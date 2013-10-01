@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9E9E2163-5980-4EE9-911D-EB4FC1BC4DFC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SingleReportingLib</RootNamespace>
+    <AssemblyName>SingleReportingLib</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseControl.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="clsCommon.cs" />
+    <Compile Include="ClusterLeads.cs" />
+    <Compile Include="Currencies.cs" />
+    <Compile Include="Emergency.cs" />
+    <Compile Include="FrequencyTemplate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Email.cs" />
+    <Compile Include="ServiceProvider.cs" />
+    <Compile Include="Units.cs" />
+    <Compile Include="Counterpart.cs" />
+    <Compile Include="Donors.cs" />
+    <Compile Include="FundAllocations.cs" />
+    <Compile Include="FundingType.cs" />
+    <Compile Include="Location.cs" />
+    <Compile Include="Organizations.cs" />
+    <Compile Include="ProjectBeneficiary.cs" />
+    <Compile Include="ProjectFunding.cs" />
+    <Compile Include="Indicator.cs" />
+    <Compile Include="Projects.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\AccessToken.cs" />
+    <Compile Include="Security\GCollection.cs" />
+    <Compile Include="Security\MemberInfo.cs" />
+    <Compile Include="Security\Membership.cs" />
+    <Compile Include="Security\MembershipUserMap.cs" />
+    <Compile Include="Security\Module.cs" />
+    <Compile Include="Security\Modules.cs" />
+    <Compile Include="Security\ModuleType.cs" />
+    <Compile Include="Security\Permission.cs" />
+    <Compile Include="Security\RoleManagement.cs" />
+    <Compile Include="Security\RoleManager.cs" />
+    <Compile Include="Security\UserRole.cs" />
+    <Compile Include="SiteInfo.cs" />
+    <Compile Include="UserInfo.cs" />
+    <Compile Include="Utilities\DbManager.cs" />
+    <Compile Include="Utilities\Encryption.cs" />
+    <Compile Include="Utilities\GCollection.cs" />
+    <Compile Include="Utilities\ILog.cs" />
+    <Compile Include="Utilities\ImageResize.cs" />
+    <Compile Include="Utilities\LanguageFilter.cs" />
+    <Compile Include="Utilities\PageList.cs" />
+    <Compile Include="Utilities\PdfThumb.cs" />
+    <Compile Include="Utilities\PrintHelper.cs" />
+    <Compile Include="Utilities\SiteCookie.cs" />
+    <Compile Include="Utilities\SqlLog.cs" />
+    <Compile Include="Utilities\StringFilter.cs" />
+    <Compile Include="Utilities\UIUtils.cs" />
+    <Compile Include="Utilities\Utils.cs" />
+    <Compile Include="Utilities\ZipcodeUtils.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

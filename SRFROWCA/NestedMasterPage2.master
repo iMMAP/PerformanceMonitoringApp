@@ -1,0 +1,61 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="NestedMasterPage2.master.cs" Inherits="SRFROWCA.NestedMasterPage2" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <div style="width: 100%; background: #4B6C9E;">
+        <script>
+            var timeout = 500;
+            var closetimer = 0;
+            var ddmenuitem = 0;
+
+            // open hidden layer
+            function mopen(id) {
+                // cancel close timer
+                mcancelclosetime();
+
+                // close old layer
+                if (ddmenuitem) ddmenuitem.style.visibility = 'hidden';
+
+                // get new layer and show it
+                ddmenuitem = document.getElementById(id);
+                ddmenuitem.style.visibility = 'visible';
+
+            }
+            // close showed layer
+            function mclose() {
+                if (ddmenuitem) ddmenuitem.style.visibility = 'hidden';
+            }
+
+            // go close timer
+            function mclosetime() {
+                closetimer = window.setTimeout(mclose, timeout);
+            }
+
+            // cancel close timer
+            function mcancelclosetime() {
+                if (closetimer) {
+                    window.clearTimeout(closetimer);
+                    closetimer = null;
+                }
+            }
+
+            // close layer when click-out
+            document.onclick = mclose; 
+        </script>
+        <ul id="sddm">
+            <li><a href="#" onmouseover="mopen('m1')" onmouseout="mclosetime()">Location Wise Reports</a>
+                <div id="m1" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
+                    <a href="#">Map1</a>                    
+                </div>
+            </li>
+            <li><a href="#" onmouseover="mopen('m2')" onmouseout="mclosetime()">Duration Wise Reports</a>
+                <div id="m2" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
+                    <a href="#">Charts in progress...</a>
+                </div>
+            </li>            
+            <%--<li><a href="#">Help</a></li>--%>
+        </ul>
+        <div style="clear: both">
+        </div>
+    </div>
+    <asp:ContentPlaceHolder ID="MainContent" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>

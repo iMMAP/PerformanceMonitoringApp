@@ -1,0 +1,124 @@
+﻿.dialog
+{
+    font-family:Tahoma;
+    font-size:11pt;
+    color:#222222;
+    background-color:#fff;
+}    
+
+/* gridheader styles */
+.gridheader
+{
+    position:relative;
+    color:#fff;        
+    cursor:move; /* So the user knows they can drag the panel */
+}
+.gridheader .outer
+{
+    background:url(../images/top-right.png) right no-repeat;
+    padding-right:40px;
+}
+.gridheader .inner
+{
+    background:url(../images/top-left.png) left no-repeat;
+    padding-left:9px;
+}
+.gridheader .content
+{
+    height:35px;
+    background:url(../images/top-mid.png) repeat-x;
+}
+.gridheader .content H2
+{
+    font-size:12pt;
+    font-weight:bold;
+    color:#fff;
+    padding-top:6px;
+    margin:0;
+}
+.gridheader .close
+{
+    /* the image is 35x35 pixels wide */
+    height:25px;
+    width:35px;	
+    /* position the image */
+    position:absolute;	
+    top:4px;
+    right:7px;	
+    background:url(../images/close.png) no-repeat;	
+    cursor:pointer;
+}
+.gridheader .close:hover
+{
+    /* set the hover image */
+    background:url(../images/close-hover.png) no-repeat;	
+}        
+
+/* dialog gridbody styles */
+.gridbody
+{
+}
+.gridbody .outer
+{
+    background:url(../images/right.png) right repeat-y;
+    padding-right:7px;
+}
+.gridbody .inner
+{
+    background:url(../images/left.png) left repeat-y;
+    padding-left:7px;
+}
+.gridbody .content
+{
+}  
+.gridbody .content H2
+{
+    padding:10px;
+    margin:0px;
+    text-align:center;
+    font-size:11pt;
+    color:#222222;            
+    font-weight:normal;
+}           
+.gridbody .content .gridfooter
+{
+    /* gridfooter image is 41 pixels tall */    
+    background:url(../images/gridfooter.gif) repeat-x bottom;
+    height:41px;
+}
+.gridbody .content .gridfooter .commands
+{
+    text-align:right;
+    padding:8px;
+}           
+.gridbody .content .gridfooter .commands INPUT
+{
+    /* keep the buttons a consistent size */    
+    width:75px;        
+}                   
+
+/* dialog gridfooter styles */
+.gridfooter
+{
+}
+.gridfooter .outer
+{
+    background:url(../images/bottom-right.png) right top no-repeat;
+    padding-right:9px;
+}
+.gridfooter .inner
+{
+    background:url(../images/bottom-left.png) left top no-repeat;
+    padding-left:9px;
+}
+.gridfooter .content
+{
+    height:7px;
+    background:url(../images/bottom-mid.png) repeat-x;        
+}   
+        
+.updating
+{
+    color:#808080;
+    background:url(../images/activity.gif) no-repeat center;
+}  
