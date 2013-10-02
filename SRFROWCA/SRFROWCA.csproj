@@ -70,6 +70,9 @@
     <Reference Include="Artem.Google">
       <HintPath>..\_dll\Artem.Google.dll</HintPath>
     </Reference>
+    <Reference Include="DotNet.Highcharts">
+      <HintPath>..\_dll\DotNet.Highcharts.dll</HintPath>
+    </Reference>
     <Reference Include="DropDownCheckBoxes, Version=1.1.0.36580, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_dll\DropDownCheckBoxes.dll</HintPath>
@@ -296,7 +299,6 @@
     <Content Include="ReportsCharts\ReportsDefault.aspx" />
     <Content Include="ReportsCharts\TargetsAchievedByLocData.aspx" />
     <Content Include="ReportsCharts\TargetsAchievedByLocDuration.aspx" />
-    <Content Include="ReportsCharts\test.aspx" />
     <Content Include="Scripts\dropdowntabs.js" />
     <Content Include="Scripts\ext-all.js" />
     <Content Include="Scripts\hc\adapters\mootools-adapter.js" />
@@ -730,13 +732,6 @@
     <Compile Include="ReportsCharts\TargetsAchievedByLocDuration.aspx.designer.cs">
       <DependentUpon>TargetsAchievedByLocDuration.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ReportsCharts\test.aspx.cs">
-      <DependentUpon>test.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ReportsCharts\test.aspx.designer.cs">
-      <DependentUpon>test.aspx</DependentUpon>
-    </Compile>
     <Compile Include="ROWCATypes.cs" />
     <Compile Include="Common\ExportUtility.cs" />
     <Compile Include="Common\Mail.cs" />
@@ -838,18 +833,6 @@
       <Project>{DE3BE702-AF50-4C77-AA51-D968CEA8DFE9}</Project>
       <Name>BusinessLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DotNet.Highcharts\DotNet.Highcharts\DotNet.Highcharts.csproj">
-      <Project>{6FE2EA1E-85E3-4969-BE6C-C08C9BA9029A}</Project>
-      <Name>DotNet.Highcharts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SingleReportingLib\SingleReportingLib.csproj">
-      <Project>{9E9E2163-5980-4EE9-911D-EB4FC1BC4DFC}</Project>
-      <Name>SingleReportingLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Tek4.Highcharts.Exporting\Tek4.Highcharts.Exporting.csproj">
-      <Project>{42BDE168-C741-4339-92B6-0656E798E989}</Project>
-      <Name>Tek4.Highcharts.Exporting</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -879,15 +862,6 @@
     <None Include="Web References\Service2\WebService.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="ADODB">
-      <Guid>{2A75196C-D9EB-4129-B803-931327F72D5C}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>8</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
     <COMReference Include="Microsoft.Office.Core">
       <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
       <VersionMajor>2</VersionMajor>
