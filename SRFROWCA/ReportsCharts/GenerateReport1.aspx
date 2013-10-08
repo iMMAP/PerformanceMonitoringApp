@@ -13,6 +13,126 @@
             width: 300px;
         }
     </style>
+    <link rel="stylesheet" href="../Styles/ui-lightness/jquery-ui-1.10.3.custom.min.css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#<%=txtFromDate.ClientID%>").datepicker();
+            $("#<%=txtToDate.ClientID%>").datepicker();
+        });
+    </script>
+    <script>
+        function radioMe(e) {
+            if (!e) e = window.event;
+            var sender = e.target || e.srcElement;
+
+            if (sender.nodeName != 'INPUT') return;
+            var checker = sender;
+            var chkBox = document.getElementById('<%= chkDuration.ClientID %>');
+            var chks = chkBox.getElementsByTagName('INPUT');
+            for (i = 0; i < chks.length; i++) {
+                if (chks[i] != checker)
+                    chks[i].checked = false;
+            }
+        }
+    </script>
+    <script>
+        Highcharts.getSVG = function (charts) {
+            var svgArr = [],
+        top = 0,
+        width = 0;
+
+            $.each(charts, function (i, chart) {
+                var svg = chart.getSVG();
+                svg = svg.replace('<svg', '<g transform="translate(0,' + top + ')" ');
+                svg = svg.replace('</svg>', '</g>');
+
+                top += chart.chartHeight;
+                width = Math.max(width, chart.chartWidth);
+
+                svgArr.push(svg);
+            });
+
+            return '<svg height="' + top + '" width="' + width + '" version="1.1" xmlns="http://www.w3.org/2000/svg">' + svgArr.join('') + '</svg>';
+        };
+
+        /**
+        * Create a global exportCharts method that takes an array of charts as an argument,
+        * and exporting options as the second argument
+        */
+        Highcharts.exportCharts = function (charts, options) {
+            var form
+            svg = Highcharts.getSVG(charts);
+
+            // merge the options
+            options = Highcharts.merge(Highcharts.getOptions().exporting, options);
+
+            // create the form
+            form = Highcharts.createElement('form', {
+                method: 'post',
+                action: options.url
+            }, {
+                display: 'none'
+            }, document.body);
+
+            // add the values
+            Highcharts.each(['filename', 'type', 'width', 'svg'], function (name) {
+                Highcharts.createElement('input', {
+                    type: 'hidden',
+                    name: name,
+                    value: {
+                        filename: options.filename || 'chart',
+                        type: options.type,
+                        width: options.width,
+                        svg: svg
+                    }[name]
+                }, null, form);
+            });
+            //console.log(svg); return;
+            // submit
+            form.submit();
+
+            // clean up
+            form.parentNode.removeChild(form);
+        };
+
+        function getSVG1() {
+            $(".chartsclass").each(function (i, obj) {
+                var svg = $(obj).html();
+                var hfValue = 0; 
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService2.asmx/SaveSVG1",
+                    data: "{'svg':'" + svg + "', i:'" + i + "', dataId:'" + hfValue + "' }",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (msg) {
+
+                    },
+                    error: function (msg) {
+
+                    }
+                });
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "../WebService2.asmx/GeneratePDF",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+
+                },
+                error: function (msg) {
+
+                }
+            });
+        }
+        
+        
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:Wizard ID="wzrdReport" runat="server" OnNextButtonClick="wzrdReport_NextButtonClick"
@@ -109,11 +229,11 @@
                     <tr>
                         <td>
                             From:
-                            <asp:Calendar ID="fromDate" runat="server"></asp:Calendar>
+                            <asp:TextBox ID="txtFromDate" runat="server"></asp:TextBox>
                         </td>
                         <td>
                             TO:
-                            <asp:Calendar ID="toDate" runat="server"></asp:Calendar>
+                            <asp:TextBox ID="txtToDate" runat="server"></asp:TextBox>
                         </td>
                     </tr>
                 </table>
@@ -164,9 +284,8 @@
                             Data:
                         </td>
                         <td>
-                            <cc:DropDownCheckBoxes ID="ddlData" runat="server" CssClass="ddlWidth" AutoPostBack="true"
-                                AddJQueryReference="True" meta:resourcekey="checkBoxes2Resource1" UseButtons="False"
-                                UseSelectAllNode="True">
+                            <cc:DropDownCheckBoxes ID="ddlData" runat="server" CssClass="ddlWidth" AddJQueryReference="True"
+                                meta:resourcekey="checkBoxes2Resource1" UseButtons="False" UseSelectAllNode="True">
                                 <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
                                 <Texts SelectBoxCaption="Select Location" />
                             </cc:DropDownCheckBoxes>
@@ -185,7 +304,40 @@
                             </asp:RadioButtonList>
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            Duration Type:
+                        </td>
+                        <td>
+                            <asp:CheckBoxList ID="chkDuration" runat="server" RepeatColumns="3">
+                                <asp:ListItem Text="Monthly" Value="1"></asp:ListItem>
+                                <asp:ListItem Text="Quarterly" Value="2"></asp:ListItem>
+                                <asp:ListItem Text="Yearly" Value="3"></asp:ListItem>
+                            </asp:CheckBoxList>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:GridView ID="grdTest" runat="server">
+                                <Columns>
+                                    <asp:TemplateField HeaderStyle-Width="30" HeaderText="#">
+                                        <ItemTemplate>
+                                            <%# Container.DataItemIndex + 1 %>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
+                            </asp:GridView>
+                        </td>
+                    </tr>
                 </table>
+                <div style="width: 100%;">
+                    <div style="width: 58%; float: left;">
+                        <asp:Literal ID="ltrChart" runat="server" ViewStateMode="Disabled"></asp:Literal>                        
+                    </div>
+                    <div style="width: 40%; float: left;">
+                        <asp:Literal ID="ltrChartPercentage" runat="server"></asp:Literal>
+                    </div>
+                </div>
             </asp:WizardStep>
         </WizardSteps>
     </asp:Wizard>

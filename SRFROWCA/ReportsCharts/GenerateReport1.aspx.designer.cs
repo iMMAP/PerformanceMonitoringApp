@@ -130,22 +130,22 @@ namespace SRFROWCA.Reports {
         protected global::Saplin.Controls.DropDownCheckBoxes ddlOrganizations;
         
         /// <summary>
-        /// fromDate control.
+        /// txtFromDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar fromDate;
+        protected global::System.Web.UI.WebControls.TextBox txtFromDate;
         
         /// <summary>
-        /// toDate control.
+        /// txtToDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar toDate;
+        protected global::System.Web.UI.WebControls.TextBox txtToDate;
         
         /// <summary>
         /// WizardStep3 control.
@@ -200,5 +200,41 @@ namespace SRFROWCA.Reports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rblReportOn;
+        
+        /// <summary>
+        /// chkDuration control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList chkDuration;
+        
+        /// <summary>
+        /// grdTest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdTest;
+        
+        /// <summary>
+        /// ltrChart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltrChart;
+        
+        /// <summary>
+        /// ltrChartPercentage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltrChartPercentage;
     }
 }

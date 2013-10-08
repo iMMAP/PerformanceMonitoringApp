@@ -4,6 +4,7 @@ using System.Data;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using SRFROWCA.UICommon;
+using System.Linq;
 
 namespace SRFROWCA.Reports
 {
@@ -13,6 +14,7 @@ namespace SRFROWCA.Reports
         {
             if (IsPostBack) return;
 
+            chkDuration.Attributes.Add("onclick", "radioMe(event);");
             PopulateControls();
         }
 
@@ -22,7 +24,6 @@ namespace SRFROWCA.Reports
             if (e.NextStepIndex == (int)WizardStepIndex.First)
             {
                 PopulateClusters();
-                //PopulateOrganizations();
             }
             else if (e.NextStepIndex == (int)WizardStepIndex.Second)
             {
@@ -49,72 +50,61 @@ namespace SRFROWCA.Reports
 
         private void GenerateMaps()
         {
-            object[] parameters = GetUsersSelectedOptions();
-            DataTable dt = GetChartData(parameters);
+            DataTable dt = GetChartData();
+            grdTest.DataSource = dt;
+            grdTest.DataBind();
+            string html = "";
+            int j = 0;
+
+            var x = (from r in dt.AsEnumerable()
+                     select r[2]).Distinct().ToList();
+
+            foreach (var item in x)
+            {
+                int i = (int)item;
+                IEnumerable<DataRow> query =
+                        from order in dt.AsEnumerable()
+                        where order.Field<int>(2) == i
+                        select order;
+
+                // Create a table from the query.
+                DataTable filteredTable = query.CopyToDataTable<DataRow>();
+                html += " " + ReportsCommon.PrepareTargetAchievedChartData(filteredTable, j);
+                j++;
+            }
+            
+            ltrChart.Text = html;
         }
 
-        private DataTable GetChartData(object[] parameters)
+        private DataTable GetChartData()
         {
-            return DBContext.GetData("", parameters);
+            object[] parameters = GetUsersSelectedOptions();
+            return DBContext.GetData("GetDataForChartsAndMaps", parameters);
         }
 
         private object[] GetUsersSelectedOptions()
         {
+            LocationTypes locationType = GetLocationType();
             string locationIds = GetLocationIds();
-            LocationTypes locationType = rbCountry.Checked ? LocationTypes.Country : rbAdmin1.Checked ? LocationTypes.Admin1 : LocationTypes.Admin2;
             string clusterIds = GetClustersIds();
             string organizationIds = GetOrganizationIds();
-            DateTime dateFrom = fromDate.SelectedDate;
-            DateTime dateTo = toDate.SelectedDate;
-            int logFrameId = GetLogFrameType();
-            string logFrameIds = GetLogFrameIds(logFrameId);
+            int? fromYear = GetDatePartFromString(txtFromDate, (int)DatePart.Year);
+            int? fromMonth = GetDatePartFromString(txtFromDate, (int)DatePart.Month);
+            int? toYear = GetDatePartFromString(txtToDate, (int)DatePart.Year);
+            int? toMonth = GetDatePartFromString(txtToDate, (int)DatePart.Month);
+            int selectedLogFrameType = GetLogFrameTypeFromOptions();
+            LogFrame actualLogFrameType = GetActualLogFrameType(selectedLogFrameType);
+            string logFrameIds = GetLogFrameIds(actualLogFrameType);
+            int durationType = GetDurationType();
 
-            return new object[] { locationIds, (int)locationType, clusterIds, organizationIds, fromDate, toDate };
+            return new object[] { (int)locationType, locationIds, clusterIds, organizationIds,
+                                    fromYear, fromMonth, toYear, toMonth, selectedLogFrameType, 
+                                    (int)actualLogFrameType, logFrameIds, durationType };
         }
 
-        private string GetLogFrameIds(int logFrameId)
+        private LocationTypes GetLocationType()
         {
-            if ((int)LogFrame.Objectives == logFrameId)
-            {
-                return ReportsCommon.GetSelectedValues(ddlObjectives);
-            }
-            else if ((int)LogFrame.Indicators == logFrameId)
-            {
-                return ReportsCommon.GetSelectedValues(ddlIndicators);
-            }
-            else if ((int)LogFrame.Activities == logFrameId)
-            {
-                return ReportsCommon.GetSelectedValues(ddlActivities);
-            }
-            else if ((int)LogFrame.Data == logFrameId)
-            {
-                return ReportsCommon.GetSelectedValues(ddlData);
-            }
-            
-            return null;
-        }
-
-        private int GetLogFrameType()
-        {
-            foreach (ListItem item in rblReportOn.Items)
-            {
-                if (item.Selected)
-                {
-                    return Convert.ToInt32(item.Value);
-                }
-            }
-
-            return 0;
-        }
-
-        private string GetOrganizationIds()
-        {
-            return ReportsCommon.GetSelectedValues(ddlOrganizations);
-        }
-
-        private string GetClustersIds()
-        {
-            return ReportsCommon.GetSelectedValues(cblClusters);
+            return rbCountry.Checked ? LocationTypes.Country : rbAdmin1.Checked ? LocationTypes.Admin1 : LocationTypes.Admin2;
         }
 
         private string GetLocationIds()
@@ -135,9 +125,92 @@ namespace SRFROWCA.Reports
             return "";
         }
 
+        private string GetClustersIds()
+        {
+            return ReportsCommon.GetSelectedValues(cblClusters);
+        }
+
+        private string GetOrganizationIds()
+        {
+            return ReportsCommon.GetSelectedValues(ddlOrganizations);
+        }
+
+        private int? GetDatePartFromString(TextBox txtBox, int datePartIndex)
+        {
+            return !string.IsNullOrEmpty(txtBox.Text.Trim()) ? Convert.ToInt32((txtBox.Text.Split('/'))[datePartIndex]) : (int?)null;
+        }
+
+        private int GetLogFrameTypeFromOptions()
+        {
+            foreach (ListItem item in rblReportOn.Items)
+            {
+                if (item.Selected)
+                    return Convert.ToInt32(item.Value);
+            }
+
+            return 0;
+        }
+
+        private LogFrame GetActualLogFrameType(int selectedLogFrameType)
+        {
+            return (LogFrame)GetLogFrameTypeFromDropDown(selectedLogFrameType);
+        }
+
+        private int GetLogFrameTypeFromDropDown(int logFrameType)
+        {
+            while (logFrameType > 0)
+            {
+                if (!string.IsNullOrEmpty(GetLogFrameIds((LogFrame)logFrameType))) break;
+
+                logFrameType -= 1;
+            }
+
+            return logFrameType;
+        }
+
+        private int? GetSelectedDateYear(DateTime dateTime)
+        {
+            return dateTime.Year;
+        }
+
+        private string GetLogFrameIds(LogFrame logFrameId)
+        {
+            if (LogFrame.Objectives == logFrameId)
+            {
+                return ReportsCommon.GetSelectedValues(ddlObjectives);
+            }
+            else if (LogFrame.Indicators == logFrameId)
+            {
+                return ReportsCommon.GetSelectedValues(ddlIndicators);
+            }
+            else if (LogFrame.Activities == logFrameId)
+            {
+                return ReportsCommon.GetSelectedValues(ddlActivities);
+            }
+            else if (LogFrame.Data == logFrameId)
+            {
+                return ReportsCommon.GetSelectedValues(ddlData);
+            }
+
+            return null;
+        }
+
+        private int GetDurationType()
+        {
+            foreach (ListItem item in chkDuration.Items)
+            {
+                if (item.Selected)
+                {
+                    return Convert.ToInt32(item.Value);
+                }
+            }
+
+            return 0;
+        }
+
         #endregion
 
-        #region Step1
+        #region Step1 Events & Methods.
 
         #region Step1 Events.
         protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
@@ -248,7 +321,7 @@ namespace SRFROWCA.Reports
 
         #endregion
 
-        #region ------ Step 2 -----
+        #region Step 2 Events & Methods.
         #region Step2 Events
 
         protected void ddlObjectives_SelectedIndexChanged(object sender, EventArgs e)
@@ -322,6 +395,8 @@ namespace SRFROWCA.Reports
         #endregion
         #endregion
 
+        #region Enums & Properties
+
         enum WizardStepIndex
         {
             Zero = 0,
@@ -346,6 +421,13 @@ namespace SRFROWCA.Reports
             Data = 4,
         }
 
+        enum DatePart
+        {
+            Day = 1,
+            Month = 2,
+            Year = 3,
+        }
+
         public List<string> SelectedClusterIds
         {
             get
@@ -363,5 +445,7 @@ namespace SRFROWCA.Reports
                 ViewState["SelectedClusterIds"] = value;
             }
         }
+
+        #endregion
     }
 }

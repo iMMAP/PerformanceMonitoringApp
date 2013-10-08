@@ -6,6 +6,9 @@ using System.Web.UI.WebControls;
 using DotNet.Highcharts.Options;
 using System.Data;
 using DotNet.Highcharts.Helpers;
+using System.Collections;
+using DotNet.Highcharts;
+using DotNet.Highcharts.Enums;
 
 namespace SRFROWCA.Reports
 {
@@ -113,6 +116,97 @@ namespace SRFROWCA.Reports
                     }
                 }
             }
+        }
+
+        private static string[] GetCategories(DataTable dt)
+        {
+            object[] categories = (from DataRow row in dt.Rows
+                                   select row["Location"]).ToArray();
+            return ((IEnumerable)categories).Cast<object>()
+                         .Select(x => x.ToString())
+                         .ToArray();
+        }
+
+        public static void DrawChart(DataTable dt, int j)
+        {
+            PrepareTargetAchievedChartData(dt, j);
+            //PreparePercentageChartData(dt);
+        }
+
+        public static string PrepareTargetAchievedChartData(DataTable dt, int j)
+        {
+            if (dt.Rows.Count > 0)
+            {
+                Series[] series = GetSeries(dt);
+                DataRow dr = dt.Rows[0];
+                string[] categories = GetCategories(dt);
+                return DrawLocaitonChart(series, categories, j);
+            }
+            else
+            {
+                Series[] series = new[]
+                {
+                        new Series{ Data = new Data(new object[] {"0"})}
+                };
+
+                string[] categories = { "" };
+                return DrawLocaitonChart(series, categories, j);
+            }
+        }
+
+        public static string DrawLocaitonChart(Series[] series, string[] category, int j)
+        {
+            Highcharts hc = new Highcharts("Chart" + j)
+                .InitChart(new Chart
+                {
+                    DefaultSeriesType = ChartTypes.Column,
+                    Width = 550,
+                    Height = 330,
+                    //MarginTop = 10,
+                })
+                .SetLegend(new Legend
+                {
+                    Margin = 5
+                })
+                .SetCredits(new Credits
+                {
+                    Enabled = false
+                })
+                .SetTitle(new Title
+                {
+                    Text = "DEF"
+                })
+                .SetXAxis(new XAxis
+                {
+                    Categories = category,
+                    Labels = new XAxisLabels
+                    {
+                        Rotation = -45,
+                        Align = HorizontalAligns.Right
+                    }
+                })
+                .SetYAxis(new[]
+                    {
+                        new YAxis
+                            {
+                                Title = new YAxisTitle { Text = "" },
+                            }
+                    })
+                .SetPlotOptions(new PlotOptions
+                {
+                    Column = new PlotOptionsColumn
+                    {
+                        PointWidth = 20,
+                        DataLabels = new PlotOptionsColumnDataLabels
+                        {
+                            Enabled = false
+                        },
+                    }
+                })
+                .SetSeries(series);
+
+            return hc.ToHtmlString();
+
         }
 
         public enum LocationType
