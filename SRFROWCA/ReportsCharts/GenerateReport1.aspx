@@ -14,7 +14,6 @@
         }
     </style>
     <link rel="stylesheet" href="../Styles/ui-lightness/jquery-ui-1.10.3.custom.min.css" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <script>
         $(function () {
@@ -38,75 +37,23 @@
         }
     </script>
     <script>
-        Highcharts.getSVG = function (charts) {
-            var svgArr = [],
-        top = 0,
-        width = 0;
-
-            $.each(charts, function (i, chart) {
-                var svg = chart.getSVG();
-                svg = svg.replace('<svg', '<g transform="translate(0,' + top + ')" ');
-                svg = svg.replace('</svg>', '</g>');
-
-                top += chart.chartHeight;
-                width = Math.max(width, chart.chartWidth);
-
-                svgArr.push(svg);
-            });
-
-            return '<svg height="' + top + '" width="' + width + '" version="1.1" xmlns="http://www.w3.org/2000/svg">' + svgArr.join('') + '</svg>';
-        };
-
-        /**
-        * Create a global exportCharts method that takes an array of charts as an argument,
-        * and exporting options as the second argument
-        */
-        Highcharts.exportCharts = function (charts, options) {
-            var form
-            svg = Highcharts.getSVG(charts);
-
-            // merge the options
-            options = Highcharts.merge(Highcharts.getOptions().exporting, options);
-
-            // create the form
-            form = Highcharts.createElement('form', {
-                method: 'post',
-                action: options.url
-            }, {
-                display: 'none'
-            }, document.body);
-
-            // add the values
-            Highcharts.each(['filename', 'type', 'width', 'svg'], function (name) {
-                Highcharts.createElement('input', {
-                    type: 'hidden',
-                    name: name,
-                    value: {
-                        filename: options.filename || 'chart',
-                        type: options.type,
-                        width: options.width,
-                        svg: svg
-                    }[name]
-                }, null, form);
-            });
-            //console.log(svg); return;
-            // submit
-            form.submit();
-
-            // clean up
-            form.parentNode.removeChild(form);
-        };
-
         function getSVG1() {
             var j = 0;
+
             $(".chartsclass").each(function (i, obj) {
+
                 var svg = $(obj).html();
-                var hfValue = 0;
+
+                var indexOf = svg.indexOf('class="highcharts-container">') + 29;
+                var len = svg.length;
+                svg = svg.substr(indexOf, len);
+                var lastIndexOf = svg.lastIndexOf("</div>");
+                svg = svg.substring(0, lastIndexOf);
 
                 $.ajax({
                     type: "POST",
                     url: "../WebService2.asmx/SaveSVG1",
-                    data: "{'svg':'" + svg + "', i:'" + i + "', dataId:'" + hfValue + "' }",
+                    data: "{'svg':'" + svg + "', i:'" + i + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (msg) {
@@ -118,6 +65,12 @@
                 });
                 j = i;
             });
+
+            setTimeout(function () { genPDF(j); }, 9000)
+
+        }
+
+        function genPDF(j) {
             
             $.ajax({
                 type: "POST",
@@ -132,7 +85,8 @@
 
                 }
             });
-        }        
+        }
+        
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -330,13 +284,14 @@
                             </asp:GridView>
                         </td>
                     </tr>
-                </table>                
+                </table>
             </asp:WizardStep>
             <asp:WizardStep>
-                <input type="button" name="btnname" value="Generate Report" onclick="getSVG1()" />
+                <input type="button" name="btnname" value="Generate Report" id="btnExport" />
+                <input type="button" name="btnname" value="Gen Doc" onclick="genPDF(6)" />
                 <div style="width: 100%;">
                     <div style="width: 58%; float: left;">
-                        <asp:Literal ID="ltrChart" runat="server" ViewStateMode="Disabled"></asp:Literal>                        
+                        <asp:Literal ID="ltrChart" runat="server" ViewStateMode="Disabled"></asp:Literal>
                     </div>
                     <div style="width: 40%; float: left;">
                         <asp:Literal ID="ltrChartPercentage" runat="server"></asp:Literal>
@@ -345,4 +300,11 @@
             </asp:WizardStep>
         </WizardSteps>
     </asp:Wizard>
+    <script>
+        $(function () {
+            $('#btnExport').click(function () {
+                getSVG1();
+            });
+        });
+    </script>
 </asp:Content>
