@@ -18,7 +18,7 @@ namespace SRFROWCA
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
-     [System.Web.Script.Services.ScriptService]
+    [System.Web.Script.Services.ScriptService]
     public class WebService2 : System.Web.Services.WebService
     {
 
@@ -122,8 +122,8 @@ namespace SRFROWCA
 
         }
 
-        [WebMethod (EnableSession=true)]
-        public void GeneratePDF()
+        [WebMethod(EnableSession = true)]
+        public void GeneratePDF(int j)
         {
             string pdfpath = Server.MapPath("img2");
 
@@ -156,12 +156,11 @@ namespace SRFROWCA
                 cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
                 projectMainInfoTable.AddCell(cell);
 
-                
-                
-                iTextSharp.text.Image gif = iTextSharp.text.Image.GetInstance(imagepath + "temp0.jpg");
-                doc.Add(gif);
-                gif = iTextSharp.text.Image.GetInstance(imagepath + "temp1.jpg");
-                doc.Add(gif);
+                for (int i = 0; i < j; i++)
+                {
+                    iTextSharp.text.Image gif = iTextSharp.text.Image.GetInstance(imagepath + Session.SessionID.ToString() + i.ToString() + ".jpg");
+                    doc.Add(gif);                    
+                }
             }
 
             catch (Exception ex)
@@ -174,31 +173,30 @@ namespace SRFROWCA
             }
         }
 
-        [WebMethod (EnableSession=true)]
+        [WebMethod(EnableSession = true)]
         public string SaveSVG1(string svg, int i, int dataId)
         {
             string result = "Success";
             try
             {
 
-                string pathToSave = "E:\\img\\";
-
-                FileStream fs = new FileStream(pathToSave + "temp" + i.ToString() + ".svg" , FileMode.Create, FileAccess.Write);
+                string pathToSave = "E:\\img\\" + Session.SessionID.ToString() + i.ToString();
+                string svgPath = pathToSave + ".svg";
+                FileStream fs = new FileStream(svgPath, FileMode.Create, FileAccess.Write);
                 StreamWriter s = new StreamWriter(fs);
                 s.WriteLine(svg);
                 s.Close();
                 fs.Close();
 
-                using (FileStream fileStream = File.OpenRead(pathToSave + "temp" + i.ToString() + ".svg"))
+                using (FileStream fileStream = File.OpenRead(svgPath))
                 {
                     MemoryStream memoryStream = new MemoryStream();
+
                     memoryStream.SetLength(fileStream.Length);
                     fileStream.Read(memoryStream.GetBuffer(), 0, (int)fileStream.Length);
+
                     SvgDocument svgDocument = SvgDocument.Open(memoryStream);
-                    string imagePath = pathToSave + "temp" + i.ToString() + ".jpg";
-                    SvgFragment sf = new SvgFragment();
-                    //sf.Width = 700;
-                    //svgDocument.Width = sf.Width;
+                    string imagePath = pathToSave + ".jpg";
                     svgDocument.Draw().Save(imagePath);
 
                     memoryStream.Close();

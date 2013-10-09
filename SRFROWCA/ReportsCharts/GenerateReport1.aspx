@@ -98,9 +98,11 @@
         };
 
         function getSVG1() {
+            var j = 0;
             $(".chartsclass").each(function (i, obj) {
                 var svg = $(obj).html();
-                var hfValue = 0; 
+                var hfValue = 0;
+
                 $.ajax({
                     type: "POST",
                     url: "../WebService2.asmx/SaveSVG1",
@@ -111,15 +113,16 @@
 
                     },
                     error: function (msg) {
-
+                        alert('failuer');
                     }
                 });
+                j = i;
             });
-
+            
             $.ajax({
                 type: "POST",
                 url: "../WebService2.asmx/GeneratePDF",
-                data: "{}",
+                data: "{'j':'" + j + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (msg) {
@@ -129,9 +132,7 @@
 
                 }
             });
-        }
-        
-        
+        }        
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -329,7 +330,10 @@
                             </asp:GridView>
                         </td>
                     </tr>
-                </table>
+                </table>                
+            </asp:WizardStep>
+            <asp:WizardStep>
+                <input type="button" name="btnname" value="Generate Report" onclick="getSVG1()" />
                 <div style="width: 100%;">
                     <div style="width: 58%; float: left;">
                         <asp:Literal ID="ltrChart" runat="server" ViewStateMode="Disabled"></asp:Literal>                        

@@ -5,6 +5,7 @@ using System.Web.UI.WebControls;
 using BusinessLogic;
 using SRFROWCA.UICommon;
 using System.Linq;
+using System.Web.UI;
 
 namespace SRFROWCA.Reports
 {
@@ -12,6 +13,8 @@ namespace SRFROWCA.Reports
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Page.ClientScript.RegisterClientScriptBlock(typeof(ScriptManager), "getSVG1", "getSVG1();");
+
             if (IsPostBack) return;
 
             chkDuration.Attributes.Add("onclick", "radioMe(event);");
@@ -30,6 +33,10 @@ namespace SRFROWCA.Reports
                 PutSelectedClustersInList();
                 PopulateObjectives();
             }
+            else if (e.NextStepIndex == (int)WizardStepIndex.Third)
+            {
+                GenerateMaps();
+            }
         }
 
         protected void wzrdReport_PreviousButtonClick(object sender, WizardNavigationEventArgs e)
@@ -42,10 +49,10 @@ namespace SRFROWCA.Reports
 
         protected void wzrdReport_FinishButtonClick(object sender, WizardNavigationEventArgs e)
         {
-            if (e.CurrentStepIndex == (int)WizardStepIndex.Second)
-            {
-                GenerateMaps();
-            }
+            //if (e.CurrentStepIndex == (int)WizardStepIndex.Second)
+            //{
+            //    GenerateMaps();
+            //}
         }
 
         private void GenerateMaps()
@@ -423,9 +430,9 @@ namespace SRFROWCA.Reports
 
         enum DatePart
         {
-            Day = 1,
-            Month = 2,
-            Year = 3,
+            Day = 0,
+            Month = 1,
+            Year = 2,
         }
 
         public List<string> SelectedClusterIds
