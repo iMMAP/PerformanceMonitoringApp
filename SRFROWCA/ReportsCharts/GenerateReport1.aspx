@@ -44,12 +44,12 @@
 
                 var svg = $(obj).html();
 
-                var indexOf = svg.indexOf('class="highcharts-container">') + 29;
-                var len = svg.length;
-                svg = svg.substr(indexOf, len);
-                var lastIndexOf = svg.lastIndexOf("</div>");
-                svg = svg.substring(0, lastIndexOf);
-
+//                var indexOf = svg.indexOf('class="highcharts-container">') + 29;
+//                var len = svg.length;
+//                svg = svg.substr(indexOf, len);
+//                var lastIndexOf = svg.lastIndexOf("</div>");
+//                svg = svg.substring(0, lastIndexOf);
+                
                 $.ajax({
                     type: "POST",
                     url: "../WebService2.asmx/SaveSVG1",
@@ -71,7 +71,7 @@
         }
 
         function genPDF(j) {
-            
+
             $.ajax({
                 type: "POST",
                 url: "../WebService2.asmx/GeneratePDF",
@@ -239,7 +239,8 @@
                             Data:
                         </td>
                         <td>
-                            <cc:DropDownCheckBoxes ID="ddlData" runat="server" CssClass="ddlWidth" AddJQueryReference="True"
+                            <cc:DropDownCheckBoxes ID="ddlData" runat="server" CssClass="ddlWidth" AddJQueryReference="True" AutoPostBack="true"
+                                OnSelectedIndexChanged="ddlData_SelectedIndexChanged"
                                 meta:resourcekey="checkBoxes2Resource1" UseButtons="False" UseSelectAllNode="True">
                                 <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
                                 <Texts SelectBoxCaption="Select Location" />
@@ -287,10 +288,8 @@
                 </table>
             </asp:WizardStep>
             <asp:WizardStep>
-                <input type="button" name="btnname" value="Generate Report" id="btnExport" />
-                <input type="button" name="btnname" value="Gen Doc" onclick="genPDF(6)" />
                 <div style="width: 100%;">
-                    <div style="width: 58%; float: left;">
+                    <div style="width: 100%; float: left;">
                         <asp:Literal ID="ltrChart" runat="server" ViewStateMode="Disabled"></asp:Literal>
                     </div>
                     <div style="width: 40%; float: left;">
@@ -299,6 +298,19 @@
                 </div>
             </asp:WizardStep>
         </WizardSteps>
+        <StartNavigationTemplate>
+            <asp:Button ID="btnNext" runat="server" Text="Next >>" CausesValidation="true" CommandName="MoveNext" />
+        </StartNavigationTemplate>
+        <StepNavigationTemplate>
+            <asp:Button ID="btnPrevious" runat="server" Text="<< Previous" CausesValidation="false"
+                CommandName="MovePrevious" />
+            <asp:Button ID="btnNext" runat="server" Text="Next >>" CausesValidation="true" CommandName="MoveNext" />
+        </StepNavigationTemplate>
+        <FinishNavigationTemplate>
+            <asp:Button ID="btnPreviousFinish" runat="server" Text="<< Previous" CausesValidation="false"
+                CommandName="MovePrevious" />
+            <input type="button" name="btnname" value="Generate PDF" id="btnExport" />            
+        </FinishNavigationTemplate>
     </asp:Wizard>
     <script>
         $(function () {

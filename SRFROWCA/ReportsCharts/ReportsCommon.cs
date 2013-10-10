@@ -140,7 +140,8 @@ namespace SRFROWCA.Reports
                 Series[] series = GetSeries(dt);
                 DataRow dr = dt.Rows[0];
                 string[] categories = GetCategories(dt);
-                return DrawLocaitonChart(series, categories, j);
+                string title = GetChartTitle(dt);
+                return DrawLocaitonChart(series, categories, j, title);
             }
             else
             {
@@ -150,19 +151,32 @@ namespace SRFROWCA.Reports
                 };
 
                 string[] categories = { "" };
-                return DrawLocaitonChart(series, categories, j);
+                return DrawLocaitonChart(series, categories, j, string.Empty);
             }
         }
 
-        public static string DrawLocaitonChart(Series[] series, string[] category, int j)
+        private static string GetChartTitle(DataTable dt)
+        {
+            string title = "";
+            title = dt.Rows[0]["ClusterName"].ToString() + "<br/> 123456 89 111213 1516171819202122 2425 27 293031323334353637 3940 414243 45";
+
+            //title += "<br/>" + dt.Rows[0]["ObjectiveName"].ToString();
+            //title += "<br/> " + dt.Rows[0]["IndicatorName"].ToString();
+            //title += "<br/> " + dt.Rows[0]["ActivityName"].ToString();
+            //title += "</br/> " + dt.Rows[0]["DataName"].ToString();
+
+            return title;
+        }
+
+        public static string DrawLocaitonChart(Series[] series, string[] category, int j, string title)
         {
             Highcharts hc = new Highcharts("Chart" + j)
                 .InitChart(new Chart
                 {
                     DefaultSeriesType = ChartTypes.Column,
                     Width = 550,
-                    Height = 330,
-                    //MarginTop = 10,
+                    Height = 530,
+                    MarginTop = 100,
                 })
                 .SetLegend(new Legend
                 {
@@ -174,7 +188,18 @@ namespace SRFROWCA.Reports
                 })
                 .SetTitle(new Title
                 {
-                    Text = "DEF"
+                    Text = @"current point of contact for any given<br/> NGO working in
+                                Haiti. Like many emergencies the"
+                })
+                .SetSubtitle(new Subtitle
+                    {
+
+                        Text = @"search and rescue teams, up-to-date<br/> hospital throughput
+                                rates for planning the shipment of medical supplies"
+                    })
+                .SetExporting(new Exporting
+                {
+                    Enabled = true
                 })
                 .SetXAxis(new XAxis
                 {

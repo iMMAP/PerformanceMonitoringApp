@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
+using System.Web.Services;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using SRFROWCA.UICommon;
-using System.Linq;
-using System.Web.UI;
-using System.Web.Services;
-using System.IO;
-using iTextSharp.text.pdf;
-
-
 
 namespace SRFROWCA.Reports
 {
@@ -18,8 +14,6 @@ namespace SRFROWCA.Reports
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Page.ClientScript.RegisterClientScriptBlock(typeof(ScriptManager), "getSVG1", "getSVG1();");
-
             if (IsPostBack) return;
 
             chkDuration.Attributes.Add("onclick", "radioMe(event);");
@@ -325,7 +319,7 @@ namespace SRFROWCA.Reports
             if (countryId > 0)
             {
                 PopulateAdmin1(countryId);
-                PopulateAdmin2(countryId);                
+                PopulateAdmin2(countryId);
             }
         }
 
@@ -339,19 +333,32 @@ namespace SRFROWCA.Reports
         protected void ddlObjectives_SelectedIndexChanged(object sender, EventArgs e)
         {
             PopulateIndicators();
+            PopulateActivities();
+            PopulateDataItems();
+            int dropDownIndex = GetLogFrameTypeFromDropDown((int)LogFrame.Objectives);
+            CheckLogFrameRadio(dropDownIndex);
         }
 
         protected void ddlIndicators_SelectedIndexChanged(object sender, EventArgs e)
         {
             PopulateActivities();
+            PopulateDataItems();
+            int dropDownIndex = GetLogFrameTypeFromDropDown((int)LogFrame.Indicators);
+            CheckLogFrameRadio(dropDownIndex);
         }
 
         protected void ddlActivities_SelectedIndexChanged(object sender, EventArgs e)
         {
             PopulateDataItems();
+            int dropDownIndex = GetLogFrameTypeFromDropDown((int)LogFrame.Activities);
+            CheckLogFrameRadio(dropDownIndex);
         }
 
-
+        protected void ddlData_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int dropDownIndex = GetLogFrameTypeFromDropDown((int)LogFrame.Data);
+            CheckLogFrameRadio(dropDownIndex);
+        }
 
         #endregion
         #region Step2 Methods.
@@ -402,6 +409,21 @@ namespace SRFROWCA.Reports
         {
             string activityIds = ReportsCommon.GetSelectedValues(ddlActivities);
             return DBContext.GetData("GetDatItemsOfMultipleActivities", new object[] { activityIds });
+        }
+
+        private void CheckLogFrameRadio(int index)
+        {
+            
+            ToggleAllList(rblReportOn, false);
+            --index;
+            index = index < 0 ? 0 : index;
+            rblReportOn.Items[index].Selected = true;
+        }
+
+        private void ToggleAllList(ListControl lstControl, bool isSelected)
+        {
+            foreach (ListItem item in lstControl.Items)
+                item.Selected = isSelected;
         }
 
         #endregion
@@ -461,11 +483,11 @@ namespace SRFROWCA.Reports
         #endregion
 
         [WebMethod(EnableSession = true)]
-        public  void TestPDF()
+        public void TestPDF()
         {
-            
+
         }
-        
+
         //[WebMethod(EnableSession = true)]
         //public void GeneratePDF(int j)
         //{

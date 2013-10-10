@@ -222,7 +222,7 @@ namespace SRFROWCA
                 doc.Close();
 
                 DirectoryInfo di = new DirectoryInfo("E:\\img\\" + Session.SessionID.ToString());
-                di.Delete(true);
+                //di.Delete(true);
                 
                 using (WebClient wc = new WebClient())
                 {
