@@ -37,18 +37,37 @@
         }
     </script>
     <script>
+
+        function occurrences(string, subString, allowOverlapping) {
+            string += ""; subString += "";
+            if (subString.length <= 0) return string.length + 1;
+            
+            var n = 0, pos = 0;
+            var step = (allowOverlapping) ? (1) : (subString.length);
+
+            while (true) {
+                pos = string.indexOf(subString, pos);
+                if (pos >= 0) { n++; pos += step; } else break;
+            }
+            return (n);
+        }
+
         function getSVG1() {
             var j = 0;
 
             $(".chartsclass").each(function (i, obj) {
-
                 var svg = $(obj).html();
 
-//                var indexOf = svg.indexOf('class="highcharts-container">') + 29;
-//                var len = svg.length;
-//                svg = svg.substr(indexOf, len);
-//                var lastIndexOf = svg.lastIndexOf("</div>");
-//                svg = svg.substring(0, lastIndexOf);
+                var indexOf = svg.indexOf('<svg');
+                var len = svg.length;
+                svg = svg.substr(indexOf);
+                var lastIndexOf = svg.lastIndexOf("</div>");
+                svg = svg.substring(0, lastIndexOf);
+                var xmlnsString = 'xmlns="http://www.w3.org/2000/svg"';
+                var n = occurrences(svg, xmlnsString, false);                
+                if (n > 1) {
+                    svg = svg.replace(xmlnsString, '');
+                }
                 
                 $.ajax({
                     type: "POST",
@@ -57,7 +76,6 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (msg) {
-
                     },
                     error: function (msg) {
                         alert('failuer');

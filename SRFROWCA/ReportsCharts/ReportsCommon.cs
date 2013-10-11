@@ -181,25 +181,18 @@ namespace SRFROWCA.Reports
                 .SetLegend(new Legend
                 {
                     Margin = 5
-                })
+                })                
                 .SetCredits(new Credits
                 {
                     Enabled = false
                 })
                 .SetTitle(new Title
                 {
-                    Text = @"current point of contact for any given<br/> NGO working in
-                                Haiti. Like many emergencies the"
+                    Text = ""
                 })
-                .SetSubtitle(new Subtitle
-                    {
-
-                        Text = @"search and rescue teams, up-to-date<br/> hospital throughput
-                                rates for planning the shipment of medical supplies"
-                    })
                 .SetExporting(new Exporting
                 {
-                    Enabled = true
+                    Enabled = false
                 })
                 .SetXAxis(new XAxis
                 {

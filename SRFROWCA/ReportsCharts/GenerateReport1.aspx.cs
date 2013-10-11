@@ -75,11 +75,18 @@ namespace SRFROWCA.Reports
 
                 // Create a table from the query.
                 DataTable filteredTable = query.CopyToDataTable<DataRow>();
+                WriteLogFrameInXMLFile();
                 html += " " + ReportsCommon.PrepareTargetAchievedChartData(filteredTable, j);
+                //html = "abc def ghi";
                 j++;
             }
 
             ltrChart.Text = html;
+        }
+
+        private void WriteLogFrameInXMLFile()
+        {
+            
         }
 
         private DataTable GetChartData()
