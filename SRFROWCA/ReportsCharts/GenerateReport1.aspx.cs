@@ -7,6 +7,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using SRFROWCA.UICommon;
+using System.Xml.Linq;
+using System.IO;
 
 namespace SRFROWCA.Reports
 {
@@ -65,6 +67,17 @@ namespace SRFROWCA.Reports
             var x = (from r in dt.AsEnumerable()
                      select r[2]).Distinct().ToList();
 
+            XDocument doc = new XDocument();
+            //XDeclaration dec = new XDeclaration("1.0", "utf-16", "true");
+            //doc.Declaration = dec;
+            //XProcessingInstruction pi = new XProcessingInstruction("LogFrameType", "Objective");
+            //doc.Add(pi);
+            //XComment comm = new XComment("test comments");
+            //doc.Add(comm);
+
+            XElement books = new XElement("LogFrames");
+            doc.Add(books);            
+
             foreach (var item in x)
             {
                 int i = (int)item;
@@ -75,18 +88,72 @@ namespace SRFROWCA.Reports
 
                 // Create a table from the query.
                 DataTable filteredTable = query.CopyToDataTable<DataRow>();
-                WriteLogFrameInXMLFile();
-                html += " " + ReportsCommon.PrepareTargetAchievedChartData(filteredTable, j);
-                //html = "abc def ghi";
+                int id = 0;
+                if (filteredTable.Rows.Count > 0)
+                {
+                    DataRow row = filteredTable.Rows[0];
+                    id = Convert.ToInt32(row["LogFrameId"].ToString());
+                    WriteLogFrameInXMLFile(books, row);
+                }
+                html += " " + ReportsCommon.PrepareTargetAchievedChartData(filteredTable, id);
                 j++;
             }
+
+            string rootDir = Server.MapPath("~/GeneratedChartFiles");
+            string dirForCurrentUser = rootDir + "\\" + Session.SessionID.ToString();
+            if (!Directory.Exists(dirForCurrentUser))
+            {
+                Directory.CreateDirectory(dirForCurrentUser);
+            }
+
+            doc.Save(dirForCurrentUser + "\\logframe.xml");
 
             ltrChart.Text = html;
         }
 
-        private void WriteLogFrameInXMLFile()
+        private void WriteLogFrameInXMLFile(XElement logFrameRoot, DataRow row)
         {
-            
+            string logFrameType = row["LogFrameType"].ToString();
+            string dataId = row["DataId"].ToString();
+            string dataName = row["DataName"].ToString();
+            string activityId = row["ActivityId"].ToString();
+            string activityName = row["ActivityName"].ToString();
+            string indicatorId = row["IndicatorId"].ToString();
+            string indicatorName = row["IndicatorName"].ToString();
+            string objId = row["ObjectiveId"].ToString();
+            string objName = row["ObjectiveName"].ToString();
+            string clusterId = row["ClusterId"].ToString();
+            string clusterName = row["ClusterName"].ToString();
+
+            XElement logFrame = new XElement("LogFrame");
+            logFrame.SetAttributeValue("LogFrameType", logFrameType);
+            logFrameRoot.Add(logFrame);
+
+            logFrame.Add(GetElement("Cluster", clusterId, clusterName));
+            logFrame.Add(GetElement("Objective", objId, objName));
+            logFrame.Add(GetElement("Indicator", indicatorId, indicatorName));
+            logFrame.Add(GetElement("Activity", activityId, activityName));
+            logFrame.Add(GetElement("Data", dataId, dataName));
+        }
+
+        private XElement GetElement(string name, string idValue, string nameValue)
+        {
+            XElement element = new XElement(name);
+            element.SetAttributeValue("Id", idValue);
+
+            if (!string.IsNullOrEmpty(nameValue))
+            {
+                element.Add(GetElement(nameValue));
+            }
+            return element;
+        }
+
+        private XElement GetElement(string text)
+        {
+            XElement element = new XElement("Name");
+            element.Value = text;
+
+            return element;
         }
 
         private DataTable GetChartData()
@@ -108,7 +175,7 @@ namespace SRFROWCA.Reports
             int selectedLogFrameType = GetLogFrameTypeFromOptions();
             LogFrame actualLogFrameType = GetActualLogFrameType(selectedLogFrameType);
             string logFrameIds = GetLogFrameIds(actualLogFrameType);
-            int durationType = GetDurationType();
+            int? durationType = GetDurationType();
 
             return new object[] { (int)locationType, locationIds, clusterIds, organizationIds,
                                     fromYear, fromMonth, toYear, toMonth, selectedLogFrameType, 
@@ -208,7 +275,7 @@ namespace SRFROWCA.Reports
             return null;
         }
 
-        private int GetDurationType()
+        private int? GetDurationType()
         {
             foreach (ListItem item in chkDuration.Items)
             {
@@ -218,7 +285,7 @@ namespace SRFROWCA.Reports
                 }
             }
 
-            return 0;
+            return (int?)null;
         }
 
         #endregion
@@ -420,7 +487,7 @@ namespace SRFROWCA.Reports
 
         private void CheckLogFrameRadio(int index)
         {
-            
+
             ToggleAllList(rblReportOn, false);
             --index;
             index = index < 0 ? 0 : index;
@@ -449,9 +516,9 @@ namespace SRFROWCA.Reports
 
         enum LocationTypes
         {
-            Country = 2,
-            Admin1 = 3,
-            Admin2 = 4,
+            Country = 1,
+            Admin1 = 2,
+            Admin2 = 3,
         }
 
         enum LogFrame

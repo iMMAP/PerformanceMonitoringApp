@@ -57,6 +57,10 @@
 
             $(".chartsclass").each(function (i, obj) {
                 var svg = $(obj).html();
+                var id = obj.id;
+                
+                id = id.substring(5, id.indexOf('_'));
+                
 
                 var indexOf = svg.indexOf('<svg');
                 var len = svg.length;
@@ -64,15 +68,15 @@
                 var lastIndexOf = svg.lastIndexOf("</div>");
                 svg = svg.substring(0, lastIndexOf);
                 var xmlnsString = 'xmlns="http://www.w3.org/2000/svg"';
-                var n = occurrences(svg, xmlnsString, false);                
+                var n = occurrences(svg, xmlnsString, false);
                 if (n > 1) {
                     svg = svg.replace(xmlnsString, '');
                 }
-                
+
                 $.ajax({
                     type: "POST",
                     url: "../WebService2.asmx/SaveSVG1",
-                    data: "{'svg':'" + svg + "', i:'" + i + "'}",
+                    data: "{'svg':'" + svg + "', i:'" + id + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (msg) {

@@ -88,6 +88,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\_dll\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PdfSharp">
+      <HintPath>..\_dll\PdfSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Svg">
       <HintPath>..\_dll\Svg.dll</HintPath>
     </Reference>
@@ -722,6 +725,7 @@
     <Compile Include="ReportsCharts\ChartReport.aspx.designer.cs">
       <DependentUpon>ChartReport.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ReportsCharts\DataRwo.cs" />
     <Compile Include="ReportsCharts\GenerateReport1.aspx.cs">
       <DependentUpon>GenerateReport1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

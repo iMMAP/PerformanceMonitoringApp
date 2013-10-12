@@ -9,6 +9,9 @@ using Svg;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.Net;
+using PdfSharp.Drawing;
+using System.Xml.Linq;
+using System.Linq;
 
 namespace SRFROWCA
 {
@@ -190,7 +193,7 @@ namespace SRFROWCA
                     Directory.CreateDirectory(dir);
                 }
 
-                string path = dir + "\\" + Session.SessionID.ToString() + i.ToString();
+                string path = dir + "\\" + Session.SessionID.ToString() + "__" + i.ToString();
 
                 string svgPath = path + ".svg";
                 FileStream fs = new FileStream(svgPath, FileMode.Create, FileAccess.Write);
@@ -224,6 +227,7 @@ namespace SRFROWCA
         [WebMethod(EnableSession = true)]
         public void GeneratePDF(int j)
         {
+            int k = j;
             string dir = Server.MapPath("GeneratedChartFiles");
 
             if (!Directory.Exists(dir + "\\" + Session.SessionID.ToString()))
@@ -244,6 +248,39 @@ namespace SRFROWCA
                 PdfWriter.GetInstance(doc, new FileStream(filePath, FileMode.Create));
                 doc.Open();
                 PdfPTable projectTitlePDFTable = new PdfPTable(2);
+                FileInfo[] imageFiles = new DirectoryInfo(path).GetFiles("*.jpg");
+
+                XDocument logFrameDoc = XDocument.Load(path + "logframe.xml");
+                string logFrameType = logFrameDoc.Element("LogFrames").Elements("LogFrame").First().Attribute("LogFrameType").Value;
+
+                for (int i = 0; i < imageFiles.Length; i++)
+                {
+                    string fileName = imageFiles[i].Name;
+                    string id = fileName.Substring(fileName.LastIndexOf("__") + 2, fileName.LastIndexOf('.') - fileName.LastIndexOf("__"));
+
+                    var a = logFrameDoc.Descendants("LogFrames")
+                                   .Where(x => (string)x.Attribute("Id").Value == "125")
+                                   .Select(x => (string)x.Element("Objective"))
+                                   .FirstOrDefault();
+
+                    var query =
+                    from e in logFrameDoc.Descendants("LogFrame")
+                    where e.Element("Objective").Attribute("Id").Value == "125"
+                    select new { Name = e.Element("Objective").Value };
+                    foreach (var v in query)
+                    { }
+
+                    XElement d = XElement.Load(path + "logframe.xml");
+                    XElement logFrame = d.Element("LogFrame");
+                    var list1 =
+                        from el in d.Descendants("Objective")
+                        where (string)el.Attribute("Id").Value == "125"
+                        select el.AncestorsAndSelf().Distinct();
+
+                    foreach (var v in list1)
+                    { }
+
+                }
 
                 AddProjectTitle(projectTitlePDFTable);
                 //AddNewLineInDocument(document, 1);
@@ -270,13 +307,16 @@ namespace SRFROWCA
                 }
                 doc.Close();
 
-                DirectoryInfo di = new DirectoryInfo(path);
-                //di.Delete(true);
+                PdfSharp.Pdf.PdfDocument document = new PdfSharp.Pdf.PdfDocument();
 
                 using (WebClient wc = new WebClient())
                 {
-                    wc.DownloadFile(filePath, @"e:\charts1.pdf");
+                    wc.DownloadFile(filePath, @"e:\charts.pdf");
                 }
+
+                DirectoryInfo di = new DirectoryInfo(path);
+
+                //di.Delete(true);
             }
 
             catch
