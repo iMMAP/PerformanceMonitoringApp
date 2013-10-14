@@ -48,55 +48,44 @@ namespace SRFROWCA.Reports
             }
         }
 
-        protected void wzrdReport_FinishButtonClick(object sender, WizardNavigationEventArgs e)
-        {
-            //if (e.CurrentStepIndex == (int)WizardStepIndex.Second)
-            //{
-            //    GenerateMaps();
-            //}
-        }
-
         private void GenerateMaps()
         {
             DataTable dt = GetChartData();
-            grdTest.DataSource = dt;
-            grdTest.DataBind();
-            string html = "";
-            int j = 0;
 
-            var x = (from r in dt.AsEnumerable()
-                     select r[2]).Distinct().ToList();
+            string html = "";            
 
             XDocument doc = new XDocument();
-            //XDeclaration dec = new XDeclaration("1.0", "utf-16", "true");
-            //doc.Declaration = dec;
-            //XProcessingInstruction pi = new XProcessingInstruction("LogFrameType", "Objective");
-            //doc.Add(pi);
-            //XComment comm = new XComment("test comments");
-            //doc.Add(comm);
-
             XElement books = new XElement("LogFrames");
-            doc.Add(books);            
+            doc.Add(books);
 
-            foreach (var item in x)
+            var distinctRows = (from DataRow dRow in dt.Rows
+                                select new { LogFrameId = dRow["LogFrameId"], 
+                                             DurationType = dRow["DurationType"],
+                                             YearId = dRow["YearId"]   }).Distinct();
+            
+            foreach (var item in distinctRows)
             {
-                int i = (int)item;
+                int logFrameId = (int)item.LogFrameId;
+                int? durationType = string.IsNullOrEmpty(item.DurationType.ToString()) ? (int?)null : Convert.ToInt32(item.DurationType.ToString());
+                int? yearId = string.IsNullOrEmpty(item.YearId.ToString()) ? (int?)null : Convert.ToInt32(item.YearId.ToString());
+                
                 IEnumerable<DataRow> query =
-                        from order in dt.AsEnumerable()
-                        where order.Field<int>(2) == i
-                        select order;
+                        from chartData in dt.AsEnumerable()
+                        where chartData.Field<int>("LogFrameId") == logFrameId
+                        && chartData.Field<int?>("DurationType") == durationType
+                        && chartData.Field<int?>("YearId") == yearId
+                        select chartData;
 
                 // Create a table from the query.
                 DataTable filteredTable = query.CopyToDataTable<DataRow>();
-                int id = 0;
+                
                 if (filteredTable.Rows.Count > 0)
                 {
-                    DataRow row = filteredTable.Rows[0];
-                    id = Convert.ToInt32(row["LogFrameId"].ToString());
+                    DataRow row = filteredTable.Rows[0];                    
                     WriteLogFrameInXMLFile(books, row);
                 }
-                html += " " + ReportsCommon.PrepareTargetAchievedChartData(filteredTable, id);
-                j++;
+
+                html += " " + ReportsCommon.PrepareTargetAchievedChartData(filteredTable, logFrameId, durationType, yearId);
             }
 
             string rootDir = Server.MapPath("~/GeneratedChartFiles");
@@ -114,6 +103,8 @@ namespace SRFROWCA.Reports
         private void WriteLogFrameInXMLFile(XElement logFrameRoot, DataRow row)
         {
             string logFrameType = row["LogFrameType"].ToString();
+            string durationTypeId = row["DurationType"].ToString();
+            string durationTypeName = row["DurationTypeName"].ToString();
             string dataId = row["DataId"].ToString();
             string dataName = row["DataName"].ToString();
             string activityId = row["ActivityId"].ToString();
@@ -124,11 +115,22 @@ namespace SRFROWCA.Reports
             string objName = row["ObjectiveName"].ToString();
             string clusterId = row["ClusterId"].ToString();
             string clusterName = row["ClusterName"].ToString();
+            string monthId = row["MonthId"].ToString();
+            string monthName = row["MonthName"].ToString();
+            string qId = row["QNumber"].ToString();
+            string qName = row["QName"].ToString();
+            string yearId = row["YearId"].ToString();
+            string yearName = row["YearName"].ToString();
 
             XElement logFrame = new XElement("LogFrame");
             logFrame.SetAttributeValue("LogFrameType", logFrameType);
+            logFrame.SetAttributeValue("DurationTypeName", durationTypeName);
             logFrameRoot.Add(logFrame);
 
+            logFrame.Add(GetElement("DurationType", durationTypeId, durationTypeName));
+            logFrame.Add(GetElement("Month", monthId, monthName));
+            logFrame.Add(GetElement("Quarter", qId, qName));
+            logFrame.Add(GetElement("Year", yearId, yearName));
             logFrame.Add(GetElement("Cluster", clusterId, clusterName));
             logFrame.Add(GetElement("Objective", objId, objName));
             logFrame.Add(GetElement("Indicator", indicatorId, indicatorName));

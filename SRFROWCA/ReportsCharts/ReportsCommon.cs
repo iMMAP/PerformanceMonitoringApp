@@ -127,50 +127,19 @@ namespace SRFROWCA.Reports
                          .ToArray();
         }
 
-        public static void DrawChart(DataTable dt, int j)
+        public static string PrepareTargetAchievedChartData(DataTable dt, int uniqueVal1, int? uniqueVal2, int? uniqueVal3)
         {
-            PrepareTargetAchievedChartData(dt, j);
-            //PreparePercentageChartData(dt);
+            Series[] series = GetSeries(dt);
+            string[] categories = GetCategories(dt);
+            return DrawLocaitonChart(series, categories, uniqueVal1, uniqueVal2, uniqueVal3);
         }
 
-        public static string PrepareTargetAchievedChartData(DataTable dt, int j)
+        public static string DrawLocaitonChart(Series[] series, string[] category, int uniqueVal1, int? uniqueVal2, int? uniqueVal3)
         {
-            if (dt.Rows.Count > 0)
-            {
-                Series[] series = GetSeries(dt);
-                DataRow dr = dt.Rows[0];
-                string[] categories = GetCategories(dt);
-                string title = GetChartTitle(dt);
-                return DrawLocaitonChart(series, categories, j, title);
-            }
-            else
-            {
-                Series[] series = new[]
-                {
-                        new Series{ Data = new Data(new object[] {"0"})}
-                };
+            string chartName = uniqueVal3 != null ? "Chart" + uniqueVal1 + "_" + uniqueVal2 + "deys" + uniqueVal3 + "ye" :
+                "Chart" + uniqueVal1;
 
-                string[] categories = { "" };
-                return DrawLocaitonChart(series, categories, j, string.Empty);
-            }
-        }
-
-        private static string GetChartTitle(DataTable dt)
-        {
-            string title = "";
-            title = dt.Rows[0]["ClusterName"].ToString() + "<br/> 123456 89 111213 1516171819202122 2425 27 293031323334353637 3940 414243 45";
-
-            //title += "<br/>" + dt.Rows[0]["ObjectiveName"].ToString();
-            //title += "<br/> " + dt.Rows[0]["IndicatorName"].ToString();
-            //title += "<br/> " + dt.Rows[0]["ActivityName"].ToString();
-            //title += "</br/> " + dt.Rows[0]["DataName"].ToString();
-
-            return title;
-        }
-
-        public static string DrawLocaitonChart(Series[] series, string[] category, int j, string title)
-        {
-            Highcharts hc = new Highcharts("Chart" + j)
+            Highcharts hc = new Highcharts(chartName)
                 .InitChart(new Chart
                 {
                     DefaultSeriesType = ChartTypes.Column,
@@ -181,7 +150,7 @@ namespace SRFROWCA.Reports
                 .SetLegend(new Legend
                 {
                     Margin = 5
-                })                
+                })
                 .SetCredits(new Credits
                 {
                     Enabled = false

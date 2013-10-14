@@ -58,9 +58,19 @@
             $(".chartsclass").each(function (i, obj) {
                 var svg = $(obj).html();
                 var id = obj.id;
-                
-                id = id.substring(5, id.indexOf('_'));
-                
+                alert(id);
+                var durationType = '';
+                var yearId = '';
+
+                var logFrameId = id.substring(5, id.indexOf('_'));
+                if(id.indexOf('ye') != -1)
+                {
+                    durationType = id.substring(id.indexOf('_') + 1, id.indexOf('deys'));
+                    yearId = id.substring(id.indexOf('ys') + 2, id.indexOf('ye'));
+                }
+                alert(logFrameId)
+                alert(durationType)
+                alert(yearId)
 
                 var indexOf = svg.indexOf('<svg');
                 var len = svg.length;
@@ -75,8 +85,8 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "../WebService2.asmx/SaveSVG1",
-                    data: "{'svg':'" + svg + "', i:'" + id + "'}",
+                    url: "../WebService2.asmx/SaveSVGOnDisk",
+                    data: "{'svg':'" + svg + "', logFrameId:'" + logFrameId + "', durationType:'" + durationType + "', yearId:'" + yearId + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (msg) {
@@ -113,7 +123,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:Wizard ID="wzrdReport" runat="server" OnNextButtonClick="wzrdReport_NextButtonClick"
-        OnPreviousButtonClick="wzrdReport_PreviousButtonClick" OnFinishButtonClick="wzrdReport_FinishButtonClick">
+        OnPreviousButtonClick="wzrdReport_PreviousButtonClick">
         <WizardSteps>
             <asp:WizardStep ID="wsFrist" runat="server" Title="Step 1">
                 <table>
