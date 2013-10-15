@@ -9,6 +9,7 @@ using DotNet.Highcharts.Helpers;
 using System.Collections;
 using DotNet.Highcharts;
 using DotNet.Highcharts.Enums;
+using System.Drawing;
 
 namespace SRFROWCA.Reports
 {
@@ -127,25 +128,35 @@ namespace SRFROWCA.Reports
                          .ToArray();
         }
 
-        public static string PrepareTargetAchievedChartData(DataTable dt, int uniqueVal1, int? uniqueVal2, int? uniqueVal3)
+        public static string PrepareTargetAchievedChartData(DataTable dt, int uniqueVal1, int? uniqueVal2, int? uniqueVal3, int chartType)
         {
+            string returnVal = "";
             Series[] series = GetSeries(dt);
             string[] categories = GetCategories(dt);
-            return DrawLocaitonChart(series, categories, uniqueVal1, uniqueVal2, uniqueVal3);
+
+            Series[] pSeries = GetPercentageSeries(dt);
+            string[] pCategories = GetCategories(dt);
+
+            returnVal = DrawLocaitonChart(series, categories, uniqueVal1, uniqueVal2, uniqueVal3, chartType);
+            returnVal += " " + DrawPercentageChart(pSeries, pCategories, uniqueVal1, uniqueVal2, uniqueVal3, chartType);
+
+            return returnVal;
         }
 
-        public static string DrawLocaitonChart(Series[] series, string[] category, int uniqueVal1, int? uniqueVal2, int? uniqueVal3)
+        private static string DrawLocaitonChart(Series[] series, string[] category, int uniqueVal1, int? uniqueVal2, int? uniqueVal3, int chartType)
         {
             string chartName = uniqueVal3 != null ? "Chart" + uniqueVal1 + "_" + uniqueVal2 + "deys" + uniqueVal3 + "ye" :
                 "Chart" + uniqueVal1;
 
+            ChartTypes typeOfChart = (ChartTypes)chartType;
+
             Highcharts hc = new Highcharts(chartName)
                 .InitChart(new Chart
                 {
-                    DefaultSeriesType = ChartTypes.Column,
+                    DefaultSeriesType = typeOfChart,
                     Width = 550,
-                    Height = 530,
-                    MarginTop = 100,
+                    Height = 380,
+                    MarginTop = 10,
                 })
                 .SetLegend(new Legend
                 {
@@ -168,7 +179,7 @@ namespace SRFROWCA.Reports
                     Categories = category,
                     Labels = new XAxisLabels
                     {
-                        Rotation = -45,
+                        Rotation = -30,
                         Align = HorizontalAligns.Right
                     }
                 })
@@ -176,7 +187,7 @@ namespace SRFROWCA.Reports
                     {
                         new YAxis
                             {
-                                Title = new YAxisTitle { Text = "" },
+                                Title = new YAxisTitle { Text = "" },                                
                             }
                     })
                 .SetPlotOptions(new PlotOptions
@@ -194,6 +205,76 @@ namespace SRFROWCA.Reports
 
             return hc.ToHtmlString();
 
+        }
+
+        private static string DrawPercentageChart(Series[] series, string[] category, int uniqueVal1, int? uniqueVal2, int? uniqueVal3, int chartType)
+        {
+            string chartName = uniqueVal3 != null ? "Charp" + uniqueVal1 + "_" + uniqueVal2 + "deys" + uniqueVal3 + "ye" :
+                "Charp" + uniqueVal1;
+
+            ChartTypes typeOfChart = (ChartTypes)chartType;
+
+            Highcharts hc = new Highcharts(chartName)
+                .InitChart(new Chart
+                {
+                    DefaultSeriesType = typeOfChart,
+                    Width = 550,
+                    Height = 280,
+                    MarginTop = 10
+                })
+                .SetLegend(new Legend
+                {
+                    Margin = 5
+                })
+                .SetCredits(new Credits
+                {
+                    Enabled = false
+                })
+                .SetTitle(new Title
+                {
+                    Text = ""
+                })
+                .SetExporting(new Exporting
+                {
+                    Enabled = false
+                })
+                .SetXAxis(new XAxis
+                {
+                    Categories = category,
+                    Labels = new XAxisLabels
+                    {
+                        Rotation = -30,
+                        Align = HorizontalAligns.Right
+                    }
+                })
+                .SetYAxis(new[]
+                    {
+                        new YAxis
+                            {
+                                Title = new YAxisTitle { Text = "" },
+                                Max = 100,
+                            }
+                    })
+                .SetPlotOptions(new PlotOptions
+                {
+                    Column = new PlotOptionsColumn
+                    {
+                        PointWidth = 20,
+                        DataLabels = new PlotOptionsColumnDataLabels
+                        {
+                            Enabled = true,
+                            Rotation = -90,
+                            Color = ColorTranslator.FromHtml("#FFFFFF"),
+                            Align = HorizontalAligns.Right,
+                            X = 3,
+                            Y = 2,
+                            Formatter = "function() { return this.y; }",
+                            Style = "font: 'normal 13px Verdana, sans-serif'"
+                        },
+                    }
+                })
+                .SetSeries(series);
+            return  hc.ToHtmlString();
         }
 
         public enum LocationType

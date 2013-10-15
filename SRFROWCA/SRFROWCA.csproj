@@ -628,8 +628,11 @@
       <DependentUpon>ClustersFeed.ashx</DependentUpon>
     </Compile>
     <Compile Include="Common\DataTableToJson.cs" />
+    <Compile Include="Common\Enemuration.cs" />
+    <Compile Include="Common\LogFrameValues.cs" />
     <Compile Include="Common\ServiceBL.cs" />
     <Compile Include="Common\SvgToPdf.cs" />
+    <Compile Include="Common\WritePDF.cs" />
     <Compile Include="ContactUs\Contactus.aspx.cs">
       <DependentUpon>Contactus.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

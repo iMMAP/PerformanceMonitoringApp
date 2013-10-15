@@ -7,6 +7,7 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Svg;
 using System.Collections.Generic;
+using SRFROWCA.Common;
 
 
 namespace SRFROWCA
@@ -22,14 +23,14 @@ namespace SRFROWCA
     public class WebService2 : System.Web.Services.WebService
     {
         [WebMethod(EnableSession = true)]
-        public string SaveSVGOnDisk(string svg, string logFrameId, string durationType, string yearId)
+        public string SaveSVGOnDisk(string svg, string logFrameId, string durationType, string yearId, string chartType)
         {
             string result = "Success";
 
             string dir = CreateFolderForFiles();
 
             // Use LogFrameId to save
-            string fileName = dir + "\\" + logFrameId;
+            string fileName = dir + "\\" + chartType +  logFrameId;
 
             if (!string.IsNullOrEmpty(durationType) && !string.IsNullOrEmpty(yearId))
             {
@@ -93,6 +94,13 @@ namespace SRFROWCA
 
             string filePath = path + "Charts.pdf";
 
+            iTextSharp.text.Document document = new iTextSharp.text.Document(PageSize.A4, 8, 8, 14, 6);
+            //MemoryStream outputStream = new MemoryStream()
+            FileStream outputStream = new FileStream(filePath, FileMode.Create);
+            PdfWriter writer = PdfWriter.GetInstance(document, outputStream);
+            document.Open();
+            
+
             FileInfo[] imageFiles = new DirectoryInfo(path).GetFiles("*.jpg");
 
             XDocument logFrameDoc = XDocument.Load(path + "logframe.xml");
@@ -102,47 +110,84 @@ namespace SRFROWCA
             for (int i = 0; i < imageFiles.Length; i++)
             {
                 string fileName = imageFiles[i].Name;
-
-                int lastIndexOfUnderScore = fileName.LastIndexOf("__");
-                int lastIndexofHyphen = fileName.LastIndexOf('-');
-                int lastIndexOfPeriod = fileName.LastIndexOf(".");
-                int length = lastIndexOfUnderScore == -1 ? lastIndexOfPeriod : lastIndexOfUnderScore;
-
-                string logFrameId = fileName.Substring(0, length);
-                string durationTypeId = lastIndexOfUnderScore == -1 ? null :
-                    fileName.Substring(lastIndexOfUnderScore + 2, lastIndexofHyphen - (lastIndexOfUnderScore + 2));
-
-                string yearTyepId = lastIndexOfUnderScore == -1 ? null :
-                    fileName.Substring(lastIndexofHyphen + 1, lastIndexOfPeriod - (lastIndexofHyphen + 1));
-
-                XElement xmlDoc = XElement.Load(path + "logframe.xml");
-                var logFrameElements =
-                    from le in xmlDoc.Descendants(logFrameType)
-                    where (string)le.Attribute("Id").Value == logFrameId
-                    select le.AncestorsAndSelf().Distinct();
-
-                LogFrameValues logFrameValues = null;
-                IEnumerable<XElement> elementsToUseInPDF = logFrameElements.Count() > 0 ? logFrameElements.FirstOrDefault() : null;
-                if (elementsToUseInPDF != null)
+                if (!fileName.Contains('t'))
                 {
-                    if (string.IsNullOrEmpty(durationTypeName))
+                    int lastIndexOfUnderScore = fileName.LastIndexOf("__");
+                    int lastIndexofHyphen = fileName.LastIndexOf('-');
+                    int lastIndexOfPeriod = fileName.LastIndexOf(".");
+                    int length = lastIndexOfUnderScore == -1 ? lastIndexOfPeriod : lastIndexOfUnderScore;
+
+                    string logFrameId = fileName.Substring(1, length - 1);
+                    string durationTypeId = lastIndexOfUnderScore == -1 ? null :
+                        fileName.Substring(lastIndexOfUnderScore + 2, lastIndexofHyphen - (lastIndexOfUnderScore + 2));
+
+                    string yearTyepId = lastIndexOfUnderScore == -1 ? null :
+                        fileName.Substring(lastIndexofHyphen + 1, lastIndexOfPeriod - (lastIndexofHyphen + 1));
+
+                    XElement xmlDoc = XElement.Load(path + "logframe.xml");
+                    var logFrameElements =
+                        from le in xmlDoc.Descendants(logFrameType)
+                        where (string)le.Attribute("Id").Value == logFrameId
+                        select le.AncestorsAndSelf().Distinct();
+
+                    LogFrameValues logFrameValues = null;
+                    IEnumerable<XElement> elementsToUseInPDF = logFrameElements.Count() > 0 ? logFrameElements.FirstOrDefault() : null;
+                    if (elementsToUseInPDF != null)
                     {
-                        logFrameValues = GetLogFrameValues(elementsToUseInPDF);
-                    }
-                    else
-                    {
-                        elementsToUseInPDF = GetElementChunk(logFrameElements, durationTypeName, durationTypeId, yearTyepId);
-                        if (elementsToUseInPDF != null)
+                        if (string.IsNullOrEmpty(durationTypeName))
                         {
                             logFrameValues = GetLogFrameValues(elementsToUseInPDF);
                         }
+                        else
+                        {
+                            elementsToUseInPDF = GetElementChunk(logFrameElements, durationTypeName, durationTypeId, yearTyepId);
+                            if (elementsToUseInPDF != null)
+                            {
+                                logFrameValues = GetLogFrameValues(elementsToUseInPDF);
+                            }
+                        }
+                    }
+
+                    if (logFrameValues != null)
+                    {
+
+                        WritePDF generatePDF = new WritePDF(logFrameValues, imageFiles[i].FullName, logFrameType);
+                        generatePDF.GeneratePDF(document);
+
                     }
                 }
-                //iTextSharp.text.Image gif = iTextSharp.text.Image.GetInstance(imageFiles[i].FullName);
             }
+            
+            document.Close();
 
-            DownLoadFile(filePath);
+            //DownLoadFile(filePath);
+
+            Context.Response.ContentType = "Application/pdf";
+            Context.Response.AppendHeader("content-disposition",
+                    "attachment; filename=" + filePath);
+            Context.Response.TransmitFile(filePath);
+            Context.Response.End();            
+
             DeleteUserFolder(path);
+        }
+
+        private void GenerateChartsReport(LogFrameValues logFrameValues, string fileName)
+        {
+            using (iTextSharp.text.Document document = new iTextSharp.text.Document(PageSize.A4, 8, 8, 14, 6))
+            {
+                using (MemoryStream outputStream = new MemoryStream())
+                {
+                    using (PdfWriter writer = PdfWriter.GetInstance(document, outputStream))
+                    {
+                        document.Open();
+
+                        //WritePDF generatePDF = new WritePDF(logFrameValues, fileName, logf);
+                        //generatePDF.GeneratePDF(document);
+
+                        document.Close();
+                    }
+                }
+            }
         }
 
         private IEnumerable<XElement> GetElementChunk(IEnumerable<IEnumerable<XElement>> logFrameElements, string durationTypeName, string durationTypeId, string yearTypeId)
@@ -177,9 +222,9 @@ namespace SRFROWCA
             lfv.Indicator = GetElementValue(logFrameElements, "Indicator");
             lfv.Activity = GetElementValue(logFrameElements, "Activity");
             lfv.Data = GetElementValue(logFrameElements, "Data");
-            lfv.MonthName = GetElementValue(logFrameElements, "MonthName");
-            lfv.QName = GetElementValue(logFrameElements, "QName");
-            lfv.YearName = GetElementValue(logFrameElements, "YearName");
+            lfv.MonthName = GetElementValue(logFrameElements, "Month");
+            lfv.QName = GetElementValue(logFrameElements, "Quarter");
+            lfv.YearName = GetElementValue(logFrameElements, "Year");
 
             return lfv;
         }
@@ -205,7 +250,7 @@ namespace SRFROWCA
 
         private string GetElementValue(IEnumerable<XElement> logFrameElements, string elementName)
         {
-            return logFrameElements.FirstOrDefault().Elements(elementName).First().Value;
+            return logFrameElements.Elements(elementName).FirstOrDefault().Value;
         }
 
         //private Font TitleFont
@@ -269,16 +314,6 @@ namespace SRFROWCA
         //doc.Open();
         //PdfPTable projectTitlePDFTable = new PdfPTable(2);
 
-        class LogFrameValues
-        {
-            public string Cluster { get; set; }
-            public string Objective { get; set; }
-            public string Indicator { get; set; }
-            public string Activity { get; set; }
-            public string Data { get; set; }
-            public string MonthName { get; set; }
-            public string QName { get; set; }
-            public string YearName { get; set; }
-        }
+
     }
 }

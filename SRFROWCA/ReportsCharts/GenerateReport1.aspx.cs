@@ -9,6 +9,8 @@ using BusinessLogic;
 using SRFROWCA.UICommon;
 using System.Xml.Linq;
 using System.IO;
+using DotNet.Highcharts.Enums;
+using SRFROWCA.Common;
 
 namespace SRFROWCA.Reports
 {
@@ -32,7 +34,7 @@ namespace SRFROWCA.Reports
             else if (e.NextStepIndex == (int)WizardStepIndex.Second)
             {
                 PutSelectedClustersInList();
-                PopulateObjectives();
+                PopulateObjectives();                
             }
             else if (e.NextStepIndex == (int)WizardStepIndex.Third)
             {
@@ -50,25 +52,29 @@ namespace SRFROWCA.Reports
 
         private void GenerateMaps()
         {
+            int chartType = Convert.ToInt32(ddlChartType.SelectedValue);
             DataTable dt = GetChartData();
 
-            string html = "";            
+            string html = "";
 
             XDocument doc = new XDocument();
             XElement books = new XElement("LogFrames");
             doc.Add(books);
 
             var distinctRows = (from DataRow dRow in dt.Rows
-                                select new { LogFrameId = dRow["LogFrameId"], 
-                                             DurationType = dRow["DurationType"],
-                                             YearId = dRow["YearId"]   }).Distinct();
-            
+                                select new
+                                {
+                                    LogFrameId = dRow["LogFrameId"],
+                                    DurationType = dRow["DurationType"],
+                                    YearId = dRow["YearId"]
+                                }).Distinct();
+
             foreach (var item in distinctRows)
             {
                 int logFrameId = (int)item.LogFrameId;
                 int? durationType = string.IsNullOrEmpty(item.DurationType.ToString()) ? (int?)null : Convert.ToInt32(item.DurationType.ToString());
                 int? yearId = string.IsNullOrEmpty(item.YearId.ToString()) ? (int?)null : Convert.ToInt32(item.YearId.ToString());
-                
+
                 IEnumerable<DataRow> query =
                         from chartData in dt.AsEnumerable()
                         where chartData.Field<int>("LogFrameId") == logFrameId
@@ -78,14 +84,14 @@ namespace SRFROWCA.Reports
 
                 // Create a table from the query.
                 DataTable filteredTable = query.CopyToDataTable<DataRow>();
-                
+
                 if (filteredTable.Rows.Count > 0)
                 {
-                    DataRow row = filteredTable.Rows[0];                    
+                    DataRow row = filteredTable.Rows[0];
                     WriteLogFrameInXMLFile(books, row);
                 }
 
-                html += " " + ReportsCommon.PrepareTargetAchievedChartData(filteredTable, logFrameId, durationType, yearId);
+                html += " " + ReportsCommon.PrepareTargetAchievedChartData(filteredTable, logFrameId, durationType, yearId, chartType);
             }
 
             string rootDir = Server.MapPath("~/GeneratedChartFiles");
@@ -191,20 +197,33 @@ namespace SRFROWCA.Reports
 
         private string GetLocationIds()
         {
+            string ids = null;
             if (rbCountry.Checked)
             {
-                return ddlCountry.SelectedItem.Value;
+                ids = ddlCountry.SelectedItem.Value;
             }
             else if (rbAdmin1.Checked)
             {
-                return ReportsCommon.GetSelectedValues(ddlAdmin1Locations);
+                ids = ReportsCommon.GetSelectedValues(ddlAdmin1Locations);
+                if (string.IsNullOrEmpty(ids))
+                {
+                    ids = ddlCountry.SelectedItem.Value;
+                }
             }
             else if (rbAdmin2.Checked)
             {
-                return ReportsCommon.GetSelectedValues(ddlAdmin2Locations);
+                ids = ReportsCommon.GetSelectedValues(ddlAdmin2Locations);
+                if (string.IsNullOrEmpty(ids))
+                {
+                    ids = ReportsCommon.GetSelectedValues(ddlAdmin1Locations);
+                    if (string.IsNullOrEmpty(ids))
+                    {
+                        ids = ddlCountry.SelectedItem.Value;
+                    }
+                }
             }
 
-            return "";
+            return ids;
         }
 
         private string GetClustersIds()
@@ -558,10 +577,17 @@ namespace SRFROWCA.Reports
 
         #endregion
 
-        [WebMethod(EnableSession = true)]
-        public void TestPDF()
+        protected void btnDownload_Click(object sender, EventArgs e)
         {
-
+            //string filePath = Server.MapPath("~/GeneratedChartFiles");
+            //filePath += "\\" + Session.SessionID.ToString() + "\\Charts.pdf";
+            //Context.Response.ContentType = "Application/pdf";
+            //Context.Response.AppendHeader("content-disposition",
+            //        "attachment; filename=" + filePath);
+            //Context.Response.TransmitFile(filePath);
+            //Context.Response.End();
+            WebService2 w2 = new WebService2();
+            w2.GeneratePDF();
         }
 
         //[WebMethod(EnableSession = true)]

@@ -41,7 +41,7 @@
         function occurrences(string, subString, allowOverlapping) {
             string += ""; subString += "";
             if (subString.length <= 0) return string.length + 1;
-            
+
             var n = 0, pos = 0;
             var step = (allowOverlapping) ? (1) : (subString.length);
 
@@ -58,19 +58,15 @@
             $(".chartsclass").each(function (i, obj) {
                 var svg = $(obj).html();
                 var id = obj.id;
-                alert(id);
                 var durationType = '';
                 var yearId = '';
 
                 var logFrameId = id.substring(5, id.indexOf('_'));
-                if(id.indexOf('ye') != -1)
-                {
+                if (id.indexOf('ye') != -1) {
                     durationType = id.substring(id.indexOf('_') + 1, id.indexOf('deys'));
                     yearId = id.substring(id.indexOf('ys') + 2, id.indexOf('ye'));
                 }
-                alert(logFrameId)
-                alert(durationType)
-                alert(yearId)
+                var chartType = id.substring(4, 5);
 
                 var indexOf = svg.indexOf('<svg');
                 var len = svg.length;
@@ -86,7 +82,7 @@
                 $.ajax({
                     type: "POST",
                     url: "../WebService2.asmx/SaveSVGOnDisk",
-                    data: "{'svg':'" + svg + "', logFrameId:'" + logFrameId + "', durationType:'" + durationType + "', yearId:'" + yearId + "'}",
+                    data: "{'svg':'" + svg + "', logFrameId:'" + logFrameId + "', durationType:'" + durationType + "', yearId:'" + yearId + "', chartType:'" + chartType + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (msg) {
@@ -98,7 +94,7 @@
                 j = i;
             });
 
-            setTimeout(function () { genPDF(j); }, 9000)
+            //setTimeout(function () { genPDF(j); }, 15000)
 
         }
 
@@ -271,9 +267,9 @@
                             Data:
                         </td>
                         <td>
-                            <cc:DropDownCheckBoxes ID="ddlData" runat="server" CssClass="ddlWidth" AddJQueryReference="True" AutoPostBack="true"
-                                OnSelectedIndexChanged="ddlData_SelectedIndexChanged"
-                                meta:resourcekey="checkBoxes2Resource1" UseButtons="False" UseSelectAllNode="True">
+                            <cc:DropDownCheckBoxes ID="ddlData" runat="server" CssClass="ddlWidth" AddJQueryReference="True"
+                                AutoPostBack="true" OnSelectedIndexChanged="ddlData_SelectedIndexChanged" meta:resourcekey="checkBoxes2Resource1"
+                                UseButtons="False" UseSelectAllNode="True">
                                 <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
                                 <Texts SelectBoxCaption="Select Location" />
                             </cc:DropDownCheckBoxes>
@@ -302,6 +298,22 @@
                                 <asp:ListItem Text="Quarterly" Value="2"></asp:ListItem>
                                 <asp:ListItem Text="Yearly" Value="3"></asp:ListItem>
                             </asp:CheckBoxList>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Chart Type :
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlChartType" runat="server">
+                            <asp:ListItem Text="Area" Value="2"></asp:ListItem>
+                            <asp:ListItem Text="AreaSpline" Value="3"></asp:ListItem>
+                            <asp:ListItem Text="Bar" Value="5"></asp:ListItem>
+                            <asp:ListItem Text="Column" Value="4" Selected="True"></asp:ListItem>
+                            <asp:ListItem Text="Line" Value="0"></asp:ListItem>
+                            <asp:ListItem Text="Spline" Value="1"></asp:ListItem>                           
+                            <asp:ListItem Text="Scatter" Value="7"></asp:ListItem>
+                            </asp:DropDownList>
                         </td>
                     </tr>
                     <tr>
@@ -341,7 +353,9 @@
         <FinishNavigationTemplate>
             <asp:Button ID="btnPreviousFinish" runat="server" Text="<< Previous" CausesValidation="false"
                 CommandName="MovePrevious" />
-            <input type="button" name="btnname" value="Generate PDF" id="btnExport" />            
+            <input type="button" name="btnname" value="Generate PDF" id="btnExport" />
+            <asp:Button ID="btnDownload" runat="server" Text="Download File" CausesValidation="false"
+                OnClick="btnDownload_Click" />
         </FinishNavigationTemplate>
     </asp:Wizard>
     <script>
