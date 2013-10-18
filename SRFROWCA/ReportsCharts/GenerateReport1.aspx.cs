@@ -11,6 +11,7 @@ using System.Xml.Linq;
 using System.IO;
 using DotNet.Highcharts.Enums;
 using SRFROWCA.Common;
+using System.Web.UI.HtmlControls;
 
 namespace SRFROWCA.Reports
 {
@@ -108,7 +109,7 @@ namespace SRFROWCA.Reports
 
         private void WriteLogFrameInXMLFile(XElement logFrameRoot, DataRow row)
         {
-            string logFrameType = row["LogFrameType"].ToString();
+            //string logFrameType = row["LogFrameType"].ToString();
             string durationTypeId = row["DurationType"].ToString();
             string durationTypeName = row["DurationTypeName"].ToString();
             string dataId = row["DataId"].ToString();
@@ -129,7 +130,7 @@ namespace SRFROWCA.Reports
             string yearName = row["YearName"].ToString();
 
             XElement logFrame = new XElement("LogFrame");
-            logFrame.SetAttributeValue("LogFrameType", logFrameType);
+            //logFrame.SetAttributeValue("LogFrameType", logFrameType);
             logFrame.SetAttributeValue("DurationTypeName", durationTypeName);
             logFrameRoot.Add(logFrame);
 
@@ -179,14 +180,13 @@ namespace SRFROWCA.Reports
             int? fromYear = GetDatePartFromString(txtFromDate, (int)DatePart.Year);
             int? fromMonth = GetDatePartFromString(txtFromDate, (int)DatePart.Month);
             int? toYear = GetDatePartFromString(txtToDate, (int)DatePart.Year);
-            int? toMonth = GetDatePartFromString(txtToDate, (int)DatePart.Month);
-            int selectedLogFrameType = GetLogFrameTypeFromOptions();
-            LogFrame actualLogFrameType = GetActualLogFrameType(selectedLogFrameType);
+            int? toMonth = GetDatePartFromString(txtToDate, (int)DatePart.Month);            
+            LogFrame actualLogFrameType = GetActualLogFrameType();
             string logFrameIds = GetLogFrameIds(actualLogFrameType);
             int? durationType = GetDurationType();
 
             return new object[] { (int)locationType, locationIds, clusterIds, organizationIds,
-                                    fromYear, fromMonth, toYear, toMonth, selectedLogFrameType, 
+                                    fromYear, fromMonth, toYear, toMonth, 
                                     (int)actualLogFrameType, logFrameIds, durationType };
         }
 
@@ -241,24 +241,25 @@ namespace SRFROWCA.Reports
             return !string.IsNullOrEmpty(txtBox.Text.Trim()) ? Convert.ToInt32((txtBox.Text.Split('/'))[datePartIndex]) : (int?)null;
         }
 
-        private int GetLogFrameTypeFromOptions()
-        {
-            foreach (ListItem item in rblReportOn.Items)
-            {
-                if (item.Selected)
-                    return Convert.ToInt32(item.Value);
-            }
+        //private int GetLogFrameTypeFromOptions()
+        //{
+        //    foreach (ListItem item in rblReportOn.Items)
+        //    {
+        //        if (item.Selected)
+        //            return Convert.ToInt32(item.Value);
+        //    }
 
-            return 0;
+        //    return 0;
+        //}
+
+        private LogFrame GetActualLogFrameType()
+        {
+            return (LogFrame)GetLogFrameTypeFromDropDown();
         }
 
-        private LogFrame GetActualLogFrameType(int selectedLogFrameType)
+        private int GetLogFrameTypeFromDropDown()
         {
-            return (LogFrame)GetLogFrameTypeFromDropDown(selectedLogFrameType);
-        }
-
-        private int GetLogFrameTypeFromDropDown(int logFrameType)
-        {
+            int logFrameType = (int)LogFrame.Data;
             while (logFrameType > 0)
             {
                 if (!string.IsNullOrEmpty(GetLogFrameIds((LogFrame)logFrameType))) break;
@@ -429,30 +430,18 @@ namespace SRFROWCA.Reports
         {
             PopulateIndicators();
             PopulateActivities();
-            PopulateDataItems();
-            int dropDownIndex = GetLogFrameTypeFromDropDown((int)LogFrame.Objectives);
-            CheckLogFrameRadio(dropDownIndex);
+            PopulateDataItems();            
         }
 
         protected void ddlIndicators_SelectedIndexChanged(object sender, EventArgs e)
         {
             PopulateActivities();
-            PopulateDataItems();
-            int dropDownIndex = GetLogFrameTypeFromDropDown((int)LogFrame.Indicators);
-            CheckLogFrameRadio(dropDownIndex);
+            PopulateDataItems();            
         }
 
         protected void ddlActivities_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PopulateDataItems();
-            int dropDownIndex = GetLogFrameTypeFromDropDown((int)LogFrame.Activities);
-            CheckLogFrameRadio(dropDownIndex);
-        }
-
-        protected void ddlData_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int dropDownIndex = GetLogFrameTypeFromDropDown((int)LogFrame.Data);
-            CheckLogFrameRadio(dropDownIndex);
+            PopulateDataItems();            
         }
 
         #endregion
@@ -504,15 +493,6 @@ namespace SRFROWCA.Reports
         {
             string activityIds = ReportsCommon.GetSelectedValues(ddlActivities);
             return DBContext.GetData("GetDatItemsOfMultipleActivities", new object[] { activityIds });
-        }
-
-        private void CheckLogFrameRadio(int index)
-        {
-
-            ToggleAllList(rblReportOn, false);
-            --index;
-            index = index < 0 ? 0 : index;
-            rblReportOn.Items[index].Selected = true;
         }
 
         private void ToggleAllList(ListControl lstControl, bool isSelected)

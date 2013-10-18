@@ -174,6 +174,10 @@ namespace SRFROWCA.Reports
                 {
                     Enabled = false
                 })
+                .SetTooltip(new Tooltip 
+                {
+                    Enabled = false
+                })
                 .SetXAxis(new XAxis
                 {
                     Categories = category,
@@ -238,6 +242,11 @@ namespace SRFROWCA.Reports
                 {
                     Enabled = false
                 })
+                .SetTooltip(new Tooltip 
+                {
+                    Enabled = false
+                })
+
                 .SetXAxis(new XAxis
                 {
                     Categories = category,

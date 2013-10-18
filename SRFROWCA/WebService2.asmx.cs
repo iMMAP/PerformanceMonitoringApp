@@ -104,7 +104,7 @@ namespace SRFROWCA
             FileInfo[] imageFiles = new DirectoryInfo(path).GetFiles("*.jpg");
 
             XDocument logFrameDoc = XDocument.Load(path + "logframe.xml");
-            string logFrameType = GetAttributeValue(logFrameDoc.Element("LogFrames"), "LogFrame", "LogFrameType");
+            //string logFrameType = GetAttributeValue(logFrameDoc.Element("LogFrames"), "LogFrame", "LogFrameType");
             string durationTypeName = GetAttributeValue(logFrameDoc.Element("LogFrames"), "LogFrame", "DurationTypeName");
 
             for (int i = 0; i < imageFiles.Length; i++)
@@ -126,7 +126,7 @@ namespace SRFROWCA
 
                     XElement xmlDoc = XElement.Load(path + "logframe.xml");
                     var logFrameElements =
-                        from le in xmlDoc.Descendants(logFrameType)
+                        from le in xmlDoc.Descendants("Data")
                         where (string)le.Attribute("Id").Value == logFrameId
                         select le.AncestorsAndSelf().Distinct();
 
@@ -151,7 +151,7 @@ namespace SRFROWCA
                     if (logFrameValues != null)
                     {
 
-                        WritePDF generatePDF = new WritePDF(logFrameValues, imageFiles[i].FullName, logFrameType);
+                        WritePDF generatePDF = new WritePDF(logFrameValues, imageFiles[i].FullName);
                         generatePDF.GeneratePDF(document);
 
                     }

@@ -13,11 +13,10 @@ namespace SRFROWCA.Common
         public string ImageFilePath { get; set; }
         public string LogFrameType { get; set; }
 
-        public WritePDF(LogFrameValues logFrameValues, string imageFilePath, string logFrameType)
+        public WritePDF(LogFrameValues logFrameValues, string imageFilePath)
         {
             LogFrameValues = logFrameValues;
             ImageFilePath = imageFilePath;
-            LogFrameType = logFrameType;
         }
 
         public void GeneratePDF(iTextSharp.text.Document document)

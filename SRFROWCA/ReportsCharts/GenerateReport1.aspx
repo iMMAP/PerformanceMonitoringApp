@@ -12,6 +12,17 @@
         {
             width: 300px;
         }
+        #modal-overlay
+        {
+            position: fixed;
+            z-index: 10;
+            background: black;
+            display: block;
+            opacity: .60;            
+            width: 100%;
+            height: 100%;
+            font-size:xx-large;
+        }
     </style>
     <link rel="stylesheet" href="../Styles/ui-lightness/jquery-ui-1.10.3.custom.min.css" />
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
@@ -53,67 +64,67 @@
         }
 
         function getSVG1() {
-            var j = 0;
+            try {
+                var j = 0;
 
-            $(".chartsclass").each(function (i, obj) {
-                var svg = $(obj).html();
-                var id = obj.id;
-                var durationType = '';
-                var yearId = '';
+                $(".chartsclass").each(function (i, obj) {
+                    var svg = $(obj).html();
+                    var id = obj.id;
+                    var durationType = '';
+                    var yearId = '';
 
-                var logFrameId = id.substring(5, id.indexOf('_'));
-                if (id.indexOf('ye') != -1) {
-                    durationType = id.substring(id.indexOf('_') + 1, id.indexOf('deys'));
-                    yearId = id.substring(id.indexOf('ys') + 2, id.indexOf('ye'));
-                }
-                var chartType = id.substring(4, 5);
-
-                var indexOf = svg.indexOf('<svg');
-                var len = svg.length;
-                svg = svg.substr(indexOf);
-                var lastIndexOf = svg.lastIndexOf("</div>");
-                svg = svg.substring(0, lastIndexOf);
-                var xmlnsString = 'xmlns="http://www.w3.org/2000/svg"';
-                var n = occurrences(svg, xmlnsString, false);
-                if (n > 1) {
-                    svg = svg.replace(xmlnsString, '');
-                }
-
-                $.ajax({
-                    type: "POST",
-                    url: "../WebService2.asmx/SaveSVGOnDisk",
-                    data: "{'svg':'" + svg + "', logFrameId:'" + logFrameId + "', durationType:'" + durationType + "', yearId:'" + yearId + "', chartType:'" + chartType + "'}",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (msg) {
-                    },
-                    error: function (msg) {
-                        alert('failuer');
+                    var logFrameId = id.substring(5, id.indexOf('_'));
+                    if (id.indexOf('ye') != -1) {
+                        durationType = id.substring(id.indexOf('_') + 1, id.indexOf('deys'));
+                        yearId = id.substring(id.indexOf('ys') + 2, id.indexOf('ye'));
                     }
+                    var chartType = id.substring(4, 5);
+
+                    var indexOf = svg.indexOf('<svg');
+                    var len = svg.length;
+                    svg = svg.substr(indexOf);
+                    var lastIndexOf = svg.lastIndexOf("</div>");
+                    svg = svg.substring(0, lastIndexOf);
+                    var xmlnsString = 'xmlns="http://www.w3.org/2000/svg"';
+                    var n = occurrences(svg, xmlnsString, false);
+                    if (n > 1) {
+                        svg = svg.replace(xmlnsString, '');
+                    }
+
+                    $.ajax({
+                        async: false,
+                        type: "POST",
+                        url: "../WebService2.asmx/SaveSVGOnDisk",
+                        data: "{'svg':'" + svg + "', logFrameId:'" + logFrameId + "', durationType:'" + durationType + "', yearId:'" + yearId + "', chartType:'" + chartType + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (msg) {
+                        },
+                        error: function (msg) {
+                            alert('Failure');
+                        }
+                    });
+                    j = i;
                 });
-                j = i;
-            });
-
-            //setTimeout(function () { genPDF(j); }, 15000)
-
+            }
+            finally {
+                AjaxFinished();
+            }
         }
 
-        function genPDF(j) {
-
-            $.ajax({
-                type: "POST",
-                url: "../WebService2.asmx/GeneratePDF",
-                data: "{'j':'" + j + "'}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (msg) {
-
-                },
-                error: function (msg) {
-
-                }
-            });
+        function AjaxFinished() {
+            $("#modal-overlay").hide();
+            $('.classbtnprevious').show()
+            $(".classbtndownload").show();            
+            $(".classusermessage").text("Please download your report by clicking on 'Download Report' button!");
         }
+
+        $(document).ajaxStart(function () {
+            $(".classusermessage").text("");
+            $("#modal-overlay").show();
+            $('#btnExport').hide();
+            $('.classbtnprevious').hide();
+        });
         
     </script>
 </asp:Content>
@@ -268,24 +279,10 @@
                         </td>
                         <td>
                             <cc:DropDownCheckBoxes ID="ddlData" runat="server" CssClass="ddlWidth" AddJQueryReference="True"
-                                AutoPostBack="true" OnSelectedIndexChanged="ddlData_SelectedIndexChanged" meta:resourcekey="checkBoxes2Resource1"
-                                UseButtons="False" UseSelectAllNode="True">
+                                meta:resourcekey="checkBoxes2Resource1" UseButtons="False" UseSelectAllNode="True">
                                 <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
                                 <Texts SelectBoxCaption="Select Location" />
                             </cc:DropDownCheckBoxes>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Report ON:
-                        </td>
-                        <td>
-                            <asp:RadioButtonList ID="rblReportOn" runat="server" RepeatColumns="4">
-                                <asp:ListItem Text="Objectives" Value="1" Selected="True"></asp:ListItem>
-                                <asp:ListItem Text="Indicators" Value="2"></asp:ListItem>
-                                <asp:ListItem Text="Activities" Value="3"></asp:ListItem>
-                                <asp:ListItem Text="Data" Value="4"></asp:ListItem>
-                            </asp:RadioButtonList>
                         </td>
                     </tr>
                     <tr>
@@ -306,13 +303,13 @@
                         </td>
                         <td>
                             <asp:DropDownList ID="ddlChartType" runat="server">
-                            <asp:ListItem Text="Area" Value="2"></asp:ListItem>
-                            <asp:ListItem Text="AreaSpline" Value="3"></asp:ListItem>
-                            <asp:ListItem Text="Bar" Value="5"></asp:ListItem>
-                            <asp:ListItem Text="Column" Value="4" Selected="True"></asp:ListItem>
-                            <asp:ListItem Text="Line" Value="0"></asp:ListItem>
-                            <asp:ListItem Text="Spline" Value="1"></asp:ListItem>                           
-                            <asp:ListItem Text="Scatter" Value="7"></asp:ListItem>
+                                <asp:ListItem Text="Area" Value="2"></asp:ListItem>
+                                <asp:ListItem Text="AreaSpline" Value="3"></asp:ListItem>
+                                <asp:ListItem Text="Bar" Value="5"></asp:ListItem>
+                                <asp:ListItem Text="Column" Value="4" Selected="True"></asp:ListItem>
+                                <asp:ListItem Text="Line" Value="0"></asp:ListItem>
+                                <asp:ListItem Text="Spline" Value="1"></asp:ListItem>
+                                <asp:ListItem Text="Scatter" Value="7"></asp:ListItem>
                             </asp:DropDownList>
                         </td>
                     </tr>
@@ -332,13 +329,20 @@
                 </table>
             </asp:WizardStep>
             <asp:WizardStep>
-                <div style="width: 100%;">
-                    <div style="width: 100%; float: left;">
-                        <asp:Literal ID="ltrChart" runat="server" ViewStateMode="Disabled"></asp:Literal>
-                    </div>
-                    <div style="width: 40%; float: left;">
-                        <asp:Literal ID="ltrChartPercentage" runat="server"></asp:Literal>
-                    </div>
+                <div id="modal-overlay" style="display: none;">
+                    Please Wait!<br />
+                    Report Generation Is In Progress... <br />
+                    This may take a while, depending on your selected options.
+                </div>
+                <div class="classusermessage">
+                    <b>You have successfully selected all the options. Please click on 'Generate Report'
+                        button.
+                        <br />
+                        It will take a while to generate your report, depending on the options you have
+                        selected!</b>
+                </div>
+                <div style="display: none;">
+                    <asp:Literal ID="ltrChart" runat="server" ViewStateMode="Disabled"></asp:Literal>
                 </div>
             </asp:WizardStep>
         </WizardSteps>
@@ -351,11 +355,11 @@
             <asp:Button ID="btnNext" runat="server" Text="Next >>" CausesValidation="true" CommandName="MoveNext" />
         </StepNavigationTemplate>
         <FinishNavigationTemplate>
-            <asp:Button ID="btnPreviousFinish" runat="server" Text="<< Previous" CausesValidation="false"
+            <asp:Button ID="btnPreviousFinish" runat="server" Text="<< Previous" CausesValidation="false" class="classbtnprevious"
                 CommandName="MovePrevious" />
-            <input type="button" name="btnname" value="Generate PDF" id="btnExport" />
-            <asp:Button ID="btnDownload" runat="server" Text="Download File" CausesValidation="false"
-                OnClick="btnDownload_Click" />
+            <input type="button" name="btnname" value="Prepare Report" id="btnExport" />
+            <asp:Button ID="btnDownload" runat="server" Text="Download Report" CausesValidation="false"
+                Style="display: none;" class="classbtndownload" OnClick="btnDownload_Click" />
         </FinishNavigationTemplate>
     </asp:Wizard>
     <script>
