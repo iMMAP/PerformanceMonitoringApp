@@ -125,6 +125,11 @@
             $('#btnExport').hide();
             $('.classbtnprevious').hide();
         });
+
+        function HideButton() {
+            $(".classusermessage").text("Please use previous button to select options to generate report!");
+            $(".classbtndownload").hide();
+        }
         
     </script>
 </asp:Content>
@@ -354,7 +359,7 @@
                 class="classbtnprevious" CommandName="MovePrevious" />
             <input type="button" name="btnname" value="Prepare Report" id="btnExport" />
             <asp:Button ID="btnDownload" runat="server" Text="Download Report" CausesValidation="false"
-                Style="display: none;" class="classbtndownload" OnClick="btnDownload_Click" />
+                Style="display: none;" class="classbtndownload" OnClick="btnDownload_Click" OnClientClick="HideButton();" />
         </FinishNavigationTemplate>
     </asp:Wizard>
     <script>

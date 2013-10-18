@@ -650,7 +650,7 @@ namespace SRFROWCA.Pages
 
         private DataTable GetCountries()
         {
-            int locationType = (int)ROWCATypes.LocationTypes.Governorate;
+            int locationType = (int)ROWCACommon.LocationTypes.Governorate;
             DataTable dt = DBContext.GetData("GetLocationOnType", new object[] { locationType });
 
             return dt.Rows.Count > 0 ? dt : new DataTable();

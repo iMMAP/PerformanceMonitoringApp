@@ -1,29 +1,21 @@
 ﻿using System.IO;
-using System.Linq;
-using System.Net;
 using System.Web.Services;
-using System.Xml.Linq;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
 using Svg;
-using System.Collections.Generic;
-using SRFROWCA.Common;
-
 
 namespace SRFROWCA
 {
     /// <summary>
-    /// Summary description for WebService2
+    /// Save Chart svg (passed as argument in SaveSVG folder) and create an image on that svg
     /// </summary>
-    [WebService(Namespace = "http://tempuri.org/")]
+    [WebService(Namespace = "http://rowca.oasiswebservice.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     [System.Web.Script.Services.ScriptService]
-    public class WebService2 : System.Web.Services.WebService
+    public class ChartSVGService : System.Web.Services.WebService
     {
         [WebMethod(EnableSession = true)]
-        public string SaveSVGOnDisk(string svg, string logFrameId, string durationType, string yearId, string chartType)
+        public string SaveSVG(string svg, string logFrameId, string durationType, string yearId, string chartType)
         {
             string result = "Success";
 

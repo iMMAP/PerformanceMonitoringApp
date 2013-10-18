@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Xml.Linq;
 using BusinessLogic;
 using SRFROWCA.Common;
+using SRFROWCA.ReportsCharts;
 
 namespace SRFROWCA.Reports
 {
@@ -179,7 +180,7 @@ namespace SRFROWCA.Reports
             int? fromYear = GetDatePartFromString(txtFromDate, (int)DatePart.Year);
             int? fromMonth = GetDatePartFromString(txtFromDate, (int)DatePart.Month);
             int? toYear = GetDatePartFromString(txtToDate, (int)DatePart.Year);
-            int? toMonth = GetDatePartFromString(txtToDate, (int)DatePart.Month);            
+            int? toMonth = GetDatePartFromString(txtToDate, (int)DatePart.Month);
             LogFrame actualLogFrameType = GetActualLogFrameType();
             string logFrameIds = GetLogFrameIds(actualLogFrameType);
             int? durationType = GetDurationType();
@@ -430,18 +431,18 @@ namespace SRFROWCA.Reports
         {
             PopulateIndicators();
             PopulateActivities();
-            PopulateDataItems();            
+            PopulateDataItems();
         }
 
         protected void ddlIndicators_SelectedIndexChanged(object sender, EventArgs e)
         {
             PopulateActivities();
-            PopulateDataItems();            
+            PopulateDataItems();
         }
 
         protected void ddlActivities_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PopulateDataItems();            
+            PopulateDataItems();
         }
 
         #endregion
@@ -559,8 +560,36 @@ namespace SRFROWCA.Reports
 
         protected void btnDownload_Click(object sender, EventArgs e)
         {
-            //ChartSVG w2 = new ChartSVG();
-            //w2.GeneratePDF();
+            string dir = Server.MapPath("~/GeneratedChartFiles");
+            string sessionId = Session.SessionID.ToString();
+            string path = (ROWCACommon.CreateFolderForFiles(dir, sessionId)) + "\\";
+
+            GenerateChartReportPDF pdf = new GenerateChartReportPDF();
+            string filePath = pdf.GeneratePDF(path);
+
+            try
+            {
+                DownloadPDF(filePath);
+            }
+            finally
+            {
+                DeleteUserFolder(path);                
+            }
+        }
+
+        private void DownloadPDF(string filePath)
+        {
+            Response.ContentType = "Application/pdf";
+            Response.AppendHeader("content-disposition",
+                    "attachment; filename=3WReport" + DateTime.Now.ToString("dd-MM-yyyy--hh-mm-ss") + ".pdf");
+            Response.TransmitFile(filePath);
+            Response.Flush();
+        }
+
+        private void DeleteUserFolder(string path)
+        {
+            DirectoryInfo di = new DirectoryInfo(path);
+            di.Delete(true);
         }
     }
 }

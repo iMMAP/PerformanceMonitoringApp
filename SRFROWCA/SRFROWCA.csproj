@@ -527,6 +527,7 @@
     <Compile Include="ReportsCharts\ChartReport.aspx.designer.cs">
       <DependentUpon>ChartReport.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ReportsCharts\GenerateChartReportPDF.cs" />
     <Compile Include="ReportsCharts\GenerateReport1.aspx.cs">
       <DependentUpon>GenerateReport1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -556,7 +557,7 @@
     <Compile Include="ReportsCharts\TargetsAchievedByLocDuration.aspx.designer.cs">
       <DependentUpon>TargetsAchievedByLocDuration.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Common\ROWCATypes.cs" />
+    <Compile Include="Common\ROWCACommon.cs" />
     <Compile Include="Common\ExportUtility.cs" />
     <Compile Include="Common\Mail.cs" />
     <Compile Include="Default.aspx.cs">

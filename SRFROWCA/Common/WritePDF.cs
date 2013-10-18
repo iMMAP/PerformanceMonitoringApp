@@ -19,7 +19,7 @@ namespace SRFROWCA.Common
             ImageFilePath = imageFilePath;
         }
 
-        public void GeneratePDF(iTextSharp.text.Document document)
+        public void WriteInPDFDocument(iTextSharp.text.Document document)
         {
             ChartTitle(document);
             ChartImage(document);
