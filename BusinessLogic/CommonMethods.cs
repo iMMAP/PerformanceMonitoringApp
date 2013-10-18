@@ -20,6 +20,12 @@ namespace BusinessLogic
             return DBContext.GetData("GetDonors", new object[] { isReallyDonor });
         }
 
-        
+        public static string ConnectionString
+        {
+            get
+            {
+                return "Live";
+            }
+        }
     }
 }

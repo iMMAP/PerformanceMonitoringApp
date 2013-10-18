@@ -63,6 +63,8 @@ namespace SRFROWCA
         // create image using svg.dll
         private void CreateImage(string path)
         {
+            string imagePath = path + ".jpg";
+            if (File.Exists(imagePath)) return;
             using (FileStream fileStream = File.OpenRead(path + ".svg"))
             {
                 using (MemoryStream memoryStream = new MemoryStream())
@@ -78,7 +80,12 @@ namespace SRFROWCA
 
         private void CreateSVG(string svg, string path)
         {
-            using (FileStream fs = new FileStream(path + ".svg", FileMode.Create, FileAccess.Write))
+            string filePath = path + ".svg";
+
+            // If file exists then no need to create again.
+            if (File.Exists(filePath)) return;
+
+            using (FileStream fs = new FileStream(filePath, FileMode.Create, FileAccess.Write))
             {
                 using (StreamWriter sw = new StreamWriter(fs))
                 {
@@ -99,17 +106,17 @@ namespace SRFROWCA
             FileStream outputStream = new FileStream(filePath, FileMode.Create);
             PdfWriter writer = PdfWriter.GetInstance(document, outputStream);
             document.Open();
-            
 
-            FileInfo[] imageFiles = new DirectoryInfo(path).GetFiles("*.jpg");
+
+            DirectoryInfo dirInfo = new DirectoryInfo(path);
+            FileInfo[] files = dirInfo.GetFiles("*.jpg").OrderBy(p => p.CreationTime).ToArray();
 
             XDocument logFrameDoc = XDocument.Load(path + "logframe.xml");
-            //string logFrameType = GetAttributeValue(logFrameDoc.Element("LogFrames"), "LogFrame", "LogFrameType");
             string durationTypeName = GetAttributeValue(logFrameDoc.Element("LogFrames"), "LogFrame", "DurationTypeName");
 
-            for (int i = 0; i < imageFiles.Length; i++)
+            foreach(FileInfo file in files)
             {
-                string fileName = imageFiles[i].Name;
+                string fileName = file.Name;
                 if (!fileName.Contains('t'))
                 {
                     int lastIndexOfUnderScore = fileName.LastIndexOf("__");
@@ -150,8 +157,7 @@ namespace SRFROWCA
 
                     if (logFrameValues != null)
                     {
-
-                        WritePDF generatePDF = new WritePDF(logFrameValues, imageFiles[i].FullName);
+                        WritePDF generatePDF = new WritePDF(logFrameValues, file.FullName);
                         generatePDF.GeneratePDF(document);
 
                     }
@@ -166,7 +172,8 @@ namespace SRFROWCA
             Context.Response.AppendHeader("content-disposition",
                     "attachment; filename=" + filePath);
             Context.Response.TransmitFile(filePath);
-            Context.Response.End();            
+            Context.Response.Flush();
+            //Context.Response.End();            
 
             DeleteUserFolder(path);
         }

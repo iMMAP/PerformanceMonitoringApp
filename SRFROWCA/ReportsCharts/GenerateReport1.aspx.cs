@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web.Services;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using BusinessLogic;
-using SRFROWCA.UICommon;
-using System.Xml.Linq;
 using System.IO;
-using DotNet.Highcharts.Enums;
+using System.Linq;
+using System.Web.UI.WebControls;
+using System.Xml.Linq;
+using BusinessLogic;
 using SRFROWCA.Common;
-using System.Web.UI.HtmlControls;
 
 namespace SRFROWCA.Reports
 {
@@ -30,14 +25,9 @@ namespace SRFROWCA.Reports
         {
             if (e.NextStepIndex == (int)WizardStepIndex.First)
             {
-                PopulateClusters();
+                PopulateObjectives();
             }
             else if (e.NextStepIndex == (int)WizardStepIndex.Second)
-            {
-                PutSelectedClustersInList();
-                PopulateObjectives();                
-            }
-            else if (e.NextStepIndex == (int)WizardStepIndex.Third)
             {
                 GenerateMaps();
             }
@@ -55,7 +45,16 @@ namespace SRFROWCA.Reports
         {
             int chartType = Convert.ToInt32(ddlChartType.SelectedValue);
             DataTable dt = GetChartData();
-
+            if (dt.Rows.Count == 0)
+            {
+                divMessage.InnerHtml = "Your selected options did not produce any report. Please contact to admin of this site for futher details!";
+                return;
+            }
+            else
+            {
+                divMessage.InnerHtml = @"<b>You have successfully selected all the options. Please click on 'Generate Report' button.
+                        <br />It will take a while to generate your report, depending on the options you haveselected!</b>";
+            }
             string html = "";
 
             XDocument doc = new XDocument();
@@ -319,6 +318,7 @@ namespace SRFROWCA.Reports
         {
             PopulateChildLocations();
             PopulateEmergency();
+            PopulateClusters();
         }
         #endregion
 
@@ -559,103 +559,8 @@ namespace SRFROWCA.Reports
 
         protected void btnDownload_Click(object sender, EventArgs e)
         {
-            //string filePath = Server.MapPath("~/GeneratedChartFiles");
-            //filePath += "\\" + Session.SessionID.ToString() + "\\Charts.pdf";
-            //Context.Response.ContentType = "Application/pdf";
-            //Context.Response.AppendHeader("content-disposition",
-            //        "attachment; filename=" + filePath);
-            //Context.Response.TransmitFile(filePath);
-            //Context.Response.End();
-            WebService2 w2 = new WebService2();
-            w2.GeneratePDF();
+            //ChartSVG w2 = new ChartSVG();
+            //w2.GeneratePDF();
         }
-
-        //[WebMethod(EnableSession = true)]
-        //public void GeneratePDF(int j)
-        //{
-        //    string pdfpath = Server.MapPath("img2");
-
-        //    if (!Directory.Exists(pdfpath + Session.SessionID.ToString()))
-        //    {
-        //        Directory.CreateDirectory(pdfpath + Session.SessionID.ToString());
-        //    }
-
-        //    string dir = pdfpath + Session.SessionID.ToString();
-
-        //    string imagepath = "E:\\img\\" + Session.SessionID.ToString() + "\\";
-        //    //Document doc = new Document(new Rectangle(288f, 144f), 10, 10, 10, 10);
-        //    using (iTextSharp.text.Document doc = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4, 8, 8, 14, 6))
-        //    {
-        //        using (MemoryStream outputStream = new MemoryStream())
-        //        {
-        //            try
-        //            {
-        //                using (PdfWriter writer = PdfWriter.GetInstance(doc, outputStream))
-        //                {
-        //                    //PdfWriter.GetInstance(doc, new FileStream(pdfpath + "Charts" + DateTime.Now.ToString(), FileMode.Create));
-        //                    doc.Open();
-        //                    PdfPTable projectTitlePDFTable = new PdfPTable(2);
-
-        //                    //AddProjectTitle(projectTitlePDFTable);
-        //                    //AddNewLineInDocument(document, 1);
-        //                    //doc.Add(projectTitlePDFTable);
-
-        //                    PdfPTable projectMainInfoTable = new PdfPTable(2);
-        //                    projectMainInfoTable.KeepTogether = true;
-        //                    float[] widths = new float[] { 1f, 3f };
-        //                    projectMainInfoTable.SetWidths(widths);
-
-        //                    projectMainInfoTable.SpacingAfter = 10f;
-
-        //                    // Add funding header.
-        //                    PdfPCell cell = null;
-        //                    cell = new PdfPCell(new iTextSharp.text.Phrase("Project General Info", TitleFont));
-        //                    cell.Colspan = 2;
-        //                    cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
-        //                    projectMainInfoTable.AddCell(cell);
-
-        //                    for (int i = 0; i < j; i++)
-        //                    {
-        //                        iTextSharp.text.Image gif = iTextSharp.text.Image.GetInstance(imagepath + Session.SessionID.ToString() + i.ToString() + ".jpg");
-        //                        doc.Add(gif);
-        //                    }
-
-        //                    DirectoryInfo di = new DirectoryInfo("E:\\img\\" + Session.SessionID.ToString());
-        //                    di.Delete(true);
-
-        //                    Response.ContentType = "application/pdf";
-        //                    Response.AddHeader("Content-Disposition", string.Format("attachment;filename=Charts-{0}.pdf", DateTime.Now.ToString()));
-        //                    Response.BinaryWrite(outputStream.ToArray());
-        //                }
-        //            }
-
-        //            catch (Exception ex)
-        //            {
-        //                //Log error;
-        //            }
-        //            finally
-        //            {
-
-        //            }
-        //        }
-        //    }
-        //}
-
-        //private iTextSharp.text.Font TitleFont
-        //{
-        //    get
-        //    {
-        //        return iTextSharp.text.FontFactory.GetFont("Arial", 7, iTextSharp.text.Font.BOLD);
-        //    }
-        //}
-
-        //private iTextSharp.text.Font TableFont
-        //{
-        //    get
-        //    {
-        //        return iTextSharp.text.FontFactory.GetFont("Arial", 8, iTextSharp.text.Font.NORMAL);
-        //    }
-        //}
-
     }
 }

@@ -18,10 +18,10 @@
             z-index: 10;
             background: black;
             display: block;
-            opacity: .60;            
+            opacity: .60;
             width: 100%;
             height: 100%;
-            font-size:xx-large;
+            font-size: xx-large;
         }
     </style>
     <link rel="stylesheet" href="../Styles/ui-lightness/jquery-ui-1.10.3.custom.min.css" />
@@ -94,7 +94,7 @@
                     $.ajax({
                         async: false,
                         type: "POST",
-                        url: "../WebService2.asmx/SaveSVGOnDisk",
+                        url: "../ChartSVGService.asmx/SaveSVG",
                         data: "{'svg':'" + svg + "', logFrameId:'" + logFrameId + "', durationType:'" + durationType + "', yearId:'" + yearId + "', chartType:'" + chartType + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
@@ -115,7 +115,7 @@
         function AjaxFinished() {
             $("#modal-overlay").hide();
             $('.classbtnprevious').show()
-            $(".classbtndownload").show();            
+            $(".classbtndownload").show();
             $(".classusermessage").text("Please download your report by clicking on 'Download Report' button!");
         }
 
@@ -139,12 +139,6 @@
                             Country:
                         </td>
                         <td>
-                            <%--<cc:DropDownCheckBoxes ID="ddlCountry" runat="server" CssClass="ddlWidth" AutoPostBack="true"
-                                OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" AddJQueryReference="True"
-                                meta:resourcekey="checkBoxes2Resource1" UseButtons="False" UseSelectAllNode="True">
-                                <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
-                                <Texts SelectBoxCaption="Select Location" />
-                            </cc:DropDownCheckBoxes>--%>
                             <asp:DropDownList ID="ddlCountry" runat="server" AutoPostBack="true" Width="300px"
                                 OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged">
                             </asp:DropDownList>
@@ -180,6 +174,9 @@
                     </tr>
                     <tr>
                         <td>
+                            Report Location Level:
+                        </td>
+                        <td>
                             <asp:RadioButton ID="rbCountry" runat="server" Text="Country" Checked="true" GroupName="Location" />
                             <asp:RadioButton ID="rbAdmin1" runat="server" Text="Admin 1" GroupName="Location" />
                             <asp:RadioButton ID="rbAdmin2" runat="server" Text="Admin 2" GroupName="Location" />
@@ -192,19 +189,6 @@
                         <td>
                             <asp:DropDownList ID="ddlEmergency" runat="server" Width="300px">
                             </asp:DropDownList>
-                        </td>
-                    </tr>
-                </table>
-            </asp:WizardStep>
-            <asp:WizardStep ID="WizardStep2" runat="server" Title="Step 2">
-                <table>
-                    <tr>
-                        <td>
-                            Clusters:
-                        </td>
-                        <td>
-                            <asp:CheckBoxList ID="cblClusters" runat="server" RepeatColumns="4">
-                            </asp:CheckBoxList>
                         </td>
                     </tr>
                     <tr>
@@ -222,17 +206,16 @@
                     </tr>
                     <tr>
                         <td>
-                            From:
-                            <asp:TextBox ID="txtFromDate" runat="server"></asp:TextBox>
+                            Clusters:
                         </td>
                         <td>
-                            TO:
-                            <asp:TextBox ID="txtToDate" runat="server"></asp:TextBox>
+                            <asp:CheckBoxList ID="cblClusters" runat="server" RepeatColumns="3">
+                            </asp:CheckBoxList>
                         </td>
                     </tr>
                 </table>
             </asp:WizardStep>
-            <asp:WizardStep ID="WizardStep3" runat="server" Title="Step 3">
+            <asp:WizardStep ID="WizardStep2" runat="server" Title="Step 2">
                 <table>
                     <tr>
                         <td>
@@ -243,7 +226,7 @@
                                 OnSelectedIndexChanged="ddlObjectives_SelectedIndexChanged" AddJQueryReference="True"
                                 meta:resourcekey="checkBoxes2Resource1" UseButtons="False" UseSelectAllNode="True">
                                 <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
-                                <Texts SelectBoxCaption="Select Location" />
+                                <Texts SelectBoxCaption="Select Objectives" />
                             </cc:DropDownCheckBoxes>
                         </td>
                     </tr>
@@ -256,7 +239,7 @@
                                 OnSelectedIndexChanged="ddlIndicators_SelectedIndexChanged" AddJQueryReference="True"
                                 meta:resourcekey="checkBoxes2Resource1" UseButtons="False" UseSelectAllNode="True">
                                 <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
-                                <Texts SelectBoxCaption="Select Location" />
+                                <Texts SelectBoxCaption="Select Indicators" />
                             </cc:DropDownCheckBoxes>
                         </td>
                     </tr>
@@ -269,7 +252,7 @@
                                 OnSelectedIndexChanged="ddlActivities_SelectedIndexChanged" AddJQueryReference="True"
                                 meta:resourcekey="checkBoxes2Resource1" UseButtons="False" UseSelectAllNode="True">
                                 <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
-                                <Texts SelectBoxCaption="Select Location" />
+                                <Texts SelectBoxCaption="Select Activities" />
                             </cc:DropDownCheckBoxes>
                         </td>
                     </tr>
@@ -281,13 +264,24 @@
                             <cc:DropDownCheckBoxes ID="ddlData" runat="server" CssClass="ddlWidth" AddJQueryReference="True"
                                 meta:resourcekey="checkBoxes2Resource1" UseButtons="False" UseSelectAllNode="True">
                                 <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
-                                <Texts SelectBoxCaption="Select Location" />
+                                <Texts SelectBoxCaption="Select Data" />
                             </cc:DropDownCheckBoxes>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            Duration Type:
+                            Date:
+                        </td>
+                        <td>
+                            From:
+                            <asp:TextBox ID="txtFromDate" runat="server"></asp:TextBox>
+                            TO:
+                            <asp:TextBox ID="txtToDate" runat="server"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Accumulate ON:
                         </td>
                         <td>
                             <asp:CheckBoxList ID="chkDuration" runat="server" RepeatColumns="3">
@@ -331,10 +325,11 @@
             <asp:WizardStep>
                 <div id="modal-overlay" style="display: none;">
                     Please Wait!<br />
-                    Report Generation Is In Progress... <br />
+                    Report Generation Is In Progress...
+                    <br />
                     This may take a while, depending on your selected options.
                 </div>
-                <div class="classusermessage">
+                <div id="divMessage" runat="server" class="classusermessage">
                     <b>You have successfully selected all the options. Please click on 'Generate Report'
                         button.
                         <br />
@@ -355,8 +350,8 @@
             <asp:Button ID="btnNext" runat="server" Text="Next >>" CausesValidation="true" CommandName="MoveNext" />
         </StepNavigationTemplate>
         <FinishNavigationTemplate>
-            <asp:Button ID="btnPreviousFinish" runat="server" Text="<< Previous" CausesValidation="false" class="classbtnprevious"
-                CommandName="MovePrevious" />
+            <asp:Button ID="btnPreviousFinish" runat="server" Text="<< Previous" CausesValidation="false"
+                class="classbtnprevious" CommandName="MovePrevious" />
             <input type="button" name="btnname" value="Prepare Report" id="btnExport" />
             <asp:Button ID="btnDownload" runat="server" Text="Download Report" CausesValidation="false"
                 Style="display: none;" class="classbtndownload" OnClick="btnDownload_Click" />

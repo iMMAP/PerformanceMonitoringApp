@@ -137,6 +137,7 @@
     <Content Include="Admin\Organization\OrganizationListing.aspx" />
     <Content Include="Admin\Upload\UploadActivities.aspx" />
     <Content Include="Admin\Users\UsersListing.aspx" />
+    <Content Include="ChartSVGService.asmx" />
     <Content Include="ContactUs\Contactus.aspx" />
     <Content Include="ContactUs\ContactUsControl.ascx" />
     <Content Include="Controls\FilterCriteria.ascx" />
@@ -169,130 +170,6 @@
     <Content Include="images\top-left.png" />
     <Content Include="images\top-mid.png" />
     <Content Include="images\top-right.png" />
-    <Content Include="jqGrid\css\ellipsis-xbl.xml" />
-    <Content Include="jqGrid\css\ui.jqgrid.css" />
-    <Content Include="jqGrid\js\Changes.txt" />
-    <Content Include="jqGrid\js\i18n\grid.locale-ar.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-bg.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-bg1251.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-cat.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-cn.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-cs.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-da.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-de.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-dk.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-el.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-en.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-es.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-fa.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-fi.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-fr.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-gl.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-he.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-hr.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-hr1250.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-hu.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-id.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-is.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-it.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-ja.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-kr.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-lt.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-mne.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-nl.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-no.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-pl.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-pt-br.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-pt.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-ro.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-ru.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-sk.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-sr-latin.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-sr.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-sv.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-th.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-tr.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-tw.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-ua.js" />
-    <Content Include="jqGrid\js\i18n\grid.locale-vi.js" />
-    <Content Include="jqGrid\js\install.txt" />
-    <Content Include="jqGrid\js\jquery-1.9.0.min.js" />
-    <Content Include="jqGrid\js\jquery.jqGrid.min.js" />
-    <Content Include="jqGrid\js\jquery.jqGrid.src.js" />
-    <Content Include="jqGrid\plugins\grid.addons.js" />
-    <Content Include="jqGrid\plugins\grid.postext.js" />
-    <Content Include="jqGrid\plugins\grid.setcolumns.js" />
-    <Content Include="jqGrid\plugins\jquery.contextmenu.js" />
-    <Content Include="jqGrid\plugins\jquery.searchFilter.js" />
-    <Content Include="jqGrid\plugins\jquery.tablednd.js" />
-    <Content Include="jqGrid\plugins\searchFilter.css" />
-    <Content Include="jqGrid\plugins\ui.multiselect.css" />
-    <Content Include="jqGrid\plugins\ui.multiselect.js" />
-    <Content Include="jqGrid\src\css\ellipsis-xbl.xml" />
-    <Content Include="jqGrid\src\css\ui.jqgrid.css" />
-    <Content Include="jqGrid\src\css\ui.multiselect.css" />
-    <Content Include="jqGrid\src\grid.base.js" />
-    <Content Include="jqGrid\src\grid.celledit.js" />
-    <Content Include="jqGrid\src\grid.common.js" />
-    <Content Include="jqGrid\src\grid.custom.js" />
-    <Content Include="jqGrid\src\grid.filter.js" />
-    <Content Include="jqGrid\src\grid.formedit.js" />
-    <Content Include="jqGrid\src\grid.grouping.js" />
-    <Content Include="jqGrid\src\grid.import.js" />
-    <Content Include="jqGrid\src\grid.inlinedit.js" />
-    <Content Include="jqGrid\src\grid.jqueryui.js" />
-    <Content Include="jqGrid\src\grid.loader.js" />
-    <Content Include="jqGrid\src\grid.subgrid.js" />
-    <Content Include="jqGrid\src\grid.tbltogrid.js" />
-    <Content Include="jqGrid\src\grid.treegrid.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-ar.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-bg.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-bg1251.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-cat.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-cn.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-cs.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-da.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-de.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-dk.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-el.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-en.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-es.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-fa.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-fi.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-fr.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-gl.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-he.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-hr.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-hr1250.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-hu.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-id.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-is.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-it.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-ja.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-kr.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-lt.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-mne.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-nl.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-no.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-pl.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-pt-br.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-pt.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-ro.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-ru.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-sk.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-sr-latin.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-sr.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-sv.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-th.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-tr.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-tw.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-ua.js" />
-    <Content Include="jqGrid\src\i18n\grid.locale-vi.js" />
-    <Content Include="jqGrid\src\jqDnR.js" />
-    <Content Include="jqGrid\src\jqModal.js" />
-    <Content Include="jqGrid\src\jquery.fmatter.js" />
-    <Content Include="jqGrid\src\jquery.jqGrid.js" />
-    <Content Include="jqGrid\src\JsonXml.js" />
     <Content Include="Maps\TargetAchievedByLocDataMap.aspx" />
     <Content Include="Pages\AddActivities.aspx" />
     <Content Include="Pages\SelectActivities.aspx" />
@@ -325,78 +202,16 @@
     <Content Include="Scripts\hc\themes\gray.js" />
     <Content Include="Scripts\hc\themes\grid.js" />
     <Content Include="Scripts\hc\themes\skies.js" />
-    <Content Include="Scripts\jquery-1.8.1.min.js" />
+    <Content Include="Scripts\jq-1.10.2.min.js" />
     <Content Include="Scripts\jquery.event.drag-1.4.min.js" />
-    <Content Include="Scripts\jquery.jqplot.min.js" />
     <Content Include="Scripts\jquery.kiketable.colsizable-1.1.js" />
     <Content Include="Scripts\jquery.numeric.js" />
     <Content Include="Scripts\modernizr.js" />
-    <Content Include="Scripts\plugins\jqplot.barRenderer.js" />
-    <Content Include="Scripts\plugins\jqplot.barRenderer.min.js" />
-    <Content Include="Scripts\plugins\jqplot.BezierCurveRenderer.js" />
-    <Content Include="Scripts\plugins\jqplot.BezierCurveRenderer.min.js" />
-    <Content Include="Scripts\plugins\jqplot.blockRenderer.js" />
-    <Content Include="Scripts\plugins\jqplot.blockRenderer.min.js" />
-    <Content Include="Scripts\plugins\jqplot.bubbleRenderer.js" />
-    <Content Include="Scripts\plugins\jqplot.bubbleRenderer.min.js" />
-    <Content Include="Scripts\plugins\jqplot.canvasAxisLabelRenderer.js" />
-    <Content Include="Scripts\plugins\jqplot.canvasAxisLabelRenderer.min.js" />
-    <Content Include="Scripts\plugins\jqplot.canvasAxisTickRenderer.js" />
-    <Content Include="Scripts\plugins\jqplot.canvasAxisTickRenderer.min.js" />
-    <Content Include="Scripts\plugins\jqplot.canvasOverlay.js" />
-    <Content Include="Scripts\plugins\jqplot.canvasOverlay.min.js" />
-    <Content Include="Scripts\plugins\jqplot.canvasTextRenderer.js" />
-    <Content Include="Scripts\plugins\jqplot.canvasTextRenderer.min.js" />
-    <Content Include="Scripts\plugins\jqplot.categoryAxisRenderer.js" />
-    <Content Include="Scripts\plugins\jqplot.categoryAxisRenderer.min.js" />
-    <Content Include="Scripts\plugins\jqplot.ciParser.js" />
-    <Content Include="Scripts\plugins\jqplot.ciParser.min.js" />
-    <Content Include="Scripts\plugins\jqplot.cursor.js" />
-    <Content Include="Scripts\plugins\jqplot.cursor.min.js" />
-    <Content Include="Scripts\plugins\jqplot.dateAxisRenderer.js" />
-    <Content Include="Scripts\plugins\jqplot.dateAxisRenderer.min.js" />
-    <Content Include="Scripts\plugins\jqplot.donutRenderer.js" />
-    <Content Include="Scripts\plugins\jqplot.donutRenderer.min.js" />
-    <Content Include="Scripts\plugins\jqplot.dragable.js" />
-    <Content Include="Scripts\plugins\jqplot.dragable.min.js" />
-    <Content Include="Scripts\plugins\jqplot.enhancedLegendRenderer.js" />
-    <Content Include="Scripts\plugins\jqplot.enhancedLegendRenderer.min.js" />
-    <Content Include="Scripts\plugins\jqplot.funnelRenderer.js" />
-    <Content Include="Scripts\plugins\jqplot.funnelRenderer.min.js" />
-    <Content Include="Scripts\plugins\jqplot.highlighter.js" />
-    <Content Include="Scripts\plugins\jqplot.highlighter.min.js" />
-    <Content Include="Scripts\plugins\jqplot.json2.js" />
-    <Content Include="Scripts\plugins\jqplot.json2.min.js" />
-    <Content Include="Scripts\plugins\jqplot.logAxisRenderer.js" />
-    <Content Include="Scripts\plugins\jqplot.logAxisRenderer.min.js" />
-    <Content Include="Scripts\plugins\jqplot.mekkoAxisRenderer.js" />
-    <Content Include="Scripts\plugins\jqplot.mekkoAxisRenderer.min.js" />
-    <Content Include="Scripts\plugins\jqplot.mekkoRenderer.js" />
-    <Content Include="Scripts\plugins\jqplot.mekkoRenderer.min.js" />
-    <Content Include="Scripts\plugins\jqplot.meterGaugeRenderer.js" />
-    <Content Include="Scripts\plugins\jqplot.meterGaugeRenderer.min.js" />
-    <Content Include="Scripts\plugins\jqplot.mobile.js" />
-    <Content Include="Scripts\plugins\jqplot.mobile.min.js" />
-    <Content Include="Scripts\plugins\jqplot.ohlcRenderer.js" />
-    <Content Include="Scripts\plugins\jqplot.ohlcRenderer.min.js" />
-    <Content Include="Scripts\plugins\jqplot.pieRenderer.js" />
-    <Content Include="Scripts\plugins\jqplot.pieRenderer.min.js" />
-    <Content Include="Scripts\plugins\jqplot.pointLabels.js" />
-    <Content Include="Scripts\plugins\jqplot.pointLabels.min.js" />
-    <Content Include="Scripts\plugins\jqplot.pyramidAxisRenderer.js" />
-    <Content Include="Scripts\plugins\jqplot.pyramidAxisRenderer.min.js" />
-    <Content Include="Scripts\plugins\jqplot.pyramidGridRenderer.js" />
-    <Content Include="Scripts\plugins\jqplot.pyramidGridRenderer.min.js" />
-    <Content Include="Scripts\plugins\jqplot.pyramidRenderer.js" />
-    <Content Include="Scripts\plugins\jqplot.pyramidRenderer.min.js" />
-    <Content Include="Scripts\plugins\jqplot.trendline.js" />
-    <Content Include="Scripts\plugins\jqplot.trendline.min.js" />
     <Content Include="Scripts\quicksearch.js" />
     <Content Include="Styles\ddcolortabs.css" />
     <Content Include="Styles\dialog.css" />
     <Content Include="Styles\grid.css" />
     <Content Include="Styles\ie.css" />
-    <Content Include="Styles\jquery.jqplot.min.css" />
     <Content Include="Styles\jquery.kiketable.colsizable.css" />
     <Content Include="Styles\nav.css" />
     <Content Include="Styles\pager.css" />
@@ -437,8 +252,6 @@
     <Content Include="packages.config" />
     <Content Include="NestedMasterPage1.master" />
     <Content Include="NestedMasterPage2.master" />
-    <Content Include="WebForm1.aspx" />
-    <Content Include="WebForm5.aspx" />
     <Content Include="WebService2.asmx" />
     <Content Include="OrganizationsFeed.ashx" />
     <Content Include="OfficeFeed.ashx" />
@@ -451,12 +264,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Content Include="ToPNG.ashx" />
-    <None Include="Web References\Service2\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\Service2\WebService.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -466,10 +273,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="WebForm2.aspx" />
-    <Content Include="WebForm3.aspx" />
-    <Content Include="WebForm4.aspx" />
-    <Content Include="WebService.asmx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="About.aspx.cs">
@@ -621,6 +424,10 @@
     <Compile Include="Admin\Users\UsersListing.aspx.designer.cs">
       <DependentUpon>UsersListing.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ChartSVGService.asmx.cs">
+      <DependentUpon>ChartSVGService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ClustersDataFeed.ashx.cs">
       <DependentUpon>ClustersDataFeed.ashx</DependentUpon>
     </Compile>
@@ -630,8 +437,7 @@
     <Compile Include="Common\DataTableToJson.cs" />
     <Compile Include="Common\Enemuration.cs" />
     <Compile Include="Common\LogFrameValues.cs" />
-    <Compile Include="Common\ServiceBL.cs" />
-    <Compile Include="Common\SvgToPdf.cs" />
+    <Compile Include="Common\UI.cs" />
     <Compile Include="Common\WritePDF.cs" />
     <Compile Include="ContactUs\Contactus.aspx.cs">
       <DependentUpon>Contactus.aspx</DependentUpon>
@@ -655,8 +461,6 @@
       <DependentUpon>FilterCriteria.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\PagingGridView.cs" />
-    <Compile Include="DataCommon\DR.cs" />
-    <Compile Include="Employee.cs" />
     <Compile Include="IndicatorsFeed.ashx.cs">
       <DependentUpon>IndicatorsFeed.ashx</DependentUpon>
     </Compile>
@@ -666,11 +470,6 @@
     </Compile>
     <Compile Include="Maps\TargetAchievedByLocDataMap.aspx.designer.cs">
       <DependentUpon>TargetAchievedByLocDataMap.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Model1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="NestedMasterPage1.master.cs">
       <DependentUpon>NestedMasterPage1.master</DependentUpon>
@@ -728,7 +527,6 @@
     <Compile Include="ReportsCharts\ChartReport.aspx.designer.cs">
       <DependentUpon>ChartReport.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ReportsCharts\DataRwo.cs" />
     <Compile Include="ReportsCharts\GenerateReport1.aspx.cs">
       <DependentUpon>GenerateReport1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -758,7 +556,7 @@
     <Compile Include="ReportsCharts\TargetsAchievedByLocDuration.aspx.designer.cs">
       <DependentUpon>TargetsAchievedByLocDuration.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ROWCATypes.cs" />
+    <Compile Include="Common\ROWCATypes.cs" />
     <Compile Include="Common\ExportUtility.cs" />
     <Compile Include="Common\Mail.cs" />
     <Compile Include="Default.aspx.cs">
@@ -789,61 +587,12 @@
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
-    <Compile Include="SQLDataReader.cs" />
-    <Compile Include="ToPNG.ashx.cs">
-      <DependentUpon>ToPNG.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="UICommon\UI.cs" />
     <Compile Include="UserManual.aspx.cs">
       <DependentUpon>UserManual.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserManual.aspx.designer.cs">
       <DependentUpon>UserManual.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Web References\Service2\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
-    <Compile Include="WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebForm2.aspx.cs">
-      <DependentUpon>WebForm2.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm2.aspx.designer.cs">
-      <DependentUpon>WebForm2.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebForm3.aspx.cs">
-      <DependentUpon>WebForm3.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm3.aspx.designer.cs">
-      <DependentUpon>WebForm3.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebForm4.aspx.cs">
-      <DependentUpon>WebForm4.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm4.aspx.designer.cs">
-      <DependentUpon>WebForm4.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebForm5.aspx.cs">
-      <DependentUpon>WebForm5.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm5.aspx.designer.cs">
-      <DependentUpon>WebForm5.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebService.asmx.cs">
-      <DependentUpon>WebService.asmx</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="WebService2.asmx.cs">
       <DependentUpon>WebService2.asmx</DependentUpon>
@@ -854,9 +603,7 @@
     <Folder Include="Admin\Location\" />
     <Folder Include="Admin\Reports\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Documents\" />
     <Folder Include="GeneratedChartFiles\" />
-    <Folder Include="img2\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Web.config" />
@@ -888,12 +635,7 @@
     <Content Include="Admin\DataFeeds\YearFeed.ashx" />
     <Content Include="Admin\DataFeeds\MonthFeed.ashx" />
     <None Include="images\Thumbs.db" />
-    <EntityDeploy Include="Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <None Include="UserManual_files\themedata.thmx" />
-    <None Include="Web References\Service2\WebService.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">
@@ -935,19 +677,6 @@
   </ItemGroup>
   <ItemGroup>
     <WebReferences Include="Web References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferenceUrl Include="http://localhost:50464/WebService.asmx">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\Service2\</RelPath>
-      <UpdateFromURL>http://localhost:50464/WebService.asmx</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>SRFROWCA_Service2_WebService</CachedSettingsPropName>
-    </WebReferenceUrl>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

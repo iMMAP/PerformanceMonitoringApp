@@ -103,13 +103,13 @@ namespace SRFROWCA.Reports {
         protected global::System.Web.UI.WebControls.DropDownList ddlEmergency;
         
         /// <summary>
-        /// WizardStep2 control.
+        /// ddlOrganizations control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.WizardStep WizardStep2;
+        protected global::Saplin.Controls.DropDownCheckBoxes ddlOrganizations;
         
         /// <summary>
         /// cblClusters control.
@@ -121,40 +121,13 @@ namespace SRFROWCA.Reports {
         protected global::System.Web.UI.WebControls.CheckBoxList cblClusters;
         
         /// <summary>
-        /// ddlOrganizations control.
+        /// WizardStep2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Saplin.Controls.DropDownCheckBoxes ddlOrganizations;
-        
-        /// <summary>
-        /// txtFromDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFromDate;
-        
-        /// <summary>
-        /// txtToDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtToDate;
-        
-        /// <summary>
-        /// WizardStep3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.WizardStep WizardStep3;
+        protected global::System.Web.UI.WebControls.WizardStep WizardStep2;
         
         /// <summary>
         /// ddlObjectives control.
@@ -193,6 +166,24 @@ namespace SRFROWCA.Reports {
         protected global::Saplin.Controls.DropDownCheckBoxes ddlData;
         
         /// <summary>
+        /// txtFromDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFromDate;
+        
+        /// <summary>
+        /// txtToDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtToDate;
+        
+        /// <summary>
         /// chkDuration control.
         /// </summary>
         /// <remarks>
@@ -218,6 +209,15 @@ namespace SRFROWCA.Reports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grdTest;
+        
+        /// <summary>
+        /// divMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divMessage;
         
         /// <summary>
         /// ltrChart control.

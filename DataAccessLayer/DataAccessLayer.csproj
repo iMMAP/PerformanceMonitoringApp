@@ -68,7 +68,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="clsCipher.cs" />
     <Compile Include="DataAccessConnection.cs" />
     <Compile Include="DBOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
