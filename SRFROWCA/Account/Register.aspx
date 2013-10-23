@@ -29,131 +29,128 @@
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <div>
+        <div style="background-color: Silver;">
+            Create User Account</div>
         <div style="width: 75%; float: left">
-            <asp:Panel ID="pnlRegister" DefaultButton="btnRegister" runat="server">
-                <fieldset style="height: 220px;">
-                    <legend>Create An Account!</legend>
-                    <table>
-                        <tr>
-                            <td>
-                                User Name:
-                            </td>
-                            <td>
-                                <asp:TextBox ID="txtUserName" runat="server" MaxLength="150"></asp:TextBox>
-                            </td>
-                            <td>
-                                <asp:RequiredFieldValidator ID="rfvUserName" runat="server" ErrorMessage="User Name"
-                                    Text="*" ControlToValidate="txtUserName"></asp:RequiredFieldValidator>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Password:
-                            </td>
-                            <td>
-                                <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" MaxLength="50"></asp:TextBox>
-                            </td>
-                            <td>
-                                <asp:RequiredFieldValidator ID="rfvPassword" runat="server" ErrorMessage="Password"
-                                    Text="*" ControlToValidate="txtPassword"></asp:RequiredFieldValidator>
-                                <asp:RegularExpressionValidator ID="valMinLength" runat="server" ControlToValidate="txtPassword"
-                                    ErrorMessage="At least 3 characters" ValidationExpression="[^\s]{3,}"></asp:RegularExpressionValidator>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Confirm Password:
-                            </td>
-                            <td>
-                                <asp:TextBox ID="txtConfirmPassword" runat="server" TextMode="Password" MaxLength="50"></asp:TextBox>
-                            </td>
-                            <td>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Confirm Password"
-                                    Text="*" ControlToValidate="txtPassword"></asp:RequiredFieldValidator>
-                                <asp:CompareValidator ID="cvConfirmPassword" runat="server" ErrorMessage="Passwords don't match."
-                                    ControlToCompare="txtPassword" ControlToValidate="txtConfirmPassword"></asp:CompareValidator>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Email:
-                            </td>
-                            <td>
-                                <asp:TextBox ID="txtEmail" runat="server" MaxLength="150"></asp:TextBox>
-                            </td>
-                            <td>
-                                <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="Email" Text="*"
-                                    ControlToValidate="txtEmail"></asp:RequiredFieldValidator>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Phone:
-                            </td>
-                            <td>
-                                <asp:TextBox ID="txtPhone" MaxLength="50" runat="server"></asp:TextBox>
-                            </td>
-                            <td>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Organization:
-                            </td>
-                            <td>
-                                <asp:DropDownList ID="ddlOrganization" runat="server" Width="200px">
-                                </asp:DropDownList>
-                            </td>
-                            <td>
-                                <asp:RequiredFieldValidator ID="rfvOrganization" runat="server" ErrorMessage="Organization"
-                                    InitialValue="0" Text="*" ControlToValidate="ddlOrganization"></asp:RequiredFieldValidator>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Office Country:
-                            </td>
-                            <td>
-                                <asp:DropDownList ID="ddlCountry" runat="server" Width="200px">
-                                </asp:DropDownList>
-                            </td>
-                            <td>
-                                <asp:RequiredFieldValidator ID="rfvCountry" runat="server" ErrorMessage="Country"
-                                    Text="*" InitialValue="0" ControlToValidate="ddlCountry"></asp:RequiredFieldValidator>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="left">
-                                <asp:Button ID="btnRegister" runat="server" Text="Register" OnClick="btnRegister_Click" />
-                            </td>
-                            <td colspan="2">
-                                <asp:LinkButton ID="lbtnMissing" runat="server" Text="Request Missing Organization Or Location"></asp:LinkButton>
-                            </td>
-                        </tr>
-                    </table>
-                    <table cellpadding="5" cellspacing="0" class="pstyle1">
-                        <tr>
-                            <td class="signupheading2">
-                                <asp:UpdatePanel ID="updMessage" runat="server" UpdateMode="Conditional">
-                                    <ContentTemplate>
-                                        <asp:Label ID="lblMessage" runat="server" CssClass="error-message" Visible="false"
-                                            ViewStateMode="Disabled"></asp:Label>
-                                    </ContentTemplate>
-                                    <Triggers>
-                                        <asp:AsyncPostBackTrigger ControlID="btnRegister" EventName="Click" />
-                                    </Triggers>
-                                </asp:UpdatePanel>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:ValidationSummary ID="valSumProjectGeneralInfo" HeaderText="Following fields are required:"
-                                    runat="server" ShowMessageBox="True" />
-                            </td>
-                        </tr>
-                    </table>
-                </fieldset>
-            </asp:Panel>
+            <table>
+                <tr>
+                    <td>
+                        User Name:
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtUserName" runat="server" MaxLength="150"></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:RequiredFieldValidator ID="rfvUserName" runat="server" ErrorMessage="User Name"
+                            Text="*" ControlToValidate="txtUserName"></asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Password:
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" MaxLength="50"></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:RequiredFieldValidator ID="rfvPassword" runat="server" ErrorMessage="Password"
+                            Text="*" ControlToValidate="txtPassword"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="valMinLength" runat="server" ControlToValidate="txtPassword"
+                            ErrorMessage="At least 3 characters" ValidationExpression="[^\s]{3,}"></asp:RegularExpressionValidator>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Confirm Password:
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtConfirmPassword" runat="server" TextMode="Password" MaxLength="50"></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Confirm Password"
+                            Text="*" ControlToValidate="txtPassword"></asp:RequiredFieldValidator>
+                        <asp:CompareValidator ID="cvConfirmPassword" runat="server" ErrorMessage="Passwords don't match."
+                            ControlToCompare="txtPassword" ControlToValidate="txtConfirmPassword"></asp:CompareValidator>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Email:
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtEmail" runat="server" MaxLength="150"></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="Email" Text="*"
+                            ControlToValidate="txtEmail"></asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Phone:
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtPhone" MaxLength="50" runat="server"></asp:TextBox>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Organization:
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="ddlOrganization" runat="server" Width="200px">
+                        </asp:DropDownList>
+                    </td>
+                    <td>
+                        <asp:RequiredFieldValidator ID="rfvOrganization" runat="server" ErrorMessage="Organization"
+                            InitialValue="0" Text="*" ControlToValidate="ddlOrganization"></asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Office Country:
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="ddlCountry" runat="server" Width="200px">
+                        </asp:DropDownList>
+                    </td>
+                    <td>
+                        <asp:RequiredFieldValidator ID="rfvCountry" runat="server" ErrorMessage="Country"
+                            Text="*" InitialValue="0" ControlToValidate="ddlCountry"></asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+            </table>
+            <div id="divUserRoles" runat="server">
+                <asp:RadioButton ID="rbntUser" runat="server" Text="User" GroupName="Roles"/>
+                <asp:RadioButton ID="rbtnCountryAdmin" runat="server" Text="Country Admin" GroupName="Roles" />
+            </div>
+            <div>
+                <asp:Button ID="btnRegister" runat="server" Text="Register" OnClick="btnRegister_Click" />
+                <asp:LinkButton ID="lbtnMissing" runat="server" Text="Request Missing Organization Or Location"></asp:LinkButton>
+            </div>
+            <table cellpadding="5" cellspacing="0" class="pstyle1">
+                <tr>
+                    <td class="signupheading2">
+                        <asp:UpdatePanel ID="updMessage" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <asp:Label ID="lblMessage" runat="server" CssClass="error-message" Visible="false"
+                                    ViewStateMode="Disabled"></asp:Label>
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="btnRegister" EventName="Click" />
+                            </Triggers>
+                        </asp:UpdatePanel>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:ValidationSummary ID="valSumProjectGeneralInfo" HeaderText="Following fields are required:"
+                            runat="server" ShowMessageBox="True" />
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
     <table>

@@ -175,7 +175,7 @@
                 </div>
                 <div style="overflow-x: auto; width: 100%">
                     <cc2:PagingGridView ID="gvReport" runat="server" Width="100%" CssClass="grid" OnRowDataBound="gvReport_RowDataBound"
-                        OnSorting="gvReport_Sorting" ShowHeaderWhenEmpty="true"
+                        OnSorting="gvReport_Sorting" ShowHeaderWhenEmpty="true" EnableViewState="false"
                         AllowSorting="True" RowStyle-Height="30" AllowPaging="true" PageSize="10" ShowHeader="true"
                         OnPageIndexChanging="gvReport_PageIndexChanging">
                         <PagerStyle BackColor="PaleGoldenrod" ForeColor="DarkSlateBlue" HorizontalAlign="Center" />

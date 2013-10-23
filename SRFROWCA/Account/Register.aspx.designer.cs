@@ -13,15 +13,6 @@ namespace SRFROWCA.Account {
     public partial class Register {
         
         /// <summary>
-        /// pnlRegister control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlRegister;
-        
-        /// <summary>
         /// txtUserName control.
         /// </summary>
         /// <remarks>
@@ -155,6 +146,33 @@ namespace SRFROWCA.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCountry;
+        
+        /// <summary>
+        /// divUserRoles control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divUserRoles;
+        
+        /// <summary>
+        /// rbntUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rbntUser;
+        
+        /// <summary>
+        /// rbtnCountryAdmin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rbtnCountryAdmin;
         
         /// <summary>
         /// btnRegister control.

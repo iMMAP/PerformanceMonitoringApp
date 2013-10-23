@@ -81,7 +81,7 @@
     </table>
     <div style="overflow-x: auto; width: 100%">
         <asp:GridView ID="gvOrgs" runat="server" AutoGenerateColumns="false" AllowSorting="True"
-            AllowPaging="true" PageSize="20" OnRowCommand="gvOrgs_RowCommand" Width="100%"
+            AllowPaging="true" PageSize="100" OnRowCommand="gvOrgs_RowCommand" Width="100%"
             OnRowDataBound="gvOrgs_RowDataBound" OnSorting="gvOrgs_Sorting" OnPageIndexChanging="gvOrgs_PageIndexChanging">
             <Columns>
                 <asp:TemplateField ItemStyle-CssClass="rownum" ItemStyle-Width="25px" HeaderText="#">

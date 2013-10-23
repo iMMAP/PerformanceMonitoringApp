@@ -88,9 +88,6 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\_dll\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="PdfSharp">
-      <HintPath>..\_dll\PdfSharp.dll</HintPath>
-    </Reference>
     <Reference Include="Svg">
       <HintPath>..\_dll\Svg.dll</HintPath>
     </Reference>
@@ -180,8 +177,6 @@
     <Content Include="ReportsCharts\ReportsDefault.aspx" />
     <Content Include="ReportsCharts\TargetsAchievedByLocData.aspx" />
     <Content Include="ReportsCharts\TargetsAchievedByLocDuration.aspx" />
-    <Content Include="Scripts\dropdowntabs.js" />
-    <Content Include="Scripts\ext-all.js" />
     <Content Include="Scripts\hc\adapters\mootools-adapter.js" />
     <Content Include="Scripts\hc\adapters\mootools-adapter.src.js" />
     <Content Include="Scripts\hc\adapters\prototype-adapter.js" />
@@ -204,20 +199,15 @@
     <Content Include="Scripts\hc\themes\skies.js" />
     <Content Include="Scripts\jq-1.10.2.min.js" />
     <Content Include="Scripts\jquery.event.drag-1.4.min.js" />
-    <Content Include="Scripts\jquery.kiketable.colsizable-1.1.js" />
-    <Content Include="Scripts\jquery.numeric.js" />
-    <Content Include="Scripts\modernizr.js" />
+    <Content Include="Scripts\jquery.kiketable.colsizable-1.1.min.js" />
+    <Content Include="Scripts\jquery.numeric.min.js" />
     <Content Include="Scripts\quicksearch.js" />
-    <Content Include="Styles\ddcolortabs.css" />
     <Content Include="Styles\dialog.css" />
     <Content Include="Styles\grid.css" />
-    <Content Include="Styles\ie.css" />
     <Content Include="Styles\jquery.kiketable.colsizable.css" />
-    <Content Include="Styles\nav.css" />
-    <Content Include="Styles\pager.css" />
-    <Content Include="Styles\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Styles\Site.min.css" />
     <Content Include="Styles\ui-lightness\images\animated-overlay.gif" />
     <Content Include="Styles\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Styles\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
@@ -260,6 +250,7 @@
     <Content Include="IndicatorsFeed.ashx" />
     <Content Include="ActivityFeed.ashx" />
     <Content Include="ActivityDataFeed.ashx" />
+    <Content Include="Admin\Web.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -614,6 +605,10 @@
     <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
       <Project>{DE3BE702-AF50-4C77-AA51-D968CEA8DFE9}</Project>
       <Name>BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HttpModules3W\HttpModules3W.csproj">
+      <Project>{5B56F24C-42A6-4382-9CF7-8BCC96D03229}</Project>
+      <Name>HttpModules3W</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

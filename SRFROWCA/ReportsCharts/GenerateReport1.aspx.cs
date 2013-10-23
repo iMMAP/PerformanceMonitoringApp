@@ -573,7 +573,7 @@ namespace SRFROWCA.Reports
             }
             finally
             {
-                DeleteUserFolder(path);                
+                DeleteUserFolder(path);               
             }
         }
 

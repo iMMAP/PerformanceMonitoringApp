@@ -3,7 +3,7 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <script src="../Scripts/jquery.numeric.js" text/javascript"></script>
+    <script src="../Scripts/jquery.numeric.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         var needToConfirm = true;
 

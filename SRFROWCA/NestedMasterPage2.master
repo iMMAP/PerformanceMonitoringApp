@@ -1,6 +1,10 @@
-﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="NestedMasterPage2.master.cs" Inherits="SRFROWCA.NestedMasterPage2" %>
+﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="NestedMasterPage2.master.cs"
+    Inherits="SRFROWCA.NestedMasterPage2" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div style="width: 100%; background: #4B6C9E;">
+        <script src="http://code.highcharts.com/modules/exporting.js" type="text/javascript"></script>
+        <script src="http://code.highcharts.com/highcharts.js" type="text/javascript"></script>
         <script>
             var timeout = 500;
             var closetimer = 0;
@@ -43,14 +47,14 @@
         <ul id="sddm">
             <li><a href="#" onmouseover="mopen('m1')" onmouseout="mclosetime()">Location Wise Reports</a>
                 <div id="m1" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
-                    <a href="#">Map1</a>                    
+                    <a href="#">Map1</a>
                 </div>
             </li>
             <li><a href="#" onmouseover="mopen('m2')" onmouseout="mclosetime()">Duration Wise Reports</a>
                 <div id="m2" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
                     <a href="#">Charts in progress...</a>
                 </div>
-            </li>            
+            </li>
             <%--<li><a href="#">Help</a></li>--%>
         </ul>
         <div style="clear: both">

@@ -15,6 +15,11 @@ namespace SRFROWCA.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!this.User.IsInRole("Admin"))
+            {
+                divUserRoles.Visible = false;
+            }
+
             if (IsPostBack) return;
             PopulateCountries();
             PopulateOrganizations();
@@ -31,17 +36,39 @@ namespace SRFROWCA.Account
                 // Create New 1)Rider, 2) Places, 3) Route,
                 // 4) Send Email to user to verify account.
                 returnValue = CreateUserAccount();
-                string message = "You have been registered successfully!";
+                string message = "Account created successfully!";
                 if (returnValue)
                 {
                     try
                     {
-                        Mail.SendMail("3wopactivities@gmail.com", "3wopactivities@gmail.com", "New 3W Account Request!", "Dear Adim! Please activitate my account " + txtUserName.Text.Trim());
-                        message = "You have been registered successfully, we will verify your credentials and activate your account in few hours!";
+                        string from = "3wopactivities@gmail.com";
+                        string to = "3wopactivities@gmail.com";
+                        string subject = "New 3W Performace Monitoring Account!";
+                        string mailBody = "";
+                        if (this.User.IsInRole("Admin"))
+                        {
+                            mailBody = string.Format(@"3W Perfomance Monitoring admin has created your new account.
+                                                        User Name: {0} \n 
+                                                        Password: {1} \n
+                                                        If you face any difficulty login, please contact to admin of the site!",
+                                                        txtUserName.Text.Trim(), txtPassword.Text);
+
+                            Mail.SendMail(from, txtEmail.Text, subject, mailBody);
+                            message = "An email has been send to " + txtEmail.Text;
+                        }
+                        else
+                        {
+                            mailBody = "Dear Adim! Please activitate my account " + txtUserName.Text.Trim();
+                            Mail.SendMail(from, to, subject, mailBody);
+                            message = @"You have been registered successfully, we will verify your
+                                        credentials and activate your account in few hours!";
+                        }
                     }
                     catch
                     {
-                        message = "You have been registered successfully but some error occoured on sending email to site admin. Contact admin and ask for the verification! We apologies for inconvenience!";
+                        message = @"You have been registered successfully but some error occoured
+                                   on sending email to site admin. Contact admin and ask for the verification!
+                                   We apologies for the inconvenience!";
                     }
                 }
 
@@ -162,7 +189,8 @@ namespace SRFROWCA.Account
 
         private void AddRecordInRoles(Guid userId)
         {
-            DBContext.Add("InsertUserInRole", new object[] { userId, DBNull.Value });
+            string roleName = rbtnCountryAdmin.Checked ? "CountryAdmin" : "User";
+            DBContext.Add("InsertUserInRole", new object[] { userId, roleName, DBNull.Value });
         }
 
         // Add new user in db.
@@ -170,7 +198,15 @@ namespace SRFROWCA.Account
         {
             // Adds a new user to the data store.
             MembershipUser user = Membership.CreateUser(txtUserName.Text.Trim(), txtPassword.Text, txtEmail.Text.Trim());
-            user.IsApproved = false;
+
+            if (this.User.IsInRole("Admin"))
+            {
+                user.IsApproved = true;
+            }
+            else
+            {
+                user.IsApproved = false;
+            }
 
             // Updates the database with the information for the specified user.
             Membership.UpdateUser(user);

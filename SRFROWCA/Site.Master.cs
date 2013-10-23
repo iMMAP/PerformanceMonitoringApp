@@ -16,7 +16,7 @@ namespace SRFROWCA
             if (HttpContext.Current.User.Identity.IsAuthenticated)
             {
                 // If loggedin user is not Admin then remove admin menue items from master page.
-                if (!HttpContext.Current.User.IsInRole("Admin"))
+                if (!HttpContext.Current.User.IsInRole("Admin") && !HttpContext.Current.User.IsInRole("CountryAdmin"))
                 {
                     // Remove admin menue items
                     RemoveAdminMenuItems();

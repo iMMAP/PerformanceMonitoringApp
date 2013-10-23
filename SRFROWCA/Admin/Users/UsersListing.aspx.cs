@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using BusinessLogic;
 using System.Data;
 using System.IO;
+using System.Web.Security;
 
 namespace SRFROWCA.Admin.Users
 {
@@ -14,7 +15,7 @@ namespace SRFROWCA.Admin.Users
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!this.User.Identity.IsAuthenticated || !this.User.IsInRole("Admin"))
+            if (!this.User.IsInRole("Admin") && !this.User.IsInRole("CountryAdmin"))
             {
                 Response.Redirect("~/Default.aspx");
             }
@@ -25,7 +26,27 @@ namespace SRFROWCA.Admin.Users
 
         private DataTable GetUsers()
         {
-            return DBContext.GetData("GetUsers");
+            if (this.User.IsInRole("CountryAdmin"))
+            {
+                object[] parameters = GetParameters();
+                return DBContext.GetData("GetUsers", parameters);
+            }
+            else
+            {
+                return DBContext.GetData("GetAllUsersInfo");
+            }
+        }
+
+        private object[] GetParameters()
+        {
+            string userId = Membership.GetUser(HttpContext.Current.User.Identity.Name).ProviderUserKey.ToString();
+            string userName = null;
+            string email = null;
+            int? isApproved = null;
+            int? isLockedOut = null;
+            string orgName = null;
+            string locationName = null;
+            return new object[] { userId, userName, email, isApproved, isLockedOut, orgName, locationName };
         }
 
         private void LoadUsers()
@@ -36,15 +57,51 @@ namespace SRFROWCA.Admin.Users
 
         protected void chkIsApproved_CheckedChanged(object sender, EventArgs e)
         {
-            foreach (GridViewRow row in gvUsers.Rows)
+            //foreach (GridViewRow row in gvUsers.Rows)
             {
-                CheckBox cb = row.FindControl("chkIsApproved") as CheckBox;
+                int index = ((GridViewRow)((CheckBox)sender).NamingContainer).RowIndex;
+                CheckBox cb = gvUsers.Rows[index].FindControl("chkIsApproved") as CheckBox;
                 if (cb != null)
                 {
-                    Label lblUserId = row.FindControl("lblUserId") as Label;
+                    Label lblUserId = gvUsers.Rows[index].FindControl("lblUserId") as Label;
                     if (lblUserId != null)
                     {
                         UpdateUserApproval(cb.Checked, lblUserId.Text);
+                    }
+                }
+            }
+        }
+
+        protected void chkIsLocked_CheckedChanged(object sender, EventArgs e)
+        {
+            //foreach (GridViewRow row in gvUsers.Rows)
+            {
+                int index = ((GridViewRow)((CheckBox)sender).NamingContainer).RowIndex;
+                CheckBox cb = gvUsers.Rows[index].FindControl("chkIsLocked") as CheckBox;
+                if (cb != null)
+                {
+                    Label lblUserId = gvUsers.Rows[index].FindControl("lblUserId") as Label;
+                    if (lblUserId != null)
+                    {
+                        UpdateUserLocked(cb.Checked, lblUserId.Text);
+                    }
+                }
+            }
+        }
+
+        protected void chkIsCountryAdmin_CheckedChanged(object sender, EventArgs e)
+        {
+            //foreach (GridViewRow row in gvUsers.Rows)
+            {
+                int index = ((GridViewRow)((CheckBox)sender).NamingContainer).RowIndex;
+                CheckBox cb = gvUsers.Rows[index].FindControl("chkIsCountryAdmin") as CheckBox;
+                if (cb != null)
+                {
+                    Label lblUserId = gvUsers.Rows[index].FindControl("lblUserId") as Label;
+                    if (lblUserId != null)
+                    {
+                        string roleName = "CountryAdmin";
+                        AddRemoveUserInRole(cb.Checked, lblUserId.Text, roleName);
                     }
                 }
             }
@@ -56,13 +113,25 @@ namespace SRFROWCA.Admin.Users
             DBContext.Update("UpdateUserApproval", new object[] { uId, isApproved, DBNull.Value });
         }
 
+        private void UpdateUserLocked(bool isLocked, string userId)
+        {
+            Guid uId = new Guid(userId);
+            DBContext.Update("UpdateUserLocked", new object[] { uId, isLocked, DBNull.Value });
+        }
+
+        private void AddRemoveUserInRole(bool isAdd, string userId, string roleName)
+        {
+            Guid uId = new Guid(userId);
+            DBContext.Update("AddRemoveUserInRole", new object[] { uId, isAdd, roleName, DBNull.Value });
+        }
+
         protected void btnExportExcel_Click(object sender, EventArgs e)
         {
             ExportUtility.PrepareGridViewForExport(gvUsers);
             ExportGridView();
         }
 
-        public override void VerifyRenderingInServerForm(Control control){}
+        public override void VerifyRenderingInServerForm(Control control) { }
 
         private void ExportGridView()
         {
@@ -125,6 +194,11 @@ namespace SRFROWCA.Admin.Users
             gvUsers.PageIndex = e.NewPageIndex;
             gvUsers.SelectedIndex = -1;
             LoadUsers();
+        }
+
+        protected void btnAddUser_Click(object sender, GridViewPageEventArgs e)
+        {
+            Response.Redirect("~/Account/Register.aspx");
         }
     }
 }
