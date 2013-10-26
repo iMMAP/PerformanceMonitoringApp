@@ -8,6 +8,7 @@ using System.Web.Security;
 using BusinessLogic;
 using System.Data;
 using SRFROWCA.Common;
+using SRFROWCA.Reports;
 
 namespace SRFROWCA.Account
 {
@@ -18,11 +19,47 @@ namespace SRFROWCA.Account
             if (!this.User.IsInRole("Admin"))
             {
                 divUserRoles.Visible = false;
+                ddlLocations.Visible = false;
+                ltrlLocation.Visible = false;
             }
 
             if (IsPostBack) return;
+
             PopulateCountries();
             PopulateOrganizations();
+
+            if (UserId != null)
+            {
+                GetUserInformation();
+            }
+        }       
+
+        private void GetUserInformation()
+        {
+            //Guid userId = new Guid(UserId);
+            //MembershipUser mu = Membership.GetUser(userId);
+            
+            ////Membership.UpdateUser(mu);            
+            //txtUserName.Text = mu.UserName;
+            //txt
+        }
+
+        private void PopulateControlsWithUserInfo(DataTable dt)
+        {
+            throw new NotImplementedException();
+        }
+
+        private DataTable GetUserData()
+        {
+            return DBContext.GetData("GetUserInfo");
+        }
+
+        private void GetUserIdFromSession()
+        {
+            if (Session["EditUserId"] != null)
+            {
+                UserId = Session["EditUseId"].ToString();
+            }
         }
 
         protected void btnRegister_Click(object sender, EventArgs e)
@@ -109,11 +146,17 @@ namespace SRFROWCA.Account
             ddlCountry.DataValueField = "LocationId";
             ddlCountry.DataTextField = "LocationName";
 
-            ddlCountry.DataSource = GetCountries();
+            DataTable dt = GetCountries();
+            ddlCountry.DataSource = dt;
             ddlCountry.DataBind();
 
             ListItem item = new ListItem("Select Your Country", "0");
             ddlCountry.Items.Insert(0, item);
+
+            ddlLocations.DataValueField = "LocationId";
+            ddlLocations.DataTextField = "LocationName";
+            ddlLocations.DataSource = dt;
+            ddlLocations.DataBind();
         }
 
         private DataTable GetCountries()
@@ -218,28 +261,54 @@ namespace SRFROWCA.Account
         private void CreateUserDetails(Guid userId)
         {
             object[] userValues = GetUserValues(userId);
-            SaveUserDetails(userValues);
-        }
-
-        private void SaveUserDetails(object[] userValues)
-        {
-            DBContext.Add("InsertASPNetUserCustom", userValues);
+            if (ROWCACommon.IsAdmin(this.User))
+            {
+                DBContext.Add("InsertASPNetUserCustomWithMultipleLocations", userValues);
+            }
+            else
+            {
+                DBContext.Add("InsertASPNetUserCustom", userValues);
+            }
         }
 
         private object[] GetUserValues(Guid userId)
         {
             int orgId = 0;
             int.TryParse(ddlOrganization.SelectedValue, out orgId);
-            int countryId = 0;
-            int.TryParse(ddlCountry.SelectedValue, out countryId);
+            string countryId = null;
+
+            if (ROWCACommon.IsAdmin(this.User))
+            {
+                countryId = ReportsCommon.GetSelectedValues(ddlLocations);
+                if (countryId == null)
+                {
+                    countryId = ddlCountry.SelectedValue;
+                }
+            }
+            else
+            {
+                countryId = ddlCountry.SelectedValue;
+            }
+
             string phone = txtPhone.Text.Trim().Length > 0 ? txtPhone.Text.Trim() : null;
 
             return new object[] { userId, orgId, countryId, phone, DBNull.Value };
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        public string UserId
         {
-
+            get
+            {
+                if (ViewState["EditUserId"] != null)
+                {
+                    return ViewState["EditUserId"].ToString();
+                }
+                return null;
+            }
+            set
+            {
+                ViewState["EditUserId"] = value.ToString();
+            }
         }
     }
 }

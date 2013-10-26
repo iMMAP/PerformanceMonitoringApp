@@ -117,6 +117,11 @@
                         <asp:Label ID="lblOrganizaitonId" runat="server" Text='<%# Eval("OrganizationId") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
+                <asp:TemplateField Visible="false">
+                    <ItemTemplate>
+                        <asp:Label ID="lblLocationParentId" runat="server" Text='<%# Eval("LocationParentId") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
             </Columns>
             <HeaderStyle BackColor="ButtonFace" />
         </asp:GridView>

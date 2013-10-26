@@ -7,7 +7,7 @@
     <link href="~/Styles/Site.min.css" rel="stylesheet" type="text/css" />    
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript" src="<%# BaseURL %>/Scripts/jquery.kiketable.colsizable-1.1.min.js"></script>
-    <script type="text/javascript" src="<%# BaseURL %>/Scripts/jquery.event.drag-1.4.min.js"></script>
+    <script type="text/javascript" src="<%# BaseURL %>/Scripts/jquery.event.drag-1.4.min.js"></script>    
     <style type="text/css">
         .ddlWidth
         {

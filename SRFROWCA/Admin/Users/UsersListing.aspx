@@ -2,7 +2,6 @@
     EnableEventValidation="false" CodeBehind="UsersListing.aspx.cs" Inherits="SRFROWCA.Admin.Users.UsersListing" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <table width="100%">
@@ -18,7 +17,7 @@
             <td colspan="2">
                 <asp:GridView ID="gvUsers" runat="server" AutoGenerateColumns="false" AllowPaging="true"
                     PageSize="20" AllowSorting="true" Width="100%" OnPageIndexChanging="gvUsers_PageIndexChanging"
-                    OnSorting="gvUsers_Sorting">
+                    OnSorting="gvUsers_Sorting" OnRowCommand="gvUsers_RowCommand">
                     <HeaderStyle BackColor="ButtonFace" />
                     <Columns>
                         <asp:TemplateField ItemStyle-CssClass="rownum" ItemStyle-Width="2%" HeaderText="#">
@@ -28,31 +27,37 @@
                         </asp:TemplateField>
                         <asp:BoundField DataField="UserName" HeaderText="User Name" SortExpression="UserName" />
                         <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
-                        <asp:TemplateField HeaderText="Approved" SortExpression="IsApproved" HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
+                        <asp:TemplateField HeaderText="Approved" SortExpression="IsApproved" HeaderStyle-Width="50px"
+                            ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>
                                 <asp:CheckBox ID="chkIsApproved" AutoPostBack="true" runat="server" OnCheckedChanged="chkIsApproved_CheckedChanged"
                                     Checked='<%# Eval("IsApproved") %>' />
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Locked" SortExpression="IsLockedOut"  HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
+                        <asp:TemplateField HeaderText="Locked" SortExpression="IsLockedOut" HeaderStyle-Width="50px"
+                            ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>
                                 <asp:CheckBox ID="chkIsLocked" AutoPostBack="true" runat="server" OnCheckedChanged="chkIsLocked_CheckedChanged"
                                     Checked='<%# Eval("IsLockedOut") %>' />
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Country Admin" SortExpression="IsCountryAdmin"  HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center">
+                        <asp:TemplateField HeaderText="Country Admin" SortExpression="IsCountryAdmin" HeaderStyle-Width="100px"
+                            ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>
                                 <asp:CheckBox ID="chkIsCountryAdmin" AutoPostBack="true" runat="server" OnCheckedChanged="chkIsCountryAdmin_CheckedChanged"
                                     Checked='<%# Eval("IsCountryAdmin") %>' />
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="OrganizationName" HeaderText="Organization" SortExpression="OrganizationName" ItemStyle-Width="500px" />
-                        <asp:BoundField DataField="OrganizationAcronym" HeaderText="Acronym" SortExpression="OrganizationAcronym" ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center" />
-                        
-                        <asp:BoundField DataField="LocationName" HeaderText="Country" SortExpression="LocationName" ItemStyle-HorizontalAlign="Center" />
-                        <asp:TemplateField Visible="false">
+                        <asp:BoundField DataField="OrganizationName" HeaderText="Organization" SortExpression="OrganizationName"
+                            ItemStyle-Width="500px" />
+                        <asp:BoundField DataField="OrganizationAcronym" HeaderText="Acronym" SortExpression="OrganizationAcronym"
+                            ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center" />
+                        <asp:BoundField DataField="LocationName" HeaderText="Country" SortExpression="LocationName"
+                            ItemStyle-HorizontalAlign="Center" />                        
+                        <asp:TemplateField HeaderText="Edit" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center"
+                            HeaderStyle-Width="70">
                             <ItemTemplate>
-                                <asp:Label ID="lblUserId" runat="server" Text='<%# Eval("UserId") %>'></asp:Label>
+                                <asp:Button ID="btnEdit" runat="server" Text="Edit" CommandName="EditUser" CommandArgument='<%# Eval("UserId") %>' />
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>

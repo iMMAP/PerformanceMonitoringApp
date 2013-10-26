@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeBehind="Register.aspx.cs" Inherits="SRFROWCA.Account.Register" %>
 
+<%@ Register Assembly="DropDownCheckBoxes" Namespace="Saplin.Controls" TagPrefix="cc" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Src="../ContactUs/ContactUsControl.ascx" TagName="ContactUsControl"
     TagPrefix="uc1" %>
@@ -26,110 +27,161 @@
             font: 12px Verdana, sans-serif;
         }
     </style>
+    <script type="text/javascript">
+        $(function () {
+            if ($('#<%=rbtnUser.ClientID%>').is(':checked')) {
+                $('#chkCountriesMessage').text('Normal user, can only be registered in one country and can enter data.');
+                $('#trLocations').hide();
+                $('#trCountry').show();
+            }
+
+            if ($('#<%=rbtnCountryAdmin.ClientID%>').is(':checked')) {
+                $('#chkCountriesMessage').text('Country Admin. Country admin can be in multiple countries. This user can administrate country level data.');
+                $('#trLocations').show();
+                $('#trCountry').hide();
+                var validator = document.getElementById('<%=rfvCountry.ClientID%>');                
+                ValidatorEnable(validator, false);
+            }
+
+            $('#<%=rbtnUser.ClientID%>').change(function () {
+                if ($('#<%=rbtnUser.ClientID%>').is(':checked')) {
+                    $('#chkCountriesMessage').text('Normal user, can only be registered in one country and can enter data.');
+                    $('#trLocations').hide();
+                    $('#trCountry').show();
+                }
+            });
+
+            $('#<%=rbtnCountryAdmin.ClientID%>').change(function () {
+                if ($('#<%=rbtnCountryAdmin.ClientID%>').is(':checked')) {
+                    $('#chkCountriesMessage').text('Country Admin. Country admin can be in multiple countries. This user can administrate country level data.');
+                    $('#trLocations').show();
+                    $('#trCountry').hide();
+                    var validator = document.getElementById('<%=rfvCountry.ClientID%>');                    
+                    ValidatorEnable(validator, false);
+                }
+            });
+        });
+    </script>
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
-    <div>
-        <div style="background-color: Silver;">
-            Create User Account</div>
-        <div style="width: 75%; float: left">
-            <table>
-                <tr>
-                    <td>
-                        User Name:
-                    </td>
-                    <td>
-                        <asp:TextBox ID="txtUserName" runat="server" MaxLength="150"></asp:TextBox>
-                    </td>
-                    <td>
-                        <asp:RequiredFieldValidator ID="rfvUserName" runat="server" ErrorMessage="User Name"
-                            Text="*" ControlToValidate="txtUserName"></asp:RequiredFieldValidator>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Password:
-                    </td>
-                    <td>
-                        <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" MaxLength="50"></asp:TextBox>
-                    </td>
-                    <td>
-                        <asp:RequiredFieldValidator ID="rfvPassword" runat="server" ErrorMessage="Password"
-                            Text="*" ControlToValidate="txtPassword"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="valMinLength" runat="server" ControlToValidate="txtPassword"
-                            ErrorMessage="At least 3 characters" ValidationExpression="[^\s]{3,}"></asp:RegularExpressionValidator>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Confirm Password:
-                    </td>
-                    <td>
-                        <asp:TextBox ID="txtConfirmPassword" runat="server" TextMode="Password" MaxLength="50"></asp:TextBox>
-                    </td>
-                    <td>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Confirm Password"
-                            Text="*" ControlToValidate="txtPassword"></asp:RequiredFieldValidator>
-                        <asp:CompareValidator ID="cvConfirmPassword" runat="server" ErrorMessage="Passwords don't match."
-                            ControlToCompare="txtPassword" ControlToValidate="txtConfirmPassword"></asp:CompareValidator>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Email:
-                    </td>
-                    <td>
-                        <asp:TextBox ID="txtEmail" runat="server" MaxLength="150"></asp:TextBox>
-                    </td>
-                    <td>
-                        <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="Email" Text="*"
-                            ControlToValidate="txtEmail"></asp:RequiredFieldValidator>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Phone:
-                    </td>
-                    <td>
-                        <asp:TextBox ID="txtPhone" MaxLength="50" runat="server"></asp:TextBox>
-                    </td>
-                    <td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Organization:
-                    </td>
-                    <td>
-                        <asp:DropDownList ID="ddlOrganization" runat="server" Width="200px">
-                        </asp:DropDownList>
-                    </td>
-                    <td>
-                        <asp:RequiredFieldValidator ID="rfvOrganization" runat="server" ErrorMessage="Organization"
-                            InitialValue="0" Text="*" ControlToValidate="ddlOrganization"></asp:RequiredFieldValidator>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Office Country:
-                    </td>
-                    <td>
-                        <asp:DropDownList ID="ddlCountry" runat="server" Width="200px">
-                        </asp:DropDownList>
-                    </td>
-                    <td>
-                        <asp:RequiredFieldValidator ID="rfvCountry" runat="server" ErrorMessage="Country"
-                            Text="*" InitialValue="0" ControlToValidate="ddlCountry"></asp:RequiredFieldValidator>
-                    </td>
-                </tr>
-            </table>
-            <div id="divUserRoles" runat="server">
-                <asp:RadioButton ID="rbntUser" runat="server" Text="User" GroupName="Roles"/>
-                <asp:RadioButton ID="rbtnCountryAdmin" runat="server" Text="Country Admin" GroupName="Roles" />
-            </div>
-            <div>
-                <asp:Button ID="btnRegister" runat="server" Text="Register" OnClick="btnRegister_Click" />
-                <asp:LinkButton ID="lbtnMissing" runat="server" Text="Request Missing Organization Or Location"></asp:LinkButton>
-            </div>
+    <div style="background-color: Silver;">
+        Create User Account</div>
+    <div style="width: 75%; float: left">
+        <table>
+            <tr>
+                <td>
+                    User Name:
+                </td>
+                <td>
+                    <asp:TextBox ID="txtUserName" runat="server" MaxLength="150"></asp:TextBox>
+                </td>
+                <td>
+                    <asp:RequiredFieldValidator ID="rfvUserName" runat="server" ErrorMessage="User Name"
+                        Text="*" ControlToValidate="txtUserName"></asp:RequiredFieldValidator>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Password:
+                </td>
+                <td>
+                    <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" MaxLength="50"></asp:TextBox>
+                </td>
+                <td>
+                    <asp:RequiredFieldValidator ID="rfvPassword" runat="server" ErrorMessage="Password"
+                        Text="*" ControlToValidate="txtPassword"></asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="valMinLength" runat="server" ControlToValidate="txtPassword"
+                        ErrorMessage="At least 3 characters" ValidationExpression="[^\s]{3,}"></asp:RegularExpressionValidator>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Confirm Password:
+                </td>
+                <td>
+                    <asp:TextBox ID="txtConfirmPassword" runat="server" TextMode="Password" MaxLength="50"></asp:TextBox>
+                </td>
+                <td>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Confirm Password"
+                        Text="*" ControlToValidate="txtPassword"></asp:RequiredFieldValidator>
+                    <asp:CompareValidator ID="cvConfirmPassword" runat="server" ErrorMessage="Passwords don't match."
+                        ControlToCompare="txtPassword" ControlToValidate="txtConfirmPassword"></asp:CompareValidator>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Email:
+                </td>
+                <td>
+                    <asp:TextBox ID="txtEmail" runat="server" MaxLength="150"></asp:TextBox>
+                </td>
+                <td>
+                    <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="Email" Text="*"
+                        ControlToValidate="txtEmail"></asp:RequiredFieldValidator>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Phone:
+                </td>
+                <td>
+                    <asp:TextBox ID="txtPhone" MaxLength="50" runat="server"></asp:TextBox>
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Organization:
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlOrganization" runat="server" Width="200px">
+                    </asp:DropDownList>
+                </td>
+                <td>
+                    <asp:RequiredFieldValidator ID="rfvOrganization" runat="server" ErrorMessage="Organization"
+                        InitialValue="0" Text="*" ControlToValidate="ddlOrganization"></asp:RequiredFieldValidator>
+                </td>
+            </tr>
+            <tr>
+            </tr>
+        </table>
+        <div id="divUserRoles" runat="server">
+            <asp:RadioButton ID="rbtnUser" runat="server" Text="User" GroupName="Roles" Checked="true" />
+            <asp:RadioButton ID="rbtnCountryAdmin" runat="server" Text="Country Admin" GroupName="Roles" />
+        </div>
+        <div id="chkCountriesMessage">
+        </div>
+        <table>
+            <tr id="trCountry">
+                <td width="109px">
+                    Country:
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlCountry" runat="server" Width="200px">
+                    </asp:DropDownList>
+                </td>
+                <td>
+                    <asp:RequiredFieldValidator ID="rfvCountry" runat="server" ErrorMessage="Country"
+                        Text="*" InitialValue="0" ControlToValidate="ddlCountry"></asp:RequiredFieldValidator>
+                </td>
+            </tr>
+            <tr id="trLocations">
+                <td width="109px">
+                    <asp:Literal ID="ltrlLocation" runat="server" Text="Country"></asp:Literal>
+                </td>
+                <td>
+                    <cc:DropDownCheckBoxes ID="ddlLocations" runat="server" CssClass="ddlWidth">
+                        <Texts SelectBoxCaption="Select Country" />
+                    </cc:DropDownCheckBoxes>
+                </td>
+                <td>
+                </td>
+            </tr>
+        </table>
+        <div>
+            <asp:Button ID="btnRegister" runat="server" Text="Register" OnClick="btnRegister_Click" />
+            <asp:LinkButton ID="lbtnMissing" runat="server" Text="Request Missing Organization Or Location"></asp:LinkButton>
             <table cellpadding="5" cellspacing="0" class="pstyle1">
                 <tr>
                     <td class="signupheading2">

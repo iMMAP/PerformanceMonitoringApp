@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Data;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
 using BusinessLogic;
-using System.Web.Security;
+using SRFROWCA.Common;
 
 namespace SRFROWCA.Admin.Office
 {
@@ -14,11 +12,15 @@ namespace SRFROWCA.Admin.Office
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!ROWCACommon.IsInAdminRoles(this.User))
+            {
+                Response.Redirect("~/Default.aspx");
+            }
+
             if (IsPostBack) return;
 
             LoadOffices();
             PopulateCountries();
-            //PopulateLocations();
             PopulateOrganizations();
         }
 
@@ -44,15 +46,15 @@ namespace SRFROWCA.Admin.Office
             {
                 int officeId = Convert.ToInt32(e.CommandArgument);
 
-                // Check if any IP has reported on this project. If so then do not delete it.
-                if (!OfficeIsBeingUsedInReports(officeId))
-                {
-                    lblMessage.Text = "Office cannot be deleted! It is being used in reports.";
-                    lblMessage.CssClass = "error-message";
-                    lblMessage.Visible = true;
+                //// Check if any IP has reported on this project. If so then do not delete it.
+                //if (!OfficeIsBeingUsedInReports(officeId))
+                //{
+                //    lblMessage.Text = "Office cannot be deleted! It is being used in reports.";
+                //    lblMessage.CssClass = "error-message";
+                //    lblMessage.Visible = true;
 
-                    return;
-                }
+                //    return;
+                //}
 
                 DeleteOffice(officeId);
                 LoadOffices();
@@ -70,13 +72,20 @@ namespace SRFROWCA.Admin.Office
                     ddlOrganizations.SelectedValue = lblOrganizaitonId.Text;
                 }
 
+                Label lblCountryId = row.FindControl("lblLocationParentId") as Label;
+                if (lblCountryId != null)
+                {
+                    ddlCountry.SelectedValue = lblCountryId.Text;
+                    PopulateLocations(Convert.ToInt32(lblCountryId.Text));
+                }
+
                 Label lblLocationId = row.FindControl("lblLocationId") as Label;
                 if (lblLocationId != null)
                 {
                     ddlLocations.SelectedValue = lblLocationId.Text;
                 }
 
-                txtOfficeName.Text = row.Cells[1].Text;
+                txtOfficeName.Text = row.Cells[2].Text;
                 mpeAddOrg.Show();
             }
         }
@@ -89,7 +98,8 @@ namespace SRFROWCA.Admin.Office
 
         private void DeleteOffice(int officeId)
         {
-            DBContext.Delete("DeleteOffice", new object[] { officeId, DBNull.Value });
+            Guid userId = (Guid)Membership.GetUser().ProviderUserKey;
+            DBContext.Delete("DeleteOffice", new object[] { officeId, userId, DBNull.Value });
         }
 
         protected void gvOffice_Sorting(object sender, GridViewSortEventArgs e)
@@ -143,7 +153,17 @@ namespace SRFROWCA.Admin.Office
 
         private DataTable GetOffices()
         {
-            return DBContext.GetData("GetAllOffices");
+            if (ROWCACommon.IsAdmin(this.User))
+            {
+                return DBContext.GetData("GetAllOffices");
+            }
+            else if (ROWCACommon.IsCountryAdmin(this.User))
+            {
+                Guid userId = (Guid)Membership.GetUser().ProviderUserKey;
+                return DBContext.GetData("GetAllOfficesByPrincipal", new object[] { userId });
+            }
+
+            return new DataTable();
         }
 
         private void PopulateCountries()
@@ -188,7 +208,17 @@ namespace SRFROWCA.Admin.Office
 
         private object GetLocations(int locationType)
         {
-            return DBContext.GetData("GetLocationOnType", new object[] { locationType });
+            if (ROWCACommon.IsAdmin(this.User))
+            {
+                return DBContext.GetData("GetLocationOnType", new object[] { locationType });
+            }
+            else if (ROWCACommon.IsCountryAdmin(this.User))
+            {
+                Guid userId = (Guid)Membership.GetUser().ProviderUserKey;
+                return DBContext.GetData("GetLocationOnTypeAndPrincipal", new object[] { locationType, userId });
+            }
+
+            return new DataTable();
         }
 
         private void PopulateOrganizations()

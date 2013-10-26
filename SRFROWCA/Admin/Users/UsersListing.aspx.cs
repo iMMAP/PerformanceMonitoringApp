@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using BusinessLogic;
 using System.Data;
 using System.IO;
 using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using BusinessLogic;
+using SRFROWCA.Common;
 
 namespace SRFROWCA.Admin.Users
 {
@@ -15,7 +13,7 @@ namespace SRFROWCA.Admin.Users
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!this.User.IsInRole("Admin") && !this.User.IsInRole("CountryAdmin"))
+            if (!ROWCACommon.IsInAdminRoles(this.User))
             {
                 Response.Redirect("~/Default.aspx");
             }
@@ -26,7 +24,7 @@ namespace SRFROWCA.Admin.Users
 
         private DataTable GetUsers()
         {
-            if (this.User.IsInRole("CountryAdmin"))
+            if (ROWCACommon.IsCountryAdmin(this.User))
             {
                 object[] parameters = GetParameters();
                 return DBContext.GetData("GetUsers", parameters);
@@ -39,7 +37,7 @@ namespace SRFROWCA.Admin.Users
 
         private object[] GetParameters()
         {
-            string userId = Membership.GetUser(HttpContext.Current.User.Identity.Name).ProviderUserKey.ToString();
+            Guid userId = (Guid)Membership.GetUser().ProviderUserKey;
             string userName = null;
             string email = null;
             int? isApproved = null;
@@ -91,19 +89,21 @@ namespace SRFROWCA.Admin.Users
 
         protected void chkIsCountryAdmin_CheckedChanged(object sender, EventArgs e)
         {
-            //foreach (GridViewRow row in gvUsers.Rows)
+            int index = ((GridViewRow)((CheckBox)sender).NamingContainer).RowIndex;
+            CheckBox cb = gvUsers.Rows[index].FindControl("chkIsCountryAdmin") as CheckBox;
+            Label lblUserId = gvUsers.Rows[index].FindControl("lblUserId") as Label;
+
+            if (cb == null || lblUserId == null) return;
+
+            AddRemoveUserInRole(cb.Checked, lblUserId.Text, ROWCACommon.GetCountryAdminRoleName);
+        }
+
+        protected void gvUsers_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "EditUser")
             {
-                int index = ((GridViewRow)((CheckBox)sender).NamingContainer).RowIndex;
-                CheckBox cb = gvUsers.Rows[index].FindControl("chkIsCountryAdmin") as CheckBox;
-                if (cb != null)
-                {
-                    Label lblUserId = gvUsers.Rows[index].FindControl("lblUserId") as Label;
-                    if (lblUserId != null)
-                    {
-                        string roleName = "CountryAdmin";
-                        AddRemoveUserInRole(cb.Checked, lblUserId.Text, roleName);
-                    }
-                }
+                Session["EditUserId"] = e.CommandArgument.ToString();
+                Response.Redirect("~/Account/UpdateUser.aspx");
             }
         }
 

@@ -130,6 +130,33 @@ namespace SRFROWCA.Account {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvOrganization;
         
         /// <summary>
+        /// divUserRoles control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divUserRoles;
+        
+        /// <summary>
+        /// rbtnUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rbtnUser;
+        
+        /// <summary>
+        /// rbtnCountryAdmin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rbtnCountryAdmin;
+        
+        /// <summary>
         /// ddlCountry control.
         /// </summary>
         /// <remarks>
@@ -148,31 +175,22 @@ namespace SRFROWCA.Account {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCountry;
         
         /// <summary>
-        /// divUserRoles control.
+        /// ltrlLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divUserRoles;
+        protected global::System.Web.UI.WebControls.Literal ltrlLocation;
         
         /// <summary>
-        /// rbntUser control.
+        /// ddlLocations control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbntUser;
-        
-        /// <summary>
-        /// rbtnCountryAdmin control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbtnCountryAdmin;
+        protected global::Saplin.Controls.DropDownCheckBoxes ddlLocations;
         
         /// <summary>
         /// btnRegister control.

@@ -4,11 +4,20 @@ using System.IO;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
+using System.Web;
+using System.IO.Compression;
 
 namespace SRFROWCA
 {
     public partial class _Default : System.Web.UI.Page
     {
+        protected void Page_PreInit(object sender, EventArgs e)
+        {
+            HttpContext context = HttpContext.Current;
+            context.Response.Filter = new GZipStream(context.Response.Filter, CompressionMode.Compress);
+            HttpContext.Current.Response.AppendHeader("Content-encoding", "gzip");
+            HttpContext.Current.Response.Cache.VaryByHeaders["Accept-encoding"] = true;
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             // Register btnExportToExcel to trigger postback, in updatepanel.

@@ -8,6 +8,35 @@ namespace SRFROWCA.Common
 {
     public class ROWCACommon
     {
+        internal static bool IsInAdminRoles(System.Security.Principal.IPrincipal iPrincipal)
+        {
+            if (IsAdmin(iPrincipal) || IsCountryAdmin(iPrincipal))
+                return true;
+            return false;
+        }
+
+        internal static bool IsAdmin(System.Security.Principal.IPrincipal iPrincipal)
+        {
+            if (iPrincipal.IsInRole("Admin"))
+                return true;
+            return false;
+        }
+
+        internal static bool IsCountryAdmin(System.Security.Principal.IPrincipal iPrincipal)
+        {
+            if (iPrincipal.IsInRole("CountryAdmin"))
+                return true;
+            return false;
+        }
+
+        internal static string GetCountryAdminRoleName
+        {
+            get 
+            {
+                return "CountryAdmin";
+            }
+        }
+
         public static string CreateFolderForFiles(string dir, string sessionId)
         {
             // Concat sessionid with path to generate seperate
