@@ -7,7 +7,7 @@
     <file relUrl="Admin/DataFeeds/MonthFeed.ashx" publishTime="04/25/2013 16:32:32" />
     <file relUrl="Styles/ui-lightness/images/ui-bg_diagonals-thick_20_666666_40x40.png" publishTime="10/08/2013 03:27:52" />
     <file relUrl="Scripts/hc/adapters/mootools-adapter.js" publishTime="07/29/2013 14:41:46" />
-    <file relUrl="bin/HttpModules3W.dll" publishTime="10/23/2013 18:32:34" />
+    <file relUrl="Account/UpdateUser.aspx" publishTime="10/27/2013 18:09:44" />
     <file relUrl="ReportsCharts/ReportsDefault.aspx" publishTime="09/30/2013 12:29:34" />
     <file relUrl="Scripts/hc/modules/funnel.src.js" publishTime="07/29/2013 14:41:46" />
     <file relUrl="ObjectivesFeed.ashx" publishTime="08/27/2013 12:25:23" />
@@ -16,15 +16,15 @@
     <file relUrl="Scripts/hc/themes/grid.js" publishTime="07/29/2013 14:41:46" />
     <file relUrl="Scripts/quicksearch.js" publishTime="02/10/2013 06:10:30" />
     <file relUrl="UserManual_files/image001.png" publishTime="04/24/2013 15:47:17" />
-    <file relUrl="Styles/ui-lightness/images/ui-bg_diagonals-thick_18_b81900_40x40.png" publishTime="10/08/2013 03:27:52" />
     <file relUrl="WebService2.asmx" publishTime="10/18/2013 17:18:37" />
     <file relUrl="images/minus.png" publishTime="01/09/2008 20:25:04" />
     <file relUrl="UserManual_files/image004.png" publishTime="04/24/2013 15:47:17" />
     <file relUrl="bin/Newtonsoft.Json.dll" publishTime="06/06/2013 13:33:36" />
     <file relUrl="Scripts/hc/adapters/prototype-adapter.src.js" publishTime="07/29/2013 14:41:46" />
-    <file relUrl="Site.Master" publishTime="10/23/2013 17:35:38" />
+    <file relUrl="Site.Master" publishTime="10/24/2013 17:43:58" />
     <file relUrl="images/last.gif" publishTime="02/23/2008 19:58:49" />
     <file relUrl="Scripts/hc/modules/exporting.src.js" publishTime="07/29/2013 14:41:46" />
+    <file relUrl="UserManual_files/filelist.xml" publishTime="04/24/2013 15:47:17" />
     <file relUrl="images/bottom-mid.png" publishTime="02/23/2008 19:58:49" />
     <file relUrl="images/hder.png" publishTime="02/25/2013 11:59:57" />
     <file relUrl="Styles/ui-lightness/images/ui-icons_222222_256x240.png" publishTime="10/08/2013 03:27:52" />
@@ -32,30 +32,33 @@
     <file relUrl="IndicatorsFeed.ashx" publishTime="08/27/2013 12:28:37" />
     <file relUrl="Pages/SelectActivities.aspx" publishTime="04/08/2013 12:02:14" />
     <file relUrl="images/pager_bg.gif" publishTime="02/23/2008 19:58:49" />
-    <file relUrl="Account/Web.config" publishTime="02/04/2013 18:49:29" />
-    <file relUrl="Admin/Users/UsersListing.aspx" publishTime="10/23/2013 16:01:49" />
+    <file relUrl="Account/Web.config" publishTime="10/28/2013 10:39:23" />
+    <file relUrl="Admin/Users/UsersListing.aspx" publishTime="10/26/2013 18:31:48" />
     <file relUrl="Scripts/jquery.event.drag-1.4.min.js" publishTime="02/18/2013 14:25:54" />
     <file relUrl="images/close-down.png" publishTime="02/23/2008 19:58:49" />
     <file relUrl="bin/AjaxControlToolkit.dll" publishTime="01/24/2013 21:49:20" />
     <file relUrl="Scripts/hc/modules/funnel.js" publishTime="07/29/2013 14:41:46" />
     <file relUrl="ReportsCharts/ChartReport.aspx" publishTime="10/09/2013 09:14:42" />
     <file relUrl="Admin/Organization/OrganizationListing.aspx" publishTime="10/23/2013 16:10:28" />
+    <file relUrl="Styles/ui-lightness/images/animated-overlay.gif" publishTime="10/08/2013 03:27:52" />
     <file relUrl="ReportsCharts/TargetsAchievedByLocDuration.aspx" publishTime="08/13/2013 20:38:33" />
     <file relUrl="UserManual_files/image009.png" publishTime="04/24/2013 15:47:17" />
+    <file relUrl="images/01a.jpg" publishTime="02/25/2013 11:51:02" />
     <file relUrl="Styles/ui-lightness/images/ui-icons_ffffff_256x240.png" publishTime="10/08/2013 03:27:52" />
     <file relUrl="UserManual_files/image002.png" publishTime="04/24/2013 15:47:17" />
     <file relUrl="Styles/grid.css" publishTime="03/05/2013 15:11:07" />
     <file relUrl="ClustersDataFeed.ashx" publishTime="03/11/2013 19:08:15" />
     <file relUrl="Controls/FilterCriteria.ascx" publishTime="08/05/2013 16:58:41" />
     <file relUrl="Styles/Site.min.css" publishTime="10/23/2013 17:35:26" />
-    <file relUrl="Scripts/hc/modules/canvas-tools.js" publishTime="07/29/2013 14:41:46" />
+    <file relUrl="Styles/ui-lightness/images/ui-bg_glass_100_fdf5ce_1x400.png" publishTime="10/08/2013 03:27:52" />
     <file relUrl="Admin/DataFeeds/OfficesFeed.ashx" publishTime="04/25/2013 16:30:50" />
     <file relUrl="Styles/jquery.kiketable.colsizable.css" publishTime="02/18/2013 14:24:08" />
     <file relUrl="Admin/DataFeeds/EmergencyFeed.ashx" publishTime="04/25/2013 16:31:10" />
     <file relUrl="Scripts/jquery.kiketable.colsizable-1.1.min.js" publishTime="10/23/2013 17:09:39" />
+    <file relUrl="Account/ChangePasswordSuccess.aspx" publishTime="02/04/2013 18:49:29" />
     <file relUrl="Scripts/hc/modules/exporting.js" publishTime="07/29/2013 14:41:46" />
     <file relUrl="Styles/ui-lightness/images/ui-icons_228ef1_256x240.png" publishTime="10/08/2013 03:27:52" />
-    <file relUrl="bin/BusinessLogic.dll" publishTime="10/23/2013 18:32:34" />
+    <file relUrl="bin/BusinessLogic.dll" publishTime="10/28/2013 11:14:42" />
     <file relUrl="ClustersFeed.ashx" publishTime="08/27/2013 12:22:50" />
     <file relUrl="ActivityFeed.ashx" publishTime="08/27/2013 12:32:03" />
     <file relUrl="Styles/ui-lightness/images/ui-bg_highlight-soft_100_eeeeee_1x100.png" publishTime="10/08/2013 03:27:52" />
@@ -65,36 +68,33 @@
     <file relUrl="Account/Login.aspx" publishTime="10/23/2013 14:31:05" />
     <file relUrl="Admin/Clusters/ActivityData.aspx" publishTime="04/11/2013 19:36:07" />
     <file relUrl="bin/log4net.dll" publishTime="10/06/2011 19:44:20" />
-    <file relUrl="Admin/Clusters/EmergencyClusters.aspx" publishTime="03/04/2013 14:32:24" />
     <file relUrl="bin/Microsoft.Practices.EnterpriseLibrary.Data.dll" publishTime="08/06/2012 20:17:32" />
     <file relUrl="UserManual_files/image005.png" publishTime="04/24/2013 15:47:17" />
-    <file relUrl="Web.config" publishTime="10/23/2013 18:32:45" />
+    <file relUrl="Web.config" publishTime="10/28/2013 11:14:54" />
     <file relUrl="OfficeFeed.ashx" publishTime="08/27/2013 12:20:36" />
-    <file relUrl="bin/SRFROWCA.dll" publishTime="10/23/2013 18:32:35" />
+    <file relUrl="bin/SRFROWCA.dll" publishTime="10/28/2013 11:14:43" />
     <file relUrl="images/rssfeed.png" publishTime="02/21/2013 19:34:18" />
-    <file relUrl="Scripts/hc/highcharts.src.js" publishTime="07/29/2013 14:41:46" />
+    <file relUrl="Admin/Clusters/IndicatorActivities.aspx" publishTime="03/26/2013 16:12:57" />
     <file relUrl="images/hdrmid.png" publishTime="02/25/2013 12:02:53" />
     <file relUrl="Admin/DataFeeds/OrganizationsFeed.ashx" publishTime="04/25/2013 16:30:31" />
-    <file relUrl="Styles/ui-lightness/images/ui-bg_glass_100_fdf5ce_1x400.png" publishTime="10/08/2013 03:27:52" />
     <file relUrl="images/bottom-right.png" publishTime="02/23/2008 19:58:49" />
     <file relUrl="Admin/DataFeeds/ClustersFeed.ashx" publishTime="04/25/2013 16:31:25" />
-    <file relUrl="Styles/ui-lightness/images/ui-icons_ffd27a_256x240.png" publishTime="10/08/2013 03:27:52" />
     <file relUrl="OrganizationsFeed.ashx" publishTime="08/27/2013 12:17:05" />
     <file relUrl="Styles/ui-lightness/jquery-ui-1.10.3.custom.css" publishTime="10/08/2013 03:27:52" />
     <file relUrl="Admin/Clusters/ObjectiveIndicators.aspx" publishTime="03/26/2013 16:14:14" />
     <file relUrl="UserManual_files/image006.png" publishTime="04/24/2013 15:47:17" />
     <file relUrl="images/sprite.png" publishTime="02/23/2008 19:58:49" />
+    <file relUrl="Account/ForgotPassword.aspx" publishTime="10/28/2013 10:40:03" />
     <file relUrl="images/close-hover.png" publishTime="02/23/2008 19:58:49" />
     <file relUrl="bin/Svg.dll" publishTime="03/04/2012 07:51:21" />
     <file relUrl="Admin/DataFeeds/YearFeed.ashx" publishTime="04/25/2013 16:32:24" />
     <file relUrl="bin/itextsharp.dll" publishTime="12/13/2012 15:40:45" />
     <file relUrl="Styles/ui-lightness/images/ui-bg_glass_65_ffffff_1x400.png" publishTime="10/08/2013 03:27:52" />
     <file relUrl="images/top-mid.png" publishTime="02/23/2008 19:58:49" />
-    <file relUrl="ReportsCharts/GenerateReport1.aspx" publishTime="10/18/2013 19:53:04" />
+    <file relUrl="ReportsCharts/GenerateReport1.aspx" publishTime="10/26/2013 15:35:57" />
     <file relUrl="images/left.png" publishTime="02/23/2008 19:58:49" />
     <file relUrl="Admin/DataFeeds/Organizations.ashx" publishTime="04/25/2013 16:26:47" />
     <file relUrl="Styles/ui-lightness/images/ui-bg_flat_10_000000_40x100.png" publishTime="10/08/2013 03:27:52" />
-    <file relUrl="ContactUs/Contactus.aspx" publishTime="02/26/2013 12:31:05" />
     <file relUrl="UserManual_files/colorschememapping.xml" publishTime="04/24/2013 15:47:16" />
     <file relUrl="Scripts/hc/modules/data.js" publishTime="07/29/2013 14:41:46" />
     <file relUrl="UserManual_files/image010.png" publishTime="04/24/2013 15:47:17" />
@@ -102,18 +102,16 @@
     <file relUrl="Scripts/jq-1.10.2.min.js" publishTime="10/13/2013 18:37:13" />
     <file relUrl="images/bottom-left.png" publishTime="02/23/2008 19:58:49" />
     <file relUrl="Admin/DataFeeds/LogFrameDataFeed.ashx" publishTime="04/25/2013 16:32:14" />
-    <file relUrl="bin/HttpModules3W.pdb" publishTime="10/23/2013 18:32:34" />
-    <file relUrl="Admin/Clusters/IndicatorActivities.aspx" publishTime="03/26/2013 16:12:57" />
     <file relUrl="NestedMasterPage1.master" publishTime="10/23/2013 17:14:55" />
+    <file relUrl="Admin/Emergency/EmergencyListing.aspx" publishTime="03/26/2013 15:44:56" />
     <file relUrl="ActivityDataFeed.ashx" publishTime="08/27/2013 12:35:34" />
-    <file relUrl="ReportsCharts/AllTargetsAndAchieved.ascx" publishTime="08/12/2013 11:22:38" />
-    <file relUrl="Account/Register.aspx" publishTime="10/23/2013 11:37:44" />
+    <file relUrl="Account/Register.aspx" publishTime="10/26/2013 18:24:46" />
     <file relUrl="Styles/dialog.css" publishTime="03/05/2013 15:28:40" />
     <file relUrl="bin/Artem.Google.dll" publishTime="11/18/2011 15:17:12" />
     <file relUrl="ReportsCharts/TargetsAchievedByLocData.aspx" publishTime="10/08/2013 18:08:32" />
-    <file relUrl="images/top-right.png" publishTime="02/23/2008 19:58:49" />
     <file relUrl="Scripts/hc/modules/canvas-tools.src.js" publishTime="07/29/2013 14:41:46" />
     <file relUrl="images/first.gif" publishTime="02/23/2008 19:58:49" />
+    <file relUrl="Styles/ui-lightness/images/ui-bg_highlight-soft_75_ffe45c_1x100.png" publishTime="10/08/2013 03:27:52" />
     <file relUrl="Admin/DataFeeds/Admin2Feed.ashx" publishTime="04/25/2013 16:31:51" />
     <file relUrl="Pages/AddActivities.aspx" publishTime="10/23/2013 17:23:44" />
     <file relUrl="Scripts/hc/themes/dark-blue.js" publishTime="07/29/2013 14:41:46" />
@@ -122,8 +120,8 @@
     <file relUrl="images/ajaxlodr.gif" publishTime="04/19/2012 18:12:46" />
     <file relUrl="Scripts/hc/adapters/prototype-adapter.js" publishTime="07/29/2013 14:41:46" />
     <file relUrl="Admin/Web.config" publishTime="10/22/2013 20:31:46" />
-    <file relUrl="bin/DataAccessLayer.pdb" publishTime="10/23/2013 18:32:34" />
-    <file relUrl="bin/DataAccessLayer.dll" publishTime="10/23/2013 18:32:34" />
+    <file relUrl="bin/DataAccessLayer.pdb" publishTime="10/28/2013 11:14:42" />
+    <file relUrl="bin/DataAccessLayer.dll" publishTime="10/28/2013 11:14:42" />
     <file relUrl="About.aspx" publishTime="02/04/2013 18:49:30" />
     <file relUrl="images/plus.png" publishTime="01/09/2008 19:25:10" />
     <file relUrl="packages.config" publishTime="07/29/2013 14:41:47" />
@@ -134,38 +132,40 @@
     <file relUrl="images/error.png" publishTime="03/05/2013 16:27:28" />
     <file relUrl="Scripts/hc/modules/data.src.js" publishTime="07/29/2013 14:41:46" />
     <file relUrl="bin/Microsoft.Practices.ObjectBuilder.dll" publishTime="08/06/2012 20:17:32" />
-    <file relUrl="Account/ChangePasswordSuccess.aspx" publishTime="02/04/2013 18:49:29" />
+    <file relUrl="ContactUs/Contactus.aspx" publishTime="02/26/2013 12:31:05" />
     <file relUrl="images/prev.gif" publishTime="02/23/2008 19:58:49" />
     <file relUrl="Styles/ui-lightness/jquery-ui-1.10.3.custom.min.css" publishTime="10/08/2013 03:27:52" />
     <file relUrl="bin/Microsoft.Practices.EnterpriseLibrary.Common.dll" publishTime="08/06/2012 20:17:32" />
-    <file relUrl="Admin/Office/OfficeListing.aspx" publishTime="03/26/2013 15:44:45" />
+    <file relUrl="Admin/Office/OfficeListing.aspx" publishTime="10/25/2013 20:40:07" />
     <file relUrl="Styles/ui-lightness/images/ui-bg_glass_100_f6f6f6_1x400.png" publishTime="10/08/2013 03:27:52" />
-    <file relUrl="bin/BusinessLogic.pdb" publishTime="10/23/2013 18:32:34" />
-    <file relUrl="Admin/Emergency/EmergencyListing.aspx" publishTime="03/26/2013 15:44:56" />
-    <file relUrl="Scripts/hc/themes/skies.js" publishTime="07/29/2013 14:41:45" />
-    <file relUrl="Styles/ui-lightness/images/animated-overlay.gif" publishTime="10/08/2013 03:27:52" />
+    <file relUrl="Scripts/hc/highcharts.src.js" publishTime="07/29/2013 14:41:46" />
+    <file relUrl="bin/BusinessLogic.pdb" publishTime="10/28/2013 11:14:42" />
+    <file relUrl="images/top-right.png" publishTime="02/23/2008 19:58:49" />
+    <file relUrl="Styles/ui-lightness/images/ui-icons_ffd27a_256x240.png" publishTime="10/08/2013 03:27:52" />
+    <file relUrl="Scripts/hc/themes/gray.js" publishTime="07/29/2013 14:41:46" />
+    <file relUrl="Scripts/hc/modules/canvas-tools.js" publishTime="07/29/2013 14:41:46" />
+    <file relUrl="bin/DotNet.Highcharts.dll" publishTime="10/01/2013 18:05:19" />
     <file relUrl="Admin/Clusters/ClusterObjectives.aspx" publishTime="03/26/2013 16:14:37" />
     <file relUrl="Admin/DataFeeds/Admin1Feed.ashx" publishTime="04/25/2013 16:31:41" />
     <file relUrl="images/pencil.gif" publishTime="02/23/2008 19:58:49" />
-    <file relUrl="UserManual_files/image008.png" publishTime="04/24/2013 15:47:17" />
     <file relUrl="Scripts/jquery.numeric.min.js" publishTime="10/23/2013 17:05:54" />
-    <file relUrl="Styles/ui-lightness/images/ui-bg_highlight-soft_75_ffe45c_1x100.png" publishTime="10/08/2013 03:27:52" />
+    <file relUrl="ReportsCharts/AllTargetsAndAchieved.ascx" publishTime="08/12/2013 11:22:38" />
     <file relUrl="Scripts/hc/themes/dark-green.js" publishTime="07/29/2013 14:41:46" />
-    <file relUrl="bin/SRFROWCA.pdb" publishTime="10/23/2013 18:32:35" />
+    <file relUrl="bin/SRFROWCA.pdb" publishTime="10/28/2013 11:14:43" />
     <file relUrl="Admin/DataFeeds/AdminDataFeeds.aspx" publishTime="04/25/2013 17:08:40" />
     <file relUrl="NestedMasterPage2.master" publishTime="10/23/2013 17:15:10" />
     <file relUrl="Styles/ui-lightness/images/ui-icons_ef8c08_256x240.png" publishTime="10/08/2013 03:27:52" />
     <file relUrl="images/right.png" publishTime="02/23/2008 19:58:49" />
     <file relUrl="Styles/ui-lightness/images/ui-bg_gloss-wave_35_f6a828_500x100.png" publishTime="10/08/2013 03:27:52" />
     <file relUrl="images/activity.gif" publishTime="02/23/2008 19:58:49" />
-    <file relUrl="bin/DotNet.Highcharts.dll" publishTime="10/01/2013 18:05:19" />
-    <file relUrl="images/01a.jpg" publishTime="02/25/2013 11:51:02" />
-    <file relUrl="Scripts/hc/themes/gray.js" publishTime="07/29/2013 14:41:46" />
+    <file relUrl="Admin/Clusters/EmergencyClusters.aspx" publishTime="03/04/2013 14:32:24" />
+    <file relUrl="UserManual_files/image008.png" publishTime="04/24/2013 15:47:17" />
+    <file relUrl="Styles/ui-lightness/images/ui-bg_diagonals-thick_18_b81900_40x40.png" publishTime="10/08/2013 03:27:52" />
     <file relUrl="images/footer.gif" publishTime="02/23/2008 19:58:49" />
     <file relUrl="images/next.gif" publishTime="02/23/2008 19:58:49" />
     <file relUrl="UserManual_files/image003.png" publishTime="04/24/2013 15:47:17" />
     <file relUrl="Maps/TargetAchievedByLocDataMap.aspx" publishTime="08/21/2013 11:25:09" />
-    <file relUrl="UserManual_files/filelist.xml" publishTime="04/24/2013 15:47:17" />
+    <file relUrl="Scripts/hc/themes/skies.js" publishTime="07/29/2013 14:41:45" />
     <file relUrl="ChartSVGService.asmx" publishTime="10/18/2013 17:20:03" />
     <file relUrl="bin/DropDownCheckBoxes.dll" publishTime="02/19/2013 20:19:21" />
   </publishProfile>

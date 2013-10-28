@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.IO;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace SRFROWCA.Common
 {
@@ -49,6 +51,55 @@ namespace SRFROWCA.Common
             }
 
             return dir;
+        }
+
+        public static byte[] GetHash(string inputString)
+        {
+            HashAlgorithm algorithm = MD5.Create();
+            return algorithm.ComputeHash(Encoding.UTF8.GetBytes(inputString));
+        }
+
+        public static string GetHashString(string inputString)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (byte b in GetHash(inputString))
+                sb.Append(b.ToString("X2"));
+
+            return sb.ToString();
+        }
+
+        public static bool DataInserted
+        {
+            get
+            {
+                if (HttpContext.Current.Session["DataInserted"] == null)
+                {
+                    HttpContext.Current.Session["DataInserted"] = false;
+                }
+                bool? dataInserted = HttpContext.Current.Session["DataInserted"] as bool?;
+
+                return dataInserted.Value;
+            }
+            set
+            {
+                HttpContext.Current.Session["DataInserted"] = value;
+            }
+        }
+
+        public static string ErrorMessage
+        {
+            get
+            {
+                return "error-message";
+            }
+        }
+
+        public static string InfoMessage
+        {
+            get
+            {
+                return "info-message";
+            }
         }
 
         public enum LocationTypes

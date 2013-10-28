@@ -31,9 +31,10 @@
             <div class="loginDisplay">
                 <div id="loginDiv" style="float: right" runat="server">
                     <asp:Login ID="activitiesLogin" runat="server" DisplayRememberMe="False" Orientation="Horizontal"
-                        TitleText="" CreateUserText="Register" CreateUserUrl="~/Account/Register.aspx"
+                        TitleText="" CreateUserText="Register" CreateUserUrl="~/Account/Register.aspx"                         
                         DestinationPageUrl="~/Default.aspx">
                     </asp:Login>
+                    <a href="../Account/ForgotPassword.aspx">Forgot Password</a>
                 </div>
                 <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false" Visible="false">
                     <AnonymousTemplate>

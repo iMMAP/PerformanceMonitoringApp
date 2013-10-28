@@ -25,6 +25,11 @@ namespace SRFROWCA.Account
 
             if (IsPostBack) return;
 
+            MembershipUser mu = Membership.GetUser("admin1");
+            string password = mu.ResetPassword();
+            ////string password = mu.GetPassword();
+            //string password = Membership.GeneratePassword(6, 0);
+            
             PopulateCountries();
             PopulateOrganizations();
 
@@ -115,9 +120,9 @@ namespace SRFROWCA.Account
 
                 ClearRegistrationControls();
             }
-            catch
+            catch (Exception ex)
             {
-                lblMessage.Text = "Some Error Occoured. Please check your internet or try again!";
+                lblMessage.Text = ex.Message;
                 lblMessage.Visible = true;
             }
         }

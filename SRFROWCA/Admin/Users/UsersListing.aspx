@@ -53,7 +53,12 @@
                         <asp:BoundField DataField="OrganizationAcronym" HeaderText="Acronym" SortExpression="OrganizationAcronym"
                             ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center" />
                         <asp:BoundField DataField="LocationName" HeaderText="Country" SortExpression="LocationName"
-                            ItemStyle-HorizontalAlign="Center" />                        
+                            ItemStyle-HorizontalAlign="Center" />
+                        <asp:TemplateField>
+                            <ItemTemplate>
+                                <asp:Label ID="lblUserId" runat="server" Visible="false" Text='<%#Eval("UserId") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="Edit" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center"
                             HeaderStyle-Width="70">
                             <ItemTemplate>
