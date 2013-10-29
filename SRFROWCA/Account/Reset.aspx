@@ -17,7 +17,7 @@
         </tr>
         <tr>
             <td>
-                <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" MaxLength="50"></asp:TextBox>
+                <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" MaxLength="128"></asp:TextBox>
             </td>
             <td>
                 <asp:RequiredFieldValidator ID="rfvPassword" runat="server" ErrorMessage="Password"
@@ -33,7 +33,7 @@
         </tr>
         <tr>
             <td>
-                <asp:TextBox ID="txtConfirmPassword" runat="server" TextMode="Password" MaxLength="50"></asp:TextBox>
+                <asp:TextBox ID="txtConfirmPassword" runat="server" TextMode="Password" MaxLength="128"></asp:TextBox>
             </td>
             <td>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Confirm Password"

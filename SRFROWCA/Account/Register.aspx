@@ -73,7 +73,7 @@
                     User Name:
                 </td>
                 <td>
-                    <asp:TextBox ID="txtUserName" runat="server" MaxLength="150"></asp:TextBox>
+                    <asp:TextBox ID="txtUserName" runat="server" MaxLength="256"></asp:TextBox>
                 </td>
                 <td>
                     <asp:RequiredFieldValidator ID="rfvUserName" runat="server" ErrorMessage="User Name"
@@ -85,7 +85,7 @@
                     Password:
                 </td>
                 <td>
-                    <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" MaxLength="50"></asp:TextBox>
+                    <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" MaxLength="128"></asp:TextBox>
                 </td>
                 <td>
                     <asp:RequiredFieldValidator ID="rfvPassword" runat="server" ErrorMessage="Password"
@@ -99,7 +99,7 @@
                     Confirm Password:
                 </td>
                 <td>
-                    <asp:TextBox ID="txtConfirmPassword" runat="server" TextMode="Password" MaxLength="50"></asp:TextBox>
+                    <asp:TextBox ID="txtConfirmPassword" runat="server" TextMode="Password" MaxLength="128"></asp:TextBox>
                 </td>
                 <td>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Confirm Password"
@@ -113,7 +113,7 @@
                     Email:
                 </td>
                 <td>
-                    <asp:TextBox ID="txtEmail" runat="server" MaxLength="150"></asp:TextBox>
+                    <asp:TextBox ID="txtEmail" runat="server" MaxLength="256"></asp:TextBox>
                 </td>
                 <td>
                     <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="Email" Text="*"

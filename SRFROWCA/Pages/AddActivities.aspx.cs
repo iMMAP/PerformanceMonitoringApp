@@ -18,19 +18,14 @@ namespace SRFROWCA.Pages
     {
         protected void Page_PreInit(object sender, EventArgs e)
         {
-            //HttpContext context = HttpContext.Current;
-            //context.Response.Filter = new GZipStream(context.Response.Filter, CompressionMode.Compress);
-            //HttpContext.Current.Response.AppendHeader("Content-encoding", "gzip");
-            //HttpContext.Current.Response.Cache.VaryByHeaders["Accept-encoding"] = true;
+            HttpContext context = HttpContext.Current;
+            context.Response.Filter = new GZipStream(context.Response.Filter, CompressionMode.Compress);
+            HttpContext.Current.Response.AppendHeader("Content-encoding", "gzip");
+            HttpContext.Current.Response.Cache.VaryByHeaders["Accept-encoding"] = true;
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!this.User.Identity.IsAuthenticated)
-            {
-                Response.Redirect("~/Default.aspx");
-            }
-
             if (!IsPostBack)
             {
                 PopulateDropDowns();

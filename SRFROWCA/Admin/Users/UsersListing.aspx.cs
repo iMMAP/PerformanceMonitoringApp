@@ -13,11 +13,6 @@ namespace SRFROWCA.Admin.Users
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!ROWCACommon.IsInAdminRoles(this.User))
-            {
-                Response.Redirect("~/Default.aspx");
-            }
-
             if (IsPostBack) return;
             LoadUsers();
         }

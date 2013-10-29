@@ -14,7 +14,7 @@
                     User Name:
                 </td>
                 <td>
-                    <asp:TextBox ID="txtUserName" runat="server" MaxLength="150" Enabled="false" style="background-color:ButtonFace;"></asp:TextBox>
+                    <asp:TextBox ID="txtUserName" runat="server" MaxLength="256" Enabled="false" style="background-color:ButtonFace;"></asp:TextBox>
                 </td>
             </tr>
             <tr>
@@ -22,7 +22,7 @@
                     Email:
                 </td>
                 <td>
-                    <asp:TextBox ID="txtEmail" runat="server" MaxLength="150"></asp:TextBox>
+                    <asp:TextBox ID="txtEmail" runat="server" MaxLength="256"></asp:TextBox>
                 </td>
             </tr>
             <tr>

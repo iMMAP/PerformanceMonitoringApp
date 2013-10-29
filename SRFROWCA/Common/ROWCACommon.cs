@@ -31,9 +31,19 @@ namespace SRFROWCA.Common
             return false;
         }
 
+        internal static bool IsAuthenticated(System.Security.Principal.IPrincipal iPrincipal)
+        {
+            return iPrincipal.Identity.IsAuthenticated;
+        }
+
+        internal static void RedirectUserToPage(HttpResponse Response)
+        {
+            Response.Redirect("~/Default.aspx");
+        }
+
         internal static string GetCountryAdminRoleName
         {
-            get 
+            get
             {
                 return "CountryAdmin";
             }

@@ -38,8 +38,8 @@ namespace SRFROWCA
         // If user is not loged in then show login control and hide loginview and vice versa
         private void ShowHideLoginControls(bool isVisible)
         {
-            loginDiv.Visible = !isVisible;
-            HeadLoginView.Visible = isVisible;
+            //loginDiv.Visible = !isVisible;
+            //HeadLoginView.Visible = isVisible;
         }
 
         // Remove menue items from menue list.

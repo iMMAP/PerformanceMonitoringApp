@@ -11,7 +11,6 @@ namespace SRFROWCA.Admin.Clusters
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (IsPostBack) return;
 
             LoadActivities();

@@ -18,7 +18,7 @@
         </tr>
         <tr>
             <td>
-                <asp:TextBox ID="txtUserName" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtUserName" runat="server" MaxLength="256"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -33,7 +33,7 @@
         </tr>
         <tr>
             <td>
-                <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtEmail" runat="server" MaxLength="256"></asp:TextBox>
             </td>
         </tr>
         <tr>

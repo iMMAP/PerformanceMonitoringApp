@@ -63,7 +63,7 @@ namespace SRFROWCA.Account
                         {
                             link = GenerateTempLinkForUser(dt.Rows[0]["LinkGUID"].ToString());
                             EmailLink(mu.Email, link, mu.UserName);
-
+                            RedirecToConfimationPage();
                         }
                         else
                         {
@@ -78,7 +78,8 @@ namespace SRFROWCA.Account
                             string hash = ROWCACommon.GetHashString(guid + tempString + datetime);
                             SaveValuesInDB(mu.UserName, hash, guid, datetime);
                             link = GenerateTempLinkForUser(guid.ToString());
-                            EmailLink(mu.Email, link, mu.UserName);
+                            //EmailLink(mu.Email, link, mu.UserName);
+                            RedirecToConfimationPage();
                         }
                     }
                 }
@@ -87,6 +88,11 @@ namespace SRFROWCA.Account
             {
                 ShowMessage(ROWCACommon.ErrorMessage, ex.Message);
             }
+        }
+
+        private void RedirecToConfimationPage()
+        {
+            Response.Redirect("~/Account/PasswordSendConfirmation.aspx");
         }
 
         private DataTable CheckPendingRequest(string userName)
@@ -109,7 +115,7 @@ namespace SRFROWCA.Account
                                               3WPM Support",
                                               userName, link);
             Mail.SendMail("3wopactivities@gmail.com", toEmail, "Password Change Request", mailBody);
-            Response.Redirect("~/Account/PasswordSendConfirmation.aspx");
+            
         }
 
         private void SaveValuesInDB(string userName, string hash, Guid guid, string dt)
