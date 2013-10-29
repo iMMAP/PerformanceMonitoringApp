@@ -80,10 +80,6 @@
     <Reference Include="itextsharp">
       <HintPath>..\_dll\itextsharp.dll</HintPath>
     </Reference>
-    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_dll\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\_dll\Newtonsoft.Json.dll</HintPath>
@@ -142,6 +138,8 @@
     <Content Include="ContactUs\Contactus.aspx" />
     <Content Include="ContactUs\ContactUsControl.ascx" />
     <Content Include="Controls\FilterCriteria.ascx" />
+    <Content Include="ErrorPages\GenericErrorPage.aspx" />
+    <Content Include="ErrorPages\HttpErrorPage.aspx" />
     <Content Include="images\01a.jpg" />
     <Content Include="images\activity.gif" />
     <Content Include="images\add_plus.png" />
@@ -460,6 +458,7 @@
     </Compile>
     <Compile Include="Common\DataTableToJson.cs" />
     <Compile Include="Common\Enemuration.cs" />
+    <Compile Include="Common\ExceptionUtility.cs" />
     <Compile Include="Common\LogFrameValues.cs" />
     <Compile Include="Common\UI.cs" />
     <Compile Include="Common\WritePDF.cs" />
@@ -485,6 +484,20 @@
       <DependentUpon>FilterCriteria.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\PagingGridView.cs" />
+    <Compile Include="ErrorPages\GenericErrorPage.aspx.cs">
+      <DependentUpon>GenericErrorPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPages\GenericErrorPage.aspx.designer.cs">
+      <DependentUpon>GenericErrorPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorPages\HttpErrorPage.aspx.cs">
+      <DependentUpon>HttpErrorPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPages\HttpErrorPage.aspx.designer.cs">
+      <DependentUpon>HttpErrorPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="IndicatorsFeed.ashx.cs">
       <DependentUpon>IndicatorsFeed.ashx</DependentUpon>
     </Compile>
@@ -629,6 +642,7 @@
     <Folder Include="Admin\Reports\" />
     <Folder Include="App_Data\" />
     <Folder Include="GeneratedChartFiles\" />
+    <Folder Include="Log\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Web.config" />

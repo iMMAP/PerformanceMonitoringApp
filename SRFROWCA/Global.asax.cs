@@ -4,18 +4,16 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
+using System.Reflection;
+using SRFROWCA.Common;
 
 namespace SRFROWCA
 {
     public class Global : System.Web.HttpApplication
     {
-        private static readonly log4net.ILog logger = log4net.LogManager.GetLogger
-    (System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         void Application_Start(object sender, EventArgs e)
         {
             // Code that runs on application startup
-
         }
 
         void Application_End(object sender, EventArgs e)
@@ -26,16 +24,37 @@ namespace SRFROWCA
 
         void Application_Error(object sender, EventArgs e)
         {
-            try
-            {
+            // Get the exception object.
+            Exception exc = Server.GetLastError();
 
-            }
-            catch (Exception ex)
-            {
-                logger.Error("", ex);
-                logger.Fatal("", ex);
-            }
+            //// Handle HTTP errors
+            //if (exc.GetType() == typeof(HttpException))
+            //{
+            //    // The Complete Error Handling Example generates
+            //    // some errors using URLs with "NoCatch" in them;
+            //    // ignore these here to simulate what would happen
+            //    // if a global.asax handler were not implemented.
+            //    if (exc.Message.Contains("NoCatch") || exc.Message.Contains("maxUrlLength"))
+            //        return;
 
+            //    //Redirect HTTP errors to HttpError page
+            //    Server.Transfer("HttpErrorPage.aspx");
+            //}
+
+            //// For other kinds of errors give the user some information
+            //// but stay on the default page
+            //Response.Write("<h2>Global Page Error</h2>\n");
+            //Response.Write(
+            //    "<p>" + exc.Message + "</p>\n");
+            //Response.Write("Return to the <a href='Default.aspx'>" +
+            //    "Default Page</a>\n");
+
+             //Log the exception and notify system operators
+            ExceptionUtility.LogException(exc, "DefaultPage");
+            //ExceptionUtility.NotifySystemOps(exc);
+
+            // Clear the error from the server
+            Server.ClearError();
         }
 
         void Session_Start(object sender, EventArgs e)
