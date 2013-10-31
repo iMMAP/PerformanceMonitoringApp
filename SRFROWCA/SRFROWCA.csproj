@@ -73,8 +73,7 @@
     <Reference Include="DotNet.Highcharts, Version=2.0.0.0, Culture=neutral, PublicKeyToken=88854f873df851bf, processorArchitecture=MSIL">
       <HintPath>..\_dll\DotNet.Highcharts.dll</HintPath>
     </Reference>
-    <Reference Include="DropDownCheckBoxes, Version=1.1.0.36580, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="DropDownCheckBoxes">
       <HintPath>..\_dll\DropDownCheckBoxes.dll</HintPath>
     </Reference>
     <Reference Include="itextsharp">
@@ -132,13 +131,16 @@
     <Content Include="Admin\Emergency\EmergencyListing.aspx" />
     <Content Include="Admin\Office\OfficeListing.aspx" />
     <Content Include="Admin\Organization\OrganizationListing.aspx" />
+    <Content Include="Admin\Organization\OrgListing.aspx" />
     <Content Include="Admin\Upload\UploadActivities.aspx" />
     <Content Include="Admin\Users\UsersListing.aspx" />
     <Content Include="ChartSVGService.asmx" />
     <Content Include="ContactUs\Contactus.aspx" />
     <Content Include="ContactUs\ContactUsControl.ascx" />
     <Content Include="Controls\FilterCriteria.ascx" />
+    <Content Include="ErrorPages\DefaultRedirectErrorPage.aspx" />
     <Content Include="ErrorPages\GenericErrorPage.aspx" />
+    <Content Include="ErrorPages\Http404ErrorPage.aspx" />
     <Content Include="ErrorPages\HttpErrorPage.aspx" />
     <Content Include="images\01a.jpg" />
     <Content Include="images\activity.gif" />
@@ -151,6 +153,7 @@
     <Content Include="images\close-hover.png" />
     <Content Include="images\close.png" />
     <Content Include="images\error.png" />
+    <Content Include="images\favicon.ico" />
     <Content Include="images\first.gif" />
     <Content Include="images\footer.gif" />
     <Content Include="images\hder.png" />
@@ -169,6 +172,7 @@
     <Content Include="images\top-left.png" />
     <Content Include="images\top-mid.png" />
     <Content Include="images\top-right.png" />
+    <Content Include="Log\ErrorLog.txt" />
     <Content Include="Maps\TargetAchievedByLocDataMap.aspx" />
     <Content Include="Pages\AddActivities.aspx" />
     <Content Include="Pages\SelectActivities.aspx" />
@@ -201,6 +205,7 @@
     <Content Include="Scripts\hc\themes\skies.js" />
     <Content Include="Scripts\jq-1.10.2.min.js" />
     <Content Include="Scripts\jquery.event.drag-1.4.min.js" />
+    <Content Include="Scripts\jquery.kiketable.colsizable-1.1.js" />
     <Content Include="Scripts\jquery.kiketable.colsizable-1.1.min.js" />
     <Content Include="Scripts\jquery.numeric.min.js" />
     <Content Include="Scripts\quicksearch.js" />
@@ -432,6 +437,13 @@
     <Compile Include="Admin\Organization\OrganizationListing.aspx.designer.cs">
       <DependentUpon>OrganizationListing.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\Organization\OrgListing.aspx.cs">
+      <DependentUpon>OrgListing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Organization\OrgListing.aspx.designer.cs">
+      <DependentUpon>OrgListing.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Upload\UploadActivities.aspx.cs">
       <DependentUpon>UploadActivities.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -459,6 +471,7 @@
     <Compile Include="Common\DataTableToJson.cs" />
     <Compile Include="Common\Enemuration.cs" />
     <Compile Include="Common\ExceptionUtility.cs" />
+    <Compile Include="Common\GZipContents.cs" />
     <Compile Include="Common\LogFrameValues.cs" />
     <Compile Include="Common\UI.cs" />
     <Compile Include="Common\WritePDF.cs" />
@@ -484,12 +497,26 @@
       <DependentUpon>FilterCriteria.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\PagingGridView.cs" />
+    <Compile Include="ErrorPages\DefaultRedirectErrorPage.aspx.cs">
+      <DependentUpon>DefaultRedirectErrorPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPages\DefaultRedirectErrorPage.aspx.designer.cs">
+      <DependentUpon>DefaultRedirectErrorPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ErrorPages\GenericErrorPage.aspx.cs">
       <DependentUpon>GenericErrorPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ErrorPages\GenericErrorPage.aspx.designer.cs">
       <DependentUpon>GenericErrorPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorPages\Http404ErrorPage.aspx.cs">
+      <DependentUpon>Http404ErrorPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPages\Http404ErrorPage.aspx.designer.cs">
+      <DependentUpon>Http404ErrorPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="ErrorPages\HttpErrorPage.aspx.cs">
       <DependentUpon>HttpErrorPage.aspx</DependentUpon>
@@ -642,7 +669,6 @@
     <Folder Include="Admin\Reports\" />
     <Folder Include="App_Data\" />
     <Folder Include="GeneratedChartFiles\" />
-    <Folder Include="Log\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Web.config" />

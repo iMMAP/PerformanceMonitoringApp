@@ -75,7 +75,8 @@
                 <input type="text" id="txtSearch" class="searchFieldOrgs" />
             </td>
             <td align="right">
-                <asp:Button ID="btnAddEmergency" runat="server" Text="Add New Emergency" />
+                <asp:Button ID="btnAddEmergency" runat="server" Text="Add New Emergency" CausesValidation="false"
+                    OnClick="btnAddEmergency_Click" />
             </td>
         </tr>
     </table>
@@ -99,13 +100,13 @@
                 <asp:TemplateField HeaderText="Edit" HeaderStyle-Width="80px">
                     <ItemTemplate>
                         <asp:Button ID="btnEdit" runat="server" Text="Edit" Width="80px" CausesValidation="false"
-                            CommandName="EditOrg" CommandArgument='<%# Eval("LocationEmergencyId") %>' />
+                            CommandName="EditEmergency" CommandArgument='<%# Eval("LocationEmergencyId") %>' />
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Delete" HeaderStyle-Width="80px">
                     <ItemTemplate>
                         <asp:Button ID="btnDelete" runat="server" Text="Delete" Width="80px" CausesValidation="false"
-                            CommandName="DeleteOrg" CommandArgument='<%# Eval("LocationEmergencyId") %>' />
+                            CommandName="DeleteEmergency" CommandArgument='<%# Eval("LocationEmergencyId") %>' />
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField Visible="false">
@@ -125,7 +126,7 @@
     <table>
         <tr>
             <td>
-                <asp:ModalPopupExtender ID="mpeAddOrg" BehaviorID="mpeAddOrg" runat="server" TargetControlID="btnAddEmergency"
+                <asp:ModalPopupExtender ID="mpeAddOrg" BehaviorID="mpeAddOrg" runat="server" TargetControlID="btntest"
                     PopupControlID="pnlOrg" BackgroundCssClass="ModalPopupBG1" CancelControlID="btnClose">
                 </asp:ModalPopupExtender>
                 <asp:Panel ID="pnlOrg" runat="server" Width="800px">
@@ -136,6 +137,18 @@
                                     <tr>
                                         <td class="popupbordertd">
                                             <table border="0" style="margin: auto;">
+                                                <tr>
+                                                    <td>
+                                                        Emergency Name:
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox ID="txtEmgName" runat="server" Width="300px" MaxLength="200"></asp:TextBox>
+                                                    </td>
+                                                    <td>
+                                                        <asp:RequiredFieldValidator ID="rfvEmgName" runat="server" ErrorMessage="Emg Name"
+                                                            Text="Required" ControlToValidate="txtEmgName"></asp:RequiredFieldValidator>
+                                                    </td>
+                                                </tr>
                                                 <tr>
                                                     <td>
                                                         Emergency Type:
@@ -151,22 +164,10 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        Emergency Name:
-                                                    </td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtEmgName" runat="server" Width="300px" MaxLength="100"></asp:TextBox>
-                                                    </td>
-                                                    <td>
-                                                        <asp:RequiredFieldValidator ID="rfvEmgName" runat="server" ErrorMessage="Emg Name"
-                                                            Text="Required" ControlToValidate="txtEmgName"></asp:RequiredFieldValidator>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
                                                         Location:
                                                     </td>
                                                     <td>
-                                                        <asp:DropDownList ID="ddlLocations" runat="server">
+                                                        <asp:DropDownList ID="ddlLocations" runat="server" Width="300px">
                                                         </asp:DropDownList>
                                                     </td>
                                                     <td>
@@ -202,4 +203,7 @@
             </td>
         </tr>
     </table>
+    <div style="display: none">
+        <asp:Button ID="btntest" runat="server" Width="1px" />
+    </div>
 </asp:Content>

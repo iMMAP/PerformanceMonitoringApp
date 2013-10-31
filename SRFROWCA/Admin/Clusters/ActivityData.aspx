@@ -154,7 +154,7 @@
         </tr>
     </table>
     <div style="overflow-x: auto; width: 100%">
-        <asp:GridView ID="gvData" runat="server" AutoGenerateColumns="false" AllowSorting="True" AllowPaging="true" PageSize="50"
+        <asp:GridView ID="gvData" runat="server" AutoGenerateColumns="false" AllowSorting="True" AllowPaging="true" PageSize="100"
             OnRowCommand="gvData_RowCommand" Width="100%" OnRowDataBound="gvData_RowDataBound"
             OnSorting="gvData_Sorting" OnPageIndexChanging="gvData_PageIndexChanging">
             <Columns>

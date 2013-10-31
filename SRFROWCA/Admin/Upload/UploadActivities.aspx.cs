@@ -7,6 +7,7 @@ using System.IO;
 using System.Web.Security;
 using System.Web.UI.WebControls;
 using BusinessLogic;
+using SRFROWCA.Common;
 
 namespace SRFROWCA.Admin.Upload
 {
@@ -48,14 +49,7 @@ namespace SRFROWCA.Admin.Upload
         // Populate Emergencies Drop down.
         private void PopulateLocationEmergencies()
         {
-            ddlEmergency.DataValueField = "LocationEmergencyId";
-            ddlEmergency.DataTextField = "EmergencyName";
-
-            ddlEmergency.DataSource = GetLocationEmergencies();
-            ddlEmergency.DataBind();
-
-            ListItem item = new ListItem("Select Emergency", "0");
-            ddlEmergency.Items.Insert(0, item);
+            UI.FillLocationEmergency(ddlEmergency, ROWCACommon.GetEmergencies(this.User));
         }
 
         // Get all emergencies.
@@ -201,6 +195,13 @@ namespace SRFROWCA.Admin.Upload
             sqlBulk.DestinationTableName = "TempData1";
             sqlBulk.WriteToServer(dt);
             sqlBulk.Close();
+        }
+
+        protected void Page_Error(object sender, EventArgs e)
+        {
+            // Get last error from the server
+            Exception exc = Server.GetLastError();
+            SRFROWCA.Common.ExceptionUtility.LogException(exc, "UploadActivities", this.User);
         }
     }
 }

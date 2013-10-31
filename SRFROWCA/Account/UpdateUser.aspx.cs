@@ -1,19 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Data;
-using SRFROWCA.Common;
-using BusinessLogic;
 using System.Web.Security;
+using System.Web.UI.WebControls;
+using BusinessLogic;
+using SRFROWCA.Common;
 using SRFROWCA.Reports;
 
 namespace SRFROWCA.Account
 {
     public partial class UpdateUser : System.Web.UI.Page
     {
+        protected void Page_PreInit(object sender, EventArgs e)
+        {
+            GZipContents.GZipOutput();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!this.User.IsInRole("Admin"))
@@ -22,6 +23,8 @@ namespace SRFROWCA.Account
             }
 
             if (IsPostBack) return;
+
+            this.Form.DefaultButton = this.btnUpdate.UniqueID;            
 
             PopulateCountries();
             PopulateOrganizations();
@@ -167,6 +170,13 @@ namespace SRFROWCA.Account
             string phone = txtPhone.Text.Trim().Length > 0 ? txtPhone.Text.Trim() : null;
 
             return new object[] { userId, orgId, countryId, phone, DBNull.Value };
+        }
+
+        protected void Page_Error(object sender, EventArgs e)
+        {
+            // Get last error from the server
+            Exception exc = Server.GetLastError();
+            SRFROWCA.Common.ExceptionUtility.LogException(exc, "UpdateUser", this.User);
         }
     }
 }

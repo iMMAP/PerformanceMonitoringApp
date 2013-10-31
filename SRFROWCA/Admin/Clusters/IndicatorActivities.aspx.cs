@@ -4,14 +4,22 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
+using SRFROWCA.Common;
 
 namespace SRFROWCA.Admin.Clusters
 {
     public partial class IndicatorActivities : System.Web.UI.Page
     {
+        protected void Page_PreInit(object sender, EventArgs e)
+        {
+            GZipContents.GZipOutput();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
+
+            this.Form.DefaultButton = this.btnAdd.UniqueID;
 
             LoadActivities();
             PopulateEmergencies();
@@ -40,14 +48,9 @@ namespace SRFROWCA.Admin.Clusters
 
         private void LoadActivities()
         {
-            gvActivity.DataSource = GetAllActivities();
+            gvActivity.DataSource = ROWCACommon.GetAllActivities(this.User);
             gvActivity.DataBind();
-        }
-
-        private DataTable GetAllActivities()
-        {
-            return DBContext.GetData("GetAllActivities");
-        }
+        }        
 
         // Add delete confirmation message with all delete buttons.
         protected void gvActivity_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -165,7 +168,7 @@ namespace SRFROWCA.Admin.Clusters
         protected void gvActivity_Sorting(object sender, GridViewSortEventArgs e)
         {
             //Retrieve the table from the session object.
-            DataTable dt = GetAllActivities();
+            DataTable dt = ROWCACommon.GetAllActivities(this.User);
             if (dt != null)
             {
                 //Sort the data.
@@ -207,20 +210,7 @@ namespace SRFROWCA.Admin.Clusters
 
         private void PopulateEmergencies()
         {
-            ddlLocEmergencies.DataValueField = "LocationEmergencyId";
-            ddlLocEmergencies.DataTextField = "EmergencyName";
-
-            ddlLocEmergencies.DataSource = GetEmergencies();
-            ddlLocEmergencies.DataBind();
-
-            ListItem item = new ListItem("Select Emergency", "0");
-            ddlLocEmergencies.Items.Insert(0, item);
-            ddlLocEmergencies.SelectedIndex = 0;
-        }
-
-        private DataTable GetEmergencies()
-        {
-            return DBContext.GetData("GetALLLocationEmergencies");
+            UI.FillLocationEmergency(ddlLocEmergencies, ROWCACommon.GetEmergencies(this.User));
         }
 
         protected void ddlLocEmergencies_SelectedIndexChanged(object sender, EventArgs e)
@@ -311,7 +301,7 @@ namespace SRFROWCA.Admin.Clusters
                 int activityTypeId = 0;
                 int.TryParse(ddlActivityType.SelectedValue, out activityTypeId);
 
-                Guid userId = (Guid)Membership.GetUser().ProviderUserKey;
+                Guid userId = ROWCACommon.GetCurrentUserId();
                 string activityName = txtActivity.Text.Trim();
                 if (!string.IsNullOrEmpty(hfPKId.Value))
                 {
@@ -353,5 +343,12 @@ namespace SRFROWCA.Admin.Clusters
         //        ViewState["PKId"] = value.ToString();
         //    }
         //}
+
+        protected void Page_Error(object sender, EventArgs e)
+        {
+            // Get last error from the server
+            Exception exc = Server.GetLastError();
+            SRFROWCA.Common.ExceptionUtility.LogException(exc, "IndicatorActivities", this.User);
+        }
     }
 }

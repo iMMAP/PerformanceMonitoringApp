@@ -4,14 +4,22 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
+using SRFROWCA.Common;
 
 namespace SRFROWCA.Admin.Emergency
 {
     public partial class EmergencyListing : System.Web.UI.Page
     {
+        protected void Page_PreInit(object sender, EventArgs e)
+        {
+            GZipContents.GZipOutput();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
+
+            this.Form.DefaultButton = this.btnAdd.UniqueID;
 
             LoadEmergencies();
             PopulateDisasterTypes();
@@ -36,14 +44,14 @@ namespace SRFROWCA.Admin.Emergency
         protected void gvEmergency_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             // If user click on Delete button.
-            if (e.CommandName == "DeleteOrg")
+            if (e.CommandName == "DeleteEmergency")
             {
                 int locEmgId = Convert.ToInt32(e.CommandArgument);
 
                 // Check if any IP has reported on this project. If so then do not delete it.
                 if (!EmgIsBeingUsed(locEmgId))
                 {
-                    lblMessage.Text = "Emergency cannot be deleted! It is being used.";
+                    lblMessage.Text = "Emergency cannot be deleted! It is being used in reported data.";
                     lblMessage.CssClass = "error-message";
                     lblMessage.Visible = true;
 
@@ -55,8 +63,10 @@ namespace SRFROWCA.Admin.Emergency
             }
 
             // Edit Project.
-            if (e.CommandName == "EditOrg")
+            if (e.CommandName == "EditEmergency")
             {
+                ClearPopupControls();
+
                 hfLocEmgId.Value = e.CommandArgument.ToString();
 
                 GridViewRow row = (((Control)e.CommandSource).NamingContainer) as GridViewRow;
@@ -72,10 +82,10 @@ namespace SRFROWCA.Admin.Emergency
                     ddlLocations.SelectedValue = lblLocationId.Text;
                 }
 
-                txtEmgName.Text = row.Cells[1].Text;
+                txtEmgName.Text = row.Cells[2].Text;                
                 mpeAddOrg.Show();
             }
-        }      
+        }
 
         private bool EmgIsBeingUsed(int locEmgId)
         {
@@ -91,7 +101,7 @@ namespace SRFROWCA.Admin.Emergency
         protected void gvEmergency_Sorting(object sender, GridViewSortEventArgs e)
         {
             //Retrieve the table from the session object.
-            DataTable dt = GetEmergencies();
+            DataTable dt = ROWCACommon.GetEmergencies(this.User);
             if (dt != null)
             {
                 //Sort the data.
@@ -133,13 +143,8 @@ namespace SRFROWCA.Admin.Emergency
 
         private void LoadEmergencies()
         {
-            gvEmergency.DataSource = GetEmergencies();
+            gvEmergency.DataSource = ROWCACommon.GetEmergencies(this.User);
             gvEmergency.DataBind();
-        }
-
-        private DataTable GetEmergencies()
-        {
-            return DBContext.GetData("GetAllLocationEmergencies");
         }
 
         private void PopulateDisasterTypes()
@@ -163,16 +168,17 @@ namespace SRFROWCA.Admin.Emergency
             ddlLocations.DataValueField = "LocationId";
             ddlLocations.DataTextField = "LocationName";
 
-            ddlLocations.DataSource = GetLocations();
+            ddlLocations.DataSource = ROWCACommon.GetLocations(this.User);
             ddlLocations.DataBind();
 
             ListItem item = new ListItem("Select Country", "0");
             ddlLocations.Items.Insert(0, item);
         }
 
-        private DataTable GetLocations()
+        protected void btnAddEmergency_Click(object sender, EventArgs e)
         {
-            return DBContext.GetData("GetLocationOnType", new object[] { (int)LocationTypes.Country });
+            ClearPopupControls();
+            mpeAddOrg.Show();
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)
@@ -207,7 +213,7 @@ namespace SRFROWCA.Admin.Emergency
             int.TryParse(ddlLocations.SelectedValue, out locId);
 
             string emgName = txtEmgName.Text.Trim();
-            Guid userId = (Guid)Membership.GetUser().ProviderUserKey;
+            Guid userId = ROWCACommon.GetCurrentUserId();
 
             if (!string.IsNullOrEmpty(hfLocEmgId.Value))
             {
@@ -225,5 +231,11 @@ namespace SRFROWCA.Admin.Emergency
             Country = 2,
         }
 
+        protected void Page_Error(object sender, EventArgs e)
+        {
+            // Get last error from the server
+            Exception exc = Server.GetLastError();
+            SRFROWCA.Common.ExceptionUtility.LogException(exc, "EmergencyListing", this.User);
+        }
     }
 }

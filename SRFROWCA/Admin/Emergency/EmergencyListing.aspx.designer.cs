@@ -76,24 +76,6 @@ namespace SRFROWCA.Admin.Emergency {
         protected global::System.Web.UI.UpdatePanel uPanel1;
         
         /// <summary>
-        /// ddlEmgType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEmgType;
-        
-        /// <summary>
-        /// rgvEmgType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rgvEmgType;
-        
-        /// <summary>
         /// txtEmgName control.
         /// </summary>
         /// <remarks>
@@ -110,6 +92,24 @@ namespace SRFROWCA.Admin.Emergency {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvEmgName;
+        
+        /// <summary>
+        /// ddlEmgType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlEmgType;
+        
+        /// <summary>
+        /// rgvEmgType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rgvEmgType;
         
         /// <summary>
         /// ddlLocations control.
@@ -164,5 +164,14 @@ namespace SRFROWCA.Admin.Emergency {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMessage2;
+        
+        /// <summary>
+        /// btntest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btntest;
     }
 }

@@ -4,14 +4,22 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
+using SRFROWCA.Common;
 
 namespace SRFROWCA.Admin.Clusters
 {
     public partial class ObjectiveIndicators : System.Web.UI.Page
     {
+        protected void Page_PreInit(object sender, EventArgs e)
+        {
+            GZipContents.GZipOutput();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
+
+            this.Form.DefaultButton = this.btnAdd.UniqueID;
 
             LoadIndicators();
             PopulateEmergencies();
@@ -95,7 +103,7 @@ namespace SRFROWCA.Admin.Clusters
         protected void gvIndicator_Sorting(object sender, GridViewSortEventArgs e)
         {
             //Retrieve the table from the session object.
-            DataTable dt = GetIndicators();
+            DataTable dt = ROWCACommon.GetIndicators(this.User);
             if (dt != null)
             {
                 //Sort the data.
@@ -137,31 +145,13 @@ namespace SRFROWCA.Admin.Clusters
 
         private void LoadIndicators()
         {
-            gvIndicator.DataSource = GetIndicators();
+            gvIndicator.DataSource = ROWCACommon.GetIndicators(this.User);
             gvIndicator.DataBind();
-        }
-
-        private DataTable GetIndicators()
-        {
-            return DBContext.GetData("GetAllIndicators");
         }
 
         private void PopulateEmergencies()
         {
-            ddlLocEmergencies.DataValueField = "LocationEmergencyId";
-            ddlLocEmergencies.DataTextField = "EmergencyName";
-
-            ddlLocEmergencies.DataSource = GetEmergencies();
-            ddlLocEmergencies.DataBind();
-
-            ListItem item = new ListItem("Select Emergency", "0");
-            ddlLocEmergencies.Items.Insert(0, item);
-            ddlEmgClusters.SelectedIndex = 0;
-        }
-
-        private DataTable GetEmergencies()
-        {
-            return DBContext.GetData("GetALLLocationEmergencies");
+            UI.FillLocationEmergency(ddlLocEmergencies, ROWCACommon.GetEmergencies(this.User));
         }
 
         protected void ddlLocEmergencies_SelectedIndexChanged(object sender, EventArgs e)
@@ -239,7 +229,7 @@ namespace SRFROWCA.Admin.Clusters
                 int clusterObjId = 0;
                 int.TryParse(ddlObjectives.SelectedValue, out clusterObjId);
 
-                Guid userId = (Guid)Membership.GetUser().ProviderUserKey;
+                Guid userId = ROWCACommon.GetCurrentUserId();
                 string indicatorName = txtIndicator.Text.Trim();
                 if (!string.IsNullOrEmpty(hfPKId.Value))
                 {
@@ -281,5 +271,12 @@ namespace SRFROWCA.Admin.Clusters
         //        ViewState["PKId1"] = value.ToString();
         //    }
         //}
+
+        protected void Page_Error(object sender, EventArgs e)
+        {
+            // Get last error from the server
+            Exception exc = Server.GetLastError();
+            SRFROWCA.Common.ExceptionUtility.LogException(exc, "ObjectiveIndicators", this.User);
+        }
     }
 }

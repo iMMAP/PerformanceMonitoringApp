@@ -4,17 +4,24 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
+using SRFROWCA.Common;
 
 namespace SRFROWCA.Admin.Clusters
 {
     public partial class ClusterObjectives : System.Web.UI.Page
     {
+        protected void Page_PreInit(object sender, EventArgs e)
+        {
+            GZipContents.GZipOutput();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
+            this.Form.DefaultButton = this.btnAdd.UniqueID;
 
-            LoadObjectives();
             PopulateEmergencies();
+            LoadObjectives();
         }
 
         // Add delete confirmation message with all delete buttons.
@@ -86,7 +93,7 @@ namespace SRFROWCA.Admin.Clusters
         protected void gvObjective_Sorting(object sender, GridViewSortEventArgs e)
         {
             //Retrieve the table from the session object.
-            DataTable dt = GetObjectives();
+            DataTable dt = ROWCACommon.GetObjectives(this.User);
             if (dt != null)
             {
                 //Sort the data.
@@ -128,31 +135,15 @@ namespace SRFROWCA.Admin.Clusters
 
         private void LoadObjectives()
         {
-            gvObjective.DataSource = GetObjectives();
+            gvObjective.DataSource = ROWCACommon.GetObjectives(this.User);
             gvObjective.DataBind();
         }
 
-        private DataTable GetObjectives()
-        {
-            return DBContext.GetData("GetAllObjectives");
-        }
+        
 
         private void PopulateEmergencies()
         {
-            ddlLocEmergencies.DataValueField = "LocationEmergencyId";
-            ddlLocEmergencies.DataTextField = "EmergencyName";
-
-            ddlLocEmergencies.DataSource = GetEmergencies();
-            ddlLocEmergencies.DataBind();
-
-            ListItem item = new ListItem("Select Emergency", "0");
-            ddlLocEmergencies.Items.Insert(0, item);
-            ddlEmgClusters.SelectedIndex = 0;
-        }
-
-        private DataTable GetEmergencies()
-        {
-            return DBContext.GetData("GetALLLocationEmergencies");
+            UI.FillLocationEmergency(ddlLocEmergencies, ROWCACommon.GetEmergencies(this.User));
         }
 
         protected void ddlLocEmergencies_SelectedIndexChanged(object sender, EventArgs e)
@@ -208,27 +199,20 @@ namespace SRFROWCA.Admin.Clusters
 
         private void SaveObjective()
         {
-            try
-            {
-                int emgClusterId = 0;
-                int.TryParse(ddlEmgClusters.SelectedValue, out emgClusterId);
+            int emgClusterId = 0;
+            int.TryParse(ddlEmgClusters.SelectedValue, out emgClusterId);
 
-                Guid userId = (Guid)Membership.GetUser().ProviderUserKey;
-                string objectiveName = txtObj.Text.Trim();
-                Server.HtmlEncode(objectiveName);
-                if(!string.IsNullOrEmpty(hfPKId.Value))
-                {
-                    int pkId = Convert.ToInt32(hfPKId.Value);
-                    DBContext.Update("UpdateObjective", new object[] { pkId, emgClusterId, objectiveName, userId, DBNull.Value });
-                }
-                else
-                {
-                     DBContext.Add("InsertObjective", new object[] { emgClusterId, objectiveName, userId, DBNull.Value });
-                }
-            }
-            catch
+            Guid userId = ROWCACommon.GetCurrentUserId();
+            string objectiveName = txtObj.Text.Trim();
+            Server.HtmlEncode(objectiveName);
+            if (!string.IsNullOrEmpty(hfPKId.Value))
             {
-                throw;
+                int pkId = Convert.ToInt32(hfPKId.Value);
+                DBContext.Update("UpdateObjective", new object[] { pkId, emgClusterId, objectiveName, userId, DBNull.Value });
+            }
+            else
+            {
+                DBContext.Add("InsertObjective", new object[] { emgClusterId, objectiveName, userId, DBNull.Value });
             }
         }
 
@@ -256,5 +240,12 @@ namespace SRFROWCA.Admin.Clusters
         //        ViewState["PKId"] = value.ToString();
         //    }
         //}
+
+        protected void Page_Error(object sender, EventArgs e)
+        {
+            // Get last error from the server
+            Exception exc = Server.GetLastError();
+            SRFROWCA.Common.ExceptionUtility.LogException(exc, "ClusterObjectives", this.User);
+        }
     }
 }

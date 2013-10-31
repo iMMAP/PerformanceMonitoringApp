@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" EnableEventValidation="false"
     CodeBehind="OrganizationListing.aspx.cs" Inherits="SRFROWCA.Admin.Organization.OrganizationListing" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
@@ -73,6 +73,9 @@
             <td>
                 <b>Search:</b>
                 <input type="text" id="txtSearch" class="searchFieldOrgs" />
+            </td>
+            <td>
+                <asp:Button ID="btnExportToExcel" runat="server" CausesValidation="false" Text="Export To Excel" onclick="btnExportToExcel_Click" />
             </td>
             <td align="right">
                 <asp:Button ID="btnAddOrganization" runat="server" Text="Add New Organization" />

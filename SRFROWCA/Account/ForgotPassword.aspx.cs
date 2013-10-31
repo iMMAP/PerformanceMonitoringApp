@@ -1,24 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.Security;
-using SRFROWCA.Common;
-using System.Security.Cryptography;
-using System.Text;
 using System.Configuration;
-using BusinessLogic;
 using System.Data;
+using System.Web.Security;
+using BusinessLogic;
+using SRFROWCA.Common;
 
 namespace SRFROWCA.Account
 {
     public partial class ForgotPassword : System.Web.UI.Page
     {
+        protected void Page_PreInit(object sender, EventArgs e)
+        {
+            GZipContents.GZipOutput();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
+
+            this.Form.DefaultButton = this.btnSubmit.UniqueID;
+            this.Form.DefaultFocus = this.txtUserName.UniqueID;
+
             if (Session["FromResetPageError"] != null)
             {
                 string msg = Session["FromResetPageError"].ToString();
@@ -68,12 +70,12 @@ namespace SRFROWCA.Account
                         else
                         {
                             Guid guid = Guid.NewGuid();
-                            string tempString = "";
+                            string tempString = "I8$pUs9\\";
                             if (ConfigurationManager.AppSettings["tempresetstring"] != null)
                             {
-                                tempString = ConfigurationManager.AppSettings["tempresetstring"].ToString();
+                                tempString += ConfigurationManager.AppSettings["tempresetstring"].ToString();
                             }
-                            string datetime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+                            string datetime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
                             string hash = ROWCACommon.GetHashString(guid + tempString + datetime);
                             SaveValuesInDB(mu.UserName, hash, guid, datetime);
@@ -194,6 +196,11 @@ namespace SRFROWCA.Account
             Mail.SendMail("admin@abc.com", toEmail, "New Password", mailBody);
         }
 
-
+        protected void Page_Error(object sender, EventArgs e)
+        {
+            // Get last error from the server
+            Exception exc = Server.GetLastError();
+            SRFROWCA.Common.ExceptionUtility.LogException(exc, "ForgotPassword", this.User);
+        }
     }
 }

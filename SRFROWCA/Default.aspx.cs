@@ -6,6 +6,7 @@ using System.Web.UI.WebControls;
 using BusinessLogic;
 using System.Web;
 using System.IO.Compression;
+using SRFROWCA.Common;
 
 namespace SRFROWCA
 {
@@ -13,10 +14,7 @@ namespace SRFROWCA
     {
         protected void Page_PreInit(object sender, EventArgs e)
         {
-            //HttpContext context = HttpContext.Current;
-            //context.Response.Filter = new GZipStream(context.Response.Filter, CompressionMode.Compress);
-            //HttpContext.Current.Response.AppendHeader("Content-encoding", "gzip");
-            //HttpContext.Current.Response.Cache.VaryByHeaders["Accept-encoding"] = true;
+            GZipContents.GZipOutput();
         }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -77,7 +75,7 @@ namespace SRFROWCA
             SQLPaging = PagingStatus.OFF;
             gvReport.AllowPaging = false;
             LoadData();
-            ExportGridView();
+            ExportUtility.ExportGridView(gvReport, "3WPMAllData", ".xls", Response);
         }
 
         #region DropDown SelectedIndexChanged.
@@ -395,98 +393,12 @@ namespace SRFROWCA
             return sortDirection;
         }
 
-        #endregion
-
-        #region Export To Excel
-        
-        private void ExportGridView()
-        {
-            string attachment = string.Format("attachment; filename=3WReport{0}.{1}", DateTime.Now.ToString("yyMMddhhmmss"), "xls");
-            Response.Clear();
-            Response.ClearHeaders();
-            Response.ClearContent();
-            Response.AddHeader("content-disposition", attachment);
-            Response.ContentType = "application/ms-excel";
-
-            Response.Write(RenderGrid().ToString());
-            Response.End();
-        }
-        private StringWriter RenderGrid()
-        {
-            //  Create a table to contain the grid
-            Table table = new Table();
-            StringWriter sw = new StringWriter();
-            HtmlTextWriter htw = new HtmlTextWriter(sw);
-
-            //  include the gridline settings
-            table.GridLines = gvReport.GridLines;
-
-            //  add the header row to the table
-            if (gvReport.HeaderRow != null)
-            {
-                PrepareControlForExport(gvReport.HeaderRow);
-                table.Rows.Add(gvReport.HeaderRow);
-            }
-
-            //  add each of the data rows to the table
-            foreach (GridViewRow row in gvReport.Rows)
-            {
-                PrepareControlForExport(row);
-                table.Rows.Add(row);
-            }
-
-            //  add the footer row to the table
-            if (gvReport.FooterRow != null)
-            {
-                PrepareControlForExport(gvReport.FooterRow);
-                table.Rows.Add(gvReport.FooterRow);
-            }
-
-            //  render the table into the htmlwriter
-            table.RenderControl(htw);
-
-            return sw;
-        }
-        private static void PrepareControlForExport(Control control)
-        {
-            for (int i = 0; i < control.Controls.Count; i++)
-            {
-                Control current = control.Controls[i];
-                if (current is LinkButton)
-                {
-                    control.Controls.Remove(current);
-                    control.Controls.AddAt(i, new LiteralControl((current as LinkButton).Text));
-                }
-                else if (current is ImageButton)
-                {
-                    control.Controls.Remove(current);
-                    control.Controls.AddAt(i, new LiteralControl((current as ImageButton).AlternateText));
-                }
-                else if (current is HyperLink)
-                {
-                    control.Controls.Remove(current);
-                    control.Controls.AddAt(i, new LiteralControl((current as HyperLink).Text));
-                }
-                else if (current is DropDownList)
-                {
-                    control.Controls.Remove(current);
-                    control.Controls.AddAt(i, new LiteralControl((current as DropDownList).SelectedItem.Text));
-                }
-                else if (current is CheckBox)
-                {
-                    control.Controls.Remove(current);
-                    control.Controls.AddAt(i, new LiteralControl((current as CheckBox).Checked ? "True" : "False"));
-                }
-
-                if (current.HasControls())
-                {
-                    PrepareControlForExport(current);
-                }
-            }
-        }
         public override void VerifyRenderingInServerForm(Control control) { }
-        
+
         #endregion
+
+
+        
         #endregion
 
         #region Properties & Enum

@@ -10,11 +10,13 @@
     <form id="form1" runat="server">
     <div>
         <h2>
-            404 Error Page</h2>
-        Standard error message suitable for file not found errors. The original exception
-        object is not available, but the original requested URL is in the query string.<br />
+            Page Not Found</h2>
+            <p>
+                Sorry but the page your are looking for cannot be found.
+            </p>
+
         <br />
-        Return to the <a href='~/Default.aspx'>Default Page</a>
+        Return to the <a href="../Default.aspx">Home Page</a>
     </div>
     </form>
 </body>

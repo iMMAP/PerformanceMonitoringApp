@@ -10,9 +10,16 @@ namespace SRFROWCA.Admin.Office
 {
     public partial class OfficeListing : System.Web.UI.Page
     {
+        protected void Page_PreInit(object sender, EventArgs e)
+        {
+            GZipContents.GZipOutput();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
+
+            this.Form.DefaultButton = this.btnAdd.UniqueID;
 
             LoadOffices();
             PopulateCountries();
@@ -93,7 +100,7 @@ namespace SRFROWCA.Admin.Office
 
         private void DeleteOffice(int officeId)
         {
-            Guid userId = (Guid)Membership.GetUser().ProviderUserKey;
+            Guid userId = ROWCACommon.GetCurrentUserId();
             DBContext.Delete("DeleteOffice", new object[] { officeId, userId, DBNull.Value });
         }
 
@@ -154,7 +161,7 @@ namespace SRFROWCA.Admin.Office
             }
             else if (ROWCACommon.IsCountryAdmin(this.User))
             {
-                Guid userId = (Guid)Membership.GetUser().ProviderUserKey;
+                Guid userId = ROWCACommon.GetCurrentUserId();
                 return DBContext.GetData("GetAllOfficesByPrincipal", new object[] { userId });
             }
 
@@ -166,8 +173,7 @@ namespace SRFROWCA.Admin.Office
             ddlCountry.DataValueField = "LocationId";
             ddlCountry.DataTextField = "LocationName";
 
-            int locationType = (int)LocationTypes.Country;
-            ddlCountry.DataSource = GetLocations(locationType);
+            ddlCountry.DataSource = ROWCACommon.GetLocations(this.User);
             ddlCountry.DataBind();
 
             ListItem item = new ListItem("Select Country", "0");
@@ -188,7 +194,7 @@ namespace SRFROWCA.Admin.Office
             ddlLocations.DataValueField = "LocationId";
             ddlLocations.DataTextField = "LocationName";
 
-            int locationType = (int)LocationTypes.Admin1;
+            int locationType = (int)ROWCACommon.LocationTypes.Governorate;
             ddlLocations.DataSource = GetLocationsOnParent(countryId, locationType);
             ddlLocations.DataBind();
 
@@ -199,21 +205,6 @@ namespace SRFROWCA.Admin.Office
         private object GetLocationsOnParent(int countryId, int locationType)
         {
             return DBContext.GetData("GetLocationOnParentAndType", new object[] { countryId, locationType });
-        }
-
-        private object GetLocations(int locationType)
-        {
-            if (ROWCACommon.IsAdmin(this.User))
-            {
-                return DBContext.GetData("GetLocationOnType", new object[] { locationType });
-            }
-            else if (ROWCACommon.IsCountryAdmin(this.User))
-            {
-                Guid userId = (Guid)Membership.GetUser().ProviderUserKey;
-                return DBContext.GetData("GetLocationOnTypeAndPrincipal", new object[] { locationType, userId });
-            }
-
-            return new DataTable();
         }
 
         private void PopulateOrganizations()
@@ -286,7 +277,7 @@ namespace SRFROWCA.Admin.Office
             int.TryParse(ddlLocations.SelectedValue, out locId);
 
             string officeName = txtOfficeName.Text.Trim();
-            Guid userId = (Guid)Membership.GetUser().ProviderUserKey;
+            Guid userId = ROWCACommon.GetCurrentUserId();
 
             if (!string.IsNullOrEmpty(hfOfficeId.Value))
             {
@@ -299,10 +290,11 @@ namespace SRFROWCA.Admin.Office
             }
         }
 
-        enum LocationTypes
+        protected void Page_Error(object sender, EventArgs e)
         {
-            Country = 2,
-            Admin1 = 3,
+            // Get last error from the server
+            Exception exc = Server.GetLastError();            
+            ExceptionUtility.LogException(exc, "OfficeListing", this.User);
         }
     }
 }

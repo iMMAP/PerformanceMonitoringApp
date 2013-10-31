@@ -105,6 +105,9 @@ namespace SRFROWCA.Common
             ddl.DataTextField = "EmergencyName";
             ddl.DataSource = dt;
             ddl.DataBind();
+            ListItem item = new ListItem("Select Emergency", "0");
+            ddl.Items.Insert(0, item);
+            ddl.SelectedIndex = 0;
         }
     }
 }

@@ -9,8 +9,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using SRFROWCA.Common;
-using System.Web;
-using System.IO.Compression;
 
 namespace SRFROWCA.Pages
 {
@@ -18,10 +16,7 @@ namespace SRFROWCA.Pages
     {
         protected void Page_PreInit(object sender, EventArgs e)
         {
-            HttpContext context = HttpContext.Current;
-            context.Response.Filter = new GZipStream(context.Response.Filter, CompressionMode.Compress);
-            HttpContext.Current.Response.AppendHeader("Content-encoding", "gzip");
-            HttpContext.Current.Response.Cache.VaryByHeaders["Accept-encoding"] = true;
+            GZipContents.GZipOutput();
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -30,6 +25,8 @@ namespace SRFROWCA.Pages
             {
                 PopulateDropDowns();
             }
+
+            this.Form.DefaultButton = this.btnSave.UniqueID;
 
             string controlName = GetPostBackControlId(this);
             if (controlName == "ddlMonth" || controlName == "ddlOffice")
@@ -586,7 +583,7 @@ namespace SRFROWCA.Pages
             string locationIds = GetSelectedLocationIds();
             string locIdsNotIncluded = GetNotSelectedLocationIds();
 
-            Guid userId = (Guid)Membership.GetUser().ProviderUserKey;
+            Guid userId = ROWCACommon.GetCurrentUserId();
             DataTable dt = DBContext.GetData("GetIPData", new object[] { locEmergencyId, locationIds, officeId, yearId, monthId, locIdsNotIncluded, userId });
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
@@ -643,7 +640,7 @@ namespace SRFROWCA.Pages
 
         private DataTable GetUserDetails()
         {
-            Guid userGuid = (Guid)Membership.GetUser().ProviderUserKey;
+            Guid userGuid = ROWCACommon.GetCurrentUserId();
             return DBContext.GetData("GetUserDetails", new object[] { userGuid });
         }
 
@@ -788,7 +785,7 @@ namespace SRFROWCA.Pages
             int monthId = Convert.ToInt32(ddlMonth.SelectedValue);
             int reportFrequencyId = 1;
             //int emergencyClusterId = Convert.ToInt32(ddlEmergency.SelectedValue);
-            Guid loginUserId = (Guid)Membership.GetUser().ProviderUserKey;
+            Guid loginUserId = ROWCACommon.GetCurrentUserId();
 
             ReportId = DBContext.Add("InsertReport", new object[] { reportName, officeId, yearId, monthId, locEmergencyId, reportFrequencyId, loginUserId, DBNull.Value });
         }
@@ -971,7 +968,7 @@ namespace SRFROWCA.Pages
 
                                 if (!(valToSaveA == null && valToSaveT == null))
                                 {
-                                    Guid loginUserId = (Guid)Membership.GetUser().ProviderUserKey;
+                                    Guid loginUserId = ROWCACommon.GetCurrentUserId();
                                     int newReportDetailId = DBContext.Add("InsertReportDetails",
                                                                             new object[] { ReportId, activityDataId, locationIdToSaveT, 
                                                                                             valToSaveT, valToSaveA, 1, loginUserId, DBNull.Value });
@@ -1002,7 +999,7 @@ namespace SRFROWCA.Pages
 
             int monthId = 0;
             int.TryParse(ddlMonth.SelectedValue, out monthId);
-            Guid userId = (Guid)Membership.GetUser().ProviderUserKey;
+            Guid userId = ROWCACommon.GetCurrentUserId();
 
             DataTable dtReport = DBContext.GetData("GetReportId", new object[] { officeId, locEmergencyId, yearId, monthId, userId });
             if (dtReport.Rows.Count > 0)
@@ -1041,6 +1038,13 @@ namespace SRFROWCA.Pages
                     }
                 }
             }
+        }
+
+        protected void Page_Error(object sender, EventArgs e)
+        {
+            // Get last error from the server
+            Exception exc = Server.GetLastError();
+            SRFROWCA.Common.ExceptionUtility.LogException(exc, "AddActivites", this.User);
         }
 
         #endregion
@@ -1173,8 +1177,9 @@ namespace SRFROWCA.Pages
         {
             TextBox l = (TextBox)sender;
             l.ID = columnName;
+            l.MaxLength = 12;
             GridViewRow row = (GridViewRow)l.NamingContainer;
             l.Text = DataBinder.Eval(row.DataItem, columnName).ToString();
-        }
+        }        
     }
 }

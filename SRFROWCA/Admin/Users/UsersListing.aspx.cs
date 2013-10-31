@@ -11,9 +11,15 @@ namespace SRFROWCA.Admin.Users
 {
     public partial class UsersListing : System.Web.UI.Page
     {
+        protected void Page_PreInit(object sender, EventArgs e)
+        {
+            GZipContents.GZipOutput();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
+            this.Form.DefaultButton = this.btnAddUser.UniqueID;
             LoadUsers();
         }
 
@@ -32,7 +38,7 @@ namespace SRFROWCA.Admin.Users
 
         private object[] GetParameters()
         {
-            Guid userId = (Guid)Membership.GetUser().ProviderUserKey;
+            Guid userId = ROWCACommon.GetCurrentUserId();
             string userName = null;
             string email = null;
             int? isApproved = null;
@@ -122,25 +128,12 @@ namespace SRFROWCA.Admin.Users
 
         protected void btnExportExcel_Click(object sender, EventArgs e)
         {
-            ExportUtility.PrepareGridViewForExport(gvUsers);
-            ExportGridView();
+            string fileName = "3WPMusers";
+            string fileExtention = ".xls";
+            ExportUtility.ExportGridView(gvUsers, fileName, fileExtention, Response);            
         }
 
         public override void VerifyRenderingInServerForm(Control control) { }
-
-        private void ExportGridView()
-        {
-            string attachment = "attachment; filename=3wopusers.xls";
-            Response.ClearContent();
-            Response.AddHeader("content-disposition", attachment);
-            Response.ContentType = "application/ms-excel";
-            StringWriter sw = new StringWriter();
-            HtmlTextWriter htw = new HtmlTextWriter(sw);
-
-            gvUsers.RenderControl(htw);
-            Response.Write(sw.ToString());
-            Response.End();
-        }
 
         protected void gvUsers_Sorting(object sender, GridViewSortEventArgs e)
         {
@@ -194,6 +187,13 @@ namespace SRFROWCA.Admin.Users
         protected void btnAddUser_Click(object sender, GridViewPageEventArgs e)
         {
             Response.Redirect("~/Account/Register.aspx");
+        }
+
+        protected void Page_Error(object sender, EventArgs e)
+        {
+            // Get last error from the server
+            Exception exc = Server.GetLastError();
+            SRFROWCA.Common.ExceptionUtility.LogException(exc, "UsersListing", this.User);
         }
     }
 }

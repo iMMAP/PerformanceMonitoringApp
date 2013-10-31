@@ -122,7 +122,7 @@
     </table>
     <div style="overflow-x: auto; width: 100%">
         <asp:GridView ID="gvIndicator" runat="server" AutoGenerateColumns="false" AllowSorting="True"
-            AllowPaging="true" PageSize="50" OnRowCommand="gvIndicator_RowCommand" Width="100%"
+            AllowPaging="true" PageSize="100" OnRowCommand="gvIndicator_RowCommand" Width="100%"
             OnRowDataBound="gvIndicator_RowDataBound" OnSorting="gvIndicator_Sorting" OnPageIndexChanging="gvIndicator_PageIndexChanging">
             <Columns>
                 <asp:TemplateField ItemStyle-CssClass="rownum" ItemStyle-Width="2%" HeaderText="#">

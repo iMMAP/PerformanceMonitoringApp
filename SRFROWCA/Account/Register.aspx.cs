@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.Security;
-using BusinessLogic;
 using System.Data;
+using System.Web.Security;
+using System.Web.UI.WebControls;
+using BusinessLogic;
 using SRFROWCA.Common;
 using SRFROWCA.Reports;
 
@@ -14,8 +10,15 @@ namespace SRFROWCA.Account
 {
     public partial class Register : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected void Page_PreInit(object sender, EventArgs e)
         {
+            GZipContents.GZipOutput();
+        }
+
+        protected void Page_Load(object sender, EventArgs e)
+        {            
+            if (IsPostBack) return;
+
             if (!this.User.IsInRole("Admin"))
             {
                 divUserRoles.Visible = false;
@@ -23,13 +26,9 @@ namespace SRFROWCA.Account
                 ltrlLocation.Visible = false;
             }
 
-            if (IsPostBack) return;
+            this.Form.DefaultButton = this.btnRegister.UniqueID;
+            this.Form.DefaultFocus = this.txtUserName.UniqueID;
 
-            MembershipUser mu = Membership.GetUser("admin1");
-            string password = mu.ResetPassword();
-            ////string password = mu.GetPassword();
-            //string password = Membership.GeneratePassword(6, 0);
-            
             PopulateCountries();
             PopulateOrganizations();
 
@@ -37,13 +36,13 @@ namespace SRFROWCA.Account
             {
                 GetUserInformation();
             }
-        }       
+        }
 
         private void GetUserInformation()
         {
             //Guid userId = new Guid(UserId);
             //MembershipUser mu = Membership.GetUser(userId);
-            
+
             ////Membership.UpdateUser(mu);            
             //txtUserName.Text = mu.UserName;
             //txt
@@ -151,7 +150,7 @@ namespace SRFROWCA.Account
             ddlCountry.DataValueField = "LocationId";
             ddlCountry.DataTextField = "LocationName";
 
-            DataTable dt = GetCountries();
+            DataTable dt = ROWCACommon.GetLocations(this.User);
             ddlCountry.DataSource = dt;
             ddlCountry.DataBind();
 
@@ -162,15 +161,7 @@ namespace SRFROWCA.Account
             ddlLocations.DataTextField = "LocationName";
             ddlLocations.DataSource = dt;
             ddlLocations.DataBind();
-        }
-
-        private DataTable GetCountries()
-        {
-            int locationType = (int)ROWCACommon.LocationTypes.National;
-            DataTable dt = DBContext.GetData("GetLocationOnType", new object[] { locationType });
-
-            return dt.Rows.Count > 0 ? dt : new DataTable();
-        }
+        }        
 
         // Populate countries drop down.
         private void PopulateOrganizations()
@@ -314,6 +305,13 @@ namespace SRFROWCA.Account
             {
                 ViewState["EditUserId"] = value.ToString();
             }
+        }
+
+        protected void Page_Error(object sender, EventArgs e)
+        {
+            // Get last error from the server
+            Exception exc = Server.GetLastError();
+            SRFROWCA.Common.ExceptionUtility.LogException(exc, "Register", this.User);
         }
     }
 }

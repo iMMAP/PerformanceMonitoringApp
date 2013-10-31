@@ -107,7 +107,7 @@
         </tr>
     </table>
     <div style="overflow-x: auto; width: 100%">
-        <asp:GridView ID="gvObjective" runat="server" AutoGenerateColumns="false" AllowSorting="True" AllowPaging="true" PageSize="50"
+        <asp:GridView ID="gvObjective" runat="server" AutoGenerateColumns="false" AllowSorting="True" AllowPaging="true" PageSize="100"
             OnRowCommand="gvObjective_RowCommand" Width="100%" OnRowDataBound="gvObjective_RowDataBound"
             OnSorting="gvObjective_Sorting" OnPageIndexChanging="gvObjective_PageIndexChanging">
             <Columns>

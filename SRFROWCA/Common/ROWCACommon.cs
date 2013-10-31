@@ -5,33 +5,39 @@ using System.Web;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Web.UI.WebControls;
+using System.Web.UI;
+using System.Data;
+using BusinessLogic;
+using System.Security.Principal;
+using System.Web.Security;
 
 namespace SRFROWCA.Common
 {
     public class ROWCACommon
     {
-        internal static bool IsInAdminRoles(System.Security.Principal.IPrincipal iPrincipal)
+        internal static bool IsInAdminRoles(IPrincipal iPrincipal)
         {
             if (IsAdmin(iPrincipal) || IsCountryAdmin(iPrincipal))
                 return true;
             return false;
         }
 
-        internal static bool IsAdmin(System.Security.Principal.IPrincipal iPrincipal)
+        internal static bool IsAdmin(IPrincipal iPrincipal)
         {
             if (iPrincipal.IsInRole("Admin"))
                 return true;
             return false;
         }
 
-        internal static bool IsCountryAdmin(System.Security.Principal.IPrincipal iPrincipal)
+        internal static bool IsCountryAdmin(IPrincipal iPrincipal)
         {
             if (iPrincipal.IsInRole("CountryAdmin"))
                 return true;
             return false;
         }
 
-        internal static bool IsAuthenticated(System.Security.Principal.IPrincipal iPrincipal)
+        internal static bool IsAuthenticated(IPrincipal iPrincipal)
         {
             return iPrincipal.Identity.IsAuthenticated;
         }
@@ -94,6 +100,98 @@ namespace SRFROWCA.Common
             {
                 HttpContext.Current.Session["DataInserted"] = value;
             }
+        }
+
+        internal static DataTable GetLocations(IPrincipal user)
+        {
+            int locationType = (int)LocationTypes.National;
+            DataTable dt = new DataTable();
+
+            if (!user.Identity.IsAuthenticated || IsAdmin(user))
+            {
+                dt = DBContext.GetData("GetLocationOnType", new object[] { locationType });
+            }
+            else if (IsCountryAdmin(user))
+            {
+                Guid userId = GetCurrentUserId();
+                dt = DBContext.GetData("GetLocationOnTypeAndPrincipal", new object[] { locationType, userId });
+            }
+
+            return dt;
+        }
+
+        internal static DataTable GetEmergencies(IPrincipal user)
+        {
+            DataTable dt = new DataTable();
+            if (IsCountryAdmin(user))
+            {
+                Guid userId = GetCurrentUserId();
+                dt = DBContext.GetData("GetLocationEmergenciesOfUser", new object[] { userId });
+            }
+            else
+            {
+                dt = DBContext.GetData("GetAllLocationEmergencies");
+            }
+
+            return dt;
+        }
+
+        internal static DataTable GetObjectives(IPrincipal user)
+        {
+            if (ROWCACommon.IsAdmin(user))
+            {
+                return DBContext.GetData("GetAllObjectives");
+            }
+            else
+            {
+                Guid userId = GetCurrentUserId();
+                return DBContext.GetData("GetAllObjectivesOfUser", new object[] { userId });
+            }
+        }
+
+        internal static DataTable GetIndicators(IPrincipal user)
+        {
+
+            if (IsAdmin(user))
+            {
+                return DBContext.GetData("GetAllIndicators");
+            }
+            else
+            {
+                Guid userId = GetCurrentUserId();
+                return DBContext.GetData("GetAllIndicatorsOfUser", new object[] { userId });
+            }
+        }
+
+        internal static DataTable GetAllActivities(IPrincipal user)
+        {
+            if (IsAdmin(user))
+            {
+                return DBContext.GetData("GetAllActivities");
+            }
+            else
+            {
+                Guid userId = GetCurrentUserId();
+                return DBContext.GetData("GetAllActivitiesOfUser", new object[] { userId });
+            }
+        }
+
+        internal static DataTable GetAllFrameWorkData(IPrincipal user)
+        {
+            if (IsAdmin(user))
+            {
+                return DBContext.GetData("GetAllData");
+            }
+            else
+            {
+                Guid userId = GetCurrentUserId();
+                return DBContext.GetData("GetAllFrameWorkDataOfUser", new object[] { userId });
+            }
+        }
+
+        public static Guid GetCurrentUserId()
+        {
+            return (Guid)Membership.GetUser().ProviderUserKey;
         }
 
         public static string ErrorMessage

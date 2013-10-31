@@ -4,14 +4,21 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
+using SRFROWCA.Common;
 
 namespace SRFROWCA.Admin.Organization
 {
     public partial class OrganizationListing : System.Web.UI.Page
     {
+        protected void Page_PreInit(object sender, EventArgs e)
+        {
+            GZipContents.GZipOutput();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
+            //this.Form.DefaultButton = this.btnAdd.UniqueID;
 
             // Populate grid with organizations
             PopulateOrganizations();
@@ -45,7 +52,7 @@ namespace SRFROWCA.Admin.Organization
                 // Check if any IP has reported on this project. If so then do not delete it.
                 if (AnyIPReportedOnOrg(orgId))
                 {
-                    lblMessage.Text = "Organization cannot be deleted! It is being used Offices and/or Reports.";
+                    lblMessage.Text = "Organization cannot be deleted! It is being used in Offices and/or Reports.";
                     lblMessage.CssClass = "error-message";
                     lblMessage.Visible = true;
 
@@ -195,7 +202,7 @@ namespace SRFROWCA.Admin.Organization
             int.TryParse(ddlOrgTypes.SelectedValue, out orgTypeId);
             string orgName = txtOrgName.Text.Trim();
             string orgAcronym = txtOrgAcronym.Text.Trim();
-            Guid userId = (Guid)Membership.GetUser().ProviderUserKey;
+            Guid userId = ROWCACommon.GetCurrentUserId();
 
             if (!string.IsNullOrEmpty(hfOrgId.Value))
             {
@@ -215,6 +222,30 @@ namespace SRFROWCA.Admin.Organization
             gvOrgs.PageIndex = e.NewPageIndex;
             gvOrgs.SelectedIndex = -1;
             PopulateOrganizations();
-        } 
+        }
+
+        protected void btnExportToExcel_Click(object sender, EventArgs e)
+        {
+            string fileName = "3WPMorgs";
+            string fileExtention = ".xls";
+            gvOrgs.AllowSorting = false;
+            ExportUtility.ExportGridView(gvOrgs, fileName, fileExtention, Response);
+            gvOrgs.AllowSorting = false;
+        }
+
+        public override void VerifyRenderingInServerForm(Control control) { }
+
+        //public override void VerifyRenderingInServerForm(Control control)
+        //{
+        //    /* Confirms that an HtmlForm control is rendered for the specified ASP.NET
+        //       server control at run time. */
+        //}
+
+        protected void Page_Error(object sender, EventArgs e)
+        {
+            // Get last error from the server
+            Exception exc = Server.GetLastError();
+            SRFROWCA.Common.ExceptionUtility.LogException(exc, "OrganizationListing", this.User);
+        }
     }
 }

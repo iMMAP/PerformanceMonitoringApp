@@ -11,10 +11,15 @@ namespace SRFROWCA.Pages
 {
     public partial class SelectActivities : System.Web.UI.Page
     {
+        protected void Page_PreInit(object sender, EventArgs e)
+        {
+            GZipContents.GZipOutput();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
-
+            
             PopulateDropDowns();
             LoadClusters();
         }
@@ -241,7 +246,7 @@ namespace SRFROWCA.Pages
             int officeId = 0;
             int.TryParse(ddlOffice.SelectedValue, out officeId);
 
-            Guid userId = (Guid)Membership.GetUser().ProviderUserKey;
+            Guid userId = ROWCACommon.GetCurrentUserId();
             if (emgLocationId > 0 && officeId > 0)
             {
                 return DBContext.GetData("GetIPActivities", new object[] { emgLocationId, officeId, userId });
@@ -251,7 +256,7 @@ namespace SRFROWCA.Pages
         }
         private DataTable GetUserDetails()
         {
-            Guid userGuid = (Guid)Membership.GetUser().ProviderUserKey;
+            Guid userGuid = ROWCACommon.GetCurrentUserId();
             return DBContext.GetData("GetUserDetails", new object[] { userGuid });
         }
         private void AddActivity(GridViewRow row)
@@ -318,7 +323,7 @@ namespace SRFROWCA.Pages
 
             int officeId = 0;
             int.TryParse(ddlOffice.SelectedValue, out officeId);
-            Guid userId = (Guid)Membership.GetUser().ProviderUserKey;
+            Guid userId = ROWCACommon.GetCurrentUserId();
 
             DBContext.Delete("DeleteActivityData", new object[] { emgLocId, officeId, dataId, userId, DBNull.Value });
         }
@@ -329,7 +334,7 @@ namespace SRFROWCA.Pages
 
             int officeId = 0;
             int.TryParse(ddlOffice.SelectedValue, out officeId);
-            Guid userId = (Guid)Membership.GetUser().ProviderUserKey;
+            Guid userId = ROWCACommon.GetCurrentUserId();
 
             DBContext.Add("InsertActivityData", new object[] { emgLocId, officeId, activityId, userId, DBNull.Value });
         }
@@ -345,6 +350,13 @@ namespace SRFROWCA.Pages
             updMessage.Update();
             ScriptManager.RegisterClientScriptBlock(this.Page, typeof(Page), UniqueID, "$('#" + lblMessage.ClientID.ToString() + "').fadeOut(3000, function() {});", true);
             return;
+        }
+
+        protected void Page_Error(object sender, EventArgs e)
+        {
+            // Get last error from the server
+            Exception exc = Server.GetLastError();
+            SRFROWCA.Common.ExceptionUtility.LogException(exc, "SelectActivities", this.User);
         }
     }
 }

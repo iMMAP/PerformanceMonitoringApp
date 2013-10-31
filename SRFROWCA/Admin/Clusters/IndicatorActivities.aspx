@@ -148,7 +148,7 @@
     </table>
     <div style="overflow-x: auto; width: 100%">
         <asp:GridView ID="gvActivity" runat="server" AutoGenerateColumns="false" AllowSorting="True"
-            AllowPaging="true" PageSize="50" OnRowCommand="gvActivity_RowCommand" Width="100%"
+            AllowPaging="true" PageSize="100" OnRowCommand="gvActivity_RowCommand" Width="100%"
             OnRowDataBound="gvActivity_RowDataBound" OnSorting="gvActivity_Sorting" OnPageIndexChanging="gvActivity_PageIndexChanging">
             <Columns>
                 <asp:TemplateField ItemStyle-CssClass="rownum" ItemStyle-Width="2%" HeaderText="#">

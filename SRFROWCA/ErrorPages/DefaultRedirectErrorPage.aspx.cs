@@ -14,10 +14,7 @@ namespace SRFROWCA.ErrorPages
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Log the exception and notify system operators
-            ex = new HttpException("defaultRedirect");
-            ExceptionUtility.LogException(ex, "Caught in DefaultRedirectErrorPage");
-            ExceptionUtility.NotifySystemOps(ex);
+            
         }
     }
 }

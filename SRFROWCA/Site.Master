@@ -3,11 +3,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head runat="server">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
     <title>3W Activities</title>
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
     <link href="~/Styles/Site.min.css" rel="stylesheet" type="text/css" />
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script type="text/javascript" src="<%# BaseURL %>/Scripts/jquery.kiketable.colsizable-1.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="<%# BaseURL %>/Scripts/jquery.kiketable.colsizable-1.1.js"></script>
     <script type="text/javascript" src="<%# BaseURL %>/Scripts/jquery.event.drag-1.4.min.js"></script>
+    <script type="text/javascript" src="<%# BaseURL %>/Scripts/hc/highcharts.js"></script>
     <style type="text/css">
         .ddlWidth
         {
@@ -24,7 +28,8 @@
     <div class="page">
         <div class="header">
             <div class="title">
-                <h2>3W Performance Monitoring</h2>
+                <h2>
+                    3W Performance Monitoring</h2>
             </div>
             <div class="loginDisplay">
                 <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">

@@ -1,24 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using System.Configuration;
 using System.Data;
+using System.Web.Security;
 using BusinessLogic;
 using SRFROWCA.Common;
-using System.Configuration;
-using System.Web.Security;
 
 namespace SRFROWCA.Account
 {
     public partial class Reset : System.Web.UI.Page
     {
+        protected void Page_PreInit(object sender, EventArgs e)
+        {
+            GZipContents.GZipOutput();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
                 if (IsPostBack) return;
+
+                this.Form.DefaultButton = this.btnSubmit.UniqueID;
+                this.Form.DefaultFocus = this.txtPassword.UniqueID;
 
                 if (Request.QueryString["key"] == null)
                 {
@@ -96,12 +99,12 @@ namespace SRFROWCA.Account
         private bool IsHashMatched(DataTable dt)
         {
             string guid = dt.Rows[0]["LinkGUID"].ToString();
-            string date = Convert.ToDateTime(dt.Rows[0]["LinkGeneratedDate"]).ToString("yyyy-MM-dd hh:mm:ss");
+            string date = Convert.ToDateTime(dt.Rows[0]["LinkGeneratedDate"]).ToString("yyyy-MM-dd HH:mm:ss");
 
-            string tempString = "";
+            string tempString = "I8$pUs9\\";
             if (ConfigurationManager.AppSettings["tempresetstring"] != null)
             {
-                tempString = ConfigurationManager.AppSettings["tempresetstring"].ToString();
+                tempString += ConfigurationManager.AppSettings["tempresetstring"].ToString();
             }
 
             string hash = ROWCACommon.GetHashString(guid + tempString + date);
@@ -120,6 +123,13 @@ namespace SRFROWCA.Account
             lblMessage.Visible = true;
             lblMessage.CssClass = css;
             lblMessage.Text = message;
+        }
+
+        protected void Page_Error(object sender, EventArgs e)
+        {
+            // Get last error from the server
+            Exception exc = Server.GetLastError();
+            SRFROWCA.Common.ExceptionUtility.LogException(exc, "Reset", this.User);
         }
     }
 }
