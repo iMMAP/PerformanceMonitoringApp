@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SRFROWCA.Admin.Clusters {
+namespace SRFROWCA.Admin.Organization {
     
     
-    public partial class ClusterObjectives {
+    public partial class OrgListing {
         
         /// <summary>
         /// updMessage control.
@@ -31,85 +31,121 @@ namespace SRFROWCA.Admin.Clusters {
         protected global::System.Web.UI.WebControls.Label lblMessage;
         
         /// <summary>
-        /// ddlLocEmergencies control.
+        /// btnExportToExcel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlLocEmergencies;
+        protected global::System.Web.UI.WebControls.Button btnExportToExcel;
         
         /// <summary>
-        /// rgvEmg control.
+        /// btnAddOrganization control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rgvEmg;
+        protected global::System.Web.UI.WebControls.Button btnAddOrganization;
         
         /// <summary>
-        /// ddlEmgClusters control.
+        /// gvOrgs control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEmgClusters;
+        protected global::System.Web.UI.WebControls.GridView gvOrgs;
         
         /// <summary>
-        /// rfvCluster control.
+        /// mpeAddOrg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCluster;
+        protected global::AjaxControlToolkit.ModalPopupExtender mpeAddOrg;
         
         /// <summary>
-        /// ddlStrObjectives control.
+        /// pnlOrg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlStrObjectives;
+        protected global::System.Web.UI.WebControls.Panel pnlOrg;
         
         /// <summary>
-        /// rfvStrObj control.
+        /// uPanel1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvStrObj;
+        protected global::System.Web.UI.UpdatePanel uPanel1;
         
         /// <summary>
-        /// txtObj control.
+        /// ddlOrgTypes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtObj;
+        protected global::System.Web.UI.WebControls.DropDownList ddlOrgTypes;
         
         /// <summary>
-        /// rfvObjective control.
+        /// rgvOrgType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvObjective;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rgvOrgType;
         
         /// <summary>
-        /// hfPKId control.
+        /// txtOrgName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfPKId;
+        protected global::System.Web.UI.WebControls.TextBox txtOrgName;
+        
+        /// <summary>
+        /// rfvOrgName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvOrgName;
+        
+        /// <summary>
+        /// txtOrgAcronym control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtOrgAcronym;
+        
+        /// <summary>
+        /// rfvOrgAcronym control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvOrgAcronym;
+        
+        /// <summary>
+        /// hfOrgId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfOrgId;
         
         /// <summary>
         /// btnAdd control.
@@ -121,12 +157,21 @@ namespace SRFROWCA.Admin.Clusters {
         protected global::System.Web.UI.WebControls.Button btnAdd;
         
         /// <summary>
-        /// gvObjective control.
+        /// btnClose control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvObjective;
+        protected global::System.Web.UI.WebControls.Button btnClose;
+        
+        /// <summary>
+        /// lblMessage2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMessage2;
     }
 }

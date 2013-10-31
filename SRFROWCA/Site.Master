@@ -61,6 +61,8 @@
                         </asp:MenuItem>
                         <asp:MenuItem NavigateUrl="~/Admin/Clusters/EmergencyClusters.aspx" Text="Clusters">
                         </asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/Admin/Clusters/StrategicObjectives.aspx" Text="Str Objectives">
+                        </asp:MenuItem>
                         <asp:MenuItem NavigateUrl="~/Admin/Clusters/ClusterObjectives.aspx" Text="Objectives">
                         </asp:MenuItem>
                         <asp:MenuItem NavigateUrl="~/Admin/Clusters/ObjectiveIndicators.aspx" Text="Indicators">

@@ -127,6 +127,7 @@
     <Content Include="Admin\Clusters\EmergencyClusters.aspx" />
     <Content Include="Admin\Clusters\IndicatorActivities.aspx" />
     <Content Include="Admin\Clusters\ObjectiveIndicators.aspx" />
+    <Content Include="Admin\Clusters\StrategicObjectives.aspx" />
     <Content Include="Admin\DataFeeds\AdminDataFeeds.aspx" />
     <Content Include="Admin\Emergency\EmergencyListing.aspx" />
     <Content Include="Admin\Office\OfficeListing.aspx" />
@@ -377,6 +378,13 @@
     </Compile>
     <Compile Include="Admin\Clusters\ObjectiveIndicators.aspx.designer.cs">
       <DependentUpon>ObjectiveIndicators.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Clusters\StrategicObjectives.aspx.cs">
+      <DependentUpon>StrategicObjectives.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Clusters\StrategicObjectives.aspx.designer.cs">
+      <DependentUpon>StrategicObjectives.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\DataFeeds\Admin1Feed.ashx.cs">
       <DependentUpon>Admin1Feed.ashx</DependentUpon>

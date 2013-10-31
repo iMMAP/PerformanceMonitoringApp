@@ -136,6 +136,19 @@ namespace SRFROWCA.Common
             return dt;
         }
 
+        internal static DataTable GetStrategicObjectives(IPrincipal user)
+        {
+            if (ROWCACommon.IsAdmin(user))
+            {
+                return DBContext.GetData("GetAllStrategicObjectives");
+            }
+            else
+            {
+                Guid userId = GetCurrentUserId();
+                return DBContext.GetData("GetAllStrategicObjectivesOfUser", new object[] { userId });
+            }
+        }
+
         internal static DataTable GetObjectives(IPrincipal user)
         {
             if (ROWCACommon.IsAdmin(user))

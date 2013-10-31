@@ -73,6 +73,9 @@ namespace SRFROWCA
                     if (menuItem.Text == "Clusters")
                         adminItems.Add(menuItem);
 
+                    if (menuItem.Text == "Str Objectives")
+                        adminItems.Add(menuItem);
+
                     if (menuItem.Text == "Objectives")
                         adminItems.Add(menuItem);
 
@@ -125,6 +128,9 @@ namespace SRFROWCA
                 if (menuItem.Text == "Clusters")
                     adminItems.Add(menuItem);
 
+                if (menuItem.Text == "Str Objectives")
+                    adminItems.Add(menuItem);
+                
                 if (menuItem.Text == "Objectives")
                     adminItems.Add(menuItem);
 

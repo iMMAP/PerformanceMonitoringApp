@@ -82,6 +82,13 @@ namespace SRFROWCA.Admin.Clusters
                     ddlEmgClusters.SelectedValue = lblEmergencyClusterId.Text;
                 }
 
+                PopulateStrategicObjectives();
+                Label lblStrategicObjectiveId = row.FindControl("lblStrategicObjectiveId") as Label;
+                if (lblStrategicObjectiveId != null)
+                {
+                    ddlStrObjectives.SelectedValue = lblStrategicObjectiveId.Text;
+                }
+
                 Label lblObjective = row.FindControl("lblObjective") as Label;
                 if (lblObjective != null)
                 {
@@ -139,8 +146,6 @@ namespace SRFROWCA.Admin.Clusters
             gvObjective.DataBind();
         }
 
-        
-
         private void PopulateEmergencies()
         {
             UI.FillLocationEmergency(ddlLocEmergencies, ROWCACommon.GetEmergencies(this.User));
@@ -174,6 +179,35 @@ namespace SRFROWCA.Admin.Clusters
             return DBContext.GetData("GetEmergencyClusters", new object[] { emergencyId });
         }
 
+        protected void ddlEmgClusters_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PopulateStrategicObjectives();
+        }
+
+        private void PopulateStrategicObjectives()
+        {
+            ddlStrObjectives.DataValueField = "StrategicObjectiveId";
+            ddlStrObjectives.DataTextField = "StrategicObjectiveName";
+
+            ddlStrObjectives.DataSource = GetClusterObjectives();
+            ddlStrObjectives.DataBind();
+
+            ListItem item = new ListItem("Select Str Objective", "0");
+            ddlStrObjectives.Items.Insert(0, item);
+        }
+
+        private DataTable GetClusterObjectives()
+        {
+            int emgClusterId = 0;
+            int.TryParse(ddlEmgClusters.SelectedValue, out emgClusterId);
+            if (emgClusterId > 0)
+            {
+                return DBContext.GetData("GetStrategicObjectives", new object[] { emgClusterId });
+            }
+
+            return new DataTable();
+        }
+
         protected void btnAdd_Click(object sender, EventArgs e)
         {
             SaveObjective();
@@ -205,14 +239,17 @@ namespace SRFROWCA.Admin.Clusters
             Guid userId = ROWCACommon.GetCurrentUserId();
             string objectiveName = txtObj.Text.Trim();
             Server.HtmlEncode(objectiveName);
+            int strObjId = 0;
+            int.TryParse(ddlStrObjectives.SelectedValue, out strObjId);
+
             if (!string.IsNullOrEmpty(hfPKId.Value))
             {
                 int pkId = Convert.ToInt32(hfPKId.Value);
-                DBContext.Update("UpdateObjective", new object[] { pkId, emgClusterId, objectiveName, userId, DBNull.Value });
+                DBContext.Update("UpdateObjective", new object[] { pkId, emgClusterId, objectiveName, userId, strObjId, DBNull.Value });
             }
             else
             {
-                DBContext.Add("InsertObjective", new object[] { emgClusterId, objectiveName, userId, DBNull.Value });
+                DBContext.Add("InsertObjective", new object[] { emgClusterId, objectiveName, userId, strObjId, DBNull.Value });
             }
         }
 

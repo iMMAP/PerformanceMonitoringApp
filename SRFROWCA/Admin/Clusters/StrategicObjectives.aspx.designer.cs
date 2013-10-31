@@ -10,7 +10,7 @@
 namespace SRFROWCA.Admin.Clusters {
     
     
-    public partial class ClusterObjectives {
+    public partial class StrategicObjectives {
         
         /// <summary>
         /// updMessage control.
@@ -67,24 +67,6 @@ namespace SRFROWCA.Admin.Clusters {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCluster;
         
         /// <summary>
-        /// ddlStrObjectives control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlStrObjectives;
-        
-        /// <summary>
-        /// rfvStrObj control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvStrObj;
-        
-        /// <summary>
         /// txtObj control.
         /// </summary>
         /// <remarks>
@@ -121,12 +103,12 @@ namespace SRFROWCA.Admin.Clusters {
         protected global::System.Web.UI.WebControls.Button btnAdd;
         
         /// <summary>
-        /// gvObjective control.
+        /// gvStrategicObjective control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvObjective;
+        protected global::System.Web.UI.WebControls.GridView gvStrategicObjective;
     }
 }
