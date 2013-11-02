@@ -2,18 +2,20 @@
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using Saplin.Controls;
+using System.Web.UI;
 
 namespace SRFROWCA.Common
 {
     public static class UI
     {
-        // Populate Clusters drop down.
-        internal static void FillClusters(DropDownCheckBoxes ddl)
+        // Populate Clusters drop down.        
+        // control can be dropdownlist or checkboxlist or any other listcontrol
+        internal static void FillClusters(ListControl control)
         {
-            ddl.DataValueField = "ClusterId";
-            ddl.DataTextField = "ClusterName";
-            ddl.DataSource = DBContext.GetData("GetAllClusters");
-            ddl.DataBind();
+            control.DataValueField = "ClusterId";
+            control.DataTextField = "ClusterName";
+            control.DataSource = DBContext.GetData("GetAllClusters");
+            control.DataBind();
         }
 
         // Populate Emergency Clusters drop down.
@@ -105,9 +107,13 @@ namespace SRFROWCA.Common
             ddl.DataTextField = "EmergencyName";
             ddl.DataSource = dt;
             ddl.DataBind();
-            ListItem item = new ListItem("Select Emergency", "0");
-            ddl.Items.Insert(0, item);
-            ddl.SelectedIndex = 0;
+
+            if (ddl.Items.Count > 1)
+            {
+                ListItem item = new ListItem("Select Emergency", "0");
+                ddl.Items.Insert(0, item);
+                ddl.SelectedIndex = 0;
+            }
         }
     }
 }

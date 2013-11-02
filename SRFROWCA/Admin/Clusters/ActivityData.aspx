@@ -124,7 +124,7 @@
                 <table>
                     <tr>
                         <td>
-                            Activity:
+                            Data:
                         </td>
                         <td>
                             <asp:TextBox ID="txtData" runat="server" Width="800px" TextMode="MultiLine" Height="80px"

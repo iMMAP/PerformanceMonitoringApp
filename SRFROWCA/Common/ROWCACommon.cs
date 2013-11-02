@@ -200,6 +200,12 @@ namespace SRFROWCA.Common
                 Guid userId = GetCurrentUserId();
                 return DBContext.GetData("GetAllFrameWorkDataOfUser", new object[] { userId });
             }
+        }       
+
+        internal static DataTable GetUserDetails()
+        {
+            Guid userId = GetCurrentUserId();
+            return DBContext.GetData("GetUserDetails", new object[] { userId });
         }
 
         public static Guid GetCurrentUserId()

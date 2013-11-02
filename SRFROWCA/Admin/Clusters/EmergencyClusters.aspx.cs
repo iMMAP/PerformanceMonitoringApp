@@ -32,16 +32,7 @@ namespace SRFROWCA.Admin.Clusters
 
         private void PopulateClusters()
         {
-            cblClusters.DataValueField = "ClusterId";
-            cblClusters.DataTextField = "ClusterName";
-
-            cblClusters.DataSource = GetClusters();
-            cblClusters.DataBind();
-        }
-
-        private DataTable GetClusters()
-        {
-            return DBContext.GetData("GetAllClusters");
+            UI.FillClusters(cblClusters);
         }
 
         protected void ddlEmergencies_SelectedIndexChanged(object sender, EventArgs e)

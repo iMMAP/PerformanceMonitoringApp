@@ -192,7 +192,7 @@
                             Emergency:
                         </td>
                         <td>
-                            <asp:DropDownList ID="ddlEmergency" runat="server" Width="300px">
+                            <asp:DropDownList ID="ddlEmergency" runat="server" AutoPostBack="true" Width="300px" OnSelectedIndexChanged="ddlEmergency_SelectedIndexChanged">
                             </asp:DropDownList>
                         </td>
                     </tr>

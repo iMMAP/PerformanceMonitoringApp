@@ -16,7 +16,7 @@ namespace SRFROWCA.Account
         }
 
         protected void Page_Load(object sender, EventArgs e)
-        {            
+        {
             if (IsPostBack) return;
 
             if (!this.User.IsInRole("Admin"))
@@ -31,21 +31,6 @@ namespace SRFROWCA.Account
 
             PopulateCountries();
             PopulateOrganizations();
-
-            if (UserId != null)
-            {
-                GetUserInformation();
-            }
-        }
-
-        private void GetUserInformation()
-        {
-            //Guid userId = new Guid(UserId);
-            //MembershipUser mu = Membership.GetUser(userId);
-
-            ////Membership.UpdateUser(mu);            
-            //txtUserName.Text = mu.UserName;
-            //txt
         }
 
         private void PopulateControlsWithUserInfo(DataTable dt)
@@ -161,7 +146,7 @@ namespace SRFROWCA.Account
             ddlLocations.DataTextField = "LocationName";
             ddlLocations.DataSource = dt;
             ddlLocations.DataBind();
-        }        
+        }
 
         // Populate countries drop down.
         private void PopulateOrganizations()
@@ -219,11 +204,24 @@ namespace SRFROWCA.Account
             // Add user in aspnet membership tables.
             user = AddRecordInMembership();
 
-            AddRecordInRoles((Guid)user.ProviderUserKey);
+            Guid userId = (Guid)user.ProviderUserKey;
+            AddRecordInRoles(userId);
 
             // User details are organization and country.
-            CreateUserDetails((Guid)user.ProviderUserKey);
+            CreateUserDetails(userId);
+
+            CreateUserOffice(userId);
             return true;
+        }
+
+        // If user office does not exists on selected organization and lcoation
+        // then create one
+        private void CreateUserOffice( Guid userId)
+        {
+            if (!IsOrganizationOfficeExists())
+            {
+                CreateOffice(userId);
+            }
         }
 
         private void AddRecordInRoles(Guid userId)
@@ -289,6 +287,40 @@ namespace SRFROWCA.Account
             string phone = txtPhone.Text.Trim().Length > 0 ? txtPhone.Text.Trim() : null;
 
             return new object[] { userId, orgId, countryId, phone, DBNull.Value };
+        }
+
+        // If selected organization office exists on selected locaiton
+        private bool IsOrganizationOfficeExists()
+        {
+            int orgId = 0;
+            int.TryParse(ddlOrganization.SelectedValue, out orgId);
+
+            int locId = 0;
+            int.TryParse(ddlCountry.SelectedValue, out locId);
+
+            if (orgId > 0 && locId > 0)
+            {
+                return DBContext.GetData("GetOrganizationOffices", new object[] { locId, orgId }).Rows.Count > 0;
+            }
+
+            return false;
+        }
+
+        // Create user's office on organization and location
+        private void CreateOffice(Guid userId)
+        {
+            int orgId = 0;
+            int.TryParse(ddlOrganization.SelectedValue, out orgId);
+
+            int locId = 0;
+            int.TryParse(ddlCountry.SelectedValue, out locId);
+
+            string officeName = ddlOrganization.SelectedItem.Text + " " + ddlCountry.SelectedItem.Text;
+
+            if (orgId > 0 && locId > 0)
+            {
+                DBContext.Add("InsertOffice", new object[] { orgId, locId, officeName, userId, DBNull.Value });
+            }
         }
 
         public string UserId

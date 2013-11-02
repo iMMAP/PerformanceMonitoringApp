@@ -353,7 +353,7 @@ namespace SRFROWCA.Pages
         private void PopulateDropDowns()
         {
             // Get details of user from aspnet_Users_Custom tbale
-            DataTable dt = GetUserDetails();
+            DataTable dt = ROWCACommon.GetUserDetails();
             if (dt.Rows.Count > 0)
             {
                 lblCountry.Text = dt.Rows[0]["LocationName"].ToString();
@@ -636,12 +636,6 @@ namespace SRFROWCA.Pages
         {
             DataTable dt = DBContext.GetData("GetThirdLevelChildLocations", new object[] { parentLocationId });
             return dt.Rows.Count > 0 ? dt : new DataTable();
-        }
-
-        private DataTable GetUserDetails()
-        {
-            Guid userGuid = ROWCACommon.GetCurrentUserId();
-            return DBContext.GetData("GetUserDetails", new object[] { userGuid });
         }
 
         private DataTable GetOrganizations()

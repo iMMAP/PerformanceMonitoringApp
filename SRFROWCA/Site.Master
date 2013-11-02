@@ -11,7 +11,7 @@
     <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="<%# BaseURL %>/Scripts/jquery.kiketable.colsizable-1.1.js"></script>
     <script type="text/javascript" src="<%# BaseURL %>/Scripts/jquery.event.drag-1.4.min.js"></script>
-    <script type="text/javascript" src="<%# BaseURL %>/Scripts/hc/highcharts.js"></script>
+    <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
     <style type="text/css">
         .ddlWidth
         {

@@ -73,7 +73,8 @@
     <Reference Include="DotNet.Highcharts, Version=2.0.0.0, Culture=neutral, PublicKeyToken=88854f873df851bf, processorArchitecture=MSIL">
       <HintPath>..\_dll\DotNet.Highcharts.dll</HintPath>
     </Reference>
-    <Reference Include="DropDownCheckBoxes">
+    <Reference Include="DropDownCheckBoxes, Version=1.1.0.37004, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_dll\DropDownCheckBoxes.dll</HintPath>
     </Reference>
     <Reference Include="itextsharp">
@@ -132,7 +133,6 @@
     <Content Include="Admin\Emergency\EmergencyListing.aspx" />
     <Content Include="Admin\Office\OfficeListing.aspx" />
     <Content Include="Admin\Organization\OrganizationListing.aspx" />
-    <Content Include="Admin\Organization\OrgListing.aspx" />
     <Content Include="Admin\Upload\UploadActivities.aspx" />
     <Content Include="Admin\Users\UsersListing.aspx" />
     <Content Include="ChartSVGService.asmx" />
@@ -444,13 +444,6 @@
     </Compile>
     <Compile Include="Admin\Organization\OrganizationListing.aspx.designer.cs">
       <DependentUpon>OrganizationListing.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\Organization\OrgListing.aspx.cs">
-      <DependentUpon>OrgListing.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\Organization\OrgListing.aspx.designer.cs">
-      <DependentUpon>OrgListing.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\Upload\UploadActivities.aspx.cs">
       <DependentUpon>UploadActivities.aspx</DependentUpon>

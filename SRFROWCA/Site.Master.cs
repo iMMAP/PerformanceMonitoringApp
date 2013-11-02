@@ -21,6 +21,10 @@ namespace SRFROWCA
                     // Remove admin menue items
                     RemoveAdminMenuItems();
                 }
+                else if (HttpContext.Current.User.IsInRole("Admin") || HttpContext.Current.User.IsInRole("CountryAdmin"))
+                {
+                    RemoveDataEntryMenueItems();
+                }
                 // if user is loggedin, hide user/password and register and show loginview.
                 ShowHideLoginControls(true);
             }
@@ -97,6 +101,25 @@ namespace SRFROWCA
                     if (menuItem.Text == "Data Feeds")
                         adminItems.Add(menuItem);
                 }
+            }
+
+            foreach (MenuItem item in adminItems)
+            {
+                menuItems.Remove(item);
+            }
+        }
+
+        private void RemoveDataEntryMenueItems()
+        {
+            MenuItemCollection menuItems = NavigationMenu.Items;
+            List<MenuItem> adminItems = new List<MenuItem>();
+            foreach (MenuItem menuItem in menuItems)
+            {
+                if (menuItem.Text == "My Activities")
+                    adminItems.Add(menuItem);
+
+                if (menuItem.Text == "Data Entry")
+                    adminItems.Add(menuItem);
             }
 
             foreach (MenuItem item in adminItems)

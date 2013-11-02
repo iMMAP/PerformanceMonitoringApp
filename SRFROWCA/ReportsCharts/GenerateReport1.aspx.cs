@@ -18,7 +18,7 @@ namespace SRFROWCA.Reports
             if (IsPostBack) return;
 
             chkDuration.Attributes.Add("onclick", "radioMe(event);");
-            PopulateControls();
+            PopulateControls();            
         }
 
         #region Wizard Events
@@ -319,8 +319,14 @@ namespace SRFROWCA.Reports
         {
             PopulateChildLocations();
             PopulateEmergency();
-            PopulateClusters();
+            PopulateEmergencyClusters();
         }
+
+        protected void ddlEmergency_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PopulateEmergencyClusters();
+        }
+
         #endregion
 
         #region Step1 Methods.
@@ -329,6 +335,7 @@ namespace SRFROWCA.Reports
         {
             PopulateCountry();
             PopulateOrganizations();
+            PopulateClusters();
         }
 
         private void PopulateEmergency()
@@ -339,13 +346,49 @@ namespace SRFROWCA.Reports
             UI.FillLocationEmergency(ddlEmergency, dt);
         }
 
-        private void PopulateClusters()
+        private void PopulateEmergencyClusters()
         {
-            //TODO: EXCEPTION HANDLING.
-            int locEmgId = Convert.ToInt32(ddlEmergency.SelectedItem.Value);
-            DataTable dt = DBContext.GetData("GetEmergencyClusters", new object[] { locEmgId });
-            UI.FillEmergnecyClusters(cblClusters, dt);
-            SelectClustersList();
+            int emergencyId = 0;
+            int.TryParse(ddlEmergency.SelectedValue, out emergencyId);
+
+            //if (emergencyId > 0)
+            {
+                FillEmergencyClusters(emergencyId);
+            }
+
+            //DataTable dt = DBContext.GetData("GetEmergencyClusters", new object[] { locEmgId });
+            //UI.FillEmergnecyClusters(cblClusters, dt);
+            //SelectClustersList();
+        }
+
+        private void FillEmergencyClusters(int emergencyId)
+        {
+            DataTable dt = GetEmergencyClusters(emergencyId);
+            CheckClusterListBox(dt);
+        }
+
+        private void CheckClusterListBox(DataTable dt)
+        {
+            foreach (ListItem item in cblClusters.Items)
+            {
+                item.Selected = false;
+            }
+
+            foreach (ListItem item in cblClusters.Items)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    if (dr["ClusterId"].ToString().Equals(item.Value))
+                    {
+                        item.Selected = true;                        
+                    }
+                }
+            }
+        }
+
+        private DataTable GetEmergencyClusters(int emergencyId)
+        {
+            return DBContext.GetData("GetEmergencyClusters", new object[] { emergencyId });
         }
 
         private void PutSelectedClustersInList()
@@ -395,6 +438,11 @@ namespace SRFROWCA.Reports
         private void PopulateOrganizations()
         {
             UI.FillOrganizations(ddlOrganizations);
+        }
+
+        private void PopulateClusters()
+        {
+            UI.FillClusters(cblClusters);
         }
 
         private void PopulateAdmin1(int countryId)

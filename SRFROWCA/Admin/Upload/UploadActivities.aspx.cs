@@ -5,7 +5,6 @@ using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.IO;
 using System.Web.Security;
-using System.Web.UI.WebControls;
 using BusinessLogic;
 using SRFROWCA.Common;
 
@@ -23,6 +22,9 @@ namespace SRFROWCA.Admin.Upload
         {
             try
             {
+                // Check if file is uploaded and is excel file
+                if (!IsValidFile()) return;
+
                 // Empty staging tables before data import.
                 EmptyTable();
                 // Fill staging table (TempData1) in db to import data using this table.
@@ -41,8 +43,7 @@ namespace SRFROWCA.Admin.Upload
             }
             catch (Exception ex)
             {
-                lblMessage.Visible = true;
-                lblMessage.Text = ex.ToString();
+                ShowMessage(ex.ToString());
             }
         }
 
@@ -58,6 +59,26 @@ namespace SRFROWCA.Admin.Upload
             return DBContext.GetData("GetALLLocationEmergencies");
         }
 
+        private bool IsValidFile()
+        {
+            if (fuExcel.HasFile)
+            {
+                string fileExt = Path.GetExtension(fuExcel.PostedFile.FileName);
+                if (fileExt != ".xls" && fileExt != ".xlsx")
+                {
+                    ShowMessage("Pleae use Excel files with 'xls' OR 'xlsx' extentions.");
+                    return false;
+                }
+            }
+            else
+            {
+                ShowMessage("Please select file to upload!");
+                return false;
+            }
+
+            return true;
+        }
+
         // First Empty staging tables.
         private void EmptyTable()
         {
@@ -67,26 +88,14 @@ namespace SRFROWCA.Admin.Upload
         // Read Data From Excel Sheet and Save into DB
         private void FillStagingTableInDB()
         {
-            if (fuExcel.HasFile)
-            {
-                string filePath = UploadFile();
-                string excelConString = GetExcelConString(filePath);
-                if (string.IsNullOrEmpty(excelConString))
-                {
-                    lblMessage.Visible = true;
-                    lblMessage.Text = "Pleae use Excel files with 'xls' OR 'xlsx' extentions.";
-                    return;
-                }
+            string filePath = UploadFile();
+            string excelConString = GetExcelConString(filePath);
 
+            if (!string.IsNullOrEmpty(excelConString))
+            {
                 DataTable dt = ReadDataInDataTable(excelConString);
                 WriteDataToDB(dt);
             }
-        }
-
-        // Import all data from staging table to respective tables.
-        private DataTable ImportData()
-        {
-            return DBContext.GetData("ImportActivitiesFromTempData");
         }
 
         // Upload file to server and return full path with name of file.
@@ -98,16 +107,22 @@ namespace SRFROWCA.Admin.Upload
 
             // Create file name on the basis of userid and datetime.
             fileName += ((Guid)Membership.GetUser().ProviderUserKey).ToString() + DateTime.Now.ToString("MMM-dd-yy-hh-mm-ss") + fileExtension;
-            string uploadLocation = Server.MapPath(@"~/Documents/" + fileName);
-            fuExcel.SaveAs(uploadLocation);
+            string uploadDir = Server.MapPath(@"~/Admin/Documents/LogFrames");
+            if (!Directory.Exists(uploadDir))
+            {
+                Directory.CreateDirectory(uploadDir);
+            }
 
-            return uploadLocation;
-        }
+            string uploadFileLocation = uploadDir + "//" + fileName;
+            fuExcel.SaveAs(uploadFileLocation);
+
+            return uploadFileLocation;
+        }                    
 
         // Get connectionstring. It is on the basis of what is the extention (xls or xlsx) of file given.
         private string GetExcelConString(string filePath)
         {
-            string con = "";
+            string con = null;
             string fileExtension = Path.GetExtension(filePath);
             if (fileExtension == ".xls")
             {
@@ -128,13 +143,14 @@ namespace SRFROWCA.Admin.Upload
             //Create Connection to Excel work book
             OleDbConnection excelCon = new OleDbConnection(excelConString);
             //Create OleDbCommand to fetch data from Excel
-            OleDbCommand cmd = new OleDbCommand(@"Select * from [Formatted Data$]", excelCon);
+            OleDbCommand cmd = new OleDbCommand(@"Select * from [AllData$]", excelCon);
             excelCon.Open();
 
             OleDbDataAdapter da = new OleDbDataAdapter();
             da.SelectCommand = cmd;
 
             DataTable dt = MakeDataTable();
+            //DataTable dt = new DataTable();
             da.Fill(dt);
             da.Dispose();
             excelCon.Close();
@@ -142,6 +158,12 @@ namespace SRFROWCA.Admin.Upload
             UpdateDataTableWithIds(dt);
 
             return dt;
+        }
+
+        // Import all data from staging table to respective tables.
+        private DataTable ImportData()
+        {
+            return DBContext.GetData("ImportActivitiesFromTempData");
         }
 
         // Create new datatable and appropriate columns.
@@ -159,7 +181,8 @@ namespace SRFROWCA.Admin.Upload
             dt.Columns.Add("LocationEmergencyId", typeof(string));
             dt.Columns.Add("Cluster", typeof(string));
             dt.Columns.Add("EmergencyClusterId", typeof(string));
-            dt.Columns.Add("SObjectives", typeof(string));
+            dt.Columns.Add("StrObjectives", typeof(string));
+            dt.Columns.Add("StrObjectiveId", typeof(string));
             dt.Columns.Add("Objectives", typeof(string));
             dt.Columns.Add("ClusterObjectiveId", typeof(string));
             dt.Columns.Add("Indicators", typeof(string));
@@ -195,6 +218,12 @@ namespace SRFROWCA.Admin.Upload
             sqlBulk.DestinationTableName = "TempData1";
             sqlBulk.WriteToServer(dt);
             sqlBulk.Close();
+        }
+
+        private void ShowMessage(string messsage, string css = "error-message")
+        {
+            lblMessage.Visible = true;
+            lblMessage.Text = messsage;
         }
 
         protected void Page_Error(object sender, EventArgs e)
