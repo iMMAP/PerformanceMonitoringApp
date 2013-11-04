@@ -123,18 +123,19 @@
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\Reset.aspx" />
     <Content Include="Account\UpdateUser.aspx" />
-    <Content Include="Admin\Clusters\ActivityData.aspx" />
-    <Content Include="Admin\Clusters\ClusterObjectives.aspx" />
-    <Content Include="Admin\Clusters\EmergencyClusters.aspx" />
-    <Content Include="Admin\Clusters\IndicatorActivities.aspx" />
-    <Content Include="Admin\Clusters\ObjectiveIndicators.aspx" />
-    <Content Include="Admin\Clusters\StrategicObjectives.aspx" />
-    <Content Include="Admin\DataFeeds\AdminDataFeeds.aspx" />
-    <Content Include="Admin\Emergency\EmergencyListing.aspx" />
-    <Content Include="Admin\Office\OfficeListing.aspx" />
-    <Content Include="Admin\Organization\OrganizationListing.aspx" />
-    <Content Include="Admin\Upload\UploadActivities.aspx" />
-    <Content Include="Admin\Users\UsersListing.aspx" />
+    <Content Include="Admin\ActivityData.aspx" />
+    <Content Include="Admin\ClusterObjectives.aspx" />
+    <Content Include="Admin\EmergencyClusters.aspx" />
+    <Content Include="Admin\IndicatorActivities.aspx" />
+    <Content Include="Admin\ObjectiveIndicators.aspx" />
+    <Content Include="Admin\StrategicObjectives.aspx" />
+    <Content Include="Anonymous\AllData.aspx" />
+    <Content Include="DataFeeds\AdminDataFeeds.aspx" />
+    <Content Include="Admin\EmergencyListing.aspx" />
+    <Content Include="Admin\OfficeListing.aspx" />
+    <Content Include="Admin\OrganizationListing.aspx" />
+    <Content Include="Admin\UploadActivities.aspx" />
+    <Content Include="Admin\UsersListing.aspx" />
     <Content Include="ChartSVGService.asmx" />
     <Content Include="ContactUs\Contactus.aspx" />
     <Content Include="ContactUs\ContactUsControl.ascx" />
@@ -150,9 +151,12 @@
     <Content Include="images\bottom-left.png" />
     <Content Include="images\bottom-mid.png" />
     <Content Include="images\bottom-right.png" />
+    <Content Include="images\button-bg.jpg" />
     <Content Include="images\close-down.png" />
     <Content Include="images\close-hover.png" />
     <Content Include="images\close.png" />
+    <Content Include="images\ddlarrow.png" />
+    <Content Include="images\droparrow.png" />
     <Content Include="images\error.png" />
     <Content Include="images\favicon.ico" />
     <Content Include="images\first.gif" />
@@ -161,6 +165,7 @@
     <Content Include="images\hdrmid.png" />
     <Content Include="images\last.gif" />
     <Content Include="images\left.png" />
+    <Content Include="images\loginmenuarrow.png" />
     <Content Include="images\minus.png" />
     <Content Include="images\next.gif" />
     <Content Include="images\pager_bg.gif" />
@@ -170,6 +175,7 @@
     <Content Include="images\right.png" />
     <Content Include="images\rssfeed.png" />
     <Content Include="images\sprite.png" />
+    <Content Include="images\temp0.svg" />
     <Content Include="images\top-left.png" />
     <Content Include="images\top-mid.png" />
     <Content Include="images\top-right.png" />
@@ -206,6 +212,7 @@
     <Content Include="Scripts\hc\themes\skies.js" />
     <Content Include="Scripts\jq-1.10.2.min.js" />
     <Content Include="Scripts\jquery.event.drag-1.4.min.js" />
+    <Content Include="Scripts\jquery.fixedMenu.js" />
     <Content Include="Scripts\jquery.kiketable.colsizable-1.1.js" />
     <Content Include="Scripts\jquery.kiketable.colsizable-1.1.min.js" />
     <Content Include="Scripts\jquery.numeric.min.js" />
@@ -215,7 +222,10 @@
     <Content Include="Styles\jquery.kiketable.colsizable.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Styles\loginareamenu.css" />
+    <Content Include="Styles\menu.css" />
     <Content Include="Styles\Site.min.css" />
+    <Content Include="Styles\style.css" />
     <Content Include="Styles\ui-lightness\images\animated-overlay.gif" />
     <Content Include="Styles\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Styles\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
@@ -273,6 +283,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="Web.sitemap" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="About.aspx.cs">
@@ -344,119 +355,126 @@
     <Compile Include="ActivityFeed.ashx.cs">
       <DependentUpon>ActivityFeed.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\Clusters\ActivityData.aspx.cs">
+    <Compile Include="Admin\ActivityData.aspx.cs">
       <DependentUpon>ActivityData.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\Clusters\ActivityData.aspx.designer.cs">
+    <Compile Include="Admin\ActivityData.aspx.designer.cs">
       <DependentUpon>ActivityData.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\Clusters\ClusterObjectives.aspx.cs">
+    <Compile Include="Admin\ClusterObjectives.aspx.cs">
       <DependentUpon>ClusterObjectives.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\Clusters\ClusterObjectives.aspx.designer.cs">
+    <Compile Include="Admin\ClusterObjectives.aspx.designer.cs">
       <DependentUpon>ClusterObjectives.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\Clusters\EmergencyClusters.aspx.cs">
+    <Compile Include="Admin\EmergencyClusters.aspx.cs">
       <DependentUpon>EmergencyClusters.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\Clusters\EmergencyClusters.aspx.designer.cs">
+    <Compile Include="Admin\EmergencyClusters.aspx.designer.cs">
       <DependentUpon>EmergencyClusters.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\Clusters\IndicatorActivities.aspx.cs">
+    <Compile Include="Admin\IndicatorActivities.aspx.cs">
       <DependentUpon>IndicatorActivities.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\Clusters\IndicatorActivities.aspx.designer.cs">
+    <Compile Include="Admin\IndicatorActivities.aspx.designer.cs">
       <DependentUpon>IndicatorActivities.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\Clusters\ObjectiveIndicators.aspx.cs">
+    <Compile Include="Admin\ObjectiveIndicators.aspx.cs">
       <DependentUpon>ObjectiveIndicators.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\Clusters\ObjectiveIndicators.aspx.designer.cs">
+    <Compile Include="Admin\ObjectiveIndicators.aspx.designer.cs">
       <DependentUpon>ObjectiveIndicators.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\Clusters\StrategicObjectives.aspx.cs">
+    <Compile Include="Admin\StrategicObjectives.aspx.cs">
       <DependentUpon>StrategicObjectives.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\Clusters\StrategicObjectives.aspx.designer.cs">
+    <Compile Include="Admin\StrategicObjectives.aspx.designer.cs">
       <DependentUpon>StrategicObjectives.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\DataFeeds\Admin1Feed.ashx.cs">
+    <Compile Include="Anonymous\AllData.aspx.cs">
+      <DependentUpon>AllData.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Anonymous\AllData.aspx.designer.cs">
+      <DependentUpon>AllData.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DataFeeds\Admin1Feed.ashx.cs">
       <DependentUpon>Admin1Feed.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\DataFeeds\Admin2Feed.ashx.cs">
+    <Compile Include="DataFeeds\Admin2Feed.ashx.cs">
       <DependentUpon>Admin2Feed.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\DataFeeds\AdminDataFeeds.aspx.cs">
+    <Compile Include="DataFeeds\AdminDataFeeds.aspx.cs">
       <DependentUpon>AdminDataFeeds.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\DataFeeds\AdminDataFeeds.aspx.designer.cs">
+    <Compile Include="DataFeeds\AdminDataFeeds.aspx.designer.cs">
       <DependentUpon>AdminDataFeeds.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\DataFeeds\ClustersFeed.ashx.cs">
+    <Compile Include="DataFeeds\ClustersFeed.ashx.cs">
       <DependentUpon>ClustersFeed.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\DataFeeds\EmergencyFeed.ashx.cs">
+    <Compile Include="DataFeeds\EmergencyFeed.ashx.cs">
       <DependentUpon>EmergencyFeed.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\DataFeeds\FeedXML.cs" />
-    <Compile Include="Admin\DataFeeds\LogFrameDataFeed.ashx.cs">
+    <Compile Include="DataFeeds\FeedXML.cs" />
+    <Compile Include="DataFeeds\LogFrameDataFeed.ashx.cs">
       <DependentUpon>LogFrameDataFeed.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\DataFeeds\MonthFeed.ashx.cs">
+    <Compile Include="DataFeeds\MonthFeed.ashx.cs">
       <DependentUpon>MonthFeed.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\DataFeeds\OfficesFeed.ashx.cs">
+    <Compile Include="DataFeeds\OfficesFeed.ashx.cs">
       <DependentUpon>OfficesFeed.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\DataFeeds\Organizations.ashx.cs">
+    <Compile Include="DataFeeds\Organizations.ashx.cs">
       <DependentUpon>Organizations.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\DataFeeds\OrganizationsFeed.ashx.cs">
+    <Compile Include="DataFeeds\OrganizationsFeed.ashx.cs">
       <DependentUpon>OrganizationsFeed.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\DataFeeds\YearFeed.ashx.cs">
+    <Compile Include="DataFeeds\YearFeed.ashx.cs">
       <DependentUpon>YearFeed.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\Emergency\EmergencyListing.aspx.cs">
+    <Compile Include="Admin\EmergencyListing.aspx.cs">
       <DependentUpon>EmergencyListing.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\Emergency\EmergencyListing.aspx.designer.cs">
+    <Compile Include="Admin\EmergencyListing.aspx.designer.cs">
       <DependentUpon>EmergencyListing.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\Office\OfficeListing.aspx.cs">
+    <Compile Include="Admin\OfficeListing.aspx.cs">
       <DependentUpon>OfficeListing.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\Office\OfficeListing.aspx.designer.cs">
+    <Compile Include="Admin\OfficeListing.aspx.designer.cs">
       <DependentUpon>OfficeListing.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\Organization\OrganizationListing.aspx.cs">
+    <Compile Include="Admin\OrganizationListing.aspx.cs">
       <DependentUpon>OrganizationListing.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\Organization\OrganizationListing.aspx.designer.cs">
+    <Compile Include="Admin\OrganizationListing.aspx.designer.cs">
       <DependentUpon>OrganizationListing.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\Upload\UploadActivities.aspx.cs">
+    <Compile Include="Admin\UploadActivities.aspx.cs">
       <DependentUpon>UploadActivities.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\Upload\UploadActivities.aspx.designer.cs">
+    <Compile Include="Admin\UploadActivities.aspx.designer.cs">
       <DependentUpon>UploadActivities.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\Users\UsersListing.aspx.cs">
+    <Compile Include="Admin\UsersListing.aspx.cs">
       <DependentUpon>UsersListing.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\Users\UsersListing.aspx.designer.cs">
+    <Compile Include="Admin\UsersListing.aspx.designer.cs">
       <DependentUpon>UsersListing.aspx</DependentUpon>
     </Compile>
     <Compile Include="ChartSVGService.asmx.cs">
@@ -690,16 +708,16 @@
   <ItemGroup>
     <Content Include="ClustersDataFeed.ashx" />
     <None Include="3WPMUserManual.pdf" />
-    <Content Include="Admin\DataFeeds\Organizations.ashx" />
-    <Content Include="Admin\DataFeeds\OrganizationsFeed.ashx" />
-    <Content Include="Admin\DataFeeds\OfficesFeed.ashx" />
-    <Content Include="Admin\DataFeeds\EmergencyFeed.ashx" />
-    <Content Include="Admin\DataFeeds\ClustersFeed.ashx" />
-    <Content Include="Admin\DataFeeds\Admin1Feed.ashx" />
-    <Content Include="Admin\DataFeeds\Admin2Feed.ashx" />
-    <Content Include="Admin\DataFeeds\LogFrameDataFeed.ashx" />
-    <Content Include="Admin\DataFeeds\YearFeed.ashx" />
-    <Content Include="Admin\DataFeeds\MonthFeed.ashx" />
+    <Content Include="DataFeeds\Organizations.ashx" />
+    <Content Include="DataFeeds\OrganizationsFeed.ashx" />
+    <Content Include="DataFeeds\OfficesFeed.ashx" />
+    <Content Include="DataFeeds\EmergencyFeed.ashx" />
+    <Content Include="DataFeeds\ClustersFeed.ashx" />
+    <Content Include="DataFeeds\Admin1Feed.ashx" />
+    <Content Include="DataFeeds\Admin2Feed.ashx" />
+    <Content Include="DataFeeds\LogFrameDataFeed.ashx" />
+    <Content Include="DataFeeds\YearFeed.ashx" />
+    <Content Include="DataFeeds\MonthFeed.ashx" />
     <None Include="images\Thumbs.db" />
     <None Include="UserManual_files\themedata.thmx" />
   </ItemGroup>

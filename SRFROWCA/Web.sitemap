@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0">    
+    <siteMapNode url="/Default.aspx" title="Home Page">
+        <siteMapNode url="/main-page-1.aspx" title="Main page 1">
+            <siteMapNode url="/sub-page-1.aspx" title="Sub navigation 1">
+                <siteMapNode url="/sub-page-2.aspx" title="Sub navigation 2">
+                    <siteMapNode url="/sub-page-3.aspx" title="Sub navigation 3">
+                    </siteMapNode>
+                    <siteMapNode url="/main-page-2.aspx" title="Main page 2">
+                        <siteMapNode url="/sub-page-4.aspx" title="Sub navigation 4">
+                            <siteMapNode url="/sub-page-5.aspx" title="Sub navigation 5">
+                            </siteMapNode>
+                            <siteMapNode url="/main-page-3.aspx" title="Main page 3">
+                                <siteMapNode url="/sub-page-6.aspx" title="Sub navigation 6">
+                                    <siteMapNode url="/sub-page-7.aspx" title="Sub navigation 7">
+                                        <siteMapNode url="/sub-page-8.aspx" title="Sub navigation 8">
+                                        </siteMapNode>
+                                    </siteMapNode>
+                                </siteMapNode>
+                            </siteMapNode>
+                        </siteMapNode>
+                    </siteMapNode>
+                </siteMapNode>
+            </siteMapNode>
+        </siteMapNode>
+    </siteMapNode>
+</siteMap>
+
+
+<!--<li>
+    <a href="#">Home</a>
+</li>
+<li>
+    <a href="../Default.aspx">All Data</a>
+</li>
+<li>
+    <a id="linkPagesMyActivities" runat="server" href="Pages/SelectActivities.aspx">
+        My Activities
+    </a>
+</li>
+<li>
+    <a id="linkPagesDE" runat="server" href="~/Pages/AddActivities.aspx">Data Entry</a>
+</li>
+<li>
+    <a class="fly arrow" href="#" tabindex="1">Generate Reports</a>
+    <ul class="dd">
+        <li>
+            <a id="linkReportsGenCharts" runat="server" class="fly" href="../ReportsCharts/GenerateReport1.aspx"
+            tabindex="1">Charts Report</a>
+        </li>
+        <li>
+            <a id="linkReportsGenTable" runat="server" class="fly" href="#" tabindex="1">
+                Tabular
+                Report
+            </a>
+        </li>
+        <li>
+            <a id="linkReportsGenMap" runat="server" class="fly" href="#" tabindex="1">Map Report</a>
+        </li>
+        <li>
+            <a id="linkReportsGenAll" runat="server" class="fly" href="#" tabindex="1">
+                Charts/Tabular/Maps
+                Report
+            </a>
+        </li>
+    </ul>
+</li>-->

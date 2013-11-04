@@ -1,253 +1,126 @@
- body{background:#b6b7bc;font-size:.80em;font-family:"Helvetica Neue","Lucida Grande","Segoe UI",Arial,Helvetica,Verdana,sans-serif;margin:0;padding:0;color:#696969}a:link,a:visited{color:#00f}a:hover{color:#1d60ff;text-decoration:none}a:active{color:#034af3}p{margin-bottom:10px;line-height:1.6em}h1,h2,h3,h4,h5,h6{font-size:1.5em;color:#666;font-variant:small-caps;text-transform:none;font-weight:200;margin-bottom:0}h1{font-size:1.6em;padding-bottom:0;margin-bottom:0}h2{font-size:1.5em;font-weight:600;color:White}h3{font-size:1.2em}h4{font-size:1.1em}h5,h6{font-size:1em}.rightColumn>h1,.rightColumn>h2,.leftColumn>h1,.leftColumn>h2{margin-top:0}.page{width:99%;background-color:#fff;margin:10px auto 0 auto;border:1px solid #496077}.header{position:relative;margin:0;padding:0;background:#4b6c9e;width:100%}.header h1{font-weight:700;margin:0;padding:0 0 0 20px;color:#f9f9f9;border:0;line-height:2em;font-size:2em}.main{padding:0 4px;margin:1px 2px 8px 2px;min-height:420px}.leftCol{padding:6px 0;margin:12px 8px 8px 8px;width:200px;min-height:200px}.footer{color:#4e5766;padding:8px 0 0 0;margin:0 auto;text-align:center;line-height:normal}div.hideSkiplink{background-color:#3a4f63;width:100%}div.menu{padding:4px 0 4px 8px}div.menu ul{list-style:none;margin:0;padding:0;width:auto}div.menu ul li a{background-color:#465c71;border:1px #4e667d solid;color:#dde4ec;display:block;line-height:1.35em;padding:4px 20px;text-decoration:none;white-space:nowrap}div.menu ul li .selected{background-color:#bfcbd6;color:#465c71;text-decoration:none}div.menu ul li a:hover{background-color:#bfcbd6;color:#465c71;text-decoration:none}div.menu ul li a:active{background-color:#465c71;color:#cfdbe6;text-decoration:none}fieldset{margin:1em 0;padding:1em;border:1px solid #ccc}fieldset p{margin:2px 12px 10px 10px}fieldset.login label,fieldset.register label,fieldset.changePassword label{display:block}fieldset label.inline{display:inline}legend{font-size:1.1em;font-weight:600;padding:2px 4px 8px 4px}input.textEntry{width:320px;border:1px solid #ccc}input.passwordEntry{width:320px;border:1px solid #ccc}div.accountInfo{width:42%}.clear{clear:both}.title{display:block;float:left;text-align:left;width:auto}.loginDisplay{font-size:1.1em;display:block;text-align:right;padding:10px;color:White}.loginDisplay a:link{color:white}.loginDisplay a:visited{color:white}.loginDisplay a:hover{color:white}.failureNotification{font-size:1.2em;color:Red}.bold{font-weight:bold}.submitButton{text-align:right;padding-right:10px}.signupheading2{font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:normal;text-align:left;color:#666}.error-message{text-align:left;display:list-item;list-style:none;list-style-type:none;border:1px solid #fe8989;color:#525252;background-color:#ffe7e7;padding:10px;background:#ffe7e7 url(../images/error.jpg) no-repeat 10px 7px !important;padding-left:45px}.info-message{text-align:left;display:list-item;list-style:none;list-style-type:none;border:1px solid #aee756;color:#525252;background-color:#e9fad0;padding:1px;padding-left:5px;font:bold large Verdana,Arial,sans-serif;height:28px;font-style:normal;font-variant:normal}tableCentre{margin-left:auto;margin-right:auto}.searchFieldOrgs{border:2px solid #000;height:28px;width:500px}.addfields1{border:1px solid #bae0f3}.addfields2{border:1px solid #bae0f3;height:18px}.addfields{border:0 solid #000;background-color:ButtonFace;font-weight:bold}.graytd{background-color:ButtonFace}.popupbordertd{height:200px;width:600px;background-color:#fff;border:#9db7df 4px solid}.buttonA{-moz-box-shadow:inset 0 1px 0 0 #9c9c9c;-webkit-box-shadow:inset 0 1px 0 0 #9c9c9c;box-shadow:inset 0 1px 0 0 #9c9c9c;background:-webkit-gradient(linear,left top,left bottom,color-stop(0.05,#3f3f40),color-stop(1,#1c1c1c));background:-moz-linear-gradient(top,#3f3f40 5%,#1c1c1c 100%);background:-webkit-linear-gradient(top,#3f3f40 5%,#1c1c1c 100%);background:-o-linear-gradient(top,#3f3f40 5%,#1c1c1c 100%);background:-ms-linear-gradient(top,#3f3f40 5%,#1c1c1c 100%);background:linear-gradient(to bottom,#3f3f40 5%,#1c1c1c 100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3f3f40',endColorstr='#1c1c1c',GradientType=0);background-color:#3f3f40;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;border:1px solid #393a3b;display:inline-block;color:#fff;font-family:arial;font-size:12px;font-weight:bold;padding:6px 19px;text-decoration:none;text-shadow:0 1px 0 #404245}.buttonA:hover{background:-webkit-gradient(linear,left top,left bottom,color-stop(0.05,#1c1c1c),color-stop(1,#3f3f40));background:-moz-linear-gradient(top,#1c1c1c 5%,#3f3f40 100%);background:-webkit-linear-gradient(top,#1c1c1c 5%,#3f3f40 100%);background:-o-linear-gradient(top,#1c1c1c 5%,#3f3f40 100%);background:-ms-linear-gradient(top,#1c1c1c 5%,#3f3f40 100%);background:linear-gradient(to bottom,#1c1c1c 5%,#3f3f40 100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1c1c1c',endColorstr='#3f3f40',GradientType=0);background-color:#1c1c1c}.buttonA:active{position:relative;top:1px}.label1{background-color:#3f3f40;color:#fff;font-family:arial;font-size:12px;font-weight:bold;padding:6px 19px;font-weight:bold;margin:1px}.label2{background-color:#3f3f40;color:#fff;font-family:arial;font-size:14px;font-weight:bold;padding:6px 1px;font-weight:bold}.ddlborder{color:#3f3f40;border:1}#sddm{margin:0;padding:0;z-index:30}#sddm li{margin:0;padding:0;list-style:none;float:left;font:bold 11px arial}#sddm li a{display:block;margin:0 1px 0 0;padding:4px 10px;background:#4b6c9e;color:#FFF;text-align:center;text-decoration:none;z-index:5;border:1px solid}#sddm li a:hover{background:#49a3ff}#sddm div{position:absolute;visibility:hidden;margin:0;padding:0;background:#eaebd8;border:1px solid #5970b2}#sddm div a{position:relative;display:block;margin:0;padding:5px 10px;width:auto;white-space:nowrap;text-align:left;text-decoration:none;background:#3a4f63;color:#fff;font:11px arial}#sddm div a:hover{background:#3a4f6a;color:#49a3ff}
- 
- /* table level rules */
-.grid
+.kiketable-colsizable
 {
-	font-family: tahoma;
-	font-size: 11px;
-	border: solid 1px #7f7f7f;
-	border-bottom-width:1px;
-    border-collapse:collapse;
-    color: #333333;
-    width:100%
+    table-layout: fixed;
+    width: 100%;
+}
+.kiketable-colsizable td, .kiketable-colsizable th
+{
+    overflow: hidden;
+}
+.kiketable-th
+{
+    /* Don't set "position: relative" in IE */
+    white-space: nowrap !important; /* Only works for THs in IE */
+    text-align: left;
+    height: 18px; /* value safe to change */
+}
+.kiketable-th-text
+{
+    height: 100%;
+    overflow: hidden;
+}
+.kiketable-colsizable-handler
+{
+    float: right;
+    cursor: e-resize;
+    height: 100%;
+    border-left: 2px outset white;
+    border-right: 2px inset white;
+    position: relative;
+    right: -2px;
+}
+html > body .kiketable-colsizable-handler
+{
+    border-right: 1px outset white;
+}
+.kiketable-colsizable-dragLine
+{
+    position: absolute;
+    width: 2px;
+    cursor: e-resize;
+    background-color: red; /* value safe to change */
+}
+.kiketable-colsizable-dragArea
+{
+    position: absolute;
+    cursor: e-resize;
+    background-color: red; /* value safe to change */
+    background-color: #000;
+}
+.kiketable-colsizable-minimized
+{
+    background-color: #ffd; /* value safe to change */
+    color: #bbb; /* value safe to change */
 }
 
+/*
+ddlWidth class
+*/
 
-/* header column rules */
-.grid th 
+.ddlWidth
 {
-    background: url(../images/sprite.png) repeat-x 0px 0px;
-    border-color: #989898 #cbcbcb #989898 #989898;
-    border-style: solid solid solid none;
-    border-width: 1px 1px 1px medium;
-    color: #000;
-    padding: 4px 5px 4px 10px;
-    vertical-align: bottom;
-    text-align:left;
-}  
-
-.grid th a
-{
-	color:#333333;
-    font-weight: bold;
-	text-decoration: none;
-	display: block;
-    padding-right: 10px;
+    width: 95%;
 }
 
-/* data cell and data row rules */
-.grid td 
+.ddlWidth80
 {
-	color:#333333;
-    padding: 4px 10px 4px 10px;
-    border-bottom: solid 1px #BBD9EE;
+    width: 80%;
 }
 
-.grid .altrow
-{
-    background-color: #EBF4FA;
-} 
+/*
+Messages to user
+*/
 
-.grid .row
+.message
 {
-    background-color: #fff;
-}  
-
-.grid .rownum
-{
-	width:15px;
-    text-align:center;
-    padding-left:0px;
-    font-weight:bold;
-    color:#333333;
-}
-
-/* group header */
-.grid .group span
-{
-	padding:10px 0px 2px 0px;
-	color:#666666;
-	text-align:left;
-	font-size:13px;
-	font-weight:bold;
-	cursor:pointer;
-} 
-.grid .group img
-{
-	cursor:pointer;
+		background-size: 40px 40px;
+		background-image: linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%,
+							transparent 50%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .05) 75%,
+							transparent 75%, transparent);										
+		 box-shadow: inset 0 -1px 0 rgba(255,255,255,.4);
+		 width: 100%;
+		 border: 1px solid;
+		 color: #fff;
+		 padding: 15px;
+		 position: fixed;
+		 _position: absolute;
+		 text-shadow: 0 1px 0 rgba(0,0,0,.5);
+		 animation: animate-bg 5s linear infinite;
 }
 
-
-.dialog
-{
-    font-family:Tahoma;
-    font-size:11pt;
-    color:#222222;
-    background-color:#fff;
-}    
-
-/* gridheader styles */
-.gridheader
-{
-    position:relative;
-    color:#fff;        
-    cursor:move; /* So the user knows they can drag the panel */
-}
-.gridheader .outer
-{
-    background:url(../images/top-right.png) right no-repeat;
-    padding-right:40px;
-}
-.gridheader .inner
-{
-    background:url(../images/top-left.png) left no-repeat;
-    padding-left:9px;
-}
-.gridheader .content
-{
-    height:35px;
-    background:url(../images/top-mid.png) repeat-x;
-}
-.gridheader .content H2
-{
-    font-size:12pt;
-    font-weight:bold;
-    color:#fff;
-    padding-top:6px;
-    margin:0;
-}
-.gridheader .close
-{
-    /* the image is 35x35 pixels wide */
-    height:25px;
-    width:35px;	
-    /* position the image */
-    position:absolute;	
-    top:4px;
-    right:7px;	
-    background:url(../images/close.png) no-repeat;	
-    cursor:pointer;
-}
-.gridheader .close:hover
-{
-    /* set the hover image */
-    background:url(../images/close-hover.png) no-repeat;	
-}        
-
-/* dialog gridbody styles */
-.gridbody
-{
-}
-.gridbody .outer
-{
-    background:url(../images/right.png) right repeat-y;
-    padding-right:7px;
-}
-.gridbody .inner
-{
-    background:url(../images/left.png) left repeat-y;
-    padding-left:7px;
-}
-.gridbody .content
-{
-}  
-.gridbody .content H2
-{
-    padding:10px;
-    margin:0px;
-    text-align:center;
-    font-size:11pt;
-    color:#222222;            
-    font-weight:normal;
-}           
-.gridbody .content .gridfooter
-{
-    /* gridfooter image is 41 pixels tall */    
-    background:url(../images/gridfooter.gif) repeat-x bottom;
-    height:41px;
-}
-.gridbody .content .gridfooter .commands
-{
-    text-align:right;
-    padding:8px;
-}           
-.gridbody .content .gridfooter .commands INPUT
-{
-    /* keep the buttons a consistent size */    
-    width:75px;        
-}                   
-
-/* dialog gridfooter styles */
-.gridfooter
-{
-}
-.gridfooter .outer
-{
-    background:url(../images/bottom-right.png) right top no-repeat;
-    padding-right:9px;
-}
-.gridfooter .inner
-{
-    background:url(../images/bottom-left.png) left top no-repeat;
-    padding-left:9px;
-}
-.gridfooter .content
-{
-    height:7px;
-    background:url(../images/bottom-mid.png) repeat-x;        
-}   
-        
-.updating
-{
-    color:#808080;
-    background:url(../images/activity.gif) no-repeat center;
-}  
-
-.kiketable-colsizable{
-	table-layout: fixed; 
-	width : 100%;
-	}
-.kiketable-colsizable td,
-.kiketable-colsizable th{
-	overflow : hidden;
-	}
-.kiketable-th{
-	/* Don't set "position: relative" in IE */
-	white-space: nowrap !important; /* Only works for THs in IE */
-	text-align: left;
-	height: 18px;		 /* value safe to change */
-	}
-.kiketable-th-text{
-	height: 100%;
-	overflow: hidden;
-	}
-.kiketable-colsizable-handler{
-	float: right;
-	cursor: e-resize;
-	height: 100%;
-	border-left:2px outset white;
-	border-right:2px inset white;
-
-	position: relative;
-	right: -2px;
-	}
-html > body .kiketable-colsizable-handler{
-	border-right:1px outset white;
-	}
-.kiketable-colsizable-dragLine{
-	position: absolute;
-	width: 2px;
-	cursor: e-resize;
-	background-color: red;	/* value safe to change */
-	}
-.kiketable-colsizable-dragArea{
-	position: absolute;
-	cursor: e-resize;
-	background-color:red;	/* value safe to change */
-	background-color: #000;
-	}
-.kiketable-colsizable-minimized{
-	background-color: #ffd; /* value safe to change */
-	color: #bbb;			/* value safe to change */
+.info{
+		 background-color: #4ea5cd;
+		 border-color: #3b8eb5;
 }
 
+.error{
+		 background-color: #de4343;
+		 border-color: #c43d3d;
+}
+		 
+.warning{
+		 background-color: #eaaf51;
+		 border-color: #d99a36;
+}
+
+.success{
+		 background-color: #61b832;
+		 border-color: #55a12c;
+}
+
+.message h3{
+		 margin: 0 0 5px 0;													 
+}
+
+.message p{
+		 margin: 0;													 
+}
+
+@keyframes animate-bg {
+    from {
+        background-position: 0 0;
+    }
+    to {
+       background-position: -80px 0;
+    }
+}

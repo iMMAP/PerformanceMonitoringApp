@@ -40,7 +40,7 @@
             </div>
             <table width="100%" class="label1">
                 <tr>
-                    <td class="formh01">
+                    <td>
                         Emergency:
                     </td>
                     <td>

@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <table width="100%" class="label1" border='1'>
         <tr>
-            <td class="formh01">
+            <td>
                 Data:
             </td>
             <td colspan="7">
@@ -14,7 +14,7 @@
             </td>
         </tr>
         <tr>
-            <td class="formh01">
+            <td>
                 Country:
             </td>
             <td>
@@ -22,7 +22,7 @@
                     OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged">
                 </asp:DropDownList>
             </td>
-            <td class="formh01">
+            <td>
                 Admin1:
             </td>
             <td>
@@ -38,7 +38,7 @@
                     OnSelectedIndexChanged="ddlLocations_SelectedIndexChanged">
                 </asp:DropDownList>
             </td>
-            <td class="formh01">
+            <td>
                 Duration:
             </td>
             <td>

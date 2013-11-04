@@ -2,22 +2,37 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-<head runat="server">
-    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
-    <title>3W Activities</title>
-    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+<head id="Head1" runat="server">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <title></title>
     <link href="~/Styles/Site.min.css" rel="stylesheet" type="text/css" />
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Styles/style.css" />
+    <link rel="stylesheet" type="text/css" href="~/Styles/menu.css" />
+    <link rel="stylesheet" type="text/css" href="~/Styles/loginareamenu.css" />
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js" type="text/javascript"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="<%# BaseURL %>/Scripts/jquery.kiketable.colsizable-1.1.js"></script>
     <script type="text/javascript" src="<%# BaseURL %>/Scripts/jquery.event.drag-1.4.min.js"></script>
-    <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
-    <style type="text/css">
-        .ddlWidth
-        {
-            width: 200px;
+    <script type="text/javascript" src="<%# BaseURL %>/Scripts/jquery.fixedMenu.js"></script>
+    <script type="text/javascript">
+        var myMessages = ['info', 'warning', 'error', 'success'];
+
+        function hideAllMessages() {
+            var messagesHeights = new Array(); // this array will store height for each
+
+            for (i = 0; i < myMessages.length; i++) {
+                messagesHeights[i] = $('.' + myMessages[i]).outerHeight(); // fill array
+                $('.' + myMessages[i]).css('top', -messagesHeights[i]); //move element outside viewport	  
+            }
         }
-    </style>
+
+        $('document').ready(function () {
+            $('.menu').fixedMenu();
+            hideAllMessages();
+        });
+        
+        
+    </script>
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -25,68 +40,80 @@
     <form runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true">
     </asp:ScriptManager>
-    <div class="page">
-        <div class="header">
-            <div class="title">
-                <h2>
-                    3W Performance Monitoring</h2>
-            </div>
-            <div class="loginDisplay">
-                <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
-                    <AnonymousTemplate>
-                        [ <a href="~/Account/Login.aspx" id="HeadLoginStatus" runat="server">Log In</a>
-                        ]
-                    </AnonymousTemplate>
-                    <LoggedInTemplate>
-                        Welcome <span class="bold">
-                            <asp:LoginName ID="HeadLoginName" runat="server" />
-                        </span>! [
-                        <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out"
-                            LogoutPageUrl="~/" />
-                        ]
-                    </LoggedInTemplate>
-                </asp:LoginView>
-            </div>
-            <div class="clear hideSkiplink">
-                <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false"
-                    IncludeStyleBlock="false" Orientation="Horizontal">
-                    <Items>
-                        <asp:MenuItem NavigateUrl="~/Default.aspx" Text="All-Data" />
-                        <asp:MenuItem NavigateUrl="~/Pages/AddActivities.aspx" Text="Data Entry"></asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="~/Pages/SelectActivities.aspx" Text="My Activities"></asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="~/Admin/Organization/OrganizationListing.aspx" Text="Organizations">
-                        </asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="~/Admin/Office/OfficeListing.aspx" Text="Offices"></asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="~/Admin/Emergency/EmergencyListing.aspx" Text="Emergencies">
-                        </asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="~/Admin/Clusters/EmergencyClusters.aspx" Text="Clusters">
-                        </asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="~/Admin/Clusters/StrategicObjectives.aspx" Text="Str Objectives">
-                        </asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="~/Admin/Clusters/ClusterObjectives.aspx" Text="Objectives">
-                        </asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="~/Admin/Clusters/ObjectiveIndicators.aspx" Text="Indicators">
-                        </asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="~/Admin/Clusters/IndicatorActivities.aspx" Text="Activity">
-                        </asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="~/Admin/Clusters/ActivityData.aspx" Text="Data"></asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="~/Admin/Users/UsersListing.aspx" Text="Users"></asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="~/Admin/Upload/UploadActivities.aspx" Text="Upload Activities">
-                        </asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="~/ContactUs/Contactus.aspx" Text="Contact Us" />
-                        <asp:MenuItem NavigateUrl="~/UserManual.aspx" Text="User Manual" />
-                        <asp:MenuItem NavigateUrl="~/Admin/DataFeeds/AdminDataFeeds.aspx" Text="Data Feeds" />
-                        <asp:MenuItem NavigateUrl="~/ReportsCharts/TargetsAchievedByLocData.aspx" Text="Reports" />
-                        <asp:MenuItem NavigateUrl="~/Maps/TargetAchievedByLocDataMap.aspx" Text="Maps" />
-                    </Items>
-                </asp:Menu>
-            </div>
+    <div class="toploginarea">
+        <strong>
+            <asp:LoginName ID="HeadLoginName" runat="server" />
+        </strong>
+        <div class="menu">
+            <ul class="sep">
+                <li><a href="~/Account/Login.aspx" id="LoginStatus" runat="server">Log On</a>
+                    <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Off"
+                        LogoutPageUrl="~/" />
+                </li>
+                <li><a href="~/Account/Register.aspx" id="ResiterStatus" runat="server">Sign Up</a>
+                </li>
+                <li><a href='javascript:void(0)'>Admin<span class="signinarrow">&nbsp; &nbsp;</span></a>
+                    <ul>
+                        <li><a class="signinfly" href="../Admin/OrganizationListing.aspx" tabindex="1">Organizations</a></li>
+                        <li><a class="signinfly" href="../Admin/OfficeListing.aspx" tabindex="1">Offices</a></li>
+                        <li><a class="signinfly" href="../Admin/EmergencyListing.aspx" tabindex="1">Emergencies</a></li>
+                        <li><a class="signinfly" href="../AdminEmergencyClusters.aspx" tabindex="1">Emg Clusters</a>
+                        </li>
+                        <hr />
+                        <li><a class="signinfly" href="../Admin/StrategicObjectives.aspx" tabindex="1">Str Objectives</a></li>
+                        <li><a class="signinfly" href="../Admin/ClusterObjectives.aspx" tabindex="1">Spec Objectives</a></li>
+                        <li><a class="signinfly" href="../Admin/ObjectiveIndicators.aspx" tabindex="1">Indicators</a></li>
+                        <li><a class="signinfly" href="../Admin/IndicatorActivities.aspx" tabindex="1">Activities</a>
+                        </li>
+                        <li><a class="signinfly" href="../Admin/ActivityData.aspx" tabindex="1">Data</a>
+                        </li>
+                        <hr />
+                        <li><a class="signinfly" href="../Admin/UsersListing.aspx" tabindex="1">Users</a></li>
+                        <li><a class="signinfly" href="../Admin/UploadActivities.aspx" tabindex="1">Upload LogFrame</a>
+                        </li>
+                        <li><a class="signinfly" href="../Admin/AdminDataFeeds.aspx" tabindex="1">XML Feeds</a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="../ContactUs/Contactus.aspx">Contact us</a></li>
+                <li><a href="../UserManual.aspx">Help</a></li>
+            </ul>
         </div>
-        <div class="main">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+        <div class="spacer" style="clear: both;">
         </div>
-        <div class="clear">
-        </div>
+    </div>
+    <div class="topmenuarea">
+        <ul id="nav">
+            <li><a href="../Default.aspx">Home</a></li>
+            <li><a href="../Anonymous/AllData.aspx">All Data</a></li>
+            <li><a href="~/Pages/SelectActivities.aspx" id="menuMyActivities" runat="server">My
+                Activities</a></li>
+            <li><a href="~/Pages/AddActivities.aspx" id="menueDataEntry" runat="server">Data Entry</a></li>
+            <li><a class="fly arrow" href="#" tabindex="1">Generate Reports</a>
+                <ul class="dd">
+                    <li><a class="fly" href="../ReportsCharts/GenerateReport1.aspx" tabindex="1">Charts
+                        Report</a></li>
+                    <li><a class="fly" href="#" tabindex="1">Tabular Report</a></li>
+                    <li><a class="fly" href="#" tabindex="1">Map Report</a></li>
+                    <li><a class="fly" href="#" tabindex="1">Charts/Tabular/Maps Report</a></li>
+                </ul>
+            </li>
+            <li><a class="fly arrow" href="#" tabindex="1">Charts</a>
+                <ul class="dd">
+                    <div class="menuheading">
+                        Diff Views Of Data</div>
+                    <li><a class="fly" href="../ReportsCharts/TargetsAchievedByLocData.aspx" tabindex="1">
+                        Data By Location</a></li>
+                    <li><a class="fly" href="../ReportsCharts/TargetsAchievedByLocDuration.aspx" tabindex="1">
+                        Data By Duration</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Maps</a></li>
+            <li><a href="../UserManual.aspx">User Manual</a></li>
+        </ul>
+    </div>
+    <div class="main">
+        <asp:ContentPlaceHolder ID="MainContent" runat="server" />
     </div>
     <div class="footer">
     </div>

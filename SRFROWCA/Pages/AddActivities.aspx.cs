@@ -314,33 +314,23 @@ namespace SRFROWCA.Pages
         }
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            try
+            using (TransactionScope scope = new TransactionScope())
             {
-                using (TransactionScope scope = new TransactionScope())
+                if (ReportId > 0)
                 {
-                    if (ReportId > 0)
-                    {
-                        DeleteReportAndItsChild();
-                    }
-
-                    if (IsDataExistsToSave())
-                    {
-                        SaveReport();
-                    }
-
-                    scope.Complete();
-
-                    lblMessage.Visible = true;
-                    lblMessage.CssClass = "info-message";
-                    lblMessage.Text = "Data Saved Successfully.";
+                    DeleteReportAndItsChild();
                 }
-            }
-            catch
-            {
-                //lblMessage.Visible = true;
-                //lblMessage.Text = "Some Error Occoured, try again.";
 
-                throw;
+                if (IsDataExistsToSave())
+                {
+                    SaveReport();
+                }
+
+                scope.Complete();
+
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), "popup",
+                //    "$('#divMsg').addClass('info message').text('Hello There').animate({ top: '0' }, 500).fadeOut(4000, function() {});", true);
+                ShowMessage("Your Data Saved Successfuly!");
             }
         }
 
@@ -1034,12 +1024,21 @@ namespace SRFROWCA.Pages
             }
         }
 
+        private void ShowMessage(string message, ROWCACommon.NotificationType notificationType = ROWCACommon.NotificationType.Success)
+        {
+            //updMessage.Update();
+            ROWCACommon.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, 500);
+        }
+
         protected void Page_Error(object sender, EventArgs e)
         {
+            ShowMessage("<b>Some Error Occoured. Admin Has Notified About It</b>.<br/> Please Try Again.", ROWCACommon.NotificationType.Error);
             // Get last error from the server
             Exception exc = Server.GetLastError();
             SRFROWCA.Common.ExceptionUtility.LogException(exc, "AddActivites", this.User);
         }
+
+
 
         #endregion
 
@@ -1174,6 +1173,6 @@ namespace SRFROWCA.Pages
             l.MaxLength = 12;
             GridViewRow row = (GridViewRow)l.NamingContainer;
             l.Text = DataBinder.Eval(row.DataItem, columnName).ToString();
-        }        
+        }
     }
 }

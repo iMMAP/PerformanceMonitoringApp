@@ -11,7 +11,7 @@
 <div>
     <table width="100%" class="label1" border='0'>
         <tr>
-            <td class="formh01">
+            <td>
                 Data:
             </td>
             <td colspan="5">
@@ -20,7 +20,7 @@
             </td>
         </tr>
         <tr>
-            <td class="formh01">
+            <td>
                 Country:
             </td>
             <td>
@@ -28,7 +28,7 @@
                     OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged">
                 </asp:DropDownList>
             </td>
-            <td class="formh01">
+            <td>
                 Admin1:
             </td>
             <td>

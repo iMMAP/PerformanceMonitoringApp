@@ -213,6 +213,47 @@ namespace SRFROWCA.Common
             return (Guid)Membership.GetUser().ProviderUserKey;
         }
 
+        internal static void ShowMessage(Page page, Type pageType, string UniqueID, string message, NotificationType notificationType = NotificationType.Success, int animationTime = 0)
+        {
+            string cssClass = GetClass(notificationType);
+
+            if (notificationType == NotificationType.Success)
+            {
+                ScriptManager.RegisterStartupScript(page, pageType, UniqueID,
+                    "$('#divMsg').addClass('" + cssClass + "').text('" + message + "').animate({ top: '0' }," + animationTime.ToString() + ").fadeOut(4000, function() {});", true);
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(page, pageType, UniqueID,
+                "$('#divMsg').addClass('" + cssClass + "').text('" + message + "').animate({ top: '0' }," + animationTime.ToString() + " 0).click(function(){$(this).animate({top: -$(this).outerHeight()}, 300);});", true);
+            }
+        }
+
+        private static string GetClass(NotificationType type)
+        {
+            if (type == NotificationType.Success)
+            {
+                return "success message";
+            }
+
+            if (type == NotificationType.Error)
+            {
+                return "error message";
+            }
+
+            if (type == NotificationType.Info)
+            {
+                return "info message";
+            }
+
+            if (type == NotificationType.Warning)
+            {
+                return "warning message";
+            }
+
+            return "info message";
+        }
+
         public static string ErrorMessage
         {
             get
@@ -240,5 +281,13 @@ namespace SRFROWCA.Common
             Nonrepresentative = 7,
             Other = 8,
         }
+
+        internal enum NotificationType
+        {
+            Success = 1,
+            Error = 2,
+            Info = 3,
+            Warning = 4,
+        }       
     }
 }

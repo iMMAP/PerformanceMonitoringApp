@@ -19,7 +19,7 @@ namespace SRFROWCA.Pages
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
-            
+
             PopulateDropDowns();
             LoadClusters();
         }
@@ -79,14 +79,15 @@ namespace SRFROWCA.Pages
             if (e.CommandName == "AddActivity")
             {
                 AddActivity(row);
-                ShowMessage("Saved Successfully!", "info-message");
+                ShowMessage("Activity Added In Your List.");
             }
 
             if (e.CommandName == "RemoveActivity")
             {
                 RemoveActivity(row);
-                ShowMessage("Saved Successfully!", "info-message");
+                ShowMessage("Activity Removed From Your List.");
             }
+
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)
@@ -104,7 +105,7 @@ namespace SRFROWCA.Pages
                 }
             }
 
-            ShowMessage("Saved Successfully!", "info-message");
+            ShowMessage("All Selected Activities Added In Your List.");
         }
 
         protected void btnDelete_Click(object sender, EventArgs e)
@@ -121,7 +122,7 @@ namespace SRFROWCA.Pages
                 }
             }
 
-            ShowMessage("Saved Successfully!", "info-message");
+            ShowMessage("All Selected Activities Removed From Your List.");
         }
 
         #endregion
@@ -342,18 +343,17 @@ namespace SRFROWCA.Pages
         {
             return DBContext.GetData("GetEmergencyClustersOfData", new object[] { emgLocationId });
         }
-        private void ShowMessage(string message, string css)
+
+        private void ShowMessage(string message, ROWCACommon.NotificationType notificationType = ROWCACommon.NotificationType.Success)
         {
-            lblMessage.CssClass = css;
-            lblMessage.Text = message;
-            lblMessage.Visible = true;
             updMessage.Update();
-            ScriptManager.RegisterClientScriptBlock(this.Page, typeof(Page), UniqueID, "$('#" + lblMessage.ClientID.ToString() + "').fadeOut(3000, function() {});", true);
-            return;
+            ROWCACommon.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType);
         }
 
         protected void Page_Error(object sender, EventArgs e)
         {
+            ShowMessage("<b>Some Error Occoured. Admin Has Notified About It</b>.<br/> Please Try Again.", ROWCACommon.NotificationType.Error);
+
             // Get last error from the server
             Exception exc = Server.GetLastError();
             SRFROWCA.Common.ExceptionUtility.LogException(exc, "SelectActivities", this.User);
