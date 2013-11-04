@@ -7,7 +7,7 @@
     <div class="containerLogin">
         <div class="graybarLogin">
             Please enter your username and password.
-            <asp:HyperLink ID="RegisterHyperLink" runat="server" EnableViewState="false" Style="color: Blue">Sign Up</asp:HyperLink>
+            <asp:HyperLink ID="RegisterHyperLink" runat="server" EnableViewState="false">Sign Up</asp:HyperLink>
             if you don't have an account.
         </div>
         <div class="contentarea">
@@ -46,7 +46,7 @@
                                 <td colspan="2">
                                     <asp:CheckBox ID="RememberMe" runat="server" />
                                     <asp:Label ID="RememberMeLabel" runat="server" AssociatedControlID="RememberMe" CssClass="inline">Keep me logged in</asp:Label>
-                                    <a href="ForgotPassword.aspx" style="color: Blue">Forgot Password?</a>
+                                    <a href="ForgotPassword.aspx">Forgot Password?</a>
                                 </td>
                             </tr>
                             <tr>

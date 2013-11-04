@@ -1027,7 +1027,7 @@ namespace SRFROWCA.Pages
         private void ShowMessage(string message, ROWCACommon.NotificationType notificationType = ROWCACommon.NotificationType.Success)
         {
             //updMessage.Update();
-            ROWCACommon.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, 500);
+            ROWCACommon.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, true, 500);
         }
 
         protected void Page_Error(object sender, EventArgs e)

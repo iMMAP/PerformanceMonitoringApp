@@ -11,25 +11,25 @@ body
 
 a:link
 {
-    color: #444444;
+    color: Blue;
     text-decoration: none;
 }
 /* unvisited link */
 a:visited
 {
-    color: #444444;
+    color: Blue;
     text-decoration: none;
 }
 /* visited link */
 a:hover
 {
-    color: #444444;
-    text-decoration: none;
+    color: Blue;
+    text-decoration: underline;
 }
 /* mouse over link */
 a:active
 {
-    color: #444444;
+    color: Blue;
     text-decoration: none;
 }
 /* selected link */

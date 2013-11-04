@@ -5,6 +5,7 @@ using System.Web.UI.WebControls;
 using BusinessLogic;
 using SRFROWCA.Common;
 using SRFROWCA.Reports;
+using Microsoft.Office.Interop.Access;
 
 namespace SRFROWCA.Account
 {
@@ -92,22 +93,18 @@ namespace SRFROWCA.Account
                     }
                     catch
                     {
-                        message = @"You have been registered successfully but some error occoured
-                                   on sending email to site admin. Contact admin and ask for the verification!
-                                   We apologies for the inconvenience!";
+                        message = "You have been registered successfully but some error occoured on sending email to site admin. Contact admin and ask for the verification! We apologies for the inconvenience!";
                     }
                 }
 
-                lblMessage.CssClass = "info-message";
-                lblMessage.Text = message;
-                lblMessage.Visible = true;
+
+                ShowMessage(message, ROWCACommon.NotificationType.Success, false, 500);
 
                 ClearRegistrationControls();
             }
             catch (Exception ex)
             {
-                lblMessage.Text = ex.Message;
-                lblMessage.Visible = true;
+                ShowMessage(ex.Message);
             }
         }
 
@@ -177,8 +174,7 @@ namespace SRFROWCA.Account
 
             if (membershipUser != null)
             {
-                lblMessage.Text = string.Format("This email {0} already exists in db!", txtEmail.Text.Trim());
-                lblMessage.Visible = true;
+                ShowMessage(string.Format("This email {0} already exists in db!", txtEmail.Text.Trim()), ROWCACommon.NotificationType.Error);
                 return true;
             }
             else
@@ -187,8 +183,7 @@ namespace SRFROWCA.Account
 
                 if (membershipUser != null)
                 {
-                    lblMessage.Text = string.Format("Someone already has this, '{0}', username. Try another?!", txtUserName.Text.Trim());
-                    lblMessage.Visible = true;
+                    ShowMessage(string.Format("Someone already has this, {0}, username. Try another?!", txtUserName.Text.Trim()), ROWCACommon.NotificationType.Error);
                     return true;
                 }
             }
@@ -321,6 +316,12 @@ namespace SRFROWCA.Account
             {
                 DBContext.Add("InsertOffice", new object[] { orgId, locId, officeName, userId, DBNull.Value });
             }
+        }
+
+        private void ShowMessage(string message, ROWCACommon.NotificationType notificationType = ROWCACommon.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
+        {
+            updMessage.Update();
+            ROWCACommon.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
         }
 
         public string UserId
