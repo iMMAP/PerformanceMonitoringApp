@@ -97,6 +97,11 @@ Messages to user
 		 background-color: #de4343;
 		 border-color: #c43d3d;
 }
+
+.error2
+{
+    color: #FF0000;
+}
 		 
 .warning{
 		 background-color: #eaaf51;
@@ -123,4 +128,23 @@ Messages to user
     to {
        background-position: -80px 0;
     }
+}
+
+/*
+CSS for Login, Register, ForgotPassword, ChagnePassword
+*/
+
+.containerLogin
+{
+    width: 50%;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    margin-top: 40px;
+}
+.graybarLogin
+{
+    background-color: #efefef;
+    border-bottom: 1px solid #ccc;
+    height: 20px;
+    padding: 9px 14px;
 }
