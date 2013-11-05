@@ -144,6 +144,8 @@
     <Content Include="ErrorPages\GenericErrorPage.aspx" />
     <Content Include="ErrorPages\Http404ErrorPage.aspx" />
     <Content Include="ErrorPages\HttpErrorPage.aspx" />
+    <Content Include="Help\generatereport1.avi" />
+    <Content Include="Help\generatereport1.swf" />
     <Content Include="images\01a.jpg" />
     <Content Include="images\activity.gif" />
     <Content Include="images\add_plus.png" />

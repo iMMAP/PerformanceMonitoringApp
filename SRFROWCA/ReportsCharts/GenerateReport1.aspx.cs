@@ -18,7 +18,7 @@ namespace SRFROWCA.Reports
             if (IsPostBack) return;
 
             chkDuration.Attributes.Add("onclick", "radioMe(event);");
-            PopulateControls();            
+            PopulateControls();
         }
 
         #region Wizard Events
@@ -48,13 +48,20 @@ namespace SRFROWCA.Reports
             DataTable dt = GetChartData();
             if (dt.Rows.Count == 0)
             {
-                divMessage.InnerHtml = "Your selected options did not produce any report. Please contact to admin of this site for futher details!";
+                divMessage.InnerHtml = @"<h2>Your selected options did not produce any report.</h2>
+                                        <p>In Step-1 you must select 'Country', 'Emergency' & at least one 'Cluster' </p>
+                                        <p>In Step-2 you must select at least one entry from 'Objectives' OR 'Indicators' OR 'Activity' OR 'Data'.</p>
+                                        <p>Please contact to admin of this site if you are unable to generate any output!</p>";
+                divMessage.Attributes.Remove("class");
+                divMessage.Attributes.Add("class", "error2");
                 return;
             }
             else
             {
-                divMessage.InnerHtml = @"<b>You have successfully selected all the options. Please click on 'Generate Report' button.
-                        <br />It will take a while to generate your report, depending on the options you haveselected!</b>";
+                divMessage.InnerHtml = @"<h2>You have successfully selected all the options.</h2>
+                                         <p>Please click on 'Prepare Report' button. It will take a while to prepare your report, depending on the options you have selected!</p>";
+                divMessage.Attributes.Remove("class");
+                divMessage.Attributes.Add("class", "info2");
             }
             string html = "";
 
@@ -380,7 +387,7 @@ namespace SRFROWCA.Reports
                 {
                     if (dr["ClusterId"].ToString().Equals(item.Value))
                     {
-                        item.Selected = true;                        
+                        item.Selected = true;
                     }
                 }
             }
@@ -621,7 +628,7 @@ namespace SRFROWCA.Reports
             }
             finally
             {
-                DeleteUserFolder(path);               
+                DeleteUserFolder(path);
             }
         }
 
