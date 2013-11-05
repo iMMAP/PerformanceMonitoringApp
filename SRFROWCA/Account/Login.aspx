@@ -56,11 +56,9 @@
                         </table>
                     </LayoutTemplate>
                 </asp:Login>
-                <div class="spacer" style="clear: both;">
-                </div>
+                <div class="spacer" style="clear: both;"></div>
             </div>
         </div>
-        <div class="graybarcontainer">
-        </div>
+        <div class="graybarcontainer"></div>
     </div>
 </asp:Content>

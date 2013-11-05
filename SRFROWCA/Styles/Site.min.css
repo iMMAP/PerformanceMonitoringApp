@@ -156,6 +156,21 @@ CSS for Login, Register, ForgotPassword, ChagnePassword
     margin-top: 40px;
 }
 
+.containerWizard
+{
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+.containerWizardStep
+{
+    width: 100%;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    margin-top: 40px;
+}
+
 .containerErrorCenter
 {
     width: 50%;

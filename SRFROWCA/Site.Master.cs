@@ -20,12 +20,19 @@ namespace SRFROWCA
                 LoginStatus.Visible = false;
                 HeadLoginStatus.Visible = true;
                 ResiterStatus.Visible = false;
+                if (!(HttpContext.Current.User.IsInRole("Admin"))
+                    && !(HttpContext.Current.User.IsInRole("CountryAdmin")))
+                {
+                    AdminMenue.Visible = false;
+                }
             }
             else
             {
                 LoginStatus.Visible = true;
                 HeadLoginStatus.Visible = false;
                 ResiterStatus.Visible = true;
+                AdminMenue.Visible = false;
+                MySettingsMenue.Visible = false;
             }
 
             // Highlihgt current menue item.

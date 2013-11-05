@@ -25,7 +25,6 @@
         }
     </style>
     <link rel="stylesheet" href="../Styles/ui-lightness/jquery-ui-1.10.3.custom.min.css" />
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <script>
         $(function () {
             $("#<%=txtFromDate.ClientID%>").datepicker();
@@ -135,90 +134,115 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:Wizard ID="wzrdReport" runat="server" OnNextButtonClick="wzrdReport_NextButtonClick"
-        OnPreviousButtonClick="wzrdReport_PreviousButtonClick">
+        CssClass="containerWizard" OnPreviousButtonClick="wzrdReport_PreviousButtonClick">
         <WizardSteps>
             <asp:WizardStep ID="wsFrist" runat="server" Title="Step 1">
-                <table>
-                    <tr>
-                        <td>
-                            Country:
-                        </td>
-                        <td>
-                            <asp:DropDownList ID="ddlCountry" runat="server" AutoPostBack="true" Width="300px"
-                                OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged">
-                            </asp:DropDownList>
-                            <asp:RequiredFieldValidator ID="rfvCountry" runat="server" InitialValue="0" ControlToValidate="ddlCountry"
-                                Text="Required" ErrorMessage="Country Required" ForeColor="Red"></asp:RequiredFieldValidator>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Admin1:
-                        </td>
-                        <td>
-                            <cc:DropDownCheckBoxes ID="ddlAdmin1Locations" runat="server" CssClass="ddlWidth2"
-                                AddJQueryReference="True" meta:resourcekey="checkBoxes2Resource1" UseButtons="False"
-                                UseSelectAllNode="True">
-                                <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
-                                <Texts SelectBoxCaption="Select Location" />
-                            </cc:DropDownCheckBoxes>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Admin2:
-                        </td>
-                        <td>
-                            <cc:DropDownCheckBoxes ID="ddlAdmin2Locations" runat="server" CssClass="ddlWidth2"
-                                AddJQueryReference="True" meta:resourcekey="checkBoxes2Resource1" UseButtons="False"
-                                UseSelectAllNode="True">
-                                <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
-                                <Texts SelectBoxCaption="Select Location" />
-                            </cc:DropDownCheckBoxes>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Report Location Level:
-                        </td>
-                        <td>
-                            <asp:RadioButton ID="rbCountry" runat="server" Text="Country" Checked="true" GroupName="Location" />
-                            <asp:RadioButton ID="rbAdmin1" runat="server" Text="Admin 1" GroupName="Location" />
-                            <asp:RadioButton ID="rbAdmin2" runat="server" Text="Admin 2" GroupName="Location" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Emergency:
-                        </td>
-                        <td>
-                            <asp:DropDownList ID="ddlEmergency" runat="server" AutoPostBack="true" Width="300px" OnSelectedIndexChanged="ddlEmergency_SelectedIndexChanged">
-                            </asp:DropDownList>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Organization:
-                        </td>
-                        <td>
-                            <cc:DropDownCheckBoxes ID="ddlOrganizations" runat="server" CssClass="ddlWidth2"
-                                AddJQueryReference="True" meta:resourcekey="checkBoxes2Resource1" UseButtons="False"
-                                UseSelectAllNode="True">
-                                <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
-                                <Texts SelectBoxCaption="Select Organization" />
-                            </cc:DropDownCheckBoxes>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Clusters:
-                        </td>
-                        <td>
-                            <asp:CheckBoxList ID="cblClusters" runat="server" RepeatColumns="3">
-                            </asp:CheckBoxList>
-                        </td>
-                    </tr>
-                </table>
+                <div class="containerWizardStep">
+                    <div class="graybar">
+                        Please enter your username and password.
+                        <asp:HyperLink ID="RegisterHyperLink" runat="server" EnableViewState="false">Sign Up</asp:HyperLink>
+                        if you don't have an account.
+                    </div>
+                    <div class="contentarea">
+                        <div class="formdiv">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <label>
+                                        Country:
+                                    </td>
+                                    <td>
+                                        <asp:DropDownList ID="ddlCountry" runat="server" AutoPostBack="true" Width="300px"
+                                            OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged">
+                                        </asp:DropDownList>
+                                        <asp:RequiredFieldValidator ID="rfvCountry" runat="server" InitialValue="0" ControlToValidate="ddlCountry"
+                                            Text="Required" ErrorMessage="Country Required" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>
+                                            Admin1:</label>
+                                    </td>
+                                    <td>
+                                        <cc:DropDownCheckBoxes ID="ddlAdmin1Locations" runat="server" CssClass="ddlWidth2"
+                                            AddJQueryReference="True" meta:resourcekey="checkBoxes2Resource1" UseButtons="False"
+                                            UseSelectAllNode="True">
+                                            <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
+                                            <Texts SelectBoxCaption="Select Location" />
+                                        </cc:DropDownCheckBoxes>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>
+                                            Admin2:</label>
+                                    </td>
+                                    <td>
+                                        <cc:DropDownCheckBoxes ID="ddlAdmin2Locations" runat="server" CssClass="ddlWidth2"
+                                            AddJQueryReference="True" meta:resourcekey="checkBoxes2Resource1" UseButtons="False"
+                                            UseSelectAllNode="True">
+                                            <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
+                                            <Texts SelectBoxCaption="Select Location" />
+                                        </cc:DropDownCheckBoxes>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>
+                                            Report Location Level:</label>
+                                    </td>
+                                    <td>
+                                        <asp:RadioButton ID="rbCountry" runat="server" Text="Country" Checked="true" GroupName="Location" />
+                                        <asp:RadioButton ID="rbAdmin1" runat="server" Text="Admin 1" GroupName="Location" />
+                                        <asp:RadioButton ID="rbAdmin2" runat="server" Text="Admin 2" GroupName="Location" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>
+                                            Emergency:</label>
+                                    </td>
+                                    <td>
+                                        <asp:DropDownList ID="ddlEmergency" runat="server" AutoPostBack="true" Width="300px"
+                                            OnSelectedIndexChanged="ddlEmergency_SelectedIndexChanged">
+                                        </asp:DropDownList>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>
+                                            Organization:</label>
+                                    </td>
+                                    <td>
+                                        <cc:DropDownCheckBoxes ID="ddlOrganizations" runat="server" CssClass="ddlWidth2"
+                                            AddJQueryReference="True" meta:resourcekey="checkBoxes2Resource1" UseButtons="False"
+                                            UseSelectAllNode="True">
+                                            <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
+                                            <Texts SelectBoxCaption="Select Organization" />
+                                        </cc:DropDownCheckBoxes>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>
+                                            Clusters:</label>
+                                    </td>
+                                    <td>
+                                        <asp:CheckBoxList ID="cblClusters" runat="server" RepeatColumns="3">
+                                        </asp:CheckBoxList>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="spacer" style="clear: both;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="graybarcontainer">
+                    </div>
+                </div>
+                <div class="spacer" style="clear: both;">
+                </div>
             </asp:WizardStep>
             <asp:WizardStep ID="WizardStep2" runat="server" Title="Step 2">
                 <table>
@@ -347,22 +371,27 @@
             </asp:WizardStep>
         </WizardSteps>
         <StartNavigationTemplate>
-            <asp:Button ID="btnNext" runat="server" Text="Next >>" CausesValidation="true" CommandName="MoveNext" />
+            <asp:Button ID="btnNext" runat="server" Text="Next >>" CausesValidation="true" CommandName="MoveNext"
+                CssClass="button_example" />
         </StartNavigationTemplate>
         <StepNavigationTemplate>
             <asp:Button ID="btnPrevious" runat="server" Text="<< Previous" CausesValidation="false"
-                CommandName="MovePrevious" />
-            <asp:Button ID="btnNext" runat="server" Text="Next >>" CausesValidation="true" CommandName="MoveNext" />
+                CssClass="button_example" CommandName="MovePrevious" />
+            <asp:Button ID="btnNext" runat="server" Text="Next >>" CausesValidation="true" CommandName="MoveNext"
+                CssClass="button_example" />
         </StepNavigationTemplate>
         <FinishNavigationTemplate>
             <asp:Button ID="btnPreviousFinish" runat="server" Text="<< Previous" CausesValidation="false"
-                class="classbtnprevious" CommandName="MovePrevious" />
-            <input type="button" name="btnname" value="Prepare Report" id="btnExport" />
+                CssClass="button_example" class="classbtnprevious" CommandName="MovePrevious" />
+            <input type="button" name="btnname" value="Prepare Report" id="btnExport" cssclass="button_example" />
             <asp:Button ID="btnDownload" runat="server" Text="Download Report" CausesValidation="false"
-                Style="display: none;" class="classbtndownload" OnClick="btnDownload_Click" OnClientClick="HideButton();" />
+                CssClass="button_example" Style="display: none;" class="classbtndownload" OnClick="btnDownload_Click"
+                OnClientClick="HideButton();" />
         </FinishNavigationTemplate>
     </asp:Wizard>
-    <script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script type="text/javascript">
         $(function () {
             $('#btnExport').click(function () {
                 getSVG1();

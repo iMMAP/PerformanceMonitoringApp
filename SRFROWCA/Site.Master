@@ -52,7 +52,8 @@
                 </li>
                 <li><a href="~/Account/Register.aspx" id="ResiterStatus" runat="server">Sign Up</a>
                 </li>
-                <li><a href='javascript:void(0)'>Admin<span class="signinarrow">&nbsp; &nbsp;</span></a>
+                <li><a href='javascript:void(0)' id="AdminMenue" runat="server">Admin<span class="signinarrow">&nbsp;
+                    &nbsp;</span></a>
                     <ul>
                         <li><a class="signinfly" href="../Admin/OrganizationListing.aspx" tabindex="1">Organizations</a></li>
                         <li><a class="signinfly" href="../Admin/OfficeListing.aspx" tabindex="1">Offices</a></li>
@@ -73,6 +74,12 @@
                         </li>
                         <li><a class="signinfly" href="../Admin/AdminDataFeeds.aspx" tabindex="1">XML Feeds</a>
                         </li>
+                    </ul>
+                </li>
+                <li><a href='javascript:void(0)' id="MySettingsMenue" runat="server">My Settings<span class="signinarrow">&nbsp;
+                    &nbsp;</span></a>
+                    <ul>
+                        <li><a class="signinfly" href="../Account/ChangePassword.aspx" tabindex="1">Change Password</a></li>
                     </ul>
                 </li>
                 <li><a href="../ContactUs/Contactus.aspx">Contact us</a></li>
