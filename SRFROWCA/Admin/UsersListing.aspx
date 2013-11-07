@@ -4,21 +4,26 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="buttonsdiv">
+        <div class="savebutton">
+            <asp:Button ID="btnExportExcel" runat="server" Text="Export To Excel" OnClick="btnExportExcel_Click"
+                CssClass="button_example" />
+        </div>
+        <div class="buttonright">
+            <asp:Button ID="btnAddUser" runat="server" Text="Add New User" PostBackUrl="~/Account/Register.aspx"
+                CssClass="button_example" />
+        </div>
+        <div class="spacer" style="clear: both;">
+        </div>
+    </div>
     <table width="100%">
         <tr>
             <td>
-                <asp:Button ID="btnExportExcel" runat="server" Text="Export To Excel" OnClick="btnExportExcel_Click" />
-            </td>
-            <td>
-                <asp:Button ID="btnAddUser" runat="server" Text="Add New User" PostBackUrl="~/Account/Register.aspx" />
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
                 <asp:GridView ID="gvUsers" runat="server" AutoGenerateColumns="false" AllowPaging="true"
-                    PageSize="20" AllowSorting="true" Width="100%" OnPageIndexChanging="gvUsers_PageIndexChanging"
+                    CssClass="imagetable" PageSize="20" AllowSorting="true" Width="100%" OnPageIndexChanging="gvUsers_PageIndexChanging"
                     OnSorting="gvUsers_Sorting" OnRowCommand="gvUsers_RowCommand">
-                    <HeaderStyle BackColor="ButtonFace" />
+                    <RowStyle CssClass="istrow" />
+                    <AlternatingRowStyle CssClass="altcolor" />
                     <Columns>
                         <asp:TemplateField ItemStyle-CssClass="rownum" ItemStyle-Width="2%" HeaderText="#">
                             <ItemTemplate>
@@ -54,7 +59,7 @@
                             ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center" />
                         <asp:BoundField DataField="LocationName" HeaderText="Country" SortExpression="LocationName"
                             ItemStyle-HorizontalAlign="Center" />
-                        <asp:TemplateField>
+                        <asp:TemplateField Visible="false">
                             <ItemTemplate>
                                 <asp:Label ID="lblUserId" runat="server" Visible="false" Text='<%#Eval("UserId") %>'></asp:Label>
                             </ItemTemplate>

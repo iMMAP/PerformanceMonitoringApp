@@ -16,70 +16,72 @@ namespace SRFROWCA.ReportsCharts
     {
         public string GeneratePDF(string path)
         {
-            string filePath = path + "Charts.pdf";
-
-            iTextSharp.text.Document document = CreatePDFDocument(filePath);            
-            document.Open();
-
-            DirectoryInfo dirInfo = new DirectoryInfo(path);
-            FileInfo[] files = dirInfo.GetFiles("*.jpg").OrderBy(p => p.CreationTime).ToArray();
-
-            XDocument xmlDoc = XDocument.Load(path + "logframe.xml");
-            string durationTypeName = GetAttributeValue(xmlDoc.Element("LogFrames"), "LogFrame", "DurationTypeName");
-
-            foreach (FileInfo file in files)
+            string filePath = "";
+            if (File.Exists(path + "logframe.xml"))
             {
-                string fileName = file.Name;
-                if (!fileName.Contains('t'))
+                filePath = path + "Charts.pdf";
+
+                iTextSharp.text.Document document = CreatePDFDocument(filePath);
+                document.Open();
+
+                DirectoryInfo dirInfo = new DirectoryInfo(path);
+                FileInfo[] files = dirInfo.GetFiles("*.jpg").OrderBy(p => p.CreationTime).ToArray();
+
+                XDocument xmlDoc = XDocument.Load(path + "logframe.xml");
+                string durationTypeName = GetAttributeValue(xmlDoc.Element("LogFrames"), "LogFrame", "DurationTypeName");
+
+                foreach (FileInfo file in files)
                 {
-                    int lastIndexOfUnderScore = fileName.LastIndexOf("__");
-                    int lastIndexofHyphen = fileName.LastIndexOf('-');
-                    int lastIndexOfPeriod = fileName.LastIndexOf(".");
-                    int length = lastIndexOfUnderScore == -1 ? lastIndexOfPeriod : lastIndexOfUnderScore;
-
-                    string logFrameId = fileName.Substring(1, length - 1);
-                    string durationTypeId = lastIndexOfUnderScore == -1 ? null :
-                        fileName.Substring(lastIndexOfUnderScore + 2, lastIndexofHyphen - (lastIndexOfUnderScore + 2));
-
-                    string yearTyepId = lastIndexOfUnderScore == -1 ? null :
-                        fileName.Substring(lastIndexofHyphen + 1, lastIndexOfPeriod - (lastIndexofHyphen + 1));
-
-                    var logFrameElements =
-                        from le in xmlDoc.Descendants("Data")
-                        where (string)le.Attribute("Id").Value == logFrameId
-                        select le.AncestorsAndSelf().Distinct();
-
-                    LogFrameValues logFrameValues = null;
-                    IEnumerable<XElement> elementsToUseInPDF = logFrameElements.Count() > 0 ? logFrameElements.FirstOrDefault() : null;
-                    if (elementsToUseInPDF != null)
+                    string fileName = file.Name;
+                    if (!fileName.Contains('t'))
                     {
-                        if (string.IsNullOrEmpty(durationTypeName))
+                        int lastIndexOfUnderScore = fileName.LastIndexOf("__");
+                        int lastIndexofHyphen = fileName.LastIndexOf('-');
+                        int lastIndexOfPeriod = fileName.LastIndexOf(".");
+                        int length = lastIndexOfUnderScore == -1 ? lastIndexOfPeriod : lastIndexOfUnderScore;
+
+                        string logFrameId = fileName.Substring(1, length - 1);
+                        string durationTypeId = lastIndexOfUnderScore == -1 ? null :
+                            fileName.Substring(lastIndexOfUnderScore + 2, lastIndexofHyphen - (lastIndexOfUnderScore + 2));
+
+                        string yearTyepId = lastIndexOfUnderScore == -1 ? null :
+                            fileName.Substring(lastIndexofHyphen + 1, lastIndexOfPeriod - (lastIndexofHyphen + 1));
+
+                        var logFrameElements =
+                            from le in xmlDoc.Descendants("Data")
+                            where (string)le.Attribute("Id").Value == logFrameId
+                            select le.AncestorsAndSelf().Distinct();
+
+                        LogFrameValues logFrameValues = null;
+                        IEnumerable<XElement> elementsToUseInPDF = logFrameElements.Count() > 0 ? logFrameElements.FirstOrDefault() : null;
+                        if (elementsToUseInPDF != null)
                         {
-                            logFrameValues = GetLogFrameValues(elementsToUseInPDF);
-                        }
-                        else
-                        {
-                            elementsToUseInPDF = GetElementChunk(logFrameElements, durationTypeName, durationTypeId, yearTyepId);
-                            if (elementsToUseInPDF != null)
+                            if (string.IsNullOrEmpty(durationTypeName))
                             {
                                 logFrameValues = GetLogFrameValues(elementsToUseInPDF);
                             }
+                            else
+                            {
+                                elementsToUseInPDF = GetElementChunk(logFrameElements, durationTypeName, durationTypeId, yearTyepId);
+                                if (elementsToUseInPDF != null)
+                                {
+                                    logFrameValues = GetLogFrameValues(elementsToUseInPDF);
+                                }
+                            }
+                        }
+
+                        if (logFrameValues != null)
+                        {
+                            WritePDF generatePDF = new WritePDF(logFrameValues, file.FullName);
+                            generatePDF.WriteInPDFDocument(document);
+
                         }
                     }
-
-                    if (logFrameValues != null)
-                    {
-                        WritePDF generatePDF = new WritePDF(logFrameValues, file.FullName);
-                        generatePDF.WriteInPDFDocument(document);
-
-                    }
                 }
+
+                document.Close();
             }
-
-            document.Close();
-
             return filePath;
-            
         }
 
         private Document CreatePDFDocument(string filePath)

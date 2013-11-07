@@ -11,9 +11,9 @@ namespace SRFROWCA.Common
     {
         public static void SendMail(string from, string to, string subject, string body)
         {
-            var client = new SmtpClient("smtp.gmail.com", 587)
+            var client = new SmtpClient("smtp.googlemail.com", 465)
             {
-                Credentials = new NetworkCredential("3wopactivities@gmail.com", "sahel1ocha"),
+                Credentials = new NetworkCredential("3wopactivities@googlemail.com", "sahel1ocha"),
                 EnableSsl = true
             };
             

@@ -9,30 +9,10 @@ body
 
 
 
-a:link
-{
-    color: Blue;
-    text-decoration: none;
-}
-/* unvisited link */
-a:visited
-{
-    color: Blue;
-    text-decoration: none;
-}
-/* visited link */
-a:hover
-{
-    color: Blue;
-    text-decoration: underline;
-}
-/* mouse over link */
-a:active
-{
-    color: Blue;
-    text-decoration: none;
-}
-/* selected link */
+a:link {color:#39668e; text-decoration:none;}      /* unvisited link */
+a:visited {color:#444444;text-decoration:none;}  /* visited link */
+ a:hover {color:#39668e;text-decoration:none;}  /* mouse over link */
+ /* a:active {color:#39668e;text-decoration:none;}   selected link */
 label
 {
     font-size: 10px;
@@ -241,6 +221,8 @@ select
     background-color:#ddd;
 }
 
+.current  { color:#3966a1!important;}  
+
 /*users page */
 
 .checkbox
@@ -282,7 +264,7 @@ table.imagetable td
     border-width: 1px;
     padding: 6px;
     border-style: solid;
-    color: #485160;
+    color: #000000;
     border-color: #bbbbbb;
 }
 
@@ -385,3 +367,61 @@ table.imagetable td
     background-image: linear-gradient(to bottom, #819bcb, #536f9d);
     }
 /*button example */
+
+/*
+Custom Styles
+*/
+.kiketable-colsizable
+{
+    table-layout: fixed;
+    width: 100%;
+}
+.kiketable-colsizable td, .kiketable-colsizable th
+{
+    overflow: hidden;
+}
+.kiketable-th
+{
+    /* Don't set "position: relative" in IE */
+    white-space: nowrap !important; /* Only works for THs in IE */
+    text-align: left;
+    height: 18px; /* value safe to change */
+}
+.kiketable-th-text
+{
+    height: 100%;
+    overflow: hidden;
+}
+.kiketable-colsizable-handler
+{
+    float: right;
+    cursor: e-resize;
+    height: 100%;
+    border-left: 2px outset white;
+    border-right: 2px inset white;
+    position: relative;
+    right: -2px;
+}
+html > body .kiketable-colsizable-handler
+{
+    border-right: 1px outset white;
+}
+.kiketable-colsizable-dragLine
+{
+    position: absolute;
+    width: 2px;
+    cursor: e-resize;
+    background-color: red; /* value safe to change */
+}
+.kiketable-colsizable-dragArea
+{
+    position: absolute;
+    cursor: e-resize;
+    background-color: red; /* value safe to change */
+    background-color: #000;
+}
+.kiketable-colsizable-minimized
+{
+    background-color: #ffd; /* value safe to change */
+    color: #bbb; /* value safe to change */
+}

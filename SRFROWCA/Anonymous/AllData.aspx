@@ -33,7 +33,7 @@
             </div>
             <div class="container">
                 <div class="graybar">
-                    Select your Activities
+                    Select Your Report Options
                 </div>
                 <div class="contentarea">
                     <div class="formdiv">

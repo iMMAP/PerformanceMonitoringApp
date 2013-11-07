@@ -51,10 +51,7 @@ namespace SRFROWCA.Admin
                 // Check if any IP has reported on this project. If so then do not delete it.
                 if (!EmgIsBeingUsed(locEmgId))
                 {
-                    lblMessage.Text = "Emergency cannot be deleted! It is being used in reported data.";
-                    lblMessage.CssClass = "error-message";
-                    lblMessage.Visible = true;
-
+                    ShowMessage("Emergency cannot be deleted! It is being used in reported data.", ROWCACommon.NotificationType.Error, false, 500);
                     return;
                 }
 
@@ -224,6 +221,12 @@ namespace SRFROWCA.Admin
             {
                 DBContext.Add("InsertEmergency", new object[] { emgTyepId, emgName, locId, userId, DBNull.Value });
             }
+        }
+
+        private void ShowMessage(string message, ROWCACommon.NotificationType notificationType = ROWCACommon.NotificationType.Success, bool fadeOut = true, int animationTime = 0)
+        {
+            updMessage.Update();
+            ROWCACommon.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
         }
 
         enum LocationTypes

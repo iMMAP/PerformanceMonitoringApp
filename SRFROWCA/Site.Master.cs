@@ -33,6 +33,8 @@ namespace SRFROWCA
                 ResiterStatus.Visible = true;
                 AdminMenue.Visible = false;
                 MySettingsMenue.Visible = false;
+                menuMyActivities.Visible = false;
+                menuDataEntry.Visible = false;
             }
 
             // Highlihgt current menue item.

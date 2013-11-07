@@ -9,8 +9,8 @@
             <td class="signupheading2" colspan="3">
                 <asp:UpdatePanel ID="updMessage" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
-                        <asp:Label ID="lblMessage" runat="server" CssClass="error-message" Visible="false"
-                            ViewStateMode="Disabled"></asp:Label>
+                       <div id="divMsg">
+                        </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </td>

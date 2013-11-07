@@ -53,7 +53,7 @@ namespace SRFROWCA.Reports
                                         <p>In Step-2 you must select at least one entry from 'Objectives' OR 'Indicators' OR 'Activity' OR 'Data'.</p>
                                         <p>Please contact to admin of this site if you are unable to generate any output!</p>";
                 divMessage.Attributes.Remove("class");
-                divMessage.Attributes.Add("class", "error2");
+                divMessage.Attributes.Add("class", "error2");                
                 return;
             }
             else
@@ -634,11 +634,14 @@ namespace SRFROWCA.Reports
 
         private void DownloadPDF(string filePath)
         {
-            Response.ContentType = "Application/pdf";
-            Response.AppendHeader("content-disposition",
-                    "attachment; filename=3WReport" + DateTime.Now.ToString("dd-MM-yyyy--hh-mm-ss") + ".pdf");
-            Response.TransmitFile(filePath);
-            Response.Flush();
+            if (!string.IsNullOrEmpty(filePath))
+            {
+                Response.ContentType = "Application/pdf";
+                Response.AppendHeader("content-disposition",
+                        "attachment; filename=3WReport" + DateTime.Now.ToString("dd-MM-yyyy--hh-mm-ss") + ".pdf");
+                Response.TransmitFile(filePath);
+                Response.Flush();
+            }
         }
 
         private void DeleteUserFolder(string path)

@@ -152,6 +152,20 @@ Messages to user
 CSS for Login, Register, ForgotPassword, ChagnePassword
 */
 
+.containerPopup
+{
+    width: 98%;
+    border: 1px solid #ccc;
+    margin-top: 40px;
+    background-color:#fbfbfb
+}
+
+.modalpopupbackground
+{
+    background-color:black;
+    opacity: 0.7;    
+}
+
 .containerLogin
 {
     width: 50%;
@@ -194,3 +208,23 @@ CSS for Login, Register, ForgotPassword, ChagnePassword
 {
     margin-bottom: 5px;
 }
+
+.db1
+{
+    width: 45%;
+    float: left;
+    border: 1px solid #ccc;
+    padding: 1%;
+}
+.db2
+{
+    width: 45%;
+    float: right;
+    border: 1px solid #ccc;
+    padding: 1%;
+}
+
+.linknv
+{
+    color:Blue
+    }

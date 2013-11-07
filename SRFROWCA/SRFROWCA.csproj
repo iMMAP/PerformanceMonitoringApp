@@ -219,8 +219,6 @@
     <Content Include="Scripts\jquery.kiketable.colsizable-1.1.min.js" />
     <Content Include="Scripts\jquery.numeric.min.js" />
     <Content Include="Scripts\quicksearch.js" />
-    <Content Include="Styles\dialog.css" />
-    <Content Include="Styles\grid.css" />
     <Content Include="Styles\jquery.kiketable.colsizable.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />

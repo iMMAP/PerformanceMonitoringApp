@@ -19,8 +19,6 @@ namespace SRFROWCA.Admin
         {
             if (IsPostBack) return;
 
-            this.Form.DefaultButton = this.btnAdd.UniqueID;
-
             LoadOffices();
             PopulateCountries();
             PopulateOrganizations();
@@ -48,15 +46,15 @@ namespace SRFROWCA.Admin
             {
                 int officeId = Convert.ToInt32(e.CommandArgument);
 
-                //// Check if any IP has reported on this project. If so then do not delete it.
-                //if (!OfficeIsBeingUsedInReports(officeId))
-                //{
-                //    lblMessage.Text = "Office cannot be deleted! It is being used in reports.";
-                //    lblMessage.CssClass = "error-message";
-                //    lblMessage.Visible = true;
+                // Check if any IP has reported on this project. If so then do not delete it.
+                if (!OfficeIsBeingUsedInReports(officeId))
+                {
+                    lblMessage.Text = "Office cannot be deleted! It is being used in reports.";
+                    lblMessage.CssClass = "error-message";
+                    lblMessage.Visible = true;
 
-                //    return;
-                //}
+                    return;
+                }
 
                 DeleteOffice(officeId);
                 LoadOffices();
@@ -187,6 +185,7 @@ namespace SRFROWCA.Admin
             int countryId = 0;
             int.TryParse(ddlCountry.SelectedValue, out countryId);
             PopulateLocations(countryId);
+            mpeAddOrg.Show();
         }
 
         private void PopulateLocations(int countryId)
@@ -231,10 +230,19 @@ namespace SRFROWCA.Admin
             }
             else
             {
-                SaveOffice();
-                LoadOffices();
-                mpeAddOrg.Hide();
-                ClearPopupControls();
+                if (!IsOrganizationOfficeExists())
+                {
+                    SaveOffice();
+                    LoadOffices();
+                    mpeAddOrg.Hide();
+                    ClearPopupControls();
+                }
+                else
+                {
+                    lblMessage2.Text = "Office already exists with same organization and same location.";
+                    lblMessage2.Visible = true;
+                    mpeAddOrg.Show();
+                }
             }
         }
 
@@ -266,6 +274,23 @@ namespace SRFROWCA.Admin
             }
 
             hfOfficeId.Value = txtOfficeName.Text = "";
+        }
+
+        // If selected organization office exists on selected locaiton
+        private bool IsOrganizationOfficeExists()
+        {
+            int orgId = 0;
+            int.TryParse(ddlOrganizations.SelectedValue, out orgId);
+
+            int locId = 0;
+            int.TryParse(ddlCountry.SelectedValue, out locId);
+
+            if (orgId > 0 && locId > 0)
+            {
+                return DBContext.GetData("GetOrganizationOffices", new object[] { locId, orgId }).Rows.Count > 0;
+            }
+
+            return false;
         }
 
         private void SaveOffice()
