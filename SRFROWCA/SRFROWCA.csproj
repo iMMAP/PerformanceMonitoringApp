@@ -121,6 +121,7 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\PasswordSendConfirmation.aspx" />
     <Content Include="Account\Register.aspx" />
+    <Content Include="Account\Registerca.aspx" />
     <Content Include="Account\Reset.aspx" />
     <Content Include="Account\UpdateUser.aspx" />
     <Content Include="Admin\ActivityData.aspx" />
@@ -334,6 +335,13 @@
     </Compile>
     <Compile Include="Account\Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Registerca.aspx.cs">
+      <DependentUpon>Registerca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Registerca.aspx.designer.cs">
+      <DependentUpon>Registerca.aspx</DependentUpon>
     </Compile>
     <Compile Include="Account\Reset.aspx.cs">
       <DependentUpon>Reset.aspx</DependentUpon>

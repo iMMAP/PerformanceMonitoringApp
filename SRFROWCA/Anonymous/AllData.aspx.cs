@@ -7,6 +7,7 @@ using BusinessLogic;
 using System.Web;
 using System.IO.Compression;
 using SRFROWCA.Common;
+using Saplin.Controls;
 namespace SRFROWCA.Anonymous
 {
     public partial class AllData : System.Web.UI.Page
@@ -124,6 +125,22 @@ namespace SRFROWCA.Anonymous
             LoadData();
         }
 
+        protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PopulateLocationDropDowns();
+            LoadData();
+        }
+
+        protected void ddlAdmin1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        protected void ddlAdmin2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
         #endregion
 
         #endregion
@@ -174,12 +191,49 @@ namespace SRFROWCA.Anonymous
         // Populate Locations drop down
         private void PopulateLocations()
         {
-            ddlLocations.DataValueField = "LocationId";
-            ddlLocations.DataTextField = "LocationName";
-
-            ddlLocations.DataSource = GetReportLocations();
-            ddlLocations.DataBind();
+            PopulateCountry();
+            PopulateLocationDropDowns();
         }
+
+        private void PopulateCountry()
+        {
+            ddlCountry.DataValueField = "LocationId";
+            ddlCountry.DataTextField = "LocationName";
+
+            ddlCountry.DataSource = DBContext.GetData("GetCountries");
+            ddlCountry.DataBind();
+        }
+
+        private void PopulateLocationDropDowns()
+        {
+            int countryId = 0;
+            int.TryParse(ddlCountry.SelectedValue, out countryId);
+            if (countryId > 0)
+            {
+                PopulateAdmin1(countryId);
+                PopulateAdmin2(countryId);
+            }
+        }
+
+        private void PopulateAdmin1(int countryId)
+        {
+            ddlAdmin1.DataValueField = "LocationId";
+            ddlAdmin1.DataTextField = "LocationName";
+
+            ddlAdmin1.DataSource = DBContext.GetData("GetAdmin1LocationsOfCountry", new object[] { countryId });
+            ddlAdmin1.DataBind();
+        }
+
+        // Populate Locations drop down
+        private void PopulateAdmin2(int countryId)
+        {
+            ddlAdmin2.DataValueField = "LocationId";
+            ddlAdmin2.DataTextField = "LocationName";
+
+            ddlAdmin2.DataSource = DBContext.GetData("GetAdmin2LocationsOfCountry", new object[] { countryId });
+            ddlAdmin2.DataBind();
+        }
+
         private object GetReportLocations()
         {
             return DBContext.GetData("GetAllLocationsInReports");
@@ -202,12 +256,12 @@ namespace SRFROWCA.Anonymous
         // Populate Users drop down
         private void PopulateUses()
         {
-            ddlUsers.DataValueField = "UserId";
-            ddlUsers.DataTextField = "UserName";
-            ddlUsers.DataSource = GetUsers();
-            ddlUsers.DataBind();
-            ListItem item = new ListItem("Select User", "0");
-            ddlUsers.Items.Insert(0, item);
+            //ddlUsers.DataValueField = "UserId";
+            //ddlUsers.DataTextField = "UserName";
+            //ddlUsers.DataSource = GetUsers();
+            //ddlUsers.DataBind();
+            //ListItem item = new ListItem("Select User", "0");
+            //ddlUsers.Items.Insert(0, item);
         }
         private object GetUsers()
         {
@@ -294,12 +348,12 @@ namespace SRFROWCA.Anonymous
         // Get filter criteria and create an object with parameter values.
         private object[] GetParamValues()
         {
-            Guid userId = ddlUsers.SelectedIndex > 0 ? new Guid(ddlUsers.SelectedValue) : new Guid();
+            Guid userId = new Guid();// ddlUsers.SelectedIndex > 0 ? new Guid(ddlUsers.SelectedValue) : new Guid();
             string emergencyIds = GetSelectedValues(ddlEmergency);
             int? officeId = GetSelectedValue(ddlOffice);
             int? yearId = GetSelectedValue(ddlYear);
             string monthIds = GetSelectedValues(ddlMonth);
-            string locationIds = GetSelectedValues(ddlLocations);
+            string locationIds = GetSelectedValues(ddlAdmin2);
             string clusterIds = GetSelectedValues(ddlClusters);
             string orgIds = GetSelectedValues(ddlOrganizations);
             string orgTypeIds = GetSelectedValues(ddlOrgTypes);

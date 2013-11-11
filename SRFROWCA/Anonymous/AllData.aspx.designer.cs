@@ -49,15 +49,6 @@ namespace SRFROWCA.Anonymous {
         protected global::Saplin.Controls.DropDownCheckBoxes ddlClusters;
         
         /// <summary>
-        /// ddlLocations control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Saplin.Controls.DropDownCheckBoxes ddlLocations;
-        
-        /// <summary>
         /// ddlYear control.
         /// </summary>
         /// <remarks>
@@ -76,13 +67,31 @@ namespace SRFROWCA.Anonymous {
         protected global::Saplin.Controls.DropDownCheckBoxes ddlMonth;
         
         /// <summary>
-        /// ddlUsers control.
+        /// ddlCountry control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlUsers;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCountry;
+        
+        /// <summary>
+        /// ddlAdmin1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Saplin.Controls.DropDownCheckBoxes ddlAdmin1;
+        
+        /// <summary>
+        /// ddlAdmin2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Saplin.Controls.DropDownCheckBoxes ddlAdmin2;
         
         /// <summary>
         /// ddlOrgTypes control.

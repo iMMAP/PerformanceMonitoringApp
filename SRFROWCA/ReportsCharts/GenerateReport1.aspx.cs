@@ -66,8 +66,8 @@ namespace SRFROWCA.Reports
             string html = "";
 
             XDocument doc = new XDocument();
-            XElement books = new XElement("LogFrames");
-            doc.Add(books);
+            XElement logFrameValues = new XElement("LogFrames");
+            doc.Add(logFrameValues);
 
             var distinctRows = (from DataRow dRow in dt.Rows
                                 select new
@@ -96,7 +96,7 @@ namespace SRFROWCA.Reports
                 if (filteredTable.Rows.Count > 0)
                 {
                     DataRow row = filteredTable.Rows[0];
-                    WriteLogFrameInXMLFile(books, row);
+                    WriteLogFrameInXMLFile(logFrameValues, row);
                 }
 
                 html += " " + ReportsCommon.PrepareTargetAchievedChartData(filteredTable, logFrameId, durationType, yearId, chartType);
@@ -114,7 +114,7 @@ namespace SRFROWCA.Reports
             ltrChart.Text = html;
         }
 
-        private void WriteLogFrameInXMLFile(XElement logFrameRoot, DataRow row)
+        private void WriteLogFrameInXMLFile(XElement logFrameValues, DataRow row)
         {
             //string logFrameType = row["LogFrameType"].ToString();
             string durationTypeId = row["DurationType"].ToString();
@@ -135,11 +135,12 @@ namespace SRFROWCA.Reports
             string qName = row["QName"].ToString();
             string yearId = row["YearId"].ToString();
             string yearName = row["YearName"].ToString();
+            
 
             XElement logFrame = new XElement("LogFrame");
             //logFrame.SetAttributeValue("LogFrameType", logFrameType);
             logFrame.SetAttributeValue("DurationTypeName", durationTypeName);
-            logFrameRoot.Add(logFrame);
+            logFrameValues.Add(logFrame);
 
             logFrame.Add(GetElement("DurationType", durationTypeId, durationTypeName));
             logFrame.Add(GetElement("Month", monthId, monthName));
@@ -588,8 +589,8 @@ namespace SRFROWCA.Reports
 
         enum DatePart
         {
-            Day = 0,
-            Month = 1,
+            Month = 0,
+            Day = 1,
             Year = 2,
         }
 

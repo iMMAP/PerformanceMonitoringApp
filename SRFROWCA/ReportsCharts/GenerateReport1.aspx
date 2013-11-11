@@ -23,6 +23,23 @@
             height: 10%;
             font-size: xx-large;
         }
+        #progressBar
+        {
+            width: 400px;
+            height: 22px;
+            border: 1px solid #111;
+            background-color: #292929;
+        }
+        
+        #progressBar div
+        {
+            height: 100%;
+            color: #fff;
+            text-align: right;
+            line-height: 22px; /* same as #progressBar height if we want text middle aligned */
+            width: 0;
+            background-color: #0099ff;
+        }
     </style>
     <link rel="stylesheet" href="../Styles/ui-lightness/jquery-ui-1.10.3.custom.min.css" />
 </asp:Content>
@@ -274,6 +291,10 @@
                     </div>
                     <div class="contentarea">
                         <div class="formdiv">
+                            <div id="progressBar" style="display: none;">
+                                <div>
+                                </div>
+                            </div>
                             <div id="modal-overlay" style="display: none;">
                                 <div style="margin: 0 auto; width: 100%">
                                     <img src="../images/ajaxlodr.gif" alt="In Progress..." />
@@ -344,9 +365,18 @@
             return (n);
         }
 
+        function progressBar(percent, $element) {
+            var progressBarWidth = percent * $element.width() / 100;
+            $element.find('div').animate({ width: progressBarWidth }, 0).html(percent + "%&nbsp;");
+        }
+
         function getSVG1() {
             try {
                 var j = 0;
+
+                var numberOfImages = $(".chartsclass").length,
+		        numberOfLoaded = 0,
+		        step = (100 / numberOfImages).toFixed(2);
 
                 $(".chartsclass").each(function (i, obj) {
                     var svg = $(obj).html();
@@ -380,6 +410,9 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (msg) {
+                            numberOfLoaded++;
+
+                            progressBar((step * numberOfLoaded).toFixed(2), $('#progressBar'));
                         },
                         error: function (msg) {
                             alert('Failure');
@@ -390,11 +423,13 @@
             }
             finally {
                 AjaxFinished();
+                progressBar(100, $('#progressBar'));
             }
         }
 
         function AjaxFinished() {
             $("#modal-overlay").hide();
+            $("#progressBar").hide();
             $('.classbtnprevious').show()
             $(".classbtndownload").show();
             $(".info2").html("<h2>Report Generated.</h2> <p>Please download your report by clicking on 'Download Report' button!</p>");
@@ -403,6 +438,7 @@
         $(document).ajaxStart(function () {
             $(".classusermessage").html("");
             $("#modal-overlay").show();
+            $("#progressBar").show();
             $('#btnExport').hide();
             $('.classbtnprevious').hide();
         });

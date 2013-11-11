@@ -57,6 +57,11 @@ html > body .kiketable-colsizable-handler
 ddlWidth class
 */
 
+.ddlWidthAllData
+{
+    width: 50%;
+}
+
 .ddlWidth
 {
     width: 95%;
@@ -176,7 +181,7 @@ CSS for Login, Register, ForgotPassword, ChagnePassword
 
 .containerWizard
 {
-    width: 65%;
+    width: 75%;
     margin: 0 auto;
     margin-top: 40px;
 }

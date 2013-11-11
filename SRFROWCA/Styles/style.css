@@ -147,6 +147,12 @@ select
     height:20px;    
 }
 
+.divBorder
+{
+    width:100%;
+    border:1;
+}
+
 .divleft
 {
     width: 33%;

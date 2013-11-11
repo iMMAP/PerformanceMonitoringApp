@@ -10,7 +10,7 @@
                 CssClass="button_example" />
         </div>
         <div class="buttonright">
-            <asp:Button ID="btnAddUser" runat="server" Text="Add New User" PostBackUrl="~/Account/Register.aspx"
+            <asp:Button ID="btnAddUser" runat="server" Text="Add New User" PostBackUrl="~/Account/Registerca.aspx"
                 CssClass="button_example" />
         </div>
         <div class="spacer" style="clear: both;">

@@ -25,6 +25,11 @@ namespace SRFROWCA
                 {
                     AdminMenue.Visible = false;
                 }
+                else
+                {
+                    menuMyActivities.Visible = false;
+                    menuDataEntry.Visible = false;
+                }
             }
             else
             {
