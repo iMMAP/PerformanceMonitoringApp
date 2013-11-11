@@ -218,7 +218,7 @@
                         <div class="spacerbig" style="clear: both;">
                         </div>
                         <div>
-                            <asp:LinkButton ID="lbtnMissing" style="color:Blue" runat="server" Text="Request Missing Organization Or Location"></asp:LinkButton>
+                            <asp:LinkButton ID="lbtnMissing" Style="color: Blue" runat="server" Text="Request Missing Organization Or Location"></asp:LinkButton>
                         </div>
                         <div class="spacer" style="clear: both;">
                         </div>
