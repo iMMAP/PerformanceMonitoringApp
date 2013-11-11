@@ -1,3 +1,4 @@
+-- Add DummyOrganization to db
 USE [ROWCA]
 GO
 /****** Object:  StoredProcedure [dbo].[GetAllTasksDataReport]    Script Date: 11/07/2013 14:41:47 ******/
@@ -142,4 +143,89 @@ BEGIN
 	DROP TABLE #locations
 	DROP TABLE #orgs
 	DROP TABLE #orgTypes
+END
+
+
+USE [ROWCA]
+GO
+/****** Object:  StoredProcedure [dbo].[InsertASPNetUserCustomWithMultipleLocations]    Script Date: 11/11/2013 17:23:02 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Muhammad Kashif Nadeem
+-- Create date: Oct 26, 2013
+-- Description:	Register User with multiple locations
+-- =============================================
+ALTER PROCEDURE [dbo].[InsertASPNetUserCustomWithMultipleLocations]
+	@userId uniqueidentifier,
+	@orgId INT,
+	@countryId VARCHAR(100),
+	@phone NVARCHAR(50),
+	@UID int = NULL OUTPUT
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+	
+	IF(@orgId IS NULL)
+	BEGIN
+		SELECT @orgId = Organizationid FROM Organizations WHERE OrganizationName LIKE 'DummyOrganization'
+	END
+	
+    SELECT * INTO #locations FROM dbo.fn_ParseCSVString (@countryId, ',')
+	INSERT	INTO aspnet_Users_Custom
+	(
+		UserId,
+		OrganizationId,
+		PhoneNumber,
+		CountryId
+	)
+	SELECT @userId,
+			@orgId,		
+			@phone,
+			s
+	FROM	#locations
+	
+	DROP TABLE #locations
+		
+	SELECT @UID = 0
+END
+
+USE [ROWCA]
+GO
+/****** Object:  StoredProcedure [dbo].[GetAllOfficesByPrincipal]    Script Date: 11/11/2013 17:36:44 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Muhammad Kashif Nadeem
+-- Create date: Feb 19, 2013
+-- Description:	Get Offices On Organization
+-- =============================================
+ALTER PROCEDURE [dbo].[GetAllOfficesByPrincipal]
+	@userId UNIQUEIDENTIFIER
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT	DISTINCT
+			f.OfficeId,
+			f.OfficeName,
+			l.LocationId,
+			l.LocationName,
+			o.OrganizationId,
+			o.OrganizationName,
+			o.OrganizationAcronym,
+			l.LocationParentId
+			
+	FROM	Offices f JOIN Organizations o ON f.OrganizationId = o.OrganizationId
+	JOIN	Locations l ON f.LocationId = l.LocationId	
+	JOIN	aspnet_Users_Custom c ON l.LocationId = c.CountryId
+	JOIN	aspnet_Users u ON c.UserId = u.UserId
+	JOIN	aspnet_UsersInRoles r ON u.UserId = r.UserId
+	WHERE	u.UserId = @userId
+	ORDER BY f.OfficeName
 END
