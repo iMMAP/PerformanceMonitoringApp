@@ -37,14 +37,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
-            <%--<div style="text-align: center;">
-                <asp:UpdateProgress ID="UpdateProgress2" runat="server" AssociatedUpdatePanelID="UpdatePanel1"
-                    DynamicLayout="true">
-                    <ProgressTemplate>
-                        <img src="../images/ajaxlodr.gif" alt="loading...">
-                    </ProgressTemplate>
-                </asp:UpdateProgress>
-            </div>--%>
             <div class="container">
                 <div class="graybar">
                     Select Your Report Options
@@ -226,82 +218,36 @@
                     <Columns>
                         <asp:BoundField DataField="Emergency" HeaderText="Emergency" SortExpression="Emergency"
                             HeaderStyle-Width="5%" />
-                        <asp:BoundField DataField="OrganizationAcronym" HeaderText="Organization" HeaderStyle-Width="5%" />
-                        <asp:BoundField DataField="Year" HeaderText="Year" HeaderStyle-Width="5%" />
-                        <asp:BoundField DataField="Month" HeaderText="Month" HeaderStyle-Width="5%" />
-                        <asp:BoundField DataField="Cluster" HeaderText="Cluster" HeaderStyle-Width="6%" />
-                        <asp:BoundField DataField="Objective" HeaderText="Objective" HeaderStyle-Width="10%" />
-                        <asp:BoundField DataField="Indicator" HeaderText="Indicator" HeaderStyle-Width="10%" />
-                        <asp:BoundField DataField="Activity" HeaderText="Activity" HeaderStyle-Width="10%" />
-                        <asp:BoundField DataField="Data" HeaderText="Data" HeaderStyle-Width="10%" />
-                        <asp:BoundField DataField="Country" HeaderText="Country" HeaderStyle-Width="5%" />
-                        <asp:BoundField DataField="(AD1)Location" HeaderText="Admin1" HeaderStyle-Width="6%" />
-                        <asp:BoundField DataField="(Ad2)Location" HeaderText="Admin2" HeaderStyle-Width="6%" />
-                        <asp:BoundField DataField="Target" HeaderText="Target" HeaderStyle-Width="3%" ItemStyle-HorizontalAlign="Right" />
-                        <asp:BoundField DataField="Achieved" HeaderText="Achieved" HeaderStyle-Width="3%"
+                        <asp:BoundField DataField="OrganizationAcronym" HeaderText="Organization" SortExpression="OrganizationAcronym"
+                            HeaderStyle-Width="5%" />
+                        <asp:BoundField DataField="Year" HeaderText="Year" SortExpression="Year" HeaderStyle-Width="5%" />
+                        <asp:BoundField DataField="Month" HeaderText="Month" SortExpression="Month" HeaderStyle-Width="5%" />
+                        <asp:BoundField DataField="Cluster" HeaderText="Cluster" SortExpression="Cluster"
+                            HeaderStyle-Width="6%" />
+                        <asp:BoundField DataField="Objective" HeaderText="Objective" SortExpression="Objective"
+                            HeaderStyle-Width="10%" />
+                        <asp:BoundField DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator"
+                            HeaderStyle-Width="10%" />
+                        <asp:BoundField DataField="Activity" HeaderText="Activity" SortExpression="Activity"
+                            HeaderStyle-Width="10%" />
+                        <asp:BoundField DataField="Data" HeaderText="Data" SortExpression="Data" HeaderStyle-Width="10%" />
+                        <asp:BoundField DataField="Country" HeaderText="Country" SortExpression="Country"
+                            HeaderStyle-Width="5%" />
+                        <asp:BoundField DataField="(AD1)Location" HeaderText="Admin1" SortExpression="(AD1)Location"
+                            HeaderStyle-Width="6%" />
+                        <asp:BoundField DataField="(Ad2)Location" HeaderText="Admin2" SortExpression="(AD2)Location"
+                            HeaderStyle-Width="6%" />
+                        <asp:BoundField DataField="Target" HeaderText="Target" SortExpression="Target" HeaderStyle-Width="3%"
                             ItemStyle-HorizontalAlign="Right" />
-                        <asp:BoundField DataField="WorkDone" HeaderText="%" HeaderStyle-Width="2%" ItemStyle-HorizontalAlign="Right" />
+                        <asp:BoundField DataField="Achieved" HeaderText="Achieved" SortExpression="Achieved"
+                            HeaderStyle-Width="3%" ItemStyle-HorizontalAlign="Right" />
+                        <asp:BoundField DataField="WorkDone" HeaderText="%" SortExpression="WorkDone" HeaderStyle-Width="2%"
+                            ItemStyle-HorizontalAlign="Right" />
                     </Columns>
                 </cc2:PagingGridView>
             </div>
             <div class="fullwidthdiv" style="clear: both;">
             </div>
-            <%--<table>
-                <tr>
-                    <td>
-                        <asp:ModalPopupExtender ID="mpeExportAllData" BehaviorID="mpeExportAllData" runat="server"
-                            TargetControlID="btnExportToExcel" PopupControlID="mpeExportAllData" BackgroundCssClass="modalpopupbackground"
-                            CancelControlID="btnClose">
-                        </asp:ModalPopupExtender>
-                        <asp:Panel ID="pnlOrg" runat="server" Width="800px">
-                            <asp:UpdatePanel ID="uPanel1" runat="server" UpdateMode="Conditional">
-                                <ContentTemplate>
-                                    <div class="containerPopup">
-                                        <div class="graybar">
-                                            Add/Remove Columns
-                                        </div>
-                                        <div class="contentarea">
-                                            <div class="formdiv">
-                                                <table border="0" style="margin: 0 auto;">
-                                                    <tr>
-                                                        <td>
-                                                            <asp:CheckBoxList ID="cbColumns" runat="server">
-                                                            </asp:CheckBoxList>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="2" align="right">
-                                                            <asp:Button ID="btnOK" runat="server" Text="OK" OnClick="btnOK_Click" CssClass="button_example" />
-                                                            <asp:Button ID="btnClose" runat="server" Text="Close" CausesValidation="false" CssClass="button_example" />
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <asp:Label ID="lblMessage2" runat="server" CssClass="error-message" Visible="false"
-                                                                ViewStateMode="Disabled"></asp:Label>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                                <div class="spacer" style="clear: both;">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="graybarcontainer">
-                                        </div>
-                                    </div>
-                                </ContentTemplate>
-                                <Triggers>
-                                    <asp:PostBackTrigger ControlID="btnOK" />
-                                    <asp:PostBackTrigger ControlID="btnClose" />
-                                </Triggers>
-                            </asp:UpdatePanel>
-                        </asp:Panel>
-                    </td>
-                </tr>
-            </table>
-            <div style="display: none">
-                <asp:Button ID="btntest" runat="server" Width="1px" />
-            </div>--%>
         </ContentTemplate>
     </asp:UpdatePanel>
     <asp:ModalPopupExtender ID="ModalPopupExtender1" runat="server" TargetControlID="HiddenTargetControlForModalPopup"
@@ -319,7 +265,7 @@
                         <tr>
                             <td>
                                 <asp:CheckBoxList ID="cbColumns" runat="server" RepeatColumns="4">
-                                    <asp:ListItem Text="DataId" Value="DataId"></asp:ListItem>                                    
+                                    <asp:ListItem Text="DataId" Value="DataId"></asp:ListItem>
                                     <asp:ListItem Text="Organization Full Name" Value="Organization"></asp:ListItem>
                                     <asp:ListItem Text="Office" Value="Office"></asp:ListItem>
                                     <asp:ListItem Text="(AD1)PCode" Value="(AD1)PCode"></asp:ListItem>
@@ -334,7 +280,8 @@
                         <tr>
                             <td colspan="2" align="right">
                                 <asp:Button ID="btnOK" runat="server" Text="OK" OnClick="btnOK_Click" CssClass="button_example" />
-                                <asp:Button ID="btnClose" runat="server" Text="Close" CausesValidation="false" OnClick="btnClose_Click" CssClass="button_example" />
+                                <asp:Button ID="btnClose" runat="server" Text="Close" CausesValidation="false" OnClick="btnClose_Click"
+                                    CssClass="button_example" />
                             </td>
                         </tr>
                         <tr>
