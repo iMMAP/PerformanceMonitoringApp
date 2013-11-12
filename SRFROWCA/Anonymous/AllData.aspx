@@ -2,10 +2,25 @@
     CodeBehind="AllData.aspx.cs" Inherits="SRFROWCA.Anonymous.AllData" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    <%@ register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
     <%--DropDownCheckBoxes is custom dropdown with checkboxes to selectect multiple items.--%>
     <%@ register assembly="DropDownCheckBoxes" namespace="Saplin.Controls" tagprefix="cc" %>
     <%--Custom GridView Class to include custom paging functionality.--%>
     <%@ register assembly="SRFROWCA" namespace="SRFROWCA" tagprefix="cc2" %>
+    <style>
+        .ModalPopupBG
+        {
+            background-color: #666699;
+            filter: alpha(opacity=50);
+            opacity: 0.7;
+        }
+        .HellowWorldPopup
+        {
+            /* min-width: 200px;*/
+            min-height: 150px;
+            background: white;
+        }
+    </style>
     <script type="text/javascript">
         function pageLoad(sender, args) {
             // Make XML DataFeed Link using hidden field
@@ -15,22 +30,21 @@
 
             // Add colgroup on top of the grid so kiketable_closizable jQuery script can work.
             // This script is to give user funcationality to increase/decrease width of grid column.
-            $("#<%=gvReport.ClientID %>").prepend('<colgroup><col /><col /><col /><col /><col /><col /><col /><col /><col /><col /><col /><col /><col /><col /><col /></colgroup>');
-            $("#<%=gvReport.ClientID %>").kiketable_colsizable();
+
         }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
-            <div style="text-align: center;">
+            <%--<div style="text-align: center;">
                 <asp:UpdateProgress ID="UpdateProgress2" runat="server" AssociatedUpdatePanelID="UpdatePanel1"
                     DynamicLayout="true">
                     <ProgressTemplate>
                         <img src="../images/ajaxlodr.gif" alt="loading...">
                     </ProgressTemplate>
                 </asp:UpdateProgress>
-            </div>
+            </div>--%>
             <div class="container">
                 <div class="graybar">
                     Select Your Report Options
@@ -86,21 +100,22 @@
                                         </asp:DropDownList>
                                         <label>
                                             Month:</label>
-                                        <cc:DropDownCheckBoxes ID="ddlMonth" runat="server" AutoPostBack="true"
-                                            OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged" AddJQueryReference="True"
-                                            meta:resourcekey="checkBoxes2Resource1" UseButtons="False" UseSelectAllNode="True">
+                                        <cc:DropDownCheckBoxes ID="ddlMonth" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged"
+                                            AddJQueryReference="True" meta:resourcekey="checkBoxes2Resource1" UseButtons="False"
+                                            UseSelectAllNode="True">
                                             <Style SelectBoxWidth="120px" DropDownBoxBoxWidth="200px" DropDownBoxBoxHeight=""></Style>
                                             <Texts SelectBoxCaption="Select Month" />
                                         </cc:DropDownCheckBoxes>
                                     </td>
                                 </tr>
                             </table>
-                        </div>                        
+                        </div>
                         <div class="divcen">
                             <table width="100%">
                                 <tr>
                                     <td>
-                                        Country:
+                                        <label>
+                                            Country:</label>
                                     </td>
                                     <td>
                                         <asp:DropDownList ID="ddlCountry" runat="server" AutoPostBack="true" CssClass="ddlWidth"
@@ -110,7 +125,8 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        Admin1:
+                                        <label>
+                                            Admin1:</label>
                                     </td>
                                     <td>
                                         <cc:DropDownCheckBoxes ID="ddlAdmin1" runat="server" CssClass="ddlWidth" AutoPostBack="true"
@@ -123,7 +139,8 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        Admin2:
+                                        <label>
+                                            Admin2:</label>
                                     </td>
                                     <td>
                                         <cc:DropDownCheckBoxes ID="ddlAdmin2" runat="server" CssClass="ddlWidth" AutoPostBack="true"
@@ -199,17 +216,140 @@
             </div>
             <div class="tablegrid">
                 <cc2:PagingGridView ID="gvReport" runat="server" Width="100%" CssClass="imagetable"
-                    OnRowDataBound="gvReport_RowDataBound" OnSorting="gvReport_Sorting" ShowHeaderWhenEmpty="true"
+                    AutoGenerateColumns="false" OnSorting="gvReport_Sorting" ShowHeaderWhenEmpty="true"
                     EnableViewState="false" AllowSorting="True" RowStyle-Height="30" AllowPaging="true"
                     PageSize="100" ShowHeader="true" OnPageIndexChanging="gvReport_PageIndexChanging">
                     <PagerStyle BackColor="#efefef" ForeColor="DarkSlateBlue" HorizontalAlign="Center" />
                     <PagerSettings Mode="NumericFirstLast" />
                     <RowStyle CssClass="istrow" />
                     <AlternatingRowStyle CssClass="altcolor" />
+                    <Columns>
+                        <asp:BoundField DataField="Emergency" HeaderText="Emergency" SortExpression="Emergency"
+                            HeaderStyle-Width="5%" />
+                        <asp:BoundField DataField="OrganizationAcronym" HeaderText="Organization" HeaderStyle-Width="5%" />
+                        <asp:BoundField DataField="Year" HeaderText="Year" HeaderStyle-Width="5%" />
+                        <asp:BoundField DataField="Month" HeaderText="Month" HeaderStyle-Width="5%" />
+                        <asp:BoundField DataField="Cluster" HeaderText="Cluster" HeaderStyle-Width="6%" />
+                        <asp:BoundField DataField="Objective" HeaderText="Objective" HeaderStyle-Width="10%" />
+                        <asp:BoundField DataField="Indicator" HeaderText="Indicator" HeaderStyle-Width="10%" />
+                        <asp:BoundField DataField="Activity" HeaderText="Activity" HeaderStyle-Width="10%" />
+                        <asp:BoundField DataField="Data" HeaderText="Data" HeaderStyle-Width="10%" />
+                        <asp:BoundField DataField="Country" HeaderText="Country" HeaderStyle-Width="5%" />
+                        <asp:BoundField DataField="(AD1)Location" HeaderText="Admin1" HeaderStyle-Width="6%" />
+                        <asp:BoundField DataField="(Ad2)Location" HeaderText="Admin2" HeaderStyle-Width="6%" />
+                        <asp:BoundField DataField="Target" HeaderText="Target" HeaderStyle-Width="3%" ItemStyle-HorizontalAlign="Right" />
+                        <asp:BoundField DataField="Achieved" HeaderText="Achieved" HeaderStyle-Width="3%"
+                            ItemStyle-HorizontalAlign="Right" />
+                        <asp:BoundField DataField="WorkDone" HeaderText="%" HeaderStyle-Width="2%" ItemStyle-HorizontalAlign="Right" />
+                    </Columns>
                 </cc2:PagingGridView>
             </div>
             <div class="fullwidthdiv" style="clear: both;">
             </div>
+            <%--<table>
+                <tr>
+                    <td>
+                        <asp:ModalPopupExtender ID="mpeExportAllData" BehaviorID="mpeExportAllData" runat="server"
+                            TargetControlID="btnExportToExcel" PopupControlID="mpeExportAllData" BackgroundCssClass="modalpopupbackground"
+                            CancelControlID="btnClose">
+                        </asp:ModalPopupExtender>
+                        <asp:Panel ID="pnlOrg" runat="server" Width="800px">
+                            <asp:UpdatePanel ID="uPanel1" runat="server" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <div class="containerPopup">
+                                        <div class="graybar">
+                                            Add/Remove Columns
+                                        </div>
+                                        <div class="contentarea">
+                                            <div class="formdiv">
+                                                <table border="0" style="margin: 0 auto;">
+                                                    <tr>
+                                                        <td>
+                                                            <asp:CheckBoxList ID="cbColumns" runat="server">
+                                                            </asp:CheckBoxList>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2" align="right">
+                                                            <asp:Button ID="btnOK" runat="server" Text="OK" OnClick="btnOK_Click" CssClass="button_example" />
+                                                            <asp:Button ID="btnClose" runat="server" Text="Close" CausesValidation="false" CssClass="button_example" />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label ID="lblMessage2" runat="server" CssClass="error-message" Visible="false"
+                                                                ViewStateMode="Disabled"></asp:Label>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <div class="spacer" style="clear: both;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="graybarcontainer">
+                                        </div>
+                                    </div>
+                                </ContentTemplate>
+                                <Triggers>
+                                    <asp:PostBackTrigger ControlID="btnOK" />
+                                    <asp:PostBackTrigger ControlID="btnClose" />
+                                </Triggers>
+                            </asp:UpdatePanel>
+                        </asp:Panel>
+                    </td>
+                </tr>
+            </table>
+            <div style="display: none">
+                <asp:Button ID="btntest" runat="server" Width="1px" />
+            </div>--%>
         </ContentTemplate>
     </asp:UpdatePanel>
+    <asp:ModalPopupExtender ID="ModalPopupExtender1" runat="server" TargetControlID="HiddenTargetControlForModalPopup"
+        PopupControlID="Panel1" Drag="true" BackgroundCssClass="ModalPopupBG">
+    </asp:ModalPopupExtender>
+    <asp:Button runat="server" ID="HiddenTargetControlForModalPopup" Style="display: none" />
+    <asp:Panel ID="Panel1" Style="display: block; width: 550px;" runat="server">
+        <div class="containerPopup">
+            <div class="graybar">
+                Add/Remove Columns
+            </div>
+            <div class="contentarea">
+                <div class="formdiv">
+                    <table border="0" style="margin: 0 auto;">
+                        <tr>
+                            <td>
+                                <asp:CheckBoxList ID="cbColumns" runat="server" RepeatColumns="4">
+                                    <asp:ListItem Text="DataId" Value="DataId"></asp:ListItem>                                    
+                                    <asp:ListItem Text="Organization Full Name" Value="Organization"></asp:ListItem>
+                                    <asp:ListItem Text="Office" Value="Office"></asp:ListItem>
+                                    <asp:ListItem Text="(AD1)PCode" Value="(AD1)PCode"></asp:ListItem>
+                                    <asp:ListItem Text="(Ad2)PCode" Value="(Ad2)PCode"></asp:ListItem>
+                                    <asp:ListItem Text="UserName" Value="UserName"></asp:ListItem>
+                                    <asp:ListItem Text="Email" Value="Email"></asp:ListItem>
+                                    <asp:ListItem Text="ReportDate" Value="ReportDate"></asp:ListItem>
+                                    <asp:ListItem Text="Unit" Value="Unit"></asp:ListItem>
+                                </asp:CheckBoxList>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="right">
+                                <asp:Button ID="btnOK" runat="server" Text="OK" OnClick="btnOK_Click" CssClass="button_example" />
+                                <asp:Button ID="btnClose" runat="server" Text="Close" CausesValidation="false" OnClick="btnClose_Click" CssClass="button_example" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Label ID="lblMessage2" runat="server" CssClass="error-message" Visible="false"
+                                    ViewStateMode="Disabled"></asp:Label>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="spacer" style="clear: both;">
+                    </div>
+                </div>
+            </div>
+            <div class="graybarcontainer">
+            </div>
+        </div>
+    </asp:Panel>
 </asp:Content>

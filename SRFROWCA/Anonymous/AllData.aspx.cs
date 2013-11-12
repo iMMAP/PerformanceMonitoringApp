@@ -8,6 +8,8 @@ using System.Web;
 using System.IO.Compression;
 using SRFROWCA.Common;
 using Saplin.Controls;
+using SRFROWCA.Reports;
+using System.Linq;
 namespace SRFROWCA.Anonymous
 {
     public partial class AllData : System.Web.UI.Page
@@ -33,24 +35,6 @@ namespace SRFROWCA.Anonymous
 
         #region Events.
 
-        protected void gvReport_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                // Right align all cell.
-                for (int j = 0; j < e.Row.Cells.Count; j++)
-                {
-                    TableCell cell = e.Row.Cells[j];
-                    cell.Wrap = false;
-
-                    if (j == 11 || j == 12)
-                    {
-                        cell.HorizontalAlign = HorizontalAlign.Right;
-                    }
-                }
-            }
-        }
-
         protected void gvReport_Sorting(object sender, GridViewSortEventArgs e)
         {
             DataTable dt = GetReportData();
@@ -72,27 +56,33 @@ namespace SRFROWCA.Anonymous
 
         protected void btnExportToExcel_Click(object sender, EventArgs e)
         {
-            SQLPaging = PagingStatus.OFF;
-            gvReport.AllowPaging = false;
-            LoadData();
-            ExportUtility.ExportGridView(gvReport, "3WPMAllData", ".xls", Response);
+            //SQLPaging = PagingStatus.OFF;
+            //gvReport.AllowPaging = false;
+            //LoadData();
+            //DataTable dt = GetReportData();
+            //string[] columnNames = dt.Columns.Cast<DataColumn>()
+            //                     .Select(x => x.ColumnName)
+            //                     .ToArray();
+            //cbColumns.DataSource = columnNames;
+            //cbColumns.DataBind();
+            ModalPopupExtender1.Show();
+            //GridView gv = new GridView();
+            //gv.DataSource = dt;
+            //gv.DataBind();
+            //ExportUtility.ExportGridView(gv, "3WPMAllData", ".xls", Response);
+            //gv.Dispose();
         }
 
         #region DropDown SelectedIndexChanged.
 
         protected void ddlEmergency_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadData();
+            LoadDataOnMultipleCheckBoxControl();
         }
 
         protected void ddlClusters_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadData();
-        }
-
-        protected void ddlLocations_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadData();
+            LoadDataOnMultipleCheckBoxControl();
         }
 
         protected void ddlYear_SelectedIndexChanged(object sender, EventArgs e)
@@ -102,22 +92,17 @@ namespace SRFROWCA.Anonymous
 
         protected void ddlMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadData();
-        }
-
-        protected void ddlUsers_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadData();
+            LoadDataOnMultipleCheckBoxControl();
         }
 
         protected void ddlOrgTypes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadData();
+            LoadDataOnMultipleCheckBoxControl();
         }
 
         protected void ddlOrganizations_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadData();
+            LoadDataOnMultipleCheckBoxControl();
         }
 
         protected void ddlOffice_SelectedIndexChanged(object sender, EventArgs e)
@@ -127,18 +112,54 @@ namespace SRFROWCA.Anonymous
 
         protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
+            LastLocationType = ReportsCommon.LocationType.Country;
             PopulateLocationDropDowns();
+            PopulateOffice();
             LoadData();
         }
 
         protected void ddlAdmin1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadData();
+            LastLocationType = ReportsCommon.LocationType.Admin1;
+            LoadDataOnMultipleCheckBoxControl();
         }
 
         protected void ddlAdmin2_SelectedIndexChanged(object sender, EventArgs e)
         {
+            LastLocationType = ReportsCommon.LocationType.Admin2;
+            LoadDataOnMultipleCheckBoxControl();
+        }
+
+        protected void btnOK_Click(object sender, EventArgs e)
+        {
+            DataTable dt = GetReportData();
+            RemoveColumnsFromDataTable(dt);
+            GridView gv = new GridView();
+            gv.DataSource = dt;
+            gv.DataBind();
+            
+            ExportUtility.ExportGridView(gv, "3WPMAllData", ".xls", Response, true);
+        }
+
+        private void RemoveColumnsFromDataTable(DataTable dt)
+        {
+            foreach (ListItem item in cbColumns.Items)
+            {
+                if (!item.Selected)
+                {
+                    dt.Columns.Remove(item.Value);
+                }
+            }
+
+            dt.Columns.Remove("rnumber");
+            dt.Columns.Remove("cnt");
+
+        }
+
+        protected void btnClose_Click(object sender, EventArgs e)
+        {
             LoadData();
+            ModalPopupExtender1.Hide();
         }
 
         #endregion
@@ -156,7 +177,6 @@ namespace SRFROWCA.Anonymous
             PopulateClusters();
             PopulateLocations();
             PopulateMonths();
-            PopulateUses();
             PopulateOrganizationTypes();
             PopulateOrganizations();
             PopulateOffice();
@@ -202,6 +222,11 @@ namespace SRFROWCA.Anonymous
 
             ddlCountry.DataSource = DBContext.GetData("GetCountries");
             ddlCountry.DataBind();
+
+            ListItem item = new ListItem("Select Country", "0");
+            ddlCountry.Items.Insert(0, item);
+
+            ddlCountry.SelectedIndex = 0;
         }
 
         private void PopulateLocationDropDowns()
@@ -253,16 +278,6 @@ namespace SRFROWCA.Anonymous
             return DBContext.GetData("GetMonths");
         }
 
-        // Populate Users drop down
-        private void PopulateUses()
-        {
-            //ddlUsers.DataValueField = "UserId";
-            //ddlUsers.DataTextField = "UserName";
-            //ddlUsers.DataSource = GetUsers();
-            //ddlUsers.DataBind();
-            //ListItem item = new ListItem("Select User", "0");
-            //ddlUsers.Items.Insert(0, item);
-        }
         private object GetUsers()
         {
             return DBContext.GetData("GetAllUsers");
@@ -309,12 +324,35 @@ namespace SRFROWCA.Anonymous
         }
         private DataTable GetOffices()
         {
-            return DBContext.GetData("GetAllOffices");
+            int countryId = 0;
+            int.TryParse(ddlCountry.SelectedValue, out countryId);
+
+            if (countryId > 0)
+            {
+                return DBContext.GetData("GetOrganizationOffices", new object[] { countryId, (int?)null });
+            }
+            else
+            {
+                return DBContext.GetData("GetAllOffices");
+            }
         }
 
         #endregion
 
         #region GridView Methods.
+
+        private void LoadDataOnMultipleCheckBoxControl()
+        {
+            if (Session["DDEventAlreadyFired"] == null)
+            {
+                Session["DDEventAlreadyFired"] = "true";
+                LoadData();
+            }
+            else
+            {
+                Session["DDEventAlreadyFired"] = null;
+            }
+        }
 
         // Load data on the basis of filter criteria.
         private void LoadData()
@@ -353,7 +391,7 @@ namespace SRFROWCA.Anonymous
             int? officeId = GetSelectedValue(ddlOffice);
             int? yearId = GetSelectedValue(ddlYear);
             string monthIds = GetSelectedValues(ddlMonth);
-            string locationIds = GetSelectedValues(ddlAdmin2);
+            string locationIds = GetLocationIds();
             string clusterIds = GetSelectedValues(ddlClusters);
             string orgIds = GetSelectedValues(ddlOrganizations);
             string orgTypeIds = GetSelectedValues(ddlOrgTypes);
@@ -363,6 +401,30 @@ namespace SRFROWCA.Anonymous
             SetHFQueryString(emergencyIds, officeId, userId, yearId, monthIds, locationIds, clusterIds, orgIds, orgTypeIds);
 
             return new object[] { emergencyIds, officeId, userId, yearId, monthIds, locationIds, clusterIds, orgIds, orgTypeIds, pageIndex, pageSize, Convert.ToInt32(SQLPaging) };
+        }
+
+        private string GetLocationIds()
+        {
+            string locationIds = null;
+            if ((int)LastLocationType == 1)
+            {
+                locationIds = ddlCountry.SelectedValue;
+            }
+            else if ((int)LastLocationType == 2)
+            {
+                locationIds = GetSelectedValues(ddlAdmin1);
+            }
+            else if ((int)LastLocationType == 3)
+            {
+                locationIds = GetSelectedValues(ddlAdmin2);
+            }
+
+            if (locationIds == "0" || locationIds == null)
+            {
+                return null;
+            }
+
+            return locationIds;
         }
 
         // Get multiple selected values from drop down checkbox.
@@ -377,7 +439,7 @@ namespace SRFROWCA.Anonymous
         private int? GetSelectedValue(DropDownList ddl)
         {
             int val = 0;
-            int.TryParse(ddlOffice.SelectedValue, out val);
+            int.TryParse(ddl.SelectedValue, out val);
             return val > 0 ? val : (int?)null;
         }
 
@@ -455,6 +517,25 @@ namespace SRFROWCA.Anonymous
         #endregion
 
         #region Properties & Enum
+
+        private ReportsCommon.LocationType LastLocationType
+        {
+            get
+            {
+                if (ViewState["LastLocationType"] != null)
+                {
+                    return (ReportsCommon.LocationType)ViewState["LastLocationType"];
+                }
+                else
+                {
+                    return ReportsCommon.LocationType.None;
+                }
+            }
+            set
+            {
+                ViewState["LastLocationType"] = value;
+            }
+        }
 
         private PagingStatus SQLPaging
         {

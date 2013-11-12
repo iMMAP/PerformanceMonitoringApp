@@ -290,7 +290,8 @@ namespace SRFROWCA.Reports
         {
             Country = 1,
             Admin1 = 2,
-            Admin2 = 3
+            Admin2 = 3,
+            None = -1
         }
     }
 }

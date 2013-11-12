@@ -133,6 +133,11 @@ namespace SRFROWCA
 
         internal static void ExportGridView(Control control, string fileName, string fileExtention, HttpResponse Response)
         {
+            ExportGridView(control, fileName, fileExtention, Response, false);
+        }
+
+        internal static void ExportGridView(Control control, string fileName, string fileExtention, HttpResponse Response, bool disposePassedControl)
+        {
             ExportUtility.PrepareControlForExport(control);
             fileName += DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss") + fileExtention;
             Response.Clear();
@@ -142,6 +147,11 @@ namespace SRFROWCA
             Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
             GridView gv = control as GridView;
             Response.Write(RenderGrid(gv).ToString());
+            if (disposePassedControl)
+            {
+                control.Dispose();
+            }
+
             Response.End();
         }
     }

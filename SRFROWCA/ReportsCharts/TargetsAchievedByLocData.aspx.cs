@@ -167,7 +167,7 @@ namespace SRFROWCA.Reports
                 })
                 .SetTitle(new Title
                 {
-                    Text = "DEF"
+                    Text = ""
                 })
                 .SetXAxis(new XAxis
                 {
@@ -202,7 +202,6 @@ namespace SRFROWCA.Reports
 
         }
 
-
         private void DrawPercentageChart(Series[] series, string[] category)
         {
             Highcharts hc = new Highcharts("Chart1")
@@ -223,7 +222,7 @@ namespace SRFROWCA.Reports
                 })
                 .SetTitle(new Title
                 {
-                    Text = "abc"
+                    Text = ""
                 })
                 .SetXAxis(new XAxis
                 {
