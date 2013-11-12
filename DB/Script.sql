@@ -554,3 +554,123 @@ BEGIN
 	AND		f.LocationId IN (SELECT LocationId FROM ChildLocations)
 	ORDER BY f.OfficeName
 END
+
+-------------------------------------------------------------------------------------------------------------
+
+USE [ROWCA]
+GO
+/****** Object:  StoredProcedure [dbo].[GetAllTasksDataReport1]    Script Date: 11/12/2013 8:06:55 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Muhammad Kashif Nadeem
+-- Create date: Feb 19, 2013
+-- Description:	Get all data for report
+-- =============================================
+ALTER PROCEDURE [dbo].[GetAllTasksDataReport1]
+	@emergencyIds VARCHAR(500) = NULL,
+	@officeId INT = NULL,
+	@userId UNIQUEIDENTIFIER = NULL,
+	@yearId INT = NULL,
+	@monthIds VARCHAR(100) = NULL,
+	@locationIds VARCHAR(MAX) = NULL,
+	@clusterIds VARCHAR(4000) = NULL,	
+	@orgIds VARCHAR(4000) = NULL,	
+	@orgTypeIds VARCHAR(1000) = NULL	
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from	
+	-- interfering with SELECT statements.
+	
+	SELECT * INTO #emergency FROM dbo.fn_ParseCSVString (@emergencyIds, ',')
+	SELECT * INTO #months FROM dbo.fn_ParseCSVString (@monthIds, ',')
+	SELECT * INTO #passedLocations FROM dbo.fn_ParseCSVString (@locationIds, ',')
+	SELECT * INTO #clusters FROM dbo.fn_ParseCSVString (@clusterIds, ',')
+	SELECT * INTO #orgs FROM dbo.fn_ParseCSVString (@orgIds, ',')
+	SELECT * INTO #orgTypes FROM dbo.fn_ParseCSVString (@orgTypeIds, ',')
+	
+	SET NOCOUNT ON;
+
+	;WITH allChildLocations AS
+	(
+		SELECT LocationId, LocationParentId
+		FROM Locations
+		WHERE LocationId IN (SELECT * FROM #passedLocations)
+		UNION ALL
+		SELECT l.LocationId, l.LocationParentId FROM Locations l join allChildLocations c on l.LocationParentId = c.LocationId
+	)
+
+	SELECT LocationId INTO #locations FROM allChildLocations	
+	DROP TABLE #passedLocations
+	
+	
+	SELECT rd.ActivityDataId AS DataId, 
+			e.EmergencyName AS Emergency,
+			org.OrganizationName AS Organization,
+			org.OrganizationAcronym,  
+			o.Officename AS Office, 
+			y.Year, 
+			m.MonthName AS Month, 
+			c.ClusterName AS Cluster, 
+			co.ObjectiveName AS Objective, 
+			oi.IndicatorName AS Indicator, 
+			ia.ActivityName AS Activity, 
+			ac.ActivityType,
+			ad.DataName AS Data,
+			l2.LocationName AS '(AD1)Location',
+			l2.LocationPCode AS '(AD1)PCode',
+			l.LocationName AS '(Ad2)Location',
+			l.LocationPCode AS '(Ad2)PCode',
+			cast(cast(rd.Target as DECIMAL(18,2)) as float) As Target,
+			cast(cast(rd.Achieved as DECIMAL(18,2)) as float) As Achieved,
+			u.UserName,
+			um.Email
+			,CONVERT(VARCHAR(10),
+					DATEADD(s,-1,DATEADD(mm, DATEDIFF(m,0,CAST(
+					  CAST(y.Year AS VARCHAR(4)) +
+					  RIGHT('0' + CAST(m.MonthId AS VARCHAR(2)), 2) +
+					  RIGHT('0' + CAST(1 AS VARCHAR(2)), 2) 
+				   AS DATETIME))+1,0)), 103) AS ReportDate,
+			un.Unit			
+			
+	FROM	Reports r JOIN ReportLocations rl ON r.ReportId = rl.ReportId
+	LEFT	JOIN Reportdetails rd ON rl.ReportlocationId = rd.ReportlocationId
+	JOIN	Locations l ON rl.LocationId = l.LocationId
+	JOIN	Years y ON r.YearId = y.YearId
+	JOIN	Months m ON r.MonthId = m.MonthId
+	JOIN	Offices o ON r.OfficeId= o.OfficeId
+	JOIN	ActivityData ad ON ad.ActivityDataId = rd.ActivityDataId
+	JOIN	IndicatorActivities ia ON ad.IndicatorActivityId = ia.IndicatorActivityId
+	JOIN	ObjectiveIndicators oi ON ia.ObjectiveIndicatorid = oi.ObjectiveIndicatorId
+	JOIN	ClusterObjectives co ON oi.ClusterObjectiveId = co.ClusterObjectiveId
+	JOIN	EmergencyClusters ec ON ec.EmergencyClusterId = co.EmergencyClusterId
+	JOIN	LocationEmergencies le ON ec.LocationEmergencyId = le.LocationEmergencyId
+	JOIN	Emergency e ON le.EmergencyId = e.EmergencyId
+	JOIN	Clusters c ON ec.ClusterId = c.ClusterId
+	JOIN	aspnet_Users u ON u.UserId = r.CreatedById
+	JOIN	aspnet_Membership um ON u.UserId = um.UserId
+	JOIN	Organizations org ON org.OrganizationId = o.OrganizationId
+	JOIN	OrganizationTypes ot ON org.OrganizationTypeId = ot.OrganizationTypeId
+	JOIN	Locations l2 on l2.LocationId = l.LocationParentId
+	LEFT	JOIN ActivityTypes ac ON ia.ActivityTypeId = ac.ActivityTypeId
+	LEFT	JOIN Units un ON ad.UnitId = un.UnitId
+	
+	WHERE	(e.EmergencyId IN( SELECT * FROM #emergency) OR @emergencyIds IS NULL)
+	AND		(o.OfficeId = @officeId OR @officeId IS NULL)
+	AND		(u.UserId = @userId OR @userId = '00000000-0000-0000-0000-000000000000')
+	AND		(y.YearId = @yearId OR @yearId IS NULL)
+	AND		(m.MonthId IN (SELECT * FROM #months) OR @monthIds IS NULL)
+	AND		(l.LocationId IN (SELECT * FROM #locations) OR @locationIds IS NULL)
+	AND		(c.ClusterId IN (SELECT * FROM #clusters) OR @clusterIds IS NULL)
+	AND		(org.OrganizationId IN (SELECT * FROM #orgs) OR @orgIds IS NULL)
+	AND		(ot.OrganizationTypeID IN (SELECT * FROM #orgTypes) OR @orgTypeIds IS NULL)
+
+	DROP TABLE #clusters
+	DROP TABLE #emergency
+	DROP TABLE #months
+	DROP TABLE #locations
+	DROP TABLE #orgs
+	DROP TABLE #orgTypes
+END
