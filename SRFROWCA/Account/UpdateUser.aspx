@@ -5,82 +5,71 @@
     <%@ register assembly="DropDownCheckBoxes" namespace="Saplin.Controls" tagprefix="cc" %>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div style="background-color: Silver;">
-        Create User Account</div>
-    <div style="width: 75%; float: left">
-        <table>
-            <tr>
-                <td>
-                    User Name:
-                </td>
-                <td>
-                    <asp:TextBox ID="txtUserName" runat="server" MaxLength="256" Enabled="false" style="background-color:ButtonFace;"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Email:
-                </td>
-                <td>
-                    <asp:TextBox ID="txtEmail" runat="server" MaxLength="256"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Phone:
-                </td>
-                <td>
-                    <asp:TextBox ID="txtPhone" MaxLength="50" runat="server"></asp:TextBox>
-                </td>
-                <td>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Organization:
-                </td>
-                <td>
-                    <asp:DropDownList ID="ddlOrganization" runat="server" Width="200px">
-                    </asp:DropDownList>
-                </td>
-            </tr>
-        </table>
-        <div id="divCountry" runat="server">
-            <table>
-                <tr id="trCountry">
-                    <td>
-                        Country:
-                    </td>
-                    <td>
-                        <asp:DropDownList ID="ddlCountry" runat="server" Width="200px">
+    <div class="containerLogin">
+        <div class="graybarLogin">
+            Register Yourself
+        </div>
+        <div class="contentarea">
+            <div class="formdiv">
+                <div class="singalselect">
+                    <label>
+                        User Name:</label>
+                    <div>
+                        <asp:TextBox ID="txtUserName" runat="server" CssClass="ddlWidthAllData" Enabled="false"
+                            Style="background-color: ButtonFace;"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="singalselect">
+                    <label>
+                        Email:
+                    </label>
+                    <div>
+                        <asp:TextBox ID="txtEmail" runat="server" CssClass="ddlWidthAllData"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="singalselect">
+                    <label>
+                        Phone:</label>
+                    <div>
+                        <asp:TextBox ID="txtPhone" MaxLength="50" CssClass="ddlWidthAllData" runat="server"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="singalselect">
+                    <label>
+                        Organization:
+                    </label>
+                    <div>
+                        <asp:DropDownList ID="ddlOrganization" runat="server" Width="400px">
                         </asp:DropDownList>
-                    </td>
-                    <td>
+                    </div>
+                </div>
+                <div id="divCountry" runat="server" class="singalselect">
+                    <label>
+                        Country:</label>
+                    <div>
+                        <asp:DropDownList ID="ddlCountry" runat="server" Width="400px">
+                        </asp:DropDownList>
                         <asp:RequiredFieldValidator ID="rfvCountry" runat="server" ErrorMessage="Country"
                             Text="*" InitialValue="0" ControlToValidate="ddlCountry"></asp:RequiredFieldValidator>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div id="divLocation" runat="server">
-            <table>
-                <tr id="trLocations">
-                    <td>
-                        <asp:Literal ID="ltrlLocation" runat="server" Text="Country"></asp:Literal>
-                    </td>
-                    <td>
-                        <cc:DropDownCheckBoxes ID="ddlLocations" runat="server" CssClass="ddlWidth">
+                    </div>
+                </div>
+                <div id="divLocation" runat="server" class="singalselect">
+                    <label>
+                        <asp:Literal ID="ltrlLocation" runat="server" Text="Country"></asp:Literal></label>
+                    <div>
+                        <cc:DropDownCheckBoxes ID="ddlLocations" runat="server">
+                            <Style SelectBoxWidth="400px" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
                             <Texts SelectBoxCaption="Select Country" />
                         </cc:DropDownCheckBoxes>
-                    </td>
-                    <td>
-                    </td>
-                </tr>
-            </table>
+                    </div>
+                </div>
+            </div>
+            <div class="spacer" style="clear: both;">
+            </div>
         </div>
-        
         <div>
-            <asp:Button ID="btnUpdate" runat="server" Text="Update" OnClick="btnUpdate_Click" />
+            <asp:Button ID="btnUpdate" runat="server" Text="Update" OnClick="btnUpdate_Click"
+                CssClass="button_example" />
             <table cellpadding="5" cellspacing="0" class="pstyle1">
                 <tr>
                     <td class="signupheading2">
@@ -102,6 +91,10 @@
                     </td>
                 </tr>
             </table>
+        </div>
+        <div class="spacer" style="clear: both;">
+        </div>
+        <div class="graybarcontainer">
         </div>
     </div>
 </asp:Content>
