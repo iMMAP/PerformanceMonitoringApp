@@ -209,7 +209,7 @@
             <div class="tablegrid">
                 <cc2:PagingGridView ID="gvReport" runat="server" Width="100%" CssClass="imagetable"
                     AutoGenerateColumns="false" OnSorting="gvReport_Sorting" ShowHeaderWhenEmpty="true"
-                    EnableViewState="false" AllowSorting="True" RowStyle-Height="30" AllowPaging="true"
+                    EnableViewState="false" AllowSorting="True" AllowPaging="true"
                     PageSize="100" ShowHeader="true" OnPageIndexChanging="gvReport_PageIndexChanging">
                     <PagerStyle BackColor="#efefef" ForeColor="DarkSlateBlue" HorizontalAlign="Center" />
                     <PagerSettings Mode="NumericFirstLast" />

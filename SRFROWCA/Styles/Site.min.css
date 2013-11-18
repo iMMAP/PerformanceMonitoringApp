@@ -233,19 +233,27 @@ CSS for Login, Register, ForgotPassword, ChagnePassword
 {
     color:Blue
     }
-    
-.divleftchartfilter
+
+.containerchart
 {
-    width: 20%;
-    float: left;
+    width: 98%;
+    margin: 0 auto;    
+    margin-top: 20px;
+}
     
+.divleftchart
+{
+    padding: 10px 5px 10px 5px;
+    border-style: dotted;
+    border-width: thin;
+    width: 10%;
+    float: left;
 }
 
-.divrightchartfilter
+.divrightchart
 {
-    width: 79%;
+    width: 88%;
     float: right;
-    border: 1px solid #ccc;
 }
 
 .hiddenelement

@@ -147,14 +147,13 @@ namespace SRFROWCA.Reports
                          .ToArray();
         }
 
-        private void DrawLocaitonChart(Series[] series, string[] category)
+        private void DrawLocaitonChart(Series[] series, string[] category, string title1, string title2)
         {
             Highcharts hc = new Highcharts("Chart")
                 .InitChart(new Chart
                 {
-                    DefaultSeriesType = ChartTypes.Column,
-                    Width = 550,
-                    Height = 330,
+                    DefaultSeriesType = ChartTypes.Column
+
                     //MarginTop = 10,
                 })
                 .SetLegend(new Legend
@@ -165,9 +164,21 @@ namespace SRFROWCA.Reports
                 {
                     Enabled = false
                 })
+                .SetExporting(new Exporting
+                {
+                    Enabled = true
+                })
                 .SetTitle(new Title
                 {
-                    Text = ""
+                    UseHTML = true,
+                    Text = title1,
+                     Style = "color: '#000000', fontWeight: 'bold', fontSize: '8px'"
+                    
+                })
+                .SetSubtitle(new Subtitle
+                {
+                    UseHTML = true,
+                    Text = title2
                 })
                 .SetXAxis(new XAxis
                 {
@@ -207,9 +218,8 @@ namespace SRFROWCA.Reports
             Highcharts hc = new Highcharts("Chart1")
                 .InitChart(new Chart
                 {
-                    DefaultSeriesType = ChartTypes.Column,
-                    Width = 550,
-                    Height = 330,
+                    DefaultSeriesType = ChartTypes.Column
+
                     //MarginTop = 10
                 })
                 .SetLegend(new Legend
@@ -264,12 +274,15 @@ namespace SRFROWCA.Reports
 
         public void PrepareTargetAchievedChartData(DataTable dt)
         {
+            string title1 = "Mali - Education <br/> <u>Objectif:</u> Accompagner les mouvements de retour (si la sécurité le permet)";
+            string title2 = "<u>Indicator:</u> Nombre de maisons des vulnerables, réparées ou reconstruites <br/><u>Activity:</u> Réparer ou reconstruire les maison endommagées ou détruites";
             if (dt.Rows.Count > 0)
             {
                 Series[] series = ReportsCommon.GetSeries(dt);
                 DataRow dr = dt.Rows[0];
                 string[] categories = GetCategories(dt);
-                DrawLocaitonChart(series, categories);
+
+                DrawLocaitonChart(series, categories, title1, title2);
             }
             else
             {
@@ -279,7 +292,7 @@ namespace SRFROWCA.Reports
                 };
 
                 string[] categories = { "" };
-                DrawLocaitonChart(series, categories);
+                DrawLocaitonChart(series, categories, title1, title2);
             }
         }
 

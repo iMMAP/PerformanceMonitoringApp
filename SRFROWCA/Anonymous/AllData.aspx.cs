@@ -217,16 +217,7 @@ namespace SRFROWCA.Anonymous
 
         private void PopulateCountry()
         {
-            ddlCountry.DataValueField = "LocationId";
-            ddlCountry.DataTextField = "LocationName";
-
-            ddlCountry.DataSource = DBContext.GetData("GetCountries");
-            ddlCountry.DataBind();
-
-            ListItem item = new ListItem("Select Country", "0");
-            ddlCountry.Items.Insert(0, item);
-
-            ddlCountry.SelectedIndex = 0;
+            UI.FillCountry(ddlCountry);
         }
 
         private void PopulateLocationDropDowns()

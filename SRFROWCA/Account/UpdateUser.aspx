@@ -7,7 +7,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="containerLogin">
         <div class="graybarLogin">
-            Register Yourself
+            Update User Information
         </div>
         <div class="contentarea">
             <div class="formdiv">

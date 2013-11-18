@@ -115,5 +115,18 @@ namespace SRFROWCA.Common
                 ddl.SelectedIndex = 0;
             }
         }
+
+        internal static void FillCountry(DropDownList ddl)
+        {
+            ddl.DataValueField = "LocationId";
+            ddl.DataTextField = "LocationName";
+
+            ddl.DataSource = DBContext.GetData("GetCountries");
+            ddl.DataBind();
+
+            ListItem item = new ListItem("Select Country", "0");
+            ddl.Items.Insert(0, item);
+            ddl.SelectedIndex = 0;
+        }
     }
 }

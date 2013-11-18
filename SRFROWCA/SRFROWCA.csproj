@@ -147,43 +147,19 @@
     <Content Include="ErrorPages\HttpErrorPage.aspx" />
     <Content Include="Help\generatereport1.avi" />
     <Content Include="Help\generatereport1.swf" />
-    <Content Include="images\01a.jpg" />
-    <Content Include="images\activity.gif" />
     <Content Include="images\add_plus.png" />
     <Content Include="images\ajaxlodr.gif" />
-    <Content Include="images\bottom-left.png" />
-    <Content Include="images\bottom-mid.png" />
-    <Content Include="images\bottom-right.png" />
-    <Content Include="images\button-bg.jpg" />
-    <Content Include="images\close-down.png" />
-    <Content Include="images\close-hover.png" />
-    <Content Include="images\close.png" />
     <Content Include="images\ddlarrow.png" />
     <Content Include="images\droparrow.png" />
     <Content Include="images\error.png" />
     <Content Include="images\favicon.ico" />
-    <Content Include="images\first.gif" />
-    <Content Include="images\footer.gif" />
-    <Content Include="images\hder.png" />
-    <Content Include="images\hdrmid.png" />
-    <Content Include="images\last.gif" />
-    <Content Include="images\left.png" />
     <Content Include="images\loginmenuarrow.png" />
     <Content Include="images\minus.png" />
-    <Content Include="images\next.gif" />
-    <Content Include="images\pager_bg.gif" />
-    <Content Include="images\pencil.gif" />
     <Content Include="images\plus.png" />
-    <Content Include="images\prev.gif" />
-    <Content Include="images\right.png" />
     <Content Include="images\rssfeed.png" />
-    <Content Include="images\sprite.png" />
-    <Content Include="images\temp0.svg" />
-    <Content Include="images\top-left.png" />
-    <Content Include="images\top-mid.png" />
-    <Content Include="images\top-right.png" />
-    <Content Include="Log\ErrorLog.txt" />
     <Content Include="Maps\TargetAchievedByLocDataMap.aspx" />
+    <Content Include="OPS\OPSActivities.aspx" />
+    <Content Include="OPS\OPSDataEntry.aspx" />
     <Content Include="Pages\AddActivities.aspx" />
     <Content Include="Pages\SelectActivities.aspx" />
     <Content Include="Pages\TargetsAchievedOfLocationByDuration.ascx" />
@@ -244,6 +220,7 @@
     <Content Include="Styles\ui-lightness\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Styles\ui-lightness\jquery-ui-1.10.3.custom.css" />
     <Content Include="Styles\ui-lightness\jquery-ui-1.10.3.custom.min.css" />
+    <Content Include="testservice.asmx" />
     <Content Include="UserManual.aspx" />
     <Content Include="UserManual_files\colorschememapping.xml" />
     <Content Include="UserManual_files\filelist.xml" />
@@ -259,18 +236,13 @@
     <Content Include="UserManual_files\image010.png" />
     <Content Include="UserManual_files\image011.png" />
     <Content Include="packages.config" />
-    <Content Include="NestedMasterPage1.master" />
-    <Content Include="NestedMasterPage2.master" />
-    <Content Include="WebService2.asmx" />
-    <Content Include="OrganizationsFeed.ashx" />
-    <Content Include="OfficeFeed.ashx" />
-    <Content Include="ClustersFeed.ashx" />
-    <Content Include="ObjectivesFeed.ashx" />
-    <Content Include="IndicatorsFeed.ashx" />
-    <Content Include="ActivityFeed.ashx" />
-    <Content Include="ActivityDataFeed.ashx" />
     <Content Include="Admin\Web.config" />
     <Content Include="Pages\Web.config" />
+    <Content Include="WebForm1.aspx" />
+    <Content Include="WebForm2.aspx" />
+    <Content Include="WebForm3.aspx" />
+    <Content Include="ops.Master" />
+    <Content Include="DataFeed.ashx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -284,7 +256,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Web.sitemap" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="About.aspx.cs">
@@ -357,12 +328,6 @@
     <Compile Include="Account\UpdateUser.aspx.designer.cs">
       <DependentUpon>UpdateUser.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ActivityDataFeed.ashx.cs">
-      <DependentUpon>ActivityDataFeed.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="ActivityFeed.ashx.cs">
-      <DependentUpon>ActivityFeed.ashx</DependentUpon>
-    </Compile>
     <Compile Include="Admin\ActivityData.aspx.cs">
       <DependentUpon>ActivityData.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -411,6 +376,9 @@
     </Compile>
     <Compile Include="Anonymous\AllData.aspx.designer.cs">
       <DependentUpon>AllData.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DataFeed.ashx.cs">
+      <DependentUpon>DataFeed.ashx</DependentUpon>
     </Compile>
     <Compile Include="DataFeeds\Admin1Feed.ashx.cs">
       <DependentUpon>Admin1Feed.ashx</DependentUpon>
@@ -489,12 +457,6 @@
       <DependentUpon>ChartSVGService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ClustersDataFeed.ashx.cs">
-      <DependentUpon>ClustersDataFeed.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="ClustersFeed.ashx.cs">
-      <DependentUpon>ClustersFeed.ashx</DependentUpon>
-    </Compile>
     <Compile Include="Common\DataTableToJson.cs" />
     <Compile Include="Common\Enemuration.cs" />
     <Compile Include="Common\ExceptionUtility.cs" />
@@ -552,9 +514,6 @@
     <Compile Include="ErrorPages\HttpErrorPage.aspx.designer.cs">
       <DependentUpon>HttpErrorPage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="IndicatorsFeed.ashx.cs">
-      <DependentUpon>IndicatorsFeed.ashx</DependentUpon>
-    </Compile>
     <Compile Include="Maps\TargetAchievedByLocDataMap.aspx.cs">
       <DependentUpon>TargetAchievedByLocDataMap.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -562,28 +521,26 @@
     <Compile Include="Maps\TargetAchievedByLocDataMap.aspx.designer.cs">
       <DependentUpon>TargetAchievedByLocDataMap.aspx</DependentUpon>
     </Compile>
-    <Compile Include="NestedMasterPage1.master.cs">
-      <DependentUpon>NestedMasterPage1.master</DependentUpon>
+    <Compile Include="ops.Master.cs">
+      <DependentUpon>ops.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="NestedMasterPage1.master.designer.cs">
-      <DependentUpon>NestedMasterPage1.master</DependentUpon>
+    <Compile Include="ops.Master.designer.cs">
+      <DependentUpon>ops.Master</DependentUpon>
     </Compile>
-    <Compile Include="NestedMasterPage2.master.cs">
-      <DependentUpon>NestedMasterPage2.master</DependentUpon>
+    <Compile Include="OPS\OPSActivities.aspx.cs">
+      <DependentUpon>OPSActivities.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="NestedMasterPage2.master.designer.cs">
-      <DependentUpon>NestedMasterPage2.master</DependentUpon>
+    <Compile Include="OPS\OPSActivities.aspx.designer.cs">
+      <DependentUpon>OPSActivities.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ObjectivesFeed.ashx.cs">
-      <DependentUpon>ObjectivesFeed.ashx</DependentUpon>
+    <Compile Include="OPS\OPSDataEntry.aspx.cs">
+      <DependentUpon>OPSDataEntry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="OfficeFeed.ashx.cs">
-      <DependentUpon>OfficeFeed.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="OrganizationsFeed.ashx.cs">
-      <DependentUpon>OrganizationsFeed.ashx</DependentUpon>
+    <Compile Include="OPS\OPSDataEntry.aspx.designer.cs">
+      <DependentUpon>OPSDataEntry.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\SelectActivities.aspx.cs">
       <DependentUpon>SelectActivities.aspx</DependentUpon>
@@ -661,9 +618,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="DataFeed.ashx.cs">
-      <DependentUpon>DataFeed.ashx</DependentUpon>
-    </Compile>
     <Compile Include="Pages\AddActivities.aspx.cs">
       <DependentUpon>AddActivities.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -679,6 +633,10 @@
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
+    <Compile Include="testservice.asmx.cs">
+      <DependentUpon>testservice.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UserManual.aspx.cs">
       <DependentUpon>UserManual.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -686,9 +644,26 @@
     <Compile Include="UserManual.aspx.designer.cs">
       <DependentUpon>UserManual.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WebService2.asmx.cs">
-      <DependentUpon>WebService2.asmx</DependentUpon>
-      <SubType>Component</SubType>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm2.aspx.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm2.aspx.designer.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm3.aspx.cs">
+      <DependentUpon>WebForm3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm3.aspx.designer.cs">
+      <DependentUpon>WebForm3.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -711,10 +686,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DataFeed.ashx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ClustersDataFeed.ashx" />
     <None Include="3WPMUserManual.pdf" />
     <Content Include="DataFeeds\Organizations.ashx" />
     <Content Include="DataFeeds\OrganizationsFeed.ashx" />
