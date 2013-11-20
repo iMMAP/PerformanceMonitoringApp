@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Globalization;
 using System.Linq;
 using System.Transactions;
-using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
@@ -21,246 +19,456 @@ namespace SRFROWCA.OPS
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.Form.DefaultButton = this.btnSave.UniqueID;
-
             if (!IsPostBack)
             {
-                PopulateDropDowns();
-                PopulateLocations(LocationId);
-                LoadClusters();
-            }
-
-            string controlName = GetPostBackControlId(this);
-            if (controlName == "ddlMonth" || controlName == "ddlOffice")
-            {
-                LocationRemoved = 0;
-                lstSelectedLocations.Items.Clear();
-            }
-
-            //DataTable dtActivities = GetActivities();
-            //AddDynamicColumnsInGrid(dtActivities);
-            //GetReport(dtActivities);
-        }
-
-        private void AddDynamicColumnsInGrid(DataTable dt, GridView gv)
-        {
-            foreach (DataColumn column in dt.Columns)
-            {
-                TemplateField customField = new TemplateField();
-                // Create the dynamic templates and assign them to 
-                // the appropriate template property.
-
-                string columnName = column.ColumnName;
-                if (!(columnName == "ReportId" || columnName == "ClusterName" || columnName == "IndicatorName" || columnName == "ActivityDataId" || columnName == "ActivityName" || columnName == "IsActive"))
+                SetOPSIds();
+                if (OPSProjectId > 0 && !string.IsNullOrEmpty(OPSClusterName) && !string.IsNullOrEmpty(OPSCountryName))
                 {
-                    customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, column.ColumnName, "1");
-                    customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, column.ColumnName, "1");
-                    gv.Columns.Add(customField);
+                    OPSLocationEmergencyId = GetEmergencyId();
+                    OPSEmergencyClusterId = GetClusterId();
                 }
-            }
-        }
-
-        // Populate Clusters Grid.
-        private void LoadClusters()
-        {
-            PopulateClusters();            
-        }
-
-        private void PopulateClusters()
-        {
-            DataTable dt = new DataTable();
-            int emgLocationId = 0;
-            int.TryParse(ddlEmergency.SelectedValue, out emgLocationId);
-
-            int officeId = 0;
-            int.TryParse(ddlOffice.SelectedValue, out officeId);
-
-            if (emgLocationId > 0 && officeId > 0)
-            {
-                dt = GetEmergencyClusters(1);
+                PopulateDropDowns();
             }
 
-            gvClusters.DataSource = dt;
-            gvClusters.DataBind();
+            this.Form.DefaultButton = this.btnSave.UniqueID;
+
+            DataTable dtActivities = GetActivities();
+            AddDynamicColumnsInGrid(dtActivities);
+            GetReport(dtActivities);
+
         }
 
-        private DataTable GetEmergencyClusters(int emgLocationId)
-        {
-            return DBContext.GetData("GetEmergencyClustersOfData", new object[] { emgLocationId });
-        }
+        #region Events.
 
-        #region Drop Downs Events & Methods.
-
-        #region Drop Down Events
+        #region DropDownLists Events
         protected void ddlEmergency_SelectedIndexChanged(object sender, EventArgs e)
         {
             LocationRemoved = 0;
-            //BindGridData();
-            //AddLocationsInSelectedList();
+            BindGridData();
+            AddLocationsInSelectedList();
         }
         protected void ddlOffice_SelectedIndexChanged(object sender, EventArgs e)
         {
             LocationRemoved = 0;
-            //BindGridData();
-            //AddLocationsInSelectedList();
+            BindGridData();
+            AddLocationsInSelectedList();
         }
         protected void ddlYear_SelectedIndexChanged(object sender, EventArgs e)
         {
             LocationRemoved = 0;
-            //BindGridData();
-            //AddLocationsInSelectedList();
+            BindGridData();
+            AddLocationsInSelectedList();
         }
         protected void ddlMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
             LocationRemoved = 0;
-            //AddLocationsInSelectedList();
-            //BindGridData();
+            AddLocationsInSelectedList();
+            BindGridData();
         }
         #endregion
 
-        #region Drop Downs Methods.
-
-        private void PopulateDropDowns()
+        #region Location List Box Events.
+        protected void btnAddAll_Click(object sender, EventArgs e)
         {
-            // Get details of user from aspnet_Users_Custom tbale
-            DataTable dt = ROWCACommon.GetUserDetails();
-            if (dt.Rows.Count > 0)
+            List<ListItem> sortedList = GetSortedList(lstLocations, lstSelectedLocations, null);
+
+            if (sortedList.Count > 0)
             {
-                lblCountry.Text = dt.Rows[0]["LocationName"].ToString();
-                lblOrganization.Text = dt.Rows[0]["OrganizationName"].ToString();
-
-                // Set Header of Location List Box.
-                lblLocationLevelOfCountry.Text = "Admin2 Locations of " + lblCountry.Text;
-
-                LocationId = Convert.ToInt32(dt.Rows[0]["LocationId"].ToString());
-                int organizationId = Convert.ToInt32(dt.Rows[0]["OrganizationId"].ToString());
-
-                PopulateLocationEmergencies(LocationId);
-                PopulateOffices(LocationId, organizationId);
-
+                LocationRemoved = 0;
+                lstSelectedLocations.Items.Clear();
+                lstSelectedLocations.Items.AddRange(sortedList.ToArray());
             }
 
-            // Populate Year Drop Down.
-            var result = DateTime.Parse(DateTime.Now.ToShortDateString(), new CultureInfo("en-US")).Year;
-            ddlYear.SelectedIndex = ddlYear.Items.IndexOf(ddlYear.Items.FindByText(result.ToString()));
+            // Remove all items from list.
+            lstLocations.Items.Clear();
 
-            // Populate Months Drop Down.
-            var result1 = DateTime.Now.ToString("MMM", CultureInfo.InvariantCulture);
-            ddlMonth.SelectedIndex = ddlMonth.Items.IndexOf(ddlMonth.Items.FindByText(result1.ToString()));
-        }
-
-        // Populate Emergency Drop Down.
-        private void PopulateLocationEmergencies(int locationId)
-        {
-            ddlEmergency.DataValueField = "LocationEmergencyId";
-            ddlEmergency.DataTextField = "EmergencyName";
-
-            ddlEmergency.DataSource = GetLocationEmergencies(locationId);
-            ddlEmergency.DataBind();
-
-            if (ddlEmergency.Items.Count > 1)
+            if (lstSelectedLocations.Items.Count > 0)
             {
-                ListItem item = new ListItem("Select Emergency", "0");
-                ddlEmergency.Items.Insert(0, item);
+                lstSelectedLocations.SelectedIndex = 0;
             }
         }
-        private DataTable GetLocationEmergencies(int locationId)
+        protected void btnAdd_Click(object sender, EventArgs e)
         {
-            DataTable dt = DBContext.GetData("GetLocationEmergencies", new object[] { locationId });
-            return dt.Rows.Count > 0 ? dt : new DataTable();
-        }
-
-        // Populate Office Drop Down.
-        private void PopulateOffices(int locationId, int organizationId)
-        {
-            ddlOffice.DataValueField = "OfficeId";
-            ddlOffice.DataTextField = "OfficeName";
-
-            ddlOffice.DataSource = GetOffices(locationId, organizationId);
-            ddlOffice.DataBind();
-
-            if (ddlOffice.Items.Count > 1)
+            if (lstLocations.SelectedIndex > -1)
             {
-                ListItem item = new ListItem("Select Your Office", "0");
-                ddlOffice.Items.Insert(0, item);
+                LocationRemoved = 0;
+                List<ListItem> items = new List<ListItem>();
+
+                for (int i = 0; i < lstLocations.Items.Count; i++)
+                {
+                    if (lstLocations.Items[i].Selected)
+                    {
+                        items.Add(lstLocations.Items[i]);
+                    }
+                }
+
+                foreach (ListItem selectedItem in items)
+                {
+                    // Get sorted list items.
+                    List<ListItem> sortedList = GetSortedList(lstSelectedLocations, null, selectedItem);
+
+                    if (sortedList.Count > 0)
+                    {
+                        // Clear all items from list box.
+                        lstSelectedLocations.Items.Clear();
+
+                        // Add items in listbox.
+                        lstSelectedLocations.Items.AddRange(sortedList.ToArray());
+                    }
+
+                    // Remove item from selected items phase list(on right);
+                    lstLocations.Items.Remove(selectedItem);
+
+                    // Select first item in selected phases list box.
+                    if (lstSelectedLocations.Items.Count > 0)
+                    {
+                        lstSelectedLocations.SelectedIndex = 0;
+                    }
+
+                    // Select first item in phases list box.
+                    if (lstLocations.Items.Count > 0)
+                    {
+                        lstLocations.SelectedIndex = 0;
+                    }
+                }
+            }
+
+            btnGetReports_Click(null, null);
+        }
+        protected void btnRemove_Click(object sender, EventArgs e)
+        {
+            if (lstSelectedLocations.SelectedIndex > -1)
+            {
+                LocationRemoved = 1;
+                List<ListItem> items = new List<ListItem>();
+
+                for (int i = 0; i < lstSelectedLocations.Items.Count; i++)
+                {
+                    if (lstSelectedLocations.Items[i].Selected)
+                    {
+                        items.Add(lstSelectedLocations.Items[i]);
+                    }
+                }
+
+                foreach (ListItem selectedItem in items)
+                {
+                    // Get sorted list items.
+                    List<ListItem> sortedList = GetSortedList(lstLocations, null, selectedItem);
+
+                    if (sortedList.Count > 0)
+                    {
+                        // Clear all items from list box.
+                        lstLocations.Items.Clear();
+
+                        // Add items in listbox.
+                        lstLocations.Items.AddRange(sortedList.ToArray());
+                    }
+
+                    // Remove item from selected items phase list(on right);
+                    lstSelectedLocations.Items.Remove(selectedItem);
+
+                    // Select first item in selected phases list box.
+                    if (lstSelectedLocations.Items.Count > 0)
+                    {
+                        lstSelectedLocations.SelectedIndex = 0;
+                    }
+
+                    // Select first item in phases list box.
+                    if (lstLocations.Items.Count > 0)
+                    {
+                        lstLocations.SelectedIndex = 0;
+                    }
+                }
             }
         }
-        private DataTable GetOffices(int locationId, int organizationId)
+        protected void btnRemoveAll_Click(object sender, EventArgs e)
         {
-            DataTable dt = DBContext.GetData("GetOrganizationOffices", new object[] { locationId, organizationId });
-            return dt.Rows.Count > 0 ? dt : new DataTable();
-        }
+            List<ListItem> sortedList = GetSortedList(lstSelectedLocations, lstLocations, null);
 
-        // Populate Months Drop Down
-        private void PopulateMonths()
-        {
-            ddlMonth.DataValueField = "MonthId";
-            ddlMonth.DataTextField = "MonthName";
+            if (sortedList.Count > 0)
+            {
+                LocationRemoved = 1;
+                lstLocations.Items.Clear();
+                lstLocations.Items.AddRange(sortedList.ToArray());
+            }
 
-            ddlMonth.DataSource = GetMonth();
-            ddlMonth.DataBind();
+            // Remove all items from listboxes.
+            lstSelectedLocations.Items.Clear();
 
-            ListItem item = new ListItem("Select Month", "0");
-            ddlMonth.Items.Insert(0, item);
-
-            var result = DateTime.Now.ToString("MMM", CultureInfo.InvariantCulture);
-            ddlMonth.SelectedIndex = ddlMonth.Items.IndexOf(ddlMonth.Items.FindByText(result.ToString()));
-        }
-        private DataTable GetMonth()
-        {
-            DataTable dt = DBContext.GetData("GetMonths");
-            return dt.Rows.Count > 0 ? dt : new DataTable();
-        }
-
-        // Populate Years Drop Down
-        private void PopulateYears()
-        {
-            ddlYear.DataValueField = "YearId";
-            ddlYear.DataTextField = "Year";
-
-            ddlYear.DataSource = GetYears();
-            ddlYear.DataBind();
-
-            ListItem item = new ListItem("Select Year", "0");
-            ddlYear.Items.Insert(0, item);
-
-            var result = DateTime.Parse(DateTime.Now.ToShortDateString(), new CultureInfo("en-US")).Year;
-            ddlYear.SelectedIndex = ddlYear.Items.IndexOf(ddlYear.Items.FindByText(result.ToString()));
-        }
-        private DataTable GetYears()
-        {
-            DataTable dt = DBContext.GetData("GetYears");
-            return dt.Rows.Count > 0 ? dt : new DataTable();
-        }
-
-        #endregion
-
-        #endregion
-
-        #region Locations Popup Events & Methods.
-        private void PopulateLocations(int parentLocationId)
-        {
-            lstLocations.DataValueField = "LocationId";
-            lstLocations.DataTextField = "LocationName";
-
-            lstLocations.DataSource = GetChildLocations(parentLocationId);
-            lstLocations.DataBind();
-
+            // Select first item if exists.
             if (lstLocations.Items.Count > 0)
             {
                 lstLocations.SelectedIndex = 0;
             }
         }
+        #endregion
 
-        private object GetChildLocations(int parentLocationId)
+        #region Button Click Events.
+
+        protected void btnGetReports_Click(object sender, EventArgs e)
         {
-            DataTable dt = DBContext.GetData("GetThirdLevelChildLocations", new object[] { parentLocationId });
-            return dt.Rows.Count > 0 ? dt : new DataTable();
+            Session["dtClone"] = null;
+            CaptureDataFromGrid();
+            BindGridData();
+            UpdateGridWithData();
+        }
+        protected void btnLocation_Click(object sender, EventArgs e)
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "key", "launchModal();", true);
+
+            int k = 0;
+            foreach (GridViewRow row in gvActivities.Rows)
+            {
+                if (k > 0) break;
+                k++;
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
+
+                    //Dictionary<int, decimal?> dataSave = new Dictionary<int, decimal?>();
+                    List<int> dataSave = new List<int>();
+                    int i = 0;
+                    foreach (DataColumn dc in dtActivities.Columns)
+                    {
+                        string colName = dc.ColumnName;
+                        int locationId = 0;
+                        HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
+                        if (hf != null)
+                        {
+                            locationId = Convert.ToInt32(hf.Value);
+                        }
+
+                        if (locationId > 0)
+                        {
+                            dataSave.Add(locationId);
+                            if (i == 1)
+                            {
+                                i = 0;
+                                int locationIdToSaveT = 0;
+                                int j = 0;
+                                foreach (var item in dataSave)
+                                {
+                                    if (j == 0)
+                                    {
+                                        locationIdToSaveT = Convert.ToInt32(item.ToString());
+                                        j++;
+                                    }
+                                    else
+                                    {
+                                        j = 0;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                i = 1;
+                            }
+                        }
+                    }
+
+                    List<ListItem> itemsToDelete = new List<ListItem>();
+
+                    foreach (ListItem item in lstLocations.Items)
+                    {
+                        if (dataSave.Contains(Convert.ToInt32(item.Value)))
+                        {
+                            ListItem selectedItem = item;
+                            itemsToDelete.Add(item);
+
+                            // Get sorted list items.
+                            List<ListItem> sortedList = GetSortedList(lstSelectedLocations, null, selectedItem);
+
+                            if (sortedList.Count > 0)
+                            {
+                                // Clear all items from list box.
+                                lstSelectedLocations.Items.Clear();
+
+                                // Add items in listbox.
+                                lstSelectedLocations.Items.AddRange(sortedList.ToArray());
+
+                                lstSelectedLocations.Items.Clear();
+                                lstSelectedLocations.Items.AddRange(sortedList.ToArray());
+                            }
+
+                            // Select first item in selected phases list box.
+                            if (lstSelectedLocations.Items.Count > 0)
+                            {
+                                lstSelectedLocations.SelectedIndex = 0;
+                            }
+                        }
+                    }
+
+                    foreach (ListItem item in itemsToDelete)
+                    {
+                        lstLocations.Items.Remove(item);
+                    }
+
+                    if (lstLocations.Items.Count > 0)
+                    {
+                        lstLocations.SelectedIndex = 0;
+                    }
+                }
+            }
+        }
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            using (TransactionScope scope = new TransactionScope())
+            {
+                if (OPSReportId > 0)
+                {
+                    DeleteReportAndItsChild();
+                }
+
+                if (IsDataExistsToSave())
+                {
+                    SaveReport();
+                }
+
+                scope.Complete();
+
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), "popup",
+                //    "$('#divMsg').addClass('info message').text('Hello There').animate({ top: '0' }, 500).fadeOut(4000, function() {});", true);
+                ShowMessage("Your Data Saved Successfuly!");
+            }
         }
 
         #endregion
 
-        #region Class Utility Methods
+        #endregion
+
+        #region Methods.
+
+        private void SetOPSIds()
+        {
+            int tempVal = 0;
+            if (Request.QueryString["uid"] != null)
+            {
+                int.TryParse(Request.QueryString["uid"].ToString(), out tempVal);
+                OPSUserId = tempVal;
+            }
+
+            if (Request.QueryString["pid"] != null)
+            {
+                tempVal = 0;
+                int.TryParse(Request.QueryString["pid"].ToString(), out tempVal);
+                OPSProjectId = tempVal;
+            }
+
+            if (Request.QueryString["clname"] != null)
+            {
+                OPSClusterName = Request.QueryString["clname"].ToString();
+            }
+
+            if (Request.QueryString["cname"] != null)
+            {
+                OPSCountryName = Request.QueryString["cname"].ToString();
+            }
+        }
+
+        private int GetEmergencyId()
+        {
+            DataTable dt = new DataTable();
+            if (!string.IsNullOrEmpty(OPSCountryName))
+            {
+                //Mali Complex Emergency
+                //Mauritania Complex
+                //Burkina Faso Complex
+                string emergencyName = "Mali Complex Emergency";
+                dt = DBContext.GetData("GetOPSEmergencyId", new object[] { OPSCountryName, emergencyName });
+            }
+
+            return dt.Rows.Count > 0 ? Convert.ToInt32(dt.Rows[0]["LocationEmergencyId"].ToString()) : 0;
+        }
+
+        private int GetClusterId()
+        {
+            DataTable dt = new DataTable();
+            if (!string.IsNullOrEmpty(OPSClusterName) && !string.IsNullOrEmpty(OPSCountryName))
+            {
+                int opsEmergency = 1;
+                string clusterName = "";
+                if (OPSClusterName == "abrisnfi")
+                {
+                    clusterName = "Abris et NFI";
+                }
+                else
+                {
+                    clusterName = OPSClusterName;
+                }
+
+                dt = DBContext.GetData("GetEmergencyClustersId", new object[] { clusterName, OPSCountryName, opsEmergency });
+            }
+
+            return dt.Rows.Count > 0 ? Convert.ToInt32(dt.Rows[0]["EmergencyClusterId"].ToString()) : 0;
+        }
+
+        private void PopulateDropDowns()
+        {
+            LocationId = 2;
+            PopulateLocations(LocationId);
+            PopulateStrategicObjectives();
+        }
+
+        protected void ddlStrObjectives_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ddlSpcObjectives.DataSource = new DataTable();
+            ddlSpcObjectives.DataBind();
+            PopulateSpcObjectives();
+        }
+
+        protected void ddlSpcObjectives_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PopulateStrategicObjectives()
+        {
+            ddlStrObjectives.DataValueField = "StrategicObjectiveId";
+            ddlStrObjectives.DataTextField = "StrategicObjectiveName";
+
+            ddlStrObjectives.DataSource = GetStrategicObjectives();
+            ddlStrObjectives.DataBind();
+
+            if (ddlStrObjectives.Items.Count > 1)
+            {
+                ListItem item = new ListItem("Select Str Objective", "0");
+                ddlStrObjectives.Items.Insert(0, item);
+            }
+            else
+            {
+                PopulateSpcObjectives();
+            }
+        }
+
+        private DataTable GetStrategicObjectives()
+        {
+            return DBContext.GetData("GetStrategicObjectives", new object[] { OPSEmergencyClusterId });
+        }
+
+        private void PopulateSpcObjectives()
+        {
+            int strObjId = 0;
+            int.TryParse(ddlStrObjectives.SelectedValue, out strObjId);
+            PopulateObjectives(strObjId);
+        }
+
+        private void PopulateObjectives(int strObjId)
+        {
+            ddlSpcObjectives.DataValueField = "ClusterObjectiveId";
+            ddlSpcObjectives.DataTextField = "ObjectiveName";
+
+            ddlSpcObjectives.DataSource = GetClusterObjectives(strObjId);
+            ddlSpcObjectives.DataBind();
+
+            ListItem item = new ListItem("Select Specific Objective", "0");
+            ddlSpcObjectives.Items.Insert(0, item);
+        }
+
+        private DataTable GetClusterObjectives(int strObjId)
+        {
+            return DBContext.GetData("GetAllSpecifObjectivesOfAStrObjective", new object[] { strObjId });
+        }
+
         // In this method we will get the postback control.
         public string GetPostBackControlId(Page page)
         {
@@ -307,192 +515,17 @@ namespace SRFROWCA.OPS
 
             return control == null ? String.Empty : control.ID;
         }
-        #endregion
 
-        #region Grid Events & Methods
-
-        #region gvClusters Events & Methods
-
-        protected void gvClusters_RowDataBound(object sender, GridViewRowEventArgs e)
+        private DataTable GetEmergencyClusters(int emergencyId)
         {
-            //Return if this is not a datarow
-            if (e.Row.RowType != DataControlRowType.DataRow) return;
-
-            GridView gvStrObjectives = e.Row.FindControl("gvStrObjectives") as GridView;
-            if (gvStrObjectives != null)
-            {
-                DataRowView dr = e.Row.DataItem as DataRowView;
-                int clusterId = 0;
-                int.TryParse(dr["EmergencyClusterId"].ToString(), out clusterId);
-
-                // Get all activities and bind grid.
-                gvStrObjectives.DataSource = GetStrObjectives(clusterId);
-                gvStrObjectives.DataBind();
-
-                // Attch row command event with grid.
-                //gvStrObjective.RowCommand += gvStrObjective_RowCommand;
-            }
-        }
-        private DataTable GetStrObjectives(int clusterId)
-        {
-            return DBContext.GetData("GetStrategicObjectives", new object[] { clusterId });
-        }
-        #endregion
-
-        #region gvStrObjectives Events & Methods
-        protected void gvStrObjectives_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            //Return if this is not a datarow
-            if (e.Row.RowType != DataControlRowType.DataRow) return;
-
-            GridView gvSpcObjectives = e.Row.FindControl("gvSpcObjectives") as GridView;
-            if (gvSpcObjectives != null)
-            {
-                DataRowView dr = e.Row.DataItem as DataRowView;
-                int strObjId = 0;
-                int.TryParse(dr["StrategicObjectiveId"].ToString(), out strObjId);
-
-                // Get all activities and bind grid.
-                gvSpcObjectives.DataSource = GetSpecificObjectives(strObjId);
-                gvSpcObjectives.DataBind();
-
-                // Attch row command event with grid.
-                //gvStrObjective.RowCommand += gvStrObjective_RowCommand;
-            }
-        }
-        private DataTable GetSpecificObjectives(int strObjId)
-        {
-            return DBContext.GetData("GetAllSpecifObjectivesOfAStrObjective", new object[] { strObjId });
-        }
-        #endregion
-
-        #region gvSpecificObjectives Events & Methods
-
-        protected void gvSpcObjectives_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            //Return if this is not a datarow
-            if (e.Row.RowType != DataControlRowType.DataRow) return;
-
-            GridView gvIndicators = e.Row.FindControl("gvIndicators") as GridView;
-            if (gvIndicators != null)
-            {
-                DataRowView dr = e.Row.DataItem as DataRowView;
-                int spcObjId = 0;
-                int.TryParse(dr["ClusterObjectiveId"].ToString(), out spcObjId);
-
-                // Get all activities and bind grid.
-                gvIndicators.DataSource = GetIndicators(spcObjId);
-                gvIndicators.DataBind();
-
-                // Attch row command event with grid.
-                //gvStrObjective.RowCommand += gvStrObjective_RowCommand;
-            }
-        }
-        private DataTable GetIndicators(int spcObjId)
-        {
-            return DBContext.GetData("GetObjectiveIndicators", new object[] { spcObjId });
-        }
-
-        #endregion
-
-        #region gvIndicators Events & Methods
-        protected void gvIndicators_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            //Return if this is not a datarow
-            if (e.Row.RowType != DataControlRowType.DataRow) return;
-
-            GridView gvActivities = e.Row.FindControl("gvActivities") as GridView;
-            if (gvActivities != null)
-            {
-                DataRowView dr = e.Row.DataItem as DataRowView;
-                int indId = 0;
-                int.TryParse(dr["ObjectiveIndicatorId"].ToString(), out indId);
-
-                // Get all activities and bind grid.
-                gvActivities.DataSource = GetActivities(indId);
-                gvActivities.DataBind();
-
-                // Attch row command event with grid.
-                //gvStrObjective.RowCommand += gvStrObjective_RowCommand;
-            }
-        }
-        private DataTable GetActivities(int indId)
-        {
-            return DBContext.GetData("GetIndicatorActivities", new object[] { indId });
-        }
-        #endregion
-
-        #region gvActivites Events & Methods
-        protected void gvActivities_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            //Return if this is not a datarow
-            if (e.Row.RowType != DataControlRowType.DataRow) return;
-
-            GridView gvData = e.Row.FindControl("gvData") as GridView;
-            if (gvData != null)
-            {
-                DataRowView dr = e.Row.DataItem as DataRowView;
-                int activityId = 0;
-                int.TryParse(dr["IndicatorActivityId"].ToString(), out activityId);
-
-                // Get all activities and bind grid.
-                gvData.DataSource = GetData(activityId);
-                gvData.DataBind();
-
-                // Attch row command event with grid.
-                //gvStrObjective.RowCommand += gvStrObjective_RowCommand;
-            }
-        }
-        private DataTable GetData(int activityId)
-        {
-            return DBContext.GetData("GetActivityData", new object[] { activityId });
-        }
-        #endregion
-
-        #region gvData Events & Methods.
-        protected void gvData_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            //Return if this is not a datarow
-            if (e.Row.RowType != DataControlRowType.DataRow) return;
-
-            GridView gvLocations = e.Row.FindControl("gvLocations") as GridView;
-            if (gvLocations != null)
-            {
-                DataRowView dr = e.Row.DataItem as DataRowView;
-                int dataId = 0;
-                int.TryParse(dr["ActivityDataId"].ToString(), out dataId);
-
-                // Get all activities and bind grid.
-                DataTable dt = GetDataLocations(dataId);
-                gvLocations.DataSource = dt;
-                gvLocations.DataBind();
-
-                // Attch row command event with grid.
-                //gvStrObjective.RowCommand += gvStrObjective_RowCommand;
-            }
-        }
-        private DataTable GetDataLocations(int dataId)
-        {
-            int locEmergencyId = 0;
-            int.TryParse(ddlEmergency.SelectedValue, out locEmergencyId);
-
-            int officeId = 0;
-            int.TryParse(ddlOffice.SelectedValue, out officeId);
-
-            int yearId = 0;
-            int.TryParse(ddlYear.SelectedValue, out yearId);
-
-            int monthId = 0;
-            int.TryParse(ddlMonth.SelectedValue, out monthId);
-
-            string locationIds = GetSelectedLocationIds();
-            string locIdsNotIncluded = GetNotSelectedLocationIds();
-
-            Guid userId = ROWCACommon.GetCurrentUserId();
-            DataTable dt = DBContext.GetData("GetIPDataLocations", new object[] { locEmergencyId, locationIds, officeId,
-                                                                                  yearId, monthId, locIdsNotIncluded,
-                                                                                  userId, dataId });
+            DataTable dt = DBContext.GetData("GetEmergencyClusters", new object[] { emergencyId });
             return dt.Rows.Count > 0 ? dt : new DataTable();
+        }
+
+        protected void BindGridData()
+        {
+            DataTable dt = GetActivities();
+            GetReport(dt);
         }
 
         private string GetSelectedLocationIds()
@@ -534,41 +567,474 @@ namespace SRFROWCA.OPS
 
             return locIdsNotIncluded;
         }
-        #endregion        
 
-        #endregion
+        private DataTable GetActivities()
+        {
+            string locationIds = GetSelectedLocationIds();
+            string locIdsNotIncluded = GetNotSelectedLocationIds();
 
-        #region Button Events
-        protected void btnSave_Click(object sender, EventArgs e)
-        { }
+            int valTemp = 0;
+            int.TryParse(ddlStrObjectives.SelectedValue, out valTemp);
+            int? strObjId = valTemp > 0 ? (int?)valTemp : null;
 
-        protected void btnLocation_Click(object sender, EventArgs e)
-        { }
+            valTemp = 0;
+            int.TryParse(ddlSpcObjectives.SelectedValue, out valTemp);
+            int? spcObjId = valTemp > 0 ? (int?)valTemp : null;
 
-        protected void btnAdd_Click(object sender, EventArgs e)
-        { }
+            DataTable dt = DBContext.GetData("GetOPSActivities", new object[] { OPSLocationEmergencyId, locationIds, locIdsNotIncluded, OPSProjectId, OPSEmergencyClusterId, strObjId, spcObjId });
+            return dt.Rows.Count > 0 ? dt : new DataTable();
+        }
 
-        protected void btnRemove_Click(object sender, EventArgs e)
-        { }
+        private void AddLocationsInSelectedList()
+        {
+            lstSelectedLocations.Items.Clear();
+            PopulateLocations(LocationId);
+        }
+
+        private void PopulateLocations(int parentLocationId)
+        {
+            lstLocations.DataValueField = "LocationId";
+            lstLocations.DataTextField = "LocationName";
+
+            lstLocations.DataSource = GetChildLocations(parentLocationId);
+            lstLocations.DataBind();
+
+            if (lstLocations.Items.Count > 0)
+            {
+                lstLocations.SelectedIndex = 0;
+            }
+        }
+
+        private DataTable GetReportLocations()
+        {
+            DataTable dt = DBContext.GetData("GetReportLocations", new object[] { OPSReportId });
+            return dt.Rows.Count > 0 ? dt : new DataTable();
+        }
+
+        private void AddDynamicColumnsInGrid(DataTable dt)
+        {
+            foreach (DataColumn column in dt.Columns)
+            {
+                TemplateField customField = new TemplateField();
+                // Create the dynamic templates and assign them to 
+                // the appropriate template property.
+
+                string columnName = column.ColumnName;
+                if (!(columnName == "OPSReportId" || columnName == "ClusterName" || columnName == "IndicatorName" || columnName == "ActivityDataId" || columnName == "ActivityName" || columnName == "DataName" || columnName == "IsActive"))
+                {
+                    customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, column.ColumnName, "1");
+                    customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, column.ColumnName, "1");
+                    gvActivities.Columns.Add(customField);
+                }
+            }
+        }
+
+        private object GetChildLocations(int parentLocationId)
+        {
+            DataTable dt = DBContext.GetData("GetSecondLevelChildLocations", new object[] { parentLocationId });
+            return dt.Rows.Count > 0 ? dt : new DataTable();
+        }
+
+        private DataTable GetOrganizations()
+        {
+            DataTable dt = DBContext.GetData("GetOrganizations");
+            return dt.Rows.Count > 0 ? dt : new DataTable();
+        }
+
+        private DataTable GetCountries()
+        {
+            int locationType = (int)ROWCACommon.LocationTypes.Governorate;
+            DataTable dt = DBContext.GetData("GetLocationOnType", new object[] { locationType });
+
+            return dt.Rows.Count > 0 ? dt : new DataTable();
+        }
+
+        public static List<ListItem> GetSortedList(ListBox sourceListBox, ListBox destinationListBox, ListItem selectedItem)
+        {
+            List<ListItem> sortedList = new List<ListItem>();
+
+            // Add all items from source listbox to sortedList List.
+            if (sourceListBox != null)
+            {
+                foreach (ListItem item in sourceListBox.Items)
+                {
+                    sortedList.Add(item);
+                }
+            }
+
+            // Add all items from destination listbox to sortedList List.
+            // We need this to sort items which are already in listbox.
+            if (destinationListBox != null)
+            {
+                foreach (ListItem item in destinationListBox.Items)
+                {
+                    sortedList.Add(item);
+                }
+            }
+
+            // If items is passed from calling method then add it in sortedList.
+            // selectedItem will have data when only one item is being add/remove
+            if (selectedItem != null)
+            {
+                sortedList.Add(selectedItem);
+            }
+
+            // Sort items in listbox.
+            sortedList = sortedList.OrderBy(li => li.Text).ToList();
+
+            return sortedList;
+        }
+
+        private void DeleteReportAndItsChild()
+        {
+            DeleteReport();
+        }
+
+        private void DeleteReport()
+        {
+            DBContext.Delete("DeleteOPSReport", new object[] { OPSReportId, OPSEmergencyClusterId, DBNull.Value });
+        }
+
+        private void SaveReport()
+        {
+            SaveReportMainInfo();
+            SaveReportLocations();
+            SaveReportDetails();
+        }
+
+        private void SaveReportLocations()
+        {
+            int k = 0;
+            foreach (GridViewRow row in gvActivities.Rows)
+            {
+                if (k > 0) break;
+                k++;
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
+
+                    List<int> dataSave = new List<int>();
+                    int i = 0;
+                    foreach (DataColumn dc in dtActivities.Columns)
+                    {
+                        string colName = dc.ColumnName;
+                        int locationId = 0;
+                        HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
+                        if (hf != null)
+                        {
+                            locationId = Convert.ToInt32(hf.Value);
+                        }
+
+                        if (locationId > 0)
+                        {
+                            dataSave.Add(locationId);
+                            if (i == 1)
+                            {
+                                i = 0;
+                                int locationIdToSaveT = 0;
+                                int j = 0;
+                                foreach (var item in dataSave)
+                                {
+                                    if (j == 0)
+                                    {
+                                        locationIdToSaveT = Convert.ToInt32(item.ToString());
+                                        j++;
+                                    }
+                                    else
+                                    {
+                                        j = 0;
+                                    }
+                                }
+
+                                if (locationId > 0)
+                                {
+                                    DBContext.Add("InsertOPSReportLocations", new object[] { OPSReportId, locationId, OPSEmergencyClusterId, DBNull.Value });
+                                }
+                            }
+                            else
+                            {
+                                i = 1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void SaveReportMainInfo()
+        {
+            OPSReportId = DBContext.Add("InsertOPSReport", new object[] { OPSLocationEmergencyId, OPSProjectId, OPSEmergencyClusterId, OPSUserId, DBNull.Value });
+        }
+
+        private bool IsDataExistsToSave()
+        {
+            bool returnValue = false;
+            foreach (GridViewRow row in gvActivities.Rows)
+            {
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
+
+                    //Dictionary<int, decimal?> dataSave = new Dictionary<int, decimal?>();
+                    List<int> dataSave = new List<int>();
+                    foreach (DataColumn dc in dtActivities.Columns)
+                    {
+                        string colName = dc.ColumnName;
+                        int locationId = 0;
+                        HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
+                        if (hf != null)
+                        {
+                            locationId = Convert.ToInt32(hf.Value);
+                            if (locationId > 0)
+                            {
+                                returnValue = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (returnValue) break;
+                }
+            }
+
+            return returnValue;
+        }
+
+        private void UpdateGridWithData()
+        {
+            string activityDataId = "";
+            foreach (GridViewRow row in gvActivities.Rows)
+            {
+                if (row.RowType != DataControlRowType.DataRow) return;
+
+                activityDataId = gvActivities.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString();
+
+                int colummCounts = gvActivities.Columns.Count;
+
+                DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
+                if (dtActivities == null) return;
+
+                DataTable dtClone = (DataTable)Session["dtClone"];
+                if (dtClone == null) return;
+
+                foreach (DataColumn dc in dtActivities.Columns)
+                {
+                    string colName = dc.ColumnName;
+                    if (dtClone.Columns.Contains(colName))
+                    {
+                        TextBox t = row.FindControl(colName) as TextBox;
+                        if (t != null)
+                        {
+                            string val = dtClone.Rows[row.RowIndex][colName].ToString();
+                            t.Text = val;
+                        }
+                    }
+                }
+            }
+        }
+
+        protected void CaptureDataFromGrid()
+        {
+            string activityDataId = "";
+            foreach (GridViewRow row in gvActivities.Rows)
+            {
+                if (row.RowType != DataControlRowType.DataRow) return;
+
+                activityDataId = gvActivities.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString();
+                int colummCounts = gvActivities.Columns.Count;
+
+                DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
+                if (dtActivities == null) return;
+
+                DataTable dtClone;
+                if (Session["dtClone"] != null)
+                {
+                    dtClone = (DataTable)Session["dtClone"];
+                }
+                else
+                {
+                    dtClone = dtActivities.Copy();
+                    foreach (DataRow dr in dtClone.Rows)
+                    {
+                        foreach (DataColumn dc in dtClone.Columns)
+                        {
+                            if (dc.DataType == typeof(string))
+                            {
+                                dr[dc] = "";
+                            }
+                        }
+                    }
+                }
+
+                foreach (DataColumn dc in dtClone.Columns)
+                {
+                    string colName = dc.ColumnName;
+                    TextBox t = row.FindControl(colName) as TextBox;
+                    if (t != null)
+                    {
+                        dtClone.Rows[row.RowIndex][colName] = t.Text;
+                        dtClone.Rows[row.RowIndex]["ActivityDataId"] = activityDataId;
+                    }
+                }
+
+                Session["dtClone"] = dtClone;
+            }
+        }
+
+        private void SaveReportDetails()
+        {
+            int activityDataId = 0;
+
+            foreach (GridViewRow row in gvActivities.Rows)
+            {
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    activityDataId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString());
+
+                    int colummCounts = gvActivities.Columns.Count;
+                    DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
+                    List<KeyValuePair<int, decimal?>> dataSave = new List<KeyValuePair<int, decimal?>>();
+                    int i = 0;
+                    foreach (DataColumn dc in dtActivities.Columns)
+                    {
+                        string colName = dc.ColumnName;
+                        int locationId = 0;
+                        HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
+                        if (hf != null)
+                        {
+                            locationId = Convert.ToInt32(hf.Value);
+                        }
+
+                        decimal? value = null;
+                        TextBox t = row.FindControl(colName) as TextBox;
+                        if (t != null)
+                        {
+                            if (!string.IsNullOrEmpty(t.Text))
+                            {
+                                value = Convert.ToDecimal(t.Text);
+                            }
+                        }
+
+                        if (locationId > 0)
+                        {
+                            dataSave.Add(new KeyValuePair<int, decimal?>(locationId, value));
+                            if (i == 1)
+                            {
+                                i = 0;
+                                int locationIdToSaveT = 0;
+                                decimal? valToSaveMid2014 = null;
+                                decimal? valToSave2014 = null;
+                                int j = 0;
+                                foreach (var item in dataSave)
+                                {
+                                    if (j == 0)
+                                    {
+                                        locationIdToSaveT = item.Key;
+                                        valToSaveMid2014 = item.Value;
+                                        j++;
+                                    }
+                                    else
+                                    {
+                                        valToSave2014 = item.Value;
+                                        j = 0;
+                                    }
+                                }
+
+                                dataSave.Clear();
+
+                                if (!(valToSaveMid2014 == null && valToSave2014 == null))
+                                {
+                                    int newReportDetailId = DBContext.Add("InsertOPSReportDetails",
+                                                                            new object[] { OPSReportId, activityDataId, locationIdToSaveT, 
+                                                                                            valToSaveMid2014, valToSave2014, 1, DBNull.Value });
+                                }
+                            }
+                            else
+                            {
+                                i = 1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void GetReport(DataTable dt)
+        {
+            Session["dtOPSActivities"] = dt;
+
+            DataTable dtReport = DBContext.GetData("GetOPSReportId", new object[] { OPSLocationEmergencyId, OPSProjectId, OPSEmergencyClusterId });
+            if (dtReport.Rows.Count > 0)
+            {
+                OPSReportId = string.IsNullOrEmpty(dtReport.Rows[0]["OPSReportId"].ToString()) ? 0 : Convert.ToInt32(dtReport.Rows[0]["OPSReportId"].ToString());
+            }
+            else
+            {
+                OPSReportId = 0;
+            }
+
+            gvActivities.DataSource = dt;
+            gvActivities.DataBind();
+        }
+
+        protected void gvActivities_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                if (Session["dtOPSActivities"] == null) return;
+
+
+                DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
+                if (dtActivities == null) return;
+
+                foreach (DataColumn dc in dtActivities.Columns)
+                {
+                    string colName = dc.ColumnName;
+                    TextBox txt = e.Row.FindControl(colName) as TextBox;
+                    if (txt != null)
+                    {
+                        if (txt.Text == "-1.00")
+                        {
+                            txt.Text = "";
+                        }
+                    }
+                }
+            }
+        }
+
+        private void ShowMessage(string message, ROWCACommon.NotificationType notificationType = ROWCACommon.NotificationType.Success)
+        {
+            //updMessage.Update();
+            ROWCACommon.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, true, 500);
+        }
+
+        protected void Page_Error(object sender, EventArgs e)
+        {
+            ShowMessage("<b>Some Error Occoured. Admin Has Notified About It</b>.<br/> Please Try Again.", ROWCACommon.NotificationType.Error);
+            // Get last error from the server
+            Exception exc = Server.GetLastError();
+            SRFROWCA.Common.ExceptionUtility.LogException(exc, "AddActivites", this.User);
+        }
+
         #endregion
 
         #region Properties & Enums
 
-        public int ReportId
+        public int OPSReportId
         {
             get
             {
-                int ReportId = 0;
-                if (ViewState["ReportId"] != null)
+                int opsReportId = 0;
+                if (ViewState["OPSReportId"] != null)
                 {
-                    int.TryParse(ViewState["ReportId"].ToString(), out ReportId);
+                    int.TryParse(ViewState["OPSReportId"].ToString(), out opsReportId);
                 }
 
-                return ReportId;
+                return opsReportId;
             }
             set
             {
-                ViewState["ReportId"] = value.ToString();
+                ViewState["OPSReportId"] = value.ToString();
             }
         }
         public int LocationId
@@ -605,6 +1071,7 @@ namespace SRFROWCA.OPS
                 ViewState["Count1"] = value.ToString();
             }
         }
+
         public int LocationRemoved
         {
             get
@@ -623,10 +1090,114 @@ namespace SRFROWCA.OPS
             }
         }
 
+        public int OPSUserId
+        {
+            get
+            {
+                int opsUserId = 0;
+                if (ViewState["OPSUserId"] != null)
+                {
+                    int.TryParse(ViewState["OPSUserId"].ToString(), out opsUserId);
+                }
+
+                return opsUserId;
+            }
+            set
+            {
+                ViewState["OPSUserId"] = value.ToString();
+            }
+        }
+
+        public int OPSProjectId
+        {
+            get
+            {
+                int opsProjectId = 0;
+                if (ViewState["OPSProjectId"] != null)
+                {
+                    int.TryParse(ViewState["OPSProjectId"].ToString(), out opsProjectId);
+                }
+
+                return opsProjectId;
+            }
+            set
+            {
+                ViewState["OPSProjectId"] = value.ToString();
+            }
+        }
+
+        public string OPSClusterName
+        {
+            get
+            {
+                if (ViewState["OPSClusterName"] != null)
+                {
+                    return ViewState["OPSClusterName"].ToString();
+                }
+
+                return "";
+            }
+            set
+            {
+                ViewState["OPSClusterName"] = value.ToString();
+            }
+        }
+
+        public string OPSCountryName
+        {
+            get
+            {
+                if (ViewState["OPSCountryName"] != null)
+                {
+                    return ViewState["OPSCountryName"].ToString();
+                }
+
+                return null;
+            }
+            set
+            {
+                ViewState["OPSCountryName"] = value.ToString();
+            }
+        }
+
+        public int OPSLocationEmergencyId
+        {
+            get
+            {
+                int opsLocationEmergencyId = 0;
+                if (ViewState["OPSLocationEmergencyId"] != null)
+                {
+                    int.TryParse(ViewState["OPSLocationEmergencyId"].ToString(), out opsLocationEmergencyId);
+                }
+
+                return opsLocationEmergencyId;
+            }
+            set
+            {
+                ViewState["OPSLocationEmergencyId"] = value.ToString();
+            }
+        }
+
+        public int OPSEmergencyClusterId
+        {
+            get
+            {
+                int opsEmgClusterId = 0;
+                if (ViewState["OPSEmergencyClusterId"] != null)
+                {
+                    int.TryParse(ViewState["OPSEmergencyClusterId"].ToString(), out opsEmgClusterId);
+                }
+
+                return opsEmgClusterId;
+            }
+            set
+            {
+                ViewState["OPSEmergencyClusterId"] = value.ToString();
+            }
+        }
+
         #endregion
     }
-
-    #region Template Class
 
     public class GridViewTemplate : ITemplate
     {
@@ -649,7 +1220,7 @@ namespace SRFROWCA.OPS
                 case DataControlRowType.Header:
                     string[] words = columnName.Split('^');
                     Label lc = new Label();
-                    lc.Width = 50;
+                    lc.Width = 40;
                     lc.Text = "<b>" + words[1] + "</b>";
                     container.Controls.Add(lc);
                     //CheckBox cb = new CheckBox();
@@ -662,7 +1233,7 @@ namespace SRFROWCA.OPS
                 case DataControlRowType.DataRow:
                     TextBox firstName = new TextBox();
                     firstName.CssClass = "numeric1";
-                    firstName.Width = 50;
+                    firstName.Width = 40;
                     firstName.DataBinding += new EventHandler(this.FirstName_DataBinding);
                     container.Controls.Add(firstName);
                     HiddenField hf = new HiddenField();
@@ -687,5 +1258,4 @@ namespace SRFROWCA.OPS
             l.Text = DataBinder.Eval(row.DataItem, columnName).ToString();
         }
     }
-    #endregion
 }

@@ -47,18 +47,7 @@
     <form id="Form1" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true">
     </asp:ScriptManager>
-    <div class="topmenuarea">
-        <ul id="nav">
-            <li><a href="~/OPS/OPSActivities.aspx" id="menuMyActivities" runat="server">My
-                Activities</a></li>
-            <li><a href="~/OPS/OPSDataEntry.aspx" id="menuDataEntry" runat="server">Data Entry</a></li>
-        </ul>
-    </div>
-    <div class="main">
-        <asp:ContentPlaceHolder ID="MainContent" runat="server" />
-    </div>
-    <div class="footer">
-    </div>
+    <asp:ContentPlaceHolder ID="MainContent" runat="server" />    
     </form>
 </body>
 </html>

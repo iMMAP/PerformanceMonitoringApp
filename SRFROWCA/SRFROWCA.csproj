@@ -158,7 +158,6 @@
     <Content Include="images\plus.png" />
     <Content Include="images\rssfeed.png" />
     <Content Include="Maps\TargetAchievedByLocDataMap.aspx" />
-    <Content Include="OPS\OPSActivities.aspx" />
     <Content Include="OPS\OPSDataEntry.aspx" />
     <Content Include="Pages\AddActivities.aspx" />
     <Content Include="Pages\SelectActivities.aspx" />
@@ -243,6 +242,8 @@
     <Content Include="WebForm3.aspx" />
     <Content Include="ops.Master" />
     <Content Include="DataFeed.ashx" />
+    <Content Include="WebForm4.aspx" />
+    <Content Include="WebForm5.aspx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -528,13 +529,6 @@
     <Compile Include="ops.Master.designer.cs">
       <DependentUpon>ops.Master</DependentUpon>
     </Compile>
-    <Compile Include="OPS\OPSActivities.aspx.cs">
-      <DependentUpon>OPSActivities.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="OPS\OPSActivities.aspx.designer.cs">
-      <DependentUpon>OPSActivities.aspx</DependentUpon>
-    </Compile>
     <Compile Include="OPS\OPSDataEntry.aspx.cs">
       <DependentUpon>OPSDataEntry.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -664,6 +658,20 @@
     </Compile>
     <Compile Include="WebForm3.aspx.designer.cs">
       <DependentUpon>WebForm3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm4.aspx.cs">
+      <DependentUpon>WebForm4.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm4.aspx.designer.cs">
+      <DependentUpon>WebForm4.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm5.aspx.cs">
+      <DependentUpon>WebForm5.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm5.aspx.designer.cs">
+      <DependentUpon>WebForm5.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
