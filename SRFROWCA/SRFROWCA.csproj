@@ -244,6 +244,7 @@
     <Content Include="DataFeed.ashx" />
     <Content Include="WebForm4.aspx" />
     <Content Include="WebForm5.aspx" />
+    <Content Include="OPS\OPSActivitiesFeed.ashx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -528,6 +529,9 @@
     </Compile>
     <Compile Include="ops.Master.designer.cs">
       <DependentUpon>ops.Master</DependentUpon>
+    </Compile>
+    <Compile Include="OPS\OPSActivitiesFeed.ashx.cs">
+      <DependentUpon>OPSActivitiesFeed.ashx</DependentUpon>
     </Compile>
     <Compile Include="OPS\OPSDataEntry.aspx.cs">
       <DependentUpon>OPSDataEntry.aspx</DependentUpon>
