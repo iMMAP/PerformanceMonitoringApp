@@ -268,3 +268,9 @@ CSS for Login, Register, ForgotPassword, ChagnePassword
 {
     display:none;
 }
+.clusterLabel
+{
+    font-size: large;
+    font-weight: bold;
+    margin-bottom: 10px;
+}

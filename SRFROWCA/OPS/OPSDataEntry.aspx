@@ -50,33 +50,65 @@
     <script language="javascript" type="text/javascript">
         $(function () {
             $(".numeric1").numeric();
-            $('#gridSearch').on("keyup paste", function () {
-                searchTable($(this).val());
+            splitLocationFromTA();
+            showHideRowsOnObjs();
+            $("#<%=gvActivities.ClientID %>").kiketable_colsizable({ minWidth: 30 })
+        });
+
+        function showHideRowsOnObjs() {
+            $('#<%=ddlStrObjectives.ClientID %>').change(function () {
+                var objId = $('#<%=ddlStrObjectives.ClientID %> :selected').val();
+
+                $("#<%=ddlSpcObjectives.ClientID %> > option").each(function () {
+                    $(this).removeClass('hiddenelement');
+                });
+                $("#<%=ddlSpcObjectives.ClientID %> > option:first-child").attr('selected', 'selected');
+                $("#<%=ddlSpcObjectives.ClientID %> > option").each(function () {
+                    var strSpcObjId = $(this).val();
+                    if (strSpcObjId === "0" || objId === "0") {
+                        $(this).removeClass('hiddenelement');
+                    }
+                    else {
+                        var spcObjId = strSpcObjId.substring(strSpcObjId.indexOf('_') + 1, strSpcObjId.length);
+                        var strObjId = strSpcObjId.substring(0, strSpcObjId.indexOf('_'));
+
+                        if (strObjId !== objId) {
+                            $(this).addClass('hiddenelement');
+                        }
+                        else {
+                            $(this).removeClass('hiddenelement');
+                        }
+                    }
+                });
+
+                //$(".istrow, .altcolor").each(function (i) {
+                $('.istrow, .altcolor').find('td:nth-child(2)').each(function (i) {
+                    if ($(this).text() === objId || objId === '0') {
+                        $(this).parent().show();
+                    }
+                    else {
+                        $(this).parent().hide();
+                    }
+                });
             });
 
-            $(".chkShowHide").click(function () {
-                if ($(this).is(':checked')) {
-                    $('#<%=gvActivities.ClientID %>').find("input[type='checkbox']").each(function () {
-                        if ($(this).is(':checked')) {
-                            $(this).parent().parent().show();
-                        }
-                        else {
-                            $(this).parent().parent().hide();
-                        }
-                    })
-                } else {
-                    $('#<%=gvActivities.ClientID %>').find("input[type='checkbox']").each(function () {
-                        if ($(this).is(':checked')) {
-                            $(this).parent().parent().show();
-                        }
-                        else {
-                            $(this).parent().parent().show();
-                        }
 
-                    })
-                }
-            })
+            $('#<%=ddlSpcObjectives.ClientID %>').change(function () {
+                var strSpcObjId = $('#<%=ddlSpcObjectives.ClientID %> :selected').val();
+                var spcObjId = strSpcObjId.substring(strSpcObjId.indexOf('_') + 1, strSpcObjId.length);
 
+                $('.istrow, .altcolor').find('td:nth-child(3)').each(function (i) {
+                    if ($(this).text() === spcObjId || spcObjId === '0') {
+                        $(this).parent().show();
+                    }
+                    else {
+                        $(this).parent().hide();
+                    }
+                });
+            });
+        }
+
+        function splitLocationFromTA() {
             if (!(/chrom(e|ium)/.test(navigator.userAgent.toLowerCase()))) {
                 var list = '';
                 var list2 = '';
@@ -97,71 +129,11 @@
                         }
                     }
                 });
-                $(".imagetable").prepend('<colgroup><col /><col /><col /><col /></colgroup><thead><tr style="background-color:ButtonFace;"><th style="width: 5px;">&nbsp;</th><th style="width: 200px;"><%:OPSClusterName %></th><th style="width: 200px;">&nbsp;</th><th style="width: 200px;">&nbsp;</th>' + list + '</tr></thead>');
-
+                $(".imagetable").prepend('<colgroup><col /><col /><col /><col /></colgroup><thead><tr style="background-color:ButtonFace;"><th style="width: 5px;">&nbsp;</th><th style="width: 200px;">&nbsp;</th><th style="width: 200px;">&nbsp;</th><th style="width: 200px;">&nbsp;</th>' + list + '</tr></thead>');
             }
-
-            $("#<%=gvActivities.ClientID %>").kiketable_colsizable({ minWidth: 30 })
-        });
-
-
-        function searchTable(inputVal) {
-            var table = $('#<%=gvActivities.ClientID %>');
-            table.find('tr').each(function (index, row) {
-                var allCells = $(row).find('td');
-                if (allCells.length > 0) {
-                    var found = false;
-                    allCells.each(function (index, td) {
-                        var regExp = new RegExp(inputVal, 'i');
-                        if (regExp.test($(td).text())) {
-                            found = true;
-                            return false;
-                        }
-                    });
-                    if (found == true) {
-                        $(row).show('fast', function () {
-
-                            if ($(".chkShowHide").is(":Checked")) {
-                                $('#<%=gvActivities.ClientID %>').find("input[type='checkbox']").each(function () {
-                                    if ($(this).is(':checked')) {
-                                        $(this).parent().parent().show();
-                                    }
-                                    else {
-                                        $(this).parent().parent().hide();
-                                    }
-                                })
-                            }
-                            else {
-                                $('#<%=gvActivities.ClientID %>').find("input[type='checkbox']").each(function () {
-                                    if ($(this).is(':checked')) {
-                                        $(this).parent().parent().show();
-                                    }
-                                })
-                            }
-                        });
-                    }
-                    else {
-                        $(row).hide('fast', function () {
-
-                            if ($(".chkShowHide").is(":Checked")) {
-                                $('#<%=gvActivities.ClientID %>').find("input[type='checkbox']").each(function () {
-                                    if ($(this).is(':checked')) {
-                                        $(this).parent().parent().hide();
-                                    }
-                                })
-                            }
-                            else {
-                                $('#<%=gvActivities.ClientID %>').find("input[type='checkbox']").each(function () {
-                                    if ($(this).is(':checked')) {
-                                        $(this).parent().parent().show();
-                                    }
-                                })
-                            }
-                        });
-                    }
-                }
-            });
         }
+
+        
     
     </script>
 </asp:Content>
@@ -188,13 +160,25 @@
                 <table style="margin: 0 auto; width: 100%">
                     <tr>
                         <td>
+                            <a href="../webform5.aspx">Back to ?</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>
+                                Cluster:</label>
+                        </td>
+                        <td>
+                            <asp:Label ID="lblCluster" runat="server" CssClass="clusterLabel"></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
                             <label>
                                 Strategic Objectives:</label>
                         </td>
                         <td>
-                            <a href="../webform5.aspx">Back</a>
-                            <asp:DropDownList ID="ddlStrObjectives" Width="950px" runat="server" OnSelectedIndexChanged="ddlStrObjectives_SelectedIndexChanged"
-                                AutoPostBack="true" onchange="needToConfirm = false;">
+                            <asp:DropDownList ID="ddlStrObjectives" Width="950px" runat="server" OnSelectedIndexChanged="ddlStrObjectives_SelectedIndexChanged">
                             </asp:DropDownList>
                         </td>
                     </tr>
@@ -204,8 +188,7 @@
                                 Specific Objectives:</label>
                         </td>
                         <td>
-                            <asp:DropDownList ID="ddlSpcObjectives" Width="950px" runat="server" OnSelectedIndexChanged="ddlSpcObjectives_SelectedIndexChanged"
-                                AutoPostBack="true" onchange="needToConfirm = false;">
+                            <asp:DropDownList ID="ddlSpcObjectives" Width="950px" runat="server" OnSelectedIndexChanged="ddlSpcObjectives_SelectedIndexChanged">
                             </asp:DropDownList>
                         </td>
                     </tr>
@@ -218,22 +201,6 @@
         </div>
     </div>
     <div class="tablegrid">
-        <table border="0" cellpadding="2" cellspacing="0" class="quicksearch2">
-            <tr>
-                <td width="250px">
-                    <input type="checkbox" id="chkShowHide" class="chkShowHide" />
-                    <b>Show Only Checked:</b>
-                </td>
-                <td>
-                    <b>Search:</b>
-                    <input type="text" id="gridSearch" class="grdSearch" style="width: 400px;" />
-                </td>
-                <td align="right">
-                </td>
-                <td style="width: 40%;">
-                </td>
-            </tr>
-        </table>
         <div id="scrolledGridView" style="overflow-x: auto; width: 100%">
             <asp:GridView ID="gvActivities" runat="server" AllowPaging="False" AllowSorting="False"
                 AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" HeaderStyle-BackColor="ButtonFace"
@@ -241,11 +208,15 @@
                 <RowStyle CssClass="istrow" />
                 <AlternatingRowStyle CssClass="altcolor" />
                 <Columns>
-                    <asp:TemplateField>
+                    <asp:TemplateField ItemStyle-CssClass="rownum" ItemStyle-Width="2%">
                         <ItemTemplate>
-                            <asp:CheckBox ID="chkSelected" runat="server" Checked='<%#bool.Parse(Eval("IsActive").ToString())%>' />
+                            <%# Container.DataItemIndex + 1 %>
                         </ItemTemplate>
                     </asp:TemplateField>
+                    <asp:BoundField DataField="StrObjName" HeaderText="strobj" ItemStyle-Wrap=" false"
+                        ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement" />
+                    <asp:BoundField DataField="SpcObjName" HeaderText="spcobj" ItemStyle-Wrap=" false"
+                        ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement" />
                     <asp:BoundField DataField="IndicatorName" HeaderText="Indicator" ItemStyle-Wrap=" false"
                         ItemStyle-Width="350px" />
                     <asp:BoundField DataField="ActivityName" HeaderText="Activity" ItemStyle-Wrap="false"
@@ -306,7 +277,7 @@
                                                         <br />
                                                         <br />
                                                         <asp:Button ID="btnAdd" runat="server" Text="&gt;" Height="30px" Width="50px" CausesValidation="false"
-                                                            OnClick="btnAdd_Click" />
+                                                            OnClick="btnAdd_Click"/>
                                                         <br />
                                                         <br />
                                                         <asp:Button ID="btnRemove" runat="server" Text="&lt;" Height="30px" Width="50px"
@@ -319,6 +290,11 @@
                                                     <td style="width: 45%">
                                                         <asp:ListBox ID="lstSelectedLocations" runat="server" Height="180px" Width="315px"
                                                             SelectionMode="Multiple"></asp:ListBox>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:CheckBoxList ID="cbAdmin1Locaitons" runat="server" RepeatColumns="2"></asp:CheckBoxList>
                                                     </td>
                                                 </tr>
                                                 <tr>

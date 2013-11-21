@@ -31,6 +31,15 @@ namespace SRFROWCA.OPS {
         protected global::System.Web.UI.WebControls.Button btnOpenLocations;
         
         /// <summary>
+        /// lblCluster control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCluster;
+        
+        /// <summary>
         /// ddlStrObjectives control.
         /// </summary>
         /// <remarks>
@@ -146,6 +155,15 @@ namespace SRFROWCA.OPS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListBox lstSelectedLocations;
+        
+        /// <summary>
+        /// cbAdmin1Locaitons control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList cbAdmin1Locaitons;
         
         /// <summary>
         /// btnClose control.

@@ -26,6 +26,7 @@ namespace SRFROWCA.OPS
                 {
                     OPSLocationEmergencyId = GetEmergencyId();
                     OPSEmergencyClusterId = GetClusterId();
+                    lblCluster.Text = OPSClusterName;
                 }
                 PopulateDropDowns();
             }
@@ -39,33 +40,6 @@ namespace SRFROWCA.OPS
         }
 
         #region Events.
-
-        #region DropDownLists Events
-        protected void ddlEmergency_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LocationRemoved = 0;
-            BindGridData();
-            AddLocationsInSelectedList();
-        }
-        protected void ddlOffice_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LocationRemoved = 0;
-            BindGridData();
-            AddLocationsInSelectedList();
-        }
-        protected void ddlYear_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LocationRemoved = 0;
-            BindGridData();
-            AddLocationsInSelectedList();
-        }
-        protected void ddlMonth_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LocationRemoved = 0;
-            AddLocationsInSelectedList();
-            BindGridData();
-        }
-        #endregion
 
         #region Location List Box Events.
         protected void btnAddAll_Click(object sender, EventArgs e)
@@ -215,7 +189,7 @@ namespace SRFROWCA.OPS
         protected void btnLocation_Click(object sender, EventArgs e)
         {
             ClientScript.RegisterStartupScript(this.GetType(), "key", "launchModal();", true);
-
+            LocationRemoved = 1;
             int k = 0;
             foreach (GridViewRow row in gvActivities.Rows)
             {
@@ -268,6 +242,18 @@ namespace SRFROWCA.OPS
 
                     List<ListItem> itemsToDelete = new List<ListItem>();
 
+                    foreach (ListItem item in cbAdmin1Locaitons.Items)
+                    {
+                        if (dataSave.Contains(Convert.ToInt32(item.Value)))
+                        {
+                            item.Selected = true;
+                        }
+                        else
+                        {
+                            item.Selected = false;
+                        }
+                    }
+
                     foreach (ListItem item in lstLocations.Items)
                     {
                         if (dataSave.Contains(Convert.ToInt32(item.Value)))
@@ -295,6 +281,8 @@ namespace SRFROWCA.OPS
                             {
                                 lstSelectedLocations.SelectedIndex = 0;
                             }
+
+
                         }
                     }
 
@@ -311,6 +299,11 @@ namespace SRFROWCA.OPS
             }
         }
         protected void btnSave_Click(object sender, EventArgs e)
+        {
+            SaveData();
+        }
+
+        private void SaveData()
         {
             using (TransactionScope scope = new TransactionScope())
             {
@@ -373,8 +366,9 @@ namespace SRFROWCA.OPS
                 //Mali Complex Emergency
                 //Mauritania Complex
                 //Burkina Faso Complex
-                string emergencyName = "Mali Complex Emergency";
-                dt = DBContext.GetData("GetOPSEmergencyId", new object[] { OPSCountryName, emergencyName });
+                //string emergencyName = GetEmergencyName();
+                int isOPSEmergency = 1;
+                dt = DBContext.GetData("GetOPSEmergencyId", new object[] { OPSCountryName, isOPSEmergency });
             }
 
             return dt.Rows.Count > 0 ? Convert.ToInt32(dt.Rows[0]["LocationEmergencyId"].ToString()) : 0;
@@ -407,18 +401,16 @@ namespace SRFROWCA.OPS
             LocationId = 2;
             PopulateLocations(LocationId);
             PopulateStrategicObjectives();
+            PopulateObjectives();
         }
 
         protected void ddlStrObjectives_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ddlSpcObjectives.DataSource = new DataTable();
-            ddlSpcObjectives.DataBind();
-            PopulateSpcObjectives();
+
         }
 
         protected void ddlSpcObjectives_SelectedIndexChanged(object sender, EventArgs e)
         {
-
         }
 
         private void PopulateStrategicObjectives()
@@ -426,8 +418,15 @@ namespace SRFROWCA.OPS
             ddlStrObjectives.DataValueField = "StrategicObjectiveId";
             ddlStrObjectives.DataTextField = "StrategicObjectiveName";
 
-            ddlStrObjectives.DataSource = GetStrategicObjectives();
+            DataTable dt = GetStrategicObjectives();
+            ddlStrObjectives.DataSource = dt;
             ddlStrObjectives.DataBind();
+
+            //cbStrObj.DataValueField = "StrategicObjectiveId";
+            //cbStrObj.DataTextField = "StrategicObjectiveName";
+
+            //cbStrObj.DataSource = dt;
+            //cbStrObj.DataBind();
 
             if (ddlStrObjectives.Items.Count > 1)
             {
@@ -449,24 +448,32 @@ namespace SRFROWCA.OPS
         {
             int strObjId = 0;
             int.TryParse(ddlStrObjectives.SelectedValue, out strObjId);
-            PopulateObjectives(strObjId);
+            PopulateObjectives();
         }
 
-        private void PopulateObjectives(int strObjId)
+        private void PopulateObjectives()
         {
-            ddlSpcObjectives.DataValueField = "ClusterObjectiveId";
+            ddlSpcObjectives.DataValueField = "StrSpcObjId";
             ddlSpcObjectives.DataTextField = "ObjectiveName";
 
-            ddlSpcObjectives.DataSource = GetClusterObjectives(strObjId);
+            DataTable dt = GetClusterObjectives();
+            ddlSpcObjectives.DataSource = dt;
             ddlSpcObjectives.DataBind();
 
             ListItem item = new ListItem("Select Specific Objective", "0");
             ddlSpcObjectives.Items.Insert(0, item);
+
+            //cbSpcObj.DataValueField = "ClusterObjectiveId";
+            //cbSpcObj.DataTextField = "ObjectiveName";
+
+            //cbSpcObj.DataSource = dt;
+            //cbSpcObj.DataBind();
         }
 
-        private DataTable GetClusterObjectives(int strObjId)
+        private DataTable GetClusterObjectives()
         {
-            return DBContext.GetData("GetAllSpecifObjectivesOfAStrObjective", new object[] { strObjId });
+            //return DBContext.GetData("GetAllSpecifObjectivesOfAStrObjective", new object[] { strObjId });
+            return DBContext.GetData("GetEmergencyClusterObjectivesWithSpcObjId", new object[] { OPSEmergencyClusterId });
         }
 
         // In this method we will get the postback control.
@@ -528,6 +535,51 @@ namespace SRFROWCA.OPS
             GetReport(dt);
         }
 
+        private string GetSelectedItems(object sender)
+        {
+            string itemIds = "";
+            foreach (ListItem item in (sender as ListControl).Items)
+            {
+                if (item.Selected)
+                {
+                    if (itemIds != "")
+                    {
+                        itemIds += "," + item.Value;
+                    }
+                    else
+                    {
+                        itemIds += item.Value;
+                    }
+                }
+            }
+
+            return itemIds;
+        }
+
+        private string GetNotSelectedItems(object sender)
+        {
+            string itemIds = "";
+            if (LocationRemoved == 1)
+            {
+                foreach (ListItem item in (sender as ListControl).Items)
+                {
+                    if (!item.Selected)
+                    {
+                        if (itemIds != "")
+                        {
+                            itemIds += "," + item.Value;
+                        }
+                        else
+                        {
+                            itemIds += item.Value;
+                        }
+                    }
+                }
+            }
+
+            return itemIds;
+        }
+
         private string GetSelectedLocationIds()
         {
             string locationIds = "";
@@ -570,18 +622,13 @@ namespace SRFROWCA.OPS
 
         private DataTable GetActivities()
         {
-            string locationIds = GetSelectedLocationIds();
-            string locIdsNotIncluded = GetNotSelectedLocationIds();
+            string locationIds2 = GetSelectedLocationIds();
+            string locIdsNotIncluded2 = GetNotSelectedLocationIds();
 
-            int valTemp = 0;
-            int.TryParse(ddlStrObjectives.SelectedValue, out valTemp);
-            int? strObjId = valTemp > 0 ? (int?)valTemp : null;
+            string locationIds = GetSelectedItems(cbAdmin1Locaitons);
+            string locIdsNotIncluded = GetNotSelectedItems(cbAdmin1Locaitons);
 
-            valTemp = 0;
-            int.TryParse(ddlSpcObjectives.SelectedValue, out valTemp);
-            int? spcObjId = valTemp > 0 ? (int?)valTemp : null;
-
-            DataTable dt = DBContext.GetData("GetOPSActivities", new object[] { OPSLocationEmergencyId, locationIds, locIdsNotIncluded, OPSProjectId, OPSEmergencyClusterId, strObjId, spcObjId });
+            DataTable dt = DBContext.GetData("GetOPSActivities", new object[] { OPSLocationEmergencyId, locationIds, locIdsNotIncluded, OPSProjectId, OPSEmergencyClusterId });
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 
@@ -596,13 +643,21 @@ namespace SRFROWCA.OPS
             lstLocations.DataValueField = "LocationId";
             lstLocations.DataTextField = "LocationName";
 
-            lstLocations.DataSource = GetChildLocations(parentLocationId);
+            DataTable dt = GetChildLocations(parentLocationId);
+            lstLocations.DataSource = dt;
             lstLocations.DataBind();
 
             if (lstLocations.Items.Count > 0)
             {
                 lstLocations.SelectedIndex = 0;
             }
+
+
+            cbAdmin1Locaitons.DataValueField = "LocationId";
+            cbAdmin1Locaitons.DataTextField = "LocationName";
+
+            cbAdmin1Locaitons.DataSource = dt;
+            cbAdmin1Locaitons.DataBind();
         }
 
         private DataTable GetReportLocations()
@@ -620,8 +675,11 @@ namespace SRFROWCA.OPS
                 // the appropriate template property.
 
                 string columnName = column.ColumnName;
-                if (!(columnName == "OPSReportId" || columnName == "ClusterName" || columnName == "IndicatorName" || columnName == "ActivityDataId" || columnName == "ActivityName" || columnName == "DataName" || columnName == "IsActive"))
+                if (!(columnName == "OPSReportId" || columnName == "ClusterName" || columnName == "IndicatorName" ||
+                        columnName == "StrObjName" || columnName == "SpcObjName" || columnName == "ActivityDataId" ||
+                        columnName == "ActivityName" || columnName == "DataName" || columnName == "IsActive"))
                 {
+
                     customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, column.ColumnName, "1");
                     customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, column.ColumnName, "1");
                     gvActivities.Columns.Add(customField);
@@ -629,7 +687,7 @@ namespace SRFROWCA.OPS
             }
         }
 
-        private object GetChildLocations(int parentLocationId)
+        private DataTable GetChildLocations(int parentLocationId)
         {
             DataTable dt = DBContext.GetData("GetSecondLevelChildLocations", new object[] { parentLocationId });
             return dt.Rows.Count > 0 ? dt : new DataTable();

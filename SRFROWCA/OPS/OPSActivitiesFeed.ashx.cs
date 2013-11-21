@@ -112,10 +112,11 @@ namespace SRFROWCA.OPS
                 logFrame.Add(GetElement("Activity", activityId, activityName));
                 logFrame.Add(GetElement("Data", dataId, dataName));
 
-                XElement locationElement = new XElement("Location");
+                
 
                 foreach (DataRow locRow in dt.Rows)
                 {
+                    XElement locationElement = new XElement("Locations");
                     
                     string locName = locRow["LocationName"].ToString();
                     string locPCode = locRow["PCode"].ToString();
@@ -124,11 +125,12 @@ namespace SRFROWCA.OPS
                     string target2014 = locRow["Target2014"].ToString();
 
                     locationElement.Add(GetLocationElement("Location", locPCode, locName));
-                    locationElement.Add(GetElement("TargetMid2014", targetMid2014, targetMid2014));
-                    locationElement.Add(GetElement("Target2014", target2014, target2014));
+                    locationElement.Add(GetTargetElement("TargetMid", targetMid2014, targetMid2014));
+                    locationElement.Add(GetTargetElement("Target", target2014, target2014));
+                    logFrame.Add(locationElement);
                 }
 
-                logFrame.Add(locationElement);
+                
             }
         }
 
@@ -144,6 +146,14 @@ namespace SRFROWCA.OPS
             XElement element = new XElement("Name");
             element.Value = text;
 
+            return element;
+        }
+
+        private XElement GetTargetElement(string name, string idValue, string nameValue)
+        {
+            XElement element = new XElement(name);
+            element.SetAttributeValue("Year", "2014");
+            element.Value = nameValue;
             return element;
         }
 
