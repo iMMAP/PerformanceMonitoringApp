@@ -5,7 +5,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <script src="../Scripts/jquery.numeric.min.js" type="text/javascript"></script>
     <script type="text/javascript">
-
         var needToConfirm = true;
 
         window.onbeforeunload = confirmExit;
@@ -13,75 +12,48 @@
             if (needToConfirm)
                 return "";
         }
-    </script>
-    <script type="text/javascript">
+
         var launch = false;
         function launchModal() {
             launch = true;
         }
+
         function pageLoad() {
             if (launch) {
                 $find("mpeAddActivity").show();
             }
         }
     </script>
-    <style type="text/css">
-        .ModalPopupBG1
-        {
-            background-color: #446633;
-            filter: alpha(opacity=50);
-            opacity: 0.7;
-        }
-        
-        .HellowWorldPopup1
-        {
-            display: block;
-            top: 10px;
-            left: 0;
-            width: 600px;
-            height: 300px;
-            padding: 5px;
-            margin: 10px;
-            z-index: 10;
-            font: 12px Verdana, sans-serif;
-            text-align: center;
-        }
-    </style>
     <script language="javascript" type="text/javascript">
         $(function () {
             $(".numeric1").numeric();
+
+            // Split location name from Target(T) and Achieved(A).
             splitLocationFromTA();
+
+            // Filter rows on strategic objects or specific objects.
             showHideRowsOnObjs();
+
+            // Change coloumn size
             $("#<%=gvActivities.ClientID %>").kiketable_colsizable({ minWidth: 30 })
         });
 
+        // Filter rows on objects
         function showHideRowsOnObjs() {
+            // Filter on strategic objectives
             $('#<%=ddlStrObjectives.ClientID %>').change(function () {
                 var objId = $('#<%=ddlStrObjectives.ClientID %> :selected').val();
 
-                $("#<%=ddlSpcObjectives.ClientID %> > option").each(function () {
-                    $(this).removeClass('hiddenelement');
-                });
-                $("#<%=ddlSpcObjectives.ClientID %> > option:first-child").attr('selected', 'selected');
-                $("#<%=ddlSpcObjectives.ClientID %> > option").each(function () {
-                    var strSpcObjId = $(this).val();
-                    if (strSpcObjId === "0" || objId === "0") {
-                        $(this).removeClass('hiddenelement');
-                    }
-                    else {
-                        var spcObjId = strSpcObjId.substring(strSpcObjId.indexOf('_') + 1, strSpcObjId.length);
-                        var strObjId = strSpcObjId.substring(0, strSpcObjId.indexOf('_'));
+                //Get all items from spcobjectives dropdown
+                var spcObjOptions = $("#<%=ddlSpcObjectives.ClientID %> > option");
 
-                        if (strObjId !== objId) {
-                            $(this).addClass('hiddenelement');
-                        }
-                        else {
-                            $(this).removeClass('hiddenelement');
-                        }
-                    }
-                });
+                // remove hidden class from items to show all.
+                showAllDropDownItems(spcObjOptions);
 
-                //$(".istrow, .altcolor").each(function (i) {
+                // Hide matching items from spc dropdown.
+                hideMatchingItemsInDropDown(spcObjOptions, objId)
+
+                // filter (hide) rows from strobj grid.
                 $('.istrow, .altcolor').find('td:nth-child(2)').each(function (i) {
                     if ($(this).text() === objId || objId === '0') {
                         $(this).parent().show();
@@ -92,7 +64,7 @@
                 });
             });
 
-
+            // Filter (hide) rows from spcobj grid
             $('#<%=ddlSpcObjectives.ClientID %>').change(function () {
                 var strSpcObjId = $('#<%=ddlSpcObjectives.ClientID %> :selected').val();
                 var spcObjId = strSpcObjId.substring(strSpcObjId.indexOf('_') + 1, strSpcObjId.length);
@@ -108,48 +80,74 @@
             });
         }
 
+        // We alos need to filter specific objectives on selected str objective.
+        // First remove 'hiddenelement' class which is to hide items in spc objective
+        // dropdown i.e. display none                
+        function showAllDropDownItems(controlItems) {
+            $(controlItems).each(function () {
+                $(this).removeClass('hiddenelement');
+            });
+
+            // Selecte first item in spc objectives.
+            $(controlItems).first().attr('selected', 'selected');
+        }
+
+        function hideMatchingItemsInDropDown(controlItems, objId) {
+            $(controlItems).each(function () {
+                var strSpcObjId = $(this).val();
+                if (strSpcObjId === "0" || objId === "0") {
+                    $(this).removeClass('hiddenelement');
+                }
+                else {
+                    var spcObjId = strSpcObjId.substring(strSpcObjId.indexOf('_') + 1, strSpcObjId.length);
+                    var strObjId = strSpcObjId.substring(0, strSpcObjId.indexOf('_'));
+
+                    if (strObjId !== objId) {
+                        $(this).addClass('hiddenelement');
+                    }
+                    else {
+                        $(this).removeClass('hiddenelement');
+                    }
+                }
+            });
+        }
+
+        // Split location namde and 'T' (means Target) and 'A' (means Achieved)
         function splitLocationFromTA() {
             if (!(/chrom(e|ium)/.test(navigator.userAgent.toLowerCase()))) {
                 var list = '';
                 var list2 = '';
                 var j = 0;
+
+                // Loop on all th in grid.
                 $(".imagetable th").each(function () {
                     var value = ($(":first-child", this).is(":input"))
-                ? $(":first-child", this).val()
-                : ($(this).text() != "")
-                  ? $(this).text()
-                  : $(this).html();
+                        ? $(":first-child", this).val()
+                        : ($(this).text() != "")
+                            ? $(this).text()
+                            : $(this).html();
+
+                    // if contains '_' (which is passed from db in column name)
                     if (value.indexOf('_') >= 0) {
                         j++;
                         city1 = value.split('_');
                         $(this).text(city1[1]);
 
+                        // Add city name after every two columns (first is T and second is A)
                         if (j % 2 === 0) {
                             list += '<th colspan="2" style="width:100px; text-align:center;">' + city1[0] + '</th>';
                         }
                     }
                 });
+
+                // Add header row in grid.
                 $(".imagetable").prepend('<colgroup><col /><col /><col /><col /></colgroup><thead><tr style="background-color:ButtonFace;"><th style="width: 5px;">&nbsp;</th><th style="width: 200px;">&nbsp;</th><th style="width: 200px;">&nbsp;</th><th style="width: 200px;">&nbsp;</th>' + list + '</tr></thead>');
             }
         }
-
-        
-    
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div id="divMsg">
-    </div>
-    <div class="buttonsdiv">
-        <div class="savebutton">
-            <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
-                CausesValidation="true" Width="120" CssClass="button_example" /></div>
-        <div class="buttonright">
-            <asp:Button ID="btnOpenLocations" runat="server" Text="Locations" CausesValidation="false"
-                CssClass="button_location" OnClick="btnLocation_Click" OnClientClick="needToConfirm = false;" />
-        </div>
-        <div class="spacer" style="clear: both;">
-        </div>
     </div>
     <div class="containerOPS">
         <div class="graybar">
@@ -158,11 +156,6 @@
         <div class="contentarea">
             <div class="formdiv">
                 <table style="margin: 0 auto; width: 100%">
-                    <tr>
-                        <td>
-                            <a href="../webform5.aspx">Back to ?</a>
-                        </td>
-                    </tr>
                     <tr>
                         <td>
                             <label>
@@ -178,7 +171,7 @@
                                 Strategic Objectives:</label>
                         </td>
                         <td>
-                            <asp:DropDownList ID="ddlStrObjectives" Width="950px" runat="server" OnSelectedIndexChanged="ddlStrObjectives_SelectedIndexChanged">
+                            <asp:DropDownList ID="ddlStrObjectives" Width="950px" runat="server">
                             </asp:DropDownList>
                         </td>
                     </tr>
@@ -188,7 +181,7 @@
                                 Specific Objectives:</label>
                         </td>
                         <td>
-                            <asp:DropDownList ID="ddlSpcObjectives" Width="950px" runat="server" OnSelectedIndexChanged="ddlSpcObjectives_SelectedIndexChanged">
+                            <asp:DropDownList ID="ddlSpcObjectives" Width="950px" runat="server">
                             </asp:DropDownList>
                         </td>
                     </tr>
@@ -198,6 +191,17 @@
             </div>
         </div>
         <div class="graybarcontainer">
+        </div>
+    </div>
+    <div class="buttonsdiv">
+        <div class="savebutton">
+            <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
+                CausesValidation="true" Width="120" CssClass="button_example" /></div>
+        <div class="buttonright">
+            <asp:Button ID="btnOpenLocations" runat="server" Text="Locations" CausesValidation="false"
+                CssClass="button_location" OnClick="btnLocation_Click" OnClientClick="needToConfirm = false;" />
+        </div>
+        <div class="spacer" style="clear: both;">
         </div>
     </div>
     <div class="tablegrid">
@@ -240,82 +244,37 @@
             <td>
                 <input type="button" id="btnClientOpen" runat="server" style="display: none;" />
                 <asp:ModalPopupExtender ID="mpeAddActivity" BehaviorID="mpeAddActivity" runat="server"
-                    TargetControlID="btnClientOpen" PopupControlID="pnlLocations" BackgroundCssClass="ModalPopupBG1">
+                    TargetControlID="btnClientOpen" PopupControlID="pnlLocations" BackgroundCssClass="modalpopupbackground">
                 </asp:ModalPopupExtender>
-                <asp:Panel ID="pnlLocations" runat="server" Width="700px">
+                <asp:Panel ID="pnlLocations" runat="server" Width="200px">
                     <asp:UpdatePanel ID="uPanel1" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <div class="HellowWorldPopup1">
-                                <table width="50%" border="0" align="center" cellpadding="0" cellspacing="0">
-                                    <tr>
-                                        <td height="63" colspan="3" bgcolor="#FFFFFF" style="border-left: #9db7df  4px solid;
-                                            border-top: #9db7df  4px solid; border-right: #9db7df  4px solid; border-bottom: #9db7df  4px solid">
-                                            <table border="0" style="margin: auto; background-color: Gray">
-                                                <tr>
-                                                    <td colspan="3" align="center">
-                                                        <asp:Label ID="lblLocationLevelOfCountry" runat="server" Text="" BackColor="White"></asp:Label>
-                                                    </td>
-                                                </tr>
-                                                <tr style="background-color: ButtonFace;">
-                                                    <td>
-                                                        Locations:
-                                                    </td>
-                                                    <td>
-                                                    </td>
-                                                    <td style="background-color: ButtonFace;">
-                                                        Selected Locations:
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width: 45%">
-                                                        <asp:ListBox ID="lstLocations" runat="server" Height="180px" Width="315px" SelectionMode="Multiple">
-                                                        </asp:ListBox>
-                                                    </td>
-                                                    <td class="TitleCellBackgroud" align="center">
-                                                        <%--<asp:Button ID="btnAddAll" runat="server" Text="&gt;&gt;" Height="30px" Width="50px"
-                                                            CausesValidation="false" OnClick="btnAddAll_Click" />--%>
-                                                        <br />
-                                                        <br />
-                                                        <asp:Button ID="btnAdd" runat="server" Text="&gt;" Height="30px" Width="50px" CausesValidation="false"
-                                                            OnClick="btnAdd_Click"/>
-                                                        <br />
-                                                        <br />
-                                                        <asp:Button ID="btnRemove" runat="server" Text="&lt;" Height="30px" Width="50px"
-                                                            CausesValidation="false" OnClick="btnRemove_Click" />
-                                                        <br />
-                                                        <br />
-                                                        <%--<asp:Button ID="btnRemoveAll" runat="server" Text="&lt;&lt;" Height="30px" Width="50px"
-                                                            CausesValidation="false" OnClick="btnRemoveAll_Click" />--%>
-                                                    </td>
-                                                    <td style="width: 45%">
-                                                        <asp:ListBox ID="lstSelectedLocations" runat="server" Height="180px" Width="315px"
-                                                            SelectionMode="Multiple"></asp:ListBox>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <asp:CheckBoxList ID="cbAdmin1Locaitons" runat="server" RepeatColumns="2"></asp:CheckBoxList>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="3" align="center">
-                                                        <asp:Button ID="btnClose" runat="server" Text="Close" Width="300px" Height="40px"
-                                                            CausesValidation="false" OnClientClick="needToConfirm = false;" />
-                                                        <%--<asp:Button ID="btnGetReports" runat="server" Text="Get Location Reports" OnClick="btnGetReports_Click"
-                                                            Width="300px" Height="40px" CausesValidation="false" />--%>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <asp:Label ID="lblOrgMessage" runat="server" ViewStateMode="Disabled"></asp:Label>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <div class="containerPopup">
+                                <div class="graybar">
+                                    Admin1 Locations
+                                </div>
+                                <div class="contentarea">
+                                    <div class="formdiv">
+                                        <table border="0" style="margin: 0 auto;">
+                                            <tr>
+                                                <td>
+                                                    <asp:CheckBoxList ID="cbAdmin1Locaitons" runat="server">
+                                                    </asp:CheckBoxList>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Button ID="btnClose" runat="server" Text="Close" CssClass="button_location" Width="120px"
+                                                        CausesValidation="false" OnClientClick="needToConfirm = false;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <div class="spacer" style="clear: both;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="graybarcontainer">
+                                </div>
                             </div>
                         </ContentTemplate>
                         <Triggers>

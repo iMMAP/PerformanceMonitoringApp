@@ -328,77 +328,37 @@
             <td>
                 <input type="button" id="btnClientOpen" runat="server" style="display: none;" />
                 <asp:ModalPopupExtender ID="mpeAddActivity" BehaviorID="mpeAddActivity" runat="server"
-                    TargetControlID="btnClientOpen" PopupControlID="pnlLocations" BackgroundCssClass="ModalPopupBG1">
+                    TargetControlID="btnClientOpen" PopupControlID="pnlLocations" BackgroundCssClass="modalpopupbackground">
                 </asp:ModalPopupExtender>
-                <asp:Panel ID="pnlLocations" runat="server" Width="700px">
+                <asp:Panel ID="pnlLocations" runat="server" Width="600px">
                     <asp:UpdatePanel ID="uPanel1" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <div class="HellowWorldPopup1">
-                                <table width="50%" border="0" align="center" cellpadding="0" cellspacing="0">
-                                    <tr>
-                                        <td height="63" colspan="3" bgcolor="#FFFFFF" style="border-left: #9db7df  4px solid;
-                                            border-top: #9db7df  4px solid; border-right: #9db7df  4px solid; border-bottom: #9db7df  4px solid">
-                                            <table border="0" style="margin: auto; background-color: Gray">
-                                                <tr>
-                                                    <td colspan="3" align="center">
-                                                        <asp:Label ID="lblLocationLevelOfCountry" runat="server" Text="" BackColor="White"></asp:Label>
-                                                    </td>
-                                                </tr>
-                                                <tr style="background-color: ButtonFace;">
-                                                    <td>
-                                                        Locations:
-                                                    </td>
-                                                    <td>
-                                                    </td>
-                                                    <td style="background-color: ButtonFace;">
-                                                        Selected Locations:
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width: 45%">
-                                                        <asp:ListBox ID="lstLocations" runat="server" Height="180px" Width="315px" SelectionMode="Multiple">
-                                                        </asp:ListBox>
-                                                    </td>
-                                                    <td class="TitleCellBackgroud" align="center">
-                                                        <%--<asp:Button ID="btnAddAll" runat="server" Text="&gt;&gt;" Height="30px" Width="50px"
-                                                            CausesValidation="false" OnClick="btnAddAll_Click" />--%>
-                                                        <br />
-                                                        <br />
-                                                        <asp:Button ID="btnAdd" runat="server" Text="&gt;" Height="30px" Width="50px" CausesValidation="false"
-                                                            OnClick="btnAdd_Click" />
-                                                        <br />
-                                                        <br />
-                                                        <asp:Button ID="btnRemove" runat="server" Text="&lt;" Height="30px" Width="50px"
-                                                            CausesValidation="false" OnClick="btnRemove_Click" />
-                                                        <br />
-                                                        <br />
-                                                        <%--<asp:Button ID="btnRemoveAll" runat="server" Text="&lt;&lt;" Height="30px" Width="50px"
-                                                            CausesValidation="false" OnClick="btnRemoveAll_Click" />--%>
-                                                    </td>
-                                                    <td style="width: 45%">
-                                                        <asp:ListBox ID="lstSelectedLocations" runat="server" Height="180px" Width="315px"
-                                                            SelectionMode="Multiple"></asp:ListBox>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="3" align="center">
-                                                        <asp:Button ID="btnClose" runat="server" Text="Close" Width="300px" Height="40px"
-                                                            CausesValidation="false" OnClientClick="needToConfirm = false;" />
-                                                        <%--<asp:Button ID="btnGetReports" runat="server" Text="Get Location Reports" OnClick="btnGetReports_Click"
-                                                            Width="300px" Height="40px" CausesValidation="false" />--%>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <asp:Label ID="lblOrgMessage" runat="server" ViewStateMode="Disabled"></asp:Label>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <div class="containerPopup">
+                                <div class="graybar">
+                                    Admin2 Locations
+                                </div>
+                                <div class="contentarea">
+                                    <div class="formdiv">
+                                        <table border="0" style="margin: 0 auto;">
+                                            <tr>
+                                                <td>
+                                                    <asp:CheckBoxList ID="cblLocations" runat="server" RepeatColumns="4" RepeatDirection="Horizontal">
+                                                    </asp:CheckBoxList>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Button ID="btnClose" runat="server" Text="Close" Width="120px" CssClass="button_location"
+                                                        CausesValidation="false" OnClientClick="needToConfirm = false;" />
+                                                </td>
+                                            </tr>
+                                        </table>                                    
+                                        <div class="spacer" style="clear: both;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="graybarcontainer">
+                                </div>
                             </div>
                         </ContentTemplate>
                         <Triggers>

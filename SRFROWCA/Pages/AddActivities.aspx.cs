@@ -32,12 +32,21 @@ namespace SRFROWCA.Pages
             if (controlName == "ddlMonth" || controlName == "ddlOffice")
             {
                 LocationRemoved = 0;
-                lstSelectedLocations.Items.Clear();
+                //lstSelectedLocations.Items.Clear();
+                RemoveSelectedLocations();
             }
 
             DataTable dtActivities = GetActivities();
             AddDynamicColumnsInGrid(dtActivities);
             GetReport(dtActivities);
+        }
+
+        private void RemoveSelectedLocations()
+        {
+            foreach (ListItem item in cblLocations.Items)
+            {
+                item.Selected = false;
+            }
         }
 
         #region Events.
@@ -70,139 +79,139 @@ namespace SRFROWCA.Pages
         #endregion
 
         #region Location List Box Events.
-        protected void btnAddAll_Click(object sender, EventArgs e)
-        {
-            List<ListItem> sortedList = GetSortedList(lstLocations, lstSelectedLocations, null);
+        //protected void btnAddAll_Click(object sender, EventArgs e)
+        //{
+        //    List<ListItem> sortedList = GetSortedList(lstLocations, lstSelectedLocations, null);
 
-            if (sortedList.Count > 0)
-            {
-                LocationRemoved = 0;
-                lstSelectedLocations.Items.Clear();
-                lstSelectedLocations.Items.AddRange(sortedList.ToArray());
-            }
+        //    if (sortedList.Count > 0)
+        //    {
+        //        LocationRemoved = 0;
+        //        lstSelectedLocations.Items.Clear();
+        //        lstSelectedLocations.Items.AddRange(sortedList.ToArray());
+        //    }
 
-            // Remove all items from list.
-            lstLocations.Items.Clear();
+        //    // Remove all items from list.
+        //    lstLocations.Items.Clear();
 
-            if (lstSelectedLocations.Items.Count > 0)
-            {
-                lstSelectedLocations.SelectedIndex = 0;
-            }
-        }
-        protected void btnAdd_Click(object sender, EventArgs e)
-        {
-            if (lstLocations.SelectedIndex > -1)
-            {
-                LocationRemoved = 0;
-                List<ListItem> items = new List<ListItem>();
+        //    if (lstSelectedLocations.Items.Count > 0)
+        //    {
+        //        lstSelectedLocations.SelectedIndex = 0;
+        //    }
+        //}
+        //protected void btnAdd_Click(object sender, EventArgs e)
+        //{
+        //    if (lstLocations.SelectedIndex > -1)
+        //    {
+        //        LocationRemoved = 0;
+        //        List<ListItem> items = new List<ListItem>();
 
-                for (int i = 0; i < lstLocations.Items.Count; i++)
-                {
-                    if (lstLocations.Items[i].Selected)
-                    {
-                        items.Add(lstLocations.Items[i]);
-                    }
-                }
+        //        for (int i = 0; i < lstLocations.Items.Count; i++)
+        //        {
+        //            if (lstLocations.Items[i].Selected)
+        //            {
+        //                items.Add(lstLocations.Items[i]);
+        //            }
+        //        }
 
-                foreach (ListItem selectedItem in items)
-                {
-                    // Get sorted list items.
-                    List<ListItem> sortedList = GetSortedList(lstSelectedLocations, null, selectedItem);
+        //        foreach (ListItem selectedItem in items)
+        //        {
+        //            // Get sorted list items.
+        //            List<ListItem> sortedList = GetSortedList(lstSelectedLocations, null, selectedItem);
 
-                    if (sortedList.Count > 0)
-                    {
-                        // Clear all items from list box.
-                        lstSelectedLocations.Items.Clear();
+        //            if (sortedList.Count > 0)
+        //            {
+        //                // Clear all items from list box.
+        //                lstSelectedLocations.Items.Clear();
 
-                        // Add items in listbox.
-                        lstSelectedLocations.Items.AddRange(sortedList.ToArray());
-                    }
+        //                // Add items in listbox.
+        //                lstSelectedLocations.Items.AddRange(sortedList.ToArray());
+        //            }
 
-                    // Remove item from selected items phase list(on right);
-                    lstLocations.Items.Remove(selectedItem);
+        //            // Remove item from selected items phase list(on right);
+        //            lstLocations.Items.Remove(selectedItem);
 
-                    // Select first item in selected phases list box.
-                    if (lstSelectedLocations.Items.Count > 0)
-                    {
-                        lstSelectedLocations.SelectedIndex = 0;
-                    }
+        //            // Select first item in selected phases list box.
+        //            if (lstSelectedLocations.Items.Count > 0)
+        //            {
+        //                lstSelectedLocations.SelectedIndex = 0;
+        //            }
 
-                    // Select first item in phases list box.
-                    if (lstLocations.Items.Count > 0)
-                    {
-                        lstLocations.SelectedIndex = 0;
-                    }
-                }
-            }
+        //            // Select first item in phases list box.
+        //            if (lstLocations.Items.Count > 0)
+        //            {
+        //                lstLocations.SelectedIndex = 0;
+        //            }
+        //        }
+        //    }
 
-            btnGetReports_Click(null, null);
-        }
-        protected void btnRemove_Click(object sender, EventArgs e)
-        {
-            if (lstSelectedLocations.SelectedIndex > -1)
-            {
-                LocationRemoved = 1;
-                List<ListItem> items = new List<ListItem>();
+        //    btnGetReports_Click(null, null);
+        //}
+        //protected void btnRemove_Click(object sender, EventArgs e)
+        //{
+        //    if (lstSelectedLocations.SelectedIndex > -1)
+        //    {
+        //        LocationRemoved = 1;
+        //        List<ListItem> items = new List<ListItem>();
 
-                for (int i = 0; i < lstSelectedLocations.Items.Count; i++)
-                {
-                    if (lstSelectedLocations.Items[i].Selected)
-                    {
-                        items.Add(lstSelectedLocations.Items[i]);
-                    }
-                }
+        //        for (int i = 0; i < lstSelectedLocations.Items.Count; i++)
+        //        {
+        //            if (lstSelectedLocations.Items[i].Selected)
+        //            {
+        //                items.Add(lstSelectedLocations.Items[i]);
+        //            }
+        //        }
 
-                foreach (ListItem selectedItem in items)
-                {
-                    // Get sorted list items.
-                    List<ListItem> sortedList = GetSortedList(lstLocations, null, selectedItem);
+        //        foreach (ListItem selectedItem in items)
+        //        {
+        //            // Get sorted list items.
+        //            List<ListItem> sortedList = GetSortedList(lstLocations, null, selectedItem);
 
-                    if (sortedList.Count > 0)
-                    {
-                        // Clear all items from list box.
-                        lstLocations.Items.Clear();
+        //            if (sortedList.Count > 0)
+        //            {
+        //                // Clear all items from list box.
+        //                lstLocations.Items.Clear();
 
-                        // Add items in listbox.
-                        lstLocations.Items.AddRange(sortedList.ToArray());
-                    }
+        //                // Add items in listbox.
+        //                lstLocations.Items.AddRange(sortedList.ToArray());
+        //            }
 
-                    // Remove item from selected items phase list(on right);
-                    lstSelectedLocations.Items.Remove(selectedItem);
+        //            // Remove item from selected items phase list(on right);
+        //            lstSelectedLocations.Items.Remove(selectedItem);
 
-                    // Select first item in selected phases list box.
-                    if (lstSelectedLocations.Items.Count > 0)
-                    {
-                        lstSelectedLocations.SelectedIndex = 0;
-                    }
+        //            // Select first item in selected phases list box.
+        //            if (lstSelectedLocations.Items.Count > 0)
+        //            {
+        //                lstSelectedLocations.SelectedIndex = 0;
+        //            }
 
-                    // Select first item in phases list box.
-                    if (lstLocations.Items.Count > 0)
-                    {
-                        lstLocations.SelectedIndex = 0;
-                    }
-                }
-            }
-        }
-        protected void btnRemoveAll_Click(object sender, EventArgs e)
-        {
-            List<ListItem> sortedList = GetSortedList(lstSelectedLocations, lstLocations, null);
+        //            // Select first item in phases list box.
+        //            if (lstLocations.Items.Count > 0)
+        //            {
+        //                lstLocations.SelectedIndex = 0;
+        //            }
+        //        }
+        //    }
+        //}
+        //protected void btnRemoveAll_Click(object sender, EventArgs e)
+        //{
+        //    List<ListItem> sortedList = GetSortedList(lstSelectedLocations, lstLocations, null);
 
-            if (sortedList.Count > 0)
-            {
-                LocationRemoved = 1;
-                lstLocations.Items.Clear();
-                lstLocations.Items.AddRange(sortedList.ToArray());
-            }
+        //    if (sortedList.Count > 0)
+        //    {
+        //        LocationRemoved = 1;
+        //        lstLocations.Items.Clear();
+        //        lstLocations.Items.AddRange(sortedList.ToArray());
+        //    }
 
-            // Remove all items from listboxes.
-            lstSelectedLocations.Items.Clear();
+        //    // Remove all items from listboxes.
+        //    lstSelectedLocations.Items.Clear();
 
-            // Select first item if exists.
-            if (lstLocations.Items.Count > 0)
-            {
-                lstLocations.SelectedIndex = 0;
-            }
-        }
+        //    // Select first item if exists.
+        //    if (lstLocations.Items.Count > 0)
+        //    {
+        //        lstLocations.SelectedIndex = 0;
+        //    }
+        //}
         #endregion
 
         #region Button Click Events.
@@ -217,7 +226,7 @@ namespace SRFROWCA.Pages
         protected void btnLocation_Click(object sender, EventArgs e)
         {
             ClientScript.RegisterStartupScript(this.GetType(), "key", "launchModal();", true);
-
+            LocationRemoved = 1;
             int k = 0;
             foreach (GridViewRow row in gvActivities.Rows)
             {
@@ -270,45 +279,57 @@ namespace SRFROWCA.Pages
 
                     List<ListItem> itemsToDelete = new List<ListItem>();
 
-                    foreach (ListItem item in lstLocations.Items)
+                    foreach (ListItem item in cblLocations.Items)
                     {
                         if (dataSave.Contains(Convert.ToInt32(item.Value)))
                         {
-                            ListItem selectedItem = item;
-                            itemsToDelete.Add(item);
-
-                            // Get sorted list items.
-                            List<ListItem> sortedList = GetSortedList(lstSelectedLocations, null, selectedItem);
-
-                            if (sortedList.Count > 0)
-                            {
-                                // Clear all items from list box.
-                                lstSelectedLocations.Items.Clear();
-
-                                // Add items in listbox.
-                                lstSelectedLocations.Items.AddRange(sortedList.ToArray());
-
-                                lstSelectedLocations.Items.Clear();
-                                lstSelectedLocations.Items.AddRange(sortedList.ToArray());
-                            }
-
-                            // Select first item in selected phases list box.
-                            if (lstSelectedLocations.Items.Count > 0)
-                            {
-                                lstSelectedLocations.SelectedIndex = 0;
-                            }
+                            item.Selected = true;
+                        }
+                        else
+                        {
+                            item.Selected = false;
                         }
                     }
 
-                    foreach (ListItem item in itemsToDelete)
-                    {
-                        lstLocations.Items.Remove(item);
-                    }
+                    //foreach (ListItem item in lstLocations.Items)
+                    //{
+                    //    if (dataSave.Contains(Convert.ToInt32(item.Value)))
+                    //    {
+                    //        ListItem selectedItem = item;
+                    //        itemsToDelete.Add(item);
 
-                    if (lstLocations.Items.Count > 0)
-                    {
-                        lstLocations.SelectedIndex = 0;
-                    }
+                    //        // Get sorted list items.
+                    //        List<ListItem> sortedList = GetSortedList(lstSelectedLocations, null, selectedItem);
+
+                    //        if (sortedList.Count > 0)
+                    //        {
+                    //            // Clear all items from list box.
+                    //            lstSelectedLocations.Items.Clear();
+
+                    //            // Add items in listbox.
+                    //            lstSelectedLocations.Items.AddRange(sortedList.ToArray());
+
+                    //            lstSelectedLocations.Items.Clear();
+                    //            lstSelectedLocations.Items.AddRange(sortedList.ToArray());
+                    //        }
+
+                    //        // Select first item in selected phases list box.
+                    //        if (lstSelectedLocations.Items.Count > 0)
+                    //        {
+                    //            lstSelectedLocations.SelectedIndex = 0;
+                    //        }
+                    //    }
+                    //}
+
+                    //foreach (ListItem item in itemsToDelete)
+                    //{
+                    //    lstLocations.Items.Remove(item);
+                    //}
+
+                    //if (lstLocations.Items.Count > 0)
+                    //{
+                    //    lstLocations.SelectedIndex = 0;
+                    //}
                 }
             }
         }
@@ -350,7 +371,7 @@ namespace SRFROWCA.Pages
                 lblOrganization.Text = dt.Rows[0]["OrganizationName"].ToString();
 
                 // Set Header of Location List Box.
-                lblLocationLevelOfCountry.Text = "Admin2 Locations of " + lblCountry.Text;
+                //lblLocationLevelOfCountry.Text = "Admin2 Locations of " + lblCountry.Text;
 
                 LocationId = Convert.ToInt32(dt.Rows[0]["LocationId"].ToString());
                 int organizationId = Convert.ToInt32(dt.Rows[0]["OrganizationId"].ToString());
@@ -516,45 +537,90 @@ namespace SRFROWCA.Pages
             GetReport(dt);
         }
 
-        private string GetSelectedLocationIds()
+        private string GetSelectedItems(object sender)
         {
-            string locationIds = "";
-
-            for (int i = 0; i < lstSelectedLocations.Items.Count; i++)
+            string itemIds = "";
+            foreach (ListItem item in (sender as ListControl).Items)
             {
-                if (locationIds != "")
+                if (item.Selected)
                 {
-                    locationIds += "," + lstSelectedLocations.Items[i].Value;
-                }
-                else
-                {
-                    locationIds += lstSelectedLocations.Items[i].Value;
-                }
-            }
-
-            return locationIds;
-        }
-
-        private string GetNotSelectedLocationIds()
-        {
-            string locIdsNotIncluded = "";
-            if (LocationRemoved == 1)
-            {
-                for (int i = 0; i < lstLocations.Items.Count; i++)
-                {
-                    if (locIdsNotIncluded != "")
+                    if (itemIds != "")
                     {
-                        locIdsNotIncluded += "," + lstLocations.Items[i].Value;
+                        itemIds += "," + item.Value;
                     }
                     else
                     {
-                        locIdsNotIncluded += lstLocations.Items[i].Value;
+                        itemIds += item.Value;
                     }
                 }
             }
 
-            return locIdsNotIncluded;
+            return itemIds;
         }
+
+        private string GetNotSelectedItems(object sender)
+        {
+            string itemIds = "";
+            if (LocationRemoved == 1)
+            {
+                foreach (ListItem item in (sender as ListControl).Items)
+                {
+                    if (!item.Selected)
+                    {
+                        if (itemIds != "")
+                        {
+                            itemIds += "," + item.Value;
+                        }
+                        else
+                        {
+                            itemIds += item.Value;
+                        }
+                    }
+                }
+            }
+
+            return itemIds;
+        }
+
+        //private string GetSelectedLocationIds()
+        //{
+        //    string locationIds = "";
+
+        //    for (int i = 0; i < lstSelectedLocations.Items.Count; i++)
+        //    {
+        //        if (locationIds != "")
+        //        {
+        //            locationIds += "," + lstSelectedLocations.Items[i].Value;
+        //        }
+        //        else
+        //        {
+        //            locationIds += lstSelectedLocations.Items[i].Value;
+        //        }
+        //    }
+
+        //    return locationIds;
+        //}
+
+        //private string GetNotSelectedLocationIds()
+        //{
+        //    string locIdsNotIncluded = "";
+        //    if (LocationRemoved == 1)
+        //    {
+        //        for (int i = 0; i < lstLocations.Items.Count; i++)
+        //        {
+        //            if (locIdsNotIncluded != "")
+        //            {
+        //                locIdsNotIncluded += "," + lstLocations.Items[i].Value;
+        //            }
+        //            else
+        //            {
+        //                locIdsNotIncluded += lstLocations.Items[i].Value;
+        //            }
+        //        }
+        //    }
+
+        //    return locIdsNotIncluded;
+        //}
 
         private DataTable GetActivities()
         {
@@ -570,8 +636,11 @@ namespace SRFROWCA.Pages
             int monthId = 0;
             int.TryParse(ddlMonth.SelectedValue, out monthId);
 
-            string locationIds = GetSelectedLocationIds();
-            string locIdsNotIncluded = GetNotSelectedLocationIds();
+            //string locationIds = GetSelectedLocationIds();
+            //string locIdsNotIncluded = GetNotSelectedLocationIds();
+
+            string locationIds = GetSelectedItems(cblLocations);
+            string locIdsNotIncluded = GetNotSelectedItems(cblLocations);
 
             Guid userId = ROWCACommon.GetCurrentUserId();
             DataTable dt = DBContext.GetData("GetIPData", new object[] { locEmergencyId, locationIds, officeId, yearId, monthId, locIdsNotIncluded, userId });
@@ -580,22 +649,29 @@ namespace SRFROWCA.Pages
 
         private void AddLocationsInSelectedList()
         {
-            lstSelectedLocations.Items.Clear();
+            //lstSelectedLocations.Items.Clear();
             PopulateLocations(LocationId);
         }
 
         private void PopulateLocations(int parentLocationId)
         {
-            lstLocations.DataValueField = "LocationId";
-            lstLocations.DataTextField = "LocationName";
+            //lstLocations.DataValueField = "LocationId";
+            //lstLocations.DataTextField = "LocationName";
 
-            lstLocations.DataSource = GetChildLocations(parentLocationId);
-            lstLocations.DataBind();
+            DataTable dt = GetChildLocations(parentLocationId);
+            //lstLocations.DataSource = dt;
+            //lstLocations.DataBind();
 
-            if (lstLocations.Items.Count > 0)
-            {
-                lstLocations.SelectedIndex = 0;
-            }
+            //if (lstLocations.Items.Count > 0)
+            //{
+            //    lstLocations.SelectedIndex = 0;
+            //}
+
+
+            cblLocations.DataValueField = "LocationId";
+            cblLocations.DataTextField = "LocationName";
+            cblLocations.DataSource = dt;
+            cblLocations.DataBind();
         }
 
         private DataTable GetReportLocations()
@@ -622,7 +698,7 @@ namespace SRFROWCA.Pages
             }
         }
 
-        private object GetChildLocations(int parentLocationId)
+        private DataTable GetChildLocations(int parentLocationId)
         {
             DataTable dt = DBContext.GetData("GetThirdLevelChildLocations", new object[] { parentLocationId });
             return dt.Rows.Count > 0 ? dt : new DataTable();
