@@ -2,6 +2,7 @@
 using System.Web;
 using System.Web.Security;
 using SRFROWCA.Common;
+using System.Web.UI.WebControls;
 
 namespace SRFROWCA.Account
 {
@@ -15,6 +16,15 @@ namespace SRFROWCA.Account
         protected void Page_Load(object sender, EventArgs e)
         {
             RegisterHyperLink.NavigateUrl = "Register.aspx?ReturnUrl=" + HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
+
+            if (!IsPostBack)
+            {
+                TextBox tb = this.LoginUser.FindControl("UserName") as TextBox;
+                if (tb != null)
+                {
+                    this.SetFocus(tb);
+                }
+            }
         }
 
         protected void LoginUser_LoginError(object sender, EventArgs e)
