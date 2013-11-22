@@ -25,10 +25,12 @@ namespace SRFROWCA.Account
                 divUserRoles.Visible = false;
                 ddlLocations.Visible = false;
                 ltrlLocation.Visible = false;
+
+                this.Form.DefaultButton = this.btnRegister.UniqueID;
+                this.SetFocus(this.txtUserName);
             }
 
-            this.Form.DefaultButton = this.btnRegister.UniqueID;
-            this.Form.DefaultFocus = this.txtUserName.UniqueID;
+            
 
             PopulateCountries();
             PopulateOrganizations();
