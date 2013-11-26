@@ -10,6 +10,7 @@ using DotNet.Highcharts.Enums;
 using DotNet.Highcharts.Helpers;
 using DotNet.Highcharts.Options;
 using SRFROWCA.Controls;
+using System.Collections.Generic;
 
 namespace SRFROWCA.Reports
 {
@@ -62,8 +63,50 @@ namespace SRFROWCA.Reports
         {
             DataTable dt = GetLocationData(locationType);
             UpdateNullColumns(dt);
-            PrepareTargetAchievedChartData(dt);
+
+            List<string> titles = GetChartTitles();
+            if (titles.Count > 0)
+            {
+                divTitle.InnerHtml = titles[0];
+                divTitle2.InnerHtml = titles[1];
+            }
             PreparePercentageChartData(dt);
+            PrepareTargetAchievedChartData(dt);
+
+        }
+
+        private DataTable GetLogFrameData()
+        {
+            int? dataId = GetSelectedValue(ddlData);
+            return DBContext.GetData("GetAllFrameWorkDataOnDataId", new object[] { dataId });
+        }
+
+        private List<string> GetChartTitles()
+        {
+            DataTable dtLogFrame = GetLogFrameData();
+            List<string> titles = new List<string>();
+            if (dtLogFrame.Rows.Count > 0)
+            {
+                string countryName = ddlCountry.SelectedItem.Text;
+                string clusterName = countryName + " - " + dtLogFrame.Rows[0]["ClusterName"].ToString();
+                string strObjName = dtLogFrame.Rows[0]["StrategicObjectiveName"].ToString();
+                string spcObjName = dtLogFrame.Rows[0]["ObjectiveName"].ToString();
+                string indicatorName = dtLogFrame.Rows[0]["IndicatorName"].ToString();
+                string activityName = dtLogFrame.Rows[0]["ActivityName"].ToString();
+                string dataName = dtLogFrame.Rows[0]["DataName"].ToString();
+
+                string title = string.Format("<table><tr><td valign='top'><b></b></td><td><h1>{0}</h1></td></tr><tr><td valign='top' width='150px'><b><u>Objectif Strategique:</u></b></td><td><h3>{1}</h3></td></tr><tr><td valign='top'><b><u>Objectif Specifique:</u></b></td><td><h3>{2}</h3></td></tr><tr><td valign='top'><b><u>Indicateur:</u></b></td><td><h3>{3}</h3></td></tr><tr><td valign='top'><b><u>Activité:</u></b></td><td><h3>{4}</h3></td></tr><tr><td valign='top'><b><u>Donnée:</u></b></td><td>{5}</td></tr></table>",
+                                                clusterName, strObjName, spcObjName, indicatorName, activityName, dataName);
+
+                titles.Add(title);
+
+                title = string.Format("<table><tr><td><b></b></td><td><h3>{0}</h3></td></tr><tr><td width='150px'><b><u>Objectif Strategique:</u></b></td><td>{1}</td></tr><tr><td><b><u>Objectif Specifique:</u></b></td><td>{2}</td></tr><tr><td><b><u>Indicateur:</u></b></td><td>{3}</td></tr><tr><td><b><u>Activité:</u></b></td><td>{4}</td></tr><tr><td><b><u>Donnée:</u></b></td><td>{5}</td></tr></table>",
+                                                clusterName, strObjName, spcObjName, indicatorName, activityName, dataName);
+
+                titles.Add(title);
+            }
+
+            return titles;
         }
 
         private DataTable GetLocationData(ReportsCommon.LocationType locationType)
@@ -147,18 +190,13 @@ namespace SRFROWCA.Reports
                          .ToArray();
         }
 
-        private void DrawLocaitonChart(Series[] series, string[] category, string title1, string title2)
+        private void DrawLocaitonChart(Series[] series, string[] category)
         {
             Highcharts hc = new Highcharts("Chart")
                 .InitChart(new Chart
                 {
-                    DefaultSeriesType = ChartTypes.Column
+                    DefaultSeriesType = ChartTypes.Bar
 
-                    //MarginTop = 10,
-                })
-                .SetLegend(new Legend
-                {
-                    Margin = 5
                 })
                 .SetCredits(new Credits
                 {
@@ -166,45 +204,33 @@ namespace SRFROWCA.Reports
                 })
                 .SetExporting(new Exporting
                 {
-                    Enabled = true
+                    Enabled = false
                 })
                 .SetTitle(new Title
                 {
-                    UseHTML = true,
-                    Text = title1,
-                     Style = "color: '#000000', fontWeight: 'bold', fontSize: '8px'"
-                    
-                })
-                .SetSubtitle(new Subtitle
-                {
-                    UseHTML = true,
-                    Text = title2
+                    Text = "Achieved Against Target",
+                    //UseHTML = true,
+                    //Style = "fontSize: '14px'",
+                    //Align = HorizontalAligns.Left,
+                    //X = 30
+
                 })
                 .SetXAxis(new XAxis
                 {
                     Categories = category,
-                    Labels = new XAxisLabels
-                    {
-                        Rotation = -45,
-                        Align = HorizontalAligns.Right
+                })
+                .SetYAxis(new YAxis
+                {
+                    Title = new YAxisTitle { 
+                        Text = ""
                     }
                 })
-                .SetYAxis(new[]
-                    {
-                        new YAxis
-                            {
-                                Title = new YAxisTitle { Text = "" },
-                            }
-                    })
                 .SetPlotOptions(new PlotOptions
                 {
-                    Column = new PlotOptionsColumn
+                    Bar = new PlotOptionsBar
                     {
                         PointWidth = 20,
-                        DataLabels = new PlotOptionsColumnDataLabels
-                        {
-                            Enabled = false
-                        },
+                        Stacking = Stackings.Normal                        
                     }
                 })
                 .SetSeries(series);
@@ -218,13 +244,7 @@ namespace SRFROWCA.Reports
             Highcharts hc = new Highcharts("Chart1")
                 .InitChart(new Chart
                 {
-                    DefaultSeriesType = ChartTypes.Column
-
-                    //MarginTop = 10
-                })
-                .SetLegend(new Legend
-                {
-                    Margin = 5
+                    DefaultSeriesType = ChartTypes.Bar
                 })
                 .SetCredits(new Credits
                 {
@@ -232,39 +252,46 @@ namespace SRFROWCA.Reports
                 })
                 .SetTitle(new Title
                 {
-                    Text = ""
+                    Text = "Percentage of Target Achieved"
+                })
+                .SetExporting(new Exporting
+                {
+                    Enabled = false
                 })
                 .SetXAxis(new XAxis
                 {
                     Categories = category,
-                    Labels = new XAxisLabels
+                    Title = new XAxisTitle 
                     {
-                        Rotation = -45,
-                        Align = HorizontalAligns.Right
+                        Text = ""
                     }
                 })
                 .SetYAxis(new[]
                     {
                         new YAxis
                             {
-                                Title = new YAxisTitle { Text = "" },
+                               
+                                Title = new YAxisTitle
+                                {
+                                    Text = ""
+                                }
                             }
                     })
                 .SetPlotOptions(new PlotOptions
                 {
-                    Column = new PlotOptionsColumn
+                    Bar = new PlotOptionsBar
                     {
-                        PointWidth = 20,
-                        DataLabels = new PlotOptionsColumnDataLabels
+                        PointWidth = 15,
+                        DataLabels = new PlotOptionsBarDataLabels
                         {
                             Enabled = true,
-                            Rotation = -90,
+                            //Rotation = -90,
                             Color = ColorTranslator.FromHtml("#FFFFFF"),
                             Align = HorizontalAligns.Right,
-                            X = 3,
-                            Y = 10,
-                            Formatter = "function() { return this.y; }",
-                            Style = "font: 'normal 13px Verdana, sans-serif'"
+                            X = 0,
+                            Y = 0,
+                            Formatter = "function() { return this.y + '%'; }",
+                            Style = "font: 'normal 8px Verdana, sans-serif'"
                         },
                     }
                 })
@@ -274,15 +301,13 @@ namespace SRFROWCA.Reports
 
         public void PrepareTargetAchievedChartData(DataTable dt)
         {
-            string title1 = "Mali - Education <br/> <u>Objectif:</u> Accompagner les mouvements de retour (si la sécurité le permet)";
-            string title2 = "<u>Indicator:</u> Nombre de maisons des vulnerables, réparées ou reconstruites <br/><u>Activity:</u> Réparer ou reconstruire les maison endommagées ou détruites";
             if (dt.Rows.Count > 0)
             {
                 Series[] series = ReportsCommon.GetSeries(dt);
                 DataRow dr = dt.Rows[0];
                 string[] categories = GetCategories(dt);
 
-                DrawLocaitonChart(series, categories, title1, title2);
+                DrawLocaitonChart(series, categories);
             }
             else
             {
@@ -292,7 +317,7 @@ namespace SRFROWCA.Reports
                 };
 
                 string[] categories = { "" };
-                DrawLocaitonChart(series, categories, title1, title2);
+                DrawLocaitonChart(series, categories);
             }
         }
 

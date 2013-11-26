@@ -7,6 +7,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using SRFROWCA.Common;
+using System.Globalization;
+
 
 namespace SRFROWCA.OPS
 {
@@ -26,7 +28,7 @@ namespace SRFROWCA.OPS
                 {
                     OPSLocationEmergencyId = GetEmergencyId();
                     OPSEmergencyClusterId = GetClusterId();
-                    lblCluster.Text = OPSClusterName;
+                    lblCluster.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(OPSClusterName);
                 }
                 PopulateDropDowns();
             }
@@ -40,144 +42,6 @@ namespace SRFROWCA.OPS
         }
 
         #region Events.
-
-        #region Location List Box Events.
-        //protected void btnAddAll_Click(object sender, EventArgs e)
-        //{
-        //    //List<ListItem> sortedList = GetSortedList(lstLocations, lstSelectedLocations, null);
-
-        //    //if (sortedList.Count > 0)
-        //    {
-        //        //TODO:
-        //        LocationRemoved = 0;
-        //        //lstSelectedLocations.Items.Clear();
-        //        //lstSelectedLocations.Items.AddRange(sortedList.ToArray());
-        //    }
-
-        //    // Remove all items from list.
-        //    //lstLocations.Items.Clear();
-
-        //    //if (lstSelectedLocations.Items.Count > 0)
-        //    //{
-        //        //lstSelectedLocations.SelectedIndex = 0;
-        //    //}
-        //}
-        //protected void btnAdd_Click(object sender, EventArgs e)
-        //{
-        //    //if (lstLocations.SelectedIndex > -1)
-        //    //{
-        //    //    LocationRemoved = 0;
-        //    //    List<ListItem> items = new List<ListItem>();
-
-        //    //    for (int i = 0; i < lstLocations.Items.Count; i++)
-        //    //    {
-        //    //        if (lstLocations.Items[i].Selected)
-        //    //        {
-        //    //            items.Add(lstLocations.Items[i]);
-        //    //        }
-        //    //    }
-
-        //    //    foreach (ListItem selectedItem in items)
-        //    //    {
-        //    //        // Get sorted list items.
-        //    //        List<ListItem> sortedList = GetSortedList(lstSelectedLocations, null, selectedItem);
-
-        //    //        if (sortedList.Count > 0)
-        //    //        {
-        //    //            // Clear all items from list box.
-        //    //            lstSelectedLocations.Items.Clear();
-
-        //    //            // Add items in listbox.
-        //    //            lstSelectedLocations.Items.AddRange(sortedList.ToArray());
-        //    //        }
-
-        //    //        // Remove item from selected items phase list(on right);
-        //    //        lstLocations.Items.Remove(selectedItem);
-
-        //    //        // Select first item in selected phases list box.
-        //    //        if (lstSelectedLocations.Items.Count > 0)
-        //    //        {
-        //    //            lstSelectedLocations.SelectedIndex = 0;
-        //    //        }
-
-        //    //        // Select first item in phases list box.
-        //    //        if (lstLocations.Items.Count > 0)
-        //    //        {
-        //    //            lstLocations.SelectedIndex = 0;
-        //    //        }
-        //    //    }
-        //    //}
-
-        //    //btnGetReports_Click(null, null);
-        //}
-        //protected void btnRemove_Click(object sender, EventArgs e)
-        //{
-        //    if (lstSelectedLocations.SelectedIndex > -1)
-        //    {
-        //        LocationRemoved = 1;
-        //        List<ListItem> items = new List<ListItem>();
-
-        //        for (int i = 0; i < lstSelectedLocations.Items.Count; i++)
-        //        {
-        //            if (lstSelectedLocations.Items[i].Selected)
-        //            {
-        //                items.Add(lstSelectedLocations.Items[i]);
-        //            }
-        //        }
-
-        //        foreach (ListItem selectedItem in items)
-        //        {
-        //            // Get sorted list items.
-        //            List<ListItem> sortedList = GetSortedList(lstLocations, null, selectedItem);
-
-        //            if (sortedList.Count > 0)
-        //            {
-        //                // Clear all items from list box.
-        //                lstLocations.Items.Clear();
-
-        //                // Add items in listbox.
-        //                lstLocations.Items.AddRange(sortedList.ToArray());
-        //            }
-
-        //            // Remove item from selected items phase list(on right);
-        //            lstSelectedLocations.Items.Remove(selectedItem);
-
-        //            // Select first item in selected phases list box.
-        //            if (lstSelectedLocations.Items.Count > 0)
-        //            {
-        //                lstSelectedLocations.SelectedIndex = 0;
-        //            }
-
-        //            // Select first item in phases list box.
-        //            if (lstLocations.Items.Count > 0)
-        //            {
-        //                lstLocations.SelectedIndex = 0;
-        //            }
-        //        }
-        //    }
-        //}
-        //protected void btnRemoveAll_Click(object sender, EventArgs e)
-        //{
-        //    List<ListItem> sortedList = GetSortedList(lstSelectedLocations, lstLocations, null);
-
-        //    if (sortedList.Count > 0)
-        //    {
-        //        LocationRemoved = 1;
-        //        lstLocations.Items.Clear();
-        //        lstLocations.Items.AddRange(sortedList.ToArray());
-        //    }
-
-        //    // Remove all items from listboxes.
-        //    lstSelectedLocations.Items.Clear();
-
-        //    // Select first item if exists.
-        //    if (lstLocations.Items.Count > 0)
-        //    {
-        //        lstLocations.SelectedIndex = 0;
-        //    }
-        //}
-        #endregion
-
         #region Button Click Events.
 
         protected void btnGetReports_Click(object sender, EventArgs e)
@@ -254,48 +118,6 @@ namespace SRFROWCA.OPS
                             item.Selected = false;
                         }
                     }
-
-                    //foreach (ListItem item in lstLocations.Items)
-                    //{
-                    //    if (dataSave.Contains(Convert.ToInt32(item.Value)))
-                    //    {
-                    //        ListItem selectedItem = item;
-                    //        itemsToDelete.Add(item);
-
-                    //        // Get sorted list items.
-                    //        List<ListItem> sortedList = GetSortedList(lstSelectedLocations, null, selectedItem);
-
-                    //        if (sortedList.Count > 0)
-                    //        {
-                    //            // Clear all items from list box.
-                    //            lstSelectedLocations.Items.Clear();
-
-                    //            // Add items in listbox.
-                    //            lstSelectedLocations.Items.AddRange(sortedList.ToArray());
-
-                    //            lstSelectedLocations.Items.Clear();
-                    //            lstSelectedLocations.Items.AddRange(sortedList.ToArray());
-                    //        }
-
-                    //        // Select first item in selected phases list box.
-                    //        if (lstSelectedLocations.Items.Count > 0)
-                    //        {
-                    //            lstSelectedLocations.SelectedIndex = 0;
-                    //        }
-
-
-                    //    }
-                    //}
-
-                    //foreach (ListItem item in itemsToDelete)
-                    //{
-                    //    lstLocations.Items.Remove(item);
-                    //}
-
-                    //if (lstLocations.Items.Count > 0)
-                    //{
-                    //    lstLocations.SelectedIndex = 0;
-                    //}
                 }
             }
         }
@@ -355,7 +177,14 @@ namespace SRFROWCA.OPS
 
             if (Request.QueryString["cname"] != null)
             {
-                OPSCountryName = Request.QueryString["cname"].ToString();
+                if (Request.QueryString["cname"].ToString().Equals("burkinafaso"))
+                {
+                    OPSCountryName = "burkina faso";
+                }
+                else
+                {
+                    OPSCountryName = Request.QueryString["cname"].ToString();
+                }
             }
         }
 
@@ -364,10 +193,6 @@ namespace SRFROWCA.OPS
             DataTable dt = new DataTable();
             if (!string.IsNullOrEmpty(OPSCountryName))
             {
-                //Mali Complex Emergency
-                //Mauritania Complex
-                //Burkina Faso Complex
-                //string emergencyName = GetEmergencyName();
                 int isOPSEmergency = 1;
                 dt = DBContext.GetData("GetOPSEmergencyId", new object[] { OPSCountryName, isOPSEmergency });
             }
@@ -578,51 +403,8 @@ namespace SRFROWCA.OPS
             return itemIds;
         }
 
-        //private string GetSelectedLocationIds()
-        //{
-        //    string locationIds = "";
-
-        //    for (int i = 0; i < lstSelectedLocations.Items.Count; i++)
-        //    {
-        //        if (locationIds != "")
-        //        {
-        //            locationIds += "," + lstSelectedLocations.Items[i].Value;
-        //        }
-        //        else
-        //        {
-        //            locationIds += lstSelectedLocations.Items[i].Value;
-        //        }
-        //    }
-
-        //    return locationIds;
-        //}
-
-        //private string GetNotSelectedLocationIds()
-        //{
-        //    string locIdsNotIncluded = "";
-        //    if (LocationRemoved == 1)
-        //    {
-        //        for (int i = 0; i < lstLocations.Items.Count; i++)
-        //        {
-        //            if (locIdsNotIncluded != "")
-        //            {
-        //                locIdsNotIncluded += "," + lstLocations.Items[i].Value;
-        //            }
-        //            else
-        //            {
-        //                locIdsNotIncluded += lstLocations.Items[i].Value;
-        //            }
-        //        }
-        //    }
-
-        //    return locIdsNotIncluded;
-        //}
-
         private DataTable GetActivities()
         {
-            //string locationIds2 = GetSelectedLocationIds();
-            //string locIdsNotIncluded2 = GetNotSelectedLocationIds();
-
             string locationIds = GetSelectedItems(cbAdmin1Locaitons);
             string locIdsNotIncluded = GetNotSelectedItems(cbAdmin1Locaitons);
 
@@ -632,24 +414,12 @@ namespace SRFROWCA.OPS
 
         private void AddLocationsInSelectedList()
         {
-            //lstSelectedLocations.Items.Clear();
             PopulateLocations(LocationId);
         }
 
         private void PopulateLocations(int parentLocationId)
         {
-            //lstLocations.DataValueField = "LocationId";
-            //lstLocations.DataTextField = "LocationName";
-
             DataTable dt = GetChildLocations(parentLocationId);
-            //lstLocations.DataSource = dt;
-            //lstLocations.DataBind();
-
-            //if (lstLocations.Items.Count > 0)
-            //{
-            //    lstLocations.SelectedIndex = 0;
-            //}
-
 
             cbAdmin1Locaitons.DataValueField = "LocationId";
             cbAdmin1Locaitons.DataTextField = "LocationName";
@@ -1199,6 +969,23 @@ namespace SRFROWCA.OPS
             }
         }
 
+        public string OPSClusterNameLabel
+        {
+            get
+            {
+                if (ViewState["OPSClusterNameLabel"] != null)
+                {
+                    return ViewState["OPSClusterNameLabel"].ToString();
+                }
+
+                return "";
+            }
+            set
+            {
+                ViewState["OPSClusterNameLabel"] = value.ToString();
+            }
+        }
+
         public string OPSCountryName
         {
             get
@@ -1277,21 +1064,15 @@ namespace SRFROWCA.OPS
                     string[] words = columnName.Split('^');
                     Label lc = new Label();
                     lc.Width = 40;
-                    lc.Text = "<b>" + words[1] + "</b>";
+                    lc.Text = "<b>" + words[1] + "</b>";                    
                     container.Controls.Add(lc);
-                    //CheckBox cb = new CheckBox();
-                    //if (columnName.Contains('T'))
-                    //{
-                    //    cb.ID = columnName;
-                    //    container.Controls.Add(cb);
-                    //}
                     break;
                 case DataControlRowType.DataRow:
-                    TextBox firstName = new TextBox();
-                    firstName.CssClass = "numeric1";
-                    firstName.Width = 40;
-                    firstName.DataBinding += new EventHandler(this.FirstName_DataBinding);
-                    container.Controls.Add(firstName);
+                    TextBox txtTA = new TextBox();
+                    txtTA.CssClass = "numeric1";
+                    txtTA.Width = 50;
+                    txtTA.DataBinding += new EventHandler(this.FirstName_DataBinding);
+                    container.Controls.Add(txtTA);
                     HiddenField hf = new HiddenField();
                     string[] words1 = columnName.Split('^');
                     hf.Value = words1[0];

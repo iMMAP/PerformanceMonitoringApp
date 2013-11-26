@@ -36,6 +36,18 @@
 
             // Change coloumn size
             $("#<%=gvActivities.ClientID %>").kiketable_colsizable({ minWidth: 30 })
+
+            $('#chkShowHideIndicator').change(function () {
+                if ($(this).is(":checked")) {
+                    $('.testhide').hide();
+                    $('#lblShowHideIndicator').text('Show Indicator/Indicateur');
+                }
+                else {
+                    
+                    $('.testhide').show();
+                    $('#lblShowHideIndicator').text('Hide Indicator/Indicateur');
+                }
+            });
         });
 
         // Filter rows on objects
@@ -54,7 +66,7 @@
                 hideMatchingItemsInDropDown(spcObjOptions, objId)
 
                 // filter (hide) rows from strobj grid.
-                $('.istrow, .altcolor').find('td:nth-child(2)').each(function (i) {
+                $('.istrow, .altcolor').find('td:nth-child(1)').each(function (i) {
                     if ($(this).text() === objId || objId === '0') {
                         $(this).parent().show();
                     }
@@ -69,7 +81,7 @@
                 var strSpcObjId = $('#<%=ddlSpcObjectives.ClientID %> :selected').val();
                 var spcObjId = strSpcObjId.substring(strSpcObjId.indexOf('_') + 1, strSpcObjId.length);
 
-                $('.istrow, .altcolor').find('td:nth-child(3)').each(function (i) {
+                $('.istrow, .altcolor').find('td:nth-child(2)').each(function (i) {
                     if ($(this).text() === spcObjId || spcObjId === '0') {
                         $(this).parent().show();
                     }
@@ -139,9 +151,9 @@
                         }
                     }
                 });
-
+                
                 // Add header row in grid.
-                $(".imagetable").prepend('<colgroup><col /><col /><col /><col /></colgroup><thead><tr style="background-color:ButtonFace;"><th style="width: 5px;">&nbsp;</th><th style="width: 200px;">&nbsp;</th><th style="width: 200px;">&nbsp;</th><th style="width: 200px;">&nbsp;</th>' + list + '</tr></thead>');
+                $(".imagetable").prepend('<colgroup><col /><col /><col /></colgroup><thead><tr style="background-color:ButtonFace;"><th class="testhide" style="width: 200px;">&nbsp;</th><th style="width: 200px;">&nbsp;</th><th style="width: 200px;">&nbsp;</th>' + list + '</tr></thead>');
             }
         }
     </script>
@@ -158,8 +170,8 @@
                 <table style="margin: 0 auto; width: 100%">
                     <tr>
                         <td>
-                            <label>
-                                Cluster:</label>
+                            <clusterlabel>
+                                <b>Cluster:</b></clusterlabel>
                         </td>
                         <td>
                             <asp:Label ID="lblCluster" runat="server" CssClass="clusterLabel"></asp:Label>
@@ -167,8 +179,8 @@
                     </tr>
                     <tr>
                         <td>
-                            <label>
-                                Strategic Objectives:</label>
+                            <clusterlabel>
+                                <b>Strategic Objectives/Objectif Strategique:</b></clusterlabel>
                         </td>
                         <td>
                             <asp:DropDownList ID="ddlStrObjectives" Width="950px" runat="server">
@@ -177,8 +189,8 @@
                     </tr>
                     <tr>
                         <td>
-                            <label>
-                                Specific Objectives:</label>
+                            <clusterlabel>
+                                <b>Cluster Objectives/Objectif:</b></clusterlabel>
                         </td>
                         <td>
                             <asp:DropDownList ID="ddlSpcObjectives" Width="950px" runat="server">
@@ -203,6 +215,10 @@
         </div>
         <div class="spacer" style="clear: both;">
         </div>
+        <input id="chkShowHideIndicator" type="checkbox" />
+        <label id="lblShowHideIndicator">
+            Hide Indicator/Indicateur
+        </label>
     </div>
     <div class="tablegrid">
         <div id="scrolledGridView" style="overflow-x: auto; width: 100%">
@@ -212,20 +228,14 @@
                 <RowStyle CssClass="istrow" />
                 <AlternatingRowStyle CssClass="altcolor" />
                 <Columns>
-                    <asp:TemplateField ItemStyle-CssClass="rownum" ItemStyle-Width="2%">
-                        <ItemTemplate>
-                            <%# Container.DataItemIndex + 1 %>
-                        </ItemTemplate>
-                    </asp:TemplateField>
                     <asp:BoundField DataField="StrObjName" HeaderText="strobj" ItemStyle-Wrap=" false"
                         ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement" />
                     <asp:BoundField DataField="SpcObjName" HeaderText="spcobj" ItemStyle-Wrap=" false"
                         ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement" />
-                    <asp:BoundField DataField="IndicatorName" HeaderText="Indicator" ItemStyle-Wrap=" false"
-                        ItemStyle-Width="350px" />
-                    <asp:BoundField DataField="ActivityName" HeaderText="Activity" ItemStyle-Wrap="false"
-                        ItemStyle-Width="350px" />
-                    <asp:BoundField DataField="DataName" HeaderText="Data" ItemStyle-Wrap="false" ItemStyle-Width="350px" />
+                    <asp:BoundField DataField="IndicatorName" HeaderText="Indicator/Indicateur" ItemStyle-Width="200px"
+                        ItemStyle-CssClass="testhide" HeaderStyle-CssClass="testhide" />
+                    <asp:BoundField DataField="ActivityName" HeaderText="Activity/Activité" ItemStyle-Width="200px" />
+                    <asp:BoundField DataField="DataName" HeaderText="Data/Donnée" ItemStyle-Width="200px" />
                 </Columns>
             </asp:GridView>
         </div>
@@ -264,8 +274,8 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <asp:Button ID="btnClose" runat="server" Text="Close" CssClass="button_location" Width="120px"
-                                                        CausesValidation="false" OnClientClick="needToConfirm = false;" />
+                                                    <asp:Button ID="btnClose" runat="server" Text="Close" CssClass="button_location"
+                                                        Width="120px" CausesValidation="false" OnClientClick="needToConfirm = false;" />
                                                 </td>
                                             </tr>
                                         </table>

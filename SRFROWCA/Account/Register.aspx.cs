@@ -70,7 +70,7 @@ namespace SRFROWCA.Account
                 {
                     try
                     {
-                        string from = "3wopactivities@gmail.com";
+                        string from = txtEmail.Text.Trim();
                         string to = "3wopactivities@gmail.com";
                         string subject = "New 3W Performace Monitoring Account!";
                         string mailBody = "";

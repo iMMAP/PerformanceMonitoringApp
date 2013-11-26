@@ -31,6 +31,8 @@ namespace SRFROWCA.Reports
                     {
                         Name = column.Caption,
                         Data = new Data(locationSeries.ToArray()),
+                        Color = column.Caption.Equals("Target") ? ColorTranslator.FromHtml("#1F77B4") : ColorTranslator.FromHtml("#FF7F0E")
+                        
                         //PlotOptionsColumn = new PlotOptionsColumn{
                         //    PointWidth = 10
                         //}
@@ -57,10 +59,12 @@ namespace SRFROWCA.Reports
                     {
                         Name = "Percentage",
                         Data = new Data(locationSeries.ToArray()),
+
+                        Color = ColorTranslator.FromHtml("#595959"),
                         PlotOptionsColumn = new PlotOptionsColumn
                         {
                             PointWidth = 20
-                        },
+                        }
                     };
                 }
             }

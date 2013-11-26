@@ -19,7 +19,7 @@ namespace SRFROWCA.Account
             if (IsPostBack) return;
 
             this.Form.DefaultButton = this.btnSubmit.UniqueID;
-            this.Form.DefaultFocus = this.txtUserName.UniqueID;
+            this.SetFocus(this.txtUserName);
 
             if (Session["FromResetPageError"] != null)
             {

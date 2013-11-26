@@ -3,6 +3,11 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+<style>
+       #MainContent_cblLocations td {
+    padding: 0 40px 0 0;
+}
+</style>
     <script src="../Scripts/jquery.numeric.min.js" type="text/javascript"></script>
     <script type="text/javascript">
 
@@ -342,7 +347,7 @@
                                         <table border="0" style="margin: 0 auto;">
                                             <tr>
                                                 <td>
-                                                    <asp:CheckBoxList ID="cblLocations" runat="server" RepeatColumns="4" RepeatDirection="Horizontal">
+                                                    <asp:CheckBoxList ID="cblLocations" runat="server" RepeatColumns="4" RepeatDirection="Horizontal" CssClass="columnGap">
                                                     </asp:CheckBoxList>
                                                 </td>
                                             </tr>
