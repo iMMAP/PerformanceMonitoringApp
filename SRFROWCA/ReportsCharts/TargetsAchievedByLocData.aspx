@@ -27,7 +27,7 @@
                 <label>
                     Data:</label>
                 <div>
-                    <asp:DropDownList ID="ddlData" runat="server" AutoPostBack="true" Width="100px" OnSelectedIndexChanged="ddlData_SelectedIndexChanged">
+                    <asp:DropDownList ID="ddlData"  runat="server" AutoPostBack="true" Width="100px" OnSelectedIndexChanged="ddlData_SelectedIndexChanged">
                     </asp:DropDownList>
                 </div>
             </div>
@@ -78,7 +78,7 @@
                 <div class="" style="margin-top: 30px;">
                     <div style="width: 400px; float: left;">
                         <asp:Literal ID="ltrChart" runat="server" ViewStateMode="Disabled"></asp:Literal>
-                        <asp:HiddenField ID="hfChart" runat="server" ViewStateMode="Disabled" />
+                        
                     </div>
                     <div style="width: 30px; float: left;">
                         &nbsp;</div>

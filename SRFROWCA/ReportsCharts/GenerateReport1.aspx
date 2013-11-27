@@ -401,7 +401,7 @@
                     if (n > 1) {
                         svg = svg.replace(xmlnsString, '');
                     }
-
+                    
                     $.ajax({
                         async: false,
                         type: "POST",

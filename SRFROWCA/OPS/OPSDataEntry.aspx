@@ -9,8 +9,16 @@
 
         window.onbeforeunload = confirmExit;
         function confirmExit() {
-            if (needToConfirm)
-                return "";
+            if (needToConfirm) {
+                var message = '';
+                var e = e || window.event;
+                // For IE and Firefox prior to version 4
+                if (e) {
+                    e.returnValue = message;
+                }
+                // For Safari
+                return message;
+            }
         }
 
         var launch = false;
@@ -18,9 +26,18 @@
             launch = true;
         }
 
+        var launchUserActivity = false;
+        function launchUserActivityModal() {
+            launchUserActivity = true;
+        }
+
         function pageLoad() {
             if (launch) {
                 $find("mpeAddActivity").show();
+            }
+
+            if (launchUserActivity) {
+                $find("mpeUserActivity").show();
             }
         }
     </script>
@@ -37,15 +54,23 @@
             // Change coloumn size
             $("#<%=gvActivities.ClientID %>").kiketable_colsizable({ minWidth: 30 })
 
-            $('#chkShowHideIndicator').change(function () {
-                if ($(this).is(":checked")) {
-                    $('.testhide').hide();
-                    $('#lblShowHideIndicator').text('Show Indicator/Indicateur');
-                }
-                else {
-                    
+            if ($('#<%=chkShowHideIndicator.ClientID%>').is(":checked")) {
+                $('.testhide').show();
+                $('#lblShowHideIndicator').text('Hide Indicator/Indicateur');
+            }
+            else {
+                $('.testhide').hide();
+                $('#lblShowHideIndicator').text('Show Indicator/Indicateur');
+            }
+
+            $('#<%=chkShowHideIndicator.ClientID%>').click(function () {
+                if ($('#<%=chkShowHideIndicator.ClientID%>').is(":checked")) {
                     $('.testhide').show();
                     $('#lblShowHideIndicator').text('Hide Indicator/Indicateur');
+                }
+                else {
+                    $('.testhide').hide();
+                    $('#lblShowHideIndicator').text('Show Indicator/Indicateur');
                 }
             });
         });
@@ -126,7 +151,8 @@
 
         // Split location namde and 'T' (means Target) and 'A' (means Achieved)
         function splitLocationFromTA() {
-            if (!(/chrom(e|ium)/.test(navigator.userAgent.toLowerCase()))) {
+            //if (!(/chrom(e|ium)/.test(navigator.userAgent.toLowerCase()))) 
+            {
                 var list = '';
                 var list2 = '';
                 var j = 0;
@@ -151,7 +177,7 @@
                         }
                     }
                 });
-                
+
                 // Add header row in grid.
                 $(".imagetable").prepend('<colgroup><col /><col /><col /></colgroup><thead><tr style="background-color:ButtonFace;"><th class="testhide" style="width: 200px;">&nbsp;</th><th style="width: 200px;">&nbsp;</th><th style="width: 200px;">&nbsp;</th>' + list + '</tr></thead>');
             }
@@ -163,7 +189,7 @@
     </div>
     <div class="containerOPS">
         <div class="graybar">
-            Select Your Options To Report On
+            Filter Activities
         </div>
         <div class="contentarea">
             <div class="formdiv">
@@ -208,14 +234,18 @@
     <div class="buttonsdiv">
         <div class="savebutton">
             <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
-                CausesValidation="true" Width="120" CssClass="button_example" /></div>
+                CausesValidation="true" Width="120" CssClass="button_example" />
+            <input type="button" class="button_example" value="Close Window" id="close" onclick="window.close()" />
+        </div>
         <div class="buttonright">
             <asp:Button ID="btnOpenLocations" runat="server" Text="Locations" CausesValidation="false"
                 CssClass="button_location" OnClick="btnLocation_Click" OnClientClick="needToConfirm = false;" />
         </div>
         <div class="spacer" style="clear: both;">
         </div>
-        <input id="chkShowHideIndicator" type="checkbox" />
+        <asp:CheckBox ID="chkShowHideIndicator" class="tempClassIndicator" runat="server"
+            Text="" />
+        <%--<input id="chkShowHideIndicator" type="checkbox" />--%>
         <label id="lblShowHideIndicator">
             Hide Indicator/Indicateur
         </label>
@@ -243,7 +273,10 @@
     <div class="buttonsdiv">
         <div class="savebutton">
             <asp:Button ID="btnSave2" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
-                CausesValidation="true" Width="120px" CssClass="button_example" /></div>
+                CausesValidation="true" Width="120px" CssClass="button_example" />
+            <asp:Button ID="btnUserActivity" runat="server" OnClick="btnUserActivity_Click" Text="Add User Activities"
+                OnClientClick="needToConfirm = false;" CausesValidation="true" Width="150px"
+                CssClass="button_location" /></div>
         <div class="buttonright">
         </div>
         <div class="spacer" style="clear: both;">
@@ -289,6 +322,106 @@
                         </ContentTemplate>
                         <Triggers>
                             <asp:PostBackTrigger ControlID="btnClose" />
+                        </Triggers>
+                    </asp:UpdatePanel>
+                </asp:Panel>
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td>
+                <input type="button" id="btnUserActivities" runat="server" style="display: none;" />
+                <asp:ModalPopupExtender ID="mpeUserActivity" BehaviorID="mpeUserActivity" runat="server"
+                    TargetControlID="btnUserActivities" PopupControlID="pnlUserActivity" BackgroundCssClass="modalpopupbackground">
+                </asp:ModalPopupExtender>
+                <asp:Panel ID="pnlUserActivity" runat="server" Width="70%">
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <div class="containerPopup">
+                                <div class="graybar">
+                                    Admin1 Locations
+                                </div>
+                                <div class="contentarea">
+                                    <div class="formdiv">
+                                        <table border="0" style="margin: 0 auto;">
+                                            <tr>
+                                                <td>
+                                                    Cluster:
+                                                </td>
+                                                <td>
+                                                    Education
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Strategic Objective:
+                                                </td>
+                                                <td>
+                                                    <asp:DropDownList ID="ddlUserStrObj" runat="server" Width="90%" OnSelectedIndexChanged="ddlUserStrObj_SelectedIndexChanged"
+                                                        AutoPostBack="true">
+                                                    </asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Specific Objective:
+                                                </td>
+                                                <td>
+                                                    <asp:DropDownList ID="ddlUserSpcObj" runat="server" Width="90%" OnSelectedIndexChanged="ddlUserSpcObj_SelectedIndexChanged"
+                                                        AutoPostBack="true">
+                                                    </asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Indicator:
+                                                </td>
+                                                <td>
+                                                    <asp:DropDownList ID="ddlUserIndicator" runat="server" Width="45%" OnSelectedIndexChanged="ddlUserIndicator_SelectedIndexChanged"
+                                                        AutoPostBack="true">
+                                                    </asp:DropDownList>
+                                                    <asp:TextBox ID="txtUserIndicator" runat="server" Width="45%"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Activity:
+                                                </td>
+                                                <td>
+                                                    <asp:DropDownList ID="ddlUserActivitiy" runat="server" Width="45%" OnSelectedIndexChanged="ddlUserActivity_SelectedIndexChanged"
+                                                        AutoPostBack="true">
+                                                    </asp:DropDownList>
+                                                    <asp:TextBox ID="txtUserActivity" runat="server" Width="45%"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Data:
+                                                </td>
+                                                <td>
+                                                    <%--<asp:DropDownList ID="ddlUserData" runat="server" Width="35%">
+                                                    </asp:DropDownList>--%>
+                                                    <asp:TextBox ID="txtUserData" runat="server" Width="90%"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Button ID="btnCloseUserActivities" runat="server" Text="Close" CssClass="button_location"
+                                                        Width="120px" CausesValidation="false" OnClientClick="needToConfirm = false;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <div class="spacer" style="clear: both;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="graybarcontainer">
+                                </div>
+                            </div>
+                        </ContentTemplate>
+                        <Triggers>
+                            <asp:PostBackTrigger ControlID="btnCloseUserActivities" />
                         </Triggers>
                     </asp:UpdatePanel>
                 </asp:Panel>

@@ -51,6 +51,12 @@ namespace SRFROWCA.OPS
             BindGridData();
             UpdateGridWithData();
         }
+
+        protected void btnUserActivity_Click(object sender, EventArgs e)
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "key1", "launchUserActivityModal();", true);
+        }
+
         protected void btnLocation_Click(object sender, EventArgs e)
         {
             ClientScript.RegisterStartupScript(this.GetType(), "key", "launchModal();", true);
@@ -245,12 +251,6 @@ namespace SRFROWCA.OPS
             ddlStrObjectives.DataSource = dt;
             ddlStrObjectives.DataBind();
 
-            //cbStrObj.DataValueField = "StrategicObjectiveId";
-            //cbStrObj.DataTextField = "StrategicObjectiveName";
-
-            //cbStrObj.DataSource = dt;
-            //cbStrObj.DataBind();
-
             if (ddlStrObjectives.Items.Count > 1)
             {
                 ListItem item = new ListItem("Select Str Objective", "0");
@@ -260,6 +260,94 @@ namespace SRFROWCA.OPS
             {
                 PopulateSpcObjectives();
             }
+
+
+            ddlUserStrObj.DataValueField = "StrategicObjectiveId";
+            ddlUserStrObj.DataTextField = "StrategicObjectiveName";
+
+            ddlUserStrObj.DataSource = dt;
+            ddlUserStrObj.DataBind();
+
+            if (ddlUserStrObj.Items.Count > 1)
+            {
+                ListItem item = new ListItem("Select Str Objective", "0");
+                ddlUserStrObj.Items.Insert(0, item);
+            }
+        }
+
+        protected void ddlUserStrObj_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int strObjId = 0;
+            int.TryParse(ddlUserStrObj.SelectedValue, out strObjId);
+            PopulateUserSpcObjectives(strObjId);
+        }
+
+        protected void ddlUserSpcObj_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int spcObjId = 0;
+            int.TryParse(ddlUserSpcObj.SelectedValue, out spcObjId);
+            PopulateIndicators(spcObjId);
+        }
+
+        protected void ddlUserIndicator_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int indicatorId = 0;
+            int.TryParse(ddlUserIndicator.SelectedValue, out indicatorId);
+            PopulateActivities(indicatorId);
+        }
+
+        protected void ddlUserActivity_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //int activityId = 0;
+            //int.TryParse(ddlUserActivitiy.SelectedValue, out activityId);
+            //PopulateData(activityId);
+        }
+
+        //private void PopulateData(int activityId)
+        //{
+        //    ddlUserData.DataValueField = "ActivityDataId";
+        //    ddlUserData.DataTextField = "DataName";
+        //    ddlUserData.DataSource = GetActivityData(activityId);
+        //    ddlUserData.DataBind();
+        //}
+
+        //private object GetActivityData(int activityId)
+        //{
+        //    return DBContext.GetData("GetActivityData", new object[] { activityId });
+        //}
+
+        private void PopulateIndicators(int objId)
+        {
+            ddlUserIndicator.DataValueField = "ObjectiveIndicatorId";
+            ddlUserIndicator.DataTextField = "IndicatorName";
+
+            ddlUserIndicator.DataSource = GetObjectiveIndicators(objId);
+            ddlUserIndicator.DataBind();
+
+            ListItem item = new ListItem("Select Indicator", "0");
+            ddlUserIndicator.Items.Insert(0, item);
+        }
+
+        private object GetObjectiveIndicators(int objId)
+        {
+            return DBContext.GetData("GetObjectiveIndicators", new object[] { objId });
+        }
+
+        private void PopulateActivities(int indicatorId)
+        {
+            ddlUserActivitiy.DataValueField = "IndicatorActivityId";
+            ddlUserActivitiy.DataTextField = "ActivityName";
+
+            ddlUserActivitiy.DataSource = GetIndicatorActivities(indicatorId);
+            ddlUserActivitiy.DataBind();
+
+            ListItem item = new ListItem("Select Activity", "0");
+            ddlUserActivitiy.Items.Insert(0, item);
+        }
+
+        private object GetIndicatorActivities(int indicatorId)
+        {
+            return DBContext.GetData("GetIndicatorActivities", new object[] { indicatorId });
         }
 
         private DataTable GetStrategicObjectives()
@@ -272,6 +360,22 @@ namespace SRFROWCA.OPS
             int strObjId = 0;
             int.TryParse(ddlStrObjectives.SelectedValue, out strObjId);
             PopulateObjectives();
+        }
+
+        private void PopulateUserSpcObjectives(int strObjId)
+        {
+            ddlUserSpcObj.DataValueField = "ClusterObjectiveId";
+            ddlUserSpcObj.DataTextField = "ObjectiveName";
+
+            DataTable dt = DBContext.GetData("GetAllSpecifObjectivesOfAStrObjective", new object[] { strObjId });
+            ddlUserSpcObj.DataSource = dt;
+            ddlUserSpcObj.DataBind();
+
+            if (ddlUserSpcObj.Items.Count > 0)
+            {
+                ListItem item = new ListItem("Select Specific Objective", "0");
+                ddlUserSpcObj.Items.Insert(0, item);
+            }
         }
 
         private void PopulateObjectives()
@@ -819,7 +923,7 @@ namespace SRFROWCA.OPS
                     TextBox txt = e.Row.FindControl(colName) as TextBox;
                     if (txt != null)
                     {
-                        if (txt.Text == "-1.00")
+                        if (txt.Text == "-1")
                         {
                             txt.Text = "";
                         }
@@ -1064,13 +1168,14 @@ namespace SRFROWCA.OPS
                     string[] words = columnName.Split('^');
                     Label lc = new Label();
                     lc.Width = 40;
-                    lc.Text = "<b>" + words[1] + "</b>";                    
+                    lc.Text = "<b>" + words[1] + "</b>";
                     container.Controls.Add(lc);
                     break;
                 case DataControlRowType.DataRow:
                     TextBox txtTA = new TextBox();
                     txtTA.CssClass = "numeric1";
-                    txtTA.Width = 50;
+                    txtTA.Width = 43;
+                    txtTA.Style["font-size"] = 10 + "px";
                     txtTA.DataBinding += new EventHandler(this.FirstName_DataBinding);
                     container.Controls.Add(txtTA);
                     HiddenField hf = new HiddenField();

@@ -70,9 +70,34 @@ namespace SRFROWCA.Reports
                 divTitle.InnerHtml = titles[0];
                 divTitle2.InnerHtml = titles[1];
             }
-            PreparePercentageChartData(dt);
-            PrepareTargetAchievedChartData(dt);
 
+            int chartHeight = GetChartHeight(dt);
+
+            PrepareTargetAchievedChartData(dt, chartHeight);
+            PreparePercentageChartData(dt, chartHeight);
+
+        }
+
+        private int GetChartHeight(DataTable dt)
+        {
+            if (dt.Rows.Count <= 10)
+            {
+                return 400;
+            }
+            else if (dt.Rows.Count <= 15)
+            {
+                return 500;
+            }
+            else if (dt.Rows.Count <= 20)
+            {
+                return 600;
+            }
+            else if (dt.Rows.Count <= 25)
+            {
+                return 650;
+            }
+
+            return 700;
         }
 
         private DataTable GetLogFrameData()
@@ -95,12 +120,15 @@ namespace SRFROWCA.Reports
                 string activityName = dtLogFrame.Rows[0]["ActivityName"].ToString();
                 string dataName = dtLogFrame.Rows[0]["DataName"].ToString();
 
-                string title = string.Format("<table><tr><td valign='top'><b></b></td><td><h1>{0}</h1></td></tr><tr><td valign='top' width='150px'><b><u>Objectif Strategique:</u></b></td><td><h3>{1}</h3></td></tr><tr><td valign='top'><b><u>Objectif Specifique:</u></b></td><td><h3>{2}</h3></td></tr><tr><td valign='top'><b><u>Indicateur:</u></b></td><td><h3>{3}</h3></td></tr><tr><td valign='top'><b><u>Activité:</u></b></td><td><h3>{4}</h3></td></tr><tr><td valign='top'><b><u>Donnée:</u></b></td><td>{5}</td></tr></table>",
+                string title = string.Format("<table><tr><td colspan='2'><h1>{0}</h1></td></tr><tr><td valign='top' width='150px'>Objectif Strategique:</td><td><strong style='font-size: 18px;'>{1}</strong></td></tr><tr><td valign='top'>Objectif Specifique:</td><td><strong style='font-size: 16px;'>{2}</strong></td></tr><tr><td valign='top'>Indicateur:</td><td><strong style='font-size: 14px;'>{3}</strong></td></tr><tr><td valign='top'>Activité:</td><td><strong style='font-size: 12px;'>{4}</strong></td></tr><tr><td valign='top'>Donnée:</td><td>{5}</td></tr></table>",
                                                 clusterName, strObjName, spcObjName, indicatorName, activityName, dataName);
 
                 titles.Add(title);
 
-                title = string.Format("<table><tr><td><b></b></td><td><h3>{0}</h3></td></tr><tr><td width='150px'><b><u>Objectif Strategique:</u></b></td><td>{1}</td></tr><tr><td><b><u>Objectif Specifique:</u></b></td><td>{2}</td></tr><tr><td><b><u>Indicateur:</u></b></td><td>{3}</td></tr><tr><td><b><u>Activité:</u></b></td><td>{4}</td></tr><tr><td><b><u>Donnée:</u></b></td><td>{5}</td></tr></table>",
+                //title = string.Format("<table><tr><td colspan='2'><h3>{0}</h3></td></tr><tr><td width='150px'>Objectif Strategique:</td><td>{1}</td></tr><tr><td>Objectif Specifique:</td><td>{2}</td></tr><tr><td>Indicateur:</td><td>{3}</td></tr><tr><td>Activité:</td><td>{4}</td></tr><tr><td>Donnée:</td><td>{5}</td></tr></table>",
+                //                                clusterName, strObjName, spcObjName, indicatorName, activityName, dataName);
+
+                title = string.Format("<table><tr><td colspan='2'><h1>{0}</h1></td></tr><tr><td valign='top' width='150px'>Objectif Strategique:</td><td><strong style='font-size: 18px;'>{1}</strong></td></tr><tr><td valign='top'>Objectif Specifique:</td><td><strong style='font-size: 16px;'>{2}</strong></td></tr><tr><td valign='top'>Indicateur:</td><td><strong style='font-size: 14px;'>{3}</strong></td></tr><tr><td valign='top'>Activité:</td><td><strong style='font-size: 12px;'>{4}</strong></td></tr><tr><td valign='top'>Donnée:</td><td>{5}</td></tr></table>",
                                                 clusterName, strObjName, spcObjName, indicatorName, activityName, dataName);
 
                 titles.Add(title);
@@ -190,13 +218,13 @@ namespace SRFROWCA.Reports
                          .ToArray();
         }
 
-        private void DrawLocaitonChart(Series[] series, string[] category)
+        private void DrawLocaitonChart(Series[] series, string[] category, int chartHeight)
         {
             Highcharts hc = new Highcharts("Chart")
                 .InitChart(new Chart
                 {
-                    DefaultSeriesType = ChartTypes.Bar
-
+                    DefaultSeriesType = ChartTypes.Bar,
+                    Height = chartHeight
                 })
                 .SetCredits(new Credits
                 {
@@ -229,7 +257,7 @@ namespace SRFROWCA.Reports
                 {
                     Bar = new PlotOptionsBar
                     {
-                        PointWidth = 20,
+                        PointWidth = chartHeight == 700 ? 15 : 20,
                         Stacking = Stackings.Normal                        
                     }
                 })
@@ -239,12 +267,13 @@ namespace SRFROWCA.Reports
 
         }
 
-        private void DrawPercentageChart(Series[] series, string[] category)
+        private void DrawPercentageChart(Series[] series, string[] category, int chartHeight)
         {
             Highcharts hc = new Highcharts("Chart1")
                 .InitChart(new Chart
                 {
-                    DefaultSeriesType = ChartTypes.Bar
+                    DefaultSeriesType = ChartTypes.Bar,
+                    Height = chartHeight
                 })
                 .SetCredits(new Credits
                 {
@@ -281,7 +310,6 @@ namespace SRFROWCA.Reports
                 {
                     Bar = new PlotOptionsBar
                     {
-                        PointWidth = 15,
                         DataLabels = new PlotOptionsBarDataLabels
                         {
                             Enabled = true,
@@ -293,13 +321,14 @@ namespace SRFROWCA.Reports
                             Formatter = "function() { return this.y + '%'; }",
                             Style = "font: 'normal 8px Verdana, sans-serif'"
                         },
+                        PointWidth = chartHeight > 700 ? 10 : chartHeight == 600 ? 15 : 20
                     }
                 })
                 .SetSeries(series);
             ltrChartPercentage.Text = hc.ToHtmlString();
         }
 
-        public void PrepareTargetAchievedChartData(DataTable dt)
+        public void PrepareTargetAchievedChartData(DataTable dt, int chartHeight)
         {
             if (dt.Rows.Count > 0)
             {
@@ -307,7 +336,7 @@ namespace SRFROWCA.Reports
                 DataRow dr = dt.Rows[0];
                 string[] categories = GetCategories(dt);
 
-                DrawLocaitonChart(series, categories);
+                DrawLocaitonChart(series, categories, chartHeight);
             }
             else
             {
@@ -317,17 +346,17 @@ namespace SRFROWCA.Reports
                 };
 
                 string[] categories = { "" };
-                DrawLocaitonChart(series, categories);
+                DrawLocaitonChart(series, categories, chartHeight);
             }
         }
 
-        public void PreparePercentageChartData(DataTable dt)
+        public void PreparePercentageChartData(DataTable dt, int chartHeight)
         {
             if (dt.Rows.Count > 0)
             {
                 Series[] series = ReportsCommon.GetPercentageSeries(dt);
                 string[] categories = GetCategories(dt);
-                DrawPercentageChart(series, categories);
+                DrawPercentageChart(series, categories, chartHeight);
             }
             else
             {
@@ -337,7 +366,7 @@ namespace SRFROWCA.Reports
                 };
 
                 string[] categories = { "" };
-                DrawPercentageChart(series, categories);
+                DrawPercentageChart(series, categories, chartHeight);
             }
         }
 
@@ -358,7 +387,7 @@ namespace SRFROWCA.Reports
             }
 
             int? dataId = GetSelectedValue(ddlData);
-            hfChart.Value = dataId.ToString();
+            
             return new object[] { locationIds, locationTypeId, dataId };
         }
 
