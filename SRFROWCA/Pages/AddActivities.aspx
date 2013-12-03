@@ -8,6 +8,8 @@
     padding: 0 40px 0 0;
 }
 </style>
+    <script type="text/javascript" src="../Scripts/jquery.kiketable.colsizable-1.1.min.js"></script>
+    <script type="text/javascript" src="../Scripts/jquery.event.drag-1.4.min.js"></script>
     <script src="../Scripts/jquery.numeric.min.js" type="text/javascript"></script>
     <script type="text/javascript">
 

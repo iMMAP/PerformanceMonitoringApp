@@ -7,12 +7,9 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="~/Styles/Site.min.css" />
     <link rel="stylesheet" type="text/css" href="~/Styles/style.css" />
-    <link rel="stylesheet" type="text/css" href="~/Styles/menu.css" />
-    <link rel="stylesheet" type="text/css" href="~/Styles/loginareamenu.css" />
     <script src="http://code.jquery.com/jquery-1.10.1.min.js" type="text/javascript"></script>
     <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="<%# BaseURL %>/Scripts/jquery.kiketable.colsizable-1.1.min.js"></script>
-    <script type="text/javascript" src="<%# BaseURL %>/Scripts/jquery.event.drag-1.4.min.js"></script>
+    
     <script type="text/javascript" src="<%# BaseURL %>/Scripts/jquery.fixedMenu.js"></script>
     <script type="text/javascript">
         var myMessages = ['info', 'warning', 'error', 'success'];

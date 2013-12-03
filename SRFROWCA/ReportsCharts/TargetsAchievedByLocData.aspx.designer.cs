@@ -13,15 +13,6 @@ namespace SRFROWCA.Reports {
     public partial class TargetsAchievedByLocData {
         
         /// <summary>
-        /// ddlData control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlData;
-        
-        /// <summary>
         /// ddlCountry control.
         /// </summary>
         /// <remarks>
@@ -47,6 +38,15 @@ namespace SRFROWCA.Reports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Saplin.Controls.DropDownCheckBoxes ddlLocations;
+        
+        /// <summary>
+        /// ddlData control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlData;
         
         /// <summary>
         /// divTitle2 control.

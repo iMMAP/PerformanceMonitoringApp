@@ -753,6 +753,12 @@
   <ItemGroup>
     <WebReferences Include="Web References\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="OPS\App_LocalResources\OPSDataEntry.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="OPS\App_LocalResources\OPSDataEntry.aspx.fr.resx" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>

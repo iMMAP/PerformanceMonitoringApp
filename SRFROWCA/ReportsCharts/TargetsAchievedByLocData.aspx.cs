@@ -19,8 +19,8 @@ namespace SRFROWCA.Reports
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
-            PopulateDataDropDown();
             PopulateCountry();
+            PopulateDataDropDown();
             PopulateLocationDropDowns();
 
             LastLocationType = ReportsCommon.LocationType.Country;
@@ -32,8 +32,15 @@ namespace SRFROWCA.Reports
             ddlData.DataValueField = "ActivityDataId";
             ddlData.DataTextField = "DataName";
 
-            ddlData.DataSource = DBContext.GetData("GetDataWithActivityIndicator");
+            ddlData.DataSource = GetActiviytData();
             ddlData.DataBind();
+        }
+
+        private DataTable GetActiviytData()
+        {
+            int countryId = 0;
+            int.TryParse(ddlCountry.SelectedValue, out countryId);
+            return DBContext.GetData("GetAllLogFrameDataOnLocation", new object[] { countryId });
         }
 
         protected void ddlData_SelectedIndexChanged(object sender, EventArgs e)
@@ -55,6 +62,7 @@ namespace SRFROWCA.Reports
         protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
             PopulateLocationDropDowns();
+            PopulateDataDropDown();
             LastLocationType = ReportsCommon.LocationType.Country;
             DrawChart(LastLocationType);
         }
@@ -75,7 +83,6 @@ namespace SRFROWCA.Reports
 
             PrepareTargetAchievedChartData(dt, chartHeight);
             PreparePercentageChartData(dt, chartHeight);
-
         }
 
         private int GetChartHeight(DataTable dt)
@@ -120,7 +127,7 @@ namespace SRFROWCA.Reports
                 string activityName = dtLogFrame.Rows[0]["ActivityName"].ToString();
                 string dataName = dtLogFrame.Rows[0]["DataName"].ToString();
 
-                string title = string.Format("<table><tr><td colspan='2'><h1>{0}</h1></td></tr><tr><td valign='top' width='150px'>Objectif Strategique:</td><td><strong style='font-size: 18px;'>{1}</strong></td></tr><tr><td valign='top'>Objectif Specifique:</td><td><strong style='font-size: 16px;'>{2}</strong></td></tr><tr><td valign='top'>Indicateur:</td><td><strong style='font-size: 14px;'>{3}</strong></td></tr><tr><td valign='top'>Activité:</td><td><strong style='font-size: 12px;'>{4}</strong></td></tr><tr><td valign='top'>Donnée:</td><td>{5}</td></tr></table>",
+                string title = string.Format("<table><tr><td colspan='2'><h1>{0}</h1></td></tr><tr><td valign='top' width='150px'>Objectif Strategique:</td><td><strong style='font-size: 16px;'>{1}</strong></td></tr><tr><td valign='top'>Objectif Specifique:</td><td><strong style='font-size: 15px;'>{2}</strong></td></tr><tr><td valign='top'>Indicateur:</td><td><strong style='font-size: 14px;'>{3}</strong></td></tr><tr><td valign='top'>Activité:</td><td><strong style='font-size: 13px;'>{4}</strong></td></tr><tr><td valign='top'>Donnée:</td><td>{5}</td></tr></table>",
                                                 clusterName, strObjName, spcObjName, indicatorName, activityName, dataName);
 
                 titles.Add(title);
@@ -128,7 +135,7 @@ namespace SRFROWCA.Reports
                 //title = string.Format("<table><tr><td colspan='2'><h3>{0}</h3></td></tr><tr><td width='150px'>Objectif Strategique:</td><td>{1}</td></tr><tr><td>Objectif Specifique:</td><td>{2}</td></tr><tr><td>Indicateur:</td><td>{3}</td></tr><tr><td>Activité:</td><td>{4}</td></tr><tr><td>Donnée:</td><td>{5}</td></tr></table>",
                 //                                clusterName, strObjName, spcObjName, indicatorName, activityName, dataName);
 
-                title = string.Format("<table><tr><td colspan='2'><h1>{0}</h1></td></tr><tr><td valign='top' width='150px'>Objectif Strategique:</td><td><strong style='font-size: 18px;'>{1}</strong></td></tr><tr><td valign='top'>Objectif Specifique:</td><td><strong style='font-size: 16px;'>{2}</strong></td></tr><tr><td valign='top'>Indicateur:</td><td><strong style='font-size: 14px;'>{3}</strong></td></tr><tr><td valign='top'>Activité:</td><td><strong style='font-size: 12px;'>{4}</strong></td></tr><tr><td valign='top'>Donnée:</td><td>{5}</td></tr></table>",
+                title = string.Format("<table><tr><td colspan='2'><h2>{0}</h2></td></tr><tr><td valign='top' width='150px'>Objectif Strategique:</td><td><strong style='font-size: 13px;'>{1}</strong></td></tr><tr><td valign='top'>Objectif Specifique:</td><td><strong style='font-size: 12px;'>{2}</strong></td></tr><tr><td valign='top'>Indicateur:</td><td><strong style='font-size: 12px;'>{3}</strong></td></tr><tr><td valign='top'>Activité:</td><td><strong style='font-size: 12px;'>{4}</strong></td></tr><tr><td valign='top'>Donnée:</td><td>{5}</td></tr></table>",
                                                 clusterName, strObjName, spcObjName, indicatorName, activityName, dataName);
 
                 titles.Add(title);
@@ -224,7 +231,8 @@ namespace SRFROWCA.Reports
                 .InitChart(new Chart
                 {
                     DefaultSeriesType = ChartTypes.Bar,
-                    Height = chartHeight
+                    Height = chartHeight,
+                    MarginTop = 70
                 })
                 .SetCredits(new Credits
                 {
@@ -233,6 +241,13 @@ namespace SRFROWCA.Reports
                 .SetExporting(new Exporting
                 {
                     Enabled = false
+                })
+                .SetLegend(new Legend 
+                { 
+                    VerticalAlign = VerticalAligns.Top,
+                    Y = 30,
+                    ItemStyle = "fontSize: '9px'"
+                    
                 })
                 .SetTitle(new Title
                 {
@@ -249,7 +264,8 @@ namespace SRFROWCA.Reports
                 })
                 .SetYAxis(new YAxis
                 {
-                    Title = new YAxisTitle { 
+                    Title = new YAxisTitle
+                    {
                         Text = ""
                     }
                 })
@@ -258,7 +274,7 @@ namespace SRFROWCA.Reports
                     Bar = new PlotOptionsBar
                     {
                         PointWidth = chartHeight == 700 ? 15 : 20,
-                        Stacking = Stackings.Normal                        
+                        Stacking = Stackings.Normal
                     }
                 })
                 .SetSeries(series);
@@ -273,7 +289,8 @@ namespace SRFROWCA.Reports
                 .InitChart(new Chart
                 {
                     DefaultSeriesType = ChartTypes.Bar,
-                    Height = chartHeight
+                    Height = chartHeight,
+                    MarginTop = 70
                 })
                 .SetCredits(new Credits
                 {
@@ -286,6 +303,13 @@ namespace SRFROWCA.Reports
                 .SetExporting(new Exporting
                 {
                     Enabled = false
+                })
+                .SetLegend(new Legend
+                {
+                    VerticalAlign = VerticalAligns.Top,
+                    Y = 30,
+                    ItemStyle = "fontSize: '9px'"
+
                 })
                 .SetXAxis(new XAxis
                 {

@@ -22,23 +22,15 @@
             }
         }
 
+    </script>
+    <script type="text/javascript">
         var launch = false;
         function launchModal() {
             launch = true;
         }
-
-        var launchUserActivity = false;
-        function launchUserActivityModal() {
-            launchUserActivity = true;
-        }
-
         function pageLoad() {
             if (launch) {
                 $find("mpeAddActivity").show();
-            }
-
-            if (launchUserActivity) {
-                $find("mpeUserActivity").show();
             }
         }
     </script>
@@ -54,53 +46,11 @@
 
             // Change coloumn size
             $("#<%=gvActivities.ClientID %>").kiketable_colsizable({ minWidth: 30 })
-
-            if ($('#<%=chkShowHideIndicator.ClientID%>').is(":checked")) {
-                $('.testhide').show();
-                $('#lblShowHideIndicator').text('Hide Indicator/Indicateur');
-            }
-            else {
-                $('.testhide').hide();
-                $('#lblShowHideIndicator').text('Show Indicator/Indicateur');
-            }
-
-            $('#<%=chkShowHideIndicator.ClientID%>').click(function () {
-                if ($('#<%=chkShowHideIndicator.ClientID%>').is(":checked")) {
-                    $('.testhide').show();
-                    $('#lblShowHideIndicator').text('Hide Indicator/Indicateur');
-                }
-                else {
-                    $('.testhide').hide();
-                    $('#lblShowHideIndicator').text('Show Indicator/Indicateur');
-                }
-            });
+            
         });
 
         // Filter rows on objects
         function showHideRowsOnObjs() {
-            // Filter on strategic objectives
-            $('#<%=ddlStrObjectives.ClientID %>').change(function () {
-                var objId = $('#<%=ddlStrObjectives.ClientID %> :selected').val();
-
-                //Get all items from spcobjectives dropdown
-                var spcObjOptions = $("#<%=ddlSpcObjectives.ClientID %> > option");
-
-                // remove hidden class from items to show all.
-                showAllDropDownItems(spcObjOptions);
-
-                // Hide matching items from spc dropdown.
-                hideMatchingItemsInDropDown(spcObjOptions, objId)
-
-                // filter (hide) rows from strobj grid.
-                $('.istrow, .altcolor').find('td:nth-child(1)').each(function (i) {
-                    if ($(this).text() === objId || objId === '0') {
-                        $(this).parent().show();
-                    }
-                    else {
-                        $(this).parent().hide();
-                    }
-                });
-            });
 
             // Filter (hide) rows from spcobj grid
             $('#<%=ddlSpcObjectives.ClientID %>').change(function () {
@@ -190,7 +140,8 @@
     </div>
     <div class="containerOPS">
         <div class="graybar">
-            Filter Activities
+            <asp:Localize ID="locFilterContainerHeader" runat="server" meta:resourcekey="locFilterContainerHeaderResource1"
+                Text="Filter Activities "></asp:Localize>
         </div>
         <div class="contentarea">
             <div class="formdiv">
@@ -198,7 +149,8 @@
                     <tr>
                         <td>
                             <clusterlabel>
-                                <b>Cluster:</b></clusterlabel>
+                                <b><asp:Localize ID="locClusterCaption" runat="server" 
+                                meta:resourcekey="locClusterCaptionResource1" Text=" Cluster:"></asp:Localize></b></clusterlabel>
                         </td>
                         <td>
                             <asp:Label ID="lblCluster" runat="server" CssClass="clusterLabel" meta:resourcekey="lblClusterResource1"></asp:Label>
@@ -207,17 +159,8 @@
                     <tr>
                         <td>
                             <clusterlabel>
-                                <b>Strategic Objectives/Objectif Strategique:</b></clusterlabel>
-                        </td>
-                        <td>
-                            <asp:DropDownList ID="ddlStrObjectives" Width="950px" runat="server" meta:resourcekey="ddlStrObjectivesResource1">
-                            </asp:DropDownList>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <clusterlabel>
-                                <b>Cluster Objectives/Objectif:</b></clusterlabel>
+                                <b><asp:Localize ID="locObjCaption" runat="server" 
+                                meta:resourcekey="locObjCaptionResource1" Text=" Strategic Objectives:"></asp:Localize></b></clusterlabel>
                         </td>
                         <td>
                             <asp:DropDownList ID="ddlSpcObjectives" Width="950px" runat="server" meta:resourcekey="ddlSpcObjectivesResource1">
@@ -234,10 +177,11 @@
     </div>
     <div class="buttonsdiv">
         <div class="savebutton">
-            <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="<%$ Resources:OPSDataEntry.aspx, btnSave2Resource1.Text %>"
-                OnClientClick="needToConfirm = false;" Width="120px" CssClass="button_example"
-                meta:resourcekey="btnSaveResource1" />
-            <input type="button" class="button_example" value="Close Window" id="close" onclick="window.close()" />
+            <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
+                Width="120px" CssClass="button_example" meta:resourcekey="btnSaveResource1" />
+            <asp:Localize ID="locbtnCloseWindow" runat="server" 
+                meta:resourcekey="locbtnCloseWindowResource1" 
+                Text="&lt;input type=&quot;button&quot; class=&quot;button_example&quot; value=&quot;Close Window&quot; id=&quot;close&quot; onclick=&quot;window.close()&quot; /&gt;"></asp:Localize> 
         </div>
         <div class="buttonright">
             <asp:Button ID="btnOpenLocations" runat="server" Text="Locations" CausesValidation="False"
@@ -246,12 +190,6 @@
         </div>
         <div class="spacer" style="clear: both;">
         </div>
-        <asp:CheckBox ID="chkShowHideIndicator" class="tempClassIndicator" runat="server"
-            meta:resourcekey="chkShowHideIndicatorResource1" />
-        <%--<input id="chkShowHideIndicator" type="checkbox" />--%>
-        <label id="lblShowHideIndicator">
-            Hide Indicator/Indicateur
-        </label>
     </div>
     <div class="tablegrid">
         <div id="scrolledGridView" style="overflow-x: auto; width: 100%">
@@ -272,16 +210,16 @@
                         <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
                         <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
                     </asp:BoundField>
-                    <asp:BoundField DataField="IndicatorName" HeaderText="Indicator/Indicateur" ItemStyle-Width="200px"
+                    <asp:BoundField DataField="IndicatorName" HeaderText="Priority" ItemStyle-Width="200px"
                         ItemStyle-CssClass="testhide" HeaderStyle-CssClass="testhide" meta:resourcekey="BoundFieldResource3">
                         <HeaderStyle CssClass="testhide"></HeaderStyle>
                         <ItemStyle CssClass="testhide" Width="200px"></ItemStyle>
                     </asp:BoundField>
-                    <asp:BoundField DataField="ActivityName" HeaderText="Activity/Activité" ItemStyle-Width="200px"
+                    <asp:BoundField DataField="ActivityName" HeaderText="Activity" ItemStyle-Width="200px"
                         meta:resourcekey="BoundFieldResource4">
                         <ItemStyle Width="200px"></ItemStyle>
                     </asp:BoundField>
-                    <asp:BoundField DataField="DataName" HeaderText="Data/Donnée" ItemStyle-Width="200px"
+                    <asp:BoundField DataField="DataName" HeaderText="Data" ItemStyle-Width="200px"
                         meta:resourcekey="BoundFieldResource5">
                         <ItemStyle Width="200px"></ItemStyle>
                     </asp:BoundField>
@@ -293,9 +231,7 @@
         <div class="savebutton">
             <asp:Button ID="btnSave2" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
                 Width="120px" CssClass="button_example" meta:resourcekey="btnSave2Resource1" />
-            <asp:Button ID="btnUserActivity" runat="server" OnClick="btnUserActivity_Click" Text="Add User Activities"
-                OnClientClick="needToConfirm = false;" Width="150px" CssClass="button_location"
-                meta:resourcekey="btnUserActivityResource1" /></div>
+        </div>
         <div class="buttonright">
         </div>
         <div class="spacer" style="clear: both;">
@@ -305,7 +241,7 @@
         <tr>
             <td>
                 <input type="button" id="btnClientOpen" runat="server" style="display: none;" />
-                <asp:ModalPopupExtender ID="mpeAddActivity" runat="server" TargetControlID="btnClientOpen"
+                <asp:ModalPopupExtender ID="mpeAddActivity" BehaviorID="mpeAddActivity" runat="server" TargetControlID="btnClientOpen"
                     PopupControlID="pnlLocations" BackgroundCssClass="modalpopupbackground" DynamicServicePath=""
                     Enabled="True">
                 </asp:ModalPopupExtender>
@@ -314,7 +250,8 @@
                         <ContentTemplate>
                             <div class="containerPopup">
                                 <div class="graybar">
-                                    Admin1 Locations
+                                    <asp:Localize ID="locLocaitonLevelCaption" runat="server" meta:resourcekey="locLocaitonLevelCaptionResource1"
+                                        Text=" Admin1 Locations"></asp:Localize>
                                 </div>
                                 <div class="contentarea">
                                     <div class="formdiv">
@@ -343,106 +280,6 @@
                         </ContentTemplate>
                         <Triggers>
                             <asp:PostBackTrigger ControlID="btnClose" />
-                        </Triggers>
-                    </asp:UpdatePanel>
-                </asp:Panel>
-            </td>
-        </tr>
-    </table>
-    <table>
-        <tr>
-            <td>
-                <input type="button" id="btnUserActivities" runat="server" style="display: none;" />
-                <asp:ModalPopupExtender ID="mpeUserActivity" runat="server" TargetControlID="btnUserActivities"
-                    PopupControlID="pnlUserActivity" BackgroundCssClass="modalpopupbackground" DynamicServicePath=""
-                    Enabled="True">
-                </asp:ModalPopupExtender>
-                <asp:Panel ID="pnlUserActivity" runat="server" Width="70%" meta:resourcekey="pnlUserActivityResource1">
-                    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
-                        <ContentTemplate>
-                            <div class="containerPopup">
-                                <div class="graybar">
-                                    Admin1 Locations
-                                </div>
-                                <div class="contentarea">
-                                    <div class="formdiv">
-                                        <table border="0" style="margin: 0 auto;">
-                                            <tr>
-                                                <td>
-                                                    Cluster:
-                                                </td>
-                                                <td>
-                                                    Education
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Strategic Objective:
-                                                </td>
-                                                <td>
-                                                    <asp:DropDownList ID="ddlUserStrObj" runat="server" Width="90%" OnSelectedIndexChanged="ddlUserStrObj_SelectedIndexChanged"
-                                                        AutoPostBack="True" meta:resourceKey="ddlUserStrObjResource1">
-                                                    </asp:DropDownList>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Specific Objective:
-                                                </td>
-                                                <td>
-                                                    <asp:DropDownList ID="ddlUserSpcObj" runat="server" Width="90%" OnSelectedIndexChanged="ddlUserSpcObj_SelectedIndexChanged"
-                                                        AutoPostBack="True" meta:resourceKey="ddlUserSpcObjResource1">
-                                                    </asp:DropDownList>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Indicator:
-                                                </td>
-                                                <td>
-                                                    <asp:DropDownList ID="ddlUserIndicator" runat="server" Width="45%" OnSelectedIndexChanged="ddlUserIndicator_SelectedIndexChanged"
-                                                        AutoPostBack="True" meta:resourceKey="ddlUserIndicatorResource1">
-                                                    </asp:DropDownList>
-                                                    <asp:TextBox ID="txtUserIndicator" runat="server" Width="45%" meta:resourceKey="txtUserIndicatorResource1"></asp:TextBox>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Activity:
-                                                </td>
-                                                <td>
-                                                    <asp:DropDownList ID="ddlUserActivitiy" runat="server" Width="45%" OnSelectedIndexChanged="ddlUserActivity_SelectedIndexChanged"
-                                                        AutoPostBack="True" meta:resourceKey="ddlUserActivitiyResource1">
-                                                    </asp:DropDownList>
-                                                    <asp:TextBox ID="txtUserActivity" runat="server" Width="45%" meta:resourceKey="txtUserActivityResource1"></asp:TextBox>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Data:
-                                                </td>
-                                                <td>
-                                                    <asp:TextBox ID="txtUserData" runat="server" Width="90%" meta:resourceKey="txtUserDataResource1"></asp:TextBox>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <asp:Button ID="btnCloseUserActivities" runat="server" Text="Close" CssClass="button_location"
-                                                        Width="120px" CausesValidation="False" OnClientClick="needToConfirm = false;"
-                                                        meta:resourceKey="btnCloseUserActivitiesResource1" />
-                                                </td>
-                                            </tr>
-                                        </table>
-                                        <div class="spacer" style="clear: both;">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="graybarcontainer">
-                                </div>
-                            </div>
-                        </ContentTemplate>
-                        <Triggers>
-                            <asp:PostBackTrigger ControlID="btnCloseUserActivities" />
                         </Triggers>
                     </asp:UpdatePanel>
                 </asp:Panel>

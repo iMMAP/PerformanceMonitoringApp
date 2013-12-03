@@ -232,7 +232,7 @@ namespace SRFROWCA.OPS
         {
             LocationId = GetLocationId();
             PopulateLocations(LocationId);
-            PopulateStrategicObjectives();
+            //PopulateStrategicObjectives();
             PopulateObjectives();
         }
 
@@ -242,107 +242,29 @@ namespace SRFROWCA.OPS
             return dt.Rows.Count > 0 ? Convert.ToInt32(dt.Rows[0]["LocationId"]) : 0;
         }
 
-        private void PopulateStrategicObjectives()
-        {
-            ddlStrObjectives.DataValueField = "StrategicObjectiveId";
-            ddlStrObjectives.DataTextField = "StrategicObjectiveName";
-
-            DataTable dt = GetStrategicObjectives();
-            ddlStrObjectives.DataSource = dt;
-            ddlStrObjectives.DataBind();
-
-            if (ddlStrObjectives.Items.Count > 1)
-            {
-                ListItem item = new ListItem("Select Str Objective", "0");
-                ddlStrObjectives.Items.Insert(0, item);
-            }
-            else
-            {
-                PopulateSpcObjectives();
-            }
-
-
-            ddlUserStrObj.DataValueField = "StrategicObjectiveId";
-            ddlUserStrObj.DataTextField = "StrategicObjectiveName";
-
-            ddlUserStrObj.DataSource = dt;
-            ddlUserStrObj.DataBind();
-
-            if (ddlUserStrObj.Items.Count > 1)
-            {
-                ListItem item = new ListItem("Select Str Objective", "0");
-                ddlUserStrObj.Items.Insert(0, item);
-            }
-        }
-
-        protected void ddlUserStrObj_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int strObjId = 0;
-            int.TryParse(ddlUserStrObj.SelectedValue, out strObjId);
-            PopulateUserSpcObjectives(strObjId);
-        }
-
-        protected void ddlUserSpcObj_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int spcObjId = 0;
-            int.TryParse(ddlUserSpcObj.SelectedValue, out spcObjId);
-            PopulateIndicators(spcObjId);
-        }
-
-        protected void ddlUserIndicator_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int indicatorId = 0;
-            int.TryParse(ddlUserIndicator.SelectedValue, out indicatorId);
-            PopulateActivities(indicatorId);
-        }
-
-        protected void ddlUserActivity_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //int activityId = 0;
-            //int.TryParse(ddlUserActivitiy.SelectedValue, out activityId);
-            //PopulateData(activityId);
-        }
-
-        //private void PopulateData(int activityId)
+        //private void PopulateStrategicObjectives()
         //{
-        //    ddlUserData.DataValueField = "ActivityDataId";
-        //    ddlUserData.DataTextField = "DataName";
-        //    ddlUserData.DataSource = GetActivityData(activityId);
-        //    ddlUserData.DataBind();
+        //    ddlStrObjectives.DataValueField = "StrategicObjectiveId";
+        //    ddlStrObjectives.DataTextField = "StrategicObjectiveName";
+
+        //    DataTable dt = GetStrategicObjectives();
+        //    ddlStrObjectives.DataSource = dt;
+        //    ddlStrObjectives.DataBind();
+
+        //    if (ddlStrObjectives.Items.Count > 1)
+        //    {
+        //        ListItem item = new ListItem("Select Str Objective", "0");
+        //        ddlStrObjectives.Items.Insert(0, item);
+        //    }
+        //    else
+        //    {
+        //        PopulateSpcObjectives();
+        //    }
         //}
-
-        //private object GetActivityData(int activityId)
-        //{
-        //    return DBContext.GetData("GetActivityData", new object[] { activityId });
-        //}
-
-        private void PopulateIndicators(int objId)
-        {
-            ddlUserIndicator.DataValueField = "ObjectiveIndicatorId";
-            ddlUserIndicator.DataTextField = "IndicatorName";
-
-            ddlUserIndicator.DataSource = GetObjectiveIndicators(objId);
-            ddlUserIndicator.DataBind();
-
-            ListItem item = new ListItem("Select Indicator", "0");
-            ddlUserIndicator.Items.Insert(0, item);
-        }
 
         private object GetObjectiveIndicators(int objId)
         {
             return DBContext.GetData("GetObjectiveIndicators", new object[] { objId });
-        }
-
-        private void PopulateActivities(int indicatorId)
-        {
-            ddlUserActivitiy.DataValueField = "IndicatorActivityId";
-            ddlUserActivitiy.DataTextField = "ActivityName";
-
-            ddlUserActivitiy.DataSource = GetIndicatorActivities(indicatorId);
-            ddlUserActivitiy.DataBind();
-
-            ListItem item = new ListItem("Select Activity", "0");
-            ddlUserActivitiy.Items.Insert(0, item);
         }
 
         private object GetIndicatorActivities(int indicatorId)
@@ -357,26 +279,12 @@ namespace SRFROWCA.OPS
 
         private void PopulateSpcObjectives()
         {
-            int strObjId = 0;
-            int.TryParse(ddlStrObjectives.SelectedValue, out strObjId);
+            //int strObjId = 0;
+            //int.TryParse(ddlStrObjectives.SelectedValue, out strObjId);
             PopulateObjectives();
         }
 
-        private void PopulateUserSpcObjectives(int strObjId)
-        {
-            ddlUserSpcObj.DataValueField = "ClusterObjectiveId";
-            ddlUserSpcObj.DataTextField = "ObjectiveName";
-
-            DataTable dt = DBContext.GetData("GetAllSpecifObjectivesOfAStrObjective", new object[] { strObjId });
-            ddlUserSpcObj.DataSource = dt;
-            ddlUserSpcObj.DataBind();
-
-            if (ddlUserSpcObj.Items.Count > 0)
-            {
-                ListItem item = new ListItem("Select Specific Objective", "0");
-                ddlUserSpcObj.Items.Insert(0, item);
-            }
-        }
+        
 
         private void PopulateObjectives()
         {

@@ -1,10 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/site.master" AutoEventWireup="true"
     CodeBehind="TargetsAchievedByLocData.aspx.cs" Inherits="SRFROWCA.Reports.TargetsAchievedByLocData" %>
 
+<%@ OutputCache Duration="100" VaryByParam="ActivityDataId" %>
 <%@ Register Assembly="DropDownCheckBoxes" Namespace="Saplin.Controls" TagPrefix="cc" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <script src="http://code.highcharts.com/highcharts.js" type="text/javascript"></script>
-    <script src="http://code.highcharts.com/modules/exporting.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <script type="text/javascript">
@@ -23,14 +23,6 @@
     </script>
     <div class="containerchart">
         <div class="divleftchart">
-            <div class="singalselect">
-                <label>
-                    Data:</label>
-                <div>
-                    <asp:DropDownList ID="ddlData"  runat="server" AutoPostBack="true" Width="100px" OnSelectedIndexChanged="ddlData_SelectedIndexChanged">
-                    </asp:DropDownList>
-                </div>
-            </div>
             <div class="singalselect">
                 <label>
                     Country:</label>
@@ -66,25 +58,33 @@
             </div>
             <div class="singalselect">
                 <label>
+                    Data:</label>
+                <div>
+                    <asp:DropDownList ID="ddlData" runat="server" AutoPostBack="true" Width="100px" OnSelectedIndexChanged="ddlData_SelectedIndexChanged">
+                    </asp:DropDownList>
+                </div>
+            </div>
+            <div class="singalselect">
+                <label>
                     <a href="javascript:;" id="print">Print</a></label>
             </div>
         </div>
-        <div style="padding: 10px 5px 10px 5px; border-style: dotted; border-width: thin;width: 85%; float: right;">
+        <div style="padding: 10px 5px 10px 5px; border-style: dotted; border-width: thin;
+            width: 85%; float: right;">
             <div id="divTitle2" runat="server" style="width: 900px; clear: right;">
             </div>
             <div id="divChartall">
                 <div id="divTitle" runat="server" style="display: none;">
                 </div>
                 <div class="" style="margin-top: 30px;">
-                    <div style="width: 400px; float: left;">
-                        <asp:Literal ID="ltrChart" runat="server" ViewStateMode="Disabled"></asp:Literal>
-                        
-                    </div>
-                    <div style="width: 30px; float: left;">
-                        &nbsp;</div>
-                    <div style="width: 400px; float: left;">
-                        <asp:Literal ID="ltrChartPercentage" runat="server"></asp:Literal>
-                    </div>
+                </div>
+                <div style="width: 400px; float: left;">
+                    <asp:Literal ID="ltrChart" runat="server" ViewStateMode="Disabled"></asp:Literal>
+                </div>
+                <div style="width: 30px; float: left;">
+                    &nbsp;</div>
+                <div style="width: 400px; float: left;">
+                    <asp:Literal ID="ltrChartPercentage" runat="server"></asp:Literal>
                 </div>
             </div>
         </div>
