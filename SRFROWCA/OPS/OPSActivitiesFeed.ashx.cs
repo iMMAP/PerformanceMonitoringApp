@@ -106,7 +106,7 @@ namespace SRFROWCA.OPS
                 logFrame.SetAttributeValue("ID", activityDataId);
                 logFrameValues.Add(logFrame);
 
-                logFrame.Add(GetElement("StrategicObjective", objId, objName));
+                logFrame.Add(GetElement("StrategicObjective", objId, strObjName));
                 logFrame.Add(GetElement("SpecificObjective", objId, objName));
                 logFrame.Add(GetElement("Indicator", indicatorId, indicatorName));
                 logFrame.Add(GetElement("Activity", activityId, activityName));

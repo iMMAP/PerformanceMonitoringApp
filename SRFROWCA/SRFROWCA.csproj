@@ -754,6 +754,12 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="OPS\App_LocalResources\tempOPSDataEntry.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="OPS\App_LocalResources\tempOPSDataEntry.aspx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="OPS\App_LocalResources\OPSDataEntry.aspx.resx" />
   </ItemGroup>
   <ItemGroup>

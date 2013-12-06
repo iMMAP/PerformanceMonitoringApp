@@ -22,15 +22,23 @@
             }
         }
 
-    </script>
-    <script type="text/javascript">
         var launch = false;
         function launchModal() {
             launch = true;
         }
+
+        var launchUserActivity = false;
+        function launchUserActivityModal() {
+            launchUserActivity = true;
+        }
+
         function pageLoad() {
             if (launch) {
                 $find("mpeAddActivity").show();
+            }
+
+            if (launchUserActivity) {
+                $find("mpeUserActivity").show();
             }
         }
     </script>
@@ -46,15 +54,38 @@
 
             // Change coloumn size
             $("#<%=gvActivities.ClientID %>").kiketable_colsizable({ minWidth: 30 })
-            
+
         });
 
         // Filter rows on objects
         function showHideRowsOnObjs() {
+            // Filter on strategic objectives
+            $('#<%=ddlStrObjectives.ClientID %>').change(function () {
+                var objId = $('#<%=ddlStrObjectives.ClientID %> :selected').val();
+
+                //Get all items from spcobjectives dropdown
+                var spcObjOptions = $("#<%=ddlPriorities.ClientID %> > option");
+
+                // remove hidden class from items to show all.
+                //showAllDropDownItems(spcObjOptions);
+
+                // Hide matching items from spc dropdown.
+                //hideMatchingItemsInDropDown(spcObjOptions, objId)
+
+                // filter (hide) rows from strobj grid.
+                $('.istrow, .altcolor').find('td:nth-child(1)').each(function (i) {
+                    if ($(this).text() === objId || objId === '0') {
+                        $(this).parent().show();
+                    }
+                    else {
+                        $(this).parent().hide();
+                    }
+                });
+            });
 
             // Filter (hide) rows from spcobj grid
-            $('#<%=ddlSpcObjectives.ClientID %>').change(function () {
-                var strSpcObjId = $('#<%=ddlSpcObjectives.ClientID %> :selected').val();
+            $('#<%=ddlPriorities.ClientID %>').change(function () {
+                var strSpcObjId = $('#<%=ddlPriorities.ClientID %> :selected').val();
                 var spcObjId = strSpcObjId.substring(strSpcObjId.indexOf('_') + 1, strSpcObjId.length);
 
                 $('.istrow, .altcolor').find('td:nth-child(2)').each(function (i) {
@@ -70,7 +101,7 @@
 
         // We alos need to filter specific objectives on selected str objective.
         // First remove 'hiddenelement' class which is to hide items in spc objective
-        // dropdown i.e. display none                
+        // dropdown i.e. display none
         function showAllDropDownItems(controlItems) {
             $(controlItems).each(function () {
                 $(this).removeClass('hiddenelement');
@@ -102,7 +133,7 @@
 
         // Split location namde and 'T' (means Target) and 'A' (means Achieved)
         function splitLocationFromTA() {
-            //if (!(/chrom(e|ium)/.test(navigator.userAgent.toLowerCase()))) 
+            //if (!(/chrom(e|ium)/.test(navigator.userAgent.toLowerCase())))
             {
                 var list = '';
                 var list2 = '';
@@ -130,18 +161,18 @@
                 });
 
                 // Add header row in grid.
-                $(".imagetable").prepend('<colgroup><col /><col /><col /></colgroup><thead><tr style="background-color:ButtonFace;"><th class="testhide" style="width: 200px;">&nbsp;</th><th style="width: 200px;">&nbsp;</th><th style="width: 200px;">&nbsp;</th>' + list + '</tr></thead>');
+                $(".imagetable").prepend('<colgroup><col /><col /><col /></colgroup><thead><tr style="background-color:ButtonFace;"><th class="testhide" style="width: 40px;">&nbsp;</th><th style="width: 200px;">&nbsp;</th><th style="width: 200px;">&nbsp;</th>' + list + '</tr></thead>');
             }
         }
     </script>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server" border="1">
     <div id="divMsg">
     </div>
     <div class="containerOPS">
         <div class="graybar">
             <asp:Localize ID="locFilterContainerHeader" runat="server" meta:resourcekey="locFilterContainerHeaderResource1"
-                Text="Filter Activities "></asp:Localize>
+                Text=" Filter Activities"></asp:Localize>
         </div>
         <div class="contentarea">
             <div class="formdiv">
@@ -150,20 +181,36 @@
                         <td>
                             <clusterlabel>
                                 <b><asp:Localize ID="locClusterCaption" runat="server" 
-                                meta:resourcekey="locClusterCaptionResource1" Text=" Cluster:"></asp:Localize></b></clusterlabel>
+                                meta:resourcekey="locClusterCaptionResource1" Text="Cluster:"></asp:Localize></b></clusterlabel>
                         </td>
                         <td>
                             <asp:Label ID="lblCluster" runat="server" CssClass="clusterLabel" meta:resourcekey="lblClusterResource1"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:LinkButton ID="lnkLanguageEnglish" Text="English" runat="server" OnClientClick="needToConfirm=false;" OnClick="lnkLanguageEnglish_Click"></asp:LinkButton>&nbsp;&nbsp;
+                            <asp:LinkButton ID="lnkLanguageFrench" Text="Français" runat="server" OnClientClick="needToConfirm=false;" OnClick="lnkLanguageFrench_Click"></asp:LinkButton>
+                            
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <clusterlabel>
-                                <b><asp:Localize ID="locObjCaption" runat="server" 
-                                meta:resourcekey="locObjCaptionResource1" Text=" Strategic Objectives:"></asp:Localize></b></clusterlabel>
+                                <b><asp:Localize ID="Localize1" runat="server" 
+                                meta:resourcekey="Localize1Resource1" Text="Strategic Objectives:"></asp:Localize></b></clusterlabel>
                         </td>
                         <td>
-                            <asp:DropDownList ID="ddlSpcObjectives" Width="950px" runat="server" meta:resourcekey="ddlSpcObjectivesResource1">
+                            <asp:DropDownList ID="ddlStrObjectives" Width="400px" runat="server" meta:resourcekey="ddlStrObjectivesResource1">
+                            </asp:DropDownList>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <clusterlabel>
+                                <b><asp:Localize ID="Localize2" runat="server" 
+                                meta:resourcekey="Localize2Resource1" Text="Prioirties:"></asp:Localize></b></clusterlabel>
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlPriorities" Width="400px" runat="server" meta:resourcekey="ddlSpcObjectivesResource1">
                             </asp:DropDownList>
                         </td>
                     </tr>
@@ -179,9 +226,8 @@
         <div class="savebutton">
             <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
                 Width="120px" CssClass="button_example" meta:resourcekey="btnSaveResource1" />
-            <asp:Localize ID="locbtnCloseWindow" runat="server" 
-                meta:resourcekey="locbtnCloseWindowResource1" 
-                Text="&lt;input type=&quot;button&quot; class=&quot;button_example&quot; value=&quot;Close Window&quot; id=&quot;close&quot; onclick=&quot;window.close()&quot; /&gt;"></asp:Localize> 
+            <asp:Localize ID="locbtnCloseWindow" runat="server" meta:resourcekey="locbtnCloseWindowResource1"
+                Text="&lt;input type=&quot;button&quot; class=&quot;button_example&quot; value=&quot;Close Window&quot; id=&quot;close&quot; onclick=&quot;window.close()&quot; /&gt;"></asp:Localize>
         </div>
         <div class="buttonright">
             <asp:Button ID="btnOpenLocations" runat="server" Text="Locations" CausesValidation="False"
@@ -210,16 +256,16 @@
                         <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
                         <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
                     </asp:BoundField>
-                    <asp:BoundField DataField="IndicatorName" HeaderText="Priority" ItemStyle-Width="200px"
+                    <asp:BoundField DataField="IndicatorName" HeaderText="Indicator/Indicateur" ItemStyle-Width="200px"
                         ItemStyle-CssClass="testhide" HeaderStyle-CssClass="testhide" meta:resourcekey="BoundFieldResource3">
                         <HeaderStyle CssClass="testhide"></HeaderStyle>
                         <ItemStyle CssClass="testhide" Width="200px"></ItemStyle>
                     </asp:BoundField>
-                    <asp:BoundField DataField="ActivityName" HeaderText="Activity" ItemStyle-Width="200px"
+                    <asp:BoundField DataField="ActivityName" HeaderText="Activity/Activité" ItemStyle-Width="200px"
                         meta:resourcekey="BoundFieldResource4">
                         <ItemStyle Width="200px"></ItemStyle>
                     </asp:BoundField>
-                    <asp:BoundField DataField="DataName" HeaderText="Data" ItemStyle-Width="200px"
+                    <asp:BoundField DataField="DataName" HeaderText="Data/Donnée" ItemStyle-Width="200px"
                         meta:resourcekey="BoundFieldResource5">
                         <ItemStyle Width="200px"></ItemStyle>
                     </asp:BoundField>
@@ -232,8 +278,6 @@
             <asp:Button ID="btnSave2" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
                 Width="120px" CssClass="button_example" meta:resourcekey="btnSave2Resource1" />
         </div>
-        <div class="buttonright">
-        </div>
         <div class="spacer" style="clear: both;">
         </div>
     </div>
@@ -241,9 +285,9 @@
         <tr>
             <td>
                 <input type="button" id="btnClientOpen" runat="server" style="display: none;" />
-                <asp:ModalPopupExtender ID="mpeAddActivity" BehaviorID="mpeAddActivity" runat="server" TargetControlID="btnClientOpen"
-                    PopupControlID="pnlLocations" BackgroundCssClass="modalpopupbackground" DynamicServicePath=""
-                    Enabled="True">
+                <asp:ModalPopupExtender ID="mpeAddActivity" runat="server" BehaviorID="mpeAddActivity"
+                    TargetControlID="btnClientOpen" PopupControlID="pnlLocations" BackgroundCssClass="modalpopupbackground"
+                    DynamicServicePath="" Enabled="True">
                 </asp:ModalPopupExtender>
                 <asp:Panel ID="pnlLocations" runat="server" Width="200px" meta:resourcekey="pnlLocationsResource1">
                     <asp:UpdatePanel ID="uPanel1" runat="server" UpdateMode="Conditional">
@@ -251,14 +295,14 @@
                             <div class="containerPopup">
                                 <div class="graybar">
                                     <asp:Localize ID="locLocaitonLevelCaption" runat="server" meta:resourcekey="locLocaitonLevelCaptionResource1"
-                                        Text=" Admin1 Locations"></asp:Localize>
+                                        Text="Admin1 Locations"></asp:Localize>
                                 </div>
                                 <div class="contentarea">
                                     <div class="formdiv">
                                         <table border="0" style="margin: 0 auto;">
                                             <tr>
                                                 <td>
-                                                    <asp:CheckBoxList ID="cbAdmin1Locaitons" runat="server" meta:resourceKey="cbAdmin1LocaitonsResource1">
+                                                    <asp:CheckBoxList ID="cbAdmin1Locaitons" runat="server" meta:resourcekey="cbAdmin1LocaitonsResource1">
                                                     </asp:CheckBoxList>
                                                 </td>
                                             </tr>
@@ -266,7 +310,7 @@
                                                 <td>
                                                     <asp:Button ID="btnClose" runat="server" Text="Close" CssClass="button_location"
                                                         Width="120px" CausesValidation="False" OnClientClick="needToConfirm = false;"
-                                                        meta:resourceKey="btnCloseResource1" />
+                                                        meta:resourcekey="btnCloseResource1" />
                                                 </td>
                                             </tr>
                                         </table>

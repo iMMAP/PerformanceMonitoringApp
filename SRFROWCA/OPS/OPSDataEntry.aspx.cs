@@ -8,14 +8,86 @@ using System.Web.UI.WebControls;
 using BusinessLogic;
 using SRFROWCA.Common;
 using System.Globalization;
+using System.Threading;
 
 
 namespace SRFROWCA.OPS
 {
     public partial class OPSDataEntry : System.Web.UI.Page
     {
+        protected override void InitializeCulture()
+        {
+            string language = Request.Form["__EventTarget"];
+            string languageId = "";
+            if (!string.IsNullOrEmpty(language))
+            {
+                if (language.EndsWith("French"))
+                {
+                    SiteLanguageId = 2;
+                    languageId = "fr-FR";
+                }
+                else
+                {
+                    SiteLanguageId = 1;
+                    languageId = "en-US";
+                }
+                SetCulture(languageId);
+            }
+
+            if (Session["Language"] != null)
+            {
+                if (!Session["Language"].ToString().StartsWith(Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName)) SetCulture(Session["Language"].ToString());
+            }
+
+            base.InitializeCulture();
+        }
+
+        protected void SetCulture(string languageId)
+        {
+            Session["Language"] = languageId;
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(languageId);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(languageId);
+        }
+
+        protected void lnkLanguageEnglish_Click(object sender, EventArgs e)
+        {
+            SiteLanguageId = 1;
+            SetOPSIds();
+            if (OPSProjectId > 0 && !string.IsNullOrEmpty(OPSClusterName) && !string.IsNullOrEmpty(OPSCountryName))
+            {
+                OPSEmergencyId = GetEmergencyId();
+                OPSEmergencyClusterId = GetClusterId();
+                lblCluster.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(OPSClusterName);
+            }
+            PopulateStrategicObjectives();
+            PopulatePriorities();
+
+            //DataTable dtActivities = GetActivities();
+            //AddDynamicColumnsInGrid(dtActivities);
+            //GetReport(dtActivities);
+        }
+
+        protected void lnkLanguageFrench_Click(object sender, EventArgs e)
+        {
+            SiteLanguageId = 2;
+            //SetOPSIds();
+            //if (OPSProjectId > 0 && !string.IsNullOrEmpty(OPSClusterName) && !string.IsNullOrEmpty(OPSCountryName))
+            //{
+            //    OPSEmergencyId = GetEmergencyId();
+            //    OPSEmergencyClusterId = GetClusterId();
+            //    lblCluster.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(OPSClusterName);
+            //}
+            PopulateStrategicObjectives();
+            PopulatePriorities();
+
+            //DataTable dtActivities = GetActivities();
+            //AddDynamicColumnsInGrid(dtActivities);
+            //GetReport(dtActivities);
+        }
+
         protected void Page_PreInit(object sender, EventArgs e)
         {
+            //InitializeCulture();
             GZipContents.GZipOutput();
         }
 
@@ -23,10 +95,11 @@ namespace SRFROWCA.OPS
         {
             if (!IsPostBack)
             {
+                SiteLanguageId = 1;
                 SetOPSIds();
                 if (OPSProjectId > 0 && !string.IsNullOrEmpty(OPSClusterName) && !string.IsNullOrEmpty(OPSCountryName))
                 {
-                    OPSLocationEmergencyId = GetEmergencyId();
+                    OPSEmergencyId = GetEmergencyId();
                     OPSEmergencyClusterId = GetClusterId();
                     lblCluster.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(OPSClusterName);
                 }
@@ -35,9 +108,25 @@ namespace SRFROWCA.OPS
 
             this.Form.DefaultButton = this.btnSave.UniqueID;
 
+            string controlName = GetPostBackControlId(this);
+            if (controlName == "lnkLanguageFrench")
+            {
+                SiteLanguageId = 2;
+            }
+
+            if (controlName == "lnkLanguageEnglish")
+            {
+                SiteLanguageId = 1;
+            }
+
             DataTable dtActivities = GetActivities();
             AddDynamicColumnsInGrid(dtActivities);
             GetReport(dtActivities);
+
+        }
+
+        protected void rbtnList_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
 
@@ -149,7 +238,7 @@ namespace SRFROWCA.OPS
                 scope.Complete();
 
                 //ScriptManager.RegisterStartupScript(this, this.GetType(), "popup",
-                //    "$('#divMsg').addClass('info message').text('Hello There').animate({ top: '0' }, 500).fadeOut(4000, function() {});", true);
+                // "$('#divMsg').addClass('info message').text('Hello There').animate({ top: '0' }, 500).fadeOut(4000, function() {});", true);
                 ShowMessage("Your Data Saved Successfuly!");
             }
         }
@@ -200,10 +289,10 @@ namespace SRFROWCA.OPS
             if (!string.IsNullOrEmpty(OPSCountryName))
             {
                 int isOPSEmergency = 1;
-                dt = DBContext.GetData("GetOPSEmergencyId", new object[] { OPSCountryName, isOPSEmergency });
+                dt = DBContext.GetData("GetOPSEmergencyId", new object[] { OPSCountryName, isOPSEmergency, SiteLanguageId });
             }
 
-            return dt.Rows.Count > 0 ? Convert.ToInt32(dt.Rows[0]["LocationEmergencyId"].ToString()) : 0;
+            return dt.Rows.Count > 0 ? Convert.ToInt32(dt.Rows[0]["EmergencyId"].ToString()) : 0;
         }
 
         private int GetClusterId()
@@ -222,7 +311,7 @@ namespace SRFROWCA.OPS
                     clusterName = OPSClusterName;
                 }
 
-                dt = DBContext.GetData("GetEmergencyClustersId", new object[] { clusterName, OPSCountryName, opsEmergency });
+                dt = DBContext.GetData("GetEmergencyClustersId", new object[] { clusterName, OPSEmergencyId, SiteLanguageId });
             }
 
             return dt.Rows.Count > 0 ? Convert.ToInt32(dt.Rows[0]["EmergencyClusterId"].ToString()) : 0;
@@ -232,8 +321,8 @@ namespace SRFROWCA.OPS
         {
             LocationId = GetLocationId();
             PopulateLocations(LocationId);
-            //PopulateStrategicObjectives();
-            PopulateObjectives();
+            PopulateStrategicObjectives();
+            PopulatePriorities();
         }
 
         private int GetLocationId()
@@ -242,61 +331,50 @@ namespace SRFROWCA.OPS
             return dt.Rows.Count > 0 ? Convert.ToInt32(dt.Rows[0]["LocationId"]) : 0;
         }
 
-        //private void PopulateStrategicObjectives()
-        //{
-        //    ddlStrObjectives.DataValueField = "StrategicObjectiveId";
-        //    ddlStrObjectives.DataTextField = "StrategicObjectiveName";
-
-        //    DataTable dt = GetStrategicObjectives();
-        //    ddlStrObjectives.DataSource = dt;
-        //    ddlStrObjectives.DataBind();
-
-        //    if (ddlStrObjectives.Items.Count > 1)
-        //    {
-        //        ListItem item = new ListItem("Select Str Objective", "0");
-        //        ddlStrObjectives.Items.Insert(0, item);
-        //    }
-        //    else
-        //    {
-        //        PopulateSpcObjectives();
-        //    }
-        //}
-
-        private object GetObjectiveIndicators(int objId)
+        private void PopulateStrategicObjectives()
         {
-            return DBContext.GetData("GetObjectiveIndicators", new object[] { objId });
-        }
+            ddlStrObjectives.DataValueField = "ObjectiveId";
+            ddlStrObjectives.DataTextField = "Objective";
 
-        private object GetIndicatorActivities(int indicatorId)
-        {
-            return DBContext.GetData("GetIndicatorActivities", new object[] { indicatorId });
+            DataTable dt = GetStrategicObjectives();
+            ddlStrObjectives.DataSource = dt;
+            ddlStrObjectives.DataBind();
+
+            if (ddlStrObjectives.Items.Count > 1)
+            {
+                ListItem item = new ListItem("Select Str Objective", "0");
+                ddlStrObjectives.Items.Insert(0, item);
+            }
+            else
+            {
+                PopulatePriorities();
+            }
         }
 
         private DataTable GetStrategicObjectives()
         {
-            return DBContext.GetData("GetStrategicObjectives", new object[] { OPSEmergencyClusterId });
+            int isLogFrame = 1;
+            return DBContext.GetData("GetObjectivesLogFrame", new object[] { SiteLanguageId, isLogFrame });
         }
 
         private void PopulateSpcObjectives()
         {
-            //int strObjId = 0;
-            //int.TryParse(ddlStrObjectives.SelectedValue, out strObjId);
-            PopulateObjectives();
+            int strObjId = 0;
+            int.TryParse(ddlStrObjectives.SelectedValue, out strObjId);
+            PopulatePriorities();
         }
 
-        
-
-        private void PopulateObjectives()
+        private void PopulatePriorities()
         {
-            ddlSpcObjectives.DataValueField = "StrSpcObjId";
-            ddlSpcObjectives.DataTextField = "ObjectiveName";
+            ddlPriorities.DataValueField = "HumanitarianPriorityId";
+            ddlPriorities.DataTextField = "HumanitarianPriority";
 
-            DataTable dt = GetClusterObjectives();
-            ddlSpcObjectives.DataSource = dt;
-            ddlSpcObjectives.DataBind();
+            DataTable dt = GetPriorites();
+            ddlPriorities.DataSource = dt;
+            ddlPriorities.DataBind();
 
-            ListItem item = new ListItem("Select Specific Objective", "0");
-            ddlSpcObjectives.Items.Insert(0, item);
+            ListItem item = new ListItem("Select Priority", "0");
+            ddlPriorities.Items.Insert(0, item);
 
             //cbSpcObj.DataValueField = "ClusterObjectiveId";
             //cbSpcObj.DataTextField = "ObjectiveName";
@@ -305,10 +383,10 @@ namespace SRFROWCA.OPS
             //cbSpcObj.DataBind();
         }
 
-        private DataTable GetClusterObjectives()
+        private DataTable GetPriorites()
         {
-            //return DBContext.GetData("GetAllSpecifObjectivesOfAStrObjective", new object[] { strObjId });
-            return DBContext.GetData("GetEmergencyClusterObjectivesWithSpcObjId", new object[] { OPSEmergencyClusterId });
+            int isLogFrame = 1;
+            return DBContext.GetData("GetPrioritiesLogFrame", new object[] { SiteLanguageId, isLogFrame });
         }
 
         // In this method we will get the postback control.
@@ -336,7 +414,7 @@ namespace SRFROWCA.OPS
 
                 foreach (string ctl in page.Request.Form)
                 {
-                    // handle ImageButton they having an additional "quasi-property" 
+                    // handle ImageButton they having an additional "quasi-property"
                     // in their Id which identifies mouse x and y coordinates
                     if (ctl.EndsWith(".x") || ctl.EndsWith(".y"))
                     {
@@ -420,7 +498,8 @@ namespace SRFROWCA.OPS
             string locationIds = GetSelectedItems(cbAdmin1Locaitons);
             string locIdsNotIncluded = GetNotSelectedItems(cbAdmin1Locaitons);
 
-            DataTable dt = DBContext.GetData("GetOPSActivities", new object[] { OPSLocationEmergencyId, locationIds, locIdsNotIncluded, OPSProjectId, OPSEmergencyClusterId });
+            DataTable dt = DBContext.GetData("GetOPSActivities", new object[] { OPSEmergencyId, locationIds, locIdsNotIncluded, 
+                                                                            OPSProjectId, OPSEmergencyClusterId, SiteLanguageId });
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 
@@ -451,7 +530,7 @@ namespace SRFROWCA.OPS
             foreach (DataColumn column in dt.Columns)
             {
                 TemplateField customField = new TemplateField();
-                // Create the dynamic templates and assign them to 
+                // Create the dynamic templates and assign them to
                 // the appropriate template property.
 
                 string columnName = column.ColumnName;
@@ -601,7 +680,7 @@ namespace SRFROWCA.OPS
 
         private void SaveReportMainInfo()
         {
-            OPSReportId = DBContext.Add("InsertOPSReport", new object[] { OPSLocationEmergencyId, OPSProjectId, OPSEmergencyClusterId, OPSUserId, DBNull.Value });
+            OPSReportId = DBContext.Add("InsertOPSReport", new object[] { OPSEmergencyId, OPSProjectId, OPSEmergencyClusterId, OPSUserId, DBNull.Value });
         }
 
         private bool IsDataExistsToSave()
@@ -783,7 +862,7 @@ namespace SRFROWCA.OPS
                                 if (!(valToSaveMid2014 == null && valToSave2014 == null))
                                 {
                                     int newReportDetailId = DBContext.Add("InsertOPSReportDetails",
-                                                                            new object[] { OPSReportId, activityDataId, locationIdToSaveT, 
+                                                                            new object[] { OPSReportId, activityDataId, locationIdToSaveT,
                                                                                             valToSaveMid2014, valToSave2014, 1, DBNull.Value });
                                 }
                             }
@@ -801,7 +880,7 @@ namespace SRFROWCA.OPS
         {
             Session["dtOPSActivities"] = dt;
 
-            DataTable dtReport = DBContext.GetData("GetOPSReportId", new object[] { OPSLocationEmergencyId, OPSProjectId, OPSEmergencyClusterId });
+            DataTable dtReport = DBContext.GetData("GetOPSReportId", new object[] { OPSEmergencyId, OPSProjectId, OPSEmergencyClusterId });
             if (dtReport.Rows.Count > 0)
             {
                 OPSReportId = string.IsNullOrEmpty(dtReport.Rows[0]["OPSReportId"].ToString()) ? 0 : Convert.ToInt32(dtReport.Rows[0]["OPSReportId"].ToString());
@@ -809,7 +888,7 @@ namespace SRFROWCA.OPS
             else
             {
                 OPSReportId = 0;
-            }
+            }                       
 
             gvActivities.DataSource = dt;
             gvActivities.DataBind();
@@ -1015,21 +1094,21 @@ namespace SRFROWCA.OPS
             }
         }
 
-        public int OPSLocationEmergencyId
+        public int OPSEmergencyId
         {
             get
             {
-                int opsLocationEmergencyId = 0;
-                if (ViewState["OPSLocationEmergencyId"] != null)
+                int opsEmergencyId = 0;
+                if (ViewState["OPSEmergencyId"] != null)
                 {
-                    int.TryParse(ViewState["OPSLocationEmergencyId"].ToString(), out opsLocationEmergencyId);
+                    int.TryParse(ViewState["OPSEmergencyId"].ToString(), out opsEmergencyId);
                 }
 
-                return opsLocationEmergencyId;
+                return opsEmergencyId;
             }
             set
             {
-                ViewState["OPSLocationEmergencyId"] = value.ToString();
+                ViewState["OPSEmergencyId"] = value.ToString();
             }
         }
 
@@ -1051,7 +1130,69 @@ namespace SRFROWCA.OPS
             }
         }
 
+        public int SiteLanguageId
+        {
+            get
+            {
+                int langId = 0;
+                if (ViewState["SiteLanguageId"] != null)
+                {
+                    int.TryParse(ViewState["SiteLanguageId"].ToString(), out langId);
+                }
+
+                return langId;
+            }
+            set
+            {
+                ViewState["SiteLanguageId"] = value.ToString();
+            }
+        }
+
+        public int Reload
+        {
+            get
+            {
+                int reloadId = 0;
+                if (ViewState["Reload"] != null)
+                {
+                    int.TryParse(ViewState["Reload"].ToString(), out reloadId);
+                }
+
+                return reloadId;
+            }
+            set
+            {
+                ViewState["Reload"] = value.ToString();
+            }
+        }
+
         #endregion
+
+        protected void rbEnglishLanguage_CheckedChanged(object sender, EventArgs e)
+        {
+            SiteLanguageId = 1;
+            SetOPSIds();
+            if (OPSProjectId > 0 && !string.IsNullOrEmpty(OPSClusterName) && !string.IsNullOrEmpty(OPSCountryName))
+            {
+                OPSEmergencyId = GetEmergencyId();
+                OPSEmergencyClusterId = GetClusterId();
+                lblCluster.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(OPSClusterName);
+            }
+            PopulateDropDowns();
+        }
+
+        protected void rbFrenchLanguage_CheckedChanged(object sender, EventArgs e)
+        {
+            SiteLanguageId = 2;
+            SetOPSIds();
+            if (OPSProjectId > 0 && !string.IsNullOrEmpty(OPSClusterName) && !string.IsNullOrEmpty(OPSCountryName))
+            {
+                OPSEmergencyId = GetEmergencyId();
+                OPSEmergencyClusterId = GetClusterId();
+                lblCluster.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(OPSClusterName);
+            }
+            PopulateDropDowns();
+        }
     }
 
     public class GridViewTemplate : ITemplate
