@@ -73,11 +73,6 @@ namespace SRFROWCA.OPS
 
                 WriteXML(logFrameValues, filteredTable);
             }
-
-
-            
-
-
             return doc.ToString();
         }
 

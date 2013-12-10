@@ -349,6 +349,17 @@ namespace SRFROWCA.OPS
             {
                 PopulatePriorities();
             }
+
+            ddlUserStrObj.DataValueField = "ObjectiveId";
+            ddlUserStrObj.DataTextField = "Objective";
+            ddlUserStrObj.DataSource = dt;
+            ddlUserStrObj.DataBind();
+
+            if (ddlUserStrObj.Items.Count > 1)
+            {
+                ListItem item = new ListItem("Select Str Objective", "0");
+                ddlUserStrObj.Items.Insert(0, item);
+            }
         }
 
         private DataTable GetStrategicObjectives()
@@ -376,11 +387,15 @@ namespace SRFROWCA.OPS
             ListItem item = new ListItem("Select Priority", "0");
             ddlPriorities.Items.Insert(0, item);
 
-            //cbSpcObj.DataValueField = "ClusterObjectiveId";
-            //cbSpcObj.DataTextField = "ObjectiveName";
 
-            //cbSpcObj.DataSource = dt;
-            //cbSpcObj.DataBind();
+            ddlUserPriority.DataValueField = "HumanitarianPriorityId";
+            ddlUserPriority.DataTextField = "HumanitarianPriority";
+
+            ddlUserPriority.DataSource = dt;
+            ddlUserPriority.DataBind();
+
+            ListItem item1 = new ListItem("Select Priority", "0");
+            ddlUserPriority.Items.Insert(0, item1);
         }
 
         private DataTable GetPriorites()
@@ -888,7 +903,7 @@ namespace SRFROWCA.OPS
             else
             {
                 OPSReportId = 0;
-            }                       
+            }
 
             gvActivities.DataSource = dt;
             gvActivities.DataBind();
@@ -934,6 +949,52 @@ namespace SRFROWCA.OPS
         }
 
         #endregion
+
+        protected void btnAddUserActivity_Click(object sender, EventArgs e)
+        {
+            mpeAddOrg.Show();
+        }
+
+        protected void btnSaveUserActivity_Click(object sender, EventArgs e)
+        {
+            int strObj = Convert.ToInt32(ddlUserStrObj.SelectedValue);
+            int priority = Convert.ToInt32(ddlUserPriority.SelectedValue);
+            string activity = txtUserActivity.Text.Trim();
+            string indicator1 = txtUserOutputIndicator1.Text.Trim();
+            string indicator2 = !string.IsNullOrEmpty(txtUserOutputIndicator2.Text.Trim()) ? txtUserOutputIndicator2.Text.Trim() : null;
+            string indicator3 = !string.IsNullOrEmpty(txtUserOutputIndicator3.Text.Trim()) ? txtUserOutputIndicator3.Text.Trim() : null;
+            string indicator4 = !string.IsNullOrEmpty(txtUserOutputIndicator4.Text.Trim()) ? txtUserOutputIndicator4.Text.Trim() : null;
+
+            DBContext.Add("InsertUserActivities", new object[] { strObj, priority, activity, indicator1, indicator2, indicator3, indicator4, OPSProjectId, OPSEmergencyClusterId, 2, DBNull.Value });
+
+            ddlUserStrObj.SelectedIndex = 0;
+            ddlUserPriority.SelectedIndex = 0;
+            txtUserActivity.Text = "";
+            txtUserOutputIndicator1.Text = "";
+            txtUserOutputIndicator2.Text = "";
+            txtUserOutputIndicator3.Text = "";
+            txtUserOutputIndicator4.Text = "";
+
+            if (SiteLanguageId == 1)
+            {
+                lblMessage2.Text = "Activity Saved Successfully. Add Another Activity OR Close.";
+            }
+            else
+            {
+                lblMessage2.Text = "Activité enregistrée. Rajouter une autre activité ou fermer";
+            }
+
+            lblMessage2.Visible = true;
+            mpeAddOrg.Show();
+           
+
+            //Page_Load(null, null);
+        }
+
+        protected void btnCloseUserActivity_Click(object sender, EventArgs e)
+        {
+            mpeAddOrg.Hide();
+        }
 
         #region Properties & Enums
 
