@@ -563,7 +563,7 @@ namespace SRFROWCA.OPS
 
         private DataTable GetChildLocations(int parentLocationId)
         {
-            DataTable dt = DBContext.GetData("GetSecondLevelChildLocations", new object[] { parentLocationId });
+            DataTable dt = DBContext.GetData("GetSecondLevelChildLocationsAndCountry", new object[] { parentLocationId });
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 

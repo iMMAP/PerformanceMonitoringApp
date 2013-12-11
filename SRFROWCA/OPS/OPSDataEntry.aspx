@@ -232,14 +232,13 @@
                 meta:resourcekey="btnSaveResource1" />
             <asp:Localize ID="locbtnCloseWindow" runat="server" meta:resourcekey="locbtnCloseWindowResource1"
                 Text="&lt;input type=&quot;button&quot; class=&quot;button_example&quot; value=&quot;Close Window&quot; id=&quot;close&quot; onclick=&quot;window.close()&quot; /&gt;"></asp:Localize>
-            <asp:Button ID="btnAddUserActivity" runat="server" Text="Add User Activity" CausesValidation="False"
-                OnClick="btnAddUserActivity_Click" OnClientClick="needToConfirm = false;" 
-                CssClass="button_location" meta:resourcekey="btnAddUserActivityResource1" />
+            
         </div>
-        <div class="buttonright">
+        <div class="buttonright">        
             <asp:Button ID="btnOpenLocations" runat="server" Text="Locations" CausesValidation="False"
                 CssClass="button_location" OnClick="btnLocation_Click" OnClientClick="needToConfirm = false;"
                 meta:resourcekey="btnOpenLocationsResource1" />
+
         </div>
         <div class="spacer" style="clear: both;">
         </div>
@@ -268,7 +267,7 @@
                         <HeaderStyle CssClass="testhide"></HeaderStyle>
                         <ItemStyle CssClass="testhide" Width="200px"></ItemStyle>
                     </asp:BoundField>
-                    <asp:BoundField DataField="ActivityName" HeaderText="Activity/Activité" ItemStyle-Width="200px"
+                    <asp:BoundField DataField="ActivityName" HeaderText="Activity" ItemStyle-Width="200px"
                         meta:resourcekey="BoundFieldResource4">
                         <ItemStyle Width="200px"></ItemStyle>
                     </asp:BoundField>
@@ -282,8 +281,10 @@
     </div>
     <div class="buttonsdiv">
         <div class="savebutton">
-            <asp:Button ID="btnSave2" runat="server" OnClick="btnSave_Click" Text="Save" CausesValidation="false" OnClientClick="needToConfirm = false;"
-                Width="120px" CssClass="button_example" meta:resourcekey="btnSave2Resource1" />
+            <asp:Button ID="btnSave2" runat="server" OnClick="btnSave_Click" Text="Save" 
+                CausesValidation="False" OnClientClick="needToConfirm = false;"
+                Width="120px" CssClass="button_example" 
+                meta:resourcekey="btnSave2Resource1" />
         </div>
         <div class="spacer" style="clear: both;">
         </div>
@@ -366,7 +367,8 @@
                                                     <asp:DropDownList ID="ddlUserStrObj" Width="408px" runat="server" meta:resourcekey="ddlStrObjectivesResource1">
                                                     </asp:DropDownList>
                                                     <asp:RequiredFieldValidator ID="rfvddlUserStrObj" runat="server" ErrorMessage="Required"
-                                                        InitialValue="0" Text="Required" ControlToValidate="ddlUserStrObj"></asp:RequiredFieldValidator>
+                                                        InitialValue="0" ForeColor="Red" Text="Required" ControlToValidate="ddlUserStrObj"
+                                                        meta:resourcekey="rfvddlUserStrObjResource1"></asp:RequiredFieldValidator>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -379,7 +381,8 @@
                                                     <asp:DropDownList ID="ddlUserPriority" Width="408px" runat="server" meta:resourcekey="ddlSpcObjectivesResource1">
                                                     </asp:DropDownList>
                                                     <asp:RequiredFieldValidator ID="rfvddlUserPriority" runat="server" ErrorMessage="Required"
-                                                        InitialValue="0" Text="Required" ControlToValidate="ddlUserPriority"></asp:RequiredFieldValidator>
+                                                        InitialValue="0" ForeColor="Red" Text="Required" ControlToValidate="ddlUserPriority"
+                                                        meta:resourcekey="rfvddlUserPriorityResource1"></asp:RequiredFieldValidator>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -391,7 +394,7 @@
                                                 <td>
                                                     <asp:TextBox ID="txtUserActivity" runat="server" Width="400px" 
                                                         meta:resourcekey="txtUserActivityResource1"></asp:TextBox>
-                                                    <asp:RequiredFieldValidator ID="rfvUserActivity" runat="server" ErrorMessage="Required"
+                                                    <asp:RequiredFieldValidator ID="rfvUserActivity" runat="server" ErrorMessage="Required"  ForeColor="Red"
                                                         Text="Required" ControlToValidate="txtUserActivity" 
                                                         meta:resourcekey="rfvUserActivityResource1"></asp:RequiredFieldValidator>
                                                 </td>
@@ -405,8 +408,8 @@
                                                 <td>
                                                     <asp:TextBox ID="txtUserOutputIndicator1" runat="server" Width="400px" 
                                                         meta:resourcekey="txtUserOutputIndicator1Resource1"></asp:TextBox>
-                                                    <asp:RequiredFieldValidator ID="rfvUserOutputIndicator1" runat="server" ErrorMessage="Required"
-                                                        Text="Required" ControlToValidate="txtUserActivity" 
+                                                    <asp:RequiredFieldValidator ID="rfvUserOutputIndicator1" runat="server" ErrorMessage="Required"  ForeColor="Red"
+                                                        Text="Required" ControlToValidate="txtUserOutputIndicator1" 
                                                         meta:resourcekey="rfvUserOutputIndicator1Resource1"></asp:RequiredFieldValidator>
                                                 </td>
                                             </tr>
