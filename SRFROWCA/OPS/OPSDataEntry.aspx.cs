@@ -60,7 +60,7 @@ namespace SRFROWCA.OPS
                 lblCluster.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(OPSClusterName);
             }
             PopulateStrategicObjectives();
-            PopulatePriorities();
+            //PopulatePriorities();
 
             //DataTable dtActivities = GetActivities();
             //AddDynamicColumnsInGrid(dtActivities);
@@ -78,7 +78,7 @@ namespace SRFROWCA.OPS
             //    lblCluster.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(OPSClusterName);
             //}
             PopulateStrategicObjectives();
-            PopulatePriorities();
+            //PopulatePriorities();
 
             //DataTable dtActivities = GetActivities();
             //AddDynamicColumnsInGrid(dtActivities);
@@ -322,7 +322,7 @@ namespace SRFROWCA.OPS
             LocationId = GetLocationId();
             PopulateLocations(LocationId);
             PopulateStrategicObjectives();
-            PopulatePriorities();
+            //PopulatePriorities();
         }
 
         private int GetLocationId()
@@ -333,76 +333,76 @@ namespace SRFROWCA.OPS
 
         private void PopulateStrategicObjectives()
         {
-            ddlStrObjectives.DataValueField = "ObjectiveId";
-            ddlStrObjectives.DataTextField = "Objective";
+            //ddlStrObjectives.DataValueField = "ObjectiveId";
+            //ddlStrObjectives.DataTextField = "Objective";
 
-            DataTable dt = GetStrategicObjectives();
-            ddlStrObjectives.DataSource = dt;
-            ddlStrObjectives.DataBind();
+            //DataTable dt = GetStrategicObjectives();
+            //ddlStrObjectives.DataSource = dt;
+            //ddlStrObjectives.DataBind();
 
-            if (ddlStrObjectives.Items.Count > 1)
-            {
-                ListItem item = new ListItem("Select Str Objective", "0");
-                ddlStrObjectives.Items.Insert(0, item);
-            }
-            else
-            {
-                PopulatePriorities();
-            }
+            //if (ddlStrObjectives.Items.Count > 1)
+            //{
+            //    ListItem item = new ListItem("Select Str Objective", "0");
+            //    ddlStrObjectives.Items.Insert(0, item);
+            //}
+            //else
+            //{
+            //    PopulatePriorities();
+            //}
 
-            ddlUserStrObj.DataValueField = "ObjectiveId";
-            ddlUserStrObj.DataTextField = "Objective";
-            ddlUserStrObj.DataSource = dt;
-            ddlUserStrObj.DataBind();
+            //ddlUserStrObj.DataValueField = "ObjectiveId";
+            //ddlUserStrObj.DataTextField = "Objective";
+            //ddlUserStrObj.DataSource = dt;
+            //ddlUserStrObj.DataBind();
 
-            if (ddlUserStrObj.Items.Count > 1)
-            {
-                ListItem item = new ListItem("Select Str Objective", "0");
-                ddlUserStrObj.Items.Insert(0, item);
-            }
+            //if (ddlUserStrObj.Items.Count > 1)
+            //{
+            //    ListItem item = new ListItem("Select Str Objective", "0");
+            //    ddlUserStrObj.Items.Insert(0, item);
+            //}
         }
 
-        private DataTable GetStrategicObjectives()
-        {
-            int isLogFrame = 1;
-            return DBContext.GetData("GetObjectivesLogFrame", new object[] { SiteLanguageId, isLogFrame });
-        }
+        //private DataTable GetStrategicObjectives()
+        //{
+        //    //int isLogFrame = 1;
+        //    //return DBContext.GetData("GetObjectivesLogFrame", new object[] { SiteLanguageId, isLogFrame });
+        //}
 
-        private void PopulateSpcObjectives()
-        {
-            int strObjId = 0;
-            int.TryParse(ddlStrObjectives.SelectedValue, out strObjId);
-            PopulatePriorities();
-        }
+        //private void PopulateSpcObjectives()
+        //{
+        //    int strObjId = 0;
+        //    int.TryParse(ddlStrObjectives.SelectedValue, out strObjId);
+        //    PopulatePriorities();
+        //}
 
-        private void PopulatePriorities()
-        {
-            ddlPriorities.DataValueField = "HumanitarianPriorityId";
-            ddlPriorities.DataTextField = "HumanitarianPriority";
+        //private void PopulatePriorities()
+        //{
+        //    ddlPriorities.DataValueField = "HumanitarianPriorityId";
+        //    ddlPriorities.DataTextField = "HumanitarianPriority";
 
-            DataTable dt = GetPriorites();
-            ddlPriorities.DataSource = dt;
-            ddlPriorities.DataBind();
+        //    DataTable dt = GetPriorites();
+        //    ddlPriorities.DataSource = dt;
+        //    ddlPriorities.DataBind();
 
-            ListItem item = new ListItem("Select Priority", "0");
-            ddlPriorities.Items.Insert(0, item);
+        //    ListItem item = new ListItem("Select Priority", "0");
+        //    ddlPriorities.Items.Insert(0, item);
 
 
-            ddlUserPriority.DataValueField = "HumanitarianPriorityId";
-            ddlUserPriority.DataTextField = "HumanitarianPriority";
+        //    ddlUserPriority.DataValueField = "HumanitarianPriorityId";
+        //    ddlUserPriority.DataTextField = "HumanitarianPriority";
 
-            ddlUserPriority.DataSource = dt;
-            ddlUserPriority.DataBind();
+        //    ddlUserPriority.DataSource = dt;
+        //    ddlUserPriority.DataBind();
 
-            ListItem item1 = new ListItem("Select Priority", "0");
-            ddlUserPriority.Items.Insert(0, item1);
-        }
+        //    ListItem item1 = new ListItem("Select Priority", "0");
+        //    ddlUserPriority.Items.Insert(0, item1);
+        //}
 
-        private DataTable GetPriorites()
-        {
-            int isLogFrame = 1;
-            return DBContext.GetData("GetPrioritiesLogFrame", new object[] { SiteLanguageId, isLogFrame });
-        }
+        //private DataTable GetPriorites()
+        //{
+        //    int isLogFrame = 1;
+        //    return DBContext.GetData("GetPrioritiesLogFrame", new object[] { SiteLanguageId, isLogFrame });
+        //}
 
         // In this method we will get the postback control.
         public string GetPostBackControlId(Page page)
@@ -549,8 +549,8 @@ namespace SRFROWCA.OPS
                 // the appropriate template property.
 
                 string columnName = column.ColumnName;
-                if (!(columnName == "OPSReportId" || columnName == "ClusterName" || columnName == "IndicatorName" ||
-                        columnName == "StrObjName" || columnName == "SpcObjName" || columnName == "ActivityDataId" ||
+                if (!(columnName == "OPSReportId" || columnName == "ClusterName" || columnName == "SecondaryCluster" ||
+                        columnName == "Objective" || columnName == "HumanitarianPriority" || columnName == "ActivityDataId" ||
                         columnName == "ActivityName" || columnName == "DataName" || columnName == "IsActive"))
                 {
 
