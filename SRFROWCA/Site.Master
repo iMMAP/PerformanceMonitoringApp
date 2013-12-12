@@ -9,7 +9,6 @@
     <link rel="stylesheet" type="text/css" href="~/Styles/style.css" />
     <script src="http://code.jquery.com/jquery-1.10.1.min.js" type="text/javascript"></script>
     <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
-    
     <script type="text/javascript" src="<%# BaseURL %>/Scripts/jquery.fixedMenu.js"></script>
     <script type="text/javascript">
         var myMessages = ['info', 'warning', 'error', 'success'];
@@ -30,7 +29,7 @@
             // get the current page
             var link = window.location.href.split('/');
             page = link[link.length - 1];
-            
+
             // now select the link based on the address
             $('#nav li a[href*="' + page + '"]').addClass('current');
         });
@@ -88,6 +87,12 @@
                 </li>
                 <li><a href="../ContactUs/Contactus.aspx">Contact us</a></li>
                 <li><a href="../UserManual.aspx">Help</a></li>
+                <li>
+                    <asp:LinkButton ID="lnkLanguageEnglish" Text="English" runat="server" OnClick="lnkLanguageEnglish_Click"
+                        CausesValidation="False"></asp:LinkButton></li>
+                <li>
+                    <asp:LinkButton ID="lnkLanguageFrench" Text="Français" runat="server" OnClick="lnkLanguageFrench_Click"
+                        CausesValidation="False"></asp:LinkButton></li>
             </ul>
         </div>
         <div class="spacer" style="clear: both;">

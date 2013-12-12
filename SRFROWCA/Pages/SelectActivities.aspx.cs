@@ -6,11 +6,53 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using SRFROWCA.Common;
+using System.Threading;
+using System.Globalization;
 
 namespace SRFROWCA.Pages
 {
     public partial class SelectActivities : System.Web.UI.Page
     {
+
+        protected override void InitializeCulture()
+        {
+            string postBackControl = Request.Form["__EventTarget"];
+            string culture = "";
+            if (!string.IsNullOrEmpty(postBackControl))
+            {
+                //if (postBackControl.EndsWith("French"))
+                //{
+                //    //SiteLanguageId = 2;
+                //    culture = "fr-FR";
+                //}
+                //else
+                //{
+                //    //SiteLanguageId = 1;
+                //    culture = "en-US";
+                //}
+                SetCulture(culture);
+
+                PopulateDropDowns();
+                LoadClusters();
+            }
+
+            //if (Session["SiteLanguage"] != null)
+            //{
+            //    string culture = "en-US";
+            //    if()
+            //    if (!Session["SiteLanguage"].ToString().StartsWith(Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName)) SetCulture(culture);
+            //}
+
+            base.InitializeCulture();
+        }
+
+        protected void SetCulture(string culture)
+        {
+            //Session["SiteLanguage"] = languageId;
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(culture);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
+        }
+
         protected void Page_PreInit(object sender, EventArgs e)
         {
             GZipContents.GZipOutput();
@@ -235,7 +277,7 @@ namespace SRFROWCA.Pages
         // Get all activities.
         private object GetActivities(int clusterId)
         {
-            return DBContext.GetData("GetEmergencyClusterActivities", new object[] { clusterId });
+            return DBContext.GetData("GetEmergencyClusterActivities", new object[] { clusterId, ROWCACommon.SelectedSiteLanguageId });
         }
 
         // Get only current (loggedin) user's activities to select from all activities.
@@ -341,7 +383,7 @@ namespace SRFROWCA.Pages
         }
         private DataTable GetEmergencyClusters(int emgLocationId)
         {
-            return DBContext.GetData("GetEmergencyClustersOfData", new object[] { emgLocationId });
+            return DBContext.GetData("GetEmergencyClustersOfData", new object[] { emgLocationId, ROWCACommon.SelectedSiteLanguageId });
         }
 
         private void ShowMessage(string message, ROWCACommon.NotificationType notificationType = ROWCACommon.NotificationType.Success)

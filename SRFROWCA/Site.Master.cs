@@ -13,6 +13,24 @@ namespace SRFROWCA
             ((Repeater)e.Item.FindControl("subNavDropdown")).DataSource = currentRepeaterNode.ChildNodes;
             ((Repeater)e.Item.FindControl("subNavDropdown")).DataBind();
         }
+
+        protected void Page_Init(object sender, EventArgs e)
+        {
+            if (Session["SiteLanguage"] == null)
+            {
+                Session["SiteLanguage"] = (int) Common.ROWCACommon.SiteLanguage.English;
+
+                if (Request.Cookies["SiteLanguageCookie"] != null)
+                {
+                    string siteLangId = Request.Cookies["SiteLanguageCookie"].Value;
+                    if (siteLangId == "2")
+                    {
+                        Session["SiteLanguage"] = (int)Common.ROWCACommon.SiteLanguage.French;
+                    }
+                }
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (HttpContext.Current.User.Identity.IsAuthenticated)
@@ -41,6 +59,24 @@ namespace SRFROWCA
                 menuMyActivities.Visible = false;
                 menuDataEntry.Visible = false;
             }
+        }
+
+        protected void lnkLanguageEnglish_Click(object sender, EventArgs e)
+        {
+            Session["SiteLanguage"] = (int)Common.ROWCACommon.SiteLanguage.English;
+            AddSiteLangInCookie(Common.ROWCACommon.SiteLanguage.English);
+        }
+
+        protected void lnkLanguageFrench_Click(object sender, EventArgs e)
+        {
+            Session["SiteLanguage"] = (int)Common.ROWCACommon.SiteLanguage.French;
+            AddSiteLangInCookie(Common.ROWCACommon.SiteLanguage.French);
+        }
+
+        private void AddSiteLangInCookie(Common.ROWCACommon.SiteLanguage lng)
+        {
+            Response.Cookies["SiteLanguageCookie"].Value = ((int)lng).ToString();
+            Response.Cookies["SiteLanguageCookie"].Expires = DateTime.Now.AddDays(365);
         }
 
         // Gets the ASP.NET application's virtual application root path on the server.

@@ -94,6 +94,24 @@ namespace SRFROWCA {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor MySettingsMenue;
         
         /// <summary>
+        /// lnkLanguageEnglish control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkLanguageEnglish;
+        
+        /// <summary>
+        /// lnkLanguageFrench control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkLanguageFrench;
+        
+        /// <summary>
         /// menuMyActivities control.
         /// </summary>
         /// <remarks>

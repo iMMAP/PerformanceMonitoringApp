@@ -102,6 +102,19 @@ namespace SRFROWCA.Common
             }
         }
 
+        internal static int SelectedSiteLanguageId
+        {
+            get
+            {
+                if (HttpContext.Current.Session["SiteLanguage"] == null)
+                {
+                    return Convert.ToInt32(HttpContext.Current.Session["SiteLanguage"]);
+                }
+
+                return Convert.ToInt32(SiteLanguage.English);
+            }
+        }
+
         internal static DataTable GetLocations(IPrincipal user)
         {
             int locationType = (int)LocationTypes.National;
@@ -288,6 +301,12 @@ namespace SRFROWCA.Common
             Error = 2,
             Info = 3,
             Warning = 4,
-        }       
+        }
+
+        internal enum SiteLanguage
+        { 
+            English = 1,
+            French = 2
+        }
     }
 }

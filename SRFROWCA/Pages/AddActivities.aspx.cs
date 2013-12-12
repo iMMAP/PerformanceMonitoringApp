@@ -636,14 +636,11 @@ namespace SRFROWCA.Pages
             int monthId = 0;
             int.TryParse(ddlMonth.SelectedValue, out monthId);
 
-            //string locationIds = GetSelectedLocationIds();
-            //string locIdsNotIncluded = GetNotSelectedLocationIds();
-
             string locationIds = GetSelectedItems(cblLocations);
             string locIdsNotIncluded = GetNotSelectedItems(cblLocations);
 
             Guid userId = ROWCACommon.GetCurrentUserId();
-            DataTable dt = DBContext.GetData("GetIPData", new object[] { locEmergencyId, locationIds, officeId, yearId, monthId, locIdsNotIncluded, userId });
+            DataTable dt = DBContext.GetData("GetIPData", new object[] { locEmergencyId, locationIds, officeId, yearId, monthId, locIdsNotIncluded, 1, userId });
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 
@@ -689,7 +686,9 @@ namespace SRFROWCA.Pages
                 // the appropriate template property.
 
                 string columnName = column.ColumnName;
-                if (!(columnName == "ReportId" || columnName == "ClusterName" || columnName == "IndicatorName" || columnName == "ActivityDataId" || columnName == "ActivityName" || columnName == "DataName" || columnName == "IsActive"))
+                if (!(columnName == "ReportId" || columnName == "ClusterName" || columnName == "Objective" || 
+                    columnName == "HumanitarianPriority" || columnName == "SecondaryCluster" || columnName == "ActivityName" ||
+                    columnName == "DataName" || columnName == "IsActive" || columnName == "ActivityDataId"))
                 {
                     customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, column.ColumnName, "1");
                     customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, column.ColumnName, "1");

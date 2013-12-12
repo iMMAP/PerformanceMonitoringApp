@@ -48,7 +48,8 @@
         <ContentTemplate>
             <asp:UpdatePanel ID="updMessage" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
-                    <div id="divMsg"></div>
+                    <div id="divMsg">
+                    </div>
                 </ContentTemplate>
             </asp:UpdatePanel>
             <div style="text-align: center;">
@@ -61,7 +62,6 @@
             </div>
             <div class="buttonsdiv">
                 <div class="heading">
-                    
                 </div>
                 <div class="buttonright">
                     <asp:Button ID="btnAdd" runat="server" Text="Add Selected" CssClass="button_example"
@@ -76,13 +76,14 @@
                 <asp:Panel CssClass="grid" ID="pnlCust" runat="server">
                     <asp:UpdatePanel ID="pnlUpdate" runat="server">
                         <ContentTemplate>
-                            <asp:GridView ID="gvClusters" runat="server" AutoGenerateColumns="false" ShowHeader="true" ShowHeaderWhenEmpty="true"
-                                CssClass="imagetable" OnRowDataBound="gvClusters_RowDataBound" Width="100%">
+                            <asp:GridView ID="gvClusters" runat="server" AutoGenerateColumns="false" ShowHeader="true"
+                                ShowHeaderWhenEmpty="true" CssClass="imagetable" OnRowDataBound="gvClusters_RowDataBound"
+                                Width="100%">
                                 <RowStyle CssClass="istrow" />
-                                <AlternatingRowStyle CssClass="altcolor" />   
+                                <AlternatingRowStyle CssClass="altcolor" />
                                 <EmptyDataTemplate>
                                     No Activitis? Please select emergency and office.
-                                </EmptyDataTemplate>                             
+                                </EmptyDataTemplate>
                                 <Columns>
                                     <asp:TemplateField HeaderText="Select Your Activities">
                                         <ItemTemplate>
@@ -102,13 +103,14 @@
                                                                 <%# Container.DataItemIndex + 1 %>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
-                                                        <asp:TemplateField HeaderText="Select" ItemStyle-Width="4%">
+                                                        <asp:TemplateField HeaderText="Select" ItemStyle-Width="2%">
                                                             <ItemTemplate>
                                                                 <asp:CheckBox ID="chkActivitySelect" runat="server" />
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
-                                                        <asp:BoundField DataField="IndicatorName" HeaderText="Indicator" ItemStyle-Width="40%" />
-                                                        <asp:BoundField DataField="ActivityName" HeaderText="Activity" ItemStyle-Width="50%" />
+                                                        <asp:BoundField DataField="Objective" HeaderText="Objective" ItemStyle-Width="38%" />
+                                                        <asp:BoundField DataField="HumanitarianPriority" HeaderText="Priority" ItemStyle-Width="10%" />
+                                                        <asp:BoundField DataField="ActivityName" HeaderText="Activity" ItemStyle-Width="40%" />
                                                         <asp:TemplateField>
                                                             <ItemTemplate>
                                                                 <asp:ImageButton ID="ibtnAdd" runat="server" ImageUrl="~/images/add_plus.png" CommandName="AddActivity"
@@ -117,7 +119,7 @@
                                                         </asp:TemplateField>
                                                         <asp:TemplateField Visible="false">
                                                             <ItemTemplate>
-                                                                <asp:Label ID="lblActivityId" runat="server" Text='<%# Eval("IndicatorActivityId") %>'></asp:Label>
+                                                                <asp:Label ID="lblActivityId" runat="server" Text='<%# Eval("PriorityActivityId") %>'></asp:Label>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
                                                     </Columns>

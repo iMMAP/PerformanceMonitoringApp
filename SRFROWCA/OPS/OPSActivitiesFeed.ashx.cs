@@ -86,14 +86,14 @@ namespace SRFROWCA.OPS
                 string activityDataId = row["ActivityDataId"].ToString();
                 string strObjId = row["StrategicObjectiveId"].ToString();
                 string strObjName = row["StrategicObjectiveName"].ToString();
-                string dataId = row["ActivityDataId"].ToString();
-                string dataName = row["DataName"].ToString();
+                string dataId = row["OutputIndicatorId"].ToString();
+                string dataName = row["OutputIndicator"].ToString();
                 string activityId = row["IndicatorActivityId"].ToString();
                 string activityName = row["ActivityName"].ToString();
-                string indicatorId = row["ObjectiveIndicatorId"].ToString();
-                string indicatorName = row["IndicatorName"].ToString();
-                string objId = row["ClusterObjectiveId"].ToString();
-                string objName = row["ObjectiveName"].ToString();
+                string indicatorId = row["SecondaryClusterId"].ToString();
+                string indicatorName = row["SecondaryCluster"].ToString();
+                string objId = row["PriorityId"].ToString();
+                string objName = row["Priority"].ToString();
                 string clusterName = row["ClusterName"].ToString();
 
                 XElement logFrame = new XElement("ProjectActivity");
@@ -102,10 +102,10 @@ namespace SRFROWCA.OPS
                 logFrameValues.Add(logFrame);
 
                 logFrame.Add(GetElement("StrategicObjective", objId, strObjName));
-                logFrame.Add(GetElement("SpecificObjective", objId, objName));
-                logFrame.Add(GetElement("Indicator", indicatorId, indicatorName));
+                logFrame.Add(GetElement("Priority", objId, objName));
+                logFrame.Add(GetElement("SecondaryCluster", indicatorId, indicatorName));
                 logFrame.Add(GetElement("Activity", activityId, activityName));
-                logFrame.Add(GetElement("Data", dataId, dataName));
+                logFrame.Add(GetElement("OutputIndicator", dataId, dataName));
 
                 
 

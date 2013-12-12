@@ -105,7 +105,7 @@
                     }
                 });
 
-                $(".imagetable").prepend('<colgroup><col /><col /><col /><col /><col /></colgroup><thead><tr style="background-color:ButtonFace;"><th style="width: 30px;">&nbsp;</th><th style="width: 50px;">&nbsp;</th><th style="width: 250px;">&nbsp;</th><th style="width: 250px;">&nbsp;</th><th style="width: 250px;">&nbsp;</th>' + list + '</tr></thead>');
+                $(".imagetable").prepend('<colgroup><col /><col /><col /><col /><col /></colgroup><thead><tr style="background-color:ButtonFace;"><th style="width: 30px;">&nbsp;</th><th style="width: 50px;">&nbsp;</th><th style="width: 150px;">&nbsp;</th><th style="width: 150px;">&nbsp;</th><th style="width: 150px;">&nbsp;</th><th style="width: 150px;">&nbsp;</th>' + list + '</tr></thead>');
             }
 
             $("#<%=gvActivities.ClientID %>").kiketable_colsizable({ minWidth: 50 })
@@ -312,11 +312,13 @@
                     </asp:TemplateField>
                     <asp:BoundField DataField="ClusterName" HeaderText="Cluster" ItemStyle-Width="50px"
                         ItemStyle-Wrap="false" />
-                    <asp:BoundField DataField="IndicatorName" HeaderText="Indicator" ItemStyle-Wrap=" false"
-                        ItemStyle-Width="350px" />
+                    <asp:BoundField DataField="Objective" HeaderText="Objective" ItemStyle-Wrap=" false"
+                        ItemStyle-Width="150px" />
+                        <asp:BoundField DataField="HumanitarianPriority" HeaderText="Priority" ItemStyle-Wrap=" false"
+                        ItemStyle-Width="150px" />
                     <asp:BoundField DataField="ActivityName" HeaderText="Activity" ItemStyle-Wrap="false"
-                        ItemStyle-Width="350px" />
-                    <asp:BoundField DataField="DataName" HeaderText="Data" ItemStyle-Wrap="false" ItemStyle-Width="350px" />
+                        ItemStyle-Width="150px" />
+                    <asp:BoundField DataField="DataName" HeaderText="Data" ItemStyle-Wrap="false" ItemStyle-Width="150px" />
                 </Columns>
             </asp:GridView>
         </div>
