@@ -13,6 +13,24 @@ namespace SRFROWCA.Pages {
     public partial class SelectActivities {
         
         /// <summary>
+        /// divEmergency control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divEmergency;
+        
+        /// <summary>
+        /// locaEmgCaption control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locaEmgCaption;
+        
+        /// <summary>
         /// ddlEmergency control.
         /// </summary>
         /// <remarks>
@@ -29,24 +47,6 @@ namespace SRFROWCA.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvEmergency;
-        
-        /// <summary>
-        /// ddlOffice control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlOffice;
-        
-        /// <summary>
-        /// rfvOffice control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvOffice;
         
         /// <summary>
         /// updActivities control.

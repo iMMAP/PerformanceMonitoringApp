@@ -4,7 +4,6 @@ using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Transactions;
-using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
@@ -409,7 +408,7 @@ namespace SRFROWCA.Pages
         }
         private DataTable GetLocationEmergencies(int locationId)
         {
-            DataTable dt = DBContext.GetData("GetLocationEmergencies", new object[] { locationId });
+            DataTable dt = DBContext.GetData("GetLocationEmergencies", new object[] { locationId, ROWCACommon.SelectedSiteLanguageId });
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 

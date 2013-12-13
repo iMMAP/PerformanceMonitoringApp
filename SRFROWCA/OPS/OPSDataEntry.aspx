@@ -269,7 +269,7 @@
                         <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
                         <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
                     </asp:BoundField>
-                    <asp:BoundField DataField="SecondaryCluster" HeaderText="Secondary Cluster" ItemStyle-Width="40px"
+                    <asp:BoundField DataField="SecondaryCluster" HeaderText="Cluster Partner" ItemStyle-Width="40px"
                         meta:resourcekey="BoundFieldResource2">
                         <ItemStyle Width="40px"></ItemStyle>
                     </asp:BoundField>

@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using BusinessLogic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Linq;
+using System.Web;
 using System.Xml.Linq;
+using BusinessLogic;
 
 namespace SRFROWCA.OPS
 {
@@ -31,17 +30,6 @@ namespace SRFROWCA.OPS
             }
 
             return projectId;
-        }
-
-        private string GetProjectData(int projectId)
-        {
-            DataTable dt = DBContext.GetData("GetOPSProjectData", new object[] { projectId });
-
-            using (var sw = new StringWriter())
-            {
-                dt.WriteXml(sw);
-                return sw.ToString();
-            }
         }
 
         private string GetXMLOfProjectData(int projectId)
@@ -83,31 +71,31 @@ namespace SRFROWCA.OPS
                 DataRow row = dt.Rows[0];
                 //string logFrameType = row["LogFrameType"].ToString();
                 string projectId = row["OPSProjectId"].ToString();
-                string activityDataId = row["ActivityDataId"].ToString();
+                
                 string strObjId = row["StrategicObjectiveId"].ToString();
-                string strObjName = row["StrategicObjectiveName"].ToString();
-                string dataId = row["OutputIndicatorId"].ToString();
-                string dataName = row["OutputIndicator"].ToString();
-                string activityId = row["IndicatorActivityId"].ToString();
-                string activityName = row["ActivityName"].ToString();
-                string indicatorId = row["SecondaryClusterId"].ToString();
-                string indicatorName = row["SecondaryCluster"].ToString();
-                string objId = row["PriorityId"].ToString();
-                string objName = row["Priority"].ToString();
+                string strObjName = row["StrategicObjectiveName"].ToString();                
+                string priorityId = row["HumanitarianPriorityId"].ToString();
+                string priority = row["HumanitarianPriority"].ToString();                
+                string clusterPartnerId = row["ClusterPartnerId"].ToString();
+                string clusterPartner = row["ClusterPartner"].ToString();                
+                string priorityActivityId = row["PriorityActivityId"].ToString();
+                string activityName = row["ActivityName"].ToString();                
+                string outputIndicatorId = row["OutputIndicatorId"].ToString();
+                string outputIndicator = row["OutputIndicator"].ToString();
+
+                string activityDataId = row["ActivityDataId"].ToString();
+                
                 string clusterName = row["ClusterName"].ToString();
 
-                XElement logFrame = new XElement("ProjectActivity");
-                //logFrame.SetAttributeValue("LogFrameType", logFrameType);
+                XElement logFrame = new XElement("ProjectActivity");                
                 logFrame.SetAttributeValue("ID", activityDataId);
                 logFrameValues.Add(logFrame);
 
-                logFrame.Add(GetElement("StrategicObjective", objId, strObjName));
-                logFrame.Add(GetElement("Priority", objId, objName));
-                logFrame.Add(GetElement("SecondaryCluster", indicatorId, indicatorName));
-                logFrame.Add(GetElement("Activity", activityId, activityName));
-                logFrame.Add(GetElement("OutputIndicator", dataId, dataName));
-
-                
+                logFrame.Add(GetElement("StrategicObjective", strObjId, strObjName));
+                logFrame.Add(GetElement("Priority", priorityId, priority));
+                logFrame.Add(GetElement("ClusterPartner", clusterPartnerId, clusterPartner));
+                logFrame.Add(GetElement("Activity", priorityActivityId, activityName));
+                logFrame.Add(GetElement("OutputIndicator", outputIndicatorId, outputIndicator));
 
                 foreach (DataRow locRow in dt.Rows)
                 {
@@ -124,8 +112,6 @@ namespace SRFROWCA.OPS
                     locationElement.Add(GetTargetElement("Target", target2014, target2014));
                     logFrame.Add(locationElement);
                 }
-
-                
             }
         }
 
@@ -140,7 +126,6 @@ namespace SRFROWCA.OPS
         {
             XElement element = new XElement("Name");
             element.Value = text;
-
             return element;
         }
 

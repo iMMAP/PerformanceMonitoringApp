@@ -106,14 +106,26 @@ namespace SRFROWCA.Common
         {
             get
             {
-                if (HttpContext.Current.Session["SiteLanguage"] == null)
+                if (HttpContext.Current.Session["SiteLanguage"] != null)
                 {
                     return Convert.ToInt32(HttpContext.Current.Session["SiteLanguage"]);
                 }
 
                 return Convert.ToInt32(SiteLanguage.English);
             }
+
+            set 
+            {
+                HttpContext.Current.Session["SiteLanguage"] = value;
+            }
         }
+
+        internal static void AddSiteLangInCookie(HttpResponse httpResponse, ROWCACommon.SiteLanguage lng)
+        {
+            httpResponse.Cookies["SiteLanguageCookie"].Value = ((int)lng).ToString();
+            httpResponse.Cookies["SiteLanguageCookie"].Expires = DateTime.Now.AddDays(365);
+        }
+
 
         internal static DataTable GetLocations(IPrincipal user)
         {

@@ -379,6 +379,9 @@
     <Compile Include="Anonymous\AllData.aspx.designer.cs">
       <DependentUpon>AllData.aspx</DependentUpon>
     </Compile>
+    <Compile Include="BasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="DataFeed.ashx.cs">
       <DependentUpon>DataFeed.ashx</DependentUpon>
     </Compile>
@@ -764,6 +767,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="OPS\App_LocalResources\OPSDataEntry.aspx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Pages\App_LocalResources\SelectActivities.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Pages\App_LocalResources\SelectActivities.aspx.fr.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

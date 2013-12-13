@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Web;
 using System.Web.UI.WebControls;
+using System.Threading;
+using System.Globalization;
+using SRFROWCA.Common;
 
 namespace SRFROWCA
 {
@@ -18,14 +21,14 @@ namespace SRFROWCA
         {
             if (Session["SiteLanguage"] == null)
             {
-                Session["SiteLanguage"] = (int) Common.ROWCACommon.SiteLanguage.English;
+                ROWCACommon.SelectedSiteLanguageId = (int) Common.ROWCACommon.SiteLanguage.English;
 
                 if (Request.Cookies["SiteLanguageCookie"] != null)
                 {
                     string siteLangId = Request.Cookies["SiteLanguageCookie"].Value;
                     if (siteLangId == "2")
                     {
-                        Session["SiteLanguage"] = (int)Common.ROWCACommon.SiteLanguage.French;
+                        ROWCACommon.SelectedSiteLanguageId = (int)Common.ROWCACommon.SiteLanguage.French;
                     }
                 }
             }
@@ -63,20 +66,14 @@ namespace SRFROWCA
 
         protected void lnkLanguageEnglish_Click(object sender, EventArgs e)
         {
-            Session["SiteLanguage"] = (int)Common.ROWCACommon.SiteLanguage.English;
-            AddSiteLangInCookie(Common.ROWCACommon.SiteLanguage.English);
+            ROWCACommon.SelectedSiteLanguageId = (int)Common.ROWCACommon.SiteLanguage.English;
+            ROWCACommon.AddSiteLangInCookie(this.Response, Common.ROWCACommon.SiteLanguage.English);
         }
 
         protected void lnkLanguageFrench_Click(object sender, EventArgs e)
         {
-            Session["SiteLanguage"] = (int)Common.ROWCACommon.SiteLanguage.French;
-            AddSiteLangInCookie(Common.ROWCACommon.SiteLanguage.French);
-        }
-
-        private void AddSiteLangInCookie(Common.ROWCACommon.SiteLanguage lng)
-        {
-            Response.Cookies["SiteLanguageCookie"].Value = ((int)lng).ToString();
-            Response.Cookies["SiteLanguageCookie"].Expires = DateTime.Now.AddDays(365);
+            ROWCACommon.SelectedSiteLanguageId = (int)Common.ROWCACommon.SiteLanguage.French;
+            ROWCACommon.AddSiteLangInCookie(this.Response, Common.ROWCACommon.SiteLanguage.French);
         }
 
         // Gets the ASP.NET application's virtual application root path on the server.

@@ -8,51 +8,12 @@ using BusinessLogic;
 using SRFROWCA.Common;
 using System.Threading;
 using System.Globalization;
+using AjaxControlToolkit;
 
 namespace SRFROWCA.Pages
 {
     public partial class SelectActivities : System.Web.UI.Page
     {
-
-        protected override void InitializeCulture()
-        {
-            string postBackControl = Request.Form["__EventTarget"];
-            string culture = "";
-            if (!string.IsNullOrEmpty(postBackControl))
-            {
-                //if (postBackControl.EndsWith("French"))
-                //{
-                //    //SiteLanguageId = 2;
-                //    culture = "fr-FR";
-                //}
-                //else
-                //{
-                //    //SiteLanguageId = 1;
-                //    culture = "en-US";
-                //}
-                SetCulture(culture);
-
-                PopulateDropDowns();
-                LoadClusters();
-            }
-
-            //if (Session["SiteLanguage"] != null)
-            //{
-            //    string culture = "en-US";
-            //    if()
-            //    if (!Session["SiteLanguage"].ToString().StartsWith(Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName)) SetCulture(culture);
-            //}
-
-            base.InitializeCulture();
-        }
-
-        protected void SetCulture(string culture)
-        {
-            //Session["SiteLanguage"] = languageId;
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(culture);
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
-        }
-
         protected void Page_PreInit(object sender, EventArgs e)
         {
             GZipContents.GZipOutput();
@@ -60,11 +21,58 @@ namespace SRFROWCA.Pages
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (IsPostBack) return;
+            string languageChange = "";
+            if (Session["SiteChanged"] != null)
+            {
+                languageChange = Session["SiteChanged"].ToString();
+            }
+            //Session["SiteLanguage"]
+            if (IsPostBack && string.IsNullOrEmpty(languageChange)) return;
 
             PopulateDropDowns();
             LoadClusters();
+            Session["SiteChanged"] = null;            
         }
+
+        #region Culture
+        protected override void InitializeCulture()
+        {
+            string postBackControl = Request.Form["__EventTarget"];
+            string culture = "en-US";
+
+            if (!string.IsNullOrEmpty(postBackControl))
+            {
+
+                if (postBackControl.EndsWith("French"))
+                {
+                    Session["SiteChanged"] = 1;
+                    ROWCACommon.SelectedSiteLanguageId = (int)ROWCACommon.SiteLanguage.French;
+                    culture = "fr-FR";
+                }
+                else if (postBackControl.EndsWith("English"))
+                {
+                    Session["SiteChanged"] = 2;
+                    ROWCACommon.SelectedSiteLanguageId = (int)ROWCACommon.SiteLanguage.English;
+                    culture = "en-US";
+                }
+
+                SetCulture(culture);
+            }
+
+            if (Session["SiteLanguage"] != null)
+            {
+                if (!Session["SiteLanguage"].ToString().StartsWith(Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName)) SetCulture(culture);
+            }
+
+            base.InitializeCulture();
+        }
+
+        protected void SetCulture(string culture)
+        {
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(culture);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
+        }
+        #endregion
 
         private void PopulateDropDowns()
         {
@@ -78,7 +86,6 @@ namespace SRFROWCA.Pages
             }
 
             PopulateLocationEmergencies(locationId);
-            PopulateOffices(locationId, orgId);
         }
 
         #region Events.
@@ -87,10 +94,7 @@ namespace SRFROWCA.Pages
         {
             LoadClusters();
         }
-        protected void ddlOffice_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadClusters();
-        }
+
 
         protected void gvClusters_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -110,6 +114,23 @@ namespace SRFROWCA.Pages
 
                 // Attch row command event with grid.
                 gvActivities.RowCommand += gvActivities_RowCommand;
+            }
+        }
+
+        protected void gvClusters_RowCreated(Object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                int i = e.Row.RowIndex;
+                if (e.Row.RowIndex == 0)
+                {
+                    CollapsiblePanelExtender cpe = e.Row.FindControl("cpeExpandCollapseActivities") as CollapsiblePanelExtender;
+                    if (cpe != null)
+                    {
+                        cpe.Collapsed = false;
+                    }
+                }
+                int j = 0;
             }
         }
 
@@ -191,34 +212,7 @@ namespace SRFROWCA.Pages
             }
 
             // If not admin then return emergencies of user's locations.
-            return DBContext.GetData("GetLocationEmergencies", new object[] { locationId });
-        }
-
-        // Populate Office DDL
-        private void PopulateOffices(int locationId, int organizationId)
-        {
-            ddlOffice.DataValueField = "OfficeId";
-            ddlOffice.DataTextField = "OfficeName";
-
-            ddlOffice.DataSource = GetOffices(locationId, organizationId);
-            ddlOffice.DataBind();
-
-            if (ddlOffice.Items.Count > 1)
-            {
-                ListItem item = new ListItem("Select Your Office", "0");
-                ddlOffice.Items.Insert(0, item);
-            }
-        }
-        private DataTable GetOffices(int locationId, int organizationId)
-        {
-            // If admin then return all offices
-            if (HttpContext.Current.User.IsInRole("Admin"))
-            {
-                return DBContext.GetData("GetAllOffices");
-            }
-
-            // If not admin then return only user's office.
-            return DBContext.GetData("GetOrganizationOffices", new object[] { locationId, organizationId });
+            return DBContext.GetData("GetLocationEmergencies", new object[] { locationId, ROWCACommon.SelectedSiteLanguageId });
         }
 
         // Populate Clusters Grid.
@@ -234,10 +228,7 @@ namespace SRFROWCA.Pages
             int emgLocationId = 0;
             int.TryParse(ddlEmergency.SelectedValue, out emgLocationId);
 
-            int officeId = 0;
-            int.TryParse(ddlOffice.SelectedValue, out officeId);
-
-            if (emgLocationId > 0 && officeId > 0)
+            if (emgLocationId > 0)
             {
                 dt = GetEmergencyClusters(emgLocationId);
             }
@@ -266,7 +257,7 @@ namespace SRFROWCA.Pages
                 foreach (GridViewRow row in gvActivities.Rows)
                 {
                     Label lblActivityId = row.FindControl("lblActivityId") as Label;
-                    if (lblActivityId != null && lblActivityId.Text == dr["IndicatorActivityId"].ToString())
+                    if (lblActivityId != null && lblActivityId.Text == dr["PriorityActivityId"].ToString())
                     {
                         ChangeImageInfo(row, "Add");
                     }
@@ -286,13 +277,10 @@ namespace SRFROWCA.Pages
             int emgLocationId = 0;
             int.TryParse(ddlEmergency.SelectedValue, out emgLocationId);
 
-            int officeId = 0;
-            int.TryParse(ddlOffice.SelectedValue, out officeId);
-
             Guid userId = ROWCACommon.GetCurrentUserId();
-            if (emgLocationId > 0 && officeId > 0)
+            if (emgLocationId > 0)
             {
-                return DBContext.GetData("GetIPActivities", new object[] { emgLocationId, officeId, userId });
+                return DBContext.GetData("GetIPActivities", new object[] { emgLocationId, userId });
             }
 
             return new DataTable();
@@ -359,27 +347,21 @@ namespace SRFROWCA.Pages
                 }
             }
         }
-        private void DeleteActivity(int dataId)
+        private void DeleteActivity(int activityId)
         {
             int emgLocId = 0;
             int.TryParse(ddlEmergency.SelectedValue, out emgLocId);
 
-            int officeId = 0;
-            int.TryParse(ddlOffice.SelectedValue, out officeId);
             Guid userId = ROWCACommon.GetCurrentUserId();
-
-            DBContext.Delete("DeleteActivityData", new object[] { emgLocId, officeId, dataId, userId, DBNull.Value });
+            DBContext.Delete("DeleteActivityData", new object[] { emgLocId, activityId, userId, DBNull.Value });
         }
         private void SaveActivity(int activityId)
         {
             int emgLocId = 0;
             int.TryParse(ddlEmergency.SelectedValue, out emgLocId);
 
-            int officeId = 0;
-            int.TryParse(ddlOffice.SelectedValue, out officeId);
             Guid userId = ROWCACommon.GetCurrentUserId();
-
-            DBContext.Add("InsertActivityData", new object[] { emgLocId, officeId, activityId, userId, DBNull.Value });
+            DBContext.Add("InsertActivityData", new object[] { emgLocId, activityId, userId, DBNull.Value });
         }
         private DataTable GetEmergencyClusters(int emgLocationId)
         {
