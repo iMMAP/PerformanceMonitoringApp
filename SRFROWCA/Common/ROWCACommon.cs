@@ -235,7 +235,12 @@ namespace SRFROWCA.Common
 
         public static Guid GetCurrentUserId()
         {
-            return (Guid)Membership.GetUser().ProviderUserKey;
+            if (Membership.GetUser() != null)
+            {
+                return (Guid)Membership.GetUser().ProviderUserKey;
+            }
+
+            return new Guid();
         }
 
         internal static void ShowMessage(Page page, Type pageType, string UniqueID, string message, NotificationType notificationType = NotificationType.Success, bool fadeOut = true, int animationTime = 0)
@@ -250,7 +255,7 @@ namespace SRFROWCA.Common
             else
             {
                 ScriptManager.RegisterStartupScript(page, pageType, UniqueID,
-                "$('#divMsg').addClass('" + cssClass + "').html('" + message + "').animate({ top: '0' }," + animationTime.ToString() + ").click(function(){$(this).animate({top: -$(this).outerHeight()}, 300);});", true);
+                "$('#divMsg').addClass('" + cssClass + "').html('" + message + "').animate({ top: '0' }," + animationTime.ToString() + ").click(function(){$(this).animate({top: -$(this).outerHeight()}, 400);});", true);
             }
         }
 

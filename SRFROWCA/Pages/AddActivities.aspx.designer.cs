@@ -22,15 +22,6 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.Label lblCountry;
         
         /// <summary>
-        /// lblOrganization control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblOrganization;
-        
-        /// <summary>
         /// ddlEmergency control.
         /// </summary>
         /// <remarks>
@@ -58,15 +49,6 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.DropDownList ddlYear;
         
         /// <summary>
-        /// rfvYear control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvYear;
-        
-        /// <summary>
         /// ddlMonth control.
         /// </summary>
         /// <remarks>
@@ -74,33 +56,6 @@ namespace SRFROWCA.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlMonth;
-        
-        /// <summary>
-        /// rfvMonth control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvMonth;
-        
-        /// <summary>
-        /// ddlOffice control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlOffice;
-        
-        /// <summary>
-        /// rfvOffice control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvOffice;
         
         /// <summary>
         /// btnSave control.

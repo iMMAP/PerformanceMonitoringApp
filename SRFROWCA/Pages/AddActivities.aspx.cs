@@ -28,7 +28,7 @@ namespace SRFROWCA.Pages
             this.Form.DefaultButton = this.btnSave.UniqueID;
 
             string controlName = GetPostBackControlId(this);
-            if (controlName == "ddlMonth" || controlName == "ddlOffice")
+            if (controlName == "ddlMonth")
             {
                 LocationRemoved = 0;
                 //lstSelectedLocations.Items.Clear();
@@ -57,12 +57,7 @@ namespace SRFROWCA.Pages
             BindGridData();
             AddLocationsInSelectedList();
         }
-        protected void ddlOffice_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LocationRemoved = 0;
-            BindGridData();
-            AddLocationsInSelectedList();
-        }
+        
         protected void ddlYear_SelectedIndexChanged(object sender, EventArgs e)
         {
             LocationRemoved = 0;
@@ -367,7 +362,7 @@ namespace SRFROWCA.Pages
             if (dt.Rows.Count > 0)
             {
                 lblCountry.Text = dt.Rows[0]["LocationName"].ToString();
-                lblOrganization.Text = dt.Rows[0]["OrganizationName"].ToString();
+                //lblOrganization.Text = dt.Rows[0]["OrganizationName"].ToString();
 
                 // Set Header of Location List Box.
                 //lblLocationLevelOfCountry.Text = "Admin2 Locations of " + lblCountry.Text;
@@ -376,13 +371,13 @@ namespace SRFROWCA.Pages
                 int organizationId = Convert.ToInt32(dt.Rows[0]["OrganizationId"].ToString());
 
                 PopulateLocationEmergencies(LocationId);
-                PopulateOffices(LocationId, organizationId);
                 PopulateLocations(LocationId);
             }
 
-            // Populate Year Drop Down.
-            var result = DateTime.Parse(DateTime.Now.ToShortDateString(), new CultureInfo("en-US")).Year;
-            ddlYear.SelectedIndex = ddlYear.Items.IndexOf(ddlYear.Items.FindByText(result.ToString()));
+            //// Populate Year Drop Down.
+            //var result = DateTime.Parse(DateTime.Now.ToShortDateString(), new CultureInfo("en-US")).Year;
+            //ddlYear.SelectedIndex = ddlYear.Items.IndexOf(ddlYear.Items.FindByText(result.ToString()));
+            PopulateYears();
 
             // Populate Months Drop Down.
             var result1 = DateTime.Now.ToString("MMM", CultureInfo.InvariantCulture);
@@ -409,27 +404,6 @@ namespace SRFROWCA.Pages
         private DataTable GetLocationEmergencies(int locationId)
         {
             DataTable dt = DBContext.GetData("GetLocationEmergencies", new object[] { locationId, ROWCACommon.SelectedSiteLanguageId });
-            return dt.Rows.Count > 0 ? dt : new DataTable();
-        }
-
-        // Populate Office Drop Down.
-        private void PopulateOffices(int locationId, int organizationId)
-        {
-            ddlOffice.DataValueField = "OfficeId";
-            ddlOffice.DataTextField = "OfficeName";
-
-            ddlOffice.DataSource = GetOffices(locationId, organizationId);
-            ddlOffice.DataBind();
-
-            if (ddlOffice.Items.Count > 1)
-            {
-                ListItem item = new ListItem("Select Your Office", "0");
-                ddlOffice.Items.Insert(0, item);
-            }
-        }
-        private DataTable GetOffices(int locationId, int organizationId)
-        {
-            DataTable dt = DBContext.GetData("GetOrganizationOffices", new object[] { locationId, organizationId });
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 
@@ -462,9 +436,6 @@ namespace SRFROWCA.Pages
 
             ddlYear.DataSource = GetYears();
             ddlYear.DataBind();
-
-            ListItem item = new ListItem("Select Year", "0");
-            ddlYear.Items.Insert(0, item);
 
             var result = DateTime.Parse(DateTime.Now.ToShortDateString(), new CultureInfo("en-US")).Year;
             ddlYear.SelectedIndex = ddlYear.Items.IndexOf(ddlYear.Items.FindByText(result.ToString()));
@@ -626,9 +597,6 @@ namespace SRFROWCA.Pages
             int locEmergencyId = 0;
             int.TryParse(ddlEmergency.SelectedValue, out locEmergencyId);
 
-            int officeId = 0;
-            int.TryParse(ddlOffice.SelectedValue, out officeId);
-
             int yearId = 0;
             int.TryParse(ddlYear.SelectedValue, out yearId);
 
@@ -639,7 +607,7 @@ namespace SRFROWCA.Pages
             string locIdsNotIncluded = GetNotSelectedItems(cblLocations);
 
             Guid userId = ROWCACommon.GetCurrentUserId();
-            DataTable dt = DBContext.GetData("GetIPData", new object[] { locEmergencyId, locationIds, officeId, yearId, monthId, locIdsNotIncluded, 1, userId });
+            DataTable dt = DBContext.GetData("GetIPData", new object[] { locEmergencyId, locationIds, yearId, monthId, locIdsNotIncluded, 1, userId });
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 
@@ -837,7 +805,6 @@ namespace SRFROWCA.Pages
         private void SaveReportMainInfo()
         {
             string reportName = "test"; // TODO:
-            int officeId = Convert.ToInt32(ddlOffice.SelectedValue);
             int locEmergencyId = Convert.ToInt32(ddlEmergency.SelectedValue);
             int yearId = Convert.ToInt32(ddlYear.SelectedValue);
             int monthId = Convert.ToInt32(ddlMonth.SelectedValue);
@@ -845,7 +812,7 @@ namespace SRFROWCA.Pages
             //int emergencyClusterId = Convert.ToInt32(ddlEmergency.SelectedValue);
             Guid loginUserId = ROWCACommon.GetCurrentUserId();
 
-            ReportId = DBContext.Add("InsertReport", new object[] { reportName, officeId, yearId, monthId, locEmergencyId, reportFrequencyId, loginUserId, DBNull.Value });
+            ReportId = DBContext.Add("InsertReport", new object[] { reportName, yearId, monthId, locEmergencyId, reportFrequencyId, loginUserId, DBNull.Value });
         }
 
         private bool IsDataExistsToSave()
@@ -1046,9 +1013,6 @@ namespace SRFROWCA.Pages
         {
             Session["dtActivities"] = dt;
 
-            int officeId = 0;
-            int.TryParse(ddlOffice.SelectedValue, out officeId);
-
             int locEmergencyId = 0;
             int.TryParse(ddlEmergency.SelectedValue, out locEmergencyId);
 
@@ -1059,10 +1023,11 @@ namespace SRFROWCA.Pages
             int.TryParse(ddlMonth.SelectedValue, out monthId);
             Guid userId = ROWCACommon.GetCurrentUserId();
 
-            DataTable dtReport = DBContext.GetData("GetReportId", new object[] { officeId, locEmergencyId, yearId, monthId, userId });
+            DataTable dtReport = DBContext.GetData("GetReportId", new object[] { locEmergencyId, yearId, monthId, userId });
             if (dtReport.Rows.Count > 0)
             {
-                ReportId = string.IsNullOrEmpty(dtReport.Rows[0]["ReportId"].ToString()) ? 0 : Convert.ToInt32(dtReport.Rows[0]["ReportId"].ToString());
+                ReportId = string.IsNullOrEmpty(dtReport.Rows[0]["ReportId"].ToString()) ? 0 : 
+                                                Convert.ToInt32(dtReport.Rows[0]["ReportId"].ToString());
             }
             else
             {

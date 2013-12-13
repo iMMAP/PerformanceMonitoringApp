@@ -3,11 +3,12 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-<style>
-       #MainContent_cblLocations td {
-    padding: 0 40px 0 0;
-}
-</style>
+    <style>
+        #MainContent_cblLocations td
+        {
+            padding: 0 40px 0 0;
+        }
+    </style>
     <script type="text/javascript" src="../Scripts/jquery.kiketable.colsizable-1.1.min.js"></script>
     <script type="text/javascript" src="../Scripts/jquery.event.drag-1.4.min.js"></script>
     <script src="../Scripts/jquery.numeric.min.js" type="text/javascript"></script>
@@ -183,55 +184,25 @@
             <div class="formdiv">
                 <table border="0" cellpadding="0" width="100%">
                     <tr>
-                        <td>
+                        <td align="right">
                             <label>
-                                Country:</label>
-                        </td>
-                        <td>
-                            <asp:Label ID="lblCountry" runat="server" Text="" Width="100px"></asp:Label>
-                        </td>
-                        <td>
-                            <label>
-                                Organization:</label>
-                        </td>
-                        <td>
-                            <asp:Label ID="lblOrganization" runat="server"></asp:Label>
-                        </td>
-                        <td>
-                            <label>
-                                Emergency:</label>
+                                Emergency: (<asp:Label ID="lblCountry" runat="server" Text=""></asp:Label>)  </label>
                         </td>
                         <td colspan="2">
-                            <asp:DropDownList ID="ddlEmergency" runat="server" Width="250px" OnSelectedIndexChanged="ddlEmergency_SelectedIndexChanged"
+                            <asp:DropDownList ID="ddlEmergency" runat="server" Width="350px" OnSelectedIndexChanged="ddlEmergency_SelectedIndexChanged"
                                 onchange="needToConfirm = false;" AutoPostBack="true">
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ID="rfvEmergency" runat="server" ErrorMessage="Select Emergency"
                                 InitialValue="0" Text="*" ControlToValidate="ddlEmergency"></asp:RequiredFieldValidator>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>
+                        <td align="right">
                             <label>
-                                Year:</label>
+                                Year/Month:</label>
                         </td>
                         <td>
                             <asp:DropDownList ID="ddlYear" runat="server" Width="100px" OnSelectedIndexChanged="ddlYear_SelectedIndexChanged"
                                 onchange="needToConfirm = false;" AutoPostBack="true">
-                                <asp:ListItem Text="2010" Value="6"></asp:ListItem>
-                                <asp:ListItem Text="2011" Value="7"></asp:ListItem>
-                                <asp:ListItem Text="2012" Value="8"></asp:ListItem>
-                                <asp:ListItem Text="2013" Value="9"></asp:ListItem>
-                                <asp:ListItem Text="2014" Value="20"></asp:ListItem>
-                                <asp:ListItem Text="2015" Value="11"></asp:ListItem>
                             </asp:DropDownList>
-                            <asp:RequiredFieldValidator ID="rfvYear" runat="server" ErrorMessage="Select Year"
-                                InitialValue="0" Text="*" ControlToValidate="ddlYear"></asp:RequiredFieldValidator>
-                        </td>
-                        <td>
-                            <label>
-                                Month:</label>
-                        </td>
-                        <td>
                             <asp:DropDownList ID="ddlMonth" runat="server" Width="100px" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged"
                                 onchange="needToConfirm = false;" AutoPostBack="true">
                                 <asp:ListItem Text="Jan" Value="1"></asp:ListItem>
@@ -247,19 +218,6 @@
                                 <asp:ListItem Text="Nov" Value="11"></asp:ListItem>
                                 <asp:ListItem Text="Dec" Value="12"></asp:ListItem>
                             </asp:DropDownList>
-                            <asp:RequiredFieldValidator ID="rfvMonth" runat="server" ErrorMessage="Select Month"
-                                InitialValue="0" Text="*" ControlToValidate="ddlMonth"></asp:RequiredFieldValidator>
-                        </td>
-                        <td>
-                            <label>
-                                Office:</label>
-                        </td>
-                        <td>
-                            <asp:DropDownList ID="ddlOffice" runat="server" Width="250px" AutoPostBack="true"
-                                onchange="needToConfirm = false;" OnSelectedIndexChanged="ddlOffice_SelectedIndexChanged">
-                            </asp:DropDownList>
-                            <asp:RequiredFieldValidator ID="rfvOffice" runat="server" ErrorMessage="Select Office"
-                                InitialValue="0" Text="*" ControlToValidate="ddlOffice"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                 </table>
@@ -314,7 +272,7 @@
                         ItemStyle-Wrap="false" />
                     <asp:BoundField DataField="Objective" HeaderText="Objective" ItemStyle-Wrap=" false"
                         ItemStyle-Width="150px" />
-                        <asp:BoundField DataField="HumanitarianPriority" HeaderText="Priority" ItemStyle-Wrap=" false"
+                    <asp:BoundField DataField="HumanitarianPriority" HeaderText="Priority" ItemStyle-Wrap=" false"
                         ItemStyle-Width="150px" />
                     <asp:BoundField DataField="ActivityName" HeaderText="Activity" ItemStyle-Wrap="false"
                         ItemStyle-Width="150px" />
@@ -351,7 +309,8 @@
                                         <table border="0" style="margin: 0 auto;">
                                             <tr>
                                                 <td>
-                                                    <asp:CheckBoxList ID="cblLocations" runat="server" RepeatColumns="4" RepeatDirection="Horizontal" CssClass="columnGap">
+                                                    <asp:CheckBoxList ID="cblLocations" runat="server" RepeatColumns="4" RepeatDirection="Horizontal"
+                                                        CssClass="columnGap">
                                                     </asp:CheckBoxList>
                                                 </td>
                                             </tr>
@@ -361,7 +320,7 @@
                                                         CausesValidation="false" OnClientClick="needToConfirm = false;" />
                                                 </td>
                                             </tr>
-                                        </table>                                    
+                                        </table>
                                         <div class="spacer" style="clear: both;">
                                         </div>
                                     </div>

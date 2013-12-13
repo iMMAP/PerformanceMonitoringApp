@@ -31,7 +31,7 @@ namespace SRFROWCA.Pages
 
             PopulateDropDowns();
             LoadClusters();
-            Session["SiteChanged"] = null;            
+            Session["SiteChanged"] = null;
         }
 
         #region Culture
@@ -119,18 +119,15 @@ namespace SRFROWCA.Pages
 
         protected void gvClusters_RowCreated(Object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow)
+            if (e.Row.RowType != DataControlRowType.DataRow) return;
+
+            if (e.Row.RowIndex == 0)
             {
-                int i = e.Row.RowIndex;
-                if (e.Row.RowIndex == 0)
+                CollapsiblePanelExtender cpe = e.Row.FindControl("cpeExpandCollapseActivities") as CollapsiblePanelExtender;
+                if (cpe != null)
                 {
-                    CollapsiblePanelExtender cpe = e.Row.FindControl("cpeExpandCollapseActivities") as CollapsiblePanelExtender;
-                    if (cpe != null)
-                    {
-                        cpe.Collapsed = false;
-                    }
+                    cpe.Collapsed = false;
                 }
-                int j = 0;
             }
         }
 
@@ -150,7 +147,6 @@ namespace SRFROWCA.Pages
                 RemoveActivity(row);
                 ShowMessage("Activity Removed From Your List.");
             }
-
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)
@@ -201,6 +197,10 @@ namespace SRFROWCA.Pages
             {
                 ListItem item = new ListItem("Select Emergency", "0");
                 ddlEmergency.Items.Insert(0, item);
+            }
+            else
+            {
+                divEmergency.Visible = false;
             }
         }
         private DataTable GetLocationEmergencies(int locationId)

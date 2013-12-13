@@ -5,6 +5,7 @@ using System.Web.UI.WebControls;
 using System.Threading;
 using System.Globalization;
 using SRFROWCA.Common;
+using System.Data;
 
 namespace SRFROWCA
 {
@@ -37,7 +38,7 @@ namespace SRFROWCA
         protected void Page_Load(object sender, EventArgs e)
         {
             if (HttpContext.Current.User.Identity.IsAuthenticated)
-            {
+            {                
                 LoginStatus.Visible = false;
                 HeadLoginStatus.Visible = true;
                 ResiterStatus.Visible = false;
@@ -62,6 +63,16 @@ namespace SRFROWCA
                 menuMyActivities.Visible = false;
                 menuDataEntry.Visible = false;
             }
+
+            //if (!IsPostBack)
+            //{
+            //    DataTable dt = ROWCACommon.GetUserDetails();
+            //    if (dt.Rows.Count > 0)
+            //    {
+            //        lblOrganization.Text = "(" + dt.Rows[0]["OrganizationAcronym"].ToString() + ")";
+            //    }
+            //}
+
         }
 
         protected void lnkLanguageEnglish_Click(object sender, EventArgs e)
