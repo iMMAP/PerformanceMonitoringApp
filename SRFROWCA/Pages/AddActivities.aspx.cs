@@ -8,6 +8,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using SRFROWCA.Common;
+using System.Threading;
 
 namespace SRFROWCA.Pages
 {
@@ -28,7 +29,7 @@ namespace SRFROWCA.Pages
             this.Form.DefaultButton = this.btnSave.UniqueID;
 
             string controlName = GetPostBackControlId(this);
-            if (controlName == "ddlMonth")
+            if (controlName == "ddlMonth" || controlName == "ddlYear")
             {
                 LocationRemoved = 0;
                 //lstSelectedLocations.Items.Clear();
@@ -39,6 +40,45 @@ namespace SRFROWCA.Pages
             AddDynamicColumnsInGrid(dtActivities);
             GetReport(dtActivities);
         }
+
+        #region Culture
+        protected override void InitializeCulture()
+        {
+            string postBackControl = Request.Form["__EventTarget"];
+            if (!string.IsNullOrEmpty(postBackControl))
+            {
+
+                if (postBackControl.EndsWith("French"))
+                {
+                    Session["SiteChanged"] = 1;
+                    ROWCACommon.SelectedSiteLanguageId = (int)ROWCACommon.SiteLanguage.French;
+                    SetCulture("fr-FR");
+                    if (Session["SiteLanguage"] != null)
+                    {
+                        if (!Session["SiteLanguage"].ToString().StartsWith(Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName)) SetCulture("fr-FR");
+                    }
+                }
+                else if (postBackControl.EndsWith("English"))
+                {
+                    Session["SiteChanged"] = 2;
+                    ROWCACommon.SelectedSiteLanguageId = (int)ROWCACommon.SiteLanguage.English;
+                    SetCulture("en=US");
+                    if (Session["SiteLanguage"] != null)
+                    {
+                        if (!Session["SiteLanguage"].ToString().StartsWith(Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName)) SetCulture("en-EN");
+                    }
+                }
+            }
+
+            base.InitializeCulture();
+        }
+
+        protected void SetCulture(string culture)
+        {
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(culture);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
+        }
+        #endregion
 
         private void RemoveSelectedLocations()
         {
@@ -607,7 +647,8 @@ namespace SRFROWCA.Pages
             string locIdsNotIncluded = GetNotSelectedItems(cblLocations);
 
             Guid userId = ROWCACommon.GetCurrentUserId();
-            DataTable dt = DBContext.GetData("GetIPData", new object[] { locEmergencyId, locationIds, yearId, monthId, locIdsNotIncluded, 1, userId });
+            DataTable dt = DBContext.GetData("GetIPData", new object[] { locEmergencyId, locationIds, yearId, monthId,
+                                                                        locIdsNotIncluded, ROWCACommon.SelectedSiteLanguageId, userId });
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 

@@ -37,31 +37,30 @@ namespace SRFROWCA.Pages
         #region Culture
         protected override void InitializeCulture()
         {
-            string postBackControl = Request.Form["__EventTarget"];
-            string culture = "en-US";
+            string postBackControl = Request.Form["__EventTarget"];            
 
             if (!string.IsNullOrEmpty(postBackControl))
             {
-
                 if (postBackControl.EndsWith("French"))
                 {
                     Session["SiteChanged"] = 1;
-                    ROWCACommon.SelectedSiteLanguageId = (int)ROWCACommon.SiteLanguage.French;
-                    culture = "fr-FR";
+                    ROWCACommon.SelectedSiteLanguageId = (int)ROWCACommon.SiteLanguage.French;                    
+                    SetCulture("fr-FR");
+                    if (Session["SiteLanguage"] != null)
+                    {
+                        if (!Session["SiteLanguage"].ToString().StartsWith(Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName)) SetCulture("fr-FR");
+                    }
                 }
                 else if (postBackControl.EndsWith("English"))
                 {
                     Session["SiteChanged"] = 2;
                     ROWCACommon.SelectedSiteLanguageId = (int)ROWCACommon.SiteLanguage.English;
-                    culture = "en-US";
+                    SetCulture("en=US");
+                    if (Session["SiteLanguage"] != null)
+                    {
+                        if (!Session["SiteLanguage"].ToString().StartsWith(Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName)) SetCulture("en-US");
+                    }
                 }
-
-                SetCulture(culture);
-            }
-
-            if (Session["SiteLanguage"] != null)
-            {
-                if (!Session["SiteLanguage"].ToString().StartsWith(Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName)) SetCulture(culture);
             }
 
             base.InitializeCulture();
