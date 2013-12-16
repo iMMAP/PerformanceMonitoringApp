@@ -8,22 +8,28 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using SRFROWCA.Common;
-using System.Threading;
 
 namespace SRFROWCA.Pages
 {
-    public partial class AddActivities : System.Web.UI.Page
+    public partial class AddActivities : BasePage
     {
-        protected void Page_PreInit(object sender, EventArgs e)
-        {
-            GZipContents.GZipOutput();
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            string languageChange = "";
+            if (Session["SiteChanged"] != null)
+            {
+                languageChange = Session["SiteChanged"].ToString();
+            }
+            if (!IsPostBack && !string.IsNullOrEmpty(languageChange)) return;
             {
                 PopulateDropDowns();
+                Session["SiteChanged"] = null;
+            }
+
+            if (!IsPostBack)
+            {
+                PopulateLocations(LocationId);
+                PopulateYears();
             }
 
             this.Form.DefaultButton = this.btnSave.UniqueID;
@@ -41,44 +47,7 @@ namespace SRFROWCA.Pages
             GetReport(dtActivities);
         }
 
-        #region Culture
-        protected override void InitializeCulture()
-        {
-            string postBackControl = Request.Form["__EventTarget"];
-            if (!string.IsNullOrEmpty(postBackControl))
-            {
-
-                if (postBackControl.EndsWith("French"))
-                {
-                    Session["SiteChanged"] = 1;
-                    ROWCACommon.SelectedSiteLanguageId = (int)ROWCACommon.SiteLanguage.French;
-                    SetCulture("fr-FR");
-                    if (Session["SiteLanguage"] != null)
-                    {
-                        if (!Session["SiteLanguage"].ToString().StartsWith(Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName)) SetCulture("fr-FR");
-                    }
-                }
-                else if (postBackControl.EndsWith("English"))
-                {
-                    Session["SiteChanged"] = 2;
-                    ROWCACommon.SelectedSiteLanguageId = (int)ROWCACommon.SiteLanguage.English;
-                    SetCulture("en=US");
-                    if (Session["SiteLanguage"] != null)
-                    {
-                        if (!Session["SiteLanguage"].ToString().StartsWith(Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName)) SetCulture("en-EN");
-                    }
-                }
-            }
-
-            base.InitializeCulture();
-        }
-
-        protected void SetCulture(string culture)
-        {
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(culture);
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
-        }
-        #endregion
+        
 
         private void RemoveSelectedLocations()
         {
@@ -411,17 +380,9 @@ namespace SRFROWCA.Pages
                 int organizationId = Convert.ToInt32(dt.Rows[0]["OrganizationId"].ToString());
 
                 PopulateLocationEmergencies(LocationId);
-                PopulateLocations(LocationId);
             }
 
-            //// Populate Year Drop Down.
-            //var result = DateTime.Parse(DateTime.Now.ToShortDateString(), new CultureInfo("en-US")).Year;
-            //ddlYear.SelectedIndex = ddlYear.Items.IndexOf(ddlYear.Items.FindByText(result.ToString()));
-            PopulateYears();
-
-            // Populate Months Drop Down.
-            var result1 = DateTime.Now.ToString("MMM", CultureInfo.InvariantCulture);
-            ddlMonth.SelectedIndex = ddlMonth.Items.IndexOf(ddlMonth.Items.FindByText(result1.ToString()));
+            PopulateMonths();
         }
 
         #region Drop Downs Methods.
@@ -456,15 +417,14 @@ namespace SRFROWCA.Pages
             ddlMonth.DataSource = GetMonth();
             ddlMonth.DataBind();
 
-            ListItem item = new ListItem("Select Month", "0");
-            ddlMonth.Items.Insert(0, item);
-
-            var result = DateTime.Now.ToString("MMM", CultureInfo.InvariantCulture);
+            var result = DateTime.Now.ToString("MMMM", new CultureInfo(ROWCACommon.SiteCulture));
+            result = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(result);
             ddlMonth.SelectedIndex = ddlMonth.Items.IndexOf(ddlMonth.Items.FindByText(result.ToString()));
         }
+
         private DataTable GetMonth()
         {
-            DataTable dt = DBContext.GetData("GetMonths");
+            DataTable dt = DBContext.GetData("GetMonths", new object[] {ROWCACommon.SelectedSiteLanguageId});
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 
@@ -477,7 +437,7 @@ namespace SRFROWCA.Pages
             ddlYear.DataSource = GetYears();
             ddlYear.DataBind();
 
-            var result = DateTime.Parse(DateTime.Now.ToShortDateString(), new CultureInfo("en-US")).Year;
+            var result = DateTime.Parse(DateTime.Now.ToShortDateString()).Year;
             ddlYear.SelectedIndex = ddlYear.Items.IndexOf(ddlYear.Items.FindByText(result.ToString()));
         }
         private DataTable GetYears()

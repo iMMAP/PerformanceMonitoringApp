@@ -6,18 +6,14 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using SRFROWCA.Common;
-using System.Threading;
 using System.Globalization;
 using AjaxControlToolkit;
 
 namespace SRFROWCA.Pages
 {
-    public partial class SelectActivities : System.Web.UI.Page
+    public partial class SelectActivities : BasePage
     {
-        protected void Page_PreInit(object sender, EventArgs e)
-        {
-            GZipContents.GZipOutput();
-        }
+        
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -33,45 +29,6 @@ namespace SRFROWCA.Pages
             LoadClusters();
             Session["SiteChanged"] = null;
         }
-
-        #region Culture
-        protected override void InitializeCulture()
-        {
-            string postBackControl = Request.Form["__EventTarget"];            
-
-            if (!string.IsNullOrEmpty(postBackControl))
-            {
-                if (postBackControl.EndsWith("French"))
-                {
-                    Session["SiteChanged"] = 1;
-                    ROWCACommon.SelectedSiteLanguageId = (int)ROWCACommon.SiteLanguage.French;                    
-                    SetCulture("fr-FR");
-                    if (Session["SiteLanguage"] != null)
-                    {
-                        if (!Session["SiteLanguage"].ToString().StartsWith(Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName)) SetCulture("fr-FR");
-                    }
-                }
-                else if (postBackControl.EndsWith("English"))
-                {
-                    Session["SiteChanged"] = 2;
-                    ROWCACommon.SelectedSiteLanguageId = (int)ROWCACommon.SiteLanguage.English;
-                    SetCulture("en=US");
-                    if (Session["SiteLanguage"] != null)
-                    {
-                        if (!Session["SiteLanguage"].ToString().StartsWith(Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName)) SetCulture("en-US");
-                    }
-                }
-            }
-
-            base.InitializeCulture();
-        }
-
-        protected void SetCulture(string culture)
-        {
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(culture);
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
-        }
-        #endregion
 
         private void PopulateDropDowns()
         {

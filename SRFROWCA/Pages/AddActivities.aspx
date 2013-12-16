@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
-    CodeBehind="AddActivities.aspx.cs" Inherits="SRFROWCA.Pages.AddActivities" culture="auto" meta:resourcekey="PageResource1" uiculture="auto" %>
+    CodeBehind="AddActivities.aspx.cs" Inherits="SRFROWCA.Pages.AddActivities" Culture="auto"
+    meta:resourcekey="PageResource1" UICulture="auto" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
@@ -159,9 +160,7 @@
     </div>
     <div class="container">
         <div class="graybar">
-            <asp:Localize ID="locaFilterCaption" runat="server" 
-                meta:resourcekey="locaFilterCaptionResource1" Text="
-            Select Your Options To Report On"></asp:Localize>
+            
         </div>
         <div class="contentarea">
             <div class="formdiv">
@@ -169,48 +168,32 @@
                     <tr>
                         <td align="right">
                             <label>
-                                <asp:Localize ID="locaEmergencyCaption" runat="server" 
-                                meta:resourcekey="locaEmergencyCaptionResource1" Text="
+                                <asp:Localize ID="locaEmergencyCaption" runat="server" meta:resourcekey="locaEmergencyCaptionResource1"
+                                    Text="
                                 Emergency:"></asp:Localize>
-                                (<asp:Label ID="lblCountry" runat="server" 
-                                meta:resourcekey="lblCountryResource1"></asp:Label>)
+                                (<asp:Label ID="lblCountry" runat="server" meta:resourcekey="lblCountryResource1"></asp:Label>)
                             </label>
                         </td>
                         <td colspan="2">
                             <asp:DropDownList ID="ddlEmergency" runat="server" Width="350px" OnSelectedIndexChanged="ddlEmergency_SelectedIndexChanged"
-                                onchange="needToConfirm = false;" AutoPostBack="True" 
-                                meta:resourcekey="ddlEmergencyResource1">
+                                onchange="needToConfirm = false;" AutoPostBack="True" meta:resourcekey="ddlEmergencyResource1">
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ID="rfvEmergency" runat="server" ErrorMessage="Select Emergency"
-                                InitialValue="0" Text="*" ControlToValidate="ddlEmergency" 
-                                meta:resourcekey="rfvEmergencyResource1"></asp:RequiredFieldValidator>
+                                InitialValue="0" Text="*" ControlToValidate="ddlEmergency" meta:resourcekey="rfvEmergencyResource1"></asp:RequiredFieldValidator>
                         </td>
                         <td align="right">
                             <label>
-                                <asp:Localize ID="locaYearMonth" runat="server" 
-                                meta:resourcekey="locaYearMonthResource1" Text="
+                                <asp:Localize ID="locaYearMonth" runat="server" meta:resourcekey="locaYearMonthResource1"
+                                    Text="
                                 Year/Month:"></asp:Localize></label>
                         </td>
                         <td>
                             <asp:DropDownList ID="ddlYear" runat="server" Width="100px" OnSelectedIndexChanged="ddlYear_SelectedIndexChanged"
-                                onchange="needToConfirm = false;" AutoPostBack="True" 
-                                meta:resourcekey="ddlYearResource1">
+                                onchange="needToConfirm = false;" AutoPostBack="True" meta:resourcekey="ddlYearResource1">
                             </asp:DropDownList>
                             <asp:DropDownList ID="ddlMonth" runat="server" Width="100px" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged"
                                 onchange="needToConfirm = false;" AutoPostBack="True" 
                                 meta:resourcekey="ddlMonthResource1">
-                                <asp:ListItem Text="Jan" Value="1" meta:resourcekey="ListItemResource1"></asp:ListItem>
-                                <asp:ListItem Text="Feb" Value="2" meta:resourcekey="ListItemResource2"></asp:ListItem>
-                                <asp:ListItem Text="Mar" Value="3" meta:resourcekey="ListItemResource3"></asp:ListItem>
-                                <asp:ListItem Text="Apr" Value="4" meta:resourcekey="ListItemResource4"></asp:ListItem>
-                                <asp:ListItem Text="May" Value="5" meta:resourcekey="ListItemResource5"></asp:ListItem>
-                                <asp:ListItem Text="Jun" Value="6" meta:resourcekey="ListItemResource6"></asp:ListItem>
-                                <asp:ListItem Text="Jul" Value="7" meta:resourcekey="ListItemResource7"></asp:ListItem>
-                                <asp:ListItem Text="Aug" Value="8" meta:resourcekey="ListItemResource8"></asp:ListItem>
-                                <asp:ListItem Text="Sep" Value="9" meta:resourcekey="ListItemResource9"></asp:ListItem>
-                                <asp:ListItem Text="Oct" Value="10" meta:resourcekey="ListItemResource10"></asp:ListItem>
-                                <asp:ListItem Text="Nov" Value="11" meta:resourcekey="ListItemResource11"></asp:ListItem>
-                                <asp:ListItem Text="Dec" Value="12" meta:resourcekey="ListItemResource12"></asp:ListItem>
                             </asp:DropDownList>
                         </td>
                     </tr>
@@ -224,13 +207,11 @@
     </div>
     <div class="buttonsdiv">
         <div class="savebutton">
-            <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" 
-                OnClientClick="needToConfirm = false;" Width="120px" CssClass="button_example" 
-                meta:resourcekey="btnSaveResource1" /></div>
+            <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
+                Width="120px" CssClass="button_example" meta:resourcekey="btnSaveResource1" /></div>
         <div class="buttonright">
             <asp:Button ID="btnOpenLocations" runat="server" Text="Locations" CausesValidation="False"
-                CssClass="button_location" OnClick="btnLocation_Click" 
-                OnClientClick="needToConfirm = false;" 
+                CssClass="button_location" OnClick="btnLocation_Click" OnClientClick="needToConfirm = false;"
                 meta:resourcekey="btnOpenLocationsResource1" />
         </div>
         <div class="spacer" style="clear: both;">
@@ -241,10 +222,14 @@
             <tr>
                 <td width="250px">
                     <input type="checkbox" id="chkShowHide" class="chkShowHide" />
-                    <b>Show Only Checked:</b>
+                    <asp:Localize ID="locaOnlyCheckCaption" runat="server" 
+                        meta:resourcekey="locaOnlyCheckCaptionResource1" 
+                        Text=" &lt;b&gt;Show Only Checked:&lt;/b&gt;"></asp:Localize>
                 </td>
                 <td>
-                    <b>Search:</b>
+                    <asp:Localize ID="locaSearchCaption" runat="server" 
+                        meta:resourcekey="locaSearchCaptionResource1" 
+                        Text=" &lt;b&gt;Search:&lt;/b&gt;"></asp:Localize>
                     <input type="text" id="gridSearch" class="grdSearch" style="width: 400px;" />
                 </td>
                 <td align="right">
@@ -254,43 +239,37 @@
             </tr>
         </table>
         <div id="scrolledGridView" style="overflow-x: auto; width: 100%">
-            <asp:GridView ID="gvActivities" runat="server"
-                AutoGenerateColumns="False" ShowHeaderWhenEmpty="True" HeaderStyle-BackColor="ButtonFace"
-                DataKeyNames="ActivityDataId" CssClass="imagetable" Width="100%" 
-                OnRowDataBound="gvActivities_RowDataBound" 
-                meta:resourcekey="gvActivitiesResource1">
-
-<HeaderStyle BackColor="Control"></HeaderStyle>
-
+            <asp:GridView ID="gvActivities" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True"
+                HeaderStyle-BackColor="ButtonFace" DataKeyNames="ActivityDataId" CssClass="imagetable"
+                Width="100%" OnRowDataBound="gvActivities_RowDataBound" meta:resourcekey="gvActivitiesResource1">
+                <HeaderStyle BackColor="Control"></HeaderStyle>
                 <RowStyle CssClass="istrow" />
                 <AlternatingRowStyle CssClass="altcolor" />
                 <Columns>
                     <asp:TemplateField meta:resourcekey="TemplateFieldResource1">
                         <ItemTemplate>
-                            <asp:CheckBox ID="chkSelected" runat="server" 
-                                Checked='<%# bool.Parse(Eval("IsActive").ToString()) %>' 
+                            <asp:CheckBox ID="chkSelected" runat="server" Checked='<%# bool.Parse(Eval("IsActive").ToString()) %>'
                                 meta:resourcekey="chkSelectedResource1" />
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:BoundField DataField="ClusterName" HeaderText="Cluster" 
-                        ItemStyle-Width="50px" meta:resourcekey="BoundFieldResource1" >
-<ItemStyle Width="50px"></ItemStyle>
+                    <asp:BoundField DataField="ClusterName" HeaderText="Cluster" ItemStyle-Width="50px"
+                        meta:resourcekey="BoundFieldResource1">
+                        <ItemStyle Width="50px"></ItemStyle>
                     </asp:BoundField>
-                    <asp:BoundField DataField="Objective" HeaderText="Objective" 
-                        ItemStyle-Width="150px" meta:resourcekey="BoundFieldResource2" >
-<ItemStyle Width="150px"></ItemStyle>
+                    <asp:BoundField DataField="Objective" HeaderText="Objective" ItemStyle-Width="150px"
+                        meta:resourcekey="BoundFieldResource2">
+                        <ItemStyle Width="150px"></ItemStyle>
                     </asp:BoundField>
                     <asp:BoundField DataField="HumanitarianPriority" HeaderText="Priority" ItemStyle-Wrap=" false"
-                        ItemStyle-Width="150px" meta:resourcekey="BoundFieldResource3" >
-<ItemStyle Wrap="False" Width="150px"></ItemStyle>
+                        ItemStyle-Width="150px" meta:resourcekey="BoundFieldResource3">
+                        <ItemStyle Wrap="False" Width="150px"></ItemStyle>
                     </asp:BoundField>
-                    <asp:BoundField DataField="ActivityName" HeaderText="Activity" 
-                        ItemStyle-Width="150px" meta:resourcekey="BoundFieldResource4" >
-<ItemStyle Width="150px"></ItemStyle>
+                    <asp:BoundField DataField="ActivityName" HeaderText="Activity" ItemStyle-Width="150px"
+                        meta:resourcekey="BoundFieldResource4">
+                        <ItemStyle Width="150px"></ItemStyle>
                     </asp:BoundField>
-                    <asp:BoundField DataField="DataName" HeaderText="Data" ItemStyle-Width="150px" 
-                        meta:resourcekey="BoundFieldResource5" >
-<ItemStyle Width="150px"></ItemStyle>
+                    <asp:BoundField DataField="DataName" HeaderText="Output Indicator" ItemStyle-Width="150px" meta:resourcekey="BoundFieldResource5">
+                        <ItemStyle Width="150px"></ItemStyle>
                     </asp:BoundField>
                 </Columns>
             </asp:GridView>
@@ -298,9 +277,8 @@
     </div>
     <div class="buttonsdiv">
         <div class="savebutton">
-            <asp:Button ID="btnSave2" runat="server" OnClick="btnSave_Click" Text="Save" 
-                OnClientClick="needToConfirm = false;" Width="120px" CssClass="button_example" 
-                meta:resourcekey="btnSave2Resource1" /></div>
+            <asp:Button ID="btnSave2" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
+                Width="120px" CssClass="button_example" meta:resourcekey="btnSave2Resource1" /></div>
         <div class="buttonright">
         </div>
         <div class="spacer" style="clear: both;">
@@ -310,18 +288,17 @@
         <tr>
             <td>
                 <input type="button" id="btnClientOpen" runat="server" style="display: none;" />
-                <asp:ModalPopupExtender ID="mpeAddActivity" runat="server"
-                    TargetControlID="btnClientOpen" PopupControlID="pnlLocations" 
-                    BackgroundCssClass="modalpopupbackground" DynamicServicePath="" Enabled="True">
+                <asp:ModalPopupExtender ID="mpeAddActivity" runat="server" BehaviorID="mpeAddActivity" TargetControlID="btnClientOpen"
+                    PopupControlID="pnlLocations" BackgroundCssClass="modalpopupbackground"
+                    DynamicServicePath="" Enabled="True">
                 </asp:ModalPopupExtender>
-                <asp:Panel ID="pnlLocations" runat="server" Width="600px" 
-                    meta:resourcekey="pnlLocationsResource1">
+                <asp:Panel ID="pnlLocations" runat="server" Width="600px" meta:resourcekey="pnlLocationsResource1">
                     <asp:UpdatePanel ID="uPanel1" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
                             <div class="containerPopup">
                                 <div class="graybar">
-                                    <asp:Localize ID="locaAdmin2LocationsCaption" runat="server" 
-                                        meta:resourcekey="locaAdmin2LocationsCaptionResource1" Text="
+                                    <asp:Localize ID="locaAdmin2LocationsCaption" runat="server" meta:resourcekey="locaAdmin2LocationsCaptionResource1"
+                                        Text="
                                     Admin2 Locations"></asp:Localize>
                                 </div>
                                 <div class="contentarea">
@@ -337,8 +314,7 @@
                                             <tr>
                                                 <td>
                                                     <asp:Button ID="btnClose" runat="server" Text="Close" Width="120px" CssClass="button_location"
-                                                        CausesValidation="False" OnClientClick="needToConfirm = false;" 
-                                                        meta:resourcekey="btnCloseResource1" />
+                                                        CausesValidation="False" OnClientClick="needToConfirm = false;" meta:resourcekey="btnCloseResource1" />
                                                 </td>
                                             </tr>
                                         </table>

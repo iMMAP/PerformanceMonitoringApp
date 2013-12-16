@@ -145,13 +145,13 @@
     <value>Activité</value>
   </data>
   <data name="btnAddResource1.Text" xml:space="preserve">
-    <value>Add Selected</value>
+    <value>Rajouter l'élément sélectionné</value>
   </data>
   <data name="btnAddResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="btnDeleteResource1.Text" xml:space="preserve">
-    <value>Delete Selected</value>
+    <value>Supprimer l'élément sélectionné</value>
   </data>
   <data name="btnDeleteResource1.ToolTip" xml:space="preserve">
     <value />

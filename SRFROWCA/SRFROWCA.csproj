@@ -769,6 +769,12 @@
     <Content Include="Pages\App_LocalResources\SelectActivities.aspx.fr.resx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Pages\App_LocalResources\tempAddActivities.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Pages\App_LocalResources\tempAddActivities.aspx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Pages\App_LocalResources\AddActivities.aspx.resx" />
   </ItemGroup>
   <ItemGroup>

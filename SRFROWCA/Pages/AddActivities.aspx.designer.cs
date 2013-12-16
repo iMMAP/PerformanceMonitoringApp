@@ -13,15 +13,6 @@ namespace SRFROWCA.Pages {
     public partial class AddActivities {
         
         /// <summary>
-        /// locaFilterCaption control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locaFilterCaption;
-        
-        /// <summary>
         /// locaEmergencyCaption control.
         /// </summary>
         /// <remarks>
@@ -101,6 +92,24 @@ namespace SRFROWCA.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnOpenLocations;
+        
+        /// <summary>
+        /// locaOnlyCheckCaption control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locaOnlyCheckCaption;
+        
+        /// <summary>
+        /// locaSearchCaption control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locaSearchCaption;
         
         /// <summary>
         /// gvActivities control.

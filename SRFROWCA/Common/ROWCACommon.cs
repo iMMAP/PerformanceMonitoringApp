@@ -11,6 +11,8 @@ using System.Data;
 using BusinessLogic;
 using System.Security.Principal;
 using System.Web.Security;
+using System.Threading;
+using System.Globalization;
 
 namespace SRFROWCA.Common
 {
@@ -114,9 +116,27 @@ namespace SRFROWCA.Common
                 return Convert.ToInt32(SiteLanguage.English);
             }
 
-            set 
+            set
             {
                 HttpContext.Current.Session["SiteLanguage"] = value;
+            }
+        }
+
+        internal static string SiteCulture
+        {
+            get
+            {
+                if (HttpContext.Current.Session["SiteCulture"] != null)
+                {
+                    return HttpContext.Current.Session["SiteCulture"].ToString();
+                }
+
+                return "en-US";
+            }
+
+            set
+            {
+                HttpContext.Current.Session["SiteCulture"] = value;
             }
         }
 
@@ -225,7 +245,7 @@ namespace SRFROWCA.Common
                 Guid userId = GetCurrentUserId();
                 return DBContext.GetData("GetAllFrameWorkDataOfUser", new object[] { userId });
             }
-        }       
+        }
 
         internal static DataTable GetUserDetails()
         {
@@ -300,6 +320,31 @@ namespace SRFROWCA.Common
             }
         }
 
+        internal static void SetCulture(string siteCulture, int languageId, short siteChanged)
+        {
+            HttpContext.Current.Session["SiteChanged"] = siteChanged;
+            SelectedSiteLanguageId = languageId;
+            SiteCulture = siteCulture;            
+        }
+
+        internal static void CultureSettings(string postBackControl)
+        {
+            if (postBackControl.EndsWith("French"))
+            {
+                SetCulture("fr-FR", (int)SiteLanguage.French, 1);
+            }
+            else if (postBackControl.EndsWith("English"))
+            {
+                SetCulture("en-US", (int)SiteLanguage.English, 1);
+            }
+        }
+
+        internal static void SetCulture()
+        {
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(SiteCulture);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(SiteCulture);
+        }
+
         public enum LocationTypes
         {
             Region = 1,
@@ -321,7 +366,7 @@ namespace SRFROWCA.Common
         }
 
         internal enum SiteLanguage
-        { 
+        {
             English = 1,
             French = 2
         }

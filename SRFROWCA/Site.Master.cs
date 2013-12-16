@@ -23,6 +23,7 @@ namespace SRFROWCA
             if (Session["SiteLanguage"] == null)
             {
                 ROWCACommon.SelectedSiteLanguageId = (int) Common.ROWCACommon.SiteLanguage.English;
+                ROWCACommon.SiteCulture = "en-US";
 
                 if (Request.Cookies["SiteLanguageCookie"] != null)
                 {
@@ -30,6 +31,7 @@ namespace SRFROWCA
                     if (siteLangId == "2")
                     {
                         ROWCACommon.SelectedSiteLanguageId = (int)Common.ROWCACommon.SiteLanguage.French;
+                        ROWCACommon.SiteCulture = "fr-FR";
                     }
                 }
             }

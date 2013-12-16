@@ -160,7 +160,7 @@
     <value />
   </data>
   <data name="BoundFieldResource5.HeaderText" xml:space="preserve">
-    <value>Data</value>
+    <value>Output Indicator</value>
   </data>
   <data name="btnCloseResource1.Text" xml:space="preserve">
     <value>Close</value>
@@ -219,93 +219,23 @@
   <data name="lblCountryResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="ListItemResource1.Text" xml:space="preserve">
-    <value>Jan</value>
-  </data>
-  <data name="ListItemResource1.Value" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ListItemResource10.Text" xml:space="preserve">
-    <value>Oct</value>
-  </data>
-  <data name="ListItemResource10.Value" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="ListItemResource11.Text" xml:space="preserve">
-    <value>Nov</value>
-  </data>
-  <data name="ListItemResource11.Value" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="ListItemResource12.Text" xml:space="preserve">
-    <value>Dec</value>
-  </data>
-  <data name="ListItemResource12.Value" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="ListItemResource2.Text" xml:space="preserve">
-    <value>Feb</value>
-  </data>
-  <data name="ListItemResource2.Value" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="ListItemResource3.Text" xml:space="preserve">
-    <value>Mar</value>
-  </data>
-  <data name="ListItemResource3.Value" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="ListItemResource4.Text" xml:space="preserve">
-    <value>Apr</value>
-  </data>
-  <data name="ListItemResource4.Value" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="ListItemResource5.Text" xml:space="preserve">
-    <value>May</value>
-  </data>
-  <data name="ListItemResource5.Value" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="ListItemResource6.Text" xml:space="preserve">
-    <value>Jun</value>
-  </data>
-  <data name="ListItemResource6.Value" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="ListItemResource7.Text" xml:space="preserve">
-    <value>Jul</value>
-  </data>
-  <data name="ListItemResource7.Value" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="ListItemResource8.Text" xml:space="preserve">
-    <value>Aug</value>
-  </data>
-  <data name="ListItemResource8.Value" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="ListItemResource9.Text" xml:space="preserve">
-    <value>Sep</value>
-  </data>
-  <data name="ListItemResource9.Value" xml:space="preserve">
-    <value>9</value>
-  </data>
   <data name="locaAdmin2LocationsCaptionResource1.Text" xml:space="preserve">
     <value>
-                                    Admin2 Locations</value>
+ Admin2 Locations</value>
   </data>
   <data name="locaEmergencyCaptionResource1.Text" xml:space="preserve">
     <value>
-                                Emergency:</value>
+Emergency:</value>
   </data>
-  <data name="locaFilterCaptionResource1.Text" xml:space="preserve">
-    <value>
-            Select Your Options To Report On</value>
+  <data name="locaOnlyCheckCaptionResource1.Text" xml:space="preserve">
+    <value>Show Only Checked:</value>
+  </data>
+  <data name="locaSearchCaptionResource1.Text" xml:space="preserve">
+    <value>Search:</value>
   </data>
   <data name="locaYearMonthResource1.Text" xml:space="preserve">
     <value>
-                                Year/Month:</value>
+Year/Month:</value>
   </data>
   <data name="PageResource1.Title" xml:space="preserve">
     <value />
