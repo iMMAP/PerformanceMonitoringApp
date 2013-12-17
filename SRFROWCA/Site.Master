@@ -77,6 +77,8 @@
                         </li>
                         <li><a class="signinfly" href="../Admin/AdminDataFeeds.aspx" tabindex="1">XML Feeds</a>
                         </li>
+                        <li><a class="signinfly" href="../OPS/UploadOPSProjectDetails.aspx" tabindex="1">Upload OPS Project Details</a>
+                        </li>
                     </ul>
                 </li>
                 <li><a href='javascript:void(0)' id="MySettingsMenue" runat="server">My Settings<span

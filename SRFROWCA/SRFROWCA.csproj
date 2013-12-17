@@ -159,6 +159,7 @@
     <Content Include="images\rssfeed.png" />
     <Content Include="Maps\TargetAchievedByLocDataMap.aspx" />
     <Content Include="OPS\OPSDataEntry.aspx" />
+    <Content Include="OPS\UploadOPSProjectDetails.aspx" />
     <Content Include="Pages\AddActivities.aspx" />
     <Content Include="Pages\SelectActivities.aspx" />
     <Content Include="Pages\TargetsAchievedOfLocationByDuration.ascx" />
@@ -245,6 +246,9 @@
     <Content Include="WebForm4.aspx" />
     <Content Include="WebForm5.aspx" />
     <Content Include="OPS\OPSActivitiesFeed.ashx" />
+    <Content Include="OPS\OPSProjectDataFeed.ashx" />
+    <Content Include="OPS\OPSProjectDataFeed2.ashx" />
+    <Content Include="OPS\OPSProjectFeed.ashx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -543,6 +547,22 @@
     <Compile Include="OPS\OPSDataEntry.aspx.designer.cs">
       <DependentUpon>OPSDataEntry.aspx</DependentUpon>
     </Compile>
+    <Compile Include="OPS\OPSProjectDataFeed.ashx.cs">
+      <DependentUpon>OPSProjectDataFeed.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="OPS\OPSProjectDataFeed2.ashx.cs">
+      <DependentUpon>OPSProjectDataFeed2.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="OPS\OPSProjectFeed.ashx.cs">
+      <DependentUpon>OPSProjectFeed.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="OPS\UploadOPSProjectDetails.aspx.cs">
+      <DependentUpon>UploadOPSProjectDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OPS\UploadOPSProjectDetails.aspx.designer.cs">
+      <DependentUpon>UploadOPSProjectDetails.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\SelectActivities.aspx.cs">
       <DependentUpon>SelectActivities.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -686,6 +706,7 @@
     <Folder Include="Admin\Reports\" />
     <Folder Include="App_Data\" />
     <Folder Include="GeneratedChartFiles\" />
+    <Folder Include="OPS\OPSProjects\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Web.config" />
