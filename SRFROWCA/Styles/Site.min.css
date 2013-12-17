@@ -274,3 +274,33 @@ CSS for Login, Register, ForgotPassword, ChagnePassword
     font-weight: bold;
     margin-bottom: 10px;
 }
+
+.error-message
+{
+    text-align: left;
+    display: list-item;
+    list-style: none;
+    list-style-type: none;
+    border: 1px solid #fe8989;
+    color: #525252;
+    background-color: #ffe7e7;
+    padding: 10px;
+    padding-left: 45px;
+}
+
+.info-message
+{
+    text-align: left;
+    display: list-item;
+    list-style: none;
+    list-style-type: none;
+    border: 1px solid #aee756;
+    color: #525252;
+    background-color: #e9fad0;
+    padding: 1px;
+    padding-left: 5px;
+    font: bold large Verdana, Arial, sans-serif;
+    height: 28px;
+    font-style: normal;
+    font-variant: normal;
+}
