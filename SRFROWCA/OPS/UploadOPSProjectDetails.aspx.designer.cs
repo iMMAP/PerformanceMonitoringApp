@@ -10,25 +10,16 @@
 namespace SRFROWCA.OPS {
     
     
-    public partial class UploadOPSProjects {
+    public partial class UploadOPSProjectDetails {
         
         /// <summary>
-        /// form1 control.
+        /// fuOPSProjectDetails control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
-        /// <summary>
-        /// fuExcel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fuExcel;
+        protected global::System.Web.UI.WebControls.FileUpload fuOPSProjectDetails;
         
         /// <summary>
         /// btnImport control.
@@ -40,12 +31,12 @@ namespace SRFROWCA.OPS {
         protected global::System.Web.UI.WebControls.Button btnImport;
         
         /// <summary>
-        /// lblmessage control.
+        /// lblMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblmessage;
+        protected global::System.Web.UI.WebControls.Label lblMessage;
     }
 }

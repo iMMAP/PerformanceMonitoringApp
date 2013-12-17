@@ -4,15 +4,16 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.IO;
+using System.Data.SqlClient;
 using System.Data;
+using System.IO;
 using System.Data.OleDb;
 using System.Configuration;
-using System.Data.SqlClient;
+using BusinessLogic;
 
 namespace SRFROWCA.OPS
 {
-    public partial class UploadOPSProjects : System.Web.UI.Page
+    public partial class UploadOPSProjectDetails : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,42 +27,43 @@ namespace SRFROWCA.OPS
                 // Check if file is uploaded and is excel file
                 if (!IsValidFile()) return;
 
-                // Empty staging tables before data import.
-                //EmptyTable();
                 // Fill staging table (TempData1) in db to import data using this table.
                 FillStagingTableInDB();
 
                 // Import data from another staging table (TempData).
-                //DataTable dt = ImportData();
+                DataTable dt = InsertDataInPhysicalTable();
 
                 // If success or any error occoured in execution of procedure then show message to user.
-                //if (dt.Rows.Count > 0)
+                if (dt.Rows.Count > 0)
                 {
-                    //lblMessage.CssClass = "info-message";
-                    //lblMessage.Visible = true;
-                    //lblMessage.Text = dt.Rows[0][0].ToString() + "  ---  " + dt.Rows[0][1].ToString();
+                    lblMessage.CssClass = "info-message";
+                    lblMessage.Visible = true;
+                    lblMessage.Text = dt.Rows[0][0].ToString();
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                throw;
+                lblMessage.Visible = true;
+                lblMessage.Text = ex.ToString();
             }
         }
 
         private bool IsValidFile()
         {
-            if (fuExcel.HasFile)
+            if (fuOPSProjectDetails.HasFile)
             {
-                string fileExt = Path.GetExtension(fuExcel.PostedFile.FileName);
+                string fileExt = Path.GetExtension(fuOPSProjectDetails.PostedFile.FileName);
                 if (fileExt != ".xls" && fileExt != ".xlsx")
                 {
-                    lblmessage.Text = "Pleae use Excel files with 'xls' OR 'xlsx' extentions.";
+                    lblMessage.Visible = true;
+                    lblMessage.Text = "Pleae use Excel files with 'xls' OR 'xlsx' extentions.";
                     return false;
                 }
             }
             else
             {
-                lblmessage.Text = "Please select file to upload!";
+                lblMessage.Visible = true;
+                lblMessage.Text = "Please select file to upload!";
                 return false;
             }
 
@@ -76,16 +78,16 @@ namespace SRFROWCA.OPS
 
             if (!string.IsNullOrEmpty(excelConString))
             {
-                DataTable dt = ReadDataInDataTable(excelConString);                
+                DataTable dt = ReadDataInDataTable(excelConString);
                 WriteDataToDB(dt);
             }
         }
 
         private string UploadFile()
         {
-            string path = fuExcel.PostedFile.FileName;
-            string fileName = Path.GetFileNameWithoutExtension(fuExcel.PostedFile.FileName);
-            string fileExtension = Path.GetExtension(fuExcel.PostedFile.FileName);
+            string path = fuOPSProjectDetails.PostedFile.FileName;
+            string fileName = Path.GetFileNameWithoutExtension(fuOPSProjectDetails.PostedFile.FileName);
+            string fileExtension = Path.GetExtension(fuOPSProjectDetails.PostedFile.FileName);
 
             // Create file name on the basis of userid and datetime.
             fileName += DateTime.Now.ToString("MMM-dd-yy-hh-mm-ss") + fileExtension;
@@ -96,7 +98,7 @@ namespace SRFROWCA.OPS
             }
 
             string uploadFileLocation = uploadDir + "//" + fileName;
-            fuExcel.SaveAs(uploadFileLocation);
+            fuOPSProjectDetails.SaveAs(uploadFileLocation);
 
             return uploadFileLocation;
         }
@@ -138,16 +140,15 @@ namespace SRFROWCA.OPS
 
         private DataTable MakeDataTable()
         {
-            DataColumn idColumn = new DataColumn();
-            idColumn.ColumnName = "Id";
-            idColumn.DataType = System.Type.GetType("System.Int32");
-            idColumn.AutoIncrement = true;
-            idColumn.AutoIncrementSeed = 1;
-            idColumn.AutoIncrementStep = 1;
-            
+            //DataColumn idColumn = new DataColumn();
+            //idColumn.ColumnName = "Id";
+            //idColumn.DataType = System.Type.GetType("System.Int32");
+            //idColumn.AutoIncrement = true;
+            //idColumn.AutoIncrementSeed = 1;
+            //idColumn.AutoIncrementStep = 1;
 
             DataTable dt = new DataTable();
-            dt.Columns.Add(idColumn);
+            //dt.Columns.Add(idColumn);
             dt.Columns.Add("Project_ID", typeof(int));
             dt.Columns.Add("Project_Title", typeof(string));
             dt.Columns.Add("Project_Code", typeof(string));
@@ -164,7 +165,7 @@ namespace SRFROWCA.OPS
             dt.Columns.Add("Original D amt", typeof(decimal));
             dt.Columns.Add("Original E", typeof(string));
             dt.Columns.Add("Original E amt", typeof(decimal));
-            dt.Columns.Add("CurrentRequest", typeof(decimal));
+            dt.Columns.Add("Current Request", typeof(decimal));
             dt.Columns.Add("Current A", typeof(string));
             dt.Columns.Add("Current A amt", typeof(decimal));
             dt.Columns.Add("Current B", typeof(string));
@@ -175,7 +176,7 @@ namespace SRFROWCA.OPS
             dt.Columns.Add("Current D amt", typeof(decimal));
             dt.Columns.Add("Current E", typeof(string));
             dt.Columns.Add("Current E amt", typeof(decimal));
-            dt.Columns.Add("RunningRequest", typeof(decimal));
+            dt.Columns.Add("Running Request", typeof(decimal));
             dt.Columns.Add("Running A", typeof(string));
             dt.Columns.Add("Running A amt", typeof(decimal));
             dt.Columns.Add("Running B", typeof(string));
@@ -190,10 +191,10 @@ namespace SRFROWCA.OPS
             dt.Columns.Add("Status_LongDs", typeof(string));
             dt.Columns.Add("Province_Name", typeof(string));
             dt.Columns.Add("Objective_Text", typeof(string));
-            dt.Columns.Add("Beneficiary Total Number", typeof(int));
-            dt.Columns.Add("Beneficiaries Children", typeof(int));
-            dt.Columns.Add("Beneficiaries Women", typeof(int));
-            dt.Columns.Add("Beneficiaries Others", typeof(int));
+            dt.Columns.Add("Beneficiary Total Number", typeof(string));
+            dt.Columns.Add("Beneficiaries Children", typeof(string));
+            dt.Columns.Add("Beneficiaries Women", typeof(string));
+            dt.Columns.Add("Beneficiaries Others", typeof(string));
             dt.Columns.Add("Beneficiaries Description", typeof(string));
             dt.Columns.Add("Beneficiaries Total Description", typeof(string));
             dt.Columns.Add("Project Start Date", typeof(DateTime));
@@ -209,7 +210,7 @@ namespace SRFROWCA.OPS
             dt.Columns.Add("Agency Project Code", typeof(string));
             dt.Columns.Add("Related URL", typeof(string));
             dt.Columns.Add("WorkFlow Comments", typeof(string));
-            dt.Columns.Add("ProjectCreated On", typeof(DateTime));
+            dt.Columns.Add("Project Created On", typeof(DateTime));
             dt.Columns.Add("ProjectType", typeof(string));
             dt.Columns.Add("GenderMarkerCode", typeof(string));
             dt.Columns.Add("Last Updated On", typeof(DateTime));
@@ -228,6 +229,12 @@ namespace SRFROWCA.OPS
             sqlBulk.DestinationTableName = "OPSProjectDetails_StagingTable";
             sqlBulk.WriteToServer(dt);
             sqlBulk.Close();
+
+        }
+
+        private DataTable InsertDataInPhysicalTable()
+        { 
+            return DBContext.GetData("InsertDataFromStagingOPSTableIntoOPSProjectDetailsTable");
         }
     }
 }
