@@ -168,7 +168,7 @@ namespace SRFROWCA.Admin
         // Import all data from staging table to respective tables.
         private DataTable ImportData()
         {
-            return DBContext.GetData("temp127");
+            return DBContext.GetData("ImportClusterLogFrame");
         }
 
         // Create new datatable and appropriate columns.
@@ -207,7 +207,9 @@ namespace SRFROWCA.Admin
             dt.Columns.Add("UnitId", typeof(int));
             dt.Columns.Add("UserId", typeof(Guid));
             dt.Columns.Add("SecondaryCluster_En", typeof(string));
-            dt.Columns.Add("SecondaryCluster_Fr", typeof(string));
+            dt.Columns.Add("SecondaryClusterId", typeof(int));
+            dt.Columns.Add("SecondaryCluster2_En", typeof(string));
+            dt.Columns.Add("SecondaryClusterId2", typeof(int)); 
 
             return dt;
         }
