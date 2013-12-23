@@ -206,10 +206,8 @@ namespace SRFROWCA.Admin
             dt.Columns.Add("Unit_Fr", typeof(string));
             dt.Columns.Add("UnitId", typeof(int));
             dt.Columns.Add("UserId", typeof(Guid));
-            dt.Columns.Add("SecondaryCluster_En", typeof(string));
-            dt.Columns.Add("SecondaryClusterId", typeof(int));
-            dt.Columns.Add("SecondaryCluster2_En", typeof(string));
-            dt.Columns.Add("SecondaryClusterId2", typeof(int)); 
+            dt.Columns.Add("SecondaryCluster_En", typeof(string));            
+            dt.Columns.Add("SecondaryCluster_Fr", typeof(string));            
 
             return dt;
         }
