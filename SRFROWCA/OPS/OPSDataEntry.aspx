@@ -163,7 +163,7 @@
                 });
 
                 // Add header row in grid.
-                $(".imagetable").prepend('<colgroup><col /><col /><col /></colgroup><thead><tr style="background-color:ButtonFace;"><th class="testhide" style="width: 40px;">&nbsp;</th><th style="width: 150px;">&nbsp;</th><th style="width: 60px;">&nbsp;</th><th style="width: 150px;">&nbsp;</th><th style="width: 150px;">&nbsp;</th>' + list + '</tr></thead>');
+                $(".imagetable").prepend('<colgroup><col /><col /><col /></colgroup><thead><tr style="background-color:ButtonFace;"><th class="testhide" style="width: 40px;">&nbsp;</th><th style="width: 150px;">&nbsp;</th><th style="width: 120px;">&nbsp;</th><th style="width: 150px;">&nbsp;</th><th style="width: 150px;">&nbsp;</th>' + list + '</tr></thead>');
             }
         }
     </script>
@@ -239,6 +239,13 @@
             <asp:Localize ID="locbtnCloseWindow" runat="server" meta:resourcekey="locbtnCloseWindowResource1"
                 Text="&lt;input type=&quot;button&quot; class=&quot;button_example&quot; value=&quot;Close Window&quot; id=&quot;close&quot; onclick=&quot;window.close()&quot; /&gt;"></asp:Localize>
         </div>
+        
+        <div>
+            <asp:Localize ID="locaNoTargetMessage" runat="server" 
+                meta:resourcekey="locaNoTargetMessageResource1" Text="
+                &lt;div style=&quot;color:Red;font-size:xx-large&quot;&gt;If you don't have target. Please enter zero to record the activity&lt;/div&gt;
+            "></asp:Localize>
+        </div>
         <div class="buttonright">
             <asp:Button ID="btnOpenLocations" runat="server" Text="Locations" CausesValidation="False"
                 CssClass="button_location" OnClick="btnLocation_Click" OnClientClick="needToConfirm = false;"
@@ -277,9 +284,9 @@
                         meta:resourcekey="BoundFieldResource3">
                         <ItemStyle Width="150px"></ItemStyle>
                     </asp:BoundField>
-                    <asp:BoundField DataField="HumanitarianPriority" HeaderText="Priority" ItemStyle-Width="60px"
-                        ItemStyle-Wrap=" false" meta:resourcekey="BoundFieldResource4">
-                        <ItemStyle Wrap="False" Width="60px"></ItemStyle>
+                    <asp:BoundField DataField="HumanitarianPriority" HeaderText="Priority" ItemStyle-Width="120px"
+                         meta:resourcekey="BoundFieldResource4">
+                        <ItemStyle Width="120px"></ItemStyle>
                     </asp:BoundField>
                     <asp:BoundField DataField="ActivityName" HeaderText="Activity" ItemStyle-Width="150px"
                         meta:resourcekey="BoundFieldResource5">
@@ -306,9 +313,9 @@
         <tr>
             <td>
                 <input type="button" id="btnClientOpen" runat="server" style="display: none;" />
-                <asp:ModalPopupExtender ID="mpeAddActivity" runat="server" TargetControlID="btnClientOpen" BehaviorID="mpeAddActivity"
-                    PopupControlID="pnlLocations" BackgroundCssClass="modalpopupbackground" DynamicServicePath=""
-                    Enabled="True">
+                <asp:ModalPopupExtender ID="mpeAddActivity" runat="server" BehaviorID="mpeAddActivity"
+                    TargetControlID="btnClientOpen" PopupControlID="pnlLocations" BackgroundCssClass="modalpopupbackground"
+                    DynamicServicePath="" Enabled="True">
                 </asp:ModalPopupExtender>
                 <asp:Panel ID="pnlLocations" runat="server" Width="200px" meta:resourcekey="pnlLocationsResource1">
                     <asp:UpdatePanel ID="uPanel1" runat="server" UpdateMode="Conditional">
@@ -351,137 +358,5 @@
             </td>
         </tr>
     </table>
-    <table>
-        <tr>
-            <td>
-                <input type="button" id="btnAddActivityOpen" runat="server" style="display: none;" />
-                <asp:ModalPopupExtender ID="mpeAddOrg" runat="server" TargetControlID="btnAddActivityOpen"
-                    PopupControlID="pnlOrg" BackgroundCssClass="modalpopupbackground" DynamicServicePath=""
-                    Enabled="True">
-                </asp:ModalPopupExtender>
-                <asp:Panel ID="pnlOrg" runat="server" Width="900px" meta:resourcekey="pnlOrgResource1">
-                    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
-                        <ContentTemplate>
-                            <div class="containerPopup">
-                                <div class="graybar">
-                                </div>
-                                <div class="contentarea">
-                                    <div class="formdiv">
-                                        <table border="0" style="margin: 0 auto;">
-                                            <tr>
-                                                <td>
-                                                    <clusterlabel>
-                                <b><asp:Localize ID="locUserActStrObj" runat="server" 
-                                meta:resourcekey="Localize1Resource1" Text="Strategic Objectives:"></asp:Localize></b></clusterlabel>
-                                                </td>
-                                                <td>
-                                                    <asp:DropDownList ID="ddlUserStrObj" Width="408px" runat="server" meta:resourcekey="ddlStrObjectivesResource1">
-                                                    </asp:DropDownList>
-                                                    <asp:RequiredFieldValidator ID="rfvddlUserStrObj" runat="server" ErrorMessage="Required"
-                                                        InitialValue="0" ForeColor="Red" Text="Required" ControlToValidate="ddlUserStrObj"
-                                                        meta:resourcekey="rfvddlUserStrObjResource1"></asp:RequiredFieldValidator>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <clusterlabel>
-
-                                <b><asp:Localize ID="locUserActPriority" runat="server" meta:resourcekey="Localize2Resource1" Text="Prioirties:"></asp:Localize></b></clusterlabel>
-                                                </td>
-                                                <td>
-                                                    <asp:DropDownList ID="ddlUserPriority" Width="408px" runat="server" meta:resourcekey="ddlSpcObjectivesResource1">
-                                                    </asp:DropDownList>
-                                                    <asp:RequiredFieldValidator ID="rfvddlUserPriority" runat="server" ErrorMessage="Required"
-                                                        InitialValue="0" ForeColor="Red" Text="Required" ControlToValidate="ddlUserPriority"
-                                                        meta:resourcekey="rfvddlUserPriorityResource1"></asp:RequiredFieldValidator>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <b>
-                                                        <asp:Localize ID="locUserActivityCaption" runat="server" meta:resourcekey="locUserActivityCaptionResource1"
-                                                            Text="Activity"></asp:Localize>
-                                                </td>
-                                                <td>
-                                                    <asp:TextBox ID="txtUserActivity" runat="server" Width="400px" meta:resourcekey="txtUserActivityResource1"></asp:TextBox>
-                                                    <asp:RequiredFieldValidator ID="rfvUserActivity" runat="server" ErrorMessage="Required"
-                                                        ForeColor="Red" Text="Required" ControlToValidate="txtUserActivity" meta:resourcekey="rfvUserActivityResource1"></asp:RequiredFieldValidator>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <b>
-                                                        <asp:Localize ID="locUserOutputInd1Caption" runat="server" meta:resourcekey="locUserOutputInd1CaptionResource1"
-                                                            Text="Output Indicator 1"></asp:Localize>
-                                                </td>
-                                                <td>
-                                                    <asp:TextBox ID="txtUserOutputIndicator1" runat="server" Width="400px" meta:resourcekey="txtUserOutputIndicator1Resource1"></asp:TextBox>
-                                                    <asp:RequiredFieldValidator ID="rfvUserOutputIndicator1" runat="server" ErrorMessage="Required"
-                                                        ForeColor="Red" Text="Required" ControlToValidate="txtUserOutputIndicator1" meta:resourcekey="rfvUserOutputIndicator1Resource1"></asp:RequiredFieldValidator>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <b>
-                                                        <asp:Localize ID="Localize4locUserOutputInd2Caption" runat="server" meta:resourcekey="Localize4locUserOutputInd2CaptionResource1"
-                                                            Text="Output Indicator 2"></asp:Localize>
-                                                </td>
-                                                <td>
-                                                    <asp:TextBox ID="txtUserOutputIndicator2" runat="server" Width="400px" meta:resourcekey="txtUserOutputIndicator2Resource1"></asp:TextBox>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <b>
-                                                        <asp:Localize ID="locUserOutputInd3Caption" runat="server" meta:resourcekey="locUserOutputInd3CaptionResource1"
-                                                            Text="Output Indicator 3"></asp:Localize>
-                                                </td>
-                                                <td>
-                                                    <asp:TextBox ID="txtUserOutputIndicator3" runat="server" Width="400px" meta:resourcekey="txtUserOutputIndicator3Resource1"></asp:TextBox>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <b>
-                                                        <asp:Localize ID="locUserOutputInd4Caption" runat="server" meta:resourcekey="locUserOutputInd4CaptionResource1"
-                                                            Text="Output Indicator 4"></asp:Localize>
-                                                </td>
-                                                <td>
-                                                    <asp:TextBox ID="txtUserOutputIndicator4" runat="server" Width="400px" meta:resourcekey="txtUserOutputIndicator4Resource1"></asp:TextBox>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2" align="right">
-                                                    <asp:HiddenField ID="hfLocEmgId" runat="server" />
-                                                    <asp:Button ID="btnSaveUserActivity" runat="server" Text="Save" OnClick="btnSaveUserActivity_Click"
-                                                        CssClass="button_example" OnClientClick="needToConfirm = false;" meta:resourcekey="btnSaveUserActivityResource1" />
-                                                    <asp:Button ID="btnCloseUserActivity" runat="server" Text="Close" CausesValidation="False"
-                                                        OnClick="btnCloseUserActivity_Click" OnClientClick="needToConfirm = false;" CssClass="button_example"
-                                                        meta:resourcekey="btnCloseUserActivityResource1" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2">
-                                                    <asp:Label ID="lblMessage2" runat="server" CssClass="error-message" Visible="False"
-                                                        ViewStateMode="Disabled" meta:resourcekey="lblMessage2Resource1"></asp:Label>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                        <div class="spacer" style="clear: both;">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="graybarcontainer">
-                                </div>
-                            </div>
-                        </ContentTemplate>
-                        <Triggers>
-                            <asp:PostBackTrigger ControlID="btnSaveUserActivity" />
-                            <asp:PostBackTrigger ControlID="btnCloseUserActivity" />
-                        </Triggers>
-                    </asp:UpdatePanel>
-                </asp:Panel>
-            </td>
-        </tr>
-    </table>
+   
 </asp:Content>

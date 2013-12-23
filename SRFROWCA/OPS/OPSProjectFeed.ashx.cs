@@ -17,7 +17,8 @@ namespace SRFROWCA.OPS
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/plain";
-            DataTable dt = DBContext.GetData("GetOPSProjectDetailsFeed");
+            DataTable dt = GetProjectDetails(context);
+            
             XDocument doc = new XDocument(new XDeclaration("1.0", "utf-16", "yes"));
             XElement logFrameValues = new XElement("Projects");
 
@@ -37,6 +38,27 @@ namespace SRFROWCA.OPS
             doc.Add(logFrameValues);
             doc.Save("e://testing1.xml");
             context.Response.Write(doc.ToString());
+        }
+
+        private DataTable GetProjectDetails(HttpContext context)
+        {
+            int tempVal = 0;
+            int? clusterId = null;
+            if (context.Request["cls"] != null)
+            {
+                int.TryParse(context.Request["cls"].ToString(), out tempVal);
+                clusterId = tempVal > 0 ? tempVal : (int?)null;
+            }
+
+            int? locationId = null;
+            if (context.Request["loc"] != null)
+            {
+                tempVal = 0;
+                int.TryParse(context.Request["loc"].ToString(), out tempVal);
+                locationId = tempVal > 0 ? tempVal : (int?)null;
+            }
+
+            return DBContext.GetData("GetOPSProjectDetailsFeed", new object[] {clusterId, locationId});
         }
 
         private XElement GetElement(string name, string nameValue)

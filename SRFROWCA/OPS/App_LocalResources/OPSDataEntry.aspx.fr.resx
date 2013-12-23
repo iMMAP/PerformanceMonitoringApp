@@ -237,6 +237,11 @@
   <data name="Localize2Resource1.Text" xml:space="preserve">
     <value>Filtrer suivant la priorité</value>
   </data>
+  <data name="locaNoTargetMessageResource1.Text" xml:space="preserve">
+    <value>
+                &lt;div style="color:Red;"&gt;Pour sélectionner une activité, pour laquelle vous ne connaissez pas la cible, mettre zéro (o) dans la colonne « cible 2014 » sous la (les) région(s) correspondante(s).&lt;/div&gt;
+            </value>
+  </data>
   <data name="locbtnCloseWindowResource1.Text" xml:space="preserve">
     <value>&lt;input type="button" class="button_example" value="Fermer" id="close" onclick="window.close()" /&gt;</value>
   </data>

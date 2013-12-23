@@ -232,16 +232,21 @@
     <value />
   </data>
   <data name="Localize1Resource1.Text" xml:space="preserve">
-    <value>Filter On Strategic Objective:</value>
+    <value>Strategic Objectives:</value>
   </data>
   <data name="Localize2Resource1.Text" xml:space="preserve">
-    <value>Filter On Prioirty:</value>
+    <value>Prioirties:</value>
+  </data>
+  <data name="locaNoTargetMessageResource1.Text" xml:space="preserve">
+    <value>
+                &lt;div style="color:Red;"&gt;To select an activity for which you don’t know the target, put a zero (o) in the column "Target 2014" under the corresponding region(s).&lt;/div&gt;
+            </value>
   </data>
   <data name="locbtnCloseWindowResource1.Text" xml:space="preserve">
     <value>&lt;input type="button" class="button_example" value="Close Window" id="close" onclick="window.close()" /&gt;</value>
   </data>
   <data name="locClusterCaptionResource1.Text" xml:space="preserve">
-    <value>Secteur:</value>
+    <value>Cluster:</value>
   </data>
   <data name="locFilterContainerHeaderResource1.Text" xml:space="preserve">
     <value> Filter Activities</value>
