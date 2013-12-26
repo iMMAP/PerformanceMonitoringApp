@@ -57,7 +57,8 @@ namespace SRFROWCA.OPS
             {
                 OPSEmergencyId = GetEmergencyId();
                 OPSEmergencyClusterId = GetClusterId();
-                lblCluster.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(OPSClusterName);
+                //lblCluster.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(OPSClusterNameLabel);
+                lblCluster.Text = OPSClusterNameLabel;
             }
             PopulateStrategicObjectives();
         }
@@ -84,29 +85,50 @@ namespace SRFROWCA.OPS
                 {
                     OPSEmergencyId = GetEmergencyId();
                     OPSEmergencyClusterId = GetClusterId();
+                    UpdateClusterName();
 
-                    lblCluster.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(OPSClusterName);
+                    //lblCluster.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(OPSClusterName);
+                    //lblCluster.Text = OPSClusterNameLabel;
                 }
                 PopulateDropDowns();
             }
 
-            this.Form.DefaultButton = this.btnSave.UniqueID;
+            this.Form.DefaultButton = this.btnSave.UniqueID;            
 
             string controlName = GetPostBackControlId(this);
             if (controlName == "lnkLanguageFrench")
             {
                 SiteLanguageId = 2;
+                UpdateClusterName();
             }
 
             if (controlName == "lnkLanguageEnglish")
             {
                 SiteLanguageId = 1;
+                UpdateClusterName();
             }
+            
+            lblCluster.Text = OPSClusterNameLabel;
 
             DataTable dtActivities = GetActivities();
             AddDynamicColumnsInGrid(dtActivities);
             GetReport(dtActivities);
+            
 
+        }
+
+        private void UpdateClusterName()
+        {
+            string clusterName = MapClusterNames();
+            DataTable dt = DBContext.GetData("GetClusterNameOnLanguage", new object[]{clusterName, SiteLanguageId});
+            if (dt.Rows.Count > 0)
+            {
+                OPSClusterNameLabel = dt.Rows[0]["ClusterName"].ToString();
+            }
+            else
+            {
+                OPSClusterNameLabel = "";
+            }
         }
 
         protected void rbtnList_SelectedIndexChanged(object sender, EventArgs e)
@@ -256,13 +278,18 @@ namespace SRFROWCA.OPS
 
             if (Request.QueryString["cname"] != null)
             {
-                if (Request.QueryString["cname"].ToString().Equals("burkinafaso"))
+                string cName = Request.QueryString["cname"].ToString();
+                if (cName == "burkinafaso" || cName == "Burkinafaso" || cName == "BURKINAFASO")
                 {
                     OPSCountryName = "burkina faso";
                 }
+                else if (cName == "region" || cName == "Region" || cName == "REGION")
+                {
+                    OPSCountryName = "Sahel Region";
+                }
                 else
                 {
-                    OPSCountryName = Request.QueryString["cname"].ToString();
+                    OPSCountryName = cName;
                 }
             }
         }
@@ -284,21 +311,76 @@ namespace SRFROWCA.OPS
             DataTable dt = new DataTable();
             if (!string.IsNullOrEmpty(OPSClusterName) && !string.IsNullOrEmpty(OPSCountryName))
             {
-                int opsEmergency = 1;
-                string clusterName = "";
-                if (OPSClusterName == "abrisnfi")
-                {
-                    clusterName = "Abris et NFI";
-                }
-                else
-                {
-                    clusterName = OPSClusterName;
-                }
+                string clusterName = MapClusterNames();
+                OPSClusterNameLabel = clusterName;
 
                 dt = DBContext.GetData("GetEmergencyClustersId", new object[] { clusterName, OPSEmergencyId, SiteLanguageId });
             }
 
             return dt.Rows.Count > 0 ? Convert.ToInt32(dt.Rows[0]["EmergencyClusterId"].ToString()) : 0;
+        }
+
+        private string MapClusterNames()
+        {
+            string clusterName = "";
+            if (OPSClusterName == "coordinationandsupportservices")
+            {
+                clusterName = "Coordination And Support Services";
+            }
+            else if (OPSClusterName == "earlyrecovery")
+            {
+                clusterName = "Early Recovery";
+            }
+            else if (OPSClusterName == "education")
+            {
+                clusterName = "Education";
+            }
+            else if (OPSClusterName == "emergencyshelterandnfi")
+            {
+                clusterName = "Emergency Shelter And NFI";
+            }
+            else if (OPSClusterName == "foodsecurity")
+            {
+                clusterName = "Food Security";
+            }
+            else if (OPSClusterName == "health")
+            {
+                clusterName = "Health";
+            }
+            else if (OPSClusterName == "logistics")
+            {
+                clusterName = "Logistics";
+            }
+            else if (OPSClusterName == "nutrition")
+            {
+                clusterName = "Nutrition";
+            }
+            else if (OPSClusterName == "protection")
+            {
+                clusterName = "Protection";
+            }
+            else if (OPSClusterName == "logistics")
+            {
+                clusterName = "Logistics";
+            }
+            else if (OPSClusterName == "waterandsanitation")
+            {
+                clusterName = "Water Sanitation & Hygiene";
+            }
+            else if (OPSClusterName == "emergencytelecommunication")
+            {
+                clusterName = "Emergency Telecommunication";
+            }
+            else if (OPSClusterName == "multisectorforrefugees")
+            {
+                clusterName = "Multi Sector for Refugees";
+            }
+            else
+            {
+                clusterName = OPSClusterName;
+            }
+
+            return clusterName;
         }
 
         private void PopulateDropDowns()
@@ -543,7 +625,15 @@ namespace SRFROWCA.OPS
 
         private DataTable GetChildLocations(int parentLocationId)
         {
-            DataTable dt = DBContext.GetData("GetSecondLevelChildLocationsAndCountry", new object[] { parentLocationId });
+            DataTable dt = new DataTable();
+            if (OPSCountryName == "Sahel Region")
+            {
+                dt = DBContext.GetData("GetLocationOnName", new object[] { OPSCountryName });
+            }
+            else
+            {
+                dt = DBContext.GetData("GetSecondLevelChildLocationsAndCountry", new object[] { parentLocationId });
+            }
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 

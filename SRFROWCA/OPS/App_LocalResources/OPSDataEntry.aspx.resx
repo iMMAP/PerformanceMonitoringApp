@@ -124,7 +124,7 @@
     <value />
   </data>
   <data name="BoundFieldResource1.HeaderText" xml:space="preserve">
-    <value>HumanitarianPriorityId</value>
+    <value>ObjectiveId</value>
   </data>
   <data name="BoundFieldResource2.AccessibleHeaderText" xml:space="preserve">
     <value />
@@ -133,7 +133,7 @@
     <value />
   </data>
   <data name="BoundFieldResource2.HeaderText" xml:space="preserve">
-    <value>Cluster Partner</value>
+    <value>HumanitarianPriorityId</value>
   </data>
   <data name="BoundFieldResource3.AccessibleHeaderText" xml:space="preserve">
     <value />
@@ -142,7 +142,7 @@
     <value />
   </data>
   <data name="BoundFieldResource3.HeaderText" xml:space="preserve">
-    <value>Objective</value>
+    <value>Cluster Partner</value>
   </data>
   <data name="BoundFieldResource4.AccessibleHeaderText" xml:space="preserve">
     <value />
@@ -151,25 +151,7 @@
     <value />
   </data>
   <data name="BoundFieldResource4.HeaderText" xml:space="preserve">
-    <value>Priority</value>
-  </data>
-  <data name="BoundFieldResource5.AccessibleHeaderText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="BoundFieldResource5.FooterText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="BoundFieldResource5.HeaderText" xml:space="preserve">
-    <value>Activity</value>
-  </data>
-  <data name="BoundFieldResource6.AccessibleHeaderText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="BoundFieldResource6.FooterText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="BoundFieldResource6.HeaderText" xml:space="preserve">
-    <value>Output Indicator</value>
+    <value>Objective</value>
   </data>
   <data name="btnCloseResource1.Text" xml:space="preserve">
     <value>Close</value>
@@ -198,7 +180,7 @@
   <data name="cbAdmin1LocaitonsResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="ddlSpcObjectivesResource1.ToolTip" xml:space="preserve">
+  <data name="ddlPrioritiesResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="ddlStrObjectivesResource1.ToolTip" xml:space="preserve">
@@ -219,6 +201,33 @@
   <data name="lblClusterResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="lblGridActivityResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblGridHeaderActivityResource1.Text" xml:space="preserve">
+    <value>Activity</value>
+  </data>
+  <data name="lblGridHeaderActivityResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblGridHeaderIndicatorResource1.Text" xml:space="preserve">
+    <value>Output Indicator</value>
+  </data>
+  <data name="lblGridHeaderIndicatorResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblGridHeaderPriorityResource1.Text" xml:space="preserve">
+    <value>Priority</value>
+  </data>
+  <data name="lblGridHeaderPriorityResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblGridIndicatorResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblGridPrioritiyResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="lnkLanguageEnglishResource1.Text" xml:space="preserve">
     <value>English</value>
   </data>
@@ -231,15 +240,15 @@
   <data name="lnkLanguageFrenchResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="Localize1Resource1.Text" xml:space="preserve">
+  <data name="Localize2Resource1.Text" xml:space="preserve">
     <value>Strategic Objectives:</value>
   </data>
-  <data name="Localize2Resource1.Text" xml:space="preserve">
+  <data name="Localize3Resource1.Text" xml:space="preserve">
     <value>Prioirties:</value>
   </data>
   <data name="locaNoTargetMessageResource1.Text" xml:space="preserve">
     <value>
-                &lt;div style="color:Red;"&gt;To select an activity for which you don’t know the target, put a zero (o) in the column "Target 2014" under the corresponding region(s).&lt;/div&gt;
+                &lt;div style="color:Red;"&gt;To select an activity for which you do not know the target, please put a zero (0).&lt;/div&gt;
             </value>
   </data>
   <data name="locbtnCloseWindowResource1.Text" xml:space="preserve">
@@ -261,6 +270,33 @@
     <value />
   </data>
   <data name="pnlLocationsResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TemplateFieldResource1.AccessibleHeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TemplateFieldResource1.FooterText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TemplateFieldResource1.HeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TemplateFieldResource2.AccessibleHeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TemplateFieldResource2.FooterText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TemplateFieldResource2.HeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TemplateFieldResource3.AccessibleHeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TemplateFieldResource3.FooterText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TemplateFieldResource3.HeaderText" xml:space="preserve">
     <value />
   </data>
 </root>

@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ops.Master" AutoEventWireup="true"
     CodeBehind="OPSDataEntry.aspx.cs" Inherits="SRFROWCA.OPS.OPSDataEntry" Culture="auto"
-    meta:resourcekey="PageResource1" UICulture="auto" %>
+    UICulture="auto" meta:resourcekey="PageResource1" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
@@ -163,7 +163,7 @@
                 });
 
                 // Add header row in grid.
-                $(".imagetable").prepend('<colgroup><col /><col /><col /></colgroup><thead><tr style="background-color:ButtonFace;"><th class="testhide" style="width: 40px;">&nbsp;</th><th style="width: 150px;">&nbsp;</th><th style="width: 120px;">&nbsp;</th><th style="width: 150px;">&nbsp;</th><th style="width: 150px;">&nbsp;</th>' + list + '</tr></thead>');
+                $(".imagetable").prepend('<colgroup><col /><col /><col /></colgroup><thead><tr style="background-color:ButtonFace;"><th style="width: 40px;">&nbsp;</th><th style="width: 150px;">&nbsp;</th><th style="width: 120px;">&nbsp;</th><th style="width: 150px;">&nbsp;</th><th style="width: 150px;">&nbsp;</th>' + list + '</tr></thead>');
             }
         }
     </script>
@@ -173,8 +173,8 @@
     </div>
     <div class="containerOPS">
         <div class="graybar">
-            <asp:Localize ID="locFilterContainerHeader" runat="server" meta:resourcekey="locFilterContainerHeaderResource1"
-                Text=" Filter Activities"></asp:Localize>
+            <asp:Localize ID="locFilterContainerHeader" runat="server" Text=" Filter Activities"
+                meta:resourcekey="locFilterContainerHeaderResource1"></asp:Localize>
         </div>
         <div class="contentarea">
             <div class="formdiv">
@@ -182,8 +182,9 @@
                     <tr>
                         <td>
                             <clusterlabel>
-                                <b><asp:Localize ID="locClusterCaption" runat="server" 
-                                meta:resourcekey="locClusterCaptionResource1" Text="Cluster:"></asp:Localize></b></clusterlabel>
+                                <b>
+                            <asp:Localize ID="locClusterCaption" runat="server" 
+                                 Text="Cluster:" meta:resourcekey="locClusterCaptionResource1" ></asp:Localize></b></clusterlabel>
                         </td>
                         <td>
                             <asp:Label ID="lblCluster" runat="server" CssClass="clusterLabel" meta:resourcekey="lblClusterResource1"></asp:Label>
@@ -198,8 +199,9 @@
                     <tr>
                         <td>
                             <clusterlabel>
-                                <b><asp:Localize ID="Localize2" runat="server"
-                                meta:resourcekey="Localize1Resource1" Text="Strategic Objectives:"></asp:Localize></b></clusterlabel>
+                                <b>
+                            <asp:Localize ID="Localize2" runat="server"
+                                 Text="Strategic Objectives:" meta:resourcekey="Localize2Resource1" ></asp:Localize></b></clusterlabel>
                         </td>
                         <td>
                             <asp:DropDownList ID="ddlStrObjectives" Width="800px" runat="server" meta:resourcekey="ddlStrObjectivesResource1">
@@ -216,11 +218,12 @@
                     <tr>
                         <td>
                             <clusterlabel>
-                                <b><asp:Localize ID="Localize3" runat="server"
-                                meta:resourcekey="Localize2Resource1" Text="Prioirties:"></asp:Localize></b></clusterlabel>
+                                <b>
+                            <asp:Localize ID="Localize3" runat="server"
+                                Text="Prioirties:" meta:resourcekey="Localize3Resource1" ></asp:Localize></b></clusterlabel>
                         </td>
                         <td>
-                            <asp:DropDownList ID="ddlPriorities" Width="400px" runat="server" meta:resourcekey="ddlSpcObjectivesResource1">
+                            <asp:DropDownList ID="ddlPriorities" Width="400px" runat="server" meta:resourcekey="ddlPrioritiesResource1">
                             </asp:DropDownList>
                         </td>
                     </tr>
@@ -236,15 +239,13 @@
         <div class="savebutton">
             <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
                 CausesValidation="False" Width="120px" CssClass="button_example" meta:resourcekey="btnSaveResource1" />
-            <asp:Localize ID="locbtnCloseWindow" runat="server" meta:resourcekey="locbtnCloseWindowResource1"
-                Text="&lt;input type=&quot;button&quot; class=&quot;button_example&quot; value=&quot;Close Window&quot; id=&quot;close&quot; onclick=&quot;window.close()&quot; /&gt;"></asp:Localize>
+            <asp:Localize ID="locbtnCloseWindow" runat="server" Text="&lt;input type=&quot;button&quot; class=&quot;button_example&quot; value=&quot;Close Window&quot; id=&quot;close&quot; onclick=&quot;window.close()&quot; /&gt;"
+                meta:resourcekey="locbtnCloseWindowResource1"></asp:Localize>
         </div>
-        
         <div>
-            <asp:Localize ID="locaNoTargetMessage" runat="server" 
-                meta:resourcekey="locaNoTargetMessageResource1" Text="
-                &lt;div style=&quot;color:Red;font-size:xx-large&quot;&gt;If you don't have target. Please enter zero to record the activity&lt;/div&gt;
-            "></asp:Localize>
+            <asp:Localize ID="locaNoTargetMessage" runat="server" Text="
+                &lt;div style=&quot;color:Red;&quot;&gt;To select an activity for  for which you do not know the target, please put a zero (0).&lt;/div&gt;
+            " meta:resourcekey="locaNoTargetMessageResource1"></asp:Localize>
         </div>
         <div class="buttonright">
             <asp:Button ID="btnOpenLocations" runat="server" Text="Locations" CausesValidation="False"
@@ -272,30 +273,47 @@
                     </asp:BoundField>
                     <asp:BoundField DataField="HumanitarianPriorityId" HeaderText="HumanitarianPriorityId"
                         ItemStyle-Width="1px" ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement"
-                        meta:resourcekey="BoundFieldResource1">
+                        meta:resourcekey="BoundFieldResource2">
                         <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
                         <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
                     </asp:BoundField>
                     <asp:BoundField DataField="SecondaryCluster" HeaderText="Cluster Partner" ItemStyle-Width="40px"
-                        meta:resourcekey="BoundFieldResource2">
+                        meta:resourcekey="BoundFieldResource3">
                         <ItemStyle Width="40px"></ItemStyle>
                     </asp:BoundField>
                     <asp:BoundField DataField="Objective" HeaderText="Objective" ItemStyle-Width="150px"
-                        meta:resourcekey="BoundFieldResource3">
+                        meta:resourcekey="BoundFieldResource4">
                         <ItemStyle Width="150px"></ItemStyle>
                     </asp:BoundField>
-                    <asp:BoundField DataField="HumanitarianPriority" HeaderText="Priority" ItemStyle-Width="120px"
-                         meta:resourcekey="BoundFieldResource4">
-                        <ItemStyle Width="120px"></ItemStyle>
-                    </asp:BoundField>
-                    <asp:BoundField DataField="ActivityName" HeaderText="Activity" ItemStyle-Width="150px"
-                        meta:resourcekey="BoundFieldResource5">
-                        <ItemStyle Width="200px"></ItemStyle>
-                    </asp:BoundField>
-                    <asp:BoundField DataField="DataName" HeaderText="Output Indicator" ItemStyle-Width="150px"
-                        meta:resourcekey="BoundFieldResource6">
-                        <ItemStyle Width="200px"></ItemStyle>
-                    </asp:BoundField>
+                    <asp:TemplateField HeaderStyle-Width="120" meta:resourcekey="TemplateFieldResource1">
+                        <HeaderTemplate>
+                            <asp:Label ID="lblGridHeaderPriority" runat="server" Text="Priority" meta:resourcekey="lblGridHeaderPriorityResource1"></asp:Label>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="lblGridPrioritiy" runat="server" Text='<%# Eval("HumanitarianPriority") %>'
+                                meta:resourcekey="lblGridPrioritiyResource1"></asp:Label>
+                        </ItemTemplate>
+                        <HeaderStyle Width="120px"></HeaderStyle>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderStyle-Width="150" meta:resourcekey="TemplateFieldResource2">
+                        <HeaderTemplate>
+                            <asp:Label ID="lblGridHeaderActivity" runat="server" Text="Activity" meta:resourcekey="lblGridHeaderActivityResource1"></asp:Label>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="lblGridActivity" runat="server" Text='<%# Eval("ActivityName") %>'
+                                meta:resourcekey="lblGridActivityResource1"></asp:Label>
+                        </ItemTemplate>
+                        <HeaderStyle Width="150px"></HeaderStyle>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderStyle-Width="150" meta:resourcekey="TemplateFieldResource3">
+                        <HeaderTemplate>
+                            <asp:Label ID="lblGridHeaderIndicator" runat="server" Text="Output Indicator" meta:resourcekey="lblGridHeaderIndicatorResource1"></asp:Label>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="lblGridIndicator" runat="server" Text='<%# Eval("DataName") %>' meta:resourcekey="lblGridIndicatorResource1"></asp:Label>
+                        </ItemTemplate>
+                        <HeaderStyle Width="150px"></HeaderStyle>
+                    </asp:TemplateField>
                 </Columns>
             </asp:GridView>
         </div>
@@ -313,17 +331,17 @@
         <tr>
             <td>
                 <input type="button" id="btnClientOpen" runat="server" style="display: none;" />
-                <asp:ModalPopupExtender ID="mpeAddActivity" runat="server" BehaviorID="mpeAddActivity"
-                    TargetControlID="btnClientOpen" PopupControlID="pnlLocations" BackgroundCssClass="modalpopupbackground"
-                    DynamicServicePath="" Enabled="True">
+                <asp:ModalPopupExtender ID="mpeAddActivity" runat="server" TargetControlID="btnClientOpen" BehaviorID="mpeAddActivity"
+                    PopupControlID="pnlLocations" BackgroundCssClass="modalpopupbackground" DynamicServicePath=""
+                    Enabled="True">
                 </asp:ModalPopupExtender>
                 <asp:Panel ID="pnlLocations" runat="server" Width="200px" meta:resourcekey="pnlLocationsResource1">
                     <asp:UpdatePanel ID="uPanel1" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
                             <div class="containerPopup">
                                 <div class="graybar">
-                                    <asp:Localize ID="locLocaitonLevelCaption" runat="server" meta:resourcekey="locLocaitonLevelCaptionResource1"
-                                        Text="Admin1 Locations"></asp:Localize>
+                                    <asp:Localize ID="locLocaitonLevelCaption" runat="server" Text="Admin1 Locations"
+                                        meta:resourcekey="locLocaitonLevelCaptionResource1"></asp:Localize>
                                 </div>
                                 <div class="contentarea">
                                     <div class="formdiv">
@@ -358,5 +376,4 @@
             </td>
         </tr>
     </table>
-   
 </asp:Content>
