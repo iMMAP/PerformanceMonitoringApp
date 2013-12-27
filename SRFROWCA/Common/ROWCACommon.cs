@@ -181,6 +181,11 @@ namespace SRFROWCA.Common
             return dt;
         }
 
+        internal static DataTable GetAllEmergencies()
+        {
+            return DBContext.GetData("GetAllEmergencies", new object[] { ROWCACommon.SiteLanguage.English });
+        }
+
         internal static DataTable GetStrategicObjectives(IPrincipal user)
         {
             if (ROWCACommon.IsAdmin(user))
@@ -324,7 +329,7 @@ namespace SRFROWCA.Common
         {
             HttpContext.Current.Session["SiteChanged"] = siteChanged;
             SelectedSiteLanguageId = languageId;
-            SiteCulture = siteCulture;            
+            SiteCulture = siteCulture;
         }
 
         internal static void CultureSettings(string postBackControl)

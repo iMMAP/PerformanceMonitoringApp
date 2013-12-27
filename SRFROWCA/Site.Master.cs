@@ -22,7 +22,7 @@ namespace SRFROWCA
         {
             if (Session["SiteLanguage"] == null)
             {
-                ROWCACommon.SelectedSiteLanguageId = (int) Common.ROWCACommon.SiteLanguage.English;
+                ROWCACommon.SelectedSiteLanguageId = (int)Common.ROWCACommon.SiteLanguage.English;
                 ROWCACommon.SiteCulture = "en-US";
 
                 if (Request.Cookies["SiteLanguageCookie"] != null)
@@ -74,7 +74,6 @@ namespace SRFROWCA
             //        lblOrganization.Text = "(" + dt.Rows[0]["OrganizationAcronym"].ToString() + ")";
             //    }
             //}
-
         }
 
         protected void lnkLanguageEnglish_Click(object sender, EventArgs e)

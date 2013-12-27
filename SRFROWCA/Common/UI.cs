@@ -65,11 +65,19 @@ namespace SRFROWCA.Common
             ddl.DataBind();
         }
 
-        internal static void FillObjectives(DropDownCheckBoxes ddl, DataTable dt)
-        {
-            ddl.DataValueField = "ClusterObjectiveId";
-            ddl.DataTextField = "ObjectiveName";
+        //internal static void FillObjectives(DropDownCheckBoxes ddl, DataTable dt)
+        //{
+        //    ddl.DataValueField = "ClusterObjectiveId";
+        //    ddl.DataTextField = "ObjectiveName";
 
+        //    ddl.DataSource = dt;
+        //    ddl.DataBind();
+        //}
+
+        internal static void FillAllObjectives(DropDownList ddl, DataTable dt)
+        {
+            ddl.DataValueField = "ObjectiveId";
+            ddl.DataTextField = "Objective";
             ddl.DataSource = dt;
             ddl.DataBind();
         }
@@ -116,6 +124,21 @@ namespace SRFROWCA.Common
             }
         }
 
+        internal static void FillEmergency(DropDownList ddl, DataTable dt)
+        {
+            ddl.DataValueField = "EmergencyId";
+            ddl.DataTextField = "EmergencyName";
+            ddl.DataSource = dt;
+            ddl.DataBind();
+
+            if (ddl.Items.Count > 1)
+            {
+                ListItem item = new ListItem("Select Emergency", "0");
+                ddl.Items.Insert(0, item);
+                ddl.SelectedIndex = 0;
+            }
+        }
+
         internal static void FillCountry(DropDownList ddl)
         {
             ddl.DataValueField = "LocationId";
@@ -127,6 +150,14 @@ namespace SRFROWCA.Common
             ListItem item = new ListItem("Select Country", "0");
             ddl.Items.Insert(0, item);
             ddl.SelectedIndex = 0;
+        }
+
+        internal static void FillPriorities(DropDownList ddl, DataTable dt)
+        {
+            ddl.DataValueField = "HumanitarianPriorityId";
+            ddl.DataTextField = "HumanitarianPriority";            
+            ddl.DataSource = dt;
+            ddl.DataBind();
         }
     }
 }

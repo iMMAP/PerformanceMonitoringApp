@@ -73,7 +73,9 @@
                         </li>
                         <hr />
                         <li><a class="signinfly" href="../Admin/UsersListing.aspx" tabindex="1">Users</a></li>
-                        <li><a class="signinfly" href="../Admin/UploadActivities.aspx" tabindex="1">Upload LogFrame</a>
+                        <li><a class="signinfly" href="../Admin/UploadLogFrame.aspx" tabindex="1">Upload LogFrame</a>
+                        </li>
+                        <li><a class="signinfly" href="../Admin/UploadLocations.aspx" tabindex="1">Upload Locations</a>
                         </li>
                         <li><a class="signinfly" href="../Admin/AdminDataFeeds.aspx" tabindex="1">XML Feeds</a>
                         </li>
