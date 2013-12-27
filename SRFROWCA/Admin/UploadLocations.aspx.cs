@@ -5,22 +5,20 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
-using SRFROWCA.Common;
-using System.IO;
-using System.Web.Security;
-using BusinessLogic;
-using System.Data.OleDb;
-using System.Configuration;
 using System.Data.SqlClient;
+using System.Configuration;
+using System.IO;
+using System.Data.OleDb;
+using BusinessLogic;
+using System.Web.Security;
 
 namespace SRFROWCA.Admin
 {
-    public partial class UploadLogFrame : System.Web.UI.Page
+    public partial class UploadLocations : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (IsPostBack) return;
-            PopulateLocationEmergencies();
+
         }
 
         protected void btnImport_Click(object sender, EventArgs e)
@@ -52,24 +50,13 @@ namespace SRFROWCA.Admin
             }
         }
 
-        // Populate Emergencies Drop down.
-        private void PopulateLocationEmergencies()
-        {
-            UI.FillEmergency(ddlEmergency, ROWCACommon.GetAllEmergencies());
-        }
-
-        // Get all emergencies.
-        private object GetLocationEmergencies()
-        {
-            return DBContext.GetData("GetALLLocationEmergencies");
-        }
 
         private bool IsValidFile()
         {
             if (fuExcel.HasFile)
             {
                 string fileExt = Path.GetExtension(fuExcel.PostedFile.FileName);
-                if (fileExt != ".xls" && fileExt != ".xlsx" && fileExt != ".xlsb")
+                if (fileExt != ".xls" && fileExt != ".xlsx")
                 {
                     ShowMessage("Pleae use Excel files with 'xls' OR 'xlsx' extentions.");
                     return false;
@@ -87,7 +74,7 @@ namespace SRFROWCA.Admin
         // First Empty staging tables.
         private void EmptyTable()
         {
-            DBContext.Delete("DeleteStagingLogFrame", new object[] { DBNull.Value });
+            DBContext.Delete("DeleteStagingLocations", new object[] { DBNull.Value });
         }
 
         // Read Data From Excel Sheet and Save into DB
@@ -148,7 +135,8 @@ namespace SRFROWCA.Admin
             //Create Connection to Excel work book
             OleDbConnection excelCon = new OleDbConnection(excelConString);
             //Create OleDbCommand to fetch data from Excel
-            OleDbCommand cmd = new OleDbCommand(@"Select * from [Sheet1$]", excelCon);
+            string sheetName = txtCountryName.Text.Trim();
+            OleDbCommand cmd = new OleDbCommand(string.Format("Select * from [{0}$]", sheetName), excelCon);
             excelCon.Open();
 
             OleDbDataAdapter da = new OleDbDataAdapter();
@@ -168,7 +156,7 @@ namespace SRFROWCA.Admin
         // Import all data from staging table to respective tables.
         private DataTable ImportData()
         {
-            return DBContext.GetData("ImportClusterLogFrame");
+            return DBContext.GetData("ImportLocations");
         }
 
         // Create new datatable and appropriate columns.
@@ -183,31 +171,15 @@ namespace SRFROWCA.Admin
 
             DataTable dt = new DataTable();
             dt.Columns.Add(idColumn);
-            dt.Columns.Add("EmergencyId", typeof(int));
-            dt.Columns.Add("Cluster_En", typeof(string));            
-            dt.Columns.Add("Cluster_Fr", typeof(string));
-            dt.Columns.Add("ClusterId", typeof(int));
-            dt.Columns.Add("EmergencyClusterId", typeof(int));
-            dt.Columns.Add("Objective_En", typeof(string));
-            dt.Columns.Add("Objective_Fr", typeof(string));
-            dt.Columns.Add("ObjectiveId", typeof(int));
-            dt.Columns.Add("ClusterObjectiveId", typeof(int));
-            dt.Columns.Add("Priority_En", typeof(string));
-            dt.Columns.Add("Priority_Fr", typeof(string));
-            dt.Columns.Add("PriorityId", typeof(int));
-            dt.Columns.Add("ObjectivePriorityId", typeof(int));
-            dt.Columns.Add("Activity_En", typeof(string));
-            dt.Columns.Add("Activity_Fr", typeof(string));
-            dt.Columns.Add("PriorityActivityId", typeof(int));
-            dt.Columns.Add("Data_En", typeof(string));
-            dt.Columns.Add("Data_Fr", typeof(string));
-            dt.Columns.Add("ActivityDataId", typeof(int));
-            dt.Columns.Add("Unit_En", typeof(string));
-            dt.Columns.Add("Unit_Fr", typeof(string));
-            dt.Columns.Add("UnitId", typeof(int));
-            dt.Columns.Add("UserId", typeof(Guid));
-            dt.Columns.Add("SecondaryCluster_En", typeof(string));            
-            dt.Columns.Add("SecondaryCluster_Fr", typeof(string));            
+
+            dt.Columns.Add("Admin Level 1", typeof(string));
+            dt.Columns.Add("Pcode1", typeof(string));            
+            dt.Columns.Add("Admin Level 2", typeof(string));
+            dt.Columns.Add("Pcode2", typeof(string));
+            dt.Columns.Add("CountryId", typeof(int));
+            dt.Columns.Add("Admin1Id", typeof(int));            
+            dt.Columns.Add("Admin2Id", typeof(int));            
+            dt.Columns.Add("UserId", typeof(Guid));           
 
             return dt;
         }
@@ -217,7 +189,6 @@ namespace SRFROWCA.Admin
         {
             if (dt.Rows.Count > 0)
             {
-                dt.Rows[0]["EmergencyId"] = ddlEmergency.SelectedValue;
                 dt.Rows[0]["UserId"] = ((Guid)Membership.GetUser().ProviderUserKey);
             }
         }
@@ -228,7 +199,7 @@ namespace SRFROWCA.Admin
             // DB connection string.
             string conString = ConfigurationManager.ConnectionStrings["live_dbName"].ConnectionString;
             SqlBulkCopy sqlBulk = new SqlBulkCopy(conString);
-            sqlBulk.DestinationTableName = "StagingTableLogFrame";
+            sqlBulk.DestinationTableName = "StagingLocations";
             sqlBulk.WriteToServer(dt);
             sqlBulk.Close();
         }
