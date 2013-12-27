@@ -55,6 +55,9 @@
             // Change coloumn size
             $("#<%=gvActivities.ClientID %>").kiketable_colsizable({ minWidth: 30 })
 
+            $("#<%=ddlStrObjectives.ClientID %> > option").first().attr('selected', 'selected');
+            $("#<%=ddlPriorities.ClientID %> > option").first().attr('selected', 'selected');
+
         });
 
         // Filter rows on objects
@@ -63,75 +66,75 @@
             $('#<%=ddlStrObjectives.ClientID %>').change(function () {
                 var objId = $('#<%=ddlStrObjectives.ClientID %> :selected').val();
 
-                //Get all items from spcobjectives dropdown
-                $("#<%=ddlPriorities.ClientID %> > option").first().attr('selected', 'selected');
+                var priorityId = $('#<%=ddlPriorities.ClientID %> :selected').val();
 
-                // remove hidden class from items to show all.
-                //showAllDropDownItems(spcObjOptions);
-
-                // Hide matching items from spc dropdown.
-                //hideMatchingItemsInDropDown(spcObjOptions, objId)
-
-                // filter (hide) rows from strobj grid.
-                $('.istrow, .altcolor').find('td:nth-child(1)').each(function (i) {
-                    if ($(this).text() === objId || objId === '0') {
-                        $(this).parent().show();
-                    }
-                    else {
-                        $(this).parent().hide();
-                    }
-                });
+                var objPrId = '';
+                if (objId !== '0' && priorityId !== '0') {
+                    objPrId = objId + '-' + priorityId;
+                    hideObjPriority(objPrId);
+                }
+                else if (objId === '0' && priorityId !== '0') {
+                    hidePriority(priorityId);
+                }
+                else {
+                    hideObj(objId);
+                }
             });
 
             // Filter (hide) rows from spcobj grid
             $('#<%=ddlPriorities.ClientID %>').change(function () {
-                $("#<%=ddlStrObjectives.ClientID %> > option").first().attr('selected', 'selected');
-                var strSpcObjId = $('#<%=ddlPriorities.ClientID %> :selected').val();
-                var spcObjId = strSpcObjId.substring(strSpcObjId.indexOf('_') + 1, strSpcObjId.length);
+                //$("#<%=ddlStrObjectives.ClientID %> > option").first().attr('selected', 'selected');
+                var objId = $('#<%=ddlStrObjectives.ClientID %> :selected').val();
+                var priorityId = $('#<%=ddlPriorities.ClientID %> :selected').val();
 
-
-                $('.istrow, .altcolor').find('td:nth-child(2)').each(function (i) {
-                    if ($(this).text() === spcObjId || spcObjId === '0') {
-                        $(this).parent().show();
-                    }
-                    else {
-                        $(this).parent().hide();
-                    }
-                });
-            });
-        }
-
-        // We alos need to filter specific objectives on selected str objective.
-        // First remove 'hiddenelement' class which is to hide items in spc objective
-        // dropdown i.e. display none
-        function showAllDropDownItems(controlItems) {
-            $(controlItems).each(function () {
-                $(this).removeClass('hiddenelement');
-            });
-
-            // Selecte first item in spc objectives.
-            $(controlItems).first().attr('selected', 'selected');
-        }
-
-        function hideMatchingItemsInDropDown(controlItems, objId) {
-            $(controlItems).each(function () {
-                var strSpcObjId = $(this).val();
-                if (strSpcObjId === "0" || objId === "0") {
-                    $(this).removeClass('hiddenelement');
+                var objPrId = '';
+                if (objId !== '0' && priorityId !== '0') {
+                    objPrId = objId + '-' + priorityId;
+                    hideObjPriority(objPrId);
+                }
+                else if (objId !== '0' && priorityId === '0') {
+                    hideObj(objId);
                 }
                 else {
-                    var spcObjId = strSpcObjId.substring(strSpcObjId.indexOf('_') + 1, strSpcObjId.length);
-                    var strObjId = strSpcObjId.substring(0, strSpcObjId.indexOf('_'));
-
-                    if (strObjId !== objId) {
-                        $(this).addClass('hiddenelement');
-                    }
-                    else {
-                        $(this).removeClass('hiddenelement');
-                    }
+                    hidePriority(priorityId);
                 }
             });
         }
+
+        function hideObj(objId) {
+
+            $('.istrow, .altcolor').find('td:nth-child(1)').each(function (i) {
+                if ($(this).text() === objId || objId === '0') {
+                    $(this).parent().show();
+                }
+                else {
+                    $(this).parent().hide();
+                }
+            });
+        }
+
+        function hidePriority(priorityId) {
+            $('.istrow, .altcolor').find('td:nth-child(2)').each(function (i) {
+                if ($(this).text() === priorityId || priorityId === '0') {
+                    $(this).parent().show();
+                }
+                else {
+                    $(this).parent().hide();
+                }
+            });
+        }
+
+        function hideObjPriority(objPrId) {
+            $('.istrow, .altcolor').find('td:nth-child(3)').each(function (i) {
+                if ($(this).text() === objPrId || objPrId === '0') {
+                    $(this).parent().show();
+                }
+                else {
+                    $(this).parent().hide();
+                }
+            });
+        }
+
 
         // Split location namde and 'T' (means Target) and 'A' (means Achieved)
         function splitLocationFromTA() {
@@ -163,7 +166,7 @@
                 });
 
                 // Add header row in grid.
-                $(".imagetable").prepend('<colgroup><col /><col /><col /></colgroup><thead><tr style="background-color:ButtonFace;"><th style="width: 40px;">&nbsp;</th><th style="width: 150px;">&nbsp;</th><th style="width: 120px;">&nbsp;</th><th style="width: 150px;">&nbsp;</th><th style="width: 150px;">&nbsp;</th>' + list + '</tr></thead>');
+                $(".imagetable").prepend('<colgroup><col /><col /><col /><col /></colgroup><thead><tr style="background-color:ButtonFace;"><th style="width: 40px;">&nbsp;</th><th style="width: 150px;">&nbsp;</th><th style="width: 120px;">&nbsp;</th><th style="width: 150px;">&nbsp;</th><th style="width: 150px;">&nbsp;</th>' + list + '</tr></thead>');
             }
         }
     </script>
@@ -207,14 +210,7 @@
                             <asp:DropDownList ID="ddlStrObjectives" Width="800px" runat="server" meta:resourcekey="ddlStrObjectivesResource1">
                             </asp:DropDownList>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            <clusterlabel><b>OR</b></clusterlabel>
-                        </td>
-                    </tr>
+                    </tr>                    
                     <tr>
                         <td>
                             <clusterlabel>
@@ -223,7 +219,7 @@
                                 Text="Prioirties:" meta:resourcekey="Localize3Resource1" ></asp:Localize></b></clusterlabel>
                         </td>
                         <td>
-                            <asp:DropDownList ID="ddlPriorities" Width="400px" runat="server" meta:resourcekey="ddlPrioritiesResource1">
+                            <asp:DropDownList ID="ddlPriorities" Width="800px" runat="server" meta:resourcekey="ddlPrioritiesResource1">
                             </asp:DropDownList>
                         </td>
                     </tr>
@@ -265,7 +261,7 @@
                 <HeaderStyle BackColor="Control"></HeaderStyle>
                 <RowStyle CssClass="istrow" />
                 <AlternatingRowStyle CssClass="altcolor" />
-                <Columns>
+                <Columns>                    
                     <asp:BoundField DataField="ObjectiveId" HeaderText="ObjectiveId" ItemStyle-Width="1px"
                         ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement" meta:resourcekey="BoundFieldResource1">
                         <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
@@ -277,6 +273,11 @@
                         <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
                         <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
                     </asp:BoundField>
+                    <asp:BoundField DataField="ObjAndPrId" HeaderText="objprid" ItemStyle-Width="1px"
+                        ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement" meta:resourcekey="BoundFieldResource2">
+                        <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
+                        <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
+                    </asp:BoundField>                   
                     <asp:BoundField DataField="SecondaryCluster" HeaderText="Cluster Partner" ItemStyle-Width="40px"
                         meta:resourcekey="BoundFieldResource3">
                         <ItemStyle Width="40px"></ItemStyle>
@@ -331,9 +332,9 @@
         <tr>
             <td>
                 <input type="button" id="btnClientOpen" runat="server" style="display: none;" />
-                <asp:ModalPopupExtender ID="mpeAddActivity" runat="server" TargetControlID="btnClientOpen" BehaviorID="mpeAddActivity"
-                    PopupControlID="pnlLocations" BackgroundCssClass="modalpopupbackground" DynamicServicePath=""
-                    Enabled="True">
+                <asp:ModalPopupExtender ID="mpeAddActivity" runat="server" TargetControlID="btnClientOpen"
+                    BehaviorID="mpeAddActivity" PopupControlID="pnlLocations" BackgroundCssClass="modalpopupbackground"
+                    DynamicServicePath="" Enabled="True">
                 </asp:ModalPopupExtender>
                 <asp:Panel ID="pnlLocations" runat="server" Width="200px" meta:resourcekey="pnlLocationsResource1">
                     <asp:UpdatePanel ID="uPanel1" runat="server" UpdateMode="Conditional">
