@@ -55,7 +55,7 @@ namespace SRFROWCA.OPS
             SetOPSIds();
             if (OPSProjectId > 0 && !string.IsNullOrEmpty(OPSClusterName) && !string.IsNullOrEmpty(OPSCountryName))
             {
-                OPSEmergencyId = GetEmergencyId();
+                GetEmergencyId();
                 OPSEmergencyClusterId = GetClusterId();
                 //lblCluster.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(OPSClusterNameLabel);
                 lblCluster.Text = OPSClusterNameLabel;
@@ -85,7 +85,7 @@ namespace SRFROWCA.OPS
                 SetOPSIds();
                 if (OPSProjectId > 0 && !string.IsNullOrEmpty(OPSClusterName) && !string.IsNullOrEmpty(OPSCountryName))
                 {
-                    OPSEmergencyId = GetEmergencyId();
+                    GetEmergencyId();
                     OPSEmergencyClusterId = GetClusterId();
                     UpdateClusterName();
 
@@ -296,7 +296,7 @@ namespace SRFROWCA.OPS
             }
         }
 
-        private int GetEmergencyId()
+        private void GetEmergencyId()
         {
             DataTable dt = new DataTable();
             if (!string.IsNullOrEmpty(OPSCountryName))
@@ -305,7 +305,11 @@ namespace SRFROWCA.OPS
                 dt = DBContext.GetData("GetOPSEmergencyId", new object[] { OPSCountryName, isOPSEmergency, SiteLanguageId });
             }
 
-            return dt.Rows.Count > 0 ? Convert.ToInt32(dt.Rows[0]["EmergencyId"].ToString()) : 0;
+            if (dt.Rows.Count > 0)
+            {
+                OPSLocationEmergencyId = Convert.ToInt32(dt.Rows[0]["LocationEmergencyId"].ToString());
+                OPSEmergencyId = Convert.ToInt32(dt.Rows[0]["EmergencyId"].ToString());
+            }
         }
 
         private int GetClusterId()
@@ -549,7 +553,7 @@ namespace SRFROWCA.OPS
             string locationIds = GetSelectedItems(cbAdmin1Locaitons);
             string locIdsNotIncluded = GetNotSelectedItems(cbAdmin1Locaitons);
 
-            DataTable dt = DBContext.GetData("GetOPSActivities", new object[] { OPSEmergencyId, locationIds, locIdsNotIncluded, 
+            DataTable dt = DBContext.GetData("GetOPSActivities", new object[] { OPSLocationEmergencyId, locationIds, locIdsNotIncluded, 
                                                                             OPSProjectId, OPSEmergencyClusterId, SiteLanguageId, OPSCountryName });
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
@@ -588,7 +592,7 @@ namespace SRFROWCA.OPS
                 if (!(columnName == "OPSReportId" || columnName == "ClusterName" || columnName == "SecondaryCluster" ||
                         columnName == "Objective" || columnName == "HumanitarianPriority" || columnName == "ActivityDataId" ||
                         columnName == "ActivityName" || columnName == "DataName" || columnName == "IsActive" ||
-                        columnName == "ObjectiveId" || columnName == "HumanitarianPriorityId" || columnName == "ObjAndPrId"))
+                        columnName == "ObjectiveId" || columnName == "HumanitarianPriorityId" || columnName == "ObjAndPrId" || columnName == "PriorityActivityId"))
                 {
 
                     customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, column.ColumnName, "1");
@@ -740,7 +744,7 @@ namespace SRFROWCA.OPS
 
         private void SaveReportMainInfo()
         {
-            OPSReportId = DBContext.Add("InsertOPSReport", new object[] { OPSEmergencyId, OPSProjectId, OPSEmergencyClusterId, OPSUserId, SiteLanguageId, DBNull.Value });
+            OPSReportId = DBContext.Add("InsertOPSReport", new object[] { OPSLocationEmergencyId, OPSProjectId, OPSEmergencyClusterId, OPSUserId, SiteLanguageId, DBNull.Value });
         }
 
         private bool IsDataExistsToSave()
@@ -940,7 +944,7 @@ namespace SRFROWCA.OPS
         {
             Session["dtOPSActivities"] = dt;
 
-            DataTable dtReport = DBContext.GetData("GetOPSReportId", new object[] { OPSEmergencyId, OPSProjectId, OPSEmergencyClusterId });
+            DataTable dtReport = DBContext.GetData("GetOPSReportId", new object[] { OPSLocationEmergencyId, OPSProjectId, OPSEmergencyClusterId });
             if (dtReport.Rows.Count > 0)
             {
                 OPSReportId = string.IsNullOrEmpty(dtReport.Rows[0]["OPSReportId"].ToString()) ? 0 : Convert.ToInt32(dtReport.Rows[0]["OPSReportId"].ToString());
@@ -1014,6 +1018,7 @@ namespace SRFROWCA.OPS
                 ViewState["OPSReportId"] = value.ToString();
             }
         }
+        
         public int LocationId
         {
             get
@@ -1031,6 +1036,7 @@ namespace SRFROWCA.OPS
                 ViewState["LocationId"] = value.ToString();
             }
         }
+        
         public int Count1
         {
             get
@@ -1172,6 +1178,24 @@ namespace SRFROWCA.OPS
             }
         }
 
+        public int OPSLocationEmergencyId
+        {
+            get
+            {
+                int opsLocationEmergencyId = 0;
+                if (ViewState["OPSLocationEmergencyId"] != null)
+                {
+                    int.TryParse(ViewState["OPSLocationEmergencyId"].ToString(), out opsLocationEmergencyId);
+                }
+
+                return opsLocationEmergencyId;
+            }
+            set
+            {
+                ViewState["OPSLocationEmergencyId"] = value.ToString();
+            }
+        }
+
         public int OPSEmergencyClusterId
         {
             get
@@ -1234,7 +1258,7 @@ namespace SRFROWCA.OPS
             SetOPSIds();
             if (OPSProjectId > 0 && !string.IsNullOrEmpty(OPSClusterName) && !string.IsNullOrEmpty(OPSCountryName))
             {
-                OPSEmergencyId = GetEmergencyId();
+                GetEmergencyId();
                 OPSEmergencyClusterId = GetClusterId();
                 lblCluster.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(OPSClusterName);
             }
@@ -1247,7 +1271,7 @@ namespace SRFROWCA.OPS
             SetOPSIds();
             if (OPSProjectId > 0 && !string.IsNullOrEmpty(OPSClusterName) && !string.IsNullOrEmpty(OPSCountryName))
             {
-                OPSEmergencyId = GetEmergencyId();
+                GetEmergencyId();
                 OPSEmergencyClusterId = GetClusterId();
                 lblCluster.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(OPSClusterName);
             }

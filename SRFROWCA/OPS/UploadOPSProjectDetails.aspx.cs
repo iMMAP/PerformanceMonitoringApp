@@ -233,7 +233,7 @@ namespace SRFROWCA.OPS
         }
 
         private DataTable InsertDataInPhysicalTable()
-        { 
+        {
             return DBContext.GetData("InsertDataFromStagingOPSTableIntoOPSProjectDetailsTable");
         }
     }

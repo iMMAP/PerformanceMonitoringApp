@@ -79,6 +79,12 @@
                 else {
                     hideObj(objId);
                 }
+
+                $('#<%=gvActivities.ClientID %>').each(function () {
+                    $('tr:odd', this).addClass('istrow').removeClass('altcolor');
+                    $('tr:even', this).addClass('altcolor').removeClass('istrow');
+                });
+
             });
 
             // Filter (hide) rows from spcobj grid
@@ -98,6 +104,11 @@
                 else {
                     hidePriority(priorityId);
                 }
+            });
+
+            $('#<%=gvActivities.ClientID %>').each(function () {
+                $('tr:odd', this).addClass('istrow').removeClass('altcolor');
+                $('tr:even', this).addClass('altcolor').removeClass('istrow');
             });
         }
 

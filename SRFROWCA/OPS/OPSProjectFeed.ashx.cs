@@ -36,7 +36,7 @@ namespace SRFROWCA.OPS
             }
 
             doc.Add(logFrameValues);
-            doc.Save("e://testing1.xml");
+            //doc.Save("e://testing1.xml");
             context.Response.Write(doc.ToString());
         }
 
