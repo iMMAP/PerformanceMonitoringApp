@@ -4,6 +4,18 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <script type="text/javascript">
+        // javascript to add to your aspx page
+        function ValidateModuleList(source, args) {
+            var chkListModules = document.getElementById('<%= chkModuleList.ClientID %>');
+            var chkListinputs = chkListModules.getElementsByTagName("input");
+            for (var i = 0; i < chkListinputs.length; i++) {
+                if (chkListinputs[i].checked) {
+                    args.IsValid = true;
+                    return;
+                }
+            }
+            args.IsValid = false;
+        }
         $(function () {
             $('#txtSearch').on("keyup paste", function () {
                 searchTable($(this).val());
@@ -122,14 +134,26 @@
                                         <table border="0" style="margin: 0 auto;">
                                             <tr>
                                                 <td>
-                                                    Emergency Name:
+                                                    Emergency Name (English):
                                                 </td>
                                                 <td>
-                                                    <asp:TextBox ID="txtEmgName" runat="server" Width="300px" MaxLength="200"></asp:TextBox>
+                                                    <asp:TextBox ID="txtEmgNameEng" runat="server" Width="300px" MaxLength="200"></asp:TextBox>
                                                 </td>
                                                 <td>
-                                                    <asp:RequiredFieldValidator ID="rfvEmgName" runat="server" ErrorMessage="Emg Name"
-                                                        Text="Required" ControlToValidate="txtEmgName"></asp:RequiredFieldValidator>
+                                                    <asp:RequiredFieldValidator ID="rfvEmgName" runat="server" ErrorMessage="Emg Name (Eng)"
+                                                        Text="Required" ControlToValidate="txtEmgNameEng"></asp:RequiredFieldValidator>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Emergency Name (French):
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox ID="txtEmgNameFr" runat="server" Width="300px" MaxLength="200"></asp:TextBox>
+                                                </td>
+                                                <td>
+                                                    <asp:RequiredFieldValidator ID="rfvEmgNameFr" runat="server" ErrorMessage="Emg Name (Fr)"
+                                                        Text="Required" ControlToValidate="txtEmgNameFr"></asp:RequiredFieldValidator>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -147,15 +171,19 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    Location:
+                                                    Country:
                                                 </td>
                                                 <td>
                                                     <asp:DropDownList ID="ddlLocations" runat="server" Width="300px">
                                                     </asp:DropDownList>
+                                                    <asp:CheckBoxList ID="chkModuleList" runat="server" RepeatColumns="3">
+                                                    </asp:CheckBoxList>
                                                 </td>
                                                 <td>
                                                     <asp:RequiredFieldValidator ID="rfvLocation" runat="server" ErrorMessage="Required"
                                                         InitialValue="0" Text="Required" ControlToValidate="ddlLocations"></asp:RequiredFieldValidator>
+                                                    <asp:CustomValidator runat="server" ID="cvmodulelist" ClientValidationFunction="ValidateModuleList"
+                                                        ErrorMessage="Please Select Atleast one Module"></asp:CustomValidator>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -174,12 +202,10 @@
                                         </table>
                                         <div class="spacer" style="clear: both;">
                                         </div>
-                                        
                                     </div>
-                                    
                                 </div>
                                 <div class="graybarcontainer">
-                                        </div>
+                                </div>
                             </div>
                         </ContentTemplate>
                         <Triggers>

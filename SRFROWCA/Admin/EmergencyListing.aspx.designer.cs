@@ -67,13 +67,13 @@ namespace SRFROWCA.Admin {
         protected global::System.Web.UI.UpdatePanel uPanel1;
         
         /// <summary>
-        /// txtEmgName control.
+        /// txtEmgNameEng control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEmgName;
+        protected global::System.Web.UI.WebControls.TextBox txtEmgNameEng;
         
         /// <summary>
         /// rfvEmgName control.
@@ -83,6 +83,24 @@ namespace SRFROWCA.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvEmgName;
+        
+        /// <summary>
+        /// txtEmgNameFr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEmgNameFr;
+        
+        /// <summary>
+        /// rfvEmgNameFr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvEmgNameFr;
         
         /// <summary>
         /// ddlEmgType control.
@@ -112,6 +130,15 @@ namespace SRFROWCA.Admin {
         protected global::System.Web.UI.WebControls.DropDownList ddlLocations;
         
         /// <summary>
+        /// chkModuleList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList chkModuleList;
+        
+        /// <summary>
         /// rfvLocation control.
         /// </summary>
         /// <remarks>
@@ -119,6 +146,15 @@ namespace SRFROWCA.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvLocation;
+        
+        /// <summary>
+        /// cvmodulelist control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvmodulelist;
         
         /// <summary>
         /// hfLocEmgId control.

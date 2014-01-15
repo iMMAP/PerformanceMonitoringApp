@@ -79,7 +79,7 @@ namespace SRFROWCA.Admin
                     ddlLocations.SelectedValue = lblLocationId.Text;
                 }
 
-                txtEmgName.Text = row.Cells[2].Text;                
+                txtEmgNameEng.Text = row.Cells[2].Text;                
                 mpeAddOrg.Show();
             }
         }
@@ -170,6 +170,13 @@ namespace SRFROWCA.Admin
 
             ListItem item = new ListItem("Select Country", "0");
             ddlLocations.Items.Insert(0, item);
+
+
+            chkModuleList.DataValueField = "LocationId";
+            chkModuleList.DataTextField = "LocationName";
+
+            chkModuleList.DataSource = ROWCACommon.GetLocations(this.User);
+            chkModuleList.DataBind();
         }
 
         protected void btnAddEmergency_Click(object sender, EventArgs e)
@@ -198,7 +205,7 @@ namespace SRFROWCA.Admin
                 ddlLocations.SelectedIndex = 0;
             }
 
-            hfLocEmgId.Value = txtEmgName.Text = "";
+            hfLocEmgId.Value = txtEmgNameEng.Text = txtEmgNameFr.Text = "";
         }
 
         private void SaveEmergency()
@@ -209,19 +216,38 @@ namespace SRFROWCA.Admin
             int locId = 0;
             int.TryParse(ddlLocations.SelectedValue, out locId);
 
-            string emgName = txtEmgName.Text.Trim();
+            string emgNameEng = txtEmgNameEng.Text.Trim();
+            string emgNameFr = txtEmgNameFr.Text.Trim();
             Guid userId = ROWCACommon.GetCurrentUserId();
 
             if (!string.IsNullOrEmpty(hfLocEmgId.Value))
             {
                 int emgLocId = Convert.ToInt32(hfLocEmgId.Value);
-                DBContext.Update("UpdateEmergency", new object[] { emgLocId, emgTyepId, emgName, locId, userId, DBNull.Value });
+                DBContext.Update("UpdateEmergency", new object[] { emgLocId, emgTyepId, emgNameEng, emgNameFr, locId, userId, DBNull.Value });
             }
             else
             {
-                DBContext.Add("InsertEmergency", new object[] { emgTyepId, emgName, locId, userId, DBNull.Value });
+                DBContext.Add("InsertEmergency", new object[] { emgTyepId, emgNameEng, emgNameFr, locId, userId, DBNull.Value });
             }
         }
+
+        //private void UpdateEmergency()
+        //{
+        //    int emgTyepId = 0;
+        //    int.TryParse(ddlEmgType.SelectedValue, out emgTyepId);
+
+        //    int locId = 0;
+        //    int.TryParse(ddlLocations.SelectedValue, out locId);
+
+        //    string emgName = txtEmgName.Text.Trim();
+        //    Guid userId = ROWCACommon.GetCurrentUserId();
+
+        //    if (!string.IsNullOrEmpty(hfLocEmgId.Value))
+        //    {
+        //        int emgLocId = Convert.ToInt32(hfLocEmgId.Value);
+        //        DBContext.Update("UpdateEmergency", new object[] { emgLocId, emgTyepId, emgName, locId, userId, DBNull.Value });
+        //    }
+        //}
 
         private void ShowMessage(string message, ROWCACommon.NotificationType notificationType = ROWCACommon.NotificationType.Success, bool fadeOut = true, int animationTime = 0)
         {
