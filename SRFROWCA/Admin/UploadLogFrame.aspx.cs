@@ -55,7 +55,8 @@ namespace SRFROWCA.Admin
         // Populate Emergencies Drop down.
         private void PopulateLocationEmergencies()
         {
-            UI.FillEmergency(ddlEmergency, ROWCACommon.GetAllEmergencies());
+            int locationId = (int)ROWCACommon.SiteLanguage.English;
+            UI.FillEmergency(ddlEmergency, ROWCACommon.GetAllEmergencies(locationId));            
         }
 
         // Get all emergencies.

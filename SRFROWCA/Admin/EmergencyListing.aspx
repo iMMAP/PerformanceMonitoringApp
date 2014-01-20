@@ -3,19 +3,8 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <script type="text/javascript">
-        // javascript to add to your aspx page
-        function ValidateModuleList(source, args) {
-            var chkListModules = document.getElementById('<%= chkModuleList.ClientID %>');
-            var chkListinputs = chkListModules.getElementsByTagName("input");
-            for (var i = 0; i < chkListinputs.length; i++) {
-                if (chkListinputs[i].checked) {
-                    args.IsValid = true;
-                    return;
-                }
-            }
-            args.IsValid = false;
-        }
+    <script type="text/javascript">       
+        
         $(function () {
             $('#txtSearch').on("keyup paste", function () {
                 searchTable($(this).val());
@@ -84,28 +73,21 @@
                             <%# Container.DataItemIndex + 1 %>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:BoundField DataField="LocationEmergencyId" HeaderText="Emg Id" HeaderStyle-Width="100px"
-                        SortExpression="LocationEmergencyId" />
+                    <asp:BoundField DataField="EmergencyId" HeaderText="Emergency Id" SortExpression="EmergencyId" />
                     <asp:BoundField DataField="EmergencyName" HeaderText="Emergency Name" SortExpression="EmergencyName" />
-                    <asp:BoundField DataField="EmergencyType" HeaderText="Disaster Type" SortExpression="EmergencyType" />
-                    <asp:BoundField DataField="LocationName" HeaderText="Location" SortExpression="LocationName" />
+                    <asp:BoundField DataField="EmergencyType" HeaderText="Disaster Type" SortExpression="EmergencyType" />                    
                     <asp:TemplateField HeaderText="Edit" HeaderStyle-Width="80px">
                         <ItemTemplate>
                             <asp:Button ID="btnEdit" runat="server" Text="Edit" Width="80px" CausesValidation="false"
-                                CommandName="EditEmergency" CommandArgument='<%# Eval("LocationEmergencyId") %>' />
+                                CommandName="EditEmergency" CommandArgument='<%# Eval("EmergencyId") %>' />
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Delete" HeaderStyle-Width="80px">
                         <ItemTemplate>
                             <asp:Button ID="btnDelete" runat="server" Text="Delete" Width="80px" CausesValidation="false"
-                                CommandName="DeleteEmergency" CommandArgument='<%# Eval("LocationEmergencyId") %>' />
+                                CommandName="DeleteEmergency" CommandArgument='<%# Eval("EmergencyId") %>' />
                         </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField Visible="false">
-                        <ItemTemplate>
-                            <asp:Label ID="lblLocationId" runat="server" Text='<%# Eval("LocationId") %>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
+                    </asp:TemplateField>                    
                     <asp:TemplateField Visible="false">
                         <ItemTemplate>
                             <asp:Label ID="lblEmergencyTypeId" runat="server" Text='<%# Eval("EmergencyTypeId") %>'></asp:Label>
@@ -167,23 +149,6 @@
                                                 <td>
                                                     <asp:RequiredFieldValidator ID="rgvEmgType" runat="server" ErrorMessage="Required"
                                                         InitialValue="0" Text="Required" ControlToValidate="ddlEmgType"></asp:RequiredFieldValidator>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Country:
-                                                </td>
-                                                <td>
-                                                    <asp:DropDownList ID="ddlLocations" runat="server" Width="300px">
-                                                    </asp:DropDownList>
-                                                    <asp:CheckBoxList ID="chkModuleList" runat="server" RepeatColumns="3">
-                                                    </asp:CheckBoxList>
-                                                </td>
-                                                <td>
-                                                    <asp:RequiredFieldValidator ID="rfvLocation" runat="server" ErrorMessage="Required"
-                                                        InitialValue="0" Text="Required" ControlToValidate="ddlLocations"></asp:RequiredFieldValidator>
-                                                    <asp:CustomValidator runat="server" ID="cvmodulelist" ClientValidationFunction="ValidateModuleList"
-                                                        ErrorMessage="Please Select Atleast one Module"></asp:CustomValidator>
                                                 </td>
                                             </tr>
                                             <tr>

@@ -23,7 +23,6 @@ namespace SRFROWCA.Admin
 
             LoadEmergencies();
             PopulateDisasterTypes();
-            //PopulateLocations();
         }
 
         // Add delete confirmation message with all delete buttons.
@@ -35,7 +34,7 @@ namespace SRFROWCA.Admin
                 if (deleteButton != null)
                 {
                     deleteButton.Attributes.Add("onclick", "javascript:return " +
-                    "confirm('Are you sure you want to delete this organization?')");
+                    "confirm('Are you sure you want to delete this Emergency?')");
                 }
             }
         }
@@ -46,16 +45,16 @@ namespace SRFROWCA.Admin
             // If user click on Delete button.
             if (e.CommandName == "DeleteEmergency")
             {
-                int locEmgId = Convert.ToInt32(e.CommandArgument);
+                int emgId = Convert.ToInt32(e.CommandArgument);
 
                 // Check if any IP has reported on this project. If so then do not delete it.
-                if (!EmgIsBeingUsed(locEmgId))
+                if (!EmgIsBeingUsed(emgId))
                 {
-                    ShowMessage("Emergency cannot be deleted! It is being used in reported data.", ROWCACommon.NotificationType.Error, false, 500);
+                    ShowMessage("Emergency cannot be deleted! It is being used.", ROWCACommon.NotificationType.Error, false, 500);
                     return;
                 }
 
-                DeleteEmergency(locEmgId);
+                DeleteEmergency(emgId);
                 LoadEmergencies();
             }
 
@@ -73,32 +72,27 @@ namespace SRFROWCA.Admin
                     ddlEmgType.SelectedValue = lblEmgTypeId.Text;
                 }
 
-                Label lblLocationId = row.FindControl("lblLocationId") as Label;
-                if (lblLocationId != null)
-                {
-                    ddlLocations.SelectedValue = lblLocationId.Text;
-                }
-
                 txtEmgNameEng.Text = row.Cells[2].Text;                
                 mpeAddOrg.Show();
             }
         }
 
-        private bool EmgIsBeingUsed(int locEmgId)
+        private bool EmgIsBeingUsed(int emgId)
         {
-            DataTable dt = DBContext.GetData("GetIsEmergencyBeingUsed", new object[] { locEmgId });
+            DataTable dt = DBContext.GetData("GetIsEmergencyBeingUsed", new object[] { emgId });
             return !(dt.Rows.Count > 0);
         }
 
-        private void DeleteEmergency(int locEmgId)
+        private void DeleteEmergency(int emgId)
         {
-            DBContext.Delete("DeleteEmergency", new object[] { locEmgId, DBNull.Value });
+            DBContext.Delete("DeleteEmergency", new object[] { emgId, DBNull.Value });
         }
 
         protected void gvEmergency_Sorting(object sender, GridViewSortEventArgs e)
         {
             //Retrieve the table from the session object.
-            DataTable dt = ROWCACommon.GetAllEmergencies();
+            int? locationId = null;
+            DataTable dt = ROWCACommon.GetAllEmergencies(locationId);
             if (dt != null)
             {
                 //Sort the data.
@@ -140,7 +134,8 @@ namespace SRFROWCA.Admin
 
         private void LoadEmergencies()
         {
-            gvEmergency.DataSource = ROWCACommon.GetAllEmergencies();
+            int? languageId = null;
+            gvEmergency.DataSource = ROWCACommon.GetAllEmergencies(languageId);
             gvEmergency.DataBind();
         }
 
@@ -158,25 +153,6 @@ namespace SRFROWCA.Admin
         private DataTable GetDisasterTypes()
         {
             return DBContext.GetData("GetAllDisasterTypes");
-        }
-
-        private void PopulateLocations()
-        {
-            ddlLocations.DataValueField = "LocationId";
-            ddlLocations.DataTextField = "LocationName";
-
-            ddlLocations.DataSource = ROWCACommon.GetLocations(this.User);
-            ddlLocations.DataBind();
-
-            ListItem item = new ListItem("Select Country", "0");
-            ddlLocations.Items.Insert(0, item);
-
-
-            chkModuleList.DataValueField = "LocationId";
-            chkModuleList.DataTextField = "LocationName";
-
-            chkModuleList.DataSource = ROWCACommon.GetLocations(this.User);
-            chkModuleList.DataBind();
         }
 
         protected void btnAddEmergency_Click(object sender, EventArgs e)
@@ -200,11 +176,6 @@ namespace SRFROWCA.Admin
                 ddlEmgType.SelectedIndex = 0;
             }
 
-            if (ddlLocations.Items.Count > 0)
-            {
-                ddlLocations.SelectedIndex = 0;
-            }
-
             hfLocEmgId.Value = txtEmgNameEng.Text = txtEmgNameFr.Text = "";
         }
 
@@ -214,7 +185,6 @@ namespace SRFROWCA.Admin
             int.TryParse(ddlEmgType.SelectedValue, out emgTyepId);
 
             int locId = 0;
-            int.TryParse(ddlLocations.SelectedValue, out locId);
 
             string emgNameEng = txtEmgNameEng.Text.Trim();
             string emgNameFr = txtEmgNameFr.Text.Trim();

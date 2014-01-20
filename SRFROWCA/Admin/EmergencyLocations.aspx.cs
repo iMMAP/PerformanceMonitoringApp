@@ -20,7 +20,8 @@ namespace SRFROWCA.Admin
 
         private void PopulateEmergencies()
         {
-            UI.FillEmergency(ddlEmergencies, ROWCACommon.GetAllEmergencies());
+            int locationId = (int) ROWCACommon.SiteLanguage.English;
+            UI.FillEmergency(ddlEmergencies, ROWCACommon.GetAllEmergencies(locationId));
         }
 
         private void PopulateCountries()

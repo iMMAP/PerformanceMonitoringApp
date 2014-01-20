@@ -121,42 +121,6 @@ namespace SRFROWCA.Admin {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rgvEmgType;
         
         /// <summary>
-        /// ddlLocations control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlLocations;
-        
-        /// <summary>
-        /// chkModuleList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList chkModuleList;
-        
-        /// <summary>
-        /// rfvLocation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvLocation;
-        
-        /// <summary>
-        /// cvmodulelist control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator cvmodulelist;
-        
-        /// <summary>
         /// hfLocEmgId control.
         /// </summary>
         /// <remarks>

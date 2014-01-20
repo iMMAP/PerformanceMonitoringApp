@@ -225,7 +225,8 @@ namespace SRFROWCA.Admin
 
         private void PopulateEmergencies()
         {
-            UI.FillLocationEmergency(ddlLocEmergencies, ROWCACommon.GetAllEmergencies());
+            int? locationId = (int?)ROWCACommon.SiteLanguage.English;
+            UI.FillLocationEmergency(ddlLocEmergencies, ROWCACommon.GetAllEmergencies(locationId));
         }      
 
         protected void ddlLocEmergencies_SelectedIndexChanged(object sender, EventArgs e)
