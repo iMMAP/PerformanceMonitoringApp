@@ -50,9 +50,9 @@ namespace SRFROWCA.Admin
                 int orgId = Convert.ToInt32(e.CommandArgument);
 
                 // Check if any IP has reported on this project. If so then do not delete it.
-                if (AnyIPReportedOnOrg(orgId))
+                if (AnyUserExistsInOrganization(orgId))
                 {
-                    lblMessage.Text = "Organization cannot be deleted! It is being used in Offices and/or Reports.";
+                    lblMessage.Text = "Organization cannot be deleted! Users are registered under this organization.";
                     lblMessage.CssClass = "error-message";
                     lblMessage.Visible = true;
 
@@ -153,9 +153,9 @@ namespace SRFROWCA.Admin
             DBContext.Delete("DeleteOrganization", new object[] { orgId, DBNull.Value });
         }
 
-        private bool AnyIPReportedOnOrg(int orgId)
+        private bool AnyUserExistsInOrganization(int orgId)
         {
-            DataTable dt = DBContext.GetData("GetOrgsUsedInReports", new object[] { orgId });
+            DataTable dt = DBContext.GetData("IsOrganizationHasUsers", new object[] { orgId });
             return dt.Rows.Count > 0;
         }
 

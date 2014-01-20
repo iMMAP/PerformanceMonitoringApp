@@ -27,7 +27,7 @@ namespace SRFROWCA.Admin
 
         private void PopulateEmergencies()
         {
-            UI.FillLocationEmergency(ddlEmergencies, ROWCACommon.GetEmergencies(this.User));
+            UI.FillLocationEmergency(ddlEmergencies, ROWCACommon.GetAllEmergencies());
         }
 
         private void PopulateClusters()

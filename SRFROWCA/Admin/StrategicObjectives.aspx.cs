@@ -23,7 +23,7 @@ namespace SRFROWCA.Admin
 
         private void PopulateEmergencies()
         {
-            UI.FillLocationEmergency(ddlLocEmergencies, ROWCACommon.GetEmergencies(this.User));
+            //UI.FillLocationEmergency(ddlLocEmergencies, ROWCACommon.GetEmergencies(this.User));
         }
 
         private void LoadStrategicObjectives()

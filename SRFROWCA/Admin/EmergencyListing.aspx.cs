@@ -23,7 +23,7 @@ namespace SRFROWCA.Admin
 
             LoadEmergencies();
             PopulateDisasterTypes();
-            PopulateLocations();
+            //PopulateLocations();
         }
 
         // Add delete confirmation message with all delete buttons.
@@ -98,7 +98,7 @@ namespace SRFROWCA.Admin
         protected void gvEmergency_Sorting(object sender, GridViewSortEventArgs e)
         {
             //Retrieve the table from the session object.
-            DataTable dt = ROWCACommon.GetEmergencies(this.User);
+            DataTable dt = ROWCACommon.GetAllEmergencies();
             if (dt != null)
             {
                 //Sort the data.
@@ -140,7 +140,7 @@ namespace SRFROWCA.Admin
 
         private void LoadEmergencies()
         {
-            gvEmergency.DataSource = ROWCACommon.GetEmergencies(this.User);
+            gvEmergency.DataSource = ROWCACommon.GetAllEmergencies();
             gvEmergency.DataBind();
         }
 

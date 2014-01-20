@@ -210,7 +210,7 @@ namespace SRFROWCA.Admin
 
         private void PopulateEmergencies()
         {
-            UI.FillLocationEmergency(ddlLocEmergencies, ROWCACommon.GetEmergencies(this.User));
+            UI.FillLocationEmergency(ddlLocEmergencies, ROWCACommon.GetAllEmergencies());
         }
 
         protected void ddlLocEmergencies_SelectedIndexChanged(object sender, EventArgs e)
