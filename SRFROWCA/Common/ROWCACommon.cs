@@ -165,7 +165,12 @@ namespace SRFROWCA.Common
             return dt;
         }
 
-        internal static DataTable GetEmergencies(IPrincipal user)
+        internal static DataTable GetLocationsAndChilds(int locationId, int childTypeId)
+        {
+            return DBContext.GetData("GetLocationAndItsChildOnType", new object[] { locationId, childTypeId });
+        }
+
+        internal static DataTable GetLocationEmergencies(IPrincipal user)
         {
             DataTable dt = new DataTable();
             if (IsCountryAdmin(user))

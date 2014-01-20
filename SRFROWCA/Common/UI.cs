@@ -37,7 +37,7 @@ namespace SRFROWCA.Common
         }
 
         // Populate LocationDropDown
-        internal static void FillLocations(DropDownList ddl, DataTable dt)
+        internal static void FillLocations(ListControl ddl, DataTable dt)
         {
             ddl.DataValueField = "LocationId";
             ddl.DataTextField = "LocationName";
