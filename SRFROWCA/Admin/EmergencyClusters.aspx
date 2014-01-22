@@ -22,7 +22,7 @@
         </div>
         <div class="contentarea">
             <div class="formdiv">
-                <table style="width:50%; margin:0 auto;">
+                <table style="width:70%; margin:0 auto;">
                     <tr>
                         <td>
                             <asp:DropDownList ID="ddlEmergencies" runat="server" OnSelectedIndexChanged="ddlEmergencies_SelectedIndexChanged"
@@ -34,7 +34,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <asp:CheckBoxList ID="cblClusters" CssClass="cb" runat="server" RepeatColumns="3">
+                            <asp:CheckBoxList ID="cblClusters" CssClass="cb" runat="server" RepeatColumns="2">
                             </asp:CheckBoxList>
                         </td>
                     </tr>

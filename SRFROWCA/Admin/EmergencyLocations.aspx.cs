@@ -26,9 +26,7 @@ namespace SRFROWCA.Admin
 
         private void PopulateCountries()
         {
-            int locationId = 1;
-            int typeId = (int)ROWCACommon.LocationTypes.National;            
-            UI.FillLocations(cblLocations, ROWCACommon.GetLocationsAndChilds(locationId, typeId));
+            UI.FillLocations(cblLocations, ROWCACommon.GetLocations(this.User, (int)ROWCACommon.LocationTypes.National));
         }
 
         protected void ddlEmergencies_SelectedIndexChanged(object sender, EventArgs e)

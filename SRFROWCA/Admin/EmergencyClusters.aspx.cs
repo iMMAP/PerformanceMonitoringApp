@@ -23,39 +23,40 @@ namespace SRFROWCA.Admin
 
             PopulateEmergencies();
             PopulateClusters();
+            FillEmergencyClusters();
         }
 
         private void PopulateEmergencies()
         {
             int locationId = (int)ROWCACommon.SiteLanguage.English;
-            UI.FillEmergency(ddlEmergencies, ROWCACommon.GetAllEmergencies(locationId));            
+            UI.FillEmergency(ddlEmergencies, ROWCACommon.GetAllEmergencies(locationId));
         }
 
         private void PopulateClusters()
         {
-            UI.FillClusters(cblClusters);
+            UI.FillClusters(cblClusters, (int)ROWCACommon.SiteLanguage.English);
         }
 
         protected void ddlEmergencies_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FillEmergencyClusters();
+        }
+
+        private void FillEmergencyClusters()
         {
             int emergencyId = 0;
             int.TryParse(ddlEmergencies.SelectedValue, out emergencyId);
 
             if (emergencyId > 0)
             {
-                FillEmergencyClusters(emergencyId);
+                DataTable dt = GetEmergencyClusters(emergencyId);
+                CheckClusterListBox(dt);
             }
-        }
-
-        private void FillEmergencyClusters(int emergencyId)
-        {
-            DataTable dt = GetEmergencyClusters(emergencyId);
-            CheckClusterListBox(dt);
         }
 
         private DataTable GetEmergencyClusters(int emergencyId)
         {
-            return DBContext.GetData("GetEmergencyClusters", new object[] { emergencyId });
+            return DBContext.GetData("GetEmergencyClusters", new object[] { emergencyId, (int)ROWCACommon.SiteLanguage.English });
         }
 
         private void CheckClusterListBox(DataTable dt)
@@ -105,7 +106,7 @@ namespace SRFROWCA.Admin
 
                 if (notDeletedItems.Count > 0)
                 {
-                    string msg = "You adata is saved but these items are being used and can't be removed: ";
+                    string msg = "Your data is saved but these items are being used and can't be removed from the selected emergency: ";
                     lblMessage.Text = msg + string.Join(", ", notDeletedItems.ToArray());
                     lblMessage.Visible = true;
                 }
@@ -120,7 +121,7 @@ namespace SRFROWCA.Admin
 
         private bool DeleteItem(int emergencyId, string itemValue)
         {
-            int returnVal = DBContext.Delete("DeleteClusterFromEmergency", 
+            int returnVal = DBContext.Delete("DeleteClusterFromEmergency",
                                                 new object[] { emergencyId, Convert.ToInt32(itemValue), DBNull.Value });
             // == 0 means deleted successfully
             return returnVal == 0;

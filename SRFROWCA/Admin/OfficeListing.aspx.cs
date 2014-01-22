@@ -171,7 +171,7 @@ namespace SRFROWCA.Admin
             ddlCountry.DataValueField = "LocationId";
             ddlCountry.DataTextField = "LocationName";
 
-            ddlCountry.DataSource = ROWCACommon.GetLocations(this.User);
+            ddlCountry.DataSource = ROWCACommon.GetLocations(this.User, (int)ROWCACommon.LocationTypes.National);
             ddlCountry.DataBind();
 
             ListItem item = new ListItem("Select Country", "0");

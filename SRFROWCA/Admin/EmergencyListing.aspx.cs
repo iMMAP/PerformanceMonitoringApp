@@ -184,8 +184,6 @@ namespace SRFROWCA.Admin
             int emgTyepId = 0;
             int.TryParse(ddlEmgType.SelectedValue, out emgTyepId);
 
-            int locId = 0;
-
             string emgNameEng = txtEmgNameEng.Text.Trim();
             string emgNameFr = txtEmgNameFr.Text.Trim();
             Guid userId = ROWCACommon.GetCurrentUserId();
@@ -193,11 +191,11 @@ namespace SRFROWCA.Admin
             if (!string.IsNullOrEmpty(hfLocEmgId.Value))
             {
                 int emgLocId = Convert.ToInt32(hfLocEmgId.Value);
-                DBContext.Update("UpdateEmergency", new object[] { emgLocId, emgTyepId, emgNameEng, emgNameFr, locId, userId, DBNull.Value });
+                DBContext.Update("UpdateEmergency", new object[] { emgLocId, emgTyepId, emgNameEng, emgNameFr, userId, DBNull.Value });
             }
             else
             {
-                DBContext.Add("InsertEmergency", new object[] { emgTyepId, emgNameEng, emgNameFr, locId, userId, DBNull.Value });
+                DBContext.Add("InsertEmergency", new object[] { emgTyepId, emgNameEng, emgNameFr, userId, DBNull.Value });
             }
         }
 
