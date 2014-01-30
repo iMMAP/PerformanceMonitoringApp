@@ -18,31 +18,6 @@
     </table>
     <table border="0" style="margin: auto; background-color: ButtonFace">
         <tr>
-            <td>
-                Emergency:
-            </td>
-            <td>
-                <asp:DropDownList ID="ddlLocEmergencies" runat="server" Width="300px" OnSelectedIndexChanged="ddlLocEmergencies_SelectedIndexChanged"
-                    AutoPostBack="true">
-                </asp:DropDownList>
-            </td>
-            <td>
-                <asp:RequiredFieldValidator ID="rgvEmg" runat="server" ErrorMessage="Required" InitialValue="0"
-                    Text="Required" ControlToValidate="ddlLocEmergencies"></asp:RequiredFieldValidator>
-            </td>
-            <td>
-                Cluster:
-            </td>
-            <td>
-                <asp:DropDownList ID="ddlEmgClusters" runat="server" Width="300px">
-                </asp:DropDownList>
-            </td>
-            <td>
-                <asp:RequiredFieldValidator ID="rfvCluster" runat="server" ErrorMessage="Required"
-                    InitialValue="0" Text="Required" ControlToValidate="ddlEmgClusters"></asp:RequiredFieldValidator>
-            </td>
-        </tr>
-        <tr>
             <td colspan="6">
                 <table>
                     <tr>
@@ -85,46 +60,25 @@
                         <%# Container.DataItemIndex + 1 %>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:BoundField DataField="StrategicObjectiveId" HeaderText="Id" HeaderStyle-Width="40px"
-                    SortExpression="LocationEmergencyId" />
-                <asp:BoundField DataField="EmergencyName" HeaderText="Emergency" SortExpression="EmergencyName"
-                    ItemStyle-Width="250px" />
-                <asp:BoundField DataField="ClusterName" HeaderText="Cluster" SortExpression="ClusterName"
-                    ItemStyle-Width="150px" />
-                <asp:TemplateField HeaderText="Objective" SortExpression="ObjectiveName">
+                <asp:BoundField DataField="ObjectiveId" HeaderText="Id" HeaderStyle-Width="40px"
+                    SortExpression="ObjectiveId" />
+                <asp:TemplateField HeaderText="Objective" SortExpression="Objective">
                     <ItemTemplate>
-                        <asp:Label ID="lblObjective" runat="server" Text='<%# Eval("StrategicObjectiveName") %>'></asp:Label>
+                        <asp:Label ID="lblObjective" runat="server" Text='<%# Eval("Objective") %>'></asp:Label>
                     </ItemTemplate>
-                </asp:TemplateField>
-                <asp:BoundField DataField="CreatedDate" HeaderText="Date" SortExpression="CreatedDate"
-                    Visible="false" />
+                </asp:TemplateField>                
                 <asp:TemplateField HeaderText="Edit" HeaderStyle-Width="80px">
                     <ItemTemplate>
                         <asp:Button ID="btnEdit" runat="server" Text="Edit" Width="80px" CausesValidation="false"
-                            CommandName="EditObjective" CommandArgument='<%# Eval("StrategicObjectiveId") %>' />
+                            CommandName="EditObjective" CommandArgument='<%# Eval("ObjectiveId") %>' />
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Delete" HeaderStyle-Width="80px">
                     <ItemTemplate>
                         <asp:Button ID="btnDelete" runat="server" Text="Delete" Width="80px" CausesValidation="false"
-                            CommandName="DeleteOrg" CommandArgument='<%# Eval("StrategicObjectiveId") %>' />
+                            CommandName="DeleteOrg" CommandArgument='<%# Eval("ObjectiveId") %>' />
                     </ItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField Visible="false">
-                    <ItemTemplate>
-                        <asp:Label ID="lblClusterObjectiveId" runat="server" Text='<%# Eval("StrategicObjectiveId") %>'></asp:Label>
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField Visible="false">
-                    <ItemTemplate>
-                        <asp:Label ID="lblEmergencyClusterId" runat="server" Text='<%# Eval("EmergencyClusterId") %>'></asp:Label>
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField Visible="false">
-                    <ItemTemplate>
-                        <asp:Label ID="lblLocationEmergencyId" runat="server" Text='<%# Eval("LocationEmergencyId") %>'></asp:Label>
-                    </ItemTemplate>
-                </asp:TemplateField>
+                </asp:TemplateField>                
             </Columns>
             <HeaderStyle BackColor="ButtonFace" />
         </asp:GridView>

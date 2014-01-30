@@ -450,7 +450,7 @@ namespace SRFROWCA.Reports
 
         private void PopulateClusters()
         {
-            UI.FillClusters(cblClusters);
+            UI.FillClusters(cblClusters, (int)ROWCACommon.SiteLanguage.English);
         }
 
         private void PopulateAdmin1(int countryId)
@@ -507,7 +507,7 @@ namespace SRFROWCA.Reports
         private void PopulateObjectives()
         {
             DataTable dt = GetObjectives();
-            UI.FillObjectives(ddlObjectives, dt);
+            //UI.FillObjectives(ddlObjectives, dt);
         }
 
         private DataTable GetObjectives()

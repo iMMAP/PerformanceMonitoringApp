@@ -134,7 +134,7 @@ namespace SRFROWCA.Account
             ddlCountry.DataValueField = "LocationId";
             ddlCountry.DataTextField = "LocationName";
 
-            DataTable dt = ROWCACommon.GetLocations(this.User);
+            DataTable dt = ROWCACommon.GetLocations(this.User, (int)ROWCACommon.LocationTypes.National);
             ddlCountry.DataSource = dt;
             ddlCountry.DataBind();
 

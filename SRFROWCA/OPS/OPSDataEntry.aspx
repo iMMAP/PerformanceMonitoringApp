@@ -44,7 +44,7 @@
     </script>
     <script language="javascript" type="text/javascript">
         $(function () {
-            $(".numeric1").numeric();
+            allowOnlyNumeric();
 
             // Split location name from Target(T) and Achieved(A).
             splitLocationFromTA();
@@ -57,8 +57,27 @@
 
             $("#<%=ddlStrObjectives.ClientID %> > option").first().attr('selected', 'selected');
             $("#<%=ddlPriorities.ClientID %> > option").first().attr('selected', 'selected');
-
         });
+
+        function allowOnlyNumeric() {
+            $(".numeric1").keydown(function (event) {
+                // Allow: backspace, delete, tab, escape, enter
+                if ($.inArray(event.keyCode, [46, 8, 9, 27, 13]) !== -1 ||
+                // Allow: Ctrl+A
+            (event.keyCode == 65 && event.ctrlKey === true) ||
+                // Allow: home, end, left, right
+            (event.keyCode >= 35 && event.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                else {
+                    // Ensure that it is a number and stop the keypress
+                    if (event.shiftKey || (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105)) {
+                        event.preventDefault();
+                    }
+                }
+            });
+        }
 
         // Filter rows on objects
         function showHideRowsOnObjs() {

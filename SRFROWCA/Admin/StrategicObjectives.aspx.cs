@@ -23,12 +23,14 @@ namespace SRFROWCA.Admin
 
         private void PopulateEmergencies()
         {
-            //UI.FillLocationEmergency(ddlLocEmergencies, ROWCACommon.GetEmergencies(this.User));
+            
+            //UI.FillEmergency(ddlEmergencies, ROWCACommon.GetAllEmergencies((int)ROWCACommon.SiteLanguage.English));
         }
 
         private void LoadStrategicObjectives()
         {
-            gvStrategicObjective.DataSource = ROWCACommon.GetStrategicObjectives(this.User);
+            int? languageId = null; // (int)ROWCACommon.SiteLanguage.English;
+            gvStrategicObjective.DataSource = ROWCACommon.GetStrategicObjectives(this.User, languageId);
             gvStrategicObjective.DataBind();
         }
 
@@ -74,19 +76,11 @@ namespace SRFROWCA.Admin
 
                 GridViewRow row = (((Control)e.CommandSource).NamingContainer) as GridViewRow;
                 Label lblLocationEmergencyId = row.FindControl("lblLocationEmergencyId") as Label;
-                int emgId = 0;
-                if (lblLocationEmergencyId != null)
-                {
-                    int.TryParse(lblLocationEmergencyId.Text, out emgId);
-                    ddlLocEmergencies.SelectedValue = lblLocationEmergencyId.Text;
-                }
-
-                PopulateEmergencyClusters(emgId);
 
                 Label lblEmergencyClusterId = row.FindControl("lblEmergencyClusterId") as Label;
                 if (lblEmergencyClusterId != null)
                 {
-                    ddlEmgClusters.SelectedValue = lblEmergencyClusterId.Text;
+                    //ddlEmgClusters.SelectedValue = lblEmergencyClusterId.Text;
                 }
 
                 Label lblObjective = row.FindControl("lblObjective") as Label;
@@ -99,14 +93,14 @@ namespace SRFROWCA.Admin
 
         private void PopulateEmergencyClusters(int emregencyId)
         {
-            ddlEmgClusters.DataValueField = "EmergencyClusterId";
-            ddlEmgClusters.DataTextField = "ClusterName";
+            //ddlEmgClusters.DataValueField = "EmergencyClusterId";
+            //ddlEmgClusters.DataTextField = "ClusterName";
 
-            ddlEmgClusters.DataSource = GetEmergencyClusters(emregencyId);
-            ddlEmgClusters.DataBind();
+            //ddlEmgClusters.DataSource = GetEmergencyClusters(emregencyId);
+            //ddlEmgClusters.DataBind();
 
-            ListItem item = new ListItem("Select Cluster", "0");
-            ddlEmgClusters.Items.Insert(0, item);
+            //ListItem item = new ListItem("Select Cluster", "0");
+            //ddlEmgClusters.Items.Insert(0, item);
         }
 
         private DataTable GetEmergencyClusters(int emergencyId)
@@ -114,15 +108,15 @@ namespace SRFROWCA.Admin
             return DBContext.GetData("GetEmergencyClusters", new object[] { emergencyId });
         }
 
-        protected void ddlLocEmergencies_SelectedIndexChanged(object sender, EventArgs e)
+        protected void ddlEmergencies_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int emergencyId = 0;
-            int.TryParse(ddlLocEmergencies.SelectedValue, out emergencyId);
+            //int emergencyId = 0;
+            //int.TryParse(ddlEmergencies.SelectedValue, out emergencyId);
 
-            if (emergencyId > 0)
-            {
-                PopulateEmergencyClusters(emergencyId);
-            }
+            //if (emergencyId > 0)
+            //{
+            //    PopulateEmergencyClusters(emergencyId);
+            //}
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)
@@ -135,7 +129,7 @@ namespace SRFROWCA.Admin
         private void SaveObjective()
         {
             int emgClusterId = 0;
-            int.TryParse(ddlEmgClusters.SelectedValue, out emgClusterId);
+            //int.TryParse(ddlEmgClusters.SelectedValue, out emgClusterId);
 
             Guid userId = ROWCACommon.GetCurrentUserId();
             string objectiveName = txtObj.Text.Trim();

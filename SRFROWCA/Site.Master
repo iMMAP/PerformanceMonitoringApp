@@ -58,10 +58,10 @@
                 <li><a href='javascript:void(0)' id="AdminMenue" runat="server">Admin<span class="signinarrow">&nbsp;
                     &nbsp;</span></a>
                     <ul>
-                        <li><a class="signinfly" href="../Admin/OrganizationListing.aspx" tabindex="1">Organizations</a></li>
-                        <li><a class="signinfly" href="../Admin/OfficeListing.aspx" tabindex="1">Offices</a></li>
+                        <li><a class="signinfly" href="../Admin/OrganizationListing.aspx" tabindex="1">Organizations</a></li>                        
                         <li><a class="signinfly" href="../Admin/EmergencyListing.aspx" tabindex="1">Emergencies</a></li>
-                        <li><a class="signinfly" href="../Admin/EmergencyClusters.aspx" tabindex="1">Emg Clusters</a>
+                        <li><a class="signinfly" href="../Admin/EmergencyLocations.aspx" tabindex="1">Emergency Locations</a></li>
+                        <li><a class="signinfly" href="../Admin/EmergencyClusters.aspx" tabindex="1">Emgergency Clusters</a>
                         </li>
                         <hr />
                         <li><a class="signinfly" href="../Admin/StrategicObjectives.aspx" tabindex="1">Str Objectives</a></li>
@@ -80,6 +80,8 @@
                         <li><a class="signinfly" href="../Admin/AdminDataFeeds.aspx" tabindex="1">XML Feeds</a>
                         </li>
                         <li><a class="signinfly" href="../OPS/UploadOPSProjectDetails.aspx" tabindex="1">Upload OPS Project Details</a>
+                        </li>
+                        <li><a class="signinfly" href="../Admin/OPSProjectAllData.aspx" tabindex="1">Update OPS All Data Table</a>
                         </li>
                     </ul>
                 </li>

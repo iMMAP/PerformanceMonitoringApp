@@ -127,8 +127,10 @@
     <Content Include="Admin\ActivityData.aspx" />
     <Content Include="Admin\ClusterObjectives.aspx" />
     <Content Include="Admin\EmergencyClusters.aspx" />
+    <Content Include="Admin\EmergencyLocations.aspx" />
     <Content Include="Admin\IndicatorActivities.aspx" />
     <Content Include="Admin\ObjectiveIndicators.aspx" />
+    <Content Include="Admin\OPSProjectAllData.aspx" />
     <Content Include="Admin\PriorityActivities.aspx" />
     <Content Include="Admin\StrategicObjectives.aspx" />
     <Content Include="Admin\UploadLocations.aspx" />
@@ -250,6 +252,7 @@
     <Content Include="WebForm5.aspx" />
     <Content Include="OPS\OPSActivitiesFeed.ashx" />
     <Content Include="OPS\OPSProjectFeed.ashx" />
+    <Content Include="xmlprojectfeeds.aspx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -356,6 +359,13 @@
     <Compile Include="Admin\EmergencyClusters.aspx.designer.cs">
       <DependentUpon>EmergencyClusters.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\EmergencyLocations.aspx.cs">
+      <DependentUpon>EmergencyLocations.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\EmergencyLocations.aspx.designer.cs">
+      <DependentUpon>EmergencyLocations.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\IndicatorActivities.aspx.cs">
       <DependentUpon>IndicatorActivities.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -369,6 +379,13 @@
     </Compile>
     <Compile Include="Admin\ObjectiveIndicators.aspx.designer.cs">
       <DependentUpon>ObjectiveIndicators.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\OPSProjectAllData.aspx.cs">
+      <DependentUpon>OPSProjectAllData.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\OPSProjectAllData.aspx.designer.cs">
+      <DependentUpon>OPSProjectAllData.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\PriorityActivities.aspx.cs">
       <DependentUpon>PriorityActivities.aspx</DependentUpon>
@@ -715,6 +732,13 @@
     </Compile>
     <Compile Include="WebForm5.aspx.designer.cs">
       <DependentUpon>WebForm5.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="xmlprojectfeeds.aspx.cs">
+      <DependentUpon>xmlprojectfeeds.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="xmlprojectfeeds.aspx.designer.cs">
+      <DependentUpon>xmlprojectfeeds.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

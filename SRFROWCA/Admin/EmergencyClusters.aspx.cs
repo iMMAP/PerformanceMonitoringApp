@@ -28,8 +28,8 @@ namespace SRFROWCA.Admin
 
         private void PopulateEmergencies()
         {
-            int locationId = (int)ROWCACommon.SiteLanguage.English;
-            UI.FillEmergency(ddlEmergencies, ROWCACommon.GetAllEmergencies(locationId));
+            int languageId = (int)ROWCACommon.SiteLanguage.English;
+            UI.FillEmergency(ddlEmergencies, ROWCACommon.GetAllEmergencies(languageId));
         }
 
         private void PopulateClusters()

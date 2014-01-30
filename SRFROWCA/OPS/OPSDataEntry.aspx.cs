@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Transactions;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using SRFROWCA.Common;
-using System.Globalization;
-using System.Threading;
-
 
 namespace SRFROWCA.OPS
 {
@@ -17,21 +16,25 @@ namespace SRFROWCA.OPS
     {
         protected override void InitializeCulture()
         {
-            string language = Request.Form["__EventTarget"];
-            string languageId = "";
-            if (!string.IsNullOrEmpty(language))
+            // Get whihc control post back page.
+            string languageControl = Request.Form["__EventTarget"];
+            string languageAndCulture = "";
+            // if post back control is language control then check
+            // which language link is clicked and change the language of the page.
+            if (!string.IsNullOrEmpty(languageControl))
             {
-                if (language.EndsWith("French"))
+                if (languageControl.EndsWith("French"))
                 {
                     SiteLanguageId = 2;
-                    languageId = "fr-FR";
+                    languageAndCulture = "fr-FR";
                 }
                 else
                 {
                     SiteLanguageId = 1;
-                    languageId = "en-US";
+                    languageAndCulture = "en-US";
                 }
-                SetCulture(languageId);
+
+                SetCulture(languageAndCulture);
             }
 
             if (Session["Language"] != null)
@@ -42,38 +45,16 @@ namespace SRFROWCA.OPS
             base.InitializeCulture();
         }
 
-        protected void SetCulture(string languageId)
+        protected void SetCulture(string languageAndCulture)
         {
-            Session["Language"] = languageId;
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(languageId);
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(languageId);
+            Session["Language"] = languageAndCulture;
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(languageAndCulture);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(languageAndCulture);
         }
 
-        protected void lnkLanguageEnglish_Click(object sender, EventArgs e)
-        {
-            SiteLanguageId = 1;
-            SetOPSIds();
-            if (OPSProjectId > 0 && !string.IsNullOrEmpty(OPSClusterName) && !string.IsNullOrEmpty(OPSCountryName))
-            {
-                GetEmergencyId();
-                OPSEmergencyClusterId = GetClusterId();
-                //lblCluster.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(OPSClusterNameLabel);
-                lblCluster.Text = OPSClusterNameLabel;
-            }
-            PopulateStrategicObjectives();
-            PopulatePriorities();
-        }
-
-        protected void lnkLanguageFrench_Click(object sender, EventArgs e)
-        {
-            SiteLanguageId = 2;
-            PopulateStrategicObjectives();
-            PopulatePriorities();
-        }
-
+        // Gzip contents of the page to reduce size.
         protected void Page_PreInit(object sender, EventArgs e)
         {
-            //InitializeCulture();
             GZipContents.GZipOutput();
         }
 
@@ -81,48 +62,35 @@ namespace SRFROWCA.OPS
         {
             if (!IsPostBack)
             {
-                SiteLanguageId = 1;
+                if (SiteLanguageId == 0)
+                {
+                    SiteLanguageId = 1;
+                }
+
                 SetOPSIds();
+
                 if (OPSProjectId > 0 && !string.IsNullOrEmpty(OPSClusterName) && !string.IsNullOrEmpty(OPSCountryName))
                 {
                     GetEmergencyId();
                     OPSEmergencyClusterId = GetClusterId();
                     UpdateClusterName();
-
-                    //lblCluster.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(OPSClusterName);
-                    //lblCluster.Text = OPSClusterNameLabel;
                 }
+
                 PopulateDropDowns();
             }
 
-            this.Form.DefaultButton = this.btnSave.UniqueID;            
-
-            string controlName = GetPostBackControlId(this);
-            if (controlName == "lnkLanguageFrench")
-            {
-                SiteLanguageId = 2;
-                UpdateClusterName();
-            }
-
-            if (controlName == "lnkLanguageEnglish")
-            {
-                SiteLanguageId = 1;
-                UpdateClusterName();
-            }
-            
+            UpdateClusterName();
             lblCluster.Text = OPSClusterNameLabel;
 
             DataTable dtActivities = GetActivities();
             AddDynamicColumnsInGrid(dtActivities);
             GetReport(dtActivities);
-            
-
         }
 
         private void UpdateClusterName()
         {
             string clusterName = MapClusterNames();
-            DataTable dt = DBContext.GetData("GetClusterNameOnLanguage", new object[]{clusterName, SiteLanguageId});
+            DataTable dt = DBContext.GetData("GetClusterNameOnLanguage", new object[] { clusterName, SiteLanguageId });
             if (dt.Rows.Count > 0)
             {
                 OPSClusterNameLabel = dt.Rows[0]["ClusterName"].ToString();
@@ -133,26 +101,25 @@ namespace SRFROWCA.OPS
             }
         }
 
-        protected void rbtnList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         #region Events.
+
+        // Get English version of Objectives and Priorities and full drop downs.
+        protected void lnkLanguageEnglish_Click(object sender, EventArgs e)
+        {
+            SiteLanguageId = 1;
+            PopulateStrategicObjectives();
+            PopulatePriorities();
+        }
+
+        // Get French version of Objectives and Priorities and full drop downs.
+        protected void lnkLanguageFrench_Click(object sender, EventArgs e)
+        {
+            SiteLanguageId = 2;
+            PopulateStrategicObjectives();
+            PopulatePriorities();
+        }
+
         #region Button Click Events.
-
-        protected void btnGetReports_Click(object sender, EventArgs e)
-        {
-            Session["dtClone"] = null;
-            CaptureDataFromGrid();
-            BindGridData();
-            UpdateGridWithData();
-        }
-
-        protected void btnUserActivity_Click(object sender, EventArgs e)
-        {
-            ClientScript.RegisterStartupScript(this.GetType(), "key1", "launchUserActivityModal();", true);
-        }
 
         protected void btnLocation_Click(object sender, EventArgs e)
         {
@@ -224,6 +191,7 @@ namespace SRFROWCA.OPS
                 }
             }
         }
+
         protected void btnSave_Click(object sender, EventArgs e)
         {
             SaveData();
@@ -244,9 +212,6 @@ namespace SRFROWCA.OPS
                 }
 
                 scope.Complete();
-
-                //ScriptManager.RegisterStartupScript(this, this.GetType(), "popup",
-                // "$('#divMsg').addClass('info message').text('Hello There').animate({ top: '0' }, 500).fadeOut(4000, function() {});", true);
                 ShowMessage("Your Data Saved Successfuly!");
             }
         }
@@ -257,15 +222,18 @@ namespace SRFROWCA.OPS
 
         #region Methods.
 
+        // Get values from querystring and set variables.
         private void SetOPSIds()
         {
             int tempVal = 0;
+            // UserId
             if (Request.QueryString["uid"] != null)
             {
                 int.TryParse(Request.QueryString["uid"].ToString(), out tempVal);
                 OPSUserId = tempVal;
             }
 
+            // ProjectId
             if (Request.QueryString["pid"] != null)
             {
                 tempVal = 0;
@@ -273,11 +241,13 @@ namespace SRFROWCA.OPS
                 OPSProjectId = tempVal;
             }
 
+            // Cluster Name
             if (Request.QueryString["clname"] != null)
             {
                 OPSClusterName = Request.QueryString["clname"].ToString();
             }
 
+            // Country Name
             if (Request.QueryString["cname"] != null)
             {
                 string cName = Request.QueryString["cname"].ToString();
@@ -331,11 +301,11 @@ namespace SRFROWCA.OPS
             string clusterName = "";
             if (OPSClusterName == "coordinationandsupportservices")
             {
-                clusterName = "Coordination And Support Services";
+                clusterName = SiteLanguageId == 2 ? "Coodination et Services de Soutien" : "Coordination And Support Services";
             }
             else if (OPSClusterName == "earlyrecovery")
             {
-                clusterName = "Early Recovery";
+                clusterName = SiteLanguageId == 2 ? "Relèvement Précoce" : "Early Recovery";
             }
             else if (OPSClusterName == "education")
             {
@@ -343,15 +313,15 @@ namespace SRFROWCA.OPS
             }
             else if (OPSClusterName == "emergencyshelterandnfi")
             {
-                clusterName = "Emergency Shelter And NFI";
+                clusterName = SiteLanguageId == 2 ? "Abris D'urgence et Biens Non-Alimentaires" : "Emergency Shelter And NFI";
             }
             else if (OPSClusterName == "foodsecurity")
             {
-                clusterName = "Food Security";
+                clusterName = SiteLanguageId == 2 ? "Sécurité Alimentaire" : "Food Security";
             }
             else if (OPSClusterName == "health")
             {
-                clusterName = "Health";
+                clusterName = SiteLanguageId == 2 ? "Santé" : "Health";
             }
             else if (OPSClusterName == "logistics")
             {
@@ -367,19 +337,19 @@ namespace SRFROWCA.OPS
             }
             else if (OPSClusterName == "logistics")
             {
-                clusterName = "Logistics";
+                clusterName = SiteLanguageId == 2 ? "Logistique" : "Logistics";
             }
             else if (OPSClusterName == "waterandsanitation")
             {
-                clusterName = "Water Sanitation & Hygiene";
+                clusterName = SiteLanguageId == 2 ? "Eau-Hygiene-Assainissement" : "Water Sanitation & Hygiene";
             }
             else if (OPSClusterName == "emergencytelecommunication")
             {
-                clusterName = "Emergency Telecommunication";
+                clusterName = SiteLanguageId == 2 ? "Télécommunication d'urgence" : "Emergency Telecommunication";
             }
             else if (OPSClusterName == "multisectorforrefugees")
             {
-                clusterName = "Multi Sector for Refugees";
+                clusterName = SiteLanguageId == 2 ? "Assistance Multi Sectorielles aux Refugies" : "Multi Sector for Refugees";
             }
             else
             {
@@ -416,7 +386,7 @@ namespace SRFROWCA.OPS
             {
                 ListItem item = new ListItem("All", "0");
                 ddlStrObjectives.Items.Insert(0, item);
-            }           
+            }
         }
 
         private DataTable GetStrategicObjectives()
@@ -435,7 +405,7 @@ namespace SRFROWCA.OPS
             ddlPriorities.DataBind();
 
             ListItem item = new ListItem("All", "0");
-            ddlPriorities.Items.Insert(0, item);           
+            ddlPriorities.Items.Insert(0, item);
         }
 
         private DataTable GetPriorites()
@@ -605,11 +575,11 @@ namespace SRFROWCA.OPS
         private DataTable GetChildLocations(int parentLocationId)
         {
             DataTable dt = new DataTable();
-            if (OPSCountryName == "Sahel Region")
-            {
-                dt = DBContext.GetData("GetLocationOnName", new object[] { OPSCountryName });
-            }
-            else
+            //if (OPSCountryName == "Sahel Region")
+            //{
+            //    dt = DBContext.GetData("GetSahelRegionalLocationsForOPS");
+            //}
+            //else
             {
                 dt = DBContext.GetData("GetSecondLevelChildLocationsAndCountry", new object[] { parentLocationId });
             }
@@ -964,7 +934,6 @@ namespace SRFROWCA.OPS
             {
                 if (Session["dtOPSActivities"] == null) return;
 
-
                 DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
                 if (dtActivities == null) return;
 
@@ -1018,7 +987,7 @@ namespace SRFROWCA.OPS
                 ViewState["OPSReportId"] = value.ToString();
             }
         }
-        
+
         public int LocationId
         {
             get
@@ -1036,7 +1005,7 @@ namespace SRFROWCA.OPS
                 ViewState["LocationId"] = value.ToString();
             }
         }
-        
+
         public int Count1
         {
             get
@@ -1219,16 +1188,16 @@ namespace SRFROWCA.OPS
             get
             {
                 int langId = 0;
-                if (ViewState["SiteLanguageId"] != null)
+                if (Session["SiteLanguageId"] != null)
                 {
-                    int.TryParse(ViewState["SiteLanguageId"].ToString(), out langId);
+                    int.TryParse(Session["SiteLanguageId"].ToString(), out langId);
                 }
 
                 return langId;
             }
             set
             {
-                ViewState["SiteLanguageId"] = value.ToString();
+                Session["SiteLanguageId"] = value.ToString();
             }
         }
 
@@ -1251,32 +1220,6 @@ namespace SRFROWCA.OPS
         }
 
         #endregion
-
-        protected void rbEnglishLanguage_CheckedChanged(object sender, EventArgs e)
-        {
-            SiteLanguageId = 1;
-            SetOPSIds();
-            if (OPSProjectId > 0 && !string.IsNullOrEmpty(OPSClusterName) && !string.IsNullOrEmpty(OPSCountryName))
-            {
-                GetEmergencyId();
-                OPSEmergencyClusterId = GetClusterId();
-                lblCluster.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(OPSClusterName);
-            }
-            PopulateDropDowns();
-        }
-
-        protected void rbFrenchLanguage_CheckedChanged(object sender, EventArgs e)
-        {
-            SiteLanguageId = 2;
-            SetOPSIds();
-            if (OPSProjectId > 0 && !string.IsNullOrEmpty(OPSClusterName) && !string.IsNullOrEmpty(OPSCountryName))
-            {
-                GetEmergencyId();
-                OPSEmergencyClusterId = GetClusterId();
-                lblCluster.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(OPSClusterName);
-            }
-            PopulateDropDowns();
-        }
     }
 
     public class GridViewTemplate : ITemplate

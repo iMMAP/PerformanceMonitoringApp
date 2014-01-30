@@ -10,11 +10,11 @@ namespace SRFROWCA.Common
     {
         // Populate Clusters drop down.        
         // control can be dropdownlist or checkboxlist or any other listcontrol
-        internal static void FillClusters(ListControl control)
+        internal static void FillClusters(ListControl control, int languageId)
         {
             control.DataValueField = "ClusterId";
             control.DataTextField = "ClusterName";
-            control.DataSource = DBContext.GetData("GetAllClusters");
+            control.DataSource = DBContext.GetData("GetAllClusters", new object[] {languageId});
             control.DataBind();
         }
 

@@ -266,7 +266,7 @@ CSS for Login, Register, ForgotPassword, ChagnePassword
 
 .hiddenelement
 {
-    /*display:none;*/
+    display:none;
 }
 .clusterLabel
 {

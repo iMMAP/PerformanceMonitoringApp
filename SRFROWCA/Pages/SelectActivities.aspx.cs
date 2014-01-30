@@ -1,20 +1,16 @@
 ﻿using System;
 using System.Data;
 using System.Web;
-using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using AjaxControlToolkit;
 using BusinessLogic;
 using SRFROWCA.Common;
-using System.Globalization;
-using AjaxControlToolkit;
 
 namespace SRFROWCA.Pages
 {
     public partial class SelectActivities : BasePage
     {
-        
-
         protected void Page_Load(object sender, EventArgs e)
         {
             string languageChange = "";
@@ -145,7 +141,7 @@ namespace SRFROWCA.Pages
         // Populate Emregency DDL
         private void PopulateLocationEmergencies(int locationId)
         {
-            ddlEmergency.DataValueField = "LocationEmergencyId";
+            ddlEmergency.DataValueField = "EmergencyId";
             ddlEmergency.DataTextField = "EmergencyName";
             ddlEmergency.DataSource = GetLocationEmergencies(locationId);
             ddlEmergency.DataBind();
@@ -168,7 +164,7 @@ namespace SRFROWCA.Pages
             }
 
             // If not admin then return emergencies of user's locations.
-            return DBContext.GetData("GetLocationEmergencies", new object[] { locationId, ROWCACommon.SelectedSiteLanguageId });
+            return DBContext.GetData("GetEmergencyOnLocation", new object[] { locationId, ROWCACommon.SelectedSiteLanguageId });
         }
 
         // Populate Clusters Grid.
@@ -319,9 +315,10 @@ namespace SRFROWCA.Pages
             Guid userId = ROWCACommon.GetCurrentUserId();
             DBContext.Add("InsertActivityData", new object[] { emgLocId, activityId, userId, DBNull.Value });
         }
-        private DataTable GetEmergencyClusters(int emgLocationId)
+
+        private DataTable GetEmergencyClusters(int emgId)
         {
-            return DBContext.GetData("GetEmergencyClustersOfData", new object[] { emgLocationId, ROWCACommon.SelectedSiteLanguageId });
+            return DBContext.GetData("GetEmergencyClustersOfData", new object[] { emgId, ROWCACommon.SelectedSiteLanguageId });
         }
 
         private void ShowMessage(string message, ROWCACommon.NotificationType notificationType = ROWCACommon.NotificationType.Success)

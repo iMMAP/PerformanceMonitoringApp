@@ -62,7 +62,7 @@
                                 <Columns>
                                     <asp:TemplateField HeaderText="Select Your Activities" meta:resourcekey="TemplateFieldResource5">
                                         <ItemTemplate>
-                                            <asp:Panel CssClass="group" ID="pnlCustomer" runat="server" meta:resourcekey="pnlCustomerResource1">
+                                            <asp:Panel CssClass="group" ID="pnlCluster" runat="server" meta:resourcekey="pnlpnlClusterResource1">
                                                 <asp:Image ID="imgCollapsible" CssClass="first" ImageUrl="~/images/plus.png" Style="margin-right: 5px;"
                                                     runat="server" meta:resourcekey="imgCollapsibleResource1" /><span class="gridheader">
                                                         <%#Eval("ClusterName")%></span>
@@ -87,10 +87,10 @@
                                                             <ItemStyle Width="2%" />
                                                         </asp:TemplateField>
                                                         <asp:BoundField DataField="Objective" HeaderText="Objective" meta:resourcekey="BoundFieldResource1">
-                                                            <ItemStyle Width="38%" />
+                                                            <ItemStyle Width="25%" />
                                                         </asp:BoundField>
                                                         <asp:BoundField DataField="HumanitarianPriority" HeaderText="Priority" meta:resourcekey="BoundFieldResource2">
-                                                            <ItemStyle Width="10%" />
+                                                            <ItemStyle Width="30%" />
                                                         </asp:BoundField>
                                                         <asp:BoundField DataField="ActivityName" HeaderText="Activity" meta:resourcekey="BoundFieldResource3">
                                                             <ItemStyle Width="40%" />
@@ -111,7 +111,7 @@
                                                 </asp:GridView>
                                             </asp:Panel>
                                             <asp:CollapsiblePanelExtender ID="cpeExpandCollapseActivities" runat="server" TargetControlID="pnlOrders"
-                                                CollapsedSize="0" Collapsed="True" ExpandControlID="pnlCustomer" CollapseControlID="pnlCustomer"
+                                                CollapsedSize="0" Collapsed="True" ExpandControlID="pnlCluster" CollapseControlID="pnlCluster"
                                                 ImageControlID="imgCollapsible" ExpandedImage="~/images/minus.png" CollapsedImage="~/images/plus.png"
                                                 Enabled="True" />
                                         </ItemTemplate>

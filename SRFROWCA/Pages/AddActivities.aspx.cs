@@ -390,7 +390,7 @@ namespace SRFROWCA.Pages
         // Populate Emergency Drop Down.
         private void PopulateLocationEmergencies(int locationId)
         {
-            ddlEmergency.DataValueField = "LocationEmergencyId";
+            ddlEmergency.DataValueField = "EmergencyId";
             ddlEmergency.DataTextField = "EmergencyName";
 
             ddlEmergency.DataSource = GetLocationEmergencies(locationId);
@@ -404,7 +404,7 @@ namespace SRFROWCA.Pages
         }
         private DataTable GetLocationEmergencies(int locationId)
         {
-            DataTable dt = DBContext.GetData("GetLocationEmergencies", new object[] { locationId, ROWCACommon.SelectedSiteLanguageId });
+            DataTable dt = DBContext.GetData("GetEmergencyOnLocation", new object[] { locationId, ROWCACommon.SelectedSiteLanguageId });
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 
@@ -550,47 +550,7 @@ namespace SRFROWCA.Pages
             }
 
             return itemIds;
-        }
-
-        //private string GetSelectedLocationIds()
-        //{
-        //    string locationIds = "";
-
-        //    for (int i = 0; i < lstSelectedLocations.Items.Count; i++)
-        //    {
-        //        if (locationIds != "")
-        //        {
-        //            locationIds += "," + lstSelectedLocations.Items[i].Value;
-        //        }
-        //        else
-        //        {
-        //            locationIds += lstSelectedLocations.Items[i].Value;
-        //        }
-        //    }
-
-        //    return locationIds;
-        //}
-
-        //private string GetNotSelectedLocationIds()
-        //{
-        //    string locIdsNotIncluded = "";
-        //    if (LocationRemoved == 1)
-        //    {
-        //        for (int i = 0; i < lstLocations.Items.Count; i++)
-        //        {
-        //            if (locIdsNotIncluded != "")
-        //            {
-        //                locIdsNotIncluded += "," + lstLocations.Items[i].Value;
-        //            }
-        //            else
-        //            {
-        //                locIdsNotIncluded += lstLocations.Items[i].Value;
-        //            }
-        //        }
-        //    }
-
-        //    return locIdsNotIncluded;
-        //}
+        }        
 
         private DataTable GetActivities()
         {
@@ -614,25 +574,12 @@ namespace SRFROWCA.Pages
 
         private void AddLocationsInSelectedList()
         {
-            //lstSelectedLocations.Items.Clear();
             PopulateLocations(LocationId);
         }
 
         private void PopulateLocations(int parentLocationId)
         {
-            //lstLocations.DataValueField = "LocationId";
-            //lstLocations.DataTextField = "LocationName";
-
             DataTable dt = GetChildLocations(parentLocationId);
-            //lstLocations.DataSource = dt;
-            //lstLocations.DataBind();
-
-            //if (lstLocations.Items.Count > 0)
-            //{
-            //    lstLocations.SelectedIndex = 0;
-            //}
-
-
             cblLocations.DataValueField = "LocationId";
             cblLocations.DataTextField = "LocationName";
             cblLocations.DataSource = dt;

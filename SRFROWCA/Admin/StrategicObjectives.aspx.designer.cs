@@ -22,42 +22,6 @@ namespace SRFROWCA.Admin {
         protected global::System.Web.UI.UpdatePanel updMessage;
         
         /// <summary>
-        /// ddlLocEmergencies control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlLocEmergencies;
-        
-        /// <summary>
-        /// rgvEmg control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rgvEmg;
-        
-        /// <summary>
-        /// ddlEmgClusters control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEmgClusters;
-        
-        /// <summary>
-        /// rfvCluster control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCluster;
-        
-        /// <summary>
         /// txtObj control.
         /// </summary>
         /// <remarks>

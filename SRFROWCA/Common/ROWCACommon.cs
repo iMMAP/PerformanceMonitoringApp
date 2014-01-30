@@ -147,9 +147,9 @@ namespace SRFROWCA.Common
         }
 
 
-        internal static DataTable GetLocations(IPrincipal user)
+        internal static DataTable GetLocations(IPrincipal user, int locationType)
         {
-            int locationType = (int)LocationTypes.National;
+
             DataTable dt = new DataTable();
 
             if (!user.Identity.IsAuthenticated || IsAdmin(user))
@@ -186,16 +186,16 @@ namespace SRFROWCA.Common
             return dt;
         }
 
-        internal static DataTable GetAllEmergencies()
+        internal static DataTable GetAllEmergencies(int? languageId)
         {
-            return DBContext.GetData("GetAllEmergencies", new object[] { ROWCACommon.SiteLanguage.English });
+            return DBContext.GetData("GetAllEmergencies", new object[] { languageId });
         }
 
-        internal static DataTable GetStrategicObjectives(IPrincipal user)
+        internal static DataTable GetStrategicObjectives(IPrincipal user, int? languageId)
         {
             if (ROWCACommon.IsAdmin(user))
             {
-                return DBContext.GetData("GetAllStrategicObjectives");
+                return DBContext.GetData("GetAllStrategicObjectives", new object[] { languageId });
             }
             else
             {

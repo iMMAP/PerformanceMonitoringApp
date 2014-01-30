@@ -100,8 +100,7 @@ namespace SRFROWCA.Account
         // Populate countries drop down.
         private void PopulateCountries()
         {
-            DataTable dt = ROWCACommon.GetLocations(this.User);
-
+            DataTable dt = ROWCACommon.GetLocations(this.User, (int)ROWCACommon.LocationTypes.National);
             ddlLocations.DataValueField = "LocationId";
             ddlLocations.DataTextField = "LocationName";
             ddlLocations.DataSource = dt;
