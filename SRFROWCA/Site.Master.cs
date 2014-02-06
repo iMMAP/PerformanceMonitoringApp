@@ -61,27 +61,20 @@ namespace SRFROWCA
                 menuMyActivities.Visible = false;
                 menuDataEntry.Visible = false;
             }
-
-            //if (!IsPostBack)
-            //{
-            //    DataTable dt = ROWCACommon.GetUserDetails();
-            //    if (dt.Rows.Count > 0)
-            //    {
-            //        lblOrganization.Text = "(" + dt.Rows[0]["OrganizationAcronym"].ToString() + ")";
-            //    }
-            //}
         }
 
         protected void lnkLanguageEnglish_Click(object sender, EventArgs e)
         {
             ROWCACommon.SelectedSiteLanguageId = (int)Common.ROWCACommon.SiteLanguage.English;
             ROWCACommon.AddSiteLangInCookie(this.Response, Common.ROWCACommon.SiteLanguage.English);
+            (MainContent.Page as BasePage).BindGridData();
         }
 
         protected void lnkLanguageFrench_Click(object sender, EventArgs e)
         {
             ROWCACommon.SelectedSiteLanguageId = (int)Common.ROWCACommon.SiteLanguage.French;
-            ROWCACommon.AddSiteLangInCookie(this.Response, Common.ROWCACommon.SiteLanguage.French);
+            ROWCACommon.AddSiteLangInCookie(this.Response, Common.ROWCACommon.SiteLanguage.French);            
+            (MainContent.Page as BasePage).BindGridData();
         }
 
         // Gets the ASP.NET application's virtual application root path on the server.

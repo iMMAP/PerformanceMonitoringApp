@@ -23,5 +23,7 @@ namespace SRFROWCA
         {
             GZipContents.GZipOutput();
         }
+
+        internal virtual void BindGridData(){}
     }
 }
