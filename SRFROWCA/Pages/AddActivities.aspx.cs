@@ -20,6 +20,7 @@ namespace SRFROWCA.Pages
             {
                 languageChange = Session["SiteChanged"].ToString();
             }
+
             if (!IsPostBack && !string.IsNullOrEmpty(languageChange)) return;
             {
                 PopulateDropDowns();
@@ -30,6 +31,7 @@ namespace SRFROWCA.Pages
             {
                 PopulateLocations(LocationId);
                 PopulateYears();
+                PopulateMonths();
             }
 
             this.Form.DefaultButton = this.btnSave.UniqueID;
@@ -38,194 +40,38 @@ namespace SRFROWCA.Pages
             if (controlName == "ddlMonth" || controlName == "ddlYear")
             {
                 LocationRemoved = 0;
-                //lstSelectedLocations.Items.Clear();
-                RemoveSelectedLocations();
+                RemoveSelectedLocations();            
             }
 
             DataTable dtActivities = GetActivities();
             AddDynamicColumnsInGrid(dtActivities);
-            GetReport(dtActivities);
+            Session["dtActivities"] = dtActivities;
+            GetReportId(dtActivities);
+            gvActivities.DataSource = dtActivities;
+            gvActivities.DataBind();
         }
 
-        
+        #region Events.        
 
-        private void RemoveSelectedLocations()
-        {
-            foreach (ListItem item in cblLocations.Items)
-            {
-                item.Selected = false;
-            }
-        }
-
-        #region Events.
-
-        #region DropDownLists Events
         protected void ddlEmergency_SelectedIndexChanged(object sender, EventArgs e)
         {
             LocationRemoved = 0;
             BindGridData();
             AddLocationsInSelectedList();
-        }
-        
+        }        
         protected void ddlYear_SelectedIndexChanged(object sender, EventArgs e)
         {
             LocationRemoved = 0;
             BindGridData();
             AddLocationsInSelectedList();
-        }
+        }        
         protected void ddlMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
             LocationRemoved = 0;
+            BindGridData();
             AddLocationsInSelectedList();
-            BindGridData();
         }
-        #endregion
-
-        #region Location List Box Events.
-        //protected void btnAddAll_Click(object sender, EventArgs e)
-        //{
-        //    List<ListItem> sortedList = GetSortedList(lstLocations, lstSelectedLocations, null);
-
-        //    if (sortedList.Count > 0)
-        //    {
-        //        LocationRemoved = 0;
-        //        lstSelectedLocations.Items.Clear();
-        //        lstSelectedLocations.Items.AddRange(sortedList.ToArray());
-        //    }
-
-        //    // Remove all items from list.
-        //    lstLocations.Items.Clear();
-
-        //    if (lstSelectedLocations.Items.Count > 0)
-        //    {
-        //        lstSelectedLocations.SelectedIndex = 0;
-        //    }
-        //}
-        //protected void btnAdd_Click(object sender, EventArgs e)
-        //{
-        //    if (lstLocations.SelectedIndex > -1)
-        //    {
-        //        LocationRemoved = 0;
-        //        List<ListItem> items = new List<ListItem>();
-
-        //        for (int i = 0; i < lstLocations.Items.Count; i++)
-        //        {
-        //            if (lstLocations.Items[i].Selected)
-        //            {
-        //                items.Add(lstLocations.Items[i]);
-        //            }
-        //        }
-
-        //        foreach (ListItem selectedItem in items)
-        //        {
-        //            // Get sorted list items.
-        //            List<ListItem> sortedList = GetSortedList(lstSelectedLocations, null, selectedItem);
-
-        //            if (sortedList.Count > 0)
-        //            {
-        //                // Clear all items from list box.
-        //                lstSelectedLocations.Items.Clear();
-
-        //                // Add items in listbox.
-        //                lstSelectedLocations.Items.AddRange(sortedList.ToArray());
-        //            }
-
-        //            // Remove item from selected items phase list(on right);
-        //            lstLocations.Items.Remove(selectedItem);
-
-        //            // Select first item in selected phases list box.
-        //            if (lstSelectedLocations.Items.Count > 0)
-        //            {
-        //                lstSelectedLocations.SelectedIndex = 0;
-        //            }
-
-        //            // Select first item in phases list box.
-        //            if (lstLocations.Items.Count > 0)
-        //            {
-        //                lstLocations.SelectedIndex = 0;
-        //            }
-        //        }
-        //    }
-
-        //    btnGetReports_Click(null, null);
-        //}
-        //protected void btnRemove_Click(object sender, EventArgs e)
-        //{
-        //    if (lstSelectedLocations.SelectedIndex > -1)
-        //    {
-        //        LocationRemoved = 1;
-        //        List<ListItem> items = new List<ListItem>();
-
-        //        for (int i = 0; i < lstSelectedLocations.Items.Count; i++)
-        //        {
-        //            if (lstSelectedLocations.Items[i].Selected)
-        //            {
-        //                items.Add(lstSelectedLocations.Items[i]);
-        //            }
-        //        }
-
-        //        foreach (ListItem selectedItem in items)
-        //        {
-        //            // Get sorted list items.
-        //            List<ListItem> sortedList = GetSortedList(lstLocations, null, selectedItem);
-
-        //            if (sortedList.Count > 0)
-        //            {
-        //                // Clear all items from list box.
-        //                lstLocations.Items.Clear();
-
-        //                // Add items in listbox.
-        //                lstLocations.Items.AddRange(sortedList.ToArray());
-        //            }
-
-        //            // Remove item from selected items phase list(on right);
-        //            lstSelectedLocations.Items.Remove(selectedItem);
-
-        //            // Select first item in selected phases list box.
-        //            if (lstSelectedLocations.Items.Count > 0)
-        //            {
-        //                lstSelectedLocations.SelectedIndex = 0;
-        //            }
-
-        //            // Select first item in phases list box.
-        //            if (lstLocations.Items.Count > 0)
-        //            {
-        //                lstLocations.SelectedIndex = 0;
-        //            }
-        //        }
-        //    }
-        //}
-        //protected void btnRemoveAll_Click(object sender, EventArgs e)
-        //{
-        //    List<ListItem> sortedList = GetSortedList(lstSelectedLocations, lstLocations, null);
-
-        //    if (sortedList.Count > 0)
-        //    {
-        //        LocationRemoved = 1;
-        //        lstLocations.Items.Clear();
-        //        lstLocations.Items.AddRange(sortedList.ToArray());
-        //    }
-
-        //    // Remove all items from listboxes.
-        //    lstSelectedLocations.Items.Clear();
-
-        //    // Select first item if exists.
-        //    if (lstLocations.Items.Count > 0)
-        //    {
-        //        lstLocations.SelectedIndex = 0;
-        //    }
-        //}
-        #endregion
-
-        #region Button Click Events.
-
-        protected void btnGetReports_Click(object sender, EventArgs e)
-        {
-            Session["dtClone"] = null;
-            CaptureDataFromGrid();
-            BindGridData();
-            UpdateGridWithData();
-        }
+        
         protected void btnLocation_Click(object sender, EventArgs e)
         {
             ClientScript.RegisterStartupScript(this.GetType(), "key", "launchModal();", true);
@@ -238,8 +84,6 @@ namespace SRFROWCA.Pages
                 if (row.RowType == DataControlRowType.DataRow)
                 {
                     DataTable dtActivities = (DataTable)Session["dtActivities"];
-
-                    //Dictionary<int, decimal?> dataSave = new Dictionary<int, decimal?>();
                     List<int> dataSave = new List<int>();
                     int i = 0;
                     foreach (DataColumn dc in dtActivities.Columns)
@@ -293,46 +137,6 @@ namespace SRFROWCA.Pages
                             item.Selected = false;
                         }
                     }
-
-                    //foreach (ListItem item in lstLocations.Items)
-                    //{
-                    //    if (dataSave.Contains(Convert.ToInt32(item.Value)))
-                    //    {
-                    //        ListItem selectedItem = item;
-                    //        itemsToDelete.Add(item);
-
-                    //        // Get sorted list items.
-                    //        List<ListItem> sortedList = GetSortedList(lstSelectedLocations, null, selectedItem);
-
-                    //        if (sortedList.Count > 0)
-                    //        {
-                    //            // Clear all items from list box.
-                    //            lstSelectedLocations.Items.Clear();
-
-                    //            // Add items in listbox.
-                    //            lstSelectedLocations.Items.AddRange(sortedList.ToArray());
-
-                    //            lstSelectedLocations.Items.Clear();
-                    //            lstSelectedLocations.Items.AddRange(sortedList.ToArray());
-                    //        }
-
-                    //        // Select first item in selected phases list box.
-                    //        if (lstSelectedLocations.Items.Count > 0)
-                    //        {
-                    //            lstSelectedLocations.SelectedIndex = 0;
-                    //        }
-                    //    }
-                    //}
-
-                    //foreach (ListItem item in itemsToDelete)
-                    //{
-                    //    lstLocations.Items.Remove(item);
-                    //}
-
-                    //if (lstLocations.Items.Count > 0)
-                    //{
-                    //    lstLocations.SelectedIndex = 0;
-                    //}
                 }
             }
         }
@@ -351,14 +155,9 @@ namespace SRFROWCA.Pages
                 }
 
                 scope.Complete();
-
-                //ScriptManager.RegisterStartupScript(this, this.GetType(), "popup",
-                //    "$('#divMsg').addClass('info message').text('Hello There').animate({ top: '0' }, 500).fadeOut(4000, function() {});", true);
                 ShowMessage("Your Data Saved Successfuly!");
             }
         }
-
-        #endregion
 
         #endregion
 
@@ -381,11 +180,7 @@ namespace SRFROWCA.Pages
 
                 PopulateLocationEmergencies(LocationId);
             }
-
-            PopulateMonths();
         }
-
-        #region Drop Downs Methods.
 
         // Populate Emergency Drop Down.
         private void PopulateLocationEmergencies(int locationId)
@@ -421,13 +216,12 @@ namespace SRFROWCA.Pages
             result = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(result);
             ddlMonth.SelectedIndex = ddlMonth.Items.IndexOf(ddlMonth.Items.FindByText(result.ToString()));
         }
-
+        
         private DataTable GetMonth()
         {
             DataTable dt = DBContext.GetData("GetMonths", new object[] {ROWCACommon.SelectedSiteLanguageId});
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
-
         // Populate Years Drop Down
         private void PopulateYears()
         {
@@ -440,13 +234,12 @@ namespace SRFROWCA.Pages
             var result = DateTime.Parse(DateTime.Now.ToShortDateString()).Year;
             ddlYear.SelectedIndex = ddlYear.Items.IndexOf(ddlYear.Items.FindByText(result.ToString()));
         }
+
         private DataTable GetYears()
         {
             DataTable dt = DBContext.GetData("GetYears");
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
-
-        #endregion
 
         // In this method we will get the postback control.
         public string GetPostBackControlId(Page page)
@@ -501,10 +294,13 @@ namespace SRFROWCA.Pages
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 
-        protected void BindGridData()
+        internal override void BindGridData()
         {
             DataTable dt = GetActivities();
-            GetReport(dt);
+            Session["dtActivities"] = dt;
+            GetReportId(dt);
+            gvActivities.DataSource = dt;
+            gvActivities.DataBind();
         }
 
         private string GetSelectedItems(object sender)
@@ -550,7 +346,7 @@ namespace SRFROWCA.Pages
             }
 
             return itemIds;
-        }        
+        }
 
         private DataTable GetActivities()
         {
@@ -756,8 +552,7 @@ namespace SRFROWCA.Pages
             int locEmergencyId = Convert.ToInt32(ddlEmergency.SelectedValue);
             int yearId = Convert.ToInt32(ddlYear.SelectedValue);
             int monthId = Convert.ToInt32(ddlMonth.SelectedValue);
-            int reportFrequencyId = 1;
-            //int emergencyClusterId = Convert.ToInt32(ddlEmergency.SelectedValue);
+            int reportFrequencyId = 1;            
             Guid loginUserId = ROWCACommon.GetCurrentUserId();
 
             ReportId = DBContext.Add("InsertReport", new object[] { reportName, yearId, monthId, locEmergencyId, reportFrequencyId, loginUserId, DBNull.Value });
@@ -772,7 +567,6 @@ namespace SRFROWCA.Pages
                 {
                     DataTable dtActivities = (DataTable)Session["dtActivities"];
 
-                    //Dictionary<int, decimal?> dataSave = new Dictionary<int, decimal?>();
                     List<int> dataSave = new List<int>();
                     foreach (DataColumn dc in dtActivities.Columns)
                     {
@@ -908,7 +702,7 @@ namespace SRFROWCA.Pages
                         {
                             if (!string.IsNullOrEmpty(t.Text))
                             {
-                                value = Convert.ToDecimal(t.Text);
+                                value = Convert.ToDecimal(t.Text, System.Globalization.CultureInfo.InvariantCulture);
                             }
                         }
 
@@ -957,75 +751,39 @@ namespace SRFROWCA.Pages
             }
         }
 
-        private void GetReport(DataTable dt)
+        private void GetReportId(DataTable dt)
         {
-            Session["dtActivities"] = dt;
-
-            int locEmergencyId = 0;
-            int.TryParse(ddlEmergency.SelectedValue, out locEmergencyId);
-
-            int yearId = 0;
-            int.TryParse(ddlYear.SelectedValue, out yearId);
-
-            int monthId = 0;
-            int.TryParse(ddlMonth.SelectedValue, out monthId);
-            Guid userId = ROWCACommon.GetCurrentUserId();
-
-            DataTable dtReport = DBContext.GetData("GetReportId", new object[] { locEmergencyId, yearId, monthId, userId });
-            if (dtReport.Rows.Count > 0)
+            if (dt.Rows.Count > 0)
             {
-                ReportId = string.IsNullOrEmpty(dtReport.Rows[0]["ReportId"].ToString()) ? 0 : 
-                                                Convert.ToInt32(dtReport.Rows[0]["ReportId"].ToString());
+                ReportId = dt.Rows[0]["ReportId"].ToString() == "" ? 0 : Convert.ToInt32(dt.Rows[0]["ReportId"].ToString());
             }
             else
             {
                 ReportId = 0;
-            }
-
-            gvActivities.DataSource = dt;
-            gvActivities.DataBind();
+            }            
         }
 
-        protected void gvActivities_RowDataBound(object sender, GridViewRowEventArgs e)
+        private void RemoveSelectedLocations()
         {
-            if (e.Row.RowType == DataControlRowType.DataRow)
+            foreach (ListItem item in cblLocations.Items)
             {
-                if (Session["dtActivities"] == null) return;
-
-
-                DataTable dtActivities = (DataTable)Session["dtActivities"];
-                if (dtActivities == null) return;
-
-                foreach (DataColumn dc in dtActivities.Columns)
-                {
-                    string colName = dc.ColumnName;
-                    TextBox txt = e.Row.FindControl(colName) as TextBox;
-                    if (txt != null)
-                    {
-                        if (txt.Text == "-1.00")
-                        {
-                            txt.Text = "";
-                        }
-                    }
-                }
+                item.Selected = false;
             }
         }
 
         private void ShowMessage(string message, ROWCACommon.NotificationType notificationType = ROWCACommon.NotificationType.Success)
         {
-            //updMessage.Update();
             ROWCACommon.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, true, 500);
         }
 
         protected void Page_Error(object sender, EventArgs e)
         {
             ShowMessage("<b>Some Error Occoured. Admin Has Notified About It</b>.<br/> Please Try Again.", ROWCACommon.NotificationType.Error);
+            
             // Get last error from the server
             Exception exc = Server.GetLastError();
             SRFROWCA.Common.ExceptionUtility.LogException(exc, "AddActivites", this.User);
         }
-
-
 
         #endregion
 
@@ -1064,24 +822,7 @@ namespace SRFROWCA.Pages
             {
                 ViewState["LocationId"] = value.ToString();
             }
-        }
-        public int Count1
-        {
-            get
-            {
-                int count1 = 0;
-                if (ViewState["Count1"] != null)
-                {
-                    int.TryParse(ViewState["Count1"].ToString(), out count1);
-                }
-
-                return count1;
-            }
-            set
-            {
-                ViewState["Count1"] = value.ToString();
-            }
-        }
+        }        
         public int LocationRemoved
         {
             get

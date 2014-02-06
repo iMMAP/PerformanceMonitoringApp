@@ -71,16 +71,16 @@ namespace SRFROWCA.Pages
 
         protected void gvClusters_RowCreated(Object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType != DataControlRowType.DataRow) return;
+            //if (e.Row.RowType != DataControlRowType.DataRow) return;
 
-            if (e.Row.RowIndex == 0)
-            {
-                CollapsiblePanelExtender cpe = e.Row.FindControl("cpeExpandCollapseActivities") as CollapsiblePanelExtender;
-                if (cpe != null)
-                {
-                    cpe.Collapsed = false;
-                }
-            }
+            //if (e.Row.RowIndex == 0)
+            //{
+            //    CollapsiblePanelExtender cpe = e.Row.FindControl("cpeExpandCollapseActivities") as CollapsiblePanelExtender;
+            //    if (cpe != null)
+            //    {
+            //        cpe.Collapsed = false;
+            //    }
+            //}
         }
 
         protected void gvActivities_RowCommand(object sender, GridViewCommandEventArgs e)

@@ -74,12 +74,13 @@
                                                     <RowStyle CssClass="altcolor" />
                                                     <AlternatingRowStyle CssClass="istrow" />
                                                     <Columns>
-                                                        <asp:TemplateField meta:resourcekey="TemplateFieldResource1">
+                                                        <%--<asp:TemplateField meta:resourcekey="TemplateFieldResource1">
                                                             <ItemTemplate>
                                                                 <%# Container.DataItemIndex + 1 %>
                                                             </ItemTemplate>
                                                             <ItemStyle CssClass="rownum" Width="2%" />
-                                                        </asp:TemplateField>
+                                                        </asp:TemplateField>--%>
+                                                        <asp:BoundField DataField="PriorityActivityId" HeaderText="Paid" />
                                                         <asp:TemplateField HeaderText="Select" meta:resourcekey="TemplateFieldResource2">
                                                             <ItemTemplate>
                                                                 <asp:CheckBox ID="chkActivitySelect" runat="server" meta:resourcekey="chkActivitySelectResource1" />

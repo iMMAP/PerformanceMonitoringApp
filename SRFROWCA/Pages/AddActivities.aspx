@@ -168,6 +168,12 @@
                     <tr>
                         <td align="right">
                             <label>
+                             <asp:DropDownList ID="DropDownList1" runat="server" Width="100px"
+                                AutoPostBack="true">
+                                <asp:ListItem Text="test1"></asp:ListItem>
+                                <asp:ListItem Text="test2"></asp:ListItem>
+                                <asp:ListItem Text="test3"></asp:ListItem>
+                            </asp:DropDownList>
                                 <asp:Localize ID="locaEmergencyCaption" runat="server" meta:resourcekey="locaEmergencyCaptionResource1"
                                     Text="
                                 Emergency:"></asp:Localize>
@@ -241,7 +247,7 @@
         <div id="scrolledGridView" style="overflow-x: auto; width: 100%">
             <asp:GridView ID="gvActivities" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True"
                 HeaderStyle-BackColor="ButtonFace" DataKeyNames="ActivityDataId" CssClass="imagetable"
-                Width="100%" OnRowDataBound="gvActivities_RowDataBound" meta:resourcekey="gvActivitiesResource1">
+                Width="100%" meta:resourcekey="gvActivitiesResource1">
                 <HeaderStyle BackColor="Control"></HeaderStyle>
                 <RowStyle CssClass="istrow" />
                 <AlternatingRowStyle CssClass="altcolor" />
@@ -292,7 +298,7 @@
                     PopupControlID="pnlLocations" BackgroundCssClass="modalpopupbackground"
                     DynamicServicePath="" Enabled="True">
                 </asp:ModalPopupExtender>
-                <asp:Panel ID="pnlLocations" runat="server" Width="600px" meta:resourcekey="pnlLocationsResource1">
+                <asp:Panel ID="pnlLocations" runat="server" Width="700px" meta:resourcekey="pnlLocationsResource1">
                     <asp:UpdatePanel ID="uPanel1" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
                             <div class="containerPopup">
