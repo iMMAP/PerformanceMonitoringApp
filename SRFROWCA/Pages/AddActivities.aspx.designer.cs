@@ -13,15 +13,6 @@ namespace SRFROWCA.Pages {
     public partial class AddActivities {
         
         /// <summary>
-        /// DropDownList1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
-        
-        /// <summary>
         /// locaEmergencyCaption control.
         /// </summary>
         /// <remarks>
@@ -38,6 +29,15 @@ namespace SRFROWCA.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblCountry;
+        
+        /// <summary>
+        /// btnSave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSave;
         
         /// <summary>
         /// ddlEmergency control.
@@ -85,15 +85,6 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.DropDownList ddlMonth;
         
         /// <summary>
-        /// btnSave control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSave;
-        
-        /// <summary>
         /// btnOpenLocations control.
         /// </summary>
         /// <remarks>
@@ -103,22 +94,49 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.Button btnOpenLocations;
         
         /// <summary>
-        /// locaOnlyCheckCaption control.
+        /// cblProjects control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locaOnlyCheckCaption;
+        protected global::System.Web.UI.WebControls.CheckBoxList cblProjects;
         
         /// <summary>
-        /// locaSearchCaption control.
+        /// cblObjectives control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locaSearchCaption;
+        protected global::System.Web.UI.WebControls.CheckBoxList cblObjectives;
+        
+        /// <summary>
+        /// cblPriorities control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList cblPriorities;
+        
+        /// <summary>
+        /// Button1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1;
+        
+        /// <summary>
+        /// btnTest2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnTest2;
         
         /// <summary>
         /// gvActivities control.
@@ -128,15 +146,6 @@ namespace SRFROWCA.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvActivities;
-        
-        /// <summary>
-        /// btnSave2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSave2;
         
         /// <summary>
         /// btnClientOpen control.

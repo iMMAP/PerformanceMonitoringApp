@@ -8,6 +8,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using SRFROWCA.Common;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace SRFROWCA.Pages
 {
@@ -24,7 +26,10 @@ namespace SRFROWCA.Pages
             if (!IsPostBack && !string.IsNullOrEmpty(languageChange)) return;
             {
                 PopulateDropDowns();
+                PopulateStrategicObjectives();
+                PopulatePriorities();
                 Session["SiteChanged"] = null;
+                cblObjectives.Items[0].Attributes["title"] = "test the tool - tip";
             }
 
             if (!IsPostBack)
@@ -40,7 +45,7 @@ namespace SRFROWCA.Pages
             if (controlName == "ddlMonth" || controlName == "ddlYear")
             {
                 LocationRemoved = 0;
-                RemoveSelectedLocations();            
+                RemoveSelectedLocations();
             }
 
             DataTable dtActivities = GetActivities();
@@ -49,29 +54,122 @@ namespace SRFROWCA.Pages
             GetReportId(dtActivities);
             gvActivities.DataSource = dtActivities;
             gvActivities.DataBind();
+
+            PopulateProjects(dtActivities);
         }
 
-        #region Events.        
+        private void PopulateProjects(DataTable dtActivities)
+        {
+            cblProjects.DataValueField = "ProjectId";
+            cblProjects.DataTextField = "ProjectTitle";
+            DataView view = new DataView(dtActivities);
+            cblProjects.DataSource = view.ToTable(true, "ProjectId", "ProjectTitle");
+            cblProjects.DataBind();
+        }
+
+        #region Events.
+
+        protected void gvActivities_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                Image imgObj = e.Row.FindControl("imgObjective") as Image;
+                if (imgObj != null)
+                {
+                    string txt = e.Row.Cells[0].Text;
+                    if (txt.Contains("1"))
+                    {
+                        imgObj.ImageUrl = "~/images/icon/so1.png";
+                        imgObj.ToolTip = "STRATEGIC OBJECTIVE 1: Track and analyse risk and vulnerability, integrating findings into humanitarian and evelopment programming.";
+                    }
+                    else if (txt.Contains("2"))
+                    {
+                        imgObj.ImageUrl = "~/images/icon/so2.png";
+                        imgObj.ToolTip = "STRATEGIC OBJECTIVE 2: Support vulnerable populations to better cope with shocks by responding earlier to warning signals, by reducing post-crisis recovery times and by building capacity of national actors.";
+                    }
+                    else if (txt.Contains("3"))
+                    {
+                        imgObj.ImageUrl = "~/images/icon/so3.png";
+                        imgObj.ToolTip = " STRATEGIC OBJECTIVE 3: Deliver coordinated and integrated life-saving assistance to people affected by emergencies.";
+                    }
+                }
+                Image imghp = e.Row.FindControl("imgPriority") as Image;
+                if (imghp != null)
+                {
+                    string txtHP = e.Row.Cells[1].Text;
+                    if (txtHP == "1")
+                    {
+                        imghp.ImageUrl = "~/images/icon/hp1.png";
+                        imghp.ToolTip = "Addressing the humanitarian impact Natural disasters (floods, etc.)";
+                    }
+                    else if (txtHP == "2")
+                    {
+                        imghp.ImageUrl = "~/images/icon/hp2.png";
+                        imghp.ToolTip = "Addressing the humanitarian impact of Conflict (IDPs, refugees, protection, etc.)";
+                    }
+                    else if (txtHP == "3")
+                    {
+                        imghp.ImageUrl = "~/images/icon/hp3.png";
+                        imghp.ToolTip = "Addressing the humanitarian impact of Epidemics (cholera, malaria, etc.)";
+                    }
+                    else if (txtHP == "4")
+                    {
+                        imghp.ImageUrl = "~/images/icon/hp4.png";
+                        imghp.ToolTip = "Addressing the humanitarian impact of Food insecurity";
+                    }
+                    else if (txtHP == "5")
+                    {
+                        imghp.ImageUrl = "~/images/icon/hp5.png";
+                        imghp.ToolTip = "Addressing the humanitarian impact of Malnutrition";
+                    }
+
+                }
+                //button.CommandArgument = e.Row.RowIndex.ToString();
+            }
+        }
+
+        private string BreakString(string fullString)
+        {
+            const Int32 MAX_WIDTH = 60;
+            int offset = 0;
+            string text = Regex.Replace(fullString, @"\s{2,}", " ");
+            List<string> lines = new List<string>();
+            StringBuilder sb = new StringBuilder();
+
+            while (offset < text.Length)
+            {
+                int index = text.LastIndexOf(" ",
+                                 Math.Min(text.Length, offset + MAX_WIDTH));
+                string line = text.Substring(offset,
+                    (index - offset <= 0 ? text.Length : index) - offset);
+                offset += line.Length + 1;
+                lines.Add(line);
+                sb.Append(line);
+                sb.Append(Environment.NewLine);
+            }
+
+            return sb.ToString();
+        }
 
         protected void ddlEmergency_SelectedIndexChanged(object sender, EventArgs e)
         {
             LocationRemoved = 0;
             BindGridData();
             AddLocationsInSelectedList();
-        }        
+        }
         protected void ddlYear_SelectedIndexChanged(object sender, EventArgs e)
         {
             LocationRemoved = 0;
             BindGridData();
             AddLocationsInSelectedList();
-        }        
+        }
         protected void ddlMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
             LocationRemoved = 0;
             BindGridData();
             AddLocationsInSelectedList();
         }
-        
+
         protected void btnLocation_Click(object sender, EventArgs e)
         {
             ClientScript.RegisterStartupScript(this.GetType(), "key", "launchModal();", true);
@@ -163,6 +261,38 @@ namespace SRFROWCA.Pages
 
         #region Methods.
 
+        private void PopulateStrategicObjectives()
+        {
+            cblObjectives.DataValueField = "ObjectiveId";
+            cblObjectives.DataTextField = "ShortObjectiveTitle";
+
+            DataTable dt = GetStrategicObjectives();
+            cblObjectives.DataSource = dt;
+            cblObjectives.DataBind();
+        }
+
+        private DataTable GetStrategicObjectives()
+        {
+            int isLogFrame = 1;
+            return DBContext.GetData("GetObjectivesLogFrame", new object[] { ROWCACommon.SelectedSiteLanguageId, isLogFrame });
+        }
+
+        private void PopulatePriorities()
+        {
+            cblPriorities.DataValueField = "HumanitarianPriorityId";
+            cblPriorities.DataTextField = "HumanitarianPriority";
+
+            DataTable dt = GetPriorites();
+            cblPriorities.DataSource = dt;
+            cblPriorities.DataBind();
+        }
+
+        private DataTable GetPriorites()
+        {
+            int isLogFrame = 1;
+            return DBContext.GetData("GetPrioritiesLogFrame", new object[] { ROWCACommon.SelectedSiteLanguageId, isLogFrame });
+        }
+
         private void PopulateDropDowns()
         {
             // Get details of user from aspnet_Users_Custom tbale
@@ -216,10 +346,10 @@ namespace SRFROWCA.Pages
             result = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(result);
             ddlMonth.SelectedIndex = ddlMonth.Items.IndexOf(ddlMonth.Items.FindByText(result.ToString()));
         }
-        
+
         private DataTable GetMonth()
         {
-            DataTable dt = DBContext.GetData("GetMonths", new object[] {ROWCACommon.SelectedSiteLanguageId});
+            DataTable dt = DBContext.GetData("GetMonths", new object[] { ROWCACommon.SelectedSiteLanguageId });
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
         // Populate Years Drop Down
@@ -363,7 +493,7 @@ namespace SRFROWCA.Pages
             string locIdsNotIncluded = GetNotSelectedItems(cblLocations);
 
             Guid userId = ROWCACommon.GetCurrentUserId();
-            DataTable dt = DBContext.GetData("GetIPData", new object[] { locEmergencyId, locationIds, yearId, monthId,
+            DataTable dt = DBContext.GetData("GetIPData1", new object[] { locEmergencyId, locationIds, yearId, monthId,
                                                                         locIdsNotIncluded, ROWCACommon.SelectedSiteLanguageId, userId });
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
@@ -397,9 +527,11 @@ namespace SRFROWCA.Pages
                 // the appropriate template property.
 
                 string columnName = column.ColumnName;
-                if (!(columnName == "ReportId" || columnName == "ClusterName" || columnName == "Objective" || 
+                if (!(columnName == "ReportId" || columnName == "ClusterName" || columnName == "Objective" ||
                     columnName == "HumanitarianPriority" || columnName == "SecondaryCluster" || columnName == "ActivityName" ||
-                    columnName == "DataName" || columnName == "IsActive" || columnName == "ActivityDataId"))
+                    columnName == "DataName" || columnName == "IsActive" || columnName == "ActivityDataId" ||
+                    columnName == "ProjectTitle" || columnName == "ProjectId" ||
+                    columnName == "ObjAndPrId" || columnName == "ObjectiveId" || columnName == "HumanitarianPriorityId"))
                 {
                     customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, column.ColumnName, "1");
                     customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, column.ColumnName, "1");
@@ -552,7 +684,7 @@ namespace SRFROWCA.Pages
             int locEmergencyId = Convert.ToInt32(ddlEmergency.SelectedValue);
             int yearId = Convert.ToInt32(ddlYear.SelectedValue);
             int monthId = Convert.ToInt32(ddlMonth.SelectedValue);
-            int reportFrequencyId = 1;            
+            int reportFrequencyId = 1;
             Guid loginUserId = ROWCACommon.GetCurrentUserId();
 
             ReportId = DBContext.Add("InsertReport", new object[] { reportName, yearId, monthId, locEmergencyId, reportFrequencyId, loginUserId, DBNull.Value });
@@ -760,7 +892,7 @@ namespace SRFROWCA.Pages
             else
             {
                 ReportId = 0;
-            }            
+            }
         }
 
         private void RemoveSelectedLocations()
@@ -779,7 +911,7 @@ namespace SRFROWCA.Pages
         protected void Page_Error(object sender, EventArgs e)
         {
             ShowMessage("<b>Some Error Occoured. Admin Has Notified About It</b>.<br/> Please Try Again.", ROWCACommon.NotificationType.Error);
-            
+
             // Get last error from the server
             Exception exc = Server.GetLastError();
             SRFROWCA.Common.ExceptionUtility.LogException(exc, "AddActivites", this.User);
@@ -822,7 +954,7 @@ namespace SRFROWCA.Pages
             {
                 ViewState["LocationId"] = value.ToString();
             }
-        }        
+        }
         public int LocationRemoved
         {
             get

@@ -10,8 +10,6 @@
             padding: 0 40px 0 0;
         }
     </style>
-    <script type="text/javascript" src="../Scripts/jquery.kiketable.colsizable-1.1.min.js"></script>
-    <script type="text/javascript" src="../Scripts/jquery.event.drag-1.4.min.js"></script>
     <script src="../Scripts/jquery.numeric.min.js" type="text/javascript"></script>
     <script type="text/javascript">
 
@@ -40,33 +38,14 @@
         }
 
         $(function () {
+            $("#format").buttonset();
             $(".numeric1").numeric();
             $('#gridSearch').on("keyup paste", function () {
                 searchTable($(this).val());
             });
 
-            $(".chkShowHide").click(function () {
-                if ($(this).is(':checked')) {
-                    $('#<%=gvActivities.ClientID %>').find("input[type='checkbox']").each(function () {
-                        if ($(this).is(':checked')) {
-                            $(this).parent().parent().show();
-                        }
-                        else {
-                            $(this).parent().parent().hide();
-                        }
-                    })
-                } else {
-                    $('#<%=gvActivities.ClientID %>').find("input[type='checkbox']").each(function () {
-                        if ($(this).is(':checked')) {
-                            $(this).parent().parent().show();
-                        }
-                        else {
-                            $(this).parent().parent().show();
-                        }
-
-                    })
-                }
-            })
+            showHideObj();
+            showHidePriority();
 
             if (!(/chrom(e|ium)/.test(navigator.userAgent.toLowerCase()))) {
                 var list = '';
@@ -83,104 +62,162 @@
                         city1 = value.split('_');
                         $(this).text(city1[1]);
 
-                        if (j % 2 === 0) {
-                            list += '<th colspan="2" style="width:100px; text-align:center;">' + city1[0] + '</th>';
+                        if (j % 3 === 0) {
+                            list += '<th colspan="3" style="width:100px; text-align:center;">' + city1[0] + '</th>';
                         }
                     }
                 });
 
-                $(".imagetable").prepend('<colgroup><col /><col /><col /><col /><col /></colgroup><thead><tr style="background-color:ButtonFace;"><th style="width: 7px;">&nbsp;</th><th style="width: 45px;">&nbsp;</th><th style="width: 150px;">&nbsp;</th><th style="width: 60px;">&nbsp;</th><th style="width: 150px;">&nbsp;</th><th style="width: 150px;">&nbsp;</th>' + list + '</tr></thead>');
+                $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th style="width: 100px;">&nbsp;</th><th style="width: 30px;">&nbsp;</th><th style="width: 450px;">&nbsp;</th><th style="width: 350px;">&nbsp;</th>' + list + '</tr></thead>');
             }
 
             $("#<%=gvActivities.ClientID %>").kiketable_colsizable({ minWidth: 50 })
         });
 
+        $(".checkbox").change(function () {
 
-        function searchTable(inputVal) {
-            var table = $('#<%=gvActivities.ClientID %>');
-            table.find('tr').each(function (index, row) {
-                var allCells = $(row).find('td');
-                if (allCells.length > 0) {
-                    var found = false;
-                    allCells.each(function (index, td) {
-                        var regExp = new RegExp(inputVal, 'i');
-                        if (regExp.test($(td).text())) {
-                            found = true;
-                            return false;
-                        }
-                    });
-                    if (found == true) {
-                        $(row).show('fast', function () {
+        });
 
-                            if ($(".chkShowHide").is(":Checked")) {
-                                $('#<%=gvActivities.ClientID %>').find("input[type='checkbox']").each(function () {
-                                    if ($(this).is(':checked')) {
-                                        $(this).parent().parent().show();
-                                    }
-                                    else {
-                                        $(this).parent().parent().hide();
-                                    }
-                                })
-                            }
-                            else {
-                                $('#<%=gvActivities.ClientID %>').find("input[type='checkbox']").each(function () {
-                                    if ($(this).is(':checked')) {
-                                        $(this).parent().parent().show();
-                                    }
-                                })
-                            }
-                        });
+        function showHideObj() {
+            $(".checkObj").live("click", function () {
+                var selectedObjs = [];
+                $("[id*=cblObjectives] input:checked").each(function () {
+                    selectedObjs.push($(this).val());
+                });
+
+                var selectedPr = [];
+                $("[id*=cblPriorities] input:checked").each(function () {
+                    selectedPr.push($(this).val());
+                });
+
+                showObj();
+                if (selectedObjs.length > 0) {
+                    var i;
+                    for (i = 0; i < selectedObjs.length; ++i) {
+                        hideObj(selectedObjs[i]);
                     }
-                    else {
-                        $(row).hide('fast', function () {
+                }
 
-                            if ($(".chkShowHide").is(":Checked")) {
-                                $('#<%=gvActivities.ClientID %>').find("input[type='checkbox']").each(function () {
-                                    if ($(this).is(':checked')) {
-                                        $(this).parent().parent().hide();
-                                    }
-                                })
-                            }
-                            else {
-                                $('#<%=gvActivities.ClientID %>').find("input[type='checkbox']").each(function () {
-                                    if ($(this).is(':checked')) {
-                                        $(this).parent().parent().show();
-                                    }
-                                })
-                            }
-                        });
+                if (selectedPr.length > 0) {
+                    var i;
+                    for (i = 0; i < selectedPr.length; ++i) {
+                        hidePriority(selectedPr[i]);
                     }
                 }
             });
         }
+
+        function showHidePriority() {
+
+            $(".checkPr").live("click", function () {
+                var selectedPr = [];
+                $("[id*=cblPriorities] input:checked").each(function () {
+                    selectedPr.push($(this).val());
+                });
+
+                var selectedObjs = [];
+                $("[id*=cblObjectives] input:checked").each(function () {
+                    selectedObjs.push($(this).val());
+                });
+
+                showPriority();
+                if (selectedPr.length > 0) {
+                    var i;
+                    for (i = 0; i < selectedPr.length; ++i) {
+                        hidePriority(selectedPr[i]);
+                    }
+                }
+
+                if (selectedObjs.length > 0) {
+                    var i;
+                    for (i = 0; i < selectedObjs.length; ++i) {
+                        hideObj(selectedObjs[i]);
+                    }
+                }
+            });
+        }
+
+        function showObj() {
+
+            $('.istrow, .altcolor').find('td:nth-child(1)').each(function (i) {
+                $(this).parent().show();
+            });
+        }
+
+        function hideObj(objId) {
+
+            $('.istrow, .altcolor').find('td:nth-child(1)').each(function (i) {
+                if ($(this).text() === objId || objId === '0') {
+                    $(this).parent().hide();
+                }
+            });
+        }
+
+        function showPriority() {
+            $('.istrow, .altcolor').find('td:nth-child(2)').each(function (i) {
+                $(this).parent().show();
+            });
+        }
+
+        function hidePriority(priorityId) {
+            $('.istrow, .altcolor').find('td:nth-child(2)').each(function (i) {
+                if ($(this).text() === priorityId || priorityId === '0') {
+                    $(this).parent().hide();
+                }
+            });
+        }
+
+        function hideObjPriority(objPrId) {
+            $('.istrow, .altcolor').find('td:nth-child(3)').each(function (i) {
+                if ($(this).text() === objPrId || objPrId === '0') {
+                    $(this).parent().show();
+                }
+                else {
+                    $(this).parent().hide();
+                }
+            });
+        }
+
+        
+        
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div id="divMsg">
     </div>
-    <div class="container">
-        <div class="graybar">
-            
-        </div>
-        <div class="contentarea">
-            <div class="formdiv">
-                <table border="0" cellpadding="0" width="100%">
-                    <tr>
-                        <td align="right">
-                            <label>
-                             <asp:DropDownList ID="DropDownList1" runat="server" Width="100px"
-                                AutoPostBack="true">
-                                <asp:ListItem Text="test1"></asp:ListItem>
-                                <asp:ListItem Text="test2"></asp:ListItem>
-                                <asp:ListItem Text="test3"></asp:ListItem>
-                            </asp:DropDownList>
-                                <asp:Localize ID="locaEmergencyCaption" runat="server" meta:resourcekey="locaEmergencyCaptionResource1"
-                                    Text="
+    <div class="containerDataEntryMain">
+        <table border="0" cellpadding="0" width="100%">
+            <tr>
+                <td align="right" style="display: none">
+                    <label>
+                        <asp:Localize ID="locaEmergencyCaption" runat="server" meta:resourcekey="locaEmergencyCaptionResource1"
+                            Text="
                                 Emergency:"></asp:Localize>
-                                (<asp:Label ID="lblCountry" runat="server" meta:resourcekey="lblCountryResource1"></asp:Label>)
-                            </label>
-                        </td>
-                        <td colspan="2">
+                        (<asp:Label ID="lblCountry" runat="server" meta:resourcekey="lblCountryResource1"></asp:Label>)
+                    </label>
+                </td>
+            </tr>
+        </table>
+        <div class="spacer" style="clear: both;">
+        </div>
+    </div>
+    <div style="display: none">
+        <div class="buttonsdiv">
+            <div class="savebutton">
+                <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
+                    Width="120px" CssClass="button_example" meta:resourcekey="btnSaveResource1" /></div>
+            <div class="buttonright">
+            </div>
+            <div class="spacer" style="clear: both;">
+            </div>
+        </div>
+    </div>
+    <div class="containerDataEntryMain">
+        <div class="containerDataEntryProjects">
+            <div class="containerDataEntryProjectsInner">
+                <table>
+                    <tr>
+                        <td colspan="2" style="display: none">
                             <asp:DropDownList ID="ddlEmergency" runat="server" Width="350px" OnSelectedIndexChanged="ddlEmergency_SelectedIndexChanged"
                                 onchange="needToConfirm = false;" AutoPostBack="True" meta:resourcekey="ddlEmergencyResource1">
                             </asp:DropDownList>
@@ -194,108 +231,89 @@
                                 Year/Month:"></asp:Localize></label>
                         </td>
                         <td>
-                            <asp:DropDownList ID="ddlYear" runat="server" Width="100px" OnSelectedIndexChanged="ddlYear_SelectedIndexChanged"
+                            <asp:DropDownList ID="ddlYear" runat="server" Width="60px" OnSelectedIndexChanged="ddlYear_SelectedIndexChanged"
                                 onchange="needToConfirm = false;" AutoPostBack="True" meta:resourcekey="ddlYearResource1">
                             </asp:DropDownList>
-                            <asp:DropDownList ID="ddlMonth" runat="server" Width="100px" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged"
-                                onchange="needToConfirm = false;" AutoPostBack="True" 
-                                meta:resourcekey="ddlMonthResource1">
+                            <asp:DropDownList ID="ddlMonth" runat="server" Width="90px" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged"
+                                onchange="needToConfirm = false;" AutoPostBack="True" meta:resourcekey="ddlMonthResource1">
                             </asp:DropDownList>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Button ID="btnOpenLocations" runat="server" Text="Locations" CausesValidation="False"
+                                CssClass="button_location" OnClick="btnLocation_Click" OnClientClick="needToConfirm = false;"
+                                meta:resourcekey="btnOpenLocationsResource1" />
                         </td>
                     </tr>
                 </table>
             </div>
-            <div class="spacer" style="clear: both;">
+            <div class="containerDataEntryProjectsInner">
+                <asp:CheckBoxList ID="cblProjects" runat="server">
+                </asp:CheckBoxList>
+                <br />
+                <br />
+            </div>
+            <div class="containerDataEntryProjectsInner">
+                <asp:CheckBoxList ID="cblObjectives" runat="server" CssClass="checkObj">
+                </asp:CheckBoxList>
+                <asp:CheckBoxList ID="cblPriorities" runat="server" CssClass="checkPr">
+                </asp:CheckBoxList>
+                <asp:Button ID="Button1" runat="server" Text="Manage Projects" CssClass="button_example" />
+                <br />
+                <br />
+                <br />
+                <asp:Button ID="btnTest2" runat="server" Text="Manage Activities" CssClass="button_example" />
+                <br />
+                <br />
+                <br />
             </div>
         </div>
-        <div class="graybarcontainer">
-        </div>
-    </div>
-    <div class="buttonsdiv">
-        <div class="savebutton">
-            <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
-                Width="120px" CssClass="button_example" meta:resourcekey="btnSaveResource1" /></div>
-        <div class="buttonright">
-            <asp:Button ID="btnOpenLocations" runat="server" Text="Locations" CausesValidation="False"
-                CssClass="button_location" OnClick="btnLocation_Click" OnClientClick="needToConfirm = false;"
-                meta:resourcekey="btnOpenLocationsResource1" />
-        </div>
-        <div class="spacer" style="clear: both;">
-        </div>
-    </div>
-    <div class="tablegrid">
-        <table border="0" cellpadding="2" cellspacing="0" class="quicksearch2">
-            <tr>
-                <td width="250px">
-                    <input type="checkbox" id="chkShowHide" class="chkShowHide" />
-                    <asp:Localize ID="locaOnlyCheckCaption" runat="server" 
-                        meta:resourcekey="locaOnlyCheckCaptionResource1" 
-                        Text=" &lt;b&gt;Show Only Checked:&lt;/b&gt;"></asp:Localize>
-                </td>
-                <td>
-                    <asp:Localize ID="locaSearchCaption" runat="server" 
-                        meta:resourcekey="locaSearchCaptionResource1" 
-                        Text=" &lt;b&gt;Search:&lt;/b&gt;"></asp:Localize>
-                    <input type="text" id="gridSearch" class="grdSearch" style="width: 400px;" />
-                </td>
-                <td align="right">
-                </td>
-                <td style="width: 40%;">
-                </td>
-            </tr>
-        </table>
-        <div id="scrolledGridView" style="overflow-x: auto; width: 100%">
-            <asp:GridView ID="gvActivities" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True"
-                HeaderStyle-BackColor="ButtonFace" DataKeyNames="ActivityDataId" CssClass="imagetable"
-                Width="100%" meta:resourcekey="gvActivitiesResource1">
-                <HeaderStyle BackColor="Control"></HeaderStyle>
-                <RowStyle CssClass="istrow" />
-                <AlternatingRowStyle CssClass="altcolor" />
-                <Columns>
-                    <asp:TemplateField meta:resourcekey="TemplateFieldResource1">
-                        <ItemTemplate>
-                            <asp:CheckBox ID="chkSelected" runat="server" Checked='<%# bool.Parse(Eval("IsActive").ToString()) %>'
-                                meta:resourcekey="chkSelectedResource1" />
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:BoundField DataField="ClusterName" HeaderText="Cluster" ItemStyle-Width="50px"
-                        meta:resourcekey="BoundFieldResource1">
-                        <ItemStyle Width="50px"></ItemStyle>
-                    </asp:BoundField>
-                    <asp:BoundField DataField="Objective" HeaderText="Objective" ItemStyle-Width="150px"
-                        meta:resourcekey="BoundFieldResource2">
-                        <ItemStyle Width="150px"></ItemStyle>
-                    </asp:BoundField>
-                    <asp:BoundField DataField="HumanitarianPriority" HeaderText="Priority" ItemStyle-Wrap=" false"
-                        ItemStyle-Width="150px" meta:resourcekey="BoundFieldResource3">
-                        <ItemStyle Wrap="False" Width="150px"></ItemStyle>
-                    </asp:BoundField>
-                    <asp:BoundField DataField="ActivityName" HeaderText="Activity" ItemStyle-Width="150px"
-                        meta:resourcekey="BoundFieldResource4">
-                        <ItemStyle Width="150px"></ItemStyle>
-                    </asp:BoundField>
-                    <asp:BoundField DataField="DataName" HeaderText="Output Indicator" ItemStyle-Width="150px" meta:resourcekey="BoundFieldResource5">
-                        <ItemStyle Width="150px"></ItemStyle>
-                    </asp:BoundField>
-                </Columns>
-            </asp:GridView>
-        </div>
-    </div>
-    <div class="buttonsdiv">
-        <div class="savebutton">
-            <asp:Button ID="btnSave2" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
-                Width="120px" CssClass="button_example" meta:resourcekey="btnSave2Resource1" /></div>
-        <div class="buttonright">
-        </div>
-        <div class="spacer" style="clear: both;">
+        <div class="containerDataEntryGrid">
+            <div class="tablegrid">
+                <div id="scrolledGridView" style="overflow-x: auto; width: 100%; height: 530px;">
+                    <asp:GridView ID="gvActivities" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True"
+                        HeaderStyle-BackColor="ButtonFace" DataKeyNames="ActivityDataId" CssClass="imagetable"
+                        Width="100%" Height="530px" meta:resourcekey="gvActivitiesResource1" OnRowDataBound="gvActivities_RowDataBound">
+                        <HeaderStyle BackColor="Control"></HeaderStyle>
+                        <RowStyle CssClass="istrow" />
+                        <AlternatingRowStyle CssClass="altcolor" />
+                        <Columns>
+                            <asp:BoundField DataField="ObjectiveId" HeaderText="ObjectiveId" ItemStyle-Width="1px" />
+                            <asp:BoundField DataField="HumanitarianPriorityId" HeaderText="HumanitarianPriorityId"
+                                ItemStyle-Width="1px" HeaderStyle-CssClass="hiddenelement" />
+                            <asp:BoundField DataField="ObjAndPrId" HeaderText="objprid" ItemStyle-Width="1px" />
+                            <asp:TemplateField HeaderText="Project Code">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblProjectcode" runat="server" Text='<%#Eval("ClusterName") %>' ToolTip='<%#Eval("ProjectTitle") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderStyle-Width="100px">
+                                <ItemTemplate>
+                                    <asp:Image ID="imgObjective" runat="server" ImageUrl="~/images/O.png" AlternateText="Obj" />
+                                    <asp:Image ID="imgPriority" runat="server" ImageUrl="~/images/P.png" AlternateText="Obj" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:BoundField DataField="ActivityName" HeaderText="Activity" ItemStyle-Width="450px"
+                                meta:resourcekey="BoundFieldResource4">
+                                <ItemStyle Width="450px"></ItemStyle>
+                            </asp:BoundField>
+                            <asp:BoundField DataField="DataName" HeaderText="Output Indicator" ItemStyle-Width="450px"
+                                meta:resourcekey="BoundFieldResource5">
+                                <ItemStyle Width="450px"></ItemStyle>
+                            </asp:BoundField>
+                        </Columns>
+                    </asp:GridView>
+                </div>
+            </div>
         </div>
     </div>
     <table>
         <tr>
             <td>
                 <input type="button" id="btnClientOpen" runat="server" style="display: none;" />
-                <asp:ModalPopupExtender ID="mpeAddActivity" runat="server" BehaviorID="mpeAddActivity" TargetControlID="btnClientOpen"
-                    PopupControlID="pnlLocations" BackgroundCssClass="modalpopupbackground"
+                <asp:ModalPopupExtender ID="mpeAddActivity" runat="server" BehaviorID="mpeAddActivity"
+                    TargetControlID="btnClientOpen" PopupControlID="pnlLocations" BackgroundCssClass="modalpopupbackground"
                     DynamicServicePath="" Enabled="True">
                 </asp:ModalPopupExtender>
                 <asp:Panel ID="pnlLocations" runat="server" Width="700px" meta:resourcekey="pnlLocationsResource1">

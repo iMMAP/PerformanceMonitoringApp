@@ -124,7 +124,7 @@
     <value />
   </data>
   <data name="BoundFieldResource1.HeaderText" xml:space="preserve">
-    <value>Cluster</value>
+    <value>Project Code</value>
   </data>
   <data name="BoundFieldResource2.AccessibleHeaderText" xml:space="preserve">
     <value />
