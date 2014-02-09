@@ -209,6 +209,41 @@ CSS for Login, Register, ForgotPassword, ChagnePassword
     margin-top: 20px;
 }
 
+.containerDataEntryMain
+{
+    width: 98%;
+    margin: 0 auto;
+    /*border: 1px solid #ccc;*/
+    margin-top: 5px;
+}
+
+.containerDataEntryGrid
+{
+    width: 79%;
+    height:540px;
+    overflow: auto;
+    float: right;
+    margin: 0 auto;
+    border: 1px solid #ccc;    
+}
+.containerDataEntryProjects
+{
+    width: 20%;
+    float:left;
+    /*margin: 0 auto;
+    border: 1px solid #ccc;*/
+}
+
+.containerDataEntryProjectsInner
+{
+    width: 90%;
+    float:left;
+    margin-bottom: 10px;
+    padding:5px;
+    
+    border: 1px solid #ccc;
+}
+
 .graybarLogin
 {
     background-color: #efefef;
