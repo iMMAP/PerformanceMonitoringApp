@@ -149,7 +149,6 @@ namespace SRFROWCA.Common
 
         internal static DataTable GetLocations(IPrincipal user, int locationType)
         {
-
             DataTable dt = new DataTable();
 
             if (!user.Identity.IsAuthenticated || IsAdmin(user))
@@ -160,6 +159,10 @@ namespace SRFROWCA.Common
             {
                 Guid userId = GetCurrentUserId();
                 dt = DBContext.GetData("GetLocationOnTypeAndPrincipal", new object[] { locationType, userId });
+            }
+            else if (user.Identity.IsAuthenticated)
+            {
+                dt = DBContext.GetData("GetLocationOnType", new object[] { locationType });
             }
 
             return dt;

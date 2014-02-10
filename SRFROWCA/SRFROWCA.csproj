@@ -155,18 +155,45 @@
     <Content Include="Help\generatereport1.swf" />
     <Content Include="images\add_plus.png" />
     <Content Include="images\ajaxlodr.gif" />
+    <Content Include="images\C.png" />
     <Content Include="images\ddlarrow.png" />
     <Content Include="images\droparrow.png" />
     <Content Include="images\error.png" />
     <Content Include="images\favicon.ico" />
+    <Content Include="images\icon\agr.png" />
+    <Content Include="images\icon\ccm.png" />
+    <Content Include="images\icon\conflict.png" />
+    <Content Include="images\icon\cor.png" />
+    <Content Include="images\icon\edu.png" />
+    <Content Include="images\icon\epidemics.png" />
+    <Content Include="images\icon\er.png" />
+    <Content Include="images\icon\et.png" />
+    <Content Include="images\icon\foodinsecurity.png" />
+    <Content Include="images\icon\fs.png" />
+    <Content Include="images\icon\hlt.png" />
+    <Content Include="images\icon\lgs.png" />
+    <Content Include="images\icon\malnutrition.png" />
+    <Content Include="images\icon\ms.png" />
+    <Content Include="images\icon\ndisaster.png" />
+    <Content Include="images\icon\nut.png" />
+    <Content Include="images\icon\pro.png" />
+    <Content Include="images\icon\shl.png" />
+    <Content Include="images\icon\so1.png" />
+    <Content Include="images\icon\so2.png" />
+    <Content Include="images\icon\so3.png" />
+    <Content Include="images\icon\wash.png" />
     <Content Include="images\loginmenuarrow.png" />
     <Content Include="images\minus.png" />
+    <Content Include="images\O.png" />
+    <Content Include="images\P.png" />
     <Content Include="images\plus.png" />
     <Content Include="images\rssfeed.png" />
     <Content Include="Maps\TargetAchievedByLocDataMap.aspx" />
     <Content Include="OPS\OPSDataEntry.aspx" />
     <Content Include="OPS\UploadOPSProjectDetails.aspx" />
     <Content Include="Pages\AddActivities.aspx" />
+    <Content Include="Pages\CreateProject.aspx" />
+    <Content Include="Pages\ManageActivities.aspx" />
     <Content Include="Pages\SelectActivities.aspx" />
     <Content Include="Pages\TargetsAchievedOfLocationByDuration.ascx" />
     <Content Include="ReportsCharts\AllTargetsAndAchieved.ascx" />
@@ -590,6 +617,20 @@
     </Compile>
     <Compile Include="OPS\UploadOPSProjectDetails.aspx.designer.cs">
       <DependentUpon>UploadOPSProjectDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\CreateProject.aspx.cs">
+      <DependentUpon>CreateProject.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\CreateProject.aspx.designer.cs">
+      <DependentUpon>CreateProject.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ManageActivities.aspx.cs">
+      <DependentUpon>ManageActivities.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\ManageActivities.aspx.designer.cs">
+      <DependentUpon>ManageActivities.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\SelectActivities.aspx.cs">
       <DependentUpon>SelectActivities.aspx</DependentUpon>
