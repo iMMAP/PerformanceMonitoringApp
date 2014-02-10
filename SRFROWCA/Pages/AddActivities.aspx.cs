@@ -29,7 +29,9 @@ namespace SRFROWCA.Pages
                 PopulateStrategicObjectives();
                 PopulatePriorities();
                 Session["SiteChanged"] = null;
-                cblObjectives.Items[0].Attributes["title"] = "test the tool - tip";
+                cblObjectives.Items[0].Attributes["title"] = "STRATEGIC OBJECTIVE 1: Track and analyse risk and vulnerability, integrating findings into humanitarian and development programming.";
+                cblObjectives.Items[1].Attributes["title"] = "STRATEGIC OBJECTIVE 2: Support vulnerable populations to better cope with shocks by responding earlier to warning signals, by reducing post-crisis recovery times and by building capacity of national actors.";
+                cblObjectives.Items[2].Attributes["title"] = "STRATEGIC OBJECTIVE 3: Deliver coordinated and integrated life-saving assistance to people affected by emergencies.";
             }
 
             if (!IsPostBack)
@@ -61,10 +63,22 @@ namespace SRFROWCA.Pages
         private void PopulateProjects(DataTable dtActivities)
         {
             cblProjects.DataValueField = "ProjectId";
-            cblProjects.DataTextField = "ProjectTitle";
+            cblProjects.DataTextField = "ClusterName";
             DataView view = new DataView(dtActivities);
-            cblProjects.DataSource = view.ToTable(true, "ProjectId", "ProjectTitle");
+            DataTable dt = view.ToTable(true, "ProjectId", "ClusterName", "ProjectTitle");
+            cblProjects.DataSource = dt;
             cblProjects.DataBind();
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                foreach (ListItem item in cblProjects.Items)
+                {
+                    if (item.Value == dr["ProjectId"].ToString())
+                    {
+                        item.Attributes["title"] = dr["ProjectTitle"].ToString();
+                    }
+                }
+            }
         }
 
         #region Events.
@@ -299,12 +313,6 @@ namespace SRFROWCA.Pages
             DataTable dt = ROWCACommon.GetUserDetails();
             if (dt.Rows.Count > 0)
             {
-                lblCountry.Text = dt.Rows[0]["LocationName"].ToString();
-                //lblOrganization.Text = dt.Rows[0]["OrganizationName"].ToString();
-
-                // Set Header of Location List Box.
-                //lblLocationLevelOfCountry.Text = "Admin2 Locations of " + lblCountry.Text;
-
                 LocationId = Convert.ToInt32(dt.Rows[0]["LocationId"].ToString());
                 int organizationId = Convert.ToInt32(dt.Rows[0]["OrganizationId"].ToString());
 
@@ -531,7 +539,8 @@ namespace SRFROWCA.Pages
                     columnName == "HumanitarianPriority" || columnName == "SecondaryCluster" || columnName == "ActivityName" ||
                     columnName == "DataName" || columnName == "IsActive" || columnName == "ActivityDataId" ||
                     columnName == "ProjectTitle" || columnName == "ProjectId" ||
-                    columnName == "ObjAndPrId" || columnName == "ObjectiveId" || columnName == "HumanitarianPriorityId"))
+                    columnName == "ObjAndPrId" || columnName == "ObjectiveId" || columnName == "HumanitarianPriorityId" ||
+                    columnName == "objAndPrAndPId" || columnName == "objAndPId" || columnName == "PrAndPId"))
                 {
                     customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, column.ColumnName, "1");
                     customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, column.ColumnName, "1");
@@ -974,6 +983,16 @@ namespace SRFROWCA.Pages
         }
 
         #endregion
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Pages/CreateProject.aspx");
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Pages/ManageActivities.aspx");
+        }
     }
 
     public class GridViewTemplate : ITemplate

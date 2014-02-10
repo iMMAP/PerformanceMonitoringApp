@@ -44,6 +44,7 @@
                 searchTable($(this).val());
             });
 
+            showHideProjects();
             showHideObj();
             showHidePriority();
 
@@ -78,6 +79,102 @@
 
         });
 
+        function showHideProjects() {
+            $(".checkProj").live("click", function () {
+                var selectedProjects = [];
+                $("[id*=cblProjects] input:checked").each(function () {
+                    selectedProjects.push($(this).val());
+                });
+
+                var selectedObjs = [];
+                $("[id*=cblObjectives] input:checked").each(function () {
+                    selectedObjs.push($(this).val());
+                });
+
+                var selectedPr = [];
+                $("[id*=cblPriorities] input:checked").each(function () {
+                    selectedPr.push($(this).val());
+                });
+
+                showAllObj();
+                if (selectedProjects.length > 0 && selectedObjs.length > 0 && selectedPr.length > 0) {
+                    alert('in all');
+                    hideAllObj();
+                    for (k = 0; k < selectedProjects.length; k++) {
+                        for (i = 0; i < selectedObjs.length; i++) {
+                            for (j = 0; j < selectedPr.length; j++) {
+                                var projId = selectedProjects[k];
+                                var objId = selectedObjs[i];
+                                var prId = selectedPr[j];
+                                var objprProject = objId + '-' + prId + '-' + projId;
+                                showObjPriorityAndProject(objprProject);
+                            }
+                        }
+                    }
+                }
+                else if (selectedProjects.length > 0 && selectedObjs.length > 0) {
+                    alert('in p and obj');
+                    hideAllObj();
+                    for (k = 0; k < selectedProjects.length; k++) {
+                        for (i = 0; i < selectedObjs.length; i++) {
+
+                            var projId = selectedProjects[k];
+                            var objId = selectedObjs[i];
+                            var objProject = objId + '-' + projId;
+                            showObjAndProject(objProject);
+                        }
+                    }
+                }
+                else if (selectedProjects.length > 0 && selectedPr.length > 0) {
+                    alert('P and Pr');
+                    hideAllObj();
+                    for (k = 0; k < selectedProjects.length; k++) {
+                        for (j = 0; j < selectedPr.length; j++) {
+                            var projId = selectedProjects[k];
+                            var prId = selectedPr[j];
+                            var prProject = prId + '-' + projId;
+                            showPriorityAndProject(prProject);
+                        }
+                    }
+                }
+                else if (selectedObjs.length > 0 && selectedPr.length > 0) {
+                    alert('obj and PR');
+                    hideAllObj();
+                    for (i = 0; i < selectedObjs.length; i++) {
+                        for (j = 0; j < selectedPr.length; j++) {
+                            var objId = selectedObjs[i];
+                            var prId = selectedPr[j];
+                            var objpr = objId + '-' + prId;
+                            showObjPriority(objpr);
+                        }
+                    }
+                }
+                else if (selectedProjects.length > 0) {
+                    alert('in P');
+                    hideAllObj();
+                    var i;
+                    for (i = 0; i < selectedProjects.length; i++) {
+                        showProject(selectedProjects[i]);
+                    }
+                }
+                else if (selectedObjs.length > 0) {
+                    alert('in obj');
+                    hideAllObj();
+                    var i;
+                    for (i = 0; i < selectedObjs.length; i++) {
+                        showObj(selectedObjs[i]);
+                    }
+                }
+                else if (selectedPr.length > 0) {
+                    hideAllObj();
+                    var i;
+                    for (i = 0; i < selectedPr.length; i++) {
+                        showPriority(selectedPr[i]);
+                    }
+                }
+            });
+        }
+
         function showHideObj() {
             $(".checkObj").live("click", function () {
                 var selectedObjs = [];
@@ -90,18 +187,30 @@
                     selectedPr.push($(this).val());
                 });
 
-                showObj();
-                if (selectedObjs.length > 0) {
-                    var i;
+                showAllObj();
+                if (selectedObjs.length > 0 && selectedPr.length > 0) {
+                    hideAllObj();
                     for (i = 0; i < selectedObjs.length; ++i) {
-                        hideObj(selectedObjs[i]);
+                        for (j = 0; j < selectedPr.length; ++j) {
+                            var objId = selectedObjs[i];
+                            var prId = selectedPr[j];
+                            var objpr = objId + '-' + prId;
+                            showObjPriority(objpr);
+                        }
                     }
                 }
-
-                if (selectedPr.length > 0) {
+                else if (selectedObjs.length > 0) {
+                    hideAllObj();
+                    var i;
+                    for (i = 0; i < selectedObjs.length; ++i) {
+                        showObj(selectedObjs[i]);
+                    }
+                }
+                else if (selectedPr.length > 0) {
+                    hideAllObj();
                     var i;
                     for (i = 0; i < selectedPr.length; ++i) {
-                        hidePriority(selectedPr[i]);
+                        showPriority(selectedPr[i]);
                     }
                 }
             });
@@ -120,60 +229,115 @@
                     selectedObjs.push($(this).val());
                 });
 
-                showPriority();
-                if (selectedPr.length > 0) {
-                    var i;
-                    for (i = 0; i < selectedPr.length; ++i) {
-                        hidePriority(selectedPr[i]);
+                showAllObj();
+                if (selectedObjs.length > 0 && selectedPr.length > 0) {
+                    hideAllObj();
+                    for (i = 0; i < selectedObjs.length; ++i) {
+                        for (j = 0; j < selectedPr.length; ++j) {
+                            var objId = selectedObjs[i];
+                            var prId = selectedPr[j];
+                            var objpr = objId + '-' + prId;
+                            showObjPriority(objpr);
+                        }
                     }
                 }
-
-                if (selectedObjs.length > 0) {
+                else if (selectedObjs.length > 0) {
+                    hideAllObj();
                     var i;
                     for (i = 0; i < selectedObjs.length; ++i) {
-                        hideObj(selectedObjs[i]);
+                        showObj(selectedObjs[i]);
+                    }
+                }
+                else if (selectedPr.length > 0) {
+                    hideAllObj();
+                    var i;
+                    for (i = 0; i < selectedPr.length; ++i) {
+                        showPriority(selectedPr[i]);
                     }
                 }
             });
         }
 
-        function showObj() {
+        function showAllObj() {
 
             $('.istrow, .altcolor').find('td:nth-child(1)').each(function (i) {
                 $(this).parent().show();
             });
         }
 
-        function hideObj(objId) {
+        function hideAllObj() {
+
+            $('.istrow, .altcolor').find('td:nth-child(1)').each(function (i) {
+                $(this).parent().hide();
+            });
+        }
+
+        function showObj(objId) {
 
             $('.istrow, .altcolor').find('td:nth-child(1)').each(function (i) {
                 if ($(this).text() === objId || objId === '0') {
-                    $(this).parent().hide();
+                    $(this).parent().show();
                 }
             });
         }
 
-        function showPriority() {
+        function showAllPriority() {
             $('.istrow, .altcolor').find('td:nth-child(2)').each(function (i) {
                 $(this).parent().show();
             });
         }
 
-        function hidePriority(priorityId) {
+        function hideAllPriority() {
+            $('.istrow, .altcolor').find('td:nth-child(2)').each(function (i) {
+                $(this).parent().hide();
+            });
+        }
+
+        function showPriority(priorityId) {
             $('.istrow, .altcolor').find('td:nth-child(2)').each(function (i) {
                 if ($(this).text() === priorityId || priorityId === '0') {
-                    $(this).parent().hide();
+                    $(this).parent().show();
                 }
             });
         }
 
-        function hideObjPriority(objPrId) {
+        function showObjPriority(objPrId) {
             $('.istrow, .altcolor').find('td:nth-child(3)').each(function (i) {
                 if ($(this).text() === objPrId || objPrId === '0') {
                     $(this).parent().show();
                 }
-                else {
-                    $(this).parent().hide();
+            });
+        }
+
+        function showProject(pId) {
+            $('.istrow, .altcolor').find('td:nth-child(4)').each(function (i) {
+                if ($(this).text() === pId || pId === '0') {
+                    $(this).parent().show();
+                }
+            });
+        }
+
+        function showObjPriorityAndProject(objPrPId) {
+            $('.istrow, .altcolor').find('td:nth-child(5)').each(function (i) {
+                if ($(this).text() === objPrPId || objPrPId === '0') {
+                    $(this).parent().show();
+                }
+            });
+        }
+
+        function showObjAndProject(objPId) {
+            alert(objPId);
+            $('.istrow, .altcolor').find('td:nth-child(6)').each(function (i) {
+                if ($(this).text() === objPId || objPId === '0') {
+                    $(this).parent().show();
+                }
+            });
+        }
+
+        function showPriorityAndProject(prPId) {
+            $('.istrow, .altcolor').find('td:nth-child(7)').each(function (i) {
+                if ($(this).text() === prPId || prPId === '0') {
+                    $(this).parent().show();
                 }
             });
         }
@@ -184,33 +348,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div id="divMsg">
-    </div>
-    <div class="containerDataEntryMain">
-        <table border="0" cellpadding="0" width="100%">
-            <tr>
-                <td align="right" style="display: none">
-                    <label>
-                        <asp:Localize ID="locaEmergencyCaption" runat="server" meta:resourcekey="locaEmergencyCaptionResource1"
-                            Text="
-                                Emergency:"></asp:Localize>
-                        (<asp:Label ID="lblCountry" runat="server" meta:resourcekey="lblCountryResource1"></asp:Label>)
-                    </label>
-                </td>
-            </tr>
-        </table>
-        <div class="spacer" style="clear: both;">
-        </div>
-    </div>
-    <div style="display: none">
-        <div class="buttonsdiv">
-            <div class="savebutton">
-                <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
-                    Width="120px" CssClass="button_example" meta:resourcekey="btnSaveResource1" /></div>
-            <div class="buttonright">
-            </div>
-            <div class="spacer" style="clear: both;">
-            </div>
-        </div>
     </div>
     <div class="containerDataEntryMain">
         <div class="containerDataEntryProjects">
@@ -224,7 +361,7 @@
                             <asp:RequiredFieldValidator ID="rfvEmergency" runat="server" ErrorMessage="Select Emergency"
                                 InitialValue="0" Text="*" ControlToValidate="ddlEmergency" meta:resourcekey="rfvEmergencyResource1"></asp:RequiredFieldValidator>
                         </td>
-                        <td align="right">
+                        <td>
                             <label>
                                 <asp:Localize ID="locaYearMonth" runat="server" meta:resourcekey="locaYearMonthResource1"
                                     Text="
@@ -240,30 +377,45 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td colspan="2">
                             <asp:Button ID="btnOpenLocations" runat="server" Text="Locations" CausesValidation="False"
-                                CssClass="button_location" OnClick="btnLocation_Click" OnClientClick="needToConfirm = false;"
+                                CssClass="button_example" OnClick="btnLocation_Click" OnClientClick="needToConfirm = false;"
                                 meta:resourcekey="btnOpenLocationsResource1" />
+                            <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
+                                Width="100px" CssClass="button_example" meta:resourcekey="btnSaveResource1" />
                         </td>
                     </tr>
                 </table>
             </div>
             <div class="containerDataEntryProjectsInner">
-                <asp:CheckBoxList ID="cblProjects" runat="server">
-                </asp:CheckBoxList>
-                <br />
-                <br />
+                <fieldset>
+                    <legend>Projects</legend>
+                    <asp:CheckBoxList ID="cblProjects" runat="server" CssClass="checkProj">
+                    </asp:CheckBoxList>
+                    <br />
+                    <br />
+                </fieldset>
             </div>
             <div class="containerDataEntryProjectsInner">
-                <asp:CheckBoxList ID="cblObjectives" runat="server" CssClass="checkObj">
-                </asp:CheckBoxList>
-                <asp:CheckBoxList ID="cblPriorities" runat="server" CssClass="checkPr">
-                </asp:CheckBoxList>
-                <asp:Button ID="Button1" runat="server" Text="Manage Projects" CssClass="button_example" />
+                <fieldset>
+                    <legend>Strategic Objectives</legend>
+                    <asp:CheckBoxList ID="cblObjectives" runat="server" CssClass="checkObj">
+                    </asp:CheckBoxList>
+                </fieldset>
+                <fieldset>
+                    <legend>Humanitarian Priorities</legend>
+                    <asp:CheckBoxList ID="cblPriorities" runat="server" CssClass="checkPr">
+                    </asp:CheckBoxList>
+                </fieldset>
+            </div>
+            <div class="containerDataEntryProjectsInner">
+                <asp:Button ID="Button1" runat="server" Text="Manage Projects" OnClick="Button1_Click"
+                    CssClass="button_example" />
                 <br />
                 <br />
                 <br />
-                <asp:Button ID="btnTest2" runat="server" Text="Manage Activities" CssClass="button_example" />
+                <asp:Button ID="btnTest2" runat="server" Text="Manage Activities" OnClick="Button2_Click"
+                    CssClass="button_example" />
                 <br />
                 <br />
                 <br />
@@ -271,18 +423,26 @@
         </div>
         <div class="containerDataEntryGrid">
             <div class="tablegrid">
-                <div id="scrolledGridView" style="overflow-x: auto; width: 100%; height: 530px;">
+                <div id="scrolledGridView" style="overflow-x: auto; width: 100%;">
                     <asp:GridView ID="gvActivities" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True"
                         HeaderStyle-BackColor="ButtonFace" DataKeyNames="ActivityDataId" CssClass="imagetable"
-                        Width="100%" Height="530px" meta:resourcekey="gvActivitiesResource1" OnRowDataBound="gvActivities_RowDataBound">
+                        Width="100%" meta:resourcekey="gvActivitiesResource1" OnRowDataBound="gvActivities_RowDataBound">
                         <HeaderStyle BackColor="Control"></HeaderStyle>
                         <RowStyle CssClass="istrow" />
                         <AlternatingRowStyle CssClass="altcolor" />
                         <Columns>
-                            <asp:BoundField DataField="ObjectiveId" HeaderText="ObjectiveId" ItemStyle-Width="1px" />
-                            <asp:BoundField DataField="HumanitarianPriorityId" HeaderText="HumanitarianPriorityId"
-                                ItemStyle-Width="1px" HeaderStyle-CssClass="hiddenelement" />
-                            <asp:BoundField DataField="ObjAndPrId" HeaderText="objprid" ItemStyle-Width="1px" />
+                            <asp:BoundField DataField="ObjectiveId" HeaderText="objId" ItemStyle-Width="1px">
+                            </asp:BoundField>
+                            <asp:BoundField DataField="HumanitarianPriorityId" HeaderText="hpId"></asp:BoundField>
+                            <asp:BoundField DataField="ObjAndPrId" HeaderText="objprid" ItemStyle-Width="1px">
+                            </asp:BoundField>
+                            <asp:BoundField DataField="ProjectId" HeaderText="pid" ItemStyle-Width="1px"></asp:BoundField>
+                            <asp:BoundField DataField="objAndPrAndPId" HeaderText="objprpid" ItemStyle-Width="1px">
+                            </asp:BoundField>
+                            <asp:BoundField DataField="objAndPId" HeaderText="objAndPId" ItemStyle-Width="1px">
+                            </asp:BoundField>
+                            <asp:BoundField DataField="PrAndPId" HeaderText="PrAndPId" ItemStyle-Width="1px">
+                            </asp:BoundField>
                             <asp:TemplateField HeaderText="Project Code">
                                 <ItemTemplate>
                                     <asp:Label ID="lblProjectcode" runat="server" Text='<%#Eval("ClusterName") %>' ToolTip='<%#Eval("ProjectTitle") %>'></asp:Label>
