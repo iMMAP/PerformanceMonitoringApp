@@ -219,8 +219,7 @@ CSS for Login, Register, ForgotPassword, ChagnePassword
 
 .containerDataEntryGrid
 {
-    width: 79%;
-    height:540px;
+    width: 79%;    
     overflow: auto;
     float: right;
     margin: 0 auto;
