@@ -28,40 +28,66 @@
         }
     </style>
     <script type="text/javascript">
-
-        $(function () {
-            if ($('#<%=rbtnUser.ClientID%>').is(':checked')) {
-                $('#chkCountriesMessage').text('Normal user, can only be registered in one country and can enter data.');
-                $('#trLocations').hide();
-                $('#trCountry').show();
-            }
-
-            if ($('#<%=rbtnCountryAdmin.ClientID%>').is(':checked')) {
-                $('#chkCountriesMessage').text('Country Admin. Country admin can be in multiple countries. This user can administrate country level data.');
-                $('#trLocations').show();
-                $('#trCountry').hide();
-                var validator = document.getElementById('<%=rfvCountry.ClientID%>');
-                ValidatorEnable(validator, false);
-            }
-
-            $('#<%=rbtnUser.ClientID%>').change(function () {
-                if ($('#<%=rbtnUser.ClientID%>').is(':checked')) {
-                    $('#chkCountriesMessage').text('Normal user, can only be registered in one country and can enter data.');
-                    $('#trLocations').hide();
-                    $('#trCountry').show();
+        function pageLoad() {
+            $(function () {
+                if ($('#<%=rbtnClusterLead.ClientID%>').is(':checked')) {                    
+                    $('#trClusters').show();
                 }
-            });
-
-            $('#<%=rbtnCountryAdmin.ClientID%>').change(function () {
-                if ($('#<%=rbtnCountryAdmin.ClientID%>').is(':checked')) {
-                    $('#chkCountriesMessage').text('Country Admin. Country admin can be in multiple countries. This user can administrate country level data.');
-                    $('#trLocations').show();
-                    $('#trCountry').hide();
-                    var validator = document.getElementById('<%=rfvCountry.ClientID%>');
-                    ValidatorEnable(validator, false);
+                else {
+                    $('#trClusters').hide();
                 }
+
+                $('#<%=rbtnUser.ClientID%>').change(function () {
+                    if ($('#<%=rbtnUser.ClientID%>').is(':checked')) {
+                        $('#trClusters').hide();
+                    }
+                });
+
+                $('#<%=rbtnClusterLead.ClientID%>').change(function () {
+                    if ($('#<%=rbtnClusterLead.ClientID%>').is(':checked')) {
+                        $('#trClusters').show();
+                    }
+                });
+
+                $('#<%=rbtnCountryAdmin.ClientID%>').change(function () {
+                    if ($('#<%=rbtnCountryAdmin.ClientID%>').is(':checked')) {
+                        $('#trClusters').hide();
+                    }
+                });
             });
-        });
+        }
+        function ValidateLocationsList(source, args) {
+            var chkListModules = document.getElementById('<%= ddlLocations.ClientID %>');
+            var chkListinputs = chkListModules.getElementsByTagName("input");
+            for (var i = 0; i < chkListinputs.length; i++) {
+                if (chkListinputs[i].checked) {
+                    args.IsValid = true;
+                    return;
+                }
+            }
+            args.IsValid = false;
+        }
+
+
+
+        function ValidateClustersList(source, args) {
+
+            if (document.getElementById('<%=rbtnClusterLead.ClientID%>').checked) {
+
+                var chkListModules = document.getElementById('<%= ddlClusters.ClientID %>');
+                var chkListinputs = chkListModules.getElementsByTagName("input");
+                for (var i = 0; i < chkListinputs.length; i++) {
+                    if (chkListinputs[i].checked) {
+                        args.IsValid = true;
+                        return;
+                    }
+                }
+                args.IsValid = false;
+            }
+            else {
+                args.IsValid = true;
+            }
+        }
     </script>
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
@@ -97,7 +123,7 @@
                                     <asp:TextBox ID="txtUserName" runat="server" MaxLength="256" CssClass="ddlWidth"></asp:TextBox>
                                 </td>
                                 <td>
-                                    <asp:RequiredFieldValidator ID="rfvUserName" runat="server" ErrorMessage="Password Required"
+                                    <asp:RequiredFieldValidator ID="rfvUserName" runat="server" ErrorMessage="UserName Required"
                                         CssClass="error2" Text="Required" ControlToValidate="txtUserName"></asp:RequiredFieldValidator>
                                 </td>
                             </tr>
@@ -174,40 +200,48 @@
                             <tr>
                             </tr>
                             <tr>
+                                <td width="109px">
+                                    <label>
+                                        <asp:Literal ID="ltrlLocation" runat="server" Text="Country:"></asp:Literal></label>
+                                </td>
+                                <td>
+                                    <cc:DropDownCheckBoxes ID="ddlLocations" runat="server" CssClass="ddlWidth" UseSelectAllNode="false">
+                                        <Texts SelectBoxCaption="Select Your Country" />
+                                    </cc:DropDownCheckBoxes>
+                                </td>
+                                <td>
+                                    <asp:CustomValidator runat="server" ForeColor="Red" ID="cvmodulelist" ClientValidationFunction="ValidateLocationsList"
+                                        ErrorMessage="Select atleast one Country."></asp:CustomValidator>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td colspan="3">
                                     <div id="divUserRoles" runat="server">
                                         <asp:RadioButton ID="rbtnUser" runat="server" Text="User" GroupName="Roles" Checked="true" />
+                                        <asp:RadioButton ID="rbtnClusterLead" runat="server" Text="Cluster Lead" GroupName="Roles" />
                                         <asp:RadioButton ID="rbtnCountryAdmin" runat="server" Text="Country Admin" GroupName="Roles" />
                                     </div>
                                     <div id="chkCountriesMessage">
                                     </div>
                                 </td>
                             </tr>
-                            <tr id="trCountry">
-                                <td width="109px">
+                            <tr id="trClusters">
+                                <td>
                                     <label>
-                                        Country:</label>
+                                        Cluster:
+                                    </label>
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="ddlCountry" runat="server" CssClass="ddlWidth">
-                                    </asp:DropDownList>
-                                </td>
-                                <td>
-                                    <asp:RequiredFieldValidator ID="rfvCountry" runat="server" ErrorMessage="Country Required"
-                                        CssClass="error2" Text="Required" InitialValue="0" ControlToValidate="ddlCountry"></asp:RequiredFieldValidator>
-                                </td>
-                            </tr>
-                            <tr id="trLocations">
-                                <td width="109px">
-                                    <label>
-                                        <asp:Literal ID="ltrlLocation" runat="server" Text="Country:"></asp:Literal></label>
-                                </td>
-                                <td>
-                                    <cc:DropDownCheckBoxes ID="ddlLocations" runat="server" CssClass="ddlWidth">
-                                        <Texts SelectBoxCaption="Select Your Country" />
+                                    <cc:DropDownCheckBoxes ID="ddlClusters" runat="server" AddJQueryReference="True"
+                                        meta:resourcekey="checkBoxes2Resource1" UseButtons="False" CssClass="ddlWidth"
+                                        UseSelectAllNode="False">
+                                        <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
+                                        <Texts SelectBoxCaption="Select Clusters" />
                                     </cc:DropDownCheckBoxes>
                                 </td>
                                 <td>
+                                    <asp:CustomValidator runat="server" ForeColor="Red" ID="CustomValidator1" ClientValidationFunction="ValidateClustersList"
+                                        ErrorMessage="Select atleast one Cluster."></asp:CustomValidator>
                                 </td>
                             </tr>
                         </table>

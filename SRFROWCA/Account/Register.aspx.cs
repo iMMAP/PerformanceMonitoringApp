@@ -22,18 +22,22 @@ namespace SRFROWCA.Account
 
             if (!this.User.IsInRole("Admin"))
             {
-                divUserRoles.Visible = false;
-                ddlLocations.Visible = false;
-                ltrlLocation.Visible = false;
+                //divUserRoles.Visible = false;
+                //ddlLocations.Visible = false;
+                //ltrlLocation.Visible = false;
 
                 this.Form.DefaultButton = this.btnRegister.UniqueID;
                 this.SetFocus(this.txtUserName);
             }
 
-            
-
             PopulateCountries();
             PopulateOrganizations();
+            PopulateClusters();
+        }
+
+        private void PopulateClusters()
+        {
+            UI.FillClusters(ddlClusters, 1);
         }
 
         private void PopulateControlsWithUserInfo(DataTable dt)
@@ -59,6 +63,7 @@ namespace SRFROWCA.Account
             bool returnValue = false;
             try
             {
+                if (!Valid()) return;
                 // If user already exists return.
                 if (IsUserAlreadyExits()) return;
 
@@ -87,7 +92,7 @@ namespace SRFROWCA.Account
                         }
                         else
                         {
-                            mailBody = "Dear Adim! Please activitate my account " + txtUserName.Text.Trim();
+                            mailBody = "Dear Admin! Please activitate my account " + txtUserName.Text.Trim();
                             Mail.SendMail(from, to, subject, mailBody);
                             message = @"You have been registered successfully, we will verify your
                                         credentials and activate your account in few hours!";
@@ -99,7 +104,6 @@ namespace SRFROWCA.Account
                     }
                 }
 
-
                 ShowMessage(message, ROWCACommon.NotificationType.Success, false, 500);
 
                 ClearRegistrationControls();
@@ -108,6 +112,31 @@ namespace SRFROWCA.Account
             {
                 ShowMessage(ex.Message);
             }
+        }
+
+        private bool Valid()
+        {
+            string countryIds = ROWCACommon.GetSelectedValues(ddlLocations);
+            string clusterIds = ROWCACommon.GetSelectedValues(ddlClusters);
+
+            string message = "";
+            if (string.IsNullOrEmpty(countryIds))
+            {
+                message = "Please select at least one country.";
+            }
+
+            if (rbtnClusterLead.Checked && string.IsNullOrEmpty(clusterIds))
+            {
+                message += " Please select your cluster(s).";
+            }
+
+            if (!string.IsNullOrEmpty(message))
+            {
+                ShowMessage(message, ROWCACommon.NotificationType.Error, false);
+                return false;
+            }
+
+            return true;
         }
 
         private void ClearRegistrationControls()
@@ -121,25 +150,25 @@ namespace SRFROWCA.Account
                 ddlOrganization.SelectedIndex = 0;
             }
 
-            if (ddlCountry.Items.Count > 0)
-            {
-                ddlCountry.SelectedIndex = 0;
-            }
+            //if (ddlCountry.Items.Count > 0)
+            //{
+            //    ddlCountry.SelectedIndex = 0;
+            //}
 
         }
 
         // Populate countries drop down.
         private void PopulateCountries()
         {
-            ddlCountry.DataValueField = "LocationId";
-            ddlCountry.DataTextField = "LocationName";
+            //ddlCountry.DataValueField = "LocationId";
+            //ddlCountry.DataTextField = "LocationName";
 
             DataTable dt = ROWCACommon.GetLocations(this.User, (int)ROWCACommon.LocationTypes.National);
-            ddlCountry.DataSource = dt;
-            ddlCountry.DataBind();
+            //ddlCountry.DataSource = dt;
+            //ddlCountry.DataBind();
 
-            ListItem item = new ListItem("Select Your Country", "0");
-            ddlCountry.Items.Insert(0, item);
+            //ListItem item = new ListItem("Select Your Country", "0");
+            //ddlCountry.Items.Insert(0, item);
 
             ddlLocations.DataValueField = "LocationId";
             ddlLocations.DataTextField = "LocationName";
@@ -206,24 +235,26 @@ namespace SRFROWCA.Account
 
             // User details are organization and country.
             CreateUserDetails(userId);
-
-            CreateUserOffice(userId);
             return true;
-        }
-
-        // If user office does not exists on selected organization and lcoation
-        // then create one
-        private void CreateUserOffice( Guid userId)
-        {
-            if (!IsOrganizationOfficeExists())
-            {
-                CreateOffice(userId);
-            }
         }
 
         private void AddRecordInRoles(Guid userId)
         {
-            string roleName = rbtnCountryAdmin.Checked ? "CountryAdmin" : "User";
+            string roleName = "User";
+
+            if (rbtnCountryAdmin.Checked)
+            {
+                roleName = "CountryAdmin";
+            }
+            else if (rbtnClusterLead.Checked)
+            {
+                roleName = "ClusterLead";
+            }
+            else if (rbtnUser.Checked)
+            {
+                roleName = "User";
+            }
+
             DBContext.Add("InsertUserInRole", new object[] { userId, roleName, DBNull.Value });
         }
 
@@ -251,73 +282,35 @@ namespace SRFROWCA.Account
         // OrganizationId and LocationId i.e. country of user.
         private void CreateUserDetails(Guid userId)
         {
+            InsertLocationsAndOrg(userId);
+            InsertClusters(userId);
+            
+        }
+
+        private void InsertClusters(Guid userId)
+        {
+            if (rbtnClusterLead.Checked)
+            {
+                string clusterIds = ROWCACommon.GetSelectedValues(ddlClusters);
+                DBContext.Add("InsertASPNetUserClusters", new object[] { userId, clusterIds, DBNull.Value });
+            }
+        }
+
+        private void InsertLocationsAndOrg(Guid userId)
+        {
             object[] userValues = GetUserValues(userId);
-            if (ROWCACommon.IsAdmin(this.User))
-            {
-                DBContext.Add("InsertASPNetUserCustomWithMultipleLocations", userValues);
-            }
-            else
-            {
-                DBContext.Add("InsertASPNetUserCustom", userValues);
-            }
+            DBContext.Add("InsertASPNetUserCustomWithMultipleLocations", userValues);
         }
 
         private object[] GetUserValues(Guid userId)
         {
             int orgId = 0;
             int.TryParse(ddlOrganization.SelectedValue, out orgId);
-            string countryId = null;
-
-            if (ROWCACommon.IsAdmin(this.User))
-            {
-                countryId = ReportsCommon.GetSelectedValues(ddlLocations);
-                if (countryId == null)
-                {
-                    countryId = ddlCountry.SelectedValue;
-                }
-            }
-            else
-            {
-                countryId = ddlCountry.SelectedValue;
-            }
-
+            string countryIds = null;
+            countryIds = ROWCACommon.GetSelectedValues(ddlLocations);
             string phone = txtPhone.Text.Trim().Length > 0 ? txtPhone.Text.Trim() : null;
 
-            return new object[] { userId, orgId, countryId, phone, DBNull.Value };
-        }
-
-        // If selected organization office exists on selected locaiton
-        private bool IsOrganizationOfficeExists()
-        {
-            int orgId = 0;
-            int.TryParse(ddlOrganization.SelectedValue, out orgId);
-
-            int locId = 0;
-            int.TryParse(ddlCountry.SelectedValue, out locId);
-
-            if (orgId > 0 && locId > 0)
-            {
-                return DBContext.GetData("GetOrganizationOffices", new object[] { locId, orgId }).Rows.Count > 0;
-            }
-
-            return false;
-        }
-
-        // Create user's office on organization and location
-        private void CreateOffice(Guid userId)
-        {
-            int orgId = 0;
-            int.TryParse(ddlOrganization.SelectedValue, out orgId);
-
-            int locId = 0;
-            int.TryParse(ddlCountry.SelectedValue, out locId);
-
-            string officeName = ddlOrganization.SelectedItem.Text + " " + ddlCountry.SelectedItem.Text;
-
-            if (orgId > 0 && locId > 0)
-            {
-                DBContext.Add("InsertOffice", new object[] { orgId, locId, officeName, userId, DBNull.Value });
-            }
+            return new object[] { userId, orgId, countryIds, phone, DBNull.Value };
         }
 
         private void ShowMessage(string message, ROWCACommon.NotificationType notificationType = ROWCACommon.NotificationType.Success, bool fadeOut = true, int animationTime = 500)

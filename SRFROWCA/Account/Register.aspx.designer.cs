@@ -157,6 +157,33 @@ namespace SRFROWCA.Account {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvOrganization;
         
         /// <summary>
+        /// ltrlLocation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltrlLocation;
+        
+        /// <summary>
+        /// ddlLocations control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Saplin.Controls.DropDownCheckBoxes ddlLocations;
+        
+        /// <summary>
+        /// cvmodulelist control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvmodulelist;
+        
+        /// <summary>
         /// divUserRoles control.
         /// </summary>
         /// <remarks>
@@ -175,6 +202,15 @@ namespace SRFROWCA.Account {
         protected global::System.Web.UI.WebControls.RadioButton rbtnUser;
         
         /// <summary>
+        /// rbtnClusterLead control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rbtnClusterLead;
+        
+        /// <summary>
         /// rbtnCountryAdmin control.
         /// </summary>
         /// <remarks>
@@ -184,40 +220,22 @@ namespace SRFROWCA.Account {
         protected global::System.Web.UI.WebControls.RadioButton rbtnCountryAdmin;
         
         /// <summary>
-        /// ddlCountry control.
+        /// ddlClusters control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCountry;
+        protected global::Saplin.Controls.DropDownCheckBoxes ddlClusters;
         
         /// <summary>
-        /// rfvCountry control.
+        /// CustomValidator1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCountry;
-        
-        /// <summary>
-        /// ltrlLocation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltrlLocation;
-        
-        /// <summary>
-        /// ddlLocations control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Saplin.Controls.DropDownCheckBoxes ddlLocations;
+        protected global::System.Web.UI.WebControls.CustomValidator CustomValidator1;
         
         /// <summary>
         /// btnRegister control.
