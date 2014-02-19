@@ -18,6 +18,14 @@ namespace SRFROWCA.Common
             control.DataBind();
         }
 
+        internal static void FillClusters(DropDownCheckBoxes control, int languageId)
+        {
+            control.DataValueField = "ClusterId";
+            control.DataTextField = "ClusterName";
+            control.DataSource = DBContext.GetData("GetAllClusters", new object[] { languageId });
+            control.DataBind();
+        }
+
         // Populate Emergency Clusters drop down.
         internal static void FillEmergnecyClusters(CheckBoxList cbl, DataTable dt)
         {
@@ -64,15 +72,6 @@ namespace SRFROWCA.Common
             ddl.DataSource = DBContext.GetData("GetOrganizations", new object[] { orgId });
             ddl.DataBind();
         }
-
-        //internal static void FillObjectives(DropDownCheckBoxes ddl, DataTable dt)
-        //{
-        //    ddl.DataValueField = "ClusterObjectiveId";
-        //    ddl.DataTextField = "ObjectiveName";
-
-        //    ddl.DataSource = dt;
-        //    ddl.DataBind();
-        //}
 
         internal static void FillAllObjectives(DropDownList ddl, DataTable dt)
         {
