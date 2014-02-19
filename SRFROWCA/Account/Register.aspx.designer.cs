@@ -166,22 +166,22 @@ namespace SRFROWCA.Account {
         protected global::System.Web.UI.WebControls.Literal ltrlLocation;
         
         /// <summary>
-        /// ddlLocations control.
+        /// ddlCountry control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Saplin.Controls.DropDownCheckBoxes ddlLocations;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCountry;
         
         /// <summary>
-        /// cvmodulelist control.
+        /// RequiredFieldValidator2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator cvmodulelist;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
         
         /// <summary>
         /// divUserRoles control.
@@ -226,7 +226,7 @@ namespace SRFROWCA.Account {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Saplin.Controls.DropDownCheckBoxes ddlClusters;
+        protected global::System.Web.UI.WebControls.DropDownList ddlClusters;
         
         /// <summary>
         /// CustomValidator1 control.

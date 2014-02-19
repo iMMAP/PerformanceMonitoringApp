@@ -38,6 +38,8 @@ namespace SRFROWCA.Account
         private void PopulateClusters()
         {
             UI.FillClusters(ddlClusters, 1);
+            ListItem item = new ListItem("Select Your Cluster", "0");
+            ddlClusters.Items.Insert(0, item);
         }
 
         private void PopulateControlsWithUserInfo(DataTable dt)
@@ -116,14 +118,14 @@ namespace SRFROWCA.Account
 
         private bool Valid()
         {
-            string countryIds = ROWCACommon.GetSelectedValues(ddlLocations);
+            //string countryIds = ROWCACommon.GetSelectedValues(ddlLocations);
             string clusterIds = ROWCACommon.GetSelectedValues(ddlClusters);
 
             string message = "";
-            if (string.IsNullOrEmpty(countryIds))
-            {
-                message = "Please select at least one country.";
-            }
+            //if (string.IsNullOrEmpty(countryIds))
+            //{
+            //    message = "Please select at least one country.";
+            //}
 
             if (rbtnClusterLead.Checked && string.IsNullOrEmpty(clusterIds))
             {
@@ -150,30 +152,30 @@ namespace SRFROWCA.Account
                 ddlOrganization.SelectedIndex = 0;
             }
 
-            //if (ddlCountry.Items.Count > 0)
-            //{
-            //    ddlCountry.SelectedIndex = 0;
-            //}
+            if (ddlCountry.Items.Count > 0)
+            {
+                ddlCountry.SelectedIndex = 0;
+            }
 
         }
 
         // Populate countries drop down.
         private void PopulateCountries()
         {
-            //ddlCountry.DataValueField = "LocationId";
-            //ddlCountry.DataTextField = "LocationName";
+            ddlCountry.DataValueField = "LocationId";
+            ddlCountry.DataTextField = "LocationName";
 
             DataTable dt = ROWCACommon.GetLocations(this.User, (int)ROWCACommon.LocationTypes.National);
-            //ddlCountry.DataSource = dt;
-            //ddlCountry.DataBind();
+            ddlCountry.DataSource = dt;
+            ddlCountry.DataBind();
 
-            //ListItem item = new ListItem("Select Your Country", "0");
-            //ddlCountry.Items.Insert(0, item);
+            ListItem item = new ListItem("Select Your Country", "0");
+            ddlCountry.Items.Insert(0, item);
 
-            ddlLocations.DataValueField = "LocationId";
-            ddlLocations.DataTextField = "LocationName";
-            ddlLocations.DataSource = dt;
-            ddlLocations.DataBind();
+            //ddlLocations.DataValueField = "LocationId";
+            //ddlLocations.DataTextField = "LocationName";
+            //ddlLocations.DataSource = dt;
+            //ddlLocations.DataBind();
         }
 
         // Populate countries drop down.
@@ -291,26 +293,26 @@ namespace SRFROWCA.Account
         {
             if (rbtnClusterLead.Checked)
             {
-                string clusterIds = ROWCACommon.GetSelectedValues(ddlClusters);
-                DBContext.Add("InsertASPNetUserClusters", new object[] { userId, clusterIds, DBNull.Value });
+                int clusterId = Convert.ToInt32(ddlClusters.SelectedValue);
+                DBContext.Add("InsertASPNetUserCluster", new object[] { userId, clusterId, DBNull.Value });
             }
         }
 
         private void InsertLocationsAndOrg(Guid userId)
         {
             object[] userValues = GetUserValues(userId);
-            DBContext.Add("InsertASPNetUserCustomWithMultipleLocations", userValues);
+            DBContext.Add("InsertASPNetUserCustom", userValues);
         }
 
         private object[] GetUserValues(Guid userId)
         {
             int orgId = 0;
             int.TryParse(ddlOrganization.SelectedValue, out orgId);
-            string countryIds = null;
-            countryIds = ROWCACommon.GetSelectedValues(ddlLocations);
+            string countryId = null;
+            countryId = ddlCountry.SelectedValue;
             string phone = txtPhone.Text.Trim().Length > 0 ? txtPhone.Text.Trim() : null;
 
-            return new object[] { userId, orgId, countryIds, phone, DBNull.Value };
+            return new object[] { userId, orgId, countryId, phone, DBNull.Value };
         }
 
         private void ShowMessage(string message, ROWCACommon.NotificationType notificationType = ROWCACommon.NotificationType.Success, bool fadeOut = true, int animationTime = 500)

@@ -30,7 +30,7 @@
     <script type="text/javascript">
         function pageLoad() {
             $(function () {
-                if ($('#<%=rbtnClusterLead.ClientID%>').is(':checked')) {                    
+                if ($('#<%=rbtnClusterLead.ClientID%>').is(':checked')) {
                     $('#trClusters').show();
                 }
                 else {
@@ -56,33 +56,18 @@
                 });
             });
         }
-        function ValidateLocationsList(source, args) {
-            var chkListModules = document.getElementById('<%= ddlLocations.ClientID %>');
-            var chkListinputs = chkListModules.getElementsByTagName("input");
-            for (var i = 0; i < chkListinputs.length; i++) {
-                if (chkListinputs[i].checked) {
-                    args.IsValid = true;
-                    return;
-                }
-            }
-            args.IsValid = false;
-        }
-
-
 
         function ValidateClustersList(source, args) {
 
             if (document.getElementById('<%=rbtnClusterLead.ClientID%>').checked) {
-
-                var chkListModules = document.getElementById('<%= ddlClusters.ClientID %>');
-                var chkListinputs = chkListModules.getElementsByTagName("input");
-                for (var i = 0; i < chkListinputs.length; i++) {
-                    if (chkListinputs[i].checked) {
-                        args.IsValid = true;
-                        return;
-                    }
+                var ddl = document.getElementById('<%= ddlClusters.ClientID %>');                
+                if (ddl.options[ddl.selectedIndex].value === '0') {
+                   
+                    args.IsValid = false;
                 }
-                args.IsValid = false;
+                else {
+                    args.IsValid = true;
+                }
             }
             else {
                 args.IsValid = true;
@@ -205,13 +190,12 @@
                                         <asp:Literal ID="ltrlLocation" runat="server" Text="Country:"></asp:Literal></label>
                                 </td>
                                 <td>
-                                    <cc:DropDownCheckBoxes ID="ddlLocations" runat="server" CssClass="ddlWidth" UseSelectAllNode="false">
-                                        <Texts SelectBoxCaption="Select Your Country" />
-                                    </cc:DropDownCheckBoxes>
+                                    <asp:DropDownList ID="ddlCountry" runat="server" CssClass="ddlWidth">
+                                    </asp:DropDownList>
                                 </td>
                                 <td>
-                                    <asp:CustomValidator runat="server" ForeColor="Red" ID="cvmodulelist" ClientValidationFunction="ValidateLocationsList"
-                                        ErrorMessage="Select atleast one Country."></asp:CustomValidator>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Location Required"
+                                        CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCountry"></asp:RequiredFieldValidator>
                                 </td>
                             </tr>
                             <tr>
@@ -232,12 +216,8 @@
                                     </label>
                                 </td>
                                 <td>
-                                    <cc:DropDownCheckBoxes ID="ddlClusters" runat="server" AddJQueryReference="True"
-                                        meta:resourcekey="checkBoxes2Resource1" UseButtons="False" CssClass="ddlWidth"
-                                        UseSelectAllNode="False">
-                                        <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
-                                        <Texts SelectBoxCaption="Select Clusters" />
-                                    </cc:DropDownCheckBoxes>
+                                    <asp:DropDownList ID="ddlClusters" runat="server" CssClass="ddlWidth">
+                                    </asp:DropDownList>
                                 </td>
                                 <td>
                                     <asp:CustomValidator runat="server" ForeColor="Red" ID="CustomValidator1" ClientValidationFunction="ValidateClustersList"
