@@ -62,20 +62,23 @@ namespace SRFROWCA.Pages
 
         private void PopulateProjects(DataTable dtActivities)
         {
-            cblProjects.DataValueField = "ProjectId";
-            cblProjects.DataTextField = "ClusterName";
-            DataView view = new DataView(dtActivities);
-            DataTable dt = view.ToTable(true, "ProjectId", "ClusterName", "ProjectTitle");
-            cblProjects.DataSource = dt;
-            cblProjects.DataBind();
-
-            foreach (DataRow dr in dt.Rows)
+            if (dtActivities.Rows.Count > 0)
             {
-                foreach (ListItem item in cblProjects.Items)
+                cblProjects.DataValueField = "ProjectId";
+                cblProjects.DataTextField = "ClusterName";
+                DataView view = new DataView(dtActivities);
+                DataTable dt = view.ToTable(true, "ProjectId", "ClusterName", "ProjectTitle");
+                cblProjects.DataSource = dt;
+                cblProjects.DataBind();
+
+                foreach (DataRow dr in dt.Rows)
                 {
-                    if (item.Value == dr["ProjectId"].ToString())
+                    foreach (ListItem item in cblProjects.Items)
                     {
-                        item.Attributes["title"] = dr["ProjectTitle"].ToString();
+                        if (item.Value == dr["ProjectId"].ToString())
+                        {
+                            item.Attributes["title"] = dr["ProjectTitle"].ToString();
+                        }
                     }
                 }
             }
@@ -983,16 +986,7 @@ namespace SRFROWCA.Pages
         }
 
         #endregion
-
-        protected void Button1_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Pages/CreateProject.aspx");
-        }
-
-        protected void Button2_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Pages/ManageActivities.aspx");
-        }
+        
     }
 
     public class GridViewTemplate : ITemplate

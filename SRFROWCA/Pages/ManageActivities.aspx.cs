@@ -16,7 +16,13 @@ namespace SRFROWCA.Pages
         {
             if (IsPostBack) return;
             PopulateProjects();
-            PopulateLocations();
+            
+
+            if(rblProjects.Items.Count > 0)
+            {
+                rblProjects.SelectedIndex = 0;
+                PopulateLogFrame();
+            }
 
         }
 
@@ -28,16 +34,16 @@ namespace SRFROWCA.Pages
             cblLocation.DataSource = dt;
             cblLocation.DataBind();
 
-           
+
         }
 
         private void PopulateProjects()
         {
-            ddlProjects.DataValueField = "ProjectId";
-            ddlProjects.DataTextField = "ProjectTitle";
+            rblProjects.DataValueField = "ProjectId";
+            rblProjects.DataTextField = "ProjectCode";
             DataTable dt = DBContext.GetData("GetAllProjectsTest");
-            ddlProjects.DataSource = dt;
-            ddlProjects.DataBind();
+            rblProjects.DataSource = dt;
+            rblProjects.DataBind();
 
             Session["testprojectdata"] = dt;
             //
@@ -47,12 +53,32 @@ namespace SRFROWCA.Pages
         {
             if (e.NextStepIndex == 1)
             {
-                PopulateLogFrame();
+                //PopulateLogFrame();
+                PopulateLocations();
             }
             else if (e.NextStepIndex == 2)
             {
-               
+                PopulateLogFrame2();
             }
+        }
+
+        private void PopulateLogFrame2()
+        {
+            int projectId = Convert.ToInt32(rblProjects.SelectedValue);
+
+            int clusterId = 0;
+            DataTable dt = Session["testprojectdata"] as DataTable;
+            foreach (DataRow dr in dt.Rows)
+            {
+                if (dr["ProjectId"].ToString() == projectId.ToString())
+                {
+                    clusterId = Convert.ToInt32(dr["ClusterId"]);
+                }
+            }
+
+
+            gvActLoc.DataSource = DBContext.GetData("GetLogFrameOfClusterTest2", new object[] { clusterId, 1 });
+            gvActLoc.DataBind();
         }
 
         protected void wzrdReport_FinishButtonClick(object sender, WizardNavigationEventArgs e)
@@ -63,20 +89,26 @@ namespace SRFROWCA.Pages
 
         private void PopulateLogFrame()
         {
-            int projectId = Convert.ToInt32(ddlProjects.SelectedValue);
+            int projectId = Convert.ToInt32(rblProjects.SelectedValue);
 
             int clusterId = 0;
             DataTable dt = Session["testprojectdata"] as DataTable;
-            foreach(DataRow dr in dt.Rows)
+            foreach (DataRow dr in dt.Rows)
             {
-                if(dr["ProjectId"].ToString() == projectId.ToString())
+                if (dr["ProjectId"].ToString() == projectId.ToString())
                 {
-                    clusterId = Convert.ToInt32( dr["ClusterId"]);
+                    clusterId = Convert.ToInt32(dr["ClusterId"]);
                 }
             }
 
             gvActivities.DataSource = DBContext.GetData("GetLogFrameOfClusterTest", new object[] { clusterId, 1 });
             gvActivities.DataBind();
+        }
+
+        protected void rblProjects_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //int projectId = Convert.ToInt32(rblProjects.SelectedValue);
+            PopulateLogFrame();
         }
 
         protected void wzrdReport_PreviousButtonClick(object sender, WizardNavigationEventArgs e)
@@ -90,11 +122,11 @@ namespace SRFROWCA.Pages
 
         private void Save()
         {
-            foreach (GridViewRow row in gvActivities.Rows)
+            foreach (GridViewRow row in gvActLoc.Rows)
             {
                 if (row.RowType == DataControlRowType.DataRow)
                 {
-                    int pId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["PriorityActivityId"].ToString());
+                    int pId = Convert.ToInt32(gvActLoc.DataKeys[row.RowIndex].Values["PriorityActivityId"].ToString());
                     TextBox txtBale = row.FindControl("txtBale") as TextBox;
                     int? tBale = null;
                     if (txtBale != null)
@@ -109,7 +141,7 @@ namespace SRFROWCA.Pages
                         tBanwa = string.IsNullOrEmpty(txtBanwa.Text.Trim()) ? (int?)null : Convert.ToInt32(txtBanwa.Text.Trim());
                     }
                     Guid userId = ROWCACommon.GetCurrentUserId();
-                    int projectId = Convert.ToInt32(ddlProjects.SelectedValue);
+                    int projectId = Convert.ToInt32(rblProjects.SelectedValue);
 
                     if (tBale != null || tBanwa != null)
                     {

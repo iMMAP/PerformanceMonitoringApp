@@ -98,7 +98,6 @@
 
                 showAllObj();
                 if (selectedProjects.length > 0 && selectedObjs.length > 0 && selectedPr.length > 0) {
-                    alert('in all');
                     hideAllObj();
                     for (k = 0; k < selectedProjects.length; k++) {
                         for (i = 0; i < selectedObjs.length; i++) {
@@ -113,7 +112,6 @@
                     }
                 }
                 else if (selectedProjects.length > 0 && selectedObjs.length > 0) {
-                    alert('in p and obj');
                     hideAllObj();
                     for (k = 0; k < selectedProjects.length; k++) {
                         for (i = 0; i < selectedObjs.length; i++) {
@@ -126,7 +124,6 @@
                     }
                 }
                 else if (selectedProjects.length > 0 && selectedPr.length > 0) {
-                    alert('P and Pr');
                     hideAllObj();
                     for (k = 0; k < selectedProjects.length; k++) {
                         for (j = 0; j < selectedPr.length; j++) {
@@ -138,7 +135,6 @@
                     }
                 }
                 else if (selectedObjs.length > 0 && selectedPr.length > 0) {
-                    alert('obj and PR');
                     hideAllObj();
                     for (i = 0; i < selectedObjs.length; i++) {
                         for (j = 0; j < selectedPr.length; j++) {
@@ -150,7 +146,6 @@
                     }
                 }
                 else if (selectedProjects.length > 0) {
-                    alert('in P');
                     hideAllObj();
                     var i;
                     for (i = 0; i < selectedProjects.length; i++) {
@@ -158,7 +153,6 @@
                     }
                 }
                 else if (selectedObjs.length > 0) {
-                    alert('in obj');
                     hideAllObj();
                     var i;
                     for (i = 0; i < selectedObjs.length; i++) {
@@ -326,7 +320,7 @@
         }
 
         function showObjAndProject(objPId) {
-            alert(objPId);
+
             $('.istrow, .altcolor').find('td:nth-child(6)').each(function (i) {
                 if ($(this).text() === objPId || objPId === '0') {
                     $(this).parent().show();
@@ -376,15 +370,6 @@
                             </asp:DropDownList>
                         </td>
                     </tr>
-                    <tr>
-                        <td colspan="2">
-                            <asp:Button ID="btnOpenLocations" runat="server" Text="Locations" CausesValidation="False"
-                                CssClass="button_example" OnClick="btnLocation_Click" OnClientClick="needToConfirm = false;"
-                                meta:resourcekey="btnOpenLocationsResource1" />
-                            <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
-                                Width="100px" CssClass="button_example" meta:resourcekey="btnSaveResource1" />
-                        </td>
-                    </tr>
                 </table>
             </div>
             <div class="containerDataEntryProjectsInner">
@@ -409,20 +394,39 @@
                 </fieldset>
             </div>
             <div class="containerDataEntryProjectsInner">
-                <asp:Button ID="Button1" runat="server" Text="Manage Projects" OnClick="Button1_Click"
-                    CssClass="button_example" />
+                <b><a href="/Pages/CreateProject.aspx">Manage Projects</a></b>
+                <%--<asp:Button ID="Button1" runat="server" Text="Manage Projects" OnClick="Button1_Click"
+                    CssClass="button_example" />--%>
+                <br />
+                <br />
+                <b><a href="/Pages/ManageActivities.aspx">Manage Activities</a></b>
+                <%--<asp:Button ID="btnTest2" runat="server" Text="Manage Activities" OnClick="Button2_Click"
+                    CssClass="button_example" />--%>
                 <br />
                 <br />
                 <br />
-                <asp:Button ID="btnTest2" runat="server" Text="Manage Activities" OnClick="Button2_Click"
-                    CssClass="button_example" />
+                <asp:Button ID="btnOpenLocations" runat="server" Text="Manage Locations" CausesValidation="False"
+                    CssClass="button_example" OnClick="btnLocation_Click" OnClientClick="needToConfirm = false;"
+                    meta:resourcekey="btnOpenLocationsResource1" />
                 <br />
+                <br />
+                <br />
+                <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
+                    Width="100px" CssClass="button_example" meta:resourcekey="btnSaveResource1" />
                 <br />
                 <br />
             </div>
         </div>
         <div class="containerDataEntryGrid">
             <div class="tablegrid">
+            <div>
+                <div>
+                <asp:Button ID="btnExport" runat="server" Text="Export (PDF)" />
+                </div>
+                <div  style="float:right">
+                    <label>YA => Yearly Target &nbsp;&nbsp; &nbsp; T => Target &nbsp;&nbsp;&nbsp; A => Achieved</label>
+                    </div>
+                </div>
                 <div id="scrolledGridView" style="overflow-x: auto; width: 100%;">
                     <asp:GridView ID="gvActivities" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True"
                         HeaderStyle-BackColor="ButtonFace" DataKeyNames="ActivityDataId" CssClass="imagetable"
@@ -431,17 +435,41 @@
                         <RowStyle CssClass="istrow" />
                         <AlternatingRowStyle CssClass="altcolor" />
                         <Columns>
-                            <asp:BoundField DataField="ObjectiveId" HeaderText="objId" ItemStyle-Width="1px">
+                            <asp:BoundField DataField="ObjectiveId" HeaderText="ObjectiveId" ItemStyle-Width="1px"
+                                ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement" meta:resourcekey="BoundFieldResource1">
+                                <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
+                                <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
                             </asp:BoundField>
-                            <asp:BoundField DataField="HumanitarianPriorityId" HeaderText="hpId"></asp:BoundField>
-                            <asp:BoundField DataField="ObjAndPrId" HeaderText="objprid" ItemStyle-Width="1px">
+                            <asp:BoundField DataField="HumanitarianPriorityId" HeaderText="HumanitarianPriorityId"
+                                ItemStyle-Width="1px" ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement"
+                                meta:resourcekey="BoundFieldResource2">
+                                <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
+                                <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
                             </asp:BoundField>
-                            <asp:BoundField DataField="ProjectId" HeaderText="pid" ItemStyle-Width="1px"></asp:BoundField>
-                            <asp:BoundField DataField="objAndPrAndPId" HeaderText="objprpid" ItemStyle-Width="1px">
+                            <asp:BoundField DataField="ObjAndPrId" HeaderText="objprid" ItemStyle-Width="1px"
+                                ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement" meta:resourcekey="BoundFieldResource2">
+                                <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
+                                <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
                             </asp:BoundField>
-                            <asp:BoundField DataField="objAndPId" HeaderText="objAndPId" ItemStyle-Width="1px">
+                            <asp:BoundField DataField="ProjectId" HeaderText="pid" ItemStyle-Width="1px" ItemStyle-CssClass="hiddenelement"
+                                HeaderStyle-CssClass="hiddenelement">
+                                <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
+                                <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
                             </asp:BoundField>
-                            <asp:BoundField DataField="PrAndPId" HeaderText="PrAndPId" ItemStyle-Width="1px">
+                            <asp:BoundField DataField="objAndPrAndPId" HeaderText="objprpid" ItemStyle-Width="1px"
+                                ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement">
+                                <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
+                                <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
+                            </asp:BoundField>
+                            <asp:BoundField DataField="objAndPId" HeaderText="objAndPId" ItemStyle-Width="1px"
+                                ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement">
+                                <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
+                                <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
+                            </asp:BoundField>
+                            <asp:BoundField DataField="PrAndPId" HeaderText="PrAndPId" ItemStyle-Width="1px"
+                                ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement">
+                                <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
+                                <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
                             </asp:BoundField>
                             <asp:TemplateField HeaderText="Project Code">
                                 <ItemTemplate>

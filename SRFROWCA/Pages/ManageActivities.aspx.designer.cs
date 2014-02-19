@@ -13,6 +13,15 @@ namespace SRFROWCA.Pages {
     public partial class ManageActivities {
         
         /// <summary>
+        /// rblProjects control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblProjects;
+        
+        /// <summary>
         /// Wizard1 control.
         /// </summary>
         /// <remarks>
@@ -31,22 +40,13 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.WizardStep WizardStep1;
         
         /// <summary>
-        /// ddlProjects control.
+        /// gvActivities control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlProjects;
-        
-        /// <summary>
-        /// cblLocation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList cblLocation;
+        protected global::System.Web.UI.WebControls.GridView gvActivities;
         
         /// <summary>
         /// WizardStep2 control.
@@ -58,12 +58,30 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.WizardStep WizardStep2;
         
         /// <summary>
-        /// gvActivities control.
+        /// cblLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvActivities;
+        protected global::System.Web.UI.WebControls.CheckBoxList cblLocation;
+        
+        /// <summary>
+        /// wz3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.WizardStep wz3;
+        
+        /// <summary>
+        /// gvActLoc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvActLoc;
     }
 }

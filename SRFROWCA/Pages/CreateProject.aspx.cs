@@ -74,6 +74,7 @@ namespace SRFROWCA.Pages
         protected void btnSave_Click(object sender, EventArgs e)
         {
             Save();
+            ShowMessage("Your Data Saved Successfuly!");
         }
 
         protected void btnManageActivities_Click(object sender, EventArgs e)
@@ -109,6 +110,11 @@ namespace SRFROWCA.Pages
             {
                 DBContext.Add("InsertProject", new object[] { title, objective, clusterId, locationId, startDate, endDate, userId, DBNull.Value });
             }
+        }
+
+        private void ShowMessage(string message, ROWCACommon.NotificationType notificationType = ROWCACommon.NotificationType.Success)
+        {
+            ROWCACommon.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, true, 500);
         }
     }
 }

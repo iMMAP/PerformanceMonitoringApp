@@ -10,6 +10,8 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<div id="divMsg">
+    </div>
     <div class="containerDataEntryMain">
         <div class="containerDataEntryProjects">
             <div class="containerDataEntryProjectsInner">
@@ -36,7 +38,7 @@
                     <td>
                         <asp:TextBox ID="txtProjectTitle" runat="server" Width="400px" TextMode="MultiLine"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="rfvTitle" runat="server" ControlToValidate="txtProjectTitle"
-                                        CssClass="error2" ErrorMessage="Required." ToolTip="Required.">Required.</asp:RequiredFieldValidator>
+                                        CssClass="error2" Text="Required" ErrorMessage="Required." ToolTip="Required.">Required.</asp:RequiredFieldValidator>
                                 
                     </td>
                 </tr>
@@ -84,7 +86,7 @@
                             OnClick="btnSave_Click" />
                         <asp:Button ID="btnSaveClose" runat="server" Text="Save & Close" CssClass="button_example"
                             OnClick="btnSaveClose_Click" />
-                        <asp:Button ID="btnManageActivities" runat="server" Text="Manage Activities" CssClass="button_example"
+                        <asp:Button ID="btnManageActivities" runat="server" Text="Manage Activities" CssClass="button_example" CausesValidation="false"
                             OnClick="btnManageActivities_Click" />
                     </td>
                 </tr>
