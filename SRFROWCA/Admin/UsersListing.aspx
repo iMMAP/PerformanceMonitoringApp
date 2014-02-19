@@ -46,17 +46,16 @@
                                     Checked='<%# Eval("IsLockedOut") %>' />
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Country Admin" SortExpression="IsCountryAdmin" HeaderStyle-Width="100px"
+                        <%-- <asp:TemplateField HeaderText="Country Admin" SortExpression="IsCountryAdmin" HeaderStyle-Width="100px"
                             ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>
                                 <asp:CheckBox ID="chkIsCountryAdmin" AutoPostBack="true" runat="server" OnCheckedChanged="chkIsCountryAdmin_CheckedChanged"
                                     Checked='<%# Eval("IsCountryAdmin") %>' />
                             </ItemTemplate>
-                        </asp:TemplateField>
+                        </asp:TemplateField>--%>
+                        <asp:BoundField DataField="UserRole" HeaderText="Role" SortExpression="UserRole" />
                         <asp:BoundField DataField="OrganizationName" HeaderText="Organization" SortExpression="OrganizationName"
                             ItemStyle-Width="500px" />
-                        <asp:BoundField DataField="OrganizationAcronym" HeaderText="Acronym" SortExpression="OrganizationAcronym"
-                            ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center" />
                         <asp:BoundField DataField="LocationName" HeaderText="Country" SortExpression="LocationName"
                             ItemStyle-HorizontalAlign="Center" />
                         <asp:TemplateField Visible="false">
