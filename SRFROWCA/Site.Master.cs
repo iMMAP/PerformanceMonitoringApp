@@ -18,16 +18,16 @@ namespace SRFROWCA
         {
             if (Session["SiteLanguage"] == null)
             {
-                ROWCACommon.SelectedSiteLanguageId = (int)Common.ROWCACommon.SiteLanguage.English;
-                ROWCACommon.SiteCulture = "en-US";
+                RC.SelectedSiteLanguageId = (int)Common.RC.SiteLanguage.English;
+                RC.SiteCulture = "en-US";
 
                 if (Request.Cookies["SiteLanguageCookie"] != null)
                 {
                     string siteLangId = Request.Cookies["SiteLanguageCookie"].Value;
                     if (siteLangId == "2")
                     {
-                        ROWCACommon.SelectedSiteLanguageId = (int)Common.ROWCACommon.SiteLanguage.French;
-                        ROWCACommon.SiteCulture = "fr-FR";
+                        RC.SelectedSiteLanguageId = (int)Common.RC.SiteLanguage.French;
+                        RC.SiteCulture = "fr-FR";
                     }
                 }
             }
@@ -44,9 +44,15 @@ namespace SRFROWCA
                     && !(HttpContext.Current.User.IsInRole("CountryAdmin")))
                 {
                     AdminMenue.Visible = false;
+
+                    if (HttpContext.Current.User.IsInRole("ClusterLead"))
+                    {
+                        menuMyActivities.HRef = "~/ClusterLead/AddSRPActivitiesFromMasterList.aspx";
+                    }
                 }
                 else
                 {
+                    
                     menuMyActivities.Visible = false;
                     menuDataEntry.Visible = false;
                 }
@@ -65,16 +71,23 @@ namespace SRFROWCA
 
         protected void lnkLanguageEnglish_Click(object sender, EventArgs e)
         {
-            ROWCACommon.SelectedSiteLanguageId = (int)Common.ROWCACommon.SiteLanguage.English;
-            ROWCACommon.AddSiteLangInCookie(this.Response, Common.ROWCACommon.SiteLanguage.English);
+            RC.SelectedSiteLanguageId = (int)Common.RC.SiteLanguage.English;
+            RC.AddSiteLangInCookie(this.Response, Common.RC.SiteLanguage.English);
             (MainContent.Page as BasePage).BindGridData();
         }
 
         protected void lnkLanguageFrench_Click(object sender, EventArgs e)
         {
-            ROWCACommon.SelectedSiteLanguageId = (int)Common.ROWCACommon.SiteLanguage.French;
-            ROWCACommon.AddSiteLangInCookie(this.Response, Common.ROWCACommon.SiteLanguage.French);            
+            RC.SelectedSiteLanguageId = (int)Common.RC.SiteLanguage.French;
+            RC.AddSiteLangInCookie(this.Response, Common.RC.SiteLanguage.French);            
             (MainContent.Page as BasePage).BindGridData();
+        }
+
+        protected void HeadLoginStatus_LoggedOut(object sender, EventArgs e)
+        {
+            HttpContext.Current.Session["UserCountry"] = null;
+            HttpContext.Current.Session["UserCluster"] = null;
+            HttpContext.Current.Session["UserOrg"] = null;
         }
 
         // Gets the ASP.NET application's virtual application root path on the server.

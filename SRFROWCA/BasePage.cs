@@ -11,10 +11,10 @@ namespace SRFROWCA
 
             if (!string.IsNullOrEmpty(postBackControl))
             {
-                ROWCACommon.CultureSettings(postBackControl);
+                RC.CultureSettings(postBackControl);
             }
 
-            ROWCACommon.SetCulture();
+            RC.SetCulture();
 
             base.InitializeCulture();
         }

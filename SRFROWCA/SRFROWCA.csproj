@@ -121,22 +121,24 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\PasswordSendConfirmation.aspx" />
     <Content Include="Account\Register.aspx" />
+    <Content Include="Account\Register2.aspx" />
     <Content Include="Account\Registerca.aspx" />
     <Content Include="Account\Reset.aspx" />
     <Content Include="Account\UpdateUser.aspx" />
+    <Content Include="Account\UserProfile.aspx" />
     <Content Include="Admin\ActivityData.aspx" />
-    <Content Include="Admin\ClusterObjectives.aspx" />
     <Content Include="Admin\EmergencyClusters.aspx" />
     <Content Include="Admin\EmergencyLocations.aspx" />
     <Content Include="Admin\IndicatorActivities.aspx" />
-    <Content Include="Admin\ObjectiveIndicators.aspx" />
-    <Content Include="Admin\OPSProjectAllData.aspx" />
     <Content Include="Admin\PriorityActivities.aspx" />
-    <Content Include="Admin\StrategicObjectives.aspx" />
     <Content Include="Admin\UploadLocations.aspx" />
     <Content Include="Admin\UploadLogFrame.aspx" />
     <Content Include="Admin\Web.config" />
     <Content Include="Anonymous\AllData.aspx" />
+    <Content Include="ClusterLead\AddSRPActivitiesFromMasterList.aspx" />
+    <Content Include="ClusterLead\AddSRPActivity.aspx" />
+    <Content Include="ClusterLead\ManageActivitiesClsuterLead.aspx" />
+    <Content Include="ClusterLead\WebForm1.aspx" />
     <Content Include="DataFeeds\AdminDataFeeds.aspx" />
     <Content Include="Admin\EmergencyListing.aspx" />
     <Content Include="Admin\OfficeListing.aspx" />
@@ -223,12 +225,14 @@
     <Content Include="Scripts\hc\themes\grid.js" />
     <Content Include="Scripts\hc\themes\skies.js" />
     <Content Include="Scripts\jq-1.10.2.min.js" />
+    <Content Include="Scripts\jq-highlight.js" />
     <Content Include="Scripts\jquery.event.drag-1.4.min.js" />
     <Content Include="Scripts\jquery.fixedMenu.js" />
     <Content Include="Scripts\jquery.kiketable.colsizable-1.1.js" />
     <Content Include="Scripts\jquery.kiketable.colsizable-1.1.min.js" />
     <Content Include="Scripts\jquery.numeric.min.js" />
     <Content Include="Scripts\quicksearch.js" />
+    <Content Include="Scripts\ShowHideObJAndPr.js" />
     <Content Include="Styles\jquery.kiketable.colsizable.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
@@ -253,6 +257,7 @@
     <Content Include="Styles\ui-lightness\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Styles\ui-lightness\jquery-ui-1.10.3.custom.css" />
     <Content Include="Styles\ui-lightness\jquery-ui-1.10.3.custom.min.css" />
+    <Content Include="UploadSRPLogFrame.aspx" />
     <Content Include="UserManual_files\colorschememapping.xml" />
     <Content Include="UserManual_files\filelist.xml" />
     <Content Include="UserManual_files\image001.png" />
@@ -271,6 +276,7 @@
     <Content Include="WebForm1.aspx" />
     <Content Include="ops.Master" />
     <Content Include="DataFeed.ashx" />
+    <Content Include="WebForm2.aspx" />
     <Content Include="WebForm5.aspx" />
     <Content Include="OPS\OPSActivitiesFeed.ashx" />
     <Content Include="OPS\OPSProjectFeed.ashx" />
@@ -339,6 +345,13 @@
     <Compile Include="Account\Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Account\Register2.aspx.cs">
+      <DependentUpon>Register2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Register2.aspx.designer.cs">
+      <DependentUpon>Register2.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Account\Registerca.aspx.cs">
       <DependentUpon>Registerca.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -360,19 +373,19 @@
     <Compile Include="Account\UpdateUser.aspx.designer.cs">
       <DependentUpon>UpdateUser.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Account\UserProfile.aspx.cs">
+      <DependentUpon>UserProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\UserProfile.aspx.designer.cs">
+      <DependentUpon>UserProfile.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\ActivityData.aspx.cs">
       <DependentUpon>ActivityData.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\ActivityData.aspx.designer.cs">
       <DependentUpon>ActivityData.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\ClusterObjectives.aspx.cs">
-      <DependentUpon>ClusterObjectives.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\ClusterObjectives.aspx.designer.cs">
-      <DependentUpon>ClusterObjectives.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\EmergencyClusters.aspx.cs">
       <DependentUpon>EmergencyClusters.aspx</DependentUpon>
@@ -395,33 +408,12 @@
     <Compile Include="Admin\IndicatorActivities.aspx.designer.cs">
       <DependentUpon>IndicatorActivities.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\ObjectiveIndicators.aspx.cs">
-      <DependentUpon>ObjectiveIndicators.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\ObjectiveIndicators.aspx.designer.cs">
-      <DependentUpon>ObjectiveIndicators.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\OPSProjectAllData.aspx.cs">
-      <DependentUpon>OPSProjectAllData.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\OPSProjectAllData.aspx.designer.cs">
-      <DependentUpon>OPSProjectAllData.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Admin\PriorityActivities.aspx.cs">
       <DependentUpon>PriorityActivities.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\PriorityActivities.aspx.designer.cs">
       <DependentUpon>PriorityActivities.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\StrategicObjectives.aspx.cs">
-      <DependentUpon>StrategicObjectives.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\StrategicObjectives.aspx.designer.cs">
-      <DependentUpon>StrategicObjectives.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\UploadLocations.aspx.cs">
       <DependentUpon>UploadLocations.aspx</DependentUpon>
@@ -447,6 +439,35 @@
     <Compile Include="BasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="ClusterLead\AddSRPActivitiesFromMasterList.aspx.cs">
+      <DependentUpon>AddSRPActivitiesFromMasterList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClusterLead\AddSRPActivitiesFromMasterList.aspx.designer.cs">
+      <DependentUpon>AddSRPActivitiesFromMasterList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClusterLead\AddSRPActivity.aspx.cs">
+      <DependentUpon>AddSRPActivity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClusterLead\AddSRPActivity.aspx.designer.cs">
+      <DependentUpon>AddSRPActivity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClusterLead\ManageActivitiesClsuterLead.aspx.cs">
+      <DependentUpon>ManageActivitiesClsuterLead.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClusterLead\ManageActivitiesClsuterLead.aspx.designer.cs">
+      <DependentUpon>ManageActivitiesClsuterLead.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClusterLead\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClusterLead\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Common\UserInfo.cs" />
     <Compile Include="DataFeed.ashx.cs">
       <DependentUpon>DataFeed.ashx</DependentUpon>
     </Compile>
@@ -695,7 +716,7 @@
     <Compile Include="ReportsCharts\TargetsAchievedByLocDuration.aspx.designer.cs">
       <DependentUpon>TargetsAchievedByLocDuration.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Common\ROWCACommon.cs" />
+    <Compile Include="Common\RC.cs" />
     <Compile Include="Common\ExportUtility.cs" />
     <Compile Include="Common\Mail.cs" />
     <Compile Include="Default.aspx.cs">
@@ -723,12 +744,26 @@
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
+    <Compile Include="UploadSRPLogFrame.aspx.cs">
+      <DependentUpon>UploadSRPLogFrame.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UploadSRPLogFrame.aspx.designer.cs">
+      <DependentUpon>UploadSRPLogFrame.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="WebForm1.aspx.designer.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm2.aspx.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm2.aspx.designer.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebForm5.aspx.cs">
       <DependentUpon>WebForm5.aspx</DependentUpon>
@@ -752,6 +787,7 @@
     <Folder Include="GeneratedChartFiles\" />
     <Folder Include="OPS\OPSProjects\" />
     <Folder Include="testdoc\" />
+    <Folder Include="TEST\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Web.config" />

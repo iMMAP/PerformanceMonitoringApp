@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" />
     <script src="http://code.jquery.com/jquery-1.10.1.min.js" type="text/javascript"></script>
     <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
-    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js" type="text/javascript"></script>  
+    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js" type="text/javascript"></script>
     <script type="text/javascript" src="<%# BaseURL %>/Scripts/jquery.fixedMenu.js"></script>
     <script type="text/javascript">
         var myMessages = ['info', 'warning', 'error', 'success'];
@@ -52,7 +52,7 @@
         <div class="menu">
             <ul class="sep">
                 <li><a href="~/Account/Login.aspx" id="LoginStatus" runat="server">Log On</a>
-                    <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Off"
+                    <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Off" OnLoggedOut="HeadLoginStatus_LoggedOut"
                         LogoutPageUrl="~/" />
                 </li>
                 <li><a href="~/Account/Register.aspx" id="ResiterStatus" runat="server">Sign Up</a>
@@ -60,11 +60,12 @@
                 <li><a href='javascript:void(0)' id="AdminMenue" runat="server">Admin<span class="signinarrow">&nbsp;
                     &nbsp;</span></a>
                     <ul>
-                        <li><a class="signinfly" href="../Admin/OrganizationListing.aspx" tabindex="1">Organizations</a></li>                        
+                        <li><a class="signinfly" href="../Admin/OrganizationListing.aspx" tabindex="1">Organizations</a></li>
                         <li><a class="signinfly" href="../Admin/EmergencyListing.aspx" tabindex="1">Emergencies</a></li>
-                        <li><a class="signinfly" href="../Admin/EmergencyLocations.aspx" tabindex="1">Emergency Locations</a></li>
-                        <li><a class="signinfly" href="../Admin/EmergencyClusters.aspx" tabindex="1">Emgergency Clusters</a>
-                        </li>
+                        <li><a class="signinfly" href="../Admin/EmergencyLocations.aspx" tabindex="1">Emergency
+                            Locations</a></li>
+                        <li><a class="signinfly" href="../Admin/EmergencyClusters.aspx" tabindex="1">Emgergency
+                            Clusters</a> </li>
                         <hr />
                         <li><a class="signinfly" href="../Admin/StrategicObjectives.aspx" tabindex="1">Str Objectives</a></li>
                         <li><a class="signinfly" href="../Admin/ClusterObjectives.aspx" tabindex="1">Spec Objectives</a></li>
@@ -81,22 +82,23 @@
                         </li>
                         <li><a class="signinfly" href="../Admin/AdminDataFeeds.aspx" tabindex="1">XML Feeds</a>
                         </li>
-                        <li><a class="signinfly" href="../OPS/UploadOPSProjectDetails.aspx" tabindex="1">Upload OPS Project Details</a>
-                        </li>
-                        <li><a class="signinfly" href="../Admin/OPSProjectAllData.aspx" tabindex="1">Update OPS All Data Table</a>
-                        </li>
+                        <li><a class="signinfly" href="../OPS/UploadOPSProjectDetails.aspx" tabindex="1">Upload
+                            OPS Project Details</a> </li>
+                        <li><a class="signinfly" href="../Admin/OPSProjectAllData.aspx" tabindex="1">Update
+                            OPS All Data Table</a> </li>
                     </ul>
                 </li>
                 <li><a href='javascript:void(0)' id="MySettingsMenue" runat="server">My Settings<span
                     class="signinarrow">&nbsp; &nbsp;</span></a>
                     <ul>
                         <li><a class="signinfly" href="../Account/ChangePassword.aspx" tabindex="1">Change Password</a></li>
+                        <li><a class="signinfly" href="../Account/UserProfile.aspx" tabindex="2">My Profile</a></li>
                     </ul>
                 </li>
                 <li><a href="../ContactUs/Contactus.aspx">Contact us</a></li>
                 <li><a href="../UserManual.aspx">Help</a></li>
                 <li>
-                    <asp:LinkButton ID="lnkLanguageEnglish" Text="English" runat="server" OnClick="lnkLanguageEnglish_Click" 
+                    <asp:LinkButton ID="lnkLanguageEnglish" Text="English" runat="server" OnClick="lnkLanguageEnglish_Click"
                         CausesValidation="False"></asp:LinkButton></li>
                 <li>
                     <asp:LinkButton ID="lnkLanguageFrench" Text="Français" runat="server" OnClick="lnkLanguageFrench_Click"

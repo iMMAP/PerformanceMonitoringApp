@@ -375,24 +375,13 @@ namespace SRFROWCA.OPS
 
         private void PopulateStrategicObjectives()
         {
-            ddlStrObjectives.DataValueField = "ObjectiveId";
-            ddlStrObjectives.DataTextField = "Objective";
-
-            DataTable dt = GetStrategicObjectives();
-            ddlStrObjectives.DataSource = dt;
-            ddlStrObjectives.DataBind();
+            UI.FillObjectives(ddlStrObjectives);
 
             if (ddlStrObjectives.Items.Count > 1)
             {
                 ListItem item = new ListItem("All", "0");
                 ddlStrObjectives.Items.Insert(0, item);
             }
-        }
-
-        private DataTable GetStrategicObjectives()
-        {
-            int isLogFrame = 1;
-            return DBContext.GetData("GetObjectivesLogFrame", new object[] { SiteLanguageId, isLogFrame });
         }
 
         private void PopulatePriorities()
@@ -594,7 +583,7 @@ namespace SRFROWCA.OPS
 
         private DataTable GetCountries()
         {
-            int locationType = (int)ROWCACommon.LocationTypes.Governorate;
+            int locationType = (int)RC.LocationTypes.Governorate;
             DataTable dt = DBContext.GetData("GetLocationOnType", new object[] { locationType });
 
             return dt.Rows.Count > 0 ? dt : new DataTable();
@@ -952,15 +941,15 @@ namespace SRFROWCA.OPS
             }
         }
 
-        private void ShowMessage(string message, ROWCACommon.NotificationType notificationType = ROWCACommon.NotificationType.Success)
+        private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success)
         {
             //updMessage.Update();
-            ROWCACommon.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, true, 400);
+            RC.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, true, 400);
         }
 
         protected void Page_Error(object sender, EventArgs e)
         {
-            ShowMessage("<b>Some Error Occoured. Admin Has Notified About It</b>.<br/> Please Try Again.", ROWCACommon.NotificationType.Error);
+            ShowMessage("<b>Some Error Occoured. Admin Has Notified About It</b>.<br/> Please Try Again.", RC.NotificationType.Error);
             // Get last error from the server
             Exception exc = Server.GetLastError();
             SRFROWCA.Common.ExceptionUtility.LogException(exc, "AddActivites", this.User);

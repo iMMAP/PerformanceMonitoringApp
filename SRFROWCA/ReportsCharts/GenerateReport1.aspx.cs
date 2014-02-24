@@ -450,7 +450,7 @@ namespace SRFROWCA.Reports
 
         private void PopulateClusters()
         {
-            UI.FillClusters(cblClusters, (int)ROWCACommon.SiteLanguage.English);
+            UI.FillClusters(cblClusters, (int)RC.SiteLanguage.English);
         }
 
         private void PopulateAdmin1(int countryId)
@@ -485,7 +485,7 @@ namespace SRFROWCA.Reports
 
         protected void ddlObjectives_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PopulateIndicators();
+            //PopulateIndicators();
             PopulateActivities();
             PopulateDataItems();
         }
@@ -514,18 +514,6 @@ namespace SRFROWCA.Reports
         {
             string clusterIds = ReportsCommon.GetSelectedValues(cblClusters);
             return DBContext.GetData("GetObjectivesOfMultipleClusters", new object[] { clusterIds });
-        }
-
-        private void PopulateIndicators()
-        {
-            DataTable dt = GetIndicators();
-            UI.FillIndicators(ddlIndicators, dt);
-        }
-
-        private DataTable GetIndicators()
-        {
-            string objIds = ReportsCommon.GetSelectedValues(ddlObjectives);
-            return DBContext.GetData("GetIndicatorsOfMultipleObjectives", new object[] { objIds });
         }
 
         private void PopulateActivities()
@@ -618,7 +606,7 @@ namespace SRFROWCA.Reports
         {
             string dir = Server.MapPath("~/GeneratedChartFiles");
             string sessionId = Session.SessionID.ToString();
-            string path = (ROWCACommon.CreateFolderForFiles(dir, sessionId)) + "\\";
+            string path = (RC.CreateFolderForFiles(dir, sessionId)) + "\\";
 
             GenerateChartReportPDF pdf = new GenerateChartReportPDF();
             string filePath = pdf.GeneratePDF(path);
