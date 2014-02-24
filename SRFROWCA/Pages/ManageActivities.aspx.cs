@@ -140,7 +140,7 @@ namespace SRFROWCA.Pages
                     {
                         tBanwa = string.IsNullOrEmpty(txtBanwa.Text.Trim()) ? (int?)null : Convert.ToInt32(txtBanwa.Text.Trim());
                     }
-                    Guid userId = ROWCACommon.GetCurrentUserId();
+                    Guid userId = RC.GetCurrentUserId;
                     int projectId = Convert.ToInt32(rblProjects.SelectedValue);
 
                     if (tBale != null || tBanwa != null)

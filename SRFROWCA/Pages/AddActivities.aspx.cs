@@ -26,7 +26,7 @@ namespace SRFROWCA.Pages
             if (!IsPostBack && !string.IsNullOrEmpty(languageChange)) return;
             {
                 PopulateDropDowns();
-                PopulateStrategicObjectives();
+                PopulateObjectives();
                 PopulatePriorities();
                 Session["SiteChanged"] = null;
                 cblObjectives.Items[0].Attributes["title"] = "STRATEGIC OBJECTIVE 1: Track and analyse risk and vulnerability, integrating findings into humanitarian and development programming.";
@@ -278,42 +278,20 @@ namespace SRFROWCA.Pages
 
         #region Methods.
 
-        private void PopulateStrategicObjectives()
+        private void PopulateObjectives()
         {
-            cblObjectives.DataValueField = "ObjectiveId";
-            cblObjectives.DataTextField = "ShortObjectiveTitle";
-
-            DataTable dt = GetStrategicObjectives();
-            cblObjectives.DataSource = dt;
-            cblObjectives.DataBind();
-        }
-
-        private DataTable GetStrategicObjectives()
-        {
-            int isLogFrame = 1;
-            return DBContext.GetData("GetObjectivesLogFrame", new object[] { ROWCACommon.SelectedSiteLanguageId, isLogFrame });
+            UI.FillObjectives(cblObjectives);
         }
 
         private void PopulatePriorities()
         {
-            cblPriorities.DataValueField = "HumanitarianPriorityId";
-            cblPriorities.DataTextField = "HumanitarianPriority";
-
-            DataTable dt = GetPriorites();
-            cblPriorities.DataSource = dt;
-            cblPriorities.DataBind();
-        }
-
-        private DataTable GetPriorites()
-        {
-            int isLogFrame = 1;
-            return DBContext.GetData("GetPrioritiesLogFrame", new object[] { ROWCACommon.SelectedSiteLanguageId, isLogFrame });
+            UI.FillPriorities(cblPriorities);
         }
 
         private void PopulateDropDowns()
         {
             // Get details of user from aspnet_Users_Custom tbale
-            DataTable dt = ROWCACommon.GetUserDetails();
+            DataTable dt = RC.GetUserDetails();
             if (dt.Rows.Count > 0)
             {
                 LocationId = Convert.ToInt32(dt.Rows[0]["LocationId"].ToString());
@@ -340,7 +318,7 @@ namespace SRFROWCA.Pages
         }
         private DataTable GetLocationEmergencies(int locationId)
         {
-            DataTable dt = DBContext.GetData("GetEmergencyOnLocation", new object[] { locationId, ROWCACommon.SelectedSiteLanguageId });
+            DataTable dt = DBContext.GetData("GetEmergencyOnLocation", new object[] { locationId, RC.SelectedSiteLanguageId });
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 
@@ -353,14 +331,14 @@ namespace SRFROWCA.Pages
             ddlMonth.DataSource = GetMonth();
             ddlMonth.DataBind();
 
-            var result = DateTime.Now.ToString("MMMM", new CultureInfo(ROWCACommon.SiteCulture));
+            var result = DateTime.Now.ToString("MMMM", new CultureInfo(RC.SiteCulture));
             result = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(result);
             ddlMonth.SelectedIndex = ddlMonth.Items.IndexOf(ddlMonth.Items.FindByText(result.ToString()));
         }
 
         private DataTable GetMonth()
         {
-            DataTable dt = DBContext.GetData("GetMonths", new object[] { ROWCACommon.SelectedSiteLanguageId });
+            DataTable dt = DBContext.GetData("GetMonths", new object[] { RC.SelectedSiteLanguageId });
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
         // Populate Years Drop Down
@@ -503,9 +481,9 @@ namespace SRFROWCA.Pages
             string locationIds = GetSelectedItems(cblLocations);
             string locIdsNotIncluded = GetNotSelectedItems(cblLocations);
 
-            Guid userId = ROWCACommon.GetCurrentUserId();
+            Guid userId = RC.GetCurrentUserId;
             DataTable dt = DBContext.GetData("GetIPData1", new object[] { locEmergencyId, locationIds, yearId, monthId,
-                                                                        locIdsNotIncluded, ROWCACommon.SelectedSiteLanguageId, userId });
+                                                                        locIdsNotIncluded, RC.SelectedSiteLanguageId, userId });
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 
@@ -566,7 +544,7 @@ namespace SRFROWCA.Pages
 
         private DataTable GetCountries()
         {
-            int locationType = (int)ROWCACommon.LocationTypes.Governorate;
+            int locationType = (int)RC.LocationTypes.Governorate;
             DataTable dt = DBContext.GetData("GetLocationOnType", new object[] { locationType });
 
             return dt.Rows.Count > 0 ? dt : new DataTable();
@@ -697,7 +675,7 @@ namespace SRFROWCA.Pages
             int yearId = Convert.ToInt32(ddlYear.SelectedValue);
             int monthId = Convert.ToInt32(ddlMonth.SelectedValue);
             int reportFrequencyId = 1;
-            Guid loginUserId = ROWCACommon.GetCurrentUserId();
+            Guid loginUserId = RC.GetCurrentUserId;
 
             ReportId = DBContext.Add("InsertReport", new object[] { reportName, yearId, monthId, locEmergencyId, reportFrequencyId, loginUserId, DBNull.Value });
         }
@@ -879,7 +857,7 @@ namespace SRFROWCA.Pages
 
                                 if (!(valToSaveA == null && valToSaveT == null))
                                 {
-                                    Guid loginUserId = ROWCACommon.GetCurrentUserId();
+                                    Guid loginUserId = RC.GetCurrentUserId;
                                     int newReportDetailId = DBContext.Add("InsertReportDetails",
                                                                             new object[] { ReportId, activityDataId, locationIdToSaveT, 
                                                                                             valToSaveT, valToSaveA, 1, loginUserId, DBNull.Value });
@@ -915,14 +893,14 @@ namespace SRFROWCA.Pages
             }
         }
 
-        private void ShowMessage(string message, ROWCACommon.NotificationType notificationType = ROWCACommon.NotificationType.Success)
+        private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success)
         {
-            ROWCACommon.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, true, 500);
+            RC.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, true, 500);
         }
 
         protected void Page_Error(object sender, EventArgs e)
         {
-            ShowMessage("<b>Some Error Occoured. Admin Has Notified About It</b>.<br/> Please Try Again.", ROWCACommon.NotificationType.Error);
+            ShowMessage("<b>Some Error Occoured. Admin Has Notified About It</b>.<br/> Please Try Again.", RC.NotificationType.Error);
 
             // Get last error from the server
             Exception exc = Server.GetLastError();
@@ -950,6 +928,7 @@ namespace SRFROWCA.Pages
                 ViewState["ReportId"] = value.ToString();
             }
         }
+
         public int LocationId
         {
             get

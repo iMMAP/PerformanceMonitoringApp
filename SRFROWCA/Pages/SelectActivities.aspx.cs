@@ -164,7 +164,7 @@ namespace SRFROWCA.Pages
             }
 
             // If not admin then return emergencies of user's locations.
-            return DBContext.GetData("GetEmergencyOnLocation", new object[] { locationId, ROWCACommon.SelectedSiteLanguageId });
+            return DBContext.GetData("GetEmergencyOnLocation", new object[] { locationId, RC.SelectedSiteLanguageId });
         }
 
         // Populate Clusters Grid.
@@ -220,7 +220,7 @@ namespace SRFROWCA.Pages
         // Get all activities.
         private object GetActivities(int clusterId)
         {
-            return DBContext.GetData("GetEmergencyClusterActivities", new object[] { clusterId, ROWCACommon.SelectedSiteLanguageId });
+            return DBContext.GetData("GetEmergencyClusterActivities", new object[] { clusterId, RC.SelectedSiteLanguageId });
         }
 
         // Get only current (loggedin) user's activities to select from all activities.
@@ -229,7 +229,7 @@ namespace SRFROWCA.Pages
             int emgLocationId = 0;
             int.TryParse(ddlEmergency.SelectedValue, out emgLocationId);
 
-            Guid userId = ROWCACommon.GetCurrentUserId();
+            Guid userId = RC.GetCurrentUserId;
             if (emgLocationId > 0)
             {
                 return DBContext.GetData("GetIPActivities", new object[] { emgLocationId, userId });
@@ -239,7 +239,7 @@ namespace SRFROWCA.Pages
         }
         private DataTable GetUserDetails()
         {
-            Guid userGuid = ROWCACommon.GetCurrentUserId();
+            Guid userGuid = RC.GetCurrentUserId;
             return DBContext.GetData("GetUserDetails", new object[] { userGuid });
         }
         private void AddActivity(GridViewRow row)
@@ -304,7 +304,7 @@ namespace SRFROWCA.Pages
             int emgLocId = 0;
             int.TryParse(ddlEmergency.SelectedValue, out emgLocId);
 
-            Guid userId = ROWCACommon.GetCurrentUserId();
+            Guid userId = RC.GetCurrentUserId;
             DBContext.Delete("DeleteActivityData", new object[] { emgLocId, activityId, userId, DBNull.Value });
         }
         private void SaveActivity(int activityId)
@@ -312,24 +312,24 @@ namespace SRFROWCA.Pages
             int emgLocId = 0;
             int.TryParse(ddlEmergency.SelectedValue, out emgLocId);
 
-            Guid userId = ROWCACommon.GetCurrentUserId();
+            Guid userId = RC.GetCurrentUserId;
             DBContext.Add("InsertActivityData", new object[] { emgLocId, activityId, userId, DBNull.Value });
         }
 
         private DataTable GetEmergencyClusters(int emgId)
         {
-            return DBContext.GetData("GetEmergencyClustersOfData", new object[] { emgId, ROWCACommon.SelectedSiteLanguageId });
+            return DBContext.GetData("GetEmergencyClustersOfData", new object[] { emgId, RC.SelectedSiteLanguageId });
         }
 
-        private void ShowMessage(string message, ROWCACommon.NotificationType notificationType = ROWCACommon.NotificationType.Success)
+        private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success)
         {
             updMessage.Update();
-            ROWCACommon.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType);
+            RC.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType);
         }
 
         protected void Page_Error(object sender, EventArgs e)
         {
-            ShowMessage("<b>Some Error Occoured. Admin Has Notified About It</b>.<br/> Please Try Again.", ROWCACommon.NotificationType.Error);
+            ShowMessage("<b>Some Error Occoured. Admin Has Notified About It</b>.<br/> Please Try Again.", RC.NotificationType.Error);
 
             // Get last error from the server
             Exception exc = Server.GetLastError();
