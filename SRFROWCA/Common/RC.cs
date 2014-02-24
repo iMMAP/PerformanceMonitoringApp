@@ -16,8 +16,15 @@ using System.Globalization;
 
 namespace SRFROWCA.Common
 {
-    public class ROWCACommon
+    public class RC
     {
+        #region Roles & Rights
+
+        internal static bool IsAuthenticated(IPrincipal iPrincipal)
+        {
+            return iPrincipal.Identity.IsAuthenticated;
+        }
+
         internal static bool IsInAdminRoles(IPrincipal iPrincipal)
         {
             if (IsAdmin(iPrincipal) || IsCountryAdmin(iPrincipal))
@@ -39,14 +46,11 @@ namespace SRFROWCA.Common
             return false;
         }
 
-        internal static bool IsAuthenticated(IPrincipal iPrincipal)
+        internal static bool IsClusterLead(IPrincipal iPrincipal)
         {
-            return iPrincipal.Identity.IsAuthenticated;
-        }
-
-        internal static void RedirectUserToPage(HttpResponse Response)
-        {
-            Response.Redirect("~/Default.aspx");
+            if (iPrincipal.IsInRole("ClusterLead"))
+                return true;
+            return false;
         }
 
         internal static string GetCountryAdminRoleName
@@ -55,6 +59,14 @@ namespace SRFROWCA.Common
             {
                 return "CountryAdmin";
             }
+        }
+        #endregion
+
+        #region Utilities
+
+        internal static void RedirectUserToPage(HttpResponse Response)
+        {
+            Response.Redirect("~/Default.aspx");
         }
 
         public static string CreateFolderForFiles(string dir, string sessionId)
@@ -86,23 +98,21 @@ namespace SRFROWCA.Common
             return sb.ToString();
         }
 
-        public static bool DataInserted
-        {
-            get
-            {
-                if (HttpContext.Current.Session["DataInserted"] == null)
-                {
-                    HttpContext.Current.Session["DataInserted"] = false;
-                }
-                bool? dataInserted = HttpContext.Current.Session["DataInserted"] as bool?;
+        #endregion
 
-                return dataInserted.Value;
-            }
-            set
-            {
-                HttpContext.Current.Session["DataInserted"] = value;
-            }
+        #region Logframe
+
+        internal static DataTable GetObjectives()
+        {
+            return DBContext.GetData("GetObjectives", new object[] { SelectedSiteLanguageId });
         }
+
+        internal static DataTable GetPriorities()
+        {
+            return DBContext.GetData("GetPriorities", new object[] { SelectedSiteLanguageId });
+        }
+
+        #endregion
 
         internal static int SelectedSiteLanguageId
         {
@@ -140,12 +150,11 @@ namespace SRFROWCA.Common
             }
         }
 
-        internal static void AddSiteLangInCookie(HttpResponse httpResponse, ROWCACommon.SiteLanguage lng)
+        internal static void AddSiteLangInCookie(HttpResponse httpResponse, RC.SiteLanguage lng)
         {
             httpResponse.Cookies["SiteLanguageCookie"].Value = ((int)lng).ToString();
             httpResponse.Cookies["SiteLanguageCookie"].Expires = DateTime.Now.AddDays(365);
         }
-
 
         internal static DataTable GetLocations(IPrincipal user, int locationType)
         {
@@ -157,7 +166,7 @@ namespace SRFROWCA.Common
             }
             else if (IsCountryAdmin(user))
             {
-                Guid userId = GetCurrentUserId();
+                Guid userId = GetCurrentUserId;
                 dt = DBContext.GetData("GetLocationOnTypeAndPrincipal", new object[] { locationType, userId });
             }
             else if (user.Identity.IsAuthenticated)
@@ -178,7 +187,7 @@ namespace SRFROWCA.Common
             DataTable dt = new DataTable();
             if (IsCountryAdmin(user))
             {
-                Guid userId = GetCurrentUserId();
+                Guid userId = GetCurrentUserId;
                 dt = DBContext.GetData("GetLocationEmergenciesOfUser", new object[] { userId });
             }
             else
@@ -194,46 +203,6 @@ namespace SRFROWCA.Common
             return DBContext.GetData("GetAllEmergencies", new object[] { languageId });
         }
 
-        internal static DataTable GetStrategicObjectives(IPrincipal user, int? languageId)
-        {
-            if (ROWCACommon.IsAdmin(user))
-            {
-                return DBContext.GetData("GetAllStrategicObjectives", new object[] { languageId });
-            }
-            else
-            {
-                Guid userId = GetCurrentUserId();
-                return DBContext.GetData("GetAllStrategicObjectivesOfUser", new object[] { userId });
-            }
-        }
-
-        internal static DataTable GetObjectives(IPrincipal user)
-        {
-            if (ROWCACommon.IsAdmin(user))
-            {
-                return DBContext.GetData("GetAllObjectives");
-            }
-            else
-            {
-                Guid userId = GetCurrentUserId();
-                return DBContext.GetData("GetAllObjectivesOfUser", new object[] { userId });
-            }
-        }
-
-        internal static DataTable GetIndicators(IPrincipal user)
-        {
-
-            if (IsAdmin(user))
-            {
-                return DBContext.GetData("GetAllIndicators");
-            }
-            else
-            {
-                Guid userId = GetCurrentUserId();
-                return DBContext.GetData("GetAllIndicatorsOfUser", new object[] { userId });
-            }
-        }
-
         internal static DataTable GetAllActivities(IPrincipal user)
         {
             if (IsAdmin(user))
@@ -242,7 +211,7 @@ namespace SRFROWCA.Common
             }
             else
             {
-                Guid userId = GetCurrentUserId();
+                Guid userId = GetCurrentUserId;
                 return DBContext.GetData("GetAllActivitiesOfUser", new object[] { userId });
             }
         }
@@ -255,25 +224,35 @@ namespace SRFROWCA.Common
             }
             else
             {
-                Guid userId = GetCurrentUserId();
+                Guid userId = GetCurrentUserId;
                 return DBContext.GetData("GetAllFrameWorkDataOfUser", new object[] { userId });
             }
         }
 
+        internal static DataTable GetAllUnits(int lngId)
+        {
+            return DBContext.GetData("GetAllUnits", new object[] { 1 });
+        }
+
+        
+
         internal static DataTable GetUserDetails()
         {
-            Guid userId = GetCurrentUserId();
+            Guid userId = GetCurrentUserId;   
             return DBContext.GetData("GetUserDetails", new object[] { userId });
         }
 
-        public static Guid GetCurrentUserId()
+        public static Guid GetCurrentUserId
         {
-            if (Membership.GetUser() != null)
+            get
             {
-                return (Guid)Membership.GetUser().ProviderUserKey;
-            }
+                if (Membership.GetUser() != null)
+                {
+                    return (Guid)Membership.GetUser().ProviderUserKey;
+                }
 
-            return new Guid();
+                return new Guid();
+            }
         }
 
         internal static void ShowMessage(Page page, Type pageType, string UniqueID, string message, NotificationType notificationType = NotificationType.Success, bool fadeOut = true, int animationTime = 0)
@@ -385,6 +364,20 @@ namespace SRFROWCA.Common
             }
 
             return itemIds;
+        }
+
+        internal static int GetSelectedIntVal(ListControl ctl)
+        {
+            int i = 0;
+            int.TryParse(ctl.SelectedValue, out i);
+            return i;
+        }
+
+        internal static decimal GetSelectedDecimalVal(ListControl ctl)
+        {
+            decimal i = 0m;
+            decimal.TryParse(ctl.SelectedValue, out i);
+            return i;
         }
 
         public enum LocationTypes

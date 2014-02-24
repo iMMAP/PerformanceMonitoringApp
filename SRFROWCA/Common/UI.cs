@@ -73,21 +73,32 @@ namespace SRFROWCA.Common
             ddl.DataBind();
         }
 
-        internal static void FillAllObjectives(DropDownList ddl, DataTable dt)
+        internal static void FillObjectives(ListControl control, DataTable dt)
         {
-            ddl.DataValueField = "ObjectiveId";
-            ddl.DataTextField = "Objective";
-            ddl.DataSource = dt;
-            ddl.DataBind();
+            control.DataValueField = "ObjectiveId";
+            control.DataTextField = "Objective";
+            control.DataSource = dt;
+            control.DataBind();
         }
 
-        internal static void FillIndicators(DropDownCheckBoxes ddl, DataTable dt)
+        internal static void FillObjectives(ListControl control)
         {
-            ddl.DataValueField = "ObjectiveIndicatorId";
-            ddl.DataTextField = "IndicatorName";
+            DataTable dt = RC.GetObjectives();
+            FillObjectives(control, dt);
+        }
 
-            ddl.DataSource = dt;
-            ddl.DataBind();
+        internal static void FillPriorities(ListControl control, DataTable dt)
+        {
+            control.DataValueField = "HumanitarianPriorityId";
+            control.DataTextField = "HumanitarianPriority";            
+            control.DataSource = dt;
+            control.DataBind();
+        }
+
+        internal static void FillPriorities(ListControl control)
+        {
+            DataTable dt = RC.GetPriorities();
+            FillPriorities(control, dt);
         }
 
         internal static void FillActivities(DropDownCheckBoxes ddl, DataTable dt)
@@ -155,6 +166,23 @@ namespace SRFROWCA.Common
         {
             ddl.DataValueField = "HumanitarianPriorityId";
             ddl.DataTextField = "HumanitarianPriority";            
+            ddl.DataSource = dt;
+            ddl.DataBind();
+        }
+
+        internal static void FillUnits(DropDownList ddl, DataTable dt)
+        {
+            ddl.DataValueField = "UnitId";
+            ddl.DataTextField = "Unit";
+            ddl.DataSource = dt;
+            ddl.DataBind();
+        }
+
+        internal static void FillUnits(DropDownList ddl)
+        {
+            ddl.DataValueField = "UnitId";
+            ddl.DataTextField = "Unit";
+            DataTable dt = RC.GetAllUnits(1);
             ddl.DataSource = dt;
             ddl.DataBind();
         }
