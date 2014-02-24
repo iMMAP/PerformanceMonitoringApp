@@ -30,7 +30,7 @@ namespace SRFROWCA.Admin
         private void LoadStrategicObjectives()
         {
             int? languageId = null; // (int)ROWCACommon.SiteLanguage.English;
-            gvStrategicObjective.DataSource = ROWCACommon.GetStrategicObjectives(this.User, languageId);
+            gvStrategicObjective.DataSource = ROWCACommon.GetStrategicObjectives(languageId);
             gvStrategicObjective.DataBind();
         }
 

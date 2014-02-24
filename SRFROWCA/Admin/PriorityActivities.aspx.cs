@@ -45,8 +45,8 @@ namespace SRFROWCA.Admin
         // Populate Emergencies Drop down.
         private void PopulateEmergencies()
         {
-            int locationId = (int)ROWCACommon.SiteLanguage.English;
-            UI.FillEmergency(ddlEmergencies, ROWCACommon.GetAllEmergencies(locationId));
+            int locationId = (int)RC.SiteLanguage.English;
+            UI.FillEmergency(ddlEmergencies, RC.GetAllEmergencies(locationId));
 
             if (ddlEmergencies.Items.Count == 1)
             {
@@ -76,7 +76,7 @@ namespace SRFROWCA.Admin
         private void PopulateObjectives()
         {
             DataTable dt = GetObjectives();
-            UI.FillAllObjectives(ddlObjectives, dt);
+            UI.FillObjectives(ddlObjectives, dt);
 
             ListItem item = new ListItem("Select Objective", "0");
             ddlObjectives.Items.Insert(0, item);
@@ -85,7 +85,7 @@ namespace SRFROWCA.Admin
         private DataTable GetObjectives()
         {
             int isLogFrame = 1;
-            return DBContext.GetData("GetObjectivesLogFrame", new object[] { (int)ROWCACommon.SiteLanguage.English, isLogFrame });
+            return DBContext.GetData("GetObjectivesLogFrame", new object[] { (int)RC.SiteLanguage.English, isLogFrame });
         }
 
         private void PopulatePriorities()
@@ -99,7 +99,7 @@ namespace SRFROWCA.Admin
         private DataTable GetPriorites()
         {
             int isLogFrame = 1;
-            return DBContext.GetData("GetPrioritiesLogFrame", new object[] { (int)ROWCACommon.SiteLanguage.English, isLogFrame });
+            return DBContext.GetData("GetPrioritiesLogFrame", new object[] { (int)RC.SiteLanguage.English, isLogFrame });
         }
 
         private void PopulateActivities()
@@ -116,7 +116,7 @@ namespace SRFROWCA.Admin
             int prId = 0;
             int.TryParse(ddlPriority.SelectedValue, out prId);
 
-            int languageId = (int) ROWCACommon.SiteLanguage.English;
+            int languageId = (int) RC.SiteLanguage.English;
             DataTable dt = DBContext.GetData("GetActivities", new object[] { emergencyId, clusterId, objId, prId, languageId });
             gvActivity.DataSource = dt;
             gvActivity.DataBind();

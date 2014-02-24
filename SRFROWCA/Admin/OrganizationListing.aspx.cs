@@ -202,7 +202,7 @@ namespace SRFROWCA.Admin
             int.TryParse(ddlOrgTypes.SelectedValue, out orgTypeId);
             string orgName = txtOrgName.Text.Trim();
             string orgAcronym = txtOrgAcronym.Text.Trim();
-            Guid userId = ROWCACommon.GetCurrentUserId();
+            Guid userId = RC.GetCurrentUserId;
 
             if (!string.IsNullOrEmpty(hfOrgId.Value))
             {

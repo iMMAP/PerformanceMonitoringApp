@@ -25,26 +25,29 @@ namespace SRFROWCA.Admin
 
         private DataTable GetUsers()
         {
-            if (ROWCACommon.IsCountryAdmin(this.User))
+            object[] parameters = GetParameters();
+            if (RC.IsCountryAdmin(this.User))
             {
-                object[] parameters = GetParameters();
+
                 return DBContext.GetData("GetUsers", parameters);
             }
             else
             {
-                return DBContext.GetData("GetAllUsersInfo");
+                return DBContext.GetData("GetAllUsersInfo", parameters);
             }
         }
 
         private object[] GetParameters()
         {
-            Guid userId = ROWCACommon.GetCurrentUserId();
-            string userName = null;
-            string email = null;
-            int? isApproved = null;
+            Guid userId = RC.GetCurrentUserId;
+
+            string userName = string.IsNullOrEmpty(txtUserName.Text.Trim()) ? null : txtUserName.Text.Trim();
+            string email = string.IsNullOrEmpty(txtEmail.Text.Trim()) ? null : txtEmail.Text.Trim();
+            string orgName = string.IsNullOrEmpty(txtOrg.Text.Trim()) ? null : txtOrg.Text.Trim();
+            string locationName = string.IsNullOrEmpty(txtCountry.Text.Trim()) ? null : txtCountry.Text.Trim();
+            int? userType = rbUserTypes.SelectedValue == "0" ? (int?)null : Convert.ToInt32(rbUserTypes.SelectedValue);
+            int? isApproved = rbIsApproved.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(rbIsApproved.SelectedValue);
             int? isLockedOut = null;
-            string orgName = null;
-            string locationName = null;
             return new object[] { userId, userName, email, isApproved, isLockedOut, orgName, locationName };
         }
 
@@ -96,7 +99,7 @@ namespace SRFROWCA.Admin
 
             if (cb == null || lblUserId == null) return;
 
-            AddRemoveUserInRole(cb.Checked, lblUserId.Text, ROWCACommon.GetCountryAdminRoleName);
+            AddRemoveUserInRole(cb.Checked, lblUserId.Text, RC.GetCountryAdminRoleName);
         }
 
         protected void gvUsers_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -130,7 +133,7 @@ namespace SRFROWCA.Admin
         {
             string fileName = "3WPMusers";
             string fileExtention = ".xls";
-            ExportUtility.ExportGridView(gvUsers, fileName, fileExtention, Response);            
+            ExportUtility.ExportGridView(gvUsers, fileName, fileExtention, Response);
         }
 
         public override void VerifyRenderingInServerForm(Control control) { }
@@ -181,6 +184,11 @@ namespace SRFROWCA.Admin
         {
             gvUsers.PageIndex = e.NewPageIndex;
             gvUsers.SelectedIndex = -1;
+            LoadUsers();
+        }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
             LoadUsers();
         }
 

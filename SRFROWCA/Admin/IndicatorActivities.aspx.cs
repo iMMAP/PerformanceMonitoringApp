@@ -48,7 +48,7 @@ namespace SRFROWCA.Admin
 
         private void LoadActivities()
         {
-            gvActivity.DataSource = ROWCACommon.GetAllActivities(this.User);
+            gvActivity.DataSource = RC.GetAllActivities(this.User);
             gvActivity.DataBind();
         }        
 
@@ -168,7 +168,7 @@ namespace SRFROWCA.Admin
         protected void gvActivity_Sorting(object sender, GridViewSortEventArgs e)
         {
             //Retrieve the table from the session object.
-            DataTable dt = ROWCACommon.GetAllActivities(this.User);
+            DataTable dt = RC.GetAllActivities(this.User);
             if (dt != null)
             {
                 //Sort the data.
@@ -210,8 +210,8 @@ namespace SRFROWCA.Admin
 
         private void PopulateEmergencies()
         {
-            int locationId = (int)ROWCACommon.SiteLanguage.English;
-            UI.FillEmergency(ddlLocEmergencies, ROWCACommon.GetAllEmergencies(locationId));            
+            int locationId = (int)RC.SiteLanguage.English;
+            UI.FillEmergency(ddlLocEmergencies, RC.GetAllEmergencies(locationId));            
         }
 
         protected void ddlLocEmergencies_SelectedIndexChanged(object sender, EventArgs e)
@@ -302,7 +302,7 @@ namespace SRFROWCA.Admin
                 int activityTypeId = 0;
                 int.TryParse(ddlActivityType.SelectedValue, out activityTypeId);
 
-                Guid userId = ROWCACommon.GetCurrentUserId();
+                Guid userId = RC.GetCurrentUserId;
                 string activityName = txtActivity.Text.Trim();
                 if (!string.IsNullOrEmpty(hfPKId.Value))
                 {

@@ -98,7 +98,7 @@ namespace SRFROWCA.Admin
 
         private void DeleteOffice(int officeId)
         {
-            Guid userId = ROWCACommon.GetCurrentUserId();
+            Guid userId = RC.GetCurrentUserId;
             DBContext.Delete("DeleteOffice", new object[] { officeId, userId, DBNull.Value });
         }
 
@@ -153,13 +153,13 @@ namespace SRFROWCA.Admin
 
         private DataTable GetOffices()
         {
-            if (ROWCACommon.IsAdmin(this.User))
+            if (RC.IsAdmin(this.User))
             {
                 return DBContext.GetData("GetAllOffices");
             }
-            else if (ROWCACommon.IsCountryAdmin(this.User))
+            else if (RC.IsCountryAdmin(this.User))
             {
-                Guid userId = ROWCACommon.GetCurrentUserId();
+                Guid userId = RC.GetCurrentUserId;
                 return DBContext.GetData("GetAllOfficesByPrincipal", new object[] { userId });
             }
 
@@ -171,7 +171,7 @@ namespace SRFROWCA.Admin
             ddlCountry.DataValueField = "LocationId";
             ddlCountry.DataTextField = "LocationName";
 
-            ddlCountry.DataSource = ROWCACommon.GetLocations(this.User, (int)ROWCACommon.LocationTypes.National);
+            ddlCountry.DataSource = RC.GetLocations(this.User, (int)RC.LocationTypes.National);
             ddlCountry.DataBind();
 
             ListItem item = new ListItem("Select Country", "0");
@@ -193,7 +193,7 @@ namespace SRFROWCA.Admin
             ddlLocations.DataValueField = "LocationId";
             ddlLocations.DataTextField = "LocationName";
 
-            int locationType = (int)ROWCACommon.LocationTypes.Governorate;
+            int locationType = (int)RC.LocationTypes.Governorate;
             ddlLocations.DataSource = GetLocationsOnParent(countryId, locationType);
             ddlLocations.DataBind();
 
@@ -302,7 +302,7 @@ namespace SRFROWCA.Admin
             int.TryParse(ddlLocations.SelectedValue, out locId);
 
             string officeName = txtOfficeName.Text.Trim();
-            Guid userId = ROWCACommon.GetCurrentUserId();
+            Guid userId = RC.GetCurrentUserId;
 
             if (!string.IsNullOrEmpty(hfOfficeId.Value))
             {

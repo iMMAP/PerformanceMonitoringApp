@@ -20,13 +20,13 @@ namespace SRFROWCA.Admin
 
         private void PopulateEmergencies()
         {
-            int locationId = (int) ROWCACommon.SiteLanguage.English;
-            UI.FillEmergency(ddlEmergencies, ROWCACommon.GetAllEmergencies(locationId));
+            int locationId = (int) RC.SiteLanguage.English;
+            UI.FillEmergency(ddlEmergencies, RC.GetAllEmergencies(locationId));
         }
 
         private void PopulateCountries()
         {
-            UI.FillLocations(cblLocations, ROWCACommon.GetLocations(this.User, (int)ROWCACommon.LocationTypes.National));
+            UI.FillLocations(cblLocations, RC.GetLocations(this.User, (int)RC.LocationTypes.National));
         }
 
         protected void ddlEmergencies_SelectedIndexChanged(object sender, EventArgs e)
@@ -121,7 +121,7 @@ namespace SRFROWCA.Admin
 
         private void SaveItem(int emergencyId, string itemValue)
         {
-            Guid userId = ROWCACommon.GetCurrentUserId();
+            Guid userId = RC.GetCurrentUserId;
             DBContext.Add("InsertEmergencyLocation", new object[] { emergencyId, Convert.ToInt32(itemValue), userId, DBNull.Value });
         }
 

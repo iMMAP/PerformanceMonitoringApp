@@ -28,13 +28,13 @@ namespace SRFROWCA.Admin
 
         private void PopulateEmergencies()
         {
-            int languageId = (int)ROWCACommon.SiteLanguage.English;
-            UI.FillEmergency(ddlEmergencies, ROWCACommon.GetAllEmergencies(languageId));
+            int languageId = (int)RC.SiteLanguage.English;
+            UI.FillEmergency(ddlEmergencies, RC.GetAllEmergencies(languageId));
         }
 
         private void PopulateClusters()
         {
-            UI.FillClusters(cblClusters, (int)ROWCACommon.SiteLanguage.English);
+            UI.FillClusters(cblClusters, (int)RC.SiteLanguage.English);
         }
 
         protected void ddlEmergencies_SelectedIndexChanged(object sender, EventArgs e)
@@ -56,7 +56,7 @@ namespace SRFROWCA.Admin
 
         private DataTable GetEmergencyClusters(int emergencyId)
         {
-            return DBContext.GetData("GetEmergencyClusters", new object[] { emergencyId, (int)ROWCACommon.SiteLanguage.English });
+            return DBContext.GetData("GetEmergencyClusters", new object[] { emergencyId, (int)RC.SiteLanguage.English });
         }
 
         private void CheckClusterListBox(DataTable dt)
@@ -129,7 +129,7 @@ namespace SRFROWCA.Admin
 
         private void SaveItem(int emergencyId, string itemValue)
         {
-            Guid userId = ROWCACommon.GetCurrentUserId();
+            Guid userId = RC.GetCurrentUserId;
             DBContext.Add("InsertEmergencyClusters", new object[] { emergencyId, Convert.ToInt32(itemValue), userId, DBNull.Value });
         }
 

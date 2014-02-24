@@ -50,7 +50,7 @@ namespace SRFROWCA.Admin
                 // Check if any IP has reported on this project. If so then do not delete it.
                 if (!EmgIsBeingUsed(emgId))
                 {
-                    ShowMessage("Emergency cannot be deleted! It is being used.", ROWCACommon.NotificationType.Error, false, 500);
+                    ShowMessage("Emergency cannot be deleted! It is being used.", RC.NotificationType.Error, false, 500);
                     return;
                 }
 
@@ -92,7 +92,7 @@ namespace SRFROWCA.Admin
         {
             //Retrieve the table from the session object.
             int? locationId = null;
-            DataTable dt = ROWCACommon.GetAllEmergencies(locationId);
+            DataTable dt = RC.GetAllEmergencies(locationId);
             if (dt != null)
             {
                 //Sort the data.
@@ -135,7 +135,7 @@ namespace SRFROWCA.Admin
         private void LoadEmergencies()
         {
             int? languageId = null;
-            gvEmergency.DataSource = ROWCACommon.GetAllEmergencies(languageId);
+            gvEmergency.DataSource = RC.GetAllEmergencies(languageId);
             gvEmergency.DataBind();
         }
 
@@ -186,7 +186,7 @@ namespace SRFROWCA.Admin
 
             string emgNameEng = txtEmgNameEng.Text.Trim();
             string emgNameFr = txtEmgNameFr.Text.Trim();
-            Guid userId = ROWCACommon.GetCurrentUserId();
+            Guid userId = RC.GetCurrentUserId;
 
             if (!string.IsNullOrEmpty(hfLocEmgId.Value))
             {
@@ -208,7 +208,7 @@ namespace SRFROWCA.Admin
         //    int.TryParse(ddlLocations.SelectedValue, out locId);
 
         //    string emgName = txtEmgName.Text.Trim();
-        //    Guid userId = ROWCACommon.GetCurrentUserId();
+        //    Guid userId = RC.GetCurrentUserId;
 
         //    if (!string.IsNullOrEmpty(hfLocEmgId.Value))
         //    {
@@ -217,10 +217,10 @@ namespace SRFROWCA.Admin
         //    }
         //}
 
-        private void ShowMessage(string message, ROWCACommon.NotificationType notificationType = ROWCACommon.NotificationType.Success, bool fadeOut = true, int animationTime = 0)
+        private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 0)
         {
             updMessage.Update();
-            ROWCACommon.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
+            RC.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
         }
 
         enum LocationTypes

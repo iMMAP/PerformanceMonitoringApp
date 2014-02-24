@@ -2,8 +2,98 @@
     EnableEventValidation="false" CodeBehind="UsersListing.aspx.cs" Inherits="SRFROWCA.Admin.UsersListing" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    <style>
+        .ddlWidthpx
+        {
+            width: 250px;
+        }
+    </style>
+    <script>
+        $(function () {
+            $("#<%=txtFromDate.ClientID%>").datepicker();
+            $("#<%=txtToDate.ClientID%>").datepicker();
+        });
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="container">
+        <div class="graybar">
+            Filter Users
+        </div>
+        <div class="contentarea">
+            <div class="formdiv">
+                <table width="100%">
+                    <tr>
+                        <td>
+                            <label>
+                                User Name:</label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtUserName" runat="server" CssClass="ddlWidthpx"></asp:TextBox>
+                        </td>
+                        <td>
+                            <label>
+                                User Email:</label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtEmail" runat="server" CssClass="ddlWidthpx"></asp:TextBox>
+                        </td>
+                        <td>
+                            <label>
+                                Organization:</label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtOrg" runat="server" Width="365px"></asp:TextBox>
+                        </td>
+                        <td>
+                            <label>
+                                Country:</label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtCountry" runat="server" CssClass="ddlWidthpx"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>
+                                User Type:
+                            </label>
+                        </td>
+                        <td>
+                            <asp:RadioButtonList ID="rbUserTypes" runat="server" RepeatColumns="4">
+                                <asp:ListItem Text="All" Value = "0" Selected="True"></asp:ListItem>
+                                <asp:ListItem Text="User" Value = "1"></asp:ListItem>
+                                <asp:ListItem Text="Clsuter Lead" Value = "2"></asp:ListItem>
+                                <asp:ListItem Text="Country Admin" Value = "3"></asp:ListItem>
+                            </asp:RadioButtonList>
+                        </td>
+                        <td>
+                            Approved:
+                        </td>
+                        <td>
+                            <asp:RadioButtonList ID="rbIsApproved" runat="server" RepeatColumns="3">
+                                <asp:ListItem Text="All" Value = "-1" Selected="True"></asp:ListItem>
+                                <asp:ListItem Text="Approved" Value = "1"></asp:ListItem>
+                                <asp:ListItem Text="Not Approved" Value = "0"></asp:ListItem>
+                            </asp:RadioButtonList>
+                        </td>
+                        <td>
+                            Created
+                        </td>
+                        <td>
+                            From:
+                            <asp:TextBox ID="txtFromDate" runat="server"></asp:TextBox>
+                            TO:
+                            <asp:TextBox ID="txtToDate" runat="server"></asp:TextBox>
+                        </td>
+                        <td colspan="2">
+                            <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
     <div class="buttonsdiv">
         <div class="savebutton">
             <asp:Button ID="btnExportExcel" runat="server" Text="Export To Excel" OnClick="btnExportExcel_Click"
