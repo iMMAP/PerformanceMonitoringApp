@@ -98,7 +98,7 @@ namespace SRFROWCA.Account
 
         private DataTable GetCountries()
         {
-            int locationType = (int)ROWCACommon.LocationTypes.National;
+            int locationType = (int)RC.LocationTypes.National;
             DataTable dt = DBContext.GetData("GetLocationOnType", new object[] { locationType });
 
             return dt.Rows.Count > 0 ? dt : new DataTable();

@@ -106,7 +106,7 @@ namespace SRFROWCA.Account
                     }
                 }
 
-                ShowMessage(message, ROWCACommon.NotificationType.Success, false, 500);
+                ShowMessage(message, RC.NotificationType.Success, false, 500);
 
                 ClearRegistrationControls();
             }
@@ -118,8 +118,8 @@ namespace SRFROWCA.Account
 
         private bool Valid()
         {
-            //string countryIds = ROWCACommon.GetSelectedValues(ddlLocations);
-            string clusterIds = ROWCACommon.GetSelectedValues(ddlClusters);
+            //string countryIds = RC.GetSelectedValues(ddlLocations);
+            string clusterIds = RC.GetSelectedValues(ddlClusters);
 
             string message = "";
             //if (string.IsNullOrEmpty(countryIds))
@@ -134,7 +134,7 @@ namespace SRFROWCA.Account
 
             if (!string.IsNullOrEmpty(message))
             {
-                ShowMessage(message, ROWCACommon.NotificationType.Error, false);
+                ShowMessage(message, RC.NotificationType.Error, false);
                 return false;
             }
 
@@ -165,7 +165,7 @@ namespace SRFROWCA.Account
             ddlCountry.DataValueField = "LocationId";
             ddlCountry.DataTextField = "LocationName";
 
-            DataTable dt = ROWCACommon.GetLocations(this.User, (int)ROWCACommon.LocationTypes.National);
+            DataTable dt = RC.GetLocations(this.User, (int)RC.LocationTypes.National);
             ddlCountry.DataSource = dt;
             ddlCountry.DataBind();
 
@@ -207,7 +207,7 @@ namespace SRFROWCA.Account
 
             if (membershipUser != null)
             {
-                ShowMessage(string.Format("This email {0} already exists in db!", txtEmail.Text.Trim()), ROWCACommon.NotificationType.Error);
+                ShowMessage(string.Format("This email {0} already exists in db!", txtEmail.Text.Trim()), RC.NotificationType.Error);
                 return true;
             }
             else
@@ -216,7 +216,7 @@ namespace SRFROWCA.Account
 
                 if (membershipUser != null)
                 {
-                    ShowMessage(string.Format("Someone already has this, {0}, username. Try another?!", txtUserName.Text.Trim()), ROWCACommon.NotificationType.Error);
+                    ShowMessage(string.Format("Someone already has this, {0}, username. Try another?!", txtUserName.Text.Trim()), RC.NotificationType.Error);
                     return true;
                 }
             }
@@ -315,10 +315,10 @@ namespace SRFROWCA.Account
             return new object[] { userId, orgId, countryId, phone, DBNull.Value };
         }
 
-        private void ShowMessage(string message, ROWCACommon.NotificationType notificationType = ROWCACommon.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
+        private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
         {
             updMessage.Update();
-            ROWCACommon.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
+            RC.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
         }
 
         public string UserId

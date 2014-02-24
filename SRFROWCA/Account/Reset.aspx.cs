@@ -73,7 +73,7 @@ namespace SRFROWCA.Account
                             mu.ChangePassword(mu.ResetPassword(), password);
                             DeleteKeyFromDB();
                             Session["ResetKey"] = null;
-                            ShowMessage(ROWCACommon.InfoMessage, "Your password has been changed!");
+                            ShowMessage(RC.InfoMessage, "Your password has been changed!");
                         }
                     }
                 }
@@ -81,12 +81,12 @@ namespace SRFROWCA.Account
                 {
                     Session["FromResetPageError"] = "Msg1";
                     Response.Redirect("~/Account/ForgotPassword.aspx");
-                    //ShowMessage(ROWCACommon.ErrorMessage, "We're sorry, but this reset code has expired. Please request a new one.");
+                    //ShowMessage(RC.ErrorMessage, "We're sorry, but this reset code has expired. Please request a new one.");
                 }
             }
             catch (Exception ex)
             {
-                ShowMessage(ROWCACommon.ErrorMessage, ex.Message);
+                ShowMessage(RC.ErrorMessage, ex.Message);
             }
         }
 
@@ -107,7 +107,7 @@ namespace SRFROWCA.Account
                 tempString += ConfigurationManager.AppSettings["tempresetstring"].ToString();
             }
 
-            string hash = ROWCACommon.GetHashString(guid + tempString + date);
+            string hash = RC.GetHashString(guid + tempString + date);
             string savedHash = dt.Rows[0]["LinkHash"].ToString();
             return hash == savedHash;
         }

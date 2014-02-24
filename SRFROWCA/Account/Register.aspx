@@ -26,43 +26,69 @@
             z-index: 10;
             font: 12px Verdana, sans-serif;
         }
+        .ddlWidthPx
+        {
+            width: 400px;
+        }
     </style>
     <script type="text/javascript">
         function pageLoad() {
             $(function () {
                 if ($('#<%=rbtnClusterLead.ClientID%>').is(':checked')) {
                     $('#trClusters').show();
+                    $('#trOrganization').hide();
                 }
                 else {
                     $('#trClusters').hide();
+                    $('#trOrganization').show();
                 }
 
                 $('#<%=rbtnUser.ClientID%>').change(function () {
                     if ($('#<%=rbtnUser.ClientID%>').is(':checked')) {
                         $('#trClusters').hide();
+                        $('#trOrganization').show();
                     }
                 });
 
                 $('#<%=rbtnClusterLead.ClientID%>').change(function () {
                     if ($('#<%=rbtnClusterLead.ClientID%>').is(':checked')) {
                         $('#trClusters').show();
+                        $('#trOrganization').hide();
                     }
                 });
 
                 $('#<%=rbtnCountryAdmin.ClientID%>').change(function () {
                     if ($('#<%=rbtnCountryAdmin.ClientID%>').is(':checked')) {
                         $('#trClusters').hide();
+                        $('#trOrganization').hide();
                     }
                 });
             });
         }
 
+        function ValidateOrganization(source, args) {
+
+            if (document.getElementById('<%=rbtnUser.ClientID%>').checked) {
+                var ddl = document.getElementById('<%= ddlOrganization.ClientID %>');
+                if (ddl.options[ddl.selectedIndex].value === '0') {
+
+                    args.IsValid = false;
+                }
+                else {
+                    args.IsValid = true;
+                }
+            }
+            else {
+                args.IsValid = true;
+            }
+        }
+
         function ValidateClustersList(source, args) {
 
             if (document.getElementById('<%=rbtnClusterLead.ClientID%>').checked) {
-                var ddl = document.getElementById('<%= ddlClusters.ClientID %>');                
+                var ddl = document.getElementById('<%= ddlClusters.ClientID %>');
                 if (ddl.options[ddl.selectedIndex].value === '0') {
-                   
+
                     args.IsValid = false;
                 }
                 else {
@@ -98,14 +124,29 @@
                 </div>
                 <div class="contentarea">
                     <div class="formdiv">
-                        <table border="0" width="100%">
+                        <table style="margin: 0 auto;" border="0">
+                            <tr>
+                                <td>
+                                    <label>
+                                        Your Role:</label>
+                                </td>
+                                <td colspan="2">
+                                    <div id="divUserRoles" runat="server">
+                                        <asp:RadioButton ID="rbtnUser" runat="server" Text="User" GroupName="Roles" Checked="true" />
+                                        <asp:RadioButton ID="rbtnClusterLead" runat="server" Text="Cluster Lead" GroupName="Roles" />
+                                        <asp:RadioButton ID="rbtnCountryAdmin" runat="server" Text="Country Admin" GroupName="Roles" />
+                                    </div>
+                                    <div id="chkCountriesMessage">
+                                    </div>
+                                </td>
+                            </tr>
                             <tr>
                                 <td>
                                     <label>
                                         Name:</label>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtUserName" runat="server" MaxLength="256" CssClass="ddlWidth"></asp:TextBox>
+                                    <asp:TextBox ID="txtUserName" runat="server" MaxLength="256" CssClass="ddlWidthPx"></asp:TextBox>
                                 </td>
                                 <td>
                                     <asp:RequiredFieldValidator ID="rfvUserName" runat="server" ErrorMessage="UserName Required"
@@ -119,7 +160,7 @@
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" MaxLength="128"
-                                        CssClass="ddlWidth"></asp:TextBox>
+                                        CssClass="ddlWidthPx"></asp:TextBox>
                                 </td>
                                 <td>
                                     <asp:RequiredFieldValidator ID="rfvPassword" runat="server" ErrorMessage="Password Required"
@@ -135,7 +176,7 @@
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtConfirmPassword" runat="server" TextMode="Password" MaxLength="128"
-                                        CssClass="ddlWidth"></asp:TextBox>
+                                        CssClass="ddlWidthPx"></asp:TextBox>
                                 </td>
                                 <td>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Confirm Password Required"
@@ -150,7 +191,7 @@
                                         Email:</label>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtEmail" runat="server" MaxLength="256" CssClass="ddlWidth"></asp:TextBox>
+                                    <asp:TextBox ID="txtEmail" runat="server" MaxLength="256" CssClass="ddlWidthPx"></asp:TextBox>
                                 </td>
                                 <td>
                                     <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="Email Required"
@@ -163,23 +204,23 @@
                                         Phone:</label>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtPhone" MaxLength="50" runat="server" CssClass="ddlWidth"></asp:TextBox>
+                                    <asp:TextBox ID="txtPhone" MaxLength="50" runat="server" CssClass="ddlWidthPx"></asp:TextBox>
                                 </td>
                                 <td>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr id="trOrganization">
                                 <td>
                                     <label>
                                         Organization:</label>
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="ddlOrganization" runat="server" CssClass="ddlWidth">
+                                    <asp:DropDownList ID="ddlOrganization" runat="server" CssClass="ddlWidthPx">
                                     </asp:DropDownList>
                                 </td>
                                 <td>
-                                    <asp:RequiredFieldValidator ID="rfvOrganization" runat="server" ErrorMessage="Organization Required"
-                                        CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlOrganization"></asp:RequiredFieldValidator>
+                                    <asp:CustomValidator runat="server" ForeColor="Red" ID="CustomValidator2" ClientValidationFunction="ValidateOrganization"
+                                        ErrorMessage="Required."></asp:CustomValidator>
                                 </td>
                             </tr>
                             <tr>
@@ -187,26 +228,15 @@
                             <tr>
                                 <td width="109px">
                                     <label>
-                                        <asp:Literal ID="ltrlLocation" runat="server" Text="Country:"></asp:Literal></label>
+                                        Country:</label>
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="ddlCountry" runat="server" CssClass="ddlWidth">
+                                    <asp:DropDownList ID="ddlCountry" runat="server" CssClass="ddlWidthPx">
                                     </asp:DropDownList>
                                 </td>
                                 <td>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Location Required"
                                         CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCountry"></asp:RequiredFieldValidator>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="3">
-                                    <div id="divUserRoles" runat="server">
-                                        <asp:RadioButton ID="rbtnUser" runat="server" Text="User" GroupName="Roles" Checked="true" />
-                                        <asp:RadioButton ID="rbtnClusterLead" runat="server" Text="Cluster Lead" GroupName="Roles" />
-                                        <asp:RadioButton ID="rbtnCountryAdmin" runat="server" Text="Country Admin" GroupName="Roles" />
-                                    </div>
-                                    <div id="chkCountriesMessage">
-                                    </div>
                                 </td>
                             </tr>
                             <tr id="trClusters">
@@ -216,23 +246,27 @@
                                     </label>
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="ddlClusters" runat="server" CssClass="ddlWidth">
+                                    <asp:DropDownList ID="ddlClusters" runat="server" CssClass="ddlWidthPx">
                                     </asp:DropDownList>
                                 </td>
                                 <td>
                                     <asp:CustomValidator runat="server" ForeColor="Red" ID="CustomValidator1" ClientValidationFunction="ValidateClustersList"
-                                        ErrorMessage="Select atleast one Cluster."></asp:CustomValidator>
+                                        ErrorMessage="Required."></asp:CustomValidator>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="left">
+                                    <asp:Button ID="btnRegister" runat="server" Text="Register" CssClass="button_example"
+                                        OnClick="btnRegister_Click" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="left">
+                                    <asp:LinkButton ID="lbtnMissing" Style="color: Blue" runat="server" Text="Request Missing Organization Or Location"></asp:LinkButton>
                                 </td>
                             </tr>
                         </table>
                         <div class="spacer" style="clear: both;">
-                        </div>
-                        <asp:Button ID="btnRegister" runat="server" Text="Register" CssClass="button_example"
-                            OnClick="btnRegister_Click" />
-                        <div class="spacerbig" style="clear: both;">
-                        </div>
-                        <div>
-                            <asp:LinkButton ID="lbtnMissing" Style="color: Blue" runat="server" Text="Request Missing Organization Or Location"></asp:LinkButton>
                         </div>
                         <div class="spacer" style="clear: both;">
                         </div>

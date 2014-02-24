@@ -26,11 +26,11 @@ namespace SRFROWCA.Account
                 string msg = Session["FromResetPageError"].ToString();
                 if (msg == "Msg1")
                 {
-                    ShowMessage(ROWCACommon.ErrorMessage, "We're sorry, but this reset code has expired. Please request a new one.");
+                    ShowMessage(RC.ErrorMessage, "We're sorry, but this reset code has expired. Please request a new one.");
                 }
                 else if (msg == "Msg2")
                 {
-                    ShowMessage(ROWCACommon.ErrorMessage, "Sorry! We couldn't verify that this user requested a password reset. Please try resetting again.");
+                    ShowMessage(RC.ErrorMessage, "Sorry! We couldn't verify that this user requested a password reset. Please try resetting again.");
                 }
 
                 Session["FromResetPageError"] = null;
@@ -46,7 +46,7 @@ namespace SRFROWCA.Account
 
                 if (string.IsNullOrEmpty(userName) && string.IsNullOrEmpty(email))
                 {
-                    ShowMessage(ROWCACommon.ErrorMessage, "Please provide at least either of the one, User Name or Email.");
+                    ShowMessage(RC.ErrorMessage, "Please provide at least either of the one, User Name or Email.");
                     return;
                 }
                 else
@@ -54,7 +54,7 @@ namespace SRFROWCA.Account
                     MembershipUser mu = GetUserFromProvidedInfo(userName, email);
                     if (mu == null)
                     {
-                        ShowMessage(ROWCACommon.ErrorMessage, "We couldn't find you using the information you entered. Please try again.");
+                        ShowMessage(RC.ErrorMessage, "We couldn't find you using the information you entered. Please try again.");
                         return;
                     }
                     else
@@ -77,7 +77,7 @@ namespace SRFROWCA.Account
                             }
                             string datetime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
-                            string hash = ROWCACommon.GetHashString(guid + tempString + datetime);
+                            string hash = RC.GetHashString(guid + tempString + datetime);
                             SaveValuesInDB(mu.UserName, hash, guid, datetime);
                             link = GenerateTempLinkForUser(guid.ToString());
                             //EmailLink(mu.Email, link, mu.UserName);
@@ -88,7 +88,7 @@ namespace SRFROWCA.Account
             }
             catch (Exception ex)
             {
-                ShowMessage(ROWCACommon.ErrorMessage, ex.Message);
+                ShowMessage(RC.ErrorMessage, ex.Message);
             }
         }
 

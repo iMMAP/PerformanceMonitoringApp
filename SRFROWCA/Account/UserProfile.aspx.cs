@@ -26,7 +26,7 @@ namespace SRFROWCA.Account
 
         private void GetUserInformation()
         {
-            Guid userId = ROWCACommon.GetCurrentUserId();
+            Guid userId = RC.GetCurrentUserId;
             MembershipUser mu = Membership.GetUser(userId);
             txtUserName.Text = mu.UserName;
             txtEmail.Text = mu.Email;
@@ -60,7 +60,7 @@ namespace SRFROWCA.Account
 
         private DataTable GetCountries()
         {
-            int locationType = (int)ROWCACommon.LocationTypes.National;
+            int locationType = (int)RC.LocationTypes.National;
             DataTable dt = DBContext.GetData("GetLocationOnType", new object[] { locationType });
 
             return dt.Rows.Count > 0 ? dt : new DataTable();
@@ -70,7 +70,7 @@ namespace SRFROWCA.Account
         {
             try
             {
-                Guid userId = ROWCACommon.GetCurrentUserId();
+                Guid userId = RC.GetCurrentUserId;
                 MembershipUser mu = Membership.GetUser(userId);
                 mu.Email = txtEmail.Text;
                 Membership.UpdateUser(mu);
@@ -81,7 +81,7 @@ namespace SRFROWCA.Account
             catch
             {
                 ShowMessage("Some error occoured while updating your profile. Please contact to Admin of the site.",
-                    ROWCACommon.NotificationType.Error);
+                    RC.NotificationType.Error);
             }
             
         }
@@ -94,9 +94,9 @@ namespace SRFROWCA.Account
             return new object[] { userId, countryId, phone, DBNull.Value };
         }
 
-        private void ShowMessage(string message, ROWCACommon.NotificationType notificationType = ROWCACommon.NotificationType.Success)
+        private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success)
         {
-            ROWCACommon.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, true, 500);
+            RC.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, true, 500);
         }
 
         protected void Page_Error(object sender, EventArgs e)
