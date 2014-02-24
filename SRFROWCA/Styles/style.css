@@ -59,6 +59,7 @@ select
     border: 1px solid #ccc;
     margin-top: 40px;
 }
+
 .graybar
 {
     background-color: #efefef;
@@ -282,7 +283,7 @@ table.imagetable td
 
 .altcolor
 {
-    background-color: #fbfbfb !important;
+    background-color: #fbfbfb;
 }
 
 .istrow

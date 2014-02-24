@@ -199,7 +199,7 @@ CSS for Login, Register, ForgotPassword, ChagnePassword
     width: 100%;
     margin: 0 auto;
     border: 1px solid #ccc;
-    margin-top: 40px;
+    margin: 10px;
 }
 
 .containerErrorCenter
@@ -217,6 +217,19 @@ CSS for Login, Register, ForgotPassword, ChagnePassword
     margin-top: 5px;
 }
 
+.containerDataEntryMain2
+{
+    width: 98%;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+}
+
+.divMargin
+{
+    margin-bottom: 10px;
+}
+
 .containerDataEntryGrid
 {
     width: 79%;    
@@ -228,6 +241,14 @@ CSS for Login, Register, ForgotPassword, ChagnePassword
 .containerDataEntryProjects
 {
     width: 20%;
+    float:left;
+    /*margin: 0 auto;
+    border: 1px solid #ccc;*/
+}
+
+.containerDataEntryProjects2
+{
+    width: 25%;
     float:left;
     /*margin: 0 auto;
     border: 1px solid #ccc;*/
