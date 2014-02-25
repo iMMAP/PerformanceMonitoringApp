@@ -20,7 +20,7 @@ namespace SRFROWCA.Common
             }
         }
 
-        internal static int GetUserCountry
+        internal static int GetCountry
         {
             get
             {
@@ -29,7 +29,7 @@ namespace SRFROWCA.Common
             }
         }
 
-        internal static int GetUserCluster
+        internal static int GetCluster
         {
             get
             {
@@ -38,7 +38,7 @@ namespace SRFROWCA.Common
             }
         }
 
-        internal static int GetUserOrganization
+        internal static int GetOrganization
         {
             get
             {
