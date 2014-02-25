@@ -23,6 +23,8 @@ namespace SRFROWCA.Pages
         private void PopulateClusters()
         {
             UI.FillClusters(ddlCluster, (int)RC.SiteLanguage.English);
+            ListItem item = new ListItem("Select Cluster", "0");
+            ddlCluster.Items.Insert(0, item);
         }
 
         private void PopulateProjects()
@@ -44,7 +46,7 @@ namespace SRFROWCA.Pages
         private DataTable GetProjects()
         {
             Guid userId = RC.GetCurrentUserId;
-            int locationId = UserInfo.GetUserCountry;
+            int locationId = UserInfo.GetCountry;
             return DBContext.GetData("GetORSProjectsOfUser", new object[] { locationId, userId });
         }
 
@@ -60,6 +62,7 @@ namespace SRFROWCA.Pages
                 ddlCluster.SelectedValue = dt.Rows[0]["ClusterId"].ToString();
                 txtFromDate.Text = dt.Rows[0]["ProjectStartDate"].ToString();
                 txtToDate.Text = dt.Rows[0]["ProjectEndDate"].ToString();
+                ltrlProjectCode.Text = dt.Rows[0]["ProjectCode"].ToString();
             }
         }
 
@@ -70,6 +73,8 @@ namespace SRFROWCA.Pages
             txtProjectObjective.Text = "";
             txtFromDate.Text = "";
             txtToDate.Text = "";
+            ltrlProjectCode.Text = "";
+            ddlCluster.SelectedValue = "0";
             ORSProjectId = 0;
         }
 
@@ -94,7 +99,8 @@ namespace SRFROWCA.Pages
 
         private void Save()
         {
-            int locationId = UserInfo.GetUserCountry;
+            int locationId = UserInfo.GetCountry;
+            int orgId = UserInfo.GetOrganization;
             string title = txtProjectTitle.Text.Trim();
             string objective = txtProjectObjective.Text.Trim();
             int clusterId = Convert.ToInt32(ddlCluster.SelectedValue);
@@ -104,16 +110,19 @@ namespace SRFROWCA.Pages
             Guid userId = RC.GetCurrentUserId;
             int projectId = RC.GetSelectedIntVal(rblProjects);
 
-            if (projectId > 0)
+            if (locationId > 0 && clusterId > 0)
             {
-                DBContext.Add("UpdateProject", new object[] { projectId, title, objective, 
+                if (projectId > 0)
+                {
+                    DBContext.Add("UpdateProject", new object[] { projectId, title, objective, 
                                                             clusterId, locationId, startDate,
                                                             endDate, userId, DBNull.Value });
-            }
-            else
-            {
-                ORSProjectId = DBContext.Add("InsertProject", new object[] { title, objective, clusterId, locationId,
-                                                                startDate, endDate, userId, DBNull.Value });
+                }
+                else
+                {
+                    ORSProjectId = DBContext.Add("InsertProject", new object[] { title, objective, clusterId, locationId,
+                                                             orgId, startDate, endDate, userId, DBNull.Value });
+                }
             }
         }
 

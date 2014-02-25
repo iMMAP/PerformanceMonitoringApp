@@ -4,8 +4,19 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <script>
         $(function () {
-            $("#<%=txtFromDate.ClientID%>").datepicker();
-            $("#<%=txtToDate.ClientID%>").datepicker();
+
+            $("#<%=txtFromDate.ClientID%>").datepicker({
+                numberOfMonths: 2,
+                onSelect: function (selected) {
+                    $("#<%=txtToDate.ClientID%>").datepicker("option", "minDate", selected)
+                }
+            });
+            $("#<%=txtToDate.ClientID%>").datepicker({
+                numberOfMonths: 2,
+                onSelect: function (selected) {
+                    $("#<%=txtFromDate.ClientID%>").datepicker("option", "maxDate", selected)
+                }
+            });
         });
     </script>
 </asp:Content>
@@ -18,14 +29,12 @@
                 <div class="graybar">
                     My Projects
                 </div>
-                
-                    <asp:RadioButtonList ID="rblProjects" runat="server" AutoPostBack="true" OnSelectedIndexChanged="rblProjects_SelectedIndexChanged">
-                    </asp:RadioButtonList>
-                    <br />
-                    <br />
-                    <asp:Button ID="btnCreateProject" runat="server" Text="Create New Project" CssClass="button_example"
-                        OnClick="btnCreateProject_Click" />
-                
+                <asp:RadioButtonList ID="rblProjects" runat="server" AutoPostBack="true" OnSelectedIndexChanged="rblProjects_SelectedIndexChanged">
+                </asp:RadioButtonList>
+                <br />
+                <br />
+                <asp:Button ID="btnCreateProject" runat="server" Text="Create New Project" CssClass="button_example"
+                    CausesValidation="false" OnClick="btnCreateProject_Click" />
             </div>
         </div>
     </div>
@@ -36,6 +45,16 @@
         <div class="contentarea">
             <div class="formdiv">
                 <table>
+                    <tr>
+                        <td>
+                            <label>
+                                Project Code:</label>
+                        </td>
+                        <td>
+                            <label>
+                                <asp:Literal ID="ltrlProjectCode" runat="server" Text=""></asp:Literal></label>
+                        </td>
+                    </tr>
                     <tr>
                         <td>
                             <label>
@@ -65,6 +84,8 @@
                         <td>
                             <asp:DropDownList ID="ddlCluster" runat="server" Width="320px">
                             </asp:DropDownList>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Required"
+                                CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCluster"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
@@ -98,4 +119,5 @@
                 </table>
             </div>
         </div>
+    </div>
 </asp:Content>

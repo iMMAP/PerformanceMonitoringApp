@@ -22,6 +22,24 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.RadioButtonList rblProjects;
         
         /// <summary>
+        /// cblObjectives control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList cblObjectives;
+        
+        /// <summary>
+        /// cblPriorities control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList cblPriorities;
+        
+        /// <summary>
         /// Wizard1 control.
         /// </summary>
         /// <remarks>
@@ -40,13 +58,13 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.WizardStep WizardStep1;
         
         /// <summary>
-        /// gvActivities control.
+        /// gvIndicators control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvActivities;
+        protected global::System.Web.UI.WebControls.GridView gvIndicators;
         
         /// <summary>
         /// WizardStep2 control.
@@ -58,13 +76,22 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.WizardStep WizardStep2;
         
         /// <summary>
-        /// cblLocation control.
+        /// cblAdmin1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList cblLocation;
+        protected global::System.Web.UI.WebControls.CheckBoxList cblAdmin1;
+        
+        /// <summary>
+        /// cblAdmin2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList cblAdmin2;
         
         /// <summary>
         /// wz3 control.
@@ -76,12 +103,12 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.WizardStep wz3;
         
         /// <summary>
-        /// gvActLoc control.
+        /// gvTargts control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvActLoc;
+        protected global::System.Web.UI.WebControls.GridView gvTargts;
     }
 }
