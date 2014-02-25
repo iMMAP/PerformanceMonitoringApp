@@ -280,6 +280,33 @@ table.imagetable td
     border-color: #bbbbbb;
 }
 
+table.imagetable2
+{
+    width: 100%;
+    font-size: 11px;
+    color: #39668e;
+    border-width: 1px;
+    border-color: #bbbbbb;
+    border-collapse: collapse;
+}
+table.imagetable2 th
+{
+    background: #ddd;
+    border-width: 1px;
+    padding: 6px;
+    border-style: solid;
+    border-color: #bbbbbb;
+    text-align: left;
+}
+table.imagetable2 td
+{
+    border-width: 1px;
+    padding: 6px;
+    border-style: solid;
+    color: #000000;
+    border-color: #bbbbbb;
+}
+
 
 .altcolor
 {
