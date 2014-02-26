@@ -14,16 +14,20 @@ namespace SRFROWCA.Pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (IsPostBack) return;
-            PopulateProjects();
-            PopulateObjectives();
-            PopulatePriorities();
-
-            if (rblProjects.Items.Count > 0)
+            if (!IsPostBack)
             {
-                rblProjects.SelectedIndex = 0;
-                PopulateLogFrame();
+                PopulateProjects();
+                PopulateObjectives();
+                PopulatePriorities();
+
+                if (rblProjects.Items.Count > 0)
+                {
+                    rblProjects.SelectedIndex = 0;
+                    PopulateLogFrame();
+                }
             }
+
+            //PopulateTragetsGrid();
         }
 
         private void PopulateObjectives()
@@ -71,15 +75,61 @@ namespace SRFROWCA.Pages
         {
             if (e.NextStepIndex == 1)
             {
-                //PopulateLogFrame();
                 PopulateLocations();
+                SaveOPSIndicator();
             }
             else if (e.NextStepIndex == 2)
             {
-                DataTable dt = GetIndicatorsAndLocationsForTarget();
-                AddDynamicColumnsInGrid(dt);
-                gvTargts.DataSource = dt;
-                gvTargts.DataBind();
+                PopulateTragetsGrid();
+            }
+        }
+
+        private void PopulateTragetsGrid()
+        {
+            DataTable dt = GetIndicatorsAndLocationsForTarget();
+            AddDynamicColumnsInGrid(dt);
+            gvTargts.DataSource = dt;
+            gvTargts.DataBind();
+            Session["dtProjectIndicators"] = dt;
+        }
+
+        private void SaveOPSIndicator()
+        {
+            int projectId = RC.GetSelectedIntVal(rblProjects);
+            int? orgId = null;
+            Guid userId = RC.GetCurrentUserId;
+            DBContext.Delete("DeleteIndicatorFromProject", new object[] {projectId, 0, DBNull.Value, DBNull.Value });
+            foreach (GridViewRow row in gvIndicators.Rows)
+            {
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    int indicatorId = Convert.ToInt32(gvIndicators.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString());
+
+                    CheckBox cbIsSRP = gvIndicators.Rows[row.RowIndex].FindControl("cbIsSRP") as CheckBox;
+                    if (cbIsSRP == null)return;
+                    if (!cbIsSRP.Checked)
+                    {
+                        CheckBox cbIsAdded = gvIndicators.Rows[row.RowIndex].FindControl("cbIsAdded") as CheckBox;
+                        if (cbIsAdded == null) return;
+
+                        int isOPS = 1;
+                        int isActive = Convert.ToInt32(cbIsAdded.Checked);
+
+                        DBContext.Update("UpdateOPSProjectIndicatorStatus", new object[] { projectId, indicatorId, isOPS, isActive, orgId, userId, DBNull.Value });
+                    }
+                    else
+                    {
+                        CheckBox cbIsAdded = gvIndicators.Rows[row.RowIndex].FindControl("cbIsAdded") as CheckBox;
+                        if (cbIsAdded == null) return;
+
+                        if (cbIsAdded.Checked)
+                        {
+                            int isActive = Convert.ToInt32(cbIsAdded.Checked);
+                            int projSelectedIndId = DBContext.Add("InsertProjectIndicator2",
+                                                                    new object[] { projectId, indicatorId, 0, isActive, orgId, userId, DBNull.Value });
+                        }
+                    }
+                }
             }
         }
 
@@ -94,31 +144,36 @@ namespace SRFROWCA.Pages
 
         private DataTable GetIndicatorsAndLocationsForTarget()
         {
-            int projectId = Convert.ToInt32(rblProjects.SelectedValue);
+            int projectId = RC.GetSelectedIntVal(rblProjects);
 
             int clusterId = 0;
             DataTable dt = Session["testprojectdata"] as DataTable;
-            foreach (DataRow dr in dt.Rows)
+
+            DataTable dtIndicators = new DataTable();
+            if (dt != null && dt.Rows.Count > 0)
             {
-                if (dr["ProjectId"].ToString() == projectId.ToString())
+                foreach (DataRow dr in dt.Rows)
                 {
-                    clusterId = Convert.ToInt32(dr["ClusterId"]);
+                    if (dr["ProjectId"].ToString() == projectId.ToString())
+                    {
+                        clusterId = Convert.ToInt32(dr["ClusterId"]);
+                    }
                 }
-            }
 
-            string selectedAdmin1 = GetSelectedItems(cblAdmin1);
-            string selectedAdmin2 = GetSelectedItems(cblAdmin2);
-            string locationSelected = selectedAdmin1 + "," + selectedAdmin2;
+                string selectedAdmin1 = GetSelectedItems(cblAdmin1);
+                string selectedAdmin2 = GetSelectedItems(cblAdmin2);
+                string locationSelected = selectedAdmin1 + "," + selectedAdmin2;
 
-            string notSelectedAdmin1 = GetNotSelectedItems(cblAdmin1);
-            string notSelectedAdmin2 = GetNotSelectedItems(cblAdmin2);
-            string locationNotSelectedIds = ""; // notSelectedAdmin1 + "," + notSelectedAdmin2;
-            string actIds = GetSelectedIndicators();
-            int lngId = 1;
-            DataTable dtIndicators = DBContext.GetData("GetProjectIndicatorsForTargets", new object[] { 1, 
+                string notSelectedAdmin1 = GetNotSelectedItems(cblAdmin1);
+                string notSelectedAdmin2 = GetNotSelectedItems(cblAdmin2);
+                string locationNotSelectedIds = ""; // notSelectedAdmin1 + "," + notSelectedAdmin2;
+                string actIds = GetSelectedIndicators();
+                int lngId = 1;
+                dtIndicators = DBContext.GetData("GetProjectIndicatorsForTargets", new object[] { 1, 
                                                                                                     clusterId,  locationSelected, 
                                                                                                     locationNotSelectedIds,
                                                                                                     actIds, lngId});
+            }
             return dtIndicators;
         }
 
@@ -153,19 +208,25 @@ namespace SRFROWCA.Pages
                 if (row.RowType == DataControlRowType.DataRow)
                 {
                     int indicatorId = Convert.ToInt32(gvIndicators.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString());
-
-                    CheckBox cb = gvIndicators.Rows[row.RowIndex].FindControl("cbIsAdded") as CheckBox;
-                    if (cb != null)
+                    CheckBox cbIsSRP = gvIndicators.Rows[row.RowIndex].FindControl("cbIsSRP") as CheckBox;
+                    if (cbIsSRP != null)
                     {
-                        if (cb.Checked)
+                        if (cbIsSRP.Checked)
                         {
-                            if (actIds != "")
+                            CheckBox cb = gvIndicators.Rows[row.RowIndex].FindControl("cbIsAdded") as CheckBox;
+                            if (cb != null)
                             {
-                                actIds += "," + indicatorId.ToString();
-                            }
-                            else
-                            {
-                                actIds += indicatorId.ToString();
+                                if (cb.Checked)
+                                {
+                                    if (actIds != "")
+                                    {
+                                        actIds += "," + indicatorId.ToString();
+                                    }
+                                    else
+                                    {
+                                        actIds += indicatorId.ToString();
+                                    }
+                                }
                             }
                         }
                     }
@@ -177,8 +238,8 @@ namespace SRFROWCA.Pages
 
         protected void wzrdReport_FinishButtonClick(object sender, WizardNavigationEventArgs e)
         {
-            Save();
-            Response.Redirect("~/Pages/AddActivities.aspx");
+            //Save();
+            //Response.Redirect("~/Pages/AddActivities.aspx");
         }
 
         private void PopulateLogFrame()
@@ -212,33 +273,7 @@ namespace SRFROWCA.Pages
 
         private void Save()
         {
-            foreach (GridViewRow row in gvTargts.Rows)
-            {
-                if (row.RowType == DataControlRowType.DataRow)
-                {
-                    int pId = Convert.ToInt32(gvTargts.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString());
-                    TextBox txtBale = row.FindControl("txtBale") as TextBox;
-                    int? tBale = null;
-                    if (txtBale != null)
-                    {
-                        tBale = string.IsNullOrEmpty(txtBale.Text.Trim()) ? (int?)null : Convert.ToInt32(txtBale.Text.Trim());
-                    }
-
-                    TextBox txtBanwa = row.FindControl("txtBanwa") as TextBox;
-                    int? tBanwa = null;
-                    if (txtBanwa != null)
-                    {
-                        tBanwa = string.IsNullOrEmpty(txtBanwa.Text.Trim()) ? (int?)null : Convert.ToInt32(txtBanwa.Text.Trim());
-                    }
-                    Guid userId = RC.GetCurrentUserId;
-                    int projectId = Convert.ToInt32(rblProjects.SelectedValue);
-
-                    if (tBale != null || tBanwa != null)
-                    {
-                        DBContext.Add("InsertUserActivityDataTest", new object[] { 2, pId, userId, projectId, DBNull.Value });
-                    }
-                }
-            }
+            SaveReportDetails();
         }
 
         protected void gvIndicators_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -428,7 +463,7 @@ namespace SRFROWCA.Pages
         private void SaveReportDetails()
         {
             int activityDataId = 0;
-
+            int projectId = RC.GetSelectedIntVal(rblProjects);
             foreach (GridViewRow row in gvTargts.Rows)
             {
                 if (row.RowType != DataControlRowType.DataRow) return;
@@ -460,8 +495,11 @@ namespace SRFROWCA.Pages
 
                     if (locationId > 0 && value != null)
                     {
-                        Guid loginUserId = RC.GetCurrentUserId;
-                        int newReportDetailId = DBContext.Add("",
+                        Guid userId = RC.GetCurrentUserId;
+                        int? orgId = null;
+                        int projSelectedIndId = DBContext.Add("InsertProjectIndicator", 
+                                                                new object[] { projectId, activityDataId, 0, 1, orgId, userId, DBNull.Value});
+                        int newReportDetailId = DBContext.Add("InsertAnnualTargetOfIndicatorOnLocation",
                                                                 new object[] { activityDataId, locationId, 
                                                                                             value, 1, DBNull.Value });
                     }

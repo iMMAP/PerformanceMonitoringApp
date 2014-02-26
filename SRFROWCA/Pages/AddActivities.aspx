@@ -424,7 +424,7 @@
                 <asp:Button ID="btnExport" runat="server" Text="Export (PDF)" />
                 </div>
                 <div  style="float:right">
-                    <label>YA => Yearly Target &nbsp;&nbsp; &nbsp; T => Target &nbsp;&nbsp;&nbsp; A => Achieved</label>
+                    <label></label>
                     </div>
                 </div>
                 <div id="scrolledGridView" style="overflow-x: auto; width: 100%;">

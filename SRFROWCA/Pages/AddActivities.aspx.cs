@@ -39,6 +39,7 @@ namespace SRFROWCA.Pages
                 PopulateLocations(LocationId);
                 PopulateYears();
                 PopulateMonths();
+                UserInfo.UserProfileInfo();
             }
 
             this.Form.DefaultButton = this.btnSave.UniqueID;
@@ -59,29 +60,36 @@ namespace SRFROWCA.Pages
 
             PopulateProjects(dtActivities);
         }
+        private DataTable GetUserProjects()
+        {
+            DataTable dt = DBContext.GetData("GetOPSAndORSUserProjects", new object[] { UserInfo.GetCountry, UserInfo.GetOrganization });
+            Session["testprojectdata"] = dt;
+            return dt;
+        }
 
         private void PopulateProjects(DataTable dtActivities)
         {
-            if (dtActivities.Rows.Count > 0)
-            {
+
+            //if (dtActivities.Rows.Count > 0)
+            //{
                 cblProjects.DataValueField = "ProjectId";
-                cblProjects.DataTextField = "ClusterName";
-                DataView view = new DataView(dtActivities);
-                DataTable dt = view.ToTable(true, "ProjectId", "ClusterName", "ProjectTitle");
-                cblProjects.DataSource = dt;
+                cblProjects.DataTextField = "ProjectCode";
+            //    DataView view = new DataView(dtActivities);
+            //    DataTable dt = view.ToTable(true, "ProjectId", "ClusterName", "ProjectTitle");
+                cblProjects.DataSource = GetUserProjects(); ;
                 cblProjects.DataBind();
 
-                foreach (DataRow dr in dt.Rows)
-                {
-                    foreach (ListItem item in cblProjects.Items)
-                    {
-                        if (item.Value == dr["ProjectId"].ToString())
-                        {
-                            item.Attributes["title"] = dr["ProjectTitle"].ToString();
-                        }
-                    }
-                }
-            }
+            //    foreach (DataRow dr in dt.Rows)
+            //    {
+            //        foreach (ListItem item in cblProjects.Items)
+            //        {
+            //            if (item.Value == dr["ProjectId"].ToString())
+            //            {
+            //                item.Attributes["title"] = dr["ProjectTitle"].ToString();
+            //            }
+            //        }
+            //    }
+            //}
         }
 
         #region Events.
@@ -482,8 +490,9 @@ namespace SRFROWCA.Pages
             string locIdsNotIncluded = GetNotSelectedItems(cblLocations);
 
             Guid userId = RC.GetCurrentUserId;
-            DataTable dt = DBContext.GetData("GetIPData1", new object[] { locEmergencyId, locationIds, yearId, monthId,
-                                                                        locIdsNotIncluded, RC.SelectedSiteLanguageId, userId });
+            DataTable dt = DBContext.GetData("GetIPData2", new object[] { locEmergencyId, locationIds, yearId, monthId,
+                                                                        locIdsNotIncluded, RC.SelectedSiteLanguageId, userId,
+                                                                        UserInfo.GetCountry, UserInfo.GetOrganization   });
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 

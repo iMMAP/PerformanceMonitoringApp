@@ -49,13 +49,11 @@
                                 <AlternatingRowStyle CssClass="altcolor" />
                                 <Columns>
                                     <asp:BoundField DataField="ObjectiveId" HeaderText="ObjectiveId" ItemStyle-Width="1px"
-                                        ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement">
-                                    </asp:BoundField>
+                                        ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement"></asp:BoundField>
                                     <asp:BoundField DataField="HumanitarianPriorityId" HeaderText="HumanitarianPriorityId"
                                         ItemStyle-Width="1px" ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement" />
                                     <asp:BoundField DataField="ObjAndPrId" HeaderText="objprid" ItemStyle-Width="1px"
-                                        ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement">
-                                    </asp:BoundField>
+                                        ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement"></asp:BoundField>
                                     <asp:TemplateField HeaderStyle-Width="100px" HeaderText="Objective & Priority">
                                         <ItemTemplate>
                                             <asp:Image ID="imgObjective" runat="server" AlternateText="O" />
@@ -78,6 +76,12 @@
                                     </asp:TemplateField>
                                     <asp:BoundField DataField="DataName" HeaderText="Output Indicator" ItemStyle-CssClass="testind"
                                         SortExpression="DataName" ItemStyle-Wrap="true"></asp:BoundField>
+                                    <asp:TemplateField HeaderText="" ItemStyle-CssClass="hiddenelement">
+                                        <ItemTemplate>
+                                            <asp:CheckBox ID="cbIsSRP" runat="server" Checked='<%# Eval("IsSRP") %>'
+                                                CssClass="testcb" />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
                                 </Columns>
                             </asp:GridView>
                         </div>
