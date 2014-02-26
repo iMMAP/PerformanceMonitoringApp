@@ -48,6 +48,11 @@ namespace SRFROWCA
                     if (HttpContext.Current.User.IsInRole("ClusterLead"))
                     {
                         menuMyActivities.HRef = "~/ClusterLead/AddSRPActivitiesFromMasterList.aspx";
+                        spnManageActivities.InnerText = "SRP Activities";
+                    }
+                    else
+                    {
+                        spnManageActivities.InnerText = "Projects Activities";
                     }
                 }
                 else

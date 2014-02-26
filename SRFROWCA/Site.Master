@@ -112,8 +112,7 @@
         <ul id="nav">
             <li><a href="../Default.aspx">Home</a></li>
             <li><a href="../Anonymous/AllData.aspx">All Data</a></li>
-            <li><a href="~/Pages/SelectActivities.aspx" id="menuMyActivities" runat="server">My
-                Activities</a></li>
+            <li><a href="~/Pages/ManageActivities.aspx" id="menuMyActivities" runat="server"><span id="spnManageActivities" runat="server" title=" Manage Activities"></span></a></li>
             <li><a href="~/Pages/AddActivities.aspx" id="menuDataEntry" runat="server">Data Entry</a></li>
             <li><a class="fly arrow" href="#" tabindex="1">Generate Reports</a>
                 <ul class="dd">
