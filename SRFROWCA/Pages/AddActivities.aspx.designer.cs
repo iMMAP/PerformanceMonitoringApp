@@ -85,15 +85,6 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.CheckBoxList cblPriorities;
         
         /// <summary>
-        /// btnOpenLocations control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnOpenLocations;
-        
-        /// <summary>
         /// btnSave control.
         /// </summary>
         /// <remarks>
@@ -103,13 +94,13 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.Button btnSave;
         
         /// <summary>
-        /// btnExport control.
+        /// btnOpenLocations control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnExport;
+        protected global::System.Web.UI.WebControls.Button btnOpenLocations;
         
         /// <summary>
         /// gvActivities control.

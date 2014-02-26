@@ -394,39 +394,35 @@
                 </fieldset>
             </div>
             <div class="containerDataEntryProjectsInner">
-                <b><a href="/Pages/CreateProject.aspx">Manage Projects</a></b>
-                <%--<asp:Button ID="Button1" runat="server" Text="Manage Projects" OnClick="Button1_Click"
-                    CssClass="button_example" />--%>
-                <br />
-                <br />
-                <b><a href="/Pages/ManageActivities.aspx">Manage Activities</a></b>
-                <%--<asp:Button ID="btnTest2" runat="server" Text="Manage Activities" OnClick="Button2_Click"
-                    CssClass="button_example" />--%>
-                <br />
-                <br />
-                <br />
-                <asp:Button ID="btnOpenLocations" runat="server" Text="Manage Locations" CausesValidation="False"
-                    CssClass="button_example" OnClick="btnLocation_Click" OnClientClick="needToConfirm = false;"
-                    meta:resourcekey="btnOpenLocationsResource1" />
-                <br />
-                <br />
-                <br />
-                <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
-                    Width="100px" CssClass="button_example" meta:resourcekey="btnSaveResource1" />
-                <br />
-                <br />
+                <fieldset>
+                    <b><a href="/Pages/CreateProject.aspx">Manage Projects</a></b>
+                    <br />
+                    <br />
+                    <b><a href="/Pages/ManageActivities.aspx">Manage Activities</a></b>
+                    <br />
+                </fieldset>
             </div>
         </div>
         <div class="containerDataEntryGrid">
-            <div class="tablegrid">
-            <div>
+            <div class="buttonsdiv">
+                <div class="savebutton2">
+                    <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
+                        Width="100px" CssClass="button_example" meta:resourcekey="btnSaveResource1" />
+                </div>
                 <div>
-                <asp:Button ID="btnExport" runat="server" Text="Export (PDF)" />
+                    Please click on Manage Locations to select the locations you would like to report on.
                 </div>
-                <div  style="float:right">
-                    <label></label>
-                    </div>
+                <div class="buttonright">
+                    <asp:Button ID="btnOpenLocations" runat="server" Text="Manage Locations" CausesValidation="False"
+                        CssClass="button_example" OnClick="btnLocation_Click" OnClientClick="needToConfirm = false;"
+                        meta:resourcekey="btnOpenLocationsResource1" />
                 </div>
+                <div class="savebutton">
+                </div>
+                <div class="spacer" style="clear: both;">
+                </div>
+            </div>
+            <div class="tablegrid">
                 <div id="scrolledGridView" style="overflow-x: auto; width: 100%;">
                     <asp:GridView ID="gvActivities" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True"
                         HeaderStyle-BackColor="ButtonFace" DataKeyNames="ActivityDataId" CssClass="imagetable"

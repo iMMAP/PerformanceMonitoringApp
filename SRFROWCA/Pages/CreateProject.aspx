@@ -26,11 +26,11 @@
     <div class="containerDataEntryMain">
         <div class="containerDataEntryProjects2">
             <div class="containerDataEntryProjectsInner">
-                <div class="graybar">
-                    My Projects
-                </div>
-                <asp:RadioButtonList ID="rblProjects" runat="server" AutoPostBack="true" OnSelectedIndexChanged="rblProjects_SelectedIndexChanged">
-                </asp:RadioButtonList>
+                <fieldset>
+                    <legend>Projects</legend>
+                    <asp:RadioButtonList ID="rblProjects" runat="server" AutoPostBack="true" OnSelectedIndexChanged="rblProjects_SelectedIndexChanged">
+                    </asp:RadioButtonList>
+                </fieldset>
                 <br />
                 <br />
                 <asp:Button ID="btnCreateProject" runat="server" Text="Create New Project" CssClass="button_example"

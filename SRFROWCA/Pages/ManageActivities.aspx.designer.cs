@@ -40,24 +40,6 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.CheckBoxList cblPriorities;
         
         /// <summary>
-        /// Wizard1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Wizard Wizard1;
-        
-        /// <summary>
-        /// WizardStep1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.WizardStep WizardStep1;
-        
-        /// <summary>
         /// gvIndicators control.
         /// </summary>
         /// <remarks>
@@ -65,50 +47,5 @@ namespace SRFROWCA.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvIndicators;
-        
-        /// <summary>
-        /// WizardStep2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.WizardStep WizardStep2;
-        
-        /// <summary>
-        /// cblAdmin1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList cblAdmin1;
-        
-        /// <summary>
-        /// cblAdmin2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList cblAdmin2;
-        
-        /// <summary>
-        /// wz3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.WizardStep wz3;
-        
-        /// <summary>
-        /// gvTargts control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvTargts;
     }
 }

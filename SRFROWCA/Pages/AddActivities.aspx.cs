@@ -288,7 +288,7 @@ namespace SRFROWCA.Pages
 
         private void PopulateObjectives()
         {
-            UI.FillObjectives(cblObjectives);
+            UI.FillObjectives(cblObjectives, true);
         }
 
         private void PopulatePriorities()
