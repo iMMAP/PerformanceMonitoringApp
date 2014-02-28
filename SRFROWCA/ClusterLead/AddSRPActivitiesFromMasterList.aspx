@@ -103,7 +103,7 @@
                                 <input id="txtIndicator" type="text" style="width: 350px;" />
                             </td>
                             <td align="right">
-                                <asp:Button ID="btnAddSRPActivity" runat="server" OnClick="btnAddSRPActivity_Click" Text="Add New SRP Activity" CssClass="button_example" />
+                                <asp:Button ID="btnAddSRPActivity" runat="server" OnClick="btnAddSRPActivity_Click" Text="Add New Activity" CssClass="button_example" />
                             </td>
                         </tr>
                     </table>
@@ -141,8 +141,8 @@
                             </asp:TemplateField>
                             <asp:BoundField DataField="ActivityName" HeaderText="Activity" ItemStyle-CssClass="testact"
                                 SortExpression="ActivityName"></asp:BoundField>
-                            <asp:TemplateField HeaderText="SRP Indicator" meta:resourcekey="TemplateFieldResource2"
-                                SortExpression="IndicatorIsAdded">
+                            <asp:TemplateField HeaderText="Country Specific Indicator" meta:resourcekey="TemplateFieldResource2"
+                                SortExpression="IndicatorIsAdded" ItemStyle-Width="40px">
                                 <ItemTemplate>
                                     <asp:CheckBox ID="chkSRP" runat="server" AutoPostBack="true" OnCheckedChanged="chkSRP_CheckedChanged"
                                         Checked='<%# Eval("IndicatorIsAdded") %>' CssClass="testcb" />

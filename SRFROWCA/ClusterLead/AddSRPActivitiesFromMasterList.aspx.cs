@@ -164,7 +164,7 @@ namespace SRFROWCA.ClusterLead
 
         private void PopulateObjectives()
         {
-            UI.FillObjectives(cblObjectives);
+            UI.FillObjectives(cblObjectives, true);
         }
 
         private void PopulatePririoties()
