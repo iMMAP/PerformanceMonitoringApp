@@ -49,10 +49,14 @@ namespace SRFROWCA
                     {
                         menuMyActivities.HRef = "~/ClusterLead/AddSRPActivitiesFromMasterList.aspx";
                         spnManageActivities.InnerText = "SRP Activities";
+                        menuManageProjects.Visible = false;
+                        spnManageProject.Visible = false;
+                        menuDataEntry.Visible = false;
                     }
                     else
                     {
                         spnManageActivities.InnerText = "Projects Activities";
+                        spnManageProject.InnerText = "Manage Projects";
                     }
                 }
                 else

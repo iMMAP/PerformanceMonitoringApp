@@ -158,25 +158,27 @@
     <Content Include="images\add_plus.png" />
     <Content Include="images\ajaxlodr.gif" />
     <Content Include="images\C.png" />
+    <Content Include="images\cind.png" />
+    <Content Include="images\cind1.png" />
     <Content Include="images\ddlarrow.png" />
     <Content Include="images\droparrow.png" />
     <Content Include="images\error.png" />
     <Content Include="images\favicon.ico" />
     <Content Include="images\icon\agr.png" />
     <Content Include="images\icon\ccm.png" />
-    <Content Include="images\icon\conflict.png" />
     <Content Include="images\icon\cor.png" />
     <Content Include="images\icon\edu.png" />
-    <Content Include="images\icon\epidemics.png" />
     <Content Include="images\icon\er.png" />
     <Content Include="images\icon\et.png" />
-    <Content Include="images\icon\foodinsecurity.png" />
     <Content Include="images\icon\fs.png" />
     <Content Include="images\icon\hlt.png" />
+    <Content Include="images\icon\hp1.png" />
+    <Content Include="images\icon\hp2.png" />
+    <Content Include="images\icon\hp3.png" />
+    <Content Include="images\icon\hp4.png" />
+    <Content Include="images\icon\hp5.png" />
     <Content Include="images\icon\lgs.png" />
-    <Content Include="images\icon\malnutrition.png" />
     <Content Include="images\icon\ms.png" />
-    <Content Include="images\icon\ndisaster.png" />
     <Content Include="images\icon\nut.png" />
     <Content Include="images\icon\pro.png" />
     <Content Include="images\icon\shl.png" />
@@ -189,6 +191,8 @@
     <Content Include="images\O.png" />
     <Content Include="images\P.png" />
     <Content Include="images\plus.png" />
+    <Content Include="images\rind.png" />
+    <Content Include="images\rind1.png" />
     <Content Include="images\rssfeed.png" />
     <Content Include="Maps\TargetAchievedByLocDataMap.aspx" />
     <Content Include="OPS\OPSDataEntry.aspx" />
@@ -282,6 +286,7 @@
     <Content Include="OPS\OPSActivitiesFeed.ashx" />
     <Content Include="OPS\OPSProjectFeed.ashx" />
     <Content Include="xmlprojectfeeds.aspx" />
+    <Content Include="ClusterLead\Web.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

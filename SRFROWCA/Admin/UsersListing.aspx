@@ -110,7 +110,7 @@
         <tr>
             <td>
                 <asp:GridView ID="gvUsers" runat="server" AutoGenerateColumns="false" AllowPaging="true"
-                    CssClass="imagetable" PageSize="20" AllowSorting="true" Width="100%" OnPageIndexChanging="gvUsers_PageIndexChanging"
+                    CssClass="imagetable" PageSize="300" AllowSorting="true" Width="100%" OnPageIndexChanging="gvUsers_PageIndexChanging"
                     OnSorting="gvUsers_Sorting" OnRowCommand="gvUsers_RowCommand">
                     <RowStyle CssClass="istrow" />
                     <AlternatingRowStyle CssClass="altcolor" />

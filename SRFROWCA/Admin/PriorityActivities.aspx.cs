@@ -76,7 +76,7 @@ namespace SRFROWCA.Admin
         private void PopulateObjectives()
         {
             DataTable dt = GetObjectives();
-            UI.FillObjectives(ddlObjectives, dt);
+            UI.FillObjectives(ddlObjectives, dt, false);
 
             ListItem item = new ListItem("Select Objective", "0");
             ddlObjectives.Items.Insert(0, item);

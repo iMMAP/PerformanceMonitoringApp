@@ -1,16 +1,64 @@
 ﻿<%@ Page Title="3W Activities - Home" Language="C#" MasterPageFile="~/Site.master"
     AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="SRFROWCA._Default" %>
 
-<%--DropDownCheckBoxes is custom dropdown with checkboxes to selectect multiple items.--%>
-<%@ Register Assembly="DropDownCheckBoxes" Namespace="Saplin.Controls" TagPrefix="cc" %>
-<%--Custom GridView Class to include custom paging functionality.--%>
-<%@ Register Assembly="SRFROWCA" Namespace="SRFROWCA" TagPrefix="cc2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="colcontainer">
-        
-        <%--<script type='text/javascript' src='http://public.tableausoftware.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1304px; height: 964px;'><noscript><a href='#'><img alt=' ' src='http:&#47;&#47;public.tableausoftware.com&#47;static&#47;images&#47;OR&#47;ORSData_10Feb2014&#47;SahelDashboard&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' width='1304' height='964' style='display:none;'><param name='host_url' value='http%3A%2F%2Fpublic.tableausoftware.com%2F' /> <param name='site_root' value='' /><param name='name' value='ORSData_10Feb2014&#47;SahelDashboard' /><param name='tabs' value='yes' /><param name='toolbar' value='yes' /><param name='static_image' value='http:&#47;&#47;public.tableausoftware.com&#47;static&#47;images&#47;OR&#47;ORSData_10Feb2014&#47;SahelDashboard&#47;1.png' / > <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /></object></div><div style='width:1304px;height:22px;padding:0px 10px 0px 0px;color:black;font:normal 8pt verdana,helvetica,arial,sans-serif;'><div style='float:right; padding-right:8px;'><a href='http://www.tableausoftware.com/public/about-tableau-products?ref=http://public.tableausoftware.com/views/ORSData_10Feb2014/SahelDashboard' target='_blank'>En savoir plus sur Tableau</a></div></div>--%>
-        
+    <div class="containerLogin">
+        <div class="graybarLogin">
+            Please enter your username and password.
+            <asp:HyperLink ID="RegisterHyperLink" runat="server" EnableViewState="false" style="color:Blue">Sign Up</asp:HyperLink>
+            if you don't have an account.
+        </div>
+        <div class="contentarea">
+            <div class="formdiv">
+                <asp:Login ID="LoginUser" runat="server" EnableViewState="false" RenderOuterTable="false" OnLoggedIn="LoginUser_LoggedIn"                     
+                    OnLoginError="LoginUser_LoginError">
+                    <LayoutTemplate>
+                        <table style="margin:0 auto;">
+                            <tr>
+                                <td colspan="2">
+                                    <asp:Label ID="FailureText" runat="server" CssClass="error2" EnableViewState="false"></asp:Label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">Username:</asp:Label>
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="UserName" runat="server" CssClass="textEntry" MaxLength="256" Width="300px"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName"
+                                        CssClass="error2" ErrorMessage="User Name is required." ToolTip="User Name is required.">User Name is required.</asp:RequiredFieldValidator>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password">Password:</asp:Label>
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="Password" runat="server" CssClass="passwordEntry" TextMode="Password"
+                                        MaxLength="128" Width="300px"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password"
+                                        CssClass="error2" ErrorMessage="Password is required." ToolTip="Password is required.">Password is required.</asp:RequiredFieldValidator>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <asp:CheckBox ID="RememberMe" runat="server" />
+                                    <asp:Label ID="RememberMeLabel" runat="server" AssociatedControlID="RememberMe" CssClass="inline">Keep me logged in</asp:Label>
+                                    <a href="ForgotPassword.aspx" style="color:Blue">Forgot Password?</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text="Log In" CssClass="button_example" />
+                            </tr>
+                        </table>
+                    </LayoutTemplate>
+                </asp:Login>
+                <div class="spacer" style="clear: both;"></div>
+            </div>
+        </div>
+        <div class="graybarcontainer"></div>
     </div>
 </asp:Content>
