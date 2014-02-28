@@ -73,10 +73,24 @@ namespace SRFROWCA.Common
             ddl.DataBind();
         }
 
-        internal static void FillObjectives(ListControl control, DataTable dt)
+        internal static void FillObjectives(ListControl control, bool useShort)
+        {
+            DataTable dt = RC.GetObjectives();
+            FillObjectives(control, dt, true);
+        }
+
+        internal static void FillObjectives(ListControl control, DataTable dt, bool useShort)
         {
             control.DataValueField = "ObjectiveId";
-            control.DataTextField = "Objective";
+            if (useShort)
+            {
+                control.DataTextField = "ShortObjectiveTitle";
+            }
+            else
+            {
+                control.DataTextField = "Objective";
+            }
+
             control.DataSource = dt;
             control.DataBind();
         }
@@ -84,7 +98,7 @@ namespace SRFROWCA.Common
         internal static void FillObjectives(ListControl control)
         {
             DataTable dt = RC.GetObjectives();
-            FillObjectives(control, dt);
+            FillObjectives(control, dt, false);
         }
 
         internal static void FillPriorities(ListControl control, DataTable dt)
