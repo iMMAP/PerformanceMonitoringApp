@@ -12,7 +12,7 @@
         </div>
         <div class="contentarea">
             <div class="formdiv">
-                <asp:Login ID="LoginUser" runat="server" EnableViewState="false" RenderOuterTable="false"
+                <asp:Login ID="LoginUser" runat="server" EnableViewState="false" RenderOuterTable="false" OnLoggedIn="LoginUser_LoggedIn"                     
                     OnLoginError="LoginUser_LoginError">
                     <LayoutTemplate>
                         <table style="margin:0 auto;">

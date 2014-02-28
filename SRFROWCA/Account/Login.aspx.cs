@@ -27,6 +27,18 @@ namespace SRFROWCA.Account
             }
         }
 
+        protected void LoginUser_LoggedIn(Object sender, EventArgs e)
+        {
+            if (Roles.IsUserInRole(LoginUser.UserName, "ClusterLead"))
+            {
+                Response.Redirect("~/ClusterLead/AddSRPActivitiesFromMasterList.aspx");
+            }
+            else
+            {
+                Response.Redirect("~/Pages/AddActivities.aspx");
+            }
+        }
+
         protected void LoginUser_LoginError(object sender, EventArgs e)
         {
             // Does there exist a User account for this user?
