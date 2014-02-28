@@ -27,7 +27,7 @@
         <div class="containerDataEntryProjects2">
             <div class="containerDataEntryProjectsInner">
                 <fieldset>
-                    <legend>Projects</legend>
+                    <legend>ORS Projects</legend>
                     <asp:RadioButtonList ID="rblProjects" runat="server" AutoPostBack="true" OnSelectedIndexChanged="rblProjects_SelectedIndexChanged">
                     </asp:RadioButtonList>
                 </fieldset>

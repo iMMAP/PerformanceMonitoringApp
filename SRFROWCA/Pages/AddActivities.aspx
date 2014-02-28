@@ -69,7 +69,7 @@
                     }
                 });
 
-                $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th style="width: 100px;">&nbsp;</th><th style="width: 30px;">&nbsp;</th><th style="width: 450px;">&nbsp;</th><th style="width: 350px;">&nbsp;</th>' + list + '</tr></thead>');
+                $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th style="width: 100px;">&nbsp;</th><th style="width: 50px;">&nbsp;</th><th style="width: 450px;">&nbsp;</th><th style="width: 350px;">&nbsp;</th>' + list + '</tr></thead>');
             }
 
             $("#<%=gvActivities.ClientID %>").kiketable_colsizable({ minWidth: 50 })
@@ -410,7 +410,7 @@
                         Width="100px" CssClass="button_example" meta:resourcekey="btnSaveResource1" />
                 </div>
                 <div>
-                    Please click on Manage Locations to select the locations you would like to report on.
+                    Please click on 'Locations' button to select the locations you want to report on.
                 </div>
                 <div class="buttonright">
                     <asp:Button ID="btnOpenLocations" runat="server" Text="Manage Locations" CausesValidation="False"
@@ -472,10 +472,12 @@
                                     <asp:Label ID="lblProjectcode" runat="server" Text='<%#Eval("ClusterName") %>' ToolTip='<%#Eval("ProjectTitle") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderStyle-Width="100px">
+                            <asp:TemplateField HeaderStyle-Width="150px">
                                 <ItemTemplate>
                                     <asp:Image ID="imgObjective" runat="server" ImageUrl="~/images/O.png" AlternateText="Obj" />
                                     <asp:Image ID="imgPriority" runat="server" ImageUrl="~/images/P.png" AlternateText="Obj" />
+                                    <asp:Image ID="imgRind" runat="server" ImageUrl="" AlternateText="" />
+                                    <asp:Image ID="imgCind" runat="server" ImageUrl="" AlternateText="" />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="ActivityName" HeaderText="Activity" ItemStyle-Width="450px"

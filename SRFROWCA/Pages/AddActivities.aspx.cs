@@ -69,27 +69,10 @@ namespace SRFROWCA.Pages
 
         private void PopulateProjects(DataTable dtActivities)
         {
-
-            //if (dtActivities.Rows.Count > 0)
-            //{
-                cblProjects.DataValueField = "ProjectId";
-                cblProjects.DataTextField = "ProjectCode";
-            //    DataView view = new DataView(dtActivities);
-            //    DataTable dt = view.ToTable(true, "ProjectId", "ClusterName", "ProjectTitle");
-                cblProjects.DataSource = GetUserProjects(); ;
-                cblProjects.DataBind();
-
-            //    foreach (DataRow dr in dt.Rows)
-            //    {
-            //        foreach (ListItem item in cblProjects.Items)
-            //        {
-            //            if (item.Value == dr["ProjectId"].ToString())
-            //            {
-            //                item.Attributes["title"] = dr["ProjectTitle"].ToString();
-            //            }
-            //        }
-            //    }
-            //}
+            cblProjects.DataValueField = "ProjectId";
+            cblProjects.DataTextField = "ProjectCode";
+            cblProjects.DataSource = GetUserProjects(); ;
+            cblProjects.DataBind();
         }
 
         #region Events.
@@ -149,7 +132,34 @@ namespace SRFROWCA.Pages
                     }
 
                 }
-                //button.CommandArgument = e.Row.RowIndex.ToString();
+
+                Image imgRind = e.Row.FindControl("imgRind") as Image;
+                if (imgRind != null)
+                {
+                    if (e.Row.RowIndex == 2 || e.Row.RowIndex == 1)
+                    {
+                        imgRind.ImageUrl = "~/images/rind1.png";
+                        imgRind.ToolTip = "Regional Indicator";
+                    }
+                    else
+                    {
+                        imgRind.Visible = false;
+                    }
+                }
+
+                Image imgCind = e.Row.FindControl("imgCind") as Image;
+                if (imgCind != null)
+                {
+                    if (e.Row.RowIndex == 2 || e.Row.RowIndex == 3)
+                    {
+                        imgCind.ImageUrl = "~/images/cind1.png";
+                        imgCind.ToolTip = "Country Specific Indicator";
+                    }
+                    else
+                    {
+                        imgCind.Visible = false;
+                    }
+                }
             }
         }
 
@@ -974,7 +984,7 @@ namespace SRFROWCA.Pages
         }
 
         #endregion
-        
+
     }
 
     public class GridViewTemplate : ITemplate

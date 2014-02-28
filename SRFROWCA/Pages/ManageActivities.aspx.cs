@@ -27,7 +27,7 @@ namespace SRFROWCA.Pages
 
         private void PopulateObjectives()
         {
-            UI.FillObjectives(cblObjectives);
+            UI.FillObjectives(cblObjectives, true);
         }
 
         private void PopulatePriorities()
@@ -143,10 +143,9 @@ namespace SRFROWCA.Pages
 
             int emgId = 1;
             int locationId = UserInfo.GetCountry;
-
-            gvIndicators.DataSource = DBContext.GetData("GetOPSandORSProjectIndicators", new object[] { emgId, 
-                                                                                                        clusterId, locationId, 
-                                                                                                                   projectId, 1 });
+            DataTable dt1 = DBContext.GetData("GetOPSandORSProjectIndicators", new object[] { emgId, clusterId, locationId, 
+                                                                                                              projectId, 1 });
+            gvIndicators.DataSource = dt1;
             gvIndicators.DataBind();
         }
 

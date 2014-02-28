@@ -38,7 +38,8 @@
             <div id="scrolledGridView" style="overflow-x: auto; width: 100%;">
                 <asp:GridView ID="gvIndicators" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True"
                     HeaderStyle-BackColor="ButtonFace" DataKeyNames="ActivityDataId" CssClass="imagetable"
-                    OnRowDataBound="gvIndicators_RowDataBound" Width="100%">
+                    OnRowDataBound="gvIndicators_RowDataBound" Width="100%" EmptyDataText="No Country Specific Indicators Available To Add In Project. Please contact with your country Cluster Lead.">
+                    
                     <HeaderStyle BackColor="Control"></HeaderStyle>
                     <RowStyle CssClass="istrow" />
                     <AlternatingRowStyle CssClass="altcolor" />
@@ -57,11 +58,11 @@
                         </asp:TemplateField>
                         <asp:BoundField DataField="ActivityName" HeaderText="Activity" ItemStyle-CssClass="testact"
                             SortExpression="ActivityName"></asp:BoundField>
-                        <asp:TemplateField HeaderText="SRP" SortExpression="IsSRP">
+                        <asp:TemplateField HeaderText="Country specific Indicator" SortExpression="IsSRP" HeaderStyle-Width="40px">
                             <ItemTemplate>
                                 <%# (Boolean.Parse(Eval("IsSRP").ToString())) ? "Yes" : "No"%></ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Select" meta:resourcekey="TemplateFieldResource2"
+                        <asp:TemplateField HeaderText="Added In Project" HeaderStyle-Width="40px"
                             SortExpression="IndicatorIsAdded">
                             <ItemTemplate>
                                 <asp:CheckBox ID="cbIsAdded" runat="server" Checked='<%# Eval("IndicatorIsAdded") %>'
