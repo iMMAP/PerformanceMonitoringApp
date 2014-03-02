@@ -28,6 +28,7 @@ namespace SRFROWCA.Pages
                 PopulateDropDowns();
                 PopulateObjectives();
                 PopulatePriorities();
+
                 Session["SiteChanged"] = null;
                 cblObjectives.Items[0].Attributes["title"] = "STRATEGIC OBJECTIVE 1: Track and analyse risk and vulnerability, integrating findings into humanitarian and development programming.";
                 cblObjectives.Items[1].Attributes["title"] = "STRATEGIC OBJECTIVE 2: Support vulnerable populations to better cope with shocks by responding earlier to warning signals, by reducing post-crisis recovery times and by building capacity of national actors.";
@@ -138,7 +139,7 @@ namespace SRFROWCA.Pages
                 {
                     if (e.Row.RowIndex == 2 || e.Row.RowIndex == 1)
                     {
-                        imgRind.ImageUrl = "~/images/rind1.png";
+                        imgRind.ImageUrl = "~/images/rind.png";
                         imgRind.ToolTip = "Regional Indicator";
                     }
                     else
@@ -152,7 +153,7 @@ namespace SRFROWCA.Pages
                 {
                     if (e.Row.RowIndex == 2 || e.Row.RowIndex == 3)
                     {
-                        imgCind.ImageUrl = "~/images/cind1.png";
+                        imgCind.ImageUrl = "~/images/cind.png";
                         imgCind.ToolTip = "Country Specific Indicator";
                     }
                     else
@@ -440,6 +441,48 @@ namespace SRFROWCA.Pages
             gvActivities.DataBind();
         }
 
+        private string GetSelectedLocations()
+        {
+            string admin1 = GetSelectedItems(cblAdmin1);
+            string admin2 = GetSelectedItems(cblLocations);
+
+            if (!string.IsNullOrEmpty(admin1) && string.IsNullOrEmpty(admin2))
+            {
+                return admin1;
+            }
+            else if (string.IsNullOrEmpty(admin1) && !string.IsNullOrEmpty(admin2))
+            {
+                return admin2;
+            }
+            else if (!string.IsNullOrEmpty(admin1) && !string.IsNullOrEmpty(admin2))
+            {
+                return admin1 + ", " + admin2;
+            }
+
+            return "";
+        }
+
+        private string GetNotSelectedLocations()
+        {
+            string admin1 = GetNotSelectedItems(cblAdmin1);
+            string admin2 = GetNotSelectedItems(cblLocations);
+
+            if (!string.IsNullOrEmpty(admin1) && string.IsNullOrEmpty(admin2))
+            {
+                return admin1;
+            }
+            else if (string.IsNullOrEmpty(admin1) && !string.IsNullOrEmpty(admin2))
+            {
+                return admin2;
+            }
+            else if (!string.IsNullOrEmpty(admin1) && !string.IsNullOrEmpty(admin2))
+            {
+                return admin1 + ", " + admin2;
+            }
+
+            return "";
+        }
+
         private string GetSelectedItems(object sender)
         {
             string itemIds = "";
@@ -496,11 +539,11 @@ namespace SRFROWCA.Pages
             int monthId = 0;
             int.TryParse(ddlMonth.SelectedValue, out monthId);
 
-            string locationIds = GetSelectedItems(cblLocations);
-            string locIdsNotIncluded = GetNotSelectedItems(cblLocations);
+            string locationIds = GetSelectedLocations();
+            string locIdsNotIncluded = GetNotSelectedLocations();
 
             Guid userId = RC.GetCurrentUserId;
-            DataTable dt = DBContext.GetData("GetIPData2", new object[] { locEmergencyId, locationIds, yearId, monthId,
+            DataTable dt = DBContext.GetData("GetIPData", new object[] { locEmergencyId, locationIds, yearId, monthId,
                                                                         locIdsNotIncluded, RC.SelectedSiteLanguageId, userId,
                                                                         UserInfo.GetCountry, UserInfo.GetOrganization   });
             return dt.Rows.Count > 0 ? dt : new DataTable();
@@ -513,7 +556,23 @@ namespace SRFROWCA.Pages
 
         private void PopulateLocations(int parentLocationId)
         {
-            DataTable dt = GetChildLocations(parentLocationId);
+            PopulateAdmin1(parentLocationId);
+            PopulateAdmin2(parentLocationId);
+
+        }
+
+        private void PopulateAdmin1(int parentLocationId)
+        {
+            DataTable dt = GetAdmin1Locations(parentLocationId);
+            cblAdmin1.DataValueField = "LocationId";
+            cblAdmin1.DataTextField = "LocationName";
+            cblAdmin1.DataSource = dt;
+            cblAdmin1.DataBind();
+        }
+
+        private void PopulateAdmin2(int parentLocationId)
+        {
+            DataTable dt = GetAdmin2Locations(parentLocationId);
             cblLocations.DataValueField = "LocationId";
             cblLocations.DataTextField = "LocationName";
             cblLocations.DataSource = dt;
@@ -542,14 +601,29 @@ namespace SRFROWCA.Pages
                     columnName == "ObjAndPrId" || columnName == "ObjectiveId" || columnName == "HumanitarianPriorityId" ||
                     columnName == "objAndPrAndPId" || columnName == "objAndPId" || columnName == "PrAndPId"))
                 {
-                    customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, column.ColumnName, "1");
-                    customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, column.ColumnName, "1");
-                    gvActivities.Columns.Add(customField);
+                    if (columnName.Contains("_2-ACCUM"))
+                    {
+                        customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, "CheckBox", column.ColumnName, "1");
+                        customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, "CheckBox", column.ColumnName, "1");
+                        gvActivities.Columns.Add(customField);
+                    }
+                    else
+                    {
+                        customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, "TextBox", column.ColumnName, "1");
+                        customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, "TextBox", column.ColumnName, "1");
+                        gvActivities.Columns.Add(customField);
+                    }
                 }
             }
         }
 
-        private DataTable GetChildLocations(int parentLocationId)
+        private DataTable GetAdmin1Locations(int parentLocationId)
+        {
+            DataTable dt = DBContext.GetData("GetSecondLevelChildLocations", new object[] { parentLocationId });
+            return dt.Rows.Count > 0 ? dt : new DataTable();
+        }
+
+        private DataTable GetAdmin2Locations(int parentLocationId)
         {
             DataTable dt = DBContext.GetData("GetThirdLevelChildLocations", new object[] { parentLocationId });
             return dt.Rows.Count > 0 ? dt : new DataTable();
@@ -989,61 +1063,79 @@ namespace SRFROWCA.Pages
 
     public class GridViewTemplate : ITemplate
     {
-        private DataControlRowType templateType;
-        private string columnName;
-        private string locationId;
+        private DataControlRowType _templateType;
+        private string _columnName;
+        private string _locationId;
+        private string _controlType;
 
-        public GridViewTemplate(DataControlRowType type, string colname, string locId)
+        public GridViewTemplate(DataControlRowType type, string controlType, string colname, string locId)
         {
-            templateType = type;
-            columnName = colname;
-            locationId = locId;
+            _templateType = type;
+            _controlType = controlType;
+            _columnName = colname;
+            _locationId = locId;
         }
 
         public void InstantiateIn(System.Web.UI.Control container)
         {
             // Create the content for the different row types.
-            switch (templateType)
+            if (_templateType == DataControlRowType.Header)
             {
-                case DataControlRowType.Header:
-                    string[] words = columnName.Split('^');
-                    Label lc = new Label();
-                    lc.Width = 50;
-                    lc.Text = "<b>" + words[1] + "</b>";
-                    container.Controls.Add(lc);
-                    //CheckBox cb = new CheckBox();
-                    //if (columnName.Contains('T'))
-                    //{
-                    //    cb.ID = columnName;
-                    //    container.Controls.Add(cb);
-                    //}
-                    break;
-                case DataControlRowType.DataRow:
-                    TextBox firstName = new TextBox();
-                    firstName.CssClass = "numeric1";
-                    firstName.Width = 50;
-                    firstName.DataBinding += new EventHandler(this.FirstName_DataBinding);
-                    container.Controls.Add(firstName);
+                string[] words = _columnName.Split('^');
+                Label lc = new Label();
+                lc.Width = 50;
+                lc.Text = "<b>" + words[1] + "</b>";
+                container.Controls.Add(lc);
+            }
+            else if (_templateType == DataControlRowType.DataRow)
+            {
+                if (_controlType == "TextBox")
+                {
+                    TextBox txtAchieved = new TextBox();
+                    txtAchieved.CssClass = "numeric1";
+                    txtAchieved.Width = 50;
+                    txtAchieved.DataBinding += new EventHandler(this.txtAchieved_DataBinding);
+                    container.Controls.Add(txtAchieved);
                     HiddenField hf = new HiddenField();
-                    string[] words1 = columnName.Split('^');
+                    string[] words1 = _columnName.Split('^');
                     hf.Value = words1[0];
-                    hf.ID = "hf" + columnName;
+                    hf.ID = "hf" + _columnName;
                     container.Controls.Add(hf);
-                    break;
-
-                default:
-                    // Insert code to handle unexpected values.
-                    break;
+                }
+                else if (_controlType == "CheckBox")
+                {
+                    CheckBox cbLocAccum = new CheckBox();
+                    //firstName.CssClass = "numeric1";
+                    //cbLocAccum.Width = 50;
+                    cbLocAccum.DataBinding += new EventHandler(this.cbAccum_DataBinding);
+                    container.Controls.Add(cbLocAccum);
+                    HiddenField hf = new HiddenField();
+                    string[] words1 = _columnName.Split('^');
+                    hf.Value = words1[0];
+                    hf.ID = "hf" + _columnName;
+                    container.Controls.Add(hf);
+                }
             }
         }
 
-        private void FirstName_DataBinding(Object sender, EventArgs e)
+        private void txtAchieved_DataBinding(Object sender, EventArgs e)
         {
-            TextBox l = (TextBox)sender;
-            l.ID = columnName;
-            l.MaxLength = 12;
-            GridViewRow row = (GridViewRow)l.NamingContainer;
-            l.Text = DataBinder.Eval(row.DataItem, columnName).ToString();
+            TextBox txt = (TextBox)sender;
+            txt.ID = _columnName;
+            txt.MaxLength = 12;
+            GridViewRow row = (GridViewRow)txt.NamingContainer;
+            txt.Text = DataBinder.Eval(row.DataItem, _columnName).ToString();
+        }
+
+        private void cbAccum_DataBinding(Object sender, EventArgs e)
+        {
+            CheckBox cb = (CheckBox)sender;
+            cb.ID = _columnName;
+            GridViewRow row = (GridViewRow)cb.NamingContainer;
+            //cb.Text = DataBinder.Eval(row.DataItem, _columnName).ToString();
+            bool isChecked = false;
+            bool.TryParse((DataBinder.Eval(row.DataItem, _columnName)).ToString(), out isChecked);
+            cb.Checked = isChecked;
         }
     }
 }

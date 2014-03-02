@@ -148,13 +148,13 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.UpdatePanel uPanel1;
         
         /// <summary>
-        /// locaAdmin2LocationsCaption control.
+        /// cblAdmin1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locaAdmin2LocationsCaption;
+        protected global::System.Web.UI.WebControls.CheckBoxList cblAdmin1;
         
         /// <summary>
         /// cblLocations control.

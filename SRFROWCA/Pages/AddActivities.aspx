@@ -60,16 +60,16 @@
                   : $(this).html();
                     if (value.indexOf('_') >= 0) {
                         j++;
-                        city1 = value.split('_');
-                        $(this).text(city1[1]);
-
+                        city1 = value.split('_');                        
+                        city2 = city1[1].split('-');
+                        $(this).text(city2[1]);
                         if (j % 3 === 0) {
                             list += '<th colspan="3" style="width:100px; text-align:center;">' + city1[0] + '</th>';
                         }
                     }
                 });
 
-                $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th style="width: 100px;">&nbsp;</th><th style="width: 50px;">&nbsp;</th><th style="width: 450px;">&nbsp;</th><th style="width: 350px;">&nbsp;</th>' + list + '</tr></thead>');
+                $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th style="width: 100px;">&nbsp;</th><th style="width: 50px;">&nbsp;</th><th style="width: 260px;">&nbsp;</th><th style="width: 220px;">&nbsp;</th>' + list + '</tr></thead>');
             }
 
             $("#<%=gvActivities.ClientID %>").kiketable_colsizable({ minWidth: 50 })
@@ -432,18 +432,17 @@
                         <AlternatingRowStyle CssClass="altcolor" />
                         <Columns>
                             <asp:BoundField DataField="ObjectiveId" HeaderText="ObjectiveId" ItemStyle-Width="1px"
-                                ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement" meta:resourcekey="BoundFieldResource1">
+                                ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement">
                                 <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
                                 <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
                             </asp:BoundField>
                             <asp:BoundField DataField="HumanitarianPriorityId" HeaderText="HumanitarianPriorityId"
-                                ItemStyle-Width="1px" ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement"
-                                meta:resourcekey="BoundFieldResource2">
+                                ItemStyle-Width="1px" ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement">
                                 <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
                                 <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
                             </asp:BoundField>
                             <asp:BoundField DataField="ObjAndPrId" HeaderText="objprid" ItemStyle-Width="1px"
-                                ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement" meta:resourcekey="BoundFieldResource2">
+                                ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement">
                                 <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
                                 <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
                             </asp:BoundField>
@@ -467,12 +466,12 @@
                                 <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
                                 <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
                             </asp:BoundField>
-                            <asp:TemplateField HeaderText="Project Code">
+                            <asp:TemplateField HeaderText="Project Code" ItemStyle-Wrap="false">
                                 <ItemTemplate>
                                     <asp:Label ID="lblProjectcode" runat="server" Text='<%#Eval("ClusterName") %>' ToolTip='<%#Eval("ProjectTitle") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderStyle-Width="150px">
+                            <asp:TemplateField ItemStyle-Wrap="false">
                                 <ItemTemplate>
                                     <asp:Image ID="imgObjective" runat="server" ImageUrl="~/images/O.png" AlternateText="Obj" />
                                     <asp:Image ID="imgPriority" runat="server" ImageUrl="~/images/P.png" AlternateText="Obj" />
@@ -480,14 +479,20 @@
                                     <asp:Image ID="imgCind" runat="server" ImageUrl="" AlternateText="" />
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:BoundField DataField="ActivityName" HeaderText="Activity" ItemStyle-Width="450px"
-                                meta:resourcekey="BoundFieldResource4">
-                                <ItemStyle Width="450px"></ItemStyle>
-                            </asp:BoundField>
-                            <asp:BoundField DataField="DataName" HeaderText="Output Indicator" ItemStyle-Width="450px"
-                                meta:resourcekey="BoundFieldResource5">
-                                <ItemStyle Width="450px"></ItemStyle>
-                            </asp:BoundField>
+                            <asp:TemplateField ItemStyle-Width="260px" HeaderText="Activity">
+                                <ItemTemplate>
+                                    <div style="width: 260px; word-wrap: break-word;">
+                                        <%# Eval("ActivityName")%>
+                                    </div>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField ItemStyle-Width="220px" HeaderText="Output Indicator">
+                                <ItemTemplate>
+                                    <div style="width: 220px; word-wrap: break-word;">
+                                        <%# Eval("DataName")%>
+                                    </div>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
                 </div>
@@ -505,19 +510,34 @@
                 <asp:Panel ID="pnlLocations" runat="server" Width="700px" meta:resourcekey="pnlLocationsResource1">
                     <asp:UpdatePanel ID="uPanel1" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <div class="containerPopup">
-                                <div class="graybar">
-                                    <asp:Localize ID="locaAdmin2LocationsCaption" runat="server" meta:resourcekey="locaAdmin2LocationsCaptionResource1"
-                                        Text="
-                                    Admin2 Locations"></asp:Localize>
-                                </div>
+                            <div class="containerPopup">                                
                                 <div class="contentarea">
                                     <div class="formdiv">
                                         <table border="0" style="margin: 0 auto;">
                                             <tr>
                                                 <td>
-                                                    <asp:CheckBoxList ID="cblLocations" runat="server" RepeatColumns="4" RepeatDirection="Horizontal"
-                                                        CssClass="columnGap" meta:resourcekey="cblLocationsResource1">
+                                                    <div class="graybar">
+                                                        Admin 1
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:CheckBoxList ID="cblAdmin1" runat="server" RepeatColumns="6" RepeatDirection="Horizontal">
+                                                    </asp:CheckBoxList>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="graybar">
+                                                        Admin 2
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:CheckBoxList ID="cblLocations" runat="server" RepeatColumns="5" RepeatDirection="Horizontal"
+                                                        meta:resourcekey="cblLocationsResource1">
                                                     </asp:CheckBoxList>
                                                 </td>
                                             </tr>
