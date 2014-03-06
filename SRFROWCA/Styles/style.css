@@ -198,6 +198,14 @@ select
     width: 50%;
     text-align: right;
 }
+
+.buttonright2
+{
+    float: right;
+    width: 30%;
+    text-align: right;
+}
+
 .savebutton
 {
     padding: 0px;
@@ -217,7 +225,7 @@ select
     font-weight: bold;
     text-transform: uppercase;
     font-size: 12px;
-    width: 45%;
+    width: 70%;
     float: left;
 }
 .quicksearch

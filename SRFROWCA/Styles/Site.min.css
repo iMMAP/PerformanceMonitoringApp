@@ -1,58 +1,3 @@
-.kiketable-colsizable
-{
-    table-layout: fixed;
-    width: 100%;
-}
-.kiketable-colsizable td, .kiketable-colsizable th
-{
-    overflow: hidden;
-}
-.kiketable-th
-{
-    /* Don't set "position: relative" in IE */
-    white-space: nowrap !important; /* Only works for THs in IE */
-    text-align: left;
-    height: 18px; /* value safe to change */
-}
-.kiketable-th-text
-{
-    height: 100%;
-    overflow: hidden;
-}
-.kiketable-colsizable-handler
-{
-    float: right;
-    cursor: e-resize;
-    height: 100%;
-    border-left: 2px outset white;
-    border-right: 2px inset white;
-    position: relative;
-    right: -2px;
-}
-html > body .kiketable-colsizable-handler
-{
-    border-right: 1px outset white;
-}
-.kiketable-colsizable-dragLine
-{
-    position: absolute;
-    width: 2px;
-    cursor: e-resize;
-    background-color: red; /* value safe to change */
-}
-.kiketable-colsizable-dragArea
-{
-    position: absolute;
-    cursor: e-resize;
-    background-color: red; /* value safe to change */
-    background-color: #000;
-}
-.kiketable-colsizable-minimized
-{
-    background-color: #ffd; /* value safe to change */
-    color: #bbb; /* value safe to change */
-}
-
 /*
 ddlWidth class
 */
@@ -232,7 +177,7 @@ CSS for Login, Register, ForgotPassword, ChagnePassword
 
 .containerDataEntryGrid
 {
-    width: 79%;    
+    width: 81%;    
     overflow: auto;
     float: right;
     margin: 0 auto;
@@ -240,7 +185,7 @@ CSS for Login, Register, ForgotPassword, ChagnePassword
 }
 .containerDataEntryProjects
 {
-    width: 20%;
+    width: 18%;
     float:left;
     /*margin: 0 auto;
     border: 1px solid #ccc;*/
@@ -275,21 +220,6 @@ CSS for Login, Register, ForgotPassword, ChagnePassword
 .spacerbig
 {
     margin-bottom: 5px;
-}
-
-.db1
-{
-    width: 45%;
-    float: left;
-    border: 1px solid #ccc;
-    padding: 1%;
-}
-.db2
-{
-    width: 45%;
-    float: right;
-    border: 1px solid #ccc;
-    padding: 1%;
 }
 
 .linknv
