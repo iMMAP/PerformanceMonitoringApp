@@ -131,6 +131,8 @@
     <Content Include="Admin\EmergencyLocations.aspx" />
     <Content Include="Admin\IndicatorActivities.aspx" />
     <Content Include="Admin\PriorityActivities.aspx" />
+    <Content Include="ClusterLead\ProjectDetails.aspx" />
+    <Content Include="ClusterLead\ProjectsListing.aspx" />
     <Content Include="Admin\UploadLocations.aspx" />
     <Content Include="Admin\UploadLogFrame.aspx" />
     <Content Include="Admin\Web.config" />
@@ -157,9 +159,7 @@
     <Content Include="Help\generatereport1.swf" />
     <Content Include="images\add_plus.png" />
     <Content Include="images\ajaxlodr.gif" />
-    <Content Include="images\C.png" />
     <Content Include="images\cind.png" />
-    <Content Include="images\cind1.png" />
     <Content Include="images\ddlarrow.png" />
     <Content Include="images\droparrow.png" />
     <Content Include="images\error.png" />
@@ -190,10 +190,11 @@
     <Content Include="images\minus.png" />
     <Content Include="images\O.png" />
     <Content Include="images\P.png" />
+    <Content Include="images\pdf.png" />
     <Content Include="images\plus.png" />
     <Content Include="images\rind.png" />
-    <Content Include="images\rind1.png" />
     <Content Include="images\rssfeed.png" />
+    <Content Include="images\word.png" />
     <Content Include="Maps\TargetAchievedByLocDataMap.aspx" />
     <Content Include="OPS\OPSDataEntry.aspx" />
     <Content Include="OPS\UploadOPSProjectDetails.aspx" />
@@ -228,16 +229,14 @@
     <Content Include="Scripts\hc\themes\gray.js" />
     <Content Include="Scripts\hc\themes\grid.js" />
     <Content Include="Scripts\hc\themes\skies.js" />
+    <Content Include="Scripts\ShowHideProjObjAndPr.js" />
     <Content Include="Scripts\jq-1.10.2.min.js" />
     <Content Include="Scripts\jq-highlight.js" />
     <Content Include="Scripts\jquery.event.drag-1.4.min.js" />
     <Content Include="Scripts\jquery.fixedMenu.js" />
-    <Content Include="Scripts\jquery.kiketable.colsizable-1.1.js" />
-    <Content Include="Scripts\jquery.kiketable.colsizable-1.1.min.js" />
     <Content Include="Scripts\jquery.numeric.min.js" />
     <Content Include="Scripts\quicksearch.js" />
     <Content Include="Scripts\ShowHideObJAndPr.js" />
-    <Content Include="Styles\jquery.kiketable.colsizable.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Styles\loginareamenu.css" />
@@ -421,6 +420,20 @@
     <Compile Include="Admin\PriorityActivities.aspx.designer.cs">
       <DependentUpon>PriorityActivities.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ClusterLead\ProjectDetails.aspx.cs">
+      <DependentUpon>ProjectDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClusterLead\ProjectDetails.aspx.designer.cs">
+      <DependentUpon>ProjectDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClusterLead\ProjectsListing.aspx.cs">
+      <DependentUpon>ProjectsListing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClusterLead\ProjectsListing.aspx.designer.cs">
+      <DependentUpon>ProjectsListing.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\UploadLocations.aspx.cs">
       <DependentUpon>UploadLocations.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -473,6 +486,7 @@
     <Compile Include="ClusterLead\WebForm1.aspx.designer.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Common\GeneratePDF.cs" />
     <Compile Include="Common\UserInfo.cs" />
     <Compile Include="DataFeed.ashx.cs">
       <DependentUpon>DataFeed.ashx</DependentUpon>
@@ -827,7 +841,6 @@
     <Content Include="DataFeeds\LogFrameDataFeed.ashx" />
     <Content Include="DataFeeds\YearFeed.ashx" />
     <Content Include="DataFeeds\MonthFeed.ashx" />
-    <None Include="images\Thumbs.db" />
     <None Include="UserManual_files\themedata.thmx" />
   </ItemGroup>
   <ItemGroup>
