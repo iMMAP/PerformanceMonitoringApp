@@ -10,6 +10,7 @@ using BusinessLogic;
 using SRFROWCA.Common;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace SRFROWCA.Pages
 {
@@ -25,6 +26,7 @@ namespace SRFROWCA.Pages
 
             if (!IsPostBack && !string.IsNullOrEmpty(languageChange)) return;
             {
+                UserInfo.UserProfileInfo();
                 PopulateDropDowns();
                 PopulateObjectives();
                 PopulatePriorities();
@@ -41,25 +43,33 @@ namespace SRFROWCA.Pages
                 PopulateYears();
                 PopulateMonths();
                 UserInfo.UserProfileInfo();
+                PopulateProjects();
+                if (rblProjects.Items.Count > 0)
+                {
+                    rblProjects.SelectedIndex = 0;
+                }
             }
 
             this.Form.DefaultButton = this.btnSave.UniqueID;
 
             string controlName = GetPostBackControlId(this);
-            if (controlName == "ddlMonth" || controlName == "ddlYear")
+
+            if (controlName == "ddlMonth" || controlName == "ddlYear" || controlName == "rblProjects")
             {
                 LocationRemoved = 0;
-                RemoveSelectedLocations();
+                RemoveSelectedLocations(cblAdmin1);
+                RemoveSelectedLocations(cblLocations);
             }
 
-            DataTable dtActivities = GetActivities();
-            AddDynamicColumnsInGrid(dtActivities);
-            Session["dtActivities"] = dtActivities;
-            GetReportId(dtActivities);
-            gvActivities.DataSource = dtActivities;
-            gvActivities.DataBind();
-
-            PopulateProjects(dtActivities);
+            //if (controlName != "rblProjects")
+            {
+                DataTable dtActivities = GetActivities();
+                AddDynamicColumnsInGrid(dtActivities);
+                Session["dtActivities"] = dtActivities;
+                GetReportId(dtActivities);
+                gvActivities.DataSource = dtActivities;
+                gvActivities.DataBind();
+            }
         }
         private DataTable GetUserProjects()
         {
@@ -68,12 +78,18 @@ namespace SRFROWCA.Pages
             return dt;
         }
 
-        private void PopulateProjects(DataTable dtActivities)
+        private void PopulateProjects()
         {
-            cblProjects.DataValueField = "ProjectId";
-            cblProjects.DataTextField = "ProjectCode";
-            cblProjects.DataSource = GetUserProjects(); ;
-            cblProjects.DataBind();
+            rblProjects.DataValueField = "ProjectId";
+            rblProjects.DataTextField = "ProjectCode";
+            DataTable dt = GetUserProjects();
+            rblProjects.DataSource = dt;
+            rblProjects.DataBind();
+
+            cblExportProjects.DataValueField = "ProjectId";
+            cblExportProjects.DataTextField = "ProjectCode";
+            cblExportProjects.DataSource = dt;
+            cblExportProjects.DataBind();
         }
 
         #region Events.
@@ -82,6 +98,32 @@ namespace SRFROWCA.Pages
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
+                int j = 0;
+                for (int i = 11; i < e.Row.Cells.Count; i++)
+                {
+                    TableCell Cell = e.Row.Cells[i];
+
+                    // if both row and column are odd, color then black
+                    // if both row and column are even, color then yellow
+                    if ((j > 2 && j < 6))
+                    {
+                        j++;
+                        string color = RC.ConfigSettings("ColumnColor");
+                        Cell.BackColor = System.Drawing.ColorTranslator.FromHtml(color);
+                        
+                        if (j == 6)
+                        {
+                            j = 0;
+                        }
+                    }
+                    else if (j < 3)
+                    {
+                        j++;
+                        string color = RC.ConfigSettings("AlternateColumnColor");
+                        Cell.BackColor = System.Drawing.ColorTranslator.FromHtml(color);
+                    }
+                }
+
                 Image imgObj = e.Row.FindControl("imgObjective") as Image;
                 if (imgObj != null)
                 {
@@ -162,6 +204,12 @@ namespace SRFROWCA.Pages
                     }
                 }
             }
+        }
+
+        protected void rblProjects_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BindGridData();
+            AddLocationsInSelectedList();
         }
 
         private string BreakString(string fullString)
@@ -271,10 +319,27 @@ namespace SRFROWCA.Pages
                             item.Selected = false;
                         }
                     }
+
+                    foreach (ListItem item in cblAdmin1.Items)
+                    {
+                        if (dataSave.Contains(Convert.ToInt32(item.Value)))
+                        {
+                            item.Selected = true;
+                        }
+                        else
+                        {
+                            item.Selected = false;
+                        }
+                    }
                 }
             }
         }
         protected void btnSave_Click(object sender, EventArgs e)
+        {
+            SaveProjectData();
+        }
+
+        private void SaveProjectData()
         {
             using (TransactionScope scope = new TransactionScope())
             {
@@ -310,14 +375,12 @@ namespace SRFROWCA.Pages
         private void PopulateDropDowns()
         {
             // Get details of user from aspnet_Users_Custom tbale
-            DataTable dt = RC.GetUserDetails();
-            if (dt.Rows.Count > 0)
-            {
-                LocationId = Convert.ToInt32(dt.Rows[0]["LocationId"].ToString());
-                int organizationId = Convert.ToInt32(dt.Rows[0]["OrganizationId"].ToString());
+            //DataTable dt = RC.GetUserDetails();
+            //if (dt.Rows.Count > 0)
+            LocationId = UserInfo.GetCountry;
+            int organizationId = UserInfo.GetOrganization;
 
-                PopulateLocationEmergencies(LocationId);
-            }
+            PopulateLocationEmergencies(LocationId);
         }
 
         // Populate Emergency Drop Down.
@@ -353,6 +416,11 @@ namespace SRFROWCA.Pages
             var result = DateTime.Now.ToString("MMMM", new CultureInfo(RC.SiteCulture));
             result = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(result);
             ddlMonth.SelectedIndex = ddlMonth.Items.IndexOf(ddlMonth.Items.FindByText(result.ToString()));
+
+            cblMonths.DataValueField = "MonthId";
+            cblMonths.DataTextField = "MonthName";
+            cblMonths.DataSource = GetMonth();
+            cblMonths.DataBind();            
         }
 
         private DataTable GetMonth()
@@ -539,13 +607,15 @@ namespace SRFROWCA.Pages
             int monthId = 0;
             int.TryParse(ddlMonth.SelectedValue, out monthId);
 
+            int projectId = RC.GetSelectedIntVal(rblProjects);
+
             string locationIds = GetSelectedLocations();
             string locIdsNotIncluded = GetNotSelectedLocations();
 
             Guid userId = RC.GetCurrentUserId;
             DataTable dt = DBContext.GetData("GetIPData", new object[] { locEmergencyId, locationIds, yearId, monthId,
                                                                         locIdsNotIncluded, RC.SelectedSiteLanguageId, userId,
-                                                                        UserInfo.GetCountry, UserInfo.GetOrganization   });
+                                                                        UserInfo.GetCountry, UserInfo.GetOrganization, projectId});
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 
@@ -609,9 +679,18 @@ namespace SRFROWCA.Pages
                     }
                     else
                     {
-                        customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, "TextBox", column.ColumnName, "1");
-                        customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, "TextBox", column.ColumnName, "1");
-                        gvActivities.Columns.Add(customField);
+                        if (columnName.Contains("_1-"))
+                        {
+                            customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, "TextBox", column.ColumnName, "1", "Annual");
+                            customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, "TextBox", column.ColumnName, "1", "Annual");
+                            gvActivities.Columns.Add(customField);
+                        }
+                        else
+                        {
+                            customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, "TextBox", column.ColumnName, "1");
+                            customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, "TextBox", column.ColumnName, "1");
+                            gvActivities.Columns.Add(customField);
+                        }
                     }
                 }
             }
@@ -728,7 +807,7 @@ namespace SRFROWCA.Pages
                         if (locationId > 0)
                         {
                             dataSave.Add(locationId);
-                            if (i == 1)
+                            if (i == 2)
                             {
                                 i = 0;
                                 int locationIdToSaveT = 0;
@@ -753,7 +832,7 @@ namespace SRFROWCA.Pages
                             }
                             else
                             {
-                                i = 1;
+                                i += 1;
                             }
                         }
                     }
@@ -763,14 +842,16 @@ namespace SRFROWCA.Pages
 
         private void SaveReportMainInfo()
         {
-            string reportName = "test"; // TODO:
             int locEmergencyId = Convert.ToInt32(ddlEmergency.SelectedValue);
-            int yearId = Convert.ToInt32(ddlYear.SelectedValue);
-            int monthId = Convert.ToInt32(ddlMonth.SelectedValue);
-            int reportFrequencyId = 1;
+            int yearId = RC.GetSelectedIntVal(ddlYear);
+            int monthId = RC.GetSelectedIntVal(ddlMonth);
+            int projId = RC.GetSelectedIntVal(rblProjects);
+
             Guid loginUserId = RC.GetCurrentUserId;
 
-            ReportId = DBContext.Add("InsertReport", new object[] { reportName, yearId, monthId, locEmergencyId, reportFrequencyId, loginUserId, DBNull.Value });
+            ReportId = DBContext.Add("InsertReport", new object[] { yearId, monthId, projId, locEmergencyId,
+                                                                    UserInfo.GetCountry, UserInfo.GetOrganization,
+                                                                    loginUserId, DBNull.Value });
         }
 
         private bool IsDataExistsToSave()
@@ -804,39 +885,6 @@ namespace SRFROWCA.Pages
             }
 
             return returnValue;
-        }
-
-        private void UpdateGridWithData()
-        {
-            string activityDataId = "";
-            foreach (GridViewRow row in gvActivities.Rows)
-            {
-                if (row.RowType != DataControlRowType.DataRow) return;
-
-                activityDataId = gvActivities.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString();
-
-                int colummCounts = gvActivities.Columns.Count;
-
-                DataTable dtActivities = (DataTable)Session["dtActivities"];
-                if (dtActivities == null) return;
-
-                DataTable dtClone = (DataTable)Session["dtClone"];
-                if (dtClone == null) return;
-
-                foreach (DataColumn dc in dtActivities.Columns)
-                {
-                    string colName = dc.ColumnName;
-                    if (dtClone.Columns.Contains(colName))
-                    {
-                        TextBox t = row.FindControl(colName) as TextBox;
-                        if (t != null)
-                        {
-                            string val = dtClone.Rows[row.RowIndex][colName].ToString();
-                            t.Text = val;
-                        }
-                    }
-                }
-            }
         }
 
         protected void CaptureDataFromGrid()
@@ -895,12 +943,14 @@ namespace SRFROWCA.Pages
             {
                 if (row.RowType == DataControlRowType.DataRow)
                 {
+                    int projectId = RC.GetSelectedIntVal(rblProjects);
                     activityDataId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString());
 
                     int colummCounts = gvActivities.Columns.Count;
                     DataTable dtActivities = (DataTable)Session["dtActivities"];
                     List<KeyValuePair<int, decimal?>> dataSave = new List<KeyValuePair<int, decimal?>>();
                     int i = 0;
+                    bool isAccum = false;
                     foreach (DataColumn dc in dtActivities.Columns)
                     {
                         string colName = dc.ColumnName;
@@ -921,10 +971,16 @@ namespace SRFROWCA.Pages
                             }
                         }
 
+                        CheckBox cbAccum = row.FindControl(colName) as CheckBox;
+                        if (cbAccum != null)
+                        {
+                            isAccum = cbAccum.Checked;
+                        }
+
                         if (locationId > 0)
                         {
                             dataSave.Add(new KeyValuePair<int, decimal?>(locationId, value));
-                            if (i == 1)
+                            if (i == 2)
                             {
                                 i = 0;
                                 int locationIdToSaveT = 0;
@@ -939,6 +995,10 @@ namespace SRFROWCA.Pages
                                         valToSaveT = item.Value;
                                         j++;
                                     }
+                                    else if (j == 1)
+                                    {
+                                        j++;
+                                    }
                                     else
                                     {
                                         valToSaveA = item.Value;
@@ -947,18 +1007,26 @@ namespace SRFROWCA.Pages
                                 }
 
                                 dataSave.Clear();
+                                Guid userId = RC.GetCurrentUserId;
 
-                                if (!(valToSaveA == null && valToSaveT == null))
+                                if (!(valToSaveT == null))
                                 {
-                                    Guid loginUserId = RC.GetCurrentUserId;
+                                    DBContext.Add("InsertUpdateIndicatorLocationAnnualTarget", new Object[] {UserInfo.GetCountry,
+                                                    UserInfo.GetOrganization, locationIdToSaveT, projectId,
+                                                    activityDataId, valToSaveT, 10, userId, DBNull.Value});
+                                }
+
+                                if (!(valToSaveA == null))
+                                {
                                     int newReportDetailId = DBContext.Add("InsertReportDetails",
                                                                             new object[] { ReportId, activityDataId, locationIdToSaveT, 
-                                                                                            valToSaveT, valToSaveA, 1, loginUserId, DBNull.Value });
+                                                                                            valToSaveA, isAccum, 1, userId, DBNull.Value });
+                                    isAccum = false;
                                 }
                             }
                             else
                             {
-                                i = 1;
+                                i += 1;
                             }
                         }
                     }
@@ -978,11 +1046,110 @@ namespace SRFROWCA.Pages
             }
         }
 
-        private void RemoveSelectedLocations()
+        private void RemoveSelectedLocations(ListControl control)
         {
-            foreach (ListItem item in cblLocations.Items)
+            foreach (ListItem item in control.Items)
             {
                 item.Selected = false;
+            }
+        }
+
+        protected void btnExcel_Export(object sender, EventArgs e)
+        {
+            SaveProjectData();
+            ExportDocumentType = 2;
+            ModalPopupExtender1.Show();
+            //DataTable dt = DBContext.GetData()
+            //string fileName = "DataEntry";
+            //string fileExtention = ".xls";
+            //DataTable dtActivities = (DataTable)Session["dtActivities"];
+            //GridView gv = new GridView();
+            //gv.DataSource = dtActivities;
+            //gv.DataBind();
+            //ExportUtility.ExportGridView(gv, fileName, fileExtention, this.Response);
+        }
+
+        protected void btnOK_Click(object sender, EventArgs e)
+        {
+            DataTable dt = new DataTable();
+
+            if (ExportDocumentType == 2)
+            {
+                dt = GetProjectsData(true);
+                GridView gv = new GridView();
+                gv.DataSource = dt;
+                gv.DataBind();
+                string fileName = UserInfo.GetCountryName + "_" + UserInfo.GetOrgName + "_" + ddlMonth.SelectedItem.Text + "_Report";
+                ExportUtility.ExportGridView(gv, fileName, ".xls", Response, true);
+            }
+            else
+            {
+                dt = GetProjectsData(false);
+                GeneratePDF(dt);
+            }
+        }
+
+        private DataTable GetProjectsData(bool isPivot)
+        {
+            int locEmergencyId = 0;
+            int.TryParse(ddlEmergency.SelectedValue, out locEmergencyId);
+
+            int yearId = 0;
+            int.TryParse(ddlYear.SelectedValue, out yearId);
+
+            int monthId = 0;
+            int.TryParse(ddlMonth.SelectedValue, out monthId);
+
+            string projectIds = GetSelectedItems(cblExportProjects);
+            string locationIds = GetSelectedLocations();
+            string locIdsNotIncluded = GetNotSelectedLocations();
+
+            Guid userId = RC.GetCurrentUserId;
+
+            string procedureName = "GetProjectsReportData";
+            if (!isPivot)
+            {
+                procedureName = "GetProjectsReportDataWithLocations";
+            }
+
+            DataTable dt = DBContext.GetData(procedureName, new object[] { locEmergencyId, locationIds, yearId, monthId,
+                                                                        locIdsNotIncluded, RC.SelectedSiteLanguageId, userId,
+                                                                        UserInfo.GetCountry, UserInfo.GetOrganization, projectIds});
+            return dt.Rows.Count > 0 ? dt : new DataTable();
+        }
+
+        protected void btnExportToExcelClose_Click(object sender, EventArgs e)
+        {
+            //LoadData();
+            ModalPopupExtender1.Hide();
+        }
+
+        protected void btnPDF_Export(object sender, EventArgs e)
+        {
+            SaveProjectData();
+            ExportDocumentType = 1;
+            ModalPopupExtender1.Show();
+        }
+
+        private void GeneratePDF(DataTable dt)
+        {
+            using (iTextSharp.text.Document document = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4, 8, 8, 14, 6))
+            {
+                using (MemoryStream outputStream = new MemoryStream())
+                {
+                    using (iTextSharp.text.pdf.PdfWriter writer = iTextSharp.text.pdf.PdfWriter.GetInstance(document, outputStream))
+                    {
+                        document.Open();
+
+                        WriteDataEntryPDF.GenerateDocument(document, dt);
+
+                        document.Close();
+
+                        Response.ContentType = "application/pdf";
+                        Response.AddHeader("Content-Disposition", string.Format("attachment;filename=Project-{0}.pdf", UserInfo.GetCountryName));
+                        Response.BinaryWrite(outputStream.ToArray());
+                    }
+                }
             }
         }
 
@@ -1039,6 +1206,7 @@ namespace SRFROWCA.Pages
                 ViewState["LocationId"] = value.ToString();
             }
         }
+
         public int LocationRemoved
         {
             get
@@ -1057,6 +1225,24 @@ namespace SRFROWCA.Pages
             }
         }
 
+        public int ExportDocumentType
+        {
+            get
+            {
+                int docType = 0;
+                if (ViewState["ExportDocumentType"] != null)
+                {
+                    int.TryParse(ViewState["ExportDocumentType"].ToString(), out docType);
+                }
+
+                return docType;
+            }
+            set
+            {
+                ViewState["ExportDocumentType"] = value.ToString();
+            }
+        }
+
         #endregion
 
     }
@@ -1067,13 +1253,15 @@ namespace SRFROWCA.Pages
         private string _columnName;
         private string _locationId;
         private string _controlType;
+        private string _txtBoxType;
 
-        public GridViewTemplate(DataControlRowType type, string controlType, string colname, string locId)
+        public GridViewTemplate(DataControlRowType type, string controlType, string colname, string locId, string txtBoxType = "Achieved")
         {
             _templateType = type;
             _controlType = controlType;
             _columnName = colname;
             _locationId = locId;
+            _txtBoxType = txtBoxType;
         }
 
         public void InstantiateIn(System.Web.UI.Control container)
@@ -1092,7 +1280,7 @@ namespace SRFROWCA.Pages
                 if (_controlType == "TextBox")
                 {
                     TextBox txtAchieved = new TextBox();
-                    txtAchieved.CssClass = "numeric1";
+                    txtAchieved.CssClass = "numeric1";                    
                     txtAchieved.Width = 50;
                     txtAchieved.DataBinding += new EventHandler(this.txtAchieved_DataBinding);
                     container.Controls.Add(txtAchieved);
@@ -1101,12 +1289,15 @@ namespace SRFROWCA.Pages
                     hf.Value = words1[0];
                     hf.ID = "hf" + _columnName;
                     container.Controls.Add(hf);
+                    if (_txtBoxType == "Annual")
+                    {
+                        string color = RC.ConfigSettings("AnnualTargetTextBoxColor");
+                        txtAchieved.BackColor = System.Drawing.ColorTranslator.FromHtml(color);
+                    }
                 }
                 else if (_controlType == "CheckBox")
                 {
-                    CheckBox cbLocAccum = new CheckBox();
-                    //firstName.CssClass = "numeric1";
-                    //cbLocAccum.Width = 50;
+                    CheckBox cbLocAccum = new CheckBox();                    
                     cbLocAccum.DataBinding += new EventHandler(this.cbAccum_DataBinding);
                     container.Controls.Add(cbLocAccum);
                     HiddenField hf = new HiddenField();
@@ -1122,7 +1313,7 @@ namespace SRFROWCA.Pages
         {
             TextBox txt = (TextBox)sender;
             txt.ID = _columnName;
-            txt.MaxLength = 12;
+            txt.MaxLength = 12;            
             GridViewRow row = (GridViewRow)txt.NamingContainer;
             txt.Text = DataBinder.Eval(row.DataItem, _columnName).ToString();
         }
@@ -1134,8 +1325,9 @@ namespace SRFROWCA.Pages
             GridViewRow row = (GridViewRow)cb.NamingContainer;
             //cb.Text = DataBinder.Eval(row.DataItem, _columnName).ToString();
             bool isChecked = false;
-            bool.TryParse((DataBinder.Eval(row.DataItem, _columnName)).ToString(), out isChecked);
+            if ((DataBinder.Eval(row.DataItem, _columnName)).ToString() == "1")
+                isChecked = true;
             cb.Checked = isChecked;
-        }
+        }        
     }
 }

@@ -129,24 +129,27 @@ namespace SRFROWCA.Pages
 
         private void PopulateLogFrame()
         {
-            int projectId = Convert.ToInt32(rblProjects.SelectedValue);
+            DataTable dtIndicators = new DataTable();
 
-            int clusterId = 0;
-            DataTable dt = Session["testprojectdata"] as DataTable;
-            foreach (DataRow dr in dt.Rows)
+            int projectId = Convert.ToInt32(rblProjects.SelectedValue);
+            DataTable dt = GetProjectCluster(projectId);
+
+            if (dt.Rows.Count > 0)
             {
-                if (dr["ProjectId"].ToString() == projectId.ToString())
-                {
-                    clusterId = Convert.ToInt32(dr["ClusterId"]);
-                }
+                int clusterId = Convert.ToInt32(dt.Rows[0]["ClusterId"].ToString());
+                int isORS = Convert.ToInt32(dt.Rows[0]["IsORS"].ToString());
+                int emgId = 1;
+                int locationId = UserInfo.GetCountry;
+                dtIndicators = DBContext.GetData("GetOPSandORSProjectIndicators", new object[] { emgId, clusterId, locationId, projectId, isORS, 1 });
             }
 
-            int emgId = 1;
-            int locationId = UserInfo.GetCountry;
-            DataTable dt1 = DBContext.GetData("GetOPSandORSProjectIndicators", new object[] { emgId, clusterId, locationId, 
-                                                                                                              projectId, 1 });
-            gvIndicators.DataSource = dt1;
+            gvIndicators.DataSource = dtIndicators;
             gvIndicators.DataBind();
+        }
+
+        private DataTable GetProjectCluster(int projectId)
+        {
+            return DBContext.GetData("GetProjectCluster", new object[] { projectId });
         }
 
         protected void rblProjects_SelectedIndexChanged(object sender, EventArgs e)

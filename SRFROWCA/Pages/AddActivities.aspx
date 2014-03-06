@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeBehind="AddActivities.aspx.cs" Inherits="SRFROWCA.Pages.AddActivities" Culture="auto"
-    meta:resourcekey="PageResource1" UICulture="auto" %>
+    UICulture="auto" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
@@ -10,9 +10,9 @@
             padding: 0 40px 0 0;
         }
     </style>
+    <script type="text/javascript" src="../Scripts/ShowHideProjObJAndPr.js"></script>
     <script src="../Scripts/jquery.numeric.min.js" type="text/javascript"></script>
     <script type="text/javascript">
-
         var needToConfirm = true;
 
         window.onbeforeunload = confirmExit;
@@ -60,7 +60,7 @@
                   : $(this).html();
                     if (value.indexOf('_') >= 0) {
                         j++;
-                        city1 = value.split('_');                        
+                        city1 = value.split('_');
                         city2 = city1[1].split('-');
                         $(this).text(city2[1]);
                         if (j % 3 === 0) {
@@ -71,273 +71,7 @@
 
                 $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th style="width: 100px;">&nbsp;</th><th style="width: 50px;">&nbsp;</th><th style="width: 260px;">&nbsp;</th><th style="width: 220px;">&nbsp;</th>' + list + '</tr></thead>');
             }
-
-            $("#<%=gvActivities.ClientID %>").kiketable_colsizable({ minWidth: 50 })
         });
-
-        $(".checkbox").change(function () {
-
-        });
-
-        function showHideProjects() {
-            $(".checkProj").live("click", function () {
-                var selectedProjects = [];
-                $("[id*=cblProjects] input:checked").each(function () {
-                    selectedProjects.push($(this).val());
-                });
-
-                var selectedObjs = [];
-                $("[id*=cblObjectives] input:checked").each(function () {
-                    selectedObjs.push($(this).val());
-                });
-
-                var selectedPr = [];
-                $("[id*=cblPriorities] input:checked").each(function () {
-                    selectedPr.push($(this).val());
-                });
-
-                showAllObj();
-                if (selectedProjects.length > 0 && selectedObjs.length > 0 && selectedPr.length > 0) {
-                    hideAllObj();
-                    for (k = 0; k < selectedProjects.length; k++) {
-                        for (i = 0; i < selectedObjs.length; i++) {
-                            for (j = 0; j < selectedPr.length; j++) {
-                                var projId = selectedProjects[k];
-                                var objId = selectedObjs[i];
-                                var prId = selectedPr[j];
-                                var objprProject = objId + '-' + prId + '-' + projId;
-                                showObjPriorityAndProject(objprProject);
-                            }
-                        }
-                    }
-                }
-                else if (selectedProjects.length > 0 && selectedObjs.length > 0) {
-                    hideAllObj();
-                    for (k = 0; k < selectedProjects.length; k++) {
-                        for (i = 0; i < selectedObjs.length; i++) {
-
-                            var projId = selectedProjects[k];
-                            var objId = selectedObjs[i];
-                            var objProject = objId + '-' + projId;
-                            showObjAndProject(objProject);
-                        }
-                    }
-                }
-                else if (selectedProjects.length > 0 && selectedPr.length > 0) {
-                    hideAllObj();
-                    for (k = 0; k < selectedProjects.length; k++) {
-                        for (j = 0; j < selectedPr.length; j++) {
-                            var projId = selectedProjects[k];
-                            var prId = selectedPr[j];
-                            var prProject = prId + '-' + projId;
-                            showPriorityAndProject(prProject);
-                        }
-                    }
-                }
-                else if (selectedObjs.length > 0 && selectedPr.length > 0) {
-                    hideAllObj();
-                    for (i = 0; i < selectedObjs.length; i++) {
-                        for (j = 0; j < selectedPr.length; j++) {
-                            var objId = selectedObjs[i];
-                            var prId = selectedPr[j];
-                            var objpr = objId + '-' + prId;
-                            showObjPriority(objpr);
-                        }
-                    }
-                }
-                else if (selectedProjects.length > 0) {
-                    hideAllObj();
-                    var i;
-                    for (i = 0; i < selectedProjects.length; i++) {
-                        showProject(selectedProjects[i]);
-                    }
-                }
-                else if (selectedObjs.length > 0) {
-                    hideAllObj();
-                    var i;
-                    for (i = 0; i < selectedObjs.length; i++) {
-                        showObj(selectedObjs[i]);
-                    }
-                }
-                else if (selectedPr.length > 0) {
-                    hideAllObj();
-                    var i;
-                    for (i = 0; i < selectedPr.length; i++) {
-                        showPriority(selectedPr[i]);
-                    }
-                }
-            });
-        }
-
-        function showHideObj() {
-            $(".checkObj").live("click", function () {
-                var selectedObjs = [];
-                $("[id*=cblObjectives] input:checked").each(function () {
-                    selectedObjs.push($(this).val());
-                });
-
-                var selectedPr = [];
-                $("[id*=cblPriorities] input:checked").each(function () {
-                    selectedPr.push($(this).val());
-                });
-
-                showAllObj();
-                if (selectedObjs.length > 0 && selectedPr.length > 0) {
-                    hideAllObj();
-                    for (i = 0; i < selectedObjs.length; ++i) {
-                        for (j = 0; j < selectedPr.length; ++j) {
-                            var objId = selectedObjs[i];
-                            var prId = selectedPr[j];
-                            var objpr = objId + '-' + prId;
-                            showObjPriority(objpr);
-                        }
-                    }
-                }
-                else if (selectedObjs.length > 0) {
-                    hideAllObj();
-                    var i;
-                    for (i = 0; i < selectedObjs.length; ++i) {
-                        showObj(selectedObjs[i]);
-                    }
-                }
-                else if (selectedPr.length > 0) {
-                    hideAllObj();
-                    var i;
-                    for (i = 0; i < selectedPr.length; ++i) {
-                        showPriority(selectedPr[i]);
-                    }
-                }
-            });
-        }
-
-        function showHidePriority() {
-
-            $(".checkPr").live("click", function () {
-                var selectedPr = [];
-                $("[id*=cblPriorities] input:checked").each(function () {
-                    selectedPr.push($(this).val());
-                });
-
-                var selectedObjs = [];
-                $("[id*=cblObjectives] input:checked").each(function () {
-                    selectedObjs.push($(this).val());
-                });
-
-                showAllObj();
-                if (selectedObjs.length > 0 && selectedPr.length > 0) {
-                    hideAllObj();
-                    for (i = 0; i < selectedObjs.length; ++i) {
-                        for (j = 0; j < selectedPr.length; ++j) {
-                            var objId = selectedObjs[i];
-                            var prId = selectedPr[j];
-                            var objpr = objId + '-' + prId;
-                            showObjPriority(objpr);
-                        }
-                    }
-                }
-                else if (selectedObjs.length > 0) {
-                    hideAllObj();
-                    var i;
-                    for (i = 0; i < selectedObjs.length; ++i) {
-                        showObj(selectedObjs[i]);
-                    }
-                }
-                else if (selectedPr.length > 0) {
-                    hideAllObj();
-                    var i;
-                    for (i = 0; i < selectedPr.length; ++i) {
-                        showPriority(selectedPr[i]);
-                    }
-                }
-            });
-        }
-
-        function showAllObj() {
-
-            $('.istrow, .altcolor').find('td:nth-child(1)').each(function (i) {
-                $(this).parent().show();
-            });
-        }
-
-        function hideAllObj() {
-
-            $('.istrow, .altcolor').find('td:nth-child(1)').each(function (i) {
-                $(this).parent().hide();
-            });
-        }
-
-        function showObj(objId) {
-
-            $('.istrow, .altcolor').find('td:nth-child(1)').each(function (i) {
-                if ($(this).text() === objId || objId === '0') {
-                    $(this).parent().show();
-                }
-            });
-        }
-
-        function showAllPriority() {
-            $('.istrow, .altcolor').find('td:nth-child(2)').each(function (i) {
-                $(this).parent().show();
-            });
-        }
-
-        function hideAllPriority() {
-            $('.istrow, .altcolor').find('td:nth-child(2)').each(function (i) {
-                $(this).parent().hide();
-            });
-        }
-
-        function showPriority(priorityId) {
-            $('.istrow, .altcolor').find('td:nth-child(2)').each(function (i) {
-                if ($(this).text() === priorityId || priorityId === '0') {
-                    $(this).parent().show();
-                }
-            });
-        }
-
-        function showObjPriority(objPrId) {
-            $('.istrow, .altcolor').find('td:nth-child(3)').each(function (i) {
-                if ($(this).text() === objPrId || objPrId === '0') {
-                    $(this).parent().show();
-                }
-            });
-        }
-
-        function showProject(pId) {
-            $('.istrow, .altcolor').find('td:nth-child(4)').each(function (i) {
-                if ($(this).text() === pId || pId === '0') {
-                    $(this).parent().show();
-                }
-            });
-        }
-
-        function showObjPriorityAndProject(objPrPId) {
-            $('.istrow, .altcolor').find('td:nth-child(5)').each(function (i) {
-                if ($(this).text() === objPrPId || objPrPId === '0') {
-                    $(this).parent().show();
-                }
-            });
-        }
-
-        function showObjAndProject(objPId) {
-
-            $('.istrow, .altcolor').find('td:nth-child(6)').each(function (i) {
-                if ($(this).text() === objPId || objPId === '0') {
-                    $(this).parent().show();
-                }
-            });
-        }
-
-        function showPriorityAndProject(prPId) {
-            $('.istrow, .altcolor').find('td:nth-child(7)').each(function (i) {
-                if ($(this).text() === prPId || prPId === '0') {
-                    $(this).parent().show();
-                }
-            });
-        }
-
-        
-        
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -350,23 +84,22 @@
                     <tr>
                         <td colspan="2" style="display: none">
                             <asp:DropDownList ID="ddlEmergency" runat="server" Width="350px" OnSelectedIndexChanged="ddlEmergency_SelectedIndexChanged"
-                                onchange="needToConfirm = false;" AutoPostBack="True" meta:resourcekey="ddlEmergencyResource1">
+                                onchange="needToConfirm = false;" AutoPostBack="True">
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ID="rfvEmergency" runat="server" ErrorMessage="Select Emergency"
-                                InitialValue="0" Text="*" ControlToValidate="ddlEmergency" meta:resourcekey="rfvEmergencyResource1"></asp:RequiredFieldValidator>
+                                InitialValue="0" Text="*" ControlToValidate="ddlEmergency"></asp:RequiredFieldValidator>
                         </td>
                         <td>
                             <label>
-                                <asp:Localize ID="locaYearMonth" runat="server" meta:resourcekey="locaYearMonthResource1"
-                                    Text="
+                                <asp:Localize ID="locaYearMonth" runat="server" Text="
                                 Year/Month:"></asp:Localize></label>
                         </td>
                         <td>
                             <asp:DropDownList ID="ddlYear" runat="server" Width="60px" OnSelectedIndexChanged="ddlYear_SelectedIndexChanged"
-                                onchange="needToConfirm = false;" AutoPostBack="True" meta:resourcekey="ddlYearResource1">
+                                onchange="needToConfirm = false;" AutoPostBack="True">
                             </asp:DropDownList>
                             <asp:DropDownList ID="ddlMonth" runat="server" Width="90px" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged"
-                                onchange="needToConfirm = false;" AutoPostBack="True" meta:resourcekey="ddlMonthResource1">
+                                onchange="needToConfirm = false;" AutoPostBack="True">
                             </asp:DropDownList>
                         </td>
                     </tr>
@@ -375,8 +108,9 @@
             <div class="containerDataEntryProjectsInner">
                 <fieldset>
                     <legend>Projects</legend>
-                    <asp:CheckBoxList ID="cblProjects" runat="server" CssClass="checkProj">
-                    </asp:CheckBoxList>
+                    <asp:RadioButtonList ID="rblProjects" runat="server" AutoPostBack="true" OnSelectedIndexChanged="rblProjects_SelectedIndexChanged"
+                        onchange="needToConfirm = false;">
+                    </asp:RadioButtonList>
                     <br />
                     <br />
                 </fieldset>
@@ -406,16 +140,15 @@
         <div class="containerDataEntryGrid">
             <div class="buttonsdiv">
                 <div class="savebutton2">
-                    <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
-                        Width="100px" CssClass="button_example" meta:resourcekey="btnSaveResource1" />
-                </div>
-                <div>
                     Please click on 'Locations' button to select the locations you want to report on.
-                </div>
-                <div class="buttonright">
                     <asp:Button ID="btnOpenLocations" runat="server" Text="Manage Locations" CausesValidation="False"
-                        CssClass="button_example" OnClick="btnLocation_Click" OnClientClick="needToConfirm = false;"
-                        meta:resourcekey="btnOpenLocationsResource1" />
+                        CssClass="button_example" OnClick="btnLocation_Click" OnClientClick="needToConfirm = false;" />
+                </div>
+                <div class="buttonright2">
+                    <asp:ImageButton ID="btnPDF" runat="server" ImageUrl="~/images/pdf.png" OnClick="btnPDF_Export"
+                        OnClientClick="needToConfirm = false;" />
+                    <asp:ImageButton ID="btnExcel" runat="server" ImageUrl="~/images/excel.png" OnClick="btnExcel_Export"
+                        OnClientClick="needToConfirm = false;" />
                 </div>
                 <div class="savebutton">
                 </div>
@@ -424,7 +157,7 @@
             </div>
             <div class="tablegrid">
                 <div id="scrolledGridView" style="overflow-x: auto; width: 100%;">
-                    <asp:GridView ID="gvActivities" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True"
+                    <asp:GridView ID="gvActivities" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="False"
                         HeaderStyle-BackColor="ButtonFace" DataKeyNames="ActivityDataId" CssClass="imagetable"
                         Width="100%" meta:resourcekey="gvActivitiesResource1" OnRowDataBound="gvActivities_RowDataBound">
                         <HeaderStyle BackColor="Control"></HeaderStyle>
@@ -495,73 +228,125 @@
                             </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
+                    <div class="spacer" style="clear: both;">
+                    </div>
+                    <div class="buttonright2">
+                        <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
+                            Width="100px" CssClass="button_example" />
+                    </div>
+                    <div class="spacer" style="clear: both;">
+                    </div>
+                    <div class="spacer" style="clear: both;">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <table>
-        <tr>
-            <td>
-                <input type="button" id="btnClientOpen" runat="server" style="display: none;" />
-                <asp:ModalPopupExtender ID="mpeAddActivity" runat="server" BehaviorID="mpeAddActivity"
-                    TargetControlID="btnClientOpen" PopupControlID="pnlLocations" BackgroundCssClass="modalpopupbackground"
-                    DynamicServicePath="" Enabled="True">
-                </asp:ModalPopupExtender>
-                <asp:Panel ID="pnlLocations" runat="server" Width="700px" meta:resourcekey="pnlLocationsResource1">
-                    <asp:UpdatePanel ID="uPanel1" runat="server" UpdateMode="Conditional">
-                        <ContentTemplate>
-                            <div class="containerPopup">                                
-                                <div class="contentarea">
-                                    <div class="formdiv">
-                                        <table border="0" style="margin: 0 auto;">
-                                            <tr>
-                                                <td>
-                                                    <div class="graybar">
-                                                        Admin 1
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <asp:CheckBoxList ID="cblAdmin1" runat="server" RepeatColumns="6" RepeatDirection="Horizontal">
-                                                    </asp:CheckBoxList>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="graybar">
-                                                        Admin 2
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <asp:CheckBoxList ID="cblLocations" runat="server" RepeatColumns="5" RepeatDirection="Horizontal"
-                                                        meta:resourcekey="cblLocationsResource1">
-                                                    </asp:CheckBoxList>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <asp:Button ID="btnClose" runat="server" Text="Close" Width="120px" CssClass="button_location"
-                                                        CausesValidation="False" OnClientClick="needToConfirm = false;" meta:resourcekey="btnCloseResource1" />
-                                                </td>
-                                            </tr>
-                                        </table>
-                                        <div class="spacer" style="clear: both;">
+    <input type="button" id="btnClientOpen" runat="server" style="display: none;" />
+    <asp:ModalPopupExtender ID="mpeAddActivity" runat="server" BehaviorID="mpeAddActivity"
+        TargetControlID="btnClientOpen" PopupControlID="pnlLocations" BackgroundCssClass="modalpopupbackground"
+        DynamicServicePath="" Enabled="True">
+    </asp:ModalPopupExtender>
+    <asp:Panel ID="pnlLocations" runat="server" Width="700px" meta:resourcekey="pnlLocationsResource1">
+        <asp:UpdatePanel ID="uPanel1" runat="server" UpdateMode="Conditional">
+            <ContentTemplate>
+                <div class="containerPopup">
+                    <div class="contentarea">
+                        <div class="formdiv">
+                            <table border="0" style="margin: 0 auto;">
+                                <tr>
+                                    <td>
+                                        <div class="graybar">
+                                            Admin 1
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="graybarcontainer">
-                                </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:CheckBoxList ID="cblAdmin1" runat="server" RepeatColumns="6" RepeatDirection="Horizontal">
+                                        </asp:CheckBoxList>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="graybar">
+                                            Admin 2
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:CheckBoxList ID="cblLocations" runat="server" RepeatColumns="5" RepeatDirection="Horizontal"
+                                            meta:resourcekey="cblLocationsResource1">
+                                        </asp:CheckBoxList>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:Button ID="btnClose" runat="server" Text="Close" Width="120px" CssClass="button_location"
+                                            CausesValidation="False" OnClientClick="needToConfirm = false;" meta:resourcekey="btnCloseResource1" />
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="spacer" style="clear: both;">
                             </div>
-                        </ContentTemplate>
-                        <Triggers>
-                            <asp:PostBackTrigger ControlID="btnClose" />
-                        </Triggers>
-                    </asp:UpdatePanel>
-                </asp:Panel>
-            </td>
-        </tr>
-    </table>
+                        </div>
+                    </div>
+                    <div class="graybarcontainer">
+                    </div>
+                </div>
+            </ContentTemplate>
+            <Triggers>
+                <asp:PostBackTrigger ControlID="btnClose" />
+            </Triggers>
+        </asp:UpdatePanel>
+    </asp:Panel>
+    <asp:ModalPopupExtender ID="ModalPopupExtender1" runat="server" TargetControlID="HiddenTargetControlForModalPopup"
+        PopupControlID="Panel1" Drag="true" BackgroundCssClass="modalpopupbackground">
+    </asp:ModalPopupExtender>
+    <asp:Button runat="server" ID="HiddenTargetControlForModalPopup" Style="display: none" />
+    <asp:Panel ID="Panel1" Style="display: block; width: 700px;" runat="server">
+        <div class="containerPopup">
+            <div class="graybar">
+                Select Projects You Want To Export
+            </div>
+            <div class="contentarea">
+                <div class="formdiv">
+                    <table border="0" style="margin: 0 auto;">
+                        <tr>
+                            <td>
+                                <asp:Label ID="lblMonths" runat="server" Text="Select Months To Generate Document"></asp:Label>
+                                <asp:CheckBoxList ID="cblMonths" runat="server" RepeatColumns="6">
+                                </asp:CheckBoxList>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:CheckBoxList ID="cblExportProjects" runat="server" RepeatColumns="4">
+                                </asp:CheckBoxList>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                <asp:Button ID="btnOK" runat="server" Text="OK" OnClick="btnOK_Click" CssClass="button_example"
+                                    OnClientClick="needToConfirm = false;" />
+                                <asp:Button ID="btnExportToExcelClose" runat="server" Text="Close" CausesValidation="false"
+                                    OnClick="btnExportToExcelClose_Click" CssClass="button_example" OnClientClick="needToConfirm = false;" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Label ID="lblMessage2" runat="server" CssClass="error-message" Visible="false"
+                                    ViewStateMode="Disabled"></asp:Label>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="spacer" style="clear: both;">
+                    </div>
+                </div>
+            </div>
+            <div class="graybarcontainer">
+            </div>
+        </div>
+    </asp:Panel>
 </asp:Content>
