@@ -178,6 +178,16 @@ namespace SRFROWCA.Common
             return dt;
         }
 
+        internal static DataTable GetAdmin1(int countryId)
+        {
+            return DBContext.GetData("GetAdmin1LocationsOfCountry", new object[] { countryId });
+        }
+
+        internal static DataTable GetAdmin2(int countryId)
+        {
+            return DBContext.GetData("GetAdmin2LocationsOfCountry", new object[] { countryId });
+        }
+
         internal static DataTable GetLocationsAndChilds(int locationId, int childTypeId)
         {
             return DBContext.GetData("GetLocationAndItsChildOnType", new object[] { locationId, childTypeId });
@@ -235,7 +245,15 @@ namespace SRFROWCA.Common
             return DBContext.GetData("GetAllUnits", new object[] { 1 });
         }
 
-        
+        internal static DataTable GetOrganizations(int? orgId)
+        {
+            return DBContext.GetData("GetOrganizations", new object[] { orgId });
+        }
+
+        internal static DataTable GetProjectsOrganizations(int? locId, int? clusterId)
+        {
+            return DBContext.GetData("GetProjectsOrganizations", new object[] { locId, clusterId });
+        }
 
         internal static DataTable GetUserDetails()
         {

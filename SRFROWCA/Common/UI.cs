@@ -49,8 +49,23 @@ namespace SRFROWCA.Common
         {
             ddl.DataValueField = "LocationId";
             ddl.DataTextField = "LocationName";
-
             ddl.DataSource = dt;
+            ddl.DataBind();
+        }
+
+        internal static void FillAdmin1(ListControl ddl, int countryId)
+        {
+            ddl.DataValueField = "LocationId";
+            ddl.DataTextField = "LocationName";
+            ddl.DataSource = RC.GetAdmin1(countryId);
+            ddl.DataBind();
+        }
+
+        internal static void FillAdmin2(ListControl ddl, int countryId)
+        {
+            ddl.DataValueField = "LocationId";
+            ddl.DataTextField = "LocationName";
+            ddl.DataSource = RC.GetAdmin2(countryId);
             ddl.DataBind();
         }
 
@@ -64,13 +79,20 @@ namespace SRFROWCA.Common
             ddl.DataBind();
         }
 
-        internal static void FillOrganizations(DropDownCheckBoxes ddl)
+        internal static void FillOrganizations(ListControl ctl, int? orgId)
         {
-            ddl.DataValueField = "OrganizationId";
-            ddl.DataTextField = "OrganizationAcronym";
-            int? orgId = null;
-            ddl.DataSource = DBContext.GetData("GetOrganizations", new object[] { orgId });
-            ddl.DataBind();
+            ctl.DataValueField = "OrganizationId";
+            ctl.DataTextField = "OrganizationName";            
+            ctl.DataSource = DBContext.GetData("GetOrganizations", new object[] { orgId });
+            ctl.DataBind();
+        }
+
+        internal static void FillOrganizations(ListControl ctl, DataTable dt)
+        {
+            ctl.DataValueField = "OrganizationId";
+            ctl.DataTextField = "OrganizationName";
+            ctl.DataSource = dt;
+            ctl.DataBind();
         }
 
         internal static void FillObjectives(ListControl control, bool useShort)
