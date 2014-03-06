@@ -110,13 +110,13 @@
     </div>
     <div class="topmenuarea">
         <ul id="nav">
+            <li><a href="../Default.aspx">Home</a></li>
             <li><a href="~/Pages/AddActivities.aspx" id="menuDataEntry" runat="server">Data Entry</a></li>
             <li><a href="~/Pages/CreateProject.aspx" id="menuManageProjects" runat="server"><span
                 id="spnManageProject" runat="server" title="Manage Projects"></span></a></li>
             <li><a href="~/Pages/ManageActivities.aspx" id="menuMyActivities" runat="server"><span
                 id="spnManageActivities" runat="server" title=" Manage Activities"></span></a>
             </li>
-            
         </ul>
     </div>
     <div class="main">
