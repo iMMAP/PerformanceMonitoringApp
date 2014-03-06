@@ -12,45 +12,6 @@ namespace SRFROWCA
 {
     public static class ExportUtility
     {
-        //public static void PrepareGridViewForExport1(Control gv)
-        //{
-        //    LinkButton lb = new LinkButton();
-        //    Literal l = new Literal();
-        //    string name = String.Empty;
-        //    for (int i = 0; i < gv.Controls.Count; i++)
-        //    {
-        //        if (gv.Controls[i].GetType() == typeof(LinkButton))
-        //        {
-        //            l.Text = (gv.Controls[i] as LinkButton).Text;
-        //            gv.Controls.Remove(gv.Controls[i]);
-        //            gv.Controls.AddAt(i, l);
-        //        }
-        //        else if (gv.Controls[i].GetType() == typeof(DropDownList))
-        //        {
-        //            l.Text = (gv.Controls[i] as DropDownList).SelectedItem.Text;
-        //            gv.Controls.Remove(gv.Controls[i]);
-        //            gv.Controls.AddAt(i, l);
-        //        }
-        //        else if (gv.Controls[i].GetType() == typeof(CheckBox))
-        //        {
-        //            l.Text = (gv.Controls[i] as CheckBox).Checked ? "True" : "False";
-        //            gv.Controls.Remove(gv.Controls[i]);
-        //            gv.Controls.AddAt(i, l);
-        //        }
-        //        else if (gv.Controls[i].GetType() == typeof(Button))
-        //        {
-        //            //l.Text = (gv.Controls[i] as CheckBox).Checked ? "True" : "False";
-        //            gv.Controls.Remove(gv.Controls[i]);
-        //            //gv.Controls.AddAt(i, l);
-        //        }
-
-        //        if (gv.Controls[i].HasControls())
-        //        {
-        //            PrepareGridViewForExport(gv.Controls[i]);
-        //        }
-        //    }
-        //}
-
         public static void PrepareControlForExport(Control control)
         {
             for (int i = 0; i < control.Controls.Count; i++)
@@ -108,6 +69,7 @@ namespace SRFROWCA
             if (gv.HeaderRow != null)
             {
                 ExportUtility.PrepareControlForExport(gv.HeaderRow);
+                gv.HeaderRow.Style.Add("background-color", "ButtonFace");                
                 table.Rows.Add(gv.HeaderRow);
             }
 
@@ -115,6 +77,7 @@ namespace SRFROWCA
             foreach (GridViewRow row in gv.Rows)
             {
                 ExportUtility.PrepareControlForExport(row);
+                row.CssClass = "istrow";
                 table.Rows.Add(row);
             }
 
@@ -138,7 +101,10 @@ namespace SRFROWCA
 
         internal static void ExportGridView(Control control, string fileName, string fileExtention, HttpResponse Response, bool disposePassedControl)
         {
+
             ExportUtility.PrepareControlForExport(control);
+            string[] nameWithSpaces = fileName.Split(' ');
+            fileName = string.Join("-", nameWithSpaces);
             fileName += DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss") + fileExtention;
             Response.Clear();
             Response.AddHeader("content-disposition", "attachment;filename=" + fileName);
@@ -146,6 +112,7 @@ namespace SRFROWCA
             Response.ContentEncoding = System.Text.Encoding.Unicode;
             Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
             GridView gv = control as GridView;
+
             Response.Write(RenderGrid(gv).ToString());
             if (disposePassedControl)
             {
@@ -154,5 +121,99 @@ namespace SRFROWCA
 
             Response.End();
         }
+
+        //public static void ExportWithBorder(string fileName, GridView gv)
+        //{
+        //    HttpContext.Current.Response.Clear();
+        //    HttpContext.Current.Response.AddHeader(
+        //        "content-disposition", string.Format("attachment; filename={0}", fileName));
+        //    HttpContext.Current.Response.ContentType = "application/ms-excel";
+
+        //    using (StringWriter sw = new StringWriter())
+        //    {
+        //        using (HtmlTextWriter htw = new HtmlTextWriter(sw))
+        //        {
+        //            //  Create a form to contain the grid
+        //            Table table = new Table();
+
+        //            //  add the header row to the table
+        //            if (gv.HeaderRow != null)
+        //            {
+        //                PrepareControlForExport1(gv.HeaderRow);
+        //                gv.HeaderRow.Style.Add("border", "solid 1px #c1d8f1");
+        //                table.Rows.Add(gv.HeaderRow);
+        //            }
+
+        //            //  add each of the data rows to the table
+        //            foreach (GridViewRow row in gv.Rows)
+        //            {
+        //                PrepareControlForExport1(row);
+        //                row.Style.Add("border", "solid 1px #c1d8f1");
+        //                table.Rows.Add(row);
+        //            }
+
+        //            //  add the footer row to the table
+        //            if (gv.FooterRow != null)
+        //            {
+        //                PrepareControlForExport1(gv.FooterRow);
+        //                gv.FooterRow.Style.Add("border", "solid 1px #c1d8f1");
+        //                table.Rows.Add(gv.FooterRow);
+        //            }
+
+        //            //  render the table into the htmlwriter                    
+        //            table.RenderControl(htw);
+
+        //            //  render the htmlwriter into the response
+        //            HttpContext.Current.Response.Write(sw.ToString());
+        //            HttpContext.Current.Response.End();
+        //        }
+        //    }
+        //}
+
+        /// <summary>
+        /// Replace any of the contained controls with literals
+        /// </summary>
+        /// <param name="control"></param>
+        //private static void PrepareControlForExport1(Control control)
+        //{
+        //    for (int i = 0; i < control.Controls.Count; i++)
+        //    {
+        //        Control current = control.Controls[i];
+        //        if (current is LinkButton)
+        //        {
+        //            control.Controls.Remove(current);
+        //            control.Controls.AddAt(i, new LiteralControl((current as LinkButton).Text));
+        //        }
+        //        else if (current is ImageButton)
+        //        {
+        //            control.Controls.Remove(current);
+        //            control.Controls.AddAt(i, new LiteralControl((current as ImageButton).AlternateText));
+        //        }
+        //        else if (current is HyperLink)
+        //        {
+        //            control.Controls.Remove(current);
+        //            control.Controls.AddAt(i, new LiteralControl((current as HyperLink).Text));
+        //        }
+        //        else if (current is DropDownList)
+        //        {
+        //            control.Controls.Remove(current);
+        //            control.Controls.AddAt(i, new LiteralControl((current as DropDownList).SelectedItem.Text));
+        //        }
+        //        else if (current is CheckBox)
+        //        {
+        //            control.Controls.Remove(current);
+        //            control.Controls.AddAt(i, new LiteralControl((current as CheckBox).Checked ? "True" : ""));
+        //        }
+        //        else if (current is TextBox)
+        //        {
+        //            control.Controls.Remove(current);
+        //            control.Controls.AddAt(i, new LiteralControl((current as TextBox).Text));
+        //        }
+        //        if (current.HasControls())
+        //        {
+        //            PrepareControlForExport(current);
+        //        }
+        //    }
+        //}
     }
 }

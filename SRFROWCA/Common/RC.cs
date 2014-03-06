@@ -13,6 +13,7 @@ using System.Security.Principal;
 using System.Web.Security;
 using System.Threading;
 using System.Globalization;
+using System.Configuration;
 
 namespace SRFROWCA.Common
 {
@@ -378,6 +379,17 @@ namespace SRFROWCA.Common
             decimal i = 0m;
             decimal.TryParse(ctl.SelectedValue, out i);
             return i;
+        }
+
+        internal static string ConfigSettings(string key)
+        {
+            string setting = "";
+            if (ConfigurationManager.AppSettings[key] != null)
+            {
+                setting += ConfigurationManager.AppSettings[key].ToString();
+            }
+
+            return setting;
         }
 
         public enum LocationTypes

@@ -104,7 +104,7 @@ namespace SRFROWCA.Common
         internal static void FillPriorities(ListControl control, DataTable dt)
         {
             control.DataValueField = "HumanitarianPriorityId";
-            control.DataTextField = "HumanitarianPriority";            
+            control.DataTextField = "ShortPriorityText";            
             control.DataSource = dt;
             control.DataBind();
         }
