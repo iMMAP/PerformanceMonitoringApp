@@ -289,3 +289,11 @@ CSS for Login, Register, ForgotPassword, ChagnePassword
     font-style: normal;
     font-variant: normal;
 }
+
+.imgButtonImg 
+        {
+            margin:0; 
+            padding:0;
+            display:inline-block;            
+            border: 0;
+         } 
