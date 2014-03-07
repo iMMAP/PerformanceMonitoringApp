@@ -8,15 +8,8 @@
         #MainContent_cblLocations td
         {
             padding: 0 40px 0 0;
-        }
+        }        
         
-        .imgButtonImg 
-        {
-            margin:0; 
-            padding:0;
-            display:inline-block;            
-            border: 0;
-         } 
     </style>
     <script type="text/javascript" src="../Scripts/ShowHideObJAndPr.js"></script>
     <script src="../Scripts/jquery.numeric.min.js" type="text/javascript"></script>
