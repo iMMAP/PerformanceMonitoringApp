@@ -2,8 +2,17 @@
     CodeBehind="ManageActivities.aspx.cs" Inherits="SRFROWCA.Pages.ManageActivities" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    <style>
+        .highlight
+        {
+            background-color: yellow;
+        }
+    </style>
     <script type="text/javascript" src="../Scripts/ShowHideObJAndPr.js"></script>
     <script>
+        $(function () {
+            $('.srpind').parent('tr:contains("Yes")').addClass('highlight');
+        });
         showHideObj();
         showHidePriority();
     </script>
@@ -39,7 +48,6 @@
                 <asp:GridView ID="gvIndicators" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True"
                     HeaderStyle-BackColor="ButtonFace" DataKeyNames="ActivityDataId" CssClass="imagetable"
                     OnRowDataBound="gvIndicators_RowDataBound" Width="100%" EmptyDataText="No Country Specific Indicators Available To Add In Project. Please contact with your country Cluster Lead.">
-                    
                     <HeaderStyle BackColor="Control"></HeaderStyle>
                     <RowStyle CssClass="istrow" />
                     <AlternatingRowStyle CssClass="altcolor" />
@@ -58,16 +66,15 @@
                         </asp:TemplateField>
                         <asp:BoundField DataField="ActivityName" HeaderText="Activity" ItemStyle-CssClass="testact"
                             SortExpression="ActivityName"></asp:BoundField>
-                        <asp:TemplateField HeaderText="Country specific Indicator" SortExpression="IsSRP" HeaderStyle-Width="40px">
+                        <asp:TemplateField HeaderText="Country specific Indicator" SortExpression="IsSRP"
+                            HeaderStyle-Width="40px" ItemStyle-CssClass="srpind">
                             <ItemTemplate>
                                 <%# (Boolean.Parse(Eval("IsSRP").ToString())) ? "Yes" : "No"%></ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Added In Project" HeaderStyle-Width="40px"
-                            SortExpression="IndicatorIsAdded">
+                        <asp:TemplateField HeaderText="Added In Project" HeaderStyle-Width="40px" SortExpression="IndicatorIsAdded">
                             <ItemTemplate>
                                 <asp:CheckBox ID="cbIsAdded" runat="server" Checked='<%# Eval("IndicatorIsAdded") %>'
-                                 OnCheckedChanged="cbIsAdded_CheckedChanged" AutoPostBack="true"
-                                    CssClass="testcb" />
+                                    OnCheckedChanged="cbIsAdded_CheckedChanged" AutoPostBack="true" CssClass="testcb" />
                             </ItemTemplate>
                             <ItemStyle Width="2%" />
                         </asp:TemplateField>

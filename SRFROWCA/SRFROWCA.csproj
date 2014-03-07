@@ -163,6 +163,7 @@
     <Content Include="images\ddlarrow.png" />
     <Content Include="images\droparrow.png" />
     <Content Include="images\error.png" />
+    <Content Include="images\excel.png" />
     <Content Include="images\favicon.ico" />
     <Content Include="images\icon\agr.png" />
     <Content Include="images\icon\ccm.png" />
