@@ -31,7 +31,7 @@ namespace SRFROWCA.Account
         {
             if (Roles.IsUserInRole(LoginUser.UserName, "ClusterLead"))
             {
-                Response.Redirect("~/ClusterLead/AddSRPActivitiesFromMasterList.aspx");
+                Response.Redirect("~/ClusterLead/ProjectsListing.aspx");
             }
             else
             {

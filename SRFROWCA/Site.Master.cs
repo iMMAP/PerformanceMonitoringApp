@@ -57,7 +57,7 @@ namespace SRFROWCA
                     }
                     else
                     {
-                        spnManageActivities.InnerText = "Projects Activities";
+                        spnManageActivities.InnerText = "Manage Activities";
                         spnManageProject.InnerText = "Manage Projects";
                     }
                 }

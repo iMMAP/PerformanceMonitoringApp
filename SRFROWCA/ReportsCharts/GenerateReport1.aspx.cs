@@ -445,7 +445,7 @@ namespace SRFROWCA.Reports
 
         private void PopulateOrganizations()
         {
-            UI.FillOrganizations(ddlOrganizations);
+            //UI.FillOrganizations(ddlOrganizations, );
         }
 
         private void PopulateClusters()

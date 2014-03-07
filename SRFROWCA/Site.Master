@@ -96,7 +96,7 @@
                     </ul>
                 </li>
                 <li><a href="../ContactUs/Contactus.aspx">Contact us</a></li>
-                <li><a href="../UserManual.aspx">Help</a></li>
+                <li><a href="../About.aspx">Help</a></li>
                 <li>
                     <asp:LinkButton ID="lnkLanguageEnglish" Text="English" runat="server" OnClick="lnkLanguageEnglish_Click"
                         CausesValidation="False"></asp:LinkButton></li>
