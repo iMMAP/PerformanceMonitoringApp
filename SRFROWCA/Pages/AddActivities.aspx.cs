@@ -179,29 +179,32 @@ namespace SRFROWCA.Pages
                 Image imgRind = e.Row.FindControl("imgRind") as Image;
                 if (imgRind != null)
                 {
-                    if (e.Row.RowIndex == 2 || e.Row.RowIndex == 1)
-                    {
-                        imgRind.ImageUrl = "~/images/rind.png";
-                        imgRind.ToolTip = "Regional Indicator";
-                    }
-                    else
-                    {
-                        imgRind.Visible = false;
-                    }
+                    //if (e.Row.RowIndex == 2 || e.Row.RowIndex == 1)
+                    //{
+                    //    imgRind.ImageUrl = "~/images/rind.png";
+                    //    imgRind.ToolTip = "Regional Indicator";
+                    //}
+                    //else
+                    //{
+                    //    imgRind.Visible = false;
+                    //}
+                    imgRind.Visible = false;
                 }
 
                 Image imgCind = e.Row.FindControl("imgCind") as Image;
                 if (imgCind != null)
                 {
-                    if (e.Row.RowIndex == 2 || e.Row.RowIndex == 3)
-                    {
-                        imgCind.ImageUrl = "~/images/cind.png";
-                        imgCind.ToolTip = "Country Specific Indicator";
-                    }
-                    else
-                    {
-                        imgCind.Visible = false;
-                    }
+                    //if (e.Row.RowIndex == 2 || e.Row.RowIndex == 3)
+                    //{
+                    //    imgCind.ImageUrl = "~/images/cind.png";
+                    //    imgCind.ToolTip = "Country Specific Indicator";
+                    //}
+                    //else
+                    //{
+                    //    imgCind.Visible = false;
+                    //}
+
+                    imgCind.Visible = false;
                 }
             }
         }

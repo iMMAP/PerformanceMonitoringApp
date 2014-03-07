@@ -9,8 +9,16 @@
         {
             padding: 0 40px 0 0;
         }
+        
+        .imgButtonImg 
+        {
+            margin:0; 
+            padding:0;
+            display:inline-block;            
+            border: 0;
+         } 
     </style>
-    <script type="text/javascript" src="../Scripts/ShowHideProjObJAndPr.js"></script>
+    <script type="text/javascript" src="../Scripts/ShowHideObJAndPr.js"></script>
     <script src="../Scripts/jquery.numeric.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         var needToConfirm = true;
@@ -44,7 +52,6 @@
                 searchTable($(this).val());
             });
 
-            showHideProjects();
             showHideObj();
             showHidePriority();
 
@@ -145,10 +152,11 @@
                         CssClass="button_example" OnClick="btnLocation_Click" OnClientClick="needToConfirm = false;" />
                 </div>
                 <div class="buttonright2">
+                    Export To:
                     <asp:ImageButton ID="btnPDF" runat="server" ImageUrl="~/images/pdf.png" OnClick="btnPDF_Export"
-                        OnClientClick="needToConfirm = false;" />
+                        OnClientClick="needToConfirm = false;" CssClass="imgButtonImg" />
                     <asp:ImageButton ID="btnExcel" runat="server" ImageUrl="~/images/excel.png" OnClick="btnExcel_Export"
-                        OnClientClick="needToConfirm = false;" />
+                        OnClientClick="needToConfirm = false;" CssClass="imgButtonImg" />
                 </div>
                 <div class="savebutton">
                 </div>
@@ -231,13 +239,15 @@
                     <div class="spacer" style="clear: both;">
                     </div>
                     <div class="buttonright2">
-                        <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
-                            Width="100px" CssClass="button_example" />
                     </div>
                     <div class="spacer" style="clear: both;">
                     </div>
                     <div class="spacer" style="clear: both;">
                     </div>
+                </div>
+                <div class="buttonright2">
+                    <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
+                        Width="100px" CssClass="button_example" />
                 </div>
             </div>
         </div>
