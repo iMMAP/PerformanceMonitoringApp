@@ -7,27 +7,22 @@ namespace SRFROWCA
 {
     public partial class SiteMaster : System.Web.UI.MasterPage
     {
-        protected void navBar_OnItemDataBound(object sender, RepeaterItemEventArgs e)
-        {
-            SiteMapNode currentRepeaterNode = (SiteMapNode)e.Item.DataItem;
-            ((Repeater)e.Item.FindControl("subNavDropdown")).DataSource = currentRepeaterNode.ChildNodes;
-            ((Repeater)e.Item.FindControl("subNavDropdown")).DataBind();
-        }
-
         protected void Page_Init(object sender, EventArgs e)
         {
             if (Session["SiteLanguage"] == null)
             {
-                RC.SelectedSiteLanguageId = (int)Common.RC.SiteLanguage.English;
-                RC.SiteCulture = "en-US";
-
                 if (Request.Cookies["SiteLanguageCookie"] != null)
                 {
                     string siteLangId = Request.Cookies["SiteLanguageCookie"].Value;
                     if (siteLangId == "2")
                     {
                         RC.SelectedSiteLanguageId = (int)Common.RC.SiteLanguage.French;
-                        RC.SiteCulture = "fr-FR";
+                        RC.SiteCulture = RC.FrenchCulture;
+                    }
+                    else
+                    {
+                        RC.SelectedSiteLanguageId = (int)Common.RC.SiteLanguage.English;
+                        RC.SiteCulture = RC.EnglishCulture;
                     }
                 }
             }
@@ -82,8 +77,8 @@ namespace SRFROWCA
 
         protected void lnkLanguageEnglish_Click(object sender, EventArgs e)
         {
-            RC.SelectedSiteLanguageId = (int)Common.RC.SiteLanguage.English;
-            RC.AddSiteLangInCookie(this.Response, Common.RC.SiteLanguage.English);
+            RC.SelectedSiteLanguageId = (int)RC.SiteLanguage.English;
+            RC.AddSiteLangInCookie(this.Response, RC.SiteLanguage.English);
             (MainContent.Page as BasePage).BindGridData();
         }
 

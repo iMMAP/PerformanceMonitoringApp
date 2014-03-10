@@ -5,6 +5,7 @@
 <head id="Head1" runat="server">
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
     <title></title>
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="~/Styles/Site.min.css" />
     <link rel="stylesheet" type="text/css" href="~/Styles/style.css" />
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" />

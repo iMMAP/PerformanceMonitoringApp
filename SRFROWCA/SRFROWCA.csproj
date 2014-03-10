@@ -202,7 +202,6 @@
     <Content Include="Pages\AddActivities.aspx" />
     <Content Include="Pages\CreateProject.aspx" />
     <Content Include="Pages\ManageActivities.aspx" />
-    <Content Include="Pages\SelectActivities.aspx" />
     <Content Include="Pages\TargetsAchievedOfLocationByDuration.ascx" />
     <Content Include="ReportsCharts\AllTargetsAndAchieved.ascx" />
     <Content Include="ReportsCharts\ChartReport.aspx" />
@@ -674,13 +673,6 @@
     <Compile Include="Pages\ManageActivities.aspx.designer.cs">
       <DependentUpon>ManageActivities.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SelectActivities.aspx.cs">
-      <DependentUpon>SelectActivities.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\SelectActivities.aspx.designer.cs">
-      <DependentUpon>SelectActivities.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Pages\TargetsAchievedOfLocationByDuration.ascx.cs">
       <DependentUpon>TargetsAchievedOfLocationByDuration.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -886,28 +878,24 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Pages\App_LocalResources\SelectActivities.aspx.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Pages\App_LocalResources\SelectActivities.aspx.fr.resx" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Pages\App_LocalResources\tempAddActivities.aspx.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Pages\App_LocalResources\tempAddActivities.aspx.fr.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Pages\App_LocalResources\AddActivities.aspx.resx" />
+    <Content Include="OPS\App_LocalResources\OPSDataEntry.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="OPS\App_LocalResources\OPSDataEntry.aspx.fr.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Pages\App_LocalResources\AddActivities.aspx.fr.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="OPS\App_LocalResources\OPSDataEntry.aspx.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="OPS\App_LocalResources\OPSDataEntry.aspx.fr.resx" />
+    <Content Include="Pages\App_LocalResources\AddActivities.aspx.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
