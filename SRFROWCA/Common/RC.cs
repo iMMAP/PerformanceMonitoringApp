@@ -410,6 +410,22 @@ namespace SRFROWCA.Common
             return setting;
         }
 
+        internal static string FrenchCulture
+        {
+            get
+            {
+                return "fr-FR";
+            }
+        }
+
+        internal static string EnglishCulture
+        {
+            get
+            {
+                return "en-US";
+            }
+        }
+
         public enum LocationTypes
         {
             Region = 1,
