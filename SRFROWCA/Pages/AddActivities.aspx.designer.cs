@@ -31,13 +31,13 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvEmergency;
         
         /// <summary>
-        /// locaYearMonth control.
+        /// lzeYearMonth control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locaYearMonth;
+        protected global::System.Web.UI.WebControls.Localize lzeYearMonth;
         
         /// <summary>
         /// ddlYear control.
@@ -58,6 +58,15 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.DropDownList ddlMonth;
         
         /// <summary>
+        /// lzeLgndProjects control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize lzeLgndProjects;
+        
+        /// <summary>
         /// rblProjects control.
         /// </summary>
         /// <remarks>
@@ -65,6 +74,15 @@ namespace SRFROWCA.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rblProjects;
+        
+        /// <summary>
+        /// lzeLgndStrObjs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize lzeLgndStrObjs;
         
         /// <summary>
         /// cblObjectives control.
@@ -76,6 +94,15 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.CheckBoxList cblObjectives;
         
         /// <summary>
+        /// lzeLgndHumPriorities control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize lzeLgndHumPriorities;
+        
+        /// <summary>
         /// cblPriorities control.
         /// </summary>
         /// <remarks>
@@ -85,6 +112,33 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.CheckBoxList cblPriorities;
         
         /// <summary>
+        /// lzeLgndManageProjects control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize lzeLgndManageProjects;
+        
+        /// <summary>
+        /// lzeLgndManageActivities control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize lzeLgndManageActivities;
+        
+        /// <summary>
+        /// lzeSelectLocaitonsText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize lzeSelectLocaitonsText;
+        
+        /// <summary>
         /// btnOpenLocations control.
         /// </summary>
         /// <remarks>
@@ -92,6 +146,15 @@ namespace SRFROWCA.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnOpenLocations;
+        
+        /// <summary>
+        /// lzeExportToText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize lzeExportToText;
         
         /// <summary>
         /// btnPDF control.
@@ -166,6 +229,15 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.UpdatePanel uPanel1;
         
         /// <summary>
+        /// lzeAdmin1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize lzeAdmin1;
+        
+        /// <summary>
         /// cblAdmin1 control.
         /// </summary>
         /// <remarks>
@@ -173,6 +245,15 @@ namespace SRFROWCA.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBoxList cblAdmin1;
+        
+        /// <summary>
+        /// lzeAdmin2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize lzeAdmin2;
         
         /// <summary>
         /// cblLocations control.
@@ -218,6 +299,15 @@ namespace SRFROWCA.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel Panel1;
+        
+        /// <summary>
+        /// lzeSelectEportProjects control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize lzeSelectEportProjects;
         
         /// <summary>
         /// lblMonths control.

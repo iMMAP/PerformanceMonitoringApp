@@ -24,31 +24,29 @@ namespace SRFROWCA.Pages
                 languageChange = Session["SiteChanged"].ToString();
             }
 
-            if (!IsPostBack && !string.IsNullOrEmpty(languageChange)) return;
+            if (!string.IsNullOrEmpty(languageChange))
             {
-                UserInfo.UserProfileInfo();
-                PopulateDropDowns();
-                PopulateObjectives();
-                PopulatePriorities();
-
+                PopulateMonths();
                 Session["SiteChanged"] = null;
-                cblObjectives.Items[0].Attributes["title"] = "STRATEGIC OBJECTIVE 1: Track and analyse risk and vulnerability, integrating findings into humanitarian and development programming.";
-                cblObjectives.Items[1].Attributes["title"] = "STRATEGIC OBJECTIVE 2: Support vulnerable populations to better cope with shocks by responding earlier to warning signals, by reducing post-crisis recovery times and by building capacity of national actors.";
-                cblObjectives.Items[2].Attributes["title"] = "STRATEGIC OBJECTIVE 3: Deliver coordinated and integrated life-saving assistance to people affected by emergencies.";
             }
 
             if (!IsPostBack)
             {
+                UserInfo.UserProfileInfo();
+                PopulateDropDowns();
                 PopulateLocations(LocationId);
                 PopulateYears();
                 PopulateMonths();
-                UserInfo.UserProfileInfo();
+
                 PopulateProjects();
                 if (rblProjects.Items.Count > 0)
                 {
                     rblProjects.SelectedIndex = 0;
                 }
             }
+
+            PopulateObjectives();
+            PopulatePriorities();
 
             this.Form.DefaultButton = this.btnSave.UniqueID;
 
@@ -73,9 +71,7 @@ namespace SRFROWCA.Pages
         }
         private DataTable GetUserProjects()
         {
-            DataTable dt = DBContext.GetData("GetOPSAndORSUserProjects", new object[] { UserInfo.GetCountry, UserInfo.GetOrganization });
-            Session["testprojectdata"] = dt;
-            return dt;
+            return DBContext.GetData("GetOPSAndORSUserProjects", new object[] { UserInfo.GetCountry, UserInfo.GetOrganization });
         }
 
         private void PopulateProjects()
@@ -90,6 +86,24 @@ namespace SRFROWCA.Pages
             cblExportProjects.DataTextField = "ProjectCode";
             cblExportProjects.DataSource = dt;
             cblExportProjects.DataBind();
+
+            ProjectsToolTip(rblProjects, dt);
+            ProjectsToolTip(cblExportProjects, dt);
+
+        }
+
+        private void ProjectsToolTip(ListControl ctl, DataTable dt)
+        {
+            foreach (ListItem item in ctl.Items)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    if (item.Text == row["ProjectCode"].ToString())
+                    {
+                        item.Attributes["title"] = row["ProjectTitle"].ToString();
+                    }
+                }
+            }
         }
 
         #region Events.
@@ -98,83 +112,10 @@ namespace SRFROWCA.Pages
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                int j = 0;
-                for (int i = 11; i < e.Row.Cells.Count; i++)
-                {
-                    TableCell Cell = e.Row.Cells[i];
+                DataEntryColumnsAlternateColors(e);
+                ObjectiveIconToolTip(e);
+                PrioritiesIconToolTip(e);
 
-                    // if both row and column are odd, color then black
-                    // if both row and column are even, color then yellow
-                    if ((j > 2 && j < 6))
-                    {
-                        j++;
-                        string color = RC.ConfigSettings("ColumnColor");
-                        Cell.BackColor = System.Drawing.ColorTranslator.FromHtml(color);
-                        
-                        if (j == 6)
-                        {
-                            j = 0;
-                        }
-                    }
-                    else if (j < 3)
-                    {
-                        j++;
-                        string color = RC.ConfigSettings("AlternateColumnColor");
-                        Cell.BackColor = System.Drawing.ColorTranslator.FromHtml(color);
-                    }
-                }
-
-                Image imgObj = e.Row.FindControl("imgObjective") as Image;
-                if (imgObj != null)
-                {
-                    string txt = e.Row.Cells[0].Text;
-                    if (txt.Contains("1"))
-                    {
-                        imgObj.ImageUrl = "~/images/icon/so1.png";
-                        imgObj.ToolTip = "STRATEGIC OBJECTIVE 1: Track and analyse risk and vulnerability, integrating findings into humanitarian and evelopment programming.";
-                    }
-                    else if (txt.Contains("2"))
-                    {
-                        imgObj.ImageUrl = "~/images/icon/so2.png";
-                        imgObj.ToolTip = "STRATEGIC OBJECTIVE 2: Support vulnerable populations to better cope with shocks by responding earlier to warning signals, by reducing post-crisis recovery times and by building capacity of national actors.";
-                    }
-                    else if (txt.Contains("3"))
-                    {
-                        imgObj.ImageUrl = "~/images/icon/so3.png";
-                        imgObj.ToolTip = " STRATEGIC OBJECTIVE 3: Deliver coordinated and integrated life-saving assistance to people affected by emergencies.";
-                    }
-                }
-                Image imghp = e.Row.FindControl("imgPriority") as Image;
-                if (imghp != null)
-                {
-                    string txtHP = e.Row.Cells[1].Text;
-                    if (txtHP == "1")
-                    {
-                        imghp.ImageUrl = "~/images/icon/hp1.png";
-                        imghp.ToolTip = "Addressing the humanitarian impact Natural disasters (floods, etc.)";
-                    }
-                    else if (txtHP == "2")
-                    {
-                        imghp.ImageUrl = "~/images/icon/hp2.png";
-                        imghp.ToolTip = "Addressing the humanitarian impact of Conflict (IDPs, refugees, protection, etc.)";
-                    }
-                    else if (txtHP == "3")
-                    {
-                        imghp.ImageUrl = "~/images/icon/hp3.png";
-                        imghp.ToolTip = "Addressing the humanitarian impact of Epidemics (cholera, malaria, etc.)";
-                    }
-                    else if (txtHP == "4")
-                    {
-                        imghp.ImageUrl = "~/images/icon/hp4.png";
-                        imghp.ToolTip = "Addressing the humanitarian impact of Food insecurity";
-                    }
-                    else if (txtHP == "5")
-                    {
-                        imghp.ImageUrl = "~/images/icon/hp5.png";
-                        imghp.ToolTip = "Addressing the humanitarian impact of Malnutrition";
-                    }
-
-                }
 
                 Image imgRind = e.Row.FindControl("imgRind") as Image;
                 if (imgRind != null)
@@ -207,6 +148,109 @@ namespace SRFROWCA.Pages
                     imgCind.Visible = false;
                 }
             }
+        }
+
+        private void PrioritiesIconToolTip(GridViewRowEventArgs e)
+        {
+            Image imghp = e.Row.FindControl("imgPriority") as Image;
+            if (imghp != null)
+            {
+                string txtHP = e.Row.Cells[1].Text;
+                if (txtHP == "1")
+                {
+                    imghp.ImageUrl = "~/images/icon/hp1.png";
+                    imghp.ToolTip = RC.SelectedSiteLanguageId == 2 ?
+                        "Répondre aux conséquences humanitaires dues aux catastrophes naturelles (inondations, etc.)" :
+                        "Addressing the humanitarian impact Natural disasters (floods, etc.)";
+                }
+                else if (txtHP == "2")
+                {
+                    imghp.ImageUrl = "~/images/icon/hp2.png";
+                    imghp.ToolTip = RC.SelectedSiteLanguageId == 2 ?
+                        "Répondre aux conséquences humanitaires dues aux conflits (PDIs, refugies, protection, etc.)" :
+                        "Addressing the humanitarian impact of Conflict (IDPs, refugees, protection, etc.)";
+                }
+                else if (txtHP == "3")
+                {
+                    imghp.ImageUrl = "~/images/icon/hp3.png";
+                    imghp.ToolTip = RC.SelectedSiteLanguageId == 2 ?
+                        "Répondre aux conséquences humanitaires dues aux épidémies (cholera, paludisme, etc.)" :
+                        "Addressing the humanitarian impact of Epidemics (cholera, malaria, etc.)";
+                }
+                else if (txtHP == "4")
+                {
+                    imghp.ImageUrl = "~/images/icon/hp4.png";
+                    imghp.ToolTip = RC.SelectedSiteLanguageId == 2 ?
+                        "Répondre aux conséquences humanitaires dues à l’insécurité alimentaire" :
+                        "Addressing the humanitarian impact of Food insecurity";
+                }
+                else if (txtHP == "5")
+                {
+                    imghp.ImageUrl = "~/images/icon/hp5.png";
+                    imghp.ToolTip = RC.SelectedSiteLanguageId == 2 ?
+                        "Répondre aux conséquences humanitaires dues à la malnutrition" :
+                        "Addressing the humanitarian impact of Malnutrition";
+                }
+            }
+        }
+
+        private void ObjectiveIconToolTip(GridViewRowEventArgs e)
+        {
+            Image imgObj = e.Row.FindControl("imgObjective") as Image;
+            if (imgObj != null)
+            {
+                string txt = e.Row.Cells[0].Text;
+
+                if (txt.Contains("1"))
+                {
+                    imgObj.ImageUrl = "~/images/icon/so1.png";
+                    imgObj.ToolTip = RC.SelectedSiteLanguageId == 2 ? "OBJECTIF STRATÉGIQUE N°1 : Recueillir les données sur les risques et les vulnérabilités, les analyser et intégrer les résultats dans la programmation humanitaire et de développement." :
+                        "STRATEGIC OBJECTIVE 1: Track and analyse risk and vulnerability, integrating findings into humanitarian and evelopment programming.";
+                }
+                else if (txt.Contains("2"))
+                {
+                    imgObj.ImageUrl = "~/images/icon/so2.png";
+                    imgObj.ToolTip = RC.SelectedSiteLanguageId == 2 ? "OBJECTIF STRATÉGIQUE N°2 : Soutenir les populations vulnérables à mieux faire face aux chocs en répondant aux signaux d’alerte de manière anticipée, réduisant la durée du relèvement post-crise et renforçant les capacités des acteurs nationaux." :
+                        "STRATEGIC OBJECTIVE 2: Support vulnerable populations to better cope with shocks by responding earlier to warning signals, by reducing post-crisis recovery times and by building capacity of national actors.";
+                }
+                else if (txt.Contains("3"))
+                {
+                    imgObj.ImageUrl = "~/images/icon/so3.png";
+                    imgObj.ToolTip = RC.SelectedSiteLanguageId == 2 ? "OBJECTIF STRATÉGIQUE N°3 : Fournir aux personnes en situation d’urgence une assistance coordonnée et intégrée, nécessaire à leur survie." :
+                        "STRATEGIC OBJECTIVE 3: Deliver coordinated and integrated life-saving assistance to people affected by emergencies.";
+                }
+            }
+        }
+
+        private void DataEntryColumnsAlternateColors(GridViewRowEventArgs e)
+        {
+            int j = 0;
+            for (int i = 11; i < e.Row.Cells.Count; i++)
+            {
+                TableCell Cell = e.Row.Cells[i];
+
+                // Three columns, 'Annual Targets', 'ACCUM', and 'Monthly Achieved'
+                // will have alternate color on each location
+                if (j <= 2)
+                {
+                    j++;
+                    string color = RC.ConfigSettings("AlternateColumnColor");
+                    Cell.BackColor = System.Drawing.ColorTranslator.FromHtml(color);
+                }
+                else if ((j > 2))
+                {
+                    j++;
+                    string color = RC.ConfigSettings("ColumnColor");
+                    Cell.BackColor = System.Drawing.ColorTranslator.FromHtml(color);
+
+                    if (j == 6) j = 0;
+                }
+            }
+        }
+
+        private void DataEntryColumnsAlternateColors()
+        {
+            throw new NotImplementedException();
         }
 
         protected void rblProjects_SelectedIndexChanged(object sender, EventArgs e)
@@ -368,11 +412,50 @@ namespace SRFROWCA.Pages
         private void PopulateObjectives()
         {
             UI.FillObjectives(cblObjectives, true);
+            ObjectivesToolTip();
+        }
+
+        private void ObjectivesToolTip()
+        {
+            if (RC.SelectedSiteLanguageId == 2)
+            {
+                cblObjectives.Items[0].Attributes["title"] = "OBJECTIF STRATÉGIQUE N°1 : Recueillir les données sur les risques et les vulnérabilités, les analyser et intégrer les résultats dans la programmation humanitaire et de développement.";
+                cblObjectives.Items[1].Attributes["title"] = "OBJECTIF STRATÉGIQUE N°2 : Soutenir les populations vulnérables à mieux faire face aux chocs en répondant aux signaux d’alerte de manière anticipée, réduisant la durée du relèvement post-crise et renforçant les capacités des acteurs nationaux.";
+                cblObjectives.Items[2].Attributes["title"] = "OBJECTIF STRATÉGIQUE N°3 : Fournir aux personnes en situation d’urgence une assistance coordonnée et intégrée, nécessaire à leur survie.";
+            }
+            else
+            {
+                cblObjectives.Items[0].Attributes["title"] = "STRATEGIC OBJECTIVE 1: Track and analyse risk and vulnerability, integrating findings into humanitarian and development programming.";
+                cblObjectives.Items[1].Attributes["title"] = "STRATEGIC OBJECTIVE 2: Support vulnerable populations to better cope with shocks by responding earlier to warning signals, by reducing post-crisis recovery times and by building capacity of national actors.";
+                cblObjectives.Items[2].Attributes["title"] = "STRATEGIC OBJECTIVE 3: Deliver coordinated and integrated life-saving assistance to people affected by emergencies.";
+            }
+
         }
 
         private void PopulatePriorities()
         {
             UI.FillPriorities(cblPriorities);
+            PrioritiesToolTip();
+        }
+
+        private void PrioritiesToolTip()
+        {
+            if (RC.SelectedSiteLanguageId == 2)
+            {
+                cblPriorities.Items[0].Attributes["title"] = "Répondre aux conséquences humanitaires dues aux catastrophes naturelles (inondations, etc.)";
+                cblPriorities.Items[1].Attributes["title"] = "Répondre aux conséquences humanitaires dues aux conflits (PDIs, refugies, protection, etc.)";
+                cblPriorities.Items[2].Attributes["title"] = "Répondre aux conséquences humanitaires dues aux épidémies (cholera, paludisme, etc.)";
+                cblPriorities.Items[3].Attributes["title"] = "Répondre aux conséquences humanitaires dues à l’insécurité alimentaire";
+                cblPriorities.Items[4].Attributes["title"] = "Répondre aux conséquences humanitaires dues à la malnutrition";
+            }
+            else
+            {
+                cblPriorities.Items[0].Attributes["title"] = "Addressing the humanitarian impact Natural disasters (floods, etc.)";
+                cblPriorities.Items[1].Attributes["title"] = "Addressing the humanitarian impact of Conflict (IDPs, refugees, protection, etc.)";
+                cblPriorities.Items[2].Attributes["title"] = "Addressing the humanitarian impact of Epidemics (cholera, malaria, etc.)";
+                cblPriorities.Items[3].Attributes["title"] = "Addressing the humanitarian impact of Food insecurity";
+                cblPriorities.Items[4].Attributes["title"] = "Addressing the humanitarian impact of Malnutrition";
+            }
         }
 
         private void PopulateDropDowns()
@@ -410,6 +493,8 @@ namespace SRFROWCA.Pages
         // Populate Months Drop Down
         private void PopulateMonths()
         {
+            int i = ddlMonth.SelectedIndex;
+
             ddlMonth.DataValueField = "MonthId";
             ddlMonth.DataTextField = "MonthName";
 
@@ -418,12 +503,19 @@ namespace SRFROWCA.Pages
 
             var result = DateTime.Now.ToString("MMMM", new CultureInfo(RC.SiteCulture));
             result = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(result);
-            ddlMonth.SelectedIndex = ddlMonth.Items.IndexOf(ddlMonth.Items.FindByText(result.ToString()));
+            if (i > -1)
+            {
+                ddlMonth.SelectedIndex = i;
+            }
+            else
+            {
+                ddlMonth.SelectedIndex = ddlMonth.Items.IndexOf(ddlMonth.Items.FindByText(result.ToString()));
+            }
 
             cblMonths.DataValueField = "MonthId";
             cblMonths.DataTextField = "MonthName";
             cblMonths.DataSource = GetMonth();
-            cblMonths.DataBind();            
+            cblMonths.DataBind();
         }
 
         private DataTable GetMonth()
@@ -1283,7 +1375,7 @@ namespace SRFROWCA.Pages
                 if (_controlType == "TextBox")
                 {
                     TextBox txtAchieved = new TextBox();
-                    txtAchieved.CssClass = "numeric1";                    
+                    txtAchieved.CssClass = "numeric1";
                     txtAchieved.Width = 50;
                     txtAchieved.DataBinding += new EventHandler(this.txtAchieved_DataBinding);
                     container.Controls.Add(txtAchieved);
@@ -1300,7 +1392,7 @@ namespace SRFROWCA.Pages
                 }
                 else if (_controlType == "CheckBox")
                 {
-                    CheckBox cbLocAccum = new CheckBox();                    
+                    CheckBox cbLocAccum = new CheckBox();
                     cbLocAccum.DataBinding += new EventHandler(this.cbAccum_DataBinding);
                     container.Controls.Add(cbLocAccum);
                     HiddenField hf = new HiddenField();
@@ -1316,7 +1408,7 @@ namespace SRFROWCA.Pages
         {
             TextBox txt = (TextBox)sender;
             txt.ID = _columnName;
-            txt.MaxLength = 12;            
+            txt.MaxLength = 12;
             GridViewRow row = (GridViewRow)txt.NamingContainer;
             txt.Text = DataBinder.Eval(row.DataItem, _columnName).ToString();
         }
@@ -1331,6 +1423,6 @@ namespace SRFROWCA.Pages
             if ((DataBinder.Eval(row.DataItem, _columnName)).ToString() == "1")
                 isChecked = true;
             cb.Checked = isChecked;
-        }        
+        }
     }
 }

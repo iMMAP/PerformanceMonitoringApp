@@ -124,7 +124,7 @@
     <value />
   </data>
   <data name="BoundFieldResource1.HeaderText" xml:space="preserve">
-    <value>Secteur</value>
+    <value>ObjectiveId</value>
   </data>
   <data name="BoundFieldResource2.AccessibleHeaderText" xml:space="preserve">
     <value />
@@ -133,7 +133,7 @@
     <value />
   </data>
   <data name="BoundFieldResource2.HeaderText" xml:space="preserve">
-    <value>Objectifs</value>
+    <value>HumanitarianPriorityId</value>
   </data>
   <data name="BoundFieldResource3.AccessibleHeaderText" xml:space="preserve">
     <value />
@@ -142,7 +142,7 @@
     <value />
   </data>
   <data name="BoundFieldResource3.HeaderText" xml:space="preserve">
-    <value>Priorité</value>
+    <value>objprid</value>
   </data>
   <data name="BoundFieldResource4.AccessibleHeaderText" xml:space="preserve">
     <value />
@@ -151,7 +151,7 @@
     <value />
   </data>
   <data name="BoundFieldResource4.HeaderText" xml:space="preserve">
-    <value>Activité</value>
+    <value>pid</value>
   </data>
   <data name="BoundFieldResource5.AccessibleHeaderText" xml:space="preserve">
     <value />
@@ -160,12 +160,48 @@
     <value />
   </data>
   <data name="BoundFieldResource5.HeaderText" xml:space="preserve">
-    <value>indicateur de résultat</value>
+    <value>objprpid</value>
+  </data>
+  <data name="BoundFieldResource6.AccessibleHeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BoundFieldResource6.FooterText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BoundFieldResource6.HeaderText" xml:space="preserve">
+    <value>objAndPId</value>
+  </data>
+  <data name="BoundFieldResource7.AccessibleHeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BoundFieldResource7.FooterText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BoundFieldResource7.HeaderText" xml:space="preserve">
+    <value>PrAndPId</value>
   </data>
   <data name="btnCloseResource1.Text" xml:space="preserve">
     <value>Fermer</value>
   </data>
   <data name="btnCloseResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="btnExcelResource1.AlternateText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="btnExcelResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="btnExportToExcelCloseResource1.Text" xml:space="preserve">
+    <value>Fermer</value>
+  </data>
+  <data name="btnExportToExcelCloseResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="btnOKResource1.Text" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="btnOKResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="btnOpenLocationsResource1.Text" xml:space="preserve">
@@ -174,10 +210,10 @@
   <data name="btnOpenLocationsResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="btnSave2Resource1.Text" xml:space="preserve">
-    <value>Enregistrer</value>
+  <data name="btnPDFResource1.AlternateText" xml:space="preserve">
+    <value />
   </data>
-  <data name="btnSave2Resource1.ToolTip" xml:space="preserve">
+  <data name="btnPDFResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="btnSaveResource1.Text" xml:space="preserve">
@@ -186,13 +222,22 @@
   <data name="btnSaveResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="cblAdmin1Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cblExportProjectsResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="cblLocationsResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="chkSelectedResource1.Text" xml:space="preserve">
+  <data name="cblMonthsResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="chkSelectedResource1.ToolTip" xml:space="preserve">
+  <data name="cblObjectivesResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cblPrioritiesResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="ddlEmergencyResource1.ToolTip" xml:space="preserve">
@@ -213,28 +258,88 @@
   <data name="gvActivitiesResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="lblCountryResource1.Text" xml:space="preserve">
+  <data name="HiddenTargetControlForModalPopupResource1.Text" xml:space="preserve">
     <value />
   </data>
-  <data name="lblCountryResource1.ToolTip" xml:space="preserve">
+  <data name="HiddenTargetControlForModalPopupResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="locaAdmin2LocationsCaptionResource1.Text" xml:space="preserve">
-    <value>Localisation Admin 2</value>
+  <data name="imgCindResource1.AlternateText" xml:space="preserve">
+    <value />
   </data>
-  <data name="locaEmergencyCaptionResource1.Text" xml:space="preserve">
-    <value>Urgence:</value>
+  <data name="imgCindResource1.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="locaOnlyCheckCaptionResource1.Text" xml:space="preserve">
-    <value>Afficher les cases sélectionnées</value>
+  <data name="imgObjectiveResource1.AlternateText" xml:space="preserve">
+    <value>Obj</value>
   </data>
-  <data name="locaSearchCaptionResource1.Text" xml:space="preserve">
-    <value>Rechercher</value>
+  <data name="imgObjectiveResource1.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="locaYearMonthResource1.Text" xml:space="preserve">
+  <data name="imgPriorityResource1.AlternateText" xml:space="preserve">
+    <value>Obj</value>
+  </data>
+  <data name="imgPriorityResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="imgRindResource1.AlternateText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="imgRindResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblMessage2Resource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblMessage2Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblMonthsResource1.Text" xml:space="preserve">
+    <value>Select Months To Generate Document</value>
+  </data>
+  <data name="lblMonthsResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lzeAdmin1Resource1.Text" xml:space="preserve">
+    <value>Admin 1</value>
+  </data>
+  <data name="lzeAdmin2Resource1.Text" xml:space="preserve">
+    <value>Admin 2</value>
+  </data>
+  <data name="lzeExportToTextResource1.Text" xml:space="preserve">
+    <value>Exporter:</value>
+  </data>
+  <data name="lzeLgndHumPrioritiesResource1.Text" xml:space="preserve">
+    <value>Priorités humanitaires</value>
+  </data>
+  <data name="lzeLgndManageActivitiesResource1.Text" xml:space="preserve">
+    <value>&lt;a href="/Pages/ManageActivities.aspx"&gt;Gérer Activités&lt;/a&gt;</value>
+  </data>
+  <data name="lzeLgndManageProjectsResource1.Text" xml:space="preserve">
+    <value>&lt;a href="/Pages/CreateProject.aspx"&gt;Gérer projets&lt;/a&gt;</value>
+  </data>
+  <data name="lzeLgndProjectsResource1.Text" xml:space="preserve">
+    <value>Projects</value>
+  </data>
+  <data name="lzeLgndStrObjsResource1.Text" xml:space="preserve">
+    <value>Objectif Stratégique</value>
+  </data>
+  <data name="lzeSelectEportProjectsResource1.Text" xml:space="preserve">
+    <value>Select Projects You Want To Export</value>
+  </data>
+  <data name="lzeSelectLocaitonsTextResource1.Text" xml:space="preserve">
+    <value>Cliquer sur le bouton "Lieu" pour sélectionner les lieux que vous voulez mentionner</value>
+  </data>
+  <data name="lzeYearMonthResource1.Text" xml:space="preserve">
     <value>Année/Mois:</value>
   </data>
   <data name="PageResource1.Title" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Panel1Resource1.GroupingText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Panel1Resource1.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="pnlLocationsResource1.GroupingText" xml:space="preserve">
@@ -243,8 +348,11 @@
   <data name="pnlLocationsResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="rblProjectsResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="rfvEmergencyResource1.ErrorMessage" xml:space="preserve">
-    <value>Select Urgence</value>
+    <value>Select Emergency</value>
   </data>
   <data name="rfvEmergencyResource1.Text" xml:space="preserve">
     <value>*</value>
@@ -259,6 +367,33 @@
     <value />
   </data>
   <data name="TemplateFieldResource1.HeaderText" xml:space="preserve">
+    <value>Code Projet</value>
+  </data>
+  <data name="TemplateFieldResource2.AccessibleHeaderText" xml:space="preserve">
     <value />
+  </data>
+  <data name="TemplateFieldResource2.FooterText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TemplateFieldResource2.HeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TemplateFieldResource3.AccessibleHeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TemplateFieldResource3.FooterText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TemplateFieldResource3.HeaderText" xml:space="preserve">
+    <value>Activité</value>
+  </data>
+  <data name="TemplateFieldResource4.AccessibleHeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TemplateFieldResource4.FooterText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TemplateFieldResource4.HeaderText" xml:space="preserve">
+    <value>Indicateur de résultat</value>
   </data>
 </root>

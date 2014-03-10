@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeBehind="AddActivities.aspx.cs" Inherits="SRFROWCA.Pages.AddActivities" Culture="auto"
-    UICulture="auto" %>
+    UICulture="auto" meta:resourcekey="PageResource1" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
@@ -8,8 +8,7 @@
         #MainContent_cblLocations td
         {
             padding: 0 40px 0 0;
-        }        
-        
+        }
     </style>
     <script type="text/javascript" src="../Scripts/ShowHideObJAndPr.js"></script>
     <script src="../Scripts/jquery.numeric.min.js" type="text/javascript"></script>
@@ -84,22 +83,22 @@
                     <tr>
                         <td colspan="2" style="display: none">
                             <asp:DropDownList ID="ddlEmergency" runat="server" Width="350px" OnSelectedIndexChanged="ddlEmergency_SelectedIndexChanged"
-                                onchange="needToConfirm = false;" AutoPostBack="True">
+                                onchange="needToConfirm = false;" AutoPostBack="True" meta:resourcekey="ddlEmergencyResource1">
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ID="rfvEmergency" runat="server" ErrorMessage="Select Emergency"
-                                InitialValue="0" Text="*" ControlToValidate="ddlEmergency"></asp:RequiredFieldValidator>
+                                InitialValue="0" Text="*" ControlToValidate="ddlEmergency" meta:resourcekey="rfvEmergencyResource1"></asp:RequiredFieldValidator>
                         </td>
                         <td>
                             <label>
-                                <asp:Localize ID="locaYearMonth" runat="server" Text="
-                                Year/Month:"></asp:Localize></label>
+                                <asp:Localize ID="lzeYearMonth" runat="server" Text="
+                                Year/Month:" meta:resourcekey="lzeYearMonthResource1"></asp:Localize></label>
                         </td>
                         <td>
                             <asp:DropDownList ID="ddlYear" runat="server" Width="60px" OnSelectedIndexChanged="ddlYear_SelectedIndexChanged"
-                                onchange="needToConfirm = false;" AutoPostBack="True">
+                                onchange="needToConfirm = false;" AutoPostBack="True" meta:resourcekey="ddlYearResource1">
                             </asp:DropDownList>
                             <asp:DropDownList ID="ddlMonth" runat="server" Width="90px" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged"
-                                onchange="needToConfirm = false;" AutoPostBack="True">
+                                onchange="needToConfirm = false;" AutoPostBack="True" meta:resourcekey="ddlMonthResource1">
                             </asp:DropDownList>
                         </td>
                     </tr>
@@ -107,9 +106,11 @@
             </div>
             <div class="containerDataEntryProjectsInner">
                 <fieldset>
-                    <legend>Projects</legend>
-                    <asp:RadioButtonList ID="rblProjects" runat="server" AutoPostBack="true" OnSelectedIndexChanged="rblProjects_SelectedIndexChanged"
-                        onchange="needToConfirm = false;">
+                    <legend>
+                        <asp:Localize ID="lzeLgndProjects" runat="server" meta:resourcekey="lzeLgndProjectsResource1"
+                            Text="Projects"></asp:Localize></legend>
+                    <asp:RadioButtonList ID="rblProjects" runat="server" AutoPostBack="True" OnSelectedIndexChanged="rblProjects_SelectedIndexChanged"
+                        onchange="needToConfirm = false;" meta:resourcekey="rblProjectsResource1">
                     </asp:RadioButtonList>
                     <br />
                     <br />
@@ -117,22 +118,30 @@
             </div>
             <div class="containerDataEntryProjectsInner">
                 <fieldset>
-                    <legend>Strategic Objectives</legend>
-                    <asp:CheckBoxList ID="cblObjectives" runat="server" CssClass="checkObj">
+                    <legend>
+                        <asp:Localize ID="lzeLgndStrObjs" runat="server" meta:resourcekey="lzeLgndStrObjsResource1"
+                            Text="Strategic Objectives"></asp:Localize></legend>
+                    <asp:CheckBoxList ID="cblObjectives" runat="server" CssClass="checkObj" meta:resourcekey="cblObjectivesResource1">
                     </asp:CheckBoxList>
                 </fieldset>
                 <fieldset>
-                    <legend>Humanitarian Priorities</legend>
-                    <asp:CheckBoxList ID="cblPriorities" runat="server" CssClass="checkPr">
+                    <legend>
+                        <asp:Localize ID="lzeLgndHumPriorities" runat="server" meta:resourcekey="lzeLgndHumPrioritiesResource1"
+                            Text="Humanitarian Priorities"></asp:Localize></legend>
+                    <asp:CheckBoxList ID="cblPriorities" runat="server" CssClass="checkPr" meta:resourcekey="cblPrioritiesResource1">
                     </asp:CheckBoxList>
                 </fieldset>
             </div>
             <div class="containerDataEntryProjectsInner">
                 <fieldset>
-                    <b><a href="/Pages/CreateProject.aspx">Manage Projects</a></b>
+                    <b>
+                        <asp:Localize ID="lzeLgndManageProjects" runat="server" meta:resourcekey="lzeLgndManageProjectsResource1"
+                            Text="&lt;a href=&quot;/Pages/CreateProject.aspx&quot;&gt;Manage Projects&lt;/a&gt;"></asp:Localize></b>
                     <br />
                     <br />
-                    <b><a href="/Pages/ManageActivities.aspx">Manage Activities</a></b>
+                    <b>
+                        <asp:Localize ID="lzeLgndManageActivities" runat="server" meta:resourcekey="lzeLgndManageActivitiesResource1"
+                            Text="&lt;a href=&quot;/Pages/ManageActivities.aspx&quot;&gt;Manage Activities&lt;/a&gt;"></asp:Localize></b>
                     <br />
                 </fieldset>
             </div>
@@ -140,16 +149,20 @@
         <div class="containerDataEntryGrid">
             <div class="buttonsdiv">
                 <div class="savebutton2">
-                    Please click on 'Locations' button to select the locations you want to report on.
+                    <asp:Localize ID="lzeSelectLocaitonsText" runat="server" meta:resourcekey="lzeSelectLocaitonsTextResource1"
+                        Text="
+                    Please click on 'Locations' button to select the locations you want to report on."></asp:Localize>
                     <asp:Button ID="btnOpenLocations" runat="server" Text="Manage Locations" CausesValidation="False"
-                        CssClass="button_example" OnClick="btnLocation_Click" OnClientClick="needToConfirm = false;" />
+                        CssClass="button_example" OnClick="btnLocation_Click" OnClientClick="needToConfirm = false;"
+                        meta:resourcekey="btnOpenLocationsResource1" />
                 </div>
                 <div class="buttonright2">
-                    Export To:
+                    <asp:Localize ID="lzeExportToText" runat="server" meta:resourcekey="lzeExportToTextResource1"
+                        Text="Export To:"></asp:Localize>
                     <asp:ImageButton ID="btnPDF" runat="server" ImageUrl="~/images/pdf.png" OnClick="btnPDF_Export"
-                        OnClientClick="needToConfirm = false;" CssClass="imgButtonImg" />
+                        OnClientClick="needToConfirm = false;" CssClass="imgButtonImg" meta:resourcekey="btnPDFResource1" />
                     <asp:ImageButton ID="btnExcel" runat="server" ImageUrl="~/images/excel.png" OnClick="btnExcel_Export"
-                        OnClientClick="needToConfirm = false;" CssClass="imgButtonImg" />
+                        OnClientClick="needToConfirm = false;" CssClass="imgButtonImg" meta:resourcekey="btnExcelResource1" />
                 </div>
                 <div class="savebutton">
                 </div>
@@ -158,74 +171,81 @@
             </div>
             <div class="tablegrid">
                 <div id="scrolledGridView" style="overflow-x: auto; width: 100%;">
-                    <asp:GridView ID="gvActivities" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="False"
-                        HeaderStyle-BackColor="ButtonFace" DataKeyNames="ActivityDataId" CssClass="imagetable"
-                        Width="100%" meta:resourcekey="gvActivitiesResource1" OnRowDataBound="gvActivities_RowDataBound">
+                    <asp:GridView ID="gvActivities" runat="server" AutoGenerateColumns="False" HeaderStyle-BackColor="ButtonFace"
+                        DataKeyNames="ActivityDataId" CssClass="imagetable" Width="100%" meta:resourcekey="gvActivitiesResource1"
+                        OnRowDataBound="gvActivities_RowDataBound">
                         <HeaderStyle BackColor="Control"></HeaderStyle>
                         <RowStyle CssClass="istrow" />
                         <AlternatingRowStyle CssClass="altcolor" />
                         <Columns>
                             <asp:BoundField DataField="ObjectiveId" HeaderText="ObjectiveId" ItemStyle-Width="1px"
-                                ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement">
+                                ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement" meta:resourcekey="BoundFieldResource1">
                                 <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
                                 <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
                             </asp:BoundField>
                             <asp:BoundField DataField="HumanitarianPriorityId" HeaderText="HumanitarianPriorityId"
-                                ItemStyle-Width="1px" ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement">
+                                ItemStyle-Width="1px" ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement"
+                                meta:resourcekey="BoundFieldResource2">
                                 <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
                                 <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
                             </asp:BoundField>
                             <asp:BoundField DataField="ObjAndPrId" HeaderText="objprid" ItemStyle-Width="1px"
-                                ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement">
+                                ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement" meta:resourcekey="BoundFieldResource3">
                                 <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
                                 <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
                             </asp:BoundField>
                             <asp:BoundField DataField="ProjectId" HeaderText="pid" ItemStyle-Width="1px" ItemStyle-CssClass="hiddenelement"
-                                HeaderStyle-CssClass="hiddenelement">
+                                HeaderStyle-CssClass="hiddenelement" meta:resourcekey="BoundFieldResource4">
                                 <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
                                 <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
                             </asp:BoundField>
                             <asp:BoundField DataField="objAndPrAndPId" HeaderText="objprpid" ItemStyle-Width="1px"
-                                ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement">
+                                ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement" meta:resourcekey="BoundFieldResource5">
                                 <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
                                 <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
                             </asp:BoundField>
                             <asp:BoundField DataField="objAndPId" HeaderText="objAndPId" ItemStyle-Width="1px"
-                                ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement">
+                                ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement" meta:resourcekey="BoundFieldResource6">
                                 <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
                                 <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
                             </asp:BoundField>
                             <asp:BoundField DataField="PrAndPId" HeaderText="PrAndPId" ItemStyle-Width="1px"
-                                ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement">
+                                ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement" meta:resourcekey="BoundFieldResource7">
                                 <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
                                 <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
                             </asp:BoundField>
-                            <asp:TemplateField HeaderText="Project Code" ItemStyle-Wrap="false">
+                            <asp:TemplateField HeaderText="Project Code" ItemStyle-Wrap="false" meta:resourcekey="TemplateFieldResource1">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblProjectcode" runat="server" Text='<%#Eval("ClusterName") %>' ToolTip='<%#Eval("ProjectTitle") %>'></asp:Label>
+                                    <asp:Label ID="lblProjectcode" runat="server" Text='<%# Eval("ClusterName") %>' ToolTip='<%# Eval("ProjectTitle") %>'></asp:Label>
                                 </ItemTemplate>
+                                <ItemStyle Wrap="False"></ItemStyle>
                             </asp:TemplateField>
-                            <asp:TemplateField ItemStyle-Wrap="false">
+                            <asp:TemplateField ItemStyle-Wrap="false" meta:resourcekey="TemplateFieldResource2">
                                 <ItemTemplate>
-                                    <asp:Image ID="imgObjective" runat="server" ImageUrl="~/images/O.png" AlternateText="Obj" />
-                                    <asp:Image ID="imgPriority" runat="server" ImageUrl="~/images/P.png" AlternateText="Obj" />
-                                    <asp:Image ID="imgRind" runat="server" ImageUrl="" AlternateText="" />
-                                    <asp:Image ID="imgCind" runat="server" ImageUrl="" AlternateText="" />
+                                    <asp:Image ID="imgObjective" runat="server" ImageUrl="~/images/O.png" AlternateText="Obj"
+                                        meta:resourcekey="imgObjectiveResource1" />
+                                    <asp:Image ID="imgPriority" runat="server" ImageUrl="~/images/P.png" AlternateText="Obj"
+                                        meta:resourcekey="imgPriorityResource1" />
+                                    <asp:Image ID="imgRind" runat="server" meta:resourcekey="imgRindResource1" />
+                                    <asp:Image ID="imgCind" runat="server" meta:resourcekey="imgCindResource1" />
                                 </ItemTemplate>
+                                <ItemStyle Wrap="False"></ItemStyle>
                             </asp:TemplateField>
-                            <asp:TemplateField ItemStyle-Width="260px" HeaderText="Activity">
+                            <asp:TemplateField ItemStyle-Width="260px" HeaderText="Activity" meta:resourcekey="TemplateFieldResource3">
                                 <ItemTemplate>
                                     <div style="width: 260px; word-wrap: break-word;">
                                         <%# Eval("ActivityName")%>
                                     </div>
                                 </ItemTemplate>
+                                <ItemStyle Width="260px"></ItemStyle>
                             </asp:TemplateField>
-                            <asp:TemplateField ItemStyle-Width="220px" HeaderText="Output Indicator">
+                            <asp:TemplateField ItemStyle-Width="220px" HeaderText="Output Indicator" meta:resourcekey="TemplateFieldResource4">
                                 <ItemTemplate>
                                     <div style="width: 220px; word-wrap: break-word;">
                                         <%# Eval("DataName")%>
                                     </div>
                                 </ItemTemplate>
+                                <ItemStyle Width="220px"></ItemStyle>
                             </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
@@ -240,15 +260,15 @@
                 </div>
                 <div class="buttonright2">
                     <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
-                        Width="100px" CssClass="button_example" />
+                        Width="100px" CssClass="button_example" meta:resourcekey="btnSaveResource1" />
                 </div>
             </div>
         </div>
     </div>
     <input type="button" id="btnClientOpen" runat="server" style="display: none;" />
-    <asp:ModalPopupExtender ID="mpeAddActivity" runat="server" BehaviorID="mpeAddActivity"
-        TargetControlID="btnClientOpen" PopupControlID="pnlLocations" BackgroundCssClass="modalpopupbackground"
-        DynamicServicePath="" Enabled="True">
+    <asp:ModalPopupExtender ID="mpeAddActivity" runat="server" TargetControlID="btnClientOpen" BehaviorID="mpeAddActivity"
+        PopupControlID="pnlLocations" BackgroundCssClass="modalpopupbackground" DynamicServicePath=""
+        Enabled="True">
     </asp:ModalPopupExtender>
     <asp:Panel ID="pnlLocations" runat="server" Width="700px" meta:resourcekey="pnlLocationsResource1">
         <asp:UpdatePanel ID="uPanel1" runat="server" UpdateMode="Conditional">
@@ -260,20 +280,23 @@
                                 <tr>
                                     <td>
                                         <div class="graybar">
-                                            Admin 1
+                                            <asp:Localize ID="lzeAdmin1" runat="server" meta:resourcekey="lzeAdmin1Resource1"
+                                                Text="Admin 1"></asp:Localize>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <asp:CheckBoxList ID="cblAdmin1" runat="server" RepeatColumns="6" RepeatDirection="Horizontal">
+                                        <asp:CheckBoxList ID="cblAdmin1" runat="server" RepeatColumns="6" RepeatDirection="Horizontal"
+                                            meta:resourcekey="cblAdmin1Resource1">
                                         </asp:CheckBoxList>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <div class="graybar">
-                                            Admin 2
+                                            <asp:Localize ID="lzeAdmin2" runat="server" meta:resourcekey="lzeAdmin2Resource1"
+                                                Text="Admin 2"></asp:Localize>
                                         </div>
                                     </td>
                                 </tr>
@@ -305,42 +328,47 @@
         </asp:UpdatePanel>
     </asp:Panel>
     <asp:ModalPopupExtender ID="ModalPopupExtender1" runat="server" TargetControlID="HiddenTargetControlForModalPopup"
-        PopupControlID="Panel1" Drag="true" BackgroundCssClass="modalpopupbackground">
+        PopupControlID="Panel1" Drag="True" BackgroundCssClass="modalpopupbackground"
+        DynamicServicePath="" Enabled="True">
     </asp:ModalPopupExtender>
-    <asp:Button runat="server" ID="HiddenTargetControlForModalPopup" Style="display: none" />
-    <asp:Panel ID="Panel1" Style="display: block; width: 700px;" runat="server">
+    <asp:Button runat="server" ID="HiddenTargetControlForModalPopup" Style="display: none"
+        meta:resourcekey="HiddenTargetControlForModalPopupResource1" />
+    <asp:Panel ID="Panel1" Style="display: block; width: 700px;" runat="server" meta:resourcekey="Panel1Resource1">
         <div class="containerPopup">
             <div class="graybar">
-                Select Projects You Want To Export
+                <asp:Localize ID="lzeSelectEportProjects" runat="server" meta:resourcekey="lzeSelectEportProjectsResource1"
+                    Text="Select Projects You Want To Export"></asp:Localize>
             </div>
             <div class="contentarea">
                 <div class="formdiv">
                     <table border="0" style="margin: 0 auto;">
                         <tr>
                             <td>
-                                <asp:Label ID="lblMonths" runat="server" Text="Select Months To Generate Document"></asp:Label>
-                                <asp:CheckBoxList ID="cblMonths" runat="server" RepeatColumns="6">
+                                <asp:Label ID="lblMonths" runat="server" Text="Select Months To Generate Document"
+                                    meta:resourcekey="lblMonthsResource1"></asp:Label>
+                                <asp:CheckBoxList ID="cblMonths" runat="server" RepeatColumns="6" meta:resourcekey="cblMonthsResource1">
                                 </asp:CheckBoxList>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <asp:CheckBoxList ID="cblExportProjects" runat="server" RepeatColumns="4">
+                                <asp:CheckBoxList ID="cblExportProjects" runat="server" RepeatColumns="4" meta:resourcekey="cblExportProjectsResource1">
                                 </asp:CheckBoxList>
                             </td>
                         </tr>
                         <tr>
                             <td align="right">
                                 <asp:Button ID="btnOK" runat="server" Text="OK" OnClick="btnOK_Click" CssClass="button_example"
-                                    OnClientClick="needToConfirm = false;" />
-                                <asp:Button ID="btnExportToExcelClose" runat="server" Text="Close" CausesValidation="false"
-                                    OnClick="btnExportToExcelClose_Click" CssClass="button_example" OnClientClick="needToConfirm = false;" />
+                                    OnClientClick="needToConfirm = false;" meta:resourcekey="btnOKResource1" />
+                                <asp:Button ID="btnExportToExcelClose" runat="server" Text="Close" CausesValidation="False"
+                                    OnClick="btnExportToExcelClose_Click" CssClass="button_example" OnClientClick="needToConfirm = false;"
+                                    meta:resourcekey="btnExportToExcelCloseResource1" />
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <asp:Label ID="lblMessage2" runat="server" CssClass="error-message" Visible="false"
-                                    ViewStateMode="Disabled"></asp:Label>
+                                <asp:Label ID="lblMessage2" runat="server" CssClass="error-message" Visible="False"
+                                    ViewStateMode="Disabled" meta:resourcekey="lblMessage2Resource1"></asp:Label>
                             </td>
                         </tr>
                     </table>
