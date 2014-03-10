@@ -266,45 +266,39 @@
         </div>
     </div>
     <input type="button" id="btnClientOpen" runat="server" style="display: none;" />
-    <asp:ModalPopupExtender ID="mpeAddActivity" runat="server" TargetControlID="btnClientOpen" BehaviorID="mpeAddActivity"
-        PopupControlID="pnlLocations" BackgroundCssClass="modalpopupbackground" DynamicServicePath=""
-        Enabled="True">
+    <asp:ModalPopupExtender ID="mpeAddActivity" runat="server" TargetControlID="btnClientOpen"
+        BehaviorID="mpeAddActivity" PopupControlID="pnlLocations" BackgroundCssClass="modalpopupbackground"
+        DynamicServicePath="" Enabled="True">
     </asp:ModalPopupExtender>
-    <asp:Panel ID="pnlLocations" runat="server" Width="700px" meta:resourcekey="pnlLocationsResource1">
+    <asp:Panel ID="pnlLocations" runat="server" Width="800px" meta:resourcekey="pnlLocationsResource1">
         <asp:UpdatePanel ID="uPanel1" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
                 <div class="containerPopup">
+                    <div class="graybarcontainer">
+                    </div>
                     <div class="contentarea">
                         <div class="formdiv">
                             <table border="0" style="margin: 0 auto;">
                                 <tr>
                                     <td>
-                                        <div class="graybar">
-                                            <asp:Localize ID="lzeAdmin1" runat="server" meta:resourcekey="lzeAdmin1Resource1"
-                                                Text="Admin 1"></asp:Localize>
-                                        </div>
+                                        <fieldset>
+                                            <legend>
+                                                <asp:Label ID="lblLocAdmin1" runat="server" Text="Admin 1 Locations"></asp:Label></legend>
+                                            <asp:CheckBoxList ID="cblAdmin1" runat="server" RepeatColumns="6" RepeatDirection="Horizontal"
+                                                meta:resourcekey="cblAdmin1Resource1">
+                                            </asp:CheckBoxList>
+                                        </fieldset>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <asp:CheckBoxList ID="cblAdmin1" runat="server" RepeatColumns="6" RepeatDirection="Horizontal"
-                                            meta:resourcekey="cblAdmin1Resource1">
-                                        </asp:CheckBoxList>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="graybar">
-                                            <asp:Localize ID="lzeAdmin2" runat="server" meta:resourcekey="lzeAdmin2Resource1"
-                                                Text="Admin 2"></asp:Localize>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <asp:CheckBoxList ID="cblLocations" runat="server" RepeatColumns="5" RepeatDirection="Horizontal"
-                                            meta:resourcekey="cblLocationsResource1">
-                                        </asp:CheckBoxList>
+                                        <fieldset>
+                                            <legend>
+                                                <asp:Label ID="lblLocAdmin2" runat="server" Text="Admin 2 Locations"></asp:Label></legend>
+                                            <asp:CheckBoxList ID="cblLocations" runat="server" RepeatColumns="5" RepeatDirection="Horizontal"
+                                                meta:resourcekey="cblLocationsResource1">
+                                            </asp:CheckBoxList>
+                                        </fieldset>
                                     </td>
                                 </tr>
                                 <tr>
@@ -333,27 +327,31 @@
     </asp:ModalPopupExtender>
     <asp:Button runat="server" ID="HiddenTargetControlForModalPopup" Style="display: none"
         meta:resourcekey="HiddenTargetControlForModalPopupResource1" />
-    <asp:Panel ID="Panel1" Style="display: block; width: 700px;" runat="server" meta:resourcekey="Panel1Resource1">
+    <asp:Panel ID="Panel1" Style="display: block; width: 800px;" runat="server" meta:resourcekey="Panel1Resource1">
         <div class="containerPopup">
             <div class="graybar">
                 <asp:Localize ID="lzeSelectEportProjects" runat="server" meta:resourcekey="lzeSelectEportProjectsResource1"
-                    Text="Select Projects You Want To Export"></asp:Localize>
+                    Text="Select Months & Projects You Want To Export"></asp:Localize>
             </div>
             <div class="contentarea">
                 <div class="formdiv">
                     <table border="0" style="margin: 0 auto;">
                         <tr>
                             <td>
-                                <asp:Label ID="lblMonths" runat="server" Text="Select Months To Generate Document"
-                                    meta:resourcekey="lblMonthsResource1"></asp:Label>
-                                <asp:CheckBoxList ID="cblMonths" runat="server" RepeatColumns="6" meta:resourcekey="cblMonthsResource1">
-                                </asp:CheckBoxList>
+                                <fieldset>
+                                    <legend>Select Months</legend>
+                                    <asp:CheckBoxList ID="cblMonths" runat="server" RepeatColumns="6" meta:resourcekey="cblMonthsResource1">
+                                    </asp:CheckBoxList>
+                                </fieldset>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <asp:CheckBoxList ID="cblExportProjects" runat="server" RepeatColumns="4" meta:resourcekey="cblExportProjectsResource1">
-                                </asp:CheckBoxList>
+                                <fieldset>
+                                    <legend>Select Projects</legend>
+                                    <asp:CheckBoxList ID="cblExportProjects" runat="server" RepeatColumns="5" meta:resourcekey="cblExportProjectsResource1">
+                                    </asp:CheckBoxList>
+                                </fieldset>
                             </td>
                         </tr>
                         <tr>

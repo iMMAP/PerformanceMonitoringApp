@@ -733,6 +733,7 @@ namespace SRFROWCA.Pages
             cblAdmin1.DataTextField = "LocationName";
             cblAdmin1.DataSource = dt;
             cblAdmin1.DataBind();
+            lblLocAdmin1.Text = UserInfo.GetCountryName + " Admin 1 Locations";
         }
 
         private void PopulateAdmin2(int parentLocationId)
@@ -742,6 +743,7 @@ namespace SRFROWCA.Pages
             cblLocations.DataTextField = "LocationName";
             cblLocations.DataSource = dt;
             cblLocations.DataBind();
+            lblLocAdmin2.Text = UserInfo.GetCountryName + " Admin 2 Locations";
         }
 
         private DataTable GetReportLocations()

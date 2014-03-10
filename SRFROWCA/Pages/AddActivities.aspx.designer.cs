@@ -229,13 +229,13 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.UpdatePanel uPanel1;
         
         /// <summary>
-        /// lzeAdmin1 control.
+        /// lblLocAdmin1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize lzeAdmin1;
+        protected global::System.Web.UI.WebControls.Label lblLocAdmin1;
         
         /// <summary>
         /// cblAdmin1 control.
@@ -247,13 +247,13 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.CheckBoxList cblAdmin1;
         
         /// <summary>
-        /// lzeAdmin2 control.
+        /// lblLocAdmin2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize lzeAdmin2;
+        protected global::System.Web.UI.WebControls.Label lblLocAdmin2;
         
         /// <summary>
         /// cblLocations control.
@@ -308,15 +308,6 @@ namespace SRFROWCA.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Localize lzeSelectEportProjects;
-        
-        /// <summary>
-        /// lblMonths control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMonths;
         
         /// <summary>
         /// cblMonths control.
