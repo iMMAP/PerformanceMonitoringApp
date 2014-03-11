@@ -291,9 +291,24 @@ CSS for Login, Register, ForgotPassword, ChagnePassword
 }
 
 .imgButtonImg 
-        {
-            margin:0; 
-            padding:0;
-            display:inline-block;            
-            border: 0;
-         } 
+{
+    margin:0; 
+    padding:0;
+    display:inline-block;            
+    border: 0;
+    } 
+         
+.highlight
+{
+    background-color: yellow;
+}
+        
+.highlight2
+{
+    background-color: #ADFF2F;
+}
+
+.highlightRow
+{
+    background-color: #F08080;
+}
