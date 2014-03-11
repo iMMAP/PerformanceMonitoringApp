@@ -294,12 +294,6 @@
   <data name="lblMessage2Resource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="lblMonthsResource1.Text" xml:space="preserve">
-    <value>Select Months To Generate Document</value>
-  </data>
-  <data name="lblMonthsResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="lzeAdmin1Resource1.Text" xml:space="preserve">
     <value>Admin 1</value>
   </data>

@@ -70,7 +70,27 @@
 
                 $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th style="width: 100px;">&nbsp;</th><th style="width: 50px;">&nbsp;</th><th style="width: 260px;">&nbsp;</th><th style="width: 220px;">&nbsp;</th>' + list + '</tr></thead>');
             }
+
+            $('.cbltest').on('click', ':checkbox', function () {
+                if ($(this).is(':checked')) {
+                    $(this).parent().addClass('highlight');
+                }
+                else {
+                    $(this).parent().removeClass('highlight');
+                }
+            });
+
+            
         });
+
+        $(document).ready(function () {
+            $(".cbltest").find(":checkbox").each(function () {
+                if ($(this).is(':checked')) {                    
+                    $(this).parent().addClass('highlight');
+                }
+            });
+        });
+
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -285,7 +305,7 @@
                                             <legend>
                                                 <asp:Label ID="lblLocAdmin1" runat="server" Text="Admin 1 Locations"></asp:Label></legend>
                                             <asp:CheckBoxList ID="cblAdmin1" runat="server" RepeatColumns="6" RepeatDirection="Horizontal"
-                                                meta:resourcekey="cblAdmin1Resource1">
+                                                meta:resourcekey="cblAdmin1Resource1" CssClass="cbltest">
                                             </asp:CheckBoxList>
                                         </fieldset>
                                     </td>
@@ -296,7 +316,7 @@
                                             <legend>
                                                 <asp:Label ID="lblLocAdmin2" runat="server" Text="Admin 2 Locations"></asp:Label></legend>
                                             <asp:CheckBoxList ID="cblLocations" runat="server" RepeatColumns="5" RepeatDirection="Horizontal"
-                                                meta:resourcekey="cblLocationsResource1">
+                                                meta:resourcekey="cblLocationsResource1" CssClass="cbltest">
                                             </asp:CheckBoxList>
                                         </fieldset>
                                     </td>
@@ -321,7 +341,7 @@
             </Triggers>
         </asp:UpdatePanel>
     </asp:Panel>
-    <asp:ModalPopupExtender ID="ModalPopupExtender1" runat="server" TargetControlID="HiddenTargetControlForModalPopup"
+    <asp:ModalPopupExtender ID="mpeExport" runat="server" TargetControlID="HiddenTargetControlForModalPopup"
         PopupControlID="Panel1" Drag="True" BackgroundCssClass="modalpopupbackground"
         DynamicServicePath="" Enabled="True">
     </asp:ModalPopupExtender>
@@ -340,7 +360,8 @@
                             <td>
                                 <fieldset>
                                     <legend>Select Months</legend>
-                                    <asp:CheckBoxList ID="cblMonths" runat="server" RepeatColumns="6" meta:resourcekey="cblMonthsResource1">
+                                    <asp:CheckBoxList ID="cblMonths" runat="server" RepeatColumns="6" meta:resourcekey="cblMonthsResource1"
+                                        CssClass="cbltest">
                                     </asp:CheckBoxList>
                                 </fieldset>
                             </td>
@@ -349,7 +370,8 @@
                             <td>
                                 <fieldset>
                                     <legend>Select Projects</legend>
-                                    <asp:CheckBoxList ID="cblExportProjects" runat="server" RepeatColumns="5" meta:resourcekey="cblExportProjectsResource1">
+                                    <asp:CheckBoxList ID="cblExportProjects" runat="server" RepeatColumns="5" meta:resourcekey="cblExportProjectsResource1"
+                                        CssClass="cbltest">
                                     </asp:CheckBoxList>
                                 </fieldset>
                             </td>

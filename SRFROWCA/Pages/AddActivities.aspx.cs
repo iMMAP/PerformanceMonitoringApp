@@ -1154,16 +1154,11 @@ namespace SRFROWCA.Pages
         protected void btnExcel_Export(object sender, EventArgs e)
         {
             SaveProjectData();
+            UnCheckAllItemsOfListControl(cblMonths);
+            UnCheckAllItemsOfListControl(cblExportProjects);
+            SelectMonthAndProject();
             ExportDocumentType = 2;
-            ModalPopupExtender1.Show();
-            //DataTable dt = DBContext.GetData()
-            //string fileName = "DataEntry";
-            //string fileExtention = ".xls";
-            //DataTable dtActivities = (DataTable)Session["dtActivities"];
-            //GridView gv = new GridView();
-            //gv.DataSource = dtActivities;
-            //gv.DataBind();
-            //ExportUtility.ExportGridView(gv, fileName, fileExtention, this.Response);
+            mpeExport.Show();
         }
 
         protected void btnOK_Click(object sender, EventArgs e)
@@ -1194,12 +1189,10 @@ namespace SRFROWCA.Pages
             int yearId = 0;
             int.TryParse(ddlYear.SelectedValue, out yearId);
 
-            int monthId = 0;
-            int.TryParse(ddlMonth.SelectedValue, out monthId);
-
+            string monthIds = GetSelectedItems(cblMonths);
             string projectIds = GetSelectedItems(cblExportProjects);
-            string locationIds = GetSelectedLocations();
-            string locIdsNotIncluded = GetNotSelectedLocations();
+            string locationIds = "";// GetSelectedLocations();
+            string locIdsNotIncluded = "";// GetNotSelectedLocations();
 
             Guid userId = RC.GetCurrentUserId;
 
@@ -1209,23 +1202,44 @@ namespace SRFROWCA.Pages
                 procedureName = "GetProjectsReportDataWithLocations";
             }
 
-            DataTable dt = DBContext.GetData(procedureName, new object[] { locEmergencyId, locationIds, yearId, monthId,
+            DataTable dt = new DataTable();
+            if (!string.IsNullOrEmpty(monthIds) && !string.IsNullOrEmpty(projectIds))
+            {
+                dt = DBContext.GetData(procedureName, new object[] { locEmergencyId, locationIds, yearId, monthIds,
                                                                         locIdsNotIncluded, RC.SelectedSiteLanguageId, userId,
                                                                         UserInfo.GetCountry, UserInfo.GetOrganization, projectIds});
-            return dt.Rows.Count > 0 ? dt : new DataTable();
+            }
+
+            return dt;
         }
 
         protected void btnExportToExcelClose_Click(object sender, EventArgs e)
         {
-            //LoadData();
-            ModalPopupExtender1.Hide();
+            mpeExport.Hide();
+        }
+
+        private void SelectMonthAndProject()
+        {
+            cblMonths.SelectedValue = ddlMonth.SelectedValue;
+            cblExportProjects.SelectedValue = rblProjects.SelectedValue;
+        }
+
+        private void UnCheckAllItemsOfListControl(ListControl control)
+        {
+            foreach (ListItem item in control.Items)
+            {
+                item.Selected = false;
+            }
         }
 
         protected void btnPDF_Export(object sender, EventArgs e)
         {
             SaveProjectData();
+            UnCheckAllItemsOfListControl(cblMonths);
+            UnCheckAllItemsOfListControl(cblExportProjects);
+            SelectMonthAndProject();
             ExportDocumentType = 1;
-            ModalPopupExtender1.Show();
+            mpeExport.Show();
         }
 
         private void GeneratePDF(DataTable dt)

@@ -2,12 +2,6 @@
     CodeBehind="ManageActivities.aspx.cs" Inherits="SRFROWCA.Pages.ManageActivities" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <style>
-        .highlight
-        {
-            background-color: yellow;
-        }
-    </style>
     <script type="text/javascript" src="../Scripts/ShowHideObJAndPr.js"></script>
     <script>
         $(function () {

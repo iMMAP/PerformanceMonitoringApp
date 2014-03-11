@@ -324,9 +324,6 @@
   <data name="lzeLgndStrObjsResource1.Text" xml:space="preserve">
     <value>Objectif Stratégique</value>
   </data>
-  <data name="lzeSelectEportProjectsResource1.Text" xml:space="preserve">
-    <value>Select Projects You Want To Export</value>
-  </data>
   <data name="lzeSelectLocaitonsTextResource1.Text" xml:space="preserve">
     <value>Cliquer sur le bouton "Lieu" pour sélectionner les lieux que vous voulez mentionner</value>
   </data>
