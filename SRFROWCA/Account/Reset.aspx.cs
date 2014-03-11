@@ -7,7 +7,7 @@ using SRFROWCA.Common;
 
 namespace SRFROWCA.Account
 {
-    public partial class Reset : System.Web.UI.Page
+    public partial class Reset : BasePage
     {
         protected void Page_PreInit(object sender, EventArgs e)
         {

@@ -11,7 +11,7 @@ using SRFROWCA.Common;
 
 namespace SRFROWCA.Account
 {
-    public partial class UserProfile : System.Web.UI.Page
+    public partial class UserProfile : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

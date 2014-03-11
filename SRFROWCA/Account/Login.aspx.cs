@@ -6,7 +6,7 @@ using System.Web.UI.WebControls;
 
 namespace SRFROWCA.Account
 {
-    public partial class Login : System.Web.UI.Page
+    public partial class Login : BasePage
     {
         protected void Page_PreInit(object sender, EventArgs e)
         {

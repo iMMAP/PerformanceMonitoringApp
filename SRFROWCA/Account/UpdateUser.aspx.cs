@@ -8,7 +8,7 @@ using SRFROWCA.Reports;
 
 namespace SRFROWCA.Account
 {
-    public partial class UpdateUser : System.Web.UI.Page
+    public partial class UpdateUser : BasePage
     {
         protected void Page_PreInit(object sender, EventArgs e)
         {

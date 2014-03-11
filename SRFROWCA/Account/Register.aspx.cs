@@ -9,7 +9,7 @@ using Microsoft.Office.Interop.Access;
 
 namespace SRFROWCA.Account
 {
-    public partial class Register : System.Web.UI.Page
+    public partial class Register : BasePage
     {
         protected void Page_PreInit(object sender, EventArgs e)
         {

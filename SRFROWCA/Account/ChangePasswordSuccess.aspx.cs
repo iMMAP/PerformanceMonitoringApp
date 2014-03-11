@@ -3,7 +3,7 @@ using SRFROWCA.Common;
 
 namespace SRFROWCA.Account
 {
-    public partial class ChangePasswordSuccess : System.Web.UI.Page
+    public partial class ChangePasswordSuccess : BasePage
     {
         protected void Page_PreInit(object sender, EventArgs e)
         {

@@ -7,7 +7,7 @@ using SRFROWCA.Common;
 
 namespace SRFROWCA.Account
 {
-    public partial class ForgotPassword : System.Web.UI.Page
+    public partial class ForgotPassword : BasePage
     {
         protected void Page_PreInit(object sender, EventArgs e)
         {

@@ -12,7 +12,7 @@ using SRFROWCA.Reports;
 
 namespace SRFROWCA.Account
 {
-    public partial class Registerca : System.Web.UI.Page
+    public partial class Registerca : BasePage
     {
         protected void Page_PreInit(object sender, EventArgs e)
         {
