@@ -140,7 +140,6 @@
     <Content Include="ClusterLead\AddSRPActivitiesFromMasterList.aspx" />
     <Content Include="ClusterLead\AddSRPActivity.aspx" />
     <Content Include="ClusterLead\ManageActivitiesClsuterLead.aspx" />
-    <Content Include="ClusterLead\WebForm1.aspx" />
     <Content Include="DataFeeds\AdminDataFeeds.aspx" />
     <Content Include="Admin\EmergencyListing.aspx" />
     <Content Include="Admin\OfficeListing.aspx" />
@@ -478,13 +477,6 @@
     </Compile>
     <Compile Include="ClusterLead\ManageActivitiesClsuterLead.aspx.designer.cs">
       <DependentUpon>ManageActivitiesClsuterLead.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ClusterLead\WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ClusterLead\WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
     <Compile Include="Common\GeneratePDF.cs" />
     <Compile Include="Common\UserInfo.cs" />
