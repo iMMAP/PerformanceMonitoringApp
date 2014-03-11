@@ -6,7 +6,7 @@ using SRFROWCA.Common;
 
 namespace SRFROWCA.Pages
 {
-    public partial class ManageActivities : System.Web.UI.Page
+    public partial class ManageActivities : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -256,17 +256,17 @@ namespace SRFROWCA.Pages
                 if (cbIsSRP == null) return;
 
                 Guid userId = RC.GetCurrentUserId;
-                if (cbIsSRP.Checked)
+                //if (cbIsSRP.Checked)
                 {
                     DBContext.Add("InsertProjectIndicator2", new object[] { projectId, indicatorId, cbIsSRP.Checked, 
                                                                             isAdded.Checked, orgId, userId, DBNull.Value });
                 }
-                else
-                {
-                    DBContext.Update("UpdateOPSProjectIndicatorStatus", new object[] { projectId, indicatorId,
-                                                                                        cbIsSRP.Checked, isAdded.Checked, orgId,
-                                                                                        userId, DBNull.Value });
-                }
+                //else
+                //{
+                //    DBContext.Update("UpdateOPSProjectIndicatorStatus", new object[] { projectId, indicatorId,
+                //                                                                        cbIsSRP.Checked, isAdded.Checked, orgId,
+                //                                                                        userId, DBNull.Value });
+                //}
             }
         }
     }

@@ -3,6 +3,12 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <script type="text/javascript" src="../Scripts/ShowHideObJAndPr.js"></script>
+    <style>
+        .highlight
+        {
+            background-color: yellow;
+        }
+    </style>
     <script>
         $(function () {
             $('.srpind').parent('tr:contains("Yes")').addClass('highlight');
@@ -60,8 +66,13 @@
                         </asp:TemplateField>
                         <asp:BoundField DataField="ActivityName" HeaderText="Activity" ItemStyle-CssClass="testact"
                             SortExpression="ActivityName"></asp:BoundField>
-                        <asp:TemplateField HeaderText="Country specific Indicator" SortExpression="IsSRP"
-                            HeaderStyle-Width="40px" ItemStyle-CssClass="srpind">
+                        <asp:TemplateField HeaderText="Regional Indicator" SortExpression="IsRegional" HeaderStyle-Width="40px"
+                            ItemStyle-CssClass="srpind">
+                            <ItemTemplate>
+                                <%# (Boolean.Parse(Eval("IsRegional").ToString())) ? "Yes" : "No"%></ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Country Indicator" SortExpression="IsSRP" HeaderStyle-Width="40px"
+                            ItemStyle-CssClass="srpind">
                             <ItemTemplate>
                                 <%# (Boolean.Parse(Eval("IsSRP").ToString())) ? "Yes" : "No"%></ItemTemplate>
                         </asp:TemplateField>

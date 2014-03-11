@@ -10,7 +10,7 @@ using BusinessLogic;
 
 namespace SRFROWCA.Pages
 {
-    public partial class CreateProject : System.Web.UI.Page
+    public partial class CreateProject : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
