@@ -2,12 +2,6 @@
     CodeBehind="ManageActivitiesClsuterLead.aspx.cs" Inherits="SRFROWCA.ClusterLead.ManageActivitiesClsuterLead" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <style>
-        .highlight
-        {
-            background-color: yellow;
-        }
-    </style>
     <script src="../Scripts/jq-highlight.js" type="text/javascript"></script>
     <script>
         $(function () {

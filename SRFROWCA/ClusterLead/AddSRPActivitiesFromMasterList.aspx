@@ -12,6 +12,7 @@
         {
             background-color: #ADFF2F;
         }
+        
         .highlightRow
         {
             background-color: #F08080;
@@ -103,7 +104,8 @@
                                 <input id="txtIndicator" type="text" style="width: 350px;" />
                             </td>
                             <td align="right">
-                                <asp:Button ID="btnAddSRPActivity" runat="server" OnClick="btnAddSRPActivity_Click" Text="Add New Activity" CssClass="button_example" />
+                                <asp:Button ID="btnAddSRPActivity" runat="server" OnClick="btnAddSRPActivity_Click"
+                                    Text="Add New Activity" CssClass="button_example" />
                             </td>
                         </tr>
                     </table>
@@ -141,11 +143,19 @@
                             </asp:TemplateField>
                             <asp:BoundField DataField="ActivityName" HeaderText="Activity" ItemStyle-CssClass="testact"
                                 SortExpression="ActivityName"></asp:BoundField>
-                            <asp:TemplateField HeaderText="Country Specific Indicator" meta:resourcekey="TemplateFieldResource2"
-                                SortExpression="IndicatorIsAdded" ItemStyle-Width="40px">
+                            <asp:TemplateField HeaderText="Regional Indicator" meta:resourcekey="TemplateFieldResource2"
+                                SortExpression="IsRegional" ItemStyle-Width="40px">
+                                <ItemTemplate>
+                                    <asp:CheckBox ID="chkRegional" runat="server" AutoPostBack="true" OnCheckedChanged="chkRegional_CheckedChanged"
+                                        Checked='<%# Eval("IsRegional") %>' CssClass="testcb" />
+                                </ItemTemplate>
+                                <ItemStyle Width="2%" />
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Country Indicator" meta:resourcekey="TemplateFieldResource2"
+                                SortExpression="IsSRP" ItemStyle-Width="40px">
                                 <ItemTemplate>
                                     <asp:CheckBox ID="chkSRP" runat="server" AutoPostBack="true" OnCheckedChanged="chkSRP_CheckedChanged"
-                                        Checked='<%# Eval("IndicatorIsAdded") %>' CssClass="testcb" />
+                                        Checked='<%# Eval("IsSRP") %>' CssClass="testcb" />
                                 </ItemTemplate>
                                 <ItemStyle Width="2%" />
                             </asp:TemplateField>

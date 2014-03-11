@@ -11,7 +11,7 @@ using System.Transactions;
 
 namespace SRFROWCA.ClusterLead
 {
-    public partial class AddSRPActivity : System.Web.UI.Page
+    public partial class AddSRPActivity : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

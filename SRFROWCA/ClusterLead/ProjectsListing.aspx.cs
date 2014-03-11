@@ -10,7 +10,7 @@ using BusinessLogic;
 
 namespace SRFROWCA.ClusterLead
 {
-    public partial class ProjectsListing : System.Web.UI.Page
+    public partial class ProjectsListing : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

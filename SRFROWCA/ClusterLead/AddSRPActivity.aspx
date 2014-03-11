@@ -140,7 +140,7 @@
             </div>
             <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" CssClass="button_example" />
             <asp:Button ID="btnBackToSRPList" runat="server" Text="Back TO SRP List" OnClick="btnBackToSRPList_Click"
-                CssClass="button_example" />
+                CssClass="button_example" CausesValidation="false" />
         </div>
     </div>
 </asp:Content>
