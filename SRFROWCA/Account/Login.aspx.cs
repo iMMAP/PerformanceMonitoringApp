@@ -33,7 +33,7 @@ namespace SRFROWCA.Account
             {
                 Response.Redirect("~/ClusterLead/ProjectsListing.aspx");
             }
-            else
+            else if (Roles.IsUserInRole(LoginUser.UserName, "User"))
             {
                 Response.Redirect("~/Pages/AddActivities.aspx");
             }
