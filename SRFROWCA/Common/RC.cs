@@ -258,7 +258,7 @@ namespace SRFROWCA.Common
         internal static DataTable GetUserDetails()
         {
             Guid userId = GetCurrentUserId;   
-            return DBContext.GetData("GetUserDetails", new object[] { userId });
+            return DBContext.GetData("GetUserDetails", new object[] {1,  userId });
         }
 
         public static Guid GetCurrentUserId

@@ -17,6 +17,9 @@ namespace SRFROWCA.Common
                 HttpContext.Current.Session["UserCountry"] = dt.Rows[0]["LocationId"];
                 HttpContext.Current.Session["UserCluster"] = dt.Rows[0]["ClusterId"];
                 HttpContext.Current.Session["UserOrg"] = dt.Rows[0]["OrganizationId"];
+                HttpContext.Current.Session["UserLocationEmergencyId"] = dt.Rows[0]["LocationEmergencyId"];
+                HttpContext.Current.Session["UserEmergencyClusterId"] = dt.Rows[0]["EmergencyClusterId"];
+                HttpContext.Current.Session["UserOrg"] = dt.Rows[0]["OrganizationId"];
 
                 HttpContext.Current.Session["UserCountryName"] = dt.Rows[0]["LocationName"];
                 HttpContext.Current.Session["UserOrgName"] = dt.Rows[0]["OrganizationName"];
@@ -47,6 +50,24 @@ namespace SRFROWCA.Common
             {
                 return HttpContext.Current.Session["UserOrg"] != null ?
                 Convert.ToInt32(HttpContext.Current.Session["UserOrg"]) : 0;
+            }
+        }
+
+        internal static int GetEmergencyCountry
+        {
+            get
+            {
+                return HttpContext.Current.Session["UserLocationEmergencyId"] != null ?
+                Convert.ToInt32(HttpContext.Current.Session["UserLocationEmergencyId"]) : 0;
+            }
+        }
+
+        internal static int GetEmergencyCluster
+        {
+            get
+            {
+                return HttpContext.Current.Session["UserEmergencyClusterId"] != null ?
+                Convert.ToInt32(HttpContext.Current.Session["UserEmergencyClusterId"]) : 0;
             }
         }
 
