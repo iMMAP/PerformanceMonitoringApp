@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -14,6 +15,15 @@
     <AssemblyName>SRFROWCA</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <UseIISExpress>false</UseIISExpress>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -77,6 +87,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_dll\DropDownCheckBoxes.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="itextsharp">
       <HintPath>..\_dll\itextsharp.dll</HintPath>
     </Reference>
@@ -88,6 +104,7 @@
       <HintPath>..\_dll\Svg.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -285,6 +302,23 @@
     <Content Include="OPS\OPSProjectFeed.ashx" />
     <Content Include="xmlprojectfeeds.aspx" />
     <Content Include="ClusterLead\Web.config" />
+    <EntityDeploy Include="ORSDb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ORSDb.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="ORSDb.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ORSDb.edmx</DependentUpon>
+      <LastGenOutput>ORSDb.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ORSDb.edmx.diagram">
+      <DependentUpon>ORSDb.edmx</DependentUpon>
+    </Content>
+    <Content Include="ORSDb.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ORSDb.edmx</DependentUpon>
+      <LastGenOutput>ORSDb.cs</LastGenOutput>
+    </Content>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -384,6 +418,12 @@
     <Compile Include="Account\UserProfile.aspx.designer.cs">
       <DependentUpon>UserProfile.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ActivityData.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ActivityType.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="Admin\ActivityData.aspx.cs">
       <DependentUpon>ActivityData.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -418,6 +458,48 @@
     </Compile>
     <Compile Include="Admin\PriorityActivities.aspx.designer.cs">
       <DependentUpon>PriorityActivities.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="aspnet_Applications.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aspnet_Membership.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aspnet_Paths.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aspnet_PersonalizationAllUsers.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aspnet_PersonalizationPerUser.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aspnet_Profile.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aspnet_Roles.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aspnet_SchemaVersions.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNet_SqlCacheTablesForChangeNotification.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aspnet_Users.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aspnet_Users_Clusters.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aspnet_Users_Custom.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aspnet_WebEvent_Events.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Cluster.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
     </Compile>
     <Compile Include="ClusterLead\ProjectDetails.aspx.cs">
       <DependentUpon>ProjectDetails.aspx</DependentUpon>
@@ -477,6 +559,12 @@
     </Compile>
     <Compile Include="ClusterLead\ManageActivitiesClsuterLead.aspx.designer.cs">
       <DependentUpon>ManageActivitiesClsuterLead.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClusterObjective.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClusterPartner.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Common\GeneratePDF.cs" />
     <Compile Include="Common\UserInfo.cs" />
@@ -589,6 +677,21 @@
       <DependentUpon>FilterCriteria.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\PagingGridView.cs" />
+    <Compile Include="DisasterType.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Emergency.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmergencyCluster.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorLog.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorLogApplication.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="ErrorPages\DefaultRedirectErrorPage.aspx.cs">
       <DependentUpon>DefaultRedirectErrorPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -617,6 +720,21 @@
     <Compile Include="ErrorPages\HttpErrorPage.aspx.designer.cs">
       <DependentUpon>HttpErrorPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="HumanitarianPriority.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IndicatorLocationAnnualTarget.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Location.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LocationEmergency.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LocationType.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="Maps\TargetAchievedByLocDataMap.aspx.cs">
       <DependentUpon>TargetAchievedByLocDataMap.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -624,12 +742,45 @@
     <Compile Include="Maps\TargetAchievedByLocDataMap.aspx.designer.cs">
       <DependentUpon>TargetAchievedByLocDataMap.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Month.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Objective.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ObjectivePriority.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="ops.Master.cs">
       <DependentUpon>ops.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ops.Master.designer.cs">
       <DependentUpon>ops.Master</DependentUpon>
+    </Compile>
+    <Compile Include="OPSAllData.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OPSIndicator.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OPSProjectDetail.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OPSProjectInfo.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OPSReport.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OPSReportDetail.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OPSReportLocation.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OPSUser.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
     </Compile>
     <Compile Include="OPS\OPSActivitiesFeed.ashx.cs">
       <DependentUpon>OPSActivitiesFeed.ashx</DependentUpon>
@@ -650,6 +801,30 @@
     </Compile>
     <Compile Include="OPS\UploadOPSProjectDetails.aspx.designer.cs">
       <DependentUpon>UploadOPSProjectDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Organization.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrganizationType.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORSDb.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ORSDb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORSDb.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORSDb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ORSDb.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ORSProject.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Pages\CreateProject.aspx.cs">
       <DependentUpon>CreateProject.aspx</DependentUpon>
@@ -672,10 +847,49 @@
     <Compile Include="Pages\TargetsAchievedOfLocationByDuration.ascx.designer.cs">
       <DependentUpon>TargetsAchievedOfLocationByDuration.ascx</DependentUpon>
     </Compile>
+    <Compile Include="PasswordReset.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PriorityActivity.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectIndicator.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectIndicatorLocaiton.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectSelectedIndicator.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Quarter.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RegionalIndicator.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RegionalIndicatorsHistory.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Report.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReportActivity.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReportDetail.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReportFrequencyType.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReportLocation.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
     </Compile>
     <Compile Include="ReportsCharts\AllTargetsAndAchieved.ascx.cs">
       <DependentUpon>AllTargetsAndAchieved.ascx</DependentUpon>
@@ -749,12 +963,42 @@
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
+    <Compile Include="SiteLanguage.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SRPIndicator.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SRPIndicatorsHistory.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StagingLocation.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StagingTableLogFrame.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TempData.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Unit.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="UploadSRPLogFrame.aspx.cs">
       <DependentUpon>UploadSRPLogFrame.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UploadSRPLogFrame.aspx.designer.cs">
       <DependentUpon>UploadSRPLogFrame.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserActivityData.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
     </Compile>
     <Compile Include="WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
@@ -790,6 +1034,9 @@
     </Compile>
     <Compile Include="xmlprojectfeeds.aspx.designer.cs">
       <DependentUpon>xmlprojectfeeds.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Year.cs">
+      <DependentUpon>ORSDb.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -889,8 +1136,16 @@
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
