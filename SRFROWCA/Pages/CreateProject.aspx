@@ -115,6 +115,10 @@
                             <asp:Button ID="btnManageActivities" runat="server" Text="Manage Activities" CssClass="button_example"
                                 CausesValidation="false" OnClick="btnManageActivities_Click" />
                         </td>
+                        <td>
+                            <asp:Button ID="btnDeleteProject" runat="server" Text="Delete Project" CssClass="button_example"
+                                CausesValidation="false" OnClick="btnDeleteProject_Click" />
+                        </td>
                     </tr>
                 </table>
             </div>

@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using SRFROWCA.Common;
 using System.Data;
 using BusinessLogic;
+using System.Globalization;
 
 namespace SRFROWCA.Pages
 {
@@ -52,8 +53,9 @@ namespace SRFROWCA.Pages
 
         protected void rblProjects_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int projectId = Convert.ToInt32(rblProjects.SelectedValue);
-            DataTable dt = DBContext.GetData("GetORSProjectDetail", new object[] { projectId });
+            ORSProjectId = Convert.ToInt32(rblProjects.SelectedValue);
+
+            DataTable dt = DBContext.GetData("GetORSProjectDetail", new object[] { ORSProjectId });
 
             if (dt.Rows.Count > 0)
             {
@@ -89,12 +91,23 @@ namespace SRFROWCA.Pages
             Save();
             PopulateProjects();
             SelectProject();
+            SelctProjectCode();
             ShowMessage("Your Data Saved Successfuly!");
+        }
+
+        private void SelctProjectCode()
+        {
+            ltrlProjectCode.Text = GetProjectCode();
         }
 
         protected void btnManageActivities_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Pages/ManageActivities.aspx");
+        }
+
+        protected void btnDeleteProject_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void Save()
@@ -105,25 +118,53 @@ namespace SRFROWCA.Pages
             string objective = txtProjectObjective.Text.Trim();
             int clusterId = Convert.ToInt32(ddlCluster.SelectedValue);
 
-            string startDate = txtFromDate.Text.Trim();
-            string endDate = txtToDate.Text.Trim();
+            DateTime? startDate = txtFromDate.Text.Trim().Length > 0 ?
+                                    DateTime.ParseExact(txtFromDate.Text.Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture) :
+                                (DateTime?)null;
+
+            DateTime? endDate = txtToDate.Text.Trim().Length > 0 ?
+                                DateTime.ParseExact(txtToDate.Text.Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture) :
+                                (DateTime?)null;
             Guid userId = RC.GetCurrentUserId;
-            int projectId = RC.GetSelectedIntVal(rblProjects);
+            //int projectId = RC.GetSelectedIntVal(rblProjects);
 
             if (locationId > 0 && clusterId > 0)
             {
-                if (projectId > 0)
+                if (ORSProjectId > 0)
                 {
-                    DBContext.Add("UpdateProject", new object[] { projectId, title, objective, 
-                                                            clusterId, locationId, startDate,
-                                                            endDate, userId, DBNull.Value });
+                    using (ORSEntities re = new ORSEntities())
+                    {
+                        ORSProject project = re.ORSProjects.Single(p => p.ORSProjectId == ORSProjectId);
+                        project.ProjectTitle = title;
+                        project.ProjectObjective = objective;
+                        project.ClusterId = clusterId;
+                        project.LocationId = locationId;
+                        project.ProjectStartDate = startDate;
+                        project.ProjectEndDate = endDate;
+                        project.UpdatedById = userId;
+                        project.UpdatedDate = DateTime.Now;
+                        re.SaveChanges();
+                    }
                 }
                 else
                 {
                     ORSProjectId = DBContext.Add("InsertProject", new object[] { title, objective, clusterId, locationId,
                                                              orgId, startDate, endDate, userId, DBNull.Value });
                 }
+
             }
+        }
+
+        private string GetProjectCode()
+        {
+            string projectCode = "";
+            using (ORSEntities re = new ORSEntities())
+            {
+                projectCode = re.ORSProjects.Where(p => p.ORSProjectId == ORSProjectId)
+                                .Select(p => p.ProjectCode).SingleOrDefault();
+            }
+
+            return projectCode;
         }
 
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success)
