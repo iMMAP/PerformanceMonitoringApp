@@ -26,7 +26,7 @@ namespace SRFROWCA.Common
             }
         }
 
-        internal static int GetCountry
+        internal static int Country
         {
             get
             {
@@ -35,7 +35,7 @@ namespace SRFROWCA.Common
             }
         }
 
-        internal static int GetCluster
+        internal static int Cluster
         {
             get
             {
@@ -44,7 +44,7 @@ namespace SRFROWCA.Common
             }
         }
 
-        internal static int GetOrganization
+        internal static int Organization
         {
             get
             {
@@ -53,7 +53,7 @@ namespace SRFROWCA.Common
             }
         }
 
-        internal static int GetEmergencyCountry
+        internal static int EmergencyCountry
         {
             get
             {
@@ -62,7 +62,7 @@ namespace SRFROWCA.Common
             }
         }
 
-        internal static int GetEmergencyCluster
+        internal static int EmergencyCluster
         {
             get
             {
@@ -71,7 +71,7 @@ namespace SRFROWCA.Common
             }
         }
 
-        internal static string GetCountryName
+        internal static string CountryName
         {
             get
             {
@@ -80,7 +80,7 @@ namespace SRFROWCA.Common
             }
         }
 
-        internal static string GetOrgName
+        internal static string OrgName
         {
             get
             {
