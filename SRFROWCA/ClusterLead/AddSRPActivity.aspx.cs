@@ -69,7 +69,7 @@ namespace SRFROWCA.ClusterLead
         private int SaveActivity()
         {
             int emergencyId = 1;
-            int clusterId = UserInfo.GetCluster;
+            int clusterId = UserInfo.Cluster;
             Guid userId = RC.GetCurrentUserId;
 
             int objId = RC.GetSelectedIntVal(ddlObjective);
@@ -101,7 +101,7 @@ namespace SRFROWCA.ClusterLead
             if (indicatorId > 0)
             {
                 bool isAdd = true;
-                int locationId = UserInfo.GetCountry;
+                int locationId = UserInfo.Country;
                 DBContext.Update("InsertDeleteSRPIndicaotr", new object[] { indicatorId, locationId, isAdd, userId, DBNull.Value });
             }
         }
@@ -123,7 +123,7 @@ namespace SRFROWCA.ClusterLead
             if (indicatorId > 0)
             {
                 bool isAdd = true;
-                int locationId = UserInfo.GetCountry;
+                int locationId = UserInfo.Country;
                 DBContext.Update("InsertDeleteSRPIndicaotr", new object[] { indicatorId, locationId, isAdd, userId, DBNull.Value });
             }
         }

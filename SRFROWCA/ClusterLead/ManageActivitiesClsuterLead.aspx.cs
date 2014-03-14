@@ -34,8 +34,6 @@ namespace SRFROWCA.ClusterLead
             UI.FillPriorities(rbPriorities);
         }
 
-
-
         protected void wzActivities_NextButtonClick(object sender, WizardNavigationEventArgs e)
         {
             gvActivities.DataSource = DBContext.GetData("GetClusterActivitiesEngAndFrOnObjAndPriority", new object[] { 1, 1, 1, 1, 1 });

@@ -30,7 +30,7 @@ namespace SRFROWCA.ClusterLead
         private DataTable GetIndicators()
         {
             int emergencyId = 1;
-            int clusterId = UserInfo.GetCluster;
+            int clusterId = UserInfo.Cluster;
             int lngId = 1;
             return DBContext.GetData("GetClusterIndicatorsToSelectSRPActivities", new object[] { emergencyId, clusterId, lngId });
         }
@@ -170,14 +170,14 @@ namespace SRFROWCA.ClusterLead
         private void AddRemoveSRPIndicatorFromList(int indicatorId, bool isAdd)
         {
             Guid userId = RC.GetCurrentUserId;
-            int locationId = UserInfo.GetCountry;
+            int locationId = UserInfo.Country;
             DBContext.Update("InsertDeleteSRPIndicaotr", new object[] { indicatorId, locationId, isAdd, userId, DBNull.Value });
         }
 
         private void AddRemoveRegionalIndicatorFromList(int indicatorId, bool isAdd)
         {
             Guid userId = RC.GetCurrentUserId;
-            int locationId = UserInfo.GetCountry;
+            int locationId = UserInfo.Country;
             DBContext.Update("InsertDeleteRegionalIndicaotr", new object[] { indicatorId, locationId, isAdd, userId, DBNull.Value });
         }
 

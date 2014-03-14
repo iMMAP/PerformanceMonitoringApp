@@ -30,7 +30,7 @@ namespace SRFROWCA.ClusterLead
 
         private void PopulateOrganizations()
         {
-            DataTable dt = RC.GetProjectsOrganizations(UserInfo.GetEmergencyCountry, UserInfo.GetEmergencyCluster);
+            DataTable dt = RC.GetProjectsOrganizations(UserInfo.EmergencyCountry, UserInfo.EmergencyCluster);
             UI.FillOrganizations(ddlOrg, dt);
 
             if (ddlOrg.Items.Count > 0)
@@ -42,7 +42,7 @@ namespace SRFROWCA.ClusterLead
 
         private void PopulateLocations()
         {
-            UI.FillAdmin1(ddlAdmin1, UserInfo.GetCountry);
+            UI.FillAdmin1(ddlAdmin1, UserInfo.Country);
 
             ListItem item = new ListItem("All", "0");
             if (ddlAdmin1.Items.Count > 0)
@@ -50,7 +50,7 @@ namespace SRFROWCA.ClusterLead
                 ddlAdmin1.Items.Insert(0, item);
             }
 
-            UI.FillAdmin2(ddlAdmin2, UserInfo.GetCountry);
+            UI.FillAdmin2(ddlAdmin2, UserInfo.Country);
             if (ddlAdmin2.Items.Count > 0)
             {
                 ddlAdmin2.Items.Insert(0, item);
@@ -178,7 +178,7 @@ namespace SRFROWCA.ClusterLead
 
             int? cbReported = cblReportingStatus.SelectedIndex > -1 ? RC.GetSelectedIntVal(cblReportingStatus) : (int?)null;
 
-            return DBContext.GetData("GetProjects", new object[] {UserInfo.GetEmergencyCountry, UserInfo.GetEmergencyCluster,
+            return DBContext.GetData("GetProjects", new object[] {UserInfo.EmergencyCountry, UserInfo.EmergencyCluster,
                                                                             projCode, orgId, admin1, admin2, 
                                                                             DBNull.Value, DBNull.Value, cbReported, 1 });
         }
