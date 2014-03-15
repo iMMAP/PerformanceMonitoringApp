@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Data;
 using System.Web.UI.WebControls;
+using System.Linq;
 using BusinessLogic;
 using SRFROWCA.Common;
+
 
 namespace SRFROWCA.Pages
 {
@@ -46,7 +48,8 @@ namespace SRFROWCA.Pages
 
         private DataTable GetUserProjects()
         {
-            DataTable dt = DBContext.GetData("GetOPSAndORSUserProjects", new object[] { UserInfo.GetCountry, UserInfo.GetOrganization });
+            bool? isOPSProject = null;
+            DataTable dt = DBContext.GetData("GetOrgProjectsOnLocation", new object[] { UserInfo.EmergencyCountry, UserInfo.Organization, isOPSProject });
             Session["testprojectdata"] = dt;
             return dt;
         }
@@ -132,15 +135,15 @@ namespace SRFROWCA.Pages
             DataTable dtIndicators = new DataTable();
 
             int projectId = Convert.ToInt32(rblProjects.SelectedValue);
-            DataTable dt = GetProjectCluster(projectId);
-
-            if (dt.Rows.Count > 0)
+            int projectClusterId = 0;
+            using (ORSEntities db = new ORSEntities())
             {
-                int clusterId = Convert.ToInt32(dt.Rows[0]["ClusterId"].ToString());
-                int isORS = Convert.ToInt32(dt.Rows[0]["IsORS"].ToString());
-                int emgId = 1;
-                int locationId = UserInfo.GetCountry;
-                dtIndicators = DBContext.GetData("GetOPSandORSProjectIndicators", new object[] { emgId, clusterId, locationId, projectId, isORS, 1 });
+                projectClusterId = db.Projects.Where(x => x.ProjectId == projectId).Select(y => y.EmergencyClusterId).SingleOrDefault();
+            }
+
+            if (projectClusterId > 0)
+            {
+                dtIndicators = DBContext.GetData("GetProjectIndicators", new object[] { projectClusterId, UserInfo.EmergencyCountry, projectId, 1 });
             }
 
             gvIndicators.DataSource = dtIndicators;
@@ -241,13 +244,12 @@ namespace SRFROWCA.Pages
         {
             int projectId = RC.GetSelectedIntVal(rblProjects);
             if (projectId == 0) return;
-            
+
             int index = ((GridViewRow)((CheckBox)sender).NamingContainer).RowIndex;
             CheckBox isAdded = gvIndicators.Rows[index].FindControl("cbIsAdded") as CheckBox;
             if (isAdded == null) return;
 
             int indicatorId = 0;
-            int? orgId = null;
             int.TryParse(gvIndicators.DataKeys[index].Values["ActivityDataId"].ToString(), out indicatorId);
 
             if (indicatorId > 0)
@@ -256,17 +258,8 @@ namespace SRFROWCA.Pages
                 if (cbIsSRP == null) return;
 
                 Guid userId = RC.GetCurrentUserId;
-                //if (cbIsSRP.Checked)
-                {
-                    DBContext.Add("InsertProjectIndicator2", new object[] { projectId, indicatorId, cbIsSRP.Checked, 
-                                                                            isAdded.Checked, orgId, userId, DBNull.Value });
-                }
-                //else
-                //{
-                //    DBContext.Update("UpdateOPSProjectIndicatorStatus", new object[] { projectId, indicatorId,
-                //                                                                        cbIsSRP.Checked, isAdded.Checked, orgId,
-                //                                                                        userId, DBNull.Value });
-                //}
+                int yearId = 10;
+                DBContext.Add("InsertProjectIndicator", new object[] { projectId, indicatorId, UserInfo.EmergencyCountry, yearId, isAdded.Checked, userId, DBNull.Value });
             }
         }
     }

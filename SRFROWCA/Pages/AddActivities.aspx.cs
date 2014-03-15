@@ -71,7 +71,7 @@ namespace SRFROWCA.Pages
         }
         private DataTable GetUserProjects()
         {
-            return DBContext.GetData("GetOPSAndORSUserProjects", new object[] { UserInfo.GetCountry, UserInfo.GetOrganization });
+            return DBContext.GetData("GetOPSAndORSUserProjects", new object[] { UserInfo.Country, UserInfo.Organization });
         }
 
         private void PopulateProjects()
@@ -463,8 +463,8 @@ namespace SRFROWCA.Pages
             // Get details of user from aspnet_Users_Custom tbale
             //DataTable dt = RC.GetUserDetails();
             //if (dt.Rows.Count > 0)
-            LocationId = UserInfo.GetCountry;
-            int organizationId = UserInfo.GetOrganization;
+            LocationId = UserInfo.Country;
+            int organizationId = UserInfo.Organization;
 
             PopulateLocationEmergencies(LocationId);
         }
@@ -710,7 +710,7 @@ namespace SRFROWCA.Pages
             Guid userId = RC.GetCurrentUserId;
             DataTable dt = DBContext.GetData("GetIPData", new object[] { locEmergencyId, locationIds, yearId, monthId,
                                                                         locIdsNotIncluded, RC.SelectedSiteLanguageId, userId,
-                                                                        UserInfo.GetCountry, UserInfo.GetOrganization, projectId});
+                                                                        UserInfo.Country, UserInfo.Organization, projectId});
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 
@@ -733,7 +733,7 @@ namespace SRFROWCA.Pages
             cblAdmin1.DataTextField = "LocationName";
             cblAdmin1.DataSource = dt;
             cblAdmin1.DataBind();
-            lblLocAdmin1.Text = UserInfo.GetCountryName + " Admin 1 Locations";
+            lblLocAdmin1.Text = UserInfo.CountryName + " Admin 1 Locations";
         }
 
         private void PopulateAdmin2(int parentLocationId)
@@ -743,7 +743,7 @@ namespace SRFROWCA.Pages
             cblLocations.DataTextField = "LocationName";
             cblLocations.DataSource = dt;
             cblLocations.DataBind();
-            lblLocAdmin2.Text = UserInfo.GetCountryName + " Admin 2 Locations";
+            lblLocAdmin2.Text = UserInfo.CountryName + " Admin 2 Locations";
         }
 
         private DataTable GetReportLocations()
@@ -947,7 +947,7 @@ namespace SRFROWCA.Pages
             Guid loginUserId = RC.GetCurrentUserId;
 
             ReportId = DBContext.Add("InsertReport", new object[] { yearId, monthId, projId, locEmergencyId,
-                                                                    UserInfo.GetCountry, UserInfo.GetOrganization,
+                                                                    UserInfo.Country, UserInfo.Organization,
                                                                     loginUserId, DBNull.Value });
         }
 
@@ -1108,8 +1108,8 @@ namespace SRFROWCA.Pages
 
                                 if (!(valToSaveT == null))
                                 {
-                                    DBContext.Add("InsertUpdateIndicatorLocationAnnualTarget", new Object[] {UserInfo.GetCountry,
-                                                    UserInfo.GetOrganization, locationIdToSaveT, projectId,
+                                    DBContext.Add("InsertUpdateIndicatorLocationAnnualTarget", new Object[] {UserInfo.Country,
+                                                    UserInfo.Organization, locationIdToSaveT, projectId,
                                                     activityDataId, valToSaveT, 10, userId, DBNull.Value});
                                 }
 
@@ -1171,7 +1171,7 @@ namespace SRFROWCA.Pages
                 GridView gv = new GridView();
                 gv.DataSource = dt;
                 gv.DataBind();
-                string fileName = UserInfo.GetCountryName + "_" + UserInfo.GetOrgName + "_" + ddlMonth.SelectedItem.Text + "_Report";
+                string fileName = UserInfo.CountryName + "_" + UserInfo.OrgName + "_" + ddlMonth.SelectedItem.Text + "_Report";
                 ExportUtility.ExportGridView(gv, fileName, ".xls", Response, true);
             }
             else
@@ -1207,7 +1207,7 @@ namespace SRFROWCA.Pages
             {
                 dt = DBContext.GetData(procedureName, new object[] { locEmergencyId, locationIds, yearId, monthIds,
                                                                         locIdsNotIncluded, RC.SelectedSiteLanguageId, userId,
-                                                                        UserInfo.GetCountry, UserInfo.GetOrganization, projectIds});
+                                                                        UserInfo.Country, UserInfo.Organization, projectIds});
             }
 
             return dt;
@@ -1257,7 +1257,7 @@ namespace SRFROWCA.Pages
                         document.Close();
 
                         Response.ContentType = "application/pdf";
-                        Response.AddHeader("Content-Disposition", string.Format("attachment;filename=Project-{0}.pdf", UserInfo.GetCountryName));
+                        Response.AddHeader("Content-Disposition", string.Format("attachment;filename=Project-{0}.pdf", UserInfo.CountryName));
                         Response.BinaryWrite(outputStream.ToArray());
                     }
                 }

@@ -8,6 +8,7 @@ using SRFROWCA.Common;
 using System.Data;
 using BusinessLogic;
 using System.Globalization;
+using System.Transactions;
 
 namespace SRFROWCA.Pages
 {
@@ -18,19 +19,19 @@ namespace SRFROWCA.Pages
             if (IsPostBack) return;
             UserInfo.UserProfileInfo();
             PopulateClusters();
-            PopulateProjects();
+            LoadProjects();
         }
 
         private void PopulateClusters()
         {
-            UI.FillClusters(ddlCluster, (int)RC.SiteLanguage.English);
+            UI.FillEmergnecyClusters(ddlCluster, UserInfo.Emergency);
             ListItem item = new ListItem("Select Cluster", "0");
             ddlCluster.Items.Insert(0, item);
         }
 
-        private void PopulateProjects()
+        private void LoadProjects()
         {
-            rblProjects.DataValueField = "ORSProjectId";
+            rblProjects.DataValueField = "ProjectId";
             rblProjects.DataTextField = "ProjectTitle";
             rblProjects.DataSource = GetProjects();
             rblProjects.DataBind();
@@ -38,37 +39,43 @@ namespace SRFROWCA.Pages
 
         private void SelectProject()
         {
-            if (ORSProjectId > 0)
+            if (ProjectId > 0)
             {
-                rblProjects.SelectedValue = ORSProjectId.ToString();
+                rblProjects.SelectedValue = ProjectId.ToString();
             }
         }
 
         private DataTable GetProjects()
         {
-            Guid userId = RC.GetCurrentUserId;
-            int locationId = UserInfo.GetCountry;
-            return DBContext.GetData("GetORSProjectsOfUser", new object[] { locationId, userId });
+            int isOPSProjects = 0;
+            return DBContext.GetData("GetOrgProjectsOnLocation", new object[] { UserInfo.EmergencyCountry, UserInfo.Organization, isOPSProjects});
         }
 
         protected void rblProjects_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ORSProjectId = Convert.ToInt32(rblProjects.SelectedValue);
+            ProjectId = Convert.ToInt32(rblProjects.SelectedValue);
 
-            DataTable dt = DBContext.GetData("GetORSProjectDetail", new object[] { ORSProjectId });
-
-            if (dt.Rows.Count > 0)
+            using (ORSEntities re = new ORSEntities())
             {
-                txtProjectTitle.Text = dt.Rows[0]["ProjectTitle"].ToString();
-                txtProjectObjective.Text = dt.Rows[0]["ProjectObjective"].ToString();
-                ddlCluster.SelectedValue = dt.Rows[0]["ClusterId"].ToString();
-                txtFromDate.Text = dt.Rows[0]["ProjectStartDate"].ToString();
-                txtToDate.Text = dt.Rows[0]["ProjectEndDate"].ToString();
-                ltrlProjectCode.Text = dt.Rows[0]["ProjectCode"].ToString();
+                Project p = re.Projects.Where(x => x.ProjectId == ProjectId).SingleOrDefault();
+                if (p != null)
+                {
+                    ltrlProjectCode.Text = p.ProjectCode;
+                    txtProjectTitle.Text = p.ProjectTitle;
+                    txtProjectObjective.Text = p.ProjectObjective;
+                    ddlCluster.SelectedValue = p.EmergencyClusterId.ToString();
+                    txtFromDate.Text = p.ProjectStartDate != null ? p.ProjectStartDate.Value.ToString("MM/dd/yyyy") : "";
+                    txtToDate.Text = p.ProjectEndDate != null ? p.ProjectEndDate.Value.ToString("MM/dd/yyyy") : "";
+                }
             }
         }
 
         protected void btnCreateProject_Click(object sender, EventArgs e)
+        {
+            ClearProjectControls();
+        }
+
+        private void ClearProjectControls()
         {
             rblProjects.ClearSelection();
             txtProjectTitle.Text = "";
@@ -77,7 +84,7 @@ namespace SRFROWCA.Pages
             txtToDate.Text = "";
             ltrlProjectCode.Text = "";
             ddlCluster.SelectedValue = "0";
-            ORSProjectId = 0;
+            ProjectId = 0;
         }
 
         protected void btnSaveClose_Click(object sender, EventArgs e)
@@ -89,7 +96,7 @@ namespace SRFROWCA.Pages
         protected void btnSave_Click(object sender, EventArgs e)
         {
             Save();
-            PopulateProjects();
+            LoadProjects();
             SelectProject();
             SelctProjectCode();
             ShowMessage("Your Data Saved Successfuly!");
@@ -107,13 +114,54 @@ namespace SRFROWCA.Pages
 
         protected void btnDeleteProject_Click(object sender, EventArgs e)
         {
+            if (!IsProjectBeingUsed())
+            {
+                DeleteProject();
+                LoadProjects();
+                ClearProjectControls();
+            }
+            else
+            {
+                ShowMessage("This project can not be deleted becasue its being used in reports!", RC.NotificationType.Error);
+            }
+        }
 
+        private bool IsProjectBeingUsed()
+        {
+            using (ORSEntities db = new ORSEntities())
+            {
+                int projCount = db.Reports.Where(x => x.ProjectId == ProjectId).Count();
+                return projCount > 0;
+            }
+        }
+
+        private void DeleteProject()
+        {
+            using (TransactionScope scope = new TransactionScope())
+            {
+                using (ORSEntities db = new ORSEntities())
+                {
+                    List<ProjectOrganization> projOrgs = db.ProjectOrganizations.Where(x => x.ProjectId == ProjectId).ToList<ProjectOrganization>();
+                    foreach (ProjectOrganization po in projOrgs)
+                    {
+                        db.ProjectOrganizations.DeleteObject(po);
+                    }
+
+                    Project project = db.Projects.Where(x => x.ProjectId == ProjectId).SingleOrDefault();
+                    if (project != null)
+                    {
+                        db.Projects.DeleteObject(project);
+                    }
+                    db.SaveChanges();
+                }
+                scope.Complete();
+            }
         }
 
         private void Save()
         {
-            int locationId = UserInfo.GetCountry;
-            int orgId = UserInfo.GetOrganization;
+            int locationId = UserInfo.EmergencyCountry;
+            int orgId = UserInfo.Organization;
             string title = txtProjectTitle.Text.Trim();
             string objective = txtProjectObjective.Text.Trim();
             int clusterId = Convert.ToInt32(ddlCluster.SelectedValue);
@@ -126,19 +174,18 @@ namespace SRFROWCA.Pages
                                 DateTime.ParseExact(txtToDate.Text.Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture) :
                                 (DateTime?)null;
             Guid userId = RC.GetCurrentUserId;
-            //int projectId = RC.GetSelectedIntVal(rblProjects);
 
             if (locationId > 0 && clusterId > 0)
             {
-                if (ORSProjectId > 0)
+                if (ProjectId > 0)
                 {
                     using (ORSEntities re = new ORSEntities())
                     {
-                        ORSProject project = re.ORSProjects.Single(p => p.ORSProjectId == ORSProjectId);
+                        Project project = re.Projects.Single(p => p.ProjectId == ProjectId);
                         project.ProjectTitle = title;
                         project.ProjectObjective = objective;
-                        project.ClusterId = clusterId;
-                        project.LocationId = locationId;
+                        project.EmergencyClusterId = clusterId;
+                        project.LocationEmergencyId = locationId;
                         project.ProjectStartDate = startDate;
                         project.ProjectEndDate = endDate;
                         project.UpdatedById = userId;
@@ -148,10 +195,9 @@ namespace SRFROWCA.Pages
                 }
                 else
                 {
-                    ORSProjectId = DBContext.Add("InsertProject", new object[] { title, objective, clusterId, locationId,
+                    ProjectId = DBContext.Add("InsertProject", new object[] { title, objective, clusterId, locationId,
                                                              orgId, startDate, endDate, userId, DBNull.Value });
                 }
-
             }
         }
 
@@ -160,7 +206,7 @@ namespace SRFROWCA.Pages
             string projectCode = "";
             using (ORSEntities re = new ORSEntities())
             {
-                projectCode = re.ORSProjects.Where(p => p.ORSProjectId == ORSProjectId)
+                projectCode = re.Projects.Where(p => p.ProjectId == ProjectId)
                                 .Select(p => p.ProjectCode).SingleOrDefault();
             }
 
@@ -172,21 +218,21 @@ namespace SRFROWCA.Pages
             RC.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, true, 500);
         }
 
-        public int ORSProjectId
+        public int ProjectId
         {
             get
             {
-                int orsProjectId = 0;
-                if (ViewState["ORSProjectId"] != null)
+                int projectId = 0;
+                if (ViewState["ProjectId"] != null)
                 {
-                    int.TryParse(ViewState["ORSProjectId"].ToString(), out orsProjectId);
+                    int.TryParse(ViewState["ProjectId"].ToString(), out projectId);
                 }
 
-                return orsProjectId;
+                return projectId;
             }
             set
             {
-                ViewState["ORSProjectId"] = value.ToString();
+                ViewState["ProjectId"] = value.ToString();
             }
         }
     }
