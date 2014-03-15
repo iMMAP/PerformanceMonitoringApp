@@ -46,7 +46,7 @@ namespace SRFROWCA
                         spnManageActivities.InnerText = "SRP Activities";
 
                         menuManageProjects.HRef = "~/ClusterLead/ProjectsListing.aspx";
-                        spnManageProject.InnerText = UserInfo.GetCountryName + " Projects";
+                        spnManageProject.InnerText = UserInfo.CountryName + " Projects";
 
                         menuDataEntry.Visible = false;
                     }
