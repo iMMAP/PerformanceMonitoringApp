@@ -101,6 +101,36 @@ namespace SRFROWCA.Common
 
         #endregion
 
+        #region Cluster Methods
+
+        internal static DataTable GetClusters()
+        {
+            return DBContext.GetData("GetAllClusters", new object[] { RC.SelectedSiteLanguageId });
+        }
+
+        internal static object GetEmergencyClusters(int emergencyId)
+        {
+            //return DBContext.GetData("GetEmergencyClusters", new object[] { emergencyId, RC.SelectedSiteLanguageId });
+            using (ORSEntities db = new ORSEntities())
+            {
+                return(
+                            from ec in db.EmergencyClusters
+                            join cl in db.Clusters on ec.ClusterId equals cl.ClusterId
+                            join em in db.Emergencies on ec.EmergencyId equals em.EmergencyId
+                            where ec.EmergencyId == emergencyId
+                            && cl.SiteLanguageId == SelectedSiteLanguageId
+                            && em.SiteLanguageId == SelectedSiteLanguageId
+                            select new
+                            {
+                                ec.EmergencyClusterId,
+                                cl.ClusterName
+                            }
+                    ).ToList();
+            }
+        }
+
+        #endregion
+
         #region Logframe
 
         internal static DataTable GetObjectives()
@@ -257,8 +287,8 @@ namespace SRFROWCA.Common
 
         internal static DataTable GetUserDetails()
         {
-            Guid userId = GetCurrentUserId;   
-            return DBContext.GetData("GetUserDetails", new object[] {1,  userId });
+            Guid userId = GetCurrentUserId;
+            return DBContext.GetData("GetUserDetails", new object[] { 1, userId });
         }
 
         public static Guid GetCurrentUserId

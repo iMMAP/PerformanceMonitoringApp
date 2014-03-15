@@ -27,20 +27,11 @@ namespace SRFROWCA.Common
         }
 
         // Populate Emergency Clusters drop down.
-        internal static void FillEmergnecyClusters(CheckBoxList cbl, DataTable dt)
+        internal static void FillEmergnecyClusters(ListControl cbl, int emergencyId)
         {
             cbl.DataValueField = "EmergencyClusterId";
             cbl.DataTextField = "ClusterName";
-            cbl.DataSource = dt;
-            cbl.DataBind();
-        }
-
-        // Populate Clusters Check Box List.
-        internal static void FillClustersCheckBoxList(CheckBoxList cbl, DataTable dt)
-        {
-            cbl.DataValueField = "ClusterId";
-            cbl.DataTextField = "ClusterName";
-            cbl.DataSource = dt;
+            cbl.DataSource = RC.GetEmergencyClusters(emergencyId);
             cbl.DataBind();
         }
 
