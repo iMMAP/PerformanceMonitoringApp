@@ -101,13 +101,6 @@
             <div class="containerDataEntryProjectsInner">
                 <table>
                     <tr>
-                        <td colspan="2" style="display: none">
-                            <asp:DropDownList ID="ddlEmergency" runat="server" Width="350px" OnSelectedIndexChanged="ddlEmergency_SelectedIndexChanged"
-                                onchange="needToConfirm = false;" AutoPostBack="True" meta:resourcekey="ddlEmergencyResource1">
-                            </asp:DropDownList>
-                            <asp:RequiredFieldValidator ID="rfvEmergency" runat="server" ErrorMessage="Select Emergency"
-                                InitialValue="0" Text="*" ControlToValidate="ddlEmergency" meta:resourcekey="rfvEmergencyResource1"></asp:RequiredFieldValidator>
-                        </td>
                         <td>
                             <label>
                                 <asp:Localize ID="lzeYearMonth" runat="server" Text="
@@ -236,7 +229,7 @@
                             </asp:BoundField>
                             <asp:TemplateField HeaderText="Project Code" ItemStyle-Wrap="false" meta:resourcekey="TemplateFieldResource1">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblProjectcode" runat="server" Text='<%# Eval("ClusterName") %>' ToolTip='<%# Eval("ProjectTitle") %>'></asp:Label>
+                                    <asp:Label ID="lblProjectcode" runat="server" Text='<%# Eval("ProjectCode") %>' ToolTip='<%# Eval("ProjectTitle") %>'></asp:Label>
                                 </ItemTemplate>
                                 <ItemStyle Wrap="False"></ItemStyle>
                             </asp:TemplateField>

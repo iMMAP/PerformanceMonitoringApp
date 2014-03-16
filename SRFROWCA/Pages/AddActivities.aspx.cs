@@ -33,8 +33,7 @@ namespace SRFROWCA.Pages
             if (!IsPostBack)
             {
                 UserInfo.UserProfileInfo();
-                PopulateDropDowns();
-                PopulateLocations(LocationId);
+                PopulateLocations();
                 PopulateYears();
                 PopulateMonths();
 
@@ -71,14 +70,16 @@ namespace SRFROWCA.Pages
         }
         private DataTable GetUserProjects()
         {
-            return DBContext.GetData("GetOPSAndORSUserProjects", new object[] { UserInfo.Country, UserInfo.Organization });
+            bool? isOPSProject = null;
+            return DBContext.GetData("GetOrgProjectsOnLocation", new object[] { UserInfo.EmergencyCountry, UserInfo.Organization,  isOPSProject});
         }
 
         private void PopulateProjects()
         {
-            rblProjects.DataValueField = "ProjectId";
-            rblProjects.DataTextField = "ProjectCode";
             DataTable dt = GetUserProjects();
+
+            rblProjects.DataValueField = "ProjectId";
+            rblProjects.DataTextField = "ProjectCode";            
             rblProjects.DataSource = dt;
             rblProjects.DataBind();
 
@@ -458,32 +459,6 @@ namespace SRFROWCA.Pages
             }
         }
 
-        private void PopulateDropDowns()
-        {
-            // Get details of user from aspnet_Users_Custom tbale
-            //DataTable dt = RC.GetUserDetails();
-            //if (dt.Rows.Count > 0)
-            LocationId = UserInfo.Country;
-            int organizationId = UserInfo.Organization;
-
-            PopulateLocationEmergencies(LocationId);
-        }
-
-        // Populate Emergency Drop Down.
-        private void PopulateLocationEmergencies(int locationId)
-        {
-            ddlEmergency.DataValueField = "EmergencyId";
-            ddlEmergency.DataTextField = "EmergencyName";
-
-            ddlEmergency.DataSource = GetLocationEmergencies(locationId);
-            ddlEmergency.DataBind();
-
-            if (ddlEmergency.Items.Count > 1)
-            {
-                ListItem item = new ListItem("Select Emergency", "0");
-                ddlEmergency.Items.Insert(0, item);
-            }
-        }
         private DataTable GetLocationEmergencies(int locationId)
         {
             DataTable dt = DBContext.GetData("GetEmergencyOnLocation", new object[] { locationId, RC.SelectedSiteLanguageId });
@@ -693,9 +668,6 @@ namespace SRFROWCA.Pages
 
         private DataTable GetActivities()
         {
-            int locEmergencyId = 0;
-            int.TryParse(ddlEmergency.SelectedValue, out locEmergencyId);
-
             int yearId = 0;
             int.TryParse(ddlYear.SelectedValue, out yearId);
 
@@ -706,24 +678,24 @@ namespace SRFROWCA.Pages
 
             string locationIds = GetSelectedLocations();
             string locIdsNotIncluded = GetNotSelectedLocations();
-
             Guid userId = RC.GetCurrentUserId;
-            DataTable dt = DBContext.GetData("GetIPData", new object[] { locEmergencyId, locationIds, yearId, monthId,
+
+            DataTable dt = DBContext.GetData("GetIPData", new object[] { UserInfo.EmergencyCountry, locationIds, yearId, monthId,
                                                                         locIdsNotIncluded, RC.SelectedSiteLanguageId, userId,
-                                                                        UserInfo.Country, UserInfo.Organization, projectId});
+                                                                        UserInfo.Organization, projectId});
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 
         private void AddLocationsInSelectedList()
         {
-            PopulateLocations(LocationId);
+            PopulateLocations();
         }
 
-        private void PopulateLocations(int parentLocationId)
+        private void PopulateLocations()
         {
-            PopulateAdmin1(parentLocationId);
-            PopulateAdmin2(parentLocationId);
-
+            int countryId = UserInfo.Country;
+            PopulateAdmin1(countryId);
+            PopulateAdmin2(countryId);
         }
 
         private void PopulateAdmin1(int parentLocationId)
@@ -761,10 +733,9 @@ namespace SRFROWCA.Pages
                 // the appropriate template property.
 
                 string columnName = column.ColumnName;
-                if (!(columnName == "ReportId" || columnName == "ClusterName" || columnName == "Objective" ||
-                    columnName == "HumanitarianPriority" || columnName == "SecondaryCluster" || columnName == "ActivityName" ||
-                    columnName == "DataName" || columnName == "IsActive" || columnName == "ActivityDataId" ||
-                    columnName == "ProjectTitle" || columnName == "ProjectId" ||
+                if (!(columnName == "ReportId" || columnName == "ProjectCode" || columnName == "Objective" ||
+                    columnName == "HumanitarianPriority" || columnName == "ActivityName" || columnName == "DataName" ||
+                    columnName == "ActivityDataId" || columnName == "ProjectTitle" || columnName == "ProjectId" ||
                     columnName == "ObjAndPrId" || columnName == "ObjectiveId" || columnName == "HumanitarianPriorityId" ||
                     columnName == "objAndPrAndPId" || columnName == "objAndPId" || columnName == "PrAndPId"))
                 {
@@ -939,14 +910,13 @@ namespace SRFROWCA.Pages
 
         private void SaveReportMainInfo()
         {
-            int locEmergencyId = Convert.ToInt32(ddlEmergency.SelectedValue);
             int yearId = RC.GetSelectedIntVal(ddlYear);
             int monthId = RC.GetSelectedIntVal(ddlMonth);
             int projId = RC.GetSelectedIntVal(rblProjects);
 
             Guid loginUserId = RC.GetCurrentUserId;
 
-            ReportId = DBContext.Add("InsertReport", new object[] { yearId, monthId, projId, locEmergencyId,
+            ReportId = DBContext.Add("InsertReport", new object[] { yearId, monthId, projId, UserInfo.EmergencyCountry,
                                                                     UserInfo.Country, UserInfo.Organization,
                                                                     loginUserId, DBNull.Value });
         }
@@ -1183,9 +1153,6 @@ namespace SRFROWCA.Pages
 
         private DataTable GetProjectsData(bool isPivot)
         {
-            int locEmergencyId = 0;
-            int.TryParse(ddlEmergency.SelectedValue, out locEmergencyId);
-
             int yearId = 0;
             int.TryParse(ddlYear.SelectedValue, out yearId);
 
@@ -1205,7 +1172,7 @@ namespace SRFROWCA.Pages
             DataTable dt = new DataTable();
             if (!string.IsNullOrEmpty(monthIds) && !string.IsNullOrEmpty(projectIds))
             {
-                dt = DBContext.GetData(procedureName, new object[] { locEmergencyId, locationIds, yearId, monthIds,
+                dt = DBContext.GetData(procedureName, new object[] { UserInfo.EmergencyCountry, locationIds, yearId, monthIds,
                                                                         locIdsNotIncluded, RC.SelectedSiteLanguageId, userId,
                                                                         UserInfo.Country, UserInfo.Organization, projectIds});
             }
@@ -1297,24 +1264,6 @@ namespace SRFROWCA.Pages
             set
             {
                 ViewState["ReportId"] = value.ToString();
-            }
-        }
-
-        public int LocationId
-        {
-            get
-            {
-                int locationId = 0;
-                if (ViewState["LocationId"] != null)
-                {
-                    int.TryParse(ViewState["LocationId"].ToString(), out locationId);
-                }
-
-                return locationId;
-            }
-            set
-            {
-                ViewState["LocationId"] = value.ToString();
             }
         }
 

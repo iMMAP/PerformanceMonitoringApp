@@ -185,7 +185,7 @@ namespace SRFROWCA.Pages
                         project.ProjectTitle = title;
                         project.ProjectObjective = objective;
                         project.EmergencyClusterId = clusterId;
-                        project.LocationEmergencyId = locationId;
+                        project.EmergencyLocationId = locationId;
                         project.ProjectStartDate = startDate;
                         project.ProjectEndDate = endDate;
                         project.UpdatedById = userId;
