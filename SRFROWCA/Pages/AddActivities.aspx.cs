@@ -1164,10 +1164,10 @@ namespace SRFROWCA.Pages
 
             Guid userId = RC.GetCurrentUserId;
 
-            string procedureName = "GetProjectsReportData";
+            string procedureName = "GetProjectsReportDataOfMultipleProjectsAndMonths";
             if (!isPivot)
             {
-                procedureName = "GetProjectsReportDataWithLocations";
+                procedureName = "GetProjectsDataByLocations";
             }
 
             DataTable dt = new DataTable();
