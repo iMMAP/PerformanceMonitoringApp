@@ -185,7 +185,7 @@
             <div class="tablegrid">
                 <div id="scrolledGridView" style="overflow-x: auto; width: 100%;">
                     <asp:GridView ID="gvActivities" runat="server" AutoGenerateColumns="False" HeaderStyle-BackColor="ButtonFace"
-                        DataKeyNames="ActivityDataId" CssClass="imagetable" Width="100%" meta:resourcekey="gvActivitiesResource1"
+                        DataKeyNames="ActivityDataId,ProjectIndicatorId" CssClass="imagetable" Width="100%" meta:resourcekey="gvActivitiesResource1"
                         OnRowDataBound="gvActivities_RowDataBound">
                         <HeaderStyle BackColor="Control"></HeaderStyle>
                         <RowStyle CssClass="istrow" />

@@ -737,7 +737,8 @@ namespace SRFROWCA.Pages
                     columnName == "HumanitarianPriority" || columnName == "ActivityName" || columnName == "DataName" ||
                     columnName == "ActivityDataId" || columnName == "ProjectTitle" || columnName == "ProjectId" ||
                     columnName == "ObjAndPrId" || columnName == "ObjectiveId" || columnName == "HumanitarianPriorityId" ||
-                    columnName == "objAndPrAndPId" || columnName == "objAndPId" || columnName == "PrAndPId"))
+                    columnName == "objAndPrAndPId" || columnName == "objAndPId" || columnName == "PrAndPId" ||
+                    columnName == "ProjectIndicatorId"))
                 {
                     if (columnName.Contains("_2-ACCUM"))
                     {
@@ -913,12 +914,9 @@ namespace SRFROWCA.Pages
             int yearId = RC.GetSelectedIntVal(ddlYear);
             int monthId = RC.GetSelectedIntVal(ddlMonth);
             int projId = RC.GetSelectedIntVal(rblProjects);
-
             Guid loginUserId = RC.GetCurrentUserId;
-
             ReportId = DBContext.Add("InsertReport", new object[] { yearId, monthId, projId, UserInfo.EmergencyCountry,
-                                                                    UserInfo.Country, UserInfo.Organization,
-                                                                    loginUserId, DBNull.Value });
+                                                                    UserInfo.Organization, loginUserId, DBNull.Value });
         }
 
         private bool IsDataExistsToSave()
@@ -1005,6 +1003,8 @@ namespace SRFROWCA.Pages
         private void SaveReportDetails()
         {
             int activityDataId = 0;
+            int projIndicatorId = 0;
+            int yearId = RC.GetSelectedIntVal(ddlYear);
 
             foreach (GridViewRow row in gvActivities.Rows)
             {
@@ -1012,6 +1012,7 @@ namespace SRFROWCA.Pages
                 {
                     int projectId = RC.GetSelectedIntVal(rblProjects);
                     activityDataId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString());
+                    projIndicatorId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["ProjectIndicatorId"].ToString());
 
                     int colummCounts = gvActivities.Columns.Count;
                     DataTable dtActivities = (DataTable)Session["dtActivities"];
@@ -1078,9 +1079,9 @@ namespace SRFROWCA.Pages
 
                                 if (!(valToSaveT == null))
                                 {
-                                    DBContext.Add("InsertUpdateIndicatorLocationAnnualTarget", new Object[] {UserInfo.Country,
+                                    DBContext.Add("InsertUpdateIndicatorLocationAnnualTarget", new Object[] {UserInfo.EmergencyCountry,
                                                     UserInfo.Organization, locationIdToSaveT, projectId,
-                                                    activityDataId, valToSaveT, 10, userId, DBNull.Value});
+                                                    activityDataId, valToSaveT, yearId, projIndicatorId, userId, DBNull.Value});
                                 }
 
                                 if (!(valToSaveA == null))
