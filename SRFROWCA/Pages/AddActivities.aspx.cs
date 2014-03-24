@@ -159,35 +159,35 @@ namespace SRFROWCA.Pages
                 string txtHP = e.Row.Cells[1].Text;
                 if (txtHP == "1")
                 {
-                    imghp.ImageUrl = "~/images/icon/hp1.png";
+                    imghp.ImageUrl = "~/assets/orsimages/icon/hp1.png";
                     imghp.ToolTip = RC.SelectedSiteLanguageId == 2 ?
                         "Répondre aux conséquences humanitaires dues aux catastrophes naturelles (inondations, etc.)" :
                         "Addressing the humanitarian impact Natural disasters (floods, etc.)";
                 }
                 else if (txtHP == "2")
                 {
-                    imghp.ImageUrl = "~/images/icon/hp2.png";
+                    imghp.ImageUrl = "~/assets/orsimages/icon/hp2.png";
                     imghp.ToolTip = RC.SelectedSiteLanguageId == 2 ?
                         "Répondre aux conséquences humanitaires dues aux conflits (PDIs, refugies, protection, etc.)" :
                         "Addressing the humanitarian impact of Conflict (IDPs, refugees, protection, etc.)";
                 }
                 else if (txtHP == "3")
                 {
-                    imghp.ImageUrl = "~/images/icon/hp3.png";
+                    imghp.ImageUrl = "~/assets/orsimages/icon/hp3.png";
                     imghp.ToolTip = RC.SelectedSiteLanguageId == 2 ?
                         "Répondre aux conséquences humanitaires dues aux épidémies (cholera, paludisme, etc.)" :
                         "Addressing the humanitarian impact of Epidemics (cholera, malaria, etc.)";
                 }
                 else if (txtHP == "4")
                 {
-                    imghp.ImageUrl = "~/images/icon/hp4.png";
+                    imghp.ImageUrl = "~/assets/orsimages/icon/hp4.png";
                     imghp.ToolTip = RC.SelectedSiteLanguageId == 2 ?
                         "Répondre aux conséquences humanitaires dues à l’insécurité alimentaire" :
                         "Addressing the humanitarian impact of Food insecurity";
                 }
                 else if (txtHP == "5")
                 {
-                    imghp.ImageUrl = "~/images/icon/hp5.png";
+                    imghp.ImageUrl = "~/assets/orsimages/icon/hp5.png";
                     imghp.ToolTip = RC.SelectedSiteLanguageId == 2 ?
                         "Répondre aux conséquences humanitaires dues à la malnutrition" :
                         "Addressing the humanitarian impact of Malnutrition";
@@ -204,19 +204,19 @@ namespace SRFROWCA.Pages
 
                 if (txt.Contains("1"))
                 {
-                    imgObj.ImageUrl = "~/images/icon/so1.png";
+                    imgObj.ImageUrl = "~/assets/orsimages/icon/so1.png";
                     imgObj.ToolTip = RC.SelectedSiteLanguageId == 2 ? "OBJECTIF STRATÉGIQUE N°1 : Recueillir les données sur les risques et les vulnérabilités, les analyser et intégrer les résultats dans la programmation humanitaire et de développement." :
                         "STRATEGIC OBJECTIVE 1: Track and analyse risk and vulnerability, integrating findings into humanitarian and evelopment programming.";
                 }
                 else if (txt.Contains("2"))
                 {
-                    imgObj.ImageUrl = "~/images/icon/so2.png";
+                    imgObj.ImageUrl = "~/assets/orsimages/icon/so2.png";
                     imgObj.ToolTip = RC.SelectedSiteLanguageId == 2 ? "OBJECTIF STRATÉGIQUE N°2 : Soutenir les populations vulnérables à mieux faire face aux chocs en répondant aux signaux d’alerte de manière anticipée, réduisant la durée du relèvement post-crise et renforçant les capacités des acteurs nationaux." :
                         "STRATEGIC OBJECTIVE 2: Support vulnerable populations to better cope with shocks by responding earlier to warning signals, by reducing post-crisis recovery times and by building capacity of national actors.";
                 }
                 else if (txt.Contains("3"))
                 {
-                    imgObj.ImageUrl = "~/images/icon/so3.png";
+                    imgObj.ImageUrl = "~/assets/orsimages/icon/so3.png";
                     imgObj.ToolTip = RC.SelectedSiteLanguageId == 2 ? "OBJECTIF STRATÉGIQUE N°3 : Fournir aux personnes en situation d’urgence une assistance coordonnée et intégrée, nécessaire à leur survie." :
                         "STRATEGIC OBJECTIVE 3: Deliver coordinated and integrated life-saving assistance to people affected by emergencies.";
                 }
@@ -922,33 +922,33 @@ namespace SRFROWCA.Pages
         private bool IsDataExistsToSave()
         {
             bool returnValue = false;
-            foreach (GridViewRow row in gvActivities.Rows)
-            {
-                if (row.RowType == DataControlRowType.DataRow)
-                {
-                    DataTable dtActivities = (DataTable)Session["dtActivities"];
+            //foreach (GridViewRow row in gvActivities.Rows)
+            //{
+            //    if (row.RowType == DataControlRowType.DataRow)
+            //    {
+            //        DataTable dtActivities = (DataTable)Session["dtActivities"];
 
-                    List<int> dataSave = new List<int>();
-                    foreach (DataColumn dc in dtActivities.Columns)
-                    {
-                        string colName = dc.ColumnName;
-                        int locationId = 0;
-                        HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
-                        if (hf != null)
-                        {
-                            locationId = Convert.ToInt32(hf.Value);
-                            if (locationId > 0)
-                            {
-                                returnValue = true;
-                                break;
-                            }
-                        }
-                    }
+            //        List<int> dataSave = new List<int>();
+            //        foreach (DataColumn dc in dtActivities.Columns)
+            //        {
+            //            string colName = dc.ColumnName;
+            //            int locationId = 0;
+            //            HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
+            //            if (hf != null)
+            //            {
+            //                locationId = Convert.ToInt32(hf.Value);
+            //                if (locationId > 0)
+            //                {
+            //                    returnValue = true;
+            //                    break;
+            //                }
+            //            }
+            //        }
 
-                    if (returnValue) break;
-                }
-            }
-
+            //        if (returnValue) break;
+            //    }
+            //}
+            returnValue = true;
             return returnValue;
         }
 
@@ -1005,7 +1005,7 @@ namespace SRFROWCA.Pages
             int activityDataId = 0;
             int projIndicatorId = 0;
             int yearId = RC.GetSelectedIntVal(ddlYear);
-
+            Random rnd = new Random();
             foreach (GridViewRow row in gvActivities.Rows)
             {
                 if (row.RowType == DataControlRowType.DataRow)
@@ -1083,7 +1083,7 @@ namespace SRFROWCA.Pages
                                                     UserInfo.Organization, locationIdToSaveT, projectId,
                                                     activityDataId, valToSaveT, yearId, projIndicatorId, userId, DBNull.Value});
                                 }
-
+                                valToSaveA = rnd.Next(1, 15);
                                 if (!(valToSaveA == null))
                                 {
                                     int newReportDetailId = DBContext.Add("InsertReportDetails",
@@ -1104,14 +1104,19 @@ namespace SRFROWCA.Pages
 
         private void GetReportId(DataTable dt)
         {
-            if (dt.Rows.Count > 0)
+            int yearId = RC.GetSelectedIntVal(ddlYear);
+            int monthId = RC.GetSelectedIntVal(ddlMonth);
+            int projectId = RC.GetSelectedIntVal(rblProjects);
+
+            using (ORSEntities db = new ORSEntities())
             {
-                ReportId = dt.Rows[0]["ReportId"].ToString() == "" ? 0 : Convert.ToInt32(dt.Rows[0]["ReportId"].ToString());
-            }
-            else
-            {
-                ReportId = 0;
-            }
+                Report r = db.Reports.Where(x => x.ProjectId == projectId
+                                            && x.YearId == yearId
+                                            && x.MonthId == monthId
+                                            && x.EmergencyLocationId == UserInfo.EmergencyCountry
+                                            && x.OrganizationId == UserInfo.Organization).SingleOrDefault();
+                ReportId = r != null ? r.ReportId : 0;
+            }           
         }
 
         private void RemoveSelectedLocations(ListControl control)
@@ -1154,14 +1159,9 @@ namespace SRFROWCA.Pages
 
         private DataTable GetProjectsData(bool isPivot)
         {
-            int yearId = 0;
-            int.TryParse(ddlYear.SelectedValue, out yearId);
-
+            int yearId = RC.GetSelectedIntVal(ddlYear);
             string monthIds = GetSelectedItems(cblMonths);
             string projectIds = GetSelectedItems(cblExportProjects);
-            string locationIds = "";// GetSelectedLocations();
-            string locIdsNotIncluded = "";// GetNotSelectedLocations();
-
             Guid userId = RC.GetCurrentUserId;
 
             string procedureName = "GetProjectsReportDataOfMultipleProjectsAndMonths";
@@ -1173,9 +1173,12 @@ namespace SRFROWCA.Pages
             DataTable dt = new DataTable();
             if (!string.IsNullOrEmpty(monthIds) && !string.IsNullOrEmpty(projectIds))
             {
-                dt = DBContext.GetData(procedureName, new object[] { UserInfo.EmergencyCountry, locationIds, yearId, monthIds,
-                                                                        locIdsNotIncluded, RC.SelectedSiteLanguageId, userId,
-                                                                        UserInfo.Country, UserInfo.Organization, projectIds});
+                dt = DBContext.GetData(procedureName, new object[] { UserInfo.EmergencyCountry, UserInfo.Organization, yearId, monthIds,
+                                                                        projectIds, RC.SelectedSiteLanguageId, userId});
+
+                //dt = DBContext.GetData(procedureName, new object[] { UserInfo.EmergencyCountry, locationIds, yearId, monthIds,
+                //                                                        locIdsNotIncluded, RC.SelectedSiteLanguageId, userId,
+                //                                                        UserInfo.Country, UserInfo.Organization, projectIds});
             }
 
             return dt;

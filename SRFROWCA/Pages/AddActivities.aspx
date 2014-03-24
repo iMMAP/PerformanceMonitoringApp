@@ -9,9 +9,25 @@
         {
             padding: 0 40px 0 0;
         }
+        
+        textarea, input[type="text"]
+        {
+            border: 1px solid #D5D5D5;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            font-family: inherit;
+            font-size: 11px;
+            line-height: 1.2;
+            padding: 2px 1px;
+            transition-duration: 0.1s;
+            text-align:right;
+        }
     </style>
-    <script type="text/javascript" src="../Scripts/ShowHideObJAndPr.js"></script>
-    <script src="../Scripts/jquery.numeric.min.js" type="text/javascript"></script>
+    <!-- ORS styles -->
+    <link rel="stylesheet" href="../assets/css/ors.css" />
+    <!-- ace styles -->
+    <script type="text/javascript" src="../assets/orsjs/ShowHideObJAndPr.js"></script>
+    <script src="../assets/orsjs/jquery.numeric.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         var needToConfirm = true;
 
@@ -38,19 +54,16 @@
         }
 
         $(function () {
-            $("#format").buttonset();
             $(".numeric1").numeric();
-            $('#gridSearch').on("keyup paste", function () {
-                searchTable($(this).val());
-            });
-
             showHideObj();
             showHidePriority();
+
 
             if (!(/chrom(e|ium)/.test(navigator.userAgent.toLowerCase()))) {
                 var list = '';
                 var list2 = '';
                 var j = 0;
+
                 $(".imagetable th").each(function () {
                     var value = ($(":first-child", this).is(":input"))
                 ? $(":first-child", this).val()
@@ -80,12 +93,12 @@
                 }
             });
 
-            
+
         });
 
         $(document).ready(function () {
             $(".cbltest").find(":checkbox").each(function () {
-                if ($(this).is(':checked')) {                    
+                if ($(this).is(':checked')) {
                     $(this).parent().addClass('highlight');
                 }
             });
@@ -95,6 +108,16 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div id="divMsg">
+    </div>
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+        </script>
+        <ul class="breadcrumb">
+            <li><i class="icon-home home-icon"></i><a href="#">Home</a> </li>
+            <li class="active">Data Entry</li>
+        </ul>
+        <!-- .breadcrumb -->
     </div>
     <div class="containerDataEntryMain">
         <div class="containerDataEntryProjects">
@@ -107,10 +130,10 @@
                                 Year/Month:" meta:resourcekey="lzeYearMonthResource1"></asp:Localize></label>
                         </td>
                         <td>
-                            <asp:DropDownList ID="ddlYear" runat="server" Width="60px" OnSelectedIndexChanged="ddlYear_SelectedIndexChanged"
+                            <asp:DropDownList ID="ddlYear" runat="server" OnSelectedIndexChanged="ddlYear_SelectedIndexChanged"
                                 onchange="needToConfirm = false;" AutoPostBack="True" meta:resourcekey="ddlYearResource1">
                             </asp:DropDownList>
-                            <asp:DropDownList ID="ddlMonth" runat="server" Width="90px" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged"
+                            <asp:DropDownList ID="ddlMonth" runat="server" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged"
                                 onchange="needToConfirm = false;" AutoPostBack="True" meta:resourcekey="ddlMonthResource1">
                             </asp:DropDownList>
                         </td>
@@ -145,19 +168,6 @@
                     </asp:CheckBoxList>
                 </fieldset>
             </div>
-            <div class="containerDataEntryProjectsInner">
-                <fieldset>
-                    <b>
-                        <asp:Localize ID="lzeLgndManageProjects" runat="server" meta:resourcekey="lzeLgndManageProjectsResource1"
-                            Text="&lt;a href=&quot;/Pages/CreateProject.aspx&quot;&gt;Manage Projects&lt;/a&gt;"></asp:Localize></b>
-                    <br />
-                    <br />
-                    <b>
-                        <asp:Localize ID="lzeLgndManageActivities" runat="server" meta:resourcekey="lzeLgndManageActivitiesResource1"
-                            Text="&lt;a href=&quot;/Pages/ManageActivities.aspx&quot;&gt;Manage Activities&lt;/a&gt;"></asp:Localize></b>
-                    <br />
-                </fieldset>
-            </div>
         </div>
         <div class="containerDataEntryGrid">
             <div class="buttonsdiv">
@@ -172,10 +182,12 @@
                 <div class="buttonright2">
                     <asp:Localize ID="lzeExportToText" runat="server" meta:resourcekey="lzeExportToTextResource1"
                         Text="Export To:"></asp:Localize>
-                    <asp:ImageButton ID="btnPDF" runat="server" ImageUrl="~/images/pdf.png" OnClick="btnPDF_Export"
-                        OnClientClick="needToConfirm = false;" CssClass="imgButtonImg" meta:resourcekey="btnPDFResource1" />
-                    <asp:ImageButton ID="btnExcel" runat="server" ImageUrl="~/images/excel.png" OnClick="btnExcel_Export"
-                        OnClientClick="needToConfirm = false;" CssClass="imgButtonImg" meta:resourcekey="btnExcelResource1" />
+                    <asp:ImageButton ID="btnPDF" runat="server" ImageUrl="~/assets/orsimages/pdf.png"
+                        OnClick="btnPDF_Export" OnClientClick="needToConfirm = false;" CssClass="imgButtonImg"
+                        meta:resourcekey="btnPDFResource1" />
+                    <asp:ImageButton ID="btnExcel" runat="server" ImageUrl="~/assets/orsimages/excel.png"
+                        OnClick="btnExcel_Export" OnClientClick="needToConfirm = false;" CssClass="imgButtonImg"
+                        meta:resourcekey="btnExcelResource1" />
                 </div>
                 <div class="savebutton">
                 </div>
@@ -185,8 +197,8 @@
             <div class="tablegrid">
                 <div id="scrolledGridView" style="overflow-x: auto; width: 100%;">
                     <asp:GridView ID="gvActivities" runat="server" AutoGenerateColumns="False" HeaderStyle-BackColor="ButtonFace"
-                        DataKeyNames="ActivityDataId,ProjectIndicatorId" CssClass="imagetable" Width="100%" meta:resourcekey="gvActivitiesResource1"
-                        OnRowDataBound="gvActivities_RowDataBound">
+                        DataKeyNames="ActivityDataId,ProjectIndicatorId" CssClass="imagetable" Width="100%"
+                        meta:resourcekey="gvActivitiesResource1" OnRowDataBound="gvActivities_RowDataBound">
                         <HeaderStyle BackColor="Control"></HeaderStyle>
                         <RowStyle CssClass="istrow" />
                         <AlternatingRowStyle CssClass="altcolor" />
