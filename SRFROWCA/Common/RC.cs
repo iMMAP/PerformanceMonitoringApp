@@ -311,12 +311,12 @@ namespace SRFROWCA.Common
             if (fadeOut)
             {
                 ScriptManager.RegisterStartupScript(page, pageType, UniqueID,
-                    "$('#divMsg').addClass('" + cssClass + "').html('" + message + "').animate({ top: '0' }," + animationTime.ToString() + ").fadeOut(4000, function() {});", true);
+                    "$('#divMsg').addClass('" + cssClass + "').html('" + message + "').animate({ top: '40' }," + animationTime.ToString() + ").fadeOut(4000, function() {});", true);
             }
             else
             {
                 ScriptManager.RegisterStartupScript(page, pageType, UniqueID,
-                "$('#divMsg').addClass('" + cssClass + "').html('" + message + "').animate({ top: '0' }," + animationTime.ToString() + ").click(function(){$(this).animate({top: -$(this).outerHeight()}, 400);});", true);
+                "$('#divMsg').addClass('" + cssClass + "').html('" + message + "').animate({ top: '40' }," + animationTime.ToString() + ").click(function(){$(this).animate({top: -$(this).outerHeight()}, 400);});", true);
             }
         }
 
