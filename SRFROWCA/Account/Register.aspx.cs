@@ -11,23 +11,14 @@ namespace SRFROWCA.Account
 {
     public partial class Register : BasePage
     {
-        protected void Page_PreInit(object sender, EventArgs e)
-        {
-            GZipContents.GZipOutput();
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
 
             if (!this.User.IsInRole("Admin"))
             {
-                //divUserRoles.Visible = false;
-                //ddlLocations.Visible = false;
-                //ltrlLocation.Visible = false;
-
                 this.Form.DefaultButton = this.btnRegister.UniqueID;
-                this.SetFocus(this.txtUserName);
+                
             }
 
             PopulateCountries();
@@ -63,6 +54,7 @@ namespace SRFROWCA.Account
         protected void btnRegister_Click(object sender, EventArgs e)
         {
             bool returnValue = false;
+            string message = "";
             try
             {
                 if (!Valid()) return;
@@ -72,7 +64,7 @@ namespace SRFROWCA.Account
                 // Create New 1)Rider, 2) Places, 3) Route,
                 // 4) Send Email to user to verify account.
                 returnValue = CreateUserAccount();
-                string message = "Account created successfully!";
+                message = "Account created successfully!";
                 if (returnValue)
                 {
                     try
@@ -96,8 +88,7 @@ namespace SRFROWCA.Account
                         {
                             mailBody = "Dear Admin! Please activitate my account " + txtUserName.Text.Trim();
                             Mail.SendMail(from, to, subject, mailBody);
-                            message = @"You have been registered successfully, we will verify your
-                                        credentials and activate your account in few hours!";
+                            message = @"You have been registered successfully, we will verify your credentials and activate your account in few hours!";
                         }
                     }
                     catch
@@ -106,14 +97,19 @@ namespace SRFROWCA.Account
                     }
                 }
 
-                ShowMessage(message, RC.NotificationType.Success, false, 500);
+                //ShowMessage(message, RC.NotificationType.Success, false, 500);
+                
 
-                ClearRegistrationControls();
+                //ClearRegistrationControls();
             }
             catch (Exception ex)
             {
+                message = ex.Message;
                 ShowMessage(ex.Message);
             }
+
+            Session["RegisterMessage"] = message;
+            Response.Redirect("../RegisterSuccess.aspx");
         }
 
         private bool Valid()
@@ -127,7 +123,7 @@ namespace SRFROWCA.Account
             //    message = "Please select at least one country.";
             //}
 
-            if (rbtnClusterLead.Checked && string.IsNullOrEmpty(clusterIds))
+            if (ddlUserRole.SelectedValue.Equals("2") && string.IsNullOrEmpty(clusterIds))
             {
                 message += " Please select your cluster(s).";
             }
@@ -244,15 +240,19 @@ namespace SRFROWCA.Account
         {
             string roleName = "User";
 
-            if (rbtnCountryAdmin.Checked)
+            if (ddlUserRole.SelectedValue.Equals("4"))
             {
-                roleName = "CountryAdmin";
+                roleName = "OCHA";
             }
-            else if (rbtnClusterLead.Checked)
+            else if (ddlUserRole.SelectedValue.Equals("3"))
+            {
+                roleName = "RegionalClusterLead";
+            }
+            else if (ddlUserRole.SelectedValue.Equals("2"))
             {
                 roleName = "ClusterLead";
             }
-            else if (rbtnUser.Checked)
+            else if (ddlUserRole.SelectedValue.Equals("1"))
             {
                 roleName = "User";
             }
@@ -286,12 +286,11 @@ namespace SRFROWCA.Account
         {
             InsertLocationsAndOrg(userId);
             InsertClusters(userId);
-            
         }
 
         private void InsertClusters(Guid userId)
         {
-            if (rbtnClusterLead.Checked)
+            if (ddlUserRole.SelectedValue.Equals("2"))
             {
                 int clusterId = Convert.ToInt32(ddlClusters.SelectedValue);
                 DBContext.Add("InsertASPNetUserCluster", new object[] { userId, clusterId, DBNull.Value });
@@ -317,7 +316,7 @@ namespace SRFROWCA.Account
 
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
         {
-            updMessage.Update();
+            //updMessage.Update();
             RC.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
         }
 

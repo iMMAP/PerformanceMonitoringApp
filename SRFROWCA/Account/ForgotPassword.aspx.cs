@@ -9,17 +9,12 @@ namespace SRFROWCA.Account
 {
     public partial class ForgotPassword : BasePage
     {
-        protected void Page_PreInit(object sender, EventArgs e)
-        {
-            GZipContents.GZipOutput();
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
 
             this.Form.DefaultButton = this.btnSubmit.UniqueID;
-            this.SetFocus(this.txtUserName);
+            this.SetFocus(this.txtEmail);
 
             if (Session["FromResetPageError"] != null)
             {
@@ -117,7 +112,7 @@ namespace SRFROWCA.Account
                                               3WPM Support",
                                               userName, link);
             Mail.SendMail("3wopactivities@gmail.com", toEmail, "Password Change Request", mailBody);
-            
+
         }
 
         private void SaveValuesInDB(string userName, string hash, Guid guid, string dt)
@@ -162,9 +157,9 @@ namespace SRFROWCA.Account
 
         private void ShowMessage(string css, string message)
         {
-            lblMessage.Visible = true;
-            lblMessage.CssClass = css;
-            lblMessage.Text = message;
+            //lblMessage.Visible = true;
+            //lblMessage.CssClass = css;
+            //lblMessage.Text = message;
         }
 
         private void SendNewPasswordToUser(string userName, string email)

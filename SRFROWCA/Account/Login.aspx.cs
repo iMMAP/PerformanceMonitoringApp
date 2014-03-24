@@ -8,14 +8,9 @@ namespace SRFROWCA.Account
 {
     public partial class Login : BasePage
     {
-        protected void Page_PreInit(object sender, EventArgs e)
-        {
-            GZipContents.GZipOutput();
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            RegisterHyperLink.NavigateUrl = "Register.aspx?ReturnUrl=" + HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
+            //RegisterHyperLink.NavigateUrl = "Register.aspx?ReturnUrl=" + HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
 
             if (!IsPostBack)
             {
@@ -60,6 +55,10 @@ namespace SRFROWCA.Account
                 LoginUser.FailureText = "Wrong Username and password combination!";
             }
         }
+
+        protected void btnForgotPassword_Click(object sender, EventArgs e)
+        {}
+
         protected void Page_Error(object sender, EventArgs e)
         {
             // Get last error from the server
