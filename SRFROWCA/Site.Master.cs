@@ -2,6 +2,8 @@
 using System.Web;
 using System.Web.UI.WebControls;
 using SRFROWCA.Common;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
 
 namespace SRFROWCA
 {
@@ -31,48 +33,93 @@ namespace SRFROWCA
         protected void Page_Load(object sender, EventArgs e)
         {
             if (HttpContext.Current.User.Identity.IsAuthenticated)
-            {                
-                LoginStatus.Visible = false;
-                HeadLoginStatus.Visible = true;
-                ResiterStatus.Visible = false;
-                if (!(HttpContext.Current.User.IsInRole("Admin"))
-                    && !(HttpContext.Current.User.IsInRole("CountryAdmin")))
-                {
-                    AdminMenue.Visible = false;
-
-                    if (HttpContext.Current.User.IsInRole("ClusterLead"))
-                    {
-                        menuMyActivities.HRef = "~/ClusterLead/AddSRPActivitiesFromMasterList.aspx";
-                        spnManageActivities.InnerText = "SRP Activities";
-
-                        menuManageProjects.HRef = "~/ClusterLead/ProjectsListing.aspx";
-                        spnManageProject.InnerText = UserInfo.CountryName + " Projects";
-
-                        menuDataEntry.Visible = false;
-                    }
-                    else
-                    {
-                        spnManageActivities.InnerText = "Manage Activities";
-                        spnManageProject.InnerText = "Manage Projects";
-                    }
-                }
-                else
-                {
-                    
-                    menuMyActivities.Visible = false;
-                    menuDataEntry.Visible = false;
-                }
-            }
-            else
             {
-                LoginStatus.Visible = true;
-                HeadLoginStatus.Visible = false;
-                ResiterStatus.Visible = true;
-                AdminMenue.Visible = false;
-                MySettingsMenue.Visible = false;
-                menuMyActivities.Visible = false;
-                menuDataEntry.Visible = false;
+                LoginStatus.Visible = false;
+                spanWelcome.Visible = true;
+                if (HttpContext.Current.User.IsInRole("User"))
+                {
+                    ActiveMenueItem();
+                    
+                }
+                //    LoginStatus.Visible = false;
+                //    //HeadLoginStatus.Visible = true;
+                //    //ResiterStatus.Visible = false;
+                //    if (!(HttpContext.Current.User.IsInRole("Admin"))
+                //        && !(HttpContext.Current.User.IsInRole("CountryAdmin")))
+                //    {
+                //        //AdminMenue.Visible = false;
+
+                //        if (HttpContext.Current.User.IsInRole("ClusterLead"))
+                //        {
+                //            //menuMyActivities.HRef = "~/ClusterLead/AddSRPActivitiesFromMasterList.aspx";
+                //            //spnManageActivities.InnerText = "SRP Activities";
+
+                //            //menuManageProjects.HRef = "~/ClusterLead/ProjectsListing.aspx";
+                //            //spnManageProject.InnerText = UserInfo.CountryName + " Projects";
+
+                //            menuDataEntry.Visible = false;
+                //        }
+                //        else
+                //        {
+                //            //spnManageActivities.InnerText = "Manage Activities";
+                //            //spnManageProject.InnerText = "Manage Projects";
+                //        }
+                //    }
+                //    else
+                //    {
+
+                //        //menuMyActivities.Visible = false;
+                //        menuDataEntry.Visible = false;
+                //    }
+                //}
+                //else
+                //{
+                //    LoginStatus.Visible = true;
+                //    //HeadLoginStatus.Visible = false;
+                //    //ResiterStatus.Visible = true;
+                //    //AdminMenue.Visible = false;
+                //    //MySettingsMenue.Visible = false;
+                //    //menuMyActivities.Visible = false;
+                //    menuDataEntry.Visible = false;
+                //}
             }
+        }
+        private void ActiveMenueItem()
+        {
+            string uri = HttpContext.Current.Request.Url.AbsolutePath;
+            if (uri == "/Pages/AddActivities.aspx")
+            {
+                liDataEntry.Attributes.Add("class", "active");
+            }
+            else if (uri == "/Default.aspx")
+            {
+                liDefault.Attributes.Add("class", "active");
+            }
+            else if (uri == "/Webform1.aspx")
+            {
+                liReports.Attributes.Add("class", "active open");
+                liWebForm1.Attributes.Add("class", "active");
+            }
+
+            //foreach (Control ctrl in nav.Controls)
+            //{
+
+            //    if (ctrl is HtmlAnchor)
+            //    {
+            //        string absoluteURL = ((HtmlAnchor)ctrl).HRef;
+            //        string url = absoluteURL.Substring(absoluteURL.IndexOf('/'));
+            //        string uri = HttpContext.Current.Request.Url.AbsolutePath;
+            //        if (url == uri)
+            //        {
+            //            HtmlGenericControl c = (HtmlGenericControl)ctrl;
+            //            c.Attributes.Add("class", "active");
+            //        }
+                    
+                    
+            //        //if (url == GetCurrentPage())  // <-- you'd need to write that
+            //          //  ctrl.Parent.Attributes.Add("class", "active");
+            //    }
+            //}
         }
 
         protected void lnkLanguageEnglish_Click(object sender, EventArgs e)

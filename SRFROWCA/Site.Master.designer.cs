@@ -40,15 +40,6 @@ namespace SRFROWCA {
         protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
-        /// HeadLoginName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LoginName HeadLoginName;
-        
-        /// <summary>
         /// LoginStatus control.
         /// </summary>
         /// <remarks>
@@ -56,6 +47,24 @@ namespace SRFROWCA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor LoginStatus;
+        
+        /// <summary>
+        /// spanWelcome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor spanWelcome;
+        
+        /// <summary>
+        /// HeadLoginName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LoginName HeadLoginName;
         
         /// <summary>
         /// HeadLoginStatus control.
@@ -67,49 +76,40 @@ namespace SRFROWCA {
         protected global::System.Web.UI.WebControls.LoginStatus HeadLoginStatus;
         
         /// <summary>
-        /// ResiterStatus control.
+        /// liDefault control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor ResiterStatus;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liDefault;
         
         /// <summary>
-        /// AdminMenue control.
+        /// liReports control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor AdminMenue;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liReports;
         
         /// <summary>
-        /// MySettingsMenue control.
+        /// liWebForm1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor MySettingsMenue;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liWebForm1;
         
         /// <summary>
-        /// lnkLanguageEnglish control.
+        /// liDataEntry control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkLanguageEnglish;
-        
-        /// <summary>
-        /// lnkLanguageFrench control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkLanguageFrench;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liDataEntry;
         
         /// <summary>
         /// menuDataEntry control.
@@ -119,42 +119,6 @@ namespace SRFROWCA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor menuDataEntry;
-        
-        /// <summary>
-        /// menuManageProjects control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuManageProjects;
-        
-        /// <summary>
-        /// spnManageProject control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spnManageProject;
-        
-        /// <summary>
-        /// menuMyActivities control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuMyActivities;
-        
-        /// <summary>
-        /// spnManageActivities control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spnManageActivities;
         
         /// <summary>
         /// MainContent control.
