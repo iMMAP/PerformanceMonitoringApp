@@ -183,10 +183,15 @@ namespace SRFROWCA.Common
 
             ddl.DataSource = DBContext.GetData("GetCountries");
             ddl.DataBind();
+        }
 
-            ListItem item = new ListItem("Select Country", "0");
-            ddl.Items.Insert(0, item);
-            ddl.SelectedIndex = 0;
+        internal static void FillCountry(ListControl ddl)
+        {
+            ddl.DataValueField = "LocationId";
+            ddl.DataTextField = "LocationName";
+
+            ddl.DataSource = DBContext.GetData("GetCountries");
+            ddl.DataBind();
         }
 
         internal static void FillPriorities(DropDownList ddl, DataTable dt)

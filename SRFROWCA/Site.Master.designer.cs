@@ -121,6 +121,42 @@ namespace SRFROWCA {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor menuDataEntry;
         
         /// <summary>
+        /// liManageProject control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liManageProject;
+        
+        /// <summary>
+        /// menuManageProjects control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuManageProjects;
+        
+        /// <summary>
+        /// liManageActivity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liManageActivity;
+        
+        /// <summary>
+        /// menuManageActivities control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuManageActivities;
+        
+        /// <summary>
         /// MainContent control.
         /// </summary>
         /// <remarks>

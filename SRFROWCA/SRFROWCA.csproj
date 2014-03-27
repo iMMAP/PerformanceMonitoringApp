@@ -148,14 +148,6 @@
     <Content Include="Admin\EmergencyLocations.aspx" />
     <Content Include="Admin\IndicatorActivities.aspx" />
     <Content Include="Admin\PriorityActivities.aspx" />
-    <Content Include="assets\avatars\avatar.png" />
-    <Content Include="assets\avatars\avatar1.png" />
-    <Content Include="assets\avatars\avatar2.png" />
-    <Content Include="assets\avatars\avatar3.png" />
-    <Content Include="assets\avatars\avatar4.png" />
-    <Content Include="assets\avatars\avatar5.png" />
-    <Content Include="assets\avatars\profile-pic.jpg" />
-    <Content Include="assets\avatars\user.jpg" />
     <Content Include="assets\css\ace-fonts.css" />
     <Content Include="assets\css\ace-rtl.min.css" />
     <Content Include="assets\css\ace-skins.min.css" />
@@ -309,6 +301,7 @@
     <Content Include="assets\orsimages\rind.png" />
     <Content Include="assets\orsimages\rssfeed.png" />
     <Content Include="assets\orsimages\word.png" />
+    <Content Include="assets\orsjs\dashboard.js" />
     <Content Include="assets\orsjs\hc\adapters\mootools-adapter.js" />
     <Content Include="assets\orsjs\hc\adapters\mootools-adapter.src.js" />
     <Content Include="assets\orsjs\hc\adapters\prototype-adapter.js" />
@@ -379,6 +372,7 @@
     <Content Include="ReportsCharts\TargetsAchievedByLocDuration.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Reports\AllData.aspx" />
     <Content Include="UploadSRPLogFrame.aspx" />
     <Content Include="UserManual_files\colorschememapping.xml" />
     <Content Include="UserManual_files\filelist.xml" />
@@ -399,6 +393,7 @@
     <Content Include="ops.Master" />
     <Content Include="DataFeed.ashx" />
     <Content Include="WebForm2.aspx" />
+    <Content Include="WebForm3.aspx" />
     <Content Include="WebForm5.aspx" />
     <Content Include="OPS\OPSActivitiesFeed.ashx" />
     <Content Include="OPS\OPSProjectFeed.ashx" />
@@ -414,6 +409,7 @@
     <None Include="assets\font\fontawesome-webfontf77b.eot" />
     <None Include="assets\font\fontawesome-webfontf77b.ttf" />
     <None Include="assets\font\fontawesome-webfontf77b.woff" />
+    <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -883,6 +879,13 @@
       <DependentUpon>AddActivities.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\AllData.aspx.cs">
+      <DependentUpon>AllData.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\AllData.aspx.designer.cs">
+      <DependentUpon>AllData.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -910,6 +913,13 @@
     </Compile>
     <Compile Include="WebForm2.aspx.designer.cs">
       <DependentUpon>WebForm2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm3.aspx.cs">
+      <DependentUpon>WebForm3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm3.aspx.designer.cs">
+      <DependentUpon>WebForm3.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebForm5.aspx.cs">
       <DependentUpon>WebForm5.aspx</DependentUpon>
@@ -1001,12 +1011,6 @@
   </ItemGroup>
   <ItemGroup>
     <WebReferences Include="Web References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Pages\App_LocalResources\tempAddActivities.aspx.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Pages\App_LocalResources\tempAddActivities.aspx.fr.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="OPS\App_LocalResources\OPSDataEntry.aspx.resx" />

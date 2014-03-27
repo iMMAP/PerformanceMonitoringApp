@@ -21,156 +21,83 @@
         <!-- /.page-header -->
         <div class="row">
             <div class="col-xs-12">
-                <!-- PAGE CONTENT BEGINS -->
-                <div class="alert alert-block alert-success">
-                    <button type="button" class="close" data-dismiss="alert">
-                        <i class="icon-remove"></i>
-                    </button>
-                    <i class="icon-ok green"></i>Welcome to <strong class="green">Ace <small>(v1.2)</small>
-                    </strong>, the lightweight, feature-rich and easy to use admin template.
-                </div>
+                <!-- PAGE CONTENT BEGINS -->               
                 <div class="row">
                     <div class="space-6">
                     </div>
-                    <div class="col-sm-7 infobox-container">
-                        <div class="infobox infobox-green  ">
-                            <div class="infobox-icon">
-                                <i class="icon-comments"></i>
-                            </div>
-                            <div class="infobox-data">
-                                <span class="infobox-data-number">32</span>
-                                <div class="infobox-content">
-                                    comments + 2 reviews</div>
-                            </div>
-                            <div class="stat stat-success">
-                                8%</div>
+                    <div class="col-sm-6 infobox-container">
+                        <script type='text/javascript' src='http://public.tableausoftware.com/javascripts/api/viz_v1.js'></script>
+                        <div class='tableauPlaceholder' style='width: 463px; height: 270px;'>
+                            <noscript>
+                                <a href='#'>
+                                    <img alt='Total Funding per Cluster ' src='http:&#47;&#47;public.tableausoftware.com&#47;static&#47;images&#47;OR&#47;ORS_Dashboard_tabular&#47;Funding&#47;1_rss.png'
+                                        style='border: none' /></a></noscript><object class='tableauViz' width='463' height='250'
+                                            style='display: none;'><param name='host_url' value='http%3A%2F%2Fpublic.tableausoftware.com%2F' />
+                                            <param name='site_root' value='' />
+                                            <param name='name' value='ORS_Dashboard_tabular&#47;Funding' />
+                                            <param name='tabs' value='no' />
+                                            <param name='toolbar' value='yes' />
+                                            <param name='static_image' value='http:&#47;&#47;public.tableausoftware.com&#47;static&#47;images&#47;OR&#47;ORS_Dashboard_tabular&#47;Funding&#47;1.png' />
+                                            <param name='animate_transition' value='yes' />
+                                            <param name='display_static_image' value='yes' />
+                                            <param name='display_spinner' value='yes' />
+                                            <param name='display_overlay' value='yes' />
+                                            <param name='display_count' value='yes' />
+                                            <param name='filter' value='amp;:showVizHome=no' />
+                                        </object>
                         </div>
-                        <div class="infobox infobox-blue  ">
-                            <div class="infobox-icon">
-                                <i class="icon-twitter"></i>
-                            </div>
-                            <div class="infobox-data">
-                                <span class="infobox-data-number">11</span>
-                                <div class="infobox-content">
-                                    new followers</div>
-                            </div>
-                            <div class="badge badge-success">
-                                +32% <i class="icon-arrow-up"></i>
-                            </div>
-                        </div>
-                        <div class="infobox infobox-pink  ">
-                            <div class="infobox-icon">
-                                <i class="icon-shopping-cart"></i>
-                            </div>
-                            <div class="infobox-data">
-                                <span class="infobox-data-number">8</span>
-                                <div class="infobox-content">
-                                    new orders</div>
-                            </div>
-                            <div class="stat stat-important">
-                                4%</div>
-                        </div>
-                        <div class="infobox infobox-red  ">
-                            <div class="infobox-icon">
-                                <i class="icon-beaker"></i>
-                            </div>
-                            <div class="infobox-data">
-                                <span class="infobox-data-number">7</span>
-                                <div class="infobox-content">
-                                    experiments</div>
-                            </div>
-                        </div>
-                        <div class="infobox infobox-orange2  ">
-                            <div class="infobox-chart">
-                                <span class="sparkline" data-values="196,128,202,177,154,94,100,170,224"></span>
-                            </div>
-                            <div class="infobox-data">
-                                <span class="infobox-data-number">6,251</span>
-                                <div class="infobox-content">
-                                    pageviews</div>
-                            </div>
-                            <div class="badge badge-success">
-                                7.2% <i class="icon-arrow-up"></i>
-                            </div>
-                        </div>
-                        <div class="infobox infobox-blue2  ">
-                            <div class="infobox-progress">
-                                <div class="easy-pie-chart percentage" data-percent="42" data-size="46">
-                                    <span class="percent">42</span>%
-                                </div>
-                            </div>
-                            <div class="infobox-data">
-                                <span class="infobox-text">traffic used</span>
-                                <div class="infobox-content">
-                                    <span class="bigger-110">~</span> 58GB remaining
-                                </div>
-                            </div>
-                        </div>
-                        <div class="space-6">
-                        </div>
-                        <div class="infobox infobox-green infobox-small infobox-dark">
-                            <div class="infobox-progress">
-                                <div class="easy-pie-chart percentage" data-percent="61" data-size="39">
-                                    <span class="percent">61</span>%
-                                </div>
-                            </div>
-                            <div class="infobox-data">
-                                <div class="infobox-content">
-                                    Task</div>
-                                <div class="infobox-content">
-                                    Completion</div>
-                            </div>
-                        </div>
-                        <div class="infobox infobox-blue infobox-small infobox-dark">
-                            <div class="infobox-chart">
-                                <span class="sparkline" data-values="3,4,2,3,4,4,2,2"></span>
-                            </div>
-                            <div class="infobox-data">
-                                <div class="infobox-content">
-                                    Earnings</div>
-                                <div class="infobox-content">
-                                    $32,000</div>
-                            </div>
-                        </div>
-                        <div class="infobox infobox-grey infobox-small infobox-dark">
-                            <div class="infobox-icon">
-                                <i class="icon-download-alt"></i>
-                            </div>
-                            <div class="infobox-data">
-                                <div class="infobox-content">
-                                    Downloads</div>
-                                <div class="infobox-content">
-                                    1,205</div>
-                            </div>
+                        Number of reports by month:
+                        <script type='text/javascript' src='http://public.tableausoftware.com/javascripts/api/viz_v1.js'></script>
+                        <div class='tableauPlaceholder' style='width: 463px; height: 237px;'>
+                            <noscript>
+                                <a href='#'>
+                                    <img alt='Number of Reports by Month ' src='http:&#47;&#47;public.tableausoftware.com&#47;static&#47;images&#47;OR&#47;ORS_ReportingMap&#47;Table&#47;1_rss.png'
+                                        style='border: none' /></a></noscript><object class='tableauViz' width='463' height='200'
+                                            style='display: none;'><param name='host_url' value='http%3A%2F%2Fpublic.tableausoftware.com%2F' />
+                                            <param name='site_root' value='' />
+                                            <param name='name' value='ORS_ReportingMap&#47;Table' />
+                                            <param name='tabs' value='no' />
+                                            <param name='toolbar' value='yes' />
+                                            <param name='static_image' value='http:&#47;&#47;public.tableausoftware.com&#47;static&#47;images&#47;OR&#47;ORS_ReportingMap&#47;Table&#47;1.png' />
+                                            <param name='animate_transition' value='yes' />
+                                            <param name='display_static_image' value='yes' />
+                                            <param name='display_spinner' value='yes' />
+                                            <param name='display_overlay' value='yes' />
+                                            <param name='display_count' value='yes' />
+                                            <param name='filter' value='amp;:showVizHome=no' />
+                                        </object>
                         </div>
                     </div>
                     <div class="vspace-sm">
                     </div>
-                    <div class="col-sm-5">
+                    <div class="col-sm-6">
                         <div class="widget-box">
-                            <div class="widget-header widget-header-flat widget-header-small">
-                                <h5>
-                                    <i class="icon-signal"></i>Traffic Sources
-                                </h5>
+                            <div class="widget-header widget-header-flat widget-header-small">                                
                                 <div class="widget-toolbar no-border">
-                                    <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown">
-                                        This Week <i class="icon-angle-down icon-on-right bigger-110"></i>
-                                    </button>
-                                    <ul class="dropdown-menu pull-right dropdown-125 dropdown-lighter dropdown-caret">
-                                        <li class="active"><a href="#" class="blue"><i class="icon-caret-right bigger-110">&nbsp;</i>
-                                            This Week </a></li>
-                                        <li><a href="#"><i class="icon-caret-right bigger-110 invisible">&nbsp;</i> Last Week
-                                        </a></li>
-                                        <li><a href="#"><i class="icon-caret-right bigger-110 invisible">&nbsp;</i> This Month
-                                        </a></li>
-                                        <li><a href="#"><i class="icon-caret-right bigger-110 invisible">&nbsp;</i> Last Month
-                                        </a></li>
-                                    </ul>
                                 </div>
                             </div>
                             <div class="widget-body">
                                 <div class="widget-main">
-                                    <div id="piechart-placeholder">
+                                    Reporting cluster :
+                                    <script type='text/javascript' src='http://public.tableausoftware.com/javascripts/api/viz_v1.js'></script>
+                                    <div class='tableauPlaceholder' style='width: 500px; height: 437px;'>
+                                        <noscript>
+                                            <a href='#'>
+                                                <img alt='Map cluster - January ' src='http:&#47;&#47;public.tableausoftware.com&#47;static&#47;images&#47;OR&#47;ORS_ReportingMap&#47;Mapcluster&#47;1_rss.png'
+                                                    style='border: none' /></a></noscript><object class='tableauViz' width='500' height='437'
+                                                        style='display: none;'><param name='host_url' value='http%3A%2F%2Fpublic.tableausoftware.com%2F' />
+                                                        <param name='site_root' value='' />
+                                                        <param name='name' value='ORS_ReportingMap&#47;Mapcluster' />
+                                                        <param name='tabs' value='no' />
+                                                        <param name='toolbar' value='yes' />
+                                                        <param name='static_image' value='http:&#47;&#47;public.tableausoftware.com&#47;static&#47;images&#47;OR&#47;ORS_ReportingMap&#47;Mapcluster&#47;1.png' />
+                                                        <param name='animate_transition' value='yes' />
+                                                        <param name='display_static_image' value='yes' />
+                                                        <param name='display_spinner' value='yes' />
+                                                        <param name='display_overlay' value='yes' />
+                                                        <param name='display_count' value='yes' />
+                                                        <param name='filter' value='amp;:showVizHome=no' />
+                                                    </object>
                                     </div>
                                     <div class="hr hr8 hr-double">
                                     </div>
@@ -205,110 +132,74 @@
                 <div class="hr hr32 hr-dotted">
                 </div>
                 <div class="row">
-                    <div class="col-sm-5">
+                    <div class="col-sm-6">
                         <div class="widget-box transparent">
-                            <div class="widget-header widget-header-flat">
-                                <h4 class="lighter">
-                                    <i class="icon-star orange"></i>Popular Domains
-                                </h4>
-                                <div class="widget-toolbar">
-                                    <a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a>
-                                </div>
+                            <script type='text/javascript' src='http://public.tableausoftware.com/javascripts/api/viz_v1.js'></script>
+                            <div class='tableauPlaceholder' style='width: 663px; height: 437px;'>
+                                <noscript>
+                                    <a href='#'>
+                                        <img alt='Reporting Status per Cluster ' src='http:&#47;&#47;public.tableausoftware.com&#47;static&#47;images&#47;OR&#47;ORS_Reporting_25March&#47;Clusterreporting&#47;1_rss.png'
+                                            style='border: none' /></a></noscript><object class='tableauViz' width='663' height='437'
+                                                style='display: none;'><param name='host_url' value='http%3A%2F%2Fpublic.tableausoftware.com%2F' />
+                                                <param name='site_root' value='' />
+                                                <param name='name' value='ORS_Reporting_25March&#47;Clusterreporting' />
+                                                <param name='tabs' value='no' />
+                                                <param name='toolbar' value='yes' />
+                                                <param name='static_image' value='http:&#47;&#47;public.tableausoftware.com&#47;static&#47;images&#47;OR&#47;ORS_Reporting_25March&#47;Clusterreporting&#47;1.png' />
+                                                <param name='animate_transition' value='yes' />
+                                                <param name='display_static_image' value='yes' />
+                                                <param name='display_spinner' value='yes' />
+                                                <param name='display_overlay' value='yes' />
+                                                <param name='display_count' value='yes' />
+                                                <param name='filter' value='amp;:showVizHome=no' />
+                                            </object>
                             </div>
-                            <div class="widget-body">
-                                <div class="widget-main no-padding">
-                                    <table class="table table-bordered table-striped">
-                                        <thead class="thin-border-bottom">
-                                            <tr>
-                                                <th>
-                                                    <i class="icon-caret-right blue"></i>name
-                                                </th>
-                                                <th>
-                                                    <i class="icon-caret-right blue"></i>price
-                                                </th>
-                                                <th class="hidden-480">
-                                                    <i class="icon-caret-right blue"></i>status
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    internet.com
-                                                </td>
-                                                <td>
-                                                    <small><s class="red">$29.99</s> </small><b class="green">$19.99</b>
-                                                </td>
-                                                <td class="hidden-480">
-                                                    <span class="label label-info arrowed-right arrowed-in">on sale</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    online.com
-                                                </td>
-                                                <td>
-                                                    <small><s class="red"></s></small><b class="green">$16.45</b>
-                                                </td>
-                                                <td class="hidden-480">
-                                                    <span class="label label-success arrowed-in arrowed-in-right">approved</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    newnet.com
-                                                </td>
-                                                <td>
-                                                    <small><s class="red"></s></small><b class="green">$15.00</b>
-                                                </td>
-                                                <td class="hidden-480">
-                                                    <span class="label label-danger arrowed">pending</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    web.com
-                                                </td>
-                                                <td>
-                                                    <small><s class="red">$24.99</s> </small><b class="green">$19.95</b>
-                                                </td>
-                                                <td class="hidden-480">
-                                                    <span class="label arrowed"><s>out of stock</s> </span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    domain.com
-                                                </td>
-                                                <td>
-                                                    <small><s class="red"></s></small><b class="green">$12.00</b>
-                                                </td>
-                                                <td class="hidden-480">
-                                                    <span class="label label-warning arrowed arrowed-right">SOLD</span>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- /widget-main -->
+                            <div style='width: 663px; height: 22px; padding: 0px 10px 0px 0px; color: black;
+                                font: normal 8pt verdana,helvetica,arial,sans-serif;'>
+                                <div style='float: right; padding-right: 8px;'>
+                                    <a href='http://www.tableausoftware.com/public/about-tableau-products?ref=http://public.tableausoftware.com/views/ORS_Reporting_25March/Clusterreporting'
+                                        target='_blank'>Learn About Tableau</a></div>
                             </div>
                             <!-- /widget-body -->
                         </div>
                         <!-- /widget-box -->
                     </div>
-                    <div class="col-sm-7">
-                        <div class="widget-box transparent">
-                            <div class="widget-header widget-header-flat">
-                                <h4 class="lighter">
-                                    <i class="icon-signal"></i>Sale Stats
-                                </h4>
-                                <div class="widget-toolbar">
-                                    <a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a>
+                    <div class="vspace-sm">
+                    </div>
+                   <div class="col-sm-6">
+                        <div class="widget-box">
+                            <div class="widget-header widget-header-flat widget-header-small">                                
+                                <div class="widget-toolbar no-border">
                                 </div>
                             </div>
                             <div class="widget-body">
-                                <div class="widget-main padding-4">
-                                    <div id="sales-charts">
+                                <div class="widget-main">
+                                    Reporting status coverage:
+                                    <script type='text/javascript' src='http://public.tableausoftware.com/javascripts/api/viz_v1.js'></script>
+                                    <div class='tableauPlaceholder' style='width: 663px; height: 437px;'>
+                                        <noscript>
+                                            <a href='#'>
+                                                <img alt='Reporting Status Coverage - February ' src='http:&#47;&#47;public.tableausoftware.com&#47;static&#47;images&#47;OR&#47;ORS_Reporting_25March&#47;Mapreporting&#47;1_rss.png'
+                                                    style='border: none' /></a></noscript><object class='tableauViz' width='663' height='437'
+                                                        style='display: none;'><param name='host_url' value='http%3A%2F%2Fpublic.tableausoftware.com%2F' />
+                                                        <param name='site_root' value='' />
+                                                        <param name='name' value='ORS_Reporting_25March&#47;Mapreporting' />
+                                                        <param name='tabs' value='no' />
+                                                        <param name='toolbar' value='yes' />
+                                                        <param name='static_image' value='http:&#47;&#47;public.tableausoftware.com&#47;static&#47;images&#47;OR&#47;ORS_Reporting_25March&#47;Mapreporting&#47;1.png' />
+                                                        <param name='animate_transition' value='yes' />
+                                                        <param name='display_static_image' value='yes' />
+                                                        <param name='display_spinner' value='yes' />
+                                                        <param name='display_overlay' value='yes' />
+                                                        <param name='display_count' value='yes' />
+                                                        <param name='filter' value='amp;:showVizHome=no' />
+                                                    </object>
+                                    </div>
+                                    <div style='width: 663px; height: 22px; padding: 0px 10px 0px 0px; color: black;
+                                        font: normal 8pt verdana,helvetica,arial,sans-serif;'>
+                                        <div style='float: right; padding-right: 8px;'>
+                                            <a href='http://www.tableausoftware.com/public/about-tableau-products?ref=http://public.tableausoftware.com/views/ORS_Reporting_25March/Mapreporting'
+                                                target='_blank'>En savoir plus sur Tableau</a></div>
                                     </div>
                                 </div>
                                 <!-- /widget-main -->
@@ -469,7 +360,7 @@
                                                 </div>
                                                 <div class="itemdiv memberdiv">
                                                     <div class="user">
-                                                        <img alt="Jim Doe's avatar" src="assets/avatars/avatar.png" />
+                                                        
                                                     </div>
                                                     <div class="body">
                                                         <div class="name">
@@ -588,7 +479,7 @@
                                             <div class="comments">
                                                 <div class="itemdiv commentdiv">
                                                     <div class="user">
-                                                        <img alt="Bob Doe's Avatar" src="assets/avatars/avatar.png" />
+                                                        
                                                     </div>
                                                     <div class="body">
                                                         <div class="name">
@@ -738,7 +629,7 @@
                                         </div>
                                         <div class="itemdiv dialogdiv">
                                             <div class="user">
-                                                <img alt="John's Avatar" src="assets/avatars/avatar.png" />
+                                                
                                             </div>
                                             <div class="body">
                                                 <div class="time">
@@ -867,16 +758,16 @@
                 $(this).sparkline('html', { tagValuesAttribute: 'data-values', type: 'bar', barColor: barColor, chartRangeMin: $(this).data('min') || 0 });
             });
 
-
-
-
             var placeholder = $('#piechart-placeholder').css({ 'width': '90%', 'min-height': '150px' });
             var data = [
-				{ label: "social networks", data: 38.7, color: "#68BC31" },
-				{ label: "search engines", data: 24.5, color: "#2091CF" },
-				{ label: "ad campaigns", data: 8.2, color: "#AF4E96" },
-				{ label: "direct traffic", data: 18.6, color: "#DA5430" },
-				{ label: "other", data: 10, color: "#FEE074" }
+				{ label: "Protection", data: 5739189255 },
+				{ label: "Health", data: 4116353971 },
+				{ label: "Nutriition", data: 2693950766 },
+				{ label: "Food Security", data: 1136654946 },
+				{ label: "Earyly Recovery", data: 10794556139 },
+                { label: "WASH", data: 513598769 },
+                { label: "Emg Shelter", data: 432233435 },
+                { label: "Education", data: 162597949 }
 			  ]
             function drawPieChart(placeholder, data, position) {
                 $.plot(placeholder, data, {

@@ -20,7 +20,6 @@
             line-height: 1.2;
             padding: 2px 1px;
             transition-duration: 0.1s;
-            text-align:right;
         }
     </style>
     <!-- ORS styles -->

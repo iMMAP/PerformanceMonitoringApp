@@ -20,6 +20,10 @@
             min-height: 150px;
             background: white;
         }
+        .ddlWidth
+        {
+            width: 100%;
+        }
     </style>
     <script type="text/javascript">
         function pageLoad(sender, args) {
@@ -33,166 +37,363 @@
 
         }
     </script>
+    
+    <script>
+        $(function () {
+
+            $("#<%=txtFromDate.ClientID%>").datepicker({
+                numberOfMonths: 2,
+                onSelect: function (selected) {
+                    $("#<%=txtToDate.ClientID%>").datepicker("option", "minDate", selected)
+                }
+            });
+            $("#<%=txtToDate.ClientID%>").datepicker({
+                numberOfMonths: 2,
+                onSelect: function (selected) {
+                    $("#<%=txtFromDate.ClientID%>").datepicker("option", "maxDate", selected)
+                }
+            });
+        });
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+        </script>
+        <ul class="breadcrumb">
+            <li><i class="icon-home home-icon"></i><a href="#">Home</a> </li>
+            <li class="active">Data Entry</li>
+        </ul>
+        <!-- .breadcrumb -->
+    </div>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
-            <div class="container">
-                <div class="graybar">
-                    Select Your Report Options
+            <div class="page-content">
+                <table width="100%">
+                    <tr>
+                        <td>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 ">
+                                    <div class="widget-box">
+                                        <div class="widget-header widget-header-small header-color-orange">
+                                            <h6>
+                                                <i class="icon-sort"></i>Small Header & Collapsed
+                                            </h6>
+                                            <div class="widget-toolbar">
+                                                <a href="#" data-action="settings"><i class="icon-cog"></i></a><a href="#" data-action="reload">
+                                                    <i class="icon-refresh"></i></a><a href="#" data-action="collapse"><i class="icon-chevron-down">
+                                                    </i></a><a href="#" data-action="close"><i class="icon-remove"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="widget-body">
+                                            <div class="widget-main">
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <div class="row">
+                                                            <div class="col-sm-4">
+                                                                <div class="widget-box">
+                                                                    <div class="widget-header">
+                                                                        <h5 class="smaller">
+                                                                            General Inforamtion</h5>
+                                                                    </div>
+                                                                    <div class="widget-body">
+                                                                        <div class="widget-main padding-6">
+                                                                            <table width="100%">
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <label>
+                                                                                            Projects:</label>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <cc:DropDownCheckBoxes ID="ddlProjects" runat="server" CssClass="ddlWidth"
+                                                                                            OnSelectedIndexChanged="ddl_SelectedIndexChanged" AddJQueryReference="True" meta:resourcekey="checkBoxes2Resource1"
+                                                                                            UseButtons="False" UseSelectAllNode="True">
+                                                                                            <Style SelectBoxWidth="" DropDownBoxBoxWidth="300px" DropDownBoxBoxHeight=""></Style>
+                                                                                            <Texts SelectBoxCaption="Select Project" />
+                                                                                        </cc:DropDownCheckBoxes>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <label>
+                                                                                            Organization:</label>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <cc:DropDownCheckBoxes ID="ddlOrganizations" runat="server" CssClass="ddlWidth"
+                                                                                            OnSelectedIndexChanged="ddl_SelectedIndexChanged" AddJQueryReference="True" meta:resourcekey="checkBoxes2Resource1"
+                                                                                            UseButtons="False" UseSelectAllNode="True">
+                                                                                            <Style SelectBoxWidth="" DropDownBoxBoxWidth="600px" DropDownBoxBoxHeight=""></Style>
+                                                                                            <Texts SelectBoxCaption="Select Organization" />
+                                                                                        </cc:DropDownCheckBoxes>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <label>
+                                                                                            Month:</label>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <cc:DropDownCheckBoxes ID="ddlMonth" runat="server" OnSelectedIndexChanged="ddl_SelectedIndexChanged"
+                                                                                            AddJQueryReference="True" meta:resourcekey="checkBoxes2Resource1" UseButtons="False"
+                                                                                            UseSelectAllNode="True">
+                                                                                            <Style SelectBoxWidth="120px" DropDownBoxBoxWidth="200px" DropDownBoxBoxHeight=""></Style>
+                                                                                            <Texts SelectBoxCaption="Select Month" />
+                                                                                        </cc:DropDownCheckBoxes>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <label>
+                                                                                            From:</label>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <asp:TextBox ID="txtFromDate" runat="server" Width="100px"></asp:TextBox><label>(mm/dd/yyyy)</label>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <label>
+                                                                                            To:</label>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <asp:TextBox ID="txtToDate" runat="server" Width="100px"></asp:TextBox><label>(mm/dd/yyyy)</label>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <div class="widget-box light-border">
+                                                                    <div class="widget-header">
+                                                                        <h5 class="smaller">
+                                                                            Logframe Filters</h5>
+                                                                    </div>
+                                                                    <div class="widget-body">
+                                                                        <div class="widget-main padding-6">
+                                                                            <table width="100%">
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <label>
+                                                                                            Cluster:
+                                                                                        </label>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <cc:DropDownCheckBoxes ID="ddlClusters" runat="server" OnSelectedIndexChanged="ddl_SelectedIndexChanged"
+                                                                                            AddJQueryReference="True" meta:resourcekey="checkBoxes2Resource1" UseButtons="False"
+                                                                                            CssClass="ddlWidth" UseSelectAllNode="True">
+                                                                                            <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
+                                                                                            <Texts SelectBoxCaption="Select Clusters" />
+                                                                                        </cc:DropDownCheckBoxes>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <label>
+                                                                                            Objectives</label>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <cc:DropDownCheckBoxes ID="ddlObjectives" runat="server" CssClass="ddlWidth"
+                                                                                            OnSelectedIndexChanged="ddl_SelectedIndexChanged" AddJQueryReference="True" meta:resourcekey="checkBoxes2Resource1"
+                                                                                            UseButtons="False" UseSelectAllNode="True">
+                                                                                            <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
+                                                                                            <Texts SelectBoxCaption="Select Objective" />
+                                                                                        </cc:DropDownCheckBoxes>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <label>
+                                                                                            Priority:</label>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <cc:DropDownCheckBoxes ID="ddlPriority" runat="server" CssClass="ddlWidth"
+                                                                                            OnSelectedIndexChanged="ddl_SelectedIndexChanged" AddJQueryReference="True" meta:resourcekey="checkBoxes2Resource1"
+                                                                                            UseButtons="False" UseSelectAllNode="True">
+                                                                                            <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
+                                                                                            <Texts SelectBoxCaption="Select Priority" />
+                                                                                        </cc:DropDownCheckBoxes>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <label>
+                                                                                            Activities:</label>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <cc:DropDownCheckBoxes ID="ddlActivities" runat="server" CssClass="ddlWidth"
+                                                                                            OnSelectedIndexChanged="ddl_SelectedIndexChanged" AddJQueryReference="True" meta:resourcekey="checkBoxes2Resource1"
+                                                                                            UseButtons="False" UseSelectAllNode="True">
+                                                                                            <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
+                                                                                            <Texts SelectBoxCaption="Select Activity" />
+                                                                                        </cc:DropDownCheckBoxes>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <label>
+                                                                                            Indicators:</label>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <cc:DropDownCheckBoxes ID="ddlIndicators" runat="server" CssClass="ddlWidth"
+                                                                                            OnSelectedIndexChanged="ddl_SelectedIndexChanged" AddJQueryReference="True" meta:resourcekey="checkBoxes2Resource1"
+                                                                                            UseButtons="False" UseSelectAllNode="True">
+                                                                                            <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
+                                                                                            <Texts SelectBoxCaption="Select Indicator" />
+                                                                                        </cc:DropDownCheckBoxes>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <asp:CheckBox ID="cbRegional" runat="server" Text="Regional Ind" />
+                                                                                        <asp:CheckBox ID="cbCountry" runat="server" Text="Country Ind" />
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <div class="widget-box light-border">
+                                                                    <div class="widget-header">
+                                                                        <h5 class="smaller">
+                                                                            Location Filters</h5>
+                                                                    </div>
+                                                                    <div class="widget-body">
+                                                                        <div class="widget-main padding-6">
+                                                                            <table width="100%">
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <label>
+                                                                                            Country:</label>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <cc:DropDownCheckBoxes ID="ddlCountry" runat="server" CssClass="ddlWidth"
+                                                                                            OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" AddJQueryReference="True"
+                                                                                            meta:resourcekey="checkBoxes2Resource1" UseButtons="False" UseSelectAllNode="True">
+                                                                                            <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
+                                                                                            <Texts SelectBoxCaption="Select Country" />
+                                                                                        </cc:DropDownCheckBoxes>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <label>
+                                                                                            Admin1:</label>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <cc:DropDownCheckBoxes ID="ddlAdmin1" runat="server" CssClass="ddlWidth"
+                                                                                            OnSelectedIndexChanged="ddlAdmin1_SelectedIndexChanged" AddJQueryReference="True"
+                                                                                            meta:resourcekey="checkBoxes2Resource1" UseButtons="False" UseSelectAllNode="True">
+                                                                                            <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
+                                                                                            <Texts SelectBoxCaption="Select Admin1" />
+                                                                                        </cc:DropDownCheckBoxes>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <label>
+                                                                                            Admin2:</label>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <cc:DropDownCheckBoxes ID="ddlAdmin2" runat="server" CssClass="ddlWidth"
+                                                                                            OnSelectedIndexChanged="ddlAdmin2_SelectedIndexChanged" AddJQueryReference="True"
+                                                                                            meta:resourcekey="checkBoxes2Resource1" UseButtons="False" UseSelectAllNode="True">
+                                                                                            <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
+                                                                                            <Texts SelectBoxCaption="Select Admin2" />
+                                                                                        </cc:DropDownCheckBoxes>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <label>
+                                                                                            Funding Status:</label>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <asp:DropDownList ID="ddlFundingStatus" runat="server" OnSelectedIndexChanged="ddlFundingStatus_SelectedIndexChanged">
+                                                                                            <asp:ListItem Text="Select FTS Status" Value="0"></asp:ListItem>
+                                                                                            <asp:ListItem Text="Commitment" Value="1"></asp:ListItem>
+                                                                                            <asp:ListItem Text="Paid contribution" Value="2"></asp:ListItem>
+                                                                                            <asp:ListItem Text="Pledge" Value="3"></asp:ListItem>
+                                                                                        </asp:DropDownList>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td></td>
+                                                                                    <td>
+                                                                                        <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" class="btn btn-primary" />
+                                                                                        <asp:Button ID="btnReset" runat="server" Text="Reset" OnClick="btnReset_Click" class="btn" />
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div class="space">
                 </div>
-                <div class="contentarea">
-                    <div class="formdiv">
-                        <div class="divleft">
-                            <table width="100%">
-                                <tr>
-                                    <td>
-                                        <label>
-                                            Emergency:</label>
-                                    </td>
-                                    <td>
-                                        <cc:DropDownCheckBoxes ID="ddlEmergency" runat="server" CssClass="ddlWidth" AutoPostBack="true"
-                                            OnSelectedIndexChanged="ddlEmergency_SelectedIndexChanged" AddJQueryReference="True"
-                                            meta:resourcekey="checkBoxes2Resource1" UseButtons="False" UseSelectAllNode="True">
-                                            <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
-                                            <Texts SelectBoxCaption="Select Emergency" />
-                                        </cc:DropDownCheckBoxes>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label>
-                                            Cluster:
-                                        </label>
-                                    </td>
-                                    <td>
-                                        <cc:DropDownCheckBoxes ID="ddlClusters" runat="server" OnSelectedIndexChanged="ddlClusters_SelectedIndexChanged"
-                                            AddJQueryReference="True" meta:resourcekey="checkBoxes2Resource1" UseButtons="False"
-                                            AutoPostBack="true" CssClass="ddlWidth" UseSelectAllNode="True">
-                                            <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
-                                            <Texts SelectBoxCaption="Select Clusters" />
-                                        </cc:DropDownCheckBoxes>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label>
-                                            Year:
-                                        </label>
-                                    </td>
-                                    <td>
-                                        <asp:DropDownList ID="ddlYear" runat="server" Width="100px" AutoPostBack="true" OnSelectedIndexChanged="ddlYear_SelectedIndexChanged">
-                                            <asp:ListItem Text="Select Year" Value="0" Selected="True"></asp:ListItem>
-                                            <asp:ListItem Text="2010" Value="6"></asp:ListItem>
-                                            <asp:ListItem Text="2011" Value="7"></asp:ListItem>
-                                            <asp:ListItem Text="2012" Value="8"></asp:ListItem>
-                                            <asp:ListItem Text="2013" Value="9"></asp:ListItem>
-                                            <asp:ListItem Text="2014" Value="20"></asp:ListItem>
-                                            <asp:ListItem Text="2015" Value="11"></asp:ListItem>
-                                        </asp:DropDownList>
-                                        <label>
-                                            Month:</label>
-                                        <cc:DropDownCheckBoxes ID="ddlMonth" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged"
-                                            AddJQueryReference="True" meta:resourcekey="checkBoxes2Resource1" UseButtons="False"
-                                            UseSelectAllNode="True">
-                                            <Style SelectBoxWidth="120px" DropDownBoxBoxWidth="200px" DropDownBoxBoxHeight=""></Style>
-                                            <Texts SelectBoxCaption="Select Month" />
-                                        </cc:DropDownCheckBoxes>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="divcen">
-                            <table width="100%">
-                                <tr>
-                                    <td>
-                                        <label>
-                                            Country:</label>
-                                    </td>
-                                    <td>
-                                        <asp:DropDownList ID="ddlCountry" runat="server" AutoPostBack="true" CssClass="ddlWidth"
-                                            OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged">
-                                        </asp:DropDownList>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label>
-                                            Admin1:</label>
-                                    </td>
-                                    <td>
-                                        <cc:DropDownCheckBoxes ID="ddlAdmin1" runat="server" CssClass="ddlWidth" AutoPostBack="true"
-                                            OnSelectedIndexChanged="ddlAdmin1_SelectedIndexChanged" AddJQueryReference="True"
-                                            meta:resourcekey="checkBoxes2Resource1" UseButtons="False" UseSelectAllNode="True">
-                                            <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
-                                            <Texts SelectBoxCaption="Select Location" />
-                                        </cc:DropDownCheckBoxes>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label>
-                                            Admin2:</label>
-                                    </td>
-                                    <td>
-                                        <cc:DropDownCheckBoxes ID="ddlAdmin2" runat="server" CssClass="ddlWidth" AutoPostBack="true"
-                                            OnSelectedIndexChanged="ddlAdmin2_SelectedIndexChanged" AddJQueryReference="True"
-                                            meta:resourcekey="checkBoxes2Resource1" UseButtons="False" UseSelectAllNode="True">
-                                            <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
-                                            <Texts SelectBoxCaption="Select Location" />
-                                        </cc:DropDownCheckBoxes>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="divright">
-                            <table width="100%">
-                                <tr>
-                                    <td>
-                                        <label>
-                                            Organization Type:</label>
-                                    </td>
-                                    <td>
-                                        <cc:DropDownCheckBoxes ID="ddlOrgTypes" runat="server" CssClass="ddlWidth" AutoPostBack="true"
-                                            OnSelectedIndexChanged="ddlOrgTypes_SelectedIndexChanged" AddJQueryReference="True"
-                                            meta:resourcekey="checkBoxes2Resource1" UseButtons="False" UseSelectAllNode="True">
-                                            <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
-                                            <Texts SelectBoxCaption="Select Org Type" />
-                                        </cc:DropDownCheckBoxes>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label>
-                                            Organization:</label>
-                                    </td>
-                                    <td>
-                                        <cc:DropDownCheckBoxes ID="ddlOrganizations" runat="server" CssClass="ddlWidth" AutoPostBack="true"
-                                            OnSelectedIndexChanged="ddlOrganizations_SelectedIndexChanged" AddJQueryReference="True"
-                                            meta:resourcekey="checkBoxes2Resource1" UseButtons="False" UseSelectAllNode="True">
-                                            <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
-                                            <Texts SelectBoxCaption="Select Organization" />
-                                        </cc:DropDownCheckBoxes>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label>
-                                            Office:</label>
-                                    </td>
-                                    <td>
-                                        <asp:DropDownList ID="ddlOffice" runat="server" CssClass="ddlWidth" AutoPostBack="true"
-                                            OnSelectedIndexChanged="ddlOffice_SelectedIndexChanged">
-                                        </asp:DropDownList>
-                                    </td>
-                                </tr>
-                            </table>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 widget-container-span">
+                        <div class="widget-box">
+                            <cc2:PagingGridView ID="gvReport" runat="server" Width="100%" CssClass="table table-striped table-bordered table-hover"
+                                AutoGenerateColumns="false" OnSorting="gvReport_Sorting" ShowHeaderWhenEmpty="true"
+                                EnableViewState="false" AllowSorting="True" AllowPaging="true" PageSize="60"
+                                ShowHeader="true" OnPageIndexChanging="gvReport_PageIndexChanging"
+                                 EmptyDataText="Your filter criteria does not match any record in database!" >
+                                <PagerStyle BackColor="#efefef" ForeColor="DarkSlateBlue" HorizontalAlign="Center" />
+                                <PagerSettings Mode="NumericFirstLast" />
+                                <RowStyle CssClass="istrow" />
+                                <AlternatingRowStyle CssClass="altcolor" />
+                                <Columns>
+                                    <asp:BoundField DataField="Cluster" HeaderText="Cluster" SortExpression="Cluster"
+                                        HeaderStyle-Width="6%" />
+                                    <asp:BoundField DataField="Organization" HeaderText="Organization" SortExpression="Organization"
+                                        HeaderStyle-Width="15%" />
+                                    <asp:BoundField DataField="ProjectCode" HeaderText="Project" SortExpression="ProjectCode"
+                                        HeaderStyle-Width="8%" />
+                                        <asp:BoundField DataField="FundingStatus" HeaderText="FTS" SortExpression="FundingStatus"
+                                        HeaderStyle-Width="5%" />                                        
+                                    <asp:BoundField DataField="Month" HeaderText="Month" SortExpression="Month" HeaderStyle-Width="5%" />
+                                    <asp:BoundField DataField="Objective" HeaderText="Objective" SortExpression="Objective"
+                                        HeaderStyle-Width="5%" />
+                                    <asp:BoundField DataField="Priority" HeaderText="Priority" SortExpression="Priority"
+                                        HeaderStyle-Width="10%" />
+                                    <asp:BoundField DataField="Activity" HeaderText="Activity" SortExpression="Activity"
+                                        HeaderStyle-Width="10%" />
+                                    <asp:BoundField DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator"
+                                        HeaderStyle-Width="10%" />
+                                    <asp:BoundField DataField="Country" HeaderText="Country" SortExpression="Country"
+                                        HeaderStyle-Width="5%" />
+                                    <asp:BoundField DataField="Admin1" HeaderText="Admin1" SortExpression="Admin1"
+                                        HeaderStyle-Width="5%" />
+                                    <asp:BoundField DataField="Admin2" HeaderText="Admin2" SortExpression="Admin2"
+                                        HeaderStyle-Width="5%" />
+                                    <asp:BoundField DataField="AnnualTarget" HeaderText="Annual Target" SortExpression="AnnualTarget"
+                                        HeaderStyle-Width="3%" ItemStyle-HorizontalAlign="Right" />
+                                    <asp:BoundField DataField="Accumulative" HeaderText="Accum" SortExpression="Accumulative"
+                                        HeaderStyle-Width="3%" ItemStyle-HorizontalAlign="Right" />
+                                    <asp:BoundField DataField="Achieved" HeaderText="Monthly Achieved" SortExpression="Achieved"
+                                        HeaderStyle-Width="3%" ItemStyle-HorizontalAlign="Right" />
+                                </Columns>
+                            </cc2:PagingGridView>
                         </div>
                     </div>
-                    <div class="spacer" style="clear: both;">
-                    </div>
-                </div>
-                <div class="graybarcontainer">
                 </div>
             </div>
             <div class="buttonsdiv">
@@ -206,48 +407,48 @@
                 <div class="spacer" style="clear: both;">
                 </div>
             </div>
-            <div class="tablegrid">
-                <cc2:PagingGridView ID="gvReport" runat="server" Width="100%" CssClass="imagetable"
-                    AutoGenerateColumns="false" OnSorting="gvReport_Sorting" ShowHeaderWhenEmpty="true"
-                    EnableViewState="false" AllowSorting="True" AllowPaging="true"
-                    PageSize="100" ShowHeader="true" OnPageIndexChanging="gvReport_PageIndexChanging">
-                    <PagerStyle BackColor="#efefef" ForeColor="DarkSlateBlue" HorizontalAlign="Center" />
-                    <PagerSettings Mode="NumericFirstLast" />
-                    <RowStyle CssClass="istrow" />
-                    <AlternatingRowStyle CssClass="altcolor" />
-                    <Columns>
-                        <asp:BoundField DataField="Emergency" HeaderText="Emergency" SortExpression="Emergency"
-                            HeaderStyle-Width="5%" />
-                        <asp:BoundField DataField="OrganizationAcronym" HeaderText="Organization" SortExpression="OrganizationAcronym"
-                            HeaderStyle-Width="5%" />
-                        <asp:BoundField DataField="Year" HeaderText="Year" SortExpression="Year" HeaderStyle-Width="5%" />
-                        <asp:BoundField DataField="Month" HeaderText="Month" SortExpression="Month" HeaderStyle-Width="5%" />
-                        <asp:BoundField DataField="Cluster" HeaderText="Cluster" SortExpression="Cluster"
-                            HeaderStyle-Width="6%" />
-                        <asp:BoundField DataField="Objective" HeaderText="Objective" SortExpression="Objective"
-                            HeaderStyle-Width="10%" />
-                        <asp:BoundField DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator"
-                            HeaderStyle-Width="10%" />
-                        <asp:BoundField DataField="Activity" HeaderText="Activity" SortExpression="Activity"
-                            HeaderStyle-Width="10%" />
-                        <asp:BoundField DataField="Data" HeaderText="Data" SortExpression="Data" HeaderStyle-Width="10%" />
-                        <asp:BoundField DataField="Country" HeaderText="Country" SortExpression="Country"
-                            HeaderStyle-Width="5%" />
-                        <asp:BoundField DataField="(AD1)Location" HeaderText="Admin1" SortExpression="(AD1)Location"
-                            HeaderStyle-Width="6%" />
-                        <asp:BoundField DataField="(Ad2)Location" HeaderText="Admin2" SortExpression="(AD2)Location"
-                            HeaderStyle-Width="6%" />
-                        <asp:BoundField DataField="Target" HeaderText="Target" SortExpression="Target" HeaderStyle-Width="3%"
-                            ItemStyle-HorizontalAlign="Right" />
-                        <asp:BoundField DataField="Achieved" HeaderText="Achieved" SortExpression="Achieved"
-                            HeaderStyle-Width="3%" ItemStyle-HorizontalAlign="Right" />
-                        <asp:BoundField DataField="WorkDone" HeaderText="%" SortExpression="WorkDone" HeaderStyle-Width="2%"
-                            ItemStyle-HorizontalAlign="Right" />
-                    </Columns>
-                </cc2:PagingGridView>
-            </div>
             <div class="fullwidthdiv" style="clear: both;">
             </div>
+            <script type="text/javascript">
+                jQuery(function ($) {
+
+                    $('#simple-colorpicker-1').ace_colorpicker({ pull_right: true }).on('change', function () {
+                        var color_class = $(this).find('option:selected').data('class');
+                        var new_class = 'widget-header';
+                        if (color_class != 'default') new_class += ' header-color-' + color_class;
+                        $(this).closest('.widget-header').attr('class', new_class);
+                    });
+
+
+                    // scrollables
+                    $('.slim-scroll').each(function () {
+                        var $this = $(this);
+                        $this.slimScroll({
+                            height: $this.data('height') || 100,
+                            railVisible: true
+                        });
+                    });
+
+                    /**$('.widget-box').on('ace.widget.settings' , function(e) {
+                    e.preventDefault();
+                    });*/
+
+
+
+                    // Portlets (boxes)
+                    $('.widget-container-span').sortable({
+                        connectWith: '.widget-container-span',
+                        items: '> .widget-box',
+                        opacity: 0.8,
+                        revert: true,
+                        forceHelperSize: true,
+                        placeholder: 'widget-placeholder',
+                        forcePlaceholderSize: true,
+                        tolerance: 'pointer'
+                    });
+
+                });
+            </script>
         </ContentTemplate>
     </asp:UpdatePanel>
     <asp:ModalPopupExtender ID="ModalPopupExtender1" runat="server" TargetControlID="HiddenTargetControlForModalPopup"

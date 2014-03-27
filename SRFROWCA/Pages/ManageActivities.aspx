@@ -9,6 +9,9 @@
             background-color: yellow;
         }
     </style>
+    <!-- ORS styles -->
+    <link rel="stylesheet" href="../assets/css/ors.css" />
+    <!-- ace styles -->
     <script>
         $(function () {
             $('.srpind').parent('tr:contains("Yes")').addClass('highlight');
@@ -18,6 +21,16 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+        </script>
+        <ul class="breadcrumb">
+            <li><i class="icon-home home-icon"></i><a href="../Default.aspx">Home</a> </li>
+            <li class="active">Manage Activities</li>
+        </ul>
+        <!-- .breadcrumb -->
+    </div>
     <div class="containerDataEntryMain">
         <div class="containerDataEntryMain">
             <div class="containerDataEntryProjects">
@@ -94,4 +107,5 @@
                 </asp:GridView>
             </div>
         </div>
+    </div>
 </asp:Content>

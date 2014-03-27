@@ -19,12 +19,25 @@
             });
         });
     </script>
+    <!-- ORS styles -->
+    <link rel="stylesheet" href="../assets/css/ors.css" />
+    <!-- ace styles -->
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div id="divMsg">
     </div>
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+        </script>
+        <ul class="breadcrumb">
+            <li><i class="icon-home home-icon"></i><a href="#">Home</a> </li>
+            <li class="active">Manage Project</li>
+        </ul>
+        <!-- .breadcrumb -->
+    </div>
     <div class="containerDataEntryMain">
-        <div class="containerDataEntryProjects2">
+        <div class="containerDataEntryProjects">
             <div class="containerDataEntryProjectsInner">
                 <fieldset>
                     <legend>ORS Projects</legend>
@@ -37,90 +50,87 @@
                     CausesValidation="false" OnClick="btnCreateProject_Click" />
             </div>
         </div>
-    </div>
-    <div class="containerLogin">
-        <div class="graybarLogin">
-            Add/Edit Project
-        </div>
-        <div class="contentarea">
-            <div class="formdiv">
-                <table>
-                    <tr>
-                        <td>
-                            <label>
-                                Project Code:</label>
-                        </td>
-                        <td>
-                            <label>
-                                <asp:Literal ID="ltrlProjectCode" runat="server" Text=""></asp:Literal></label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>
-                                Project Title:</label>
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtProjectTitle" runat="server" Width="500px" TextMode="MultiLine"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="rfvTitle" runat="server" ControlToValidate="txtProjectTitle"
-                                CssClass="error2" Text="Required" ErrorMessage="Required." ToolTip="Required.">Required.</asp:RequiredFieldValidator>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>
-                                Project Objective:</label>
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtProjectObjective" runat="server" Width="500px" Height="100px"
-                                TextMode="MultiLine"></asp:TextBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>
-                                Cluster:</label>
-                        </td>
-                        <td>
-                            <asp:DropDownList ID="ddlCluster" runat="server" Width="320px">
-                            </asp:DropDownList>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Required"
-                                CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCluster"></asp:RequiredFieldValidator>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>
-                                Start Date:</label>
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtFromDate" runat="server"></asp:TextBox><label>(mm/dd/yyyy)</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>
-                                End Date:</label>
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtToDate" runat="server"></asp:TextBox><label>(mm/dd/yyyy)</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <asp:Button ID="btnSave" runat="server" Text="Save & Stay" CssClass="button_example"
-                                OnClick="btnSave_Click" />
-                            <asp:Button ID="btnSaveClose" runat="server" Text="Save & Close" CssClass="button_example"
-                                OnClick="btnSaveClose_Click" />
-                            <asp:Button ID="btnManageActivities" runat="server" Text="Manage Activities" CssClass="button_example"
-                                CausesValidation="false" OnClick="btnManageActivities_Click" />
-                        </td>
-                        <td>
-                            <asp:Button ID="btnDeleteProject" runat="server" Text="Delete Project" CssClass="button_example"
-                                CausesValidation="false" OnClick="btnDeleteProject_Click" />
-                        </td>
-                    </tr>
-                </table>
+        <div class="containerDataEntryGrid">
+            <div class="contentarea">
+                <div class="formdiv">
+                    <table>
+                        <tr>
+                            <td>
+                                <label>
+                                    Project Code:</label>
+                            </td>
+                            <td>
+                                <label>
+                                    <asp:Literal ID="ltrlProjectCode" runat="server" Text=""></asp:Literal></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    Project Title:</label>
+                            </td>
+                            <td>
+                                <asp:TextBox ID="txtProjectTitle" runat="server" Width="500px" TextMode="MultiLine"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="rfvTitle" runat="server" ControlToValidate="txtProjectTitle"
+                                    CssClass="error2" Text="Required" ErrorMessage="Required." ToolTip="Required.">Required.</asp:RequiredFieldValidator>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    Project Objective:</label>
+                            </td>
+                            <td>
+                                <asp:TextBox ID="txtProjectObjective" runat="server" Width="500px" Height="100px"
+                                    TextMode="MultiLine"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    Cluster:</label>
+                            </td>
+                            <td>
+                                <asp:DropDownList ID="ddlCluster" runat="server" Width="320px">
+                                </asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Required"
+                                    CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCluster"></asp:RequiredFieldValidator>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    Start Date:</label>
+                            </td>
+                            <td>
+                                <asp:TextBox ID="txtFromDate" runat="server"></asp:TextBox><label>(mm/dd/yyyy)</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    End Date:</label>
+                            </td>
+                            <td>
+                                <asp:TextBox ID="txtToDate" runat="server"></asp:TextBox><label>(mm/dd/yyyy)</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <asp:Button ID="btnSave" runat="server" Text="Save & Stay" CssClass="button_example"
+                                    OnClick="btnSave_Click" />
+                                <asp:Button ID="btnSaveClose" runat="server" Text="Save & Close" CssClass="button_example"
+                                    OnClick="btnSaveClose_Click" />
+                                <asp:Button ID="btnManageActivities" runat="server" Text="Manage Activities" CssClass="button_example"
+                                    CausesValidation="false" OnClick="btnManageActivities_Click" />
+                            </td>
+                            <td>
+                                <asp:Button ID="btnDeleteProject" runat="server" Text="Delete Project" CssClass="button_example"
+                                    CausesValidation="false" OnClick="btnDeleteProject_Click" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

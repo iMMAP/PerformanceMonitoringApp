@@ -38,51 +38,70 @@ namespace SRFROWCA
                 spanWelcome.Visible = true;
                 if (HttpContext.Current.User.IsInRole("User"))
                 {
+                    menuDataEntry.Visible = true;
+                    menuManageProjects.Visible = true;
+                    menuManageActivities.Visible = true;
                     ActiveMenueItem();
-                    
+
                 }
-                //    LoginStatus.Visible = false;
-                //    //HeadLoginStatus.Visible = true;
-                //    //ResiterStatus.Visible = false;
-                //    if (!(HttpContext.Current.User.IsInRole("Admin"))
-                //        && !(HttpContext.Current.User.IsInRole("CountryAdmin")))
-                //    {
-                //        //AdminMenue.Visible = false;
-
-                //        if (HttpContext.Current.User.IsInRole("ClusterLead"))
-                //        {
-                //            //menuMyActivities.HRef = "~/ClusterLead/AddSRPActivitiesFromMasterList.aspx";
-                //            //spnManageActivities.InnerText = "SRP Activities";
-
-                //            //menuManageProjects.HRef = "~/ClusterLead/ProjectsListing.aspx";
-                //            //spnManageProject.InnerText = UserInfo.CountryName + " Projects";
-
-                //            menuDataEntry.Visible = false;
-                //        }
-                //        else
-                //        {
-                //            //spnManageActivities.InnerText = "Manage Activities";
-                //            //spnManageProject.InnerText = "Manage Projects";
-                //        }
-                //    }
-                //    else
-                //    {
-
-                //        //menuMyActivities.Visible = false;
-                //        menuDataEntry.Visible = false;
-                //    }
-                //}
-                //else
-                //{
-                //    LoginStatus.Visible = true;
-                //    //HeadLoginStatus.Visible = false;
-                //    //ResiterStatus.Visible = true;
-                //    //AdminMenue.Visible = false;
-                //    //MySettingsMenue.Visible = false;
-                //    //menuMyActivities.Visible = false;
-                //    menuDataEntry.Visible = false;
-                //}
+                else
+                {
+                    menuDataEntry.Visible = false;
+                    menuManageProjects.Visible = false;
+                    menuManageActivities.Visible = false;
+                }
             }
+            else
+            {
+                liDataEntry.Visible = false;
+                liManageProject.Visible = false;
+                liManageActivity.Visible = false;
+                menuDataEntry.Visible = false;
+                menuManageProjects.Visible = false;
+                menuManageActivities.Visible = false;
+            }
+            //    LoginStatus.Visible = false;
+            //    //HeadLoginStatus.Visible = true;
+            //    //ResiterStatus.Visible = false;
+            //    if (!(HttpContext.Current.User.IsInRole("Admin"))
+            //        && !(HttpContext.Current.User.IsInRole("CountryAdmin")))
+            //    {
+            //        //AdminMenue.Visible = false;
+
+            //        if (HttpContext.Current.User.IsInRole("ClusterLead"))
+            //        {
+            //            //menuMyActivities.HRef = "~/ClusterLead/AddSRPActivitiesFromMasterList.aspx";
+            //            //spnManageActivities.InnerText = "SRP Activities";
+
+            //            //menuManageProjects.HRef = "~/ClusterLead/ProjectsListing.aspx";
+            //            //spnManageProject.InnerText = UserInfo.CountryName + " Projects";
+
+            //            menuDataEntry.Visible = false;
+            //        }
+            //        else
+            //        {
+            //            //spnManageActivities.InnerText = "Manage Activities";
+            //            //spnManageProject.InnerText = "Manage Projects";
+            //        }
+            //    }
+            //    else
+            //    {
+
+            //        //menuMyActivities.Visible = false;
+            //        menuDataEntry.Visible = false;
+            //    }
+            //}
+            //else
+            //{
+            //    LoginStatus.Visible = true;
+            //    //HeadLoginStatus.Visible = false;
+            //    //ResiterStatus.Visible = true;
+            //    //AdminMenue.Visible = false;
+            //    //MySettingsMenue.Visible = false;
+            //    //menuMyActivities.Visible = false;
+            //    menuDataEntry.Visible = false;
+            //}
+
         }
         private void ActiveMenueItem()
         {
@@ -90,6 +109,14 @@ namespace SRFROWCA
             if (uri == "/Pages/AddActivities.aspx")
             {
                 liDataEntry.Attributes.Add("class", "active");
+            }
+            else if (uri == "/Pages/CreateProject.aspx")
+            {
+                liManageProject.Attributes.Add("class", "active");
+            }
+            else if (uri == "/Pages/ManageActivities.aspx")
+            {
+                liManageActivity.Attributes.Add("class", "active");
             }
             else if (uri == "/Default.aspx")
             {
@@ -114,8 +141,8 @@ namespace SRFROWCA
             //            HtmlGenericControl c = (HtmlGenericControl)ctrl;
             //            c.Attributes.Add("class", "active");
             //        }
-                    
-                    
+
+
             //        //if (url == GetCurrentPage())  // <-- you'd need to write that
             //          //  ctrl.Parent.Attributes.Add("class", "active");
             //    }
@@ -132,7 +159,7 @@ namespace SRFROWCA
         protected void lnkLanguageFrench_Click(object sender, EventArgs e)
         {
             RC.SelectedSiteLanguageId = (int)Common.RC.SiteLanguage.French;
-            RC.AddSiteLangInCookie(this.Response, Common.RC.SiteLanguage.French);            
+            RC.AddSiteLangInCookie(this.Response, Common.RC.SiteLanguage.French);
             (MainContent.Page as BasePage).BindGridData();
         }
 
