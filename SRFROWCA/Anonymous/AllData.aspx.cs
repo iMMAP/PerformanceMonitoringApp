@@ -12,18 +12,10 @@ using SRFROWCA.Reports;
 using System.Linq;
 namespace SRFROWCA.Anonymous
 {
-    public partial class AllData : System.Web.UI.Page
-    {
-        protected void Page_PreInit(object sender, EventArgs e)
-        {
-            GZipContents.GZipOutput();
-        }
+    public partial class AllData : BasePage
+    {        
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Register btnExportToExcel to trigger postback, in updatepanel.
-            ScriptManager scriptManager = ScriptManager.GetCurrent(this.Page);
-            //scriptManager.RegisterPostBackControl(this.btnExportToExcel);
-
             if (IsPostBack) return;
 
             // Load data in gridview.
@@ -78,26 +70,25 @@ namespace SRFROWCA.Anonymous
             LoadData();
         }
 
-        protected void btnExportToExcel_Click(object sender, EventArgs e)
+        #region DropDown SelectedIndexChanged.
+
+        protected void ddlCluster_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //SQLPaging = PagingStatus.OFF;
-            //gvReport.AllowPaging = false;
-            //LoadData();
-            //DataTable dt = GetReportData();
-            //string[] columnNames = dt.Columns.Cast<DataColumn>()
-            //                     .Select(x => x.ColumnName)
-            //                     .ToArray();
-            //cbColumns.DataSource = columnNames;
-            //cbColumns.DataBind();
-            ModalPopupExtender1.Show();
-            //GridView gv = new GridView();
-            //gv.DataSource = dt;
-            //gv.DataBind();
-            //ExportUtility.ExportGridView(gv, "3WPMAllData", ".xls", Response);
-            //gv.Dispose();
+            LoadDataOnMultipleCheckBoxControl();
+            PopulateActivities();
+            PopulateIndicators();
         }
 
-        #region DropDown SelectedIndexChanged.
+        protected void ddlActivities_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadDataOnMultipleCheckBoxControl();
+            PopulateIndicators();
+        }
+
+        protected void ddlIndicators_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadDataOnMultipleCheckBoxControl();
+        }
 
         protected void ddl_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -112,39 +103,21 @@ namespace SRFROWCA.Anonymous
         protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
             LastLocationType = ReportsCommon.LocationType.Country;
+            LoadDataOnMultipleCheckBoxControl();
             PopulateLocationDropDowns();
-            LoadData();
         }
 
         protected void ddlAdmin1_SelectedIndexChanged(object sender, EventArgs e)
         {
             LastLocationType = ReportsCommon.LocationType.Admin1;
             LoadDataOnMultipleCheckBoxControl();
+            PopulateAdmin2();
         }
 
         protected void ddlAdmin2_SelectedIndexChanged(object sender, EventArgs e)
         {
             LastLocationType = ReportsCommon.LocationType.Admin2;
             LoadDataOnMultipleCheckBoxControl();
-        }
-
-        protected void btnOK_Click(object sender, EventArgs e)
-        {
-            DataTable dt = GetReportData();
-            RemoveColumnsFromDataTable(dt);
-            GridView gv = new GridView();
-            gv.DataSource = dt;
-            gv.DataBind();
-
-            ExportUtility.ExportGridView(gv, "3WPMAllData", ".xls", Response, true);
-        }
-
-
-
-        protected void btnClose_Click(object sender, EventArgs e)
-        {
-            LoadData();
-            ModalPopupExtender1.Hide();
         }
 
         #endregion
@@ -180,13 +153,35 @@ namespace SRFROWCA.Anonymous
             }
         }
 
-        private void PopulateIndicators()
-        {
-        }
-
         private void PopulateActivities()
         {
+            string clusterIds = GetSelectedValues(ddlClusters);
+            string objIds = GetSelectedValues(ddlObjectives);
+            string priorityIds = GetSelectedValues(ddlPriority);
 
+            if (clusterIds != null)
+            {
+                ddlActivities.DataTextField = "ActivityName";
+                ddlActivities.DataValueField = "PriorityActivityId";
+                ddlActivities.DataSource = DBContext.GetData("[GetActivitiesOfMultipleClusterObjAndPriorities]", new object[] { 1, clusterIds, objIds, priorityIds, 1 });
+                ddlActivities.DataBind();
+            }
+        }
+
+        private void PopulateIndicators()
+        {
+            string clusterIds = GetSelectedValues(ddlClusters);
+            string objIds = GetSelectedValues(ddlObjectives);
+            string priorityIds = GetSelectedValues(ddlPriority);
+            string activityIds = GetSelectedValues(ddlActivities);
+
+            if (clusterIds != null)
+            {
+                ddlIndicators.DataTextField = "DataName";
+                ddlIndicators.DataValueField = "ActivityDataId";
+                ddlIndicators.DataSource = DBContext.GetData("[GetIndicatorsOfMultipleClusterObjPriAndActivities]", new object[] { 1, clusterIds, objIds, priorityIds, activityIds, 1 });
+                ddlIndicators.DataBind();
+            }
         }
 
         private void PopulatePriorities()
@@ -219,32 +214,36 @@ namespace SRFROWCA.Anonymous
 
         private void PopulateLocationDropDowns()
         {
-            int countryId = 0;
-            int.TryParse(ddlCountry.SelectedValue, out countryId);
-            if (countryId > 0)
+            PopulateAdmin1();
+            PopulateAdmin2();
+        }
+
+        private void PopulateAdmin1()
+        {
+            string countryIds = GetSelectedValues(ddlCountry);
+            if (countryIds != null)
             {
-                PopulateAdmin1(countryId);
-                PopulateAdmin2(countryId);
+                ddlAdmin1.DataValueField = "LocationId";
+                ddlAdmin1.DataTextField = "LocationName";
+
+                ddlAdmin1.DataSource = DBContext.GetData("GetAdmin1LocationsOfMultipleCountries", new object[] { countryIds });
+                ddlAdmin1.DataBind();
             }
         }
 
-        private void PopulateAdmin1(int countryId)
-        {
-            ddlAdmin1.DataValueField = "LocationId";
-            ddlAdmin1.DataTextField = "LocationName";
-
-            ddlAdmin1.DataSource = DBContext.GetData("GetAdmin1LocationsOfCountry", new object[] { countryId });
-            ddlAdmin1.DataBind();
-        }
-
         // Populate Locations drop down
-        private void PopulateAdmin2(int countryId)
+        private void PopulateAdmin2()
         {
-            ddlAdmin2.DataValueField = "LocationId";
-            ddlAdmin2.DataTextField = "LocationName";
+            string admin1Ids = GetSelectedValues(ddlAdmin1);
+            string countryIds = GetSelectedValues(ddlCountry);
+            if (countryIds != null)
+            {
 
-            ddlAdmin2.DataSource = DBContext.GetData("GetAdmin2LocationsOfCountry", new object[] { countryId });
-            ddlAdmin2.DataBind();
+                ddlAdmin2.DataValueField = "LocationId";
+                ddlAdmin2.DataTextField = "LocationName";
+                ddlAdmin2.DataSource = DBContext.GetData("GetAdmin2LocationsOfMultipleCountries", new object[] { countryIds, admin1Ids });
+                ddlAdmin2.DataBind();
+            }
         }
 
         private object GetReportLocations()
@@ -308,15 +307,20 @@ namespace SRFROWCA.Anonymous
 
         private void RemoveColumnsFromDataTable(DataTable dt)
         {
-            foreach (ListItem item in cbColumns.Items)
-            {
-                if (!item.Selected)
-                {
-                    dt.Columns.Remove(item.Value);
-                }
-            }
+            //foreach (ListItem item in cbColumns.Items)
+            //{
+            //    if (!item.Selected)
+            //    {
+            //        dt.Columns.Remove(item.Value);
+            //    }
+            //}
 
             dt.Columns.Remove("rnumber");
+            dt.Columns.Remove("ObjectiveId");
+            dt.Columns.Remove("PriorityId");
+            dt.Columns.Remove("ActivityId");
+            dt.Columns.Remove("IndicatorId");
+            dt.Columns.Remove("MonthId");
             dt.Columns.Remove("cnt");
 
         }
@@ -382,6 +386,8 @@ namespace SRFROWCA.Anonymous
             string fts = ddlFundingStatus.SelectedValue != "0" ? ddlFundingStatus.SelectedItem.Text : null;
             int? fromMonth = !string.IsNullOrEmpty(txtFromDate.Text.Trim()) ? Convert.ToInt32(txtFromDate.Text.Trim().Substring(0, 2)) : (int?)null;
             int? toMonth = !string.IsNullOrEmpty(txtToDate.Text.Trim()) ? Convert.ToInt32(txtToDate.Text.Trim().Substring(0, 2)) : (int?)null;
+            int? regionalInd = cbRegional.Checked ? 1 : (int?)null;
+            int? countryInd = cbCountry.Checked ? 1 : (int?)null;
             int pageSize = gvReport.PageSize;
             int pageIndex = GridPageIndex; //gvReport.PageIndex;
             int langId = 1;
@@ -390,7 +396,7 @@ namespace SRFROWCA.Anonymous
 
             return new object[] { monthIds, locationIds, clusterIds, orgIds, 
                                     objIds, prIds, actIds, indIds, projectIds, fts,
-                                    fromMonth, toMonth,
+                                    fromMonth, toMonth, regionalInd, countryInd,
                                     pageIndex, pageSize, Convert.ToInt32(SQLPaging), langId };
         }
 
@@ -399,7 +405,7 @@ namespace SRFROWCA.Anonymous
             string locationIds = null;
             if ((int)LastLocationType == 1)
             {
-                locationIds = ddlCountry.SelectedValue;
+                locationIds = GetSelectedValues(ddlCountry);
             }
             else if ((int)LastLocationType == 2)
             {
@@ -499,11 +505,22 @@ namespace SRFROWCA.Anonymous
             return sortDirection;
         }
 
+        protected void ExportToExcel(object sender, EventArgs e)
+        {
+            SQLPaging = PagingStatus.OFF;
+            DataTable dt = GetReportData();
+            SQLPaging = PagingStatus.ON;
+            RemoveColumnsFromDataTable(dt);
+            GridView gv = new GridView();
+            gv.DataSource = dt;
+            gv.DataBind();
+
+            ExportUtility.ExportGridView(gv, "ORS_CustomReport", ".xls", Response, true);
+        }
+
         public override void VerifyRenderingInServerForm(Control control) { }
 
         #endregion
-
-
 
         #endregion
 
