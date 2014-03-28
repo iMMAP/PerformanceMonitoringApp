@@ -18,8 +18,8 @@
             background-color: #F08080;
         }
     </style>
-    <script type="text/javascript" src="../Scripts/ShowHideObJAndPr.js"></script>
-    <script type="text/javascript" src="../Scripts/jq-highlight.js"></script>
+    <script type="text/javascript" src="../assets/orsjs/ShowHideObJAndPr.js"></script>
+    <script type="text/javascript" src="../assets/orsjs/jq-highlight.js"></script>
     <script>
         $(function () {
             showHideObj();
