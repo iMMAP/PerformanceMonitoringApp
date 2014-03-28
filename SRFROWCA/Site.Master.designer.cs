@@ -67,6 +67,24 @@ namespace SRFROWCA {
         protected global::System.Web.UI.WebControls.LoginName HeadLoginName;
         
         /// <summary>
+        /// lnkLanguageEnglish control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkLanguageEnglish;
+        
+        /// <summary>
+        /// lnkLanguageFrench control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkLanguageFrench;
+        
+        /// <summary>
         /// HeadLoginStatus control.
         /// </summary>
         /// <remarks>
@@ -94,13 +112,13 @@ namespace SRFROWCA {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liReports;
         
         /// <summary>
-        /// liWebForm1 control.
+        /// liCustomReport control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liWebForm1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCustomReport;
         
         /// <summary>
         /// liDataEntry control.
@@ -155,6 +173,24 @@ namespace SRFROWCA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor menuManageActivities;
+        
+        /// <summary>
+        /// liRegionalIndicators control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liRegionalIndicators;
+        
+        /// <summary>
+        /// menuRegionalIndicators control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuRegionalIndicators;
         
         /// <summary>
         /// MainContent control.

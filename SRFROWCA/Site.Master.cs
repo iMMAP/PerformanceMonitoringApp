@@ -32,77 +32,70 @@ namespace SRFROWCA
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            HideAllAuthenticatedMenues();
+
             if (HttpContext.Current.User.Identity.IsAuthenticated)
             {
                 LoginStatus.Visible = false;
                 spanWelcome.Visible = true;
+
                 if (HttpContext.Current.User.IsInRole("User"))
                 {
-                    menuDataEntry.Visible = true;
-                    menuManageProjects.Visible = true;
-                    menuManageActivities.Visible = true;
-                    ActiveMenueItem();
+                    ShowUserMenue();
 
                 }
-                else
+
+                if (HttpContext.Current.User.IsInRole("ClusterLead"))
                 {
-                    menuDataEntry.Visible = false;
-                    menuManageProjects.Visible = false;
-                    menuManageActivities.Visible = false;
+                    ShowClusterLeadMenue();
                 }
+
+                if (HttpContext.Current.User.IsInRole("RegionalClusterLead "))
+                {
+                    ShowRegionalLeadMenue();
+                }
+
+                //
             }
-            else
-            {
-                liDataEntry.Visible = false;
-                liManageProject.Visible = false;
-                liManageActivity.Visible = false;
-                menuDataEntry.Visible = false;
-                menuManageProjects.Visible = false;
-                menuManageActivities.Visible = false;
-            }
-            //    LoginStatus.Visible = false;
-            //    //HeadLoginStatus.Visible = true;
-            //    //ResiterStatus.Visible = false;
-            //    if (!(HttpContext.Current.User.IsInRole("Admin"))
-            //        && !(HttpContext.Current.User.IsInRole("CountryAdmin")))
-            //    {
-            //        //AdminMenue.Visible = false;
-
-            //        if (HttpContext.Current.User.IsInRole("ClusterLead"))
-            //        {
-            //            //menuMyActivities.HRef = "~/ClusterLead/AddSRPActivitiesFromMasterList.aspx";
-            //            //spnManageActivities.InnerText = "SRP Activities";
-
-            //            //menuManageProjects.HRef = "~/ClusterLead/ProjectsListing.aspx";
-            //            //spnManageProject.InnerText = UserInfo.CountryName + " Projects";
-
-            //            menuDataEntry.Visible = false;
-            //        }
-            //        else
-            //        {
-            //            //spnManageActivities.InnerText = "Manage Activities";
-            //            //spnManageProject.InnerText = "Manage Projects";
-            //        }
-            //    }
-            //    else
-            //    {
-
-            //        //menuMyActivities.Visible = false;
-            //        menuDataEntry.Visible = false;
-            //    }
-            //}
-            //else
-            //{
-            //    LoginStatus.Visible = true;
-            //    //HeadLoginStatus.Visible = false;
-            //    //ResiterStatus.Visible = true;
-            //    //AdminMenue.Visible = false;
-            //    //MySettingsMenue.Visible = false;
-            //    //menuMyActivities.Visible = false;
-            //    menuDataEntry.Visible = false;
-            //}
-
+            ActiveMenueItem();
         }
+
+        private void HideAllAuthenticatedMenues()
+        {
+            bool isShow = false;
+
+            menuDataEntry.Visible = isShow;
+            liDataEntry.Visible = isShow;
+            menuManageProjects.Visible = isShow;
+            liManageProject.Visible = isShow;
+            menuManageActivities.Visible = isShow;
+            liManageActivity.Visible = isShow;
+            menuRegionalIndicators.Visible = isShow;
+            liRegionalIndicators.Visible = isShow;
+        }
+
+        private void ShowUserMenue()
+        {
+            bool isShow = true;
+
+            menuDataEntry.Visible = isShow;
+            liDataEntry.Visible = isShow;
+            menuManageProjects.Visible = isShow;
+            liManageProject.Visible = isShow;
+            menuManageActivities.Visible = isShow;
+            liManageActivity.Visible = isShow;
+        }
+
+        private void ShowRegionalLeadMenue()
+        {
+            bool isShow = true;
+            menuRegionalIndicators.Visible = isShow;
+            liRegionalIndicators.Visible = isShow;
+        }
+
+        private void ShowClusterLeadMenue()
+        {}
+
         private void ActiveMenueItem()
         {
             string uri = HttpContext.Current.Request.Url.AbsolutePath;
@@ -122,10 +115,10 @@ namespace SRFROWCA
             {
                 liDefault.Attributes.Add("class", "active");
             }
-            else if (uri == "/Webform1.aspx")
+            else if (uri == "/Anonymous/AllData.aspx")
             {
                 liReports.Attributes.Add("class", "active open");
-                liWebForm1.Attributes.Add("class", "active");
+                liCustomReport.Attributes.Add("class", "active");
             }
 
             //foreach (Control ctrl in nav.Controls)

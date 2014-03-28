@@ -363,6 +363,7 @@
     <Content Include="Pages\CreateProject.aspx" />
     <Content Include="Pages\ManageActivities.aspx" />
     <Content Include="Pages\TargetsAchievedOfLocationByDuration.ascx" />
+    <Content Include="RegionalLead\ManageRegionalIndicators.aspx" />
     <Content Include="RegisterSuccess.aspx" />
     <Content Include="ReportsCharts\AllTargetsAndAchieved.ascx" />
     <Content Include="ReportsCharts\ChartReport.aspx" />
@@ -806,6 +807,13 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="RegionalLead\ManageRegionalIndicators.aspx.cs">
+      <DependentUpon>ManageRegionalIndicators.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegionalLead\ManageRegionalIndicators.aspx.designer.cs">
+      <DependentUpon>ManageRegionalIndicators.aspx</DependentUpon>
     </Compile>
     <Compile Include="RegisterSuccess.aspx.cs">
       <DependentUpon>RegisterSuccess.aspx</DependentUpon>
