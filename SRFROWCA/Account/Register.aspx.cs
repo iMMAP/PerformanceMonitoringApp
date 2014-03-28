@@ -290,7 +290,7 @@ namespace SRFROWCA.Account
 
         private void InsertClusters(Guid userId)
         {
-            if (ddlUserRole.SelectedValue.Equals("2"))
+            if (ddlUserRole.SelectedValue.Equals("2") || ddlUserRole.SelectedValue.Equals("3"))
             {
                 int clusterId = Convert.ToInt32(ddlClusters.SelectedValue);
                 DBContext.Add("InsertASPNetUserCluster", new object[] { userId, clusterId, DBNull.Value });
