@@ -253,7 +253,7 @@
                                                                                         <span>Admin1:</span>
                                                                                     </td>
                                                                                     <td>
-                                                                                        <cc:DropDownCheckBoxes ID="ddlAdmin1" runat="server" CssClass="ddlWidth" OnSelectedIndexChanged="ddlAdmin1_SelectedIndexChanged"
+                                                                                        <cc:DropDownCheckBoxes ID="ddlAdmin1" runat="server" CssClass="ddlWidth" OnSelectedIndexChanged="ddlAdmin1_SelectedIndexChanged" AutoPostBack="true"
                                                                                             AddJQueryReference="True" meta:resourcekey="checkBoxes2Resource1" UseButtons="False"
                                                                                             UseSelectAllNode="True">
                                                                                             <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>

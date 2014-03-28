@@ -12,7 +12,7 @@ using SRFROWCA.Reports;
 using System.Linq;
 namespace SRFROWCA.Anonymous
 {
-    public partial class AllData : BasePage
+    public partial class AllData : System.Web.UI.Page
     {        
         protected void Page_Load(object sender, EventArgs e)
         {
