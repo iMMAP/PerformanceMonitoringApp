@@ -155,7 +155,7 @@
                                                 </div>
                                                 <div class="widget-body">
                                                     <div class="widget-main">
-                                                        <input id="Text1" type="text" class="ddlWidth" />
+                                                        <input id="txtIndicator" type="text" class="ddlWidth" />
                                                     </div>
                                                 </div>
                                             </div>
