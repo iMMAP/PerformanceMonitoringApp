@@ -43,8 +43,10 @@ namespace SRFROWCA.Common
             get
             {
                 int i = 0;
-                int.TryParse(HttpContext.Current.Session["UserCluster"].ToString(), out i);
-
+                if (HttpContext.Current.Session["UserCluster"] != null)
+                {
+                    int.TryParse(HttpContext.Current.Session["UserCluster"].ToString(), out i);
+                }
                 return i;
             }
         }
@@ -54,7 +56,10 @@ namespace SRFROWCA.Common
             get
             {
                 int i = 0;
-                int.TryParse(HttpContext.Current.Session["UserOrg"].ToString(), out i);
+                if (HttpContext.Current.Session["UserOrg"] != null)
+                {
+                    int.TryParse(HttpContext.Current.Session["UserOrg"].ToString(), out i);
+                }
                 return i;
             }
         }
@@ -64,7 +69,10 @@ namespace SRFROWCA.Common
             get
             {
                 int i = 0;
-                int.TryParse(HttpContext.Current.Session["UserLocationEmergencyId"].ToString(), out i);
+                if (HttpContext.Current.Session["UserLocationEmergencyId"] != null)
+                {
+                    int.TryParse(HttpContext.Current.Session["UserLocationEmergencyId"].ToString(), out i);
+                }
                 return i;
             }
         }
@@ -74,7 +82,10 @@ namespace SRFROWCA.Common
             get
             {
                 int i = 0;
-                int.TryParse(HttpContext.Current.Session["UserEmergencyClusterId"].ToString(), out i);
+                if (HttpContext.Current.Session["UserEmergencyClusterId"] != null)
+                {
+                    int.TryParse(HttpContext.Current.Session["UserEmergencyClusterId"].ToString(), out i);
+                }
                 return i;
             }
         }
@@ -84,7 +95,10 @@ namespace SRFROWCA.Common
             get
             {
                 int i = 0;
-                int.TryParse(HttpContext.Current.Session["EmergencyId"].ToString(), out i);
+                if (HttpContext.Current.Session["EmergencyId"] != null)
+                {
+                    int.TryParse(HttpContext.Current.Session["EmergencyId"].ToString(), out i);
+                }
                 return i;
             }
         }
