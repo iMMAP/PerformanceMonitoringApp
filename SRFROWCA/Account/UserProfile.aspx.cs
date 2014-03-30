@@ -20,8 +20,8 @@ namespace SRFROWCA.Account
             this.Form.DefaultButton = this.btnUpdate.UniqueID;
 
             PopulateCountries();
-                GetUserInformation();
-            
+            GetUserInformation();
+
         }
 
         private void GetUserInformation()
@@ -44,7 +44,7 @@ namespace SRFROWCA.Account
 
         private DataTable GetUserDetails(Guid userId)
         {
-            return DBContext.GetData("GetUserDetails", new object[] { userId });
+            return RC.GetUserDetails();
         }
 
         // Populate countries drop down.
@@ -83,7 +83,7 @@ namespace SRFROWCA.Account
                 ShowMessage("Some error occoured while updating your profile. Please contact to Admin of the site.",
                     RC.NotificationType.Error);
             }
-            
+
         }
 
         private object[] GetUserValues(Guid userId)

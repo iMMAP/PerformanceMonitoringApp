@@ -14,6 +14,12 @@ namespace SRFROWCA.Account
 
             if (!IsPostBack)
             {
+                Button btn = this.LoginUser.FindControl("LoginButton") as Button;
+                if (btn != null)
+                {
+                    this.Form.DefaultButton = btn.UniqueID;
+                }
+
                 TextBox tb = this.LoginUser.FindControl("UserName") as TextBox;
                 if (tb != null)
                 {
@@ -24,14 +30,20 @@ namespace SRFROWCA.Account
 
         protected void LoginUser_LoggedIn(Object sender, EventArgs e)
         {
-            if (Roles.IsUserInRole(LoginUser.UserName, "ClusterLead"))
-            {
-                Response.Redirect("~/ClusterLead/ProjectsListing.aspx");
-            }
-            else if (Roles.IsUserInRole(LoginUser.UserName, "User"))
+            //if (Roles.IsUserInRole(LoginUser.UserName, "ClusterLead"))
+            //{
+            //    Response.Redirect("~/ClusterLead/ProjectsListing.aspx");
+            //}
+
+            if (Roles.IsUserInRole(LoginUser.UserName, "User"))
             {
                 Response.Redirect("~/Pages/AddActivities.aspx");
             }
+
+            //else if (Roles.IsUserInRole(LoginUser.UserName, "RegionalClusterLead"))
+            //{
+            //    Response.Redirect("~/Pages/AddActivities.aspx");
+            //}
         }
 
         protected void LoginUser_LoginError(object sender, EventArgs e)
@@ -43,11 +55,11 @@ namespace SRFROWCA.Account
                 // Is this user locked out?
                 if (usrInfo.IsLockedOut)
                 {
-                    LoginUser.FailureText = "Your account has been locked out. Please contact the administrator to have your account unlocked.";
+                    LoginUser.FailureText = "Your account has been locked out. Please contact the admin of the site for futher details.";
                 }
                 else if (!usrInfo.IsApproved)
                 {
-                    LoginUser.FailureText = "Your account has not yet been approved. You cannot login until an administrator has approved your account.";
+                    LoginUser.FailureText = "Your account has not yet been approved. You cannot login until an admin of the site approve your account.";
                 }
             }
             else
