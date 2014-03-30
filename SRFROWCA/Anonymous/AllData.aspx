@@ -51,7 +51,7 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 ">
                                     <div class="widget-box">
-                                        <div class="widget-header widget-header-small header-color-orange">
+                                        <div class="widget-header widget-header-small header-color-blue2">
                                             <h6>
                                                 <button runat="server" id="btnExportToExcel" onserverclick="ExportToExcel" class="width-10 btn btn-sm btn-primary"
                                                     title="Excel">
