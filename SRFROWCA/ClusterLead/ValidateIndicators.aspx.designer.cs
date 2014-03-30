@@ -22,15 +22,6 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.Label lblProjectTitle;
         
         /// <summary>
-        /// lblProjectCode control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblProjectCode;
-        
-        /// <summary>
         /// lblOrganization control.
         /// </summary>
         /// <remarks>
@@ -65,6 +56,15 @@ namespace SRFROWCA.ClusterLead {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblReportingPeriod;
+        
+        /// <summary>
+        /// btnApprove control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnApprove;
         
         /// <summary>
         /// gvIndicators control.

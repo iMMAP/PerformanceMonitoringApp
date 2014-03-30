@@ -7,9 +7,112 @@
     <!-- ace styles -->
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+        </script>
+        <ul class="breadcrumb">
+            <li><i class="icon-home home-icon"></i><a href="#">Home</a> </li>
+            <li class="active">Validate</li>
+        </ul>
+        <!-- .breadcrumb -->
+    </div>
     <div class="page-content">
         <div id="divMsg">
         </div>
+        <table width="100%">
+            <tr>
+                <td>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 ">
+                            <div class="widget-box">
+                                <div class="widget-header widget-header-small header-color-blue2">
+                                    <h6>
+                                        <%-- <button runat="server" id="btnExportToExcel" onserverclick="ExportToExcel" class="width-10 btn btn-sm btn-primary"
+                                            title="Excel">
+                                            <i class="icon-download"></i>Excel
+                                        </button>--%>
+                                    </h6>
+                                    <div class="widget-toolbar">
+                                        <a href="#" data-action="collapse"><i class="icon-chevron-down"></i></a>
+                                    </div>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <div class="widget-box no-border">
+                                                            <div class="widget-body">
+                                                                <div class="widget-main padding-6">
+                                                                    <table width="100%">
+                                                                        <tr>
+                                                                            <td width="100px">
+                                                                                Project Code:
+                                                                            </td>
+                                                                            <td>
+                                                                                <asp:DropDownList ID="ddlProjects" runat="server" CssClass="width-100" 
+                                                                                AutoPostBack="true" OnSelectedIndexChanged="ddl_SelectedIndexChanged" >
+                                                                                </asp:DropDownList>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                Months:
+                                                                            </td>
+                                                                            <td>
+                                                                                <asp:DropDownList ID="ddlMonths" runat="server" CssClass="width-100"
+                                                                                AutoPostBack="true" OnSelectedIndexChanged="ddl_SelectedIndexChanged">
+                                                                                </asp:DropDownList>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-9">
+                                                        <div class="widget-box no-border">
+                                                            <div class="widget-body">
+                                                                <div class="widget-main padding-6">
+                                                                    <table class="width-100">
+                                                                        <tr>
+                                                                            <td width="100px">
+                                                                                Project Title:
+                                                                            </td>
+                                                                            <td>
+                                                                                <asp:DropDownList ID="ddlProjectTitle" runat="server" CssClass="width-100"
+                                                                                AutoPostBack="true" OnSelectedIndexChanged="ddl_SelectedIndexChanged">
+                                                                                </asp:DropDownList>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                Organization:
+                                                                            </td>
+                                                                            <td>
+                                                                                <asp:DropDownList ID="ddlOrganizations" runat="server" CssClass="width-100"
+                                                                                AutoPostBack="true" OnSelectedIndexChanged="ddl_SelectedIndexChanged">
+                                                                                </asp:DropDownList>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
         <div class="row">
             <div class="col-sm-12 widget-container-span">
                 <div class="widget-box">
@@ -35,7 +138,7 @@
                                         <asp:BoundField DataField="OrganizationName" HeaderText="Organization" SortExpression="OrganizationName" />
                                         <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
                                         <asp:BoundField DataField="CreatedDate" HeaderText="Last Updated" SortExpression="CreatedDate" />
-                                        <asp:TemplateField>
+                                        <asp:TemplateField HeaderText="View Details">
                                             <ItemTemplate>
                                                 <asp:ImageButton ID="imgbtnView" runat="server" ImageUrl="~/assets/orsimages/view.png"
                                                     CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>' CommandName="ViewReport" />
