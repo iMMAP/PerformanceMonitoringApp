@@ -31,13 +31,13 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.CheckBoxList cblPriorities;
         
         /// <summary>
-        /// btnAddSRPActivity control.
+        /// localizeClusterName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddSRPActivity;
+        protected global::System.Web.UI.WebControls.Localize localizeClusterName;
         
         /// <summary>
         /// gvSRPIndicators control.
