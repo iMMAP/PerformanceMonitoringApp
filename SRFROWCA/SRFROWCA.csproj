@@ -268,6 +268,9 @@
     <Content Include="assets\orsimages\cind.png" />
     <Content Include="assets\orsimages\ddlarrow.png" />
     <Content Include="assets\orsimages\droparrow.png" />
+    <Content Include="assets\orsimages\edit-file-icon.png" />
+    <Content Include="assets\orsimages\edit-file-icon0.png" />
+    <Content Include="assets\orsimages\edit-file-icon2.png" />
     <Content Include="assets\orsimages\error.png" />
     <Content Include="assets\orsimages\excel.png" />
     <Content Include="assets\orsimages\icon\agr.png" />
@@ -293,13 +296,16 @@
     <Content Include="assets\orsimages\icon\so3.png" />
     <Content Include="assets\orsimages\icon\wash.png" />
     <Content Include="assets\orsimages\loginmenuarrow.png" />
+    <Content Include="assets\orsimages\logo.png" />
     <Content Include="assets\orsimages\minus.png" />
     <Content Include="assets\orsimages\O.png" />
     <Content Include="assets\orsimages\P.png" />
     <Content Include="assets\orsimages\pdf.png" />
+    <Content Include="assets\orsimages\pencil.png" />
     <Content Include="assets\orsimages\plus.png" />
     <Content Include="assets\orsimages\rind.png" />
     <Content Include="assets\orsimages\rssfeed.png" />
+    <Content Include="assets\orsimages\view.png" />
     <Content Include="assets\orsimages\word.png" />
     <Content Include="assets\orsjs\dashboard.js" />
     <Content Include="assets\orsjs\hc\adapters\mootools-adapter.js" />
@@ -338,7 +344,8 @@
     <Content Include="Anonymous\AllData.aspx" />
     <Content Include="ClusterLead\AddSRPActivitiesFromMasterList.aspx" />
     <Content Include="ClusterLead\AddSRPActivity.aspx" />
-    <Content Include="ClusterLead\ManageActivitiesClsuterLead.aspx" />
+    <Content Include="ClusterLead\ValidateIndicators.aspx" />
+    <Content Include="ClusterLead\ValidateReportList.aspx" />
     <Content Include="DataFeeds\AdminDataFeeds.aspx" />
     <Content Include="Admin\EmergencyListing.aspx" />
     <Content Include="Admin\OfficeListing.aspx" />
@@ -374,6 +381,10 @@
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Reports\AllData.aspx" />
+    <Content Include="Reports\ProjectByClusters.aspx" />
+    <Content Include="Reports\ProjectsByCluster.aspx" />
+    <Content Include="Reports\ProjectsByCountry.aspx" />
+    <Content Include="Reports\ProjectsPerOrganization.aspx" />
     <Content Include="UploadSRPLogFrame.aspx" />
     <Content Include="UserManual_files\colorschememapping.xml" />
     <Content Include="UserManual_files\filelist.xml" />
@@ -400,16 +411,16 @@
     <Content Include="OPS\OPSProjectFeed.ashx" />
     <Content Include="xmlprojectfeeds.aspx" />
     <Content Include="ClusterLead\Web.config" />
-    <EntityDeploy Include="ORSModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ORSModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <None Include="assets\font\cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff" />
     <None Include="assets\font\DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff" />
     <None Include="assets\font\fontawesome-webfontd41d.eot" />
     <None Include="assets\font\fontawesome-webfontf77b.eot" />
     <None Include="assets\font\fontawesome-webfontf77b.ttf" />
     <None Include="assets\font\fontawesome-webfontf77b.woff" />
+    <EntityDeploy Include="ORSModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ORSModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -597,14 +608,22 @@
     <Compile Include="ClusterLead\AddSRPActivity.aspx.designer.cs">
       <DependentUpon>AddSRPActivity.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ClusterLead\ManageActivitiesClsuterLead.aspx.cs">
-      <DependentUpon>ManageActivitiesClsuterLead.aspx</DependentUpon>
+    <Compile Include="ClusterLead\ValidateIndicators.aspx.cs">
+      <DependentUpon>ValidateIndicators.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ClusterLead\ManageActivitiesClsuterLead.aspx.designer.cs">
-      <DependentUpon>ManageActivitiesClsuterLead.aspx</DependentUpon>
+    <Compile Include="ClusterLead\ValidateIndicators.aspx.designer.cs">
+      <DependentUpon>ValidateIndicators.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClusterLead\ValidateReportList.aspx.cs">
+      <DependentUpon>ValidateReportList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClusterLead\ValidateReportList.aspx.designer.cs">
+      <DependentUpon>ValidateReportList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Common\GeneratePDF.cs" />
+    <Compile Include="Common\ObjPrToolTip.cs" />
     <Compile Include="Common\UserInfo.cs" />
     <Compile Include="DataFeed.ashx.cs">
       <DependentUpon>DataFeed.ashx</DependentUpon>
@@ -893,6 +912,34 @@
     </Compile>
     <Compile Include="Reports\AllData.aspx.designer.cs">
       <DependentUpon>AllData.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ProjectByClusters.aspx.cs">
+      <DependentUpon>ProjectByClusters.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ProjectByClusters.aspx.designer.cs">
+      <DependentUpon>ProjectByClusters.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ProjectsByCluster.aspx.cs">
+      <DependentUpon>ProjectsByCluster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ProjectsByCluster.aspx.designer.cs">
+      <DependentUpon>ProjectsByCluster.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ProjectsByCountry.aspx.cs">
+      <DependentUpon>ProjectsByCountry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ProjectsByCountry.aspx.designer.cs">
+      <DependentUpon>ProjectsByCountry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ProjectsPerOrganization.aspx.cs">
+      <DependentUpon>ProjectsPerOrganization.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ProjectsPerOrganization.aspx.designer.cs">
+      <DependentUpon>ProjectsPerOrganization.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>

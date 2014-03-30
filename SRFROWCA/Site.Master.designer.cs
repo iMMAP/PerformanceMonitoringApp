@@ -193,6 +193,42 @@ namespace SRFROWCA {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor menuRegionalIndicators;
         
         /// <summary>
+        /// liSRPIndicators control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liSRPIndicators;
+        
+        /// <summary>
+        /// menueSRPIndicators control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueSRPIndicators;
+        
+        /// <summary>
+        /// liValidateIndicators control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liValidateIndicators;
+        
+        /// <summary>
+        /// menueValidateIndicaotrs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueValidateIndicaotrs;
+        
+        /// <summary>
         /// MainContent control.
         /// </summary>
         /// <remarks>

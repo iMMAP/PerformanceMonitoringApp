@@ -42,7 +42,6 @@ namespace SRFROWCA
                 if (HttpContext.Current.User.IsInRole("User"))
                 {
                     ShowUserMenue();
-
                 }
 
                 if (HttpContext.Current.User.IsInRole("ClusterLead"))
@@ -72,6 +71,10 @@ namespace SRFROWCA
             liManageActivity.Visible = isShow;
             menuRegionalIndicators.Visible = isShow;
             liRegionalIndicators.Visible = isShow;
+            menueSRPIndicators.Visible = isShow;
+            liSRPIndicators.Visible = isShow;
+            menueValidateIndicaotrs.Visible = isShow;
+            liValidateIndicators.Visible = isShow;
         }
 
         private void ShowUserMenue()
@@ -94,7 +97,13 @@ namespace SRFROWCA
         }
 
         private void ShowClusterLeadMenue()
-        {}
+        {
+            bool isShow = true;
+            menueSRPIndicators.Visible = isShow;
+            liSRPIndicators.Visible = isShow;
+            menueValidateIndicaotrs.Visible = isShow;
+            liValidateIndicators.Visible = isShow;
+        }
 
         private void ActiveMenueItem()
         {

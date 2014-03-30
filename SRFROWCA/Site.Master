@@ -5,7 +5,7 @@
 <head id="Head1" runat="server">
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
     <meta charset="utf-8" />
-    <title>Dashboard - ORS</title>
+    <title>ORS</title>
     <meta name="description" content="overview &amp; stats" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- basic styles -->
@@ -57,7 +57,7 @@
         </script>
         <div class="navbar-container" id="navbar-container">
             <div class="navbar-header pull-left">
-                <a href="#" class="navbar-brand"><small><i class="icon-leaf"></i>ORS</small> </a>
+                <a href="<%# BaseURL %>/Default.aspx" class="navbar-brand"><img src="<%# BaseURL %>/assets/orsimages/logo.png" alt="OCHA"/></a>
                 <!-- /.brand -->
             </div>
             <!-- /.navbar-header -->
@@ -157,7 +157,7 @@
                             </span><i class="icon-caret-down"></i></a>
                         <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
                             <li><a href="#"><i class="icon-cog"></i>Settings </a></li>
-                            <li><a href="#"><i class="icon-user"></i>Profile </a></li>
+                            <li><a href="<%# BaseURL %>Account/UserProfile.aspx"><i class="icon-user"></i>Profile </a></li>
                             <li class="divider"></li>
                             <li>
                                 <asp:LinkButton ID="lnkLanguageEnglish" Text="English" runat="server" OnClick="lnkLanguageEnglish_Click"
@@ -168,7 +168,7 @@
                             <li class="divider"></li>
                             <li>
                                 <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Logout"
-                                    OnLoggedOut="HeadLoginStatus_LoggedOut" LogoutPageUrl="~/Default.aspx" CssClass="icon-off" />
+                                    OnLoggedOut="HeadLoginStatus_LoggedOut" LogoutPageUrl="~/Default.aspx" />
                             </li>
                         </ul>
                     </li>
@@ -214,22 +214,17 @@
                 <ul class="nav nav-list">
                     <li id="liDefault" runat="server"><a href="../Default.aspx"><i class="icon-dashboard">
                     </i><span class="menu-text">Dashboard </span></a></li>
-
-                    <li id="liReports" runat="server">
-                        <a href="#" class="dropdown-toggle">
-                            <i class="icon-text-width"></i>
-                                <span class="menu-text">Reports </span>
-                                <b class="arrow icon-angle-down"></b>
-                        </a>
+                    <li id="liReports" runat="server"><a href="#" class="dropdown-toggle"><i class="icon-text-width">
+                    </i><span class="menu-text">Reports </span><b class="arrow icon-angle-down"></b></a>
                         <ul class="submenu">
                             <li id="liCustomReport" runat="server"><a href="../Anonymous/AllData.aspx"><i class="icon-double-angle-right">
                             </i>Custom Report </a></li>
-                            <li><a href="buttons.html"><i class="icon-double-angle-right"></i>Buttons &amp; Icons
-                            </a></li>
-                            <li><a href="treeview.html"><i class="icon-double-angle-right"></i>Treeview </a>
-                            </li>
-                            <li><a href="jquery-ui.html"><i class="icon-double-angle-right"></i>jQuery UI </a>
-                            </li>
+                            <li><a href="../Reports/ProjectsPerOrganization.aspx"><i class="icon-double-angle-right">
+                            </i>Projects Per Orgs </a></li>
+                            <li><a href="../Reports/ProjectsByCountry.aspx"><i class="icon-double-angle-right"></i>
+                                Projects Per Country </a></li>
+                            <li><a href="../Reports/ProjectByClusters.aspx"><i class="icon-double-angle-right"></i>
+                                Projects Per Clusters</a> </li>
                             <li><a href="nestable-list.html"><i class="icon-double-angle-right"></i>Nestable Lists
                             </a></li>
                             <li><a href="#" class="dropdown-toggle"><i class="icon-double-angle-right"></i>Three
@@ -280,43 +275,16 @@
                     <li id="liManageActivity" runat="server"><a href="~/Pages/ManageActivities.aspx"
                         id="menuManageActivities" runat="server"><i class="icon-list-alt"></i><span class="menu-text">
                             Manage Activities</span> </a></li>
-
                     <li id="liRegionalIndicators" runat="server"><a href="~/RegionalLead/ManageRegionalIndicators.aspx"
                         id="menuRegionalIndicators" runat="server"><i class="icon-list-alt"></i><span class="menu-text">
                             Regional Indicators</span> </a></li>
-                    <li><a href="calendar.html"><i class="icon-calendar"></i><span class="menu-text">Calendar
-                        <span class="badge badge-transparent tooltip-error" title="2&nbsp;Important&nbsp;Events">
-                            <i class="icon-warning-sign red bigger-130"></i></span></span></a></li>
-                    <li><a href="gallery.html"><i class="icon-picture"></i><span class="menu-text">Gallery
-                    </span></a></li>
-                    <li><a href="#" class="dropdown-toggle"><i class="icon-tag"></i><span class="menu-text">
-                        More Pages </span><b class="arrow icon-angle-down"></b></a>
-                        <ul class="submenu">
-                            <li><a href="profile.html"><i class="icon-double-angle-right"></i>User Profile </a>
-                            </li>
-                            <li><a href="inbox.html"><i class="icon-double-angle-right"></i>Inbox </a></li>
-                            <li><a href="pricing.html"><i class="icon-double-angle-right"></i>Pricing Tables </a>
-                            </li>
-                            <li><a href="invoice.html"><i class="icon-double-angle-right"></i>Invoice </a></li>
-                            <li><a href="timeline.html"><i class="icon-double-angle-right"></i>Timeline </a>
-                            </li>
-                            <li><a href="../Account/Login.aspx"><i class="icon-double-angle-right"></i>Login &amp; Register
-                            </a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#" class="dropdown-toggle"><i class="icon-file-alt"></i><span class="menu-text">
-                        Other Pages <span class="badge badge-primary ">5</span> </span><b class="arrow icon-angle-down">
-                        </b></a>
-                        <ul class="submenu">
-                            <li><a href="faq.html"><i class="icon-double-angle-right"></i>FAQ </a></li>
-                            <li><a href="error-404.html"><i class="icon-double-angle-right"></i>Error 404 </a>
-                            </li>
-                            <li><a href="error-500.html"><i class="icon-double-angle-right"></i>Error 500 </a>
-                            </li>
-                            <li><a href="grid.html"><i class="icon-double-angle-right"></i>Grid </a></li>
-                            <li><a href="blank.html"><i class="icon-double-angle-right"></i>Blank Page </a></li>
-                        </ul>
-                    </li>
+                    <li id="liSRPIndicators" runat="server"><a href="~/ClusterLead/AddSRPActivitiesFromMasterList.aspx"
+                        id="menueSRPIndicators" runat="server"><i class="icon-list-alt"></i><span class="menu-text">Country
+                            Indicators</span> </a></li>
+                            <li id="liValidateIndicators" runat="server"><a href="~/ClusterLead/ValidateReportList.aspx"
+                        id="menueValidateIndicaotrs" runat="server"><i class="icon-list-alt"></i><span class="menu-text">Validate Indicators</span> </a></li>
+
+                            
                 </ul>
                 <!-- /.nav-list -->
                 <div class="sidebar-collapse" id="sidebar-collapse">
