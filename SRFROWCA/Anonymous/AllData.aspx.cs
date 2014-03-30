@@ -290,21 +290,6 @@ namespace SRFROWCA.Anonymous
             return DBContext.GetData("GetOrganizations", new object[] { orgId });
         }
 
-        private DataTable GetOffices()
-        {
-            int countryId = 0;
-            int.TryParse(ddlCountry.SelectedValue, out countryId);
-
-            if (countryId > 0)
-            {
-                return DBContext.GetData("GetOrganizationOffices", new object[] { countryId, (int?)null });
-            }
-            else
-            {
-                return DBContext.GetData("GetAllOffices");
-            }
-        }
-
         private void RemoveColumnsFromDataTable(DataTable dt)
         {
             //foreach (ListItem item in cbColumns.Items)
