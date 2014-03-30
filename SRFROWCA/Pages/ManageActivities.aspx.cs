@@ -10,8 +10,14 @@ namespace SRFROWCA.Pages
 {
     public partial class ManageActivities : BasePage
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected void Page_PreRender(object sender, EventArgs e)
         {
+            ObjPrToolTip.ObjectivesToolTip(cblObjectives);
+            ObjPrToolTip.PrioritiesToolTip(cblPriorities);
+        }
+
+        protected void Page_Load(object sender, EventArgs e)
+        {   
             if (!IsPostBack)
             {
                 UserInfo.UserProfileInfo();
@@ -21,20 +27,61 @@ namespace SRFROWCA.Pages
 
                 if (rblProjects.Items.Count > 0)
                 {
-                    rblProjects.SelectedIndex = 0;
+                    if (Request.QueryString["pid"] != null)
+                    {
+                        SelectedProjectId = Request.QueryString["pid"];
+                    }
+
+                    if (ProjectIdExists(SelectedProjectId))
+                    {
+                        rblProjects.SelectedValue = SelectedProjectId;
+                    }
+                    else
+                    {
+                        rblProjects.SelectedIndex = 0;
+                    }
+
                     PopulateLogFrame();
+                    SelectedProjectId = rblProjects.SelectedValue;
                 }
+            }
+        }
+
+        private bool ProjectIdExists(string SelectedProjectId)
+        {
+            foreach (ListItem item in rblProjects.Items)
+            {
+                if (item.Value == SelectedProjectId)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        internal override void BindGridData()
+        {
+            PopulateObjectives();
+            PopulatePriorities();
+
+            if (rblProjects.Items.Count > 0)
+            {
+                rblProjects.SelectedValue = SelectedProjectId;
+                PopulateLogFrame();
             }
         }
 
         private void PopulateObjectives()
         {
             UI.FillObjectives(cblObjectives, true);
+            ObjPrToolTip.ObjectivesToolTip(cblObjectives);
         }
 
         private void PopulatePriorities()
         {
             UI.FillPriorities(cblPriorities);
+            ObjPrToolTip.PrioritiesToolTip(cblPriorities);
         }
 
         private void PopulateProjects()
@@ -42,8 +89,26 @@ namespace SRFROWCA.Pages
             rblProjects.DataValueField = "ProjectId";
             rblProjects.DataTextField = "ProjectCode";
 
-            rblProjects.DataSource = GetUserProjects();
+            DataTable dt = GetUserProjects();
+            rblProjects.DataSource = dt;
             rblProjects.DataBind();
+
+            ProjectsToolTip(rblProjects, dt);
+
+        }
+
+        private void ProjectsToolTip(ListControl ctl, DataTable dt)
+        {
+            foreach (ListItem item in ctl.Items)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    if (item.Text == row["ProjectCode"].ToString())
+                    {
+                        item.Attributes["title"] = row["ProjectTitle"].ToString();
+                    }
+                }
+            }
         }
 
         private DataTable GetUserProjects()
@@ -143,7 +208,7 @@ namespace SRFROWCA.Pages
 
             if (projectClusterId > 0)
             {
-                dtIndicators = DBContext.GetData("GetProjectIndicators", new object[] { projectClusterId, UserInfo.EmergencyCountry, projectId, 1 });
+                dtIndicators = DBContext.GetData("GetProjectIndicators", new object[] { projectClusterId, UserInfo.EmergencyCountry, projectId, RC.SelectedSiteLanguageId });
             }
 
             gvIndicators.DataSource = dtIndicators;
@@ -159,63 +224,18 @@ namespace SRFROWCA.Pages
         {
             //int projectId = Convert.ToInt32(rblProjects.SelectedValue);
             PopulateLogFrame();
+            SelectedProjectId = rblProjects.SelectedValue;
         }
 
         protected void gvIndicators_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                Image imgObj = e.Row.FindControl("imgObjective") as Image;
-                if (imgObj != null)
-                {
-                    string txt = e.Row.Cells[0].Text;
-                    if (txt.Contains("1"))
-                    {
-                        imgObj.ImageUrl = "~/images/icon/so1.png";
-                        imgObj.ToolTip = "STRATEGIC OBJECTIVE 1: Track and analyse risk and vulnerability, integrating findings into humanitarian and evelopment programming.";
-                    }
-                    else if (txt.Contains("2"))
-                    {
-                        imgObj.ImageUrl = "~/images/icon/so2.png";
-                        imgObj.ToolTip = "STRATEGIC OBJECTIVE 2: Support vulnerable populations to better cope with shocks by responding earlier to warning signals, by reducing post-crisis recovery times and by building capacity of national actors.";
-                    }
-                    else if (txt.Contains("3"))
-                    {
-                        imgObj.ImageUrl = "~/images/icon/so3.png";
-                        imgObj.ToolTip = " STRATEGIC OBJECTIVE 3: Deliver coordinated and integrated life-saving assistance to people affected by emergencies.";
-                    }
-                }
-                Image imghp = e.Row.FindControl("imgPriority") as Image;
-                if (imghp != null)
-                {
-                    string txtHP = e.Row.Cells[1].Text;
-                    if (txtHP == "1")
-                    {
-                        imghp.ImageUrl = "~/images/icon/hp1.png";
-                        imghp.ToolTip = "Addressing the humanitarian impact Natural disasters (floods, etc.)";
-                    }
-                    else if (txtHP == "2")
-                    {
-                        imghp.ImageUrl = "~/images/icon/hp2.png";
-                        imghp.ToolTip = "Addressing the humanitarian impact of Conflict (IDPs, refugees, protection, etc.)";
-                    }
-                    else if (txtHP == "3")
-                    {
-                        imghp.ImageUrl = "~/images/icon/hp3.png";
-                        imghp.ToolTip = "Addressing the humanitarian impact of Epidemics (cholera, malaria, etc.)";
-                    }
-                    else if (txtHP == "4")
-                    {
-                        imghp.ImageUrl = "~/images/icon/hp4.png";
-                        imghp.ToolTip = "Addressing the humanitarian impact of Food insecurity";
-                    }
-                    else if (txtHP == "5")
-                    {
-                        imghp.ImageUrl = "~/images/icon/hp5.png";
-                        imghp.ToolTip = "Addressing the humanitarian impact of Malnutrition";
-                    }
+                ObjPrToolTip.ObjectiveIconToolTip(e);
+                ObjPrToolTip.PrioritiesIconToolTip(e);
 
-                }
+                ObjPrToolTip.RegionalIndicatorIcon(e, 4);
+                ObjPrToolTip.CountryIndicatorIcon(e, 5);
             }
         }
 
@@ -260,6 +280,20 @@ namespace SRFROWCA.Pages
                 Guid userId = RC.GetCurrentUserId;
                 int yearId = 10;
                 DBContext.Add("InsertProjectIndicator", new object[] { projectId, indicatorId, UserInfo.EmergencyCountry, yearId, isAdded.Checked, userId, DBNull.Value });
+            }
+        }
+
+        public string SelectedProjectId
+        {
+            get
+            {
+
+                return ViewState["ManageActivitesSelectedProjectId"] != null ?
+                    ViewState["ManageActivitesSelectedProjectId"].ToString() : "0";
+            }
+            set
+            {
+                ViewState["ManageActivitesSelectedProjectId"] = value.ToString();
             }
         }
     }

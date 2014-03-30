@@ -47,7 +47,7 @@ namespace SRFROWCA.Pages
             PopulateObjectives();
             PopulatePriorities();
 
-            this.Form.DefaultButton = this.btnSave.UniqueID;
+            //this.Form.DefaultButton = this.btnSave.UniqueID;
 
             string controlName = GetPostBackControlId(this);
 
@@ -58,7 +58,7 @@ namespace SRFROWCA.Pages
                 RemoveSelectedLocations(cblLocations);
             }
 
-            //if (controlName != "rblProjects")
+            if (controlName != "imgbtnComments")
             {
                 DataTable dtActivities = GetActivities();
                 AddDynamicColumnsInGrid(dtActivities);
@@ -67,11 +67,12 @@ namespace SRFROWCA.Pages
                 gvActivities.DataSource = dtActivities;
                 gvActivities.DataBind();
             }
+
         }
         private DataTable GetUserProjects()
         {
             bool? isOPSProject = null;
-            return DBContext.GetData("GetOrgProjectsOnLocation", new object[] { UserInfo.EmergencyCountry, UserInfo.Organization,  isOPSProject});
+            return DBContext.GetData("GetOrgProjectsOnLocation", new object[] { UserInfo.EmergencyCountry, UserInfo.Organization, isOPSProject });
         }
 
         private void PopulateProjects()
@@ -79,18 +80,11 @@ namespace SRFROWCA.Pages
             DataTable dt = GetUserProjects();
 
             rblProjects.DataValueField = "ProjectId";
-            rblProjects.DataTextField = "ProjectCode";            
+            rblProjects.DataTextField = "ProjectCode";
             rblProjects.DataSource = dt;
             rblProjects.DataBind();
 
-            cblExportProjects.DataValueField = "ProjectId";
-            cblExportProjects.DataTextField = "ProjectCode";
-            cblExportProjects.DataSource = dt;
-            cblExportProjects.DataBind();
-
             ProjectsToolTip(rblProjects, dt);
-            ProjectsToolTip(cblExportProjects, dt);
-
         }
 
         private void ProjectsToolTip(ListControl ctl, DataTable dt)
@@ -113,140 +107,217 @@ namespace SRFROWCA.Pages
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                DataEntryColumnsAlternateColors(e);
-                ObjectiveIconToolTip(e);
-                PrioritiesIconToolTip(e);
+                ObjPrToolTip.ObjectiveIconToolTip(e);
+                ObjPrToolTip.PrioritiesIconToolTip(e);
+                int activityDataId = 0;
+                int.TryParse(this.gvActivities.DataKeys[e.Row.RowIndex]["ActivityDataId"].ToString(), out activityDataId);
 
-
-                Image imgRind = e.Row.FindControl("imgRind") as Image;
-                if (imgRind != null)
-                {
-                    //if (e.Row.RowIndex == 2 || e.Row.RowIndex == 1)
-                    //{
-                    //    imgRind.ImageUrl = "~/images/rind.png";
-                    //    imgRind.ToolTip = "Regional Indicator";
-                    //}
-                    //else
-                    //{
-                    //    imgRind.Visible = false;
-                    //}
-                    imgRind.Visible = false;
-                }
-
-                Image imgCind = e.Row.FindControl("imgCind") as Image;
-                if (imgCind != null)
-                {
-                    //if (e.Row.RowIndex == 2 || e.Row.RowIndex == 3)
-                    //{
-                    //    imgCind.ImageUrl = "~/images/cind.png";
-                    //    imgCind.ToolTip = "Country Specific Indicator";
-                    //}
-                    //else
-                    //{
-                    //    imgCind.Visible = false;
-                    //}
-
-                    imgCind.Visible = false;
-                }
+                ObjPrToolTip.RegionalIndicatorIcon(e, 11);
+                ObjPrToolTip.CountryIndicatorIcon(e, 12);
             }
         }
 
-        private void PrioritiesIconToolTip(GridViewRowEventArgs e)
+        protected void gvActivities_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            Image imghp = e.Row.FindControl("imgPriority") as Image;
-            if (imghp != null)
+            if (e.CommandName == "AddComments")
             {
-                string txtHP = e.Row.Cells[1].Text;
-                if (txtHP == "1")
+                int rowIndex = int.Parse(e.CommandArgument.ToString());
+
+                int activityDataId = 0;
+                int.TryParse(this.gvActivities.DataKeys[rowIndex]["ActivityDataId"].ToString(), out activityDataId);
+
+                CommentsIndId = activityDataId;
+
+                if (activityDataId > 0)
                 {
-                    imghp.ImageUrl = "~/assets/orsimages/icon/hp1.png";
-                    imghp.ToolTip = RC.SelectedSiteLanguageId == 2 ?
-                        "Répondre aux conséquences humanitaires dues aux catastrophes naturelles (inondations, etc.)" :
-                        "Addressing the humanitarian impact Natural disasters (floods, etc.)";
+                    int yearId = 0;
+                    int.TryParse(ddlYear.SelectedValue, out yearId);
+
+                    int monthId = 0;
+                    int.TryParse(ddlMonth.SelectedValue, out monthId);
+
+                    int projectId = RC.GetSelectedIntVal(rblProjects);
+
+                    Guid userId = RC.GetCurrentUserId;
+
+                    using (ORSEntities db = new ORSEntities())
+                    {
+                        IndicatorComment comments = db.IndicatorComments
+                                                    .Where(x => x.YearId == yearId
+                                                            && x.MonthId == monthId
+                                                            && x.ProjectId == projectId
+                                                            && x.EmergencyLocationId == UserInfo.EmergencyCountry
+                                                            && x.Organizationid == UserInfo.Organization
+                                                        && x.ActivityDataId == activityDataId).SingleOrDefault();
+
+                        txtComments.Text = comments != null ? comments.Comments : "";
+                    }
                 }
-                else if (txtHP == "2")
-                {
-                    imghp.ImageUrl = "~/assets/orsimages/icon/hp2.png";
-                    imghp.ToolTip = RC.SelectedSiteLanguageId == 2 ?
-                        "Répondre aux conséquences humanitaires dues aux conflits (PDIs, refugies, protection, etc.)" :
-                        "Addressing the humanitarian impact of Conflict (IDPs, refugees, protection, etc.)";
-                }
-                else if (txtHP == "3")
-                {
-                    imghp.ImageUrl = "~/assets/orsimages/icon/hp3.png";
-                    imghp.ToolTip = RC.SelectedSiteLanguageId == 2 ?
-                        "Répondre aux conséquences humanitaires dues aux épidémies (cholera, paludisme, etc.)" :
-                        "Addressing the humanitarian impact of Epidemics (cholera, malaria, etc.)";
-                }
-                else if (txtHP == "4")
-                {
-                    imghp.ImageUrl = "~/assets/orsimages/icon/hp4.png";
-                    imghp.ToolTip = RC.SelectedSiteLanguageId == 2 ?
-                        "Répondre aux conséquences humanitaires dues à l’insécurité alimentaire" :
-                        "Addressing the humanitarian impact of Food insecurity";
-                }
-                else if (txtHP == "5")
-                {
-                    imghp.ImageUrl = "~/assets/orsimages/icon/hp5.png";
-                    imghp.ToolTip = RC.SelectedSiteLanguageId == 2 ?
-                        "Répondre aux conséquences humanitaires dues à la malnutrition" :
-                        "Addressing the humanitarian impact of Malnutrition";
-                }
+
+                mpeComments.Show();
             }
         }
 
-        private void ObjectiveIconToolTip(GridViewRowEventArgs e)
+        protected void btnSaveComments_Click(object sender, EventArgs e)
         {
-            Image imgObj = e.Row.FindControl("imgObjective") as Image;
-            if (imgObj != null)
+            if (CommentsIndId > 0)
             {
-                string txt = e.Row.Cells[0].Text;
+                SaveComments();
+            }
 
-                if (txt.Contains("1"))
+            CommentsIndId = 0;
+            txtComments.Text = "";
+            mpeComments.Hide();
+        }
+
+        // TODO: if user remove all locations then what?
+        private void SaveComments()
+        {
+            string comments = txtComments.Text.Trim();
+
+            int yearId = 0;
+            int.TryParse(ddlYear.SelectedValue, out yearId);
+
+            int monthId = 0;
+            int.TryParse(ddlMonth.SelectedValue, out monthId);
+
+            int projectId = RC.GetSelectedIntVal(rblProjects);
+
+            Guid userId = RC.GetCurrentUserId;
+            //DBContext.Add("InsertIndicatorComments", new object[] { reportId, activityDataId, comments });
+            using (ORSEntities db = new ORSEntities())
+            {
+                IndicatorComment deleteComment = db.IndicatorComments
+                                                .Where(x => x.YearId == yearId
+                                                            && x.MonthId == monthId
+                                                            && x.ProjectId == projectId
+                                                            && x.EmergencyLocationId == UserInfo.EmergencyCountry
+                                                            && x.Organizationid == UserInfo.Organization
+                                                        && x.ActivityDataId == CommentsIndId).SingleOrDefault();
+                if (deleteComment != null)
                 {
-                    imgObj.ImageUrl = "~/assets/orsimages/icon/so1.png";
-                    imgObj.ToolTip = RC.SelectedSiteLanguageId == 2 ? "OBJECTIF STRATÉGIQUE N°1 : Recueillir les données sur les risques et les vulnérabilités, les analyser et intégrer les résultats dans la programmation humanitaire et de développement." :
-                        "STRATEGIC OBJECTIVE 1: Track and analyse risk and vulnerability, integrating findings into humanitarian and evelopment programming.";
+                    db.IndicatorComments.DeleteObject(deleteComment);
+                    db.SaveChanges();
                 }
-                else if (txt.Contains("2"))
+
+                if (!string.IsNullOrEmpty(comments))
                 {
-                    imgObj.ImageUrl = "~/assets/orsimages/icon/so2.png";
-                    imgObj.ToolTip = RC.SelectedSiteLanguageId == 2 ? "OBJECTIF STRATÉGIQUE N°2 : Soutenir les populations vulnérables à mieux faire face aux chocs en répondant aux signaux d’alerte de manière anticipée, réduisant la durée du relèvement post-crise et renforçant les capacités des acteurs nationaux." :
-                        "STRATEGIC OBJECTIVE 2: Support vulnerable populations to better cope with shocks by responding earlier to warning signals, by reducing post-crisis recovery times and by building capacity of national actors.";
-                }
-                else if (txt.Contains("3"))
-                {
-                    imgObj.ImageUrl = "~/assets/orsimages/icon/so3.png";
-                    imgObj.ToolTip = RC.SelectedSiteLanguageId == 2 ? "OBJECTIF STRATÉGIQUE N°3 : Fournir aux personnes en situation d’urgence une assistance coordonnée et intégrée, nécessaire à leur survie." :
-                        "STRATEGIC OBJECTIVE 3: Deliver coordinated and integrated life-saving assistance to people affected by emergencies.";
+                    IndicatorComment insertComment = db.IndicatorComments.CreateObject();
+                    insertComment.YearId = yearId;
+                    insertComment.MonthId = monthId;
+                    insertComment.ProjectId = projectId;
+                    insertComment.EmergencyLocationId = UserInfo.EmergencyCountry;
+                    insertComment.Organizationid = UserInfo.Organization;
+                    insertComment.ActivityDataId = CommentsIndId;
+                    insertComment.Comments = comments;
+                    db.IndicatorComments.AddObject(insertComment);
+                    db.SaveChanges();
                 }
             }
         }
+
+        protected void btnCancelComments_Click(object sender, EventArgs e)
+        {
+            txtComments.Text = "";
+            mpeComments.Hide();
+        }
+
+        //private void PrioritiesIconToolTip(GridViewRowEventArgs e)
+        //{
+        //    Image imghp = e.Row.FindControl("imgPriority") as Image;
+        //    if (imghp != null)
+        //    {
+        //        string txtHP = e.Row.Cells[1].Text;
+        //        if (txtHP == "1")
+        //        {
+        //            imghp.ImageUrl = "~/assets/orsimages/icon/hp1.png";
+        //            imghp.ToolTip = RC.SelectedSiteLanguageId == 2 ?
+        //                "Répondre aux conséquences humanitaires dues aux catastrophes naturelles (inondations, etc.)" :
+        //                "Addressing the humanitarian impact Natural disasters (floods, etc.)";
+        //        }
+        //        else if (txtHP == "2")
+        //        {
+        //            imghp.ImageUrl = "~/assets/orsimages/icon/hp2.png";
+        //            imghp.ToolTip = RC.SelectedSiteLanguageId == 2 ?
+        //                "Répondre aux conséquences humanitaires dues aux conflits (PDIs, refugies, protection, etc.)" :
+        //                "Addressing the humanitarian impact of Conflict (IDPs, refugees, protection, etc.)";
+        //        }
+        //        else if (txtHP == "3")
+        //        {
+        //            imghp.ImageUrl = "~/assets/orsimages/icon/hp3.png";
+        //            imghp.ToolTip = RC.SelectedSiteLanguageId == 2 ?
+        //                "Répondre aux conséquences humanitaires dues aux épidémies (cholera, paludisme, etc.)" :
+        //                "Addressing the humanitarian impact of Epidemics (cholera, malaria, etc.)";
+        //        }
+        //        else if (txtHP == "4")
+        //        {
+        //            imghp.ImageUrl = "~/assets/orsimages/icon/hp4.png";
+        //            imghp.ToolTip = RC.SelectedSiteLanguageId == 2 ?
+        //                "Répondre aux conséquences humanitaires dues à l’insécurité alimentaire" :
+        //                "Addressing the humanitarian impact of Food insecurity";
+        //        }
+        //        else if (txtHP == "5")
+        //        {
+        //            imghp.ImageUrl = "~/assets/orsimages/icon/hp5.png";
+        //            imghp.ToolTip = RC.SelectedSiteLanguageId == 2 ?
+        //                "Répondre aux conséquences humanitaires dues à la malnutrition" :
+        //                "Addressing the humanitarian impact of Malnutrition";
+        //        }
+        //    }
+        //}
+
+        //private void ObjectiveIconToolTip(GridViewRowEventArgs e)
+        //{
+        //    Image imgObj = e.Row.FindControl("imgObjective") as Image;
+        //    if (imgObj != null)
+        //    {
+        //        string txt = e.Row.Cells[0].Text;
+
+        //        if (txt.Contains("1"))
+        //        {
+        //            imgObj.ImageUrl = "~/assets/orsimages/icon/so1.png";
+        //            imgObj.ToolTip = RC.SelectedSiteLanguageId == 2 ? "OBJECTIF STRATÉGIQUE N°1 : Recueillir les données sur les risques et les vulnérabilités, les analyser et intégrer les résultats dans la programmation humanitaire et de développement." :
+        //                "STRATEGIC OBJECTIVE 1: Track and analyse risk and vulnerability, integrating findings into humanitarian and evelopment programming.";
+        //        }
+        //        else if (txt.Contains("2"))
+        //        {
+        //            imgObj.ImageUrl = "~/assets/orsimages/icon/so2.png";
+        //            imgObj.ToolTip = RC.SelectedSiteLanguageId == 2 ? "OBJECTIF STRATÉGIQUE N°2 : Soutenir les populations vulnérables à mieux faire face aux chocs en répondant aux signaux d’alerte de manière anticipée, réduisant la durée du relèvement post-crise et renforçant les capacités des acteurs nationaux." :
+        //                "STRATEGIC OBJECTIVE 2: Support vulnerable populations to better cope with shocks by responding earlier to warning signals, by reducing post-crisis recovery times and by building capacity of national actors.";
+        //        }
+        //        else if (txt.Contains("3"))
+        //        {
+        //            imgObj.ImageUrl = "~/assets/orsimages/icon/so3.png";
+        //            imgObj.ToolTip = RC.SelectedSiteLanguageId == 2 ? "OBJECTIF STRATÉGIQUE N°3 : Fournir aux personnes en situation d’urgence une assistance coordonnée et intégrée, nécessaire à leur survie." :
+        //                "STRATEGIC OBJECTIVE 3: Deliver coordinated and integrated life-saving assistance to people affected by emergencies.";
+        //        }
+        //    }
+        //}
 
         private void DataEntryColumnsAlternateColors(GridViewRowEventArgs e)
         {
-            int j = 0;
-            for (int i = 11; i < e.Row.Cells.Count; i++)
-            {
-                TableCell Cell = e.Row.Cells[i];
+            //int j = 0;
+            //for (int i = 11; i < e.Row.Cells.Count; i++)
+            //{
+            //    TableCell Cell = e.Row.Cells[i];
 
-                // Three columns, 'Annual Targets', 'ACCUM', and 'Monthly Achieved'
-                // will have alternate color on each location
-                if (j <= 2)
-                {
-                    j++;
-                    string color = RC.ConfigSettings("AlternateColumnColor");
-                    Cell.BackColor = System.Drawing.ColorTranslator.FromHtml(color);
-                }
-                else if ((j > 2))
-                {
-                    j++;
-                    string color = RC.ConfigSettings("ColumnColor");
-                    Cell.BackColor = System.Drawing.ColorTranslator.FromHtml(color);
+            //    // Three columns, 'Annual Targets', 'ACCUM', and 'Monthly Achieved'
+            //    // will have alternate color on each location
+            //    if (j <= 2)
+            //    {
+            //        j++;
+            //        string color = RC.ConfigSettings("AlternateColumnColor");
+            //        Cell.BackColor = System.Drawing.ColorTranslator.FromHtml(color);
+            //    }
+            //    else if ((j > 2))
+            //    {
+            //        j++;
+            //        string color = RC.ConfigSettings("ColumnColor");
+            //        Cell.BackColor = System.Drawing.ColorTranslator.FromHtml(color);
 
-                    if (j == 6) j = 0;
-                }
-            }
+            //        if (j == 6) j = 0;
+            //    }
+            //}
         }
 
         private void DataEntryColumnsAlternateColors()
@@ -382,6 +453,7 @@ namespace SRFROWCA.Pages
                 }
             }
         }
+
         protected void btnSave_Click(object sender, EventArgs e)
         {
             SaveProjectData();
@@ -413,50 +485,13 @@ namespace SRFROWCA.Pages
         private void PopulateObjectives()
         {
             UI.FillObjectives(cblObjectives, true);
-            ObjectivesToolTip();
-        }
-
-        private void ObjectivesToolTip()
-        {
-            if (RC.SelectedSiteLanguageId == 2)
-            {
-                cblObjectives.Items[0].Attributes["title"] = "OBJECTIF STRATÉGIQUE N°1 : Recueillir les données sur les risques et les vulnérabilités, les analyser et intégrer les résultats dans la programmation humanitaire et de développement.";
-                cblObjectives.Items[1].Attributes["title"] = "OBJECTIF STRATÉGIQUE N°2 : Soutenir les populations vulnérables à mieux faire face aux chocs en répondant aux signaux d’alerte de manière anticipée, réduisant la durée du relèvement post-crise et renforçant les capacités des acteurs nationaux.";
-                cblObjectives.Items[2].Attributes["title"] = "OBJECTIF STRATÉGIQUE N°3 : Fournir aux personnes en situation d’urgence une assistance coordonnée et intégrée, nécessaire à leur survie.";
-            }
-            else
-            {
-                cblObjectives.Items[0].Attributes["title"] = "STRATEGIC OBJECTIVE 1: Track and analyse risk and vulnerability, integrating findings into humanitarian and development programming.";
-                cblObjectives.Items[1].Attributes["title"] = "STRATEGIC OBJECTIVE 2: Support vulnerable populations to better cope with shocks by responding earlier to warning signals, by reducing post-crisis recovery times and by building capacity of national actors.";
-                cblObjectives.Items[2].Attributes["title"] = "STRATEGIC OBJECTIVE 3: Deliver coordinated and integrated life-saving assistance to people affected by emergencies.";
-            }
-
+            ObjPrToolTip.ObjectivesToolTip(cblObjectives);
         }
 
         private void PopulatePriorities()
         {
             UI.FillPriorities(cblPriorities);
-            PrioritiesToolTip();
-        }
-
-        private void PrioritiesToolTip()
-        {
-            if (RC.SelectedSiteLanguageId == 2)
-            {
-                cblPriorities.Items[0].Attributes["title"] = "Répondre aux conséquences humanitaires dues aux catastrophes naturelles (inondations, etc.)";
-                cblPriorities.Items[1].Attributes["title"] = "Répondre aux conséquences humanitaires dues aux conflits (PDIs, refugies, protection, etc.)";
-                cblPriorities.Items[2].Attributes["title"] = "Répondre aux conséquences humanitaires dues aux épidémies (cholera, paludisme, etc.)";
-                cblPriorities.Items[3].Attributes["title"] = "Répondre aux conséquences humanitaires dues à l’insécurité alimentaire";
-                cblPriorities.Items[4].Attributes["title"] = "Répondre aux conséquences humanitaires dues à la malnutrition";
-            }
-            else
-            {
-                cblPriorities.Items[0].Attributes["title"] = "Addressing the humanitarian impact Natural disasters (floods, etc.)";
-                cblPriorities.Items[1].Attributes["title"] = "Addressing the humanitarian impact of Conflict (IDPs, refugees, protection, etc.)";
-                cblPriorities.Items[2].Attributes["title"] = "Addressing the humanitarian impact of Epidemics (cholera, malaria, etc.)";
-                cblPriorities.Items[3].Attributes["title"] = "Addressing the humanitarian impact of Food insecurity";
-                cblPriorities.Items[4].Attributes["title"] = "Addressing the humanitarian impact of Malnutrition";
-            }
+            ObjPrToolTip.PrioritiesToolTip(cblPriorities);
         }
 
         private DataTable GetLocationEmergencies(int locationId)
@@ -486,11 +521,6 @@ namespace SRFROWCA.Pages
             {
                 ddlMonth.SelectedIndex = ddlMonth.Items.IndexOf(ddlMonth.Items.FindByText(result.ToString()));
             }
-
-            cblMonths.DataValueField = "MonthId";
-            cblMonths.DataTextField = "MonthName";
-            cblMonths.DataSource = GetMonth();
-            cblMonths.DataBind();
         }
 
         private DataTable GetMonth()
@@ -738,7 +768,7 @@ namespace SRFROWCA.Pages
                     columnName == "ActivityDataId" || columnName == "ProjectTitle" || columnName == "ProjectId" ||
                     columnName == "ObjAndPrId" || columnName == "ObjectiveId" || columnName == "HumanitarianPriorityId" ||
                     columnName == "objAndPrAndPId" || columnName == "objAndPId" || columnName == "PrAndPId" ||
-                    columnName == "ProjectIndicatorId"))
+                    columnName == "ProjectIndicatorId" || columnName == "RInd" || columnName == "CInd"))
                 {
                     if (columnName.Contains("_2-ACCUM"))
                     {
@@ -915,8 +945,9 @@ namespace SRFROWCA.Pages
             int monthId = RC.GetSelectedIntVal(ddlMonth);
             int projId = RC.GetSelectedIntVal(rblProjects);
             Guid loginUserId = RC.GetCurrentUserId;
+            string reportName = rblProjects.SelectedItem.Text + " (" + ddlMonth.SelectedItem.Text + "-14)";
             ReportId = DBContext.Add("InsertReport", new object[] { yearId, monthId, projId, UserInfo.EmergencyCountry,
-                                                                    UserInfo.Organization, loginUserId, DBNull.Value });
+                                                                    UserInfo.Organization, loginUserId, reportName,  DBNull.Value });
         }
 
         private bool IsDataExistsToSave()
@@ -1116,7 +1147,7 @@ namespace SRFROWCA.Pages
                                             && x.EmergencyLocationId == UserInfo.EmergencyCountry
                                             && x.OrganizationId == UserInfo.Organization).SingleOrDefault();
                 ReportId = r != null ? r.ReportId : 0;
-            }           
+            }
         }
 
         private void RemoveSelectedLocations(ListControl control)
@@ -1130,38 +1161,30 @@ namespace SRFROWCA.Pages
         protected void btnExcel_Export(object sender, EventArgs e)
         {
             SaveProjectData();
-            UnCheckAllItemsOfListControl(cblMonths);
-            UnCheckAllItemsOfListControl(cblExportProjects);
-            SelectMonthAndProject();
-            ExportDocumentType = 2;
-            mpeExport.Show();
+            DataTable dt = GetProjectsData(true);
+            GridView gv = new GridView();
+            gv.DataSource = dt;
+            gv.DataBind();
+            string fileName = UserInfo.CountryName + "_" + UserInfo.OrgName + "_" + ddlMonth.SelectedItem.Text + "_Report";
+            ExportUtility.ExportGridView(gv, fileName, ".xls", Response, true);
         }
 
-        protected void btnOK_Click(object sender, EventArgs e)
+        protected void btnPDF_Export(object sender, EventArgs e)
         {
-            DataTable dt = new DataTable();
-
-            if (ExportDocumentType == 2)
-            {
-                dt = GetProjectsData(true);
-                GridView gv = new GridView();
-                gv.DataSource = dt;
-                gv.DataBind();
-                string fileName = UserInfo.CountryName + "_" + UserInfo.OrgName + "_" + ddlMonth.SelectedItem.Text + "_Report";
-                ExportUtility.ExportGridView(gv, fileName, ".xls", Response, true);
-            }
-            else
-            {
-                dt = GetProjectsData(false);
-                GeneratePDF(dt);
-            }
+            SaveProjectData();
+            DataTable dt = GetProjectsData(false);
+            GeneratePDF(dt);
         }
 
         private DataTable GetProjectsData(bool isPivot)
         {
-            int yearId = RC.GetSelectedIntVal(ddlYear);
-            string monthIds = GetSelectedItems(cblMonths);
-            string projectIds = GetSelectedItems(cblExportProjects);
+            int yearId = 0;
+            int.TryParse(ddlYear.SelectedValue, out yearId);
+
+            int monthId = 0;
+            int.TryParse(ddlMonth.SelectedValue, out monthId);
+
+            int projectId = RC.GetSelectedIntVal(rblProjects);
             Guid userId = RC.GetCurrentUserId;
 
             string procedureName = "GetProjectsReportDataOfMultipleProjectsAndMonths";
@@ -1170,47 +1193,9 @@ namespace SRFROWCA.Pages
                 procedureName = "GetProjectsDataByLocations";
             }
 
-            DataTable dt = new DataTable();
-            if (!string.IsNullOrEmpty(monthIds) && !string.IsNullOrEmpty(projectIds))
-            {
-                dt = DBContext.GetData(procedureName, new object[] { UserInfo.EmergencyCountry, UserInfo.Organization, yearId, monthIds,
-                                                                        projectIds, RC.SelectedSiteLanguageId, userId});
-
-                //dt = DBContext.GetData(procedureName, new object[] { UserInfo.EmergencyCountry, locationIds, yearId, monthIds,
-                //                                                        locIdsNotIncluded, RC.SelectedSiteLanguageId, userId,
-                //                                                        UserInfo.Country, UserInfo.Organization, projectIds});
-            }
-
+            DataTable dt = DBContext.GetData(procedureName, new object[] { UserInfo.EmergencyCountry, UserInfo.Organization, yearId, monthId,
+                                                                        projectId, RC.SelectedSiteLanguageId, userId});
             return dt;
-        }
-
-        protected void btnExportToExcelClose_Click(object sender, EventArgs e)
-        {
-            mpeExport.Hide();
-        }
-
-        private void SelectMonthAndProject()
-        {
-            cblMonths.SelectedValue = ddlMonth.SelectedValue;
-            cblExportProjects.SelectedValue = rblProjects.SelectedValue;
-        }
-
-        private void UnCheckAllItemsOfListControl(ListControl control)
-        {
-            foreach (ListItem item in control.Items)
-            {
-                item.Selected = false;
-            }
-        }
-
-        protected void btnPDF_Export(object sender, EventArgs e)
-        {
-            SaveProjectData();
-            UnCheckAllItemsOfListControl(cblMonths);
-            UnCheckAllItemsOfListControl(cblExportProjects);
-            SelectMonthAndProject();
-            ExportDocumentType = 1;
-            mpeExport.Show();
         }
 
         private void GeneratePDF(DataTable dt)
@@ -1257,13 +1242,13 @@ namespace SRFROWCA.Pages
         {
             get
             {
-                int ReportId = 0;
+                int reportId = 0;
                 if (ViewState["ReportId"] != null)
                 {
-                    int.TryParse(ViewState["ReportId"].ToString(), out ReportId);
+                    int.TryParse(ViewState["ReportId"].ToString(), out reportId);
                 }
 
-                return ReportId;
+                return reportId;
             }
             set
             {
@@ -1304,6 +1289,24 @@ namespace SRFROWCA.Pages
             set
             {
                 ViewState["ExportDocumentType"] = value.ToString();
+            }
+        }
+
+        public int CommentsIndId
+        {
+            get
+            {
+                int commentsIndId = 0;
+                if (ViewState["CommentsIndId"] != null)
+                {
+                    int.TryParse(ViewState["CommentsIndId"].ToString(), out commentsIndId);
+                }
+
+                return commentsIndId;
+            }
+            set
+            {
+                ViewState["CommentsIndId"] = value.ToString();
             }
         }
 

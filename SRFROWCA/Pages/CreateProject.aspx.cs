@@ -109,7 +109,7 @@ namespace SRFROWCA.Pages
 
         protected void btnManageActivities_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Pages/ManageActivities.aspx");
+            Response.Redirect("~/Pages/ManageActivities.aspx?pid=" + ProjectId.ToString());
         }
 
         protected void btnDeleteProject_Click(object sender, EventArgs e)

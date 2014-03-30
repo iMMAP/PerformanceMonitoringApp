@@ -13,6 +13,15 @@ namespace SRFROWCA.Pages {
     public partial class ManageActivities {
         
         /// <summary>
+        /// lzeLgndProjects control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize lzeLgndProjects;
+        
+        /// <summary>
         /// rblProjects control.
         /// </summary>
         /// <remarks>
@@ -22,6 +31,15 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.RadioButtonList rblProjects;
         
         /// <summary>
+        /// lzeLgndStrObjs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize lzeLgndStrObjs;
+        
+        /// <summary>
         /// cblObjectives control.
         /// </summary>
         /// <remarks>
@@ -29,6 +47,15 @@ namespace SRFROWCA.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBoxList cblObjectives;
+        
+        /// <summary>
+        /// lzeLgndHumPriorities control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize lzeLgndHumPriorities;
         
         /// <summary>
         /// cblPriorities control.

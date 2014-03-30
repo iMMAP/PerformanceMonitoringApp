@@ -13,13 +13,13 @@ namespace SRFROWCA.Pages {
     public partial class AddActivities {
         
         /// <summary>
-        /// lzeYearMonth control.
+        /// Localize1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize lzeYearMonth;
+        protected global::System.Web.UI.WebControls.Localize Localize1;
         
         /// <summary>
         /// ddlYear control.
@@ -109,7 +109,7 @@ namespace SRFROWCA.Pages {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnOpenLocations;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnOpenLocations;
         
         /// <summary>
         /// lzeExportToText control.
@@ -154,7 +154,7 @@ namespace SRFROWCA.Pages {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSave;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnSave;
         
         /// <summary>
         /// btnClientOpen control.
@@ -238,84 +238,57 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.Button btnClose;
         
         /// <summary>
-        /// mpeExport control.
+        /// mpeComments control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender mpeExport;
+        protected global::AjaxControlToolkit.ModalPopupExtender mpeComments;
         
         /// <summary>
-        /// HiddenTargetControlForModalPopup control.
+        /// Button1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button HiddenTargetControlForModalPopup;
+        protected global::System.Web.UI.WebControls.Button Button1;
         
         /// <summary>
-        /// Panel1 control.
+        /// Panel2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel1;
+        protected global::System.Web.UI.WebControls.Panel Panel2;
         
         /// <summary>
-        /// lzeSelectEportProjects control.
+        /// btnCancelComments control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize lzeSelectEportProjects;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnCancelComments;
         
         /// <summary>
-        /// cblMonths control.
+        /// txtComments control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList cblMonths;
+        protected global::System.Web.UI.WebControls.TextBox txtComments;
         
         /// <summary>
-        /// cblExportProjects control.
+        /// btnSaveComments control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList cblExportProjects;
-        
-        /// <summary>
-        /// btnOK control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnOK;
-        
-        /// <summary>
-        /// btnExportToExcelClose control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnExportToExcelClose;
-        
-        /// <summary>
-        /// lblMessage2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMessage2;
+        protected global::System.Web.UI.WebControls.Button btnSaveComments;
     }
 }
