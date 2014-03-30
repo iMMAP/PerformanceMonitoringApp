@@ -31,6 +31,15 @@ namespace SRFROWCA.RegionalLead {
         protected global::System.Web.UI.WebControls.CheckBoxList cblPriorities;
         
         /// <summary>
+        /// localizeClusterName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localizeClusterName;
+        
+        /// <summary>
         /// gvIndicators control.
         /// </summary>
         /// <remarks>

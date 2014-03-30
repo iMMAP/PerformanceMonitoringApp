@@ -14,22 +14,12 @@ namespace SRFROWCA.RegionalLead
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //string languageChange = "";
-            //if (Session["SiteChanged"] != null)
-            //{
-            //    languageChange = Session["SiteChanged"].ToString();
-            //}
-
-            //if (!string.IsNullOrEmpty(languageChange))
-            //{
-            //    Session["SiteChanged"] = null;
-            //}
-
             if (IsPostBack) return;
             UserInfo.UserProfileInfo();
             PopulateObjectives();
             PopulatePriorities();
             PopulateIndicators();
+            PopulateClusterName();
         }
 
         internal override void BindGridData()
@@ -37,16 +27,19 @@ namespace SRFROWCA.RegionalLead
             PopulateObjectives();
             PopulatePriorities();
             PopulateIndicators();
+            PopulateClusterName();
         }
 
         private void PopulateObjectives()
         {
             UI.FillObjectives(cblObjectives, true);
+            ObjPrToolTip.ObjectivesToolTip(cblObjectives);
         }
 
         private void PopulatePriorities()
         {
             UI.FillPriorities(cblPriorities);
+            ObjPrToolTip.PrioritiesToolTip(cblPriorities);
         }
 
         private void PopulateIndicators()
@@ -62,61 +55,17 @@ namespace SRFROWCA.RegionalLead
             return DBContext.GetData("GetClusterIndicatorsToSelectSRPActivities", new object[] { emergencyId, clusterId, RC.SelectedSiteLanguageId });
         }
 
+        private void PopulateClusterName()
+        {
+            localizeClusterName.Text = RC.GetClusterName + " Indicators";
+        }
+
         protected void gvIndicators_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                Image imgObj = e.Row.FindControl("imgObjective") as Image;
-                if (imgObj != null)
-                {
-                    string txt = e.Row.Cells[0].Text;
-                    if (txt.Contains("1"))
-                    {
-                        imgObj.ImageUrl = "~/assets/orsimages/icon/so1.png";
-                        //imgObj.ToolTip = "STRATEGIC OBJECTIVE 1: Track and analyse risk and vulnerability, integrating findings into humanitarian and evelopment programming.";
-                    }
-                    else if (txt.Contains("2"))
-                    {
-                        imgObj.ImageUrl = "~/assets/orsimages/icon/so2.png";
-                        //imgObj.ToolTip = "STRATEGIC OBJECTIVE 2: Support vulnerable populations to better cope with shocks by responding earlier to warning signals, by reducing post-crisis recovery times and by building capacity of national actors.";
-                    }
-                    else if (txt.Contains("3"))
-                    {
-                        imgObj.ImageUrl = "~/assets/orsimages/icon/so3.png";
-                        //imgObj.ToolTip = " STRATEGIC OBJECTIVE 3: Deliver coordinated and integrated life-saving assistance to people affected by emergencies.";
-                    }
-                }
-                Image imghp = e.Row.FindControl("imgPriority") as Image;
-                if (imghp != null)
-                {
-                    string txtHP = e.Row.Cells[1].Text;
-                    if (txtHP == "1")
-                    {
-                        imghp.ImageUrl = "~/assets/orsimages/icon/hp1.png";
-                        //imghp.ToolTip = "Addressing the humanitarian impact Natural disasters (floods, etc.)";
-                    }
-                    else if (txtHP == "2")
-                    {
-                        imghp.ImageUrl = "~/assets/orsimages/icon/hp2.png";
-                        //imghp.ToolTip = "Addressing the humanitarian impact of Conflict (IDPs, refugees, protection, etc.)";
-                    }
-                    else if (txtHP == "3")
-                    {
-                        imghp.ImageUrl = "~/assets/orsimages/icon/hp3.png";
-                        //imghp.ToolTip = "Addressing the humanitarian impact of Epidemics (cholera, malaria, etc.)";
-                    }
-                    else if (txtHP == "4")
-                    {
-                        imghp.ImageUrl = "~/assets/orsimages/icon/hp4.png";
-                        //imghp.ToolTip = "Addressing the humanitarian impact of Food insecurity";
-                    }
-                    else if (txtHP == "5")
-                    {
-                        imghp.ImageUrl = "~/assets/orsimages/icon/hp5.png";
-                        //imghp.ToolTip = "Addressing the humanitarian impact of Malnutrition";
-                    }
-
-                }
+                ObjPrToolTip.ObjectiveIconToolTip(e);
+                ObjPrToolTip.PrioritiesIconToolTip(e);
             }
         }
 

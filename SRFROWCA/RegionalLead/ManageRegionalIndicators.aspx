@@ -2,30 +2,9 @@
     CodeBehind="ManageRegionalIndicators.aspx.cs" Inherits="SRFROWCA.RegionalLead.ManageRegionalIndicators" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <style>
-        .ddlWidth
-        {
-            width: 100%;
-        }
-        .hiddenelement
-        {
-            display: none;
-        }
-        .highlight
-        {
-            background-color: yellow;
-        }
-        
-        .highlight2
-        {
-            background-color: #ADFF2F;
-        }
-        
-        .highlightRow
-        {
-            background-color: #DFF0D8;
-        }
-    </style>
+    <!-- ORS styles -->
+    <link rel="stylesheet" href="../assets/css/ors.css" />
+    <!-- ace styles -->
     <script type="text/javascript" src="../assets/orsjs/ShowHideObJAndPr.js"></script>
     <script type="text/javascript" src="../assets/orsjs/jq-highlight.js"></script>
     <script>
@@ -57,16 +36,16 @@
             });
 
             $('tr .testcb').click(function () {
-                $(this).parent().parent().toggleClass('highlightRow');
+                $(this).parent().parent().toggleClass('highlightRow2');
             });
 
             $("tr .testcb").each(function () {
                 var checkBox = $(this).find("input[type='checkbox']");
                 if ($(checkBox).is(':checked')) {
-                    $(this).parent().parent().addClass('highlightRow');
+                    $(this).parent().parent().addClass('highlightRow2');
                 }
                 else {
-                    $(this).parent().removeClass('highlightRow');
+                    $(this).parent().removeClass('highlightRow2');
                 }
             });
         });
@@ -90,7 +69,7 @@
                     <div class="row">
                         <div class="col-sm-3 widget-container-span">
                             <div class="widget-box">
-                                <div class="widget-header widget-header-small header-color-orange">
+                                <div class="widget-header widget-header-small header-color-blue2">
                                     <h4>
                                         Filter Options</h4>
                                     <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up">
@@ -100,7 +79,7 @@
                                     <div class="widget-main">
                                         <div class="col-sm-14 widget-container-span">
                                             <div class="widget-box">
-                                                <div class="widget-header widget-header-small header-color-pink">
+                                                <div class="widget-header widget-header-small header-color-grey">
                                                     <h5>
                                                         Strategic Objectives</h5>
                                                     <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up">
@@ -116,7 +95,7 @@
                                         </div>
                                         <div class="col-sm-14 widget-container-span">
                                             <div class="widget-box">
-                                                <div class="widget-header widget-header-small header-color-pink">
+                                                <div class="widget-header widget-header-small header-color-grey">
                                                     <h5>
                                                         Humanitarian Priorities</h5>
                                                     <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up">
@@ -132,7 +111,7 @@
                                         </div>
                                         <div class="col-sm-14 widget-container-span">
                                             <div class="widget-box">
-                                                <div class="widget-header widget-header-small header-color-pink">
+                                                <div class="widget-header widget-header-small header-color-grey">
                                                     <h5>
                                                         Search (highlight) Activity</h5>
                                                     <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up">
@@ -147,7 +126,7 @@
                                         </div>
                                         <div class="col-sm-14 widget-container-span">
                                             <div class="widget-box">
-                                                <div class="widget-header widget-header-small header-color-pink">
+                                                <div class="widget-header widget-header-small header-color-grey">
                                                     <h5>
                                                         Search (highlight) Indicator</h5>
                                                     <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up">
@@ -166,9 +145,10 @@
                         </div>
                         <div class="col-sm-9 widget-container-span">
                             <div class="widget-box">
-                                <div class="widget-header widget-header-small header-color-orange">
+                                <div class="widget-header widget-header-small header-color-blue2">
                                     <h4>
-                                        Food Security Indicators List</h4>
+                                        <asp:Localize ID="localizeClusterName" runat="server" Text=""></asp:Localize>
+                                    </h4>
                                     <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up">
                                     </i></a></span>
                                 </div>
