@@ -429,6 +429,18 @@ namespace SRFROWCA.Common
             return i;
         }
 
+        internal static string GetClusterName
+        {
+            get
+            {
+                using (ORSEntities db = new ORSEntities())
+                {
+                    return db.Clusters.Where(x => x.ClusterId == UserInfo.Cluster && x.SiteLanguageId == RC.SelectedSiteLanguageId)
+                                            .Select(x => x.ClusterName).SingleOrDefault();
+                }
+            }
+        }
+
         internal static string ConfigSettings(string key)
         {
             string setting = "";

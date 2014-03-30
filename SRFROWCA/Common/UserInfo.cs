@@ -32,8 +32,9 @@ namespace SRFROWCA.Common
         {
             get
             {
-                return HttpContext.Current.Session["UserCountry"] != null ?
-                Convert.ToInt32(HttpContext.Current.Session["UserCountry"]) : 0;
+                int i = 0;
+                int.TryParse( HttpContext.Current.Session["UserCountry"].ToString(), out i);
+                return i;
             }
         }
 
@@ -41,8 +42,10 @@ namespace SRFROWCA.Common
         {
             get
             {
-                return HttpContext.Current.Session["UserCluster"] != null ?
-                Convert.ToInt32(HttpContext.Current.Session["UserCluster"]) : 0;
+                int i = 0;
+                int.TryParse(HttpContext.Current.Session["UserCluster"].ToString(), out i);
+
+                return i;
             }
         }
 
@@ -50,8 +53,9 @@ namespace SRFROWCA.Common
         {
             get
             {
-                return HttpContext.Current.Session["UserOrg"] != null ?
-                Convert.ToInt32(HttpContext.Current.Session["UserOrg"]) : 0;
+                int i = 0;
+                int.TryParse(HttpContext.Current.Session["UserOrg"].ToString(), out i);
+                return i;
             }
         }
 
@@ -59,8 +63,9 @@ namespace SRFROWCA.Common
         {
             get
             {
-                return HttpContext.Current.Session["UserLocationEmergencyId"] != null ?
-                Convert.ToInt32(HttpContext.Current.Session["UserLocationEmergencyId"]) : 0;
+                int i = 0;
+                int.TryParse(HttpContext.Current.Session["UserLocationEmergencyId"].ToString(), out i);
+                return i;
             }
         }
 
@@ -68,8 +73,9 @@ namespace SRFROWCA.Common
         {
             get
             {
-                return HttpContext.Current.Session["UserEmergencyClusterId"] != null ?
-                Convert.ToInt32(HttpContext.Current.Session["UserEmergencyClusterId"]) : 0;
+                int i = 0;
+                int.TryParse(HttpContext.Current.Session["UserEmergencyClusterId"].ToString(), out i);
+                return i;
             }
         }
 
@@ -77,8 +83,9 @@ namespace SRFROWCA.Common
         {
             get
             {
-                return HttpContext.Current.Session["EmergencyId"] != null ?
-                Convert.ToInt32(HttpContext.Current.Session["EmergencyId"]) : 0;
+                int i = 0;
+                int.TryParse(HttpContext.Current.Session["EmergencyId"].ToString(), out i);
+                return i;
             }
         }
 
@@ -99,5 +106,7 @@ namespace SRFROWCA.Common
                 HttpContext.Current.Session["UserOrgName"].ToString() : "";
             }
         }
+
+
     }
 }
