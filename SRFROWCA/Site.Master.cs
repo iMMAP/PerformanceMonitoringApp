@@ -53,9 +53,8 @@ namespace SRFROWCA
                 {
                     ShowRegionalLeadMenue();
                 }
-
-                //
             }
+
             ActiveMenueItem();
         }
 
@@ -128,6 +127,22 @@ namespace SRFROWCA
             {
                 liReports.Attributes.Add("class", "active open");
                 liCustomReport.Attributes.Add("class", "active");
+            }
+            else if (uri == "/ClusterLead/AddSRPActivitiesFromMasterList.aspx")
+            {
+                liSRPIndicators.Attributes.Add("class", "active");
+            }
+            else if (uri == "/ClusterLead/ValidateReportList.aspx")
+            {
+                liValidateIndicators.Attributes.Add("class", "active");
+            }
+            else if (uri == "/ClusterLead/ValidateIndicators.aspx")
+            {
+                liValidateIndicators.Attributes.Add("class", "active");
+            }
+            else if (uri == "/RegionalLead/ManageRegionalIndicators.aspx")
+            {
+                liRegionalIndicators.Attributes.Add("class", "active");
             }
 
             //foreach (Control ctrl in nav.Controls)

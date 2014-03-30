@@ -282,7 +282,7 @@
                         id="menueSRPIndicators" runat="server"><i class="icon-list-alt"></i><span class="menu-text">Country
                             Indicators</span> </a></li>
                             <li id="liValidateIndicators" runat="server"><a href="~/ClusterLead/ValidateReportList.aspx"
-                        id="menueValidateIndicaotrs" runat="server"><i class="icon-list-alt"></i><span class="menu-text">Validate Indicators</span> </a></li>
+                        id="menueValidateIndicaotrs" runat="server"><i class="icon-list-alt"></i><span class="menu-text">Validate</span> </a></li>
 
                             
                 </ul>
