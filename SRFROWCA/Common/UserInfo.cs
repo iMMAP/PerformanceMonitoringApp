@@ -17,7 +17,18 @@ namespace SRFROWCA.Common
                 HttpContext.Current.Session["UserCountry"] = dt.Rows[0]["LocationId"];
                 HttpContext.Current.Session["UserCluster"] = dt.Rows[0]["ClusterId"];
                 HttpContext.Current.Session["UserOrg"] = dt.Rows[0]["OrganizationId"];
-                HttpContext.Current.Session["UserLocationEmergencyId"] = dt.Rows[0]["EmergencyLocationId"];
+                if (dt.Rows[0]["EmergencyLocationId"] != null)
+                {
+                    if (dt.Rows[0]["EmergencyLocationId"].ToString() == "1")
+                    {
+                        HttpContext.Current.Session["UserLocationEmergencyId"] = null;
+                    }
+                    else
+                    {
+                        HttpContext.Current.Session["UserLocationEmergencyId"] = dt.Rows[0]["EmergencyLocationId"];
+                    }
+                }
+                
                 HttpContext.Current.Session["UserEmergencyClusterId"] = dt.Rows[0]["EmergencyClusterId"];
                 HttpContext.Current.Session["UserOrg"] = dt.Rows[0]["OrganizationId"];
 
