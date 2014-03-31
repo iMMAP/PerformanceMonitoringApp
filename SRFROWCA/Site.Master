@@ -57,7 +57,8 @@
         </script>
         <div class="navbar-container" id="navbar-container">
             <div class="navbar-header pull-left">
-                <a href="<%# BaseURL %>/Default.aspx" class="navbar-brand"><img src="<%# BaseURL %>/assets/orsimages/logo.png" alt="OCHA"/></a>
+                <a href="<%# BaseURL %>/Default.aspx" class="navbar-brand">
+                    <img src="<%# BaseURL %>/assets/orsimages/logo.png" alt="OCHA" /></a>
                 <!-- /.brand -->
             </div>
             <!-- /.navbar-header -->
@@ -157,7 +158,8 @@
                             </span><i class="icon-caret-down"></i></a>
                         <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
                             <li><a href="#"><i class="icon-cog"></i>Settings </a></li>
-                            <li><a href="<%# BaseURL %>Account/UserProfile.aspx"><i class="icon-user"></i>Profile </a></li>
+                            <li><a href="<%# BaseURL %>Account/UserProfile.aspx"><i class="icon-user"></i>Profile
+                            </a></li>
                             <li class="divider"></li>
                             <li>
                                 <asp:LinkButton ID="lnkLanguageEnglish" Text="English" runat="server" OnClick="lnkLanguageEnglish_Click"
@@ -192,17 +194,8 @@
                 </script>
                 <div class="sidebar-shortcuts" id="sidebar-shortcuts">
                     <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-                        <button class="btn btn-success">
-                            <i class="icon-signal"></i>
-                        </button>
-                        <button class="btn btn-info">
-                            <i class="icon-pencil"></i>
-                        </button>
-                        <button class="btn btn-warning">
-                            <i class="icon-group"></i>
-                        </button>
-                        <button class="btn btn-danger">
-                            <i class="icon-cogs"></i>
+                        <button class="btn width-100 btn-info">
+                            Online Reporting System
                         </button>
                     </div>
                     <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
@@ -214,58 +207,8 @@
                 <ul class="nav nav-list">
                     <li id="liDefault" runat="server"><a href="../Default.aspx"><i class="icon-dashboard">
                     </i><span class="menu-text">Dashboard </span></a></li>
-                    <li id="liReports" runat="server"><a href="#" class="dropdown-toggle"><i class="icon-text-width">
-                    </i><span class="menu-text">Reports </span><b class="arrow icon-angle-down"></b></a>
-                        <ul class="submenu">
-                            <li id="liCustomReport" runat="server"><a href="../Anonymous/AllData.aspx"><i class="icon-double-angle-right">
-                            </i>Custom Report </a></li>
-                            <li><a href="../Reports/ProjectsPerOrganization.aspx"><i class="icon-double-angle-right">
-                            </i>Projects Per Orgs </a></li>
-                            <li><a href="../Reports/ProjectsByCountry.aspx"><i class="icon-double-angle-right"></i>
-                                Projects Per Country </a></li>
-                            <li><a href="../Reports/ProjectByClusters.aspx"><i class="icon-double-angle-right"></i>
-                                Projects Per Clusters</a> </li>
-                            <li><a href="nestable-list.html"><i class="icon-double-angle-right"></i>Nestable Lists
-                            </a></li>
-                            <li><a href="#" class="dropdown-toggle"><i class="icon-double-angle-right"></i>Three
-                                Level Menu <b class="arrow icon-angle-down"></b></a>
-                                <ul class="submenu">
-                                    <li><a href="#"><i class="icon-leaf"></i>Item #1 </a></li>
-                                    <li><a href="#" class="dropdown-toggle"><i class="icon-pencil"></i>4th level <b class="arrow icon-angle-down">
-                                    </b></a>
-                                        <ul class="submenu">
-                                            <li><a href="#"><i class="icon-plus"></i>Add Product </a></li>
-                                            <li><a href="#"><i class="icon-eye-open"></i>View Products </a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="typography.html"><i class="icon-desktop"></i><span class="menu-text">Maps
-                    </span></a></li>
-                    <li><a href="#" class="dropdown-toggle"><i class="icon-list"></i><span class="menu-text">
-                        Tables </span><b class="arrow icon-angle-down"></b></a>
-                        <ul class="submenu">
-                            <li><a href="tables.html"><i class="icon-double-angle-right"></i>Simple &amp; Dynamic
-                            </a></li>
-                            <li><a href="jqgrid.html"><i class="icon-double-angle-right"></i>jqGrid plugin </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="#" class="dropdown-toggle"><i class="icon-edit"></i><span class="menu-text">
-                        Charts </span><b class="arrow icon-angle-down"></b></a>
-                        <ul class="submenu">
-                            <li><a href="form-elements.html"><i class="icon-double-angle-right"></i>Form Elements
-                            </a></li>
-                            <li><a href="form-wizard.html"><i class="icon-double-angle-right"></i>Wizard &amp; Validation
-                            </a></li>
-                            <li><a href="wysiwyg.html"><i class="icon-double-angle-right"></i>Wysiwyg &amp; Markdown
-                            </a></li>
-                            <li><a href="dropzone.html"><i class="icon-double-angle-right"></i>Dropzone File Upload
-                            </a></li>
-                        </ul>
-                    </li>
+                     <li id="liReportingStatus" runat="server"><a href="../ReportingStatus.aspx"><i class="icon-list">
+                    </i><span class="menu-text">Reporting Status </span></a></li>
                     <li id="liDataEntry" runat="server"><a href="~/Pages/AddActivities.aspx" id="menuDataEntry"
                         runat="server"><i class="icon-list-alt"></i><span class="menu-text">Data Entry</span>
                     </a></li>
@@ -279,12 +222,61 @@
                         id="menuRegionalIndicators" runat="server"><i class="icon-list-alt"></i><span class="menu-text">
                             Regional Indicators</span> </a></li>
                     <li id="liSRPIndicators" runat="server"><a href="~/ClusterLead/AddSRPActivitiesFromMasterList.aspx"
-                        id="menueSRPIndicators" runat="server"><i class="icon-list-alt"></i><span class="menu-text">Country
-                            Indicators</span> </a></li>
-                            <li id="liValidateIndicators" runat="server"><a href="~/ClusterLead/ValidateReportList.aspx"
-                        id="menueValidateIndicaotrs" runat="server"><i class="icon-list-alt"></i><span class="menu-text">Validate</span> </a></li>
-
+                        id="menueSRPIndicators" runat="server"><i class="icon-list-alt"></i><span class="menu-text">
+                            Country Indicators</span> </a></li>
+                    <li id="liValidateIndicators" runat="server"><a href="~/ClusterLead/ValidateReportList.aspx"
+                        id="menueValidateIndicaotrs" runat="server"><i class="icon-list-alt"></i><span class="menu-text">
+                            Validate</span> </a></li>
+                    <li id="liReports" runat="server"><a id="menueReports" runat="server" href="#" class="dropdown-toggle">
+                        <i class="icon-text-width"></i><span class="menu-text">Reports </span><b class="arrow icon-angle-down">
+                        </b></a>
+                        <ul class="submenu">
+                            <li id="liCustomReport" runat="server"><a href="~/Anonymous/AllData.aspx" id="menueCustomReport"
+                                runat="server"><i class="icon-double-angle-right"></i>Custom Report </a></li>
+                            <li id="liReportsTopIndicators1" runat="server"><a id="menueReportsTopIndicators1"
+                                runat="server" href="#" class="dropdown-toggle"><i class="icon-double-angle-right">
+                                </i>Top Indicators <b class="arrow icon-angle-down"></b></a>
+                                <ul class="submenu">
+                                    <li id="liReportsTopIndicatorsGeneral1" runat="server"><a id="menueReportsTopIndicatorsGeneral1"
+                                        runat="server" href="~/Reports/TopIndicatorsGeneral.aspx"><i class="icon-double-angle-right">
+                                        </i>Top 10 All</a></li>
+                                    <li id="liReportsTopIndicatorRegional1" runat="server"><a id="menueReportsTopIndicatorRegional"
+                                        runat="server" href="~/Reports/TopIndicaotrsRegional.aspx"><i class="icon-double-angle-right">
+                                        </i>Top 10 Regional</a></li>
+                                </ul>
+                            </li>
                             
+                            <li id="liReportsSummaryReports" runat="server"><a id="menueReportsSummaryReports"
+                                runat="server" href="#" class="dropdown-toggle"><i class="icon-double-angle-right">
+                                </i>Summary Reports <b class="arrow icon-angle-down"></b></a>
+                                <ul class="submenu">
+                                    <li id="liReportsSummaryReportsOperationalPresence" runat="server"><a id="menueReportsSummaryReportsOperationalReports"
+                                        runat="server" href="~/Reports/ProjectsPerOrganization.aspx"><i class="icon-double-angle-right">
+                                        </i>Operational Presence</a></li>
+                                    <li id="li1" runat="server"><a id="A1" runat="server" href="~/Reports/ProjectsPerOrganization.aspx">
+                                        <i class="icon-double-angle-right"></i>Contact List</a></li>
+                                    <li id="liReportsSummaryReportsProjectReports" runat="server"><a id="menueReportsSummaryReportsProjectReports"
+                                        runat="server" href="#" class="dropdown-toggle"><i class="icon-double-angle-right">
+                                        </i>Project Reports <b class="arrow icon-angle-down"></b></a>
+                                        <ul class="submenu">
+                                            <li id="liReportsSummaryReportsProjectReportsByOrg" runat="server"><a id="menueReportsSummaryReportsProjectReportsByOrg"
+                                                runat="server" href="~/Reports/ProjectsPerOrganization.aspx"><i class="icon-angle-right">
+                                                </i>By Orgs </a></li>
+                                            <li id="liReportsSummaryReportsProjectReportsByCountry" runat="server"><a id="menueReportsSummaryReportsProjectReportsByCountry"
+                                                runat="server" href="~/Reports/ProjectsByCountry.aspx"><i class="icon-angle-right">
+                                                </i>By Country </a></li>
+                                            <li id="liReportsSummaryReportsProjectReportsByClusters" runat="server"><a id="menueReportsSummaryReportsProjectReportsByClusters"
+                                                runat="server" a href="~/Reports/ProjectByClusters.aspx"><i class="icon-angle-right">
+                                                </i>By Cluster</a> </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="liBulkImport" runat="server"><a href="~/Admin/UploadLogFrame.aspx"
+                        id="menueBuldImport" runat="server"><i class="icon-list-alt"></i><span class="menu-text">
+                            Bulk Import Data</span> </a></li>
                 </ul>
                 <!-- /.nav-list -->
                 <div class="sidebar-collapse" id="sidebar-collapse">

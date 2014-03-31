@@ -62,6 +62,8 @@ namespace SRFROWCA
         {
             bool isShow = false;
 
+            liReports.Visible = isShow;
+            menueReports.Visible = isShow;
             menuDataEntry.Visible = isShow;
             liDataEntry.Visible = isShow;
             menuManageProjects.Visible = isShow;
@@ -74,12 +76,20 @@ namespace SRFROWCA
             liSRPIndicators.Visible = isShow;
             menueValidateIndicaotrs.Visible = isShow;
             liValidateIndicators.Visible = isShow;
+
+            liReportsTopIndicators1.Visible = isShow;
+            liReportsTopIndicatorsGeneral1.Visible = isShow;
+            liReportsTopIndicatorRegional1.Visible = isShow;
+            
+
         }
 
         private void ShowUserMenue()
         {
             bool isShow = true;
 
+            liReports.Visible = isShow;
+            menueReports.Visible = isShow;
             menuDataEntry.Visible = isShow;
             liDataEntry.Visible = isShow;
             menuManageProjects.Visible = isShow;
@@ -91,17 +101,28 @@ namespace SRFROWCA
         private void ShowRegionalLeadMenue()
         {
             bool isShow = true;
+            liReports.Visible = isShow;
+            menueReports.Visible = isShow;
             menuRegionalIndicators.Visible = isShow;
             liRegionalIndicators.Visible = isShow;
+            liReportsTopIndicators1.Visible = isShow;
+            liReportsTopIndicatorsGeneral1.Visible = isShow;
+            liReportsTopIndicatorRegional1.Visible = isShow;
         }
 
         private void ShowClusterLeadMenue()
         {
             bool isShow = true;
+
+            liReports.Visible = isShow;
+            menueReports.Visible = isShow;
             menueSRPIndicators.Visible = isShow;
             liSRPIndicators.Visible = isShow;
             menueValidateIndicaotrs.Visible = isShow;
             liValidateIndicators.Visible = isShow;
+            liReportsTopIndicators1.Visible = isShow;
+            liReportsTopIndicatorsGeneral1.Visible = isShow;
+            liReportsTopIndicatorRegional1.Visible = isShow;
         }
 
         private void ActiveMenueItem()
@@ -144,6 +165,39 @@ namespace SRFROWCA
             {
                 liRegionalIndicators.Attributes.Add("class", "active");
             }
+            else if (uri == "/Reports/ProjectsPerOrganization.aspx")
+            {
+                liReports.Attributes.Add("class", "active open");
+                liReportsSummaryReports.Attributes.Add("class", "active open");
+                liReportsSummaryReportsProjectReports.Attributes.Add("class", "active open");
+                liReportsSummaryReportsProjectReportsByOrg.Attributes.Add("class", "active");
+            }
+            else if (uri == "/Reports/ProjectByClusters.aspx")
+            {
+                liReports.Attributes.Add("class", "active open");
+                liReportsSummaryReports.Attributes.Add("class", "active open");
+                liReportsSummaryReportsProjectReports.Attributes.Add("class", "active open");
+                liReportsSummaryReportsProjectReportsByClusters.Attributes.Add("class", "active");
+            }
+            else if (uri == "/Reports/ProjectsByCountry.aspx")
+            {
+                liReports.Attributes.Add("class", "active open");
+                liReportsSummaryReports.Attributes.Add("class", "active open");
+                liReportsSummaryReportsProjectReports.Attributes.Add("class", "active open");
+                liReportsSummaryReportsProjectReportsByCountry.Attributes.Add("class", "active");
+            }
+            //else if (uri == "/Reports/TopIndicatorsGeneral.aspx")
+            //{
+            //    liReports.Attributes.Add("class", "active open");
+            //    liReportsTopIndicators.Attributes.Add("class", "active open");
+            //    liReportsTopIndicatorsGeneral.Attributes.Add("class", "active");
+            //}
+            //else if (uri == "/Reports/TopIndicaotrsRegional.aspx")
+            //{
+            //    liReports.Attributes.Add("class", "active open");
+            //    liReportsTopIndicators.Attributes.Add("class", "active open");
+            //    liReportsTopIndicatorRegional.Attributes.Add("class", "active");
+            //}
 
             //foreach (Control ctrl in nav.Controls)
             //{
