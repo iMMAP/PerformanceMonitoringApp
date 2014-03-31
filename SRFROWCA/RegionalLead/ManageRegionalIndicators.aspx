@@ -67,19 +67,14 @@
             <tr>
                 <td>
                     <div class="row">
-                        <div class="col-sm-3 widget-container-span">
-                            <div class="widget-box">
-                                <div class="widget-header widget-header-small header-color-blue2">
-                                    <h4>
-                                        Filter Options</h4>
-                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up">
-                                    </i></a></span>
-                                </div>
+                        <div class="col-sm-3">
+                            <div class="widget-box no-border">
+                                
                                 <div class="widget-body">
-                                    <div class="widget-main">
+                                    <div class="widget-main no-padding-top">
                                         <div class="col-sm-14 widget-container-span">
                                             <div class="widget-box">
-                                                <div class="widget-header widget-header-small header-color-grey">
+                                                <div class="widget-header widget-header-small header-color-blue2">
                                                     <h5>
                                                         Strategic Objectives</h5>
                                                     <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up">
@@ -95,7 +90,7 @@
                                         </div>
                                         <div class="col-sm-14 widget-container-span">
                                             <div class="widget-box">
-                                                <div class="widget-header widget-header-small header-color-grey">
+                                                <div class="widget-header widget-header-small header-color-blue2">
                                                     <h5>
                                                         Humanitarian Priorities</h5>
                                                     <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up">
@@ -111,7 +106,7 @@
                                         </div>
                                         <div class="col-sm-14 widget-container-span">
                                             <div class="widget-box">
-                                                <div class="widget-header widget-header-small header-color-grey">
+                                                <div class="widget-header widget-header-small header-color-blue2">
                                                     <h5>
                                                         Search (highlight) Activity</h5>
                                                     <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up">
@@ -126,7 +121,7 @@
                                         </div>
                                         <div class="col-sm-14 widget-container-span">
                                             <div class="widget-box">
-                                                <div class="widget-header widget-header-small header-color-grey">
+                                                <div class="widget-header widget-header-small header-color-blue2">
                                                     <h5>
                                                         Search (highlight) Indicator</h5>
                                                     <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up">

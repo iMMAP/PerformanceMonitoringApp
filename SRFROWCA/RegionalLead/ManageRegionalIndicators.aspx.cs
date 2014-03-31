@@ -12,6 +12,12 @@ namespace SRFROWCA.RegionalLead
 {
     public partial class ManageRegionalIndicators : BasePage
     {
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            ObjPrToolTip.ObjectivesToolTip(cblObjectives);
+            ObjPrToolTip.PrioritiesToolTip(cblPriorities);
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
