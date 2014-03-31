@@ -13,6 +13,7 @@
             width: 100%;
         }
     </style>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
     <script type="text/javascript">
         $(function () {
 
@@ -38,7 +39,7 @@
         </script>
         <ul class="breadcrumb">
             <li><i class="icon-home home-icon"></i><a href="#">Home</a> </li>
-            <li class="active">Data Entry</li>
+            <li class="active">Custom Report</li>
         </ul>
         <!-- .breadcrumb -->
     </div>
@@ -70,11 +71,7 @@
                                                     <div class="col-xs-12">
                                                         <div class="row">
                                                             <div class="col-sm-4">
-                                                                <div class="widget-box">
-                                                                    <div class="widget-header">
-                                                                        <h5 class="smaller">
-                                                                            General Inforamtion</h5>
-                                                                    </div>
+                                                                <div class="widget-box no-border">
                                                                     <div class="widget-body">
                                                                         <div class="widget-main padding-6">
                                                                             <table width="100%">
@@ -148,8 +145,8 @@
                                                                                     </td>
                                                                                     <td>
                                                                                         <span>
-                                                                                            <asp:CheckBox ID="cbRegional" runat="server" Text="Regional Ind" />
-                                                                                            <asp:CheckBox ID="cbCountry" runat="server" Text="Country Ind" /></span>
+                                                                                            <asp:CheckBox ID="cbRegional" runat="server" Text="Regional" />
+                                                                                            <asp:CheckBox ID="cbCountry" runat="server" Text="Country" /></span>
                                                                                     </td>
                                                                                 </tr>
                                                                             </table>
@@ -158,11 +155,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-4">
-                                                                <div class="widget-box light-border">
-                                                                    <div class="widget-header">
-                                                                        <h5 class="smaller">
-                                                                            Logframe Filters</h5>
-                                                                    </div>
+                                                                <div class="widget-box no-border">
                                                                     <div class="widget-body">
                                                                         <div class="widget-main padding-6">
                                                                             <table width="100%">
@@ -227,11 +220,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-4">
-                                                                <div class="widget-box light-border">
-                                                                    <div class="widget-header">
-                                                                        <h5 class="smaller">
-                                                                            Location Filters</h5>
-                                                                    </div>
+                                                                <div class="widget-box no-border">
                                                                     <div class="widget-body">
                                                                         <div class="widget-main padding-6">
                                                                             <table width="100%">
