@@ -1036,7 +1036,7 @@ namespace SRFROWCA.Pages
             int activityDataId = 0;
             int projIndicatorId = 0;
             int yearId = RC.GetSelectedIntVal(ddlYear);
-            Random rnd = new Random();
+            
             foreach (GridViewRow row in gvActivities.Rows)
             {
                 if (row.RowType == DataControlRowType.DataRow)
@@ -1114,7 +1114,7 @@ namespace SRFROWCA.Pages
                                                     UserInfo.Organization, locationIdToSaveT, projectId,
                                                     activityDataId, valToSaveT, yearId, projIndicatorId, userId, DBNull.Value});
                                 }
-                                valToSaveA = rnd.Next(1, 15);
+                                
                                 if (!(valToSaveA == null))
                                 {
                                     int newReportDetailId = DBContext.Add("InsertReportDetails",
