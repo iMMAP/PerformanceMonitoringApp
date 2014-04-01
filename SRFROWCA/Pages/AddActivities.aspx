@@ -36,7 +36,7 @@
         }
     </style>
     <!-- ORS styles -->
-    <link rel="stylesheet" href="../assets/css/ors.css" />
+    <link rel="stylesheet" href="../assets/css/test.css" />
     <!-- ace styles -->
     <script type="text/javascript" src="../assets/orsjs/ShowHideObJAndPr.js"></script>
     <script src="../assets/orsjs/jquery.numeric.min.js" type="text/javascript"></script>
@@ -114,9 +114,19 @@
                     $(this).parent().addClass('highlight');
                 }
             });
+
+            // scrollables
+            $('.slim-scroll').each(function () {
+                var $this = $(this);
+                $this.slimScroll({
+                    height: $this.data('height') || 100,
+                    railVisible: true
+                });
+            });
         });
 
     </script>
+    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="breadcrumbs" id="breadcrumbs">
@@ -170,10 +180,12 @@
                                         </i></a></span>
                                     </div>
                                     <div class="widget-body">
-                                        <div class="widget-main">
-                                            <asp:RadioButtonList ID="rblProjects" runat="server" AutoPostBack="True" OnSelectedIndexChanged="rblProjects_SelectedIndexChanged"
-                                                onchange="needToConfirm = false;" meta:resourcekey="rblProjectsResource1">
-                                            </asp:RadioButtonList>
+                                        <div class="slim-scroll" data-height="200">
+                                            <div class="widget-main">
+                                                <asp:RadioButtonList ID="rblProjects" runat="server" AutoPostBack="True" OnSelectedIndexChanged="rblProjects_SelectedIndexChanged"
+                                                    onchange="needToConfirm = false;" meta:resourcekey="rblProjectsResource1">
+                                                </asp:RadioButtonList>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -260,40 +272,24 @@
                                 <AlternatingRowStyle CssClass="altcolor" />
                                 <Columns>
                                     <asp:BoundField DataField="ObjectiveId" HeaderText="ObjectiveId" ItemStyle-Width="1px"
-                                        ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement" meta:resourcekey="BoundFieldResource1">
-                                        <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
-                                        <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
+                                        ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource1">
                                     </asp:BoundField>
                                     <asp:BoundField DataField="HumanitarianPriorityId" HeaderText="HumanitarianPriorityId"
-                                        ItemStyle-Width="1px" ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement"
-                                        meta:resourcekey="BoundFieldResource2">
-                                        <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
-                                        <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
-                                    </asp:BoundField>
+                                        ItemStyle-Width="1px" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden"
+                                        meta:resourcekey="BoundFieldResource2"></asp:BoundField>
                                     <asp:BoundField DataField="ObjAndPrId" HeaderText="objprid" ItemStyle-Width="1px"
-                                        ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement" meta:resourcekey="BoundFieldResource3">
-                                        <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
-                                        <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
+                                        ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource3">
                                     </asp:BoundField>
-                                    <asp:BoundField DataField="ProjectId" HeaderText="pid" ItemStyle-Width="1px" ItemStyle-CssClass="hiddenelement"
-                                        HeaderStyle-CssClass="hiddenelement" meta:resourcekey="BoundFieldResource4">
-                                        <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
-                                        <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
-                                    </asp:BoundField>
+                                    <asp:BoundField DataField="ProjectId" HeaderText="pid" ItemStyle-Width="1px" ItemStyle-CssClass="hidden"
+                                        HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource4"></asp:BoundField>
                                     <asp:BoundField DataField="objAndPrAndPId" HeaderText="objprpid" ItemStyle-Width="1px"
-                                        ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement" meta:resourcekey="BoundFieldResource5">
-                                        <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
-                                        <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
+                                        ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource5">
                                     </asp:BoundField>
                                     <asp:BoundField DataField="objAndPId" HeaderText="objAndPId" ItemStyle-Width="1px"
-                                        ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement" meta:resourcekey="BoundFieldResource6">
-                                        <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
-                                        <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
+                                        ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource6">
                                     </asp:BoundField>
                                     <asp:BoundField DataField="PrAndPId" HeaderText="PrAndPId" ItemStyle-Width="1px"
-                                        ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement" meta:resourcekey="BoundFieldResource7">
-                                        <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
-                                        <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
+                                        ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource7">
                                     </asp:BoundField>
                                     <asp:TemplateField HeaderText="Project Code" ItemStyle-Wrap="false" meta:resourcekey="TemplateFieldResource1">
                                         <ItemTemplate>
@@ -402,7 +398,7 @@
                             </div>
                             <div class="modal-footer no-margin-top">
                                 <asp:Button ID="btnClose" runat="server" Text="Close" Width="120px" CssClass="btn btn-primary"
-                                                CausesValidation="False" OnClientClick="needToConfirm = false;" meta:resourcekey="btnCloseResource1" />
+                                    CausesValidation="False" OnClientClick="needToConfirm = false;" meta:resourcekey="btnCloseResource1" />
                             </div>
                         </div>
                     </div>
@@ -453,5 +449,5 @@
                 </div>
             </div>
         </div>
-    </asp:Panel>
+    </asp:Panel>    
 </asp:Content>
