@@ -94,6 +94,24 @@ namespace SRFROWCA {
         protected global::System.Web.UI.WebControls.LoginStatus HeadLoginStatus;
         
         /// <summary>
+        /// liDashboards control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liDashboards;
+        
+        /// <summary>
+        /// menueDashboards control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueDashboards;
+        
+        /// <summary>
         /// liDefault control.
         /// </summary>
         /// <remarks>
@@ -445,13 +463,13 @@ namespace SRFROWCA {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liBulkImport;
         
         /// <summary>
-        /// menueBuldImport control.
+        /// menueBulkImport control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueBuldImport;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueBulkImport;
         
         /// <summary>
         /// MainContent control.

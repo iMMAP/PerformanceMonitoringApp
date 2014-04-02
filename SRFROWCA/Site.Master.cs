@@ -4,6 +4,7 @@ using System.Web.UI.WebControls;
 using SRFROWCA.Common;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
+using System.Web.SessionState;
 
 namespace SRFROWCA
 {
@@ -53,10 +54,12 @@ namespace SRFROWCA
                 {
                     ShowRegionalLeadMenue();
                 }
+
+                ShowAuthenticatedMenues();
             }
 
             ActiveMenueItem();
-        }
+        }        
 
         private void HideAllAuthenticatedMenues()
         {
@@ -76,12 +79,11 @@ namespace SRFROWCA
             liSRPIndicators.Visible = isShow;
             menueValidateIndicaotrs.Visible = isShow;
             liValidateIndicators.Visible = isShow;
-
             liReportsTopIndicators1.Visible = isShow;
             liReportsTopIndicatorsGeneral1.Visible = isShow;
             liReportsTopIndicatorRegional1.Visible = isShow;
-            
-
+            liBulkImport.Visible = isShow;
+            menueBulkImport.Visible = isShow;
         }
 
         private void ShowUserMenue()
@@ -125,10 +127,27 @@ namespace SRFROWCA
             liReportsTopIndicatorRegional1.Visible = isShow;
         }
 
+        private void ShowAuthenticatedMenues()
+        {
+            bool isShow = true;
+            liBulkImport.Visible = isShow;
+            menueBulkImport.Visible = isShow;
+        }
+
         private void ActiveMenueItem()
         {
             string uri = HttpContext.Current.Request.Url.AbsolutePath;
-            if (uri == "/Pages/AddActivities.aspx")
+            if (uri == "/Default.aspx")
+            {
+                liDashboards.Attributes.Add("class", "active open");
+                liDefault.Attributes.Add("class", "active");
+            }
+            else if (uri == "/ReportingStatus.aspx")
+            {
+                liDashboards.Attributes.Add("class", "active open");
+                liReportingStatus.Attributes.Add("class", "active");
+            }                
+            else if (uri == "/Pages/AddActivities.aspx")
             {
                 liDataEntry.Attributes.Add("class", "active");
             }
@@ -139,11 +158,7 @@ namespace SRFROWCA
             else if (uri == "/Pages/ManageActivities.aspx")
             {
                 liManageActivity.Attributes.Add("class", "active");
-            }
-            else if (uri == "/Default.aspx")
-            {
-                liDefault.Attributes.Add("class", "active");
-            }
+            }            
             else if (uri == "/Anonymous/AllData.aspx")
             {
                 liReports.Attributes.Add("class", "active open");
@@ -239,7 +254,7 @@ namespace SRFROWCA
             HttpContext.Current.Session["UserCountry"] = null;
             HttpContext.Current.Session["UserCluster"] = null;
             HttpContext.Current.Session["UserOrg"] = null;
-        }
+        }        
 
         // Gets the ASP.NET application's virtual application root path on the server.
         private static string VirtualFolder

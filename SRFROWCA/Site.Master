@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
     <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
     <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/blitzer/jquery-ui.min.css" />
+    <!-- ORS styles -->
+    <link rel="stylesheet" href="assets/css/ors.css" />
+    <!-- ace styles -->
     <!--[if !IE]> -->
     <script type="text/javascript">
         window.jQuery || document.write("<script src='<%# BaseURL %>/assets/js/jquery-2.0.3.min.js'>" +
@@ -157,8 +160,8 @@
                                 <asp:LoginName ID="HeadLoginName" runat="server" />
                             </span><i class="icon-caret-down"></i></a>
                         <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-                            <li><a href="#"><i class="icon-cog"></i>Settings </a></li>
-                            <li><a href="<%# BaseURL %>Account/UserProfile.aspx"><i class="icon-user"></i>Profile
+                            <li><a href="../Account/ChangePassword.aspx"><i class="icon-unlock "></i>Change Password</a></li>
+                            <li><a href="../Account/UserProfile.aspx"><i class="icon-user"></i>Profile
                             </a></li>
                             <li class="divider"></li>
                             <li>
@@ -205,15 +208,21 @@
                 </div>
                 <!-- #sidebar-shortcuts -->
                 <ul class="nav nav-list">
-                    <li id="liDefault" runat="server"><a href="../Default.aspx"><i class="icon-dashboard">
-                    </i><span class="menu-text">Dashboard </span></a></li>
-                     <li id="liReportingStatus" runat="server"><a href="../ReportingStatus.aspx"><i class="icon-list">
-                    </i><span class="menu-text">Reporting Status </span></a></li>
+                    <li id="liDashboards" runat="server"><a id="menueDashboards" runat="server" href="#"
+                        class="dropdown-toggle"><i class="icon-dashboard"></i><span class="menu-text">Dashboard
+                        </span><b class="arrow icon-angle-down"></b></a>
+                        <ul class="submenu">
+                            <li id="liDefault" runat="server"><a href="../Default.aspx">
+                            <span class="menu-text">Performance Monitoring </span></a></li>
+                            <li id="liReportingStatus" runat="server"><a href="../ReportingStatus.aspx"><i class="icon-list">
+                            </i><span class="menu-text">Reporting Status </span></a></li>
+                        </ul>
+                    </li>
                     <li id="liDataEntry" runat="server"><a href="~/Pages/AddActivities.aspx" id="menuDataEntry"
                         runat="server"><i class="icon-list-alt"></i><span class="menu-text">Data Entry</span>
                     </a></li>
                     <li id="liManageProject" runat="server"><a href="~/Pages/CreateProject.aspx" id="menuManageProjects"
-                        runat="server"><i class="icon-list-alt"></i><span class="menu-text">Manage Project</span>
+                        runat="server"><i class="icon-list-alt"></i><span class="menu-text">Manage Projects</span>
                     </a></li>
                     <li id="liManageActivity" runat="server"><a href="~/Pages/ManageActivities.aspx"
                         id="menuManageActivities" runat="server"><i class="icon-list-alt"></i><span class="menu-text">
@@ -245,7 +254,6 @@
                                         </i>Top 10 Regional</a></li>
                                 </ul>
                             </li>
-                            
                             <li id="liReportsSummaryReports" runat="server"><a id="menueReportsSummaryReports"
                                 runat="server" href="#" class="dropdown-toggle"><i class="icon-double-angle-right">
                                 </i>Summary Reports <b class="arrow icon-angle-down"></b></a>
@@ -266,7 +274,7 @@
                                                 runat="server" href="~/Reports/ProjectsByCountry.aspx"><i class="icon-angle-right">
                                                 </i>By Country </a></li>
                                             <li id="liReportsSummaryReportsProjectReportsByClusters" runat="server"><a id="menueReportsSummaryReportsProjectReportsByClusters"
-                                                runat="server" a href="~/Reports/ProjectByClusters.aspx"><i class="icon-angle-right">
+                                                runat="server" href="~/Reports/ProjectByClusters.aspx"><i class="icon-angle-right">
                                                 </i>By Cluster</a> </li>
                                         </ul>
                                     </li>
@@ -274,9 +282,13 @@
                             </li>
                         </ul>
                     </li>
-                    <li id="liBulkImport" runat="server"><a href="~/Admin/UploadLogFrame.aspx"
-                        id="menueBuldImport" runat="server"><i class="icon-list-alt"></i><span class="menu-text">
-                            Bulk Import Data</span> </a></li>
+                    <li id="liBulkImport" runat="server"><a href="~/Admin/UploadLogFrame.aspx" id="menueBulkImport"
+                        runat="server"><i class="icon-list-alt"></i><span class="menu-text">Bulk Import Data</span>
+                    </a></li>
+                    <li><a href="../ContactUs/Contactus.aspx"><i class="icon-envelope-alt"></i><span class="menu-text">Contact Us</span>
+                    </a></li>
+                    <li><a href="../faq.aspx"><i class="icon-comment "></i><span class="menu-text">FAQs & Help</span>
+                    </a></li>
                 </ul>
                 <!-- /.nav-list -->
                 <div class="sidebar-collapse" id="sidebar-collapse">
@@ -315,6 +327,25 @@
     <script src="<%# BaseURL %>/assets/js/ace.min.js"></script>
     <script type="text/javascript">
         if ("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+    <script>
+        // Keep the session alive
+        function setHeartbeat() {
+            setTimeout("heartbeat()", 200000);
+        }
+
+        $(function () {
+            heartbeat();
+        });
+
+        function heartbeat() {
+            $.get(
+                    "/SessionHeartbeat.ashx",
+                    function (data) {
+                        setHeartbeat();
+                    }
+                );
+        }
     </script>
     </form>
 </body>

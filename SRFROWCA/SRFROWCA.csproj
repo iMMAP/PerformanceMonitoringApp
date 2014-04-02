@@ -129,6 +129,9 @@
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="Telerik.Web.UI, Version=2013.2.717.40, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
@@ -182,6 +185,7 @@
     <Content Include="assets\css\select2.css" />
     <Content Include="assets\css\select2.png" />
     <Content Include="assets\css\select2x2.png" />
+    <Content Include="assets\css\test.css" />
     <Content Include="assets\css\ui.jqgrid.css" />
     <Content Include="assets\fonts\glyphicons-halflings-regular-2.html" />
     <Content Include="assets\fonts\glyphicons-halflings-regular-3.html" />
@@ -359,6 +363,7 @@
     <Content Include="ErrorPages\GenericErrorPage.aspx" />
     <Content Include="ErrorPages\Http404ErrorPage.aspx" />
     <Content Include="ErrorPages\HttpErrorPage.aspx" />
+    <Content Include="faq.aspx" />
     <Content Include="Help\generatereport1.avi" />
     <Content Include="Help\generatereport1.swf" />
     <Content Include="Log\ErrorLog.txt" />
@@ -381,6 +386,7 @@
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Reports\AllData.aspx" />
+    <Content Include="Reports\PivotReport.aspx" />
     <Content Include="Reports\ProjectByClusters.aspx" />
     <Content Include="Reports\ProjectsByCluster.aspx" />
     <Content Include="Reports\ProjectsByCountry.aspx" />
@@ -408,11 +414,13 @@
     <Content Include="DataFeed.ashx" />
     <Content Include="WebForm2.aspx" />
     <Content Include="WebForm3.aspx" />
+    <Content Include="WebForm4.aspx" />
     <Content Include="WebForm5.aspx" />
     <Content Include="OPS\OPSActivitiesFeed.ashx" />
     <Content Include="OPS\OPSProjectFeed.ashx" />
     <Content Include="xmlprojectfeeds.aspx" />
     <Content Include="ClusterLead\Web.config" />
+    <Content Include="Admin\Web.config" />
     <None Include="assets\font\cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff" />
     <None Include="assets\font\DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff" />
     <None Include="assets\font\fontawesome-webfontd41d.eot" />
@@ -764,6 +772,13 @@
     <Compile Include="ErrorPages\HttpErrorPage.aspx.designer.cs">
       <DependentUpon>HttpErrorPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="faq.aspx.cs">
+      <DependentUpon>faq.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="faq.aspx.designer.cs">
+      <DependentUpon>faq.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Maps\TargetAchievedByLocDataMap.aspx.cs">
       <DependentUpon>TargetAchievedByLocDataMap.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -922,6 +937,13 @@
     <Compile Include="Reports\AllData.aspx.designer.cs">
       <DependentUpon>AllData.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\PivotReport.aspx.cs">
+      <DependentUpon>PivotReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\PivotReport.aspx.designer.cs">
+      <DependentUpon>PivotReport.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Reports\ProjectByClusters.aspx.cs">
       <DependentUpon>ProjectByClusters.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -964,6 +986,9 @@
     <Compile Include="Reports\TopIndicatorsGeneral.aspx.designer.cs">
       <DependentUpon>TopIndicatorsGeneral.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SessionHeartbeat.ashx.cs">
+      <DependentUpon>SessionHeartbeat.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -998,6 +1023,13 @@
     </Compile>
     <Compile Include="WebForm3.aspx.designer.cs">
       <DependentUpon>WebForm3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm4.aspx.cs">
+      <DependentUpon>WebForm4.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm4.aspx.designer.cs">
+      <DependentUpon>WebForm4.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebForm5.aspx.cs">
       <DependentUpon>WebForm5.aspx</DependentUpon>
@@ -1047,6 +1079,7 @@
     <Content Include="DataFeeds\LogFrameDataFeed.ashx" />
     <Content Include="DataFeeds\YearFeed.ashx" />
     <Content Include="DataFeeds\MonthFeed.ashx" />
+    <Content Include="SessionHeartbeat.ashx" />
     <None Include="UserManual_files\themedata.thmx" />
   </ItemGroup>
   <ItemGroup>
