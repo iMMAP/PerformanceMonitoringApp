@@ -17,7 +17,7 @@ namespace SRFROWCA.Account
         {
             if (IsPostBack) return;
 
-            this.Form.DefaultButton = this.btnUpdate.UniqueID;
+            //this.Form.DefaultButton = this.btnUpdate.UniqueID;
 
             PopulateCountries();
             GetUserInformation();
@@ -35,9 +35,9 @@ namespace SRFROWCA.Account
             if (dt.Rows.Count > 0)
             {
                 txtPhone.Text = dt.Rows[0]["PhoneNumber"].ToString();
+                txtFullName.Text = dt.Rows[0]["FullName"].ToString();
 
                 string[] roles = Roles.GetRolesForUser(mu.UserName);
-
                 ddlCountry.SelectedValue = dt.Rows[0]["LocationId"].ToString();
             }
         }
@@ -91,7 +91,8 @@ namespace SRFROWCA.Account
             int countryId = 0;
             int.TryParse(ddlCountry.SelectedValue, out countryId);
             string phone = txtPhone.Text.Trim().Length > 0 ? txtPhone.Text.Trim() : null;
-            return new object[] { userId, countryId, phone, DBNull.Value };
+            string fullName = txtFullName.Text.Trim();
+            return new object[] { userId, countryId, phone, fullName, DBNull.Value };
         }
 
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success)

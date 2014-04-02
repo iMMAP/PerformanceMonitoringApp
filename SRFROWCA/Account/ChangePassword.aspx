@@ -4,12 +4,23 @@
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
-    <div class="containerLogin">
-        <div class="graybarLogin">
-            Change Your Password
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+        </script>
+        <ul class="breadcrumb">
+            <li><i class="icon-home home-icon"></i><a href="#">Home</a> </li>
+            <li class="active">Change Password</li>
+        </ul>
+        <!-- .breadcrumb -->
+    </div>
+    <div class="col-sm-offset-1 col-sm-10">
+        <div class="space">
         </div>
-        <div class="contentarea">
-            <div class="formdiv">
+        <div class="tab-content profile-edit-tab-content">
+            <div id="edit-basic" class="tab-pane in active">
+                <div class="vspace-xs">
+                </div>
                 <asp:ChangePassword ID="ChangeUserPassword" runat="server" CancelDestinationPageUrl="~/"
                     EnableViewState="false" RenderOuterTable="false" SuccessPageUrl="ChangePasswordSuccess.aspx">
                     <ChangePasswordTemplate>
@@ -53,7 +64,7 @@
                                     <asp:TextBox ID="ConfirmNewPassword" runat="server" CssClass="passwordEntry" TextMode="Password"
                                         MaxLength="128" Width="300px"></asp:TextBox>
                                 </td>
-                                <td style="width:200px">
+                                <td style="width: 200px">
                                     <asp:RequiredFieldValidator ID="ConfirmNewPasswordRequired" runat="server" ControlToValidate="ConfirmNewPassword"
                                         CssClass="error2" Display="Dynamic" ErrorMessage="Confirm New Password is required."
                                         ToolTip="Confirm New Password is required.">Required.</asp:RequiredFieldValidator>
@@ -64,19 +75,15 @@
                             <tr>
                                 <td colspan="3">
                                     <asp:Button ID="CancelPushButton" runat="server" CausesValidation="False" CommandName="Cancel"
-                                        Text="Cancel" CssClass="button_example" />
+                                        Text="Cancel" CssClass="btn btn-default" />
                                     <asp:Button ID="ChangePasswordPushButton" runat="server" CommandName="ChangePassword"
-                                        Text="Change Password" CssClass="button_example" />
+                                        Text="Change Password" CssClass="btn btn-primary" />
                                 </td>
                             </tr>
                         </table>
                     </ChangePasswordTemplate>
                 </asp:ChangePassword>
-                <div class="spacer" style="clear: both;">
-                </div>
             </div>
-        </div>
-        <div class="graybarcontainer">
         </div>
     </div>
 </asp:Content>
