@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using BusinessLogic;
 using System.Data;
 using System.IO;
+using System.Drawing;
 
 namespace SRFROWCA
 {
@@ -56,7 +57,6 @@ namespace SRFROWCA
 
         private static StringWriter RenderGrid(GridView gv)
         {
-            
             //  Create a table to contain the grid
             Table table = new Table();
             StringWriter sw = new StringWriter();
@@ -68,8 +68,17 @@ namespace SRFROWCA
             //  add the header row to the table
             if (gv.HeaderRow != null)
             {
+                
                 ExportUtility.PrepareControlForExport(gv.HeaderRow);
-                gv.HeaderRow.Style.Add("background-color", "ButtonFace");                
+
+                gv.HeaderRow.BackColor = Color.Gray;
+                foreach (TableCell cell in gv.HeaderRow.Cells)
+                {
+                    cell.BackColor = gv.HeaderStyle.BackColor;
+                }
+
+                //gv.HeaderRow.Style.
+                    //.Add("background-color", "ButtonFace");                
                 table.Rows.Add(gv.HeaderRow);
             }
 
@@ -77,7 +86,21 @@ namespace SRFROWCA
             foreach (GridViewRow row in gv.Rows)
             {
                 ExportUtility.PrepareControlForExport(row);
-                row.CssClass = "istrow";
+
+                foreach (TableCell cell in row.Cells)
+                {
+                    if (row.RowIndex % 2 == 0)
+                    {
+                        cell.BackColor = Color.Cyan;
+                    }
+                    else
+                    {
+                        cell.BackColor = Color.Wheat;
+                    }
+                    cell.CssClass = "textmode";
+                }
+
+                //row.CssClass = "istrow";
                 table.Rows.Add(row);
             }
 
@@ -101,7 +124,6 @@ namespace SRFROWCA
 
         internal static void ExportGridView(Control control, string fileName, string fileExtention, HttpResponse Response, bool disposePassedControl)
         {
-
             ExportUtility.PrepareControlForExport(control);
             string[] nameWithSpaces = fileName.Split(' ');
             fileName = string.Join("-", nameWithSpaces);
@@ -166,52 +188,6 @@ namespace SRFROWCA
         //            //  render the htmlwriter into the response
         //            HttpContext.Current.Response.Write(sw.ToString());
         //            HttpContext.Current.Response.End();
-        //        }
-        //    }
-        //}
-
-        /// <summary>
-        /// Replace any of the contained controls with literals
-        /// </summary>
-        /// <param name="control"></param>
-        //private static void PrepareControlForExport1(Control control)
-        //{
-        //    for (int i = 0; i < control.Controls.Count; i++)
-        //    {
-        //        Control current = control.Controls[i];
-        //        if (current is LinkButton)
-        //        {
-        //            control.Controls.Remove(current);
-        //            control.Controls.AddAt(i, new LiteralControl((current as LinkButton).Text));
-        //        }
-        //        else if (current is ImageButton)
-        //        {
-        //            control.Controls.Remove(current);
-        //            control.Controls.AddAt(i, new LiteralControl((current as ImageButton).AlternateText));
-        //        }
-        //        else if (current is HyperLink)
-        //        {
-        //            control.Controls.Remove(current);
-        //            control.Controls.AddAt(i, new LiteralControl((current as HyperLink).Text));
-        //        }
-        //        else if (current is DropDownList)
-        //        {
-        //            control.Controls.Remove(current);
-        //            control.Controls.AddAt(i, new LiteralControl((current as DropDownList).SelectedItem.Text));
-        //        }
-        //        else if (current is CheckBox)
-        //        {
-        //            control.Controls.Remove(current);
-        //            control.Controls.AddAt(i, new LiteralControl((current as CheckBox).Checked ? "True" : ""));
-        //        }
-        //        else if (current is TextBox)
-        //        {
-        //            control.Controls.Remove(current);
-        //            control.Controls.AddAt(i, new LiteralControl((current as TextBox).Text));
-        //        }
-        //        if (current.HasControls())
-        //        {
-        //            PrepareControlForExport(current);
         //        }
         //    }
         //}

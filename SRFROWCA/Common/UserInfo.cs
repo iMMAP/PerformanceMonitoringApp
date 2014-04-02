@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data;
+using System.Web.Security;
 
 namespace SRFROWCA.Common
 {
@@ -44,7 +45,10 @@ namespace SRFROWCA.Common
             get
             {
                 int i = 0;
-                int.TryParse( HttpContext.Current.Session["UserCountry"].ToString(), out i);
+                if (HttpContext.Current.Session["UserCountry"] != null)
+                {
+                    int.TryParse(HttpContext.Current.Session["UserCountry"].ToString(), out i);
+                }
                 return i;
             }
         }
@@ -131,7 +135,5 @@ namespace SRFROWCA.Common
                 HttpContext.Current.Session["UserOrgName"].ToString() : "";
             }
         }
-
-
     }
 }

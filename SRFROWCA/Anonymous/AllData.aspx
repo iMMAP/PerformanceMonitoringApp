@@ -13,6 +13,9 @@
             width: 100%;
         }
     </style>
+    <!-- ORS styles -->
+    <link rel="stylesheet" href="../assets/css/ors.css" />
+    <!-- ace styles -->
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
     <script type="text/javascript">
         $(function () {
@@ -306,7 +309,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 widget-container-span">
                         <div class="widget-box">
-                            <cc2:PagingGridView ID="gvReport" runat="server" Width="100%" CssClass="table table-striped table-bordered table-hover"
+                            <cc2:PagingGridView ID="gvReport" runat="server" Width="100%" CssClass="imagetable"
                                 AutoGenerateColumns="false" OnSorting="gvReport_Sorting" ShowHeaderWhenEmpty="true"
                                 EnableViewState="false" AllowSorting="True" AllowPaging="true" PageSize="60"
                                 ShowHeader="true" OnPageIndexChanging="gvReport_PageIndexChanging" EmptyDataText="Your filter criteria does not match any record in database!">

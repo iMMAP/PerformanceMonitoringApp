@@ -25,38 +25,38 @@ namespace SRFROWCA.Admin
 
         protected void btnImport_Click(object sender, EventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 // Check if file is uploaded and is excel file
                 if (!IsValidFile()) return;
 
-                // Empty staging tables before data import.
-                EmptyTable();
-                // Fill staging table (TempData1) in db to import data using this table.
-                FillStagingTableInDB();
+            //    // Empty staging tables before data import.
+            //    EmptyTable();
+            //    // Fill staging table (TempData1) in db to import data using this table.
+            //    FillStagingTableInDB();
 
-                // Import data from another staging table (TempData).
-                DataTable dt = ImportData();
+            //    // Import data from another staging table (TempData).
+            //    DataTable dt = ImportData();
 
-                // If success or any error occoured in execution of procedure then show message to user.
-                if (dt.Rows.Count > 0)
-                {
-                    lblMessage.CssClass = "info-message";
-                    lblMessage.Visible = true;
-                    lblMessage.Text = dt.Rows[0][0].ToString() + "  ---  " + dt.Rows[0][1].ToString();
-                }
-            }
-            catch (Exception ex)
-            {
-                ShowMessage(ex.ToString());
-            }
+            //    // If success or any error occoured in execution of procedure then show message to user.
+            //    if (dt.Rows.Count > 0)
+            //    {
+            //        lblMessage.CssClass = "info-message";
+            //        lblMessage.Visible = true;
+            //        lblMessage.Text = dt.Rows[0][0].ToString() + "  ---  " + dt.Rows[0][1].ToString();
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    ShowMessage(ex.ToString());
+            //}
         }
 
         // Populate Emergencies Drop down.
         private void PopulateLocationEmergencies()
         {
-            int locationId = (int)RC.SiteLanguage.English;
-            UI.FillEmergency(ddlEmergency, RC.GetAllEmergencies(locationId));            
+            //int locationId = (int)RC.SiteLanguage.English;
+            //UI.FillEmergency(ddlEmergency, RC.GetAllEmergencies(locationId));            
         }
 
         // Get all emergencies.
@@ -218,8 +218,8 @@ namespace SRFROWCA.Admin
         {
             if (dt.Rows.Count > 0)
             {
-                dt.Rows[0]["EmergencyId"] = ddlEmergency.SelectedValue;
-                dt.Rows[0]["UserId"] = ((Guid)Membership.GetUser().ProviderUserKey);
+                //dt.Rows[0]["EmergencyId"] = ddlEmergency.SelectedValue;
+                //dt.Rows[0]["UserId"] = ((Guid)Membership.GetUser().ProviderUserKey);
             }
         }
 

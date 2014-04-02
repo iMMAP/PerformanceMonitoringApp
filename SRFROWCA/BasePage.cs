@@ -22,6 +22,7 @@ namespace SRFROWCA
         protected void Page_PreInit(object sender, EventArgs e)
         {
             GZipContents.GZipOutput();
+            UserInfo.UserProfileInfo();
         }
 
         internal virtual void BindGridData(){}

@@ -107,6 +107,11 @@ namespace SRFROWCA.Pages
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
+                if (e.Row.RowIndex == 0)
+                {
+                    e.Row.Style.Add("height", "50px");
+                }
+
                 ObjPrToolTip.ObjectiveIconToolTip(e);
                 ObjPrToolTip.PrioritiesIconToolTip(e);
                 int activityDataId = 0;

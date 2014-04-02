@@ -503,6 +503,52 @@ namespace SRFROWCA.Anonymous
             ExportUtility.ExportGridView(gv, "ORS_CustomReport", ".xls", Response, true);
         }
 
+        //private void testexport()
+        //{
+
+        //    Response.Clear();
+
+        //    Response.AddHeader("content-disposition", "attachment; filename=FileName1.xls");
+
+        //    Response.Charset = "";
+
+        //    Response.ContentType = "application/vnd.xls";
+
+        //    System.IO.StringWriter stringWrite = new System.IO.StringWriter();
+
+        //    System.Web.UI.HtmlTextWriter htmlWrite =
+        //    new HtmlTextWriter(stringWrite);
+        //    GridView g = new GridView();
+        //    this.Form.Controls.Add(g);
+
+        //    g.HeaderStyle.BackColor = System.Drawing.Color.Red;
+        //    SQLPaging = PagingStatus.OFF;
+        //    DataTable dt = GetReportData();
+        //    SQLPaging = PagingStatus.ON;
+        //    g.DataSource = dt;
+        //    g.DataBind();
+        //    foreach (GridViewRow i in g.Rows)
+        //    {
+
+        //        foreach (TableCell tc in i.Cells)
+
+        //            tc.Attributes.Add("class", "text");
+
+
+        //    }
+
+        //    g.RenderControl(htmlWrite);
+        //    string style = @"<style> .text { mso-number-format:\@; } </style> ";
+
+        //    Response.Write(style);
+
+        //    Response.Write(stringWrite.ToString());
+
+        //    Response.End();
+
+
+        //}
+
         public override void VerifyRenderingInServerForm(Control control) { }
 
         #endregion
