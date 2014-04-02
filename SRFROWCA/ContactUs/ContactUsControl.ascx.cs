@@ -23,9 +23,16 @@ namespace SRFROWCA.ContactUs
                 SendMessage();
                 ShowMessage("Your message has been sent!", "info-message");
             }
-            catch
+            catch (Exception ex)
             {
-                ShowMessage("Some error occoured, please try again!", "error-message");
+                if (ex.Message.Equals("The specified string is not in the form required for an e-mail address."))
+                {
+                    ShowMessage("Please provide valid E-Mail address!", "error-message");
+                }
+                else
+                {
+                    ShowMessage("Some an error occoured, please try again!", "error-message");
+                }
             }
         }
 
