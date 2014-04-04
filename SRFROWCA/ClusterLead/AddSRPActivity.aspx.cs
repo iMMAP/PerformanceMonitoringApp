@@ -8,18 +8,52 @@ using SRFROWCA.Common;
 using BusinessLogic;
 using System.Data;
 using System.Transactions;
+using SRFROWCA.Controls;
 
 namespace SRFROWCA.ClusterLead
 {
     public partial class AddSRPActivity : BasePage
     {
+        protected void Page_PreLoad(object sender, EventArgs e)
+        {
+            string control = Utils.GetPostBackControlId(this);
+            if (control == "btnAddIndicatorControl")
+            {
+                IndControlId += 1;
+            }
+
+            if (control == "btnRemoveIndicatorControl")
+            {
+                IndControlId -= 1;
+            }
+
+            if (IndControlId <= 1)
+            {
+                btnRemoveIndicatorControl.Visible = false;
+            }
+            else
+            {
+                btnRemoveIndicatorControl.Visible = true;
+            }
+
+            //if (control == "btnSave" && IndControlId > 1)
+            //{
+            //    IndControlId -= 1;
+            //}
+            for (int i = 0; i < IndControlId; i++)
+            {
+                AddIndicatorControl(i);
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
             UserInfo.UserProfileInfo();
             PopulateObjective();
             PopulatePriority();
-            PopulateUnits();
+            AddIndicatorControl(0);
+            IndControlId = 1;
         }
 
         private void PopulateObjective()
@@ -38,22 +72,13 @@ namespace SRFROWCA.ClusterLead
             ddlPriority.Items.Insert(0, item);
         }
 
-        private void PopulateUnits()
-        {
-            UI.FillUnits(ddlUnitsInd1);
-            UI.FillUnits(ddlUnitsInd2);
-
-            ListItem item = new ListItem("Select Unit", "0");
-            ddlUnitsInd1.Items.Insert(0, item);
-            ddlUnitsInd2.Items.Insert(0, item);
-        }
-
         protected void btnSave_Click(object sender, EventArgs e)
         {
             using (TransactionScope scope = new TransactionScope())
             {
                 SaveData();
                 scope.Complete();
+                Response.Redirect("AddSRPActivitiesFromMasterList.aspx");
             }
         }
 
@@ -62,7 +87,18 @@ namespace SRFROWCA.ClusterLead
             int priorityActivityId = SaveActivity();
             if (priorityActivityId > 0)
             {
-                SaveIndicators(priorityActivityId);
+                foreach (Control ctl in pnlAdditionalIndicaotrs.Controls)
+                {
+                    if (ctl != null && ctl.ID != null && ctl.ID.Contains("indicatorControlId"))
+                    {
+                        NewIndicatorsControl indControl = ctl as NewIndicatorsControl;
+
+                        if (indControl != null)
+                        {
+                            indControl.SaveIndicators(priorityActivityId);
+                        }
+                    }
+                }
             }
         }
 
@@ -81,81 +117,54 @@ namespace SRFROWCA.ClusterLead
                                                                         priorityId, actEn, actFr, userId, DBNull.Value });
         }
 
-        private void SaveIndicators(int priorityActivityId)
+        protected void btnAddIndiatorControl_Click(object sender, EventArgs e)
         {
-            SaveIndicator1(priorityActivityId);
-            SaveIndicaotr2(priorityActivityId);
+
         }
 
-        private void SaveIndicator1(int priorityActivityId)
+        private void AddIndicatorControl(int i)
         {
-            int unitId = RC.GetSelectedIntVal(ddlUnitsInd1);
-            string indEn = txtInd1Eng.Text.Trim();
-            string indFr = txtInd1Fr.Text.Trim();
-            Guid userId = RC.GetCurrentUserId;
-            bool isSRP = true;
-            bool isPriorityInd = false;
+            NewIndicatorsControl newIndSet = (NewIndicatorsControl)LoadControl("~/controls/NewIndicatorsControl.ascx");
+            newIndSet.ControlNumber = i + 1;
+            newIndSet.ID = "indicatorControlId" + i.ToString();
+            pnlAdditionalIndicaotrs.Controls.Add(newIndSet);
+        }
 
-            int indicatorId = DBContext.Add("InsertOutPutIndicator", new object[] { priorityActivityId, indEn, indFr, 
-                                                                unitId, isSRP, isPriorityInd, userId, DBNull.Value});
-            if (indicatorId > 0)
+        public int IndControlId
+        {
+            get
             {
-                bool isAdd = true;
-                int locationId = UserInfo.Country;
-                DBContext.Update("InsertDeleteSRPIndicaotr", new object[] { indicatorId, locationId, isAdd, userId, DBNull.Value });
+                int indControlId = 0;
+                if (ViewState["IndicatorControlId"] != null)
+                {
+                    int.TryParse(ViewState["IndicatorControlId"].ToString(), out indControlId);
+                }
+
+                return indControlId;
             }
-        }
-
-        private void SaveIndicaotr2(int priorityActivityId)
-        {
-            if (!Ind2IsValid()) return;
-
-            int unitId = RC.GetSelectedIntVal(ddlUnitsInd2);
-            string indEn = txtInd2Eng.Text.Trim();
-            string indFr = txtInd2Fr.Text.Trim();
-            Guid userId = RC.GetCurrentUserId;
-            bool isSRP = true;
-            bool isPriorityInd = false;
-
-            int indicatorId = DBContext.Add("InsertOutPutIndicator", new object[] { priorityActivityId, indEn, indFr, 
-                                                                unitId, isSRP, isPriorityInd, userId, DBNull.Value});
-
-            if (indicatorId > 0)
+            set
             {
-                bool isAdd = true;
-                int locationId = UserInfo.Country;
-                DBContext.Update("InsertDeleteSRPIndicaotr", new object[] { indicatorId, locationId, isAdd, userId, DBNull.Value });
+                ViewState["IndicatorControlId"] = value.ToString();
             }
         }
 
-        private bool Ind2IsValid()
-        {
-            string txtIndEn = txtInd2Eng.Text.Trim();
-            string txtIndFr = txtInd2Fr.Text.Trim();
-            int unitId = RC.GetSelectedIntVal(ddlUnitsInd2);
+        //public int IndControlId
+        //{
+        //    get
+        //    {
+        //        int indControlId = 0;
+        //        if (Session["IndicatorControlId"] != null)
+        //        {
+        //            int.TryParse(Session["IndicatorControlId"].ToString(), out indControlId);
+        //        }
 
-            if (!string.IsNullOrEmpty(txtIndEn) && !string.IsNullOrEmpty(txtIndFr) && unitId > 0) return true;
-
-            if (!string.IsNullOrEmpty(txtIndEn) && !string.IsNullOrEmpty(txtIndFr) && unitId == 0)
-            {
-                string message = "Please select Unit for Indicator 2.";
-                return false;
-            }
-
-            if (!string.IsNullOrEmpty(txtIndEn) && string.IsNullOrEmpty(txtIndFr))
-            {
-                string message = "Please provide French version of Indicator 2. ";
-                return false;
-            }
-
-            if (string.IsNullOrEmpty(txtIndEn) && !string.IsNullOrEmpty(txtIndFr))
-            {
-                string message = "Please provide English version of Indicator 2. ";
-                return false;
-            }
-
-            return false;
-        }
+        //        return indControlId;
+        //    }
+        //    set
+        //    {
+        //        Session["IndicatorControlId"] = value.ToString();
+        //    }
+        //}
 
         protected void btnBackToSRPList_Click(object sender, EventArgs e)
         {

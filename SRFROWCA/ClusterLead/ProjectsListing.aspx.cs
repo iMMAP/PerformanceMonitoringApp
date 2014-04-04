@@ -16,7 +16,6 @@ namespace SRFROWCA.ClusterLead
         {
             if (IsPostBack) return;
 
-            UserInfo.UserProfileInfo();
             PopulateControls();
             LoadProjects();
         }

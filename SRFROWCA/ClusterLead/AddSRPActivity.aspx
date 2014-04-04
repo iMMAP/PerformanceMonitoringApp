@@ -4,143 +4,116 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="containerDataEntryMain2">
-        <div class="graybar">
-            Select Objective and Priority
-        </div>
-        <div class="contentarea">
-            <div class="formdiv">
-                <table>
-                    <tr>
-                        <td>
-                            <label>
-                                Objective:</label>
-                        </td>
-                        <td>
-                            <asp:DropDownList ID="ddlObjective" runat="server" Width="800px">
-                            </asp:DropDownList>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Required" CssClass="error2"
-                                InitialValue="0" Text="Required" ControlToValidate="ddlObjective"></asp:RequiredFieldValidator>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>
-                                Priority:</label>
-                        </td>
-                        <td>
-                            <asp:DropDownList ID="ddlPriority" runat="server" Width="800px">
-                            </asp:DropDownList>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Required" CssClass="error2"
-                                InitialValue="0" Text="Required" ControlToValidate="ddlPriority"></asp:RequiredFieldValidator>
-                        </td>
-                    </tr>
-                </table>
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+        </script>
+        <ul class="breadcrumb">
+            <li><i class="icon-home home-icon"></i><a href="#">Home</a> </li>
+            <li class="active">Add Activity & Indicator</li>
+        </ul>
+        <!-- .breadcrumb -->
+    </div>
+    <div id="divMessage" runat="server" class="error2">
+    </div>
+    <div class="page-content">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="widget-box no-border">
+                    <div class="widget-body">
+                        <div class="widget-main">
+                            <div>
+                                <div class="row">
+                                    <h6 class="header blue bolder smaller">
+                                        Select Objective & Priority</h6>
+                                    <div class="col-xs-6 col-sm-6">
+                                        <div class="widget-box no-border">
+                                            <div class="widget-body">
+                                                <div class="widget-main no-padding-bottom no-padding-top">
+                                                    <div>
+                                                        <asp:DropDownList ID="ddlObjective" runat="server" CssClass="width-90">
+                                                        </asp:DropDownList>
+                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Required"
+                                                            CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlObjective"></asp:RequiredFieldValidator>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6">
+                                        <div class="widget-box no-border">
+                                            <div class="widget-body">
+                                                <div class="widget-main no-padding-bottom no-padding-top">
+                                                    <div>
+                                                        <asp:DropDownList ID="ddlPriority" runat="server" CssClass="width-90">
+                                                        </asp:DropDownList>
+                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Required"
+                                                            CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlPriority"></asp:RequiredFieldValidator>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <h6 class="header blue bolder smaller">
+                                    Add Activity</h6>
+                                <div class="col-xs-6 col-sm-6">
+                                    <div class="widget-box no-border">
+                                        <div class="widget-body">
+                                            <div class="widget-main no-padding-bottom no-padding-top">
+                                                <label>
+                                                    Activity (English):</label>
+                                                <div>
+                                                    <asp:TextBox ID="txtActivityEng" runat="server" CssClass="width-90" TextMode="MultiLine"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator ID="rfvUserName" runat="server" ErrorMessage="Required"
+                                                        CssClass="error2" Text="Required" ControlToValidate="txtActivityEng"></asp:RequiredFieldValidator>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-6">
+                                    <div class="widget-box no-border">
+                                        <div class="widget-body">
+                                            <div class="widget-main no-padding-bottom no-padding-top">
+                                                <label>
+                                                    Activity (French):</label>
+                                                <div>
+                                                    <asp:TextBox ID="txtActivityFr" runat="server" CssClass="width-90" TextMode="MultiLine"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="UserName Required"
+                                                        CssClass="error2" Text="Required" ControlToValidate="txtActivityFr"></asp:RequiredFieldValidator>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <asp:Panel ID="pnlAdditionalIndicaotrs" runat="server">
+                            </asp:Panel>
+                        </div>
+                        <div class="pull-right">
+                            <button id="btnRemoveIndicatorControl" runat="server" onserverclick="btnAddIndiatorControl_Click" causesvalidation="false"
+                                class="btn spinner-down btn-xs btn-danger" type="button" visible="false">
+                                <i class="icon-minus smaller-75"></i>
+                            </button>
+                            <button id="btnAddIndicatorControl" runat="server" onserverclick="btnAddIndiatorControl_Click" causesvalidation="false"
+                                class="btn spinner-up btn-xs btn-success" type="button">
+                                <i class="icon-plus smaller-75"></i>
+                            </button>
+                        </div>
+                        <%--<asp:Button ID="btnAddIndicatorControl" runat="server" Text="Add More Indicators"
+                            OnClick="btnAddIndiatorControl_Click" CausesValidation="false" CssClass="width-10 btn btn-sm btn-danger pull-right" />--%>
+                        <button runat="server" id="btnSave" onserverclick="btnSave_Click" class="width-10 btn btn-sm btn-primary"
+                            title="Save">
+                            <i class="icon-ok bigger-110"></i>Save
+                        </button>
+                        <asp:Button ID="btnBackToSRPList" runat="server" Text="Back TO SRP List" OnClick="btnBackToSRPList_Click"
+                            CssClass="width-10 btn btn-sm btn-primary" CausesValidation="false" />
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="graybar">
-            Add Activity
-        </div>
-        <div class="contentarea">
-            <div class="formdiv">
-                <table>
-                    <tr>
-                        <td>
-                            <label>
-                                Activity (English):</label>
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtActivityEng" runat="server" Width="700px" TextMode="MultiLine"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="rfvUserName" runat="server" ErrorMessage="UserName Required"
-                                        CssClass="error2" Text="Required" ControlToValidate="txtActivityEng"></asp:RequiredFieldValidator>
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>
-                                Activity (French):</label>
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtActivityFr" runat="server" Width="700px" TextMode="MultiLine"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="UserName Required"
-                                        CssClass="error2" Text="Required" ControlToValidate="txtActivityFr"></asp:RequiredFieldValidator>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div class="graybar">
-            Add Activity
-        </div>
-        <div class="contentarea">
-            <div class="formdiv">
-                <table>
-                    <tr>
-                        <td>
-                            <label>
-                                Indicator 1 (English):</label>
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtInd1Eng" runat="server" Width="700px"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="UserName Required"
-                                        CssClass="error2" Text="Required" ControlToValidate="txtInd1Eng"></asp:RequiredFieldValidator>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>
-                                Indicator 1 (French):</label>
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtInd1Fr" runat="server" Width="700px"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="UserName Required"
-                                        CssClass="error2" Text="Required" ControlToValidate="txtInd1Fr"></asp:RequiredFieldValidator>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>
-                                Indicator 1 Unit:</label>
-                        </td>
-                        <td>
-                            <asp:DropDownList ID="ddlUnitsInd1" runat="server"></asp:DropDownList>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="Required"  CssClass="error2"
-                                InitialValue="0" Text="Required" ControlToValidate="ddlUnitsInd1"></asp:RequiredFieldValidator>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>
-                                Indicator 2 (English):</label>
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtInd2Eng" runat="server" Width="700px"></asp:TextBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>
-                                Indicator 2 (French):</label>
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtInd2Fr" runat="server" Width="700px"></asp:TextBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>
-                                Indicator 2 Unit:</label>
-                        </td>
-                        <td>
-                            <asp:DropDownList ID="ddlUnitsInd2" runat="server"></asp:DropDownList>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" CssClass="button_example" />
-            <asp:Button ID="btnBackToSRPList" runat="server" Text="Back TO SRP List" OnClick="btnBackToSRPList_Click"
-                CssClass="button_example" CausesValidation="false" />
         </div>
     </div>
 </asp:Content>

@@ -40,6 +40,24 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.Localize localizeClusterName;
         
         /// <summary>
+        /// btnAddSRPActivity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnAddSRPActivity;
+        
+        /// <summary>
+        /// btnAddIndicator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnAddIndicator;
+        
+        /// <summary>
         /// gvSRPIndicators control.
         /// </summary>
         /// <remarks>

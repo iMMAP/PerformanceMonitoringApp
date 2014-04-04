@@ -144,35 +144,36 @@
                                     <h4>
                                         <asp:Localize ID="localizeClusterName" runat="server" Text=""></asp:Localize>
                                     </h4>
-                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up">
+                                    <span class="widget-toolbar pull-right"><a href="#" data-action="collapse"><i class="icon-chevron-up">
                                     </i></a></span>
+                                    <div class="btn-group pull-right">
+                                        <button runat="server" id="btnAddSRPActivity" onserverclick="btnAddSRPActivity_Click"
+                                            class="width-10 btn btn-sm btn-yellow" title="Add Indicator">
+                                            Add Activity & Indicator
+                                        </button>
+                                        <button runat="server" id="btnAddIndicator" onserverclick="btnAddIndicator_Click"
+                                            class="width-10 btn btn-sm btn-yellow" title="Add Indicator">
+                                            Add Indicator
+                                        </button>
+                                    </div>
                                 </div>
                                 <div class="widget-body">
                                     <div class="widget-main">
                                         <asp:GridView ID="gvSRPIndicators" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True"
                                             HeaderStyle-BackColor="ButtonFace" DataKeyNames="ActivityDataId" CssClass="imagetable"
-                                            Width="100%" OnRowDataBound="gvSRPIndicators_RowDataBound" EmptyDataText="Your Cluster Doesn Not Have Mastre List or SRP List Of Activities"
+                                            Width="100%" OnRowDataBound="gvSRPIndicators_RowDataBound" OnRowCommand="gvSRPIndicators_RowCommand" EmptyDataText="Your Cluster Doesn Not Have Mastre List or SRP List Of Activities"
                                             AllowSorting="true" OnSorting="gvSRPIndicators_Sorting">
                                             <HeaderStyle BackColor="Control"></HeaderStyle>
                                             <RowStyle CssClass="istrow" />
                                             <AlternatingRowStyle CssClass="altcolor" />
                                             <Columns>
                                                 <asp:BoundField DataField="ObjectiveId" HeaderText="ObjectiveId" ItemStyle-Width="1px"
-                                                    ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement" meta:resourcekey="BoundFieldResource1">
-                                                    <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
-                                                    <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
-                                                </asp:BoundField>
+                                                    ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden"></asp:BoundField>
                                                 <asp:BoundField DataField="HumanitarianPriorityId" HeaderText="HumanitarianPriorityId"
-                                                    ItemStyle-Width="1px" ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement"
-                                                    meta:resourcekey="BoundFieldResource2">
-                                                    <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
-                                                    <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
+                                                    ItemStyle-Width="1px" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden">
                                                 </asp:BoundField>
                                                 <asp:BoundField DataField="ObjAndPrId" HeaderText="objprid" ItemStyle-Width="1px"
-                                                    ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement" meta:resourcekey="BoundFieldResource2">
-                                                    <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
-                                                    <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
-                                                </asp:BoundField>
+                                                    ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden"></asp:BoundField>
                                                 <asp:TemplateField HeaderStyle-Width="100px" HeaderText="Objective & Priority">
                                                     <ItemTemplate>
                                                         <asp:Image ID="imgObjective" runat="server" AlternateText="O" />
@@ -183,11 +184,11 @@
                                                 <asp:BoundField DataField="ActivityName" HeaderText="Activity" ItemStyle-CssClass="testact"
                                                     SortExpression="ActivityName"></asp:BoundField>
                                                 <asp:BoundField DataField="IsRegional" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" />
-                                                <asp:TemplateField HeaderText="" HeaderStyle-CssClass="hidden" 
-                                                    SortExpression="IsRegional" ItemStyle-CssClass="hidden" >
+                                                <asp:TemplateField HeaderText="" HeaderStyle-CssClass="hidden" SortExpression="IsRegional"
+                                                    ItemStyle-CssClass="hidden">
                                                     <ItemTemplate>
-                                                        <asp:CheckBox ID="chkRegional" runat="server"
-                                                            Checked='<%# Eval("IsRegional") %>' CssClass="testrcb" Enabled="false" />
+                                                        <asp:CheckBox ID="chkRegional" runat="server" Checked='<%# Eval("IsRegional") %>'
+                                                            CssClass="testrcb" Enabled="false" />
                                                     </ItemTemplate>
                                                     <ItemStyle Width="2%" />
                                                 </asp:TemplateField>
@@ -201,6 +202,12 @@
                                                 </asp:TemplateField>
                                                 <asp:BoundField DataField="DataName" HeaderText="Output Indicator" ItemStyle-CssClass="testind"
                                                     SortExpression="DataName" ItemStyle-Wrap="true"></asp:BoundField>
+                                                <asp:TemplateField>
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="lnkVieDetails" runat="server" Text="Edit" CommandName="EditIndicator"
+                                                            CommandArgument='<%# Eval("ActivityDataId") %>' />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
                                             </Columns>
                                         </asp:GridView>
                                     </div>

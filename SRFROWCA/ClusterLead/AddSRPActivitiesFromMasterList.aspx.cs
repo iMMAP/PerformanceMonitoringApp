@@ -21,11 +21,12 @@ namespace SRFROWCA.ClusterLead
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
-            UserInfo.UserProfileInfo();
             PopulateObjectives();
             PopulatePriorities();
             PopulateIndicators();
             PopulateClusterName();
+
+            Session["SRPCustomEditIndicator"] = null;
         }
 
         internal override void BindGridData()
@@ -62,6 +63,15 @@ namespace SRFROWCA.ClusterLead
                 ObjPrToolTip.ObjectiveIconToolTip(e);
                 ObjPrToolTip.PrioritiesIconToolTip(e);
                 ObjPrToolTip.RegionalIndicatorIcon(e, 5);
+            }
+        }
+
+        protected void gvSRPIndicators_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "EditIndicator")
+            {
+                Session["SRPCustomEditIndicator"] = e.CommandArgument.ToString();
+                Response.Redirect("~/LeadPages/EditActIndicator.aspx");
             }
         }
 
@@ -156,6 +166,11 @@ namespace SRFROWCA.ClusterLead
         protected void btnAddSRPActivity_Click(object sender, EventArgs e)
         {
             Response.Redirect("AddSRPActivity.aspx");
+        }
+
+        protected void btnAddIndicator_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/LeadPages/AddIndicatorOnActivity.aspx");
         }
 
         private void PopulateObjectives()
