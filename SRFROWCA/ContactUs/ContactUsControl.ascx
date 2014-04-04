@@ -65,7 +65,7 @@
         </div>
     </div>
     <!-- /contact us -->
-    <div class="col-xs-3 col-sm-3">
+    <%--<div class="col-xs-3 col-sm-3">
         <div class="widget-box no-border">
             <div class="widget-body">
                 <div class="widget-main">
@@ -92,6 +92,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>--%>
 </div>
 <!-- /row -->
