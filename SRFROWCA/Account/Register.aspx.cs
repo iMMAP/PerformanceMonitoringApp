@@ -18,7 +18,6 @@ namespace SRFROWCA.Account
             if (!this.User.IsInRole("Admin"))
             {
                 this.Form.DefaultButton = this.btnRegister.UniqueID;
-                
             }
 
             PopulateCountries();
@@ -86,7 +85,7 @@ namespace SRFROWCA.Account
                         }
                         else
                         {
-                            mailBody = "Dear Admin! Please activitate my account " + txtUserName.Text.Trim();
+                            mailBody = "Dear Admin! Please activitate my account Username: " + txtUserName.Text.Trim() + ", Full Name: " + txtFullName.Text.Trim();
                             Mail.SendMail(from, to, subject, mailBody);
                             message = @"You have been registered successfully, we will verify your credentials and activate your account in few hours!";
                         }
@@ -310,8 +309,9 @@ namespace SRFROWCA.Account
             string countryId = null;
             countryId = ddlCountry.SelectedValue;
             string phone = txtPhone.Text.Trim().Length > 0 ? txtPhone.Text.Trim() : null;
+            string fullName = txtFullName.Text.Trim();
 
-            return new object[] { userId, orgId, countryId, phone, DBNull.Value };
+            return new object[] { userId, orgId, countryId, phone, fullName, DBNull.Value };
         }
 
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)

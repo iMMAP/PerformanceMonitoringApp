@@ -41,7 +41,10 @@
                                     Name</label>
                                 <div class="col-sm-8">
                                     <asp:TextBox ID="txtFullName" runat="server" CssClass="col-xs-12 col-sm-10"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="rfvFullName" runat="server" ControlToValidate="txtFullName"
+                                            Text="Required" ErrorMessage="Required" ForeColor="Red"></asp:RequiredFieldValidator>
                                 </div>
+                                
                             </div>
                         </div>
                         <div class="space">
@@ -58,7 +61,7 @@
                                     <div class="col-sm-8">
                                         <asp:TextBox ID="txtEmail" runat="server" CssClass="col-xs-12 col-sm-10"></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="rfv" runat="server" ControlToValidate="txtEmail"
-                                            Text="Required" ErrorMessage="Email" ForeColor="Red"></asp:RequiredFieldValidator>
+                                            Text="Required" ErrorMessage="Required" ForeColor="Red"></asp:RequiredFieldValidator>
                                     </div>
                                 </div>
                                 <div class="space-4">
@@ -67,17 +70,19 @@
                                     <label class="col-sm-4 control-label no-padding-right" for="form-field-first">
                                         Phone</label>
                                     <div class="col-sm-8">
-                                        <asp:TextBox ID="txtPhone" MaxLength="50" CssClass="col-xs-12 col-sm-10" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txtPhone" MaxLength="50" CssClass="col-xs-12 col-sm-6" runat="server"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="rfvPhone" runat="server" ControlToValidate="txtPhone"
+                                            Text="Required" ErrorMessage="Required" ForeColor="Red"></asp:RequiredFieldValidator>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label no-padding-right" for="form-field-first">
                                         Country</label>
                                     <div class="col-sm-8">
-                                        <asp:DropDownList ID="ddlCountry" runat="server" Width="400px">
+                                        <asp:DropDownList ID="ddlCountry" runat="server" CssClass="col-xs-12 col-sm-6">
                                         </asp:DropDownList>
-                                        <asp:RequiredFieldValidator ID="rfvCountry" runat="server" ErrorMessage="Country"
-                                            Text="*" InitialValue="0" ControlToValidate="ddlCountry"></asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ID="rfvCountry" runat="server" ErrorMessage="Required"
+                                            Text="Required" InitialValue="0" ControlToValidate="ddlCountry"></asp:RequiredFieldValidator>
                                     </div>
                                 </div>
                             </div>

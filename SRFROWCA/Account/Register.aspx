@@ -116,11 +116,20 @@
                                             </label>
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
-                                                    <asp:TextBox ID="txtUserName" runat="server" MaxLength="256" CssClass="form-control"
-                                                        placeholder="User Name"></asp:TextBox>
+                                                    <asp:TextBox ID="txtFullName" runat="server" MaxLength="256" CssClass="form-control"
+                                                        placeholder="Full Name"></asp:TextBox>
                                                     <i class="icon-user"></i>
-                                                    <asp:RequiredFieldValidator ID="rfvUserName" runat="server" ErrorMessage="UserName Required"
-                                                        CssClass="error2" Text="User Name Required" ControlToValidate="txtUserName"></asp:RequiredFieldValidator>
+                                                    <asp:RequiredFieldValidator ID="rfvFullName" runat="server" ErrorMessage="Name Required"
+                                                        CssClass="error2" Text="Name Required" ControlToValidate="txtFullName"></asp:RequiredFieldValidator>
+                                                </span>
+                                            </label>
+                                            <label class="block clearfix">
+                                                <span class="block input-icon input-icon-right">
+                                                    <asp:TextBox ID="txtUserName" runat="server" MaxLength="256" CssClass="form-control"
+                                                        placeholder="Username"></asp:TextBox>
+                                                    <i class="icon-user"></i>
+                                                    <asp:RequiredFieldValidator ID="rfvUserName" runat="server" ErrorMessage="Username Required"
+                                                        CssClass="error2" Text="Username Required" ControlToValidate="txtUserName"></asp:RequiredFieldValidator>
                                                 </span>
                                             </label>
                                             <label class="block clearfix">
@@ -147,6 +156,8 @@
                                                     <asp:TextBox ID="txtPhone" MaxLength="50" runat="server" CssClass="form-control"
                                                         placeholder="Phone"></asp:TextBox>
                                                     <i class="icon-info-sign"></i></span>
+                                                    <asp:RequiredFieldValidator ID="rfvPhone" runat="server" ErrorMessage="Phone Required"
+                                                        CssClass="error2" Text="Phone Required" ControlToValidate="txtPhone"></asp:RequiredFieldValidator>
                                             </label>
                                             <div id="divOrganization">
                                                 <label class="block clearfix">
