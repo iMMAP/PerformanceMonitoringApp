@@ -20,7 +20,6 @@ namespace SRFROWCA.Pages
         {   
             if (!IsPostBack)
             {
-                UserInfo.UserProfileInfo();
                 PopulateProjects();
                 PopulateObjectives();
                 PopulatePriorities();

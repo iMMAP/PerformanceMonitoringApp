@@ -137,7 +137,7 @@
                                             OnClick="btnSave_Click" />
                                         <asp:Button ID="btnSaveClose" runat="server" Text="Save & Close" CssClass="btn btn-primary"
                                             OnClick="btnSaveClose_Click" />
-                                        <asp:Button ID="btnManageActivities" runat="server" Text="Manage Activities" CssClass="btn btn-primary"
+                                        <asp:Button ID="btnManageActivities" runat="server" Text="Manage Activities" CssClass="btn btn-primary" Enabled="false"
                                             CausesValidation="false" OnClick="btnManageActivities_Click" />
                                     </td>
                                     <td>

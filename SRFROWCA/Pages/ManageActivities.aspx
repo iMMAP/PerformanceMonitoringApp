@@ -130,11 +130,11 @@
                                     <AlternatingRowStyle CssClass="altcolor" />
                                     <Columns>
                                         <asp:BoundField DataField="ObjectiveId" HeaderText="ObjectiveId" ItemStyle-Width="1px"
-                                            ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement"></asp:BoundField>
+                                            ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden"></asp:BoundField>
                                         <asp:BoundField DataField="HumanitarianPriorityId" HeaderText="HumanitarianPriorityId"
-                                            ItemStyle-Width="1px" ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement" />
+                                            ItemStyle-Width="1px" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" />
                                         <asp:BoundField DataField="ObjAndPrId" HeaderText="objprid" ItemStyle-Width="1px"
-                                            ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement"></asp:BoundField>
+                                            ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden"></asp:BoundField>
                                         <asp:TemplateField HeaderStyle-Width="100px" HeaderText="Objective & Priority">
                                             <ItemTemplate>
                                                 <asp:Image ID="imgObjective" runat="server" AlternateText="O" />
@@ -166,9 +166,9 @@
                                         </asp:TemplateField>
                                         <asp:BoundField DataField="DataName" HeaderText="Output Indicator" ItemStyle-CssClass="testind"
                                             SortExpression="DataName" ItemStyle-Wrap="true"></asp:BoundField>
-                                        <asp:TemplateField HeaderText="" ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement">
+                                        <asp:TemplateField HeaderText="" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden">
                                             <ItemTemplate>
-                                                <asp:CheckBox ID="cbIsSRP" runat="server" Checked='<%# Eval("IsSRP") %>' CssClass="hiddenelement" />
+                                                <asp:CheckBox ID="cbIsSRP" runat="server" Checked='<%# Eval("IsSRP") %>' CssClass="hidden" />
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>

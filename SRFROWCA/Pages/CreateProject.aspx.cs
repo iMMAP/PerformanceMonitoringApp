@@ -17,9 +17,16 @@ namespace SRFROWCA.Pages
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
-            UserInfo.UserProfileInfo();
             PopulateClusters();
             LoadProjects();
+
+            if (rblProjects.Items.Count > 0)
+            {
+                rblProjects.SelectedIndex = 0;
+                LoadProjectDetails();
+            }
+
+            ToggleButtons();
         }
 
         private void PopulateClusters()
@@ -51,7 +58,27 @@ namespace SRFROWCA.Pages
             return DBContext.GetData("GetOrgProjectsOnLocation", new object[] { UserInfo.EmergencyCountry, UserInfo.Organization, isOPSProjects});
         }
 
+        private void ToggleButtons()
+        {
+            if (ProjectId > 0)
+            {
+                btnManageActivities.Enabled = true;
+                btnDeleteProject.Enabled = true;
+            }
+            else
+            {
+                btnManageActivities.Enabled = false;
+                btnDeleteProject.Enabled = false;
+            }
+        }
+
         protected void rblProjects_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadProjectDetails();
+            ToggleButtons();
+        }
+
+        private void LoadProjectDetails()
         {
             ProjectId = Convert.ToInt32(rblProjects.SelectedValue);
 
@@ -73,6 +100,7 @@ namespace SRFROWCA.Pages
         protected void btnCreateProject_Click(object sender, EventArgs e)
         {
             ClearProjectControls();
+            ToggleButtons();
         }
 
         private void ClearProjectControls()
@@ -99,6 +127,7 @@ namespace SRFROWCA.Pages
             LoadProjects();
             SelectProject();
             SelctProjectCode();
+            ToggleButtons();
             ShowMessage("Your Data Saved Successfuly!");
         }
 
@@ -119,6 +148,7 @@ namespace SRFROWCA.Pages
                 DeleteProject();
                 LoadProjects();
                 ClearProjectControls();
+                ToggleButtons();
             }
             else
             {

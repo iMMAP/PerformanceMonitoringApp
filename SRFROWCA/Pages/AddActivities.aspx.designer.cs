@@ -94,6 +94,24 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.CheckBoxList cblPriorities;
         
         /// <summary>
+        /// btnGeneratePDF control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnGeneratePDF;
+        
+        /// <summary>
+        /// btnExportToExcel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnExportToExcel;
+        
+        /// <summary>
         /// lzeSelectLocaitonsText control.
         /// </summary>
         /// <remarks>
@@ -110,33 +128,6 @@ namespace SRFROWCA.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton btnOpenLocations;
-        
-        /// <summary>
-        /// lzeExportToText control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize lzeExportToText;
-        
-        /// <summary>
-        /// btnPDF control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnPDF;
-        
-        /// <summary>
-        /// btnExcel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnExcel;
         
         /// <summary>
         /// gvActivities control.

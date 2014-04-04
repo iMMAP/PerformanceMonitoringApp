@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+﻿<%@ Page Title="ORS - Data Entry" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     EnableEventValidation="false" CodeBehind="AddActivities.aspx.cs" Inherits="SRFROWCA.Pages.AddActivities"
     Culture="auto" UICulture="auto" meta:resourcekey="PageResource1" %>
 
@@ -20,6 +20,7 @@
             line-height: 1.2;
             padding: 2px 1px;
             transition-duration: 0.1s;
+            text-align: right;
         }
         
         .commentstext
@@ -36,7 +37,7 @@
         }
     </style>
     <!-- ORS styles -->
-    <link rel="stylesheet" href="../assets/css/test.css" />
+    <link rel="stylesheet" href="../assets/css/ors.css" />
     <!-- ace styles -->
     <script type="text/javascript" src="../assets/orsjs/ShowHideObJAndPr.js"></script>
     <script src="../assets/orsjs/jquery.numeric.min.js" type="text/javascript"></script>
@@ -126,7 +127,6 @@
         });
 
     </script>
-    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="breadcrumbs" id="breadcrumbs">
@@ -235,6 +235,14 @@
                 <div class="widget-box">
                     <div class="widget-header widget-header-small header-color-blue2">
                         <h4>
+                            <button runat="server" id="btnGeneratePDF" onserverclick="btnPDF_Export" onclick="needToConfirm = false;"
+                                class="width-10 btn btn-sm btn-yellow" title="PDF">
+                                <i class="icon-download"></i>PDF
+                            </button>
+                            <button runat="server" id="btnExportToExcel" onserverclick="btnExcel_Export" onclick="needToConfirm = false;"
+                                class="width-10 btn btn-sm btn-yellow" title="Excel">
+                                <i class="icon-download"></i>Excel
+                            </button>
                         </h4>
                         <span class="widget-toolbar pull-right"><a href="#" data-action="collapse" class="pull-right">
                             <i class="icon-chevron-up pull-right"></i></a></span>
@@ -248,16 +256,6 @@
                                     type="button" class="btn btn-sm btn-primary">
                                     <i class="fa fa-building-o"></i>Locations
                                 </button>
-                            </div>
-                            <div class="pull-right">
-                                <asp:Localize ID="lzeExportToText" runat="server" meta:resourcekey="lzeExportToTextResource1"
-                                    Text="Export To:"></asp:Localize>
-                                <asp:ImageButton ID="btnPDF" runat="server" ImageUrl="~/assets/orsimages/pdf.png"
-                                    OnClick="btnPDF_Export" OnClientClick="needToConfirm = false;" CssClass="imgButtonImg"
-                                    meta:resourcekey="btnPDFResource1" />
-                                <asp:ImageButton ID="btnExcel" runat="server" ImageUrl="~/assets/orsimages/excel.png"
-                                    OnClick="btnExcel_Export" OnClientClick="needToConfirm = false;" CssClass="imgButtonImg"
-                                    meta:resourcekey="btnExcelResource1" />
                             </div>
                             <div class="spacer" style="clear: both;">
                             </div>
@@ -419,20 +417,18 @@
         <div class="row">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header no-padding">
-                        <div class="table-header">
+                    <div class="modal-header">
                             <button runat="server" id="btnCancelComments" onserverclick="btnCancelComments_Click"
-                                class="close" data-dismiss="modal" aria-hidden="true" onclick="needToConfirm = false;">
-                                <span class="white">&times;</span>
+                                class="close" data-dismiss="modal" onclick="needToConfirm = false;">&times;
                             </button>
-                            Indicator Comments
-                        </div>
+                            <h4 class="blue bigger">Indicator Comments</h4>
                     </div>
-                    <div class="modal-body no-padding">
+                    <div class="modal-body overflow-visible">
+                    <div class="row">
                         <table border="0" style="margin: 0 auto;">
                             <tr>
                                 <td>
-                                    <asp:TextBox ID="txtComments" runat="server" Width="400px" Height="300px" TextMode="MultiLine"
+                                    <asp:TextBox ID="txtComments" runat="server" Width="500px" Height="200px" TextMode="MultiLine"
                                         CssClass="commentstext"></asp:TextBox>
                                 </td>
                             </tr>
@@ -441,13 +437,14 @@
                                 </td>
                             </tr>
                         </table>
+                        </div>
                     </div>
-                    <div class="modal-footer no-margin-top">
+                    <div class="modal-footer">
                         <asp:Button ID="btnSaveComments" runat="server" Text="Save" OnClick="btnSaveComments_Click"
                             CssClass="btn btn-primary" OnClientClick="needToConfirm = false;" />
                     </div>
                 </div>
             </div>
         </div>
-    </asp:Panel>    
+    </asp:Panel>
 </asp:Content>

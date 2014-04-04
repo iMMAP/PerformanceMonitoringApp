@@ -552,7 +552,7 @@ namespace SRFROWCA.Pages
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 
-        // In this method we will get the postback control.
+        //// In this method we will get the postback control.
         public string GetPostBackControlId(Page page)
         {
             // If page is requested first time then return.
@@ -1041,7 +1041,7 @@ namespace SRFROWCA.Pages
             int activityDataId = 0;
             int projIndicatorId = 0;
             int yearId = RC.GetSelectedIntVal(ddlYear);
-            
+
             foreach (GridViewRow row in gvActivities.Rows)
             {
                 if (row.RowType == DataControlRowType.DataRow)
@@ -1119,7 +1119,7 @@ namespace SRFROWCA.Pages
                                                     UserInfo.Organization, locationIdToSaveT, projectId,
                                                     activityDataId, valToSaveT, yearId, projIndicatorId, userId, DBNull.Value});
                                 }
-                                
+
                                 if (!(valToSaveA == null))
                                 {
                                     int newReportDetailId = DBContext.Add("InsertReportDetails",
@@ -1167,18 +1167,24 @@ namespace SRFROWCA.Pages
         {
             SaveProjectData();
             DataTable dt = GetProjectsData(true);
-            GridView gv = new GridView();
-            gv.DataSource = dt;
-            gv.DataBind();
-            string fileName = UserInfo.CountryName + "_" + UserInfo.OrgName + "_" + ddlMonth.SelectedItem.Text + "_Report";
-            ExportUtility.ExportGridView(gv, fileName, ".xls", Response, true);
+            if (dt.Rows.Count > 0)
+            {
+                GridView gv = new GridView();
+                gv.DataSource = dt;
+                gv.DataBind();
+                string fileName = UserInfo.CountryName + "_" + UserInfo.OrgName + "_" + ddlMonth.SelectedItem.Text + "_Report";
+                ExportUtility.ExportGridView(gv, fileName, ".xls", Response, true);
+            }
         }
 
         protected void btnPDF_Export(object sender, EventArgs e)
         {
             SaveProjectData();
             DataTable dt = GetProjectsData(false);
-            GeneratePDF(dt);
+            if (dt.Rows.Count > 0)
+            {
+                GeneratePDF(dt);
+            }
         }
 
         private DataTable GetProjectsData(bool isPivot)
