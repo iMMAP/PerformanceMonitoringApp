@@ -12,7 +12,7 @@ using SRFROWCA.Reports;
 using System.Linq;
 namespace SRFROWCA.Anonymous
 {
-    public partial class AllData : System.Web.UI.Page
+    public partial class AllData : BasePage
     {        
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -25,6 +25,8 @@ namespace SRFROWCA.Anonymous
 
             // Populate all drop downs.
             PopulateDropDowns();
+
+            LoadData();
         }
 
         #region Events.
@@ -197,7 +199,14 @@ namespace SRFROWCA.Anonymous
         // Populate Clusters drop down.
         private void PopulateClusters()
         {
-            UI.FillClusters(ddlClusters, 1);
+            UI.FillClusters(ddlClusters, RC.SelectedSiteLanguageId);
+            if (UserInfo.Cluster > 0)
+            {
+                ddlClusters.SelectedValue = UserInfo.Cluster.ToString();
+                ddlClusters.Visible = false;
+                lblCluster.Text = ddlClusters.SelectedItem.Text;
+                lblCluster.Visible = true;
+            }
         }
 
         // Populate Locations drop down
@@ -210,6 +219,13 @@ namespace SRFROWCA.Anonymous
         private void PopulateCountry()
         {
             UI.FillCountry(ddlCountry);
+            if (UserInfo.Country > 0)
+            {
+                ddlCountry.SelectedValue = UserInfo.Country.ToString();
+                ddlCountry.Visible = false;
+                lblCountry.Text = ddlCountry.SelectedItem.Text;
+                lblCountry.Visible = true;
+            }
         }
 
         private void PopulateLocationDropDowns()
@@ -282,10 +298,24 @@ namespace SRFROWCA.Anonymous
             ddlOrganizations.DataValueField = "OrganizationId";
             ddlOrganizations.DataTextField = "OrganizationAcronym";
             int? orgId = null;
+
+            if (UserInfo.Organization > 0)
+            {
+                orgId = UserInfo.Organization;
+            }
+
             ddlOrganizations.DataSource = GetOrganizations(orgId);
             ddlOrganizations.DataBind();
+
+            if (UserInfo.Organization > 0)
+            {
+                ddlOrganizations.SelectedValue = UserInfo.Organization.ToString();
+                ddlOrganizations.Visible = false;
+                lblOrganization.Text = ddlOrganizations.SelectedItem.Text;
+                lblOrganization.Visible = true;
+            }
         }
-        private object GetOrganizations(int? orgId)
+        private DataTable GetOrganizations(int? orgId)
         {
             return DBContext.GetData("GetOrganizations", new object[] { orgId });
         }

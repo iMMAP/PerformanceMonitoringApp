@@ -40,6 +40,15 @@ namespace SRFROWCA.Anonymous {
         protected global::Saplin.Controls.DropDownCheckBoxes ddlClusters;
         
         /// <summary>
+        /// lblCluster control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCluster;
+        
+        /// <summary>
         /// ddlObjectives control.
         /// </summary>
         /// <remarks>
@@ -94,15 +103,6 @@ namespace SRFROWCA.Anonymous {
         protected global::System.Web.UI.WebControls.CheckBox cbCountry;
         
         /// <summary>
-        /// ddlProjects control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Saplin.Controls.DropDownCheckBoxes ddlProjects;
-        
-        /// <summary>
         /// ddlOrganizations control.
         /// </summary>
         /// <remarks>
@@ -110,6 +110,24 @@ namespace SRFROWCA.Anonymous {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Saplin.Controls.DropDownCheckBoxes ddlOrganizations;
+        
+        /// <summary>
+        /// lblOrganization control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblOrganization;
+        
+        /// <summary>
+        /// ddlProjects control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Saplin.Controls.DropDownCheckBoxes ddlProjects;
         
         /// <summary>
         /// ddlMonth control.
@@ -146,6 +164,15 @@ namespace SRFROWCA.Anonymous {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Saplin.Controls.DropDownCheckBoxes ddlCountry;
+        
+        /// <summary>
+        /// lblCountry control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCountry;
         
         /// <summary>
         /// ddlAdmin1 control.
