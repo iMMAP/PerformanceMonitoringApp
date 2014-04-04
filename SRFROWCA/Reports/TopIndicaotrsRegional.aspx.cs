@@ -9,13 +9,12 @@ using BusinessLogic;
 
 namespace SRFROWCA.Reports
 {
-    public partial class TopIndicaotrsRegional : System.Web.UI.Page
+    public partial class TopIndicaotrsRegional : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                UserInfo.UserProfileInfo();
                 PopulateOrganizations();
                 PopulateCountry();
                 PopulateObjectives();

@@ -158,10 +158,10 @@
                             <asp:BoundField DataField="OrganizationName" HeaderText="Organization" SortExpression="OrganizationName" />
                             <asp:BoundField DataField="OriginalRequest" HeaderText="Original Amount" SortExpression="OriginalRequest" />
                             <asp:BoundField DataField="CurrentRequest" HeaderText="Current Amount" SortExpression="CurrentRequest" />
-                            <asp:BoundField DataField="LocationName" HeaderText="Locations" />
+                            <asp:BoundField DataField="LocationName" HeaderText="Locations" SortExpression="LocationName" />
                             <asp:BoundField DataField="Contact" HeaderText="Contact" ItemStyle-Wrap="true" ItemStyle-Width="150px"
                                 SortExpression="Contact" />
-                            <asp:BoundField DataField="Phone" HeaderText="Phone" />
+                            <asp:BoundField DataField="Phone" HeaderText="Phone" SortExpression="Phone"  />
                             <asp:TemplateField>
                                 <ItemTemplate>
                                     <asp:LinkButton ID="lnkVieDetails" runat="server" Text="View" CommandName="ViewProject"

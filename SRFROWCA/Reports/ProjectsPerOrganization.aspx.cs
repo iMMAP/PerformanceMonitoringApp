@@ -10,13 +10,12 @@ using BusinessLogic;
 
 namespace SRFROWCA.Reports
 {
-    public partial class ProjectsPerOrganization : System.Web.UI.Page
+    public partial class ProjectsPerOrganization : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
 
-            UserInfo.UserProfileInfo();
             PopulateControls();
             LoadProjects();
         }
