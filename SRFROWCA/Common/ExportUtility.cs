@@ -68,17 +68,14 @@ namespace SRFROWCA
             //  add the header row to the table
             if (gv.HeaderRow != null)
             {
-                
                 ExportUtility.PrepareControlForExport(gv.HeaderRow);
-
-                gv.HeaderRow.BackColor = Color.Gray;
+                gv.HeaderRow.BackColor = System.Drawing.ColorTranslator.FromHtml("#ddd");
+                gv.HeaderRow.BorderColor = System.Drawing.ColorTranslator.FromHtml("#bbbbbb");
                 foreach (TableCell cell in gv.HeaderRow.Cells)
                 {
                     cell.BackColor = gv.HeaderStyle.BackColor;
                 }
-
-                //gv.HeaderRow.Style.
-                    //.Add("background-color", "ButtonFace");                
+                
                 table.Rows.Add(gv.HeaderRow);
             }
 
@@ -91,11 +88,11 @@ namespace SRFROWCA
                 {
                     if (row.RowIndex % 2 == 0)
                     {
-                        cell.BackColor = Color.Cyan;
+                        cell.BackColor = System.Drawing.ColorTranslator.FromHtml("#ebf0f4");
                     }
                     else
                     {
-                        cell.BackColor = Color.Wheat;
+                        cell.BackColor = System.Drawing.ColorTranslator.FromHtml("#fbfbfb");
                     }
                     cell.CssClass = "textmode";
                 }

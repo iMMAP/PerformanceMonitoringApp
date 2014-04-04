@@ -122,15 +122,30 @@ namespace SRFROWCA.Common
             control.DataBind();
         }
 
+        internal static void FillPriorities(ListControl control, DataTable dt, bool userShortText)
+        {
+            control.DataValueField = "HumanitarianPriorityId";
+            if (userShortText)
+            {
+                control.DataTextField = "ShortPriorityText";
+            }
+            else
+            {
+                control.DataTextField = "HumanitarianPriority";
+            }
+            control.DataSource = dt;
+            control.DataBind();
+        }
+
         internal static void FillPriorities(ListControl control)
         {
             DataTable dt = RC.GetPriorities();
             FillPriorities(control, dt);
         }
 
-        internal static void FillActivities(DropDownCheckBoxes ddl, DataTable dt)
+        internal static void FillActivities(ListControl ddl, DataTable dt)
         {
-            ddl.DataValueField = "IndicatorActivityId";
+            ddl.DataValueField = "PriorityActivityId";
             ddl.DataTextField = "ActivityName";
 
             ddl.DataSource = dt;
@@ -191,14 +206,6 @@ namespace SRFROWCA.Common
             ddl.DataTextField = "LocationName";
 
             ddl.DataSource = DBContext.GetData("GetCountries");
-            ddl.DataBind();
-        }
-
-        internal static void FillPriorities(DropDownList ddl, DataTable dt)
-        {
-            ddl.DataValueField = "HumanitarianPriorityId";
-            ddl.DataTextField = "HumanitarianPriority";            
-            ddl.DataSource = dt;
             ddl.DataBind();
         }
 

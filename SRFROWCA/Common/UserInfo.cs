@@ -15,26 +15,29 @@ namespace SRFROWCA.Common
 
             if (dt.Rows.Count > 0)
             {
-                HttpContext.Current.Session["UserCountry"] = dt.Rows[0]["LocationId"];
+                
                 HttpContext.Current.Session["UserCluster"] = dt.Rows[0]["ClusterId"];
                 HttpContext.Current.Session["UserOrg"] = dt.Rows[0]["OrganizationId"];
+                HttpContext.Current.Session["UserOrgName"] = dt.Rows[0]["OrganizationName"];
+                
                 if (dt.Rows[0]["EmergencyLocationId"] != null)
                 {
                     if (dt.Rows[0]["EmergencyLocationId"].ToString() == "1")
                     {
                         HttpContext.Current.Session["UserLocationEmergencyId"] = null;
+                        HttpContext.Current.Session["UserCountry"] = null;
+                        HttpContext.Current.Session["UserCountryName"] = null;
                     }
                     else
                     {
                         HttpContext.Current.Session["UserLocationEmergencyId"] = dt.Rows[0]["EmergencyLocationId"];
+                        HttpContext.Current.Session["UserCountry"] = dt.Rows[0]["LocationId"];
+                        HttpContext.Current.Session["UserCountryName"] = dt.Rows[0]["LocationName"];
                     }
                 }
                 
                 HttpContext.Current.Session["UserEmergencyClusterId"] = dt.Rows[0]["EmergencyClusterId"];
-                HttpContext.Current.Session["UserOrg"] = dt.Rows[0]["OrganizationId"];
-
-                HttpContext.Current.Session["UserCountryName"] = dt.Rows[0]["LocationName"];
-                HttpContext.Current.Session["UserOrgName"] = dt.Rows[0]["OrganizationName"];
+                
             }
 
             HttpContext.Current.Session["EmergencyId"] = 1;
