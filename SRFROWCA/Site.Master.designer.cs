@@ -94,6 +94,24 @@ namespace SRFROWCA {
         protected global::System.Web.UI.WebControls.LoginStatus HeadLoginStatus;
         
         /// <summary>
+        /// liRegister control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liRegister;
+        
+        /// <summary>
+        /// menueRegister control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueRegister;
+        
+        /// <summary>
         /// liDashboards control.
         /// </summary>
         /// <remarks>
@@ -128,6 +146,15 @@ namespace SRFROWCA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liReportingStatus;
+        
+        /// <summary>
+        /// liOperationalPresenceDB control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liOperationalPresenceDB;
         
         /// <summary>
         /// liDataEntry control.
@@ -256,78 +283,6 @@ namespace SRFROWCA {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor menueReports;
         
         /// <summary>
-        /// liCustomReport control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCustomReport;
-        
-        /// <summary>
-        /// menueCustomReport control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueCustomReport;
-        
-        /// <summary>
-        /// liReportsTopIndicators1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liReportsTopIndicators1;
-        
-        /// <summary>
-        /// menueReportsTopIndicators1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueReportsTopIndicators1;
-        
-        /// <summary>
-        /// liReportsTopIndicatorsGeneral1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liReportsTopIndicatorsGeneral1;
-        
-        /// <summary>
-        /// menueReportsTopIndicatorsGeneral1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueReportsTopIndicatorsGeneral1;
-        
-        /// <summary>
-        /// liReportsTopIndicatorRegional1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liReportsTopIndicatorRegional1;
-        
-        /// <summary>
-        /// menueReportsTopIndicatorRegional control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueReportsTopIndicatorRegional;
-        
-        /// <summary>
         /// liReportsSummaryReports control.
         /// </summary>
         /// <remarks>
@@ -364,22 +319,22 @@ namespace SRFROWCA {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor menueReportsSummaryReportsOperationalReports;
         
         /// <summary>
-        /// li1 control.
+        /// liContactList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl li1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liContactList;
         
         /// <summary>
-        /// A1 control.
+        /// menueContactList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor A1;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueContactList;
         
         /// <summary>
         /// liReportsSummaryReportsProjectReports control.
@@ -454,22 +409,94 @@ namespace SRFROWCA {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor menueReportsSummaryReportsProjectReportsByClusters;
         
         /// <summary>
-        /// liBulkImport control.
+        /// liCustomReport control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liBulkImport;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCustomReport;
         
         /// <summary>
-        /// menueBulkImport control.
+        /// menueCustomReport control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueBulkImport;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueCustomReport;
+        
+        /// <summary>
+        /// liPivotTables control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liPivotTables;
+        
+        /// <summary>
+        /// menuePivotTables control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuePivotTables;
+        
+        /// <summary>
+        /// liPivotPerfMonitoring control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liPivotPerfMonitoring;
+        
+        /// <summary>
+        /// menuePivotPerfMonitoring control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuePivotPerfMonitoring;
+        
+        /// <summary>
+        /// liPivotNumberOfOrgs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liPivotNumberOfOrgs;
+        
+        /// <summary>
+        /// menuePivotOPrPresence control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuePivotOPrPresence;
+        
+        /// <summary>
+        /// liPivotOrgOperational control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liPivotOrgOperational;
+        
+        /// <summary>
+        /// menuePivotOrgPresence control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuePivotOrgPresence;
         
         /// <summary>
         /// MainContent control.

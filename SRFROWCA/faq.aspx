@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+﻿<%@ Page Title="ORS - FAQs/Help" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeBehind="faq.aspx.cs" Inherits="SRFROWCA.faq" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
@@ -10,7 +10,7 @@
         </script>
         <ul class="breadcrumb">
             <li><i class="icon-home home-icon"></i><a href="#">Home</a> </li>
-            <li class="active">FAQs</li>
+            <li class="active">FAQs/Help</li>
         </ul>
         <!-- .breadcrumb -->
     </div>

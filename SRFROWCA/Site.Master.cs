@@ -5,6 +5,9 @@ using SRFROWCA.Common;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.SessionState;
+using System.Collections.Generic;
+using System.Collections;
+using System.Data;
 
 namespace SRFROWCA
 {
@@ -39,6 +42,7 @@ namespace SRFROWCA
             {
                 LoginStatus.Visible = false;
                 spanWelcome.Visible = true;
+                liRegister.Visible = false;
 
                 if (HttpContext.Current.User.IsInRole("User"))
                 {
@@ -79,11 +83,15 @@ namespace SRFROWCA
             liSRPIndicators.Visible = isShow;
             menueValidateIndicaotrs.Visible = isShow;
             liValidateIndicators.Visible = isShow;
-            liReportsTopIndicators1.Visible = isShow;
-            liReportsTopIndicatorsGeneral1.Visible = isShow;
-            liReportsTopIndicatorRegional1.Visible = isShow;
-            liBulkImport.Visible = isShow;
-            menueBulkImport.Visible = isShow;
+            //liReportsTopIndicators1.Visible = isShow;
+            //liReportsTopIndicatorsGeneral1.Visible = isShow;
+            //liReportsTopIndicatorRegional1.Visible = isShow;
+            liPivotTables.Visible = isShow;
+            liPivotPerfMonitoring.Visible = isShow;
+            liPivotNumberOfOrgs.Visible = isShow;
+            liPivotOrgOperational.Visible = isShow;
+            //liBulkImport.Visible = isShow;
+            
         }
 
         private void ShowUserMenue()
@@ -107,9 +115,9 @@ namespace SRFROWCA
             menueReports.Visible = isShow;
             menuRegionalIndicators.Visible = isShow;
             liRegionalIndicators.Visible = isShow;
-            liReportsTopIndicators1.Visible = isShow;
-            liReportsTopIndicatorsGeneral1.Visible = isShow;
-            liReportsTopIndicatorRegional1.Visible = isShow;
+            //liReportsTopIndicators1.Visible = isShow;
+            //liReportsTopIndicatorsGeneral1.Visible = isShow;
+            //liReportsTopIndicatorRegional1.Visible = isShow;
         }
 
         private void ShowClusterLeadMenue()
@@ -122,16 +130,19 @@ namespace SRFROWCA
             liSRPIndicators.Visible = isShow;
             menueValidateIndicaotrs.Visible = isShow;
             liValidateIndicators.Visible = isShow;
-            liReportsTopIndicators1.Visible = isShow;
-            liReportsTopIndicatorsGeneral1.Visible = isShow;
-            liReportsTopIndicatorRegional1.Visible = isShow;
+            //liReportsTopIndicators1.Visible = isShow;
+            //liReportsTopIndicatorsGeneral1.Visible = isShow;
+            //liReportsTopIndicatorRegional1.Visible = isShow;
         }
 
         private void ShowAuthenticatedMenues()
         {
             bool isShow = true;
-            liBulkImport.Visible = isShow;
-            menueBulkImport.Visible = isShow;
+            //liBulkImport.Visible = isShow;
+            liPivotTables.Visible = isShow;
+            liPivotPerfMonitoring.Visible = isShow;
+            liPivotNumberOfOrgs.Visible = isShow;
+            liPivotOrgOperational.Visible = isShow;
         }
 
         private void ActiveMenueItem()
@@ -146,6 +157,11 @@ namespace SRFROWCA
             {
                 liDashboards.Attributes.Add("class", "active open");
                 liReportingStatus.Attributes.Add("class", "active");
+            }
+            else if (uri == "/OperationalPresenceDB.aspx")
+            {
+                liDashboards.Attributes.Add("class", "active open");
+                liOperationalPresenceDB.Attributes.Add("class", "active");
             }                
             else if (uri == "/Pages/AddActivities.aspx")
             {
@@ -180,6 +196,12 @@ namespace SRFROWCA
             {
                 liRegionalIndicators.Attributes.Add("class", "active");
             }
+            else if (uri == "/Reports/OperationalPresence.aspx")
+            {
+                liReports.Attributes.Add("class", "active open");
+                liReportsSummaryReports.Attributes.Add("class", "active open");
+                liContactList.Attributes.Add("class", "active");
+            }
             else if (uri == "/Reports/ProjectsPerOrganization.aspx")
             {
                 liReports.Attributes.Add("class", "active open");
@@ -201,52 +223,43 @@ namespace SRFROWCA
                 liReportsSummaryReportsProjectReports.Attributes.Add("class", "active open");
                 liReportsSummaryReportsProjectReportsByCountry.Attributes.Add("class", "active");
             }
-            //else if (uri == "/Reports/TopIndicatorsGeneral.aspx")
-            //{
-            //    liReports.Attributes.Add("class", "active open");
-            //    liReportsTopIndicators.Attributes.Add("class", "active open");
-            //    liReportsTopIndicatorsGeneral.Attributes.Add("class", "active");
-            //}
-            //else if (uri == "/Reports/TopIndicaotrsRegional.aspx")
-            //{
-            //    liReports.Attributes.Add("class", "active open");
-            //    liReportsTopIndicators.Attributes.Add("class", "active open");
-            //    liReportsTopIndicatorRegional.Attributes.Add("class", "active");
-            //}
-
-            //foreach (Control ctrl in nav.Controls)
-            //{
-
-            //    if (ctrl is HtmlAnchor)
-            //    {
-            //        string absoluteURL = ((HtmlAnchor)ctrl).HRef;
-            //        string url = absoluteURL.Substring(absoluteURL.IndexOf('/'));
-            //        string uri = HttpContext.Current.Request.Url.AbsolutePath;
-            //        if (url == uri)
-            //        {
-            //            HtmlGenericControl c = (HtmlGenericControl)ctrl;
-            //            c.Attributes.Add("class", "active");
-            //        }
-
-
-            //        //if (url == GetCurrentPage())  // <-- you'd need to write that
-            //          //  ctrl.Parent.Attributes.Add("class", "active");
-            //    }
-            //}
+            else if (uri == "/PivotTables/PerfMontPivot.aspx")
+            {
+                liPivotTables.Attributes.Add("class", "active open");
+                liPivotPerfMonitoring.Attributes.Add("class", "active");
+            }
+            else if (uri == "/PivotTables/NumOfOrgsClsCnt.aspx")
+            {
+                liPivotTables.Attributes.Add("class", "active open");
+                liPivotNumberOfOrgs.Attributes.Add("class", "active");
+            }
+            else if (uri == "/PivotTables/OprOrgsClsCnt.aspx")
+            {
+                liPivotTables.Attributes.Add("class", "active open");
+                liPivotOrgOperational.Attributes.Add("class", "active");
+            }
         }
 
         protected void lnkLanguageEnglish_Click(object sender, EventArgs e)
         {
-            RC.SelectedSiteLanguageId = (int)RC.SiteLanguage.English;
-            RC.AddSiteLangInCookie(this.Response, RC.SiteLanguage.English);
-            (MainContent.Page as BasePage).BindGridData();
+            try
+            {
+                RC.SelectedSiteLanguageId = (int)RC.SiteLanguage.English;
+                RC.AddSiteLangInCookie(this.Response, RC.SiteLanguage.English);
+                (MainContent.Page as BasePage).BindGridData();
+            }
+            catch { }
         }
 
         protected void lnkLanguageFrench_Click(object sender, EventArgs e)
         {
+            try
+            { 
             RC.SelectedSiteLanguageId = (int)Common.RC.SiteLanguage.French;
             RC.AddSiteLangInCookie(this.Response, Common.RC.SiteLanguage.French);
             (MainContent.Page as BasePage).BindGridData();
+            }
+            catch { }
         }
 
         protected void HeadLoginStatus_LoggedOut(object sender, EventArgs e)
@@ -274,5 +287,9 @@ namespace SRFROWCA
                                      (VirtualFolder.Equals("/")) ? string.Empty : VirtualFolder);
             }
         }
+
+        
     }
+
+    
 }

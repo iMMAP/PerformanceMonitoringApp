@@ -67,7 +67,7 @@
             <!-- /.navbar-header -->
             <div class="navbar-header pull-right" role="navigation">
                 <ul class="nav ace-nav">
-                    <li class="grey"><a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-tasks">
+                    <%--<li class="grey"><a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-tasks">
                     </i><span class="badge badge-grey">4</span> </a>
                         <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
                             <li class="dropdown-header"><i class="icon-ok"></i>4 Tasks to complete </li>
@@ -141,19 +141,23 @@
                     <li class="green"><a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-envelope icon-animated-vertical">
                     </i><span class="badge badge-success">5</span> </a>
                         <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
-                            <li class="dropdown-header"><i class="icon-envelope-alt"></i>5 Messages </li>
-                            <li><a href="#"><span class="msg-body"><span class="msg-title"><span class="blue">Alex:</span>
-                                Ciao sociis natoque penatibus et auctor ... </span><span class="msg-time"><i class="icon-time">
-                                </i><span>a moment ago</span> </span></span></a></li>
-                            <li><a href="#"><span class="msg-body"><span class="msg-title"><span class="blue">Susan:</span>
-                                Vestibulum id ligula porta felis euismod ... </span><span class="msg-time"><i class="icon-time">
-                                </i><span>20 minutes ago</span> </span></span></a></li>
-                            <li><a href="#"><span class="msg-body"><span class="msg-title"><span class="blue">Bob:</span>
-                                Nullam quis risus eget urna mollis ornare ... </span><span class="msg-time"><i class="icon-time">
-                                </i><span>3:15 pm</span> </span></span></a></li>
-                            <li><a href="inbox.html">See all messages <i class="icon-arrow-right"></i></a></li>
+                            <asp:Repeater ID="rptMessages" runat="server">
+                                <HeaderTemplate>
+                                    <li class="dropdown-header"><i class="icon-envelope-alt"></i>5 Messages </li>
+                                </HeaderTemplate>
+                                <ItemTemplate>
+                                    <li><a href="#"><span class="msg-body"><span class="msg-title"><span class="blue">
+                                        <%#Eval("FullName")%></span>
+                                        <%#Eval("Message")%>
+                                    </span><span class="msg-time"><i class="icon-time"></i><span>
+                                        <%#Eval("DateTime")%></span> </span></span></a></li>
+                                </ItemTemplate>
+                                <FooterTemplate>
+                                    <li><a href="inbox.html">See all messages <i class="icon-arrow-right"></i></a></li>
+                                </FooterTemplate>
+                            </asp:Repeater>
                         </ul>
-                    </li>
+                    </li>--%>
                     <li class="light-blue"><a href="~/Account/Login.aspx" id="LoginStatus" runat="server">
                         Log On</a><a data-toggle="dropdown" id="spanWelcome" runat="server" visible="false"
                             href="#" class="dropdown-toggle"><span class="user-info"><small>Welcome,</small>
@@ -161,8 +165,7 @@
                             </span><i class="icon-caret-down"></i></a>
                         <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
                             <li><a href="../Account/ChangePassword.aspx"><i class="icon-unlock "></i>Change Password</a></li>
-                            <li><a href="../Account/UserProfile.aspx"><i class="icon-user"></i>Profile
-                            </a></li>
+                            <li><a href="../Account/UserProfile.aspx"><i class="icon-user"></i>Profile </a></li>
                             <li class="divider"></li>
                             <li>
                                 <asp:LinkButton ID="lnkLanguageEnglish" Text="English" runat="server" OnClick="lnkLanguageEnglish_Click"
@@ -177,6 +180,8 @@
                             </li>
                         </ul>
                     </li>
+                    <li id="liRegister" runat="server" class="light-blue"><a id="menueRegister" runat="server"
+                        href="~/Account/Register.aspx">Register</a></li>
                 </ul>
                 <!-- /.ace-nav -->
             </div>
@@ -212,10 +217,12 @@
                         class="dropdown-toggle"><i class="icon-dashboard"></i><span class="menu-text">Dashboard
                         </span><b class="arrow icon-angle-down"></b></a>
                         <ul class="submenu">
-                            <li id="liDefault" runat="server"><a href="../Default.aspx">
-                            <span class="menu-text">Performance Monitoring </span></a></li>
+                            <li id="liDefault" runat="server"><a href="../Default.aspx"><span class="menu-text">
+                                Performance Monitoring </span></a></li>
                             <li id="liReportingStatus" runat="server"><a href="../ReportingStatus.aspx"><i class="icon-list">
                             </i><span class="menu-text">Reporting Status </span></a></li>
+                            <li id="liOperationalPresenceDB" runat="server" runat="server"><a href="../OperationalPresenceDB.aspx"><i class="icon-list">
+                            </i><span class="menu-text">Operational Presence </span></a></li>
                         </ul>
                     </li>
                     <li id="liDataEntry" runat="server"><a href="~/Pages/AddActivities.aspx" id="menuDataEntry"
@@ -240,20 +247,6 @@
                         <i class="icon-text-width"></i><span class="menu-text">Reports </span><b class="arrow icon-angle-down">
                         </b></a>
                         <ul class="submenu">
-                            <li id="liCustomReport" runat="server"><a href="~/Anonymous/AllData.aspx" id="menueCustomReport"
-                                runat="server"><i class="icon-double-angle-right"></i>Custom Report </a></li>
-                            <li id="liReportsTopIndicators1" runat="server"><a id="menueReportsTopIndicators1"
-                                runat="server" href="#" class="dropdown-toggle"><i class="icon-double-angle-right">
-                                </i>Top Indicators <b class="arrow icon-angle-down"></b></a>
-                                <ul class="submenu">
-                                    <li id="liReportsTopIndicatorsGeneral1" runat="server"><a id="menueReportsTopIndicatorsGeneral1"
-                                        runat="server" href="~/Reports/TopIndicatorsGeneral.aspx"><i class="icon-double-angle-right">
-                                        </i>Top 10 All</a></li>
-                                    <li id="liReportsTopIndicatorRegional1" runat="server"><a id="menueReportsTopIndicatorRegional"
-                                        runat="server" href="~/Reports/TopIndicaotrsRegional.aspx"><i class="icon-double-angle-right">
-                                        </i>Top 10 Regional</a></li>
-                                </ul>
-                            </li>
                             <li id="liReportsSummaryReports" runat="server"><a id="menueReportsSummaryReports"
                                 runat="server" href="#" class="dropdown-toggle"><i class="icon-double-angle-right">
                                 </i>Summary Reports <b class="arrow icon-angle-down"></b></a>
@@ -261,7 +254,7 @@
                                     <li id="liReportsSummaryReportsOperationalPresence" runat="server"><a id="menueReportsSummaryReportsOperationalReports"
                                         runat="server" href="~/Reports/ProjectsPerOrganization.aspx"><i class="icon-double-angle-right">
                                         </i>Operational Presence</a></li>
-                                    <li id="li1" runat="server"><a id="A1" runat="server" href="~/Reports/ProjectsPerOrganization.aspx">
+                                    <li id="liContactList" runat="server"><a id="menueContactList" runat="server" href="~/Reports/OperationalPresence.aspx">
                                         <i class="icon-double-angle-right"></i>Contact List</a></li>
                                     <li id="liReportsSummaryReportsProjectReports" runat="server"><a id="menueReportsSummaryReportsProjectReports"
                                         runat="server" href="#" class="dropdown-toggle"><i class="icon-double-angle-right">
@@ -280,15 +273,31 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li id="liCustomReport" runat="server"><a href="~/Anonymous/AllData.aspx" id="menueCustomReport"
+                                runat="server"><i class="icon-double-angle-right"></i>Custom Report </a></li>
                         </ul>
                     </li>
-                    <li id="liBulkImport" runat="server"><a href="~/Admin/UploadLogFrame.aspx" id="menueBulkImport"
+                    <li id="liPivotTables" runat="server"><a id="menuePivotTables" runat="server" href="#"
+                        class="dropdown-toggle"><i class="icon-list"></i><span class="menu-text">Pivot Tables
+                        </span><b class="arrow icon-angle-down"></b></a>
+                        <ul class="submenu">
+                            <li id="liPivotPerfMonitoring" runat="server"><a id="menuePivotPerfMonitoring" runat="server"
+                                href="~/PivotTables/PerfMontPivot.aspx"><span class="menu-text">Performance Monitoring
+                                </span></a></li>
+                            <li id="liPivotNumberOfOrgs" runat="server"><a id="menuePivotOPrPresence" runat="server"
+                                href="~/PivotTables/NumOfOrgsClsCnt.aspx"><span class="menu-text">Operational Presence
+                                </span></a></li>
+                            <li id="liPivotOrgOperational" runat="server"><a id="menuePivotOrgPresence" runat="server"
+                                href="~/PivotTables/OprOrgsClsCnt.aspx"><span class="menu-text">Organizational Presence</span></a></li>
+                        </ul>
+                    </li>
+                    <%-- <li id="liBulkImport" runat="server"><a href="~/Admin/UploadLogFrame.aspx" id="menueBulkImport"
                         runat="server"><i class="icon-list-alt"></i><span class="menu-text">Bulk Import Data</span>
-                    </a></li>
-                    <li><a href="../ContactUs/Contactus.aspx"><i class="icon-envelope-alt"></i><span class="menu-text">Contact Us</span>
-                    </a></li>
-                    <li><a href="../faq.aspx"><i class="icon-comment "></i><span class="menu-text">FAQs & Help</span>
-                    </a></li>
+                    </a></li>--%>
+                    <li><a href="../ContactUs/Contactus.aspx"><i class="icon-envelope-alt"></i><span
+                        class="menu-text">Contact Us</span> </a></li>
+                    <li><a href="../faq.aspx"><i class="icon-comment "></i><span class="menu-text">FAQs
+                        & Help</span> </a></li>
                 </ul>
                 <!-- /.nav-list -->
                 <div class="sidebar-collapse" id="sidebar-collapse">
