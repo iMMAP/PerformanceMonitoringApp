@@ -157,20 +157,20 @@
                                             <AlternatingRowStyle CssClass="altcolor" />
                                             <Columns>
                                                 <asp:BoundField DataField="ObjectiveId" HeaderText="ObjectiveId" ItemStyle-Width="1px"
-                                                    ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement" meta:resourcekey="BoundFieldResource1">
-                                                    <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
-                                                    <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
+                                                    ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource1">
+                                                    <HeaderStyle CssClass="hidden"></HeaderStyle>
+                                                    <ItemStyle Wrap="False" CssClass="hidden"></ItemStyle>
                                                 </asp:BoundField>
                                                 <asp:BoundField DataField="HumanitarianPriorityId" HeaderText="HumanitarianPriorityId"
-                                                    ItemStyle-Width="1px" ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement"
+                                                    ItemStyle-Width="1px" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden"
                                                     meta:resourcekey="BoundFieldResource2">
-                                                    <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
-                                                    <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
+                                                    <HeaderStyle CssClass="hidden"></HeaderStyle>
+                                                    <ItemStyle Wrap="False" CssClass="hidden"></ItemStyle>
                                                 </asp:BoundField>
                                                 <asp:BoundField DataField="ObjAndPrId" HeaderText="objprid" ItemStyle-Width="1px"
-                                                    ItemStyle-CssClass="hiddenelement" HeaderStyle-CssClass="hiddenelement" meta:resourcekey="BoundFieldResource2">
-                                                    <HeaderStyle CssClass="hiddenelement"></HeaderStyle>
-                                                    <ItemStyle Wrap="False" CssClass="hiddenelement"></ItemStyle>
+                                                    ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource2">
+                                                    <HeaderStyle CssClass="hidden"></HeaderStyle>
+                                                    <ItemStyle Wrap="False" CssClass="hidden"></ItemStyle>
                                                 </asp:BoundField>
                                                 <asp:TemplateField HeaderStyle-Width="100px" HeaderText="Objective & Priority">
                                                     <ItemTemplate>

@@ -21,7 +21,6 @@ namespace SRFROWCA.RegionalLead
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
-            UserInfo.UserProfileInfo();
             PopulateObjectives();
             PopulatePriorities();
             PopulateIndicators();
