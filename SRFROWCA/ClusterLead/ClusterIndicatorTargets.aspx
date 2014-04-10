@@ -1,17 +1,17 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
-    CodeBehind="AddSRPActivitiesFromMasterList.aspx.cs" Inherits="SRFROWCA.ClusterLead.AddSRPActivitiesFromMasterList" %>
+﻿<%@ Page Title="Cluster Indicator Target" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ClusterIndicatorTargets.aspx.cs" Inherits="SRFROWCA.ClusterLead.ClusterIndicatorTargets" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <title>Country Indicators </title>
     <!-- ORS styles -->
     <link rel="stylesheet" href="../assets/css/ors.css" />
     <!-- ace styles -->
     <script type="text/javascript" src="../assets/orsjs/ShowHideObJAndPr.js"></script>
     <script type="text/javascript" src="../assets/orsjs/jq-highlight.js"></script>
+    <script src="../assets/orsjs/jquery.numeric.min.js" type="text/javascript"></script>
     <script>
         $(function () {
             showHideObj();
             showHidePriority();
+            $(".numeric").numeric();
 
             $('#txtActivity').keyup(function () {
                 $(".testact").unhighlight();
@@ -22,7 +22,6 @@
                         $(".testact").highlight(terms);
                     }
                 }
-
             });
 
             $('#txtIndicator').keyup(function () {
@@ -65,7 +64,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="page-content">
+    <div class="page-content">        
         <div class="breadcrumbs" id="breadcrumbs">
             <script type="text/javascript">
                 try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
@@ -75,6 +74,8 @@
                 <li class="active">Select Regional Indicators</li>
             </ul>
             <!-- .breadcrumb -->
+        </div>
+        <div id="divMsg">
         </div>
         <table>
             <tr>
@@ -87,10 +88,8 @@
                                         <div class="col-sm-14 widget-container-span">
                                             <div class="widget-box">
                                                 <div class="widget-header widget-header-small header-color-blue2">
-                                                    <h5>
-                                                        Strategic Objectives</h5>
-                                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up">
-                                                    </i></a></span>
+                                                    <h5>Strategic Objectives</h5>
+                                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
                                                 </div>
                                                 <div class="widget-body">
                                                     <div class="widget-main">
@@ -103,10 +102,8 @@
                                         <div class="col-sm-14 widget-container-span">
                                             <div class="widget-box">
                                                 <div class="widget-header widget-header-small header-color-blue2">
-                                                    <h5>
-                                                        Humanitarian Priorities</h5>
-                                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up">
-                                                    </i></a></span>
+                                                    <h5>Humanitarian Priorities</h5>
+                                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
                                                 </div>
                                                 <div class="widget-body">
                                                     <div class="widget-main">
@@ -119,10 +116,8 @@
                                         <div class="col-sm-14 widget-container-span">
                                             <div class="widget-box">
                                                 <div class="widget-header widget-header-small header-color-blue2">
-                                                    <h5>
-                                                        Search Activity/Indicator</h5>
-                                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up">
-                                                    </i></a></span>
+                                                    <h5>Search Activity/Indicator</h5>
+                                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
                                                 </div>
                                                 <div class="widget-body">
                                                     <div class="widget-main">
@@ -140,33 +135,31 @@
                         </div>
                         <div class="col-sm-9 widget-container-span">
                             <div class="widget-box">
-                                <div class="widget-header widget-header-small header-color-blue2">
-                                    <h4>
-                                        <asp:Localize ID="localizeClusterName" runat="server" Text=""></asp:Localize>
-                                    </h4>
-                                    <button runat="server" id="btnExportToExcel" onserverclick="ExportToExcel" class="width-10 btn btn-sm btn-yellow"
+                                <div class="widget-header widget-header header-color-blue2">
+                                    <div class="col-sm-3">
+                                        <button runat="server" id="btnExportToExcel" onserverclick="ExportToExcel" class="btn btn-sm btn-yellow"
                                             title="Excel">
                                             <i class="icon-download"></i>Excel
                                         </button>
-                                    <span class="widget-toolbar pull-right"><a href="#" data-action="collapse"><i class="icon-chevron-up">
-                                    </i></a></span>
-                                    <div class="btn-group pull-right">
-                                        <button runat="server" id="btnAddSRPActivity" onserverclick="btnAddSRPActivity_Click"
-                                            class="width-10 btn btn-sm btn-yellow" title="Add Indicator">
-                                            Add Activity & Indicator
-                                        </button>
-                                        <button runat="server" id="btnAddIndicator" onserverclick="btnAddIndicator_Click"
-                                            class="width-10 btn btn-sm btn-yellow" title="Add Indicator">
-                                            Add Indicator
-                                        </button>
                                     </div>
+                                    <div class="col-sm-6">
+                                        <h4>
+                                            <asp:Localize ID="localizeClusterName" runat="server" Text=""></asp:Localize>
+                                        </h4>
+                                    </div>
+                                    <div class="col-sm-3">
+                                    <button id="Button1" runat="server" onserverclick="btnSave_Click" onclick="needToConfirm = false;"
+                                        type="button" class="btn btn-sm btn-yellow pull-right">
+                                        <i class="icon-save"></i>Save
+                                    </button>
+                                </div>
                                 </div>
                                 <div class="widget-body">
                                     <div class="widget-main">
-                                        <asp:GridView ID="gvSRPIndicators" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True"
-                                            HeaderStyle-BackColor="ButtonFace" DataKeyNames="ActivityDataId" CssClass="imagetable"
-                                            Width="100%" OnRowDataBound="gvSRPIndicators_RowDataBound" OnRowCommand="gvSRPIndicators_RowCommand" EmptyDataText="Your Cluster Doesn Not Have Mastre List or SRP List Of Activities"
-                                            AllowSorting="true" OnSorting="gvSRPIndicators_Sorting">
+                                        <asp:GridView ID="gvClusterIndTargets" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True"
+                                            HeaderStyle-BackColor="ButtonFace" DataKeyNames="ActivityDataId,ClusterIndicatorTargetId" CssClass="imagetable"
+                                            Width="100%" OnRowDataBound="gvClusterIndTargets_RowDataBound" EmptyDataText="Your Cluster Doesn Not Have Mastre List or SRP List Of Activities"
+                                            AllowSorting="true" OnSorting="gvClusterIndTargets_Sorting">
                                             <HeaderStyle BackColor="Control"></HeaderStyle>
                                             <RowStyle CssClass="istrow" />
                                             <AlternatingRowStyle CssClass="altcolor" />
@@ -174,8 +167,7 @@
                                                 <asp:BoundField DataField="ObjectiveId" HeaderText="ObjectiveId" ItemStyle-Width="1px"
                                                     ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden"></asp:BoundField>
                                                 <asp:BoundField DataField="HumanitarianPriorityId" HeaderText="HumanitarianPriorityId"
-                                                    ItemStyle-Width="1px" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden">
-                                                </asp:BoundField>
+                                                    ItemStyle-Width="1px" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden"></asp:BoundField>
                                                 <asp:BoundField DataField="ObjAndPrId" HeaderText="objprid" ItemStyle-Width="1px"
                                                     ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden"></asp:BoundField>
                                                 <asp:TemplateField HeaderStyle-Width="100px" HeaderText="Objective & Priority">
@@ -183,38 +175,34 @@
                                                         <asp:Image ID="imgObjective" runat="server" AlternateText="O" />
                                                         <asp:Image ID="imgPriority" runat="server" AlternateText="P" />
                                                         <asp:Image ID="imgRind" runat="server" />
+                                                        <asp:Image ID="imgCind" runat="server" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:BoundField DataField="ActivityName" HeaderText="Activity" ItemStyle-CssClass="testact"
                                                     SortExpression="ActivityName"></asp:BoundField>
                                                 <asp:BoundField DataField="IsRegional" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" />
-                                                <asp:TemplateField HeaderText="" HeaderStyle-CssClass="hidden" SortExpression="IsRegional"
-                                                    ItemStyle-CssClass="hidden">
-                                                    <ItemTemplate>
-                                                        <asp:CheckBox ID="chkRegional" runat="server" Checked='<%# Eval("IsRegional") %>'
-                                                            CssClass="testrcb" Enabled="false" />
-                                                    </ItemTemplate>
-                                                    <ItemStyle Width="2%" />
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Country Indicator" meta:resourcekey="TemplateFieldResource2"
-                                                    SortExpression="IsSRP" ItemStyle-Width="40px">
-                                                    <ItemTemplate>
-                                                        <asp:CheckBox ID="chkSRP" runat="server" AutoPostBack="true" OnCheckedChanged="chkSRP_CheckedChanged"
-                                                            Checked='<%# Eval("IsSRP") %>' CssClass="testcb" />
-                                                    </ItemTemplate>
-                                                    <ItemStyle Width="2%" />
-                                                </asp:TemplateField>
+                                                <asp:BoundField DataField="IsSRP" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" />
                                                 <asp:BoundField DataField="Indicator" HeaderText="Output Indicator" ItemStyle-CssClass="testind"
                                                     SortExpression="Indicator" ItemStyle-Wrap="true"></asp:BoundField>
-                                                <asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Mid Year Target">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton ID="lnkVieDetails" runat="server" Text="Edit" CommandName="EditIndicator"
-                                                            CommandArgument='<%# Eval("ActivityDataId") %>' />
+                                                        <asp:TextBox ID="txtMidYearTarget" runat="server" CssClass="numeric" Width="60px" Text='<%# Eval("TargetMidYear") %>'></asp:TextBox>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Full Year Target">
+                                                    <ItemTemplate>
+                                                        <asp:TextBox ID="txtFullYearTarget" runat="server" CssClass="numeric" Width="60px" Text='<%# Eval("TargetFullYear") %>'></asp:TextBox>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                             </Columns>
                                         </asp:GridView>
                                     </div>
+                                </div>
+                                <div>
+                                    <button id="btnSave" runat="server" onserverclick="btnSave_Click" onclick="needToConfirm = false;"
+                                        type="button" class="width-20 pull-right btn btn-sm btn-primary">
+                                        <i class="icon-save"></i>Save
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -223,4 +211,5 @@
             </tr>
         </table>
     </div>
+
 </asp:Content>

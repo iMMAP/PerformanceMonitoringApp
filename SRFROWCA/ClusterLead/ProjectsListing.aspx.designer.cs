@@ -13,22 +13,13 @@ namespace SRFROWCA.ClusterLead {
     public partial class ProjectsListing {
         
         /// <summary>
-        /// txtProjectCode control.
+        /// btnExportToExcel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtProjectCode;
-        
-        /// <summary>
-        /// ddlOrg control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlOrg;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnExportToExcel;
         
         /// <summary>
         /// ddlAdmin1 control.
@@ -49,13 +40,13 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.DropDownList ddlAdmin2;
         
         /// <summary>
-        /// ddlProjStatus control.
+        /// cblReportingStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlProjStatus;
+        protected global::System.Web.UI.WebControls.CheckBoxList cblReportingStatus;
         
         /// <summary>
         /// cblFundingStatus control.
@@ -67,13 +58,31 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.CheckBoxList cblFundingStatus;
         
         /// <summary>
-        /// cblReportingStatus control.
+        /// txtProjectCode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList cblReportingStatus;
+        protected global::System.Web.UI.WebControls.TextBox txtProjectCode;
+        
+        /// <summary>
+        /// ddlOrg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlOrg;
+        
+        /// <summary>
+        /// ddlProjStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlProjStatus;
         
         /// <summary>
         /// gvProjects control.

@@ -21,6 +21,7 @@ namespace SRFROWCA.ClusterLead
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
+            UserInfo.UserProfileInfo();
             PopulateObjectives();
             PopulatePriorities();
             PopulateIndicators();
@@ -183,6 +184,27 @@ namespace SRFROWCA.ClusterLead
         {
             UI.FillPriorities(cblPriorities);
             ObjPrToolTip.PrioritiesToolTip(cblPriorities);
+        }
+
+        protected void ExportToExcel(object sender, EventArgs e)
+        {
+            DataTable dt = GetIndicators();
+            RemoveColumnsFromDataTable(dt);
+            GridView gv = new GridView();
+            gv.DataSource = dt;
+            gv.DataBind();
+
+            ExportUtility.ExportGridView(gv, UserInfo.CountryName + "_" + RC.GetClusterName + "_Indicators", ".xls", Response, true);
+        }
+
+        private void RemoveColumnsFromDataTable(DataTable dt)
+        {
+            dt.Columns.Remove("ObjectiveId");
+            dt.Columns.Remove("ObjAndPrId");
+            dt.Columns.Remove("PriorityActivityId");
+            dt.Columns.Remove("ActivityDataId");
+            dt.Columns.Remove("HumanitarianPriorityId");
+            dt.Columns.Remove("ActivityDataId1");
         }
     }
 }

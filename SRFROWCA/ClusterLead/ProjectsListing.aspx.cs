@@ -56,6 +56,17 @@ namespace SRFROWCA.ClusterLead
             }
         }
 
+        protected void ExportToExcel(object sender, EventArgs e)
+        {
+            DataTable dt = GetProjects();
+            //RemoveColumnsFromDataTable(dt);
+            GridView gv = new GridView();
+            gv.DataSource = dt;
+            gv.DataBind();
+
+            ExportUtility.ExportGridView(gv, "ProjectListing", ".xls", Response, true);
+        }
+
         private void PopulateProjectStatus()
         {
 
@@ -176,10 +187,11 @@ namespace SRFROWCA.ClusterLead
             }
 
             int? cbReported = cblReportingStatus.SelectedIndex > -1 ? RC.GetSelectedIntVal(cblReportingStatus) : (int?)null;
+            int? cbFunded = cblFundingStatus.SelectedIndex > -1 ? RC.GetSelectedIntVal(cblFundingStatus) : (int?)null;
 
             return DBContext.GetData("GetProjects", new object[] {UserInfo.EmergencyCountry, UserInfo.EmergencyCluster,
                                                                             projCode, orgId, admin1, admin2, 
-                                                                            DBNull.Value, DBNull.Value, cbReported, 1 });
+                                                                            DBNull.Value, cbFunded, cbReported, 1 });
         }
     }
 }
