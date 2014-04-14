@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="ORS - Contact Us" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
-    CodeBehind="Contactus.aspx.cs" Inherits="SRFROWCA.ContactUs.Contactus" %>
+    CodeBehind="Contactus.aspx.cs" Inherits="SRFROWCA.ContactUs.Contactus" culture="auto" meta:resourcekey="PageResource1" uiculture="auto" %>
 
 <%@ Register Src="ContactUsControl.ascx" TagName="ContactUsControl" TagPrefix="uc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
@@ -10,8 +10,10 @@
             try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
         </script>
         <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="#">Home</a> </li>
-            <li class="active">Contact Us</li>
+            <li><i class="icon-home home-icon"></i><a href="../Default.aspx">
+                <asp:Localize ID="localBreadCrumbHome" runat="server" Text="Home" meta:resourcekey="localBreadCrumbHomeResource1"></asp:Localize></a> </li>
+            <li class="active">
+                <asp:Localize ID="localBreadCrumbContactUs" runat="server" Text="Contact Us" meta:resourcekey="localBreadCrumbContactUsResource1"></asp:Localize></li>
         </ul>
         <!-- .breadcrumb -->
     </div>

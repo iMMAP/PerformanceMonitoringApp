@@ -7,58 +7,64 @@
                 <div class="widget-main">
                     <div>
                         <label>
-                            Please use following fields to send us your query, request, comments!</label>
+                            <asp:Localize ID="localContactUsMessage" runat="server" Text="Please use following fields to send us your query, request, comments!" meta:resourcekey="localContactUsMessageResource1"></asp:Localize>
+                        </label>
                     </div>
                     <hr />
                     <div>
                         <label>
-                            Name</label>
+                            <asp:Localize ID="localName" runat="server" Text="Name" meta:resourcekey="localNameResource1"></asp:Localize>
+                        </label>
                         <div>
-                            <asp:TextBox ID="txtName" runat="server" Width="300px" CssClass="addfields2" MaxLength="50"></asp:TextBox>
+                            <asp:TextBox ID="txtName" runat="server" Width="300px" MaxLength="50" meta:resourcekey="txtNameResource1"></asp:TextBox>
                         </div>
                     </div>
                     <div>
                         <label>
-                            Your Email(Required)</label>
+                            <asp:Localize ID="localEmail" runat="server" Text="Your Email(Required)" meta:resourcekey="localEmailResource1"></asp:Localize>
+                            
+                        </label>
                             <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="Email Required"
-                                                        Text="*" CssClass="error2" ControlToValidate="txtEmail"></asp:RequiredFieldValidator>
+                                                        Text="*" CssClass="error2" ControlToValidate="txtEmail" meta:resourcekey="rfvEmailResource1"></asp:RequiredFieldValidator>
                         <div>
                             <div>
-                                <asp:TextBox ID="txtEmail" runat="server" Width="500px" CssClass="addfields2" MaxLength="100"></asp:TextBox>
+                                <asp:TextBox ID="txtEmail" runat="server" Width="500px" MaxLength="100" meta:resourcekey="txtEmailResource1"></asp:TextBox>
                                  
                             </div>
                         </div>
                     </div>
                     <div>
                         <label>
-                            Subject</label>
+                            <asp:Localize ID="localSubject" runat="server" Text="Subject" meta:resourcekey="localSubjectResource1"></asp:Localize>
+                        </label>
                         <div>
                             <div>
-                                <asp:TextBox ID="txtSubject" runat="server" Width="500px" CssClass="addfields2" MaxLength="100"></asp:TextBox>
+                                <asp:TextBox ID="txtSubject" runat="server" Width="500px" MaxLength="100" meta:resourcekey="txtSubjectResource1"></asp:TextBox>
                             </div>
                         </div>
                     </div>
                     <div>
                         <label>
-                            Message (300 char max)(Required)</label>
+                            <asp:Localize ID="localMessage" runat="server" Text="Message (300 char max)(Required)" meta:resourcekey="localMessageResource1"></asp:Localize>
+                        </label>
                             <asp:RequiredFieldValidator ID="rfvMessage" runat="server" ErrorMessage="Required"
-                                                        Text="*" CssClass="error2" ControlToValidate="txtMessage"></asp:RequiredFieldValidator>
+                                                        Text="*" CssClass="error2" ControlToValidate="txtMessage" meta:resourcekey="rfvMessageResource1"></asp:RequiredFieldValidator>
                         <div>
                             <div>
-                                <asp:TextBox ID="txtMessage" runat="server" Width="500px" Height="150px" CssClass="addfields1"
-                                    TextMode="MultiLine" MaxLength="300"></asp:TextBox>                                    
+                                <asp:TextBox ID="txtMessage" runat="server" Width="500px" Height="150px"
+                                    TextMode="MultiLine" MaxLength="300" meta:resourcekey="txtMessageResource1"></asp:TextBox>                                    
                             </div>
                         </div>
                     </div>
                     <hr />
                     <div>
                         <button runat="server" id="btnSend" onserverclick="txtSend_Click" class="btn btn-primary"
-                            title="Send">
-                            <i class="icon-envelope-alt"></i>Send
+                             Title="Send">
+                            <i class="icon-envelope-alt"></i><asp:Localize ID="LocalSend" runat="server" Text="Send" meta:resourcekey="LocalSendResource1"></asp:Localize>
                         </button>
                     </div>
                     <div>
-                        <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>
+                        <asp:Label ID="lblMessage" runat="server" meta:resourcekey="lblMessageResource1"></asp:Label>
                     </div>
                 </div>
             </div>
