@@ -90,8 +90,12 @@ namespace SRFROWCA
             liPivotPerfMonitoring.Visible = isShow;
             liPivotNumberOfOrgs.Visible = isShow;
             liPivotOrgOperational.Visible = isShow;
+            liCLprojectsListing.Visible = isShow;
+            liSumOfCountryIndicators.Visible = isShow;
+            liSumOfRegionalIndicators.Visible = isShow;
+            liClusterTarget.Visible = isShow;
+            liPivotSumOfCountryIndicators.Visible = isShow;
             //liBulkImport.Visible = isShow;
-            
         }
 
         private void ShowUserMenue()
@@ -115,6 +119,7 @@ namespace SRFROWCA
             menueReports.Visible = isShow;
             menuRegionalIndicators.Visible = isShow;
             liRegionalIndicators.Visible = isShow;
+            liSumOfRegionalIndicators.Visible = isShow;
             //liReportsTopIndicators1.Visible = isShow;
             //liReportsTopIndicatorsGeneral1.Visible = isShow;
             //liReportsTopIndicatorRegional1.Visible = isShow;
@@ -130,6 +135,10 @@ namespace SRFROWCA
             liSRPIndicators.Visible = isShow;
             menueValidateIndicaotrs.Visible = isShow;
             liValidateIndicators.Visible = isShow;
+            liCLprojectsListing.Visible = isShow;
+            liSumOfCountryIndicators.Visible = isShow;
+            liClusterTarget.Visible = isShow;
+            liPivotSumOfCountryIndicators.Visible = isShow;
             //liReportsTopIndicators1.Visible = isShow;
             //liReportsTopIndicatorsGeneral1.Visible = isShow;
             //liReportsTopIndicatorRegional1.Visible = isShow;
@@ -184,6 +193,10 @@ namespace SRFROWCA
             {
                 liSRPIndicators.Attributes.Add("class", "active");
             }
+            else if (uri == "/ClusterLead/ClusterIndicatorTargets.aspx")
+            {
+                liClusterTarget.Attributes.Add("class", "active");
+            }
             else if (uri == "/ClusterLead/ValidateReportList.aspx")
             {
                 liValidateIndicators.Attributes.Add("class", "active");
@@ -201,6 +214,18 @@ namespace SRFROWCA
                 liReports.Attributes.Add("class", "active open");
                 liReportsSummaryReports.Attributes.Add("class", "active open");
                 liContactList.Attributes.Add("class", "active");
+            }
+            else if (uri == "/ClusterLead/SumOfCountryIndicators.aspx")
+            {
+                liReports.Attributes.Add("class", "active open");
+                liReportsSummaryReports.Attributes.Add("class", "active open");
+                liSumOfCountryIndicators.Attributes.Add("class", "active");
+            }
+            else if (uri == "/PivotTables/RegionalIndicatorsAchievedReport.aspx")
+            {
+                liReports.Attributes.Add("class", "active open");
+                liReportsSummaryReports.Attributes.Add("class", "active open");
+                liSumOfRegionalIndicators.Attributes.Add("class", "active");
             }
             else if (uri == "/Reports/ProjectsPerOrganization.aspx")
             {
@@ -237,6 +262,15 @@ namespace SRFROWCA
             {
                 liPivotTables.Attributes.Add("class", "active open");
                 liPivotOrgOperational.Attributes.Add("class", "active");
+            }
+            else if (uri == "/PivotTables/CountryIndicatorsAchievedReport.aspx")
+            {
+                liPivotTables.Attributes.Add("class", "active open");
+                liPivotSumOfCountryIndicators.Attributes.Add("class", "active");
+            }
+            else if (uri == "/ClusterLead/ProjectsListing.aspx")
+            {
+                liCLprojectsListing.Attributes.Add("class", "active");
             }
         }
 
