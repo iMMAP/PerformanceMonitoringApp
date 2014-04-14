@@ -188,8 +188,8 @@
                                                     </ItemTemplate>
                                                     <ItemStyle Width="2%" />
                                                 </asp:TemplateField>
-                                                <asp:BoundField DataField="DataName" HeaderText="Output Indicator" ItemStyle-CssClass="testind"
-                                                    SortExpression="DataName" ItemStyle-Wrap="true"></asp:BoundField>
+                                                <asp:BoundField DataField="Indicator" HeaderText="Output Indicator" ItemStyle-CssClass="testind"
+                                                    SortExpression="Indicator" ItemStyle-Wrap="true"></asp:BoundField>
                                             </Columns>
                                         </asp:GridView>
                                     </div>
