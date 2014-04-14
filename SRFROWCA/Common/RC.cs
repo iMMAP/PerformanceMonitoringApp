@@ -493,5 +493,13 @@ namespace SRFROWCA.Common
             English = 1,
             French = 2
         }
+
+        public enum LocationTypeForUI
+        {
+            Country = 1,
+            Admin1 = 2,
+            Admin2 = 3,
+            None = -1
+        }
     }
 }
