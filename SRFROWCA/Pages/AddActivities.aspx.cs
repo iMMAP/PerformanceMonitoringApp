@@ -1143,7 +1143,7 @@ namespace SRFROWCA.Pages
             int yearId = RC.GetSelectedIntVal(ddlYear);
             int monthId = RC.GetSelectedIntVal(ddlMonth);
             int projectId = RC.GetSelectedIntVal(rblProjects);
-
+            
             using (ORSEntities db = new ORSEntities())
             {
                 Report r = db.Reports.Where(x => x.ProjectId == projectId
@@ -1221,7 +1221,7 @@ namespace SRFROWCA.Pages
 
                         WriteDataEntryPDF.GenerateDocument(document, dt);
 
-                        document.Close();
+                        
 
                         Response.ContentType = "application/pdf";
                         Response.AddHeader("Content-Disposition", string.Format("attachment;filename=Project-{0}.pdf", UserInfo.CountryName));

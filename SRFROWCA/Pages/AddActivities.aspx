@@ -152,7 +152,7 @@
                                     <div class="widget-header widget-header-small header-color-blue2">
                                         <h5>
                                             <asp:Localize ID="Localize1" runat="server" Text="
-                                Year/Month:" meta:resourcekey="lzeYearMonthResource1"></asp:Localize></label>
+                                Year/Month:" meta:resourcekey="lzeYearMonthResource1"></asp:Localize>
                                         </h5>
                                         <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up">
                                         </i></a></span>

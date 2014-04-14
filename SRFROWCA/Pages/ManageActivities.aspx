@@ -139,8 +139,8 @@
                                             <ItemTemplate>
                                                 <asp:Image ID="imgObjective" runat="server" AlternateText="O" />
                                                 <asp:Image ID="imgPriority" runat="server" AlternateText="P" />
-                                                <asp:Image ID="imgRind" runat="server" meta:resourcekey="imgRindResource1" />
-                                                <asp:Image ID="imgCind" runat="server" meta:resourcekey="imgCindResource1" />
+                                                <asp:Image ID="imgRind" runat="server"/>
+                                                <asp:Image ID="imgCind" runat="server"/>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:BoundField DataField="IsRegional" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" />
