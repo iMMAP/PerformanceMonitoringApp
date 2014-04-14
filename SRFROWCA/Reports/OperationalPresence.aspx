@@ -15,7 +15,7 @@
         <!-- .breadcrumb -->
     </div>
     <div class="page-content">
-        <table width="100%">
+        <table class="width-100">
             <tr>
                 <td>
                     <div class="row">
