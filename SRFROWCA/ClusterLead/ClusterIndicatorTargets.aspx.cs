@@ -11,7 +11,7 @@ using SRFROWCA.Common;
 
 namespace SRFROWCA.ClusterLead
 {
-    public partial class ClusterIndicatorTargets : System.Web.UI.Page
+    public partial class ClusterIndicatorTargets : BasePage
     {
         protected void Page_PreRender(object sender, EventArgs e)
         {
@@ -23,6 +23,14 @@ namespace SRFROWCA.ClusterLead
         {
             if (IsPostBack) return;
             UserInfo.UserProfileInfo();
+            PopulateObjectives();
+            PopulatePriorities();
+            PopulateIndicators();
+            PopulateClusterName();
+        }
+
+        internal override void BindGridData()
+        {
             PopulateObjectives();
             PopulatePriorities();
             PopulateIndicators();
