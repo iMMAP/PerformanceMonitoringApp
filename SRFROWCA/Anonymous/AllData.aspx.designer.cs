@@ -103,6 +103,24 @@ namespace SRFROWCA.Anonymous {
         protected global::System.Web.UI.WebControls.CheckBox cbCountry;
         
         /// <summary>
+        /// cbOPSProjects control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbOPSProjects;
+        
+        /// <summary>
+        /// cbORSProjects control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbORSProjects;
+        
+        /// <summary>
         /// ddlOrganizations control.
         /// </summary>
         /// <remarks>
@@ -157,6 +175,24 @@ namespace SRFROWCA.Anonymous {
         protected global::System.Web.UI.WebControls.TextBox txtToDate;
         
         /// <summary>
+        /// cbValidated control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbValidated;
+        
+        /// <summary>
+        /// cbNotValidated control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbNotValidated;
+        
+        /// <summary>
         /// ddlCountry control.
         /// </summary>
         /// <remarks>
@@ -191,6 +227,24 @@ namespace SRFROWCA.Anonymous {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Saplin.Controls.DropDownCheckBoxes ddlAdmin2;
+        
+        /// <summary>
+        /// cbFunded control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbFunded;
+        
+        /// <summary>
+        /// cbNotFunded control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbNotFunded;
         
         /// <summary>
         /// ddlFundingStatus control.

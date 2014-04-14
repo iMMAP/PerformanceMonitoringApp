@@ -1,19 +1,14 @@
 ﻿using System;
 using System.Data;
-using System.IO;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
-using System.Web;
-using System.IO.Compression;
 using SRFROWCA.Common;
-using Saplin.Controls;
-using SRFROWCA.Reports;
-using System.Linq;
 namespace SRFROWCA.Anonymous
 {
     public partial class AllData : BasePage
-    {        
+    {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
@@ -25,7 +20,12 @@ namespace SRFROWCA.Anonymous
 
             // Populate all drop downs.
             PopulateDropDowns();
+            LoadData();
+        }
 
+        internal override void BindGridData()
+        {
+            PopulateDropDowns();
             LoadData();
         }
 
@@ -42,9 +42,10 @@ namespace SRFROWCA.Anonymous
             txtFromDate.Text = "";
             txtToDate.Text = "";
             ddlFundingStatus.SelectedValue = "0";
-            cbRegional.Checked = cbCountry.Checked = false;
-            gvReport.DataSource = new DataTable();
-            gvReport.DataBind();
+            cbORSProjects.Checked = cbORSProjects.Checked = cbRegional.Checked = cbCountry.Checked = false;
+            cbFunded.Checked = cbNotFunded.Checked = cbValidated.Checked = cbNotValidated.Checked = false;
+
+            LoadData();
         }
 
         protected void gvReport_Sorting(object sender, GridViewSortEventArgs e)
@@ -104,21 +105,21 @@ namespace SRFROWCA.Anonymous
 
         protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LastLocationType = ReportsCommon.LocationType.Country;
+            LastLocationType = RC.LocationTypeForUI.Country;
             LoadDataOnMultipleCheckBoxControl();
             PopulateLocationDropDowns();
         }
 
         protected void ddlAdmin1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LastLocationType = ReportsCommon.LocationType.Admin1;
+            LastLocationType = RC.LocationTypeForUI.Admin1;
             LoadDataOnMultipleCheckBoxControl();
             PopulateAdmin2();
         }
 
         protected void ddlAdmin2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LastLocationType = ReportsCommon.LocationType.Admin2;
+            LastLocationType = RC.LocationTypeForUI.Admin2;
             LoadDataOnMultipleCheckBoxControl();
         }
 
@@ -150,7 +151,20 @@ namespace SRFROWCA.Anonymous
             {
                 ddlProjects.DataValueField = "ProjectId";
                 ddlProjects.DataTextField = "ProjectCode";
-                ddlProjects.DataSource = db.Projects.Select(x => new { x.ProjectId, x.ProjectCode }).OrderBy(o => o.ProjectCode);
+                if (UserInfo.EmergencyCluster > 0)
+                {
+                    ddlProjects.DataSource = db.Projects
+                                            .Where(x => x.EmergencyClusterId == UserInfo.EmergencyCluster
+                                                    && x.EmergencyLocationId == UserInfo.EmergencyCountry)
+                                            .Select(x => new { x.ProjectId, x.ProjectCode }).OrderBy(o => o.ProjectCode);
+                }
+                else
+                {
+                    ddlProjects.DataSource = db.Projects
+                                        .Where(x => x.EmergencyLocationId == UserInfo.EmergencyCountry)
+                                        .Select(x => new { x.ProjectId, x.ProjectCode }).OrderBy(o => o.ProjectCode);
+                }
+
                 ddlProjects.DataBind();
             }
         }
@@ -165,7 +179,7 @@ namespace SRFROWCA.Anonymous
             {
                 ddlActivities.DataTextField = "ActivityName";
                 ddlActivities.DataValueField = "PriorityActivityId";
-                ddlActivities.DataSource = DBContext.GetData("[GetActivitiesOfMultipleClusterObjAndPriorities]", new object[] { 1, clusterIds, objIds, priorityIds, 1 });
+                ddlActivities.DataSource = DBContext.GetData("[GetActivitiesOfMultipleClusterObjAndPriorities]", new object[] { 1, clusterIds, objIds, priorityIds, RC.SelectedSiteLanguageId });
                 ddlActivities.DataBind();
             }
         }
@@ -181,7 +195,7 @@ namespace SRFROWCA.Anonymous
             {
                 ddlIndicators.DataTextField = "DataName";
                 ddlIndicators.DataValueField = "ActivityDataId";
-                ddlIndicators.DataSource = DBContext.GetData("[GetIndicatorsOfMultipleClusterObjPriAndActivities]", new object[] { 1, clusterIds, objIds, priorityIds, activityIds, 1 });
+                ddlIndicators.DataSource = DBContext.GetData("[GetIndicatorsOfMultipleClusterObjPriAndActivities]", new object[] { 1, clusterIds, objIds, priorityIds, activityIds, RC.SelectedSiteLanguageId });
                 ddlIndicators.DataBind();
             }
         }
@@ -218,6 +232,7 @@ namespace SRFROWCA.Anonymous
 
         private void PopulateCountry()
         {
+            LastLocationType = RC.LocationTypeForUI.Country;
             UI.FillCountry(ddlCountry);
             if (UserInfo.Country > 0)
             {
@@ -262,11 +277,6 @@ namespace SRFROWCA.Anonymous
             }
         }
 
-        private object GetReportLocations()
-        {
-            return DBContext.GetData("GetAllLocationsInReports");
-        }
-
         // Populate Months drop down
         private void PopulateMonths()
         {
@@ -279,17 +289,7 @@ namespace SRFROWCA.Anonymous
 
         private DataTable GetMonth()
         {
-            return DBContext.GetData("GetMonths", new object[] { 1 });
-        }
-
-        private object GetUsers()
-        {
-            return DBContext.GetData("GetAllUsers");
-        }
-
-        private object GetOrganizationTypes()
-        {
-            return DBContext.GetData("GetOrganizationTypes");
+            return DBContext.GetData("GetMonths", new object[] { RC.SelectedSiteLanguageId });
         }
 
         // Populate Organizations drop down.
@@ -368,12 +368,12 @@ namespace SRFROWCA.Anonymous
             if (dt.Rows.Count > 0)
             {
                 gvReport.VirtualItemCount = Convert.ToInt32(dt.Rows[0]["Cnt"]);
-            }
 
-            // rnumber and Cnt colums are not needed in gridview
-            // so remove these two columns from datatable.
-            dt.Columns.Remove("rnumber");
-            dt.Columns.Remove("Cnt");
+                // rnumber and Cnt colums are not needed in gridview
+                // so remove these two columns from datatable.
+                dt.Columns.Remove("rnumber");
+                dt.Columns.Remove("Cnt");
+            }
 
             gvReport.DataSource = dt;
             gvReport.DataBind();
@@ -391,6 +391,13 @@ namespace SRFROWCA.Anonymous
         {
             string monthIds = GetSelectedValues(ddlMonth);
             string locationIds = GetLocationIds();
+            if (string.IsNullOrEmpty(locationIds))
+            {
+                if (!string.IsNullOrEmpty(lblCountry.Text.Trim()))
+                {
+                    locationIds = UserInfo.Country.ToString();
+                }
+            }
             string clusterIds = GetSelectedValues(ddlClusters);
             string orgIds = GetSelectedValues(ddlOrganizations);
             string objIds = GetSelectedValues(ddlObjectives);
@@ -403,16 +410,19 @@ namespace SRFROWCA.Anonymous
             int? toMonth = !string.IsNullOrEmpty(txtToDate.Text.Trim()) ? Convert.ToInt32(txtToDate.Text.Trim().Substring(0, 2)) : (int?)null;
             int? regionalInd = cbRegional.Checked ? 1 : (int?)null;
             int? countryInd = cbCountry.Checked ? 1 : (int?)null;
+            int? funded = cbFunded.Checked ? 1 : (int?)null;
+            int? notFunded = cbNotFunded.Checked ? 1 : (int?)null;
+            int? isOPS = cbOPSProjects.Checked && cbORSProjects.Checked ? null : cbOPSProjects.Checked ? 1 : cbORSProjects.Checked ? 0 : (int?)null;
+            int? isApproved = cbValidated.Checked && cbNotValidated.Checked ? null : cbValidated.Checked ? 0 : cbNotValidated.Checked ? 1 : (int?)null;
             int pageSize = gvReport.PageSize;
             int pageIndex = GridPageIndex; //gvReport.PageIndex;
-            int langId = 1;
-
+            int langId = RC.SelectedSiteLanguageId;
             //SetHFQueryString(monthIds, locationIds, clusterIds, orgIds);
 
-            return new object[] { monthIds, locationIds, clusterIds, orgIds, 
+            return new object[] {monthIds, locationIds, clusterIds, orgIds, 
                                     objIds, prIds, actIds, indIds, projectIds, fts,
-                                    fromMonth, toMonth, regionalInd, countryInd,
-                                    pageIndex, pageSize, Convert.ToInt32(SQLPaging), langId };
+                                    fromMonth, toMonth, regionalInd, countryInd, funded, notFunded,
+                                    isOPS, isApproved, pageIndex, pageSize, Convert.ToInt32(SQLPaging), langId };
         }
 
         private string GetLocationIds()
@@ -445,28 +455,6 @@ namespace SRFROWCA.Anonymous
             string ids = GetSelectedItems(sender);
             ids = !string.IsNullOrEmpty(ids) ? ids : null;
             return ids;
-        }
-
-        // Get Selected Value from Drop Down.
-        private int? GetSelectedValue(DropDownList ddl)
-        {
-            int val = 0;
-            int.TryParse(ddl.SelectedValue, out val);
-            return val > 0 ? val : (int?)null;
-        }
-
-        // set hidden field. This string is being used in XML DataFeed.
-        private void SetHFQueryString(string emergencyIds, int? officeId, Guid userId, int? yearId, string monthIds,
-                                                string locationIds, string clusterIds, string orgIds, string orgTypeIds)
-        {
-            if (!string.IsNullOrEmpty(emergencyIds) || officeId != null || yearId != null ||
-                !string.IsNullOrEmpty(monthIds) || !string.IsNullOrEmpty(locationIds) ||
-                !string.IsNullOrEmpty(clusterIds) || !string.IsNullOrEmpty(orgIds) || string.IsNullOrEmpty(orgTypeIds))
-            {
-                //hfReportLink.Value = string.Format("?emg={0}&cls={1}&loc={2}&y={3}&m={4}&u={5}&ot={6}&org={7}&ofc={8}",
-                //                                     emergencyIds, clusterIds, locationIds, yearId, monthIds,
-                //                                     userId, orgTypeIds, orgIds, officeId);
-            }
         }
 
         private string GetSelectedItems(object sender)
@@ -587,18 +575,15 @@ namespace SRFROWCA.Anonymous
 
         #region Properties & Enum
 
-        private ReportsCommon.LocationType LastLocationType
+        private RC.LocationTypeForUI LastLocationType
         {
             get
             {
                 if (ViewState["LastLocationType"] != null)
                 {
-                    return (ReportsCommon.LocationType)ViewState["LastLocationType"];
+                    return (RC.LocationTypeForUI)ViewState["LastLocationType"];
                 }
-                else
-                {
-                    return ReportsCommon.LocationType.None;
-                }
+                return RC.LocationTypeForUI.None;
             }
             set
             {
@@ -614,13 +599,11 @@ namespace SRFROWCA.Anonymous
                 {
                     if (ViewState["SQLPaging"].Equals("OFF"))
                         return PagingStatus.OFF;
-                    else
-                        return PagingStatus.ON;
-                }
-                else
-                {
+
                     return PagingStatus.ON;
                 }
+
+                return PagingStatus.ON;
             }
             set
             {

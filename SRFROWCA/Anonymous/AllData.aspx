@@ -2,11 +2,11 @@
     CodeBehind="AllData.aspx.cs" Inherits="SRFROWCA.Anonymous.AllData" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <%@ register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
+    <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
     <%--DropDownCheckBoxes is custom dropdown with checkboxes to selectect multiple items.--%>
-    <%@ register assembly="DropDownCheckBoxes" namespace="Saplin.Controls" tagprefix="cc" %>
+    <%@ Register Assembly="DropDownCheckBoxes" Namespace="Saplin.Controls" TagPrefix="cc" %>
     <%--Custom GridView Class to include custom paging functionality.--%>
-    <%@ register assembly="SRFROWCA" namespace="SRFROWCA" tagprefix="cc2" %>
+    <%@ Register Assembly="SRFROWCA" Namespace="SRFROWCA" TagPrefix="cc2" %>
     <style>
         .ddlWidth
         {
@@ -75,7 +75,7 @@
                                                                 <div class="widget-box no-border">
                                                                     <div class="widget-body">
                                                                         <div class="widget-main padding-6">
-                                                                            <table width="100%">
+                                                                            <table class="width-100">
                                                                                 <tr>
                                                                                     <td>
                                                                                         <span>Cluster: </span>
@@ -143,12 +143,20 @@
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                    <td>
-                                                                                    </td>
+                                                                                    <td></td>
                                                                                     <td>
                                                                                         <span>
                                                                                             <asp:CheckBox ID="cbRegional" runat="server" Text="Regional" />
                                                                                             <asp:CheckBox ID="cbCountry" runat="server" Text="Country" /></span>
+
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td></td>
+                                                                                    <td>
+                                                                                        <span>
+                                                                                            <asp:CheckBox ID="cbOPSProjects" runat="server" Text="OPS Projects" />
+                                                                                            <asp:CheckBox ID="cbORSProjects" runat="server" Text="ORS Projects" /></span>
                                                                                     </td>
                                                                                 </tr>
                                                                             </table>
@@ -160,7 +168,7 @@
                                                                 <div class="widget-box no-border">
                                                                     <div class="widget-body">
                                                                         <div class="widget-main padding-6">
-                                                                            <table width="100%">
+                                                                            <table class="width-100">
                                                                                 <tr>
                                                                                     <td>
                                                                                         <span>Organization:</span>
@@ -217,6 +225,16 @@
                                                                                         <asp:TextBox ID="txtToDate" runat="server" Width="100px"></asp:TextBox><span>(mm/dd/yyyy)</span>
                                                                                     </td>
                                                                                 </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                     Reported Data:
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <span>
+                                                                                            <asp:CheckBox ID="cbValidated" runat="server" Text="Validated" />
+                                                                                            <asp:CheckBox ID="cbNotValidated" runat="server" Text="Not Validated" /></span>
+                                                                                    </td>
+                                                                                </tr>                                                                                
                                                                             </table>
                                                                         </div>
                                                                     </div>
@@ -226,7 +244,7 @@
                                                                 <div class="widget-box no-border">
                                                                     <div class="widget-body">
                                                                         <div class="widget-main padding-6">
-                                                                            <table width="100%">
+                                                                            <table class="width-100">
                                                                                 <tr>
                                                                                     <td>
                                                                                         <span>Country:</span>
@@ -269,7 +287,17 @@
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td>
-                                                                                        <span>Funding Status:</span>
+                                                                                     Funding Status:
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <span>
+                                                                                            <asp:CheckBox ID="cbFunded" runat="server" Text="Funded" />
+                                                                                            <asp:CheckBox ID="cbNotFunded" runat="server" Text="Not Funded" /></span>
+                                                                                    </td>
+                                                                                </tr>                                                                                
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <span>Funding Details:</span>
                                                                                     </td>
                                                                                     <td>
                                                                                         <asp:DropDownList ID="ddlFundingStatus" runat="server" OnSelectedIndexChanged="ddlFundingStatus_SelectedIndexChanged">
@@ -280,9 +308,9 @@
                                                                                         </asp:DropDownList>
                                                                                     </td>
                                                                                 </tr>
+                                                                                
                                                                                 <tr>
-                                                                                    <td>
-                                                                                    </td>
+                                                                                    <td></td>
                                                                                     <td>
                                                                                         <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click"
                                                                                             class="btn btn-primary" />
