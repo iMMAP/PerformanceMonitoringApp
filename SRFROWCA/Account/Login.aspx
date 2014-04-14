@@ -1,9 +1,21 @@
 ﻿<%@ Page Title="Log On" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
-    CodeBehind="Login.aspx.cs" Inherits="SRFROWCA.Account.Login" %>
+    CodeBehind="Login.aspx.cs" Inherits="SRFROWCA.Account.Login" Culture="auto" meta:resourcekey="PageResource1" UICulture="auto" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+        </script>
+        <ul class="breadcrumb">
+            <li><i class="icon-home home-icon"></i><a href="../Default.aspx">
+                <asp:Localize ID="localBreadCrumbHome" runat="server" Text="Home" meta:resourcekey="localBreadCrumbHomeResource1"></asp:Localize></a> </li>
+            <li class="active">
+                <asp:Localize ID="localBreadCrumbLogin" runat="server" Text="Login" meta:resourcekey="localBreadCrumbLoginResource1"></asp:Localize></li>
+        </ul>
+        <!-- .breadcrumb -->
+    </div>
     <div class="page-content">
         <div class="login-layout">
             <div class="main-container">
@@ -17,45 +29,40 @@
                                     <div class="widget-body">
                                         <div class="widget-main">
                                             <h4 class="header blue lighter bigger">
-                                                <i class="icon-coffee green"></i>Please Enter Your Information
+                                                <i class="icon-coffee green"></i>
+                                                <asp:Localize ID="localEnterYourInfo" runat="server" Text="Please Enter Your Information" meta:resourcekey="localEnterYourInfoResource1"></asp:Localize>
                                             </h4>
                                             <div class="space-6">
                                             </div>
-                                            <asp:Login ID="LoginUser" runat="server" EnableViewState="false" RenderOuterTable="false"
-                                                OnLoggedIn="LoginUser_LoggedIn" OnLoginError="LoginUser_LoginError">
+                                            <asp:Login ID="LoginUser" runat="server" EnableViewState="False" RenderOuterTable="False"
+                                                OnLoggedIn="LoginUser_LoggedIn" OnLoginError="LoginUser_LoginError" meta:resourcekey="LoginUserResource1">
                                                 <LayoutTemplate>
                                                     <label class="block clearfix">
                                                         <span class="block">
-                                                            <asp:Label ID="FailureText" runat="server" CssClass="error2" EnableViewState="false"></asp:Label>
+                                                            <asp:Label ID="FailureText" runat="server" CssClass="error2" EnableViewState="False" meta:resourcekey="FailureTextResource1"></asp:Label>
                                                         </span>
                                                     </label>
                                                     <label class="block clearfix">
                                                         <span class="block input-icon input-icon-right">
                                                             <asp:TextBox ID="UserName" runat="server" MaxLength="256" CssClass="form-control"
-                                                                placeholder="Username"></asp:TextBox>
+                                                                placeholder="Username" meta:resourcekey="UserNameResource1"></asp:TextBox>
                                                             <i class="icon-user"></i>
                                                             <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName"
-                                                                CssClass="error2" ErrorMessage="User Name is required." ToolTip="User Name is required.">User Name is required.</asp:RequiredFieldValidator>
+                                                                CssClass="error2" ErrorMessage="User Name is required." ToolTip="User Name is required." meta:resourcekey="UserNameRequiredResource1" Text="User Name is required."></asp:RequiredFieldValidator>
                                                         </span>
                                                     </label>
                                                     <label class="block clearfix">
                                                         <span class="block input-icon input-icon-right">
                                                             <asp:TextBox ID="Password" runat="server" CssClass="form-control" TextMode="Password"
-                                                                placeholder="Password" MaxLength="128" Width="300px"></asp:TextBox>
+                                                                placeholder="Password" MaxLength="128" meta:resourcekey="PasswordResource1"></asp:TextBox>
                                                             <i class="icon-lock"></i>
                                                             <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password"
-                                                                CssClass="error2" ErrorMessage="Password is required." ToolTip="Password is required.">Password is required.</asp:RequiredFieldValidator>
+                                                                CssClass="error2" ErrorMessage="Password is required." ToolTip="Password is required." meta:resourcekey="PasswordRequiredResource1" Text="Password is required."></asp:RequiredFieldValidator>
                                                         </span>
                                                     </label>
                                                     <div class="clearfix">
-                                                        <label class="inline">
-                                                            <input id="RememberMe" runat="server" type="checkbox" class="ace" />
-                                                            <span class="lbl">Remember Me</span>
-                                                        </label>
-                                                        <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text="Log In" CausesValidation="true"
-                                                            CssClass="width-35 pull-right btn btn-sm btn-primary" />
-                                                    </div>
-                                                    <div class="space-4">
+                                                        <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text="Log In"
+                                                            CssClass="width-35 pull-right btn btn-sm btn-primary" meta:resourcekey="LoginButtonResource1" />
                                                     </div>
                                                 </LayoutTemplate>
                                             </asp:Login>
@@ -63,12 +70,14 @@
                                         <!-- /widget-main -->
                                         <div class="toolbar clearfix">
                                             <div>
-                                                <a href="ForgotPassword.aspx" class="forgot-password-link"><i class="icon-arrow-left">
-                                                </i>I forgot my password </a>
+                                                <a href="ForgotPassword.aspx" class="forgot-password-link"><i class="icon-arrow-left"></i>
+                                                    <asp:Localize ID="localForgotPassword" runat="server" Text="I forgot my password" meta:resourcekey="localForgotPasswordResource1"></asp:Localize>
+                                                </a>
                                             </div>
                                             <div>
-                                                <a href="Register.aspx" class="user-signup-link">I want to register <i class="icon-arrow-right">
-                                                </i></a>
+                                                <a href="Register.aspx" class="user-signup-link">
+                                                    <asp:Localize ID="localToRegister" runat="server" Text="I want to register" meta:resourcekey="localToRegisterResource1"></asp:Localize>
+                                                    <i class="icon-arrow-right"></i></a>
                                             </div>
                                         </div>
                                     </div>
