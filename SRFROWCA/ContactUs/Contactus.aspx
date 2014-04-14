@@ -15,6 +15,7 @@
         </ul>
         <!-- .breadcrumb -->
     </div>
-    <uc1:ContactUsControl ID="ContactUsControl1" runat="server" />
-    &nbsp;
+    <div class="page-content">
+        <uc1:ContactUsControl ID="ContactUsControl1" runat="server" />
+    </div>
 </asp:Content>
