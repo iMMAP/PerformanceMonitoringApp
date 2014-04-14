@@ -13,6 +13,33 @@ namespace SRFROWCA.Account {
     public partial class Register {
         
         /// <summary>
+        /// localBreadCrumbHome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localBreadCrumbHome;
+        
+        /// <summary>
+        /// localBreadCrumbRegister control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localBreadCrumbRegister;
+        
+        /// <summary>
+        /// localRegisterNewUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localRegisterNewUser;
+        
+        /// <summary>
         /// ddlUserRole control.
         /// </summary>
         /// <remarks>
@@ -200,5 +227,14 @@ namespace SRFROWCA.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnRegister;
+        
+        /// <summary>
+        /// localRegister control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localRegister;
     }
 }

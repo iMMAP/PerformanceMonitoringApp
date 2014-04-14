@@ -5,11 +5,6 @@ namespace SRFROWCA.Account
 {
     public partial class ChangePassword : BasePage
     {
-        protected void Page_PreInit(object sender, EventArgs e)
-        {
-            GZipContents.GZipOutput();
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -18,7 +13,7 @@ namespace SRFROWCA.Account
         {
             // Get last error from the server
             Exception exc = Server.GetLastError();
-            SRFROWCA.Common.ExceptionUtility.LogException(exc, "ChangePassword", this.User);
+            ExceptionUtility.LogException(exc, "ChangePassword", User);
         }
     }
 }

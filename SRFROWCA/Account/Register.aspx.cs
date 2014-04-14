@@ -5,7 +5,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using SRFROWCA.Common;
-using SRFROWCA.Reports;
 
 namespace SRFROWCA.Account
 {
@@ -15,9 +14,9 @@ namespace SRFROWCA.Account
         {
             if (IsPostBack) return;
 
-            if (!this.User.IsInRole("Admin"))
+            if (!User.IsInRole("Admin"))
             {
-                this.Form.DefaultButton = this.btnRegister.UniqueID;
+                Form.DefaultButton = btnRegister.UniqueID;
             }
 
             PopulateCountries();
@@ -25,34 +24,17 @@ namespace SRFROWCA.Account
             PopulateClusters();
         }
 
-        private void PopulateClusters()
+        internal override void BindGridData()
         {
-            UI.FillClusters(ddlClusters, 1);
-            ListItem item = new ListItem("Select Your Cluster", "0");
-            ddlClusters.Items.Insert(0, item);
+            PopulateCountries();
+            PopulateOrganizations();
+            PopulateClusters();
         }
 
-        private void PopulateControlsWithUserInfo(DataTable dt)
-        {
-            throw new NotImplementedException();
-        }
-
-        private DataTable GetUserData()
-        {
-            return DBContext.GetData("GetUserInfo");
-        }
-
-        private void GetUserIdFromSession()
-        {
-            if (Session["EditUserId"] != null)
-            {
-                UserId = Session["EditUseId"].ToString();
-            }
-        }
+        #region Events.
 
         protected void btnRegister_Click(object sender, EventArgs e)
         {
-            bool returnValue = false;
             string message = "";
             try
             {
@@ -62,7 +44,8 @@ namespace SRFROWCA.Account
 
                 // Create New 1)Rider, 2) Places, 3) Route,
                 // 4) Send Email to user to verify account.
-                returnValue = CreateUserAccount();
+
+                bool returnValue = CreateUserAccount();
                 message = "Account created successfully!";
                 if (returnValue)
                 {
@@ -72,7 +55,7 @@ namespace SRFROWCA.Account
                         string to = "3wopactivities@gmail.com";
                         string subject = "New 3W Performace Monitoring Account!";
                         string mailBody = "";
-                        if (this.User.IsInRole("Admin"))
+                        if (User.IsInRole("Admin"))
                         {
                             mailBody = string.Format(@"3W Perfomance Monitoring admin has created your new account.
                                                         User Name: {0} \n 
@@ -97,7 +80,7 @@ namespace SRFROWCA.Account
                 }
 
                 //ShowMessage(message, RC.NotificationType.Success, false, 500);
-                
+
 
                 //ClearRegistrationControls();
             }
@@ -111,17 +94,69 @@ namespace SRFROWCA.Account
             Response.Redirect("../RegisterSuccess.aspx");
         }
 
+        protected void btnReset_Click(object sender, EventArgs e)
+        {
+            ddlUserRole.SelectedIndex = 0;
+            txtUserName.Text = "";
+            txtPassword.Text = "";
+            txtEmail.Text = "";
+            txtPhone.Text = "";
+            ddlClusters.SelectedIndex = 0;
+            ddlCountry.SelectedIndex = 0;
+            ddlOrganization.SelectedIndex = 0;
+        }
+
+        #endregion
+
+        // Populate countries drop down.
+        private void PopulateOrganizations()
+        {
+            ddlOrganization.DataValueField = "OrganizationId";
+            ddlOrganization.DataTextField = "OrganizationAcronym";
+
+            ddlOrganization.DataSource = GetOrganizations();
+            ddlOrganization.DataBind();
+
+            string text = RC.SelectedSiteLanguageId == 2 ? "Séléctionner votre Organisation" : "Select Your Organization";
+            ListItem item = new ListItem(text, "0");
+            ddlOrganization.Items.Insert(0, item);
+        }
+
+        private DataTable GetOrganizations()
+        {
+            DataTable dt = DBContext.GetData("GetOrganizations");
+
+            return dt.Rows.Count > 0 ? dt : new DataTable();
+        }
+
+        // Populate countries drop down.
+        private void PopulateCountries()
+        {
+            ddlCountry.DataValueField = "LocationId";
+            ddlCountry.DataTextField = "LocationName";
+
+            DataTable dt = RC.GetLocations(User, (int)RC.LocationTypes.National);
+            ddlCountry.DataSource = dt;
+            ddlCountry.DataBind();
+
+            string text = RC.SelectedSiteLanguageId == 2 ? "Sélectionner votre Pays" : "Select Your Country";
+            ListItem item = new ListItem(text, "0");
+            ddlCountry.Items.Insert(0, item);
+        }
+
+        private void PopulateClusters()
+        {
+            UI.FillClusters(ddlClusters, RC.SelectedSiteLanguageId);
+            string text = RC.SelectedSiteLanguageId == 2 ? "Sélectionner votre Cluster" : "Select Your Cluster";
+            ListItem item = new ListItem(text, "0");
+            ddlClusters.Items.Insert(0, item);
+        }
+
         private bool Valid()
         {
-            //string countryIds = RC.GetSelectedValues(ddlLocations);
             string clusterIds = RC.GetSelectedValues(ddlClusters);
 
             string message = "";
-            //if (string.IsNullOrEmpty(countryIds))
-            //{
-            //    message = "Please select at least one country.";
-            //}
-
             if (ddlUserRole.SelectedValue.Equals("2") && string.IsNullOrEmpty(clusterIds))
             {
                 message += " Please select your cluster(s).";
@@ -136,64 +171,6 @@ namespace SRFROWCA.Account
             return true;
         }
 
-        private void ClearRegistrationControls()
-        {
-            txtUserName.Text = "";
-            txtPassword.Text = "";
-            txtEmail.Text = "";
-
-            if (ddlOrganization.Items.Count > 0)
-            {
-                ddlOrganization.SelectedIndex = 0;
-            }
-
-            if (ddlCountry.Items.Count > 0)
-            {
-                ddlCountry.SelectedIndex = 0;
-            }
-
-        }
-
-        // Populate countries drop down.
-        private void PopulateCountries()
-        {
-            ddlCountry.DataValueField = "LocationId";
-            ddlCountry.DataTextField = "LocationName";
-
-            DataTable dt = RC.GetLocations(this.User, (int)RC.LocationTypes.National);
-            ddlCountry.DataSource = dt;
-            ddlCountry.DataBind();
-
-            ListItem item = new ListItem("Select Your Country", "0");
-            ddlCountry.Items.Insert(0, item);
-
-            //ddlLocations.DataValueField = "LocationId";
-            //ddlLocations.DataTextField = "LocationName";
-            //ddlLocations.DataSource = dt;
-            //ddlLocations.DataBind();
-        }
-
-        // Populate countries drop down.
-        private void PopulateOrganizations()
-        {
-
-            ddlOrganization.DataValueField = "OrganizationId";
-            ddlOrganization.DataTextField = "OrganizationAcronym";
-
-            ddlOrganization.DataSource = GetOrganizations();
-            ddlOrganization.DataBind();
-
-            ListItem item = new ListItem("Select Your Organization", "0");
-            ddlOrganization.Items.Insert(0, item);
-        }
-
-        private DataTable GetOrganizations()
-        {
-            DataTable dt = DBContext.GetData("GetOrganizations");
-
-            return dt.Rows.Count > 0 ? dt : new DataTable();
-        }
-
         // Check if user (email address) is already in db.
         // If not null then user already exists otherwise not.
         private bool IsUserAlreadyExits()
@@ -205,15 +182,12 @@ namespace SRFROWCA.Account
                 ShowMessage(string.Format("This email {0} already exists in db!", txtEmail.Text.Trim()), RC.NotificationType.Error);
                 return true;
             }
-            else
-            {
-                membershipUser = Membership.GetUser(txtUserName.Text.Trim());
 
-                if (membershipUser != null)
-                {
-                    ShowMessage(string.Format("Someone already has this, {0}, username. Try another?!", txtUserName.Text.Trim()), RC.NotificationType.Error);
-                    return true;
-                }
+            membershipUser = Membership.GetUser(txtUserName.Text.Trim());
+            if (membershipUser != null)
+            {
+                ShowMessage(string.Format("Someone already has this, {0}, username. Try another?!", txtUserName.Text.Trim()), RC.NotificationType.Error);
+                return true;
             }
 
             return false;
@@ -222,16 +196,16 @@ namespace SRFROWCA.Account
         // Create new user, places and route.
         private bool CreateUserAccount()
         {
-            MembershipUser user = null;
-
             // Add user in aspnet membership tables.
-            user = AddRecordInMembership();
+            MembershipUser user = AddRecordInMembership();
+            if (user.ProviderUserKey != null)
+            {
+                Guid userId = (Guid)user.ProviderUserKey;
+                AddRecordInRoles(userId);
 
-            Guid userId = (Guid)user.ProviderUserKey;
-            AddRecordInRoles(userId);
-
-            // User details are organization and country.
-            CreateUserDetails(userId);
+                // User details are organization and country.
+                CreateUserDetails(userId);
+            }
             return true;
         }
 
@@ -265,7 +239,7 @@ namespace SRFROWCA.Account
             // Adds a new user to the data store.
             MembershipUser user = Membership.CreateUser(txtUserName.Text.Trim(), txtPassword.Text, txtEmail.Text.Trim());
 
-            if (this.User.IsInRole("Admin"))
+            if (User.IsInRole("Admin"))
             {
                 user.IsApproved = true;
             }
@@ -287,6 +261,12 @@ namespace SRFROWCA.Account
             InsertClusters(userId);
         }
 
+        private void InsertLocationsAndOrg(Guid userId)
+        {
+            object[] userValues = GetUserValues(userId);
+            DBContext.Add("InsertASPNetUserCustom", userValues);
+        }
+
         private void InsertClusters(Guid userId)
         {
             if (ddlUserRole.SelectedValue.Equals("2") || ddlUserRole.SelectedValue.Equals("3"))
@@ -296,18 +276,11 @@ namespace SRFROWCA.Account
             }
         }
 
-        private void InsertLocationsAndOrg(Guid userId)
-        {
-            object[] userValues = GetUserValues(userId);
-            DBContext.Add("InsertASPNetUserCustom", userValues);
-        }
-
         private object[] GetUserValues(Guid userId)
         {
             int orgId = 0;
             int.TryParse(ddlOrganization.SelectedValue, out orgId);
-            string countryId = null;
-            countryId = ddlCountry.SelectedValue;
+            string countryId = ddlCountry.SelectedValue;
             string phone = txtPhone.Text.Trim().Length > 0 ? txtPhone.Text.Trim() : null;
             string fullName = txtFullName.Text.Trim();
 
@@ -317,9 +290,10 @@ namespace SRFROWCA.Account
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
         {
             //updMessage.Update();
-            RC.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
+            RC.ShowMessage(Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
         }
 
+        #region Properties & Enums.
         public string UserId
         {
             get
@@ -332,15 +306,16 @@ namespace SRFROWCA.Account
             }
             set
             {
-                ViewState["EditUserId"] = value.ToString();
+                ViewState["EditUserId"] = value;
             }
         }
+        #endregion
 
         protected void Page_Error(object sender, EventArgs e)
         {
             // Get last error from the server
             Exception exc = Server.GetLastError();
-            SRFROWCA.Common.ExceptionUtility.LogException(exc, "Register", this.User);
+            ExceptionUtility.LogException(exc, "Register", User);
         }
     }
 }

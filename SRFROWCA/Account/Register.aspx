@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
-    CodeBehind="Register.aspx.cs" Inherits="SRFROWCA.Account.Register" %>
+    CodeBehind="Register.aspx.cs" Inherits="SRFROWCA.Account.Register" culture="auto" meta:resourcekey="PageResource1" uiculture="auto" %>
 
-<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
     <script type="text/javascript">
         function showHideControlsOnUserRole(roleVal) {
@@ -32,8 +31,8 @@
             showHideControlsOnUserRole(roleVal);
 
             $('#<%=ddlUserRole.ClientID%>').change(function () {
-                var roleVal = $('#<%=ddlUserRole.ClientID%> option:selected').val();
-                showHideControlsOnUserRole(roleVal);
+                var role = $('#<%=ddlUserRole.ClientID%> option:selected').val();
+                showHideControlsOnUserRole(role);
             });
         });
 
@@ -74,22 +73,18 @@
     </script>
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
-    <%--<asp:UpdatePanel ID="updActivities" runat="server" UpdateMode="Conditional">
-        <ContentTemplate>
-            <asp:UpdatePanel ID="updMessage" runat="server" UpdateMode="Conditional">
-                <ContentTemplate>
-                    <div id="divMsg">
-                    </div>
-                </ContentTemplate>
-            </asp:UpdatePanel>
-            <div style="text-align: center;">
-                <asp:UpdateProgress ID="UpdateProgress2" runat="server" AssociatedUpdatePanelID="updActivities"
-                    DynamicLayout="true">
-                    <ProgressTemplate>
-                        <img src="../assets/images/ajaxlodr.gif" alt="Loading">
-                    </ProgressTemplate>
-                </asp:UpdateProgress>
-            </div>--%>
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+        </script>
+        <ul class="breadcrumb">
+            <li><i class="icon-home home-icon"></i><a href="../Default.aspx">
+                <asp:Localize ID="localBreadCrumbHome" runat="server" Text="Home" meta:resourcekey="localBreadCrumbHomeResource1"></asp:Localize></a> </li>
+            <li class="active">
+                <asp:Localize ID="localBreadCrumbRegister" runat="server" Text="Register" meta:resourcekey="localBreadCrumbRegisterResource1"></asp:Localize></li>
+        </ul>
+        <!-- .breadcrumb -->
+    </div>
     <div class="page-content">
         <div class="login-layout">
             <div class="main-container">
@@ -101,101 +96,104 @@
                                     <div class="widget-body">
                                         <div class="widget-main">
                                             <h4 class="header green lighter bigger">
-                                                <i class="icon-group blue"></i>New User Registration
+                                                <i class="icon-group blue"></i>
+                                                <asp:Localize ID="localRegisterNewUser" runat="server" Text="New User Registration" meta:resourcekey="localRegisterNewUserResource1"></asp:Localize>
                                             </h4>
                                             <label class="block clearfix">
-                                                <asp:DropDownList ID="ddlUserRole" runat="server" Width="290px">
-                                                    <asp:ListItem Text="Select Your Role" Value="0"></asp:ListItem>
-                                                    <asp:ListItem Text="Data Entry/Field Officer" Value="1"></asp:ListItem>
-                                                    <asp:ListItem Text="Country Cluster Lead" Value="2"></asp:ListItem>
-                                                    <asp:ListItem Text="Region Cluster Lead" Value="3"></asp:ListItem>
-                                                    <asp:ListItem Text="OCHA Staff" Value="4"></asp:ListItem>
+                                                <asp:DropDownList ID="ddlUserRole" runat="server" CssClass="form-control" meta:resourcekey="ddlUserRoleResource1">
+                                                    <asp:ListItem Text="Select Your Role" Value="0" meta:resourcekey="ListItemResource1"></asp:ListItem>
+                                                    <asp:ListItem Text="Data Entry/Field Officer" Value="1" meta:resourcekey="ListItemResource2"></asp:ListItem>
+                                                    <asp:ListItem Text="Country Cluster Lead" Value="2" meta:resourcekey="ListItemResource3"></asp:ListItem>
+                                                    <asp:ListItem Text="Region Cluster Lead" Value="3" meta:resourcekey="ListItemResource4"></asp:ListItem>
+                                                    <asp:ListItem Text="OCHA Staff" Value="4" meta:resourcekey="ListItemResource5"></asp:ListItem>
                                                 </asp:DropDownList>
                                                 <asp:RequiredFieldValidator ID="rfvUserRole" runat="server" ErrorMessage="Select Your Role"
-                                                    CssClass="error2" InitialValue="0" Text="Select Your Role" ControlToValidate="ddlCountry"></asp:RequiredFieldValidator>
+                                                    CssClass="error2" InitialValue="0" Text="Select Your Role" ControlToValidate="ddlCountry" meta:resourcekey="rfvUserRoleResource1"></asp:RequiredFieldValidator>
                                             </label>
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
                                                     <asp:TextBox ID="txtFullName" runat="server" MaxLength="256" CssClass="form-control"
-                                                        placeholder="Full Name"></asp:TextBox>
+                                                        placeholder="Full Name" meta:resourcekey="txtFullNameResource1"></asp:TextBox>
                                                     <i class="icon-user"></i>
                                                     <asp:RequiredFieldValidator ID="rfvFullName" runat="server" ErrorMessage="Name Required"
-                                                        CssClass="error2" Text="Name Required" ControlToValidate="txtFullName"></asp:RequiredFieldValidator>
+                                                        CssClass="error2" Text="Name Required" ControlToValidate="txtFullName" meta:resourcekey="rfvFullNameResource1"></asp:RequiredFieldValidator>
                                                 </span>
                                             </label>
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
                                                     <asp:TextBox ID="txtUserName" runat="server" MaxLength="256" CssClass="form-control"
-                                                        placeholder="Username"></asp:TextBox>
+                                                        placeholder="Username" meta:resourcekey="txtUserNameResource1"></asp:TextBox>
                                                     <i class="icon-user"></i>
                                                     <asp:RequiredFieldValidator ID="rfvUserName" runat="server" ErrorMessage="Username Required"
-                                                        CssClass="error2" Text="Username Required" ControlToValidate="txtUserName"></asp:RequiredFieldValidator>
+                                                        CssClass="error2" Text="Username Required" ControlToValidate="txtUserName" meta:resourcekey="rfvUserNameResource1"></asp:RequiredFieldValidator>
                                                 </span>
                                             </label>
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
                                                     <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" MaxLength="128"
-                                                        CssClass="form-control" placeholder="Password"></asp:TextBox>
+                                                        CssClass="form-control" placeholder="Password" meta:resourcekey="txtPasswordResource1"></asp:TextBox>
                                                     <i class="icon-lock"></i>
                                                     <asp:RequiredFieldValidator ID="rfvPassword" runat="server" ErrorMessage="Password Required"
-                                                        CssClass="error2" Text="Password Required" ControlToValidate="txtPassword"></asp:RequiredFieldValidator>
+                                                        CssClass="error2" Text="Password Required" ControlToValidate="txtPassword" meta:resourcekey="rfvPasswordResource1"></asp:RequiredFieldValidator>
                                                     <asp:RegularExpressionValidator ID="valMinLength" runat="server" ControlToValidate="txtPassword"
-                                                        CssClass="error2" ErrorMessage="At least 3 characters" ValidationExpression="[^\s]{3,}"></asp:RegularExpressionValidator>
+                                                        CssClass="error2" ErrorMessage="At least 3 characters" ValidationExpression="[^\s]{3,}" meta:resourcekey="valMinLengthResource1"></asp:RegularExpressionValidator>
                                                 </span>
                                             </label>
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
                                                     <asp:TextBox ID="txtEmail" runat="server" MaxLength="256" CssClass="form-control"
-                                                        placeholder="Email"></asp:TextBox>
+                                                        placeholder="Email" meta:resourcekey="txtEmailResource1"></asp:TextBox>
                                                     <i class="icon-envelope"></i>
                                                     <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="Email Required"
-                                                        Text="Email Required" CssClass="error2" ControlToValidate="txtEmail"></asp:RequiredFieldValidator></span>
+                                                        Text="Email Required" CssClass="error2" ControlToValidate="txtEmail" meta:resourcekey="rfvEmailResource1"></asp:RequiredFieldValidator></span>
                                             </label>
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
                                                     <asp:TextBox ID="txtPhone" MaxLength="50" runat="server" CssClass="form-control"
-                                                        placeholder="Phone"></asp:TextBox>
+                                                        placeholder="Phone" meta:resourcekey="txtPhoneResource1"></asp:TextBox>
                                                     <i class="icon-info-sign"></i></span>
-                                                    <asp:RequiredFieldValidator ID="rfvPhone" runat="server" ErrorMessage="Phone Required"
-                                                        CssClass="error2" Text="Phone Required" ControlToValidate="txtPhone"></asp:RequiredFieldValidator>
+                                                <asp:RequiredFieldValidator ID="rfvPhone" runat="server" ErrorMessage="Phone Required"
+                                                    CssClass="error2" Text="Phone Required" ControlToValidate="txtPhone" meta:resourcekey="rfvPhoneResource1"></asp:RequiredFieldValidator>
                                             </label>
                                             <div id="divOrganization">
                                                 <label class="block clearfix">
                                                     <span class="block input-icon input-icon-right">
-                                                        <asp:DropDownList ID="ddlOrganization" runat="server" Width="290px">
+                                                        <asp:DropDownList ID="ddlOrganization" runat="server" CssClass="form-control" meta:resourcekey="ddlOrganizationResource1">
                                                         </asp:DropDownList>
                                                         <asp:CustomValidator runat="server" ForeColor="Red" ID="CustomValidator2" ClientValidationFunction="ValidateOrganization"
-                                                            ErrorMessage="Select Your Organization."></asp:CustomValidator>
+                                                            ErrorMessage="Select Your Organization." meta:resourcekey="CustomValidator2Resource1"></asp:CustomValidator>
                                                     </span>
                                                 </label>
                                             </div>
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
-                                                    <asp:DropDownList ID="ddlCountry" runat="server" Width="290px">
+                                                    <asp:DropDownList ID="ddlCountry" runat="server" CssClass="form-control" meta:resourcekey="ddlCountryResource1">
                                                     </asp:DropDownList>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Select Your Country"
-                                                        CssClass="error2" InitialValue="0" Text="Select Your Country" ControlToValidate="ddlCountry"></asp:RequiredFieldValidator>
+                                                        CssClass="error2" InitialValue="0" Text="Select Your Country" ControlToValidate="ddlCountry" meta:resourcekey="RequiredFieldValidator2Resource1"></asp:RequiredFieldValidator>
                                                 </span>
                                             </label>
                                             <div id="divCluster">
                                                 <label class="block clearfix">
                                                     <span class="block input-icon input-icon-right">
-                                                        <asp:DropDownList ID="ddlClusters" runat="server" Width="290px">
+                                                        <asp:DropDownList ID="ddlClusters" runat="server" CssClass="form-control" meta:resourcekey="ddlClustersResource1">
                                                         </asp:DropDownList>
                                                         <asp:CustomValidator runat="server" ForeColor="Red" ID="CustomValidator1" ClientValidationFunction="ValidateClustersList"
-                                                            ErrorMessage="Select Your Cluster."></asp:CustomValidator>
+                                                            ErrorMessage="Select Your Cluster." meta:resourcekey="CustomValidator1Resource1"></asp:CustomValidator>
                                                     </span>
                                                 </label>
                                             </div>
                                             <div class="clearfix">
-                                                <asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="width-30 pull-left btn btn-sm" />
+                                                <asp:Button ID="btnReset" runat="server" OnClick="btnReset_Click" CssClass="width-30 pull-left btn btn-sm" Text="Reset" CausesValidation="False" meta:resourcekey="btnResetResource1" />
+
                                                 <asp:Button ID="btnRegister" runat="server" Text="Register" CssClass="width-65 pull-right btn btn-sm btn-success"
-                                                    OnClick="btnRegister_Click" />
+                                                    OnClick="btnRegister_Click" meta:resourcekey="btnRegisterResource1" />
                                             </div>
                                         </div>
                                         <div class="toolbar center">
-                                            <a href="Login.aspx" class="back-to-login-link"><i class="icon-arrow-left"></i>Back
-                                                to login </a>
+                                            <a href="Login.aspx" class="back-to-login-link"><i class="icon-arrow-left"></i>
+                                                <asp:Localize ID="localRegister" runat="server" Text="Back to login" meta:resourcekey="localRegisterResource1"></asp:Localize>
+                                            </a>
                                         </div>
                                     </div>
                                     <!-- /widget-body -->
