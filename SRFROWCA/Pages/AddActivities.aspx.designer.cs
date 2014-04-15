@@ -13,6 +13,24 @@ namespace SRFROWCA.Pages {
     public partial class AddActivities {
         
         /// <summary>
+        /// localBreadCrumbHome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localBreadCrumbHome;
+        
+        /// <summary>
+        /// localBreadCrumbDataEntry control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localBreadCrumbDataEntry;
+        
+        /// <summary>
         /// Localize1 control.
         /// </summary>
         /// <remarks>
@@ -130,6 +148,15 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.HtmlControls.HtmlButton btnOpenLocations;
         
         /// <summary>
+        /// localLocationButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localLocationButton;
+        
+        /// <summary>
         /// gvActivities control.
         /// </summary>
         /// <remarks>
@@ -146,6 +173,15 @@ namespace SRFROWCA.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton btnSave;
+        
+        /// <summary>
+        /// localSaveButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localSaveButton;
         
         /// <summary>
         /// btnClientOpen control.
@@ -263,6 +299,15 @@ namespace SRFROWCA.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton btnCancelComments;
+        
+        /// <summary>
+        /// localIndComments control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localIndComments;
         
         /// <summary>
         /// txtComments control.

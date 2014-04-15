@@ -115,7 +115,7 @@ namespace SRFROWCA.Pages
                 ObjPrToolTip.ObjectiveIconToolTip(e);
                 ObjPrToolTip.PrioritiesIconToolTip(e);
                 int activityDataId = 0;
-                int.TryParse(this.gvActivities.DataKeys[e.Row.RowIndex]["ActivityDataId"].ToString(), out activityDataId);
+                int.TryParse(gvActivities.DataKeys[e.Row.RowIndex]["ActivityDataId"].ToString(), out activityDataId);
 
                 ObjPrToolTip.RegionalIndicatorIcon(e, 11);
                 ObjPrToolTip.CountryIndicatorIcon(e, 12);
@@ -129,7 +129,7 @@ namespace SRFROWCA.Pages
                 int rowIndex = int.Parse(e.CommandArgument.ToString());
 
                 int activityDataId = 0;
-                int.TryParse(this.gvActivities.DataKeys[rowIndex]["ActivityDataId"].ToString(), out activityDataId);
+                int.TryParse(gvActivities.DataKeys[rowIndex]["ActivityDataId"].ToString(), out activityDataId);
 
                 CommentsIndId = activityDataId;
 
