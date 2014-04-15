@@ -162,14 +162,14 @@
   <data name="localDashboardOprPresenceResource1.Text" xml:space="preserve">
     <value>Présence opérationnelle</value>
   </data>
-    <data name="localMasterLoginLinkResource1.Text" xml:space="preserve">
+  <data name="localMasterLoginLinkResource1.Text" xml:space="preserve">
     <value>Se connecter</value>
   </data>
   <data name="localDashboardRepStatusResource1.Text" xml:space="preserve">
     <value>Etat du rapport</value>
   </data>
   <data name="localDataEntryResource1.Text" xml:space="preserve">
-    <value>Saisi de données</value>
+    <value>Saisie de données</value>
   </data>
   <data name="localFAQHelpResource1.Text" xml:space="preserve">
     <value>FAQ &amp; Aide</value>
