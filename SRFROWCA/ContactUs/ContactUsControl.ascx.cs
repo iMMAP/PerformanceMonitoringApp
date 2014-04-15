@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ServiceModel.Channels;
 using SRFROWCA.Common;
 
 namespace SRFROWCA.ContactUs
@@ -14,24 +15,30 @@ namespace SRFROWCA.ContactUs
         {
             try
             {
+                string message = "";
                 if (string.IsNullOrEmpty(txtEmail.Text.Trim()))
                 {
-                    ShowMessage("Please enter your email!", "error-message");
+                    message = RC.SelectedSiteLanguageId == 2 ? "Merci de saisir votre email!" : "Please enter your email!";
+                    ShowMessage(message, "error-message");
                     return;
                 }
 
                 SendMessage();
-                ShowMessage("Your message has been sent!", "info-message");
+                message = RC.SelectedSiteLanguageId == 2 ? "Votre message a été envoyé" : "Your message has been sent!";
+                ShowMessage(message, "info-message");
             }
             catch (Exception ex)
             {
+                string message = "";
                 if (ex.Message.Equals("The specified string is not in the form required for an e-mail address."))
                 {
-                    ShowMessage("Please provide valid E-Mail address!", "error-message");
+                    message = RC.SelectedSiteLanguageId == 2 ? "Merci de donner une adresse email valide!" : "Please provide valid E-Mail address!";
+                    ShowMessage(message, "error-message");
                 }
                 else
                 {
-                    ShowMessage("Some an error occoured, please try again!", "error-message");
+                    message = RC.SelectedSiteLanguageId == 2 ? "Une erreur est survenue, merci de réessayer" : "Some an error occoured, please try again!";
+                    ShowMessage(message, "error-message");
                 }
             }
         }
