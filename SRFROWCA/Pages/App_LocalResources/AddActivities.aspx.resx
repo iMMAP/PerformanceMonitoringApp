@@ -384,4 +384,13 @@
   <data name="txtCommentsResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="AddActivities_PopulateAdmin1__Admin_1_Locations" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="AddActivities_SaveMessageSuccess" xml:space="preserve">
+    <value>Your Data Saved Successfuly!</value>
+  </data>
+  <data name="AddActivities_PopulateAdmin2__Admin_2_Locations" xml:space="preserve">
+    <value>Cercle</value>
+  </data>
 </root>
