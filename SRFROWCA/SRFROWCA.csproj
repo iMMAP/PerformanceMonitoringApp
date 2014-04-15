@@ -1167,14 +1167,6 @@
     <Content Include="OPS\App_LocalResources\OPSDataEntry.aspx.fr.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Pages\App_LocalResources\AddActivities.aspx.fr.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Pages\App_LocalResources\AddActivities.aspx.resx">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
@@ -1194,6 +1186,48 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\App_LocalResources\Login.aspx.fr.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Account\App_LocalResources\Register.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Account\App_LocalResources\Register.aspx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Account\App_LocalResources\ChangePassword.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Account\App_LocalResources\ChangePassword.aspx.fr.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Account\App_LocalResources\ForgotPassword.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Account\App_LocalResources\ForgotPassword.aspx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ContactUs\App_LocalResources\ContactUsControl.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ContactUs\App_LocalResources\ContactUsControl.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ContactUs\App_LocalResources\Contactus.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ContactUs\App_LocalResources\Contactus.aspx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Pages\App_LocalResources\AddActivities.aspx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Pages\App_LocalResources\AddActivities.aspx.fr-FR.resx">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>

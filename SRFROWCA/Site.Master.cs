@@ -2,12 +2,6 @@
 using System.Web;
 using System.Web.UI.WebControls;
 using SRFROWCA.Common;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.SessionState;
-using System.Collections.Generic;
-using System.Collections;
-using System.Data;
 
 namespace SRFROWCA
 {
@@ -22,12 +16,12 @@ namespace SRFROWCA
                     string siteLangId = Request.Cookies["SiteLanguageCookie"].Value;
                     if (siteLangId == "2")
                     {
-                        RC.SelectedSiteLanguageId = (int)Common.RC.SiteLanguage.French;
+                        RC.SelectedSiteLanguageId = (int)RC.SiteLanguage.French;
                         RC.SiteCulture = RC.FrenchCulture;
                     }
                     else
                     {
-                        RC.SelectedSiteLanguageId = (int)Common.RC.SiteLanguage.English;
+                        RC.SelectedSiteLanguageId = (int)RC.SiteLanguage.English;
                         RC.SiteCulture = RC.EnglishCulture;
                     }
                 }
