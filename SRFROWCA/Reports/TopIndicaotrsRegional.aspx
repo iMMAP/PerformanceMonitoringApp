@@ -12,7 +12,7 @@
             try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
         </script>
         <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="#">Home</a> </li>
+            <li><i class="fa fa-home home-icon"></i><a href="#">Home</a> </li>
             <li class="active">Top 10 Indicators All</li>
         </ul>
         <!-- .breadcrumb -->
@@ -29,11 +29,11 @@
                                         <asp:Label ID="lblClusterName" runat="server" Text=""></asp:Label>
                                         <%-- <button runat="server" id="btnExportToExcel" onserverclick="ExportToExcel" class="width-10 btn btn-sm btn-primary"
                                             title="Excel">
-                                            <i class="icon-download"></i>Excel
+                                            <i class="fa fa-download"></i>Excel
                                         </button>--%>
                                     </h6>
                                     <div class="widget-toolbar">
-                                        <a href="#" data-action="collapse"><i class="icon-chevron-down"></i></a>
+                                        <a href="#" data-action="collapse"><i class="fa fa-chevron-down"></i></a>
                                     </div>
                                 </div>
                                 <div class="widget-body">
