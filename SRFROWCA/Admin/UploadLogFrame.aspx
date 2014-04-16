@@ -9,7 +9,7 @@
             try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
         </script>
         <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="#">Home</a> </li>
+            <li><i class="fa fa-home home-icon"></i><a href="#">Home</a> </li>
             <li class="active">Data Entry</li>
         </ul>
         <!-- .breadcrumb -->
@@ -28,7 +28,7 @@
                                         <h5>
                                             Bulk Upload Reports
                                         </h5>
-                                        <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up">
+                                        <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="fa fa-chevron-up">
                                         </i></a></span>
                                     </div>
                                     <div class="widget-body">

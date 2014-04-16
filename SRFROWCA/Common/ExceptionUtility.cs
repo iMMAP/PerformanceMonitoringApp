@@ -1,34 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
-using System.IO;
 using BusinessLogic;
 
 namespace SRFROWCA.Common
 {
-    public sealed class ExceptionUtility
+    public static class ExceptionUtility
     {
-        // All methods are static, so this can be private
-        private ExceptionUtility()
-        { }
-
-        public static void LogException(Exception exc, string source, HttpServerUtility Server)
+        public static void LogException(Exception exc, string source, HttpServerUtility server)
         {
-            if (exc is InvalidOperationException)
+            if (exc is InvalidOperationException || exc is System.Data.SqlClient.SqlException)
             {
                 // Pass the error on to the Generic Error page            
-                Server.Transfer("~/ErrorPages/GenericErrorPage.aspx", true);
-
-            }
-
-            if (exc is System.Data.SqlClient.SqlException)
-            {
-
-                Server.Transfer("~/ErrorPages/GenericErrorPage.aspx", true);
+                server.Transfer("~/ErrorPages/GenericErrorPage.aspx", true);
             }
         }
-
 
         // Notify System Operators about an exception
         public static void NotifySystemOps(Exception exc, string source, System.Security.Principal.IPrincipal iPrincipal)
@@ -79,21 +64,21 @@ namespace SRFROWCA.Common
             string innerExcSource = exc.InnerException != null ? exc.InnerException.Source : null;
             string innerExc = exc.InnerException != null ? exc.InnerException.Message : null;
             string innerExcStackTrace = exc.InnerException != null ? exc.InnerException.StackTrace : null;
-            string excType = exc != null ? exc.GetType().ToString() : null;
-            string exception = exc != null ? exc.Message : null;
-            string excStackTrace = exc != null ? exc.StackTrace : null;
+            string excType = exc.GetType().ToString();
+            string exception = exc.Message;
+            string excStackTrace = exc.StackTrace;
 
             string userAgent = null;
             string url = null;
 
-            if (System.Web.HttpContext.Current != null)
+            if (HttpContext.Current != null)
             {
                 userAgent = HttpContext.Current.Request.UserAgent;
                 url = HttpContext.Current.Request.Url.ToString();
             }
 
             int? httpCode = null;
-            if (exc is System.Web.HttpException)
+            if (exc is HttpException)
             {
                 httpCode = ((HttpException)exc).GetHttpCode();
             }

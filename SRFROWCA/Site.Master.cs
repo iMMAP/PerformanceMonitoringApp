@@ -76,7 +76,7 @@ namespace SRFROWCA
             menueSRPIndicators.Visible = isShow;
             liSRPIndicators.Visible = isShow;
             menueValidateIndicaotrs.Visible = isShow;
-            liValidateIndicators.Visible = isShow;
+            liValidate.Visible = isShow;
             //liReportsTopIndicators1.Visible = isShow;
             //liReportsTopIndicatorsGeneral1.Visible = isShow;
             //liReportsTopIndicatorRegional1.Visible = isShow;
@@ -89,6 +89,7 @@ namespace SRFROWCA
             liSumOfRegionalIndicators.Visible = isShow;
             liClusterTarget.Visible = isShow;
             liPivotSumOfCountryIndicators.Visible = isShow;
+            liFundingStatus.Visible = isShow;
             //liBulkImport.Visible = isShow;
         }
 
@@ -128,11 +129,12 @@ namespace SRFROWCA
             menueSRPIndicators.Visible = isShow;
             liSRPIndicators.Visible = isShow;
             menueValidateIndicaotrs.Visible = isShow;
-            liValidateIndicators.Visible = isShow;
+            liValidate.Visible = isShow;
             liCLprojectsListing.Visible = isShow;
             liSumOfCountryIndicators.Visible = isShow;
             liClusterTarget.Visible = isShow;
             liPivotSumOfCountryIndicators.Visible = isShow;
+            liFundingStatus.Visible = isShow;
             //liReportsTopIndicators1.Visible = isShow;
             //liReportsTopIndicatorsGeneral1.Visible = isShow;
             //liReportsTopIndicatorRegional1.Visible = isShow;
@@ -193,10 +195,12 @@ namespace SRFROWCA
             }
             else if (uri == "/ClusterLead/ValidateReportList.aspx")
             {
+                liValidate.Attributes.Add("class", "active open");
                 liValidateIndicators.Attributes.Add("class", "active");
             }
             else if (uri == "/ClusterLead/ValidateIndicators.aspx")
             {
+                liValidate.Attributes.Add("class", "active open");
                 liValidateIndicators.Attributes.Add("class", "active");
             }
             else if (uri == "/RegionalLead/ManageRegionalIndicators.aspx")

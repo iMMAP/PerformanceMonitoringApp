@@ -7,7 +7,7 @@
             try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
         </script>
         <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="#">Home</a> </li>
+            <li><i class="fa fa-home home-icon"></i><a href="#">Home</a> </li>
             <li class="active">Operational Presence</li>
         </ul>
         <!-- .breadcrumb -->

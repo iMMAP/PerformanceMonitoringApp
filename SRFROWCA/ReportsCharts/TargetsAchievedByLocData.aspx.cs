@@ -19,11 +19,11 @@ namespace SRFROWCA.Reports
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
-            PopulateCountry();
-            PopulateDataDropDown();
-            PopulateLocationDropDowns();
+            //PopulateCountry();
+            //PopulateDataDropDown();
+            //PopulateLocationDropDowns();
 
-            LastLocationType = ReportsCommon.LocationType.Country;
+            //LastLocationType = ReportsCommon.LocationType.Country;
             DrawChart(LastLocationType);
         }
 
@@ -70,19 +70,19 @@ namespace SRFROWCA.Reports
         private void DrawChart(ReportsCommon.LocationType locationType)
         {
             DataTable dt = GetLocationData(locationType);
-            UpdateNullColumns(dt);
+            //UpdateNullColumns(dt);
 
-            List<string> titles = GetChartTitles();
-            if (titles.Count > 0)
-            {
-                divTitle.InnerHtml = titles[0];
-                divTitle2.InnerHtml = titles[1];
-            }
+            //List<string> titles = GetChartTitles();
+            //if (titles.Count > 0)
+            //{
+            //    divTitle.InnerHtml = titles[0];
+            //    divTitle2.InnerHtml = titles[1];
+            //}
 
-            int chartHeight = GetChartHeight(dt);
+            //int chartHeight = GetChartHeight(dt);
 
-            PrepareTargetAchievedChartData(dt, chartHeight);
-            PreparePercentageChartData(dt, chartHeight);
+            PrepareTargetAchievedChartData(dt, 400);
+            //PreparePercentageChartData(dt, chartHeight);
         }
 
         private int GetChartHeight(DataTable dt)
@@ -110,7 +110,7 @@ namespace SRFROWCA.Reports
         private DataTable GetLogFrameData()
         {
             int? dataId = GetSelectedValue(ddlData);
-            return DBContext.GetData("GetAllFrameWorkDataOnDataId", new object[] { dataId });
+            return DBContext.GetData("GetTotalAchievedByCountry");//, new object[] { dataId });
         }
 
         private List<string> GetChartTitles()
@@ -146,8 +146,8 @@ namespace SRFROWCA.Reports
 
         private DataTable GetLocationData(ReportsCommon.LocationType locationType)
         {
-            object[] param = GetParamValues((int)locationType);
-            return DBContext.GetData("GetTargetAchievedByLocation", param);
+            //object[] param = GetParamValues((int)locationType);
+            return DBContext.GetData("GetTotalAchievedByCountry");//, param);
         }
 
         protected void ddlAdmin1_SelectedIndexChanged(object sender, EventArgs e)
@@ -219,7 +219,7 @@ namespace SRFROWCA.Reports
         private string[] GetCategories(DataTable dt)
         {
             object[] categories = (from DataRow row in dt.Rows
-                                   select row["Location"]).ToArray();
+                                   select row["LocationName"]).ToArray();
             return ((IEnumerable)categories).Cast<object>()
                          .Select(x => x.ToString())
                          .ToArray();

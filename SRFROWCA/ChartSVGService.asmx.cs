@@ -1,6 +1,11 @@
 ﻿using System.IO;
 using System.Web.Services;
 using Svg;
+using BusinessLogic;
+using System.Data;
+using Newtonsoft.Json;
+using System.Web.Script.Serialization;
+using System.Collections.Generic;
 
 namespace SRFROWCA
 {
@@ -17,22 +22,45 @@ namespace SRFROWCA
         [WebMethod(EnableSession = true)]
         public string SaveSVG(string svg, string logFrameId, string durationType, string yearId, string chartType)
         {
-            string result = "Success";
+            //string result = "Success";
 
-            string dir = CreateFolderForFiles();
+            //string dir = CreateFolderForFiles();
 
-            // Use LogFrameId to save
-            string fileName = dir + "\\" + chartType + logFrameId;
+            //// Use LogFrameId to save
+            //string fileName = dir + "\\" + chartType + logFrameId;
 
-            if (!string.IsNullOrEmpty(durationType) && !string.IsNullOrEmpty(yearId))
+            //if (!string.IsNullOrEmpty(durationType) && !string.IsNullOrEmpty(yearId))
+            //{
+            //    fileName += "__" + durationType + "-" + yearId;
+            //}
+
+            //CreateSVG(svg, fileName);
+            //CreateImage(fileName);
+
+            //return result;
+
+            DataTable dt = DBContext.GetData("GetTotalAchievedByCountry");
+            //string result = JsonConvert.SerializeObject(dt);
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
+            Dictionary<string, object> row;
+            foreach (DataRow dr in dt.Rows)
             {
-                fileName += "__" + durationType + "-" + yearId;
+                row = new Dictionary<string, object>();
+                foreach (DataColumn col in dt.Columns)
+                {
+                    row.Add(col.ColumnName, dr[col]);
+                }
+                rows.Add(row);
             }
 
-            CreateSVG(svg, fileName);
-            CreateImage(fileName);
+            string result = serializer.Serialize(rows);
 
+
+            //result = result.Substring(1, result.Length - 2);
+            //Newtonsoft.Json.Linq.JObject jo = Newtonsoft.Json.Linq.JObject.Parse(result);
             return result;
+
         }
 
         private string CreateFolderForFiles()
@@ -77,12 +105,10 @@ namespace SRFROWCA
             // If file exists then no need to create again.
             if (File.Exists(filePath)) return;
 
-            using (FileStream fs = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+            FileStream fs = new FileStream(filePath, FileMode.Create, FileAccess.Write);
+            using (StreamWriter sw = new StreamWriter(fs))
             {
-                using (StreamWriter sw = new StreamWriter(fs))
-                {
-                    sw.WriteLine(svg);
-                }
+                sw.WriteLine(svg);
             }
         }
     }

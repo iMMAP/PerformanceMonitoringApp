@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Data;
 using System.Web;
-using System.Data;
-using System.Web.Security;
 
 namespace SRFROWCA.Common
 {
@@ -15,7 +11,6 @@ namespace SRFROWCA.Common
 
             if (dt.Rows.Count > 0)
             {
-                
                 HttpContext.Current.Session["UserCluster"] = dt.Rows[0]["ClusterId"];
                 HttpContext.Current.Session["UserOrg"] = dt.Rows[0]["OrganizationId"];
                 HttpContext.Current.Session["UserOrgName"] = dt.Rows[0]["OrganizationName"];

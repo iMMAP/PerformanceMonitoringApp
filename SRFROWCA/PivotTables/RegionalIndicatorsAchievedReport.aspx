@@ -8,7 +8,7 @@
             try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
         </script>
         <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="#">Home</a> </li>
+            <li><i class="fa fa-home home-icon"></i><a href="#">Home</a> </li>
             <li class="active"><asp:Label ID="lblHeaderMessage" runat="server" Text=""></asp:Label></li>
         </ul>
         <!-- .breadcrumb -->
@@ -21,11 +21,11 @@
                         <h6>
                             <button runat="server" id="btnExport" onserverclick="btnExport_Click" class="btn btn-sm btn-yellow"
                                 title="Excel">
-                                <i class="icon-download"></i>Excel
+                                <i class="fa fa-download"></i>Excel
                             </button>
                         </h6>
                         <div class="widget-toolbar">
-                            <a href="#" data-action="collapse"><i class="icon-chevron-down"></i></a>
+                            <a href="#" data-action="collapse"><i class="fa fa-chevron-down"></i></a>
                         </div>
                     </div>
                     <div class="widget-body">

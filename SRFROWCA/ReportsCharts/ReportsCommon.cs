@@ -23,6 +23,7 @@ namespace SRFROWCA.Reports
             foreach (DataColumn column in dt.Columns)
             {
                 if (column.Caption == "Target" || column.Caption == "Achieved")
+                //if (column.Caption == "Achieved")
                 {
                     object[] locationSeries = (from DataRow row in dt.Rows
                                                select row[column.Caption]).ToArray();
@@ -31,8 +32,8 @@ namespace SRFROWCA.Reports
                     {
                         Name = column.Caption,
                         Data = new Data(locationSeries.ToArray()),
-                        Color = column.Caption.Equals("Target") ? ColorTranslator.FromHtml("#1F77B4") : ColorTranslator.FromHtml("#FF7F0E")
-                        
+                        //Color = column.Caption.Equals("Target") ? ColorTranslator.FromHtml("#1F77B4") : ColorTranslator.FromHtml("#FF7F0E")
+
                         //PlotOptionsColumn = new PlotOptionsColumn{
                         //    PointWidth = 10
                         //}
@@ -178,7 +179,7 @@ namespace SRFROWCA.Reports
                 {
                     Enabled = false
                 })
-                .SetTooltip(new Tooltip 
+                .SetTooltip(new Tooltip
                 {
                     Enabled = false
                 })
@@ -246,7 +247,7 @@ namespace SRFROWCA.Reports
                 {
                     Enabled = false
                 })
-                .SetTooltip(new Tooltip 
+                .SetTooltip(new Tooltip
                 {
                     Enabled = false
                 })
@@ -287,7 +288,7 @@ namespace SRFROWCA.Reports
                     }
                 })
                 .SetSeries(series);
-            return  hc.ToHtmlString();
+            return hc.ToHtmlString();
         }
 
         public enum LocationType

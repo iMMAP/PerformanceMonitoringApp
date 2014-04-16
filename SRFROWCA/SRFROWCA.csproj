@@ -379,6 +379,8 @@
     <Content Include="Help\generatereport1.swf" />
     <Content Include="LeadPages\AddIndicatorOnActivity.aspx" />
     <Content Include="LeadPages\EditActIndicator.aspx" />
+    <Content Include="LeadPages\FundingListing.aspx" />
+    <Content Include="LeadPages\FundingSummary.aspx" />
     <Content Include="Log\ErrorLog.txt" />
     <Content Include="Maps\FirstTestOL3.aspx" />
     <Content Include="Maps\TargetAchievedByLocDataMap.aspx" />
@@ -835,6 +837,20 @@
     <Compile Include="LeadPages\EditActIndicator.aspx.designer.cs">
       <DependentUpon>EditActIndicator.aspx</DependentUpon>
     </Compile>
+    <Compile Include="LeadPages\FundingListing.aspx.cs">
+      <DependentUpon>FundingListing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LeadPages\FundingListing.aspx.designer.cs">
+      <DependentUpon>FundingListing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LeadPages\FundingSummary.aspx.cs">
+      <DependentUpon>FundingSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LeadPages\FundingSummary.aspx.designer.cs">
+      <DependentUpon>FundingSummary.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Maps\FirstTestOL3.aspx.cs">
       <DependentUpon>FirstTestOL3.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1230,6 +1246,22 @@
     <Content Include="Pages\App_LocalResources\AddActivities.aspx.fr-FR.resx">
       <SubType>Designer</SubType>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Pages\App_LocalResources\ManageActivities.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Pages\App_LocalResources\CreateProject.aspx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Pages\App_LocalResources\CreateProject.aspx.fr-FR.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Pages\App_LocalResources\ManageActivities.aspx.fr-FR.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
