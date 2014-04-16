@@ -58,7 +58,7 @@
                 try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
             </script>
             <ul class="breadcrumb">
-                <li><i class="icon-home home-icon"></i><a href="#">Home</a> </li>
+                <li><i class="fa fa-home home-icon"></i><a href="#">Home</a> </li>
                 <li class="active">Select Regional Indicators</li>
             </ul>
             <!-- .breadcrumb -->
@@ -77,7 +77,7 @@
                                                 <div class="widget-header widget-header-small header-color-blue2">
                                                     <h5>
                                                         Strategic Objectives</h5>
-                                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up">
+                                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="fa fa-chevron-up">
                                                     </i></a></span>
                                                 </div>
                                                 <div class="widget-body">
@@ -93,7 +93,7 @@
                                                 <div class="widget-header widget-header-small header-color-blue2">
                                                     <h5>
                                                         Humanitarian Priorities</h5>
-                                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up">
+                                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="fa fa-chevron-up">
                                                     </i></a></span>
                                                 </div>
                                                 <div class="widget-body">
@@ -109,7 +109,7 @@
                                                 <div class="widget-header widget-header-small header-color-blue2">
                                                     <h5>
                                                         Search (highlight) Activity</h5>
-                                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up">
+                                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="fa fa-chevron-up">
                                                     </i></a></span>
                                                 </div>
                                                 <div class="widget-body">
@@ -124,7 +124,7 @@
                                                 <div class="widget-header widget-header-small header-color-blue2">
                                                     <h5>
                                                         Search (highlight) Indicator</h5>
-                                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up">
+                                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="fa fa-chevron-up">
                                                     </i></a></span>
                                                 </div>
                                                 <div class="widget-body">
@@ -144,7 +144,7 @@
                                     <h4>
                                         <asp:Localize ID="localizeClusterName" runat="server" Text=""></asp:Localize>
                                     </h4>
-                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up">
+                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="fa fa-chevron-up">
                                     </i></a></span>
                                 </div>
                                 <div class="widget-body">
