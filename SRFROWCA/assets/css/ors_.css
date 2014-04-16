@@ -1,0 +1,205 @@
+﻿/*
+style.css ors
+*/
+table.imagetable
+{
+    width: 100%;
+    font-size: 11px;
+    color: #39668e;
+    border-width: 1px;
+    border-color: #bbbbbb;
+    border-collapse: collapse;
+}
+
+table.imagetable th
+{
+    background: #ddd;
+    border-width: 1px;
+    padding: 4px;
+    border-style: solid;
+    border-color: #bbbbbb;
+    text-align: left;
+}
+
+table.imagetable td
+{
+    border-width: 1px;
+    padding: 4px;
+    border-style: solid;
+    color: #000000;
+    border-color: #bbbbbb;
+}
+
+.altcolor
+{
+    background-color: #fbfbfb;
+}
+
+.istrow
+{
+    background: #ebf0f4;
+}
+
+/*
+End style.css ors
+*/
+
+
+.error2
+{
+	color: #FF0000;
+}
+
+.message
+{
+		background-size: 40px 40px;
+		background-image: linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%,
+							transparent 50%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .05) 75%,
+							transparent 75%, transparent);										
+		 box-shadow: inset 0 -1px 0 rgba(255,255,255,.4);
+		 width: 100%;
+		 border: 1px solid;
+		 color: #fff;
+		 padding: 15px;
+		 position: fixed;
+		 _position: absolute;
+		 text-shadow: 0 1px 0 rgba(0,0,0,.5);
+		 animation: animate-bg 5s linear infinite;
+}
+
+.message2
+{
+		background-image: linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%,
+							transparent 50%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .05) 75%,
+							transparent 75%, transparent);										
+		 box-shadow: inset 0 -1px 0 rgba(255,255,255,.4);
+		 width: 100%;
+		 border: 1px solid;
+		 color: #fff;
+		 padding: 15px;
+		 text-shadow: 0 1px 0 rgba(0,0,0,.5);
+		 animation: animate-bg 5s linear infinite;
+}
+
+.info{
+		 background-color: #4ea5cd;
+		 border-color: #3b8eb5;
+}
+
+.error{
+		 background-color: #de4343;
+		 border-color: #c43d3d;
+}
+
+.warning{
+		 background-color: #eaaf51;
+		 border-color: #d99a36;
+}
+
+.success{
+		 background-color: #61b832;
+		 border-color: #55a12c;
+}
+
+.message h3{
+		 margin: 0 0 5px 0;													 
+}
+
+.message p{
+		 margin: 0;													 
+}
+
+@keyframes animate-bg {
+	from {
+		background-position: 0 0;
+	}
+	to {
+	   background-position: -80px 0;
+	}
+}
+
+.containerPopup
+{
+    width: 98%;
+    border: 1px solid #ccc;
+    margin-top: 40px;
+    background-color:#fbfbfb
+}
+
+.modalpopupbackground
+{
+    background-color:black;
+    opacity: 0.7;    
+}
+
+
+
+
+.hiddenelement
+{
+    display:none;
+}
+.clusterLabel
+{
+    font-size: large;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.error-message
+{
+    text-align: left;
+    display: list-item;
+    list-style: none;
+    list-style-type: none;
+    border: 1px solid #fe8989;
+    color: #525252;
+    background-color: #ffe7e7;
+    padding: 10px;
+    padding-left: 45px;
+}
+
+.info-message
+{
+    text-align: left;
+    display: list-item;
+    list-style: none;
+    list-style-type: none;
+    border: 1px solid #aee756;
+    color: #525252;
+    background-color: #e9fad0;
+    padding: 1px;
+    padding-left: 5px;
+    font: bold large Verdana, Arial, sans-serif;
+    height: 28px;
+    font-style: normal;
+    font-variant: normal;
+}
+
+.imgButtonImg 
+{
+    margin:0; 
+    padding:0;
+    display:inline-block;            
+    border: 0;
+    } 
+         
+.highlight
+{
+    background-color: yellow;
+}
+        
+.highlight2
+{
+    background-color: #ADFF2F;
+}
+
+.highlightRow
+{
+    background-color: #F08080;
+}
+
+.highlightRow2
+{
+    background-color: #DFF0D8;
+}

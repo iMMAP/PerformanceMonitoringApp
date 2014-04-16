@@ -20,8 +20,8 @@
 .ui-jqgrid .ui-th-div-ie {white-space: nowrap; zoom :1; height:17px;}
 .ui-jqgrid .ui-jqgrid-resize {height:20px !important;position: relative; cursor :e-resize;display: inline;overflow: hidden;}
 .ui-jqgrid .ui-grid-ico-sort {overflow:hidden;position:absolute;display:inline; cursor: pointer !important;}
-.ui-jqgrid .ui-icon-asc {margin-top:-3px; height:12px;}
-.ui-jqgrid .ui-icon-desc {margin-top:3px;height:12px;}
+.ui-jqgrid .ui-fa fa-asc {margin-top:-3px; height:12px;}
+.ui-jqgrid .ui-fa fa-desc {margin-top:3px;height:12px;}
 .ui-jqgrid .ui-i-asc {margin-top:0;height:16px;}
 .ui-jqgrid .ui-i-desc {margin-top:0;margin-left:13px;height:16px;}
 .ui-jqgrid .ui-jqgrid-sortable {cursor:pointer;}
@@ -113,10 +113,10 @@ tr.ui-search-toolbar select {margin: 1px 0 0 0}
 .ui-jqdialog-content .DataTD {padding: 2px; border: 0 none; vertical-align: top;}
 .ui-jqdialog-content .form-view-data {white-space:pre}
 .fm-button { display: inline-block; margin:0 4px 0 0; padding: .4em .5em; text-decoration:none !important; cursor:pointer; position: relative; text-align: center; zoom: 1; }
-.fm-button-icon-left { padding-left: 1.9em; }
-.fm-button-icon-right { padding-right: 1.9em; }
-.fm-button-icon-left .ui-icon { right: auto; left: .2em; margin-left: 0; position: absolute; top: 50%; margin-top: -8px; }
-.fm-button-icon-right .ui-icon { left: auto; right: .2em; margin-left: 0; position: absolute; top: 50%; margin-top: -8px;}
+.fm-button-fa fa-left { padding-left: 1.9em; }
+.fm-button-fa fa-right { padding-right: 1.9em; }
+.fm-button-fa fa-left .ui-icon { right: auto; left: .2em; margin-left: 0; position: absolute; top: 50%; margin-top: -8px; }
+.fm-button-fa fa-right .ui-icon { left: auto; right: .2em; margin-left: 0; position: absolute; top: 50%; margin-top: -8px;}
 #nData, #pData { float: left; margin:3px;padding: 0; width: 15px; }
 /* End Eorm edit */
 /*.ui-jqgrid .edit-cell {}*/
