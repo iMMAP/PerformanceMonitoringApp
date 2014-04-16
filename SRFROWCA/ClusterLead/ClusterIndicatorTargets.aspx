@@ -70,7 +70,7 @@
                 try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
             </script>
             <ul class="breadcrumb">
-                <li><i class="icon-home home-icon"></i><a href="#">Home</a> </li>
+                <li><i class="fa fa-home home-icon"></i><a href="#">Home</a> </li>
                 <li class="active">Select Regional Indicators</li>
             </ul>
             <!-- .breadcrumb -->
@@ -89,7 +89,7 @@
                                             <div class="widget-box">
                                                 <div class="widget-header widget-header-small header-color-blue2">
                                                     <h5>Strategic Objectives</h5>
-                                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
+                                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="fa fa-chevron-up"></i></a></span>
                                                 </div>
                                                 <div class="widget-body">
                                                     <div class="widget-main">
@@ -103,7 +103,7 @@
                                             <div class="widget-box">
                                                 <div class="widget-header widget-header-small header-color-blue2">
                                                     <h5>Humanitarian Priorities</h5>
-                                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
+                                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="fa fa-chevron-up"></i></a></span>
                                                 </div>
                                                 <div class="widget-body">
                                                     <div class="widget-main">
@@ -117,7 +117,7 @@
                                             <div class="widget-box">
                                                 <div class="widget-header widget-header-small header-color-blue2">
                                                     <h5>Search Activity/Indicator</h5>
-                                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
+                                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="fa fa-chevron-up"></i></a></span>
                                                 </div>
                                                 <div class="widget-body">
                                                     <div class="widget-main">
@@ -139,7 +139,7 @@
                                     <div class="col-sm-3">
                                         <button runat="server" id="btnExportToExcel" onserverclick="ExportToExcel" class="btn btn-sm btn-yellow"
                                             title="Excel">
-                                            <i class="icon-download"></i>Excel
+                                            <i class="fa fa-download"></i>Excel
                                         </button>
                                     </div>
                                     <div class="col-sm-6">
@@ -150,7 +150,7 @@
                                     <div class="col-sm-3">
                                     <button id="Button1" runat="server" onserverclick="btnSave_Click" onclick="needToConfirm = false;"
                                         type="button" class="btn btn-sm btn-yellow pull-right">
-                                        <i class="icon-save"></i>Save
+                                        <i class="fa fa-save"></i>Save
                                     </button>
                                 </div>
                                 </div>
@@ -201,7 +201,7 @@
                                 <div>
                                     <button id="btnSave" runat="server" onserverclick="btnSave_Click" onclick="needToConfirm = false;"
                                         type="button" class="width-20 pull-right btn btn-sm btn-primary">
-                                        <i class="icon-save"></i>Save
+                                        <i class="fa fa-save"></i>Save
                                     </button>
                                 </div>
                             </div>

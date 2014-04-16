@@ -10,7 +10,7 @@ using SRFROWCA.Common;
 
 namespace SRFROWCA.ClusterLead
 {
-    public partial class ValidateIndicators : System.Web.UI.Page
+    public partial class ValidateIndicators : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
