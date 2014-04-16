@@ -243,7 +243,13 @@
   <data name="localReportsSumRepSumOfCountryIndResource1.Text" xml:space="preserve">
     <value>Somme Indicateurs Pays</value>
   </data>
-  <data name="localValidateIndicatorsResource1.Text" xml:space="preserve">
+    <data name="LocalValidateAchievementsResource1.Text" xml:space="preserve">
+    <value>Accomplissement</value>
+  </data>
+    <data name="localValidateIndicatorsResource1.Text" xml:space="preserve">
+    <value>Indicateur</value>
+  </data>
+    <data name="localValidateResource1.Text" xml:space="preserve">
     <value>Valider</value>
   </data>
   <data name="localWelcomeResource1.Text" xml:space="preserve">

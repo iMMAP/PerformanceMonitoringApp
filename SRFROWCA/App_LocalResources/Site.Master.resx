@@ -255,7 +255,13 @@
   <data name="localReportsSumRepSumOfCountryIndResource1.Text" xml:space="preserve">
     <value>Sum Of Country Ind</value>
   </data>
+  <data name="LocalValidateAchievementsResource1.Text" xml:space="preserve">
+    <value>Achievements</value>
+  </data>
   <data name="localValidateIndicatorsResource1.Text" xml:space="preserve">
+    <value>Indicators</value>
+  </data>
+  <data name="localValidateResource1.Text" xml:space="preserve">
     <value>Validate</value>
   </data>
   <data name="localWelcomeResource1.Text" xml:space="preserve">
