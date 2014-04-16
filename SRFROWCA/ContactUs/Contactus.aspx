@@ -10,7 +10,7 @@
             try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
         </script>
         <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="../Default.aspx">
+            <li><i class="fa fa-home home-icon"></i><a href="../Default.aspx">
                 <asp:Localize ID="localBreadCrumbHome" runat="server" Text="Home" meta:resourcekey="localBreadCrumbHomeResource1"></asp:Localize></a> </li>
             <li class="active">
                 <asp:Localize ID="localBreadCrumbContactUs" runat="server" Text="Contact Us" meta:resourcekey="localBreadCrumbContactUsResource1"></asp:Localize></li>

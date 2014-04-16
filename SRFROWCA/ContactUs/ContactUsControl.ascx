@@ -60,7 +60,7 @@
                     <div>
                         <button runat="server" id="btnSend" onserverclick="txtSend_Click" class="btn btn-primary"
                              Title="Send">
-                            <i class="icon-envelope-alt"></i><asp:Localize ID="LocalSend" runat="server" Text="Send" meta:resourcekey="LocalSendResource1"></asp:Localize>
+                            <i class="fa fa-envelope-alt"></i><asp:Localize ID="LocalSend" runat="server" Text="Send" meta:resourcekey="LocalSendResource1"></asp:Localize>
                         </button>
                     </div>
                     <div>
