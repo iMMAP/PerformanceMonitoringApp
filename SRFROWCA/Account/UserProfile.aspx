@@ -9,7 +9,7 @@
             try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
         </script>
         <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="#">Home</a> </li>
+            <li><i class="fa fa-home home-icon"></i><a href="#">Home</a> </li>
             <li class="active">My Profile</li>
         </ul>
         <!-- .breadcrumb -->
@@ -93,7 +93,7 @@
                 <div>
                     <button runat="server" id="btnUpdate" onserverclick="btnUpdate_Click" class="width-10 btn btn-sm btn-primary"
                         title="Save">
-                        <i class="icon-ok bigger-110"></i>Save
+                        <i class="fa fa-ok bigger-110"></i>Save
                     </button>
                 </div>
             </div>
