@@ -13,6 +13,24 @@ namespace SRFROWCA.Pages {
     public partial class CreateProject {
         
         /// <summary>
+        /// localBreadCrumbHome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localBreadCrumbHome;
+        
+        /// <summary>
+        /// localBreadCrumbManageProjects control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localBreadCrumbManageProjects;
+        
+        /// <summary>
         /// rblProjects control.
         /// </summary>
         /// <remarks>
@@ -31,6 +49,24 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.Button btnCreateProject;
         
         /// <summary>
+        /// localMangeProjAddEditCaption control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localMangeProjAddEditCaption;
+        
+        /// <summary>
+        /// localProjectCode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localProjectCode;
+        
+        /// <summary>
         /// ltrlProjectCode control.
         /// </summary>
         /// <remarks>
@@ -38,6 +74,15 @@ namespace SRFROWCA.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal ltrlProjectCode;
+        
+        /// <summary>
+        /// localProjectTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localProjectTitle;
         
         /// <summary>
         /// txtProjectTitle control.
@@ -58,6 +103,15 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTitle;
         
         /// <summary>
+        /// localProjectObjective control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localProjectObjective;
+        
+        /// <summary>
         /// txtProjectObjective control.
         /// </summary>
         /// <remarks>
@@ -65,6 +119,15 @@ namespace SRFROWCA.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtProjectObjective;
+        
+        /// <summary>
+        /// localCluster control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localCluster;
         
         /// <summary>
         /// ddlCluster control.
@@ -85,6 +148,15 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
         
         /// <summary>
+        /// localCreateProjectStartDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localCreateProjectStartDate;
+        
+        /// <summary>
         /// txtFromDate control.
         /// </summary>
         /// <remarks>
@@ -92,6 +164,15 @@ namespace SRFROWCA.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFromDate;
+        
+        /// <summary>
+        /// localCreateProjectEndDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localCreateProjectEndDate;
         
         /// <summary>
         /// txtToDate control.

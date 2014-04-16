@@ -29,6 +29,11 @@ namespace SRFROWCA.Pages
             ToggleButtons();
         }
 
+        internal override void BindGridData()
+        {
+            PopulateClusters();
+        }
+
         private void PopulateClusters()
         {
             UI.FillEmergnecyClusters(ddlCluster, UserInfo.Emergency);
@@ -128,7 +133,7 @@ namespace SRFROWCA.Pages
             SelectProject();
             SelctProjectCode();
             ToggleButtons();
-            ShowMessage("Your Data Saved Successfuly!");
+            ShowMessage((string)GetLocalResourceObject("CreateProjects_SaveMessageSuccess"));
         }
 
         private void SelctProjectCode()

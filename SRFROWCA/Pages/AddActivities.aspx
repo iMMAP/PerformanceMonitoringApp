@@ -134,7 +134,7 @@
             try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
         </script>
         <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="../Default.aspx">
+            <li><i class="fa fa-home home-icon"></i><a href="../Default.aspx">
                 <asp:Localize ID="localBreadCrumbHome" runat="server" Text="Home" meta:resourcekey="localBreadCrumbHomeResource1"></asp:Localize></a> </li>
             <li class="active">
                 <asp:Localize ID="localBreadCrumbDataEntry" runat="server" Text="Data Entry" meta:resourcekey="localBreadCrumbDataEntryResource1"></asp:Localize></li>
@@ -155,7 +155,7 @@
                                         <h5>
                                             <asp:Localize ID="Localize1" runat="server" Text="Year/Month:" meta:resourcekey="Localize1Resource1"></asp:Localize>
                                         </h5>
-                                        <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
+                                        <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="fa fa-chevron-up"></i></a></span>
                                     </div>
                                     <div class="widget-body">
                                         <div class="widget-main">
@@ -176,7 +176,7 @@
                                             <asp:Localize ID="lzeLgndProjects" runat="server"
                                                 Text="Projects" meta:resourcekey="lzeLgndProjectsResource1"></asp:Localize>
                                         </h5>
-                                        <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
+                                        <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="fa fa-chevron-up"></i></a></span>
                                     </div>
                                     <div class="widget-body">
                                         <div class="slim-scroll" data-height="200">
@@ -196,7 +196,7 @@
                                             <asp:Localize ID="lzeLgndStrObjs" runat="server"
                                                 Text="Strategic Objectives" meta:resourcekey="lzeLgndStrObjsResource1"></asp:Localize>
                                         </h5>
-                                        <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
+                                        <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="fa fa-chevron-up"></i></a></span>
                                     </div>
                                     <div class="widget-body">
                                         <div class="widget-main">
@@ -213,7 +213,7 @@
                                             <asp:Localize ID="lzeLgndHumPriorities" runat="server"
                                                 Text="Humanitarian Priorities" meta:resourcekey="lzeLgndHumPrioritiesResource1"></asp:Localize>
                                         </h5>
-                                        <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
+                                        <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="fa fa-chevron-up"></i></a></span>
                                     </div>
                                     <div class="widget-body">
                                         <div class="widget-main">
@@ -233,15 +233,15 @@
                         <h4>
                             <button runat="server" id="btnGeneratePDF" onserverclick="btnPDF_Export" onclick="needToConfirm = false;"
                                 class="width-10 btn btn-sm btn-yellow" title="PDF">
-                                <i class="icon-download"></i>PDF
+                                <i class="fa fa-download"></i>PDF
                             </button>
                             <button runat="server" id="btnExportToExcel" onserverclick="btnExcel_Export" onclick="needToConfirm = false;"
                                 class="width-10 btn btn-sm btn-yellow" title="Excel">
-                                <i class="icon-download"></i>Excel
+                                <i class="fa fa-download"></i>Excel
                             </button>
                         </h4>
                         <span class="widget-toolbar pull-right"><a href="#" data-action="collapse" class="pull-right">
-                            <i class="icon-chevron-up pull-right"></i></a></span>
+                            <i class="fa fa-chevron-up pull-right"></i></a></span>
                     </div>
                     <div class="widget-body">
                         <div class="widget-main">
@@ -366,7 +366,7 @@
                         </div>
                         <button id="btnSave" runat="server" onserverclick="btnSave_Click" onclick="needToConfirm = false;"
                             type="button" class="width-20 pull-right btn btn-sm btn-primary">
-                            <i class="icon-save"></i>
+                            <i class="fa fa-save"></i>
                             <asp:Localize ID="localSaveButton" runat="server" Text="Save" meta:resourcekey="localSaveButtonResource1"></asp:Localize>
                         </button>
                         <div class="space">

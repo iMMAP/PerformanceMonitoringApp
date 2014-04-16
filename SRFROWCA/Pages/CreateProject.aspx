@@ -1,5 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
-    CodeBehind="CreateProject.aspx.cs" Inherits="SRFROWCA.Pages.CreateProject" %>
+﻿<%@ Page Title="ORS Manage Projects" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+    CodeBehind="CreateProject.aspx.cs" Inherits="SRFROWCA.Pages.CreateProject" culture="auto" meta:resourcekey="PageResource1" uiculture="auto" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <script>
@@ -8,13 +8,13 @@
             $("#<%=txtFromDate.ClientID%>").datepicker({
                 numberOfMonths: 2,
                 onSelect: function (selected) {
-                    $("#<%=txtToDate.ClientID%>").datepicker("option", "minDate", selected)
+                    $("#<%=txtToDate.ClientID%>").datepicker("option", "minDate", selected);
                 }
             });
             $("#<%=txtToDate.ClientID%>").datepicker({
                 numberOfMonths: 2,
                 onSelect: function (selected) {
-                    $("#<%=txtFromDate.ClientID%>").datepicker("option", "maxDate", selected)
+                    $("#<%=txtFromDate.ClientID%>").datepicker("option", "maxDate", selected);
                 }
             });
         });
@@ -29,8 +29,10 @@
             try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
         </script>
         <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="#">Home</a> </li>
-            <li class="active">Manage Projects</li>
+            <li><i class="fa fa-home home-icon"></i><a href="../Default.aspx">
+                <asp:Localize ID="localBreadCrumbHome" runat="server" Text="Home" meta:resourcekey="localBreadCrumbHomeResource1"></asp:Localize></a> </li>
+            <li class="active">
+                <asp:Localize ID="localBreadCrumbManageProjects" runat="server" Text="Manage Projects" meta:resourcekey="localBreadCrumbDataEntryResource1"></asp:Localize></li>
         </ul>
         <!-- .breadcrumb -->
     </div>
@@ -41,19 +43,17 @@
             <div class="col-sm-3 widget-container-span">
                 <div class="widget-box">
                     <div class="widget-header widget-header-small header-color-blue2">
-                        <h4>
-                        Projects List
+                        <h4>Projects
                         </h4>
-                        <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up">
-                        </i></a></span>
+                        <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="fa fa-chevron-up"></i></a></span>
                     </div>
                     <div class="widget-body">
                         <div class="widget-main">
-                            <asp:RadioButtonList ID="rblProjects" runat="server" AutoPostBack="true" OnSelectedIndexChanged="rblProjects_SelectedIndexChanged">
+                            <asp:RadioButtonList ID="rblProjects" runat="server" AutoPostBack="True" OnSelectedIndexChanged="rblProjects_SelectedIndexChanged" meta:resourcekey="rblProjectsResource1">
                             </asp:RadioButtonList>
                             <div class="space"></div>
                             <asp:Button ID="btnCreateProject" runat="server" Text="Create New Project" CssClass="btn btn-primary"
-                                CausesValidation="false" OnClick="btnCreateProject_Click" />
+                                CausesValidation="False" OnClick="btnCreateProject_Click" meta:resourcekey="btnCreateProjectResource1" />
                         </div>
                     </div>
                 </div>
@@ -62,10 +62,10 @@
                 <div class="widget-box">
                     <div class="widget-header widget-header-small header-color-blue2">
                         <h4>
-                            Add/Edit Project
+                            <asp:Localize ID="localMangeProjAddEditCaption" runat="server" Text="Add/Edit Project" meta:resourcekey="localMangeProjAddEditCaptionResource1"></asp:Localize>
                         </h4>
                         <span class="widget-toolbar pull-right"><a href="#" data-action="collapse" class="pull-right">
-                            <i class="icon-chevron-up pull-right"></i></a></span>
+                            <i class="fa fa-chevron-up pull-right"></i></a></span>
                     </div>
                     <div class="widget-body">
                         <div class="widget-main">
@@ -73,76 +73,76 @@
                                 <tr>
                                     <td>
                                         <label>
-                                            Project Code:</label>
+                                            <asp:Localize ID="localProjectCode" runat="server" Text="Project Code:" meta:resourcekey="localProjectCodeResource1"></asp:Localize> </label>
                                     </td>
                                     <td>
                                         <label>
-                                            <asp:Literal ID="ltrlProjectCode" runat="server" Text=""></asp:Literal></label>
+                                            <asp:Literal ID="ltrlProjectCode" runat="server" meta:resourcekey="ltrlProjectCodeResource1"></asp:Literal></label>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <label>
-                                            Project Title:</label>
+                                            <asp:Localize ID="localProjectTitle" runat="server" Text="Project Title:" meta:resourcekey="localProjectTitleResource1"></asp:Localize></label>
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="txtProjectTitle" runat="server" Width="500px" TextMode="MultiLine"></asp:TextBox>
+                                        <asp:TextBox ID="txtProjectTitle" runat="server" Width="500px" TextMode="MultiLine" meta:resourcekey="txtProjectTitleResource1"></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="rfvTitle" runat="server" ControlToValidate="txtProjectTitle"
-                                            CssClass="error2" Text="Required" ErrorMessage="Required." ToolTip="Required.">Required.</asp:RequiredFieldValidator>
+                                            CssClass="error2" Text="Required." ErrorMessage="Required." ToolTip="Required." meta:resourcekey="rfvTitleResource1"></asp:RequiredFieldValidator>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <label>
-                                            Project Objective:</label>
+                                            <asp:Localize ID="localProjectObjective" runat="server" Text="Project Objective:" meta:resourcekey="localProjectObjectiveResource1"></asp:Localize></label>
                                     </td>
                                     <td>
                                         <asp:TextBox ID="txtProjectObjective" runat="server" Width="500px" Height="100px"
-                                            TextMode="MultiLine"></asp:TextBox>
+                                            TextMode="MultiLine" meta:resourcekey="txtProjectObjectiveResource1"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <label>
-                                            Cluster:</label>
+                                            <asp:Localize ID="localCluster" runat="server" Text="Cluster:" meta:resourcekey="localClusterResource1"></asp:Localize></label>
                                     </td>
                                     <td>
-                                        <asp:DropDownList ID="ddlCluster" runat="server" Width="320px">
+                                        <asp:DropDownList ID="ddlCluster" runat="server" Width="320px" meta:resourcekey="ddlClusterResource1">
                                         </asp:DropDownList>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Required"
-                                            CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCluster"></asp:RequiredFieldValidator>
+                                            CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCluster" meta:resourcekey="RequiredFieldValidator1Resource1"></asp:RequiredFieldValidator>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <label>
-                                            Start Date:</label>
+                                            <asp:Localize ID="localCreateProjectStartDate" runat="server" Text="Start Date:" meta:resourcekey="localCreateProjectStartDateResource1"></asp:Localize></label>
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="txtFromDate" runat="server"></asp:TextBox><label>(mm/dd/yyyy)</label>
+                                        <asp:TextBox ID="txtFromDate" runat="server" meta:resourcekey="txtFromDateResource1"></asp:TextBox><label>(mm/dd/yyyy)</label>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <label>
-                                            End Date:</label>
+                                            <asp:Localize ID="localCreateProjectEndDate" runat="server" Text="End Date:" meta:resourcekey="localCreateProjectEndDateResource1"></asp:Localize></label>
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="txtToDate" runat="server"></asp:TextBox><label>(mm/dd/yyyy)</label>
+                                        <asp:TextBox ID="txtToDate" runat="server" meta:resourcekey="txtToDateResource1"></asp:TextBox><label>(mm/dd/yyyy)</label>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">
                                         <asp:Button ID="btnSave" runat="server" Text="Save & Stay" CssClass="btn btn-primary"
-                                            OnClick="btnSave_Click" />
+                                            OnClick="btnSave_Click" meta:resourcekey="btnSaveResource1" />
                                         <asp:Button ID="btnSaveClose" runat="server" Text="Save & Close" CssClass="btn btn-primary"
-                                            OnClick="btnSaveClose_Click" />
-                                        <asp:Button ID="btnManageActivities" runat="server" Text="Manage Activities" CssClass="btn btn-primary" Enabled="false"
-                                            CausesValidation="false" OnClick="btnManageActivities_Click" />
+                                            OnClick="btnSaveClose_Click" meta:resourcekey="btnSaveCloseResource1" />
+                                        <asp:Button ID="btnManageActivities" runat="server" Text="Manage Activities" CssClass="btn btn-primary" Enabled="False"
+                                            CausesValidation="False" OnClick="btnManageActivities_Click" meta:resourcekey="btnManageActivitiesResource1" />
                                     </td>
                                     <td>
                                         <asp:Button ID="btnDeleteProject" runat="server" Text="Delete Project" CssClass="btn btn-danger"
-                                            CausesValidation="false" OnClick="btnDeleteProject_Click" OnClientClick="javascript:return confirm('Are you sure your want to delete this project?');" />
+                                            CausesValidation="False" OnClick="btnDeleteProject_Click" OnClientClick="javascript:return confirm('Are you sure your want to delete this project?');" meta:resourcekey="btnDeleteProjectResource1" />
                                     </td>
                                 </tr>
                             </table>
