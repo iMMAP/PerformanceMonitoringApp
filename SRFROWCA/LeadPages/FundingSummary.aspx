@@ -9,7 +9,7 @@
 									<div class="col-sm-7 infobox-container">
 										<div class="infobox infobox-green  ">
 											<div class="infobox-icon">
-												<i class="fa fa-building-o"></i>
+												<i class="icon-building-o"></i>
 											</div>
 
 											<div class="infobox-data">
@@ -21,7 +21,7 @@
 
 										<div class="infobox infobox-blue  ">
 											<div class="infobox-icon">
-												<i class="fa fa-twitter"></i>
+												<i class="icon-twitter"></i>
 											</div>
 
 											<div class="infobox-data">
@@ -31,13 +31,13 @@
 
 											<div class="badge badge-success">
 												+32%
-												<i class="fa fa-arrow-up"></i>
+												<i class="icon-arrow-up"></i>
 											</div>
 										</div>
 
 										<div class="infobox infobox-pink  ">
 											<div class="infobox-icon">
-												<i class="fa fa-shopping-cart"></i>
+												<i class="icon-shopping-cart"></i>
 											</div>
 
 											<div class="infobox-data">
@@ -49,7 +49,7 @@
 
 										<div class="infobox infobox-red  ">
 											<div class="infobox-icon">
-												<i class="fa fa-beaker"></i>
+												<i class="icon-beaker"></i>
 											</div>
 
 											<div class="infobox-data">
@@ -70,7 +70,7 @@
 
 											<div class="badge badge-success">
 												7.2%
-												<i class="fa fa-arrow-up"></i>
+												<i class="icon-arrow-up"></i>
 											</div>
 										</div>
 
@@ -119,7 +119,7 @@
 
 										<div class="infobox infobox-grey infobox-small infobox-dark">
 											<div class="infobox-icon">
-												<i class="fa fa-download-alt"></i>
+												<i class="icon-download-alt"></i>
 											</div>
 
 											<div class="infobox-data">
@@ -135,41 +135,41 @@
 										<div class="widget-box">
 											<div class="widget-header widget-header-flat widget-header-small">
 												<h5>
-													<i class="fa fa-signal"></i>
+													<i class="icon-signal"></i>
 													Traffic Sources
 												</h5>
 
 												<div class="widget-toolbar no-border">
 													<button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown">
 														This Week
-														<i class="fa fa-angle-down fa fa-on-right bigger-110"></i>
+														<i class="icon-angle-down icon-on-right bigger-110"></i>
 													</button>
 
 													<ul class="dropdown-menu pull-right dropdown-125 dropdown-lighter dropdown-caret">
 														<li class="active">
 															<a href="#" class="blue">
-																<i class="fa fa-caret-right bigger-110">&nbsp;</i>
+																<i class="icon-caret-right bigger-110">&nbsp;</i>
 																This Week
 															</a>
 														</li>
 
 														<li>
 															<a href="#">
-																<i class="fa fa-caret-right bigger-110 invisible">&nbsp;</i>
+																<i class="icon-caret-right bigger-110 invisible">&nbsp;</i>
 																Last Week
 															</a>
 														</li>
 
 														<li>
 															<a href="#">
-																<i class="fa fa-caret-right bigger-110 invisible">&nbsp;</i>
+																<i class="icon-caret-right bigger-110 invisible">&nbsp;</i>
 																This Month
 															</a>
 														</li>
 
 														<li>
 															<a href="#">
-																<i class="fa fa-caret-right bigger-110 invisible">&nbsp;</i>
+																<i class="icon-caret-right bigger-110 invisible">&nbsp;</i>
 																Last Month
 															</a>
 														</li>
@@ -186,7 +186,7 @@
 													<div class="clearfix">
 														<div class="grid3">
 															<span class="grey">
-																<i class="fa fa-facebook-sign fa fa-2x blue"></i>
+																<i class="icon-facebook-sign icon-2x blue"></i>
 																&nbsp; likes
 															</span>
 															<h4 class="bigger pull-right">1,255</h4>
@@ -194,7 +194,7 @@
 
 														<div class="grid3">
 															<span class="grey">
-																<i class="fa fa-twitter-sign fa fa-2x purple"></i>
+																<i class="icon-twitter-sign icon-2x purple"></i>
 																&nbsp; tweets
 															</span>
 															<h4 class="bigger pull-right">941</h4>
@@ -202,7 +202,7 @@
 
 														<div class="grid3">
 															<span class="grey">
-																<i class="fa fa-pinterest-sign fa fa-2x red"></i>
+																<i class="icon-pinterest-sign icon-2x red"></i>
 																&nbsp; pins
 															</span>
 															<h4 class="bigger pull-right">1,050</h4>
