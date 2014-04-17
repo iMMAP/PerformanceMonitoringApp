@@ -29,7 +29,7 @@
             try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
         </script>
         <ul class="breadcrumb">
-            <li><i class="fa fa-home home-icon"></i><a href="../Default.aspx">
+            <li><i class="icon-home home-icon"></i><a href="../Default.aspx">
                 <asp:Localize ID="localBreadCrumbHome" runat="server" Text="Home" meta:resourcekey="localBreadCrumbHomeResource1"></asp:Localize></a> </li>
             <li class="active">
                 <asp:Localize ID="localBreadCrumbManageProjects" runat="server" Text="Manage Projects" meta:resourcekey="localBreadCrumbDataEntryResource1"></asp:Localize></li>
@@ -45,7 +45,7 @@
                     <div class="widget-header widget-header-small header-color-blue2">
                         <h4>Projects
                         </h4>
-                        <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="fa fa-chevron-up"></i></a></span>
+                        <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
                     </div>
                     <div class="widget-body">
                         <div class="widget-main">
@@ -64,8 +64,6 @@
                         <h4>
                             <asp:Localize ID="localMangeProjAddEditCaption" runat="server" Text="Add/Edit Project" meta:resourcekey="localMangeProjAddEditCaptionResource1"></asp:Localize>
                         </h4>
-                        <span class="widget-toolbar pull-right"><a href="#" data-action="collapse" class="pull-right">
-                            <i class="fa fa-chevron-up pull-right"></i></a></span>
                     </div>
                     <div class="widget-body">
                         <div class="widget-main">

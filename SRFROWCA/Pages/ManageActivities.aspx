@@ -38,7 +38,7 @@
             try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
         </script>
         <ul class="breadcrumb">
-            <li><i class="fa fa-home home-icon"></i><a href="../Default.aspx">
+            <li><i class="icon-home home-icon"></i><a href="../Default.aspx">
                 <asp:Localize ID="localBreadCrumbHome" runat="server" Text="Home" meta:resourcekey="localBreadCrumbHomeResource1"></asp:Localize></a> </li>
             <li class="active">
                 <asp:Localize ID="localBreadCrumbManageProjectActiviites" runat="server" Text="Manage Project Activities" meta:resourcekey="localBreadCrumbManageProjectActiviitesResource1"></asp:Localize></li>
@@ -60,7 +60,7 @@
                                             <asp:Localize ID="lzeLgndProjects" runat="server"
                                                 Text="Projects" meta:resourcekey="lzeLgndProjectsResource1"></asp:Localize>
                                         </h5>
-                                        <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="fa fa-chevron-up"></i></a></span>
+                                        <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
                                     </div>
                                     <div class="widget-body">
                                         <div class="widget-main">
@@ -77,7 +77,7 @@
                                             <asp:Localize ID="lzeLgndStrObjs" runat="server"
                                                 Text="Strategic Objectives" meta:resourcekey="lzeLgndStrObjsResource1"></asp:Localize>
                                         </h5>
-                                        <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="fa fa-chevron-up"></i></a></span>
+                                        <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
                                     </div>
                                     <div class="widget-body">
                                         <div class="widget-main">
@@ -94,7 +94,7 @@
                                             <asp:Localize ID="lzeLgndHumPriorities" runat="server"
                                                 Text="Humanitarian Priorities" meta:resourcekey="lzeLgndHumPrioritiesResource1"></asp:Localize>
                                         </h5>
-                                        <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="fa fa-chevron-up"></i></a></span>
+                                        <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
                                     </div>
                                     <div class="widget-body">
                                         <div class="widget-main">
@@ -114,8 +114,7 @@
                         <h4>
                             <asp:Localize ID="local" runat="server" Text="Master List Of Cluster Indicators" meta:resourcekey="localResource1"></asp:Localize>
                         </h4>
-                        <span class="widget-toolbar pull-right"><a href="#" data-action="collapse" class="pull-right">
-                            <i class="fa fa-chevron-up pull-right"></i></a></span>
+                        
                     </div>
                     <div class="widget-body">
                         <div class="widget-main">
