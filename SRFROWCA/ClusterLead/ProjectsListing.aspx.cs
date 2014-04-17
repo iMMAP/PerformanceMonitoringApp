@@ -7,6 +7,10 @@ using System.Web.UI.WebControls;
 using SRFROWCA.Common;
 using System.Data;
 using BusinessLogic;
+using System.IO;
+using iTextSharp.text.html.simpleparser;
+using iTextSharp.text.pdf;
+using System.Web.UI.HtmlControls;
 
 namespace SRFROWCA.ClusterLead
 {

@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
-    CodeBehind="AddSRPActivitiesFromMasterList.aspx.cs" Inherits="SRFROWCA.ClusterLead.AddSRPActivitiesFromMasterList" %>
+    CodeBehind="AddSRPActivitiesFromMasterList.aspx.cs" Inherits="SRFROWCA.ClusterLead.AddSRPActivitiesFromMasterList" culture="auto" meta:resourcekey="PageResource1" uiculture="auto" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <title>Country Indicators </title>
@@ -71,8 +71,10 @@
                 try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
             </script>
             <ul class="breadcrumb">
-                <li><i class="fa fa-home home-icon"></i><a href="#">Home</a> </li>
-                <li class="active">Select Regional Indicators</li>
+                <li><i class="icon-home home-icon"></i><a href="../Default.aspx">
+                    <asp:Localize ID="localBreadCrumbHome" runat="server" Text="Home" meta:resourcekey="localBreadCrumbHomeResource1"></asp:Localize></a> </li>
+                <li class="active">
+                    <asp:Localize ID="localBreadCrumbCountryIndicators" runat="server" Text="Country Indicators" meta:resourcekey="localBreadCrumbCountryIndicatorsResource1"></asp:Localize></li>
             </ul>
             <!-- .breadcrumb -->
         </div>
@@ -88,13 +90,13 @@
                                             <div class="widget-box">
                                                 <div class="widget-header widget-header-small header-color-blue2">
                                                     <h5>
-                                                        Strategic Objectives</h5>
-                                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="fa fa-chevron-up">
-                                                    </i></a></span>
+                                                        <asp:Localize ID="localCountryIndicatorsSO" runat="server" Text="Strategic Objectives" meta:resourcekey="localCountryIndicatorsSOResource1"></asp:Localize>
+                                                    </h5>
+                                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
                                                 </div>
                                                 <div class="widget-body">
                                                     <div class="widget-main">
-                                                        <asp:CheckBoxList ID="cblObjectives" runat="server" CssClass="checkObj">
+                                                        <asp:CheckBoxList ID="cblObjectives" runat="server" CssClass="checkObj" meta:resourcekey="cblObjectivesResource1">
                                                         </asp:CheckBoxList>
                                                     </div>
                                                 </div>
@@ -104,13 +106,13 @@
                                             <div class="widget-box">
                                                 <div class="widget-header widget-header-small header-color-blue2">
                                                     <h5>
-                                                        Humanitarian Priorities</h5>
-                                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="fa fa-chevron-up">
-                                                    </i></a></span>
+                                                        <asp:Localize ID="localCountryIndicatorsHP" runat="server" Text="Humanitarian Priorities" meta:resourcekey="localCountryIndicatorsHPResource1"></asp:Localize>
+                                                    </h5>
+                                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
                                                 </div>
                                                 <div class="widget-body">
                                                     <div class="widget-main">
-                                                        <asp:CheckBoxList ID="cblPriorities" runat="server" CssClass="checkPr">
+                                                        <asp:CheckBoxList ID="cblPriorities" runat="server" CssClass="checkPr" meta:resourcekey="cblPrioritiesResource1">
                                                         </asp:CheckBoxList>
                                                     </div>
                                                 </div>
@@ -120,9 +122,9 @@
                                             <div class="widget-box">
                                                 <div class="widget-header widget-header-small header-color-blue2">
                                                     <h5>
-                                                        Search Activity/Indicator</h5>
-                                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="fa fa-chevron-up">
-                                                    </i></a></span>
+                                                        <asp:Localize ID="localCountryIndicatorsSearchActivity" runat="server" Text="Search Activity/Indicator" meta:resourcekey="localCountryIndicatorsSearchActivityResource1"></asp:Localize>
+                                                    </h5>
+                                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
                                                 </div>
                                                 <div class="widget-body">
                                                     <div class="widget-main">
@@ -140,25 +142,29 @@
                         </div>
                         <div class="col-sm-9 widget-container-span">
                             <div class="widget-box">
-                                <div class="widget-header widget-header-small header-color-blue2">
-                                    <h4>
-                                        <asp:Localize ID="localizeClusterName" runat="server" Text=""></asp:Localize>
-                                    </h4>
-                                    <button runat="server" id="btnExportToExcel" onserverclick="ExportToExcel" class="width-10 btn btn-sm btn-yellow"
+                                <div class="widget-header widget-header header-color-blue2">
+                                    <div class="col-sm-3">
+                                        <button runat="server" id="btnExportToExcel" onserverclick="ExportToExcel" class="width-10 btn btn-sm btn-yellow"
                                             title="Excel">
-                                            <i class="fa fa-download"></i>Excel
+                                            <i class="icon-download"></i>Excel
                                         </button>
-                                    <span class="widget-toolbar pull-right"><a href="#" data-action="collapse"><i class="fa fa-chevron-up">
-                                    </i></a></span>
-                                    <div class="btn-group pull-right">
-                                        <button runat="server" id="btnAddSRPActivity" onserverclick="btnAddSRPActivity_Click"
-                                            class="width-10 btn btn-sm btn-yellow" title="Add Indicator">
-                                            Add Activity & Indicator
-                                        </button>
-                                        <button runat="server" id="btnAddIndicator" onserverclick="btnAddIndicator_Click"
-                                            class="width-10 btn btn-sm btn-yellow" title="Add Indicator">
-                                            Add Indicator
-                                        </button>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <h4>
+                                            <asp:Localize ID="localizeClusterName" runat="server" meta:resourcekey="localizeClusterNameResource1"></asp:Localize>
+                                        </h4>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="btn-group pull-right">
+                                            <button runat="server" id="btnAddSRPActivity" onserverclick="btnAddSRPActivity_Click"
+                                                class="width-10 btn btn-sm btn-yellow" title="Add Indicator">
+                                                <asp:Localize ID="localCountryIndicatorsAddAct" runat="server" Text="Add Activity & Indicator" meta:resourcekey="localCountryIndicatorsAddActResource1"></asp:Localize>
+                                            </button>
+                                            <button runat="server" id="btnAddIndicator" onserverclick="btnAddIndicator_Click"
+                                                class="width-10 btn btn-sm btn-yellow" title="Add Indicator">
+                                                <asp:Localize ID="localCountryIndicaotrsAddInd" runat="server" Text="Add Indicator" meta:resourcekey="localCountryIndicaotrsAddIndResource1"></asp:Localize>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="widget-body">
@@ -166,50 +172,74 @@
                                         <asp:GridView ID="gvSRPIndicators" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True"
                                             HeaderStyle-BackColor="ButtonFace" DataKeyNames="ActivityDataId" CssClass="imagetable"
                                             Width="100%" OnRowDataBound="gvSRPIndicators_RowDataBound" OnRowCommand="gvSRPIndicators_RowCommand" EmptyDataText="Your Cluster Doesn Not Have Mastre List or SRP List Of Activities"
-                                            AllowSorting="true" OnSorting="gvSRPIndicators_Sorting">
+                                            AllowSorting="True" OnSorting="gvSRPIndicators_Sorting" meta:resourcekey="gvSRPIndicatorsResource1">
                                             <HeaderStyle BackColor="Control"></HeaderStyle>
                                             <RowStyle CssClass="istrow" />
                                             <AlternatingRowStyle CssClass="altcolor" />
                                             <Columns>
                                                 <asp:BoundField DataField="ObjectiveId" HeaderText="ObjectiveId" ItemStyle-Width="1px"
-                                                    ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden"></asp:BoundField>
+                                                    ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource1">
+<HeaderStyle CssClass="hidden"></HeaderStyle>
+
+<ItemStyle CssClass="hidden" Width="1px"></ItemStyle>
+                                                </asp:BoundField>
                                                 <asp:BoundField DataField="HumanitarianPriorityId" HeaderText="HumanitarianPriorityId"
-                                                    ItemStyle-Width="1px" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden">
+                                                    ItemStyle-Width="1px" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource2">
+<HeaderStyle CssClass="hidden"></HeaderStyle>
+
+<ItemStyle CssClass="hidden" Width="1px"></ItemStyle>
                                                 </asp:BoundField>
                                                 <asp:BoundField DataField="ObjAndPrId" HeaderText="objprid" ItemStyle-Width="1px"
-                                                    ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden"></asp:BoundField>
-                                                <asp:TemplateField HeaderStyle-Width="100px" HeaderText="Objective & Priority">
+                                                    ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource3">
+<HeaderStyle CssClass="hidden"></HeaderStyle>
+
+<ItemStyle CssClass="hidden" Width="1px"></ItemStyle>
+                                                </asp:BoundField>
+                                                <asp:TemplateField HeaderStyle-Width="100px" HeaderText="Objective & Priority" meta:resourcekey="TemplateFieldResource1">
                                                     <ItemTemplate>
-                                                        <asp:Image ID="imgObjective" runat="server" AlternateText="O" />
-                                                        <asp:Image ID="imgPriority" runat="server" AlternateText="P" />
-                                                        <asp:Image ID="imgRind" runat="server" />
+                                                        <asp:Image ID="imgObjective" runat="server" AlternateText="O" meta:resourcekey="imgObjectiveResource1" />
+                                                        <asp:Image ID="imgPriority" runat="server" AlternateText="P" meta:resourcekey="imgPriorityResource1" />
+                                                        <asp:Image ID="imgRind" runat="server" meta:resourcekey="imgRindResource1" />
                                                     </ItemTemplate>
+
+<HeaderStyle Width="100px"></HeaderStyle>
                                                 </asp:TemplateField>
                                                 <asp:BoundField DataField="ActivityName" HeaderText="Activity" ItemStyle-CssClass="testact"
-                                                    SortExpression="ActivityName"></asp:BoundField>
-                                                <asp:BoundField DataField="IsRegional" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" />
+                                                    SortExpression="ActivityName" meta:resourcekey="BoundFieldResource4">
+<ItemStyle CssClass="testact"></ItemStyle>
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="IsRegional" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource5" >
+<HeaderStyle CssClass="hidden"></HeaderStyle>
+
+<ItemStyle CssClass="hidden"></ItemStyle>
+                                                </asp:BoundField>
                                                 <asp:TemplateField HeaderText="" HeaderStyle-CssClass="hidden" SortExpression="IsRegional"
-                                                    ItemStyle-CssClass="hidden">
+                                                    ItemStyle-CssClass="hidden" meta:resourcekey="TemplateFieldResource2">
                                                     <ItemTemplate>
                                                         <asp:CheckBox ID="chkRegional" runat="server" Checked='<%# Eval("IsRegional") %>'
-                                                            CssClass="testrcb" Enabled="false" />
+                                                            CssClass="testrcb" Enabled="False" meta:resourcekey="chkRegionalResource1" />
                                                     </ItemTemplate>
+
+<HeaderStyle CssClass="hidden"></HeaderStyle>
+
                                                     <ItemStyle Width="2%" />
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Country Indicator" meta:resourcekey="TemplateFieldResource2"
                                                     SortExpression="IsSRP" ItemStyle-Width="40px">
                                                     <ItemTemplate>
-                                                        <asp:CheckBox ID="chkSRP" runat="server" AutoPostBack="true" OnCheckedChanged="chkSRP_CheckedChanged"
-                                                            Checked='<%# Eval("IsSRP") %>' CssClass="testcb" />
+                                                        <asp:CheckBox ID="chkSRP" runat="server" AutoPostBack="True" OnCheckedChanged="chkSRP_CheckedChanged"
+                                                            Checked='<%# Eval("IsSRP") %>' CssClass="testcb" meta:resourcekey="chkSRPResource1" />
                                                     </ItemTemplate>
                                                     <ItemStyle Width="2%" />
                                                 </asp:TemplateField>
-                                                <asp:BoundField DataField="Indicator" HeaderText="Output Indicator" ItemStyle-CssClass="testind"
-                                                    SortExpression="Indicator" ItemStyle-Wrap="true"></asp:BoundField>
-                                                <asp:TemplateField>
+                                                <asp:BoundField DataField="Indicator" HeaderText="Indicator" ItemStyle-CssClass="testind"
+                                                    SortExpression="Indicator" ItemStyle-Wrap="true" meta:resourcekey="BoundFieldResource6">
+<ItemStyle Wrap="True" CssClass="testind"></ItemStyle>
+                                                </asp:BoundField>
+                                                <asp:TemplateField meta:resourcekey="TemplateFieldResource3">
                                                     <ItemTemplate>
                                                         <asp:LinkButton ID="lnkVieDetails" runat="server" Text="Edit" CommandName="EditIndicator"
-                                                            CommandArgument='<%# Eval("ActivityDataId") %>' />
+                                                            CommandArgument='<%# Eval("ActivityDataId") %>' meta:resourcekey="lnkVieDetailsResource1" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                             </Columns>

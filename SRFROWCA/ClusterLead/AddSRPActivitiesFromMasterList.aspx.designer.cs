@@ -13,6 +13,33 @@ namespace SRFROWCA.ClusterLead {
     public partial class AddSRPActivitiesFromMasterList {
         
         /// <summary>
+        /// localBreadCrumbHome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localBreadCrumbHome;
+        
+        /// <summary>
+        /// localBreadCrumbCountryIndicators control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localBreadCrumbCountryIndicators;
+        
+        /// <summary>
+        /// localCountryIndicatorsSO control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localCountryIndicatorsSO;
+        
+        /// <summary>
         /// cblObjectives control.
         /// </summary>
         /// <remarks>
@@ -20,6 +47,15 @@ namespace SRFROWCA.ClusterLead {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBoxList cblObjectives;
+        
+        /// <summary>
+        /// localCountryIndicatorsHP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localCountryIndicatorsHP;
         
         /// <summary>
         /// cblPriorities control.
@@ -31,13 +67,13 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.CheckBoxList cblPriorities;
         
         /// <summary>
-        /// localizeClusterName control.
+        /// localCountryIndicatorsSearchActivity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localizeClusterName;
+        protected global::System.Web.UI.WebControls.Localize localCountryIndicatorsSearchActivity;
         
         /// <summary>
         /// btnExportToExcel control.
@@ -49,6 +85,15 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.HtmlControls.HtmlButton btnExportToExcel;
         
         /// <summary>
+        /// localizeClusterName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localizeClusterName;
+        
+        /// <summary>
         /// btnAddSRPActivity control.
         /// </summary>
         /// <remarks>
@@ -58,6 +103,15 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.HtmlControls.HtmlButton btnAddSRPActivity;
         
         /// <summary>
+        /// localCountryIndicatorsAddAct control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localCountryIndicatorsAddAct;
+        
+        /// <summary>
         /// btnAddIndicator control.
         /// </summary>
         /// <remarks>
@@ -65,6 +119,15 @@ namespace SRFROWCA.ClusterLead {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton btnAddIndicator;
+        
+        /// <summary>
+        /// localCountryIndicaotrsAddInd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localCountryIndicaotrsAddInd;
         
         /// <summary>
         /// gvSRPIndicators control.

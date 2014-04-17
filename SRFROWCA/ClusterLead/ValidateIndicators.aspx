@@ -12,7 +12,7 @@
             try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
         </script>
         <ul class="breadcrumb">
-            <li><i class="fa fa-home home-icon"></i><a href="#">Home</a> </li>
+            <li><i class="icon-home home-icon"></i><a href="#">Home</a> </li>
             <li><a href="ValidateReportList.aspx">Validate</a></li>
             <li class="active">Validate Indicators</li>
         </ul>
@@ -30,7 +30,7 @@
                                         Report Details
                                     </h6>
                                     <div class="widget-toolbar">
-                                        <a href="#" data-action="collapse"><i class="fa fa-chevron-down"></i></a>
+                                        <a href="#" data-action="collapse"><i class="icon-chevron-down"></i></a>
                                     </div>
                                 </div>
                                 <div class="widget-body">
@@ -98,7 +98,7 @@
                                         Validate Reported Indicators
                                     </h6>
                                     <div class="widget-toolbar">
-                                        <a href="#" data-action="collapse"><i class="fa fa-chevron-down"></i></a>
+                                        <a href="#" data-action="collapse"><i class="icon-chevron-down"></i></a>
                                     </div>
                                 </div>
                                 <div class="widget-body">
@@ -106,10 +106,10 @@
                                         <div class="btn-toolbar">
                                             <div class="btn-group">
                                                 <button runat="server" id="btnApprove" onserverclick="btnApprove_Click" class="btn btn-sm btn-success">
-                                                    <i class="fa fa-ok bigger-110"></i>Approve
+                                                    <i class="icon-ok bigger-110"></i>Approve
                                                 </button>
                                                 <%--<button runat="server" id="btnReject" onserverclick="btnReject_Click" class="btn btn-sm btn-danger">
-                                                    <i class="fa fa-remove bigger-110"></i>Reject
+                                                    <i class="icon-remove bigger-110"></i>Reject
                                                 </button>--%>
                                             </div>
                                         </div>

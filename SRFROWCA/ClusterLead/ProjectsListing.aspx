@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
-    CodeBehind="ProjectsListing.aspx.cs" Inherits="SRFROWCA.ClusterLead.ProjectsListing" %>
+    CodeBehind="ProjectsListing.aspx.cs" Inherits="SRFROWCA.ClusterLead.ProjectsListing" culture="auto" meta:resourcekey="PageResource1" uiculture="auto" EnableEventValidation="false" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
@@ -9,13 +9,15 @@
             try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
         </script>
         <ul class="breadcrumb">
-            <li><i class="fa fa-home home-icon"></i><a href="#">Home</a> </li>
-            <li class="active">Projects</li>            
+            <li><i class="icon-home home-icon"></i><a href="../Default.aspx">
+                <asp:Localize ID="localBreadCrumbHome" runat="server" Text="Home" meta:resourcekey="localBreadCrumbHomeResource1"></asp:Localize></a> </li>
+            <li class="active">
+                <asp:Localize ID="localBreadCrumbProjects" runat="server" Text="Projects" meta:resourcekey="localBreadCrumbProjectsResource1"></asp:Localize></li>
         </ul>
         <!-- .breadcrumb -->
     </div>
     <div class="page-content">
-        <table width="100%">
+        <table class="width-100">
             <tr>
                 <td>
                     <div class="row">
@@ -23,13 +25,13 @@
                             <div class="widget-box">
                                 <div class="widget-header widget-header-small header-color-blue2">
                                     <h6>
-                                         <button runat="server" id="btnExportToExcel" onserverclick="ExportToExcel" class="width-10 btn btn-sm btn-yellow"
+                                        <button runat="server" id="btnExportToExcel" onserverclick="ExportToExcel" class="width-10 btn btn-sm btn-yellow"
                                             title="Excel">
-                                            <i class="fa fa-download"></i>Excel
+                                            <i class="icon-download"></i>Excel
                                         </button>
                                     </h6>
                                     <div class="widget-toolbar">
-                                        <a href="#" data-action="collapse"><i class="fa fa-chevron-down"></i></a>
+                                        <a href="#" data-action="collapse"><i class="icon-chevron-down"></i></a>
                                     </div>
                                 </div>
                                 <div class="widget-body">
@@ -43,49 +45,49 @@
                                                                 <div class="widget-main padding-6">
                                                                     <table class="width-100">
                                                                         <tr>
-                                                                            <td width="100px">
-                                                                                Admin 1:
+                                                                            <td width="150px">
+                                                                                <asp:Localize ID="localAdmin1" runat="server" Text="Region:" meta:resourcekey="localAdmin1Resource1"></asp:Localize>
                                                                             </td>
                                                                             <td>
-                                                                                <asp:DropDownList ID="ddlAdmin1" runat="server" CssClass="width-90" AutoPostBack="true"
-                                                                                    OnSelectedIndexChanged="ddlAdmin1_SelectedIndexChanged">
+                                                                                <asp:DropDownList ID="ddlAdmin1" runat="server" CssClass="width-90" AutoPostBack="True"
+                                                                                    OnSelectedIndexChanged="ddlAdmin1_SelectedIndexChanged" meta:resourcekey="ddlAdmin1Resource1">
                                                                                 </asp:DropDownList>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>
-                                                                                Admin 2:
+                                                                                <asp:Localize ID="Localize1" runat="server" Text="Cercle:" meta:resourcekey="Localize1Resource1"></asp:Localize>
                                                                             </td>
                                                                             <td>
-                                                                                <asp:DropDownList ID="ddlAdmin2" runat="server" CssClass="width-90" AutoPostBack="true"
-                                                                                    OnSelectedIndexChanged="ddlAdmin1_SelectedIndexChanged">
+                                                                                <asp:DropDownList ID="ddlAdmin2" runat="server" CssClass="width-90" AutoPostBack="True"
+                                                                                    OnSelectedIndexChanged="ddlAdmin1_SelectedIndexChanged" meta:resourcekey="ddlAdmin2Resource1">
                                                                                 </asp:DropDownList>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>
-                                                                                Reporting:
+                                                                                <asp:Localize ID="Localize2" runat="server" Text="Reporting Status:" meta:resourcekey="Localize2Resource1"></asp:Localize>
                                                                             </td>
                                                                             <td>
-                                                                                <asp:CheckBoxList ID="cblReportingStatus" runat="server" RepeatColumns="2" AutoPostBack="true"
-                                                                                    OnSelectedIndexChanged="cblReportingStatus_SelectedIndexChanged">
-                                                                                    <asp:ListItem Text="Yes" Value="1">
+                                                                                <asp:CheckBoxList ID="cblReportingStatus" runat="server" RepeatColumns="2" AutoPostBack="True"
+                                                                                    OnSelectedIndexChanged="cblReportingStatus_SelectedIndexChanged" meta:resourcekey="cblReportingStatusResource1">
+                                                                                    <asp:ListItem Text="Yes" Value="1" meta:resourcekey="ListItemResource1">
                                                                                     </asp:ListItem>
-                                                                                    <asp:ListItem Text="No" Value="0">
+                                                                                    <asp:ListItem Text="No" Value="0" meta:resourcekey="ListItemResource2">
                                                                                     </asp:ListItem>
                                                                                 </asp:CheckBoxList>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>
-                                                                                Fund Status:
+                                                                                <asp:Localize ID="Localize3" runat="server" Text="Funding Status:" meta:resourcekey="Localize3Resource1"></asp:Localize>
                                                                             </td>
                                                                             <td>
-                                                                                <asp:CheckBoxList ID="cblFundingStatus" runat="server" RepeatColumns="2" AutoPostBack="true"
-                                                                                OnSelectedIndexChanged="ddlOrg_SelectedIndexChanged">
-                                                                                    <asp:ListItem Text="Yes" Value="1">
+                                                                                <asp:CheckBoxList ID="cblFundingStatus" runat="server" RepeatColumns="2" AutoPostBack="True"
+                                                                                    OnSelectedIndexChanged="ddlOrg_SelectedIndexChanged" meta:resourcekey="cblFundingStatusResource1">
+                                                                                    <asp:ListItem Text="Yes" Value="1" meta:resourcekey="ListItemResource3">
                                                                                     </asp:ListItem>
-                                                                                    <asp:ListItem Text="No" Value="0">
+                                                                                    <asp:ListItem Text="No" Value="0" meta:resourcekey="ListItemResource4">
                                                                                     </asp:ListItem>
                                                                                 </asp:CheckBoxList>
                                                                             </td>
@@ -102,37 +104,37 @@
                                                                     <table>
                                                                         <tr>
                                                                             <td>
-                                                                                Proj Code:
+                                                                                Project Code:
                                                                             </td>
                                                                             <td>
-                                                                                <asp:TextBox ID="txtProjectCode" runat="server" CssClass="width-20" AutoPostBack="true"
-                                                                                    OnTextChanged="txtProjectCode_TextChanged"></asp:TextBox>
+                                                                                <asp:TextBox ID="txtProjectCode" runat="server" CssClass="width-90" AutoPostBack="True"
+                                                                                    OnTextChanged="txtProjectCode_TextChanged" meta:resourcekey="txtProjectCodeResource1"></asp:TextBox>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>
-                                                                                Agency:
+                                                                                Organization:
                                                                             </td>
                                                                             <td>
-                                                                                <asp:DropDownList ID="ddlOrg" runat="server" CssClass="width-90" AutoPostBack="true"
-                                                                                    OnSelectedIndexChanged="ddlOrg_SelectedIndexChanged">
+                                                                                <asp:DropDownList ID="ddlOrg" runat="server" CssClass="width-90" AutoPostBack="True"
+                                                                                    OnSelectedIndexChanged="ddlOrg_SelectedIndexChanged" meta:resourcekey="ddlOrgResource1">
                                                                                 </asp:DropDownList>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>
-                                                                                Proj Status:
+                                                                                Project Status:
                                                                             </td>
                                                                             <td>
-                                                                                <asp:DropDownList ID="ddlProjStatus" runat="server" CssClass="width" AutoPostBack="true"
-                                                                                    OnSelectedIndexChanged="ddlProjStatus_SelectedIndexChanged">
-                                                                                    <asp:ListItem Text="All" Value="0" Selected="True"></asp:ListItem>
-                                                                                    <asp:ListItem Text="On Going" Value="1"></asp:ListItem>
-                                                                                    <asp:ListItem Text="Completed" Value="2"></asp:ListItem>
+                                                                                <asp:DropDownList ID="ddlProjStatus" runat="server" CssClass="width-90" AutoPostBack="True"
+                                                                                    OnSelectedIndexChanged="ddlProjStatus_SelectedIndexChanged" meta:resourcekey="ddlProjStatusResource1">
+                                                                                    <asp:ListItem Text="All" Value="0" Selected="True" meta:resourcekey="ListItemResource5"></asp:ListItem>
+                                                                                    <asp:ListItem Text="On Going" Value="1" meta:resourcekey="ListItemResource6"></asp:ListItem>
+                                                                                    <asp:ListItem Text="Completed" Value="2" meta:resourcekey="ListItemResource7"></asp:ListItem>
                                                                                 </asp:DropDownList>
                                                                             </td>
                                                                         </tr>
-                                                                        
+
                                                                     </table>
                                                                 </div>
                                                             </div>
@@ -153,26 +155,31 @@
             <div class="col-xs-12 col-sm-12 widget-container-span">
                 <div class="widget-box">
                     <asp:GridView ID="gvProjects" runat="server" AutoGenerateColumns="False" CssClass="imagetable"
-                        AllowPaging="true" AllowSorting="true" PageSize="50" ShowHeaderWhenEmpty="true"
+                        AllowPaging="True" AllowSorting="True" PageSize="50" ShowHeaderWhenEmpty="True"
                         EmptyDataText="Your filter criteria does not match any project!" Width="100%"
-                        OnRowCommand="gvProjects_RowCommand" OnSorting="gvProjects_Sorting" OnPageIndexChanging="gvProjects_PageIndexChanging">
+                        OnRowCommand="gvProjects_RowCommand" OnSorting="gvProjects_Sorting" OnPageIndexChanging="gvProjects_PageIndexChanging" meta:resourcekey="gvProjectsResource1">
                         <RowStyle CssClass="istrow" />
                         <AlternatingRowStyle CssClass="altcolor" />
                         <Columns>
-                            <asp:BoundField DataField="ProjectCode" HeaderText="Project Code" SortExpression="ProjectCode" />
+                            <asp:BoundField DataField="ProjectCode" HeaderText="Project Code" SortExpression="ProjectCode" meta:resourcekey="BoundFieldResource1" />
                             <asp:BoundField DataField="ProjectTitle" HeaderText="Project Title" ItemStyle-Wrap="true"
-                                SortExpression="ProjectTitle" />
-                            <asp:BoundField DataField="OrganizationName" HeaderText="Organization" SortExpression="OrganizationName" />
-                            <asp:BoundField DataField="OriginalRequest" HeaderText="Original Amount" SortExpression="OriginalRequest" />
-                            <asp:BoundField DataField="CurrentRequest" HeaderText="Current Amount" SortExpression="CurrentRequest" />
-                            <asp:BoundField DataField="LocationName" HeaderText="Locations" />
+                                SortExpression="ProjectTitle" meta:resourcekey="BoundFieldResource2" >
+<ItemStyle Wrap="True"></ItemStyle>
+                            </asp:BoundField>
+                            <asp:BoundField DataField="OrganizationName" HeaderText="Organization" SortExpression="OrganizationName" meta:resourcekey="BoundFieldResource3" />
+                            <asp:BoundField DataField="OriginalRequest" HeaderText="Original Amount" SortExpression="OriginalRequest" meta:resourcekey="BoundFieldResource4" />
+                            <asp:BoundField DataField="CurrentRequest" HeaderText="Current Amount" SortExpression="CurrentRequest" meta:resourcekey="BoundFieldResource5" />
+                            <asp:BoundField DataField="Funded" HeaderText="Funded (USD)" SortExpression="Funded" meta:resourcekey="BoundFieldResource6" />
+                            <asp:BoundField DataField="LocationName" HeaderText="Locations" meta:resourcekey="BoundFieldResource7" />
                             <asp:BoundField DataField="Contact" HeaderText="Contact" ItemStyle-Wrap="true" ItemStyle-Width="150px"
-                                SortExpression="Contact" />
-                            <asp:BoundField DataField="Phone" HeaderText="Phone" />
-                            <asp:TemplateField>
+                                SortExpression="Contact" meta:resourcekey="BoundFieldResource8" >
+<ItemStyle Wrap="True" Width="150px"></ItemStyle>
+                            </asp:BoundField>
+                            <asp:BoundField DataField="Phone" HeaderText="Phone" meta:resourcekey="BoundFieldResource9" />
+                            <asp:TemplateField meta:resourcekey="TemplateFieldResource1">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="lnkVieDetails" runat="server" Text="View" CommandName="ViewProject"
-                                        CommandArgument='<%# Eval("ProjectId") %>' /></asp:LinkButton>
+                                        CommandArgument='<%# Eval("ProjectId") %>' meta:resourcekey="lnkVieDetailsResource1" />
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>

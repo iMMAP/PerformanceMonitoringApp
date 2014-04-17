@@ -13,6 +13,33 @@ namespace SRFROWCA.ClusterLead {
     public partial class ClusterIndicatorTargets {
         
         /// <summary>
+        /// localBreadCrumbHome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localBreadCrumbHome;
+        
+        /// <summary>
+        /// localBreadCrumbClusterTarget control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localBreadCrumbClusterTarget;
+        
+        /// <summary>
+        /// localClusterTargetSO control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localClusterTargetSO;
+        
+        /// <summary>
         /// cblObjectives control.
         /// </summary>
         /// <remarks>
@@ -22,6 +49,15 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.CheckBoxList cblObjectives;
         
         /// <summary>
+        /// localClusterTargetsHP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localClusterTargetsHP;
+        
+        /// <summary>
         /// cblPriorities control.
         /// </summary>
         /// <remarks>
@@ -29,6 +65,15 @@ namespace SRFROWCA.ClusterLead {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBoxList cblPriorities;
+        
+        /// <summary>
+        /// localClsuterTargetSearchAct control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localClsuterTargetSearchAct;
         
         /// <summary>
         /// btnExportToExcel control.
@@ -58,6 +103,15 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.HtmlControls.HtmlButton Button1;
         
         /// <summary>
+        /// localClsuterTargetsSave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localClsuterTargetsSave;
+        
+        /// <summary>
         /// gvClusterIndTargets control.
         /// </summary>
         /// <remarks>
@@ -74,5 +128,14 @@ namespace SRFROWCA.ClusterLead {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton btnSave;
+        
+        /// <summary>
+        /// localClusterTargetsSave2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localClusterTargetsSave2;
     }
 }
