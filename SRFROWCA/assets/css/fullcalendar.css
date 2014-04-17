@@ -179,7 +179,7 @@ html .fc,
 	
 /* icon (for jquery ui) */
 	
-.fc-button .fc-fa fa-wrap {
+.fc-button .fc-icon-wrap {
 	position: relative;
 	float: left;
 	top: 50%;
