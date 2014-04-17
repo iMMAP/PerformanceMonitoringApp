@@ -9,7 +9,7 @@
             try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
         </script>
         <ul class="breadcrumb">
-            <li><i class="fa fa-home home-icon"></i><a href="../Default.aspx">
+            <li><i class="icon-home home-icon"></i><a href="../Default.aspx">
                 <asp:Localize ID="localBreadCrumbHome" runat="server" Text="Home" meta:resourcekey="localBreadCrumbHomeResource1"></asp:Localize></a> </li>
             <li class="active">
                 <asp:Localize ID="localBreadCrumbForgotPassword" runat="server" Text="Forgot Password" meta:resourcekey="localBreadCrumbForgotPasswordResource1"></asp:Localize></li>
@@ -27,7 +27,7 @@
                                     <div class="widget-body">
                                         <div class="widget-main">
                                             <h4 class="header red lighter bigger">
-                                                <i class="fa fa-key"></i>
+                                                <i class="icon-key"></i>
                                                 <asp:Localize ID="localRetrievePassword" runat="server" Text="Retrieve Password" meta:resourcekey="localRetrievePasswordResource1"></asp:Localize>
                                             </h4>
                                             <div class="space-6">
@@ -36,15 +36,15 @@
                                                 <asp:Localize ID="localEnterEmailOrUserName" runat="server" Text="Enter your email OR User Name to receive instructions!" meta:resourcekey="localEnterEmailOrUserNameResource1"></asp:Localize>
                                             </p>
                                             <label class="block clearfix">
-                                                <span class="block input-icon input-fa fa-right">
+                                                <span class="block input-icon input-icon-right">
                                                     <asp:TextBox ID="txtEmail" runat="server" MaxLength="256" CssClass="form-control" placeholder="Email" meta:resourcekey="txtEmailResource1"></asp:TextBox>
-                                                    <i class="fa fa-envelope"></i></span>
+                                                    <i class="icon-envelope"></i></span>
                                             </label>
                                             OR
                                             <label class="block clearfix">
-                                                <span class="block input-icon input-fa fa-right">
+                                                <span class="block input-icon input-icon-right">
                                                     <asp:TextBox ID="txtUserName" runat="server" MaxLength="256" CssClass="form-control" placeholder="Username" meta:resourcekey="txtUserNameResource1"></asp:TextBox>
-                                                    <i class="fa fa-user"></i></span>
+                                                    <i class="icon-user"></i></span>
                                             </label>
                                             <div class="clearfix">
                                                 <asp:Button ID="btnSubmit" runat="server" Text="Send Me!" CssClass="width-35 pull-right btn btn-sm btn-danger"
@@ -55,7 +55,7 @@
                                         <div class="toolbar center">
                                             <a href="Login.aspx" class="back-to-login-link">
                                                 <asp:Localize ID="localBakToLogin" runat="server" Text="Back to login" meta:resourcekey="localBakToLoginResource1"></asp:Localize>
-                                                <i class="fa fa-arrow-right"></i></a>
+                                                <i class="icon-arrow-right"></i></a>
                                         </div>
                                     </div>
                                     <!-- /widget-body -->

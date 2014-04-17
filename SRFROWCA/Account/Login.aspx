@@ -9,7 +9,7 @@
             try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
         </script>
         <ul class="breadcrumb">
-            <li><i class="fa fa-home home-icon"></i><a href="../Default.aspx">
+            <li><i class="icon-home home-icon"></i><a href="../Default.aspx">
                 <asp:Localize ID="localBreadCrumbHome" runat="server" Text="Home" meta:resourcekey="localBreadCrumbHomeResource1"></asp:Localize></a> </li>
             <li class="active">
                 <asp:Localize ID="localBreadCrumbLogin" runat="server" Text="Login" meta:resourcekey="localBreadCrumbLoginResource1"></asp:Localize></li>
@@ -29,7 +29,7 @@
                                     <div class="widget-body">
                                         <div class="widget-main">
                                             <h4 class="header blue lighter bigger">
-                                                <i class="fa fa-coffee green"></i>
+                                                <i class="icon-coffee green"></i>
                                                 <asp:Localize ID="localEnterYourInfo" runat="server" Text="Please Enter Your Information" meta:resourcekey="localEnterYourInfoResource1"></asp:Localize>
                                             </h4>
                                             <div class="space-6">
@@ -43,19 +43,19 @@
                                                         </span>
                                                     </label>
                                                     <label class="block clearfix">
-                                                        <span class="block input-icon input-fa fa-right">
+                                                        <span class="block input-icon input-icon-right">
                                                             <asp:TextBox ID="UserName" runat="server" MaxLength="256" CssClass="form-control"
                                                                 placeholder="Username" meta:resourcekey="UserNameResource1"></asp:TextBox>
-                                                            <i class="fa fa-user"></i>
+                                                            <i class="icon-user"></i>
                                                             <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName"
                                                                 CssClass="error2" ErrorMessage="User Name is required." ToolTip="User Name is required." meta:resourcekey="UserNameRequiredResource1" Text="User Name is required."></asp:RequiredFieldValidator>
                                                         </span>
                                                     </label>
                                                     <label class="block clearfix">
-                                                        <span class="block input-icon input-fa fa-right">
+                                                        <span class="block input-icon input-icon-right">
                                                             <asp:TextBox ID="Password" runat="server" CssClass="form-control" TextMode="Password"
                                                                 placeholder="Password" MaxLength="128" meta:resourcekey="PasswordResource1"></asp:TextBox>
-                                                            <i class="fa fa-lock"></i>
+                                                            <i class="icon-lock"></i>
                                                             <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password"
                                                                 CssClass="error2" ErrorMessage="Password is required." ToolTip="Password is required." meta:resourcekey="PasswordRequiredResource1" Text="Password is required."></asp:RequiredFieldValidator>
                                                         </span>
@@ -70,14 +70,14 @@
                                         <!-- /widget-main -->
                                         <div class="toolbar clearfix">
                                             <div>
-                                                <a href="ForgotPassword.aspx" class="forgot-password-link"><i class="fa fa-arrow-left"></i>
+                                                <a href="ForgotPassword.aspx" class="forgot-password-link"><i class="icon-arrow-left"></i>
                                                     <asp:Localize ID="localForgotPassword" runat="server" Text="I forgot my password" meta:resourcekey="localForgotPasswordResource1"></asp:Localize>
                                                 </a>
                                             </div>
                                             <div>
                                                 <a href="Register.aspx" class="user-signup-link">
                                                     <asp:Localize ID="localToRegister" runat="server" Text="I want to register" meta:resourcekey="localToRegisterResource1"></asp:Localize>
-                                                    <i class="fa fa-arrow-right"></i></a>
+                                                    <i class="icon-arrow-right"></i></a>
                                             </div>
                                         </div>
                                     </div>
