@@ -289,9 +289,9 @@ namespace SRFROWCA.Reports
             {
                 return ReportsCommon.GetSelectedValues(ddlObjectives);
             }
-            else if (LogFrame.Indicators == logFrameId)
+            else if (LogFrame.Priority == logFrameId)
             {
-                return ReportsCommon.GetSelectedValues(ddlIndicators);
+                return ReportsCommon.GetSelectedValues(ddlPriority);
             }
             else if (LogFrame.Activities == logFrameId)
             {
@@ -524,8 +524,8 @@ namespace SRFROWCA.Reports
 
         private DataTable GetActivities()
         {
-            string indicatorIds = ReportsCommon.GetSelectedValues(ddlIndicators);
-            return DBContext.GetData("GetActivitiesOfMultipleIndicators", new object[] { indicatorIds });
+            string priority = ReportsCommon.GetSelectedValues(ddlPriority);
+            return DBContext.GetData("GetActivitiesOfMultipleIndicators", new object[] { priority });
         }
 
         private void PopulateDataItems()
@@ -570,7 +570,7 @@ namespace SRFROWCA.Reports
         enum LogFrame
         {
             Objectives = 1,
-            Indicators = 2,
+            Priority = 2,
             Activities = 3,
             Data = 4,
         }

@@ -181,11 +181,11 @@
                                             Inidicators:</label>
                                     </td>
                                     <td>
-                                        <cc:DropDownCheckBoxes ID="ddlIndicators" runat="server" CssClass="ddlWidth" AutoPostBack="true"
-                                            OnSelectedIndexChanged="ddlIndicators_SelectedIndexChanged" AddJQueryReference="True"
+                                        <cc:DropDownCheckBoxes ID="ddlPriority" runat="server" CssClass="ddlWidth" AutoPostBack="true"
+                                            OnSelectedIndexChanged="ddlPriority_SelectedIndexChanged" AddJQueryReference="True"
                                             meta:resourcekey="checkBoxes2Resource1" UseButtons="False" UseSelectAllNode="True">
                                             <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
-                                            <Texts SelectBoxCaption="Select Indicators" />
+                                            <Texts SelectBoxCaption="Select Priority" />
                                         </cc:DropDownCheckBoxes>
                                     </td>
                                 </tr>
@@ -206,13 +206,13 @@
                                 <tr>
                                     <td>
                                         <label>
-                                            Data:</label>
+                                            Indicator:</label>
                                     </td>
                                     <td>
                                         <cc:DropDownCheckBoxes ID="ddlData" runat="server" CssClass="ddlWidth" AddJQueryReference="True"
                                             meta:resourcekey="checkBoxes2Resource1" UseButtons="False" UseSelectAllNode="True">
                                             <Style SelectBoxWidth="" DropDownBoxBoxWidth="" DropDownBoxBoxHeight=""></Style>
-                                            <Texts SelectBoxCaption="Select Data" />
+                                            <Texts SelectBoxCaption="Select Indicator" />
                                         </cc:DropDownCheckBoxes>
                                     </td>
                                 </tr>

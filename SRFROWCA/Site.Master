@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- basic styles -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     <!--[if IE 7]>
 		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
 		<![endif]-->
@@ -66,10 +66,10 @@
                 <!-- /.navbar-header -->
                 <div class="navbar-header pull-right" role="navigation">
                     <ul class="nav ace-nav">
-                        <%--<li class="grey"><a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="fa fa-tasks">
+                        <%--<li class="grey"><a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-tasks">
                     </i><span class="badge badge-grey">4</span> </a>
                         <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
-                            <li class="dropdown-header"><i class="fa fa-ok"></i>4 Tasks to complete </li>
+                            <li class="dropdown-header"><i class="icon-ok"></i>4 Tasks to complete </li>
                             <li><a href="#">
                                 <div class="clearfix">
                                     <span class="pull-left">Software Update</span> <span class="pull-right">65%</span>
@@ -106,53 +106,53 @@
                                     </div>
                                 </div>
                             </a></li>
-                            <li><a href="#">See tasks with details <i class="fa fa-arrow-right"></i></a></li>
+                            <li><a href="#">See tasks with details <i class="icon-arrow-right"></i></a></li>
                         </ul>
                     </li>
                     <li class="purple"><a data-toggle="dropdown" class="dropdown-toggle" href="#"><i
-                        class="fa fa-bell-alt fa fa-animated-bell"></i><span class="badge badge-important">8</span>
+                        class="icon-bell-alt icon-animated-bell"></i><span class="badge badge-important">8</span>
                     </a>
                         <ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
-                            <li class="dropdown-header"><i class="fa fa-warning-sign"></i>8 Notifications </li>
+                            <li class="dropdown-header"><i class="icon-warning-sign"></i>8 Notifications </li>
                             <li><a href="#">
                                 <div class="clearfix">
-                                    <span class="pull-left"><i class="btn btn-xs no-hover btn-pink fa fa-comment"></i>New
+                                    <span class="pull-left"><i class="btn btn-xs no-hover btn-pink icon-comment"></i>New
                                         Comments </span><span class="pull-right badge badge-info">+12</span>
                                 </div>
                             </a></li>
-                            <li><a href="#"><i class="btn btn-xs btn-primary fa fa-user"></i>Bob just signed up as
+                            <li><a href="#"><i class="btn btn-xs btn-primary icon-user"></i>Bob just signed up as
                                 an editor ... </a></li>
                             <li><a href="#">
                                 <div class="clearfix">
-                                    <span class="pull-left"><i class="btn btn-xs no-hover btn-success fa fa-shopping-cart">
+                                    <span class="pull-left"><i class="btn btn-xs no-hover btn-success icon-shopping-cart">
                                     </i>New Orders </span><span class="pull-right badge badge-success">+8</span>
                                 </div>
                             </a></li>
                             <li><a href="#">
                                 <div class="clearfix">
-                                    <span class="pull-left"><i class="btn btn-xs no-hover btn-info fa fa-twitter"></i>Followers
+                                    <span class="pull-left"><i class="btn btn-xs no-hover btn-info icon-twitter"></i>Followers
                                     </span><span class="pull-right badge badge-info">+11</span>
                                 </div>
                             </a></li>
-                            <li><a href="#">See all notifications <i class="fa fa-arrow-right"></i></a></li>
+                            <li><a href="#">See all notifications <i class="icon-arrow-right"></i></a></li>
                         </ul>
                     </li>
-                    <li class="green"><a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="fa fa-envelope fa fa-animated-vertical">
+                    <li class="green"><a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-envelope icon-animated-vertical">
                     </i><span class="badge badge-success">5</span> </a>
                         <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
                             <asp:Repeater ID="rptMessages" runat="server">
                                 <HeaderTemplate>
-                                    <li class="dropdown-header"><i class="fa fa-envelope-alt"></i>5 Messages </li>
+                                    <li class="dropdown-header"><i class="icon-envelope-alt"></i>5 Messages </li>
                                 </HeaderTemplate>
                                 <ItemTemplate>
                                     <li><a href="#"><span class="msg-body"><span class="msg-title"><span class="blue">
                                         <%#Eval("FullName")%></span>
                                         <%#Eval("Message")%>
-                                    </span><span class="msg-time"><i class="fa fa-time"></i><span>
+                                    </span><span class="msg-time"><i class="icon-time"></i><span>
                                         <%#Eval("DateTime")%></span> </span></span></a></li>
                                 </ItemTemplate>
                                 <FooterTemplate>
-                                    <li><a href="inbox.html">See all messages <i class="fa fa-arrow-right"></i></a></li>
+                                    <li><a href="inbox.html">See all messages <i class="icon-arrow-right"></i></a></li>
                                 </FooterTemplate>
                             </asp:Repeater>
                         </ul>
@@ -168,16 +168,15 @@
                             <asp:Localize ID="localMasterLoginLink" runat="server" Text="Log In" meta:resourcekey="localMasterLoginLinkResource1"></asp:Localize></a><a data-toggle="dropdown" id="spanWelcome" runat="server" visible="false"
                                 href="#" class="dropdown-toggle"><span class="user-info"><small><asp:Localize ID="localWelcome" runat="server" Text="Welcome," meta:resourcekey="localWelcomeResource1"></asp:Localize></small>
                                     <asp:LoginName ID="HeadLoginName" runat="server" meta:resourcekey="HeadLoginNameResource1" />
-                                </span><i class="fa fa-caret-down"></i></a>
+                                </span><i class="icon-caret-down"></i></a>
                             <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-                                <li><a href="../Account/ChangePassword.aspx"><i class="fa fa-unlock "></i>
+                                <li><a href="../Account/ChangePassword.aspx"><i class="icon-unlock "></i>
                                     <asp:Localize ID="localChangePassword" runat="server" Text="Change Password" meta:resourcekey="localChangePasswordResource1"></asp:Localize></a></li>
-                                <li><a href="../Account/UserProfile.aspx"><i class="fa fa-user"></i>
+                                <li><a href="../Account/UserProfile.aspx"><i class="icon-user"></i>
                                     <asp:Localize ID="localProfile" runat="server" Text="Profile" meta:resourcekey="localProfileResource1"></asp:Localize>
                                 </a></li>
                                 <li class="divider"></li>
-
-                                <li>
+                                <li>                                    
                                     <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect"
                                         OnLoggedOut="HeadLoginStatus_LoggedOut" LogoutPageUrl="~/Default.aspx" meta:resourcekey="HeadLoginStatusResource1" />
                                 </li>
@@ -217,114 +216,114 @@
                     <!-- #sidebar-shortcuts -->
                     <ul class="nav nav-list">
                         <li id="liDashboards" runat="server"><a id="menueDashboards" runat="server" href="#"
-                            class="dropdown-toggle"><i class="fa fa-dashboard"></i><span class="menu-text">
+                            class="dropdown-toggle"><i class="icon-dashboard"></i><span class="menu-text">
                                 <asp:Localize ID="localDashboard" runat="server" Text="Dashboard" meta:resourcekey="localMasterDashboardResource1"></asp:Localize>
-                            </span><b class="arrow fa fa-angle-down"></b></a>
+                            </span><b class="arrow icon-angle-down"></b></a>
                             <ul class="submenu">
                                 <li id="liDefault" runat="server"><a href="../Default.aspx"><span class="menu-text">
 
                                     <asp:Localize ID="localDashboardPerfMon" runat="server" Text="Performance Monitoring" meta:resourcekey="Localize1Resource1"></asp:Localize>
                                 </span></a></li>
-                                <li id="liReportingStatus" runat="server"><a href="../ReportingStatus.aspx"><i class="fa fa-list"></i><span class="menu-text">
+                                <li id="liReportingStatus" runat="server"><a href="../ReportingStatus.aspx"><i class="icon-list"></i><span class="menu-text">
                                     <asp:Localize ID="localDashboardRepStatus" runat="server" Text="Reporting Status" meta:resourcekey="localDashboardRepStatusResource1"></asp:Localize>
                                 </span></a></li>
-                                <li id="liOperationalPresenceDB" runat="server"><a href="../OperationalPresenceDB.aspx"><i class="fa fa-list"></i><span class="menu-text">
+                                <li id="liOperationalPresenceDB" runat="server"><a href="../OperationalPresenceDB.aspx"><i class="icon-list"></i><span class="menu-text">
                                     <asp:Localize ID="localDashboardOprPresence" runat="server" Text="Operational Presence" meta:resourcekey="localDashboardOprPresenceResource1"></asp:Localize>
                                 </span></a></li>
                             </ul>
                         </li>
                         <li id="liDataEntry" runat="server"><a href="~/Pages/AddActivities.aspx" id="menuDataEntry"
-                            runat="server"><i class="fa fa-list-alt"></i><span class="menu-text">
+                            runat="server"><i class="icon-list-alt"></i><span class="menu-text">
                                 <asp:Localize ID="localDataEntry" runat="server" Text="Data Entry" meta:resourcekey="localDataEntryResource1"></asp:Localize></span>
                         </a></li>
                         <li id="liManageProject" runat="server"><a href="~/Pages/CreateProject.aspx" id="menuManageProjects"
-                            runat="server"><i class="fa fa-list-alt"></i><span class="menu-text">
+                            runat="server"><i class="icon-list-alt"></i><span class="menu-text">
                                 <asp:Localize ID="localManageProjects" runat="server" Text="Manage Projects" meta:resourcekey="localManageProjectsResource1"></asp:Localize></span>
                         </a></li>
                         <li id="liManageActivity" runat="server"><a href="~/Pages/ManageActivities.aspx"
-                            id="menuManageActivities" runat="server"><i class="fa fa-list-alt"></i><span class="menu-text">
+                            id="menuManageActivities" runat="server"><i class="icon-list-alt"></i><span class="menu-text">
                                 <asp:Localize ID="localManageActivities" runat="server" Text="Manage Activities" meta:resourcekey="localManageActivitiesResource1"></asp:Localize></span> </a></li>
                         <li id="liRegionalIndicators" runat="server"><a href="~/RegionalLead/ManageRegionalIndicators.aspx"
-                            id="menuRegionalIndicators" runat="server"><i class="fa fa-list-alt"></i><span class="menu-text">
+                            id="menuRegionalIndicators" runat="server"><i class="icon-list-alt"></i><span class="menu-text">
                                 <asp:Localize ID="localManageRegionalIndicators" runat="server" Text="Regional Indicators" meta:resourcekey="localManageRegionalIndicatorsResource1"></asp:Localize></span> </a></li>
 
                         <li id="liCLprojectsListing" runat="server"><a href="~/ClusterLead/ProjectsListing.aspx"
-                            id="menueCLProjectsListing" runat="server"><i class="fa fa-list-alt"></i><span class="menu-text">
+                            id="menueCLProjectsListing" runat="server"><i class="icon-list-alt"></i><span class="menu-text">
                                 <asp:Localize ID="localCLProjectListing" runat="server" Text="Projects" meta:resourcekey="localCLProjectListingResource1"></asp:Localize></span> </a></li>
 
                         <li id="liSRPIndicators" runat="server"><a href="~/ClusterLead/AddSRPActivitiesFromMasterList.aspx"
-                            id="menueSRPIndicators" runat="server"><i class="fa fa-list-ol"></i><span class="menu-text">
+                            id="menueSRPIndicators" runat="server"><i class="icon-list-ol"></i><span class="menu-text">
                                 <asp:Localize ID="localAddSRPActivities" runat="server" Text="Country Indicators" meta:resourcekey="localAddSRPActivitiesResource1"></asp:Localize></span> </a></li>
                         <li id="liClusterTarget" runat="server"><a href="~/ClusterLead/ClusterIndicatorTargets.aspx"
-                            id="menueClsuterTarget" runat="server"><i class="fa fa-sort-numeric-asc"></i><span class="menu-text">
+                            id="menueClsuterTarget" runat="server"><i class="icon-sort-by-order"></i><span class="menu-text">
                                 <asp:Localize ID="localCluterTargets" runat="server" Text="Cluster Targets" meta:resourcekey="localCluterTargetsResource1"></asp:Localize></span> </a></li>
 
 
                         <li id="liValidate" runat="server"><a id="menueValidate" runat="server" href="#"
-                            class="dropdown-toggle"><i class="fa fa-check"></i><span class="menu-text">
+                            class="dropdown-toggle"><i class="icon-check"></i><span class="menu-text">
                                 <asp:Localize ID="localValidate" runat="server" Text="Validate" meta:resourcekey="localValidateResource1"></asp:Localize>
-                            </span><b class="arrow fa fa-angle-down"></b></a>
+                            </span><b class="arrow icon-angle-down"></b></a>
                             <ul class="submenu">
                                 <li id="liValidateAchievements" runat="server"><a id="menueValidateAchievements" runat="server"
                                     href=""><span class="menu-text">
                                         <asp:Localize ID="LocalValidateAchievements" runat="server" Text="Achievements" meta:resourcekey="LocalValidateAchievementsResource1"></asp:Localize>
                                     </span></a></li>
                                 <li id="liValidateIndicators" runat="server"><a href="~/ClusterLead/ValidateReportList.aspx"
-                                    id="menueValidateIndicaotrs" runat="server"><i class="fa fa-list-alt"></i><span class="menu-text">
+                                    id="menueValidateIndicaotrs" runat="server"><i class="icon-list-alt"></i><span class="menu-text">
                                         <asp:Localize ID="localValidateIndicators" runat="server" Text="Indicators" meta:resourcekey="localValidateIndicatorsResource1"></asp:Localize></span></a></li>
                             </ul>
                         </li>
                         <li id="liReports" runat="server"><a id="menueReports" runat="server" href="#" class="dropdown-toggle">
-                            <i class="fa fa-th"></i><span class="menu-text">
+                            <i class="icon-th"></i><span class="menu-text">
                                 <asp:Localize ID="localReports" runat="server" Text="Reports" meta:resourcekey="localReportsResource1"></asp:Localize>
-                            </span><b class="arrow fa fa-angle-down"></b></a>
+                            </span><b class="arrow icon-angle-down"></b></a>
                             <ul class="submenu">
                                 <li id="liReportsSummaryReports" runat="server"><a id="menueReportsSummaryReports"
-                                    runat="server" href="#" class="dropdown-toggle"><i class="fa fa-angle-double-right"></i>
+                                    runat="server" href="#" class="dropdown-toggle"><i class="icon-angle-double-right"></i>
                                     <asp:Localize ID="localReportsSummaryReports" runat="server" Text="Summary Reports" meta:resourcekey="localReportsSummaryReportsResource1"></asp:Localize>
-                                    <b class="arrow fa fa-angle-down"></b></a>
+                                    <b class="arrow icon-angle-down"></b></a>
                                     <ul class="submenu">
                                         <li id="liReportsSummaryReportsOperationalPresence" runat="server"><a id="menueReportsSummaryReportsOperationalReports"
-                                            runat="server" href="~/Reports/ProjectsPerOrganization.aspx"><i class="fa fa-angle-double-right"></i>
+                                            runat="server" href="~/Reports/ProjectsPerOrganization.aspx"><i class="icon-angle-double-right"></i>
                                             <asp:Localize ID="localReportsSumRepOprPresence" runat="server" Text="Operational Presence" meta:resourcekey="localReportsSumRepOprPresenceResource1"></asp:Localize></a></li>
                                         <li id="liContactList" runat="server"><a id="menueContactList" runat="server" href="~/Reports/OperationalPresence.aspx">
-                                            <i class="fa fa-angle-double-right"></i>
+                                            <i class="icon-angle-double-right"></i>
                                             <asp:Localize ID="localReportsSumRepContactList" runat="server" Text="Contact List" meta:resourcekey="localReportsSumRepContactListResource1"></asp:Localize></a></li>
                                         <li id="liSumOfCountryIndicators" runat="server"><a id="menueSumOfCountryIndicators" runat="server" href="~/ClusterLead/SumOfCountryIndicators.aspx">
-                                            <i class="fa fa-angle-double-right"></i>
+                                            <i class="icon-angle-double-right"></i>
                                             <asp:Localize ID="localReportsSumRepSumOfCountryInd" runat="server" Text="Sum Of Country Ind" meta:resourcekey="localReportsSumRepSumOfCountryIndResource1"></asp:Localize></a></li>
                                         <li id="liSumOfRegionalIndicators" runat="server"><a id="menueSumOfRegionalIndicators" runat="server" href="~/PivotTables/RegionalIndicatorsAchievedReport.aspx">
-                                            <i class="fa fa-angle-double-right"></i>
+                                            <i class="icon-angle-double-right"></i>
                                             <asp:Localize ID="localReportsSumReportSumOfRegInd" runat="server" Text="Sum Of Regional Ind" meta:resourcekey="localReportsSumReportSumOfRegIndResource1"></asp:Localize></a></li>
                                         <li id="liReportsSummaryReportsProjectReports" runat="server"><a id="menueReportsSummaryReportsProjectReports"
-                                            runat="server" href="#" class="dropdown-toggle"><i class="fa fa-angle-double-right"></i>
-                                            <asp:Localize ID="localReportsProjReports" runat="server" Text="Project Reports" meta:resourcekey="localReportsProjReportsResource1"></asp:Localize><b class="arrow fa fa-angle-down"></b></a>
+                                            runat="server" href="#" class="dropdown-toggle"><i class="icon-angle-double-right"></i>
+                                            <asp:Localize ID="localReportsProjReports" runat="server" Text="Project Reports" meta:resourcekey="localReportsProjReportsResource1"></asp:Localize><b class="arrow icon-angle-down"></b></a>
                                             <ul class="submenu">
                                                 <li id="liReportsSummaryReportsProjectReportsByOrg" runat="server"><a id="menueReportsSummaryReportsProjectReportsByOrg"
-                                                    runat="server" href="~/Reports/ProjectsPerOrganization.aspx"><i class="fa fa-angle-right"></i>
+                                                    runat="server" href="~/Reports/ProjectsPerOrganization.aspx"><i class="icon-angle-right"></i>
                                                     <asp:Localize ID="localReportsProjReportByOrg" runat="server" Text="By Orgs" meta:resourcekey="localReportsProjReportByOrgResource1"></asp:Localize>
                                                 </a></li>
                                                 <li id="liReportsSummaryReportsProjectReportsByCountry" runat="server"><a id="menueReportsSummaryReportsProjectReportsByCountry"
-                                                    runat="server" href="~/Reports/ProjectsByCountry.aspx"><i class="fa fa-angle-right"></i>
+                                                    runat="server" href="~/Reports/ProjectsByCountry.aspx"><i class="icon-angle-right"></i>
                                                     <asp:Localize ID="localReportsProjReportByCountry" runat="server" Text="By Country" meta:resourcekey="localReportsProjReportByCountryResource1"></asp:Localize>
                                                 </a></li>
                                                 <li id="liReportsSummaryReportsProjectReportsByClusters" runat="server"><a id="menueReportsSummaryReportsProjectReportsByClusters"
-                                                    runat="server" href="~/Reports/ProjectByClusters.aspx"><i class="fa fa-angle-right"></i>
+                                                    runat="server" href="~/Reports/ProjectByClusters.aspx"><i class="icon-angle-right"></i>
                                                     <asp:Localize ID="localREportsProjReportByCluster" runat="server" Text="By Cluster" meta:resourcekey="localREportsProjReportByClusterResource1"></asp:Localize></a> </li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </li>
                                 <li id="liCustomReport" runat="server"><a href="~/Anonymous/AllData.aspx" id="menueCustomReport"
-                                    runat="server"><i class="fa fa-angle-double-right"></i>
+                                    runat="server"><i class="icon-angle-double-right"></i>
                                     <asp:Localize ID="localReportCustomReport" runat="server" Text="Custom Report" meta:resourcekey="localReportCustomReportResource1"></asp:Localize>
                                 </a></li>
                             </ul>
                         </li>
                         <li id="liPivotTables" runat="server"><a id="menuePivotTables" runat="server" href="#"
-                            class="dropdown-toggle"><i class="fa fa-table"></i><span class="menu-text">
+                            class="dropdown-toggle"><i class="icon-table"></i><span class="menu-text">
                                 <asp:Localize ID="localPivotTables" runat="server" Text="Pivot Tables" meta:resourcekey="localPivotTablesResource1"></asp:Localize>
-                            </span><b class="arrow fa fa-angle-down"></b></a>
+                            </span><b class="arrow icon-angle-down"></b></a>
                             <ul class="submenu">
                                 <li id="liPivotPerfMonitoring" runat="server"><a id="menuePivotPerfMonitoring" runat="server"
                                     href="~/PivotTables/PerfMontPivot.aspx"><span class="menu-text">
@@ -338,26 +337,26 @@
                                     href="~/PivotTables/OprOrgsClsCnt.aspx"><span class="menu-text">
                                         <asp:Localize ID="localPivotTableOrgOperational" runat="server" Text="Organizational Presence" meta:resourcekey="localPivotTableOrgOperationalResource1"></asp:Localize></span></a></li>
                                 <li id="liPivotSumOfCountryIndicators" runat="server"><a id="menuePivotSumOfCountryIndicators" runat="server" href="~/PivotTables/CountryIndicatorsAchievedReport.aspx">
-                                    <i class="fa fa-angle-double-right"></i>
+                                    <i class="icon-angle-double-right"></i>
                                     <asp:Localize ID="localPivotTableSumOfInd" runat="server" Text="Sum Of Country Ind" meta:resourcekey="localPivotTableSumOfIndResource1"></asp:Localize></a></li>
                             </ul>
                         </li>
                         <%-- <li id="liBulkImport" runat="server"><a href="~/Admin/UploadLogFrame.aspx" id="menueBulkImport"
-                        runat="server"><i class="fa fa-list-alt"></i><span class="menu-text">Bulk Import Data</span>
+                        runat="server"><i class="icon-list-alt"></i><span class="menu-text">Bulk Import Data</span>
                     </a></li>--%>
                         <li id="liFundingStatus" runat="server"><a href="~/LeadPages/FundingListing.aspx"
-                            id="AFundingStatus" runat="server"><i class="fa fa-list-alt"></i><span class="menu-text">Funding Status</span> </a></li>
-                        <li><a href="../ContactUs/Contactus.aspx"><i class="fa fa-envelope-o"></i><span
+                            id="AFundingStatus" runat="server"><i class="icon-list-alt"></i><span class="menu-text">Funding Status</span> </a></li>
+                        <li><a href="../ContactUs/Contactus.aspx"><i class="icon-envelope-alt"></i><span
                             class="menu-text">
                             <asp:Localize ID="localContactUs" runat="server" Text="Contact Us" meta:resourcekey="localContactUsResource1"></asp:Localize></span> </a></li>
                         
 
-                        <li><a href="../faq.aspx"><i class="fa fa-comments-o"></i><span class="menu-text">
+                        <li><a href="../faq.aspx"><i class="icon-comment-alt"></i><span class="menu-text">
                             <asp:Localize ID="localFAQHelp" runat="server" Text="FAQs& Help" meta:resourcekey="localFAQHelpResource1"></asp:Localize></span> </a></li>
                     </ul>
                     <!-- /.nav-list -->
                     <div class="sidebar-collapse" id="sidebar-collapse">
-                        <i class="fa fa-double-angle-left" data-icon1="fa fa-double-angle-left" data-icon2="fa fa-angle-double-right"></i>
+                        <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-angle-double-right"></i>
                     </div>
                     <script type="text/javascript">
                         try { ace.settings.check('sidebar', 'collapsed') } catch (e) { }
@@ -370,7 +369,7 @@
                 <!-- /.main-content -->
             </div>
             <!-- /.main-container-inner -->
-            <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse"><i class="fa fa-angle-double-up"></i></a>
+            <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse"><i class="icon-angle-double-up"></i></a>
         </div>
         <!-- /.main-container -->
         <!-- basic scripts -->

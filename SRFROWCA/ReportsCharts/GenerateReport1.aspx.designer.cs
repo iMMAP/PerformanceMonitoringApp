@@ -139,13 +139,13 @@ namespace SRFROWCA.Reports {
         protected global::Saplin.Controls.DropDownCheckBoxes ddlObjectives;
         
         /// <summary>
-        /// ddlIndicators control.
+        /// ddlPriority control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Saplin.Controls.DropDownCheckBoxes ddlIndicators;
+        protected global::Saplin.Controls.DropDownCheckBoxes ddlPriority;
         
         /// <summary>
         /// ddlActivities control.

@@ -1263,6 +1263,24 @@
   <ItemGroup>
     <Content Include="Pages\App_LocalResources\ManageActivities.aspx.fr-FR.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="ClusterLead\App_LocalResources\ProjectsListing.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ClusterLead\App_LocalResources\ProjectsListing.aspx.fr-FR.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ClusterLead\App_LocalResources\AddSRPActivitiesFromMasterList.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ClusterLead\App_LocalResources\AddSRPActivitiesFromMasterList.aspx.fr-FR.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ClusterLead\App_LocalResources\ClusterIndicatorTargets.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ClusterLead\App_LocalResources\ClusterIndicatorTargets.aspx.fr-FR.resx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
