@@ -21,6 +21,11 @@ namespace SRFROWCA.ClusterLead
             }
         }
 
+        internal override void BindGridData()
+        {
+            PopulateMonths();
+        }
+
         private void PopulateDropDowns()
         {
             PopulateMonths();
@@ -33,16 +38,11 @@ namespace SRFROWCA.ClusterLead
             ddlMonths.DataValueField = "MonthId";
             ddlMonths.DataTextField = "MonthName";
 
-            ddlMonths.DataSource = GetMonth();
+            ddlMonths.DataSource = RC.GetMonths();
             ddlMonths.DataBind();
 
             ListItem item = new ListItem("Select", "0");
             ddlMonths.Items.Insert(0, item);
-        }
-
-        private DataTable GetMonth()
-        {
-            return DBContext.GetData("GetMonths", new object[] { 1 });
         }
 
         // Populate Organizations drop down.

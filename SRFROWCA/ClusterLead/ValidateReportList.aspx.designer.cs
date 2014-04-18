@@ -13,6 +13,42 @@ namespace SRFROWCA.ClusterLead {
     public partial class ValidateReportList {
         
         /// <summary>
+        /// localBreadCrumbHome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localBreadCrumbHome;
+        
+        /// <summary>
+        /// localBreadCrumbValidateAchievements control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localBreadCrumbValidateAchievements;
+        
+        /// <summary>
+        /// localFilterReports control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localFilterReports;
+        
+        /// <summary>
+        /// localProjectCode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localProjectCode;
+        
+        /// <summary>
         /// ddlProjects control.
         /// </summary>
         /// <remarks>
@@ -20,6 +56,15 @@ namespace SRFROWCA.ClusterLead {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlProjects;
+        
+        /// <summary>
+        /// localMonths control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localMonths;
         
         /// <summary>
         /// ddlMonths control.
@@ -31,6 +76,15 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.DropDownList ddlMonths;
         
         /// <summary>
+        /// localProjectTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localProjectTitle;
+        
+        /// <summary>
         /// ddlProjectTitle control.
         /// </summary>
         /// <remarks>
@@ -40,6 +94,15 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.DropDownList ddlProjectTitle;
         
         /// <summary>
+        /// localOrganization control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localOrganization;
+        
+        /// <summary>
         /// ddlOrganizations control.
         /// </summary>
         /// <remarks>
@@ -47,6 +110,15 @@ namespace SRFROWCA.ClusterLead {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlOrganizations;
+        
+        /// <summary>
+        /// localReportsList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localReportsList;
         
         /// <summary>
         /// gvReports control.
