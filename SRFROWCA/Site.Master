@@ -24,7 +24,7 @@
     <!-- ORS styles -->
     <link rel="stylesheet" href="assets/css/ors.css" />
     <!-- ace styles -->
-    <!--[if !IE]> -->
+    <!--[if !IE] -->
     <script type="text/javascript">
         window.jQuery || document.write("<script src='<%# BaseURL %>/assets/js/jquery-2.0.3.min.js'>" +
     "<" + "/script>"); </script>
@@ -206,8 +206,7 @@
                     <div class="sidebar-shortcuts" id="sidebar-shortcuts">
                         <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
                             <button class="btn width-100 btn-info">
-                                Online Reporting System
-                            </button>
+                                Online Reporting System         </button>
                         </div>
                         <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
                             <span class="btn btn-success"></span><span class="btn btn-info"></span><span class="btn btn-warning"></span><span class="btn btn-danger"></span>
@@ -344,6 +343,9 @@
                         <%-- <li id="liBulkImport" runat="server"><a href="~/Admin/UploadLogFrame.aspx" id="menueBulkImport"
                         runat="server"><i class="icon-list-alt"></i><span class="menu-text">Bulk Import Data</span>
                     </a></li>--%>
+                        <li id="liUserListing" runat="server"><a href="~/Admin/UsersListing.aspx"
+                            id="menueUserListing" runat="server"><i class="icon-user"></i><span class="menu-text">Users</span> </a></li>
+
                         <li id="liFundingStatus" runat="server"><a href="~/LeadPages/FundingListing.aspx"
                             id="AFundingStatus" runat="server"><i class="icon-list-alt"></i><span class="menu-text">Funding Status</span> </a></li>
                         <li><a href="../ContactUs/Contactus.aspx"><i class="icon-envelope-alt"></i><span
@@ -369,7 +371,7 @@
                 <!-- /.main-content -->
             </div>
             <!-- /.main-container-inner -->
-            <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse"><i class="icon-angle-double-up"></i></a>
+            <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse"><i class="icon-double-angle-up"></i></a>
         </div>
         <!-- /.main-container -->
         <!-- basic scripts -->

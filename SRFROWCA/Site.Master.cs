@@ -53,6 +53,16 @@ namespace SRFROWCA
                     ShowRegionalLeadMenue();
                 }
 
+                if (HttpContext.Current.User.IsInRole("OCHA"))
+                {
+                    ShowOCHAMenue();
+                }
+
+                if (HttpContext.Current.User.IsInRole("Admin"))
+                {
+                    ShowAdminMenue();
+                }
+
                 ShowAuthenticatedMenues();
             }
 
@@ -90,6 +100,7 @@ namespace SRFROWCA
             liClusterTarget.Visible = isShow;
             liPivotSumOfCountryIndicators.Visible = isShow;
             liFundingStatus.Visible = isShow;
+            liUserListing.Visible = isShow;
             //liBulkImport.Visible = isShow;
         }
 
@@ -133,8 +144,7 @@ namespace SRFROWCA
             liCLprojectsListing.Visible = isShow;
             liSumOfCountryIndicators.Visible = isShow;
             liClusterTarget.Visible = isShow;
-            liPivotSumOfCountryIndicators.Visible = isShow;
-            liFundingStatus.Visible = isShow;
+            liPivotSumOfCountryIndicators.Visible = isShow;            
             //liReportsTopIndicators1.Visible = isShow;
             //liReportsTopIndicatorsGeneral1.Visible = isShow;
             //liReportsTopIndicatorRegional1.Visible = isShow;
@@ -149,6 +159,19 @@ namespace SRFROWCA
             liPivotNumberOfOrgs.Visible = isShow;
             liPivotOrgOperational.Visible = isShow;
         }
+
+        private void ShowOCHAMenue()
+        {
+            bool isShow = true;
+            liFundingStatus.Visible = isShow;
+        }
+
+        private void ShowAdminMenue()
+        {
+            bool isShow = true;
+            liFundingStatus.Visible = isShow;
+            liUserListing.Visible = isShow;
+        }        
 
         private void ActiveMenueItem()
         {
@@ -269,6 +292,10 @@ namespace SRFROWCA
             else if (uri == "/ClusterLead/ProjectsListing.aspx")
             {
                 liCLprojectsListing.Attributes.Add("class", "active");
+            }
+            else if (uri == "/Admin/UsersListing.aspx")
+            {
+                liUserListing.Attributes.Add("class", "active");
             }
         }
 

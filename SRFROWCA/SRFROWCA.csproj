@@ -1281,6 +1281,12 @@
   <ItemGroup>
     <Content Include="ClusterLead\App_LocalResources\ClusterIndicatorTargets.aspx.fr-FR.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="ClusterLead\App_LocalResources\ValidateReportList.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ClusterLead\App_LocalResources\ValidateReportList.aspx.fr-FR.resx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
