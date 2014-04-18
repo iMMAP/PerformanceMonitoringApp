@@ -291,6 +291,11 @@ namespace SRFROWCA.Common
             return DBContext.GetData("GetUserDetails", new object[] { 1, userId });
         }
 
+        internal static DataTable GetMonths()
+        {
+            return DBContext.GetData("GetMonths", new object[] { SelectedSiteLanguageId });
+        }
+
         public static Guid GetCurrentUserId
         {
             get
