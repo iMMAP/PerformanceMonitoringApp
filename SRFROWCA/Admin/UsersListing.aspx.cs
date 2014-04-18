@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Web.Security;
 using System.Web.UI;
@@ -45,10 +46,18 @@ namespace SRFROWCA.Admin
             string email = string.IsNullOrEmpty(txtEmail.Text.Trim()) ? null : txtEmail.Text.Trim();
             string orgName = string.IsNullOrEmpty(txtOrg.Text.Trim()) ? null : txtOrg.Text.Trim();
             string locationName = string.IsNullOrEmpty(txtCountry.Text.Trim()) ? null : txtCountry.Text.Trim();
-            int? userType = rbUserTypes.SelectedValue == "0" ? (int?)null : Convert.ToInt32(rbUserTypes.SelectedValue);
+            string userType = ddlRoles.SelectedValue == "All"? null: ddlRoles.SelectedValue;
             int? isApproved = rbIsApproved.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(rbIsApproved.SelectedValue);
             int? isLockedOut = null;
-            return new object[] { userId, userName, email, isApproved, isLockedOut, orgName, locationName };
+            DateTime? startDate = txtFromDate.Text.Trim().Length > 0 ?
+                                    DateTime.ParseExact(txtFromDate.Text.Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture) :
+                                (DateTime?)null;
+
+            DateTime? endDate = txtToDate.Text.Trim().Length > 0 ?
+                                DateTime.ParseExact(txtToDate.Text.Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture) :
+                                (DateTime?)null;
+
+            return new object[] { userId, userName, email, isApproved, isLockedOut, orgName, locationName, userType, startDate, endDate };
         }
 
         private void LoadUsers()
@@ -91,15 +100,9 @@ namespace SRFROWCA.Admin
             }
         }
 
-        protected void chkIsCountryAdmin_CheckedChanged(object sender, EventArgs e)
+        protected void ddlRoles_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int index = ((GridViewRow)((CheckBox)sender).NamingContainer).RowIndex;
-            CheckBox cb = gvUsers.Rows[index].FindControl("chkIsCountryAdmin") as CheckBox;
-            Label lblUserId = gvUsers.Rows[index].FindControl("lblUserId") as Label;
-
-            if (cb == null || lblUserId == null) return;
-
-            AddRemoveUserInRole(cb.Checked, lblUserId.Text, RC.GetCountryAdminRoleName);
+            LoadUsers();
         }
 
         protected void gvUsers_RowCommand(object sender, GridViewCommandEventArgs e)

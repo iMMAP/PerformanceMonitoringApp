@@ -13,6 +13,24 @@ namespace SRFROWCA.Admin {
     public partial class UsersListing {
         
         /// <summary>
+        /// btnExportToExcel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnExportToExcel;
+        
+        /// <summary>
+        /// btnAddUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddUser;
+        
+        /// <summary>
         /// txtUserName control.
         /// </summary>
         /// <remarks>
@@ -49,13 +67,13 @@ namespace SRFROWCA.Admin {
         protected global::System.Web.UI.WebControls.TextBox txtCountry;
         
         /// <summary>
-        /// rbUserTypes control.
+        /// ddlRoles control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rbUserTypes;
+        protected global::System.Web.UI.WebControls.DropDownList ddlRoles;
         
         /// <summary>
         /// rbIsApproved control.
@@ -92,24 +110,6 @@ namespace SRFROWCA.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSearch;
-        
-        /// <summary>
-        /// btnExportExcel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnExportExcel;
-        
-        /// <summary>
-        /// btnAddUser control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddUser;
         
         /// <summary>
         /// gvUsers control.
