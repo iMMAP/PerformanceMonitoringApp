@@ -93,23 +93,6 @@ namespace SRFROWCA.ClusterLead
             }
         }
 
-        protected void chkRegional_CheckedChanged(object sender, EventArgs e)
-        {
-            int index = ((GridViewRow)((CheckBox)sender).NamingContainer).RowIndex;
-            CheckBox cb = gvSRPIndicators.Rows[index].FindControl("chkRegional") as CheckBox;
-            if (cb != null)
-            {
-                //Label lblUserId = gvSRPIndicators.Rows[index].FindControl("lblUserId") as Label;
-                int indicatorId = 0;
-                int.TryParse(gvSRPIndicators.DataKeys[index].Values["ActivityDataId"].ToString(), out indicatorId);
-
-                if (indicatorId > 0)
-                {
-                    AddRemoveRegionalIndicatorFromList(indicatorId, cb.Checked);
-                }
-            }
-        }
-
         protected void gvSRPIndicators_Sorting(object sender, GridViewSortEventArgs e)
         {
             DataTable dt = GetIndicators();
@@ -153,15 +136,9 @@ namespace SRFROWCA.ClusterLead
         private void AddRemoveSRPIndicatorFromList(int indicatorId, bool isAdd)
         {
             Guid userId = RC.GetCurrentUserId;
-            int locationId = UserInfo.Country;
-            DBContext.Update("InsertDeleteSRPIndicaotr", new object[] { indicatorId, locationId, isAdd, userId, DBNull.Value });
-        }
-
-        private void AddRemoveRegionalIndicatorFromList(int indicatorId, bool isAdd)
-        {
-            Guid userId = RC.GetCurrentUserId;
-            int locationId = UserInfo.Country;
-            DBContext.Update("InsertDeleteRegionalIndicaotr", new object[] { indicatorId, locationId, isAdd, userId, DBNull.Value });
+            int locationId = UserInfo.EmergencyCountry;
+            int clusterId = UserInfo.EmergencyCluster;
+            DBContext.Update("InsertDeleteSRPIndicaotr", new object[] { indicatorId, locationId, clusterId, isAdd, userId, DBNull.Value });
         }
 
         protected void btnAddSRPActivity_Click(object sender, EventArgs e)
