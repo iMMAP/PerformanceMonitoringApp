@@ -135,7 +135,7 @@ namespace SRFROWCA.RegionalLead
         private void AddRemoveRegionalIndicatorFromList(int indicatorId, bool isAdd)
         {
             Guid userId = RC.GetCurrentUserId;
-            DBContext.Update("InsertDeleteRegionalIndicaotr", new object[] { indicatorId, isAdd, userId, DBNull.Value });
+            DBContext.Update("InsertDeleteRegionalIndicaotr", new object[] { indicatorId, UserInfo.EmergencyCluster, isAdd, userId, DBNull.Value });
         }
     }
 }
