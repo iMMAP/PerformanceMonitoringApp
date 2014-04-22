@@ -176,7 +176,7 @@
                                     <asp:Localize ID="localProfile" runat="server" Text="Profile" meta:resourcekey="localProfileResource1"></asp:Localize>
                                 </a></li>
                                 <li class="divider"></li>
-                                <li>                                    
+                                <li>
                                     <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect"
                                         OnLoggedOut="HeadLoginStatus_LoggedOut" LogoutPageUrl="~/Default.aspx" meta:resourcekey="HeadLoginStatusResource1" />
                                 </li>
@@ -206,7 +206,8 @@
                     <div class="sidebar-shortcuts" id="sidebar-shortcuts">
                         <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
                             <button class="btn width-100 btn-info">
-                                Online Reporting System         </button>
+                                Online Reporting System        
+                            </button>
                         </div>
                         <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
                             <span class="btn btn-success"></span><span class="btn btn-info"></span><span class="btn btn-warning"></span><span class="btn btn-danger"></span>
@@ -256,8 +257,9 @@
                         <li id="liClusterTarget" runat="server"><a href="~/ClusterLead/ClusterIndicatorTargets.aspx"
                             id="menueClsuterTarget" runat="server"><i class="icon-sort-by-order"></i><span class="menu-text">
                                 <asp:Localize ID="localCluterTargets" runat="server" Text="Cluster Targets" meta:resourcekey="localCluterTargetsResource1"></asp:Localize></span> </a></li>
-
-
+                        <li id="liBulkImport" runat="server"><a href="~/ClusterLead/UploadAchieved.aspx" id="menueBulkImport"
+                            runat="server"><i class="icon-list-alt"></i><span class="menu-text">Bulk Import Data</span>
+                        </a></li>
                         <li id="liValidate" runat="server"><a id="menueValidate" runat="server" href="#"
                             class="dropdown-toggle"><i class="icon-check"></i><span class="menu-text">
                                 <asp:Localize ID="localValidate" runat="server" Text="Validate" meta:resourcekey="localValidateResource1"></asp:Localize>
@@ -340,9 +342,6 @@
                                     <asp:Localize ID="localPivotTableSumOfInd" runat="server" Text="Sum Of Country Ind" meta:resourcekey="localPivotTableSumOfIndResource1"></asp:Localize></a></li>
                             </ul>
                         </li>
-                        <%-- <li id="liBulkImport" runat="server"><a href="~/Admin/UploadLogFrame.aspx" id="menueBulkImport"
-                        runat="server"><i class="icon-list-alt"></i><span class="menu-text">Bulk Import Data</span>
-                    </a></li>--%>
                         <li id="liUserListing" runat="server"><a href="~/Admin/UsersListing.aspx"
                             id="menueUserListing" runat="server"><i class="icon-user"></i><span class="menu-text">Users</span> </a></li>
 
@@ -351,7 +350,7 @@
                         <li><a href="../ContactUs/Contactus.aspx"><i class="icon-envelope-alt"></i><span
                             class="menu-text">
                             <asp:Localize ID="localContactUs" runat="server" Text="Contact Us" meta:resourcekey="localContactUsResource1"></asp:Localize></span> </a></li>
-                        
+
 
                         <li><a href="../faq.aspx"><i class="icon-comment-alt"></i><span class="menu-text">
                             <asp:Localize ID="localFAQHelp" runat="server" Text="FAQs& Help" meta:resourcekey="localFAQHelpResource1"></asp:Localize></span> </a></li>

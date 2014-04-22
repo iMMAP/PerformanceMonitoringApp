@@ -101,7 +101,7 @@ namespace SRFROWCA
             liPivotSumOfCountryIndicators.Visible = isShow;
             liFundingStatus.Visible = isShow;
             liUserListing.Visible = isShow;
-            //liBulkImport.Visible = isShow;
+            liBulkImport.Visible = isShow;
         }
 
         private void ShowUserMenue()
@@ -144,7 +144,8 @@ namespace SRFROWCA
             liCLprojectsListing.Visible = isShow;
             liSumOfCountryIndicators.Visible = isShow;
             liClusterTarget.Visible = isShow;
-            liPivotSumOfCountryIndicators.Visible = isShow;            
+            liPivotSumOfCountryIndicators.Visible = isShow;
+            liBulkImport.Visible = isShow;
             //liReportsTopIndicators1.Visible = isShow;
             //liReportsTopIndicatorsGeneral1.Visible = isShow;
             //liReportsTopIndicatorRegional1.Visible = isShow;

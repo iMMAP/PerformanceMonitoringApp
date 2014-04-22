@@ -427,6 +427,24 @@ namespace SRFROWCA {
         protected global::System.Web.UI.WebControls.Localize localCluterTargets;
         
         /// <summary>
+        /// liBulkImport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liBulkImport;
+        
+        /// <summary>
+        /// menueBulkImport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueBulkImport;
+        
+        /// <summary>
         /// liValidate control.
         /// </summary>
         /// <remarks>
