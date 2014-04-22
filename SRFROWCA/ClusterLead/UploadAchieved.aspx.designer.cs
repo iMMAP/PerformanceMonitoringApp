@@ -31,6 +31,15 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.Localize localBreadCrumbUploadAchieved;
         
         /// <summary>
+        /// lblMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMessage;
+        
+        /// <summary>
         /// localDownleadTemplate control.
         /// </summary>
         /// <remarks>
@@ -58,6 +67,15 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.Localize localDownloadItems;
         
         /// <summary>
+        /// ddlOrganizations control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Saplin.Controls.DropDownCheckBoxes ddlOrganizations;
+        
+        /// <summary>
         /// localDownloadFirstItem control.
         /// </summary>
         /// <remarks>
@@ -67,49 +85,58 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.Localize localDownloadFirstItem;
         
         /// <summary>
-        /// Localize1 control.
+        /// lblOrganization control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize1;
+        protected global::System.Web.UI.WebControls.Label lblOrganization;
         
         /// <summary>
-        /// Localize2 control.
+        /// chkCountryIndicators control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize2;
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkCountryIndicators;
         
         /// <summary>
-        /// Localize3 control.
+        /// chkRegionalInidcators control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize3;
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkRegionalInidcators;
         
         /// <summary>
-        /// Localize5 control.
+        /// chkAllIndicators control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize5;
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkAllIndicators;
         
         /// <summary>
-        /// Localize4 control.
+        /// localDownloadClusterTargets control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize4;
+        protected global::System.Web.UI.WebControls.Localize localDownloadClusterTargets;
+        
+        /// <summary>
+        /// LocalDownloadLocations control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize LocalDownloadLocations;
         
         /// <summary>
         /// btnDownloadTemplage control.
@@ -119,5 +146,77 @@ namespace SRFROWCA.ClusterLead {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnDownloadTemplage;
+        
+        /// <summary>
+        /// localUploadHeaderText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localUploadHeaderText;
+        
+        /// <summary>
+        /// localUploadBrowseText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localUploadBrowseText;
+        
+        /// <summary>
+        /// localUploadItemsMain control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localUploadItemsMain;
+        
+        /// <summary>
+        /// localUploadItem1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localUploadItem1;
+        
+        /// <summary>
+        /// localUploadItem2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localUploadItem2;
+        
+        /// <summary>
+        /// localUploadItem3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localUploadItem3;
+        
+        /// <summary>
+        /// fuAchieved control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload fuAchieved;
+        
+        /// <summary>
+        /// btnImport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnImport;
     }
 }
