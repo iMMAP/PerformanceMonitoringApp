@@ -77,13 +77,12 @@ namespace SRFROWCA
                 }
                 
                 table.Rows.Add(gv.HeaderRow);
-            }
+            }          
 
             //  add each of the data rows to the table
             foreach (GridViewRow row in gv.Rows)
             {
                 ExportUtility.PrepareControlForExport(row);
-
                 foreach (TableCell cell in row.Cells)
                 {
                     if (row.RowIndex % 2 == 0)
@@ -94,6 +93,7 @@ namespace SRFROWCA
                     {
                         cell.BackColor = System.Drawing.ColorTranslator.FromHtml("#fbfbfb");
                     }
+                    //cell.BackColor = row.BackColor;
                     cell.CssClass = "textmode";
                 }
 
