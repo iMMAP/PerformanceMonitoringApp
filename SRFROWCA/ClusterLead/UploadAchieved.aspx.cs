@@ -18,8 +18,6 @@ namespace SRFROWCA.ClusterLead
             if (!IsPostBack)
             {
                 LoadOrganizations();
-                //gvTemplate.DataSource = GetIndicators();
-                //gvTemplate.DataBind();
             }
         }
 
@@ -32,14 +30,28 @@ namespace SRFROWCA.ClusterLead
         }
 
         #region Download Template
-        
+
         protected void btnDownload_Click(object sender, EventArgs e)
         {
+            if (!IsIndicatorSelected())
+            {
+                ShowMessage("Please at least select one CheckBox i.e. Country, Regional or All to get the list of indicators!", RC.NotificationType.Error, true, 2000);
+                return;
+            }
             GridView gv = new GridView();
             gv.DataSource = GetIndicators();
             gv.DataBind();
-            //RemoveColumnsFromDataTable(dt);
-            ExportUtility.ExportGridView(gv, "ORSDataTemplate", ".xls", Response, true);
+            ExportGridView(gv, "ORSDataTemplate", ".xls", true);
+        }
+
+        private bool IsIndicatorSelected()
+        {
+            bool countryInd = chkCountryIndicators.Checked;
+            bool regionalInd = chkRegionalInidcators.Checked;
+            bool allInd = chkAllIndicators.Checked;
+
+            return countryInd || regionalInd || allInd;
+                
         }
 
         private DataTable GetIndicators()
@@ -52,39 +64,7 @@ namespace SRFROWCA.ClusterLead
                                                                                         orgIds, countryInd, regionalInd, allInd,
                                                                                         RC.SelectedSiteLanguageId});
         }
-
-        string strGroup = "";
-        int t = 0;
-
-        protected void gvTemplate_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.Header)
-            {
-                e.Row.BackColor = System.Drawing.ColorTranslator.FromHtml("#ddd");
-                e.Row.BorderColor = System.Drawing.ColorTranslator.FromHtml("#bbbbbb");
-            }
-
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                DataRowView drv = (DataRowView)e.Row.DataItem;
-
-                if (!(drv["ProjectCode"].ToString() == strGroup))
-                {
-
-                    strGroup = drv["ProjectCode"].ToString();
-                    t += 1;
-                }
-                if (t % 2 == 0)
-                {
-                    e.Row.BackColor = System.Drawing.ColorTranslator.FromHtml("#ebf0f4");
-                }
-                else
-                {
-                    e.Row.BackColor = System.Drawing.ColorTranslator.FromHtml("#fbfbfb");
-                }
-            }
-        }
-
+        
         #endregion
 
         protected void btnImport_Click(object sender, EventArgs e)
@@ -317,7 +297,7 @@ namespace SRFROWCA.ClusterLead
 	                            [Accumulative] [int] NULL,
 	                            [Mid Year Target] [int] NULL,
 	                            [Full Year Target] [int] NULL";
-            
+
             foreach (DataColumn column in dt.Columns)
             {
                 if (LocationColumn(column.ColumnName))
@@ -403,7 +383,7 @@ namespace SRFROWCA.ClusterLead
                     }
                     else
                     {
-                        locationNames += "," + column.ColumnName + "_" + i.ToString() + " AS t_" + column.ColumnName + i.ToString(); 
+                        locationNames += "," + column.ColumnName + "_" + i.ToString() + " AS t_" + column.ColumnName + i.ToString();
                     }
                     i += 1;
                 }
@@ -455,11 +435,102 @@ namespace SRFROWCA.ClusterLead
         private void WriteDataToDB(DataTable dt, string conString)
         {
             // DB connection string.
-            
+
             SqlBulkCopy sqlBulk = new SqlBulkCopy(conString);
             sqlBulk.DestinationTableName = "ImportCLDataStaging_Temp";
             sqlBulk.WriteToServer(dt);
             sqlBulk.Close();
+        }
+
+        private void ExportGridView(Control control, string fileName, string fileExtention, bool disposePassedControl)
+        {
+            string[] nameWithSpaces = fileName.Split(' ');
+            fileName = string.Join("-", nameWithSpaces);
+            fileName += fileExtention;
+            Response.Clear();
+            Response.AddHeader("content-disposition", "attachment;filename=" + fileName);
+            Response.ContentType = "application/ms-excel";
+            Response.ContentEncoding = System.Text.Encoding.Unicode;
+            Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
+            GridView gv = control as GridView;
+            Response.Write(RenderGrid(gv).ToString());
+            if (disposePassedControl)
+            {
+                control.Dispose();
+            }
+
+            Response.End();
+        }
+
+        private static StringWriter RenderGrid(GridView gv)
+        {
+            //  Create a table to contain the grid
+            Table table = new Table();
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter htw = new HtmlTextWriter(sw);
+
+            //  include the gridline settings
+            table.GridLines = gv.GridLines;
+
+            //  add the header row to the table
+            if (gv.HeaderRow != null)
+            {
+                ExportUtility.PrepareControlForExport(gv.HeaderRow);
+                gv.HeaderRow.BackColor = System.Drawing.ColorTranslator.FromHtml("#ddd");
+                gv.HeaderRow.BorderColor = System.Drawing.ColorTranslator.FromHtml("#bbbbbb");
+                foreach (TableCell cell in gv.HeaderRow.Cells)
+                {
+                    cell.BackColor = gv.HeaderStyle.BackColor;
+                }
+
+                table.Rows.Add(gv.HeaderRow);
+            }
+
+            string strGroup = "";
+            int t = 0;
+            string color = "";
+            //  add each of the data rows to the table
+            foreach (GridViewRow row in gv.Rows)
+            {
+                if (!(row.Cells[1].Text == strGroup))
+                {
+
+                    strGroup = row.Cells[1].Text;
+                    t += 1;
+                }
+                if (t % 2 == 0)
+                {
+
+                    color = "#ebf0f4";
+                }
+                else
+                {
+                    color = "#fbfbfb";
+                }
+
+                ExportUtility.PrepareControlForExport(row);
+                foreach (TableCell cell in row.Cells)
+                {
+
+                    cell.BackColor = System.Drawing.ColorTranslator.FromHtml(color);
+                    cell.CssClass = "textmode";
+                }
+
+                //row.CssClass = "istrow";
+                table.Rows.Add(row);
+            }
+
+            //  add the footer row to the table
+            if (gv.FooterRow != null)
+            {
+                ExportUtility.PrepareControlForExport(gv.FooterRow);
+                table.Rows.Add(gv.FooterRow);
+            }
+
+            //  render the table into the htmlwriter
+            table.RenderControl(htw);
+
+            return sw;
         }
 
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)

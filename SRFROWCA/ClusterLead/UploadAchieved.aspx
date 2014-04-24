@@ -51,7 +51,7 @@
                                 <cc:DropDownCheckBoxes ID="ddlOrganizations" runat="server" CssClass="ddlWidth"
                                     AddJQueryReference="True"
                                     UseButtons="False" UseSelectAllNode="True">
-                                    <Style SelectBoxWidth="" DropDownBoxBoxWidth="250%" DropDownBoxBoxHeight="300px"></Style>
+                                    <Style SelectBoxWidth="" DropDownBoxBoxWidth="350%" DropDownBoxBoxHeight="300px"></Style>
                                     <Texts SelectBoxCaption="Select Organization" />
                                 </cc:DropDownCheckBoxes>
                                 <asp:Localize ID="localDownloadFirstItem" runat="server" Text="No organization means all"></asp:Localize>

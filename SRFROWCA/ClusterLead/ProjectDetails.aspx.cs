@@ -15,7 +15,8 @@ namespace SRFROWCA.ClusterLead
         {
             if (IsPostBack) return;
 
-            if (Session["ViewProjectId"] != null)
+            //if (Session["ViewProjectId"] != null)
+            if (Request.QueryString["pid"] != null)
             {
                 GetProjectDetails();
             }
@@ -23,7 +24,9 @@ namespace SRFROWCA.ClusterLead
 
         private void GetProjectDetails()
         {
-            int projectId = Convert.ToInt32(Session["ViewProjectId"].ToString());
+            //int projectId = Convert.ToInt32(Session["ViewProjectId"].ToString());
+            int projectId = 0;
+            int.TryParse(Request.QueryString["pid"].ToString(), out projectId);
             DataTable dt = DBContext.GetData("GetProjectDetails", new object[] { projectId, 1 });
             fvProjects.DataSource = dt;
             fvProjects.DataBind();

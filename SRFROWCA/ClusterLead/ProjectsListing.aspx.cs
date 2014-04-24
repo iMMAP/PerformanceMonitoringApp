@@ -110,8 +110,8 @@ namespace SRFROWCA.ClusterLead
         {
             if (e.CommandName == "ViewProject")
             {
-                Session["ViewProjectId"] = e.CommandArgument.ToString();
-                Response.Redirect("~/ClusterLead/ProjectDetails.aspx");
+                //Session["ViewProjectId"] = e.CommandArgument.ToString();
+                Response.Redirect("~/ClusterLead/ProjectDetails.aspx?pid=" + e.CommandArgument.ToString());
             }
         }
 
