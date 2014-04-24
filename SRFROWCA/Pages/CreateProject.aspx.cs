@@ -232,6 +232,7 @@ namespace SRFROWCA.Pages
                 {
                     ProjectId = DBContext.Add("InsertProject", new object[] { title, objective, clusterId, locationId,
                                                              orgId, startDate, endDate, userId, DBNull.Value });
+                    AddNotification(ProjectId);
                 }
             }
         }
@@ -246,6 +247,24 @@ namespace SRFROWCA.Pages
             }
 
             return projectCode;
+        }
+
+        private void AddNotification(int pId)
+        {
+            using (ORSEntities db = new ORSEntities())
+            {
+                Notification notification = db.Notifications.CreateObject();
+                notification.Notification1 = "New Project Added For " + ddlCluster.SelectedItem.Text;
+                notification.SourceUserId = RC.GetCurrentUserId;
+                notification.ProjectId = pId;
+                notification.EmergencyLocationId = UserInfo.EmergencyCountry;
+                notification.EmergencyClusterId = Convert.ToInt32(ddlCluster.SelectedValue);
+                notification.OrganizationId = UserInfo.Organization;
+                notification.PageURL = "~/ClusterLead/ProjectDetails.aspx?pid=" + pId.ToString();
+                notification.IsRead = false;
+                db.Notifications.AddObject(notification);
+                db.SaveChanges();
+            }
         }
 
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success)

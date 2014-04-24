@@ -209,8 +209,24 @@ namespace SRFROWCA.Pages
                     insertComment.Comments = comments;
                     db.IndicatorComments.AddObject(insertComment);
                     db.SaveChanges();
+                    //AddNotification(db);
                 }
             }
+        }
+
+        private void AddNotification(ORSEntities db)
+        {
+            Notification notification = db.Notifications.CreateObject();
+            notification.Notification1 = "New Comments Added For Indicator In Project " + rblProjects.SelectedItem.Text;
+            notification.SourceUserId = RC.GetCurrentUserId;
+            notification.ProjectId = Convert.ToInt32(rblProjects.SelectedValue);
+            notification.EmergencyLocationId = UserInfo.EmergencyCountry;
+            notification.OrganizationId = UserInfo.Organization;
+            notification.MonthId = Convert.ToInt32(ddlMonth.SelectedValue);
+            notification.ActivityDataId = CommentsIndId;
+            notification.IsRead = false;            
+            db.Notifications.AddObject(notification);
+            db.SaveChanges();
         }
 
         protected void btnCancelComments_Click(object sender, EventArgs e)
