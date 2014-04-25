@@ -15,7 +15,7 @@ namespace SRFROWCA.ClusterLead
         {
             if (!IsPostBack)
             {
-                //LoadProjects();
+                LoadProjects();
                 LoadIndicators();
             }
         }
@@ -42,6 +42,11 @@ namespace SRFROWCA.ClusterLead
             }
         }
 
+        protected void rblProjects_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadIndicators();
+        }
+
         private void LoadIndicators()
         {
             LoadAddedIndicators();
@@ -50,8 +55,7 @@ namespace SRFROWCA.ClusterLead
 
         private void LoadAddedIndicators()
         {
-            int? projectId = null;
-                //Convert.ToInt32(rblProjects.SelectedValue) > 0 ? Convert.ToInt32(rblProjects.SelectedValue) : (int?)null;
+            int? projectId = Convert.ToInt32(rblProjects.SelectedValue) > 0 ? Convert.ToInt32(rblProjects.SelectedValue) : (int?)null;
             gvAdded.DataSource = DBContext.GetData("GetAddedProjectIndicatorsToApprove", new object[] { UserInfo.EmergencyCountry,
                                                                                                         UserInfo.EmergencyCluster,
                                                                                                         projectId,
@@ -61,8 +65,7 @@ namespace SRFROWCA.ClusterLead
 
         private void LoadDeletedIndicators()
         {
-            int? projectId = null;
-                //Convert.ToInt32(rblProjects.SelectedValue) > 0 ? Convert.ToInt32(rblProjects.SelectedValue) : (int?)null;
+            int? projectId = Convert.ToInt32(rblProjects.SelectedValue) > 0 ? Convert.ToInt32(rblProjects.SelectedValue) : (int?)null;
             gvDeleted.DataSource = DBContext.GetData("GetDeletedProjectIndicatorsToApprove", new object[] { UserInfo.EmergencyCountry,
                                                                                                             UserInfo.EmergencyCluster,
                                                                                                             projectId,
@@ -104,7 +107,9 @@ namespace SRFROWCA.ClusterLead
                 }
             }
 
+            LoadProjects();
             LoadIndicators();
+            //AddNotification("CLApproveComments", UserInfo.EmergencyCountry, UserInfo.EmergencyCluster)
         }
 
         private void ApproveAddedIndicator(int projIndId)
@@ -150,7 +155,7 @@ namespace SRFROWCA.ClusterLead
                     }
                 }
             }
-
+            LoadProjects();
             LoadIndicators();
         }
 
@@ -164,10 +169,17 @@ namespace SRFROWCA.ClusterLead
             DBContext.GetData("RejectDeletedProjectIndicator", new object[] { projIndId });
         }
 
-        //private void LoadProjects()
-        //{
-        //    rblProjects.DataSource = DBContext.GetData("GetProjectsToApproveIndicatorsAddRemoved", new object[] { UserInfo.EmergencyCountry, UserInfo.EmergencyCluster });
-        //    rblProjects.DataBind();
-        //}
+        private void LoadProjects()
+        {
+            rblProjects.DataValueField = "ProjectId";
+            rblProjects.DataTextField = "ProjectCode";
+            rblProjects.DataSource = DBContext.GetData("GetProjectsToApproveIndicatorsAddRemoved", new object[] { UserInfo.EmergencyCountry, UserInfo.EmergencyCluster });
+            rblProjects.DataBind();
+
+            if (rblProjects.Items.Count > 0)
+            {
+                rblProjects.SelectedIndex = 0;
+            }
+        }
     }
 }

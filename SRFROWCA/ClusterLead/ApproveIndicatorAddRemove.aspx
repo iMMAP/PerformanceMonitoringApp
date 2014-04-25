@@ -18,7 +18,32 @@
     </div>
     <div class="page-content">
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-3">
+                <div class="widget-box no-border">
+                    <div class="widget-body">
+                        <div class="widget-main no-padding-top">
+                            <div class="col-sm-14 widget-container-span">
+                                <div class="widget-box">
+                                    <div class="widget-header widget-header-small header-color-blue2">
+                                        <h5>
+                                            <asp:Localize ID="Localize2" runat="server" Text="Projects"></asp:Localize>
+                                        </h5>
+                                    </div>
+                                    <div class="widget-body">
+                                        <div class="widget-main">
+                                            <asp:RadioButtonList ID="rblProjects" runat="server" AutoPostBack="True" OnSelectedIndexChanged="rblProjects_SelectedIndexChanged"
+                                                    >
+                                                </asp:RadioButtonList>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-9">
                 <div class="widget-box">
                     <div class="widget-header widget-header-small header-color-blue2">
                         <button runat="server" id="btnApprove" onserverclick="btnApprove_Click" class="btn btn-success">
@@ -42,7 +67,7 @@
                                         <div class="widget-main">
                                             <asp:GridView ID="gvAdded" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True"
                                                 HeaderStyle-BackColor="ButtonFace" DataKeyNames="ActivityDataId,ProjectIndicatorId" CssClass="imagetable"
-                                                Width="100%" OnRowDataBound="gvAdded_RowDataBound" EmptyDataText="Your Cluster Doesn Not Have Mastre List or SRP List Of Activities">
+                                                Width="100%" OnRowDataBound="gvAdded_RowDataBound" EmptyDataText="No Add Indicator request">
                                                 <HeaderStyle BackColor="Control"></HeaderStyle>
                                                 <RowStyle CssClass="istrow" />
                                                 <AlternatingRowStyle CssClass="altcolor" />
@@ -99,7 +124,7 @@
                                             <div class="widget-main">
                                                 <asp:GridView ID="gvDeleted" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True"
                                                     HeaderStyle-BackColor="ButtonFace" DataKeyNames="ActivityDataId,ProjectIndicatorId" CssClass="imagetable"
-                                                    Width="100%" OnRowDataBound="gvDeleted_RowDataBound" EmptyDataText="Your Cluster Doesn Not Have Mastre List or SRP List Of Activities">
+                                                    Width="100%" OnRowDataBound="gvDeleted_RowDataBound" EmptyDataText="No Remove Indicator request">
                                                     <HeaderStyle BackColor="Control"></HeaderStyle>
                                                     <RowStyle CssClass="istrow" />
                                                     <AlternatingRowStyle CssClass="altcolor" />
