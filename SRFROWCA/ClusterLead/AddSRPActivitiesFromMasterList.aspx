@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
-    CodeBehind="AddSRPActivitiesFromMasterList.aspx.cs" Inherits="SRFROWCA.ClusterLead.AddSRPActivitiesFromMasterList" culture="auto" meta:resourcekey="PageResource1" uiculture="auto" %>
+    CodeBehind="AddSRPActivitiesFromMasterList.aspx.cs" Inherits="SRFROWCA.ClusterLead.AddSRPActivitiesFromMasterList" Culture="auto" meta:resourcekey="PageResource1" UICulture="auto" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <title>Country Indicators </title>
@@ -143,18 +143,18 @@
                         <div class="col-sm-9 widget-container-span">
                             <div class="widget-box">
                                 <div class="widget-header widget-header header-color-blue2">
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-2">
                                         <button runat="server" id="btnExportToExcel" onserverclick="ExportToExcel" class="width-10 btn btn-sm btn-yellow"
                                             title="Excel">
                                             <i class="icon-download"></i>Excel
                                         </button>
                                     </div>
-                                    <div class="col-sm-5">
+                                    <div class="col-sm-4">
                                         <h4>
                                             <asp:Localize ID="localizeClusterName" runat="server" meta:resourcekey="localizeClusterNameResource1"></asp:Localize>
                                         </h4>
                                     </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-5">
                                         <div class="btn-group pull-right">
                                             <button runat="server" id="btnAddSRPActivity" onserverclick="btnAddSRPActivity_Click"
                                                 class="width-10 btn btn-sm btn-yellow" title="Add Indicator">
@@ -179,21 +179,21 @@
                                             <Columns>
                                                 <asp:BoundField DataField="ObjectiveId" HeaderText="ObjectiveId" ItemStyle-Width="1px"
                                                     ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource1">
-<HeaderStyle CssClass="hidden"></HeaderStyle>
+                                                    <HeaderStyle CssClass="hidden"></HeaderStyle>
 
-<ItemStyle CssClass="hidden" Width="1px"></ItemStyle>
+                                                    <ItemStyle CssClass="hidden" Width="1px"></ItemStyle>
                                                 </asp:BoundField>
                                                 <asp:BoundField DataField="HumanitarianPriorityId" HeaderText="HumanitarianPriorityId"
                                                     ItemStyle-Width="1px" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource2">
-<HeaderStyle CssClass="hidden"></HeaderStyle>
+                                                    <HeaderStyle CssClass="hidden"></HeaderStyle>
 
-<ItemStyle CssClass="hidden" Width="1px"></ItemStyle>
+                                                    <ItemStyle CssClass="hidden" Width="1px"></ItemStyle>
                                                 </asp:BoundField>
                                                 <asp:BoundField DataField="ObjAndPrId" HeaderText="objprid" ItemStyle-Width="1px"
                                                     ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource3">
-<HeaderStyle CssClass="hidden"></HeaderStyle>
+                                                    <HeaderStyle CssClass="hidden"></HeaderStyle>
 
-<ItemStyle CssClass="hidden" Width="1px"></ItemStyle>
+                                                    <ItemStyle CssClass="hidden" Width="1px"></ItemStyle>
                                                 </asp:BoundField>
                                                 <asp:TemplateField HeaderStyle-Width="100px" HeaderText="Objective & Priority" meta:resourcekey="TemplateFieldResource1">
                                                     <ItemTemplate>
@@ -202,16 +202,16 @@
                                                         <asp:Image ID="imgRind" runat="server" meta:resourcekey="imgRindResource1" />
                                                     </ItemTemplate>
 
-<HeaderStyle Width="100px"></HeaderStyle>
+                                                    <HeaderStyle Width="100px"></HeaderStyle>
                                                 </asp:TemplateField>
                                                 <asp:BoundField DataField="ActivityName" HeaderText="Activity" ItemStyle-CssClass="testact"
                                                     SortExpression="ActivityName" meta:resourcekey="BoundFieldResource4">
-<ItemStyle CssClass="testact"></ItemStyle>
+                                                    <ItemStyle CssClass="testact"></ItemStyle>
                                                 </asp:BoundField>
-                                                <asp:BoundField DataField="IsRegional" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource5" >
-<HeaderStyle CssClass="hidden"></HeaderStyle>
+                                                <asp:BoundField DataField="IsRegional" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource5">
+                                                    <HeaderStyle CssClass="hidden"></HeaderStyle>
 
-<ItemStyle CssClass="hidden"></ItemStyle>
+                                                    <ItemStyle CssClass="hidden"></ItemStyle>
                                                 </asp:BoundField>
                                                 <asp:TemplateField HeaderText="" HeaderStyle-CssClass="hidden" SortExpression="IsRegional"
                                                     ItemStyle-CssClass="hidden" meta:resourcekey="TemplateFieldResource2">
@@ -220,7 +220,7 @@
                                                             CssClass="testrcb" Enabled="False" meta:resourcekey="chkRegionalResource1" />
                                                     </ItemTemplate>
 
-<HeaderStyle CssClass="hidden"></HeaderStyle>
+                                                    <HeaderStyle CssClass="hidden"></HeaderStyle>
 
                                                     <ItemStyle Width="2%" />
                                                 </asp:TemplateField>
@@ -234,7 +234,7 @@
                                                 </asp:TemplateField>
                                                 <asp:BoundField DataField="Indicator" HeaderText="Indicator" ItemStyle-CssClass="testind"
                                                     SortExpression="Indicator" ItemStyle-Wrap="true" meta:resourcekey="BoundFieldResource6">
-<ItemStyle Wrap="True" CssClass="testind"></ItemStyle>
+                                                    <ItemStyle Wrap="True" CssClass="testind"></ItemStyle>
                                                 </asp:BoundField>
                                                 <asp:TemplateField meta:resourcekey="TemplateFieldResource3">
                                                     <ItemTemplate>
