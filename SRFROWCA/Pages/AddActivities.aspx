@@ -3,6 +3,7 @@
     Culture="auto" UICulture="auto" meta:resourcekey="PageResource1" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+<%@ Register Src="../Controls/ReportedIndicatorComments.ascx" TagName="ReportedIndicatorComments" TagPrefix="uc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style>
         #MainContent_cblLocations td
@@ -455,8 +456,7 @@
                     </div>
                     <div class="modal-body overflow-visible">
                         <div class="row">
-                            <asp:TextBox ID="txtComments" runat="server" Width="500px" Height="200px" TextMode="MultiLine"
-                                CssClass="commentstext" meta:resourcekey="txtCommentsResource1"></asp:TextBox>
+                            <uc1:ReportedIndicatorComments ID="ucIndComments" runat="server" />
                         </div>
                     </div>
                     <div class="modal-footer">

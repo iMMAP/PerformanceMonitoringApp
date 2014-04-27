@@ -106,8 +106,8 @@ namespace SRFROWCA.Pages
                 if (e.Row.RowIndex == 0)
                     e.Row.Style.Add("height", "50px");
 
-                ObjPrToolTip.ObjectiveIconToolTip(e);
-                ObjPrToolTip.PrioritiesIconToolTip(e);
+                ObjPrToolTip.ObjectiveIconToolTip(e, 0);
+                ObjPrToolTip.PrioritiesIconToolTip(e, 1);
                 int activityDataId = 0;
                 int.TryParse(gvActivities.DataKeys[e.Row.RowIndex]["ActivityDataId"].ToString(), out activityDataId);
 
@@ -129,90 +129,83 @@ namespace SRFROWCA.Pages
 
                 if (activityDataId > 0)
                 {
+                    CommentsIndId = activityDataId;
                     int yearId = 0;
                     int.TryParse(ddlYear.SelectedValue, out yearId);
-
                     int monthId = 0;
                     int.TryParse(ddlMonth.SelectedValue, out monthId);
-
                     int projectId = RC.GetSelectedIntVal(rblProjects);
 
-                    using (ORSEntities db = new ORSEntities())
-                    {
-                        IndicatorComment comments = db.IndicatorComments
-                                                    .Where(x => x.YearId == yearId
-                                                            && x.MonthId == monthId
-                                                            && x.ProjectId == projectId
-                                                            && x.EmergencyLocationId == UserInfo.EmergencyCountry
-                                                            && x.Organizationid == UserInfo.Organization
-                                                        && x.ActivityDataId == activityDataId).SingleOrDefault();
-
-                        txtComments.Text = comments != null ? comments.Comments : "";
-                    }
+                    ucIndComments.ActivityDataId = activityDataId;
+                    ucIndComments.YearId = yearId;
+                    ucIndComments.MonthId = monthId;
+                    ucIndComments.ProjectId = projectId;
+                    ucIndComments.EmgLocationId = UserInfo.EmergencyCountry;
+                    ucIndComments.LoadComments();
+                    mpeComments.Show();
                 }
-
-                mpeComments.Show();
             }
         }
 
         protected void btnSaveComments_Click(object sender, EventArgs e)
         {
-            if (CommentsIndId > 0)
+            string comments = ucIndComments.GetComments();
+            if (!string.IsNullOrEmpty(comments))
             {
-                SaveComments();
-            }
-
-            CommentsIndId = 0;
-            txtComments.Text = "";
-            mpeComments.Hide();
-        }
-
-        // TODO: if user remove all locations then what?
-        private void SaveComments()
-        {
-            string comments = txtComments.Text.Trim();
-
-            int yearId = 0;
-            int.TryParse(ddlYear.SelectedValue, out yearId);
-
-            int monthId = 0;
-            int.TryParse(ddlMonth.SelectedValue, out monthId);
-
-            int projectId = RC.GetSelectedIntVal(rblProjects);
-
-            Guid userId = RC.GetCurrentUserId;
-            //DBContext.Add("InsertIndicatorComments", new object[] { reportId, activityDataId, comments });
-            using (ORSEntities db = new ORSEntities())
-            {
-                IndicatorComment deleteComment = db.IndicatorComments
-                                                .Where(x => x.YearId == yearId
-                                                            && x.MonthId == monthId
-                                                            && x.ProjectId == projectId
-                                                            && x.EmergencyLocationId == UserInfo.EmergencyCountry
-                                                            && x.Organizationid == UserInfo.Organization
-                                                        && x.ActivityDataId == CommentsIndId).SingleOrDefault();
-                if (deleteComment != null)
+                using (ORSEntities db = new ORSEntities())
                 {
-                    db.IndicatorComments.DeleteObject(deleteComment);
-                    db.SaveChanges();
-                }
-
-                if (!string.IsNullOrEmpty(comments))
-                {
-                    IndicatorComment insertComment = db.IndicatorComments.CreateObject();
-                    insertComment.YearId = yearId;
-                    insertComment.MonthId = monthId;
-                    insertComment.ProjectId = projectId;
-                    insertComment.EmergencyLocationId = UserInfo.EmergencyCountry;
-                    insertComment.Organizationid = UserInfo.Organization;
-                    insertComment.ActivityDataId = CommentsIndId;
-                    insertComment.Comments = comments;
-                    db.IndicatorComments.AddObject(insertComment);
-                    db.SaveChanges();
-                    //AddNotification(db);
+                    int yearId = 0;
+                    int.TryParse(ddlYear.SelectedValue, out yearId);
+                    int monthId = 0;
+                    int.TryParse(ddlMonth.SelectedValue, out monthId);
+                    int projectId = RC.GetSelectedIntVal(rblProjects);
+                    DBContext.Add("InsertIndicatorComments", new object[] { yearId, monthId, projectId, CommentsIndId, UserInfo.EmergencyCountry, comments, RC.GetCurrentUserId, DBNull.Value });
                 }
             }
         }
+
+        //protected void btnSaveComments_Click(object sender, EventArgs e)
+        //{
+        //    if (CommentsIndId > 0)
+        //    {
+        //        SaveComments();
+        //    }
+
+        //    CommentsIndId = 0;
+        //    //txtComments.Text = "";
+        //    mpeComments.Hide();
+        //}
+
+        //// TODO: if user remove all locations then what?
+        //private void SaveComments()
+        //{
+        //    string comments = ucIndComments.GetComments();
+        //    int yearId = 0;
+        //    int.TryParse(ddlYear.SelectedValue, out yearId);
+        //    int monthId = 0;
+        //    int.TryParse(ddlMonth.SelectedValue, out monthId);
+        //    int projectId = RC.GetSelectedIntVal(rblProjects);
+
+        //    Guid userId = RC.GetCurrentUserId;
+        //    //DBContext.Add("InsertIndicatorComments", new object[] { reportId, activityDataId, comments });
+
+
+        //    if (!string.IsNullOrEmpty(comments))
+        //    {
+        //        IndicatorComment insertComment = db.IndicatorComments.CreateObject();
+        //        insertComment.YearId = yearId;
+        //        insertComment.MonthId = monthId;
+        //        insertComment.ProjectId = projectId;
+        //        insertComment.EmergencyLocationId = UserInfo.EmergencyCountry;
+        //        insertComment.Organizationid = UserInfo.Organization;
+        //        insertComment.ActivityDataId = CommentsIndId;
+        //        insertComment.Comments = comments;
+        //        db.IndicatorComments.AddObject(insertComment);
+        //        db.SaveChanges();
+        //        //AddNotification(db);
+        //    }
+
+        //}
 
         private void AddNotification(ORSEntities db)
         {
@@ -231,7 +224,6 @@ namespace SRFROWCA.Pages
 
         protected void btnCancelComments_Click(object sender, EventArgs e)
         {
-            txtComments.Text = "";
             mpeComments.Hide();
         }
 

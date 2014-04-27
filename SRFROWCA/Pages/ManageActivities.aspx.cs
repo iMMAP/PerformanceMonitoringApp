@@ -230,8 +230,8 @@ namespace SRFROWCA.Pages
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                ObjPrToolTip.ObjectiveIconToolTip(e);
-                ObjPrToolTip.PrioritiesIconToolTip(e);
+                ObjPrToolTip.ObjectiveIconToolTip(e, 0);
+                ObjPrToolTip.PrioritiesIconToolTip(e, 1);
 
                 ObjPrToolTip.RegionalIndicatorIcon(e, 4);
                 ObjPrToolTip.CountryIndicatorIcon(e, 5);
