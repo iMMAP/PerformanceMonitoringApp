@@ -8,12 +8,12 @@ namespace SRFROWCA.Common
 {
     public static class ObjPrToolTip
     {
-        public static void PrioritiesIconToolTip(GridViewRowEventArgs e)
+        public static void PrioritiesIconToolTip(GridViewRowEventArgs e, int index)
         {
             Image imghp = e.Row.FindControl("imgPriority") as Image;
             if (imghp != null)
             {
-                string txtHP = e.Row.Cells[1].Text;
+                string txtHP = e.Row.Cells[index].Text;
                 if (txtHP == "1")
                 {
                     imghp.ImageUrl = "~/assets/orsimages/icon/hp1.png";
@@ -52,12 +52,12 @@ namespace SRFROWCA.Common
             }
         }
 
-        public static void ObjectiveIconToolTip(GridViewRowEventArgs e)
+        public static void ObjectiveIconToolTip(GridViewRowEventArgs e, int index)
         {
             Image imgObj = e.Row.FindControl("imgObjective") as Image;
             if (imgObj != null)
             {
-                string txt = e.Row.Cells[0].Text;
+                string txt = e.Row.Cells[index].Text;
 
                 if (txt.Contains("1"))
                 {

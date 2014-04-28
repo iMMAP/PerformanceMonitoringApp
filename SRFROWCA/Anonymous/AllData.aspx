@@ -348,22 +348,22 @@
                                 <AlternatingRowStyle CssClass="altcolor" />
                                 <Columns>
                                     <asp:BoundField DataField="Cluster" HeaderText="Cluster" SortExpression="Cluster"
-                                        HeaderStyle-Width="6%" />
-                                    <asp:BoundField DataField="Organization" HeaderText="Organization" SortExpression="Organization"
-                                        HeaderStyle-Width="15%" />
-                                    <asp:BoundField DataField="ProjectCode" HeaderText="Project" SortExpression="ProjectCode"
-                                        HeaderStyle-Width="8%" />
-                                    <asp:BoundField DataField="FundingStatus" HeaderText="FTS" SortExpression="FundingStatus"
                                         HeaderStyle-Width="5%" />
+                                    <asp:BoundField DataField="Organization" HeaderText="Organization" SortExpression="Organization"
+                                        HeaderStyle-Width="10%" />
+                                    <asp:BoundField DataField="ProjectCode" HeaderText="Project" SortExpression="ProjectCode"
+                                        HeaderStyle-Width="5%" />
+                                    <asp:BoundField DataField="FundingStatus" HeaderText="FTS" SortExpression="FundingStatus"
+                                        HeaderStyle-Width="2%" />
                                     <asp:BoundField DataField="Month" HeaderText="Month" SortExpression="Month" HeaderStyle-Width="5%" />
                                     <asp:BoundField DataField="Objective" HeaderText="Objective" SortExpression="Objective"
-                                        HeaderStyle-Width="5%" />
+                                        HeaderStyle-Width="4%" />
                                     <asp:BoundField DataField="Priority" HeaderText="Priority" SortExpression="Priority"
-                                        HeaderStyle-Width="10%" />
+                                        HeaderStyle-Width="8%" />
                                     <asp:BoundField DataField="Activity" HeaderText="Activity" SortExpression="Activity"
-                                        HeaderStyle-Width="10%" />
+                                        HeaderStyle-Width="20%" />
                                     <asp:BoundField DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator"
-                                        HeaderStyle-Width="10%" />
+                                        HeaderStyle-Width="20%" />
                                     <asp:BoundField DataField="Country" HeaderText="Country" SortExpression="Country"
                                         HeaderStyle-Width="5%" />
                                     <asp:BoundField DataField="Admin1" HeaderText="Admin1" SortExpression="Admin1" HeaderStyle-Width="5%" />

@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Data;
 using System.Web;
 using System.Web.UI.WebControls;
 using SRFROWCA.Common;
+using System.Linq;
+using System.Web.UI.HtmlControls;
 
 namespace SRFROWCA
 {
@@ -31,6 +34,18 @@ namespace SRFROWCA
         protected void Page_Load(object sender, EventArgs e)
         {
             HideAllAuthenticatedMenues();
+
+            LoadNotifications();
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add("FullName");
+            dt.Columns.Add("Message");
+            dt.Columns.Add("DateTime");
+            dt.Rows.Add(new object[] { "Kashif", "Hello, There how are you?", DateTime.Now.AddDays(1) });
+            dt.Rows.Add(new object[] { "Max M", "Added new report.", DateTime.Now });
+            dt.Rows.Add(new object[] { "Some One", "New ORS project Added", DateTime.Now.AddDays(3) });
+            rptMessages.DataSource = dt;
+            rptMessages.DataBind();
 
             if (HttpContext.Current.User.Identity.IsAuthenticated)
             {
@@ -67,7 +82,25 @@ namespace SRFROWCA
             }
 
             ActiveMenueItem();
-        }        
+        }
+
+        private void LoadNotifications()
+        {
+            try
+            {
+                using (ORSEntities db = new ORSEntities())
+                {
+                    rptNotifications.DataSource = db.Notifications.Where(x => x.EmergencyLocationId == UserInfo.EmergencyCountry
+                                                                            && x.EmergencyClusterId == UserInfo.EmergencyCluster)
+                                                                  .Select(y => new {y.Notification1, y.PageURL});
+                    rptNotifications.DataBind();
+                }
+            }
+            catch (Exception ex)
+            {
+                string s = ex.ToString();
+            }
+        }
 
         private void HideAllAuthenticatedMenues()
         {
@@ -220,9 +253,9 @@ namespace SRFROWCA
             else if (uri == "/ClusterLead/ValidateReportList.aspx")
             {
                 liValidate.Attributes.Add("class", "active open");
-                liValidateIndicators.Attributes.Add("class", "active");
+                liValidateAchievements.Attributes.Add("class", "active");
             }
-            else if (uri == "/ClusterLead/ValidateIndicators.aspx")
+            else if (uri == "/ClusterLead/ApproveIndicatorAddRemove.aspx")
             {
                 liValidate.Attributes.Add("class", "active open");
                 liValidateIndicators.Attributes.Add("class", "active");
@@ -353,3 +386,4 @@ namespace SRFROWCA
 
     
 }
+
