@@ -331,6 +331,11 @@ namespace SRFROWCA
             {
                 liUserListing.Attributes.Add("class", "active");
             }
+            else if (uri.Contains("ClusterLead/ValidateIndicators.aspx"))
+            {
+                liValidate.Attributes.Add("class", "active open");
+                liValidateAchievements.Attributes.Add("class", "active");
+            }
         }
 
         protected void lnkLanguageEnglish_Click(object sender, EventArgs e)
