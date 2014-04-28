@@ -46,8 +46,8 @@ namespace SRFROWCA.ClusterLead
 
         protected void gvIndicators_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            ObjPrToolTip.ObjectiveIconToolTip(e, 6);
-            ObjPrToolTip.PrioritiesIconToolTip(e, 7);
+            ObjPrToolTip.ObjectiveIconToolTip(e, 10);
+            ObjPrToolTip.PrioritiesIconToolTip(e, 11);
 
             if (e.Row.RowType == DataControlRowType.Header)
             {
