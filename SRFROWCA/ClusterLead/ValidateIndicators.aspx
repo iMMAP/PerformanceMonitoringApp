@@ -185,10 +185,10 @@
                         <uc1:ReportedIndicatorComments ID="ucIndComments" runat="server" />
                     </div>
                 </div>
-                <%--<div class="modal-footer">
+                <div class="modal-footer">
                     <asp:Button ID="btnSaveComments" runat="server" Text="Save" OnClick="btnSaveComments_Click"
                         CssClass="btn btn-primary" />
-                </div>--%>
+                </div>
             </div>
 
         </div>

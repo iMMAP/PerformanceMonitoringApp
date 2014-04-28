@@ -110,7 +110,7 @@ namespace SRFROWCA.ClusterLead
                             ucIndComments.LoadComments();
                             mpeComments.Show();
                         }
-                    }                    
+                    }
                 }
             }
         }
@@ -121,13 +121,14 @@ namespace SRFROWCA.ClusterLead
             {
                 if (row.RowType == DataControlRowType.DataRow)
                 {
-                    int reportDetailId = Convert.ToInt32(gvIndicators.DataKeys[row.RowIndex].Values["ReportDetailId"].ToString());
+                    int reportId = Convert.ToInt32(gvIndicators.DataKeys[row.RowIndex].Values["ReportId"].ToString());
+                    int activityDataId = Convert.ToInt32(gvIndicators.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString()); 
                     CheckBox cb = gvIndicators.Rows[row.RowIndex].FindControl("chkApproved") as CheckBox;
                     if (cb != null)
                     {
                         if (cb.Checked)
                         {
-                            ApproveIndicatorData(reportDetailId);
+                            ApproveIndicatorData(reportId, activityDataId, cb.Checked);
                         }
                     }
                 }
@@ -161,9 +162,21 @@ namespace SRFROWCA.ClusterLead
             //mpeComments.Hide();
         }
 
-        private void ApproveIndicatorData(int reportDetailId)
+        private void ApproveIndicatorData(int reportId, int activiytDataId, bool isApproved)
         {
-            DBContext.Update("UpdateReportDetailApproved", new object[] { reportDetailId, RC.GetCurrentUserId, DBNull.Value });
+            using (ORSEntities db = new ORSEntities())
+            {
+                var reportInfo = db.Reports.Where(x => x.ReportId == reportId).Select(y => new { y.YearId, y.MonthId, y.ProjectId, y.EmergencyLocationId }).ToList();
+                if (reportInfo.Count > 0)
+                {
+                    int yearId = reportInfo[0].YearId;
+                    int monthId = reportInfo[0].MonthId;
+                    int projectId = reportInfo[0].ProjectId;
+                    int emgLocationId = reportInfo[0].EmergencyLocationId;
+                    DBContext.Update("InsertUpdateApproveIndicator", new object[] { yearId, monthId, projectId, emgLocationId,
+                                                                                    activiytDataId, RC.GetCurrentUserId, isApproved, DBNull.Value });
+                }
+            }
         }
 
         //private void RejectIndicatorData(int reportDetailId)
