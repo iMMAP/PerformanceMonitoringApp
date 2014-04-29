@@ -202,7 +202,7 @@
     <value>Tableaux croisés</value>
   </data>
   <data name="localPivotTableSumOfIndResource1.Text" xml:space="preserve">
-    <value>Sum Of Country Ind</value>
+    <value>Indicateurs Pays</value>
   </data>
   <data name="localProfileResource1.Text" xml:space="preserve">
     <value>Profil</value>
@@ -238,18 +238,18 @@
     <value>Présence opérationnelle</value>
   </data>
   <data name="localReportsSumReportSumOfRegIndResource1.Text" xml:space="preserve">
-    <value>Somme Indicateurs Régionaux</value>
+    <value>Indicateurs Régionaux</value>
   </data>
   <data name="localReportsSumRepSumOfCountryIndResource1.Text" xml:space="preserve">
-    <value>Somme Indicateurs Pays</value>
+    <value>Indicateurs Pays</value>
   </data>
-    <data name="LocalValidateAchievementsResource1.Text" xml:space="preserve">
+  <data name="LocalValidateAchievementsResource1.Text" xml:space="preserve">
     <value>Accomplissement</value>
   </data>
-    <data name="localValidateIndicatorsResource1.Text" xml:space="preserve">
+  <data name="localValidateIndicatorsResource1.Text" xml:space="preserve">
     <value>Indicateur</value>
   </data>
-    <data name="localValidateResource1.Text" xml:space="preserve">
+  <data name="localValidateResource1.Text" xml:space="preserve">
     <value>Valider</value>
   </data>
   <data name="localWelcomeResource1.Text" xml:space="preserve">

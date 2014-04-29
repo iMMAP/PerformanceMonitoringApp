@@ -214,7 +214,7 @@
     <value>Pivot Tables</value>
   </data>
   <data name="localPivotTableSumOfIndResource1.Text" xml:space="preserve">
-    <value>Sum Of Country Ind</value>
+    <value>Country Indicators</value>
   </data>
   <data name="localProfileResource1.Text" xml:space="preserve">
     <value>Profile</value>
@@ -250,10 +250,10 @@
     <value>Operational Presence</value>
   </data>
   <data name="localReportsSumReportSumOfRegIndResource1.Text" xml:space="preserve">
-    <value>Sum Of Regional Ind</value>
+    <value>Regional Indicators</value>
   </data>
   <data name="localReportsSumRepSumOfCountryIndResource1.Text" xml:space="preserve">
-    <value>Sum Of Country Ind</value>
+    <value>Country Indicators</value>
   </data>
   <data name="LocalValidateAchievementsResource1.Text" xml:space="preserve">
     <value>Achievements</value>
