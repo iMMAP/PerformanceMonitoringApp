@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="localGeneralAns10Resource1.Text" xml:space="preserve">
+    <value>Vous pouvez choisir car ORS est flexible. Vous pouvez avoir un compte global pour votre organisation avec un mot de passe à partager en interne, ou avoir des comptes individuels avec email et mot de passe. Soyez juste prudents dans la sélection des rôles de votre profil. Si vous êtes basé sur le terrain, cela correspond à « chargé de programme terrain UN/ONG » et si vous êtes basé au siège d’une organisation (qui est en dehors du pays concerné), vous devez vous enregistrer comme « siège d’agence /ONG</value>
+  </data>
+  <data name="localGeneralAns11Resource1.Text" xml:space="preserve">
+    <value>Vous pouvez rapporter autant de fois que possible par mois.</value>
+  </data>
+  <data name="localGeneralAns12Resource1.Text" xml:space="preserve">
+    <value>Vous serez notifié par mail lorsque le coordinateur de cluster approuvera vos données.</value>
+  </data>
+  <data name="localGeneralAns2Resource1.Text" xml:space="preserve">
+    <value>&lt;p&gt;ORS est accessible à tous les acteurs humanitaires, incluant les agences des Nations Unies et les ONG, les bailleurs et les organismes nationaux. Le rapport résumé de suivi des indicateurs de performance est public et accessible à tous, tandis que le rapport détaillé et autres fonctionnalités sont accessibles après enregistrement dans la base de données. Pour accéder au système ORS, cliquez sur : http://ors.ocharowca.info/ &lt;/p&gt;</value>
+  </data>
+  <data name="localGeneralAns3Resource1.Text" xml:space="preserve">
+    <value>&lt;ul&gt;&lt;li&gt;Le système ORS peut fournir un suivi en temps réel des activités (rapport résumé et détaillé) à travers le Sahel.&lt;/li&gt;&lt;li&gt;Les organisations peuvent reporter de manière régulière leurs réalisations par activité et localité.&lt;/li&gt;&lt;li&gt;Les coordinateurs de Cluster/secteurs peuvent marquer leurs indicateurs de base (pays/régional) pour le suivi au niveau pays ou régional.&lt;/li&gt;&lt;li&gt;Les coordinateurs de Cluster/secteurs peuvent valider/approuver les rapports soumis par les organisations.&lt;/li&gt;&lt;li&gt;Les utilisateurs peuvent accéder aux tableaux de bords, rapports personnalisés, graphiques, cartes et tableaux croisés dynamiques en PDF/format Excel.&lt;/li&gt;&lt;/ul&gt;</value>
+  </data>
+  <data name="localGeneralAns5Resource1.Text" xml:space="preserve">
+    <value>&lt;p&gt;Le système ORS fournit aux utilisateurs la possibilité de choisir la langue de préférence (Français ou Anglais). Pour modifier les préférences, cliquez sur l’option qui vous convient en haut à droite de la fenêtre.&lt;/p&gt;</value>
+  </data>
+  <data name="localGeneralAns6Resource1.Text" xml:space="preserve">
+    <value>Vous devez vous enregistrer en ligne sur http://ors.ocharowca.info. Téléchargez le guide de l’utilisateur et suivez les instructions</value>
+  </data>
+  <data name="localGeneralAns7Resource1.Text" xml:space="preserve">
+    <value>Allez sur ORS, cliquez sur Connexion et sélectionnez le lien « J’ai oublié mon mot de passe » à côté de la case de saisie du mot de passe.</value>
+  </data>
+  <data name="localGeneralAns8Resource1.Text" xml:space="preserve">
+    <value>Si le nom de votre organisation ne figure pas dans la liste des organisations, cliquez sur le lien « Cliquez ici pour nous informer ». Cela ne complétera pas votre inscription mais permettra aux administrateurs du système de vérifier et rajouter votre organisation dans la liste. Complétez le formulaire et attendez votre mail de notification pour plus d’instructions.</value>
+  </data>
+  <data name="localGeneralAns9Resource1.Text" xml:space="preserve">
+    <value>Vous avez rempli le formulaire, mais cela ne constitue pas une inscription. Vous devez attendre de recevoir le mail de confirmation que votre organisation a bien été rajoutée à la liste avant de poursuivre la procédure d’enregistrement en ligne.</value>
+  </data>
+  <data name="localGeneralQ10Resource1.Text" xml:space="preserve">
+    <value>Qui de mon organisation peut s’enregistrer sur ORS ?</value>
+  </data>
+  <data name="localGeneralQ11Resource1.Text" xml:space="preserve">
+    <value>Combien de fois peut-on rapporter?</value>
+  </data>
+  <data name="localGeneralQ12Resource1.Text" xml:space="preserve">
+    <value>Comment puis-je savoir que mes données ont été approuvées ?</value>
+  </data>
+  <data name="localGeneralQ1p1Resource1.Text" xml:space="preserve">
+    <value>Opérateur/Responsable terrain</value>
+  </data>
+  <data name="localGeneralQ1p2Resource1.Text" xml:space="preserve">
+    <value>Chef de file cluster pays</value>
+  </data>
+  <data name="localGeneralQ1p3Resource1.Text" xml:space="preserve">
+    <value>Chef de file cluster régional</value>
+  </data>
+  <data name="localGeneralQ1p4Resource1.Text" xml:space="preserve">
+    <value>Staff OCHA</value>
+  </data>
+  <data name="localGeneralQ1Resource1.Text" xml:space="preserve">
+    <value>QU’EST-CE QUE LE SYSTEME ORS?</value>
+  </data>
+  <data name="localGeneralQ2Resource1.Text" xml:space="preserve">
+    <value>Qui a accès au système ORS?</value>
+  </data>
+  <data name="localGeneralQ3Resource1.Text" xml:space="preserve">
+    <value>Que peut-on faire avec le système ORS?</value>
+  </data>
+  <data name="localGeneralQ4Resource1.Text" xml:space="preserve">
+    <value>COMMENT SELECTIONNER VOTRE ROLE SUR ORS</value>
+  </data>
+  <data name="localGeneralQ5Resource1.Text" xml:space="preserve">
+    <value>PREFERENCES LINGUISTIQUES</value>
+  </data>
+  <data name="localGeneralQ6Resource1.Text" xml:space="preserve">
+    <value>Comment puis-je accéder à ORS ?</value>
+  </data>
+  <data name="localGeneralQ7Resource1.Text" xml:space="preserve">
+    <value>J’ai oublié mon mot de passe, dois-je m’enregistrer à nouveau ?</value>
+  </data>
+  <data name="localGeneralQ8Resource1.Text" xml:space="preserve">
+    <value>Je ne trouve pas mon organisation dans la liste des organisations</value>
+  </data>
+  <data name="localGeneralQ9Resource1.Text" xml:space="preserve">
+    <value>J’ai rempli le formulaire avec les informations de mon organisation mais ne parvient pas à accéder à la base de données</value>
+  </data>
+  <data name="localGeneraolAns1p1Resource1.Text" xml:space="preserve">
+    <value>&lt;p&gt;Vous appartenez à une organisation faisant appel (agence des Nations Unies ou ONG) basée sur le terrain et vous souhaitez rapporter sur ORS. Vous pouvez voir tous les projets de votre organisation et soumettre vos réalisations.&lt;/p&gt;</value>
+  </data>
+  <data name="localGeneraolAns1p2Resource1.Text" xml:space="preserve">
+    <value>&lt;p&gt;Vous appartenez à une organisation faisant appel (agence des Nations Unies ou ONG) basée sur le terrain et vous avez le rôle de &lt;b&gt;Chef de file sectoriel au niveau pays&lt;/b&gt;. Vous avez la possibilité de soumettre des rapports, sélectionner les indicateurs de pays, valider les résultats soumis par les organisations, importer des données dans le système et générer des rapports personnalisés.&lt;/p&gt;</value>
+  </data>
+  <data name="localGeneraolAns1p3Resource1.Text" xml:space="preserve">
+    <value>&lt;p&gt;Vous appartenez à une organisation faisant appel (agence des Nations Unies ou ONG) basée sur le terrain et vous avez le rôle de &lt;b&gt;Chef de file sectoriel au niveau régional&lt;/b&gt;. Vous avez la possibilité de soumettre des rapports, sélectionner les indicateurs de base régionaux et générer des rapports personnalisés.&lt;/p&gt;</value>
+  </data>
+  <data name="localGeneraolAns1p4Resource1.Text" xml:space="preserve">
+    <value>&lt;p&gt;Vous êtes administrateur de la base de données sur le terrain. Vous pouvez voir et éditer les données, importer des résultats pour les autres organisations et approuver/rejeter/restaurer des résultats au nom des chefs de file sectoriels.&lt;/p&gt;</value>
+  </data>
+  <data name="localHelpQ1Resource1.Text" xml:space="preserve">
+    <value>Inscription</value>
+  </data>
+  <data name="localHelpQ2Resource1.Text" xml:space="preserve">
+    <value>Comment choisir une langue Anglais/Français</value>
+  </data>
+  <data name="localHelpQ3Resource1.Text" xml:space="preserve">
+    <value>COMMENT SELECTIONNER VOTRE ROLE SUR ORS</value>
+  </data>
+  <data name="localHelpQ4Resource1.Text" xml:space="preserve">
+    <value>COMMENT RAPPORTER SUR ORS</value>
+  </data>
+  <data name="localHelpQ5Resource1.Text" xml:space="preserve">
+    <value>ORS RAPPORTS</value>
+  </data>
+  <data name="localHelpQ6Resource1.Text" xml:space="preserve">
+    <value>UTILISATION DU SYSTEME ORS EN TANT QUE COORDINATEUR DE CLUSTER PAYS / REGIONAL</value>
+  </data>
+  <data name="Localize2Resource1.Text" xml:space="preserve">
+    <value>&lt;p&gt;Le système de reporting en ligne (ORS) est un outil de suivi des indicateurs de performance en temps réel qui permet aux Agences UN et ONG participant au processus de planification inter-agences (plan de réponse stratégique ou plans d’action d’urgence) de rapporter directement les résultats de leurs activités définies durant le SRP. La base de données a été conçue pour faciliter le partage d’information et faire le suivi les indicateurs de performance de toutes les interventions humanitaires.&lt;/p&gt;
+&lt;p&gt;Le système ORS est déployé à travers la région du Sahel (9 pays) et administré par le bureau régional OCHA pour l’Afrique de l’Ouest et du Centre (ROWCA) qui travaille étroitement avec les bureaux pays.&lt;/p&gt;
+&lt;p&gt;L'outil héberge toutes les données des projets tels que soumis par les partenaires pendant le processus SRP. Il est également lié à la base de données en ligne FTS (Financial Tracking Système) qui permet de suivre les demandes et l’état de financement des projets des plans inter-agences.&lt;/p&gt;</value>
+  </data>
+  <data name="localTab1HeadingResource1.Text" xml:space="preserve">
+    <value>FAQs</value>
+  </data>
+  <data name="localTab1Resource1.Text" xml:space="preserve">
+    <value>FAQs</value>
+  </data>
+  <data name="localTab2HeadingResource1.Text" xml:space="preserve">
+    <value>Aide</value>
+  </data>
+  <data name="localTab2Resource1.Text" xml:space="preserve">
+    <value>Aide</value>
+  </data>
+  <data name="localTab3HeadingResource1.Text" xml:space="preserve">
+    <value>Vidéos</value>
+  </data>
+  <data name="localTab3Resource1.Text" xml:space="preserve">
+    <value>Vidéos</value>
+  </data>
+  <data name="PageResource1.Title" xml:space="preserve">
+    <value>ORS - FAQs/Aide</value>
+  </data>
+</root>
