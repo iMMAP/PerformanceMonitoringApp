@@ -48,8 +48,9 @@ namespace SRFROWCA.ClusterLead
         {
             int emergencyId = 1;
             int clusterId = UserInfo.Cluster;
+            int emgLocationId = UserInfo.EmergencyCountry;
             int lngId = RC.SelectedSiteLanguageId;
-            return DBContext.GetData("GetClusterIndicatorsToSelectSRPActivities", new object[] { emergencyId, clusterId, lngId });
+            return DBContext.GetData("GetClusterIndicatorsToSelectSRPActivities", new object[] { emergencyId, clusterId, emgLocationId, lngId });
         }
 
         private void PopulateClusterName()

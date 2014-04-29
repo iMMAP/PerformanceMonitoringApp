@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -53,6 +54,15 @@ namespace SRFROWCA.ClusterLead
             {
                 LoadAddedIndicators();
                 LoadDeletedIndicators();
+            }
+            else
+            {
+                gvAdded.DataSource = new DataTable();
+                gvAdded.DataBind();
+                gvDeleted.DataSource = new DataTable();
+                gvDeleted.DataBind();
+
+                ToggleButtons(false);
             }
         }
 
@@ -182,6 +192,20 @@ namespace SRFROWCA.ClusterLead
             if (rblProjects.Items.Count > 0)
             {
                 rblProjects.SelectedIndex = 0;
+            }
+        }
+
+        private void ToggleButtons(bool isEnable)
+        {
+            if (isEnable)
+            {
+                btnApprove.Attributes.Remove("disabled");
+                btnReject.Attributes.Remove("disabled");
+            }
+            else
+            {
+                btnApprove.Attributes.Add("disabled", "disabled");
+                btnReject.Attributes.Add("disabled", "disabled");
             }
         }
     }
