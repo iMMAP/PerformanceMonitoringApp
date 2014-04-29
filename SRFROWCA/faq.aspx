@@ -31,7 +31,9 @@
                         </i><asp:Localize ID="localTab3" runat="server" Text="Videos" 
                                 meta:resourcekey="localTab3Resource1"></asp:Localize></a></li>
                         <!-- /.dropdown -->
+                        <div class="pull-right"><i class="green icon-envelope-alt icon-large"></i> <b>ors@ocharowca.info</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="blue icon-skype icon-large"></i> <b>orshelpdesk</b> </div>
                     </ul>
+                    
                     <div class="tab-content no-border padding-24">
                         <div id="faq-tab-1" class="tab-pane fade in active">
                             <h4 class="blue">
