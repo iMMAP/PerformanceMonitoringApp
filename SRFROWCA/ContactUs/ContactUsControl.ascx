@@ -71,33 +71,33 @@
         </div>
     </div>
     <!-- /contact us -->
-    <%--<div class="col-xs-3 col-sm-3">
+    <div class="col-xs-3 col-sm-3">
         <div class="widget-box no-border">
             <div class="widget-body">
                 <div class="widget-main">
                     <div>
-                        <lable>&nbsp;</lable>
+                        <label>&nbsp;</label>
                     </div>
                     <hr />
                     <div>
                         <label>
-                            Email</label>
+                            <i class="green icon-envelope-alt icon-3x"></i></label>
                         <div>
-                            info@hello-media.com
+                            <b>ors@ocharowca.info</b>
                         </div>
                     </div>
                     <hr />
                     <div>
                         <label>
-                            Phone</label>
+                            <i class="blue icon-skype icon-3x"></i></label>
                         <div>
-                            000.0000.0000
+                            <b>orshelpdesk</b>
                         </div>
                     </div>
                     <hr />
                 </div>
             </div>
         </div>
-    </div>--%>
+    </div>
 </div>
 <!-- /row -->
