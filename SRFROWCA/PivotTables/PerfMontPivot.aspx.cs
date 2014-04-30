@@ -37,7 +37,7 @@ namespace SRFROWCA.PivotTables
             int? emgClusterId = UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
             int? organizationId = UserInfo.Organization > 0 ? UserInfo.Organization : (int?)null;            
             int langId = RC.SelectedSiteLanguageId;
-            return DBContext.GetData("GetDataForPivotReport", new object[] {emgLocationId, emgClusterId, organizationId,langId});
+            return DBContext.GetData("GetDataForPivotReport", new object[] {emgLocationId, emgClusterId, organizationId, langId});
         }
 
         protected void CheckBoxEnableDragDrop_CheckedChanged(object sender, EventArgs e)

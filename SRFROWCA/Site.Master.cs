@@ -149,6 +149,13 @@ namespace SRFROWCA
             liManageProject.Visible = isShow;
             menuManageActivities.Visible = isShow;
             liManageActivity.Visible = isShow;
+            liReportsSummaryReports.Visible = !isShow;
+            liPivotOrgOperational.Visible = !isShow;
+            menuePivotOPrPresence.Visible = !isShow;
+            liPivotNumberOfOrgs.Visible = !isShow;
+            menuePivotOrgPresence.Visible = !isShow;
+            liPivotSumOfCountryIndicators.Visible = !isShow;
+            menuePivotSumOfCountryIndicators.Visible = !isShow;
         }
 
         private void ShowRegionalLeadMenue()
