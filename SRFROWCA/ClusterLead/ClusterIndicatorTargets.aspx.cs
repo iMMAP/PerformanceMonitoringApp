@@ -25,16 +25,42 @@ namespace SRFROWCA.ClusterLead
             UserInfo.UserProfileInfo();
             PopulateObjectives();
             PopulatePriorities();
-            PopulateIndicators();
-            PopulateClusterName();
+            //PopulateIndicators();
+            //PopulateClusterName();
+
+            if (RC.IsCountryAdmin(User))
+            {
+                PopulateClusters();
+            }
+            else
+            {
+                PopulateIndicators();
+                ddlClusters.Visible = false;
+            }
         }
 
         internal override void BindGridData()
         {
             PopulateObjectives();
             PopulatePriorities();
-            PopulateIndicators();
-            PopulateClusterName();
+            //PopulateIndicators();
+            //PopulateClusterName();
+            if (RC.IsCountryAdmin(User))
+            {
+                PopulateClusters();
+            }
+            else
+            {
+                PopulateIndicators();
+                ddlClusters.Visible = false;
+            }
+        }
+
+        private void PopulateClusters()
+        {
+            int emgId = 1;
+            UI.FillEmergnecyClusters(ddlClusters, emgId);
+            RC.AddSelectItemInList(ddlClusters, "Select Cluster");
         }
 
         private void PopulateObjectives()
@@ -57,13 +83,27 @@ namespace SRFROWCA.ClusterLead
 
         private DataTable GetIndicators()
         {
+            int tempVal = 0;
+            if (ddlClusters.Enabled)
+            {
+                int.TryParse(ddlClusters.SelectedValue, out tempVal);
+            }
+
+            int? clusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
+            int? emgLocationId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
             int lngId = RC.SelectedSiteLanguageId;
-            return DBContext.GetData("GetClusterIndicatorsToForTargets", new object[] { UserInfo.EmergencyCountry, UserInfo.EmergencyCluster, lngId });
+            int yearId = 10;
+            return DBContext.GetData("GetClusterIndicatorsToForTargets", new object[] { emgLocationId, clusterId, yearId, lngId});
         }
 
         private void PopulateClusterName()
         {
             localizeClusterName.Text = RC.GetClusterName + " Indicators";
+        }
+
+        protected void ddlClusters_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PopulateIndicators();
         }
 
         protected void gvClusterIndTargets_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -210,12 +250,15 @@ namespace SRFROWCA.ClusterLead
         protected void ExportToExcel(object sender, EventArgs e)
         {
             DataTable dt = GetIndicators();
-            RemoveColumnsFromDataTable(dt);
-            GridView gv = new GridView();
-            gv.DataSource = dt;
-            gv.DataBind();
+            if (dt.Rows.Count > 0)
+            {
+                RemoveColumnsFromDataTable(dt);
+                GridView gv = new GridView();
+                gv.DataSource = dt;
+                gv.DataBind();
 
-            ExportUtility.ExportGridView(gv, UserInfo.CountryName + "_" + RC.GetClusterName + "_Indicator_Target", ".xls", Response, true);
+                ExportUtility.ExportGridView(gv, UserInfo.CountryName + "_" + RC.GetClusterName + "_Indicator_Target", ".xls", Response, true);
+            }
         }
 
 
