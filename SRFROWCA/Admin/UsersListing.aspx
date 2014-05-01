@@ -35,16 +35,13 @@
                             <div class="widget-box">
                                 <div class="widget-header widget-header-small header-color-blue2">
                                     <h6>
-                                        <button runat="server" id="btnExportToExcel" onserverclick="btnExportExcel_Click" class="width-10 btn btn-sm btn-yellow"
+                                        <button runat="server" id="btnExportToExcel" onserverclick="btnExportExcel_Click" class="btn btn-yellow"
                                             title="Excel">
                                             <i class="icon-download"></i>Excel
                                         </button>
                                         <asp:Button ID="btnAddUser" runat="server" Text="Add New User" PostBackUrl="~/Account/Registerca.aspx"
-                                            CssClass="button_example" />
+                                            CssClass="btn btn-yellow pull-right" />
                                     </h6>
-                                    <div class="widget-toolbar">
-                                        <a href="#" data-action="collapse"><i class="icon-chevron-down"></i></a>
-                                    </div>
                                 </div>
                                 <div class="widget-body">
                                     <div class="widget-main">
@@ -95,6 +92,7 @@
                                                                     <asp:ListItem Text="Clsuter Lead" Value="ClusterLead"></asp:ListItem>
                                                                     <asp:ListItem Text="Regional Lead" Value="RegionalClusterLead"></asp:ListItem>
                                                                     <asp:ListItem Text="OCHA" Value="OCHA"></asp:ListItem>
+                                                                    <asp:ListItem Text="OCHA Country Admin" Value="CountryAdmin"></asp:ListItem>
                                                                 </asp:DropDownList>
                                                             </td>
                                                             <td>Approved:
