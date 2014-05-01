@@ -213,7 +213,11 @@ namespace SRFROWCA.Account
         {
             string roleName = "User";
 
-            if (ddlUserRole.SelectedValue.Equals("4"))
+            if (ddlUserRole.SelectedValue.Equals("5"))
+            {
+                roleName = "CountryAdmin";
+            }
+            else if (ddlUserRole.SelectedValue.Equals("4"))
             {
                 roleName = "OCHA";
             }
