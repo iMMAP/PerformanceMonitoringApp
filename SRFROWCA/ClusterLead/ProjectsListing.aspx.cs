@@ -193,8 +193,10 @@ namespace SRFROWCA.ClusterLead
             int? cbReported = cblReportingStatus.SelectedIndex > -1 ? RC.GetSelectedIntVal(cblReportingStatus) : (int?)null;
             int? cbFunded = cblFundingStatus.SelectedIndex > -1 ? RC.GetSelectedIntVal(cblFundingStatus) : (int?)null;
 
-            return DBContext.GetData("GetProjects", new object[] {UserInfo.EmergencyCountry, UserInfo.EmergencyCluster,
-                                                                            projCode, orgId, admin1, admin2, 
+            int? countryId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
+            int? clusterId = UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
+
+            return DBContext.GetData("GetProjects", new object[] {countryId, clusterId,projCode, orgId, admin1, admin2, 
                                                                             DBNull.Value, cbFunded, cbReported, 1 });
         }
     }
