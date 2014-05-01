@@ -46,6 +46,15 @@
                             <asp:Localize ID="localDownloadItems" runat="server" Text="In this template you will have:"></asp:Localize></h4>
 
                         <ul class="list-unstyled spaced inline bigger-110 margin-15">
+                            <li id="liClusters" runat="server">
+                                <i class="icon-hand-right blue"></i>
+
+                                <label>
+                                    Cluster:
+                                    <asp:DropDownList ID="ddlClusters" runat="server"></asp:DropDownList>
+                                </label>
+
+                            </li>
                             <li>
                                 <i class="icon-hand-right blue"></i>
                                 <cc:DropDownCheckBoxes ID="ddlOrganizations" runat="server" CssClass="ddlWidth"

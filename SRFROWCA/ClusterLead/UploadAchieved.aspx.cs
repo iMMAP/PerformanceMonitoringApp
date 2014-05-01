@@ -18,7 +18,22 @@ namespace SRFROWCA.ClusterLead
             if (!IsPostBack)
             {
                 LoadOrganizations();
+                if (RC.IsCountryAdmin(User))
+                {
+                    PopulateClusters();
+                }
+                else
+                {
+                    ddlClusters.Visible = false;
+                    liClusters.Visible = false;
+                }
             }
+        }
+
+        private void PopulateClusters()
+        {
+            int emgId = 1;
+            UI.FillEmergnecyClusters(ddlClusters, emgId);
         }
 
         private void LoadOrganizations()
@@ -56,15 +71,24 @@ namespace SRFROWCA.ClusterLead
 
         private DataTable GetIndicators()
         {
+            int tempVal = 0;
+            if (ddlClusters.Visible)
+            {
+                int.TryParse(ddlClusters.SelectedValue, out tempVal);
+            }
+
+            int? clusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
+            int? emgLocationId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
+
             bool countryInd = chkCountryIndicators.Checked;
             bool regionalInd = chkRegionalInidcators.Checked;
             bool allInd = chkAllIndicators.Checked;
             string orgIds = RC.GetSelectedValues(ddlOrganizations);
-            return DBContext.GetData("GetIndicatorsForDataEntryTemplate", new object[]{UserInfo.EmergencyCountry, UserInfo.EmergencyCluster,
+            return DBContext.GetData("GetIndicatorsForDataEntryTemplate", new object[]{emgLocationId, clusterId,
                                                                                         orgIds, countryInd, regionalInd, allInd,
                                                                                         RC.SelectedSiteLanguageId});
         }
-        
+
         #endregion
 
         protected void btnImport_Click(object sender, EventArgs e)

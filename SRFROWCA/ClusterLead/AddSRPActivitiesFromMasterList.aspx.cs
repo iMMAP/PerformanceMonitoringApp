@@ -73,7 +73,7 @@ namespace SRFROWCA.ClusterLead
         private DataTable GetIndicators()
         {
             int tempVal = 0;
-            if (ddlClusters.Enabled)
+            if (ddlClusters.Visible)
             {
                 int.TryParse(ddlClusters.SelectedValue, out tempVal);
             }
