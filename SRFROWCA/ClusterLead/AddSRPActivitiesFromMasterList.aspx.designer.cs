@@ -76,6 +76,15 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.Localize localCountryIndicatorsSearchActivity;
         
         /// <summary>
+        /// ddlClusters control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlClusters;
+        
+        /// <summary>
         /// btnExportToExcel control.
         /// </summary>
         /// <remarks>
@@ -83,15 +92,6 @@ namespace SRFROWCA.ClusterLead {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton btnExportToExcel;
-        
-        /// <summary>
-        /// localizeClusterName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localizeClusterName;
         
         /// <summary>
         /// btnAddSRPActivity control.

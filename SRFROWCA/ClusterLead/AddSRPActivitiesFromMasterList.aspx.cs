@@ -24,18 +24,44 @@ namespace SRFROWCA.ClusterLead
             UserInfo.UserProfileInfo();
             PopulateObjectives();
             PopulatePriorities();
-            PopulateIndicators();
-            PopulateClusterName();
+            
+            //PopulateClusterName();
+
+            if (RC.IsCountryAdmin(User))
+            {
+                PopulateClusters();
+            }
+            else
+            {
+                PopulateIndicators();
+                ddlClusters.Visible = false;
+            }
 
             Session["SRPCustomEditIndicator"] = null;
+        }
+
+        private void PopulateClusters()
+        {
+            int emgId = 1;
+            UI.FillEmergnecyClusters(ddlClusters, emgId);
+            RC.AddSelectItemInList(ddlClusters, "Select Cluster");
         }
 
         internal override void BindGridData()
         {
             PopulateObjectives();
-            PopulatePriorities();
-            PopulateIndicators();
-            PopulateClusterName();
+            PopulatePriorities();            
+            //PopulateClusterName();
+
+            if (RC.IsCountryAdmin(User))
+            {
+                PopulateClusters();
+            }
+            else
+            {
+                PopulateIndicators();
+                ddlClusters.Visible = false;
+            }
         }
 
         private void PopulateIndicators()
@@ -46,17 +72,22 @@ namespace SRFROWCA.ClusterLead
 
         private DataTable GetIndicators()
         {
-            int emergencyId = 1;
-            int clusterId = UserInfo.Cluster;
-            int emgLocationId = UserInfo.EmergencyCountry;
+            int tempVal = 0;
+            if (ddlClusters.Enabled)
+            {
+                int.TryParse(ddlClusters.SelectedValue, out tempVal);
+            }
+
+            int? clusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
+            int? emgLocationId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
             int lngId = RC.SelectedSiteLanguageId;
-            return DBContext.GetData("GetClusterIndicatorsToSelectSRPActivities", new object[] { emergencyId, clusterId, emgLocationId, lngId });
+            return DBContext.GetData("GetClusterIndicatorsToSelectSRPActivities", new object[] { clusterId, emgLocationId, lngId });
         }
 
-        private void PopulateClusterName()
-        {
-            localizeClusterName.Text = RC.GetClusterName + " Indicators";
-        }
+        //private void PopulateClusterName()
+        //{
+        //    localizeClusterName.Text = RC.GetClusterName + " Indicators";
+        //}
 
         protected void gvSRPIndicators_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -150,6 +181,11 @@ namespace SRFROWCA.ClusterLead
         protected void btnAddIndicator_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/LeadPages/AddIndicatorOnActivity.aspx");
+        }
+
+        protected void ddlClusters_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PopulateIndicators();
         }
 
         private void PopulateObjectives()
