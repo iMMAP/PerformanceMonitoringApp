@@ -10,14 +10,9 @@ namespace SRFROWCA.Account
 {
     public partial class UpdateUser : BasePage
     {
-        protected void Page_PreInit(object sender, EventArgs e)
-        {
-            GZipContents.GZipOutput();
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!this.User.IsInRole("Admin"))
+            if (!this.User.IsInRole("Admin") && !this.User.IsInRole("CountryAdmin"))
             {
                 Response.Redirect("~/Default.aspx");
             }
@@ -74,7 +69,7 @@ namespace SRFROWCA.Account
 
         private DataTable GetUserDetails(Guid userId)
         {
-            return DBContext.GetData("GetUserDetails", new object[] { userId });
+            return DBContext.GetData("GetUserDetails", new object[] { 1, userId });
         }
 
         // Populate countries drop down.

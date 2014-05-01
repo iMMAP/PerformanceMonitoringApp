@@ -14,11 +14,6 @@ namespace SRFROWCA.Account
 {
     public partial class Registerca : BasePage
     {
-        protected void Page_PreInit(object sender, EventArgs e)
-        {
-            GZipContents.GZipOutput();
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
@@ -27,6 +22,29 @@ namespace SRFROWCA.Account
             this.Form.DefaultFocus = this.txtUserName.UniqueID;
 
             PopulateCountries();
+            PopulateOrganizations();
+            PopulateClusters();
+        }
+
+        private void PopulateOrganizations()
+        {
+            ddlOrganization.DataValueField = "OrganizationId";
+            ddlOrganization.DataTextField = "OrganizationAcronym";
+
+            ddlOrganization.DataSource = GetOrganizations();
+            ddlOrganization.DataBind();
+
+            string text = RC.SelectedSiteLanguageId == 2 ? "Séléctionner votre Organisation" : "Select Your Organization";
+            ListItem item = new ListItem(text, "0");
+            ddlOrganization.Items.Insert(0, item);
+        }        
+
+        private void PopulateClusters()
+        {
+            UI.FillClusters(ddlClusters, RC.SelectedSiteLanguageId);
+            string text = RC.SelectedSiteLanguageId == 2 ? "Sélectionner votre Cluster" : "Select Your Cluster";
+            ListItem item = new ListItem(text, "0");
+            ddlClusters.Items.Insert(0, item);
         }
 
         private DataTable GetUserData()
@@ -47,54 +65,23 @@ namespace SRFROWCA.Account
             bool returnValue = false;
             try
             {
+                if (!DataIsValid()) return;
                 // If user already exists return.
                 if (IsUserAlreadyExits()) return;
 
                 // Create New 1)Rider, 2) Places, 3) Route,
                 // 4) Send Email to user to verify account.
                 returnValue = CreateUserAccount();
-                string message = "Account created successfully!";
-                if (returnValue)
-                {
-                    try
-                    {
-                        string from = "3wopactivities@gmail.com";
-                        string to = txtEmail.Text.Trim();
-                        string subject = "New 3W Performace Monitoring Account!";
-                        string mailBody = "";
-                        if (this.User.IsInRole("Admin"))
-                        {
-                            mailBody = string.Format(@"3W Perfomance Monitoring admin has created your new account.
-                                                        User Name: {0} \n 
-                                                        Password: {1} \n
-                                                        If you face any difficulty login, please contact to admin of the site!",
-                                                        txtUserName.Text.Trim(), txtPassword.Text);
-
-                            Mail.SendMail(from, txtEmail.Text, subject, mailBody);
-                            message = "An email has been send to " + txtEmail.Text;
-                        }
-                    }
-                    catch
-                    {
-                        message = "You have been registered successfully but some error occoured on sending email to site admin. Contact admin and ask for the verification! We apologies for the inconvenience!";
-                    }
-                }
-
-                ShowMessage(message, RC.NotificationType.Success, false, 500);
-
-                ClearRegistrationControls();
             }
             catch (Exception ex)
             {
-                ShowMessage(ex.Message);
+                ShowMessage(ex.Message, RC.NotificationType.Error, false);
             }
-        }
 
-        private void ClearRegistrationControls()
-        {
-            txtUserName.Text = "";
-            txtPassword.Text = "";
-            txtEmail.Text = "";
+            if (returnValue)
+            {   
+                Response.Redirect("~/Admin/UsersListing.aspx");
+            }
         }
 
         // Populate countries drop down.
@@ -105,12 +92,20 @@ namespace SRFROWCA.Account
             ddlLocations.DataTextField = "LocationName";
             ddlLocations.DataSource = dt;
             ddlLocations.DataBind();
+
+            ListItem item = new ListItem("Select Country", "0");
+            ddlLocations.Items.Insert(0, item);
+
+            if (HttpContext.Current.User.IsInRole("CountryAdmin"))
+            {
+                ddlLocations.SelectedValue = UserInfo.Country.ToString();
+                ddlLocations.Enabled = false;
+            }
         }
 
         private DataTable GetOrganizations()
         {
             DataTable dt = DBContext.GetData("GetOrganizations");
-
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 
@@ -158,7 +153,29 @@ namespace SRFROWCA.Account
 
         private void AddRecordInRoles(Guid userId)
         {
-            string roleName = "CountryAdmin";
+            string roleName = "User";
+
+            if (ddlUserRole.SelectedValue.Equals("5"))
+            {
+                roleName = "CountryAdmin";
+            }
+            else if (ddlUserRole.SelectedValue.Equals("4"))
+            {
+                roleName = "OCHA";
+            }
+            else if (ddlUserRole.SelectedValue.Equals("3"))
+            {
+                roleName = "RegionalClusterLead";
+            }
+            else if (ddlUserRole.SelectedValue.Equals("2"))
+            {
+                roleName = "ClusterLead";
+            }
+            else if (ddlUserRole.SelectedValue.Equals("1"))
+            {
+                roleName = "User";
+            }
+
             DBContext.Add("InsertUserInRole", new object[] { userId, roleName, DBNull.Value });
         }
 
@@ -178,22 +195,113 @@ namespace SRFROWCA.Account
         // OrganizationId and LocationId i.e. country of user.
         private void CreateUserDetails(Guid userId)
         {
+            InsertLocationsAndOrg(userId);
+            InsertClusters(userId);
+        }
+
+        private void InsertLocationsAndOrg(Guid userId)
+        {
             object[] userValues = GetUserValues(userId);
-            DBContext.Add("InsertASPNetUserCustomWithMultipleLocations", userValues);
+            DBContext.Add("InsertASPNetUserCustom", userValues);
+        }
+
+        private void InsertClusters(Guid userId)
+        {
+            if (ddlUserRole.SelectedValue.Equals("2") || ddlUserRole.SelectedValue.Equals("3"))
+            {
+                int clusterId = Convert.ToInt32(ddlClusters.SelectedValue);
+                DBContext.Add("InsertASPNetUserCluster", new object[] { userId, clusterId, DBNull.Value });
+            }
         }
 
         private object[] GetUserValues(Guid userId)
         {
+            if (ddlUserRole.SelectedValue.Equals("3"))
+            {
+                ddlLocations.SelectedValue = "567";
+            }
+
             int? orgId = null;
+            orgId = ddlOrganization.SelectedValue != "0"? Convert.ToInt32(ddlOrganization.SelectedValue) : (int?)null;
             string countryId = null;
-            countryId = ReportsCommon.GetSelectedValues(ddlLocations);
+            countryId = ddlLocations.SelectedValue;
             string phone = txtPhone.Text.Trim().Length > 0 ? txtPhone.Text.Trim() : null;
-            return new object[] { userId, orgId, countryId, phone, DBNull.Value };
+            return new object[] { userId, orgId, countryId, phone, txtFullName.Text, DBNull.Value };
+        }
+
+        protected void ddlUserRole_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ddlOrganization.SelectedIndex = 0;
+            ddlClusters.SelectedIndex = 0;
+            ddlLocations.SelectedIndex = 0;
+
+            if (ddlUserRole.SelectedValue.Equals("0"))
+            {
+                ddlOrganization.Enabled = true;
+                ddlClusters.Enabled = true;
+                divOrg.Visible = true;
+                divCluster.Visible = true;
+            }
+            else if (ddlUserRole.SelectedValue.Equals("5"))
+            {
+                ddlOrganization.Enabled = false;
+                ddlClusters.Enabled = false;
+                divOrg.Visible = false;
+                divCluster.Visible = false;
+            }
+            else if (ddlUserRole.SelectedValue.Equals("4"))
+            {
+                ddlOrganization.Enabled = false;
+                ddlClusters.Enabled = false;
+                divOrg.Visible = false;
+                divCluster.Visible = false;
+            }
+            else if (ddlUserRole.SelectedValue.Equals("3"))
+            {
+                ddlOrganization.Enabled = false;
+                ddlClusters.Enabled = true;
+                divOrg.Visible = false;
+                divCluster.Visible = true;
+            }
+            else if (ddlUserRole.SelectedValue.Equals("2"))
+            {
+                ddlOrganization.Enabled = false;
+                ddlClusters.Enabled = true;
+                divOrg.Visible = false;
+                divCluster.Visible = true;
+            }
+            else if (ddlUserRole.SelectedValue.Equals("1"))
+            {
+                ddlClusters.Enabled = false;
+                ddlOrganization.Enabled = true;
+                divOrg.Visible = true;
+                divCluster.Visible = false;
+            }
+        }
+
+        private bool DataIsValid()
+        {
+            //if (ddlUserRole.SelectedValue.Equals("5") || ddlUserRole.SelectedValue.Equals("4"))
+            //{
+            //    //roleName = "CountryAdmin";
+            //}
+
+            if (ddlUserRole.SelectedValue.Equals("3") || ddlUserRole.SelectedValue.Equals("2"))
+            {
+                if (ddlClusters.SelectedIndex == 0)
+                    return false;
+            }
+            else if (ddlUserRole.SelectedValue.Equals("1"))
+            {
+                if (ddlOrganization.SelectedIndex == 0)
+                    return false;
+            }
+
+            return true;
         }
 
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
         {
-            updMessage.Update();
             RC.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
         }
 
