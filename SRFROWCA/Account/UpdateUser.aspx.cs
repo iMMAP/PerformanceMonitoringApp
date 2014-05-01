@@ -19,7 +19,7 @@ namespace SRFROWCA.Account
 
             if (IsPostBack) return;
 
-            this.Form.DefaultButton = this.btnUpdate.UniqueID;            
+            this.Form.DefaultButton = this.btnUpdate.UniqueID;
 
             PopulateCountries();
             PopulateOrganizations();
@@ -41,29 +41,30 @@ namespace SRFROWCA.Account
             if (dt.Rows.Count > 0)
             {
                 txtPhone.Text = dt.Rows[0]["PhoneNumber"].ToString();
+                txtFullName.Text = dt.Rows[0]["FullName"].ToString();
                 ddlOrganization.SelectedValue = dt.Rows[0]["OrganizationId"].ToString();
 
-                string[] roles = Roles.GetRolesForUser(mu.UserName);
-                if (roles.Length > 0)
-                {
-                    if (roles[0] == "CountryAdmin")
-                    {
-                        divCountry.Visible = false;
-                        rfvCountry.Enabled = false;
+                //string[] roles = Roles.GetRolesForUser(mu.UserName);
+                //if (roles.Length > 0)
+                //{
+                //    if (roles[0] == "CountryAdmin")
+                //    {
+                //        divCountry.Visible = false;
+                //        rfvCountry.Enabled = false;
 
-                        foreach (DataRow dr in dt.Rows)
-                        {
-                            ListItem item = ddlLocations.Items.FindByValue(dr["LocationId"].ToString());
-                            item.Selected = true;
-                        }
+                //        foreach (DataRow dr in dt.Rows)
+                //        {
+                //            ListItem item = ddlLocations.Items.FindByValue(dr["LocationId"].ToString());
+                //            item.Selected = true;
+                //        }
 
-                    }
-                    else
-                    {
-                        ddlCountry.SelectedValue = dt.Rows[0]["LocationId"].ToString();
-                        divLocation.Visible = false;
-                    }
-                }
+                //    }
+                //    else
+                //    {
+                ddlCountry.SelectedValue = dt.Rows[0]["LocationId"].ToString();
+                //        divLocation.Visible = false;
+                //    }
+                //}
             }
         }
 
@@ -85,10 +86,10 @@ namespace SRFROWCA.Account
             ListItem item = new ListItem("Select Your Country", "0");
             ddlCountry.Items.Insert(0, item);
 
-            ddlLocations.DataValueField = "LocationId";
-            ddlLocations.DataTextField = "LocationName";
-            ddlLocations.DataSource = dt;
-            ddlLocations.DataBind();
+            //ddlLocations.DataValueField = "LocationId";
+            //ddlLocations.DataTextField = "LocationName";
+            //ddlLocations.DataSource = dt;
+            //ddlLocations.DataBind();
         }
 
         private DataTable GetCountries()
@@ -126,45 +127,21 @@ namespace SRFROWCA.Account
             mu.Email = txtEmail.Text;
             Membership.UpdateUser(mu);
 
-            string[] roles = Roles.GetRolesForUser(mu.UserName);
-            if (roles.Length > 0)
-            {
-                object[] userValues = GetUserValues(userId, roles[0]);
-                if (roles[0] == "CountryAdmin")
-                {
-                    DBContext.Add("UpdateASPNetUserCustomWithMultipleLocations", userValues);
-                }
-                else if (roles[0] == "User")
-                {
-                    DBContext.Add("UpdateASPNetUserCustom", userValues);
-                }
-            }
+            object[] userValues = GetUserValues(userId);
+            DBContext.Add("UpdateASPNetUserCustom", userValues);
 
-            Response.Redirect("~/Admin/Users/UsersListing.aspx");
+            Response.Redirect("~/Admin/UsersListing.aspx");
         }
 
-        private object[] GetUserValues(Guid userId, string roleName)
+        private object[] GetUserValues(Guid userId)
         {
-            int orgId = 0;
-            int.TryParse(ddlOrganization.SelectedValue, out orgId);
+            int tempVal = 0;
+            int.TryParse(ddlOrganization.SelectedValue, out tempVal);
+            int? orgId = tempVal > 0 ? tempVal : (int?)null;
             string countryId = null;
-
-            if (roleName == "CountryAdmin")
-            {
-                countryId = ReportsCommon.GetSelectedValues(ddlLocations);
-                if (countryId == null)
-                {
-                    countryId = ddlCountry.SelectedValue;
-                }
-            }
-            else
-            {
-                countryId = ddlCountry.SelectedValue;
-            }
-
+            countryId = ddlCountry.SelectedValue;
             string phone = txtPhone.Text.Trim().Length > 0 ? txtPhone.Text.Trim() : null;
-
-            return new object[] { userId, orgId, countryId, phone, DBNull.Value };
+            return new object[] { userId, orgId, countryId, phone, txtFullName.Text.Trim(), DBNull.Value };
         }
 
         protected void Page_Error(object sender, EventArgs e)
