@@ -16,12 +16,18 @@ namespace SRFROWCA.Account
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
-
             //this.Form.DefaultButton = this.btnUpdate.UniqueID;
-
             PopulateCountries();
             GetUserInformation();
 
+            if (RC.IsDataEntryUser(User))
+            {
+                ddlCountry.Enabled = true;
+            }
+            else
+            {
+                ddlCountry.Enabled = false;
+            }
         }
 
         private void GetUserInformation()
