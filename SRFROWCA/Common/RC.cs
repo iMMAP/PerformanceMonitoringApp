@@ -391,6 +391,13 @@ namespace SRFROWCA.Common
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(SiteCulture);
         }
 
+        internal static void AddSelectItemInList(ListControl ctl, string text)
+        {
+            ListItem item = new ListItem(text, "0");
+            ctl.Items.Insert(0, item);
+        }
+    
+
         // Get multiple selected values from drop down checkbox.
         internal static string GetSelectedValues(object sender)
         {

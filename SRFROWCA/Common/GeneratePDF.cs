@@ -20,16 +20,10 @@ namespace SRFROWCA.Common
             for (int i = 0; i < projectIds.Count; i++)
             {
                 IEnumerable<DataRow> projectDetails = GetProjectInformation(dt, projectIds[i]);
-
                 DataRow projectGeneralInfo = projectDetails.FirstOrDefault<DataRow>();
                 ProjectGeneralInfo(document, projectGeneralInfo);
 
                 IndicatorTargets(document, projectDetails);
-
-                //PDFExportObjId = 0;
-                //PDFExportPrId = 0;
-                //PDFExportActivityId = 0;
-
                 document.NewPage();
             }
         }
