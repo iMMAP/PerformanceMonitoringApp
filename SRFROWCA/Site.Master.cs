@@ -33,6 +33,8 @@ namespace SRFROWCA
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            SetUserName();
+
             HideAllAuthenticatedMenues();
 
             LoadNotifications();
@@ -73,6 +75,11 @@ namespace SRFROWCA
                     ShowOCHAMenue();
                 }
 
+                if (HttpContext.Current.User.IsInRole("CountryAdmin"))
+                {
+                    ShowCountryAdminMenue();
+                }
+
                 if (HttpContext.Current.User.IsInRole("Admin"))
                 {
                     ShowAdminMenue();
@@ -84,6 +91,21 @@ namespace SRFROWCA
             ActiveMenueItem();
         }
 
+        private void SetUserName()
+        {
+            if (HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                using (ORSEntities db = new ORSEntities())
+                {
+                    var user = db.aspnet_Users_Custom.Where(x => x.UserId == RC.GetCurrentUserId).Select(y => new { y.FullName }).SingleOrDefault();
+                    if (user != null && !string.IsNullOrEmpty(user.FullName))
+                    {
+                        HeadLoginName.FormatString = user.FullName;
+                    }
+                }
+            }
+        }
+
         private void LoadNotifications()
         {
             try
@@ -92,7 +114,7 @@ namespace SRFROWCA
                 {
                     rptNotifications.DataSource = db.Notifications.Where(x => x.EmergencyLocationId == UserInfo.EmergencyCountry
                                                                             && x.EmergencyClusterId == UserInfo.EmergencyCluster)
-                                                                  .Select(y => new {y.Notification1, y.PageURL});
+                                                                  .Select(y => new { y.Notification1, y.PageURL });
                     rptNotifications.DataBind();
                 }
             }
@@ -207,12 +229,28 @@ namespace SRFROWCA
             liFundingStatus.Visible = isShow;
         }
 
+        private void ShowCountryAdminMenue()
+        {
+            bool isShow = true;
+            liReports.Visible = isShow;
+            menueReports.Visible = isShow;
+            menueSRPIndicators.Visible = isShow;
+            liSRPIndicators.Visible = isShow;
+            menueValidateIndicaotrs.Visible = isShow;
+            liValidate.Visible = isShow;
+            liCLprojectsListing.Visible = isShow;
+            liSumOfCountryIndicators.Visible = isShow;
+            liClusterTarget.Visible = isShow;
+            liPivotSumOfCountryIndicators.Visible = isShow;
+            liBulkImport.Visible = isShow;
+        }
+
         private void ShowAdminMenue()
         {
             bool isShow = true;
             liFundingStatus.Visible = isShow;
             liUserListing.Visible = isShow;
-        }        
+        }
 
         private void ActiveMenueItem()
         {
@@ -231,7 +269,7 @@ namespace SRFROWCA
             {
                 liDashboards.Attributes.Add("class", "active open");
                 liOperationalPresenceDB.Attributes.Add("class", "active");
-            }                
+            }
             else if (uri == "/Pages/AddActivities.aspx")
             {
                 liDataEntry.Attributes.Add("class", "active");
@@ -243,7 +281,7 @@ namespace SRFROWCA
             else if (uri == "/Pages/ManageActivities.aspx")
             {
                 liManageActivity.Attributes.Add("class", "active");
-            }            
+            }
             else if (uri == "/Anonymous/AllData.aspx")
             {
                 liReports.Attributes.Add("class", "active open");
@@ -359,10 +397,10 @@ namespace SRFROWCA
         protected void lnkLanguageFrench_Click(object sender, EventArgs e)
         {
             try
-            { 
-            RC.SelectedSiteLanguageId = (int)Common.RC.SiteLanguage.French;
-            RC.AddSiteLangInCookie(this.Response, Common.RC.SiteLanguage.French);
-            (MainContent.Page as BasePage).BindGridData();
+            {
+                RC.SelectedSiteLanguageId = (int)Common.RC.SiteLanguage.French;
+                RC.AddSiteLangInCookie(this.Response, Common.RC.SiteLanguage.French);
+                (MainContent.Page as BasePage).BindGridData();
             }
             catch { }
         }
@@ -372,7 +410,12 @@ namespace SRFROWCA
             HttpContext.Current.Session["UserCountry"] = null;
             HttpContext.Current.Session["UserCluster"] = null;
             HttpContext.Current.Session["UserOrg"] = null;
-        }        
+            HttpContext.Current.Session["UserOrgName"] = null;
+            HttpContext.Current.Session["UserLocationEmergencyId"] = null;
+            HttpContext.Current.Session["UserCountryName"] = null;
+            HttpContext.Current.Session["UserEmergencyClusterId"] = null;
+            HttpContext.Current.Session["EmergencyId"] = null;
+        }
 
         // Gets the ASP.NET application's virtual application root path on the server.
         private static string VirtualFolder
@@ -393,9 +436,9 @@ namespace SRFROWCA
             }
         }
 
-        
+
     }
 
-    
+
 }
 

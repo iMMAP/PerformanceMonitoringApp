@@ -867,9 +867,7 @@
     <Content Include="fckeditor\_samples\_plugins\samples\fckplugin.js" />
     <Content Include="fckeditor\_upgrade.html" />
     <Content Include="fckeditor\_whatsnew.html" />
-    <Content Include="fckeditor\_whatsnew_history.html" />
-    <Content Include="Help\generatereport1.avi" />
-    <Content Include="Help\generatereport1.swf" />
+    <Content Include="fckeditor\_whatsnew_history.html" />        
     <Content Include="LeadPages\AddIndicatorOnActivity.aspx" />
     <Content Include="LeadPages\EditActIndicator.aspx" />
     <Content Include="LeadPages\FundingListing.aspx" />
