@@ -39,12 +39,13 @@ namespace SRFROWCA.Reports
                 int? emgLocId = UserInfo.EmergencyCountry == 0 ? (int?)null : UserInfo.EmergencyCountry;
                 int countryId = RC.GetSelectedIntVal(ddlCountry);
                 emgLocId = countryId == 0 ? (int?)null : countryId;
+                int? emgClusterId = UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
 
-                DataTable dt = DBContext.GetData("GetProjectsOnCountryAndCluster", new object[] { emgLocId, UserInfo.EmergencyCluster });
+                DataTable dt = DBContext.GetData("GetProjectsOnCountryAndCluster", new object[] { emgLocId, emgClusterId });
                 ddlProjects.DataSource = dt;
                 ddlProjects.DataBind();
 
-                ListItem item = new ListItem("Select", "0");
+                ListItem item = new ListItem("All", "0");
                 ddlProjects.Items.Insert(0, item);
             }
         }
@@ -52,10 +53,11 @@ namespace SRFROWCA.Reports
         private void PopulateOrganizations()
         {
             int? emgLocId = UserInfo.EmergencyCountry == 0 ? (int?)null : UserInfo.EmergencyCountry;
+            int? emgClusterId = UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
             int countryId = RC.GetSelectedIntVal(ddlCountry);
             emgLocId = countryId == 0 ? (int?)null : countryId;
 
-            DataTable dt = RC.GetProjectsOrganizations(emgLocId, UserInfo.EmergencyCluster);
+            DataTable dt = RC.GetProjectsOrganizations(emgLocId, emgClusterId);
             UI.FillOrganizations(ddlOrganizations, dt);
 
             if (ddlOrganizations.Items.Count > 0)
@@ -280,12 +282,11 @@ namespace SRFROWCA.Reports
             int? cbFunded = cblFundingStatus.SelectedIndex > -1 ? RC.GetSelectedIntVal(cblFundingStatus) : (int?)null;
 
             int? emgLocId = UserInfo.EmergencyCountry == 0 ? (int?)null : UserInfo.EmergencyCountry;
+            int? clusterId = UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
             int countryId = RC.GetSelectedIntVal(ddlCountry);
             emgLocId = countryId == 0 ? (int?)null : countryId;
 
-
-            return DBContext.GetData("GetProjects", new object[] {emgLocId, UserInfo.EmergencyCluster,
-                                                                            projCode, orgId, admin1, admin2, 
+            return DBContext.GetData("GetProjects", new object[] {emgLocId, clusterId, projCode, orgId, admin1, admin2, 
                                                                             DBNull.Value, cbFunded, cbReported, 1 });
         }
 
