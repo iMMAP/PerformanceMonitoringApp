@@ -381,6 +381,10 @@ namespace SRFROWCA
                 liValidate.Attributes.Add("class", "active open");
                 liValidateAchievements.Attributes.Add("class", "active");
             }
+            else if (uri.Contains("ClusterLead/UploadAchieved.aspx"))
+            {
+                liBulkImport.Attributes.Add("class", "active");
+            }
         }
 
         protected void lnkLanguageEnglish_Click(object sender, EventArgs e)
