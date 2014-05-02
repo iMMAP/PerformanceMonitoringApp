@@ -845,21 +845,16 @@ namespace SRFROWCA.Pages
 
         private void GeneratePDF(DataTable dt)
         {
-            using (iTextSharp.text.Document document = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4, 8, 8, 14, 6))
+            using (MemoryStream outputStream = new MemoryStream())
             {
-                using (MemoryStream outputStream = new MemoryStream())
-                {
-                    using (iTextSharp.text.pdf.PdfWriter writer = iTextSharp.text.pdf.PdfWriter.GetInstance(document, outputStream))
-                    {
-                        document.Open();
-
-                        WriteDataEntryPDF.GenerateDocument(document, dt);
-
-                        Response.ContentType = "application/pdf";
-                        Response.AddHeader("Content-Disposition", string.Format("attachment;filename=Project-{0}.pdf", UserInfo.CountryName));
-                        Response.BinaryWrite(outputStream.ToArray());
-                    }
-                }
+                iTextSharp.text.Document document = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4, 8, 8, 14, 6);
+                iTextSharp.text.pdf.PdfWriter writer = iTextSharp.text.pdf.PdfWriter.GetInstance(document, outputStream);
+                document.Open();
+                WriteDataEntryPDF.GenerateDocument(document, dt);
+                document.Close();
+                Response.ContentType = "application/pdf";
+                Response.AddHeader("Content-Disposition", string.Format("attachment;filename=Project-{0}.pdf", UserInfo.CountryName));
+                Response.BinaryWrite(outputStream.ToArray());
             }
         }
 
