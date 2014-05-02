@@ -185,9 +185,12 @@ namespace SRFROWCA.ClusterLead
 
         private void LoadProjects()
         {
+            int? clusterId = UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
+            int? emgLocationId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
+
             rblProjects.DataValueField = "ProjectId";
             rblProjects.DataTextField = "ProjectCode";
-            rblProjects.DataSource = DBContext.GetData("GetProjectsToApproveIndicatorsAddRemoved", new object[] { UserInfo.EmergencyCountry, UserInfo.EmergencyCluster });
+            rblProjects.DataSource = DBContext.GetData("GetProjectsToApproveIndicatorsAddRemoved", new object[] { emgLocationId, clusterId });
             rblProjects.DataBind();
 
             if (rblProjects.Items.Count > 0)
