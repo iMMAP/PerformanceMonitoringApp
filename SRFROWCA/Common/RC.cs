@@ -54,6 +54,13 @@ namespace SRFROWCA.Common
             return false;
         }
 
+        internal static bool IsDataEntryUser(IPrincipal iPrincipal)
+        {
+            if (iPrincipal.IsInRole("User"))
+                return true;
+            return false;
+        }
+
         internal static string GetCountryAdminRoleName
         {
             get
