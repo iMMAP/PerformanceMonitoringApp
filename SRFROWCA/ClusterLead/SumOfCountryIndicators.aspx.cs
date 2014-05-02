@@ -12,9 +12,23 @@ namespace SRFROWCA.ClusterLead
         {
             if (!IsPostBack)
             {
-
-                LoadData();
+                if (RC.IsCountryAdmin(User))
+                {
+                    PopulateClusters();
+                    LoadEmptyData();
+                }
+                else
+                {
+                    divCluster.Visible = false;
+                    LoadData();
+                }
             }
+        }
+
+        private void LoadEmptyData()
+        {
+            gvReport.DataSource = new DataTable();
+            gvReport.DataBind();
         }
 
         private void LoadData()
@@ -25,8 +39,29 @@ namespace SRFROWCA.ClusterLead
 
         private DataTable GetData()
         {
-            return DBContext.GetData("GetAllCountryIndicatorsAchievedReport", new object[] {UserInfo.EmergencyCountry, UserInfo.EmergencyCluster, 
-                                                                                                DBNull.Value, DBNull.Value, DBNull.Value, RC.SelectedSiteLanguageId});
+            int tempVal = 0;
+            if (ddlClusters.Visible)
+            {
+                int.TryParse(ddlClusters.SelectedValue, out tempVal);
+            }
+
+            int? clusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
+            int? emgLocationId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
+
+            return DBContext.GetData("GetAllCountryIndicatorsAchievedReport", new object[] {emgLocationId, clusterId, DBNull.Value, DBNull.Value, 
+                                                                                                            DBNull.Value, RC.SelectedSiteLanguageId});
+        }
+
+        private void PopulateClusters()
+        {
+            int emgId = 1;
+            UI.FillEmergnecyClusters(ddlClusters, emgId);
+            RC.AddSelectItemInList(ddlClusters, "Select Cluster");
+        }
+
+        protected void ddlClusters_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadData();
         }
 
         protected void gvReport_RowDataBound(object sender, GridViewRowEventArgs e)

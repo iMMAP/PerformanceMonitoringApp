@@ -31,6 +31,10 @@
                     </div>
                     <div class="widget-body">
                         <div class="widget-main">
+                            <div id="divCluster" runat="server">
+                                <asp:DropDownList ID="ddlClusters" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlClusters_SelectedIndexChanged"></asp:DropDownList>
+                                <div class="space-10"></div>
+                            </div>
                             <asp:GridView ID="gvReport" runat="server" Width="100%" CssClass="imagetable"
                                 AutoGenerateColumns="false" OnSorting="gvReport_Sorting" OnRowDataBound="gvReport_RowDataBound" ShowHeaderWhenEmpty="true"
                                 EnableViewState="false" AllowSorting="True" AllowPaging="true" PageSize="60"

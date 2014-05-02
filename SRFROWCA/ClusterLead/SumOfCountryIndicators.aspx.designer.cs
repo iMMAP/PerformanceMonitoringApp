@@ -31,6 +31,24 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.HtmlControls.HtmlButton btnExport;
         
         /// <summary>
+        /// divCluster control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divCluster;
+        
+        /// <summary>
+        /// ddlClusters control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlClusters;
+        
+        /// <summary>
         /// gvReport control.
         /// </summary>
         /// <remarks>
