@@ -16,14 +16,30 @@ namespace SRFROWCA.ClusterLead
         {
             if (!IsPostBack)
             {
-                LoadReports();
                 PopulateDropDowns();
+
+                if (RC.IsCountryAdmin(User))
+                {
+                    PopulateClusters();
+                }
+                else
+                {
+                    divClusters.Visible = false;
+                    LoadReports();
+                }
             }
         }
 
         internal override void BindGridData()
         {
             PopulateMonths();
+        }
+
+        private void PopulateClusters()
+        {
+            int emgId = 1;
+            UI.FillEmergnecyClusters(ddlClusters, emgId);
+            RC.AddSelectItemInList(ddlClusters, "Select Cluster");
         }
 
         private void PopulateDropDowns()
@@ -90,6 +106,15 @@ namespace SRFROWCA.ClusterLead
 
         private void LoadReports()
         {
+            int tempVal = 0;
+            if (ddlClusters.Visible)
+            {
+                int.TryParse(ddlClusters.SelectedValue, out tempVal);
+            }
+
+            int? clusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
+            int? emgLocationId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
+
             int id = RC.GetSelectedIntVal(ddlProjects);
 
             if (id == 0)
@@ -104,7 +129,7 @@ namespace SRFROWCA.ClusterLead
             id = RC.GetSelectedIntVal(ddlOrganizations);
             int? orgId = id == 0 ? (int?)null : id;
 
-            gvReports.DataSource = DBContext.GetData("GetCountryReports", new object[] { UserInfo.EmergencyCountry, UserInfo.EmergencyCluster, projectID, monthId, orgId });
+            gvReports.DataSource = DBContext.GetData("GetCountryReports", new object[] { emgLocationId, clusterId, projectID, monthId, orgId });
             gvReports.DataBind();
         }
 
@@ -119,6 +144,11 @@ namespace SRFROWCA.ClusterLead
 
                 Response.Redirect("ValidateIndicators.aspx?rid=" + reportId);
             }
+        }
+
+        protected void ddlClusters_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadReports();
         }
 
         protected void ddl_SelectedIndexChanged(object sender, EventArgs e)

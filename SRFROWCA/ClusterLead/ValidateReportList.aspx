@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="ORS - Validate" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
-    CodeBehind="ValidateReportList.aspx.cs" Inherits="SRFROWCA.ClusterLead.ValidateReportList" culture="auto" meta:resourcekey="PageResource1" uiculture="auto" %>
+    CodeBehind="ValidateReportList.aspx.cs" Inherits="SRFROWCA.ClusterLead.ValidateReportList" Culture="auto" meta:resourcekey="PageResource1" UICulture="auto" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <!-- ORS styles -->
@@ -7,7 +7,7 @@
     <!-- ace styles -->
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-<div class="breadcrumbs" id="breadcrumbs">
+    <div class="breadcrumbs" id="breadcrumbs">
         <script type="text/javascript">
             try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
         </script>
@@ -51,8 +51,8 @@
                                                                                 <asp:Localize ID="localProjectCode" runat="server" Text="Project Code:" meta:resourcekey="localProjectCodeResource1"></asp:Localize>
                                                                             </td>
                                                                             <td>
-                                                                                <asp:DropDownList ID="ddlProjects" runat="server" CssClass="width-100" 
-                                                                                AutoPostBack="True" OnSelectedIndexChanged="ddl_SelectedIndexChanged" meta:resourcekey="ddlProjectsResource1" >
+                                                                                <asp:DropDownList ID="ddlProjects" runat="server" CssClass="width-100"
+                                                                                    AutoPostBack="True" OnSelectedIndexChanged="ddl_SelectedIndexChanged" meta:resourcekey="ddlProjectsResource1">
                                                                                 </asp:DropDownList>
                                                                             </td>
                                                                         </tr>
@@ -62,8 +62,16 @@
                                                                             </td>
                                                                             <td>
                                                                                 <asp:DropDownList ID="ddlMonths" runat="server" CssClass="width-100"
-                                                                                AutoPostBack="True" OnSelectedIndexChanged="ddl_SelectedIndexChanged" meta:resourcekey="ddlMonthsResource1">
+                                                                                    AutoPostBack="True" OnSelectedIndexChanged="ddl_SelectedIndexChanged" meta:resourcekey="ddlMonthsResource1">
                                                                                 </asp:DropDownList>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td></td>
+                                                                            <td>
+                                                                                <div id="divClusters" runat="server">
+                                                                                    <asp:DropDownList ID="ddlClusters" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlClusters_SelectedIndexChanged"></asp:DropDownList>
+                                                                                </div>
                                                                             </td>
                                                                         </tr>
                                                                     </table>
@@ -82,7 +90,7 @@
                                                                             </td>
                                                                             <td>
                                                                                 <asp:DropDownList ID="ddlProjectTitle" runat="server" CssClass="width-100"
-                                                                                AutoPostBack="True" OnSelectedIndexChanged="ddl_SelectedIndexChanged" meta:resourcekey="ddlProjectTitleResource1">
+                                                                                    AutoPostBack="True" OnSelectedIndexChanged="ddl_SelectedIndexChanged" meta:resourcekey="ddlProjectTitleResource1">
                                                                                 </asp:DropDownList>
                                                                             </td>
                                                                         </tr>
@@ -92,7 +100,7 @@
                                                                             </td>
                                                                             <td>
                                                                                 <asp:DropDownList ID="ddlOrganizations" runat="server" CssClass="width-100"
-                                                                                AutoPostBack="True" OnSelectedIndexChanged="ddl_SelectedIndexChanged" meta:resourcekey="ddlOrganizationsResource1">
+                                                                                    AutoPostBack="True" OnSelectedIndexChanged="ddl_SelectedIndexChanged" meta:resourcekey="ddlOrganizationsResource1">
                                                                                 </asp:DropDownList>
                                                                             </td>
                                                                         </tr>

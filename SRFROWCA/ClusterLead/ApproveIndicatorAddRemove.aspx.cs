@@ -68,20 +68,21 @@ namespace SRFROWCA.ClusterLead
 
         private void LoadAddedIndicators()
         {
+            int? clusterId = UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
+            int? emgLocationId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
+
             int? projectId = Convert.ToInt32(rblProjects.SelectedValue) > 0 ? Convert.ToInt32(rblProjects.SelectedValue) : (int?)null;
-            gvAdded.DataSource = DBContext.GetData("GetAddedProjectIndicatorsToApprove", new object[] { UserInfo.EmergencyCountry,
-                                                                                                        UserInfo.EmergencyCluster,
-                                                                                                        projectId,
+            gvAdded.DataSource = DBContext.GetData("GetAddedProjectIndicatorsToApprove", new object[] { emgLocationId, clusterId, projectId,
                                                                                                         RC.SelectedSiteLanguageId });
             gvAdded.DataBind();
         }
 
         private void LoadDeletedIndicators()
         {
+            int? clusterId = UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
+            int? emgLocationId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
             int? projectId = Convert.ToInt32(rblProjects.SelectedValue) > 0 ? Convert.ToInt32(rblProjects.SelectedValue) : (int?)null;
-            gvDeleted.DataSource = DBContext.GetData("GetDeletedProjectIndicatorsToApprove", new object[] { UserInfo.EmergencyCountry,
-                                                                                                            UserInfo.EmergencyCluster,
-                                                                                                            projectId,
+            gvDeleted.DataSource = DBContext.GetData("GetDeletedProjectIndicatorsToApprove", new object[] { emgLocationId, clusterId,projectId,
                                                                                                             RC.SelectedSiteLanguageId });
             gvDeleted.DataBind();
         }
