@@ -57,7 +57,7 @@ namespace SRFROWCA.RegionalLead
         {
             int emergencyId = 1;
             int clusterId = UserInfo.Cluster;
-            return DBContext.GetData("GetClusterIndicatorsToSelectRegionalIndicators", new object[] { emergencyId, clusterId, RC.SelectedSiteLanguageId });
+            return DBContext.GetData("GetClusterIndicatorsToSelectRegionalActivities", new object[] { emergencyId, clusterId, RC.SelectedSiteLanguageId });
         }
 
         private void PopulateClusterName()
