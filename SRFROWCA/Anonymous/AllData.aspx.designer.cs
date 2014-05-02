@@ -13,13 +13,22 @@ namespace SRFROWCA.Anonymous {
     public partial class AllData {
         
         /// <summary>
-        /// UpdatePanel1 control.
+        /// pnlAllData control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.UpdatePanel pnlAllData;
+        
+        /// <summary>
+        /// UpdateProgress2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress UpdateProgress2;
         
         /// <summary>
         /// btnExportToExcel control.

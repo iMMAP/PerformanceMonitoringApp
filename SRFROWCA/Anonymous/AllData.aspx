@@ -46,9 +46,17 @@
         </ul>
         <!-- .breadcrumb -->
     </div>
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+    <asp:UpdatePanel ID="pnlAllData" runat="server">
         <ContentTemplate>
             <div class="page-content">
+                <div style="text-align: center;">
+                    <asp:UpdateProgress ID="UpdateProgress2" runat="server" AssociatedUpdatePanelID="pnlAllData"
+                        DynamicLayout="true">
+                        <ProgressTemplate>
+                            <img src="../assets/orsimages/ajaxlodr.gif" alt="Loading">
+                        </ProgressTemplate>
+                    </asp:UpdateProgress>
+                </div>
                 <table width="100%">
                     <tr>
                         <td>
@@ -226,15 +234,14 @@
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                    <td>
-                                                                                     Reported Data:
+                                                                                    <td>Reported Data:
                                                                                     </td>
                                                                                     <td>
                                                                                         <span>
                                                                                             <asp:CheckBox ID="cbValidated" runat="server" Text="Validated" />
                                                                                             <asp:CheckBox ID="cbNotValidated" runat="server" Text="Not Validated" /></span>
                                                                                     </td>
-                                                                                </tr>                                                                                
+                                                                                </tr>
                                                                             </table>
                                                                         </div>
                                                                     </div>
@@ -286,15 +293,14 @@
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                    <td>
-                                                                                     Funding Status:
+                                                                                    <td>Funding Status:
                                                                                     </td>
                                                                                     <td>
                                                                                         <span>
                                                                                             <asp:CheckBox ID="cbFunded" runat="server" Text="Funded" />
                                                                                             <asp:CheckBox ID="cbNotFunded" runat="server" Text="Not Funded" /></span>
                                                                                     </td>
-                                                                                </tr>                                                                                
+                                                                                </tr>
                                                                                 <tr>
                                                                                     <td>
                                                                                         <span>Funding Details:</span>
@@ -308,7 +314,7 @@
                                                                                         </asp:DropDownList>
                                                                                     </td>
                                                                                 </tr>
-                                                                                
+
                                                                                 <tr>
                                                                                     <td></td>
                                                                                     <td>
