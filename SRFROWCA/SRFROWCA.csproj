@@ -867,7 +867,7 @@
     <Content Include="fckeditor\_samples\_plugins\samples\fckplugin.js" />
     <Content Include="fckeditor\_upgrade.html" />
     <Content Include="fckeditor\_whatsnew.html" />
-    <Content Include="fckeditor\_whatsnew_history.html" />        
+    <Content Include="fckeditor\_whatsnew_history.html" />
     <Content Include="LeadPages\AddIndicatorOnActivity.aspx" />
     <Content Include="LeadPages\EditActIndicator.aspx" />
     <Content Include="LeadPages\FundingListing.aspx" />
@@ -1472,6 +1472,7 @@
     <Compile Include="Maps\TargetAchievedByLocDataMap.aspx.designer.cs">
       <DependentUpon>TargetAchievedByLocDataMap.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Notifications\Notifications.cs" />
     <Compile Include="OperationalPresenceDB.aspx.cs">
       <DependentUpon>OperationalPresenceDB.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

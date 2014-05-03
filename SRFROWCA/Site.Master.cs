@@ -85,6 +85,11 @@ namespace SRFROWCA
                     ShowAdminMenue();
                 }
 
+                if (HttpContext.Current.User.IsInRole("OCHACountryStaff"))
+                {
+                    ShowOCHACountryStaff();
+                }
+
                 ShowAuthenticatedMenues();
             }
 
@@ -241,6 +246,22 @@ namespace SRFROWCA
             liCLprojectsListing.Visible = isShow;
             liSumOfCountryIndicators.Visible = isShow;
             liClusterTarget.Visible = isShow;
+            liPivotSumOfCountryIndicators.Visible = isShow;
+            liBulkImport.Visible = isShow;
+        }
+
+        private void ShowOCHACountryStaff()
+        {
+            bool isShow = true;
+            liReports.Visible = isShow;
+            menueReports.Visible = isShow;
+            menueSRPIndicators.Visible = isShow;
+            //liSRPIndicators.Visible = isShow;
+            //menueValidateIndicaotrs.Visible = isShow;
+            //liValidate.Visible = isShow;
+            liCLprojectsListing.Visible = isShow;
+            liSumOfCountryIndicators.Visible = isShow;
+            //liClusterTarget.Visible = isShow;
             liPivotSumOfCountryIndicators.Visible = isShow;
             liBulkImport.Visible = isShow;
         }
