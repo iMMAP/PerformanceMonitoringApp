@@ -12,7 +12,7 @@ using SRFROWCA.Common;
 
 namespace SRFROWCA.PivotTables
 {
-    public partial class NumOfOrgsClsCnt : System.Web.UI.Page
+    public partial class NumOfOrgsClsCnt : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
