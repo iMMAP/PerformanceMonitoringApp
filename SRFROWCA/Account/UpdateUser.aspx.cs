@@ -21,6 +21,7 @@ namespace SRFROWCA.Account
 
             this.Form.DefaultButton = this.btnUpdate.UniqueID;
 
+            PopulateRoles();
             PopulateCountries();
             PopulateOrganizations();
 
@@ -28,6 +29,14 @@ namespace SRFROWCA.Account
             {
                 GetUserInformation();
             }
+        }
+
+        protected void PopulateRoles()
+        {
+            ddlUserRole.DataTextField = "RoleName";
+            ddlUserRole.DataValueField = "RoleId";
+            ddlUserRole.DataSource = DBContext.GetData("GetUserRolesToUpdateInUserUpdate");
+            ddlUserRole.DataBind();
         }
 
         private void GetUserInformation()
@@ -43,6 +52,7 @@ namespace SRFROWCA.Account
                 txtPhone.Text = dt.Rows[0]["PhoneNumber"].ToString();
                 txtFullName.Text = dt.Rows[0]["FullName"].ToString();
                 ddlOrganization.SelectedValue = dt.Rows[0]["OrganizationId"].ToString();
+                ddlUserRole.SelectedValue = dt.Rows[0]["RoleId"].ToString();
 
                 //string[] roles = Roles.GetRolesForUser(mu.UserName);
                 //if (roles.Length > 0)
@@ -127,9 +137,20 @@ namespace SRFROWCA.Account
             mu.Email = txtEmail.Text;
             Membership.UpdateUser(mu);
 
+            Guid roleId = new Guid(ddlUserRole.SelectedValue);
+            DBContext.Update("aspnet_Roles_UpdateUserRole", new object[] { userId, roleId, DBNull.Value });
+
             object[] userValues = GetUserValues(userId);
             DBContext.Add("UpdateASPNetUserCustom", userValues);
 
+            Response.Redirect("~/Admin/UsersListing.aspx");
+        }
+
+        protected void btnChangePassword_Click(object sender, EventArgs e)
+        {
+            Guid userId = new Guid(Session["EditUserId"].ToString());
+            MembershipUser mu = Membership.GetUser(userId);
+            mu.ChangePassword(mu.ResetPassword(), txtPassword.Text.Trim());
             Response.Redirect("~/Admin/UsersListing.aspx");
         }
 

@@ -233,6 +233,10 @@ namespace SRFROWCA.Account
             {
                 roleName = "User";
             }
+            else if (ddlUserRole.SelectedValue.Equals("6"))
+            {
+                roleName = "OCHACountryStaff";
+            }
 
             DBContext.Add("InsertUserInRole", new object[] { userId, roleName, DBNull.Value });
         }
