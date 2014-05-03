@@ -22,6 +22,15 @@ namespace SRFROWCA.ClusterLead
 
             PopulateControls();
             LoadProjects();
+            if (RC.IsCountryAdmin(User) || RC.IsOCHAStaff(User))
+            {
+                PopulateClusters();
+            }
+            else
+            {
+                ddlClusters.Visible = false;
+                divClusters.Visible = false;
+            }
         }
 
         private void PopulateControls()
@@ -31,9 +40,23 @@ namespace SRFROWCA.ClusterLead
             PopulateProjectStatus();
         }
 
+        private void PopulateClusters()
+        {
+            int emgId = 1;
+            UI.FillEmergnecyClusters(ddlClusters, emgId);
+            RC.AddSelectItemInList(ddlClusters, "Select Cluster");
+        }
+
         private void PopulateOrganizations()
         {
-            DataTable dt = RC.GetProjectsOrganizations(UserInfo.EmergencyCountry, UserInfo.EmergencyCluster);
+            int tempVal = 0;
+            if (ddlClusters.Visible)
+            {
+                int.TryParse(ddlClusters.SelectedValue, out tempVal);
+            }
+            int? clusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
+
+            DataTable dt = RC.GetProjectsOrganizations(UserInfo.EmergencyCountry, clusterId);
             UI.FillOrganizations(ddlOrg, dt);
 
             if (ddlOrg.Items.Count > 0)
@@ -171,6 +194,13 @@ namespace SRFROWCA.ClusterLead
 
         private DataTable GetProjects()
         {
+            int tempVal = 0;
+            if (ddlClusters.Visible)
+            {
+                int.TryParse(ddlClusters.SelectedValue, out tempVal);
+            }
+            int? clusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
+
             string projCode = txtProjectCode.Text.Trim().Length > 0 ? txtProjectCode.Text.Trim() : null;
             int? orgId = RC.GetSelectedIntVal(ddlOrg);
             if (orgId == 0)
@@ -194,10 +224,14 @@ namespace SRFROWCA.ClusterLead
             int? cbFunded = cblFundingStatus.SelectedIndex > -1 ? RC.GetSelectedIntVal(cblFundingStatus) : (int?)null;
 
             int? countryId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
-            int? clusterId = UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
 
             return DBContext.GetData("GetProjects", new object[] {countryId, clusterId,projCode, orgId, admin1, admin2, 
                                                                             DBNull.Value, cbFunded, cbReported, 1 });
+        }
+
+        protected void ddlClusters_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadProjects();
         }
     }
 }

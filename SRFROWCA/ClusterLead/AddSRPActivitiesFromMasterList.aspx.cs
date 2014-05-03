@@ -27,7 +27,7 @@ namespace SRFROWCA.ClusterLead
             
             //PopulateClusterName();
 
-            if (RC.IsCountryAdmin(User))
+            if (RC.IsCountryAdmin(User) || RC.IsOCHAStaff(User))
             {
                 PopulateClusters();
             }

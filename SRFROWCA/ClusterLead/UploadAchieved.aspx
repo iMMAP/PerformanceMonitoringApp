@@ -51,7 +51,7 @@
 
                                 <label>
                                     Cluster:
-                                    <asp:DropDownList ID="ddlClusters" runat="server"></asp:DropDownList>
+                                    <asp:DropDownList ID="ddlClusters" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlClusters_SelectedIndexChanged"></asp:DropDownList>
                                 </label>
 
                             </li>

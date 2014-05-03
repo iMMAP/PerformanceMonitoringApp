@@ -18,7 +18,7 @@ namespace SRFROWCA.ClusterLead
             if (!IsPostBack)
             {
                 LoadOrganizations();
-                if (RC.IsCountryAdmin(User))
+                if (RC.IsCountryAdmin(User) || RC.IsOCHAStaff(User))
                 {
                     PopulateClusters();
                 }
@@ -38,10 +38,24 @@ namespace SRFROWCA.ClusterLead
 
         private void LoadOrganizations()
         {
+            int tempVal = 0;
+            if (ddlClusters.Visible)
+            {
+                int.TryParse(ddlClusters.SelectedValue, out tempVal);
+            }
+
+            int? clusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
+            int? emgLocationId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
+
             ddlOrganizations.DataTextField = "OrganizationName";
             ddlOrganizations.DataValueField = "OrganizationId";
-            ddlOrganizations.DataSource = DBContext.GetData("GetProjectsOrganizations", new object[] { UserInfo.EmergencyCountry, UserInfo.EmergencyCluster });
+            ddlOrganizations.DataSource = DBContext.GetData("GetProjectsOrganizations", new object[] { emgLocationId, clusterId });
             ddlOrganizations.DataBind();
+        }
+
+        protected void ddlClusters_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadOrganizations();
         }
 
         #region Download Template

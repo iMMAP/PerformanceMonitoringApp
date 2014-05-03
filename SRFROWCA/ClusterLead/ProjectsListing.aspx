@@ -105,8 +105,7 @@
                                                                 <div class="widget-main padding-6">
                                                                     <table>
                                                                         <tr>
-                                                                            <td>
-                                                                                Project Code:
+                                                                            <td>Project Code:
                                                                             </td>
                                                                             <td>
                                                                                 <asp:TextBox ID="txtProjectCode" runat="server" CssClass="width-90" AutoPostBack="True"
@@ -114,8 +113,7 @@
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td>
-                                                                                Organization:
+                                                                            <td>Organization:
                                                                             </td>
                                                                             <td>
                                                                                 <asp:DropDownList ID="ddlOrg" runat="server" CssClass="width-90" AutoPostBack="True"
@@ -124,8 +122,7 @@
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td>
-                                                                                Project Status:
+                                                                            <td>Project Status:
                                                                             </td>
                                                                             <td>
                                                                                 <asp:DropDownList ID="ddlProjStatus" runat="server" CssClass="width-90" AutoPostBack="True"
@@ -135,6 +132,14 @@
                                                                                     <asp:ListItem Text="Completed" Value="2" meta:resourcekey="ListItemResource7"></asp:ListItem>
                                                                                 </asp:DropDownList>
                                                                             </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <div id="divClusters" runat="server">
+                                                                                <td>Clusters:</td>
+                                                                                <td>
+                                                                                    <asp:DropDownList ID="ddlClusters" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlClusters_SelectedIndexChanged"></asp:DropDownList>
+                                                                                </td>
+                                                                            </div>
                                                                         </tr>
                                                                     </table>
                                                                 </div>

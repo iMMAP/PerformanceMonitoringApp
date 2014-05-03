@@ -12,7 +12,7 @@ namespace SRFROWCA.ClusterLead
         {
             if (!IsPostBack)
             {
-                if (RC.IsCountryAdmin(User))
+                if (RC.IsCountryAdmin(User) || RC.IsOCHAStaff(User))
                 {
                     PopulateClusters();
                     LoadEmptyData();
