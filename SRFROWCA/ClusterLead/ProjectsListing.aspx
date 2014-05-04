@@ -135,7 +135,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <div id="divClusters" runat="server">
-                                                                                <td>Clusters:</td>
+                                                                                <td>Cluster:</td>
                                                                                 <td>
                                                                                     <asp:DropDownList ID="ddlClusters" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlClusters_SelectedIndexChanged"></asp:DropDownList>
                                                                                 </td>
