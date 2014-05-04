@@ -35,7 +35,12 @@ namespace SRFROWCA.Account
         {
             ddlUserRole.DataTextField = "RoleName";
             ddlUserRole.DataValueField = "RoleId";
-            ddlUserRole.DataSource = DBContext.GetData("GetUserRolesToUpdateInUserUpdate");
+            string userType = "Admin";
+            if (RC.IsCountryAdmin(User))
+            {
+                userType = "CountryAdmin";
+            }
+            ddlUserRole.DataSource = DBContext.GetData("GetUserRolesToUpdateInUserUpdate", new object[] {userType});
             ddlUserRole.DataBind();
         }
 
@@ -52,29 +57,14 @@ namespace SRFROWCA.Account
                 txtPhone.Text = dt.Rows[0]["PhoneNumber"].ToString();
                 txtFullName.Text = dt.Rows[0]["FullName"].ToString();
                 ddlOrganization.SelectedValue = dt.Rows[0]["OrganizationId"].ToString();
-                ddlUserRole.SelectedValue = dt.Rows[0]["RoleId"].ToString();
-
-                //string[] roles = Roles.GetRolesForUser(mu.UserName);
-                //if (roles.Length > 0)
-                //{
-                //    if (roles[0] == "CountryAdmin")
-                //    {
-                //        divCountry.Visible = false;
-                //        rfvCountry.Enabled = false;
-
-                //        foreach (DataRow dr in dt.Rows)
-                //        {
-                //            ListItem item = ddlLocations.Items.FindByValue(dr["LocationId"].ToString());
-                //            item.Selected = true;
-                //        }
-
-                //    }
-                //    else
-                //    {
+                ddlUserRole.SelectedValue = dt.Rows[0]["RoleId"].ToString();               
                 ddlCountry.SelectedValue = dt.Rows[0]["LocationId"].ToString();
-                //        divLocation.Visible = false;
-                //    }
-                //}
+
+                if (RC.IsCountryAdmin(User))
+                {
+                    ddlCountry.Enabled = false;
+                }
+                
             }
         }
 
@@ -143,6 +133,11 @@ namespace SRFROWCA.Account
             object[] userValues = GetUserValues(userId);
             DBContext.Add("UpdateASPNetUserCustom", userValues);
 
+            Response.Redirect("~/Admin/UsersListing.aspx");
+        }
+
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
             Response.Redirect("~/Admin/UsersListing.aspx");
         }
 

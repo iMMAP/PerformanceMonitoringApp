@@ -110,7 +110,7 @@
                                                     <asp:ListItem Text="OCHA Staff" Value="4" meta:resourcekey="ListItemResource5"></asp:ListItem>
                                                 </asp:DropDownList>
                                                 <asp:RequiredFieldValidator ID="rfvUserRole" runat="server" ErrorMessage="Select Your Role"
-                                                    CssClass="error2" InitialValue="0" Text="Select Your Role" ControlToValidate="ddlCountry" meta:resourcekey="rfvUserRoleResource1"></asp:RequiredFieldValidator>
+                                                    CssClass="error2" InitialValue="0" Text="Select Your Role" ControlToValidate="ddlUserRole" meta:resourcekey="rfvUserRoleResource1"></asp:RequiredFieldValidator>
                                             </label>
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">

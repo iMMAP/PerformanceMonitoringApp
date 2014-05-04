@@ -12,7 +12,7 @@
         </script>
         <ul class="breadcrumb">
             <li><i class="icon-home home-icon"></i><a href="../Default.aspx">
-                <asp:Localize ID="localBreadCrumbHome" runat="server" Text="Home" meta:resourcekey="localBreadCrumbHomeResource1"></asp:Localize></a> </li>
+                <asp:Localize ID="localBreadCrumbHome" runat="server" Text="Home"></asp:Localize></a> </li>
             <li class="active">
                 <asp:Localize ID="localBreadCrumbRegister" runat="server" Text="Add New User"></asp:Localize></li>
         </ul>
@@ -31,15 +31,18 @@
                             <label>
                                 Role:</label>
                             <div>
-                                <asp:DropDownList ID="ddlUserRole" runat="server" CssClass="form-control">
-                                   
+                                <asp:DropDownList ID="ddlUserRole" runat="server" CssClass="form-control width-70">
                                 </asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="rfvUserRole" runat="server" ErrorMessage="Select Your Role"
+                                    CssClass="error2" InitialValue="0" Text="Select Your Role" ControlToValidate="ddlUserRole"></asp:RequiredFieldValidator>
                             </div>
                         </div>
                         <div>
                             <label>Full Name:</label>
                             <div>
-                                <asp:TextBox ID="txtFullName" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtFullName" runat="server" CssClass="width-70"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="rfvFullName" runat="server" ErrorMessage="Name Required"
+                                    CssClass="error2" Text="Name Required" ControlToValidate="txtFullName"></asp:RequiredFieldValidator>
                             </div>
                         </div>
 
@@ -47,8 +50,10 @@
                             <label>
                                 User Name:</label>
                             <div>
-                                <asp:TextBox ID="txtUserName" runat="server" CssClass="ddlWidthAllData" Enabled="false"
+                                <asp:TextBox ID="txtUserName" runat="server" CssClass="width-70" Enabled="false"
                                     Style="background-color: ButtonFace;"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Name Required"
+                                    CssClass="error2" Text="Name Required" ControlToValidate="txtUserName"></asp:RequiredFieldValidator>
                             </div>
                         </div>
                         <div class="singalselect">
@@ -56,14 +61,18 @@
                                 Email:
                             </label>
                             <div>
-                                <asp:TextBox ID="txtEmail" runat="server" CssClass="ddlWidthAllData"></asp:TextBox>
+                                <asp:TextBox ID="txtEmail" runat="server" CssClass="width-70"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="Email Required"
+                                    Text="Email Required" CssClass="error2" ControlToValidate="txtEmail"></asp:RequiredFieldValidator>
                             </div>
                         </div>
                         <div class="singalselect">
                             <label>
                                 Phone:</label>
                             <div>
-                                <asp:TextBox ID="txtPhone" MaxLength="50" CssClass="ddlWidthAllData" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtPhone" MaxLength="50" CssClass="width-70" runat="server"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="rfvPhone" runat="server" ErrorMessage="Phone Required"
+                                    CssClass="error2" Text="Phone Required" ControlToValidate="txtPhone"></asp:RequiredFieldValidator>
                             </div>
                         </div>
                         <div class="singalselect">
@@ -71,7 +80,7 @@
                                 Organization:
                             </label>
                             <div>
-                                <asp:DropDownList ID="ddlOrganization" runat="server" Width="400px">
+                                <asp:DropDownList ID="ddlOrganization" runat="server" CssClass="width-70">
                                 </asp:DropDownList>
                             </div>
                         </div>
@@ -79,16 +88,18 @@
                             <label>
                                 Country:</label>
                             <div>
-                                <asp:DropDownList ID="ddlCountry" runat="server" Width="400px">
+                                <asp:DropDownList ID="ddlCountry" runat="server" CssClass="width-70">
                                 </asp:DropDownList>
                                 <asp:RequiredFieldValidator ID="rfvCountry" runat="server" ErrorMessage="Country"
-                                    Text="*" InitialValue="0" ControlToValidate="ddlCountry"></asp:RequiredFieldValidator>
+                                    Text="*" InitialValue="0" ControlToValidate="ddlCountry" CssClass="error2"></asp:RequiredFieldValidator>
                             </div>
                         </div>
                         <div class="space-10"></div>
                         <div>
                             <asp:Button ID="btnUpdate" runat="server" Text="Update" OnClick="btnUpdate_Click"
                                 CssClass="btn btn-primary" />
+                            <asp:Button ID="btnBack" runat="server" Text="Back to Users List" OnClick="btnBack_Click"
+                                CssClass="btn" />
                         </div>
                     </div>
                 </div>
