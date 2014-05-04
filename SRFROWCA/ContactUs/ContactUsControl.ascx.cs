@@ -45,7 +45,7 @@ namespace SRFROWCA.ContactUs
 
         private void SendMessage()
         {
-            Mail.SendMail(txtEmail.Text.Trim(), "3wopactivities@gmail.com", "3W Activities: " + txtSubject.Text.Trim(), txtMessage.Text.Trim());
+            Mail.SendMail(txtEmail.Text.Trim(), "orsocharowca@gmail.com ", "3W Activities: " + txtSubject.Text.Trim(), txtMessage.Text.Trim());
         }
 
         private void ShowMessage(string msg, string cssClass)
