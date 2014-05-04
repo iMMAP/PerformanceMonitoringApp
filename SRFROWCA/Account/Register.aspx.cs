@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Net.Mail;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -51,27 +52,25 @@ namespace SRFROWCA.Account
                 {
                     try
                     {
-                        string from = txtEmail.Text.Trim();
-                        string to = "3wopactivities@gmail.com";
-                        string subject = "New 3W Performace Monitoring Account!";
-                        string mailBody = "";
-                        if (User.IsInRole("Admin"))
+                        using (MailMessage mailMsg = new MailMessage())
                         {
-                            mailBody = string.Format(@"3W Perfomance Monitoring admin has created your new account.
-                                                        User Name: {0} \n 
-                                                        Password: {1} \n
-                                                        If you face any difficulty login, please contact to admin of the site!",
-                                                        txtUserName.Text.Trim(), txtPassword.Text);
-
-                            Mail.SendMail(from, txtEmail.Text, subject, mailBody);
-                            message = "An email has been send to " + txtEmail.Text;
-                        }
-                        else
-                        {
-                            mailBody = "Dear Admin! Please activitate my account Username: " + txtUserName.Text.Trim() + ", Full Name: " + txtFullName.Text.Trim();
-                            Mail.SendMail(from, to, subject, mailBody);
+                            mailMsg.From = new MailAddress("orsocharowca@gmail.com");
+                            mailMsg.To.Add(new MailAddress("orsocharowca@gmail.com"));
+                            mailMsg.Subject = "New ORS Account Created By User!";
+                            mailMsg.IsBodyHtml = true;
+                            mailMsg.Body = string.Format(@"New {0} Registered with following credentials<hr/>
+                                                        <b>Name:</b> {1}<br/>
+                                                        <b>User Name:</b> {2}<br/>
+                                                        <b>Email:</b> {3}<br/>                                                        
+                                                        <b>Cluster:</b> {4}<br/>
+                                                        <b>Organization:</b> {5}<br/>
+                                                        <b>Country:</b> {6}", ddlUserRole.SelectedItem.Text, txtFullName.Text.Trim(), txtUserName.Text.Trim(),
+                                                                       txtEmail.Text.Trim(), ddlClusters.SelectedItem.Text,ddlOrganization.SelectedItem.Text,
+                                                                       ddlCountry.SelectedItem.Text);
+                            Mail.SendMail(mailMsg);                            
                             message = @"You have been registered successfully, we will verify your credentials and activate your account in few hours!";
                         }
+
                     }
                     catch
                     {

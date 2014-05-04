@@ -79,7 +79,7 @@ namespace SRFROWCA.Account
                             string hash = RC.GetHashString(guid + tempString + datetime);
                             SaveValuesInDB(mu.UserName, hash, guid, datetime);
                             link = GenerateTempLinkForUser(guid.ToString());
-                            //EmailLink(mu.Email, link, mu.UserName);
+                            EmailLink(mu.Email, link, mu.UserName);
                             RedirecToConfimationPage();
                         }
                     }
@@ -124,7 +124,7 @@ namespace SRFROWCA.Account
 
 
             string mailBody = string.Format(mailMessage,userName, link);
-            Mail.SendMail("3wopactivities@gmail.com", toEmail, "Password Change Request", mailBody);
+            Mail.SendMail("orsocharowca@gmail.com ", toEmail, "Password Change Request", mailBody);
         }
 
         private void SaveValuesInDB(string userName, string hash, Guid guid, string dt)
