@@ -2,6 +2,7 @@
 using System.Data;
 using System.Globalization;
 using System.IO;
+using System.Net.Mail;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -78,6 +79,10 @@ namespace SRFROWCA.Admin
                     if (lblUserId != null)
                     {
                         UpdateUserApproval(cb.Checked, lblUserId.Text);
+
+                        Guid userId = new Guid(lblUserId.Text);
+                        MembershipUser mu = Membership.GetUser(userId);
+                        EmailUser(mu.Email, mu.UserName, true, cb.Checked);
                     }
                 }
             }
@@ -95,6 +100,10 @@ namespace SRFROWCA.Admin
                     if (lblUserId != null)
                     {
                         UpdateUserLocked(cb.Checked, lblUserId.Text);
+
+                        Guid userId = new Guid(lblUserId.Text);
+                        MembershipUser mu = Membership.GetUser(userId);
+                        EmailUser(mu.Email, mu.UserName, false, cb.Checked);
                     }
                 }
             }
@@ -188,6 +197,55 @@ namespace SRFROWCA.Admin
             gvUsers.PageIndex = e.NewPageIndex;
             gvUsers.SelectedIndex = -1;
             LoadUsers();
+        }
+
+        protected void EmailUser(string to, string userName, bool isApproved, bool isChecked)
+        {
+            try
+            {
+                using (MailMessage mailMsg = new MailMessage())
+                {
+                    mailMsg.From = new MailAddress("orsocharowca@gmail.com");
+                    mailMsg.To.Add(new MailAddress(to));                    
+                    mailMsg.IsBodyHtml = true;
+                    string mailBody = "";
+                    string siteAddress = "http://ors.ocharowca.info/";
+
+                    if (isApproved)
+                    {
+                        if (isChecked)
+                        {
+                            mailMsg.Subject = "ORS user approved by admin of the site!";
+                            mailBody = @"Your ORS user '" + userName + "' is approved by admin!<br/> You can login to your account at " + siteAddress;
+                        }
+                        else
+                        {
+                            mailMsg.Subject = "ORS user disapproved by admin of the site!";
+                            mailBody = @"Your " + siteAddress + " user '" + userName + "' is disapproved by admin. Please contact admin of the site for further details.";
+                        }
+                    }
+                    else
+                    {
+                        if (isChecked)
+                        {
+                            mailMsg.Subject = "ORS user locked-out by admin of the site!";
+                            mailBody = @"Your " + siteAddress + " user '" + userName + "' is locked by admin. Please contact admin of the site for further details.";
+                        }
+                        else
+                        {
+                            mailMsg.Subject = "ORS user unlocked by admin of the site!";
+                            mailBody = @"Your " + siteAddress + " user '" + userName + "' is unlocked by admin. Please contact admin of the site for further details.";
+                        }
+                    }
+
+                    mailMsg.Body = mailBody;
+                    Mail.SendMail(mailMsg);
+                }
+            }
+            catch
+            {
+                
+            }
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
