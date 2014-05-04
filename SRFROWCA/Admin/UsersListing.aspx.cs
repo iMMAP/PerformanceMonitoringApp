@@ -11,13 +11,8 @@ using SRFROWCA.Common;
 
 namespace SRFROWCA.Admin
 {
-    public partial class UsersListing : System.Web.UI.Page
+    public partial class UsersListing : BasePage
     {
-        protected void Page_PreInit(object sender, EventArgs e)
-        {
-            GZipContents.GZipOutput();
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
@@ -57,8 +52,13 @@ namespace SRFROWCA.Admin
             DateTime? endDate = txtToDate.Text.Trim().Length > 0 ?
                                 DateTime.ParseExact(txtToDate.Text.Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture) :
                                 (DateTime?)null;
+            int? countryId = null;
+            if (RC.IsCountryAdmin(User))
+            {
+                countryId = UserInfo.EmergencyCountry;
+            }
 
-            return new object[] { userId, userName, email, isApproved, isLockedOut, orgName, locationName, userType, startDate, endDate };
+            return new object[] { userId, userName, email, isApproved, isLockedOut, orgName, locationName, userType, startDate, endDate, countryId };
         }
 
         private void LoadUsers()
