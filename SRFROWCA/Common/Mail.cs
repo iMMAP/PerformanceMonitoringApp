@@ -13,11 +13,22 @@ namespace SRFROWCA.Common
         {
             var client = new SmtpClient("smtp.googlemail.com", 587)
             {
-                Credentials = new NetworkCredential("3wopactivities@googlemail.com", "sahel1ocha"),
+                Credentials = new NetworkCredential("orsocharowca@gmail.com", "rOcha$w2Af"),
                 EnableSsl = true
             };
-            
+
             client.Send(from, to, subject, body);
+        }
+
+        internal static void SendMail(MailMessage mailMsg)
+        {
+            var client = new SmtpClient("smtp.googlemail.com", 587)
+            {
+                Credentials = new NetworkCredential("orsocharowca@gmail.com", "rOcha$w2Af"),
+                EnableSsl = true
+            };
+
+            client.Send(mailMsg);
         }
     }
 }

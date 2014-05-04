@@ -36,7 +36,7 @@ namespace SRFROWCA.Common
                                                                      items[5],
                                                                      items[6],
                                                                      items[7]);
-                Mail.SendMail("3wopactivities@gmail.com", "3wopactivities@gmail.com", subject, mailBody);
+                Mail.SendMail("orsocharowca@gmail.com ", "orsocharowca@gmail.com ", subject, mailBody);
             }
         }
 
