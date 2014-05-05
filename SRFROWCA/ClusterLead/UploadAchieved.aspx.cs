@@ -17,7 +17,7 @@ namespace SRFROWCA.ClusterLead
         {
             if (!IsPostBack)
             {
-                LoadOrganizations();
+                PopulateOrganizations();                
                 if (RC.IsCountryAdmin(User) || RC.IsOCHAStaff(User))
                 {
                     PopulateClusters();
@@ -28,6 +28,30 @@ namespace SRFROWCA.ClusterLead
                     liClusters.Visible = false;
                 }
             }
+        }
+
+        private void PopulateOrganizations()
+        {
+            if (RC.IsDataEntryUser(User))
+            {
+                localDownloadFirstItem.Visible = false;
+                ddlOrganizations.Visible = false;
+                DataTable dt = DBContext.GetData("GetOrganizations", new object[] { UserInfo.Organization });
+                if (dt.Rows.Count > 0)
+                {
+                    lblOrganization.Visible = true;
+                    lblOrganization.Text = dt.Rows[0]["OrganizationName"].ToString();
+                }
+            }
+            else
+            {
+                LoadOrganizations();
+            }
+        }
+
+        private void GetUserOrganization()
+        {
+            DBContext.GetData("GetOrganizations", new object[] { UserInfo.Organization });
         }
 
         private void PopulateClusters()
@@ -46,10 +70,10 @@ namespace SRFROWCA.ClusterLead
 
             int? clusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
             int? emgLocationId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
-
+            
             ddlOrganizations.DataTextField = "OrganizationName";
             ddlOrganizations.DataValueField = "OrganizationId";
-            ddlOrganizations.DataSource = DBContext.GetData("GetProjectsOrganizations", new object[] { emgLocationId, clusterId });
+            ddlOrganizations.DataSource = DBContext.GetData("GetProjectsOrganizations", new object[] { emgLocationId, clusterId});
             ddlOrganizations.DataBind();
         }
 
@@ -97,7 +121,15 @@ namespace SRFROWCA.ClusterLead
             bool countryInd = chkCountryIndicators.Checked;
             bool regionalInd = chkRegionalInidcators.Checked;
             bool allInd = chkAllIndicators.Checked;
-            string orgIds = RC.GetSelectedValues(ddlOrganizations);
+            string orgIds = "";
+            if (RC.IsDataEntryUser(User))
+            {
+                orgIds = UserInfo.Organization.ToString();
+            }
+            else
+            {
+                orgIds = RC.GetSelectedValues(ddlOrganizations);
+            }
             return DBContext.GetData("GetIndicatorsForDataEntryTemplate", new object[]{emgLocationId, clusterId,
                                                                                         orgIds, countryInd, regionalInd, allInd,
                                                                                         RC.SelectedSiteLanguageId});
