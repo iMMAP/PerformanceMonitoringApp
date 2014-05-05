@@ -46,8 +46,8 @@ namespace SRFROWCA
             dt.Rows.Add(new object[] { "Kashif", "Hello, There how are you?", DateTime.Now.AddDays(1) });
             dt.Rows.Add(new object[] { "Max M", "Added new report.", DateTime.Now });
             dt.Rows.Add(new object[] { "Some One", "New ORS project Added", DateTime.Now.AddDays(3) });
-            rptMessages.DataSource = dt;
-            rptMessages.DataBind();
+            //rptMessages.DataSource = dt;
+            //rptMessages.DataBind();
 
             if (HttpContext.Current.User.Identity.IsAuthenticated)
             {
@@ -117,8 +117,17 @@ namespace SRFROWCA
             {
                 using (ORSEntities db = new ORSEntities())
                 {
+                    int count = db.Notifications.Where(x => x.EmergencyLocationId == UserInfo.EmergencyCountry
+                                                                            && x.EmergencyClusterId == UserInfo.EmergencyCluster
+                                                                            && x.IsRead == false).Count();
+                    lblNumberOfNotifications.Text = count.ToString();
+                    //lblNumberOfNotifications2.Text = count.ToString();
+                    
+                                                                  
+
                     rptNotifications.DataSource = db.Notifications.Where(x => x.EmergencyLocationId == UserInfo.EmergencyCountry
-                                                                            && x.EmergencyClusterId == UserInfo.EmergencyCluster)
+                                                                            && x.EmergencyClusterId == UserInfo.EmergencyCluster
+                                                                            && x.IsRead == false)
                                                                   .Select(y => new { y.Notification1, y.PageURL });
                     rptNotifications.DataBind();
                 }
@@ -183,6 +192,7 @@ namespace SRFROWCA
             menuePivotOrgPresence.Visible = !isShow;
             liPivotSumOfCountryIndicators.Visible = !isShow;
             menuePivotSumOfCountryIndicators.Visible = !isShow;
+            //liBulkImport.Visible = isShow;
         }
 
         private void ShowRegionalLeadMenue()
@@ -259,7 +269,8 @@ namespace SRFROWCA
             menueSRPIndicators.Visible = isShow;
             liCLprojectsListing.Visible = isShow;
             liSumOfCountryIndicators.Visible = isShow;
-            liPivotSumOfCountryIndicators.Visible = isShow;            
+            liPivotSumOfCountryIndicators.Visible = isShow;
+            liCLprojectsListing.Visible = isShow;
         }
 
         private void ShowAdminMenue()
