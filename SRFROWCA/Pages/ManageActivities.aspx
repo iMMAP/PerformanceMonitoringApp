@@ -25,6 +25,15 @@
                     $(this).parent().parent().removeClass('highlightRow');
                 }
             });
+
+            // scrollables
+            $('.slim-scroll').each(function () {
+                var $this = $(this);
+                $this.slimScroll({
+                    height: $this.data('height') || 100,
+                    railVisible: true
+                });
+            });
         });
         showHideObj();
         showHidePriority();
@@ -63,9 +72,11 @@
                                         <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
                                     </div>
                                     <div class="widget-body">
-                                        <div class="widget-main">
-                                            <asp:RadioButtonList ID="rblProjects" runat="server" AutoPostBack="True" OnSelectedIndexChanged="rblProjects_SelectedIndexChanged" meta:resourcekey="rblProjectsResource1">
-                                            </asp:RadioButtonList>
+                                        <div class="slim-scroll" data-height="200">
+                                            <div class="widget-main">
+                                                <asp:RadioButtonList ID="rblProjects" runat="server" AutoPostBack="True" OnSelectedIndexChanged="rblProjects_SelectedIndexChanged" meta:resourcekey="rblProjectsResource1">
+                                                </asp:RadioButtonList>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -114,7 +125,7 @@
                         <h4>
                             <asp:Localize ID="local" runat="server" Text="Master List Of Cluster Indicators" meta:resourcekey="localResource1"></asp:Localize>
                         </h4>
-                        
+
                     </div>
                     <div class="widget-body">
                         <div class="widget-main">
@@ -220,4 +231,16 @@
             </div>
         </div>
     </div>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-50659880-1', 'ocharowca.info');
+        ga('send', 'pageview');
+
+</script>
 </asp:Content>

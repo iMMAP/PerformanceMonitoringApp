@@ -9,6 +9,7 @@ using System.Data;
 using BusinessLogic;
 using System.Globalization;
 using System.Transactions;
+using System.Net.Mail;
 
 namespace SRFROWCA.Pages
 {
@@ -233,9 +234,59 @@ namespace SRFROWCA.Pages
                     ProjectId = DBContext.Add("InsertProject", new object[] { title, objective, clusterId, locationId,
                                                              orgId, startDate, endDate, userId, DBNull.Value });
                     AddNotification(ProjectId);
+                    SendEmailToUser(txtProjectTitle.Text.Trim(), ddlCluster.SelectedItem.Text, clusterId);
                 }
             }
         }
+
+        private void SendEmailToUser(string projectTitle, string cluster, int clusterId)
+        {
+            DataTable dt = DBContext.GetData("GetUserInClusterCountryAndRole", new object[] { clusterId, UserInfo.Country, "ClusterLead" });
+            string toEmail = "";
+            foreach(DataRow dr in dt.Rows)
+            {
+                if (string.IsNullOrEmpty(toEmail))
+                {
+                    toEmail = dr["Email"].ToString();
+                }
+                else
+                {
+                    toEmail += "," + dr["Email"].ToString();
+                }
+            }
+
+            DataTable dtCA = DBContext.GetData("GetCountryAdmins", new object[] { UserInfo.Country, "CountryAdmin" });
+            foreach (DataRow dr in dtCA.Rows)
+            {
+                if (string.IsNullOrEmpty(toEmail))
+                {
+                    toEmail = dr["Email"].ToString();
+                }
+                else
+                {
+                    toEmail += "," + dr["Email"].ToString();
+                }
+            }
+
+            try
+            {
+                using (MailMessage mailMsg = new MailMessage())
+                {
+                    mailMsg.From = new MailAddress("orsocharowca@gmail.com");
+                    mailMsg.To.Add(toEmail);
+                    mailMsg.Subject = "ORS Project Created/Updated!";
+                    mailMsg.IsBodyHtml = true;
+                    mailMsg.Body = "New ORS project created with these details Project Title: " + projectTitle + " Cluster: " + cluster.ToString();
+                    Mail.SendMail(mailMsg);
+                }
+
+            }
+            catch
+            {
+            }
+        }
+
+        
 
         private string GetProjectCode()
         {
