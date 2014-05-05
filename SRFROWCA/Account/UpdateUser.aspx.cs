@@ -24,11 +24,20 @@ namespace SRFROWCA.Account
             PopulateRoles();
             PopulateCountries();
             PopulateOrganizations();
+            PopulateClusters();
 
             if (Session["EditUserId"] != null)
             {
                 GetUserInformation();
             }
+        }
+
+        private void PopulateClusters()
+        {
+            UI.FillClusters(ddlClusters, RC.SelectedSiteLanguageId);
+            string text = RC.SelectedSiteLanguageId == 2 ? "Sélectionner votre Cluster" : "Select Your Cluster";
+            ListItem item = new ListItem(text, "0");
+            ddlClusters.Items.Insert(0, item);
         }
 
         protected void PopulateRoles()
@@ -59,12 +68,12 @@ namespace SRFROWCA.Account
                 ddlOrganization.SelectedValue = dt.Rows[0]["OrganizationId"].ToString();
                 ddlUserRole.SelectedValue = dt.Rows[0]["RoleId"].ToString();               
                 ddlCountry.SelectedValue = dt.Rows[0]["LocationId"].ToString();
+                ddlClusters.SelectedValue = dt.Rows[0]["ClusterId"].ToString();
 
                 if (RC.IsCountryAdmin(User))
                 {
                     ddlCountry.Enabled = false;
                 }
-                
             }
         }
 
@@ -122,18 +131,25 @@ namespace SRFROWCA.Account
 
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
-            Guid userId = new Guid(Session["EditUserId"].ToString());
-            MembershipUser mu = Membership.GetUser(userId);
-            mu.Email = txtEmail.Text;
-            Membership.UpdateUser(mu);
+            try
+            {
+                Guid userId = new Guid(Session["EditUserId"].ToString());
+                MembershipUser mu = Membership.GetUser(userId);
+                mu.Email = txtEmail.Text;
+                Membership.UpdateUser(mu);
 
-            Guid roleId = new Guid(ddlUserRole.SelectedValue);
-            DBContext.Update("aspnet_Roles_UpdateUserRole", new object[] { userId, roleId, DBNull.Value });
+                Guid roleId = new Guid(ddlUserRole.SelectedValue);
+                DBContext.Update("aspnet_Roles_UpdateUserRole", new object[] { userId, roleId, DBNull.Value });
 
-            object[] userValues = GetUserValues(userId);
-            DBContext.Add("UpdateASPNetUserCustom", userValues);
+                object[] userValues = GetUserValues(userId);
+                DBContext.Add("UpdateASPNetUserCustom", userValues);
 
-            Response.Redirect("~/Admin/UsersListing.aspx");
+                Response.Redirect("~/Admin/UsersListing.aspx");
+            }
+            catch
+            {
+                
+            }
         }
 
         protected void btnBack_Click(object sender, EventArgs e)
@@ -156,8 +172,14 @@ namespace SRFROWCA.Account
             int? orgId = tempVal > 0 ? tempVal : (int?)null;
             string countryId = null;
             countryId = ddlCountry.SelectedValue;
+            int? clusterId = ddlClusters.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlClusters.SelectedValue);
             string phone = txtPhone.Text.Trim().Length > 0 ? txtPhone.Text.Trim() : null;
-            return new object[] { userId, orgId, countryId, phone, txtFullName.Text.Trim(), DBNull.Value };
+            return new object[] { userId, orgId, countryId, phone, txtFullName.Text.Trim(), clusterId, DBNull.Value };
+        }
+
+        protected void ddlUserRole_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
         protected void Page_Error(object sender, EventArgs e)

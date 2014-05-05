@@ -31,7 +31,7 @@
                             <label>
                                 Role:</label>
                             <div>
-                                <asp:DropDownList ID="ddlUserRole" runat="server" CssClass="form-control width-70">
+                                <asp:DropDownList ID="ddlUserRole" runat="server" CssClass="form-control width-70" AutoPostBack="true" OnSelectedIndexChanged="ddlUserRole_SelectedIndexChanged">
                                 </asp:DropDownList>
                                 <asp:RequiredFieldValidator ID="rfvUserRole" runat="server" ErrorMessage="Select Your Role"
                                     CssClass="error2" InitialValue="0" Text="Select Your Role" ControlToValidate="ddlUserRole"></asp:RequiredFieldValidator>
@@ -92,6 +92,16 @@
                                 </asp:DropDownList>
                                 <asp:RequiredFieldValidator ID="rfvCountry" runat="server" ErrorMessage="Country"
                                     Text="*" InitialValue="0" ControlToValidate="ddlCountry" CssClass="error2"></asp:RequiredFieldValidator>
+                            </div>
+                        </div>
+                        <div id="divCluster" runat="server">
+                            <label>
+                                Cluster:</label>
+                            <div>
+                                <asp:DropDownList ID="ddlClusters" runat="server" CssClass="form-control width-70">
+                                </asp:DropDownList>
+                                <asp:CustomValidator runat="server" ForeColor="Red" ID="CustomValidator1" ClientValidationFunction="ValidateClustersList"
+                                    ErrorMessage="Select Your Cluster." meta:resourcekey="CustomValidator1Resource1"></asp:CustomValidator>
                             </div>
                         </div>
                         <div class="space-10"></div>
