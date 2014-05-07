@@ -66,7 +66,7 @@ namespace SRFROWCA.Pages
                 gvActivities.DataSource = dtActivities;
                 gvActivities.DataBind();
             }
-        }        
+        }
 
         #region Events.
 
@@ -354,7 +354,7 @@ namespace SRFROWCA.Pages
                     columnName == "ActivityDataId" || columnName == "ProjectTitle" || columnName == "ProjectId" ||
                     columnName == "ObjAndPrId" || columnName == "ObjectiveId" || columnName == "HumanitarianPriorityId" ||
                     columnName == "objAndPrAndPId" || columnName == "objAndPId" || columnName == "PrAndPId" ||
-                    columnName == "ProjectIndicatorId" || columnName == "RInd" || columnName == "CInd"))
+                    columnName == "ProjectIndicatorId" || columnName == "RInd" || columnName == "CInd" || columnName == "Accum" || columnName == "Unit"))
                 {
                     if (columnName.Contains("_2-ACCUM"))
                     {
@@ -405,6 +405,9 @@ namespace SRFROWCA.Pages
             gvActivities.DataSource = dt;
             gvActivities.DataBind();
 
+            PopulateObjectives();
+            PopulatePriorities();
+            PopulateToolTips();
             BindCultureResourcesOfPage();
         }
         private void AddLocationsInSelectedList()
@@ -459,24 +462,33 @@ namespace SRFROWCA.Pages
         {
             using (TransactionScope scope = new TransactionScope())
             {
-                if (ReportId > 0)
+                List<int> locationIds = GetLocationIdsFromGrid();
+                if (locationIds.Count > 0)
+                {
+                    if (ReportId == 0)
+                    {
+                        SaveReportMainInfo();
+                    }
+
+                    SaveReport();
+                }
+                else
                 {
                     DeleteReport();
                 }
 
-                SaveReport();
                 scope.Complete();
                 ShowMessage((string)GetLocalResourceObject("AddActivities_SaveMessageSuccess"));
             }
         }
-        
+
         private void DeleteReport()
         {
             DBContext.Delete("DeleteReport", new object[] { ReportId, DBNull.Value });
         }
         private void SaveReport()
         {
-            SaveReportMainInfo();
+            //SaveReportMainInfo();
             SaveReportLocations();
             SaveReportDetails();
         }
@@ -494,11 +506,21 @@ namespace SRFROWCA.Pages
         private void SaveReportLocations()
         {
             List<int> locationIds = GetLocationIdsFromGrid();
+            string locIds = "";
             foreach (int locationId in locationIds)
             {
-                DBContext.Add("InsertReportLocations", new object[] { ReportId, locationId, DBNull.Value });
+                if (string.IsNullOrEmpty(locIds))
+                {
+                    locIds = locationId.ToString();
+                }
+                else
+                {
+                    locIds += "," + locationId.ToString();
+                }
             }
-        }        
+
+            DBContext.Add("InsertReportLocations", new object[] { ReportId, locIds, DBNull.Value });
+        }
         private void SaveReportDetails()
         {
             int activityDataId = 0;
@@ -549,16 +571,16 @@ namespace SRFROWCA.Pages
                             if (i == 2)
                             {
                                 i = 0;
-                                int locationIdToSaveT = 0;
-                                decimal? valToSaveT = null;
-                                decimal? valToSaveA = null;
+                                int locationIdToSave = 0;
+                                decimal? annualTarget = null;
+                                decimal? achieved = null;
                                 int j = 0;
                                 foreach (var item in dataSave)
                                 {
                                     if (j == 0)
                                     {
-                                        locationIdToSaveT = item.Key;
-                                        valToSaveT = item.Value;
+                                        locationIdToSave = item.Key;
+                                        annualTarget = item.Value;
                                         j++;
                                     }
                                     else if (j == 1)
@@ -567,26 +589,16 @@ namespace SRFROWCA.Pages
                                     }
                                     else
                                     {
-                                        valToSaveA = item.Value;
+                                        achieved = item.Value;
                                         j = 0;
                                     }
                                 }
 
                                 dataSave.Clear();
-                                Guid userId = RC.GetCurrentUserId;
-
-                                if (!(valToSaveT == null))
+                                if (locationIdToSave > 0)
                                 {
-                                    DBContext.Add("InsertUpdateIndicatorLocationAnnualTarget", new Object[] {UserInfo.EmergencyCountry,
-                                                    UserInfo.Organization, locationIdToSaveT, projectId,
-                                                    activityDataId, valToSaveT, yearId, projIndicatorId, userId, DBNull.Value});
-                                }
-
-                                if (!(valToSaveA == null))
-                                {
-                                    DBContext.Add("InsertReportDetails", new object[] { ReportId, activityDataId, locationIdToSaveT, 
-                                                                                            valToSaveA, isAccum, 1, userId, DBNull.Value });
-                                    isAccum = false;
+                                    DBContext.Add("InsertReportDetails", new object[] { ReportId, activityDataId, locationIdToSave, achieved, 
+                                                                                        RC.GetCurrentUserId, projIndicatorId, annualTarget, DBNull.Value });
                                 }
                             }
                             else
@@ -730,7 +742,7 @@ namespace SRFROWCA.Pages
             return itemIds;
         }
 
-        
+
         private DataTable GetProjectsData(bool isPivot)
         {
             int yearId = 0;
@@ -776,7 +788,7 @@ namespace SRFROWCA.Pages
         {
             RC.ShowMessage(Page, typeof(Page), UniqueID, message, notificationType, true, 500);
         }
-        
+
         #endregion
 
         #region Properties & Enums

@@ -89,13 +89,13 @@
                         city1 = value.split('_');
                         city2 = city1[1].split('-');
                         $(this).text(city2[1]);
-                        if (j % 3 === 0) {
-                            list += '<th colspan="3" style="width:100px; text-align:center;">' + city1[0] + '</th>';
+                        if (j % 2 === 0) {
+                            list += '<th colspan="2" style="width:100px; text-align:center;">' + city1[0] + '</th>';
                         }
                     }
                 });
 
-                $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th style="width: 100px;">&nbsp;</th><th style="width: 50px;">&nbsp;</th><th style="width: 260px;">&nbsp;</th><th style="width: 220px;">&nbsp;</th><th style="width: 30px;">&nbsp;</th>' + list + '</tr></thead>');
+                $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th style="width: 100px;">&nbsp;</th><th style="width: 50px;">&nbsp;</th><th style="width: 260px;">&nbsp;</th><th style="width: 220px;">&nbsp;</th><th style="width: 40px;"></th><th style="width: 20px;"></th><th style="width: 30px;">&nbsp;</th>' + list + '</tr></thead>');
             }
 
             $('.cbltest').on('click', ':checkbox', function () {
@@ -332,7 +332,6 @@
                                                 <%# Eval("ActivityName")%>
                                             </div>
                                         </ItemTemplate>
-                                        <ItemStyle Width="260px"></ItemStyle>
                                     </asp:TemplateField>
                                     <asp:TemplateField ItemStyle-Width="220px" HeaderText="Output Indicator" meta:resourcekey="TemplateFieldResource4">
                                         <ItemTemplate>
@@ -340,7 +339,13 @@
                                                 <%# Eval("DataName")%>
                                             </div>
                                         </ItemTemplate>
-                                        <ItemStyle Width="220px"></ItemStyle>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField ItemStyle-Width="65px" HeaderText="Unit">
+                                        <ItemTemplate>
+                                            <div style="width: 65px; word-wrap: break-word;">
+                                                <%# Eval("Unit")%>
+                                            </div>
+                                        </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:BoundField DataField="RInd" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource8">
                                         <HeaderStyle CssClass="hidden"></HeaderStyle>
@@ -352,13 +357,21 @@
 
                                         <ItemStyle CssClass="hidden"></ItemStyle>
                                     </asp:BoundField>
-                                    <asp:TemplateField ItemStyle-Width="30px" HeaderText="Cmt" meta:resourcekey="TemplateFieldResource5">
+                                    <asp:TemplateField ItemStyle-Width="30px" HeaderText="CMT" meta:resourcekey="TemplateFieldResource5">
                                         <ItemTemplate>
                                             <asp:ImageButton ID="imgbtnComments" runat="server" ImageUrl="~/assets/orsimages/edit-file-icon.png"
                                                 CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>' CommandName="AddComments"
                                                 OnClientClick="needToConfirm = false;" meta:resourcekey="imgbtnCommentsResource1" />
                                         </ItemTemplate>
                                         <ItemStyle Width="30px"></ItemStyle>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="ACM"
+                                        ItemStyle-Width="20px">
+                                        <ItemTemplate>
+                                            <asp:CheckBox ID="chkIsAccum" runat="server"
+                                                Checked='<%# Eval("Accum") %>'/>
+                                        </ItemTemplate>
+                                        <ItemStyle Width="20px" />
                                     </asp:TemplateField>
                                 </Columns>
                             </asp:GridView>
