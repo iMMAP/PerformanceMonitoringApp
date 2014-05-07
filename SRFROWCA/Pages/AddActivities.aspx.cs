@@ -34,19 +34,20 @@ namespace SRFROWCA.Pages
                 PopulateLocations();
                 PopulateYears();
                 PopulateMonths();
-
                 PopulateProjects();
+
                 if (rblProjects.Items.Count > 0)
                 {
                     rblProjects.SelectedIndex = 0;
                 }
+
+                PopulateObjectives();
+                PopulatePriorities();
             }
 
-            PopulateObjectives();
-            PopulatePriorities();
+            PopulateToolTips();
 
             //this.Form.DefaultButton = this.btnSave.UniqueID;
-
             string controlName = GetPostBackControlId(this);
 
             if (controlName == "ddlMonth" || controlName == "ddlYear" || controlName == "rblProjects")
@@ -65,57 +66,38 @@ namespace SRFROWCA.Pages
                 gvActivities.DataSource = dtActivities;
                 gvActivities.DataBind();
             }
-        }
-
-        private DataTable GetUserProjects()
-        {
-            bool? isOPSProject = null;
-            return DBContext.GetData("GetOrgProjectsOnLocation", new object[] { UserInfo.EmergencyCountry, UserInfo.Organization, isOPSProject });
-        }
-
-        private void PopulateProjects()
-        {
-            DataTable dt = GetUserProjects();
-
-            rblProjects.DataValueField = "ProjectId";
-            rblProjects.DataTextField = "ProjectCode";
-            rblProjects.DataSource = dt;
-            rblProjects.DataBind();
-
-            ProjectsToolTip(rblProjects, dt);
-        }
-
-        private void ProjectsToolTip(ListControl ctl, DataTable dt)
-        {
-            foreach (ListItem item in ctl.Items)
-            {
-                foreach (DataRow row in dt.Rows)
-                {
-                    if (item.Text == row["ProjectCode"].ToString())
-                        item.Attributes["title"] = row["ProjectTitle"].ToString();
-                }
-            }
-        }
+        }        
 
         #region Events.
+
+        protected void ddlYear_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LocationRemoved = 0;
+            BindGridData();
+            AddLocationsInSelectedList();
+        }
+        protected void ddlMonth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LocationRemoved = 0;
+            BindGridData();
+            AddLocationsInSelectedList();
+        }
+        protected void rblProjects_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BindGridData();
+            AddLocationsInSelectedList();
+        }
 
         protected void gvActivities_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                if (e.Row.RowIndex == 0)
-                    e.Row.Style.Add("height", "50px");
-
                 ObjPrToolTip.ObjectiveIconToolTip(e, 0);
                 ObjPrToolTip.PrioritiesIconToolTip(e, 1);
-                int activityDataId = 0;
-                int.TryParse(gvActivities.DataKeys[e.Row.RowIndex]["ActivityDataId"].ToString(), out activityDataId);
-
                 ObjPrToolTip.RegionalIndicatorIcon(e, 11);
                 ObjPrToolTip.CountryIndicatorIcon(e, 12);
             }
         }
-
         protected void gvActivities_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "AddComments")
@@ -124,8 +106,6 @@ namespace SRFROWCA.Pages
 
                 int activityDataId = 0;
                 int.TryParse(gvActivities.DataKeys[rowIndex]["ActivityDataId"].ToString(), out activityDataId);
-
-                CommentsIndId = activityDataId;
 
                 if (activityDataId > 0)
                 {
@@ -147,6 +127,18 @@ namespace SRFROWCA.Pages
             }
         }
 
+        protected void btnLocation_Click(object sender, EventArgs e)
+        {
+            ClientScript.RegisterStartupScript(GetType(), "key", "launchModal();", true);
+            LocationRemoved = 1;
+            List<int> locationIds = GetLocationIdsFromGrid();
+            SelectLocationsOfGrid(locationIds);
+        }
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            SaveProjectData();
+        }
+
         protected void btnSaveComments_Click(object sender, EventArgs e)
         {
             string comments = ucIndComments.GetComments();
@@ -163,185 +155,46 @@ namespace SRFROWCA.Pages
                 }
             }
         }
-
-        //protected void btnSaveComments_Click(object sender, EventArgs e)
-        //{
-        //    if (CommentsIndId > 0)
-        //    {
-        //        SaveComments();
-        //    }
-
-        //    CommentsIndId = 0;
-        //    //txtComments.Text = "";
-        //    mpeComments.Hide();
-        //}
-
-        //// TODO: if user remove all locations then what?
-        //private void SaveComments()
-        //{
-        //    string comments = ucIndComments.GetComments();
-        //    int yearId = 0;
-        //    int.TryParse(ddlYear.SelectedValue, out yearId);
-        //    int monthId = 0;
-        //    int.TryParse(ddlMonth.SelectedValue, out monthId);
-        //    int projectId = RC.GetSelectedIntVal(rblProjects);
-
-        //    Guid userId = RC.GetCurrentUserId;
-        //    //DBContext.Add("InsertIndicatorComments", new object[] { reportId, activityDataId, comments });
-
-
-        //    if (!string.IsNullOrEmpty(comments))
-        //    {
-        //        IndicatorComment insertComment = db.IndicatorComments.CreateObject();
-        //        insertComment.YearId = yearId;
-        //        insertComment.MonthId = monthId;
-        //        insertComment.ProjectId = projectId;
-        //        insertComment.EmergencyLocationId = UserInfo.EmergencyCountry;
-        //        insertComment.Organizationid = UserInfo.Organization;
-        //        insertComment.ActivityDataId = CommentsIndId;
-        //        insertComment.Comments = comments;
-        //        db.IndicatorComments.AddObject(insertComment);
-        //        db.SaveChanges();
-        //        //AddNotification(db);
-        //    }
-
-        //}
-
-        private void AddNotification(ORSEntities db)
-        {
-            Notification notification = db.Notifications.CreateObject();
-            notification.Notification1 = "New Comments Added For Indicator In Project " + rblProjects.SelectedItem.Text;
-            notification.SourceUserId = RC.GetCurrentUserId;
-            notification.ProjectId = Convert.ToInt32(rblProjects.SelectedValue);
-            notification.EmergencyLocationId = UserInfo.EmergencyCountry;
-            notification.OrganizationId = UserInfo.Organization;
-            notification.MonthId = Convert.ToInt32(ddlMonth.SelectedValue);
-            notification.ActivityDataId = CommentsIndId;
-            notification.IsRead = false;            
-            db.Notifications.AddObject(notification);
-            db.SaveChanges();
-        }
-
         protected void btnCancelComments_Click(object sender, EventArgs e)
         {
             mpeComments.Hide();
         }
 
-        protected void rblProjects_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            BindGridData();
-            AddLocationsInSelectedList();
-        }
-
-        protected void ddlEmergency_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LocationRemoved = 0;
-            BindGridData();
-            AddLocationsInSelectedList();
-        }
-
-        protected void ddlYear_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LocationRemoved = 0;
-            BindGridData();
-            AddLocationsInSelectedList();
-        }
-
-        protected void ddlMonth_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LocationRemoved = 0;
-            BindGridData();
-            AddLocationsInSelectedList();
-        }
-
-        protected void btnLocation_Click(object sender, EventArgs e)
-        {
-            ClientScript.RegisterStartupScript(GetType(), "key", "launchModal();", true);
-            LocationRemoved = 1;
-            List<int> locationIds = GetLocationIdsFromGrid();
-            SelectLocationsOfGrid(locationIds);
-        }
-
-        private List<int> GetLocationIdsFromGrid()
-        {
-            List<int> locationIds = new List<int>();
-            foreach (GridViewRow row in gvActivities.Rows)
-            {
-                if (row.RowType == DataControlRowType.DataRow)
-                {
-                    DataTable dtActivities = (DataTable)Session["dtActivities"];
-                    foreach (DataColumn dc in dtActivities.Columns)
-                    {
-                        string colName = dc.ColumnName;
-
-                        HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
-                        if (hf != null)
-                        {
-                            int locationId = 0;
-                            int.TryParse(hf.Value, out locationId);
-                            if (locationId > 0)
-                                locationIds.Add((locationId));
-                        }
-                    }
-
-                    // If data row then iterate only once bece we need column names
-                    // from grid to get ids from hidden fields.
-                    break;
-                }
-            }
-
-            return locationIds.Distinct().ToList();
-        }
-
-        private void SelectLocationsOfGrid(List<int> locationIds)
-        {
-            foreach (ListItem item in cblLocations.Items)
-            {
-                item.Selected = locationIds.Contains(Convert.ToInt32(item.Value));
-            }
-
-            foreach (ListItem item in cblAdmin1.Items)
-            {
-                item.Selected = locationIds.Contains(Convert.ToInt32(item.Value));
-            }
-        }
-
-        protected void btnSave_Click(object sender, EventArgs e)
+        protected void btnExcel_Export(object sender, EventArgs e)
         {
             SaveProjectData();
+            DataTable dt = GetProjectsData(true);
+            if (dt.Rows.Count > 0)
+            {
+                GridView gv = new GridView();
+                gv.DataSource = dt;
+                gv.DataBind();
+                string fileName = UserInfo.CountryName + "_" + UserInfo.OrgName + "_" + ddlMonth.SelectedItem.Text + "_Report";
+                ExportUtility.ExportGridView(gv, fileName, ".xls", Response, true);
+            }
+        }
+        protected void btnPDF_Export(object sender, EventArgs e)
+        {
+            SaveProjectData();
+            DataTable dt = GetProjectsData(false);
+            if (dt.Rows.Count > 0)
+            {
+                GeneratePDF(dt);
+            }
         }
 
-        private void SaveProjectData()
+        protected void Page_Error(object sender, EventArgs e)
         {
-            using (TransactionScope scope = new TransactionScope())
-            {
-                if (ReportId > 0)
-                {
-                    DeleteReportAndItsChild();
-                }
+            ShowMessage("<b>Some Error Occoured. Admin Has Notified About It</b>.<br/> Please Try Again.", RC.NotificationType.Error);
 
-                SaveReport();
-
-                scope.Complete();
-                ShowMessage((string)GetLocalResourceObject("AddActivities_SaveMessageSuccess"));
-            }
+            // Get last error from the server
+            Exception exc = Server.GetLastError();
+            ExceptionUtility.LogException(exc, "AddActivites", this.User);
         }
 
         #endregion
 
         #region Methods.
-
-        private void PopulateObjectives()
-        {
-            UI.FillObjectives(cblObjectives, true);
-            ObjPrToolTip.ObjectivesToolTip(cblObjectives);
-        }
-
-        private void PopulatePriorities()
-        {
-            UI.FillPriorities(cblPriorities);
-            ObjPrToolTip.PrioritiesToolTip(cblPriorities);
-        }
 
         // Populate Months Drop Down
         private void PopulateMonths()
@@ -358,12 +211,12 @@ namespace SRFROWCA.Pages
             result = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(result);
             ddlMonth.SelectedIndex = i > -1 ? i : ddlMonth.Items.IndexOf(ddlMonth.Items.FindByText(result));
         }
-
         private DataTable GetMonth()
         {
             DataTable dt = DBContext.GetData("GetMonths", new object[] { RC.SelectedSiteLanguageId });
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
+
         // Populate Years Drop Down
         private void PopulateYears()
         {
@@ -376,156 +229,96 @@ namespace SRFROWCA.Pages
             var result = DateTime.Parse(DateTime.Now.ToShortDateString()).Year;
             ddlYear.SelectedIndex = ddlYear.Items.IndexOf(ddlYear.Items.FindByText(result.ToString()));
         }
-
         private DataTable GetYears()
         {
             DataTable dt = DBContext.GetData("GetYears");
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 
-        // In this method we will get the postback control.
-        public string GetPostBackControlId(Page page)
+        private void PopulateLocations()
         {
-            // If page is requested first time then return.
-            if (!page.IsPostBack)
-                return "";
+            int countryId = UserInfo.Country;
+            PopulateAdmin1(countryId);
+            PopulateAdmin2(countryId);
+        }
+        private void PopulateAdmin1(int parentLocationId)
+        {
+            DataTable dt = GetAdmin1Locations(parentLocationId);
+            cblAdmin1.DataValueField = "LocationId";
+            cblAdmin1.DataTextField = "LocationName";
+            cblAdmin1.DataSource = dt;
+            cblAdmin1.DataBind();
 
-            Control control = null;
-            // first we will check the "__EVENTTARGET" because if post back made by the controls
-            // which used "_doPostBack" function also available in Request.Form collection.
-            string controlName = page.Request.Params["__EVENTTARGET"];
-            if (!String.IsNullOrEmpty(controlName))
+            lblLocAdmin1.Text = UserInfo.CountryName + " " + (string)GetLocalResourceObject("AddActivities_PopulateAdmin1__Admin_1_Locations");
+        }
+        private DataTable GetAdmin1Locations(int parentLocationId)
+        {
+            DataTable dt = DBContext.GetData("GetSecondLevelChildLocations", new object[] { parentLocationId });
+            return dt.Rows.Count > 0 ? dt : new DataTable();
+        }
+        private void PopulateAdmin2(int parentLocationId)
+        {
+            DataTable dt = GetAdmin2Locations(parentLocationId);
+            cblLocations.DataValueField = "LocationId";
+            cblLocations.DataTextField = "LocationName";
+            cblLocations.DataSource = dt;
+            cblLocations.DataBind();
+            lblLocAdmin2.Text = UserInfo.CountryName + (string)GetLocalResourceObject("AddActivities_PopulateAdmin2__Admin_2_Locations");
+        }
+        private DataTable GetAdmin2Locations(int parentLocationId)
+        {
+            DataTable dt = DBContext.GetData("GetThirdLevelChildLocations", new object[] { parentLocationId });
+            return dt.Rows.Count > 0 ? dt : new DataTable();
+        }
+
+        private void PopulateProjects()
+        {
+            DataTable dt = GetUserProjects();
+            rblProjects.DataValueField = "ProjectId";
+            rblProjects.DataTextField = "ProjectCode";
+            rblProjects.DataSource = dt;
+            rblProjects.DataBind();
+        }
+        private DataTable GetUserProjects()
+        {
+            bool? isOPSProject = null;
+            return DBContext.GetData("GetOrgProjectsOnLocation", new object[] { UserInfo.EmergencyCountry, UserInfo.Organization, isOPSProject });
+        }
+
+        private void PopulateObjectives()
+        {
+            UI.FillObjectives(cblObjectives, true);
+        }
+        private void PopulatePriorities()
+        {
+            UI.FillPriorities(cblPriorities);
+        }
+        private void PopulateToolTips()
+        {
+            ObjPrToolTip.ObjectivesToolTip(cblObjectives);
+            ObjPrToolTip.PrioritiesToolTip(cblPriorities);
+
+            DataTable dt = GetUserProjects();
+            ProjectsToolTip(rblProjects, dt);
+        }
+        private void ProjectsToolTip(ListControl ctl, DataTable dt)
+        {
+            foreach (ListItem item in ctl.Items)
             {
-                control = page.FindControl(controlName);
-            }
-            else
-            {
-                // if __EVENTTARGET is null, the control is a button type and we need to
-                // iterate over the form collection to find it
-
-                string controlId;
-                Control foundControl;
-
-                foreach (string ctl in page.Request.Form)
+                foreach (DataRow row in dt.Rows)
                 {
-                    // handle ImageButton they having an additional "quasi-property" 
-                    // in their Id which identifies mouse x and y coordinates
-                    if (ctl.EndsWith(".x") || ctl.EndsWith(".y"))
-                    {
-                        controlId = ctl.Substring(0, ctl.Length - 2);
-                        foundControl = page.FindControl(controlId);
-                    }
-                    else
-                    {
-                        foundControl = page.FindControl(ctl);
-                    }
-
-                    if (!(foundControl is Button || foundControl is ImageButton)) continue;
-
-                    control = foundControl;
-                    break;
+                    if (item.Text == row["ProjectCode"].ToString())
+                        item.Attributes["title"] = row["ProjectTitle"].ToString();
                 }
             }
-
-            return control == null ? String.Empty : control.ID;
         }
 
-        internal override void BindGridData()
+        private void RemoveSelectedLocations(ListControl control)
         {
-            DataTable dt = GetActivities();
-            Session["dtActivities"] = dt;
-            GetReportId();
-            gvActivities.DataSource = dt;
-            gvActivities.DataBind();
-
-            BindCultureResourcesOfPage();
-        }
-
-        private string GetSelectedLocations()
-        {
-            string admin1 = GetSelectedItems(cblAdmin1);
-            string admin2 = GetSelectedItems(cblLocations);
-
-            if (!string.IsNullOrEmpty(admin1) && string.IsNullOrEmpty(admin2))
+            foreach (ListItem item in control.Items)
             {
-                return admin1;
+                item.Selected = false;
             }
-            else if (string.IsNullOrEmpty(admin1) && !string.IsNullOrEmpty(admin2))
-            {
-                return admin2;
-            }
-            else if (!string.IsNullOrEmpty(admin1) && !string.IsNullOrEmpty(admin2))
-            {
-                return admin1 + ", " + admin2;
-            }
-
-            return "";
-        }
-
-        private string GetNotSelectedLocations()
-        {
-            string admin1 = GetNotSelectedItems(cblAdmin1);
-            string admin2 = GetNotSelectedItems(cblLocations);
-
-            if (!string.IsNullOrEmpty(admin1) && string.IsNullOrEmpty(admin2))
-            {
-                return admin1;
-            }
-            else if (string.IsNullOrEmpty(admin1) && !string.IsNullOrEmpty(admin2))
-            {
-                return admin2;
-            }
-            else if (!string.IsNullOrEmpty(admin1) && !string.IsNullOrEmpty(admin2))
-            {
-                return admin1 + ", " + admin2;
-            }
-
-            return "";
-        }
-
-        private string GetSelectedItems(object sender)
-        {
-            string itemIds = "";
-            foreach (ListItem item in (sender as ListControl).Items)
-            {
-                if (item.Selected)
-                {
-                    if (itemIds != "")
-                    {
-                        itemIds += "," + item.Value;
-                    }
-                    else
-                    {
-                        itemIds += item.Value;
-                    }
-                }
-            }
-
-            return itemIds;
-        }
-
-        private string GetNotSelectedItems(object sender)
-        {
-            string itemIds = "";
-            if (LocationRemoved == 1)
-            {
-                foreach (ListItem item in (sender as ListControl).Items)
-                {
-                    if (!item.Selected)
-                    {
-                        if (itemIds != "")
-                        {
-                            itemIds += "," + item.Value;
-                        }
-                        else
-                        {
-                            itemIds += item.Value;
-                        }
-                    }
-                }
-            }
-
-            return itemIds;
         }
 
         private DataTable GetActivities()
@@ -547,40 +340,6 @@ namespace SRFROWCA.Pages
                                                                         UserInfo.Organization, projectId});
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
-
-        private void AddLocationsInSelectedList()
-        {
-            PopulateLocations();
-        }
-
-        private void PopulateLocations()
-        {
-            int countryId = UserInfo.Country;
-            PopulateAdmin1(countryId);
-            PopulateAdmin2(countryId);
-        }
-
-        private void PopulateAdmin1(int parentLocationId)
-        {
-            DataTable dt = GetAdmin1Locations(parentLocationId);
-            cblAdmin1.DataValueField = "LocationId";
-            cblAdmin1.DataTextField = "LocationName";
-            cblAdmin1.DataSource = dt;
-            cblAdmin1.DataBind();
-
-            lblLocAdmin1.Text = UserInfo.CountryName + " " + (string)GetLocalResourceObject("AddActivities_PopulateAdmin1__Admin_1_Locations");
-        }
-
-        private void PopulateAdmin2(int parentLocationId)
-        {
-            DataTable dt = GetAdmin2Locations(parentLocationId);
-            cblLocations.DataValueField = "LocationId";
-            cblLocations.DataTextField = "LocationName";
-            cblLocations.DataSource = dt;
-            cblLocations.DataBind();
-            lblLocAdmin2.Text = UserInfo.CountryName + (string)GetLocalResourceObject("AddActivities_PopulateAdmin2__Admin_2_Locations");
-        }
-
         private void AddDynamicColumnsInGrid(DataTable dt)
         {
             foreach (DataColumn column in dt.Columns)
@@ -621,44 +380,105 @@ namespace SRFROWCA.Pages
                 }
             }
         }
-
-        private DataTable GetAdmin1Locations(int parentLocationId)
+        private void GetReportId()
         {
-            DataTable dt = DBContext.GetData("GetSecondLevelChildLocations", new object[] { parentLocationId });
-            return dt.Rows.Count > 0 ? dt : new DataTable();
+            int yearId = RC.GetSelectedIntVal(ddlYear);
+            int monthId = RC.GetSelectedIntVal(ddlMonth);
+            int projectId = RC.GetSelectedIntVal(rblProjects);
+
+            using (ORSEntities db = new ORSEntities())
+            {
+                Report r = db.Reports.Where(x => x.ProjectId == projectId
+                                            && x.YearId == yearId
+                                            && x.MonthId == monthId
+                                            && x.EmergencyLocationId == UserInfo.EmergencyCountry
+                                            && x.OrganizationId == UserInfo.Organization).SingleOrDefault();
+                ReportId = r != null ? r.ReportId : 0;
+            }
         }
 
-        private DataTable GetAdmin2Locations(int parentLocationId)
+        internal override void BindGridData()
         {
-            DataTable dt = DBContext.GetData("GetThirdLevelChildLocations", new object[] { parentLocationId });
-            return dt.Rows.Count > 0 ? dt : new DataTable();
+            DataTable dt = GetActivities();
+            Session["dtActivities"] = dt;
+            GetReportId();
+            gvActivities.DataSource = dt;
+            gvActivities.DataBind();
+
+            BindCultureResourcesOfPage();
+        }
+        private void AddLocationsInSelectedList()
+        {
+            PopulateLocations();
         }
 
-        private void DeleteReportAndItsChild()
+        private List<int> GetLocationIdsFromGrid()
         {
-            //DeleteReportDetail();
-            DeleteReport();
+            List<int> locationIds = new List<int>();
+            foreach (GridViewRow row in gvActivities.Rows)
+            {
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    DataTable dtActivities = (DataTable)Session["dtActivities"];
+                    foreach (DataColumn dc in dtActivities.Columns)
+                    {
+                        string colName = dc.ColumnName;
+
+                        HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
+                        if (hf != null)
+                        {
+                            int locationId = 0;
+                            int.TryParse(hf.Value, out locationId);
+                            if (locationId > 0)
+                                locationIds.Add((locationId));
+                        }
+                    }
+
+                    // If data row then iterate only once bece we need column names
+                    // from grid to get ids from hidden fields.
+                    break;
+                }
+            }
+
+            return locationIds.Distinct().ToList();
+        }
+        private void SelectLocationsOfGrid(List<int> locationIds)
+        {
+            foreach (ListItem item in cblLocations.Items)
+            {
+                item.Selected = locationIds.Contains(Convert.ToInt32(item.Value));
+            }
+
+            foreach (ListItem item in cblAdmin1.Items)
+            {
+                item.Selected = locationIds.Contains(Convert.ToInt32(item.Value));
+            }
         }
 
+        private void SaveProjectData()
+        {
+            using (TransactionScope scope = new TransactionScope())
+            {
+                if (ReportId > 0)
+                {
+                    DeleteReport();
+                }
+
+                SaveReport();
+                scope.Complete();
+                ShowMessage((string)GetLocalResourceObject("AddActivities_SaveMessageSuccess"));
+            }
+        }
+        
         private void DeleteReport()
         {
             DBContext.Delete("DeleteReport", new object[] { ReportId, DBNull.Value });
         }
-
         private void SaveReport()
         {
             SaveReportMainInfo();
             SaveReportLocations();
             SaveReportDetails();
-        }
-
-        private void SaveReportLocations()
-        {
-            List<int> locationIds = GetLocationIdsFromGrid();
-            foreach (int locationId in locationIds)
-            {
-                DBContext.Add("InsertReportLocations", new object[] { ReportId, locationId, DBNull.Value });
-            }
         }
 
         private void SaveReportMainInfo()
@@ -671,7 +491,14 @@ namespace SRFROWCA.Pages
             ReportId = DBContext.Add("InsertReport", new object[] { yearId, monthId, projId, UserInfo.EmergencyCountry,
                                                                     UserInfo.Organization, loginUserId, reportName,  DBNull.Value });
         }
-
+        private void SaveReportLocations()
+        {
+            List<int> locationIds = GetLocationIdsFromGrid();
+            foreach (int locationId in locationIds)
+            {
+                DBContext.Add("InsertReportLocations", new object[] { ReportId, locationId, DBNull.Value });
+            }
+        }        
         private void SaveReportDetails()
         {
             int activityDataId = 0;
@@ -772,55 +599,138 @@ namespace SRFROWCA.Pages
             }
         }
 
-        private void GetReportId()
+        // In this method we will get the postback control.
+        public string GetPostBackControlId(Page page)
         {
-            int yearId = RC.GetSelectedIntVal(ddlYear);
-            int monthId = RC.GetSelectedIntVal(ddlMonth);
-            int projectId = RC.GetSelectedIntVal(rblProjects);
+            // If page is requested first time then return.
+            if (!page.IsPostBack)
+                return "";
 
-            using (ORSEntities db = new ORSEntities())
+            Control control = null;
+            // first we will check the "__EVENTTARGET" because if post back made by the controls
+            // which used "_doPostBack" function also available in Request.Form collection.
+            string controlName = page.Request.Params["__EVENTTARGET"];
+            if (!String.IsNullOrEmpty(controlName))
             {
-                Report r = db.Reports.Where(x => x.ProjectId == projectId
-                                            && x.YearId == yearId
-                                            && x.MonthId == monthId
-                                            && x.EmergencyLocationId == UserInfo.EmergencyCountry
-                                            && x.OrganizationId == UserInfo.Organization).SingleOrDefault();
-                ReportId = r != null ? r.ReportId : 0;
+                control = page.FindControl(controlName);
             }
+            else
+            {
+                // if __EVENTTARGET is null, the control is a button type and we need to
+                // iterate over the form collection to find it
+
+                string controlId;
+                Control foundControl;
+
+                foreach (string ctl in page.Request.Form)
+                {
+                    // handle ImageButton they having an additional "quasi-property" 
+                    // in their Id which identifies mouse x and y coordinates
+                    if (ctl.EndsWith(".x") || ctl.EndsWith(".y"))
+                    {
+                        controlId = ctl.Substring(0, ctl.Length - 2);
+                        foundControl = page.FindControl(controlId);
+                    }
+                    else
+                    {
+                        foundControl = page.FindControl(ctl);
+                    }
+
+                    if (!(foundControl is Button || foundControl is ImageButton)) continue;
+
+                    control = foundControl;
+                    break;
+                }
+            }
+
+            return control == null ? String.Empty : control.ID;
         }
 
-        private void RemoveSelectedLocations(ListControl control)
+        private string GetSelectedLocations()
         {
-            foreach (ListItem item in control.Items)
+            string admin1 = GetSelectedItems(cblAdmin1);
+            string admin2 = GetSelectedItems(cblLocations);
+
+            if (!string.IsNullOrEmpty(admin1) && string.IsNullOrEmpty(admin2))
             {
-                item.Selected = false;
+                return admin1;
             }
+            else if (string.IsNullOrEmpty(admin1) && !string.IsNullOrEmpty(admin2))
+            {
+                return admin2;
+            }
+            else if (!string.IsNullOrEmpty(admin1) && !string.IsNullOrEmpty(admin2))
+            {
+                return admin1 + ", " + admin2;
+            }
+
+            return "";
+        }
+        private string GetNotSelectedLocations()
+        {
+            string admin1 = GetNotSelectedItems(cblAdmin1);
+            string admin2 = GetNotSelectedItems(cblLocations);
+
+            if (!string.IsNullOrEmpty(admin1) && string.IsNullOrEmpty(admin2))
+            {
+                return admin1;
+            }
+            else if (string.IsNullOrEmpty(admin1) && !string.IsNullOrEmpty(admin2))
+            {
+                return admin2;
+            }
+            else if (!string.IsNullOrEmpty(admin1) && !string.IsNullOrEmpty(admin2))
+            {
+                return admin1 + ", " + admin2;
+            }
+
+            return "";
+        }
+        private string GetSelectedItems(object sender)
+        {
+            string itemIds = "";
+            foreach (ListItem item in (sender as ListControl).Items)
+            {
+                if (item.Selected)
+                {
+                    if (itemIds != "")
+                    {
+                        itemIds += "," + item.Value;
+                    }
+                    else
+                    {
+                        itemIds += item.Value;
+                    }
+                }
+            }
+
+            return itemIds;
+        }
+        private string GetNotSelectedItems(object sender)
+        {
+            string itemIds = "";
+            if (LocationRemoved == 1)
+            {
+                foreach (ListItem item in (sender as ListControl).Items)
+                {
+                    if (!item.Selected)
+                    {
+                        if (itemIds != "")
+                        {
+                            itemIds += "," + item.Value;
+                        }
+                        else
+                        {
+                            itemIds += item.Value;
+                        }
+                    }
+                }
+            }
+
+            return itemIds;
         }
 
-        protected void btnExcel_Export(object sender, EventArgs e)
-        {
-            SaveProjectData();
-            DataTable dt = GetProjectsData(true);
-            if (dt.Rows.Count > 0)
-            {
-                GridView gv = new GridView();
-                gv.DataSource = dt;
-                gv.DataBind();
-                string fileName = UserInfo.CountryName + "_" + UserInfo.OrgName + "_" + ddlMonth.SelectedItem.Text + "_Report";
-                ExportUtility.ExportGridView(gv, fileName, ".xls", Response, true);
-            }
-        }
-
-        protected void btnPDF_Export(object sender, EventArgs e)
-        {
-            SaveProjectData();
-            DataTable dt = GetProjectsData(false);
-            if (dt.Rows.Count > 0)
-            {
-                GeneratePDF(dt);
-            }
-        }
-
+        
         private DataTable GetProjectsData(bool isPivot)
         {
             int yearId = 0;
@@ -842,7 +752,6 @@ namespace SRFROWCA.Pages
                                                                         projectId, RC.SelectedSiteLanguageId, userId});
             return dt;
         }
-
         private void GeneratePDF(DataTable dt)
         {
             using (MemoryStream outputStream = new MemoryStream())
@@ -857,28 +766,17 @@ namespace SRFROWCA.Pages
                 Response.BinaryWrite(outputStream.ToArray());
             }
         }
-
         private void BindCultureResourcesOfPage()
         {
             lblLocAdmin1.Text = UserInfo.CountryName + " " + (string)GetLocalResourceObject("AddActivities_PopulateAdmin1__Admin_1_Locations");
             lblLocAdmin2.Text = UserInfo.CountryName + " " + (string)GetLocalResourceObject("AddActivities_PopulateAdmin2__Admin_2_Locations");
 
         }
-
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success)
         {
             RC.ShowMessage(Page, typeof(Page), UniqueID, message, notificationType, true, 500);
         }
-
-        protected void Page_Error(object sender, EventArgs e)
-        {
-            ShowMessage("<b>Some Error Occoured. Admin Has Notified About It</b>.<br/> Please Try Again.", RC.NotificationType.Error);
-
-            // Get last error from the server
-            Exception exc = Server.GetLastError();
-            ExceptionUtility.LogException(exc, "AddActivites", this.User);
-        }
-
+        
         #endregion
 
         #region Properties & Enums

@@ -8,11 +8,7 @@
     <script type="text/javascript" src="../assets/orsjs/ShowHideObJAndPr.js"></script>
     <script>
         $(function () {
-            $('.srpind').parent('tr:contains("Yes")').addClass('highlightRow2');
-
-            $('tr .testcb').click(function () {
-                $(this).parent().parent().toggleClass('highlightRow');
-            });
+            
 
             $("tr .testcb").each(function () {
 
@@ -125,7 +121,11 @@
                         <h4>
                             <asp:Localize ID="local" runat="server" Text="Master List Of Cluster Indicators" meta:resourcekey="localResource1"></asp:Localize>
                         </h4>
-
+                        <button id="btnSave" runat="server" onserverclick="btnSave_Click" onclick="needToConfirm = false;"
+                                type="button" class="btn btn-sm btn-yellow pull-right">
+                                <i class="icon-save"></i>
+                                <asp:Localize ID="localClsuterTargetsSave" runat="server" Text="Save"></asp:Localize>
+                            </button>
                     </div>
                     <div class="widget-body">
                         <div class="widget-main">
@@ -202,7 +202,7 @@
                                         <asp:TemplateField HeaderText="Added In Project" HeaderStyle-Width="40px" SortExpression="IndicatorIsAdded" meta:resourcekey="TemplateFieldResource4">
                                             <ItemTemplate>
                                                 <asp:CheckBox ID="cbIsAdded" runat="server" Checked='<%# Eval("IndicatorIsAdded") %>'
-                                                    OnCheckedChanged="cbIsAdded_CheckedChanged" AutoPostBack="True" CssClass="testcb" meta:resourcekey="cbIsAddedResource1" />
+                                                    CssClass="testcb" meta:resourcekey="cbIsAddedResource1" />
                                             </ItemTemplate>
 
                                             <HeaderStyle Width="40px"></HeaderStyle>
@@ -222,6 +222,7 @@
 
                                             <ItemStyle CssClass="hidden"></ItemStyle>
                                         </asp:TemplateField>
+                                        <asp:BoundField DataField="ActivityDataId" />
                                     </Columns>
                                 </asp:GridView>
                             </div>

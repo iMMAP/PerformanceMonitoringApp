@@ -4,6 +4,8 @@ using System.Web.UI.WebControls;
 using System.Linq;
 using BusinessLogic;
 using SRFROWCA.Common;
+using System.Transactions;
+using System.Web.UI;
 
 
 namespace SRFROWCA.Pages
@@ -17,7 +19,7 @@ namespace SRFROWCA.Pages
         }
 
         protected void Page_Load(object sender, EventArgs e)
-        {   
+        {
             if (!IsPostBack)
             {
                 PopulateProjects();
@@ -280,6 +282,49 @@ namespace SRFROWCA.Pages
                 int yearId = 10;
                 DBContext.Add("InsertProjectIndicator", new object[] { projectId, indicatorId, UserInfo.EmergencyCountry, yearId, isAdded.Checked, userId, DBNull.Value });
             }
+        }
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            using (TransactionScope scope = new TransactionScope())
+            {
+                SaveData();
+                scope.Complete();
+                ShowMessage("Data Saved Successfully!");
+            }
+        }
+
+        private void SaveData()
+        {
+            int projectId = RC.GetSelectedIntVal(rblProjects);
+            if (projectId == 0) return;
+
+            foreach (GridViewRow row in gvIndicators.Rows)
+            {
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    int indicatorId = 0;
+                    int.TryParse(gvIndicators.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString(), out indicatorId);
+                    CheckBox isAdded = gvIndicators.Rows[row.RowIndex].FindControl("cbIsAdded") as CheckBox;
+
+                    if (indicatorId > 0 && isAdded != null)
+                    {
+                        bool isOPS = projectId > 500000 ? false : true;
+                        int yearId = 10;
+                        if (!isAdded.Checked)
+                        {
+                            int i = 0;
+                        }
+                        DBContext.Add("InsertProjectIndicator", new object[] { projectId, indicatorId, UserInfo.EmergencyCountry, yearId,
+                                                                                isAdded.Checked, isOPS, RC.GetCurrentUserId, DBNull.Value });
+                    }
+                }
+            }
+        }
+
+        private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success)
+        {
+            RC.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, true, 500);
         }
 
         public string SelectedProjectId
