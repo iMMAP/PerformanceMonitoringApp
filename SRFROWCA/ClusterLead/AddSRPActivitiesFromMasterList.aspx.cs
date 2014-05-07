@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using SRFROWCA.Common;
 using BusinessLogic;
 using System.Data;
+using System.Transactions;
 
 namespace SRFROWCA.ClusterLead
 {
@@ -108,22 +109,22 @@ namespace SRFROWCA.ClusterLead
             }
         }
 
-        protected void chkSRP_CheckedChanged(object sender, EventArgs e)
-        {
-            int index = ((GridViewRow)((CheckBox)sender).NamingContainer).RowIndex;
-            CheckBox cb = gvSRPIndicators.Rows[index].FindControl("chkSRP") as CheckBox;
-            if (cb != null)
-            {
-                //Label lblUserId = gvSRPIndicators.Rows[index].FindControl("lblUserId") as Label;
-                int indicatorId = 0;
-                int.TryParse(gvSRPIndicators.DataKeys[index].Values["ActivityDataId"].ToString(), out indicatorId);
+        //protected void chkSRP_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    int index = ((GridViewRow)((CheckBox)sender).NamingContainer).RowIndex;
+        //    CheckBox cb = gvSRPIndicators.Rows[index].FindControl("chkSRP") as CheckBox;
+        //    if (cb != null)
+        //    {
+        //        //Label lblUserId = gvSRPIndicators.Rows[index].FindControl("lblUserId") as Label;
+        //        int indicatorId = 0;
+        //        int.TryParse(gvSRPIndicators.DataKeys[index].Values["ActivityDataId"].ToString(), out indicatorId);
 
-                if (indicatorId > 0)
-                {
-                    AddRemoveSRPIndicatorFromList(indicatorId, cb.Checked);
-                }
-            }
-        }
+        //        if (indicatorId > 0)
+        //        {
+        //            AddRemoveSRPIndicatorFromList(indicatorId, cb.Checked);
+        //        }
+        //    }
+        //}
 
         protected void gvSRPIndicators_Sorting(object sender, GridViewSortEventArgs e)
         {
@@ -219,6 +220,43 @@ namespace SRFROWCA.ClusterLead
             dt.Columns.Remove("ActivityDataId");
             dt.Columns.Remove("HumanitarianPriorityId");
             dt.Columns.Remove("ActivityDataId1");
+        }
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            using (TransactionScope scope = new TransactionScope())
+            {
+                SaveData();
+                scope.Complete();
+                ShowMessage("Data Saved Successfully!");
+            }
+        }
+
+        private void SaveData()
+        {
+            foreach (GridViewRow row in gvSRPIndicators.Rows)
+            {
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    CheckBox cb = gvSRPIndicators.Rows[row.RowIndex].FindControl("chkSRP") as CheckBox;
+                    if (cb != null)
+                    {
+                        //Label lblUserId = gvSRPIndicators.Rows[index].FindControl("lblUserId") as Label;
+                        int indicatorId = 0;
+                        int.TryParse(gvSRPIndicators.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString(), out indicatorId);
+
+                        if (indicatorId > 0)
+                        {
+                            AddRemoveSRPIndicatorFromList(indicatorId, cb.Checked);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success)
+        {
+            RC.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, true, 500);
         }
     }
 }

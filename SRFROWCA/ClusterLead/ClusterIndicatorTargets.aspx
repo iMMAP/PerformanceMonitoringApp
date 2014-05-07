@@ -158,7 +158,7 @@
                             </h4>
                         </div>
                         <div class="col-sm-3">
-                            <button id="Button1" runat="server" onserverclick="btnSave_Click" onclick="needToConfirm = false;"
+                            <button id="btnSave1" runat="server" onserverclick="btnSave_Click" onclick="needToConfirm = false;"
                                 type="button" class="btn btn-sm btn-yellow pull-right">
                                 <i class="icon-save"></i>
                                 <asp:Localize ID="localClsuterTargetsSave" runat="server" Text="Save" meta:resourcekey="localClsuterTargetsSaveResource1"></asp:Localize>

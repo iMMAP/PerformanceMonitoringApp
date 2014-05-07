@@ -40,15 +40,7 @@
                 $(this).parent().parent().toggleClass('highlightRow');
             });
 
-            $("tr .testrcb").each(function () {
-                var checkBox = $(this).find("input[type='checkbox']");
-                if ($(checkBox).is(':checked')) {
-                    $(this).parent().parent().addClass('highlightRow2');
-                }
-                else {
-                    $(this).parent().parent().removeClass('highlightRow2');
-                }
-            });
+            
 
             $("tr .testcb").each(function () {
                 var checkBox = $(this).find("input[type='checkbox']");
@@ -145,10 +137,15 @@
             <div class="col-sm-9 widget-container-span">
                 <div class="widget-box">
                     <div class="widget-header widget-header header-color-blue2">
-                        <div class="col-sm-2">
+                        <div class="col-sm-4">
                             <button runat="server" id="btnExportToExcel" onserverclick="ExportToExcel" class="width-10 btn btn-sm btn-yellow"
                                 title="Excel">
                                 <i class="icon-download"></i>Excel
+                            </button>
+                            <button id="btnSave" runat="server" onserverclick="btnSave_Click" onclick="needToConfirm = false;"
+                                type="button" class="btn btn-sm btn-yellow">
+                                <i class="icon-save"></i>
+                                <asp:Localize ID="localClsuterTargetsSave" runat="server" Text="Save"></asp:Localize>
                             </button>
                         </div>
                         <%--<div class="col-sm-4">
@@ -229,7 +226,7 @@
                                     <asp:TemplateField HeaderText="Country Indicator" meta:resourcekey="TemplateFieldResource2"
                                         SortExpression="IsSRP" ItemStyle-Width="40px">
                                         <ItemTemplate>
-                                            <asp:CheckBox ID="chkSRP" runat="server" AutoPostBack="True" OnCheckedChanged="chkSRP_CheckedChanged"
+                                            <asp:CheckBox ID="chkSRP" runat="server"
                                                 Checked='<%# Eval("IsSRP") %>' CssClass="testcb" meta:resourcekey="chkSRPResource1" />
                                         </ItemTemplate>
                                         <ItemStyle Width="2%" />

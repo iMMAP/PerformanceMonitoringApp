@@ -103,13 +103,13 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.Localize localizeClusterName;
         
         /// <summary>
-        /// Button1 control.
+        /// btnSave1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton Button1;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnSave1;
         
         /// <summary>
         /// localClsuterTargetsSave control.
