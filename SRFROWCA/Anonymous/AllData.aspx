@@ -342,7 +342,7 @@
                 <div class="space">
                 </div>
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 widget-container-span">
+                    <div class="col-xs-12 col-sm-12">
                         <div class="widget-box">
                             <cc2:PagingGridView ID="gvReport" runat="server" Width="100%" CssClass="imagetable"
                                 AutoGenerateColumns="false" OnSorting="gvReport_Sorting" ShowHeaderWhenEmpty="true"

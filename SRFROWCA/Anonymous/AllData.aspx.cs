@@ -147,26 +147,35 @@ namespace SRFROWCA.Anonymous
 
         private void PopulateProjects()
         {
-            using (ORSEntities db = new ORSEntities())
-            {
-                ddlProjects.DataValueField = "ProjectId";
-                ddlProjects.DataTextField = "ProjectCode";
-                if (UserInfo.EmergencyCluster > 0)
-                {
-                    ddlProjects.DataSource = db.Projects
-                                            .Where(x => x.EmergencyClusterId == UserInfo.EmergencyCluster
-                                                    && x.EmergencyLocationId == UserInfo.EmergencyCountry)
-                                            .Select(x => new { x.ProjectId, x.ProjectCode }).OrderBy(o => o.ProjectCode);
-                }
-                else
-                {
-                    ddlProjects.DataSource = db.Projects
-                                        .Where(x => x.EmergencyLocationId == UserInfo.EmergencyCountry)
-                                        .Select(x => new { x.ProjectId, x.ProjectCode }).OrderBy(o => o.ProjectCode);
-                }
+            ddlProjects.DataTextField = "ProjectCode";
+            ddlProjects.DataValueField = "ProjectId";
 
-                ddlProjects.DataBind();
-            }
+            int? emgLocationId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
+            int? emgClsuterId = UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
+            int? orgId = UserInfo.Organization > 0 ? UserInfo.Organization : (int?)null;
+            ddlProjects.DataSource = DBContext.GetData("GetProjectsOnClusterCountryAndOrg", new object[] { emgLocationId, emgClsuterId, orgId });
+            ddlProjects.DataBind();
+
+            //using (ORSEntities db = new ORSEntities())
+            //{
+            //    ddlProjects.DataValueField = "ProjectId";
+            //    ddlProjects.DataTextField = "ProjectCode";
+            //    if (UserInfo.EmergencyCluster > 0)
+            //    {
+            //        ddlProjects.DataSource = db.Projects
+            //                                .Where(x => x.EmergencyClusterId == UserInfo.EmergencyCluster
+            //                                        && x.EmergencyLocationId == UserInfo.EmergencyCountry)
+            //                                .Select(x => new { x.ProjectId, x.ProjectCode }).OrderBy(o => o.ProjectCode);
+            //    }
+            //    else
+            //    {
+            //        ddlProjects.DataSource = db.Projects
+            //                            .Where(x => x.EmergencyLocationId == UserInfo.EmergencyCountry)
+            //                            .Select(x => new { x.ProjectId, x.ProjectCode }).OrderBy(o => o.ProjectCode);
+            //    }
+
+            //    ddlProjects.DataBind();
+            //}
         }
 
         private void PopulateActivities()
