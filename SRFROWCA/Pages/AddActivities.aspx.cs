@@ -93,8 +93,8 @@ namespace SRFROWCA.Pages
             {
                 ObjPrToolTip.ObjectiveIconToolTip(e, 0);
                 ObjPrToolTip.PrioritiesIconToolTip(e, 1);
-                ObjPrToolTip.RegionalIndicatorIcon(e, 11);
-                ObjPrToolTip.CountryIndicatorIcon(e, 12);
+                ObjPrToolTip.RegionalIndicatorIcon(e, 12);
+                ObjPrToolTip.CountryIndicatorIcon(e, 13);
             }
         }
         protected void gvActivities_RowCommand(object sender, GridViewCommandEventArgs e)
