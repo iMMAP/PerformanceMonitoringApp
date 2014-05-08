@@ -57,11 +57,11 @@
                             </li>
                             <li>
                                 <i class="icon-hand-right blue"></i>
-                                <cc:DropDownCheckBoxes ID="ddlOrganizations" runat="server" CssClass="ddlWidth"
+                                <cc:DropDownCheckBoxes ID="ddlOrganizations" runat="server" CssClass="width-30"
                                     AddJQueryReference="True"
                                     UseButtons="False" UseSelectAllNode="True">
                                     <Style SelectBoxWidth="" DropDownBoxBoxWidth="350%" DropDownBoxBoxHeight="300px"></Style>
-                                    <Texts SelectBoxCaption="Select Organization" />
+                                    <Texts SelectBoxCaption="Select Organizations" />
                                 </cc:DropDownCheckBoxes>
                                 <asp:Localize ID="localDownloadFirstItem" runat="server" Text="No organization means all"></asp:Localize>
                                 <asp:Label ID="lblOrganization" runat="server" Text="" Visible="false"></asp:Label>

@@ -17,7 +17,7 @@ namespace SRFROWCA.ClusterLead
         {
             if (!IsPostBack)
             {
-                PopulateOrganizations();                
+                PopulateOrganizations();
                 if (RC.IsCountryAdmin(User) || RC.IsOCHAStaff(User))
                 {
                     PopulateClusters();
@@ -70,10 +70,10 @@ namespace SRFROWCA.ClusterLead
 
             int? clusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
             int? emgLocationId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
-            
+
             ddlOrganizations.DataTextField = "OrganizationName";
             ddlOrganizations.DataValueField = "OrganizationId";
-            ddlOrganizations.DataSource = DBContext.GetData("GetProjectsOrganizations", new object[] { emgLocationId, clusterId});
+            ddlOrganizations.DataSource = DBContext.GetData("GetProjectsOrganizations", new object[] { emgLocationId, clusterId });
             ddlOrganizations.DataBind();
         }
 
@@ -104,7 +104,7 @@ namespace SRFROWCA.ClusterLead
             bool allInd = chkAllIndicators.Checked;
 
             return countryInd || regionalInd || allInd;
-                
+
         }
 
         private DataTable GetIndicators()
@@ -120,19 +120,13 @@ namespace SRFROWCA.ClusterLead
 
             bool countryInd = chkCountryIndicators.Checked;
             bool regionalInd = chkRegionalInidcators.Checked;
-            bool allInd = chkAllIndicators.Checked;
-            string orgIds = "";
-            if (RC.IsDataEntryUser(User))
-            {
-                orgIds = UserInfo.Organization.ToString();
-            }
-            else
-            {
-                orgIds = RC.GetSelectedValues(ddlOrganizations);
-            }
-            return DBContext.GetData("GetIndicatorsForDataEntryTemplate", new object[]{emgLocationId, clusterId,
-                                                                                        orgIds, countryInd, regionalInd, allInd,
-                                                                                        RC.SelectedSiteLanguageId});
+            bool allInd = chkAllIndicators.Checked;            
+            string orgIds = null;
+            orgIds = RC.GetSelectedValues(ddlOrganizations);
+            int yearId = 10;
+
+            return DBContext.GetData("GetIndicatorsForDataEntryTemplate", new object[]{emgLocationId, clusterId, orgIds, countryInd, regionalInd, allInd,
+                                                                                        RC.SelectedSiteLanguageId, yearId});
         }
 
         #endregion
