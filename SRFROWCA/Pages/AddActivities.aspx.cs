@@ -30,7 +30,6 @@ namespace SRFROWCA.Pages
 
             if (!IsPostBack)
             {
-                UserInfo.UserProfileInfo();
                 PopulateLocations();
                 PopulateYears();
                 PopulateMonths();
@@ -354,12 +353,16 @@ namespace SRFROWCA.Pages
                     columnName == "ActivityDataId" || columnName == "ProjectTitle" || columnName == "ProjectId" ||
                     columnName == "ObjAndPrId" || columnName == "ObjectiveId" || columnName == "HumanitarianPriorityId" ||
                     columnName == "objAndPrAndPId" || columnName == "objAndPId" || columnName == "PrAndPId" ||
-                    columnName == "ProjectIndicatorId" || columnName == "RInd" || columnName == "CInd" || columnName == "Accum" || columnName == "Unit"))
+                    columnName == "ProjectIndicatorId" || columnName == "RInd" || columnName == "CInd"
+                    //|| columnName == "Accum" 
+                    || columnName == "Unit"
+                    ))
                 {
-                    if (columnName.Contains("_2-ACCUM"))
+                    if (columnName.Contains("Accum"))
                     {
                         customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, "CheckBox", column.ColumnName, "1");
-                        customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, "CheckBox", column.ColumnName, "1");
+                        //customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, "CheckBox", column.ColumnName, "1");
+                        customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, "CheckBox", "ACM", "1");
                         gvActivities.Columns.Add(customField);
                     }
                     else
@@ -489,6 +492,7 @@ namespace SRFROWCA.Pages
         private void SaveReport()
         {
             //SaveReportMainInfo();
+            DeleteReportAccumulatives();
             SaveReportLocations();
             SaveReportDetails();
         }
@@ -535,14 +539,29 @@ namespace SRFROWCA.Pages
                     activityDataId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString());
                     projIndicatorId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["ProjectIndicatorId"].ToString());
 
+
+
+
+
                     DataTable dtActivities = (DataTable)Session["dtActivities"];
                     List<KeyValuePair<int, decimal?>> dataSave = new List<KeyValuePair<int, decimal?>>();
                     int i = 0;
-                    bool isAccum = false;
+
                     foreach (DataColumn dc in dtActivities.Columns)
                     {
+
                         string colName = dc.ColumnName;
                         int locationId = 0;
+
+                        CheckBox cbAccum = row.FindControl(colName) as CheckBox;
+                        if (cbAccum != null)
+                        {
+                            if (cbAccum.Checked)
+                            {
+                                SaveAccumulative(activityDataId, cbAccum.Checked);
+                            }
+                        }
+
                         HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
                         if (hf != null)
                         {
@@ -557,12 +576,6 @@ namespace SRFROWCA.Pages
                             {
                                 value = Convert.ToDecimal(t.Text, CultureInfo.InvariantCulture);
                             }
-                        }
-
-                        CheckBox cbAccum = row.FindControl(colName) as CheckBox;
-                        if (cbAccum != null)
-                        {
-                            isAccum = cbAccum.Checked;
                         }
 
                         if (locationId > 0)
@@ -609,6 +622,16 @@ namespace SRFROWCA.Pages
                     }
                 }
             }
+        }
+
+        private void DeleteReportAccumulatives()
+        {
+            DBContext.Delete("DeleteReportAccumulatives", new object[] { ReportId, DBNull.Value });
+        }
+
+        private void SaveAccumulative(int activityDataId, bool isAccum)
+        {
+            DBContext.Add("InsertReportAccumulative", new object[] { ReportId, activityDataId, isAccum, RC.GetCurrentUserId, DBNull.Value });
         }
 
         // In this method we will get the postback control.
@@ -871,9 +894,19 @@ namespace SRFROWCA.Pages
             // Create the content for the different row types.
             if (_templateType == DataControlRowType.Header)
             {
-                string[] words = _columnName.Split('^');
-                Label lc = new Label { Width = 50, Text = "<b>" + words[1] + "</b>" };
-                container.Controls.Add(lc);
+                if (_columnName == "ACM")
+                {
+                    Label lc = new Label { Width = 25, Text = "<b>ACM</b>" };
+                    container.Controls.Add(lc);
+                }
+                else
+                {
+                    string[] words = _columnName.Split('^');
+
+                    Label lc = new Label { Width = 50, Text = "<b>" + words[1] + "</b>" };
+                    container.Controls.Add(lc);
+                }
+
             }
             else if (_templateType == DataControlRowType.DataRow)
             {
@@ -898,11 +931,11 @@ namespace SRFROWCA.Pages
                     CheckBox cbLocAccum = new CheckBox();
                     cbLocAccum.DataBinding += cbAccum_DataBinding;
                     container.Controls.Add(cbLocAccum);
-                    HiddenField hf = new HiddenField();
-                    string[] words1 = _columnName.Split('^');
-                    hf.Value = words1[0];
-                    hf.ID = "hf" + _columnName;
-                    container.Controls.Add(hf);
+                    //HiddenField hf = new HiddenField();
+                    //string[] words1 = _columnName.Split('^');
+                    //hf.Value = words1[0];
+                    //hf.ID = "hf" + _columnName;
+                    //container.Controls.Add(hf);
                 }
             }
         }
@@ -921,7 +954,7 @@ namespace SRFROWCA.Pages
             CheckBox cb = (CheckBox)sender;
             cb.ID = _columnName;
             GridViewRow row = (GridViewRow)cb.NamingContainer;
-            cb.Checked = (DataBinder.Eval(row.DataItem, _columnName)).ToString() == "1";
+            cb.Checked = (DataBinder.Eval(row.DataItem, _columnName)).ToString() == "True";
         }
     }
 }
