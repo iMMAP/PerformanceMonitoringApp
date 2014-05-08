@@ -41,7 +41,7 @@ namespace SRFROWCA
                 else if (current is CheckBox)
                 {
                     control.Controls.Remove(current);
-                    control.Controls.AddAt(i, new LiteralControl((current as CheckBox).Checked ? "True" : "False"));
+                    control.Controls.AddAt(i, new LiteralControl((current as CheckBox).Checked ? "Yes" : "No"));
                 }
                 else if (current is Button)
                 {
