@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data;
+using System.Net.Mail;
 using System.Web.Security;
 using BusinessLogic;
 using SRFROWCA.Common;
@@ -124,7 +125,22 @@ namespace SRFROWCA.Account
 
 
             string mailBody = string.Format(mailMessage,userName, link);
-            Mail.SendMail("orsocharowca@gmail.com ", toEmail, "Password Change Request", mailBody);
+            //Mail.SendMail("orsocharowca@gmail.com ", toEmail, "Password Change Request", mailBody);
+            try
+            {
+                using (MailMessage mailMsg = new MailMessage())
+                {
+                    mailMsg.From = new MailAddress("orsocharowca@gmail.com");
+                    mailMsg.To.Add(new MailAddress("orsocharowca@gmail.com"));
+                    mailMsg.Subject = "ORS Password Change Request";
+                    mailMsg.IsBodyHtml = true;
+                    mailMsg.Body = mailBody;
+                    Mail.SendMail(mailMsg);
+                }
+            }
+            catch
+            {
+            }
         }
 
         private void SaveValuesInDB(string userName, string hash, Guid guid, string dt)
@@ -172,35 +188,6 @@ namespace SRFROWCA.Account
             //lblMessage.Visible = true;
             //lblMessage.CssClass = css;
             //lblMessage.Text = message;
-        }
-
-        private void SendNewPasswordToUser(string userName, string email)
-        {
-            if (!string.IsNullOrEmpty(userName))
-            {
-                MembershipUser mu = Membership.GetUser(userName);
-                if (mu != null)
-                {
-                    string password = mu.ResetPassword();
-                    EmailPassword(password, mu.Email);
-                }
-            }
-            else if (!string.IsNullOrEmpty(email))
-            {
-                userName = Membership.GetUserNameByEmail(email);
-                if (!string.IsNullOrEmpty(userName))
-                {
-                    MembershipUser mu = Membership.GetUser(userName);
-                    string password = mu.ResetPassword();
-                    EmailPassword(password, mu.Email);
-                }
-            }
-        }
-
-        private void EmailPassword(string password, string toEmail)
-        {
-            string mailBody = string.Format("Your new password is {0}", password);
-            Mail.SendMail("admin@abc.com", toEmail, "New Password", mailBody);
         }
 
         protected void Page_Error(object sender, EventArgs e)
