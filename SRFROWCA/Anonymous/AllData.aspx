@@ -163,8 +163,8 @@
                                                                                     <td></td>
                                                                                     <td>
                                                                                         <span>
-                                                                                            <asp:CheckBox ID="cbOPSProjects" runat="server" Text="OPS Projects" />
-                                                                                            <asp:CheckBox ID="cbORSProjects" runat="server" Text="ORS Projects" /></span>
+                                                                                            <asp:CheckBox ID="cbOPSProjects" runat="server" Text="SRP Projects" />
+                                                                                            <asp:CheckBox ID="cbORSProjects" runat="server" Text="Non SRP Projects" /></span>
                                                                                     </td>
                                                                                 </tr>
                                                                             </table>
