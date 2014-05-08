@@ -364,7 +364,7 @@ namespace SRFROWCA.ClusterLead
 	                            [Activity] [nvarchar](1000) NULL,
 	                            [Indicator Id] [int] NULL,
 	                            [Indicator] [nvarchar](1000) NULL,
-	                            [Accumulative] [int] NULL,
+	                            [Accumulative] [nvarchar](10) NULL,
 	                            [Mid Year Target] [int] NULL,
 	                            [Full Year Target] [int] NULL";
 
@@ -398,7 +398,7 @@ namespace SRFROWCA.ClusterLead
 	                            [Activity] [nvarchar](1000) NULL,
 	                            [Indicator Id] [int] NULL,
 	                            [Indicator] [nvarchar](1000) NULL,
-	                            [Accumulative] [int] NULL,
+	                            [Accumulative] [nvarchar](10) NULL,
 	                            [Mid Year Target] [int] NULL,
 	                            [Full Year Target] [int] NULL";
             int i = 1;
