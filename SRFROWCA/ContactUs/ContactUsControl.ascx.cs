@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Mail;
 using System.ServiceModel.Channels;
 using SRFROWCA.Common;
 
@@ -45,7 +46,24 @@ namespace SRFROWCA.ContactUs
 
         private void SendMessage()
         {
-            Mail.SendMail(txtEmail.Text.Trim(), "orsocharowca@gmail.com ", "3W Activities: " + txtSubject.Text.Trim(), txtMessage.Text.Trim());
+            try
+            {
+                using (MailMessage mailMsg = new MailMessage())
+                {
+                    mailMsg.From = new MailAddress(txtEmail.Text.Trim());
+                    mailMsg.To.Add(new MailAddress("orsocharowca@gmail.com"));
+                    mailMsg.Subject = "ORS Contact US!";
+                    mailMsg.IsBodyHtml = true;
+                    mailMsg.Body = txtMessage.Text.Trim();
+                    Mail.SendMail(mailMsg);
+                    ShowMessage(@"You message has been sent!", "");
+                }
+            }
+            catch
+            {
+                ShowMessage("Problem contacting ORS help desk, please check your email or contact us directly using ors@ocharowca.info", "");
+            }
+            //Mail.SendMail(txtEmail.Text.Trim(), "orsocharowca@gmail.com ", "3W Activities: " + txtSubject.Text.Trim(), txtMessage.Text.Trim());
         }
 
         private void ShowMessage(string msg, string cssClass)
