@@ -581,7 +581,7 @@ namespace SRFROWCA.Pages
                         if (locationId > 0)
                         {
                             dataSave.Add(new KeyValuePair<int, decimal?>(locationId, value));
-                            if (i == 2)
+                            if (i == 1)
                             {
                                 i = 0;
                                 int locationIdToSave = 0;
@@ -594,10 +594,6 @@ namespace SRFROWCA.Pages
                                     {
                                         locationIdToSave = item.Key;
                                         annualTarget = item.Value;
-                                        j++;
-                                    }
-                                    else if (j == 1)
-                                    {
                                         j++;
                                     }
                                     else
@@ -906,7 +902,6 @@ namespace SRFROWCA.Pages
                     Label lc = new Label { Width = 50, Text = "<b>" + words[1] + "</b>" };
                     container.Controls.Add(lc);
                 }
-
             }
             else if (_templateType == DataControlRowType.DataRow)
             {

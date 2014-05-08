@@ -365,14 +365,6 @@
                                         </ItemTemplate>
                                         <ItemStyle Width="30px"></ItemStyle>
                                     </asp:TemplateField>
-                                    <%--<asp:TemplateField HeaderText="ACM"
-                                        ItemStyle-Width="20px">
-                                        <ItemTemplate>
-                                            <asp:CheckBox ID="chkIsAccum" runat="server"
-                                                Checked='<%# Eval("Accum") %>'/>
-                                        </ItemTemplate>
-                                        <ItemStyle Width="20px" />
-                                    </asp:TemplateField>--%>
                                 </Columns>
                             </asp:GridView>
                         </div>
