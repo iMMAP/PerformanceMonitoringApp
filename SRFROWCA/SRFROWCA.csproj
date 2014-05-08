@@ -882,6 +882,7 @@
     <Content Include="Pages\CreateProject.aspx" />
     <Content Include="Pages\ManageActivities.aspx" />
     <Content Include="Pages\TargetsAchievedOfLocationByDuration.ascx" />
+    <Content Include="Pages\UploadAchived.aspx" />
     <Content Include="PivotTables\CountryIndicatorsAchievedReport.aspx" />
     <Content Include="PivotTables\PerfMontPivot.aspx" />
     <Content Include="PivotTables\RegionalIndicatorsAchievedReport.aspx" />
@@ -914,6 +915,7 @@
     <Content Include="OPS\OPSProjectFeed.ashx" />
     <Content Include="ClusterLead\Web.config" />
     <Content Include="Admin\Web.config" />
+    <Content Include="WebForm1.aspx" />
     <None Include="assets\font\cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff" />
     <None Include="assets\font\DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff" />
     <None Include="assets\font\fontawesome-webfontd41d.eot" />
@@ -1543,6 +1545,13 @@
     <Compile Include="Pages\TargetsAchievedOfLocationByDuration.ascx.designer.cs">
       <DependentUpon>TargetsAchievedOfLocationByDuration.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\UploadAchived.aspx.cs">
+      <DependentUpon>UploadAchived.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\UploadAchived.aspx.designer.cs">
+      <DependentUpon>UploadAchived.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PivotTables\CountryIndicatorsAchievedReport.aspx.cs">
       <DependentUpon>CountryIndicatorsAchievedReport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1734,6 +1743,13 @@
     </Compile>
     <Compile Include="UploadSRPLogFrame.aspx.designer.cs">
       <DependentUpon>UploadSRPLogFrame.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -171,6 +171,7 @@ namespace SRFROWCA
             liFundingStatus.Visible = isShow;
             liUserListing.Visible = isShow;
             liBulkImport.Visible = isShow;
+            liBulkImportUser.Visible = isShow;
         }
 
         private void ShowUserMenue()
@@ -192,7 +193,7 @@ namespace SRFROWCA
             menuePivotOrgPresence.Visible = !isShow;
             liPivotSumOfCountryIndicators.Visible = !isShow;
             menuePivotSumOfCountryIndicators.Visible = !isShow;
-            //liBulkImport.Visible = isShow;
+            liBulkImportUser.Visible = isShow;
         }
 
         private void ShowRegionalLeadMenue()
