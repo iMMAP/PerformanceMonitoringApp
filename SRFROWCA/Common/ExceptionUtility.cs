@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Mail;
 using System.Web;
 using BusinessLogic;
 
@@ -22,7 +23,7 @@ namespace SRFROWCA.Common
             {
                 string userName = iPrincipal != null ? iPrincipal.Identity.Name : "";
                 object[] items = GetParameters(exc, source, userName);
-                string subject = string.Format(@"3W Exception, source: {0} at: {1} by: {2}", source, DateTime.Now.ToString("yyyy-MM-dd hh:mm"), userName);
+                string subject = string.Format(@"ORS Exception, source: {0} at: {1} by: {2}", source, DateTime.Now.ToString("yyyy-MM-dd hh:mm"), userName);
                 string mailBody = string.Format(@"Inner Exception Type: {0}
                                             Inner Exception Source: {1} 
                                             Inner Exception: {2}
@@ -36,7 +37,23 @@ namespace SRFROWCA.Common
                                                                      items[5],
                                                                      items[6],
                                                                      items[7]);
-                Mail.SendMail("orsocharowca@gmail.com ", "orsocharowca@gmail.com ", subject, mailBody);
+                //Mail.SendMail("orsocharowca@gmail.com ", "orsocharowca@gmail.com ", subject, mailBody);
+
+                try
+                {
+                    using (MailMessage mailMsg = new MailMessage())
+                    {
+                        mailMsg.From = new MailAddress("orsocharowca@gmail.com");
+                        mailMsg.To.Add(new MailAddress("orsocharowca@gmail.com"));
+                        mailMsg.Subject = subject;
+                        mailMsg.IsBodyHtml = true;
+                        mailMsg.Body = mailBody;
+                        Mail.SendMail(mailMsg);
+                    }
+                }
+                catch
+                {
+                }
             }
         }
 
