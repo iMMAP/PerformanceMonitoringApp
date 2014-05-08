@@ -31,13 +31,12 @@
                         </div>
                     </div>
                     <div class="widget-body">
-                        <div class="widget-main">                          
+                        <div class="widget-main">
                             <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
                                 <AjaxSettings>
                                     <telerik:AjaxSetting AjaxControlID="rpgvCustomReport">
                                         <UpdatedControls>
-                                            <telerik:AjaxUpdatedControl ControlID="rpgvCustomReport" LoadingPanelID="RadAjaxLoadingPanel1">
-                                            </telerik:AjaxUpdatedControl>
+                                            <telerik:AjaxUpdatedControl ControlID="rpgvCustomReport" LoadingPanelID="RadAjaxLoadingPanel1"></telerik:AjaxUpdatedControl>
                                         </UpdatedControls>
                                     </telerik:AjaxSetting>
                                 </AjaxSettings>
@@ -47,8 +46,9 @@
                             <telerik:RadPivotGrid ID="rpgvCustomReport" runat="server" OnNeedDataSource="RadPivotGrid1_NeedDataSource"
                                 AllowFiltering="true" AllowPaging="true" PageSize="30" ShowFilterHeaderZone="false"
                                 ShowDataHeaderZone="false" ShowRowHeaderZone="false" ShowColumnHeaderZone="false"
-                                EnableConfigurationPanel="true" AllowSorting="true"
-                                 >
+                                EnableConfigurationPanel="true" AllowSorting="true" AggregatesLevel="0"
+                                TotalsSettings-GrandTotalsVisibility="None"
+                                TotalsSettings-RowsSubTotalsPosition="None">
                                 <Fields>
                                     <telerik:PivotGridColumnField DataField="Month">
                                     </telerik:PivotGridColumnField>
