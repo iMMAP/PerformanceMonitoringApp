@@ -238,15 +238,6 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.CheckBoxList cblAdmin1;
         
         /// <summary>
-        /// lblLocAdmin2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblLocAdmin2;
-        
-        /// <summary>
         /// cblLocations control.
         /// </summary>
         /// <remarks>

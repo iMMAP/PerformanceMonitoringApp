@@ -414,17 +414,17 @@
                                             </fieldset>
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <%--<tr>
                                         <td>
                                             <fieldset>
                                                 <legend>
-                                                    <asp:Label ID="lblLocAdmin2" runat="server" Text="Admin 2 Locations" meta:resourcekey="lblLocAdmin2Resource1"></asp:Label></legend>
+                                                    <asp:Label ID="lblLocAdmin2" runat="server" Text="Admin 2 Locations" meta:resourcekey="lblLocAdmin2Resource1"></asp:Label></legend>--%>
                                                 <asp:CheckBoxList ID="cblLocations" runat="server" RepeatColumns="5" RepeatDirection="Horizontal"
                                                     CssClass="cbltest" meta:resourcekey="cblLocationsResource1">
                                                 </asp:CheckBoxList>
-                                            </fieldset>
+                                            <%--</fieldset>
                                         </td>
-                                    </tr>
+                                    </tr>--%>
                                 </table>
                             </div>
                             <div class="modal-footer no-margin-top">

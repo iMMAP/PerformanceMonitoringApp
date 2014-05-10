@@ -238,7 +238,7 @@ namespace SRFROWCA.Pages
         {
             int countryId = UserInfo.Country;
             PopulateAdmin1(countryId);
-            PopulateAdmin2(countryId);
+            //PopulateAdmin2(countryId);
         }
         private void PopulateAdmin1(int parentLocationId)
         {
@@ -262,7 +262,7 @@ namespace SRFROWCA.Pages
             cblLocations.DataTextField = "LocationName";
             cblLocations.DataSource = dt;
             cblLocations.DataBind();
-            lblLocAdmin2.Text = UserInfo.CountryName + (string)GetLocalResourceObject("AddActivities_PopulateAdmin2__Admin_2_Locations");
+            //lblLocAdmin2.Text = UserInfo.CountryName + (string)GetLocalResourceObject("AddActivities_PopulateAdmin2__Admin_2_Locations");
         }
         private DataTable GetAdmin2Locations(int parentLocationId)
         {
@@ -800,7 +800,7 @@ namespace SRFROWCA.Pages
         private void BindCultureResourcesOfPage()
         {
             lblLocAdmin1.Text = UserInfo.CountryName + " " + (string)GetLocalResourceObject("AddActivities_PopulateAdmin1__Admin_1_Locations");
-            lblLocAdmin2.Text = UserInfo.CountryName + " " + (string)GetLocalResourceObject("AddActivities_PopulateAdmin2__Admin_2_Locations");
+            //lblLocAdmin2.Text = UserInfo.CountryName + " " + (string)GetLocalResourceObject("AddActivities_PopulateAdmin2__Admin_2_Locations");
 
         }
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success)
