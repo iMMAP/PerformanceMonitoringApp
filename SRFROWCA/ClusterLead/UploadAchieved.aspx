@@ -137,7 +137,7 @@
                             <ul class="list-unstyled spaced inline bigger-110 margin-15">
                                 <li>
                                     <i class="icon-hand-right blue"></i>
-                                    <asp:Localize ID="localUploadItem1" runat="server" Text="Sheet Name must be 'ORSDataTemplate'"></asp:Localize>
+                                    <asp:Localize ID="localUploadItem1" runat="server" Text="Your Data Must Be In First Sheet"></asp:Localize>
                                 </li>
 
                                 <li>
@@ -147,7 +147,8 @@
 
                                 <li>
                                     <i class="icon-hand-right blue"></i>
-                                    <asp:Localize ID="localUploadItem3" runat="server" Text="If Month column is empty in the file then data will be imported under current month"></asp:Localize>
+                                    <asp:DropDownList ID="ddlMonth" runat="server">
+                                    </asp:DropDownList>
                                 </li>
                             </ul>
                         </div>

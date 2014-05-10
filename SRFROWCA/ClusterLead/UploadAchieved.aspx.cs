@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.IO;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -18,9 +19,10 @@ namespace SRFROWCA.ClusterLead
             if (!IsPostBack)
             {
                 PopulateOrganizations();
+                PopulateMonths();
                 if (RC.IsCountryAdmin(User) || RC.IsOCHAStaff(User))
                 {
-                    PopulateClusters();
+                    PopulateClusters();                    
                 }
                 else
                 {
@@ -129,6 +131,26 @@ namespace SRFROWCA.ClusterLead
                                                                                         RC.SelectedSiteLanguageId, yearId});
         }
 
+        private void PopulateMonths()
+        {
+            int i = ddlMonth.SelectedIndex;
+
+            ddlMonth.DataValueField = "MonthId";
+            ddlMonth.DataTextField = "MonthName";
+
+            ddlMonth.DataSource = GetMonth();
+            ddlMonth.DataBind();
+
+            var result = DateTime.Now.ToString("MMMM", new CultureInfo(RC.SiteCulture));
+            result = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(result);
+            ddlMonth.SelectedIndex = i > -1 ? i : ddlMonth.Items.IndexOf(ddlMonth.Items.FindByText(result));
+        }
+        private DataTable GetMonth()
+        {
+            DataTable dt = DBContext.GetData("GetMonths", new object[] { RC.SelectedSiteLanguageId });
+            return dt.Rows.Count > 0 ? dt : new DataTable();
+        }
+
         #endregion
 
         protected void btnImport_Click(object sender, EventArgs e)
@@ -201,18 +223,82 @@ namespace SRFROWCA.ClusterLead
 
             if (!string.IsNullOrEmpty(excelConString))
             {
-                DataTable dt = ReadDataInDataTable(excelConString);
-                dt.Columns.Remove("Project Title");
-                string tableScript = CreateTableScript(dt);
-                string tableScript2 = CreateTableScript2(dt);
-                string conString = ConfigurationManager.ConnectionStrings["live_dbName"].ConnectionString;
-                CreateStagingTable(tableScript, conString);
-                CreateStagingTable(tableScript2, conString);
-                WriteDataToDB(dt, conString);
-                string locationColumnNames = GetLocationColumnNames(dt);
-                string locationColumnNamesWithAliases = GetLocationColumnNamesWithAliases(dt);
-                string locationColumnNamesAlias = GetLocationColumnNamesAlias(dt);
-                UnpivotStagingTable(locationColumnNames, locationColumnNamesWithAliases, locationColumnNamesAlias);
+                string[] sheets = GetExcelSheetNames(excelConString);
+                if (sheets.Length > 0)
+                {
+                    DataTable dt = ReadDataInDataTable(excelConString, sheets[0]);
+                    dt.Columns.Remove("Project Title");
+                    dt.Columns.Remove("Organization");
+                    string tableScript = CreateTableScript(dt);
+                    string tableScript2 = CreateTableScript2(dt);
+                    string conString = ConfigurationManager.ConnectionStrings["live_dbName"].ConnectionString;
+                    CreateStagingTable(tableScript, conString);
+                    CreateStagingTable(tableScript2, conString);
+                    WriteDataToDB(dt, conString);
+                    string locationColumnNames = GetLocationColumnNames(dt);
+                    string locationColumnNamesWithAliases = GetLocationColumnNamesWithAliases(dt);
+                    string locationColumnNamesAlias = GetLocationColumnNamesAlias(dt);
+                    UnpivotStagingTable(locationColumnNames, locationColumnNamesWithAliases, locationColumnNamesAlias);
+                }
+            }
+        }
+
+        private String[] GetExcelSheetNames(string excelConString)
+        {
+            OleDbConnection objConn = null;
+            System.Data.DataTable dt = null;
+
+            try
+            {
+                //// Connection String. Change the excel file to the file you
+                //// will search.
+                //String connString = "Provider=Microsoft.Jet.OLEDB.4.0;" +
+                //  "Data Source=" + excelFile + ";Extended Properties=Excel 8.0;";
+                objConn = new OleDbConnection(excelConString);
+                // Open connection with the database.
+                objConn.Open();
+                // Get the data table containg the schema guid.
+                dt = objConn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+
+                if (dt == null)
+                {
+                    return null;
+                }
+
+                String[] excelSheets = new String[dt.Rows.Count];
+                int i = 0;
+
+                // Add the sheet name to the string array.
+                foreach (DataRow row in dt.Rows)
+                {
+                    excelSheets[i] = row["TABLE_NAME"].ToString();
+                    i++;
+                }
+
+                // Loop through all of the sheets if you want too...
+                for (int j = 0; j < excelSheets.Length; j++)
+                {
+                    // Query each excel sheet.
+                }
+
+                return excelSheets;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                // Clean up.
+                if (objConn != null)
+                {
+                    objConn.Close();
+                    objConn.Dispose();
+                }
+                if (dt != null)
+                {
+                    dt.Dispose();
+                }
             }
         }
 
@@ -276,12 +362,12 @@ namespace SRFROWCA.ClusterLead
         // First Read data from excel sheet into data table.
         // Add UserId, Selected Emregency Id and Identity column.
         // Above added data is needed to update tables in db.
-        private DataTable ReadDataInDataTable(string excelConString)
+        private DataTable ReadDataInDataTable(string excelConString, string sheetName)
         {
             //Create Connection to Excel work book
             OleDbConnection excelCon = new OleDbConnection(excelConString);
             //Create OleDbCommand to fetch data from Excel
-            OleDbCommand cmd = new OleDbCommand(@"Select * from [ORSDataTemplate$]", excelCon);
+            OleDbCommand cmd = new OleDbCommand(string.Format(@"Select * from [{0}]", sheetName), excelCon);
             excelCon.Open();
 
             OleDbDataAdapter da = new OleDbDataAdapter();
@@ -293,7 +379,7 @@ namespace SRFROWCA.ClusterLead
             da.Dispose();
             excelCon.Close();
 
-            //UpdateDataTableWithIds(dt);
+            UpdateDataTableWithIds(dt);
 
             return dt;
         }
@@ -318,6 +404,7 @@ namespace SRFROWCA.ClusterLead
 
             DataTable dt = new DataTable();
             dt.Columns.Add(idColumn);
+            dt.Columns.Add("Month", typeof(string));
             //dt.Columns.Add("EmergencyId", typeof(int));
             //dt.Columns.Add("ClusterId", typeof(int));
             //dt.Columns.Add("EmergencyClusterId", typeof(int));
@@ -338,6 +425,7 @@ namespace SRFROWCA.ClusterLead
         {
             if (dt.Rows.Count > 0)
             {
+                dt.Rows[0]["Month"] = ddlMonth.SelectedValue;
                 //dt.Rows[0]["EmergencyId"] = ddlEmergency.SelectedValue;
                 //dt.Rows[0]["UserId"] = RC.GetCurrentUserId;
             }
