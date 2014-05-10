@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -21,6 +22,7 @@ namespace SRFROWCA.Pages
             if (!IsPostBack)
             {
                 PopulateProjects();
+                PopulateMonths();
             }
         }
 
@@ -60,9 +62,14 @@ namespace SRFROWCA.Pages
         {
             int? emgLocationId = UserInfo.EmergencyCountry;
 
-            bool countryInd = chkCountryIndicators.Checked;
-            bool regionalInd = chkRegionalInidcators.Checked;
-            bool allInd = chkAllIndicators.Checked;
+            //bool countryInd = chkCountryIndicators.Checked;
+            //bool regionalInd = chkRegionalInidcators.Checked;
+            //bool allInd = chkAllIndicators.Checked;
+
+            bool countryInd = false;
+            bool regionalInd = false;
+            bool allInd = false;
+
 
             string projectIds = null;
             int? orgId = null;
@@ -79,6 +86,26 @@ namespace SRFROWCA.Pages
         }
 
         #endregion
+
+        private void PopulateMonths()
+        {
+            int i = ddlMonth.SelectedIndex;
+
+            ddlMonth.DataValueField = "MonthId";
+            ddlMonth.DataTextField = "MonthName";
+
+            ddlMonth.DataSource = GetMonth();
+            ddlMonth.DataBind();
+
+            var result = DateTime.Now.ToString("MMMM", new CultureInfo(RC.SiteCulture));
+            result = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(result);
+            ddlMonth.SelectedIndex = i > -1 ? i : ddlMonth.Items.IndexOf(ddlMonth.Items.FindByText(result));
+        }
+        private DataTable GetMonth()
+        {
+            DataTable dt = DBContext.GetData("GetMonths", new object[] { RC.SelectedSiteLanguageId });
+            return dt.Rows.Count > 0 ? dt : new DataTable();
+        }
 
         protected void btnImport_Click(object sender, EventArgs e)
         {
@@ -108,7 +135,7 @@ namespace SRFROWCA.Pages
                 string message = "Some Error Occoured During Import, Please contact with site Admin!";
                 ShowMessage(message, RC.NotificationType.Error, false);
             }
-        }
+        }        
 
         // Get all emergencies.
         private object GetLocationEmergencies()
@@ -150,24 +177,97 @@ namespace SRFROWCA.Pages
 
             if (!string.IsNullOrEmpty(excelConString))
             {
-                DataTable dt = ReadDataInDataTable(excelConString);
-                dt.Columns.Remove("Project Title");
-                string tableScript = CreateTableScript(dt);
-                string tableScript2 = CreateTableScript2(dt);
-                string conString = ConfigurationManager.ConnectionStrings["live_dbName"].ConnectionString;
-                CreateStagingTable(tableScript, conString);
-                CreateStagingTable(tableScript2, conString);
-                WriteDataToDB(dt, conString);
-                string locationColumnNames = GetLocationColumnNames(dt);
-                string locationColumnNamesWithAliases = GetLocationColumnNamesWithAliases(dt);
-                string locationColumnNamesAlias = GetLocationColumnNamesAlias(dt);
-                UnpivotStagingTable(locationColumnNames, locationColumnNamesWithAliases, locationColumnNamesAlias);
+                string[] sheets = GetExcelSheetNames(excelConString);
+                if (sheets.Count() > 0)
+                {
+                    DataTable dt = ReadDataInDataTable(excelConString, sheets[0]);
+                    dt.Columns.Remove("Project Title");
+                    dt.Columns.Remove("Organization");
+                    string tableScript = CreateTableScript(dt);
+                    string tableScript2 = CreateTableScript2(dt);
+                    string conString = ConfigurationManager.ConnectionStrings["live_dbName"].ConnectionString;
+                    CreateStagingTable(tableScript, conString);
+                    CreateStagingTable(tableScript2, conString);
+                    WriteDataToDB(dt, conString);
+                    string locationColumnNames = GetLocationColumnNames(dt);
+                    string locationColumnNamesWithAliases = GetLocationColumnNamesWithAliases(dt);
+                    string locationColumnNamesAlias = GetLocationColumnNamesAlias(dt);
+                    UnpivotStagingTable(locationColumnNames, locationColumnNamesWithAliases, locationColumnNamesAlias);
+                }
+            }
+        }
+
+        private String[] GetExcelSheetNames(string excelConString)
+        {
+            OleDbConnection objConn = null;
+            System.Data.DataTable dt = null;
+
+            try
+            {
+                //// Connection String. Change the excel file to the file you
+                //// will search.
+                //String connString = "Provider=Microsoft.Jet.OLEDB.4.0;" +
+                //  "Data Source=" + excelFile + ";Extended Properties=Excel 8.0;";
+                objConn = new OleDbConnection(excelConString);
+                // Open connection with the database.
+                objConn.Open();
+                // Get the data table containg the schema guid.
+                dt = objConn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+
+                if (dt == null)
+                {
+                    return null;
+                }
+
+                String[] excelSheets = new String[dt.Rows.Count];
+                int i = 0;
+
+                // Add the sheet name to the string array.
+                foreach (DataRow row in dt.Rows)
+                {
+                    excelSheets[i] = row["TABLE_NAME"].ToString();
+                    i++;
+                }
+
+                // Loop through all of the sheets if you want too...
+                for (int j = 0; j < excelSheets.Length; j++)
+                {
+                    // Query each excel sheet.
+                }
+
+                return excelSheets;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                // Clean up.
+                if (objConn != null)
+                {
+                    objConn.Close();
+                    objConn.Dispose();
+                }
+                if (dt != null)
+                {
+                    dt.Dispose();
+                }
             }
         }
 
         private void UnpivotStagingTable(string locationColumnNames, string locationColumnNamesWithAliases, string locationColumnNamesAlias)
         {
             DBContext.GetData("UnpivotImportAchievedStagingTable", new object[] { locationColumnNames, locationColumnNamesWithAliases, locationColumnNamesAlias });
+        }
+
+        // Add 'LocationEmergencyId' and 'UserId' in DataTable.
+        private void UpdateDataTableWithIds(DataTable dt)
+        {
+            if (dt.Rows.Count > 0)
+            {
+                dt.Rows[0]["Month"] = ddlMonth.SelectedValue;
+            }
         }
 
         private void CreateStagingTable(string tableScript, string conString)
@@ -225,12 +325,12 @@ namespace SRFROWCA.Pages
         // First Read data from excel sheet into data table.
         // Add UserId, Selected Emregency Id and Identity column.
         // Above added data is needed to update tables in db.
-        private DataTable ReadDataInDataTable(string excelConString)
+        private DataTable ReadDataInDataTable(string excelConString, string sheetName)
         {
             //Create Connection to Excel work book
             OleDbConnection excelCon = new OleDbConnection(excelConString);
             //Create OleDbCommand to fetch data from Excel
-            OleDbCommand cmd = new OleDbCommand(@"Select * from [ORSDataTemplate$]", excelCon);
+            OleDbCommand cmd = new OleDbCommand(string.Format(@"Select * from [{0}]", sheetName), excelCon);
             excelCon.Open();
 
             OleDbDataAdapter da = new OleDbDataAdapter();
@@ -242,7 +342,7 @@ namespace SRFROWCA.Pages
             da.Dispose();
             excelCon.Close();
 
-            //UpdateDataTableWithIds(dt);
+            UpdateDataTableWithIds(dt);
 
             return dt;
         }
@@ -267,7 +367,7 @@ namespace SRFROWCA.Pages
 
             DataTable dt = new DataTable();
             dt.Columns.Add(idColumn);
-            //dt.Columns.Add("EmergencyId", typeof(int));
+            dt.Columns.Add("Month", typeof(string));
             //dt.Columns.Add("ClusterId", typeof(int));
             //dt.Columns.Add("EmergencyClusterId", typeof(int));
             //dt.Columns.Add("ObjectiveId", typeof(int));
@@ -280,16 +380,6 @@ namespace SRFROWCA.Pages
             //dt.Columns.Add("ActivityDataId", typeof(int));
 
             return dt;
-        }
-
-        // Add 'LocationEmergencyId' and 'UserId' in DataTable.
-        private void UpdateDataTableWithIds(DataTable dt)
-        {
-            if (dt.Rows.Count > 0)
-            {
-                //dt.Rows[0]["EmergencyId"] = ddlEmergency.SelectedValue;
-                //dt.Rows[0]["UserId"] = RC.GetCurrentUserId;
-            }
         }
 
         private string CreateTableScript(DataTable dt)
@@ -448,7 +538,6 @@ namespace SRFROWCA.Pages
         private void WriteDataToDB(DataTable dt, string conString)
         {
             // DB connection string.
-
             SqlBulkCopy sqlBulk = new SqlBulkCopy(conString);
             sqlBulk.DestinationTableName = "ImportCLDataStaging_Temp";
             sqlBulk.WriteToServer(dt);

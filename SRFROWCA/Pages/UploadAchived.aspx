@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="ORS - Bulk Upload User" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="UploadAchived.aspx.cs" Inherits="SRFROWCA.Pages.UploadAchived" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <%@ Register Assembly="DropDownCheckBoxes" Namespace="Saplin.Controls" TagPrefix="cc" %>
     <!-- ORS styles -->
@@ -60,7 +61,7 @@
                                 <i class="icon-hand-right blue"></i>
                                 <asp:Localize ID="Localize2" runat="server" Text="Project Indicators"></asp:Localize>
                             </li>
-                            <li>
+                            <%--<li>
                                 <i class="icon-hand-right blue"></i>
 
                                 <label>
@@ -86,7 +87,7 @@
                                     <span class="lbl">All Indicators (Master List)</span>
                                 </label>
 
-                            </li>                            
+                            </li> --%>
                             <li>
                                 <i class="icon-hand-right blue"></i>
                                 <asp:Localize ID="localDownloadClusterTargets" runat="server" Text="Cluster Targets of each indicator"></asp:Localize>
@@ -128,7 +129,7 @@
                             <ul class="list-unstyled spaced inline bigger-110 margin-15">
                                 <li>
                                     <i class="icon-hand-right blue"></i>
-                                    <asp:Localize ID="localUploadItem1" runat="server" Text="Sheet Name must be 'ORSDataTemplate'"></asp:Localize>
+                                    <asp:Localize ID="localUploadItem1" runat="server" Text="Your Data Must be in first sheet"></asp:Localize>
                                 </li>
 
                                 <li>
@@ -138,7 +139,8 @@
 
                                 <li>
                                     <i class="icon-hand-right blue"></i>
-                                    <asp:Localize ID="localUploadItem3" runat="server" Text="If Month column is empty in the file then data will be imported under current month"></asp:Localize>
+                                    <asp:DropDownList ID="ddlMonth" runat="server">
+                                    </asp:DropDownList>
                                 </li>
                             </ul>
                         </div>

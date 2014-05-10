@@ -103,33 +103,6 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.Localize Localize2;
         
         /// <summary>
-        /// chkCountryIndicators control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkCountryIndicators;
-        
-        /// <summary>
-        /// chkRegionalInidcators control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkRegionalInidcators;
-        
-        /// <summary>
-        /// chkAllIndicators control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkAllIndicators;
-        
-        /// <summary>
         /// localDownloadClusterTargets control.
         /// </summary>
         /// <remarks>
@@ -202,13 +175,13 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.Localize localUploadItem2;
         
         /// <summary>
-        /// localUploadItem3 control.
+        /// ddlMonth control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localUploadItem3;
+        protected global::System.Web.UI.WebControls.DropDownList ddlMonth;
         
         /// <summary>
         /// fuAchieved control.
