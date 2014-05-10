@@ -79,7 +79,7 @@
                                     <label class="col-sm-4 control-label no-padding-right" for="form-field-first">
                                         Country</label>
                                     <div class="col-sm-8">
-                                        <asp:DropDownList ID="ddlCountry" runat="server" CssClass="col-xs-12 col-sm-6">
+                                        <asp:DropDownList ID="ddlCountry" runat="server" CssClass="col-xs-12 col-sm-6" Enabled="false">
                                         </asp:DropDownList>
                                         <asp:RequiredFieldValidator ID="rfvCountry" runat="server" ErrorMessage="Required"
                                             Text="Required" InitialValue="0" ControlToValidate="ddlCountry"></asp:RequiredFieldValidator>

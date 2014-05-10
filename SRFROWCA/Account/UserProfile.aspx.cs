@@ -19,15 +19,7 @@ namespace SRFROWCA.Account
             //this.Form.DefaultButton = this.btnUpdate.UniqueID;
             PopulateCountries();
             GetUserInformation();
-
-            if (RC.IsDataEntryUser(User))
-            {
-                ddlCountry.Enabled = true;
-            }
-            else
-            {
-                ddlCountry.Enabled = false;
-            }
+            ddlCountry.Enabled = false;
         }
 
         private void GetUserInformation()
