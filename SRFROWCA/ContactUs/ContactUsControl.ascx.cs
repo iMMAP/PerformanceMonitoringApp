@@ -50,11 +50,11 @@ namespace SRFROWCA.ContactUs
             {
                 using (MailMessage mailMsg = new MailMessage())
                 {
-                    mailMsg.From = new MailAddress(txtEmail.Text.Trim());
+                    mailMsg.From = new MailAddress("orsocharowca@gmail.com");
                     mailMsg.To.Add(new MailAddress("orsocharowca@gmail.com"));
                     mailMsg.Subject = "ORS Contact US!";
                     mailMsg.IsBodyHtml = true;
-                    mailMsg.Body = txtMessage.Text.Trim();
+                    mailMsg.Body = string.Format(@"Email is Sent by {0} <hr/>{1}", txtEmail.Text.Trim(), txtMessage.Text.Trim());
                     Mail.SendMail(mailMsg);
                     ShowMessage(@"You message has been sent!", "");
                 }

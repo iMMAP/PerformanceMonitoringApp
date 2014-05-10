@@ -130,7 +130,7 @@
     <value>Your Email(Required)</value>
   </data>
   <data name="localMessageResource1.Text" xml:space="preserve">
-    <value>Message (300 char max)(Required)</value>
+    <value>Message (600 char max)(Required)</value>
   </data>
   <data name="localNameResource1.Text" xml:space="preserve">
     <value>Name</value>

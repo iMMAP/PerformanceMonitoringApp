@@ -1,5 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ContactUsControl.ascx.cs"
     Inherits="SRFROWCA.ContactUs.ContactUsControl" %>
+<%@ Register Assembly="FredCK.FCKeditorV2" Namespace="FredCK.FCKeditorV2" TagPrefix="FCKeditorV2" %>
 <div class="row">
     <div class="col-xs-6 col-sm-6">
         <div class="widget-box no-border">
@@ -45,14 +46,14 @@
                     </div>
                     <div>
                         <label>
-                            <asp:Localize ID="localMessage" runat="server" Text="Message (300 char max)(Required)" meta:resourcekey="localMessageResource1"></asp:Localize>
+                            <asp:Localize ID="localMessage" runat="server" Text="Message (600 char max)(Required)" meta:resourcekey="localMessageResource1"></asp:Localize>
                         </label>
                             <asp:RequiredFieldValidator ID="rfvMessage" runat="server" ErrorMessage="Required"
                                                         Text="*" CssClass="error2" ControlToValidate="txtMessage" meta:resourcekey="rfvMessageResource1"></asp:RequiredFieldValidator>
                         <div>
                             <div>
                                 <asp:TextBox ID="txtMessage" runat="server" Width="500px" Height="150px"
-                                    TextMode="MultiLine" MaxLength="300" meta:resourcekey="txtMessageResource1"></asp:TextBox>                                    
+                                    TextMode="MultiLine" MaxLength="600" meta:resourcekey="txtMessageResource1"></asp:TextBox>                                    
                             </div>
                         </div>
                     </div>
