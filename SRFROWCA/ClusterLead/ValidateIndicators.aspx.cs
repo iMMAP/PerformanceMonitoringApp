@@ -92,25 +92,25 @@ namespace SRFROWCA.ClusterLead
                     ActivityDataId = activityDataId;
                     ReportId = reportId;
 
-                    using (ORSEntities db = new ORSEntities())
-                    {
-                        var reportInfo = db.Reports.Where(x => x.ReportId == ReportId).Select(y => new { y.YearId, y.MonthId, y.ProjectId, y.EmergencyLocationId }).ToList();
-                        if (reportInfo.Count > 0)
-                        {
-                            int yearId = reportInfo[0].YearId;
-                            int monthId = reportInfo[0].MonthId;
-                            int projectId = reportInfo[0].ProjectId;
-                            int emgLocationId = reportInfo[0].EmergencyLocationId;
+                    //using (ORSEntities db = new ORSEntities())
+                    //{
+                    //    var reportInfo = db.Reports.Where(x => x.ReportId == ReportId).Select(y => new { y.YearId, y.MonthId, y.ProjectId, y.EmergencyLocationId }).ToList();
+                    //    if (reportInfo.Count > 0)
+                    //    {
+                            //int yearId = reportInfo[0].YearId;
+                            //int monthId = reportInfo[0].MonthId;
+                            //int projectId = reportInfo[0].ProjectId;
+                            //int emgLocationId = reportInfo[0].EmergencyLocationId;
 
-                            ucIndComments.ActivityDataId = activityDataId;
-                            ucIndComments.YearId = yearId;
-                            ucIndComments.MonthId = monthId;
-                            ucIndComments.ProjectId = projectId;
-                            ucIndComments.EmgLocationId = UserInfo.EmergencyCountry;
-                            ucIndComments.LoadComments();
+                            //ucIndComments.ActivityDataId = activityDataId;
+                            //ucIndComments.YearId = yearId;
+                            //ucIndComments.MonthId = monthId;
+                            //ucIndComments.ProjectId = projectId;
+                            //ucIndComments.EmgLocationId = UserInfo.EmergencyCountry;
+                            ucIndComments.LoadComments(reportId, activityDataId);
                             mpeComments.Show();
-                        }
-                    }
+                    //    }
+                    //}
                 }
             }
         }
@@ -140,18 +140,18 @@ namespace SRFROWCA.ClusterLead
             string comments = ucIndComments.GetComments();
             if (!string.IsNullOrEmpty(comments))
             {
-                using (ORSEntities db = new ORSEntities())
-                {
-                    var reportInfo = db.Reports.Where(x => x.ReportId == ReportId).Select(y => new { y.YearId, y.MonthId, y.ProjectId, y.EmergencyLocationId }).ToList();
-                    if (reportInfo.Count > 0)
-                    {
-                        int yearId = reportInfo[0].YearId;
-                        int monthId = reportInfo[0].MonthId;
-                        int projectId = reportInfo[0].ProjectId;
-                        int emgLocationId = reportInfo[0].EmergencyLocationId;
-                        DBContext.Add("InsertIndicatorComments", new object[] { yearId, monthId, projectId, ActivityDataId, emgLocationId, comments, RC.GetCurrentUserId, DBNull.Value });
-                    }
-                }
+                //using (ORSEntities db = new ORSEntities())
+                //{
+                //    var reportInfo = db.Reports.Where(x => x.ReportId == ReportId).Select(y => new { y.YearId, y.MonthId, y.ProjectId, y.EmergencyLocationId }).ToList();
+                //    if (reportInfo.Count > 0)
+                //    {
+                //        int yearId = reportInfo[0].YearId;
+                //        int monthId = reportInfo[0].MonthId;
+                //        int projectId = reportInfo[0].ProjectId;
+                //        int emgLocationId = reportInfo[0].EmergencyLocationId;
+                        DBContext.Add("InsertIndicatorComments", new object[] { ReportId, ActivityDataId, comments, RC.GetCurrentUserId, DBNull.Value });
+                //    }
+                //}
             }
             //mpeComments.Show();
         }
