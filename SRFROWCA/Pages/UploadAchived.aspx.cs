@@ -178,7 +178,7 @@ namespace SRFROWCA.Pages
             if (!string.IsNullOrEmpty(excelConString))
             {
                 string[] sheets = GetExcelSheetNames(excelConString);
-                if (sheets.Count() > 0)
+                if (sheets.Length > 0)
                 {
                     DataTable dt = ReadDataInDataTable(excelConString, sheets[0]);
                     dt.Columns.Remove("Project Title");

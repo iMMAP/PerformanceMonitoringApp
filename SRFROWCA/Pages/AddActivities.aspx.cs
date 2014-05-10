@@ -99,8 +99,14 @@ namespace SRFROWCA.Pages
         }
         protected void gvActivities_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+
             if (e.CommandName == "AddComments")
             {
+                if (ReportId == 0)
+                {
+                    SaveReportMainInfo();
+                }
+
                 int rowIndex = int.Parse(e.CommandArgument.ToString());
 
                 int activityDataId = 0;
@@ -109,18 +115,18 @@ namespace SRFROWCA.Pages
                 if (activityDataId > 0)
                 {
                     CommentsIndId = activityDataId;
-                    int yearId = 0;
-                    int.TryParse(ddlYear.SelectedValue, out yearId);
-                    int monthId = 0;
-                    int.TryParse(ddlMonth.SelectedValue, out monthId);
-                    int projectId = RC.GetSelectedIntVal(rblProjects);
+                    //int yearId = 0;
+                    //int.TryParse(ddlYear.SelectedValue, out yearId);
+                    //int monthId = 0;
+                    //int.TryParse(ddlMonth.SelectedValue, out monthId);
+                    //int projectId = RC.GetSelectedIntVal(rblProjects);
 
-                    ucIndComments.ActivityDataId = activityDataId;
-                    ucIndComments.YearId = yearId;
-                    ucIndComments.MonthId = monthId;
-                    ucIndComments.ProjectId = projectId;
-                    ucIndComments.EmgLocationId = UserInfo.EmergencyCountry;
-                    ucIndComments.LoadComments();
+                    //ucIndComments.ActivityDataId = activityDataId;
+                    //ucIndComments.YearId = yearId;
+                    //ucIndComments.MonthId = monthId;
+                    //ucIndComments.ProjectId = projectId;
+                    //ucIndComments.EmgLocationId = UserInfo.EmergencyCountry;
+                    ucIndComments.LoadComments(ReportId, activityDataId);
                     mpeComments.Show();
                 }
             }
@@ -145,12 +151,12 @@ namespace SRFROWCA.Pages
             {
                 using (ORSEntities db = new ORSEntities())
                 {
-                    int yearId = 0;
-                    int.TryParse(ddlYear.SelectedValue, out yearId);
-                    int monthId = 0;
-                    int.TryParse(ddlMonth.SelectedValue, out monthId);
-                    int projectId = RC.GetSelectedIntVal(rblProjects);
-                    DBContext.Add("InsertIndicatorComments", new object[] { yearId, monthId, projectId, CommentsIndId, UserInfo.EmergencyCountry, comments, RC.GetCurrentUserId, DBNull.Value });
+                    //int yearId = 0;
+                    //int.TryParse(ddlYear.SelectedValue, out yearId);
+                    //int monthId = 0;
+                    //int.TryParse(ddlMonth.SelectedValue, out monthId);
+                    //int projectId = RC.GetSelectedIntVal(rblProjects);
+                    DBContext.Add("InsertIndicatorComments", new object[] { ReportId, CommentsIndId, comments, RC.GetCurrentUserId, DBNull.Value });
                 }
             }
         }
