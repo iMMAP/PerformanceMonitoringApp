@@ -269,7 +269,7 @@ namespace SRFROWCA.ClusterLead
             dt.Columns.Remove("PriorityActivityId");
             dt.Columns.Remove("ActivityDataId");
             dt.Columns.Remove("HumanitarianPriorityId");
-            dt.Columns.Remove("ActivityDataId1");
+            dt.Columns.Remove("ClusterIndicatorTargetId");
         }
 
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success)

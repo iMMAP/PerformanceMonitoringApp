@@ -46,8 +46,8 @@ namespace SRFROWCA.ClusterLead
 
         protected void gvIndicators_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            ObjPrToolTip.ObjectiveIconToolTip(e, 10);
-            ObjPrToolTip.PrioritiesIconToolTip(e, 11);
+            ObjPrToolTip.ObjectiveIconToolTip(e, 7);
+            ObjPrToolTip.PrioritiesIconToolTip(e, 8);
 
             if (e.Row.RowType == DataControlRowType.Header)
             {
@@ -57,9 +57,9 @@ namespace SRFROWCA.ClusterLead
                 e.Row.Cells[6].Visible = false;
                 e.Row.Cells[7].Visible = false;
                 e.Row.Cells[8].Visible = false;
-                e.Row.Cells[9].Visible = false;
-                e.Row.Cells[10].Visible = false;
-                e.Row.Cells[11].Visible = false;
+                //e.Row.Cells[9].Visible = false;
+                //e.Row.Cells[10].Visible = false;
+                //e.Row.Cells[11].Visible = false;
             }
 
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -70,9 +70,9 @@ namespace SRFROWCA.ClusterLead
                 e.Row.Cells[6].Visible = false;
                 e.Row.Cells[7].Visible = false;
                 e.Row.Cells[8].Visible = false;
-                e.Row.Cells[9].Visible = false;
-                e.Row.Cells[10].Visible = false;
-                e.Row.Cells[11].Visible = false;
+                //e.Row.Cells[9].Visible = false;
+                //e.Row.Cells[10].Visible = false;
+                //e.Row.Cells[11].Visible = false;
             }
         }
 
@@ -97,18 +97,18 @@ namespace SRFROWCA.ClusterLead
                     //    var reportInfo = db.Reports.Where(x => x.ReportId == ReportId).Select(y => new { y.YearId, y.MonthId, y.ProjectId, y.EmergencyLocationId }).ToList();
                     //    if (reportInfo.Count > 0)
                     //    {
-                            //int yearId = reportInfo[0].YearId;
-                            //int monthId = reportInfo[0].MonthId;
-                            //int projectId = reportInfo[0].ProjectId;
-                            //int emgLocationId = reportInfo[0].EmergencyLocationId;
+                    //int yearId = reportInfo[0].YearId;
+                    //int monthId = reportInfo[0].MonthId;
+                    //int projectId = reportInfo[0].ProjectId;
+                    //int emgLocationId = reportInfo[0].EmergencyLocationId;
 
-                            //ucIndComments.ActivityDataId = activityDataId;
-                            //ucIndComments.YearId = yearId;
-                            //ucIndComments.MonthId = monthId;
-                            //ucIndComments.ProjectId = projectId;
-                            //ucIndComments.EmgLocationId = UserInfo.EmergencyCountry;
-                            ucIndComments.LoadComments(reportId, activityDataId);
-                            mpeComments.Show();
+                    //ucIndComments.ActivityDataId = activityDataId;
+                    //ucIndComments.YearId = yearId;
+                    //ucIndComments.MonthId = monthId;
+                    //ucIndComments.ProjectId = projectId;
+                    //ucIndComments.EmgLocationId = UserInfo.EmergencyCountry;
+                    ucIndComments.LoadComments(reportId, activityDataId);
+                    mpeComments.Show();
                     //    }
                     //}
                 }
@@ -117,22 +117,29 @@ namespace SRFROWCA.ClusterLead
 
         protected void btnApprove_Click(object sender, EventArgs e)
         {
+            int reportId = 0;
             foreach (GridViewRow row in gvIndicators.Rows)
             {
                 if (row.RowType == DataControlRowType.DataRow)
                 {
-                    int reportId = Convert.ToInt32(gvIndicators.DataKeys[row.RowIndex].Values["ReportId"].ToString());
-                    int activityDataId = Convert.ToInt32(gvIndicators.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString()); 
+                    reportId = Convert.ToInt32(gvIndicators.DataKeys[row.RowIndex].Values["ReportId"].ToString());
+                    int reportDetailId = Convert.ToInt32(gvIndicators.DataKeys[row.RowIndex].Values["ReportDetailId"].ToString());
                     CheckBox cb = gvIndicators.Rows[row.RowIndex].FindControl("chkApproved") as CheckBox;
                     if (cb != null)
                     {
                         if (cb.Checked)
                         {
-                            ApproveIndicatorData(reportId, activityDataId, cb.Checked);
+                            ApproveIndicatorData(reportDetailId, cb.Checked);
                         }
                     }
                 }
             }
+
+            if (reportId > 0)
+            {
+                DBContext.Add("UpdateReporyApproved", new object[] { reportId, RC.GetCurrentUserId, DBNull.Value });
+            }
+            
         }
 
         protected void btnSaveComments_Click(object sender, EventArgs e)
@@ -149,7 +156,7 @@ namespace SRFROWCA.ClusterLead
                 //        int monthId = reportInfo[0].MonthId;
                 //        int projectId = reportInfo[0].ProjectId;
                 //        int emgLocationId = reportInfo[0].EmergencyLocationId;
-                        DBContext.Add("InsertIndicatorComments", new object[] { ReportId, ActivityDataId, comments, RC.GetCurrentUserId, DBNull.Value });
+                DBContext.Add("InsertIndicatorComments", new object[] { ReportId, ActivityDataId, comments, RC.GetCurrentUserId, DBNull.Value });
                 //    }
                 //}
             }
@@ -162,21 +169,10 @@ namespace SRFROWCA.ClusterLead
             //mpeComments.Hide();
         }
 
-        private void ApproveIndicatorData(int reportId, int activiytDataId, bool isApproved)
+        private void ApproveIndicatorData(int reportDetailId, bool isApproved)
         {
-            using (ORSEntities db = new ORSEntities())
-            {
-                var reportInfo = db.Reports.Where(x => x.ReportId == reportId).Select(y => new { y.YearId, y.MonthId, y.ProjectId, y.EmergencyLocationId }).ToList();
-                if (reportInfo.Count > 0)
-                {
-                    int yearId = reportInfo[0].YearId;
-                    int monthId = reportInfo[0].MonthId;
-                    int projectId = reportInfo[0].ProjectId;
-                    int emgLocationId = reportInfo[0].EmergencyLocationId;
-                    DBContext.Update("InsertUpdateApproveIndicator", new object[] { yearId, monthId, projectId, emgLocationId,
-                                                                                    activiytDataId, RC.GetCurrentUserId, isApproved, DBNull.Value });
-                }
-            }
+
+            DBContext.Update("InsertUpdateApproveIndicator", new object[] { reportDetailId, RC.GetCurrentUserId, isApproved, DBNull.Value });
         }
 
         //private void RejectIndicatorData(int reportDetailId)

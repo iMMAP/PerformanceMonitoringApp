@@ -121,7 +121,7 @@
                                             <div class="row">
                                                 <div id="scrolledGridView" style="overflow-x: auto; width: 100%;">
                                                     <asp:GridView ID="gvIndicators" runat="server" AutoGenerateColumns="True" HeaderStyle-BackColor="ButtonFace"
-                                                        DataKeyNames="ReportId,ActivityDataId" CssClass="imagetable" Width="100%" OnRowCommand="gvIndicators_RowCommand" OnRowDataBound="gvIndicators_RowDataBound">
+                                                        DataKeyNames="ReportId,ActivityDataId,ReportDetailId" CssClass="imagetable" Width="100%" OnRowCommand="gvIndicators_RowCommand" OnRowDataBound="gvIndicators_RowDataBound">
                                                         <HeaderStyle BackColor="Control"></HeaderStyle>
                                                         <RowStyle CssClass="istrow" />
                                                         <AlternatingRowStyle CssClass="altcolor" />
