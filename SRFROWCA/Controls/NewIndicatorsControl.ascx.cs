@@ -35,8 +35,9 @@ namespace SRFROWCA.Controls
             if (indicatorId > 0)
             {
                 bool isAdd = true;
-                int locationId = UserInfo.Country;
-                DBContext.Update("InsertDeleteSRPIndicaotr", new object[] { indicatorId, locationId, isAdd, userId, DBNull.Value });
+                int locationId = UserInfo.EmergencyCountry;
+                int clusterId = UserInfo.EmergencyCluster;
+                DBContext.Update("InsertDeleteSRPIndicaotr", new object[] { indicatorId, locationId, clusterId, isAdd, userId, DBNull.Value });
             }
         }
 

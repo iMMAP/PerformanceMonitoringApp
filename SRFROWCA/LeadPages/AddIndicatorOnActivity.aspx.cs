@@ -89,10 +89,10 @@ namespace SRFROWCA.LeadPages
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            using (TransactionScope scope = new TransactionScope())
+            //using (TransactionScope scope = new TransactionScope())
             {
                 SaveData();
-                scope.Complete();
+                //scope.Complete();
                 Response.Redirect("~/ClusterLead/AddSRPActivitiesFromMasterList.aspx");
             }
         }

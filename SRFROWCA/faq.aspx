@@ -62,7 +62,7 @@
                                         <a href="#faq-1-6" data-parent="#faq-list-1" data-toggle="collapse" class="accordion-toggle collapsed">
                                             <i class="icon-chevron-left pull-right" data-icon-hide="icon-chevron-down" data-icon-show="icon-chevron-left"></i><i class="icon-user bigger-130"></i>&nbsp;
                                             <asp:Localize ID="localGeneralQ6" runat="server"
-                                                Text="How can I get access to OPS?"
+                                                Text="How can I get access to ORS?"
                                                 meta:resourcekey="localGeneralQ6Resource1"></asp:Localize></a>
                                     </div>
                                     <div class="panel-collapse collapse" id="faq-1-6">
