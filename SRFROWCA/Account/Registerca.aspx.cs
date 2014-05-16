@@ -277,6 +277,15 @@ namespace SRFROWCA.Account
                 divOrg.Visible = true;
                 divCluster.Visible = false;
             }
+
+            if (ddlLocations.Visible)
+            {
+                if (HttpContext.Current.User.IsInRole("CountryAdmin"))
+                {
+                    ddlLocations.SelectedValue = UserInfo.Country.ToString();
+                    //ddlLocations.Enabled = false;
+                }
+            }
         }
 
         private bool DataIsValid()
