@@ -298,7 +298,7 @@
                         <li id="liBulkImportUser" runat="server"><a href="~/Pages/UploadAchived.aspx" id="A1"
                             runat="server"><i class="icon-list-alt"></i><span class="menu-text">Bulk Import Data</span>
                         </a></li>
-                        <li id="liPublicAllData" runat="server"><a href="~/Anonymous/AllDataPublic.aspx" id="menuePublicAllData"
+                        <li id="liPublicAllData" runat="server"><a href="~/Anonymous/AllData.aspx" id="menuePublicAllData"
                             runat="server"><i class="icon-table"></i>
                             <asp:Localize ID="Localize1" runat="server" Text="Custom Report" meta:resourcekey="localReportCustomReportResource1"></asp:Localize>
                         </a></li>
