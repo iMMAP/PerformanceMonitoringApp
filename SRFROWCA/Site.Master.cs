@@ -55,6 +55,9 @@ namespace SRFROWCA
                 spanWelcome.Visible = true;
                 liRegister.Visible = false;
 
+                liPublicAllData.Visible = false;
+                menuePublicAllData.Visible = false;
+
                 if (HttpContext.Current.User.IsInRole("User"))
                 {
                     ShowUserMenue();
@@ -172,6 +175,7 @@ namespace SRFROWCA
             liUserListing.Visible = isShow;
             liBulkImport.Visible = isShow;
             liBulkImportUser.Visible = isShow;
+            liORSDocuments.Visible = isShow;
         }
 
         private void ShowUserMenue()
@@ -194,6 +198,8 @@ namespace SRFROWCA
             liPivotSumOfCountryIndicators.Visible = !isShow;
             menuePivotSumOfCountryIndicators.Visible = !isShow;
             liBulkImportUser.Visible = isShow;
+            liORSDocuments.Visible = isShow;
+            menueORSDocuments.Visible = isShow;
         }
 
         private void ShowRegionalLeadMenue()
@@ -224,6 +230,8 @@ namespace SRFROWCA
             liClusterTarget.Visible = isShow;
             liPivotSumOfCountryIndicators.Visible = isShow;
             liBulkImport.Visible = isShow;
+            liORSDocuments.Visible = isShow;
+            menueORSDocuments.Visible = isShow;
             //liReportsTopIndicators1.Visible = isShow;
             //liReportsTopIndicatorsGeneral1.Visible = isShow;
             //liReportsTopIndicatorRegional1.Visible = isShow;
@@ -315,6 +323,11 @@ namespace SRFROWCA
             {
                 liReports.Attributes.Add("class", "active open");
                 liCustomReport.Attributes.Add("class", "active");
+                liPublicAllData.Attributes.Add("class", "active open");                
+            }
+            else if (uri == "/Anonymous/AllDataPublic.aspx")
+            {
+                liPublicAllData.Attributes.Add("class", "active");
             }
             else if (uri == "/ClusterLead/AddSRPActivitiesFromMasterList.aspx")
             {

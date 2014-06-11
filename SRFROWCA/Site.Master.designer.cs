@@ -1030,6 +1030,33 @@ namespace SRFROWCA {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor A1;
         
         /// <summary>
+        /// liPublicAllData control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liPublicAllData;
+        
+        /// <summary>
+        /// menuePublicAllData control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuePublicAllData;
+        
+        /// <summary>
+        /// Localize1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize Localize1;
+        
+        /// <summary>
         /// localContactUs control.
         /// </summary>
         /// <remarks>
@@ -1046,6 +1073,24 @@ namespace SRFROWCA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Localize localFAQHelp;
+        
+        /// <summary>
+        /// liORSDocuments control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liORSDocuments;
+        
+        /// <summary>
+        /// menueORSDocuments control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueORSDocuments;
         
         /// <summary>
         /// MainContent control.

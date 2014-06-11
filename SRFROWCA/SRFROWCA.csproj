@@ -161,6 +161,7 @@
     <Content Include="Admin\EmergencyLocations.aspx" />
     <Content Include="Admin\IndicatorActivities.aspx" />
     <Content Include="Admin\PriorityActivities.aspx" />
+    <Content Include="Anonymous\AllDataPublic.aspx" />
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="assets\css\ace-fonts.css" />
     <Content Include="assets\css\ace-rtl.min.css" />
@@ -313,6 +314,7 @@
     <Content Include="assets\orsimages\logo.png" />
     <Content Include="assets\orsimages\minus.png" />
     <Content Include="assets\orsimages\O.png" />
+    <Content Include="assets\orsimages\orslogo.png" />
     <Content Include="assets\orsimages\P.png" />
     <Content Include="assets\orsimages\pdf.png" />
     <Content Include="assets\orsimages\pencil.png" />
@@ -878,6 +880,7 @@
     <Content Include="OperationalPresenceDB.aspx" />
     <Content Include="OPS\OPSDataEntry.aspx" />
     <Content Include="OPS\UploadOPSProjectDetails.aspx" />
+    <Content Include="ORSDocuments\orsdocs.aspx" />
     <Content Include="Pages\AddActivities.aspx" />
     <Content Include="Pages\CreateProject.aspx" />
     <Content Include="Pages\ManageActivities.aspx" />
@@ -916,6 +919,7 @@
     <Content Include="ClusterLead\Web.config" />
     <Content Include="Admin\Web.config" />
     <Content Include="WebForm1.aspx" />
+    <Content Include="WebForm2.aspx" />
     <None Include="assets\font\cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff" />
     <None Include="assets\font\DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff" />
     <None Include="assets\font\fontawesome-webfontd41d.eot" />
@@ -1034,6 +1038,7 @@
     <None Include="HelpFiles\HelpDocs\HelpFrench\6_ORS_Language_FR_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpFrench\7_ORS_ClusterLead_FR_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpFrench\8_ORS_FAQ_FR_v3.pdf" />
+    <Content Include="ORSDocuments\Mali\Protection\Note Explicative Monitoring des 13 indicateurs du SRP.pdf" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -1168,6 +1173,13 @@
     </Compile>
     <Compile Include="Admin\PriorityActivities.aspx.designer.cs">
       <DependentUpon>PriorityActivities.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Anonymous\AllDataPublic.aspx.cs">
+      <DependentUpon>AllDataPublic.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Anonymous\AllDataPublic.aspx.designer.cs">
+      <DependentUpon>AllDataPublic.aspx</DependentUpon>
     </Compile>
     <Compile Include="Charts.aspx.cs">
       <DependentUpon>Charts.aspx</DependentUpon>
@@ -1509,6 +1521,13 @@
     <Compile Include="OPS\UploadOPSProjectDetails.aspx.designer.cs">
       <DependentUpon>UploadOPSProjectDetails.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ORSDocuments\orsdocs.aspx.cs">
+      <DependentUpon>orsdocs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORSDocuments\orsdocs.aspx.designer.cs">
+      <DependentUpon>orsdocs.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ORSModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1750,6 +1769,13 @@
     </Compile>
     <Compile Include="WebForm1.aspx.designer.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm2.aspx.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm2.aspx.designer.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

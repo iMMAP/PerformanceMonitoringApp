@@ -60,31 +60,32 @@
             <div class="navbar-container" id="navbar-container">
                 <div class="navbar-header pull-left">
                     <a href="<%# BaseURL %>/Default.aspx" class="navbar-brand">
-                        <img src="<%# BaseURL %>/assets/orsimages/logo.png" alt="OCHA" /></a>
+                        <img src="<%# BaseURL %>/assets/orsimages/logo.gif" alt="OCHA" /></a>
                     <!-- /.brand -->
                 </div>
                 <!-- /.navbar-header -->
                 <div class="navbar-header pull-right" role="navigation">
-                    <ul class="nav ace-nav">                        
-                    <li class="purple"><a data-toggle="dropdown" class="dropdown-toggle" href="#"><i
-                        class="icon-bell-alt icon-animated-bell"></i><span class="badge badge-important"><asp:Label ID="lblNumberOfNotifications" runat="server" Text=""></asp:Label></span>
-                    </a>
-                        <ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
-                             <asp:Repeater ID="rptNotifications" runat="server">
-                                <HeaderTemplate>
-                                    <li class="dropdown-header"><i class="icon-warning-sign"></i>Notifications </li>
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <li><a href="<%#Eval("PageURL")%>">
-                                        <span class="msg-body"><span class="msg-title"><span class="blue">
-                                        <%#Eval("Notification1")%></span>
-                                    </span></span></a></li>
-                                </ItemTemplate>
-                            </asp:Repeater>
-                            <li><a href="#">See all notifications <i class="icon-arrow-right"></i></a></li>
-                        </ul>
-                    </li>
-                    <%--<li class="green"><a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-envelope icon-animated-vertical">
+                    <ul class="nav ace-nav">
+                        <li class="purple"><a data-toggle="dropdown" class="dropdown-toggle" href="#"><i
+                            class="icon-bell-alt icon-animated-bell"></i><span class="badge badge-important">
+                                <asp:Label ID="lblNumberOfNotifications" runat="server" Text=""></asp:Label></span>
+                        </a>
+                            <ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+                                <asp:Repeater ID="rptNotifications" runat="server">
+                                    <HeaderTemplate>
+                                        <li class="dropdown-header"><i class="icon-warning-sign"></i>Notifications </li>
+                                    </HeaderTemplate>
+                                    <ItemTemplate>
+                                        <li><a href="<%#Eval("PageURL")%>">
+                                            <span class="msg-body"><span class="msg-title"><span class="blue">
+                                                <%#Eval("Notification1")%></span>
+                                            </span></span></a></li>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                                <li><a href="#">See all notifications <i class="icon-arrow-right"></i></a></li>
+                            </ul>
+                        </li>
+                        <%--<li class="green"><a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-envelope icon-animated-vertical">
                     </i><span class="badge badge-success">5</span> </a>
                         <ul class="pull-right dropdown-navbar navbar-green dropdown-menu dropdown-caret dropdown-close">
                             <asp:Repeater ID="rptMessages" runat="server">
@@ -203,7 +204,7 @@
                                 <asp:Localize ID="localAddSRPActivities" runat="server" Text="Country Indicators" meta:resourcekey="localAddSRPActivitiesResource1"></asp:Localize></span> </a></li>
                         <li id="liClusterTarget" runat="server"><a href="~/ClusterLead/ClusterIndicatorTargets.aspx"
                             id="menueClsuterTarget" runat="server"><i class="icon-sort-by-order"></i><span class="menu-text">
-                                <asp:Localize ID="localCluterTargets" runat="server" Text="Cluster Targets" meta:resourcekey="localCluterTargetsResource1"></asp:Localize></span> </a></li>                        
+                                <asp:Localize ID="localCluterTargets" runat="server" Text="Cluster Targets" meta:resourcekey="localCluterTargetsResource1"></asp:Localize></span> </a></li>
                         <li id="liValidate" runat="server"><a id="menueValidate" runat="server" href="#"
                             class="dropdown-toggle"><i class="icon-check"></i><span class="menu-text">
                                 <asp:Localize ID="localValidate" runat="server" Text="Validate" meta:resourcekey="localValidateResource1"></asp:Localize>
@@ -297,13 +298,20 @@
                         <li id="liBulkImportUser" runat="server"><a href="~/Pages/UploadAchived.aspx" id="A1"
                             runat="server"><i class="icon-list-alt"></i><span class="menu-text">Bulk Import Data</span>
                         </a></li>
+                        <li id="liPublicAllData" runat="server"><a href="~/Anonymous/AllDataPublic.aspx" id="menuePublicAllData"
+                            runat="server"><i class="icon-table"></i>
+                            <asp:Localize ID="Localize1" runat="server" Text="Custom Report" meta:resourcekey="localReportCustomReportResource1"></asp:Localize>
+                        </a></li>
                         <li><a href="../ContactUs/Contactus.aspx"><i class="icon-envelope-alt"></i><span
                             class="menu-text">
                             <asp:Localize ID="localContactUs" runat="server" Text="Contact Us" meta:resourcekey="localContactUsResource1"></asp:Localize></span> </a></li>
-
-
                         <li><a href="../faq.aspx"><i class="icon-comment-alt"></i><span class="menu-text">
                             <asp:Localize ID="localFAQHelp" runat="server" Text="FAQs& Help" meta:resourcekey="localFAQHelpResource1"></asp:Localize></span> </a></li>
+
+                        <li id="liORSDocuments" runat="server"><a href="~/ORSDocuments/orsdocs.aspx" id="menueORSDocuments"
+                            runat="server"><i class="icon-list-alt"></i><span class="menu-text">Documents
+                                </span>
+                        </a></li>
                     </ul>
                     <!-- /.nav-list -->
                     <div class="sidebar-collapse" id="sidebar-collapse">
@@ -371,7 +379,7 @@
             ga('create', 'UA-50659880-1', 'ocharowca.info');
             ga('send', 'pageview');
 
-</script>
+        </script>
     </form>
 </body>
 </html>
