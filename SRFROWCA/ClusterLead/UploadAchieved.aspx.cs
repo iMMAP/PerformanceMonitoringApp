@@ -283,7 +283,7 @@ namespace SRFROWCA.ClusterLead
 
                 return excelSheets;
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }
