@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
@@ -26,6 +23,8 @@ namespace SRFROWCA.Pages
             }
         }
 
+        #region Download Template
+
         private void PopulateProjects()
         {
             DataTable dt = GetUserProjects();
@@ -40,8 +39,6 @@ namespace SRFROWCA.Pages
             bool? isOPSProject = true;
             return DBContext.GetData("GetOrgProjectsOnLocation", new object[] { UserInfo.EmergencyCountry, UserInfo.Organization, isOPSProject });
         }
-
-        #region Download Template
 
         protected void btnDownload_Click(object sender, EventArgs e)
         {
@@ -62,15 +59,9 @@ namespace SRFROWCA.Pages
         {
             int? emgLocationId = UserInfo.EmergencyCountry;
 
-            //bool countryInd = chkCountryIndicators.Checked;
-            //bool regionalInd = chkRegionalInidcators.Checked;
-            //bool allInd = chkAllIndicators.Checked;
-
             bool countryInd = false;
             bool regionalInd = false;
             bool allInd = false;
-
-
             string projectIds = null;
             int? orgId = null;
 
@@ -114,18 +105,17 @@ namespace SRFROWCA.Pages
                 // Check if file is uploaded and is excel file
                 if (!IsValidFile()) return;
 
-                // Empty staging tables before data import.
-                //EmptyTable();
                 // Fill staging table (TempData1) in db to import data using this table.
                 FillStagingTableInDB();
 
                 // Import data from another staging table (TempData).
-                DataTable dt = ImportData();
+                DataTable dt = new DataTable();
+                dt = ImportData();
 
                 // If success or any error occoured in execution of procedure then show message to user.
                 if (dt.Rows.Count > 0)
                 {
-                    string message = "Data Imported Successfully! Records Updated " + dt.Rows[0][0].ToString() + "  ---  New Records " + dt.Rows[0][1].ToString();
+                    string message = "Data Imported Successfully!"; 
                     ShowMessage(message, RC.NotificationType.Success, false);
                 }
             }
@@ -135,7 +125,7 @@ namespace SRFROWCA.Pages
                 string message = "Some Error Occoured During Import, Please contact with site Admin!";
                 ShowMessage(message, RC.NotificationType.Error, false);
             }
-        }        
+        }
 
         // Get all emergencies.
         private object GetLocationEmergencies()
@@ -258,7 +248,7 @@ namespace SRFROWCA.Pages
 
         private void UnpivotStagingTable(string locationColumnNames, string locationColumnNamesWithAliases, string locationColumnNamesAlias)
         {
-            DBContext.GetData("UnpivotImportAchievedStagingTable", new object[] { locationColumnNames, locationColumnNamesWithAliases, locationColumnNamesAlias });
+            DBContext.GetData("UnpivotUserImportAchievedStagingTable", new object[] { locationColumnNames, locationColumnNamesWithAliases, locationColumnNamesAlias });
         }
 
         // Add 'LocationEmergencyId' and 'UserId' in DataTable.
@@ -351,7 +341,7 @@ namespace SRFROWCA.Pages
         private DataTable ImportData()
         {
             int yearId = 10;
-            return DBContext.GetData("ImportCLDataFromStagingTable", new object[] {UserInfo.EmergencyCountry, UserInfo.EmergencyCluster,
+            return DBContext.GetData("ImportUserCLDataFromStagingTable", new object[] {UserInfo.EmergencyCountry, UserInfo.EmergencyCluster,
                                                                                     yearId, RC.GetCurrentUserId, RC.IsClusterLead(User)});
         }
 
@@ -368,17 +358,6 @@ namespace SRFROWCA.Pages
             DataTable dt = new DataTable();
             dt.Columns.Add(idColumn);
             dt.Columns.Add("Month", typeof(string));
-            //dt.Columns.Add("ClusterId", typeof(int));
-            //dt.Columns.Add("EmergencyClusterId", typeof(int));
-            //dt.Columns.Add("ObjectiveId", typeof(int));
-            //dt.Columns.Add("ClusterObjectiveId", typeof(int));
-            //dt.Columns.Add("PriorityId", typeof(int));
-            //dt.Columns.Add("ObjectivePriorityId", typeof(int));
-            //dt.Columns.Add("Activity", typeof(string));
-            //dt.Columns.Add("PriorityActivityId", typeof(int));
-            //dt.Columns.Add("Data", typeof(string));
-            //dt.Columns.Add("ActivityDataId", typeof(int));
-
             return dt;
         }
 
@@ -391,15 +370,14 @@ namespace SRFROWCA.Pages
                             CREATE TABLE [ImportCLDataStaging_Temp](
 	                            [Id] [int] IDENTITY(1,1) NOT NULL,
 	                            [Month] [nvarchar](20) NULL,
-	                            [ProjectCode] [nvarchar](20) NULL,
-	                            [Objective] [nvarchar](100) NULL,
-	                            [Priority] [nvarchar](100) NULL,
-	                            [Activity] [nvarchar](1000) NULL,
+	                            [ProjectCode] [nvarchar](50) NULL,
+	                            [Objective] [nvarchar](500) NULL,
+	                            [Priority] [nvarchar](500) NULL,
+	                            [Activity] [nvarchar](2000) NULL,
 	                            [Indicator Id] [int] NULL,
-	                            [Indicator] [nvarchar](1000) NULL,
+	                            [Indicator] [nvarchar](2000) NULL,
 	                            [Accumulative] [nvarchar](10) NULL,
-	                            [Mid Year Target] [int] NULL,
-	                            [Full Year Target] [int] NULL";
+                                [Unit] [nvarchar](150) NULL ";
 
             foreach (DataColumn column in dt.Columns)
             {
@@ -425,27 +403,36 @@ namespace SRFROWCA.Pages
                             CREATE TABLE [ImportCLDataStaging_Temp2](
 	                            [Id] [int] NOT NULL,
 	                            [Month] [nvarchar](20) NULL,
-	                            [ProjectCode] [nvarchar](20) NULL,
-	                            [Objective] [nvarchar](100) NULL,
-	                            [Priority] [nvarchar](100) NULL,
-	                            [Activity] [nvarchar](1000) NULL,
+	                            [ProjectCode] [nvarchar](50) NULL,
+	                            [Objective] [nvarchar](500) NULL,
+	                            [Priority] [nvarchar](500) NULL,
+	                            [Activity] [nvarchar](2000) NULL,
 	                            [Indicator Id] [int] NULL,
-	                            [Indicator] [nvarchar](1000) NULL,
+	                            [Indicator] [nvarchar](2000) NULL,
 	                            [Accumulative] [nvarchar](10) NULL,
-	                            [Mid Year Target] [int] NULL,
-	                            [Full Year Target] [int] NULL";
-            int i = 1;
+                                [Unit] [nvarchar](150) NULL ";
+            int i = 0;
             foreach (DataColumn column in dt.Columns)
             {
                 if (LocationColumn(column.ColumnName))
                 {
-                    query += " ,[" + column.ColumnName + "_" + i.ToString() + "] int NULL";
                     i += 1;
+                    string j = "";
+                    if (i < 10)
+                    {
+                        j = i.ToString("00");
+                    }
+                    else
+                    {
+                        j = i.ToString();
+                    }
+
+                    query += " ,[" + column.ColumnName + "_" + j.ToString() + "] int NULL";
                 }
             }
 
             query += " ) ";
-
+            
             return query;
         }
 
@@ -457,14 +444,25 @@ namespace SRFROWCA.Pages
             {
                 if (LocationColumn(column.ColumnName))
                 {
-                    if (string.IsNullOrEmpty(locationNames))
+                    string j = "";
+                    if (i < 10)
                     {
-                        locationNames += column.ColumnName + "_" + i.ToString();
+                        j = i.ToString("00");
                     }
                     else
                     {
-                        locationNames += "," + column.ColumnName + "_" + i.ToString();
+                        j = i.ToString();
                     }
+
+                    if (string.IsNullOrEmpty(locationNames))
+                    {
+                        locationNames += column.ColumnName + "_" + j.ToString();
+                    }
+                    else
+                    {
+                        locationNames += "," + column.ColumnName + "_" + j.ToString();
+                    }
+
                     i += 1;
                 }
             }
@@ -480,13 +478,23 @@ namespace SRFROWCA.Pages
             {
                 if (LocationColumn(column.ColumnName))
                 {
-                    if (string.IsNullOrEmpty(locationNames))
+                    string j = "";
+                    if (i < 10)
                     {
-                        locationNames += column.ColumnName + "_" + i.ToString() + " AS t_" + column.ColumnName + i.ToString();
+                        j = i.ToString("00");
                     }
                     else
                     {
-                        locationNames += "," + column.ColumnName + "_" + i.ToString() + " AS t_" + column.ColumnName + i.ToString();
+                        j = i.ToString();
+                    }
+
+                    if (string.IsNullOrEmpty(locationNames))
+                    {
+                        locationNames += column.ColumnName + "_" + j.ToString() + " AS t_" + column.ColumnName + j.ToString();
+                    }
+                    else
+                    {
+                        locationNames += "," + column.ColumnName + "_" + j.ToString() + " AS t_" + column.ColumnName + j.ToString();
                     }
                     i += 1;
                 }
@@ -503,13 +511,24 @@ namespace SRFROWCA.Pages
             {
                 if (LocationColumn(column.ColumnName))
                 {
-                    if (string.IsNullOrEmpty(locationNames))
+                    string j = "";
+
+                    if (i < 10)
                     {
-                        locationNames += "t_" + column.ColumnName + i.ToString();
+                        j = i.ToString("00");
                     }
                     else
                     {
-                        locationNames += "," + "t_" + column.ColumnName + i.ToString();
+                        j = i.ToString();
+                    }
+
+                    if (string.IsNullOrEmpty(locationNames))
+                    {
+                        locationNames += "t_" + column.ColumnName + j.ToString();
+                    }
+                    else
+                    {
+                        locationNames += "," + "t_" + column.ColumnName + j.ToString();
                     }
 
                     i += 1;
@@ -522,7 +541,7 @@ namespace SRFROWCA.Pages
         private bool LocationColumn(string name)
         {
             if (name == "Id" || name == "Month" || name == "ProjectCode" || name == "Objective" || name == "Priority" || name == "Activity" ||
-                name == "Indicator Id" || name == "Indicator" || name == "Accumulative" || name == "Mid Year Target" || name == "Full Year Target")
+                name == "Indicator Id" || name == "Indicator" || name == "Accumulative" || name == "Unit")
             {
                 return false;
             }
