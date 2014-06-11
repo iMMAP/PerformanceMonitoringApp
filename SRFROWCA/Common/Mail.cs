@@ -20,12 +20,23 @@ namespace SRFROWCA.Common
         //    client.Send(from, to, subject, body);
         //}
 
+        //internal static void SendMail(MailMessage mailMsg)
+        //{
+        //    var client = new SmtpClient("smtp.googlemail.com", 587)
+        //    {
+        //        Credentials = new NetworkCredential("orsocharowca@gmail.com", "rOcha$w2Af"),
+        //        EnableSsl = true
+        //    };
+
+        //    client.Send(mailMsg);
+        //}
+
         internal static void SendMail(MailMessage mailMsg)
         {
-            var client = new SmtpClient("smtp.googlemail.com", 587)
+            var client = new SmtpClient("41.191.198.197", 25)
             {
-                Credentials = new NetworkCredential("orsocharowca@gmail.com", "rOcha$w2Af"),
-                EnableSsl = true
+                Credentials = new NetworkCredential("dakar@ochasomalia.org", "Ocha123"),
+                //EnableSsl = true
             };
 
             client.Send(mailMsg);
