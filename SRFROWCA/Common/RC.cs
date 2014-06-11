@@ -420,6 +420,13 @@ namespace SRFROWCA.Common
             return ids;
         }
 
+        internal static int? GetSelectedValue(DropDownList ddl)
+        {
+            int val = 0;
+            int.TryParse(ddl.SelectedValue, out val);
+            return val > 0 ? val : (int?)null;
+        }
+
         private static string GetSelectedItems(object sender)
         {
             string itemIds = "";
@@ -439,6 +446,43 @@ namespace SRFROWCA.Common
             }
 
             return itemIds;
+        }
+
+        // Get multiple selected values from drop down checkbox.
+        internal static string GetItemsText(object sender)
+        {
+            string items = GetSelectedItemsText(sender);
+            items = !string.IsNullOrEmpty(items) ? items : null;
+            return items;
+        }
+
+        private static string GetSelectedItemsText(object sender)
+        {
+            string items = "";
+            int i = 0;
+            foreach (ListItem item in (sender as ListControl).Items)
+            {
+                if (item.Selected)
+                {
+                    i++;
+                    if (items != "")
+                    {
+                        items += ", " + item.Text;
+                    }
+                    else
+                    {
+                        items += item.Text;
+                    }
+                }
+
+                if (i > 3)
+                {
+                    items += "... and more";
+                    break;
+                }
+            }
+
+            return items;
         }
 
         internal static int GetSelectedIntVal(ListControl ctl)
