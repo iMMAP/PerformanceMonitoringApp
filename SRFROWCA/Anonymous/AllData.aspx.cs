@@ -17,9 +17,16 @@ namespace SRFROWCA.Anonymous
             //LoadData();
             gvReport.DataSource = new DataTable();
             gvReport.DataBind();
-
             // Populate all drop downs.
             PopulateDropDowns();
+
+            if (!this.User.Identity.IsAuthenticated)
+            {
+                ltrlValidated.Visible = false;
+                cbValidated.Visible = false;
+                cbNotValidated.Visible = false;
+            }
+
             LoadData();
         }
 
@@ -41,7 +48,7 @@ namespace SRFROWCA.Anonymous
             PopulateDropDowns();
             txtFromDate.Text = "";
             txtToDate.Text = "";
-            ddlFundingStatus.SelectedValue = "0";
+            
             cbORSProjects.Checked = cbORSProjects.Checked = cbRegional.Checked = cbCountry.Checked = false;
             cbFunded.Checked = cbNotFunded.Checked = cbValidated.Checked = cbNotValidated.Checked = false;
 
@@ -96,12 +103,7 @@ namespace SRFROWCA.Anonymous
         protected void ddl_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadDataOnMultipleCheckBoxControl();
-        }
-
-        protected void ddlFundingStatus_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadData();
-        }
+        }       
 
         protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -180,9 +182,9 @@ namespace SRFROWCA.Anonymous
 
         private void PopulateActivities()
         {
-            string clusterIds = GetSelectedValues(ddlClusters);
-            string objIds = GetSelectedValues(ddlObjectives);
-            string priorityIds = GetSelectedValues(ddlPriority);
+            string clusterIds = RC.GetSelectedValues(ddlClusters);
+            string objIds = RC.GetSelectedValues(ddlObjectives);
+            string priorityIds = RC.GetSelectedValues(ddlPriority);
 
             if (clusterIds != null)
             {
@@ -195,10 +197,10 @@ namespace SRFROWCA.Anonymous
 
         private void PopulateIndicators()
         {
-            string clusterIds = GetSelectedValues(ddlClusters);
-            string objIds = GetSelectedValues(ddlObjectives);
-            string priorityIds = GetSelectedValues(ddlPriority);
-            string activityIds = GetSelectedValues(ddlActivities);
+            string clusterIds = RC.GetSelectedValues(ddlClusters);
+            string objIds = RC.GetSelectedValues(ddlObjectives);
+            string priorityIds = RC.GetSelectedValues(ddlPriority);
+            string activityIds = RC.GetSelectedValues(ddlActivities);
 
             if (clusterIds != null)
             {
@@ -260,7 +262,7 @@ namespace SRFROWCA.Anonymous
 
         private void PopulateAdmin1()
         {
-            string countryIds = GetSelectedValues(ddlCountry);
+            string countryIds = RC.GetSelectedValues(ddlCountry);
             if (countryIds != null)
             {
                 ddlAdmin1.DataValueField = "LocationId";
@@ -274,8 +276,8 @@ namespace SRFROWCA.Anonymous
         // Populate Locations drop down
         private void PopulateAdmin2()
         {
-            string admin1Ids = GetSelectedValues(ddlAdmin1);
-            string countryIds = GetSelectedValues(ddlCountry);
+            string admin1Ids = RC.GetSelectedValues(ddlAdmin1);
+            string countryIds = RC.GetSelectedValues(ddlCountry);
             if (countryIds != null)
             {
 
@@ -369,6 +371,8 @@ namespace SRFROWCA.Anonymous
         // Load data on the basis of filter criteria.
         private void LoadData()
         {
+            divSearchCriteria.InnerHtml = GetSearchCriteria();
+
             DataTable dt = GetReportData();
 
             // Cnt column has total number of records in resultset.
@@ -398,7 +402,7 @@ namespace SRFROWCA.Anonymous
         // Get filter criteria and create an object with parameter values.
         private object[] GetParamValues()
         {
-            string monthIds = GetSelectedValues(ddlMonth);
+            string monthIds = RC.GetSelectedValues(ddlMonth);
             string locationIds = GetLocationIds();
             if (string.IsNullOrEmpty(locationIds))
             {
@@ -407,14 +411,13 @@ namespace SRFROWCA.Anonymous
                     locationIds = UserInfo.Country.ToString();
                 }
             }
-            string clusterIds = GetSelectedValues(ddlClusters);
-            string orgIds = GetSelectedValues(ddlOrganizations);
-            string objIds = GetSelectedValues(ddlObjectives);
-            string prIds = GetSelectedValues(ddlPriority);
-            string actIds = GetSelectedValues(ddlActivities);
-            string indIds = GetSelectedValues(ddlIndicators);
-            string projectIds = GetSelectedValues(ddlProjects);
-            string fts = ddlFundingStatus.SelectedValue != "0" ? ddlFundingStatus.SelectedItem.Text : null;
+            string clusterIds = RC.GetSelectedValues(ddlClusters);
+            string orgIds = RC.GetSelectedValues(ddlOrganizations);
+            string objIds = RC.GetSelectedValues(ddlObjectives);
+            string prIds = RC.GetSelectedValues(ddlPriority);
+            string actIds = RC.GetSelectedValues(ddlActivities);
+            string indIds = RC.GetSelectedValues(ddlIndicators);
+            string projectIds = RC.GetSelectedValues(ddlProjects);
             int? fromMonth = !string.IsNullOrEmpty(txtFromDate.Text.Trim()) ? Convert.ToInt32(txtFromDate.Text.Trim().Substring(0, 2)) : (int?)null;
             int? toMonth = !string.IsNullOrEmpty(txtToDate.Text.Trim()) ? Convert.ToInt32(txtToDate.Text.Trim().Substring(0, 2)) : (int?)null;
             int? regionalInd = cbRegional.Checked ? 1 : (int?)null;
@@ -422,16 +425,59 @@ namespace SRFROWCA.Anonymous
             int? funded = cbFunded.Checked ? 1 : (int?)null;
             int? notFunded = cbNotFunded.Checked ? 1 : (int?)null;
             int? isOPS = cbOPSProjects.Checked && cbORSProjects.Checked ? null : cbOPSProjects.Checked ? 1 : cbORSProjects.Checked ? 0 : (int?)null;
-            int? isApproved = cbValidated.Checked && cbNotValidated.Checked ? null : cbValidated.Checked ? 0 : cbNotValidated.Checked ? 1 : (int?)null;
+            int? isApproved = 0;
+            if (this.User.Identity.IsAuthenticated)
+            {
+                isApproved = cbValidated.Checked && cbNotValidated.Checked ? null : cbValidated.Checked ? 0 : cbNotValidated.Checked ? 1 : (int?)null;
+            }
             int pageSize = gvReport.PageSize;
             int pageIndex = GridPageIndex; //gvReport.PageIndex;
             int langId = RC.SelectedSiteLanguageId;
             //SetHFQueryString(monthIds, locationIds, clusterIds, orgIds);
 
             return new object[] {monthIds, locationIds, clusterIds, orgIds, 
-                                    objIds, prIds, actIds, indIds, projectIds, fts,
+                                    objIds, prIds, actIds, indIds, projectIds,
                                     fromMonth, toMonth, regionalInd, countryInd, funded, notFunded,
                                     isOPS, isApproved, pageIndex, pageSize, Convert.ToInt32(SQLPaging), langId };
+        }
+
+        private string GetSearchCriteria()
+        {
+            string months = RC.GetItemsText(ddlMonth);
+            string country = RC.GetItemsText(ddlCountry);
+            string admin1 = RC.GetItemsText(ddlAdmin1);
+            string clusters = RC.GetItemsText(ddlClusters);
+            string orgs = RC.GetItemsText(ddlOrganizations);
+            string objs = RC.GetItemsText(ddlObjectives);
+            string prs = RC.GetItemsText(ddlPriority);
+            string acts = RC.GetItemsText(ddlActivities);
+            string inds = RC.GetItemsText(ddlIndicators);
+            string projects = RC.GetItemsText(ddlProjects);
+
+            string criteria = "";
+            criteria += MakeSearchCriteriaString("Clusters: ", clusters);
+            criteria += MakeSearchCriteriaString("Organizations: ", orgs);
+            criteria += MakeSearchCriteriaString("Country: ", country);
+            criteria += MakeSearchCriteriaString("Admin1: ", admin1);
+            criteria += MakeSearchCriteriaString("Projects: ", projects);
+            criteria += MakeSearchCriteriaString("Months: ", months);
+            criteria += MakeSearchCriteriaString("Objectives: ", objs);
+            criteria += MakeSearchCriteriaString("Priorities: ", prs);
+            criteria += MakeSearchCriteriaString("Activities: ", acts);
+            criteria += MakeSearchCriteriaString("Indicators: ", inds);
+
+            return criteria;
+        }
+
+        private string MakeSearchCriteriaString(string caption, string items)
+        {
+            string criteria = "";
+            if (!string.IsNullOrEmpty(items))
+            {
+                criteria += "<b>" + caption + "</b>" + items + "&nbsp;&nbsp;";
+            }
+
+            return criteria;
         }
 
         private string GetLocationIds()
@@ -439,15 +485,15 @@ namespace SRFROWCA.Anonymous
             string locationIds = null;
             if ((int)LastLocationType == 1)
             {
-                locationIds = GetSelectedValues(ddlCountry);
+                locationIds = RC.GetSelectedValues(ddlCountry);
             }
             else if ((int)LastLocationType == 2)
             {
-                locationIds = GetSelectedValues(ddlAdmin1);
+                locationIds = RC.GetSelectedValues(ddlAdmin1);
             }
             else if ((int)LastLocationType == 3)
             {
-                locationIds = GetSelectedValues(ddlAdmin2);
+                locationIds = RC.GetSelectedValues(ddlAdmin2);
             }
 
             if (locationIds == "0" || locationIds == null)
@@ -456,35 +502,6 @@ namespace SRFROWCA.Anonymous
             }
 
             return locationIds;
-        }
-
-        // Get multiple selected values from drop down checkbox.
-        private string GetSelectedValues(object sender)
-        {
-            string ids = GetSelectedItems(sender);
-            ids = !string.IsNullOrEmpty(ids) ? ids : null;
-            return ids;
-        }
-
-        private string GetSelectedItems(object sender)
-        {
-            string itemIds = "";
-            foreach (ListItem item in (sender as ListControl).Items)
-            {
-                if (item.Selected)
-                {
-                    if (itemIds != "")
-                    {
-                        itemIds += "," + item.Value;
-                    }
-                    else
-                    {
-                        itemIds += item.Value;
-                    }
-                }
-            }
-
-            return itemIds;
         }
 
         private string GetSortDirection(string column)

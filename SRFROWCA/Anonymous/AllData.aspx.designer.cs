@@ -184,6 +184,15 @@ namespace SRFROWCA.Anonymous {
         protected global::System.Web.UI.WebControls.TextBox txtToDate;
         
         /// <summary>
+        /// ltrlValidated control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltrlValidated;
+        
+        /// <summary>
         /// cbValidated control.
         /// </summary>
         /// <remarks>
@@ -256,15 +265,6 @@ namespace SRFROWCA.Anonymous {
         protected global::System.Web.UI.WebControls.CheckBox cbNotFunded;
         
         /// <summary>
-        /// ddlFundingStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlFundingStatus;
-        
-        /// <summary>
         /// btnSearch control.
         /// </summary>
         /// <remarks>
@@ -281,6 +281,15 @@ namespace SRFROWCA.Anonymous {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnReset;
+        
+        /// <summary>
+        /// divSearchCriteria control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSearchCriteria;
         
         /// <summary>
         /// gvReport control.
