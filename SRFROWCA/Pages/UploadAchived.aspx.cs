@@ -227,7 +227,7 @@ namespace SRFROWCA.Pages
 
                 return excelSheets;
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }
