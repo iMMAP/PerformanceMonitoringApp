@@ -22,6 +22,8 @@
         <!-- .breadcrumb -->
     </div>
     <div class="page-content">
+        <div id="divMsg">
+        </div>
         <table width="100%">
             <tr>
                 <td>
@@ -120,12 +122,15 @@
                                         <div class="form-group">
                                             <div class="row">
                                                 <div id="scrolledGridView" style="overflow-x: auto; width: 100%;">
-                                                    <asp:GridView ID="gvIndicators" runat="server" AutoGenerateColumns="True" HeaderStyle-BackColor="ButtonFace"
+                                                    <asp:GridView ID="gvIndicators" runat="server" AutoGenerateColumns="False" HeaderStyle-BackColor="ButtonFace"
                                                         DataKeyNames="ReportId,ActivityDataId,ReportDetailId" CssClass="imagetable" Width="100%" OnRowCommand="gvIndicators_RowCommand" OnRowDataBound="gvIndicators_RowDataBound">
                                                         <HeaderStyle BackColor="Control"></HeaderStyle>
                                                         <RowStyle CssClass="istrow" />
                                                         <AlternatingRowStyle CssClass="altcolor" />
                                                         <Columns>
+                                                            <asp:BoundField DataField="ObjectiveId" HeaderText="Obj" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden"/>
+                                                            <asp:BoundField DataField="HumanitarianPriorityId" HeaderText="Pr" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden"/>
+                                                            <asp:BoundField DataField="IsSRP" HeaderText="Country" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden"/>
                                                             <asp:TemplateField HeaderText="Select" ItemStyle-Width="40px">
                                                                 <ItemTemplate>
                                                                     <asp:CheckBox ID="chkApproved" runat="server" Checked='<%# Eval("IsApproved") %>'
@@ -143,10 +148,17 @@
                                                             <asp:TemplateField ItemStyle-Wrap="false" meta:resourcekey="TemplateFieldResource2">
                                                                 <ItemTemplate>
                                                                     <asp:Image ID="imgObjective" runat="server" AlternateText="Obj" />
-                                                                    <asp:Image ID="imgPriority" runat="server" AlternateText="Obj" />
+                                                                    <asp:Image ID="imgPriority" runat="server" AlternateText="PR" />
+                                                                    <asp:Image ID="imgCind" runat="server" AlternateText="C" />
                                                                 </ItemTemplate>
                                                                 <ItemStyle Wrap="False"></ItemStyle>
                                                             </asp:TemplateField>
+                                                            <asp:BoundField DataField="Activity" HeaderText="Activity" />
+                                                            <asp:BoundField DataField="Indicator" HeaderText="Indicator" />
+                                                            <asp:BoundField DataField="Location" HeaderText="Location" />
+                                                            <asp:BoundField DataField="AnnualTarget" HeaderText="Annual Target" />
+                                                            <asp:BoundField DataField="Achieved" HeaderText="Monthly Achieved" />
+
                                                         </Columns>
                                                     </asp:GridView>
                                                 </div>

@@ -25,6 +25,15 @@ namespace SRFROWCA.ClusterLead
             }
         }
 
+        internal override void BindGridData()
+        {
+            int reportId = 0;
+            int.TryParse(Request.QueryString["rid"].ToString(), out reportId);
+
+            LoadReportMainInfo(reportId);
+            LoadIndicators(reportId);
+        }
+
         private void LoadReportMainInfo(int reportId)
         {
             DataTable dt = DBContext.GetData("GetReportMainInfo", new object[] { reportId });
@@ -46,34 +55,35 @@ namespace SRFROWCA.ClusterLead
 
         protected void gvIndicators_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            ObjPrToolTip.ObjectiveIconToolTip(e, 7);
-            ObjPrToolTip.PrioritiesIconToolTip(e, 8);
+            ObjPrToolTip.ObjectiveIconToolTip(e, 0);
+            ObjPrToolTip.PrioritiesIconToolTip(e, 1);
+            ObjPrToolTip.CountryIndicatorIcon(e, 2);
 
-            if (e.Row.RowType == DataControlRowType.Header)
-            {
-                e.Row.Cells[3].Visible = false;
-                e.Row.Cells[4].Visible = false;
-                e.Row.Cells[5].Visible = false;
-                e.Row.Cells[6].Visible = false;
-                e.Row.Cells[7].Visible = false;
-                e.Row.Cells[8].Visible = false;
-                //e.Row.Cells[9].Visible = false;
-                //e.Row.Cells[10].Visible = false;
-                //e.Row.Cells[11].Visible = false;
-            }
+            //if (e.Row.RowType == DataControlRowType.Header)
+            //{
+            //    e.Row.Cells[3].Visible = false;
+            //    e.Row.Cells[4].Visible = false;
+            //    e.Row.Cells[5].Visible = false;
+            //    e.Row.Cells[6].Visible = false;
+            //    e.Row.Cells[7].Visible = false;
+            //    e.Row.Cells[8].Visible = false;
+            //    //e.Row.Cells[9].Visible = false;
+            //    //e.Row.Cells[10].Visible = false;
+            //    //e.Row.Cells[11].Visible = false;
+            //}
 
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                e.Row.Cells[3].Visible = false;
-                e.Row.Cells[4].Visible = false;
-                e.Row.Cells[5].Visible = false;
-                e.Row.Cells[6].Visible = false;
-                e.Row.Cells[7].Visible = false;
-                e.Row.Cells[8].Visible = false;
-                //e.Row.Cells[9].Visible = false;
-                //e.Row.Cells[10].Visible = false;
-                //e.Row.Cells[11].Visible = false;
-            }
+            //if (e.Row.RowType == DataControlRowType.DataRow)
+            //{
+            //    e.Row.Cells[3].Visible = false;
+            //    e.Row.Cells[4].Visible = false;
+            //    e.Row.Cells[5].Visible = false;
+            //    e.Row.Cells[6].Visible = false;
+            //    e.Row.Cells[7].Visible = false;
+            //    e.Row.Cells[8].Visible = false;
+            //    //e.Row.Cells[9].Visible = false;
+            //    //e.Row.Cells[10].Visible = false;
+            //    //e.Row.Cells[11].Visible = false;
+            //}
         }
 
         protected void gvIndicators_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -127,19 +137,17 @@ namespace SRFROWCA.ClusterLead
                     CheckBox cb = gvIndicators.Rows[row.RowIndex].FindControl("chkApproved") as CheckBox;
                     if (cb != null)
                     {
-                        if (cb.Checked)
-                        {
-                            ApproveIndicatorData(reportDetailId, cb.Checked);
-                        }
+                        ApproveIndicatorData(reportDetailId, cb.Checked);
                     }
                 }
             }
 
-            if (reportId > 0)
-            {
-                DBContext.Add("UpdateReporyApproved", new object[] { reportId, RC.GetCurrentUserId, DBNull.Value });
-            }
-            
+            //if (reportId > 0)
+            //{
+            //    DBContext.Add("UpdateReporyApproved", new object[] { reportId, RC.GetCurrentUserId, DBNull.Value });
+            //}
+
+            ShowMessage("Data Saved Successfully!");
         }
 
         protected void btnSaveComments_Click(object sender, EventArgs e)
@@ -173,6 +181,11 @@ namespace SRFROWCA.ClusterLead
         {
 
             DBContext.Update("InsertUpdateApproveIndicator", new object[] { reportDetailId, RC.GetCurrentUserId, isApproved, DBNull.Value });
+        }
+
+        private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success)
+        {
+            RC.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, true, 500);
         }
 
         //private void RejectIndicatorData(int reportDetailId)

@@ -70,8 +70,8 @@
         <!-- .breadcrumb -->
     </div>
     <div class="page-content">
-
-
+         <div id="divMsg">
+        </div>
         <div class="row">
             <div class="col-sm-3">
                 <div class="widget-box no-border">

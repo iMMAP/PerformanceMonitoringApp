@@ -18,6 +18,11 @@ namespace SRFROWCA.ClusterLead
             {
                 PopulateDropDowns();
 
+                if (Session["ClusterLeadValidateReportCountryInd"] != null)
+                {
+                    cbCountryIndicators.Checked = true;
+                }
+
                 if (RC.IsCountryAdmin(User))
                 {
                     PopulateClusters();
@@ -128,8 +133,10 @@ namespace SRFROWCA.ClusterLead
 
             id = RC.GetSelectedIntVal(ddlOrganizations);
             int? orgId = id == 0 ? (int?)null : id;
+            
+            bool srpInd = cbCountryIndicators.Checked;
 
-            gvReports.DataSource = DBContext.GetData("GetCountryReports", new object[] { emgLocationId, clusterId, projectID, monthId, orgId });
+            gvReports.DataSource = DBContext.GetData("GetCountryReports", new object[] { emgLocationId, clusterId, projectID, monthId, orgId, srpInd });
             gvReports.DataBind();
         }
 
@@ -153,6 +160,20 @@ namespace SRFROWCA.ClusterLead
 
         protected void ddl_SelectedIndexChanged(object sender, EventArgs e)
         {
+            LoadReports();
+        }
+
+        protected void cbCountryIndicators_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbCountryIndicators.Checked)
+            {
+                Session["ClusterLeadValidateReportCountryInd"] = 1;
+            }
+            else
+            {
+                Session["ClusterLeadValidateReportCountryInd"] = null;
+            }
+            
             LoadReports();
         }
     }

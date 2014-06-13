@@ -74,6 +74,10 @@
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
+                                                                        <tr>
+                                                                            <td></td>
+                                                                            <td><asp:CheckBox ID="cbCountryIndicators" runat="server" Text="Country Indicators" AutoPostBack="true" OnCheckedChanged="cbCountryIndicators_CheckedChanged" /></td>
+                                                                        </tr>
                                                                     </table>
                                                                 </div>
                                                             </div>
@@ -143,7 +147,8 @@
                                         <asp:BoundField DataField="ProjectTitle" HeaderText="Project Title" SortExpression="ProjectTitle" meta:resourcekey="BoundFieldResource3" />
                                         <asp:BoundField DataField="OrganizationName" HeaderText="Organization" SortExpression="OrganizationName" meta:resourcekey="BoundFieldResource4" />
                                         <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" meta:resourcekey="BoundFieldResource5" />
-                                        <asp:BoundField DataField="CreatedDate" HeaderText="Last Updated" SortExpression="CreatedDate" meta:resourcekey="BoundFieldResource6" />
+                                        <asp:BoundField DataField="CreatedDate" HeaderText="Date Created" SortExpression="CreatedDate"/>
+                                        <asp:BoundField DataField="LastUpdateDate" HeaderText="Last Updated" SortExpression="LastUpdateDate"/>
                                         <asp:TemplateField HeaderText="View Details" meta:resourcekey="TemplateFieldResource1">
                                             <ItemTemplate>
                                                 <asp:ImageButton ID="imgbtnView" runat="server" ImageUrl="~/assets/orsimages/view.png"
