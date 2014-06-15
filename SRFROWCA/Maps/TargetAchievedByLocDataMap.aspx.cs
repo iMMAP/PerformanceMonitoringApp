@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using BusinessLogic;
 using System.Data;
 using SRFROWCA.Reports;
+using SRFROWCA.Common;
 
 namespace SRFROWCA.Maps
 {
@@ -114,14 +115,14 @@ namespace SRFROWCA.Maps
             }
             else if (locationTypeId == 2)
             {
-                locationIds = ReportsCommon.GetSelectedValues(ddlAdmin1);
+                locationIds = RC.GetSelectedValues(ddlAdmin1);
             }
             else if (locationTypeId == 3)
             {
-                locationIds = ReportsCommon.GetSelectedValues(ddlLocations);
+                locationIds = RC.GetSelectedValues(ddlLocations);
             }
 
-            int? dataId = ReportsCommon.GetSelectedValue(ddlData);
+            int? dataId = RC.GetSelectedValue(ddlData);
             return new object[] { locationIds, locationTypeId, dataId, DBNull.Value };
         }
 
