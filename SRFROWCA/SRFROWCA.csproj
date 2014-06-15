@@ -311,10 +311,10 @@
     <Content Include="assets\orsimages\icon\so3.png" />
     <Content Include="assets\orsimages\icon\wash.png" />
     <Content Include="assets\orsimages\loginmenuarrow.png" />
-    <Content Include="assets\orsimages\logo.png" />
+    
     <Content Include="assets\orsimages\minus.png" />
     <Content Include="assets\orsimages\O.png" />
-    <Content Include="assets\orsimages\orslogo.png" />
+    
     <Content Include="assets\orsimages\P.png" />
     <Content Include="assets\orsimages\pdf.png" />
     <Content Include="assets\orsimages\pencil.png" />
@@ -919,7 +919,6 @@
     <Content Include="ClusterLead\Web.config" />
     <Content Include="Admin\Web.config" />
     <Content Include="WebForm1.aspx" />
-    <Content Include="WebForm2.aspx" />
     <None Include="assets\font\cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff" />
     <None Include="assets\font\DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff" />
     <None Include="assets\font\fontawesome-webfontd41d.eot" />
@@ -1769,13 +1768,6 @@
     </Compile>
     <Compile Include="WebForm1.aspx.designer.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebForm2.aspx.cs">
-      <DependentUpon>WebForm2.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm2.aspx.designer.cs">
-      <DependentUpon>WebForm2.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
