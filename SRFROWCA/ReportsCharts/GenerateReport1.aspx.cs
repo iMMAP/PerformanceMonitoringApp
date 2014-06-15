@@ -212,7 +212,7 @@ namespace SRFROWCA.Reports
             }
             else if (rbAdmin1.Checked)
             {
-                ids = ReportsCommon.GetSelectedValues(ddlAdmin1Locations);
+                ids = RC.GetSelectedValues(ddlAdmin1Locations);
                 if (string.IsNullOrEmpty(ids))
                 {
                     ids = ddlCountry.SelectedItem.Value;
@@ -220,10 +220,10 @@ namespace SRFROWCA.Reports
             }
             else if (rbAdmin2.Checked)
             {
-                ids = ReportsCommon.GetSelectedValues(ddlAdmin2Locations);
+                ids = RC.GetSelectedValues(ddlAdmin2Locations);
                 if (string.IsNullOrEmpty(ids))
                 {
-                    ids = ReportsCommon.GetSelectedValues(ddlAdmin1Locations);
+                    ids = RC.GetSelectedValues(ddlAdmin1Locations);
                     if (string.IsNullOrEmpty(ids))
                     {
                         ids = ddlCountry.SelectedItem.Value;
@@ -236,12 +236,12 @@ namespace SRFROWCA.Reports
 
         private string GetClustersIds()
         {
-            return ReportsCommon.GetSelectedValues(cblClusters);
+            return RC.GetSelectedValues(cblClusters);
         }
 
         private string GetOrganizationIds()
         {
-            return ReportsCommon.GetSelectedValues(ddlOrganizations);
+            return RC.GetSelectedValues(ddlOrganizations);
         }
 
         private int? GetDatePartFromString(TextBox txtBox, int datePartIndex)
@@ -287,19 +287,19 @@ namespace SRFROWCA.Reports
         {
             if (LogFrame.Objectives == logFrameId)
             {
-                return ReportsCommon.GetSelectedValues(ddlObjectives);
+                return RC.GetSelectedValues(ddlObjectives);
             }
             else if (LogFrame.Priority == logFrameId)
             {
-                return ReportsCommon.GetSelectedValues(ddlPriority);
+                return RC.GetSelectedValues(ddlPriority);
             }
             else if (LogFrame.Activities == logFrameId)
             {
-                return ReportsCommon.GetSelectedValues(ddlActivities);
+                return RC.GetSelectedValues(ddlActivities);
             }
             else if (LogFrame.Data == logFrameId)
             {
-                return ReportsCommon.GetSelectedValues(ddlData);
+                return RC.GetSelectedValues(ddlData);
             }
 
             return null;
@@ -512,7 +512,7 @@ namespace SRFROWCA.Reports
 
         private DataTable GetObjectives()
         {
-            string clusterIds = ReportsCommon.GetSelectedValues(cblClusters);
+            string clusterIds = RC.GetSelectedValues(cblClusters);
             return DBContext.GetData("GetObjectivesOfMultipleClusters", new object[] { clusterIds });
         }
 
@@ -524,7 +524,7 @@ namespace SRFROWCA.Reports
 
         private DataTable GetActivities()
         {
-            string priority = ReportsCommon.GetSelectedValues(ddlPriority);
+            string priority = RC.GetSelectedValues(ddlPriority);
             return DBContext.GetData("GetActivitiesOfMultipleIndicators", new object[] { priority });
         }
 
@@ -536,7 +536,7 @@ namespace SRFROWCA.Reports
 
         private DataTable GetActivityData()
         {
-            string activityIds = ReportsCommon.GetSelectedValues(ddlActivities);
+            string activityIds = RC.GetSelectedValues(ddlActivities);
             return DBContext.GetData("GetDatItemsOfMultipleActivities", new object[] { activityIds });
         }
 

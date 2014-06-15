@@ -9,6 +9,7 @@ using DotNet.Highcharts;
 using DotNet.Highcharts.Enums;
 using DotNet.Highcharts.Helpers;
 using DotNet.Highcharts.Options;
+using SRFROWCA.Common;
 using SRFROWCA.Controls;
 
 namespace SRFROWCA.Reports
@@ -169,8 +170,8 @@ namespace SRFROWCA.Reports
                 LocationName = ddlLocations.SelectedItem.Text;
             }
 
-            int? dataId = ReportsCommon.GetSelectedValue(ddlData);
-            int? yearId = ReportsCommon.GetSelectedValue(ddlYear);
+            int? dataId = RC.GetSelectedValue(ddlData);
+            int? yearId = RC.GetSelectedValue(ddlYear);
             return new object[] { locationIds, locationTypeId, dataId, yearId };
         }
 
