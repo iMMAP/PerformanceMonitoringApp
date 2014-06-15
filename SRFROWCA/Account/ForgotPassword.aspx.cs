@@ -51,6 +51,7 @@ namespace SRFROWCA.Account
                 }
                 else
                 {
+
                     MembershipUser mu = GetUserFromProvidedInfo(userName, email);
                     if (mu == null)
                     {
@@ -179,6 +180,8 @@ namespace SRFROWCA.Account
                     return Membership.GetUser(userName);
                 }
             }
+
+            
 
             return mu;
         }
