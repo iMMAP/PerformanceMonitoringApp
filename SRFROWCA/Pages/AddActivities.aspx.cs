@@ -478,7 +478,7 @@ namespace SRFROWCA.Pages
                     {
                         SaveReportMainInfo();
                     }
-
+                    
                     SaveReport();
                 }
                 else
