@@ -163,7 +163,13 @@
                     </div>
                     <!-- #sidebar-shortcuts -->
                     <ul class="nav nav-list">
-                        <li id="liDashboards" runat="server"><a id="menueDashboards" runat="server" href="#"
+
+                        <li id="liDashboard" runat="server"><a id="menueDashboard" runat="server" href="/Default.aspx"><i class="icon-dashboard"></i><span
+                            class="menu-text">
+                            <asp:Localize ID="Localize2" runat="server" Text="Dashboard" meta:resourcekey="localMasterDashboardResource1"></asp:Localize></span> </a></li>
+
+
+                        <%--<li id="liDashboards" runat="server"><a id="menueDashboards" runat="server" href="#"
                             class="dropdown-toggle"><i class="icon-dashboard"></i><span class="menu-text">
                                 <asp:Localize ID="localDashboard" runat="server" Text="Dashboard" meta:resourcekey="localMasterDashboardResource1"></asp:Localize>
                             </span><b class="arrow icon-angle-down"></b></a>
@@ -179,7 +185,7 @@
                                     <asp:Localize ID="localDashboardOprPresence" runat="server" Text="Operational Presence" meta:resourcekey="localDashboardOprPresenceResource1"></asp:Localize>
                                 </span></a></li>
                             </ul>
-                        </li>
+                        </li>--%>
                         <li id="liDataEntry" runat="server"><a href="~/Pages/AddActivities.aspx" id="menuDataEntry"
                             runat="server"><i class="icon-list-alt"></i><span class="menu-text">
                                 <asp:Localize ID="localDataEntry" runat="server" Text="Data Entry" meta:resourcekey="localDataEntryResource1"></asp:Localize></span>
