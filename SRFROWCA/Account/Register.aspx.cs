@@ -77,16 +77,14 @@ namespace SRFROWCA.Account
                         message = "You have been registered successfully but some error occoured on sending email to site admin. Contact admin and ask for the verification! We apologies for the inconvenience!";
                     }
                 }
-
-                //ShowMessage(message, RC.NotificationType.Success, false, 500);
-
-
-                //ClearRegistrationControls();
+                
             }
             catch (Exception ex)
             {
+                Session["RegisterMessage"] = null;
                 message = ex.Message;
-                ShowMessage(ex.Message);
+                ShowMessage(ex.Message, RC.NotificationType.Error, false);
+                return;
             }
 
             Session["RegisterMessage"] = message;
@@ -174,20 +172,20 @@ namespace SRFROWCA.Account
         // If not null then user already exists otherwise not.
         private bool IsUserAlreadyExits()
         {
-            MembershipUser membershipUser = Membership.GetUser(txtEmail.Text.Trim());
-
+            MembershipUser membershipUser = Membership.GetUser(txtUserName.Text.Trim());
             if (membershipUser != null)
             {
-                ShowMessage(string.Format("This email {0} already exists in db!", txtEmail.Text.Trim()), RC.NotificationType.Error);
+                ShowMessage(string.Format("Another user already exists in the system with the same username ({0}). Try another!", txtUserName.Text.Trim()), RC.NotificationType.Error, false);
                 return true;
             }
 
-            membershipUser = Membership.GetUser(txtUserName.Text.Trim());
-            if (membershipUser != null)
-            {
-                ShowMessage(string.Format("Someone already has this, {0}, username. Try another?!", txtUserName.Text.Trim()), RC.NotificationType.Error);
-                return true;
-            }
+            //string userName = Membership.GetUserNameByEmail(txtEmail.Text.Trim());
+
+            //if (!string.IsNullOrEmpty(userName))
+            //{
+            //    ShowMessage(string.Format("Another user already exists in the system with the same email ({0})", txtEmail.Text.Trim()), RC.NotificationType.Error, false);
+            //    return true;
+            //}
 
             return false;
         }

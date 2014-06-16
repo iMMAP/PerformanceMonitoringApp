@@ -86,6 +86,7 @@
         <!-- .breadcrumb -->
     </div>
     <div class="page-content">
+        <div id="divMsg"></div>
         <div class="login-layout">
             <div class="main-container">
                 <div class="main-content">
