@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="011d250ef6ab48fb93ca4b4e1780dd5a" Name="Diagram1">
+        <EntityTypeShape EntityType="ORSModel.ActivityData" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.ActivityType" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.aspnet_Membership" Width="1.5" PointX="11.25" PointY="25.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.aspnet_Profile" Width="1.5" PointX="11.25" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.aspnet_Roles" Width="1.5" PointX="6.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.aspnet_Users" Width="1.5" PointX="9" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.aspnet_Users_Clusters" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.aspnet_Users_Custom" Width="1.5" PointX="11.25" PointY="31.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.ClusterObjective" Width="1.5" PointX="6" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.ClusterPartner" Width="1.5" PointX="13.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.Cluster" Width="1.5" PointX="15.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.Currency" Width="1.5" PointX="0.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.DisasterType" Width="1.5" PointX="15.75" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.Donor" Width="1.5" PointX="17.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.Emergency" Width="1.5" PointX="18" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.EmergencyCluster" Width="1.5" PointX="3.75" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.EmergencyLocation" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.FTSFunding" Width="1.5" PointX="17.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.HumanitarianPriority" Width="1.5" PointX="18.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.IndicatorComment" Width="1.5" PointX="12.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.Location" Width="1.5" PointX="16" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.LocationType" Width="1.5" PointX="13.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.Month" Width="1.5" PointX="19.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.ObjectivePriority" Width="1.5" PointX="8.25" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.Objective" Width="1.5" PointX="19.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.OPSProjectDetail" Width="1.5" PointX="20.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.OPSReportDetail" Width="1.5" PointX="11" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.OPSReportLocation" Width="1.5" PointX="11" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.OPSReport" Width="1.5" PointX="8.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.OPSUser" Width="1.5" PointX="20.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.Organization" Width="1.5" PointX="6" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.OrganizationType" Width="1.5" PointX="3.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.PasswordReset" Width="1.5" PointX="21.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.PriorityActivity" Width="1.5" PointX="10.5" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.ProjectIndicatorAnnualTarget" Width="1.5" PointX="21.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.ProjectIndicator" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.ProjectOrganization" Width="1.5" PointX="8.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.Project" Width="1.5" PointX="6" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.ProjectStatu" Width="1.5" PointX="3.75" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.Quarter" Width="1.5" PointX="14.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.RegionalIndicator" Width="1.5" PointX="16.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.RegionalIndicatorsHistory" Width="1.5" PointX="22.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.ReportDetail" Width="1.5" PointX="15.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.ReportFrequencyType" Width="1.5" PointX="22.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.ReportLocation" Width="1.5" PointX="13.5" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.Report" Width="1.5" PointX="11.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.SiteLanguage" Width="1.5" PointX="22.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.SRPIndicator" Width="1.5" PointX="3" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.SRPIndicatorsHistory" Width="1.5" PointX="22.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.Unit" Width="1.5" PointX="22.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ORSModel.Year" Width="1.5" PointX="0.75" PointY="23.75" IsExpanded="true" />
+        <AssociationConnector Association="ORSModel.FK__aspnet_Me__UserI__2C496DC0" ManuallyRouted="false" />
+        <AssociationConnector Association="ORSModel.FK__aspnet_Pr__UserI__310E22DD" ManuallyRouted="false" />
+        <AssociationConnector Association="ORSModel.FK_aspnet_Users_Custom_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ORSModel.FK_Reports_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ORSModel.FK_EmergencyClusterObjectives_EmergencyClusters" ManuallyRouted="false" />
+        <AssociationConnector Association="ORSModel.FK_ObjectivePriorities_ClusterObjectives" ManuallyRouted="false" />
+        <AssociationConnector Association="ORSModel.FK_Emergency_EmergencyTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="ORSModel.FK_Projects_EmergencyClusters" ManuallyRouted="false" />
+        <AssociationConnector Association="ORSModel.FK_Reports_EmergencyClusters" ManuallyRouted="false" />
+        <AssociationConnector Association="ORSModel.FK_ProjectIndicators_EmergencyLocations" ManuallyRouted="false" />
+        <AssociationConnector Association="ORSModel.FK_Projects_EmergencyLocations" ManuallyRouted="false" />
+        <AssociationConnector Association="ORSModel.FK_Reports_EmergencyLocations" ManuallyRouted="false" />
+        <AssociationConnector Association="ORSModel.FK_SRPIndicators_EmergencyLocations" ManuallyRouted="false" />
+        <AssociationConnector Association="ORSModel.FK_Locations_LocationTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="ORSModel.FK_PriorityActivities_ObjectivePriorities" ManuallyRouted="false" />
+        <AssociationConnector Association="ORSModel.FK_OPSReportDetails_OPSReports" ManuallyRouted="false" />
+        <AssociationConnector Association="ORSModel.FK_OPSReportLocations_OPSReports" ManuallyRouted="false" />
+        <AssociationConnector Association="ORSModel.FK_Organizations_OrganizationTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="ORSModel.FK_ProjectOrganizations_Organizations" ManuallyRouted="false" />
+        <AssociationConnector Association="ORSModel.FK_Reports_Organizations" ManuallyRouted="false" />
+        <AssociationConnector Association="ORSModel.FK_ProjectOrganizations_Projects" ManuallyRouted="false" />
+        <AssociationConnector Association="ORSModel.FK_Projects_ProjectStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="ORSModel.FK_Reports_Projects" ManuallyRouted="false" />
+        <AssociationConnector Association="ORSModel.FK_ReportDetails_ReportLocations" ManuallyRouted="false" />
+        <AssociationConnector Association="ORSModel.FK_ReportDetails_Reports" ManuallyRouted="false" />
+        <AssociationConnector Association="ORSModel.FK_ReportLocations_Reports" ManuallyRouted="false" />
+        <AssociationConnector Association="ORSModel.aspnet_UsersInRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ORSModel.ClusterIndicatorTarget" Width="1.5" PointX="1.3281811835841189" PointY="31.317148849050117" />
+        <EntityTypeShape EntityType="ORSModel.Notification" Width="1.5" PointX="9.3607880125571" PointY="3.5315407531017162" />
+        <EntityTypeShape EntityType="ORSModel.IndicatorCommentsDetail" Width="1.5" PointX="8.90442810249721" PointY="20.049238080181759" />
+        <AssociationConnector Association="ORSModel.FK_Notifications_EmergencyClusters" />
+        <AssociationConnector Association="ORSModel.FK_Notifications_Organizations" />
+        <AssociationConnector Association="ORSModel.FK_Notifications_Years" />
+        <EntityTypeShape EntityType="ORSModel.NotificationType" Width="1.5" PointX="8.9670146000417947" PointY="27.85252281830298" />
+        <AssociationConnector Association="ORSModel.FK_Notifications_NotificationTypes" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
