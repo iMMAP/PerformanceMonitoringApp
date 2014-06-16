@@ -15,8 +15,8 @@ namespace SRFROWCA.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.Form.DefaultButton = this.btnSearch.UniqueID;
             if (IsPostBack) return;
-            this.Form.DefaultButton = this.btnAddUser.UniqueID;
             LoadUsers();
         }
 
