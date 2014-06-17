@@ -88,14 +88,30 @@ namespace SRFROWCA.Pages
             ddlMonth.DataSource = GetMonth();
             ddlMonth.DataBind();
 
-            var result = DateTime.Now.ToString("MMMM", new CultureInfo(RC.SiteCulture));
-            result = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(result);
-            ddlMonth.SelectedIndex = i > -1 ? i : ddlMonth.Items.IndexOf(ddlMonth.Items.FindByText(result));
+            ListItem item = new ListItem("Select Month", "0");
+            ddlMonth.Items.Insert(0, item);
+            ddlMonth.SelectedIndex = 0;
+
+            //var result = DateTime.Now.ToString("MMMM", new CultureInfo(RC.SiteCulture));
+            //result = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(result);
+            //ddlMonth.SelectedIndex = i > -1 ? i : ddlMonth.Items.IndexOf(ddlMonth.Items.FindByText(result));
         }
         private DataTable GetMonth()
         {
             DataTable dt = DBContext.GetData("GetMonths", new object[] { RC.SelectedSiteLanguageId });
             return dt.Rows.Count > 0 ? dt : new DataTable();
+        }
+
+        protected void ddlMonth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlMonth.SelectedValue == "0")
+            {
+                fuAchieved.Enabled = false;
+            }
+            else
+            {
+                fuAchieved.Enabled = true;
+            }
         }
 
         protected void btnImport_Click(object sender, EventArgs e)
@@ -104,6 +120,8 @@ namespace SRFROWCA.Pages
             {
                 // Check if file is uploaded and is excel file
                 if (!IsValidFile()) return;
+
+                if (!MonthSelected()) return;
 
                 // Fill staging table (TempData1) in db to import data using this table.
                 FillStagingTableInDB();
@@ -127,6 +145,17 @@ namespace SRFROWCA.Pages
             }
         }
 
+        private bool MonthSelected()
+        {
+            if (ddlMonth.SelectedValue == "0")
+            {
+                ShowMessage("Please Select Month You Want To Report For", RC.NotificationType.Error, false);
+                return false;
+            }
+
+            return true;
+        }
+
         // Get all emergencies.
         private object GetLocationEmergencies()
         {
@@ -140,13 +169,13 @@ namespace SRFROWCA.Pages
                 string fileExt = Path.GetExtension(fuAchieved.PostedFile.FileName);
                 if (fileExt != ".xls" && fileExt != ".xlsx" && fileExt != ".xlsb")
                 {
-                    ShowMessage("Pleae use Excel files with 'xls' OR 'xlsx' extentions.");
+                    ShowMessage("Pleae use Excel files with 'xls' OR 'xlsx' extentions.", RC.NotificationType.Error, false);
                     return false;
                 }
             }
             else
             {
-                ShowMessage("Please select file to upload!");
+                ShowMessage("Please select file to upload!", RC.NotificationType.Error, true, 1000);
                 return false;
             }
 
