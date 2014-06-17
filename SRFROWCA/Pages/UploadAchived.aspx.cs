@@ -115,7 +115,7 @@ namespace SRFROWCA.Pages
                 // If success or any error occoured in execution of procedure then show message to user.
                 if (dt.Rows.Count > 0)
                 {
-                    string message = "Data Imported Successfully!"; 
+                    string message = "Data Imported Successfully!";
                     ShowMessage(message, RC.NotificationType.Success, false);
                 }
             }
@@ -171,8 +171,8 @@ namespace SRFROWCA.Pages
                 if (sheets.Length > 0)
                 {
                     DataTable dt = ReadDataInDataTable(excelConString, sheets[0]);
-                    dt.Columns.Remove("Project Title");
-                    dt.Columns.Remove("Organization");
+
+                    RemoveUnwantedColumns(dt);
                     string tableScript = CreateTableScript(dt);
                     string tableScript2 = CreateTableScript2(dt);
                     string conString = ConfigurationManager.ConnectionStrings["live_dbName"].ConnectionString;
@@ -185,6 +185,15 @@ namespace SRFROWCA.Pages
                     UnpivotStagingTable(locationColumnNames, locationColumnNamesWithAliases, locationColumnNamesAlias);
                 }
             }
+        }
+
+        private void RemoveUnwantedColumns(DataTable dt)
+        {
+            if (dt.Columns.Contains("Project Title"))
+                dt.Columns.Remove("Project Title");
+
+            if (dt.Columns.Contains("Organization"))
+                dt.Columns.Remove("Organization");
         }
 
         private String[] GetExcelSheetNames(string excelConString)
@@ -432,7 +441,7 @@ namespace SRFROWCA.Pages
             }
 
             query += " ) ";
-            
+
             return query;
         }
 
@@ -456,11 +465,11 @@ namespace SRFROWCA.Pages
 
                     if (string.IsNullOrEmpty(locationNames))
                     {
-                        locationNames += column.ColumnName + "_" + j.ToString();
+                        locationNames += "[" + column.ColumnName + "_" + j.ToString() + "]";
                     }
                     else
                     {
-                        locationNames += "," + column.ColumnName + "_" + j.ToString();
+                        locationNames += "," + "[" + column.ColumnName + "_" + j.ToString() + "]";
                     }
 
                     i += 1;
@@ -490,11 +499,11 @@ namespace SRFROWCA.Pages
 
                     if (string.IsNullOrEmpty(locationNames))
                     {
-                        locationNames += column.ColumnName + "_" + j.ToString() + " AS t_" + column.ColumnName + j.ToString();
+                        locationNames += "[" + column.ColumnName + "_" + j.ToString() + "]" + " AS [t_" + column.ColumnName + j.ToString() + "]";
                     }
                     else
                     {
-                        locationNames += "," + column.ColumnName + "_" + j.ToString() + " AS t_" + column.ColumnName + j.ToString();
+                        locationNames += "," + "[" + column.ColumnName + "_" + j.ToString() + "]" + " AS [t_" + column.ColumnName + j.ToString() + "]";
                     }
                     i += 1;
                 }
@@ -524,11 +533,11 @@ namespace SRFROWCA.Pages
 
                     if (string.IsNullOrEmpty(locationNames))
                     {
-                        locationNames += "t_" + column.ColumnName + j.ToString();
+                        locationNames += "[t_" + column.ColumnName + j.ToString() + "]";
                     }
                     else
                     {
-                        locationNames += "," + "t_" + column.ColumnName + j.ToString();
+                        locationNames += "," + "[t_" + column.ColumnName + j.ToString() + "]";
                     }
 
                     i += 1;
