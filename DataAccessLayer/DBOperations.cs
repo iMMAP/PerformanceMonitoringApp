@@ -77,10 +77,10 @@ namespace DataAccessLayer.DataAccess
                     dbConnection.Open();
                     Database.ClearParameterCache();
 
-                    if (type.Equals("Project"))
+                    if (type.Equals("Contribution"))
                     {
                         database.ExecuteNonQuery(CommandType.Text, "DELETE FROM FTSFunding");
-                        database.ExecuteNonQuery(CommandType.Text, "DELETE FROM Projects");
+                        //database.ExecuteNonQuery(CommandType.Text, "DELETE FROM Projects");
                     }
 
                     foreach (object[] parameters in listObjParams)
