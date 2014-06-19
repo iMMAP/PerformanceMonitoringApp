@@ -94,7 +94,7 @@
                             </li>
                             <li>
                                 <i class="icon-hand-right blue"></i>
-                                <asp:Localize ID="LocalDownloadLocations" runat="server" Text="All locations ('Region')"></asp:Localize>
+                                <asp:Localize ID="LocalDownloadLocations" runat="server" Text="All locations ('Admin1')"></asp:Localize>
                             </li>
                         </ul>
                         <div class="space"></div>
@@ -139,17 +139,16 @@
 
                                 <li>
                                     <i class="icon-hand-right blue"></i>
-                                    <asp:DropDownList ID="ddlMonth" runat="server">
+                                    Month:
+                                    <asp:DropDownList ID="ddlMonth" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged">
                                     </asp:DropDownList>
                                 </li>
                             </ul>
                         </div>
-
-                        <hr />
-                        <div class="space"></div>
-
+                        <div>Select The Month To Upload Data.</div>
+                        
                         <div class="center">
-                            <asp:FileUpload ID="fuAchieved" runat="server" class="btn btn-grey" />
+                            <asp:FileUpload ID="fuAchieved" runat="server" class="btn btn-grey" Enabled="false" />
                         </div>
                         <div class="center">
                             <asp:Button ID="btnImport" runat="server" Text="Import" CssClass="btn btn-primary" OnClick="btnImport_Click" />

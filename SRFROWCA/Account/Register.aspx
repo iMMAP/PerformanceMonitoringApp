@@ -186,7 +186,7 @@
                                                 </label>
                                             </div>
                                             <div class="clearfix">
-                                                <asp:Button ID="btnReset" runat="server" OnClick="btnReset_Click" CssClass="width-30 pull-left btn btn-sm" Text="Reset" CausesValidation="False" meta:resourcekey="btnResetResource1" />
+                                                
 
                                                 <asp:Button ID="btnRegister" runat="server" Text="Register" CssClass="width-65 pull-right btn btn-sm btn-success"
                                                     OnClick="btnRegister_Click" meta:resourcekey="btnRegisterResource1" />

@@ -88,14 +88,30 @@ namespace SRFROWCA.Pages
             ddlMonth.DataSource = GetMonth();
             ddlMonth.DataBind();
 
-            var result = DateTime.Now.ToString("MMMM", new CultureInfo(RC.SiteCulture));
-            result = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(result);
-            ddlMonth.SelectedIndex = i > -1 ? i : ddlMonth.Items.IndexOf(ddlMonth.Items.FindByText(result));
+            ListItem item = new ListItem("Select Month", "0");
+            ddlMonth.Items.Insert(0, item);
+            ddlMonth.SelectedIndex = 0;
+
+            //var result = DateTime.Now.ToString("MMMM", new CultureInfo(RC.SiteCulture));
+            //result = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(result);
+            //ddlMonth.SelectedIndex = i > -1 ? i : ddlMonth.Items.IndexOf(ddlMonth.Items.FindByText(result));
         }
         private DataTable GetMonth()
         {
             DataTable dt = DBContext.GetData("GetMonths", new object[] { RC.SelectedSiteLanguageId });
             return dt.Rows.Count > 0 ? dt : new DataTable();
+        }
+
+        protected void ddlMonth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlMonth.SelectedValue == "0")
+            {
+                fuAchieved.Enabled = false;
+            }
+            else
+            {
+                fuAchieved.Enabled = true;
+            }
         }
 
         protected void btnImport_Click(object sender, EventArgs e)
@@ -104,6 +120,8 @@ namespace SRFROWCA.Pages
             {
                 // Check if file is uploaded and is excel file
                 if (!IsValidFile()) return;
+
+                if (!MonthSelected()) return;
 
                 // Fill staging table (TempData1) in db to import data using this table.
                 FillStagingTableInDB();
@@ -115,7 +133,7 @@ namespace SRFROWCA.Pages
                 // If success or any error occoured in execution of procedure then show message to user.
                 if (dt.Rows.Count > 0)
                 {
-                    string message = "Data Imported Successfully!"; 
+                    string message = "Data Imported Successfully!";
                     ShowMessage(message, RC.NotificationType.Success, false);
                 }
             }
@@ -125,6 +143,17 @@ namespace SRFROWCA.Pages
                 string message = "Some Error Occoured During Import, Please contact with site Admin!";
                 ShowMessage(message, RC.NotificationType.Error, false);
             }
+        }
+
+        private bool MonthSelected()
+        {
+            if (ddlMonth.SelectedValue == "0")
+            {
+                ShowMessage("Please Select Month You Want To Report For", RC.NotificationType.Error, false);
+                return false;
+            }
+
+            return true;
         }
 
         // Get all emergencies.
@@ -140,13 +169,13 @@ namespace SRFROWCA.Pages
                 string fileExt = Path.GetExtension(fuAchieved.PostedFile.FileName);
                 if (fileExt != ".xls" && fileExt != ".xlsx" && fileExt != ".xlsb")
                 {
-                    ShowMessage("Pleae use Excel files with 'xls' OR 'xlsx' extentions.");
+                    ShowMessage("Pleae use Excel files with 'xls' OR 'xlsx' extentions.", RC.NotificationType.Error, false);
                     return false;
                 }
             }
             else
             {
-                ShowMessage("Please select file to upload!");
+                ShowMessage("Please select file to upload!", RC.NotificationType.Error, true, 1000);
                 return false;
             }
 
@@ -171,8 +200,8 @@ namespace SRFROWCA.Pages
                 if (sheets.Length > 0)
                 {
                     DataTable dt = ReadDataInDataTable(excelConString, sheets[0]);
-                    dt.Columns.Remove("Project Title");
-                    dt.Columns.Remove("Organization");
+
+                    RemoveUnwantedColumns(dt);
                     string tableScript = CreateTableScript(dt);
                     string tableScript2 = CreateTableScript2(dt);
                     string conString = ConfigurationManager.ConnectionStrings["live_dbName"].ConnectionString;
@@ -185,6 +214,15 @@ namespace SRFROWCA.Pages
                     UnpivotStagingTable(locationColumnNames, locationColumnNamesWithAliases, locationColumnNamesAlias);
                 }
             }
+        }
+
+        private void RemoveUnwantedColumns(DataTable dt)
+        {
+            if (dt.Columns.Contains("Project Title"))
+                dt.Columns.Remove("Project Title");
+
+            if (dt.Columns.Contains("Organization"))
+                dt.Columns.Remove("Organization");
         }
 
         private String[] GetExcelSheetNames(string excelConString)
@@ -432,7 +470,7 @@ namespace SRFROWCA.Pages
             }
 
             query += " ) ";
-            
+
             return query;
         }
 
@@ -456,11 +494,11 @@ namespace SRFROWCA.Pages
 
                     if (string.IsNullOrEmpty(locationNames))
                     {
-                        locationNames += column.ColumnName + "_" + j.ToString();
+                        locationNames += "[" + column.ColumnName + "_" + j.ToString() + "]";
                     }
                     else
                     {
-                        locationNames += "," + column.ColumnName + "_" + j.ToString();
+                        locationNames += "," + "[" + column.ColumnName + "_" + j.ToString() + "]";
                     }
 
                     i += 1;
@@ -490,11 +528,11 @@ namespace SRFROWCA.Pages
 
                     if (string.IsNullOrEmpty(locationNames))
                     {
-                        locationNames += column.ColumnName + "_" + j.ToString() + " AS t_" + column.ColumnName + j.ToString();
+                        locationNames += "[" + column.ColumnName + "_" + j.ToString() + "]" + " AS [t_" + column.ColumnName + j.ToString() + "]";
                     }
                     else
                     {
-                        locationNames += "," + column.ColumnName + "_" + j.ToString() + " AS t_" + column.ColumnName + j.ToString();
+                        locationNames += "," + "[" + column.ColumnName + "_" + j.ToString() + "]" + " AS [t_" + column.ColumnName + j.ToString() + "]";
                     }
                     i += 1;
                 }
@@ -524,11 +562,11 @@ namespace SRFROWCA.Pages
 
                     if (string.IsNullOrEmpty(locationNames))
                     {
-                        locationNames += "t_" + column.ColumnName + j.ToString();
+                        locationNames += "[t_" + column.ColumnName + j.ToString() + "]";
                     }
                     else
                     {
-                        locationNames += "," + "t_" + column.ColumnName + j.ToString();
+                        locationNames += "," + "[t_" + column.ColumnName + j.ToString() + "]";
                     }
 
                     i += 1;

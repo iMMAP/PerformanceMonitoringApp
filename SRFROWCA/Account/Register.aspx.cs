@@ -91,18 +91,6 @@ namespace SRFROWCA.Account
             Response.Redirect("../RegisterSuccess.aspx");
         }
 
-        protected void btnReset_Click(object sender, EventArgs e)
-        {
-            ddlUserRole.SelectedIndex = 0;
-            txtUserName.Text = "";
-            txtPassword.Text = "";
-            txtEmail.Text = "";
-            txtPhone.Text = "";
-            ddlClusters.SelectedIndex = 0;
-            ddlCountry.SelectedIndex = 0;
-            ddlOrganization.SelectedIndex = 0;
-        }
-
         #endregion
 
         // Populate countries drop down.

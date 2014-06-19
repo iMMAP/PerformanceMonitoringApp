@@ -478,7 +478,7 @@ namespace SRFROWCA.Pages
                     {
                         SaveReportMainInfo();
                     }
-                    
+
                     SaveReport();
                 }
                 else
@@ -493,7 +493,8 @@ namespace SRFROWCA.Pages
 
         private void DeleteReport()
         {
-            DBContext.Delete("DeleteReport", new object[] { ReportId, DBNull.Value });
+            if (ReportId > 0)
+                DBContext.Delete("DeleteReport", new object[] { ReportId, DBNull.Value });
         }
         private void SaveReport()
         {
