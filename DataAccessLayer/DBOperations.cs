@@ -2,6 +2,10 @@ using System;
 using System.Data.Common;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using System.Data;
+using System.Data.SqlClient;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 
 namespace DataAccessLayer.DataAccess
 {
@@ -32,8 +36,8 @@ namespace DataAccessLayer.DataAccess
                 DataSet dataSet = database.ExecuteDataSet(dbCommand);
                 dataSet = new DataSet();
                 dataSet = database.ExecuteDataSet(dbCommand);
-                if(dataSet.Tables.Count > 0)
-                dt = dataSet.Tables[0] != null ? dataSet.Tables[0] : new DataTable();
+                if (dataSet.Tables.Count > 0)
+                    dt = dataSet.Tables[0] != null ? dataSet.Tables[0] : new DataTable();
             }
 
             return dt;
@@ -59,6 +63,44 @@ namespace DataAccessLayer.DataAccess
             }
 
             return recordId;
+        }
+
+        public static bool ExecuteSPROC(string loginEnvironment, string sprocName, List<object[]> listObjParams, out string errorMessage, string type)
+        {
+            Database database = DataAccessConnection.GetDBConnection(loginEnvironment);
+            errorMessage = string.Empty;
+
+            try
+            {
+                using (DbConnection dbConnection = database.CreateConnection())
+                {
+                    dbConnection.Open();
+                    Database.ClearParameterCache();
+
+                    if (type.Equals("Contribution"))
+                    {
+                        database.ExecuteNonQuery(CommandType.Text, "DELETE FROM FTSFunding");
+                        //database.ExecuteNonQuery(CommandType.Text, "DELETE FROM Projects");
+                    }
+
+                    foreach (object[] parameters in listObjParams)
+                    {
+                        using (DbCommand dbCommand = database.GetStoredProcCommand(sprocName, parameters))
+                        {
+                            database.ExecuteNonQuery(dbCommand);
+                            //dtData = dataSet.Tables.Count > 0 ? dataSet.Tables[0] : new DataTable();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                errorMessage = ex.Message;
+                return false;
+            }
+            
+
+            return true;
         }
     }
 }
