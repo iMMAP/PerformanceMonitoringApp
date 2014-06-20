@@ -76,7 +76,7 @@
                                         <li class="dropdown-header"><i class="icon-warning-sign"></i>Notifications </li>
                                     </HeaderTemplate>
                                     <ItemTemplate>
-                                        <li><a href="<%#Eval("PageURL")%>">
+                                        <li><a href="<%#Eval("PageURL")%>"> 
                                             <span class="msg-body"><span class="msg-title"><span class="blue">
                                                 <%#Eval("Notification1")%></span>
                                             </span></span></a></li>
