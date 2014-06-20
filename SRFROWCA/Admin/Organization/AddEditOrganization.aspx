@@ -19,7 +19,7 @@
         <div id="divMsg">
         </div>
         <div class="row">
-            <table border="0" class="width-70">
+            <table border="0" class="width-70"> 
                      <tr>
                     <td style="width:200px">
                         <label>

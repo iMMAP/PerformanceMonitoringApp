@@ -15,7 +15,7 @@
         <!-- .breadcrumb -->
     </div>
      <div class="page-content">
-          <table border="0" cellpadding="2" cellspacing="0" class="pstyle1" width="100%">
+          <table border="0" cellpadding="2" cellspacing="0" class="pstyle1" width="100%"> 
         <tr>
             <td class="signupheading2 error2" colspan="3">
                

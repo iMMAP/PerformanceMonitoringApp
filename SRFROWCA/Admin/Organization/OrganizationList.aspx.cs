@@ -19,7 +19,7 @@ namespace SRFROWCA.Admin.Organization
             if (IsPostBack) return;
             BindData();
            
-        }
+        } 
         private void BindData()
         {
             LoadOrganizationTypes();
@@ -44,7 +44,7 @@ namespace SRFROWCA.Admin.Organization
             ddlType.DataValueField = "OrganizationTypeId";
             ddlType.DataBind();
 
-        }
+        } 
 
         private void LoadCountries()
         {
