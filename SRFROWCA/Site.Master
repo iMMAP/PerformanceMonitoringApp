@@ -118,9 +118,9 @@
                                     <asp:LoginName ID="HeadLoginName" runat="server" meta:resourcekey="HeadLoginNameResource1" />
                                 </span><i class="icon-caret-down"></i></a>
                             <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-                                <li><a href="../Account/ChangePassword.aspx"><i class="icon-unlock "></i>
+                                <li><a href="<%=BaseURL %>/Account/ChangePassword.aspx"><i class="icon-unlock "></i>
                                     <asp:Localize ID="localChangePassword" runat="server" Text="Change Password" meta:resourcekey="localChangePasswordResource1"></asp:Localize></a></li>
-                                <li><a href="../Account/UserProfile.aspx"><i class="icon-user"></i>
+                                <li><a href="<%=BaseURL %>/Account/UserProfile.aspx"><i class="icon-user"></i>
                                     <asp:Localize ID="localProfile" runat="server" Text="Profile" meta:resourcekey="localProfileResource1"></asp:Localize>
                                 </a></li>
                                 <li class="divider"></li>
@@ -169,12 +169,12 @@
                                 <asp:Localize ID="localDashboard" runat="server" Text="Dashboard" meta:resourcekey="localMasterDashboardResource1"></asp:Localize>
                             </span><b class="arrow icon-angle-down"></b></a>
                             <ul class="submenu">
-                                <li id="liDefault" runat="server"><a href="../Default.aspx"><span class="menu-text">
+                                <li id="liDefault" runat="server"><a href="<%=BaseURL %>/Default.aspx"><span class="menu-text">
 
-                                    <asp:Localize ID="localDashboardPerfMon" runat="server" Text="Achievements" meta:resourcekey="localDashboardRepStatusResource1"></asp:Localize>
+                                    <asp:Localize ID="localDashboardPerfMon" runat="server" Text="Performance Monitoring" meta:resourcekey="Localize1Resource1"></asp:Localize>
                                 </span></a></li>
-                                <li id="liReportingStatus" runat="server"><a href="../ReportingStatus.aspx"><i class="icon-list"></i><span class="menu-text">
-                                    <asp:Localize ID="localDashboardRepStatus" runat="server" Text="Who Is Reporting" meta:resourcekey="Localize1Resource1" ></asp:Localize>
+                                <li id="liReportingStatus" runat="server"><a href="<%=BaseURL %>/ReportingStatus.aspx"><i class="icon-list"></i><span class="menu-text">
+                                    <asp:Localize ID="localDashboardRepStatus" runat="server" Text="Reporting Status" meta:resourcekey="localDashboardRepStatusResource1"></asp:Localize>
                                 </span></a></li>
                                 <%--<li id="liOperationalPresenceDB" runat="server"><a href="../OperationalPresenceDB.aspx"><i class="icon-list"></i><span class="menu-text">
                                     <asp:Localize ID="localDashboardOprPresence" runat="server" Text="Operational Presence" meta:resourcekey="localDashboardOprPresenceResource1"></asp:Localize>
@@ -305,10 +305,10 @@
                             runat="server"><i class="icon-table"></i>
                             <asp:Localize ID="Localize1" runat="server" Text="Custom Report" meta:resourcekey="localReportCustomReportResource1"></asp:Localize>
                         </a></li>
-                        <li><a href="../ContactUs/Contactus.aspx"><i class="icon-envelope-alt"></i><span
+                        <li><a href="<%=BaseURL %>/ContactUs/Contactus.aspx"><i class="icon-envelope-alt"></i><span
                             class="menu-text">
                             <asp:Localize ID="localContactUs" runat="server" Text="Contact Us" meta:resourcekey="localContactUsResource1"></asp:Localize></span> </a></li>
-                        <li><a href="../faq.aspx"><i class="icon-comment-alt"></i><span class="menu-text">
+                        <li><a href="<%=BaseURL %>/faq.aspx"><i class="icon-comment-alt"></i><span class="menu-text">
                             <asp:Localize ID="localFAQHelp" runat="server" Text="FAQs& Help" meta:resourcekey="localFAQHelpResource1"></asp:Localize></span> </a></li>
 
                         <li id="liORSDocuments" runat="server"><a href="~/ORSDocuments/orsdocs.aspx" id="menueORSDocuments"
