@@ -94,15 +94,6 @@ namespace SRFROWCA.Admin.Organization {
         protected global::System.Web.UI.WebControls.DropDownList ddlCountry;
         
         /// <summary>
-        /// RequiredFieldValidator5 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator5;
-        
-        /// <summary>
         /// txtPhone control.
         /// </summary>
         /// <remarks>

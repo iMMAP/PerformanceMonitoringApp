@@ -69,8 +69,8 @@ namespace SRFROWCA.Admin.Organization
         private void SaveOrganization()
         {
             try
-            {
-                int retVal = 0;
+            {              
+                int retVal = 0;                
                 objOrganization.Name = txtOrgName.Text;
                 objOrganization.Acronym = txtOrgAcronym.Text;
                 objOrganization.TypeId = Convert.ToInt32(ddlType.SelectedValue);
@@ -95,14 +95,8 @@ namespace SRFROWCA.Admin.Organization
             }
             catch (Exception ex)
             {
-                if (ex.Message.Contains("Cannot insert duplicate key row in object 'dbo.Organizations' with unique index 'IDX_Organizations_OrgName'."))
-                {
-                    RC.ShowMessage(this.Page, typeof(Page), UniqueID, "An Organization With Same Name Already Exists!", RC.NotificationType.Error, false);
-                }
-                else
-                {
-                    RC.ShowMessage(this.Page, typeof(Page), UniqueID, ex.Message, RC.NotificationType.Error, true, 500);
-                }
+                RC.ShowMessage(this.Page, typeof(Page), UniqueID, ex.Message, RC.NotificationType.Error, true, 500);
+               
             }
         }
         protected void btnSave_Click(object sender, EventArgs e)
