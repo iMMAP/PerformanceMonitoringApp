@@ -171,10 +171,10 @@
                             <ul class="submenu">
                                 <li id="liDefault" runat="server"><a href="../Default.aspx"><span class="menu-text">
 
-                                    <asp:Localize ID="localDashboardPerfMon" runat="server" Text="Performance Monitoring" meta:resourcekey="Localize1Resource1"></asp:Localize>
+                                    <asp:Localize ID="localDashboardPerfMon" runat="server" Text="Achievements" meta:resourcekey="localDashboardRepStatusResource1"></asp:Localize>
                                 </span></a></li>
                                 <li id="liReportingStatus" runat="server"><a href="../ReportingStatus.aspx"><i class="icon-list"></i><span class="menu-text">
-                                    <asp:Localize ID="localDashboardRepStatus" runat="server" Text="Reporting Status" meta:resourcekey="localDashboardRepStatusResource1"></asp:Localize>
+                                    <asp:Localize ID="localDashboardRepStatus" runat="server" Text="Who Is Reporting" meta:resourcekey="Localize1Resource1" ></asp:Localize>
                                 </span></a></li>
                                 <%--<li id="liOperationalPresenceDB" runat="server"><a href="../OperationalPresenceDB.aspx"><i class="icon-list"></i><span class="menu-text">
                                     <asp:Localize ID="localDashboardOprPresence" runat="server" Text="Operational Presence" meta:resourcekey="localDashboardOprPresenceResource1"></asp:Localize>
