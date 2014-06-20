@@ -175,7 +175,7 @@
     <value>Operational Presence</value>
   </data>
   <data name="localDashboardRepStatusResource1.Text" xml:space="preserve">
-    <value>Reporting Status</value>
+    <value>Achievements</value>
   </data>
   <data name="localDataEntryResource1.Text" xml:space="preserve">
     <value>Data Entry</value>
@@ -184,7 +184,7 @@
     <value>FAQs&amp; Help</value>
   </data>
   <data name="Localize1Resource1.Text" xml:space="preserve">
-    <value>Performance Monitoring</value>
+    <value>Who Is Reporting</value>
   </data>
   <data name="localManageActivitiesResource1.Text" xml:space="preserve">
     <value>Manage Activities</value>

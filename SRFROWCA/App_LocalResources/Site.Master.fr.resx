@@ -166,7 +166,7 @@
     <value>Se connecter</value>
   </data>
   <data name="localDashboardRepStatusResource1.Text" xml:space="preserve">
-    <value>Etat du rapport</value>
+    <value>Réalisations</value>
   </data>
   <data name="localDataEntryResource1.Text" xml:space="preserve">
     <value>Saisie de données</value>
@@ -175,7 +175,7 @@
     <value>FAQ &amp; Aide</value>
   </data>
   <data name="Localize1Resource1.Text" xml:space="preserve">
-    <value>Suivi de perfomance</value>
+    <value>Qui rapporte où</value>
   </data>
   <data name="localManageActivitiesResource1.Text" xml:space="preserve">
     <value>Gérer Activités</value>
