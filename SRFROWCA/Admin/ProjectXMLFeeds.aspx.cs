@@ -305,9 +305,9 @@ namespace SRFROWCA.Admin
             string errorMessage = string.Empty;
             if (ProjectContributions.SaveContributions(projectList, type, out errorMessage))
                 lblMessage.Text += "XML Feeds Project fed successfully into database<br><br>";
-            else
-                lblMessage.Text += "Error: XML feeding unsuccessful - " + errorMessage + "<br><br>";
-
+            
+            if(!string.IsNullOrEmpty(errorMessage))
+                lblMessage.Text += "With following Errors: <br>" + errorMessage + "<br><br>";
 
             //Response.Write(type + " count in Feed: " + projectList.Count.ToString() + "<br>");
             //Response.Write(type + " already exist in DB: 0" + "<br>");

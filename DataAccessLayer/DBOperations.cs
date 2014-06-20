@@ -85,11 +85,19 @@ namespace DataAccessLayer.DataAccess
 
                     foreach (object[] parameters in listObjParams)
                     {
-                        using (DbCommand dbCommand = database.GetStoredProcCommand(sprocName, parameters))
+                        try
                         {
-                            database.ExecuteNonQuery(dbCommand);
-                            //dtData = dataSet.Tables.Count > 0 ? dataSet.Tables[0] : new DataTable();
+                            using (DbCommand dbCommand = database.GetStoredProcCommand(sprocName, parameters))
+                            {
+                                database.ExecuteNonQuery(dbCommand);
+                                //dtData = dataSet.Tables.Count > 0 ? dataSet.Tables[0] : new DataTable();
+                            }
                         }
+                        catch (Exception ex)
+                        {
+                            errorMessage += ex.Message + "<br><br>";
+                        }
+                        
                     }
                 }
             }
