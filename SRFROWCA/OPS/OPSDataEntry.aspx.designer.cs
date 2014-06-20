@@ -13,13 +13,40 @@ namespace SRFROWCA.OPS {
     public partial class OPSDataEntry {
         
         /// <summary>
-        /// locFilterContainerHeader control.
+        /// lzeLgndStrObjs control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locFilterContainerHeader;
+        protected global::System.Web.UI.WebControls.Localize lzeLgndStrObjs;
+        
+        /// <summary>
+        /// cblObjectives control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList cblObjectives;
+        
+        /// <summary>
+        /// lzeLgndHumPriorities control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize lzeLgndHumPriorities;
+        
+        /// <summary>
+        /// cblPriorities control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList cblPriorities;
         
         /// <summary>
         /// locClusterCaption control.
@@ -56,42 +83,6 @@ namespace SRFROWCA.OPS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkLanguageFrench;
-        
-        /// <summary>
-        /// Localize2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize2;
-        
-        /// <summary>
-        /// ddlStrObjectives control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlStrObjectives;
-        
-        /// <summary>
-        /// Localize3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize3;
-        
-        /// <summary>
-        /// ddlPriorities control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPriorities;
         
         /// <summary>
         /// btnSave control.
@@ -137,15 +128,6 @@ namespace SRFROWCA.OPS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvActivities;
-        
-        /// <summary>
-        /// btnSave2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSave2;
         
         /// <summary>
         /// btnClientOpen control.

@@ -5,40 +5,44 @@
 <head id="Head1" runat="server">
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
     <title></title>
-    <link rel="stylesheet" type="text/css" href="~/Styles/Site.min.css" />
-    <link rel="stylesheet" type="text/css" href="~/Styles/style.css" />
-    <link rel="stylesheet" type="text/css" href="~/Styles/menu.css" />
-    <link rel="stylesheet" type="text/css" href="~/Styles/loginareamenu.css" />
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js" type="text/javascript"></script>
-    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="<%# BaseURL %>/Scripts/jquery.kiketable.colsizable-1.1.min.js"></script>
-    <script type="text/javascript" src="<%# BaseURL %>/Scripts/jquery.event.drag-1.4.min.js"></script>
-    <script type="text/javascript" src="<%# BaseURL %>/Scripts/jquery.fixedMenu.js"></script>
+    <!-- basic styles -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <!--[if IE 7]>
+		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
+		<![endif]-->
+    <!-- page specific plugin styles -->
+    <!-- fonts -->
+    <link rel="stylesheet" href="assets/css/ace-fonts.css" />
+    <link rel="stylesheet" href="assets/css/ace.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+    <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/blitzer/jquery-ui.min.css" />
+    <!-- ORS styles -->
+    <link rel="stylesheet" href="assets/css/ors.css" />
+    <!-- ace styles -->
+    <!--[if !IE] -->
     <script type="text/javascript">
-        var myMessages = ['info', 'warning', 'error', 'success'];
-
-        function hideAllMessages() {
-            var messagesHeights = new Array(); // this array will store height for each
-
-            for (i = 0; i < myMessages.length; i++) {
-                messagesHeights[i] = $('.' + myMessages[i]).outerHeight(); // fill array
-                $('.' + myMessages[i]).css('top', -messagesHeights[i]); //move element outside viewport	  
-            }
-        }
-
-        $(function () {
-            $('.menu').fixedMenu();
-            hideAllMessages();
-
-            // get the current page
-            var link = window.location.href.split('/');
-            page = link[link.length - 1];
-
-            // now select the link based on the address
-            $('#nav li a[href*="' + page + '"]').addClass('current');
-        });
-        
-        
+        window.jQuery || document.write("<script src='<%# BaseURL %>/assets/js/jquery-2.0.3.min.js'>" +
+    "<" + "/script>"); </script>
+    <!-- <![endif]-->
+    <!--[if IE]> <script type="text/javascript">
+    window.jQuery || document.write("<script src='<%# BaseURL %>/assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+    </script> <![endif]-->
+    <script type="text/javascript">        if ("ontouchend" in document)
+            document.write("<script src='<%# BaseURL %>/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+    <!--[if lte IE 8]>
+		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+		<![endif]-->
+    <!-- inline styles related to this page -->
+    <!-- ace settings handler -->
+    <script src="<%# BaseURL %>/assets/js/ace-extra.min.js"></script>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+		<script src="<%# BaseURL %>/assets/js/html5shiv.js"></script>
+		<script src="<%# BaseURL %>/assets/js/respond.min.js"></script>
+		<![endif]-->
     </script>
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>

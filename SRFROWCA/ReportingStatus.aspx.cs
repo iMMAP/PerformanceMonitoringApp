@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace SRFROWCA
 {
-    public partial class ReportingStatus : System.Web.UI.Page
+    public partial class ReportingStatus : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

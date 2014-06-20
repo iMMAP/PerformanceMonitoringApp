@@ -976,6 +976,15 @@ namespace SRFROWCA {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor AFundingStatus;
         
         /// <summary>
+        /// liOrganizationList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liOrganizationList;
+        
+        /// <summary>
         /// liBulkImport control.
         /// </summary>
         /// <remarks>

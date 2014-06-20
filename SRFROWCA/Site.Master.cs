@@ -287,6 +287,7 @@ namespace SRFROWCA
             bool isShow = true;
             liFundingStatus.Visible = isShow;
             liUserListing.Visible = isShow;
+            liOrganizationList.Visible = isShow;
         }
 
         private void ActiveMenueItem()
@@ -471,7 +472,7 @@ namespace SRFROWCA
 
         // This property is to use it in markup where css and js files
         // use this to create virtualpath.
-        protected string BaseURL
+        public string BaseURL
         {
             get
             {

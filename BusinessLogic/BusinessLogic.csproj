@@ -43,12 +43,12 @@
   <ItemGroup>
     <Compile Include="CommonMethods.cs" />
     <Compile Include="DBContext.cs" />
-    <Compile Include="Projects\ProjectContributions.cs" />
+    <Compile Include="Organization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
-      <Project>{c778fc54-fadb-446c-bed3-b34a36f16d79}</Project>
+      <Project>{C778FC54-FADB-446C-BED3-B34A36F16D79}</Project>
       <Name>DataAccessLayer</Name>
     </ProjectReference>
   </ItemGroup>

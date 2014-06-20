@@ -15,7 +15,7 @@ using System.Data.SqlClient;
 
 namespace SRFROWCA.Admin
 {
-    public partial class UploadLogFrame : System.Web.UI.Page
+    public partial class UploadLogFrame : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

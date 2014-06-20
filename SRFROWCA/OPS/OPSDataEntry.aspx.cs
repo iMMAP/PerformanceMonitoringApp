@@ -12,54 +12,21 @@ using SRFROWCA.Common;
 
 namespace SRFROWCA.OPS
 {
-    public partial class OPSDataEntry : System.Web.UI.Page
+    public partial class OPSDataEntry : BasePage
     {
-        protected override void InitializeCulture()
-        {
-            // Get whihc control post back page.
-            string languageControl = Request.Form["__EventTarget"];
-            string languageAndCulture = "";
-            // if post back control is language control then check
-            // which language link is clicked and change the language of the page.
-            if (!string.IsNullOrEmpty(languageControl))
-            {
-                if (languageControl.EndsWith("French"))
-                {
-                    SiteLanguageId = 2;
-                    languageAndCulture = "fr-FR";
-                }
-                else
-                {
-                    SiteLanguageId = 1;
-                    languageAndCulture = "en-US";
-                }
-
-                SetCulture(languageAndCulture);
-            }
-
-            if (Session["Language"] != null)
-            {
-                if (!Session["Language"].ToString().StartsWith(Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName)) SetCulture(Session["Language"].ToString());
-            }
-
-            base.InitializeCulture();
-        }
-
-        protected void SetCulture(string languageAndCulture)
-        {
-            Session["Language"] = languageAndCulture;
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(languageAndCulture);
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(languageAndCulture);
-        }
-
-        // Gzip contents of the page to reduce size.
-        protected void Page_PreInit(object sender, EventArgs e)
-        {
-            GZipContents.GZipOutput();
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
+            string languageChange = "";
+            if (Session["SiteChanged"] != null)
+            {
+                languageChange = Session["SiteChanged"].ToString();
+            }
+
+            if (!string.IsNullOrEmpty(languageChange))
+            {
+                Session["SiteChanged"] = null;
+            }
+
             if (!IsPostBack)
             {
                 if (SiteLanguageId == 0)
@@ -106,17 +73,17 @@ namespace SRFROWCA.OPS
         // Get English version of Objectives and Priorities and full drop downs.
         protected void lnkLanguageEnglish_Click(object sender, EventArgs e)
         {
-            SiteLanguageId = 1;
-            PopulateStrategicObjectives();
-            PopulatePriorities();
+            //SiteLanguageId = 1;
+            //PopulateStrategicObjectives();
+            //PopulatePriorities();
         }
 
         // Get French version of Objectives and Priorities and full drop downs.
         protected void lnkLanguageFrench_Click(object sender, EventArgs e)
         {
-            SiteLanguageId = 2;
-            PopulateStrategicObjectives();
-            PopulatePriorities();
+            //SiteLanguageId = 2;
+            //PopulateStrategicObjectives();
+            //PopulatePriorities();
         }
 
         #region Button Click Events.
@@ -277,7 +244,7 @@ namespace SRFROWCA.OPS
 
             if (dt.Rows.Count > 0)
             {
-                OPSLocationEmergencyId = Convert.ToInt32(dt.Rows[0]["LocationEmergencyId"].ToString());
+                OPSLocationEmergencyId = Convert.ToInt32(dt.Rows[0]["EmergencyLocationId"].ToString());
                 OPSEmergencyId = Convert.ToInt32(dt.Rows[0]["EmergencyId"].ToString());
             }
         }
@@ -363,7 +330,7 @@ namespace SRFROWCA.OPS
         {
             LocationId = GetLocationId();
             PopulateLocations(LocationId);
-            PopulateStrategicObjectives();
+            PopulateObjectives();
             PopulatePriorities();
         }
 
@@ -373,34 +340,13 @@ namespace SRFROWCA.OPS
             return dt.Rows.Count > 0 ? Convert.ToInt32(dt.Rows[0]["LocationId"]) : 0;
         }
 
-        private void PopulateStrategicObjectives()
+        private void PopulateObjectives()
         {
-            UI.FillObjectives(ddlStrObjectives);
-
-            if (ddlStrObjectives.Items.Count > 1)
-            {
-                ListItem item = new ListItem("All", "0");
-                ddlStrObjectives.Items.Insert(0, item);
-            }
+            UI.FillObjectives(cblObjectives, true);
         }
-
         private void PopulatePriorities()
         {
-            ddlPriorities.DataValueField = "HumanitarianPriorityId";
-            ddlPriorities.DataTextField = "HumanitarianPriority";
-
-            DataTable dt = GetPriorites();
-            ddlPriorities.DataSource = dt;
-            ddlPriorities.DataBind();
-
-            ListItem item = new ListItem("All", "0");
-            ddlPriorities.Items.Insert(0, item);
-        }
-
-        private DataTable GetPriorites()
-        {
-            int isLogFrame = 1;
-            return DBContext.GetData("GetPrioritiesLogFrame", new object[] { SiteLanguageId, isLogFrame });
+            UI.FillPriorities(cblPriorities);
         }
 
         // In this method we will get the postback control.
@@ -456,7 +402,7 @@ namespace SRFROWCA.OPS
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 
-        protected void BindGridData()
+        internal override void BindGridData()
         {
             DataTable dt = GetActivities();
             GetReport(dt);
@@ -921,23 +867,28 @@ namespace SRFROWCA.OPS
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                if (Session["dtOPSActivities"] == null) return;
+                //if (Session["dtOPSActivities"] == null) return;
 
-                DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
-                if (dtActivities == null) return;
+                //DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
+                //if (dtActivities == null) return;
 
-                foreach (DataColumn dc in dtActivities.Columns)
-                {
-                    string colName = dc.ColumnName;
-                    TextBox txt = e.Row.FindControl(colName) as TextBox;
-                    if (txt != null)
-                    {
-                        if (txt.Text == "-1")
-                        {
-                            txt.Text = "";
-                        }
-                    }
-                }
+                //foreach (DataColumn dc in dtActivities.Columns)
+                //{
+                //    string colName = dc.ColumnName;
+                //    TextBox txt = e.Row.FindControl(colName) as TextBox;
+                //    if (txt != null)
+                //    {
+                //        if (txt.Text == "-1")
+                //        {
+                //            txt.Text = "";
+                //        }
+                //    }
+                //}
+
+                ObjPrToolTip.ObjectiveIconToolTip(e, 0);
+                ObjPrToolTip.PrioritiesIconToolTip(e, 1);
+                //ObjPrToolTip.RegionalIndicatorIcon(e, 12);
+                //ObjPrToolTip.CountryIndicatorIcon(e, 13);
             }
         }
 

@@ -304,9 +304,9 @@ namespace SRFROWCA.Admin
 
             string errorMessage = string.Empty;
             if (ProjectContributions.SaveContributions(projectList, type, out errorMessage))
-                lblMessage.Text += "XML Feeds Project fed successfully into database<br>";
+                lblMessage.Text += "XML Feeds Project fed successfully into database<br><br>";
             else
-                lblMessage.Text += "Error: XML feeding unsuccessful - " + errorMessage + "<br>";
+                lblMessage.Text += "Error: XML feeding unsuccessful - " + errorMessage + "<br><br>";
 
 
             //Response.Write(type + " count in Feed: " + projectList.Count.ToString() + "<br>");
@@ -323,7 +323,7 @@ namespace SRFROWCA.Admin
             }
             catch (Exception ex)
             {
-                lblMessage.Text = "Error (Project feed): Connectivity issues - " + ex.Message+"<br>";
+                lblMessage.Text = "Error (Project feed): Connectivity issues - " + ex.Message+"<br><br>";
             }
 
             try

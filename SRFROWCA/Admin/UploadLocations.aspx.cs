@@ -14,7 +14,7 @@ using System.Web.Security;
 
 namespace SRFROWCA.Admin
 {
-    public partial class UploadLocations : System.Web.UI.Page
+    public partial class UploadLocations : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
