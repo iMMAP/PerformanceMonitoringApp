@@ -303,11 +303,17 @@ namespace SRFROWCA.Admin
                 type = "Contribution";
 
             string errorMessage = string.Empty;
-            if (ProjectContributions.SaveContributions(projectList, type, out errorMessage))
-                lblMessage.Text += "XML Feeds Project fed successfully into database<br><br>";
-            
-            if(!string.IsNullOrEmpty(errorMessage))
-                lblMessage.Text += "With following Errors: <br>" + errorMessage + "<br><br>";
+
+            if (ProjectContributions.TruncateTable("FTSFunding", out errorMessage))
+            {
+                if (ProjectContributions.SaveContributions(projectList, type, out errorMessage))
+                    lblMessage.Text += "XML Feeds (" + type + ") Project fed successfully into database<br><br>";
+
+                if (!string.IsNullOrEmpty(errorMessage))
+                    lblMessage.Text += "With following Errors: <br>" + errorMessage + "<br><br>";
+            }
+            else
+                lblMessage.Text = "Error: Failed to truncate table: "+errorMessage;
 
             //Response.Write(type + " count in Feed: " + projectList.Count.ToString() + "<br>");
             //Response.Write(type + " already exist in DB: 0" + "<br>");
@@ -317,6 +323,9 @@ namespace SRFROWCA.Admin
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
+            btnSubmit.Text = "Please wait...";
+            btnSubmit.Enabled = false;
+
             try
             {
                 LoadXML("http://fts.unocha.org/common/CustomSearchXmlRss.aspx?output=0&CQ=cq1606141529408X1rn1Kc2n", "project");
@@ -334,6 +343,9 @@ namespace SRFROWCA.Admin
             {
                 lblMessage.Text += "Error (Contribution feed): Connectivity issues - " + ex.Message;
             }
+
+            btnSubmit.Text = "Load Projects Feed";
+            btnSubmit.Enabled = true;
         }
 
         private string FormatDate(string dateValue)

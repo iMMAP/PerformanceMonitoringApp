@@ -65,7 +65,7 @@ namespace DataAccessLayer.DataAccess
             return recordId;
         }
 
-        public static bool ExecuteSPROC(string loginEnvironment, string sprocName, List<object[]> listObjParams, out string errorMessage, string type)
+        public static bool TruncateTable(string loginEnvironment, string tableName, out string errorMessage)
         {
             Database database = DataAccessConnection.GetDBConnection(loginEnvironment);
             errorMessage = string.Empty;
@@ -77,11 +77,29 @@ namespace DataAccessLayer.DataAccess
                     dbConnection.Open();
                     Database.ClearParameterCache();
 
-                    if (type.Equals("Contribution"))
-                    {
-                        database.ExecuteNonQuery(CommandType.Text, "DELETE FROM FTSFunding");
-                        //database.ExecuteNonQuery(CommandType.Text, "DELETE FROM Projects");
-                    }
+                    database.ExecuteNonQuery(CommandType.Text, "DELETE FROM "+tableName);
+                }
+            }
+            catch (Exception ex)
+            {
+                errorMessage = ex.Message;
+                return false;
+            }
+
+            return true;
+        }
+
+        public static bool ExecuteSPROC(string loginEnvironment, string sprocName, List<object[]> listObjParams, out string errorMessage, string type)
+        {
+            Database database = DataAccessConnection.GetDBConnection(loginEnvironment);
+            errorMessage = string.Empty;
+
+            try
+            {
+                using (DbConnection dbConnection = database.CreateConnection())
+                {
+                    dbConnection.Open();
+                    Database.ClearParameterCache();
 
                     foreach (object[] parameters in listObjParams)
                     {

@@ -288,6 +288,7 @@ namespace SRFROWCA
             liFundingStatus.Visible = isShow;
             liUserListing.Visible = isShow;
             liOrganizationList.Visible = isShow;
+            liProjectXMLFeeds.Visible = isShow;
         }
 
         private void ActiveMenueItem()

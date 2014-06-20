@@ -64,6 +64,13 @@ namespace BusinessLogic.Projects
         public DateTime? ProjectEndDate { get; set; }
         public DateTime? ContributionDecisionDate { get; set; }
 
+        public static bool TruncateTable(string tableName, out string errorMessage)
+        {
+            errorMessage = string.Empty;
+
+            return DBOperations.TruncateTable(CommonMethodsBL.ConnectionString, tableName, out errorMessage);
+        }
+
         public static bool SaveContributions(List<ProjectContributions> listProjectContribution, string type, out string errorMessage)
         {
             errorMessage = string.Empty;
