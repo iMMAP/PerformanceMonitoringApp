@@ -69,9 +69,7 @@ namespace SRFROWCA.Admin.Organization
         private void SaveOrganization()
         {
             try
-            {
-                int b = 0;
-                int a = 10 / b;
+            {              
                 int retVal = 0;                
                 objOrganization.Name = txtOrgName.Text;
                 objOrganization.Acronym = txtOrgAcronym.Text;
