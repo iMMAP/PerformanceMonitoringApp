@@ -160,7 +160,6 @@
     <Content Include="Admin\EmergencyLocations.aspx" />
     <Content Include="Admin\IndicatorActivities.aspx" />
     <Content Include="Admin\PriorityActivities.aspx" />
-    <Content Include="Admin\ProjectXMLFeeds.aspx" />
     <Content Include="Anonymous\AllDataPublic.aspx" />
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="assets\css\ace-fonts.css" />
@@ -1170,13 +1169,6 @@
     </Compile>
     <Compile Include="Admin\PriorityActivities.aspx.designer.cs">
       <DependentUpon>PriorityActivities.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\ProjectXMLFeeds.aspx.cs">
-      <DependentUpon>ProjectXMLFeeds.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\ProjectXMLFeeds.aspx.designer.cs">
-      <DependentUpon>ProjectXMLFeeds.aspx</DependentUpon>
     </Compile>
     <Compile Include="Anonymous\AllDataPublic.aspx.cs">
       <DependentUpon>AllDataPublic.aspx</DependentUpon>
