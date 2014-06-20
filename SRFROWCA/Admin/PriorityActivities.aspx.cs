@@ -10,7 +10,7 @@ using SRFROWCA.Common;
 
 namespace SRFROWCA.Admin
 {
-    public partial class PriorityActivities : System.Web.UI.Page
+    public partial class PriorityActivities : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

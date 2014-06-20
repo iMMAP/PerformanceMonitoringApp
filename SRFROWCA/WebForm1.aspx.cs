@@ -12,10 +12,7 @@ namespace SRFROWCA
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (IsPostBack) return;
-
-            gvIndicators.DataSource = DBContext.GetData("TestProcedureActivity");
-            gvIndicators.DataBind();
+            
         }
     }
 }

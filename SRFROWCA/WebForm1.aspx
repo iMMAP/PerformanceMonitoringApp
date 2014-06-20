@@ -1,34 +1,18 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="SRFROWCA.WebForm1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    <script type="text/javascript">
+        function windowOpen() {
+            myWindow = window.open('http://localhost:50464/OPS/OPSDataEntry.aspx?uid=9&pid=59768&ProjectRevision=R&clname=education&cname=mali&key=pUAkWrmUJKCobRxo2HrHSA%3d%3d', '_blank', 'width=1000,height=600, scrollbars=yes,resizable=yes')
+            myWindow.focus()
+            return false;
+        }
+</script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="page-content">
-        <div class="row">
-            <div class="col-sm-9 widget-container-span">
-                <div class="widget-box">
-                    <div class="widget-body">
-                        <div class="widget-main">
-                            <div id="scrolledGridView" style="overflow-x: auto; width: 100%;">
-                                <asp:GridView ID="gvIndicators" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True"
-                                    CssClass="imagetable">
-                                    <HeaderStyle BackColor="Control"></HeaderStyle>
-                                    <RowStyle CssClass="istrow" />
-                                    <AlternatingRowStyle CssClass="altcolor" />
-                                    <Columns>
-                                        <asp:BoundField DataField="ActivityName" HeaderText="Activity" ItemStyle-CssClass="testact"
-                                            SortExpression="ActivityName">
-                                            <ItemStyle CssClass="testact"></ItemStyle>
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="PriorityActivityId" />
-                                    </Columns>
-                                </asp:GridView>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="space"></div>
+    <input type="button" value="test"  onclick="windowOpen()" style="width:200px" />
         </div>
-    </div>
-
+     
 </asp:Content>

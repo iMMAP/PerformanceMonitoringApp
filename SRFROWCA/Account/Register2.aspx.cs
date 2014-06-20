@@ -10,7 +10,7 @@ using System.Data;
 
 namespace SRFROWCA.Account
 {
-    public partial class Register2 : System.Web.UI.Page
+    public partial class Register2 : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

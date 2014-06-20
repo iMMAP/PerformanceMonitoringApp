@@ -38,8 +38,7 @@ namespace SRFROWCA.Account
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            try
-            {
+            
                 string userName = txtUserName.Text.Trim();
                 string email = txtEmail.Text.Trim();
 
@@ -65,7 +64,7 @@ namespace SRFROWCA.Account
                         if (dt.Rows.Count > 0)
                         {
                             link = GenerateTempLinkForUser(dt.Rows[0]["LinkGUID"].ToString());
-                            //EmailLink(mu.Email, link, mu.UserName);
+                            EmailLink(mu.Email, link, mu.UserName);
                             RedirecToConfimationPage();
                         }
                         else
@@ -86,11 +85,7 @@ namespace SRFROWCA.Account
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                ShowMessage(RC.ErrorMessage, ex.Message);
-            }
+           
         }
 
         private void RedirecToConfimationPage()
@@ -106,33 +101,17 @@ namespace SRFROWCA.Account
         private void EmailLink(string toEmail, string link, string userName)
         {
             string mailMessage = RC.SelectedSiteLanguageId == 2
-                ? @"Mot de passe oublié!
-                                            ORS a reçu une requête de réinitialiser le mot de passe de votre compte. '{0}' 
-                                            Pour réinitialiser votre mot de passe, cliquer sur le lien ci-dessous (ou faites un copie-coller de l'URL sur votre navigateur): {1}
-                                            Si vous n'avez pas demandé de changement, ignorer ce message.
-                                            Meric,
-                                            ORS Support"
-                : @"Forgot your password!
+                ? @"Mot de passe oublié!{0}{1}ORS a reçu une requête de réinitialiser le mot de passe de votre compte '{2}'.{3}{4}Pour réinitialiser votre mot de passe, cliquer sur le lien ci-dessous (ou faites un copie-coller de l'URL sur votre navigateur): {5}{6}{7}{8}Si vous n'avez pas demandé de changement, ignorer ce message.{9}Ce lien va expirer dans 24 heures{10}{11}Meric,{12}ORS Support"
+                : @"Forgot your password!{0}{1}ORS received a request to reset the password for your account '{2}'.{3}{4}To reset your password, click on the link below (or copy and paste the URL into your browser):{5}{6}{7}{8}If you did not request this change, you do not need to do anything.{9}This link will expire in 24 hours.{10}{11}Thanks,{12}ORS Support";
 
-                                              ORS received a request to reset the password for your account '{0}'
-                                              To reset your password, click on the link below (or copy and paste the URL into your browser):
-                                              {1}
-
-                                              If you did not request this change, you do not need to do anything.
-                                              This link will expire in 24 hours.
-
-                                              Thanks, 
-                                              ORS Support";
-
-
-            string mailBody = string.Format(mailMessage,userName, link);
+            string mailBody = string.Format(mailMessage, "<br/>", "<br/>", userName, "<br/>", "<br/>", "<br/>", link, "<br/>", "<br/>", "<br/>", "<br/>", "<br/>", "<br/>");
             //Mail.SendMail("orsocharowca@gmail.com ", toEmail, "Password Change Request", mailBody);
             try
             {
                 using (MailMessage mailMsg = new MailMessage())
                 {
                     mailMsg.From = new MailAddress("orsocharowca@gmail.com");
-                    mailMsg.To.Add(new MailAddress("orsocharowca@gmail.com"));
+                    mailMsg.To.Add(new MailAddress(toEmail));
                     mailMsg.Subject = "ORS Password Change Request";
                     mailMsg.IsBodyHtml = true;
                     mailMsg.Body = mailBody;

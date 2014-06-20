@@ -35,12 +35,12 @@
                                             <p>
                                                 <asp:Localize ID="localEnterEmailOrUserName" runat="server" Text="Enter your email OR User Name to receive instructions!" meta:resourcekey="localEnterEmailOrUserNameResource1"></asp:Localize>
                                             </p>
-                                            <label class="block clearfix">
-                                                <span class="block input-icon input-icon-right">
-                                                    <asp:TextBox ID="txtEmail" runat="server" MaxLength="256" CssClass="form-control" placeholder="Email" meta:resourcekey="txtEmailResource1"></asp:TextBox>
-                                                    <i class="icon-envelope"></i></span>
+                                            <%--<label class="block clearfix">
+                                                <span class="block input-icon input-icon-right">--%>
+                                                    <asp:TextBox ID="txtEmail" runat="server" MaxLength="256" CssClass="form-control" placeholder="Email" meta:resourcekey="txtEmailResource1" Visible="false"></asp:TextBox>
+                                                    <%--<i class="icon-envelope"></i></span>
                                             </label>
-                                            OR
+                                            OR--%>
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
                                                     <asp:TextBox ID="txtUserName" runat="server" MaxLength="256" CssClass="form-control" placeholder="Username" meta:resourcekey="txtUserNameResource1"></asp:TextBox>

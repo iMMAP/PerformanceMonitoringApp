@@ -7,7 +7,7 @@ using SRFROWCA.Common;
 
 namespace SRFROWCA.Admin
 {
-    public partial class EmergencyLocations : System.Web.UI.Page
+    public partial class EmergencyLocations : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

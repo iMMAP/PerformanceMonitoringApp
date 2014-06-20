@@ -295,13 +295,14 @@ namespace SRFROWCA
             string uri = HttpContext.Current.Request.Url.AbsolutePath;
             if (uri == "/Default.aspx")
             {
-                liDashboard.Attributes.Add("class", "active");
+                liDashboards.Attributes.Add("class", "active open");
+                liDefault.Attributes.Add("class", "active");
             }
-            //else if (uri == "/ReportingStatus.aspx")
-            //{
-            //    liDashboards.Attributes.Add("class", "active open");
-            //    liReportingStatus.Attributes.Add("class", "active");
-            //}
+            else if (uri == "/ReportingStatus.aspx")
+            {
+                liDashboards.Attributes.Add("class", "active open");
+                liReportingStatus.Attributes.Add("class", "active");
+            }
             //else if (uri == "/OperationalPresenceDB.aspx")
             //{
             //    liDashboards.Attributes.Add("class", "active open");
