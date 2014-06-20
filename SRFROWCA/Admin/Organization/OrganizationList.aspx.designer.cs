@@ -13,7 +13,7 @@ namespace SRFROWCA.Admin.Organization {
     public partial class OrganizationList {
         
         /// <summary>
-        /// lblMessage control.
+        /// lblMessage control. 
         /// </summary>
         /// <remarks>
         /// Auto-generated field.

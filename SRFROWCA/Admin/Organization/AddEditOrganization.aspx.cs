@@ -82,7 +82,7 @@ namespace SRFROWCA.Admin.Organization
                 if (string.IsNullOrEmpty(Request.QueryString["oid"]))
                 {
                     retVal = objOrganization.Add();
-                }
+                } 
                 else
                 {
                     objOrganization.Id = Convert.ToInt32(Utils.DecryptQueryString(Request.QueryString["oid"]));
