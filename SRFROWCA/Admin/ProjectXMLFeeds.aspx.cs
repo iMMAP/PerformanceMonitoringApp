@@ -304,16 +304,11 @@ namespace SRFROWCA.Admin
 
             string errorMessage = string.Empty;
 
-            if (ProjectContributions.TruncateTable("FTSFunding", out errorMessage))
-            {
-                if (ProjectContributions.SaveContributions(projectList, type, out errorMessage))
-                    lblMessage.Text += "XML Feeds (" + type + ") Project fed successfully into database<br><br>";
+            if (ProjectContributions.SaveContributions(projectList, type, out errorMessage))
+                lblMessage.Text += "XML Feeds (" + type + ") Project fed successfully into database<br><br>";
 
-                if (!string.IsNullOrEmpty(errorMessage))
-                    lblMessage.Text += "With following Errors: <br>" + errorMessage + "<br><br>";
-            }
-            else
-                lblMessage.Text = "Error: Failed to truncate table: "+errorMessage;
+            if (!string.IsNullOrEmpty(errorMessage))
+                lblMessage.Text += "With following Errors: <br>" + errorMessage + "<br><br>";
 
             //Response.Write(type + " count in Feed: " + projectList.Count.ToString() + "<br>");
             //Response.Write(type + " already exist in DB: 0" + "<br>");
@@ -325,24 +320,31 @@ namespace SRFROWCA.Admin
         {
             btnSubmit.Text = "Please wait...";
             btnSubmit.Enabled = false;
+            string errorMessage = string.Empty;
 
-            try
+            if (ProjectContributions.TruncateTable("FTSFunding", out errorMessage))
             {
-                LoadXML("http://fts.unocha.org/common/CustomSearchXmlRss.aspx?output=0&CQ=cq1606141529408X1rn1Kc2n", "project");
-            }
-            catch (Exception ex)
-            {
-                lblMessage.Text = "Error (Project feed): Connectivity issues - " + ex.Message+"<br><br>";
-            }
 
-            try
-            {
-                LoadXML("http://fts.unocha.org/common/CustomSearchXmlRss.aspx?output=0&CQ=cq1606141458492On03qSddb", "contribution");
+                try
+                {
+                    LoadXML("http://fts.unocha.org/common/CustomSearchXmlRss.aspx?output=0&CQ=cq1606141529408X1rn1Kc2n", "project");
+                }
+                catch (Exception ex)
+                {
+                    lblMessage.Text = "Error (Project feed): Connectivity issues - " + ex.Message + "<br><br>";
+                }
+
+                try
+                {
+                    LoadXML("http://fts.unocha.org/common/CustomSearchXmlRss.aspx?output=0&CQ=cq1606141458492On03qSddb", "contribution");
+                }
+                catch (Exception ex)
+                {
+                    lblMessage.Text += "Error (Contribution feed): Connectivity issues - " + ex.Message;
+                }
             }
-            catch (Exception ex)
-            {
-                lblMessage.Text += "Error (Contribution feed): Connectivity issues - " + ex.Message;
-            }
+            else
+                lblMessage.Text = "Error: Failed to truncate table" + errorMessage;
 
             btnSubmit.Text = "Load Projects Feed";
             btnSubmit.Enabled = true;
