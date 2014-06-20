@@ -66,8 +66,7 @@
                         </asp:DropDownList>
                     </td>
                     <td>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="Country Type Required" InitialValue="-1"
-                            CssClass="error2" Text="Required" ControlToValidate="ddlCountry"></asp:RequiredFieldValidator>
+                       
                     </td>
                 </tr>
                 <tr>

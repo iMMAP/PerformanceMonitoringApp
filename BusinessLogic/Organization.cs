@@ -96,7 +96,7 @@ namespace BusinessLogic
                 obj.Status = Convert.ToBoolean(dt.Rows[0]["IsActive"]);
                 obj.Phone = dt.Rows[0]["Phone"].ToString();
                 obj.Address = dt.Rows[0]["Address"].ToString();
-                obj.CountryId = Convert.ToInt32(dt.Rows[0]["CountryId"]);
+                obj.CountryId =  dt.Rows[0]["CountryId"] == DBNull.Value ? -1 : Convert.ToInt32(dt.Rows[0]["CountryId"]);
             }
             return obj;
         }
