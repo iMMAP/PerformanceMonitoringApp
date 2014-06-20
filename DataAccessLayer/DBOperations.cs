@@ -65,6 +65,30 @@ namespace DataAccessLayer.DataAccess
             return recordId;
         }
 
+        public static bool TruncateTable(string loginEnvironment, string tableName, out string errorMessage)
+        {
+            Database database = DataAccessConnection.GetDBConnection(loginEnvironment);
+            errorMessage = string.Empty;
+
+            try
+            {
+                using (DbConnection dbConnection = database.CreateConnection())
+                {
+                    dbConnection.Open();
+                    Database.ClearParameterCache();
+
+                    database.ExecuteNonQuery(CommandType.Text, "DELETE FROM "+tableName);
+                }
+            }
+            catch (Exception ex)
+            {
+                errorMessage = ex.Message;
+                return false;
+            }
+
+            return true;
+        }
+
         public static bool ExecuteSPROC(string loginEnvironment, string sprocName, List<object[]> listObjParams, out string errorMessage, string type)
         {
             Database database = DataAccessConnection.GetDBConnection(loginEnvironment);
@@ -77,19 +101,21 @@ namespace DataAccessLayer.DataAccess
                     dbConnection.Open();
                     Database.ClearParameterCache();
 
-                    if (type.Equals("Contribution"))
-                    {
-                        database.ExecuteNonQuery(CommandType.Text, "DELETE FROM FTSFunding");
-                        //database.ExecuteNonQuery(CommandType.Text, "DELETE FROM Projects");
-                    }
-
                     foreach (object[] parameters in listObjParams)
                     {
-                        using (DbCommand dbCommand = database.GetStoredProcCommand(sprocName, parameters))
+                        try
                         {
-                            database.ExecuteNonQuery(dbCommand);
-                            //dtData = dataSet.Tables.Count > 0 ? dataSet.Tables[0] : new DataTable();
+                            using (DbCommand dbCommand = database.GetStoredProcCommand(sprocName, parameters))
+                            {
+                                database.ExecuteNonQuery(dbCommand);
+                                //dtData = dataSet.Tables.Count > 0 ? dataSet.Tables[0] : new DataTable();
+                            }
                         }
+                        catch (Exception ex)
+                        {
+                            errorMessage += ex.Message + "<br><br>";
+                        }
+                        
                     }
                 }
             }

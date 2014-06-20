@@ -162,6 +162,7 @@
     <Content Include="Admin\Organization\AddEditOrganization.aspx" />
     <Content Include="Admin\Organization\OrganizationList.aspx" />
     <Content Include="Admin\PriorityActivities.aspx" />
+    <Content Include="Admin\ProjectXMLFeeds.aspx" />
     <Content Include="Anonymous\AllDataPublic.aspx" />
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="assets\css\ace-fonts.css" />
@@ -1165,26 +1166,19 @@
     <Compile Include="Admin\IndicatorActivities.aspx.designer.cs">
       <DependentUpon>IndicatorActivities.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\Organization\AddEditOrganization.aspx.cs">
-      <DependentUpon>AddEditOrganization.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\Organization\AddEditOrganization.aspx.designer.cs">
-      <DependentUpon>AddEditOrganization.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\Organization\OrganizationList.aspx.cs">
-      <DependentUpon>OrganizationList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\Organization\OrganizationList.aspx.designer.cs">
-      <DependentUpon>OrganizationList.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Admin\PriorityActivities.aspx.cs">
       <DependentUpon>PriorityActivities.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\PriorityActivities.aspx.designer.cs">
       <DependentUpon>PriorityActivities.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ProjectXMLFeeds.aspx.cs">
+      <DependentUpon>ProjectXMLFeeds.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ProjectXMLFeeds.aspx.designer.cs">
+      <DependentUpon>ProjectXMLFeeds.aspx</DependentUpon>
     </Compile>
     <Compile Include="Anonymous\AllDataPublic.aspx.cs">
       <DependentUpon>AllDataPublic.aspx</DependentUpon>

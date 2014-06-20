@@ -176,7 +176,6 @@ namespace SRFROWCA
             liBulkImport.Visible = isShow;
             liBulkImportUser.Visible = isShow;
             liORSDocuments.Visible = isShow;
-            liOrganizationList.Visible = isShow;
         }
 
         private void ShowUserMenue()
@@ -289,6 +288,7 @@ namespace SRFROWCA
             liFundingStatus.Visible = isShow;
             liUserListing.Visible = isShow;
             liOrganizationList.Visible = isShow;
+            liProjectXMLFeeds.Visible = isShow;
         }
 
         private void ActiveMenueItem()
