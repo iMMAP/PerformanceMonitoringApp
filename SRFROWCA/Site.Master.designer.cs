@@ -175,31 +175,67 @@ namespace SRFROWCA {
         protected global::System.Web.UI.WebControls.Localize localRegister;
         
         /// <summary>
-        /// liDashboard control.
+        /// liDashboards control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liDashboard;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liDashboards;
         
         /// <summary>
-        /// menueDashboard control.
+        /// menueDashboards control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueDashboard;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueDashboards;
         
         /// <summary>
-        /// Localize2 control.
+        /// localDashboard control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize2;
+        protected global::System.Web.UI.WebControls.Localize localDashboard;
+        
+        /// <summary>
+        /// liDefault control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liDefault;
+        
+        /// <summary>
+        /// localDashboardPerfMon control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localDashboardPerfMon;
+        
+        /// <summary>
+        /// liReportingStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liReportingStatus;
+        
+        /// <summary>
+        /// localDashboardRepStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localDashboardRepStatus;
         
         /// <summary>
         /// liDataEntry control.
