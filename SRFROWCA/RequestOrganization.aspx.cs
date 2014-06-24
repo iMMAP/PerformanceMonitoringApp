@@ -41,14 +41,14 @@ namespace SRFROWCA
             if (result > 0)
             {
                 string mailBody = "An ORS Organization Request has been posted:";
-                mailBody += Environment.NewLine + "Organization Name: " + txtOrganizationName.Text;
-                mailBody += Environment.NewLine + "Organization Acronym: " + txtAcronym.Text;
-                mailBody += Environment.NewLine + "Organization Type: " + txtType.Text;
-                mailBody += Environment.NewLine + "Country: " + txtCountry.Text;
-                mailBody += Environment.NewLine + "Contact Name: " + txtContactName.Text;
-                mailBody += Environment.NewLine + "Phone: " + txtPhone.Text;
-                mailBody += Environment.NewLine + "Email: " + txtEmail.Text;
-                mailBody += Environment.NewLine + "Database ID: " + result.ToString();
+                mailBody += "<br>" + "Organization Name: " + txtOrganizationName.Text;
+                mailBody += "<br>" + "Organization Acronym: " + txtAcronym.Text;
+                mailBody += "<br>" + "Organization Type: " + txtType.Text;
+                mailBody += "<br>" + "Country: " + txtCountry.Text;
+                mailBody += "<br>" + "Contact Name: " + txtContactName.Text;
+                mailBody += "<br>" + "Phone: " + txtPhone.Text;
+                mailBody += "<br>" + "Email: " + txtEmail.Text;
+                mailBody += "<br>" + "Database ID: " + result.ToString();
 
                 try
                 {
