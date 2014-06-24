@@ -532,6 +532,7 @@ namespace SRFROWCA.Pages
 
             DBContext.Add("InsertReportLocations", new object[] { ReportId, locIds, DBNull.Value });
         }
+
         private void SaveReportDetails()
         {
             int activityDataId = 0;
@@ -546,17 +547,12 @@ namespace SRFROWCA.Pages
                     activityDataId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString());
                     projIndicatorId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["ProjectIndicatorId"].ToString());
 
-
-
-
-
                     DataTable dtActivities = (DataTable)Session["dtActivities"];
                     List<KeyValuePair<int, decimal?>> dataSave = new List<KeyValuePair<int, decimal?>>();
                     int i = 0;
 
                     foreach (DataColumn dc in dtActivities.Columns)
                     {
-
                         string colName = dc.ColumnName;
                         int locationId = 0;
 

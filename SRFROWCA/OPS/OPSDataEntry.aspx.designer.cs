@@ -85,6 +85,24 @@ namespace SRFROWCA.OPS {
         protected global::System.Web.UI.WebControls.LinkButton lnkLanguageFrench;
         
         /// <summary>
+        /// btnOpenLocations control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnOpenLocations;
+        
+        /// <summary>
+        /// locaNoTargetMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locaNoTargetMessage;
+        
+        /// <summary>
         /// btnSave control.
         /// </summary>
         /// <remarks>
@@ -101,24 +119,6 @@ namespace SRFROWCA.OPS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Localize locbtnCloseWindow;
-        
-        /// <summary>
-        /// locaNoTargetMessage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locaNoTargetMessage;
-        
-        /// <summary>
-        /// btnOpenLocations control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnOpenLocations;
         
         /// <summary>
         /// gvActivities control.
@@ -164,15 +164,6 @@ namespace SRFROWCA.OPS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel uPanel1;
-        
-        /// <summary>
-        /// locLocaitonLevelCaption control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locLocaitonLevelCaption;
         
         /// <summary>
         /// cbAdmin1Locaitons control.

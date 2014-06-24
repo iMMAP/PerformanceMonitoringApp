@@ -19,18 +19,17 @@
 
         <div class="row">
             <div id="scrolledGridView" style="overflow-x: auto; width: 100%;">
-                <asp:GridView ID="gvFunding" runat="server" AutoGenerateColumns="False" HeaderStyle-BackColor="ButtonFace"
+                <asp:GridView ID="gvFunding" runat="server" AutoGenerateColumns="True" HeaderStyle-BackColor="ButtonFace"
                     CssClass="imagetable"
                     Width="100%">
                     <HeaderStyle BackColor="Control"></HeaderStyle>
                     <RowStyle CssClass="istrow" />
                     <AlternatingRowStyle CssClass="altcolor" />
-                    <Columns>
+                    <%--<Columns>
                         <asp:BoundField DataField="FTSDonorName" HeaderText="Donor Name" />
                         <asp:BoundField DataField="FTSReceipentOrganization" HeaderText="Organization" />
                         <asp:BoundField DataField="FTSEmergencyTitle" HeaderText="Emergency" />
-                        <asp:BoundField DataField="FTSAppealTitle" HeaderText="Appeal" />
-                        <asp:BoundField DataField="FTSProjectCode" HeaderText="FTS Project Code" />
+                        <asp:BoundField DataField="FTSAppealTitle" HeaderText="Appeal" />                        
                         <asp:BoundField DataField="EmergencyYear" HeaderText="Emergency Year" />
                         <asp:BoundField DataField="USDCommitedContributed" HeaderText="USD Commited Contributed" />
                         <asp:BoundField DataField="USDPledged" HeaderText="USD Pledged" />
@@ -41,7 +40,7 @@
                         <asp:BoundField DataField="DeistinationCountry" HeaderText="Country" />
                         <asp:BoundField DataField="ContributionStatus" HeaderText="Status" />
                         <asp:BoundField DataField="ReportedBy" HeaderText="Reported By" />
-                    </Columns>
+                    </Columns>--%>
 
                 </asp:GridView>
             </div>
