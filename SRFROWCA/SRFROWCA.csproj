@@ -909,6 +909,7 @@
     <Content Include="Reports\ProjectsPerOrganization.aspx" />
     <Content Include="Reports\TopIndicaotrsRegional.aspx" />
     <Content Include="Reports\TopIndicatorsGeneral.aspx" />
+    <Content Include="RequestOrganization.aspx" />
     <Content Include="UploadSRPLogFrame.aspx" />
     <Content Include="packages.config" />
     <Content Include="Pages\Web.config" />
@@ -1751,6 +1752,13 @@
     </Compile>
     <Compile Include="Reports\TopIndicatorsGeneral.aspx.designer.cs">
       <DependentUpon>TopIndicatorsGeneral.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RequestOrganization.aspx.cs">
+      <DependentUpon>RequestOrganization.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RequestOrganization.aspx.designer.cs">
+      <DependentUpon>RequestOrganization.aspx</DependentUpon>
     </Compile>
     <Compile Include="SessionHeartbeat.ashx.cs">
       <DependentUpon>SessionHeartbeat.ashx</DependentUpon>

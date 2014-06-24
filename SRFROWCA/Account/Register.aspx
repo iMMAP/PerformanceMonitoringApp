@@ -164,6 +164,7 @@
                                                         </asp:DropDownList>
                                                         <asp:CustomValidator runat="server" ForeColor="Red" ID="CustomValidator2" ClientValidationFunction="ValidateOrganization"
                                                             ErrorMessage="Select Your Organization." meta:resourcekey="CustomValidator2Resource1"></asp:CustomValidator>
+                                                    <a href="../RequestOrganization.aspx" style="font-size:smaller;cursor:pointer;">Add organization if you dont see yours in the list.</a>
                                                     </span>
                                                 </label>
                                             </div>
