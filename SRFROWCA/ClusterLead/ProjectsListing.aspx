@@ -56,7 +56,7 @@
                                                                                 </asp:DropDownList>
                                                                             </td>
                                                                         </tr>
-                                                                        <tr>
+                                                                       <%-- <tr>
                                                                             <td>
                                                                                 <asp:Localize ID="Localize1" runat="server" Text="Cercle:" meta:resourcekey="Localize1Resource1"></asp:Localize>
                                                                             </td>
@@ -65,7 +65,7 @@
                                                                                     OnSelectedIndexChanged="ddlAdmin1_SelectedIndexChanged" meta:resourcekey="ddlAdmin2Resource1">
                                                                                 </asp:DropDownList>
                                                                             </td>
-                                                                        </tr>
+                                                                        </tr>--%>
                                                                         <tr>
                                                                             <td>
                                                                                 <asp:Localize ID="Localize2" runat="server" Text="Reporting Status:" meta:resourcekey="Localize2Resource1"></asp:Localize>
@@ -121,7 +121,7 @@
                                                                                 </asp:DropDownList>
                                                                             </td>
                                                                         </tr>
-                                                                        <tr>
+                                                                       <%-- <tr>
                                                                             <td>Project Status:
                                                                             </td>
                                                                             <td>
@@ -132,7 +132,7 @@
                                                                                     <asp:ListItem Text="Completed" Value="2" meta:resourcekey="ListItemResource7"></asp:ListItem>
                                                                                 </asp:DropDownList>
                                                                             </td>
-                                                                        </tr>
+                                                                        </tr>--%>
                                                                         <tr>
                                                                             <div id="divClusters" runat="server">
                                                                                 <td>Cluster:</td>

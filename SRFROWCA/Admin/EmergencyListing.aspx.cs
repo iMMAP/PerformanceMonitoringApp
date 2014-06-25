@@ -20,6 +20,8 @@ namespace SRFROWCA.Admin
             PopulateDisasterTypes();
         }
 
+       
+
         // Add delete confirmation message with all delete buttons.
         protected void gvEmergency_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -45,7 +47,7 @@ namespace SRFROWCA.Admin
                 // Check if any IP has reported on this project. If so then do not delete it.
                 if (!EmgIsBeingUsed(emgId))
                 {
-                    ShowMessage("Emergency cannot be deleted! It is being used.", RC.NotificationType.Error, false, 500);
+                    ShowMessage("Emergency cannot be deleted! It is being used.", RC.NotificationType.Error, true, 500);
                     return;
                 }
 
@@ -67,9 +69,32 @@ namespace SRFROWCA.Admin
                     ddlEmgType.SelectedValue = lblEmgTypeId.Text;
                 }
 
-                txtEmgNameEng.Text = row.Cells[2].Text;                
+                if (gvEmergency.DataKeys[row.RowIndex].Value.ToString() == "1")
+                {
+                    txtEmgNameEng.Text = row.Cells[2].Text;
+                }
+                else
+                {
+                    txtEmgNameFr.Text = row.Cells[2].Text;
+                }
                 mpeAddOrg.Show();
             }
+        }
+        protected void btnSearch2_Click(object sender, EventArgs e)
+        {
+            LoadEmergencies();
+        }
+        protected void btnExportExcel_Click(object sender, EventArgs e)
+        {
+            string fileName = "Emergencies";
+            string fileExtention = ".xls";
+            ExportUtility.ExportGridView(gvEmergency, fileName, fileExtention, Response);
+        }
+
+        internal override void BindGridData()
+        {
+            LoadEmergencies();
+            PopulateDisasterTypes();
         }
 
         private bool EmgIsBeingUsed(int emgId)
@@ -86,7 +111,7 @@ namespace SRFROWCA.Admin
         protected void gvEmergency_Sorting(object sender, GridViewSortEventArgs e)
         {
             //Retrieve the table from the session object.
-            int? locationId = null;
+            int? locationId = null;// (int)RC.SelectedSiteLanguageId; 
             DataTable dt = RC.GetAllEmergencies(locationId);
             if (dt != null)
             {
@@ -129,8 +154,8 @@ namespace SRFROWCA.Admin
 
         private void LoadEmergencies()
         {
-            int? languageId = null;
-            gvEmergency.DataSource = RC.GetAllEmergencies(languageId);
+            int? languageId = null;// (int)RC.SelectedSiteLanguageId;
+            gvEmergency.DataSource = RC.GetAllEmergencies(languageId, txtOrganizationName.Text,Convert.ToInt32(ddlDisasterType.SelectedValue));
             gvEmergency.DataBind();
         }
 
@@ -140,6 +165,11 @@ namespace SRFROWCA.Admin
             ddlEmgType.DataTextField = "EmergencyType";
             ddlEmgType.DataSource = GetDisasterTypes();
             ddlEmgType.DataBind();
+
+            ddlDisasterType.DataValueField = "EmergencyTypeId";
+            ddlDisasterType.DataTextField = "EmergencyType";
+            ddlDisasterType.DataSource = GetDisasterTypes();
+            ddlDisasterType.DataBind();
 
             ListItem item = new ListItem("Select Disaster Type", "0");
             ddlEmgType.Items.Insert(0, item);

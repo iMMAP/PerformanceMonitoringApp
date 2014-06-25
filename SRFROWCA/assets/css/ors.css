@@ -108,3 +108,29 @@ table.imagetable td
 {
 font-size:14px;
 }
+.pageHeading
+{
+    font-size:16px;
+    line-height:32px;
+    margin-left:20px;
+}
+.containerPopup
+{
+background-color:#fff;
+width:650px;
+padding:10px 30px;
+border:solid 1px #4ea5cd;
+}
+.popupheading
+{
+    font-size:16px;
+    border-bottom:solid 1px #bbbbbb;
+    line-height:30px;
+    margin-bottom:30px;
+    color:#000;
+    font-weight:bold;
+}
+.containerPopup .frmControl
+{
+padding-left:20px;
+}
