@@ -162,6 +162,7 @@
     <Content Include="Admin\Organization\AddEditOrganization.aspx" />
     <Content Include="Admin\Organization\OrganizationList.aspx" />
     <Content Include="Admin\PriorityActivities.aspx" />
+    <Content Include="Admin\ProgressSummary.aspx" />
     <Content Include="Admin\ProjectXMLFeeds.aspx" />
     <Content Include="Anonymous\AllDataPublic.aspx" />
     <Content Include="App_Readme\Elmah.txt" />
@@ -1187,6 +1188,13 @@
     </Compile>
     <Compile Include="Admin\PriorityActivities.aspx.designer.cs">
       <DependentUpon>PriorityActivities.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ProgressSummary.aspx.cs">
+      <DependentUpon>ProgressSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ProgressSummary.aspx.designer.cs">
+      <DependentUpon>ProgressSummary.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\ProjectXMLFeeds.aspx.cs">
       <DependentUpon>ProjectXMLFeeds.aspx</DependentUpon>
