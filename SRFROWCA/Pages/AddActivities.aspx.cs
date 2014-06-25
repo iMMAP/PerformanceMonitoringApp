@@ -561,7 +561,7 @@ namespace SRFROWCA.Pages
                         {
                             if (cbAccum.Checked)
                             {
-                                SaveAccumulative(activityDataId, cbAccum.Checked);
+                                SaveAccumulative(projectId, yearId, activityDataId, cbAccum.Checked);
                             }
                         }
 
@@ -625,12 +625,14 @@ namespace SRFROWCA.Pages
 
         private void DeleteReportAccumulatives()
         {
-            DBContext.Delete("DeleteReportAccumulatives", new object[] { ReportId, DBNull.Value });
+            int projectId = RC.GetSelectedIntVal(rblProjects);
+            int yearId = RC.GetSelectedIntVal(ddlYear);
+            DBContext.Delete("DeleteReportAccumulatives", new object[] { projectId, yearId, DBNull.Value });
         }
 
-        private void SaveAccumulative(int activityDataId, bool isAccum)
+        private void SaveAccumulative(int projectId, int yearId, int activityDataId, bool isAccum)
         {
-            DBContext.Add("InsertReportAccumulative", new object[] { ReportId, activityDataId, isAccum, RC.GetCurrentUserId, DBNull.Value });
+            DBContext.Add("InsertReportAccumulative", new object[] { projectId, yearId, activityDataId, isAccum, RC.GetCurrentUserId, DBNull.Value });
         }
 
         // In this method we will get the postback control.

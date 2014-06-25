@@ -1167,6 +1167,20 @@
     <Compile Include="Admin\IndicatorActivities.aspx.designer.cs">
       <DependentUpon>IndicatorActivities.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\Organization\AddEditOrganization.aspx.cs">
+      <DependentUpon>AddEditOrganization.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Organization\AddEditOrganization.aspx.designer.cs">
+      <DependentUpon>AddEditOrganization.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Organization\OrganizationList.aspx.cs">
+      <DependentUpon>OrganizationList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Organization\OrganizationList.aspx.designer.cs">
+      <DependentUpon>OrganizationList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\PriorityActivities.aspx.cs">
       <DependentUpon>PriorityActivities.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
