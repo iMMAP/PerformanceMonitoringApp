@@ -178,17 +178,17 @@ namespace SRFROWCA.Common
 
         internal static void FillEmergency(DropDownList ddl, DataTable dt)
         {
-            //ddl.DataValueField = "EmergencyId";
-            //ddl.DataTextField = "EmergencyName";
-            //ddl.DataSource = dt;
-            //ddl.DataBind();
+            ddl.DataValueField = "EmergencyId";
+            ddl.DataTextField = "EmergencyName";
+            ddl.DataSource = dt;
+            ddl.DataBind();
 
-            //if (ddl.Items.Count > 1)
-            //{
-            //    ListItem item = new ListItem("Select Emergency", "0");
-            //    ddl.Items.Insert(0, item);
-            //    ddl.SelectedIndex = 0;
-            //}
+            if (ddl.Items.Count > 1)
+            {
+                ListItem item = new ListItem("Select Emergency", "0");
+                ddl.Items.Insert(0, item);
+                ddl.SelectedIndex = 0;
+            }
         }
 
         internal static void FillCountry(DropDownList ddl)

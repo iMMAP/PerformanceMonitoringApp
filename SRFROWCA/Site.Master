@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
     <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/blitzer/jquery-ui.min.css" />
     <!-- ORS styles -->
-    <link rel="stylesheet" href="assets/css/ors.css" />
+   
     <!-- ace styles -->
     <!--[if !IE] -->
     <script type="text/javascript">
@@ -50,6 +50,7 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
+     <link rel="stylesheet" href="<%= BaseURL %>/assets/css/ors.css" />
     <form runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
@@ -294,7 +295,28 @@
                         <li id="liFundingStatus" runat="server"><a href="~/LeadPages/FundingListing.aspx"
                             id="AFundingStatus" runat="server"><i class="icon-list-alt"></i><span class="menu-text">Funding Status</span> </a></li>
                          <li id="liOrganizationList" runat="server"><a href='<%=BaseURL%>/Admin/organization/OrganizationList.aspx'
-                            id="menueOrganizationList" ><i class="icon-user"></i><span class="menu-text">Organizations</span> </a></li>
+                            id="menueOrganizationList" ><i class="icon-user"></i><span class="menu-text">
+                                 <asp:Localize ID="localOrganizationsResource1" runat="server" Text="Organizations" meta:resourcekey="localOrganizationsResource1"></asp:Localize>
+                                </span> </a></li>
+
+                          <li id="liEmergency" runat="server"><a id="A2" runat="server" href="#"
+                            class="dropdown-toggle"><i class="icon-list-alt"></i><span class="menu-text">
+                                <asp:Localize ID="Localize2" runat="server" Text="Emergency" meta:resourcekey="localMasterEmergencyResource1"></asp:Localize>
+                            </span><b class="arrow icon-angle-down"></b></a>
+                            <ul class="submenu">
+                                <li id="liEmgList" runat="server"><a href="<%=BaseURL %>/admin/EmergencyListing.aspx"><span class="menu-text">
+
+                                    <asp:Localize ID="Localize3" runat="server" Text="Emergency List" meta:resourcekey="localMasterEmergencyListResource1"></asp:Localize>
+                                </span></a></li>
+                                <li id="liEmgLocation" runat="server"><a href="<%=BaseURL %>/admin/EmergencyLocations.aspx"><i class="icon-list"></i><span class="menu-text">
+                                    <asp:Localize ID="Localize4" runat="server" Text="Emergency Locations" meta:resourcekey="localEmergencyLocationsResource1"></asp:Localize>
+                                </span></a></li>
+                                <li id="liEmgCluster" runat="server"><a href="<%=BaseURL %>/admin/EmergencyClusters.aspx"><i class="icon-list"></i><span class="menu-text">
+                                    <asp:Localize ID="Localize5" runat="server" Text="Emergency Clusters" meta:resourcekey="localEmergencyClustersResource1"></asp:Localize>
+                                </span></a></li>
+                            </ul>
+                        </li>
+
                         <li id="liBulkImport" runat="server"><a href="~/ClusterLead/UploadAchieved.aspx" id="menueBulkImport"
                             runat="server"><i class="icon-list-alt"></i><span class="menu-text">Bulk Import Data</span>
                         </a></li>

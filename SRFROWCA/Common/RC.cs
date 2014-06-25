@@ -253,9 +253,10 @@ namespace SRFROWCA.Common
             return dt;
         }
 
-        internal static DataTable GetAllEmergencies(int? languageId)
+        internal static DataTable GetAllEmergencies(int? languageId, string search = "", int disasterType = 0)
         {
-            return DBContext.GetData("GetAllEmergencies", new object[] { languageId });
+            
+            return DBContext.GetData("GetAllEmergencies", new object[] { languageId, string.IsNullOrEmpty(search) ? null : search, disasterType > 0 ? disasterType : 0 });
         }
 
         internal static DataTable GetAllActivities(IPrincipal user)

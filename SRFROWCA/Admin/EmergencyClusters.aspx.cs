@@ -23,13 +23,20 @@ namespace SRFROWCA.Admin
 
         private void PopulateEmergencies()
         {
-            int languageId = (int)RC.SiteLanguage.English;
+            int languageId = (int)RC.SelectedSiteLanguageId;//RC.SiteLanguage.English;
             UI.FillEmergency(ddlEmergencies, RC.GetAllEmergencies(languageId));
+        }
+
+        internal override void BindGridData()
+        {
+            PopulateEmergencies();
+            PopulateClusters();
+            FillEmergencyClusters();
         }
 
         private void PopulateClusters()
         {
-            UI.FillClusters(cblClusters, (int)RC.SiteLanguage.English);
+            UI.FillClusters(cblClusters, (int)RC.SelectedSiteLanguageId);
         }
 
         protected void ddlEmergencies_SelectedIndexChanged(object sender, EventArgs e)
@@ -51,7 +58,7 @@ namespace SRFROWCA.Admin
 
         private DataTable GetEmergencyClusters(int emergencyId)
         {
-            return DBContext.GetData("GetEmergencyClusters", new object[] { emergencyId, (int)RC.SiteLanguage.English });
+            return DBContext.GetData("GetEmergencyClusters", new object[] { emergencyId, (int)RC.SelectedSiteLanguageId });
         }
 
         private void CheckClusterListBox(DataTable dt)

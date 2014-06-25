@@ -176,6 +176,8 @@ namespace SRFROWCA
             liBulkImport.Visible = isShow;
             liBulkImportUser.Visible = isShow;
             liORSDocuments.Visible = isShow;
+            liOrganizationList.Visible = isShow;           
+            liEmergency.Visible = isShow;
         }
 
         private void ShowUserMenue()
@@ -289,6 +291,7 @@ namespace SRFROWCA
             liUserListing.Visible = isShow;
             liOrganizationList.Visible = isShow;
             liProjectXMLFeeds.Visible = isShow;
+            liEmergency.Visible = isShow;
         }
 
         private void ActiveMenueItem()
@@ -428,6 +431,21 @@ namespace SRFROWCA
             else if (uri.Contains("ClusterLead/UploadAchieved.aspx"))
             {
                 liBulkImport.Attributes.Add("class", "active");
+            }
+            else if (uri.Contains("/EmergencyListing.aspx"))
+            {
+                liEmergency.Attributes.Add("class", "active open");
+                liEmgList.Attributes.Add("class", "active");
+            }
+            else if (uri.Contains("/EmergencyLocations.aspx"))
+            {
+                liEmergency.Attributes.Add("class", "active open");
+                liEmgLocation.Attributes.Add("class", "active");
+            }
+            else if (uri.Contains("/EmergencyClusters.aspx"))
+            {
+                liEmergency.Attributes.Add("class", "active open");
+                liEmgCluster.Attributes.Add("class", "active");
             }
         }
 
