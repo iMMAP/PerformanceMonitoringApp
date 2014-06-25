@@ -14,7 +14,26 @@ namespace SRFROWCA.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            LoadCombo();
+            if (!IsPostBack)
+            {
+                LoadData(null, null, "-1", "-1", "-1");
+                LoadCombo();
+            }
+        }
+
+        private void LoadData(string startDate, string endDate, string countryID, string clusterID, string isOPSProject)
+        {
+            DataTable dtResult = DBContext.GetData("uspGetReportData", new object[] {startDate, endDate, countryID, clusterID, isOPSProject});
+
+            if (dtResult.Rows.Count > 0)
+            {
+                lblUsers.Text = Convert.ToString(dtResult.Rows[0]["UserCount"]);
+                lblOrganizations.Text = Convert.ToString(dtResult.Rows[0]["OrganizationCount"]);
+                lblReportedOrgs.Text = Convert.ToString(dtResult.Rows[0]["ReportedOrganizationCount"]);
+                lblReportedCountries.Text = Convert.ToString(dtResult.Rows[0]["CountriesCount"]);
+                lblReports.Text = Convert.ToString(dtResult.Rows[0]["ReportCount"]);
+                lblReportedProjects.Text = Convert.ToString(dtResult.Rows[0]["ReportedProjectCount"]);
+            }
         }
 
         private void LoadCombo()
@@ -37,17 +56,7 @@ namespace SRFROWCA.Admin
             string clusterID = ddlClusters.SelectedValue;
             string isOPSProject = rbIsOPSProject.SelectedValue;
 
-            DataTable dtResult = DBContext.GetData("uspGetReportData", new object[] {startDate, endDate, countryID, clusterID, isOPSProject});
-
-            if (dtResult.Rows.Count > 0)
-            {
-                lblUsers.Text = Convert.ToString(dtResult.Rows[0]["UserCount"]);
-                lblOrganizations.Text = Convert.ToString(dtResult.Rows[0]["OrganizationCount"]);
-                lblReportedOrgs.Text = Convert.ToString(dtResult.Rows[0]["ReportedOrganizationCount"]);
-                lblReportedCountries.Text = Convert.ToString(dtResult.Rows[0]["CountriesCount"]);
-                lblReports.Text = Convert.ToString(dtResult.Rows[0]["ReportCount"]);
-                lblReportedProjects.Text = Convert.ToString(dtResult.Rows[0]["ReportedProjectCount"]);
-            }
+            LoadData(startDate, endDate, countryID, clusterID, isOPSProject);
         }
     }
 }
