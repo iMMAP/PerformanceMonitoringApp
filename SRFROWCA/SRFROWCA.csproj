@@ -1595,7 +1595,6 @@
     </Compile>
     <Compile Include="Pages\UploadAchived.aspx.cs">
       <DependentUpon>UploadAchived.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\UploadAchived.aspx.designer.cs">
       <DependentUpon>UploadAchived.aspx</DependentUpon>
