@@ -7,135 +7,135 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SRFROWCA.ClusterLead {
+namespace SRFROWCA {
     
     
-    public partial class ProjectsListing {
+    public partial class RequestOrganization {
         
         /// <summary>
-        /// localBreadCrumbHome control.
+        /// txtMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localBreadCrumbHome;
+        protected global::System.Web.UI.WebControls.Label txtMessage;
         
         /// <summary>
-        /// localBreadCrumbProjects control.
+        /// lblHeader control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localBreadCrumbProjects;
+        protected global::System.Web.UI.WebControls.Label lblHeader;
         
         /// <summary>
-        /// btnExportToExcel control.
+        /// txtOrganizationName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnExportToExcel;
+        protected global::System.Web.UI.WebControls.TextBox txtOrganizationName;
         
         /// <summary>
-        /// localAdmin1 control.
+        /// rfvOrgName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localAdmin1;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvOrgName;
         
         /// <summary>
-        /// ddlAdmin1 control.
+        /// txtAcronym control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlAdmin1;
+        protected global::System.Web.UI.WebControls.TextBox txtAcronym;
         
         /// <summary>
-        /// Localize2 control.
+        /// rfvAcronym control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize2;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvAcronym;
         
         /// <summary>
-        /// cblReportingStatus control.
+        /// txtType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList cblReportingStatus;
+        protected global::System.Web.UI.WebControls.TextBox txtType;
         
         /// <summary>
-        /// Localize3 control.
+        /// rfvType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize3;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvType;
         
         /// <summary>
-        /// cblFundingStatus control.
+        /// txtCountry control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList cblFundingStatus;
+        protected global::System.Web.UI.WebControls.TextBox txtCountry;
         
         /// <summary>
-        /// txtProjectCode control.
+        /// txtContactName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtProjectCode;
+        protected global::System.Web.UI.WebControls.TextBox txtContactName;
         
         /// <summary>
-        /// ddlOrg control.
+        /// txtPhone control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlOrg;
+        protected global::System.Web.UI.WebControls.TextBox txtPhone;
         
         /// <summary>
-        /// divClusters control.
+        /// txtEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divClusters;
+        protected global::System.Web.UI.WebControls.TextBox txtEmail;
         
         /// <summary>
-        /// ddlClusters control.
+        /// rfvEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlClusters;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvEmail;
         
         /// <summary>
-        /// gvProjects control.
+        /// btnRegister control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvProjects;
+        protected global::System.Web.UI.WebControls.Button btnRegister;
     }
 }

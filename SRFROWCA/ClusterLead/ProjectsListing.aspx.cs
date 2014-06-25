@@ -76,11 +76,11 @@ namespace SRFROWCA.ClusterLead
                 ddlAdmin1.Items.Insert(0, item);
             }
 
-            UI.FillAdmin2(ddlAdmin2, UserInfo.Country);
-            if (ddlAdmin2.Items.Count > 0)
-            {
-                ddlAdmin2.Items.Insert(0, item);
-            }
+            //UI.FillAdmin2(ddlAdmin2, UserInfo.Country);
+            //if (ddlAdmin2.Items.Count > 0)
+            //{
+            //    ddlAdmin2.Items.Insert(0, item);
+            //}
         }
 
         protected void ExportToExcel(object sender, EventArgs e)
@@ -109,15 +109,15 @@ namespace SRFROWCA.ClusterLead
             LoadProjects();
         }
 
-        protected void ddlAdmin2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadProjects();
-        }
+        //protected void ddlAdmin2_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    LoadProjects();
+        //}
 
-        protected void ddlProjStatus_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        //protected void ddlProjStatus_SelectedIndexChanged(object sender, EventArgs e)
+        //{
 
-        }
+        //}
 
         protected void cblReportingStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -214,18 +214,21 @@ namespace SRFROWCA.ClusterLead
                 admin1 = (int?)null;
             }
 
-            int? admin2 = RC.GetSelectedIntVal(ddlAdmin2);
-            if (admin2 == 0)
-            {
-                admin2 = (int?)null;
-            }
+            //int? admin2 = RC.GetSelectedIntVal(ddlAdmin2);
+            //if (admin2 == 0)
+            //{
+            //    admin2 = (int?)null;
+            //}
 
             int? cbReported = cblReportingStatus.SelectedIndex > -1 ? RC.GetSelectedIntVal(cblReportingStatus) : (int?)null;
             int? cbFunded = cblFundingStatus.SelectedIndex > -1 ? RC.GetSelectedIntVal(cblFundingStatus) : (int?)null;
 
             int? countryId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
 
-            return DBContext.GetData("GetProjects", new object[] {countryId, clusterId,projCode, orgId, admin1, admin2, 
+            //return DBContext.GetData("GetProjects", new object[] {countryId, clusterId,projCode, orgId, admin1, admin2, 
+            //                                                                DBNull.Value, cbFunded, cbReported, 1 });
+
+            return DBContext.GetData("GetProjects", new object[] {countryId, clusterId,projCode, orgId, admin1, DBNull.Value, 
                                                                             DBNull.Value, cbFunded, cbReported, 1 });
         }
 

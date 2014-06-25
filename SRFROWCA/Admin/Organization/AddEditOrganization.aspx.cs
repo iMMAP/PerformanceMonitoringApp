@@ -95,7 +95,17 @@ namespace SRFROWCA.Admin.Organization
             }
             catch (Exception ex)
             {
-                RC.ShowMessage(this.Page, typeof(Page), UniqueID, ex.Message, RC.NotificationType.Error, true, 500);
+                string message = "";
+                if (ex.Message.Contains("Cannot insert duplicate key row in object"))
+                {
+                    message = "Organization with same name already exists!";
+                }
+                else
+                {
+                    message = "Some error occoured!";
+                }
+                
+                RC.ShowMessage(this.Page, typeof(Page), UniqueID, message, RC.NotificationType.Error, false);
                
             }
         }

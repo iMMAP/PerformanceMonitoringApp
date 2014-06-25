@@ -322,7 +322,8 @@ namespace SRFROWCA.Admin
             btnSubmit.Enabled = false;
             string errorMessage = string.Empty;
 
-            if (ProjectContributions.TruncateTable("FTSFunding", out errorMessage))
+            if (ProjectContributions.TruncateTable("FTSContribution", out errorMessage)
+                && ProjectContributions.TruncateTable("FTSFunding", out errorMessage))
             {
 
                 try
