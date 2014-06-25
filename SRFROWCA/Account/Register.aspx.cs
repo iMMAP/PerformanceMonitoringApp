@@ -52,23 +52,33 @@ namespace SRFROWCA.Account
                 {
                     try
                     {
-                        using (MailMessage mailMsg = new MailMessage())
+                        DataTable dtEmails = DBContext.GetData("uspGetUserEmails", new object[] { ddlCountry.SelectedValue });
+                        string emails = string.Empty;
+
+                        if (dtEmails.Rows.Count > 0)
                         {
-                            mailMsg.From = new MailAddress("orsocharowca@gmail.com");
-                            mailMsg.To.Add(new MailAddress("orsocharowca@gmail.com"));
-                            mailMsg.Subject = "New ORS Account Created By User!";
-                            mailMsg.IsBodyHtml = true;
-                            mailMsg.Body = string.Format(@"New {0} Registered with following credentials<hr/>
+                            using (MailMessage mailMsg = new MailMessage())
+                            {
+                                for (int i = 0; i < dtEmails.Rows.Count; i++)
+                                    emails += Convert.ToString(dtEmails.Rows[i]["Email"]) + ",";
+
+                                mailMsg.From = new MailAddress("orsocharowca@gmail.com");
+                                //mailMsg.To.Add(new MailAddress("orsocharowca@gmail.com"));
+                                mailMsg.To.Add(emails.TrimEnd(','));
+                                mailMsg.Subject = "New ORS Account Created By User!";
+                                mailMsg.IsBodyHtml = true;
+                                mailMsg.Body = string.Format(@"New {0} Registered with following credentials<hr/>
                                                         <b>Name:</b> {1}<br/>
                                                         <b>User Name:</b> {2}<br/>
                                                         <b>Email:</b> {3}<br/>                                                        
                                                         <b>Cluster:</b> {4}<br/>
                                                         <b>Organization:</b> {5}<br/>
                                                         <b>Country:</b> {6}", ddlUserRole.SelectedItem.Text, txtFullName.Text.Trim(), txtUserName.Text.Trim(),
-                                                                       txtEmail.Text.Trim(), ddlClusters.SelectedItem.Text,ddlOrganization.SelectedItem.Text,
-                                                                       ddlCountry.SelectedItem.Text);
-                            Mail.SendMail(mailMsg);                            
-                            message = @"You have been registered successfully, we will verify your credentials and activate your account in few hours!";
+                                                                           txtEmail.Text.Trim(), ddlClusters.SelectedItem.Text, ddlOrganization.SelectedItem.Text,
+                                                                           ddlCountry.SelectedItem.Text);
+                                Mail.SendMail(mailMsg);
+                                message = @"You have been registered successfully, we will verify your credentials and activate your account in few hours!";
+                            }
                         }
 
                     }
@@ -77,7 +87,7 @@ namespace SRFROWCA.Account
                         message = "You have been registered successfully but some error occoured on sending email to site admin. Contact admin and ask for the verification! We apologies for the inconvenience!";
                     }
                 }
-                
+
             }
             catch (Exception ex)
             {
