@@ -5,6 +5,7 @@ using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.IO;
+using System.Transactions;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
@@ -12,7 +13,7 @@ using SRFROWCA.Common;
 
 namespace SRFROWCA.Pages
 {
-    public partial class UploadAchived : System.Web.UI.Page
+    public partial class UploadAchived : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -123,26 +124,51 @@ namespace SRFROWCA.Pages
 
                 if (!MonthSelected()) return;
 
+
                 // Fill staging table (TempData1) in db to import data using this table.
-                FillStagingTableInDB();
+                string filePath = UploadFile();
+                string excelConString = GetExcelConString(filePath);
 
-                // Import data from another staging table (TempData).
                 DataTable dt = new DataTable();
-                dt = ImportData();
-
-                // If success or any error occoured in execution of procedure then show message to user.
-                if (dt.Rows.Count > 0)
+                string tableScript = "";
+                string tableScript2 = "";
+                if (!string.IsNullOrEmpty(excelConString))
                 {
-                    string message = "Data Imported Successfully!";
-                    ShowMessage(message, RC.NotificationType.Success, false);
+                    string[] sheets = GetExcelSheetNames(excelConString);
+                    if (sheets.Length > 0)
+                    {
+                        dt = ReadDataInDataTable(excelConString, sheets[0]);
+
+                        RemoveUnwantedColumns(dt);
+                        tableScript = CreateTableScript(dt);
+                        tableScript2 = CreateTableScript2(dt);
+                    }
+                }
+
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    if (dt.Rows.Count > 0)
+                    {
+                        FillStagingTableInDB(tableScript, tableScript2, dt);
+                        ImportData();                        
+                        TruncateTempTables();
+                    }
+
+                    scope.Complete();
+                    ShowMessage("Data Imported Successfully!", RC.NotificationType.Success, false);
                 }
             }
             catch (Exception ex)
             {
+                TruncateTempTables();
                 lblMessage.Text = ex.ToString();
-                string message = "Some Error Occoured During Import, Please contact with site Admin!";
-                ShowMessage(message, RC.NotificationType.Error, false);
+                ShowMessage("Some Error Occoured During Import, Please contact with site Admin!", RC.NotificationType.Error, false);
             }
+        }
+
+        private void TruncateTempTables()
+        {
+            DBContext.Update("TruncateImportUserTempTables", new object[] { DBNull.Value });
         }
 
         private bool MonthSelected()
@@ -189,31 +215,19 @@ namespace SRFROWCA.Pages
         //}
 
         // Read Data From Excel Sheet and Save into DB
-        private void FillStagingTableInDB()
+        private void FillStagingTableInDB(string tableScript, string tableScript2, DataTable dt)
         {
-            string filePath = UploadFile();
-            string excelConString = GetExcelConString(filePath);
 
-            if (!string.IsNullOrEmpty(excelConString))
-            {
-                string[] sheets = GetExcelSheetNames(excelConString);
-                if (sheets.Length > 0)
-                {
-                    DataTable dt = ReadDataInDataTable(excelConString, sheets[0]);
+            string conString = ConfigurationManager.ConnectionStrings["live_dbName"].ConnectionString;
+            CreateStagingTable(tableScript, conString);
+            CreateStagingTable(tableScript2, conString);
+            WriteDataToDB(dt, conString);
+            string locationColumnNames = GetLocationColumnNames(dt);
+            string locationColumnNamesWithAliases = GetLocationColumnNamesWithAliases(dt);
+            string locationColumnNamesAlias = GetLocationColumnNamesAlias(dt);
+            UnpivotStagingTable(locationColumnNames, locationColumnNamesWithAliases, locationColumnNamesAlias);
 
-                    RemoveUnwantedColumns(dt);
-                    string tableScript = CreateTableScript(dt);
-                    string tableScript2 = CreateTableScript2(dt);
-                    string conString = ConfigurationManager.ConnectionStrings["live_dbName"].ConnectionString;
-                    CreateStagingTable(tableScript, conString);
-                    CreateStagingTable(tableScript2, conString);
-                    WriteDataToDB(dt, conString);
-                    string locationColumnNames = GetLocationColumnNames(dt);
-                    string locationColumnNamesWithAliases = GetLocationColumnNamesWithAliases(dt);
-                    string locationColumnNamesAlias = GetLocationColumnNamesAlias(dt);
-                    UnpivotStagingTable(locationColumnNames, locationColumnNamesWithAliases, locationColumnNamesAlias);
-                }
-            }
+
         }
 
         private void RemoveUnwantedColumns(DataTable dt)
@@ -264,10 +278,6 @@ namespace SRFROWCA.Pages
                 }
 
                 return excelSheets;
-            }
-            catch
-            {
-                return null;
             }
             finally
             {

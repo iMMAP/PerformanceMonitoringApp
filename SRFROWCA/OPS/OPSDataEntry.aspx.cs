@@ -16,23 +16,29 @@ namespace SRFROWCA.OPS
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //string languageChange = "";
+            //if (Session["SiteChanged"] != null)
+            //{
+            //    languageChange = Session["SiteChanged"].ToString();
+            //}
+
+            //if (!string.IsNullOrEmpty(languageChange))
+            //{
+            //    Session["SiteChanged"] = null;
+            //}
+
             string languageChange = "";
             if (Session["SiteChanged"] != null)
             {
                 languageChange = Session["SiteChanged"].ToString();
             }
 
-            if (!string.IsNullOrEmpty(languageChange))
-            {
-                Session["SiteChanged"] = null;
-            }
-
             if (!IsPostBack)
             {
-                if (SiteLanguageId == 0)
-                {
-                    SiteLanguageId = 1;
-                }
+                //if (SiteLanguageId == 0)
+                //{
+                //    SiteLanguageId = 1;
+                //}
 
                 SetOPSIds();
 
@@ -57,7 +63,7 @@ namespace SRFROWCA.OPS
         private void UpdateClusterName()
         {
             string clusterName = MapClusterNames();
-            DataTable dt = DBContext.GetData("GetClusterNameOnLanguage", new object[] { clusterName, SiteLanguageId });
+            DataTable dt = DBContext.GetData("GetClusterNameOnLanguage", new object[] { clusterName, RC.SelectedSiteLanguageId });
             if (dt.Rows.Count > 0)
             {
                 OPSClusterNameLabel = dt.Rows[0]["ClusterName"].ToString();
@@ -168,19 +174,65 @@ namespace SRFROWCA.OPS
         {
             using (TransactionScope scope = new TransactionScope())
             {
-                if (OPSReportId > 0)
-                {
-                    DeleteReportAndItsChild();
-                }
+                //if (OPSReportId > 0)
+                //{
+                //    DeleteReportAndItsChild();
+                //}
 
-                if (IsDataExistsToSave())
+                //if (IsDataExistsToSave())
+                //{
+                //    SaveReport();
+                //}
+
+                List<int> locationIds = GetLocationIdsFromGrid();
+                if (locationIds.Count > 0)
                 {
+                    if (OPSReportId == 0)
+                    {
+                        SaveReportMainInfo();
+                    }
+
                     SaveReport();
+                }
+                else
+                {
+                    DeleteReport();
                 }
 
                 scope.Complete();
                 ShowMessage("Your Data Saved Successfuly!");
             }
+        }
+
+        private List<int> GetLocationIdsFromGrid()
+        {
+            List<int> locationIds = new List<int>();
+            foreach (GridViewRow row in gvActivities.Rows)
+            {
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    DataTable dtActivities = (DataTable)Session["dtActivities"];
+                    foreach (DataColumn dc in dtActivities.Columns)
+                    {
+                        string colName = dc.ColumnName;
+
+                        HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
+                        if (hf != null)
+                        {
+                            int locationId = 0;
+                            int.TryParse(hf.Value, out locationId);
+                            if (locationId > 0)
+                                locationIds.Add((locationId));
+                        }
+                    }
+
+                    // If data row then iterate only once bece we need column names
+                    // from grid to get ids from hidden fields.
+                    break;
+                }
+            }
+
+            return locationIds.Distinct().ToList();
         }
 
         #endregion
@@ -239,7 +291,7 @@ namespace SRFROWCA.OPS
             if (!string.IsNullOrEmpty(OPSCountryName))
             {
                 int isOPSEmergency = 1;
-                dt = DBContext.GetData("GetOPSEmergencyId", new object[] { OPSCountryName, isOPSEmergency, SiteLanguageId });
+                dt = DBContext.GetData("GetOPSEmergencyId", new object[] { OPSCountryName, isOPSEmergency, RC.SelectedSiteLanguageId });
             }
 
             if (dt.Rows.Count > 0)
@@ -257,7 +309,7 @@ namespace SRFROWCA.OPS
                 string clusterName = MapClusterNames();
                 OPSClusterNameLabel = clusterName;
 
-                dt = DBContext.GetData("GetEmergencyClustersId", new object[] { clusterName, OPSEmergencyId, SiteLanguageId });
+                dt = DBContext.GetData("GetEmergencyClustersId", new object[] { clusterName, OPSEmergencyId, RC.SelectedSiteLanguageId });
             }
 
             return dt.Rows.Count > 0 ? Convert.ToInt32(dt.Rows[0]["EmergencyClusterId"].ToString()) : 0;
@@ -268,11 +320,11 @@ namespace SRFROWCA.OPS
             string clusterName = "";
             if (OPSClusterName == "coordinationandsupportservices")
             {
-                clusterName = SiteLanguageId == 2 ? "Coodination et Services de Soutien" : "Coordination And Support Services";
+                clusterName = RC.SelectedSiteLanguageId == 2 ? "Coodination et Services de Soutien" : "Coordination And Support Services";
             }
             else if (OPSClusterName == "earlyrecovery")
             {
-                clusterName = SiteLanguageId == 2 ? "Relèvement Précoce" : "Early Recovery";
+                clusterName = RC.SelectedSiteLanguageId == 2 ? "Relèvement Précoce" : "Early Recovery";
             }
             else if (OPSClusterName == "education")
             {
@@ -280,15 +332,15 @@ namespace SRFROWCA.OPS
             }
             else if (OPSClusterName == "emergencyshelterandnfi")
             {
-                clusterName = SiteLanguageId == 2 ? "Abris D'urgence et Biens Non-Alimentaires" : "Emergency Shelter And NFI";
+                clusterName = RC.SelectedSiteLanguageId == 2 ? "Abris D'urgence et Biens Non-Alimentaires" : "Emergency Shelter And NFI";
             }
             else if (OPSClusterName == "foodsecurity")
             {
-                clusterName = SiteLanguageId == 2 ? "Sécurité Alimentaire" : "Food Security";
+                clusterName = RC.SelectedSiteLanguageId == 2 ? "Sécurité Alimentaire" : "Food Security";
             }
             else if (OPSClusterName == "health")
             {
-                clusterName = SiteLanguageId == 2 ? "Santé" : "Health";
+                clusterName = RC.SelectedSiteLanguageId == 2 ? "Santé" : "Health";
             }
             else if (OPSClusterName == "logistics")
             {
@@ -304,19 +356,19 @@ namespace SRFROWCA.OPS
             }
             else if (OPSClusterName == "logistics")
             {
-                clusterName = SiteLanguageId == 2 ? "Logistique" : "Logistics";
+                clusterName = RC.SelectedSiteLanguageId == 2 ? "Logistique" : "Logistics";
             }
             else if (OPSClusterName == "waterandsanitation")
             {
-                clusterName = SiteLanguageId == 2 ? "Eau-Hygiene-Assainissement" : "Water Sanitation & Hygiene";
+                clusterName = RC.SelectedSiteLanguageId == 2 ? "Eau-Hygiene-Assainissement" : "Water Sanitation & Hygiene";
             }
             else if (OPSClusterName == "emergencytelecommunication")
             {
-                clusterName = SiteLanguageId == 2 ? "Télécommunication d'urgence" : "Emergency Telecommunication";
+                clusterName = RC.SelectedSiteLanguageId == 2 ? "Télécommunication d'urgence" : "Emergency Telecommunication";
             }
             else if (OPSClusterName == "multisectorforrefugees")
             {
-                clusterName = SiteLanguageId == 2 ? "Assistance Multi Sectorielles aux Refugies" : "Multi Sector for Refugees";
+                clusterName = RC.SelectedSiteLanguageId == 2 ? "Assistance Multi Sectorielles aux Refugies" : "Multi Sector for Refugees";
             }
             else
             {
@@ -459,7 +511,7 @@ namespace SRFROWCA.OPS
             string locIdsNotIncluded = GetNotSelectedItems(cbAdmin1Locaitons);
 
             DataTable dt = DBContext.GetData("GetOPSActivities", new object[] { OPSLocationEmergencyId, locationIds, locIdsNotIncluded, 
-                                                                            OPSProjectId, OPSEmergencyClusterId, SiteLanguageId, OPSCountryName });
+                                                                            OPSProjectId, OPSEmergencyClusterId, RC.SelectedSiteLanguageId, OPSCountryName });
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 
@@ -497,7 +549,8 @@ namespace SRFROWCA.OPS
                 if (!(columnName == "OPSReportId" || columnName == "ClusterName" || columnName == "SecondaryCluster" ||
                         columnName == "Objective" || columnName == "HumanitarianPriority" || columnName == "ActivityDataId" ||
                         columnName == "ActivityName" || columnName == "DataName" || columnName == "IsActive" ||
-                        columnName == "ObjectiveId" || columnName == "HumanitarianPriorityId" || columnName == "ObjAndPrId" || columnName == "PriorityActivityId"))
+                        columnName == "ObjectiveId" || columnName == "HumanitarianPriorityId" || columnName == "ObjAndPrId" ||
+                        columnName == "PriorityActivityId" || columnName == "RInd" || columnName == "CInd" || columnName == "Unit"))
                 {
 
                     customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, column.ColumnName, "1");
@@ -583,73 +636,33 @@ namespace SRFROWCA.OPS
 
         private void SaveReport()
         {
-            SaveReportMainInfo();
+            //SaveReportMainInfo();
             SaveReportLocations();
             SaveReportDetails();
         }
 
         private void SaveReportLocations()
         {
-            int k = 0;
-            foreach (GridViewRow row in gvActivities.Rows)
+            List<int> locationIds = GetLocationIdsFromGrid();
+            string locIds = "";
+            foreach (int locationId in locationIds)
             {
-                if (k > 0) break;
-                k++;
-                if (row.RowType == DataControlRowType.DataRow)
+                if (string.IsNullOrEmpty(locIds))
                 {
-                    DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
-
-                    List<int> dataSave = new List<int>();
-                    int i = 0;
-                    foreach (DataColumn dc in dtActivities.Columns)
-                    {
-                        string colName = dc.ColumnName;
-                        int locationId = 0;
-                        HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
-                        if (hf != null)
-                        {
-                            locationId = Convert.ToInt32(hf.Value);
-                        }
-
-                        if (locationId > 0)
-                        {
-                            dataSave.Add(locationId);
-                            if (i == 1)
-                            {
-                                i = 0;
-                                int locationIdToSaveT = 0;
-                                int j = 0;
-                                foreach (var item in dataSave)
-                                {
-                                    if (j == 0)
-                                    {
-                                        locationIdToSaveT = Convert.ToInt32(item.ToString());
-                                        j++;
-                                    }
-                                    else
-                                    {
-                                        j = 0;
-                                    }
-                                }
-
-                                if (locationId > 0)
-                                {
-                                    DBContext.Add("InsertOPSReportLocations", new object[] { OPSReportId, locationId, OPSEmergencyClusterId, DBNull.Value });
-                                }
-                            }
-                            else
-                            {
-                                i = 1;
-                            }
-                        }
-                    }
+                    locIds = locationId.ToString();
+                }
+                else
+                {
+                    locIds += "," + locationId.ToString();
                 }
             }
+
+            DBContext.Add("InsertOPSReportLocations", new object[] { OPSReportId, locIds, OPSEmergencyClusterId, DBNull.Value });
         }
 
         private void SaveReportMainInfo()
         {
-            OPSReportId = DBContext.Add("InsertOPSReport", new object[] { OPSLocationEmergencyId, OPSProjectId, OPSEmergencyClusterId, OPSUserId, SiteLanguageId, DBNull.Value });
+            OPSReportId = DBContext.Add("InsertOPSReport", new object[] { OPSLocationEmergencyId, OPSProjectId, OPSEmergencyClusterId, OPSUserId, RC.SelectedSiteLanguageId, DBNull.Value });
         }
 
         private bool IsDataExistsToSave()
@@ -777,14 +790,16 @@ namespace SRFROWCA.OPS
                 {
                     activityDataId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString());
 
-                    int colummCounts = gvActivities.Columns.Count;
+                    //int colummCounts = gvActivities.Columns.Count;
                     DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
                     List<KeyValuePair<int, decimal?>> dataSave = new List<KeyValuePair<int, decimal?>>();
                     int i = 0;
+
                     foreach (DataColumn dc in dtActivities.Columns)
                     {
                         string colName = dc.ColumnName;
                         int locationId = 0;
+
                         HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
                         if (hf != null)
                         {
@@ -797,7 +812,7 @@ namespace SRFROWCA.OPS
                         {
                             if (!string.IsNullOrEmpty(t.Text))
                             {
-                                value = Convert.ToDecimal(t.Text);
+                                value = Convert.ToDecimal(t.Text, CultureInfo.InvariantCulture);
                             }
                         }
 
@@ -827,17 +842,15 @@ namespace SRFROWCA.OPS
                                 }
 
                                 dataSave.Clear();
-
                                 if (!(valToSaveMid2014 == null && valToSave2014 == null))
                                 {
-                                    int newReportDetailId = DBContext.Add("InsertOPSReportDetails",
-                                                                            new object[] { OPSReportId, activityDataId, locationIdToSaveT,
-                                                                                            valToSaveMid2014, valToSave2014, 1, DBNull.Value });
+                                    DBContext.Add("InsertOPSReportDetails", new object[] { OPSReportId, activityDataId, locationIdToSaveT,
+                                                                                            valToSaveMid2014, valToSave2014, 1, OPSUserId, DBNull.Value });
                                 }
                             }
                             else
                             {
-                                i = 1;
+                                i += 1;
                             }
                         }
                     }
@@ -867,28 +880,28 @@ namespace SRFROWCA.OPS
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                //if (Session["dtOPSActivities"] == null) return;
+                if (Session["dtOPSActivities"] == null) return;
 
-                //DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
-                //if (dtActivities == null) return;
+                DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
+                if (dtActivities == null) return;
 
-                //foreach (DataColumn dc in dtActivities.Columns)
-                //{
-                //    string colName = dc.ColumnName;
-                //    TextBox txt = e.Row.FindControl(colName) as TextBox;
-                //    if (txt != null)
-                //    {
-                //        if (txt.Text == "-1")
-                //        {
-                //            txt.Text = "";
-                //        }
-                //    }
-                //}
+                foreach (DataColumn dc in dtActivities.Columns)
+                {
+                    string colName = dc.ColumnName;
+                    TextBox txt = e.Row.FindControl(colName) as TextBox;
+                    if (txt != null)
+                    {
+                        if (txt.Text == "-1")
+                        {
+                            txt.Text = "";
+                        }
+                    }
+                }
 
                 ObjPrToolTip.ObjectiveIconToolTip(e, 0);
                 ObjPrToolTip.PrioritiesIconToolTip(e, 1);
-                //ObjPrToolTip.RegionalIndicatorIcon(e, 12);
-                //ObjPrToolTip.CountryIndicatorIcon(e, 13);
+                ObjPrToolTip.RegionalIndicatorIcon(e, 5);
+                ObjPrToolTip.CountryIndicatorIcon(e, 6);
             }
         }
 
@@ -1123,23 +1136,23 @@ namespace SRFROWCA.OPS
             }
         }
 
-        public int SiteLanguageId
-        {
-            get
-            {
-                int langId = 0;
-                if (Session["SiteLanguageId"] != null)
-                {
-                    int.TryParse(Session["SiteLanguageId"].ToString(), out langId);
-                }
+        //public int SiteLanguageId
+        //{
+        //    get
+        //    {
+        //        int langId = 0;
+        //        if (Session["SiteLanguageId"] != null)
+        //        {
+        //            int.TryParse(Session["SiteLanguageId"].ToString(), out langId);
+        //        }
 
-                return langId;
-            }
-            set
-            {
-                Session["SiteLanguageId"] = value.ToString();
-            }
-        }
+        //        return langId;
+        //    }
+        //    set
+        //    {
+        //        Session["SiteLanguageId"] = value.ToString();
+        //    }
+        //}
 
         public int Reload
         {
