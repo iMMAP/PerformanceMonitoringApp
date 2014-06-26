@@ -200,6 +200,7 @@ namespace SRFROWCA
             liBulkImportUser.Visible = isShow;
             liORSDocuments.Visible = isShow;
             menueORSDocuments.Visible = isShow;
+            liCLprojectsListing.Visible = isShow;
         }
 
         private void ShowRegionalLeadMenue()
@@ -279,7 +280,6 @@ namespace SRFROWCA
             liCLprojectsListing.Visible = isShow;
             liSumOfCountryIndicators.Visible = isShow;
             liPivotSumOfCountryIndicators.Visible = isShow;
-            liCLprojectsListing.Visible = isShow;
         }
 
         private void ShowAdminMenue()
