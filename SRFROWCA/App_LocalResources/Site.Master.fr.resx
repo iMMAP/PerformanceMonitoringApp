@@ -255,4 +255,7 @@
   <data name="localWelcomeResource1.Text" xml:space="preserve">
     <value>Bienvenue,</value>
   </data>
+  <data name="localOrganizationsResource1" xml:space="preserve">
+    <value>Organisations</value>
+  </data>
 </root>

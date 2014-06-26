@@ -20,7 +20,7 @@ namespace SRFROWCA.Admin
 
         private void PopulateEmergencies()
         {
-            int locationId = (int) RC.SiteLanguage.English;
+            int locationId = (int)RC.SelectedSiteLanguageId;
             UI.FillEmergency(ddlEmergencies, RC.GetAllEmergencies(locationId));
         }
 
@@ -51,6 +51,12 @@ namespace SRFROWCA.Admin
             int languageId = 1;
             return DBContext.GetData("GetEmergnecyLocations", new object[] { emergencyId, languageId });
         }
+        internal override void BindGridData()
+        {
+            PopulateEmergencies();
+            PopulateCountries();
+            FillEmergencyLocations();
+        }
 
         private void CheckLocationsListBox(DataTable dt)
         {
@@ -70,7 +76,7 @@ namespace SRFROWCA.Admin
                 }
             }
         }
-
+       
         protected void btnSave_Click(object sender, EventArgs e)
         {
             int emergencyId = 0;
@@ -98,7 +104,7 @@ namespace SRFROWCA.Admin
 
                 if (notDeletedItems.Count > 0)
                 {
-                    string msg = "You adata is saved but these items are being used and can't be removed: ";
+                    string msg = "Your data is saved but these items are being used and can't be removed: ";
                     lblMessage.Text = msg + string.Join(", ", notDeletedItems.ToArray());
                     lblMessage.Visible = true;
                 }

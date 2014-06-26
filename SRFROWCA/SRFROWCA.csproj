@@ -927,23 +927,6 @@
     <None Include="assets\font\fontawesome-webfontf77b.eot" />
     <None Include="assets\font\fontawesome-webfontf77b.ttf" />
     <None Include="assets\font\fontawesome-webfontf77b.woff" />
-    <EntityDeploy Include="ORSModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ORSModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="ORSModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ORSModel.edmx</DependentUpon>
-      <LastGenOutput>ORSModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="ORSModel.edmx.diagram">
-      <DependentUpon>ORSModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="ORSModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ORSModel.edmx</DependentUpon>
-      <LastGenOutput>ORSModel.cs</LastGenOutput>
-    </Content>
     <Content Include="fckeditor\editor\dialog\fck_spellerpages\spellerpages\server-scripts\spellchecker.cfm" />
     <Content Include="fckeditor\editor\dialog\fck_spellerpages\spellerpages\server-scripts\spellchecker.php" />
     <Content Include="fckeditor\editor\dialog\fck_spellerpages\spellerpages\server-scripts\spellchecker.pl" />
@@ -1040,6 +1023,23 @@
     <None Include="HelpFiles\HelpDocs\HelpFrench\7_ORS_ClusterLead_FR_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpFrench\8_ORS_FAQ_FR_v3.pdf" />
     <Content Include="ORSDocuments\Mali\Protection\Note Explicative Monitoring des 13 indicateurs du SRP.pdf" />
+    <EntityDeploy Include="ORSModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ORSModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="ORSModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ORSModel.edmx</DependentUpon>
+      <LastGenOutput>ORSModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ORSModel.edmx.diagram">
+      <DependentUpon>ORSModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="ORSModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ORSModel.edmx</DependentUpon>
+      <LastGenOutput>ORSModel.cs</LastGenOutput>
+    </Content>
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -1167,6 +1167,20 @@
     </Compile>
     <Compile Include="Admin\IndicatorActivities.aspx.designer.cs">
       <DependentUpon>IndicatorActivities.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Organization\AddEditOrganization.aspx.cs">
+      <DependentUpon>AddEditOrganization.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Organization\AddEditOrganization.aspx.designer.cs">
+      <DependentUpon>AddEditOrganization.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Organization\OrganizationList.aspx.cs">
+      <DependentUpon>OrganizationList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Organization\OrganizationList.aspx.designer.cs">
+      <DependentUpon>OrganizationList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\PriorityActivities.aspx.cs">
       <DependentUpon>PriorityActivities.aspx</DependentUpon>

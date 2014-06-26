@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace SRFROWCA.LeadPages
 {
-    public partial class FundingListing : System.Web.UI.Page
+    public partial class FundingListing : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -19,10 +19,17 @@ namespace SRFROWCA.LeadPages
 
         private void LoadFunding()
         {
-            using (ORSEntities db = new ORSEntities())
+            try
             {
-                gvFunding.DataSource = db.FTSFundings;
-                gvFunding.DataBind();
+                using (ORSEntities db = new ORSEntities())
+                {
+                    gvFunding.DataSource = db.FTSFundings;
+                    gvFunding.DataBind();
+                }
+            }
+            catch (Exception ex)
+            {
+                string s = ex.ToString();
             }
         }
     }

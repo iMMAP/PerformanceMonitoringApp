@@ -13,6 +13,24 @@ namespace SRFROWCA.Admin {
     public partial class EmergencyLocations {
         
         /// <summary>
+        /// localBreadCrumbHome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localBreadCrumbHome;
+        
+        /// <summary>
+        /// localBreadCrumbEmgCluster control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localBreadCrumbEmgCluster;
+        
+        /// <summary>
         /// updMessage control.
         /// </summary>
         /// <remarks>

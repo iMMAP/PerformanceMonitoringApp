@@ -532,6 +532,7 @@ namespace SRFROWCA.Pages
 
             DBContext.Add("InsertReportLocations", new object[] { ReportId, locIds, DBNull.Value });
         }
+
         private void SaveReportDetails()
         {
             int activityDataId = 0;
@@ -546,17 +547,12 @@ namespace SRFROWCA.Pages
                     activityDataId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString());
                     projIndicatorId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["ProjectIndicatorId"].ToString());
 
-
-
-
-
                     DataTable dtActivities = (DataTable)Session["dtActivities"];
                     List<KeyValuePair<int, decimal?>> dataSave = new List<KeyValuePair<int, decimal?>>();
                     int i = 0;
 
                     foreach (DataColumn dc in dtActivities.Columns)
                     {
-
                         string colName = dc.ColumnName;
                         int locationId = 0;
 
@@ -565,7 +561,7 @@ namespace SRFROWCA.Pages
                         {
                             if (cbAccum.Checked)
                             {
-                                SaveAccumulative(activityDataId, cbAccum.Checked);
+                                SaveAccumulative(projectId, yearId, activityDataId, cbAccum.Checked);
                             }
                         }
 
@@ -629,12 +625,14 @@ namespace SRFROWCA.Pages
 
         private void DeleteReportAccumulatives()
         {
-            DBContext.Delete("DeleteReportAccumulatives", new object[] { ReportId, DBNull.Value });
+            int projectId = RC.GetSelectedIntVal(rblProjects);
+            int yearId = RC.GetSelectedIntVal(ddlYear);
+            DBContext.Delete("DeleteReportAccumulatives", new object[] { projectId, yearId, DBNull.Value });
         }
 
-        private void SaveAccumulative(int activityDataId, bool isAccum)
+        private void SaveAccumulative(int projectId, int yearId, int activityDataId, bool isAccum)
         {
-            DBContext.Add("InsertReportAccumulative", new object[] { ReportId, activityDataId, isAccum, RC.GetCurrentUserId, DBNull.Value });
+            DBContext.Add("InsertReportAccumulative", new object[] { projectId, yearId, activityDataId, isAccum, RC.GetCurrentUserId, DBNull.Value });
         }
 
         // In this method we will get the postback control.

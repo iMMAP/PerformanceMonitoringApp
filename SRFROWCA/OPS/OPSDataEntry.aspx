@@ -35,6 +35,11 @@
             transition-duration: 0.1s;
             text-align: left;
         }
+
+        .langlinks
+        {
+            color: white;
+        }
     </style>
     <!-- ORS styles -->
     <link rel="stylesheet" href="../assets/css/ors.css" />
@@ -87,6 +92,21 @@
 
             // Split location name from Target(T) and Achieved(A).
             splitLocationFromTA();
+
+            $('.cbltest').on('click', ':checkbox', function () {
+                if ($(this).is(':checked')) {
+                    $(this).parent().addClass('highlight');
+                }
+                else {
+                    $(this).parent().removeClass('highlight');
+                }
+            });
+
+            $(".cbltest").find(":checkbox").each(function () {
+                if ($(this).is(':checked')) {
+                    $(this).parent().addClass('highlight');
+                }
+            });
         });
 
         function allowOnlyNumeric() {
@@ -139,7 +159,7 @@
                 });
 
                 // Add header row in grid.
-                $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th style="width: 100px;">&nbsp;</th><th style="width: 50px;">&nbsp;</th><th style="width: 260px;">&nbsp;</th><th style="width: 220px;">&nbsp;</th>' + list + '</tr></thead>');
+                $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th style="width: 100px;">&nbsp;</th><th style="width: 50px;">&nbsp;</th><th style="width: 260px;">&nbsp;</th><th style="width: 220px;">&nbsp;</th><th style="width: 50px;">&nbsp;</th>' + list + '</tr></thead>');
             }
         }
     </script>
@@ -169,7 +189,7 @@
                                             <asp:Localize ID="lzeLgndStrObjs" runat="server"
                                                 Text="Strategic Objectives" meta:resourcekey="lzeLgndStrObjsResource1"></asp:Localize>
                                         </h5>
-                                        
+
                                     </div>
                                     <div class="widget-body">
                                         <div class="widget-main">
@@ -186,7 +206,7 @@
                                             <asp:Localize ID="lzeLgndHumPriorities" runat="server"
                                                 Text="Humanitarian Priorities" meta:resourcekey="lzeLgndHumPrioritiesResource1"></asp:Localize>
                                         </h5>
-                                        
+
                                     </div>
                                     <div class="widget-body">
                                         <div class="widget-main">
@@ -203,32 +223,31 @@
             <div class="col-sm-9 widget-container-span">
                 <div class="widget-box">
                     <div class="widget-header widget-header-small header-color-blue2">
-                        <h4>
-                            <asp:Localize ID="locClusterCaption" runat="server"
-                                Text="Cluster:" meta:resourcekey="locClusterCaptionResource1"></asp:Localize>
-                            <asp:Label ID="lblCluster" runat="server" meta:resourcekey="lblClusterResource1"></asp:Label>
-                            <div class="pull-right">
-                                <asp:LinkButton ID="lnkLanguageEnglish" Text="English" runat="server" OnClientClick="needToConfirm=false;" CssClass="error"
-                                    CausesValidation="False" OnClick="lnkLanguageEnglish_Click" meta:resourcekey="lnkLanguageEnglishResource1"></asp:LinkButton>&nbsp;&nbsp;
+                        <asp:Localize ID="locClusterCaption" runat="server"
+                            Text="Cluster:" meta:resourcekey="locClusterCaptionResource1"></asp:Localize>
+                        <asp:Label ID="lblCluster" runat="server" meta:resourcekey="lblClusterResource1"></asp:Label>
+                        <div class="pull-right">
+                            <asp:LinkButton ID="lnkLanguageEnglish" Text="English" runat="server" OnClientClick="needToConfirm=false;" CssClass="langlinks"
+                                CausesValidation="False" OnClick="lnkLanguageEnglish_Click" meta:resourcekey="lnkLanguageEnglishResource1"></asp:LinkButton>&nbsp;&nbsp;
 
-                            <asp:LinkButton ID="lnkLanguageFrench" Text="Français" runat="server" OnClientClick="needToConfirm=false;" CssClass="error"
+                            <asp:LinkButton ID="lnkLanguageFrench" Text="Français" runat="server" OnClientClick="needToConfirm=false;" CssClass="langlinks"
                                 CausesValidation="False" OnClick="lnkLanguageFrench_Click" meta:resourcekey="lnkLanguageFrenchResource1"></asp:LinkButton>
-                            </div>
-                        </h4>
+                        </div>
                     </div>
                     <div class="widget-body">
                         <div class="widget-main">
                             <div class="pull-left">
-                                <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
-                                    CausesValidation="False" Width="120px" CssClass="button_example" meta:resourcekey="btnSaveResource1" />
-                                <asp:Localize ID="locbtnCloseWindow" runat="server" Text="&lt;input type=&quot;button&quot; class=&quot;button_example&quot; value=&quot;Close Window&quot; id=&quot;close&quot; onclick=&quot;window.close()&quot; /&gt;"
-                                    meta:resourcekey="locbtnCloseWindowResource1"></asp:Localize>
+                                <asp:Button ID="btnOpenLocations" runat="server" Text="Locations" CausesValidation="False"
+                                    CssClass="btn btn-primary" OnClick="btnLocation_Click" OnClientClick="needToConfirm = false;"
+                                    meta:resourcekey="btnOpenLocationsResource1" />
                                 <asp:Localize ID="locaNoTargetMessage" runat="server" Text="&lt;div style=&quot;color:Red;&quot;&gt;To select an activity for  for which you do not know the target, please put a zero (0).&lt;/div&gt;" meta:resourcekey="locaNoTargetMessageResource1"></asp:Localize>
                             </div>
                             <div class="pull-right">
-                                <asp:Button ID="btnOpenLocations" runat="server" Text="Locations" CausesValidation="False"
-                                    CssClass="button_location" OnClick="btnLocation_Click" OnClientClick="needToConfirm = false;"
-                                    meta:resourcekey="btnOpenLocationsResource1" />
+                                <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
+                                    CausesValidation="False" Width="120px" CssClass="btn btn-primary" meta:resourcekey="btnSaveResource1" />
+                                <asp:Localize ID="locbtnCloseWindow" runat="server" Text="&lt;input type=&quot;button&quot; class=&quot;btn btn-primary&quot; value=&quot;Close Window&quot; id=&quot;close&quot; onclick=&quot;window.close()&quot; /&gt;"
+                                    meta:resourcekey="locbtnCloseWindowResource1"></asp:Localize>
+
                             </div>
 
                             <div class="spacer" style="clear: both;">
@@ -262,6 +281,16 @@
                                             </ItemTemplate>
                                             <ItemStyle Wrap="False"></ItemStyle>
                                         </asp:TemplateField>
+                                        <asp:BoundField DataField="RInd" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden">
+                                            <HeaderStyle CssClass="hidden"></HeaderStyle>
+
+                                            <ItemStyle CssClass="hidden"></ItemStyle>
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="CInd" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden">
+                                            <HeaderStyle CssClass="hidden"></HeaderStyle>
+
+                                            <ItemStyle CssClass="hidden"></ItemStyle>
+                                        </asp:BoundField>
                                         <asp:TemplateField HeaderStyle-Width="150" meta:resourcekey="TemplateFieldResource2">
                                             <HeaderTemplate>
                                                 <asp:Label ID="lblGridHeaderActivity" runat="server" Text="Activity" meta:resourcekey="lblGridHeaderActivityResource1"></asp:Label>
@@ -281,6 +310,17 @@
                                             </ItemTemplate>
                                             <HeaderStyle Width="150px"></HeaderStyle>
                                         </asp:TemplateField>
+
+                                        <asp:TemplateField HeaderStyle-Width="50">
+                                            <HeaderTemplate>
+                                                <asp:Label ID="lblUnitHeader" runat="server" Text="Unit"></asp:Label>
+                                            </HeaderTemplate>
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblUnit" runat="server" Text='<%# Eval("Unit") %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <HeaderStyle Width="50px"></HeaderStyle>
+                                        </asp:TemplateField>
+
                                     </Columns>
                                 </asp:GridView>
                             </div>
@@ -302,33 +342,33 @@
                     <asp:Panel ID="pnlLocations" runat="server" Width="200px" meta:resourcekey="pnlLocationsResource1">
                         <asp:UpdatePanel ID="uPanel1" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
-                                <div class="containerPopup">
-                                    <div class="graybar">
-                                        <asp:Localize ID="locLocaitonLevelCaption" runat="server" Text="Admin1 Locations"
-                                            meta:resourcekey="locLocaitonLevelCaptionResource1"></asp:Localize>
-                                    </div>
-                                    <div class="contentarea">
-                                        <div class="formdiv">
-                                            <table border="0" style="margin: 0 auto;">
-                                                <tr>
-                                                    <td>
-                                                        <asp:CheckBoxList ID="cbAdmin1Locaitons" runat="server" meta:resourcekey="cbAdmin1LocaitonsResource1">
-                                                        </asp:CheckBoxList>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <asp:Button ID="btnClose" runat="server" Text="Close" CssClass="button_location"
-                                                            Width="120px" CausesValidation="False" OnClientClick="needToConfirm = false;"
-                                                            meta:resourcekey="btnCloseResource1" />
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                            <div class="spacer" style="clear: both;">
+                                <div class="row">
+                                    <div class=" width-100 modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header no-padding">
+                                                <div class="table-header">
+                                                    Select Locations
+                                                </div>
+                                            </div>
+                                            <div class="modal-body no-padding">
+                                                <table border="0" style="margin: 0 auto;">
+                                                    <tr>
+                                                        <td>
+                                                            <asp:CheckBoxList ID="cbAdmin1Locaitons" runat="server" meta:resourcekey="cbAdmin1LocaitonsResource1" css="cbltest">
+                                                            </asp:CheckBoxList>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Button ID="btnClose" runat="server" Text="Close" CssClass="btn btn-primary"
+                                                                Width="120px" CausesValidation="False" OnClientClick="needToConfirm = false;"
+                                                                meta:resourcekey="btnCloseResource1" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <div class="space"></div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="graybarcontainer">
                                     </div>
                                 </div>
                             </ContentTemplate>
