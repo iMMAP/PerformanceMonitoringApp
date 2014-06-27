@@ -47,20 +47,20 @@ namespace SRFROWCA.Account
                 // 4) Send Email to user to verify account.
 
                 bool returnValue = CreateUserAccount();
-                message = "Account created successfully!";
+                //message = "Account created successfully!";
                 if (returnValue)
                 {
                     try
                     {
                         DataTable dtEmails = DBContext.GetData("uspGetUserEmails", new object[] { ddlCountry.SelectedValue });
                         string emails = string.Empty;
-
+                        emails = "orsocharowca@gmail.com";
                         if (dtEmails.Rows.Count > 0)
                         {
                             using (MailMessage mailMsg = new MailMessage())
                             {
                                 for (int i = 0; i < dtEmails.Rows.Count; i++)
-                                    emails += Convert.ToString(dtEmails.Rows[i]["Email"]) + ",";
+                                    emails += "," + Convert.ToString(dtEmails.Rows[i]["Email"]);
 
                                 mailMsg.From = new MailAddress("orsocharowca@gmail.com");
                                 //mailMsg.To.Add(new MailAddress("orsocharowca@gmail.com"));
