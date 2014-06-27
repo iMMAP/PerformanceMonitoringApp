@@ -37,7 +37,7 @@ namespace SRFROWCA.ClusterLead
         {
             PopulateOrganizations();
             PopulateLocations();
-            PopulateProjectStatus();
+            //PopulateProjectStatus();
         }
 
         private void PopulateClusters()
@@ -94,10 +94,10 @@ namespace SRFROWCA.ClusterLead
             ExportUtility.ExportGridView(gv, "ProjectListing", ".xls", Response, true);
         }
 
-        private void PopulateProjectStatus()
-        {
+        //private void PopulateProjectStatus()
+        //{
 
-        }
+        //}
 
         protected void ddlOrg_SelectedIndexChanged(object sender, EventArgs e)
         {

@@ -25,7 +25,7 @@
     </div>
     <table border="0" cellpadding="2" cellspacing="0" class="pstyle1" width="100%">
         <tr>
-            <td class="signupheading2" colspan="3">
+            <td class="signupheading2" colspan="3" style="padding-left:20px;">
                 <asp:UpdatePanel ID="updMessage" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
                         <asp:Label ID="lblMessage" runat="server" CssClass="error2" Visible="false"
@@ -51,7 +51,7 @@
                                 AutoPostBack="true">
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ID="rgvEmg" runat="server" ErrorMessage="Required" InitialValue="0"
-                                Text="Required" ControlToValidate="ddlEmergencies"></asp:RequiredFieldValidator>
+                                Text="Required" ControlToValidate="ddlEmergencies" CssClass="error2"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
@@ -63,6 +63,9 @@
                             <br />
                             <asp:CheckBoxList ID="cblClusters" CssClass="cb" runat="server" RepeatColumns="2" CellPadding="5">
                             </asp:CheckBoxList> 
+                               <asp:CustomValidator runat="server" ID="cvmodulelist"
+  ClientValidationFunction="ValidateModuleList"
+  ErrorMessage="Please Select Atleast one Cluster" CssClass="error2"></asp:CustomValidator>
                         </td>
                     </tr>
                     <tr>
@@ -80,4 +83,16 @@
         <div class="graybarcontainer">
         </div>
     </div>
+     <script type="text/javascript">
+         function ValidateModuleList(source, args) {
+             var checkedCount = $("input[type=checkbox]:checked").length;
+
+             if (checkedCount > 0) {
+                 args.IsValid = true;
+                 return;
+             }
+             args.IsValid = false;
+         }
+
+    </script>
 </asp:Content>
