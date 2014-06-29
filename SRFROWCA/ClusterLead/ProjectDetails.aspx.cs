@@ -31,5 +31,15 @@ namespace SRFROWCA.ClusterLead
             fvProjects.DataSource = dt;
             fvProjects.DataBind();
         }
+
+        protected void fvProjects_PageIndexChanging(object sender, FormViewPageEventArgs e)
+        {
+            
+        }
+
+        protected void btnViewReport_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/ClusterLead/ProjectReports.aspx");
+        }
     }
 }

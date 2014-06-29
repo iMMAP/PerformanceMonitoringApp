@@ -2,17 +2,61 @@
     CodeBehind="ProjectDetails.aspx.cs" Inherits="SRFROWCA.ClusterLead.ProjectDetails" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    
+    <style>
+        .tblMain td {
+            width:10%;
+            padding-bottom:5px;
+        }
+        .tblMain td label{
+            font-weight:bold;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="containerLogin">
-        <asp:FormView ID="fvProjects" runat="server">
+    <div class="page-content">
+
+        <table class="width-100">
+            <tr>
+                <td>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 ">
+                            <div class="widget-box">
+                                <div class="widget-header widget-header-small header-color-blue2">
+                                    <h6>
+                                        <button runat="server" id="btExportPDF" class="width-10 btn btn-sm btn-yellow"
+                                            title="PDF">
+                                            <i class="icon-download"></i>PDF
+                                        </button>
+                                        <button runat="server" id="btnExportToExcel" class="width-10 btn btn-sm btn-yellow"
+                                            title="Excel">
+                                            <i class="icon-download"></i>Excel
+                                        </button>
+                                         
+                                    </h6>
+                                    <div class="widget-toolbar">
+                                        <a href="#" data-action="collapse"><i class="icon-chevron-down"></i></a>
+                                    </div>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="row">
+                                                    <div >
+                                                        <div class="widget-box no-border">
+                                                            <div class="widget-body">
+                                                                <div class="widget-main padding-6">
+                                                                    
+                                                                     <div class="containerLogin">
+        <asp:FormView ID="fvProjects" runat="server" OnPageIndexChanging="fvProjects_PageIndexChanging">
             <ItemTemplate>                
                 <h3>
                     <%# Eval("ProjectCode") %></h3>
-                <table border="0">
+                <table class="tblMain" border="0" style="width:100%">
                     <tr>
                         <td>
-                            <label>Project Id:</label>
+                            <label>Project ID:</label>
                         </td>
                         <td>
                             <%# Eval("ProjectId") %>
@@ -91,17 +135,38 @@
                             <%# Eval("ProjectImplementingpartner")%>
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                           &nbsp;
+                        </td>
+                        <td>
+                            <asp:Button runat="server" ID="btnViewReport" Text="View Reports" class="width-10 btn btn-sm" OnClick="btnViewReport_Click" />
+                        </td>
+                    </tr>
                 </table>
             </ItemTemplate>
         </asp:FormView>
-        <%--<asp:DetailsView ID="dvProjects" runat="server" Height="600px" Width="100%" AutoGenerateRows="false"
-            AllowPaging="true" OnPageIndexChanging="dvProjects_PageIndexChanging">
-            <RowStyle CssClass="istrow" />
-            <AlternatingRowStyle CssClass="altcolor" />
-            <Fields>
-                <asp:BoundField DataField="ProjectCode" HeaderText="Project Code" />
-                <asp:BoundField DataField="ProjectTitle" HeaderText="Project Title" />
-            </Fields>
-        </asp:DetailsView>--%>
+        
     </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+   
+</div>
+
 </asp:Content>
