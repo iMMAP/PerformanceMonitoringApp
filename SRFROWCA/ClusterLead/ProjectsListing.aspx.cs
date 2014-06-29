@@ -35,7 +35,15 @@ namespace SRFROWCA.ClusterLead
 
         private void PopulateControls()
         {
-            PopulateOrganizations();
+            if (!RC.IsDataEntryUser(User))
+                PopulateOrganizations();
+            else
+            {
+                ddlOrg.Visible = false;
+                divOrganization.Visible = false;
+            }
+
+
             PopulateLocations();
             //PopulateProjectStatus();
         }
@@ -203,9 +211,13 @@ namespace SRFROWCA.ClusterLead
 
             string projCode = txtProjectCode.Text.Trim().Length > 0 ? txtProjectCode.Text.Trim() : null;
             int? orgId = RC.GetSelectedIntVal(ddlOrg);
+
             if (orgId == 0)
             {
-                orgId = (int?)null;
+                if (RC.IsDataEntryUser(User))
+                    orgId = UserInfo.Organization;
+                else
+                    orgId = (int?)null;
             }
 
             int? admin1 = RC.GetSelectedIntVal(ddlAdmin1);

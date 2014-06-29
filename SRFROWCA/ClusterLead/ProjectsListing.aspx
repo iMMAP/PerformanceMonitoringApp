@@ -113,6 +113,7 @@
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
+                                                                            <div id="divOrganization" runat="server">
                                                                             <td>Organization:
                                                                             </td>
                                                                             <td>
@@ -120,6 +121,7 @@
                                                                                     OnSelectedIndexChanged="ddlOrg_SelectedIndexChanged" meta:resourcekey="ddlOrgResource1">
                                                                                 </asp:DropDownList>
                                                                             </td>
+                                                                            </div>
                                                                         </tr>
                                                                        <%-- <tr>
                                                                             <td>Project Status:
