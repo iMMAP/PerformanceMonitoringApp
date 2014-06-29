@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="OrganizationList.aspx.cs" Inherits="SRFROWCA.Admin.Organization.OrganizationList" MasterPageFile="~/Site.Master" %>
 <%@ MasterType virtualPath="~/Site.master" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     </asp:Content>
 
