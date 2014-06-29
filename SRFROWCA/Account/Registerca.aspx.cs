@@ -237,30 +237,31 @@ namespace SRFROWCA.Account
 
             if (ddlUserRole.SelectedValue.Equals("0"))
             {
+                ddlLocations.Enabled = true;
                 ddlOrganization.Enabled = true;
                 ddlClusters.Enabled = true;
+                divLocations.Visible = true;
                 divOrg.Visible = true;
                 divCluster.Visible = true;
             }
-            else if (ddlUserRole.SelectedValue.Equals("5"))
+            else if (ddlUserRole.SelectedValue.Equals("5") || ddlUserRole.SelectedValue.Equals("4"))
             {
                 ddlOrganization.Enabled = false;
                 ddlClusters.Enabled = false;
                 divOrg.Visible = false;
                 divCluster.Visible = false;
-            }
-            else if (ddlUserRole.SelectedValue.Equals("4"))
-            {
-                ddlOrganization.Enabled = false;
-                ddlClusters.Enabled = false;
-                divOrg.Visible = false;
-                divCluster.Visible = false;
+
+                ddlLocations.Enabled = true;
+                divLocations.Visible = true;
             }
             else if (ddlUserRole.SelectedValue.Equals("3"))
             {
                 ddlOrganization.Enabled = false;
+                ddlLocations.Enabled = false;
                 ddlClusters.Enabled = true;
+
                 divOrg.Visible = false;
+                divLocations.Visible = false;
                 divCluster.Visible = true;
             }
             else if (ddlUserRole.SelectedValue.Equals("2"))
@@ -269,6 +270,8 @@ namespace SRFROWCA.Account
                 ddlClusters.Enabled = true;
                 divOrg.Visible = false;
                 divCluster.Visible = true;
+                ddlLocations.Enabled = true;
+                divLocations.Visible = true;
             }
             else if (ddlUserRole.SelectedValue.Equals("1"))
             {
@@ -276,6 +279,8 @@ namespace SRFROWCA.Account
                 ddlOrganization.Enabled = true;
                 divOrg.Visible = true;
                 divCluster.Visible = false;
+                ddlLocations.Enabled = true;
+                divLocations.Visible = true;
             }
 
             if (ddlLocations.Visible)
