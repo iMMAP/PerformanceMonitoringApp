@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Web;
 using System.Web.Security;
 using System.Web.UI.WebControls;
 using BusinessLogic;
@@ -29,6 +30,49 @@ namespace SRFROWCA.Account
             if (Session["EditUserId"] != null)
             {
                 GetUserInformation();
+                ShowHideControls();
+            }
+        }
+
+        private void ShowHideControls()
+        {
+            if (ddlUserRole.SelectedItem.Text == "OCHA Country Admin" || ddlUserRole.SelectedItem.Text == "OCHA Country Staff")
+            {
+                ddlOrganization.Enabled = false;
+                ddlClusters.Enabled = false;
+                divOrg.Visible = false;
+                divCluster.Visible = false;
+
+                ddlCountry.Enabled = true;
+                divLocations.Visible = true;
+            }
+            else if (ddlUserRole.SelectedItem.Text == "Region Cluster Lead")
+            {
+                ddlOrganization.Enabled = false;
+                ddlCountry.Enabled = false;
+                ddlClusters.Enabled = true;
+
+                divOrg.Visible = false;
+                divLocations.Visible = false;
+                divCluster.Visible = true;
+            }
+            else if (ddlUserRole.SelectedItem.Text == "Country Cluster Lead")
+            {
+                ddlOrganization.Enabled = false;
+                ddlClusters.Enabled = true;
+                divOrg.Visible = false;
+                divCluster.Visible = true;
+                ddlCountry.Enabled = true;
+                divLocations.Visible = true;
+            }
+            else if (ddlUserRole.SelectedItem.Text == "Data Entry/Field Officer")
+            {
+                ddlClusters.Enabled = false;
+                ddlOrganization.Enabled = true;
+                divOrg.Visible = true;
+                divCluster.Visible = false;
+                ddlCountry.Enabled = true;
+                divLocations.Visible = true;
             }
         }
 
@@ -167,6 +211,11 @@ namespace SRFROWCA.Account
 
         private object[] GetUserValues(Guid userId)
         {
+            if (ddlUserRole.SelectedItem.Text == "Region Cluster Lead")
+            {
+                ddlCountry.SelectedValue = "567";
+            }
+
             int tempVal = 0;
             int.TryParse(ddlOrganization.SelectedValue, out tempVal);
             int? orgId = tempVal > 0 ? tempVal : (int?)null;
@@ -179,7 +228,57 @@ namespace SRFROWCA.Account
 
         protected void ddlUserRole_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ddlOrganization.SelectedIndex = 0;
+            ddlClusters.SelectedIndex = 0;
+            ddlCountry.SelectedIndex = 0;
 
+            if (ddlUserRole.SelectedItem.Text == "OCHA Country Admin" || ddlUserRole.SelectedItem.Text == "OCHA Country Staff")
+            {
+                ddlOrganization.Enabled = false;
+                ddlClusters.Enabled = false;
+                divOrg.Visible = false;
+                divCluster.Visible = false;
+
+                ddlCountry.Enabled = true;
+                divLocations.Visible = true;
+            }
+            else if (ddlUserRole.SelectedItem.Text == "Region Cluster Lead")
+            {
+                ddlOrganization.Enabled = false;
+                ddlCountry.Enabled = false;
+                ddlClusters.Enabled = true;
+
+                divOrg.Visible = false;
+                divLocations.Visible = false;
+                divCluster.Visible = true;
+            }
+            else if (ddlUserRole.SelectedItem.Text == "Country Cluster Lead")
+            {
+                ddlOrganization.Enabled = false;
+                ddlClusters.Enabled = true;
+                divOrg.Visible = false;
+                divCluster.Visible = true;
+                ddlCountry.Enabled = true;
+                divLocations.Visible = true;
+            }
+            else if (ddlUserRole.SelectedItem.Text == "Data Entry/Field Officer")
+            {
+                ddlClusters.Enabled = false;
+                ddlOrganization.Enabled = true;
+                divOrg.Visible = true;
+                divCluster.Visible = false;
+                ddlCountry.Enabled = true;
+                divLocations.Visible = true;
+            }
+
+            if (ddlCountry.Visible)
+            {
+                if (HttpContext.Current.User.IsInRole("CountryAdmin"))
+                {
+                    ddlCountry.SelectedValue = UserInfo.Country.ToString();
+                    //ddlLocations.Enabled = false;
+                }
+            }
         }
 
         protected void Page_Error(object sender, EventArgs e)
