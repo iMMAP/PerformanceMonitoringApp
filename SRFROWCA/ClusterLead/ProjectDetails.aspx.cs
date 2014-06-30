@@ -39,7 +39,12 @@ namespace SRFROWCA.ClusterLead
 
         protected void btnViewReport_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/ClusterLead/ProjectReports.aspx");
+            string projectID = "0";
+
+            if (!string.IsNullOrEmpty(Request.QueryString["pid"]))
+                projectID = Convert.ToString(Request.QueryString["pid"]);
+
+            Response.Redirect("~/ClusterLead/ProjectReports.aspx?pid=" + projectID);
         }
     }
 }
