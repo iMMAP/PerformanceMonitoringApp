@@ -201,6 +201,14 @@
                                         CommandArgument='<%# Eval("ProjectId") %>' meta:resourcekey="lnkVieDetailsResource1" />--%>
                                 </ItemTemplate>
                             </asp:TemplateField>
+                            <asp:TemplateField >
+                                <ItemTemplate>
+                                     <asp:ImageButton ID="lnkPrint" runat="server" ImageUrl="~/assets/orsimages/pdf.png" CommandName="PrintReport"
+                                                    CommandArgument='<%# Eval("ProjectId") %>' />
+                                            
+                                 
+                                </ItemTemplate>
+                            </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
                 </div>

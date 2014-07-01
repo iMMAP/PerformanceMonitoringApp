@@ -104,13 +104,18 @@ namespace SRFROWCA.ClusterLead
 
         protected void ExportToPDF(object sender, EventArgs e)
         {
-            DataTable dtResults = DBContext.GetData("uspGetReports", new object[] { null, null, null });
+            ExportToPDF(null);
+        }
+
+        private void ExportToPDF(int? projectId)
+        {
+            DataTable dtResults = DBContext.GetData("uspGetReports", new object[] { projectId, null, null });
 
             if (dtResults.Rows.Count > 0)
             {
                 Response.ContentType = "application/pdf";
                 Response.AddHeader("Content-Disposition", string.Format("attachment;filename=Project-{0}-{1}.pdf", UserInfo.CountryName, DateTime.Now.ToString("yyyyMMddHHmmss")));
-                Response.BinaryWrite(WriteDataEntryPDF.GeneratePDF(dtResults, null, null).ToArray());
+                Response.BinaryWrite(WriteDataEntryPDF.GeneratePDF(dtResults, projectId, null).ToArray());
             }
         }
 
@@ -155,6 +160,10 @@ namespace SRFROWCA.ClusterLead
             {
                 //Session["ViewProjectId"] = e.CommandArgument.ToString();
                 Response.Redirect("~/ClusterLead/ProjectDetails.aspx?pid=" + e.CommandArgument.ToString());
+            }
+            else if (e.CommandName == "PrintReport")
+            {
+                ExportToPDF(Convert.ToInt32(e.CommandArgument));
             }
         }
 
