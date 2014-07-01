@@ -27,6 +27,10 @@
                             <div class="widget-box">
                                 <div class="widget-header widget-header-small header-color-blue2">
                                     <h6>
+                                        <button runat="server" id="btnExportPDF" onserverclick="ExportToPDF" class="width-10 btn btn-sm btn-yellow"
+                                            title="PDF">
+                                            <i class="icon-download"></i>PDF
+                                        </button>
                                         <button runat="server" id="btnExportToExcel" onserverclick="ExportToExcel" class="width-10 btn btn-sm btn-yellow"
                                             title="Excel">
                                             <i class="icon-download"></i>Excel

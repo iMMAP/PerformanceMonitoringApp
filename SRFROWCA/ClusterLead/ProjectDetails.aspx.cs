@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using BusinessLogic;
+using SRFROWCA.Common;
 
 namespace SRFROWCA.ClusterLead
 {
@@ -45,6 +46,23 @@ namespace SRFROWCA.ClusterLead
                 projectID = Convert.ToString(Request.QueryString["pid"]);
 
             Response.Redirect("~/ClusterLead/ProjectReports.aspx?pid=" + projectID);
+        }
+
+        protected void btExportPDF_Click(object sender, EventArgs e)
+        {
+            int projectID = 0;
+
+            if (Request.QueryString["pid"] != null)
+                int.TryParse(Request.QueryString["pid"].ToString(), out projectID);
+
+            DataTable dtResults = DBContext.GetData("uspGetReports", new object[] { Convert.ToString(projectID), null, null });
+
+            if (dtResults.Rows.Count > 0)
+            {
+                Response.ContentType = "application/pdf";
+                Response.AddHeader("Content-Disposition", string.Format("attachment;filename=Project-{0}-{1}.pdf", UserInfo.CountryName, DateTime.Now.ToString("yyyyMMddHHmmss")));
+                Response.BinaryWrite(WriteDataEntryPDF.GeneratePDF(dtResults, projectID, null).ToArray());
+            }
         }
     }
 }

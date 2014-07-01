@@ -1,7 +1,9 @@
 ﻿using BusinessLogic;
+using SRFROWCA.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -34,14 +36,27 @@ namespace SRFROWCA.ClusterLead
             string startDate = !string.IsNullOrEmpty(txtFromDate.Text) ? txtFromDate.Text : null;
             string endDate = !string.IsNullOrEmpty(txtToDate.Text) ? txtToDate.Text : null;
 
-            return DBContext.GetData("uspGetReports", new object[] { projectID , startDate, endDate});
+            return DBContext.GetData("uspGetReports", new object[] { projectID, startDate, endDate });
         }
 
         protected void grdReports_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "PrintReport")
             {
-                Response.Redirect("~/ClusterLead/ProjectReports.aspx?rid=" + e.CommandArgument.ToString());
+                //int projectID = 65761;
+                int projectID = 0;
+
+                if (Request.QueryString["pid"] != null)
+                    int.TryParse(Request.QueryString["pid"].ToString(), out projectID);
+
+                DataTable dtResults = DBContext.GetData("uspGetReports", new object[] { Convert.ToString(projectID), null, null });
+
+                if (dtResults.Rows.Count > 0)
+                {
+                    Response.ContentType = "application/pdf";
+                    Response.AddHeader("Content-Disposition", string.Format("attachment;filename=Project-{0}-{1}.pdf", UserInfo.CountryName, DateTime.Now.ToString("yyyyMMddHHmmss")));
+                    Response.BinaryWrite(WriteDataEntryPDF.GeneratePDF(dtResults, projectID, Convert.ToInt32(e.CommandArgument)).ToArray());
+                }
             }
         }
 
@@ -93,6 +108,24 @@ namespace SRFROWCA.ClusterLead
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             LoadReports();
+        }
+
+        protected void btnExportPDF_Click(object sender, EventArgs e)
+        {
+            //int projectID = 65761;
+            int projectID = 0;
+
+            if (Request.QueryString["pid"] != null)
+                int.TryParse(Request.QueryString["pid"].ToString(), out projectID);
+
+            DataTable dtResults = DBContext.GetData("uspGetReports", new object[] { Convert.ToString(projectID), null, null });
+
+            if (dtResults.Rows.Count > 0)
+            {
+                Response.ContentType = "application/pdf";
+                Response.AddHeader("Content-Disposition", string.Format("attachment;filename=Project-{0}-{1}.pdf", UserInfo.CountryName, DateTime.Now.ToString("yyyyMMddHHmmss")));
+                Response.BinaryWrite(WriteDataEntryPDF.GeneratePDF(dtResults, projectID, null).ToArray());
+            }
         }
     }
 }

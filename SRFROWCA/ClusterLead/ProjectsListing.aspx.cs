@@ -102,6 +102,18 @@ namespace SRFROWCA.ClusterLead
             ExportUtility.ExportGridView(gv, "ProjectListing", ".xls", Response, true);
         }
 
+        protected void ExportToPDF(object sender, EventArgs e)
+        {
+            DataTable dtResults = DBContext.GetData("uspGetReports", new object[] { null, null, null });
+
+            if (dtResults.Rows.Count > 0)
+            {
+                Response.ContentType = "application/pdf";
+                Response.AddHeader("Content-Disposition", string.Format("attachment;filename=Project-{0}-{1}.pdf", UserInfo.CountryName, DateTime.Now.ToString("yyyyMMddHHmmss")));
+                Response.BinaryWrite(WriteDataEntryPDF.GeneratePDF(dtResults, null, null).ToArray());
+            }
+        }
+
         //private void PopulateProjectStatus()
         //{
 

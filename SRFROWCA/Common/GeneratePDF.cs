@@ -28,6 +28,112 @@ namespace SRFROWCA.Common
             }
         }
 
+        public static MemoryStream GeneratePDF(DataTable dt, int? projectID, int? reportID)
+        {
+            using (MemoryStream outputStream = new MemoryStream())
+            {
+                iTextSharp.text.Document document = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4, 8, 8, 14, 6);
+                iTextSharp.text.pdf.PdfWriter writer = iTextSharp.text.pdf.PdfWriter.GetInstance(document, outputStream);
+
+                if (dt.Rows.Count > 0)
+                {
+                    document.Open();
+                    GenerateDocument(document, dt, projectID, reportID);
+                    document.Close();
+                }
+
+                return outputStream;
+            }
+        }
+
+        public static void GenerateDocument(iTextSharp.text.Document document, DataTable dt, int? projectID, int? reportID)
+        {
+            if (projectID != null)
+            {
+                IEnumerable<DataRow> projectDetails = GetProjectInformation(dt, (int)projectID);
+                DataRow projectGeneralInfo = projectDetails.FirstOrDefault<DataRow>();
+
+                ProjectGeneralInfo(document, projectGeneralInfo);
+                ProjectReports(document, dt, reportID);
+            }
+            else
+            {
+                List<int> projectIds = GetDistinctProjects(dt);
+
+                for (int i = 0; i < projectIds.Count; i++)
+                {
+                    IEnumerable<DataRow> projectDetails = GetProjectInformation(dt, projectIds[i]);
+                    DataRow projectGeneralInfo = projectDetails.FirstOrDefault<DataRow>();
+
+                    ProjectGeneralInfo(document, projectGeneralInfo);
+                    ProjectReports(document, dt.Select("ProjectID='" + projectIds[i] + "'").CopyToDataTable<DataRow>(), reportID);
+                    
+                    document.NewPage();
+                }
+            }
+        }
+
+        private static void ProjectReports(iTextSharp.text.Document document, DataTable dt, int? reportID)
+        {
+            PdfPTable tbl = new PdfPTable(6);
+
+            PdfPCell cell = null;
+            var headerColor = new BaseColor(240, 240, 240);
+            cell = new PdfPCell(new Phrase("Report ID", TitleFont));
+            cell.BackgroundColor = headerColor;
+            tbl.AddCell(cell);
+
+            cell = new PdfPCell(new Phrase("Report Name", TitleFont));
+            cell.BackgroundColor = headerColor;
+            tbl.AddCell(cell);
+
+            cell = new PdfPCell(new Phrase("Created By", TitleFont));
+            cell.BackgroundColor = headerColor;
+            tbl.AddCell(cell);
+
+            cell = new PdfPCell(new Phrase("Created Date", TitleFont));
+            cell.BackgroundColor = headerColor;
+            tbl.AddCell(cell);
+
+            cell = new PdfPCell(new Phrase("Updated By", TitleFont));
+            cell.BackgroundColor = headerColor;
+            tbl.AddCell(cell);
+
+            cell = new PdfPCell(new Phrase("Updated Date", TitleFont));
+            cell.BackgroundColor = headerColor;
+            tbl.AddCell(cell);
+
+            if (reportID != null)
+            {
+                DataRow[] row = dt.Select("ReportID='" + reportID.ToString() + "'");
+
+                if (row.Length > 0)
+                {
+                    tbl.AddCell(new Phrase(Convert.ToString(row[0]["ReportID"]), TableFont));
+                    tbl.AddCell(new Phrase(Convert.ToString(row[0]["ReportName"]), TableFont));
+                    tbl.AddCell(new Phrase(Convert.ToString(row[0]["CreatedBy"]), TableFont));
+                    tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(row[0]["CreatedDate"])) ? Convert.ToDateTime(row[0]["CreatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
+                    tbl.AddCell(new Phrase(Convert.ToString(row[0]["UpdatedBy"]), TableFont));
+                    tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(row[0]["UpdatedDate"])) ? Convert.ToDateTime(row[0]["UpdatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
+                }
+            }
+            else
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    tbl.AddCell(new Phrase(Convert.ToString(dt.Rows[i]["ReportID"]), TableFont));
+                    tbl.AddCell(new Phrase(Convert.ToString(dt.Rows[i]["ReportName"]), TableFont));
+                    tbl.AddCell(new Phrase(Convert.ToString(dt.Rows[i]["CreatedBy"]), TableFont));
+                    tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(dt.Rows[i]["CreatedDate"])) ? Convert.ToDateTime(dt.Rows[i]["CreatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
+                    tbl.AddCell(new Phrase(Convert.ToString(dt.Rows[i]["UpdatedBy"]), TableFont));
+                    tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(dt.Rows[i]["UpdatedDate"])) ? Convert.ToDateTime(dt.Rows[i]["UpdatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
+                }
+            }
+
+            tbl.SpacingAfter = 10f;
+            document.Add(tbl);
+        }
+
         private static void IndicatorTargets(Document document, IEnumerable<DataRow> projectDetails)
         {
             DataTable dt = projectDetails.CopyToDataTable();

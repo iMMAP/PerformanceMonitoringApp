@@ -40,11 +40,12 @@
                             <div class="widget-box">
                                 <div class="widget-header widget-header-small header-color-blue2">
                                     <h6>
-                                        <button runat="server" id="btExportPDF" class="width-10 btn btn-sm btn-yellow"
+                                       <button runat="server" id="btnExportPDF" onserverclick="btnExportPDF_Click" class="width-10 btn btn-sm btn-yellow"
                                             title="PDF">
                                             <i class="icon-download"></i>PDF
                                        
                                         </button>
+                                        
                                         <button runat="server" id="btnExportToExcel" class="width-10 btn btn-sm btn-yellow"
                                             title="Excel">
                                             <i class="icon-download"></i>Excel
@@ -114,14 +115,13 @@
                             </asp:BoundField>--%>
                             <asp:BoundField DataField="ReportID" HeaderText="Report ID" SortExpression="ReportID"/>
                             <asp:BoundField DataField="ReportName" HeaderText="Report Name" SortExpression="ReportName"/>
-                            <asp:BoundField DataField="LocationName" HeaderText="Location" SortExpression="LocationName"/>
+                            <asp:BoundField DataField="Country" HeaderText="Location" SortExpression="Country"/>
                             <asp:BoundField DataField="IsApproved" HeaderText="Is Approved" SortExpression="IsApproved" />
-                            <asp:BoundField DataField="LocationName" HeaderText="Locations" meta:resourcekey="BoundFieldResource7" />
                             <asp:BoundField DataField="CreatedDate" HeaderText="Created On" SortExpression="CreatedDate" ></asp:BoundField>
                             <asp:TemplateField >
                                 <ItemTemplate>
                                      <asp:ImageButton ID="lnkPrint" runat="server" ImageUrl="~/assets/orsimages/pdf.png" CommandName="PrintReport"
-                                                    CommandArgument='<%# Eval("ReportId") %>' />
+                                                    CommandArgument='<%# Eval("ReportID") %>' />
                                             
                                  
                                 </ItemTemplate>
