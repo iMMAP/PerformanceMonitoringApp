@@ -27,6 +27,10 @@
                             <div class="widget-box">
                                 <div class="widget-header widget-header-small header-color-blue2">
                                     <h6>
+                                        <button runat="server" id="btnExportPDF" onserverclick="ExportToPDF" class="width-10 btn btn-sm btn-yellow"
+                                            title="PDF">
+                                            <i class="icon-download"></i>PDF
+                                        </button>
                                         <button runat="server" id="btnExportToExcel" onserverclick="ExportToExcel" class="width-10 btn btn-sm btn-yellow"
                                             title="Excel">
                                             <i class="icon-download"></i>Excel
@@ -195,6 +199,14 @@
                                             
                                    <%-- <asp:LinkButton ID="lnkVieDetails" runat="server" Text="View" CommandName="ViewProject"
                                         CommandArgument='<%# Eval("ProjectId") %>' meta:resourcekey="lnkVieDetailsResource1" />--%>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField >
+                                <ItemTemplate>
+                                     <asp:ImageButton ID="lnkPrint" runat="server" ImageUrl="~/assets/orsimages/pdf.png" CommandName="PrintReport"
+                                                    CommandArgument='<%# Eval("ProjectId") %>' />
+                                            
+                                 
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>

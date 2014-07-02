@@ -30,9 +30,5 @@ namespace BusinessLogic
                 return "Live";
             }
         }
-       
-
-      
-
     }
 }

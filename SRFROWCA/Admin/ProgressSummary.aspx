@@ -54,13 +54,13 @@
                                                                 <asp:TextBox ID="txtFromDate" runat="server" CssClass="width-80"></asp:TextBox>
                                                             </td>
 
-                                                            <td>Country:
+                                                           <%-- <td>Country:
                                                             </td>
                                                             <td>
                                                                 <asp:DropDownList ID="ddlCountry" AppendDataBoundItems="true" runat="server" CssClass="width-100">
                                                                     <asp:ListItem Text="Select Country" Value="-1" Selected="True"></asp:ListItem>
                                                                 </asp:DropDownList>
-                                                            </td>
+                                                            </td>--%>
                                                             <td>&nbsp;</td>
                                                             <td>&nbsp;</td>
                                                         </tr>
@@ -72,13 +72,13 @@
                                                             <td>
                                                                 <asp:TextBox ID="txtToDate" runat="server" CssClass="width-80"></asp:TextBox>
                                                             </td>
-                                                            <td>Cluster: 
+                                                            <%--<td>Cluster: 
                                                             </td>
                                                             <td>
                                                                 <asp:DropDownList ID="ddlClusters" AppendDataBoundItems="true" runat="server" CssClass="width-100">
                                                                     <asp:ListItem Text="Select Cluster" Value="-1" Selected="True"></asp:ListItem>
                                                                 </asp:DropDownList>
-                                                            </td>
+                                                            </td>--%>
 
                                                             <td>&nbsp;
                                                             </td>

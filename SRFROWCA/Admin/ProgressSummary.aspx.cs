@@ -17,7 +17,7 @@ namespace SRFROWCA.Admin
             if (!IsPostBack)
             {
                 LoadData(null, null, "-1", "-1", "-1");
-                LoadCombo();
+                //LoadCombo();
             }
         }
 
@@ -36,27 +36,27 @@ namespace SRFROWCA.Admin
             }
         }
 
-        private void LoadCombo()
-        {
-            UI.FillClusters(ddlClusters, RC.SelectedSiteLanguageId);
-            if (UserInfo.Cluster > 0)
-            {
-                ddlClusters.SelectedValue = UserInfo.Cluster.ToString();
-                ddlClusters.Visible = false;
-            }
+        //private void LoadCombo()
+        //{
+        //    UI.FillClusters(ddlClusters, RC.SelectedSiteLanguageId);
+        //    if (UserInfo.Cluster > 0)
+        //    {
+        //        ddlClusters.SelectedValue = UserInfo.Cluster.ToString();
+        //        ddlClusters.Visible = false;
+        //    }
 
-            UI.FillLocations(ddlCountry, RC.GetLocations(this.User, (int)RC.LocationTypes.National));
-        }
+        //    UI.FillLocations(ddlCountry, RC.GetLocations(this.User, (int)RC.LocationTypes.National));
+        //}
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             string startDate = !string.IsNullOrEmpty(txtFromDate.Text)?txtFromDate.Text:null;
             string endDate = !string.IsNullOrEmpty(txtToDate.Text)?txtToDate.Text:null;
-            string countryID = ddlCountry.SelectedValue;
-            string clusterID = ddlClusters.SelectedValue;
+            //string countryID = ddlCountry.SelectedValue;
+            //string clusterID = ddlClusters.SelectedValue;
             string isOPSProject = rbIsOPSProject.SelectedValue;
 
-            LoadData(startDate, endDate, countryID, clusterID, isOPSProject);
+            LoadData(startDate, endDate, "-1", "-1", isOPSProject);
         }
     }
 }
