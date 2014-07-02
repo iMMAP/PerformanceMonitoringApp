@@ -2,8 +2,20 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <script type="text/javascript">
-        function windowOpen() {
+        function windowOpen1() {
             myWindow = window.open('http://localhost:50464/OPS/OPSDataEntry.aspx?uid=9&pid=59768&ProjectRevision=R&clname=education&cname=mali&key=pUAkWrmUJKCobRxo2HrHSA%3d%3d', '_blank', 'width=1000,height=600, scrollbars=yes,resizable=yes')
+            myWindow.focus()
+            return false;
+        }
+
+        function windowOpen2() {
+            myWindow = window.open('http://localhost:50464/OPS/OPSDataEntry.aspx?uid=9&pid=52472&ProjectRevision=R&clname=education&cname=Burkina Faso&key=pUAkWrmUJKCobRxo2HrHSA%3d%3d', '_blank', 'width=1000,height=600, scrollbars=yes,resizable=yes')
+            myWindow.focus()
+            return false;
+        }
+
+        function windowOpen3() {
+            myWindow = window.open('http://localhost:50464/OPS/OPSDataEntry.aspx?uid=9&pid=66068&ProjectRevision=R&clname=foodsecurity&cname=senegal&key=pUAkWrmUJKCobRxo2HrHSA%3d%3d', '_blank', 'width=1000,height=600, scrollbars=yes,resizable=yes')
             myWindow.focus()
             return false;
         }
@@ -12,7 +24,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="page-content">
     <div class="space"></div>
-    <input type="button" value="test"  onclick="windowOpen()" style="width:200px" />
+    <input type="button" value="test"  onclick="windowOpen1()" style="width:200px" />
+        <input type="button" value="52472 Education"  onclick="windowOpen2()" style="width:200px" />
+        <input type="button" value="66068 Food"  onclick="windowOpen3()" style="width:200px" />
         </div>
      
 </asp:Content>

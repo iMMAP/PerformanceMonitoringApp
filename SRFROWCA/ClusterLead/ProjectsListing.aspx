@@ -113,6 +113,7 @@
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
+                                                                            <div id="divOrganization" runat="server">
                                                                             <td>Organization:
                                                                             </td>
                                                                             <td>
@@ -120,6 +121,7 @@
                                                                                     OnSelectedIndexChanged="ddlOrg_SelectedIndexChanged" meta:resourcekey="ddlOrgResource1">
                                                                                 </asp:DropDownList>
                                                                             </td>
+                                                                            </div>
                                                                         </tr>
                                                                        <%-- <tr>
                                                                             <td>Project Status:
@@ -188,8 +190,11 @@
                             <asp:BoundField DataField="Phone" HeaderText="Phone" meta:resourcekey="BoundFieldResource9" />
                             <asp:TemplateField meta:resourcekey="TemplateFieldResource1">
                                 <ItemTemplate>
-                                    <asp:LinkButton ID="lnkVieDetails" runat="server" Text="View" CommandName="ViewProject"
-                                        CommandArgument='<%# Eval("ProjectId") %>' meta:resourcekey="lnkVieDetailsResource1" />
+                                     <asp:ImageButton ID="lnkVieDetails" runat="server" ImageUrl="~/assets/orsimages/view.png" CommandName="ViewProject"
+                                                    CommandArgument='<%# Eval("ProjectId") %>' meta:resourcekey="lnkVieDetailsResource1" />
+                                            
+                                   <%-- <asp:LinkButton ID="lnkVieDetails" runat="server" Text="View" CommandName="ViewProject"
+                                        CommandArgument='<%# Eval("ProjectId") %>' meta:resourcekey="lnkVieDetailsResource1" />--%>
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>

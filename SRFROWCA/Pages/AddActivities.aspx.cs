@@ -910,7 +910,6 @@ namespace SRFROWCA.Pages
                 else
                 {
                     string[] words = _columnName.Split('^');
-
                     Label lc = new Label { Width = 50, Text = "<b>" + words[1] + "</b>" };
                     container.Controls.Add(lc);
                 }

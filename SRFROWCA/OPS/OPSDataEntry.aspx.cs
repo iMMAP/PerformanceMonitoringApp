@@ -167,23 +167,20 @@ namespace SRFROWCA.OPS
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            SaveData();
+            //if (!DataIsValid)
+            //{
+            //    ShowMessage("Annual Target for at least one location is mandatory of selected activities!");
+            //}
+            //else
+            //{
+                SaveData();
+            //}
         }
 
         private void SaveData()
         {
             using (TransactionScope scope = new TransactionScope())
             {
-                //if (OPSReportId > 0)
-                //{
-                //    DeleteReportAndItsChild();
-                //}
-
-                //if (IsDataExistsToSave())
-                //{
-                //    SaveReport();
-                //}
-
                 List<int> locationIds = GetLocationIdsFromGrid();
                 if (locationIds.Count > 0)
                 {
@@ -211,7 +208,8 @@ namespace SRFROWCA.OPS
             {
                 if (row.RowType == DataControlRowType.DataRow)
                 {
-                    DataTable dtActivities = (DataTable)Session["dtActivities"];
+                    
+                    DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
                     foreach (DataColumn dc in dtActivities.Columns)
                     {
                         string colName = dc.ColumnName;
@@ -550,7 +548,7 @@ namespace SRFROWCA.OPS
                         columnName == "Objective" || columnName == "HumanitarianPriority" || columnName == "ActivityDataId" ||
                         columnName == "ActivityName" || columnName == "DataName" || columnName == "IsActive" ||
                         columnName == "ObjectiveId" || columnName == "HumanitarianPriorityId" || columnName == "ObjAndPrId" ||
-                        columnName == "PriorityActivityId" || columnName == "RInd" || columnName == "CInd" || columnName == "Unit"))
+                        columnName == "PriorityActivityId" || columnName == "RInd" || columnName == "CInd" || columnName == "Unit" || columnName == "IsAdded"))
                 {
 
                     customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, column.ColumnName, "1");
@@ -636,7 +634,6 @@ namespace SRFROWCA.OPS
 
         private void SaveReport()
         {
-            //SaveReportMainInfo();
             SaveReportLocations();
             SaveReportDetails();
         }
@@ -794,63 +791,67 @@ namespace SRFROWCA.OPS
                     DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
                     List<KeyValuePair<int, decimal?>> dataSave = new List<KeyValuePair<int, decimal?>>();
                     int i = 0;
-
-                    foreach (DataColumn dc in dtActivities.Columns)
+                    CheckBox isAdded = row.FindControl("cbIsAdded") as CheckBox;
+                    if (isAdded.Checked)
                     {
-                        string colName = dc.ColumnName;
-                        int locationId = 0;
-
-                        HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
-                        if (hf != null)
+                        foreach (DataColumn dc in dtActivities.Columns)
                         {
-                            locationId = Convert.ToInt32(hf.Value);
-                        }
+                            string colName = dc.ColumnName;
+                            int locationId = 0;
 
-                        decimal? value = null;
-                        TextBox t = row.FindControl(colName) as TextBox;
-                        if (t != null)
-                        {
-                            if (!string.IsNullOrEmpty(t.Text))
+                            HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
+                            if (hf != null)
                             {
-                                value = Convert.ToDecimal(t.Text, CultureInfo.InvariantCulture);
+                                locationId = Convert.ToInt32(hf.Value);
                             }
-                        }
 
-                        if (locationId > 0)
-                        {
-                            dataSave.Add(new KeyValuePair<int, decimal?>(locationId, value));
-                            if (i == 1)
+                            decimal? value = null;
+                            TextBox t = row.FindControl(colName) as TextBox;
+                            if (t != null)
                             {
-                                i = 0;
-                                int locationIdToSaveT = 0;
-                                decimal? valToSaveMid2014 = null;
-                                decimal? valToSave2014 = null;
-                                int j = 0;
-                                foreach (var item in dataSave)
+                                if (!string.IsNullOrEmpty(t.Text))
                                 {
-                                    if (j == 0)
-                                    {
-                                        locationIdToSaveT = item.Key;
-                                        valToSaveMid2014 = item.Value;
-                                        j++;
-                                    }
-                                    else
-                                    {
-                                        valToSave2014 = item.Value;
-                                        j = 0;
-                                    }
-                                }
-
-                                dataSave.Clear();
-                                if (!(valToSaveMid2014 == null && valToSave2014 == null))
-                                {
-                                    DBContext.Add("InsertOPSReportDetails", new object[] { OPSReportId, activityDataId, locationIdToSaveT,
-                                                                                            valToSaveMid2014, valToSave2014, 1, OPSUserId, DBNull.Value });
+                                    value = Convert.ToDecimal(t.Text, CultureInfo.InvariantCulture);
                                 }
                             }
-                            else
+
+                            if (locationId > 0)
                             {
-                                i += 1;
+                                dataSave.Add(new KeyValuePair<int, decimal?>(locationId, value));
+                                if (i == 1)
+                                {
+                                    i = 0;
+                                    int locationIdToSaveT = 0;
+                                    decimal? valToSaveMid2014 = null;
+                                    decimal? valToSave2014 = null;
+                                    int j = 0;
+                                    foreach (var item in dataSave)
+                                    {
+                                        if (j == 0)
+                                        {
+                                            locationIdToSaveT = item.Key;
+                                            valToSaveMid2014 = item.Value;
+                                            j++;
+                                        }
+                                        else
+                                        {
+                                            valToSave2014 = item.Value;
+                                            j = 0;
+                                        }
+                                    }
+
+                                    dataSave.Clear();
+                                    //if (!(valToSaveMid2014 == null && valToSave2014 == null))
+                                    {
+                                        valToSave2014 = valToSave2014 == null ? 0 : valToSave2014; 
+                                        DBContext.Add("InsertOPSReportDetails", new object[] { OPSReportId, activityDataId, locationIdToSaveT,
+                                                                                            valToSaveMid2014, valToSave2014, 1, DBNull.Value });
+                                    }
+                                }
+                                else
+                                {
+                                    i += 1;
+                                }
                             }
                         }
                     }
@@ -900,8 +901,8 @@ namespace SRFROWCA.OPS
 
                 ObjPrToolTip.ObjectiveIconToolTip(e, 0);
                 ObjPrToolTip.PrioritiesIconToolTip(e, 1);
-                ObjPrToolTip.RegionalIndicatorIcon(e, 5);
-                ObjPrToolTip.CountryIndicatorIcon(e, 6);
+                ObjPrToolTip.RegionalIndicatorIcon(e, 6);
+                ObjPrToolTip.CountryIndicatorIcon(e, 7);
             }
         }
 
@@ -1173,6 +1174,8 @@ namespace SRFROWCA.OPS
         }
 
         #endregion
+
+        public bool DataIsValid { get; set; }
     }
 
     public class GridViewTemplate : ITemplate
@@ -1194,11 +1197,19 @@ namespace SRFROWCA.OPS
             switch (templateType)
             {
                 case DataControlRowType.Header:
-                    string[] words = columnName.Split('^');
-                    Label lc = new Label();
-                    lc.Width = 40;
-                    lc.Text = "<b>" + words[1] + "</b>";
-                    container.Controls.Add(lc);
+                    if (columnName == "ACM")
+                    {
+                        Label lc = new Label { Width = 25, Text = "<b>ACM</b>" };
+                        container.Controls.Add(lc);
+                    }
+                    else
+                    {
+                        string[] words = columnName.Split('^');
+                        Label lc = new Label();
+                        lc.Width = 40;
+                        lc.Text = "<b>" + words[1] + "</b>";
+                        container.Controls.Add(lc);
+                    }
                     break;
                 case DataControlRowType.DataRow:
                     TextBox txtTA = new TextBox();

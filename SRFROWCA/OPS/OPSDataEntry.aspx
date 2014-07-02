@@ -159,7 +159,7 @@
                 });
 
                 // Add header row in grid.
-                $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th style="width: 100px;">&nbsp;</th><th style="width: 50px;">&nbsp;</th><th style="width: 260px;">&nbsp;</th><th style="width: 220px;">&nbsp;</th><th style="width: 50px;">&nbsp;</th>' + list + '</tr></thead>');
+                $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th style="width: 50px;">&nbsp;</th><th style="width: 100px;">&nbsp;</th><th style="width: 50px;">&nbsp;</th><th style="width: 260px;">&nbsp;</th><th style="width: 220px;">&nbsp;</th><th style="width: 50px;">&nbsp;</th>' + list + '</tr></thead>');
             }
         }
     </script>
@@ -268,6 +268,16 @@
                                             meta:resourcekey="BoundFieldResource2"></asp:BoundField>
                                         <asp:BoundField DataField="ObjAndPrId" HeaderText="objprid" ItemStyle-Width="1px"
                                             ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource2"></asp:BoundField>
+                                        <asp:TemplateField HeaderText="Selected" HeaderStyle-Width="40px">
+                                            <ItemTemplate>
+                                                <asp:CheckBox ID="cbIsAdded" runat="server" Checked='<%# Eval("IsAdded") %>'
+                                                    CssClass="testcb"/>
+                                            </ItemTemplate>
+
+                                            <HeaderStyle Width="40px"></HeaderStyle>
+
+                                            <ItemStyle Width="100px" />
+                                        </asp:TemplateField>
                                         <asp:BoundField DataField="SecondaryCluster" HeaderText="Cluster Partner" ItemStyle-Width="40px"
                                             meta:resourcekey="BoundFieldResource3">
                                             <ItemStyle Width="40px"></ItemStyle>
@@ -291,6 +301,7 @@
 
                                             <ItemStyle CssClass="hidden"></ItemStyle>
                                         </asp:BoundField>
+
                                         <asp:TemplateField HeaderStyle-Width="150" meta:resourcekey="TemplateFieldResource2">
                                             <HeaderTemplate>
                                                 <asp:Label ID="lblGridHeaderActivity" runat="server" Text="Activity" meta:resourcekey="lblGridHeaderActivityResource1"></asp:Label>

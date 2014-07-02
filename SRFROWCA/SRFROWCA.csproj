@@ -356,6 +356,7 @@
     <Content Include="ClusterLead\ApproveIndicatorAddRemove.aspx" />
     <Content Include="ClusterLead\ClusterIndicatorTargets.aspx" />
     <Content Include="ClusterLead\ProjectDetails.aspx" />
+    <Content Include="ClusterLead\ProjectReports.aspx" />
     <Content Include="ClusterLead\ProjectsListing.aspx" />
     <Content Include="Admin\UploadLocations.aspx" />
     <Content Include="Admin\UploadLogFrame.aspx" />
@@ -1214,6 +1215,10 @@
     </Compile>
     <Compile Include="ClusterLead\ProjectDetails.aspx.designer.cs">
       <DependentUpon>ProjectDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClusterLead\ProjectReports.aspx.cs">
+      <DependentUpon>ProjectReports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ClusterLead\ProjectsListing.aspx.cs">
       <DependentUpon>ProjectsListing.aspx</DependentUpon>
