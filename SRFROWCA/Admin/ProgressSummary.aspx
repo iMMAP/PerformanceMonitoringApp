@@ -96,11 +96,13 @@
                                                                     <asp:ListItem Text="ORS" Value="0"></asp:ListItem>
                                                                 </asp:RadioButtonList>
                                                             </td>
-                                                            <td>&nbsp;
-                                                            </td>
+                                                            
 
                                                             <td colspan="3" style="text-align: right;">
                                                                 <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-primary" OnClick="btnSearch_Click" />
+                                                            </td>
+                                                            <td>
+                                                                <asp:Button ID="btnPDFPrint" runat="server" Text="Export PDF" CssClass ="btn btn-primary" OnClick="btnPDFPrint_Click" />
                                                             </td>
                                                         </tr>
                                                     </table>

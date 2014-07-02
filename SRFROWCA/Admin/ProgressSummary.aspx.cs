@@ -58,5 +58,21 @@ namespace SRFROWCA.Admin
 
             LoadData(startDate, endDate, "-1", "-1", isOPSProject);
         }
+
+        protected void btnPDFPrint_Click(object sender, EventArgs e)
+        {
+            string startDate = !string.IsNullOrEmpty(txtFromDate.Text) ? txtFromDate.Text : null;
+            string endDate = !string.IsNullOrEmpty(txtToDate.Text) ? txtToDate.Text : null;
+            string isOPSProject = rbIsOPSProject.SelectedValue;
+
+            DataTable dtResults = DBContext.GetData("uspGetReportData", new object[] { startDate, endDate, "-1", "-1", isOPSProject });
+
+            if (dtResults.Rows.Count > 0)
+            {
+                Response.ContentType = "application/pdf";
+                Response.AddHeader("Content-Disposition", string.Format("attachment;filename=Project-{0}-{1}.pdf", UserInfo.CountryName, DateTime.Now.ToString("yyyyMMddHHmmss")));
+                Response.BinaryWrite(WriteDataEntryPDF.GenerateSummaryPDF(dtResults).ToArray());
+            }
+        }
     }
 }
