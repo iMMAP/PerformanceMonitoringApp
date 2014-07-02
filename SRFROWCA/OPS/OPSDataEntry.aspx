@@ -166,16 +166,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server" border="1">
     <div class="page-content">
-        <div id="divMsg">
-        </div>
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="widget-box no-border">
-                    <div class="widget-body">
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="row">
             <div class="col-sm-3">
                 <div class="widget-box no-border">
@@ -240,7 +230,7 @@
                                 <asp:Button ID="btnOpenLocations" runat="server" Text="Locations" CausesValidation="False"
                                     CssClass="btn btn-primary" OnClick="btnLocation_Click" OnClientClick="needToConfirm = false;"
                                     meta:resourcekey="btnOpenLocationsResource1" />
-                                <asp:Localize ID="locaNoTargetMessage" runat="server" Text="&lt;div style=&quot;color:Red;&quot;&gt;To select an activity for  for which you do not know the target, please put a zero (0).&lt;/div&gt;" meta:resourcekey="locaNoTargetMessageResource1"></asp:Localize>
+                                <%--<asp:Localize ID="locaNoTargetMessage" runat="server" Text="&lt;div style=&quot;color:Red;&quot;&gt;To select an activity for  for which you do not know the target, please put a zero (0).&lt;/div&gt;" meta:resourcekey="locaNoTargetMessageResource1"></asp:Localize>--%>
                             </div>
                             <div class="pull-right">
                                 <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
@@ -252,7 +242,8 @@
 
                             <div class="spacer" style="clear: both;">
                             </div>
-
+                            <div id="divMsg">
+                            </div>
                             <div id="scrolledGridView" style="overflow-x: auto; width: 100%">
                                 <asp:GridView ID="gvActivities" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True"
                                     HeaderStyle-BackColor="ButtonFace" DataKeyNames="ActivityDataId" CssClass="imagetable"
@@ -268,16 +259,6 @@
                                             meta:resourcekey="BoundFieldResource2"></asp:BoundField>
                                         <asp:BoundField DataField="ObjAndPrId" HeaderText="objprid" ItemStyle-Width="1px"
                                             ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource2"></asp:BoundField>
-                                        <asp:TemplateField HeaderText="Selected" HeaderStyle-Width="40px">
-                                            <ItemTemplate>
-                                                <asp:CheckBox ID="cbIsAdded" runat="server" Checked='<%# Eval("IsAdded") %>'
-                                                    CssClass="testcb"/>
-                                            </ItemTemplate>
-
-                                            <HeaderStyle Width="40px"></HeaderStyle>
-
-                                            <ItemStyle Width="100px" />
-                                        </asp:TemplateField>
                                         <asp:BoundField DataField="SecondaryCluster" HeaderText="Cluster Partner" ItemStyle-Width="40px"
                                             meta:resourcekey="BoundFieldResource3">
                                             <ItemStyle Width="40px"></ItemStyle>
@@ -341,55 +322,55 @@
             </div>
         </div>
 
-
-        <table>
-            <tr>
-                <td>
-                    <input type="button" id="btnClientOpen" runat="server" style="display: none;" />
-                    <asp:ModalPopupExtender ID="mpeAddActivity" runat="server" TargetControlID="btnClientOpen"
-                        BehaviorID="mpeAddActivity" PopupControlID="pnlLocations" BackgroundCssClass="modalpopupbackground"
-                        DynamicServicePath="" Enabled="True">
-                    </asp:ModalPopupExtender>
-                    <asp:Panel ID="pnlLocations" runat="server" Width="200px" meta:resourcekey="pnlLocationsResource1">
-                        <asp:UpdatePanel ID="uPanel1" runat="server" UpdateMode="Conditional">
-                            <ContentTemplate>
-                                <div class="row">
-                                    <div class=" width-100 modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header no-padding">
-                                                <div class="table-header">
-                                                    Select Locations
-                                                </div>
+    </div>
+    <table>
+        <tr>
+            <td>
+                <input type="button" id="btnClientOpen" runat="server" style="display: none;" />
+                <asp:ModalPopupExtender ID="mpeAddActivity" runat="server" TargetControlID="btnClientOpen"
+                    BehaviorID="mpeAddActivity" PopupControlID="pnlLocations" BackgroundCssClass="modalpopupbackground"
+                    DynamicServicePath="" Enabled="True">
+                </asp:ModalPopupExtender>
+                <asp:Panel ID="pnlLocations" runat="server" Width="200px" meta:resourcekey="pnlLocationsResource1">
+                    <asp:UpdatePanel ID="uPanel1" runat="server" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <div class="row">
+                                <div class=" width-100 modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header no-padding">
+                                            <div class="table-header">
+                                                Select Locations
                                             </div>
-                                            <div class="modal-body no-padding">
-                                                <table border="0" style="margin: 0 auto;">
-                                                    <tr>
-                                                        <td>
-                                                            <asp:CheckBoxList ID="cbAdmin1Locaitons" runat="server" meta:resourcekey="cbAdmin1LocaitonsResource1" css="cbltest">
-                                                            </asp:CheckBoxList>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <asp:Button ID="btnClose" runat="server" Text="Close" CssClass="btn btn-primary"
-                                                                Width="120px" CausesValidation="False" OnClientClick="needToConfirm = false;"
-                                                                meta:resourcekey="btnCloseResource1" />
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                                <div class="space"></div>
-                                            </div>
+                                        </div>
+                                        <div class="modal-body no-padding">
+                                            <table border="0" style="margin: 0 auto;">
+                                                <tr>
+                                                    <td>
+                                                        <asp:CheckBoxList ID="cbAdmin1Locaitons" runat="server" meta:resourcekey="cbAdmin1LocaitonsResource1" css="cbltest">
+                                                        </asp:CheckBoxList>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:Button ID="btnClose" runat="server" Text="Close" CssClass="btn btn-primary"
+                                                            Width="120px" CausesValidation="False" OnClientClick="needToConfirm = false;"
+                                                            meta:resourcekey="btnCloseResource1" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <div class="space"></div>
                                         </div>
                                     </div>
                                 </div>
-                            </ContentTemplate>
-                            <Triggers>
-                                <asp:PostBackTrigger ControlID="btnClose" />
-                            </Triggers>
-                        </asp:UpdatePanel>
-                    </asp:Panel>
-                </td>
-            </tr>
-        </table>
-    </div>
+                            </div>
+                        </ContentTemplate>
+                        <Triggers>
+                            <asp:PostBackTrigger ControlID="btnClose" />
+                        </Triggers>
+                    </asp:UpdatePanel>
+                </asp:Panel>
+            </td>
+        </tr>
+    </table>
+
 </asp:Content>

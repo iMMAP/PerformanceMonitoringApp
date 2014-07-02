@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
 using BusinessLogic;
-using SRFROWCA.Common;
 
 namespace SRFROWCA.ClusterLead
 {
-    public partial class ProjectDetails : BasePage
+    public partial class ProjectDetails : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -35,7 +34,7 @@ namespace SRFROWCA.ClusterLead
 
         protected void fvProjects_PageIndexChanging(object sender, FormViewPageEventArgs e)
         {
-            
+
         }
 
         protected void btnViewReport_Click(object sender, EventArgs e)
@@ -60,8 +59,8 @@ namespace SRFROWCA.ClusterLead
             if (dtResults.Rows.Count > 0)
             {
                 Response.ContentType = "application/pdf";
-                Response.AddHeader("Content-Disposition", string.Format("attachment;filename=Project-{0}-{1}.pdf", UserInfo.CountryName, DateTime.Now.ToString("yyyyMMddHHmmss")));
-                Response.BinaryWrite(WriteDataEntryPDF.GeneratePDF(dtResults, projectID, null).ToArray());
+                Response.AddHeader("Content-Disposition", string.Format("attachment;filename=Project-{0}-{1}.pdf", SRFROWCA.Common.UserInfo.CountryName, DateTime.Now.ToString("yyyyMMddHHmmss")));
+                Response.BinaryWrite(SRFROWCA.Common.WriteDataEntryPDF.GeneratePDF(dtResults, projectID, null).ToArray());
             }
         }
     }

@@ -1,15 +1,15 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
-    CodeBehind="ProjectDetails.aspx.cs" Inherits="SRFROWCA.ClusterLead.ProjectDetails" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ProjectDetails.aspx.cs" Inherits="SRFROWCA.ClusterLead.ProjectDetails" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-
     <style>
-        .tblMain td {
+        .tblMain td
+        {
             width: 350px;
             padding-bottom: 5px;
         }
 
-            .tblMain td label {
+            .tblMain td label
+            {
                 font-weight: bold;
             }
     </style>
@@ -56,14 +56,14 @@
                                                                             <ItemTemplate>
                                                                                 <h3>
                                                                                     <%# Eval("ProjectCode") %></h3>
-                                                                                <table class="tblMain" >
+                                                                                <table class="tblMain">
                                                                                     <tr>
                                                                                         <td>
                                                                                             <label>Project ID:</label>
                                                                                         </td>
                                                                                         <td>
                                                                                             <%# Eval("ProjectId") %>
-                        </td>
+                                                                                        </td>
                                                                                     </tr>
                                                                                     <tr>
                                                                                         <td>
@@ -71,7 +71,7 @@
                                                                                         </td>
                                                                                         <td>
                                                                                             <%# Eval("ProjectTitle")%>
-                        </td>
+                                                                                        </td>
                                                                                     </tr>
                                                                                     <tr>
                                                                                         <td>
@@ -79,7 +79,7 @@
                                                                                         </td>
                                                                                         <td>
                                                                                             <%# Eval("OrganizationName") %>
-                        </td>
+                                                                                        </td>
                                                                                     </tr>
                                                                                     <tr>
                                                                                         <td>
@@ -87,7 +87,7 @@
                                                                                         </td>
                                                                                         <td>
                                                                                             <%# Eval("LocationName") %>
-                        </td>
+                                                                                        </td>
                                                                                     </tr>
 
                                                                                     <tr>
@@ -96,7 +96,7 @@
                                                                                         </td>
                                                                                         <td>
                                                                                             <%# Eval("ProjectContactName")%>
-                        </td>
+                                                                                        </td>
                                                                                     </tr>
                                                                                     <tr>
                                                                                         <td>
@@ -104,7 +104,7 @@
                                                                                         </td>
                                                                                         <td>
                                                                                             <%# Eval("ProjectContactEmail")%>
-                        </td>
+                                                                                        </td>
                                                                                     </tr>
                                                                                     <tr>
                                                                                         <td>
@@ -112,7 +112,7 @@
                                                                                         </td>
                                                                                         <td>
                                                                                             <%# Eval("ProjectContactPhone")%>
-                        </td>
+                                                                                        </td>
                                                                                     </tr>
                                                                                     <tr>
                                                                                         <td>
@@ -120,7 +120,7 @@
                                                                                         </td>
                                                                                         <td>
                                                                                             <%# Eval("ProjectStartDate")%>
-                        </td>
+                                                                                        </td>
                                                                                     </tr>
                                                                                     <tr>
                                                                                         <td>
@@ -128,7 +128,7 @@
                                                                                         </td>
                                                                                         <td>
                                                                                             <%# Eval("ProjectEndDate")%>
-                        </td>
+                                                                                        </td>
                                                                                     </tr>
                                                                                     <tr>
                                                                                         <td>
@@ -136,11 +136,11 @@
                                                                                         </td>
                                                                                         <td>
                                                                                             <%# Eval("ProjectImplementingpartner")%>
-                        </td>
+                                                                                        </td>
                                                                                     </tr>
                                                                                     <tr>
                                                                                         <td>&nbsp;
-                        </td>
+                                                                                        </td>
                                                                                         <td>
                                                                                             <asp:Button runat="server" ID="btnViewReport" Text="View Reports" class="width-10 btn btn-sm" OnClick="btnViewReport_Click" />
                                                                                         </td>
@@ -170,5 +170,4 @@
 
 
     </div>
-
 </asp:Content>

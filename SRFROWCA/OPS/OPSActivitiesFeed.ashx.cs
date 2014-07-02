@@ -13,7 +13,6 @@ namespace SRFROWCA.OPS
     /// </summary>
     public class OPSActivitiesFeed : IHttpHandler
     {
-
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/plain";
