@@ -39,9 +39,13 @@ namespace SRFROWCA.Common
                 {
                     document.Open();
 
-                    GenerateSummaryPDF(dt);
+                    GenerateDocument(document, dt, projectID, reportID);
 
-                    document.Close();
+                    try
+                    {
+                        document.Close();
+                    }
+                    catch { }
                 }
 
                 return outputStream;
@@ -61,7 +65,12 @@ namespace SRFROWCA.Common
                     GenerateSummaryReport(document, dt);
                     GenerateSummaryCountry(document, dt);
                     GenerateSummaryOrganization(document, dt);
-                    document.Close();
+
+                    try
+                    {
+                        document.Close();
+                    }
+                    catch { }
                 }
 
                 return outputStream;
@@ -70,7 +79,7 @@ namespace SRFROWCA.Common
 
         public static void GenerateDocument(iTextSharp.text.Document document, DataTable dt, int? projectID, int? reportID)
         {
-            if (projectID != null)
+            if (projectID != null && projectID > 0)
             {
                 IEnumerable<DataRow> projectDetails = GetProjectInformation(dt, (int)projectID);
                 DataRow projectGeneralInfo = projectDetails.FirstOrDefault<DataRow>();
@@ -78,7 +87,7 @@ namespace SRFROWCA.Common
                 ProjectGeneralInfo(document, projectGeneralInfo);
                 ProjectReports(document, dt, reportID);
             }
-            else
+            else if(projectID > 0)
             {
                 List<int> projectIds = GetDistinctProjects(dt);
 
@@ -620,7 +629,7 @@ namespace SRFROWCA.Common
             cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
             tbl.AddCell(cell);
 
-            cell = new PdfPCell(new Phrase(dr["ProjectCode"].ToString(), TableFont));
+            cell = new PdfPCell(new Phrase(Convert.ToString(dr["ProjectCode"]), TableFont));
             cell.Border = 0;
             cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
             tbl.AddCell(cell);
@@ -630,7 +639,7 @@ namespace SRFROWCA.Common
             cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
             tbl.AddCell(cell);
 
-            cell = new PdfPCell(new Phrase(dr["ProjectTitle"].ToString(), TableFont));
+            cell = new PdfPCell(new Phrase(Convert.ToString(dr["ProjectTitle"]), TableFont));
             cell.Border = 0;
             cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
             tbl.AddCell(cell);
@@ -640,7 +649,7 @@ namespace SRFROWCA.Common
             cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
             tbl.AddCell(cell);
 
-            cell = new PdfPCell(new Phrase(dr["Country"].ToString(), TableFont));
+            cell = new PdfPCell(new Phrase(Convert.ToString(dr["Country"]), TableFont));
             cell.Border = 0;
             cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
             tbl.AddCell(cell);
@@ -650,7 +659,7 @@ namespace SRFROWCA.Common
             cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
             tbl.AddCell(cell);
 
-            cell = new PdfPCell(new Phrase(dr["ClusterName"].ToString(), TableFont));
+            cell = new PdfPCell(new Phrase(Convert.ToString(dr["ClusterName"]), TableFont));
             cell.Border = 0;
             cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
             tbl.AddCell(cell);
@@ -674,55 +683,55 @@ namespace SRFROWCA.Common
             tbl.AddCell(cell);
 
             tbl.AddCell(new Phrase("Organization:", TableFont));
-            tbl.AddCell(new Phrase(dr["Organizationname"].ToString(), TableFont));
+            tbl.AddCell(new Phrase(Convert.ToString(dr["Organizationname"]), TableFont));
 
             tbl.AddCell(new Phrase("Start Date:", TableFont));
-            tbl.AddCell(new Phrase(dr["ProjectStartDate"].ToString(), TableFont));
+            tbl.AddCell(new Phrase(Convert.ToString(dr["ProjectStartDate"]), TableFont));
 
             tbl.AddCell(new Phrase("End Date:", TableFont));
-            tbl.AddCell(new Phrase(dr["ProjectEndDate"].ToString(), TableFont));
+            tbl.AddCell(new Phrase(Convert.ToString(dr["ProjectEndDate"]), TableFont));
 
             tbl.AddCell(new Phrase("Original Request:", TableFont));
-            tbl.AddCell(new Phrase(dr["OriginalRequest"].ToString(), TableFont));
+            tbl.AddCell(new Phrase(Convert.ToString(dr["OriginalRequest"]), TableFont));
 
             tbl.AddCell(new Phrase("Current Request:", TableFont));
-            tbl.AddCell(new Phrase(dr["CurrentRequest"].ToString(), TableFont));
+            tbl.AddCell(new Phrase(Convert.ToString(dr["CurrentRequest"]), TableFont));
 
             tbl.AddCell(new Phrase("Beneficiaries Children:", TableFont));
-            tbl.AddCell(new Phrase(dr["BeneficiariesChildren"].ToString(), TableFont));
+            tbl.AddCell(new Phrase(Convert.ToString(dr["BeneficiariesChildren"]), TableFont));
 
             tbl.AddCell(new Phrase("Beneficiaries Women:", TableFont));
-            tbl.AddCell(new Phrase(dr["BeneficiariesWomen"].ToString(), TableFont));
+            tbl.AddCell(new Phrase(Convert.ToString(dr["BeneficiariesWomen"]), TableFont));
 
             tbl.AddCell(new Phrase("Beneficiaries Others:", TableFont));
-            tbl.AddCell(new Phrase(dr["BeneficiariesOthers"].ToString(), TableFont));
+            tbl.AddCell(new Phrase(Convert.ToString(dr["BeneficiariesOthers"]), TableFont));
 
             tbl.AddCell(new Phrase("Beneficiary Total:", TableFont));
-            tbl.AddCell(new Phrase(dr["BeneficiaryTotalNumber"].ToString(), TableFont));
+            tbl.AddCell(new Phrase(Convert.ToString(dr["BeneficiaryTotalNumber"]), TableFont));
 
             tbl.AddCell(new Phrase("Beneficiaries Description:", TableFont));
-            tbl.AddCell(new Phrase(dr["BeneficiariesDescription"].ToString(), TableFont));
+            tbl.AddCell(new Phrase(Convert.ToString(dr["BeneficiariesDescription"]), TableFont));
 
             tbl.AddCell(new Phrase("Beneficiaries Total Description:", TableFont));
-            tbl.AddCell(new Phrase(dr["BeneficiariesTotalDescription"].ToString(), TableFont));
+            tbl.AddCell(new Phrase(Convert.ToString(dr["BeneficiariesTotalDescription"]), TableFont));
 
             tbl.AddCell(new Phrase("OPS Status:", TableFont));
-            tbl.AddCell(new Phrase(dr["OPSProjectStatus"].ToString(), TableFont));
+            tbl.AddCell(new Phrase(Convert.ToString(dr["OPSProjectStatus"]), TableFont));
 
             tbl.AddCell(new Phrase("Implementing Partners:", TableFont));
-            tbl.AddCell(new Phrase(dr["ProjectImplementingpartner"].ToString(), TableFont));
+            tbl.AddCell(new Phrase(Convert.ToString(dr["ProjectImplementingpartner"]), TableFont));
 
             tbl.AddCell(new Phrase("Contact Name:", TableFont));
-            tbl.AddCell(new Phrase(dr["ProjectContactName"].ToString(), TableFont));
+            tbl.AddCell(new Phrase(Convert.ToString(dr["ProjectContactName"]), TableFont));
 
             tbl.AddCell(new Phrase("Contact Email:", TableFont));
-            tbl.AddCell(new Phrase(dr["ProjectContactEmail"].ToString(), TableFont));
+            tbl.AddCell(new Phrase(Convert.ToString(dr["ProjectContactEmail"]), TableFont));
 
             tbl.AddCell(new Phrase("Contact Phone:", TableFont));
-            tbl.AddCell(new Phrase(dr["ProjectContactPhone"].ToString(), TableFont));
+            tbl.AddCell(new Phrase(Convert.ToString(dr["ProjectContactPhone"]), TableFont));
 
             tbl.AddCell(new Phrase("Related URL:", TableFont));
-            tbl.AddCell(new Phrase(dr["RelatedURL"].ToString(), TableFont));
+            tbl.AddCell(new Phrase(Convert.ToString(dr["RelatedURL"]), TableFont));
 
             document.Add(tbl);
         }
