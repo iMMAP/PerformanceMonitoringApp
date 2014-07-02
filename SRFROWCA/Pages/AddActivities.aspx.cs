@@ -258,7 +258,14 @@ namespace SRFROWCA.Pages
         }
         private DataTable GetAdmin1Locations(int parentLocationId)
         {
-            DataTable dt = DBContext.GetData("GetSecondLevelChildLocations", new object[] { parentLocationId });
+            string procedure = "GetSecondLevelChildLocations";
+
+            if (parentLocationId == 567)
+            {
+                procedure = "GetSecondLevelChildLocationsAndCountry";
+            }
+
+            DataTable dt = DBContext.GetData(procedure, new object[] { parentLocationId });
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
         private void PopulateAdmin2(int parentLocationId)
@@ -903,7 +910,6 @@ namespace SRFROWCA.Pages
                 else
                 {
                     string[] words = _columnName.Split('^');
-
                     Label lc = new Label { Width = 50, Text = "<b>" + words[1] + "</b>" };
                     container.Controls.Add(lc);
                 }

@@ -167,23 +167,20 @@ namespace SRFROWCA.OPS
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
+            //if (!DataIsValid)
+            //{
+            //    ShowMessage("Annual Target for at least one location is mandatory of selected activities!");
+            //}
+            //else
+            //{
             SaveData();
+            //}
         }
 
         private void SaveData()
         {
             using (TransactionScope scope = new TransactionScope())
             {
-                //if (OPSReportId > 0)
-                //{
-                //    DeleteReportAndItsChild();
-                //}
-
-                //if (IsDataExistsToSave())
-                //{
-                //    SaveReport();
-                //}
-
                 List<int> locationIds = GetLocationIdsFromGrid();
                 if (locationIds.Count > 0)
                 {
@@ -211,7 +208,8 @@ namespace SRFROWCA.OPS
             {
                 if (row.RowType == DataControlRowType.DataRow)
                 {
-                    DataTable dtActivities = (DataTable)Session["dtActivities"];
+
+                    DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
                     foreach (DataColumn dc in dtActivities.Columns)
                     {
                         string colName = dc.ColumnName;
@@ -552,10 +550,19 @@ namespace SRFROWCA.OPS
                         columnName == "ObjectiveId" || columnName == "HumanitarianPriorityId" || columnName == "ObjAndPrId" ||
                         columnName == "PriorityActivityId" || columnName == "RInd" || columnName == "CInd" || columnName == "Unit"))
                 {
+                    if (columnName == "IsAdded")
+                    {
 
-                    customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, column.ColumnName, "1");
-                    customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, column.ColumnName, "1");
-                    gvActivities.Columns.Add(customField);
+                        customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, column.ColumnName, "1", "CheckBox");
+                        customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, "Selected", "1", "CheckBox");
+                        gvActivities.Columns.Add(customField);
+                    }
+                    else
+                    {
+                        customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, column.ColumnName, "1", "TextBox");
+                        customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, column.ColumnName, "1", "TextBox");
+                        gvActivities.Columns.Add(customField);
+                    }
                 }
             }
         }
@@ -634,10 +641,16 @@ namespace SRFROWCA.OPS
             DBContext.Delete("DeleteOPSReport", new object[] { OPSReportId, OPSEmergencyClusterId, DBNull.Value });
         }
 
+        private void DeleteOPSReportDetails()
+        {
+            DBContext.Delete("DeleteOPSReportDetails", new object[] { OPSReportId, OPSEmergencyClusterId, DBNull.Value });
+        }
+
         private void SaveReport()
         {
-            //SaveReportMainInfo();
             SaveReportLocations();
+
+            DeleteOPSReportDetails();
             SaveReportDetails();
         }
 
@@ -794,63 +807,73 @@ namespace SRFROWCA.OPS
                     DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
                     List<KeyValuePair<int, decimal?>> dataSave = new List<KeyValuePair<int, decimal?>>();
                     int i = 0;
-
+                    bool isAdded = false;
                     foreach (DataColumn dc in dtActivities.Columns)
                     {
                         string colName = dc.ColumnName;
                         int locationId = 0;
 
-                        HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
-                        if (hf != null)
+                        CheckBox cbAccum = row.FindControl(colName) as CheckBox;                        
+                        if (cbAccum != null && cbAccum.Checked)
                         {
-                            locationId = Convert.ToInt32(hf.Value);
+                            isAdded = true;
                         }
 
-                        decimal? value = null;
-                        TextBox t = row.FindControl(colName) as TextBox;
-                        if (t != null)
+                        if (isAdded)
                         {
-                            if (!string.IsNullOrEmpty(t.Text))
+                            HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
+                            if (hf != null)
                             {
-                                value = Convert.ToDecimal(t.Text, CultureInfo.InvariantCulture);
+                                locationId = Convert.ToInt32(hf.Value);
                             }
-                        }
 
-                        if (locationId > 0)
-                        {
-                            dataSave.Add(new KeyValuePair<int, decimal?>(locationId, value));
-                            if (i == 1)
+                            decimal? value = null;
+                            TextBox t = row.FindControl(colName) as TextBox;
+                            if (t != null)
                             {
-                                i = 0;
-                                int locationIdToSaveT = 0;
-                                decimal? valToSaveMid2014 = null;
-                                decimal? valToSave2014 = null;
-                                int j = 0;
-                                foreach (var item in dataSave)
+                                if (!string.IsNullOrEmpty(t.Text))
                                 {
-                                    if (j == 0)
-                                    {
-                                        locationIdToSaveT = item.Key;
-                                        valToSaveMid2014 = item.Value;
-                                        j++;
-                                    }
-                                    else
-                                    {
-                                        valToSave2014 = item.Value;
-                                        j = 0;
-                                    }
-                                }
-
-                                dataSave.Clear();
-                                if (!(valToSaveMid2014 == null && valToSave2014 == null))
-                                {
-                                    DBContext.Add("InsertOPSReportDetails", new object[] { OPSReportId, activityDataId, locationIdToSaveT,
-                                                                                            valToSaveMid2014, valToSave2014, 1, OPSUserId, DBNull.Value });
+                                    value = Convert.ToDecimal(t.Text, CultureInfo.InvariantCulture);
                                 }
                             }
-                            else
+
+                            if (locationId > 0)
                             {
-                                i += 1;
+                                dataSave.Add(new KeyValuePair<int, decimal?>(locationId, value));
+                                if (i == 1)
+                                {
+                                    i = 0;
+                                    int locationIdToSaveT = 0;
+                                    decimal? valToSaveMid2014 = null;
+                                    decimal? valToSave2014 = null;
+                                    int j = 0;
+                                    foreach (var item in dataSave)
+                                    {
+                                        if (j == 0)
+                                        {
+                                            locationIdToSaveT = item.Key;
+                                            valToSaveMid2014 = item.Value;
+                                            j++;
+                                        }
+                                        else
+                                        {
+                                            valToSave2014 = item.Value;
+                                            j = 0;
+                                        }
+                                    }
+
+                                    dataSave.Clear();
+                                    //if (!(valToSaveMid2014 == null && valToSave2014 == null))
+                                    {
+                                        valToSave2014 = valToSave2014 == null ? 0 : valToSave2014;
+                                        DBContext.Add("InsertOPSReportDetails", new object[] { OPSReportId, activityDataId, locationIdToSaveT,
+                                                                                            valToSaveMid2014, valToSave2014, 1, DBNull.Value });
+                                    }
+                                }
+                                else
+                                {
+                                    i += 1;
+                                }
                             }
                         }
                     }
@@ -900,8 +923,8 @@ namespace SRFROWCA.OPS
 
                 ObjPrToolTip.ObjectiveIconToolTip(e, 0);
                 ObjPrToolTip.PrioritiesIconToolTip(e, 1);
-                ObjPrToolTip.RegionalIndicatorIcon(e, 5);
-                ObjPrToolTip.CountryIndicatorIcon(e, 6);
+                ObjPrToolTip.RegionalIndicatorIcon(e, 6);
+                ObjPrToolTip.CountryIndicatorIcon(e, 7);
             }
         }
 
@@ -1173,6 +1196,8 @@ namespace SRFROWCA.OPS
         }
 
         #endregion
+
+        public bool DataIsValid { get; set; }
     }
 
     public class GridViewTemplate : ITemplate
@@ -1180,27 +1205,36 @@ namespace SRFROWCA.OPS
         private DataControlRowType templateType;
         private string columnName;
         private string locationId;
+        private string controlType;
 
-        public GridViewTemplate(DataControlRowType type, string colname, string locId)
+        public GridViewTemplate(DataControlRowType type, string colname, string locId, string cntrlType)
         {
             templateType = type;
             columnName = colname;
             locationId = locId;
+            controlType = cntrlType;
         }
 
         public void InstantiateIn(System.Web.UI.Control container)
         {
-            // Create the content for the different row types.
-            switch (templateType)
+            if (templateType == DataControlRowType.Header)
             {
-                case DataControlRowType.Header:
-                    string[] words = columnName.Split('^');
-                    Label lc = new Label();
-                    lc.Width = 40;
-                    lc.Text = "<b>" + words[1] + "</b>";
+                if (columnName == "Selected")
+                {
+                    Label lc = new Label { Width = 50, Text = "<b>Selected</b>" };
                     container.Controls.Add(lc);
-                    break;
-                case DataControlRowType.DataRow:
+                }
+                else
+                {
+                    string[] words = columnName.Split('^');
+                    Label lc = new Label { Width = 50, Text = "<b>" + words[1] + "</b>" };
+                    container.Controls.Add(lc);
+                }
+            }
+            else if (templateType == DataControlRowType.DataRow)
+            {
+                if (controlType == "TextBox")
+                {
                     TextBox txtTA = new TextBox();
                     txtTA.CssClass = "numeric1";
                     txtTA.Width = 43;
@@ -1212,11 +1246,13 @@ namespace SRFROWCA.OPS
                     hf.Value = words1[0];
                     hf.ID = "hf" + columnName;
                     container.Controls.Add(hf);
-                    break;
-
-                default:
-                    // Insert code to handle unexpected values.
-                    break;
+                }
+                else if (controlType == "CheckBox")
+                {
+                    CheckBox cbLocAccum = new CheckBox();
+                    cbLocAccum.DataBinding += cbAccum_DataBinding;
+                    container.Controls.Add(cbLocAccum);
+                }
             }
         }
 
@@ -1227,6 +1263,14 @@ namespace SRFROWCA.OPS
             l.MaxLength = 12;
             GridViewRow row = (GridViewRow)l.NamingContainer;
             l.Text = DataBinder.Eval(row.DataItem, columnName).ToString();
+        }
+
+        private void cbAccum_DataBinding(Object sender, EventArgs e)
+        {
+            CheckBox cb = (CheckBox)sender;
+            cb.ID = columnName;
+            GridViewRow row = (GridViewRow)cb.NamingContainer;
+            cb.Checked = (DataBinder.Eval(row.DataItem, columnName)).ToString() == "True";
         }
     }
 }

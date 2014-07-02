@@ -344,8 +344,6 @@ namespace SRFROWCA.Anonymous
             dt.Columns.Remove("rnumber");
             dt.Columns.Remove("ObjectiveId");
             dt.Columns.Remove("PriorityId");
-            dt.Columns.Remove("ActivityId");
-            dt.Columns.Remove("IndicatorId");
             dt.Columns.Remove("MonthId");
             dt.Columns.Remove("cnt");
 

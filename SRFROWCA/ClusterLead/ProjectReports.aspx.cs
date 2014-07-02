@@ -1,17 +1,12 @@
-﻿using BusinessLogic;
-using SRFROWCA.Common;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Data;
-using System.IO;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
+using BusinessLogic;
+using SRFROWCA.Common;
 
 namespace SRFROWCA.ClusterLead
 {
-    public partial class ProjectReports : System.Web.UI.Page
+    public partial class ProjectReports : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
