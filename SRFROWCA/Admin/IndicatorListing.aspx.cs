@@ -363,8 +363,7 @@ namespace SRFROWCA.Admin
         protected void gvIndicator_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             gvIndicator.PageIndex = e.NewPageIndex;
-            //gvIndicator.SelectedIndex = -1;
-            // LoadOrganizations();
+            LoadIndicators();
         }
 
         protected void gvIndicator_RowDeleting(object sender, GridViewDeleteEventArgs e)
