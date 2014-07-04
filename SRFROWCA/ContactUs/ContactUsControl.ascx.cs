@@ -61,7 +61,7 @@ namespace SRFROWCA.ContactUs
             }
             catch
             {
-                ShowMessage("Problem contacting ORS help desk, please check your email or contact us directly using ors@ocharowca.info", "");
+                ShowMessage("Problem contacting ORS help desk, please contact us directly using ors@ocharowca.info", "");
             }
             //Mail.SendMail(txtEmail.Text.Trim(), "orsocharowca@gmail.com ", "3W Activities: " + txtSubject.Text.Trim(), txtMessage.Text.Trim());
         }

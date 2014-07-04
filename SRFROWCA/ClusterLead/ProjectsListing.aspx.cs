@@ -35,7 +35,15 @@ namespace SRFROWCA.ClusterLead
 
         private void PopulateControls()
         {
-            PopulateOrganizations();
+            if (!RC.IsDataEntryUser(User))
+                PopulateOrganizations();
+            else
+            {
+                ddlOrg.Visible = false;
+                divOrganization.Visible = false;
+            }
+
+
             PopulateLocations();
             //PopulateProjectStatus();
         }
@@ -94,6 +102,23 @@ namespace SRFROWCA.ClusterLead
             ExportUtility.ExportGridView(gv, "ProjectListing", ".xls", Response, true);
         }
 
+        protected void ExportToPDF(object sender, EventArgs e)
+        {
+            ExportToPDF(null);
+        }
+
+        private void ExportToPDF(int? projectId)
+        {
+            DataTable dtResults = DBContext.GetData("uspGetReports", new object[] { projectId, null, null });
+
+            if (dtResults.Rows.Count > 0)
+            {
+                Response.ContentType = "application/pdf";
+                Response.AddHeader("Content-Disposition", string.Format("attachment;filename=Project-{0}-{1}.pdf", UserInfo.CountryName, DateTime.Now.ToString("yyyyMMddHHmmss")));
+                Response.BinaryWrite(WriteDataEntryPDF.GeneratePDF(dtResults, projectId, null).ToArray());
+            }
+        }
+
         //private void PopulateProjectStatus()
         //{
 
@@ -135,6 +160,10 @@ namespace SRFROWCA.ClusterLead
             {
                 //Session["ViewProjectId"] = e.CommandArgument.ToString();
                 Response.Redirect("~/ClusterLead/ProjectDetails.aspx?pid=" + e.CommandArgument.ToString());
+            }
+            else if (e.CommandName == "PrintReport")
+            {
+                ExportToPDF(Convert.ToInt32(e.CommandArgument));
             }
         }
 
@@ -203,9 +232,13 @@ namespace SRFROWCA.ClusterLead
 
             string projCode = txtProjectCode.Text.Trim().Length > 0 ? txtProjectCode.Text.Trim() : null;
             int? orgId = RC.GetSelectedIntVal(ddlOrg);
+
             if (orgId == 0)
             {
-                orgId = (int?)null;
+                if (RC.IsDataEntryUser(User))
+                    orgId = UserInfo.Organization;
+                else
+                    orgId = (int?)null;
             }
 
             int? admin1 = RC.GetSelectedIntVal(ddlAdmin1);

@@ -17,7 +17,7 @@ namespace SRFROWCA.Common
                 
                 if (dt.Rows[0]["EmergencyLocationId"] != null)
                 {
-                    if (dt.Rows[0]["EmergencyLocationId"].ToString() == "1")
+                    if ((!(HttpContext.Current.User.IsInRole("User"))) && dt.Rows[0]["EmergencyLocationId"].ToString() == "1")
                     {
                         HttpContext.Current.Session["UserLocationEmergencyId"] = null;
                         HttpContext.Current.Session["UserCountry"] = null;

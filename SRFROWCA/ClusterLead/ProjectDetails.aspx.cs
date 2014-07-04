@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
 using BusinessLogic;
 
 namespace SRFROWCA.ClusterLead
 {
-    public partial class ProjectDetails : BasePage
+    public partial class ProjectDetails : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -30,6 +30,38 @@ namespace SRFROWCA.ClusterLead
             DataTable dt = DBContext.GetData("GetProjectDetails", new object[] { projectId, 1 });
             fvProjects.DataSource = dt;
             fvProjects.DataBind();
+        }
+
+        protected void fvProjects_PageIndexChanging(object sender, FormViewPageEventArgs e)
+        {
+
+        }
+
+        protected void btnViewReport_Click(object sender, EventArgs e)
+        {
+            string projectID = "0";
+
+            if (!string.IsNullOrEmpty(Request.QueryString["pid"]))
+                projectID = Convert.ToString(Request.QueryString["pid"]);
+
+            Response.Redirect("~/ClusterLead/ProjectReports.aspx?pid=" + projectID);
+        }
+
+        protected void btExportPDF_Click(object sender, EventArgs e)
+        {
+            int projectID = 0;
+
+            if (Request.QueryString["pid"] != null)
+                int.TryParse(Request.QueryString["pid"].ToString(), out projectID);
+
+            DataTable dtResults = DBContext.GetData("uspGetReports", new object[] { Convert.ToString(projectID), null, null });
+
+            if (dtResults.Rows.Count > 0)
+            {
+                Response.ContentType = "application/pdf";
+                Response.AddHeader("Content-Disposition", string.Format("attachment;filename=Project-{0}-{1}.pdf", SRFROWCA.Common.UserInfo.CountryName, DateTime.Now.ToString("yyyyMMddHHmmss")));
+                Response.BinaryWrite(SRFROWCA.Common.WriteDataEntryPDF.GeneratePDF(dtResults, projectID, null).ToArray());
+            }
         }
     }
 }

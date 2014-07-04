@@ -2,7 +2,60 @@
     CodeBehind="UpdateUser.aspx.cs" Inherits="SRFROWCA.Account.UpdateUser" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <%@ Register Assembly="DropDownCheckBoxes" Namespace="Saplin.Controls" TagPrefix="cc" %>
+    <script type="text/javascript">
+
+        function ValidateOrganization(source, args) {
+            var roleVal = $('#<%=ddlUserRole.ClientID%> option:selected').text();
+            
+            if (roleVal === 'Data Entry/Field Officer') {
+                var ddl = document.getElementById('<%= ddlOrganization.ClientID %>');
+                if (ddl.options[ddl.selectedIndex].value === '0') {
+
+                    args.IsValid = false;
+                }
+                else {
+                    args.IsValid = true;
+                }
+            }
+            else {
+                args.IsValid = true;
+            }
+        }
+
+        function ValidateClustersList(source, args) {
+            var roleVal = $('#<%=ddlUserRole.ClientID%> option:selected').text();
+            if (roleVal === 'Country Cluster Lead' || roleVal === 'Region Cluster Lead') {
+                var ddl = document.getElementById('<%= ddlClusters.ClientID %>');
+                if (ddl.options[ddl.selectedIndex].value === '0') {
+
+                    args.IsValid = false;
+                }
+                else {
+                    args.IsValid = true;
+                }
+            }
+            else {
+                args.IsValid = true;
+            }
+        }
+
+        function ValidateCountryList(source, args) {
+            var roleVal = $('#<%=ddlUserRole.ClientID%> option:selected').val();
+            if (roleVal !== 'Region Cluster Lead') {
+                var ddl = document.getElementById('<%= ddlCountry.ClientID %>');
+                if (ddl.options[ddl.selectedIndex].value === '0') {
+
+                    args.IsValid = false;
+                }
+                else {
+                    args.IsValid = true;
+                }
+            }
+            else {
+                args.IsValid = true;
+            }
+        }
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -71,27 +124,27 @@
                                 Phone:</label>
                             <div>
                                 <asp:TextBox ID="txtPhone" MaxLength="50" CssClass="width-70" runat="server"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="rfvPhone" runat="server" ErrorMessage="Phone Required"
-                                    CssClass="error2" Text="Phone Required" ControlToValidate="txtPhone"></asp:RequiredFieldValidator>
                             </div>
                         </div>
-                        <div class="singalselect">
+                        <div id="divOrg" runat="server">
                             <label>
                                 Organization:
                             </label>
                             <div>
                                 <asp:DropDownList ID="ddlOrganization" runat="server" CssClass="width-70">
                                 </asp:DropDownList>
+                                <asp:CustomValidator runat="server" ForeColor="Red" ID="CustomValidator2" ClientValidationFunction="ValidateOrganization"
+                                    ErrorMessage="Organization Required"></asp:CustomValidator>
                             </div>
                         </div>
-                        <div id="divCountry" runat="server" class="singalselect">
+                        <div id="divLocations" runat="server">
                             <label>
                                 Country:</label>
                             <div>
                                 <asp:DropDownList ID="ddlCountry" runat="server" CssClass="width-70">
                                 </asp:DropDownList>
-                                <asp:RequiredFieldValidator ID="rfvCountry" runat="server" ErrorMessage="Country"
-                                    Text="*" InitialValue="0" ControlToValidate="ddlCountry" CssClass="error2"></asp:RequiredFieldValidator>
+                                <asp:CustomValidator runat="server" ForeColor="Red" ID="CustomValidator3" ClientValidationFunction="ValidateCountryList"
+                                    ErrorMessage="Country Required" meta:resourcekey="CustomValidator2Resource1"></asp:CustomValidator>
                             </div>
                         </div>
                         <div id="divCluster" runat="server">
@@ -108,7 +161,7 @@
                         <div>
                             <asp:Button ID="btnUpdate" runat="server" Text="Update" OnClick="btnUpdate_Click"
                                 CssClass="btn btn-primary" />
-                            <asp:Button ID="btnBack" runat="server" Text="Back to Users List" OnClick="btnBack_Click"
+                            <asp:Button ID="btnBack" runat="server" Text="Back to Users List" OnClick="btnBack_Click" CausesValidation="false"
                                 CssClass="btn" />
                         </div>
                     </div>
