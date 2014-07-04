@@ -31,7 +31,12 @@ namespace SRFROWCA.ClusterLead
             string startDate = !string.IsNullOrEmpty(txtFromDate.Text) ? txtFromDate.Text : null;
             string endDate = !string.IsNullOrEmpty(txtToDate.Text) ? txtToDate.Text : null;
 
-            return DBContext.GetData("uspGetReports", new object[] { projectID, startDate, endDate });
+            DataTable dtGrid = DBContext.GetData("uspGetReports", new object[] { projectID, startDate, endDate });
+
+            string[] selectedColumns = new[] { "ReportID", "ReportName", "ProjectCode", "IsApproved", "Country", "ProjectID", "CreatedDate" };
+            DataTable dtFiltered = new DataView(dtGrid).ToTable(true, selectedColumns);
+
+            return dtFiltered;
         }
 
         protected void grdReports_RowCommand(object sender, GridViewCommandEventArgs e)
