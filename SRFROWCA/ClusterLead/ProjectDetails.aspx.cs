@@ -54,7 +54,7 @@ namespace SRFROWCA.ClusterLead
             if (Request.QueryString["pid"] != null)
                 int.TryParse(Request.QueryString["pid"].ToString(), out projectID);
 
-            DataTable dtResults = DBContext.GetData("uspGetReports", new object[] { Convert.ToString(projectID), null, null });
+            DataTable dtResults = DBContext.GetData("uspGetReports", new object[] { Convert.ToString(projectID), null, null , null});
 
             if (dtResults.Rows.Count > 0)
             {
