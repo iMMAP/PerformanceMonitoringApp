@@ -193,9 +193,17 @@ namespace SRFROWCA.Common
 
                 ProjectGeneralInfo(document, projectGeneralInfo);
                 ProjectReports(document, dt, reportID);
-                IndicatorTargets(document, projectDetails);
+
+                if (reportID != null)
+                {
+                    IndicatorTargets(document, (from projectData in dt.AsEnumerable()
+                                                where projectData.Field<int>("ReportID") == reportID
+                                                select projectData));
+                }
+                else
+                    IndicatorTargets(document, projectDetails);
             }
-            else if (projectID > 0)
+            else if (projectID == null)
             {
                 List<int> projectIds = GetDistinctProjects(dt);
 
@@ -268,14 +276,20 @@ namespace SRFROWCA.Common
             }
             else
             {
-                for (int i = 0; i < dt.Rows.Count; i++)
+                string[] selectedColumns = new[] { "ReportID", "ReportName", "OrganizationName", "Month", "CreatedBy", "CreatedDate", "UpdatedBy", "UpdatedDate" };
+
+                DataTable dtFiltered = new DataView(dt).ToTable(true, selectedColumns);
+
+                for (int i = 0; i < dtFiltered.Rows.Count; i++)
                 {
-                    tbl.AddCell(new Phrase(Convert.ToString(dt.Rows[i]["ReportID"]), TableFont));
-                    tbl.AddCell(new Phrase(Convert.ToString(dt.Rows[i]["ReportName"]), TableFont));
-                    tbl.AddCell(new Phrase(Convert.ToString(dt.Rows[i]["CreatedBy"]), TableFont));
-                    tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(dt.Rows[i]["CreatedDate"])) ? Convert.ToDateTime(dt.Rows[i]["CreatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
-                    tbl.AddCell(new Phrase(Convert.ToString(dt.Rows[i]["UpdatedBy"]), TableFont));
-                    tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(dt.Rows[i]["UpdatedDate"])) ? Convert.ToDateTime(dt.Rows[i]["UpdatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
+                    tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["ReportID"]), TableFont));
+                    tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["ReportName"]), TableFont));
+                    tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["OrganizationName"]), TableFont));
+                    tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["Month"]), TableFont));
+                    tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["CreatedBy"]), TableFont));
+                    tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(dtFiltered.Rows[i]["CreatedDate"])) ? Convert.ToDateTime(dtFiltered.Rows[i]["CreatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
+                    tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["UpdatedBy"]), TableFont));
+                    tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(dtFiltered.Rows[i]["UpdatedDate"])) ? Convert.ToDateTime(dtFiltered.Rows[i]["UpdatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
                 }
             }
 
