@@ -423,7 +423,7 @@ namespace SRFROWCA
                 liPivotTables.Attributes.Add("class", "active open");
                 liPivotSumOfCountryIndicators.Attributes.Add("class", "active");
             }
-            else if (uri == "/ClusterLead/ProjectsListing.aspx")
+            else if (uri == "/ClusterLead/ProjectsListing.aspx" || uri.Contains("/ClusterLead/ProjectDetails.aspx"))
             {
                 liCLprojectsListing.Attributes.Add("class", "active");
             }
@@ -462,6 +462,14 @@ namespace SRFROWCA
             else if (uri.Contains("Admin/IndicatorListing.aspx"))
             {
                 liIndicators.Attributes.Add("class", "active");
+            }
+            else if (uri.Contains("Admin/ProgressSummary.aspx"))
+            {
+                liProgressSummary.Attributes.Add("class", "active");
+            }
+            else if (uri.Contains("Admin/ProjectXMLFeeds.aspx"))
+            {
+                liProjectXMLFeeds.Attributes.Add("class", "active");
             }
         }
 
