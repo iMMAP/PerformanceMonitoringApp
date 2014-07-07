@@ -156,9 +156,12 @@
     <Content Include="Account\UpdateUser.aspx" />
     <Content Include="Account\UserProfile.aspx" />
     <Content Include="Admin\ActivityData.aspx" />
+    <Content Include="Admin\ActivityListing.aspx" />
     <Content Include="Admin\EmergencyClusters.aspx" />
     <Content Include="Admin\EmergencyLocations.aspx" />
     <Content Include="Admin\IndicatorActivities.aspx" />
+    <Content Include="Admin\IndicatorListing.aspx" />
+    <Content Include="Admin\OPSProjectAllData.aspx" />
     <Content Include="Admin\Organization\AddEditOrganization.aspx" />
     <Content Include="Admin\Organization\OrganizationList.aspx" />
     <Content Include="Admin\PriorityActivities.aspx" />
@@ -904,6 +907,8 @@
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="PivotTables\OprOrgsClsCnt.aspx" />
+    <Content Include="Reports\CountriesForReports.aspx" />
+    <Content Include="Reports\CountryReports.aspx" />
     <Content Include="Reports\OperationalPresence.aspx" />
     <Content Include="PivotTables\NumOfOrgsClsCnt.aspx" />
     <Content Include="Reports\ProjectByClusters.aspx" />
@@ -1148,6 +1153,13 @@
     <Compile Include="Admin\ActivityData.aspx.designer.cs">
       <DependentUpon>ActivityData.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\ActivityListing.aspx.cs">
+      <DependentUpon>ActivityListing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ActivityListing.aspx.designer.cs">
+      <DependentUpon>ActivityListing.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\EmergencyClusters.aspx.cs">
       <DependentUpon>EmergencyClusters.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1168,6 +1180,20 @@
     </Compile>
     <Compile Include="Admin\IndicatorActivities.aspx.designer.cs">
       <DependentUpon>IndicatorActivities.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\IndicatorListing.aspx.cs">
+      <DependentUpon>IndicatorListing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\IndicatorListing.aspx.designer.cs">
+      <DependentUpon>IndicatorListing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\OPSProjectAllData.aspx.cs">
+      <DependentUpon>OPSProjectAllData.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\OPSProjectAllData.aspx.designer.cs">
+      <DependentUpon>OPSProjectAllData.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\Organization\AddEditOrganization.aspx.cs">
       <DependentUpon>AddEditOrganization.aspx</DependentUpon>
@@ -1733,6 +1759,20 @@
     </Compile>
     <Compile Include="PivotTables\OprOrgsClsCnt.aspx.designer.cs">
       <DependentUpon>OprOrgsClsCnt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\CountriesForReports.aspx.cs">
+      <DependentUpon>CountriesForReports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\CountriesForReports.aspx.designer.cs">
+      <DependentUpon>CountriesForReports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\CountryReports.aspx.cs">
+      <DependentUpon>CountryReports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\CountryReports.aspx.designer.cs">
+      <DependentUpon>CountryReports.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\OperationalPresence.aspx.cs">
       <DependentUpon>OperationalPresence.aspx</DependentUpon>
