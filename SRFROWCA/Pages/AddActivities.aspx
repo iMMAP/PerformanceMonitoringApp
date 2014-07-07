@@ -54,7 +54,7 @@
                 needToConfirm = false;
             }
             if (needToConfirm)
-                return "";
+                return "Leave this page If you don't have any unsaved changes OR Stay on the page and save your changes before leaving the page!";
         }
 
         var launch = false;

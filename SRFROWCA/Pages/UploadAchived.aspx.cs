@@ -19,6 +19,7 @@ namespace SRFROWCA.Pages
         {
             if (!IsPostBack)
             {
+                PopulateAdmin1(UserInfo.Country);
                 PopulateProjects();
                 PopulateMonths();
             }
@@ -71,10 +72,13 @@ namespace SRFROWCA.Pages
             {
                 orgId = UserInfo.Organization;
             }
-
             int yearId = 10;
+
+            string locationIds = RC.GetSelectedValues(cblLocations);
+            locationIds = string.IsNullOrEmpty(locationIds) ? null : locationIds;
+
             return DBContext.GetData("GetIndicatorsForUserDataEntryTemplate", new object[]{ emgLocationId, orgId, projectIds, countryInd,
-                                                                                            regionalInd, allInd, RC.SelectedSiteLanguageId, yearId});
+                                                                                            regionalInd, allInd, RC.SelectedSiteLanguageId, yearId, locationIds});
         }
 
         #endregion
@@ -100,6 +104,33 @@ namespace SRFROWCA.Pages
         private DataTable GetMonth()
         {
             DataTable dt = DBContext.GetData("GetMonths", new object[] { RC.SelectedSiteLanguageId });
+            return dt.Rows.Count > 0 ? dt : new DataTable();
+        }
+
+        private void PopulateAdmin1(int parentLocationId)
+        {
+            DataTable dt = GetAdmin1Locations(parentLocationId);
+            cblLocations.DataValueField = "LocationId";
+            cblLocations.DataTextField = "LocationName";
+            cblLocations.DataSource = dt;
+            cblLocations.DataBind();
+
+            foreach (ListItem item in cblLocations.Items)
+            {
+                item.Selected = true;
+            }
+        }
+
+        private DataTable GetAdmin1Locations(int parentLocationId)
+        {
+            string procedure = "GetSecondLevelChildLocations";
+
+            if (parentLocationId == 567)
+            {
+                procedure = "GetSecondLevelChildLocationsAndCountry";
+            }
+
+            DataTable dt = DBContext.GetData(procedure, new object[] { parentLocationId });
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 
