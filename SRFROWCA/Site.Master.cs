@@ -180,6 +180,8 @@ namespace SRFROWCA
             liEmergency.Visible = isShow;
             liProgressSummary.Visible = isShow;
             liProjectXMLFeeds.Visible = isShow;
+            liActivities.Visible = isShow;
+            liIndicators.Visible = isShow;
         }
 
         private void ShowUserMenue()
@@ -296,6 +298,8 @@ namespace SRFROWCA
             liEmergency.Visible = isShow;
             liProgressSummary.Visible = isShow;
             liProjectXMLFeeds.Visible = isShow;
+            liIndicators.Visible = isShow;
+            liActivities.Visible = isShow;
         }
 
         private void ActiveMenueItem()
@@ -450,6 +454,14 @@ namespace SRFROWCA
             {
                 liEmergency.Attributes.Add("class", "active open");
                 liEmgCluster.Attributes.Add("class", "active");
+            }
+            else if (uri.Contains("Admin/ActivityListing.aspx"))
+            {
+                liActivities.Attributes.Add("class", "active");
+            }
+            else if (uri.Contains("Admin/IndicatorListing.aspx"))
+            {
+                liIndicators.Attributes.Add("class", "active");
             }
         }
 

@@ -11,7 +11,114 @@ namespace SRFROWCA.Common
 {
     public static class WriteDataEntryPDF
     {
-        #region Generate PDF Document
+        #region Properties/Enums
+
+        private static Font TitleFont
+        {
+            get
+            {
+                return iTextSharp.text.FontFactory.GetFont("Arial", 7, iTextSharp.text.Font.BOLD);
+            }
+        }
+
+        private static Font TableFont
+        {
+            get
+            {
+                return FontFactory.GetFont("Arial", 8, Font.NORMAL);
+            }
+        }
+
+        private static bool KeepPDFTableTogether
+        {
+            get { return true; }
+        }
+
+        private enum ProjectFundingType
+        {
+            Pledges = 1,
+            Commitments = 2,
+            Contributions = 3,
+        }
+
+        private enum FetchStatus
+        {
+            Success = 1
+        }
+
+        private static int PDFExportObjId
+        {
+            get
+            {
+                int docType = 0;
+                if (HttpContext.Current.Session["PDFExportObjId"] != null)
+                {
+                    int.TryParse(HttpContext.Current.Session["PDFExportObjId"].ToString(), out docType);
+                }
+
+                return docType;
+            }
+            set
+            {
+                HttpContext.Current.Session["PDFExportObjId"] = value.ToString();
+            }
+        }
+
+        private static int PDFExportPrId
+        {
+            get
+            {
+                int docType = 0;
+                if (HttpContext.Current.Session["PDFExportPrId"] != null)
+                {
+                    int.TryParse(HttpContext.Current.Session["PDFExportPrId"].ToString(), out docType);
+                }
+
+                return docType;
+            }
+            set
+            {
+                HttpContext.Current.Session["PDFExportPrId"] = value.ToString();
+            }
+        }
+
+        private static int PDFExportActivityId
+        {
+            get
+            {
+                int docType = 0;
+                if (HttpContext.Current.Session["PDFExportActivityId"] != null)
+                {
+                    int.TryParse(HttpContext.Current.Session["PDFExportActivityId"].ToString(), out docType);
+                }
+
+                return docType;
+            }
+            set
+            {
+                HttpContext.Current.Session["PDFExportActivityId"] = value.ToString();
+            }
+        }
+
+        private static int PDFExportIndicatorId
+        {
+            get
+            {
+                int docType = 0;
+                if (HttpContext.Current.Session["PDFExportIndicatorId"] != null)
+                {
+                    int.TryParse(HttpContext.Current.Session["PDFExportIndicatorId"].ToString(), out docType);
+                }
+
+                return docType;
+            }
+            set
+            {
+                HttpContext.Current.Session["PDFExportIndicatorId"] = value.ToString();
+            }
+        }
+
+        #endregion
 
         public static void GenerateDocument(iTextSharp.text.Document document, DataTable dt)
         {
@@ -86,8 +193,9 @@ namespace SRFROWCA.Common
 
                 ProjectGeneralInfo(document, projectGeneralInfo);
                 ProjectReports(document, dt, reportID);
+                IndicatorTargets(document, projectDetails);
             }
-            else if(projectID > 0)
+            else if (projectID > 0)
             {
                 List<int> projectIds = GetDistinctProjects(dt);
 
@@ -106,7 +214,7 @@ namespace SRFROWCA.Common
 
         private static void ProjectReports(iTextSharp.text.Document document, DataTable dt, int? reportID)
         {
-            PdfPTable tbl = new PdfPTable(6);
+            PdfPTable tbl = new PdfPTable(new float[] { 2f, 3f, 3f, 2f, 4f, 2f, 3f, 2f });
 
             PdfPCell cell = null;
             var headerColor = new BaseColor(240, 240, 240);
@@ -115,6 +223,14 @@ namespace SRFROWCA.Common
             tbl.AddCell(cell);
 
             cell = new PdfPCell(new Phrase("Report Name", TitleFont));
+            cell.BackgroundColor = headerColor;
+            tbl.AddCell(cell);
+
+            cell = new PdfPCell(new Phrase("Organization Name", TitleFont));
+            cell.BackgroundColor = headerColor;
+            tbl.AddCell(cell);
+
+            cell = new PdfPCell(new Phrase("Month", TitleFont));
             cell.BackgroundColor = headerColor;
             tbl.AddCell(cell);
 
@@ -142,6 +258,8 @@ namespace SRFROWCA.Common
                 {
                     tbl.AddCell(new Phrase(Convert.ToString(row[0]["ReportID"]), TableFont));
                     tbl.AddCell(new Phrase(Convert.ToString(row[0]["ReportName"]), TableFont));
+                    tbl.AddCell(new Phrase(Convert.ToString(row[0]["OrganizationName"]), TableFont));
+                    tbl.AddCell(new Phrase(Convert.ToString(row[0]["Month"]), TableFont));
                     tbl.AddCell(new Phrase(Convert.ToString(row[0]["CreatedBy"]), TableFont));
                     tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(row[0]["CreatedDate"])) ? Convert.ToDateTime(row[0]["CreatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
                     tbl.AddCell(new Phrase(Convert.ToString(row[0]["UpdatedBy"]), TableFont));
@@ -411,7 +529,7 @@ namespace SRFROWCA.Common
                 cell.Border = 0;
                 cell.Padding = 5;
                 tbl.AddCell(cell);
-                
+
                 cell = new PdfPCell(new Phrase(Convert.ToString(dt.Rows[0]["YesterdayReportCount"]), TableFont));
                 cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
                 cell.Padding = 5;
@@ -1366,116 +1484,5 @@ namespace SRFROWCA.Common
         //        document.Add(new Paragraph("\n"));
         //    }
         //}
-
-        #region Properties/Enums
-
-        private static Font TitleFont
-        {
-            get
-            {
-                return iTextSharp.text.FontFactory.GetFont("Arial", 7, iTextSharp.text.Font.BOLD);
-            }
-        }
-
-        private static Font TableFont
-        {
-            get
-            {
-                return FontFactory.GetFont("Arial", 8, Font.NORMAL);
-            }
-        }
-
-        private static bool KeepPDFTableTogether
-        {
-            get { return true; }
-        }
-
-        private enum ProjectFundingType
-        {
-            Pledges = 1,
-            Commitments = 2,
-            Contributions = 3,
-        }
-
-        private enum FetchStatus
-        {
-            Success = 1
-        }
-
-        private static int PDFExportObjId
-        {
-            get
-            {
-                int docType = 0;
-                if (HttpContext.Current.Session["PDFExportObjId"] != null)
-                {
-                    int.TryParse(HttpContext.Current.Session["PDFExportObjId"].ToString(), out docType);
-                }
-
-                return docType;
-            }
-            set
-            {
-                HttpContext.Current.Session["PDFExportObjId"] = value.ToString();
-            }
-        }
-
-        private static int PDFExportPrId
-        {
-            get
-            {
-                int docType = 0;
-                if (HttpContext.Current.Session["PDFExportPrId"] != null)
-                {
-                    int.TryParse(HttpContext.Current.Session["PDFExportPrId"].ToString(), out docType);
-                }
-
-                return docType;
-            }
-            set
-            {
-                HttpContext.Current.Session["PDFExportPrId"] = value.ToString();
-            }
-        }
-
-        private static int PDFExportActivityId
-        {
-            get
-            {
-                int docType = 0;
-                if (HttpContext.Current.Session["PDFExportActivityId"] != null)
-                {
-                    int.TryParse(HttpContext.Current.Session["PDFExportActivityId"].ToString(), out docType);
-                }
-
-                return docType;
-            }
-            set
-            {
-                HttpContext.Current.Session["PDFExportActivityId"] = value.ToString();
-            }
-        }
-
-        private static int PDFExportIndicatorId
-        {
-            get
-            {
-                int docType = 0;
-                if (HttpContext.Current.Session["PDFExportIndicatorId"] != null)
-                {
-                    int.TryParse(HttpContext.Current.Session["PDFExportIndicatorId"].ToString(), out docType);
-                }
-
-                return docType;
-            }
-            set
-            {
-                HttpContext.Current.Session["PDFExportIndicatorId"] = value.ToString();
-            }
-        }
-
-        #endregion
-
-        #endregion
     }
 }
