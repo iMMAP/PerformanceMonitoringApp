@@ -109,7 +109,7 @@ namespace SRFROWCA.ClusterLead
 
         private void ExportToPDF(int? projectId)
         {
-            DataTable dtResults = DBContext.GetData("uspGetReports", new object[] { projectId, null, null , null});
+            DataTable dtResults = DBContext.GetData("uspGetReports", new object[] { projectId, null, null , null, RC.GetCurrentUserId});
 
             if (dtResults.Rows.Count > 0)
             {

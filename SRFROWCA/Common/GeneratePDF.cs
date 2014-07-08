@@ -130,7 +130,7 @@ namespace SRFROWCA.Common
                 DataRow projectGeneralInfo = projectDetails.FirstOrDefault<DataRow>();
                 ProjectGeneralInfo(document, projectGeneralInfo);
 
-                IndicatorTargets(document, projectDetails);
+                IndicatorTargets(document, projectDetails, true);
                 document.NewPage();
             }
         }
@@ -194,14 +194,7 @@ namespace SRFROWCA.Common
                 ProjectGeneralInfo(document, projectGeneralInfo);
                 ProjectReports(document, dt, reportID);
 
-                if (reportID != null)
-                {
-                    IndicatorTargets(document, (from projectData in dt.AsEnumerable()
-                                                where projectData.Field<int>("ReportID") == reportID
-                                                select projectData));
-                }
-                else
-                    IndicatorTargets(document, projectDetails);
+
             }
             else if (projectID == null)
             {
@@ -222,8 +215,69 @@ namespace SRFROWCA.Common
 
         private static void ProjectReports(iTextSharp.text.Document document, DataTable dt, int? reportID)
         {
-            PdfPTable tbl = new PdfPTable(new float[] { 2f, 3f, 3f, 2f, 4f, 2f, 3f, 2f });
+            if (reportID != null)
+            {
+                PdfPTable tbl = new PdfPTable(new float[] { 2f, 3f, 3f, 2f, 4f, 2f, 3f, 2f });
+                ProjectReportHeaders(tbl);
 
+                DataRow[] row = dt.Select("ReportID='" + reportID.ToString() + "'");
+
+                if (row.Length > 0)
+                {
+                    tbl.AddCell(new Phrase(Convert.ToString(row[0]["ReportID"]), TableFont));
+                    tbl.AddCell(new Phrase(Convert.ToString(row[0]["ReportName"]), TableFont));
+                    tbl.AddCell(new Phrase(Convert.ToString(row[0]["OrganizationName"]), TableFont));
+                    tbl.AddCell(new Phrase(Convert.ToString(row[0]["Month"]), TableFont));
+                    tbl.AddCell(new Phrase(Convert.ToString(row[0]["CreatedBy"]), TableFont));
+                    tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(row[0]["CreatedDate"])) ? Convert.ToDateTime(row[0]["CreatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
+                    tbl.AddCell(new Phrase(Convert.ToString(row[0]["UpdatedBy"]), TableFont));
+                    tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(row[0]["UpdatedDate"])) ? Convert.ToDateTime(row[0]["UpdatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
+                }
+
+                tbl.SpacingAfter = 10f;
+                document.Add(tbl);
+
+                IndicatorTargets(document, (from projectData in dt.AsEnumerable()
+                                            where projectData.Field<int>("ReportID") == Convert.ToInt32(row[0]["ReportID"])
+                                            select projectData), false);
+
+            }
+            else
+            {
+                DataRow[] rows = dt.Select("UserID = '" + RC.GetCurrentUserId + "'");
+
+                if (rows.Length > 0)
+                {
+                    string[] selectedColumns = new[] { "ReportID", "ReportName", "OrganizationName", "Month", "CreatedBy", "CreatedDate", "UpdatedBy", "UpdatedDate" };
+                    DataTable dtFiltered = new DataView(rows.CopyToDataTable<DataRow>()).ToTable(true, selectedColumns);
+
+                    for (int i = 0; i < dtFiltered.Rows.Count; i++)
+                    {
+                        PdfPTable tbl = new PdfPTable(new float[] { 2f, 3f, 3f, 2f, 4f, 2f, 3f, 2f });
+                        ProjectReportHeaders(tbl);
+
+                        tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["ReportID"]), TableFont));
+                        tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["ReportName"]), TableFont));
+                        tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["OrganizationName"]), TableFont));
+                        tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["Month"]), TableFont));
+                        tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["CreatedBy"]), TableFont));
+                        tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(dtFiltered.Rows[i]["CreatedDate"])) ? Convert.ToDateTime(dtFiltered.Rows[i]["CreatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
+                        tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["UpdatedBy"]), TableFont));
+                        tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(dtFiltered.Rows[i]["UpdatedDate"])) ? Convert.ToDateTime(dtFiltered.Rows[i]["UpdatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
+
+                        tbl.SpacingAfter = 10f;
+                        document.Add(tbl);
+
+                        IndicatorTargets(document, (from projectData in dt.AsEnumerable()
+                                                    where projectData.Field<int>("ReportID") == Convert.ToInt32(dtFiltered.Rows[i]["ReportID"])
+                                                    select projectData), false);
+                    }
+                }
+            }
+        }
+
+        private static void ProjectReportHeaders(PdfPTable tbl)
+        {
             PdfPCell cell = null;
             var headerColor = new BaseColor(240, 240, 240);
             cell = new PdfPCell(new Phrase("Report ID", TitleFont));
@@ -257,47 +311,9 @@ namespace SRFROWCA.Common
             cell = new PdfPCell(new Phrase("Updated Date", TitleFont));
             cell.BackgroundColor = headerColor;
             tbl.AddCell(cell);
-
-            if (reportID != null)
-            {
-                DataRow[] row = dt.Select("ReportID='" + reportID.ToString() + "'");
-
-                if (row.Length > 0)
-                {
-                    tbl.AddCell(new Phrase(Convert.ToString(row[0]["ReportID"]), TableFont));
-                    tbl.AddCell(new Phrase(Convert.ToString(row[0]["ReportName"]), TableFont));
-                    tbl.AddCell(new Phrase(Convert.ToString(row[0]["OrganizationName"]), TableFont));
-                    tbl.AddCell(new Phrase(Convert.ToString(row[0]["Month"]), TableFont));
-                    tbl.AddCell(new Phrase(Convert.ToString(row[0]["CreatedBy"]), TableFont));
-                    tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(row[0]["CreatedDate"])) ? Convert.ToDateTime(row[0]["CreatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
-                    tbl.AddCell(new Phrase(Convert.ToString(row[0]["UpdatedBy"]), TableFont));
-                    tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(row[0]["UpdatedDate"])) ? Convert.ToDateTime(row[0]["UpdatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
-                }
-            }
-            else
-            {
-                string[] selectedColumns = new[] { "ReportID", "ReportName", "OrganizationName", "Month", "CreatedBy", "CreatedDate", "UpdatedBy", "UpdatedDate" };
-
-                DataTable dtFiltered = new DataView(dt).ToTable(true, selectedColumns);
-
-                for (int i = 0; i < dtFiltered.Rows.Count; i++)
-                {
-                    tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["ReportID"]), TableFont));
-                    tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["ReportName"]), TableFont));
-                    tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["OrganizationName"]), TableFont));
-                    tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["Month"]), TableFont));
-                    tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["CreatedBy"]), TableFont));
-                    tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(dtFiltered.Rows[i]["CreatedDate"])) ? Convert.ToDateTime(dtFiltered.Rows[i]["CreatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
-                    tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["UpdatedBy"]), TableFont));
-                    tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(dtFiltered.Rows[i]["UpdatedDate"])) ? Convert.ToDateTime(dtFiltered.Rows[i]["UpdatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
-                }
-            }
-
-            tbl.SpacingAfter = 10f;
-            document.Add(tbl);
         }
 
-        private static void IndicatorTargets(Document document, IEnumerable<DataRow> projectDetails)
+        private static void IndicatorTargets(Document document, IEnumerable<DataRow> projectDetails, bool showAccum)
         {
             DataTable dt = projectDetails.CopyToDataTable();
             var distinctPriorities = (from DataRow dRow in dt.Rows
@@ -356,7 +372,7 @@ namespace SRFROWCA.Common
                                                     select ind);
 
 
-                    PdfPTable tbl = new PdfPTable(4);
+                    PdfPTable tbl = showAccum ? new PdfPTable(4) : new PdfPTable(3);
 
                     DataRow drAct = targets.First<DataRow>();
                     AddLogFrameInfo(document, drAct);
@@ -371,16 +387,19 @@ namespace SRFROWCA.Common
                     cell.BackgroundColor = headerColor;
                     tbl.AddCell(cell);
 
-                    cell = new PdfPCell(new Phrase("Accumulative", TitleFont));
-                    cell.BackgroundColor = headerColor;
-                    tbl.AddCell(cell);
+                    if (showAccum)
+                    {
+                        cell = new PdfPCell(new Phrase("Accumulative", TitleFont));
+                        cell.BackgroundColor = headerColor;
+                        tbl.AddCell(cell);
+                    }
 
                     cell = new PdfPCell(new Phrase("Monthly Achieved", TitleFont));
                     cell.BackgroundColor = headerColor;
                     tbl.AddCell(cell);
                     foreach (DataRow row in targets)
                     {
-                        ReportedData(document, tbl, row);
+                        ReportedData(document, tbl, row, showAccum);
                     }
 
                     tbl.SpacingAfter = 10f;
@@ -389,11 +408,14 @@ namespace SRFROWCA.Common
             }
         }
 
-        private static void ReportedData(Document document, PdfPTable tbl, DataRow row)
+        private static void ReportedData(Document document, PdfPTable tbl, DataRow row, bool showAccum)
         {
             tbl.AddCell(new Phrase(row["Location"].ToString(), TableFont));
             tbl.AddCell(new Phrase(row["TargetAnnual"].ToString(), TableFont));
-            tbl.AddCell(new Phrase(row["Accumulative"].ToString(), TableFont));
+
+            if (showAccum)
+                tbl.AddCell(new Phrase(row["Accumulative"].ToString(), TableFont));
+
             tbl.AddCell(new Phrase(row["Achieved"].ToString(), TableFont));
         }
 
