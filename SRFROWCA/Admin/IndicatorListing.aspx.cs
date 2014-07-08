@@ -51,8 +51,8 @@ namespace SRFROWCA.Admin
                     return;
                 }
 
-                DeleteIndicator(activityDataId);
-                LoadIndicators();
+                //DeleteIndicator(activityDataId);
+                //LoadIndicators();
             }
 
             // Edit Project.
@@ -65,9 +65,9 @@ namespace SRFROWCA.Admin
                 GridViewRow row = (((Control)e.CommandSource).NamingContainer) as GridViewRow;
                 ddlClusterNew.SelectedValue = gvIndicator.DataKeys[row.RowIndex].Values["ClusterId"].ToString();
                 LoadObjectivesByCluster();
-                ddlObjectiveNew.SelectedValue = gvIndicator.DataKeys[row.RowIndex].Values["ObjectiveId"].ToString();
+                ddlObjectiveNew.SelectedValue = gvIndicator.DataKeys[row.RowIndex].Values["ClusterObjectiveId"].ToString();
                 LoadPrioritiesByObjective();
-                ddlPriorityNew.SelectedValue = gvIndicator.DataKeys[row.RowIndex].Values["HumanitarianPriorityId"].ToString();
+                ddlPriorityNew.SelectedValue = gvIndicator.DataKeys[row.RowIndex].Values["ObjectivePriorityId"].ToString();
                 LoadActivitiesByPriority();
                 ddlActivityNew.SelectedValue = gvIndicator.DataKeys[row.RowIndex].Values["PriorityActivityId"].ToString();
                 ddlUnit.SelectedValue = gvIndicator.DataKeys[row.RowIndex].Values["UnitId"].ToString();
@@ -76,10 +76,16 @@ namespace SRFROWCA.Admin
                 if (gvIndicator.DataKeys[row.RowIndex].Values["SiteLanguageId"].ToString() == "1")
                 {
                     txtActivityEng.Text = gvIndicator.DataKeys[row.RowIndex].Values["DataName"].ToString();
+                    txtActivityFr.Visible = false;
+                    rfvEmgNameFr.Enabled = false;
+                    trFrench.Visible = false;
                 }
                 else
                 {
                     txtActivityFr.Text = gvIndicator.DataKeys[row.RowIndex].Values["DataName"].ToString();
+                    txtActivityEng.Visible = false;
+                    rfvEmgName.Enabled = false;
+                    trEnglish.Visible = false;
                 }
                 mpeAddOrg.Show();
             }
@@ -218,7 +224,7 @@ namespace SRFROWCA.Admin
             int? priorityId = ddlPriority.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlPriority.SelectedValue);
             int? activityId = ddlActivity.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlActivity.SelectedValue);
             string search = string.IsNullOrEmpty(txtActivityName.Text) ? null : txtActivityName.Text;
-            return DBContext.GetData("GetAllIndicators", new object[] { clusterId,objectiveId,priorityId,activityId,search });
+            return DBContext.GetData("GetAllIndicators", new object[] { clusterId, objectiveId, priorityId, activityId, search, (int)RC.SelectedSiteLanguageId });
         }
 
         private DataTable GetObjectives()
@@ -239,7 +245,7 @@ namespace SRFROWCA.Admin
         {
             ddlObjectiveNew.Items.Clear();
             ddlObjectiveNew.Items.Add(new ListItem("Select", "-1"));
-            ddlObjectiveNew.DataValueField = "ObjectiveId";
+            ddlObjectiveNew.DataValueField = "ClusterObjectiveId";
             ddlObjectiveNew.DataTextField = "Objective";
             ddlObjectiveNew.DataSource = GetObjectives(Convert.ToInt32(ddlClusterNew.SelectedValue));
             ddlObjectiveNew.DataBind();
@@ -248,7 +254,7 @@ namespace SRFROWCA.Admin
         {
             ddlPriorityNew.Items.Clear();
             ddlPriorityNew.Items.Add(new ListItem("Select", "-1"));
-            ddlPriorityNew.DataValueField = "HumanitarianPriorityId";
+            ddlPriorityNew.DataValueField = "ObjectivePriorityId";
             ddlPriorityNew.DataTextField = "HumanitarianPriority";
             ddlPriorityNew.DataSource = GetPriorities(Convert.ToInt32(ddlObjectiveNew.SelectedValue));
             ddlPriorityNew.DataBind();
@@ -296,8 +302,9 @@ namespace SRFROWCA.Admin
                 return DBContext.GetData("GetActivitiesByPriority", new object[] { (int)RC.SelectedSiteLanguageId, priorityId });
             }
         }
-        protected void btnAddIndicator_Click(object sender, EventArgs e)
-        {
+
+       protected void btnAddIndicator_Click(object sender, EventArgs e)
+        {         
             ClearPopupControls();
             mpeAddOrg.Show();
         }
@@ -320,7 +327,9 @@ namespace SRFROWCA.Admin
             chkIsPriority.Checked = false;
             chkisSRP.Checked = false;
             txtActivityEng.Text = txtActivityFr.Text = string.Empty;
-
+            txtActivityFr.Visible = txtActivityEng.Visible = true;
+            rfvEmgName.Enabled = rfvEmgNameFr.Enabled = true;
+            trEnglish.Visible = trFrench.Visible = true;
             //hdnIndicatorId.Value = txtEmgNameEng.Text = txtEmgNameFr.Text = "";
         }
 
@@ -333,11 +342,11 @@ namespace SRFROWCA.Admin
             if (!string.IsNullOrEmpty(hdnIndicatorId.Value))
             {
                 int indicatorId = Convert.ToInt32(hdnIndicatorId.Value);
-                DBContext.Update("UpdateActivityData", new object[] { indicatorId, priorityActivityId, Convert.ToInt32(ddlUnit.SelectedValue), chkisSRP.Checked, chkIsPriority.Checked, txtActivityEng.Text, txtActivityFr.Text, userId, DBNull.Value });
+                DBContext.Update("UpdateActivityData", new object[] { indicatorId, priorityActivityId, Convert.ToInt32(ddlUnit.SelectedValue), chkisSRP.Checked, chkIsPriority.Checked, txtActivityEng.Text, txtActivityFr.Text, userId, txtActivityEng.Visible ? 1:2, DBNull.Value });
             }
             else
             {
-                DBContext.Add("InsertActivityData", new object[] { priorityActivityId,Convert.ToInt32(ddlUnit.SelectedValue),chkisSRP.Checked,chkIsPriority.Checked, txtActivityEng.Text, txtActivityFr.Text, userId, DBNull.Value });
+                DBContext.Add("InsertOutPutIndicator", new object[] { priorityActivityId, txtActivityEng.Text, txtActivityFr.Text, Convert.ToInt32(ddlUnit.SelectedValue), chkisSRP.Checked, chkIsPriority.Checked, userId, DBNull.Value });
             }
         }
 

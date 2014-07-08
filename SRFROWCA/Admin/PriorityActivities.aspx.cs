@@ -99,7 +99,7 @@ namespace SRFROWCA.Admin
         private DataTable GetPriorites()
         {
             int isLogFrame = 1;
-            return DBContext.GetData("GetPrioritiesLogFrame", new object[] { (int)RC.SiteLanguage.English, isLogFrame });
+            return DBContext.GetData("GetPrioritiesLogFrame", new object[] { (int)RC.SiteLanguage.English });
         }
 
         private void PopulateActivities()
