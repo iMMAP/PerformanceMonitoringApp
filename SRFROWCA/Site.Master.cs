@@ -471,6 +471,10 @@ namespace SRFROWCA
             {
                 liProjectXMLFeeds.Attributes.Add("class", "active");
             }
+            else if (uri.Contains("Reports/CountriesForReports.aspx") || uri.Contains("CountryReports"))
+            {
+                liCountryReports.Attributes.Add("class", "active");
+            }   
         }
 
         protected void lnkLanguageEnglish_Click(object sender, EventArgs e)

@@ -32,13 +32,14 @@
         <!-- .breadcrumb -->
     </div>
     <div class="page-content">
-        <div id="divMsg">
-        </div>
         <div class="row">
-            <div id="scrolledGridView" style="overflow-x: auto; width: 100%; margin: 0 auto;">
+            <div style="margin: 0 auto; width:70%;">
+                
+                <h2>ORS Report By Country</h2>
+                <div class="hr hr-18 dotted hr-double"></div>
+                <h3>Click on country to view reports</h3>
                 <asp:GridView ID="gvCountries" runat="server" AutoGenerateColumns="False" CssClass="imagetable" OnRowCommand="gvCountries_RowCommand" OnRowDataBound="gvCountries_RowDataBound"
-                    ShowHeaderWhenEmpty="True"
-                    Width="40%">
+                    Width="40%" ShowHeader="false">
                     <RowStyle CssClass="istrow" Height="40px" />
                     <AlternatingRowStyle CssClass="altcolor" />
                     <Columns>
