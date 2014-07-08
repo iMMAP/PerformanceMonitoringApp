@@ -335,8 +335,8 @@
                             runat="server"><i class="icon-table"></i>
                             <asp:Localize ID="Localize1" runat="server" Text="Custom Report" meta:resourcekey="localReportCustomReportResource1"></asp:Localize>
                         </a></li>
-                        <li id="liCountryReports" runat="server"><a id="menueCountryReports" runat="server" href="~/Reports/CountriesForReports.aspx">
-                                    <i class="icon-angle-double-right"></i>Country Reports</a></li>
+                        <%--<li id="liCountryReports" runat="server"><a id="menueCountryReports" runat="server" href="~/Reports/CountriesForReports.aspx">
+                                    <i class="icon-angle-double-right"></i>Country Reports</a></li>--%>
                         <li><a href="<%=BaseURL %>/ContactUs/Contactus.aspx"><i class="icon-envelope-alt"></i><span
                             class="menu-text">
                             <asp:Localize ID="localContactUs" runat="server" Text="Contact Us" meta:resourcekey="localContactUsResource1"></asp:Localize></span> </a></li>

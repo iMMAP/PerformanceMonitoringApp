@@ -51,8 +51,8 @@ namespace SRFROWCA.Admin
                     return;
                 }
 
-                DeleteActivity(priorityActivityId);
-                LoadActivities();
+                //DeleteActivity(priorityActivityId);
+                //LoadActivities();
             }
 
             // Edit Project.
@@ -65,18 +65,24 @@ namespace SRFROWCA.Admin
                 GridViewRow row = (((Control)e.CommandSource).NamingContainer) as GridViewRow;
                 ddlClusterNew.SelectedValue = gvActivity.DataKeys[row.RowIndex].Values["ClusterId"].ToString();
                 LoadObjectivesByCluster();
-                ddlObjectiveNew.SelectedValue = gvActivity.DataKeys[row.RowIndex].Values["ObjectiveId"].ToString();
+                ddlObjectiveNew.SelectedValue = gvActivity.DataKeys[row.RowIndex].Values["ClusterObjectiveId"].ToString();
                 LoadPrioritiesByObjective();
-                ddlPriorityNew.SelectedValue = gvActivity.DataKeys[row.RowIndex].Values["HumanitarianPriorityId"].ToString();
+                ddlPriorityNew.SelectedValue = gvActivity.DataKeys[row.RowIndex].Values["ObjectivePriorityId"].ToString();
                 ddlActivityType.SelectedValue = gvActivity.DataKeys[row.RowIndex].Values["ActivityTypeId"].ToString();
 
                 if (gvActivity.DataKeys[row.RowIndex].Values["SiteLanguageId"].ToString() == "1")
                 {
                     txtActivityEng.Text = gvActivity.DataKeys[row.RowIndex].Values["ActivityName"].ToString();
+                    txtActivityFr.Visible = false;
+                    rfvEmgNameFr.Enabled = false;
+                    trFrench.Visible = false;
                 }
                 else
                 {
                     txtActivityFr.Text = gvActivity.DataKeys[row.RowIndex].Values["ActivityName"].ToString();
+                    txtActivityEng.Visible = false;
+                    rfvEmgName.Enabled = false;
+                    trEnglish.Visible = false;
                 }
                 mpeAddOrg.Show();
             }
@@ -210,7 +216,7 @@ namespace SRFROWCA.Admin
             int? objectiveId = ddlObjective.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlObjective.SelectedValue);
             int? priorityId = ddlPriority.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlPriority.SelectedValue);
             string search = string.IsNullOrEmpty(txtActivityName.Text) ? null : txtActivityName.Text;
-            return DBContext.GetData("GetAllActivities", new object[] { clusterId,objectiveId,priorityId,search });
+            return DBContext.GetData("GetAllActivities", new object[] { clusterId, objectiveId, priorityId, search, (int)RC.SelectedSiteLanguageId });
         }
 
         private DataTable GetObjectives(int? clusterId = null)
@@ -265,7 +271,9 @@ namespace SRFROWCA.Admin
             ddlPriorityNew.SelectedIndex = 0;
             ddlActivityType.SelectedIndex = 0;
             txtActivityEng.Text = txtActivityFr.Text = string.Empty;
-
+            txtActivityFr.Visible = txtActivityEng.Visible = true;
+            rfvEmgName.Enabled = rfvEmgNameFr.Enabled = true;
+            trEnglish.Visible = trFrench.Visible = true;
             //hfLocEmgId.Value = txtEmgNameEng.Text = txtEmgNameFr.Text = "";
         }
 
@@ -282,7 +290,7 @@ namespace SRFROWCA.Admin
             if (!string.IsNullOrEmpty(hdnPriorityActivityId.Value))
             {
                 int priorityActivityId = Convert.ToInt32(hdnPriorityActivityId.Value);
-                DBContext.Update("UpdatePriorityActivity", new object[] { priorityActivityId, clusterId, objectiveId, priorityId, activityTypeId, txtActivityEng.Text, txtActivityFr.Text, userId, DBNull.Value });
+                DBContext.Update("UpdatePriorityActivity", new object[] { priorityActivityId, clusterId, objectiveId, priorityId, activityTypeId, txtActivityEng.Text, txtActivityFr.Text, userId, txtActivityEng.Visible ? 1:2, DBNull.Value });
             }
             else
             {
@@ -300,7 +308,7 @@ namespace SRFROWCA.Admin
         {
             ddlObjectiveNew.Items.Clear();
             ddlObjectiveNew.Items.Add(new ListItem("Select", "-1"));
-            ddlObjectiveNew.DataValueField = "ObjectiveId";
+            ddlObjectiveNew.DataValueField = "ClusterObjectiveId";
             ddlObjectiveNew.DataTextField = "Objective";
             ddlObjectiveNew.DataSource = GetObjectives(Convert.ToInt32(ddlClusterNew.SelectedValue));
             ddlObjectiveNew.DataBind();
@@ -309,7 +317,7 @@ namespace SRFROWCA.Admin
         {
             ddlPriorityNew.Items.Clear();
             ddlPriorityNew.Items.Add(new ListItem("Select", "-1"));
-            ddlPriorityNew.DataValueField = "HumanitarianPriorityId";
+            ddlPriorityNew.DataValueField = "ObjectivePriorityId";
             ddlPriorityNew.DataTextField = "HumanitarianPriority";
             ddlPriorityNew.DataSource = GetPriorities(Convert.ToInt32(ddlObjectiveNew.SelectedValue));
             ddlPriorityNew.DataBind();

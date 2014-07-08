@@ -120,7 +120,7 @@
     <div class="tablegrid">
         <div style="overflow-x: auto; width: 100%">
            <asp:GridView ID="gvActivity" runat="server" AutoGenerateColumns="false" AllowSorting="True" AllowPaging="true" PagerSettings-Mode="NumericFirstLast"
-                OnRowCommand="gvActivity_RowCommand" Width="100%" OnRowDataBound="gvActivity_RowDataBound" PagerSettings-Position="Bottom" DataKeyNames="ClusterId,ObjectiveId,HumanitarianPriorityId,ActivityTypeId,HumanitarianPriority,SiteLanguageId,ActivityName"  
+                OnRowCommand="gvActivity_RowCommand" Width="100%" OnRowDataBound="gvActivity_RowDataBound" PagerSettings-Position="Bottom" DataKeyNames="ClusterId,ClusterObjectiveId,ObjectivePriorityId,ActivityTypeId,HumanitarianPriority,SiteLanguageId,ActivityName"  
                 CssClass="imagetable" OnSorting="gvActivity_Sorting" OnPageIndexChanging="gvActivity_PageIndexChanging" PageSize="30" OnRowDeleting="gvActivity_RowDeleting">
                 <RowStyle CssClass="istrow" />
                 <AlternatingRowStyle CssClass="altcolor" />
@@ -205,7 +205,7 @@
                                                         Text="Required" ControlToValidate="ddlPriorityNew" CssClass="error2" InitialValue="-1"></asp:RequiredFieldValidator>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            <tr runat="server" id="trEnglish">
                                                 <td>
                                                     Activity Name (English):
                                                 </td>
@@ -217,7 +217,7 @@
                                                         Text="Required" ControlToValidate="txtActivityEng" CssClass="error2"></asp:RequiredFieldValidator>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            <tr runat="server" id="trFrench">
                                                 <td>
                                                     Activity Name (French):
                                                 </td>

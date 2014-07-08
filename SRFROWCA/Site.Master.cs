@@ -473,7 +473,7 @@ namespace SRFROWCA
             }
             else if (uri.Contains("Reports/CountriesForReports.aspx") || uri.Contains("CountryReports"))
             {
-                liCountryReports.Attributes.Add("class", "active");
+                //liCountryReports.Attributes.Add("class", "active");
             }   
         }
 
