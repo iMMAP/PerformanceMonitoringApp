@@ -156,9 +156,11 @@
     <Content Include="Account\UpdateUser.aspx" />
     <Content Include="Account\UserProfile.aspx" />
     <Content Include="Admin\ActivityData.aspx" />
+    <Content Include="Admin\ActivityListing.aspx" />
     <Content Include="Admin\EmergencyClusters.aspx" />
     <Content Include="Admin\EmergencyLocations.aspx" />
     <Content Include="Admin\IndicatorActivities.aspx" />
+    <Content Include="Admin\IndicatorListing.aspx" />
     <Content Include="Admin\Organization\AddEditOrganization.aspx" />
     <Content Include="Admin\Organization\OrganizationList.aspx" />
     <Content Include="Admin\PriorityActivities.aspx" />
@@ -357,7 +359,6 @@
     <Content Include="ClusterLead\ClusterIndicatorTargets.aspx" />
     <Content Include="ClusterLead\ManageActivitiesClsuterLead.aspx" />
     <Content Include="ClusterLead\ProjectDetails.aspx" />
-    <Content Include="ClusterLead\ProjectReports.aspx" />
     <Content Include="ClusterLead\ProjectsListing.aspx" />
     <Content Include="Admin\UploadLocations.aspx" />
     <Content Include="Admin\UploadLogFrame.aspx" />
@@ -1147,6 +1148,13 @@
     <Compile Include="Admin\ActivityData.aspx.designer.cs">
       <DependentUpon>ActivityData.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\ActivityListing.aspx.cs">
+      <DependentUpon>ActivityListing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ActivityListing.aspx.designer.cs">
+      <DependentUpon>ActivityListing.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\EmergencyClusters.aspx.cs">
       <DependentUpon>EmergencyClusters.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1167,6 +1175,13 @@
     </Compile>
     <Compile Include="Admin\IndicatorActivities.aspx.designer.cs">
       <DependentUpon>IndicatorActivities.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\IndicatorListing.aspx.cs">
+      <DependentUpon>IndicatorListing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\IndicatorListing.aspx.designer.cs">
+      <DependentUpon>IndicatorListing.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\PriorityActivities.aspx.cs">
       <DependentUpon>PriorityActivities.aspx</DependentUpon>
@@ -1223,13 +1238,6 @@
     </Compile>
     <Compile Include="ClusterLead\ProjectDetails.aspx.designer.cs">
       <DependentUpon>ProjectDetails.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ClusterLead\ProjectReports.aspx.cs">
-      <DependentUpon>ProjectReports.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ClusterLead\ProjectReports.aspx.designer.cs">
-      <DependentUpon>ProjectReports.aspx</DependentUpon>
     </Compile>
     <Compile Include="ClusterLead\ProjectsListing.aspx.cs">
       <DependentUpon>ProjectsListing.aspx</DependentUpon>

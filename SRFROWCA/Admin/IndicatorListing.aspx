@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeBehind="IndicatorListing.aspx.cs" Inherits="SRFROWCA.Admin.IndicatorListing" %>
-
+<%@ MasterType virtualPath="~/Site.master" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
               
@@ -136,7 +136,7 @@
            <asp:GridView ID="gvIndicator" runat="server" AutoGenerateColumns="false" AllowSorting="True" AllowPaging="true" PagerSettings-Mode="NumericFirstLast"
                 OnRowCommand="gvIndicator_RowCommand" Width="100%" OnRowDataBound="gvIndicator_RowDataBound" PagerSettings-Position="Bottom"  
                 CssClass="imagetable" OnSorting="gvIndicator_Sorting" OnPageIndexChanging="gvIndicator_PageIndexChanging" PageSize="30" OnRowDeleting="gvIndicator_RowDeleting"
-               OnRowEditing="gvIndicator_RowEditing" DataKeyNames="ClusterId,ObjectiveId,HumanitarianPriorityId,PriorityActivityId,HumanitarianPriority,SiteLanguageId,DataName,IsPriorityIndicatory,IsSRPIndicator,UnitId">
+               OnRowEditing="gvIndicator_RowEditing" DataKeyNames="ClusterId,ClusterObjectiveId,ObjectivePriorityId,PriorityActivityId,HumanitarianPriority,SiteLanguageId,DataName,IsPriorityIndicatory,IsSRPIndicator,UnitId">
                 <RowStyle CssClass="istrow" />
                 <AlternatingRowStyle CssClass="altcolor" />
                 <Columns>
@@ -250,7 +250,7 @@
                                                 </td>
                                             </tr>
                                           
-                                            <tr>
+                                            <tr  runat="server" id="trEnglish">
                                                 <td>
                                                     Indicator Name (English):
                                                 </td>
@@ -262,7 +262,7 @@
                                                         Text="Required" ControlToValidate="txtActivityEng" CssClass="error2"></asp:RequiredFieldValidator>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            <tr runat="server" id="trFrench">
                                                 <td>
                                                     Indicator Name (French):
                                                 </td>
