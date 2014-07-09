@@ -113,23 +113,23 @@ namespace SRFROWCA.Account
         // If not null then user already exists otherwise not.
         private bool IsUserAlreadyExits()
         {
-            MembershipUser membershipUser = Membership.GetUser(txtEmail.Text.Trim());
+            //MembershipUser membershipUser = Membership.GetUser(txtEmail.Text.Trim());
 
-            if (membershipUser != null)
-            {
-                ShowMessage(string.Format("This email {0} already exists in db!", txtEmail.Text.Trim()), RC.NotificationType.Error);
-                return true;
-            }
-            else
-            {
-                membershipUser = Membership.GetUser(txtUserName.Text.Trim());
+            //if (membershipUser != null)
+            //{
+            //    ShowMessage(string.Format("This email {0} already exists in db!", txtEmail.Text.Trim()), RC.NotificationType.Error);
+            //    return true;
+            //}
+            //else
+            
+                MembershipUser membershipUser = Membership.GetUser(txtUserName.Text.Trim());
 
                 if (membershipUser != null)
                 {
                     ShowMessage(string.Format("Someone already has this, {0}, username. Try another?!", txtUserName.Text.Trim()), RC.NotificationType.Error);
                     return true;
                 }
-            }
+            
 
             return false;
         }

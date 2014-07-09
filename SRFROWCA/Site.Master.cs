@@ -471,8 +471,9 @@ namespace SRFROWCA
             {
                 liProjectXMLFeeds.Attributes.Add("class", "active");
             }
-            else if (uri.Contains("Reports/CountriesForReports.aspx") || uri.Contains("CountryReports"))
+            else if (uri.Contains("CountryReports"))
             {
+                liCountryConsolidatedReports.Attributes.Add("class", "active open");                
                 //liCountryReports.Attributes.Add("class", "active");
             }   
         }

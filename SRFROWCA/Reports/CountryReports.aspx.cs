@@ -15,11 +15,24 @@ namespace SRFROWCA.Reports
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
-            if (Request.QueryString["cname"] != null)
+            if (Request.QueryString["cid"] != null)
             {
-                lblCountryName.Text = Request.QueryString["cname"].ToString() + " 2014";
+                using (ORSEntities db = new ORSEntities())
+                {
+                    int locationId = 0;
+                    int.TryParse(Request.QueryString["cid"].ToString(), out locationId);
+
+                    if ((locationId == 567) || (locationId >= 2 && locationId <= 10))
+                    {
+                        Location location = db.Locations.FirstOrDefault(x => x.LocationId == locationId);
+                        if (location != null)
+                        {
+                            lblCountryName.Text = location.LocationName + " 2014";
+                        }
+                    }
+                }
             }
-            
+
             LoadReportTypes();
         }
 
@@ -41,9 +54,21 @@ namespace SRFROWCA.Reports
             {
                 int countryId = 0;
                 int.TryParse(Request.QueryString["cid"].ToString(), out countryId);
+                int? isPublic = 1;
+
+                if (!this.User.Identity.IsAuthenticated || RC.IsDataEntryUser(this.User))
+                {
+                    isPublic = 1;
+                }
+                else if ((RC.IsAdmin(this.User)) || (countryId == 567 && UserInfo.Country == 0) || (countryId == UserInfo.Country))
+                {
+                    isPublic = null;
+
+                }
+
                 if (countryId > 0)
                 {
-                    dt = DBContext.GetData("GetPublicCountryReportTypes", new object[] { countryId, RC.SelectedSiteLanguageId });
+                    dt = DBContext.GetData("GetPublicCountryReportTypes", new object[] { countryId, isPublic, RC.SelectedSiteLanguageId });
                 }
             }
 
