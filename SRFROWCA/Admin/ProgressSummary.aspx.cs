@@ -23,7 +23,7 @@ namespace SRFROWCA.Admin
 
         private void LoadData(string startDate, string endDate, string countryID, string clusterID, string isOPSProject)
         {
-            DataTable dtResult = DBContext.GetData("uspGetReportData", new object[] {startDate, endDate, countryID, clusterID, isOPSProject});
+            DataTable dtResult = DBContext.GetData("uspGetReportData", new object[] {startDate, endDate, countryID, clusterID, isOPSProject, RC.SelectedSiteLanguageId});
 
             if (dtResult.Rows.Count > 0)
             {
@@ -65,7 +65,7 @@ namespace SRFROWCA.Admin
             string endDate = !string.IsNullOrEmpty(txtToDate.Text) ? txtToDate.Text : null;
             string isOPSProject = rbIsOPSProject.SelectedValue;
 
-            DataTable dtResults = DBContext.GetData("uspGetReportData", new object[] { startDate, endDate, "-1", "-1", isOPSProject });
+            DataTable dtResults = DBContext.GetData("uspGetReportData", new object[] { startDate, endDate, "-1", "-1", isOPSProject, RC.SelectedSiteLanguageId });
 
             if (dtResults.Rows.Count > 0)
             {

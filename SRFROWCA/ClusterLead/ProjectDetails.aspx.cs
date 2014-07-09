@@ -50,7 +50,7 @@ namespace SRFROWCA.ClusterLead
             string startDate = /*!string.IsNullOrEmpty(txtFromDate.Text) ? txtFromDate.Text :*/ null;
             string endDate = /*!string.IsNullOrEmpty(txtToDate.Text) ? txtToDate.Text :*/ null;
 
-            DataTable dtGrid = DBContext.GetData("uspGetReports", new object[] { projectID, startDate, endDate, null, null });
+            DataTable dtGrid = DBContext.GetData("uspGetReports", new object[] { projectID, startDate, endDate, null, null,RC.SelectedSiteLanguageId });
 
             string[] selectedColumns = new[] { "ReportID", "ReportName", "ProjectCode", "IsApproved", "Country", "ProjectID", "CreatedDate" };
             DataTable dtFiltered = new DataView(dtGrid).ToTable(true, selectedColumns);
@@ -80,7 +80,7 @@ namespace SRFROWCA.ClusterLead
             if (Request.QueryString["pid"] != null)
                 int.TryParse(Request.QueryString["pid"].ToString(), out projectID);
 
-            DataTable dtResults = DBContext.GetData("uspGetReports", new object[] { Convert.ToString(projectID), null, null , null, null});
+            DataTable dtResults = DBContext.GetData("uspGetReports", new object[] { Convert.ToString(projectID), null, null , null, null, RC.SelectedSiteLanguageId});
 
             if (dtResults.Rows.Count > 0)
             {
@@ -100,7 +100,7 @@ namespace SRFROWCA.ClusterLead
                 if (Request.QueryString["pid"] != null)
                     int.TryParse(Request.QueryString["pid"].ToString(), out projectID);
 
-                DataTable dtResults = DBContext.GetData("uspGetReports", new object[] { Convert.ToString(projectID), null, null, Convert.ToInt32(e.CommandArgument), null });
+                DataTable dtResults = DBContext.GetData("uspGetReports", new object[] { Convert.ToString(projectID), null, null, Convert.ToInt32(e.CommandArgument), null, RC.SelectedSiteLanguageId });
 
                 if (dtResults.Rows.Count > 0)
                 {
@@ -108,6 +108,10 @@ namespace SRFROWCA.ClusterLead
                     Response.AddHeader("Content-Disposition", string.Format("attachment;filename=Project-{0}-{1}.pdf", UserInfo.CountryName, DateTime.Now.ToString("yyyyMMddHHmmss")));
                     Response.BinaryWrite(WriteDataEntryPDF.GeneratePDF(dtResults, projectID, Convert.ToInt32(e.CommandArgument)).ToArray());
                 }
+            }
+            else if (e.CommandName == "ViewReport")
+            {
+                Response.Redirect("~/ClusterLead/ReportDetails.aspx?rid=" + Convert.ToString(e.CommandArgument));
             }
         }
 

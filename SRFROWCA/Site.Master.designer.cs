@@ -1156,6 +1156,15 @@ namespace SRFROWCA {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liProjectXMLFeeds;
         
         /// <summary>
+        /// localProjectXMLFeed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localProjectXMLFeed;
+        
+        /// <summary>
         /// liProgressSummary control.
         /// </summary>
         /// <remarks>
@@ -1163,6 +1172,15 @@ namespace SRFROWCA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liProgressSummary;
+        
+        /// <summary>
+        /// localProjectSummary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localProjectSummary;
         
         /// <summary>
         /// liPublicAllData control.
