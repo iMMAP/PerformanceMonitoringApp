@@ -350,6 +350,11 @@ namespace SRFROWCA.Pages
             DataTable dt = DBContext.GetData("GetIPData", new object[] { UserInfo.EmergencyCountry, locationIds, yearId, monthId,
                                                                         locIdsNotIncluded, RC.SelectedSiteLanguageId, userId,
                                                                         UserInfo.Organization, projectId});
+            if (dt.Rows.Count <= 0 && !string.IsNullOrEmpty(locationIds))
+            {
+                ShowMessage("Are you sure you have activites for this project. Please click on Manage Activites to select the activities you want to report on!", RC.NotificationType.Error, false);
+            }
+
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
         private void AddDynamicColumnsInGrid(DataTable dt)
@@ -815,9 +820,9 @@ namespace SRFROWCA.Pages
             //lblLocAdmin2.Text = UserInfo.CountryName + " " + (string)GetLocalResourceObject("AddActivities_PopulateAdmin2__Admin_2_Locations");
 
         }
-        private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success)
+        private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
         {
-            RC.ShowMessage(Page, typeof(Page), UniqueID, message, notificationType, true, 500);
+            RC.ShowMessage(Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
         }
 
         #endregion

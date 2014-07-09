@@ -7,6 +7,7 @@
     <!-- ace styles -->
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+
     <div class="breadcrumbs" id="breadcrumbs">
         <script type="text/javascript">
             try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
@@ -42,8 +43,8 @@
                             <asp:Localize ID="localTemplateInstructions" runat="server" Text="Please download the template to upload data!"></asp:Localize></h3>
                         <hr />
                         <div class="space"></div>
-                        <h4 class="smaller">
-                            <asp:Localize ID="localDownloadItems" runat="server" Text="In this template you will have:"></asp:Localize></h4>
+                        <h4 class="smaller"><b>
+                            <asp:Localize ID="localDownloadItems" runat="server" Text="In this template you will have:"></asp:Localize></b> </h4>
 
                         <ul class="list-unstyled spaced inline bigger-110 margin-15">
                             <li>
@@ -98,6 +99,11 @@
                             </li>
                         </ul>
                         <div class="space"></div>
+                        <div>
+                            <h4 class="smaller"><b>Locations You Want To Report ON:</b></h4>
+                            <asp:CheckBoxList ID="cblLocations" runat="server" RepeatColumns="6"></asp:CheckBoxList>
+                        </div>
+                        <div class="space"></div>
                         <div class="center">
                             <asp:Button ID="btnDownloadTemplage" runat="server" Text="Download Template" CssClass="btn btn-primary" OnClick="btnDownload_Click" />
                         </div>
@@ -146,7 +152,7 @@
                             </ul>
                         </div>
                         <div>Select The Month To Upload Data.</div>
-                        
+
                         <div class="center">
                             <asp:FileUpload ID="fuAchieved" runat="server" class="btn btn-grey" Enabled="false" />
                         </div>
