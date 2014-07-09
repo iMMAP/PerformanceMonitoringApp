@@ -171,6 +171,12 @@
   <data name="localContactUsResource1.Text" xml:space="preserve">
     <value>Contact Us</value>
   </data>
+  <data name="localProjectXMLFeedResource1.Text" xml:space="preserve">
+							<value>Project XML Feeds</value>
+						</data>
+  <data name="localProjectSummaryResource1.Text" xml:space="preserve">
+							<value>Progress Summary</value>
+						</data>
   <data name="localDashboardOprPresenceResource1.Text" xml:space="preserve">
     <value>Operational Presence</value>
   </data>

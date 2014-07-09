@@ -368,6 +368,7 @@
     <Content Include="Anonymous\AllData.aspx" />
     <Content Include="ClusterLead\AddSRPActivitiesFromMasterList.aspx" />
     <Content Include="ClusterLead\AddSRPActivity.aspx" />
+    <Content Include="ClusterLead\ReportDetails.aspx" />
     <Content Include="ClusterLead\SumOfCountryIndicators.aspx" />
     <Content Include="ClusterLead\UploadAchieved.aspx" />
     <Content Include="ClusterLead\ValidateIndicators.aspx" />
@@ -1325,6 +1326,13 @@
     </Compile>
     <Compile Include="ClusterLead\AddSRPActivity.aspx.designer.cs">
       <DependentUpon>AddSRPActivity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClusterLead\ReportDetails.aspx.cs">
+      <DependentUpon>ReportDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClusterLead\ReportDetails.aspx.designer.cs">
+      <DependentUpon>ReportDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="ClusterLead\SumOfCountryIndicators.aspx.cs">
       <DependentUpon>SumOfCountryIndicators.aspx</DependentUpon>
