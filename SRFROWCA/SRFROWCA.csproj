@@ -164,6 +164,7 @@
     <Content Include="Admin\Organization\AddEditOrganization.aspx" />
     <Content Include="Admin\Organization\OrganizationList.aspx" />
     <Content Include="Admin\PriorityActivities.aspx" />
+    <Content Include="Admin\ProgressSummary.aspx" />
     <Content Include="Admin\ProjectXMLFeeds.aspx" />
     <Content Include="Anonymous\AllDataPublic.aspx" />
     <Content Include="App_Readme\Elmah.txt" />
@@ -359,12 +360,14 @@
     <Content Include="ClusterLead\ClusterIndicatorTargets.aspx" />
     <Content Include="ClusterLead\ManageActivitiesClsuterLead.aspx" />
     <Content Include="ClusterLead\ProjectDetails.aspx" />
+    <Content Include="ClusterLead\ProjectReports.aspx" />
     <Content Include="ClusterLead\ProjectsListing.aspx" />
     <Content Include="Admin\UploadLocations.aspx" />
     <Content Include="Admin\UploadLogFrame.aspx" />
     <Content Include="Anonymous\AllData.aspx" />
     <Content Include="ClusterLead\AddSRPActivitiesFromMasterList.aspx" />
     <Content Include="ClusterLead\AddSRPActivity.aspx" />
+    <Content Include="ClusterLead\ReportDetails.aspx" />
     <Content Include="ClusterLead\SumOfCountryIndicators.aspx" />
     <Content Include="ClusterLead\UploadAchieved.aspx" />
     <Content Include="ClusterLead\ValidateIndicators.aspx" />
@@ -1190,6 +1193,13 @@
     <Compile Include="Admin\PriorityActivities.aspx.designer.cs">
       <DependentUpon>PriorityActivities.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\ProgressSummary.aspx.cs">
+      <DependentUpon>ProgressSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ProgressSummary.aspx.designer.cs">
+      <DependentUpon>ProgressSummary.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\ProjectXMLFeeds.aspx.cs">
       <DependentUpon>ProjectXMLFeeds.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1239,6 +1249,13 @@
     <Compile Include="ClusterLead\ProjectDetails.aspx.designer.cs">
       <DependentUpon>ProjectDetails.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ClusterLead\ProjectReports.aspx.cs">
+      <DependentUpon>ProjectReports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClusterLead\ProjectReports.aspx.designer.cs">
+      <DependentUpon>ProjectReports.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ClusterLead\ProjectsListing.aspx.cs">
       <DependentUpon>ProjectsListing.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1283,6 +1300,13 @@
     </Compile>
     <Compile Include="ClusterLead\AddSRPActivity.aspx.designer.cs">
       <DependentUpon>AddSRPActivity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClusterLead\ReportDetails.aspx.cs">
+      <DependentUpon>ReportDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClusterLead\ReportDetails.aspx.designer.cs">
+      <DependentUpon>ReportDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="ClusterLead\SumOfCountryIndicators.aspx.cs">
       <DependentUpon>SumOfCountryIndicators.aspx</DependentUpon>
