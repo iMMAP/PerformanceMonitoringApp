@@ -23,8 +23,8 @@
             <li><i class="icon-home home-icon"></i><a href="../Default.aspx">
                 <asp:Localize ID="localBreadCrumbHome" runat="server" Text="Home" meta:resourcekey="localBreadCrumbHomeResource1"></asp:Localize></a>
             </li>
-            <li class="active">
-                <asp:Localize ID="localBreadCrumbProjects" runat="server" Text="Projects" meta:resourcekey="localBreadCrumbProjectsResource1"></asp:Localize></li>
+            <li class="active"><a href="ProjectsListing.aspx">
+                <asp:Localize ID="localBreadCrumbProjects" runat="server" Text="Projects" meta:resourcekey="localBreadCrumbProjectsResource1"></asp:Localize></a></li>
         <li class="active">
                 <asp:Localize ID="localBreadCrumbProjectDetails" runat="server" Text="Project Details"></asp:Localize></li>
         
@@ -239,6 +239,7 @@
                             <asp:BoundField DataField="IsApproved" HeaderText="Is Approved" SortExpression="IsApproved" />
                             <asp:BoundField DataField="CreatedDate" HeaderText="Created On" SortExpression="CreatedDate" ></asp:BoundField>
                              <asp:TemplateField >
+
                                 <ItemTemplate>
                                      <asp:ImageButton ID="lnkViewDetails" runat="server" ImageUrl="~/assets/orsimages/view.png" CommandName="ViewReport"
                                                     CommandArgument='<%# Eval("ReportID") %>' />
@@ -246,7 +247,7 @@
                                    <%-- <asp:LinkButton ID="lnkVieDetails" runat="server" Text="View" CommandName="ViewProject"
                                         CommandArgument='<%# Eval("ProjectId") %>' meta:resourcekey="lnkVieDetailsResource1" />--%>
                                 </ItemTemplate>
-                            </asp:TemplateField>
+                                </asp:TemplateField>
                             <asp:TemplateField >
                                 <ItemTemplate>
                                      <asp:ImageButton ID="lnkPrint" runat="server" ImageUrl="~/assets/orsimages/pdf.png" CommandName="PrintReport"
@@ -254,6 +255,8 @@
                                             
                                  
                                 </ItemTemplate>
+                                
+
                             </asp:TemplateField>
                         </Columns>
                     </asp:GridView>

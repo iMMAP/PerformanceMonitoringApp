@@ -182,9 +182,11 @@
                             </asp:BoundField>
                             <asp:BoundField DataField="OrganizationName" HeaderText="Organization" SortExpression="OrganizationName"
                                 meta:resourcekey="BoundFieldResource3" />
-                            <asp:BoundField DataField="CurrentRequest" HeaderText="Requirements" SortExpression="CurrentRequest"
+                            <asp:BoundField DataField="CurrentRequest" HeaderText="Current Request" SortExpression="CurrentRequest"
                                 meta:resourcekey="BoundFieldResource5" />
-                            <asp:BoundField DataField="Funded" HeaderText="Funded (USD)" SortExpression="Funded"
+                             <asp:BoundField DataField="OriginalRequest" HeaderText="Original Request" SortExpression="OriginalRequest"
+                                meta:resourcekey="BoundFieldResource10" />
+                            <asp:BoundField DataField="Funded" HeaderText="Funded" SortExpression="Funded"
                                 meta:resourcekey="BoundFieldResource6" />
                             <asp:BoundField DataField="LocationName" HeaderText="Locations" meta:resourcekey="BoundFieldResource7" />
                             <asp:BoundField DataField="Contact" HeaderText="Contact" ItemStyle-Wrap="true" ItemStyle-Width="150px"

@@ -53,7 +53,12 @@ namespace SRFROWCA.ClusterLead
             DataTable dtGrid = DBContext.GetData("uspGetReports", new object[] { projectID, startDate, endDate, null, null,RC.SelectedSiteLanguageId });
 
             string[] selectedColumns = new[] { "ReportID", "ReportName", "ProjectCode", "IsApproved", "Country", "ProjectID", "CreatedDate" };
-            DataTable dtFiltered = new DataView(dtGrid).ToTable(true, selectedColumns);
+            DataTable dtFiltered = new DataTable();
+            try
+            {
+                dtFiltered = new DataView(dtGrid).ToTable(true, selectedColumns);
+            }
+            catch { }
 
             return dtFiltered;
         }
