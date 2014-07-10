@@ -152,19 +152,20 @@
                         $(this).text(city1[1]);
 
                         // Add city name after every two columns (first is T and second is A)
-                        if (j % 2 === 0) {
-                            list += '<th colspan="2" style="width:100px; text-align:center;">' + city1[0] + '</th>';
+                        if (j % 1 === 0) {
+                            list += '<th colspan="1" style="width:100px; text-align:center;">' + city1[0] + '</th>';
                         }
                     }
                 });
 
                 // Add header row in grid.
-                $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th style="width: 50px;">&nbsp;</th><th style="width: 100px;">&nbsp;</th><th style="width: 50px;">&nbsp;</th><th style="width: 260px;">&nbsp;</th><th style="width: 220px;">&nbsp;</th><th style="width: 50px;">&nbsp;</th>' + list + '</tr></thead>');
+                $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th style="width: 70px;">&nbsp;</th><th style="width: 260px;">&nbsp;</th><th style="width: 260px;">&nbsp;</th><th style="width: 70px;">&nbsp;</th><th style="width: 40px;">&nbsp;</th>' + list + '</tr></thead>');
             }
         }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server" border="1">
+
     <div class="page-content">
         <div class="row">
             <div class="col-sm-3">
@@ -224,24 +225,24 @@
                                 CausesValidation="False" OnClick="lnkLanguageFrench_Click" meta:resourcekey="lnkLanguageFrenchResource1"></asp:LinkButton>
                         </div>
                     </div>
+
                     <div class="widget-body">
                         <div class="widget-main">
                             <div class="pull-left">
                                 <asp:Button ID="btnOpenLocations" runat="server" Text="Locations" CausesValidation="False"
                                     CssClass="btn btn-primary" OnClick="btnLocation_Click" OnClientClick="needToConfirm = false;"
                                     meta:resourcekey="btnOpenLocationsResource1" />
-                                <%--<asp:Localize ID="locaNoTargetMessage" runat="server" Text="&lt;div style=&quot;color:Red;&quot;&gt;To select an activity for  for which you do not know the target, please put a zero (0).&lt;/div&gt;" meta:resourcekey="locaNoTargetMessageResource1"></asp:Localize>--%>
+                                <asp:Localize ID="locaNoTargetMessage" runat="server" Text="&lt;div style=&quot;color:Red;&quot;&gt;Please Click On Locations Button To Add Locations To Select, Add, Edit your Activities" meta:resourcekey="locaNoTargetMessageResource1"></asp:Localize>
                             </div>
                             <div class="pull-right">
                                 <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
                                     CausesValidation="False" Width="120px" CssClass="btn btn-primary" meta:resourcekey="btnSaveResource1" />
                                 <asp:Localize ID="locbtnCloseWindow" runat="server" Text="&lt;input type=&quot;button&quot; class=&quot;btn btn-primary&quot; value=&quot;Close Window&quot; id=&quot;close&quot; onclick=&quot;window.close()&quot; /&gt;"
                                     meta:resourcekey="locbtnCloseWindowResource1"></asp:Localize>
-
                             </div>
-
                             <div class="spacer" style="clear: both;">
                             </div>
+                            <br />
                             <div id="divMsg">
                             </div>
                             <div id="scrolledGridView" style="overflow-x: auto; width: 100%">
@@ -258,11 +259,7 @@
                                             ItemStyle-Width="1px" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden"
                                             meta:resourcekey="BoundFieldResource2"></asp:BoundField>
                                         <asp:BoundField DataField="ObjAndPrId" HeaderText="objprid" ItemStyle-Width="1px"
-                                            ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource2"></asp:BoundField>
-                                        <asp:BoundField DataField="SecondaryCluster" HeaderText="Cluster Partner" ItemStyle-Width="40px"
-                                            meta:resourcekey="BoundFieldResource3">
-                                            <ItemStyle Width="40px"></ItemStyle>
-                                        </asp:BoundField>
+                                            ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource2"></asp:BoundField>                                        
                                         <asp:TemplateField ItemStyle-Wrap="false" meta:resourcekey="TemplateFieldResource2">
                                             <ItemTemplate>
                                                 <asp:Image ID="imgObjective" runat="server" AlternateText="Obj" meta:resourcekey="imgObjectiveResource1" />
@@ -321,7 +318,6 @@
                 </div>
             </div>
         </div>
-
     </div>
     <table>
         <tr>

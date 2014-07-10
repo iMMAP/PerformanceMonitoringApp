@@ -94,6 +94,15 @@ namespace SRFROWCA.OPS {
         protected global::System.Web.UI.WebControls.Button btnOpenLocations;
         
         /// <summary>
+        /// locaNoTargetMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locaNoTargetMessage;
+        
+        /// <summary>
         /// btnSave control.
         /// </summary>
         /// <remarks>

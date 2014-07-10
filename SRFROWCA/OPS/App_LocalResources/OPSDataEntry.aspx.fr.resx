@@ -248,7 +248,7 @@
   </data>
   <data name="locaNoTargetMessageResource1.Text" xml:space="preserve">
     <value>
-                &lt;div style="color:Red;"&gt;Mettez un zéro (0), pour sélectionner une activité pour lequel vous ne connaissez pas la cible.&lt;/div&gt;
+                &lt;div style="color:Red;"&gt;Please Click On Locations Button To Add Locations To Select, Add, Edit your Activities.&lt;/div&gt;
             </value>
   </data>
   <data name="locbtnCloseWindowResource1.Text" xml:space="preserve">
