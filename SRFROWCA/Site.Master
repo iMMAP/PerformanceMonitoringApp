@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
     <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/blitzer/jquery-ui.min.css" />
     <!-- ORS styles -->
-   
+
     <!-- ace styles -->
     <!--[if !IE] -->
     <script type="text/javascript">
@@ -50,7 +50,7 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-     <link rel="stylesheet" href="<%= BaseURL %>/assets/css/ors.css" />
+    <link rel="stylesheet" href="<%= BaseURL %>/assets/css/ors.css" />
     <form runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
@@ -77,7 +77,7 @@
                                         <li class="dropdown-header"><i class="icon-warning-sign"></i>Notifications </li>
                                     </HeaderTemplate>
                                     <ItemTemplate>
-                                        <li><a href="<%#Eval("PageURL")%>"> 
+                                        <li><a href="<%#Eval("PageURL")%>">
                                             <span class="msg-body"><span class="msg-title"><span class="blue">
                                                 <%#Eval("Notification1")%></span>
                                             </span></span></a></li>
@@ -268,6 +268,22 @@
                                 </a></li>
                             </ul>
                         </li>
+                        <li id="liCountryConsolidatedReports" runat="server"><a id="menueCountryConsolidatedReports" runat="server" href="#"
+                            class="dropdown-toggle"><i class="icon-list-alt"></i><span class="menu-text">Consolidated Reports
+                            </span><b class="arrow icon-angle-down"></b></a>
+                            <ul class="submenu">
+                                <li id="liCountryConsolidatedBurkina" runat="server"><a href="<%=BaseURL %>/Reports/CountryReports.aspx?cid=2"><span class="menu-text">Burkina Faso</span></a></li>
+                                <li id="liCountryConsolidatedCameroon" runat="server"><a href="<%=BaseURL %>/Reports/CountryReports.aspx?cid=3"><span class="menu-text">Cameroon</span></a></li>
+                                <li id="liCountryConsolidatedChad" runat="server"><a href="<%=BaseURL %>/Reports/CountryReports.aspx?cid=4"><span class="menu-text">Chad</span></a></li>
+                                <li id="liCountryConsolidatedGambia" runat="server"><a href="<%=BaseURL %>/Reports/CountryReports.aspx?cid=5"><span class="menu-text">Gambia</span></a></li>
+                                <li id="liCountryConsolidatedMali" runat="server"><a href="<%=BaseURL %>/Reports/CountryReports.aspx?cid=6"><span class="menu-text">Mali</span></a></li>
+                                <li id="liCountryConsolidatedMauritania" runat="server"><a href="<%=BaseURL %>/Reports/CountryReports.aspx?cid=7"><span class="menu-text">Mauritania</span></a></li>
+                                <li id="liCountryConsolidatedNiger" runat="server"><a href="<%=BaseURL %>/Reports/CountryReports.aspx?cid=8"><span class="menu-text">Niger</span></a></li>
+                                <li id="liCountryConsolidatedNigeria" runat="server"><a href="<%=BaseURL %>/Reports/CountryReports.aspx?cid=9"><span class="menu-text">Nigeria</span></a></li>
+                                <li id="liCountryConsolidatedSenegal" runat="server"><a href="<%=BaseURL %>/Reports/CountryReports.aspx?cid=10"><span class="menu-text">Senegal</span></a></li>
+                                <li id="liCountryConsolidatedSahel" runat="server"><a href="<%=BaseURL %>/Reports/CountryReports.aspx?cid=567"><span class="menu-text">Sahel</span></a></li>
+                            </ul>
+                        </li>
                         <li id="liPivotTables" runat="server"><a id="menuePivotTables" runat="server" href="#"
                             class="dropdown-toggle"><i class="icon-table"></i><span class="menu-text">
                                 <asp:Localize ID="localPivotTables" runat="server" Text="Pivot Tables" meta:resourcekey="localPivotTablesResource1"></asp:Localize>
@@ -294,12 +310,12 @@
 
                         <li id="liFundingStatus" runat="server"><a href="~/LeadPages/FundingListing.aspx"
                             id="AFundingStatus" runat="server"><i class="icon-list-alt"></i><span class="menu-text">Funding Status</span> </a></li>
-                         <li id="liOrganizationList" runat="server"><a href='<%=BaseURL%>/Admin/organization/OrganizationList.aspx'
+                        <li id="liOrganizationList" runat="server"><a href='<%=BaseURL%>/Admin/organization/OrganizationList.aspx'
                             id="menueOrganizationList"><i class="icon-user"></i><span class="menu-text">
-                                 <asp:Localize ID="localOrganizationsResource1" runat="server" Text="Organizations" meta:resourcekey="localOrganizationsResource1"></asp:Localize>
+                                <asp:Localize ID="localOrganizationsResource1" runat="server" Text="Organizations" meta:resourcekey="localOrganizationsResource1"></asp:Localize>
                             </span></a></li>
 
-                          <li id="liEmergency" runat="server"><a id="A2" runat="server" href="#"
+                        <li id="liEmergency" runat="server"><a id="A2" runat="server" href="#"
                             class="dropdown-toggle"><i class="icon-list-alt"></i><span class="menu-text">
                                 <asp:Localize ID="Localize2" runat="server" Text="Emergency" meta:resourcekey="localMasterEmergencyResource1"></asp:Localize>
                             </span><b class="arrow icon-angle-down"></b></a>
@@ -316,9 +332,9 @@
                                 </span></a></li>
                             </ul>
                         </li>
-                         <li id="liActivities" runat="server"><a href="~/Admin/ActivityListing.aspx"
+                        <li id="liActivities" runat="server"><a href="~/Admin/ActivityListing.aspx"
                             id="A3" runat="server"><i class="icon-list-alt"></i><span class="menu-text">Activities</span> </a></li>
-                         <li id="liIndicators" runat="server"><a href="~/Admin/IndicatorListing.aspx"
+                        <li id="liIndicators" runat="server"><a href="~/Admin/IndicatorListing.aspx"
                             id="A4" runat="server"><i class="icon-list-alt"></i><span class="menu-text">Indicators</span> </a></li>
 
                         <li id="liBulkImport" runat="server"><a href="~/ClusterLead/UploadAchieved.aspx" id="menueBulkImport"
@@ -327,16 +343,16 @@
                         <li id="liBulkImportUser" runat="server"><a href="~/Pages/UploadAchived.aspx" id="A1"
                             runat="server"><i class="icon-list-alt"></i><span class="menu-text">Bulk Import Data</span>
                         </a></li>
-                         <li id="liProjectXMLFeeds" runat="server"><a href='<%=BaseURL%>/Admin/ProjectXMLFeeds.aspx'
-                            id="menuProjectXMLFeeds" ><i class="icon-list-alt"></i><span class="menu-text">Project XML Feeds</span> </a></li>
+                        <li id="liProjectXMLFeeds" runat="server"><a href='<%=BaseURL%>/Admin/ProjectXMLFeeds.aspx'
+                            id="menuProjectXMLFeeds"><i class="icon-list-alt"></i><span class="menu-text">Project XML Feeds</span> </a></li>
                         <li id="liProgressSummary" runat="server"><a href='<%=BaseURL%>/Admin/ProgressSummary.aspx'
-                            id="menuProjectSummary" ><i class="icon-table"></i><span class="menu-text">Progress Summary</span> </a></li>
+                            id="menuProjectSummary"><i class="icon-table"></i><span class="menu-text">Progress Summary</span> </a></li>
                         <li id="liPublicAllData" runat="server"><a href="~/Anonymous/AllData.aspx" id="menuePublicAllData"
                             runat="server"><i class="icon-table"></i>
                             <asp:Localize ID="Localize1" runat="server" Text="Custom Report" meta:resourcekey="localReportCustomReportResource1"></asp:Localize>
                         </a></li>
-                        <%--<li id="liCountryReports" runat="server"><a id="menueCountryReports" runat="server" href="~/Reports/CountriesForReports.aspx">
-                                    <i class="icon-angle-double-right"></i>Country Reports</a></li>--%>
+
+                        
                         <li><a href="<%=BaseURL %>/ContactUs/Contactus.aspx"><i class="icon-envelope-alt"></i><span
                             class="menu-text">
                             <asp:Localize ID="localContactUs" runat="server" Text="Contact Us" meta:resourcekey="localContactUsResource1"></asp:Localize></span> </a></li>
@@ -345,7 +361,7 @@
 
                         <li id="liORSDocuments" runat="server"><a href="~/ORSDocuments/orsdocs.aspx" id="menueORSDocuments"
                             runat="server"><i class="icon-list-alt"></i><span class="menu-text">Documents
-                                </span>
+                            </span>
                         </a></li>
                     </ul>
                     <!-- /.nav-list -->

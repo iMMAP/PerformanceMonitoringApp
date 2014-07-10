@@ -805,6 +805,114 @@ namespace SRFROWCA {
         protected global::System.Web.UI.WebControls.Localize localReportCustomReport;
         
         /// <summary>
+        /// liCountryConsolidatedReports control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCountryConsolidatedReports;
+        
+        /// <summary>
+        /// menueCountryConsolidatedReports control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueCountryConsolidatedReports;
+        
+        /// <summary>
+        /// liCountryConsolidatedBurkina control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCountryConsolidatedBurkina;
+        
+        /// <summary>
+        /// liCountryConsolidatedCameroon control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCountryConsolidatedCameroon;
+        
+        /// <summary>
+        /// liCountryConsolidatedChad control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCountryConsolidatedChad;
+        
+        /// <summary>
+        /// liCountryConsolidatedGambia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCountryConsolidatedGambia;
+        
+        /// <summary>
+        /// liCountryConsolidatedMali control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCountryConsolidatedMali;
+        
+        /// <summary>
+        /// liCountryConsolidatedMauritania control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCountryConsolidatedMauritania;
+        
+        /// <summary>
+        /// liCountryConsolidatedNiger control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCountryConsolidatedNiger;
+        
+        /// <summary>
+        /// liCountryConsolidatedNigeria control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCountryConsolidatedNigeria;
+        
+        /// <summary>
+        /// liCountryConsolidatedSenegal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCountryConsolidatedSenegal;
+        
+        /// <summary>
+        /// liCountryConsolidatedSahel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCountryConsolidatedSahel;
+        
+        /// <summary>
         /// liPivotTables control.
         /// </summary>
         /// <remarks>
@@ -1156,15 +1264,6 @@ namespace SRFROWCA {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liProjectXMLFeeds;
         
         /// <summary>
-        /// localProjectXMLFeed control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localProjectXMLFeed;
-        
-        /// <summary>
         /// liProgressSummary control.
         /// </summary>
         /// <remarks>
@@ -1172,15 +1271,6 @@ namespace SRFROWCA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liProgressSummary;
-        
-        /// <summary>
-        /// localProjectSummary control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localProjectSummary;
         
         /// <summary>
         /// liPublicAllData control.
