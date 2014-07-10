@@ -248,8 +248,15 @@ namespace SRFROWCA.Common
 
                 if (rows.Length > 0)
                 {
+                    DataTable dtFiltered = new DataTable();
                     string[] selectedColumns = new[] { "ReportID", "ReportName", "OrganizationName", "Month", "CreatedBy", "CreatedDate", "UpdatedBy", "UpdatedDate" };
-                    DataTable dtFiltered = new DataView(rows.CopyToDataTable<DataRow>()).ToTable(true, selectedColumns);
+
+                    try
+                    {
+                        dtFiltered = new DataView(rows.CopyToDataTable<DataRow>()).ToTable(true, selectedColumns);
+
+                    }
+                    catch { }
 
                     for (int i = 0; i < dtFiltered.Rows.Count; i++)
                     {

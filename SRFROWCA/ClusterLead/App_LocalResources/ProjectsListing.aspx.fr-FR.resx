@@ -160,7 +160,16 @@
     <value />
   </data>
   <data name="BoundFieldResource5.HeaderText" xml:space="preserve">
-    <value>Requirements</value>
+    <value>Current Request</value>
+  </data>
+  <data name="BoundFieldResource10.AccessibleHeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BoundFieldResource10.FooterText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BoundFieldResource10.HeaderText" xml:space="preserve">
+    <value>Original Request</value>
   </data>
   <data name="BoundFieldResource6.AccessibleHeaderText" xml:space="preserve">
     <value />
@@ -169,7 +178,7 @@
     <value />
   </data>
   <data name="BoundFieldResource6.HeaderText" xml:space="preserve">
-    <value>Financé (En Dollars)</value>
+    <value>Financé</value>
   </data>
   <data name="BoundFieldResource7.AccessibleHeaderText" xml:space="preserve">
     <value />
