@@ -214,7 +214,9 @@ namespace SRFROWCA.Pages
 
             var result = DateTime.Now.ToString("MMMM", new CultureInfo(RC.SiteCulture));
             result = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(result);
-            ddlMonth.SelectedIndex = i > -1 ? i : ddlMonth.Items.IndexOf(ddlMonth.Items.FindByText(result));
+            int monthNumber = MonthNumber.GetMonthNumber(result);
+            monthNumber = monthNumber == 1? monthNumber : monthNumber -1;
+            ddlMonth.SelectedIndex = i > -1 ? i : ddlMonth.Items.IndexOf(ddlMonth.Items.FindByValue(monthNumber.ToString()));
         }
         private DataTable GetMonth()
         {
