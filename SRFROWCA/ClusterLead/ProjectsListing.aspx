@@ -52,6 +52,16 @@
                                                                     <table class="width-100">
                                                                         <tr>
                                                                             <td width="150px">
+                                                                                <asp:Localize ID="localCountry" Visible="false" runat="server" Text="Country:" meta:resourcekey="localCountryResource1"></asp:Localize>
+                                                                            </td>
+                                                                            <td>
+                                                                                <asp:DropDownList Visible ="false" ID="ddlCountry" runat="server" CssClass="width-90" AutoPostBack="True"
+                                                                                    OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" meta:resourcekey="ddlCountryResource1">
+                                                                                </asp:DropDownList>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td width="150px">
                                                                                 <asp:Localize ID="localAdmin1" runat="server" Text="Region:" meta:resourcekey="localAdmin1Resource1"></asp:Localize>
                                                                             </td>
                                                                             <td>

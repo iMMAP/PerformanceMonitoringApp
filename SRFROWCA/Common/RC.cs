@@ -47,6 +47,13 @@ namespace SRFROWCA.Common
             return false;
         }
 
+        internal static bool IsRegionalClusterLead(IPrincipal iPrincipal)
+        {
+            if (iPrincipal.IsInRole("RegionalClusterLead"))
+                return true;
+            return false;
+        }
+
         internal static bool IsOCHAStaff(IPrincipal iPrincipal)
         {
             if (iPrincipal.IsInRole("OCHACountryStaff"))
