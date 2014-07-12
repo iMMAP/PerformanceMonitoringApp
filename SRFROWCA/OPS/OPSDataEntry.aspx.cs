@@ -169,18 +169,6 @@ namespace SRFROWCA.OPS
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            //if (!DataIsValid)
-            //{
-            //    ShowMessage("Annual Target for at least one location is mandatory of selected activities!");
-            //}
-            //else
-            //{
-            SaveData();
-            //}
-        }
-
-        private void SaveData()
-        {
             using (TransactionScope scope = new TransactionScope())
             {
                 List<int> locationIds = GetLocationIdsFromGrid();
@@ -202,6 +190,61 @@ namespace SRFROWCA.OPS
                 ShowMessage("Your Data Saved Successfuly!");
             }
         }
+
+        //private bool DataIsValid()
+        //{
+        //    int activityDataId = 0;
+        //    foreach (GridViewRow row in gvActivities.Rows)
+        //    {
+        //        if (row.RowType == DataControlRowType.DataRow)
+        //        {
+        //            //activityDataId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString());
+        //            DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
+
+        //            bool isAdded = false;
+        //            foreach (DataColumn dc in dtActivities.Columns)
+        //            {
+        //                string colName = dc.ColumnName;
+        //                int locationId = 0;
+
+        //                CheckBox cbAccum = row.FindControl(colName) as CheckBox;
+        //                if (cbAccum != null && cbAccum.Checked)
+        //                {
+        //                    isAdded = true;
+        //                }
+
+        //                if (isAdded)
+        //                {
+        //                    HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
+        //                    if (hf != null)
+        //                    {
+        //                        locationId = Convert.ToInt32(hf.Value);
+        //                    }
+
+        //                    decimal? fullYearTarget = null;
+        //                    TextBox t = row.FindControl(colName) as TextBox;
+        //                    if (t != null)
+        //                    {
+        //                        if (!string.IsNullOrEmpty(t.Text))
+        //                        {
+        //                            fullYearTarget = Convert.ToDecimal(t.Text, CultureInfo.InvariantCulture);
+        //                        }
+        //                    }
+
+        //                    if (locationId > 0)
+        //                    {
+        //                        decimal? midYearTarget = null;
+        //                        fullYearTarget = fullYearTarget == null ? 0 : fullYearTarget;
+        //                        DBContext.Add("InsertOPSReportDetails", new object[] { OPSReportId, activityDataId, locationId,
+        //                                                                                    midYearTarget, fullYearTarget, 1, DBNull.Value });
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+
+        //    return true;
+        //}
 
         private List<int> GetLocationIdsFromGrid()
         {
@@ -823,7 +866,7 @@ namespace SRFROWCA.OPS
                 {
                     activityDataId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString());
                     DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
-                    
+
                     bool isAdded = false;
                     foreach (DataColumn dc in dtActivities.Columns)
                     {
@@ -1183,8 +1226,6 @@ namespace SRFROWCA.OPS
         }
 
         #endregion
-
-        public bool DataIsValid { get; set; }
     }
 
     public class GridViewTemplate : ITemplate

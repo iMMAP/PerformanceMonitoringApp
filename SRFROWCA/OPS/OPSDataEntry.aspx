@@ -232,7 +232,7 @@
                                 <asp:Button ID="btnOpenLocations" runat="server" Text="Locations" CausesValidation="False"
                                     CssClass="btn btn-primary" OnClick="btnLocation_Click" OnClientClick="needToConfirm = false;"
                                     meta:resourcekey="btnOpenLocationsResource1" />
-                                <asp:Localize ID="locaNoTargetMessage" runat="server" Text="&lt;div style=&quot;color:Red;&quot;&gt;Please Click On Locations Button To Add Locations To Select, Add, Edit your Activities" meta:resourcekey="locaNoTargetMessageResource1"></asp:Localize>
+                                <asp:Localize ID="locaNoTargetMessage" runat="server" Text="&lt;div style=&quot;color:Red;&quot;&gt;Please click on Locations button to add locations. You will then be able to add or edit your project activities." meta:resourcekey="locaNoTargetMessageResource1"></asp:Localize>
                             </div>
                             <div class="pull-right">
                                 <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"

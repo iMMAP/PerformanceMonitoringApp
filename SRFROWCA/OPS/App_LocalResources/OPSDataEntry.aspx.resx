@@ -248,7 +248,7 @@
   </data>
   <data name="locaNoTargetMessageResource1.Text" xml:space="preserve">
     <value>
-                &lt;div style="color:Red;"&gt;Please Click On Locations Button To Add Locations To Select, Add, Edit your Activities&lt;/div&gt;
+                &lt;div style="color:Red;"&gt;Please click on Locations button to add locations. You will then be able to add or edit your project activities.&lt;/div&gt;
             </value>
   </data>
   <data name="locbtnCloseWindowResource1.Text" xml:space="preserve">
