@@ -22,6 +22,7 @@ namespace SRFROWCA.ClusterLead
 
             PopulateControls();
             LoadProjects();
+            
             if (RC.IsCountryAdmin(User) || RC.IsOCHAStaff(User))
             {
                 PopulateClusters();
@@ -30,6 +31,12 @@ namespace SRFROWCA.ClusterLead
             {
                 ddlClusters.Visible = false;
                 divClusters.Visible = false;
+            }
+
+            if (RC.IsRegionalClusterLead(User))
+            {
+                localCountry.Visible = true;
+                ddlCountry.Visible = true;
             }
         }
 
@@ -43,6 +50,8 @@ namespace SRFROWCA.ClusterLead
                 divOrganization.Visible = false;
             }
 
+            if (RC.IsRegionalClusterLead(User))
+                PopulateCountries();
 
             PopulateLocations();
             //PopulateProjectStatus();
@@ -64,6 +73,14 @@ namespace SRFROWCA.ClusterLead
             }
             int? clusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
 
+            if (ddlCountry.Visible)
+            {
+                tempVal = 0;
+                int.TryParse(ddlCountry.SelectedValue, out tempVal);
+            }
+
+            int? countryID = tempVal > 0 ? tempVal : UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry: (int?)null;
+
             DataTable dt = RC.GetProjectsOrganizations(UserInfo.EmergencyCountry, clusterId);
             UI.FillOrganizations(ddlOrg, dt);
 
@@ -74,9 +91,35 @@ namespace SRFROWCA.ClusterLead
             }
         }
 
+        private void PopulateCountries()
+        {
+            int tempVal = 0;
+            if (ddlClusters.Visible)
+            {
+                int.TryParse(ddlClusters.SelectedValue, out tempVal);
+            }
+            int? clusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
+
+            //DataTable dt = RC.GetLocations(User, 2);
+            UI.FillCountry(ddlCountry);
+
+            if (ddlCountry.Items.Count > 0)
+            {
+                ListItem item = new ListItem("All", "0");
+                ddlCountry.Items.Insert(0, item);
+            }
+        }
+
         private void PopulateLocations()
         {
-            UI.FillAdmin1(ddlAdmin1, UserInfo.Country);
+            int tempVal = 0;
+            if (ddlCountry.Visible)
+            {
+                int.TryParse(ddlCountry.SelectedValue, out tempVal);
+            }
+            int countryID = tempVal > 0 ? tempVal : UserInfo.Country > 0 ? UserInfo.Country : 0;
+
+            UI.FillAdmin1(ddlAdmin1, countryID);
 
             ListItem item = new ListItem("All", "0");
             if (ddlAdmin1.Items.Count > 0)
@@ -132,6 +175,17 @@ namespace SRFROWCA.ClusterLead
         protected void ddlAdmin1_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadProjects();
+        }
+
+        protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlCountry.SelectedIndex > -1)
+            {
+                //UserInfo.Country = Convert.ToInt32(ddlCountry.SelectedValue);
+                PopulateOrganizations();
+                PopulateLocations();
+                LoadProjects();
+            }
         }
 
         //protected void ddlAdmin2_SelectedIndexChanged(object sender, EventArgs e)
@@ -230,6 +284,13 @@ namespace SRFROWCA.ClusterLead
             }
             int? clusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
 
+            if (ddlCountry.Visible)
+            {
+                tempVal = 0;
+                int.TryParse(ddlCountry.SelectedValue, out tempVal);
+            }
+            int? countryID = tempVal > 0 ? tempVal : UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
+
             string projCode = txtProjectCode.Text.Trim().Length > 0 ? txtProjectCode.Text.Trim() : null;
             int? orgId = RC.GetSelectedIntVal(ddlOrg);
 
@@ -256,12 +317,12 @@ namespace SRFROWCA.ClusterLead
             int? cbReported = cblReportingStatus.SelectedIndex > -1 ? RC.GetSelectedIntVal(cblReportingStatus) : (int?)null;
             int? cbFunded = cblFundingStatus.SelectedIndex > -1 ? RC.GetSelectedIntVal(cblFundingStatus) : (int?)null;
 
-            int? countryId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
+            //int? countryId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
 
             //return DBContext.GetData("GetProjects", new object[] {countryId, clusterId,projCode, orgId, admin1, admin2, 
             //                                                                DBNull.Value, cbFunded, cbReported, 1 });
 
-            return DBContext.GetData("GetProjects", new object[] {countryId, clusterId,projCode, orgId, admin1, DBNull.Value, 
+            return DBContext.GetData("GetProjects", new object[] {countryID, clusterId,projCode, orgId, admin1, DBNull.Value, 
                                                                             DBNull.Value, cbFunded, cbReported, 1 });
         }
 

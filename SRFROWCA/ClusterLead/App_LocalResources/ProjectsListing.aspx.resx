@@ -162,7 +162,7 @@
   <data name="BoundFieldResource5.HeaderText" xml:space="preserve">
     <value>Current Request</value>
   </data>
-   <data name="BoundFieldResource10.AccessibleHeaderText" xml:space="preserve">
+  <data name="BoundFieldResource10.AccessibleHeaderText" xml:space="preserve">
     <value />
   </data>
   <data name="BoundFieldResource10.FooterText" xml:space="preserve">
@@ -284,6 +284,9 @@
   </data>
   <data name="localAdmin1Resource1.Text" xml:space="preserve">
     <value>Region:</value>
+  </data>
+  <data name="localCountryResource1.Text" xml:space="preserve">
+    <value>Country:</value>
   </data>
   <data name="localBreadCrumbHomeResource1.Text" xml:space="preserve">
     <value>Home</value>

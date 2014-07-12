@@ -217,6 +217,7 @@ namespace SRFROWCA
             menuRegionalIndicators.Visible = isShow;
             liRegionalIndicators.Visible = isShow;
             liSumOfRegionalIndicators.Visible = isShow;
+            liCLprojectsListing.Visible = isShow;
             //liReportsTopIndicators1.Visible = isShow;
             //liReportsTopIndicatorsGeneral1.Visible = isShow;
             //liReportsTopIndicatorRegional1.Visible = isShow;
