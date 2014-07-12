@@ -52,6 +52,8 @@ namespace SRFROWCA.OPS
                 PopulateDropDowns();
             }
 
+            PopulateToolTips();
+
             UpdateClusterName();
             lblCluster.Text = OPSClusterNameLabel;
 
@@ -384,6 +386,12 @@ namespace SRFROWCA.OPS
             PopulatePriorities();
         }
 
+        private void PopulateToolTips()
+        {
+            ObjPrToolTip.ObjectivesToolTip(cblObjectives);
+            ObjPrToolTip.PrioritiesToolTip(cblPriorities);
+        }
+
         private int GetLocationId()
         {
             DataTable dt = DBContext.GetData("GetLocationIdOnName", new object[] { OPSCountryName });
@@ -456,6 +464,7 @@ namespace SRFROWCA.OPS
         {
             DataTable dt = GetActivities();
             GetReport(dt);
+            PopulateToolTips();
         }
 
         private string GetSelectedItems(object sender)
@@ -507,9 +516,19 @@ namespace SRFROWCA.OPS
         {
             string locationIds = GetSelectedItems(cbAdmin1Locaitons);
             string locIdsNotIncluded = GetNotSelectedItems(cbAdmin1Locaitons);
-
+            int yearId = 10; //2014
             DataTable dt = DBContext.GetData("GetOPSActivities", new object[] { OPSLocationEmergencyId, locationIds, locIdsNotIncluded, 
-                                                                            OPSProjectId, OPSEmergencyClusterId, RC.SelectedSiteLanguageId, OPSCountryName });
+                                                                            OPSProjectId, OPSEmergencyClusterId, RC.SelectedSiteLanguageId, OPSCountryName, yearId });
+            if (dt.Rows.Count <= 0 && string.IsNullOrEmpty(locationIds))
+            {
+                locaNoTargetMessage.Visible = true;
+                //ShowMessage("Please click on locations button and add locations to select/edit your activities/Indicators.", RC.NotificationType.Error, true, 5000);
+            }
+            else
+            {
+                locaNoTargetMessage.Visible = false;
+            }
+
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 
@@ -675,7 +694,8 @@ namespace SRFROWCA.OPS
 
         private void SaveReportMainInfo()
         {
-            OPSReportId = DBContext.Add("InsertOPSReport", new object[] { OPSLocationEmergencyId, OPSProjectId, OPSEmergencyClusterId, OPSUserId, RC.SelectedSiteLanguageId, DBNull.Value });
+            int yearId = 10; //2014
+            OPSReportId = DBContext.Add("InsertOPSReport", new object[] { OPSLocationEmergencyId, OPSProjectId, OPSEmergencyClusterId, OPSUserId, RC.SelectedSiteLanguageId, yearId, DBNull.Value });
         }
 
         private bool IsDataExistsToSave()
@@ -802,18 +822,15 @@ namespace SRFROWCA.OPS
                 if (row.RowType == DataControlRowType.DataRow)
                 {
                     activityDataId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString());
-
-                    //int colummCounts = gvActivities.Columns.Count;
                     DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
-                    List<KeyValuePair<int, decimal?>> dataSave = new List<KeyValuePair<int, decimal?>>();
-                    int i = 0;
+                    
                     bool isAdded = false;
                     foreach (DataColumn dc in dtActivities.Columns)
                     {
                         string colName = dc.ColumnName;
                         int locationId = 0;
 
-                        CheckBox cbAccum = row.FindControl(colName) as CheckBox;                        
+                        CheckBox cbAccum = row.FindControl(colName) as CheckBox;
                         if (cbAccum != null && cbAccum.Checked)
                         {
                             isAdded = true;
@@ -827,53 +844,22 @@ namespace SRFROWCA.OPS
                                 locationId = Convert.ToInt32(hf.Value);
                             }
 
-                            decimal? value = null;
+                            decimal? fullYearTarget = null;
                             TextBox t = row.FindControl(colName) as TextBox;
                             if (t != null)
                             {
                                 if (!string.IsNullOrEmpty(t.Text))
                                 {
-                                    value = Convert.ToDecimal(t.Text, CultureInfo.InvariantCulture);
+                                    fullYearTarget = Convert.ToDecimal(t.Text, CultureInfo.InvariantCulture);
                                 }
                             }
 
                             if (locationId > 0)
                             {
-                                dataSave.Add(new KeyValuePair<int, decimal?>(locationId, value));
-                                if (i == 1)
-                                {
-                                    i = 0;
-                                    int locationIdToSaveT = 0;
-                                    decimal? valToSaveMid2014 = null;
-                                    decimal? valToSave2014 = null;
-                                    int j = 0;
-                                    foreach (var item in dataSave)
-                                    {
-                                        if (j == 0)
-                                        {
-                                            locationIdToSaveT = item.Key;
-                                            valToSaveMid2014 = item.Value;
-                                            j++;
-                                        }
-                                        else
-                                        {
-                                            valToSave2014 = item.Value;
-                                            j = 0;
-                                        }
-                                    }
-
-                                    dataSave.Clear();
-                                    //if (!(valToSaveMid2014 == null && valToSave2014 == null))
-                                    {
-                                        valToSave2014 = valToSave2014 == null ? 0 : valToSave2014;
-                                        DBContext.Add("InsertOPSReportDetails", new object[] { OPSReportId, activityDataId, locationIdToSaveT,
-                                                                                            valToSaveMid2014, valToSave2014, 1, DBNull.Value });
-                                    }
-                                }
-                                else
-                                {
-                                    i += 1;
-                                }
+                                decimal? midYearTarget = null;
+                                fullYearTarget = fullYearTarget == null ? 0 : fullYearTarget;
+                                DBContext.Add("InsertOPSReportDetails", new object[] { OPSReportId, activityDataId, locationId,
+                                                                                            midYearTarget, fullYearTarget, 1, DBNull.Value });
                             }
                         }
                     }
@@ -885,7 +871,8 @@ namespace SRFROWCA.OPS
         {
             Session["dtOPSActivities"] = dt;
 
-            DataTable dtReport = DBContext.GetData("GetOPSReportId", new object[] { OPSLocationEmergencyId, OPSProjectId, OPSEmergencyClusterId });
+            int yearId = 10; //2014
+            DataTable dtReport = DBContext.GetData("GetOPSReportId", new object[] { OPSLocationEmergencyId, OPSProjectId, OPSEmergencyClusterId, yearId });
             if (dtReport.Rows.Count > 0)
             {
                 OPSReportId = string.IsNullOrEmpty(dtReport.Rows[0]["OPSReportId"].ToString()) ? 0 : Convert.ToInt32(dtReport.Rows[0]["OPSReportId"].ToString());
@@ -923,15 +910,15 @@ namespace SRFROWCA.OPS
 
                 ObjPrToolTip.ObjectiveIconToolTip(e, 0);
                 ObjPrToolTip.PrioritiesIconToolTip(e, 1);
-                ObjPrToolTip.RegionalIndicatorIcon(e, 6);
-                ObjPrToolTip.CountryIndicatorIcon(e, 7);
+                ObjPrToolTip.RegionalIndicatorIcon(e, 5);
+                ObjPrToolTip.CountryIndicatorIcon(e, 6);
             }
         }
 
-        private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success)
+        private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
         {
             //updMessage.Update();
-            RC.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, true, 400);
+            RC.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
         }
 
         protected void Page_Error(object sender, EventArgs e)

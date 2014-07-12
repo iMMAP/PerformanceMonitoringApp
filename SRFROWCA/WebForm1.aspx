@@ -9,13 +9,13 @@
         }
 
         function windowOpen2() {
-            myWindow = window.open('http://ors.ocharowca.info/OPS/OPSDataEntry.aspx?uid=9&pid=23&ProjectRevision=R&clname=education&cname=mali&key=pUAkWrmUJKCobRxo2HrHSA%3d%3d', '_blank', 'width=1000,height=600, scrollbars=yes,resizable=yes')
+            myWindow = window.open('http://localhost:50464/OPS/OPSDataEntry.aspx?uid=9&pid=23&ProjectRevision=R&clname=education&cname=mali&key=pUAkWrmUJKCobRxo2HrHSA%3d%3d', '_blank', 'width=1000,height=600, scrollbars=yes,resizable=yes')
             myWindow.focus()
             return false;
         }
 
         function windowOpen3() {
-            myWindow = window.open('http://ors.ocharowca.info/ops/opsdataentry.aspx?uid=1883&pid=65744&ProjectRevision=R&clname=foodsecurity&cname=burkinafaso&key=Ka/Cl+36LjhfYQaAZz0QmA==', '_blank', 'width=1000,height=600, scrollbars=yes,resizable=yes')
+            myWindow = window.open('http://localhost:50464/ops/opsdataentry.aspx?uid=1883&pid=657445&ProjectRevision=R&clname=foodsecurity&cname=burkinafaso&key=Ka/Cl+36LjhfYQaAZz0QmA==', '_blank', 'width=1000,height=600, scrollbars=yes,resizable=yes')
             myWindow.focus()
             return false;
         }

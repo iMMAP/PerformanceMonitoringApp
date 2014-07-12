@@ -930,6 +930,7 @@
     <Content Include="ClusterLead\Web.config" />
     <Content Include="Admin\Web.config" />
     <Content Include="WebForm1.aspx" />
+    <Content Include="Anonymous\AllDataFeed.ashx" />
     <None Include="assets\font\cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff" />
     <None Include="assets\font\DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff" />
     <None Include="assets\font\fontawesome-webfontd41d.eot" />
@@ -1233,6 +1234,9 @@
     <Compile Include="Admin\ProjectXMLFeeds.aspx.designer.cs">
       <DependentUpon>ProjectXMLFeeds.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Anonymous\AllDataFeed.ashx.cs">
+      <DependentUpon>AllDataFeed.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Anonymous\AllDataPublic.aspx.cs">
       <DependentUpon>AllDataPublic.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1363,6 +1367,7 @@
       <DependentUpon>ValidateReportList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Common\GeneratePDF.cs" />
+    <Compile Include="Common\MonthNumber.cs" />
     <Compile Include="Common\ObjPrToolTip.cs" />
     <Compile Include="Common\UserInfo.cs" />
     <Compile Include="Common\Utils.cs" />
