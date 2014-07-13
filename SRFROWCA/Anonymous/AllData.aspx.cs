@@ -119,11 +119,11 @@ namespace SRFROWCA.Anonymous
             PopulateAdmin2();
         }
 
-        protected void ddlAdmin2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LastLocationType = RC.LocationTypeForUI.Admin2;
-            LoadDataOnMultipleCheckBoxControl();
-        }
+        //protected void ddlAdmin2_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    LastLocationType = RC.LocationTypeForUI.Admin2;
+        //    LoadDataOnMultipleCheckBoxControl();
+        //}
 
         #endregion
 
@@ -281,10 +281,10 @@ namespace SRFROWCA.Anonymous
             if (countryIds != null)
             {
 
-                ddlAdmin2.DataValueField = "LocationId";
-                ddlAdmin2.DataTextField = "LocationName";
-                ddlAdmin2.DataSource = DBContext.GetData("GetAdmin2LocationsOfMultipleCountries", new object[] { countryIds, admin1Ids });
-                ddlAdmin2.DataBind();
+                //ddlAdmin2.DataValueField = "LocationId";
+                //ddlAdmin2.DataTextField = "LocationName";
+                //ddlAdmin2.DataSource = DBContext.GetData("GetAdmin2LocationsOfMultipleCountries", new object[] { countryIds, admin1Ids });
+                //ddlAdmin2.DataBind();
             }
         }
 
@@ -489,10 +489,10 @@ namespace SRFROWCA.Anonymous
             {
                 locationIds = RC.GetSelectedValues(ddlAdmin1);
             }
-            else if ((int)LastLocationType == 3)
-            {
-                locationIds = RC.GetSelectedValues(ddlAdmin2);
-            }
+            //else if ((int)LastLocationType == 3)
+            //{
+            //    locationIds = RC.GetSelectedValues(ddlAdmin2);
+            //}
 
             if (locationIds == "0" || locationIds == null)
             {

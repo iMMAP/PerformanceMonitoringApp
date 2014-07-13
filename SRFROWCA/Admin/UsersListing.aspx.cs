@@ -45,6 +45,8 @@ namespace SRFROWCA.Admin
             string userType = ddlRoles.SelectedValue == "All"? null: ddlRoles.SelectedValue;
             int? isApproved = rbIsApproved.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(rbIsApproved.SelectedValue);
             int? isLockedOut = null;
+            int pageSize = gvUsers.PageSize;
+            int pageIndex = GridPageIndex;
             DateTime? startDate = txtFromDate.Text.Trim().Length > 0 ?
                                     DateTime.ParseExact(txtFromDate.Text.Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture) :
                                 (DateTime?)null;
@@ -58,11 +60,16 @@ namespace SRFROWCA.Admin
                 countryId = UserInfo.EmergencyCountry;
             }
 
-            return new object[] { userId, userName, email, isApproved, isLockedOut, orgName, locationName, userType, startDate, endDate, countryId };
+            return new object[] { userId, userName, email, isApproved, isLockedOut, orgName, locationName, userType, startDate, endDate, countryId,pageSize, pageIndex };
         }
 
         private void LoadUsers()
         {
+            DataTable dt = GetUsers();
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                gvUsers.VirtualItemCount = Convert.ToInt32(dt.Rows[0]["TotalRecords"]);
+            }
             gvUsers.DataSource = GetUsers();
             gvUsers.DataBind();
         }
@@ -195,7 +202,7 @@ namespace SRFROWCA.Admin
         protected void gvUsers_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             gvUsers.PageIndex = e.NewPageIndex;
-            gvUsers.SelectedIndex = -1;
+            GridPageIndex = e.NewPageIndex;
             LoadUsers();
         }
 
@@ -263,6 +270,24 @@ namespace SRFROWCA.Admin
             // Get last error from the server
             Exception exc = Server.GetLastError();
             SRFROWCA.Common.ExceptionUtility.LogException(exc, "UsersListing", this.User);
+        }
+
+        private int GridPageIndex
+        {
+            get
+            {
+                int index = 0;
+                if (ViewState["GridPageIndex"] != null)
+                {
+                    int.TryParse(ViewState["GridPageIndex"].ToString(), out index);
+                }
+
+                return index;
+            }
+            set
+            {
+                ViewState["GridPageIndex"] = value.ToString();
+            }
         }
     }
 }

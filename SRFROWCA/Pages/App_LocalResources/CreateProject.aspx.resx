@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-    <!-- 
+  <!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,179 +59,185 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-        <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-        <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
             <xsd:complexType>
-                <xsd:choice maxOccurs="unbounded">
-                    <xsd:element name="metadata">
-                        <xsd:complexType>
-                            <xsd:sequence>
-                                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-                            </xsd:sequence>
-                            <xsd:attribute name="name" use="required" type="xsd:string" />
-                            <xsd:attribute name="type" type="xsd:string" />
-                            <xsd:attribute name="mimetype" type="xsd:string" />
-                            <xsd:attribute ref="xml:space" />
-                        </xsd:complexType>
-                    </xsd:element>
-                    <xsd:element name="assembly">
-                        <xsd:complexType>
-                            <xsd:attribute name="alias" type="xsd:string" />
-                            <xsd:attribute name="name" type="xsd:string" />
-                        </xsd:complexType>
-                    </xsd:element>
-                    <xsd:element name="data">
-                        <xsd:complexType>
-                            <xsd:sequence>
-                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-                            </xsd:sequence>
-                            <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-                            <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-                            <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-                            <xsd:attribute ref="xml:space" />
-                        </xsd:complexType>
-                    </xsd:element>
-                    <xsd:element name="resheader">
-                        <xsd:complexType>
-                            <xsd:sequence>
-                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                            </xsd:sequence>
-                            <xsd:attribute name="name" type="xsd:string" use="required" />
-                        </xsd:complexType>
-                    </xsd:element>
-                </xsd:choice>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
-        </xsd:element>
-    </xsd:schema>
-    <resheader name="resmimetype">
-        <value>text/microsoft-resx</value>
-    </resheader>
-    <resheader name="version">
-        <value>2.0</value>
-    </resheader>
-    <resheader name="reader">
-        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </resheader>
-    <resheader name="writer">
-        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </resheader>
-    <data name="btnCreateProjectResource1.Text" xml:space="preserve">
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="btnCreateProjectResource1.Text" xml:space="preserve">
     <value>Create New Project</value>
   </data>
-    <data name="btnCreateProjectResource1.ToolTip" xml:space="preserve">
+  <data name="btnCreateProjectResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-    <data name="btnDeleteProjectResource1.Text" xml:space="preserve">
+  <data name="btnDeleteProjectResource1.Text" xml:space="preserve">
     <value>Delete Project</value>
   </data>
-    <data name="btnDeleteProjectResource1.ToolTip" xml:space="preserve">
+  <data name="btnDeleteProjectResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-    <data name="btnManageActivitiesResource1.Text" xml:space="preserve">
+  <data name="btnManageActivitiesResource1.Text" xml:space="preserve">
     <value>Manage Activities</value>
   </data>
-    <data name="btnManageActivitiesResource1.ToolTip" xml:space="preserve">
+  <data name="btnManageActivitiesResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-    <data name="btnSaveCloseResource1.Text" xml:space="preserve">
+  <data name="btnSaveCloseResource1.Text" xml:space="preserve">
     <value>Save &amp; Close</value>
   </data>
-    <data name="btnSaveCloseResource1.ToolTip" xml:space="preserve">
+  <data name="btnSaveCloseResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-    <data name="btnSaveResource1.Text" xml:space="preserve">
+  <data name="btnSaveResource1.Text" xml:space="preserve">
     <value>Save &amp; Stay</value>
   </data>
-    <data name="btnSaveResource1.ToolTip" xml:space="preserve">
+  <data name="btnSaveResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-    <data name="ddlClusterResource1.ToolTip" xml:space="preserve">
+  <data name="ddlClusterResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-    <data name="localBreadCrumbDataEntryResource1.Text" xml:space="preserve">
+  <data name="localBreadCrumbDataEntryResource1.Text" xml:space="preserve">
     <value>Manage Projects</value>
   </data>
-    <data name="localBreadCrumbHomeResource1.Text" xml:space="preserve">
+  <data name="localBreadCrumbHomeResource1.Text" xml:space="preserve">
     <value>Home</value>
   </data>
-    <data name="localClusterResource1.Text" xml:space="preserve">
+  <data name="localClusterResource1.Text" xml:space="preserve">
     <value>Cluster:</value>
   </data>
-    <data name="localCreateProjectEndDateResource1.Text" xml:space="preserve">
+  <data name="localCreateProjectEndDateResource1.Text" xml:space="preserve">
     <value>End Date:</value>
   </data>
-    <data name="localCreateProjectStartDateResource1.Text" xml:space="preserve">
+  <data name="localCreateProjectStartDateResource1.Text" xml:space="preserve">
     <value>Start Date:</value>
   </data>
-    <data name="localMangeProjAddEditCaptionResource1.Text" xml:space="preserve">
+  <data name="localMangeProjAddEditCaptionResource1.Text" xml:space="preserve">
     <value>Add/Edit Project</value>
   </data>
-    <data name="localProjectCodeResource1.Text" xml:space="preserve">
+  <data name="localProjectCodeResource1.Text" xml:space="preserve">
     <value>Project Code:</value>
   </data>
-    <data name="localProjectObjectiveResource1.Text" xml:space="preserve">
+  <data name="localProjectObjectiveResource1.Text" xml:space="preserve">
     <value>Project Objective:</value>
   </data>
-    <data name="localProjectTitleResource1.Text" xml:space="preserve">
+  <data name="localProjectTitleResource1.Text" xml:space="preserve">
     <value>Project Title:</value>
   </data>
-    <data name="ltrlProjectCodeResource1.Text" xml:space="preserve">
+  <data name="ltrlProjectCodeResource1.Text" xml:space="preserve">
     <value />
   </data>
-    <data name="MangeProjects_DeleteProject" xml:space="preserve">
+  <data name="MangeProjects_DeleteProject" xml:space="preserve">
     <value>Are you sure your want to delete this project?</value>
   </data>
-    <data name="PageResource1.Title" xml:space="preserve">
+  <data name="PageResource1.Title" xml:space="preserve">
     <value>ORS Manage Projects</value>
   </data>
-    <data name="rblProjectsResource1.ToolTip" xml:space="preserve">
+  <data name="rblProjectsResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-    <data name="RequiredFieldValidator1Resource1.ErrorMessage" xml:space="preserve">
+  <data name="RequiredFieldValidator1Resource1.ErrorMessage" xml:space="preserve">
     <value>Required</value>
   </data>
-    <data name="RequiredFieldValidator1Resource1.Text" xml:space="preserve">
+  <data name="RequiredFieldValidator1Resource1.Text" xml:space="preserve">
     <value>Required</value>
   </data>
-    <data name="RequiredFieldValidator1Resource1.ToolTip" xml:space="preserve">
+  <data name="RequiredFieldValidator1Resource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-    <data name="rfvTitleResource1.ErrorMessage" xml:space="preserve">
+  <data name="rfvTitleResource1.ErrorMessage" xml:space="preserve">
     <value>Required.</value>
   </data>
-    <data name="rfvTitleResource1.Text" xml:space="preserve">
+  <data name="rfvTitleResource1.Text" xml:space="preserve">
     <value>Required.</value>
   </data>
-    <data name="rfvTitleResource1.ToolTip" xml:space="preserve">
+  <data name="rfvTitleResource1.ToolTip" xml:space="preserve">
     <value>Required.</value>
   </data>
-    <data name="txtFromDateResource1.Text" xml:space="preserve">
+  <data name="txtFromDateResource1.Text" xml:space="preserve">
     <value />
   </data>
-    <data name="txtFromDateResource1.ToolTip" xml:space="preserve">
+  <data name="txtFromDateResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-    <data name="txtProjectObjectiveResource1.Text" xml:space="preserve">
+  <data name="txtProjectObjectiveResource1.Text" xml:space="preserve">
     <value />
   </data>
-    <data name="txtProjectObjectiveResource1.ToolTip" xml:space="preserve">
+  <data name="txtProjectObjectiveResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-    <data name="txtProjectTitleResource1.Text" xml:space="preserve">
+  <data name="txtProjectTitleResource1.Text" xml:space="preserve">
     <value />
   </data>
-    <data name="txtProjectTitleResource1.ToolTip" xml:space="preserve">
+  <data name="txtProjectTitleResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-    <data name="txtToDateResource1.Text" xml:space="preserve">
+  <data name="txtToDateResource1.Text" xml:space="preserve">
     <value />
   </data>
-    <data name="txtToDateResource1.ToolTip" xml:space="preserve">
+  <data name="txtToDateResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-    <data name="CreateProjects_SaveMessageSuccess" xml:space="preserve">
+  <data name="CreateProjects_SaveMessageSuccess" xml:space="preserve">
     <value>Your Data Saved Successfuly!</value>
+  </data>
+  <data name="localDonorNameResource1.Text" xml:space="preserve">
+    <value>Donor:</value>
+  </data>
+  <data name="localFundingStatusResource1.Text" xml:space="preserve">
+    <value>Funding Status:</value>
   </data>
 </root>
