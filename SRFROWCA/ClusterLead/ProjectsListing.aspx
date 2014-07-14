@@ -198,7 +198,7 @@
                                 meta:resourcekey="BoundFieldResource10" />
                             <asp:BoundField DataField="Funded" HeaderText="Funded" SortExpression="Funded"
                                 meta:resourcekey="BoundFieldResource6" />
-                            <asp:BoundField DataField="LocationName" HeaderText="Locations" meta:resourcekey="BoundFieldResource7" />
+                            <asp:BoundField DataField="LocationName" HeaderText="Reported Locations" meta:resourcekey="BoundFieldResource7" />
                             <asp:BoundField DataField="Contact" HeaderText="Contact" ItemStyle-Wrap="true" ItemStyle-Width="150px"
                                 SortExpression="Contact" meta:resourcekey="BoundFieldResource8">
                                 <ItemStyle Wrap="True" Width="150px"></ItemStyle>

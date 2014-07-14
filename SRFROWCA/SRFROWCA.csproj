@@ -373,7 +373,6 @@
     <Content Include="ClusterLead\UploadAchieved.aspx" />
     <Content Include="ClusterLead\ValidateIndicators.aspx" />
     <Content Include="ClusterLead\ValidateReportList.aspx" />
-    <Content Include="Controls\AddContryReportControl.ascx" />
     <Content Include="Controls\NewIndicatorsControl.ascx" />
     <Content Include="Controls\ReportedIndicatorComments.ascx" />
     <Content Include="DataFeeds\AdminDataFeeds.aspx" />
@@ -909,7 +908,6 @@
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="PivotTables\OprOrgsClsCnt.aspx" />
-    <Content Include="Reports\AddCountryReports.aspx" />
     <Content Include="Reports\CountriesForReports.aspx" />
     <Content Include="Reports\CountryReports.aspx" />
     <Content Include="Reports\OperationalPresence.aspx" />
@@ -1234,9 +1232,6 @@
     <Compile Include="Admin\ProjectXMLFeeds.aspx.designer.cs">
       <DependentUpon>ProjectXMLFeeds.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Anonymous\AllDataFeed.ashx.cs">
-      <DependentUpon>AllDataFeed.ashx</DependentUpon>
-    </Compile>
     <Compile Include="Anonymous\AllDataPublic.aspx.cs">
       <DependentUpon>AllDataPublic.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1371,13 +1366,6 @@
     <Compile Include="Common\ObjPrToolTip.cs" />
     <Compile Include="Common\UserInfo.cs" />
     <Compile Include="Common\Utils.cs" />
-    <Compile Include="Controls\AddContryReportControl.ascx.cs">
-      <DependentUpon>AddContryReportControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Controls\AddContryReportControl.ascx.designer.cs">
-      <DependentUpon>AddContryReportControl.ascx</DependentUpon>
-    </Compile>
     <Compile Include="Controls\NewIndicatorsControl.ascx.cs">
       <DependentUpon>NewIndicatorsControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1777,13 +1765,6 @@
     <Compile Include="PivotTables\OprOrgsClsCnt.aspx.designer.cs">
       <DependentUpon>OprOrgsClsCnt.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Reports\AddCountryReports.aspx.cs">
-      <DependentUpon>AddCountryReports.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reports\AddCountryReports.aspx.designer.cs">
-      <DependentUpon>AddCountryReports.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Reports\CountriesForReports.aspx.cs">
       <DependentUpon>CountriesForReports.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2015,10 +1996,14 @@
     <Content Include="Pages\App_LocalResources\ManageActivities.aspx.fr-FR.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ClusterLead\App_LocalResources\ProjectsListing.aspx.resx" />
+    <Content Include="ClusterLead\App_LocalResources\ProjectsListing.aspx.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ClusterLead\App_LocalResources\ProjectsListing.aspx.fr-FR.resx" />
+    <Content Include="ClusterLead\App_LocalResources\ProjectsListing.aspx.fr-FR.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClusterLead\App_LocalResources\AddSRPActivitiesFromMasterList.aspx.resx" />

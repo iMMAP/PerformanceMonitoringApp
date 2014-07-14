@@ -52,7 +52,8 @@ namespace SRFROWCA.Account
                 {
                     try
                     {
-                        DataTable dtEmails = DBContext.GetData("uspGetUserEmails", new object[] { ddlCountry.SelectedValue });
+                        bool emailClusterLead = false;
+                        DataTable dtEmails = DBContext.GetData("uspGetUserEmails", new object[] { ddlCountry.SelectedValue, emailClusterLead });
                         string emails = string.Empty;
                         emails = "orsocharowca@gmail.com";
                         if (dtEmails.Rows.Count > 0)
