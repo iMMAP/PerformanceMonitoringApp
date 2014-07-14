@@ -96,8 +96,8 @@ namespace SRFROWCA.Pages
                 ddlCluster.SelectedValue = dtProject.Rows[0]["EmergencyClusterId"].ToString();
                 txtDonorName.Text = dtProject.Rows[0]["DonorName"].ToString();
                 ddlFundingStatus.SelectedValue = dtProject.Rows[0]["FundingStatus"].ToString();
-                txtFromDate.Text = dtProject.Rows[0]["ProjectStartDate"] != null ? Convert.ToDateTime(dtProject.Rows[0]["ProjectStartDate"]).ToString("MM/dd/yyyy") : "";
-                txtToDate.Text = dtProject.Rows[0]["ProjectEndDate"] != null ? Convert.ToDateTime(dtProject.Rows[0]["ProjectEndDate"]).ToString("MM/dd/yyyy") : "";
+                txtFromDate.Text = dtProject.Rows[0]["ProjectStartDate"] != DBNull.Value ? Convert.ToDateTime(dtProject.Rows[0]["ProjectStartDate"]).ToString("MM/dd/yyyy") : "";
+                txtToDate.Text = dtProject.Rows[0]["ProjectEndDate"] != DBNull.Value ? Convert.ToDateTime(dtProject.Rows[0]["ProjectEndDate"]).ToString("MM/dd/yyyy") : "";
             }
             //using (ORSEntities re = new ORSEntities())
             //{

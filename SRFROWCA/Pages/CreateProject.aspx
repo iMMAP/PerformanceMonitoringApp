@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="ORS Manage Projects" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
-    CodeBehind="CreateProject.aspx.cs" Inherits="SRFROWCA.Pages.CreateProject" culture="auto" meta:resourcekey="PageResource1" uiculture="auto" %>
+    CodeBehind="CreateProject.aspx.cs" Inherits="SRFROWCA.Pages.CreateProject" Culture="auto" meta:resourcekey="PageResource1" UICulture="auto" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <script>
@@ -71,7 +71,8 @@
                                 <tr>
                                     <td>
                                         <label>
-                                            <asp:Localize ID="localProjectCode" runat="server" Text="Project Code:" meta:resourcekey="localProjectCodeResource1"></asp:Localize> </label>
+                                            <asp:Localize ID="localProjectCode" runat="server" Text="Project Code:" meta:resourcekey="localProjectCodeResource1"></asp:Localize>
+                                        </label>
                                     </td>
                                     <td>
                                         <label>
@@ -99,16 +100,6 @@
                                             TextMode="MultiLine" meta:resourcekey="txtProjectObjectiveResource1"></asp:TextBox>
                                     </td>
                                 </tr>
-                                      <tr>
-                                    <td>
-                                        <label>
-                                            <asp:Localize ID="localDonorName" runat="server" Text="Donor:" meta:resourcekey="localDonorNameResource1"></asp:Localize></label>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox ID="txtDonorName" runat="server" Width="500px" MaxLength="150"></asp:TextBox>
-                                       
-                                    </td>
-                                </tr>
                                 <tr>
                                     <td>
                                         <label>
@@ -119,20 +110,6 @@
                                         </asp:DropDownList>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Required"
                                             CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCluster" meta:resourcekey="RequiredFieldValidator1Resource1"></asp:RequiredFieldValidator>
-                                    </td>
-                                </tr>
-                                 <tr>
-                                    <td>
-                                        <label>
-                                            <asp:Localize ID="localFundingStatus" runat="server" Text="Funding Status:" meta:resourcekey="localFundingStatusResource1"></asp:Localize></label>
-                                    </td>
-                                    <td>
-                                        <asp:DropDownList ID="ddlFundingStatus" runat="server" Width="320px">
-                                            <asp:ListItem Text="Select Funding Status" Value="-1"></asp:ListItem>
-                                            <asp:ListItem Text="Funded" Value="1"></asp:ListItem>
-                                            <asp:ListItem Text="Not Funded" Value="2"></asp:ListItem>
-                                        </asp:DropDownList>
-                                      
                                     </td>
                                 </tr>
                                 <tr>
@@ -151,6 +128,30 @@
                                     </td>
                                     <td>
                                         <asp:TextBox ID="txtToDate" runat="server" meta:resourcekey="txtToDateResource1"></asp:TextBox><label>(mm/dd/yyyy)</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>
+                                            <asp:Localize ID="localFundingStatus" runat="server" Text="Funding Status:" meta:resourcekey="localFundingStatusResource1"></asp:Localize></label>
+                                    </td>
+                                    <td>
+                                        <asp:DropDownList ID="ddlFundingStatus" runat="server" Width="320px">
+                                            <asp:ListItem Text="Select Funding Status" Value="-1"></asp:ListItem>
+                                            <asp:ListItem Text="Funded" Value="1"></asp:ListItem>
+                                            <asp:ListItem Text="Not Funded" Value="2"></asp:ListItem>
+                                        </asp:DropDownList>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>
+                                            <asp:Localize ID="localDonorName" runat="server" Text="Donor:" meta:resourcekey="localDonorNameResource1"></asp:Localize></label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="txtDonorName" runat="server" Width="500px" MaxLength="150"></asp:TextBox>
+
                                     </td>
                                 </tr>
                                 <tr>
