@@ -152,14 +152,14 @@
                         $(this).text(city1[1]);
 
                         // Add city name after every two columns (first is T and second is A)
-                        if (j % 1 === 0) {
-                            list += '<th colspan="1" style="width:100px; text-align:center;">' + city1[0] + '</th>';
+                        if (j % 2 === 0) {
+                            list += '<th colspan="2" style="width:100px; text-align:center;">' + city1[0] + '</th>';
                         }
                     }
                 });
 
                 // Add header row in grid.
-                $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th style="width: 70px;">&nbsp;</th><th style="width: 260px;">&nbsp;</th><th style="width: 260px;">&nbsp;</th><th style="width: 70px;">&nbsp;</th><th style="width: 40px;">&nbsp;</th>' + list + '</tr></thead>');
+                $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th style="width: 100px;">&nbsp;</th><th style="width: 50px;">&nbsp;</th><th style="width: 260px;">&nbsp;</th><th style="width: 220px;">&nbsp;</th><th style="width: 50px;">&nbsp;</th>' + list + '</tr></thead>');
             }
         }
     </script>
@@ -232,7 +232,7 @@
                                 <asp:Button ID="btnOpenLocations" runat="server" Text="Locations" CausesValidation="False"
                                     CssClass="btn btn-primary" OnClick="btnLocation_Click" OnClientClick="needToConfirm = false;"
                                     meta:resourcekey="btnOpenLocationsResource1" />
-                                <asp:Localize ID="locaNoTargetMessage" runat="server" Text="&lt;div style=&quot;color:Red;&quot;&gt;Please click on Locations button to add locations. You will then be able to add or edit your project activities." meta:resourcekey="locaNoTargetMessageResource1"></asp:Localize>
+                                <asp:Localize ID="locaNoTargetMessage" runat="server" Text="&lt;div style=&quot;color:Red;&quot;&gt;Please Click On Locations Button To Add Locations To Select, Add, Edit your Activities" meta:resourcekey="locaNoTargetMessageResource1"></asp:Localize>
                             </div>
                             <div class="pull-right">
                                 <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"

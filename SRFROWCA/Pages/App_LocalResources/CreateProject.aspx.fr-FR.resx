@@ -157,7 +157,7 @@
     <value>Accueil</value>
   </data>
   <data name="localClusterResource1.Text" xml:space="preserve">
-    <value>Cluster:</value>
+    <value>groupe:</value>
   </data>
   <data name="localCreateProjectEndDateResource1.Text" xml:space="preserve">
     <value>Date de fin:</value>
@@ -231,7 +231,13 @@
   <data name="txtToDateResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-    <data name="CreateProjects_SaveMessageSuccess" xml:space="preserve">
+  <data name="CreateProjects_SaveMessageSuccess" xml:space="preserve">
     <value>Vos données sont enregistrées avec succès!</value>
+  </data>
+  <data name="localDonorNameResource1.Text" xml:space="preserve">
+    <value>donneur:</value>
+  </data>
+  <data name="localFundingStatusResource1.Text" xml:space="preserve">
+    <value>Statut de financement:</value>
   </data>
 </root>

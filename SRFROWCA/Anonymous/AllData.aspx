@@ -18,20 +18,10 @@
     <!-- ace styles -->
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
     <script type="text/javascript">
+        
         $(function () {
-
-            $("#<%=txtFromDate.ClientID%>").datepicker({
-                numberOfMonths: 2,
-                onSelect: function (selected) {
-                    $("#<%=txtToDate.ClientID%>").datepicker("option", "minDate", selected)
-                }
-            });
-            $("#<%=txtToDate.ClientID%>").datepicker({
-                numberOfMonths: 2,
-                onSelect: function (selected) {
-                    $("#<%=txtFromDate.ClientID%>").datepicker("option", "maxDate", selected)
-                }
-            });
+            bindCalendars();
+           
 
             $(".classsearchcriteriacustomreport").tooltip({
                 show: {
@@ -40,6 +30,21 @@
                 }
             });
         });
+        function bindCalendars()
+        {
+            $("#<%=txtFromDate.ClientID%>").datepicker({
+                numberOfMonths: 2,
+                onSelect: function (selected) {
+                    $("#<%=txtToDate.ClientID%>").datepicker("option", "minDate", selected)
+                }
+             });
+                $("#<%=txtToDate.ClientID%>").datepicker({
+                numberOfMonths: 2,
+                onSelect: function (selected) {
+                    $("#<%=txtFromDate.ClientID%>").datepicker("option", "maxDate", selected)
+                }
+            });
+        }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -286,7 +291,7 @@
                                                                                         </cc:DropDownCheckBoxes>
                                                                                     </td>
                                                                                 </tr>
-                                                                                <tr>
+                                                                               <%-- <tr>
                                                                                     <td>
                                                                                         <span>Admin2:</span>
                                                                                     </td>
@@ -298,7 +303,7 @@
                                                                                             <Texts SelectBoxCaption="Select Admin2" />
                                                                                         </cc:DropDownCheckBoxes>
                                                                                     </td>
-                                                                                </tr>
+                                                                                </tr>--%>
                                                                                 <tr>
                                                                                     <td>Funding Status:
                                                                                     </td>
@@ -369,8 +374,7 @@
                                     HeaderStyle-Width="10%" />
                                 <asp:BoundField DataField="ProjectCode" HeaderText="Project" SortExpression="ProjectCode"
                                     HeaderStyle-Width="5%" />
-                                <asp:BoundField DataField="FundingStatus" HeaderText="FTS" SortExpression="FundingStatus"
-                                    HeaderStyle-Width="2%" />
+                               
                                 <asp:BoundField DataField="Month" HeaderText="Month" SortExpression="Month" HeaderStyle-Width="5%" />
                                 <asp:BoundField DataField="Objective" HeaderText="Objective" SortExpression="Objective"
                                     HeaderStyle-Width="4%" />
@@ -451,6 +455,6 @@
 
         ga('create', 'UA-50659880-1', 'ocharowca.info');
         ga('send', 'pageview');
-
+        Sys.WebForms.PageRequestManager.getInstance().add_endRequest(bindCalendars);
     </script>
 </asp:Content>

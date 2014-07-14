@@ -121,6 +121,24 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.TextBox txtProjectObjective;
         
         /// <summary>
+        /// localDonorName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localDonorName;
+        
+        /// <summary>
+        /// txtDonorName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDonorName;
+        
+        /// <summary>
         /// localCluster control.
         /// </summary>
         /// <remarks>
@@ -146,6 +164,24 @@ namespace SRFROWCA.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
+        
+        /// <summary>
+        /// localFundingStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localFundingStatus;
+        
+        /// <summary>
+        /// ddlFundingStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlFundingStatus;
         
         /// <summary>
         /// localCreateProjectStartDate control.

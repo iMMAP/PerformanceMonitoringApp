@@ -222,7 +222,7 @@
 
                                             <ItemStyle CssClass="hidden"></ItemStyle>
                                         </asp:TemplateField>
-                                        <asp:BoundField DataField="ActivityDataId" />
+                                       
                                     </Columns>
                                 </asp:GridView>
                             </div>

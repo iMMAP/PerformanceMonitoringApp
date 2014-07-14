@@ -2,6 +2,7 @@
     EnableEventValidation="false" CodeBehind="UsersListing.aspx.cs" Inherits="SRFROWCA.Admin.UsersListing" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+     <%@ Register Assembly="SRFROWCA" Namespace="SRFROWCA" TagPrefix="cc2" %>
     <script>
         $(function () {
             $("#<%=txtFromDate.ClientID%>").datepicker();
@@ -134,9 +135,11 @@
         <table width="100%">
             <tr>
                 <td>
-                    <asp:GridView ID="gvUsers" runat="server" AutoGenerateColumns="false" AllowPaging="true"
-                        CssClass="imagetable" PageSize="600" AllowSorting="true" Width="100%" OnPageIndexChanging="gvUsers_PageIndexChanging"
-                        OnSorting="gvUsers_Sorting" OnRowCommand="gvUsers_RowCommand">
+                      <cc2:PagingGridView ID="gvUsers" runat="server" AutoGenerateColumns="false" AllowPaging="true"
+                        CssClass="imagetable" PageSize="30" AllowSorting="true" Width="100%" OnPageIndexChanging="gvUsers_PageIndexChanging"
+                        OnSorting="gvUsers_Sorting" OnRowCommand="gvUsers_RowCommand" >
+                             <PagerStyle BackColor="#efefef" ForeColor="DarkSlateBlue" HorizontalAlign="Center" />
+                            <PagerSettings Mode="NumericFirstLast" />
                         <RowStyle CssClass="istrow" />
                         <AlternatingRowStyle CssClass="altcolor" />
                         <Columns>
@@ -180,7 +183,7 @@
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
-                    </asp:GridView>
+                   </cc2:PagingGridView>
                 </td>
             </tr>
         </table>

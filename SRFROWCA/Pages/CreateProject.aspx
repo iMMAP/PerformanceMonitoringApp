@@ -99,6 +99,16 @@
                                             TextMode="MultiLine" meta:resourcekey="txtProjectObjectiveResource1"></asp:TextBox>
                                     </td>
                                 </tr>
+                                      <tr>
+                                    <td>
+                                        <label>
+                                            <asp:Localize ID="localDonorName" runat="server" Text="Donor:" meta:resourcekey="localDonorNameResource1"></asp:Localize></label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="txtDonorName" runat="server" Width="500px" MaxLength="150"></asp:TextBox>
+                                       
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td>
                                         <label>
@@ -109,6 +119,20 @@
                                         </asp:DropDownList>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Required"
                                             CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCluster" meta:resourcekey="RequiredFieldValidator1Resource1"></asp:RequiredFieldValidator>
+                                    </td>
+                                </tr>
+                                 <tr>
+                                    <td>
+                                        <label>
+                                            <asp:Localize ID="localFundingStatus" runat="server" Text="Funding Status:" meta:resourcekey="localFundingStatusResource1"></asp:Localize></label>
+                                    </td>
+                                    <td>
+                                        <asp:DropDownList ID="ddlFundingStatus" runat="server" Width="320px">
+                                            <asp:ListItem Text="Select Funding Status" Value="-1"></asp:ListItem>
+                                            <asp:ListItem Text="Funded" Value="1"></asp:ListItem>
+                                            <asp:ListItem Text="Not Funded" Value="2"></asp:ListItem>
+                                        </asp:DropDownList>
+                                      
                                     </td>
                                 </tr>
                                 <tr>

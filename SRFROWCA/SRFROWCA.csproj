@@ -1612,11 +1612,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ORSModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORSModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ORSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="ORSModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -287,7 +287,7 @@ namespace SRFROWCA.Account
             string phone = txtPhone.Text.Trim().Length > 0 ? txtPhone.Text.Trim() : null;
             string fullName = txtFullName.Text.Trim();
 
-            return new object[] { userId, orgId, countryId, phone, fullName, DBNull.Value };
+            return new object[] { userId, ddlUserRole.SelectedValue == "1" ? orgId : (int?)null, countryId, phone, fullName, DBNull.Value };
         }
 
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)

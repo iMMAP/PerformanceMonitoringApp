@@ -16,7 +16,103 @@
         <!-- .breadcrumb -->
     </div>
     <div class="page-content">
+         <table width="100%">
+            <tr>
+                <td>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 ">
+                            <div class="widget-box">
+                                <div class="widget-header widget-header-small header-color-blue2">
+                                   <h6>Search Filters</h6>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="row">
+                                                    <table border="0" width="100%">
+                                                        <tr>
+                                                            <td class="width-20">
+                                                                <label>
+                                                                    Project ID:</label>
+                                                            </td>
+                                                            <td class="width-30">
+                                                                <asp:TextBox ID="txtprojectId" runat="server" CssClass="width-80"></asp:TextBox>
+                                                            </td>
+                                                            <td class="width-20">
+                                                                <label>
+                                                                    Project:</label>
+                                                            </td>
+                                                            <td class="width-30">
+                                                                  <asp:TextBox ID="txtProject" runat="server" CssClass="width-80"></asp:TextBox>
+                                                            </td>
+                                                             
+                                                            
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="width-20">
+                                                                <label>
+                                                                    Organization:</label>
+                                                            </td>
+                                                            <td class="width-30">
+                                                                <asp:TextBox ID="txtOrg" runat="server" CssClass="width-80"></asp:TextBox>
+                                                            </td>
+                                                            <td class="width-20">
+                                                                <label>
+                                                                    Project Sector:</label>
+                                                            </td>
+                                                            <td class="width-30">
+                                                                <asp:TextBox ID="txtPrjSector" runat="server" CssClass="width-80"></asp:TextBox>
+                                                            </td>
+                                                           
+                                                        </tr>
+                                                            <tr>
+                                                            <td class="width-20">
+                                                                <label>
+                                                                    Project Country:</label>
+                                                            </td>
+                                                            <td class="width-30">
+                                                                <asp:TextBox ID="txtPrjCountry" runat="server" CssClass="width-80"></asp:TextBox>
+                                                            </td>
+                                                            <td class="width-20">
+                                                                <label>
+                                                                    Appealing Country:</label>
+                                                            </td>
+                                                            <td class="width-30">
+                                                                <asp:TextBox ID="txtApealingCountry" runat="server" CssClass="width-80"></asp:TextBox>
+                                                            </td>
+                                                           
+                                                        </tr>
+                                                         <tr>
+                                                            <td class="width-20">
+                                                                <label>
+                                                                    Project Cluster:</label>
+                                                            </td>
+                                                            <td class="width-30">
+                                                                 <asp:TextBox ID="txtPrjCluster" runat="server" CssClass="width-80"></asp:TextBox>
+                                                            </td>
+                                                             <td colspan="2">
+                                                              <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-primary" CausesValidation="false" OnClick="btnSearch_Click" />
+                                                            </td>
+                                                        </tr>
+                                                   
+                                                   
+                                                        
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
+
+
+                    </div>
+                </td>
+            </tr>
+        </table>
         <div class="row">
             <div id="scrolledGridView" style="overflow-x: auto; width: 100%;">
                 <asp:GridView ID="gvFunding" runat="server" AutoGenerateColumns="True" HeaderStyle-BackColor="ButtonFace"
