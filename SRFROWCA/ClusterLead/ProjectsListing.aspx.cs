@@ -23,20 +23,20 @@ namespace SRFROWCA.ClusterLead
             PopulateControls();
             LoadProjects();
             
-            if (RC.IsCountryAdmin(User) || RC.IsOCHAStaff(User))
+            if (RC.IsCountryAdmin(User) || RC.IsOCHAStaff(User) || RC.IsRegionalClusterLead(User))
             {
                 PopulateClusters();
+
+                if (RC.IsRegionalClusterLead(User))
+                {
+                    localCountry.Visible = true;
+                    ddlCountry.Visible = true;
+                }
             }
-            else
+            else 
             {
                 ddlClusters.Visible = false;
                 divClusters.Visible = false;
-            }
-
-            if (RC.IsRegionalClusterLead(User))
-            {
-                localCountry.Visible = true;
-                ddlCountry.Visible = true;
             }
         }
 
