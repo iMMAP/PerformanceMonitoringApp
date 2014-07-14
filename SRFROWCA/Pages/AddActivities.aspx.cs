@@ -9,6 +9,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using SRFROWCA.Common;
+using System.Net.Mail;
 
 namespace SRFROWCA.Pages
 {
@@ -139,6 +140,7 @@ namespace SRFROWCA.Pages
             List<int> locationIds = GetLocationIdsFromGrid();
             SelectLocationsOfGrid(locationIds);
         }
+
         protected void btnSave_Click(object sender, EventArgs e)
         {
             SaveProjectData();
@@ -160,6 +162,7 @@ namespace SRFROWCA.Pages
                 }
             }
         }
+
         protected void btnCancelComments_Click(object sender, EventArgs e)
         {
             mpeComments.Hide();
@@ -178,6 +181,7 @@ namespace SRFROWCA.Pages
                 ExportUtility.ExportGridView(gv, fileName, ".xls", Response, true);
             }
         }
+
         protected void btnPDF_Export(object sender, EventArgs e)
         {
             SaveProjectData();
@@ -489,19 +493,55 @@ namespace SRFROWCA.Pages
                 if (locationIds.Count > 0)
                 {
                     if (ReportId == 0)
-                    {
                         SaveReportMainInfo();
-                    }
 
                     SaveReport();
+                    SendMail("Report Saved Summary!");
                 }
                 else
                 {
                     DeleteReport();
+                    SendMail("Report Delete Summary!");
                 }
 
                 scope.Complete();
                 ShowMessage((string)GetLocalResourceObject("AddActivities_SaveMessageSuccess"));
+            }
+        }
+
+        private void SendMail(string subject)
+        {
+            try
+            {
+                int countryID = UserInfo.Country > 0 ? UserInfo.Country : 0;
+
+                bool emailClusterLead = true;
+                DataTable dtEmails = DBContext.GetData("uspGetUserEmails", new object[] { countryID, emailClusterLead });
+
+                string emails = string.Empty;
+                emails = "orsocharowca@gmail.com";
+                
+                if (dtEmails.Rows.Count > 0)
+                {
+                    using (MailMessage mailMsg = new MailMessage())
+                    {
+                        for (int i = 0; i < dtEmails.Rows.Count; i++)
+                            emails += "," + Convert.ToString(dtEmails.Rows[i]["Email"]);
+
+                        mailMsg.From = new MailAddress("orsocharowca@gmail.com");
+                        mailMsg.To.Add(emails.TrimEnd(','));
+                        mailMsg.Subject = subject;
+                        mailMsg.IsBodyHtml = true;
+                        mailMsg.Body = string.Format(@"");
+
+                        Mail.SendMail(mailMsg);
+                    }
+                }
+
+            }
+            catch
+            {
+                //message = "You have been registered successfully but some error occoured on sending email to site admin. Contact admin and ask for the verification! We apologies for the inconvenience!";
             }
         }
 
@@ -510,6 +550,7 @@ namespace SRFROWCA.Pages
             if (ReportId > 0)
                 DBContext.Delete("DeleteReport", new object[] { ReportId, DBNull.Value });
         }
+
         private void SaveReport()
         {
             //SaveReportMainInfo();
@@ -528,6 +569,7 @@ namespace SRFROWCA.Pages
             ReportId = DBContext.Add("InsertReport", new object[] { yearId, monthId, projId, UserInfo.EmergencyCountry,
                                                                     UserInfo.Organization, loginUserId, reportName,  DBNull.Value });
         }
+
         private void SaveReportLocations()
         {
             List<int> locationIds = GetLocationIdsFromGrid();

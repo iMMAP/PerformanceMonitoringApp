@@ -1362,6 +1362,7 @@
       <DependentUpon>ValidateReportList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Common\GeneratePDF.cs" />
+    <Compile Include="Common\MonthNumber.cs" />
     <Compile Include="Common\ObjPrToolTip.cs" />
     <Compile Include="Common\UserInfo.cs" />
     <Compile Include="Common\Utils.cs" />
