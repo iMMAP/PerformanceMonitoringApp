@@ -40,15 +40,6 @@ namespace SRFROWCA.Admin {
         protected global::System.Web.UI.WebControls.Button btnAddActivity;
         
         /// <summary>
-        /// txtActivityName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtActivityName;
-        
-        /// <summary>
         /// ddlCluster control.
         /// </summary>
         /// <remarks>
@@ -74,6 +65,15 @@ namespace SRFROWCA.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlPriority;
+        
+        /// <summary>
+        /// txtActivityName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtActivityName;
         
         /// <summary>
         /// btnSearch control.
@@ -227,24 +227,6 @@ namespace SRFROWCA.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvEmgNameFr;
-        
-        /// <summary>
-        /// ddlActivityType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlActivityType;
-        
-        /// <summary>
-        /// rgvEmgType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rgvEmgType;
         
         /// <summary>
         /// hdnPriorityActivityId control.

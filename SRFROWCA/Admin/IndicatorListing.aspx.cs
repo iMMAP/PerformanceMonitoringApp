@@ -47,12 +47,13 @@ namespace SRFROWCA.Admin
                 // Check if any IP has reported on this project. If so then do not delete it.
                 if (!IndicatorIsBeingUsed(activityDataId))
                 {
-                    ShowMessage("Indicator cannot be deleted! It is being used.", RC.NotificationType.Error, true, 500);
-                    return;
+                    ShowMessage("Indicator cannot be deleted! It is being used.", RC.NotificationType.Error, true, 2000);
                 }
-
-                //DeleteIndicator(activityDataId);
-                //LoadIndicators();
+                else
+                {
+                    DeleteIndicator(activityDataId);
+                    LoadIndicators();
+                }
             }
 
             // Edit Project.

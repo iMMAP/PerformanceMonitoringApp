@@ -15,7 +15,6 @@ namespace SRFROWCA.Admin
             if (IsPostBack) return;
 
             this.Form.DefaultButton = this.btnAdd.UniqueID;
-
             LoadActivities();
             PopulateFilters();
         }
@@ -48,11 +47,12 @@ namespace SRFROWCA.Admin
                 if (!ActivityIsBeingUsed(priorityActivityId))
                 {
                     ShowMessage("Activity cannot be deleted! It is being used.", RC.NotificationType.Error, true, 500);
-                    return;
                 }
-
-                //DeleteActivity(priorityActivityId);
-                //LoadActivities();
+                else
+                {
+                    DeleteActivity(priorityActivityId);
+                    LoadActivities();
+                }
             }
 
             // Edit Project.
@@ -68,7 +68,7 @@ namespace SRFROWCA.Admin
                 ddlObjectiveNew.SelectedValue = gvActivity.DataKeys[row.RowIndex].Values["ClusterObjectiveId"].ToString();
                 LoadPrioritiesByObjective();
                 ddlPriorityNew.SelectedValue = gvActivity.DataKeys[row.RowIndex].Values["ObjectivePriorityId"].ToString();
-                ddlActivityType.SelectedValue = gvActivity.DataKeys[row.RowIndex].Values["ActivityTypeId"].ToString();
+                //ddlActivityType.SelectedValue = gvActivity.DataKeys[row.RowIndex].Values["ActivityTypeId"].ToString();
 
                 if (gvActivity.DataKeys[row.RowIndex].Values["SiteLanguageId"].ToString() == "1")
                 {
@@ -93,9 +93,15 @@ namespace SRFROWCA.Admin
         }
         protected void btnExportExcel_Click(object sender, EventArgs e)
         {
+            GridView gvExport = new GridView();
+            DataTable dt = GetActivities();
+            RemoveColumnsFromDataTable(dt);
+            gvExport.DataSource = dt;
+            gvExport.DataBind();
+
             string fileName = "Activities";
             string fileExtention = ".xls";
-            ExportUtility.ExportGridView(gvActivity, fileName, fileExtention, Response);
+            ExportUtility.ExportGridView(gvExport, fileName, fileExtention, Response);
         }
 
         internal override void BindGridData()
@@ -193,12 +199,12 @@ namespace SRFROWCA.Admin
             ddlClusterNew.DataSource = GetClusters();
             ddlClusterNew.DataBind();
 
-            ddlActivityType.Items.Clear();
-            ddlActivityType.Items.Add(new ListItem("Select", "-1"));
-            ddlActivityType.DataValueField = "ActivityTypeId";
-            ddlActivityType.DataTextField = "ActivityType";
-            ddlActivityType.DataSource = GetActivityTypes();
-            ddlActivityType.DataBind();
+            //ddlActivityType.Items.Clear();
+            //ddlActivityType.Items.Add(new ListItem("Select", "-1"));
+            //ddlActivityType.DataValueField = "ActivityTypeId";
+            //ddlActivityType.DataTextField = "ActivityType";
+            //ddlActivityType.DataSource = GetActivityTypes();
+            //ddlActivityType.DataBind();
 
                       
         }
@@ -269,7 +275,7 @@ namespace SRFROWCA.Admin
             ddlClusterNew.SelectedIndex = 0;
             ddlObjectiveNew.SelectedIndex = 0;
             ddlPriorityNew.SelectedIndex = 0;
-            ddlActivityType.SelectedIndex = 0;
+            //ddlActivityType.SelectedIndex = 0;
             txtActivityEng.Text = txtActivityFr.Text = string.Empty;
             txtActivityFr.Visible = txtActivityEng.Visible = true;
             rfvEmgName.Enabled = rfvEmgNameFr.Enabled = true;
@@ -282,8 +288,7 @@ namespace SRFROWCA.Admin
             int clusterId = Convert.ToInt32(ddlClusterNew.SelectedValue);
             int objectiveId = Convert.ToInt32(ddlObjectiveNew.SelectedValue);
             int priorityId = Convert.ToInt32(ddlPriorityNew.SelectedValue);
-            int activityTypeId = Convert.ToInt32(ddlActivityType.SelectedValue);
-            
+            int activityTypeId = 1;// Convert.ToInt32(ddlActivityType.SelectedValue);            
 
             Guid userId = RC.GetCurrentUserId;
 
@@ -361,6 +366,19 @@ namespace SRFROWCA.Admin
 
         }
 
-        
+        private void RemoveColumnsFromDataTable(DataTable dt)
+        {
+            try
+            {
+                dt.Columns.Remove("ClusterId");
+                dt.Columns.Remove("ClusterObjectiveId");
+                dt.Columns.Remove("ObjectivePriorityId");
+                dt.Columns.Remove("PriorityActivityId");
+                dt.Columns.Remove("ActivityType");
+                dt.Columns.Remove("SiteLanguageId");
+                dt.Columns.Remove("ActivityTypeId");
+            }
+            catch { }
+        }
     }
 }

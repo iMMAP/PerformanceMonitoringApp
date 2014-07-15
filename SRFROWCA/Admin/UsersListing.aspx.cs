@@ -20,9 +20,9 @@ namespace SRFROWCA.Admin
             LoadUsers();
         }
 
-        private DataTable GetUsers()
+        private DataTable GetUsers(int pageSize = 0)
         {
-            object[] parameters = GetParameters();
+            object[] parameters = GetParameters(pageSize);
             if (RC.IsCountryAdmin(this.User))
             {
 
@@ -34,7 +34,7 @@ namespace SRFROWCA.Admin
             }
         }
 
-        private object[] GetParameters()
+        private object[] GetParameters(int pSize)
         {
             Guid userId = RC.GetCurrentUserId;
 
@@ -45,7 +45,8 @@ namespace SRFROWCA.Admin
             string userType = ddlRoles.SelectedValue == "All"? null: ddlRoles.SelectedValue;
             int? isApproved = rbIsApproved.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(rbIsApproved.SelectedValue);
             int? isLockedOut = null;
-            int pageSize = gvUsers.PageSize;
+            int pageSize = pSize > 0 ? pSize : gvUsers.PageSize;
+            
             int pageIndex = GridPageIndex;
             DateTime? startDate = txtFromDate.Text.Trim().Length > 0 ?
                                     DateTime.ParseExact(txtFromDate.Text.Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture) :
@@ -150,9 +151,13 @@ namespace SRFROWCA.Admin
 
         protected void btnExportExcel_Click(object sender, EventArgs e)
         {
-            string fileName = "3WPMusers";
+            DataTable dt = GetUsers(10000);
+            string fileName = "ORSUsers";
             string fileExtention = ".xls";
-            ExportUtility.ExportGridView(gvUsers, fileName, fileExtention, Response);
+            GridView gvUserExport = new GridView();
+            gvUserExport.DataSource = dt;
+            gvUserExport.DataBind();
+            ExportUtility.ExportGridView(gvUserExport, fileName, fileExtention, Response);
         }
 
         public override void VerifyRenderingInServerForm(Control control) { }
