@@ -333,20 +333,15 @@ namespace SRFROWCA.Anonymous
 
         private void RemoveColumnsFromDataTable(DataTable dt)
         {
-            //foreach (ListItem item in cbColumns.Items)
-            //{
-            //    if (!item.Selected)
-            //    {
-            //        dt.Columns.Remove(item.Value);
-            //    }
-            //}
-
-            dt.Columns.Remove("rnumber");
-            dt.Columns.Remove("ObjectiveId");
-            dt.Columns.Remove("PriorityId");
-            dt.Columns.Remove("MonthId");
-            dt.Columns.Remove("cnt");
-
+            try
+            {
+                dt.Columns.Remove("rnumber");
+                dt.Columns.Remove("ObjectiveId");
+                dt.Columns.Remove("PriorityId");
+                dt.Columns.Remove("MonthId");
+                dt.Columns.Remove("cnt");
+            }
+            catch { }
         }
 
         #endregion

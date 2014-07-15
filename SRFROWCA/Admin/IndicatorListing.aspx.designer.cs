@@ -40,15 +40,6 @@ namespace SRFROWCA.Admin {
         protected global::System.Web.UI.WebControls.Button btnAddActivity;
         
         /// <summary>
-        /// txtActivityName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtActivityName;
-        
-        /// <summary>
         /// ddlCluster control.
         /// </summary>
         /// <remarks>
@@ -56,6 +47,15 @@ namespace SRFROWCA.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCluster;
+        
+        /// <summary>
+        /// ddlActivity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlActivity;
         
         /// <summary>
         /// ddlObjective control.
@@ -67,6 +67,15 @@ namespace SRFROWCA.Admin {
         protected global::System.Web.UI.WebControls.DropDownList ddlObjective;
         
         /// <summary>
+        /// txtActivityName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtActivityName;
+        
+        /// <summary>
         /// ddlPriority control.
         /// </summary>
         /// <remarks>
@@ -74,15 +83,6 @@ namespace SRFROWCA.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlPriority;
-        
-        /// <summary>
-        /// ddlActivity control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlActivity;
         
         /// <summary>
         /// btnSearch control.
@@ -272,24 +272,6 @@ namespace SRFROWCA.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvEmgNameFr;
-        
-        /// <summary>
-        /// chkisSRP control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkisSRP;
-        
-        /// <summary>
-        /// chkIsPriority control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkIsPriority;
         
         /// <summary>
         /// hdnIndicatorId control.

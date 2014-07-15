@@ -20,7 +20,7 @@ namespace SRFROWCA.Admin
             PopulateFilters();
         }
 
-       
+
 
         // Add delete confirmation message with all delete buttons.
         protected void gvIndicator_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -47,12 +47,13 @@ namespace SRFROWCA.Admin
                 // Check if any IP has reported on this project. If so then do not delete it.
                 if (!IndicatorIsBeingUsed(activityDataId))
                 {
-                    ShowMessage("Indicator cannot be deleted! It is being used.", RC.NotificationType.Error, true, 500);
-                    return;
+                    ShowMessage("Indicator cannot be deleted! It is being used.", RC.NotificationType.Error, true, 2000);
                 }
-
-                //DeleteIndicator(activityDataId);
-                //LoadIndicators();
+                else
+                {
+                    DeleteIndicator(activityDataId);
+                    LoadIndicators();
+                }
             }
 
             // Edit Project.
@@ -71,8 +72,8 @@ namespace SRFROWCA.Admin
                 LoadActivitiesByPriority();
                 ddlActivityNew.SelectedValue = gvIndicator.DataKeys[row.RowIndex].Values["PriorityActivityId"].ToString();
                 ddlUnit.SelectedValue = gvIndicator.DataKeys[row.RowIndex].Values["UnitId"].ToString();
-                chkisSRP.Checked = Convert.ToBoolean(gvIndicator.DataKeys[row.RowIndex].Values["IsSRPIndicator"].ToString());
-                chkIsPriority.Checked = Convert.ToBoolean(gvIndicator.DataKeys[row.RowIndex].Values["IsPriorityIndicatory"].ToString());
+                //chkisSRP.Checked = Convert.ToBoolean(gvIndicator.DataKeys[row.RowIndex].Values["IsSRPIndicator"].ToString());
+                //chkIsPriority.Checked = Convert.ToBoolean(gvIndicator.DataKeys[row.RowIndex].Values["IsPriorityIndicatory"].ToString());
                 if (gvIndicator.DataKeys[row.RowIndex].Values["SiteLanguageId"].ToString() == "1")
                 {
                     txtActivityEng.Text = gvIndicator.DataKeys[row.RowIndex].Values["DataName"].ToString();
@@ -169,7 +170,7 @@ namespace SRFROWCA.Admin
         private void PopulateFilters()
         {
             ddlCluster.Items.Clear();
-            ddlCluster.Items.Add(new ListItem("All","-1"));
+            ddlCluster.Items.Add(new ListItem("All", "-1"));
             ddlCluster.DataValueField = "ClusterId";
             ddlCluster.DataTextField = "ClusterName";
             ddlCluster.DataSource = GetClusters();
@@ -213,8 +214,8 @@ namespace SRFROWCA.Admin
 
         private DataTable GetClusters()
         {
-            
-            return DBContext.GetData("GetAllClusters", new object[]{(int)RC.SelectedSiteLanguageId});
+
+            return DBContext.GetData("GetAllClusters", new object[] { (int)RC.SelectedSiteLanguageId });
         }
 
         private DataTable GetIndicators()
@@ -240,7 +241,7 @@ namespace SRFROWCA.Admin
         {
             return DBContext.GetData("GetAllUnits", new object[] { (int)RC.SelectedSiteLanguageId });
         }
-      
+
         private void LoadObjectivesByCluster()
         {
             ddlObjectiveNew.Items.Clear();
@@ -303,8 +304,8 @@ namespace SRFROWCA.Admin
             }
         }
 
-       protected void btnAddIndicator_Click(object sender, EventArgs e)
-        {         
+        protected void btnAddIndicator_Click(object sender, EventArgs e)
+        {
             ClearPopupControls();
             mpeAddOrg.Show();
         }
@@ -324,8 +325,8 @@ namespace SRFROWCA.Admin
             ddlPriorityNew.SelectedIndex = 0;
             ddlActivityNew.SelectedIndex = 0;
             ddlUnit.SelectedIndex = 0;
-            chkIsPriority.Checked = false;
-            chkisSRP.Checked = false;
+            //chkIsPriority.Checked = false;
+            //chkisSRP.Checked = false;
             txtActivityEng.Text = txtActivityFr.Text = string.Empty;
             txtActivityFr.Visible = txtActivityEng.Visible = true;
             rfvEmgName.Enabled = rfvEmgNameFr.Enabled = true;
@@ -335,22 +336,23 @@ namespace SRFROWCA.Admin
 
         private void SaveIndicator()
         {
-           int priorityActivityId = Convert.ToInt32(ddlActivityNew.SelectedValue);
+            int priorityActivityId = Convert.ToInt32(ddlActivityNew.SelectedValue);
 
             Guid userId = RC.GetCurrentUserId;
 
             if (!string.IsNullOrEmpty(hdnIndicatorId.Value))
             {
                 int indicatorId = Convert.ToInt32(hdnIndicatorId.Value);
-                DBContext.Update("UpdateActivityData", new object[] { indicatorId, priorityActivityId, Convert.ToInt32(ddlUnit.SelectedValue), chkisSRP.Checked, chkIsPriority.Checked, txtActivityEng.Text, txtActivityFr.Text, userId, txtActivityEng.Visible ? 1:2, DBNull.Value });
+                DBContext.Update("UpdateActivityData", new object[] { indicatorId, priorityActivityId, Convert.ToInt32(ddlUnit.SelectedValue), false, false, txtActivityEng.Text, txtActivityFr.Text, userId, txtActivityEng.Visible ? 1 : 2, DBNull.Value });
             }
             else
             {
-                DBContext.Add("InsertOutPutIndicator", new object[] { priorityActivityId, txtActivityEng.Text, txtActivityFr.Text, Convert.ToInt32(ddlUnit.SelectedValue), chkisSRP.Checked, chkIsPriority.Checked, userId, DBNull.Value });
+                DBContext.Add("InsertOutPutIndicator", new object[] { priorityActivityId, txtActivityEng.Text, txtActivityFr.Text, Convert.ToInt32(ddlUnit.SelectedValue), false,
+                                                                    false, userId, DBNull.Value });
             }
         }
 
-        
+
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 0)
         {
             updMessage.Update();
