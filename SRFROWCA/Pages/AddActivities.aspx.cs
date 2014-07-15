@@ -76,12 +76,14 @@ namespace SRFROWCA.Pages
             BindGridData();
             AddLocationsInSelectedList();
         }
+
         protected void ddlMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
             LocationRemoved = 0;
             BindGridData();
             AddLocationsInSelectedList();
         }
+
         protected void rblProjects_SelectedIndexChanged(object sender, EventArgs e)
         {
             BindGridData();
@@ -98,6 +100,7 @@ namespace SRFROWCA.Pages
                 ObjPrToolTip.CountryIndicatorIcon(e, 13);
             }
         }
+
         protected void gvActivities_RowCommand(object sender, GridViewCommandEventArgs e)
         {
 
@@ -219,9 +222,10 @@ namespace SRFROWCA.Pages
             var result = DateTime.Now.ToString("MMMM", new CultureInfo(RC.SiteCulture));
             result = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(result);
             int monthNumber = MonthNumber.GetMonthNumber(result);
-            monthNumber = monthNumber == 1? monthNumber : monthNumber -1;
+            monthNumber = monthNumber == 1 ? monthNumber : monthNumber - 1;
             ddlMonth.SelectedIndex = i > -1 ? i : ddlMonth.Items.IndexOf(ddlMonth.Items.FindByValue(monthNumber.ToString()));
         }
+
         private DataTable GetMonth()
         {
             DataTable dt = DBContext.GetData("GetMonths", new object[] { RC.SelectedSiteLanguageId });
@@ -240,6 +244,7 @@ namespace SRFROWCA.Pages
             var result = DateTime.Parse(DateTime.Now.ToShortDateString()).Year;
             ddlYear.SelectedIndex = ddlYear.Items.IndexOf(ddlYear.Items.FindByText(result.ToString()));
         }
+
         private DataTable GetYears()
         {
             DataTable dt = DBContext.GetData("GetYears");
@@ -252,6 +257,7 @@ namespace SRFROWCA.Pages
             PopulateAdmin1(countryId);
             //PopulateAdmin2(countryId);
         }
+
         private void PopulateAdmin1(int parentLocationId)
         {
             DataTable dt = GetAdmin1Locations(parentLocationId);
@@ -262,6 +268,7 @@ namespace SRFROWCA.Pages
 
             lblLocAdmin1.Text = UserInfo.CountryName + " " + (string)GetLocalResourceObject("AddActivities_PopulateAdmin1__Admin_1_Locations");
         }
+
         private DataTable GetAdmin1Locations(int parentLocationId)
         {
             string procedure = "GetSecondLevelChildLocations";
@@ -274,6 +281,7 @@ namespace SRFROWCA.Pages
             DataTable dt = DBContext.GetData(procedure, new object[] { parentLocationId });
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
+
         private void PopulateAdmin2(int parentLocationId)
         {
             DataTable dt = GetAdmin2Locations(parentLocationId);
@@ -283,6 +291,7 @@ namespace SRFROWCA.Pages
             cblLocations.DataBind();
             //lblLocAdmin2.Text = UserInfo.CountryName + (string)GetLocalResourceObject("AddActivities_PopulateAdmin2__Admin_2_Locations");
         }
+
         private DataTable GetAdmin2Locations(int parentLocationId)
         {
             DataTable dt = DBContext.GetData("GetThirdLevelChildLocations", new object[] { parentLocationId });
@@ -297,6 +306,7 @@ namespace SRFROWCA.Pages
             rblProjects.DataSource = dt;
             rblProjects.DataBind();
         }
+
         private DataTable GetUserProjects()
         {
             bool? isOPSProject = null;
@@ -307,10 +317,12 @@ namespace SRFROWCA.Pages
         {
             UI.FillObjectives(cblObjectives, true);
         }
+
         private void PopulatePriorities()
         {
             UI.FillPriorities(cblPriorities);
         }
+
         private void PopulateToolTips()
         {
             ObjPrToolTip.ObjectivesToolTip(cblObjectives);
@@ -319,6 +331,7 @@ namespace SRFROWCA.Pages
             DataTable dt = GetUserProjects();
             ProjectsToolTip(rblProjects, dt);
         }
+
         private void ProjectsToolTip(ListControl ctl, DataTable dt)
         {
             foreach (ListItem item in ctl.Items)
@@ -363,6 +376,7 @@ namespace SRFROWCA.Pages
 
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
+
         private void AddDynamicColumnsInGrid(DataTable dt)
         {
             foreach (DataColumn column in dt.Columns)
@@ -407,6 +421,7 @@ namespace SRFROWCA.Pages
                 }
             }
         }
+
         private void GetReportId()
         {
             int yearId = RC.GetSelectedIntVal(ddlYear);
@@ -437,6 +452,7 @@ namespace SRFROWCA.Pages
             PopulateToolTips();
             BindCultureResourcesOfPage();
         }
+
         private void AddLocationsInSelectedList()
         {
             PopulateLocations();
@@ -472,6 +488,7 @@ namespace SRFROWCA.Pages
 
             return locationIds.Distinct().ToList();
         }
+
         private void SelectLocationsOfGrid(List<int> locationIds)
         {
             foreach (ListItem item in cblLocations.Items)
@@ -496,12 +513,12 @@ namespace SRFROWCA.Pages
                         SaveReportMainInfo();
 
                     SaveReport();
-                    SendMail("Report Saved Summary!");
+                    SendMail("Report Saved Summary! " + DateTime.Now.ToString("dd-MMM-yyyy"), ReportId);
                 }
                 else
                 {
                     DeleteReport();
-                    SendMail("Report Delete Summary!");
+                    SendMail("Report Delete Summary! " + DateTime.Now.ToString("dd-MMM-yyyy"), ReportId);
                 }
 
                 scope.Complete();
@@ -509,18 +526,20 @@ namespace SRFROWCA.Pages
             }
         }
 
-        private void SendMail(string subject)
+        private void SendMail(string subject, int reportID)
         {
             try
             {
                 int countryID = UserInfo.Country > 0 ? UserInfo.Country : 0;
+                int projId = RC.GetSelectedIntVal(rblProjects);
 
                 bool emailClusterLead = true;
-                DataTable dtEmails = DBContext.GetData("uspGetUserEmails", new object[] { countryID, emailClusterLead });
+                DataTable dtEmails = DBContext.GetData("uspGetUserEmails", new object[] { countryID, projId, emailClusterLead });
 
                 string emails = string.Empty;
                 emails = "orsocharowca@gmail.com";
-                
+                string changeType = subject.Contains("Delete") ? "deleted" : "added";
+
                 if (dtEmails.Rows.Count > 0)
                 {
                     using (MailMessage mailMsg = new MailMessage())
@@ -532,7 +551,11 @@ namespace SRFROWCA.Pages
                         mailMsg.To.Add(emails.TrimEnd(','));
                         mailMsg.Subject = subject;
                         mailMsg.IsBodyHtml = true;
-                        mailMsg.Body = string.Format(@"");
+                        mailMsg.Body = string.Format(@"Notification:" + Environment.NewLine +
+                                                      "The user: : " + User.Identity.Name + " has " + changeType + " the report with following details:" + Environment.NewLine +
+                                                      "ProjectID: " + projId + Environment.NewLine +
+                                                      "CountryID:" + countryID + Environment.NewLine+
+                                                      "ReportID:" + reportID + Environment.NewLine);
 
                         Mail.SendMail(mailMsg);
                     }
