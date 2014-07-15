@@ -40,6 +40,42 @@ namespace SRFROWCA.RegionalLead {
         protected global::System.Web.UI.WebControls.Localize localizeClusterName;
         
         /// <summary>
+        /// btnAddRegActivity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnAddRegActivity;
+        
+        /// <summary>
+        /// localCountryIndicatorsAddAct control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localCountryIndicatorsAddAct;
+        
+        /// <summary>
+        /// btnAddIndicator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnAddIndicator;
+        
+        /// <summary>
+        /// localCountryIndicaotrsAddInd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localCountryIndicaotrsAddInd;
+        
+        /// <summary>
         /// gvIndicators control.
         /// </summary>
         /// <remarks>

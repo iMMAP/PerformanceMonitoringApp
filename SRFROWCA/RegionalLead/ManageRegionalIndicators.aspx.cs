@@ -137,5 +137,15 @@ namespace SRFROWCA.RegionalLead
             Guid userId = RC.GetCurrentUserId;
             DBContext.Update("InsertDeleteRegionalIndicaotr", new object[] { indicatorId, UserInfo.EmergencyCluster, isAdd, userId, DBNull.Value });
         }
+
+        protected void btnAddRegActivity_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/ClusterLead/AddSRPActivity.aspx");
+        }
+
+        protected void btnAddIndicator_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/LeadPages/AddIndicatorOnActivity.aspx");
+        }
     }
 }
