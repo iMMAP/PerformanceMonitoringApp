@@ -54,6 +54,14 @@ namespace SRFROWCA.ClusterLead
             PopulatePriority();
             AddIndicatorControl(0);
             IndControlId = 1;
+            if (RC.IsClusterLead(this.User))
+            {
+                btnBackToSRPList.Text = "Back To SRP List";
+            }
+            else
+            {
+                btnBackToSRPList.Text = "Back To Indicators List";
+            }
         }
 
         private void PopulateObjective()
@@ -78,7 +86,14 @@ namespace SRFROWCA.ClusterLead
             {
                 SaveData();
                 scope.Complete();
-                Response.Redirect("AddSRPActivitiesFromMasterList.aspx");
+                if (RC.IsClusterLead(this.User))
+                {
+                    Response.Redirect("AddSRPActivitiesFromMasterList.aspx");
+                }
+                else
+                {
+                    Response.Redirect("~/RegionalLead/ManageRegionalIndicators.aspx");
+                }
             }
         }
 
@@ -95,7 +110,14 @@ namespace SRFROWCA.ClusterLead
 
                         if (indControl != null)
                         {
-                            indControl.SaveIndicators(priorityActivityId);
+                            if (RC.IsClusterLead(this.User))
+                            {
+                                indControl.SaveIndicators(priorityActivityId);
+                            }
+                            else
+                            {
+                                indControl.SaveRegionalIndicators(priorityActivityId);
+                            }
                         }
                     }
                 }
@@ -168,7 +190,14 @@ namespace SRFROWCA.ClusterLead
 
         protected void btnBackToSRPList_Click(object sender, EventArgs e)
         {
-            Response.Redirect("AddSRPActivitiesFromMasterList.aspx");
+            if (RC.IsClusterLead(this.User))
+            {
+                Response.Redirect("AddSRPActivitiesFromMasterList.aspx");
+            }
+            else
+            {
+                Response.Redirect("~/RegionalLead/ManageRegionalIndicators.aspx");
+            }
         }
     }
 }

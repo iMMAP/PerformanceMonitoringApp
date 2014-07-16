@@ -2029,6 +2029,9 @@
   <ItemGroup>
     <Content Include="App_LocalResources\faq.aspx.fr-FR.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="RegionalLead\App_LocalResources\ManageRegionalIndicators.aspx.resx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
