@@ -204,7 +204,7 @@
                                 <ItemStyle Wrap="True" Width="150px"></ItemStyle>
                             </asp:BoundField>
                             <asp:BoundField DataField="Phone" HeaderText="Phone" meta:resourcekey="BoundFieldResource9" />
-                            <asp:TemplateField meta:resourcekey="TemplateFieldResource1">
+                            <asp:TemplateField HeaderText="View" meta:resourcekey="TemplateFieldResource1">
                                 <ItemTemplate>
                                      <asp:ImageButton ID="lnkVieDetails" runat="server" ImageUrl="~/assets/orsimages/view.png" CommandName="ViewProject"
                                                     CommandArgument='<%# Eval("ProjectId") %>' meta:resourcekey="lnkVieDetailsResource1" />
@@ -213,7 +213,7 @@
                                         CommandArgument='<%# Eval("ProjectId") %>' meta:resourcekey="lnkVieDetailsResource1" />--%>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField >
+                            <asp:TemplateField HeaderText="PDF" >
                                 <ItemTemplate>
                                      <asp:ImageButton ID="lnkPrint" runat="server" ImageUrl="~/assets/orsimages/pdf.png" CommandName="PrintReport"
                                                     CommandArgument='<%# Eval("ProjectId") %>' />

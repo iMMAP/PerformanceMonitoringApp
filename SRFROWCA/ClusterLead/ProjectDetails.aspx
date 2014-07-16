@@ -238,7 +238,7 @@
                             <asp:BoundField DataField="Country" HeaderText="Location" SortExpression="Country"/>
                             <asp:BoundField DataField="IsApproved" HeaderText="Is Approved" SortExpression="IsApproved" />
                             <asp:BoundField DataField="CreatedDate" HeaderText="Created On" SortExpression="CreatedDate" ></asp:BoundField>
-                             <asp:TemplateField >
+                             <asp:TemplateField HeaderText="View" >
 
                                 <ItemTemplate>
                                      <asp:ImageButton ID="lnkViewDetails" runat="server" ImageUrl="~/assets/orsimages/view.png" CommandName="ViewReport"
@@ -248,7 +248,7 @@
                                         CommandArgument='<%# Eval("ProjectId") %>' meta:resourcekey="lnkVieDetailsResource1" />--%>
                                 </ItemTemplate>
                                 </asp:TemplateField>
-                            <asp:TemplateField >
+                            <asp:TemplateField HeaderText="PDF" >
                                 <ItemTemplate>
                                      <asp:ImageButton ID="lnkPrint" runat="server" ImageUrl="~/assets/orsimages/pdf.png" CommandName="PrintReport"
                                                     CommandArgument='<%# Eval("ReportID") %>' />

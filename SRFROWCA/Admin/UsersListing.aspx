@@ -84,7 +84,7 @@
                                                                     <asp:ListItem Text="User" Value="User"></asp:ListItem>
                                                                     <asp:ListItem Text="Clsuter Lead" Value="ClusterLead"></asp:ListItem>
                                                                     <asp:ListItem Text="Regional Lead" Value="RegionalClusterLead"></asp:ListItem>
-                                                                    <asp:ListItem Text="OCHA" Value="OCHA"></asp:ListItem>
+                                                                    <asp:ListItem Text="OCHA Country Staff" Value="OCHACountryStaff"></asp:ListItem>
                                                                     <asp:ListItem Text="OCHA Country Admin" Value="CountryAdmin"></asp:ListItem>
                                                                 </asp:DropDownList>
                                                             </td>

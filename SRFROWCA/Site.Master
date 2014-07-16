@@ -226,42 +226,16 @@
                                 <asp:Localize ID="localReports" runat="server" Text="Reports" meta:resourcekey="localReportsResource1"></asp:Localize>
                             </span><b class="arrow icon-angle-down"></b></a>
                             <ul class="submenu">
-                                <li id="liReportsSummaryReports" runat="server"><a id="menueReportsSummaryReports"
-                                    runat="server" href="#" class="dropdown-toggle"><i class="icon-angle-double-right"></i>
-                                    <asp:Localize ID="localReportsSummaryReports" runat="server" Text="Summary Reports" meta:resourcekey="localReportsSummaryReportsResource1"></asp:Localize>
-                                    <b class="arrow icon-angle-down"></b></a>
-                                    <ul class="submenu">
-                                        <li id="liReportsSummaryReportsOperationalPresence" runat="server"><a id="menueReportsSummaryReportsOperationalReports"
-                                            runat="server" href="~/Reports/ProjectsPerOrganization.aspx"><i class="icon-angle-double-right"></i>
-                                            <asp:Localize ID="localReportsSumRepOprPresence" runat="server" Text="Operational Presence" meta:resourcekey="localReportsSumRepOprPresenceResource1"></asp:Localize></a></li>
-                                        <li id="liContactList" runat="server"><a id="menueContactList" runat="server" href="~/Reports/OperationalPresence.aspx">
-                                            <i class="icon-angle-double-right"></i>
-                                            <asp:Localize ID="localReportsSumRepContactList" runat="server" Text="Contact List" meta:resourcekey="localReportsSumRepContactListResource1"></asp:Localize></a></li>
-                                        <li id="liSumOfCountryIndicators" runat="server"><a id="menueSumOfCountryIndicators" runat="server" href="~/ClusterLead/SumOfCountryIndicators.aspx">
-                                            <i class="icon-angle-double-right"></i>
-                                            <asp:Localize ID="localReportsSumRepSumOfCountryInd" runat="server" Text="Country Indicators" meta:resourcekey="localReportsSumRepSumOfCountryIndResource1"></asp:Localize></a></li>
-                                        <li id="liSumOfRegionalIndicators" runat="server"><a id="menueSumOfRegionalIndicators" runat="server" href="~/PivotTables/RegionalIndicatorsAchievedReport.aspx">
-                                            <i class="icon-angle-double-right"></i>
-                                            <asp:Localize ID="localReportsSumReportSumOfRegInd" runat="server" Text="Regional Indicator" meta:resourcekey="localReportsSumReportSumOfRegIndResource1"></asp:Localize></a></li>
-                                        <li id="liReportsSummaryReportsProjectReports" runat="server"><a id="menueReportsSummaryReportsProjectReports"
-                                            runat="server" href="#" class="dropdown-toggle"><i class="icon-angle-double-right"></i>
-                                            <asp:Localize ID="localReportsProjReports" runat="server" Text="Project Reports" meta:resourcekey="localReportsProjReportsResource1"></asp:Localize><b class="arrow icon-angle-down"></b></a>
-                                            <ul class="submenu">
-                                                <li id="liReportsSummaryReportsProjectReportsByOrg" runat="server"><a id="menueReportsSummaryReportsProjectReportsByOrg"
-                                                    runat="server" href="~/Reports/ProjectsPerOrganization.aspx"><i class="icon-angle-right"></i>
-                                                    <asp:Localize ID="localReportsProjReportByOrg" runat="server" Text="By Orgs" meta:resourcekey="localReportsProjReportByOrgResource1"></asp:Localize>
-                                                </a></li>
-                                                <li id="liReportsSummaryReportsProjectReportsByCountry" runat="server"><a id="menueReportsSummaryReportsProjectReportsByCountry"
-                                                    runat="server" href="~/Reports/ProjectsByCountry.aspx"><i class="icon-angle-right"></i>
-                                                    <asp:Localize ID="localReportsProjReportByCountry" runat="server" Text="By Country" meta:resourcekey="localReportsProjReportByCountryResource1"></asp:Localize>
-                                                </a></li>
-                                                <li id="liReportsSummaryReportsProjectReportsByClusters" runat="server"><a id="menueReportsSummaryReportsProjectReportsByClusters"
-                                                    runat="server" href="~/Reports/ProjectByClusters.aspx"><i class="icon-angle-right"></i>
-                                                    <asp:Localize ID="localREportsProjReportByCluster" runat="server" Text="By Cluster" meta:resourcekey="localREportsProjReportByClusterResource1"></asp:Localize></a> </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
+                                <li id="liContactList" runat="server"><a id="menueContactList" runat="server" href="~/Reports/OperationalPresence.aspx">
+                                    <i class="icon-angle-double-right"></i>
+                                    <asp:Localize ID="localReportsSumRepContactList" runat="server" Text="Contact List" meta:resourcekey="localReportsSumRepContactListResource1"></asp:Localize></a></li>
+                                <li id="liSumOfCountryIndicators" runat="server"><a id="menueSumOfCountryIndicators" runat="server" href="~/ClusterLead/SumOfCountryIndicators.aspx">
+                                    <i class="icon-angle-double-right"></i>
+                                    <asp:Localize ID="localReportsSumRepSumOfCountryInd" runat="server" Text="Country Indicators" meta:resourcekey="localReportsSumRepSumOfCountryIndResource1"></asp:Localize></a></li>
+                                <li id="liSumOfRegionalIndicators" runat="server"><a id="menueSumOfRegionalIndicators" runat="server" href="~/PivotTables/RegionalIndicatorsAchievedReport.aspx">
+                                    <i class="icon-angle-double-right"></i>
+                                    <asp:Localize ID="localReportsSumReportSumOfRegInd" runat="server" Text="Regional Indicator" meta:resourcekey="localReportsSumReportSumOfRegIndResource1"></asp:Localize></a></li>
+
                                 <li id="liCustomReport" runat="server"><a href="~/Anonymous/AllData.aspx" id="menueCustomReport"
                                     runat="server"><i class="icon-angle-double-right"></i>
                                     <asp:Localize ID="localReportCustomReport" runat="server" Text="Custom Report" meta:resourcekey="localReportCustomReportResource1"></asp:Localize>
@@ -352,7 +326,7 @@
                             <asp:Localize ID="Localize1" runat="server" Text="Custom Report" meta:resourcekey="localReportCustomReportResource1"></asp:Localize>
                         </a></li>
 
-                        
+
                         <li><a href="<%=BaseURL %>/ContactUs/Contactus.aspx"><i class="icon-envelope-alt"></i><span
                             class="menu-text">
                             <asp:Localize ID="localContactUs" runat="server" Text="Contact Us" meta:resourcekey="localContactUsResource1"></asp:Localize></span> </a></li>

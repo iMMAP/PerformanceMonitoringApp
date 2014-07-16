@@ -182,6 +182,9 @@ namespace SRFROWCA
             liProjectXMLFeeds.Visible = isShow;
             liActivities.Visible = isShow;
             liIndicators.Visible = isShow;
+            liContactList.Visible = isShow;
+            liSumOfCountryIndicators.Visible = isShow;
+            liSumOfRegionalIndicators.Visible = isShow;
         }
 
         private void ShowUserMenue()
@@ -196,7 +199,7 @@ namespace SRFROWCA
             liManageProject.Visible = isShow;
             menuManageActivities.Visible = isShow;
             liManageActivity.Visible = isShow;
-            liReportsSummaryReports.Visible = !isShow;
+            //liReportsSummaryReports.Visible = !isShow;
             liPivotOrgOperational.Visible = !isShow;
             menuePivotOPrPresence.Visible = !isShow;
             liPivotNumberOfOrgs.Visible = !isShow;
@@ -217,7 +220,7 @@ namespace SRFROWCA
             menuRegionalIndicators.Visible = isShow;
             liRegionalIndicators.Visible = isShow;
             liSumOfRegionalIndicators.Visible = isShow;
-            liCLprojectsListing.Visible = isShow;
+            liCLprojectsListing.Visible = isShow;            
             //liReportsTopIndicators1.Visible = isShow;
             //liReportsTopIndicatorsGeneral1.Visible = isShow;
             //liReportsTopIndicatorRegional1.Visible = isShow;
@@ -259,6 +262,9 @@ namespace SRFROWCA
         {
             bool isShow = true;
             liFundingStatus.Visible = isShow;
+            liReports.Visible = isShow;
+            menueReports.Visible = isShow;
+            liContactList.Visible = isShow;
         }
 
         private void ShowCountryAdminMenue()
@@ -276,6 +282,7 @@ namespace SRFROWCA
             liPivotSumOfCountryIndicators.Visible = isShow;
             liBulkImport.Visible = isShow;
             liUserListing.Visible = isShow;
+            liContactList.Visible = isShow;
         }
 
         private void ShowOCHACountryStaff()
@@ -368,41 +375,41 @@ namespace SRFROWCA
             else if (uri == "/Reports/OperationalPresence.aspx")
             {
                 liReports.Attributes.Add("class", "active open");
-                liReportsSummaryReports.Attributes.Add("class", "active open");
+                //liReportsSummaryReports.Attributes.Add("class", "active open");
                 liContactList.Attributes.Add("class", "active");
             }
             else if (uri == "/ClusterLead/SumOfCountryIndicators.aspx")
             {
                 liReports.Attributes.Add("class", "active open");
-                liReportsSummaryReports.Attributes.Add("class", "active open");
+                //liReportsSummaryReports.Attributes.Add("class", "active open");
                 liSumOfCountryIndicators.Attributes.Add("class", "active");
             }
             else if (uri == "/PivotTables/RegionalIndicatorsAchievedReport.aspx")
             {
                 liReports.Attributes.Add("class", "active open");
-                liReportsSummaryReports.Attributes.Add("class", "active open");
+                //liReportsSummaryReports.Attributes.Add("class", "active open");
                 liSumOfRegionalIndicators.Attributes.Add("class", "active");
             }
             else if (uri == "/Reports/ProjectsPerOrganization.aspx")
             {
                 liReports.Attributes.Add("class", "active open");
-                liReportsSummaryReports.Attributes.Add("class", "active open");
-                liReportsSummaryReportsProjectReports.Attributes.Add("class", "active open");
-                liReportsSummaryReportsProjectReportsByOrg.Attributes.Add("class", "active");
+                //liReportsSummaryReports.Attributes.Add("class", "active open");
+                //liReportsSummaryReportsProjectReports.Attributes.Add("class", "active open");
+                //liReportsSummaryReportsProjectReportsByOrg.Attributes.Add("class", "active");
             }
             else if (uri == "/Reports/ProjectByClusters.aspx")
             {
                 liReports.Attributes.Add("class", "active open");
-                liReportsSummaryReports.Attributes.Add("class", "active open");
-                liReportsSummaryReportsProjectReports.Attributes.Add("class", "active open");
-                liReportsSummaryReportsProjectReportsByClusters.Attributes.Add("class", "active");
+                //liReportsSummaryReports.Attributes.Add("class", "active open");
+                //liReportsSummaryReportsProjectReports.Attributes.Add("class", "active open");
+                //liReportsSummaryReportsProjectReportsByClusters.Attributes.Add("class", "active");
             }
             else if (uri == "/Reports/ProjectsByCountry.aspx")
             {
                 liReports.Attributes.Add("class", "active open");
-                liReportsSummaryReports.Attributes.Add("class", "active open");
-                liReportsSummaryReportsProjectReports.Attributes.Add("class", "active open");
-                liReportsSummaryReportsProjectReportsByCountry.Attributes.Add("class", "active");
+                //liReportsSummaryReports.Attributes.Add("class", "active open");
+                //liReportsSummaryReportsProjectReports.Attributes.Add("class", "active open");
+                //liReportsSummaryReportsProjectReportsByCountry.Attributes.Add("class", "active");
             }
             else if (uri == "/PivotTables/PerfMontPivot.aspx")
             {
