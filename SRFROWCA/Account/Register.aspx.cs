@@ -212,11 +212,7 @@ namespace SRFROWCA.Account
             if (ddlUserRole.SelectedValue.Equals("5"))
             {
                 roleName = "CountryAdmin";
-            }
-            else if (ddlUserRole.SelectedValue.Equals("4"))
-            {
-                roleName = "OCHA";
-            }
+            }            
             else if (ddlUserRole.SelectedValue.Equals("3"))
             {
                 roleName = "RegionalClusterLead";
