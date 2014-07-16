@@ -144,8 +144,19 @@
                                     <h4>
                                         <asp:Localize ID="localizeClusterName" runat="server" Text=""></asp:Localize>
                                     </h4>
-                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up">
-                                    </i></a></span>
+                                  
+                            <div class="btn-group pull-right">
+                                <button runat="server" id="btnAddRegActivity" onserverclick="btnAddRegActivity_Click"
+                                    class="width-10 btn btn-sm btn-yellow" title="Add Indicator" style="margin-right:5px;">
+                                    <asp:Localize ID="localCountryIndicatorsAddAct" runat="server" Text="Add Activity & Indicator" meta:resourcekey="localCountryIndicatorsAddActResource1"></asp:Localize>
+                                </button>
+                                <button runat="server" id="btnAddIndicator" onserverclick="btnAddIndicator_Click"
+                                    class="width-10 btn btn-sm btn-yellow" title="Add Indicator">
+                                    <asp:Localize ID="localCountryIndicaotrsAddInd" runat="server" Text="Add Indicator" meta:resourcekey="localCountryIndicaotrsAddIndResource1"></asp:Localize>
+                                </button>
+                            </div>
+                       <%--<a href="#" data-action="collapse"><i class="icon-chevron-up">
+                                    </i></a>--%>
                                 </div>
                                 <div class="widget-body">
                                     <div class="widget-main">
