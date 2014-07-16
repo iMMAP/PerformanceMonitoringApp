@@ -282,7 +282,6 @@ namespace SRFROWCA.ClusterLead
             {
                 int.TryParse(ddlClusters.SelectedValue, out tempVal);
             }
-
             int? clusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
 
             tempVal = 0;
@@ -309,21 +308,9 @@ namespace SRFROWCA.ClusterLead
             {
                 admin1 = (int?)null;
             }
-
-            //int? admin2 = RC.GetSelectedIntVal(ddlAdmin2);
-            //if (admin2 == 0)
-            //{
-            //    admin2 = (int?)null;
-            //}
-
+            
             int? cbReported = cblReportingStatus.SelectedIndex > -1 ? RC.GetSelectedIntVal(cblReportingStatus) : (int?)null;
             int? cbFunded = cblFundingStatus.SelectedIndex > -1 ? RC.GetSelectedIntVal(cblFundingStatus) : (int?)null;
-
-            //int? countryId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
-
-            //return DBContext.GetData("GetProjects", new object[] {countryId, clusterId,projCode, orgId, admin1, admin2, 
-            //                                                                DBNull.Value, cbFunded, cbReported, 1 });
-
             return DBContext.GetData("GetProjects", new object[] {countryID, clusterId,projCode, orgId, admin1, DBNull.Value, 
                                                                             DBNull.Value, cbFunded, cbReported, 1 });
         }
