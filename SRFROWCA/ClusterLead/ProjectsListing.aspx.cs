@@ -282,8 +282,10 @@ namespace SRFROWCA.ClusterLead
             {
                 int.TryParse(ddlClusters.SelectedValue, out tempVal);
             }
+
             int? clusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
 
+            tempVal = 0;
             if (ddlCountry.Visible)
             {
                 tempVal = 0;
