@@ -8,6 +8,8 @@ using BusinessLogic;
 using System.Data;
 using SRFROWCA.Common;
 using System.Transactions;
+using System.Web.Security;
+using System.Net.Mail;
 
 namespace SRFROWCA.LeadPages
 {
@@ -43,9 +45,9 @@ namespace SRFROWCA.LeadPages
             if (dt.Rows.Count > 0)
             {
                 divObjPr.InnerHtml = dt.Rows[0]["ShortObjectiveTitle"].ToString() + "<br/>" + dt.Rows[0]["ShortPriorityText"].ToString();
-                txtActivity.Text = dt.Rows[0]["ActivityName"].ToString();
+                ViewState["oldActivity"] = txtActivity.Text = dt.Rows[0]["ActivityName"].ToString();
                 ActivityId = Convert.ToInt32(dt.Rows[0]["PriorityActivityId"].ToString());
-                txtIndicator.Text = dt.Rows[0]["DataName"].ToString();
+                ViewState["oldIndicator"] = txtIndicator.Text = dt.Rows[0]["DataName"].ToString();
             }
         }
 
@@ -54,9 +56,32 @@ namespace SRFROWCA.LeadPages
             using (TransactionScope scope = new TransactionScope())
             {
                 SaveData();
+                if (ViewState["oldActivity"].ToString() != txtActivity.Text || ViewState["oldIndicator"].ToString() != txtIndicator.Text)
+                {
+                    SendNewIndicatorEmail(string.Format(@"Old Activity: {0}<br/>New Activity: {1}<br/><br/>
+                    Old Indicator: {2}<br/>New Indicator: {3}<br/><br/>", ViewState["oldActivity"].ToString(), txtActivity.Text, ViewState["oldIndicator"].ToString(), txtIndicator.Text));
+                }
                 Session["SRPCustomEditIndicator"] = null;
                 scope.Complete();
                 Response.Redirect("~/ClusterLead/AddSRPActivitiesFromMasterList.aspx");
+            }
+        }
+        private void SendNewIndicatorEmail(string strIndicators)
+        {
+            using (MailMessage mailMsg = new MailMessage())
+            {
+                mailMsg.From = new MailAddress("orsocharowca@gmail.com");
+                mailMsg.To.Add("orsocharowca@gmail.com");
+                mailMsg.Subject = "Activity/Indicator Has Been Modified in ORS Master List";
+                mailMsg.IsBodyHtml = true;
+                mailMsg.Body = string.Format(@"Activity/Indicator Has Been Modified in ORS Master List<hr/>
+                                                {0}<br/>                                              
+                                                <b>By Following User:</b><br/>                                                        
+                                                        <b>User Name:</b> {1}<br/>
+                                                        <b>Email:</b> {2}<br/>                                                        
+                                                        <b>Phone:</b> {3}<b/>"
+                                                        , strIndicators, Membership.GetUser().UserName, Membership.GetUser().Email, RC.GetUserDetails().Rows[0]["PhoneNumber"].ToString());
+                Mail.SendMail(mailMsg);
             }
         }
 
@@ -87,7 +112,15 @@ namespace SRFROWCA.LeadPages
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             Session["SRPCustomEditIndicator"] = null;
-            Response.Redirect("~/ClusterLead/AddSRPActivitiesFromMasterList.aspx");
+            
+            if (RC.IsClusterLead(this.User))
+            {
+                Response.Redirect("AddSRPActivitiesFromMasterList.aspx");
+            }
+            else
+            {
+                Response.Redirect("~/RegionalLead/ManageRegionalIndicators.aspx");
+            }
         }
 
 
