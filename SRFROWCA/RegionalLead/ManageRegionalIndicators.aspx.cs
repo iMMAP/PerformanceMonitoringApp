@@ -147,5 +147,13 @@ namespace SRFROWCA.RegionalLead
         {
             Response.Redirect("~/LeadPages/AddIndicatorOnActivity.aspx");
         }
+        protected void gvIndicators_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "EditIndicator")
+            {
+                Session["SRPCustomEditIndicator"] = e.CommandArgument.ToString();
+                Response.Redirect("~/LeadPages/EditActIndicator.aspx");
+            }
+        }
     }
 }

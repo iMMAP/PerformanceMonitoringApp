@@ -9,6 +9,10 @@ using SRFROWCA.Controls;
 using SRFROWCA.Common;
 using BusinessLogic;
 using System.Data;
+using System.Text;
+using System.Net.Mail;
+using System.Web.Security;
+
 
 namespace SRFROWCA.LeadPages
 {
@@ -117,6 +121,7 @@ namespace SRFROWCA.LeadPages
             int priorityActivityId = RC.GetSelectedIntVal(ddlActivities);
             if (priorityActivityId > 0)
             {
+                StringBuilder strIndcators = new StringBuilder();
                 foreach (Control ctl in pnlAdditionalIndicaotrs.Controls)
                 {
                     if (ctl != null && ctl.ID != null && ctl.ID.Contains("indicatorControlId"))
@@ -128,14 +133,40 @@ namespace SRFROWCA.LeadPages
                             if (RC.IsClusterLead(this.User))
                             {
                                 indControl.SaveIndicators(priorityActivityId);
+                                
                             }
                             else
                             {
                                 indControl.SaveRegionalIndicators(priorityActivityId);
                             }
+                            TextBox txtEng = (TextBox)indControl.FindControl("txtInd1Eng");
+                            TextBox txtFr = (TextBox)indControl.FindControl("txtInd1Fr");
+                            strIndcators.AppendFormat("Indicator (English): {0}<br/>Indicator (French): {1}<br/><br/>", txtEng.Text, txtFr.Text);
+                           
                         }
                     }
                 }
+                SendNewIndicatorEmail(strIndcators.ToString());
+            }
+        }
+
+
+        private void SendNewIndicatorEmail(string strIndicators)
+        {
+            using (MailMessage mailMsg = new MailMessage())
+            {
+                mailMsg.From = new MailAddress("orsocharowca@gmail.com");                
+                mailMsg.To.Add("orsocharowca@gmail.com");
+                mailMsg.Subject = "New Indicators Has Been Added in ORS Master List";
+                mailMsg.IsBodyHtml = true;
+                mailMsg.Body = string.Format(@"New Indicators Has Been Added in ORS Master List<hr/>
+                                                {0}<br/>                                              
+                                                <b>By Following User:</b><br/>                                                        
+                                                        <b>User Name:</b> {1}<br/>
+                                                        <b>Email:</b> {2}<br/>                                                        
+                                                        <b>Phone:</b> {3}<b/>"
+                                                        , strIndicators, Membership.GetUser().UserName,Membership.GetUser().Email,RC.GetUserDetails().Rows[0]["PhoneNumber"].ToString());
+               Mail.SendMail(mailMsg);                
             }
         }
 
@@ -186,5 +217,7 @@ namespace SRFROWCA.LeadPages
                 Response.Redirect("~/RegionalLead/ManageRegionalIndicators.aspx");
             }
         }
+
+        
     }
 }
