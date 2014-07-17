@@ -538,7 +538,7 @@ namespace SRFROWCA.Pages
 
                 string emails = string.Empty;
                 emails = "orsocharowca@gmail.com";
-                string changeType = subject.Contains("Delete") ? "deleted" : "added";
+                string changeType = subject.Contains("Delete") ? "deleted" : "Added/Updated";
 
                 if (dtEmails.Rows.Count > 0)
                 {
