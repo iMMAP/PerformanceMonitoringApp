@@ -162,7 +162,7 @@
                                     <div class="widget-main">
                                         <asp:GridView ID="gvIndicators" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True"
                                             HeaderStyle-BackColor="ButtonFace" DataKeyNames="ActivityDataId" CssClass="imagetable"
-                                            OnRowDataBound="gvIndicators_RowDataBound" Width="100%">
+                                            OnRowDataBound="gvIndicators_RowDataBound" Width="100%" OnRowCommand="gvIndicators_RowCommand">
                                             <HeaderStyle BackColor="Control"></HeaderStyle>
                                             <RowStyle CssClass="istrow" />
                                             <AlternatingRowStyle CssClass="altcolor" />
@@ -201,6 +201,12 @@
                                                 </asp:TemplateField>
                                                 <asp:BoundField DataField="Indicator" HeaderText="Output Indicator" ItemStyle-CssClass="testind"
                                                     SortExpression="Indicator" ItemStyle-Wrap="true"></asp:BoundField>
+                                                <asp:TemplateField meta:resourcekey="TemplateFieldResource3">
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="lnkVieDetails" runat="server" Text="Edit" CommandName="EditIndicator"
+                                                CommandArgument='<%# Eval("ActivityDataId") %>' meta:resourcekey="lnkVieDetailsResource1" />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
                                             </Columns>
                                         </asp:GridView>
                                     </div>
