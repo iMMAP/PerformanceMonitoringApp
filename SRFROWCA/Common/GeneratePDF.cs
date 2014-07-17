@@ -244,16 +244,16 @@ namespace SRFROWCA.Common
             }
             else
             {
-                DataRow[] rows = dt.Select("UserID = '" + RC.GetCurrentUserId + "'");
+                //DataRow[] rows = dt.Select("UserID = '" + RC.GetCurrentUserId + "'");
 
-                if (rows.Length > 0)
+                //if (rows.Length > 0)
                 {
                     DataTable dtFiltered = new DataTable();
                     string[] selectedColumns = new[] { "ReportID", "ReportName", "OrganizationName", "Month", "CreatedBy", "CreatedDate", "UpdatedBy", "UpdatedDate" };
 
                     try
                     {
-                        dtFiltered = new DataView(rows.CopyToDataTable<DataRow>()).ToTable(true, selectedColumns);
+                        dtFiltered = dt.DefaultView.ToTable(true, selectedColumns); //new DataView(rows.CopyToDataTable<DataRow>()).ToTable(true, selectedColumns);
 
                     }
                     catch { }
