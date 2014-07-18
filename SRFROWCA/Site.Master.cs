@@ -283,6 +283,7 @@ namespace SRFROWCA
             liBulkImport.Visible = isShow;
             liUserListing.Visible = isShow;
             liContactList.Visible = isShow;
+            liProgressSummary.Visible = isShow;
         }
 
         private void ShowOCHACountryStaff()

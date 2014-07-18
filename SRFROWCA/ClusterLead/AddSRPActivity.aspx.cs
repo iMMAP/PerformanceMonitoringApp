@@ -134,20 +134,27 @@ namespace SRFROWCA.ClusterLead
 
         private void SendNewIndicatorEmail(string strIndicators)
         {
-            using (MailMessage mailMsg = new MailMessage())
+            try
             {
-                mailMsg.From = new MailAddress("orsocharowca@gmail.com");
-                mailMsg.To.Add("orsocharowca@gmail.com");
-                mailMsg.Subject = "New Indicators Has Been Added in ORS Master List";
-                mailMsg.IsBodyHtml = true;
-                mailMsg.Body = string.Format(@"New Indicators Has Been Added in ORS Master List<hr/>
+                using (MailMessage mailMsg = new MailMessage())
+                {
+                    mailMsg.From = new MailAddress("orsocharowca@gmail.com");
+                    mailMsg.To.Add("orsocharowca@gmail.com");
+                    mailMsg.Subject = "New Indicators Has Been Added in ORS Master List";
+                    mailMsg.IsBodyHtml = true;
+                    mailMsg.Body = string.Format(@"New Indicators Has Been Added in ORS Master List<hr/>
                                                 {0}<br/>                                              
                                                 <b>By Following User:</b><br/>                                                        
                                                         <b>User Name:</b> {1}<br/>
                                                         <b>Email:</b> {2}<br/>                                                        
                                                         <b>Phone:</b> {3}<b/>"
-                                                        , strIndicators, Membership.GetUser().UserName, Membership.GetUser().Email, RC.GetUserDetails().Rows[0]["PhoneNumber"].ToString());
-                Mail.SendMail(mailMsg);
+                                                            , strIndicators, Membership.GetUser().UserName, Membership.GetUser().Email, RC.GetUserDetails().Rows[0]["PhoneNumber"].ToString());
+                    Mail.SendMail(mailMsg);
+                }
+            }
+            catch
+            {
+ 
             }
         }
 

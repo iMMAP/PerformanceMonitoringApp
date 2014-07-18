@@ -33,7 +33,7 @@ namespace SRFROWCA.Common
 
         internal static void SendMail(MailMessage mailMsg)
         {
-            var client = new SmtpClient("41.191.198.197", 25)
+            var client = new SmtpClient("41.191.198.195", 25)
             {
                 Credentials = new NetworkCredential("dakar@ochasomalia.org", "Ocha123"),
                 //EnableSsl = true
