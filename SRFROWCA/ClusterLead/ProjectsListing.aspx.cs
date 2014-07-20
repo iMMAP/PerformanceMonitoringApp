@@ -152,7 +152,44 @@ namespace SRFROWCA.ClusterLead
 
         private void ExportToPDF(int? projectId)
         {
-            DataTable dtResults = DBContext.GetData("uspGetReports", new object[] { projectId, null, null , null, RC.GetCurrentUserId, RC.SelectedSiteLanguageId});
+            int tempVal = 0;
+            if (ddlClusters.Visible)
+            {
+                int.TryParse(ddlClusters.SelectedValue, out tempVal);
+            }
+            int? clusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
+
+            tempVal = 0;
+            if (ddlCountry.Visible)
+            {
+                tempVal = 0;
+                int.TryParse(ddlCountry.SelectedValue, out tempVal);
+            }
+
+            int? countryID = tempVal > 0 ? tempVal : UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
+            projectId = projectId > 0 ? projectId : txtProjectCode.Text.Trim().Length > 0 ? (int?)Convert.ToInt32(txtProjectCode.Text.Trim()) : null;
+
+            int? orgId = RC.GetSelectedIntVal(ddlOrg);
+
+            if (orgId == 0)
+            {
+                if (RC.IsDataEntryUser(User))
+                    orgId = UserInfo.Organization;
+                else
+                    orgId = (int?)null;
+            }
+
+            int? admin1 = RC.GetSelectedIntVal(ddlAdmin1);
+            if (admin1 == 0)
+            {
+                admin1 = (int?)null;
+            }
+
+            int? cbReported = cblReportingStatus.SelectedIndex > -1 ? RC.GetSelectedIntVal(cblReportingStatus) : (int?)null;
+            int? cbFunded = cblFundingStatus.SelectedIndex > -1 ? RC.GetSelectedIntVal(cblFundingStatus) : (int?)null;
+
+            DataTable dtResults = DBContext.GetData("uspGetReports", new object[] { projectId, null, null , null, RC.GetCurrentUserId, RC.SelectedSiteLanguageId,
+                                                                                    countryID, clusterId, orgId, admin1,cbFunded, cbReported,});
 
             if (dtResults.Rows.Count > 0)
             {
