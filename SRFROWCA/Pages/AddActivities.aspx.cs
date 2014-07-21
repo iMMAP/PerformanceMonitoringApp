@@ -533,8 +533,7 @@ namespace SRFROWCA.Pages
                 int countryID = UserInfo.Country > 0 ? UserInfo.Country : 0;
                 int projId = RC.GetSelectedIntVal(rblProjects);
 
-                bool emailClusterLead = true;
-                DataTable dtEmails = DBContext.GetData("uspGetUserEmails", new object[] { countryID, projId, emailClusterLead });
+                DataTable dtEmails = DBContext.GetData("uspGetUserEmails", new object[] { countryID, projId });
 
                 string emails = string.Empty;
                 emails = "orsocharowca@gmail.com";
