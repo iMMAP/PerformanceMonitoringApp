@@ -180,6 +180,9 @@
   <data name="localFAQHelpResource1.Text" xml:space="preserve">
     <value>FAQ &amp; Aide</value>
   </data>
+  <data name="localSettingsResource1.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
   <data name="Localize1Resource1.Text" xml:space="preserve">
     <value>Qui rapporte où</value>
   </data>

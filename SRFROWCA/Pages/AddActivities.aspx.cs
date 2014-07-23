@@ -561,7 +561,7 @@ namespace SRFROWCA.Pages
                 }
 
             }
-            catch
+            catch (Exception ex)
             {
                 //message = "You have been registered successfully but some error occoured on sending email to site admin. Contact admin and ask for the verification! We apologies for the inconvenience!";
             }

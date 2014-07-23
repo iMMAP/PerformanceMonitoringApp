@@ -337,6 +337,11 @@
                             runat="server"><i class="icon-list-alt"></i><span class="menu-text">Documents
                             </span>
                         </a></li>
+
+                        <li id="liSettings" runat="server"><a href="~/Admin/ConfigSettings.aspx" id="menuSettings"
+                            runat="server"><i class="icon-list-alt"></i><span class="menu-text"><asp:Localize ID="localSettings" runat="server" Text="Settings" meta:resourcekey="localSettingsResource1"></asp:Localize>
+                            </span>
+                        </a></li>
                     </ul>
                     <!-- /.nav-list -->
                     <div class="sidebar-collapse" id="sidebar-collapse">

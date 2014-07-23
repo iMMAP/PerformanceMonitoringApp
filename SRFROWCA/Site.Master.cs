@@ -180,6 +180,7 @@ namespace SRFROWCA
             liEmergency.Visible = isShow;
             liProgressSummary.Visible = isShow;
             liProjectXMLFeeds.Visible = isShow;
+            liSettings.Visible = isShow;
             liActivities.Visible = isShow;
             liIndicators.Visible = isShow;
             liContactList.Visible = isShow;
@@ -306,7 +307,7 @@ namespace SRFROWCA
             liProjectXMLFeeds.Visible = isShow;
             liEmergency.Visible = isShow;
             liProgressSummary.Visible = isShow;
-            liProjectXMLFeeds.Visible = isShow;
+            liSettings.Visible = isShow;
             liIndicators.Visible = isShow;
             liActivities.Visible = isShow;
         }
@@ -479,6 +480,10 @@ namespace SRFROWCA
             else if (uri.Contains("Admin/ProjectXMLFeeds.aspx"))
             {
                 liProjectXMLFeeds.Attributes.Add("class", "active");
+            }
+            else if (uri.Contains("Admin/ConfigSettings.aspx"))
+            {
+                liSettings.Attributes.Add("class", "active");
             }
             else if (uri.Contains("CountryReports"))
             {
