@@ -8,6 +8,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+
+using System.Net;
+using System.Security.Principal;
+
 namespace SRFROWCA.Reports
 {
     public partial class LoadCountryReport : System.Web.UI.Page
@@ -34,10 +38,68 @@ namespace SRFROWCA.Reports
                 rvCountry.ServerReport.ReportPath = "/reports/countryreport";//dt.Rows[0]["SSRSReportName"].ToString();
                 ReportParameter[] RptParameters =  new ReportParameter[1];
                 RptParameters[0] = new ReportParameter("CountryId", Request.QueryString["cid"]);
-                //rvCountry.ServerReport.ReportServerCredentials = new Microsoft.Reporting.ReportServerCredentials("uName", "PassWORD", "doMain");
+                rvCountry.ServerReport.ReportServerCredentials = new ReportServerCredentials("Administrator", "&qisW.c@Jq", "");
                 rvCountry.ServerReport.SetParameters(RptParameters);
                 rvCountry.ServerReport.Refresh();
             }
         }
     }
+    
+
+
+public class ReportServerCredentials : IReportServerCredentials
+{
+private string reportServerUserName;
+private string reportServerPassword;
+private string reportServerDomain;
+
+public ReportServerCredentials(string userName, string password, string domain)
+{
+reportServerUserName = userName;
+reportServerPassword = password;
+reportServerDomain = domain;
 }
+
+public WindowsIdentity ImpersonationUser
+{
+get
+{
+// Use default identity.
+return null;
+}
+}
+
+public ICredentials NetworkCredentials
+{
+get
+{
+// Use default identity.
+return new NetworkCredential(reportServerUserName, reportServerPassword, reportServerDomain);
+}
+}
+
+public void New(string userName, string password, string domain)
+{
+reportServerUserName = userName;
+reportServerPassword = password;
+reportServerDomain = domain;
+}
+
+public bool GetFormsCredentials(out Cookie authCookie, out string user, out string password, out string authority)
+{
+// Do not use forms credentials to authenticate.
+authCookie = null;
+user = null;
+password = null;
+authority = null;
+
+return false;
+} 
+}
+
+}
+
+
+
+
+
