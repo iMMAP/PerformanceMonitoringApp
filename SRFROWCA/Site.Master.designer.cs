@@ -1282,6 +1282,33 @@ namespace SRFROWCA {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor menueORSDocuments;
         
         /// <summary>
+        /// liSettings control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liSettings;
+        
+        /// <summary>
+        /// menuSettings control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuSettings;
+        
+        /// <summary>
+        /// localSettings control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localSettings;
+        
+        /// <summary>
         /// MainContent control.
         /// </summary>
         /// <remarks>

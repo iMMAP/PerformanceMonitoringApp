@@ -238,46 +238,49 @@ namespace SRFROWCA.Common
                 document.Add(tbl);
 
                 IndicatorTargets(document, (from projectData in dt.AsEnumerable()
-                                            where projectData.Field<int>("ReportID") == Convert.ToInt32(row[0]["ReportID"])
+                                            where projectData.Field<int?>("ReportID") == (int?)Convert.ToInt32(row[0]["ReportID"])
                                             select projectData), false);
 
             }
             else
             {
-                DataRow[] rows = dt.Select("UserID = '" + RC.GetCurrentUserId + "'");
+                //DataRow[] rows = dt.Select("UserID = '" + RC.GetCurrentUserId + "'");
 
-                if (rows.Length > 0)
+                //if (rows.Length > 0)
                 {
                     DataTable dtFiltered = new DataTable();
                     string[] selectedColumns = new[] { "ReportID", "ReportName", "OrganizationName", "Month", "CreatedBy", "CreatedDate", "UpdatedBy", "UpdatedDate" };
 
                     try
                     {
-                        dtFiltered = new DataView(rows.CopyToDataTable<DataRow>()).ToTable(true, selectedColumns);
+                        dtFiltered = dt.DefaultView.ToTable(true, selectedColumns); //new DataView(rows.CopyToDataTable<DataRow>()).ToTable(true, selectedColumns);
 
                     }
                     catch { }
 
                     for (int i = 0; i < dtFiltered.Rows.Count; i++)
                     {
-                        PdfPTable tbl = new PdfPTable(new float[] { 2f, 3f, 3f, 2f, 4f, 2f, 3f, 2f });
-                        ProjectReportHeaders(tbl);
+                        if (!string.IsNullOrEmpty(Convert.ToString(dtFiltered.Rows[i]["ReportID"])))
+                        {
+                            PdfPTable tbl = new PdfPTable(new float[] { 2f, 3f, 3f, 2f, 4f, 2f, 3f, 2f });
+                            ProjectReportHeaders(tbl);
 
-                        tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["ReportID"]), TableFont));
-                        tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["ReportName"]), TableFont));
-                        tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["OrganizationName"]), TableFont));
-                        tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["Month"]), TableFont));
-                        tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["CreatedBy"]), TableFont));
-                        tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(dtFiltered.Rows[i]["CreatedDate"])) ? Convert.ToDateTime(dtFiltered.Rows[i]["CreatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
-                        tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["UpdatedBy"]), TableFont));
-                        tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(dtFiltered.Rows[i]["UpdatedDate"])) ? Convert.ToDateTime(dtFiltered.Rows[i]["UpdatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
+                            tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["ReportID"]), TableFont));
+                            tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["ReportName"]), TableFont));
+                            tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["OrganizationName"]), TableFont));
+                            tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["Month"]), TableFont));
+                            tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["CreatedBy"]), TableFont));
+                            tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(dtFiltered.Rows[i]["CreatedDate"])) ? Convert.ToDateTime(dtFiltered.Rows[i]["CreatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
+                            tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["UpdatedBy"]), TableFont));
+                            tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(dtFiltered.Rows[i]["UpdatedDate"])) ? Convert.ToDateTime(dtFiltered.Rows[i]["UpdatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
 
-                        tbl.SpacingAfter = 10f;
-                        document.Add(tbl);
+                            tbl.SpacingAfter = 10f;
+                            document.Add(tbl);
 
-                        IndicatorTargets(document, (from projectData in dt.AsEnumerable()
-                                                    where projectData.Field<int>("ReportID") == Convert.ToInt32(dtFiltered.Rows[i]["ReportID"])
-                                                    select projectData), false);
+                            IndicatorTargets(document, (from projectData in dt.AsEnumerable()
+                                                        where projectData.Field<int?>("ReportID") == (int?)Convert.ToInt32(dtFiltered.Rows[i]["ReportID"])
+                                                        select projectData), false);
+                        }
                     }
                 }
             }
@@ -687,7 +690,7 @@ namespace SRFROWCA.Common
                 //cell.BorderWidthBottom = 1;
                 //tbl.AddCell(cell);
 
-                cell = new PdfPCell(new Phrase(Convert.ToString(country.Organizations)+" / " + Convert.ToString(country.OrgPerCountry), TableFont));
+                cell = new PdfPCell(new Phrase(Convert.ToString(country.Organizations) + " / " + Convert.ToString(country.OrgPerCountry), TableFont));
                 cell.Padding = 5;
                 cell.BorderWidthLeft = 1;
                 cell.BorderWidthRight = 1;

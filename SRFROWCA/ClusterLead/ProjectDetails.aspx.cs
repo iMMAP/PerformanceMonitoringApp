@@ -50,13 +50,14 @@ namespace SRFROWCA.ClusterLead
             string startDate = /*!string.IsNullOrEmpty(txtFromDate.Text) ? txtFromDate.Text :*/ null;
             string endDate = /*!string.IsNullOrEmpty(txtToDate.Text) ? txtToDate.Text :*/ null;
 
-            DataTable dtGrid = DBContext.GetData("uspGetReports", new object[] { projectID, startDate, endDate, null, null,RC.SelectedSiteLanguageId });
+            DataTable dtGrid = DBContext.GetData("uspGetReports", new object[] { projectID, startDate, endDate, null, null,RC.SelectedSiteLanguageId,
+                                                                                null, null, null, null, null, null});
 
             string[] selectedColumns = new[] { "ReportID", "ReportName", "ProjectCode", "IsApproved", "Country", "ProjectID", "CreatedDate" };
             DataTable dtFiltered = new DataTable();
             try
             {
-                dtFiltered = new DataView(dtGrid).ToTable(true, selectedColumns);
+                dtFiltered = new DataView(dtGrid).ToTable(true, selectedColumns).Select("ReportID IS NOT NULL").CopyToDataTable<DataRow>();
             }
             catch { }
 
@@ -85,7 +86,8 @@ namespace SRFROWCA.ClusterLead
             if (Request.QueryString["pid"] != null)
                 int.TryParse(Request.QueryString["pid"].ToString(), out projectID);
 
-            DataTable dtResults = DBContext.GetData("uspGetReports", new object[] { Convert.ToString(projectID), null, null , null, null, RC.SelectedSiteLanguageId});
+            DataTable dtResults = DBContext.GetData("uspGetReports", new object[] { Convert.ToString(projectID), null, null , null, null, RC.SelectedSiteLanguageId,
+                                                                                        null, null, null, null, null, null});
 
             if (dtResults.Rows.Count > 0)
             {
@@ -105,7 +107,7 @@ namespace SRFROWCA.ClusterLead
                 if (Request.QueryString["pid"] != null)
                     int.TryParse(Request.QueryString["pid"].ToString(), out projectID);
 
-                DataTable dtResults = DBContext.GetData("uspGetReports", new object[] { Convert.ToString(projectID), null, null, Convert.ToInt32(e.CommandArgument), null, RC.SelectedSiteLanguageId });
+                DataTable dtResults = DBContext.GetData("uspGetReports", new object[] { Convert.ToString(projectID), null, null, Convert.ToInt32(e.CommandArgument), null, RC.SelectedSiteLanguageId, null, null, null, null, null, null });
 
                 if (dtResults.Rows.Count > 0)
                 {

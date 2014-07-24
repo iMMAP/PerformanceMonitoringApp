@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Net.Mail;
 using System.Net;
+using System.Configuration;
 
 namespace SRFROWCA.Common
 {
@@ -33,13 +34,19 @@ namespace SRFROWCA.Common
 
         internal static void SendMail(MailMessage mailMsg)
         {
-            var client = new SmtpClient("41.191.198.197", 25)
+            var client = new SmtpClient("41.191.198.195", 25)
             {
                 Credentials = new NetworkCredential("dakar@ochasomalia.org", "Ocha123"),
                 //EnableSsl = true
             };
 
-            client.Send(mailMsg);
+            string appendSubject = Convert.ToString(ConfigurationManager.AppSettings["StagingEmailSubjectText"]);
+
+            if (!string.IsNullOrEmpty(appendSubject))
+                mailMsg.Subject = appendSubject + ": " + mailMsg.Subject;
+
+            if (Convert.ToBoolean(ConfigurationManager.AppSettings["SendEmail"]))
+                client.Send(mailMsg);
         }
     }
 }

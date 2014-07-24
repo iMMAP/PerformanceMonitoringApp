@@ -513,12 +513,12 @@ namespace SRFROWCA.Pages
                         SaveReportMainInfo();
 
                     SaveReport();
-                    SendMail("Report Saved Summary! " + DateTime.Now.ToString("dd-MMM-yyyy"), ReportId);
+                    //SendMail("Report Saved Summary! " + DateTime.Now.ToString("dd-MMM-yyyy"), ReportId);
                 }
                 else
                 {
                     DeleteReport();
-                    SendMail("Report Delete Summary! " + DateTime.Now.ToString("dd-MMM-yyyy"), ReportId);
+                    //SendMail("Report Delete Summary! " + DateTime.Now.ToString("dd-MMM-yyyy"), ReportId);
                 }
 
                 scope.Complete();
@@ -533,12 +533,11 @@ namespace SRFROWCA.Pages
                 int countryID = UserInfo.Country > 0 ? UserInfo.Country : 0;
                 int projId = RC.GetSelectedIntVal(rblProjects);
 
-                bool emailClusterLead = true;
-                DataTable dtEmails = DBContext.GetData("uspGetUserEmails", new object[] { countryID, projId, emailClusterLead });
+                DataTable dtEmails = DBContext.GetData("uspGetUserEmails", new object[] { countryID, projId });
 
                 string emails = string.Empty;
                 emails = "orsocharowca@gmail.com";
-                string changeType = subject.Contains("Delete") ? "deleted" : "added";
+                string changeType = subject.Contains("Delete") ? "deleted" : "Added/Updated";
 
                 if (dtEmails.Rows.Count > 0)
                 {
@@ -562,7 +561,7 @@ namespace SRFROWCA.Pages
                 }
 
             }
-            catch
+            catch (Exception ex)
             {
                 //message = "You have been registered successfully but some error occoured on sending email to site admin. Contact admin and ask for the verification! We apologies for the inconvenience!";
             }

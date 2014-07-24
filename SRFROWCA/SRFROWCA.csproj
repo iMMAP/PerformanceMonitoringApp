@@ -158,6 +158,7 @@
     <Content Include="Account\UserProfile.aspx" />
     <Content Include="Admin\ActivityData.aspx" />
     <Content Include="Admin\ActivityListing.aspx" />
+    <Content Include="Admin\ConfigSettings.aspx" />
     <Content Include="Admin\EmergencyClusters.aspx" />
     <Content Include="Admin\EmergencyLocations.aspx" />
     <Content Include="Admin\IndicatorActivities.aspx" />
@@ -921,6 +922,7 @@
     <Content Include="Reports\ProjectsPerOrganization.aspx" />
     <Content Include="Reports\TopIndicaotrsRegional.aspx" />
     <Content Include="Reports\TopIndicatorsGeneral.aspx" />
+    <Content Include="TEST\WebForm1.aspx" />
     <Content Include="UploadSRPLogFrame.aspx" />
     <Content Include="packages.config" />
     <Content Include="Pages\Web.config" />
@@ -1065,6 +1067,17 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="rowcaDataSet.xsc">
+      <DependentUpon>rowcaDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="rowcaDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>rowcaDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="rowcaDataSet.xss">
+      <DependentUpon>rowcaDataSet.xsd</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="About.aspx.cs">
@@ -1164,6 +1177,13 @@
     </Compile>
     <Compile Include="Admin\ActivityListing.aspx.designer.cs">
       <DependentUpon>ActivityListing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ConfigSettings.aspx.cs">
+      <DependentUpon>ConfigSettings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ConfigSettings.aspx.designer.cs">
+      <DependentUpon>ConfigSettings.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\EmergencyClusters.aspx.cs">
       <DependentUpon>EmergencyClusters.aspx</DependentUpon>
@@ -1852,6 +1872,11 @@
     <Compile Include="Reports\TopIndicatorsGeneral.aspx.designer.cs">
       <DependentUpon>TopIndicatorsGeneral.aspx</DependentUpon>
     </Compile>
+    <Compile Include="rowcaDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rowcaDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="SessionHeartbeat.ashx.cs">
       <DependentUpon>SessionHeartbeat.ashx</DependentUpon>
     </Compile>
@@ -1861,6 +1886,13 @@
     </Compile>
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="TEST\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TEST\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
     <Compile Include="UploadSRPLogFrame.aspx.cs">
       <DependentUpon>UploadSRPLogFrame.aspx</DependentUpon>
@@ -1883,7 +1915,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="GeneratedChartFiles\" />
     <Folder Include="OPS\OPSProjects\" />
-    <Folder Include="TEST\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Web.config" />
@@ -2049,6 +2080,9 @@
   <ItemGroup>
     <Content Include="RegionalLead\App_LocalResources\ManageRegionalIndicators.aspx.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TEST\Report1.rdlc" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -2062,7 +2096,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>50464</DevelopmentServerPort>
+          <DevelopmentServerPort>10696</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost/SRFROWCA</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

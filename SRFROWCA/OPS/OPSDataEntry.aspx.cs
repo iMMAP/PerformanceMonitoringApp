@@ -859,6 +859,7 @@ namespace SRFROWCA.OPS
         private void SaveReportDetails()
         {
             int activityDataId = 0;
+            int? userId = OPSUserId > 0 ? OPSUserId : (int?)null;
 
             foreach (GridViewRow row in gvActivities.Rows)
             {
@@ -902,7 +903,7 @@ namespace SRFROWCA.OPS
                                 decimal? midYearTarget = null;
                                 fullYearTarget = fullYearTarget == null ? 0 : fullYearTarget;
                                 DBContext.Add("InsertOPSReportDetails", new object[] { OPSReportId, activityDataId, locationId,
-                                                                                            midYearTarget, fullYearTarget, 1, DBNull.Value });
+                                                                                            midYearTarget, fullYearTarget, userId, DBNull.Value });
                             }
                         }
                     }

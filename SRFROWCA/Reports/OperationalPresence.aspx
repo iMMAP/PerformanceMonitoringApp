@@ -104,6 +104,7 @@
                             <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
                             <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
                             <asp:BoundField DataField="Contact" HeaderText="Contact" SortExpression="Contact" />
+                            <asp:BoundField DataField="Organization" HeaderText="Organization" SortExpression="Organization" />
                            
                         </Columns>
                     </asp:GridView>
