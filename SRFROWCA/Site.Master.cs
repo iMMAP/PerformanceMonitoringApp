@@ -185,6 +185,7 @@ namespace SRFROWCA
             liContactList.Visible = isShow;
             liSumOfCountryIndicators.Visible = isShow;
             liSumOfRegionalIndicators.Visible = isShow;
+            liCountryReports.Visible = isShow;
         }
 
         private void ShowUserMenue()
@@ -308,6 +309,7 @@ namespace SRFROWCA
             liProjectXMLFeeds.Visible = isShow;
             liIndicators.Visible = isShow;
             liActivities.Visible = isShow;
+            liCountryReports.Visible = isShow;
         }
 
         private void ActiveMenueItem()
@@ -482,6 +484,11 @@ namespace SRFROWCA
             else if (uri.Contains("CountryReports"))
             {
                 liCountryConsolidatedReports.Attributes.Add("class", "active open");                
+                //liCountryReports.Attributes.Add("class", "active");
+            }
+            else if (uri.Contains("NewCountryReports"))
+            {
+                liCountryReports.Attributes.Add("class", "active open");
                 //liCountryReports.Attributes.Add("class", "active");
             }   
         }

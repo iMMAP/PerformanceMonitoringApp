@@ -106,6 +106,7 @@
       <HintPath>..\_dll\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\_dll\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -908,6 +909,8 @@
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="PivotTables\OprOrgsClsCnt.aspx" />
+    <Content Include="Reports\LoadCountryReport.aspx" />
+    <Content Include="Reports\NewCountryReports.aspx" />
     <Content Include="Reports\CountriesForReports.aspx" />
     <Content Include="Reports\CountryReports.aspx" />
     <Content Include="Reports\OperationalPresence.aspx" />
@@ -1764,6 +1767,20 @@
     </Compile>
     <Compile Include="PivotTables\OprOrgsClsCnt.aspx.designer.cs">
       <DependentUpon>OprOrgsClsCnt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\LoadCountryReport.aspx.cs">
+      <DependentUpon>LoadCountryReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\LoadCountryReport.aspx.designer.cs">
+      <DependentUpon>LoadCountryReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\NewCountryReports.aspx.cs">
+      <DependentUpon>NewCountryReports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\NewCountryReports.aspx.designer.cs">
+      <DependentUpon>NewCountryReports.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\CountriesForReports.aspx.cs">
       <DependentUpon>CountriesForReports.aspx</DependentUpon>

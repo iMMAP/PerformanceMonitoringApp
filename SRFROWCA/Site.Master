@@ -258,6 +258,22 @@
                                 <li id="liCountryConsolidatedSahel" runat="server"><a href="<%=BaseURL %>/Reports/CountryReports.aspx?cid=567"><span class="menu-text">Sahel</span></a></li>
                             </ul>
                         </li>
+                         <li id="liCountryReports" runat="server"><a id="menueCountryReports" runat="server" href="#"
+                            class="dropdown-toggle"><i class="icon-list-alt"></i><span class="menu-text">Country Reports
+                            </span><b class="arrow icon-angle-down"></b></a>
+                            <ul class="submenu">
+                                <li id="liCountryBurkina" runat="server"><a href="<%=BaseURL %>/Reports/NewCountryReports.aspx?cid=2"><span class="menu-text">Burkina Faso</span></a></li>
+                                <li id="liCountryCameroon" runat="server"><a href="<%=BaseURL %>/Reports/NewCountryReports.aspx?cid=3"><span class="menu-text">Cameroon</span></a></li>
+                                <li id="liCountryChad" runat="server"><a href="<%=BaseURL %>/Reports/NewCountryReports.aspx?cid=4"><span class="menu-text">Chad</span></a></li>
+                                <li id="liCountryGambia" runat="server"><a href="<%=BaseURL %>/Reports/NewCountryReports.aspx?cid=5"><span class="menu-text">Gambia</span></a></li>
+                                <li id="liCountryMali" runat="server"><a href="<%=BaseURL %>/Reports/NewCountryReports.aspx?cid=6"><span class="menu-text">Mali</span></a></li>
+                                <li id="liCountryMauritania" runat="server"><a href="<%=BaseURL %>/Reports/NewCountryReports.aspx?cid=7"><span class="menu-text">Mauritania</span></a></li>
+                                <li id="liCountryNiger" runat="server"><a href="<%=BaseURL %>/Reports/NewCountryReports.aspx?cid=8"><span class="menu-text">Niger</span></a></li>
+                                <li id="liCountryNigeria" runat="server"><a href="<%=BaseURL %>/Reports/NewCountryReports.aspx?cid=9"><span class="menu-text">Nigeria</span></a></li>
+                                <li id="liCountrySenegal" runat="server"><a href="<%=BaseURL %>/Reports/NewCountryReports.aspx?cid=10"><span class="menu-text">Senegal</span></a></li>
+                                <li id="liCountrySahel" runat="server"><a href="<%=BaseURL %>/Reports/NewCountryReports.aspx?cid=567"><span class="menu-text">Sahel</span></a></li>
+                            </ul>
+                        </li>
                         <li id="liPivotTables" runat="server"><a id="menuePivotTables" runat="server" href="#"
                             class="dropdown-toggle"><i class="icon-table"></i><span class="menu-text">
                                 <asp:Localize ID="localPivotTables" runat="server" Text="Pivot Tables" meta:resourcekey="localPivotTablesResource1"></asp:Localize>
