@@ -919,7 +919,6 @@
     <Content Include="Reports\ProjectsPerOrganization.aspx" />
     <Content Include="Reports\TopIndicaotrsRegional.aspx" />
     <Content Include="Reports\TopIndicatorsGeneral.aspx" />
-    <Content Include="TEST\WebForm1.aspx" />
     <Content Include="UploadSRPLogFrame.aspx" />
     <Content Include="packages.config" />
     <Content Include="Pages\Web.config" />
@@ -1863,13 +1862,6 @@
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
-    <Compile Include="TEST\WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="TEST\WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
     <Compile Include="UploadSRPLogFrame.aspx.cs">
       <DependentUpon>UploadSRPLogFrame.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1891,6 +1883,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="GeneratedChartFiles\" />
     <Folder Include="OPS\OPSProjects\" />
+    <Folder Include="TEST\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Web.config" />
@@ -2055,9 +2048,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="RegionalLead\App_LocalResources\ManageRegionalIndicators.aspx.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="TEST\Report1.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
