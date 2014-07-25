@@ -180,11 +180,13 @@ namespace SRFROWCA
             liEmergency.Visible = isShow;
             liProgressSummary.Visible = isShow;
             liProjectXMLFeeds.Visible = isShow;
+            liSettings.Visible = isShow;
             liActivities.Visible = isShow;
             liIndicators.Visible = isShow;
             liContactList.Visible = isShow;
             liSumOfCountryIndicators.Visible = isShow;
             liSumOfRegionalIndicators.Visible = isShow;
+            liCountryReports.Visible = isShow;
         }
 
         private void ShowUserMenue()
@@ -306,9 +308,10 @@ namespace SRFROWCA
             liProjectXMLFeeds.Visible = isShow;
             liEmergency.Visible = isShow;
             liProgressSummary.Visible = isShow;
-            liProjectXMLFeeds.Visible = isShow;
+            liSettings.Visible = isShow;
             liIndicators.Visible = isShow;
             liActivities.Visible = isShow;
+            liCountryReports.Visible = isShow;
         }
 
         private void ActiveMenueItem()
@@ -480,9 +483,18 @@ namespace SRFROWCA
             {
                 liProjectXMLFeeds.Attributes.Add("class", "active");
             }
+            else if (uri.Contains("Admin/ConfigSettings.aspx"))
+            {
+                liSettings.Attributes.Add("class", "active");
+            }
             else if (uri.Contains("CountryReports"))
             {
                 liCountryConsolidatedReports.Attributes.Add("class", "active open");                
+                //liCountryReports.Attributes.Add("class", "active");
+            }
+            else if (uri.Contains("NewCountryReports"))
+            {
+                liCountryReports.Attributes.Add("class", "active open");
                 //liCountryReports.Attributes.Add("class", "active");
             }   
         }

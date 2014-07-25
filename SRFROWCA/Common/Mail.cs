@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Net.Mail;
 using System.Net;
+using System.Configuration;
 
 namespace SRFROWCA.Common
 {
@@ -39,7 +40,13 @@ namespace SRFROWCA.Common
                 //EnableSsl = true
             };
 
-            client.Send(mailMsg);
+            string appendSubject = Convert.ToString(ConfigurationManager.AppSettings["StagingEmailSubjectText"]);
+
+            if (!string.IsNullOrEmpty(appendSubject))
+                mailMsg.Subject = appendSubject + ": " + mailMsg.Subject;
+
+            if (Convert.ToBoolean(ConfigurationManager.AppSettings["SendEmail"]))
+                client.Send(mailMsg);
         }
     }
 }
