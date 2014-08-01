@@ -513,7 +513,7 @@ namespace SRFROWCA.Pages
                         SaveReportMainInfo();
 
                     SaveReport();
-                    //SendMail("Report Saved Summary! " + DateTime.Now.ToString("dd-MMM-yyyy"), ReportId);
+                    SendMail("Report Saved Summary! " + DateTime.Now.ToString("dd-MMM-yyyy"), ReportId);
                 }
                 else
                 {

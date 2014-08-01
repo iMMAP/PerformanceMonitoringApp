@@ -67,6 +67,10 @@
                 <!-- /.navbar-header -->
                 <div class="navbar-header pull-right" role="navigation">
                     <ul class="nav ace-nav">
+                        <li class="grey">
+                            <a href="https://twitter.com/SahelORS" target="_blank"><img src="assets/orsimages/twitter.png" />
+                                </a>
+                        </li>
                         <li class="purple"><a data-toggle="dropdown" class="dropdown-toggle" href="#"><i
                             class="icon-bell-alt icon-animated-bell"></i><span class="badge badge-important">
                                 <asp:Label ID="lblNumberOfNotifications" runat="server" Text=""></asp:Label></span>
@@ -86,6 +90,7 @@
                                 <li><a href="#">See all notifications <i class="icon-arrow-right"></i></a></li>
                             </ul>
                         </li>
+
                         <%--<li class="green"><a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-envelope icon-animated-vertical">
                     </i><span class="badge badge-success">5</span> </a>
                         <ul class="pull-right dropdown-navbar navbar-green dropdown-menu dropdown-caret dropdown-close">
@@ -258,7 +263,7 @@
                                 <li id="liCountryConsolidatedSahel" runat="server"><a href="<%=BaseURL %>/Reports/CountryReports.aspx?cid=567"><span class="menu-text">Sahel</span></a></li>
                             </ul>
                         </li>
-                         <li id="liCountryReports" runat="server"><a id="menueCountryReports" runat="server" href="#"
+                        <li id="liCountryReports" runat="server"><a id="menueCountryReports" runat="server" href="#"
                             class="dropdown-toggle"><i class="icon-list-alt"></i><span class="menu-text">Country Reports
                             </span><b class="arrow icon-angle-down"></b></a>
                             <ul class="submenu">
@@ -355,7 +360,8 @@
                         </a></li>
 
                         <li id="liSettings" runat="server"><a href="~/Admin/ConfigSettings.aspx" id="menuSettings"
-                            runat="server"><i class="icon-list-alt"></i><span class="menu-text"><asp:Localize ID="localSettings" runat="server" Text="Settings" meta:resourcekey="localSettingsResource1"></asp:Localize>
+                            runat="server"><i class="icon-list-alt"></i><span class="menu-text">
+                                <asp:Localize ID="localSettings" runat="server" Text="Settings" meta:resourcekey="localSettingsResource1"></asp:Localize>
                             </span>
                         </a></li>
                     </ul>

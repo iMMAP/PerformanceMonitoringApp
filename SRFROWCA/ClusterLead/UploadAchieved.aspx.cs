@@ -20,6 +20,7 @@ namespace SRFROWCA.ClusterLead
             {
                 PopulateOrganizations();
                 PopulateMonths();
+                PopulateAdmin1(UserInfo.Country);
                 if (RC.IsCountryAdmin(User) || RC.IsOCHAStaff(User))
                 {
                     PopulateClusters();                    
@@ -84,6 +85,33 @@ namespace SRFROWCA.ClusterLead
             LoadOrganizations();
         }
 
+        private void PopulateAdmin1(int parentLocationId)
+        {
+            DataTable dt = GetAdmin1Locations(parentLocationId);
+            cblLocations.DataValueField = "LocationId";
+            cblLocations.DataTextField = "LocationName";
+            cblLocations.DataSource = dt;
+            cblLocations.DataBind();
+
+            foreach (ListItem item in cblLocations.Items)
+            {
+                item.Selected = true;
+            }
+        }
+
+        private DataTable GetAdmin1Locations(int parentLocationId)
+        {
+            string procedure = "GetSecondLevelChildLocations";
+
+            if (parentLocationId == 567)
+            {
+                procedure = "GetSecondLevelChildLocationsAndCountry";
+            }
+
+            DataTable dt = DBContext.GetData(procedure, new object[] { parentLocationId });
+            return dt.Rows.Count > 0 ? dt : new DataTable();
+        }
+
         #region Download Template
 
         protected void btnDownload_Click(object sender, EventArgs e)
@@ -126,9 +154,11 @@ namespace SRFROWCA.ClusterLead
             string orgIds = null;
             orgIds = RC.GetSelectedValues(ddlOrganizations);
             int yearId = 10;
+            string locationIds = RC.GetSelectedValues(cblLocations);
+            locationIds = string.IsNullOrEmpty(locationIds) ? null : locationIds;
 
             return DBContext.GetData("GetIndicatorsForDataEntryTemplate", new object[]{emgLocationId, clusterId, orgIds, countryInd, regionalInd, allInd,
-                                                                                        RC.SelectedSiteLanguageId, yearId});
+                                                                                        RC.SelectedSiteLanguageId, yearId, locationIds});
         }
 
         private void PopulateMonths()
@@ -177,8 +207,8 @@ namespace SRFROWCA.ClusterLead
             }
             catch (Exception ex)
             {
-                lblMessage.Text = ex.ToString();
-                string message = "Some Error Occoured During Import, Please contact with site Admin!";
+                //lblMessage.Text = ex.ToString();                
+                string message = "Error on importing data. Please contact with ORS support team! " + ex.Message;
                 ShowMessage(message, RC.NotificationType.Error, false);
             }
         }

@@ -326,6 +326,7 @@
     <Content Include="assets\orsimages\plus.png" />
     <Content Include="assets\orsimages\rind.png" />
     <Content Include="assets\orsimages\rssfeed.png" />
+    <Content Include="assets\orsimages\Twitter.ico" />
     <Content Include="assets\orsimages\view.png" />
     <Content Include="assets\orsimages\word.png" />
     <Content Include="assets\orsjs\dashboard.js" />

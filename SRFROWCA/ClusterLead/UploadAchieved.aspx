@@ -22,7 +22,7 @@
     <div class="page-content">
         <div id="divMsg">
         </div>
-        <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>
+        <%--<asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>--%>
         <div class="row">
             <div class="col-xs-6">
                 <!-- PAGE CONTENT BEGINS -->
@@ -97,11 +97,16 @@
                                 <i class="icon-hand-right blue"></i>
                                 <asp:Localize ID="localDownloadClusterTargets" runat="server" Text="Cluster Targets of each indicator"></asp:Localize>
                             </li>
-                            <li>
+                            <%--<li>
                                 <i class="icon-hand-right blue"></i>
                                 <asp:Localize ID="LocalDownloadLocations" runat="server" Text="All locations ('Region')"></asp:Localize>
-                            </li>
+                            </li>--%>
                         </ul>
+                        <div class="space"></div>
+                        <div>
+                            <h4 class="smaller"><b>Locations You Want To Report ON:</b></h4>
+                            <asp:CheckBoxList ID="cblLocations" runat="server" RepeatColumns="6"></asp:CheckBoxList>
+                        </div>
                         <div class="space"></div>
                         <div class="hidden">
                             <%--<asp:GridView ID="gvTemplate" runat="server" AutoGenerateColumns="true" OnRowDataBound="gvTemplate_RowDataBound"></asp:GridView>--%>
