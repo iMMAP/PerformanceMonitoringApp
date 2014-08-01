@@ -34,7 +34,7 @@ namespace SRFROWCA.Reports
             if (dt != null && dt.Rows.Count > 0)
             {
                 rvCountry.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote;
-                rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://54.83.26.190/Reportserver"); //new System.Uri(dt.Rows[0]["SSRSURL"].ToString());
+                rvCountry.ServerReport.ReportServerUrl = new System.Uri("http:///win-78sij2cjpjj/Reportserver"); //new System.Uri(dt.Rows[0]["SSRSURL"].ToString());
                 rvCountry.ServerReport.ReportPath = "/reports/countryreport";//dt.Rows[0]["SSRSReportName"].ToString();
                 ReportParameter[] RptParameters =  new ReportParameter[1];
                 RptParameters[0] = new ReportParameter("CountryId", Request.QueryString["cid"]);
