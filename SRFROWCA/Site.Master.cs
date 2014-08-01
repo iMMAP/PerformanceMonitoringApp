@@ -186,7 +186,7 @@ namespace SRFROWCA
             liContactList.Visible = isShow;
             liSumOfCountryIndicators.Visible = isShow;
             liSumOfRegionalIndicators.Visible = isShow;
-            liCountryReports.Visible = isShow;
+           
         }
 
         private void ShowUserMenue()
@@ -311,7 +311,7 @@ namespace SRFROWCA
             liSettings.Visible = isShow;
             liIndicators.Visible = isShow;
             liActivities.Visible = isShow;
-            liCountryReports.Visible = isShow;
+            
         }
 
         private void ActiveMenueItem()
