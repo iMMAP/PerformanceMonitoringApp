@@ -518,7 +518,7 @@ namespace SRFROWCA.Pages
                 else
                 {
                     DeleteReport();
-                    //SendMail("Report Delete Summary! " + DateTime.Now.ToString("dd-MMM-yyyy"), ReportId);
+                    SendMail("Report Delete Summary! " + DateTime.Now.ToString("dd-MMM-yyyy"), ReportId);
                 }
 
                 scope.Complete();
