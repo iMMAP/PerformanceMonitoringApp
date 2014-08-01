@@ -30,7 +30,7 @@ namespace SRFROWCA.Reports
         }
         private void LoadReport()
         {
-            DataTable dt = GetReportInfo(Convert.ToInt32(Request.QueryString["id"]));
+            DataTable dt = GetReportInfo(Convert.ToInt32(Request.QueryString["id"])); 
             if (dt != null && dt.Rows.Count > 0)
             {
                 rvCountry.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote;
