@@ -39,15 +39,15 @@ namespace SRFROWCA
 
             LoadNotifications();
 
-            DataTable dt = new DataTable();
-            dt.Columns.Add("FullName");
-            dt.Columns.Add("Message");
-            dt.Columns.Add("DateTime");
-            dt.Rows.Add(new object[] { "Kashif", "Hello, There how are you?", DateTime.Now.AddDays(1) });
-            dt.Rows.Add(new object[] { "Max M", "Added new report.", DateTime.Now });
-            dt.Rows.Add(new object[] { "Some One", "New ORS project Added", DateTime.Now.AddDays(3) });
-            //rptMessages.DataSource = dt;
-            //rptMessages.DataBind();
+            //DataTable dt = new DataTable();
+            //dt.Columns.Add("FullName");
+            //dt.Columns.Add("Message");
+            //dt.Columns.Add("DateTime");
+            //dt.Rows.Add(new object[] { "Kashif", "Hello, There how are you?", DateTime.Now.AddDays(1) });
+            //dt.Rows.Add(new object[] { "Max M", "Added new report.", DateTime.Now });
+            //dt.Rows.Add(new object[] { "Some One", "New ORS project Added", DateTime.Now.AddDays(3) });
+            ////rptMessages.DataSource = dt;
+            ////rptMessages.DataBind();
 
             if (HttpContext.Current.User.Identity.IsAuthenticated)
             {
@@ -186,7 +186,7 @@ namespace SRFROWCA
             liContactList.Visible = isShow;
             liSumOfCountryIndicators.Visible = isShow;
             liSumOfRegionalIndicators.Visible = isShow;
-           
+            liCountryReports.Visible = isShow;
         }
 
         private void ShowUserMenue()
@@ -487,7 +487,7 @@ namespace SRFROWCA
             {
                 liSettings.Attributes.Add("class", "active");
             }
-            else if (uri.Contains("NewCountryReports"))
+            else if (uri.Contains("NewCountryReports") || uri.Contains("LoadCountryReport"))
             {
                 liCountryReports.Attributes.Add("class", "active open");
                 //liCountryReports.Attributes.Add("class", "active");
@@ -497,6 +497,7 @@ namespace SRFROWCA
                 liCountryConsolidatedReports.Attributes.Add("class", "active open");                
                 //liCountryReports.Attributes.Add("class", "active");
             }
+            
         }
 
         protected void lnkLanguageEnglish_Click(object sender, EventArgs e)

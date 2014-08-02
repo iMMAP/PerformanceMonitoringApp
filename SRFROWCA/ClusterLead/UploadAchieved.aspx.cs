@@ -93,10 +93,10 @@ namespace SRFROWCA.ClusterLead
             cblLocations.DataSource = dt;
             cblLocations.DataBind();
 
-            foreach (ListItem item in cblLocations.Items)
-            {
-                item.Selected = true;
-            }
+            //foreach (ListItem item in cblLocations.Items)
+            //{
+            //    item.Selected = true;
+            //}
         }
 
         private DataTable GetAdmin1Locations(int parentLocationId)
@@ -203,13 +203,15 @@ namespace SRFROWCA.ClusterLead
                 {
                     string message = "Data Imported Successfully! Records Updated " + dt.Rows[0][0].ToString() + "  ---  New Records " + dt.Rows[0][1].ToString();
                     ShowMessage(message, RC.NotificationType.Success, false);
+                    lblMessage.Text = "";
                 }
             }
             catch (Exception ex)
             {
                 //lblMessage.Text = ex.ToString();                
-                string message = "Error on importing data. Please contact with ORS support team! " + ex.Message;
+                string message = "Error on importing data. Please contact with ORS support team! ";
                 ShowMessage(message, RC.NotificationType.Error, false);
+                lblMessage.Text = ex.ToString();
             }
         }
 
@@ -538,11 +540,11 @@ namespace SRFROWCA.ClusterLead
                 {
                     if (string.IsNullOrEmpty(locationNames))
                     {
-                        locationNames += column.ColumnName + "_" + i.ToString();
+                        locationNames += "[" + column.ColumnName + "_" + i.ToString() + "]"; 
                     }
                     else
                     {
-                        locationNames += "," + column.ColumnName + "_" + i.ToString();
+                        locationNames += ",[" + column.ColumnName + "_" + i.ToString() + "]";
                     }
                     i += 1;
                 }
@@ -561,11 +563,11 @@ namespace SRFROWCA.ClusterLead
                 {
                     if (string.IsNullOrEmpty(locationNames))
                     {
-                        locationNames += column.ColumnName + "_" + i.ToString() + " AS t_" + column.ColumnName + i.ToString();
+                        locationNames += "[" + column.ColumnName + "_" + i.ToString() + "] AS [t_" + column.ColumnName + i.ToString() + "]";
                     }
                     else
                     {
-                        locationNames += "," + column.ColumnName + "_" + i.ToString() + " AS t_" + column.ColumnName + i.ToString();
+                        locationNames += ",[" + column.ColumnName + "_" + i.ToString() + "] AS [t_" + column.ColumnName + i.ToString() + "]";
                     }
                     i += 1;
                 }
@@ -584,11 +586,11 @@ namespace SRFROWCA.ClusterLead
                 {
                     if (string.IsNullOrEmpty(locationNames))
                     {
-                        locationNames += "t_" + column.ColumnName + i.ToString();
+                        locationNames += "[t_" + column.ColumnName + i.ToString() + "]";
                     }
                     else
                     {
-                        locationNames += "," + "t_" + column.ColumnName + i.ToString();
+                        locationNames += "," + "[t_" + column.ColumnName + i.ToString() + "]";
                     }
 
                     i += 1;

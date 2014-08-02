@@ -22,7 +22,7 @@
     <div class="page-content">
         <div id="divMsg">
         </div>
-        <%--<asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>--%>
+        <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>
         <div class="row">
             <div class="col-xs-6">
                 <!-- PAGE CONTENT BEGINS -->

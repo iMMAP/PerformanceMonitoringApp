@@ -25,6 +25,11 @@ namespace SRFROWCA.ClusterLead
             }
         }
 
+        internal override void BindGridData()
+        {
+            LoadData();
+        }
+
         private void LoadEmptyData()
         {
             gvReport.DataSource = new DataTable();
@@ -47,9 +52,9 @@ namespace SRFROWCA.ClusterLead
 
             int? clusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
             int? emgLocationId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
+            int yearId = 10;
 
-            return DBContext.GetData("GetAllCountryIndicatorsAchievedReport", new object[] {emgLocationId, clusterId, DBNull.Value, DBNull.Value, 
-                                                                                                            DBNull.Value, RC.SelectedSiteLanguageId});
+            return DBContext.GetData("GetAllCountryIndicatorsAchievedReport", new object[] {emgLocationId, clusterId, yearId, RC.SelectedSiteLanguageId});
         }
 
         private void PopulateClusters()

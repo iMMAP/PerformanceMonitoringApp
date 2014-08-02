@@ -68,7 +68,7 @@
                 <div class="navbar-header pull-right" role="navigation">
                     <ul class="nav ace-nav">
                         <li class="grey">
-                            <a href="https://twitter.com/SahelORS" target="_blank"><img src="assets/orsimages/twitter.png" />
+                            <a href="https://twitter.com/SahelORS" target="_blank"><img src="../assets/orsimages/twitter.png" alt="twitter"/>
                                 </a>
                         </li>
                         <li class="purple"><a data-toggle="dropdown" class="dropdown-toggle" href="#"><i
