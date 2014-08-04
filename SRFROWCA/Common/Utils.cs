@@ -89,6 +89,11 @@ namespace SRFROWCA.Common
             {
                 key = Encoding.UTF8.GetBytes("r0b1nr0y");
                 DESCryptoServiceProvider des = new DESCryptoServiceProvider();
+                stringToDecrypt = stringToDecrypt.Trim().Replace(' ', '+');
+                if (stringToDecrypt.Length % 4 > 0)
+                {
+                    stringToDecrypt = stringToDecrypt.PadRight(stringToDecrypt.Length + 4 - stringToDecrypt.Length % 4, '=');
+                }
                 inputByteArray = Convert.FromBase64String(stringToDecrypt);
                 MemoryStream ms = new MemoryStream();
                 CryptoStream cs = new CryptoStream(ms,

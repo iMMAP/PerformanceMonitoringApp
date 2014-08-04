@@ -158,7 +158,6 @@
     <Content Include="Account\UserProfile.aspx" />
     <Content Include="Admin\ActivityData.aspx" />
     <Content Include="Admin\ActivityListing.aspx" />
-    <Content Include="Admin\ConfigSettings.aspx" />
     <Content Include="Admin\EmergencyClusters.aspx" />
     <Content Include="Admin\EmergencyLocations.aspx" />
     <Content Include="Admin\IndicatorActivities.aspx" />
@@ -327,6 +326,7 @@
     <Content Include="assets\orsimages\plus.png" />
     <Content Include="assets\orsimages\rind.png" />
     <Content Include="assets\orsimages\rssfeed.png" />
+    <Content Include="assets\orsimages\twitter.png" />
     <Content Include="assets\orsimages\view.png" />
     <Content Include="assets\orsimages\word.png" />
     <Content Include="assets\orsjs\dashboard.js" />
@@ -910,6 +910,8 @@
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="PivotTables\OprOrgsClsCnt.aspx" />
+    <Content Include="Reports\LoadCountryReport.aspx" />
+    <Content Include="Reports\NewCountryReports.aspx" />
     <Content Include="Reports\CountriesForReports.aspx" />
     <Content Include="Reports\CountryReports.aspx" />
     <Content Include="Reports\OperationalPresence.aspx" />
@@ -1164,13 +1166,6 @@
     <Compile Include="Admin\ActivityListing.aspx.designer.cs">
       <DependentUpon>ActivityListing.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\ConfigSettings.aspx.cs">
-      <DependentUpon>ConfigSettings.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\ConfigSettings.aspx.designer.cs">
-      <DependentUpon>ConfigSettings.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Admin\EmergencyClusters.aspx.cs">
       <DependentUpon>EmergencyClusters.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1240,6 +1235,9 @@
     </Compile>
     <Compile Include="Admin\ProjectXMLFeeds.aspx.designer.cs">
       <DependentUpon>ProjectXMLFeeds.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Anonymous\AllDataFeed.ashx.cs">
+      <DependentUpon>AllDataFeed.ashx</DependentUpon>
     </Compile>
     <Compile Include="Anonymous\AllDataPublic.aspx.cs">
       <DependentUpon>AllDataPublic.aspx</DependentUpon>
@@ -1773,6 +1771,20 @@
     </Compile>
     <Compile Include="PivotTables\OprOrgsClsCnt.aspx.designer.cs">
       <DependentUpon>OprOrgsClsCnt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\LoadCountryReport.aspx.cs">
+      <DependentUpon>LoadCountryReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\LoadCountryReport.aspx.designer.cs">
+      <DependentUpon>LoadCountryReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\NewCountryReports.aspx.cs">
+      <DependentUpon>NewCountryReports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\NewCountryReports.aspx.designer.cs">
+      <DependentUpon>NewCountryReports.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\CountriesForReports.aspx.cs">
       <DependentUpon>CountriesForReports.aspx</DependentUpon>

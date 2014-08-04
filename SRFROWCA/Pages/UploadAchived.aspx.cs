@@ -65,7 +65,7 @@ namespace SRFROWCA.Pages
             bool regionalInd = false;
             bool allInd = false;
             string projectIds = null;
-            int? orgId = null;
+            int? orgId = null;            
 
             projectIds = RC.GetSelectedValues(ddlProjects);
             if (projectIds == null)
