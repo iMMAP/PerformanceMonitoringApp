@@ -920,7 +920,6 @@
     <Content Include="Reports\ProjectsPerOrganization.aspx" />
     <Content Include="Reports\TopIndicaotrsRegional.aspx" />
     <Content Include="Reports\TopIndicatorsGeneral.aspx" />
-    <Content Include="TEST\WebForm1.aspx" />
     <Content Include="UploadSRPLogFrame.aspx" />
     <Content Include="packages.config" />
     <Content Include="Pages\Web.config" />
@@ -1064,17 +1063,6 @@
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="rowcaDataSet.xsc">
-      <DependentUpon>rowcaDataSet.xsd</DependentUpon>
-    </Content>
-    <None Include="rowcaDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>rowcaDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="rowcaDataSet.xss">
-      <DependentUpon>rowcaDataSet.xsd</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -1856,11 +1844,6 @@
     <Compile Include="Reports\TopIndicatorsGeneral.aspx.designer.cs">
       <DependentUpon>TopIndicatorsGeneral.aspx</DependentUpon>
     </Compile>
-    <Compile Include="rowcaDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>rowcaDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="SessionHeartbeat.ashx.cs">
       <DependentUpon>SessionHeartbeat.ashx</DependentUpon>
     </Compile>
@@ -1870,13 +1853,6 @@
     </Compile>
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
-    </Compile>
-    <Compile Include="TEST\WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="TEST\WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
     <Compile Include="UploadSRPLogFrame.aspx.cs">
       <DependentUpon>UploadSRPLogFrame.aspx</DependentUpon>
@@ -1899,6 +1875,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="GeneratedChartFiles\" />
     <Folder Include="OPS\OPSProjects\" />
+    <Folder Include="TEST\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Web.config" />
@@ -2063,9 +2040,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="RegionalLead\App_LocalResources\ManageRegionalIndicators.aspx.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="TEST\Report1.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
