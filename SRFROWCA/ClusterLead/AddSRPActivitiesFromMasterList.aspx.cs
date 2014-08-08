@@ -57,6 +57,7 @@ namespace SRFROWCA.ClusterLead
             if (RC.IsCountryAdmin(User))
             {
                 PopulateClusters();
+                PopulateIndicators();
             }
             else
             {
@@ -176,7 +177,16 @@ namespace SRFROWCA.ClusterLead
 
         protected void btnAddSRPActivity_Click(object sender, EventArgs e)
         {
-            Response.Redirect("AddSRPActivity.aspx");
+            if (ddlClusters.Visible)
+            {
+                int cid = 0;
+                int.TryParse(ddlClusters.SelectedValue, out cid);
+                Response.Redirect("AddSRPActivity.aspx?cid=" + cid.ToString());
+            }
+            else
+            {
+                Response.Redirect("AddSRPActivity.aspx");
+            }
         }
 
         protected void btnAddIndicator_Click(object sender, EventArgs e)

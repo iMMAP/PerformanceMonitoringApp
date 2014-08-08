@@ -5,6 +5,7 @@ using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.IO;
+using System.Transactions;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
@@ -21,17 +22,12 @@ namespace SRFROWCA.ClusterLead
                 PopulateOrganizations();
                 PopulateMonths();
                 PopulateAdmin1(UserInfo.Country);
-                if (RC.IsCountryAdmin(User) || RC.IsOCHAStaff(User))
-                {
-                    PopulateClusters();                    
-                }
-                else
-                {
-                    ddlClusters.Visible = false;
-                    liClusters.Visible = false;
-                }
+                ShowHideClsutersOnUserProfile();
+                LoadOrgProjects();
             }
         }
+
+        #region Data Entry Template
 
         private void PopulateOrganizations()
         {
@@ -52,17 +48,6 @@ namespace SRFROWCA.ClusterLead
             }
         }
 
-        private void GetUserOrganization()
-        {
-            DBContext.GetData("GetOrganizations", new object[] { UserInfo.Organization });
-        }
-
-        private void PopulateClusters()
-        {
-            int emgId = 1;
-            UI.FillEmergnecyClusters(ddlClusters, emgId);
-        }
-
         private void LoadOrganizations()
         {
             int tempVal = 0;
@@ -79,12 +64,6 @@ namespace SRFROWCA.ClusterLead
             ddlOrganizations.DataSource = DBContext.GetData("GetProjectsOrganizations", new object[] { emgLocationId, clusterId });
             ddlOrganizations.DataBind();
         }
-
-        protected void ddlClusters_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadOrganizations();
-        }
-
         private void PopulateAdmin1(int parentLocationId)
         {
             DataTable dt = GetAdmin1Locations(parentLocationId);
@@ -92,13 +71,7 @@ namespace SRFROWCA.ClusterLead
             cblLocations.DataTextField = "LocationName";
             cblLocations.DataSource = dt;
             cblLocations.DataBind();
-
-            //foreach (ListItem item in cblLocations.Items)
-            //{
-            //    item.Selected = true;
-            //}
         }
-
         private DataTable GetAdmin1Locations(int parentLocationId)
         {
             string procedure = "GetSecondLevelChildLocations";
@@ -111,20 +84,22 @@ namespace SRFROWCA.ClusterLead
             DataTable dt = DBContext.GetData(procedure, new object[] { parentLocationId });
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
-
-        #region Download Template
-
-        protected void btnDownload_Click(object sender, EventArgs e)
+        private void ShowHideClsutersOnUserProfile()
         {
-            if (!IsIndicatorSelected())
+            if (RC.IsCountryAdmin(User) || RC.IsOCHAStaff(User))
             {
-                ShowMessage("Please at least select one CheckBox i.e. Country, Regional or All to get the list of indicators!", RC.NotificationType.Error, true, 2000);
-                return;
+                PopulateClusters();
             }
-            GridView gv = new GridView();
-            gv.DataSource = GetIndicators();
-            gv.DataBind();
-            ExportGridView(gv, "ORSDataTemplate", ".xls", true);
+            else
+            {
+                ddlClusters.Visible = false;
+                liClusters.Visible = false;
+            }
+        }
+        private void PopulateClusters()
+        {
+            int emgId = 1;
+            UI.FillEmergnecyClusters(ddlClusters, emgId);
         }
 
         private bool IsIndicatorSelected()
@@ -150,16 +125,73 @@ namespace SRFROWCA.ClusterLead
 
             bool countryInd = chkCountryIndicators.Checked;
             bool regionalInd = chkRegionalInidcators.Checked;
-            bool allInd = chkAllIndicators.Checked;            
+            bool allInd = chkAllIndicators.Checked;
             string orgIds = null;
             orgIds = RC.GetSelectedValues(ddlOrganizations);
             int yearId = 10;
+            
             string locationIds = RC.GetSelectedValues(cblLocations);
             locationIds = string.IsNullOrEmpty(locationIds) ? null : locationIds;
 
-            return DBContext.GetData("GetIndicatorsForDataEntryTemplate", new object[]{emgLocationId, clusterId, orgIds, countryInd, regionalInd, allInd,
-                                                                                        RC.SelectedSiteLanguageId, yearId, locationIds});
+            string projectIds = null;
+            projectIds = RC.GetSelectedValues(ddlProjects);
+
+            if (emgLocationId > 0 && clusterId > 0)
+            {
+                return DBContext.GetData("GetIndicatorsForDataEntryTemplate2", new object[]{emgLocationId, clusterId, orgIds, countryInd, regionalInd, allInd,
+																						RC.SelectedSiteLanguageId, yearId, locationIds, projectIds});
+            }
+            else
+                return new DataTable();
         }
+
+        protected void ddlClusters_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadOrganizations();
+            LoadOrgProjects();
+        }
+
+        protected void ddlOrg_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadOrgProjects();
+        }
+
+        private void LoadOrgProjects()
+        {
+            ddlProjects.DataTextField = "ProjectCode";
+            ddlProjects.DataValueField = "ProjectId";
+
+            int tempVal = 0;
+            if (ddlClusters.Visible)
+            {
+                int.TryParse(ddlClusters.SelectedValue, out tempVal);
+            }
+
+            int? emgClusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
+            int? emgLocationId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
+            //int? emgClsuterId = UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;            
+            string orgIds = RC.GetSelectedValues(ddlOrganizations);
+            ddlProjects.DataSource = DBContext.GetData("GetProjectsOnClusterCountryAndOrganizations", new object[] { emgLocationId, emgClusterId, orgIds });
+            ddlProjects.DataBind();
+        }
+
+        protected void btnDownload_Click(object sender, EventArgs e)
+        {
+            //if (!IsIndicatorSelected())
+            //{
+            //    ShowMessage("Please at least select one CheckBox i.e. Country, Regional or All to get the list of indicators!", RC.NotificationType.Error, true, 2000);
+            //    return;
+            //}
+
+            GridView gv = new GridView();
+            gv.DataSource = GetIndicators();
+            gv.DataBind();
+            ExportGridView(gv, "ORSDataTemplate", ".xls", true);
+        }
+
+        #endregion
+
+        #region Upload Data
 
         private void PopulateMonths()
         {
@@ -181,8 +213,6 @@ namespace SRFROWCA.ClusterLead
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 
-        #endregion
-
         protected void btnImport_Click(object sender, EventArgs e)
         {
             try
@@ -190,28 +220,46 @@ namespace SRFROWCA.ClusterLead
                 // Check if file is uploaded and is excel file
                 if (!IsValidFile()) return;
 
-                // Empty staging tables before data import.
-                //EmptyTable();
-                // Fill staging table (TempData1) in db to import data using this table.
-                FillStagingTableInDB();
+                // Force user to select month. 
+                //if (!MonthSelected()) return;
 
-                // Import data from another staging table (TempData).
-                DataTable dt = ImportData();
+                string filePath = UploadFile();
+                string excelConString = GetExcelConString(filePath);
 
-                // If success or any error occoured in execution of procedure then show message to user.
-                if (dt.Rows.Count > 0)
+                DataTable dt = new DataTable();
+                string tableScript = "";
+                string tableScript2 = "";
+
+                string[] sheets = GetExcelSheetNames(excelConString);
+                if (!string.IsNullOrEmpty(excelConString))
                 {
-                    string message = "Data Imported Successfully! Records Updated " + dt.Rows[0][0].ToString() + "  ---  New Records " + dt.Rows[0][1].ToString();
-                    ShowMessage(message, RC.NotificationType.Success, false);
-                    lblMessage.Text = "";
+                    if (sheets.Length > 0)
+                    {
+                        dt = ReadDataInDataTable(excelConString, sheets[0]);
+                        RemoveUnwantedColumns(dt);
+                        tableScript = CreateTableScript(dt);
+                        tableScript2 = CreateTableScript2(dt);
+                    }
+                }
+
+                //using (TransactionScope scope = new TransactionScope())
+                {
+                    if (dt.Rows.Count > 0)
+                    {
+                        FillStagingTableInDB(tableScript, tableScript2, dt);
+                        ImportData();
+                        //TruncateTempTables();
+                    }
+
+                    //scope.Complete();
+                    ShowMessage("Data Imported Successfully!", RC.NotificationType.Success, false);
                 }
             }
             catch (Exception ex)
             {
-                //lblMessage.Text = ex.ToString();                
-                string message = "Error on importing data. Please contact with ORS support team! ";
-                ShowMessage(message, RC.NotificationType.Error, false);
+                //TruncateTempTables();
                 lblMessage.Text = ex.ToString();
+                ShowMessage("Some Error Occoured During Import, Please contact with site Admin!", RC.NotificationType.Error, false);
             }
         }
 
@@ -248,31 +296,17 @@ namespace SRFROWCA.ClusterLead
         //}
 
         // Read Data From Excel Sheet and Save into DB
-        private void FillStagingTableInDB()
+        private void FillStagingTableInDB(string tableScript, string tableScript2, DataTable dt)
         {
-            string filePath = UploadFile();
-            string excelConString = GetExcelConString(filePath);
 
-            if (!string.IsNullOrEmpty(excelConString))
-            {
-                string[] sheets = GetExcelSheetNames(excelConString);
-                if (sheets.Length > 0)
-                {
-                    DataTable dt = ReadDataInDataTable(excelConString, sheets[0]);
-                    dt.Columns.Remove("Project Title");
-                    dt.Columns.Remove("Organization");
-                    string tableScript = CreateTableScript(dt);
-                    string tableScript2 = CreateTableScript2(dt);
-                    string conString = ConfigurationManager.ConnectionStrings["live_dbName"].ConnectionString;
-                    CreateStagingTable(tableScript, conString);
-                    CreateStagingTable(tableScript2, conString);
-                    WriteDataToDB(dt, conString);
-                    string locationColumnNames = GetLocationColumnNames(dt);
-                    string locationColumnNamesWithAliases = GetLocationColumnNamesWithAliases(dt);
-                    string locationColumnNamesAlias = GetLocationColumnNamesAlias(dt);
-                    UnpivotStagingTable(locationColumnNames, locationColumnNamesWithAliases, locationColumnNamesAlias);
-                }
-            }
+            string conString = ConfigurationManager.ConnectionStrings["live_dbName"].ConnectionString;
+            CreateStagingTable(tableScript, conString);
+            CreateStagingTable(tableScript2, conString);
+            WriteDataToDB(dt, conString);
+            string locationColumnNames = GetLocationColumnNames(dt);
+            string locationColumnNamesWithAliases = GetLocationColumnNamesWithAliases(dt);
+            string locationColumnNamesAlias = GetLocationColumnNamesAlias(dt);
+            UnpivotStagingTable(locationColumnNames, locationColumnNamesWithAliases, locationColumnNamesAlias);
         }
 
         private String[] GetExcelSheetNames(string excelConString)
@@ -421,7 +455,7 @@ namespace SRFROWCA.ClusterLead
         {
             int yearId = 10;
             return DBContext.GetData("ImportCLDataFromStagingTable", new object[] {UserInfo.EmergencyCountry, UserInfo.EmergencyCluster,
-                                                                                    yearId, RC.GetCurrentUserId, RC.IsClusterLead(User)});
+																					yearId, RC.GetCurrentUserId, RC.IsClusterLead(User)});
         }
 
         // Create new datatable and appropriate columns.
@@ -466,21 +500,21 @@ namespace SRFROWCA.ClusterLead
         private string CreateTableScript(DataTable dt)
         {
             string query = @" IF OBJECT_ID('ImportCLDataStaging_Temp') IS NOT NULL
-                            BEGIN
-                                DROP TABLE ImportCLDataStaging_Temp
-	                        END 
-                            CREATE TABLE [ImportCLDataStaging_Temp](
-	                            [Id] [int] IDENTITY(1,1) NOT NULL,
-	                            [Month] [nvarchar](20) NULL,
-	                            [ProjectCode] [nvarchar](20) NULL,
-	                            [Objective] [nvarchar](100) NULL,
-	                            [Priority] [nvarchar](100) NULL,
-	                            [Activity] [nvarchar](1000) NULL,
-	                            [Indicator Id] [int] NULL,
-	                            [Indicator] [nvarchar](1000) NULL,
-	                            [Accumulative] [nvarchar](10) NULL,
-	                            [Mid Year Target] [int] NULL,
-	                            [Full Year Target] [int] NULL";
+							BEGIN
+								DROP TABLE ImportCLDataStaging_Temp
+							END 
+							CREATE TABLE [ImportCLDataStaging_Temp](
+								[Id] [int] IDENTITY(1,1) NOT NULL,
+								[Month] [nvarchar](20) NULL,
+								[ProjectCode] [nvarchar](20) NULL,
+								[Objective] [nvarchar](100) NULL,
+								[Priority] [nvarchar](100) NULL,
+								[Activity] [nvarchar](1000) NULL,
+								[Indicator Id] [int] NULL,
+								[Indicator] [nvarchar](1000) NULL,
+								[Accumulative] [nvarchar](10) NULL,
+								[Mid Year Target] [int] NULL,
+								[Full Year Target] [int] NULL";
 
             foreach (DataColumn column in dt.Columns)
             {
@@ -491,8 +525,8 @@ namespace SRFROWCA.ClusterLead
             }
 
             query += @" CONSTRAINT [PK_ImportCLDataStaging_Temp] PRIMARY KEY CLUSTERED 
-                        ([id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-                    ) ON [PRIMARY] ";
+						([id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+					) ON [PRIMARY] ";
 
             return query;
         }
@@ -500,28 +534,38 @@ namespace SRFROWCA.ClusterLead
         private string CreateTableScript2(DataTable dt)
         {
             string query = @" IF OBJECT_ID('ImportCLDataStaging_Temp2') IS NOT NULL
-                            BEGIN
-                                DROP TABLE ImportCLDataStaging_Temp2
-	                        END 
-                            CREATE TABLE [ImportCLDataStaging_Temp2](
-	                            [Id] [int] NOT NULL,
-	                            [Month] [nvarchar](20) NULL,
-	                            [ProjectCode] [nvarchar](20) NULL,
-	                            [Objective] [nvarchar](100) NULL,
-	                            [Priority] [nvarchar](100) NULL,
-	                            [Activity] [nvarchar](1000) NULL,
-	                            [Indicator Id] [int] NULL,
-	                            [Indicator] [nvarchar](1000) NULL,
-	                            [Accumulative] [nvarchar](10) NULL,
-	                            [Mid Year Target] [int] NULL,
-	                            [Full Year Target] [int] NULL";
-            int i = 1;
+							BEGIN
+								DROP TABLE ImportCLDataStaging_Temp2
+							END 
+							CREATE TABLE [ImportCLDataStaging_Temp2](
+								[Id] [int] NOT NULL,
+								[Month] [nvarchar](20) NULL,
+								[ProjectCode] [nvarchar](20) NULL,
+								[Objective] [nvarchar](100) NULL,
+								[Priority] [nvarchar](100) NULL,
+								[Activity] [nvarchar](1000) NULL,
+								[Indicator Id] [int] NULL,
+								[Indicator] [nvarchar](1000) NULL,
+								[Accumulative] [nvarchar](10) NULL,
+								[Mid Year Target] [int] NULL,
+								[Full Year Target] [int] NULL";
+            int i = 0;
             foreach (DataColumn column in dt.Columns)
             {
                 if (LocationColumn(column.ColumnName))
                 {
-                    query += " ,[" + column.ColumnName + "_" + i.ToString() + "] int NULL";
                     i += 1;
+                    string j = "";
+                    if (i < 10)
+                    {
+                        j = i.ToString("00");
+                    }
+                    else
+                    {
+                        j = i.ToString();
+                    }
+
+                    query += " ,[" + column.ColumnName + "_" + j.ToString() + "] int NULL";
                 }
             }
 
@@ -538,13 +582,23 @@ namespace SRFROWCA.ClusterLead
             {
                 if (LocationColumn(column.ColumnName))
                 {
-                    if (string.IsNullOrEmpty(locationNames))
+                    string j = "";
+                    if (i < 10)
                     {
-                        locationNames += "[" + column.ColumnName + "_" + i.ToString() + "]"; 
+                        j = i.ToString("00");
                     }
                     else
                     {
-                        locationNames += ",[" + column.ColumnName + "_" + i.ToString() + "]";
+                        j = i.ToString();
+                    }
+
+                    if (string.IsNullOrEmpty(locationNames))
+                    {
+                        locationNames += "[" + column.ColumnName + "_" + j.ToString() + "]";
+                    }
+                    else
+                    {
+                        locationNames += ",[" + column.ColumnName + "_" + j.ToString() + "]";
                     }
                     i += 1;
                 }
@@ -561,13 +615,23 @@ namespace SRFROWCA.ClusterLead
             {
                 if (LocationColumn(column.ColumnName))
                 {
-                    if (string.IsNullOrEmpty(locationNames))
+                    string j = "";
+                    if (i < 10)
                     {
-                        locationNames += "[" + column.ColumnName + "_" + i.ToString() + "] AS [t_" + column.ColumnName + i.ToString() + "]";
+                        j = i.ToString("00");
                     }
                     else
                     {
-                        locationNames += ",[" + column.ColumnName + "_" + i.ToString() + "] AS [t_" + column.ColumnName + i.ToString() + "]";
+                        j = i.ToString();
+                    }
+
+                    if (string.IsNullOrEmpty(locationNames))
+                    {
+                        locationNames += "[" + column.ColumnName + "_" + j.ToString() + "] AS [t_" + column.ColumnName + j.ToString() + "]";
+                    }
+                    else
+                    {
+                        locationNames += ",[" + column.ColumnName + "_" + j.ToString() + "] AS [t_" + column.ColumnName + j.ToString() + "]";
                     }
                     i += 1;
                 }
@@ -584,13 +648,24 @@ namespace SRFROWCA.ClusterLead
             {
                 if (LocationColumn(column.ColumnName))
                 {
-                    if (string.IsNullOrEmpty(locationNames))
+                    string j = "";
+
+                    if (i < 10)
                     {
-                        locationNames += "[t_" + column.ColumnName + i.ToString() + "]";
+                        j = i.ToString("00");
                     }
                     else
                     {
-                        locationNames += "," + "[t_" + column.ColumnName + i.ToString() + "]";
+                        j = i.ToString();
+                    }
+
+                    if (string.IsNullOrEmpty(locationNames))
+                    {
+                        locationNames += "[t_" + column.ColumnName + j.ToString() + "]";
+                    }
+                    else
+                    {
+                        locationNames += "," + "[t_" + column.ColumnName + j.ToString() + "]";
                     }
 
                     i += 1;
@@ -717,6 +792,33 @@ namespace SRFROWCA.ClusterLead
             return sw;
         }
 
+        private bool MonthSelected()
+        {
+            if (ddlMonth.SelectedValue == "0")
+            {
+                ShowMessage("Please Select Month You Want To Report For", RC.NotificationType.Error, false);
+                return false;
+            }
+
+            return true;
+        }
+
+        private void RemoveUnwantedColumns(DataTable dt)
+        {
+            if (dt.Columns.Contains("Project Title"))
+                dt.Columns.Remove("Project Title");
+
+            if (dt.Columns.Contains("Organization"))
+                dt.Columns.Remove("Organization");
+        }
+
+        private void TruncateTempTables()
+        {
+            DBContext.Update("TruncateImportUserTempTables", new object[] { DBNull.Value });
+        }
+
+        #endregion
+
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
         {
             RC.ShowMessage(Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
@@ -730,3 +832,8 @@ namespace SRFROWCA.ClusterLead
         }
     }
 }
+
+//private void GetUserOrganization()
+//{
+//    DBContext.GetData("GetOrganizations", new object[] { UserInfo.Organization });
+//}

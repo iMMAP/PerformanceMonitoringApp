@@ -29,23 +29,13 @@
 
                 <div class="error-container">
                     <div class="well">
-                        <h2 class="grey lighter smaller">
-                            <span class="blue bigger-125">
-                                <i class="icon-sitemap"></i>
-
-                            </span>
-                            <asp:Localize ID="localDownleadTemplate" runat="server" Text="Data Entry Template"></asp:Localize>
-                        </h2>
-
-                        <hr />
                         <h3 class="lighter smaller">
                             <asp:Localize ID="localTemplateInstructions" runat="server" Text="Please download the template to upload data!"></asp:Localize></h3>
-                        <hr />
-                        <div class="space"></div>
+                        <hr />                        
                         <h4 class="smaller">
                             <asp:Localize ID="localDownloadItems" runat="server" Text="In this template you will have:"></asp:Localize></h4>
 
-                        <ul class="list-unstyled spaced inline bigger-110 margin-15">
+                        <ul class="list-unstyled spaced bigger-110 margin-15">
                             <li id="liClusters" runat="server">
                                 <i class="icon-hand-right blue"></i>
 
@@ -57,14 +47,25 @@
                             </li>
                             <li>
                                 <i class="icon-hand-right blue"></i>
-                                <cc:DropDownCheckBoxes ID="ddlOrganizations" runat="server" CssClass="width-30"
-                                    AddJQueryReference="True"
+                                <cc:DropDownCheckBoxes ID="ddlOrganizations" runat="server" CssClass="width-40"
+                                    AddJQueryReference="True" AutoPostBack="true" OnSelectedIndexChanged="ddlOrg_SelectedIndexChanged"
                                     UseButtons="False" UseSelectAllNode="True">
-                                    <Style SelectBoxWidth="" DropDownBoxBoxWidth="350%" DropDownBoxBoxHeight="300px"></Style>
+                                    <Style SelectBoxWidth="" DropDownBoxBoxWidth="200%" DropDownBoxBoxHeight="300px"></Style>
                                     <Texts SelectBoxCaption="Select Organizations" />
                                 </cc:DropDownCheckBoxes>
                                 <asp:Localize ID="localDownloadFirstItem" runat="server" Text="No organization means all"></asp:Localize>
                                 <asp:Label ID="lblOrganization" runat="server" Text="" Visible="false"></asp:Label>
+                            </li>
+                            <li>
+                                <i class="icon-hand-right blue"></i>
+                                <cc:DropDownCheckBoxes ID="ddlProjects" runat="server" CssClass="width-40"
+                                    AddJQueryReference="True"
+                                    UseButtons="False" UseSelectAllNode="True">
+                                    <Style SelectBoxWidth="" DropDownBoxBoxWidth="100%" DropDownBoxBoxHeight="300px"></Style>
+                                    <Texts SelectBoxCaption="Select Projects" />
+                                </cc:DropDownCheckBoxes>
+                                <asp:Localize ID="Localize1" runat="server" Text="No Project means all"></asp:Localize>
+                                <asp:Label ID="Label1" runat="server" Text="" Visible="false"></asp:Label>
                             </li>
                             <li>
                                 <i class="icon-hand-right blue"></i>
