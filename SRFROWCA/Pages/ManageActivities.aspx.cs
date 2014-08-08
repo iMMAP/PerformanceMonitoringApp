@@ -286,10 +286,10 @@ namespace SRFROWCA.Pages
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            using (TransactionScope scope = new TransactionScope())
+            //using (TransactionScope scope = new TransactionScope())
             {
                 SaveData();
-                scope.Complete();
+                //scope.Complete();
                 ShowMessage("Data Saved Successfully!");
             }
         }
