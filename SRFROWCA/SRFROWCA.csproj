@@ -325,7 +325,7 @@
     <Content Include="assets\orsimages\pencil.png" />
     <Content Include="assets\orsimages\plus.png" />
     <Content Include="assets\orsimages\rind.png" />
-    <Content Include="assets\orsimages\rssfeed.png" />    
+    <Content Include="assets\orsimages\rssfeed.png" />
     <Content Include="assets\orsimages\twitter.png" />
     <Content Include="assets\orsimages\view.png" />
     <Content Include="assets\orsimages\word.png" />
@@ -933,6 +933,7 @@
     <Content Include="Admin\Web.config" />
     <Content Include="WebForm1.aspx" />
     <Content Include="Anonymous\AllDataFeed.ashx" />
+    <Content Include="Anonymous\NumberOfOrgsByAdmin1.ashx" />
     <None Include="assets\font\cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff" />
     <None Include="assets\font\DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff" />
     <None Include="assets\font\fontawesome-webfontd41d.eot" />
@@ -1256,6 +1257,9 @@
     </Compile>
     <Compile Include="Anonymous\AllDataPublic.aspx.designer.cs">
       <DependentUpon>AllDataPublic.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Anonymous\NumberOfOrgsByAdmin1.ashx.cs">
+      <DependentUpon>NumberOfOrgsByAdmin1.ashx</DependentUpon>
     </Compile>
     <Compile Include="Charts.aspx.cs">
       <DependentUpon>Charts.aspx</DependentUpon>
