@@ -286,10 +286,10 @@ namespace SRFROWCA.Pages
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            using (TransactionScope scope = new TransactionScope())
+            //using (TransactionScope scope = new TransactionScope())
             {
                 SaveData();
-                scope.Complete();
+                //scope.Complete();
                 ShowMessage("Data Saved Successfully!");
             }
         }
@@ -311,6 +311,11 @@ namespace SRFROWCA.Pages
                     {
                         bool isOPS = projectId > 500000 ? false : true;
                         int yearId = 10;
+
+                        if (isAdded.Checked)
+                        {
+                            int j = 0;
+                        }
                         DBContext.Add("InsertProjectIndicator", new object[] { projectId, indicatorId, UserInfo.EmergencyCountry, yearId,
                                                                                 isAdded.Checked, isOPS, RC.GetCurrentUserId, DBNull.Value });
                     }

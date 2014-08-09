@@ -61,6 +61,7 @@ namespace SRFROWCA.LeadPages
                     SendNewIndicatorEmail(string.Format(@"Old Activity: {0}<br/>New Activity: {1}<br/><br/>
                     Old Indicator: {2}<br/>New Indicator: {3}<br/><br/>", ViewState["oldActivity"].ToString(), txtActivity.Text, ViewState["oldIndicator"].ToString(), txtIndicator.Text));
                 }
+
                 Session["SRPCustomEditIndicator"] = null;
                 scope.Complete();
                 Response.Redirect("~/ClusterLead/AddSRPActivitiesFromMasterList.aspx");

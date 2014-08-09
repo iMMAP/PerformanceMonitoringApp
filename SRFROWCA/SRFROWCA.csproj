@@ -326,6 +326,7 @@
     <Content Include="assets\orsimages\plus.png" />
     <Content Include="assets\orsimages\rind.png" />
     <Content Include="assets\orsimages\rssfeed.png" />
+    <Content Include="assets\orsimages\twitter.png" />
     <Content Include="assets\orsimages\view.png" />
     <Content Include="assets\orsimages\word.png" />
     <Content Include="assets\orsjs\dashboard.js" />
@@ -932,6 +933,7 @@
     <Content Include="Admin\Web.config" />
     <Content Include="WebForm1.aspx" />
     <Content Include="Anonymous\AllDataFeed.ashx" />
+    <Content Include="Anonymous\NumberOfOrgsByAdmin1.ashx" />
     <None Include="assets\font\cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff" />
     <None Include="assets\font\DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff" />
     <None Include="assets\font\fontawesome-webfontd41d.eot" />
@@ -1235,12 +1237,18 @@
     <Compile Include="Admin\ProjectXMLFeeds.aspx.designer.cs">
       <DependentUpon>ProjectXMLFeeds.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Anonymous\AllDataFeed.ashx.cs">
+      <DependentUpon>AllDataFeed.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Anonymous\AllDataPublic.aspx.cs">
       <DependentUpon>AllDataPublic.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Anonymous\AllDataPublic.aspx.designer.cs">
       <DependentUpon>AllDataPublic.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Anonymous\NumberOfOrgsByAdmin1.ashx.cs">
+      <DependentUpon>NumberOfOrgsByAdmin1.ashx</DependentUpon>
     </Compile>
     <Compile Include="Charts.aspx.cs">
       <DependentUpon>Charts.aspx</DependentUpon>
@@ -1883,7 +1891,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="GeneratedChartFiles\" />
     <Folder Include="OPS\OPSProjects\" />
-    <Folder Include="TEST\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Web.config" />

@@ -65,7 +65,7 @@ namespace SRFROWCA.Pages
             bool regionalInd = false;
             bool allInd = false;
             string projectIds = null;
-            int? orgId = null;
+            int? orgId = null;            
 
             projectIds = RC.GetSelectedValues(ddlProjects);
             if (projectIds == null)
@@ -115,10 +115,10 @@ namespace SRFROWCA.Pages
             cblLocations.DataSource = dt;
             cblLocations.DataBind();
 
-            foreach (ListItem item in cblLocations.Items)
-            {
-                item.Selected = true;
-            }
+            //foreach (ListItem item in cblLocations.Items)
+            //{
+            //    item.Selected = true;
+            //}
         }
 
         private DataTable GetAdmin1Locations(int parentLocationId)
@@ -181,8 +181,8 @@ namespace SRFROWCA.Pages
                     if (dt.Rows.Count > 0)
                     {
                         FillStagingTableInDB(tableScript, tableScript2, dt);
-                        ImportData();                        
-                        TruncateTempTables();
+                        ImportData();
+                        //TruncateTempTables();
                     }
 
                     scope.Complete();
@@ -191,7 +191,7 @@ namespace SRFROWCA.Pages
             }
             catch (Exception ex)
             {
-                TruncateTempTables();
+                //TruncateTempTables();
                 lblMessage.Text = ex.ToString();
                 ShowMessage("Some Error Occoured During Import, Please contact with site Admin!", RC.NotificationType.Error, false);
             }
@@ -248,7 +248,6 @@ namespace SRFROWCA.Pages
         // Read Data From Excel Sheet and Save into DB
         private void FillStagingTableInDB(string tableScript, string tableScript2, DataTable dt)
         {
-
             string conString = ConfigurationManager.ConnectionStrings["live_dbName"].ConnectionString;
             CreateStagingTable(tableScript, conString);
             CreateStagingTable(tableScript2, conString);

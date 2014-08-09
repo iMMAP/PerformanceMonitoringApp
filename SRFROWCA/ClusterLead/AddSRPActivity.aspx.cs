@@ -89,13 +89,13 @@ namespace SRFROWCA.ClusterLead
             {
                 SaveData();
                 scope.Complete();
-                if (RC.IsClusterLead(this.User))
+                if (RC.IsRegionalClusterLead(this.User))
                 {
-                    Response.Redirect("AddSRPActivitiesFromMasterList.aspx");
+                    Response.Redirect("~/RegionalLead/ManageRegionalIndicators.aspx");
                 }
                 else
                 {
-                    Response.Redirect("~/RegionalLead/ManageRegionalIndicators.aspx");
+                    Response.Redirect("AddSRPActivitiesFromMasterList.aspx");
                 }
             }
         }
@@ -120,7 +120,8 @@ namespace SRFROWCA.ClusterLead
                             }
                             else
                             {
-                                indControl.SaveRegionalIndicators(priorityActivityId);
+                                bool regional = RC.IsRegionalClusterLead(this.User);
+                                indControl.SaveRegionalIndicators(priorityActivityId, regional);
                             }
                             TextBox txtEng = (TextBox)indControl.FindControl("txtInd1Eng");
                             TextBox txtFr = (TextBox)indControl.FindControl("txtInd1Fr");
@@ -162,6 +163,15 @@ namespace SRFROWCA.ClusterLead
         {
             int emergencyId = 1;
             int clusterId = UserInfo.Cluster;
+
+            if (clusterId == 0)
+            {
+                if (Request.QueryString["cid"] != null)
+                {
+                    int.TryParse(Request.QueryString["cid"], out clusterId);
+                }
+            }
+
             Guid userId = RC.GetCurrentUserId;
 
             int objId = RC.GetSelectedIntVal(ddlObjective);

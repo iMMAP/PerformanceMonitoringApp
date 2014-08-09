@@ -513,12 +513,12 @@ namespace SRFROWCA.Pages
                         SaveReportMainInfo();
 
                     SaveReport();
-                    //SendMail("Report Saved Summary! " + DateTime.Now.ToString("dd-MMM-yyyy"), ReportId);
+                    SendMail("Report Saved Summary! " + DateTime.Now.ToString("dd-MMM-yyyy"), ReportId);
                 }
                 else
                 {
                     DeleteReport();
-                    //SendMail("Report Delete Summary! " + DateTime.Now.ToString("dd-MMM-yyyy"), ReportId);
+                    SendMail("Report Delete Summary! " + DateTime.Now.ToString("dd-MMM-yyyy"), ReportId);
                 }
 
                 scope.Complete();

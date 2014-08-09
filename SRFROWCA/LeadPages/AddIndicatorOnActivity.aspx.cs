@@ -137,7 +137,8 @@ namespace SRFROWCA.LeadPages
                             }
                             else
                             {
-                                indControl.SaveRegionalIndicators(priorityActivityId);
+                                bool regional = RC.IsRegionalClusterLead(this.User);
+                                indControl.SaveRegionalIndicators(priorityActivityId, regional);
                             }
                             TextBox txtEng = (TextBox)indControl.FindControl("txtInd1Eng");
                             TextBox txtFr = (TextBox)indControl.FindControl("txtInd1Fr");
