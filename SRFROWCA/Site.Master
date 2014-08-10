@@ -2,13 +2,14 @@
 
 <!DOCTYPE html>
 <html>
-<head id="Head1" runat="server">
+<head id="masterHead" runat="server">
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 	<meta charset="utf-8" />
 	<title>ORS</title>
 	<meta name="description" content="overview &amp; stats" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<!-- basic styles -->
+	
+    <!-- basic styles -->
 	<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 	<!--[if IE 7]>
@@ -20,7 +21,9 @@
 	<link rel="stylesheet" href="assets/css/ace.min.css" />
 	<link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
 	<link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+    <link rel="stylesheet" href="assets/css/ors.css" />
 	<link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/blitzer/jquery-ui.min.css" />
+
 	<!-- ORS styles -->
 
 	<!-- ace styles -->
@@ -46,13 +49,14 @@
 		<script src="<%# BaseURL %>/assets/js/html5shiv.js"></script>
 		<script src="<%# BaseURL %>/assets/js/respond.min.js"></script>
 		<![endif]-->
+
 	<asp:ContentPlaceHolder ID="HeadContent" runat="server">
 	</asp:ContentPlaceHolder>
 </head>
 <body>
-	<link rel="stylesheet" href="<%= BaseURL %>/assets/css/ors.css" />
+	
 	<form runat="server">
-		<asp:ScriptManager ID="ScriptManager1" runat="server">
+		<asp:ScriptManager ID="masterScriptMgr" runat="server">
 		</asp:ScriptManager>
 		<div class="navbar navbar-default" id="navbar">
 			<script type="text/javascript">
@@ -263,7 +267,7 @@
 							</ul>
 						</li>
 						<li id="liCountryReports" runat="server"><a id="menueCountryReports" runat="server" href="#"
-							class="dropdown-toggle"><i class="icon-list-alt"></i><span class="menu-text">Country Reports
+							class="dropdown-toggle"><i class="icon-globe"></i><span class="menu-text">Country Reports
 							</span><b class="arrow icon-angle-down"></b></a>
 							<ul class="submenu">
 								<li id="liCountryBurkina" runat="server"><a href="<%=BaseURL %>/Reports/NewCountryReports.aspx?cid=2"><span class="menu-text">Burkina Faso</span></a></li>
@@ -300,17 +304,17 @@
 							</ul>
 						</li>
 						<li id="liUserListing" runat="server"><a href="~/Admin/UsersListing.aspx"
-							id="menueUserListing" runat="server"><i class="icon-user"></i><span class="menu-text">Users</span> </a></li>
+							id="menueUserListing" runat="server"><i class="icon-group"></i><span class="menu-text">Users</span> </a></li>
 
 						<li id="liFundingStatus" runat="server"><a href="~/LeadPages/FundingListing.aspx"
-							id="AFundingStatus" runat="server"><i class="icon-list-alt"></i><span class="menu-text">Funding Status</span> </a></li>
+							id="AFundingStatus" runat="server"><i class="icon-money"></i><span class="menu-text">Funding Status</span> </a></li>
 						<li id="liOrganizationList" runat="server"><a href='<%=BaseURL%>/Admin/organization/OrganizationList.aspx'
-							id="menueOrganizationList"><i class="icon-user"></i><span class="menu-text">
+							id="menueOrganizationList"><i class="icon-building"></i><span class="menu-text">
 								<asp:Localize ID="localOrganizationsResource1" runat="server" Text="Organizations" meta:resourcekey="localOrganizationsResource1"></asp:Localize>
 							</span></a></li>
 
 						<li id="liEmergency" runat="server"><a id="A2" runat="server" href="#"
-							class="dropdown-toggle"><i class="icon-list-alt"></i><span class="menu-text">
+							class="dropdown-toggle"><i class="icon-ambulance"></i><span class="menu-text">
 								<asp:Localize ID="Localize2" runat="server" Text="Emergency" meta:resourcekey="localMasterEmergencyResource1"></asp:Localize>
 							</span><b class="arrow icon-angle-down"></b></a>
 							<ul class="submenu">
@@ -338,7 +342,7 @@
 							runat="server"><i class="icon-list-alt"></i><span class="menu-text">Bulk Import Data</span>
 						</a></li>
 						<li id="liProjectXMLFeeds" runat="server"><a href='<%=BaseURL%>/Admin/ProjectXMLFeeds.aspx'
-							id="menuProjectXMLFeeds"><i class="icon-list-alt"></i><span class="menu-text">Project XML Feeds</span> </a></li>
+							id="menuProjectXMLFeeds"><i class="icon-download"></i><span class="menu-text">Project XML Feeds</span> </a></li>
 						<li id="liProgressSummary" runat="server"><a href='<%=BaseURL%>/Admin/ProgressSummary.aspx'
 							id="menuProjectSummary"><i class="icon-table"></i><span class="menu-text">Progress Summary</span> </a></li>
 						<li id="liPublicAllData" runat="server"><a href="~/Anonymous/AllData.aspx" id="menuePublicAllData"
@@ -359,7 +363,7 @@
 						</a></li>
 
 						<li id="liSettings" runat="server"><a href="~/Admin/ConfigSettings.aspx" id="menuSettings"
-							runat="server"><i class="icon-list-alt"></i><span class="menu-text">
+							runat="server"><i class="icon-cogs"></i><span class="menu-text">
 								<asp:Localize ID="localSettings" runat="server" Text="Settings" meta:resourcekey="localSettingsResource1"></asp:Localize>
 							</span>
 						</a></li>

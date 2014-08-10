@@ -34,9 +34,7 @@ namespace SRFROWCA
         protected void Page_Load(object sender, EventArgs e)
         {
             SetUserName();
-
             HideAllAuthenticatedMenues();
-
             LoadNotifications();
 
             //DataTable dt = new DataTable();
@@ -124,9 +122,6 @@ namespace SRFROWCA
                                                                             && x.EmergencyClusterId == UserInfo.EmergencyCluster
                                                                             && x.IsRead == false).Count();
                     lblNumberOfNotifications.Text = count.ToString();
-                    //lblNumberOfNotifications2.Text = count.ToString();
-                    
-                                                                  
 
                     rptNotifications.DataSource = db.Notifications.Where(x => x.EmergencyLocationId == UserInfo.EmergencyCountry
                                                                             && x.EmergencyClusterId == UserInfo.EmergencyCluster
@@ -176,7 +171,7 @@ namespace SRFROWCA
             liBulkImport.Visible = isShow;
             liBulkImportUser.Visible = isShow;
             liORSDocuments.Visible = isShow;
-            liOrganizationList.Visible = isShow;           
+            liOrganizationList.Visible = isShow;
             liEmergency.Visible = isShow;
             liProgressSummary.Visible = isShow;
             liProjectXMLFeeds.Visible = isShow;
@@ -222,7 +217,7 @@ namespace SRFROWCA
             menuRegionalIndicators.Visible = isShow;
             liRegionalIndicators.Visible = isShow;
             liSumOfRegionalIndicators.Visible = isShow;
-            liCLprojectsListing.Visible = isShow;            
+            liCLprojectsListing.Visible = isShow;
             //liReportsTopIndicators1.Visible = isShow;
             //liReportsTopIndicatorsGeneral1.Visible = isShow;
             //liReportsTopIndicatorRegional1.Visible = isShow;
@@ -311,7 +306,7 @@ namespace SRFROWCA
             liSettings.Visible = isShow;
             liIndicators.Visible = isShow;
             liActivities.Visible = isShow;
-            
+
         }
 
         private void ActiveMenueItem()
@@ -348,7 +343,7 @@ namespace SRFROWCA
             {
                 liReports.Attributes.Add("class", "active open");
                 liCustomReport.Attributes.Add("class", "active");
-                liPublicAllData.Attributes.Add("class", "active open");                
+                liPublicAllData.Attributes.Add("class", "active open");
             }
             else if (uri == "/Anonymous/AllDataPublic.aspx")
             {
@@ -491,13 +486,13 @@ namespace SRFROWCA
             {
                 liCountryReports.Attributes.Add("class", "active open");
                 //liCountryReports.Attributes.Add("class", "active");
-            }   
+            }
             else if (uri.Contains("CountryReports"))
             {
-                liCountryConsolidatedReports.Attributes.Add("class", "active open");                
+                liCountryConsolidatedReports.Attributes.Add("class", "active open");
                 //liCountryReports.Attributes.Add("class", "active");
             }
-            
+
         }
 
         protected void lnkLanguageEnglish_Click(object sender, EventArgs e)
@@ -552,10 +547,5 @@ namespace SRFROWCA
                                      (VirtualFolder.Equals("/")) ? string.Empty : VirtualFolder);
             }
         }
-
-
     }
-
-
 }
-
