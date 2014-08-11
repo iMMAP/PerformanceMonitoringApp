@@ -38,7 +38,7 @@
             </li>
             <li class="active">
                 <asp:Localize ID="localBreadCrumbProjects" runat="server" Text="Progress Summary" meta:resourcekey="localBreadCrumbProjectsResource1"></asp:Localize></li>
-      
+
         </ul>
         <!-- .breadcrumb -->
     </div>
@@ -57,7 +57,7 @@
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <div class="row">
-                                                    <table border="0" width="50%">
+                                                    <table border="0" style="width: 50%; margin: 10px 10px 10px 20px">
                                                         <tr>
                                                             <td>
                                                                 <label>
@@ -67,15 +67,13 @@
                                                                 <asp:TextBox ID="txtFromDate" runat="server" CssClass="width-80"></asp:TextBox>
                                                             </td>
 
-                                                           <%-- <td>Country:
+                                                            <%-- <td>Country:
                                                             </td>
                                                             <td>
                                                                 <asp:DropDownList ID="ddlCountry" AppendDataBoundItems="true" runat="server" CssClass="width-100">
                                                                     <asp:ListItem Text="Select Country" Value="-1" Selected="True"></asp:ListItem>
                                                                 </asp:DropDownList>
                                                             </td>--%>
-                                                            <td>&nbsp;</td>
-                                                            <td>&nbsp;</td>
                                                         </tr>
                                                         <tr>
                                                             <td>
@@ -92,12 +90,6 @@
                                                                     <asp:ListItem Text="Select Cluster" Value="-1" Selected="True"></asp:ListItem>
                                                                 </asp:DropDownList>
                                                             </td>--%>
-
-                                                            <td>&nbsp;
-                                                            </td>
-                                                            <td>&nbsp;
-                                                            </td>
-
                                                         </tr>
                                                         <tr>
                                                             <td>&nbsp;
@@ -109,13 +101,13 @@
                                                                     <asp:ListItem Text="ORS" Value="0"></asp:ListItem>
                                                                 </asp:RadioButtonList>
                                                             </td>
-                                                            
-
-                                                            <td colspan="3" style="text-align: right;">
+                                                        </tr>
+                                                        <tr >
+                                                            <td >&nbsp;</td>
+                                                            <td style="padding-top:20px;">
                                                                 <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-primary" OnClick="btnSearch_Click" />
-                                                            </td>
-                                                            <td>
-                                                                <asp:Button ID="btnPDFPrint" runat="server" Text="Export PDF" CssClass ="btn btn-primary" OnClick="btnPDFPrint_Click" />
+
+                                                                <asp:Button ID="btnPDFPrint" runat="server" Text="Export PDF" CssClass="btn btn-primary" OnClick="btnPDFPrint_Click" />
                                                             </td>
                                                         </tr>
                                                     </table>
