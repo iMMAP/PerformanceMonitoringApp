@@ -77,7 +77,7 @@ namespace SRFROWCA.Reports
 
         private DataTable GetReports(int countryId, int reportTypeId)
         {
-            return DBContext.GetData("GetPublicCountryReports", new object[] { countryId, reportTypeId, RC.SelectedSiteLanguageId });
+            return DBContext.GetData("GetPublicCountryReports_New", new object[] { countryId, reportTypeId, RC.SelectedSiteLanguageId });
         }
 
         protected void rptReportTypes_ItemDataBound(object sender, RepeaterItemEventArgs e)
