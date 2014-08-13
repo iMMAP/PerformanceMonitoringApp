@@ -15,7 +15,9 @@
         </ul>
         <!-- .breadcrumb -->
     </div>
+
     <div class="page-content">
+
          <table width="100%">
             <tr>
                 <td>
@@ -23,16 +25,16 @@
                         <div class="col-xs-12 col-sm-12 ">
                             <div class="widget-box">
                                 <div class="widget-header widget-header-small header-color-blue2">
-                                   <h6>Search Filters</h6>
+                                <%--   <h6>Search Filters</h6>--%>
                                 </div>
                                 <div class="widget-body">
                                     <div class="widget-main">
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <div class="row">
-                                                    <table border="0" width="100%">
+                                                    <table border="0" style="width: 100%; margin: 10px 10px 10px 20px">
                                                         <tr>
-                                                            <td class="width-20">
+                                                            <td class="width-10">
                                                                 <label>
                                                                     Project ID:</label>
                                                             </td>
@@ -50,7 +52,7 @@
                                                             
                                                         </tr>
                                                         <tr>
-                                                            <td class="width-20">
+                                                            <td class="width-10">
                                                                 <label>
                                                                     Organization:</label>
                                                             </td>
@@ -67,7 +69,7 @@
                                                            
                                                         </tr>
                                                             <tr>
-                                                            <td class="width-20">
+                                                            <td class="width-10">
                                                                 <label>
                                                                     Project Country:</label>
                                                             </td>
@@ -84,7 +86,7 @@
                                                            
                                                         </tr>
                                                          <tr>
-                                                            <td class="width-20">
+                                                            <td class="width-10">
                                                                 <label>
                                                                     Project Cluster:</label>
                                                             </td>
@@ -92,7 +94,13 @@
                                                                  <asp:TextBox ID="txtPrjCluster" runat="server" CssClass="width-80"></asp:TextBox>
                                                             </td>
                                                              <td colspan="2">
-                                                              <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-primary" CausesValidation="false" OnClick="btnSearch_Click" />
+                                                              
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td >&nbsp;</td>
+                                                            <td colspan="3" style="padding-top:20px;">
+                                                                <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-primary" CausesValidation="false" OnClick="btnSearch_Click" />
                                                             </td>
                                                         </tr>
                                                    
@@ -113,14 +121,13 @@
                 </td>
             </tr>
         </table>
-        <div class="row">
-            <div id="scrolledGridView" style="overflow-x: auto; width: 100%;">
+        
                 <asp:GridView ID="gvFunding" runat="server" AutoGenerateColumns="True" HeaderStyle-BackColor="ButtonFace"
-                    CssClass="imagetable"
+                    CssClass="table table-striped table-bordered table-hover"
                     Width="100%">
-                    <HeaderStyle BackColor="Control"></HeaderStyle>
-                    <RowStyle CssClass="istrow" />
-                    <AlternatingRowStyle CssClass="altcolor" />
+                   
+                   
+                   
                     <%--<Columns>
                         <asp:BoundField DataField="FTSDonorName" HeaderText="Donor Name" />
                         <asp:BoundField DataField="FTSReceipentOrganization" HeaderText="Organization" />
@@ -139,9 +146,7 @@
                     </Columns>--%>
 
                 </asp:GridView>
+                   
             </div>
-            <div class="space">
-            </div>
-        </div>
-    </div>
+           
 </asp:Content>

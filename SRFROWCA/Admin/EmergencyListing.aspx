@@ -170,8 +170,9 @@
                                 <asp:Label ID="lblEmergencyTypeId" runat="server" Text='<%# Eval("EmergencyTypeId") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
+                        
                     </Columns>
-
+                   
                 </asp:GridView>
             </div>
         </div>

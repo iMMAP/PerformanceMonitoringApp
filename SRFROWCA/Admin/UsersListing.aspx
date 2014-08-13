@@ -23,6 +23,7 @@
         <!-- .breadcrumb -->
     </div>
     <div class="page-content">
+
         <table width="100%">
             <tr>
                 <td>
@@ -44,7 +45,7 @@
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <div class="row">
-                                                    <table border="0" width="100%">
+                                                    <table border="0" style="width: 100%; margin-left: 20px;">
                                                         <tr>
                                                             <td>
                                                                 <label>
@@ -113,9 +114,17 @@
                                                                     <asp:ListItem Text="Not Approved" Value="0"></asp:ListItem>
                                                                 </asp:RadioButtonList>
                                                             </td>
-                                                            <td colspan="2">
-                                                                <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" CssClass="btn btn-primary" />
+                                                            <td >
+                                                                
                                                             </td>
+                                                            <td></td>
+                                                           
+
+                                                            
+                                                        </tr>
+                                                        <tr>
+                                                            <td>&nbsp;</td>
+                                                            <td colspan="5" style="padding-top:20px;"><asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" CssClass="btn btn-primary" /></td>
                                                         </tr>
                                                     </table>
                                                 </div>
@@ -136,12 +145,11 @@
             <tr>
                 <td>
                       <cc2:PagingGridView ID="gvUsers" runat="server" AutoGenerateColumns="false" AllowPaging="true"
-                        CssClass="imagetable" PageSize="30" AllowSorting="true" Width="100%" OnPageIndexChanging="gvUsers_PageIndexChanging"
+                       CssClass="table table-striped table-bordered table-hover" PageSize="30" AllowSorting="true" Width="100%" OnPageIndexChanging="gvUsers_PageIndexChanging"
                         OnSorting="gvUsers_Sorting" OnRowCommand="gvUsers_RowCommand" >
                              <PagerStyle BackColor="#efefef" ForeColor="DarkSlateBlue" HorizontalAlign="Center" />
                             <PagerSettings Mode="NumericFirstLast" />
-                        <RowStyle CssClass="istrow" />
-                        <AlternatingRowStyle CssClass="altcolor" />
+                       
                         <Columns>
                             <asp:TemplateField ItemStyle-CssClass="rownum" ItemStyle-Width="2%" HeaderText="#">
                                 <ItemTemplate>
@@ -168,18 +176,19 @@
                             <asp:BoundField DataField="OrganizationName" HeaderText="Organization" SortExpression="OrganizationName"
                                 ItemStyle-Width="500px" />
                             <asp:BoundField DataField="LocationName" HeaderText="Country" SortExpression="LocationName"
-                                ItemStyle-HorizontalAlign="Center" />
+                                ItemStyle-HorizontalAlign="Center" ItemStyle-Width="150"/>
                             <asp:BoundField DataField="CreateDate" HeaderText="Create Date" SortExpression="DateCreated"
-                                ItemStyle-HorizontalAlign="Center" />
+                                ItemStyle-HorizontalAlign="Center" ItemStyle-Width="250" />
                             <asp:TemplateField Visible="false">
                                 <ItemTemplate>
                                     <asp:Label ID="lblUserId" runat="server" Visible="false" Text='<%#Eval("UserId") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Edit" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center"
+                            <asp:TemplateField  HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center"
                                 HeaderStyle-Width="70">
                                 <ItemTemplate>
-                                    <asp:Button ID="btnEdit" runat="server" Text="Edit" CommandName="EditUser" CommandArgument='<%# Eval("UserId") %>' />
+                                    
+                                    <asp:LinkButton ID="btnEdit" runat="server" Text="Edit" CommandName="EditUser" CommandArgument='<%# Eval("UserId") %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
