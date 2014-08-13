@@ -34,11 +34,11 @@ namespace SRFROWCA.Admin
                 webSection.Settings["SendEmail"].Value = rbListEmailSetting.SelectedValue;
                 webConfig.Save();
 
-                lblMessage.Text = "Settings save successfully";
+                lblMessage.Text = "Settings save successfully!";
             }
             catch (Exception ex)
             {
-                lblMessage.Text = "Could not save settings. Error: " + ex.Message;
+                lblMessage.Text = "Could not save settings! Error: " + ex.Message;
             }
            
 
