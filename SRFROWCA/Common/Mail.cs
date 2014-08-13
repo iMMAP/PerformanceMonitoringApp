@@ -36,7 +36,7 @@ namespace SRFROWCA.Common
         {
             var client = new SmtpClient("41.191.198.195", 25)
             {
-                Credentials = new NetworkCredential("dakar@ochasomalia.org", "Ocha123"),
+                Credentials = new NetworkCredential("dakar@ochasomalia.org", "Ocha@123"),
                 //EnableSsl = true
             };
 

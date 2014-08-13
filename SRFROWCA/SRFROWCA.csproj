@@ -1170,6 +1170,7 @@
     </Compile>
     <Compile Include="Admin\ConfigSettings.aspx.cs">
       <DependentUpon>ConfigSettings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\ConfigSettings.aspx.designer.cs">
       <DependentUpon>ConfigSettings.aspx</DependentUpon>
