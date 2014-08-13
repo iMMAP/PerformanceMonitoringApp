@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Transactions;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
@@ -28,9 +27,11 @@ namespace SRFROWCA.ClusterLead
             //PopulateIndicators();
             //PopulateClusterName();
 
-            if (RC.IsCountryAdmin(User))
+            if (RC.IsCountryAdmin(User) || RC.IsOCHAStaff(User))
             {
                 PopulateClusters();
+                btnSave.Attributes.Add("disabled", "disabled");
+                btnSave1.Attributes.Add("disabled", "disabled");
             }
             else
             {
@@ -45,15 +46,16 @@ namespace SRFROWCA.ClusterLead
             PopulatePriorities();
             //PopulateIndicators();
             //PopulateClusterName();
-            if (RC.IsCountryAdmin(User))
+            if (RC.IsCountryAdmin(User) || RC.IsOCHAStaff(User))
             {
                 PopulateClusters();
             }
             else
-            {
-                PopulateIndicators();
+            {                
                 ddlClusters.Visible = false;
             }
+
+            PopulateIndicators();
         }
 
         private void PopulateClusters()
@@ -83,17 +85,30 @@ namespace SRFROWCA.ClusterLead
 
         private DataTable GetIndicators()
         {
-            int tempVal = 0;
-            if (ddlClusters.Visible)
+            int clusterId = 0;
+            if (RC.IsCountryAdmin(User) || RC.IsOCHAStaff(User))
             {
-                int.TryParse(ddlClusters.SelectedValue, out tempVal);
+                if (ddlClusters.Visible)
+                {
+                    int.TryParse(ddlClusters.SelectedValue, out clusterId);
+                }
+            }
+            else
+            {
+                clusterId = UserInfo.EmergencyCluster;
             }
 
-            int? clusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
             int? emgLocationId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
             int lngId = RC.SelectedSiteLanguageId;
             int yearId = 10;
-            return DBContext.GetData("GetClusterIndicatorsToForTargets", new object[] { emgLocationId, clusterId, yearId, lngId});
+
+            DataTable dt = new DataTable();
+            if (clusterId > 0)
+            {
+                dt = DBContext.GetData("GetClusterIndicatorsToForTargets", new object[] { emgLocationId, clusterId, yearId, lngId });
+            }
+
+            return dt;
         }
 
         private void PopulateClusterName()
@@ -103,6 +118,20 @@ namespace SRFROWCA.ClusterLead
 
         protected void ddlClusters_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (ddlClusters.Visible)
+            {
+                if (ddlClusters.SelectedValue == "0")
+                {
+                    btnSave.Attributes.Add("disabled", "disabled");
+                    btnSave1.Attributes.Add("disabled", "disabled");
+                }
+                else
+                {
+                    btnSave.Attributes.Remove("disabled");
+                    btnSave1.Attributes.Remove("disabled");
+                }
+            }
+
             PopulateIndicators();
         }
 
@@ -170,50 +199,63 @@ namespace SRFROWCA.ClusterLead
 
         private void SaveData()
         {
-            using (ORSEntities db = new ORSEntities())
+            int tempVal = 0;
+            if (RC.IsCountryAdmin(User) || RC.IsOCHAStaff(User))
             {
-                var clusterIndTargetIds = db.ClusterIndicatorTargets
-                                            .Where(x => x.EmergencyLocationId == UserInfo.EmergencyCountry && x.EmergencyClusterId == UserInfo.EmergencyCluster)
-                                            .Select(y => y.ClusterIndicatorTargetId).ToList();
-
-                foreach (GridViewRow row in gvClusterIndTargets.Rows)
+                if (ddlClusters.Visible)
                 {
-                    if (row.RowType == DataControlRowType.DataRow)
+                    int.TryParse(ddlClusters.SelectedValue, out tempVal);
+                }
+            }
+            int clusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster;
+
+            if (clusterId > 0)
+            {
+                using (ORSEntities db = new ORSEntities())
+                {
+                    var clusterIndTargetIds = db.ClusterIndicatorTargets
+                                                .Where(x => x.EmergencyLocationId == UserInfo.EmergencyCountry && x.EmergencyClusterId == clusterId)
+                                                .Select(y => y.ClusterIndicatorTargetId).ToList();
+
+                    foreach (GridViewRow row in gvClusterIndTargets.Rows)
                     {
-                        int clusterIndTargetId = 0;
-                        int.TryParse(gvClusterIndTargets.DataKeys[row.RowIndex].Values["ClusterIndicatorTargetId"].ToString(), out clusterIndTargetId);
-
-                        int indicatorId = 0;
-                        int.TryParse(gvClusterIndTargets.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString(), out indicatorId);
-
-                        if (indicatorId > 0)
+                        if (row.RowType == DataControlRowType.DataRow)
                         {
-                            int midYearTargetTemp = 0;
-                            TextBox txtMidYearTarget = row.FindControl("txtMidYearTarget") as TextBox;
-                            if (txtMidYearTarget != null)
-                            {
-                                int.TryParse(txtMidYearTarget.Text.Trim(), out midYearTargetTemp);
-                            }
+                            int clusterIndTargetId = 0;
+                            int.TryParse(gvClusterIndTargets.DataKeys[row.RowIndex].Values["ClusterIndicatorTargetId"].ToString(), out clusterIndTargetId);
 
-                            int fullYearTargetTemp = 0;
-                            TextBox txtFullYearTarget = row.FindControl("txtFullYearTarget") as TextBox;
-                            if (txtFullYearTarget != null)
-                            {
-                                int.TryParse(txtFullYearTarget.Text.Trim(), out fullYearTargetTemp);
-                            }
+                            int indicatorId = 0;
+                            int.TryParse(gvClusterIndTargets.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString(), out indicatorId);
 
-                            int? midYearTarget = midYearTargetTemp > 0 ? midYearTargetTemp : (int?)null;
-                            int? fullYearTarget = fullYearTargetTemp > 0 ? fullYearTargetTemp : (int?)null;
-                            if (midYearTarget != null || fullYearTarget != null)
+                            if (indicatorId > 0)
                             {
-                                SaveTargets(clusterIndTargetId, indicatorId, midYearTarget, fullYearTarget);
-                                clusterIndTargetIds.Remove(clusterIndTargetId);
+                                int midYearTargetTemp = 0;
+                                TextBox txtMidYearTarget = row.FindControl("txtMidYearTarget") as TextBox;
+                                if (txtMidYearTarget != null)
+                                {
+                                    int.TryParse(txtMidYearTarget.Text.Trim(), out midYearTargetTemp);
+                                }
+
+                                int fullYearTargetTemp = 0;
+                                TextBox txtFullYearTarget = row.FindControl("txtFullYearTarget") as TextBox;
+                                if (txtFullYearTarget != null)
+                                {
+                                    int.TryParse(txtFullYearTarget.Text.Trim(), out fullYearTargetTemp);
+                                }
+
+                                int? midYearTarget = midYearTargetTemp > 0 ? midYearTargetTemp : (int?)null;
+                                int? fullYearTarget = fullYearTargetTemp > 0 ? fullYearTargetTemp : (int?)null;
+                                if (midYearTarget != null || fullYearTarget != null)
+                                {
+                                    SaveTargets(clusterIndTargetId, indicatorId, midYearTarget, fullYearTarget, clusterId);
+                                    clusterIndTargetIds.Remove(clusterIndTargetId);
+                                }
                             }
                         }
                     }
-                }
 
-                DeleteAllRemainingTarget(clusterIndTargetIds);
+                    DeleteAllRemainingTarget(clusterIndTargetIds);
+                }
             }
         }
 
@@ -240,10 +282,21 @@ namespace SRFROWCA.ClusterLead
             }
         }
 
-        private void SaveTargets(int clusterIndTargetId, int indicatorId, int? midYearTarget, int? fullYearTarget)
+        private void SaveTargets(int clusterIndTargetId, int indicatorId, int? midYearTarget, int? fullYearTarget, int clusterId)
         {
             int yearId = 10; // TODO: Get year from datetime or from frontend
-            DBContext.Add("InsertTargetInClustrIndicatorTargets", new object[] {clusterIndTargetId, UserInfo.EmergencyCountry, UserInfo.EmergencyCluster,
+
+            //int tempVal = 0;
+            //if (RC.IsCountryAdmin(User) || RC.IsOCHAStaff(User))
+            //{
+            //    if (ddlClusters.Visible)
+            //    {
+            //        int.TryParse(ddlClusters.SelectedValue, out tempVal);
+            //    }
+            //}
+            //int clusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster;
+
+            DBContext.Add("InsertTargetInClustrIndicatorTargets", new object[] {clusterIndTargetId, UserInfo.EmergencyCountry, clusterId,
                                                                                     indicatorId, yearId, midYearTarget, fullYearTarget, RC.GetCurrentUserId, DBNull.Value });
         }
 
