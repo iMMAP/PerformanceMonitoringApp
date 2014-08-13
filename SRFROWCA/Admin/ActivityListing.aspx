@@ -50,7 +50,7 @@
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <div class="row">
-                                                    <table border="0" width="100%">
+                                                    <table border="0" style="width: 100%; margin: 10px 10px 10px 20px">
                                                         <tr>
                                                             <td class="width-20">
                                                                 <label>
@@ -97,8 +97,12 @@
                                                         <tr>
                                                             <td colspan="3"></td>
                                                             <td colspan="2">
-                                                                <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch2_Click" CssClass="btn btn-primary" CausesValidation="false" />
+                                                                
                                                             </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>&nbsp;</td>
+                                                            <td colspan="4" style="padding-top:20px;"><asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch2_Click" CssClass="btn btn-primary" CausesValidation="false" /></td>
                                                         </tr>
                                                     </table>
                                                 </div>
@@ -120,24 +124,23 @@
             <div style="overflow-x: auto; width: 100%">
                 <asp:GridView ID="gvActivity" runat="server" AutoGenerateColumns="false" AllowSorting="True" AllowPaging="true" PagerSettings-Mode="NumericFirstLast"
                     OnRowCommand="gvActivity_RowCommand" Width="100%" OnRowDataBound="gvActivity_RowDataBound" PagerSettings-Position="Bottom" DataKeyNames="ClusterId,ClusterObjectiveId,ObjectivePriorityId,ActivityTypeId,HumanitarianPriority,SiteLanguageId,ActivityName"
-                    CssClass="imagetable" OnSorting="gvActivity_Sorting" OnPageIndexChanging="gvActivity_PageIndexChanging" PageSize="30" OnRowDeleting="gvActivity_RowDeleting">
-                    <RowStyle CssClass="istrow" />
-                    <AlternatingRowStyle CssClass="altcolor" />
+                     CssClass="table table-striped table-bordered table-hover"  OnSorting="gvActivity_Sorting" OnPageIndexChanging="gvActivity_PageIndexChanging" PageSize="30" OnRowDeleting="gvActivity_RowDeleting">
+                    
                     <Columns>
                         <asp:BoundField DataField="ClusterName" HeaderText="Cluster" SortExpression="ClusterName" ItemStyle-Width="120px" />
                         <asp:BoundField DataField="ShortObjective" HeaderText="Objective" SortExpression="ShortObjective" ItemStyle-Width="80px" />
                         <asp:BoundField DataField="ShortPriority" HeaderText="Priority" SortExpression="ShortPriority"  ItemStyle-Width="180px"/>
                         <asp:BoundField DataField="ActivityName" HeaderText="Activity" SortExpression="ActivityName" />
                         <%--<asp:BoundField DataField="ActivityType" HeaderText="Activity Type" SortExpression="ActivityType"/>--%>
-                        <asp:TemplateField HeaderText="Edit" HeaderStyle-Width="80px">
-                            <ItemTemplate>
-                                <asp:Button ID="btnEdit" runat="server" Text="Edit" Width="80px" CausesValidation="false" class="btn btn-xs"
+                        <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle"   HeaderStyle-Width="80px">
+                            <ItemTemplate >
+                                <asp:LinkButton ID="btnEdit" runat="server" Text="Edit" Width="80px" CausesValidation="false" 
                                     CommandName="EditActivity" CommandArgument='<%# Eval("PriorityActivityId") %>' />
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Delete" HeaderStyle-Width="80px">
+                        <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle" HeaderStyle-Width="80px">
                             <ItemTemplate>
-                                <asp:Button ID="btnDelete" runat="server" Text="Delete" Width="80px" CausesValidation="false" class="btn btn-xs"
+                                <asp:LinkButton ID="btnDelete" runat="server" Text="Delete" Width="80px" CausesValidation="false" 
                                     CommandName="Delete" CommandArgument='<%# Eval("PriorityActivityId") %>' />
                             </ItemTemplate>
                         </asp:TemplateField>
