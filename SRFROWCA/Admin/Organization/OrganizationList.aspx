@@ -47,7 +47,7 @@
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <div class="row">
-                                                    <table border="0" width="100%">
+                                                    <table border="0" style="width: 100%; margin: 10px 10px 10px 20px">
                                                         <tr>
                                                             <td>
                                                                 <label>
@@ -66,18 +66,8 @@
                                                                     
                                                                 </asp:DropDownList>
                                                             </td>
-                                                            <td>
-                                                                <label>
-                                                                    Status:</label>
-                                                            </td>
-                                                            <td>
-                                                                 <asp:DropDownList ID="ddlStatus" runat="server" CssClass="width-90">
-                                                                    <asp:ListItem Text="All" Value="-1" Selected="True"></asp:ListItem>
-                                                                    <asp:ListItem Text="Active" Value="1"></asp:ListItem>
-                                                                    <asp:ListItem Text="InActive" Value="0"></asp:ListItem>
-                                                                   
-                                                                </asp:DropDownList>
-                                                            </td>
+                                                            <td></td>
+                                                           
                                                         </tr>
                                                         <tr>
                                                             <td>
@@ -99,7 +89,36 @@
                                                                 </asp:DropDownList>
                                                             </td>
                                                              <td>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                           
+                                                             <td>
+                                                                <label>
+                                                                    Status:</label>
+                                                            </td>
+                                                            <td>
+                                                                 <asp:DropDownList ID="ddlStatus" runat="server" CssClass="width-90">
+                                                                    <asp:ListItem Text="All" Value="-1" Selected="True"></asp:ListItem>
+                                                                    <asp:ListItem Text="Active" Value="1"></asp:ListItem>
+                                                                    <asp:ListItem Text="InActive" Value="0"></asp:ListItem>
+                                                                   
+                                                                </asp:DropDownList>
+                                                            </td>
+                                                            <td></td>  <td>
+
+                                                            </td>
+                                                            <td>
+
+                                                            </td>  
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                &nbsp;
+                                                            </td>
+                                                            <td colspan="4" style="padding-top:20px">
                                                               <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" CssClass="btn btn-primary" />
+
                                                             </td>
                                                         </tr>
                                                         
@@ -123,10 +142,9 @@
             <tr>
                 <td>
                     <asp:GridView ID="gvOrganization" runat="server" AutoGenerateColumns="false" AllowPaging="true"
-                        CssClass="imagetable" PageSize="300" AllowSorting="true" Width="100%" OnPageIndexChanging="gvOrganization_PageIndexChanging"
+                        CssClass="table table-striped table-bordered table-hover" PageSize="300" AllowSorting="true" Width="100%" OnPageIndexChanging="gvOrganization_PageIndexChanging"
                         OnSorting="gvOrganization_Sorting" OnRowCommand="gvOrganization_RowCommand" OnRowDeleting="gvOrganization_RowDeleting" OnRowDataBound="gvOrganization_RowDataBound">
-                        <RowStyle CssClass="istrow" />
-                        <AlternatingRowStyle CssClass="altcolor" />
+                       
                         <Columns>
                             <asp:TemplateField ItemStyle-CssClass="rownum" ItemStyle-Width="2%" HeaderText="#">
                                 <ItemTemplate>
@@ -140,21 +158,22 @@
                             <asp:BoundField DataField="Country" HeaderText="Country" SortExpression="Country" />
                             <asp:BoundField DataField="Phone" HeaderText="Phone" SortExpression="Phone" />
                             <asp:BoundField DataField="CreatedDate" HeaderText="Created Date" SortExpression="CreatedDate"
-                                ItemStyle-HorizontalAlign="Center" />
-                             <asp:TemplateField HeaderText="Edit" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center"
+                                ItemStyle-HorizontalAlign="Center" ItemStyle-Width="200" />
+                             <asp:TemplateField HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center"
                                 HeaderStyle-Width="70">
                                 <ItemTemplate>
-                                    <asp:Button ID="btnEdit" runat="server" Text="Edit" CommandName="Edit" CommandArgument='<%# Eval("OrganizationID") %>' />
+                                    <asp:LinkButton Text="Edit" ID="btnEdit" runat="server"  CommandName="Edit" CommandArgument='<%# Eval("OrganizationID") %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>  
-                             <asp:TemplateField HeaderText="Delete" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center"
+                             <asp:TemplateField  HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center"
                                 HeaderStyle-Width="70">
                                 <ItemTemplate>
-                                    <asp:Button ID="btnDelete" runat="server" Text="Delete" CommandName="Delete" CommandArgument='<%# Eval("OrganizationID") %>' />
+                                    <asp:LinkButton ID="btnDelete" runat="server" Text="Delete" CommandName="Delete" CommandArgument='<%# Eval("OrganizationID") %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>                         
                            
                         </Columns>
+                        
                         <EmptyDataTemplate>
                             <div class="no-record">No record found!</div>                           
                         </EmptyDataTemplate>
