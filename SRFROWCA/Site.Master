@@ -282,6 +282,19 @@
 								<li id="liCountrySahel" runat="server"><a href="<%=BaseURL %>/Reports/NewCountryReports.aspx?cid=567"><span class="menu-text">Sahel</span></a></li>
 							</ul>
 						</li>
+                        <li id="liMaps" runat="server"><a id="mnuMaps" runat="server" href="#"
+							class="dropdown-toggle"><i class="icon-globe"></i><span class="menu-text">Maps
+							</span><b class="arrow icon-angle-down"></b></a>
+							<ul class="submenu">
+								<li id="liMapBurkina" runat="server"><a href="<%=BaseURL %>/Reports/CountryMaps.aspx?cid=2"><span class="menu-text">Burkina Faso</span></a></li>
+								<li id="liMapCameroon" runat="server"><a href="<%=BaseURL %>/Reports/CountryMaps.aspx?cid=3"><span class="menu-text">Cameroon</span></a></li>								
+								<li id="liMapGambia" runat="server"><a href="<%=BaseURL %>/Reports/CountryMaps.aspx?cid=5"><span class="menu-text">Gambia</span></a></li>
+								<li id="liMapMali" runat="server"><a href="<%=BaseURL %>/Reports/CountryMaps.aspx?cid=6"><span class="menu-text">Mali</span></a></li>
+								<li id="liMapMauritania" runat="server"><a href="<%=BaseURL %>/Reports/CountryMaps.aspx?cid=7"><span class="menu-text">Mauritania</span></a></li>								
+                                <li id="liMapNiger" runat="server"><a href="<%=BaseURL %>/Reports/CountryMaps.aspx?cid=8"><span class="menu-text">Niger</span></a></li>								
+								<li id="liMapSenegal" runat="server"><a href="<%=BaseURL %>/Reports/CountryMaps.aspx?cid=10"><span class="menu-text">Senegal</span></a></li>								
+							</ul>
+						</li>
 						<li id="liPivotTables" runat="server"><a id="menuePivotTables" runat="server" href="#"
 							class="dropdown-toggle"><i class="icon-table"></i><span class="menu-text">
 								<asp:Localize ID="localPivotTables" runat="server" Text="Pivot Tables" meta:resourcekey="localPivotTablesResource1"></asp:Localize>

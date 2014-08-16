@@ -182,7 +182,7 @@ namespace SRFROWCA.Pages
                     {
                         FillStagingTableInDB(tableScript, tableScript2, dt);
                         ImportData();
-                        //TruncateTempTables();
+                        TruncateTempTables();
                     }
 
                     scope.Complete();
@@ -419,8 +419,7 @@ namespace SRFROWCA.Pages
         private DataTable ImportData()
         {
             int yearId = 10;
-            return DBContext.GetData("ImportUserCLDataFromStagingTable", new object[] {UserInfo.EmergencyCountry, UserInfo.EmergencyCluster,
-                                                                                    yearId, RC.GetCurrentUserId, RC.IsClusterLead(User)});
+            return DBContext.GetData("ImportUserCLDataFromStagingTable", new object[] {UserInfo.EmergencyCountry, yearId, RC.GetCurrentUserId, RC.IsClusterLead(User)});
         }
 
         // Create new datatable and appropriate columns.

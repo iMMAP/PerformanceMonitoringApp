@@ -911,6 +911,8 @@
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="PivotTables\OprOrgsClsCnt.aspx" />
+    <Content Include="Reports\LoadCountryMaps.aspx" />
+    <Content Include="Reports\CountryMaps.aspx" />
     <Content Include="Reports\LoadCountryReport.aspx" />
     <Content Include="Reports\NewCountryReports.aspx" />
     <Content Include="Reports\CountriesForReports.aspx" />
@@ -1170,6 +1172,7 @@
     </Compile>
     <Compile Include="Admin\ConfigSettings.aspx.cs">
       <DependentUpon>ConfigSettings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\ConfigSettings.aspx.designer.cs">
       <DependentUpon>ConfigSettings.aspx</DependentUpon>
@@ -1782,6 +1785,20 @@
     </Compile>
     <Compile Include="PivotTables\OprOrgsClsCnt.aspx.designer.cs">
       <DependentUpon>OprOrgsClsCnt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\LoadCountryMaps.aspx.cs">
+      <DependentUpon>LoadCountryMaps.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\LoadCountryMaps.aspx.designer.cs">
+      <DependentUpon>LoadCountryMaps.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\CountryMaps.aspx.cs">
+      <DependentUpon>CountryMaps.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\CountryMaps.aspx.designer.cs">
+      <DependentUpon>CountryMaps.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\LoadCountryReport.aspx.cs">
       <DependentUpon>LoadCountryReport.aspx</DependentUpon>

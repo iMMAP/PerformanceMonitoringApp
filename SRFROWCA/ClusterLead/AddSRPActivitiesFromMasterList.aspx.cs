@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using SRFROWCA.Common;
-using BusinessLogic;
 using System.Data;
 using System.Transactions;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using BusinessLogic;
+using SRFROWCA.Common;
 
 namespace SRFROWCA.ClusterLead
 {
@@ -22,15 +19,15 @@ namespace SRFROWCA.ClusterLead
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
-            UserInfo.UserProfileInfo();
+            
             PopulateObjectives();
             PopulatePriorities();
-            
-            //PopulateClusterName();
 
             if (RC.IsCountryAdmin(User) || RC.IsOCHAStaff(User))
             {
                 PopulateClusters();
+                btnAddSRPActivity.Attributes.Add("disabled", "disabled");
+                btnAddIndicator.Attributes.Add("disabled", "disabled");
             }
             else
             {
@@ -41,20 +38,12 @@ namespace SRFROWCA.ClusterLead
             Session["SRPCustomEditIndicator"] = null;
         }
 
-        private void PopulateClusters()
-        {
-            int emgId = 1;
-            UI.FillEmergnecyClusters(ddlClusters, emgId);
-            RC.AddSelectItemInList(ddlClusters, "Select Cluster");
-        }
-
         internal override void BindGridData()
         {
             PopulateObjectives();
-            PopulatePriorities();            
-            //PopulateClusterName();
+            PopulatePriorities();
 
-            if (RC.IsCountryAdmin(User))
+            if (RC.IsCountryAdmin(User) || RC.IsOCHAStaff(User))
             {
                 PopulateClusters();
                 PopulateIndicators();
@@ -66,30 +55,34 @@ namespace SRFROWCA.ClusterLead
             }
         }
 
-        private void PopulateIndicators()
+        protected void ddlClusters_SelectedIndexChanged(object sender, EventArgs e)
         {
-            gvSRPIndicators.DataSource = GetIndicators();
-            gvSRPIndicators.DataBind();
-        }
-
-        private DataTable GetIndicators()
-        {
-            int tempVal = 0;
             if (ddlClusters.Visible)
             {
-                int.TryParse(ddlClusters.SelectedValue, out tempVal);
+                if (ddlClusters.SelectedValue == "0")
+                {
+                    btnAddSRPActivity.Attributes.Add("disabled", "disabled");
+                    btnAddIndicator.Attributes.Add("disabled", "disabled");
+                }
+                else
+                {
+                    btnAddSRPActivity.Attributes.Remove("disabled");
+                    btnAddIndicator.Attributes.Remove("disabled");
+                }
             }
 
-            int? clusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
-            int? emgLocationId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
-            int lngId = RC.SelectedSiteLanguageId;
-            return DBContext.GetData("GetClusterIndicatorsToSelectSRPActivities", new object[] { clusterId, emgLocationId, lngId });
+            PopulateIndicators();
         }
 
-        //private void PopulateClusterName()
-        //{
-        //    localizeClusterName.Text = RC.GetClusterName + " Indicators";
-        //}
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            using (TransactionScope scope = new TransactionScope())
+            {
+                SaveData();
+                scope.Complete();
+                ShowMessage("Data Saved Successfully!");
+            }
+        }
 
         protected void gvSRPIndicators_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -110,23 +103,6 @@ namespace SRFROWCA.ClusterLead
             }
         }
 
-        //protected void chkSRP_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    int index = ((GridViewRow)((CheckBox)sender).NamingContainer).RowIndex;
-        //    CheckBox cb = gvSRPIndicators.Rows[index].FindControl("chkSRP") as CheckBox;
-        //    if (cb != null)
-        //    {
-        //        //Label lblUserId = gvSRPIndicators.Rows[index].FindControl("lblUserId") as Label;
-        //        int indicatorId = 0;
-        //        int.TryParse(gvSRPIndicators.DataKeys[index].Values["ActivityDataId"].ToString(), out indicatorId);
-
-        //        if (indicatorId > 0)
-        //        {
-        //            AddRemoveSRPIndicatorFromList(indicatorId, cb.Checked);
-        //        }
-        //    }
-        //}
-
         protected void gvSRPIndicators_Sorting(object sender, GridViewSortEventArgs e)
         {
             DataTable dt = GetIndicators();
@@ -135,6 +111,77 @@ namespace SRFROWCA.ClusterLead
 
             gvSRPIndicators.DataSource = dt;
             gvSRPIndicators.DataBind();
+        }
+
+        protected void btnAddSRPActivity_Click(object sender, EventArgs e)
+        {
+            if (ddlClusters.Visible)
+            {
+                int cid = 0;
+                int.TryParse(ddlClusters.SelectedValue, out cid);
+                Response.Redirect("AddSRPActivity.aspx?cid=" + cid.ToString());
+            }
+            else
+            {
+                Response.Redirect("AddSRPActivity.aspx");
+            }
+        }
+
+        protected void btnAddIndicator_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/LeadPages/AddIndicatorOnActivity.aspx");
+        }
+
+        private void PopulateObjectives()
+        {
+            UI.FillObjectives(cblObjectives, true);
+            ObjPrToolTip.ObjectivesToolTip(cblObjectives);
+        }
+
+        private void PopulatePriorities()
+        {
+            UI.FillPriorities(cblPriorities);
+            ObjPrToolTip.PrioritiesToolTip(cblPriorities);
+        }
+
+        private void PopulateClusters()
+        {
+            int emgId = 1;
+            UI.FillEmergnecyClusters(ddlClusters, emgId);
+            RC.AddSelectItemInList(ddlClusters, "Select Cluster");
+        }
+
+        private void PopulateIndicators()
+        {
+            gvSRPIndicators.DataSource = GetIndicators();
+            gvSRPIndicators.DataBind();
+        }
+
+        private DataTable GetIndicators()
+        {
+            int clusterId = 0;
+            if (RC.IsCountryAdmin(User) || RC.IsOCHAStaff(User))
+            {
+                if (ddlClusters.Visible)
+                {
+                    int.TryParse(ddlClusters.SelectedValue, out clusterId);
+                }
+            }
+            else
+            {
+                clusterId = UserInfo.EmergencyCluster;
+            }
+
+            int? emgLocationId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
+            int lngId = RC.SelectedSiteLanguageId;
+
+            DataTable dt = new DataTable();
+            if (clusterId > 0)
+            {
+                dt = DBContext.GetData("GetClusterIndicatorsToSelectSRPActivities", new object[] { clusterId, emgLocationId, lngId });
+            }
+
+            return dt;
         }
 
         private string GetSortDirection(string column)
@@ -167,48 +214,47 @@ namespace SRFROWCA.ClusterLead
             return sortDirection;
         }
 
+        private void SaveData()
+        {
+            foreach (GridViewRow row in gvSRPIndicators.Rows)
+            {
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    CheckBox cb = gvSRPIndicators.Rows[row.RowIndex].FindControl("chkSRP") as CheckBox;
+                    if (cb != null)
+                    {
+                        int indicatorId = 0;
+                        int.TryParse(gvSRPIndicators.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString(), out indicatorId);
+
+                        if (indicatorId > 0)
+                        {
+                            if (cb.Checked)
+                            {
+                                int i = 0;
+                            }
+                            AddRemoveSRPIndicatorFromList(indicatorId, cb.Checked);
+                        }
+                    }
+                }
+            }
+        }
+
         private void AddRemoveSRPIndicatorFromList(int indicatorId, bool isAdd)
         {
             Guid userId = RC.GetCurrentUserId;
             int locationId = UserInfo.EmergencyCountry;
-            int clusterId = UserInfo.EmergencyCluster;
+
+            int tempVal = 0;
+            if (RC.IsCountryAdmin(User) || RC.IsOCHAStaff(User))
+            {
+                if (ddlClusters.Visible)
+                {
+                    int.TryParse(ddlClusters.SelectedValue, out tempVal);
+                }
+            }
+            int clusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster;
+
             DBContext.Update("InsertDeleteSRPIndicaotr", new object[] { indicatorId, locationId, clusterId, isAdd, userId, DBNull.Value });
-        }
-
-        protected void btnAddSRPActivity_Click(object sender, EventArgs e)
-        {
-            if (ddlClusters.Visible)
-            {
-                int cid = 0;
-                int.TryParse(ddlClusters.SelectedValue, out cid);
-                Response.Redirect("AddSRPActivity.aspx?cid=" + cid.ToString());
-            }
-            else
-            {
-                Response.Redirect("AddSRPActivity.aspx");
-            }
-        }
-
-        protected void btnAddIndicator_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/LeadPages/AddIndicatorOnActivity.aspx");
-        }
-
-        protected void ddlClusters_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            PopulateIndicators();
-        }
-
-        private void PopulateObjectives()
-        {
-            UI.FillObjectives(cblObjectives, true);
-            ObjPrToolTip.ObjectivesToolTip(cblObjectives);
-        }
-
-        private void PopulatePriorities()
-        {
-            UI.FillPriorities(cblPriorities);
-            ObjPrToolTip.PrioritiesToolTip(cblPriorities);
         }
 
         protected void ExportToExcel(object sender, EventArgs e)
@@ -230,38 +276,6 @@ namespace SRFROWCA.ClusterLead
             dt.Columns.Remove("ActivityDataId");
             dt.Columns.Remove("HumanitarianPriorityId");
             dt.Columns.Remove("ActivityDataId1");
-        }
-
-        protected void btnSave_Click(object sender, EventArgs e)
-        {
-            using (TransactionScope scope = new TransactionScope())
-            {
-                SaveData();
-                scope.Complete();
-                ShowMessage("Data Saved Successfully!");
-            }
-        }
-
-        private void SaveData()
-        {
-            foreach (GridViewRow row in gvSRPIndicators.Rows)
-            {
-                if (row.RowType == DataControlRowType.DataRow)
-                {
-                    CheckBox cb = gvSRPIndicators.Rows[row.RowIndex].FindControl("chkSRP") as CheckBox;
-                    if (cb != null)
-                    {
-                        //Label lblUserId = gvSRPIndicators.Rows[index].FindControl("lblUserId") as Label;
-                        int indicatorId = 0;
-                        int.TryParse(gvSRPIndicators.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString(), out indicatorId);
-
-                        if (indicatorId > 0)
-                        {
-                            AddRemoveSRPIndicatorFromList(indicatorId, cb.Checked);
-                        }
-                    }
-                }
-            }
         }
 
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success)
