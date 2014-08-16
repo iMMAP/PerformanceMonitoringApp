@@ -338,7 +338,7 @@
                     </tr>
                 </table>
 
-                <div class="col-xs-12 col-sm-12">
+                <%--<div class="col-xs-12 col-sm-12">--%>
                     <div class="widget-box">
                         <div class="widget-header widget-header-small header-color-blue2">
                             <h6>Search Criteria
@@ -355,18 +355,16 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                <%--</div>--%>
             <div class="row">
                 <div class="col-xs-12 col-sm-12">
                     <div class="widget-box">
-                        <cc2:PagingGridView ID="gvReport" runat="server" Width="100%" CssClass="imagetable"
+                        <cc2:PagingGridView ID="gvReport" runat="server" Width="100%"  CssClass="table table-striped table-bordered table-hover"
                             AutoGenerateColumns="false" OnSorting="gvReport_Sorting" ShowHeaderWhenEmpty="true"
                             EnableViewState="false" AllowSorting="True" AllowPaging="true" PageSize="60"
                             ShowHeader="true" OnPageIndexChanging="gvReport_PageIndexChanging" EmptyDataText="Your filter criteria does not match any record in database!">
                             <PagerStyle BackColor="#efefef" ForeColor="DarkSlateBlue" HorizontalAlign="Center" />
-                            <PagerSettings Mode="NumericFirstLast" />
-                            <RowStyle CssClass="istrow" />
-                            <AlternatingRowStyle CssClass="altcolor" />
+                         
                             <Columns>
                                 <asp:BoundField DataField="Cluster" HeaderText="Cluster" SortExpression="Cluster"
                                     HeaderStyle-Width="5%" />

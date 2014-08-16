@@ -244,7 +244,7 @@
                         <span class="widget-toolbar pull-right"><a href="#" data-action="collapse" class="pull-right">
                             <i class="icon-chevron-up pull-right"></i></a></span>
                     </div>
-                    <div class="widget-body">
+                    <div class="widget-body" style="padding-right:20px;padding-left:20px;">
                         <div class="widget-main">
                             <div class="pull-left">
                                 <asp:Localize ID="lzeSelectLocaitonsText" runat="server"
@@ -371,7 +371,7 @@
                         <div class="space">
                         </div>
                         <button id="btnSave" runat="server" onserverclick="btnSave_Click" onclick="needToConfirm = false;"
-                            type="button" class="width-20 pull-right btn btn-sm btn-primary">
+                            type="button" class="pull-right btn btn-sm btn-primary">
                             <i class="icon-save"></i>
                             <asp:Localize ID="localSaveButton" runat="server" Text="Save" meta:resourcekey="localSaveButtonResource1"></asp:Localize>
                         </button>

@@ -176,13 +176,12 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 widget-container-span">
                 <div class="widget-box">
-                    <asp:GridView ID="gvProjects" runat="server" AutoGenerateColumns="False" CssClass="imagetable"
+                    <asp:GridView ID="gvProjects" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-bordered table-hover"
                         AllowPaging="True" AllowSorting="True" PageSize="50" ShowHeaderWhenEmpty="True"
                         EmptyDataText="Your filter criteria does not match any project!" Width="100%"
                         OnRowCommand="gvProjects_RowCommand" OnSorting="gvProjects_Sorting" OnPageIndexChanging="gvProjects_PageIndexChanging"
                         meta:resourcekey="gvProjectsResource1">
-                        <RowStyle CssClass="istrow" />
-                        <AlternatingRowStyle CssClass="altcolor" />
+                   
                         <Columns>
                             <asp:BoundField DataField="ProjectCode" HeaderText="Project Code" SortExpression="ProjectCode"
                                 meta:resourcekey="BoundFieldResource1" />
@@ -204,8 +203,8 @@
                                 <ItemStyle Wrap="True" Width="150px"></ItemStyle>
                             </asp:BoundField>
                             <asp:BoundField DataField="Phone" HeaderText="Phone" meta:resourcekey="BoundFieldResource9" />
-                            <asp:TemplateField HeaderText="View" meta:resourcekey="TemplateFieldResource1">
-                                <ItemTemplate>
+                            <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderText="View" meta:resourcekey="TemplateFieldResource1">
+                                <ItemTemplate  >
                                      <asp:ImageButton ID="lnkVieDetails" runat="server" ImageUrl="~/assets/orsimages/view.png" CommandName="ViewProject"
                                                     CommandArgument='<%# Eval("ProjectId") %>' meta:resourcekey="lnkVieDetailsResource1" />
                                             
@@ -213,7 +212,7 @@
                                         CommandArgument='<%# Eval("ProjectId") %>' meta:resourcekey="lnkVieDetailsResource1" />--%>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="PDF" >
+                            <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderText="PDF" >
                                 <ItemTemplate>
                                      <asp:ImageButton ID="lnkPrint" runat="server" ImageUrl="~/assets/orsimages/pdf.png" CommandName="PrintReport"
                                                     CommandArgument='<%# Eval("ProjectId") %>' />
