@@ -163,6 +163,8 @@
     <Content Include="Admin\EmergencyLocations.aspx" />
     <Content Include="Admin\IndicatorActivities.aspx" />
     <Content Include="Admin\IndicatorListing.aspx" />
+    <Content Include="Admin\Location\AddNewLocation.aspx" />
+    <Content Include="Admin\Location\LocationsList.aspx" />
     <Content Include="Admin\OPSProjectAllData.aspx" />
     <Content Include="Admin\Organization\AddEditOrganization.aspx" />
     <Content Include="Admin\Organization\OrganizationList.aspx" />
@@ -1172,6 +1174,7 @@
     </Compile>
     <Compile Include="Admin\ConfigSettings.aspx.cs">
       <DependentUpon>ConfigSettings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\ConfigSettings.aspx.designer.cs">
       <DependentUpon>ConfigSettings.aspx</DependentUpon>
@@ -1203,6 +1206,20 @@
     </Compile>
     <Compile Include="Admin\IndicatorListing.aspx.designer.cs">
       <DependentUpon>IndicatorListing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Location\AddNewLocation.aspx.cs">
+      <DependentUpon>AddNewLocation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Location\AddNewLocation.aspx.designer.cs">
+      <DependentUpon>AddNewLocation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Location\LocationsList.aspx.cs">
+      <DependentUpon>LocationsList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Location\LocationsList.aspx.designer.cs">
+      <DependentUpon>LocationsList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\OPSProjectAllData.aspx.cs">
       <DependentUpon>OPSProjectAllData.aspx</DependentUpon>
@@ -1909,7 +1926,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Admin\Location\" />
     <Folder Include="Admin\Reports\" />
     <Folder Include="App_Data\" />
     <Folder Include="GeneratedChartFiles\" />
