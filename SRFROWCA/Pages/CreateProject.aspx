@@ -181,7 +181,7 @@
                                         <asp:DropDownList ID="DropDownList2" runat="server"></asp:DropDownList></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2">
+                                    <td colspan="2" style="padding-top:20px;">
                                         <asp:Button ID="btnSave" runat="server" Text="Save & Stay" CssClass="btn btn-primary"
                                             OnClick="btnSave_Click" meta:resourcekey="btnSaveResource1" />
                                         <asp:Button ID="btnSaveClose" runat="server" Text="Save & Close" CssClass="btn btn-primary"
@@ -189,7 +189,7 @@
                                         <asp:Button ID="btnManageActivities" runat="server" Text="Manage Activities" CssClass="btn btn-primary" Enabled="False"
                                             CausesValidation="False" OnClick="btnManageActivities_Click" meta:resourcekey="btnManageActivitiesResource1" />
                                     </td>
-                                    <td>
+                                    <td style="padding-top:20px;">
                                         <asp:Button ID="btnDeleteProject" runat="server" Text="Delete Project" CssClass="btn btn-danger"
                                             CausesValidation="False" OnClick="btnDeleteProject_Click" OnClientClick="javascript:return confirm('Are you sure your want to delete this project?');" meta:resourcekey="btnDeleteProjectResource1" />
                                     </td>
