@@ -10,6 +10,9 @@ namespace SRFROWCA
 {
     public partial class SiteMaster : System.Web.UI.MasterPage
     {
+        public string MetaDescription = "ROWCA ORS";
+        public string PageTitle = "ORS - Home";
+
         protected void Page_Init(object sender, EventArgs e)
         {
             if (Session["SiteLanguage"] == null)
@@ -316,11 +319,13 @@ namespace SRFROWCA
             {
                 liDashboards.Attributes.Add("class", "active open");
                 liDefault.Attributes.Add("class", "active");
+                PageTitle = "ORS - Home";
             }
             else if (uri == "/ReportingStatus.aspx")
             {
                 liDashboards.Attributes.Add("class", "active open");
                 liReportingStatus.Attributes.Add("class", "active");
+                PageTitle = "ORS - Achievements";
             }
             //else if (uri == "/OperationalPresenceDB.aspx")
             //{
@@ -329,18 +334,26 @@ namespace SRFROWCA
             //}
             else if (uri == "/Pages/AddActivities.aspx")
             {
+                PageTitle = "ORS - Add Activity";
+
                 liDataEntry.Attributes.Add("class", "active");
             }
             else if (uri == "/Pages/CreateProject.aspx")
             {
+                PageTitle = "ORS - Manage Project";
+
                 liManageProject.Attributes.Add("class", "active");
             }
             else if (uri == "/Pages/ManageActivities.aspx")
             {
+                PageTitle = "ORS - Manage Activity";
+
                 liManageActivity.Attributes.Add("class", "active");
             }
             else if (uri == "/Anonymous/AllData.aspx")
             {
+                PageTitle = "ORS - Reports";
+
                 liReports.Attributes.Add("class", "active open");
                 liCustomReport.Attributes.Add("class", "active");
                 liPublicAllData.Attributes.Add("class", "active open");
@@ -348,6 +361,16 @@ namespace SRFROWCA
             else if (uri == "/Anonymous/AllDataPublic.aspx")
             {
                 liPublicAllData.Attributes.Add("class", "active");
+            }
+            else if (uri.Contains("UploadAchived.aspx"))
+            {
+                PageTitle = "ORS - Bulk Upload";
+                liBulkImport.Attributes.Add("class", "active");
+            }
+            else if (uri.Contains("/ORSDocuments/orsdocs.aspx"))
+            {
+                PageTitle = "ORS - Documents";
+                liORSDocuments.Attributes.Add("class", "active");
             }
             else if (uri == "/ClusterLead/AddSRPActivitiesFromMasterList.aspx")
             {
@@ -369,6 +392,7 @@ namespace SRFROWCA
             }
             else if (uri == "/RegionalLead/ManageRegionalIndicators.aspx")
             {
+                PageTitle = "ORS - Reg. Indicators";
                 liRegionalIndicators.Attributes.Add("class", "active");
             }
             else if (uri == "/Reports/OperationalPresence.aspx")
@@ -412,16 +436,22 @@ namespace SRFROWCA
             }
             else if (uri == "/PivotTables/PerfMontPivot.aspx")
             {
+                PageTitle = "ORS - Perf. Monitoring";
+
                 liPivotTables.Attributes.Add("class", "active open");
                 liPivotPerfMonitoring.Attributes.Add("class", "active");
             }
             else if (uri == "/PivotTables/NumOfOrgsClsCnt.aspx")
             {
+                PageTitle = "ORS - Op. Presence";
+
                 liPivotTables.Attributes.Add("class", "active open");
                 liPivotNumberOfOrgs.Attributes.Add("class", "active");
             }
             else if (uri == "/PivotTables/OprOrgsClsCnt.aspx")
             {
+                PageTitle = "ORS - Org. Presence";
+
                 liPivotTables.Attributes.Add("class", "active open");
                 liPivotOrgOperational.Attributes.Add("class", "active");
             }
@@ -432,11 +462,26 @@ namespace SRFROWCA
             }
             else if (uri == "/ClusterLead/ProjectsListing.aspx" || uri.Contains("/ClusterLead/ProjectDetails.aspx"))
             {
+                PageTitle = "ORS - Projects";
                 liCLprojectsListing.Attributes.Add("class", "active");
             }
             else if (uri == "/Admin/UsersListing.aspx")
             {
+                PageTitle = "ORS - User Details";
+
                 liUserListing.Attributes.Add("class", "active");
+            }
+            else if (uri == "/LeadPages/FundingListing.aspx")
+            {
+                PageTitle = "ORS - Fundings";
+
+                liFundingStatus.Attributes.Add("class", "active");
+            }
+            else if (uri == "/organization/OrganizationList.aspx")
+            {
+                PageTitle = "ORS - Organizations";
+
+                liOrganizationList.Attributes.Add("class", "active");
             }
             else if (uri.Contains("ClusterLead/ValidateIndicators.aspx"))
             {
@@ -449,53 +494,82 @@ namespace SRFROWCA
             }
             else if (uri.Contains("/EmergencyListing.aspx"))
             {
+                PageTitle = "ORS - Emergencies";
+
                 liEmergency.Attributes.Add("class", "active open");
                 liEmgList.Attributes.Add("class", "active");
             }
             else if (uri.Contains("/EmergencyLocations.aspx"))
             {
+                PageTitle = "ORS - Emergency Locations";
+
                 liEmergency.Attributes.Add("class", "active open");
                 liEmgLocation.Attributes.Add("class", "active");
             }
             else if (uri.Contains("/EmergencyClusters.aspx"))
             {
+                PageTitle = "ORS - Emergency Clusters";
+
                 liEmergency.Attributes.Add("class", "active open");
                 liEmgCluster.Attributes.Add("class", "active");
             }
             else if (uri.Contains("Admin/ActivityListing.aspx"))
             {
+                PageTitle = "ORS - Activites";
+
                 liActivities.Attributes.Add("class", "active");
             }
             else if (uri.Contains("Admin/IndicatorListing.aspx"))
             {
+                PageTitle = "ORS - Indicators";
+
                 liIndicators.Attributes.Add("class", "active");
             }
             else if (uri.Contains("Admin/ProgressSummary.aspx"))
             {
+                PageTitle = "ORS - Progress Summary";
+
                 liProgressSummary.Attributes.Add("class", "active");
             }
             else if (uri.Contains("Admin/ProjectXMLFeeds.aspx"))
             {
+                PageTitle = "ORS - XML Feeds";
+
                 liProjectXMLFeeds.Attributes.Add("class", "active");
             }
             else if (uri.Contains("Admin/ConfigSettings.aspx"))
             {
+                PageTitle = "ORS - Settings";
+
                 liSettings.Attributes.Add("class", "active");
             }
             else if (uri.Contains("NewCountryReports") || uri.Contains("LoadCountryReport"))
             {
+                PageTitle = "ORS - Country Reports";
+
                 liCountryReports.Attributes.Add("class", "active open");
                 //liCountryReports.Attributes.Add("class", "active");
             }
             else if (uri.Contains("CountryReports"))
             {
+                PageTitle = "ORS - Country Reports";
                 liCountryConsolidatedReports.Attributes.Add("class", "active open");
                 //liCountryReports.Attributes.Add("class", "active");
             }
             else if (uri.Contains("CountryMaps"))
             {
+                PageTitle = "ORS - Country Maps";
+                
                 liMaps.Attributes.Add("class", "active open");
                 //liCountryReports.Attributes.Add("class", "active");
+            }
+            else if (uri.Contains("ContactUs.aspx"))
+            {
+                PageTitle = "ORS - Contact Us";
+            }
+            else if (uri.Contains("faq.aspx"))
+            {
+                PageTitle = "ORS - FAQ";
             }
 
         }
