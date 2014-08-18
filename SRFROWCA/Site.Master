@@ -5,8 +5,8 @@
 <head id="masterHead" runat="server">
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 	<meta charset="utf-8" />
-	<title>ORS</title>
-	<meta name="description" content="overview &amp; stats" />
+	<title><%=PageTitle %></title>
+	<meta name="description" content="<%=MetaDescription %>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
     <!-- basic styles -->
@@ -325,6 +325,10 @@
 							id="menueOrganizationList"><i class="icon-building"></i><span class="menu-text">
 								<asp:Localize ID="localOrganizationsResource1" runat="server" Text="Organizations" meta:resourcekey="localOrganizationsResource1"></asp:Localize>
 							</span></a></li>
+                          <li id="liLocations" runat="server"><a id="mnuLocations" href='<%=BaseURL%>/Admin/Location/LocationsList.aspx'
+							><i class="icon-globe"></i><span class="menu-text">Locations
+							</span></a>							
+						</li>
 
 						<li id="liEmergency" runat="server"><a id="A2" runat="server" href="#"
 							class="dropdown-toggle"><i class="icon-ambulance"></i><span class="menu-text">
