@@ -517,8 +517,11 @@ namespace SRFROWCA.Pages
                 }
                 else
                 {
-                    DeleteReport();
-                    SendMail("Report Delete Summary! " + DateTime.Now.ToString("dd-MMM-yyyy"), ReportId);
+                    if (ReportId > 0)
+                    {
+                        DeleteReport();
+                        SendMail("Report Delete Summary! " + DateTime.Now.ToString("dd-MMM-yyyy"), ReportId);
+                    }
                 }
 
                 scope.Complete();
@@ -530,10 +533,10 @@ namespace SRFROWCA.Pages
         {
             try
             {
-                int countryID = UserInfo.Country > 0 ? UserInfo.Country : 0;
-                int projId = RC.GetSelectedIntVal(rblProjects);
+                string countryName = !string.IsNullOrEmpty(UserInfo.CountryName) ? UserInfo.CountryName : "";                
+                string projCode = rblProjects.SelectedValue;
 
-                DataTable dtEmails = DBContext.GetData("uspGetUserEmails", new object[] { countryID, projId });
+                DataTable dtEmails = DBContext.GetData("uspGetUserEmails", new object[] { countryName, projCode });
 
                 string emails = string.Empty;
                 emails = "orsocharowca@gmail.com";
@@ -552,8 +555,8 @@ namespace SRFROWCA.Pages
                         mailMsg.IsBodyHtml = true;
                         mailMsg.Body = string.Format(@"Notification:" + Environment.NewLine +
                                                       "The user: : " + User.Identity.Name + " has " + changeType + " the report with following details:" + Environment.NewLine +
-                                                      "ProjectID: " + projId + Environment.NewLine +
-                                                      "CountryID:" + countryID + Environment.NewLine+
+                                                      "Project Code: " + projCode + Environment.NewLine +
+                                                      "Country:" + countryName + Environment.NewLine+
                                                       "ReportID:" + reportID + Environment.NewLine);
 
                         Mail.SendMail(mailMsg);
