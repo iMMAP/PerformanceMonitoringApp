@@ -121,6 +121,24 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.TextBox txtProjectObjective;
         
         /// <summary>
+        /// LocalizeImplementingPartners control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize LocalizeImplementingPartners;
+        
+        /// <summary>
+        /// txtImplementingPartners control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtImplementingPartners;
+        
+        /// <summary>
         /// localCluster control.
         /// </summary>
         /// <remarks>
@@ -193,13 +211,13 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.TextBox txtRequestedAmount;
         
         /// <summary>
-        /// ddlRequestedAmountDonor control.
+        /// ddlRequestedAmountCurrency control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlRequestedAmountDonor;
+        protected global::System.Web.UI.WebControls.DropDownList ddlRequestedAmountCurrency;
         
         /// <summary>
         /// localFundingStatus control.
@@ -238,49 +256,49 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.TextBox txtDonorName;
         
         /// <summary>
-        /// TextBox1 control.
+        /// txtDonor1Contributed control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox txtDonor1Contributed;
         
         /// <summary>
-        /// DropDownList1 control.
+        /// ddlDonor1Currency control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.WebControls.DropDownList ddlDonor1Currency;
         
         /// <summary>
-        /// TextBox2 control.
+        /// txtDonor2Name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.TextBox txtDonor2Name;
         
         /// <summary>
-        /// TextBox3 control.
+        /// txtDonor2Contributed control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox3;
+        protected global::System.Web.UI.WebControls.TextBox txtDonor2Contributed;
         
         /// <summary>
-        /// DropDownList2 control.
+        /// ddlDonor2Currency control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList2;
+        protected global::System.Web.UI.WebControls.DropDownList ddlDonor2Currency;
         
         /// <summary>
         /// btnSave control.

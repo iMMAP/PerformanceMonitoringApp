@@ -18,6 +18,7 @@ namespace SRFROWCA.Pages
         {
             if (IsPostBack) return;
             PopulateClusters();
+            PopulateCurrency();
             LoadProjects();
 
             if (rblProjects.Items.Count > 0)
@@ -27,6 +28,25 @@ namespace SRFROWCA.Pages
             }
 
             ToggleButtons();
+        }
+
+        private void PopulateCurrency()
+        {
+            DataTable dt = DBContext.GetData("GetAllCurrency");
+            PopulateCurrencyDropDowns(ddlRequestedAmountCurrency, dt);
+            PopulateCurrencyDropDowns(ddlDonor1Currency, dt);
+            PopulateCurrencyDropDowns(ddlDonor2Currency, dt);
+        }
+
+        private void PopulateCurrencyDropDowns(DropDownList ddl, DataTable dt)
+        {
+            ddl.DataTextField = "CurrencyTitle";
+            ddl.DataValueField = "CurrencyId";
+            ddl.DataSource = dt;
+            ddl.DataBind();
+
+            ListItem item = new ListItem("Select Currency", "0");
+            ddl.Items.Insert(0, item);
         }
 
         internal override void BindGridData()
@@ -221,8 +241,9 @@ namespace SRFROWCA.Pages
             int orgId = UserInfo.Organization;
             string title = txtProjectTitle.Text.Trim();
             string objective = txtProjectObjective.Text.Trim();
+            string projectPartner = txtImplementingPartners.Text.Trim();
             int clusterId = Convert.ToInt32(ddlCluster.SelectedValue);
-            string donorName = !string.IsNullOrEmpty(txtDonorName.Text.Trim()) ? txtDonorName.Text.Trim() : null;
+            
             int? fundingStatus = Convert.ToInt32(ddlFundingStatus.SelectedValue) > 0 ? Convert.ToInt32(ddlFundingStatus.SelectedValue) : (int?)null;
             DateTime? startDate = txtFromDate.Text.Trim().Length > 0 ?
                                     DateTime.ParseExact(txtFromDate.Text.Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture) :
@@ -231,6 +252,21 @@ namespace SRFROWCA.Pages
             DateTime? endDate = txtToDate.Text.Trim().Length > 0 ?
                                 DateTime.ParseExact(txtToDate.Text.Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture) :
                                 (DateTime?)null;
+
+            int requestedCurrency = Convert.ToInt32(ddlRequestedAmountCurrency.SelectedValue);
+            int requestedAmount = 0;
+            int.TryParse(txtRequestedAmount.Text.Trim(), out requestedAmount);
+
+            string donorName = !string.IsNullOrEmpty(txtDonorName.Text.Trim()) ? txtDonorName.Text.Trim() : null;
+            int contribution1 = 0;
+            int.TryParse(txtDonor1Contributed.Text.Trim(), out contribution1);
+            int contributionCurrency1 = Convert.ToInt32(ddlDonor1Currency.SelectedValue);
+
+            string donorName2 = !string.IsNullOrEmpty(txtDonor2Name.Text.Trim()) ? txtDonor2Name.Text.Trim() : null;
+            int contribution2 = 0;
+            int.TryParse(txtDonor2Contributed.Text.Trim(), out contribution2);
+            int contributionCurrency2 = Convert.ToInt32(ddlDonor2Currency.SelectedValue);
+
             Guid userId = RC.GetCurrentUserId;
 
             if (locationId > 0 && clusterId > 0)
@@ -238,7 +274,9 @@ namespace SRFROWCA.Pages
                 if (ProjectId > 0)
                 {
                     DBContext.Update("UpdateProjectDetail", new object[] { ProjectId,title, objective, clusterId, locationId,
-                                                             orgId, startDate, endDate, userId,donorName,fundingStatus, DBNull.Value });
+                                                             orgId, startDate, endDate, userId, donorName,fundingStatus, requestedCurrency, requestedAmount, 
+                                                             
+                                                             DBNull.Value });
                 }
                 else
                 {
