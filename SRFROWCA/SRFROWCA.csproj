@@ -1401,6 +1401,7 @@
     <Compile Include="Common\GeneratePDF.cs" />
     <Compile Include="Common\MonthNumber.cs" />
     <Compile Include="Common\ObjPrToolTip.cs" />
+    <Compile Include="Common\ReportServerCredentials.cs" />
     <Compile Include="Common\UserInfo.cs" />
     <Compile Include="Common\Utils.cs" />
     <Compile Include="Controls\NewIndicatorsControl.ascx.cs">

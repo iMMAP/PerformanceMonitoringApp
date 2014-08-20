@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Reporting.WebForms;
+using System;
+
 using System.Data;
 using System.Web.UI.WebControls;
 using BusinessLogic;
@@ -134,6 +136,44 @@ namespace SRFROWCA.ClusterLead
             dt.Columns.Remove("ObjectiveId");
             dt.Columns.Remove("ObjAndPrId");
             dt.Columns.Remove("HumanitarianPriorityId");
+        }
+
+        protected void ExportToPDF(object sender, EventArgs e)
+        {
+            Warning[] warnings;
+            string[] streamIds;
+            string mimeType = string.Empty;
+            string encoding = string.Empty;
+            string extension = string.Empty;
+            int tempVal = 0;
+            if (ddlClusters.Visible)
+            {
+                int.TryParse(ddlClusters.SelectedValue, out tempVal);
+            }
+
+            int? clusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
+            int? emgLocationId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
+            int yearId = 10;
+            ReportViewer rvCountry = new ReportViewer();
+            rvCountry.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote;
+            rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://win-78sij2cjpjj/Reportserver");
+            rvCountry.ServerReport.ReportPath = "/reports/countryindicators"; 
+            ReportParameter[] RptParameters = new ReportParameter[4];
+            RptParameters[0] = new ReportParameter("emgLocationId", emgLocationId.ToString());
+            RptParameters[1] = new ReportParameter("emgClusterId", clusterId.ToString());
+            RptParameters[2] = new ReportParameter("langId", RC.SelectedSiteLanguageId.ToString());
+            RptParameters[3] = new ReportParameter("yearId", yearId.ToString());
+            rvCountry.ServerReport.ReportServerCredentials = new ReportServerCredentials("Administrator", "&qisW.c@Jq", "");
+            rvCountry.ServerReport.SetParameters(RptParameters);
+            byte[] bytes = rvCountry.ServerReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+
+
+            Response.Buffer = true;
+            Response.Clear();
+            Response.ContentType = mimeType;
+            Response.AddHeader("content-disposition", "attachment; filename=CountryReport.pdf");
+            Response.BinaryWrite(bytes); // create the file
+            Response.Flush();
         }
     }
 }
