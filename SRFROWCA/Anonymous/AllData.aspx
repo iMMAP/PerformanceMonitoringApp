@@ -365,45 +365,46 @@
                 <%--</div>--%>
                 <div class="row">
                     <div class="col-xs-12 col-sm-12">
-                        <div class="widget-box">
-                            <cc2:PagingGridView ID="gvReport" runat="server" Width="100%" CssClass="table table-striped table-bordered table-hover"
-                                AutoGenerateColumns="false" OnSorting="gvReport_Sorting" ShowHeaderWhenEmpty="true"
-                                EnableViewState="false" AllowSorting="True" AllowPaging="true" PageSize="60"
-                                ShowHeader="true" OnPageIndexChanging="gvReport_PageIndexChanging" EmptyDataText="Your filter criteria does not match any record in database!">
-                                <PagerStyle BackColor="#efefef" ForeColor="DarkSlateBlue" HorizontalAlign="Center" />
 
-                                <Columns>
-                                    <asp:BoundField DataField="Cluster" HeaderText="Cluster" SortExpression="Cluster" />
-                                    <asp:BoundField DataField="Organization" HeaderText="Organization" SortExpression="Organization" />
-                                    <asp:BoundField DataField="ProjectCode" HeaderText="Project" SortExpression="ProjectCode" />
+                        <cc2:PagingGridView ID="gvReport" runat="server" Width="100%" CssClass="table table-striped table-bordered table-hover"
+                            AutoGenerateColumns="false" OnSorting="gvReport_Sorting" ShowHeaderWhenEmpty="true"
+                            EnableViewState="false" AllowSorting="True" AllowPaging="true" PageSize="60"
+                            ShowHeader="true" OnPageIndexChanging="gvReport_PageIndexChanging" EmptyDataText="Your filter criteria does not match any record in database!">
+                            <PagerStyle BackColor="#efefef" ForeColor="DarkSlateBlue" HorizontalAlign="Center" />
 
-                                    <asp:BoundField DataField="Month" HeaderText="Month" SortExpression="Month" />
-                                    <asp:BoundField DataField="Objective" HeaderText="Objective" SortExpression="Objective" />
-                                    <asp:BoundField DataField="Priority" HeaderText="Priority" SortExpression="Priority" />
-                                    <asp:BoundField DataField="Activity" HeaderText="Activity" SortExpression="Activity" />
-                                    <asp:BoundField DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator" />
-                                    <asp:BoundField DataField="Accumulative" HeaderText="Accum" SortExpression="Accumulative"
-                                        ItemStyle-HorizontalAlign="Right" />
-                                    <asp:BoundField DataField="Country" HeaderText="Country" SortExpression="Country" />
-                                    <asp:BoundField DataField="Admin1" HeaderText="Admin1" SortExpression="Admin1" />
-                                    <asp:BoundField DataField="AnnualTarget" HeaderText="Annual Target" SortExpression="AnnualTarget"
-                                        ItemStyle-HorizontalAlign="Right" />
-                                    <asp:TemplateField HeaderText="Cmt">
-                                        <ItemStyle HorizontalAlign="Center" />
+                            <Columns>
+                                <asp:BoundField DataField="Cluster" HeaderText="Cluster" SortExpression="Cluster" />
+                                <asp:BoundField DataField="Organization" HeaderText="Organization" SortExpression="Organization" />
+                                <asp:BoundField DataField="ProjectCode" HeaderText="Project" SortExpression="ProjectCode" />
 
-                                        <ItemTemplate>
-                                            <span class="tooltip" style="opacity:100;" title="<%# Eval("Comments") %>">
-                                                 <img src="../assets/orsimages/edit-file-icon.png" /> </span>
-                                        </ItemTemplate>
-                                        <HeaderStyle ForeColor="#4C8FBD"  />
-                                    </asp:TemplateField>
+                                <asp:BoundField DataField="Month" HeaderText="Month" SortExpression="Month" />
+                                <asp:BoundField DataField="Objective" HeaderText="Objective" SortExpression="Objective" />
+                                <asp:BoundField DataField="Priority" HeaderText="Priority" SortExpression="Priority" />
+                                <asp:BoundField DataField="Activity" HeaderText="Activity" SortExpression="Activity" />
+                                <asp:BoundField DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator" />
+                                <asp:BoundField DataField="Accumulative" HeaderText="Accum" SortExpression="Accumulative"
+                                    ItemStyle-HorizontalAlign="Right" />
+                                <asp:BoundField DataField="Country" HeaderText="Country" SortExpression="Country" />
+                                <asp:BoundField DataField="Admin1" HeaderText="Admin1" SortExpression="Admin1" />
+                                <asp:BoundField DataField="AnnualTarget" HeaderText="Annual Target" SortExpression="AnnualTarget"
+                                    ItemStyle-HorizontalAlign="Right" />
+                                <asp:BoundField DataField="Achieved" HeaderText="Monthly Achieved" SortExpression="Achieved"
+                                    ItemStyle-HorizontalAlign="Right" />
+                                <asp:TemplateField HeaderText="Cmt">
+                                   
+                                    <ItemTemplate>
+                                        <span class="tooltip" style="opacity: 100;" title="<%# Eval("Comments") %>">
+                                            <img src="../assets/orsimages/edit-file-icon.png" />
+                                        </span>
+                                    </ItemTemplate>
+                                    <HeaderStyle ForeColor="#4C8FBD" />
+                                </asp:TemplateField>
 
-                                    <asp:BoundField DataField="Achieved" HeaderText="Monthly Achieved" SortExpression="Achieved"
-                                        ItemStyle-HorizontalAlign="Right" />
 
-                                </Columns>
-                            </cc2:PagingGridView>
-                        </div>
+
+                            </Columns>
+                        </cc2:PagingGridView>
+
                     </div>
                 </div>
             </div>
