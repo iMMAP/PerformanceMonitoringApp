@@ -185,6 +185,7 @@ namespace SRFROWCA
             liSumOfCountryIndicators.Visible = isShow;
             liSumOfRegionalIndicators.Visible = isShow;
             //liCountryReports.Visible = isShow;
+            liLocations.Visible = isShow;
         }
 
         private void ShowUserMenue()
@@ -309,7 +310,7 @@ namespace SRFROWCA
             liSettings.Visible = isShow;
             liIndicators.Visible = isShow;
             liActivities.Visible = isShow;
-
+            liLocations.Visible = isShow;
         }
 
         private void ActiveMenueItem()
@@ -563,10 +564,15 @@ namespace SRFROWCA
                 liMaps.Attributes.Add("class", "active open");
                 //liCountryReports.Attributes.Add("class", "active");
             }
-            else if (uri.Contains("ContactUs.aspx"))
+            else if (uri.Contains("Admin/Location/AddNewLocation.aspx") || uri.Contains("Admin/Location/LocationsList.aspx"))
+            {
+                liLocations.Attributes.Add("class", "active");
+            }
+             else if (uri.Contains("ContactUs.aspx"))
             {
                 PageTitle = "ORS - Contact Us";
             }
+
             else if (uri.Contains("faq.aspx"))
             {
                 PageTitle = "ORS - FAQ";

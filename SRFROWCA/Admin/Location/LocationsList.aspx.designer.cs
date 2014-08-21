@@ -7,63 +7,75 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SRFROWCA.ClusterLead {
+namespace SRFROWCA.Admin.Location {
     
     
-    public partial class SumOfCountryIndicators {
+    public partial class LocationsList {
         
         /// <summary>
-        /// lblHeaderMessage control.
+        /// lblMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblHeaderMessage;
+        protected global::System.Web.UI.WebControls.Label lblMessage;
         
         /// <summary>
-        /// btnExportPDF control.
+        /// btnAddUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnExportPDF;
+        protected global::System.Web.UI.WebControls.Button btnAddUser;
         
         /// <summary>
-        /// btnExport control.
+        /// txtLocationName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnExport;
+        protected global::System.Web.UI.WebControls.TextBox txtLocationName;
         
         /// <summary>
-        /// divCluster control.
+        /// ddlType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divCluster;
+        protected global::System.Web.UI.WebControls.DropDownList ddlType;
         
         /// <summary>
-        /// ddlClusters control.
+        /// btnSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlClusters;
+        protected global::System.Web.UI.WebControls.Button btnSearch;
         
         /// <summary>
-        /// gvReport control.
+        /// gvLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvReport;
+        protected global::System.Web.UI.WebControls.GridView gvLocation;
+        
+        /// <summary>
+        /// Master property.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated property.
+        /// </remarks>
+        public new SRFROWCA.SiteMaster Master {
+            get {
+                return ((SRFROWCA.SiteMaster)(base.Master));
+            }
+        }
     }
 }
