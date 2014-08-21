@@ -205,6 +205,7 @@
     <Content Include="assets\css\select2.css" />
     <Content Include="assets\css\select2.png" />
     <Content Include="assets\css\select2x2.png" />
+    <Content Include="assets\css\tooltipster.css" />
     <Content Include="assets\css\ui.jqgrid.css" />
     <Content Include="assets\fonts\glyphicons-halflings-regular-2.html" />
     <Content Include="assets\fonts\glyphicons-halflings-regular-3.html" />
@@ -274,6 +275,7 @@
     <Content Include="assets\js\jquery.nestable.min.js" />
     <Content Include="assets\js\jquery.slimscroll.min.js" />
     <Content Include="assets\js\jquery.sparkline.min.js" />
+    <Content Include="assets\js\jquery.tooltipster.min.js" />
     <Content Include="assets\js\jquery.ui.touch-punch.min.js" />
     <Content Include="assets\js\jquery.validate.min.js" />
     <Content Include="assets\js\markdown\bootstrap-markdown.min.js" />
