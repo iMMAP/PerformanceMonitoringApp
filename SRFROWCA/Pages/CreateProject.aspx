@@ -115,7 +115,7 @@
                                             <asp:Localize ID="localCluster" runat="server" Text="Cluster:" meta:resourcekey="localClusterResource1"></asp:Localize></label>
                                     </td>
                                     <td colspan="5">
-                                        <asp:DropDownList ID="ddlCluster" runat="server" Width="190px" meta:resourcekey="ddlClusterResource1">
+                                        <asp:DropDownList ID="ddlCluster" runat="server" Width="150px" meta:resourcekey="ddlClusterResource1">
                                         </asp:DropDownList>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Required"
                                             CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCluster" meta:resourcekey="RequiredFieldValidator1Resource1"></asp:RequiredFieldValidator>
@@ -127,7 +127,7 @@
                                             <asp:Localize ID="localCreateProjectStartDate" runat="server" Text="Start Date:" meta:resourcekey="localCreateProjectStartDateResource1"></asp:Localize></label>
                                     </td>
                                     <td colspan="5">
-                                        <asp:TextBox ID="txtFromDate" runat="server" Width="190px" meta:resourcekey="txtFromDateResource1"></asp:TextBox><label>(mm/dd/yyyy)</label>
+                                        <asp:TextBox ID="txtFromDate" runat="server" Width="150px" meta:resourcekey="txtFromDateResource1"></asp:TextBox><label>(mm/dd/yyyy)</label>
                                     </td>
                                 </tr>
                                 <tr>
@@ -136,13 +136,13 @@
                                             <asp:Localize ID="localCreateProjectEndDate" runat="server" Text="End Date:" meta:resourcekey="localCreateProjectEndDateResource1"></asp:Localize></label>
                                     </td>
                                     <td colspan="5">
-                                        <asp:TextBox ID="txtToDate" runat="server" Width="190px" meta:resourcekey="txtToDateResource1"></asp:TextBox><label>(mm/dd/yyyy)</label>
+                                        <asp:TextBox ID="txtToDate" runat="server" Width="150px" meta:resourcekey="txtToDateResource1"></asp:TextBox><label>(mm/dd/yyyy)</label>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Requested Amount:</td>
                                     <td>
-                                        <asp:TextBox ID="txtRequestedAmount" runat="server" Width="190px"></asp:TextBox></td>
+                                        <asp:TextBox ID="txtRequestedAmount" runat="server" Width="150px"></asp:TextBox></td>
                                     <td>Currency:</td>
                                     <td colspan="3">
                                         <asp:DropDownList ID="ddlRequestedAmountCurrency" runat="server" Width="150px"></asp:DropDownList></td>
@@ -153,7 +153,7 @@
                                             <asp:Localize ID="localFundingStatus" runat="server" Text="Funding Status:" meta:resourcekey="localFundingStatusResource1"></asp:Localize></label>
                                     </td>
                                     <td colspan="5">
-                                        <asp:DropDownList ID="ddlFundingStatus" runat="server" Width="190px">
+                                        <asp:DropDownList ID="ddlFundingStatus" runat="server" Width="150px">
                                             <asp:ListItem Text="Select Funding Status" Value="-1"></asp:ListItem>
                                             <asp:ListItem Text="Funded" Value="1"></asp:ListItem>
                                             <asp:ListItem Text="Partialy Funded" Value="3"></asp:ListItem>
@@ -165,14 +165,14 @@
                                 <tr>
                                     <td>
                                         <label>
-                                            <asp:Localize ID="localDonorName" runat="server" Text="Donor:" meta:resourcekey="localDonorNameResource1"></asp:Localize></label>
+                                            <asp:Localize ID="localDonorName" runat="server" Text="Donor1:" meta:resourcekey="localDonorNameResource1"></asp:Localize></label>
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="txtDonorName" runat="server" Width="190px" MaxLength="150"></asp:TextBox>
+                                        <asp:TextBox ID="txtDonorName" runat="server" Width="150px" MaxLength="100"></asp:TextBox>
                                     </td>
                                     <td>Contributed</td>
                                     <td>
-                                        <asp:TextBox ID="txtDonor1Contributed" runat="server" Width="100px" MaxLength="150"></asp:TextBox>
+                                        <asp:TextBox ID="txtDonor1Contributed" runat="server" Width="100px" MaxLength="10"></asp:TextBox>
                                     </td>
                                     <td>Currency:</td>
                                     <td>
@@ -181,18 +181,31 @@
                                 <tr>
                                     <td>Donor2</td>
                                     <td>
-                                        <asp:TextBox ID="txtDonor2Name" runat="server" Width="190px" MaxLength="150"></asp:TextBox>
+                                        <asp:TextBox ID="txtDonor2Name" runat="server" Width="150px" MaxLength="100"></asp:TextBox>
                                     </td>
                                     <td>Contributed</td>
                                     <td>
-                                        <asp:TextBox ID="txtDonor2Contributed" runat="server" Width="100px" MaxLength="150"></asp:TextBox>
+                                        <asp:TextBox ID="txtDonor2Contributed" runat="server" Width="100px" MaxLength="10"></asp:TextBox>
                                     </td>
                                     <td>Currency:</td>
                                     <td>
                                         <asp:DropDownList ID="ddlDonor2Currency" Width="150px" runat="server"></asp:DropDownList></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2" style="padding-top: 20px;">
+                                    <td>Contact Name:</td>
+                                    <td>
+                                        <asp:TextBox ID="txtContactName" runat="server" Width="150px" MaxLength="50"></asp:TextBox>
+                                    </td>
+                                    <td>Phone:</td>
+                                    <td>
+                                        <asp:TextBox ID="txtContactPhone" runat="server" Width="100px" MaxLength="50"></asp:TextBox>
+                                    </td>
+                                    <td>Email:</td>
+                                    <td>
+                                        <asp:TextBox ID="txtContactEmail" runat="server" Width="150px" MaxLength="100"></asp:TextBox>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="padding-top: 20px;">
                                         <asp:Button ID="btnSave" runat="server" Text="Save & Stay" CssClass="btn btn-primary"
                                             OnClick="btnSave_Click" meta:resourcekey="btnSaveResource1" />
                                         <asp:Button ID="btnSaveClose" runat="server" Text="Save & Close" CssClass="btn btn-primary"

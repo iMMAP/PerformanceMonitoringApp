@@ -114,8 +114,19 @@ namespace SRFROWCA.Pages
                 txtProjectObjective.Text = dtProject.Rows[0]["ProjectObjective"].ToString();
                 ddlCluster.SelectedValue = dtProject.Rows[0]["EmergencyClusterId"].ToString();
                 txtDonorName.Text = dtProject.Rows[0]["DonorName"].ToString();
+                txtDonor1Contributed.Text = dtProject.Rows[0]["Contribution1Amount"].ToString();
+                ddlDonor1Currency.SelectedValue = dtProject.Rows[0]["Contribution1CurrencyId"].ToString();
                 ddlFundingStatus.SelectedValue = dtProject.Rows[0]["FundingStatus"].ToString();
 
+                txtImplementingPartners.Text = dtProject.Rows[0]["ProjectImplementingpartner"].ToString();
+                txtRequestedAmount.Text = dtProject.Rows[0]["RequestedAmount"].ToString();
+                ddlRequestedAmountCurrency.SelectedValue = dtProject.Rows[0]["RequestedAmountCurrencyId"].ToString();
+                txtDonor2Name.Text = dtProject.Rows[0]["DonorName2"].ToString();
+                txtDonor2Contributed.Text = dtProject.Rows[0]["Contribution2Amount"].ToString();
+                ddlDonor2Currency.SelectedValue = dtProject.Rows[0]["Contribution2CurrencyId"].ToString();
+                txtContactName.Text = dtProject.Rows[0]["ProjectContactName"].ToString();
+                txtContactPhone.Text = dtProject.Rows[0]["ProjectContactPhone"].ToString();
+                txtContactEmail.Text = dtProject.Rows[0]["ProjectContactEmail"].ToString();
 
                 DateTime dtFrom = DateTime.Now;
                 if (dtProject.Rows[0]["ProjectStartDate"] != DBNull.Value)
@@ -241,9 +252,9 @@ namespace SRFROWCA.Pages
             int orgId = UserInfo.Organization;
             string title = txtProjectTitle.Text.Trim();
             string objective = txtProjectObjective.Text.Trim();
-            string projectPartner = txtImplementingPartners.Text.Trim();
+            string projectPartners = txtImplementingPartners.Text.Trim();
             int clusterId = Convert.ToInt32(ddlCluster.SelectedValue);
-            
+
             int? fundingStatus = Convert.ToInt32(ddlFundingStatus.SelectedValue) > 0 ? Convert.ToInt32(ddlFundingStatus.SelectedValue) : (int?)null;
             DateTime? startDate = txtFromDate.Text.Trim().Length > 0 ?
                                     DateTime.ParseExact(txtFromDate.Text.Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture) :
@@ -253,19 +264,35 @@ namespace SRFROWCA.Pages
                                 DateTime.ParseExact(txtToDate.Text.Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture) :
                                 (DateTime?)null;
 
-            int requestedCurrency = Convert.ToInt32(ddlRequestedAmountCurrency.SelectedValue);
-            int requestedAmount = 0;
-            int.TryParse(txtRequestedAmount.Text.Trim(), out requestedAmount);
+            int val = 0;
+
+            int.TryParse(txtRequestedAmount.Text.Trim(), out val);
+            int? requestedAmount = val > 0 ? val : (int?)null;
+            val = 0;
+
+            int.TryParse(ddlRequestedAmountCurrency.SelectedValue, out val);
+            int? requestedCurrencyId = val > 0 ? val : (int?)null;
+            val = 0;
 
             string donorName = !string.IsNullOrEmpty(txtDonorName.Text.Trim()) ? txtDonorName.Text.Trim() : null;
-            int contribution1 = 0;
-            int.TryParse(txtDonor1Contributed.Text.Trim(), out contribution1);
-            int contributionCurrency1 = Convert.ToInt32(ddlDonor1Currency.SelectedValue);
+            int.TryParse(txtDonor1Contributed.Text.Trim(), out val);
+            int? contribution1 = val > 0 ? val : (int?)null;
+            val = 0;
+            int.TryParse(ddlDonor1Currency.SelectedValue, out val);
+            int? donor1CurrencyId = val > 0 ? val : (int?)null;
+            val = 0;
 
             string donorName2 = !string.IsNullOrEmpty(txtDonor2Name.Text.Trim()) ? txtDonor2Name.Text.Trim() : null;
-            int contribution2 = 0;
-            int.TryParse(txtDonor2Contributed.Text.Trim(), out contribution2);
-            int contributionCurrency2 = Convert.ToInt32(ddlDonor2Currency.SelectedValue);
+            int.TryParse(txtDonor2Contributed.Text.Trim(), out val);
+            int? contribution2 = val > 0 ? val : (int?)null;
+            val = 0;
+            int.TryParse(ddlDonor2Currency.SelectedValue, out val);
+            int? donor2CurrencyId = val > 0 ? val : (int?)null;
+            val = 0;
+
+            string contactName = !string.IsNullOrEmpty(txtContactName.Text.Trim()) ? txtContactName.Text.Trim() : null;
+            string contactPhone = !string.IsNullOrEmpty(txtContactPhone.Text.Trim()) ? txtContactPhone.Text.Trim() : null;
+            string contactEmail = !string.IsNullOrEmpty(txtContactEmail.Text.Trim()) ? txtContactEmail.Text.Trim() : null;
 
             Guid userId = RC.GetCurrentUserId;
 
@@ -273,15 +300,15 @@ namespace SRFROWCA.Pages
             {
                 if (ProjectId > 0)
                 {
-                    DBContext.Update("UpdateProjectDetail", new object[] { ProjectId,title, objective, clusterId, locationId,
-                                                             orgId, startDate, endDate, userId, donorName,fundingStatus, requestedCurrency, requestedAmount, 
-                                                             
-                                                             DBNull.Value });
+                    DBContext.Update("UpdateProjectDetail", new object[] { ProjectId, clusterId, locationId, orgId, userId, title, objective, projectPartners, startDate, endDate, 
+                                                                              requestedAmount, requestedCurrencyId, donorName, contribution1, donor1CurrencyId, donorName2, 
+                                                                              contribution2, donor2CurrencyId, fundingStatus, contactName, contactPhone, contactEmail, DBNull.Value });
                 }
                 else
                 {
-                    ProjectId = DBContext.Add("InsertProject", new object[] { title, objective, clusterId, locationId,
-                                                             orgId, startDate, endDate, userId,donorName,fundingStatus, DBNull.Value });
+                    ProjectId = DBContext.Add("InsertProject", new object[] { clusterId, locationId, orgId, userId, title, objective, projectPartners, startDate, endDate, 
+                                                                              requestedAmount, requestedCurrencyId, donorName, contribution1, donor1CurrencyId, donorName2, 
+                                                                              contribution2, donor2CurrencyId, fundingStatus, contactName, contactPhone, contactEmail, DBNull.Value });
                     AddNotification(ProjectId);
                     SendEmailToUser(txtProjectTitle.Text.Trim(), ddlCluster.SelectedItem.Text, clusterId);
                 }
