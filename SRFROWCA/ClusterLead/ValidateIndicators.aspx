@@ -200,6 +200,8 @@
                 <div class="modal-footer">
                     <asp:Button ID="btnSaveComments" runat="server" Text="Save" OnClick="btnSaveComments_Click"
                         CssClass="btn btn-primary" />
+                      <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancelComments_Click"
+                        CssClass="btn btn-primary" />
                 </div>
             </div>
 

@@ -449,6 +449,7 @@
     <asp:Panel ID="Panel2" Style="display: block; width: 800px;" runat="server" meta:resourcekey="Panel2Resource1">
         <div class="row">
             <div class="modal-dialog">
+            
                 <div class="modal-content">
                     <div class="modal-header">
                         <button runat="server" id="btnCancelComments" onserverclick="btnCancelComments_Click"
@@ -464,10 +465,14 @@
                             <uc1:ReportedIndicatorComments ID="ucIndComments" runat="server" />
                         </div>
                     </div>
+                    
                     <div class="modal-footer">
                         <asp:Button ID="btnSaveComments" runat="server" Text="Save" OnClick="btnSaveComments_Click"
                             CssClass="btn btn-primary" OnClientClick="needToConfirm = false;" meta:resourcekey="btnSaveCommentsResource1" />
+                            <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancelComments_Click"
+                            CssClass="btn btn-primary" OnClientClick="needToConfirm = false;"/>
                     </div>
+                    
                 </div>
             </div>
         </div>

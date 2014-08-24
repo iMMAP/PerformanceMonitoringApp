@@ -96,31 +96,16 @@ namespace SRFROWCA.ClusterLead
                 int reportId = 0;
                 int.TryParse(gvIndicators.DataKeys[rowIndex]["ReportId"].ToString(), out reportId);
 
-                //if (activityDataId > 0 && reportId > 0 && ucIndComments != null)
                 if (activityDataId > 0 && reportId > 0)
                 {
                     ActivityDataId = activityDataId;
                     ReportId = reportId;
 
-                    //using (ORSEntities db = new ORSEntities())
-                    //{
-                    //    var reportInfo = db.Reports.Where(x => x.ReportId == ReportId).Select(y => new { y.YearId, y.MonthId, y.ProjectId, y.EmergencyLocationId }).ToList();
-                    //    if (reportInfo.Count > 0)
-                    //    {
-                    //int yearId = reportInfo[0].YearId;
-                    //int monthId = reportInfo[0].MonthId;
-                    //int projectId = reportInfo[0].ProjectId;
-                    //int emgLocationId = reportInfo[0].EmergencyLocationId;
+                    if (ucIndComments.LoadComments(reportId, activityDataId))
+                        btnSaveComments.Visible = false;
 
-                    //ucIndComments.ActivityDataId = activityDataId;
-                    //ucIndComments.YearId = yearId;
-                    //ucIndComments.MonthId = monthId;
-                    //ucIndComments.ProjectId = projectId;
-                    //ucIndComments.EmgLocationId = UserInfo.EmergencyCountry;
-                    ucIndComments.LoadComments(reportId, activityDataId);
                     mpeComments.Show();
-                    //    }
-                    //}
+                   
                 }
             }
         }
@@ -153,33 +138,20 @@ namespace SRFROWCA.ClusterLead
         protected void btnSaveComments_Click(object sender, EventArgs e)
         {
             string comments = ucIndComments.GetComments();
+            int indictorCommentDetID = ucIndComments.GetIndicatorCommentDetailID();
+
             if (!string.IsNullOrEmpty(comments))
             {
-                //using (ORSEntities db = new ORSEntities())
-                //{
-                //    var reportInfo = db.Reports.Where(x => x.ReportId == ReportId).Select(y => new { y.YearId, y.MonthId, y.ProjectId, y.EmergencyLocationId }).ToList();
-                //    if (reportInfo.Count > 0)
-                //    {
-                //        int yearId = reportInfo[0].YearId;
-                //        int monthId = reportInfo[0].MonthId;
-                //        int projectId = reportInfo[0].ProjectId;
-                //        int emgLocationId = reportInfo[0].EmergencyLocationId;
-                DBContext.Add("InsertIndicatorComments", new object[] { ReportId, ActivityDataId, comments, RC.GetCurrentUserId, DBNull.Value });
-                //    }
-                //}
+                DBContext.Add("InsertIndicatorComments", new object[] { ReportId, ActivityDataId, comments, RC.GetCurrentUserId, DBNull.Value, indictorCommentDetID });
             }
-            //mpeComments.Show();
+            
         }
 
         protected void btnCancelComments_Click(object sender, EventArgs e)
-        {
-
-            //mpeComments.Hide();
-        }
+        {}
 
         private void ApproveIndicatorData(int reportDetailId, bool isApproved)
         {
-
             DBContext.Update("InsertUpdateApproveIndicator", new object[] { reportDetailId, RC.GetCurrentUserId, isApproved, DBNull.Value });
         }
 
@@ -187,11 +159,6 @@ namespace SRFROWCA.ClusterLead
         {
             RC.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, true, 500);
         }
-
-        //private void RejectIndicatorData(int reportDetailId)
-        //{
-        //    DBContext.Update("UpdateReportDetailRejected", new object[] { reportDetailId, RC.GetCurrentUserId, DBNull.Value });
-        //}
 
         private int ReportId
         {
