@@ -22,6 +22,15 @@ namespace SRFROWCA.Controls {
         protected global::System.Web.UI.WebControls.Repeater rptIndComments;
         
         /// <summary>
+        /// hdnUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnUpdate;
+        
+        /// <summary>
         /// fcComments control.
         /// </summary>
         /// <remarks>

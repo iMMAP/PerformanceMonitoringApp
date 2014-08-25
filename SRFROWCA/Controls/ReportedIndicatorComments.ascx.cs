@@ -14,111 +14,50 @@ namespace SRFROWCA.Controls
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+           
         }
 
-        public void LoadComments(int reportId, int activityDataId)
+        public bool LoadComments(int reportId, int activityDataId)
         {
+            bool isApproved = false;
+
             using (ORSEntities db = new ORSEntities())
             {
-                rptIndComments.DataSource = DBContext.GetData("GetIndicatorComments", new object[] {reportId, activityDataId });
+                DataTable dtResults = DBContext.GetData("GetIndicatorComments", new object[] { reportId, activityDataId });
+
+                if (dtResults.Rows.Count > 0)
+                    if (Convert.ToString(dtResults.Rows[0]["IsApproved"]).Equals("1"))
+                        isApproved = true;
+
+                rptIndComments.DataSource = dtResults;
                 rptIndComments.DataBind();
             }
+
+            hdnUpdate.Value = "-1";
+            fcComments.Value = string.Empty;
+
+            return isApproved;
         }
 
         public string GetComments()
         {
             string comments = fcComments.Value;
             fcComments.Value = "";
+
             return comments;
         }
 
-        //public int ActivityDataId
-        //{
-        //    get
-        //    {
-        //        int id = 0;
-        //        if (ViewState["ActivityDataId"] != null)
-        //        {
-        //            int.TryParse(ViewState["ActivityDataId"].ToString(), out id);
-        //        }
+        public bool CheckIfUpdate()
+        {
+            return !string.IsNullOrEmpty(hdnUpdate.Value);
+        }
 
-        //        return id;
-        //    }
-        //    set
-        //    {
-        //        ViewState["ActivityDataId"] = value;
-        //    }
-        //}
+        public int GetIndicatorCommentDetailID()
+        {
+            int ID = Convert.ToInt32(hdnUpdate.Value);
+            hdnUpdate.Value = "-1";
 
-        //public int YearId
-        //{
-        //    get
-        //    {
-        //        int id = 0;
-        //        if (ViewState["YearId"] != null)
-        //        {
-        //            int.TryParse(ViewState["YearId"].ToString(), out id);
-        //        }
-
-        //        return id;
-        //    }
-        //    set
-        //    {
-        //        ViewState["YearId"] = value;
-        //    }
-        //}
-        //public int MonthId
-        //{
-        //    get
-        //    {
-        //        int id = 0;
-        //        if (ViewState["MonthId"] != null)
-        //        {
-        //            int.TryParse(ViewState["MonthId"].ToString(), out id);
-        //        }
-
-        //        return id;
-        //    }
-        //    set
-        //    {
-        //        ViewState["MonthId"] = value;
-        //    }
-        //}
-        //public int ProjectId
-        //{
-        //    get
-        //    {
-        //        int id = 0;
-        //        if (ViewState["ProjectId"] != null)
-        //        {
-        //            int.TryParse(ViewState["ProjectId"].ToString(), out id);
-        //        }
-
-        //        return id;
-        //    }
-        //    set
-        //    {
-        //        ViewState["ProjectId"] = value;
-        //    }
-        //}
-        //public int EmgLocationId
-        //{
-        //    get
-        //    {
-        //        int id = 0;
-        //        if (ViewState["EmgLocationId"] != null)
-        //        {
-        //            int.TryParse(ViewState["EmgLocationId"].ToString(), out id);
-        //        }
-
-        //        return id;
-        //    }
-        //    set
-        //    {
-        //        ViewState["EmgLocationId"] = value;
-        //    }
-        //}
-
+            return ID;
+        }
     }
 }
