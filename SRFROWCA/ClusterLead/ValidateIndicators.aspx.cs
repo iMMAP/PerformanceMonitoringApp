@@ -110,7 +110,7 @@ namespace SRFROWCA.ClusterLead
             }
         }
 
-        protected void btnApprove_Click(object sender, EventArgs e)
+        protected void btnApprove_Click(object sender, EventArgs e) 
         {
             int reportId = 0;
             foreach (GridViewRow row in gvIndicators.Rows)
