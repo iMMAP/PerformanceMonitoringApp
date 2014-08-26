@@ -77,6 +77,12 @@
             hiddenField.value = "-1";
         }
 
+        function clearComments()
+        {
+            var txtCmtArea = document.getElementById("<%=txtComments.ClientID %>");
+            txtCmtArea.value = '';
+        }
+
         $(function () {
             $(".numeric1").numeric();
             showHideObj();
@@ -371,7 +377,7 @@
                                         <ItemTemplate>
                                             <asp:ImageButton ID="imgbtnComments" runat="server" ImageUrl="~/assets/orsimages/edit-file-icon.png"
                                                 CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>' CommandName="AddComments"
-                                                OnClientClick="needToConfirm = false;" meta:resourcekey="imgbtnCommentsResource1" />
+                                                OnClientClick="needToConfirm = false;clearComments();" meta:resourcekey="imgbtnCommentsResource1" />
                                         </ItemTemplate>
                                         <ItemStyle Width="30px"></ItemStyle>
                                     </asp:TemplateField>

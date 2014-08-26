@@ -12,6 +12,12 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="breadcrumbs" id="breadcrumbs">
         <script type="text/javascript">
+
+            function clearComments() {
+                var txtCmtArea = document.getElementById("<%=txtComments.ClientID %>");
+                   txtCmtArea.value = '';
+               }
+
             function alertComment() {
                 var txtCmtArea = document.getElementById("<%=txtComments.ClientID %>");
                 txtCmtArea.focus();
@@ -158,7 +164,7 @@
                                                             <asp:TemplateField ItemStyle-Width="30px" HeaderText="Cmt" meta:resourcekey="TemplateFieldResource5">
                                                                 <ItemTemplate>
                                                                     <asp:ImageButton ID="imgbtnComments" runat="server" ImageUrl="~/assets/orsimages/edit-file-icon.png"
-                                                                        CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>' CommandName="AddComments" />
+                                                                        CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>' CommandName="AddComments" OnClientClick="clearComments();" />
                                                                 </ItemTemplate>
                                                                 <ItemStyle Width="30px"></ItemStyle>
                                                             </asp:TemplateField>
