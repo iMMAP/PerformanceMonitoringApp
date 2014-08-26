@@ -34,18 +34,15 @@ namespace SRFROWCA.Controls
             }
 
             hdnUpdate.Value = "-1";
-            fcComments.Value = string.Empty;
+            //fcComments.Value = string.Empty;
 
             return isApproved;
         }
 
-        public string GetComments()
-        {
-            string comments = fcComments.Value;
-            fcComments.Value = "";
-
-            return comments;
-        }
+        //public string GetComments()
+        //{
+        //    return hdnComments.Value.Trim().Replace("<p>",string.Empty).Replace("</p>",string.Empty);
+        //}
 
         public bool CheckIfUpdate()
         {
