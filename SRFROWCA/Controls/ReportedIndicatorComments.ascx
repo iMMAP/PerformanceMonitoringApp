@@ -55,9 +55,9 @@
             });
         });
 </script>
-<div class="widget-box" style="height: 400px;">
+<div class="widget-box" style="height:400px;">
     <div class="widget-header widget-header-small header-color-blue2">
-        Old Comments
+        <%--Old Comments--%>
    
     </div>
     <div class="widget-body">
@@ -72,10 +72,6 @@
                                 <ItemTemplate>
 
                                     <div class="itemdiv commentdiv">
-                                        <div class="user">
-                                            <img src="/assets/avatars/avatar2.png" alt="avatar">
-                                        </div>
-
                                         <div class="body">
                                             <div class="name">
                                                 <a href="#"><%#Eval("UserName")%></a>
@@ -92,7 +88,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="tools">
+                                        <div class="tools" >
                                             <div class="inline position-relative">
                                                 <button data-toggle="dropdown" class="btn btn-minier bigger btn-yellow dropdown-toggle">
                                                     <i class="icon-angle-down icon-only bigger-120"></i>
@@ -124,62 +120,16 @@
                             </asp:Repeater>
 
                         </div>
-                        <div class="slimScrollBar ui-draggable" style="background: none repeat scroll 0% 0% rgb(0, 0, 0); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 283.019px;"></div>
+                                               <div class="slimScrollBar ui-draggable" style="background: none repeat scroll 0% 0% rgb(0, 0, 0); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 283.019px;"></div>
                         <div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: none repeat scroll 0% 0% rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div>
 
 
-                        <div class="hr hr8"></div>
-                        <%--<asp:HiddenField ID="hdnComments" runat="server" Value="" />--%>
+                  <%--      <div class="hr hr8"></div>--%>
                         <asp:HiddenField ID="hdnUpdate" runat="server" Value="-1" />
                     </div>
                 </div>
             </div>
 
-            <%--<div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover" id="sample-table-1">
-                        <thead>
-                            <tr>
-                                <th style="padding: 2px;" class="center">View/Edit</th>
-                                <th style="padding: 2px;">User</th>
-                                <th style="padding: 2px;">Comment Date</th>
-                                
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <asp:Repeater ID="rptIndComments" runat="server">
-                                <ItemTemplate>
-                                    <tr>
-                                        <td class="center" style="padding: 2px;">
-                                            <label>
-                                                <input id="chkComment" type="checkbox" onclick="javascript: check(this,'<%#Eval("IndicatorCommentsDetailId")%>')" class="ace">
-                                                <span class="lbl"></span>
-                                       <div id="cmt-<%#Eval("IndicatorCommentsDetailId")%>" style="visibility:hidden;display:none;"><%#Eval("Comments")%></div>         
-                                            </label>
-                                        </td>
-
-                                        <td style="padding: 2px;"><%#Eval("UserName")%>
-                                        </td>
-                                        <td style="padding: 2px;"><%#Eval("CreatedDate")%></td>
-                                       
-                                    </tr>
-
-                                </ItemTemplate>
-                            </asp:Repeater>
-                        </tbody>
-                    </table>
-                     <asp:HiddenField ID="hdnUpdate" runat="server" Value="-1"  />
-                </div>--%>
         </div>
     </div>
 </div>
-
-
-
-
-<%--<div style="height: 200px;">
-
-    <FCKeditorV2:FCKeditor ID="fcComments" runat="server" ToolbarSet="Basic">
-    </FCKeditorV2:FCKeditor>
-
-</div>--%>

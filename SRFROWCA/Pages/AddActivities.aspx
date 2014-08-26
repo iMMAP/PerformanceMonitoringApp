@@ -462,15 +462,15 @@
             <div class="modal-dialog">
 
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header" style="border-bottom-width:0px;">
                         <button runat="server" id="btnCancelComments" onserverclick="btnCancelComments_Click"
                             class="close" data-dismiss="modal" onclick="needToConfirm = false;">
                             &times;
                        
                         </button>
-                        <h4 class="blue bigger">
+                        <%--<h4 class="blue bigger">
                             <asp:Localize ID="localIndComments" runat="server" Text="Indicator Comments" meta:resourcekey="localIndCommentsResource1"></asp:Localize>
-                        </h4>
+                        </h4>--%>
                     </div> 
                     <span class="btn btn-sm btn-info no-radius" style="margin-top:5px;margin-left:8px;line-height:8px;" onclick="javascript:alertComment();">New Comment</span>
                                      
