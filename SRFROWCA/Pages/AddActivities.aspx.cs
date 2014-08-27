@@ -519,6 +519,10 @@ namespace SRFROWCA.Pages
                 int countryID = UserInfo.Country > 0 ? UserInfo.Country : 0;
                 int projId = RC.GetSelectedIntVal(rblProjects);
 
+                string monthName = ddlMonth.SelectedItem.Text + " - " + ddlYear.SelectedItem.Text;
+                string projectCode = rblProjects.SelectedItem.Text;
+                string country = UserInfo.CountryName;
+
                 DataTable dtEmails = DBContext.GetData("uspGetUserEmails", new object[] { countryID, projId });
 
                 string emails = string.Empty;
@@ -538,9 +542,9 @@ namespace SRFROWCA.Pages
                         mailMsg.IsBodyHtml = true;
                         mailMsg.Body = string.Format(@"Notification:" + Environment.NewLine +
                                                       "The user: : " + User.Identity.Name + " has " + changeType + " the report with following details:" + Environment.NewLine +
-                                                      "ProjectID: " + projId + Environment.NewLine +
-                                                      "CountryID:" + countryID + Environment.NewLine +
-                                                      "ReportID:" + reportID + Environment.NewLine);
+                                                      " Country: " + country + Environment.NewLine +
+                                                      " Project: " + projectCode + Environment.NewLine +
+                                                      " Report: " + monthName + Environment.NewLine);
 
                         Mail.SendMail(mailMsg);
                     }

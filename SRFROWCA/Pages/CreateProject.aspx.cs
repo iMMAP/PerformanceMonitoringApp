@@ -225,24 +225,25 @@ namespace SRFROWCA.Pages
 
         private void DeleteProject()
         {
-            using (TransactionScope scope = new TransactionScope())
+            //using (TransactionScope scope = new TransactionScope())
             {
-                using (ORSEntities db = new ORSEntities())
-                {
-                    List<ProjectOrganization> projOrgs = db.ProjectOrganizations.Where(x => x.ProjectId == ProjectId).ToList<ProjectOrganization>();
-                    foreach (ProjectOrganization po in projOrgs)
-                    {
-                        db.ProjectOrganizations.DeleteObject(po);
-                    }
+                //using (ORSEntities db = new ORSEntities())
+                //{
+                //    List<ProjectOrganization> projOrgs = db.ProjectOrganizations.Where(x => x.ProjectId == ProjectId).ToList<ProjectOrganization>();
+                //    foreach (ProjectOrganization po in projOrgs)
+                //    {
+                //        db.ProjectOrganizations.DeleteObject(po);
+                //    }
 
-                    Project project = db.Projects.Where(x => x.ProjectId == ProjectId).SingleOrDefault();
-                    if (project != null)
-                    {
-                        db.Projects.DeleteObject(project);
-                    }
-                    db.SaveChanges();
-                }
-                scope.Complete();
+                //    Project project = db.Projects.Where(x => x.ProjectId == ProjectId).SingleOrDefault();
+                //    if (project != null)
+                //    {
+                //        db.Projects.DeleteObject(project);
+                //    }
+                //    db.SaveChanges();
+                //}
+                DBContext.Delete("DeleteProject", new object[] { ProjectId, DBNull.Value });
+                //scope.Complete();
             }
         }
 
