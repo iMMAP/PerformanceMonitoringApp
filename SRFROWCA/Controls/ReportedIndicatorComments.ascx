@@ -119,7 +119,7 @@
 
             <%--</div>--%>
             <div class="slimScrollBar ui-draggable" style="background: none repeat scroll 0% 0% rgb(0, 0, 0); width: 7px; display:none; position: absolute; top: 0px; opacity: 0.4; border-radius: 7px; z-index: 99; right: 1px; height: 283.019px;"></div>
-            <div class="slimScrollRail" style="width: 7px; height: 107%; display:none; position: absolute; top: 0px;  border-radius: 7px; background: none repeat scroll 0% 0% rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div>
+            <div class="slimScrollRail" style="width: 7px; height: 110%; display:none; position: absolute; top: 0px;  border-radius: 7px; background: none repeat scroll 0% 0% rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div>
 
 
 
