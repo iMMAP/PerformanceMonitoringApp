@@ -137,7 +137,7 @@ namespace SRFROWCA.ClusterLead
 
         protected void btnSaveComments_Click(object sender, EventArgs e)
         {
-            string comments = ucIndComments.GetComments();
+            string comments = txtComments.Value;// ucIndComments.GetComments();
             int indictorCommentDetID = ucIndComments.GetIndicatorCommentDetailID();
 
             if (!string.IsNullOrEmpty(comments))
