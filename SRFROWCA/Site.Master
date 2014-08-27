@@ -79,21 +79,21 @@
 								<asp:Label ID="lblNumberOfNotifications" runat="server" Text=""></asp:Label></span>
 						</a>
 							<ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
-								<asp:Repeater ID="rptNotifications" runat="server">
+								<asp:Repeater ID="rptNotifications" runat="server" OnItemCommand="rptNotifications_ItemCommand" OnItemDataBound="rptNotification_ItemDataBound">
 									<HeaderTemplate>
 										<li class="dropdown-header"><i class="icon-warning-sign"></i>Notifications </li>
 									</HeaderTemplate>
 									<ItemTemplate>
-										<li><a href="<%#Eval("PageURL")%>">
-											<span class="msg-body"><span class="msg-title"><span class="blue">
+										<li><asp:LinkButton ID="btnLinkNotifications" runat="server" PostBackUrl='<%#Eval("PageURL")%>' CommandArgument="NotificationId" CommandName="GoToNotification">
+											<span class="msg-body"><span class="msg-title"><span class="blue">                                                
 												<%#Eval("Notification1")%></span>
-											</span></span></a></li>
+											</span></span></asp:LinkButton></li>
 									</ItemTemplate>
 								</asp:Repeater>
 								<li><a href="#">See all notifications <i class="icon-arrow-right"></i></a></li>
 							</ul>
 						</li>
-
+                        <%--<a href="<%#Eval("PageURL")%>">--%>
 						<%--<li class="green"><a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-envelope icon-animated-vertical">
 					</i><span class="badge badge-success">5</span> </a>
 						<ul class="pull-right dropdown-navbar navbar-green dropdown-menu dropdown-caret dropdown-close">
@@ -249,7 +249,7 @@
 									<asp:Localize ID="localReportCustomReport" runat="server" Text="Custom Report" meta:resourcekey="localReportCustomReportResource1"></asp:Localize>
 								</a></li>
 							</ul>
-						</li>
+						</li>                        
 						<li id="liCountryConsolidatedReports" runat="server"><a id="menueCountryConsolidatedReports" runat="server" href="#"
 							class="dropdown-toggle"><i class="icon-list-alt"></i><span class="menu-text">Consolidated Reports
 							</span><b class="arrow icon-angle-down"></b></a>

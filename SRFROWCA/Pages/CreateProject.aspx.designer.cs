@@ -121,6 +121,24 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.TextBox txtProjectObjective;
         
         /// <summary>
+        /// LocalizeImplementingPartners control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize LocalizeImplementingPartners;
+        
+        /// <summary>
+        /// txtImplementingPartners control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtImplementingPartners;
+        
+        /// <summary>
         /// localCluster control.
         /// </summary>
         /// <remarks>
@@ -184,6 +202,24 @@ namespace SRFROWCA.Pages {
         protected global::System.Web.UI.WebControls.TextBox txtToDate;
         
         /// <summary>
+        /// txtRequestedAmount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRequestedAmount;
+        
+        /// <summary>
+        /// ddlRequestedAmountCurrency control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlRequestedAmountCurrency;
+        
+        /// <summary>
         /// localFundingStatus control.
         /// </summary>
         /// <remarks>
@@ -218,6 +254,78 @@ namespace SRFROWCA.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDonorName;
+        
+        /// <summary>
+        /// txtDonor1Contributed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDonor1Contributed;
+        
+        /// <summary>
+        /// ddlDonor1Currency control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlDonor1Currency;
+        
+        /// <summary>
+        /// txtDonor2Name control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDonor2Name;
+        
+        /// <summary>
+        /// txtDonor2Contributed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDonor2Contributed;
+        
+        /// <summary>
+        /// ddlDonor2Currency control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlDonor2Currency;
+        
+        /// <summary>
+        /// txtContactName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtContactName;
+        
+        /// <summary>
+        /// txtContactPhone control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtContactPhone;
+        
+        /// <summary>
+        /// txtContactEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtContactEmail;
         
         /// <summary>
         /// btnSave control.

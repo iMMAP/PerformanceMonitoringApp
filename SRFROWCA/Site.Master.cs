@@ -129,13 +129,38 @@ namespace SRFROWCA
                     rptNotifications.DataSource = db.Notifications.Where(x => x.EmergencyLocationId == UserInfo.EmergencyCountry
                                                                             && x.EmergencyClusterId == UserInfo.EmergencyCluster
                                                                             && x.IsRead == false)
-                                                                  .Select(y => new { y.Notification1, y.PageURL });
+                                                                  .Select(y => new { y.Notification1, y.PageURL, y.NotificationId });
                     rptNotifications.DataBind();
                 }
             }
             catch (Exception ex)
             {
                 string s = ex.ToString();
+            }
+        }
+
+        protected void btnLinkNotifications_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void rptNotification_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                LinkButton lnkButton = e.Item.FindControl("btnLinkNotifications") as LinkButton;
+                if (lnkButton != null)
+                {
+                    lnkButton.Click += btnLinkNotifications_Click;
+                }
+            }
+        }
+
+        protected void rptNotifications_ItemCommand(object sender, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "GoToNotification")
+            {
+                string i = e.CommandArgument.ToString();
             }
         }
 

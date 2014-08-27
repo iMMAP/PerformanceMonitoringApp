@@ -16,6 +16,11 @@ namespace SRFROWCA.ClusterLead
         {
             if (IsPostBack) return;
 
+            if (Request.QueryString["nid"] != null)
+            {
+                
+            }
+
             //if (Session["ViewProjectId"] != null)
             if (Request.QueryString["pid"] != null)
             {
