@@ -58,76 +58,82 @@
     <div class="widget-header widget-header-small header-color-blue2">
         <%--Old Comments--%>
     </div>
-      <div class="widget-body">
+    <div class="widget-body">
         <div class="widget-main">
             <div class="slim-scroll" data-height="380">
-   <div class="tab-content padding-8 overflow-visible">
-        <div class="tab-pane active" id="comment-tab">
+                <div class="tab-content padding-8 overflow-visible">
+                    <div class="tab-pane active" id="comment-tab">
 
-           <%-- <div class="comments" style="overflow: hidden; width: auto;">--%>
+                        <%-- <div class="comments" style="overflow: hidden; width: auto;">--%>
 
-                <asp:Repeater ID="rptIndComments" runat="server">
-                    <ItemTemplate>
+                        <asp:Repeater ID="rptIndComments" runat="server">
+                            <ItemTemplate>
 
-                        <div class="itemdiv commentdiv">
-                            <div class="body">
-                                <div class="name">
-                                    <a href="#"><%#Eval("UserName")%></a>
+                                <div class="itemdiv commentdiv">
+
+
+
+                                    <div class="body">
+                                        <div class="name">
+                                            <a href="#"><%#Eval("UserName")%></a>
+                                        </div>
+
+                                        <div class="time">
+                                            <i class="icon-time"></i>
+                                            <span class="green"><%#Eval("CreatedDate")%></span>
+                                        </div>
+
+
+                                        <div class="text">
+                                            <i class="icon-quote-left"></i>
+                                            <span id="cmt-<%#Eval("IndicatorCommentsDetailId")%>"><%#Eval("Comments")%></span>
+                                        </div>
+
+
+
+                                    </div>
+
+                                    <div class="tools">
+                                        <div class="inline position-relative">
+                                            <button data-toggle="dropdown" class="btn btn-minier bigger btn-yellow dropdown-toggle">
+                                                <i class="icon-angle-down icon-only bigger-120"></i>
+                                            </button>
+
+                                            <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+
+                                                <li>
+                                                    <a title="" data-rel="tooltip" class="tooltip-warning" href="#" onclick="javascript: edit('<%#Eval("IndicatorCommentsDetailId")%>')" data-original-title="Reject">
+                                                        <span class="orange">
+                                                            <i class="icon-edit bigger-110"></i>
+                                                        </span>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a title="" data-rel="tooltip" class="tooltip-error" onclick="javascript:confirm('Are you sure you want to delete this comment?')" href="#" data-original-title="Delete">
+                                                        <span class="red">
+                                                            <i class="icon-trash bigger-110"></i>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
                                 </div>
 
-                                <div class="time">
-                                    <i class="icon-time"></i>
-                                    <span class="green"><%#Eval("CreatedDate")%></span>
-                                </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
 
-                                <div class="text">
-                                    <i class="icon-quote-left"></i>
-                                    <span id="cmt-<%#Eval("IndicatorCommentsDetailId")%>"><%#Eval("Comments")%></span>
-                                </div>
-                            </div>
+                        <%--</div>--%>
+                        <div class="slimScrollBar ui-draggable" style="background: none repeat scroll 0% 0% rgb(0, 0, 0); width: 7px; display: none; position: absolute; top: 0px; opacity: 0.4; border-radius: 7px; z-index: 99; right: 1px; height: 283.019px;"></div>
+                        <div class="slimScrollRail" style="width: 7px; height: 110%; display: none; position: absolute; top: 0px; border-radius: 7px; background: none repeat scroll 0% 0% rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div>
 
-                            <div class="tools">
-                                <div class="inline position-relative">
-                                    <button data-toggle="dropdown" class="btn btn-minier bigger btn-yellow dropdown-toggle">
-                                        <i class="icon-angle-down icon-only bigger-120"></i>
-                                    </button>
+                        <asp:HiddenField ID="hdnUpdate" runat="server" Value="-1" />
+                    </div>
+                </div>
+            </div>
 
-                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-
-                                        <li>
-                                            <a title="" data-rel="tooltip" class="tooltip-warning" href="#" onclick="javascript: edit('<%#Eval("IndicatorCommentsDetailId")%>')" data-original-title="Reject">
-                                                <span class="orange">
-                                                    <i class="icon-edit bigger-110"></i>
-                                                </span>
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a title="" data-rel="tooltip" class="tooltip-error" onclick="javascript:confirm('Are you sure you want to delete this comment?')" href="#" data-original-title="Delete">
-                                                <span class="red">
-                                                    <i class="icon-trash bigger-110"></i>
-                                                </span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                    </ItemTemplate>
-                </asp:Repeater>
-
-            <%--</div>--%>
-            <div class="slimScrollBar ui-draggable" style="background: none repeat scroll 0% 0% rgb(0, 0, 0); width: 7px; display:none; position: absolute; top: 0px; opacity: 0.4; border-radius: 7px; z-index: 99; right: 1px; height: 283.019px;"></div>
-            <div class="slimScrollRail" style="width: 7px; height: 110%; display:none; position: absolute; top: 0px;  border-radius: 7px; background: none repeat scroll 0% 0% rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div>
-
-
-
-            <asp:HiddenField ID="hdnUpdate" runat="server" Value="-1" />
         </div>
-    </div>
-        </div>
-
-       </div>
     </div>
 </div>
