@@ -203,7 +203,7 @@
     <asp:Button runat="server" ID="Button1" Style="display: none" />
     <asp:Panel ID="Panel2" runat="server">
         <div class="row">
-            <div style="width: 800px">
+            <div style="width: 600px">
 
                 <div class="modal-content">
                     <div class="modal-header" style="border-bottom-width:0px;">
@@ -218,24 +218,24 @@
                     </div>
                     <span class="btn btn-sm btn-info no-radius" style="margin-top: 5px; margin-left: 8px; line-height: 8px;" onclick="javascript:alertComment();">New Comment</span>
 
-                    <div class="modal-body overflow-visible">
+                    <div class="modal-body overflow-visible" style="padding-top:5px;">
                         <div class="row">
                             <uc1:ReportedIndicatorComments ID="ucIndComments" runat="server" />
                         </div>
                     </div>
-                    <%-- <div class="modal-footer">--%>
-                    <div class="form-actions">
+                  <br />    
+                     <div class="form-actions" style=" margin: 0 auto;width: 97%;">
                         <div class="input-group">
                             <input type="text" runat="server" id="txtComments" name="message" class="form-control" style="text-align: left;" placeholder="Type your comment here ...">
                             <span class="input-group-btn">
                                 <asp:Button ID="btnSaveComments" runat="server" Text="Save" OnClick="btnSaveComments_Click"
-                                    CssClass="btn btn-primary" />
+                                     CssClass="btn btn-sm btn-info no-radius" />
                             </span>
                         </div>
-                        <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancelComments_Click"
+                        <asp:Button ID="btnCancel" Visible="false" runat="server" Text="Cancel" OnClick="btnCancelComments_Click"
                             CssClass="btn btn-primary" />
                     </div>
-                    <%--</div>--%>
+                    <br />
                 </div>
 
             </div>
