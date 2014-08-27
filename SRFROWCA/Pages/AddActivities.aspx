@@ -486,8 +486,8 @@
                             <uc1:ReportedIndicatorComments ID="ucIndComments" runat="server" />
                         </div>
                     </div>
-
-                    <div class="form-actions">
+                   <br />
+                    <div class="form-actions" style=" margin: 0 auto;width: 97%;">
                         <div class="input-group">
                             <input type="text" runat="server" id="txtComments" name="message" class="form-control" style="text-align:left;" placeholder="Type your comment here ...">
                             <span class="input-group-btn">
@@ -502,6 +502,7 @@
                         <asp:Button Visible="false" ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancelComments_Click"
                             CssClass="btn btn-primary" OnClientClick="needToConfirm = false;" />
                     </div>
+                   <br />
                     
 
                 </div>
