@@ -6,13 +6,11 @@
 <%@ Register Src="../Controls/ReportedIndicatorComments.ascx" TagName="ReportedIndicatorComments" TagPrefix="uc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style>
-        #MainContent_cblLocations td
-        {
+        #MainContent_cblLocations td {
             padding: 0 40px 0 0;
         }
 
-        textarea, input[type="text"]
-        {
+        textarea, input[type="text"] {
             border: 1px solid #D5D5D5;
             border-radius: 0 !important;
             box-shadow: none !important;
@@ -24,8 +22,7 @@
             text-align: right;
         }
 
-        .commentstext
-        {
+        .commentstext {
             border: 1px solid #D5D5D5;
             border-radius: 0 !important;
             box-shadow: none !important;
@@ -65,6 +62,19 @@
             if (launch) {
                 $find("mpeAddActivity").show();
             }
+        }
+
+        function alertComment()
+        {
+            var txtCmtArea = document.getElementById("<%=txtComments.ClientID %>");
+            txtCmtArea.focus();
+            txtCmtArea.value = '';
+
+            var btnSaveCmt = document.getElementById("<%=btnSaveComments.ClientID %>");
+            btnSaveCmt.value = "Save";
+
+            var hiddenField = document.getElementById("MainContent_ucIndComments_hdnUpdate");
+            hiddenField.value = "-1";
         }
 
         $(function () {
@@ -235,16 +245,18 @@
                             <button runat="server" id="btnGeneratePDF" onserverclick="btnPDF_Export" onclick="needToConfirm = false;"
                                 class="width-10 btn btn-sm btn-yellow" title="PDF">
                                 <i class="icon-download"></i>PDF
+                           
                             </button>
                             <button runat="server" id="btnExportToExcel" onserverclick="btnExcel_Export" onclick="needToConfirm = false;"
                                 class="width-10 btn btn-sm btn-yellow" title="Excel">
                                 <i class="icon-download"></i>Excel
+                           
                             </button>
                         </h4>
                         <span class="widget-toolbar pull-right"><a href="#" data-action="collapse" class="pull-right">
                             <i class="icon-chevron-up pull-right"></i></a></span>
                     </div>
-                    <div class="widget-body" style="padding-right:20px;padding-left:20px;">
+                    <div class="widget-body" style="padding-right: 20px; padding-left: 20px;">
                         <div class="widget-main">
                             <div class="pull-left">
                                 <asp:Localize ID="lzeSelectLocaitonsText" runat="server"
@@ -317,12 +329,10 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField ItemStyle-Wrap="false" meta:resourcekey="TemplateFieldResource2">
                                         <ItemTemplate>
-                                            <asp:Image ID="imgObjective" runat="server" AlternateText="Obj" meta:resourcekey="imgObjectiveResource1"
-                                                />
-                                            <asp:Image ID="imgPriority" runat="server" AlternateText="Obj" meta:resourcekey="imgPriorityResource1"
-                                                />
-                                            <asp:Image ID="imgRind" runat="server" meta:resourcekey="imgRindResource1"/>
-                                            <asp:Image ID="imgCind" runat="server" meta:resourcekey="imgCindResource1"/>
+                                            <asp:Image ID="imgObjective" runat="server" AlternateText="Obj" meta:resourcekey="imgObjectiveResource1" />
+                                            <asp:Image ID="imgPriority" runat="server" AlternateText="Obj" meta:resourcekey="imgPriorityResource1" />
+                                            <asp:Image ID="imgRind" runat="server" meta:resourcekey="imgRindResource1" />
+                                            <asp:Image ID="imgCind" runat="server" meta:resourcekey="imgCindResource1" />
                                         </ItemTemplate>
                                         <ItemStyle Wrap="False"></ItemStyle>
                                     </asp:TemplateField>
@@ -399,6 +409,7 @@
                             <div class="modal-header no-padding">
                                 <div class="table-header">
                                     Select Locations
+                               
                                 </div>
                             </div>
                             <div class="modal-body no-padding">
@@ -419,10 +430,10 @@
                                             <fieldset>
                                                 <legend>
                                                     <asp:Label ID="lblLocAdmin2" runat="server" Text="Admin 2 Locations" meta:resourcekey="lblLocAdmin2Resource1"></asp:Label></legend>--%>
-                                                <asp:CheckBoxList ID="cblLocations" runat="server" RepeatColumns="5" RepeatDirection="Horizontal"
-                                                    CssClass="cbltest" meta:resourcekey="cblLocationsResource1">
-                                                </asp:CheckBoxList>
-                                            <%--</fieldset>
+                                    <asp:CheckBoxList ID="cblLocations" runat="server" RepeatColumns="5" RepeatDirection="Horizontal"
+                                        CssClass="cbltest" meta:resourcekey="cblLocationsResource1">
+                                    </asp:CheckBoxList>
+                                    <%--</fieldset>
                                         </td>
                                     </tr>--%>
                                 </table>
@@ -449,30 +460,44 @@
     <asp:Panel ID="Panel2" Style="display: block; width: 800px;" runat="server" meta:resourcekey="Panel2Resource1">
         <div class="row">
             <div class="modal-dialog">
-            
+
                 <div class="modal-content">
                     <div class="modal-header">
                         <button runat="server" id="btnCancelComments" onserverclick="btnCancelComments_Click"
                             class="close" data-dismiss="modal" onclick="needToConfirm = false;">
                             &times;
+                       
                         </button>
                         <h4 class="blue bigger">
                             <asp:Localize ID="localIndComments" runat="server" Text="Indicator Comments" meta:resourcekey="localIndCommentsResource1"></asp:Localize>
                         </h4>
-                    </div>
-                    <div class="modal-body overflow-visible">
+                    </div> 
+                    <span class="btn btn-sm btn-info no-radius" style="margin-top:5px;margin-left:8px;line-height:8px;" onclick="javascript:alertComment();">New Comment</span>
+                                     
+                    <div class="modal-body overflow-visible" style="padding-top:5px;">
                         <div class="row">
+                               
                             <uc1:ReportedIndicatorComments ID="ucIndComments" runat="server" />
                         </div>
                     </div>
-                    
-                    <div class="modal-footer">
-                        <asp:Button ID="btnSaveComments" runat="server" Text="Save" OnClick="btnSaveComments_Click"
-                            CssClass="btn btn-primary" OnClientClick="needToConfirm = false;" meta:resourcekey="btnSaveCommentsResource1" />
-                            <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancelComments_Click"
-                            CssClass="btn btn-primary" OnClientClick="needToConfirm = false;"/>
+
+                    <div class="form-actions">
+                        <div class="input-group">
+                            <input type="text" runat="server" id="txtComments" name="message" class="form-control" style="text-align:left;" placeholder="Type your comment here ...">
+                            <span class="input-group-btn">
+                                <%--<button type="button" class="btn btn-sm btn-info no-radius">
+                                    <i class="icon-share-alt"></i>
+                                    Save
+                                </button>--%>
+                                <asp:Button ID="btnSaveComments" runat="server" Text="Save" OnClick="btnSaveComments_Click"
+                                    CssClass="btn btn-sm btn-info no-radius" OnClientClick="needToConfirm = false;" meta:resourcekey="btnSaveCommentsResource1" />
+                            </span>
+                        </div>
+                        <asp:Button Visible="false" ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancelComments_Click"
+                            CssClass="btn btn-primary" OnClientClick="needToConfirm = false;" />
                     </div>
                     
+
                 </div>
             </div>
         </div>
