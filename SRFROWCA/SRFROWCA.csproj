@@ -207,6 +207,7 @@
     <Content Include="assets\css\select2.css" />
     <Content Include="assets\css\select2.png" />
     <Content Include="assets\css\select2x2.png" />
+    <Content Include="assets\css\tooltipster.css" />
     <Content Include="assets\css\ui.jqgrid.css" />
     <Content Include="assets\fonts\glyphicons-halflings-regular-2.html" />
     <Content Include="assets\fonts\glyphicons-halflings-regular-3.html" />
@@ -276,6 +277,7 @@
     <Content Include="assets\js\jquery.nestable.min.js" />
     <Content Include="assets\js\jquery.slimscroll.min.js" />
     <Content Include="assets\js\jquery.sparkline.min.js" />
+    <Content Include="assets\js\jquery.tooltipster.min.js" />
     <Content Include="assets\js\jquery.ui.touch-punch.min.js" />
     <Content Include="assets\js\jquery.validate.min.js" />
     <Content Include="assets\js\markdown\bootstrap-markdown.min.js" />
@@ -1059,6 +1061,15 @@
     <None Include="HelpFiles\HelpDocs\HelpFrench\7_ORS_ClusterLead_FR_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpFrench\8_ORS_FAQ_FR_v3.pdf" />
     <Content Include="ORSDocuments\Mali\Protection\Note Explicative Monitoring des 13 indicateurs du SRP.pdf" />
+    <Content Include="ORSReports\Country-Indicators\CountryIndicators-Mali-Education.pdf" />
+    <Content Include="ORSReports\Country-Indicators\CountryIndicators-Mali-S-NFI.pdf" />
+    <Content Include="ORSReports\Country-Indicators\CountryIndicators-Mali-WASH.pdf" />
+    <Content Include="ORSReports\3W\ORS3W-Burkina.pdf" />
+    <Content Include="ORSReports\3W\ORS3W-Cameroon.pdf" />
+    <Content Include="ORSReports\3W\ORS3W-Mali.pdf" />
+    <Content Include="ORSReports\3W\ORS3W-Mauritania.pdf" />
+    <Content Include="ORSReports\3W\ORS3W-Niger.pdf" />
+    <Content Include="ORSReports\3W\ORS3W-Senegal.pdf" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

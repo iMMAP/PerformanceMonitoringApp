@@ -22,12 +22,12 @@ namespace SRFROWCA.Controls {
         protected global::System.Web.UI.WebControls.Repeater rptIndComments;
         
         /// <summary>
-        /// fcComments control.
+        /// hdnUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FredCK.FCKeditorV2.FCKeditor fcComments;
+        protected global::System.Web.UI.WebControls.HiddenField hdnUpdate;
     }
 }

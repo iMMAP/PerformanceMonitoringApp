@@ -8,20 +8,21 @@
     <%--Custom GridView Class to include custom paging functionality.--%>
     <%@ Register Assembly="SRFROWCA" Namespace="SRFROWCA" TagPrefix="cc2" %>
     <style>
-        .ddlWidth
-        {
+        .ddlWidth {
             width: 100%;
         }
     </style>
     <!-- ORS styles -->
     <link rel="stylesheet" href="../assets/css/ors.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/tooltipster.css" />
     <!-- ace styles -->
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery.tooltipster.min.js"></script>
     <script type="text/javascript">
-        
+
         $(function () {
             bindCalendars();
-           
+
 
             $(".classsearchcriteriacustomreport").tooltip({
                 show: {
@@ -30,21 +31,25 @@
                 }
             });
         });
-        function bindCalendars()
-        {
+        $(document).ready(function () {
+            $('.tooltip').tooltipster({
+                contentAsHTML: true
+            });
+        });
+        function bindCalendars() {
             $("#<%=txtFromDate.ClientID%>").datepicker({
                 numberOfMonths: 2,
                 onSelect: function (selected) {
                     $("#<%=txtToDate.ClientID%>").datepicker("option", "minDate", selected)
                 }
-             });
+            });
                 $("#<%=txtToDate.ClientID%>").datepicker({
                 numberOfMonths: 2,
                 onSelect: function (selected) {
                     $("#<%=txtFromDate.ClientID%>").datepicker("option", "maxDate", selected)
                 }
-            });
-        }
+                });
+            }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -80,6 +85,7 @@
                                                 <button runat="server" id="btnExportToExcel" onserverclick="ExportToExcel" class="width-10 btn btn-sm btn-yellow"
                                                     title="Excel">
                                                     <i class="icon-download"></i>Excel
+                                               
                                                 </button>
                                             </h6>
                                             <div class="widget-toolbar">
@@ -246,7 +252,8 @@
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                    <td><asp:Literal ID="ltrlValidated" runat="server" Text="Reported Data:"></asp:Literal>
+                                                                                    <td>
+                                                                                        <asp:Literal ID="ltrlValidated" runat="server" Text="Reported Data:"></asp:Literal>
                                                                                     </td>
                                                                                     <td>
                                                                                         <span>
@@ -291,7 +298,7 @@
                                                                                         </cc:DropDownCheckBoxes>
                                                                                     </td>
                                                                                 </tr>
-                                                                               <%-- <tr>
+                                                                                <%-- <tr>
                                                                                     <td>
                                                                                         <span>Admin2:</span>
                                                                                     </td>
@@ -339,64 +346,67 @@
                 </table>
 
                 <%--<div class="col-xs-12 col-sm-12">--%>
-                    <div class="widget-box">
-                        <div class="widget-header widget-header-small header-color-blue2">
-                            <h6>Search Criteria
+                <div class="widget-box">
+                    <div class="widget-header widget-header-small header-color-blue2">
+                        <h6>Search Criteria
                             </h6>
-                            <div class="widget-toolbar">
-                                <a href="#" data-action="collapse"><i class="icon-chevron-down"></i></a>
-                            </div>
-                        </div>
-                        <div class="widget-body">
-                            <div class="widget-main">
-                                <small>
-                                    <div id="divSearchCriteria" runat="server"></div>
-                                </small>
-                            </div>
+                        <div class="widget-toolbar">
+                            <a href="#" data-action="collapse"><i class="icon-chevron-down"></i></a>
                         </div>
                     </div>
+                    <div class="widget-body">
+                        <div class="widget-main">
+                            <small>
+                                <div id="divSearchCriteria" runat="server"></div>
+                            </small>
+                        </div>
+                    </div>
+                </div>
                 <%--</div>--%>
-            <div class="row">
-                <div class="col-xs-12 col-sm-12">
-                    <div class="widget-box">
-                        <cc2:PagingGridView ID="gvReport" runat="server" Width="100%"  CssClass="table table-striped table-bordered table-hover"
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+
+                        <cc2:PagingGridView ID="gvReport" runat="server" Width="100%" CssClass="table table-striped table-bordered table-hover"
                             AutoGenerateColumns="false" OnSorting="gvReport_Sorting" ShowHeaderWhenEmpty="true"
                             EnableViewState="false" AllowSorting="True" AllowPaging="true" PageSize="60"
                             ShowHeader="true" OnPageIndexChanging="gvReport_PageIndexChanging" EmptyDataText="Your filter criteria does not match any record in database!">
                             <PagerStyle BackColor="#efefef" ForeColor="DarkSlateBlue" HorizontalAlign="Center" />
-                         
-                            <Columns>
-                                <asp:BoundField DataField="Cluster" HeaderText="Cluster" SortExpression="Cluster"
-                                    HeaderStyle-Width="5%" />
-                                <asp:BoundField DataField="Organization" HeaderText="Organization" SortExpression="Organization"
-                                    HeaderStyle-Width="10%" />
-                                <asp:BoundField DataField="ProjectCode" HeaderText="Project" SortExpression="ProjectCode"
-                                    HeaderStyle-Width="5%" />
-                               
-                                <asp:BoundField DataField="Month" HeaderText="Month" SortExpression="Month" HeaderStyle-Width="5%" />
-                                <asp:BoundField DataField="Objective" HeaderText="Objective" SortExpression="Objective"
-                                    HeaderStyle-Width="4%" />
-                                <asp:BoundField DataField="Priority" HeaderText="Priority" SortExpression="Priority"
-                                    HeaderStyle-Width="8%" />
-                                <asp:BoundField DataField="Activity" HeaderText="Activity" SortExpression="Activity"
-                                    HeaderStyle-Width="20%" />
-                                <asp:BoundField DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator"
-                                    HeaderStyle-Width="20%" />
-                                <asp:BoundField DataField="Accumulative" HeaderText="Accum" SortExpression="Accumulative"
-                                    HeaderStyle-Width="3%" ItemStyle-HorizontalAlign="Right" />
-                                <asp:BoundField DataField="Country" HeaderText="Country" SortExpression="Country"
-                                    HeaderStyle-Width="5%" />
-                                <asp:BoundField DataField="Admin1" HeaderText="Admin1" SortExpression="Admin1" HeaderStyle-Width="5%" />
-                                <asp:BoundField DataField="AnnualTarget" HeaderText="Annual Target" SortExpression="AnnualTarget"
-                                    HeaderStyle-Width="3%" ItemStyle-HorizontalAlign="Right" />
 
+                            <Columns>
+                                <asp:BoundField DataField="Cluster" HeaderText="Cluster" SortExpression="Cluster" />
+                                <asp:BoundField DataField="Organization" HeaderText="Organization" SortExpression="Organization" />
+                                <asp:BoundField DataField="ProjectCode" HeaderText="Project" SortExpression="ProjectCode" />
+
+                                <asp:BoundField DataField="Month" HeaderText="Month" SortExpression="Month" />
+                                <asp:BoundField DataField="Objective" HeaderText="Objective" SortExpression="Objective" />
+                                <asp:BoundField DataField="Priority" HeaderText="Priority" SortExpression="Priority" />
+                                <asp:BoundField DataField="Activity" HeaderText="Activity" SortExpression="Activity" />
+                                <asp:BoundField DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator" />
+                                <asp:BoundField DataField="Accumulative" HeaderText="Accum" SortExpression="Accumulative"
+                                    ItemStyle-HorizontalAlign="Right" />
+                                <asp:BoundField DataField="Country" HeaderText="Country" SortExpression="Country" />
+                                <asp:BoundField DataField="Admin1" HeaderText="Admin1" SortExpression="Admin1" />
+                                <asp:BoundField DataField="AnnualTarget" HeaderText="Annual Target" SortExpression="AnnualTarget"
+                                    ItemStyle-HorizontalAlign="Right" />
                                 <asp:BoundField DataField="Achieved" HeaderText="Monthly Achieved" SortExpression="Achieved"
-                                    HeaderStyle-Width="3%" ItemStyle-HorizontalAlign="Right" />
+                                    ItemStyle-HorizontalAlign="Right" />
+                                <asp:TemplateField HeaderText="Cmt">
+                                   
+                                    <ItemTemplate>
+                                        <span class="tooltip" style="opacity: 100;" title="<%# Eval("Comments") %>">
+                                            <img src="../assets/orsimages/edit-file-icon.png" />
+                                        </span>
+                                    </ItemTemplate>
+                                    <HeaderStyle ForeColor="#4C8FBD" />
+                                </asp:TemplateField>
+
+
+
                             </Columns>
                         </cc2:PagingGridView>
+
                     </div>
                 </div>
-            </div>
             </div>
             <div class="fullwidthdiv" style="clear: both;">
             </div>

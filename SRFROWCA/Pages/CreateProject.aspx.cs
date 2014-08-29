@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Globalization;
 using System.Linq;
-using System.Web;
+using System.Net.Mail;
+using System.Transactions;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using SRFROWCA.Common;
-using System.Data;
 using BusinessLogic;
-using System.Globalization;
-using System.Transactions;
-using System.Net.Mail;
+using SRFROWCA.Common;
 
 namespace SRFROWCA.Pages
 {
@@ -19,6 +18,7 @@ namespace SRFROWCA.Pages
         {
             if (IsPostBack) return;
             PopulateClusters();
+            PopulateCurrency();
             LoadProjects();
 
             if (rblProjects.Items.Count > 0)
@@ -28,6 +28,25 @@ namespace SRFROWCA.Pages
             }
 
             ToggleButtons();
+        }
+
+        private void PopulateCurrency()
+        {
+            DataTable dt = DBContext.GetData("GetAllCurrency");
+            PopulateCurrencyDropDowns(ddlRequestedAmountCurrency, dt);
+            PopulateCurrencyDropDowns(ddlDonor1Currency, dt);
+            PopulateCurrencyDropDowns(ddlDonor2Currency, dt);
+        }
+
+        private void PopulateCurrencyDropDowns(DropDownList ddl, DataTable dt)
+        {
+            ddl.DataTextField = "CurrencyTitle";
+            ddl.DataValueField = "CurrencyId";
+            ddl.DataSource = dt;
+            ddl.DataBind();
+
+            ListItem item = new ListItem("Select Currency", "0");
+            ddl.Items.Insert(0, item);
         }
 
         internal override void BindGridData()
@@ -45,7 +64,7 @@ namespace SRFROWCA.Pages
         private void LoadProjects()
         {
             rblProjects.DataValueField = "ProjectId";
-            rblProjects.DataTextField = "ProjectTitle";
+            rblProjects.DataTextField = "ProjectCode";
             rblProjects.DataSource = GetProjects();
             rblProjects.DataBind();
         }
@@ -61,7 +80,7 @@ namespace SRFROWCA.Pages
         private DataTable GetProjects()
         {
             int isOPSProjects = 0;
-            return DBContext.GetData("GetOrgProjectsOnLocation", new object[] { UserInfo.EmergencyCountry, UserInfo.Organization, isOPSProjects});
+            return DBContext.GetData("GetOrgProjectsOnLocation", new object[] { UserInfo.EmergencyCountry, UserInfo.Organization, isOPSProjects });
         }
 
         private void ToggleButtons()
@@ -95,9 +114,20 @@ namespace SRFROWCA.Pages
                 txtProjectObjective.Text = dtProject.Rows[0]["ProjectObjective"].ToString();
                 ddlCluster.SelectedValue = dtProject.Rows[0]["EmergencyClusterId"].ToString();
                 txtDonorName.Text = dtProject.Rows[0]["DonorName"].ToString();
+                txtDonor1Contributed.Text = dtProject.Rows[0]["Contribution1Amount"].ToString();
+                ddlDonor1Currency.SelectedValue = dtProject.Rows[0]["Contribution1CurrencyId"].ToString();
                 ddlFundingStatus.SelectedValue = dtProject.Rows[0]["FundingStatus"].ToString();
 
-                
+                txtImplementingPartners.Text = dtProject.Rows[0]["ProjectImplementingpartner"].ToString();
+                txtRequestedAmount.Text = dtProject.Rows[0]["RequestedAmount"].ToString();
+                ddlRequestedAmountCurrency.SelectedValue = dtProject.Rows[0]["RequestedAmountCurrencyId"].ToString();
+                txtDonor2Name.Text = dtProject.Rows[0]["DonorName2"].ToString();
+                txtDonor2Contributed.Text = dtProject.Rows[0]["Contribution2Amount"].ToString();
+                ddlDonor2Currency.SelectedValue = dtProject.Rows[0]["Contribution2CurrencyId"].ToString();
+                txtContactName.Text = dtProject.Rows[0]["ProjectContactName"].ToString();
+                txtContactPhone.Text = dtProject.Rows[0]["ProjectContactPhone"].ToString();
+                txtContactEmail.Text = dtProject.Rows[0]["ProjectContactEmail"].ToString();
+
                 DateTime dtFrom = DateTime.Now;
                 if (dtProject.Rows[0]["ProjectStartDate"] != DBNull.Value)
                 {
@@ -119,23 +149,8 @@ namespace SRFROWCA.Pages
                 {
                     txtToDate.Text = "";
                 }
-                
+
             }
-            //using (ORSEntities re = new ORSEntities())
-            //{
-            //    Project p = re.Projects.Where(x => x.ProjectId == ProjectId).SingleOrDefault();
-            //    if (p != null)
-            //    {
-            //        ltrlProjectCode.Text = p.ProjectCode;
-            //        txtProjectTitle.Text = p.ProjectTitle;
-            //        txtProjectObjective.Text = p.ProjectObjective;
-            //        ddlCluster.SelectedValue = p.EmergencyClusterId.ToString();
-            //        //txtDonorName.Text = p.DonorName != null ? p.DonorName : string.Empty;
-            //        //ddlFundingStatus.SelectedValue = p.FundingStatus != null ? p.FundingStatus.ToString() : "-1";
-            //        txtFromDate.Text = p.ProjectStartDate != null ? p.ProjectStartDate.Value.ToString("MM/dd/yyyy") : "";
-            //        txtToDate.Text = p.ProjectEndDate != null ? p.ProjectEndDate.Value.ToString("MM/dd/yyyy") : "";
-            //    }
-            //}
         }
 
         protected void btnCreateProject_Click(object sender, EventArgs e)
@@ -156,6 +171,18 @@ namespace SRFROWCA.Pages
             ProjectId = 0;
             txtDonorName.Text = string.Empty;
             ddlFundingStatus.SelectedValue = "-1";
+            txtImplementingPartners.Text = "";
+            txtRequestedAmount.Text = "";
+            txtDonor1Contributed.Text = "";
+            txtDonor2Name.Text = "";
+            txtDonor2Contributed.Text = "";
+            txtContactEmail.Text = "";
+            txtContactName.Text = "";
+            txtContactPhone.Text = "";
+            ddlRequestedAmountCurrency.SelectedValue = "0";
+            ddlDonor1Currency.SelectedValue = "0";
+            ddlDonor2Currency.SelectedValue = "0";
+
         }
 
         protected void btnSaveClose_Click(object sender, EventArgs e)
@@ -210,24 +237,25 @@ namespace SRFROWCA.Pages
 
         private void DeleteProject()
         {
-            using (TransactionScope scope = new TransactionScope())
+            //using (TransactionScope scope = new TransactionScope())
             {
-                using (ORSEntities db = new ORSEntities())
-                {
-                    List<ProjectOrganization> projOrgs = db.ProjectOrganizations.Where(x => x.ProjectId == ProjectId).ToList<ProjectOrganization>();
-                    foreach (ProjectOrganization po in projOrgs)
-                    {
-                        db.ProjectOrganizations.DeleteObject(po);
-                    }
+                //using (ORSEntities db = new ORSEntities())
+                //{
+                //    List<ProjectOrganization> projOrgs = db.ProjectOrganizations.Where(x => x.ProjectId == ProjectId).ToList<ProjectOrganization>();
+                //    foreach (ProjectOrganization po in projOrgs)
+                //    {
+                //        db.ProjectOrganizations.DeleteObject(po);
+                //    }
 
-                    Project project = db.Projects.Where(x => x.ProjectId == ProjectId).SingleOrDefault();
-                    if (project != null)
-                    {
-                        db.Projects.DeleteObject(project);
-                    }
-                    db.SaveChanges();
-                }
-                scope.Complete();
+                //    Project project = db.Projects.Where(x => x.ProjectId == ProjectId).SingleOrDefault();
+                //    if (project != null)
+                //    {
+                //        db.Projects.DeleteObject(project);
+                //    }
+                //    db.SaveChanges();
+                //}
+                DBContext.Delete("DeleteProject", new object[] { ProjectId, DBNull.Value });
+                //scope.Complete();
             }
         }
 
@@ -237,8 +265,9 @@ namespace SRFROWCA.Pages
             int orgId = UserInfo.Organization;
             string title = txtProjectTitle.Text.Trim();
             string objective = txtProjectObjective.Text.Trim();
+            string projectPartners = txtImplementingPartners.Text.Trim();
             int clusterId = Convert.ToInt32(ddlCluster.SelectedValue);
-            string donorName = !string.IsNullOrEmpty(txtDonorName.Text.Trim()) ? txtDonorName.Text.Trim() : null;
+
             int? fundingStatus = Convert.ToInt32(ddlFundingStatus.SelectedValue) > 0 ? Convert.ToInt32(ddlFundingStatus.SelectedValue) : (int?)null;
             DateTime? startDate = txtFromDate.Text.Trim().Length > 0 ?
                                     DateTime.ParseExact(txtFromDate.Text.Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture) :
@@ -247,35 +276,52 @@ namespace SRFROWCA.Pages
             DateTime? endDate = txtToDate.Text.Trim().Length > 0 ?
                                 DateTime.ParseExact(txtToDate.Text.Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture) :
                                 (DateTime?)null;
+
+            int val = 0;
+
+            int.TryParse(txtRequestedAmount.Text.Trim(), out val);
+            int? requestedAmount = val > 0 ? val : (int?)null;
+            val = 0;
+
+            int.TryParse(ddlRequestedAmountCurrency.SelectedValue, out val);
+            int? requestedCurrencyId = val > 0 ? val : (int?)null;
+            val = 0;
+
+            string donorName = !string.IsNullOrEmpty(txtDonorName.Text.Trim()) ? txtDonorName.Text.Trim() : null;
+            int.TryParse(txtDonor1Contributed.Text.Trim(), out val);
+            int? contribution1 = val > 0 ? val : (int?)null;
+            val = 0;
+            int.TryParse(ddlDonor1Currency.SelectedValue, out val);
+            int? donor1CurrencyId = val > 0 ? val : (int?)null;
+            val = 0;
+
+            string donorName2 = !string.IsNullOrEmpty(txtDonor2Name.Text.Trim()) ? txtDonor2Name.Text.Trim() : null;
+            int.TryParse(txtDonor2Contributed.Text.Trim(), out val);
+            int? contribution2 = val > 0 ? val : (int?)null;
+            val = 0;
+            int.TryParse(ddlDonor2Currency.SelectedValue, out val);
+            int? donor2CurrencyId = val > 0 ? val : (int?)null;
+            val = 0;
+
+            string contactName = !string.IsNullOrEmpty(txtContactName.Text.Trim()) ? txtContactName.Text.Trim() : null;
+            string contactPhone = !string.IsNullOrEmpty(txtContactPhone.Text.Trim()) ? txtContactPhone.Text.Trim() : null;
+            string contactEmail = !string.IsNullOrEmpty(txtContactEmail.Text.Trim()) ? txtContactEmail.Text.Trim() : null;
+
             Guid userId = RC.GetCurrentUserId;
 
             if (locationId > 0 && clusterId > 0)
             {
                 if (ProjectId > 0)
                 {
-                    //using (ORSEntities re = new ORSEntities())
-                    //{
-                    //    Project project = re.Projects.Single(p => p.ProjectId == ProjectId);
-                    //    project.ProjectTitle = title;
-                    //    project.ProjectObjective = objective;
-                    //    project.EmergencyClusterId = clusterId;
-                    //    project.EmergencyLocationId = locationId;
-                    //    project.ProjectStartDate = startDate;
-                    //    project.ProjectEndDate = endDate;
-                    //    project.UpdatedById = userId;
-                    //    project.UpdatedDate = DateTime.Now;
-                    //    //project.DonorName = donorName;
-                    //    //project.FundingStatus = fundingStatus;
-                    //    re.SaveChanges();
-                    //}
-
-                    DBContext.Update("UpdateProjectDetail", new object[] { ProjectId,title, objective, clusterId, locationId,
-                                                             orgId, startDate, endDate, userId,donorName,fundingStatus, DBNull.Value });
+                    DBContext.Update("UpdateProjectDetail", new object[] { ProjectId, clusterId, locationId, orgId, userId, title, objective, projectPartners, startDate, endDate, 
+                                                                              requestedAmount, requestedCurrencyId, donorName, contribution1, donor1CurrencyId, donorName2, 
+                                                                              contribution2, donor2CurrencyId, fundingStatus, contactName, contactPhone, contactEmail, DBNull.Value });
                 }
                 else
                 {
-                    ProjectId = DBContext.Add("InsertProject", new object[] { title, objective, clusterId, locationId,
-                                                             orgId, startDate, endDate, userId,donorName,fundingStatus, DBNull.Value });
+                    ProjectId = DBContext.Add("InsertProject", new object[] { clusterId, locationId, orgId, userId, title, objective, projectPartners, startDate, endDate, 
+                                                                              requestedAmount, requestedCurrencyId, donorName, contribution1, donor1CurrencyId, donorName2, 
+                                                                              contribution2, donor2CurrencyId, fundingStatus, contactName, contactPhone, contactEmail, DBNull.Value });
                     AddNotification(ProjectId);
                     SendEmailToUser(txtProjectTitle.Text.Trim(), ddlCluster.SelectedItem.Text, clusterId);
                 }
@@ -286,7 +332,7 @@ namespace SRFROWCA.Pages
         {
             DataTable dt = DBContext.GetData("GetUserInClusterCountryAndRole", new object[] { clusterId, UserInfo.Country, "ClusterLead" });
             string toEmail = "";
-            foreach(DataRow dr in dt.Rows)
+            foreach (DataRow dr in dt.Rows)
             {
                 if (string.IsNullOrEmpty(toEmail))
                 {
@@ -329,7 +375,7 @@ namespace SRFROWCA.Pages
             }
         }
 
-        
+
 
         private string GetProjectCode()
         {
@@ -345,20 +391,18 @@ namespace SRFROWCA.Pages
 
         private void AddNotification(int pId)
         {
-            using (ORSEntities db = new ORSEntities())
-            {
-                Notification notification = db.Notifications.CreateObject();
-                notification.Notification1 = "New Project Added For " + ddlCluster.SelectedItem.Text;
-                notification.SourceUserId = RC.GetCurrentUserId;
-                notification.ProjectId = pId;
-                notification.EmergencyLocationId = UserInfo.EmergencyCountry;
-                notification.EmergencyClusterId = Convert.ToInt32(ddlCluster.SelectedValue);
-                notification.OrganizationId = UserInfo.Organization;
-                notification.PageURL = "~/ClusterLead/ProjectDetails.aspx?pid=" + pId.ToString();
-                notification.IsRead = false;
-                db.Notifications.AddObject(notification);
-                db.SaveChanges();
-            }
+            Guid guid = Guid.NewGuid();
+            string tempString = "I8$pUs9\\";
+            string datetime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            string hash = RC.GetHashString(guid + tempString + datetime);
+
+            string notification1 = "New Project Added For " + ddlCluster.SelectedItem.Text;
+            int emergencyClusterId = Convert.ToInt32(ddlCluster.SelectedValue);
+            string pageURL = "~/ClusterLead/ProjectDetails.aspx?pid=" + pId.ToString();
+            bool isRead = false;
+
+            DBContext.Add("InsertNotification", new object[]{notification1, RC.GetCurrentUserId, pId, UserInfo.EmergencyCountry, emergencyClusterId,
+                                                               UserInfo.Organization,  pageURL, isRead, hash, DBNull.Value});
         }
 
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success)

@@ -112,15 +112,6 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.HtmlControls.HtmlButton btnCancelComments;
         
         /// <summary>
-        /// localIndComments control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localIndComments;
-        
-        /// <summary>
         /// ucIndComments control.
         /// </summary>
         /// <remarks>
@@ -130,6 +121,15 @@ namespace SRFROWCA.ClusterLead {
         protected global::SRFROWCA.Controls.ReportedIndicatorComments ucIndComments;
         
         /// <summary>
+        /// txtComments control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtComments;
+        
+        /// <summary>
         /// btnSaveComments control.
         /// </summary>
         /// <remarks>
@@ -137,5 +137,14 @@ namespace SRFROWCA.ClusterLead {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSaveComments;
+        
+        /// <summary>
+        /// btnCancel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancel;
     }
 }

@@ -51,6 +51,7 @@
                                                     <%#Eval("ReportTitle")%>
                                                 </a>
                                             </ItemTemplate>
+                                            <ItemStyle Width="650" />
                                         </asp:TemplateField>
                                         <asp:TemplateField>
                                             <ItemTemplate>

@@ -68,7 +68,7 @@ namespace SRFROWCA.Pages
             }
         }
 
-        #region Events.
+        #region Events
 
         protected void ddlYear_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -103,7 +103,6 @@ namespace SRFROWCA.Pages
 
         protected void gvActivities_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-
             if (e.CommandName == "AddComments")
             {
                 if (ReportId == 0)
@@ -119,18 +118,10 @@ namespace SRFROWCA.Pages
                 if (activityDataId > 0)
                 {
                     CommentsIndId = activityDataId;
-                    //int yearId = 0;
-                    //int.TryParse(ddlYear.SelectedValue, out yearId);
-                    //int monthId = 0;
-                    //int.TryParse(ddlMonth.SelectedValue, out monthId);
-                    //int projectId = RC.GetSelectedIntVal(rblProjects);
 
-                    //ucIndComments.ActivityDataId = activityDataId;
-                    //ucIndComments.YearId = yearId;
-                    //ucIndComments.MonthId = monthId;
-                    //ucIndComments.ProjectId = projectId;
-                    //ucIndComments.EmgLocationId = UserInfo.EmergencyCountry;
-                    ucIndComments.LoadComments(ReportId, activityDataId);
+                    if (ucIndComments.LoadComments(ReportId, activityDataId))
+                        btnSaveComments.Visible = false;
+                 
                     mpeComments.Show();
                 }
             }
@@ -151,17 +142,14 @@ namespace SRFROWCA.Pages
 
         protected void btnSaveComments_Click(object sender, EventArgs e)
         {
-            string comments = ucIndComments.GetComments();
+            string comments = txtComments.Value;//ucIndComments.GetComments(); 
+            int indictorCommentDetID = ucIndComments.GetIndicatorCommentDetailID();
+
             if (!string.IsNullOrEmpty(comments))
             {
                 using (ORSEntities db = new ORSEntities())
                 {
-                    //int yearId = 0;
-                    //int.TryParse(ddlYear.SelectedValue, out yearId);
-                    //int monthId = 0;
-                    //int.TryParse(ddlMonth.SelectedValue, out monthId);
-                    //int projectId = RC.GetSelectedIntVal(rblProjects);
-                    DBContext.Add("InsertIndicatorComments", new object[] { ReportId, CommentsIndId, comments, RC.GetCurrentUserId, DBNull.Value });
+                    DBContext.Add("InsertIndicatorComments", new object[] { ReportId, CommentsIndId, comments, RC.GetCurrentUserId, DBNull.Value, indictorCommentDetID });
                 }
             }
         }
@@ -206,9 +194,8 @@ namespace SRFROWCA.Pages
 
         #endregion
 
-        #region Methods.
+        #region Methods
 
-        // Populate Months Drop Down
         private void PopulateMonths()
         {
             int i = ddlMonth.SelectedIndex;
@@ -232,7 +219,6 @@ namespace SRFROWCA.Pages
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 
-        // Populate Years Drop Down
         private void PopulateYears()
         {
             ddlYear.DataValueField = "YearId";
@@ -533,6 +519,10 @@ namespace SRFROWCA.Pages
                 int countryID = UserInfo.Country > 0 ? UserInfo.Country : 0;
                 int projId = RC.GetSelectedIntVal(rblProjects);
 
+                string monthName = ddlMonth.SelectedItem.Text + " - " + ddlYear.SelectedItem.Text;
+                string projectCode = rblProjects.SelectedItem.Text;
+                string country = UserInfo.CountryName;
+
                 DataTable dtEmails = DBContext.GetData("uspGetUserEmails", new object[] { countryID, projId });
 
                 string emails = string.Empty;
@@ -552,9 +542,9 @@ namespace SRFROWCA.Pages
                         mailMsg.IsBodyHtml = true;
                         mailMsg.Body = string.Format(@"Notification:" + Environment.NewLine +
                                                       "The user: : " + User.Identity.Name + " has " + changeType + " the report with following details:" + Environment.NewLine +
-                                                      "ProjectID: " + projId + Environment.NewLine +
-                                                      "CountryID:" + countryID + Environment.NewLine+
-                                                      "ReportID:" + reportID + Environment.NewLine);
+                                                      " Country: " + country + Environment.NewLine +
+                                                      " Project: " + projectCode + Environment.NewLine +
+                                                      " Report: " + monthName + Environment.NewLine);
 
                         Mail.SendMail(mailMsg);
                     }
@@ -713,7 +703,6 @@ namespace SRFROWCA.Pages
             DBContext.Add("InsertReportAccumulative", new object[] { projectId, yearId, activityDataId, isAccum, RC.GetCurrentUserId, DBNull.Value });
         }
 
-        // In this method we will get the postback control.
         public string GetPostBackControlId(Page page)
         {
             // If page is requested first time then return.
@@ -780,6 +769,7 @@ namespace SRFROWCA.Pages
 
             return "";
         }
+
         private string GetNotSelectedLocations()
         {
             string admin1 = GetNotSelectedItems(cblAdmin1);
@@ -800,6 +790,7 @@ namespace SRFROWCA.Pages
 
             return "";
         }
+
         private string GetSelectedItems(object sender)
         {
             string itemIds = "";
@@ -820,6 +811,7 @@ namespace SRFROWCA.Pages
 
             return itemIds;
         }
+
         private string GetNotSelectedItems(object sender)
         {
             string itemIds = "";
@@ -844,7 +836,6 @@ namespace SRFROWCA.Pages
             return itemIds;
         }
 
-
         private DataTable GetProjectsData(bool isPivot)
         {
             int yearId = 0;
@@ -866,6 +857,7 @@ namespace SRFROWCA.Pages
                                                                         projectId, RC.SelectedSiteLanguageId, userId});
             return dt;
         }
+
         private void GeneratePDF(DataTable dt)
         {
             using (MemoryStream outputStream = new MemoryStream())
@@ -880,12 +872,14 @@ namespace SRFROWCA.Pages
                 Response.BinaryWrite(outputStream.ToArray());
             }
         }
+
         private void BindCultureResourcesOfPage()
         {
             lblLocAdmin1.Text = UserInfo.CountryName + " " + (string)GetLocalResourceObject("AddActivities_PopulateAdmin1__Admin_1_Locations");
             //lblLocAdmin2.Text = UserInfo.CountryName + " " + (string)GetLocalResourceObject("AddActivities_PopulateAdmin2__Admin_2_Locations");
 
         }
+
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
         {
             RC.ShowMessage(Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
