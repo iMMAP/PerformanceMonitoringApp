@@ -12,6 +12,7 @@ namespace SRFROWCA.Reports
 {
     public partial class CountryReports : BasePage
     {
+        public string countryName = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
@@ -28,6 +29,7 @@ namespace SRFROWCA.Reports
                         if (location != null)
                         {
                             lblCountryName.Text = location.LocationName + " 2014";
+                            countryName = location.LocationName;
                         }
                     }
                 }
