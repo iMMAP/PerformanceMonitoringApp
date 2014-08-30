@@ -47,7 +47,7 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField>
                                             <ItemTemplate>
-                                                <a href="<%#Eval("ReportURL").ToString() + "&cid=" + Request.QueryString["cid"].ToString() + "&cName=" + countryName%>" target="_blank">
+                                                <a href="<%#GetReportURL(Eval("ReportURL").ToString(),Eval("ReportTitle").ToString())%>" target="_blank">
                                                     <%#Eval("ReportTitle")%>
                                                 </a>
                                             </ItemTemplate>

@@ -159,5 +159,24 @@ namespace SRFROWCA.Reports
                 }
             }
         }
+
+        public string GetReportURL(string reportUrl, string reportTitle)
+        {
+            string returnURL = string.Empty;
+            if (reportTitle == "3W Report")
+            {
+                returnURL = "downloadreport.aspx?type=3W&cid=" + Request.QueryString["cid"].ToString() + "&cName=" + countryName;
+            }
+            else if (reportTitle == "4W Report")
+            {
+                returnURL = "downloadreport.aspx?type=4W&cid=" + Request.QueryString["cid"].ToString() + "&cName=" + countryName;           
+            }
+            else
+            {
+                returnURL = reportUrl;
+            }
+
+            return returnURL;
+        }
     }
 }
