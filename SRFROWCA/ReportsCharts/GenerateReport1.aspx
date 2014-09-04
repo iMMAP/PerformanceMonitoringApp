@@ -340,8 +340,8 @@
                 OnClientClick="HideButton();" />
         </FinishNavigationTemplate>
     </asp:Wizard>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <%--<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>--%>
+    <script src="../assets/js/highcharts.js"></script>
     <script type="text/javascript">
         $(function () {
             $('#btnExport').click(function () {

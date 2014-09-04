@@ -2,8 +2,8 @@
     CodeBehind="Charts.aspx.cs" Inherits="SRFROWCA.Charts" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <script src="http://code.highcharts.com/highcharts.js"></script>
-    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+    <script src="assets/js/highcharts.js"></script>
+    <script src="assets/js/exporting.js"></script>
     <script>
         $(function () {
             var temp = 'test';

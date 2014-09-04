@@ -176,9 +176,11 @@
     <Content Include="assets\css\ace-fonts.css" />
     <Content Include="assets\css\ace-rtl.min.css" />
     <Content Include="assets\css\ace-skins.min.css" />
+    <Content Include="assets\css\ace.min-.css" />
     <Content Include="assets\css\ace.min.css" />
     <Content Include="assets\css\bootstrap-editable.css" />
     <Content Include="assets\css\bootstrap-timepicker.css" />
+    <Content Include="assets\css\bootstrap.min-.css" />
     <Content Include="assets\css\bootstrap.min.css" />
     <Content Include="assets\css\chosen-sprite%402x.png" />
     <Content Include="assets\css\chosen-sprite.png" />
@@ -188,7 +190,9 @@
     <Content Include="assets\css\datepicker.css" />
     <Content Include="assets\css\daterangepicker.css" />
     <Content Include="assets\css\dropzone.css" />
+    <Content Include="assets\css\font-awesome-ie7.min.css" />
     <Content Include="assets\css\font-awesome.min.css" />
+    <Content Include="assets\css\font-awesome.min_.css" />
     <Content Include="assets\css\fullcalendar.css" />
     <Content Include="assets\css\images\border.png" />
     <Content Include="assets\css\images\controls.png" />
@@ -200,6 +204,7 @@
     <Content Include="assets\css\img\saturation.png" />
     <Content Include="assets\css\jquery-ui-1.10.3.custom.min.css" />
     <Content Include="assets\css\jquery-ui-1.10.3.full.min.css" />
+    <Content Include="assets\css\jquery-ui.min.css" />
     <Content Include="assets\css\jquery.gritter.css" />
     <Content Include="assets\css\ors.css" />
     <Content Include="assets\css\prettify.css" />
@@ -250,6 +255,7 @@
     <Content Include="assets\js\date-time\daterangepicker.min.js" />
     <Content Include="assets\js\date-time\moment.min.js" />
     <Content Include="assets\js\dropzone.min.js" />
+    <Content Include="assets\js\exporting.js" />
     <Content Include="assets\js\flot\jquery.flot.min.js" />
     <Content Include="assets\js\flot\jquery.flot.pie.min.js" />
     <Content Include="assets\js\flot\jquery.flot.resize.min.js" />
@@ -258,11 +264,13 @@
     <Content Include="assets\js\fuelux\fuelux.tree.min.js" />
     <Content Include="assets\js\fuelux\fuelux.wizard.min.js" />
     <Content Include="assets\js\fullcalendar.min.js" />
+    <Content Include="assets\js\highcharts.js" />
     <Content Include="assets\js\jqGrid\i18n\grid.locale-en.js" />
     <Content Include="assets\js\jqGrid\jquery.jqGrid.min.js" />
     <Content Include="assets\js\jquery-2.0.3.min.js" />
     <Content Include="assets\js\jquery-ui-1.10.3.custom.min.js" />
     <Content Include="assets\js\jquery-ui-1.10.3.full.min.js" />
+    <Content Include="assets\js\jquery-ui.min.js" />
     <Content Include="assets\js\jquery.autosize.min.js" />
     <Content Include="assets\js\jquery.colorbox-min.js" />
     <Content Include="assets\js\jquery.dataTables.bootstrap.js" />
