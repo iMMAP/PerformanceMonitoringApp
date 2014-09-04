@@ -171,6 +171,18 @@ namespace SRFROWCA.Pages
             ProjectId = 0;
             txtDonorName.Text = string.Empty;
             ddlFundingStatus.SelectedValue = "-1";
+            txtImplementingPartners.Text = "";
+            txtRequestedAmount.Text = "";
+            txtDonor1Contributed.Text = "";
+            txtDonor2Name.Text = "";
+            txtDonor2Contributed.Text = "";
+            txtContactEmail.Text = "";
+            txtContactName.Text = "";
+            txtContactPhone.Text = "";
+            ddlRequestedAmountCurrency.SelectedValue = "0";
+            ddlDonor1Currency.SelectedValue = "0";
+            ddlDonor2Currency.SelectedValue = "0";
+
         }
 
         protected void btnSaveClose_Click(object sender, EventArgs e)

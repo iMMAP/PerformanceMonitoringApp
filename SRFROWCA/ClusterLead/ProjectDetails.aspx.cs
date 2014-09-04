@@ -15,17 +15,27 @@ namespace SRFROWCA.ClusterLead
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
-
-            if (Request.QueryString["nid"] != null)
-            {
-                
-            }
-
+            
             //if (Session["ViewProjectId"] != null)
             if (Request.QueryString["pid"] != null)
             {
                 GetProjectDetails();
                 LoadReports();
+                UpdateNotificationStatus();
+            }
+        }
+
+        private void UpdateNotificationStatus()
+        {
+            int notificationId = 0;
+            if (Request.QueryString["nid"] != null)
+            {
+                int.TryParse(Request.QueryString["nid"], out notificationId);
+
+                if (notificationId > 0)
+                {
+                    DBContext.Update("UpdateNotificationStatus", new object[] { notificationId,  DBNull.Value});
+                }
             }
         }
 
