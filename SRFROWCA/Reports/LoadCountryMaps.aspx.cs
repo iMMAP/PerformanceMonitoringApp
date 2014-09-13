@@ -37,6 +37,10 @@ namespace SRFROWCA.Reports
             if (dt != null && dt.Rows.Count > 0)
             {
                 url = dt.Rows[0]["MapURL"].ToString();
+                if (url.IndexOf("http://") == -1)
+                {
+                    url = Master.BaseURL + "/orsmaps/" + url;
+                }
                 //ViewState["url"] = url.Substring(0,url.LastIndexOf('/')-1);                
                 ltrlFileName.Text = url.Substring(url.LastIndexOf("/")+1);
                 ViewState["filename"] = ltrlFileName.Text;

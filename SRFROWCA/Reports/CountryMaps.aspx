@@ -42,16 +42,13 @@
                                     <Columns>
                                         <asp:TemplateField>
                                             <ItemTemplate>
-                                                <%#Container.DataItemIndex + 1%>.
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField>
-                                            <ItemTemplate>
-                                                <a href="LoadCountryMaps.aspx?id=<%#Eval("CountryMapId") %>&cid=<%=Request.QueryString["cid"]%>" target="_blank">
+                                                <%#Container.DataItemIndex + 1%>.&nbsp;&nbsp;&nbsp;
+                                                 <a href="LoadCountryMaps.aspx?id=<%#Eval("CountryMapId") %>&cid=<%=Request.QueryString["cid"]%>" target="_blank">
                                                     <%#Eval("MapTitle")%>
                                                 </a>
                                             </ItemTemplate>
                                         </asp:TemplateField>
+                                       
                                         <asp:TemplateField>
                                             <ItemTemplate>
                                                 <%--<asp:Button ID="btnDelete" runat="server" CommandName="DeleteReport" CommandArgument='<%# Eval("CountryReportId") %>' Text="Remove" />--%>

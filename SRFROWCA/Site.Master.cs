@@ -211,6 +211,7 @@ namespace SRFROWCA
             liSumOfRegionalIndicators.Visible = isShow;
             //liCountryReports.Visible = isShow;
             liLocations.Visible = isShow;
+            liMapsListing.Visible = isShow;
         }
 
         private void ShowUserMenue()
@@ -336,6 +337,7 @@ namespace SRFROWCA
             liIndicators.Visible = isShow;
             liActivities.Visible = isShow;
             liLocations.Visible = isShow;
+            liMapsListing.Visible = isShow;
         }
 
         private void ActiveMenueItem()
@@ -602,6 +604,12 @@ namespace SRFROWCA
             {
                 PageTitle = "ORS - FAQ";
             }
+            else if (uri.Contains("CountryMapsListing") || uri.Contains("AddEditCountryMaps"))
+            {
+                PageTitle = "ORS - Country Maps";
+                liMapsListing.Attributes.Add("class", "active open");                
+            }
+           
 
         }
 
