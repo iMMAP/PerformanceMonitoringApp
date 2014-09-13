@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ProjectReports.aspx.cs" Inherits="SRFROWCA.ClusterLead.ProjectReports" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+    <%--<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>--%>
     <script type="text/javascript">
         $(function () {
 

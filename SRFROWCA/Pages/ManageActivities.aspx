@@ -6,10 +6,9 @@
     <link rel="stylesheet" href="../assets/css/ors.css" />
     <!-- ace styles -->
     <script type="text/javascript" src="../assets/orsjs/ShowHideObJAndPr.js"></script>
-    <script>
+   
+     <script>
         $(function () {
-            
-
             $("tr .testcb").each(function () {
 
                 var checkBox = $(this).find("input[type='checkbox']");
@@ -33,9 +32,8 @@
         });
         showHideObj();
         showHidePriority();
-
-
     </script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="breadcrumbs" id="Div1">
@@ -122,10 +120,10 @@
                             <asp:Localize ID="local" runat="server" Text="Master List Of Cluster Indicators" meta:resourcekey="localResource1"></asp:Localize>
                         </h4>
                         <button id="btnSave" runat="server" onserverclick="btnSave_Click" onclick="needToConfirm = false;"
-                                type="button" class="btn btn-sm btn-yellow pull-right">
-                                <i class="icon-save"></i>
-                                <asp:Localize ID="localClsuterTargetsSave" runat="server" Text="Save"></asp:Localize>
-                            </button>
+                            type="button" class="btn btn-sm btn-yellow pull-right">
+                            <i class="icon-save"></i>
+                            <asp:Localize ID="localClsuterTargetsSave" runat="server" Text="Save"></asp:Localize>
+                        </button>
                     </div>
                     <div class="widget-body">
                         <div class="widget-main">
@@ -222,7 +220,7 @@
 
                                             <ItemStyle CssClass="hidden"></ItemStyle>
                                         </asp:TemplateField>
-                                       
+
                                     </Columns>
                                 </asp:GridView>
                             </div>
@@ -232,7 +230,7 @@
             </div>
         </div>
     </div>
-    <script>
+   <%-- <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
                 (i[r].q = i[r].q || []).push(arguments)
@@ -243,5 +241,5 @@
         ga('create', 'UA-50659880-1', 'ocharowca.info');
         ga('send', 'pageview');
 
-</script>
+</script>--%>
 </asp:Content>

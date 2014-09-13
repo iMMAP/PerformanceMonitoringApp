@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="../assets/css/ors.css" />
     <link rel="stylesheet" type="text/css" href="../assets/css/tooltipster.css" />
     <!-- ace styles -->
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+    <%--<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>--%>
     <script type="text/javascript" src="../assets/js/jquery.tooltipster.min.js"></script>
     <script type="text/javascript">
 
@@ -453,7 +453,7 @@
         </ContentTemplate>
     </asp:UpdatePanel>
 
-    <script>
+   <%-- <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
                 (i[r].q = i[r].q || []).push(arguments)
@@ -464,5 +464,5 @@
         ga('create', 'UA-50659880-1', 'ocharowca.info');
         ga('send', 'pageview');
         Sys.WebForms.PageRequestManager.getInstance().add_endRequest(bindCalendars);
-    </script>
+    </script>--%>
 </asp:Content>
