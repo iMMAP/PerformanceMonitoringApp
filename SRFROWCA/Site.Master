@@ -283,7 +283,7 @@
 							</ul>
 						</li>
                         <li id="liMaps" runat="server"><a id="mnuMaps" runat="server" href="#"
-							class="dropdown-toggle"><i class="icon-globe"></i><span class="menu-text">Maps
+							class="dropdown-toggle"><i class="icon-globe"></i><span class="menu-text">Country Maps
 							</span><b class="arrow icon-angle-down"></b></a>
 							<ul class="submenu">
 								<li id="liMapBurkina" runat="server"><a href="<%=BaseURL %>/Reports/CountryMaps.aspx?cid=2"><span class="menu-text">Burkina Faso</span></a></li>
@@ -295,6 +295,8 @@
 								<li id="liMapSenegal" runat="server"><a href="<%=BaseURL %>/Reports/CountryMaps.aspx?cid=10"><span class="menu-text">Senegal</span></a></li>								
 							</ul>
 						</li>
+                        <li id="liMapsListing" runat="server"><a href="~/Admin/CountryMapsListing.aspx"
+							id="A5" runat="server"><i class="icon-globe"></i><span class="menu-text">Maps</span> </a></li>
 						<li id="liPivotTables" runat="server"><a id="menuePivotTables" runat="server" href="#"
 							class="dropdown-toggle"><i class="icon-table"></i><span class="menu-text">
 								<asp:Localize ID="localPivotTables" runat="server" Text="Pivot Tables" meta:resourcekey="localPivotTablesResource1"></asp:Localize>

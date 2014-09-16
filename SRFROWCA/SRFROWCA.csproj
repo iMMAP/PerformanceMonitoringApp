@@ -159,6 +159,8 @@
     <Content Include="Admin\ActivityData.aspx" />
     <Content Include="Admin\ActivityListing.aspx" />
     <Content Include="Admin\ConfigSettings.aspx" />
+    <Content Include="Admin\AddEditCountryMaps.aspx" />
+    <Content Include="Admin\CountryMapsListing.aspx" />
     <Content Include="Admin\EmergencyClusters.aspx" />
     <Content Include="Admin\EmergencyLocations.aspx" />
     <Content Include="Admin\IndicatorActivities.aspx" />
@@ -512,6 +514,7 @@
     <Content Include="ORSReports\3W\ORS3W-Mauritania.pdf" />
     <Content Include="ORSReports\3W\ORS3W-Niger.pdf" />
     <Content Include="ORSReports\3W\ORS3W-Senegal.pdf" />
+    <Content Include="ORSMaps\BFA_A4_P_140808_V1_ORS_3W_June.pdf" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -632,6 +635,20 @@
     </Compile>
     <Compile Include="Admin\ConfigSettings.aspx.designer.cs">
       <DependentUpon>ConfigSettings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\AddEditCountryMaps.aspx.cs">
+      <DependentUpon>AddEditCountryMaps.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\AddEditCountryMaps.aspx.designer.cs">
+      <DependentUpon>AddEditCountryMaps.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\CountryMapsListing.aspx.cs">
+      <DependentUpon>CountryMapsListing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\CountryMapsListing.aspx.designer.cs">
+      <DependentUpon>CountryMapsListing.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\EmergencyClusters.aspx.cs">
       <DependentUpon>EmergencyClusters.aspx</DependentUpon>
