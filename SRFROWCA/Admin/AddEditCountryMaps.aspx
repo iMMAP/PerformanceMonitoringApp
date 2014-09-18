@@ -72,7 +72,7 @@
                                                          <tr>
                                                             <td>
                                                                 <label>
-                                                                    Map Type:</label>
+                                                                    Map Month:</label>
                                                             </td>
                                                             <td>
                                                                <asp:DropDownList ID="ddlMapType" runat="server" AppendDataBoundItems="true" CssClass="width-80">

@@ -58,7 +58,7 @@
                                                             </td>
                                                             <td>
                                                                 <label>
-                                                                    Map Type:</label>
+                                                                    Map Month:</label>
                                                             </td>
                                                             <td>
                                                                 <asp:DropDownList ID="ddlMapType" runat="server" AppendDataBoundItems="true" CssClass="width-80">
@@ -121,7 +121,7 @@
                         </asp:TemplateField>
                         <asp:BoundField DataField="MapTitle" HeaderText="Map Title" SortExpression="MapTitle" />
 
-                        <asp:BoundField DataField="MapTypeTitle" HeaderText="Map type" SortExpression="MapTypeTitle" />
+                        <asp:BoundField DataField="MapTypeTitle" HeaderText="Map Month" SortExpression="MapTypeTitle" />
                         <asp:BoundField DataField="LocationName" HeaderText="Location" SortExpression="LocationName" />
                         <asp:BoundField DataField="IsActive" HeaderText="Active" SortExpression="IsActive" />
                         <asp:TemplateField HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Center">
