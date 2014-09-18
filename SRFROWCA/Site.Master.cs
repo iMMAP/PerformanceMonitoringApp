@@ -565,6 +565,11 @@ namespace SRFROWCA
 
                 liProjectXMLFeeds.Attributes.Add("class", "active");
             }
+            else if (uri.Contains("CountryMapsListing") || uri.Contains("AddEditCountryMaps"))
+            {
+                PageTitle = "ORS - Country Maps";
+                liMapsListing.Attributes.Add("class", "active open");
+            }
             else if (uri.Contains("Admin/ConfigSettings.aspx"))
             {
                 PageTitle = "ORS - Settings";
@@ -604,11 +609,7 @@ namespace SRFROWCA
             {
                 PageTitle = "ORS - FAQ";
             }
-            else if (uri.Contains("CountryMapsListing") || uri.Contains("AddEditCountryMaps"))
-            {
-                PageTitle = "ORS - Country Maps";
-                liMapsListing.Attributes.Add("class", "active open");                
-            }
+            
            
 
         }
