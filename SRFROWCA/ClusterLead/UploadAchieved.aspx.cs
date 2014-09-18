@@ -136,10 +136,12 @@ namespace SRFROWCA.ClusterLead
             string projectIds = null;
             projectIds = RC.GetSelectedValues(ddlProjects);
 
+            bool isProjIndicators = chkProjectIndicators.Checked;
+
             if (emgLocationId > 0 && clusterId > 0)
             {
                 return DBContext.GetData("GetIndicatorsForDataEntryTemplate2", new object[]{emgLocationId, clusterId, orgIds, countryInd, regionalInd, allInd,
-																						RC.SelectedSiteLanguageId, yearId, locationIds, projectIds});
+																						RC.SelectedSiteLanguageId, yearId, locationIds, projectIds, isProjIndicators});
             }
             else
                 return new DataTable();
