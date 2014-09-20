@@ -1,16 +1,17 @@
 ﻿<%@ Page Title="ORS - FAQs/Help" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeBehind="faq.aspx.cs" Inherits="SRFROWCA.faq" Culture="auto" UICulture="auto" meta:resourcekey="PageResource1" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+<asp:Content ID="headContent" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+
+<asp:Content ID="mainContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="breadcrumbs" id="breadcrumbs">
         <script type="text/javascript">
             try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
         </script>
         <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="#">Home</a> </li>
-            <li class="active">FAQs/Help</li>
+            <li><i class="icon-home home-icon"></i><a href="/">Home</a> </li>
+            <li class="active">FAQs & Help</li>
         </ul>
         <!-- .breadcrumb -->
     </div>
