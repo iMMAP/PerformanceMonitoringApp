@@ -52,7 +52,7 @@
             }
     </script>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="mainContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="breadcrumbs" id="breadcrumbs">
         <script type="text/javascript">
             try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
@@ -74,7 +74,7 @@
                         </ProgressTemplate>
                     </asp:UpdateProgress>
                 </div>
-                <table width="100%">
+                <table style="width:100%">
                     <tr>
                         <td>
                             <div class="row">

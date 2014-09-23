@@ -145,7 +145,7 @@
 
     </script>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="mainContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="breadcrumbs" id="breadcrumbs">
         <script type="text/javascript">
             try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
@@ -166,7 +166,7 @@
                 <div class="widget-box no-border">
                     <div class="widget-body">
                         <div class="widget-main no-padding-top">
-                            <div class="col-sm-14 widget-container-span">
+                         <%--   <div class="col-sm-14 widget-container-span">--%>
                                 <div class="widget-box">
                                     <div class="widget-header widget-header-small header-color-blue2">
                                         <h5>
@@ -185,8 +185,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-14 widget-container-span">
+                          <%--  </div>--%>
+                           <%-- <div class="col-sm-14 widget-container-span">--%>
                                 <div class="widget-box">
                                     <div class="widget-header widget-header-small header-color-blue2">
                                         <h5>
@@ -205,8 +205,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-14 widget-container-span">
+                           <%-- </div>--%>
+                           <%-- <div class="col-sm-14 widget-container-span">--%>
                                 <div class="widget-box">
                                     <div class="widget-header widget-header-small header-color-blue2">
                                         <h5>
@@ -222,8 +222,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-14 widget-container-span">
+                           <%-- </div>
+                            <div class="col-sm-14 widget-container-span">--%>
                                 <div class="widget-box">
                                     <div class="widget-header widget-header-small header-color-blue2">
                                         <h5>
@@ -239,7 +239,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            <%--</div>--%>
                         </div>
                     </div>
                 </div>
