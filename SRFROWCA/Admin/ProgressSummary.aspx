@@ -27,7 +27,7 @@
         });
     </script>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="mainContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="breadcrumbs" id="breadcrumbs">
         <script type="text/javascript">
             try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
@@ -43,6 +43,7 @@
         <!-- .breadcrumb -->
     </div>
     <div class="page-content">
+        <asp:Label runat="server" ID="lblMessage"></asp:Label>
         <table width="100%">
             <tr>
                 <td>
@@ -67,13 +68,13 @@
                                                                 <asp:TextBox ID="txtFromDate" runat="server" CssClass="width-80"></asp:TextBox>
                                                             </td>
 
-                                                            <%-- <td>Country:
+                                                             <td>Country:
                                                             </td>
                                                             <td>
-                                                                <asp:DropDownList ID="ddlCountry" AppendDataBoundItems="true" runat="server" CssClass="width-100">
+                                                                <asp:DropDownList ID="ddlCountry" AppendDataBoundItems="true" runat="server" AutoPostBack="true" CssClass="width-100" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged">
                                                                     <asp:ListItem Text="Select Country" Value="-1" Selected="True"></asp:ListItem>
                                                                 </asp:DropDownList>
-                                                            </td>--%>
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
