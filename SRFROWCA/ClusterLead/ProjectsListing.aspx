@@ -2,9 +2,9 @@
     CodeBehind="ProjectsListing.aspx.cs" Inherits="SRFROWCA.ClusterLead.ProjectsListing"
     Culture="auto" meta:resourcekey="PageResource1" UICulture="auto" EnableEventValidation="false" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+<asp:Content ID="headContent" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="mainContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="breadcrumbs" id="breadcrumbs">
         <script type="text/javascript">
             try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
@@ -22,18 +22,18 @@
         <table class="width-100">
             <tr>
                 <td>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 ">
-                            <div class="widget-box">
+                
                                 <div class="widget-header widget-header-small header-color-blue2">
                                     <h6>
                                         <button runat="server" id="btnExportPDF" onserverclick="ExportToPDF" class="width-10 btn btn-sm btn-yellow"
                                             title="PDF">
                                             <i class="icon-download"></i>PDF
+                                       
                                         </button>
                                         <button runat="server" id="btnExportToExcel" onserverclick="ExportToExcel" class="width-10 btn btn-sm btn-yellow"
                                             title="Excel">
                                             <i class="icon-download"></i>Excel
+                                       
                                         </button>
                                     </h6>
                                     <div class="widget-toolbar">
@@ -43,19 +43,16 @@
                                 <div class="widget-body">
                                     <div class="widget-main">
                                         <div class="row">
-                                            <div class="col-xs-12">
-                                                <div class="row">
+                                        
                                                     <div class="col-sm-3">
-                                                        <div class="widget-box no-border">
-                                                            <div class="widget-body">
-                                                                <div class="widget-main padding-6">
+                                                      
                                                                     <table class="width-100">
                                                                         <tr>
                                                                             <td width="150px">
                                                                                 <asp:Localize ID="localCountry" Visible="false" runat="server" Text="Country:" meta:resourcekey="localCountryResource1"></asp:Localize>
                                                                             </td>
                                                                             <td>
-                                                                                <asp:DropDownList Visible ="false" ID="ddlCountry" runat="server" CssClass="width-90" AutoPostBack="True"
+                                                                                <asp:DropDownList Visible="false" ID="ddlCountry" runat="server" CssClass="width-90" AutoPostBack="True"
                                                                                     OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" meta:resourcekey="ddlCountryResource1">
                                                                                 </asp:DropDownList>
                                                                             </td>
@@ -70,7 +67,7 @@
                                                                                 </asp:DropDownList>
                                                                             </td>
                                                                         </tr>
-                                                                       <%-- <tr>
+                                                                        <%-- <tr>
                                                                             <td>
                                                                                 <asp:Localize ID="Localize1" runat="server" Text="Cercle:" meta:resourcekey="Localize1Resource1"></asp:Localize>
                                                                             </td>
@@ -109,9 +106,7 @@
                                                                             </td>
                                                                         </tr>
                                                                     </table>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                            
                                                     </div>
                                                     <div class="col-sm-9">
                                                         <div class="widget-box no-border">
@@ -128,16 +123,16 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <div id="divOrganization" runat="server">
-                                                                            <td>Organization:
+                                                                                <td>Organization:
                                                                             </td>
-                                                                            <td>
-                                                                                <asp:DropDownList ID="ddlOrg" runat="server" CssClass="width-90" AutoPostBack="True"
-                                                                                    OnSelectedIndexChanged="ddlOrg_SelectedIndexChanged" meta:resourcekey="ddlOrgResource1">
-                                                                                </asp:DropDownList>
-                                                                            </td>
+                                                                                <td>
+                                                                                    <asp:DropDownList ID="ddlOrg" runat="server" CssClass="width-90" AutoPostBack="True"
+                                                                                        OnSelectedIndexChanged="ddlOrg_SelectedIndexChanged" meta:resourcekey="ddlOrgResource1">
+                                                                                    </asp:DropDownList>
+                                                                                </td>
                                                                             </div>
                                                                         </tr>
-                                                                       <%-- <tr>
+                                                                        <%-- <tr>
                                                                             <td>Project Status:
                                                                             </td>
                                                                             <td>
@@ -162,14 +157,11 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
+                                             
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
+                     
                 </td>
             </tr>
         </table>
@@ -181,7 +173,7 @@
                         EmptyDataText="Your filter criteria does not match any project!" Width="100%"
                         OnRowCommand="gvProjects_RowCommand" OnSorting="gvProjects_Sorting" OnPageIndexChanging="gvProjects_PageIndexChanging"
                         meta:resourcekey="gvProjectsResource1">
-                   
+
                         <Columns>
                             <asp:BoundField DataField="ProjectCode" HeaderText="Project Code" SortExpression="ProjectCode"
                                 meta:resourcekey="BoundFieldResource1" />
@@ -193,7 +185,7 @@
                                 meta:resourcekey="BoundFieldResource3" />
                             <asp:BoundField DataField="CurrentRequest" HeaderText="Current Request" SortExpression="CurrentRequest"
                                 meta:resourcekey="BoundFieldResource5" />
-                             <asp:BoundField DataField="OriginalRequest" HeaderText="Original Request" SortExpression="OriginalRequest"
+                            <asp:BoundField DataField="OriginalRequest" HeaderText="Original Request" SortExpression="OriginalRequest"
                                 meta:resourcekey="BoundFieldResource10" />
                             <asp:BoundField DataField="Funded" HeaderText="Funded" SortExpression="Funded"
                                 meta:resourcekey="BoundFieldResource6" />
@@ -204,20 +196,20 @@
                             </asp:BoundField>
                             <asp:BoundField DataField="Phone" HeaderText="Phone" meta:resourcekey="BoundFieldResource9" />
                             <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderText="View" meta:resourcekey="TemplateFieldResource1">
-                                <ItemTemplate  >
-                                     <asp:ImageButton ID="lnkVieDetails" runat="server" ImageUrl="~/assets/orsimages/view.png" CommandName="ViewProject"
-                                                    CommandArgument='<%# Eval("ProjectId") %>' meta:resourcekey="lnkVieDetailsResource1" />
-                                            
-                                   <%-- <asp:LinkButton ID="lnkVieDetails" runat="server" Text="View" CommandName="ViewProject"
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="lnkVieDetails" runat="server" ImageUrl="../assets/orsimages/view.png" CommandName="ViewProject"
+                                        CommandArgument='<%# Eval("ProjectId") %>' meta:resourcekey="lnkVieDetailsResource1" />
+
+                                    <%-- <asp:LinkButton ID="lnkVieDetails" runat="server" Text="View" CommandName="ViewProject"
                                         CommandArgument='<%# Eval("ProjectId") %>' meta:resourcekey="lnkVieDetailsResource1" />--%>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderText="PDF" >
+                            <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderText="PDF">
                                 <ItemTemplate>
-                                     <asp:ImageButton ID="lnkPrint" runat="server" ImageUrl="~/assets/orsimages/pdf.png" CommandName="PrintReport"
-                                                    CommandArgument='<%# Eval("ProjectId") %>' />
-                                            
-                                 
+                                    <asp:ImageButton ID="lnkPrint" runat="server" ImageUrl="../assets/orsimages/pdf.png" CommandName="PrintReport"
+                                        CommandArgument='<%# Eval("ProjectId") %>' />
+
+
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
@@ -226,16 +218,5 @@
             </div>
         </div>
     </div>
-   <%-- <script>
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date(); a = s.createElement(o),
-            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-        ga('create', 'UA-50659880-1', 'ocharowca.info');
-        ga('send', 'pageview');
-
-</script>--%>
 </asp:Content>

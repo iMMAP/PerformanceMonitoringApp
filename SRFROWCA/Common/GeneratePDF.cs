@@ -159,7 +159,7 @@ namespace SRFROWCA.Common
             }
         }
 
-        public static MemoryStream GenerateSummaryPDF(DataTable dt)
+        public static MemoryStream GenerateSummaryPDF(DataTable dt, string startDate, string endDate)
         {
             using (MemoryStream outputStream = new MemoryStream())
             {
@@ -169,7 +169,7 @@ namespace SRFROWCA.Common
                 if (dt.Rows.Count > 0)
                 {
                     document.Open();
-                    GenerateSummaryReport(document, dt);
+                    GenerateSummaryReport(document, dt, startDate, endDate);
                     GenerateSummaryCountry(document, dt);
                     GenerateSummaryOrganization(document, dt);
 
@@ -492,10 +492,27 @@ namespace SRFROWCA.Common
                               .ToList<int>();
         }
 
-        private static void GenerateSummaryReport(iTextSharp.text.Document document, DataTable dt)
+        private static void GenerateSummaryReport(iTextSharp.text.Document document, DataTable dt, string startDate, string endDate)
         {
             if (dt.Rows.Count > 0)
             {
+                string header = string.Empty;
+
+                if (string.IsNullOrEmpty(startDate))
+                    startDate = "N/A";
+                else
+                    startDate = Convert.ToDateTime(startDate).ToString("MMMM dd, yyyy");
+                
+                if (string.IsNullOrEmpty(endDate))
+                    endDate = DateTime.Now.ToString("MMMM dd, yyyy");
+                else
+                    endDate = Convert.ToDateTime(endDate).ToString("MMMM dd, yyyy");
+
+                if (startDate.Equals("N/A") && endDate.Equals("N/A"))
+                    header = "Overall Progress Reports - " + DateTime.Now.ToString("MMMM dd, yyyy");
+                else
+                    header = "Overall Progress Reports - " + startDate+" to "+endDate;
+
                 PdfPTable tbl = new PdfPTable(2);
 
                 tbl.KeepTogether = true;
@@ -507,7 +524,7 @@ namespace SRFROWCA.Common
 
                 PdfPCell cell = null;
 
-                cell = new PdfPCell(new Phrase("Overall Progress Reports - " + DateTime.Now.ToString("MMMM dd, yyyy (HH:mm)"), FontFactory.GetFont("Arial", 12, Font.BOLD)));
+                cell = new PdfPCell(new Phrase(header, FontFactory.GetFont("Arial", 12, Font.BOLD)));
                 cell.PaddingTop = 20;
                 cell.Border = 0;
                 //cell.BorderWidthBottom = 1;

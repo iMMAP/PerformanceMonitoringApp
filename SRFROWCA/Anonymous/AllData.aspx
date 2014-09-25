@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeBehind="AllData.aspx.cs" Inherits="SRFROWCA.Anonymous.AllData" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+<asp:Content ID="mainContent" ContentPlaceHolderID="HeadContent" runat="server">
     <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
     <%--DropDownCheckBoxes is custom dropdown with checkboxes to selectect multiple items.--%>
     <%@ Register Assembly="DropDownCheckBoxes" Namespace="Saplin.Controls" TagPrefix="cc" %>
@@ -52,7 +52,7 @@
             }
     </script>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="mainContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="breadcrumbs" id="breadcrumbs">
         <script type="text/javascript">
             try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
@@ -74,7 +74,7 @@
                         </ProgressTemplate>
                     </asp:UpdateProgress>
                 </div>
-                <table width="100%">
+                <table style="width:100%">
                     <tr>
                         <td>
                             <div class="row">
@@ -453,16 +453,5 @@
         </ContentTemplate>
     </asp:UpdatePanel>
 
-   <%-- <script>
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date(); a = s.createElement(o),
-            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-        ga('create', 'UA-50659880-1', 'ocharowca.info');
-        ga('send', 'pageview');
-        Sys.WebForms.PageRequestManager.getInstance().add_endRequest(bindCalendars);
-    </script>--%>
+  
 </asp:Content>

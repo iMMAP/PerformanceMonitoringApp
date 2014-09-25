@@ -17,7 +17,7 @@ namespace SRFROWCA.Admin
             if (!IsPostBack)
             {
                 LoadData(null, null, "-1", "-1", "-1");
-                //LoadCombo();
+                LoadCombo();
             }
         }
 
@@ -34,29 +34,33 @@ namespace SRFROWCA.Admin
                 lblReports.Text = Convert.ToString(dtResult.Rows[0]["ReportCount"]);
                 lblReportedProjects.Text = Convert.ToString(dtResult.Rows[0]["ReportedProjectCount"]);
             }
+            else
+            {
+                lblUsers.Text = lblOrganizations.Text = lblReportedOrgs.Text = lblReportedCountries.Text = lblReports.Text = lblReportedProjects.Text = "0";
+            }
         }
 
-        //private void LoadCombo()
-        //{
-        //    UI.FillClusters(ddlClusters, RC.SelectedSiteLanguageId);
-        //    if (UserInfo.Cluster > 0)
-        //    {
-        //        ddlClusters.SelectedValue = UserInfo.Cluster.ToString();
-        //        ddlClusters.Visible = false;
-        //    }
+        private void LoadCombo()
+        {
+            /*UI.FillClusters(ddlClusters, RC.SelectedSiteLanguageId);
+            if (UserInfo.Cluster > 0)
+            {
+                ddlClusters.SelectedValue = UserInfo.Cluster.ToString();
+                ddlClusters.Visible = false;
+            }*/
 
-        //    UI.FillLocations(ddlCountry, RC.GetLocations(this.User, (int)RC.LocationTypes.National));
-        //}
+            UI.FillLocations(ddlCountry, RC.GetLocations(this.User, (int)RC.LocationTypes.National));
+        }
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             string startDate = !string.IsNullOrEmpty(txtFromDate.Text)?txtFromDate.Text:null;
             string endDate = !string.IsNullOrEmpty(txtToDate.Text)?txtToDate.Text:null;
-            //string countryID = ddlCountry.SelectedValue;
+            string countryID = ddlCountry.SelectedValue;
             //string clusterID = ddlClusters.SelectedValue;
             string isOPSProject = rbIsOPSProject.SelectedValue;
 
-            LoadData(startDate, endDate, "-1", "-1", isOPSProject);
+            LoadData(startDate, endDate, countryID, "-1", isOPSProject);
         }
 
         protected void btnPDFPrint_Click(object sender, EventArgs e)
@@ -65,14 +69,29 @@ namespace SRFROWCA.Admin
             string endDate = !string.IsNullOrEmpty(txtToDate.Text) ? txtToDate.Text : null;
             string isOPSProject = rbIsOPSProject.SelectedValue;
 
-            DataTable dtResults = DBContext.GetData("uspGetReportData", new object[] { startDate, endDate, "-1", "-1", isOPSProject, RC.SelectedSiteLanguageId });
+            DataTable dtResults = DBContext.GetData("uspGetReportData", new object[] { startDate, endDate, ddlCountry.SelectedValue, "-1", isOPSProject, RC.SelectedSiteLanguageId });
 
             if (dtResults.Rows.Count > 0)
             {
                 Response.ContentType = "application/pdf";
                 Response.AddHeader("Content-Disposition", string.Format("attachment;filename=Project-{0}-{1}.pdf", UserInfo.CountryName, DateTime.Now.ToString("yyyyMMddHHmmss")));
-                Response.BinaryWrite(WriteDataEntryPDF.GenerateSummaryPDF(dtResults).ToArray());
+                Response.BinaryWrite(WriteDataEntryPDF.GenerateSummaryPDF(dtResults, startDate, endDate).ToArray());
             }
+            else
+            {
+                lblMessage.Text = "Error: No data to report!";
+            }
+        }
+
+        protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string startDate = !string.IsNullOrEmpty(txtFromDate.Text) ? txtFromDate.Text : null;
+            string endDate = !string.IsNullOrEmpty(txtToDate.Text) ? txtToDate.Text : null;
+            string countryID = ddlCountry.SelectedValue;
+            //string clusterID = ddlClusters.SelectedValue;
+            string isOPSProject = rbIsOPSProject.SelectedValue;
+
+            LoadData(startDate, endDate, countryID, "-1", isOPSProject);
         }
     }
 }
