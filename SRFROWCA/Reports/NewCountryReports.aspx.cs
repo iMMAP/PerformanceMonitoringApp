@@ -12,6 +12,7 @@ namespace SRFROWCA.Reports
 {
     public partial class NewCountryReports : BasePage
     {
+        public string countryName = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
@@ -28,6 +29,7 @@ namespace SRFROWCA.Reports
                         if (location != null)
                         {
                             lblCountryName.Text = location.LocationName + " 2014";
+                            countryName = location.LocationName;
                         }
                     }
                 }
@@ -156,6 +158,24 @@ namespace SRFROWCA.Reports
                     LoadReportTypes();
                 }
             }
+        }
+        public string GetReportURL(string reportUrl, string reportTitle)
+        {
+            string returnURL = string.Empty;
+            if (reportTitle == "3W Report")
+            {
+                returnURL = "downloadreport.aspx?type=3W&cid=" + Request.QueryString["cid"].ToString() + "&cName=" + countryName;
+            }
+            else if (reportTitle == "4W Report")
+            {
+                returnURL = "downloadreport.aspx?type=4W&cid=" + Request.QueryString["cid"].ToString() + "&cName=" + countryName;
+            }
+            else
+            {
+                returnURL = reportUrl;
+            }
+
+            return returnURL;
         }
     }
 }
