@@ -47,10 +47,11 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField>
                                             <ItemTemplate>
-                                                <a href="LoadCountryReport.aspx?id=<%#Eval("CountryReportId") %>&cid=<%=Request.QueryString["cid"]%>" target="_blank">
+                                                <a href="<%#GetReportURL(Eval("ReportURL").ToString(),Eval("ReportTitle").ToString())%>" target="_blank">
                                                     <%#Eval("ReportTitle")%>
                                                 </a>
                                             </ItemTemplate>
+                                            <ItemStyle Width="650" />
                                         </asp:TemplateField>
                                         <asp:TemplateField>
                                             <ItemTemplate>
