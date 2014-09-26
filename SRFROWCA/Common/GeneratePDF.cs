@@ -508,8 +508,8 @@ namespace SRFROWCA.Common
                 else
                     endDate = Convert.ToDateTime(endDate).ToString("MMMM dd, yyyy");
 
-                if (startDate.Equals("N/A") && endDate.Equals("N/A"))
-                    header = "Overall Progress Reports - " + DateTime.Now.ToString("MMMM dd, yyyy");
+                if (startDate.Equals("N/A"))
+                    header = "Overall Progress Reports - " + endDate;
                 else
                     header = "Overall Progress Reports - " + startDate+" to "+endDate;
 
