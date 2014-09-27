@@ -7,12 +7,14 @@
 
             $("#<%=txtFromDate.ClientID%>").datepicker({
                 numberOfMonths: 2,
+                dateFormat: "dd-mm-yy",
                 onSelect: function (selected) {
                     $("#<%=txtToDate.ClientID%>").datepicker("option", "minDate", selected)
                 }
             });
             $("#<%=txtToDate.ClientID%>").datepicker({
                 numberOfMonths: 2,
+                dateFormat: "dd-mm-yy",
                 onSelect: function (selected) {
                     $("#<%=txtFromDate.ClientID%>").datepicker("option", "maxDate", selected)
                 }

@@ -52,7 +52,7 @@
             }
     </script>
 </asp:Content>
-<asp:Content ID="mainContent" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="allDataContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="breadcrumbs" id="breadcrumbs">
         <script type="text/javascript">
             try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }

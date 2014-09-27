@@ -54,8 +54,8 @@ namespace SRFROWCA.Admin
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            string startDate = !string.IsNullOrEmpty(txtFromDate.Text)?txtFromDate.Text:null;
-            string endDate = !string.IsNullOrEmpty(txtToDate.Text)?txtToDate.Text:null;
+            string startDate = !string.IsNullOrEmpty(txtFromDate.Text) ? txtFromDate.Text.Split('-')[2] + '-' + txtFromDate.Text.Split('-')[1] + '-' + txtFromDate.Text.Split('-')[0] : null;
+            string endDate = !string.IsNullOrEmpty(txtToDate.Text) ? txtToDate.Text.Split('-')[2] + '-' + txtToDate.Text.Split('-')[1] + '-' + txtToDate.Text.Split('-')[0] : null;
             string countryID = ddlCountry.SelectedValue;
             //string clusterID = ddlClusters.SelectedValue;
             string isOPSProject = rbIsOPSProject.SelectedValue;
@@ -65,8 +65,8 @@ namespace SRFROWCA.Admin
 
         protected void btnPDFPrint_Click(object sender, EventArgs e)
         {
-            string startDate = !string.IsNullOrEmpty(txtFromDate.Text) ? txtFromDate.Text : null;
-            string endDate = !string.IsNullOrEmpty(txtToDate.Text) ? txtToDate.Text : null;
+            string startDate = !string.IsNullOrEmpty(txtFromDate.Text) ? txtFromDate.Text.Split('-')[2] + '-' + txtFromDate.Text.Split('-')[1] + '-' + txtFromDate.Text.Split('-')[0] : null;
+            string endDate = !string.IsNullOrEmpty(txtToDate.Text) ? txtToDate.Text.Split('-')[2] + '-' + txtToDate.Text.Split('-')[1] + '-' + txtToDate.Text.Split('-')[0] : null;
             string isOPSProject = rbIsOPSProject.SelectedValue;
 
             DataTable dtResults = DBContext.GetData("uspGetReportData", new object[] { startDate, endDate, ddlCountry.SelectedValue, "-1", isOPSProject, RC.SelectedSiteLanguageId });
@@ -85,8 +85,8 @@ namespace SRFROWCA.Admin
 
         protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string startDate = !string.IsNullOrEmpty(txtFromDate.Text) ? txtFromDate.Text : null;
-            string endDate = !string.IsNullOrEmpty(txtToDate.Text) ? txtToDate.Text : null;
+            string startDate = !string.IsNullOrEmpty(txtFromDate.Text) ? txtFromDate.Text.Split('-')[2] + '-' + txtFromDate.Text.Split('-')[1] + '-' + txtFromDate.Text.Split('-')[0] : null;
+            string endDate = !string.IsNullOrEmpty(txtToDate.Text) ? txtToDate.Text.Split('-')[2] + '-' + txtToDate.Text.Split('-')[1] + '-' + txtToDate.Text.Split('-')[0] : null;
             string countryID = ddlCountry.SelectedValue;
             //string clusterID = ddlClusters.SelectedValue;
             string isOPSProject = rbIsOPSProject.SelectedValue;
