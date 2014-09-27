@@ -160,7 +160,7 @@ namespace SRFROWCA.Reports
             }
         }
 
-        public string GetReportURL(string reportUrl, string reportTitle)
+        public string GetReportURL(string reportUrl, string reportTitle, string countryReportId, string reportTypeId)
         {
             string returnURL = string.Empty;
             if (reportTitle == "3W Report")
@@ -170,6 +170,10 @@ namespace SRFROWCA.Reports
             else if (reportTitle == "4W Report")
             {
                 returnURL = "downloadreport.aspx?type=4W&cid=" + Request.QueryString["cid"].ToString() + "&cName=" + countryName;           
+            }
+            else if (reportTypeId == "4" || reportTypeId == "5")
+            {
+                returnURL = "downloadreport.aspx?type=5&cid=" + countryReportId + "&cName=" + countryName;
             }
             else
             {
