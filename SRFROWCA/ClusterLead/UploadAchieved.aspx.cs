@@ -35,7 +35,7 @@ namespace SRFROWCA.ClusterLead
             {
                 localDownloadFirstItem.Visible = false;
                 ddlOrganizations.Visible = false;
-                DataTable dt = DBContext.GetData("GetOrganizations", new object[] { UserInfo.Organization });
+                DataTable dt = DBContext.GetData("GetOrganizations", new object[] { UserInfo.Organization , null});
                 if (dt.Rows.Count > 0)
                 {
                     lblOrganization.Visible = true;
@@ -171,7 +171,7 @@ namespace SRFROWCA.ClusterLead
             int? emgLocationId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
             //int? emgClsuterId = UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;            
             string orgIds = RC.GetSelectedValues(ddlOrganizations);
-            ddlProjects.DataSource = DBContext.GetData("GetProjectsOnClusterCountryAndOrganizations", new object[] { emgLocationId, emgClusterId, orgIds });
+            ddlProjects.DataSource = DBContext.GetData("GetProjectsOnClusterCountryAndOrganizations", new object[] { emgLocationId, emgClusterId, orgIds , null});
             ddlProjects.DataBind();
         }
 

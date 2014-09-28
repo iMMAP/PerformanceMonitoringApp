@@ -126,7 +126,7 @@ namespace SRFROWCA.Controls
         }
         private object GetOrganizations(int? orgId)
         {
-            return DBContext.GetData("GetOrganizations", new object[] { orgId });
+            return DBContext.GetData("GetOrganizations", new object[] { orgId , null});
         }
 
         // Populate office drop down

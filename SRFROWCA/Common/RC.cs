@@ -299,7 +299,7 @@ namespace SRFROWCA.Common
 
         internal static DataTable GetOrganizations(int? orgId)
         {
-            return DBContext.GetData("GetOrganizations", new object[] { orgId });
+            return DBContext.GetData("GetOrganizations", new object[] { orgId , null});
         }
 
         internal static DataTable GetProjectsOrganizations(int? locId, int? clusterId)
