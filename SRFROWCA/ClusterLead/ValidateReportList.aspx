@@ -77,7 +77,7 @@
                                                                         <tr>
                                                                             <td></td>
                                                                             <td>
-                                                                                <asp:CheckBox ID="cbCountryIndicators" runat="server" Text="Country Indicators" AutoPostBack="true" OnCheckedChanged="cbCountryIndicators_CheckedChanged" /></td>
+                                                                                <asp:CheckBox Visible="false" ID="cbCountryIndicators" runat="server" Text="Country Indicators" AutoPostBack="true" OnCheckedChanged="cbCountryIndicators_CheckedChanged" /></td>
                                                                         </tr>
                                                                     </table>
                                                                 </div>
