@@ -115,7 +115,7 @@ namespace SRFROWCA.Anonymous
 
         protected void ddlProjects_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadDataOnMultipleCheckBoxControl();
+            LoadDataOnMultipleCheckBoxControl(); 
             PopulateOrganizations();
         }  
 
@@ -178,8 +178,8 @@ namespace SRFROWCA.Anonymous
             ddlProjects.DataSource = DBContext.GetData("GetProjectsOnClusterCountryAndOrg", new object[] { emgLocationId, emgClsuterId, orgId, orgIDs });
             ddlProjects.DataBind();
 
-            if (!string.IsNullOrEmpty(orgIDs))
-                SelectAll(ddlProjects);
+            //if (!string.IsNullOrEmpty(orgIDs))
+            //    SelectAll(ddlProjects);
         }
 
         private void PopulateActivities()
