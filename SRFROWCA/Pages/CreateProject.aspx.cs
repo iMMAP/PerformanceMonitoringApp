@@ -79,16 +79,23 @@ namespace SRFROWCA.Pages
 
         private DataTable GetProjects()
         {
-            int isOPSProjects = 0;
-            return DBContext.GetData("GetOrgProjectsOnLocation", new object[] { UserInfo.EmergencyCountry, UserInfo.Organization, isOPSProjects });
+            bool? isOPSProject = null;
+            return DBContext.GetData("GetOrgProjectsOnLocation", new object[] { UserInfo.EmergencyCountry, UserInfo.Organization, isOPSProject });
         }
 
         private void ToggleButtons()
         {
             if (ProjectId > 0)
             {
-                btnManageActivities.Enabled = true;
-                btnDeleteProject.Enabled = true;
+                if (Convert.ToBoolean(ViewState["IsOpsProject"].ToString()))
+                {
+                    ToggleControlsForOPS();
+                }
+                else
+                {
+                    btnManageActivities.Enabled = true;
+                    btnDeleteProject.Enabled = true;
+                }
             }
             else
             {
@@ -117,7 +124,7 @@ namespace SRFROWCA.Pages
                 txtDonor1Contributed.Text = dtProject.Rows[0]["Contribution1Amount"].ToString();
                 ddlDonor1Currency.SelectedValue = dtProject.Rows[0]["Contribution1CurrencyId"].ToString();
                 ddlFundingStatus.SelectedValue = dtProject.Rows[0]["FundingStatus"].ToString();
-
+                ddlProjectSatus.SelectedValue = dtProject.Rows[0]["ProjectStatus"].ToString();
                 txtImplementingPartners.Text = dtProject.Rows[0]["ProjectImplementingpartner"].ToString();
                 txtRequestedAmount.Text = dtProject.Rows[0]["RequestedAmount"].ToString();
                 ddlRequestedAmountCurrency.SelectedValue = dtProject.Rows[0]["RequestedAmountCurrencyId"].ToString();
@@ -127,7 +134,8 @@ namespace SRFROWCA.Pages
                 txtContactName.Text = dtProject.Rows[0]["ProjectContactName"].ToString();
                 txtContactPhone.Text = dtProject.Rows[0]["ProjectContactPhone"].ToString();
                 txtContactEmail.Text = dtProject.Rows[0]["ProjectContactEmail"].ToString();
-
+                ViewState["IsOpsProject"] = dtProject.Rows[0]["IsOpsProject"].ToString();
+               
                 DateTime dtFrom = DateTime.Now;
                 if (dtProject.Rows[0]["ProjectStartDate"] != DBNull.Value)
                 {
@@ -149,7 +157,55 @@ namespace SRFROWCA.Pages
                 {
                     txtToDate.Text = "";
                 }
+                
+                    ToggleControlsForOPS();
+                
+            }
+        }
 
+        private void ToggleControlsForOPS()
+        {
+            if (Convert.ToBoolean(ViewState["IsOpsProject"].ToString()))
+            {
+                btnDeleteProject.Enabled = false;
+                txtProjectTitle.Enabled = false;
+                txtProjectObjective.Enabled = false;
+                ddlCluster.Enabled = false;
+                txtFromDate.Enabled = false;
+                txtToDate.Enabled = false;
+                txtRequestedAmount.Enabled = false;
+                ddlDonor1Currency.Enabled = false;
+                ddlDonor2Currency.Enabled = false;
+                txtDonor2Name.Enabled = false;
+                txtDonorName.Enabled = false;
+                txtDonor1Contributed.Enabled = false;
+                txtDonor2Contributed.Enabled = false;
+                txtContactName.Enabled = false;
+                txtContactPhone.Enabled = false;
+                txtContactEmail.Enabled = false;
+                ddlRequestedAmountCurrency.Enabled = false;
+                ddlFundingStatus.Enabled = false;
+            }
+            else
+            {
+                btnDeleteProject.Enabled = true;
+                txtProjectTitle.Enabled = true;
+                txtProjectObjective.Enabled = true;
+                ddlCluster.Enabled = true;
+                txtFromDate.Enabled = true;
+                txtToDate.Enabled = true;
+                txtRequestedAmount.Enabled = true;
+                ddlDonor1Currency.Enabled = true;
+                ddlDonor2Currency.Enabled = true;
+                txtDonor2Name.Enabled = true;
+                txtDonorName.Enabled = true;
+                txtDonor1Contributed.Enabled = true;
+                txtDonor2Contributed.Enabled = true;
+                txtContactName.Enabled = true;
+                txtContactPhone.Enabled = true;
+                txtContactEmail.Enabled = true;
+                ddlRequestedAmountCurrency.Enabled = true;
+                ddlFundingStatus.Enabled = true;
             }
         }
 
@@ -313,9 +369,17 @@ namespace SRFROWCA.Pages
             {
                 if (ProjectId > 0)
                 {
-                    DBContext.Update("UpdateProjectDetail", new object[] { ProjectId, clusterId, locationId, orgId, userId, title, objective, projectPartners, startDate, endDate, 
+                    if (Convert.ToBoolean(ViewState["IsOpsProject"].ToString()))
+                    {
+                        DBContext.Update("UpdateOpsProjectDetail", new object[] { ProjectId, projectPartners, ddlProjectSatus.SelectedValue, userId, DBNull.Value });
+                    }
+                    else 
+                    {
+                        
+                        DBContext.Update("UpdateProjectDetail", new object[] { ProjectId, clusterId, locationId, orgId, userId, title, objective, projectPartners, startDate, endDate, 
                                                                               requestedAmount, requestedCurrencyId, donorName, contribution1, donor1CurrencyId, donorName2, 
-                                                                              contribution2, donor2CurrencyId, fundingStatus, contactName, contactPhone, contactEmail, DBNull.Value });
+                                                                              contribution2, donor2CurrencyId, fundingStatus, contactName, contactPhone, contactEmail,ddlProjectSatus.SelectedValue, DBNull.Value });
+                    }
                 }
                 else
                 {
