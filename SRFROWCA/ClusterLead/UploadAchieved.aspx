@@ -96,6 +96,15 @@
                             </li>
                             <li>
                                 <i class="icon-hand-right blue"></i>
+
+                                <label>
+                                    <input id="chkProjectIndicators" runat="server" name="form-field-checkbox" type="checkbox" class="ace" />
+                                    <span class="lbl">Project Indicators</span>
+                                </label>
+
+                            </li>
+                            <li>
+                                <i class="icon-hand-right blue"></i>
                                 <asp:Localize ID="localDownloadClusterTargets" runat="server" Text="Cluster Targets of each indicator"></asp:Localize>
                             </li>
                             <%--<li>

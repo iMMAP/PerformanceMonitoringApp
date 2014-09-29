@@ -157,6 +157,15 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkAllIndicators;
         
         /// <summary>
+        /// chkProjectIndicators control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkProjectIndicators;
+        
+        /// <summary>
         /// localDownloadClusterTargets control.
         /// </summary>
         /// <remarks>

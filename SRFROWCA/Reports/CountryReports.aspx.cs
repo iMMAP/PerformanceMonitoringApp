@@ -175,6 +175,10 @@ namespace SRFROWCA.Reports
             {
                 returnURL = "downloadreport.aspx?type=5&cid=" + countryReportId + "&cName=" + countryName;
             }
+            else if (reportTypeId == "3")
+            {
+                returnURL = reportUrl;
+            }
             else
             {
                 returnURL = reportUrl;

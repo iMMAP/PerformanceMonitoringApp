@@ -390,6 +390,7 @@
     <Content Include="ClusterLead\UploadAchieved.aspx" />
     <Content Include="ClusterLead\ValidateIndicators.aspx" />
     <Content Include="ClusterLead\ValidateReportList.aspx" />
+    <Content Include="Controls\AddContryReportControl.ascx" />
     <Content Include="Controls\NewIndicatorsControl.ascx" />
     <Content Include="Controls\ReportedIndicatorComments.ascx" />
     <Content Include="DataFeeds\AdminDataFeeds.aspx" />
@@ -438,6 +439,7 @@
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="PivotTables\OprOrgsClsCnt.aspx" />
+    <Content Include="Reports\AddCountryReports.aspx" />
     <Content Include="Reports\DownloadReport.aspx" />
     <Content Include="Reports\LoadCountryMaps.aspx" />
     <Content Include="Reports\CountryMaps.aspx" />
@@ -453,6 +455,7 @@
     <Content Include="Reports\ProjectsPerOrganization.aspx" />
     <Content Include="Reports\TopIndicaotrsRegional.aspx" />
     <Content Include="Reports\TopIndicatorsGeneral.aspx" />
+    <Content Include="RequestOrganization.aspx" />
     <Content Include="UploadSRPLogFrame.aspx" />
     <Content Include="packages.config" />
     <Content Include="Pages\Web.config" />
@@ -514,7 +517,6 @@
     <Content Include="ORSReports\3W\ORS3W-Mauritania.pdf" />
     <Content Include="ORSReports\3W\ORS3W-Niger.pdf" />
     <Content Include="ORSReports\3W\ORS3W-Senegal.pdf" />
-    <Content Include="ORSMaps\BFA_A4_P_140808_V1_ORS_3W_June.pdf" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -875,6 +877,13 @@
     <Compile Include="Common\ReportServerCredentials.cs" />
     <Compile Include="Common\UserInfo.cs" />
     <Compile Include="Common\Utils.cs" />
+    <Compile Include="Controls\AddContryReportControl.ascx.cs">
+      <DependentUpon>AddContryReportControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\AddContryReportControl.ascx.designer.cs">
+      <DependentUpon>AddContryReportControl.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\NewIndicatorsControl.ascx.cs">
       <DependentUpon>NewIndicatorsControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1274,6 +1283,13 @@
     <Compile Include="PivotTables\OprOrgsClsCnt.aspx.designer.cs">
       <DependentUpon>OprOrgsClsCnt.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\AddCountryReports.aspx.cs">
+      <DependentUpon>AddCountryReports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\AddCountryReports.aspx.designer.cs">
+      <DependentUpon>AddCountryReports.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Reports\DownloadReport.aspx.cs">
       <DependentUpon>DownloadReport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1379,6 +1395,13 @@
     <Compile Include="Reports\TopIndicatorsGeneral.aspx.designer.cs">
       <DependentUpon>TopIndicatorsGeneral.aspx</DependentUpon>
     </Compile>
+    <Compile Include="RequestOrganization.aspx.cs">
+      <DependentUpon>RequestOrganization.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RequestOrganization.aspx.designer.cs">
+      <DependentUpon>RequestOrganization.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SessionHeartbeat.ashx.cs">
       <DependentUpon>SessionHeartbeat.ashx</DependentUpon>
     </Compile>
@@ -1410,6 +1433,7 @@
     <Folder Include="Configurations\" />
     <Folder Include="GeneratedChartFiles\" />
     <Folder Include="OPS\OPSProjects\" />
+    <Folder Include="ORSMaps\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Web.config" />
