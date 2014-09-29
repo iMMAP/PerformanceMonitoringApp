@@ -390,6 +390,7 @@
     <Content Include="ClusterLead\UploadAchieved.aspx" />
     <Content Include="ClusterLead\ValidateIndicators.aspx" />
     <Content Include="ClusterLead\ValidateReportList.aspx" />
+    <Content Include="Controls\AddContryReportControl.ascx" />
     <Content Include="Controls\NewIndicatorsControl.ascx" />
     <Content Include="Controls\ReportedIndicatorComments.ascx" />
     <Content Include="DataFeeds\AdminDataFeeds.aspx" />
@@ -438,6 +439,7 @@
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="PivotTables\OprOrgsClsCnt.aspx" />
+    <Content Include="Reports\AddCountryReports.aspx" />
     <Content Include="Reports\DownloadReport.aspx" />
     <Content Include="Reports\LoadCountryMaps.aspx" />
     <Content Include="Reports\CountryMaps.aspx" />
@@ -875,6 +877,13 @@
     <Compile Include="Common\ReportServerCredentials.cs" />
     <Compile Include="Common\UserInfo.cs" />
     <Compile Include="Common\Utils.cs" />
+    <Compile Include="Controls\AddContryReportControl.ascx.cs">
+      <DependentUpon>AddContryReportControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\AddContryReportControl.ascx.designer.cs">
+      <DependentUpon>AddContryReportControl.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\NewIndicatorsControl.ascx.cs">
       <DependentUpon>NewIndicatorsControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1273,6 +1282,13 @@
     </Compile>
     <Compile Include="PivotTables\OprOrgsClsCnt.aspx.designer.cs">
       <DependentUpon>OprOrgsClsCnt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\AddCountryReports.aspx.cs">
+      <DependentUpon>AddCountryReports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\AddCountryReports.aspx.designer.cs">
+      <DependentUpon>AddCountryReports.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\DownloadReport.aspx.cs">
       <DependentUpon>DownloadReport.aspx</DependentUpon>
