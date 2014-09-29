@@ -6,6 +6,7 @@ using System.Web.UI.WebControls;
 using BusinessLogic;
 using SRFROWCA.Common;
 using System.Text.RegularExpressions;
+using Saplin.Controls;
 namespace SRFROWCA.Anonymous
 {
     public partial class AllData : BasePage
@@ -176,6 +177,9 @@ namespace SRFROWCA.Anonymous
 
             ddlProjects.DataSource = DBContext.GetData("GetProjectsOnClusterCountryAndOrg", new object[] { emgLocationId, emgClsuterId, orgId, orgIDs });
             ddlProjects.DataBind();
+
+            if (!string.IsNullOrEmpty(orgIDs))
+                SelectAll(ddlProjects);
         }
 
         private void PopulateActivities()
@@ -324,6 +328,8 @@ namespace SRFROWCA.Anonymous
                 lblOrganization.Text = ddlOrganizations.SelectedItem.Text;
                 lblOrganization.Visible = true;
             }
+            else if (!string.IsNullOrEmpty(projIDs))
+                SelectAll(ddlOrganizations);
         }
 
         private DataTable GetOrganizations(int? orgId, string projIDs)
@@ -662,6 +668,15 @@ namespace SRFROWCA.Anonymous
             set
             {
                 ViewState["GridPageIndex"] = value.ToString();
+            }
+        }
+
+        private void SelectAll(DropDownCheckBoxes ddlControl)
+        {
+            foreach (ListItem item in (ddlControl as ListControl).Items)
+            {
+                if (!item.Selected)
+                    item.Selected = true;
             }
         }
 
