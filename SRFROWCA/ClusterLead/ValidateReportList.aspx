@@ -162,7 +162,7 @@
                                         <asp:BoundField DataField="LastUpdateDate" HeaderText="Last Updated" SortExpression="LastUpdateDate" />
                                         <asp:TemplateField HeaderText="View Details" meta:resourcekey="TemplateFieldResource1">
                                             <ItemTemplate>
-                                                <asp:ImageButton ID="imgbtnView" runat="server" ImageUrl="~/assets/orsimages/view.png"
+                                                <asp:ImageButton ID="imgbtnView" runat="server" ImageUrl="../assets/orsimages/view.png"
                                                     CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>' CommandName="ViewReport" meta:resourcekey="imgbtnViewResource1" />
                                             </ItemTemplate>
                                         </asp:TemplateField>

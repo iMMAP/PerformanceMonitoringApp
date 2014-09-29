@@ -52,7 +52,7 @@ namespace SRFROWCA.ClusterLead
 
         private void LoadIndicators(int reporId)
         {
-            gvIndicators.DataSource = DBContext.GetData("GetReportIndicatorsToValidate", new object[] { reporId, RC.SelectedSiteLanguageId });
+            gvIndicators.DataSource = DBContext.GetData("GetReportIndicatorsToValidate", new object[] { reporId, RC.SelectedSiteLanguageId, null });
             gvIndicators.DataBind();
         }
 
