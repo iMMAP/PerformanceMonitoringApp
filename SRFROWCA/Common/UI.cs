@@ -74,7 +74,7 @@ namespace SRFROWCA.Common
         {
             ctl.DataValueField = "OrganizationId";
             ctl.DataTextField = "OrganizationName";            
-            ctl.DataSource = DBContext.GetData("GetOrganizations", new object[] { orgId });
+            ctl.DataSource = DBContext.GetData("GetOrganizations", new object[] { orgId , null});
             ctl.DataBind();
         }
 

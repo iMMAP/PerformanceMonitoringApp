@@ -52,7 +52,7 @@
             }
     </script>
 </asp:Content>
-<asp:Content ID="mainContent" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="allDataContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="breadcrumbs" id="breadcrumbs">
         <script type="text/javascript">
             try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
@@ -201,7 +201,7 @@
                                                                                     </td>
                                                                                     <td>
                                                                                         <cc:DropDownCheckBoxes ID="ddlOrganizations" runat="server" CssClass="ddlWidth" AutoPostBack="true"
-                                                                                            OnSelectedIndexChanged="ddl_SelectedIndexChanged" AddJQueryReference="True" meta:resourcekey="checkBoxes2Resource1"
+                                                                                            OnSelectedIndexChanged="ddlOrganizations_SelectedIndexChanged" AddJQueryReference="True" meta:resourcekey="checkBoxes2Resource1"
                                                                                             UseButtons="False" UseSelectAllNode="True">
                                                                                             <Style SelectBoxWidth="" DropDownBoxBoxWidth="250%" DropDownBoxBoxHeight="300px"></Style>
                                                                                             <Texts SelectBoxCaption="Select Organization" />
@@ -215,7 +215,7 @@
                                                                                     </td>
                                                                                     <td>
                                                                                         <cc:DropDownCheckBoxes ID="ddlProjects" runat="server" CssClass="ddlWidth" AutoPostBack="true"
-                                                                                            OnSelectedIndexChanged="ddl_SelectedIndexChanged" AddJQueryReference="True" meta:resourcekey="checkBoxes2Resource1"
+                                                                                            OnSelectedIndexChanged="ddlProjects_SelectedIndexChanged" AddJQueryReference="True" meta:resourcekey="checkBoxes2Resource1"
                                                                                             UseButtons="False" UseSelectAllNode="True">
                                                                                             <Style SelectBoxWidth="" DropDownBoxBoxWidth="100%" DropDownBoxBoxHeight="400%"></Style>
                                                                                             <Texts SelectBoxCaption="Select Project" />

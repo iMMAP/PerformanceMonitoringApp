@@ -214,7 +214,7 @@ namespace SRFROWCA.Admin
         }
         private object GetOrganizations(int? orgId)
         {
-            return DBContext.GetData("GetOrganizations", new object[] { orgId });
+            return DBContext.GetData("GetOrganizations", new object[] { orgId , null});
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)

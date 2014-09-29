@@ -95,6 +95,18 @@ namespace SRFROWCA.Anonymous
             LoadDataOnMultipleCheckBoxControl();
         }
 
+        protected void ddlOrganizations_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadDataOnMultipleCheckBoxControl();
+            PopulateProjects();
+        }
+
+        protected void ddlProjects_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadDataOnMultipleCheckBoxControl();
+            PopulateOrganizations();
+        }
+
         protected void ddl_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadDataOnMultipleCheckBoxControl();
@@ -155,7 +167,13 @@ namespace SRFROWCA.Anonymous
             int? emgLocationId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
             int? emgClsuterId = UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
             int? orgId = UserInfo.Organization > 0 ? UserInfo.Organization : (int?)null;
-            ddlProjects.DataSource = DBContext.GetData("GetProjectsOnClusterCountryAndOrg", new object[] { emgLocationId, emgClsuterId, orgId });
+
+            string orgIDs = RC.GetSelectedValues(ddlOrganizations);
+
+            if (!string.IsNullOrEmpty(orgIDs))
+                orgId = null;
+
+            ddlProjects.DataSource = DBContext.GetData("GetProjectsOnClusterCountryAndOrg", new object[] { emgLocationId, emgClsuterId, orgId, orgIDs });
             ddlProjects.DataBind();
 
             //using (ORSEntities db = new ORSEntities())
@@ -309,13 +327,14 @@ namespace SRFROWCA.Anonymous
             ddlOrganizations.DataValueField = "OrganizationId";
             ddlOrganizations.DataTextField = "OrganizationAcronym";
             int? orgId = null;
+            string projIDs = null;
 
             if (UserInfo.Organization > 0)
-            {
                 orgId = UserInfo.Organization;
-            }
 
-            ddlOrganizations.DataSource = GetOrganizations(orgId);
+            projIDs = RC.GetSelectedValues(ddlProjects);
+
+            ddlOrganizations.DataSource = GetOrganizations(orgId, projIDs);
             ddlOrganizations.DataBind();
 
             if (UserInfo.Organization > 0)
@@ -326,9 +345,10 @@ namespace SRFROWCA.Anonymous
                 lblOrganization.Visible = true;
             }
         }
-        private DataTable GetOrganizations(int? orgId)
+
+        private DataTable GetOrganizations(int? orgId, string projIDs)
         {
-            return DBContext.GetData("GetOrganizations", new object[] { orgId });
+            return DBContext.GetData("GetOrganizations", new object[] { orgId, projIDs });
         }
 
         private void RemoveColumnsFromDataTable(DataTable dt)

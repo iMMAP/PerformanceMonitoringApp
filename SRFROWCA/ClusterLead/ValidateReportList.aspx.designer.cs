@@ -139,6 +139,15 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.DropDownList ddlOrganizations;
         
         /// <summary>
+        /// rbIsOPSProject control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rbIsOPSProject;
+        
+        /// <summary>
         /// localReportsList control.
         /// </summary>
         /// <remarks>

@@ -133,10 +133,12 @@ namespace SRFROWCA.ClusterLead
 
             id = RC.GetSelectedIntVal(ddlOrganizations);
             int? orgId = id == 0 ? (int?)null : id;
-            
+
             bool srpInd = cbCountryIndicators.Checked;
 
-            gvReports.DataSource = DBContext.GetData("GetCountryReports", new object[] { emgLocationId, clusterId, projectID, monthId, orgId, srpInd });
+            bool? isOPS = rbIsOPSProject.SelectedValue.Equals("-1") ? (bool?)null : Convert.ToBoolean(rbIsOPSProject.SelectedValue);
+
+            gvReports.DataSource = DBContext.GetData("GetCountryReports", new object[] { emgLocationId, clusterId, projectID, monthId, orgId, srpInd, isOPS });
             gvReports.DataBind();
         }
 
@@ -173,7 +175,12 @@ namespace SRFROWCA.ClusterLead
             {
                 Session["ClusterLeadValidateReportCountryInd"] = null;
             }
-            
+
+            LoadReports();
+        }
+
+        protected void rbIsOPSProject_SelectedIndexChanged(object sender, EventArgs e)
+        {
             LoadReports();
         }
     }

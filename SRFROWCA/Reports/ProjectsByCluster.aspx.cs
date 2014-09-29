@@ -50,7 +50,7 @@ namespace SRFROWCA.Reports
         }
         private object GetOrganizations(int? orgId)
         {
-            return DBContext.GetData("GetOrganizations", new object[] { orgId });
+            return DBContext.GetData("GetOrganizations", new object[] { orgId , null});
         }
 
         private void LoadClusters()

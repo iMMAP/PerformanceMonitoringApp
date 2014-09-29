@@ -49,7 +49,16 @@ namespace SRFROWCA.ClusterLead
 
         private void LoadIndicators(int reporId)
         {
-            gvIndicators.DataSource = DBContext.GetData("GetReportIndicatorsToValidate", new object[] { reporId, RC.SelectedSiteLanguageId });
+            int? locTypeId = null;
+
+            if (UserInfo.EmergencyCountry.Equals(6) && !IsPostBack)
+                rbCountry.SelectedValue = "2";
+
+            if (rbCountry.SelectedValue.Equals("2"))
+                locTypeId = Convert.ToInt32(rbCountry.SelectedValue);
+                //countryId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
+
+            gvIndicators.DataSource = DBContext.GetData("GetReportIndicatorsToValidate", new object[] { reporId, RC.SelectedSiteLanguageId, locTypeId });
             gvIndicators.DataBind();
         }
 
@@ -194,6 +203,14 @@ namespace SRFROWCA.ClusterLead
             {
                 ViewState["ActivityDataId"] = value;
             }
+        }
+
+        protected void rbCountry_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int reportId = 0;
+            int.TryParse(Request.QueryString["rid"].ToString(), out reportId);
+
+            LoadIndicators(reportId);
         }
 
         //protected void btnReject_Click(object sender, EventArgs e)

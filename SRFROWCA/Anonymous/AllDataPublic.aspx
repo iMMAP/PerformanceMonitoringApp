@@ -181,7 +181,7 @@
                                                                                     </td>
                                                                                     <td>
                                                                                         <cc:DropDownCheckBoxes ID="ddlOrganizations" runat="server" CssClass="ddlWidth" AutoPostBack="true"
-                                                                                            OnSelectedIndexChanged="ddl_SelectedIndexChanged" AddJQueryReference="True" meta:resourcekey="checkBoxes2Resource1"
+                                                                                            OnSelectedIndexChanged="ddlOrganizations_SelectedIndexChanged" AddJQueryReference="True" meta:resourcekey="checkBoxes2Resource1"
                                                                                             UseButtons="False" UseSelectAllNode="True">
                                                                                             <Style SelectBoxWidth="" DropDownBoxBoxWidth="250%" DropDownBoxBoxHeight="300px"></Style>
                                                                                             <Texts SelectBoxCaption="Select Organization" />
@@ -195,7 +195,7 @@
                                                                                     </td>
                                                                                     <td>
                                                                                         <cc:DropDownCheckBoxes ID="ddlProjects" runat="server" CssClass="ddlWidth" AutoPostBack="true"
-                                                                                            OnSelectedIndexChanged="ddl_SelectedIndexChanged" AddJQueryReference="True" meta:resourcekey="checkBoxes2Resource1"
+                                                                                            OnSelectedIndexChanged="ddlProjects_SelectedIndexChanged" AddJQueryReference="True" meta:resourcekey="checkBoxes2Resource1"
                                                                                             UseButtons="False" UseSelectAllNode="True">
                                                                                             <Style SelectBoxWidth="" DropDownBoxBoxWidth="100%" DropDownBoxBoxHeight="400%"></Style>
                                                                                             <Texts SelectBoxCaption="Select Project" />

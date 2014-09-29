@@ -9,14 +9,22 @@
     <!-- ace styles -->
 
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="vIndicatorContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="breadcrumbs" id="breadcrumbs">
         <script type="text/javascript">
 
+            function CheckAll(Checkbox) {
+                var GridVwHeaderChckbox = document.getElementById("<%=gvIndicators.ClientID %>");
+
+                for (i = 1; i < GridVwHeaderChckbox.rows.length; i++) {
+                    GridVwHeaderChckbox.rows[i].cells[3].getElementsByTagName("INPUT")[0].checked = Checkbox.checked;
+                }
+            }
+
             function clearComments() {
                 var txtCmtArea = document.getElementById("<%=txtComments.ClientID %>");
-                   txtCmtArea.value = '';
-               }
+                txtCmtArea.value = '';
+            }
 
             function alertComment() {
                 var txtCmtArea = document.getElementById("<%=txtComments.ClientID %>");
@@ -24,12 +32,12 @@
                 txtCmtArea.value = '';
 
                 var btnSaveCmt = document.getElementById("<%=btnSaveComments.ClientID %>");
-                  btnSaveCmt.value = "Save";
+                btnSaveCmt.value = "Save";
 
-                  var hiddenField = document.getElementById("MainContent_ucIndComments_hdnUpdate");
-                  hiddenField.value = "-1";
-              }
-              try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+                var hiddenField = document.getElementById("MainContent_ucIndComments_hdnUpdate");
+                hiddenField.value = "-1";
+            }
+            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
         </script>
         <ul class="breadcrumb">
             <li><i class="icon-home home-icon"></i><a href="#">Home</a> </li>
@@ -58,60 +66,81 @@
                                     <div class="widget-main">
                                         <div class="form-group">
                                             <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="col-sm-12">
 
-                                                        <label class="col-sm-1 control-label no-padding-right" for="form-input-readonly">
-                                                            Project:
+                                                <table class="width-90">
+                                                    <tr>
+                                                        <td>
+
+                                                            <label class="control-label no-padding-right" style="padding-left:10px;" for="form-input-readonly">
+                                                                Project:
                                                        
-                                                        </label>
-                                                        <div class="col-sm-11">
+                                                            </label>
+                                                        </td>
+
+                                                        <td>
                                                             <asp:Label ID="lblProjectTitle" runat="server" Text=""></asp:Label>
-                                                            <%--<input readonly="" type="text" class="col-xs-10 col-sm-11" id="form-input-readonly"
-                                                                value="This text field is readonly!" />--%>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <div class="col-sm-6">
-                                                        <label class="col-sm-2 control-label no-padding-right" for="form-input-readonly">
-                                                            Organization:
+
+                                                        </td>
+                                                         <td>
+                                                            <label class="control-label no-padding-right" for="form-input-readonly">
+                                                                Updated By:
                                                        
-                                                        </label>
-                                                        <div class="col-sm-10">
-                                                            <asp:Label ID="lblOrganization" runat="server" Text=""></asp:Label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <div class="col-sm-4">
-                                                        <label class="col-sm-3 control-label no-padding-right" for="form-input-readonly">
-                                                            Updated By:
-                                                       
-                                                        </label>
-                                                        <div class="col-sm-8">
+                                                            </label>
+                                                        </td>
+                                                        <td>
                                                             <asp:Label ID="lblUpdatedBy" runat="server" Text=""></asp:Label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <label class="col-sm-3 control-label no-padding-right" for="form-input-readonly">
-                                                            Updated On:
+                                                        </td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+
+
+                                                            <label class="control-label padding-left no-padding-right" style="padding-left:10px;" for="form-input-readonly">
+                                                                Organization:
                                                        
-                                                        </label>
-                                                        <div class="col-sm-8">
+                                                            </label>
+                                                        </td>
+
+                                                        <td>
+                                                            <asp:Label ID="lblOrganization" runat="server" Text=""></asp:Label>
+                                                        </td>
+                                                          <td>
+                                                            <label class="control-label no-padding-right" for="form-input-readonly">
+                                                                Updated On:
+                                                       
+                                                            </label>
+                                                        </td>
+                                                        <td>
                                                             <asp:Label ID="lblUpdatedOn" runat="server" Text=""></asp:Label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <label class="col-sm-3 control-label no-padding-right" for="form-input-readonly">
-                                                            Reporting Period:
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                    
+                                                    <tr>
+                                                        <td>
+                                                            <label class="control-label padding-left no-padding-right" style="padding-left:10px;" for="form-input-readonly">
+                                                                Reporting Period:
                                                        
-                                                        </label>
-                                                        <div class="col-sm-8">
+                                                            </label>
+                                                        </td>
+                                                        <td>
                                                             <asp:Label ID="lblReportingPeriod" runat="server" Text=""></asp:Label>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                        </td>
+                                                        <td></td><td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="padding-top:20px;padding-left:10px;" colspan="3">
+                                                             <asp:RadioButtonList  AutoPostBack="true" ID="rbCountry" runat="server" RepeatColumns="2" OnSelectedIndexChanged="rbCountry_SelectedIndexChanged">
+                                                                                    <asp:ListItem Text="All Indictaors" Value="0" Selected="True"> </asp:ListItem>
+                                                                                    <asp:ListItem Text="Country Indicators" Value="2" ></asp:ListItem>
+                                                                                </asp:RadioButtonList>
+                                                                 </td>
+                                                     
+                                                    </tr>
+                                                </table>
+
+
                                             </div>
                                         </div>
                                     </div>
@@ -154,7 +183,11 @@
                                                             <asp:BoundField DataField="ObjectiveId" HeaderText="Obj" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" />
                                                             <asp:BoundField DataField="HumanitarianPriorityId" HeaderText="Pr" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" />
                                                             <asp:BoundField DataField="IsSRP" HeaderText="Country" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" />
-                                                            <asp:TemplateField HeaderText="Select" ItemStyle-Width="40px">
+                                                            <asp:TemplateField HeaderText="Select" ItemStyle-Width="70px">
+                                                                <HeaderTemplate>
+
+                                                                    <asp:CheckBox ID="chkSelectAll" runat="server" onclick="CheckAll(this);" />
+                                                                </HeaderTemplate>
                                                                 <ItemTemplate>
                                                                     <asp:CheckBox ID="chkApproved" runat="server" Checked='<%# Eval("IsApproved") %>'
                                                                         CssClass="testcb" />
@@ -206,7 +239,7 @@
             <div style="width: 600px">
 
                 <div class="modal-content">
-                    <div class="modal-header" style="border-bottom-width:0px;">
+                    <div class="modal-header" style="border-bottom-width: 0px;">
                         <button runat="server" id="btnCancelComments" onserverclick="btnCancelComments_Click"
                             class="close" data-dismiss="modal">
                             &times;
@@ -218,18 +251,18 @@
                     </div>
                     <span class="btn btn-sm btn-info no-radius" style="margin-top: 5px; margin-left: 8px; line-height: 8px;" onclick="javascript:alertComment();">New Comment</span>
 
-                    <div class="modal-body overflow-visible" style="padding-top:5px;">
+                    <div class="modal-body overflow-visible" style="padding-top: 5px;">
                         <div class="row">
                             <uc1:ReportedIndicatorComments ID="ucIndComments" runat="server" />
                         </div>
                     </div>
-                  <br />    
-                     <div class="form-actions" style=" margin: 0 auto;width: 97%;">
+                    <br />
+                    <div class="form-actions" style="margin: 0 auto; width: 97%;">
                         <div class="input-group">
                             <input type="text" runat="server" id="txtComments" name="message" class="form-control" style="text-align: left;" placeholder="Type your comment here ...">
                             <span class="input-group-btn">
                                 <asp:Button ID="btnSaveComments" runat="server" Text="Save" OnClick="btnSaveComments_Click"
-                                     CssClass="btn btn-sm btn-info no-radius" />
+                                    CssClass="btn btn-sm btn-info no-radius" />
                             </span>
                         </div>
                         <asp:Button ID="btnCancel" Visible="false" runat="server" Text="Cancel" OnClick="btnCancelComments_Click"

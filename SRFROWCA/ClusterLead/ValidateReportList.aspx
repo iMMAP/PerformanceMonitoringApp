@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../assets/css/ors.css" />
     <!-- ace styles -->
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="vReportsContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="breadcrumbs" id="breadcrumbs">
         <script type="text/javascript">
             try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
@@ -47,7 +47,7 @@
                                                                 <div class="widget-main padding-6">
                                                                     <table class="width-100">
                                                                         <tr>
-                                                                            <td class="width-20">
+                                                                            <td class="width-30">
                                                                                 <asp:Localize ID="localProjectCode" runat="server" Text="Project Code:" meta:resourcekey="localProjectCodeResource1"></asp:Localize>
                                                                             </td>
                                                                             <td>
@@ -76,7 +76,8 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td></td>
-                                                                            <td><asp:CheckBox ID="cbCountryIndicators" runat="server" Text="Country Indicators" AutoPostBack="true" OnCheckedChanged="cbCountryIndicators_CheckedChanged" /></td>
+                                                                            <td>
+                                                                                <asp:CheckBox ID="cbCountryIndicators" runat="server" Text="Country Indicators" AutoPostBack="true" OnCheckedChanged="cbCountryIndicators_CheckedChanged" /></td>
                                                                         </tr>
                                                                     </table>
                                                                 </div>
@@ -106,6 +107,16 @@
                                                                                 <asp:DropDownList ID="ddlOrganizations" runat="server" CssClass="width-100"
                                                                                     AutoPostBack="True" OnSelectedIndexChanged="ddl_SelectedIndexChanged" meta:resourcekey="ddlOrganizationsResource1">
                                                                                 </asp:DropDownList>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>&nbsp;</td>
+                                                                            <td>
+                                                                                <asp:RadioButtonList AutoPostBack="true" ID="rbIsOPSProject" runat="server" RepeatColumns="3" OnSelectedIndexChanged="rbIsOPSProject_SelectedIndexChanged">
+                                                                                    <asp:ListItem Text="All" Value="-1"></asp:ListItem>
+                                                                                    <asp:ListItem Text="OPS" Value="true" Selected="True"></asp:ListItem>
+                                                                                    <asp:ListItem Text="ORS" Value="false"></asp:ListItem>
+                                                                                </asp:RadioButtonList>
                                                                             </td>
                                                                         </tr>
                                                                     </table>
@@ -147,8 +158,8 @@
                                         <asp:BoundField DataField="ProjectTitle" HeaderText="Project Title" SortExpression="ProjectTitle" meta:resourcekey="BoundFieldResource3" />
                                         <asp:BoundField DataField="OrganizationName" HeaderText="Organization" SortExpression="OrganizationName" meta:resourcekey="BoundFieldResource4" />
                                         <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" meta:resourcekey="BoundFieldResource5" />
-                                        <asp:BoundField DataField="CreatedDate" HeaderText="Date Created" SortExpression="CreatedDate"/>
-                                        <asp:BoundField DataField="LastUpdateDate" HeaderText="Last Updated" SortExpression="LastUpdateDate"/>
+                                        <asp:BoundField DataField="CreatedDate" HeaderText="Date Created" SortExpression="CreatedDate" />
+                                        <asp:BoundField DataField="LastUpdateDate" HeaderText="Last Updated" SortExpression="LastUpdateDate" />
                                         <asp:TemplateField HeaderText="View Details" meta:resourcekey="TemplateFieldResource1">
                                             <ItemTemplate>
                                                 <asp:ImageButton ID="imgbtnView" runat="server" ImageUrl="~/assets/orsimages/view.png"
