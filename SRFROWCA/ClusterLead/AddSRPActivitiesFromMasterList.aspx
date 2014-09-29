@@ -235,7 +235,7 @@
                                         SortExpression="Indicator" ItemStyle-Wrap="true" meta:resourcekey="BoundFieldResource6">
                                         <ItemStyle Wrap="True" CssClass="testind"></ItemStyle>
                                     </asp:BoundField>
-                                    <asp:TemplateField meta:resourcekey="TemplateFieldResource3">
+                                    <asp:TemplateField meta:resourcekey="TemplateFieldResource3" Visible="false">
                                         <ItemTemplate>
                                             <asp:LinkButton ID="lnkVieDetails" runat="server" Text="Edit" CommandName="EditIndicator"
                                                 CommandArgument='<%# Eval("ActivityDataId") %>' meta:resourcekey="lnkVieDetailsResource1" />
