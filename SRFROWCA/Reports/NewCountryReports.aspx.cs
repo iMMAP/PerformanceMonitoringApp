@@ -176,7 +176,14 @@ namespace SRFROWCA.Reports
             }
             else if (reportTypeId == "3")
             {
-                returnURL = reportUrl;
+                if (reportTitle == "Project Reporting Status per Cluster (grouped by Organization)")
+                {
+                    returnURL = "LoadCountryReport.aspx?id=" + countryReportId + "&cid=" + Request.QueryString["cid"].ToString();
+                }
+                else
+                {
+                    returnURL = reportUrl;
+                }
             }
             else
             {
