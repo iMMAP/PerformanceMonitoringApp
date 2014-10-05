@@ -390,6 +390,7 @@
     <Content Include="ClusterLead\UploadAchieved.aspx" />
     <Content Include="ClusterLead\ValidateIndicators.aspx" />
     <Content Include="ClusterLead\ValidateReportList.aspx" />
+    <Content Include="Configurations\Settings.xml" />
     <Content Include="Controls\AddContryReportControl.ascx" />
     <Content Include="Controls\NewIndicatorsControl.ascx" />
     <Content Include="Controls\ReportedIndicatorComments.ascx" />
@@ -1430,7 +1431,6 @@
   <ItemGroup>
     <Folder Include="Admin\Reports\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Configurations\" />
     <Folder Include="GeneratedChartFiles\" />
     <Folder Include="OPS\OPSProjects\" />
     <Folder Include="ORSMaps\" />
