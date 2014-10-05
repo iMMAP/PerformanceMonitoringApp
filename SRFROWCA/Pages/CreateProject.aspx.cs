@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Net.Mail;
@@ -169,8 +170,11 @@ namespace SRFROWCA.Pages
             {
                 btnDeleteProject.Enabled = false;
                 txtProjectTitle.Enabled = false;
+                txtProjectTitle.BackColor =  Color.LightGray;
                 txtProjectObjective.Enabled = false;
+                txtProjectObjective.BackColor = Color.LightGray;
                 ddlCluster.Enabled = false;
+                ddlCluster.BackColor = Color.LightGray;
                 txtFromDate.Enabled = false;
                 txtToDate.Enabled = false;
                 txtRequestedAmount.Enabled = false;
@@ -185,13 +189,17 @@ namespace SRFROWCA.Pages
                 txtContactEmail.Enabled = false;
                 ddlRequestedAmountCurrency.Enabled = false;
                 ddlFundingStatus.Enabled = false;
+                ddlFundingStatus.BackColor = Color.LightGray;
             }
             else
             {
                 btnDeleteProject.Enabled = true;
                 txtProjectTitle.Enabled = true;
+                txtProjectTitle.BackColor = Color.White;
                 txtProjectObjective.Enabled = true;
+                txtProjectObjective.BackColor = Color.White;
                 ddlCluster.Enabled = true;
+                ddlCluster.BackColor = Color.White;
                 txtFromDate.Enabled = true;
                 txtToDate.Enabled = true;
                 txtRequestedAmount.Enabled = true;
@@ -206,6 +214,7 @@ namespace SRFROWCA.Pages
                 txtContactEmail.Enabled = true;
                 ddlRequestedAmountCurrency.Enabled = true;
                 ddlFundingStatus.Enabled = true;
+                ddlFundingStatus.BackColor = Color.White;
             }
         }
 
@@ -213,6 +222,8 @@ namespace SRFROWCA.Pages
         {
             ClearProjectControls();
             ToggleButtons();
+            ViewState["IsOpsProject"] = false;
+            ToggleControlsForOPS();
         }
 
         private void ClearProjectControls()
