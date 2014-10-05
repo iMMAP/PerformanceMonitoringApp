@@ -124,7 +124,7 @@
                                  <tr>
                                     <td>
                                         <label>
-                                            <asp:Localize ID="Localize1" runat="server" Text="Project Status:" meta:resourcekey="localFundingStatusResource1"></asp:Localize></label>
+                                            <asp:Localize ID="Localize1" runat="server" Text="Project Status:"></asp:Localize></label>
                                     </td>
                                     <td colspan="5">
                                         <asp:DropDownList ID="ddlProjectSatus" runat="server" Width="150px">
@@ -133,8 +133,7 @@
                                             <asp:ListItem Text="Ongoing" Value="2"></asp:ListItem>
                                             <asp:ListItem Text="Completed" Value="3"></asp:ListItem>
                                         </asp:DropDownList>
-                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Required"
-                                            CssClass="error2" InitialValue="-1" Text="Required" ControlToValidate="ddlProjectSatus" meta:resourcekey="RequiredFieldValidator1Resource1"></asp:RequiredFieldValidator>
+                                         
                                     </td>
                                 </tr>
                                 <tr>
