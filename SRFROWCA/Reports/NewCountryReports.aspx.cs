@@ -174,21 +174,13 @@ namespace SRFROWCA.Reports
             {
                 returnURL = "downloadreport.aspx?type=5&cid=" + countryReportId + "&cName=" + countryName;
             }
-            else if (reportTypeId == "3")
-            {
-                if (reportTitle == "Project Reporting Status per Cluster (grouped by Organization)" || reportTitle == "Project Reporting Status per Organization (grouped by Cluster)")
-                {
-                    returnURL = "LoadCountryReport.aspx?id=" + countryReportId + "&cid=" + Request.QueryString["cid"].ToString();
-                }
-                else
-                {
-                    returnURL = reportUrl;
-                }
-            }
             else
             {
-                returnURL = "LoadCountryReport.aspx?id=" + countryReportId + "&cid=" + Request.QueryString["cid"].ToString();
+
+                returnURL = "downloadreport.aspx?type=6&cid=" + countryReportId + "&cName=" + countryName + "&countryId=" + Request.QueryString["cid"].ToString();
+                
             }
+            
 
             return returnURL;
         }
