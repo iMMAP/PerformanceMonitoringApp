@@ -32,8 +32,8 @@ namespace SRFROWCA.Reports
             string fileName = "";
             ReportViewer rvCountry = new ReportViewer();
             rvCountry.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote;
-            //rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://win-78sij2cjpjj/Reportserver");
-            rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://54.83.26.190/Reportserver");
+            rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://win-78sij2cjpjj/Reportserver");
+            //rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://54.83.26.190/Reportserver");
             ReportParameter[] RptParameters = null;
             if (reportType == "3W")
             {
