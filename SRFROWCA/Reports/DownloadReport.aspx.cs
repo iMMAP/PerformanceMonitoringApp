@@ -33,6 +33,7 @@ namespace SRFROWCA.Reports
             ReportViewer rvCountry = new ReportViewer();
             rvCountry.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote;
             rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://win-78sij2cjpjj/Reportserver");
+            //rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://54.83.26.190/Reportserver");
             ReportParameter[] RptParameters = null;
             if (reportType == "3W")
             {
@@ -58,6 +59,14 @@ namespace SRFROWCA.Reports
                 RptParameters[3] = new ReportParameter("yearId", "10");
                 rvCountry.ServerReport.ReportPath = "/reports/countryindicators";
                 fileName = "CountryIndicators-" + Request.QueryString["cName"].ToString() + "-" + GetClusterName((int)dt.Rows[0]["EmergencyClusterId"]) + ".pdf";
+            }
+            else
+            {
+                DataTable dt = GetReportInfo(Convert.ToInt32(Request.QueryString["cid"]));
+                rvCountry.ServerReport.ReportPath = dt.Rows[0]["SSRSReportName"].ToString(); //"/reports/countryreport";
+                RptParameters = new ReportParameter[1];
+                RptParameters[0] = new ReportParameter("CountryId", Request.QueryString["countryId"]);
+                fileName = dt.Rows[0]["ReportTitle"].ToString() + Request.QueryString["cName"].ToString() + ".pdf";
             }
             
             rvCountry.ServerReport.ReportServerCredentials = new ReportServerCredentials("Administrator", "&qisW.c@Jq", "");
