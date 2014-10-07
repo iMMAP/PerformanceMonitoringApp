@@ -230,7 +230,7 @@
                                 </a></li>
                             </ul>
                         </li>
-                        <li id="liCountryConsolidatedReports" runat="server"><a id="menueCountryConsolidatedReports" runat="server" href="#"
+                        <%--<li id="liCountryConsolidatedReports" runat="server"><a id="menueCountryConsolidatedReports" runat="server" href="#"
                             class="dropdown-toggle"><i class="icon-list-alt"></i><span class="menu-text">Consolidated Reports
 							</span><b class="arrow icon-angle-down"></b></a>
                             <ul class="submenu">
@@ -245,7 +245,7 @@
                                 <li id="liCountryConsolidatedSenegal" runat="server"><a href="<%=BaseURL %>/Reports/CountryReports.aspx?cid=10"><span class="menu-text">Senegal</span></a></li>
                                 <li id="liCountryConsolidatedSahel" runat="server"><a href="<%=BaseURL %>/Reports/CountryReports.aspx?cid=567"><span class="menu-text">Sahel</span></a></li>
                             </ul>
-                        </li>
+                        </li>--%>
                         <li id="liCountryReports" runat="server"><a id="menueCountryReports" runat="server" href="#"
                             class="dropdown-toggle"><i class="icon-globe"></i><span class="menu-text">Country Reports
 							</span><b class="arrow icon-angle-down"></b></a>

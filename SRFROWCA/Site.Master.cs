@@ -586,7 +586,7 @@ namespace SRFROWCA
             else if (uri.Contains("CountryReports"))
             {
                 PageTitle = "ORS - Country Reports";
-                liCountryConsolidatedReports.Attributes.Add("class", "active open");
+                //liCountryConsolidatedReports.Attributes.Add("class", "active open");
                 //liCountryReports.Attributes.Add("class", "active");
             }
             else if (uri.Contains("CountryMaps.aspx"))

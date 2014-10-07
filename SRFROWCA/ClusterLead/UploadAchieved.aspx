@@ -50,7 +50,7 @@
                                 <cc:DropDownCheckBoxes ID="ddlOrganizations" runat="server" CssClass="width-40"
                                     AddJQueryReference="True" AutoPostBack="true" OnSelectedIndexChanged="ddlOrg_SelectedIndexChanged"
                                     UseButtons="False" UseSelectAllNode="True">
-                                    <Style SelectBoxWidth="" DropDownBoxBoxWidth="200%" DropDownBoxBoxHeight="300px"></Style>
+                                    <Style SelectBoxWidth="" DropDownBoxBoxWidth="300%" DropDownBoxBoxHeight="300px"></Style>
                                     <Texts SelectBoxCaption="Select Organizations" />
                                 </cc:DropDownCheckBoxes>
                                 <asp:Localize ID="localDownloadFirstItem" runat="server" Text="No organization means all"></asp:Localize>

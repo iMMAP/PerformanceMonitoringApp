@@ -36,7 +36,7 @@
                                                         <tr>
                                                             <td style="width: 50%;">
                                                                 <label>
-                                                                    Send Email Settings:</label>
+                                                                    Send Email:</label>
                                                             </td>
                                                             <td>
                                                                 <asp:RadioButtonList runat="server" ID="rbListEmailSetting" RepeatDirection="Horizontal">
@@ -48,7 +48,7 @@
                                                         <tr>
                                                             <td>
                                                                 <label>
-                                                                    Staging Email Subject Text:</label>
+                                                                    Email Subject (Add in the begining:</label>
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtStagingSubject" runat="server" Width="300" MaxLength="50"></asp:TextBox>

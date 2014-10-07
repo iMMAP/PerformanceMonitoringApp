@@ -179,7 +179,9 @@ namespace SRFROWCA.Pages
                 txtToDate.Enabled = false;
                 txtRequestedAmount.Enabled = false;
                 ddlDonor1Currency.Enabled = false;
+                ddlDonor1Currency.BackColor = Color.LightGray;
                 ddlDonor2Currency.Enabled = false;
+                ddlDonor2Currency.BackColor = Color.LightGray;
                 txtDonor2Name.Enabled = false;
                 txtDonorName.Enabled = false;
                 txtDonor1Contributed.Enabled = false;
@@ -188,6 +190,7 @@ namespace SRFROWCA.Pages
                 txtContactPhone.Enabled = false;
                 txtContactEmail.Enabled = false;
                 ddlRequestedAmountCurrency.Enabled = false;
+                ddlRequestedAmountCurrency.BackColor = Color.LightGray;
                 ddlFundingStatus.Enabled = false;
                 ddlFundingStatus.BackColor = Color.LightGray;
             }
@@ -204,7 +207,9 @@ namespace SRFROWCA.Pages
                 txtToDate.Enabled = true;
                 txtRequestedAmount.Enabled = true;
                 ddlDonor1Currency.Enabled = true;
+                ddlDonor1Currency.BackColor = Color.White;
                 ddlDonor2Currency.Enabled = true;
+                ddlDonor2Currency.BackColor = Color.White;
                 txtDonor2Name.Enabled = true;
                 txtDonorName.Enabled = true;
                 txtDonor1Contributed.Enabled = true;
@@ -213,6 +218,7 @@ namespace SRFROWCA.Pages
                 txtContactPhone.Enabled = true;
                 txtContactEmail.Enabled = true;
                 ddlRequestedAmountCurrency.Enabled = true;
+                ddlRequestedAmountCurrency.BackColor = Color.White;
                 ddlFundingStatus.Enabled = true;
                 ddlFundingStatus.BackColor = Color.White;
             }
