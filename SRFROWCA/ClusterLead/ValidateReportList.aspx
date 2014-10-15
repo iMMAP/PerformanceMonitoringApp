@@ -157,9 +157,10 @@
                                         <asp:BoundField DataField="ProjectCode" HeaderText="Project Code" SortExpression="ProjectCode" meta:resourcekey="BoundFieldResource2" />
                                         <asp:BoundField DataField="ProjectTitle" HeaderText="Project Title" SortExpression="ProjectTitle" meta:resourcekey="BoundFieldResource3" />
                                         <asp:BoundField DataField="OrganizationName" HeaderText="Organization" SortExpression="OrganizationName" meta:resourcekey="BoundFieldResource4" />
-                                        <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" meta:resourcekey="BoundFieldResource5" />
-                                        <asp:BoundField DataField="CreatedDate" HeaderText="Date Created" SortExpression="CreatedDate" />
-                                        <asp:BoundField DataField="LastUpdateDate" HeaderText="Last Updated" SortExpression="LastUpdateDate" />
+                                        <asp:BoundField DataField="CreatedBy" HeaderText="Created" SortExpression="CreatedBy"/>
+                                        <asp:BoundField DataField="CreatedDate" HeaderText="Created On" SortExpression="CreatedDate" />
+                                        <asp:BoundField DataField="UpdatedBy" HeaderText="Updated" SortExpression="UpdatedBy"/>
+                                        <asp:BoundField DataField="LastUpdateDate" HeaderText="Updated On" SortExpression="LastUpdateDate" />
                                         <asp:TemplateField HeaderText="View Details" meta:resourcekey="TemplateFieldResource1">
                                             <ItemTemplate>
                                                 <asp:ImageButton ID="imgbtnView" runat="server" ImageUrl="../assets/orsimages/view.png"
