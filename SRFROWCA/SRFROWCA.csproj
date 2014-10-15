@@ -475,23 +475,6 @@
     <None Include="assets\font\fontawesome-webfontf77b.eot" />
     <None Include="assets\font\fontawesome-webfontf77b.ttf" />
     <None Include="assets\font\fontawesome-webfontf77b.woff" />
-    <EntityDeploy Include="ORSModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ORSModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="ORSModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ORSModel.edmx</DependentUpon>
-      <LastGenOutput>ORSModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="ORSModel.edmx.diagram">
-      <DependentUpon>ORSModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="ORSModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ORSModel.edmx</DependentUpon>
-      <LastGenOutput>ORSModel.cs</LastGenOutput>
-    </Content>
     <None Include="HelpFiles\HelpDocs\HelpEng\1_ORS_description_EN_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpEng\2_ORS_Resgistration_EN_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpEng\3_ORS_Role_EN_v3.pdf" />
@@ -518,6 +501,23 @@
     <Content Include="ORSReports\3W\ORS3W-Mauritania.pdf" />
     <Content Include="ORSReports\3W\ORS3W-Niger.pdf" />
     <Content Include="ORSReports\3W\ORS3W-Senegal.pdf" />
+    <EntityDeploy Include="ORSModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ORSModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="ORSModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ORSModel.edmx</DependentUpon>
+      <LastGenOutput>ORSModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ORSModel.edmx.diagram">
+      <DependentUpon>ORSModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="ORSModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ORSModel.edmx</DependentUpon>
+      <LastGenOutput>ORSModel.cs</LastGenOutput>
+    </Content>
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -1131,6 +1131,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ORSModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORSModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ORSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ORSModel.Designer.cs">
       <AutoGen>True</AutoGen>
