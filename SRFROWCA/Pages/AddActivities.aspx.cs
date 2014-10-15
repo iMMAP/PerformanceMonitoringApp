@@ -121,7 +121,7 @@ namespace SRFROWCA.Pages
 
                     if (ucIndComments.LoadComments(ReportId, activityDataId))
                         btnSaveComments.Visible = false;
-                 
+
                     mpeComments.Show();
                 }
             }
@@ -493,18 +493,32 @@ namespace SRFROWCA.Pages
             using (TransactionScope scope = new TransactionScope())
             {
                 List<int> locationIds = GetLocationIdsFromGrid();
+                string mailType = "";
                 if (locationIds.Count > 0)
                 {
+                    bool isNewReport = false;
                     if (ReportId == 0)
+                    {
                         SaveReportMainInfo();
+                        isNewReport = true;
+                        mailType = "Added";
+                    }
 
-                    SaveReport();
-                    SendMail("Report Saved Summary! " + DateTime.Now.ToString("dd-MMM-yyyy"), ReportId);
+                    int returnCode = SaveReport();
+                    if (returnCode == 1 && !isNewReport)
+                    {
+                        UpdateReportUpdatedDate();
+                        mailType = "Updated";
+                    }
+
+                    if (returnCode == 1)
+                        SendMail("Report Saved Summary! " + DateTime.Now.ToString("dd-MMM-yyyy"), ReportId, mailType);
                 }
                 else
                 {
                     DeleteReport();
-                    SendMail("Report Delete Summary! " + DateTime.Now.ToString("dd-MMM-yyyy"), ReportId);
+                    mailType = "Deleted";
+                    SendMail("Report Delete Summary! " + DateTime.Now.ToString("dd-MMM-yyyy"), ReportId, mailType);
                 }
 
                 scope.Complete();
@@ -512,7 +526,7 @@ namespace SRFROWCA.Pages
             }
         }
 
-        private void SendMail(string subject, int reportID)
+        private void SendMail(string subject, int reportID, string mailType)
         {
             try
             {
@@ -527,7 +541,7 @@ namespace SRFROWCA.Pages
 
                 string emails = string.Empty;
                 emails = "orsocharowca@gmail.com";
-                string changeType = subject.Contains("Delete") ? "deleted" : "Added/Updated";
+                
 
                 if (dtEmails.Rows.Count > 0)
                 {
@@ -541,7 +555,7 @@ namespace SRFROWCA.Pages
                         mailMsg.Subject = subject;
                         mailMsg.IsBodyHtml = true;
                         mailMsg.Body = string.Format(@"Notification:" + Environment.NewLine +
-                                                      "The user: : " + User.Identity.Name + " has " + changeType + " the report with following details:" + Environment.NewLine +
+                                                      "The user: : " + User.Identity.Name + " has " + mailType + " the report with following details:" + Environment.NewLine +
                                                       " Country: " + country + Environment.NewLine +
                                                       " Project: " + projectCode + Environment.NewLine +
                                                       " Report: " + monthName + Environment.NewLine);
@@ -563,12 +577,17 @@ namespace SRFROWCA.Pages
                 DBContext.Delete("DeleteReport", new object[] { ReportId, DBNull.Value });
         }
 
-        private void SaveReport()
+        private int SaveReport()
         {
             //SaveReportMainInfo();
             DeleteReportAccumulatives();
             SaveReportLocations();
-            SaveReportDetails();
+            return SaveReportDetails();
+        }
+
+        private void UpdateReportUpdatedDate()
+        {
+            DBContext.Update("UpdateReportUpdatedDate", new object[] {ReportId, RC.GetCurrentUserId, DBNull.Value });
         }
 
         private void SaveReportMainInfo()
@@ -601,12 +620,12 @@ namespace SRFROWCA.Pages
             DBContext.Add("InsertReportLocations", new object[] { ReportId, locIds, DBNull.Value });
         }
 
-        private void SaveReportDetails()
+        private int SaveReportDetails()
         {
             int activityDataId = 0;
             int projIndicatorId = 0;
             int yearId = RC.GetSelectedIntVal(ddlYear);
-
+            int returnCodeForUpdate = 0;
             foreach (GridViewRow row in gvActivities.Rows)
             {
                 if (row.RowType == DataControlRowType.DataRow)
@@ -677,8 +696,10 @@ namespace SRFROWCA.Pages
                                 dataSave.Clear();
                                 if (locationIdToSave > 0)
                                 {
-                                    DBContext.Add("InsertReportDetails", new object[] { ReportId, activityDataId, locationIdToSave, achieved, 
-                                                                                        RC.GetCurrentUserId, projIndicatorId, annualTarget, DBNull.Value });
+                                    int returnCode = DBContext.Add("InsertReportDetails", new object[] { ReportId, activityDataId, locationIdToSave, achieved, 
+                                                                    RC.GetCurrentUserId, projIndicatorId, annualTarget, DBNull.Value });
+
+                                    returnCodeForUpdate = returnCodeForUpdate == 0 ? returnCode : returnCodeForUpdate;
                                 }
                             }
                             else
@@ -689,6 +710,8 @@ namespace SRFROWCA.Pages
                     }
                 }
             }
+
+            return returnCodeForUpdate;
         }
 
         private void DeleteReportAccumulatives()
