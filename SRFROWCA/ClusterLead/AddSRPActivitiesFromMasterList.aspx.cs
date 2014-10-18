@@ -105,7 +105,7 @@ namespace SRFROWCA.ClusterLead
 
         protected void gvSRPIndicators_Sorting(object sender, GridViewSortEventArgs e)
         {
-            DataTable dt = GetIndicators();
+            DataTable dt = GetIndicators(true);
             //Sort the data.
             dt.DefaultView.Sort = e.SortExpression + " " + GetSortDirection(e.SortExpression);
 
@@ -153,16 +153,16 @@ namespace SRFROWCA.ClusterLead
 
         private void PopulateIndicators()
         {
-            gvSRPIndicators.DataSource = GetIndicators();
+            gvSRPIndicators.DataSource = GetIndicators(true);
             gvSRPIndicators.DataBind();
         }
 
-        private DataTable GetIndicators()
+        private DataTable GetIndicators(bool isFilter)
         {
             int clusterId = 0;
             if (RC.IsCountryAdmin(User) || RC.IsOCHAStaff(User))
             {
-                if (ddlClusters.Visible)
+                if (isFilter && ddlClusters.Visible)
                 {
                     int.TryParse(ddlClusters.SelectedValue, out clusterId);
                 }
@@ -259,7 +259,7 @@ namespace SRFROWCA.ClusterLead
 
         protected void ExportToExcel(object sender, EventArgs e)
         {
-            DataTable dt = GetIndicators();
+            DataTable dt = GetIndicators(false);
             RemoveColumnsFromDataTable(dt);
             GridView gv = new GridView();
             gv.DataSource = dt;

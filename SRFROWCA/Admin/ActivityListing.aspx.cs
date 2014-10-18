@@ -94,7 +94,7 @@ namespace SRFROWCA.Admin
         protected void btnExportExcel_Click(object sender, EventArgs e)
         {
             GridView gvExport = new GridView();
-            DataTable dt = GetActivities();
+            DataTable dt = DBContext.GetData("GetAllActivities", new object[] { null, null, null, null, (int)RC.SelectedSiteLanguageId });//GetActivities();
             RemoveColumnsFromDataTable(dt);
             gvExport.DataSource = dt;
             gvExport.DataBind();
@@ -205,14 +205,11 @@ namespace SRFROWCA.Admin
             //ddlActivityType.DataTextField = "ActivityType";
             //ddlActivityType.DataSource = GetActivityTypes();
             //ddlActivityType.DataBind();
-
-                      
         }
 
        
         private DataTable GetClusters()
         {
-            
             return DBContext.GetData("GetAllClusters", new object[]{(int)RC.SelectedSiteLanguageId});
         }
 
@@ -222,6 +219,7 @@ namespace SRFROWCA.Admin
             int? objectiveId = ddlObjective.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlObjective.SelectedValue);
             int? priorityId = ddlPriority.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlPriority.SelectedValue);
             string search = string.IsNullOrEmpty(txtActivityName.Text) ? null : txtActivityName.Text;
+
             return DBContext.GetData("GetAllActivities", new object[] { clusterId, objectiveId, priorityId, search, (int)RC.SelectedSiteLanguageId });
         }
 
