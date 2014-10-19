@@ -556,12 +556,11 @@ namespace SRFROWCA.Anonymous
             int langId = RC.SelectedSiteLanguageId;
             SQLPaging = PagingStatus.ON;
 
-            object[] paramValue = new object[] {string.Empty, string.Empty, string.Empty, string.Empty, 
-                                    string.Empty, string.Empty, string.Empty, string.Empty, string.Empty,
+            object[] paramValue = new object[] {null, null, null, null, null, null, null, null, null,
                                     null, null, null, null, null, null,
-                                    null, null, pageIndex, pageSize, Convert.ToInt32(SQLPaging), langId };
+                                    null, null, null, null, null, langId };
 
-            DataTable dt = DBContext.GetData("GetAllTasksDataReport", paramValue);//GetReportData();
+            DataTable dt = DBContext.GetData("GetAllTasksDataReport", paramValue);
             
             RemoveColumnsFromDataTable(dt);
             ReplaceHTMLTags(dt);
