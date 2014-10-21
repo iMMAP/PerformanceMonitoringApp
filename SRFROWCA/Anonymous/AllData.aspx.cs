@@ -550,8 +550,17 @@ namespace SRFROWCA.Anonymous
         protected void ExportToExcel(object sender, EventArgs e)
         {
             SQLPaging = PagingStatus.OFF;
-            DataTable dt = GetReportData();
+
+            int pageSize = gvReport.PageSize;
+            int pageIndex = GridPageIndex;
+            int langId = RC.SelectedSiteLanguageId;
             SQLPaging = PagingStatus.ON;
+
+            object[] paramValue = new object[] {null, null, null, null, null, null, null, null, null,
+                                    null, null, null, null, null, null,
+                                    null, null, null, null, null, langId };
+
+            DataTable dt = DBContext.GetData("GetAllTasksDataReport", paramValue);
             
             RemoveColumnsFromDataTable(dt);
             ReplaceHTMLTags(dt);

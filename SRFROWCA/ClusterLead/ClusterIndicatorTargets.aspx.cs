@@ -79,16 +79,16 @@ namespace SRFROWCA.ClusterLead
 
         private void PopulateIndicators()
         {
-            gvClusterIndTargets.DataSource = GetIndicators();
+            gvClusterIndTargets.DataSource = GetIndicators(true);
             gvClusterIndTargets.DataBind();
         }
 
-        private DataTable GetIndicators()
+        private DataTable GetIndicators(bool isFilter)
         {
             int clusterId = 0;
             if (RC.IsCountryAdmin(User) || RC.IsOCHAStaff(User))
             {
-                if (ddlClusters.Visible)
+                if (isFilter && ddlClusters.Visible)
                 {
                     int.TryParse(ddlClusters.SelectedValue, out clusterId);
                 }
@@ -302,7 +302,7 @@ namespace SRFROWCA.ClusterLead
 
         protected void ExportToExcel(object sender, EventArgs e)
         {
-            DataTable dt = GetIndicators();
+            DataTable dt = GetIndicators(false);
             if (dt.Rows.Count > 0)
             {
                 RemoveColumnsFromDataTable(dt);

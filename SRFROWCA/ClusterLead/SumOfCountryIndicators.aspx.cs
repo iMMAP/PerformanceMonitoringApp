@@ -40,14 +40,14 @@ namespace SRFROWCA.ClusterLead
 
         private void LoadData()
         {
-            gvReport.DataSource = GetData();
+            gvReport.DataSource = GetData(true);
             gvReport.DataBind();
         }
 
-        private DataTable GetData()
+        private DataTable GetData(bool isFilter)
         {
             int tempVal = 0;
-            if (ddlClusters.Visible)
+            if (isFilter && ddlClusters.Visible)
             {
                 int.TryParse(ddlClusters.SelectedValue, out tempVal);
             }
@@ -82,7 +82,7 @@ namespace SRFROWCA.ClusterLead
 
         protected void gvReport_Sorting(object sender, GridViewSortEventArgs e)
         {
-            DataTable dt = GetData();
+            DataTable dt = GetData(true);
             //Sort the data.
             dt.DefaultView.Sort = e.SortExpression + " " + GetSortDirection(e.SortExpression);
 
@@ -122,7 +122,7 @@ namespace SRFROWCA.ClusterLead
 
         protected void ExportToExcel(object sender, EventArgs e)
         {
-            DataTable dt = GetData();
+            DataTable dt = GetData(false);
             RemoveColumnsFromDataTable(dt);
             GridView gv = new GridView();
             gv.DataSource = dt;

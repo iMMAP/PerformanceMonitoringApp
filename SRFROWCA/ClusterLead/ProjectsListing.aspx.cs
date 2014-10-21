@@ -136,8 +136,13 @@ namespace SRFROWCA.ClusterLead
 
         protected void ExportToExcel(object sender, EventArgs e)
         {
-            DataTable dt = GetProjects();
+            int? clusterId = UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
+            int? countryID = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
+            int? orgId = (RC.IsDataEntryUser(User))?orgId = UserInfo.Organization:orgId = (int?)null;
+
+            DataTable dt = DBContext.GetData("GetProjects", new object[] { countryID, clusterId, null, orgId, null, DBNull.Value, DBNull.Value, null, null, 1 });//GetProjects();
             //RemoveColumnsFromDataTable(dt);
+
             GridView gv = new GridView();
             gv.DataSource = dt;
             gv.DataBind();
@@ -188,8 +193,7 @@ namespace SRFROWCA.ClusterLead
             int? cbReported = cblReportingStatus.SelectedIndex > -1 ? RC.GetSelectedIntVal(cblReportingStatus) : (int?)null;
             int? cbFunded = cblFundingStatus.SelectedIndex > -1 ? RC.GetSelectedIntVal(cblFundingStatus) : (int?)null;
 
-            DataTable dtResults = DBContext.GetData("uspGetReports", new object[] { projectId, null, null , null, RC.GetCurrentUserId, RC.SelectedSiteLanguageId,
-                                                                                    countryID, clusterId, orgId, admin1,cbFunded, cbReported,});
+            DataTable dtResults = DBContext.GetData("uspGetReports", new object[] { projectId, null, null , null, RC.GetCurrentUserId, RC.SelectedSiteLanguageId,countryID, clusterId, orgId, admin1,cbFunded, cbReported,});
 
             if (dtResults.Rows.Count > 0)
             {
