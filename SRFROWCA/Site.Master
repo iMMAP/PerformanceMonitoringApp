@@ -165,9 +165,9 @@
 
                                     <asp:Localize ID="localDashboardPerfMon" runat="server" Text="Performance Monitoring" meta:resourcekey="Localize1Resource1"></asp:Localize>
                                 </span></a></li>
-                                <li id="liReportingStatus" runat="server"><a href="<%=BaseURL %>/ReportingStatus.aspx"><i class="icon-list"></i><span class="menu-text">
+                                <%--<li id="liReportingStatus" runat="server"><a href="<%=BaseURL %>/ReportingStatus.aspx"><i class="icon-list"></i><span class="menu-text">
                                     <asp:Localize ID="localDashboardRepStatus" runat="server" Text="Reporting Status" meta:resourcekey="localDashboardRepStatusResource1"></asp:Localize>
-                                </span></a></li>
+                                </span></a></li>--%>
                             </ul>
                         </li>
                         <li id="liDataEntry" runat="server"><a href="~/Pages/AddActivities.aspx" id="menuDataEntry"
