@@ -61,8 +61,10 @@ namespace SRFROWCA.Admin
                 ClearPopupControls();
 
                 hdnPriorityActivityId.Value = e.CommandArgument.ToString();
-
+                
                 GridViewRow row = (((Control)e.CommandSource).NamingContainer) as GridViewRow;
+                ddlEmergencyNew.SelectedValue = gvActivity.DataKeys[row.RowIndex].Values["EmergencyId"].ToString();
+                LoadClustersByEmergency();
                 ddlClusterNew.SelectedValue = gvActivity.DataKeys[row.RowIndex].Values["ClusterId"].ToString();
                 LoadObjectivesByCluster();
                 ddlObjectiveNew.SelectedValue = gvActivity.DataKeys[row.RowIndex].Values["ClusterObjectiveId"].ToString();
@@ -94,7 +96,7 @@ namespace SRFROWCA.Admin
         protected void btnExportExcel_Click(object sender, EventArgs e)
         {
             GridView gvExport = new GridView();
-            DataTable dt = DBContext.GetData("GetAllActivities", new object[] { null, null, null, null, (int)RC.SelectedSiteLanguageId });//GetActivities();
+            DataTable dt = DBContext.GetData("GetAllActivities", new object[] { null,null, null, null, null, (int)RC.SelectedSiteLanguageId });//GetActivities();
             RemoveColumnsFromDataTable(dt);
             gvExport.DataSource = dt;
             gvExport.DataBind();
@@ -171,46 +173,84 @@ namespace SRFROWCA.Admin
 
         private void PopulateFilters()
         {
-            ddlCluster.Items.Clear();
-            ddlCluster.Items.Add(new ListItem("All","-1"));
-            ddlCluster.DataValueField = "ClusterId";
-            ddlCluster.DataTextField = "ClusterName";
-            ddlCluster.DataSource = GetClusters();
-            ddlCluster.DataBind();
+            LoadEmergencyFilter();
+            LoadClustersFilter();
+            LoadObjectivesFilter();
+            LoadPriorityFilter();
+            LoadEmergencyFilterNew();          
+          
+        }
 
-            ddlObjective.Items.Clear();
-            ddlObjective.Items.Add(new ListItem("All", "-1"));
-            ddlObjective.DataValueField = "ObjectiveId";
-            ddlObjective.DataTextField = "Objective";
-            ddlObjective.DataSource = GetObjectives();
-            ddlObjective.DataBind();
-
-            ddlPriority.Items.Clear();
-            ddlPriority.Items.Add(new ListItem("All", "-1"));
-            ddlPriority.DataValueField = "HumanitarianPriorityId";
-            ddlPriority.DataTextField = "HumanitarianPriority";
-            ddlPriority.DataSource = GetPriorities();
-            ddlPriority.DataBind();
-
+        private void LoadClustersByEmergency()
+        {
             ddlClusterNew.Items.Clear();
             ddlClusterNew.Items.Add(new ListItem("Select", "-1"));
             ddlClusterNew.DataValueField = "ClusterId";
             ddlClusterNew.DataTextField = "ClusterName";
-            ddlClusterNew.DataSource = GetClusters();
+            ddlClusterNew.DataSource = GetClustersByEmergency();
             ddlClusterNew.DataBind();
-
-            //ddlActivityType.Items.Clear();
-            //ddlActivityType.Items.Add(new ListItem("Select", "-1"));
-            //ddlActivityType.DataValueField = "ActivityTypeId";
-            //ddlActivityType.DataTextField = "ActivityType";
-            //ddlActivityType.DataSource = GetActivityTypes();
-            //ddlActivityType.DataBind();
         }
 
-       
+        private void LoadEmergencyFilter(){
+            ddlEmergency.Items.Clear();
+            ddlEmergency.Items.Add(new ListItem("All", "-1"));
+            ddlEmergency.DataValueField = "EmergencyId";
+            ddlEmergency.DataTextField = "EmergencyName";
+            ddlEmergency.DataSource = RC.GetAllEmergencies((int)RC.SelectedSiteLanguageId);
+            ddlEmergency.DataBind();
+        }
+
+        private void LoadEmergencyFilterNew()
+        {
+            ddlEmergencyNew.Items.Clear();
+            ddlEmergencyNew.Items.Add(new ListItem("Select", "-1"));
+            ddlEmergencyNew.DataValueField = "EmergencyId";
+            ddlEmergencyNew.DataTextField = "EmergencyName";
+            ddlEmergencyNew.DataSource = RC.GetAllEmergencies((int)RC.SelectedSiteLanguageId);
+            ddlEmergencyNew.DataBind();
+        }
+
+        private void LoadClustersFilter()
+        {
+            ddlCluster.Items.Clear();
+            ddlCluster.Items.Add(new ListItem("All", "-1"));
+            ddlCluster.DataValueField = "ClusterId";
+            ddlCluster.DataTextField = "ClusterName";
+            ddlCluster.DataSource = GetClusters();
+            ddlCluster.DataBind();
+        }
+
+        private void LoadObjectivesFilter()
+        {
+            ddlObjective.Items.Clear();
+            ddlObjective.Items.Add(new ListItem("All", "-1"));
+            ddlObjective.DataValueField = "ObjectiveId";
+            ddlObjective.DataTextField = "Objective";
+            ddlObjective.DataSource = GetObjectivesByEmergencyAndCluster(ddlCluster.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlCluster.SelectedValue));
+            ddlObjective.DataBind();
+        }
+
+        private void LoadPriorityFilter()
+        {
+            ddlPriority.Items.Clear();
+            ddlPriority.Items.Add(new ListItem("All", "-1"));
+            ddlPriority.DataValueField = "HumanitarianPriorityId";
+            ddlPriority.DataTextField = "HumanitarianPriority";
+            ddlPriority.DataSource = GetPrioritiesByEmergencyClusertAndObjective();
+            ddlPriority.DataBind();
+        }
+
+     
         private DataTable GetClusters()
         {
-            return DBContext.GetData("GetAllClusters", new object[]{(int)RC.SelectedSiteLanguageId});
+            int? emgId = ddlEmergency.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlEmergency.SelectedValue);
+            return DBContext.GetData("GetAllClusters", new object[]{(int)RC.SelectedSiteLanguageId, emgId});
+        }
+
+        private DataTable GetClustersByEmergency()
+        {
+            int? emgId = ddlEmergencyNew.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlEmergencyNew.SelectedValue);
+            return DBContext.GetData("GetAllClusters", new object[] { (int)RC.SelectedSiteLanguageId, emgId });
         }
 
         private DataTable GetActivities()
@@ -218,33 +258,34 @@ namespace SRFROWCA.Admin
             int? clusterId = ddlCluster.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlCluster.SelectedValue);
             int? objectiveId = ddlObjective.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlObjective.SelectedValue);
             int? priorityId = ddlPriority.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlPriority.SelectedValue);
+            int? emergencyId = ddlEmergency.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlEmergency.SelectedValue);
             string search = string.IsNullOrEmpty(txtActivityName.Text) ? null : txtActivityName.Text;
 
-            return DBContext.GetData("GetAllActivities", new object[] { clusterId, objectiveId, priorityId, search, (int)RC.SelectedSiteLanguageId });
+            return DBContext.GetData("GetAllActivities", new object[] {emergencyId,clusterId, objectiveId, priorityId, search, (int)RC.SelectedSiteLanguageId });
+        }
+        private DataTable GetObjectivesByEmergencyAndCluster(int? clusterId = null)
+        {
+            return DBContext.GetData("GetObjectivesByEmergencyAndCluster", new object[] { (int)RC.SelectedSiteLanguageId, (ddlEmergency.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlEmergency.SelectedValue)), clusterId });
+        }
+
+        private DataTable GetPrioritiesByEmergencyClusertAndObjective()
+        {
+            return DBContext.GetData("GetPrioritiesByEmergencyClusertAndObjective", new object[] { (int)RC.SelectedSiteLanguageId, (ddlEmergency.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlEmergency.SelectedValue)), (ddlCluster.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlCluster.SelectedValue)),
+            (ddlObjective.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlObjective.SelectedValue))});
         }
 
         private DataTable GetObjectives(int? clusterId = null)
-        {
-            if (clusterId == null)
-            {
-                return DBContext.GetData("GetObjectives", new object[] { (int)RC.SelectedSiteLanguageId });
-            }
-            else
-            {
-                return DBContext.GetData("GetObjectivesByClusterId", new object[] { (int)RC.SelectedSiteLanguageId, clusterId });
-            }
+        {           
+                return DBContext.GetData("GetObjectivesByClusterId", new object[] { (int)RC.SelectedSiteLanguageId, 
+                    (ddlEmergencyNew.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlEmergencyNew.SelectedValue)), clusterId });           
         }
 
         private DataTable GetPriorities(int? objectiveId = null)
-        {
-            if (objectiveId == null)
-            {
-                return DBContext.GetData("GetPriorities", new object[] { (int)RC.SelectedSiteLanguageId });
-            }
-            else
-            {
-                return DBContext.GetData("GetPrioritiesByObjective", new object[] { (int)RC.SelectedSiteLanguageId, objectiveId });
-            }
+        {           
+                return DBContext.GetData("GetPrioritiesByObjective", new object[] { (int)RC.SelectedSiteLanguageId, 
+                     (ddlEmergencyNew.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlEmergencyNew.SelectedValue)),
+                     (ddlClusterNew.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlClusterNew.SelectedValue)),
+                     objectiveId });           
         }
 
         private DataTable GetActivityTypes()
@@ -270,6 +311,7 @@ namespace SRFROWCA.Admin
 
         private void ClearPopupControls()
         {
+            ddlEmergencyNew.SelectedIndex = 0;
             ddlClusterNew.SelectedIndex = 0;
             ddlObjectiveNew.SelectedIndex = 0;
             ddlPriorityNew.SelectedIndex = 0;
@@ -344,14 +386,37 @@ namespace SRFROWCA.Admin
             LoadActivities();
         }
 
+        protected void ddlCluster_SelectedIndexChanged(object sender, EventArgs e)
+        {           
+            LoadObjectivesFilter();
+            LoadPriorityFilter();
+        }
+
+        protected void ddlObjective_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadPriorityFilter();
+        }
+
         protected void gvActivity_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
 
         }
 
+        protected void ddlEmergencyNew_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadClustersByEmergency();
+        }
+
         protected void ddlClusterNew_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadObjectivesByCluster();
+        }
+
+        protected void ddlEmergency_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadClustersFilter();
+            LoadObjectivesFilter();
+            LoadPriorityFilter();
         }
 
         protected void ddlObjectiveNew_SelectedIndexChanged(object sender, EventArgs e)

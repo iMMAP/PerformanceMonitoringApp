@@ -82,7 +82,7 @@ namespace SRFROWCA.Common
 
         public static void ObjectivesToolTip(ListControl ctl)
         {
-            if (ctl.Items.Count > 0)
+            if (ctl.Items.Count > 2)
             {
                 if (RC.SelectedSiteLanguageId == 2)
                 {
@@ -102,7 +102,7 @@ namespace SRFROWCA.Common
 
         public static void PrioritiesToolTip(ListControl ctl)
         {
-            if (ctl.Items.Count > 0)
+            if (ctl.Items.Count > 5)
             {
                 if (RC.SelectedSiteLanguageId == 2)
                 {

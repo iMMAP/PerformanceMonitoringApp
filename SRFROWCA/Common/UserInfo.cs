@@ -32,10 +32,11 @@ namespace SRFROWCA.Common
                 }
                 
                 HttpContext.Current.Session["UserEmergencyClusterId"] = dt.Rows[0]["EmergencyClusterId"];
+                HttpContext.Current.Session["EmergencyId"] = dt.Rows[0]["EmergencyId"];
                 
             }
 
-            HttpContext.Current.Session["EmergencyId"] = 1;
+           
         }
 
         internal static int Country
