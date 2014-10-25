@@ -516,9 +516,12 @@ namespace SRFROWCA.Pages
                 }
                 else
                 {
-                    DeleteReport();
-                    mailType = "Deleted";
-                    SendMail("Report Delete Summary! " + DateTime.Now.ToString("dd-MMM-yyyy"), ReportId, mailType);
+                    if (ReportId > 0)
+                    {
+                        DeleteReport();
+                        mailType = "Deleted";
+                        SendMail("Report Delete Summary! " + DateTime.Now.ToString("dd-MMM-yyyy"), ReportId, mailType);
+                    }
                 }
 
                 scope.Complete();

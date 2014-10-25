@@ -352,7 +352,7 @@ namespace SRFROWCA
             else if (uri == "/ReportingStatus.aspx")
             {
                 liDashboards.Attributes.Add("class", "active open");
-                liReportingStatus.Attributes.Add("class", "active");
+                //liReportingStatus.Attributes.Add("class", "active");
                 PageTitle = "ORS - Achievements";
             }
             //else if (uri == "/OperationalPresenceDB.aspx")
