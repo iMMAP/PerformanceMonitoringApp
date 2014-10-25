@@ -87,7 +87,7 @@
                                                                 <tr>
                                                                     <td></td>
                                                                     <td>
-                                                                        <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" CssClass="width-20 btn btn-sm btn-success" Enabled="false" />
+                                                                        <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" CssClass="width-20 btn btn-sm btn-success" Enabled="true" />
                                                                     </td>
                                                                 </tr>
                                                             </table>
