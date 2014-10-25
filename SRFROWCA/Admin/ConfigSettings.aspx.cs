@@ -85,5 +85,32 @@ namespace SRFROWCA.Admin
                 }
             }
         }
+
+        public static void GetKeys(out string stagingSubject, out bool sendMail)
+        {
+            stagingSubject = string.Empty;
+            sendMail = false;
+
+            string PATH = HttpRuntime.AppDomainAppPath;
+            PATH = PATH.Substring(0, PATH.LastIndexOf(@"\") + 1) + @"Configurations\Settings.xml";
+
+            if (File.Exists(PATH))
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(PATH);
+
+                XmlElement elem_settings = doc.GetElementById("Settings");
+                XmlNode settingsNode = doc.DocumentElement;
+
+                foreach (XmlNode node in settingsNode.ChildNodes)
+                {
+                    if (node.Name == "KeySettings")
+                    {
+                        stagingSubject = Convert.ToString(node.Attributes["StagingEmailSubjectText"].Value);
+                        sendMail = Convert.ToBoolean(node.Attributes["SendEmail"].Value);
+                    }
+                }
+            }
+        }
     }
 }

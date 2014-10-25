@@ -26,12 +26,19 @@ namespace SRFROWCA.Account
             PopulateCountries();
             PopulateOrganizations();
             PopulateClusters();
+            PopulateEmergencies();
 
             if (Session["EditUserId"] != null)
             {
                 GetUserInformation();
                 ShowHideControls();
             }
+        }
+
+        private void PopulateEmergencies()
+        {
+            int locationId = (int)RC.SelectedSiteLanguageId;
+            UI.FillEmergency(ddlEmergency, RC.GetAllEmergencies(locationId));
         }
 
         private void ShowHideControls()
@@ -113,7 +120,7 @@ namespace SRFROWCA.Account
                 ddlUserRole.SelectedValue = dt.Rows[0]["RoleId"].ToString();               
                 ddlCountry.SelectedValue = dt.Rows[0]["LocationId"].ToString();
                 ddlClusters.SelectedValue = dt.Rows[0]["ClusterId"].ToString();
-
+                ddlEmergency.SelectedValue = dt.Rows[0]["EmergencyId"].ToString();
                 if (RC.IsCountryAdmin(User))
                 {
                     ddlCountry.Enabled = false;
@@ -209,6 +216,8 @@ namespace SRFROWCA.Account
             Response.Redirect("~/Admin/UsersListing.aspx");
         }
 
+      
+
         private object[] GetUserValues(Guid userId)
         {
             if (ddlUserRole.SelectedItem.Text == "Region Cluster Lead")
@@ -223,7 +232,7 @@ namespace SRFROWCA.Account
             countryId = ddlCountry.SelectedValue;
             int? clusterId = ddlClusters.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlClusters.SelectedValue);
             string phone = txtPhone.Text.Trim().Length > 0 ? txtPhone.Text.Trim() : null;
-            return new object[] { userId, orgId, countryId, phone, txtFullName.Text.Trim(), clusterId, DBNull.Value };
+            return new object[] { userId, orgId, countryId, phone, txtFullName.Text.Trim(), clusterId,ddlEmergency.SelectedValue, DBNull.Value };
         }
 
         protected void ddlUserRole_SelectedIndexChanged(object sender, EventArgs e)

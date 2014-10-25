@@ -78,18 +78,13 @@
     <Reference Include="AjaxControlToolkit, Version=4.1.7.123, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
       <HintPath>..\_dll\AjaxControlToolkit.dll</HintPath>
     </Reference>
-    <Reference Include="Artem.Google">
-      <HintPath>..\_dll\Artem.Google.dll</HintPath>
-    </Reference>
     <Reference Include="DotNet.Highcharts, Version=2.0.0.0, Culture=neutral, PublicKeyToken=88854f873df851bf, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_dll\DotNet.Highcharts.dll</HintPath>
     </Reference>
     <Reference Include="DropDownCheckBoxes, Version=1.1.0.37004, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_dll\DropDownCheckBoxes.dll</HintPath>
-    </Reference>
-    <Reference Include="Elmah">
-      <HintPath>..\_dll\Elmah.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -99,10 +94,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_dll\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="FredCK.FCKeditorV2">
-      <HintPath>..\_dll\FredCK.FCKeditorV2.dll</HintPath>
-    </Reference>
-    <Reference Include="itextsharp">
+    <Reference Include="itextsharp, Version=5.1.3.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_dll\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -110,7 +103,8 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\_dll\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Svg">
+    <Reference Include="Svg, Version=0.5.2.17984, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_dll\Svg.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -140,6 +134,7 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="Telerik.Web.UI, Version=2013.2.717.40, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_dll\Telerik.Web.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
@@ -1453,17 +1448,6 @@
     <Content Include="DataFeeds\YearFeed.ashx" />
     <Content Include="DataFeeds\MonthFeed.ashx" />
     <Content Include="SessionHeartbeat.ashx" />
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="VBIDE">
-      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>5</VersionMajor>
-      <VersionMinor>3</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
   </ItemGroup>
   <ItemGroup>
     <WebReferences Include="Web References\" />

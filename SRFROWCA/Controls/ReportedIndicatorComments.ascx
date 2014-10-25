@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ReportedIndicatorComments.ascx.cs"
     Inherits="SRFROWCA.Controls.ReportedIndicatorComments" %>
-<%@ Register Assembly="FredCK.FCKeditorV2" Namespace="FredCK.FCKeditorV2" TagPrefix="FCKeditorV2" %>
+
 <script type="text/javascript">
 
     function check(chkVal, indicatorCmtID) {
