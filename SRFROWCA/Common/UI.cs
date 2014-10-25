@@ -14,7 +14,7 @@ namespace SRFROWCA.Common
         {
             control.DataValueField = "ClusterId";
             control.DataTextField = "ClusterName";
-            control.DataSource = DBContext.GetData("GetAllClusters", new object[] {languageId});
+            control.DataSource = DBContext.GetData("GetAllClusters", new object[] {languageId,(int?)null});
             control.DataBind();
         }
 
@@ -22,7 +22,7 @@ namespace SRFROWCA.Common
         {
             control.DataValueField = "ClusterId";
             control.DataTextField = "ClusterName";
-            control.DataSource = DBContext.GetData("GetAllClusters", new object[] { languageId });
+            control.DataSource = DBContext.GetData("GetAllClusters", new object[] { languageId, (int?)null });
             control.DataBind();
         }
 
