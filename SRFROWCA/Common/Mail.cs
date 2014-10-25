@@ -5,6 +5,7 @@ using System.Web;
 using System.Net.Mail;
 using System.Net;
 using System.Configuration;
+using SRFROWCA.Admin;
 
 namespace SRFROWCA.Common
 {
@@ -40,12 +41,17 @@ namespace SRFROWCA.Common
                 //EnableSsl = true
             };
 
-            string appendSubject = Convert.ToString(ConfigurationManager.AppSettings["StagingEmailSubjectText"]);
+            //string appendSubject = Convert.ToString(ConfigurationManager.AppSettings["StagingEmailSubjectText"]);
+            string appendSubject = string.Empty;
+            bool sendMail = false;
+
+            ConfigSettings.GetKeys(out appendSubject, out sendMail);
 
             if (!string.IsNullOrEmpty(appendSubject))
                 mailMsg.Subject = appendSubject + ": " + mailMsg.Subject;
 
-            if (Convert.ToBoolean(ConfigurationManager.AppSettings["SendEmail"]))
+            //if (Convert.ToBoolean(ConfigurationManager.AppSettings["SendEmail"]))
+            if (sendMail)
                 client.Send(mailMsg);
         }
     }
