@@ -94,7 +94,7 @@ namespace SRFROWCA.Admin
         protected void btnExportExcel_Click(object sender, EventArgs e)
         {
             GridView gvExport = new GridView();
-            DataTable dt = DBContext.GetData("GetAllActivities", new object[] { null, null, null, null, (int)RC.SelectedSiteLanguageId });//GetActivities();
+            DataTable dt = GetActivities();//DBContext.GetData("GetAllActivities", new object[] { null, null, null, null, (int)RC.SelectedSiteLanguageId });
             RemoveColumnsFromDataTable(dt);
             gvExport.DataSource = dt;
             gvExport.DataBind();
