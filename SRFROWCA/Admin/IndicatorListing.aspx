@@ -53,17 +53,54 @@
                                                 <div class="row">
                                                     <table border="0" style="width: 100%; margin: 10px 10px 10px 20px">
                                                         <tr>
+
                                                             <td class="width-20">
                                                                 <label>
-                                                                    Cluster:</label>
+                                                                    Emergency:</label>
                                                             </td>
                                                             <td class="width-30">
-                                                                <asp:DropDownList ID="ddlCluster" runat="server" AppendDataBoundItems="true" CssClass="width-80">
+                                                                <asp:DropDownList ID="ddlEmergency" runat="server" AppendDataBoundItems="true" CssClass="width-80" AutoPostBack="true" OnSelectedIndexChanged="ddlEmergency_SelectedIndexChanged">
                                                                     <asp:ListItem Text="All" Value="-1" Selected="True"></asp:ListItem>
 
                                                                 </asp:DropDownList>
                                                             </td>
                                                             <td class="width-20">
+                                                                <label>
+                                                                    Cluster:</label>
+                                                            </td>
+                                                            <td class="width-30">
+                                                                <asp:DropDownList ID="ddlCluster" runat="server" AppendDataBoundItems="true" AutoPostBack="true" CssClass="width-80"  OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged">
+                                                                    <asp:ListItem Text="All" Value="-1" Selected="True"></asp:ListItem>
+
+                                                                </asp:DropDownList>
+                                                            </td>
+                                                           
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="width-20">
+                                                                <label>
+                                                                    Objective:</label>
+                                                            </td>
+                                                            <td class="width-30">
+                                                                <asp:DropDownList ID="ddlObjective" runat="server" AppendDataBoundItems="true" CssClass="width-80" AutoPostBack="true" OnSelectedIndexChanged="ddlObjective_SelectedIndexChanged">
+                                                                    <asp:ListItem Text="All" Value="-1" Selected="True"></asp:ListItem>
+
+                                                                </asp:DropDownList>
+                                                            </td>
+                                                               <td class="width-20">
+                                                                <label>
+                                                                    Priority:</label>
+                                                            </td>
+                                                            <td class="width-30">
+                                                                <asp:DropDownList ID="ddlPriority" runat="server" AppendDataBoundItems="true" CssClass="width-80" AutoPostBack="true" OnSelectedIndexChanged="ddlPriority_SelectedIndexChanged">
+                                                                    <asp:ListItem Text="All" Value="-1" Selected="True"></asp:ListItem>
+
+                                                                </asp:DropDownList>
+                                                            </td>
+
+                                                        </tr>
+                                                        <tr>
+                                                             <td class="width-20">
                                                                 <label>
                                                                     Activity:</label>
                                                             </td>
@@ -73,41 +110,14 @@
 
                                                                 </asp:DropDownList>
                                                             </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="width-20">
-                                                                <label>
-                                                                    Objective:</label>
-                                                            </td>
-                                                            <td class="width-30">
-                                                                <asp:DropDownList ID="ddlObjective" runat="server" AppendDataBoundItems="true" CssClass="width-80">
-                                                                    <asp:ListItem Text="All" Value="-1" Selected="True"></asp:ListItem>
+                                                         
 
-                                                                </asp:DropDownList>
-                                                            </td>
-                                                            <td class="width-20">
+                                                           <td class="width-20">
                                                                 <label>
                                                                     Indicator Name:</label>
                                                             </td>
                                                             <td class="width-30">
                                                                 <asp:TextBox ID="txtActivityName" runat="server" CssClass="width-80"></asp:TextBox>
-                                                            </td>
-
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="width-20">
-                                                                <label>
-                                                                    Priority:</label>
-                                                            </td>
-                                                            <td class="width-30">
-                                                                <asp:DropDownList ID="ddlPriority" runat="server" AppendDataBoundItems="true" CssClass="width-80">
-                                                                    <asp:ListItem Text="All" Value="-1" Selected="True"></asp:ListItem>
-
-                                                                </asp:DropDownList>
-                                                            </td>
-
-                                                            <td colspan="2">
-
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -138,7 +148,7 @@
                 <asp:GridView ID="gvIndicator" runat="server" AutoGenerateColumns="false" AllowSorting="True" AllowPaging="true" PagerSettings-Mode="NumericFirstLast"
                     OnRowCommand="gvIndicator_RowCommand" Width="100%" OnRowDataBound="gvIndicator_RowDataBound" PagerSettings-Position="Bottom"
                     CssClass="table table-striped table-bordered table-hover" OnSorting="gvIndicator_Sorting" OnPageIndexChanging="gvIndicator_PageIndexChanging" PageSize="30" OnRowDeleting="gvIndicator_RowDeleting"
-                    OnRowEditing="gvIndicator_RowEditing" DataKeyNames="ClusterId,ClusterObjectiveId,ObjectivePriorityId,PriorityActivityId,HumanitarianPriority,SiteLanguageId,DataName,IsPriorityIndicatory,IsSRPIndicator,UnitId">
+                    OnRowEditing="gvIndicator_RowEditing" DataKeyNames="ClusterId,ClusterObjectiveId,ObjectivePriorityId,PriorityActivityId,HumanitarianPriority,SiteLanguageId,DataName,IsPriorityIndicatory,IsSRPIndicator,UnitId,EmergencyId">
                   
                     <Columns>
                         <asp:BoundField DataField="ClusterName" HeaderText="Cluster" SortExpression="ClusterName" />
@@ -179,6 +189,19 @@
                                     <div class="contentarea">
                                         <div class="formdiv">
                                             <table border="0" style="margin: 0 auto;">
+                                                 <tr>
+                                                    <td>Emergency:
+                                                    </td>
+                                                    <td class="frmControl">
+                                                        <asp:DropDownList ID="ddlEmergencyNew" runat="server" AppendDataBoundItems="true" AutoPostBack="true" Width="500px" OnSelectedIndexChanged="ddlEmergencyNew_SelectedIndexChanged">
+                                                            <asp:ListItem Text="Select" Value="-1" Selected="True"></asp:ListItem>
+                                                        </asp:DropDownList>
+                                                    </td>
+                                                    <td>
+                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="Required"
+                                                            Text="Required" ControlToValidate="ddlEmergencyNew" CssClass="error2" InitialValue="-1"></asp:RequiredFieldValidator>
+                                                    </td>
+                                                </tr>
                                                 <tr>
                                                     <td>Cluster:
                                                     </td>
@@ -314,6 +337,7 @@
                             <Triggers>
                                 <asp:PostBackTrigger ControlID="btnAdd" />
                                 <asp:PostBackTrigger ControlID="btnClose" />
+                                 <asp:AsyncPostBackTrigger ControlID="ddlEmergencyNew" EventName="SelectedIndexChanged" />
                                 <asp:AsyncPostBackTrigger ControlID="ddlClusterNew" EventName="SelectedIndexChanged" />
                                 <asp:AsyncPostBackTrigger ControlID="ddlObjectiveNew" EventName="SelectedIndexChanged" />
                                 <asp:AsyncPostBackTrigger ControlID="ddlPriorityNew" EventName="SelectedIndexChanged" />
