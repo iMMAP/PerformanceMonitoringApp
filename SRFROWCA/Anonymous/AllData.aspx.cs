@@ -556,9 +556,9 @@ namespace SRFROWCA.Anonymous
             int langId = RC.SelectedSiteLanguageId;
             SQLPaging = PagingStatus.ON;
 
-            object[] paramValue = new object[] {null, null, null, null, null, null, null, null, null,
-                                    null, null, null, null, null, null,
-                                    null, null, null, null, null, langId };
+            object[] paramValue = GetParamValues();
+            paramValue[18] = 0;
+            paramValue[19] = 0;
 
             DataTable dt = DBContext.GetData("GetAllTasksDataReport", paramValue);
             

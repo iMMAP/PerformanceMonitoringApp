@@ -153,7 +153,7 @@
 
                                             <ItemStyle CssClass="hidden" Width="1px"></ItemStyle>
                                         </asp:BoundField>
-                                        <asp:TemplateField HeaderStyle-Width="100px" HeaderText="Objective & Priority" meta:resourcekey="TemplateFieldResource1">
+                                        <%--<asp:TemplateField HeaderStyle-Width="100px" HeaderText="Objective & Priority" meta:resourcekey="TemplateFieldResource1">
                                             <ItemTemplate>
                                                 <asp:Image ID="imgObjective" runat="server" AlternateText="O" meta:resourcekey="imgObjectiveResource1" />
                                                 <asp:Image ID="imgPriority" runat="server" AlternateText="P" meta:resourcekey="imgPriorityResource1" />
@@ -162,7 +162,11 @@
                                             </ItemTemplate>
 
                                             <HeaderStyle Width="100px"></HeaderStyle>
-                                        </asp:TemplateField>
+                                        </asp:TemplateField>--%>
+                                         <asp:BoundField DataField="Objective" HeaderText="Objective & Priority" ItemStyle-CssClass="testact">
+                                            <ItemStyle CssClass="testact"></ItemStyle>
+                                        </asp:BoundField>
+                                         
                                         <asp:BoundField DataField="IsRegional" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource4">
                                             <HeaderStyle CssClass="hidden"></HeaderStyle>
 
