@@ -240,8 +240,14 @@ namespace SRFROWCA.Pages
         private void PopulateLocations()
         {
             int countryId = UserInfo.Country;
-            PopulateAdmin1(countryId);
-            //PopulateAdmin2(countryId);
+            if (UserInfo.Emergency == 2)
+            {
+                PopulateAdmin2(countryId);
+            }
+            else
+            {
+                PopulateAdmin1(countryId);
+            }
         }
 
         private void PopulateAdmin1(int parentLocationId)

@@ -77,14 +77,15 @@ namespace SRFROWCA.Account
                                                                            txtEmail.Text.Trim(), ddlClusters.SelectedItem.Text, ddlOrganization.SelectedItem.Text,
                                                                            ddlCountry.SelectedItem.Text);
                                 Mail.SendMail(mailMsg);
-                                message = @"You have been registered successfully, we will verify your credentials and activate your account in few hours!";
                             }
                         }
+
+                        message = @"You have been registered successfully, we will verify your credentials and activate your account in few hours!";
 
                     }
                     catch
                     {
-                        message = "You have been registered successfully but some error occoured on sending email to site admin. Contact admin and ask for the verification! We apologies for the inconvenience!";
+                        message = "You have been registered successfully but some error occoured on sending email to the site admin. Contact admin and ask for the verification! We apologies for the inconvenience!";
                     }
                 }
 
