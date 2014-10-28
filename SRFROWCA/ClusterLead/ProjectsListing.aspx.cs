@@ -136,11 +136,11 @@ namespace SRFROWCA.ClusterLead
 
         protected void ExportToExcel(object sender, EventArgs e)
         {
-            int? clusterId = UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
-            int? countryID = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
-            int? orgId = (RC.IsDataEntryUser(User))?orgId = UserInfo.Organization:orgId = (int?)null;
+            //int? clusterId = UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
+            //int? countryID = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
+            //int? orgId = (RC.IsDataEntryUser(User))?orgId = UserInfo.Organization:orgId = (int?)null;
 
-            DataTable dt = DBContext.GetData("GetProjects", new object[] { countryID, clusterId, null, orgId, null, DBNull.Value, DBNull.Value, null, null, 1 });//GetProjects();
+            DataTable dt = GetProjects();//DBContext.GetData("GetProjects", new object[] { countryID, clusterId, null, orgId, null, DBNull.Value, DBNull.Value, null, null, 1 });
             //RemoveColumnsFromDataTable(dt);
 
             GridView gv = new GridView();

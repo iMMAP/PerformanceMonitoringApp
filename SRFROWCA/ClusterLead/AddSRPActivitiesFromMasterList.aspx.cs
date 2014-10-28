@@ -259,7 +259,7 @@ namespace SRFROWCA.ClusterLead
 
         protected void ExportToExcel(object sender, EventArgs e)
         {
-            DataTable dt = GetIndicators(false);
+            DataTable dt = GetIndicators(true);
             RemoveColumnsFromDataTable(dt);
             GridView gv = new GridView();
             gv.DataSource = dt;

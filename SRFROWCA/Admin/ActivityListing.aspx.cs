@@ -61,7 +61,7 @@ namespace SRFROWCA.Admin
                 ClearPopupControls();
 
                 hdnPriorityActivityId.Value = e.CommandArgument.ToString();
-                
+
                 GridViewRow row = (((Control)e.CommandSource).NamingContainer) as GridViewRow;
                 ddlEmergencyNew.SelectedValue = gvActivity.DataKeys[row.RowIndex].Values["EmergencyId"].ToString();
                 LoadClustersByEmergency();
@@ -96,7 +96,7 @@ namespace SRFROWCA.Admin
         protected void btnExportExcel_Click(object sender, EventArgs e)
         {
             GridView gvExport = new GridView();
-            DataTable dt = DBContext.GetData("GetAllActivities", new object[] { null,null, null, null, null, (int)RC.SelectedSiteLanguageId });//GetActivities();
+            DataTable dt = DBContext.GetData("GetAllActivities", new object[] { null, null, null, null, (int)RC.SelectedSiteLanguageId });//GetActivities();
             RemoveColumnsFromDataTable(dt);
             gvExport.DataSource = dt;
             gvExport.DataBind();
@@ -240,7 +240,7 @@ namespace SRFROWCA.Admin
             ddlPriority.DataBind();
         }
 
-     
+
         private DataTable GetClusters()
         {
             int? emgId = ddlEmergency.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlEmergency.SelectedValue);
@@ -269,19 +269,19 @@ namespace SRFROWCA.Admin
         }
 
         private DataTable GetPrioritiesByEmergencyClusertAndObjective()
-        {
+            {
             return DBContext.GetData("GetPrioritiesByEmergencyClusertAndObjective", new object[] { (int)RC.SelectedSiteLanguageId, (ddlEmergency.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlEmergency.SelectedValue)), (ddlCluster.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlCluster.SelectedValue)),
             (ddlObjective.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlObjective.SelectedValue))});
-        }
+            }
 
         private DataTable GetObjectives(int? clusterId = null)
-        {           
+            {
                 return DBContext.GetData("GetObjectivesByClusterId", new object[] { (int)RC.SelectedSiteLanguageId, 
                     (ddlEmergencyNew.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlEmergencyNew.SelectedValue)), clusterId });           
         }
 
         private DataTable GetPriorities(int? objectiveId = null)
-        {           
+        {
                 return DBContext.GetData("GetPrioritiesByObjective", new object[] { (int)RC.SelectedSiteLanguageId, 
                      (ddlEmergencyNew.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlEmergencyNew.SelectedValue)),
                      (ddlClusterNew.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlClusterNew.SelectedValue)),

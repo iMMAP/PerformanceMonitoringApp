@@ -302,7 +302,7 @@ namespace SRFROWCA.ClusterLead
 
         protected void ExportToExcel(object sender, EventArgs e)
         {
-            DataTable dt = GetIndicators(false);
+            DataTable dt = GetIndicators(true);
             if (dt.Rows.Count > 0)
             {
                 RemoveColumnsFromDataTable(dt);

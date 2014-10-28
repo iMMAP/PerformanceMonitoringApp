@@ -59,7 +59,7 @@ namespace SRFROWCA.Anonymous
 
         protected void gvReport_Sorting(object sender, GridViewSortEventArgs e)
         {
-            DataTable dt = GetReportData();
+            DataTable dt = GetReportData(true);
 
             if (dt != null)
             {
@@ -386,7 +386,7 @@ namespace SRFROWCA.Anonymous
         {
             divSearchCriteria.InnerHtml = GetSearchCriteria();
 
-            DataTable dt = GetReportData();
+            DataTable dt = GetReportData(true);
 
             // Cnt column has total number of records in resultset.
             // Gridview is using custom paging so to tell gridview that how many pages
@@ -406,14 +406,14 @@ namespace SRFROWCA.Anonymous
         }
 
         // Get data from db.
-        private DataTable GetReportData()
+        private DataTable GetReportData(bool filter)
         {
-            object[] paramValue = GetParamValues();
+            object[] paramValue = GetParamValues(filter);
             return DBContext.GetData("GetAllTasksDataReport", paramValue);
         }
 
         // Get filter criteria and create an object with parameter values.
-        private object[] GetParamValues()
+        private object[] GetParamValues(bool filter)
         {
             string monthIds = RC.GetSelectedValues(ddlMonth);
             string locationIds = GetLocationIds();
@@ -443,10 +443,17 @@ namespace SRFROWCA.Anonymous
             {
                 isApproved = cbValidated.Checked && cbNotValidated.Checked ? null : cbValidated.Checked ? 0 : cbNotValidated.Checked ? 1 : (int?)null;
             }
-            int pageSize = gvReport.PageSize;
-            int pageIndex = GridPageIndex; //gvReport.PageIndex;
+
+            int? pageSize = null;
+            int? pageIndex = null;
+
+            if (filter)
+            {
+                pageSize = gvReport.PageSize;
+                pageIndex = GridPageIndex; 
+            }
+
             int langId = RC.SelectedSiteLanguageId;
-            //SetHFQueryString(monthIds, locationIds, clusterIds, orgIds);
 
             return new object[] {monthIds, locationIds, clusterIds, orgIds, 
                                     objIds, prIds, actIds, indIds, projectIds,
@@ -550,18 +557,8 @@ namespace SRFROWCA.Anonymous
         protected void ExportToExcel(object sender, EventArgs e)
         {
             SQLPaging = PagingStatus.OFF;
+            DataTable dt = GetReportData(false);
 
-            int pageSize = gvReport.PageSize;
-            int pageIndex = GridPageIndex;
-            int langId = RC.SelectedSiteLanguageId;
-            SQLPaging = PagingStatus.ON;
-
-            object[] paramValue = new object[] {null, null, null, null, null, null, null, null, null,
-                                    null, null, null, null, null, null,
-                                    null, null, null, null, null, langId };
-
-            DataTable dt = DBContext.GetData("GetAllTasksDataReport", paramValue);
-            
             RemoveColumnsFromDataTable(dt);
             ReplaceHTMLTags(dt);
 
