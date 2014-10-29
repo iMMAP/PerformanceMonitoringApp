@@ -528,17 +528,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="rowcaDataSet.xsc">
-      <DependentUpon>rowcaDataSet.xsd</DependentUpon>
-    </Content>
-    <None Include="rowcaDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>rowcaDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="rowcaDataSet.xss">
-      <DependentUpon>rowcaDataSet.xsd</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="About.aspx.cs">
@@ -1400,11 +1389,6 @@
     </Compile>
     <Compile Include="RequestOrganization.aspx.designer.cs">
       <DependentUpon>RequestOrganization.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="rowcaDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>rowcaDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="SessionHeartbeat.ashx.cs">
       <DependentUpon>SessionHeartbeat.ashx</DependentUpon>

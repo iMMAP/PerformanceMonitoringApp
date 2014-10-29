@@ -147,7 +147,7 @@
             <div style="overflow-x: auto; width: 100%">
                 <asp:GridView ID="gvIndicator" runat="server" AutoGenerateColumns="false" AllowSorting="True" AllowPaging="true" PagerSettings-Mode="NumericFirstLast"
                     OnRowCommand="gvIndicator_RowCommand" Width="100%" OnRowDataBound="gvIndicator_RowDataBound" PagerSettings-Position="Bottom"
-                    CssClass="table table-striped table-bordered table-hover" OnSorting="gvIndicator_Sorting" OnPageIndexChanging="gvIndicator_PageIndexChanging" PageSize="30" OnRowDeleting="gvIndicator_RowDeleting"
+                    CssClass=" table-striped table-bordered table-hover" OnSorting="gvIndicator_Sorting" OnPageIndexChanging="gvIndicator_PageIndexChanging" PageSize="30" OnRowDeleting="gvIndicator_RowDeleting"
                     OnRowEditing="gvIndicator_RowEditing" DataKeyNames="ClusterId,ClusterObjectiveId,ObjectivePriorityId,PriorityActivityId,HumanitarianPriority,SiteLanguageId,DataName,IsPriorityIndicatory,IsSRPIndicator,UnitId,EmergencyId">
                   
                     <Columns>

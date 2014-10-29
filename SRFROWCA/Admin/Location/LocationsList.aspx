@@ -93,7 +93,7 @@
             <tr>
                 <td>
                     <asp:GridView ID="gvLocation" runat="server" AutoGenerateColumns="false" AllowPaging="true"
-                        CssClass="table table-striped table-bordered table-hover" PageSize="30" AllowSorting="true" Width="100%" 
+                        CssClass=" table-striped table-bordered table-hover" PageSize="30" AllowSorting="true" Width="100%" 
                         OnPageIndexChanging="gvLocation_PageIndexChanging" OnSorting="gvLocation_Sorting"
                         OnRowCommand="gvLocation_RowCommand">
                        

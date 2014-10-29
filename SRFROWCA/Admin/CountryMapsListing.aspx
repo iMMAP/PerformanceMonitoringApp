@@ -111,7 +111,7 @@
             <div style="overflow-x: auto; width: 100%">
                 <asp:GridView ID="gvEmergency" runat="server" AutoGenerateColumns="false" AllowSorting="True"
                     OnRowCommand="gvEmergency_RowCommand" Width="100%" OnRowDataBound="gvEmergency_RowDataBound" 
-                    CssClass="table table-striped table-bordered table-hover" OnSorting="gvEmergency_Sorting">
+                    CssClass="table-striped table-bordered table-hover" OnSorting="gvEmergency_Sorting">
 
                     <Columns>
                         <asp:TemplateField ItemStyle-Width="2%" HeaderText="#">
