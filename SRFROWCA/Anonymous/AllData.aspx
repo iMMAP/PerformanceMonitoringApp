@@ -386,7 +386,7 @@
                                     ItemStyle-HorizontalAlign="Right" />
                                 <asp:BoundField DataField="Country" HeaderText="Country" SortExpression="Country" />
                                 <asp:BoundField DataField="Admin1" HeaderText="Admin1" SortExpression="Admin1" />
-                                <asp:BoundField DataField="Admin2" HeaderText="Admin2" SortExpression="Admin2" />
+                                
                                 <asp:BoundField DataField="AnnualTarget" HeaderText="Annual Target" SortExpression="AnnualTarget"
                                     ItemStyle-HorizontalAlign="Right" />
                                 <asp:BoundField DataField="Achieved" HeaderText="Monthly Achieved" SortExpression="Achieved"
