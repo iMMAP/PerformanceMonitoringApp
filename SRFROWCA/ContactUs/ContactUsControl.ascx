@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ContactUsControl.ascx.cs"
     Inherits="SRFROWCA.ContactUs.ContactUsControl" %>
-<%@ Register Assembly="FredCK.FCKeditorV2" Namespace="FredCK.FCKeditorV2" TagPrefix="FCKeditorV2" %>
+
 <div class="row">
     <div class="col-xs-6 col-sm-6">
         <div class="widget-box no-border">
