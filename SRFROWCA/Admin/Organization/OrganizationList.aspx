@@ -142,7 +142,7 @@
             <tr>
                 <td>
                     <asp:GridView ID="gvOrganization" runat="server" AutoGenerateColumns="false" AllowPaging="true"
-                        CssClass="table table-striped table-bordered table-hover" PageSize="300" AllowSorting="true" Width="100%" OnPageIndexChanging="gvOrganization_PageIndexChanging"
+                        CssClass=" table-striped table-bordered table-hover" PageSize="300" AllowSorting="true" Width="100%" OnPageIndexChanging="gvOrganization_PageIndexChanging"
                         OnSorting="gvOrganization_Sorting" OnRowCommand="gvOrganization_RowCommand" OnRowDeleting="gvOrganization_RowDeleting" OnRowDataBound="gvOrganization_RowDataBound">
                        
                         <Columns>

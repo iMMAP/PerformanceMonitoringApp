@@ -202,7 +202,7 @@
 
         <div class="row">
         
-                    <asp:GridView ID="grdReports" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-bordered table-hover"
+                    <asp:GridView ID="grdReports" runat="server" AutoGenerateColumns="False" CssClass=" table-striped table-bordered table-hover"
                         AllowPaging="True" AllowSorting="True" PageSize="50" ShowHeaderWhenEmpty="True"
                         EmptyDataText="Your filter criteria does not match any report!" Width="100%"
                         OnRowCommand="grdReports_RowCommand" OnSorting="grdReports_Sorting" OnPageIndexChanging="grdReports_PageIndexChanging">

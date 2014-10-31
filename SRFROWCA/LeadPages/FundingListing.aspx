@@ -123,7 +123,7 @@
         </table>
         
                 <asp:GridView ID="gvFunding" runat="server" AutoGenerateColumns="True" HeaderStyle-BackColor="ButtonFace"
-                    CssClass="table table-striped table-bordered table-hover"
+                    CssClass=" table-striped table-bordered table-hover"
                     Width="100%">
                    
                    

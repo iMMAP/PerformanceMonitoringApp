@@ -97,7 +97,7 @@
         </div>
 
         <asp:GridView ID="gvIndicators" runat="server" AutoGenerateColumns="False" HeaderStyle-BackColor="ButtonFace"
-            DataKeyNames="ReportId,ActivityDataId,ReportDetailId" CssClass="table table-striped table-bordered table-hover" Width="100%" OnRowDataBound="gvIndicators_RowDataBound">
+            DataKeyNames="ReportId,ActivityDataId,ReportDetailId" CssClass=" table-striped table-bordered table-hover" Width="100%" OnRowDataBound="gvIndicators_RowDataBound">
             <HeaderStyle BackColor="Control"></HeaderStyle>
 
             <Columns>

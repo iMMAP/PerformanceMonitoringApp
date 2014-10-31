@@ -137,7 +137,7 @@
             <div style="overflow-x: auto; width: 100%">
                 <asp:GridView ID="gvActivity" runat="server" AutoGenerateColumns="false" AllowSorting="True" AllowPaging="true" PagerSettings-Mode="NumericFirstLast"
                     OnRowCommand="gvActivity_RowCommand" Width="100%" OnRowDataBound="gvActivity_RowDataBound" PagerSettings-Position="Bottom" DataKeyNames="ClusterId,ClusterObjectiveId,ObjectivePriorityId,ActivityTypeId,HumanitarianPriority,SiteLanguageId,ActivityName,EmergencyId"
-                     CssClass="table table-striped table-bordered table-hover"  OnSorting="gvActivity_Sorting" OnPageIndexChanging="gvActivity_PageIndexChanging" PageSize="30" OnRowDeleting="gvActivity_RowDeleting">
+                     CssClass="table-striped table-bordered table-hover"  OnSorting="gvActivity_Sorting" OnPageIndexChanging="gvActivity_PageIndexChanging" PageSize="30" OnRowDeleting="gvActivity_RowDeleting">
                     
                     <Columns>
                         <asp:BoundField DataField="ClusterName" HeaderText="Cluster" SortExpression="ClusterName" ItemStyle-Width="120px" />

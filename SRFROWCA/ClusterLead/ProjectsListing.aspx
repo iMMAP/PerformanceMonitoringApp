@@ -168,7 +168,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 widget-container-span">
                 <div class="widget-box">
-                    <asp:GridView ID="gvProjects" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-bordered table-hover"
+                    <asp:GridView ID="gvProjects" runat="server" AutoGenerateColumns="False" CssClass=" table-striped table-bordered table-hover"
                         AllowPaging="True" AllowSorting="True" PageSize="50" ShowHeaderWhenEmpty="True"
                         EmptyDataText="Your filter criteria does not match any project!" Width="100%"
                         OnRowCommand="gvProjects_RowCommand" OnSorting="gvProjects_Sorting" OnPageIndexChanging="gvProjects_PageIndexChanging"
