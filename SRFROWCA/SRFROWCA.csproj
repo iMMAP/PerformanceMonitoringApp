@@ -165,7 +165,6 @@
     <Content Include="Admin\IndicatorListing.aspx" />
     <Content Include="Admin\Location\AddNewLocation.aspx" />
     <Content Include="Admin\Location\LocationsList.aspx" />
-    <Content Include="Admin\OPSProjectAllData.aspx" />
     <Content Include="Admin\Organization\AddEditOrganization.aspx" />
     <Content Include="Admin\Organization\OrganizationList.aspx" />
     <Content Include="Admin\PriorityActivities.aspx" />
@@ -430,12 +429,6 @@
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="PivotTables\OprOrgsClsCnt.aspx" />
-    <Content Include="ReportsCharts\AllTargetsAndAchieved.ascx" />
-    <Content Include="ReportsCharts\ChartReport.aspx" />
-    <Content Include="ReportsCharts\GenerateReport1.aspx" />
-    <Content Include="ReportsCharts\ReportsDefault.aspx" />
-    <Content Include="ReportsCharts\TargetsAchievedByLocData.aspx" />
-    <Content Include="ReportsCharts\TargetsAchievedByLocDuration.aspx" />
     <Content Include="Reports\AddCountryReports.aspx" />
     <Content Include="Reports\DownloadReport.aspx" />
     <Content Include="Reports\LoadCountryMaps.aspx" />
@@ -459,11 +452,12 @@
     <Content Include="ops.Master" />
     <Content Include="DataFeed.ashx" />
     <Content Include="OPS\OPSActivitiesFeed.ashx" />
-    <Content Include="OPS\OPSProjectFeed.ashx" />
     <Content Include="ClusterLead\Web.config" />
     <Content Include="Admin\Web.config" />
     <Content Include="Anonymous\AllDataFeed.ashx" />
     <Content Include="Anonymous\NumberOfOrgsByAdmin1.ashx" />
+    <Content Include="Anonymous\3W.ashx" />
+    <Content Include="Anonymous\4W.ashx" />
     <None Include="assets\font\cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff" />
     <None Include="assets\font\DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff" />
     <None Include="assets\font\fontawesome-webfontd41d.eot" />
@@ -702,13 +696,6 @@
     <Compile Include="Admin\Location\LocationsList.aspx.designer.cs">
       <DependentUpon>LocationsList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\OPSProjectAllData.aspx.cs">
-      <DependentUpon>OPSProjectAllData.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\OPSProjectAllData.aspx.designer.cs">
-      <DependentUpon>OPSProjectAllData.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Admin\Organization\AddEditOrganization.aspx.cs">
       <DependentUpon>AddEditOrganization.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -743,6 +730,12 @@
     </Compile>
     <Compile Include="Admin\ProjectXMLFeeds.aspx.designer.cs">
       <DependentUpon>ProjectXMLFeeds.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Anonymous\3W.ashx.cs">
+      <DependentUpon>3W.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Anonymous\4W.ashx.cs">
+      <DependentUpon>4W.ashx</DependentUpon>
     </Compile>
     <Compile Include="Anonymous\AllDataFeed.ashx.cs">
       <DependentUpon>AllDataFeed.ashx</DependentUpon>
@@ -1108,9 +1101,6 @@
     <Compile Include="OPS\OPSDataEntry.aspx.designer.cs">
       <DependentUpon>OPSDataEntry.aspx</DependentUpon>
     </Compile>
-    <Compile Include="OPS\OPSProjectFeed.ashx.cs">
-      <DependentUpon>OPSProjectFeed.ashx</DependentUpon>
-    </Compile>
     <Compile Include="OPS\UploadOPSProjectDetails.aspx.cs">
       <DependentUpon>UploadOPSProjectDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1238,50 +1228,7 @@
     <Compile Include="PivotTables\OprOrgsClsCnt.aspx.designer.cs">
       <DependentUpon>OprOrgsClsCnt.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ReportsCharts\AllTargetsAndAchieved.ascx.cs">
-      <DependentUpon>AllTargetsAndAchieved.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ReportsCharts\AllTargetsAndAchieved.ascx.designer.cs">
-      <DependentUpon>AllTargetsAndAchieved.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="ReportsCharts\ChartReport.aspx.cs">
-      <DependentUpon>ChartReport.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ReportsCharts\ChartReport.aspx.designer.cs">
-      <DependentUpon>ChartReport.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ReportsCharts\GenerateChartReportPDF.cs" />
-    <Compile Include="ReportsCharts\GenerateReport1.aspx.cs">
-      <DependentUpon>GenerateReport1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ReportsCharts\GenerateReport1.aspx.designer.cs">
-      <DependentUpon>GenerateReport1.aspx</DependentUpon>
-    </Compile>
     <Compile Include="ReportsCharts\ReportsCommon.cs" />
-    <Compile Include="ReportsCharts\ReportsDefault.aspx.cs">
-      <DependentUpon>ReportsDefault.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ReportsCharts\ReportsDefault.aspx.designer.cs">
-      <DependentUpon>ReportsDefault.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ReportsCharts\TargetsAchievedByLocData.aspx.cs">
-      <DependentUpon>TargetsAchievedByLocData.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ReportsCharts\TargetsAchievedByLocData.aspx.designer.cs">
-      <DependentUpon>TargetsAchievedByLocData.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ReportsCharts\TargetsAchievedByLocDuration.aspx.cs">
-      <DependentUpon>TargetsAchievedByLocDuration.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ReportsCharts\TargetsAchievedByLocDuration.aspx.designer.cs">
-      <DependentUpon>TargetsAchievedByLocDuration.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Reports\AddCountryReports.aspx.cs">
       <DependentUpon>AddCountryReports.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1441,9 +1388,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="DataFeeds\Organizations.ashx" />
     <Content Include="DataFeeds\OrganizationsFeed.ashx" />
     <Content Include="DataFeeds\OfficesFeed.ashx" />
@@ -1455,9 +1399,6 @@
     <Content Include="DataFeeds\YearFeed.ashx" />
     <Content Include="DataFeeds\MonthFeed.ashx" />
     <Content Include="SessionHeartbeat.ashx" />
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="OPS\App_LocalResources\OPSDataEntry.aspx.resx" />
