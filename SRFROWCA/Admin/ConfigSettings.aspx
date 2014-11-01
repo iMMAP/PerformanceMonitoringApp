@@ -83,7 +83,7 @@
                                                             </td>
                                                             <td></td>
                                                             <td rowspan="6">
-                                                                <asp:ListBox runat="server" ID="lstConfigs" Style="height: 190px; width: 300px;"></asp:ListBox>
+                                                                <asp:ListBox runat="server" ID="lstConfigs" Style="height: 190px; width: 300px;" AutoPostBack="true" OnSelectedIndexChanged="lstConfigs_SelectedIndexChanged"></asp:ListBox>
                                                         </tr>
                                                         <tr>
                                                             <td>

@@ -458,7 +458,6 @@
     <Content Include="Anonymous\NumberOfOrgsByAdmin1.ashx" />
     <Content Include="Anonymous\3W.ashx" />
     <Content Include="Anonymous\4W.ashx" />
-    <Content Include="WebForm1.aspx" />
     <None Include="assets\font\cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff" />
     <None Include="assets\font\DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff" />
     <None Include="assets\font\fontawesome-webfontd41d.eot" />
@@ -1354,13 +1353,6 @@
     </Compile>
     <Compile Include="UploadSRPLogFrame.aspx.designer.cs">
       <DependentUpon>UploadSRPLogFrame.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
