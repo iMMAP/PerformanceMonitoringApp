@@ -121,7 +121,7 @@
                                                                 <asp:TextBox runat="server" ID="txtDate" Width="270"></asp:TextBox>
                                                             </td>
                                                             <td style="padding-right: 15px;">
-                                                                <asp:Button runat="server" ID="btnAdd" Text="Add >>" OnClick="btnAdd_Click" />
+                                                                <asp:Button runat="server" ID="btnAdd" Text="Add >>" OnClick="btnAdd_Click" CssClass="btn-primary"  />
                                                         </tr>
                                                         <tr>
                                                             <td>

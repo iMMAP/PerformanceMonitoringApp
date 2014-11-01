@@ -161,6 +161,7 @@
     <Content Include="Admin\CountryMapsListing.aspx" />
     <Content Include="Admin\EmergencyClusters.aspx" />
     <Content Include="Admin\EmergencyLocations.aspx" />
+    <Content Include="Admin\EmergencyObjectives.aspx" />
     <Content Include="Admin\IndicatorActivities.aspx" />
     <Content Include="Admin\IndicatorListing.aspx" />
     <Content Include="Admin\Location\AddNewLocation.aspx" />
@@ -656,6 +657,13 @@
     </Compile>
     <Compile Include="Admin\EmergencyLocations.aspx.designer.cs">
       <DependentUpon>EmergencyLocations.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\EmergencyObjectives.aspx.cs">
+      <DependentUpon>EmergencyObjectives.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\EmergencyObjectives.aspx.designer.cs">
+      <DependentUpon>EmergencyObjectives.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\IndicatorActivities.aspx.cs">
       <DependentUpon>IndicatorActivities.aspx</DependentUpon>

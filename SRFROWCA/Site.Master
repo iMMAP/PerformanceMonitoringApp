@@ -327,6 +327,9 @@
                                 <li id="liEmgCluster" runat="server"><a href="<%=BaseURL %>/admin/EmergencyClusters.aspx"><i class="icon-list"></i><span class="menu-text">
                                     <asp:Localize ID="Localize5" runat="server" Text="Emergency Clusters" meta:resourcekey="localEmergencyClustersResource1"></asp:Localize>
                                 </span></a></li>
+                                 <li id="liEmgObjectives" runat="server"><a href="<%=BaseURL %>/admin/EmergencyObjectives.aspx"><i class="icon-list"></i><span class="menu-text">
+                                    <asp:Localize ID="Localize6" runat="server" Text="Emergency Objectives" meta:resourcekey="localEmergencyObjectivesResource1"></asp:Localize>
+                                </span></a></li>
                             </ul>
                         </li>
                         <li id="liActivities" runat="server"><a href="~/Admin/ActivityListing.aspx"
