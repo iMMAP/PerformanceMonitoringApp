@@ -147,7 +147,7 @@
                                                             <div class="col-xs-12">
                                                                 <div class="row">
                                                                     <table style="width: 85%; margin: 10px 10px 10px 20px" border="0">
-                                                                        <tr>
+                                                                        <tr style="<%=showCountry%>">
                                                                             <td style="width: 30%">
                                                                                 <asp:Label ID="lblCountry" runat="server" Text="Country:"></asp:Label>
                                                                             </td>
