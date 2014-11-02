@@ -21,6 +21,12 @@ namespace SRFROWCA.Admin
             }
         }
 
+        internal override void BindGridData()
+        {
+            LoadCombos();
+            LoadEmergencyObjectives();
+        }
+
         private void LoadCombos()
         {
             ddlEmergency.DataValueField = "EmergencyId";

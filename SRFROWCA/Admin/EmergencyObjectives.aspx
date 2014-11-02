@@ -9,12 +9,20 @@
 
             var objEng = document.getElementById('<%=txtObjectiveEng.ClientID%>');
             var objFr = document.getElementById('<%=txtObjectiveFr.ClientID%>');
+            var cmbEm = document.getElementById('<%=ddlEmergency.ClientID%>');
 
             if (objEng.value == '' && objFr.value == '') {
 
                 alert("Please enter atleast one Objective!");
                 return false;
             }
+
+            if (cmbEm.value < 0) {
+                alert("Please select an Emergency!");
+                return false;
+            }
+
+            
         }
     </script>
 </asp:Content>
@@ -61,30 +69,30 @@
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <div class="row">
-                                                    <table border="0" style="width: 50%; margin: 10px 10px 10px 20px">
+                                                    <table border="0" style="width: 60%; margin: 10px 10px 10px 20px">
                                                         <tr>
                                                             <td>
                                                                 <label>
-                                                                    Emergency Name:</label>
+                                                                    Emergency:</label>
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtEmergencyName" runat="server" CssClass="width-80"></asp:TextBox>
                                                             </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
+                                                               <td>
                                                                 <label>
-                                                                    Objective Name:</label>
+                                                                    Objective:</label>
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtObjectiveName" runat="server" CssClass="width-80"></asp:TextBox>
                                                             </td>
                                                         </tr>
+                                                       
                                                         <tr>
                                                             <td>&nbsp;</td>
                                                             <td style="padding-top: 20px;">
                                                                 <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" CssClass="btn btn-primary" CausesValidation="false" />
                                                             </td>
+                                                            <td></td><td></td>
                                                         </tr>
 
                                                     </table>
@@ -115,10 +123,10 @@
                                 <%# Container.DataItemIndex + 1 %>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField ItemStyle-Width="5%" DataField="EmergencyObjectiveId" HeaderText="ID" SortExpression="EmergencyObjectiveId" />
+                        <asp:BoundField ItemStyle-Width="5%" Visible="false" DataField="EmergencyObjectiveId" HeaderText="ID" SortExpression="EmergencyObjectiveId" />
 
-                        <asp:BoundField ItemStyle-Width="25%" DataField="EmergencyName" HeaderText="Emergency Name" SortExpression="EmergencyName" />
-                        <asp:BoundField ItemStyle-Width="45%" DataField="Objective" HeaderText="Objective Name" SortExpression="Objective" />
+                        <asp:BoundField ItemStyle-Width="25%" DataField="EmergencyName" HeaderText="Emergency" SortExpression="EmergencyName" />
+                        <asp:BoundField ItemStyle-Width="45%" DataField="Objective" HeaderText="Objective" SortExpression="Objective" />
                         
                         <asp:TemplateField HeaderStyle-Width="10%" ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>
@@ -174,7 +182,10 @@
                                                     <td>Emergency:
                                                     </td>
                                                     <td class="frmControl">
-                                                        <asp:DropDownList ID="ddlEmergency" runat="server" Width="300px">
+                                                        <asp:DropDownList ID="ddlEmergency" runat="server" AppendDataBoundItems="true" Width="300px">
+                                                            <asp:ListItem Selected="True" Text="--- Select Emergency ---" Value="-1">
+
+                                                            </asp:ListItem>
                                                         </asp:DropDownList>
                                                     </td>
                                                     <td>
@@ -183,7 +194,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Objective Name (English):
+                                                    <td>Objective (English):
                                                     </td>
                                                     <td class="frmControl">
                                                         <asp:TextBox ID="txtObjectiveEng" runat="server" TextMode="MultiLine" Height="70" Width="300px" MaxLength="200"></asp:TextBox>
@@ -194,7 +205,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Objective Name (French):
+                                                    <td>Objective (French):
                                                     </td>
                                                     <td class="frmControl">
                                                         <asp:TextBox ID="txtObjectiveFr" runat="server" TextMode="MultiLine" Height="70" Width="300px" MaxLength="200"></asp:TextBox>
