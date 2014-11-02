@@ -493,6 +493,19 @@ namespace SRFROWCA.Admin
             }
         }
 
+        protected void gvConfigSettings_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                LinkButton deleteButton = e.Row.FindControl("btnDelete") as LinkButton;
+                if (deleteButton != null)
+                {
+                    deleteButton.Attributes.Add("onclick", "javascript:return " +
+                    "confirm('Are you sure you want to delete this Setting?')");
+                }
+            }
+        }
+
         protected void gvConfigSettings_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             string configKeyID = Convert.ToString(e.CommandArgument);

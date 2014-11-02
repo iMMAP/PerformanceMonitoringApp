@@ -234,7 +234,7 @@
                                                 <div class="table-responsive " style="margin-top:5px;">
                                                                         <div style="overflow-x: auto; width: 100%">
                                                                             <asp:GridView ID="gvConfigSettings" runat="server" AutoGenerateColumns="false" AllowSorting="True"
-                                                                                OnRowCommand="gvConfigSettings_RowCommand"
+                                                                                OnRowCommand="gvConfigSettings_RowCommand" OnRowDataBound="gvConfigSettings_RowDataBound"
                                                                                 CssClass=" table-striped table-bordered table-hover">
 
                                                                                 <Columns>
