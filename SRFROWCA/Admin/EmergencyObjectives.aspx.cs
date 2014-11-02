@@ -10,14 +10,24 @@ using System.Web.UI.WebControls;
 
 namespace SRFROWCA.Admin
 {
-    public partial class EmergencyObjectives: BasePage
+    public partial class EmergencyObjectives : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 LoadEmergencyObjectives();
+                LoadCombos();
             }
+        }
+
+        private void LoadCombos()
+        {
+            ddlEmergency.DataValueField = "EmergencyId";
+            ddlEmergency.DataTextField = "EmergencyName";
+
+            ddlEmergency.DataSource = RC.GetAllEmergencies(RC.SelectedSiteLanguageId);
+            ddlEmergency.DataBind();
         }
 
         private void LoadEmergencyObjectives()
@@ -52,7 +62,7 @@ namespace SRFROWCA.Admin
                 objective = txtObjectiveName.Text;
 
             DataTable dt = GetEmergencyObjectives(emergency, objective);
-            
+
             if (dt != null)
             {
                 //Sort the data.
@@ -66,7 +76,7 @@ namespace SRFROWCA.Admin
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                Button deleteButton = e.Row.FindControl("btnDelete") as Button;
+                LinkButton deleteButton = e.Row.FindControl("btnDelete") as LinkButton;
                 if (deleteButton != null)
                 {
                     deleteButton.Attributes.Add("onclick", "javascript:return " +
@@ -77,16 +87,67 @@ namespace SRFROWCA.Admin
 
         protected void gvEmergencyObjectives_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            // If user click on Delete button.
             if (e.CommandName == "DeleteObjective")
             {
                 int emgObjectiveId = Convert.ToInt32(e.CommandArgument);
+
+                if (IsObjectiveUsed(emgObjectiveId))
+                {
+                    ShowMessage("Objective cannot be deleted! It is being used.", RC.NotificationType.Error, true, 500);
+                    return;
+                }
+
+                if (!DeleteEmergencyObjective(emgObjectiveId))
+                    ShowMessage("Objective cannot be deleted!", RC.NotificationType.Error, true, 500);
+
+                LoadEmergencyObjectives();
             }
 
-            // Edit Project.
             if (e.CommandName == "EditObjective")
             {
+                ClearPopupControls();
+                hfEmgObjID.Value = e.CommandArgument.ToString();
+
+                GridViewRow row = (((Control)e.CommandSource).NamingContainer) as GridViewRow;
+                Label lblEmergencyID = row.FindControl("lblEmergencyId") as Label;
+                Label lblObjAlternate = row.FindControl("lblObjAlternate") as Label;
+
+                if (lblEmergencyID != null)
+                    ddlEmergency.SelectedValue = lblEmergencyID.Text;
+
+                if (gvEmergencyObjectives.DataKeys[row.RowIndex].Value.ToString() == "1")
+                {
+                    txtObjectiveEng.Text = row.Cells[3].Text;
+
+                    if (lblObjAlternate != null)
+                        txtObjectiveFr.Text = lblObjAlternate.Text;
+                }
+                else
+                {
+                    txtObjectiveFr.Text = row.Cells[3].Text;
+
+                    if (lblObjAlternate != null)
+                        txtObjectiveEng.Text = lblObjAlternate.Text;
+                }
+
+                mpeAddObjective.Show();
             }
+        }
+
+        private bool IsObjectiveUsed(int emgObjectiveId)
+        {
+            if (DBContext.GetData("uspIsObjectiveUsed", new object[] { emgObjectiveId }).Rows.Count > 0)
+                return true;
+            else
+                return false;
+        }
+
+        private bool DeleteEmergencyObjective(int emgObjectiveId)
+        {
+            if (DBContext.Delete("uspDeleteEmergencyObjective", new object[] { emgObjectiveId, null }) > 0)
+                return true;
+            else
+                return false;
         }
 
         private string GetSortDirection(string column)
@@ -122,6 +183,52 @@ namespace SRFROWCA.Admin
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             LoadEmergencyObjectives();
+        }
+
+        protected void btnAddObjectives_Click(object sender, EventArgs e)
+        {
+            ClearPopupControls();
+            mpeAddObjective.Show();
+        }
+
+        private void ClearPopupControls()
+        {
+            if (ddlEmergency.Items.Count > 0)
+                ddlEmergency.SelectedIndex = 0;
+
+            hfEmgObjID.Value = txtObjectiveFr.Text = txtObjectiveEng.Text = string.Empty;
+        }
+
+        protected void btnAdd_Click(object sender, EventArgs e)
+        {
+            SaveEmergencyObjective();
+            LoadEmergencyObjectives();
+            ClearPopupControls();
+            mpeAddObjective.Hide();
+        }
+
+        private void SaveEmergencyObjective()
+        {
+            if (string.IsNullOrEmpty(txtObjectiveEng.Text))
+                txtObjectiveEng.Text = txtObjectiveFr.Text;
+            else if (string.IsNullOrEmpty(txtObjectiveFr.Text))
+                txtObjectiveFr.Text = txtObjectiveEng.Text;
+
+            Guid userId = RC.GetCurrentUserId;
+            string objectiveEng = txtObjectiveEng.Text.Trim();
+            string objectiveFr = txtObjectiveFr.Text.Trim();
+            int emergencyID = Convert.ToInt32(ddlEmergency.SelectedValue);
+
+            if (!string.IsNullOrEmpty(hfEmgObjID.Value))
+                DBContext.Add("uspInsertEmergencyObjective", new object[] { emergencyID, objectiveEng, objectiveFr, userId, Convert.ToInt32(hfEmgObjID.Value), null });
+            else
+                DBContext.Add("uspInsertEmergencyObjective", new object[] { emergencyID, objectiveEng, objectiveFr, userId, null, null });
+        }
+
+        private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 0)
+        {
+            updMessage.Update();
+            RC.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
         }
     }
 }
