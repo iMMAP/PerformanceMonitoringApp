@@ -158,6 +158,7 @@
     <Content Include="Admin\ActivityListing.aspx" />
     <Content Include="Admin\ConfigSettings.aspx" />
     <Content Include="Admin\AddEditCountryMaps.aspx" />
+    <Content Include="Admin\CountryIndicators.aspx" />
     <Content Include="Admin\CountryMapsListing.aspx" />
     <Content Include="Admin\EmergencyClusters.aspx" />
     <Content Include="Admin\EmergencyLocations.aspx" />
@@ -636,6 +637,13 @@
     </Compile>
     <Compile Include="Admin\AddEditCountryMaps.aspx.designer.cs">
       <DependentUpon>AddEditCountryMaps.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\CountryIndicators.aspx.cs">
+      <DependentUpon>CountryIndicators.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\CountryIndicators.aspx.designer.cs">
+      <DependentUpon>CountryIndicators.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\CountryMapsListing.aspx.cs">
       <DependentUpon>CountryMapsListing.aspx</DependentUpon>

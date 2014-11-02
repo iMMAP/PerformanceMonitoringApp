@@ -332,6 +332,18 @@
                                 </span></a></li>
                             </ul>
                         </li>
+                          <li id="liClusterFrameworks" runat="server"><a id="A6" runat="server" href="#"
+                            class="dropdown-toggle"><i class="icon-list-alt"></i><span class="menu-text">
+                                <asp:Localize ID="localClusterFrameworksList" runat="server" Text="Cluster Frameworks" meta:resourcekey="localClusterFrameworksListResource1"></asp:Localize>
+                            </span><b class="arrow icon-angle-down"></b></a>
+                            <ul class="submenu">
+                                <li id="liCountryIndicators" runat="server"><a href="<%=BaseURL %>/admin/CountryIndicators.aspx"><span class="menu-text">
+
+                                    <asp:Localize ID="Localize8" runat="server" Text="Country Indicators" meta:resourcekey="localCountryIndicatorsResource1"></asp:Localize>
+                                </span></a></li>
+                              
+                            </ul>
+                        </li>
                         <li id="liActivities" runat="server"><a href="~/Admin/ActivityListing.aspx"
                             id="A3" runat="server"><i class="icon-list-alt"></i><span class="menu-text">Activities</span> </a></li>
                         <li id="liIndicators" runat="server"><a href="~/Admin/IndicatorListing.aspx"
