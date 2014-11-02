@@ -86,7 +86,7 @@
                     </div>
                 </td>
             </tr>
-        </table
+        </table>
 
             <div class="table-responsive">
             <div style="overflow-x: auto; width: 100%">
