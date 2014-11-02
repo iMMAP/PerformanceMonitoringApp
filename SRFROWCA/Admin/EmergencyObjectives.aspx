@@ -105,7 +105,7 @@
 
         <div class="table-responsive">
             <div style="overflow-x: auto; width: 100%">
-                <asp:GridView ID="gvEmergencyObjectives" runat="server" AutoGenerateColumns="false" AllowSorting="True" DataKeyNames="SiteLanguageId"
+                <asp:GridView ID="gvEmergencyObjectives" Width="100%" runat="server" AutoGenerateColumns="false" AllowSorting="True" DataKeyNames="SiteLanguageId"
                     CssClass=" table-striped table-bordered table-hover"
                     OnRowCommand="gvEmergencyObjectives_RowCommand" OnRowDataBound="gvEmergencyObjectives_RowDataBound" OnSorting="gvEmergencyObjectives_Sorting">
 
@@ -186,7 +186,7 @@
                                                     <td>Objective Name (English):
                                                     </td>
                                                     <td class="frmControl">
-                                                        <asp:TextBox ID="txtObjectiveEng" runat="server" Width="300px" MaxLength="200"></asp:TextBox>
+                                                        <asp:TextBox ID="txtObjectiveEng" runat="server" TextMode="MultiLine" Height="70" Width="300px" MaxLength="200"></asp:TextBox>
                                                     </td>
                                                     <td>
                                                         <%--<asp:RequiredFieldValidator ID="rfvObjName" runat="server" ErrorMessage="Objective Name (Eng)"
@@ -197,7 +197,7 @@
                                                     <td>Objective Name (French):
                                                     </td>
                                                     <td class="frmControl">
-                                                        <asp:TextBox ID="txtObjectiveFr" runat="server" Width="300px" MaxLength="200"></asp:TextBox>
+                                                        <asp:TextBox ID="txtObjectiveFr" runat="server" TextMode="MultiLine" Height="70" Width="300px" MaxLength="200"></asp:TextBox>
                                                     </td>
                                                     <td>
                                                         <%-- <asp:RequiredFieldValidator ID="rfvObjNameFr" runat="server" ErrorMessage="Objective Name (Fr)"
