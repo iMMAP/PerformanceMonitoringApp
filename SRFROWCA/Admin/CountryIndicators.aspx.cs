@@ -16,7 +16,7 @@ namespace SRFROWCA.Admin
         {
             if (!IsPostBack)
             {
-                LoadClusterLeads();
+                LoadClusterIndicators();
                 LoadCombos();
             }
         }
@@ -27,7 +27,7 @@ namespace SRFROWCA.Admin
             UI.FillClusters(ddlCluster, RC.SelectedSiteLanguageId);
         }
 
-        private void LoadClusterLeads()
+        private void LoadClusterIndicators()
         {
             string objective = null;
             string indicator = null;
@@ -53,6 +53,16 @@ namespace SRFROWCA.Admin
         private DataTable GetClusterIndicatros(int? clusterId, int? countryId, string objective, string indicator)
         {
             return DBContext.GetData("uspGetCluserIndicators", new object[] { clusterId, countryId, objective, indicator, RC.SelectedSiteLanguageId });
+        }
+
+        protected void btnAddIndicator_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Admin/AddCountryIndicator.aspx");
+        }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadClusterIndicators();
         }
     }
 }

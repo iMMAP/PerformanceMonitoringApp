@@ -28,7 +28,7 @@
                                 <div class="widget-header widget-header-small header-color-blue2">
                                     <h6>
 
-                                        <asp:Button ID="btnAddIndicator" runat="server" Text="Add Indicator" CausesValidation="false"
+                                        <asp:Button ID="btnAddIndicator" runat="server" OnClick="btnAddIndicator_Click" Text="Add Indicator" CausesValidation="false"
                                             CssClass="btn btn-yellow pull-right" />
                                     </h6>
                                 </div>
@@ -37,7 +37,7 @@
                                       
                                           
                                                 <div class="row">
-                                                    <table border="0" style="width: 50%; margin: 10px 10px 10px 20px">
+                                                    <table border="0" style="width: 80%; margin: 10px 10px 10px 20px">
                                                         .
                                                          <tr>
                                                              <td>
@@ -49,10 +49,7 @@
                                                                      <asp:ListItem Selected="True" Text="--- Select Country ---" Value="-1"></asp:ListItem>
                                                                  </asp:DropDownList>
                                                              </td>
-                                                         </tr>
-
-                                                        <tr>
-                                                            <td>
+                                                               <td>
                                                                 <label>
                                                                     Cluster:</label>
                                                             </td>
@@ -61,7 +58,9 @@
                                                                     <asp:ListItem Selected="True" Text="--- Select Cluster ---" Value="-1"></asp:ListItem>
                                                                 </asp:DropDownList>
                                                             </td>
-                                                        </tr>
+                                                         </tr>
+
+                                                       
                                                         <tr>
                                                             <td>
                                                                 <label>
@@ -70,9 +69,7 @@
                                                             <td>
                                                                 <asp:TextBox ID="txtObjectiveName"  runat="server" Width="270"></asp:TextBox>
                                                             </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
+                                                               <td>
                                                                 <label>
                                                                     Indicator:</label>
                                                             </td>
@@ -80,11 +77,12 @@
                                                                 <asp:TextBox ID="txtIndicatorName" runat="server" Width="270"></asp:TextBox>
                                                             </td>
                                                         </tr>
+                                                        
                                                         <tr>
                                                             <td>&nbsp;</td>
                                                             <td style="padding-top: 20px;">
-                                                                <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-primary" CausesValidation="false" />
-                                                            </td>
+                                                                <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" CssClass="btn btn-primary" CausesValidation="false" />
+                                                            </td><td></td><td></td>
                                                         </tr>
 
                                                     </table>
@@ -109,43 +107,41 @@
                     CssClass=" table-striped table-bordered table-hover">
 
                     <Columns>
-                        <asp:TemplateField ItemStyle-Width="5%" HeaderText="#">
+                        <asp:TemplateField ItemStyle-Width="2%" HeaderText="#">
                             <ItemTemplate>
                                 <%# Container.DataItemIndex + 1 %>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <%-- <asp:BoundField ItemStyle-Width="5%" DataField="EmergencyObjectiveId" HeaderText="ID" SortExpression="EmergencyObjectiveId" />
+                         <asp:BoundField Visible="false" DataField="ClusterIndicatorId" HeaderText="ID" SortExpression="ClusterIndicatorId" />
 
-                        <asp:BoundField ItemStyle-Width="25%" DataField="EmergencyName" HeaderText="Emergency Name" SortExpression="EmergencyName" />
-                        <asp:BoundField ItemStyle-Width="45%" DataField="Objective" HeaderText="Objective Name" SortExpression="Objective" />
+                        <asp:BoundField ItemStyle-Width="10%" DataField="Country" HeaderText="Country" SortExpression="Country" />
+                        <asp:BoundField ItemStyle-Width="15%" DataField="Cluster" HeaderText="Cluster" SortExpression="Cluster" />
+                        <asp:BoundField ItemStyle-Width="40%" DataField="Objective" HeaderText="Objective" SortExpression="Objective" />
+                        <asp:BoundField ItemStyle-Width="23%" DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator" />
                         
-                        <asp:TemplateField HeaderStyle-Width="10%" ItemStyle-HorizontalAlign="Center">
+                        <asp:TemplateField HeaderStyle-Width="5%" ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>
 
-                                <asp:LinkButton runat="server" ID="btnEdit" CausesValidation="false"
-                                    CommandName="EditObjective" CommandArgument='<%# Eval("EmergencyObjectiveId") %>' Text="Edit">
+                                <asp:LinkButton runat="server" Visible="false" ID="btnEdit" CausesValidation="false"
+                                    CommandName="EditIndicator" CommandArgument='<%# Eval("ClusterIndicatorId") %>' Text="Edit">
 
                                 </asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderStyle-Width="10%" ItemStyle-HorizontalAlign="Center">
+                        <asp:TemplateField HeaderStyle-Width="5%" ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>
-                                <asp:LinkButton ID="btnDelete" runat="server" Text="Delete" Width="80px" CausesValidation="false"
-                                    CommandName="DeleteObjective" CommandArgument='<%# Eval("EmergencyObjectiveId") %>'>
+                                <asp:LinkButton ID="btnDelete" Visible="false" runat="server" Text="Delete" Width="80px" CausesValidation="false"
+                                    CommandName="DeleteIndicator" CommandArgument='<%# Eval("ClusterIndicatorId") %>'>
 
                                 </asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
-                           <asp:TemplateField Visible="false">
+                          <%-- <asp:TemplateField Visible="false">
                             <ItemTemplate>
                                 <asp:Label ID="lblEmergencyId" runat="server" Text='<%# Eval("EmergencyId") %>'></asp:Label>
                             </ItemTemplate>
-                        </asp:TemplateField>
-                         <asp:TemplateField Visible="false">
-                            <ItemTemplate>
-                                <asp:Label ID="lblObjAlternate" runat="server" Text='<%# Eval("ObjectiveAlt") %>'></asp:Label>
-                            </ItemTemplate>
                         </asp:TemplateField>--%>
+                       
                     </Columns>
 
                 </asp:GridView>
