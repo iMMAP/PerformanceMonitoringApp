@@ -237,6 +237,7 @@ namespace SRFROWCA
             liORSDocuments.Visible = isShow;
             menueORSDocuments.Visible = isShow;
             liCLprojectsListing.Visible = isShow;
+            liClusterFrameworks.Visible = !isShow;
         }
 
         private void ShowRegionalLeadMenue()

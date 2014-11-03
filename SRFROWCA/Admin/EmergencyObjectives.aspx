@@ -76,7 +76,10 @@
                                                                     Emergency:</label>
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="txtEmergencyName" runat="server" CssClass="width-80"></asp:TextBox>
+                                                               <%-- <asp:TextBox ID="txtEmergencyName" runat="server" CssClass="width-80"></asp:TextBox>--%>
+                                                                <asp:DropDownList runat="server" ID="ddlEmergencySearch" AutoPostBack="true" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlEmergencySearch_SelectedIndexChanged">
+                                                                    <asp:ListItem Selected="True" Text="--- Select Emergency ---" Value="-1"></asp:ListItem>
+                                                                </asp:DropDownList>
                                                             </td>
                                                                <td>
                                                                 <label>

@@ -29,45 +29,48 @@ namespace SRFROWCA.Admin
 
         private void LoadCombos()
         {
-            ddlEmergency.DataValueField = "EmergencyId";
-            ddlEmergency.DataTextField = "EmergencyName";
+            ddlEmergency.DataValueField = 
+                ddlEmergencySearch.DataValueField= "EmergencyId";
+            ddlEmergency.DataTextField = 
+                ddlEmergencySearch.DataTextField = "EmergencyName";
 
-            ddlEmergency.DataSource = RC.GetAllEmergencies(RC.SelectedSiteLanguageId);
+            ddlEmergency.DataSource = ddlEmergencySearch.DataSource = RC.GetAllEmergencies(RC.SelectedSiteLanguageId);
             ddlEmergency.DataBind();
+            ddlEmergencySearch.DataBind();
         }
 
         private void LoadEmergencyObjectives()
         {
-            string emergency = null;
+            int? emergencyId = null;
             string objective = null;
 
-            if (!string.IsNullOrEmpty(txtEmergencyName.Text.Trim()))
-                emergency = txtEmergencyName.Text;
+            if (Convert.ToInt32(ddlEmergencySearch.SelectedValue) > -1)
+                emergencyId = Convert.ToInt32(ddlEmergencySearch.SelectedValue);
 
             if (!string.IsNullOrEmpty(txtObjectiveName.Text.Trim()))
                 objective = txtObjectiveName.Text;
 
-            gvEmergencyObjectives.DataSource = GetEmergencyObjectives(emergency, objective);
+            gvEmergencyObjectives.DataSource = GetEmergencyObjectives(emergencyId, objective);
             gvEmergencyObjectives.DataBind();
         }
 
-        private DataTable GetEmergencyObjectives(string emergency, string objective)
+        private DataTable GetEmergencyObjectives(int? emergencyId, string objective)
         {
-            return DBContext.GetData("uspGetEmergencyObjectives", new object[] { emergency, objective, RC.SelectedSiteLanguageId });
+            return DBContext.GetData("uspGetEmergencyObjectives", new object[] { emergencyId, objective, RC.SelectedSiteLanguageId });
         }
 
         protected void gvEmergencyObjectives_Sorting(object sender, GridViewSortEventArgs e)
         {
-            string emergency = null;
+            int? emergencyId = null;
             string objective = null;
 
-            if (!string.IsNullOrEmpty(txtEmergencyName.Text.Trim()))
-                emergency = txtEmergencyName.Text;
+            if (Convert.ToInt32(ddlEmergencySearch.SelectedValue) > -1)
+                emergencyId = Convert.ToInt32(ddlEmergencySearch.SelectedValue);
 
             if (!string.IsNullOrEmpty(txtObjectiveName.Text.Trim()))
                 objective = txtObjectiveName.Text;
 
-            DataTable dt = GetEmergencyObjectives(emergency, objective);
+            DataTable dt = GetEmergencyObjectives(emergencyId, objective);
 
             if (dt != null)
             {
@@ -235,6 +238,11 @@ namespace SRFROWCA.Admin
         {
             updMessage.Update();
             RC.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
+        }
+
+        protected void ddlEmergencySearch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadEmergencyObjectives();
         }
     }
 }

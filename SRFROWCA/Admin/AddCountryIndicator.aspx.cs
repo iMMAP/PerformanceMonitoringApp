@@ -3,31 +3,47 @@ using SRFROWCA.Common;
 using SRFROWCA.Controls;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Xml;
 
 namespace SRFROWCA.Admin
 {
     public partial class AddCountryIndicator : BasePage
     {
+        public int maxCount = 0;
+
         protected void Page_PreLoad(object sender, EventArgs e)
         {
             string control = Utils.GetPostBackControlId(this);
+            SetMaxCount();
 
-            if (control == "btnAddIndicatorControl")
+            if (control == "ddlCountry" || control == "ddlCluster")
+                IndControlId = maxCount;
+
+            if (control == "btnAddIndicatorControl"
+                && IndControlId <= maxCount)
                 IndControlId += 1;
+            else
+                btnAddIndicatorControl.Visible = false;
 
             if (control == "btnRemoveIndicatorControl")
                 IndControlId -= 1;
-
+            
             if (IndControlId <= 1)
                 btnRemoveIndicatorControl.Visible = false;
-
             else
                 btnRemoveIndicatorControl.Visible = true;
+
+            if (IndControlId < maxCount)
+                btnAddIndicatorControl.Visible = true;
+            else
+                btnAddIndicatorControl.Visible = false;
 
             for (int i = 0; i < IndControlId; i++)
                 AddIndicatorControl(i);
@@ -39,10 +55,36 @@ namespace SRFROWCA.Admin
             {
                 UserInfo.UserProfileInfo();
 
+                ShowHideControls();
                 PopulateObjective();
+                SetMaxCount();
 
-                AddIndicatorControl(0);
-                IndControlId = 1;
+                if (maxCount > 0)
+                {
+                    AddIndicatorControl(0);
+                    IndControlId = 1;
+                }
+            }
+        }
+
+        private void ShowHideControls()
+        {
+            if (RC.IsCountryAdmin(this.User))
+            {
+                lblCountry.Visible =
+                    ddlCountry.Visible = false;
+
+                ddlCountry.SelectedValue = Convert.ToString(UserInfo.EmergencyCountry);
+            }
+            else if (RC.IsClusterLead(this.User))
+            {
+                lblCountry.Visible =
+                    ddlCountry.Visible =
+                        ddlCluster.Visible =
+                            lblCluster.Visible = false;
+
+                ddlCountry.SelectedValue = Convert.ToString(UserInfo.EmergencyCountry);
+                ddlCluster.SelectedValue = Convert.ToString(UserInfo.EmergencyCluster);
             }
         }
 
@@ -133,6 +175,71 @@ namespace SRFROWCA.Admin
                     }
                 }
             }
+        }
+
+        private void GetMaxCount(string configKey)
+        {
+            string PATH = HttpRuntime.AppDomainAppPath;
+            PATH = PATH.Substring(0, PATH.LastIndexOf(@"\") + 1) + @"Configurations\ChangeEndSettings.xml";
+
+            if (File.Exists(PATH))
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(PATH);
+
+                XmlElement elem_settings = doc.GetElementById("ChangeEndSettings");
+                XmlNode settingsNode = doc.DocumentElement;
+
+                foreach (XmlNode node in settingsNode.ChildNodes)
+                {
+                    if (node.Name.Equals(configKey))
+                    {
+                        if (node.Attributes["ClusterCount"] != null)
+                            maxCount = Convert.ToInt32(node.Attributes["ClusterCount"].Value);
+                    }
+                }
+            }
+
+            if (maxCount > 0)
+            {
+                string countryId = null;
+                string clusterId = null;
+
+                if(Convert.ToInt32(ddlCountry.SelectedValue) > -1)
+                    countryId = ddlCountry.SelectedValue;
+
+                if(Convert.ToInt32(ddlCluster.SelectedValue) > -1)
+                    clusterId = ddlCluster.SelectedValue;
+
+                DataTable dtCount = DBContext.GetData("uspGetIndicatorCount", new object[] { countryId, clusterId});
+
+                if (dtCount.Rows.Count > 0)
+                    maxCount = maxCount - Convert.ToInt32(dtCount.Rows[0]["IndicatorCount"]);
+            }
+        }
+
+        protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //SetMaxCount();
+        }
+
+        protected void ddlCluster_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //SetMaxCount();
+        }
+
+        private void SetMaxCount()
+        {
+            string countryId = string.Empty;
+            string clusterId = string.Empty;
+
+            if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
+                countryId = ddlCountry.SelectedValue;
+
+            if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
+                clusterId = ddlCluster.SelectedValue;
+
+            GetMaxCount("Key-" + countryId + clusterId);
         }
     }
 }

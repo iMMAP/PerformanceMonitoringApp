@@ -23,6 +23,7 @@ namespace SRFROWCA.Admin
         public string liTab1 = "active";
         public string liTab2 = string.Empty;
         public string showCountry = string.Empty;
+        public string countryId = string.Empty;
 
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -67,22 +68,23 @@ namespace SRFROWCA.Admin
         {
             if (!IsPostBack)
             {
+                ShowHideControls();
                 ReadConfigKeys();
                 LoadCombos();
-                EnableDisableControls();
 
                 if (!string.IsNullOrEmpty(Request.QueryString["editKey"]))
                     FillControls(Convert.ToString("Key-" + Request.QueryString["editKey"]));
             }
         }
 
-        private void EnableDisableControls()
+        private void ShowHideControls()
         {
             if (RC.IsCountryAdmin(this.User))
             {
                 ddlCountry.SelectedValue = Convert.ToString(UserInfo.EmergencyCountry);
                 ddlCountry.Enabled = false;
                 showCountry = "display:none";
+                countryId = Convert.ToString(UserInfo.EmergencyCountry);
             }
         }
 
@@ -278,7 +280,13 @@ namespace SRFROWCA.Admin
                     string configKey = "Key-";
 
                     if (node.Attributes["CountryID"] != null)
+                    {
+                        if (!string.IsNullOrEmpty(countryId) && !node.Attributes["CountryID"].Value.Equals(countryId))
+                            continue;
+
                         configKey += Convert.ToString(node.Attributes["CountryID"].Value);
+                    }
+                        
                     if (node.Attributes["ClusterID"] != null)
                         configKey += Convert.ToString(node.Attributes["ClusterID"].Value);
                     //if (node.Attributes["DateLimit"] != null)

@@ -41,17 +41,14 @@
                                                         .
                                                          <tr>
                                                              <td>
-                                                                 <label>
-                                                                     Country:</label>
-                                                             </td>
-                                                             <td>
-                                                                 <asp:DropDownList runat="server" AppendDataBoundItems="true" ID="ddlCountry" Width="270">
-                                                                     <asp:ListItem Selected="True" Text="--- Select Country ---" Value="-1"></asp:ListItem>
-                                                                 </asp:DropDownList>
-                                                             </td>
-                                                               <td>
                                                                 <label>
-                                                                    Cluster:</label>
+                                                                    Objective:</label>
+                                                            </td>
+                                                            <td>
+                                                                <asp:TextBox ID="txtObjectiveName"  runat="server" Width="270"></asp:TextBox>
+                                                            </td>
+                                                               <td>
+                                                               <asp:Label runat="server" ID="lblCluster" Text="Cluster:"></asp:Label>
                                                             </td>
                                                             <td>
                                                                 <asp:DropDownList runat="server" AppendDataBoundItems="true" ID="ddlCluster" Width="270">
@@ -62,20 +59,22 @@
 
                                                        
                                                         <tr>
-                                                            <td>
-                                                                <label>
-                                                                    Objective:</label>
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="txtObjectiveName"  runat="server" Width="270"></asp:TextBox>
-                                                            </td>
-                                                               <td>
+                                                              <td>
                                                                 <label>
                                                                     Indicator:</label>
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtIndicatorName" runat="server" Width="270"></asp:TextBox>
                                                             </td>
+                                                            <td>
+                                                                 <asp:Label runat="server" ID="lblCountry" Text="Country:"></asp:Label>
+                                                             </td>
+                                                             <td>
+                                                                 <asp:DropDownList runat="server" AppendDataBoundItems="true" ID="ddlCountry" Width="270">
+                                                                     <asp:ListItem Selected="True" Text="--- Select Country ---" Value="-1"></asp:ListItem>
+                                                                 </asp:DropDownList>
+                                                             </td>
+                                                             
                                                         </tr>
                                                         
                                                         <tr>

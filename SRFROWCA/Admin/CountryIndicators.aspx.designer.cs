@@ -22,13 +22,22 @@ namespace SRFROWCA.Admin {
         protected global::System.Web.UI.WebControls.Button btnAddIndicator;
         
         /// <summary>
-        /// ddlCountry control.
+        /// txtObjectiveName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCountry;
+        protected global::System.Web.UI.WebControls.TextBox txtObjectiveName;
+        
+        /// <summary>
+        /// lblCluster control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCluster;
         
         /// <summary>
         /// ddlCluster control.
@@ -40,15 +49,6 @@ namespace SRFROWCA.Admin {
         protected global::System.Web.UI.WebControls.DropDownList ddlCluster;
         
         /// <summary>
-        /// txtObjectiveName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtObjectiveName;
-        
-        /// <summary>
         /// txtIndicatorName control.
         /// </summary>
         /// <remarks>
@@ -56,6 +56,24 @@ namespace SRFROWCA.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtIndicatorName;
+        
+        /// <summary>
+        /// lblCountry control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCountry;
+        
+        /// <summary>
+        /// ddlCountry control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCountry;
         
         /// <summary>
         /// btnSearch control.

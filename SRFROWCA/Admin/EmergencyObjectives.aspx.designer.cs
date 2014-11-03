@@ -31,13 +31,13 @@ namespace SRFROWCA.Admin {
         protected global::System.Web.UI.WebControls.Button btnAddObjectives;
         
         /// <summary>
-        /// txtEmergencyName control.
+        /// ddlEmergencySearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEmergencyName;
+        protected global::System.Web.UI.WebControls.DropDownList ddlEmergencySearch;
         
         /// <summary>
         /// txtObjectiveName control.

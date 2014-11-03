@@ -18,6 +18,28 @@ namespace SRFROWCA.Admin
             {
                 LoadClusterIndicators();
                 LoadCombos();
+                ShowHideControls();
+            }
+        }
+
+        private void ShowHideControls()
+        {
+            if (RC.IsCountryAdmin(this.User))
+            {
+                lblCountry.Visible = 
+                    ddlCountry.Visible = false;
+
+                ddlCountry.SelectedValue = Convert.ToString(UserInfo.EmergencyCountry);
+            }
+            else if (RC.IsClusterLead(this.User))
+            {
+                lblCountry.Visible = 
+                    ddlCountry.Visible = 
+                        ddlCluster.Visible = 
+                            lblCluster.Visible = false;
+
+                ddlCountry.SelectedValue = Convert.ToString(UserInfo.EmergencyCountry);
+                ddlCluster.SelectedValue = Convert.ToString(UserInfo.EmergencyCluster);
             }
         }
 
@@ -52,7 +74,7 @@ namespace SRFROWCA.Admin
 
         private DataTable GetClusterIndicatros(int? clusterId, int? countryId, string objective, string indicator)
         {
-            return DBContext.GetData("uspGetCluserIndicators", new object[] { clusterId, countryId, objective, indicator, RC.SelectedSiteLanguageId });
+            return DBContext.GetData("uspGetClusterIndicators", new object[] { clusterId, countryId, objective, indicator, RC.SelectedSiteLanguageId });
         }
 
         protected void btnAddIndicator_Click(object sender, EventArgs e)
