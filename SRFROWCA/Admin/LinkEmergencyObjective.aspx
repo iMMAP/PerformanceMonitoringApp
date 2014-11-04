@@ -69,9 +69,9 @@
                                                                         <br />
                                                                         <asp:CheckBoxList ID="cblObjectives" CssClass="cb" runat="server" RepeatColumns="2" CellPadding="5">
                                                                         </asp:CheckBoxList>
-                                                                        <asp:CustomValidator runat="server" ID="cvmodulelist"
+                                                                      <%--  <asp:CustomValidator runat="server" ID="cvmodulelist"
                                                                             ClientValidationFunction="ValidateModuleList"
-                                                                            ErrorMessage="Please Select Atleast one Objective" CssClass="error2"></asp:CustomValidator>
+                                                                            ErrorMessage="Please Select Atleast one Objective" CssClass="error2"></asp:CustomValidator>--%>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
