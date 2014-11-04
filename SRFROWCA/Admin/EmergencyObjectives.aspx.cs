@@ -229,9 +229,9 @@ namespace SRFROWCA.Admin
             int emergencyID = Convert.ToInt32(ddlEmergency.SelectedValue);
 
             if (!string.IsNullOrEmpty(hfEmgObjID.Value))
-                DBContext.Add("uspInsertEmergencyObjective", new object[] { emergencyID, objectiveEng, objectiveFr, userId, Convert.ToInt32(hfEmgObjID.Value), null });
+                DBContext.Add("uspInsertEmergencyObjective", new object[] { emergencyID, objectiveEng, objectiveFr, userId, Convert.ToInt32(hfEmgObjID.Value), null, null });
             else
-                DBContext.Add("uspInsertEmergencyObjective", new object[] { emergencyID, objectiveEng, objectiveFr, userId, null, null });
+                DBContext.Add("uspInsertEmergencyObjective", new object[] { emergencyID, objectiveEng, objectiveFr, userId, null, null, null });
         }
 
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 0)
