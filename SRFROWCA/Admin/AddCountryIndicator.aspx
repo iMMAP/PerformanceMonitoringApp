@@ -32,7 +32,7 @@
                                                  <div>
                                                     <asp:Label runat="server" ID="lblCountry" Text="Country:"></asp:Label>
                                                     <div>
-                                                        <asp:DropDownList ID="ddlCountry" AutoPostBack="true" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" runat="server" CssClass="width-40" AppendDataBoundItems="true" >
+                                                        <asp:DropDownList ID="ddlCountry"  OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" runat="server" CssClass="width-40" AppendDataBoundItems="true" >
                                                             <asp:ListItem Selected="True" Text="--- Select Country --" Value="0"></asp:ListItem>
                                                         </asp:DropDownList>
                                                         <asp:RequiredFieldValidator ID="rfvddlCountry" runat="server" ErrorMessage="Required"
@@ -42,7 +42,7 @@
                                                  <div>
                                                     <asp:Label runat="server" ID="lblCluster" Text="Cluster:"></asp:Label>
                                                     <div>
-                                                        <asp:DropDownList ID="ddlCluster" AutoPostBack="true" OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged" runat="server" CssClass="width-40" AppendDataBoundItems="true" >
+                                                        <asp:DropDownList ID="ddlCluster"  OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged" runat="server" CssClass="width-40" AppendDataBoundItems="true" >
                                                             <asp:ListItem Selected="True" Text="--- Select Cluster --" Value="0"></asp:ListItem>
                                                         </asp:DropDownList>
                                                         <asp:RequiredFieldValidator ID="rfvddlCluster" runat="server" ErrorMessage="Required"

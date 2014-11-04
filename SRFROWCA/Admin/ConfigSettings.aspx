@@ -6,7 +6,7 @@
 
             $("#<%=txtDate.ClientID%>").datepicker({
                 numberOfMonths: 1,
-                dateFormat: "dd-mm-yy",
+                dateFormat: "mm-dd-yy",
                 onSelect: function (selected) {
                     $("#<%=txtDate.ClientID%>").datepicker("option", "minDate", selected)
                 }

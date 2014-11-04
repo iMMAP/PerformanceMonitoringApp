@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -150,7 +151,7 @@ namespace SRFROWCA.Admin
             }
 
             if (!string.IsNullOrEmpty(txtDate.Text.Trim()))
-                dateLimit = txtDate.Text.Trim();
+                dateLimit = DateTime.ParseExact(txtDate.Text.Trim(), "MM-dd-yyyy", CultureInfo.InvariantCulture).ToString("MM-dd-yyyy"); // txtDate.Text.Trim();
 
             if (!string.IsNullOrEmpty(txtNoIndicatorsFramework.Text.Trim()))
                 frameworkCount = txtNoIndicatorsFramework.Text.Trim();
@@ -162,25 +163,29 @@ namespace SRFROWCA.Admin
             XmlNode settingsNode = doc.DocumentElement;
 
             bool isExist = false;
-            XDocument delKey = XDocument.Load(PATH);
-            foreach (XmlNode node in settingsNode.ChildNodes)
+
+            if (File.Exists(PATH))
             {
-                if (!string.IsNullOrEmpty(Request.QueryString["editKey"])
-                    && node.Name.Equals(Convert.ToString("Key-" + Request.QueryString["editKey"])))
+                XDocument delKey = XDocument.Load(PATH);
+                foreach (XmlNode node in settingsNode.ChildNodes)
                 {
-                    delKey.Descendants(Convert.ToString("Key-" + Request.QueryString["editKey"])).Remove();
-                    delKey.Save(PATH);
-                    doc.Load(PATH);
+                    if (!string.IsNullOrEmpty(Request.QueryString["editKey"])
+                        && node.Name.Equals(Convert.ToString("Key-" + Request.QueryString["editKey"])))
+                    {
+                        delKey.Descendants(Convert.ToString("Key-" + Request.QueryString["editKey"])).Remove();
+                        delKey.Save(PATH);
+                        doc.Load(PATH);
+                    }
+                    else if (string.IsNullOrEmpty(Request.QueryString["editKey"]) &&
+                            node.Name.Equals(configKey))
+                    {
+                        isExist = true;
+                        //delKey.Descendants(configKey).Remove();
+                        //delKey.Save(PATH);
+                        //doc.Load(PATH);
+                    }
+
                 }
-                else if (string.IsNullOrEmpty(Request.QueryString["editKey"]) &&
-                        node.Name.Equals(configKey))
-                {
-                    isExist = true;
-                    //delKey.Descendants(configKey).Remove();
-                    //delKey.Save(PATH);
-                    //doc.Load(PATH);
-                }
-               
             }
 
             if (!isExist)

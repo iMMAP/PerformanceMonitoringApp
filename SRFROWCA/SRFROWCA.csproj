@@ -392,7 +392,6 @@
     <Content Include="ClusterLead\UploadAchieved.aspx" />
     <Content Include="ClusterLead\ValidateIndicators.aspx" />
     <Content Include="ClusterLead\ValidateReportList.aspx" />
-    <Content Include="Configurations\ChangeEndSettings.xml" />
     <Content Include="Configurations\Settings.xml" />
     <Content Include="Controls\AddContryReportControl.ascx" />
     <Content Include="Controls\NewCountryIndicatorsControl.ascx" />

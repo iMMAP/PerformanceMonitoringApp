@@ -17,36 +17,52 @@ namespace SRFROWCA.Admin
     public partial class AddCountryIndicator : BasePage
     {
         public int maxCount = 0;
+        public bool applyFilter = false;
 
         protected void Page_PreLoad(object sender, EventArgs e)
         {
-            string control = Utils.GetPostBackControlId(this);
-            SetMaxCount();
-
-            if (control == "ddlCountry" || control == "ddlCluster")
-                IndControlId = maxCount;
-
-            if (control == "btnAddIndicatorControl"
-                && IndControlId <= maxCount)
-                IndControlId += 1;
+            if (RC.IsClusterLead(this.User))
+            {
+                applyFilter = true;
+                SetMaxCount();
+            }
             else
-                btnAddIndicatorControl.Visible = false;
+                maxCount = 1;
 
-            if (control == "btnRemoveIndicatorControl")
-                IndControlId -= 1;
-            
-            if (IndControlId <= 1)
-                btnRemoveIndicatorControl.Visible = false;
-            else
-                btnRemoveIndicatorControl.Visible = true;
+            //if (applyFilter)
+            {
+                string control = Utils.GetPostBackControlId(this);
 
-            if (IndControlId < maxCount)
-                btnAddIndicatorControl.Visible = true;
-            else
-                btnAddIndicatorControl.Visible = false;
+                //if (control == "ddlCountry" || control == "ddlCluster")
+                //    IndControlId = maxCount;
 
-            for (int i = 0; i < IndControlId; i++)
-                AddIndicatorControl(i);
+                if ((applyFilter && IndControlId <= maxCount && control == "btnAddIndicatorControl")
+                    || control == "btnAddIndicatorControl")
+                    IndControlId += 1;
+                else
+                    btnAddIndicatorControl.Visible = false;
+
+                if (control == "btnRemoveIndicatorControl")
+                    IndControlId -= 1;
+
+                if (IndControlId <= 1)
+                    btnRemoveIndicatorControl.Visible = false;
+                else
+                    btnRemoveIndicatorControl.Visible = true;
+
+                if (applyFilter)
+                {
+                    if (IndControlId < maxCount)
+                        btnAddIndicatorControl.Visible = true;
+                    else
+                        btnAddIndicatorControl.Visible = false;
+                }
+                else
+                    btnAddIndicatorControl.Visible = true;
+
+                for (int i = 0; i < IndControlId; i++)
+                    AddIndicatorControl(i);
+            }
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -57,7 +73,9 @@ namespace SRFROWCA.Admin
 
                 ShowHideControls();
                 PopulateObjective();
-                SetMaxCount();
+
+                if (applyFilter)
+                    SetMaxCount();
 
                 if (maxCount > 0)
                 {
@@ -205,13 +223,13 @@ namespace SRFROWCA.Admin
                 string countryId = null;
                 string clusterId = null;
 
-                if(Convert.ToInt32(ddlCountry.SelectedValue) > -1)
+                if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
                     countryId = ddlCountry.SelectedValue;
 
-                if(Convert.ToInt32(ddlCluster.SelectedValue) > -1)
+                if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
                     clusterId = ddlCluster.SelectedValue;
 
-                DataTable dtCount = DBContext.GetData("uspGetIndicatorCount", new object[] { countryId, clusterId});
+                DataTable dtCount = DBContext.GetData("uspGetIndicatorCount", new object[] { countryId, clusterId });
 
                 if (dtCount.Rows.Count > 0)
                     maxCount = maxCount - Convert.ToInt32(dtCount.Rows[0]["IndicatorCount"]);

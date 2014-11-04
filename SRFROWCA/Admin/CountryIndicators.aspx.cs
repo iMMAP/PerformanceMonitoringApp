@@ -15,12 +15,19 @@ namespace SRFROWCA.Admin
 {
     public partial class CountryIndicators : BasePage
     {
+        public bool applyFilter = false;
         public int maxCount = 0;
         public DateTime dateLimit = DateTime.Now.AddDays(1);
 
         protected void Page_PreLoad(object sender, EventArgs e)
         {
-            SetMaxCount();
+            if (RC.IsClusterLead(this.User))
+            {
+                applyFilter = true;
+                SetMaxCount();
+            }
+            else
+                maxCount = 1;
 
             if (maxCount <= 0)
                 btnAddIndicator.Enabled = false;
@@ -149,7 +156,7 @@ namespace SRFROWCA.Admin
                             maxValu = Convert.ToInt32(node.Attributes["ClusterCount"].Value);
 
                         if (node.Attributes["DateLimit"] != null)
-                            maxDate = Convert.ToDateTime(node.Attributes["DateLimit"].Value);
+                            maxDate = DateTime.ParseExact(Convert.ToString(node.Attributes["DateLimit"].Value), "MM-dd-yyyy", CultureInfo.InvariantCulture); 
                     }
                 }
             }
@@ -191,18 +198,19 @@ namespace SRFROWCA.Admin
                 if (lblClusterID != null && !string.IsNullOrEmpty(lblClusterID.Text))
                     configKey += lblClusterID.Text.Trim();
 
-                GetMaxCount(configKey, out maxVal, out maxDate);
+                if(applyFilter)
+                    GetMaxCount(configKey, out maxVal, out maxDate);
 
                 if (btnDelete != null)
                 {
                     btnDelete.Attributes.Add("onclick", "javascript:return " +
                     "confirm('Are you sure you want to delete this Setting?')");
 
-                    if (maxDate < DateTime.ParseExact(DateTime.Now.ToString("dd-MM-yyyy"), "MM-dd-yyyy", CultureInfo.InvariantCulture))
+                    if (applyFilter && maxDate < DateTime.Now)
                         btnDelete.Visible = false;
                 }
 
-                if (btnEdit != null && maxDate < DateTime.ParseExact(DateTime.Now.ToString("dd-MM-yyyy"), "MM-dd-yyyy", CultureInfo.InvariantCulture))
+                if (btnEdit != null && applyFilter && maxDate < DateTime.Now)
                     btnEdit.Visible = false;
             }
         }
