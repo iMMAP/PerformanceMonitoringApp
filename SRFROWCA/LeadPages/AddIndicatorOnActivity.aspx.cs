@@ -151,7 +151,6 @@ namespace SRFROWCA.LeadPages
             }
         }
 
-
         private void SendNewIndicatorEmail(string strIndicators)
         {
             using (MailMessage mailMsg = new MailMessage())

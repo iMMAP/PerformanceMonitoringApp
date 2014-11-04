@@ -34,60 +34,70 @@
                                 </div>
                                 <div class="widget-body">
                                     <div class="widget-main">
-                                      
-                                          
-                                                <div class="row">
-                                                    <table border="0" style="width: 80%; margin: 10px 10px 10px 20px">
-                                                        .
+
+
+                                        <div class="row">
+                                            <table border="0" style="width: 80%; margin: 10px 10px 10px 20px">
+                                                .
                                                          <tr>
                                                              <td>
-                                                                <label>
-                                                                    Objective:</label>
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="txtObjectiveName"  runat="server" Width="270"></asp:TextBox>
-                                                            </td>
-                                                               <td>
-                                                               <asp:Label runat="server" ID="lblCluster" Text="Cluster:"></asp:Label>
-                                                            </td>
-                                                            <td>
-                                                                <asp:DropDownList runat="server" AppendDataBoundItems="true" ID="ddlCluster" Width="270">
-                                                                    <asp:ListItem Selected="True" Text="--- Select Cluster ---" Value="-1"></asp:ListItem>
-                                                                </asp:DropDownList>
-                                                            </td>
-                                                         </tr>
-
-                                                       
-                                                        <tr>
-                                                              <td>
-                                                                <label>
-                                                                    Indicator:</label>
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="txtIndicatorName" runat="server" Width="270"></asp:TextBox>
-                                                            </td>
-                                                            <td>
-                                                                 <asp:Label runat="server" ID="lblCountry" Text="Country:"></asp:Label>
+                                                                 <label>
+                                                                     Objective:</label>
                                                              </td>
                                                              <td>
-                                                                 <asp:DropDownList runat="server" AppendDataBoundItems="true" ID="ddlCountry" Width="270">
-                                                                     <asp:ListItem Selected="True" Text="--- Select Country ---" Value="-1"></asp:ListItem>
+                                                                 <asp:TextBox ID="txtObjectiveName" runat="server" Width="270"></asp:TextBox>
+                                                             </td>
+                                                             <td>
+                                                                 <asp:Label runat="server" ID="lblCluster" Text="Cluster:"></asp:Label>
+                                                             </td>
+                                                             <td>
+                                                                 <asp:DropDownList AutoPostBack="true" runat="server" OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged" AppendDataBoundItems="true" ID="ddlCluster" Width="270">
+                                                                     <asp:ListItem Selected="True" Text="--- Select Cluster ---" Value="-1"></asp:ListItem>
                                                                  </asp:DropDownList>
                                                              </td>
-                                                             
-                                                        </tr>
-                                                        
-                                                        <tr>
-                                                            <td>&nbsp;</td>
-                                                            <td style="padding-top: 20px;">
-                                                                <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" CssClass="btn btn-primary" CausesValidation="false" />
-                                                            </td><td></td><td></td>
-                                                        </tr>
+                                                         </tr>
 
-                                                    </table>
-                                                </div>
-                                            
-                                        
+
+                                                <tr>
+                                                    <td>
+                                                        <label>
+                                                            Indicator:</label>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox ID="txtIndicatorName" runat="server" Width="270"></asp:TextBox>
+                                                    </td>
+                                                    <td>
+                                                        <asp:Label runat="server" ID="lblCountry" Text="Country:"></asp:Label>
+                                                    </td>
+                                                    <td>
+                                                        <asp:DropDownList AutoPostBack="true" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" runat="server" AppendDataBoundItems="true" ID="ddlCountry" Width="270">
+                                                            <asp:ListItem Selected="True" Text="--- Select Country ---" Value="-1"></asp:ListItem>
+                                                        </asp:DropDownList>
+                                                    </td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td style="padding-top: 20px;">
+                                                        <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" CssClass="btn btn-primary" CausesValidation="false" />
+                                                    </td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td style="padding-top: 20px;">
+                                                        <asp:Label runat="server" ID="lblMessage" Text=""></asp:Label>
+                                                    </td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+
+                                            </table>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -103,7 +113,7 @@
         <div class="table-responsive">
             <div style="overflow-x: auto; width: 100%">
                 <asp:GridView ID="gvClusterIndicators" Width="100%" runat="server" AutoGenerateColumns="false" AllowSorting="True" DataKeyNames="SiteLanguageId"
-                    CssClass=" table-striped table-bordered table-hover">
+                    OnRowDataBound="gvClusterIndicators_RowDataBound" OnRowCommand="gvClusterIndicators_RowCommand" CssClass=" table-striped table-bordered table-hover">
 
                     <Columns>
                         <asp:TemplateField ItemStyle-Width="2%" HeaderText="#">
@@ -111,17 +121,19 @@
                                 <%# Container.DataItemIndex + 1 %>
                             </ItemTemplate>
                         </asp:TemplateField>
-                         <asp:BoundField Visible="false" DataField="ClusterIndicatorId" HeaderText="ID" SortExpression="ClusterIndicatorId" />
+                        <asp:BoundField Visible="false" DataField="ClusterIndicatorId" HeaderText="ID" SortExpression="ClusterIndicatorId" />
 
                         <asp:BoundField ItemStyle-Width="10%" DataField="Country" HeaderText="Country" SortExpression="Country" />
                         <asp:BoundField ItemStyle-Width="15%" DataField="Cluster" HeaderText="Cluster" SortExpression="Cluster" />
-                        <asp:BoundField ItemStyle-Width="40%" DataField="Objective" HeaderText="Objective" SortExpression="Objective" />
-                        <asp:BoundField ItemStyle-Width="23%" DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator" />
                         
+                        <asp:BoundField ItemStyle-Width="25%" Visible="false" DataField="Objective" HeaderText="Objective" SortExpression="Objective" />
+                        <asp:BoundField ItemStyle-Width="23%" DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator" />
+                        <asp:BoundField ItemStyle-Width="15%" DataField="Target" HeaderText="Target" SortExpression="Target" />
+
                         <asp:TemplateField HeaderStyle-Width="5%" ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>
 
-                                <asp:LinkButton runat="server" Visible="false" ID="btnEdit" CausesValidation="false"
+                                <asp:LinkButton runat="server" ID="btnEdit" CausesValidation="false"
                                     CommandName="EditIndicator" CommandArgument='<%# Eval("ClusterIndicatorId") %>' Text="Edit">
 
                                 </asp:LinkButton>
@@ -129,18 +141,23 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderStyle-Width="5%" ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>
-                                <asp:LinkButton ID="btnDelete" Visible="false" runat="server" Text="Delete" Width="80px" CausesValidation="false"
+                                <asp:LinkButton ID="btnDelete" runat="server" Text="Delete" Width="80px" CausesValidation="false"
                                     CommandName="DeleteIndicator" CommandArgument='<%# Eval("ClusterIndicatorId") %>'>
 
                                 </asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
-                          <%-- <asp:TemplateField Visible="false">
+                        <asp:TemplateField Visible="false">
                             <ItemTemplate>
-                                <asp:Label ID="lblEmergencyId" runat="server" Text='<%# Eval("EmergencyId") %>'></asp:Label>
+                                <asp:Label ID="lblCountryID" runat="server" Text='<%# Eval("CountryID") %>'></asp:Label>
                             </ItemTemplate>
-                        </asp:TemplateField>--%>
-                       
+                        </asp:TemplateField>
+                        <asp:TemplateField Visible="false">
+                            <ItemTemplate>
+                                <asp:Label ID="lblClusterID" runat="server" Text='<%# Eval("ClusterID") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+
                     </Columns>
 
                 </asp:GridView>
