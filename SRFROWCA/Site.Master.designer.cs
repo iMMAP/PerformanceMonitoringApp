@@ -1201,6 +1201,42 @@ namespace SRFROWCA {
         protected global::System.Web.UI.WebControls.Localize Localize8;
         
         /// <summary>
+        /// liNewActivityListing control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liNewActivityListing;
+        
+        /// <summary>
+        /// Localize9 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize Localize9;
+        
+        /// <summary>
+        /// liNewIndicatorListing control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liNewIndicatorListing;
+        
+        /// <summary>
+        /// Localize10 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize Localize10;
+        
+        /// <summary>
         /// liActivities control.
         /// </summary>
         /// <remarks>

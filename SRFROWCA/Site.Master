@@ -344,6 +344,14 @@
 
                                     <asp:Localize ID="Localize8" runat="server" Text="Country Indicators" meta:resourcekey="localCountryIndicatorsResource1"></asp:Localize>
                                 </span></a></li>
+                                 <li id="liNewActivityListing" runat="server"><a href="<%=BaseURL %>/ClusterLead/ActivityListing.aspx"><span class="menu-text">
+
+                                    <asp:Localize ID="Localize9" runat="server" Text="Activity List" meta:resourcekey="localActivityResource1"></asp:Localize>
+                                </span></a></li>
+                                 <li id="liNewIndicatorListing" runat="server"><a href="<%=BaseURL %>/ClusterLead/IndicatorListing.aspx"><span class="menu-text">
+
+                                    <asp:Localize ID="Localize10" runat="server" Text="Indicators List" meta:resourcekey="localIndicatorsResource1"></asp:Localize>
+                                </span></a></li>
                               
                             </ul>
                         </li>
