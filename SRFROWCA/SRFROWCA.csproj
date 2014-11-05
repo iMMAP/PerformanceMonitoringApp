@@ -379,12 +379,6 @@
     <Content Include="ClusterLead\ActivityListing.aspx" />
     <Content Include="ClusterLead\ApproveIndicatorAddRemove.aspx" />
     <Content Include="ClusterLead\ClusterIndicatorTargets.aspx" />
-    <Content Include="ClusterLead\AddActivityAndIndicators.aspx" />
-    <Content Include="ClusterLead\AddIndicators.aspx" />
-    <Content Include="ClusterLead\AddActivity.aspx" />
-    <Content Include="ClusterLead\EditActivity.aspx" />
-    <Content Include="ClusterLead\EditIndicator.aspx" />
-    <Content Include="ClusterLead\IndicatorListing.aspx" />
     <Content Include="ClusterLead\ManageActivitiesClsuterLead.aspx" />
     <Content Include="ClusterLead\ProjectDetails.aspx" />
     <Content Include="ClusterLead\ProjectReports.aspx" />
@@ -401,7 +395,6 @@
     <Content Include="ClusterLead\ValidateReportList.aspx" />
     <Content Include="Configurations\Settings.xml" />
     <Content Include="Controls\AddContryReportControl.ascx" />
-    <Content Include="Controls\IndicatorsWithAdmin1TargetsControl.ascx" />
     <Content Include="Controls\NewCountryIndicatorsControl.ascx" />
     <Content Include="Controls\NewIndicatorsControl.ascx" />
     <Content Include="Controls\ReportedIndicatorComments.ascx" />
@@ -803,48 +796,6 @@
     <Compile Include="ClusterLead\ClusterIndicatorTargets.aspx.designer.cs">
       <DependentUpon>ClusterIndicatorTargets.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ClusterLead\AddActivityAndIndicators.aspx.cs">
-      <DependentUpon>AddActivityAndIndicators.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ClusterLead\AddActivityAndIndicators.aspx.designer.cs">
-      <DependentUpon>AddActivityAndIndicators.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ClusterLead\AddIndicators.aspx.cs">
-      <DependentUpon>AddIndicators.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ClusterLead\AddIndicators.aspx.designer.cs">
-      <DependentUpon>AddIndicators.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ClusterLead\AddActivity.aspx.cs">
-      <DependentUpon>AddActivity.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ClusterLead\AddActivity.aspx.designer.cs">
-      <DependentUpon>AddActivity.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ClusterLead\EditActivity.aspx.cs">
-      <DependentUpon>EditActivity.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ClusterLead\EditActivity.aspx.designer.cs">
-      <DependentUpon>EditActivity.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ClusterLead\EditIndicator.aspx.cs">
-      <DependentUpon>EditIndicator.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ClusterLead\EditIndicator.aspx.designer.cs">
-      <DependentUpon>EditIndicator.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ClusterLead\IndicatorListing.aspx.cs">
-      <DependentUpon>IndicatorListing.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ClusterLead\IndicatorListing.aspx.designer.cs">
-      <DependentUpon>IndicatorListing.aspx</DependentUpon>
-    </Compile>
     <Compile Include="ClusterLead\ManageActivitiesClsuterLead.aspx.cs">
       <DependentUpon>ManageActivitiesClsuterLead.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -958,13 +909,6 @@
     </Compile>
     <Compile Include="Controls\AddContryReportControl.ascx.designer.cs">
       <DependentUpon>AddContryReportControl.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\IndicatorsWithAdmin1TargetsControl.ascx.cs">
-      <DependentUpon>IndicatorsWithAdmin1TargetsControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Controls\IndicatorsWithAdmin1TargetsControl.ascx.designer.cs">
-      <DependentUpon>IndicatorsWithAdmin1TargetsControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\NewCountryIndicatorsControl.ascx.cs">
       <DependentUpon>NewCountryIndicatorsControl.ascx</DependentUpon>
