@@ -11,31 +11,37 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml;
 
-namespace SRFROWCA.Admin
+namespace SRFROWCA.ClusterLead
 {
     public partial class CountryIndicators : BasePage
     {
         public bool applyFilter = false;
         public int maxCount = 0;
         public DateTime dateLimit = DateTime.Now.AddDays(1);
+        public string countryId = null;
+        public string clusterId = null;
 
         protected void Page_PreLoad(object sender, EventArgs e)
         {
             if (RC.IsClusterLead(this.User))
             {
+                countryId = Convert.ToString(UserInfo.EmergencyCountry);
+                clusterId = Convert.ToString(UserInfo.EmergencyCluster);
+
                 applyFilter = true;
                 SetMaxCount();
             }
             else
                 maxCount = 1;
 
-            if (maxCount <= 0)
+            if (maxCount <= 0
+                || (applyFilter && DateTime.Now > dateLimit))
                 btnAddIndicator.Enabled = false;
             else
                 btnAddIndicator.Enabled = true;
 
-            if (Convert.ToInt32(ddlCountry.SelectedValue) < 0 && Convert.ToInt32(ddlCluster.SelectedValue) < 0)
-                btnAddIndicator.Enabled = true;
+            //if (Convert.ToInt32(ddlCountry.SelectedValue) < 0 && Convert.ToInt32(ddlCluster.SelectedValue) < 0)
+            //    btnAddIndicator.Enabled = true;
 
             string control = Utils.GetPostBackControlId(this);
             
@@ -82,35 +88,35 @@ namespace SRFROWCA.Admin
 
         private void LoadClusterIndicators()
         {
-            string objective = null;
+            //string objective = null;
             string indicator = null;
-            int? countryId = null;
-            int? clusterId = null;
+            int? countryID = Convert.ToInt32(countryId);
+            int? clusterID = Convert.ToInt32(clusterId);
 
-            if (!string.IsNullOrEmpty(txtObjectiveName.Text.Trim()))
-                objective = txtObjectiveName.Text;
+            //if (!string.IsNullOrEmpty(txtObjectiveName.Text.Trim()))
+            //    objective = txtObjectiveName.Text;
 
             if (!string.IsNullOrEmpty(txtIndicatorName.Text.Trim()))
                 indicator = txtIndicatorName.Text;
 
             if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
-                countryId = Convert.ToInt32(ddlCountry.SelectedValue);
+                countryID = Convert.ToInt32(ddlCountry.SelectedValue);
 
             if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
-                clusterId = Convert.ToInt32(ddlCluster.SelectedValue);
+                clusterID = Convert.ToInt32(ddlCluster.SelectedValue);
 
-            gvClusterIndicators.DataSource = GetClusterIndicatros(clusterId, countryId, objective, indicator);
+            gvClusterIndicators.DataSource = GetClusterIndicatros(clusterID, countryID, indicator);
             gvClusterIndicators.DataBind();
         }
 
-        private DataTable GetClusterIndicatros(int? clusterId, int? countryId, string objective, string indicator)
+        private DataTable GetClusterIndicatros(int? clusterId, int? countryId, string indicator)
         {
-            return DBContext.GetData("uspGetClusterIndicators", new object[] { clusterId, countryId, objective, indicator, RC.SelectedSiteLanguageId });
+            return DBContext.GetData("uspGetClusterIndicators", new object[] { clusterId, countryId, indicator, RC.SelectedSiteLanguageId });
         }
 
         protected void btnAddIndicator_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Admin/AddCountryIndicator.aspx");
+            Response.Redirect("~/ClusterLead/AddCountryIndicator.aspx");
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -120,8 +126,8 @@ namespace SRFROWCA.Admin
 
         private void SetMaxCount()
         {
-            string countryId = string.Empty;
-            string clusterId = string.Empty;
+            //string countryId = string.Empty;
+            //string clusterId = string.Empty;
 
             if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
                 countryId = ddlCountry.SelectedValue;
@@ -163,8 +169,8 @@ namespace SRFROWCA.Admin
 
             if (maxValu > 0)
             {
-                string countryId = null;
-                string clusterId = null;
+                //string countryId = null;
+                //string clusterId = null;
 
                 if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
                     countryId = ddlCountry.SelectedValue;
@@ -177,6 +183,66 @@ namespace SRFROWCA.Admin
                 if (dtCount.Rows.Count > 0)
                     maxValu = maxValu - Convert.ToInt32(dtCount.Rows[0]["IndicatorCount"]);
             }
+        }
+
+        protected void gvClusterIndicators_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            //string objective = null;
+            string indicator = null;
+            int? countryID = Convert.ToInt32(countryId);
+            int? clusterID = Convert.ToInt32(clusterId);
+
+            //if (!string.IsNullOrEmpty(txtObjectiveName.Text.Trim()))
+            //    objective = txtObjectiveName.Text;
+
+            if (!string.IsNullOrEmpty(txtIndicatorName.Text.Trim()))
+                indicator = txtIndicatorName.Text;
+
+            if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
+                countryID = Convert.ToInt32(ddlCountry.SelectedValue);
+
+            if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
+                clusterID = Convert.ToInt32(ddlCluster.SelectedValue);
+
+            DataTable dt = GetClusterIndicatros(clusterID, countryID, indicator);
+
+            if (dt != null)
+            {
+                //Sort the data.
+                dt.DefaultView.Sort = e.SortExpression + " " + GetSortDirection(e.SortExpression);
+                gvClusterIndicators.DataSource = dt;
+                gvClusterIndicators.DataBind();
+            }
+        }
+
+        private string GetSortDirection(string column)
+        {
+
+            // By default, set the sort direction to ascending.
+            string sortDirection = "ASC";
+
+            // Retrieve the last column that was sorted.
+            string sortExpression = ViewState["SortExpression"] as string;
+
+            if (sortExpression != null)
+            {
+                // Check if the same column is being sorted.
+                // Otherwise, the default value can be returned.
+                if (sortExpression == column)
+                {
+                    string lastDirection = ViewState["SortDirection"] as string;
+                    if ((lastDirection != null) && (lastDirection == "ASC"))
+                    {
+                        sortDirection = "DESC";
+                    }
+                }
+            }
+
+            // Save new values in ViewState.
+            ViewState["SortDirection"] = sortDirection;
+            ViewState["SortExpression"] = column;
+
+            return sortDirection;
         }
 
         protected void gvClusterIndicators_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -217,19 +283,19 @@ namespace SRFROWCA.Admin
 
         protected void gvClusterIndicators_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            int clusterIndicatorID = Convert.ToInt32(e.CommandArgument);
-
             if (e.CommandName == "DeleteIndicator")
             {
+                int clusterIndicatorID = Convert.ToInt32(e.CommandArgument);
+
                 DeleteClusterIndicator(clusterIndicatorID);
                 LoadClusterIndicators();
 
                 //lblMessage.Text = "Setting deleted successfully!";
-                Response.Redirect("~/Admin/CountryIndicators.aspx");
+                Response.Redirect("~/ClusterLead/CountryIndicators.aspx");
             }
             else if (e.CommandName == "EditIndicator")
             {
-
+                int clusterIndicatorID = Convert.ToInt32(e.CommandArgument);
             }
         }
 

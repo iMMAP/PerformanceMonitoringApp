@@ -340,7 +340,7 @@
                                 <asp:Localize ID="localClusterFrameworksList" runat="server" Text="Cluster Frameworks" meta:resourcekey="localClusterFrameworksListResource1"></asp:Localize>
                             </span><b class="arrow icon-angle-down"></b></a>
                             <ul class="submenu">
-                                <li id="liCountryIndicators" runat="server"><a href="<%=BaseURL %>/admin/CountryIndicators.aspx"><span class="menu-text">
+                                <li id="liCountryIndicators" runat="server"><a href="<%=BaseURL %>/ClusterLead/CountryIndicators.aspx"><span class="menu-text">
 
                                     <asp:Localize ID="Localize8" runat="server" Text="Country Indicators" meta:resourcekey="localCountryIndicatorsResource1"></asp:Localize>
                                 </span></a></li>

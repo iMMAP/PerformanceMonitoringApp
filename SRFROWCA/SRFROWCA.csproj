@@ -158,10 +158,10 @@
     <Content Include="Account\UserProfile.aspx" />
     <Content Include="Admin\ActivityData.aspx" />
     <Content Include="Admin\ActivityListing.aspx" />
-    <Content Include="Admin\AddCountryIndicator.aspx" />
+    <Content Include="ClusterLead\AddCountryIndicator.aspx" />
     <Content Include="Admin\ConfigSettings.aspx" />
     <Content Include="Admin\AddEditCountryMaps.aspx" />
-    <Content Include="Admin\CountryIndicators.aspx" />
+    <Content Include="ClusterLead\CountryIndicators.aspx" />
     <Content Include="Admin\CountryMapsListing.aspx" />
     <Content Include="Admin\EmergencyClusters.aspx" />
     <Content Include="Admin\EmergencyLocations.aspx" />
@@ -629,11 +629,11 @@
     <Compile Include="Admin\ActivityListing.aspx.designer.cs">
       <DependentUpon>ActivityListing.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\AddCountryIndicator.aspx.cs">
+    <Compile Include="ClusterLead\AddCountryIndicator.aspx.cs">
       <DependentUpon>AddCountryIndicator.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\AddCountryIndicator.aspx.designer.cs">
+    <Compile Include="ClusterLead\AddCountryIndicator.aspx.designer.cs">
       <DependentUpon>AddCountryIndicator.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\ConfigSettings.aspx.cs">
@@ -650,11 +650,11 @@
     <Compile Include="Admin\AddEditCountryMaps.aspx.designer.cs">
       <DependentUpon>AddEditCountryMaps.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\CountryIndicators.aspx.cs">
+    <Compile Include="ClusterLead\CountryIndicators.aspx.cs">
       <DependentUpon>CountryIndicators.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\CountryIndicators.aspx.designer.cs">
+    <Compile Include="ClusterLead\CountryIndicators.aspx.designer.cs">
       <DependentUpon>CountryIndicators.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\CountryMapsListing.aspx.cs">

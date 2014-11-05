@@ -12,19 +12,29 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml;
 
-namespace SRFROWCA.Admin
+namespace SRFROWCA.ClusterLead
 {
     public partial class AddCountryIndicator : BasePage
     {
         public int maxCount = 0;
         public bool applyFilter = false;
+        public string countryId = string.Empty;
+        public string clusterId = string.Empty;
+        public string displayNone = string.Empty;
 
         protected void Page_PreLoad(object sender, EventArgs e)
         {
             if (RC.IsClusterLead(this.User))
             {
+                displayNone = "display:none";
+                countryId = Convert.ToString(UserInfo.EmergencyCountry);
+                clusterId = Convert.ToString(UserInfo.EmergencyCluster);
+
                 applyFilter = true;
                 SetMaxCount();
+
+                if(maxCount == 1)
+                    IndControlId = maxCount;
             }
             else
                 maxCount = 1;
@@ -71,13 +81,14 @@ namespace SRFROWCA.Admin
             {
                 UserInfo.UserProfileInfo();
 
+                LoadCombos();
                 ShowHideControls();
-                PopulateObjective();
+                //PopulateObjective();
 
                 if (applyFilter)
                     SetMaxCount();
 
-                if (maxCount > 0)
+                if (maxCount > 0 && IndControlId == 0) 
                 {
                     AddIndicatorControl(0);
                     IndControlId = 1;
@@ -108,7 +119,8 @@ namespace SRFROWCA.Admin
 
         internal override void BindGridData()
         {
-            PopulateObjective();
+            //PopulateObjective();
+            LoadCombos();
         }
 
         private void PopulateObjective()
@@ -121,11 +133,11 @@ namespace SRFROWCA.Admin
 
         private void LoadCombos()
         {
-            ddlObjective.DataValueField = "ObjectiveID";
+            /*ddlObjective.DataValueField = "ObjectiveID";
             ddlObjective.DataTextField = "Objective";
 
             ddlObjective.DataSource = DBContext.GetData("GetObjectives", new object[] { RC.SelectedSiteLanguageId, null });
-            ddlObjective.DataBind();
+            ddlObjective.DataBind();*/
 
             UI.FillCountry(ddlCountry);
             UI.FillClusters(ddlCluster, RC.SelectedSiteLanguageId);
@@ -163,14 +175,14 @@ namespace SRFROWCA.Admin
         protected void btnSave_ServerClick(object sender, EventArgs e)
         {
             SaveData();
-            Response.Redirect("~/Admin/CountryIndicators.aspx");
+            Response.Redirect("~/ClusterLead/CountryIndicators.aspx");
         }
 
         private void SaveData()
         {
-            int objectiveID = RC.GetSelectedIntVal(ddlObjective);
+            //int objectiveID = RC.GetSelectedIntVal(ddlObjective);
 
-            if (objectiveID > 0)
+            //if (objectiveID > 0)
             {
                 foreach (Control ctl in pnlIndicaotrs.Controls)
                 {
@@ -188,7 +200,8 @@ namespace SRFROWCA.Admin
                             TextBox txtTarget = (TextBox)indControl.FindControl("txtTarget");
                             DropDownList ddlUnits = (DropDownList)indControl.FindControl("ddlUnits");
 
-                            indControl.SaveIndicators(objectiveID, Convert.ToInt32(ddlCountry.SelectedValue), Convert.ToInt32(ddlCluster.SelectedValue));
+                            //indControl.SaveIndicators(objectiveID, Convert.ToInt32(ddlCountry.SelectedValue), Convert.ToInt32(ddlCluster.SelectedValue));
+                            indControl.SaveIndicators(Convert.ToInt32(ddlCountry.SelectedValue), Convert.ToInt32(ddlCluster.SelectedValue));
                         }
                     }
                 }
@@ -220,8 +233,8 @@ namespace SRFROWCA.Admin
 
             if (maxCount > 0)
             {
-                string countryId = null;
-                string clusterId = null;
+                //string countryId = null;
+                //string clusterId = null;
 
                 if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
                     countryId = ddlCountry.SelectedValue;
@@ -248,8 +261,8 @@ namespace SRFROWCA.Admin
 
         private void SetMaxCount()
         {
-            string countryId = string.Empty;
-            string clusterId = string.Empty;
+            //string countryId = string.Empty;
+            //string clusterId = string.Empty;
 
             if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
                 countryId = ddlCountry.SelectedValue;

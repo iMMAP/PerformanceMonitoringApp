@@ -11,7 +11,7 @@
                         <label>
                             Indicator (Eng):</label>
                         <div>
-                            <asp:TextBox ID="txtInd1Eng" runat="server" CssClass="width-70"></asp:TextBox>
+                            <asp:TextBox ID="txtInd1Eng" MaxLength="4000" runat="server" CssClass="width-70"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="rfvtxtInd1Eng" runat="server" ErrorMessage="Indicator Required"
                                 CssClass="error2" Text="Required" ControlToValidate="txtInd1Eng"></asp:RequiredFieldValidator>
                         </div>
@@ -28,7 +28,7 @@
                         <label>
                             Indicator (Fr):</label>
                         <div>
-                            <asp:TextBox ID="txtInd1Fr" runat="server" CssClass="width-70"></asp:TextBox>
+                            <asp:TextBox ID="txtInd1Fr" MaxLength="4000" runat="server" CssClass="width-70"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="rfvtxtInd1Fr" runat="server" ErrorMessage="Indicator Required"
                                 CssClass="error2" Text="Required" ControlToValidate="txtInd1Fr"></asp:RequiredFieldValidator>
                         </div>

@@ -20,7 +20,8 @@ namespace SRFROWCA.Controls
             LoadCombos();
         }
 
-        public void SaveIndicators(int objectiveId, int countryId, int clusterId)
+        //public void SaveIndicators(int objectiveId, int countryId, int clusterId)
+        public void SaveIndicators(int countryId, int clusterId)
         {
             string indEn = txtInd1Eng.Text.Trim();
             string indFr = txtInd1Fr.Text.Trim();
@@ -29,7 +30,8 @@ namespace SRFROWCA.Controls
             
             Guid userId = RC.GetCurrentUserId;
 
-            DBContext.Add("uspInsertIndicator", new object[] {objectiveId, indEn, indFr, target, unitId, countryId, clusterId, RC.GetCurrentUserId, null });
+            //DBContext.Add("uspInsertIndicator", new object[] {objectiveId, indEn, indFr, target, unitId, countryId, clusterId, RC.GetCurrentUserId, null });
+            DBContext.Add("uspInsertIndicator", new object[] { indEn, indFr, target, unitId, countryId, clusterId, RC.GetCurrentUserId, null });
         }
 
         private void LoadCombos()

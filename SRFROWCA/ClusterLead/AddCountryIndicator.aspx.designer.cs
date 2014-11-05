@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SRFROWCA.Admin {
+namespace SRFROWCA.ClusterLead {
     
     
     public partial class AddCountryIndicator {
@@ -74,24 +74,6 @@ namespace SRFROWCA.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvddlCluster;
-        
-        /// <summary>
-        /// ddlObjective control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlObjective;
-        
-        /// <summary>
-        /// rfvObjective control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvObjective;
         
         /// <summary>
         /// pnlIndicaotrs control.

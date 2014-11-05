@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SRFROWCA.Admin {
+namespace SRFROWCA.ClusterLead {
     
     
     public partial class CountryIndicators {
@@ -22,13 +22,13 @@ namespace SRFROWCA.Admin {
         protected global::System.Web.UI.WebControls.Button btnAddIndicator;
         
         /// <summary>
-        /// txtObjectiveName control.
+        /// txtIndicatorName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtObjectiveName;
+        protected global::System.Web.UI.WebControls.TextBox txtIndicatorName;
         
         /// <summary>
         /// lblCluster control.
@@ -47,15 +47,6 @@ namespace SRFROWCA.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCluster;
-        
-        /// <summary>
-        /// txtIndicatorName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIndicatorName;
         
         /// <summary>
         /// lblCountry control.
