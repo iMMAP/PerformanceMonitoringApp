@@ -7,90 +7,90 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SRFROWCA.ClusterLead {
+namespace SRFROWCA.Controls {
     
     
-    public partial class ActivityListing {
+    public partial class NewCountryIndicatorsControl {
         
         /// <summary>
-        /// updMessage control.
+        /// lbl1stNumber control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updMessage;
+        protected global::System.Web.UI.WebControls.Label lbl1stNumber;
         
         /// <summary>
-        /// btnExportToExcel control.
+        /// txtInd1Eng control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnExportToExcel;
+        protected global::System.Web.UI.WebControls.TextBox txtInd1Eng;
         
         /// <summary>
-        /// btnAddActivityAndIndicator control.
+        /// rfvtxtInd1Eng control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddActivityAndIndicator;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvtxtInd1Eng;
         
         /// <summary>
-        /// btnAddActivity control.
+        /// txtInd1Fr control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddActivity;
+        protected global::System.Web.UI.WebControls.TextBox txtInd1Fr;
         
         /// <summary>
-        /// ddlCluster control.
+        /// rfvtxtInd1Fr control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCluster;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvtxtInd1Fr;
         
         /// <summary>
-        /// txtActivityName control.
+        /// txtTarget control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtActivityName;
+        protected global::System.Web.UI.WebControls.TextBox txtTarget;
         
         /// <summary>
-        /// ddlObjective control.
+        /// rfvtxtTarget control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlObjective;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvtxtTarget;
         
         /// <summary>
-        /// btnSearch control.
+        /// ddlUnits control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearch;
+        protected global::System.Web.UI.WebControls.DropDownList ddlUnits;
         
         /// <summary>
-        /// gvActivity control.
+        /// RequiredFieldValidator2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvActivity;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
     }
 }

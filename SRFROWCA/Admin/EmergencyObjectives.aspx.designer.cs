@@ -10,7 +10,7 @@
 namespace SRFROWCA.Admin {
     
     
-    public partial class EmergencyListing {
+    public partial class EmergencyObjectives {
         
         /// <summary>
         /// updMessage control.
@@ -22,40 +22,31 @@ namespace SRFROWCA.Admin {
         protected global::System.Web.UI.UpdatePanel updMessage;
         
         /// <summary>
-        /// btnExportToExcel control.
+        /// btnAddObjectives control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnExportToExcel;
+        protected global::System.Web.UI.WebControls.Button btnAddObjectives;
         
         /// <summary>
-        /// btnAddEmergency control.
+        /// ddlEmergencySearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddEmergency;
+        protected global::System.Web.UI.WebControls.DropDownList ddlEmergencySearch;
         
         /// <summary>
-        /// txtOrganizationName control.
+        /// txtObjectiveName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtOrganizationName;
-        
-        /// <summary>
-        /// ddlDisasterType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDisasterType;
+        protected global::System.Web.UI.WebControls.TextBox txtObjectiveName;
         
         /// <summary>
         /// btnSearch control.
@@ -67,22 +58,22 @@ namespace SRFROWCA.Admin {
         protected global::System.Web.UI.WebControls.Button btnSearch;
         
         /// <summary>
-        /// gvEmergency control.
+        /// gvEmergencyObjectives control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvEmergency;
+        protected global::System.Web.UI.WebControls.GridView gvEmergencyObjectives;
         
         /// <summary>
-        /// mpeAddOrg control.
+        /// mpeAddObjective control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender mpeAddOrg;
+        protected global::AjaxControlToolkit.ModalPopupExtender mpeAddObjective;
         
         /// <summary>
         /// pnlOrg control.
@@ -103,67 +94,49 @@ namespace SRFROWCA.Admin {
         protected global::System.Web.UI.UpdatePanel uPanel1;
         
         /// <summary>
-        /// txtEmgNameEng control.
+        /// ddlEmergency control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEmgNameEng;
+        protected global::System.Web.UI.WebControls.DropDownList ddlEmergency;
         
         /// <summary>
-        /// rfvEmgName control.
+        /// rgvEmergency control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvEmgName;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rgvEmergency;
         
         /// <summary>
-        /// txtEmgNameFr control.
+        /// txtObjectiveEng control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEmgNameFr;
+        protected global::System.Web.UI.WebControls.TextBox txtObjectiveEng;
         
         /// <summary>
-        /// rfvEmgNameFr control.
+        /// txtObjectiveFr control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvEmgNameFr;
+        protected global::System.Web.UI.WebControls.TextBox txtObjectiveFr;
         
         /// <summary>
-        /// ddlEmgType control.
+        /// hfEmgObjID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEmgType;
-        
-        /// <summary>
-        /// rgvEmgType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rgvEmgType;
-        
-        /// <summary>
-        /// hfLocEmgId control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfLocEmgId;
+        protected global::System.Web.UI.WebControls.HiddenField hfEmgObjID;
         
         /// <summary>
         /// btnAdd control.
@@ -191,6 +164,14 @@ namespace SRFROWCA.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMessage2;
-      
+        
+        /// <summary>
+        /// btnTarget control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnTarget;
     }
 }

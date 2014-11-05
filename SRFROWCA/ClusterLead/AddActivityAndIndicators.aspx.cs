@@ -139,14 +139,9 @@ namespace SRFROWCA.ClusterLead
             {
                 SaveData();
                 scope.Complete();
-                if (RC.IsRegionalClusterLead(this.User))
-                {
-                    //Response.Redirect("~/RegionalLead/ManageRegionalIndicators.aspx");
-                }
-                else
-                {
-                    //Response.Redirect("AddSRPActivitiesFromMasterList.aspx");
-                }
+               
+                Response.Redirect("ActivityListing.aspx");
+                
             }
         }
 
@@ -269,7 +264,7 @@ namespace SRFROWCA.ClusterLead
 
         protected void btnBackToSRPList_Click(object sender, EventArgs e)
         {
-           Response.Redirect("~/ClusterLead/IndicatorListing.aspx");
+            Response.Redirect("ActivityListing.aspx");
         }
     }
 }

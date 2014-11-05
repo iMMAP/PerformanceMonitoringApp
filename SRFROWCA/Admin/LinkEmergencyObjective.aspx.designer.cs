@@ -7,10 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SRFROWCA.ClusterLead {
+namespace SRFROWCA.Admin {
     
     
-    public partial class ActivityListing {
+    public partial class LinkEmergencyObjective {
+        
+        /// <summary>
+        /// localBreadCrumbHome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localBreadCrumbHome;
+        
+        /// <summary>
+        /// localBreadCrumbLinkEmgObjectives control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localBreadCrumbLinkEmgObjectives;
         
         /// <summary>
         /// updMessage control.
@@ -22,75 +40,48 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.UpdatePanel updMessage;
         
         /// <summary>
-        /// btnExportToExcel control.
+        /// lblMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnExportToExcel;
+        protected global::System.Web.UI.WebControls.Label lblMessage;
         
         /// <summary>
-        /// btnAddActivityAndIndicator control.
+        /// ddlEmergencies control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddActivityAndIndicator;
+        protected global::System.Web.UI.WebControls.DropDownList ddlEmergencies;
         
         /// <summary>
-        /// btnAddActivity control.
+        /// rgvEmg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddActivity;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rgvEmg;
         
         /// <summary>
-        /// ddlCluster control.
+        /// cblObjectives control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCluster;
+        protected global::System.Web.UI.WebControls.CheckBoxList cblObjectives;
         
         /// <summary>
-        /// txtActivityName control.
+        /// btnSave control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtActivityName;
-        
-        /// <summary>
-        /// ddlObjective control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlObjective;
-        
-        /// <summary>
-        /// btnSearch control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearch;
-        
-        /// <summary>
-        /// gvActivity control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvActivity;
+        protected global::System.Web.UI.WebControls.Button btnSave;
     }
 }

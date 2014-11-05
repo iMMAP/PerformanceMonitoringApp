@@ -122,7 +122,7 @@
                             title="Save">
                             <i class="icon-ok bigger-110"></i>Save
                         </button>
-                        <asp:Button ID="btnBackToSRPList" runat="server" Text="Back TO SRP List" OnClick="btnBackToSRPList_Click"
+                        <asp:Button ID="btnBackToSRPList" runat="server" Text="Back" OnClick="btnBackToSRPList_Click"
                             CssClass="width-10 btn btn-sm btn-primary" CausesValidation="false" />
                     </div>
                 </div>

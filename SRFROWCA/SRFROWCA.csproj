@@ -158,13 +158,17 @@
     <Content Include="Account\UserProfile.aspx" />
     <Content Include="Admin\ActivityData.aspx" />
     <Content Include="Admin\ActivityListing.aspx" />
+    <Content Include="Admin\AddCountryIndicator.aspx" />
     <Content Include="Admin\ConfigSettings.aspx" />
     <Content Include="Admin\AddEditCountryMaps.aspx" />
+    <Content Include="Admin\CountryIndicators.aspx" />
     <Content Include="Admin\CountryMapsListing.aspx" />
     <Content Include="Admin\EmergencyClusters.aspx" />
     <Content Include="Admin\EmergencyLocations.aspx" />
+    <Content Include="Admin\EmergencyObjectives.aspx" />
     <Content Include="Admin\IndicatorActivities.aspx" />
     <Content Include="Admin\IndicatorListing.aspx" />
+    <Content Include="Admin\LinkEmergencyObjective.aspx" />
     <Content Include="Admin\Location\AddNewLocation.aspx" />
     <Content Include="Admin\Location\LocationsList.aspx" />
     <Content Include="Admin\Organization\AddEditOrganization.aspx" />
@@ -395,10 +399,10 @@
     <Content Include="ClusterLead\UploadAchieved.aspx" />
     <Content Include="ClusterLead\ValidateIndicators.aspx" />
     <Content Include="ClusterLead\ValidateReportList.aspx" />
-    <Content Include="Configurations\ChangeEndSettings.xml" />
     <Content Include="Configurations\Settings.xml" />
     <Content Include="Controls\AddContryReportControl.ascx" />
     <Content Include="Controls\IndicatorsWithAdmin1TargetsControl.ascx" />
+    <Content Include="Controls\NewCountryIndicatorsControl.ascx" />
     <Content Include="Controls\NewIndicatorsControl.ascx" />
     <Content Include="Controls\ReportedIndicatorComments.ascx" />
     <Content Include="DataFeeds\AdminDataFeeds.aspx" />
@@ -633,6 +637,13 @@
     <Compile Include="Admin\ActivityListing.aspx.designer.cs">
       <DependentUpon>ActivityListing.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\AddCountryIndicator.aspx.cs">
+      <DependentUpon>AddCountryIndicator.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\AddCountryIndicator.aspx.designer.cs">
+      <DependentUpon>AddCountryIndicator.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\ConfigSettings.aspx.cs">
       <DependentUpon>ConfigSettings.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -646,6 +657,13 @@
     </Compile>
     <Compile Include="Admin\AddEditCountryMaps.aspx.designer.cs">
       <DependentUpon>AddEditCountryMaps.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\CountryIndicators.aspx.cs">
+      <DependentUpon>CountryIndicators.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\CountryIndicators.aspx.designer.cs">
+      <DependentUpon>CountryIndicators.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\CountryMapsListing.aspx.cs">
       <DependentUpon>CountryMapsListing.aspx</DependentUpon>
@@ -668,6 +686,13 @@
     <Compile Include="Admin\EmergencyLocations.aspx.designer.cs">
       <DependentUpon>EmergencyLocations.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\EmergencyObjectives.aspx.cs">
+      <DependentUpon>EmergencyObjectives.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\EmergencyObjectives.aspx.designer.cs">
+      <DependentUpon>EmergencyObjectives.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\IndicatorActivities.aspx.cs">
       <DependentUpon>IndicatorActivities.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -681,6 +706,13 @@
     </Compile>
     <Compile Include="Admin\IndicatorListing.aspx.designer.cs">
       <DependentUpon>IndicatorListing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\LinkEmergencyObjective.aspx.cs">
+      <DependentUpon>LinkEmergencyObjective.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\LinkEmergencyObjective.aspx.designer.cs">
+      <DependentUpon>LinkEmergencyObjective.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\Location\AddNewLocation.aspx.cs">
       <DependentUpon>AddNewLocation.aspx</DependentUpon>
@@ -933,6 +965,13 @@
     </Compile>
     <Compile Include="Controls\IndicatorsWithAdmin1TargetsControl.ascx.designer.cs">
       <DependentUpon>IndicatorsWithAdmin1TargetsControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NewCountryIndicatorsControl.ascx.cs">
+      <DependentUpon>NewCountryIndicatorsControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\NewCountryIndicatorsControl.ascx.designer.cs">
+      <DependentUpon>NewCountryIndicatorsControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\NewIndicatorsControl.ascx.cs">
       <DependentUpon>NewIndicatorsControl.ascx</DependentUpon>

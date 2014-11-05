@@ -207,9 +207,13 @@ namespace SRFROWCA.ClusterLead
         {
             Response.Redirect("AddActivity.aspx");
             
-        }             
+        }
 
-       
+        protected void btnAddActInd_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AddActivityandIndicators.aspx");
+
+        }    
 
         
 
