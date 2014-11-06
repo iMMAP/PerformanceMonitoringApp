@@ -2,7 +2,7 @@
 
 <div class="row">
     <h6 class="header blue bolder smaller">
-        Indicator<asp:Label ID="lbl1stNumber" runat="server" Text=""></asp:Label></h6>
+        Indicator<asp:Label ID="lbl1stNumber" runat="server" Text=""></asp:Label></h6> 
     <div class="col-xs-6 col-sm-6">
         <div class="widget-box no-border">
             <div class="widget-body">

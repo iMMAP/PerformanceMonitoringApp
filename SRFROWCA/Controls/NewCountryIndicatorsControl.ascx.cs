@@ -34,7 +34,7 @@ namespace SRFROWCA.Controls
             DBContext.Add("uspInsertIndicator", new object[] { indEn, indFr, target, unitId, countryId, clusterId, RC.GetCurrentUserId, null });
         }
 
-        private void LoadCombos()
+        private void LoadCombos() 
         {
             UI.FillUnits(ddlUnits);
         }
