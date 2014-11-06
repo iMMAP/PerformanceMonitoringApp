@@ -773,6 +773,9 @@
       <DependentUpon>AddCountryIndicator.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="ClusterLead\AddCountryIndicator.aspx.designer.cs">
+      <DependentUpon>AddCountryIndicator.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ClusterLead\ApproveIndicatorAddRemove.aspx.cs">
       <DependentUpon>ApproveIndicatorAddRemove.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
