@@ -20,7 +20,7 @@ namespace SRFROWCA.ClusterLead
         public bool applyFilter = false;
         public string countryId = string.Empty;
         public string clusterId = string.Empty;
-        public string displayNone = string.Empty;
+        public string displayNone = string.Empty; 
 
         protected void Page_PreLoad(object sender, EventArgs e)
         {

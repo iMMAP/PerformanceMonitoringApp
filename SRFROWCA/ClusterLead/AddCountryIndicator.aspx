@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="AddCountryIndicator.aspx.cs" Inherits="SRFROWCA.ClusterLead.AddCountryIndicator" %>
 
-<asp:Content ID="cntHeadCountryIndicator" ContentPlaceHolderID="HeadContent" runat="server">
+<asp:Content ID="cntHeadCountryIndicator" ContentPlaceHolderID="HeadContent" runat="server"> 
 </asp:Content>
 <asp:Content ID="cntMainCountryIndicator" ContentPlaceHolderID="MainContent" runat="server">
     <div class="breadcrumbs" id="breadcrumbs">

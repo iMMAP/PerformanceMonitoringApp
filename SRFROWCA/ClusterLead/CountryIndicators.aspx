@@ -138,7 +138,7 @@
                     OnRowDataBound="gvClusterIndicators_RowDataBound" OnSorting="gvClusterIndicators_Sorting" OnRowCommand="gvClusterIndicators_RowCommand" CssClass=" table-striped table-bordered table-hover">
 
                     <Columns>
-                        <asp:TemplateField ItemStyle-Width="2%" HeaderText="#">
+                        <asp:TemplateField ItemStyle-Width="2%" HeaderText="#"> 
                             <ItemTemplate>
                                 <%# Container.DataItemIndex + 1 %>
                             </ItemTemplate>

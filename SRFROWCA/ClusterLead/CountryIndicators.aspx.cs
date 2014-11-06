@@ -283,7 +283,7 @@ namespace SRFROWCA.ClusterLead
                         btnDelete.Visible = false;
                 }
 
-                if (btnEdit != null && applyFilter && maxDate < DateTime.Now)
+                if (btnEdit != null && applyFilter && maxDate < DateTime.Now) 
                     btnEdit.Visible = false;
             }
         }
