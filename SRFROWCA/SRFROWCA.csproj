@@ -375,8 +375,6 @@
     <Content Include="assets\orsjs\ShowHideObJAndPr.js" />
     <Content Include="assets\orsjs\ShowHideProjObjAndPr.js" />
     <Content Include="ClusterLead\ActivityListing.aspx" />
-    <Content Include="ClusterLead\AddActivity.aspx" />
-    <Content Include="ClusterLead\AddActivityAndIndicators.aspx" />
     <Content Include="ClusterLead\ApproveIndicatorAddRemove.aspx" />
     <Content Include="ClusterLead\ClusterIndicatorTargets.aspx" />
     <Content Include="ClusterLead\ManageActivitiesClsuterLead.aspx" />
