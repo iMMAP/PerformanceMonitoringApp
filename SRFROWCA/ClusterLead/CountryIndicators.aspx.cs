@@ -84,14 +84,21 @@ namespace SRFROWCA.ClusterLead
         {
             UI.FillCountry(ddlCountry);
             UI.FillClusters(ddlCluster, RC.SelectedSiteLanguageId);
+            UI.FillUnits(ddlUnits);
         }
 
         private void LoadClusterIndicators()
         {
             //string objective = null;
             string indicator = null;
-            int? countryID = Convert.ToInt32(countryId);
-            int? clusterID = Convert.ToInt32(clusterId);
+            int? countryID = null;
+            int? clusterID = null;
+
+            if(!string.IsNullOrEmpty(countryId))
+                countryID = Convert.ToInt32(countryId);
+
+            if(!string.IsNullOrEmpty(clusterId))
+                clusterID = Convert.ToInt32(clusterId);
 
             //if (!string.IsNullOrEmpty(txtObjectiveName.Text.Trim()))
             //    objective = txtObjectiveName.Text;
@@ -296,7 +303,41 @@ namespace SRFROWCA.ClusterLead
             else if (e.CommandName == "EditIndicator")
             {
                 int clusterIndicatorID = Convert.ToInt32(e.CommandArgument);
+
+                ClearPopupControls();
+                hfClusterIndicatorID.Value = clusterIndicatorID.ToString();
+
+                GridViewRow row = (((Control)e.CommandSource).NamingContainer) as GridViewRow;
+                Label lblIndAlternate = row.FindControl("lblIndAlternate") as Label;
+                Label lblUnitID = row.FindControl("lblUnitID") as Label;
+
+                if (gvClusterIndicators.DataKeys[row.RowIndex].Value.ToString() == "1")
+                {
+                    txtIndicatorEng.Text = row.Cells[4].Text;
+
+                    if (lblIndAlternate != null)
+                        txtIndicatorFr.Text = lblIndAlternate.Text;
+                }
+                else
+                {
+                    txtIndicatorFr.Text = row.Cells[4].Text;
+
+                    if (lblIndAlternate != null)
+                        txtIndicatorEng.Text = lblIndAlternate.Text;
+                }
+
+                txtTarget.Text = row.Cells[5].Text;
+
+                if (lblUnitID != null)
+                    ddlUnits.SelectedValue = lblUnitID.Text;
+
+                mpeEditIndicator.Show();
             }
+        }
+
+        private void ClearPopupControls()
+        {
+            hfClusterIndicatorID.Value = txtIndicatorEng.Text = txtIndicatorFr.Text = string.Empty;
         }
 
         private void DeleteClusterIndicator(int indicatorID)
@@ -317,6 +358,31 @@ namespace SRFROWCA.ClusterLead
         internal override void BindGridData()
         {
             LoadClusterIndicators();
+        }
+
+        protected void btnEdit_Click(object sender, EventArgs e)
+        {
+            SaveClusterIndicators();
+            LoadClusterIndicators();
+            ClearPopupControls();
+            mpeEditIndicator.Hide();
+        }
+
+        private void SaveClusterIndicators()
+        {
+            if (string.IsNullOrEmpty(txtIndicatorEng.Text))
+                txtIndicatorEng.Text = txtIndicatorFr.Text;
+            else if (string.IsNullOrEmpty(txtIndicatorFr.Text))
+                txtIndicatorFr.Text = txtIndicatorEng.Text;
+
+            Guid userId = RC.GetCurrentUserId;
+            string indicatorEng = txtIndicatorEng.Text.Trim();
+            string indicatorFr = txtIndicatorFr.Text.Trim();
+            string target = txtTarget.Text.Trim();
+            string unitID = ddlUnits.SelectedValue;
+
+            if (!string.IsNullOrEmpty(hfClusterIndicatorID.Value))
+                DBContext.Add("uspInsertIndicator", new object[] { indicatorEng, indicatorFr, target, unitID, null, null, RC.GetCurrentUserId, null, Convert.ToInt32(hfClusterIndicatorID.Value) });
         }
 
     }

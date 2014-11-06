@@ -1,8 +1,33 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="CountryIndicators.aspx.cs" Inherits="SRFROWCA.ClusterLead.CountryIndicators" %>
 
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
 
 <asp:Content ID="cntHeadCountryIndicators" ContentPlaceHolderID="HeadContent" runat="server">
+
+    
+    <script type="text/javascript">
+        function validate() {
+
+            var objEng = document.getElementById('<%=txtIndicatorEng.ClientID%>');
+            var objFr = document.getElementById('<%=txtIndicatorFr.ClientID%>');
+            
+            if (objEng.value == '' && objFr.value == '') {
+
+                alert("Please enter atleast one Indicator!");
+                return false;
+            }
+
+            //if (cmbEm.value < 0) {
+            //    alert("Please select a Country!");
+            //    return false;
+            //}
+
+
+        }
+    </script>
+
 </asp:Content>
 
 
@@ -124,9 +149,9 @@
                         <asp:BoundField ItemStyle-Width="10%" DataField="Cluster" HeaderText="Cluster" SortExpression="Cluster" />
 
                         <%--<asp:BoundField ItemStyle-Width="25%" Visible="false" DataField="Objective" HeaderText="Objective" SortExpression="Objective" />--%>
-                        <asp:BoundField ItemStyle-Width="58%" DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator" />
+                        <asp:BoundField ItemStyle-Width="48%" DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator" />
                         <asp:BoundField ItemStyle-Width="10%" DataField="Target" HeaderText="Target" SortExpression="Target" />
-
+                        <asp:BoundField ItemStyle-Width="10%" DataField="Unit" HeaderText="Unit" SortExpression="Unit" />
                         <asp:TemplateField HeaderStyle-Width="5%" ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>
 
@@ -154,11 +179,132 @@
                                 <asp:Label ID="lblClusterID" runat="server" Text='<%# Eval("ClusterID") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
+                          <asp:TemplateField Visible="false">
+                            <ItemTemplate>
+                                <asp:Label ID="lblIndAlternate" runat="server" Text='<%# Eval("IndicatorAlt") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                         <asp:TemplateField Visible="false">
+                            <ItemTemplate>
+                                <asp:Label ID="lblUnitID" runat="server" Text='<%# Eval("UnitID") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
 
                     </Columns>
 
                 </asp:GridView>
             </div>
+        </div>
+
+        <table>
+            <tr>
+                <td>
+                    <asp:ModalPopupExtender ID="mpeEditIndicator" BehaviorID="mpeEditIndicator" runat="server" TargetControlID="btnTarget"
+                        PopupControlID="pnlOrg" BackgroundCssClass="modalpopupbackground" CancelControlID="btnClose">
+                    </asp:ModalPopupExtender>
+                    <asp:Panel ID="pnlOrg" runat="server" Width="650px">
+                        <asp:UpdatePanel ID="uPanel1" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <div class="containerPopup">
+                                    <div class="popupheading">
+                                        Edit Indicator
+                                    </div>
+                                    <div class="contentarea">
+                                        <div class="formdiv">
+                                            <table border="0" style="margin: 0 auto;">
+                                               <%-- <tr>
+                                                    <td>Country:
+                                                    </td>
+                                                    <td class="frmControl">
+                                                        <asp:DropDownList ID="ddlCountry" runat="server" AppendDataBoundItems="true" Width="300px">
+                                                            <asp:ListItem Selected="True" Text="--- Select Country ---" Value="-1">
+
+                                                            </asp:ListItem>
+                                                        </asp:DropDownList>
+                                                    </td>
+                                                    <td>
+                                                       </td>
+                                                </tr>--%>
+                                                <tr>
+                                                    <td>Indicator (English):
+                                                    </td>
+                                                    <td class="frmControl">
+                                                        <asp:TextBox ID="txtIndicatorEng" runat="server" TextMode="MultiLine" Height="70" Width="450px" MaxLength="4000"></asp:TextBox>
+                                                    </td>
+                                                    <td>
+                                                       
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Indicator (French):
+                                                    </td>
+                                                    <td class="frmControl">
+                                                        <asp:TextBox ID="txtIndicatorFr" runat="server" TextMode="MultiLine" Height="70" Width="450px" MaxLength="4000"></asp:TextBox>
+                                                    </td>
+                                                    <td>
+                                                   
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Target:
+                                                    </td>
+                                                    <td class="frmControl">
+                                                        <asp:TextBox ID="txtTarget"  runat="server" Width="450px" MaxLength="10"></asp:TextBox>
+                                                    </td>
+                                                    <td>
+                                                   
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Unit:
+                                                    </td>
+                                                    <td class="frmControl">
+                                                        <asp:DropDownList runat="server" ID="ddlUnits" Width="450"></asp:DropDownList>
+                            
+                                                    </td>
+                                                    <td>
+                                                   
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td></td>
+                                                    <td align="left" class="frmControl">
+                                                        <br />
+                                                        <asp:HiddenField ID="hfClusterIndicatorID" runat="server" />
+                                                        <asp:Button ID="btnEdit" runat="server" OnClick="btnEdit_Click" Text="Update"  OnClientClick="return validate();" CssClass="btn btn_primary" />
+                                                        <asp:Button ID="btnClose" runat="server" Text="Close" CausesValidation="false" CssClass="btn btn_primary" />
+                                                        <br />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:Label ID="lblMessage2" runat="server" CssClass="error-message" Visible="false"
+                                                            ViewStateMode="Disabled"></asp:Label>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <div class="spacer" style="clear: both;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="graybarcontainer">
+                                    </div>
+                                </div>
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:PostBackTrigger ControlID="btnEdit" />
+                                <asp:PostBackTrigger ControlID="btnClose" />
+                            </Triggers>
+                        </asp:UpdatePanel>
+                    </asp:Panel>
+                </td>
+            </tr>
+        </table>
+
+        <div style="display: none">
+            <asp:Button ID="btnTarget" runat="server" Width="1px" />
         </div>
 
     </div>
