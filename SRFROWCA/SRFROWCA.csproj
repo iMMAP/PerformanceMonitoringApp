@@ -161,6 +161,7 @@
     <Content Include="ClusterLead\AddCountryIndicator.aspx" />
     <Content Include="Admin\ConfigSettings.aspx" />
     <Content Include="Admin\AddEditCountryMaps.aspx" />
+    <Content Include="ClusterLead\ClusterDataEntry.aspx" />
     <Content Include="ClusterLead\CountryIndicators.aspx" />
     <Content Include="Admin\CountryMapsListing.aspx" />
     <Content Include="Admin\EmergencyClusters.aspx" />
@@ -651,6 +652,13 @@
     </Compile>
     <Compile Include="Admin\AddEditCountryMaps.aspx.designer.cs">
       <DependentUpon>AddEditCountryMaps.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClusterLead\ClusterDataEntry.aspx.cs">
+      <DependentUpon>ClusterDataEntry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClusterLead\ClusterDataEntry.aspx.designer.cs">
+      <DependentUpon>ClusterDataEntry.aspx</DependentUpon>
     </Compile>
     <Compile Include="ClusterLead\CountryIndicators.aspx.cs">
       <DependentUpon>CountryIndicators.aspx</DependentUpon>
