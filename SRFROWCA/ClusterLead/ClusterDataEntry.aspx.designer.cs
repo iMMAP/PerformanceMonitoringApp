@@ -31,6 +31,15 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.DropDownList ddlMonth;
         
         /// <summary>
+        /// btnSaveAll control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSaveAll;
+        
+        /// <summary>
         /// gvIndicators control.
         /// </summary>
         /// <remarks>

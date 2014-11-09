@@ -17,11 +17,11 @@ namespace SRFROWCA.ClusterLead
         {
             if (!IsPostBack)
             {
-                LoadClusterIndicators();
                 PopulateYears();
                 PopulateMonths();
-
                 SetDates();
+                
+                LoadClusterIndicators();
             }
         }
 
@@ -47,7 +47,10 @@ namespace SRFROWCA.ClusterLead
 
         private DataTable GetClusterIndicatros(int? clusterId, int? countryId, string indicator)
         {
-            return DBContext.GetData("uspGetClusterIndicators", new object[] { clusterId, countryId, indicator, RC.SelectedSiteLanguageId });
+            int yearID = Convert.ToInt32(ddlYear.SelectedValue);
+            int monthID = Convert.ToInt32(ddlMonth.SelectedValue);
+
+            return DBContext.GetData("uspGetClusterReportDetails", new object[] { yearID, monthID, RC.SelectedSiteLanguageId });
         }
 
         private void PopulateYears()
@@ -91,6 +94,60 @@ namespace SRFROWCA.ClusterLead
         {
             DataTable dt = DBContext.GetData("GetMonths", new object[] { RC.SelectedSiteLanguageId });
             return dt.Rows.Count > 0 ? dt : new DataTable();
+        }
+
+        private void SaveClusterIndicatorDetails()
+        {
+            int clusterIndicatorID = 0;
+            int target = 0;
+            string runningSum = null;
+            string achieved = null;
+            int countryId = 0;
+            int clusterId = 0;
+            int yearId = Convert.ToInt32(ddlYear.SelectedValue);
+            int monthId = Convert.ToInt32(ddlMonth.SelectedValue);
+
+            foreach (GridViewRow row in gvIndicators.Rows)
+            {
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    target = Convert.ToInt32(row.Cells[3].Text);
+                    
+                    TextBox txtRunningSum = (TextBox)row.FindControl("txtRunningSum");
+                    TextBox txtAchieved = (TextBox)row.FindControl("txtAchieved");
+                    Label lblCountryID = (Label)row.FindControl("lblCountryID");
+                    Label lblClusterID = (Label)row.FindControl("lblClusterID");
+                    Label lblClusterIndicatorID = (Label)row.FindControl("lblClusterIndicatorID");
+
+                    if (lblClusterIndicatorID != null)
+                        clusterIndicatorID = Convert.ToInt32(lblClusterIndicatorID.Text);
+
+                    if (txtRunningSum != null)
+                        runningSum = string.IsNullOrEmpty(txtRunningSum.Text)?null: Convert.ToString(txtRunningSum.Text);
+
+                    if (txtAchieved != null)
+                        achieved = string.IsNullOrEmpty(txtAchieved.Text)?null:Convert.ToString(txtAchieved.Text);
+
+                    if (lblCountryID != null)
+                        countryId = Convert.ToInt32(lblCountryID.Text);
+
+                    if (lblClusterID != null)
+                        clusterId = Convert.ToInt32(lblClusterID.Text);
+
+                    DBContext.Add("uspInsertClusterReport", new object[] {clusterIndicatorID, clusterId, countryId, yearId, monthId, runningSum, achieved, RC.GetCurrentUserId, null });
+                }
+            }
+        }
+
+        protected void btnSaveAll_Click(object sender, EventArgs e)
+        {
+            SaveClusterIndicatorDetails();
+            LoadClusterIndicators();
+        }
+
+        protected void ddlMonth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadClusterIndicators();
         }
     }
 }

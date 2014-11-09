@@ -2,6 +2,18 @@
 
 
 <asp:Content ID="cntHeadClusterDataEntry" ContentPlaceHolderID="HeadContent" runat="server">
+
+    <script type="text/javascript">
+
+        function validate()
+        {
+
+
+            return true;
+        }
+
+    </script>
+
 </asp:Content>
 
 
@@ -29,21 +41,26 @@
                                 </div>
                                 <div class="widget-body">
                                     <div class="widget-main">
-                                        <table border="0" style="width: 40%; margin: 0px 10px 0px 20px">
+                                        <table border="0" style="width: 95%; margin: 0px 10px 0px 20px">
 
                                             <tr>
-                                                <td style="width: 40%;">
+                                                <td style="width: 15%;">
                                                     <label>
                                                         Reporting Year/Month:</label>
                                                 </td>
-                                                <td style="width: 10%;">
+                                                <td style="width: 5%;">
                                                     <asp:DropDownList ID="ddlYear" Enabled="false" runat="server">
                                                     </asp:DropDownList>
                                                 </td>
                                                 <td style="width: 20%;">
-                                                    <asp:DropDownList ID="ddlMonth" runat="server">
+                                                    <asp:DropDownList ID="ddlMonth" AutoPostBack="true" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged" runat="server">
                                                     </asp:DropDownList></td>
-                                                <td style="width: 20%;"></td>
+                                                <td style="width: 50%;text-align:right;">
+                                                     <asp:Button runat="server" ID="btnSaveAll" Text="Save All" class="width-10 btn btn-sm" OnClientClick="return validate();" OnClick="btnSaveAll_Click"  />
+
+                                                </td>
+
+
 
                                             </tr>
                                         </table>
@@ -73,31 +90,26 @@
                             <%# Container.DataItemIndex + 1 %>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:BoundField DataField="ClusterIndicatorID" HeaderText="ClusterIndicatorID" 
-                        ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden">
-                        <HeaderStyle CssClass="hidden"></HeaderStyle>
-
-                        <ItemStyle CssClass="hidden" ></ItemStyle>
-                    </asp:BoundField>
-                     <asp:TemplateField ItemStyle-Width="45%" HeaderText="Indicator">
+                    <asp:TemplateField Visible="false">
+                            <ItemTemplate>
+                                <asp:Label ID="lblClusterIndicatorID" runat="server" Text='<%# Eval("ClusterIndicatorID") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                  
+                     <asp:TemplateField ItemStyle-Width="65%" HeaderText="Indicator">
                         <ItemTemplate>
                             <div style="word-wrap: break-word;">
                                 <%# Eval("Indicator")%>
                             </div>
                         </ItemTemplate>
                     </asp:TemplateField>
-                   <asp:TemplateField ItemStyle-Width="45%" HeaderText="Target">
-                        <ItemTemplate>
-                            <div style="word-wrap: break-word;">
-                                <%# Eval("Target")%>
-                            </div>
-                        </ItemTemplate>
-                    </asp:TemplateField>
+                    <asp:BoundField DataField="Target" HeaderText="Target"  ItemStyle-Width="25%" ></asp:BoundField>
+                  
 
                     <asp:TemplateField ItemStyle-Width="5%" HeaderText="Running Sum">
                         <ItemTemplate>
                             <div style=" word-wrap: break-word;">
-                                <asp:TextBox runat="server" ID="txtRunningSum" ></asp:TextBox>
+                                <asp:TextBox runat="server" MaxLength="10" ID="txtRunningSum" Text='<%# Eval("RunningSum") %>' ></asp:TextBox>
                             </div>
                         </ItemTemplate>
                     </asp:TemplateField>
@@ -105,10 +117,20 @@
                       <asp:TemplateField ItemStyle-Width="5%" HeaderText="Achieved">
                         <ItemTemplate>
                             <div style="word-wrap: break-word;">
-                                <asp:TextBox runat="server" ID="txtAchieved" ></asp:TextBox>
+                                <asp:TextBox runat="server" MaxLength="10" ID="txtAchieved" Text='<%# Eval("Achieved") %>' ></asp:TextBox>
                             </div>
                         </ItemTemplate>
                     </asp:TemplateField>
+                       <asp:TemplateField Visible="false">
+                            <ItemTemplate>
+                                <asp:Label ID="lblCountryID" runat="server" Text='<%# Eval("CountryID") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField Visible="false">
+                            <ItemTemplate>
+                                <asp:Label ID="lblClusterID" runat="server" Text='<%# Eval("ClusterID") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
 
                 </Columns>
             </asp:GridView>
