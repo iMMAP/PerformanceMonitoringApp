@@ -53,7 +53,7 @@
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body class="skin-2">
+<body>
 
     <form runat="server">
         <asp:ScriptManager ID="masterScriptMgr" runat="server">
