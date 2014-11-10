@@ -17,6 +17,9 @@ namespace SRFROWCA.ClusterLead
         {
             if (!IsPostBack)
             {
+                LoadCombos();
+                ShowHideControls();
+
                 PopulateYears();
                 PopulateMonths();
                 SetDates();
@@ -25,9 +28,50 @@ namespace SRFROWCA.ClusterLead
             }
         }
 
+        private void ShowHideControls()
+        {
+            if (RC.IsCountryAdmin(this.User))
+            {
+                lblCountry.Visible =
+                    ddlCountry.Visible = false;
+
+                ddlCountry.SelectedValue = Convert.ToString(UserInfo.EmergencyCountry);
+
+                if (Convert.ToInt32(ddlCountry.SelectedValue) > 0)
+                {
+                    lblCountryClusterTitle.Text = "Country:";
+                    lblCountryCluster.Text = UserInfo.CountryName;
+                }
+            }
+            else if (RC.IsClusterLead(this.User))
+            {
+                lblCountry.Visible =
+                    ddlCountry.Visible =
+                        ddlCluster.Visible =
+                            lblCluster.Visible = false;
+
+                ddlCountry.SelectedValue = Convert.ToString(UserInfo.EmergencyCountry);
+                ddlCluster.SelectedValue = Convert.ToString(UserInfo.EmergencyCluster);
+
+                if (Convert.ToInt32(ddlCountry.SelectedValue) > 0
+                    && Convert.ToInt32(ddlCluster.SelectedValue) > 0)
+                {
+                    lblCountryClusterTitle.Text = "Country/Cluster:";
+                    lblCountryCluster.Text = UserInfo.CountryName + "-" + ddlCluster.SelectedItem.Text;
+                }
+            }
+            
+        }
+
+        private void LoadCombos()
+        {
+            UI.FillCountry(ddlCountry);
+            UI.FillClusters(ddlCluster, RC.SelectedSiteLanguageId);
+        }
+
         private void SetDates()
         {
-            int month = DateTime.Now.Month-1;
+            int month = DateTime.Now.Month - 1;
             int year = 11;// DateTime.Now.Year;
 
             if (month.Equals(12))
@@ -41,7 +85,16 @@ namespace SRFROWCA.ClusterLead
 
         private void LoadClusterIndicators()
         {
-            gvIndicators.DataSource = GetClusterIndicatros(null, null, null);
+            int? countryId = null;
+            int? clusterId = null;
+
+            if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
+                countryId = Convert.ToInt32(ddlCountry.SelectedValue);
+
+            if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
+                clusterId = Convert.ToInt32(ddlCluster.SelectedValue);
+
+            gvIndicators.DataSource = GetClusterIndicatros(clusterId, countryId, null);
             gvIndicators.DataBind();
         }
 
@@ -49,8 +102,8 @@ namespace SRFROWCA.ClusterLead
         {
             int yearID = Convert.ToInt32(ddlYear.SelectedValue);
             int monthID = Convert.ToInt32(ddlMonth.SelectedValue);
-
-            return DBContext.GetData("uspGetClusterReportDetails", new object[] { yearID, monthID, RC.SelectedSiteLanguageId });
+          
+            return DBContext.GetData("uspGetClusterReportDetails", new object[] { yearID, monthID, RC.SelectedSiteLanguageId, countryId, clusterId });
         }
 
         private void PopulateYears()
@@ -86,7 +139,7 @@ namespace SRFROWCA.ClusterLead
 
             int monthNumber = MonthNumber.GetMonthNumber(result);
             monthNumber = monthNumber == 1 ? monthNumber : monthNumber - 1;
-            
+
             ddlMonth.SelectedIndex = i > -1 ? i : ddlMonth.Items.IndexOf(ddlMonth.Items.FindByValue(monthNumber.ToString()));
         }
 
@@ -100,7 +153,6 @@ namespace SRFROWCA.ClusterLead
         {
             int clusterIndicatorID = 0;
             int target = 0;
-            string runningSum = null;
             string achieved = null;
             int countryId = 0;
             int clusterId = 0;
@@ -111,9 +163,8 @@ namespace SRFROWCA.ClusterLead
             {
                 if (row.RowType == DataControlRowType.DataRow)
                 {
-                    target = Convert.ToInt32(row.Cells[3].Text);
-                    
-                    TextBox txtRunningSum = (TextBox)row.FindControl("txtRunningSum");
+                    target = Convert.ToInt32(row.Cells[4].Text);
+
                     TextBox txtAchieved = (TextBox)row.FindControl("txtAchieved");
                     Label lblCountryID = (Label)row.FindControl("lblCountryID");
                     Label lblClusterID = (Label)row.FindControl("lblClusterID");
@@ -122,19 +173,20 @@ namespace SRFROWCA.ClusterLead
                     if (lblClusterIndicatorID != null)
                         clusterIndicatorID = Convert.ToInt32(lblClusterIndicatorID.Text);
 
-                    if (txtRunningSum != null)
-                        runningSum = string.IsNullOrEmpty(txtRunningSum.Text)?null: Convert.ToString(txtRunningSum.Text);
-
                     if (txtAchieved != null)
-                        achieved = string.IsNullOrEmpty(txtAchieved.Text)?null:Convert.ToString(txtAchieved.Text);
+                        achieved = string.IsNullOrEmpty(txtAchieved.Text) ? null : Convert.ToString(txtAchieved.Text);
 
-                    if (lblCountryID != null)
+                    if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
+                        countryId = Convert.ToInt32(ddlCountry.SelectedValue);
+                    else if (lblCountryID != null)
                         countryId = Convert.ToInt32(lblCountryID.Text);
 
-                    if (lblClusterID != null)
+                    if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
+                        clusterId = Convert.ToInt32(ddlCluster.SelectedValue);
+                    else if (lblCluster != null)
                         clusterId = Convert.ToInt32(lblClusterID.Text);
 
-                    DBContext.Add("uspInsertClusterReport", new object[] {clusterIndicatorID, clusterId, countryId, yearId, monthId, runningSum, achieved, RC.GetCurrentUserId, null });
+                    DBContext.Add("uspInsertClusterReport", new object[] { clusterIndicatorID, clusterId, countryId, yearId, monthId, achieved, RC.GetCurrentUserId, null });
                 }
             }
         }
@@ -148,6 +200,25 @@ namespace SRFROWCA.ClusterLead
         protected void ddlMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadClusterIndicators();
+        }
+
+        protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadClusterIndicators();
+        }
+
+        protected void ddlCluster_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadClusterIndicators();
+        }
+
+        protected void gvIndicators_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                ObjPrToolTip.RegionalIndicatorIcon(e, 8);
+                ObjPrToolTip.CountryIndicatorIcon(e, 9);
+            }
         }
     }
 }
