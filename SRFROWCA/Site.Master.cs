@@ -5,6 +5,7 @@ using System.Web.UI.WebControls;
 using SRFROWCA.Common;
 using System.Linq;
 using System.Web.UI.HtmlControls;
+using BusinessLogic;
 
 namespace SRFROWCA
 {
@@ -39,6 +40,9 @@ namespace SRFROWCA
             SetUserName();
             HideAllAuthenticatedMenues();
             LoadNotifications();
+            
+            if(!IsPostBack)
+                LoadEmergencies();
 
             //DataTable dt = new DataTable();
             //dt.Columns.Add("FullName");
@@ -113,6 +117,12 @@ namespace SRFROWCA
                     }
                 }
             }
+        }
+
+        private void LoadEmergencies()
+        {
+            rptEmergencies.DataSource = DBContext.GetData("uspEmergencies", new object[] {RC.SelectedSiteLanguageId });
+            rptEmergencies.DataBind();
         }
 
         private void LoadNotifications()
