@@ -352,6 +352,11 @@
 
                                     <asp:Localize ID="Localize10" runat="server" Text="Indicators List" meta:resourcekey="localIndicatorsResource1"></asp:Localize>
                                 </span></a></li>
+                                <li id="liClusterDataEntry" runat="server"><a href="<%=BaseURL %>/ClusterLead/ClusterDataEntry.aspx"><span class="menu-text">
+
+                                    <asp:Localize ID="Localize11" runat="server" Text="Cluster Data Entry" meta:resourcekey="localClusterDataEntryResource1"></asp:Localize>
+                                </span></a></li>
+                                
                               
                             </ul>
                         </li>

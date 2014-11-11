@@ -31,7 +31,7 @@ namespace SRFROWCA.Controls
             Guid userId = RC.GetCurrentUserId;
 
             //DBContext.Add("uspInsertIndicator", new object[] {objectiveId, indEn, indFr, target, unitId, countryId, clusterId, RC.GetCurrentUserId, null });
-            DBContext.Add("uspInsertIndicator", new object[] { indEn, indFr, target, unitId, countryId, clusterId, RC.GetCurrentUserId, null });
+            DBContext.Add("uspInsertIndicator", new object[] { indEn, indFr, target, unitId, countryId, clusterId, RC.GetCurrentUserId, null , null});
         }
 
         private void LoadCombos() 

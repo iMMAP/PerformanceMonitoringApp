@@ -57,7 +57,7 @@
                     <label class="col-sm-3"></label>
 
                     <div class="col-sm-9">
-                        <asp:Button id="btnUpload" runat="server" Text="Upload" />
+                        <asp:Button id="btnUpload" runat="server" Text="Upload" OnClick="btnUpload_Click" />
                     </div>
                 </div>
                 
