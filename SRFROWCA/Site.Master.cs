@@ -552,6 +552,34 @@ namespace SRFROWCA
                 liEmergency.Attributes.Add("class", "active open");
                 liEmgCluster.Attributes.Add("class", "active");
             }
+            else if (uri.Contains("ClusterLead/CountryIndicators.aspx"))
+            {
+                PageTitle = "ORS - Country Indicators";
+
+                liClusterFrameworks.Attributes.Add("class", "active open");
+                liCountryIndicators.Attributes.Add("class", "active");
+            }
+            else if (uri.Contains("ClusterLead/ActivityListing.aspx"))
+            {
+                PageTitle = "ORS - Activity Listing";
+
+                liClusterFrameworks.Attributes.Add("class", "active open");
+                liNewActivityListing.Attributes.Add("class", "active");
+            }
+            else if (uri.Contains("ClusterLead/IndicatorListing.aspx"))
+            {
+                PageTitle = "ORS - Indicator Listing";
+
+                liClusterFrameworks.Attributes.Add("class", "active open");
+                liNewIndicatorListing.Attributes.Add("class", "active");
+            }
+            else if (uri.Contains("ClusterLead/ClusterDataEntry.aspx"))
+            {
+                PageTitle = "ORS - Cluster Data Entry";
+
+                liClusterFrameworks.Attributes.Add("class", "active open");
+                liClusterDataEntry.Attributes.Add("class", "active");
+            }
             else if (uri.Contains("Admin/ActivityListing.aspx"))
             {
                 PageTitle = "ORS - Activites";
