@@ -111,13 +111,6 @@ namespace SRFROWCA.ClusterLead
 							END 
 							CREATE TABLE [ImportSRPTemp](
 								[Id] [int] IDENTITY(1,1) NOT NULL,
-	                            [EmergencyLocationId] [int] NULL,
-	                            [EmergencyClusterId] [int] NULL,
-	                            [EmergencyObjectiveId] [int] NULL,
-                                [ObjectiveId] [int] NULL,
-                                [ActivityId] [int] NULL,
-                                [IndicatorId] [int] NULL,
-                                [UnitId] [int] NULL,                            
 	                            [Objective] [nvarchar](1000) NULL,
 	                            [Activity_En] [nvarchar](2000) NULL,
 	                            [Activity_Fr] [nvarchar](2000) NULL,
@@ -292,16 +285,16 @@ namespace SRFROWCA.ClusterLead
             idColumn.AutoIncrement = true;
             idColumn.AutoIncrementSeed = 1;
             idColumn.AutoIncrementStep = 1;
-
             
             dt.Columns.Add(idColumn);
-            dt.Columns.Add("EmergencyLocationId", typeof(int));
-            dt.Columns.Add("EmergencyClusterId", typeof(int));
-            dt.Columns.Add("EmergencyObjectiveId", typeof(int));
-            dt.Columns.Add("ObjectiveId", typeof(int));
-            dt.Columns.Add("ActivityId", typeof(int));
-            dt.Columns.Add("IndicatorId", typeof(int));
-            dt.Columns.Add("UnitId", typeof(int));
+            //dt.Columns.Add("EmergencyId", typeof(int));
+            //dt.Columns.Add("EmergencyLocationId", typeof(int));
+            //dt.Columns.Add("EmergencyClusterId", typeof(int));
+            //dt.Columns.Add("EmergencyObjectiveId", typeof(int));
+            //dt.Columns.Add("ObjectiveId", typeof(int));
+            //dt.Columns.Add("ActivityId", typeof(int));
+            //dt.Columns.Add("IndicatorId", typeof(int));
+            //dt.Columns.Add("UnitId", typeof(int));
             return dt;
         }
 
