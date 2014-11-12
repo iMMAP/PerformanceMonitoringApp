@@ -222,6 +222,7 @@ namespace SRFROWCA
             //liCountryReports.Visible = isShow;
             liLocations.Visible = isShow;
             liMapsListing.Visible = isShow;
+            liReport.Visible = isShow;
         }
 
         private void ShowUserMenue()
@@ -284,6 +285,7 @@ namespace SRFROWCA
             //liReportsTopIndicators1.Visible = isShow;
             //liReportsTopIndicatorsGeneral1.Visible = isShow;
             //liReportsTopIndicatorRegional1.Visible = isShow;
+            liReport.Visible = isShow;
         }
 
         private void ShowAuthenticatedMenues()
