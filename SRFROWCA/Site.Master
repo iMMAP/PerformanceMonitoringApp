@@ -376,6 +376,11 @@
 
                                     <asp:Localize ID="Localize11" runat="server" Text="Cluster Data Entry" meta:resourcekey="localClusterDataEntryResource1"></asp:Localize>
                                 </span></a></li>
+
+                                  <li id="liReport" runat="server"><a href="<%=BaseURL %>/Reports/DownloadReport.aspx?type=10"><span class="menu-text">
+
+                                    <asp:Localize ID="Localize12" runat="server" Text="Report" meta:resourcekey="localReportResource1"></asp:Localize>
+                                </span></a></li>
                                 
                               
                             </ul>

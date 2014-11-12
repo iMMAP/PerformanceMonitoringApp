@@ -27,7 +27,7 @@ namespace SRFROWCA.Reports
             string extension = string.Empty;
             int tempVal = 0;
 
-
+            byte[] bytes;
             string reportType = Request.QueryString["Type"].ToString();
             string fileName = "";
             ReportViewer rvCountry = new ReportViewer();
@@ -35,12 +35,16 @@ namespace SRFROWCA.Reports
             rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://win-78sij2cjpjj/Reportserver");
             //rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://54.83.26.190/Reportserver");
             ReportParameter[] RptParameters = null;
+            //rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://localhost/Reportserver");
             if (reportType == "3W")
             {
                 RptParameters = new ReportParameter[1];
                 RptParameters[0] = new ReportParameter("CountryId", Request.QueryString["cid"].ToString());          
                 rvCountry.ServerReport.ReportPath = "/reports/countryactivities";
                 fileName = "ORS3W-" + Request.QueryString["cName"].ToString() + ".pdf";
+                rvCountry.ServerReport.ReportServerCredentials = new ReportServerCredentials("Administrator", "&qisW.c@Jq", "");
+                rvCountry.ServerReport.SetParameters(RptParameters);
+                bytes = rvCountry.ServerReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);         
             }
             else if (reportType == "4W")
             {
@@ -48,6 +52,9 @@ namespace SRFROWCA.Reports
                 RptParameters[0] = new ReportParameter("CountryId", Request.QueryString["cid"].ToString());          
                 rvCountry.ServerReport.ReportPath = "/reports/countryactivities4w";
                 fileName = "ORS4W-" + Request.QueryString["cName"].ToString() + ".pdf";
+                rvCountry.ServerReport.ReportServerCredentials = new ReportServerCredentials("Administrator", "&qisW.c@Jq", "");
+                rvCountry.ServerReport.SetParameters(RptParameters);
+                bytes = rvCountry.ServerReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);         
             }
             else if (reportType == "5")
             {
@@ -59,6 +66,23 @@ namespace SRFROWCA.Reports
                 RptParameters[3] = new ReportParameter("yearId", "10");
                 rvCountry.ServerReport.ReportPath = "/reports/countryindicators";
                 fileName = "CountryIndicators-" + Request.QueryString["cName"].ToString() + "-" + GetClusterName((int)dt.Rows[0]["EmergencyClusterId"]) + ".pdf";
+                rvCountry.ServerReport.ReportServerCredentials = new ReportServerCredentials("Administrator", "&qisW.c@Jq", "");
+                rvCountry.ServerReport.SetParameters(RptParameters);
+                bytes = rvCountry.ServerReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);         
+            }
+            else if (reportType == "10")
+            {
+                DataTable dt = GetReportInfo(Convert.ToInt32(Request.QueryString["cid"]));
+                RptParameters = new ReportParameter[3];
+                RptParameters[0] = new ReportParameter("emgLocationId", UserInfo.EmergencyCountry.ToString());
+                RptParameters[1] = new ReportParameter("emgClusterId", UserInfo.EmergencyCluster.ToString());
+                RptParameters[2] = new ReportParameter("emgLangId", (RC.SelectedSiteLanguageId).ToString());
+                
+                rvCountry.ServerReport.ReportPath = "/reports/indicators";
+                fileName = "PerformanceIndicators.doc";
+                rvCountry.ServerReport.ReportServerCredentials = new ReportServerCredentials("Administrator", "&qisW.c@Jq", "");
+                rvCountry.ServerReport.SetParameters(RptParameters);
+                bytes = rvCountry.ServerReport.Render("WORD", null, out mimeType, out encoding, out extension, out streamIds, out warnings);         
             }
             else
             {
@@ -67,11 +91,13 @@ namespace SRFROWCA.Reports
                 RptParameters = new ReportParameter[1];
                 RptParameters[0] = new ReportParameter("CountryId", Request.QueryString["countryId"]);
                 fileName = dt.Rows[0]["ReportTitle"].ToString() + Request.QueryString["cName"].ToString() + ".pdf";
+                rvCountry.ServerReport.ReportServerCredentials = new ReportServerCredentials("Administrator", "&qisW.c@Jq", "");
+                rvCountry.ServerReport.SetParameters(RptParameters);
+                bytes = rvCountry.ServerReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);         
             }
             
-            rvCountry.ServerReport.ReportServerCredentials = new ReportServerCredentials("Administrator", "&qisW.c@Jq", "");
-            rvCountry.ServerReport.SetParameters(RptParameters);
-            byte[] bytes = rvCountry.ServerReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);         
+          
+           
             
 
             Response.Buffer = true;
