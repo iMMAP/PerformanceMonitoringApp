@@ -13,6 +13,7 @@ namespace SRFROWCA
     {
         public string MetaDescription = "ROWCA ORS";
         public string PageTitle = "ORS - Home";
+        public string CurrentEmergency = "Select";
 
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -40,8 +41,8 @@ namespace SRFROWCA
             SetUserName();
             HideAllAuthenticatedMenues();
             LoadNotifications();
-            
-            if(!IsPostBack)
+
+            if (!IsPostBack)
                 LoadEmergencies();
 
             //DataTable dt = new DataTable();
@@ -56,6 +57,8 @@ namespace SRFROWCA
 
             if (HttpContext.Current.User.Identity.IsAuthenticated)
             {
+                SetCurrentEmergency();
+
                 LoginStatus.Visible = false;
                 spanWelcome.Visible = true;
                 liRegister.Visible = false;
@@ -104,6 +107,19 @@ namespace SRFROWCA
             ActiveMenueItem();
         }
 
+        private void SetCurrentEmergency()
+        {
+            try
+            {
+                DataTable dtEmergencies = (DataTable)rptEmergencies.DataSource;
+                if (dtEmergencies.Rows.Count > 0)
+                {
+                    CurrentEmergency = Convert.ToString(dtEmergencies.Select("ID='" + UserInfo.Emergency + "'")[0]["Emergency"]);
+                }
+            }
+            catch { }
+        }
+
         private void SetUserName()
         {
             if (HttpContext.Current.User.Identity.IsAuthenticated)
@@ -121,8 +137,13 @@ namespace SRFROWCA
 
         private void LoadEmergencies()
         {
-            rptEmergencies.DataSource = DBContext.GetData("uspEmergencies", new object[] {RC.SelectedSiteLanguageId });
-            rptEmergencies.DataBind();
+            DataTable dtEmergencies = DBContext.GetData("uspEmergencies", new object[] { RC.SelectedSiteLanguageId });
+
+            if (dtEmergencies.Rows.Count > 0)
+            {
+                rptEmergencies.DataSource = dtEmergencies.Select("IsSRP=1").CopyToDataTable();
+                rptEmergencies.DataBind();
+            }
         }
 
         private void LoadNotifications()
@@ -150,6 +171,11 @@ namespace SRFROWCA
         }
 
         protected void btnLinkNotifications_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnEmergency_Click(object sender, EventArgs e)
         {
 
         }
@@ -633,7 +659,7 @@ namespace SRFROWCA
             else if (uri.Contains("CountryMaps.aspx"))
             {
                 PageTitle = "ORS - Country Maps";
-                
+
                 liMaps.Attributes.Add("class", "active open");
                 //liCountryReports.Attributes.Add("class", "active");
             }
@@ -641,7 +667,7 @@ namespace SRFROWCA
             {
                 liLocations.Attributes.Add("class", "active");
             }
-             else if (uri.Contains("ContactUs.aspx"))
+            else if (uri.Contains("ContactUs.aspx"))
             {
                 PageTitle = "ORS - Contact Us";
             }
@@ -650,8 +676,8 @@ namespace SRFROWCA
             {
                 PageTitle = "ORS - FAQ";
             }
-            
-           
+
+
 
         }
 
@@ -705,6 +731,28 @@ namespace SRFROWCA
                 return string.Format("http://{0}{1}",
                                      HttpContext.Current.Request.ServerVariables["HTTP_HOST"],
                                      (VirtualFolder.Equals("/")) ? string.Empty : VirtualFolder);
+            }
+        }
+
+        protected void rptEmergencies_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "LinkClick")
+            {
+                int emergencyID = Convert.ToInt32(e.CommandArgument);
+
+                if (HttpContext.Current.User.Identity.IsAuthenticated)
+                    DBContext.Update("uspUpdateUserEmergency", new object[] { emergencyID, RC.GetCurrentUserId , null});
+            }
+        }
+
+        protected void rptEmergencies_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                LinkButton btnEmergency = e.Item.FindControl("btnEmergency") as LinkButton;
+
+                if (btnEmergency != null)
+                    btnEmergency.Click += btnEmergency_Click;
             }
         }
     }
