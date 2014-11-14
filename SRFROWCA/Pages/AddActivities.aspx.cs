@@ -50,15 +50,15 @@ namespace SRFROWCA.Pages
             //this.Form.DefaultButton = this.btnSave.UniqueID;
             string controlName = GetPostBackControlId(this);
 
-            if (controlName == "ddlMonth" || controlName == "ddlYear" || controlName == "rblProjects")
+            if (controlName == "ddlMonth" || controlName == "ddlYear" || controlName == "rblProjects" || controlName == "ddlWeeks")
             {
                 LocationRemoved = 0;
                 RemoveSelectedLocations(cblAdmin1);
                 RemoveSelectedLocations(cblLocations);
             }
 
-            if (controlName != "imgbtnComments")
-            {
+            //if (controlName != "imgbtnComments")
+            { 
                 DataTable dtActivities = GetActivities();
                 AddDynamicColumnsInGrid(dtActivities);
                 Session["dtActivities"] = dtActivities;
@@ -75,9 +75,33 @@ namespace SRFROWCA.Pages
             LocationRemoved = 0;
             BindGridData();
             AddLocationsInSelectedList();
+
+            LoadWeeks();
+        }
+
+        private void LoadWeeks()
+        {
+            //ddlWeeks.DataValueField = "WeekId";
+            //ddlWeeks.DataTextField = "WeekNumberInMonth";
+            //ddlWeeks.DataSource = GetWeeksOfYear();
+            //ddlWeeks.DataBind();
+        }
+
+        private DataTable GetWeeksOfYear()
+        {
+            int yearId = 0;
+            int.TryParse(ddlYear.SelectedValue, out yearId);
+            return DBContext.GetData("GetWeeksOfTheYear", new object[] { yearId });
         }
 
         protected void ddlMonth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LocationRemoved = 0;
+            BindGridData();
+            AddLocationsInSelectedList();
+        }
+
+        protected void ddlWeek_SelectedIndexChanged(object sender, EventArgs e)
         {
             LocationRemoved = 0;
             BindGridData();
@@ -101,29 +125,63 @@ namespace SRFROWCA.Pages
             }
         }
 
+        protected void btnImgClick(object sender, EventArgs e)
+        {
+            int j = 0;
+            ImageButton btn = (ImageButton)sender;
+            GridViewRow gvr = (GridViewRow)btn.NamingContainer;
+
+            //Get rowindex
+            int rowIndex = gvr.RowIndex;
+
+            if (ReportId == 0)
+            {
+                SaveReportMainInfo();
+            }
+
+            //SaveProjectData();
+
+            //int rowIndex = int.Parse(e.CommandArgument.ToString());
+
+            int activityDataId = 0;
+            int.TryParse(gvActivities.DataKeys[rowIndex]["ActivityDataId"].ToString(), out activityDataId);
+
+            if (activityDataId > 0)
+            {
+                CommentsIndId = activityDataId;
+
+                if (ucIndComments.LoadComments(ReportId, activityDataId))
+                    btnSaveComments.Visible = false;
+
+                mpeComments.Show();
+            }
+        }
+
         protected void gvActivities_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "AddComments")
             {
-                if (ReportId == 0)
-                {
-                    SaveReportMainInfo();
-                }
+                //if (ReportId == 0)
+                //{
+                //    SaveReportMainInfo();
+                //}
 
-                int rowIndex = int.Parse(e.CommandArgument.ToString());
+                ////SaveProjectData();
 
-                int activityDataId = 0;
-                int.TryParse(gvActivities.DataKeys[rowIndex]["ActivityDataId"].ToString(), out activityDataId);
+                //int rowIndex = int.Parse(e.CommandArgument.ToString());
 
-                if (activityDataId > 0)
-                {
-                    CommentsIndId = activityDataId;
+                //int activityDataId = 0;
+                //int.TryParse(gvActivities.DataKeys[rowIndex]["ActivityDataId"].ToString(), out activityDataId);
 
-                    if (ucIndComments.LoadComments(ReportId, activityDataId))
-                        btnSaveComments.Visible = false;
+                //if (activityDataId > 0)
+                //{
+                //    CommentsIndId = activityDataId;
 
-                    mpeComments.Show();
-                }
+                //    if (ucIndComments.LoadComments(ReportId, activityDataId))
+                //        btnSaveComments.Visible = false;
+
+                //    mpeComments.Show();
+                //}
             }
         }
 
@@ -601,13 +659,14 @@ namespace SRFROWCA.Pages
 
         private void SaveReportMainInfo()
         {
+            //int weekId = RC.GetSelectedIntVal(ddlWeeks);
             int yearId = RC.GetSelectedIntVal(ddlYear);
             int monthId = RC.GetSelectedIntVal(ddlMonth);
             int projId = RC.GetSelectedIntVal(rblProjects);
             Guid loginUserId = RC.GetCurrentUserId;
             string reportName = rblProjects.SelectedItem.Text + " (" + ddlMonth.SelectedItem.Text + "-14)";
             ReportId = DBContext.Add("InsertReport", new object[] { yearId, monthId, projId, UserInfo.EmergencyCountry,
-                                                                    UserInfo.Organization, loginUserId, reportName,  DBNull.Value });
+                                                                    UserInfo.Organization, loginUserId, reportName, DBNull.Value });
         }
 
         private void SaveReportLocations()
