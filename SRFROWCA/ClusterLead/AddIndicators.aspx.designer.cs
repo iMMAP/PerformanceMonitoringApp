@@ -5,57 +5,30 @@
 //     Changes to this file may cause incorrect behavior and will be lost if
 //     the code is regenerated. 
 // </auto-generated>
-//------------------------------------------------------------------------------ 
+//------------------------------------------------------------------------------
 
 namespace SRFROWCA.ClusterLead {
     
     
-    public partial class CountryIndicators {
+    public partial class AddIndicators {
         
         /// <summary>
-        /// btnAddIndicator control.
+        /// divMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddIndicator;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divMessage;
         
         /// <summary>
-        /// txtIndicatorName control.
+        /// dvCountry control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIndicatorName;
-        
-        /// <summary>
-        /// lblCluster control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCluster;
-        
-        /// <summary>
-        /// ddlCluster control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCluster;
-        
-        /// <summary>
-        /// lblCountry control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCountry;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvCountry;
         
         /// <summary>
         /// ddlCountry control.
@@ -67,138 +40,120 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.DropDownList ddlCountry;
         
         /// <summary>
-        /// btnSearch control.
+        /// rfvCountry control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearch;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCountry;
         
         /// <summary>
-        /// lblMessage control.
+        /// dvcluster control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMessage;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvcluster;
         
         /// <summary>
-        /// gvClusterIndicators control.
+        /// ddlCluster control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvClusterIndicators;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCluster;
         
         /// <summary>
-        /// mpeEditIndicator control.
+        /// rfvCluster control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender mpeEditIndicator;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCluster;
         
         /// <summary>
-        /// pnlOrg control.
+        /// ddlObjective control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlOrg;
+        protected global::System.Web.UI.WebControls.DropDownList ddlObjective;
         
         /// <summary>
-        /// uPanel1 control.
+        /// RequiredFieldValidator1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel uPanel1;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
         
         /// <summary>
-        /// txtIndicatorEng control.
+        /// ddlActivity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIndicatorEng;
+        protected global::System.Web.UI.WebControls.DropDownList ddlActivity;
         
         /// <summary>
-        /// txtIndicatorFr control.
+        /// RequiredFieldValidator2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIndicatorFr;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
         
         /// <summary>
-        /// txtTarget control.
+        /// pnlAdditionalIndicaotrs control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTarget;
+        protected global::System.Web.UI.WebControls.Panel pnlAdditionalIndicaotrs;
         
         /// <summary>
-        /// ddlUnits control.
+        /// btnRemoveIndicatorControl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlUnits;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnRemoveIndicatorControl;
         
         /// <summary>
-        /// hfClusterIndicatorID control.
+        /// btnAddIndicatorControl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfClusterIndicatorID;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnAddIndicatorControl;
         
         /// <summary>
-        /// btnEdit control.
+        /// btnSave control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEdit;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnSave;
         
         /// <summary>
-        /// btnClose control.
+        /// btnBackToSRPList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnClose;
-        
-        /// <summary>
-        /// lblMessage2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMessage2;
-        
-        /// <summary>
-        /// btnTarget control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnTarget;
+        protected global::System.Web.UI.WebControls.Button btnBackToSRPList;
     }
 }

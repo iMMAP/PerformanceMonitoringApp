@@ -300,7 +300,6 @@ namespace SRFROWCA.ClusterLead
         // Read Data From Excel Sheet and Save into DB
         private void FillStagingTableInDB(string tableScript, string tableScript2, DataTable dt)
         {
-
             string conString = ConfigurationManager.ConnectionStrings["live_dbName"].ConnectionString;
             CreateStagingTable(tableScript, conString);
             CreateStagingTable(tableScript2, conString);

@@ -7,72 +7,54 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SRFROWCA.Controls {
+namespace SRFROWCA.ClusterLead {
     
     
-    public partial class IndicatorsWithAdmin1TargetsControl {
+    public partial class UploadSRP {
         
         /// <summary>
-        /// lbl1stNumber control.
+        /// localBreadCrumbHome control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl1stNumber;
+        protected global::System.Web.UI.WebControls.Localize localBreadCrumbHome;
         
         /// <summary>
-        /// ddlUnit control.
+        /// localBreadCrumbUploadAchieved control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlUnit;
+        protected global::System.Web.UI.WebControls.Localize localBreadCrumbUploadAchieved;
         
         /// <summary>
-        /// txtInd1Eng control.
+        /// lblMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtInd1Eng;
+        protected global::System.Web.UI.WebControls.Label lblMessage;
         
         /// <summary>
-        /// RequiredFieldValidator4 control.
+        /// fuSRP control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator4;
+        protected global::System.Web.UI.WebControls.FileUpload fuSRP;
         
         /// <summary>
-        /// txtInd1Fr control.
+        /// btnUpload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtInd1Fr;
-        
-        /// <summary>
-        /// RequiredFieldValidator5 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator5;
-        
-        /// <summary>
-        /// rptAdmin1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptAdmin1;
+        protected global::System.Web.UI.WebControls.Button btnUpload;
     }
 }

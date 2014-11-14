@@ -40,8 +40,7 @@
                                             title="Excel">
                                             <i class="icon-download"></i>Excel
                                         </button>
-                                        <asp:Button ID="btnAddActivityAndIndicator" runat="server" Text="Add Activity & Indicator" style="margin-left:5px;" CausesValidation="false"
-                                            CssClass="btn btn-yellow pull-right" OnClick="btnAddActInd_Click" />&nbsp;&nbsp;
+
                                         <asp:Button ID="btnAddActivity" runat="server" Text="Add New Activity" CausesValidation="false"
                                             CssClass="btn btn-yellow pull-right" OnClick="btnAddActivity_Click" />
                                     </h6>

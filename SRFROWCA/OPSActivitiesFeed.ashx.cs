@@ -19,18 +19,39 @@ namespace SRFROWCA
             context.Response.ContentType = "text/xml";
 
             int projectID = 0;
-
             if (context.Request["pid"] != null)
             {
-                try
-                {
-                    projectID = Convert.ToInt32(context.Request["pid"]);
-                }
-                catch { }
+                int.TryParse(context.Request["pid"], out projectID);
             }
 
+            string type = null;
+
+            if (context.Request["projectrevision"] != null)
+            {
+                type= context.Request["projectrevision"];
+            }
+
+            if (context.Request["datacheck"] != null)
+            {
+                //int.TryParse(context.Request["datacheck"], out projectID);
+            }
+
+            if (type == "R" || type == "r")
+            {
+                type = "Revision";
+            }
+            else if (type == "O" || type == "o")
+            {
+                type = "Original";
+            }
+            else
+            {
+                type = null;
+            }
+
+
             DataSet dsResults = new DataSet();
-            DataTable dtResults = DBContext.GetData("uspOPSActivitiesFeed", new object[] { projectID });
+            DataTable dtResults = DBContext.GetData("uspOPSActivitiesFeed", new object[] { projectID, type });
             dsResults = dtResults.DataSet;
             dsResults.DataSetName = "ors";
             dsResults.Tables[0].TableName = "ors_webservice";
