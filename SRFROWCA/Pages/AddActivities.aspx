@@ -182,6 +182,7 @@
                                             <asp:DropDownList ID="ddlMonth" runat="server" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged"
                                                 onchange="needToConfirm = false;" AutoPostBack="True" meta:resourcekey="ddlMonthResource1">
                                             </asp:DropDownList>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -280,7 +281,7 @@
                             <asp:GridView ID="gvActivities" runat="server" AutoGenerateColumns="False" HeaderStyle-BackColor="ButtonFace"
                                 DataKeyNames="ActivityDataId,ProjectIndicatorId,ReportId" CssClass="imagetable"
                                 Width="100%" OnRowDataBound="gvActivities_RowDataBound"
-                                OnRowCommand="gvActivities_RowCommand" meta:resourcekey="gvActivitiesResource1">
+                                meta:resourcekey="gvActivitiesResource1">
                                 <HeaderStyle BackColor="Control"></HeaderStyle>
                                 <RowStyle CssClass="istrow" />
                                 <AlternatingRowStyle CssClass="altcolor" />
@@ -376,7 +377,7 @@
                                     <asp:TemplateField ItemStyle-Width="30px" HeaderText="CMT" meta:resourcekey="TemplateFieldResource5">
                                         <ItemTemplate>
                                             <asp:ImageButton ID="imgbtnComments" runat="server" ImageUrl="~/assets/orsimages/edit-file-icon.png"
-                                                CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>' CommandName="AddComments"
+                                                CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>' CommandName="AddComments" OnClick="btnImgClick"
                                                 OnClientClick="needToConfirm = false;clearComments();" meta:resourcekey="imgbtnCommentsResource1" />
                                         </ItemTemplate>
                                         <ItemStyle Width="30px"></ItemStyle>

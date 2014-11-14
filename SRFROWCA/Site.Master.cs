@@ -580,12 +580,12 @@ namespace SRFROWCA
                 liEmergency.Attributes.Add("class", "active open");
                 liEmgCluster.Attributes.Add("class", "active");
             }
-            else if (uri.Contains("ClusterLead/CountryIndicators.aspx"))
+            else if (uri.Contains("ClusterLead/CountryIndicators.aspx") || uri.Contains("ClusterLead/AddCountryIndicator.aspx"))
             {
                 PageTitle = "ORS - Country Indicators";
 
                 liClusterFrameworks.Attributes.Add("class", "active open");
-                liCountryIndicators.Attributes.Add("class", "active");
+                liClusterIndicators.Attributes.Add("class", "active");
             }
             else if (uri.Contains("ClusterLead/ActivityListing.aspx"))
             {
@@ -607,6 +607,13 @@ namespace SRFROWCA
 
                 liClusterFrameworks.Attributes.Add("class", "active open");
                 liClusterDataEntry.Attributes.Add("class", "active");
+            }
+            else if (uri.Contains("ClusterLead/UploadSRP"))
+            {
+                PageTitle = "ORS - Cluster Data Entry";
+
+                liClusterFrameworkImport.Attributes.Add("class", "active open");
+                liClusterFrameworkImport.Attributes.Add("class", "active");
             }
             else if (uri.Contains("Admin/ActivityListing.aspx"))
             {

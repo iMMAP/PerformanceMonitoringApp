@@ -360,9 +360,9 @@
                                 <asp:Localize ID="localClusterFrameworksList" runat="server" Text="Cluster Frameworks" meta:resourcekey="localClusterFrameworksListResource1"></asp:Localize>
                             </span><b class="arrow icon-angle-down"></b></a>
                             <ul class="submenu">
-                                <li id="liCountryIndicators" runat="server"><a href="<%=BaseURL %>/ClusterLead/CountryIndicators.aspx"><span class="menu-text">
+                                <li id="liClusterIndicators" runat="server"><a href="<%=BaseURL %>/ClusterLead/CountryIndicators.aspx"><span class="menu-text">
 
-                                    <asp:Localize ID="Localize8" runat="server" Text="Country Indicators" meta:resourcekey="localCountryIndicatorsResource1"></asp:Localize>
+                                    <asp:Localize ID="Localize8" runat="server" Text="Cluster Indicators" meta:resourcekey="localCountryIndicatorsResource1"></asp:Localize>
                                 </span></a></li>
                                  <li id="liNewActivityListing" runat="server"><a href="<%=BaseURL %>/ClusterLead/ActivityListing.aspx"><span class="menu-text">
 
@@ -375,6 +375,10 @@
                                 <li id="liClusterDataEntry" runat="server"><a href="<%=BaseURL %>/ClusterLead/ClusterDataEntry.aspx"><span class="menu-text">
 
                                     <asp:Localize ID="Localize11" runat="server" Text="Cluster Data Entry" meta:resourcekey="localClusterDataEntryResource1"></asp:Localize>
+                                </span></a></li>
+
+                                 <li id="liClusterFrameworkImport" runat="server"><a href="<%=BaseURL %>/ClusterLead/UploadSRP.aspx"><span class="menu-text">
+                                    <asp:Localize ID="Localize13" runat="server" Text="Import Framework"></asp:Localize>
                                 </span></a></li>
 
                                   <li id="liReport" runat="server"><a href="<%=BaseURL %>/Reports/DownloadReport.aspx?type=10"><span class="menu-text">

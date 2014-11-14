@@ -191,15 +191,6 @@ namespace SRFROWCA.Common
             }
         }
 
-        internal static void FillCountry(DropDownList ddl)
-        {
-            ddl.DataValueField = "LocationId";
-            ddl.DataTextField = "LocationName";
-
-            ddl.DataSource = DBContext.GetData("GetCountries");
-            ddl.DataBind();
-        }
-
         internal static void FillCountry(ListControl ddl)
         {
             ddl.DataValueField = "LocationId";
@@ -224,6 +215,15 @@ namespace SRFROWCA.Common
             DataTable dt = RC.GetAllUnits(1);
             ddl.DataSource = dt;
             ddl.DataBind();
+        }
+
+        internal static void FillEmergencyLocations(ListControl ctl, int emergencyId)
+        {
+            DataTable dt = RC.GetLocationEmergencies(emergencyId);
+            ctl.DataTextField = "LocationName";
+            ctl.DataValueField = "EmergencyLocationId";
+            ctl.DataSource = dt;
+            ctl.DataBind();
         }
     }
 }

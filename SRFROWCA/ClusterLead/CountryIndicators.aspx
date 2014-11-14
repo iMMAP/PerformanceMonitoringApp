@@ -108,12 +108,6 @@
                                                 <td></td>
                                                 <td></td>
                                             </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td colspan="3" style="padding-top:10px;">
-                                                     <asp:Label runat="server" ID="lblMessage" Text=""></asp:Label>
-                                                </td>
-                                            </tr>
                                             <%--<tr>
                                                     <td>&nbsp;</td>
                                                     <td style="padding-top: 10px;">
@@ -124,7 +118,7 @@
                                                 </tr>--%>
                                         </table>
 
-                                       
+                                        <asp:Label runat="server" ID="lblMessage" Text=""></asp:Label>
 
                                     </div>
                                 </div>
