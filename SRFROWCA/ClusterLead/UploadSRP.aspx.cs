@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Transactions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -24,31 +25,31 @@ namespace SRFROWCA.ClusterLead
 
         private void PopulateDropDowns()
         {
-            LoadCountires();
-            LoadClusters();
+            //LoadCountires();
+            //LoadClusters();
         }
-        private void LoadCountires()
-        {
-            int emergencyId = UserInfo.Emergency;
-            UI.FillEmergencyLocations(ddlCountry, emergencyId);
+        //private void LoadCountires()
+        //{
+        //    int emergencyId = UserInfo.Emergency;
+        //    UI.FillEmergencyLocations(ddlCountry, emergencyId);
 
-            if (ddlCountry.Items.Count > 0)
-            {
-                ListItem item = new ListItem("Select", "0");
-                ddlCountry.Items.Insert(0, item);
-            }
-        }
-        private void LoadClusters()
-        {
-            int emergencyId = UserInfo.Emergency;
-            UI.FillEmergnecyClusters(ddlCluster, emergencyId);
+        //    if (ddlCountry.Items.Count > 0)
+        //    {
+        //        ListItem item = new ListItem("Select", "0");
+        //        ddlCountry.Items.Insert(0, item);
+        //    }
+        //}
+        //private void LoadClusters()
+        //{
+        //    int emergencyId = UserInfo.Emergency;
+        //    UI.FillEmergnecyClusters(ddlCluster, emergencyId);
 
-            if (ddlCountry.Items.Count > 0)
-            {
-                ListItem item = new ListItem("Select", "0");
-                ddlCountry.Items.Insert(0, item);
-            }
-        }
+        //    if (ddlCountry.Items.Count > 0)
+        //    {
+        //        ListItem item = new ListItem("Select", "0");
+        //        ddlCountry.Items.Insert(0, item);
+        //    }
+        //}
 
         #region Upload
 
@@ -74,12 +75,12 @@ namespace SRFROWCA.ClusterLead
                     FU.CreateTableInDB(conString, tableScript);
                     FU.WriteDataInDBTable(conString, "ImportSRPTemp", dt);
                     UnpivotStagingTable(dt);
-                    //ImportData();
+                    ImportData();
                     //TruncateTempTables();
                 }
 
                 //scope.Complete();
-                ShowMessage("Data Imported Successfully!", RC.NotificationType.Success, false);
+                ShowMessage("Framework Imported Successfully!", RC.NotificationType.Success, false);
             }
         }
 
@@ -171,8 +172,8 @@ namespace SRFROWCA.ClusterLead
         private DataTable ImportData()
         {
             int yearId = 11;
-            return DBContext.GetData("ImportCLDataFromStagingTable", new object[] {UserInfo.EmergencyCountry, UserInfo.EmergencyCluster,
-																					yearId, RC.GetCurrentUserId, RC.IsClusterLead(User)});
+            return DBContext.GetData("ImportSRP", new object[] {UserInfo.Emergency, UserInfo.EmergencyCountry, UserInfo.EmergencyCluster,
+																					RC.GetCurrentUserId});
         }
 
         private string GetLocationNames(DataTable dt)

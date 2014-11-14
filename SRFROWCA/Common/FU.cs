@@ -103,7 +103,7 @@ namespace SRFROWCA.Common
             //Create Connection to Excel work book
             OleDbConnection excelCon = new OleDbConnection(excelConString);
             //Create OleDbCommand to fetch data from Excel
-            OleDbCommand cmd = new OleDbCommand(string.Format(@"Select * from [{0}]", sheetName), excelCon);
+            OleDbCommand cmd = new OleDbCommand(string.Format(@"Select * from [{0}{1}]", sheetName, "A3:ZZ"), excelCon);
             excelCon.Open();
 
             OleDbDataAdapter da = new OleDbDataAdapter();

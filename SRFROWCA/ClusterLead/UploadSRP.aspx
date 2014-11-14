@@ -32,7 +32,7 @@
         <div class="row">
             <div class="col-xs-6">
                 <!-- PAGE CONTENT BEGINS -->
-                <div>
+                <%--<div>
                     <label class="col-sm-3">Country: </label>
                     <div class="col-sm-9">
                         <asp:DropDownList ID="ddlCountry" runat="server" CssClass="width-60"></asp:DropDownList>
@@ -44,7 +44,7 @@
                     <div class="col-sm-9">
                         <asp:DropDownList ID="ddlCluster" runat="server" CssClass="width-60"></asp:DropDownList>
                     </div>
-                </div>
+                </div>--%>
                <div class="space-20"></div>
                 <div>
                     <label class="col-sm-3"></label>
