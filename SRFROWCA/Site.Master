@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head id="masterHead" runat="server">
-    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" /> 
     <meta charset="utf-8" />
     <title><%=PageTitle %></title>
     <meta name="description" content="<%=MetaDescription %>" />
