@@ -12,7 +12,7 @@
 
             var objEng = document.getElementById('<%=txtIndicatorEng.ClientID%>');
             var objFr = document.getElementById('<%=txtIndicatorFr.ClientID%>');
-            
+
             if (objEng.value == '' && objFr.value == '') {
 
                 alert("Please enter atleast one Indicator!");
@@ -108,6 +108,12 @@
                                                 <td></td>
                                                 <td></td>
                                             </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td colspan="3" style="padding-top:10px;">
+                                                     <asp:Label runat="server" ID="lblMessage" Text=""></asp:Label>
+                                                </td>
+                                            </tr>
                                             <%--<tr>
                                                     <td>&nbsp;</td>
                                                     <td style="padding-top: 10px;">
@@ -118,7 +124,7 @@
                                                 </tr>--%>
                                         </table>
 
-                                        <asp:Label runat="server" ID="lblMessage" Text=""></asp:Label>
+                                       
 
                                     </div>
                                 </div>
