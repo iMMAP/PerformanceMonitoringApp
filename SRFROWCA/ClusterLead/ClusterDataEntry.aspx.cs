@@ -247,8 +247,8 @@ namespace SRFROWCA.ClusterLead
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                ObjPrToolTip.RegionalIndicatorIcon(e, 8);
-                ObjPrToolTip.CountryIndicatorIcon(e, 9);
+                ObjPrToolTip.RegionalIndicatorIcon(e,9);
+                ObjPrToolTip.CountryIndicatorIcon(e, 10);
 
                 Label lblTarget = (Label)e.Row.FindControl("lblTarget");
 
