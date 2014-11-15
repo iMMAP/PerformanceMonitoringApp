@@ -139,6 +139,7 @@ namespace SRFROWCA.ClusterLead
 
             return DBContext.Add("InsertActivityNew", new object[] { emergencyClusterId, objId,emergencyLocationId, 
                                                                         actEn, actFr, userId, DBNull.Value });
+           
         }
 
       

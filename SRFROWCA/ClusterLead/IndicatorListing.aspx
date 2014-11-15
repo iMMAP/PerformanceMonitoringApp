@@ -133,7 +133,7 @@
                         <asp:BoundField DataField="ClusterName" HeaderText="Cluster" SortExpression="ClusterName" ItemStyle-Width="150px" />
                         <asp:BoundField DataField="ShortObjective" HeaderText="Objective" SortExpression="ShortObjective" ItemStyle-Width="150px" />                       
                         <asp:BoundField DataField="Activity" HeaderText="Activity" SortExpression="Activity" />
-                          <asp:BoundField DataField="Indicator" HeaderText="Activity" SortExpression="Activity" />
+                          <asp:BoundField DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator" />
                         <%--<asp:BoundField DataField="ActivityType" HeaderText="Activity Type" SortExpression="ActivityType"/>--%>
                         <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle"   HeaderStyle-Width="80px">
                             <ItemTemplate >
