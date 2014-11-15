@@ -41,18 +41,18 @@ namespace SRFROWCA.ClusterLead
             // If user click on Delete button.
             if (e.CommandName == "Delete")
             {
-                //int priorityActivityId = Convert.ToInt32(e.CommandArgument);
+                int activityDetailId = Convert.ToInt32(e.CommandArgument);
 
-                //// Check if any IP has reported on this project. If so then do not delete it.
-                //if (!ActivityIsBeingUsed(priorityActivityId))
-                //{
-                //   // ShowMessage("Activity cannot be deleted! It is being used.", RC.NotificationType.Error, true, 500);
-                //}
-                //else
-                //{
-                //    DeleteActivity(priorityActivityId);
-                //    LoadActivities();
-                //}
+                // Check if any IP has reported on this project. If so then do not delete it.
+                if (!ActivityIsBeingUsed(activityDetailId))
+                {
+                  RC.ShowMessage(Page,Page.GetType(), "asasa","Activity cannot be deleted! It is being used.", RC.NotificationType.Error, true, 500);
+                }
+                else
+                {
+                    DeleteActivity(activityDetailId);
+                    LoadActivities();
+                }
             }
 
             // Edit Project.
@@ -86,15 +86,15 @@ namespace SRFROWCA.ClusterLead
             PopulateFilters();
         }
 
-        private bool ActivityIsBeingUsed(int priorityActivityId)
+        private bool ActivityIsBeingUsed(int ActivityDetailId)
         {
-            DataTable dt = DBContext.GetData("GetIsActvityBeingUsed", new object[] { priorityActivityId });
+            DataTable dt = DBContext.GetData("GetIsActvityBeingUsed", new object[] { ActivityDetailId });
             return !(dt.Rows.Count > 0);
         }
 
-        private void DeleteActivity(int priorityActivityId)
+        private void DeleteActivity(int activityDetailId)
         {
-            DBContext.Delete("DeleteActivity", new object[] { priorityActivityId, DBNull.Value });
+            DBContext.Delete("DeleteActivityNew", new object[] { activityDetailId, DBNull.Value });
         }
 
         protected void gvActivity_Sorting(object sender, GridViewSortEventArgs e)

@@ -39,18 +39,18 @@ namespace SRFROWCA.ClusterLead
             // If user click on Delete button.
             if (e.CommandName == "Delete")
             {
-                //int IndicatorId = Convert.ToInt32(e.CommandArgument);
+                int IndicatorDetailId = Convert.ToInt32(e.CommandArgument);
 
-                //// Check if any IP has reported on this project. If so then do not delete it.
-                //if (!ActivityIsBeingUsed(IndicatorId))
-                //{
-                //   // ShowMessage("Activity cannot be deleted! It is being used.", RC.NotificationType.Error, true, 500);
-                //}
-                //else
-                //{
-                //    DeleteActivity(IndicatorId);
-                //    LoadIndicators();
-                //}
+                // Check if any IP has reported on this project. If so then do not delete it.
+                if (!IndicatorIsBeingUsed(IndicatorDetailId))
+                {
+                    RC.ShowMessage(Page, Page.GetType(), "asasa", "Indicator cannot be deleted! It is being used.", RC.NotificationType.Error, true, 500);
+                }
+                else
+                {
+                    DeleteIndicator(IndicatorDetailId);
+                    LoadIndicators();
+                }
             }
 
             // Edit Project.
@@ -85,15 +85,15 @@ namespace SRFROWCA.ClusterLead
            
         }
 
-        private bool ActivityIsBeingUsed(int priorityActivityId)
+        private bool IndicatorIsBeingUsed(int indicatorDetailId)
         {
-            DataTable dt = DBContext.GetData("GetIsActvityBeingUsed", new object[] { priorityActivityId });
+            DataTable dt = DBContext.GetData("GetIsNewIndicatorBeingUsed", new object[] { indicatorDetailId });
             return !(dt.Rows.Count > 0);
         }
 
-        private void DeleteActivity(int priorityActivityId)
+        private void DeleteIndicator(int indicatorDetailId)
         {
-            DBContext.Delete("DeleteActivity", new object[] { priorityActivityId, DBNull.Value });
+            DBContext.Delete("DeleteIndicatorNew", new object[] { indicatorDetailId, DBNull.Value });
         }
 
         protected void gvActivity_Sorting(object sender, GridViewSortEventArgs e)
