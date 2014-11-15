@@ -80,8 +80,9 @@ namespace SRFROWCA.ClusterLead
 
         internal override void BindGridData()
         {
-            LoadIndicators();
             PopulateFilters();
+            LoadIndicators();
+           
         }
 
         private bool ActivityIsBeingUsed(int priorityActivityId)
@@ -265,5 +266,12 @@ namespace SRFROWCA.ClusterLead
             }
             catch { }
         }
+
+        protected void btnAddActivityAndIndicators_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AddActivityAndIndicators.aspx?b=i");
+
+        }    
+
     }
 }

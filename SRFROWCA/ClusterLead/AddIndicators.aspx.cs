@@ -60,14 +60,7 @@ namespace SRFROWCA.ClusterLead
             AddIndicatorControl(0);
             IndControlId = 1;
             ShowHideControls();
-            if (RC.IsClusterLead(this.User))
-            {
-                btnBackToSRPList.Text = "Back To SRP List";
-            }
-            else
-            {
-                btnBackToSRPList.Text = "Back To Indicators List";
-            }
+            
         }
         private void PopulateActivities()
         {           
@@ -159,14 +152,8 @@ namespace SRFROWCA.ClusterLead
             {
                 SaveData();
                 scope.Complete();
-                if (RC.IsRegionalClusterLead(this.User))
-                {
-                    //Response.Redirect("~/RegionalLead/ManageRegionalIndicators.aspx");
-                }
-                else
-                {
-                    //Response.Redirect("AddSRPActivitiesFromMasterList.aspx");
-                }
+                Response.Redirect("IndicatorListing.aspx");
+                
             }
         }
 
@@ -264,14 +251,8 @@ namespace SRFROWCA.ClusterLead
 
         protected void btnBackToSRPList_Click(object sender, EventArgs e)
         {
-            if (RC.IsClusterLead(this.User))
-            {
-                Response.Redirect("AddSRPActivitiesFromMasterList.aspx");
-            }
-            else
-            {
-                Response.Redirect("~/RegionalLead/ManageRegionalIndicators.aspx");
-            }
+            Response.Redirect("IndicatorListing.aspx");
+           
         }
 
         protected void ddlObjective_SelectedIndexChanged(object sender, EventArgs e)

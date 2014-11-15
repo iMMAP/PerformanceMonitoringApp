@@ -43,6 +43,8 @@
 
                                         <asp:Button ID="btnAddActivity" runat="server" Text="Add New Indicator" CausesValidation="false"
                                             CssClass="btn btn-yellow pull-right" OnClick="btnAddActivity_Click" />
+                                        <asp:Button ID="btnAddActivityAndIndicators" runat="server" Text="Add New Activity & Indicators" CausesValidation="false"
+                                            CssClass="btn btn-yellow pull-right" OnClick="btnAddActivityAndIndicators_Click" style="margin-right:5px;" />
                                     </h6>
                                 </div>
                                 <div class="widget-body">
