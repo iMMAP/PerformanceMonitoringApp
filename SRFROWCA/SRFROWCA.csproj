@@ -844,6 +844,9 @@
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>EditIndicator.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ClusterLead\EditIndicator.aspx.designer.cs">
+      <DependentUpon>EditIndicator.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ClusterLead\IndicatorListing.aspx.cs">
       <DependentUpon>IndicatorListing.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

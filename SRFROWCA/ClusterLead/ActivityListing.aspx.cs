@@ -175,6 +175,8 @@ namespace SRFROWCA.ClusterLead
             ddlObjective.DataBind();
         }
 
+       
+
         private DataTable GetClusters()
         {
             int? emgId = UserInfo.Emergency;
@@ -207,7 +209,13 @@ namespace SRFROWCA.ClusterLead
         {
             Response.Redirect("AddActivity.aspx");
             
-        }             
+        }
+
+        protected void btnAddActivityAndIndicators_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AddActivityAndIndicators.aspx?b=a");
+
+        }    
 
        
 

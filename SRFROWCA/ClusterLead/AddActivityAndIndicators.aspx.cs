@@ -139,13 +139,13 @@ namespace SRFROWCA.ClusterLead
             {
                 SaveData();
                 scope.Complete();
-                if (RC.IsRegionalClusterLead(this.User))
+                if (Request.QueryString["b"] == "a")
                 {
-                    //Response.Redirect("~/RegionalLead/ManageRegionalIndicators.aspx");
+                    Response.Redirect("~/ClusterLead/ActivityListing.aspx");
                 }
                 else
                 {
-                    //Response.Redirect("AddSRPActivitiesFromMasterList.aspx");
+                    Response.Redirect("~/ClusterLead/IndicatorListing.aspx");
                 }
             }
         }
@@ -180,6 +180,8 @@ namespace SRFROWCA.ClusterLead
                     }
                 }
                 SendNewIndicatorEmail(strIndcators.ToString());
+
+               
             }
         }
 
@@ -269,7 +271,15 @@ namespace SRFROWCA.ClusterLead
 
         protected void btnBackToSRPList_Click(object sender, EventArgs e)
         {
-           Response.Redirect("~/ClusterLead/IndicatorListing.aspx");
+            if (Request.QueryString["b"] == "a")
+            {
+            Response.Redirect("~/ClusterLead/ActivityListing.aspx");
+            }
+                else
+            {
+                Response.Redirect("~/ClusterLead/IndicatorListing.aspx");
+            }
+           
         }
     }
 }

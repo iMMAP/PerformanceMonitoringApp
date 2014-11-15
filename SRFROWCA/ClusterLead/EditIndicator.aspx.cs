@@ -42,13 +42,14 @@ namespace SRFROWCA.ClusterLead
                 ddlActivity.SelectedValue = dt.Rows[0]["ActivityId"].ToString();
                 txtInd1Eng.Text = dt.Rows[0]["Indicator"].ToString();
                 ddlUnit.SelectedValue = dt.Rows[0]["UnitId"].ToString();
+                chkGender.Checked = Convert.ToBoolean(dt.Rows[0]["IsGender"].ToString());
                 GetAdmin1ForIndicatorAndLocation(indicatorDetailId);
             }
         }
 
         private void GetAdmin1ForIndicatorAndLocation(int indicatorDetailId)
         {
-            DataTable dt = DBContext.GetData("GetAdmin1ForIndicator", new object[] { indicatorDetailId, UserInfo.Country == null ? Convert.ToInt32(ddlCountry.SelectedValue) : UserInfo.Country });
+            DataTable dt = DBContext.GetData("GetAdmin1ForIndicator", new object[] { indicatorDetailId, UserInfo.Country == 0 ? Convert.ToInt32(ddlCountry.SelectedValue) : UserInfo.Country });
             if (dt != null && dt.Rows.Count > 0)
             {
                 rptAdmin1.DataSource = dt;
@@ -194,7 +195,8 @@ namespace SRFROWCA.ClusterLead
             int UnitId = Convert.ToInt32(ddlUnit.SelectedValue);
             string indicator = txtInd1Eng.Text;
             Guid userId = RC.GetCurrentUserId;
-            int indicatorId = DBContext.Update("UpdateIndicatorNew", new object[] { indicatorDetailId,activityId,UnitId,indicator,userId, DBNull.Value});
+            int gender = chkGender.Checked ? 1 : 0;
+            int indicatorId = DBContext.Update("UpdateIndicatorNew", new object[] { indicatorDetailId,activityId,UnitId,indicator,userId,gender, DBNull.Value});
             SaveAdmin1Targets(indicatorId);
         }
 

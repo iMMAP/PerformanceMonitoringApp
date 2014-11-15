@@ -58,10 +58,10 @@ namespace SRFROWCA.Controls
             string indEn = txtInd1Eng.Text.Trim();
             string indFr = txtInd1Fr.Text.Trim();
             Guid userId = RC.GetCurrentUserId;
-          
+            int gender = chkGender.Checked ? 1 : 0;
 
             int indicatorId = DBContext.Add("InsertIndicator", new object[] { ActivityId, indEn, indFr, 
-                                                                unitId, userId, DBNull.Value});
+                                                                unitId, userId,gender, DBNull.Value});
             if (indicatorId > 0)
             {
                 SaveAdmin1Targets(indicatorId);
