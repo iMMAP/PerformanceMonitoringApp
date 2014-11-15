@@ -103,13 +103,13 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.TextBox txtActivityEng;
         
         /// <summary>
-        /// rfvUserName control.
+        /// cvValidate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvUserName;
+        protected global::System.Web.UI.WebControls.CustomValidator cvValidate;
         
         /// <summary>
         /// txtActivityFr control.
@@ -119,15 +119,6 @@ namespace SRFROWCA.ClusterLead {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtActivityFr;
-        
-        /// <summary>
-        /// RequiredFieldValidator3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
         
         /// <summary>
         /// btnSave control.

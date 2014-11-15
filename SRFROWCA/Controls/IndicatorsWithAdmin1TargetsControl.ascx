@@ -22,7 +22,7 @@ text-align: center;float:left;
     <h6 class="header blue bolder smaller">
         Indicator<asp:Label ID="lbl1stNumber" runat="server" Text=""></asp:Label></h6>
   
-    <div class="col-xs-12 col-sm-12" style="padding-left:0px;">
+    <div class="col-xs-12 col-sm-12 dvIndicator" style="padding-left:0px;">
         <div class="widget-box no-border">
             <div class="widget-body">
                 <div class="widget-main no-padding-bottom no-padding-top">
@@ -31,8 +31,7 @@ text-align: center;float:left;
                             (English):</label>
                         <div>
                             <asp:TextBox ID="txtInd1Eng" runat="server" CssClass="width-95" TextMode="MultiLine"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="Required"
-                                CssClass="error2" Text="Required" ControlToValidate="txtInd1Eng"></asp:RequiredFieldValidator>
+                            
                         </div>
                         </div>
                      <div style="float:left;width:40%;">
@@ -40,8 +39,7 @@ text-align: center;float:left;
                             (French):</label>
                         <div>
                             <asp:TextBox ID="txtInd1Fr" runat="server" CssClass="width-95" TextMode="MultiLine"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="Required"
-                                CssClass="error2" Text="Required" ControlToValidate="txtInd1Fr"></asp:RequiredFieldValidator>
+                           
                         </div>
                          </div>
                     <div style="float:left;width:15%;">

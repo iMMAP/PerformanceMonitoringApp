@@ -59,7 +59,7 @@
                 </div>
             </div>
 
-
+            <asp:CustomValidator runat="server" id="cvValidate"  ClientValidationFunction="validateIndicator"></asp:CustomValidator>
 
 
             <div style="float: left; width: 50%;">
@@ -99,5 +99,22 @@
         <asp:Button ID="btnBackToSRPList" runat="server" Text="Back" OnClick="btnBackToSRPList_Click"
             CssClass="width-10 btn btn-sm btn-primary" CausesValidation="false" />
     </div>
+    <script>
 
+        function validateIndicator() {
+
+            var counter = 0;
+            $(".dvIndicator").each(function (index) {
+                var txtEng = $(this).find("[id$=txtInd1Eng]").val();
+                var txtFr = $(this).find("[id$=txtInd1Fr]").val();
+
+                if (txtEng.trim() == '' && txtFr.trim() == '') {
+
+                    alert("Please add Indicator " + (parseInt(index) + 1) + " atleast in one Language!")
+                    return false;
+                }
+            });
+
+        }
+    </script>
 </asp:Content>
