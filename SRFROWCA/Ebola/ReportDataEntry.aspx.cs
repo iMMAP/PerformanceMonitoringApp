@@ -20,8 +20,8 @@ namespace SRFROWCA.Ebola
         public int MonthID = 0;
         public int DayID = 0;
 
-        DataTable dtYears = new DataTable();
-        DataTable dtMonths = new DataTable();
+        public static DataTable dtYears = new DataTable();
+        public static DataTable dtMonths = new DataTable();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -48,7 +48,6 @@ namespace SRFROWCA.Ebola
 
                 PopulateObjectives();
                 PopulatePriorities();
-                PopulateDate();
             }
 
             PopulateToolTips();
@@ -56,12 +55,14 @@ namespace SRFROWCA.Ebola
             //this.Form.DefaultButton = this.btnSave.UniqueID;
             string controlName = GetPostBackControlId(this);
 
-            if (/*controlName == "ddlMonth" || controlName == "ddlYear" ||*/ controlName == "rblProjects" || controlName == "ddlWeeks")
+            if (/*controlName == "ddlMonth" || controlName == "ddlYear" ||*/ controlName == "rblProjects" || controlName == "txtDate" /*|| controlName == "ddlWeeks"*/)
             {
                 LocationRemoved = 0;
                 RemoveSelectedLocations(cblAdmin1);
                 RemoveSelectedLocations(cblLocations);
             }
+            else
+                PopulateDate();
 
             //if (controlName != "imgbtnComments")
             {
@@ -482,7 +483,7 @@ namespace SRFROWCA.Ebola
 
             int projectId = RC.GetSelectedIntVal(rblProjects);
 
-            using (ORSEntities db = new ORSEntities())
+            /*using (ORSEntities db = new ORSEntities())
             {
                 Report r = db.Reports.Where(x => x.ProjectId == projectId
                                             && x.YearId == YearID
@@ -490,7 +491,9 @@ namespace SRFROWCA.Ebola
                                             && x.EmergencyLocationId == UserInfo.EmergencyCountry
                                             && x.OrganizationId == UserInfo.Organization).SingleOrDefault();
                 ReportId = r != null ? r.ReportId : 0;
-            }
+            }*/
+
+            ReportId = 0;
         }
 
         internal override void BindGridData()
@@ -692,7 +695,7 @@ namespace SRFROWCA.Ebola
             Guid loginUserId = RC.GetCurrentUserId;
             string reportName = rblProjects.SelectedItem.Text + " (" + new DateTime(1, monthId, 1).ToString("MMMM") + "-14)";
 
-            ReportId = DBContext.Add("InsertReport_Ebola", new object[] { yearId, MonthID, projId, UserInfo.EmergencyCountry, UserInfo.Organization, loginUserId, reportName, DBNull.Value });
+            ReportId = DBContext.Add("InsertReport_Ebola", new object[] { YearID, MonthID, 0, 0, projId, UserInfo.EmergencyCountry, UserInfo.Organization, loginUserId, reportName, Convert.ToInt32(rblFrequency.SelectedValue), DateTime.ParseExact(txtDate.Text.Trim(), "MM-dd-yyyy", CultureInfo.InvariantCulture).ToString("MM-dd-yyyy"), DBNull.Value });
         }
 
         private void SaveReportLocations()
