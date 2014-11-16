@@ -1,24 +1,32 @@
-﻿using System;
+﻿using BusinessLogic;
+using SRFROWCA.Common;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Transactions;
+using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using BusinessLogic;
-using SRFROWCA.Common;
-using System.Net.Mail;
 
-namespace SRFROWCA.Pages
+namespace SRFROWCA.Ebola
 {
-    public partial class AddActivities : BasePage
+    public partial class ReportDataEntry : BasePage
     {
+        public int YearID = 0;
+        public int MonthID = 0;
+        public int DayID = 0;
+
+        DataTable dtYears = new DataTable();
+        DataTable dtMonths = new DataTable();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             string languageChange = "";
-            
+
             if (Session["SiteChanged"] != null)
                 languageChange = Session["SiteChanged"].ToString();
 
@@ -40,6 +48,7 @@ namespace SRFROWCA.Pages
 
                 PopulateObjectives();
                 PopulatePriorities();
+                PopulateDate();
             }
 
             PopulateToolTips();
@@ -47,7 +56,7 @@ namespace SRFROWCA.Pages
             //this.Form.DefaultButton = this.btnSave.UniqueID;
             string controlName = GetPostBackControlId(this);
 
-            if (controlName == "ddlMonth" || controlName == "ddlYear" || controlName == "rblProjects" || controlName == "ddlWeeks")
+            if (/*controlName == "ddlMonth" || controlName == "ddlYear" ||*/ controlName == "rblProjects" || controlName == "ddlWeeks")
             {
                 LocationRemoved = 0;
                 RemoveSelectedLocations(cblAdmin1);
@@ -55,33 +64,59 @@ namespace SRFROWCA.Pages
             }
 
             //if (controlName != "imgbtnComments")
-            { 
+            {
                 DataTable dtActivities = GetActivities();
                 AddDynamicColumnsInGrid(dtActivities);
+
                 Session["dtActivities"] = dtActivities;
                 GetReportId();
-                gvActivities.DataSource = dtActivities;
-                gvActivities.DataBind();
+
+                gvIndicatorData.DataSource = dtActivities;
+                gvIndicatorData.DataBind();
             }
         }
 
         #region Events
 
-        protected void ddlYear_SelectedIndexChanged(object sender, EventArgs e)
+        /*protected void ddlYear_SelectedIndexChanged(object sender, EventArgs e)
         {
             LocationRemoved = 0;
             BindGridData();
             AddLocationsInSelectedList();
 
             LoadWeeks();
+        }*/
+
+        private void ReloadGrid()
+        {
+            int yearId = 0;
+            int monthId = 0;
+            int dayId = 0;
+
+            string[] dateSplit = txtDate.Text.Trim().Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (dateSplit.Length > 2)
+            {
+                int.TryParse(dateSplit[2], out yearId);
+                int.TryParse(dateSplit[1], out dayId);
+                int.TryParse(dateSplit[0], out monthId);
+            }
+
+            SetDateIDs(new DateTime(1, monthId, 1).ToString("MMMM"), new DateTime(yearId, 1, 1).ToString("YYYY"), dayId);
+
+            LocationRemoved = 0;
+            BindGridData();
+            AddLocationsInSelectedList();
+
+            //LoadWeeks();
         }
 
-        private void LoadWeeks()
+        /*private void LoadWeeks()
         {
-            //ddlWeeks.DataValueField = "WeekId";
-            //ddlWeeks.DataTextField = "WeekNumberInMonth";
-            //ddlWeeks.DataSource = GetWeeksOfYear();
-            //ddlWeeks.DataBind();
+            ddlWeeks.DataValueField = "WeekId";
+            ddlWeeks.DataTextField = "WeekNumberInMonth";
+            ddlWeeks.DataSource = GetWeeksOfYear();
+            ddlWeeks.DataBind();
         }
 
         private DataTable GetWeeksOfYear()
@@ -103,6 +138,26 @@ namespace SRFROWCA.Pages
             LocationRemoved = 0;
             BindGridData();
             AddLocationsInSelectedList();
+        }*/
+
+        private void PopulateDate()
+        {
+            txtDate.Text = DateTime.Now.ToString("MM-dd-yyyy");
+            SetDateIDs(DateTime.Now.ToString("MMMM"), DateTime.Now.ToString("yyyy"), DateTime.Now.Day);
+        }
+
+        private void SetDateIDs(string month, string year, int day)
+        {
+            DataRow[] drMonth = dtMonths.Select("MonthName='" + month + "' AND SiteLanguageId='" + RC.SelectedSiteLanguageId + "'");
+            DataRow[] drYear = dtYears.Select("Year='" + year + "'");
+
+            if (drMonth.Length > 0)
+                MonthID = Convert.ToInt32(drMonth[0]["MonthID"]);
+
+            if (drYear.Length > 0)
+                YearID = Convert.ToInt32(drYear[0]["YearID"]);
+
+            DayID = day;
         }
 
         protected void rblProjects_SelectedIndexChanged(object sender, EventArgs e)
@@ -111,7 +166,7 @@ namespace SRFROWCA.Pages
             AddLocationsInSelectedList();
         }
 
-        protected void gvActivities_RowDataBound(object sender, GridViewRowEventArgs e)
+        protected void gvIndicatorData_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
@@ -128,20 +183,13 @@ namespace SRFROWCA.Pages
             ImageButton btn = (ImageButton)sender;
             GridViewRow gvr = (GridViewRow)btn.NamingContainer;
 
-            //Get rowindex
             int rowIndex = gvr.RowIndex;
 
             if (ReportId == 0)
-            {
                 SaveReportMainInfo();
-            }
-
-            //SaveProjectData();
-
-            //int rowIndex = int.Parse(e.CommandArgument.ToString());
 
             int activityDataId = 0;
-            int.TryParse(gvActivities.DataKeys[rowIndex]["ActivityDataId"].ToString(), out activityDataId);
+            int.TryParse(gvIndicatorData.DataKeys[rowIndex]["ActivityDataId"].ToString(), out activityDataId);
 
             if (activityDataId > 0)
             {
@@ -154,38 +202,16 @@ namespace SRFROWCA.Pages
             }
         }
 
-        protected void gvActivities_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected void gvIndicatorData_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName == "AddComments")
-            {
-                //if (ReportId == 0)
-                //{
-                //    SaveReportMainInfo();
-                //}
 
-                ////SaveProjectData();
-
-                //int rowIndex = int.Parse(e.CommandArgument.ToString());
-
-                //int activityDataId = 0;
-                //int.TryParse(gvActivities.DataKeys[rowIndex]["ActivityDataId"].ToString(), out activityDataId);
-
-                //if (activityDataId > 0)
-                //{
-                //    CommentsIndId = activityDataId;
-
-                //    if (ucIndComments.LoadComments(ReportId, activityDataId))
-                //        btnSaveComments.Visible = false;
-
-                //    mpeComments.Show();
-                //}
-            }
         }
 
         protected void btnLocation_Click(object sender, EventArgs e)
         {
             ClientScript.RegisterStartupScript(GetType(), "key", "launchModal();", true);
             LocationRemoved = 1;
+
             List<int> locationIds = GetLocationIdsFromGrid();
             SelectLocationsOfGrid(locationIds);
         }
@@ -197,15 +223,13 @@ namespace SRFROWCA.Pages
 
         protected void btnSaveComments_Click(object sender, EventArgs e)
         {
-            string comments = txtComments.Value;//ucIndComments.GetComments(); 
+            string comments = txtComments.Value;
             int indictorCommentDetID = ucIndComments.GetIndicatorCommentDetailID();
 
             if (!string.IsNullOrEmpty(comments))
             {
                 using (ORSEntities db = new ORSEntities())
-                {
                     DBContext.Add("InsertIndicatorComments", new object[] { ReportId, CommentsIndId, comments, RC.GetCurrentUserId, DBNull.Value, indictorCommentDetID });
-                }
             }
         }
 
@@ -218,12 +242,25 @@ namespace SRFROWCA.Pages
         {
             SaveProjectData();
             DataTable dt = GetProjectsData(true);
+
             if (dt.Rows.Count > 0)
             {
+                int monthId = 0;
+                int dayId = 0;
+
+                string[] dateSplit = txtDate.Text.Trim().Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
+
+                if (dateSplit.Length > 2)
+                {
+                    int.TryParse(dateSplit[1], out dayId);
+                    int.TryParse(dateSplit[0], out monthId);
+                }
+
                 GridView gv = new GridView();
                 gv.DataSource = dt;
                 gv.DataBind();
-                string fileName = UserInfo.CountryName + "_" + UserInfo.OrgName + "_" + ddlMonth.SelectedItem.Text + "_Report";
+
+                string fileName = UserInfo.CountryName + "_" + UserInfo.OrgName + "_" + new DateTime(1, monthId, 1).ToString("MMMM") + "_Report";
                 ExportUtility.ExportGridView(gv, fileName, ".xls", Response, true);
             }
         }
@@ -231,11 +268,10 @@ namespace SRFROWCA.Pages
         protected void btnPDF_Export(object sender, EventArgs e)
         {
             SaveProjectData();
+
             DataTable dt = GetProjectsData(false);
             if (dt.Rows.Count > 0)
-            {
                 GeneratePDF(dt);
-            }
         }
 
         protected void Page_Error(object sender, EventArgs e)
@@ -244,7 +280,7 @@ namespace SRFROWCA.Pages
 
             // Get last error from the server
             Exception exc = Server.GetLastError();
-            ExceptionUtility.LogException(exc, "AddActivites", this.User);
+            ExceptionUtility.LogException(exc, "ReportDataEntry", this.User);
         }
 
         #endregion
@@ -253,67 +289,35 @@ namespace SRFROWCA.Pages
 
         private void PopulateMonths()
         {
-            int i = ddlMonth.SelectedIndex;
-
-            ddlMonth.DataValueField = "MonthId";
-            ddlMonth.DataTextField = "MonthName";
-
-            ddlMonth.DataSource = GetMonth();
-            ddlMonth.DataBind();
-
-            var result = DateTime.Now.ToString("MMMM", new CultureInfo(RC.SiteCulture));
-            result = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(result);
-            int monthNumber = MonthNumber.GetMonthNumber(result);
-            monthNumber = monthNumber == 1 ? monthNumber : monthNumber - 1;
-            ddlMonth.SelectedIndex = i > -1 ? i : ddlMonth.Items.IndexOf(ddlMonth.Items.FindByValue(monthNumber.ToString()));
-        }
-
-        private DataTable GetMonth()
-        {
-            DataTable dt = DBContext.GetData("GetMonths", new object[] { RC.SelectedSiteLanguageId });
-            return dt.Rows.Count > 0 ? dt : new DataTable();
+            dtMonths = DBContext.GetData("GetMonths", new object[] { RC.SelectedSiteLanguageId });
         }
 
         private void PopulateYears()
         {
-            ddlYear.DataValueField = "YearId";
-            ddlYear.DataTextField = "Year";
-
-            ddlYear.DataSource = GetYears();
-            ddlYear.DataBind();
-
-            var result = DateTime.Parse(DateTime.Now.ToShortDateString()).Year;
-            ddlYear.SelectedIndex = ddlYear.Items.IndexOf(ddlYear.Items.FindByText(result.ToString()));
-        }
-
-        private DataTable GetYears()
-        {
-            DataTable dt = DBContext.GetData("GetYears");
-            return dt.Rows.Count > 0 ? dt : new DataTable();
+            dtYears = DBContext.GetData("GetYears");
         }
 
         private void PopulateLocations()
         {
             int countryId = UserInfo.Country;
+
             if (UserInfo.Emergency == 2)
-            {
                 PopulateAdmin2(countryId);
-            }
             else
-            {
                 PopulateAdmin1(countryId);
-            }
         }
 
         private void PopulateAdmin1(int parentLocationId)
         {
             DataTable dt = GetAdmin1Locations(parentLocationId);
+
             cblAdmin1.DataValueField = "LocationId";
             cblAdmin1.DataTextField = "LocationName";
+
             cblAdmin1.DataSource = dt;
             cblAdmin1.DataBind();
 
-            lblLocAdmin1.Text = UserInfo.CountryName + " " + (string)GetLocalResourceObject("AddActivities_PopulateAdmin1__Admin_1_Locations");
+            lblLocAdmin1.Text = UserInfo.CountryName + " " + "Region";//(string)GetLocalResourceObject("ReportDataEntry_PopulateAdmin1__Admin_1_Locations");
         }
 
         private DataTable GetAdmin1Locations(int parentLocationId)
@@ -321,9 +325,7 @@ namespace SRFROWCA.Pages
             string procedure = "GetSecondLevelChildLocations";
 
             if (parentLocationId == 567)
-            {
                 procedure = "GetSecondLevelChildLocationsAndCountry";
-            }
 
             DataTable dt = DBContext.GetData(procedure, new object[] { parentLocationId });
             return dt.Rows.Count > 0 ? dt : new DataTable();
@@ -332,11 +334,13 @@ namespace SRFROWCA.Pages
         private void PopulateAdmin2(int parentLocationId)
         {
             DataTable dt = GetAdmin2Locations(parentLocationId);
+
             cblLocations.DataValueField = "LocationId";
             cblLocations.DataTextField = "LocationName";
+
             cblLocations.DataSource = dt;
             cblLocations.DataBind();
-            //lblLocAdmin2.Text = UserInfo.CountryName + (string)GetLocalResourceObject("AddActivities_PopulateAdmin2__Admin_2_Locations");
+            //lblLocAdmin2.Text = UserInfo.CountryName + (string)GetLocalResourceObject("ReportDataEntry_PopulateAdmin2__Admin_2_Locations");
         }
 
         private DataTable GetAdmin2Locations(int parentLocationId)
@@ -348,8 +352,10 @@ namespace SRFROWCA.Pages
         private void PopulateProjects()
         {
             DataTable dt = GetUserProjects();
+
             rblProjects.DataValueField = "ProjectId";
             rblProjects.DataTextField = "ProjectCode";
+
             rblProjects.DataSource = dt;
             rblProjects.DataBind();
         }
@@ -394,32 +400,35 @@ namespace SRFROWCA.Pages
         private void RemoveSelectedLocations(ListControl control)
         {
             foreach (ListItem item in control.Items)
-            {
                 item.Selected = false;
-            }
         }
 
         private DataTable GetActivities()
         {
-            int yearId = 0;
-            int.TryParse(ddlYear.SelectedValue, out yearId);
+            //int yearId = 0;
+            //int monthId = 0;
+            //int dayId = 0;
 
-            int monthId = 0;
-            int.TryParse(ddlMonth.SelectedValue, out monthId);
+            //string[] dateSplit = txtDate.Text.Trim().Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
+
+            //if (dateSplit.Length > 2)
+            //{
+            //    int.TryParse(dateSplit[2], out yearId);
+            //    int.TryParse(dateSplit[1], out monthId);
+            //    int.TryParse(dateSplit[0], out dayId);
+            //}
 
             int projectId = RC.GetSelectedIntVal(rblProjects);
-
             string locationIds = GetSelectedLocations();
             string locIdsNotIncluded = GetNotSelectedLocations();
-            Guid userId = RC.GetCurrentUserId;
 
-            DataTable dt = DBContext.GetData("GetIPData", new object[] { UserInfo.EmergencyCountry, locationIds, yearId, monthId,
+            Guid userId = RC.GetCurrentUserId;
+            DataTable dt = DBContext.GetData("GetIPData_Ebola", new object[] { UserInfo.EmergencyCountry, locationIds, YearID, MonthID,
                                                                         locIdsNotIncluded, RC.SelectedSiteLanguageId, userId,
                                                                         UserInfo.Organization, projectId});
+
             if (dt.Rows.Count <= 0 && !string.IsNullOrEmpty(locationIds))
-            {
                 ShowMessage("Are you sure you have activites for this project. Please click on Manage Activites to select the activities you want to report on!", RC.NotificationType.Error, false);
-            }
 
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
@@ -429,8 +438,6 @@ namespace SRFROWCA.Pages
             foreach (DataColumn column in dt.Columns)
             {
                 TemplateField customField = new TemplateField();
-                // Create the dynamic templates and assign them to 
-                // the appropriate template property.
 
                 string columnName = column.ColumnName;
                 if (!(columnName == "ReportId" || columnName == "ProjectCode" || columnName == "Objective" ||
@@ -438,17 +445,13 @@ namespace SRFROWCA.Pages
                     columnName == "ActivityDataId" || columnName == "ProjectTitle" || columnName == "ProjectId" ||
                     columnName == "ObjAndPrId" || columnName == "ObjectiveId" || columnName == "HumanitarianPriorityId" ||
                     columnName == "objAndPrAndPId" || columnName == "objAndPId" || columnName == "PrAndPId" ||
-                    columnName == "ProjectIndicatorId" || columnName == "RInd" || columnName == "CInd"
-                    //|| columnName == "Accum" 
-                    || columnName == "Unit"
-                    ))
+                    columnName == "ProjectIndicatorId" || columnName == "RInd" || columnName == "CInd" || columnName == "Unit"))
                 {
                     if (columnName.Contains("Accum"))
                     {
                         customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, "CheckBox", column.ColumnName, "1");
-                        //customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, "CheckBox", column.ColumnName, "1");
                         customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, "CheckBox", "ACM", "1");
-                        gvActivities.Columns.Add(customField);
+                        gvIndicatorData.Columns.Add(customField);
                     }
                     else
                     {
@@ -456,13 +459,13 @@ namespace SRFROWCA.Pages
                         {
                             customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, "TextBox", column.ColumnName, "Annual");
                             customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, "TextBox", column.ColumnName, "Annual");
-                            gvActivities.Columns.Add(customField);
+                            gvIndicatorData.Columns.Add(customField);
                         }
                         else
                         {
                             customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, "TextBox", column.ColumnName);
                             customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, "TextBox", column.ColumnName);
-                            gvActivities.Columns.Add(customField);
+                            gvIndicatorData.Columns.Add(customField);
                         }
                     }
                 }
@@ -471,15 +474,19 @@ namespace SRFROWCA.Pages
 
         private void GetReportId()
         {
-            int yearId = RC.GetSelectedIntVal(ddlYear);
-            int monthId = RC.GetSelectedIntVal(ddlMonth);
+            string[] dateSplit = txtDate.Text.Trim().Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
+
+            //int yearId = dateSplit.Length > 2 ? Convert.ToInt32(dateSplit[2]) : 0;
+            //int monthId = dateSplit.Length > 1 ? Convert.ToInt32(dateSplit[1]) : 0;
+            //int dayId = dateSplit.Length > 0 ? Convert.ToInt32(dateSplit[0]) : 0;
+
             int projectId = RC.GetSelectedIntVal(rblProjects);
 
             using (ORSEntities db = new ORSEntities())
             {
                 Report r = db.Reports.Where(x => x.ProjectId == projectId
-                                            && x.YearId == yearId
-                                            && x.MonthId == monthId
+                                            && x.YearId == YearID
+                                            && x.MonthId == MonthID
                                             && x.EmergencyLocationId == UserInfo.EmergencyCountry
                                             && x.OrganizationId == UserInfo.Organization).SingleOrDefault();
                 ReportId = r != null ? r.ReportId : 0;
@@ -490,9 +497,10 @@ namespace SRFROWCA.Pages
         {
             DataTable dt = GetActivities();
             Session["dtActivities"] = dt;
+
             GetReportId();
-            gvActivities.DataSource = dt;
-            gvActivities.DataBind();
+            gvIndicatorData.DataSource = dt;
+            gvIndicatorData.DataBind();
 
             PopulateObjectives();
             PopulatePriorities();
@@ -508,20 +516,23 @@ namespace SRFROWCA.Pages
         private List<int> GetLocationIdsFromGrid()
         {
             List<int> locationIds = new List<int>();
-            foreach (GridViewRow row in gvActivities.Rows)
+
+            foreach (GridViewRow row in gvIndicatorData.Rows)
             {
                 if (row.RowType == DataControlRowType.DataRow)
                 {
                     DataTable dtActivities = (DataTable)Session["dtActivities"];
+
                     foreach (DataColumn dc in dtActivities.Columns)
                     {
                         string colName = dc.ColumnName;
-
                         HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
+
                         if (hf != null)
                         {
                             int locationId = 0;
                             int.TryParse(hf.Value, out locationId);
+
                             if (locationId > 0)
                                 locationIds.Add((locationId));
                         }
@@ -539,14 +550,10 @@ namespace SRFROWCA.Pages
         private void SelectLocationsOfGrid(List<int> locationIds)
         {
             foreach (ListItem item in cblLocations.Items)
-            {
                 item.Selected = locationIds.Contains(Convert.ToInt32(item.Value));
-            }
 
             foreach (ListItem item in cblAdmin1.Items)
-            {
                 item.Selected = locationIds.Contains(Convert.ToInt32(item.Value));
-            }
         }
 
         private void SaveProjectData()
@@ -554,6 +561,7 @@ namespace SRFROWCA.Pages
             using (TransactionScope scope = new TransactionScope())
             {
                 List<int> locationIds = GetLocationIdsFromGrid();
+
                 string mailType = "";
                 if (locationIds.Count > 0)
                 {
@@ -586,7 +594,7 @@ namespace SRFROWCA.Pages
                 }
 
                 scope.Complete();
-                ShowMessage((string)GetLocalResourceObject("AddActivities_SaveMessageSuccess"));
+                ShowMessage("Your data saves successfully!"/*(string)GetLocalResourceObject("ReportDataEntry_SaveMessageSuccess")*/);
             }
         }
 
@@ -597,7 +605,20 @@ namespace SRFROWCA.Pages
                 int countryID = UserInfo.Country > 0 ? UserInfo.Country : 0;
                 int projId = RC.GetSelectedIntVal(rblProjects);
 
-                string monthName = ddlMonth.SelectedItem.Text + " - " + ddlYear.SelectedItem.Text;
+                int yearId = 0;
+                int monthId = 0;
+                int dayId = 0;
+
+                string[] dateSplit = txtDate.Text.Trim().Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
+
+                if (dateSplit.Length > 2)
+                {
+                    int.TryParse(dateSplit[2], out yearId);
+                    int.TryParse(dateSplit[1], out dayId);
+                    int.TryParse(dateSplit[0], out monthId);
+                }
+
+                string monthName = new DateTime(1, monthId, 1).ToString("MMMM") + " - " + new DateTime(1, yearId, 1).ToString("YYYY");
                 string projectCode = rblProjects.SelectedItem.Text;
                 string country = UserInfo.CountryName;
 
@@ -605,7 +626,7 @@ namespace SRFROWCA.Pages
 
                 string emails = string.Empty;
                 emails = "orsocharowca@gmail.com";
-                
+
 
                 if (dtEmails.Rows.Count > 0)
                 {
@@ -627,7 +648,6 @@ namespace SRFROWCA.Pages
                         Mail.SendMail(mailMsg);
                     }
                 }
-
             }
             catch (Exception ex)
             {
@@ -637,13 +657,12 @@ namespace SRFROWCA.Pages
 
         private void DeleteReport()
         {
-            if (ReportId > 0)
-                DBContext.Delete("DeleteReport", new object[] { ReportId, DBNull.Value });
+            //if (ReportId > 0)
+            //    DBContext.Delete("DeleteReport", new object[] { ReportId, DBNull.Value });
         }
 
         private int SaveReport()
         {
-            //SaveReportMainInfo();
             DeleteReportAccumulatives();
             SaveReportLocations();
             return SaveReportDetails();
@@ -651,53 +670,67 @@ namespace SRFROWCA.Pages
 
         private void UpdateReportUpdatedDate()
         {
-            DBContext.Update("UpdateReportUpdatedDate", new object[] {ReportId, RC.GetCurrentUserId, DBNull.Value });
+            //DBContext.Update("UpdateReportUpdatedDate", new object[] { ReportId, RC.GetCurrentUserId, DBNull.Value });
         }
 
         private void SaveReportMainInfo()
         {
-            //int weekId = RC.GetSelectedIntVal(ddlWeeks);
-            int yearId = RC.GetSelectedIntVal(ddlYear);
-            int monthId = RC.GetSelectedIntVal(ddlMonth);
+            int yearId = 0;
+            int monthId = 0;
+            int dayId = 0;
+
+            string[] dateSplit = txtDate.Text.Trim().Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (dateSplit.Length > 2)
+            {
+                yearId = Convert.ToInt32(dateSplit[2]);
+                dayId = Convert.ToInt32(dateSplit[1]);
+                monthId = Convert.ToInt32(dateSplit[0]);
+            }
+
             int projId = RC.GetSelectedIntVal(rblProjects);
             Guid loginUserId = RC.GetCurrentUserId;
-            string reportName = rblProjects.SelectedItem.Text + " (" + ddlMonth.SelectedItem.Text + "-14)";
-            ReportId = DBContext.Add("InsertReport", new object[] { yearId, monthId, projId, UserInfo.EmergencyCountry,
-                                                                    UserInfo.Organization, loginUserId, reportName, DBNull.Value });
+            string reportName = rblProjects.SelectedItem.Text + " (" + new DateTime(1, monthId, 1).ToString("MMMM") + "-14)";
+
+            ReportId = DBContext.Add("InsertReport_Ebola", new object[] { yearId, MonthID, projId, UserInfo.EmergencyCountry, UserInfo.Organization, loginUserId, reportName, DBNull.Value });
         }
 
         private void SaveReportLocations()
         {
             List<int> locationIds = GetLocationIdsFromGrid();
-            string locIds = "";
+            string locIds = string.Empty;
+
             foreach (int locationId in locationIds)
             {
                 if (string.IsNullOrEmpty(locIds))
-                {
                     locIds = locationId.ToString();
-                }
                 else
-                {
                     locIds += "," + locationId.ToString();
-                }
             }
 
-            DBContext.Add("InsertReportLocations", new object[] { ReportId, locIds, DBNull.Value });
+            DBContext.Add("InsertReportLocations_Ebola", new object[] { ReportId, locIds, DBNull.Value });
         }
 
         private int SaveReportDetails()
         {
+            int yearId = 0;
+            string[] dateSplit = txtDate.Text.Trim().Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (dateSplit.Length > 2)
+                int.TryParse(dateSplit[2], out yearId);
+
             int activityDataId = 0;
             int projIndicatorId = 0;
-            int yearId = RC.GetSelectedIntVal(ddlYear);
+            //int yearId = RC.GetSelectedIntVal(ddlYear);
             int returnCodeForUpdate = 0;
-            foreach (GridViewRow row in gvActivities.Rows)
+
+            foreach (GridViewRow row in gvIndicatorData.Rows)
             {
                 if (row.RowType == DataControlRowType.DataRow)
                 {
                     int projectId = RC.GetSelectedIntVal(rblProjects);
-                    activityDataId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString());
-                    projIndicatorId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["ProjectIndicatorId"].ToString());
+                    activityDataId = Convert.ToInt32(gvIndicatorData.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString());
+                    projIndicatorId = Convert.ToInt32(gvIndicatorData.DataKeys[row.RowIndex].Values["ProjectIndicatorId"].ToString());
 
                     DataTable dtActivities = (DataTable)Session["dtActivities"];
                     List<KeyValuePair<int, decimal?>> dataSave = new List<KeyValuePair<int, decimal?>>();
@@ -712,30 +745,26 @@ namespace SRFROWCA.Pages
                         if (cbAccum != null)
                         {
                             if (cbAccum.Checked)
-                            {
-                                SaveAccumulative(projectId, yearId, activityDataId, cbAccum.Checked);
-                            }
+                                SaveVariable(projectId, yearId, activityDataId, cbAccum.Checked);
                         }
 
                         HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
+
                         if (hf != null)
-                        {
                             locationId = Convert.ToInt32(hf.Value);
-                        }
 
                         decimal? value = null;
                         TextBox t = row.FindControl(colName) as TextBox;
                         if (t != null)
                         {
                             if (!string.IsNullOrEmpty(t.Text))
-                            {
                                 value = Convert.ToDecimal(t.Text, CultureInfo.InvariantCulture);
-                            }
                         }
 
                         if (locationId > 0)
                         {
                             dataSave.Add(new KeyValuePair<int, decimal?>(locationId, value));
+
                             if (i == 1)
                             {
                                 i = 0;
@@ -743,6 +772,7 @@ namespace SRFROWCA.Pages
                                 decimal? annualTarget = null;
                                 decimal? achieved = null;
                                 int j = 0;
+
                                 foreach (var item in dataSave)
                                 {
                                     if (j == 0)
@@ -759,9 +789,10 @@ namespace SRFROWCA.Pages
                                 }
 
                                 dataSave.Clear();
+
                                 if (locationIdToSave > 0)
                                 {
-                                    int returnCode = DBContext.Add("InsertReportDetails", new object[] { ReportId, activityDataId, locationIdToSave, achieved, 
+                                    int returnCode = DBContext.Add("InsertReportDetails_Ebola", new object[] { ReportId, activityDataId, locationIdToSave, achieved, 
                                                                     RC.GetCurrentUserId, projIndicatorId, annualTarget, DBNull.Value });
 
                                     returnCodeForUpdate = returnCodeForUpdate == 0 ? returnCode : returnCodeForUpdate;
@@ -781,30 +812,35 @@ namespace SRFROWCA.Pages
 
         private void DeleteReportAccumulatives()
         {
+            int yearId = 0;
+            string[] dateSplit = txtDate.Text.Trim().Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (dateSplit.Length > 2)
+                int.TryParse(dateSplit[2], out yearId);
+
             int projectId = RC.GetSelectedIntVal(rblProjects);
-            int yearId = RC.GetSelectedIntVal(ddlYear);
-            DBContext.Delete("DeleteReportAccumulatives", new object[] { projectId, yearId, DBNull.Value });
+
+            DBContext.Delete("DeleteReportAccumulatives_Ebola", new object[] { projectId, yearId, DBNull.Value });
         }
 
-        private void SaveAccumulative(int projectId, int yearId, int activityDataId, bool isAccum)
+        private void SaveVariable(int projectId, int yearId, int activityDataId, bool isAccum)
         {
-            DBContext.Add("InsertReportAccumulative", new object[] { projectId, yearId, activityDataId, isAccum, RC.GetCurrentUserId, DBNull.Value });
+            DBContext.Add("InsertReportVariable_Ebola", new object[] { projectId, yearId, activityDataId, isAccum, RC.GetCurrentUserId, DBNull.Value });
         }
 
         public string GetPostBackControlId(Page page)
         {
-            // If page is requested first time then return.
             if (!page.IsPostBack)
                 return "";
 
             Control control = null;
+
             // first we will check the "__EVENTTARGET" because if post back made by the controls
             // which used "_doPostBack" function also available in Request.Form collection.
+
             string controlName = page.Request.Params["__EVENTTARGET"];
-            if (!String.IsNullOrEmpty(controlName))
-            {
+            if (!string.IsNullOrEmpty(controlName))
                 control = page.FindControl(controlName);
-            }
             else
             {
                 // if __EVENTTARGET is null, the control is a button type and we need to
@@ -843,17 +879,11 @@ namespace SRFROWCA.Pages
             string admin2 = GetSelectedItems(cblLocations);
 
             if (!string.IsNullOrEmpty(admin1) && string.IsNullOrEmpty(admin2))
-            {
                 return admin1;
-            }
             else if (string.IsNullOrEmpty(admin1) && !string.IsNullOrEmpty(admin2))
-            {
                 return admin2;
-            }
             else if (!string.IsNullOrEmpty(admin1) && !string.IsNullOrEmpty(admin2))
-            {
                 return admin1 + ", " + admin2;
-            }
 
             return "";
         }
@@ -864,17 +894,11 @@ namespace SRFROWCA.Pages
             string admin2 = GetNotSelectedItems(cblLocations);
 
             if (!string.IsNullOrEmpty(admin1) && string.IsNullOrEmpty(admin2))
-            {
                 return admin1;
-            }
             else if (string.IsNullOrEmpty(admin1) && !string.IsNullOrEmpty(admin2))
-            {
                 return admin2;
-            }
             else if (!string.IsNullOrEmpty(admin1) && !string.IsNullOrEmpty(admin2))
-            {
                 return admin1 + ", " + admin2;
-            }
 
             return "";
         }
@@ -887,13 +911,9 @@ namespace SRFROWCA.Pages
                 if (item.Selected)
                 {
                     if (itemIds != "")
-                    {
                         itemIds += "," + item.Value;
-                    }
                     else
-                    {
                         itemIds += item.Value;
-                    }
                 }
             }
 
@@ -910,13 +930,9 @@ namespace SRFROWCA.Pages
                     if (!item.Selected)
                     {
                         if (itemIds != "")
-                        {
                             itemIds += "," + item.Value;
-                        }
                         else
-                        {
                             itemIds += item.Value;
-                        }
                     }
                 }
             }
@@ -926,23 +942,30 @@ namespace SRFROWCA.Pages
 
         private DataTable GetProjectsData(bool isPivot)
         {
-            int yearId = 0;
-            int.TryParse(ddlYear.SelectedValue, out yearId);
+            //int yearId = 0;
+            //int monthId = 0;
+            //int dayId = 0;
 
-            int monthId = 0;
-            int.TryParse(ddlMonth.SelectedValue, out monthId);
+            //string[] dateSplit = txtDate.Text.Trim().Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
+
+            //if (dateSplit.Length > 2)
+            //{
+            //    int.TryParse(dateSplit[2], out yearId);
+            //    int.TryParse(dateSplit[1], out monthId);
+            //    int.TryParse(dateSplit[0], out dayId);
+            //}
 
             int projectId = RC.GetSelectedIntVal(rblProjects);
             Guid userId = RC.GetCurrentUserId;
 
             string procedureName = "GetProjectsReportDataOfMultipleProjectsAndMonths";
-            if (!isPivot)
-            {
-                procedureName = "GetProjectsDataByLocations";
-            }
 
-            DataTable dt = DBContext.GetData(procedureName, new object[] { UserInfo.EmergencyCountry, UserInfo.Organization, yearId, monthId,
-                                                                        projectId, RC.SelectedSiteLanguageId, userId});
+            if (!isPivot)
+                procedureName = "GetProjectsDataByLocations";
+
+            DataTable dt = new DataTable();
+            /*dt = DBContext.GetData(procedureName, new object[] { UserInfo.EmergencyCountry, UserInfo.Organization, YearID, MonthID,
+                                                                        projectId, RC.SelectedSiteLanguageId, userId});*/
             return dt;
         }
 
@@ -953,8 +976,10 @@ namespace SRFROWCA.Pages
                 iTextSharp.text.Document document = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4, 8, 8, 14, 6);
                 iTextSharp.text.pdf.PdfWriter writer = iTextSharp.text.pdf.PdfWriter.GetInstance(document, outputStream);
                 document.Open();
+
                 WriteDataEntryPDF.GenerateDocument(document, dt);
                 document.Close();
+
                 Response.ContentType = "application/pdf";
                 Response.AddHeader("Content-Disposition", string.Format("attachment;filename=Project-{0}.pdf", UserInfo.CountryName));
                 Response.BinaryWrite(outputStream.ToArray());
@@ -963,9 +988,8 @@ namespace SRFROWCA.Pages
 
         private void BindCultureResourcesOfPage()
         {
-            lblLocAdmin1.Text = UserInfo.CountryName + " " + (string)GetLocalResourceObject("AddActivities_PopulateAdmin1__Admin_1_Locations");
-            //lblLocAdmin2.Text = UserInfo.CountryName + " " + (string)GetLocalResourceObject("AddActivities_PopulateAdmin2__Admin_2_Locations");
-
+            //lblLocAdmin1.Text = UserInfo.CountryName + " " + (string)GetLocalResourceObject("ReportDataEntry_PopulateAdmin1__Admin_1_Locations");
+            lblLocAdmin1.Text = UserInfo.CountryName + " Region";
         }
 
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
@@ -1032,7 +1056,6 @@ namespace SRFROWCA.Pages
         }
 
         #endregion
-
     }
 
     public class GridViewTemplate : ITemplate
@@ -1074,11 +1097,13 @@ namespace SRFROWCA.Pages
                     TextBox txtAchieved = new TextBox { CssClass = "numeric1", Width = 50 };
                     txtAchieved.DataBinding += txtAchieved_DataBinding;
                     container.Controls.Add(txtAchieved);
+
                     HiddenField hf = new HiddenField();
                     string[] words1 = _columnName.Split('^');
                     hf.Value = words1[0];
                     hf.ID = "hf" + _columnName;
                     container.Controls.Add(hf);
+
                     if (_txtBoxType == "Annual")
                     {
                         string color = RC.ConfigSettings("AnnualTargetTextBoxColor");
@@ -1090,11 +1115,6 @@ namespace SRFROWCA.Pages
                     CheckBox cbLocAccum = new CheckBox();
                     cbLocAccum.DataBinding += cbAccum_DataBinding;
                     container.Controls.Add(cbLocAccum);
-                    //HiddenField hf = new HiddenField();
-                    //string[] words1 = _columnName.Split('^');
-                    //hf.Value = words1[0];
-                    //hf.ID = "hf" + _columnName;
-                    //container.Controls.Add(hf);
                 }
             }
         }
@@ -1104,6 +1124,7 @@ namespace SRFROWCA.Pages
             TextBox txt = (TextBox)sender;
             txt.ID = _columnName;
             txt.MaxLength = 12;
+
             GridViewRow row = (GridViewRow)txt.NamingContainer;
             txt.Text = DataBinder.Eval(row.DataItem, _columnName).ToString();
         }
@@ -1112,6 +1133,7 @@ namespace SRFROWCA.Pages
         {
             CheckBox cb = (CheckBox)sender;
             cb.ID = _columnName;
+
             GridViewRow row = (GridViewRow)cb.NamingContainer;
             cb.Checked = (DataBinder.Eval(row.DataItem, _columnName)).ToString() == "True";
         }
