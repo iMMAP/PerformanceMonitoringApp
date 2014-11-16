@@ -4,6 +4,7 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
+using Microsoft.Reporting.WebForms;
 using SRFROWCA.Common;
 
 namespace SRFROWCA.ClusterLead
@@ -78,6 +79,45 @@ namespace SRFROWCA.ClusterLead
             string fileName = "Activities";
             string fileExtention = ".xls";
             ExportUtility.ExportGridView(gvExport, fileName, fileExtention, Response);
+        }
+
+        protected void ExportToPDF(object sender, EventArgs e)
+        {
+            Warning[] warnings;
+            string[] streamIds;
+            string mimeType = string.Empty;
+            string encoding = string.Empty;
+            string extension = string.Empty;
+            byte[] bytes;
+            ReportViewer rvCountry = new ReportViewer();
+            rvCountry.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote;
+            rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://win-78sij2cjpjj/Reportserver");
+            //rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://54.83.26.190/Reportserver");
+            ReportParameter[] RptParameters = null;
+           // rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://localhost/Reportserver");
+            string emergencyClusterId = null;
+            string emergencyObjectiveId = null;
+            string search = null;
+            string emgLocationId = null;
+
+            RptParameters = new ReportParameter[5];
+            RptParameters[0] = new ReportParameter("emgLocationId", emgLocationId,false);
+            RptParameters[1] = new ReportParameter("emgClusterId", emergencyClusterId,false);
+            RptParameters[2] = new ReportParameter("emgObjectiveId", emergencyObjectiveId, false);
+            RptParameters[3] = new ReportParameter("search", search ,false);           
+            RptParameters[4] = new ReportParameter("lngId", ((int)RC.SiteLanguage.English).ToString(),false);
+
+            rvCountry.ServerReport.ReportPath = "/reports/clusteractivities";
+            string fileName = "ClusterActivities"+ DateTime.Now.ToString("yyyy-MM-dd_hh_mm_ss") +".pdf";
+             rvCountry.ServerReport.ReportServerCredentials = new ReportServerCredentials("Administrator", "&qisW.c@Jq", "");
+            rvCountry.ServerReport.SetParameters(RptParameters);
+            bytes = rvCountry.ServerReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+            Response.Buffer = true;
+            Response.Clear();
+            Response.ContentType = mimeType;
+            Response.AddHeader("content-disposition", "attachment; filename=" + fileName);
+            Response.BinaryWrite(bytes); // create the file
+            Response.Flush();
         }
 
         internal override void BindGridData()
