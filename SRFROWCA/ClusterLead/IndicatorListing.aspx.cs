@@ -4,6 +4,7 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
+using Microsoft.Reporting.WebForms;
 using SRFROWCA.Common;
 
 namespace SRFROWCA.ClusterLead
@@ -68,7 +69,8 @@ namespace SRFROWCA.ClusterLead
         protected void btnExportExcel_Click(object sender, EventArgs e)
         {
             GridView gvExport = new GridView();
-            DataTable dt = DBContext.GetData("GetAllIndicatorsNew", new object[] { null, null, null, null,null, (int)RC.SelectedSiteLanguageId });//GetActivities();
+
+            DataTable dt = DBContext.GetData("GetAllIndicatorsNew", new object[] { null, null, null, null, null, null, (int)RC.SelectedSiteLanguageId });//GetActivities();
             RemoveColumnsFromDataTable(dt);
             gvExport.DataSource = dt;
             gvExport.DataBind();
@@ -76,6 +78,51 @@ namespace SRFROWCA.ClusterLead
             string fileName = "Indicators";
             string fileExtention = ".xls";
             ExportUtility.ExportGridView(gvExport, fileName, fileExtention, Response);
+        }
+
+        protected void ExportToPDF(object sender, EventArgs e)
+        {
+            Warning[] warnings;
+            string[] streamIds;
+            string mimeType = string.Empty;
+            string encoding = string.Empty;
+            string extension = string.Empty;            
+            byte[] bytes;
+            ReportViewer rvCountry = new ReportViewer();
+            rvCountry.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote;
+            rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://win-78sij2cjpjj/Reportserver");
+            //rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://54.83.26.190/Reportserver");
+            ReportParameter[] RptParameters = null;
+           // rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://localhost/Reportserver");
+
+            string activityId = null;
+
+            string emergencyClusterId = null;
+            string emergencyObjectiveId = null;
+            string search = null;
+            string emgLocationId = null;
+            string IsGender = null;
+           
+            RptParameters = new ReportParameter[7];
+            RptParameters[0] = new ReportParameter("emgLocationId", emgLocationId,false);
+            RptParameters[1] = new ReportParameter("emgClusterId", emergencyClusterId,false);
+            RptParameters[2] = new ReportParameter("emgObjectiveId", emergencyObjectiveId,false);
+            RptParameters[3] = new ReportParameter("search", search,false);
+            RptParameters[4] = new ReportParameter("activityId", activityId,false);
+            RptParameters[5] = new ReportParameter("isGender", IsGender,false);
+            RptParameters[6] = new ReportParameter("lngId", ((int)RC.SiteLanguage.English).ToString(),false);
+            
+            rvCountry.ServerReport.ReportPath = "/reports/activityindicators";
+            string fileName = "ActivityIndicators" + DateTime.Now.ToString("yyyy-MM-dd_hh_mm_ss") +".pdf";
+            rvCountry.ServerReport.ReportServerCredentials = new ReportServerCredentials("Administrator", "&qisW.c@Jq", "");
+            rvCountry.ServerReport.SetParameters(RptParameters);
+            bytes = rvCountry.ServerReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+            Response.Buffer = true;
+            Response.Clear();
+            Response.ContentType = mimeType;
+            Response.AddHeader("content-disposition", "attachment; filename=" + fileName);
+            Response.BinaryWrite(bytes); // create the file
+            Response.Flush();
         }
 
         internal override void BindGridData()
@@ -202,7 +249,7 @@ namespace SRFROWCA.ClusterLead
             int? activityId = ddlActivity.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlActivity.SelectedValue);            
             string search = string.IsNullOrEmpty(txtActivityName.Text) ? null : txtActivityName.Text;
 
-            return DBContext.GetData("GetAllIndicatorsNew", new object[] {DBNull.Value, emergencyClusterId, emergencyObjectiveId, search,activityId, (int)RC.SelectedSiteLanguageId });
+            return DBContext.GetData("GetAllIndicatorsNew", new object[] {DBNull.Value, emergencyClusterId, emergencyObjectiveId, search,activityId,chkIsGender.Checked ? 1:0, (int)RC.SelectedSiteLanguageId });
         }
         private DataTable GetObjectives()
         {

@@ -22,6 +22,15 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.UpdatePanel updMessage;
         
         /// <summary>
+        /// btnExportPDF control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnExportPDF;
+        
+        /// <summary>
         /// btnExportToExcel control.
         /// </summary>
         /// <remarks>
@@ -83,6 +92,15 @@ namespace SRFROWCA.ClusterLead {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtActivityName;
+        
+        /// <summary>
+        /// chkIsGender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkIsGender;
         
         /// <summary>
         /// btnSearch control.

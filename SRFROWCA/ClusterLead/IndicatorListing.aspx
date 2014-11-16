@@ -36,6 +36,11 @@
                             <div class="widget-box">
                                 <div class="widget-header widget-header-small header-color-blue2">
                                     <h6>
+                                        <button runat="server" id="btnExportPDF" onserverclick="ExportToPDF"  class="btn btn-yellow" causesvalidation="false"
+                                            title="PDF">
+                                            <i class="icon-download"></i>PDF
+                                       
+                                        </button>
                                         <button runat="server" id="btnExportToExcel" onserverclick="btnExportExcel_Click" class="btn btn-yellow" causesvalidation="false"
                                             title="Excel">
                                             <i class="icon-download"></i>Excel
@@ -96,16 +101,21 @@
                                                                 <asp:TextBox ID="txtActivityName" runat="server" CssClass="width-80"></asp:TextBox>
                                                             </td>
                                                         </tr>
+                                                      <tr>
+                                                           <td class="width-20">
+                                                                <label>
+                                                                    Gender Aggregated:</label>
+                                                            </td>
+                                                            <td class="width-30">
+                                                               <asp:CheckBox runat="server" ID="chkIsGender" />
+                                                            </td>
+                                                          <td class="width-20"></td>
+                                                          <td class="width-30"></td>
+                                                      </tr>
                                                       
                                                         <tr>
-                                                            <td colspan="3"></td>
-                                                            <td colspan="2">
-                                                                
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
                                                             <td>&nbsp;</td>
-                                                            <td colspan="4" style="padding-top:20px;"><asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch2_Click" CssClass="btn btn-primary" CausesValidation="false" /></td>
+                                                            <td colspan="4" style="padding-top:10px;"><asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch2_Click" CssClass="btn btn-primary" CausesValidation="false" /></td>
                                                         </tr>
                                                     </table>
                                                 </div>
@@ -134,7 +144,7 @@
                         <asp:BoundField DataField="ShortObjective" HeaderText="Objective" SortExpression="ShortObjective" ItemStyle-Width="150px" />                       
                         <asp:BoundField DataField="Activity" HeaderText="Activity" SortExpression="Activity" />
                           <asp:BoundField DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator" />
-                        <%--<asp:BoundField DataField="ActivityType" HeaderText="Activity Type" SortExpression="ActivityType"/>--%>
+                          <asp:BoundField DataField="Unit" HeaderText="Unit" SortExpression="Unit" />
                         <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle"   HeaderStyle-Width="80px">
                             <ItemTemplate >
                                 <asp:LinkButton ID="btnEdit" runat="server" Text="Edit" Width="80px" CausesValidation="false" 
