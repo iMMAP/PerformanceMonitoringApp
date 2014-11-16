@@ -292,10 +292,9 @@
                             </div>
                         </div>
                         <div id="scrolledGridView" style="overflow-x: auto; width: 100%;">
-                            <asp:GridView ID="gvActivities" runat="server" AutoGenerateColumns="False" HeaderStyle-BackColor="ButtonFace"
+                            <asp:GridView ID="gvIndicatorData" runat="server" AutoGenerateColumns="False" HeaderStyle-BackColor="ButtonFace"
                                 DataKeyNames="ActivityDataId,ProjectIndicatorId,ReportId" CssClass="imagetable"
-                                Width="100%" OnRowDataBound="gvActivities_RowDataBound"
-                                meta:resourcekey="gvActivitiesResource1">
+                                Width="100%" OnRowDataBound="gvIndicatorData_RowDataBound">
                                 <HeaderStyle BackColor="Control"></HeaderStyle>
                                 <RowStyle CssClass="istrow" />
                                 <AlternatingRowStyle CssClass="altcolor" />

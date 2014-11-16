@@ -18,10 +18,9 @@ namespace SRFROWCA.Pages
         protected void Page_Load(object sender, EventArgs e)
         {
             string languageChange = "";
+            
             if (Session["SiteChanged"] != null)
-            {
                 languageChange = Session["SiteChanged"].ToString();
-            }
 
             if (!string.IsNullOrEmpty(languageChange))
             {
@@ -37,9 +36,7 @@ namespace SRFROWCA.Pages
                 PopulateProjects();
 
                 if (rblProjects.Items.Count > 0)
-                {
                     rblProjects.SelectedIndex = 0;
-                }
 
                 PopulateObjectives();
                 PopulatePriorities();
