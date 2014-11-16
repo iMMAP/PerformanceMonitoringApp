@@ -257,12 +257,10 @@ namespace SRFROWCA.ClusterLead
             try
             {
                 dt.Columns.Remove("ClusterId");
-                dt.Columns.Remove("ClusterObjectiveId");
-                dt.Columns.Remove("ObjectivePriorityId");
-                dt.Columns.Remove("PriorityActivityId");
-                dt.Columns.Remove("ActivityType");
-                dt.Columns.Remove("SiteLanguageId");
-                dt.Columns.Remove("ActivityTypeId");
+                dt.Columns.Remove("IndicatorId");
+                dt.Columns.Remove("IndicatorDetailId");
+                dt.Columns.Remove("ClusterName");
+                dt.Columns.Remove("ShortObjective");
             }
             catch { }
         }
