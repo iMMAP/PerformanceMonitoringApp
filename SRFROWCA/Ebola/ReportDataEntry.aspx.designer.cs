@@ -58,24 +58,6 @@ namespace SRFROWCA.Ebola {
         protected global::System.Web.UI.WebControls.RadioButtonList rblFrequency;
         
         /// <summary>
-        /// ddlYear control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlYear;
-        
-        /// <summary>
-        /// ddlMonth control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlMonth;
-        
-        /// <summary>
         /// lzeLgndProjects control.
         /// </summary>
         /// <remarks>

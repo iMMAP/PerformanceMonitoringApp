@@ -191,12 +191,12 @@
                                                 <asp:ListItem  Text="Monthly" Value="3"></asp:ListItem>
                                             </asp:RadioButtonList>
                                                 </div>
-                                            <asp:DropDownList ID="ddlYear" Visible="false" runat="server" OnSelectedIndexChanged="ddlYear_SelectedIndexChanged"
+                                        <%--    <asp:DropDownList ID="ddlYear" Visible="false" runat="server" OnSelectedIndexChanged="ddlYear_SelectedIndexChanged"
                                                 onchange="needToConfirm = false;" AutoPostBack="True" meta:resourcekey="ddlYearResource1">
                                             </asp:DropDownList>
                                             <asp:DropDownList ID="ddlMonth" Visible="false" runat="server" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged"
                                                 onchange="needToConfirm = false;" AutoPostBack="True" meta:resourcekey="ddlMonthResource1">
-                                            </asp:DropDownList>
+                                            </asp:DropDownList>--%>
                                             
                                         </div>
                                     </div>
