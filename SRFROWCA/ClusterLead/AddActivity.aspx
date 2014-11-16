@@ -94,8 +94,7 @@
                                                     Activity (English):</label>
                                                 <div>
                                                     <asp:TextBox ID="txtActivityEng" runat="server" CssClass="width-90" TextMode="MultiLine"></asp:TextBox>
-                                                    <asp:RequiredFieldValidator ID="rfvUserName" runat="server" ErrorMessage="Required"
-                                                        CssClass="error2" Text="Required" ControlToValidate="txtActivityEng"></asp:RequiredFieldValidator>
+                                                    <asp:CustomValidator runat="server" id="cvValidate"  ClientValidationFunction="validateActivity"></asp:CustomValidator>
                                                 </div>
                                             </div>
                                         </div>
@@ -109,8 +108,7 @@
                                                     Activity (French):</label>
                                                 <div>
                                                     <asp:TextBox ID="txtActivityFr" runat="server" CssClass="width-90" TextMode="MultiLine"></asp:TextBox>
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="UserName Required"
-                                                        CssClass="error2" Text="Required" ControlToValidate="txtActivityFr"></asp:RequiredFieldValidator>
+                                                   
                                                 </div>
                                             </div>
                                         </div>
@@ -131,4 +129,21 @@
             </div>
         </div>
     </div>
+    <script>
+        function validateActivity(sender, args) {
+            var txtEng = $("[id$=txtActivityEng]").val();
+            var txtFr = $("[id$=txtActivityFr]").val();
+
+            if (txtEng.trim() == '' && txtFr.trim() == '') {
+
+                alert("Please add Activity atleast in one Language!")
+                args.IsValid = false;
+                return false;
+            }
+            else {
+                args.IsValid = true;
+            }
+        }
+
+    </script>
 </asp:Content>

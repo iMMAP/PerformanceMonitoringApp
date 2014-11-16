@@ -75,8 +75,8 @@
                                                     Activity (English):</label>
                                                 <div>
                                                     <asp:TextBox ID="txtActivityEng" runat="server" CssClass="width-90" TextMode="MultiLine"></asp:TextBox>
-                                                    <asp:RequiredFieldValidator ID="rfvUserName" runat="server" ErrorMessage="Required"
-                                                        CssClass="error2" Text="Required" ControlToValidate="txtActivityEng"></asp:RequiredFieldValidator>
+                                                    <asp:CustomValidator ID="cvActivityEng" runat="server"  ClientValidationFunction="validateActivity"
+                                                        CssClass="error2"  ></asp:CustomValidator>
                                                 </div>
                                            
                                         </div>
@@ -90,8 +90,7 @@
                                                     Activity (French):</label>
                                                 <div>
                                                     <asp:TextBox ID="txtActivityFr" runat="server" CssClass="width-90" TextMode="MultiLine"></asp:TextBox>
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="UserName Required"
-                                                        CssClass="error2" Text="Required" ControlToValidate="txtActivityFr"></asp:RequiredFieldValidator>
+                                                   
                                                 </div>
                                            
                                         </div>
@@ -121,4 +120,35 @@
                             CssClass="width-10 btn btn-sm btn-primary" CausesValidation="false" />
                   
     </div>
+    <script >
+        function validateActivity(sender, args) {
+            var txtEng = $("[id$=txtActivityEng]").val();
+            var txtFr = $("[id$=txtActivityFr]").val();
+            
+            if (txtEng.trim() == '' && txtFr.trim() == '') {
+                
+                alert("Please add Activity atleast in one Language!")
+                return false;
+            }
+            else {
+                validateIndicator();
+            }
+        }
+
+        function validateIndicator() {
+           
+            var counter = 0;
+            $(".dvIndicator").each(function (index) {
+                var txtEng = $(this).find("[id$=txtInd1Eng]").val();
+                var txtFr = $(this).find("[id$=txtInd1Fr]").val();
+                
+                if (txtEng.trim() == '' && txtFr.trim() == '') {
+
+                    alert("Please add Indicator " + (parseInt(index)+1) + " atleast in one Language!")
+                    return false;
+                }
+            });
+            
+        }
+    </script>
 </asp:Content>
