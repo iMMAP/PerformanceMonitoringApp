@@ -31,6 +31,14 @@ namespace SRFROWCA.ClusterLead
             PopulateIndicator(Convert.ToInt32(Request.QueryString["id"]));
            
         }
+        internal override void BindGridData()
+        {
+            PopulateObjective();
+            PopulateClusters();           
+            PopulateActivities();
+            PopulateUnits();
+
+        }
         private void PopulateIndicator(int indicatorDetailId)
         {
             DataTable dt = DBContext.GetData("GetNewIndicator", new object[] { indicatorDetailId });

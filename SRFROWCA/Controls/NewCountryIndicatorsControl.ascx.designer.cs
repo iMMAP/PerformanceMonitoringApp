@@ -31,15 +31,6 @@ namespace SRFROWCA.Controls {
         protected global::System.Web.UI.WebControls.TextBox txtInd1Eng;
         
         /// <summary>
-        /// rfvtxtInd1Eng control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvtxtInd1Eng;
-        
-        /// <summary>
         /// txtInd1Fr control.
         /// </summary>
         /// <remarks>
@@ -47,15 +38,6 @@ namespace SRFROWCA.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtInd1Fr;
-        
-        /// <summary>
-        /// rfvtxtInd1Fr control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvtxtInd1Fr;
         
         /// <summary>
         /// txtTarget control.

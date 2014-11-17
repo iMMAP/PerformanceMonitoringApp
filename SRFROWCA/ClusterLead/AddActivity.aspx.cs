@@ -12,11 +12,14 @@ using SRFROWCA.Controls;
 using System.Net.Mail;
 using System.Text;
 using System.Web.Security;
+using System.Xml;
+using System.IO;
 
 namespace SRFROWCA.ClusterLead
 {
     public partial class AddActivity : BasePage
     {
+       
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
@@ -26,6 +29,14 @@ namespace SRFROWCA.ClusterLead
             PopulateCountries();           
             ShowHideControls();
            
+        }
+
+
+        internal override void BindGridData()
+        {
+            PopulateClusters();
+            PopulateObjective();
+            
         }
 
         private void ShowHideControls()

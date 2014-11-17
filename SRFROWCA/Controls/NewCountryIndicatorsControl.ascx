@@ -2,7 +2,7 @@
 
 <div class="row no-padding-bottom no-padding-top">
     <h6 class="header blue bolder smaller">Indicator<asp:Label ID="lbl1stNumber" runat="server" Text=""></asp:Label></h6>
-    <div class="col-sm-12">
+    <div class="col-sm-12 dvIndicator">
         <div class="widget-box no-border">
             <div class="widget-body">
                 <div class="col-sm-4">
@@ -14,8 +14,7 @@
                                         (English):</label>
                                     <div>
                                         <asp:TextBox ID="txtInd1Eng" MaxLength="4000" runat="server" TextMode="MultiLine" CssClass="width-100"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="rfvtxtInd1Eng" runat="server" ErrorMessage="Indicator Required"
-                                            CssClass="error2" Text="Required" ControlToValidate="txtInd1Eng"></asp:RequiredFieldValidator>
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -31,8 +30,7 @@
                                         (French):</label>
                                     <div>
                                         <asp:TextBox ID="txtInd1Fr" MaxLength="4000" runat="server" TextMode="MultiLine" CssClass="width-100"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="rfvtxtInd1Fr" runat="server" ErrorMessage="Indicator Required"
-                                            CssClass="error2" Text="Required" ControlToValidate="txtInd1Fr"></asp:RequiredFieldValidator>
+                                      
                                     </div>
                                 </div>
                             </div>

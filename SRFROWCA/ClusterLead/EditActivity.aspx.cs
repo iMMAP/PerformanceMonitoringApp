@@ -27,6 +27,13 @@ namespace SRFROWCA.ClusterLead
             ShowHideControls();
             GetActivity();
         }
+
+        internal override void BindGridData()
+        {
+            PopulateClusters();
+            PopulateObjective();
+
+        }
         private void GetActivity()
         {
             DataTable dt = DBContext.GetData("GetNewActivity", new object[] {Convert.ToInt32(Request.QueryString["id"]) });

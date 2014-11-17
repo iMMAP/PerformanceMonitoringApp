@@ -401,6 +401,7 @@
     <Content Include="ClusterLead\UploadSRP.aspx" />
     <Content Include="ClusterLead\ValidateIndicators.aspx" />
     <Content Include="ClusterLead\ValidateReportList.aspx" />
+    <Content Include="Configurations\ChangeEndSettings.xml" />
     <Content Include="Controls\AddContryReportControl.ascx" />
     <Content Include="Controls\IndicatorsWithAdmin1TargetsControl.ascx" />
     <Content Include="Controls\NewCountryIndicatorsControl.ascx" />
@@ -1489,7 +1490,6 @@
   <ItemGroup>
     <Folder Include="Admin\Reports\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Configurations\" />
     <Folder Include="OPS\OPSProjects\" />
     <Folder Include="ORSMaps\" />
   </ItemGroup>
@@ -1639,6 +1639,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="RegionalLead\App_LocalResources\ManageRegionalIndicators.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ClusterLead\App_LocalResources\AddActivity.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ClusterLead\App_LocalResources\AddActivity.aspx.fr-FR.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Controls\App_LocalResources\IndicatorsWithAdmin1TargetsControl.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Controls\App_LocalResources\IndicatorsWithAdmin1TargetsControl.ascx.fr-FR.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

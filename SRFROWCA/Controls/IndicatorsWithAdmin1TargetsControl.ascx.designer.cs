@@ -13,6 +13,15 @@ namespace SRFROWCA.Controls {
     public partial class IndicatorsWithAdmin1TargetsControl {
         
         /// <summary>
+        /// localIndicatorInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localIndicatorInfo;
+        
+        /// <summary>
         /// lbl1stNumber control.
         /// </summary>
         /// <remarks>
