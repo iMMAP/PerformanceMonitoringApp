@@ -62,6 +62,13 @@ namespace SRFROWCA.ClusterLead
            
         }
 
+        internal override void BindGridData()
+        {
+            PopulateClusters();
+            PopulateObjective();
+
+        }
+
         private void ShowHideControls()
         {
             if (RC.IsClusterLead(this.User))

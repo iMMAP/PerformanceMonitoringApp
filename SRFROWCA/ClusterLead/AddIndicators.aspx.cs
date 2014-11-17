@@ -265,6 +265,14 @@ namespace SRFROWCA.ClusterLead
             PopulateActivities();
         }
 
+        internal override void BindGridData()
+        {
+            PopulateClusters();
+            PopulateObjective();
+            PopulateActivities();           
+
+        }
+
         protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
             PopulateActivities();

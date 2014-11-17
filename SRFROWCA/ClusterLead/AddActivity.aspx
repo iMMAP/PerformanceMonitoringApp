@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
-    CodeBehind="AddActivity.aspx.cs" Inherits="SRFROWCA.ClusterLead.AddActivity" %>
+    CodeBehind="AddActivity.aspx.cs" Inherits="SRFROWCA.ClusterLead.AddActivity"  Culture="auto" UICulture="auto" meta:resourcekey="PageResource1"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
@@ -16,6 +16,11 @@
     </div>
     <div id="divMessage" runat="server" class="error2">
     </div>
+    <div style="float:left;width:80%;margin:20px 10px;">
+
+        <asp:Localize ID="localActivityInfo" runat="server" Text="Please provide the activities that cluster partners will undertake in 2015. You can specify up to 25 Activities that partners will be able to associate with their projects during project upload on OPS." meta:resourcekey="localActivityInfoResource1"></asp:Localize>
+    </div>
+     
     <div class="page-content">
         <div class="row">
             <div class="col-xs-12 col-sm-12">
@@ -31,10 +36,10 @@
                                             <div class="widget-body">
                                                 <div class="widget-main no-padding-bottom no-padding-top">
                                                     <div>
-                                                        <asp:DropDownList ID="ddlCountry" runat="server" CssClass="width-90">
+                                                        <asp:DropDownList ID="ddlCountry" runat="server" CssClass="width-90" meta:resourcekey="ddlCountryResource1">
                                                         </asp:DropDownList>
                                                         <asp:RequiredFieldValidator ID="rfvCountry" runat="server" ErrorMessage="Required"
-                                                            CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCountry"></asp:RequiredFieldValidator>
+                                                            CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCountry" meta:resourcekey="rfvCountryResource1"></asp:RequiredFieldValidator>
                                                     </div>
                                                 </div>
                                             </div>
@@ -51,10 +56,10 @@
                                             <div class="widget-body">
                                                 <div class="widget-main no-padding-bottom no-padding-top">
                                                     <div>
-                                                        <asp:DropDownList ID="ddlCluster" runat="server" CssClass="width-90">
+                                                        <asp:DropDownList ID="ddlCluster" runat="server" CssClass="width-90" meta:resourcekey="ddlClusterResource1">
                                                         </asp:DropDownList>
                                                         <asp:RequiredFieldValidator ID="rfvCluster" runat="server" ErrorMessage="Required"
-                                                            CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCluster"></asp:RequiredFieldValidator>
+                                                            CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCluster" meta:resourcekey="rfvClusterResource1"></asp:RequiredFieldValidator>
                                                     </div>
                                                 </div>
                                             </div>
@@ -72,10 +77,10 @@
                                             <div class="widget-body">
                                                 <div class="widget-main no-padding-bottom no-padding-top">
                                                     <div>
-                                                        <asp:DropDownList ID="ddlObjective" runat="server" CssClass="width-90" >
+                                                        <asp:DropDownList ID="ddlObjective" runat="server" CssClass="width-90" meta:resourcekey="ddlObjectiveResource1" >
                                                         </asp:DropDownList>
                                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Required"
-                                                            CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlObjective"></asp:RequiredFieldValidator>
+                                                            CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlObjective" meta:resourcekey="RequiredFieldValidator1Resource1"></asp:RequiredFieldValidator>
                                                     </div>
                                                 </div>
                                             </div>
@@ -93,8 +98,8 @@
                                                 <label>
                                                     Activity (English):</label>
                                                 <div>
-                                                    <asp:TextBox ID="txtActivityEng" runat="server" CssClass="width-90" TextMode="MultiLine"></asp:TextBox>
-                                                    <asp:CustomValidator runat="server" id="cvValidate"  ClientValidationFunction="validateActivity"></asp:CustomValidator>
+                                                    <asp:TextBox ID="txtActivityEng" runat="server" CssClass="width-90" TextMode="MultiLine" meta:resourcekey="txtActivityEngResource1"></asp:TextBox>
+                                                    <asp:CustomValidator runat="server" id="cvValidate"  ClientValidationFunction="validateActivity" meta:resourcekey="cvValidateResource1"></asp:CustomValidator>
                                                 </div>
                                             </div>
                                         </div>
@@ -107,7 +112,7 @@
                                                 <label>
                                                     Activity (French):</label>
                                                 <div>
-                                                    <asp:TextBox ID="txtActivityFr" runat="server" CssClass="width-90" TextMode="MultiLine"></asp:TextBox>
+                                                    <asp:TextBox ID="txtActivityFr" runat="server" CssClass="width-90" TextMode="MultiLine" meta:resourcekey="txtActivityFrResource1"></asp:TextBox>
                                                    
                                                 </div>
                                             </div>
@@ -123,7 +128,7 @@
                             <i class="icon-ok bigger-110"></i>Save
                         </button>
                         <asp:Button ID="btnBackToSRPList" runat="server" Text="Back" OnClick="btnBackToSRPList_Click"
-                            CssClass="width-10 btn btn-sm btn-primary" CausesValidation="false" />
+                            CssClass="width-10 btn btn-sm btn-primary" CausesValidation="False" meta:resourcekey="btnBackToSRPListResource1" />
                     </div>
                 </div>
             </div>

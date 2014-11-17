@@ -89,6 +89,24 @@
                 <i class="icon-ok bigger-110"></i>Save
             </button>
         </div>
-
+        <asp:CustomValidator ID="cvActivityEng" runat="server"  ClientValidationFunction="validateIndicator"
+                                                        CssClass="error2"  ></asp:CustomValidator>
     </div>
+    <script>
+        function validateIndicator() {
+
+            var counter = 0;
+            $(".dvIndicator").each(function (index) {
+                var txtEng = $(this).find("[id$=txtInd1Eng]").val();
+                var txtFr = $(this).find("[id$=txtInd1Fr]").val();
+
+                if (txtEng.trim() == '' && txtFr.trim() == '') {
+
+                    alert("Please add Indicator " + (parseInt(index) + 1) + " atleast in one Language!")
+                    return false;
+                }
+            });
+
+        }
+    </script>
 </asp:Content>

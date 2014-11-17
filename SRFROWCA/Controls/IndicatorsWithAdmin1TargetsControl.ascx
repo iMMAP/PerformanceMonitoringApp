@@ -18,9 +18,13 @@ text-align: center;float:left;
     }
 
 </style>
+ 
 <div style="display:block;width:100%;margin-bottom:15px;">
+    <div style="width:80%;margin-top:120px;margin-bottom:0px;display:block;">
+        <asp:Localize ID="localIndicatorInfo" runat="server" meta:resourcekey="localIndicatorInfoResource1"></asp:Localize>
+    </div>
     <h6 class="header blue bolder smaller">
-        Indicator<asp:Label ID="lbl1stNumber" runat="server" Text=""></asp:Label></h6>
+        Indicator<asp:Label ID="lbl1stNumber" runat="server" meta:resourcekey="lbl1stNumberResource1"></asp:Label></h6>
   
     <div class="col-xs-12 col-sm-12 dvIndicator" style="padding-left:0px;">
         <div class="widget-box no-border">
@@ -30,7 +34,7 @@ text-align: center;float:left;
                         <label>
                             (English):</label>
                         <div>
-                            <asp:TextBox ID="txtInd1Eng" runat="server" CssClass="width-95" TextMode="MultiLine"></asp:TextBox>
+                            <asp:TextBox ID="txtInd1Eng" runat="server" CssClass="width-95" TextMode="MultiLine" meta:resourcekey="txtInd1EngResource1"></asp:TextBox>
                             
                         </div>
                         </div>
@@ -38,7 +42,7 @@ text-align: center;float:left;
                          <label>
                             (French):</label>
                         <div>
-                            <asp:TextBox ID="txtInd1Fr" runat="server" CssClass="width-95" TextMode="MultiLine"></asp:TextBox>
+                            <asp:TextBox ID="txtInd1Fr" runat="server" CssClass="width-95" TextMode="MultiLine" meta:resourcekey="txtInd1FrResource1"></asp:TextBox>
                            
                         </div>
                          </div>
@@ -46,9 +50,9 @@ text-align: center;float:left;
                          <label>
                             Unit:</label>
                         <div>
-        <asp:DropDownList runat="server" ID="ddlUnit" CssClass="width-95"></asp:DropDownList>
+        <asp:DropDownList runat="server" ID="ddlUnit" CssClass="width-95" meta:resourcekey="ddlUnitResource1"></asp:DropDownList>
                              <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Required"
-                                CssClass="error2" Text="Required" ControlToValidate="ddlUnit" InitialValue="0"></asp:RequiredFieldValidator>
+                                CssClass="error2" Text="Required" ControlToValidate="ddlUnit" InitialValue="0" meta:resourcekey="RequiredFieldValidator1Resource1"></asp:RequiredFieldValidator>
     </div>
                         </div>
                     </div>
@@ -59,7 +63,7 @@ text-align: center;float:left;
         <div class="widget-box no-border">
             <div class="widget-body">
                 <div class="widget-main no-padding-bottom no-padding-top">
-                   <asp:CheckBox runat="server" ID="chkGender" text="Gender Disagregated" />
+                   <asp:CheckBox runat="server" ID="chkGender" text="Gender Disagregated" meta:resourcekey="chkGenderResource1" />
                     </div>
                 </div>
             </div>
@@ -81,8 +85,8 @@ text-align: center;float:left;
                         <div class="content" style="float:left;clear:both;margin-top:10px;margin-left:0px;">
        <asp:Repeater runat="server" ID="rptAdmin1">
            <ItemTemplate>
-               <div style="float:left;width:140px;margin-bottom:20px;margin-right:20px;"><div style="float:left;width:80px;text-align:right;margin-top:5px;" ><%#Eval("LocationName")%>&nbsp;</div><asp:TextBox runat="server" ID="txtTarget" style="width:50px;"></asp:TextBox></div>
-               <asp:HiddenField runat="server" ID="hdnLocationId" Value='<%#Eval("LocationId")%>' />
+               <div style="float:left;width:140px;margin-bottom:20px;margin-right:20px;"><div style="float:left;width:80px;text-align:right;margin-top:5px;" ><%#Eval("LocationName")%>&nbsp;</div><asp:TextBox runat="server" ID="txtTarget" style="width:50px;" meta:resourcekey="txtTargetResource1"></asp:TextBox></div>
+               <asp:HiddenField runat="server" ID="hdnLocationId" Value='<%# Eval("LocationId") %>' />
            </ItemTemplate>
        </asp:Repeater>
     </div>
