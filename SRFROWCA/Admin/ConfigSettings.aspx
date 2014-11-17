@@ -175,7 +175,7 @@
                                                                         <tr>
                                                                             <td>
                                                                                 <label>
-                                                                                    Change end date:
+                                                                                    Framework Deadline:
 
                                                                                 </label>
                                                                             </td>
@@ -188,7 +188,7 @@
                                                                         <tr>
                                                                             <td>
                                                                                 <label>
-                                                                                    No. of Indicators Framework:
+                                                                                    Number of Activity Indicators Allowed:
 
                                                                                 </label>
                                                                             </td>
@@ -198,7 +198,7 @@
                                                                         <tr>
                                                                             <td>
                                                                                 <label>
-                                                                                    No. of Cluster Indicators:
+                                                                                    Number of Output Indicators Allowed:
 
                                                                                 </label>
                                                                             </td>
