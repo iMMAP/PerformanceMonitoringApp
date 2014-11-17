@@ -118,7 +118,7 @@
                     }
                 });
 
-                $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th style="width: 100px;">&nbsp;</th><th style="width: 50px;">&nbsp;</th><th style="width: 260px;">&nbsp;</th><th style="width: 220px;">&nbsp;</th><th style="width: 40px;"></th><th style="width: 20px;"></th><th style="width: 30px;">&nbsp;</th>' + list + '</tr></thead>');
+                $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th style="width: 100px;">&nbsp;</th><th style="width: 50px;">&nbsp;</th><th style="width: 260px;">&nbsp;</th><th style="width: 220px;">&nbsp;</th><th style="width: 40px;"></th>' + list + '</tr></thead>');
             }
 
             $('.cbltest').on('click', ':checkbox', function () {
@@ -186,9 +186,9 @@
                                              <asp:TextBox runat="server" ID="txtDate" style="text-align:left;"  Font-Size="Medium" Width="200"></asp:TextBox>
                                             <div style="margin-top:10px;">
                                             <asp:RadioButtonList  runat="server" ID="rblFrequency">
-                                                <asp:ListItem Selected="True" Text="Daily" Value="1"></asp:ListItem>
-                                                <asp:ListItem  Text="Weekly" Value="2"></asp:ListItem>
-                                                <asp:ListItem  Text="Monthly" Value="3"></asp:ListItem>
+                                                <asp:ListItem  Text="Daily" Enabled="false" Value="2"></asp:ListItem>
+                                                <asp:ListItem Selected="True" Text="Weekly" Value="3"></asp:ListItem>
+                                                <asp:ListItem  Text="Monthly" Value="1"></asp:ListItem>
                                             </asp:RadioButtonList>
                                                 </div>
                                         <%--    <asp:DropDownList ID="ddlYear" Visible="false" runat="server" OnSelectedIndexChanged="ddlYear_SelectedIndexChanged"
@@ -341,13 +341,13 @@
 
                                         <ItemStyle CssClass="hidden" Width="1px"></ItemStyle>
                                     </asp:BoundField>
-                                    <asp:TemplateField HeaderText="Project Code" ItemStyle-Wrap="false" meta:resourcekey="TemplateFieldResource1">
+                                    <asp:TemplateField HeaderText="Project Code" Visible="false" ItemStyle-Wrap="false" meta:resourcekey="TemplateFieldResource1">
                                         <ItemTemplate>
                                             <asp:Label ID="lblProjectcode" runat="server" Text='<%# Eval("ProjectCode") %>' ToolTip='<%# Eval("ProjectTitle") %>'></asp:Label>
                                         </ItemTemplate>
                                         <ItemStyle Wrap="False"></ItemStyle>
                                     </asp:TemplateField>
-                                    <asp:TemplateField ItemStyle-Wrap="false" meta:resourcekey="TemplateFieldResource2" >
+                                    <asp:TemplateField ItemStyle-Wrap="false" Visible="false" meta:resourcekey="TemplateFieldResource2" >
                                         <ItemTemplate>
                                             <asp:Image ID="imgObjective" runat="server" AlternateText="Obj" meta:resourcekey="imgObjectiveResource1" />
                                             <asp:Image ID="imgPriority" runat="server" AlternateText="Obj" meta:resourcekey="imgPriorityResource1" />
@@ -356,7 +356,7 @@
                                         </ItemTemplate>
                                         <ItemStyle Wrap="False"></ItemStyle>
                                     </asp:TemplateField>
-                                    <asp:TemplateField ItemStyle-Width="260px" HeaderText="Activity" meta:resourcekey="TemplateFieldResource3">
+                                    <asp:TemplateField ItemStyle-Width="260px" HeaderText="Strategic Pillar" meta:resourcekey="TemplateFieldResource3">
                                         <ItemTemplate>
                                             <div style="width: 260px; word-wrap: break-word;">
                                                 <%# Eval("ActivityName")%>
@@ -401,7 +401,7 @@
                         <div class="space">
                         </div>
                         <button id="btnSave" runat="server"  onserverclick="btnSave_Click" onclick="needToConfirm = false;"
-                            type="button" class="pull-right btn btn-sm btn-primary" disabled>
+                            type="button" class="pull-right btn btn-sm btn-primary">
                             <i class="icon-save"></i>
                             <asp:Localize ID="localSaveButton" runat="server" Text="Save" meta:resourcekey="localSaveButtonResource1"></asp:Localize>
                         </button>

@@ -20,8 +20,8 @@ namespace SRFROWCA.Ebola
         public int MonthID = 0;
         public int DayID = 0;
 
-        DataTable dtYears = new DataTable();
-        DataTable dtMonths = new DataTable();
+        public static DataTable dtYears = new DataTable();
+        public static DataTable dtMonths = new DataTable();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -48,7 +48,6 @@ namespace SRFROWCA.Ebola
 
                 PopulateObjectives();
                 PopulatePriorities();
-                PopulateDate();
             }
 
             PopulateToolTips();
@@ -56,12 +55,14 @@ namespace SRFROWCA.Ebola
             //this.Form.DefaultButton = this.btnSave.UniqueID;
             string controlName = GetPostBackControlId(this);
 
-            if (/*controlName == "ddlMonth" || controlName == "ddlYear" ||*/ controlName == "rblProjects" || controlName == "ddlWeeks")
+            if (/*controlName == "ddlMonth" || controlName == "ddlYear" ||*/ controlName == "rblProjects" || controlName == "txtDate" /*|| controlName == "ddlWeeks"*/)
             {
                 LocationRemoved = 0;
                 RemoveSelectedLocations(cblAdmin1);
                 RemoveSelectedLocations(cblLocations);
             }
+            else
+                PopulateDate();
 
             //if (controlName != "imgbtnComments")
             {
@@ -423,9 +424,9 @@ namespace SRFROWCA.Ebola
             string locIdsNotIncluded = GetNotSelectedLocations();
 
             Guid userId = RC.GetCurrentUserId;
-            DataTable dt = DBContext.GetData("GetIPData_Ebola", new object[] { UserInfo.EmergencyCountry, locationIds, YearID, MonthID,
+            DataTable dt = DBContext.GetData("GetIPData_Ebola", new object[] { UserInfo.EmergencyCountry, locationIds, YearID, MonthID,DayID,
                                                                         locIdsNotIncluded, RC.SelectedSiteLanguageId, userId,
-                                                                        UserInfo.Organization, projectId});
+                                                                        UserInfo.Organization, projectId, Convert.ToInt32(rblFrequency.SelectedValue), DateTime.ParseExact(txtDate.Text.Trim(), "MM-dd-yyyy", CultureInfo.InvariantCulture).ToString("MM-dd-yyyy")});
 
             if (dt.Rows.Count <= 0 && !string.IsNullOrEmpty(locationIds))
                 ShowMessage("Are you sure you have activites for this project. Please click on Manage Activites to select the activities you want to report on!", RC.NotificationType.Error, false);
@@ -457,16 +458,16 @@ namespace SRFROWCA.Ebola
                     {
                         if (columnName.Contains("_1-"))
                         {
-                            customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, "TextBox", column.ColumnName, "Annual");
-                            customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, "TextBox", column.ColumnName, "Annual");
+                            customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, "TextBox", column.ColumnName, "Variable");
+                            customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, "TextBox", column.ColumnName, "Variable");
                             gvIndicatorData.Columns.Add(customField);
                         }
-                        else
-                        {
-                            customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, "TextBox", column.ColumnName);
-                            customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, "TextBox", column.ColumnName);
-                            gvIndicatorData.Columns.Add(customField);
-                        }
+                        //else
+                        //{
+                        //    customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, "TextBox", column.ColumnName);
+                        //    customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, "TextBox", column.ColumnName);
+                        //    gvIndicatorData.Columns.Add(customField);
+                        //}
                     }
                 }
             }
@@ -482,7 +483,7 @@ namespace SRFROWCA.Ebola
 
             int projectId = RC.GetSelectedIntVal(rblProjects);
 
-            using (ORSEntities db = new ORSEntities())
+            /*using (ORSEntities db = new ORSEntities())
             {
                 Report r = db.Reports.Where(x => x.ProjectId == projectId
                                             && x.YearId == YearID
@@ -490,7 +491,9 @@ namespace SRFROWCA.Ebola
                                             && x.EmergencyLocationId == UserInfo.EmergencyCountry
                                             && x.OrganizationId == UserInfo.Organization).SingleOrDefault();
                 ReportId = r != null ? r.ReportId : 0;
-            }
+            }*/
+
+            ReportId = 0;
         }
 
         internal override void BindGridData()
@@ -692,7 +695,7 @@ namespace SRFROWCA.Ebola
             Guid loginUserId = RC.GetCurrentUserId;
             string reportName = rblProjects.SelectedItem.Text + " (" + new DateTime(1, monthId, 1).ToString("MMMM") + "-14)";
 
-            ReportId = DBContext.Add("InsertReport_Ebola", new object[] { yearId, MonthID, projId, UserInfo.EmergencyCountry, UserInfo.Organization, loginUserId, reportName, DBNull.Value });
+            ReportId = DBContext.Add("InsertReport_Ebola", new object[] { YearID, MonthID, 0, 0, projId, UserInfo.EmergencyCountry, UserInfo.Organization, loginUserId, reportName, Convert.ToInt32(rblFrequency.SelectedValue), DateTime.ParseExact(txtDate.Text.Trim(), "MM-dd-yyyy", CultureInfo.InvariantCulture).ToString("MM-dd-yyyy"), DBNull.Value });
         }
 
         private void SaveReportLocations()
@@ -745,7 +748,7 @@ namespace SRFROWCA.Ebola
                         if (cbAccum != null)
                         {
                             if (cbAccum.Checked)
-                                SaveVariable(projectId, yearId, activityDataId, cbAccum.Checked);
+                                SaveAccumulative(projectId, yearId, activityDataId, cbAccum.Checked);
                         }
 
                         HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
@@ -823,9 +826,9 @@ namespace SRFROWCA.Ebola
             DBContext.Delete("DeleteReportAccumulatives_Ebola", new object[] { projectId, yearId, DBNull.Value });
         }
 
-        private void SaveVariable(int projectId, int yearId, int activityDataId, bool isAccum)
+        private void SaveAccumulative(int projectId, int yearId, int activityDataId, bool isAccum)
         {
-            DBContext.Add("InsertReportVariable_Ebola", new object[] { projectId, yearId, activityDataId, isAccum, RC.GetCurrentUserId, DBNull.Value });
+            DBContext.Add("InsertReportAccumulative_Ebola", new object[] { projectId, yearId, activityDataId, isAccum, RC.GetCurrentUserId, DBNull.Value });
         }
 
         public string GetPostBackControlId(Page page)
@@ -1065,7 +1068,7 @@ namespace SRFROWCA.Ebola
         private readonly string _controlType;
         private readonly string _txtBoxType;
 
-        public GridViewTemplate(DataControlRowType type, string controlType, string colname, string txtBoxType = "Achieved")
+        public GridViewTemplate(DataControlRowType type, string controlType, string colname, string txtBoxType = "Variable")
         {
             _templateType = type;
             _controlType = controlType;
@@ -1094,9 +1097,9 @@ namespace SRFROWCA.Ebola
             {
                 if (_controlType == "TextBox")
                 {
-                    TextBox txtAchieved = new TextBox { CssClass = "numeric1", Width = 50 };
-                    txtAchieved.DataBinding += txtAchieved_DataBinding;
-                    container.Controls.Add(txtAchieved);
+                    TextBox txtVariable = new TextBox { CssClass = "numeric1", Width = 50 };
+                    txtVariable.DataBinding += txtVariable_DataBinding;
+                    container.Controls.Add(txtVariable);
 
                     HiddenField hf = new HiddenField();
                     string[] words1 = _columnName.Split('^');
@@ -1104,10 +1107,10 @@ namespace SRFROWCA.Ebola
                     hf.ID = "hf" + _columnName;
                     container.Controls.Add(hf);
 
-                    if (_txtBoxType == "Annual")
+                    if (_txtBoxType == "Variable")
                     {
                         string color = RC.ConfigSettings("AnnualTargetTextBoxColor");
-                        txtAchieved.BackColor = System.Drawing.ColorTranslator.FromHtml(color);
+                        txtVariable.BackColor = System.Drawing.ColorTranslator.FromHtml(color);
                     }
                 }
                 else if (_controlType == "CheckBox")
@@ -1119,7 +1122,7 @@ namespace SRFROWCA.Ebola
             }
         }
 
-        private void txtAchieved_DataBinding(Object sender, EventArgs e)
+        private void txtVariable_DataBinding(Object sender, EventArgs e)
         {
             TextBox txt = (TextBox)sender;
             txt.ID = _columnName;
