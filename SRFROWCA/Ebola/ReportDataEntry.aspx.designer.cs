@@ -157,13 +157,13 @@ namespace SRFROWCA.Ebola {
         protected global::System.Web.UI.WebControls.Localize localLocationButton;
         
         /// <summary>
-        /// gvActivities control.
+        /// gvIndicatorData control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvActivities;
+        protected global::System.Web.UI.WebControls.GridView gvIndicatorData;
         
         /// <summary>
         /// btnSave control.

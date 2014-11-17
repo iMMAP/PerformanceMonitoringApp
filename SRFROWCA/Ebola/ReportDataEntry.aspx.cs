@@ -16,6 +16,13 @@ namespace SRFROWCA.Ebola
 {
     public partial class ReportDataEntry : BasePage
     {
+        public int YearID = 0;
+        public int MonthID = 0;
+        public int DayID = 0;
+
+        public static DataTable dtYears = new DataTable();
+        public static DataTable dtMonths = new DataTable();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             string languageChange = "";
@@ -25,15 +32,15 @@ namespace SRFROWCA.Ebola
 
             if (!string.IsNullOrEmpty(languageChange))
             {
-                //PopulateMonths();
+                PopulateMonths();
                 Session["SiteChanged"] = null;
             }
 
             if (!IsPostBack)
             {
                 PopulateLocations();
-                //PopulateYears();
-                //PopulateMonths();
+                PopulateYears();
+                PopulateMonths();
                 PopulateProjects();
 
                 if (rblProjects.Items.Count > 0)
@@ -41,7 +48,6 @@ namespace SRFROWCA.Ebola
 
                 PopulateObjectives();
                 PopulatePriorities();
-                PopulateDate();
             }
 
             PopulateToolTips();
@@ -49,12 +55,14 @@ namespace SRFROWCA.Ebola
             //this.Form.DefaultButton = this.btnSave.UniqueID;
             string controlName = GetPostBackControlId(this);
 
-            if (/*controlName == "ddlMonth" || controlName == "ddlYear" ||*/ controlName == "rblProjects" || controlName == "ddlWeeks")
+            if (/*controlName == "ddlMonth" || controlName == "ddlYear" ||*/ controlName == "rblProjects" || controlName == "txtDate" /*|| controlName == "ddlWeeks"*/)
             {
                 LocationRemoved = 0;
                 RemoveSelectedLocations(cblAdmin1);
                 RemoveSelectedLocations(cblLocations);
             }
+            else
+                PopulateDate();
 
             //if (controlName != "imgbtnComments")
             {
@@ -64,8 +72,8 @@ namespace SRFROWCA.Ebola
                 Session["dtActivities"] = dtActivities;
                 GetReportId();
 
-                gvActivities.DataSource = dtActivities;
-                gvActivities.DataBind();
+                gvIndicatorData.DataSource = dtActivities;
+                gvIndicatorData.DataBind();
             }
         }
 
@@ -82,6 +90,21 @@ namespace SRFROWCA.Ebola
 
         private void ReloadGrid()
         {
+            int yearId = 0;
+            int monthId = 0;
+            int dayId = 0;
+
+            string[] dateSplit = txtDate.Text.Trim().Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (dateSplit.Length > 2)
+            {
+                int.TryParse(dateSplit[2], out yearId);
+                int.TryParse(dateSplit[1], out dayId);
+                int.TryParse(dateSplit[0], out monthId);
+            }
+
+            SetDateIDs(new DateTime(1, monthId, 1).ToString("MMMM"), new DateTime(yearId, 1, 1).ToString("YYYY"), dayId);
+
             LocationRemoved = 0;
             BindGridData();
             AddLocationsInSelectedList();
@@ -121,6 +144,21 @@ namespace SRFROWCA.Ebola
         private void PopulateDate()
         {
             txtDate.Text = DateTime.Now.ToString("MM-dd-yyyy");
+            SetDateIDs(DateTime.Now.ToString("MMMM"), DateTime.Now.ToString("yyyy"), DateTime.Now.Day);
+        }
+
+        private void SetDateIDs(string month, string year, int day)
+        {
+            DataRow[] drMonth = dtMonths.Select("MonthName='" + month + "' AND SiteLanguageId='" + RC.SelectedSiteLanguageId + "'");
+            DataRow[] drYear = dtYears.Select("Year='" + year + "'");
+
+            if (drMonth.Length > 0)
+                MonthID = Convert.ToInt32(drMonth[0]["MonthID"]);
+
+            if (drYear.Length > 0)
+                YearID = Convert.ToInt32(drYear[0]["YearID"]);
+
+            DayID = day;
         }
 
         protected void rblProjects_SelectedIndexChanged(object sender, EventArgs e)
@@ -129,7 +167,7 @@ namespace SRFROWCA.Ebola
             AddLocationsInSelectedList();
         }
 
-        protected void gvActivities_RowDataBound(object sender, GridViewRowEventArgs e)
+        protected void gvIndicatorData_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
@@ -152,7 +190,7 @@ namespace SRFROWCA.Ebola
                 SaveReportMainInfo();
 
             int activityDataId = 0;
-            int.TryParse(gvActivities.DataKeys[rowIndex]["ActivityDataId"].ToString(), out activityDataId);
+            int.TryParse(gvIndicatorData.DataKeys[rowIndex]["ActivityDataId"].ToString(), out activityDataId);
 
             if (activityDataId > 0)
             {
@@ -165,9 +203,9 @@ namespace SRFROWCA.Ebola
             }
         }
 
-        protected void gvActivities_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected void gvIndicatorData_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-        
+
         }
 
         protected void btnLocation_Click(object sender, EventArgs e)
@@ -215,8 +253,8 @@ namespace SRFROWCA.Ebola
 
                 if (dateSplit.Length > 2)
                 {
-                    int.TryParse(dateSplit[1], out monthId);
-                    int.TryParse(dateSplit[0], out dayId);
+                    int.TryParse(dateSplit[1], out dayId);
+                    int.TryParse(dateSplit[0], out monthId);
                 }
 
                 GridView gv = new GridView();
@@ -250,46 +288,15 @@ namespace SRFROWCA.Ebola
 
         #region Methods
 
-        /*private void PopulateMonths()
+        private void PopulateMonths()
         {
-            int i = ddlMonth.SelectedIndex;
-
-            ddlMonth.DataValueField = "MonthId";
-            ddlMonth.DataTextField = "MonthName";
-
-            ddlMonth.DataSource = GetMonth();
-            ddlMonth.DataBind();
-
-            var result = DateTime.Now.ToString("MMMM", new CultureInfo(RC.SiteCulture));
-            result = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(result);
-            int monthNumber = MonthNumber.GetMonthNumber(result);
-            monthNumber = monthNumber == 1 ? monthNumber : monthNumber - 1;
-            ddlMonth.SelectedIndex = i > -1 ? i : ddlMonth.Items.IndexOf(ddlMonth.Items.FindByValue(monthNumber.ToString()));
+            dtMonths = DBContext.GetData("GetMonths", new object[] { RC.SelectedSiteLanguageId });
         }
 
-        private DataTable GetMonth()
+        private void PopulateYears()
         {
-            DataTable dt = DBContext.GetData("GetMonths", new object[] { RC.SelectedSiteLanguageId });
-            return dt.Rows.Count > 0 ? dt : new DataTable();
-        }*/
-
-        /*private void PopulateYears()
-        {
-            ddlYear.DataValueField = "YearId";
-            ddlYear.DataTextField = "Year";
-
-            ddlYear.DataSource = GetYears();
-            ddlYear.DataBind();
-
-            var result = DateTime.Parse(DateTime.Now.ToShortDateString()).Year;
-            ddlYear.SelectedIndex = ddlYear.Items.IndexOf(ddlYear.Items.FindByText(result.ToString()));
+            dtYears = DBContext.GetData("GetYears");
         }
-
-        private DataTable GetYears()
-        {
-            DataTable dt = DBContext.GetData("GetYears");
-            return dt.Rows.Count > 0 ? dt : new DataTable();
-        }*/
 
         private void PopulateLocations()
         {
@@ -399,28 +406,27 @@ namespace SRFROWCA.Ebola
 
         private DataTable GetActivities()
         {
-            int yearId = 0;
-            int monthId = 0;
-            int dayId = 0;
+            //int yearId = 0;
+            //int monthId = 0;
+            //int dayId = 0;
 
-            string[] dateSplit = txtDate.Text.Trim().Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
+            //string[] dateSplit = txtDate.Text.Trim().Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
 
-            if (dateSplit.Length > 2)
-            {
-                int.TryParse(dateSplit[2], out yearId);
-                int.TryParse(dateSplit[1], out monthId);
-                int.TryParse(dateSplit[0], out dayId);
-            }
+            //if (dateSplit.Length > 2)
+            //{
+            //    int.TryParse(dateSplit[2], out yearId);
+            //    int.TryParse(dateSplit[1], out monthId);
+            //    int.TryParse(dateSplit[0], out dayId);
+            //}
 
             int projectId = RC.GetSelectedIntVal(rblProjects);
             string locationIds = GetSelectedLocations();
             string locIdsNotIncluded = GetNotSelectedLocations();
 
             Guid userId = RC.GetCurrentUserId;
-            DataTable dt = new DataTable();
-            /*dt = DBContext.GetData("GetIPData", new object[] { UserInfo.EmergencyCountry, locationIds, yearId, monthId,
+            DataTable dt = DBContext.GetData("GetIPData_Ebola", new object[] { UserInfo.EmergencyCountry, locationIds, YearID, MonthID,
                                                                         locIdsNotIncluded, RC.SelectedSiteLanguageId, userId,
-                                                                        UserInfo.Organization, projectId});*/
+                                                                        UserInfo.Organization, projectId});
 
             if (dt.Rows.Count <= 0 && !string.IsNullOrEmpty(locationIds))
                 ShowMessage("Are you sure you have activites for this project. Please click on Manage Activites to select the activities you want to report on!", RC.NotificationType.Error, false);
@@ -446,7 +452,7 @@ namespace SRFROWCA.Ebola
                     {
                         customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, "CheckBox", column.ColumnName, "1");
                         customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, "CheckBox", "ACM", "1");
-                        gvActivities.Columns.Add(customField);
+                        gvIndicatorData.Columns.Add(customField);
                     }
                     else
                     {
@@ -454,13 +460,13 @@ namespace SRFROWCA.Ebola
                         {
                             customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, "TextBox", column.ColumnName, "Annual");
                             customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, "TextBox", column.ColumnName, "Annual");
-                            gvActivities.Columns.Add(customField);
+                            gvIndicatorData.Columns.Add(customField);
                         }
                         else
                         {
                             customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, "TextBox", column.ColumnName);
                             customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, "TextBox", column.ColumnName);
-                            gvActivities.Columns.Add(customField);
+                            gvIndicatorData.Columns.Add(customField);
                         }
                     }
                 }
@@ -471,21 +477,23 @@ namespace SRFROWCA.Ebola
         {
             string[] dateSplit = txtDate.Text.Trim().Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
 
-            int yearId = dateSplit.Length > 2 ? Convert.ToInt32(dateSplit[2]) : 0;
-            int monthId = dateSplit.Length > 1 ? Convert.ToInt32(dateSplit[1]) : 0;
-            int dayId = dateSplit.Length > 0 ? Convert.ToInt32(dateSplit[0]) : 0;
+            //int yearId = dateSplit.Length > 2 ? Convert.ToInt32(dateSplit[2]) : 0;
+            //int monthId = dateSplit.Length > 1 ? Convert.ToInt32(dateSplit[1]) : 0;
+            //int dayId = dateSplit.Length > 0 ? Convert.ToInt32(dateSplit[0]) : 0;
 
             int projectId = RC.GetSelectedIntVal(rblProjects);
 
-            using (ORSEntities db = new ORSEntities())
+            /*using (ORSEntities db = new ORSEntities())
             {
                 Report r = db.Reports.Where(x => x.ProjectId == projectId
-                                            && x.YearId == yearId
-                                            && x.MonthId == monthId
+                                            && x.YearId == YearID
+                                            && x.MonthId == MonthID
                                             && x.EmergencyLocationId == UserInfo.EmergencyCountry
                                             && x.OrganizationId == UserInfo.Organization).SingleOrDefault();
                 ReportId = r != null ? r.ReportId : 0;
-            }
+            }*/
+
+            ReportId = 0;
         }
 
         internal override void BindGridData()
@@ -494,8 +502,8 @@ namespace SRFROWCA.Ebola
             Session["dtActivities"] = dt;
 
             GetReportId();
-            gvActivities.DataSource = dt;
-            gvActivities.DataBind();
+            gvIndicatorData.DataSource = dt;
+            gvIndicatorData.DataBind();
 
             PopulateObjectives();
             PopulatePriorities();
@@ -512,7 +520,7 @@ namespace SRFROWCA.Ebola
         {
             List<int> locationIds = new List<int>();
 
-            foreach (GridViewRow row in gvActivities.Rows)
+            foreach (GridViewRow row in gvIndicatorData.Rows)
             {
                 if (row.RowType == DataControlRowType.DataRow)
                 {
@@ -609,8 +617,8 @@ namespace SRFROWCA.Ebola
                 if (dateSplit.Length > 2)
                 {
                     int.TryParse(dateSplit[2], out yearId);
-                    int.TryParse(dateSplit[1], out monthId);
-                    int.TryParse(dateSplit[0], out dayId);
+                    int.TryParse(dateSplit[1], out dayId);
+                    int.TryParse(dateSplit[0], out monthId);
                 }
 
                 string monthName = new DateTime(1, monthId, 1).ToString("MMMM") + " - " + new DateTime(1, yearId, 1).ToString("YYYY");
@@ -679,15 +687,15 @@ namespace SRFROWCA.Ebola
             if (dateSplit.Length > 2)
             {
                 yearId = Convert.ToInt32(dateSplit[2]);
-                monthId = Convert.ToInt32(dateSplit[1]);
-                dayId = Convert.ToInt32(dateSplit[0]);
+                dayId = Convert.ToInt32(dateSplit[1]);
+                monthId = Convert.ToInt32(dateSplit[0]);
             }
 
             int projId = RC.GetSelectedIntVal(rblProjects);
             Guid loginUserId = RC.GetCurrentUserId;
-            string reportName = rblProjects.SelectedItem.Text + " (" + new DateTime(1,monthId,1).ToString("MMMM") + "-14)";
-            
-            //ReportId = DBContext.Add("InsertReport", new object[] { yearId, monthId, projId, UserInfo.EmergencyCountry, UserInfo.Organization, loginUserId, reportName, DBNull.Value });
+            string reportName = rblProjects.SelectedItem.Text + " (" + new DateTime(1, monthId, 1).ToString("MMMM") + "-14)";
+
+            ReportId = DBContext.Add("InsertReport_Ebola", new object[] { YearID, MonthID, 0, 0, projId, UserInfo.EmergencyCountry, UserInfo.Organization, loginUserId, reportName, Convert.ToInt32(rblFrequency.SelectedValue), DateTime.ParseExact(txtDate.Text.Trim(), "MM-dd-yyyy", CultureInfo.InvariantCulture).ToString("MM-dd-yyyy"), DBNull.Value });
         }
 
         private void SaveReportLocations()
@@ -703,7 +711,7 @@ namespace SRFROWCA.Ebola
                     locIds += "," + locationId.ToString();
             }
 
-            //DBContext.Add("InsertReportLocations", new object[] { ReportId, locIds, DBNull.Value });
+            DBContext.Add("InsertReportLocations_Ebola", new object[] { ReportId, locIds, DBNull.Value });
         }
 
         private int SaveReportDetails()
@@ -719,13 +727,13 @@ namespace SRFROWCA.Ebola
             //int yearId = RC.GetSelectedIntVal(ddlYear);
             int returnCodeForUpdate = 0;
 
-            foreach (GridViewRow row in gvActivities.Rows)
+            foreach (GridViewRow row in gvIndicatorData.Rows)
             {
                 if (row.RowType == DataControlRowType.DataRow)
                 {
                     int projectId = RC.GetSelectedIntVal(rblProjects);
-                    activityDataId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString());
-                    projIndicatorId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["ProjectIndicatorId"].ToString());
+                    activityDataId = Convert.ToInt32(gvIndicatorData.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString());
+                    projIndicatorId = Convert.ToInt32(gvIndicatorData.DataKeys[row.RowIndex].Values["ProjectIndicatorId"].ToString());
 
                     DataTable dtActivities = (DataTable)Session["dtActivities"];
                     List<KeyValuePair<int, decimal?>> dataSave = new List<KeyValuePair<int, decimal?>>();
@@ -740,11 +748,11 @@ namespace SRFROWCA.Ebola
                         if (cbAccum != null)
                         {
                             if (cbAccum.Checked)
-                                SaveAccumulative(projectId, yearId, activityDataId, cbAccum.Checked);
+                                SaveVariable(projectId, yearId, activityDataId, cbAccum.Checked);
                         }
 
                         HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
-                        
+
                         if (hf != null)
                             locationId = Convert.ToInt32(hf.Value);
 
@@ -759,7 +767,7 @@ namespace SRFROWCA.Ebola
                         if (locationId > 0)
                         {
                             dataSave.Add(new KeyValuePair<int, decimal?>(locationId, value));
-                            
+
                             if (i == 1)
                             {
                                 i = 0;
@@ -785,13 +793,13 @@ namespace SRFROWCA.Ebola
 
                                 dataSave.Clear();
 
-                                //if (locationIdToSave > 0)
-                                //{
-                                //    int returnCode = DBContext.Add("InsertReportDetails", new object[] { ReportId, activityDataId, locationIdToSave, achieved, 
-                                //                                    RC.GetCurrentUserId, projIndicatorId, annualTarget, DBNull.Value });
+                                if (locationIdToSave > 0)
+                                {
+                                    int returnCode = DBContext.Add("InsertReportDetails_Ebola", new object[] { ReportId, activityDataId, locationIdToSave, achieved, 
+                                                                    RC.GetCurrentUserId, projIndicatorId, annualTarget, DBNull.Value });
 
-                                //    returnCodeForUpdate = returnCodeForUpdate == 0 ? returnCode : returnCodeForUpdate;
-                                //}
+                                    returnCodeForUpdate = returnCodeForUpdate == 0 ? returnCode : returnCodeForUpdate;
+                                }
                             }
                             else
                             {
@@ -815,12 +823,12 @@ namespace SRFROWCA.Ebola
 
             int projectId = RC.GetSelectedIntVal(rblProjects);
 
-            //DBContext.Delete("DeleteReportAccumulatives", new object[] { projectId, yearId, DBNull.Value });
+            DBContext.Delete("DeleteReportAccumulatives_Ebola", new object[] { projectId, yearId, DBNull.Value });
         }
 
-        private void SaveAccumulative(int projectId, int yearId, int activityDataId, bool isAccum)
+        private void SaveVariable(int projectId, int yearId, int activityDataId, bool isAccum)
         {
-            //DBContext.Add("InsertReportAccumulative", new object[] { projectId, yearId, activityDataId, isAccum, RC.GetCurrentUserId, DBNull.Value });
+            DBContext.Add("InsertReportVariable_Ebola", new object[] { projectId, yearId, activityDataId, isAccum, RC.GetCurrentUserId, DBNull.Value });
         }
 
         public string GetPostBackControlId(Page page)
@@ -829,10 +837,10 @@ namespace SRFROWCA.Ebola
                 return "";
 
             Control control = null;
-            
+
             // first we will check the "__EVENTTARGET" because if post back made by the controls
             // which used "_doPostBack" function also available in Request.Form collection.
-            
+
             string controlName = page.Request.Params["__EVENTTARGET"];
             if (!string.IsNullOrEmpty(controlName))
                 control = page.FindControl(controlName);
@@ -937,29 +945,29 @@ namespace SRFROWCA.Ebola
 
         private DataTable GetProjectsData(bool isPivot)
         {
-            int yearId = 0;
-            int monthId = 0;
-            int dayId = 0;
+            //int yearId = 0;
+            //int monthId = 0;
+            //int dayId = 0;
 
-            string[] dateSplit = txtDate.Text.Trim().Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
+            //string[] dateSplit = txtDate.Text.Trim().Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
 
-            if (dateSplit.Length > 2)
-            {
-                int.TryParse(dateSplit[2], out yearId);
-                int.TryParse(dateSplit[1], out monthId);
-                int.TryParse(dateSplit[0], out dayId);
-            }
+            //if (dateSplit.Length > 2)
+            //{
+            //    int.TryParse(dateSplit[2], out yearId);
+            //    int.TryParse(dateSplit[1], out monthId);
+            //    int.TryParse(dateSplit[0], out dayId);
+            //}
 
             int projectId = RC.GetSelectedIntVal(rblProjects);
             Guid userId = RC.GetCurrentUserId;
 
             string procedureName = "GetProjectsReportDataOfMultipleProjectsAndMonths";
-            
+
             if (!isPivot)
                 procedureName = "GetProjectsDataByLocations";
 
             DataTable dt = new DataTable();
-            /*dt = DBContext.GetData(procedureName, new object[] { UserInfo.EmergencyCountry, UserInfo.Organization, yearId, monthId,
+            /*dt = DBContext.GetData(procedureName, new object[] { UserInfo.EmergencyCountry, UserInfo.Organization, YearID, MonthID,
                                                                         projectId, RC.SelectedSiteLanguageId, userId});*/
             return dt;
         }
