@@ -258,7 +258,7 @@
                                                                                     <asp:BoundField ItemStyle-Width="10%" HeaderStyle-HorizontalAlign="Center" DataField="EndDate" HeaderText="End Date"  />
                                                                                     <asp:BoundField ItemStyle-Width="18%" HeaderStyle-HorizontalAlign="Center" DataField="NoOfFrameworkIndicators" HeaderText="Activity Indicators Allowed" />
                                                                                     <asp:BoundField ItemStyle-Width="18%" HeaderStyle-HorizontalAlign="Center" DataField="NoOfClusterIndicators" HeaderText="Output Indicators Allowed" />
-                                                                                    <asp:BoundField ItemStyle-Width="20%" HeaderStyle-HorizontalAlign="Center" DataField="NoOfIndicatorsNotAllowed" HeaderText="Activity Indicators Not Allowed" />
+                                                                                    <asp:BoundField ItemStyle-Width="20%" HeaderStyle-HorizontalAlign="Center" DataField="NoOfActivitiesAllowed" HeaderText="Activity Indicators Not Allowed" />
                                                                                     <asp:TemplateField HeaderStyle-Width="5%" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                                                                                         <ItemTemplate>
 
