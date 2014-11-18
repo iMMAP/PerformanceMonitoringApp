@@ -208,12 +208,12 @@
                                                                          <tr>
                                                                             <td>
                                                                                 <label>
-                                                                                    Number of Activity Indicators Not Allowed:
+                                                                                    Number of Activities Allowed:
 
                                                                                 </label>
                                                                             </td>
                                                                             <td>
-                                                                                <asp:TextBox runat="server" ID="txtNoIndicatorsNotAllowed" Width="270" onblur="return isNumeric(this.value, this)"></asp:TextBox></td>
+                                                                                <asp:TextBox runat="server" ID="txtActivitiesAllowed" Width="270" onblur="return isNumeric(this.value, this)"></asp:TextBox></td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>&nbsp;</td>

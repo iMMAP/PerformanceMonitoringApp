@@ -166,13 +166,13 @@ namespace SRFROWCA.Admin {
         protected global::System.Web.UI.WebControls.TextBox txtNoClusterIndicators;
         
         /// <summary>
-        /// txtNoIndicatorsNotAllowed control.
+        /// txtActivitiesAllowed control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNoIndicatorsNotAllowed;
+        protected global::System.Web.UI.WebControls.TextBox txtActivitiesAllowed;
         
         /// <summary>
         /// btnAddFrameworkSettings control.
