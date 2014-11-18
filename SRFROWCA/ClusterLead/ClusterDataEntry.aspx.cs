@@ -196,7 +196,7 @@ namespace SRFROWCA.ClusterLead
 
                     if (lblTarget != null)
                     {
-                        target = Convert.ToInt32(lblTarget.Text.Trim());
+                        target = Convert.ToInt32(lblTarget.Text.Replace(".","").Replace(",","").Trim());
                         //string siteLang = RC.SelectedSiteLanguageId.Equals(1) ? "en-US" : "de-DE";
                         //target = int.Parse(lblTarget.Text.Trim(), CultureInfo.GetCultureInfo(siteLang));
                     }
