@@ -192,12 +192,12 @@ namespace SRFROWCA.ClusterLead
                     Label lblClusterID = (Label)row.FindControl("lblClusterID");
                     Label lblClusterIndicatorID = (Label)row.FindControl("lblClusterIndicatorID");
 
-                    if (lblTarget != null)
-                    {
-                        target = Convert.ToInt32(lblTarget.Text.Trim());
-                        //string siteLang = RC.SelectedSiteLanguageId.Equals(1) ? "en-US" : "de-DE";
-                        //target = int.Parse(lblTarget.Text.Trim(), CultureInfo.GetCultureInfo(siteLang));
-                    }
+                    //if (lblTarget != null)
+                    //{
+                    //    target = Convert.ToInt32(lblTarget.Text.Trim());
+                    //    //string siteLang = RC.SelectedSiteLanguageId.Equals(1) ? "en-US" : "de-DE";
+                    //    //target = int.Parse(lblTarget.Text.Trim(), CultureInfo.GetCultureInfo(siteLang));
+                    //}
 
                     if (lblClusterIndicatorID != null)
                         clusterIndicatorID = Convert.ToInt32(lblClusterIndicatorID.Text);

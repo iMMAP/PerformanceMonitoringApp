@@ -300,7 +300,7 @@ namespace SRFROWCA.Common
 
         internal static DataTable GetAllUnits(int lngId)
         {
-            return DBContext.GetData("GetAllUnits", new object[] { 1 });
+            return DBContext.GetData("GetAllUnits", new object[] { lngId });
         }
 
         internal static DataTable GetOrganizations(int? orgId)

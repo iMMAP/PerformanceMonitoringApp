@@ -1201,6 +1201,15 @@ namespace SRFROWCA {
         protected global::System.Web.UI.WebControls.Localize localClusterFrameworksList;
         
         /// <summary>
+        /// liClusterFrameworkSub control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liClusterFrameworkSub;
+        
+        /// <summary>
         /// liClusterIndicators control.
         /// </summary>
         /// <remarks>
@@ -1217,6 +1226,24 @@ namespace SRFROWCA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Localize Localize8;
+        
+        /// <summary>
+        /// liClusterDataEntry control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liClusterDataEntry;
+        
+        /// <summary>
+        /// Localize11 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize Localize11;
         
         /// <summary>
         /// liNewActivityListing control.
@@ -1253,24 +1280,6 @@ namespace SRFROWCA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Localize Localize10;
-        
-        /// <summary>
-        /// liClusterDataEntry control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liClusterDataEntry;
-        
-        /// <summary>
-        /// Localize11 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize11;
         
         /// <summary>
         /// liClusterFrameworkImport control.

@@ -11,7 +11,7 @@
             <li><i class="icon-home home-icon"></i><a href="../Default.aspx">
                 <asp:Localize ID="localBreadCrumbHome" runat="server" Text="Home"></asp:Localize></a> </li>
             <li class="active">
-                <asp:Localize ID="localBreadCrumbUploadAchieved" runat="server" Text="Bulk Upload"></asp:Localize></li>
+                <asp:Localize ID="localBreadCrumbUploadAchieved" runat="server" Text="Import Framework"></asp:Localize></li>
         </ul>
         <!-- .breadcrumb -->
     </div>
@@ -20,12 +20,12 @@
         </div>
         <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>
         <div class="page-header">
-            <h1>Form Elements
-								<small>
-                                    <i class="icon-double-angle-right"></i>
-                                    Common form elements and layouts
-                                </small>
-            </h1>
+
+            <small>
+                <i class="icon-double-angle-right"></i>
+                - This template will allow you to upload the activities and indicators in bulk into ORS.
+            </small>
+
         </div>
         <!-- /.page-header -->
 
@@ -45,22 +45,22 @@
                         <asp:DropDownList ID="ddlCluster" runat="server" CssClass="width-60"></asp:DropDownList>
                     </div>
                 </div>--%>
-               <div class="space-20"></div>
+                <div class="space-20"></div>
                 <div>
                     <label class="col-sm-3"></label>
-                    <div class="col-sm-9" >
+                    <div class="col-sm-9">
                         <asp:FileUpload ID="fuSRP" runat="server" />
                     </div>
                 </div>
-               
+
                 <div>
                     <label class="col-sm-3"></label>
 
                     <div class="col-sm-9">
-                        <asp:Button id="btnUpload" runat="server" Text="Upload" OnClick="btnUpload_Click" />
+                        <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="btnUpload_Click" />
                     </div>
                 </div>
-                
+
             </div>
         </div>
 
