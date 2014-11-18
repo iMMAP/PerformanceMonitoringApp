@@ -1192,13 +1192,13 @@ namespace SRFROWCA {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor A6;
         
         /// <summary>
-        /// localClusterFrameworksList control.
+        /// localClusterFrameworksList1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localClusterFrameworksList;
+        protected global::System.Web.UI.WebControls.Localize localClusterFrameworksList1;
         
         /// <summary>
         /// liClusterFrameworkSub control.
@@ -1298,24 +1298,6 @@ namespace SRFROWCA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Localize Localize13;
-        
-        /// <summary>
-        /// liReport control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liReport;
-        
-        /// <summary>
-        /// Localize12 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize12;
         
         /// <summary>
         /// liActivities control.

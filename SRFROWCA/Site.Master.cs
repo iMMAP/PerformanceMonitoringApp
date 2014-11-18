@@ -248,7 +248,7 @@ namespace SRFROWCA
             //liCountryReports.Visible = isShow;
             liLocations.Visible = isShow;
             liMapsListing.Visible = isShow;
-            liReport.Visible = isShow;
+            //liReport.Visible = isShow;
         }
 
         private void ShowUserMenue()
@@ -311,7 +311,7 @@ namespace SRFROWCA
             //liReportsTopIndicators1.Visible = isShow;
             //liReportsTopIndicatorsGeneral1.Visible = isShow;
             //liReportsTopIndicatorRegional1.Visible = isShow;
-            liReport.Visible = isShow;
+            //liReport.Visible = isShow;
         }
 
         private void ShowAuthenticatedMenues()
@@ -589,14 +589,16 @@ namespace SRFROWCA
 
                 liClusterIndicators.Attributes.Add("class", "active");
             }
-            else if (uri.Contains("ClusterLead/ActivityListing.aspx"))
+            else if (uri.Contains("ClusterLead/ActivityListing.aspx") || uri.Contains("ClusterLead/AddActivity.aspx"))
             {
                 PageTitle = "ORS - Activity Listing";
 
                 liClusterFrameworks.Attributes.Add("class", "active open");
                 liNewActivityListing.Attributes.Add("class", "active");
             }
-            else if (uri.Contains("ClusterLead/IndicatorListing.aspx"))
+            else if (uri.Contains("ClusterLead/IndicatorListing.aspx")
+                || uri.Contains("AddActivityAndIndicators.aspx")
+                || uri.Contains("ClusterLead/AddIndicators.aspx"))
             {
                 PageTitle = "ORS - Indicator Listing";
 

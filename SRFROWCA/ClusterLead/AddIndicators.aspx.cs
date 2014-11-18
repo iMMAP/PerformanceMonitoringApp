@@ -138,7 +138,7 @@ namespace SRFROWCA.ClusterLead
         {
             UI.FillObjectives(ddlObjective);
             ddlObjective.DataSource = DBContext.GetData("GetEmergencyObjectives", new object[] {RC.SelectedSiteLanguageId,UserInfo.Emergency});
-            ddlObjective.DataTextField = "ShortObjectiveTitle";
+            ddlObjective.DataTextField = "Objective";
             ddlObjective.DataValueField = "EmergencyObjectiveId";
             ddlObjective.DataBind();
             ListItem item = new ListItem("Select Objective", "0");
@@ -263,6 +263,14 @@ namespace SRFROWCA.ClusterLead
         protected void ddlCluster_SelectedIndexChanged(object sender, EventArgs e)
         {
             PopulateActivities();
+        }
+
+        internal override void BindGridData()
+        {
+            PopulateClusters();
+            PopulateObjective();
+            PopulateActivities();           
+
         }
 
         protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)

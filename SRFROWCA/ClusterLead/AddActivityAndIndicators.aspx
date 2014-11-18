@@ -2,6 +2,7 @@
     CodeBehind="AddActivityAndIndicators.aspx.cs" Inherits="SRFROWCA.ClusterLead.AddActivityAndIndicators" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="breadcrumbs" id="breadcrumbs">
@@ -57,12 +58,6 @@
                         CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlObjective"></asp:RequiredFieldValidator>
                 </div>
             </div>
-
-
-
-
-           
-
         </div>
                             <div style="display:block;">
                                 <h6 class="header blue bolder smaller">
@@ -96,7 +91,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                
                             </div>
+        
+            
+        
                             <asp:Panel ID="pnlAdditionalIndicaotrs" runat="server">
                             </asp:Panel>
                         

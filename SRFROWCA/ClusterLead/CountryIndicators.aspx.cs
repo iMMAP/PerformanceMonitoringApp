@@ -1,15 +1,13 @@
-﻿using BusinessLogic;
-using SRFROWCA.Common;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Data;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml;
+using BusinessLogic;
+using SRFROWCA.Common;
 
 namespace SRFROWCA.ClusterLead
 {
@@ -23,15 +21,11 @@ namespace SRFROWCA.ClusterLead
 
         protected void Page_PreLoad(object sender, EventArgs e)
         {
-            //string control = Utils.GetPostBackControlId(this);
-
-            //if (control == "btnDelete"
-            //    && Convert.ToBoolean(Request.QueryString["delete"]))
             if (!string.IsNullOrEmpty(Request.QueryString["delete"])
                 && Convert.ToBoolean(Request.QueryString["delete"]))
-                lblMessage.Text = "Indicator deleted successfully!";
+                ShowMessage("Indicator deleted successfully!");
             else if (!string.IsNullOrEmpty(Request.QueryString["delete"]))
-                lblMessage.Text = "Error: Indicator cannot be deleted because it is being in reports!";
+                ShowMessage("Error: Indicator cannot be deleted because it is being used!", RC.NotificationType.Error, true, 1000);
 
             if (RC.IsClusterLead(this.User))
             {
@@ -53,6 +47,11 @@ namespace SRFROWCA.ClusterLead
                 btnAddIndicator.Enabled = false;
             else
                 btnAddIndicator.Enabled = true;
+
+            if (RC.IsAdmin(this.User))
+            {
+                cbIncludeRegional.Visible = false;
+            }
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -88,7 +87,7 @@ namespace SRFROWCA.ClusterLead
 
         private void LoadCombos()
         {
-            UI.FillCountry(ddlCountry);
+            UI.FillEmergencyLocations(ddlCountry, 1);
             UI.FillClusters(ddlCluster, RC.SelectedSiteLanguageId);
             UI.FillUnits(ddlUnits);
         }
@@ -124,7 +123,15 @@ namespace SRFROWCA.ClusterLead
 
         private DataTable GetClusterIndicatros(int? clusterId, int? countryId, string indicator)
         {
-            return DBContext.GetData("uspGetClusterIndicators", new object[] { clusterId, countryId, indicator, RC.SelectedSiteLanguageId });
+            bool regionalIncluded = cbIncludeRegional.Checked;
+            int emergencyId = UserInfo.Emergency;
+            if (emergencyId <= 0)
+            {
+                regionalIncluded = false;
+            }
+
+            return DBContext.GetData("uspGetClusterIndicators", new object[] { clusterId, countryId, indicator,
+                                                                               RC.SelectedSiteLanguageId, regionalIncluded, emergencyId });
         }
 
         protected void btnAddIndicator_Click(object sender, EventArgs e)
@@ -262,6 +269,9 @@ namespace SRFROWCA.ClusterLead
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
+                ObjPrToolTip.RegionalIndicatorIcon(e, 1);
+                ObjPrToolTip.CountryIndicatorIcon(e, 2);
+
                 LinkButton btnDelete = e.Row.FindControl("btnDelete") as LinkButton;
                 LinkButton btnEdit = e.Row.FindControl("btnEdit") as LinkButton;
                 Label lblCountryID = e.Row.FindControl("lblCountryID") as Label;
@@ -287,10 +297,17 @@ namespace SRFROWCA.ClusterLead
 
                     if (applyFilter && maxDate < DateTime.Now)
                         btnDelete.Visible = false;
-                }
+                }                
 
                 if (btnEdit != null && applyFilter && maxDate < DateTime.Now)
                     btnEdit.Visible = false;
+
+                string isRegional = e.Row.Cells[1].Text;
+                if ((RC.IsCountryAdmin(this.User) || RC.IsClusterLead(this.User)) && isRegional == "True")
+                {
+                    btnEdit.Visible = false;
+                    btnDelete.Visible = false;
+                }
             }
         }
 
@@ -301,8 +318,11 @@ namespace SRFROWCA.ClusterLead
                 int clusterIndicatorID = Convert.ToInt32(e.CommandArgument);
                 string delFlag = "false";
 
-                if (DeleteClusterIndicator(clusterIndicatorID))
-                    delFlag = "true";
+                if (!IndicatorIsInUse(clusterIndicatorID))
+                {
+                    if (DeleteClusterIndicator(clusterIndicatorID))
+                        delFlag = "true";
+                }
 
                 //LoadClusterIndicators();
                 Response.Redirect("~/ClusterLead/CountryIndicators.aspx?delete=" + delFlag);
@@ -320,26 +340,32 @@ namespace SRFROWCA.ClusterLead
 
                 if (gvClusterIndicators.DataKeys[row.RowIndex].Value.ToString() == "1")
                 {
-                    txtIndicatorEng.Text = row.Cells[4].Text;
+                    txtIndicatorEng.Text = row.Cells[7].Text;
 
                     if (lblIndAlternate != null)
                         txtIndicatorFr.Text = lblIndAlternate.Text;
                 }
                 else
                 {
-                    txtIndicatorFr.Text = row.Cells[4].Text;
+                    txtIndicatorFr.Text = row.Cells[7].Text;
 
                     if (lblIndAlternate != null)
                         txtIndicatorEng.Text = lblIndAlternate.Text;
                 }
 
-                txtTarget.Text = row.Cells[5].Text;
+                txtTarget.Text = row.Cells[8].Text;
 
                 if (lblUnitID != null)
                     ddlUnits.SelectedValue = lblUnitID.Text;
 
                 mpeEditIndicator.Show();
             }
+        }
+
+        private bool IndicatorIsInUse(int clusterIndicatorID)
+        {
+            DataTable dt = DBContext.GetData("ClusterIndicatorInUse", new object[] { clusterIndicatorID});
+            return dt.Rows.Count > 0;
         }
 
         private void ClearPopupControls()
@@ -390,6 +416,11 @@ namespace SRFROWCA.ClusterLead
 
             if (!string.IsNullOrEmpty(hfClusterIndicatorID.Value))
                 DBContext.Add("uspInsertIndicator", new object[] { indicatorEng, indicatorFr, target, unitID, null, null, RC.GetCurrentUserId, null, Convert.ToInt32(hfClusterIndicatorID.Value) });
+        }
+
+        private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
+        {
+            RC.ShowMessage(Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
         }
 
     }

@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using System.Xml;
 using BusinessLogic;
 using SRFROWCA.Common;
-using SRFROWCA.Controls; 
+using SRFROWCA.Controls;
 
 namespace SRFROWCA.ClusterLead
 {
@@ -17,7 +17,7 @@ namespace SRFROWCA.ClusterLead
         public bool applyFilter = false;
         public string countryId = string.Empty;
         public string clusterId = string.Empty;
-        public string displayNone = string.Empty; 
+        public string displayNone = string.Empty;
 
         protected void Page_PreLoad(object sender, EventArgs e)
         {
@@ -30,7 +30,7 @@ namespace SRFROWCA.ClusterLead
                 applyFilter = true;
                 SetMaxCount();
 
-                if(maxCount == 1)
+                if (maxCount == 1)
                     IndControlId = maxCount;
             }
             else
@@ -85,7 +85,7 @@ namespace SRFROWCA.ClusterLead
                 if (applyFilter)
                     SetMaxCount();
 
-                if (maxCount > 0 && IndControlId == 0) 
+                if (maxCount > 0 && IndControlId == 0)
                 {
                     AddIndicatorControl(0);
                     IndControlId = 1;
@@ -136,7 +136,7 @@ namespace SRFROWCA.ClusterLead
             ddlObjective.DataSource = DBContext.GetData("GetObjectives", new object[] { RC.SelectedSiteLanguageId, null });
             ddlObjective.DataBind();*/
 
-            UI.FillCountry(ddlCountry);
+            UI.FillEmergencyLocations(ddlCountry, 1);
             UI.FillClusters(ddlCluster, RC.SelectedSiteLanguageId);
         }
 
@@ -177,29 +177,22 @@ namespace SRFROWCA.ClusterLead
 
         private void SaveData()
         {
-            //int objectiveID = RC.GetSelectedIntVal(ddlObjective);
-
-            //if (objectiveID > 0)
+            foreach (Control ctl in pnlIndicaotrs.Controls)
             {
-                foreach (Control ctl in pnlIndicaotrs.Controls)
+                if (ctl != null
+                    && ctl.ID != null
+                    && ctl.ID.Contains("countryIndicatorControlId"))
                 {
-                    if (ctl != null
-                        && ctl.ID != null
-                        && ctl.ID.Contains("countryIndicatorControlId"))
+                    NewCountryIndicatorsControl indControl = ctl as NewCountryIndicatorsControl;
+
+                    if (indControl != null)
                     {
-                        NewCountryIndicatorsControl indControl = ctl as NewCountryIndicatorsControl;
+                        TextBox txtEng = (TextBox)indControl.FindControl("txtInd1Eng");
+                        TextBox txtFr = (TextBox)indControl.FindControl("txtInd1Fr");
+                        TextBox txtTarget = (TextBox)indControl.FindControl("txtTarget");
+                        DropDownList ddlUnits = (DropDownList)indControl.FindControl("ddlUnits");
 
-                        if (indControl != null)
-                        {
-                            TextBox txtEng = (TextBox)indControl.FindControl("txtInd1Eng");
-                            TextBox txtFr = (TextBox)indControl.FindControl("txtInd1Fr");
-
-                            TextBox txtTarget = (TextBox)indControl.FindControl("txtTarget");
-                            DropDownList ddlUnits = (DropDownList)indControl.FindControl("ddlUnits");
-
-                            //indControl.SaveIndicators(objectiveID, Convert.ToInt32(ddlCountry.SelectedValue), Convert.ToInt32(ddlCluster.SelectedValue));
-                            indControl.SaveIndicators(Convert.ToInt32(ddlCountry.SelectedValue), Convert.ToInt32(ddlCluster.SelectedValue));
-                        }
+                        indControl.SaveIndicators(Convert.ToInt32(ddlCountry.SelectedValue), Convert.ToInt32(ddlCluster.SelectedValue));
                     }
                 }
             }

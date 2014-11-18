@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Data;
+using System.Globalization;
+using System.IO;
+using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Xml;
 using BusinessLogic;
 using Microsoft.Reporting.WebForms;
 using SRFROWCA.Common;
@@ -11,6 +15,77 @@ namespace SRFROWCA.ClusterLead
 {
     public partial class IndicatorListing : BasePage
     {
+
+         public bool applyFilter = false;
+        public int maxIndCount = 0;
+        public int maxActCount = 0;
+        public DateTime dateLimit = DateTime.Now.AddDays(1);
+
+        protected void Page_PreLoad(object sender, EventArgs e)
+        {
+            if (RC.IsClusterLead(this.User))
+            {
+                GetMaxCount("Key-" + UserInfo.EmergencyCountry + UserInfo.EmergencyCluster, out maxIndCount, out maxActCount, out dateLimit);
+                if (maxIndCount <= 0 || (maxActCount <= 0 || (applyFilter && DateTime.Now > dateLimit))){
+                    btnAddActivityAndIndicators.Enabled = false;
+                }
+                if(maxIndCount <= 0 || (applyFilter && DateTime.Now > dateLimit)){
+                    btnAddActivity.Enabled =false;
+                }
+            }
+        }
+
+      
+        private void GetMaxCount(string configKey, out int maxIndValue,out int maxActValue, out DateTime maxDate)
+        {
+            maxIndValue = 0;
+            maxActValue = 0;
+            maxDate = DateTime.Now.AddDays(1);
+
+            string PATH = HttpRuntime.AppDomainAppPath;
+            PATH = PATH.Substring(0, PATH.LastIndexOf(@"\") + 1) + @"Configurations\ChangeEndSettings.xml";
+
+            if (File.Exists(PATH))
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(PATH);
+
+                XmlElement elem_settings = doc.GetElementById("ChangeEndSettings");
+                XmlNode settingsNode = doc.DocumentElement;
+
+                foreach (XmlNode node in settingsNode.ChildNodes)
+                {
+                    if (node.Name.Equals(configKey))
+                    {
+                        if (node.Attributes["FrameworkCount"] != null)
+                            maxIndValue = Convert.ToInt32(node.Attributes["FrameworkCount"].Value);
+
+                         if (node.Attributes["ActivityCount"] != null)
+                            maxActValue = Convert.ToInt32(node.Attributes["ActivityCount"].Value);
+
+                        if (node.Attributes["DateLimit"] != null)
+                            maxDate = DateTime.ParseExact(Convert.ToString(node.Attributes["DateLimit"].Value), "MM-dd-yyyy", CultureInfo.InvariantCulture);
+                    }
+                }
+            }
+
+            if (maxIndValue > 0)
+            {
+                     DataTable dt = DBContext.GetData("GetAllIndicatorsNew", new object[] { null, null, null, null, null, null, (int)RC.SelectedSiteLanguageId });
+                if (dt.Rows.Count > 0)
+                    maxIndValue = maxIndValue - dt.Rows.Count;
+            }
+
+            if (maxActValue > 0)
+            {
+                  DataTable dt = DBContext.GetData("GetAllActivitiesNew", new object[] { null, null, null, null, (int)RC.SelectedSiteLanguageId });             
+                if (dt != null && dt.Rows.Count > 0)
+                    maxActValue = maxActValue - dt.Rows.Count;
+            }
+        }
+
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;           
@@ -189,6 +264,16 @@ namespace SRFROWCA.ClusterLead
         {
             gvActivity.DataSource = GetActivities();
             gvActivity.DataBind();
+            if (RC.IsClusterLead(this.User))
+            {
+                GetMaxCount("Key-" + UserInfo.EmergencyCountry + UserInfo.EmergencyCluster, out maxIndCount, out maxActCount, out dateLimit);
+                if (maxIndCount <= 0 || (applyFilter && DateTime.Now > dateLimit))
+                {
+                    gvActivity.Columns[5].Visible = false;
+                    gvActivity.Columns[6].Visible = false;
+                }
+               
+            }
         }
 
         private void PopulateFilters()

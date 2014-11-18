@@ -25,12 +25,17 @@ namespace SRFROWCA.Controls
         {
             string indEn = txtInd1Eng.Text.Trim();
             string indFr = txtInd1Fr.Text.Trim();
+
+            if (string.IsNullOrEmpty(indEn) && string.IsNullOrEmpty(indFr))
+            {
+
+            }
+
             string target = txtTarget.Text.Trim();
             string unitId = ddlUnits.SelectedValue;
             
             Guid userId = RC.GetCurrentUserId;
 
-            //DBContext.Add("uspInsertIndicator", new object[] {objectiveId, indEn, indFr, target, unitId, countryId, clusterId, RC.GetCurrentUserId, null });
             DBContext.Add("uspInsertIndicator", new object[] { indEn, indFr, target, unitId, countryId, clusterId, RC.GetCurrentUserId, null , null});
         }
 

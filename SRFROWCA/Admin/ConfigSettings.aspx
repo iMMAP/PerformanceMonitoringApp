@@ -175,7 +175,7 @@
                                                                         <tr>
                                                                             <td>
                                                                                 <label>
-                                                                                    Change end date:
+                                                                                    Framework Deadline:
 
                                                                                 </label>
                                                                             </td>
@@ -188,7 +188,7 @@
                                                                         <tr>
                                                                             <td>
                                                                                 <label>
-                                                                                    No. of Indicators Framework:
+                                                                                    Number of Activity Indicators Allowed:
 
                                                                                 </label>
                                                                             </td>
@@ -198,13 +198,24 @@
                                                                         <tr>
                                                                             <td>
                                                                                 <label>
-                                                                                    No. of Cluster Indicators:
+                                                                                    Number of Activities Allowed:
+
+                                                                                </label>
+                                                                            </td>
+                                                                            <td>
+                                                                                <asp:TextBox runat="server" ID="txtNoActivitiesFramework" Width="270" onblur="return isNumeric(this.value, this)"></asp:TextBox>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <label>
+                                                                                    Number of Output Indicators Allowed:
 
                                                                                 </label>
                                                                             </td>
                                                                             <td>
                                                                                 <asp:TextBox runat="server" ID="txtNoClusterIndicators" Width="270" onblur="return isNumeric(this.value, this)"></asp:TextBox>
                                                                         </tr>
+
                                                                         <tr>
                                                                             <td>&nbsp;</td>
                                                                             <td style="padding-top: 20px;">
@@ -246,8 +257,9 @@
                                                                                     <asp:BoundField ItemStyle-Width="15%" HeaderStyle-HorizontalAlign="Center" DataField="Country" HeaderText="Country"  />
                                                                                     <asp:BoundField ItemStyle-Width="15%" HeaderStyle-HorizontalAlign="Center" DataField="Cluster" HeaderText="Cluster"  />
                                                                                     <asp:BoundField ItemStyle-Width="15%" HeaderStyle-HorizontalAlign="Center" DataField="EndDate" HeaderText="End Date"  />
-                                                                                    <asp:BoundField ItemStyle-Width="20%" HeaderStyle-HorizontalAlign="Center" DataField="NoOfFrameworkIndicators" HeaderText="Framework Indicator Count" />
-                                                                                    <asp:BoundField ItemStyle-Width="20%" HeaderStyle-HorizontalAlign="Center" DataField="NoOfClusterIndicators" HeaderText="Cluster Indicator Count" />
+                                                                                    <asp:BoundField ItemStyle-Width="10%" HeaderStyle-HorizontalAlign="Center" DataField="NoOfFrameworkIndicators" HeaderText="Framework Indicator" />
+                                                                                    <asp:BoundField ItemStyle-Width="10%" HeaderStyle-HorizontalAlign="Center" DataField="NoOfFrameworkActivities" HeaderText="Framework Activities" />
+                                                                                    <asp:BoundField ItemStyle-Width="10%" HeaderStyle-HorizontalAlign="Center" DataField="NoOfClusterIndicators" HeaderText="Output Indicator" />
                                                                                     <asp:TemplateField HeaderStyle-Width="5%" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                                                                                         <ItemTemplate>
 

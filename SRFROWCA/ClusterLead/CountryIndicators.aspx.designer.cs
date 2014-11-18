@@ -5,12 +5,21 @@
 //     Changes to this file may cause incorrect behavior and will be lost if
 //     the code is regenerated. 
 // </auto-generated>
-//------------------------------------------------------------------------------ 
+//------------------------------------------------------------------------------
 
 namespace SRFROWCA.ClusterLead {
     
     
     public partial class CountryIndicators {
+        
+        /// <summary>
+        /// locMessageForUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locMessageForUser;
         
         /// <summary>
         /// btnAddIndicator control.
@@ -49,6 +58,15 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.DropDownList ddlCluster;
         
         /// <summary>
+        /// cbIncludeRegional control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbIncludeRegional;
+        
+        /// <summary>
         /// lblCountry control.
         /// </summary>
         /// <remarks>
@@ -74,15 +92,6 @@ namespace SRFROWCA.ClusterLead {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSearch;
-        
-        /// <summary>
-        /// lblMessage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMessage;
         
         /// <summary>
         /// gvClusterIndicators control.

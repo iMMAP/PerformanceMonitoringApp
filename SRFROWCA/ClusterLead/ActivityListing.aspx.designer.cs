@@ -13,6 +13,15 @@ namespace SRFROWCA.ClusterLead {
     public partial class ActivityListing {
         
         /// <summary>
+        /// localActivityInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localActivityInfo;
+        
+        /// <summary>
         /// updMessage control.
         /// </summary>
         /// <remarks>

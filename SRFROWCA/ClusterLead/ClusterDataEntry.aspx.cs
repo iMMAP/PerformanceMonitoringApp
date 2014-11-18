@@ -20,7 +20,7 @@ namespace SRFROWCA.ClusterLead
         {
             if (!string.IsNullOrEmpty(Request.QueryString["save"])
               && Convert.ToBoolean(Request.QueryString["save"]))
-                lblMessage.Text = "Achieved data saved successfully!";
+                ShowMessage("Achieved data saved successfully!");
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -47,10 +47,6 @@ namespace SRFROWCA.ClusterLead
 
                 ddlCountry.SelectedValue = Convert.ToString(UserInfo.EmergencyCountry);
                 CountryDisplayNone = "display:none";
-                lblCountryClusterTitle.Text = "Country:";
-
-                if (!string.IsNullOrEmpty(UserInfo.CountryName))
-                    lblCountryCluster.Text = UserInfo.CountryName;
             }
             else if (RC.IsClusterLead(this.User))
             {
@@ -63,18 +59,6 @@ namespace SRFROWCA.ClusterLead
                 ddlCluster.SelectedValue = Convert.ToString(UserInfo.EmergencyCluster);
 
                 ClusterDisplayNone = "display:none";
-                lblCountryClusterTitle.Text = "Country/Cluster:";
-                
-                if (!string.IsNullOrEmpty(UserInfo.CountryName))
-                    lblCountryCluster.Text = UserInfo.CountryName + "-";
-                else
-                    lblCountryCluster.Text = "NA - ";
-
-                if (Convert.ToInt32(ddlCluster.SelectedValue) > 0)
-                    lblCountryCluster.Text += ddlCluster.SelectedItem.Text;
-                else
-                    lblCountryCluster.Text += "NA";
-
             } 
 
         }
@@ -173,7 +157,6 @@ namespace SRFROWCA.ClusterLead
         private void SaveClusterIndicatorDetails()
         {
             int clusterIndicatorID = 0;
-            int target = 0;
             string achieved = null;
             int countryId = 0;
             int clusterId = 0;
@@ -310,6 +293,11 @@ namespace SRFROWCA.ClusterLead
             ViewState["SortExpression"] = column;
 
             return sortDirection;
+        }
+
+        private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
+        {
+            RC.ShowMessage(Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
         }
     }
 }

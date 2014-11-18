@@ -134,3 +134,10 @@ border:solid 1px #4ea5cd;
 {
 padding-left:20px;
 }
+
+.alert2 {
+    border: 1px solid transparent;
+    border-radius: 4px;
+    margin-bottom: 2px;
+    padding: 3px;
+}

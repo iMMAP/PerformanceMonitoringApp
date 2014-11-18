@@ -11,35 +11,9 @@
             $(".numeric1").numeric();
         });
 
-        /*function validate() {
-            var txtObjList = document.getElementsByClassName('txtAchieved');
-            for (var i = 0; i < txtObjList.length; i++) {
-
-                if (txtObjList[i].value != '' && !isNumeric(txtObjList[i].value)) {
-                    alert('Please enter valid values!');
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        function isNumeric(myValue) {
-            var numexp = /^[0-9]+$/;
-            if (myValue.trim() != '') {
-                if (myValue.match(numexp)) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        }*/
-
     </script>
 
 </asp:Content>
-
-
 
 <asp:Content ID="cntMainClusterDataEntry" ContentPlaceHolderID="MainContent" runat="server">
     <div class="breadcrumbs" id="breadcrumbs">
@@ -48,12 +22,12 @@
         </script>
         <ul class="breadcrumb">
             <li><i class="icon-home home-icon"></i><a href="../Default.aspx">Home</a> </li>
-            <li class="active">Cluster Data Entry</li>
+            <li class="active">Output Indicator Data Entry</li>
         </ul>
 
     </div>
     <div class="page-content">
-
+    <div id="divMsg"></div>
         <table style="width: 100%">
             <tr>
                 <td>
@@ -87,11 +61,6 @@
                                                         <asp:ListItem Selected="True" Text="--- Select Cluster ---" Value="-1"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </td>
-                                                <td>
-                                                    <asp:Label runat="server" ID="lblCountryClusterTitle"></asp:Label></td>
-
-                                                <td>
-                                                    <asp:Label runat="server" ID="lblCountryCluster"></asp:Label></td>
                                             </tr>
                                             <tr>
                                                 <td>
@@ -113,22 +82,11 @@
 
 
                                             </tr>
-                                            <tr>
-                                                <td colspan="4" style="padding-top: 10px;">
-                                                    <asp:Label ID="lblMessage" runat="server"></asp:Label>
-                                                </td>
-                                            </tr>
                                         </table>
-
-
-
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
-
                     </div>
                 </td>
             </tr>

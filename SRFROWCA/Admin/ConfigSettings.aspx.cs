@@ -136,6 +136,7 @@ namespace SRFROWCA.Admin
             string cluster = string.Empty;
             string dateLimit = string.Empty;
             string frameworkCount = string.Empty;
+            string activityCount = "";
             string clusterCount = string.Empty;
 
             if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
@@ -155,6 +156,9 @@ namespace SRFROWCA.Admin
 
             if (!string.IsNullOrEmpty(txtNoIndicatorsFramework.Text.Trim()))
                 frameworkCount = txtNoIndicatorsFramework.Text.Trim();
+
+            if (!string.IsNullOrEmpty(txtNoActivitiesFramework.Text.Trim()))
+                activityCount = txtNoActivitiesFramework.Text.Trim();
 
             if (!string.IsNullOrEmpty(txtNoClusterIndicators.Text.Trim()))
                 clusterCount = txtNoClusterIndicators.Text.Trim();
@@ -193,6 +197,7 @@ namespace SRFROWCA.Admin
                 if (!configKey.Equals("Key-") &&
                     (!string.IsNullOrEmpty(dateLimit)
                     || !string.IsNullOrEmpty(frameworkCount)
+                    || !string.IsNullOrEmpty(activityCount)
                     || !string.IsNullOrEmpty(clusterCount)) &&
                     (ddlCluster.SelectedIndex > -1 || ddlCountry.SelectedIndex > -1))
                 {
@@ -232,6 +237,13 @@ namespace SRFROWCA.Admin
                     {
                         key = doc.CreateAttribute("FrameworkCount");
                         key.Value = frameworkCount;
+                        elem.SetAttributeNode(key);
+                    }
+
+                    if (!string.IsNullOrEmpty(activityCount))
+                    {
+                        key = doc.CreateAttribute("ActivityCount");
+                        key.Value = activityCount;
                         elem.SetAttributeNode(key);
                     }
 
@@ -276,6 +288,7 @@ namespace SRFROWCA.Admin
                 dtConfigSettings.Columns.Add("Cluster");
                 dtConfigSettings.Columns.Add("EndDate");
                 dtConfigSettings.Columns.Add("NoOfFrameworkIndicators");
+                dtConfigSettings.Columns.Add("NoOfFrameworkActivities");
                 dtConfigSettings.Columns.Add("NoOfClusterIndicators");
 
                 foreach (XmlNode node in settingsNode.ChildNodes)
@@ -306,6 +319,7 @@ namespace SRFROWCA.Admin
                     row["Cluster"] = node.Attributes["Cluster"] != null ? Convert.ToString(node.Attributes["Cluster"].Value) : string.Empty;
                     row["EndDate"] = node.Attributes["DateLimit"] != null ? Convert.ToString(node.Attributes["DateLimit"].Value) : string.Empty;
                     row["NoOfFrameworkIndicators"] = node.Attributes["FrameworkCount"] != null ? Convert.ToString(node.Attributes["FrameworkCount"].Value) : string.Empty;
+                    row["NoOfFrameworkActivities"] = node.Attributes["ActivityCount"] != null ? Convert.ToString(node.Attributes["ActivityCount"].Value) : string.Empty;
                     row["NoOfClusterIndicators"] = node.Attributes["ClusterCount"] != null ? Convert.ToString(node.Attributes["ClusterCount"].Value) : string.Empty;
 
                     dtConfigSettings.Rows.Add(row);
@@ -574,6 +588,10 @@ namespace SRFROWCA.Admin
                             txtDate.Text = Convert.ToString(node.Attributes["DateLimit"].Value);
                         if (node.Attributes["FrameworkCount"] != null)
                             txtNoIndicatorsFramework.Text = Convert.ToString(node.Attributes["FrameworkCount"].Value);
+
+                        if (node.Attributes["ActivityCount"] != null)
+                            txtNoActivitiesFramework.Text = Convert.ToString(node.Attributes["ActivityCount"].Value);
+
                         if (node.Attributes["ClusterCount"] != null)
                             txtNoClusterIndicators.Text = Convert.ToString(node.Attributes["ClusterCount"].Value);
 

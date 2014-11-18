@@ -19,52 +19,77 @@
         <div id="divMsg">
         </div>
         <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>
-        <div class="page-header">
-
-            <small>
-                <i class="icon-double-angle-right"></i>
-                - This template will allow you to upload the activities and indicators in bulk into ORS.
-            </small>
-
-        </div>
-        <!-- /.page-header -->
-
         <div class="row">
             <div class="col-xs-6">
                 <!-- PAGE CONTENT BEGINS -->
-                <%--<div>
-                    <label class="col-sm-3">Country: </label>
-                    <div class="col-sm-9">
-                        <asp:DropDownList ID="ddlCountry" runat="server" CssClass="width-60"></asp:DropDownList>
+
+                <div class="error-container">
+                    <div class="well">
+                        <h3 class="lighter smaller">
+                            <asp:HyperLink ID="hlTemplate" runat="server" Text="Download Framework Template" NavigateUrl="../Test/Template.xlsx"></asp:HyperLink>
+                        </h3>
+                        <hr />
+                        <h4 class="smaller">
+                            Import Framework To ORS</h4>
+
+                        <%--<div>
+
+                            <label class="col-sm-3">Country: </label>
+                            <div class="col-sm-9">
+                                <asp:DropDownList ID="ddlCountry" runat="server" CssClass="width-60"></asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="space-20"></div>
+                        <div>
+                            <label class="col-sm-3">Cluster: </label>
+                            <div class="col-sm-9">
+                                <asp:DropDownList ID="ddlCluster" runat="server" CssClass="width-60"></asp:DropDownList>
+                            </div>
+                        </div>--%>
+                            <div class="col-sm-9">
+                                <asp:FileUpload ID="fuSRP" runat="server" />
+                            </div>
+                        <div>
+                            <div>
+                                <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="btnUpload_Click" />
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="space-20"></div>  
-                <div>
-                    <label class="col-sm-3">Cluster: </label>
-                    <div class="col-sm-9">
-                        <asp:DropDownList ID="ddlCluster" runat="server" CssClass="width-60"></asp:DropDownList>
-                    </div>
-                </div>--%>
-                <div class="space-20"></div>
-                <div>
-                    <label class="col-sm-3"></label>
-                    <div class="col-sm-9">
-                        <asp:FileUpload ID="fuSRP" runat="server" />
+            </div>
+            <div class="col-xs-6">
+                <!-- PAGE CONTENT BEGINS -->
+
+                <div class="error-container">
+                    <div class="well">
+                        <h2 class="grey lighter smaller">
+                            <asp:Localize ID="localUploadHeaderText" runat="server" Text="Export Framework"></asp:Localize>
+                        </h2>
+
+                        <hr />
+                        
+                        <div>
+                            
+                            <ul class="list-unstyled spaced inline bigger-110 margin-15">
+                                <li id="liReport" runat="server">
+                                    <i class="icon-hand-right blue"></i>
+                                    <a href="../Reports/DownloadReport.aspx?type=10"><span class="menu-text"><asp:Localize ID="Localize12" runat="server" Text="Export In Word" meta:resourcekey="localReportResource1"></asp:Localize>
+                                </span></a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <hr />
+                        <div class="space"></div>
+
+                        <div class="center">
+                        </div>
+                        <div class="center">
+                        </div>
                     </div>
                 </div>
-
-                <div>
-                    <label class="col-sm-3"></label>
-
-                    <div class="col-sm-9">
-                        <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="btnUpload_Click" />
-                    </div>
-                </div>
-
+                <!-- PAGE CONTENT ENDS -->
             </div>
         </div>
-
-
     </div>
-
 </asp:Content>

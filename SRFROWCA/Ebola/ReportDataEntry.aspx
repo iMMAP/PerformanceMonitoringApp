@@ -79,14 +79,12 @@
             txtCmtArea.value = '';
         }
 
-        $(function () {
+        $(document).ready(function () {
 
             $("#<%=txtDate.ClientID%>").datepicker({
-                  numberOfMonths: 1,
-                  dateFormat: "mm-dd-yy",
-                  onSelect: function (selected) {
-                      $("#<%=txtDate.ClientID%>").datepicker("option", "minDate", selected)
-                }
+                numberOfMonths: 1,
+                  dateFormat: "mm-dd-yy"
+                  
             });
           });
 
@@ -112,8 +110,8 @@
                         city1 = value.split('_');
                         city2 = city1[1].split('-');
                         $(this).text(city2[1]);
-                        if (j % 2 === 0) {
-                            list += '<th colspan="2" style="width:100px; text-align:center;">' + city1[0] + '</th>';
+                        if (j % 1 === 0) {
+                            list += '<th style="width:100px; text-align:center;">' + city1[0] + '</th>';
                         }
                     }
                 });
@@ -183,11 +181,11 @@
                                     </div>
                                     <div class="widget-body">
                                         <div class="widget-main">
-                                             <asp:TextBox runat="server" ID="txtDate" style="text-align:left;"  Font-Size="Medium" Width="200"></asp:TextBox>
+                                             <asp:TextBox runat="server" ID="txtDate" OnTextChanged="txtDate_TextChanged" AutoPostBack="true" style="text-align:left;"  Font-Size="Medium" Width="200"></asp:TextBox>
                                             <div style="margin-top:10px;">
-                                            <asp:RadioButtonList  runat="server" ID="rblFrequency">
-                                                <asp:ListItem  Text="Daily" Enabled="false" Value="2"></asp:ListItem>
-                                                <asp:ListItem Selected="True" Text="Weekly" Value="3"></asp:ListItem>
+                                            <asp:RadioButtonList  runat="server" ID="rblFrequency" AutoPostBack="true" OnSelectedIndexChanged="rblFrequency_SelectedIndexChanged">
+                                                <asp:ListItem Selected="True" Text="Daily" Value="2"></asp:ListItem>
+                                                <asp:ListItem  Text="Weekly" Value="3"></asp:ListItem>
                                                 <asp:ListItem  Text="Monthly" Value="1"></asp:ListItem>
                                             </asp:RadioButtonList>
                                                 </div>

@@ -397,13 +397,13 @@
                                 
 
                                 <li id="liClusterFrameworkImport" runat="server"><a href="<%=BaseURL %>/ClusterLead/UploadSRP.aspx"><span class="menu-text">
-                                    <asp:Localize ID="Localize13" runat="server" Text="Import Framework"></asp:Localize>
+                                    <asp:Localize ID="Localize13" runat="server" Text="Import/Export Framework"></asp:Localize>
                                 </span></a></li>
 
-                                <li id="liReport" runat="server"><a href="<%=BaseURL %>/Reports/DownloadReport.aspx?type=10"><span class="menu-text">
+                                <%--<li id="liReport" runat="server"><a href="<%=BaseURL %>/Reports/DownloadReport.aspx?type=10"><span class="menu-text">
 
                                     <asp:Localize ID="Localize12" runat="server" Text="Export Framework" meta:resourcekey="localReportResource1"></asp:Localize>
-                                </span></a></li>
+                                </span></a></li>--%>
 
 
                             </ul>

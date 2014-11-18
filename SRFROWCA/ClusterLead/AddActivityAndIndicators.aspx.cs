@@ -62,6 +62,13 @@ namespace SRFROWCA.ClusterLead
            
         }
 
+        internal override void BindGridData()
+        {
+            PopulateClusters();
+            PopulateObjective();
+
+        }
+
         private void ShowHideControls()
         {
             if (RC.IsClusterLead(this.User))
@@ -125,7 +132,7 @@ namespace SRFROWCA.ClusterLead
         {
             UI.FillObjectives(ddlObjective);
             ddlObjective.DataSource = DBContext.GetData("GetEmergencyObjectives", new object[] {RC.SelectedSiteLanguageId,UserInfo.Emergency});
-            ddlObjective.DataTextField = "ShortObjectiveTitle";
+            ddlObjective.DataTextField = "Objective";
             ddlObjective.DataValueField = "EmergencyObjectiveId";
             ddlObjective.DataBind();
             ListItem item = new ListItem("Select Objective", "0");
