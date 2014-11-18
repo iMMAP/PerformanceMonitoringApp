@@ -18,9 +18,14 @@ namespace SRFROWCA.ClusterLead
 
         protected void Page_PreLoad(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(Request.QueryString["save"])
-              && Convert.ToBoolean(Request.QueryString["save"]))
+            string control = Utils.GetPostBackControlId(this);
+
+            //if (!string.IsNullOrEmpty(Request.QueryString["save"])
+            //  && Convert.ToBoolean(Request.QueryString["save"]))
+            if (control.Equals("btnSaveAll"))
                 lblMessage.Text = "Achieved data saved successfully!";
+            else
+                lblMessage.Text = string.Empty;
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -35,6 +40,7 @@ namespace SRFROWCA.ClusterLead
                 SetDates();
 
                 LoadClusterIndicators();
+                Session["ControlData"] = string.Empty;
             }
         }
 
@@ -64,7 +70,7 @@ namespace SRFROWCA.ClusterLead
 
                 ClusterDisplayNone = "display:none";
                 lblCountryClusterTitle.Text = "Country/Cluster:";
-                
+
                 if (!string.IsNullOrEmpty(UserInfo.CountryName))
                     lblCountryCluster.Text = UserInfo.CountryName + "-";
                 else
@@ -74,8 +80,7 @@ namespace SRFROWCA.ClusterLead
                     lblCountryCluster.Text += ddlCluster.SelectedItem.Text;
                 else
                     lblCountryCluster.Text += "NA";
-
-            } 
+            }
 
         }
 
@@ -90,6 +95,14 @@ namespace SRFROWCA.ClusterLead
             UI.FillEmergencyLocations(ddlCountry, UserInfo.Emergency, RC.SelectedSiteLanguageId);
             //UI.FillClusters(ddlCluster, RC.SelectedSiteLanguageId);
             UI.FillEmergnecyClusters(ddlCluster, RC.SelectedSiteLanguageId);
+
+            //if (!string.IsNullOrEmpty(Convert.ToString(Session["ControlData"])))
+            //{
+            //    string[] ddlValues = Convert.ToString(Session["ControlData"]).Split('|');
+                
+            //    ddlCountry.SelectedValue = ddlValues[0];
+            //    ddlCluster.SelectedValue = ddlValues[1];
+            //}
         }
 
         private void SetDates()
@@ -102,8 +115,18 @@ namespace SRFROWCA.ClusterLead
             else if (month.Equals(11))
                 month = 12;
 
-            ddlMonth.SelectedValue = month.ToString();
-            ddlYear.SelectedValue = year.ToString();
+            //if (!string.IsNullOrEmpty(Convert.ToString(Session["ControlData"])))
+            //{
+            //    string[] ddlValues = Convert.ToString(Session["ControlData"]).Split('|');
+
+            //    ddlYear.SelectedValue = ddlValues[2];
+            //    ddlMonth.SelectedValue = ddlValues[3];
+            //}
+            //else
+            {
+                ddlMonth.SelectedValue = month.ToString();
+                ddlYear.SelectedValue = year.ToString();
+            }
         }
 
         private void LoadClusterIndicators()
@@ -196,7 +219,7 @@ namespace SRFROWCA.ClusterLead
 
                     if (lblTarget != null)
                     {
-                        target = Convert.ToInt32(lblTarget.Text.Replace(".","").Replace(",","").Trim());
+                        target = Convert.ToInt32(lblTarget.Text.Replace(".", "").Replace(",", "").Trim());
                         //string siteLang = RC.SelectedSiteLanguageId.Equals(1) ? "en-US" : "de-DE";
                         //target = int.Parse(lblTarget.Text.Trim(), CultureInfo.GetCultureInfo(siteLang));
                     }
@@ -225,9 +248,10 @@ namespace SRFROWCA.ClusterLead
         protected void btnSaveAll_Click(object sender, EventArgs e)
         {
             SaveClusterIndicatorDetails();
-            //LoadClusterIndicators();
+            LoadClusterIndicators();
 
-            Response.Redirect("~/ClusterLead/ClusterDataEntry.aspx?save=true");
+            //Session["ControlData"] = ddlCountry.SelectedValue + "|" + ddlCluster.SelectedValue + "|" + ddlYear.SelectedValue + "|" + ddlMonth.SelectedValue;
+            //Response.Redirect("~/ClusterLead/ClusterDataEntry.aspx?save=true");
         }
 
         protected void ddlMonth_SelectedIndexChanged(object sender, EventArgs e)
@@ -249,7 +273,7 @@ namespace SRFROWCA.ClusterLead
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                ObjPrToolTip.RegionalIndicatorIcon(e,9);
+                ObjPrToolTip.RegionalIndicatorIcon(e, 9);
                 ObjPrToolTip.CountryIndicatorIcon(e, 10);
 
                 Label lblTarget = (Label)e.Row.FindControl("lblTarget");

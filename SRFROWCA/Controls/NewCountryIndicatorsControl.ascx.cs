@@ -25,7 +25,7 @@ namespace SRFROWCA.Controls
         {
             string indEn = txtInd1Eng.Text.Trim();
             string indFr = txtInd1Fr.Text.Trim();
-            string target = txtTarget.Text.Trim();
+            string target = decimal.Round(Convert.ToDecimal(txtTarget.Text.Trim()),0).ToString();
             string unitId = ddlUnits.SelectedValue;
             
             Guid userId = RC.GetCurrentUserId;
