@@ -250,6 +250,11 @@ namespace SRFROWCA.Common
             return DBContext.GetData("GetEmergnecyLocations", new object[] { emergencyId, languageId });
         }
 
+        internal static DataTable GetEmergencyLocations(int emergencyId, int siteLangID)
+        {
+            return DBContext.GetData("uspGetEmergencyLocations", new object[] { emergencyId, siteLangID });
+        }
+
         internal static DataTable GetLocationEmergencies(IPrincipal user)
         {
             DataTable dt = new DataTable();

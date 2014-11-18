@@ -92,7 +92,7 @@ namespace SRFROWCA.Admin
         private void LoadCombos()
         {
             //UI.FillCountry(ddlCountry);
-            UI.FillEmergencyLocations(ddlCountry, UserInfo.Emergency);
+            UI.FillEmergencyLocations(ddlCountry, UserInfo.Emergency, RC.SelectedSiteLanguageId);
             UI.FillEmergnecyClusters(ddlCluster, RC.SelectedSiteLanguageId);
             //UI.FillClusters(ddlCluster, RC.SelectedSiteLanguageId);
         }
