@@ -91,8 +91,13 @@ namespace SRFROWCA.Admin
 
         private void LoadCombos()
         {
+            int emergencyID = 0;
+
+            if (RC.IsCountryAdmin(this.User))
+                emergencyID = UserInfo.Emergency;
+
             //UI.FillCountry(ddlCountry);
-            UI.FillEmergencyLocations(ddlCountry, UserInfo.Emergency, RC.SelectedSiteLanguageId);
+            UI.FillEmergencyLocations(ddlCountry, emergencyID, RC.SelectedSiteLanguageId);
             UI.FillEmergnecyClusters(ddlCluster, RC.SelectedSiteLanguageId);
             //UI.FillClusters(ddlCluster, RC.SelectedSiteLanguageId);
         }
@@ -307,7 +312,7 @@ namespace SRFROWCA.Admin
 
                         configKey += Convert.ToString(node.Attributes["CountryID"].Value);
                     }
-                        
+
                     if (node.Attributes["ClusterID"] != null)
                         configKey += Convert.ToString(node.Attributes["ClusterID"].Value);
                     //if (node.Attributes["DateLimit"] != null)
