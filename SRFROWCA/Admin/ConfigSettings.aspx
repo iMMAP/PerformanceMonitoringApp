@@ -248,16 +248,17 @@
                                                                                 CssClass=" table-striped table-bordered table-hover">
 
                                                                                 <Columns>
-                                                                                    <asp:TemplateField ItemStyle-Width="5%" HeaderText="#">
+                                                                                    <asp:TemplateField ItemStyle-Width="2%" HeaderText="#">
                                                                                         <ItemTemplate>
                                                                                             <%# Container.DataItemIndex + 1 %>
                                                                                         </ItemTemplate>
                                                                                     </asp:TemplateField>
-                                                                                    <asp:BoundField ItemStyle-Width="15%" HeaderStyle-HorizontalAlign="Center" DataField="Country" HeaderText="Country"  />
-                                                                                    <asp:BoundField ItemStyle-Width="15%" HeaderStyle-HorizontalAlign="Center" DataField="Cluster" HeaderText="Cluster"  />
-                                                                                    <asp:BoundField ItemStyle-Width="15%" HeaderStyle-HorizontalAlign="Center" DataField="EndDate" HeaderText="End Date"  />
-                                                                                    <asp:BoundField ItemStyle-Width="20%" HeaderStyle-HorizontalAlign="Center" DataField="NoOfFrameworkIndicators" HeaderText="Framework Indicator Count" />
-                                                                                    <asp:BoundField ItemStyle-Width="20%" HeaderStyle-HorizontalAlign="Center" DataField="NoOfClusterIndicators" HeaderText="Cluster Indicator Count" />
+                                                                                    <asp:BoundField ItemStyle-Width="10%" HeaderStyle-HorizontalAlign="Center" DataField="Country" HeaderText="Country"  />
+                                                                                    <asp:BoundField ItemStyle-Width="10%" HeaderStyle-HorizontalAlign="Center" DataField="Cluster" HeaderText="Cluster"  />
+                                                                                    <asp:BoundField ItemStyle-Width="10%" HeaderStyle-HorizontalAlign="Center" DataField="EndDate" HeaderText="End Date"  />
+                                                                                    <asp:BoundField ItemStyle-Width="18%" HeaderStyle-HorizontalAlign="Center" DataField="NoOfFrameworkIndicators" HeaderText="Activity Indicators Allowed" />
+                                                                                    <asp:BoundField ItemStyle-Width="18%" HeaderStyle-HorizontalAlign="Center" DataField="NoOfClusterIndicators" HeaderText="Output Indicators Allowed" />
+                                                                                    <asp:BoundField ItemStyle-Width="20%" HeaderStyle-HorizontalAlign="Center" DataField="NoOfIndicatorsNotAllowed" HeaderText="Activity Indicators Not Allowed" />
                                                                                     <asp:TemplateField HeaderStyle-Width="5%" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                                                                                         <ItemTemplate>
 

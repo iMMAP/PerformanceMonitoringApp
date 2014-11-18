@@ -594,7 +594,7 @@ namespace SRFROWCA.Admin
                         if (node.Attributes["ClusterCount"] != null)
                             txtNoClusterIndicators.Text = Convert.ToString(node.Attributes["ClusterCount"].Value);
                         if (node.Attributes["FrameworkNotAllowedCount"] != null)
-                            txtNoIndicatorsNotAllowed.Text = Convert.ToString(node.Attributes["NoOfIndicatorsNotAllowed"].Value);
+                            txtNoIndicatorsNotAllowed.Text = Convert.ToString(node.Attributes["FrameworkNotAllowedCount"].Value);
 
                         break;
                     }
