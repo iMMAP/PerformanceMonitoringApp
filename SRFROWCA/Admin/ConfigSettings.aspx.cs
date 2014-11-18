@@ -91,8 +91,10 @@ namespace SRFROWCA.Admin
 
         private void LoadCombos()
         {
-            UI.FillCountry(ddlCountry);
-            UI.FillClusters(ddlCluster, RC.SelectedSiteLanguageId);
+            //UI.FillCountry(ddlCountry);
+            UI.FillEmergencyLocations(ddlCountry, UserInfo.Emergency);
+            UI.FillEmergnecyClusters(ddlCluster, RC.SelectedSiteLanguageId);
+            //UI.FillClusters(ddlCluster, RC.SelectedSiteLanguageId);
         }
 
         private void SetKeySettings()
@@ -137,6 +139,7 @@ namespace SRFROWCA.Admin
             string dateLimit = string.Empty;
             string frameworkCount = string.Empty;
             string clusterCount = string.Empty;
+            string indicatorsNotAllowed = string.Empty;
 
             if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
             {
@@ -158,6 +161,10 @@ namespace SRFROWCA.Admin
 
             if (!string.IsNullOrEmpty(txtNoClusterIndicators.Text.Trim()))
                 clusterCount = txtNoClusterIndicators.Text.Trim();
+
+            if (!string.IsNullOrEmpty(txtNoIndicatorsNotAllowed.Text.Trim()))
+                indicatorsNotAllowed = txtNoClusterIndicators.Text.Trim();
+
 
             string configKey = "Key-" + countryID + clusterID;// +dateLimit.Replace("-", string.Empty) + frameworkCount + clusterCount;
             XmlNode settingsNode = doc.DocumentElement;
@@ -242,6 +249,13 @@ namespace SRFROWCA.Admin
                         elem.SetAttributeNode(key);
                     }
 
+                    if (!string.IsNullOrEmpty(indicatorsNotAllowed))
+                    {
+                        key = doc.CreateAttribute("FrameworkNotAllowedCount");
+                        key.Value = clusterCount;
+                        elem.SetAttributeNode(key);
+                    }
+
                     doc.DocumentElement.AppendChild(elem);
                     doc.Save(PATH);
 
@@ -277,6 +291,8 @@ namespace SRFROWCA.Admin
                 dtConfigSettings.Columns.Add("EndDate");
                 dtConfigSettings.Columns.Add("NoOfFrameworkIndicators");
                 dtConfigSettings.Columns.Add("NoOfClusterIndicators");
+                dtConfigSettings.Columns.Add("NoOfIndicatorsNotAllowed");
+
 
                 foreach (XmlNode node in settingsNode.ChildNodes)
                 {
@@ -307,6 +323,7 @@ namespace SRFROWCA.Admin
                     row["EndDate"] = node.Attributes["DateLimit"] != null ? Convert.ToString(node.Attributes["DateLimit"].Value) : string.Empty;
                     row["NoOfFrameworkIndicators"] = node.Attributes["FrameworkCount"] != null ? Convert.ToString(node.Attributes["FrameworkCount"].Value) : string.Empty;
                     row["NoOfClusterIndicators"] = node.Attributes["ClusterCount"] != null ? Convert.ToString(node.Attributes["ClusterCount"].Value) : string.Empty;
+                    row["NoOfIndicatorsNotAllowed"] = node.Attributes["FrameworkNotAllowedCount"] != null ? Convert.ToString(node.Attributes["FrameworkNotAllowedCount"].Value) : string.Empty;
 
                     dtConfigSettings.Rows.Add(row);
                 }
@@ -576,6 +593,8 @@ namespace SRFROWCA.Admin
                             txtNoIndicatorsFramework.Text = Convert.ToString(node.Attributes["FrameworkCount"].Value);
                         if (node.Attributes["ClusterCount"] != null)
                             txtNoClusterIndicators.Text = Convert.ToString(node.Attributes["ClusterCount"].Value);
+                        if (node.Attributes["FrameworkNotAllowedCount"] != null)
+                            txtNoIndicatorsNotAllowed.Text = Convert.ToString(node.Attributes["NoOfIndicatorsNotAllowed"].Value);
 
                         break;
                     }

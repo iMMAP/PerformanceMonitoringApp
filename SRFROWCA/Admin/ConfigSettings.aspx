@@ -148,7 +148,7 @@
                                                                 <div class="row">
                                                                     <table style="width: 85%; margin: 10px 10px 10px 20px" border="0">
                                                                         <tr style="<%=showCountry%>">
-                                                                            <td style="width: 30%">
+                                                                            <td style="width: 40%">
                                                                                 <asp:Label ID="lblCountry" runat="server" Text="Country:"></asp:Label>
                                                                             </td>
                                                                             <td>
@@ -183,7 +183,7 @@
                                                                                 <asp:TextBox runat="server" ID="txtDate" Width="270"></asp:TextBox>
                                                                             </td>
                                                                             <td style="padding-right: 15px;">
-                                                                                <asp:Button runat="server" Visible="false" ID="btnAdd" Text="Add >>" OnClick="btnAdd_Click" CssClass="btn-primary" />
+                                                                                <asp:Button runat="server" Visible="false" ID="btnAdd" Text="Add >>" OnClick="btnAdd_Click" CssClass="btn-primary" /></td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>
@@ -193,7 +193,7 @@
                                                                                 </label>
                                                                             </td>
                                                                             <td>
-                                                                                <asp:TextBox runat="server" ID="txtNoIndicatorsFramework" Width="270" onblur="return isNumeric(this.value, this)"></asp:TextBox>
+                                                                                <asp:TextBox runat="server" ID="txtNoIndicatorsFramework" Width="270" onblur="return isNumeric(this.value, this)"></asp:TextBox></td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>
@@ -203,7 +203,17 @@
                                                                                 </label>
                                                                             </td>
                                                                             <td>
-                                                                                <asp:TextBox runat="server" ID="txtNoClusterIndicators" Width="270" onblur="return isNumeric(this.value, this)"></asp:TextBox>
+                                                                                <asp:TextBox runat="server" ID="txtNoClusterIndicators" Width="270" onblur="return isNumeric(this.value, this)"></asp:TextBox></td>
+                                                                        </tr>
+                                                                         <tr>
+                                                                            <td>
+                                                                                <label>
+                                                                                    Number of Activity Indicators Not Allowed:
+
+                                                                                </label>
+                                                                            </td>
+                                                                            <td>
+                                                                                <asp:TextBox runat="server" ID="txtNoIndicatorsNotAllowed" Width="270" onblur="return isNumeric(this.value, this)"></asp:TextBox></td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>&nbsp;</td>

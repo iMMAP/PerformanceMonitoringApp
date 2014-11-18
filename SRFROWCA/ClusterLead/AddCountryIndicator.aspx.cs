@@ -136,8 +136,10 @@ namespace SRFROWCA.ClusterLead
             ddlObjective.DataSource = DBContext.GetData("GetObjectives", new object[] { RC.SelectedSiteLanguageId, null });
             ddlObjective.DataBind();*/
 
-            UI.FillCountry(ddlCountry);
-            UI.FillClusters(ddlCluster, RC.SelectedSiteLanguageId);
+            //UI.FillCountry(ddlCountry);
+            UI.FillEmergencyLocations(ddlCountry, UserInfo.Emergency);
+            //UI.FillClusters(ddlCluster, RC.SelectedSiteLanguageId);
+            UI.FillEmergnecyClusters(ddlCluster, RC.SelectedSiteLanguageId);
         }
 
         public int IndControlId

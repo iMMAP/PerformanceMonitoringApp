@@ -88,8 +88,10 @@ namespace SRFROWCA.ClusterLead
 
         private void LoadCombos()
         {
-            UI.FillCountry(ddlCountry);
-            UI.FillClusters(ddlCluster, RC.SelectedSiteLanguageId);
+            //UI.FillCountry(ddlCountry);
+            UI.FillEmergencyLocations(ddlCountry, UserInfo.Emergency);
+            //UI.FillClusters(ddlCluster, RC.SelectedSiteLanguageId);
+            UI.FillEmergnecyClusters(ddlCluster, RC.SelectedSiteLanguageId);
             UI.FillUnits(ddlUnits);
         }
 
