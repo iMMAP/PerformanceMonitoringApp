@@ -228,7 +228,7 @@ namespace SRFROWCA.Common
 
         internal static void FillEmergencyLocations(ListControl ctl, int emergencyId, int siteLangID)
         {
-            DataTable dt = RC.GetLocationEmergencies(emergencyId);
+            DataTable dt = RC.GetEmergencyLocations(emergencyId, siteLangID);
             ctl.DataTextField = "EmergencyLocationId";
             ctl.DataValueField = "LocationName";
             ctl.DataSource = dt;
