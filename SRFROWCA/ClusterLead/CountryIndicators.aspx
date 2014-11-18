@@ -52,6 +52,10 @@
                             <div class="widget-box">
                                 <div class="widget-header widget-header-small header-color-blue2">
                                     <h6>
+                                         <button runat="server" id="btnExportToExcel" onserverclick="btnExportToExcel_ServerClick" class="btn btn-yellow" causesvalidation="false"
+                                            title="Excel">
+                                            <i class="icon-download"></i>Excel
+                                        </button>
 
                                         <asp:Button ID="btnAddIndicator" runat="server" OnClick="btnAddIndicator_Click" Text="Add Indicator" CausesValidation="false"
                                             CssClass="btn btn-yellow pull-right" />

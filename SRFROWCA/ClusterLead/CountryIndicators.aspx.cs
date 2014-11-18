@@ -394,5 +394,57 @@ namespace SRFROWCA.ClusterLead
                 DBContext.Add("uspInsertIndicator", new object[] { indicatorEng, indicatorFr, target, unitID, null, null, RC.GetCurrentUserId, null, Convert.ToInt32(hfClusterIndicatorID.Value) });
         }
 
+        protected void btnExportToExcel_ServerClick(object sender, EventArgs e)
+        {
+            GridView gvExport = new GridView();
+
+            //string objective = null;
+            string indicator = null;
+            int? countryID = null;
+            int? clusterID = null;
+
+            if (!string.IsNullOrEmpty(CountryID))
+                countryID = Convert.ToInt32(CountryID);
+
+            if (!string.IsNullOrEmpty(ClusterID))
+                clusterID = Convert.ToInt32(ClusterID);
+
+            //if (!string.IsNullOrEmpty(txtObjectiveName.Text.Trim()))
+            //    objective = txtObjectiveName.Text;
+
+            if (!string.IsNullOrEmpty(txtIndicatorName.Text.Trim()))
+                indicator = txtIndicatorName.Text;
+
+            if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
+                countryID = Convert.ToInt32(ddlCountry.SelectedValue);
+
+            if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
+                clusterID = Convert.ToInt32(ddlCluster.SelectedValue);
+
+            DataTable dt = GetClusterIndicatros(clusterID, countryID, indicator);
+
+            RemoveColumnsFromDataTable(dt);
+            gvExport.DataSource = dt;
+            gvExport.DataBind();
+
+            string fileName = "ClusterIndicators";
+            string fileExtention = ".xls";
+            ExportUtility.ExportGridView(gvExport, fileName, fileExtention, Response);
+        }
+
+        private void RemoveColumnsFromDataTable(DataTable dt)
+        {
+            try
+            {
+                dt.Columns.Remove("ClusterIndicatorId");
+                dt.Columns.Remove("SiteLanguageId");
+                dt.Columns.Remove("IndicatorAlt");
+                dt.Columns.Remove("CountryID");
+                dt.Columns.Remove("ClusterId");
+                dt.Columns.Remove("UnitId");
+                
+            }
+            catch { }
+        }
     }
 }
