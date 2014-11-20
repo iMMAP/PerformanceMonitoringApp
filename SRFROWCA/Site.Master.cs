@@ -34,6 +34,24 @@ namespace SRFROWCA
                     }
                 }
             }
+
+            if (Session["SelectedEmergencyId"] == null)
+            {
+                if (Request.Cookies["SelectedEmergencyId"] != null)
+                {
+                    string emergencyId = Request.Cookies["SelectedEmergencyId"].Value;
+                    int emgId = 0;
+                    int.TryParse(emergencyId, out emgId);
+                    if (emgId > 0)
+                    {
+                        RC.SelectedEmergencyId = emgId;
+                    }
+                    else
+                    {
+                        RC.SelectedSiteLanguageId = 0;
+                    }
+                }
+            }
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -41,6 +59,8 @@ namespace SRFROWCA
             SetUserName();
             HideAllAuthenticatedMenues();
             LoadNotifications();
+
+            
 
             if (!IsPostBack)
                 LoadEmergencies();
@@ -54,6 +74,8 @@ namespace SRFROWCA
             //dt.Rows.Add(new object[] { "Some One", "New ORS project Added", DateTime.Now.AddDays(3) });
             ////rptMessages.DataSource = dt;
             ////rptMessages.DataBind();
+
+
 
             if (HttpContext.Current.User.Identity.IsAuthenticated)
             {
@@ -105,6 +127,12 @@ namespace SRFROWCA
             }
 
             ActiveMenueItem();
+
+            if (RC.SelectedEmergencyId == 2)
+            {
+                //HideAllAuthenticatedMenues();
+                menuDataEntry.Attributes["href"] = "~/Ebola/ReportDataEntry.aspx";
+            }
         }
 
         private void SetCurrentEmergency()
@@ -751,9 +779,19 @@ namespace SRFROWCA
             if (e.CommandName == "LinkClick")
             {
                 int emergencyID = Convert.ToInt32(e.CommandArgument);
+                //Session["MenueEmergencyId"] = emergencyID;
+                Response.Cookies["SelectedEmergencyId"].Value = emergencyID.ToString();
+                Response.Cookies["SelectedEmergencyId"].Expires = DateTime.Now.AddDays(365);
 
                 if (HttpContext.Current.User.Identity.IsAuthenticated)
-                    DBContext.Update("uspUpdateUserEmergency", new object[] { emergencyID, RC.GetCurrentUserId , null});
+                    DBContext.Update("uspUpdateUserEmergency", new object[] { emergencyID, RC.GetCurrentUserId, null });
+
+                if (emergencyID == 2)
+                {
+                    HideAllAuthenticatedMenues();
+                }
+
+                Session["SelectedEmergencyId"] = null;
             }
         }
 

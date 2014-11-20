@@ -184,6 +184,24 @@ namespace SRFROWCA.Common
             }
         }
 
+        internal static int SelectedEmergencyId
+        {
+            get
+            {
+                if (HttpContext.Current.Session["SelectedEmergencyId"] != null)
+                {
+                    return Convert.ToInt32(HttpContext.Current.Session["SelectedEmergencyId"]);
+                }
+
+                return 1;
+            }
+
+            set
+            {
+                HttpContext.Current.Session["SelectedEmergencyId"] = value;
+            }
+        }
+
         internal static string SiteCulture
         {
             get

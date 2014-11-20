@@ -416,6 +416,11 @@
     <Content Include="ContactUs\ContactUsControl.ascx" />
     <Content Include="Controls\FilterCriteria.ascx" />
     <Content Include="DeleteThisPlease.html" />
+    <Content Include="Ebola\AllData.aspx" />
+    <Content Include="Ebola\CreateProject.aspx" />
+    <Content Include="Ebola\Default.aspx" />
+    <Content Include="Ebola\Login.aspx" />
+    <Content Include="Ebola\ManageActivities.aspx" />
     <Content Include="Ebola\ReportDataEntry.aspx" />
     <Content Include="ErrorPages\DefaultRedirectErrorPage.aspx" />
     <Content Include="ErrorPages\GenericErrorPage.aspx" />
@@ -482,6 +487,7 @@
     <None Include="assets\font\fontawesome-webfontf77b.eot" />
     <None Include="assets\font\fontawesome-webfontf77b.ttf" />
     <None Include="assets\font\fontawesome-webfontf77b.woff" />
+    <Content Include="Ebola\Ebola.Master" />
     <None Include="HelpFiles\HelpDocs\HelpEng\1_ORS_description_EN_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpEng\2_ORS_Resgistration_EN_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpEng\3_ORS_Role_EN_v3.pdf" />
@@ -1110,6 +1116,48 @@
       <DependentUpon>FilterCriteria.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\PagingGridView.cs" />
+    <Compile Include="Ebola\AllData.aspx.cs">
+      <DependentUpon>AllData.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ebola\AllData.aspx.designer.cs">
+      <DependentUpon>AllData.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ebola\CreateProject.aspx.cs">
+      <DependentUpon>CreateProject.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ebola\CreateProject.aspx.designer.cs">
+      <DependentUpon>CreateProject.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ebola\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ebola\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ebola\Ebola.Master.cs">
+      <DependentUpon>Ebola.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ebola\Ebola.Master.designer.cs">
+      <DependentUpon>Ebola.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Ebola\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ebola\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ebola\ManageActivities.aspx.cs">
+      <DependentUpon>ManageActivities.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ebola\ManageActivities.aspx.designer.cs">
+      <DependentUpon>ManageActivities.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Ebola\ReportDataEntry.aspx.cs">
       <DependentUpon>ReportDataEntry.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

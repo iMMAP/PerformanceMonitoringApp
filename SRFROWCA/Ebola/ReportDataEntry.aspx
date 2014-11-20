@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true"  MasterPageFile="~/Site.Master" EnableEventValidation="false" CodeBehind="ReportDataEntry.aspx.cs" Inherits="SRFROWCA.Ebola.ReportDataEntry" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true"  MasterPageFile="~/Ebola/Ebola.Master" EnableEventValidation="false" CodeBehind="ReportDataEntry.aspx.cs" Inherits="SRFROWCA.Ebola.ReportDataEntry" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Src="../Controls/ReportedIndicatorComments.ascx" TagName="ReportedIndicatorComments" TagPrefix="uc1" %>
@@ -181,9 +181,9 @@
                                     </div>
                                     <div class="widget-body">
                                         <div class="widget-main">
-                                             <asp:TextBox runat="server" ID="txtDate" OnTextChanged="txtDate_TextChanged" AutoPostBack="true" style="text-align:left;"  Font-Size="Medium" Width="200"></asp:TextBox>
+                                             <asp:TextBox runat="server" ID="txtDate" OnTextChanged="txtDate_TextChanged" AutoPostBack="true" style="text-align:left;"  Font-Size="Medium" Width="200" onchange="needToConfirm = false;"></asp:TextBox>
                                             <div style="margin-top:10px;">
-                                            <asp:RadioButtonList  runat="server" ID="rblFrequency" AutoPostBack="true" OnSelectedIndexChanged="rblFrequency_SelectedIndexChanged">
+                                            <asp:RadioButtonList  runat="server" ID="rblFrequency" AutoPostBack="true" OnSelectedIndexChanged="rblFrequency_SelectedIndexChanged" onchange="needToConfirm = false;">
                                                 <asp:ListItem Selected="True" Text="Daily" Value="2"></asp:ListItem>
                                                 <asp:ListItem  Text="Weekly" Value="3"></asp:ListItem>
                                                 <asp:ListItem  Text="Monthly" Value="1"></asp:ListItem>

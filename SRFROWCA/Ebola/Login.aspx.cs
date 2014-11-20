@@ -5,7 +5,7 @@ using System.Web.UI.WebControls;
 using BusinessLogic;
 using SRFROWCA.Common;
 
-namespace SRFROWCA.Account
+namespace SRFROWCA.Ebola
 {
     public partial class Login : BasePage
     {
@@ -29,17 +29,17 @@ namespace SRFROWCA.Account
 
         protected void LoginUser_LoggedIn(Object sender, EventArgs e)
         {
-            DataTable dt = DBContext.GetData("GetUserEmergency", new object[] { LoginUser.UserName });
-            string emergencyId = "";
-            if (dt.Rows.Count > 0)
-            {
-                emergencyId = dt.Rows[0]["EmergencyId"].ToString();
-            }
+            //DataTable dt = DBContext.GetData("GetUserEmergency", new object[] { LoginUser.UserName });
+            //string emergencyId = "";
+            //if (dt.Rows.Count > 0)
+            //{
+            //    emergencyId = dt.Rows[0]["EmergencyId"].ToString();
+            //}
 
-            if (Roles.IsUserInRole(LoginUser.UserName, "User") && emergencyId == "2")
-            {
-                Response.Redirect("~/Ebola/ReportDataEntry.aspx");
-            }
+            //if (Roles.IsUserInRole(LoginUser.UserName, "User") && emergencyId == "2")
+            //{
+            //    Response.Redirect("~/Ebola/ReportDataEntry.aspx");
+            //}
             
             if (Roles.IsUserInRole(LoginUser.UserName, "ClusterLead"))
             {
@@ -48,7 +48,7 @@ namespace SRFROWCA.Account
 
             if (Roles.IsUserInRole(LoginUser.UserName, "User"))
             {
-                Response.Redirect("~/Pages/AddActivities.aspx");
+                Response.Redirect("~/Ebola/ReportDataEntry.aspx");
             }
         }
 
