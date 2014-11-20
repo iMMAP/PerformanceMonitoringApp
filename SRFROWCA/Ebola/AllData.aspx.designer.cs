@@ -40,6 +40,15 @@ namespace SRFROWCA.Ebola {
         protected global::System.Web.UI.HtmlControls.HtmlButton btnExportToExcel;
         
         /// <summary>
+        /// ddlObjectives control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Saplin.Controls.DropDownCheckBoxes ddlObjectives;
+        
+        /// <summary>
         /// ddlActivities control.
         /// </summary>
         /// <remarks>
@@ -56,6 +65,42 @@ namespace SRFROWCA.Ebola {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Saplin.Controls.DropDownCheckBoxes ddlIndicators;
+        
+        /// <summary>
+        /// ltrlValidated control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltrlValidated;
+        
+        /// <summary>
+        /// cbValidated control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbValidated;
+        
+        /// <summary>
+        /// cbNotValidated control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbNotValidated;
+        
+        /// <summary>
+        /// cbAggregated control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbAggregated;
         
         /// <summary>
         /// ddlOrganizations control.
@@ -85,15 +130,6 @@ namespace SRFROWCA.Ebola {
         protected global::Saplin.Controls.DropDownCheckBoxes ddlProjects;
         
         /// <summary>
-        /// ddlMonth control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Saplin.Controls.DropDownCheckBoxes ddlMonth;
-        
-        /// <summary>
         /// txtFromDate control.
         /// </summary>
         /// <remarks>
@@ -110,33 +146,6 @@ namespace SRFROWCA.Ebola {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtToDate;
-        
-        /// <summary>
-        /// ltrlValidated control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltrlValidated;
-        
-        /// <summary>
-        /// cbValidated control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox cbValidated;
-        
-        /// <summary>
-        /// cbNotValidated control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox cbNotValidated;
         
         /// <summary>
         /// ddlCountry control.

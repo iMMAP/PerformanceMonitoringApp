@@ -184,33 +184,6 @@ namespace SRFROWCA.Ebola {
         protected global::System.Web.UI.WebControls.Localize localRegister;
         
         /// <summary>
-        /// liDashboards control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liDashboards;
-        
-        /// <summary>
-        /// menueDashboards control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueDashboards;
-        
-        /// <summary>
-        /// localDashboard control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localDashboard;
-        
-        /// <summary>
         /// liDefault control.
         /// </summary>
         /// <remarks>

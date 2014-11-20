@@ -1,5 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Ebola/Ebola.Master" AutoEventWireup="true"
-    CodeBehind="AllData.aspx.cs" Inherits="SRFROWCA.Ebola.AllData" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Ebola/Ebola.Master" CodeBehind="AllData.aspx.cs" Inherits="SRFROWCA.Ebola.AllData" %>
+
 
 <asp:Content ID="headContent" ContentPlaceHolderID="HeadContent" runat="server">
     <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
@@ -102,9 +102,19 @@
                                                                     <div class="widget-body">
                                                                         <div class="widget-main padding-6">
                                                                             <table class="width-100">
-                                                                                
-                                                                                
-                                                                                
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <span>Objectives</span>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <cc:DropDownCheckBoxes ID="ddlObjectives" runat="server" CssClass="ddlWidth" AutoPostBack="true"
+                                                                                            OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged" AddJQueryReference="True"
+                                                                                            meta:resourcekey="checkBoxes2Resource1" UseButtons="False" UseSelectAllNode="True">
+                                                                                            <Style SelectBoxWidth="" DropDownBoxBoxWidth="100%" DropDownBoxBoxHeight=""></Style>
+                                                                                            <Texts SelectBoxCaption="Select Objective" />
+                                                                                        </cc:DropDownCheckBoxes>
+                                                                                    </td>
+                                                                                </tr>
                                                                                 <tr>
                                                                                     <td>
                                                                                         <span>Activities:</span>
@@ -129,6 +139,26 @@
                                                                                             <Style SelectBoxWidth="" DropDownBoxBoxWidth="300%" DropDownBoxBoxHeight=""></Style>
                                                                                             <Texts SelectBoxCaption="Select Indicator" />
                                                                                         </cc:DropDownCheckBoxes>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                 <tr>
+                                                                                    <td>
+                                                                                        <asp:Literal ID="ltrlValidated" runat="server" Text="Reported Data:"></asp:Literal>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <span>
+                                                                                            <asp:CheckBox ID="cbValidated" runat="server" Text="Validated" />
+                                                                                            <asp:CheckBox ID="cbNotValidated" runat="server" Text="Not Validated" /></span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <span>
+                                                                                            <asp:CheckBox ID="cbAggregated" runat="server" Text="Aggregated" />
+                                                                                            </span>
                                                                                     </td>
                                                                                 </tr>
                                                                             </table>
@@ -157,30 +187,18 @@
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td>
-                                                                                        <span>Projects:</span>
+                                                                                        <span>Interventions:</span>
                                                                                     </td>
                                                                                     <td>
                                                                                         <cc:DropDownCheckBoxes ID="ddlProjects" runat="server" CssClass="ddlWidth" AutoPostBack="true"
                                                                                             OnSelectedIndexChanged="ddlProjects_SelectedIndexChanged" AddJQueryReference="True" meta:resourcekey="checkBoxes2Resource1"
                                                                                             UseButtons="False" UseSelectAllNode="True">
                                                                                             <Style SelectBoxWidth="" DropDownBoxBoxWidth="100%" DropDownBoxBoxHeight="400%"></Style>
-                                                                                            <Texts SelectBoxCaption="Select Project" />
+                                                                                            <Texts SelectBoxCaption="Select Interventions" />
                                                                                         </cc:DropDownCheckBoxes>
                                                                                     </td>
                                                                                 </tr>
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        <span>Month:</span>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <cc:DropDownCheckBoxes ID="ddlMonth" runat="server" OnSelectedIndexChanged="ddl_SelectedIndexChanged"
-                                                                                            AutoPostBack="true" AddJQueryReference="True" meta:resourcekey="checkBoxes2Resource1"
-                                                                                            UseButtons="False" UseSelectAllNode="True">
-                                                                                            <Style SelectBoxWidth="120px" DropDownBoxBoxWidth="200%" DropDownBoxBoxHeight="200px"></Style>
-                                                                                            <Texts SelectBoxCaption="Select Month" />
-                                                                                        </cc:DropDownCheckBoxes>
-                                                                                    </td>
-                                                                                </tr>
+                                                                               
                                                                                 <tr>
                                                                                     <td>
                                                                                         <span>From:</span>
@@ -197,16 +215,7 @@
                                                                                         <asp:TextBox ID="txtToDate" runat="server" Width="100px"></asp:TextBox><span>(mm/dd/yyyy)</span>
                                                                                     </td>
                                                                                 </tr>
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        <asp:Literal ID="ltrlValidated" runat="server" Text="Reported Data:"></asp:Literal>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <span>
-                                                                                            <asp:CheckBox ID="cbValidated" runat="server" Text="Validated" />
-                                                                                            <asp:CheckBox ID="cbNotValidated" runat="server" Text="Not Validated" /></span>
-                                                                                    </td>
-                                                                                </tr>
+                                                                               
                                                                             </table>
                                                                         </div>
                                                                     </div>
@@ -257,7 +266,7 @@
                                                                                         </cc:DropDownCheckBoxes>
                                                                                     </td>
                                                                                 </tr>
-                                                                               
+                                                                                
                                                                                 <tr>
                                                                                     <td></td>
                                                                                     <td>
@@ -283,7 +292,7 @@
                     </tr>
                 </table>
 
-                <%--<div class="col-xs-12 col-sm-12">--%>
+                
                 <div class="widget-box">
                     <div class="widget-header widget-header-small header-color-blue2">
                         <h6>Search Criteria
@@ -311,22 +320,24 @@
                             <PagerStyle BackColor="#efefef" ForeColor="DarkSlateBlue" HorizontalAlign="Center" />
 
                             <Columns>
-                                
+                                <%--<asp:BoundField DataField="Cluster" HeaderText="Cluster" SortExpression="Cluster" />--%>
                                 <asp:BoundField DataField="Organization" HeaderText="Organization" SortExpression="Organization" />
-                                <asp:BoundField DataField="ProjectCode" HeaderText="Project" SortExpression="ProjectCode" />
+                                <asp:BoundField DataField="ProjectCode" HeaderText="Intervention" SortExpression="ProjectCode" />
 
-                                <asp:BoundField DataField="ReportDate" HeaderText="Date" SortExpression="ReportDate" />
-                                <asp:BoundField DataField="ReportFrequency" HeaderText="Frequency" SortExpression="ReportFrequency" />
-                                
+                                <%--<asp:BoundField DataField="Month" HeaderText="Month" SortExpression="Month" />--%>
+                                <asp:BoundField DataField="Objective" HeaderText="Objective" SortExpression="Objective" />
+                                <%--<asp:BoundField DataField="Priority" HeaderText="Priority" SortExpression="Priority" />--%>
                                 <asp:BoundField DataField="Activity" HeaderText="Activity" SortExpression="Activity" />
                                 <asp:BoundField DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator" />
                                 <asp:BoundField DataField="Accumulative" HeaderText="Accum" SortExpression="Accumulative"
                                     ItemStyle-HorizontalAlign="Right" />
                                 <asp:BoundField DataField="Country" HeaderText="Country" SortExpression="Country" />
                                 <asp:BoundField DataField="Admin1" HeaderText="Admin1" SortExpression="Admin1" />
-                                <asp:BoundField DataField="Admin2" HeaderText="Admin2" SortExpression="Admin2" />
-                                <asp:BoundField DataField="Achieved" HeaderText="Variable" SortExpression="Achieved"
+                                
+                                <asp:BoundField DataField="Variable" HeaderText="Variable" SortExpression="Variable"
                                     ItemStyle-HorizontalAlign="Right" />
+                              <%--  <asp:BoundField DataField="Achieved" HeaderText="Monthly Achieved" SortExpression="Achieved"
+                                    ItemStyle-HorizontalAlign="Right" />--%>
                                 <asp:TemplateField HeaderText="Cmt">
                                    
                                     <ItemTemplate>

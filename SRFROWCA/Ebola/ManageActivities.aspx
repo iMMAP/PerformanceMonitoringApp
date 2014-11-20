@@ -44,7 +44,7 @@
             <li><i class="icon-home home-icon"></i><a href="../Default.aspx">
                 <asp:Localize ID="localBreadCrumbHome" runat="server" Text="Home" meta:resourcekey="localBreadCrumbHomeResource1"></asp:Localize></a> </li>
             <li class="active">
-                <asp:Localize ID="localBreadCrumbManageProjectActiviites" runat="server" Text="Manage Project Activities" meta:resourcekey="localBreadCrumbManageProjectActiviitesResource1"></asp:Localize></li>
+                <asp:Localize ID="localBreadCrumbManageProjectActiviites" runat="server" Text="Manage Intervention Indicators" ></asp:Localize></li>
         </ul>
         <!-- .breadcrumb -->
     </div>
@@ -61,7 +61,7 @@
                                     <div class="widget-header widget-header-small header-color-blue2">
                                         <h5>
                                             <asp:Localize ID="lzeLgndProjects" runat="server"
-                                                Text="Projects" meta:resourcekey="lzeLgndProjectsResource1"></asp:Localize>
+                                                Text="Interventions"></asp:Localize>
                                         </h5>
                                         <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
                                     </div>
@@ -93,7 +93,7 @@
                                 </div>
                            <%-- </div>
                             <div class="col-sm-14 widget-container-span">--%>
-                                <div class="widget-box">
+                                <div class="widget-box hidden">
                                     <div class="widget-header widget-header-small header-color-blue2">
                                         <h5>
                                             <asp:Localize ID="lzeLgndHumPriorities" runat="server"
@@ -117,7 +117,7 @@
                <%-- <div class="widget-box">--%>
                     <div class="widget-header widget-header-small header-color-blue2">
                         <h4>
-                            <asp:Localize ID="local" runat="server" Text="Master List Of Cluster Indicators" meta:resourcekey="localResource1"></asp:Localize>
+                            <asp:Localize ID="local" runat="server" Text="Indicators"></asp:Localize>
                         </h4>
                         <button id="btnSave" runat="server" onserverclick="btnSave_Click" onclick="needToConfirm = false;"
                             type="button" class="btn btn-sm btn-yellow pull-right">
@@ -173,8 +173,8 @@
 
                                             <ItemStyle CssClass="hidden"></ItemStyle>
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="ActivityName" HeaderText="Activity" ItemStyle-CssClass="testact"
-                                            SortExpression="ActivityName" meta:resourcekey="BoundFieldResource6">
+                                        <asp:BoundField DataField="ActivityName" HeaderText="Activities" ItemStyle-CssClass="testact"
+                                            SortExpression="ActivityName">
                                             <ItemStyle CssClass="testact"></ItemStyle>
                                         </asp:BoundField>
                                         <asp:TemplateField HeaderText="Regional Indicator" SortExpression="IsRegional" HeaderStyle-CssClass="hidden"
@@ -197,7 +197,7 @@
 
                                             <ItemStyle CssClass="srpind hidden"></ItemStyle>
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Added In Project" HeaderStyle-Width="40px" SortExpression="IndicatorIsAdded" meta:resourcekey="TemplateFieldResource4">
+                                        <asp:TemplateField HeaderText="Click To Add" HeaderStyle-Width="40px" SortExpression="IndicatorIsAdded">
                                             <ItemTemplate>
                                                 <asp:CheckBox ID="cbIsAdded" runat="server" Checked='<%# Eval("IndicatorIsAdded") %>'
                                                     CssClass="testcb" meta:resourcekey="cbIsAddedResource1" />
@@ -207,8 +207,8 @@
 
                                             <ItemStyle Width="100px" />
                                         </asp:TemplateField>
-                                        <asp:BoundField DataField="DataName" HeaderText="Output Indicator" ItemStyle-CssClass="testind"
-                                            SortExpression="DataName" ItemStyle-Wrap="true" meta:resourcekey="BoundFieldResource7">
+                                        <asp:BoundField DataField="DataName" HeaderText="Indicators" ItemStyle-CssClass="testind"
+                                            SortExpression="DataName" ItemStyle-Wrap="true">
                                             <ItemStyle Wrap="True" CssClass="testind"></ItemStyle>
                                         </asp:BoundField>
                                         <asp:TemplateField HeaderText="" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="TemplateFieldResource5">

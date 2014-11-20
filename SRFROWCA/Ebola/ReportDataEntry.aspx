@@ -159,7 +159,7 @@
             <li><i class="icon-home home-icon"></i><a href="../Default.aspx">
                 <asp:Localize ID="localBreadCrumbHome" runat="server" Text="Home" ></asp:Localize></a> </li>
             <li class="active">
-                <asp:Localize ID="localBreadCrumbDataEntry" runat="server" Text="Reports Data Entry" ></asp:Localize></li>
+                <asp:Localize ID="localBreadCrumbDataEntry" runat="server" Text="Data Entry" ></asp:Localize></li>
         </ul>
         <!-- .breadcrumb -->
     </div>
@@ -204,7 +204,7 @@
                                     <div class="widget-header widget-header-small header-color-blue2">
                                         <h5>
                                             <asp:Localize ID="lzeLgndProjects" runat="server"
-                                                Text="Projects" meta:resourcekey="lzeLgndProjectsResource1"></asp:Localize>
+                                                Text="Interventions" meta:resourcekey="lzeLgndProjectsResource1"></asp:Localize>
                                         </h5>
                                         <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
                                     </div>
@@ -237,7 +237,7 @@
                                 </div>
                            <%-- </div>
                             <div class="col-sm-14 widget-container-span">--%>
-                                <div class="widget-box">
+                                <div class="widget-box hidden">
                                     <div class="widget-header widget-header-small header-color-blue2">
                                         <h5>
                                             <asp:Localize ID="lzeLgndHumPriorities" runat="server"
@@ -279,11 +279,11 @@
                         <div class="widget-main">
                             <div class="pull-left">
                                 <asp:Localize ID="lzeSelectLocaitonsText" runat="server"
-                                    Text="Please click on 'Locations' button to select the locations you want to report on." meta:resourcekey="lzeSelectLocaitonsTextResource1"></asp:Localize>
+                                    Text="Please click on 'Locations' button to select the Admin 2 locations you want to report on."></asp:Localize>
                                 <button id="btnOpenLocations" runat="server" onserverclick="btnLocation_Click" onclick="needToConfirm = false;"
                                     type="button" class="btn btn-sm btn-primary">
                                     <i class="icon-building-o"></i>
-                                    <asp:Localize ID="localLocationButton" runat="server" Text="Locations" meta:resourcekey="localLocationButtonResource1"></asp:Localize>
+                                    <asp:Localize ID="localLocationButton" runat="server" Text="Locations" ></asp:Localize>
                                 </button>
                             </div>
                             <div class="spacer" style="clear: both;">
@@ -354,14 +354,14 @@
                                         </ItemTemplate>
                                         <ItemStyle Wrap="False"></ItemStyle>
                                     </asp:TemplateField>
-                                    <asp:TemplateField ItemStyle-Width="260px" HeaderText="Strategic Pillar" meta:resourcekey="TemplateFieldResource3">
+                                    <asp:TemplateField ItemStyle-Width="260px" HeaderText="Activities" meta:resourcekey="TemplateFieldResource3">
                                         <ItemTemplate>
                                             <div style="width: 260px; word-wrap: break-word;">
                                                 <%# Eval("ActivityName")%>
                                             </div>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField ItemStyle-Width="220px" HeaderText="Output Indicator" meta:resourcekey="TemplateFieldResource4">
+                                    <asp:TemplateField ItemStyle-Width="220px" HeaderText="Indicators" meta:resourcekey="TemplateFieldResource4">
                                         <ItemTemplate>
                                             <div style="width: 220px; word-wrap: break-word;">
                                                 <%# Eval("DataName")%>
@@ -436,7 +436,7 @@
                                         <td>
                                             <fieldset>
                                                 <legend>
-                                                    <asp:Label ID="lblLocAdmin1" runat="server" Text="Admin 1 Locations" meta:resourcekey="lblLocAdmin1Resource1"></asp:Label></legend>
+                                                    <asp:Label ID="lblLocAdmin1" runat="server" Text="Admin 2 Locations" meta:resourcekey="lblLocAdmin1Resource1"></asp:Label></legend>
                                                 <asp:CheckBoxList ID="cblAdmin1" runat="server" RepeatColumns="6" RepeatDirection="Horizontal"
                                                     CssClass="cbltest" meta:resourcekey="cblAdmin1Resource1">
                                                 </asp:CheckBoxList>

@@ -332,7 +332,7 @@ namespace SRFROWCA.Ebola
             DataTable dt = GetUserProjects();
 
             rblProjects.DataValueField = "ProjectId";
-            rblProjects.DataTextField = "ProjectCode";
+            rblProjects.DataTextField = "ProjectShortTitle";
 
             rblProjects.DataSource = dt;
             rblProjects.DataBind();
@@ -356,9 +356,7 @@ namespace SRFROWCA.Ebola
 
         private void PopulateToolTips()
         {
-            ObjPrToolTip.ObjectivesToolTip(cblObjectives);
-            ObjPrToolTip.PrioritiesToolTip(cblPriorities);
-
+            
             DataTable dt = GetUserProjects();
             ProjectsToolTip(rblProjects, dt);
         }
@@ -369,7 +367,7 @@ namespace SRFROWCA.Ebola
             {
                 foreach (DataRow row in dt.Rows)
                 {
-                    if (item.Text == row["ProjectCode"].ToString())
+                    if (item.Text == row["ProjectShortTitle"].ToString())
                         item.Attributes["title"] = row["ProjectTitle"].ToString();
                 }
             }

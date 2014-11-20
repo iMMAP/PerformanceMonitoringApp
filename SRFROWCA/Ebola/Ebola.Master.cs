@@ -221,16 +221,11 @@ namespace SRFROWCA.Ebola
             string uri = HttpContext.Current.Request.Url.AbsolutePath;
             if (uri == "/Ebola/Default.aspx")
             {
-                liDashboards.Attributes.Add("class", "active open");
-                liDefault.Attributes.Add("class", "active");
+                //liDashboards.Attributes.Add("class", "active open");
+                liDefault.Attributes.Add("class", "active open");
                 PageTitle = "ORS - Home";
             }
-            else if (uri == "Ebola/ReportingStatus.aspx")
-            {
-                liDashboards.Attributes.Add("class", "active open");
-                //liReportingStatus.Attributes.Add("class", "active");
-                PageTitle = "ORS - Achievements";
-            }
+            
             else if (uri == "/Ebola/ReportDataEntry.aspx")
             {
                 PageTitle = "ORS - Add Activity";

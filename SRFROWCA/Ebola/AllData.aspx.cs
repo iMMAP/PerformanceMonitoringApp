@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Data;
-using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
-using SRFROWCA.Common;
-using System.Text.RegularExpressions;
 using Saplin.Controls;
+using SRFROWCA.Common;
+
 namespace SRFROWCA.Ebola
 {
     public partial class AllData : BasePage
@@ -15,11 +15,9 @@ namespace SRFROWCA.Ebola
         {
             if (IsPostBack) return;
 
-            // Load data in gridview.
-            //LoadData();
             gvReport.DataSource = new DataTable();
             gvReport.DataBind();
-            // Populate all drop downs.
+
             PopulateDropDowns();
 
             if (!this.User.Identity.IsAuthenticated)
@@ -50,6 +48,8 @@ namespace SRFROWCA.Ebola
             PopulateDropDowns();
             txtFromDate.Text = "";
             txtToDate.Text = "";
+
+            //cbORSProjects.Checked = cbORSProjects.Checked = cbRegional.Checked = cbCountry.Checked = false;
             cbValidated.Checked = cbNotValidated.Checked = false;
 
             LoadData();
@@ -85,6 +85,7 @@ namespace SRFROWCA.Ebola
         protected void ddlCluster_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadDataOnMultipleCheckBoxControl();
+            PopulateActivities();
             PopulateIndicators();
         }
 
@@ -130,11 +131,11 @@ namespace SRFROWCA.Ebola
             PopulateAdmin2();
         }
 
-        //protected void ddlAdmin2_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    LastLocationType = RC.LocationTypeForUI.Admin2;
-        //    LoadDataOnMultipleCheckBoxControl();
-        //}
+        protected void ddlAdmin2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LastLocationType = RC.LocationTypeForUI.Admin2;
+            LoadDataOnMultipleCheckBoxControl();
+        }
 
         #endregion
 
@@ -147,9 +148,12 @@ namespace SRFROWCA.Ebola
         // Populate All drop downs.
         private void PopulateDropDowns()
         {
+            //PopulateClusters();
             PopulateLocations();
-            PopulateMonths();
+            //PopulateMonths();
             PopulateOrganizations();
+            PopulateObjectives();
+            //PopulatePriorities();
             PopulateActivities();
             PopulateIndicators();
             PopulateProjects();
@@ -160,8 +164,9 @@ namespace SRFROWCA.Ebola
             ddlProjects.DataTextField = "ProjectCode";
             ddlProjects.DataValueField = "ProjectId";
 
-            int? emgLocationId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
-            int? emgClsuterId = UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
+            //int? emgLocationId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
+            //int? emgClsuterId = UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
+            int? locationId = null;
             int? orgId = UserInfo.Organization > 0 ? UserInfo.Organization : (int?)null;
 
             string orgIDs = RC.GetSelectedValues(ddlOrganizations);
@@ -169,7 +174,7 @@ namespace SRFROWCA.Ebola
             if (!string.IsNullOrEmpty(orgIDs))
                 orgId = null;
 
-            ddlProjects.DataSource = DBContext.GetData("GetProjectsOnClusterCountryAndOrg", new object[] { emgLocationId, emgClsuterId, orgId, orgIDs });
+            ddlProjects.DataSource = DBContext.GetData("[GetEmergencyProjects]", new object[] { 2, locationId, 3, orgId, orgIDs });
             ddlProjects.DataBind();
 
             //if (!string.IsNullOrEmpty(orgIDs))
@@ -178,29 +183,46 @@ namespace SRFROWCA.Ebola
 
         private void PopulateActivities()
         {
-            string clusterIds = "1";
-
-            if (clusterIds != null)
-            {
-
-                ddlActivities.DataTextField = "ActivityName";
-                ddlActivities.DataValueField = "PriorityActivityId";
-                ddlActivities.DataSource = DBContext.GetData("GetActivitiesOfALanguageOfACluster", new object[] { 2, 3, RC.SelectedSiteLanguageId });
-                ddlActivities.DataBind();
-            }
+            string objIds = RC.GetSelectedValues(ddlObjectives);
+            ddlActivities.DataTextField = "ActivityName";
+            ddlActivities.DataValueField = "PriorityActivityId";
+            ddlActivities.DataSource = DBContext.GetData("[GetEbolaActivities]", new object[] { 2, 3, objIds, RC.SelectedSiteLanguageId });
+            ddlActivities.DataBind();
         }
 
         private void PopulateIndicators()
         {
-            int clusterId = 3;
-            int emergencyId = 2;
+            string objIds = RC.GetSelectedValues(ddlObjectives);
             string activityIds = RC.GetSelectedValues(ddlActivities);
 
             ddlIndicators.DataTextField = "DataName";
             ddlIndicators.DataValueField = "ActivityDataId";
-            ddlIndicators.DataSource = DBContext.GetData("GetIndicatorsOfACluster", new object[] { emergencyId, clusterId, activityIds, RC.SelectedSiteLanguageId });
+            ddlIndicators.DataSource = DBContext.GetData("[GetEbolaIndicators]", new object[] { 2, 3, objIds, activityIds, RC.SelectedSiteLanguageId });
             ddlIndicators.DataBind();
         }
+
+        //private void PopulatePriorities()
+        //{
+        //    //UI.FillPriorities(ddlPriority);
+        //}
+
+        private void PopulateObjectives()
+        {
+            UI.FillEmergencyObjectives(ddlObjectives, true, 2);
+        }
+
+        // Populate Clusters drop down.
+        //private void PopulateClusters()
+        //{
+        //    //UI.FillClusters(ddlClusters, RC.SelectedSiteLanguageId);
+        //    //if (UserInfo.Cluster > 0)
+        //    //{
+        //    //    ddlClusters.SelectedValue = UserInfo.Cluster.ToString();
+        //    //    ddlClusters.Visible = false;
+        //    //    lblCluster.Text = ddlClusters.SelectedItem.Text;
+        //    //    lblCluster.Visible = true;
+        //    //}
+        //}
 
         // Populate Locations drop down
         private void PopulateLocations()
@@ -248,28 +270,27 @@ namespace SRFROWCA.Ebola
             string countryIds = RC.GetSelectedValues(ddlCountry);
             if (countryIds != null)
             {
-
-                //ddlAdmin2.DataValueField = "LocationId";
-                //ddlAdmin2.DataTextField = "LocationName";
-                //ddlAdmin2.DataSource = DBContext.GetData("GetAdmin2LocationsOfMultipleCountries", new object[] { countryIds, admin1Ids });
-                //ddlAdmin2.DataBind();
+                ddlAdmin2.DataValueField = "LocationId";
+                ddlAdmin2.DataTextField = "LocationName";
+                ddlAdmin2.DataSource = DBContext.GetData("GetAdmin2LocationsOfMultipleCountries", new object[] { countryIds, admin1Ids });
+                ddlAdmin2.DataBind();
             }
         }
 
         // Populate Months drop down
-        private void PopulateMonths()
-        {
-            ddlMonth.DataValueField = "MonthId";
-            ddlMonth.DataTextField = "MonthName";
+        //private void PopulateMonths()
+        //{
+        //    //ddlMonth.DataValueField = "MonthId";
+        //    //ddlMonth.DataTextField = "MonthName";
 
-            ddlMonth.DataSource = GetMonth();
-            ddlMonth.DataBind();
-        }
+        //    //ddlMonth.DataSource = GetMonth();
+        //    //ddlMonth.DataBind();
+        //}
 
-        private DataTable GetMonth()
-        {
-            return DBContext.GetData("GetMonths", new object[] { RC.SelectedSiteLanguageId });
-        }
+        //private DataTable GetMonth()
+        //{
+        //    return DBContext.GetData("GetMonths", new object[] { RC.SelectedSiteLanguageId });
+        //}
 
         // Populate Organizations drop down.
         private void PopulateOrganizations()
@@ -300,7 +321,7 @@ namespace SRFROWCA.Ebola
 
         private DataTable GetOrganizations(int? orgId, string projIDs)
         {
-            return DBContext.GetData("GetOrganizations", new object[] { orgId, projIDs });
+            return DBContext.GetData("GetEmergencyOrganizations", new object[] { 2, orgId, projIDs });
         }
 
         private void ReplaceHTMLTags(DataTable dt)
@@ -375,13 +396,14 @@ namespace SRFROWCA.Ebola
         private DataTable GetReportData(bool filter)
         {
             object[] paramValue = GetParamValues(filter);
-            return DBContext.GetData("GetAllTasksDataReport", paramValue);
+            return DBContext.GetData("GetAllTasksDataReport_Ebola", paramValue);
         }
 
         // Get filter criteria and create an object with parameter values.
         private object[] GetParamValues(bool filter)
         {
-            string monthIds = RC.GetSelectedValues(ddlMonth);
+            //string monthIds = RC.GetSelectedValues(ddlMonth);
+            string monthIds = null;
             string locationIds = GetLocationIds();
             if (string.IsNullOrEmpty(locationIds))
             {
@@ -390,13 +412,15 @@ namespace SRFROWCA.Ebola
                     locationIds = UserInfo.Country.ToString();
                 }
             }
-            string clusterIds = "1";
+            //string clusterIds = RC.GetSelectedValues(ddlClusters);
+            int clusterId = 3;
             string orgIds = RC.GetSelectedValues(ddlOrganizations);
+            string objIds = RC.GetSelectedValues(ddlObjectives);
+            //string prIds = RC.GetSelectedValues(ddlPriority);
+            string prIds = null;
             string actIds = RC.GetSelectedValues(ddlActivities);
             string indIds = RC.GetSelectedValues(ddlIndicators);
             string projectIds = RC.GetSelectedValues(ddlProjects);
-            int? fromMonth = !string.IsNullOrEmpty(txtFromDate.Text.Trim()) ? Convert.ToInt32(txtFromDate.Text.Trim().Substring(0, 2)) : (int?)null;
-            int? toMonth = !string.IsNullOrEmpty(txtToDate.Text.Trim()) ? Convert.ToInt32(txtToDate.Text.Trim().Substring(0, 2)) : (int?)null;
             int? isApproved = 0;
             if (this.User.Identity.IsAuthenticated)
             {
@@ -414,31 +438,39 @@ namespace SRFROWCA.Ebola
 
             int langId = RC.SelectedSiteLanguageId;
 
-            return new object[] {monthIds, locationIds, clusterIds, orgIds, 
-                                    actIds, indIds, projectIds,
-                                    fromMonth, toMonth, 
+            return new object[] {locationIds, clusterId, orgIds, 
+                                    objIds, actIds, indIds, projectIds,
                                     isApproved, pageIndex, pageSize, Convert.ToInt32(SQLPaging), langId };
         }
 
         private string GetSearchCriteria()
         {
-            string months = RC.GetItemsText(ddlMonth);
+            //string months = RC.GetItemsText(ddlMonth);
+            string months = string.Empty;
             string country = RC.GetItemsText(ddlCountry);
             string admin1 = RC.GetItemsText(ddlAdmin1);
+            //string clusters = RC.GetItemsText(ddlClusters);
+            string clusters = RC.GetClusterName;
             string orgs = RC.GetItemsText(ddlOrganizations);
+            string objs = RC.GetItemsText(ddlObjectives);
+            //string prs = RC.GetItemsText(ddlPriority);
+            string prs = string.Empty;
             string acts = RC.GetItemsText(ddlActivities);
             string inds = RC.GetItemsText(ddlIndicators);
             string projects = RC.GetItemsText(ddlProjects);
 
             string criteria = "";
-
+            criteria += MakeSearchCriteriaString("Clusters: ", clusters);
             criteria += MakeSearchCriteriaString("Organizations: ", orgs);
             criteria += MakeSearchCriteriaString("Country: ", country);
             criteria += MakeSearchCriteriaString("Admin1: ", admin1);
             criteria += MakeSearchCriteriaString("Projects: ", projects);
-            criteria += MakeSearchCriteriaString("Months: ", months);
+            //criteria += MakeSearchCriteriaString("Months: ", months);
+            criteria += MakeSearchCriteriaString("Objectives: ", objs);
+            //criteria += MakeSearchCriteriaString("Priorities: ", prs);
             criteria += MakeSearchCriteriaString("Activities: ", acts);
             criteria += MakeSearchCriteriaString("Indicators: ", inds);
+
             return criteria;
         }
 
@@ -464,6 +496,10 @@ namespace SRFROWCA.Ebola
             {
                 locationIds = RC.GetSelectedValues(ddlAdmin1);
             }
+            //else if ((int)LastLocationType == 3)
+            //{
+            //    locationIds = RC.GetSelectedValues(ddlAdmin2);
+            //}
 
             if (locationIds == "0" || locationIds == null)
             {
@@ -517,6 +553,52 @@ namespace SRFROWCA.Ebola
 
             ExportUtility.ExportGridView(gv, "ORS_CustomReport", ".xls", Response, true);
         }
+
+        //private void testexport()
+        //{
+
+        //    Response.Clear();
+
+        //    Response.AddHeader("content-disposition", "attachment; filename=FileName1.xls");
+
+        //    Response.Charset = "";
+
+        //    Response.ContentType = "application/vnd.xls";
+
+        //    System.IO.StringWriter stringWrite = new System.IO.StringWriter();
+
+        //    System.Web.UI.HtmlTextWriter htmlWrite =
+        //    new HtmlTextWriter(stringWrite);
+        //    GridView g = new GridView();
+        //    this.Form.Controls.Add(g);
+
+        //    g.HeaderStyle.BackColor = System.Drawing.Color.Red;
+        //    SQLPaging = PagingStatus.OFF;
+        //    DataTable dt = GetReportData();
+        //    SQLPaging = PagingStatus.ON;
+        //    g.DataSource = dt;
+        //    g.DataBind();
+        //    foreach (GridViewRow i in g.Rows)
+        //    {
+
+        //        foreach (TableCell tc in i.Cells)
+
+        //            tc.Attributes.Add("class", "text");
+
+
+        //    }
+
+        //    g.RenderControl(htmlWrite);
+        //    string style = @"<style> .text { mso-number-format:\@; } </style> ";
+
+        //    Response.Write(style);
+
+        //    Response.Write(stringWrite.ToString());
+
+        //    Response.End();
+
+
+        //}
 
         public override void VerifyRenderingInServerForm(Control control) { }
 

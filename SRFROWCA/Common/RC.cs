@@ -159,6 +159,11 @@ namespace SRFROWCA.Common
             return DBContext.GetData("GetObjectives", new object[] { SelectedSiteLanguageId, UserInfo.Emergency == null ? (int?)null : UserInfo.Emergency });
         }
 
+        internal static DataTable GetEmergencyObjectives(int emergencyId)
+        {
+            return DBContext.GetData("GetObjectives", new object[] { SelectedSiteLanguageId, emergencyId });
+        }
+
         internal static DataTable GetPriorities()
         {
             return DBContext.GetData("GetPriorities", new object[] { SelectedSiteLanguageId, UserInfo.Emergency == null ? (int?)null : UserInfo.Emergency });

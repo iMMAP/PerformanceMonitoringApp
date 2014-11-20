@@ -92,6 +92,12 @@ namespace SRFROWCA.Common
             FillObjectives(control, dt, true);
         }
 
+        internal static void FillEmergencyObjectives(ListControl control, bool useShort, int emergencyId)
+        {
+            DataTable dt = RC.GetEmergencyObjectives(emergencyId);
+            FillObjectives(control, dt, true);
+        }
+
         internal static void FillObjectives(ListControl control, DataTable dt, bool useShort)
         {
             control.DataValueField = "ObjectiveId";
@@ -221,7 +227,7 @@ namespace SRFROWCA.Common
         {
             DataTable dt = RC.GetLocationEmergencies(emergencyId);
             ctl.DataTextField = "LocationName";
-            ctl.DataValueField = "EmergencyLocationId";
+            ctl.DataValueField = "LocationId";
             ctl.DataSource = dt;
             ctl.DataBind();
         }

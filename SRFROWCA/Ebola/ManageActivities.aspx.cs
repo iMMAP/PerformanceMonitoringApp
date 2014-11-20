@@ -12,12 +12,6 @@ namespace SRFROWCA.Ebola
 {
     public partial class ManageActivities : BasePage
     {
-        protected void Page_PreRender(object sender, EventArgs e)
-        {
-            ObjPrToolTip.ObjectivesToolTip(cblObjectives);
-            ObjPrToolTip.PrioritiesToolTip(cblPriorities);
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -88,7 +82,7 @@ namespace SRFROWCA.Ebola
         private void PopulateProjects()
         {
             rblProjects.DataValueField = "ProjectId";
-            rblProjects.DataTextField = "ProjectCode";
+            rblProjects.DataTextField = "ProjectShortTitle";
 
             DataTable dt = GetUserProjects();
             rblProjects.DataSource = dt;
@@ -104,7 +98,7 @@ namespace SRFROWCA.Ebola
             {
                 foreach (DataRow row in dt.Rows)
                 {
-                    if (item.Text == row["ProjectCode"].ToString())
+                    if (item.Text == row["ProjectShortTitle"].ToString())
                     {
                         item.Attributes["title"] = row["ProjectTitle"].ToString();
                     }

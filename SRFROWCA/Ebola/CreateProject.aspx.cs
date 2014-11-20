@@ -34,9 +34,9 @@ namespace SRFROWCA.Ebola
         private void PopulateCurrency()
         {
             DataTable dt = DBContext.GetData("GetAllCurrency");
-            PopulateCurrencyDropDowns(ddlRequestedAmountCurrency, dt);
-            PopulateCurrencyDropDowns(ddlDonor1Currency, dt);
-            PopulateCurrencyDropDowns(ddlDonor2Currency, dt);
+            //PopulateCurrencyDropDowns(ddlRequestedAmountCurrency, dt);
+            //PopulateCurrencyDropDowns(ddlDonor1Currency, dt);
+            //PopulateCurrencyDropDowns(ddlDonor2Currency, dt);
         }
 
         private void PopulateCurrencyDropDowns(DropDownList ddl, DataTable dt)
@@ -57,17 +57,35 @@ namespace SRFROWCA.Ebola
 
         private void PopulateClusters()
         {
-            UI.FillEmergnecyClusters(ddlCluster, UserInfo.Emergency);
-            ListItem item = new ListItem("Select Cluster", "0");
-            ddlCluster.Items.Insert(0, item);
+            //UI.FillEmergnecyClusters(ddlCluster, UserInfo.Emergency);
+            //ListItem item = new ListItem("Select Cluster", "0");
+            //ddlCluster.Items.Insert(0, item);
         }
 
         private void LoadProjects()
         {
             rblProjects.DataValueField = "ProjectId";
-            rblProjects.DataTextField = "ProjectCode";
-            rblProjects.DataSource = GetProjects();
+            rblProjects.DataTextField = "ProjectShortTitle";
+            DataTable dt = GetProjects();
+
+            rblProjects.DataSource = dt;
             rblProjects.DataBind();
+
+            ProjectsToolTip(rblProjects, dt);
+        }
+
+        private void ProjectsToolTip(ListControl ctl, DataTable dt)
+        {
+            foreach (ListItem item in ctl.Items)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    if (item.Text == row["ProjectShortTitle"].ToString())
+                    {
+                        item.Attributes["title"] = row["ProjectTitle"].ToString();
+                    }
+                }
+            }
         }
 
         private void SelectProject()
@@ -120,18 +138,18 @@ namespace SRFROWCA.Ebola
                 ltrlProjectCode.Text = dtProject.Rows[0]["ProjectCode"].ToString();
                 txtProjectTitle.Text = dtProject.Rows[0]["ProjectTitle"].ToString();
                 txtProjectObjective.Text = dtProject.Rows[0]["ProjectObjective"].ToString();
-                ddlCluster.SelectedValue = dtProject.Rows[0]["EmergencyClusterId"].ToString();
-                txtDonorName.Text = dtProject.Rows[0]["DonorName"].ToString();
-                txtDonor1Contributed.Text = dtProject.Rows[0]["Contribution1Amount"].ToString();
-                ddlDonor1Currency.SelectedValue = dtProject.Rows[0]["Contribution1CurrencyId"].ToString();
-                ddlFundingStatus.SelectedValue = dtProject.Rows[0]["FundingStatus"].ToString();
+                //ddlCluster.SelectedValue = dtProject.Rows[0]["EmergencyClusterId"].ToString();
+                //txtDonorName.Text = dtProject.Rows[0]["DonorName"].ToString();
+                //txtDonor1Contributed.Text = dtProject.Rows[0]["Contribution1Amount"].ToString();
+                //ddlDonor1Currency.SelectedValue = dtProject.Rows[0]["Contribution1CurrencyId"].ToString();
+                //ddlFundingStatus.SelectedValue = dtProject.Rows[0]["FundingStatus"].ToString();
                 ddlProjectSatus.SelectedValue = dtProject.Rows[0]["ProjectStatus"].ToString();
                 txtImplementingPartners.Text = dtProject.Rows[0]["ProjectImplementingpartner"].ToString();
-                txtRequestedAmount.Text = dtProject.Rows[0]["RequestedAmount"].ToString();
-                ddlRequestedAmountCurrency.SelectedValue = dtProject.Rows[0]["RequestedAmountCurrencyId"].ToString();
-                txtDonor2Name.Text = dtProject.Rows[0]["DonorName2"].ToString();
-                txtDonor2Contributed.Text = dtProject.Rows[0]["Contribution2Amount"].ToString();
-                ddlDonor2Currency.SelectedValue = dtProject.Rows[0]["Contribution2CurrencyId"].ToString();
+                //txtRequestedAmount.Text = dtProject.Rows[0]["RequestedAmount"].ToString();
+                //ddlRequestedAmountCurrency.SelectedValue = dtProject.Rows[0]["RequestedAmountCurrencyId"].ToString();
+                //txtDonor2Name.Text = dtProject.Rows[0]["DonorName2"].ToString();
+                //txtDonor2Contributed.Text = dtProject.Rows[0]["Contribution2Amount"].ToString();
+                //ddlDonor2Currency.SelectedValue = dtProject.Rows[0]["Contribution2CurrencyId"].ToString();
                 txtContactName.Text = dtProject.Rows[0]["ProjectContactName"].ToString();
                 txtContactPhone.Text = dtProject.Rows[0]["ProjectContactPhone"].ToString();
                 txtContactEmail.Text = dtProject.Rows[0]["ProjectContactEmail"].ToString();
@@ -173,26 +191,26 @@ namespace SRFROWCA.Ebola
                 txtProjectTitle.BackColor =  Color.LightGray;
                 txtProjectObjective.Enabled = false;
                 txtProjectObjective.BackColor = Color.LightGray;
-                ddlCluster.Enabled = false;
-                ddlCluster.BackColor = Color.LightGray;
+                //ddlCluster.Enabled = false;
+                //ddlCluster.BackColor = Color.LightGray;
                 txtFromDate.Enabled = false;
                 txtToDate.Enabled = false;
-                txtRequestedAmount.Enabled = false;
-                ddlDonor1Currency.Enabled = false;
-                ddlDonor1Currency.BackColor = Color.LightGray;
-                ddlDonor2Currency.Enabled = false;
-                ddlDonor2Currency.BackColor = Color.LightGray;
-                txtDonor2Name.Enabled = false;
-                txtDonorName.Enabled = false;
-                txtDonor1Contributed.Enabled = false;
-                txtDonor2Contributed.Enabled = false;
+                //txtRequestedAmount.Enabled = false;
+                //ddlDonor1Currency.Enabled = false;
+                //ddlDonor1Currency.BackColor = Color.LightGray;
+                //ddlDonor2Currency.Enabled = false;
+                //ddlDonor2Currency.BackColor = Color.LightGray;
+                //txtDonor2Name.Enabled = false;
+                //txtDonorName.Enabled = false;
+                //txtDonor1Contributed.Enabled = false;
+                //txtDonor2Contributed.Enabled = false;
                 txtContactName.Enabled = false;
                 txtContactPhone.Enabled = false;
                 txtContactEmail.Enabled = false;
-                ddlRequestedAmountCurrency.Enabled = false;
-                ddlRequestedAmountCurrency.BackColor = Color.LightGray;
-                ddlFundingStatus.Enabled = false;
-                ddlFundingStatus.BackColor = Color.LightGray;
+                //ddlRequestedAmountCurrency.Enabled = false;
+                //ddlRequestedAmountCurrency.BackColor = Color.LightGray;
+                //ddlFundingStatus.Enabled = false;
+                //ddlFundingStatus.BackColor = Color.LightGray;
             }
             else
             {
@@ -201,26 +219,26 @@ namespace SRFROWCA.Ebola
                 txtProjectTitle.BackColor = Color.White;
                 txtProjectObjective.Enabled = true;
                 txtProjectObjective.BackColor = Color.White;
-                ddlCluster.Enabled = true;
-                ddlCluster.BackColor = Color.White;
+                //ddlCluster.Enabled = true;
+                //ddlCluster.BackColor = Color.White;
                 txtFromDate.Enabled = true;
                 txtToDate.Enabled = true;
-                txtRequestedAmount.Enabled = true;
-                ddlDonor1Currency.Enabled = true;
-                ddlDonor1Currency.BackColor = Color.White;
-                ddlDonor2Currency.Enabled = true;
-                ddlDonor2Currency.BackColor = Color.White;
-                txtDonor2Name.Enabled = true;
-                txtDonorName.Enabled = true;
-                txtDonor1Contributed.Enabled = true;
-                txtDonor2Contributed.Enabled = true;
+                //txtRequestedAmount.Enabled = true;
+                //ddlDonor1Currency.Enabled = true;
+                //ddlDonor1Currency.BackColor = Color.White;
+                //ddlDonor2Currency.Enabled = true;
+                //ddlDonor2Currency.BackColor = Color.White;
+                //txtDonor2Name.Enabled = true;
+                //txtDonorName.Enabled = true;
+                //txtDonor1Contributed.Enabled = true;
+                //txtDonor2Contributed.Enabled = true;
                 txtContactName.Enabled = true;
                 txtContactPhone.Enabled = true;
                 txtContactEmail.Enabled = true;
-                ddlRequestedAmountCurrency.Enabled = true;
-                ddlRequestedAmountCurrency.BackColor = Color.White;
-                ddlFundingStatus.Enabled = true;
-                ddlFundingStatus.BackColor = Color.White;
+                //ddlRequestedAmountCurrency.Enabled = true;
+                //ddlRequestedAmountCurrency.BackColor = Color.White;
+                //ddlFundingStatus.Enabled = true;
+                //ddlFundingStatus.BackColor = Color.White;
             }
         }
 
@@ -240,28 +258,28 @@ namespace SRFROWCA.Ebola
             txtFromDate.Text = "";
             txtToDate.Text = "";
             ltrlProjectCode.Text = "";
-            ddlCluster.SelectedValue = "0";
+            //ddlCluster.SelectedValue = "0";
             ProjectId = 0;
-            txtDonorName.Text = string.Empty;
-            ddlFundingStatus.SelectedValue = "-1";
-            txtImplementingPartners.Text = "";
-            txtRequestedAmount.Text = "";
-            txtDonor1Contributed.Text = "";
-            txtDonor2Name.Text = "";
-            txtDonor2Contributed.Text = "";
+            //txtDonorName.Text = string.Empty;
+            //ddlFundingStatus.SelectedValue = "-1";
+            //txtImplementingPartners.Text = "";
+            //txtRequestedAmount.Text = "";
+            //txtDonor1Contributed.Text = "";
+            //txtDonor2Name.Text = "";
+            //txtDonor2Contributed.Text = "";
             txtContactEmail.Text = "";
             txtContactName.Text = "";
             txtContactPhone.Text = "";
-            ddlRequestedAmountCurrency.SelectedValue = "0";
-            ddlDonor1Currency.SelectedValue = "0";
-            ddlDonor2Currency.SelectedValue = "0";
+            //ddlRequestedAmountCurrency.SelectedValue = "0";
+            //ddlDonor1Currency.SelectedValue = "0";
+            //ddlDonor2Currency.SelectedValue = "0";
 
         }
 
         protected void btnSaveClose_Click(object sender, EventArgs e)
         {
             Save();
-            Response.Redirect("~/Pages/AddActivities.aspx");
+            Response.Redirect("~/Ebola/ReportDataEntry.aspx");
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
@@ -281,7 +299,7 @@ namespace SRFROWCA.Ebola
 
         protected void btnManageActivities_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Pages/ManageActivities.aspx?pid=" + ProjectId.ToString());
+            Response.Redirect("~/Ebola/ManageActivities.aspx?pid=" + ProjectId.ToString());
         }
 
         protected void btnDeleteProject_Click(object sender, EventArgs e)
@@ -339,9 +357,9 @@ namespace SRFROWCA.Ebola
             string title = txtProjectTitle.Text.Trim();
             string objective = txtProjectObjective.Text.Trim();
             string projectPartners = txtImplementingPartners.Text.Trim();
-            int clusterId = Convert.ToInt32(ddlCluster.SelectedValue);
+            int clusterId = 13;// Convert.ToInt32(ddlCluster.SelectedValue);
 
-            int? fundingStatus = Convert.ToInt32(ddlFundingStatus.SelectedValue) > 0 ? Convert.ToInt32(ddlFundingStatus.SelectedValue) : (int?)null;
+            int? fundingStatus = null; // Convert.ToInt32(ddlFundingStatus.SelectedValue) > 0 ? Convert.ToInt32(ddlFundingStatus.SelectedValue) : (int?)null;
             DateTime? startDate = txtFromDate.Text.Trim().Length > 0 ?
                                     DateTime.ParseExact(txtFromDate.Text.Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture) :
                                 (DateTime?)null;
@@ -352,27 +370,27 @@ namespace SRFROWCA.Ebola
 
             int val = 0;
 
-            int.TryParse(txtRequestedAmount.Text.Trim(), out val);
+            //int.TryParse(txtRequestedAmount.Text.Trim(), out val);
             int? requestedAmount = val > 0 ? val : (int?)null;
             val = 0;
 
-            int.TryParse(ddlRequestedAmountCurrency.SelectedValue, out val);
+            //int.TryParse(ddlRequestedAmountCurrency.SelectedValue, out val);
             int? requestedCurrencyId = val > 0 ? val : (int?)null;
             val = 0;
 
-            string donorName = !string.IsNullOrEmpty(txtDonorName.Text.Trim()) ? txtDonorName.Text.Trim() : null;
-            int.TryParse(txtDonor1Contributed.Text.Trim(), out val);
+            string donorName = null;//!string.IsNullOrEmpty(txtDonorName.Text.Trim()) ? txtDonorName.Text.Trim() : null;
+            //int.TryParse(txtDonor1Contributed.Text.Trim(), out val);
             int? contribution1 = val > 0 ? val : (int?)null;
             val = 0;
-            int.TryParse(ddlDonor1Currency.SelectedValue, out val);
+            //int.TryParse(ddlDonor1Currency.SelectedValue, out val);
             int? donor1CurrencyId = val > 0 ? val : (int?)null;
             val = 0;
 
-            string donorName2 = !string.IsNullOrEmpty(txtDonor2Name.Text.Trim()) ? txtDonor2Name.Text.Trim() : null;
-            int.TryParse(txtDonor2Contributed.Text.Trim(), out val);
+            string donorName2 = null;// !string.IsNullOrEmpty(txtDonor2Name.Text.Trim()) ? txtDonor2Name.Text.Trim() : null;
+            //int.TryParse(txtDonor2Contributed.Text.Trim(), out val);
             int? contribution2 = val > 0 ? val : (int?)null;
             val = 0;
-            int.TryParse(ddlDonor2Currency.SelectedValue, out val);
+            //nt.TryParse(ddlDonor2Currency.SelectedValue, out val);
             int? donor2CurrencyId = val > 0 ? val : (int?)null;
             val = 0;
 
@@ -404,7 +422,7 @@ namespace SRFROWCA.Ebola
                                                                               requestedAmount, requestedCurrencyId, donorName, contribution1, donor1CurrencyId, donorName2, 
                                                                               contribution2, donor2CurrencyId, fundingStatus, contactName, contactPhone, contactEmail, DBNull.Value });
                     AddNotification(ProjectId);
-                    SendEmailToUser(txtProjectTitle.Text.Trim(), ddlCluster.SelectedItem.Text, clusterId);
+                    //SendEmailToUser(txtProjectTitle.Text.Trim(), ddlCluster.SelectedItem.Text, clusterId);
                 }
             }
         }
@@ -472,18 +490,18 @@ namespace SRFROWCA.Ebola
 
         private void AddNotification(int pId)
         {
-            Guid guid = Guid.NewGuid();
-            string tempString = "I8$pUs9\\";
-            string datetime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            string hash = RC.GetHashString(guid + tempString + datetime);
+            //Guid guid = Guid.NewGuid();
+            //string tempString = "I8$pUs9\\";
+            //string datetime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            //string hash = RC.GetHashString(guid + tempString + datetime);
 
-            string notification1 = "New Project Added For " + ddlCluster.SelectedItem.Text;
-            int emergencyClusterId = Convert.ToInt32(ddlCluster.SelectedValue);
-            string pageURL = "~/ClusterLead/ProjectDetails.aspx?pid=" + pId.ToString();
-            bool isRead = false;
+            //string notification1 = "New Project Added For " + ddlCluster.SelectedItem.Text;
+            //int emergencyClusterId = Convert.ToInt32(ddlCluster.SelectedValue);
+            //string pageURL = "~/ClusterLead/ProjectDetails.aspx?pid=" + pId.ToString();
+            //bool isRead = false;
 
-            DBContext.Add("InsertNotification", new object[]{notification1, RC.GetCurrentUserId, pId, UserInfo.EmergencyCountry, emergencyClusterId,
-                                                               UserInfo.Organization,  pageURL, isRead, hash, DBNull.Value});
+            //DBContext.Add("InsertNotification", new object[]{notification1, RC.GetCurrentUserId, pId, UserInfo.EmergencyCountry, emergencyClusterId,
+            //                                                   UserInfo.Organization,  pageURL, isRead, hash, DBNull.Value});
         }
 
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success)
