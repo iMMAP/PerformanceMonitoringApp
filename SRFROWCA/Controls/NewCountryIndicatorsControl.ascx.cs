@@ -31,7 +31,7 @@ namespace SRFROWCA.Controls
 
             }
 
-            string target = txtTarget.Text.Trim();
+            string target = decimal.Round(Convert.ToDecimal(txtTarget.Text.Trim()), 0).ToString();
             string unitId = ddlUnits.SelectedValue;
             
             Guid userId = RC.GetCurrentUserId;
