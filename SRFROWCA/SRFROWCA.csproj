@@ -417,6 +417,7 @@
     <Content Include="ContactUs\ContactUsControl.ascx" />
     <Content Include="Controls\FilterCriteria.ascx" />
     <Content Include="DeleteThisPlease.html" />
+    <Content Include="Ebola\AllData.aspx" />
     <Content Include="Ebola\ReportDataEntry.aspx" />
     <Content Include="ErrorPages\DefaultRedirectErrorPage.aspx" />
     <Content Include="ErrorPages\GenericErrorPage.aspx" />
@@ -1111,6 +1112,13 @@
       <DependentUpon>FilterCriteria.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\PagingGridView.cs" />
+    <Compile Include="Ebola\AllData.aspx.cs">
+      <DependentUpon>AllData.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ebola\AllData.aspx.designer.cs">
+      <DependentUpon>AllData.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Ebola\ReportDataEntry.aspx.cs">
       <DependentUpon>ReportDataEntry.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
