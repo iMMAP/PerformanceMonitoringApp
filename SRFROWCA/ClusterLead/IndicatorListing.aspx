@@ -115,7 +115,7 @@
                                                       
                                                         <tr>
                                                             <td>&nbsp;</td>
-                                                            <td colspan="4" style="padding-top:10px;"><asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch2_Click" CssClass="btn btn-primary" CausesValidation="false" /></td>
+                                                            <td colspan="4" style="padding-top:10px;"><asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch2_Click" CssClass="btn btn-primary" CausesValidation="false" /><asp:Button ID="btnReset" runat="server" Text="Reset" Style="margin-left:5px;" OnClick="btnReset_Click" CssClass="btn btn-primary" CausesValidation="False" meta:resourcekey="btnSearchResource1" /></td>
                                                         </tr>
                                                     </table>
                                                 </div>
@@ -137,7 +137,8 @@
             <div style="overflow-x: auto; width: 100%">
                 <asp:GridView ID="gvActivity" runat="server" AutoGenerateColumns="false" AllowSorting="True" AllowPaging="true" PagerSettings-Mode="NumericFirstLast"
                     OnRowCommand="gvActivity_RowCommand" Width="100%" OnRowDataBound="gvActivity_RowDataBound" PagerSettings-Position="Bottom" DataKeyNames="IndicatorDetailId"
-                     CssClass="table-striped table-bordered table-hover"  OnSorting="gvActivity_Sorting" OnPageIndexChanging="gvActivity_PageIndexChanging" PageSize="30" OnRowDeleting="gvActivity_RowDeleting">
+                     CssClass="table-striped table-bordered table-hover"  OnSorting="gvActivity_Sorting" OnPageIndexChanging="gvActivity_PageIndexChanging" 
+                    PageSize="30" OnRowDeleting="gvActivity_RowDeleting" ShowHeaderWhenEmpty="true" EmptyDataText="Your filter criteria does not match any indicator!">
                     
                     <Columns>
                         <asp:BoundField DataField="ClusterName" HeaderText="Cluster" SortExpression="ClusterName" ItemStyle-Width="150px" />
