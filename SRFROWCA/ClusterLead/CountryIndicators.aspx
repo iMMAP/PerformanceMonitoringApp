@@ -1,6 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="CountryIndicators.aspx.cs" Inherits="SRFROWCA.ClusterLead.CountryIndicators" Culture="auto" meta:resourcekey="PageResource1" UICulture="auto" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+<%@ Register Assembly="SRFROWCA" Namespace="SRFROWCA" TagPrefix="cc2" %>
+
 <asp:Content ID="cntHeadCountryIndicators" ContentPlaceHolderID="HeadContent" runat="server">
     <script type="text/javascript">
         function validate() {
@@ -11,7 +13,12 @@
                 return false;
             }
         }
+
+        $(function () {
+            $(".numeric1").numeric();
+        });
     </script>
+    <script src="../assets/orsjs/jquery.numeric.min.js" type="text/javascript"></script>
 </asp:Content>
 
 
@@ -39,8 +46,13 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 ">
                             <div class="widget-box">
-                                <div class="widget-header widget-header-small header-color-blue2">
+                                <div class="widget-header widget-header-small header-color-blue2" style="padding-left:0px;">
                                     <h6>
+
+                                           <button runat="server" id="btnExportToExcel" onserverclick="btnExportToExcel_ServerClick" class="btn btn-yellow" causesvalidation="false"
+                                            title="Excel">
+                                            <i class="icon-download"></i>Excel
+                                        </button>
 
                                         <asp:Button ID="btnAddIndicator" runat="server" OnClick="btnAddIndicator_Click" Text="Add Indicator" CausesValidation="False"
                                             CssClass="btn btn-yellow pull-right" meta:resourcekey="btnAddIndicatorResource1" />
@@ -103,9 +115,11 @@
         </table>
         <div class="table-responsive">
             <div style="overflow-x: auto; width: 100%">
-                <asp:GridView ID="gvClusterIndicators" Width="100%" runat="server" AutoGenerateColumns="False" AllowSorting="True" DataKeyNames="SiteLanguageId"
-                    OnRowDataBound="gvClusterIndicators_RowDataBound" OnSorting="gvClusterIndicators_Sorting" OnRowCommand="gvClusterIndicators_RowCommand" CssClass=" table-striped table-bordered table-hover" meta:resourcekey="gvClusterIndicatorsResource1">
-
+                <cc2:PagingGridView ID="gvClusterIndicators" Width="100%" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" AllowSorting="True" DataKeyNames="SiteLanguageId"
+                     OnRowDataBound="gvClusterIndicators_RowDataBound" OnSorting="gvClusterIndicators_Sorting" ShowHeader="true" OnRowCommand="gvClusterIndicators_RowCommand" CssClass=" table-striped table-bordered table-hover" meta:resourcekey="gvClusterIndicatorsResource1" >
+                    <EmptyDataTemplate>
+                        Your filter criteria does not match any record in database!
+                    </EmptyDataTemplate>
                     <Columns>
                         <asp:TemplateField ItemStyle-Width="2%" HeaderText="#" meta:resourcekey="TemplateFieldResource1">
                             <ItemTemplate>
@@ -192,7 +206,7 @@
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
-                </asp:GridView>
+                </cc2:PagingGridView>
             </div>
         </div>
         <table>
@@ -232,7 +246,7 @@
                                                     <td>Target:
                                                     </td>
                                                     <td class="frmControl">
-                                                        <asp:TextBox ID="txtTarget" runat="server" Width="450px" MaxLength="10" meta:resourcekey="txtTargetResource1"></asp:TextBox>
+                                                        <asp:TextBox ID="txtTarget" CssClass="numeric1" runat="server" Width="450px" MaxLength="9" meta:resourcekey="txtTargetResource1"></asp:TextBox>
                                                     </td>
                                                     <td></td>
                                                 </tr>

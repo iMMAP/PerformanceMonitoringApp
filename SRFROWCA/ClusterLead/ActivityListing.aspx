@@ -106,7 +106,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td>&nbsp;</td>
-                                                            <td colspan="4" style="padding-top:20px;"><asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch2_Click" CssClass="btn btn-primary" CausesValidation="False" meta:resourcekey="btnSearchResource1" /></td>
+                                                            <td colspan="4" style="padding-top:20px;"><asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch2_Click" CssClass="btn btn-primary" CausesValidation="False" meta:resourcekey="btnSearchResource1" /><asp:Button ID="btnReset" runat="server" Text="Reset" Style="margin-left:5px;" OnClick="btnReset_Click" CssClass="btn btn-primary" CausesValidation="False"  /></td>
                                                         </tr>
                                                     </table>
                                                 </div>
@@ -126,9 +126,10 @@
 
         <div class="tablegrid">
             <div style="overflow-x: auto; width: 100%">
-                <asp:GridView ID="gvActivity" runat="server" AutoGenerateColumns="False" AllowSorting="True" AllowPaging="True" PagerSettings-Mode="NumericFirstLast"
+                <asp:GridView ID="gvActivity" runat="server" AutoGenerateColumns="False" AllowSorting="True" AllowPaging="True" PagerSettings-Mode="NumericFirstLast" ShowHeaderWhenEmpty="True"
                     OnRowCommand="gvActivity_RowCommand" Width="100%" OnRowDataBound="gvActivity_RowDataBound" PagerSettings-Position="Bottom" DataKeyNames="ActivityDetailId"
-                     CssClass="table-striped table-bordered table-hover"  OnSorting="gvActivity_Sorting" OnPageIndexChanging="gvActivity_PageIndexChanging" PageSize="30" OnRowDeleting="gvActivity_RowDeleting" meta:resourcekey="gvActivityResource1">
+                     CssClass="table-striped table-bordered table-hover"  OnSorting="gvActivity_Sorting" OnPageIndexChanging="gvActivity_PageIndexChanging" PageSize="30" OnRowDeleting="gvActivity_RowDeleting"
+                    EmptyDataText="Your filter criteria does not match any activity!">
                     
                     <Columns>
                         <asp:BoundField DataField="ClusterName" HeaderText="Cluster" SortExpression="ClusterName" ItemStyle-Width="150px" meta:resourcekey="BoundFieldResource1" >
@@ -162,7 +163,6 @@
                     </Columns>
                     <HeaderStyle BackColor="ButtonFace" />
 
-<PagerSettings Mode="NumericFirstLast"></PagerSettings>
                 </asp:GridView>
             </div>
         </div>

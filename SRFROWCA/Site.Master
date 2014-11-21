@@ -377,7 +377,7 @@
                                     <asp:Localize ID="Localize11" runat="server" Text="Output Data Entry" meta:resourcekey="localClusterDataEntryResource1"></asp:Localize>
                                 </span></a></li>
                                         <li>
-											<a href="#">
+											<a href="<%=BaseURL %>/ClusterLead/ClusterReports.aspx">
 												
 												Output Report
 											</a>

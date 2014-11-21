@@ -411,7 +411,7 @@ namespace SRFROWCA.ClusterLead
             Guid userId = RC.GetCurrentUserId;
             string indicatorEng = txtIndicatorEng.Text.Trim();
             string indicatorFr = txtIndicatorFr.Text.Trim();
-            string target = txtTarget.Text.Trim();
+            string target = decimal.Round(Convert.ToDecimal(txtTarget.Text.Trim()), 0).ToString();
             string unitID = ddlUnits.SelectedValue;
 
             if (!string.IsNullOrEmpty(hfClusterIndicatorID.Value))
@@ -421,6 +421,59 @@ namespace SRFROWCA.ClusterLead
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
         {
             RC.ShowMessage(Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
+        }
+
+        protected void btnExportToExcel_ServerClick(object sender, EventArgs e)
+        {
+            GridView gvExport = new GridView();
+
+            //string objective = null;
+            string indicator = null;
+            int? countryID = null;
+            int? clusterID = null;
+
+            if (!string.IsNullOrEmpty(CountryID))
+                countryID = Convert.ToInt32(CountryID);
+
+            if (!string.IsNullOrEmpty(ClusterID))
+                clusterID = Convert.ToInt32(ClusterID);
+
+            //if (!string.IsNullOrEmpty(txtObjectiveName.Text.Trim()))
+            //    objective = txtObjectiveName.Text;
+
+            if (!string.IsNullOrEmpty(txtIndicatorName.Text.Trim()))
+                indicator = txtIndicatorName.Text;
+
+            if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
+                countryID = Convert.ToInt32(ddlCountry.SelectedValue);
+
+            if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
+                clusterID = Convert.ToInt32(ddlCluster.SelectedValue);
+
+            DataTable dt = GetClusterIndicatros(clusterID, countryID, indicator);
+
+            RemoveColumnsFromDataTable(dt);
+            gvExport.DataSource = dt;
+            gvExport.DataBind();
+
+            string fileName = "ClusterIndicators";
+            string fileExtention = ".xls";
+            ExportUtility.ExportGridView(gvExport, fileName, fileExtention, Response);
+        }
+
+        private void RemoveColumnsFromDataTable(DataTable dt)
+        {
+            try
+            {
+                dt.Columns.Remove("ClusterIndicatorId");
+                dt.Columns.Remove("SiteLanguageId");
+                dt.Columns.Remove("IndicatorAlt");
+                dt.Columns.Remove("CountryID");
+                dt.Columns.Remove("ClusterId");
+                dt.Columns.Remove("UnitId");
+
+            }
+            catch { }
         }
 
     }

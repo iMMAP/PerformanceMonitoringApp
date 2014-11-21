@@ -46,7 +46,7 @@
                                     <label>
                                         Target:</label>
                                     <div>
-                                        <asp:TextBox ID="txtTarget" MaxLength="10" runat="server" CssClass="width-100 numeric1"></asp:TextBox>
+                                        <asp:TextBox ID="txtTarget" MaxLength="9" runat="server" CssClass="width-100 numeric1"></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="rfvtxtTarget" runat="server" ErrorMessage="Target Required"
                                             CssClass="error2" Text="Required" ControlToValidate="txtTarget"></asp:RequiredFieldValidator>
                                     </div>

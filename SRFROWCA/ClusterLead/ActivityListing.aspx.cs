@@ -144,6 +144,15 @@ namespace SRFROWCA.ClusterLead
         {
             LoadActivities();
         }
+
+        protected void btnReset_Click(object sender, EventArgs e)
+        {
+            ddlCluster.SelectedValue = "-1";
+            ddlObjective.SelectedValue = "-1";
+            txtActivityName.Text = "";
+            LoadActivities();
+        }
+
         protected void btnExportExcel_Click(object sender, EventArgs e)
         {
             GridView gvExport = new GridView();

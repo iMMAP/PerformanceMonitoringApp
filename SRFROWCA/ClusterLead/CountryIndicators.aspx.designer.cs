@@ -22,6 +22,15 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.Localize locMessageForUser;
         
         /// <summary>
+        /// btnExportToExcel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnExportToExcel;
+        
+        /// <summary>
         /// btnAddIndicator control.
         /// </summary>
         /// <remarks>
@@ -100,7 +109,7 @@ namespace SRFROWCA.ClusterLead {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvClusterIndicators;
+        protected global::SRFROWCA.PagingGridView gvClusterIndicators;
         
         /// <summary>
         /// mpeEditIndicator control.

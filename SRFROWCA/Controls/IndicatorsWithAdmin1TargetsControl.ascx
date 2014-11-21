@@ -100,7 +100,7 @@
                             <ItemTemplate>
                                 <div style="float: left; width: 140px; margin-bottom: 20px; margin-right: 20px;">
                                     <div style="float: left; width: 80px; text-align: right; margin-top: 5px;"><%#Eval("LocationName")%>&nbsp;</div>
-                                    <asp:TextBox runat="server" ID="txtTarget" Style="width: 50px;" CssClass="numeric1" meta:resourcekey="txtTargetResource1"></asp:TextBox>
+                                    <asp:TextBox runat="server" onkeypress="return isNumber();" MaxLength="8" ID="txtTarget" Style="width: 50px;" CssClass="numeric1" meta:resourcekey="txtTargetResource1"></asp:TextBox>
                                 </div>
                                 <asp:HiddenField runat="server" ID="hdnLocationId" Value='<%# Eval("LocationId") %>' />
                             </ItemTemplate>
@@ -116,5 +116,12 @@
     $(document).ready(function () {
         $(".content").hide();
     });
-
+    function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
 </script>

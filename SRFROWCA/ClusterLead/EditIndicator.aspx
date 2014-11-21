@@ -150,7 +150,7 @@ text-align: center;float:left;
                         <div class="content" style="float:left;clear:both;margin-top:10px;margin-left:0px;">
        <asp:Repeater runat="server" ID="rptAdmin1">
            <ItemTemplate>
-               <div style="float:left;width:140px;margin-bottom:20px;margin-right:20px;"><div style="float:left;width:80px;text-align:right;margin-top:5px;" ><%#Eval("LocationName")%>&nbsp;</div><asp:TextBox runat="server" ID="txtTarget" style="width:50px;" Text='<%#Eval("ClusterTarget") %>'></asp:TextBox></div>
+               <div style="float:left;width:140px;margin-bottom:20px;margin-right:20px;"><div style="float:left;width:80px;text-align:right;margin-top:5px;" ><%#Eval("LocationName")%>&nbsp;</div><asp:TextBox runat="server" MaxLength="8" onkeypress="return isNumber();" ID="txtTarget" style="width:50px;" Text='<%#Eval("ClusterTarget") %>'></asp:TextBox></div>
                <asp:HiddenField runat="server" ID="hdnLocationId" Value='<%#Eval("LocationId")%>' />
            </ItemTemplate>
        </asp:Repeater>
@@ -175,7 +175,14 @@ text-align: center;float:left;
         $(document).ready(function () {
             $(".content").hide();
         });
-
+        function isNumber(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                return false;
+            }
+            return true;
+        }
 </script>
 
 </asp:Content>
