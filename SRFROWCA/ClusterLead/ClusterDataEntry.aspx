@@ -52,7 +52,7 @@
                                                     <asp:Label runat="server" ID="lblCountry" Text="Country:"></asp:Label>
                                                 </td>
                                                 <td style="width: 10%;">
-                                                    <asp:DropDownList AutoPostBack="true" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" runat="server" AppendDataBoundItems="true" ID="ddlCountry" Width="270">
+                                                    <asp:DropDownList AutoPostBack="true" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" runat="server"  ID="ddlCountry" Width="270">
                                                         <asp:ListItem Selected="True" Text="--- Select Country ---" Value="-1"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </td>
@@ -65,7 +65,7 @@
                                                     <asp:Label runat="server" ID="lblCluster" Text="Cluster:"></asp:Label>
                                                 </td>
                                                 <td style="<%=ClusterDisplayNone%>">
-                                                    <asp:DropDownList AutoPostBack="true" runat="server" OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged" AppendDataBoundItems="true" ID="ddlCluster" Width="270">
+                                                    <asp:DropDownList AutoPostBack="true" runat="server" OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged"  ="ddlCluster" Width="270">
                                                         <asp:ListItem Selected="True" Text="--- Select Cluster ---" Value="-1"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </td>
