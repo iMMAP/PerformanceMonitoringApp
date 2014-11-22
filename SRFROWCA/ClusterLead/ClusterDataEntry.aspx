@@ -84,7 +84,7 @@
                                                 <td></td>
                                                 <td style="text-align: right;">
                                                     <asp:Button runat="server" ID="btnSaveAll" Text="Save" class="width-10 btn btn-sm" OnClientClick="return validate();" OnClick="btnSaveAll_Click" />
-                                                    <button class="width-10 btn btn-sm" onclick="return resetAll();" >Reset</button>
+                                                    <button class="width-10 btn btn-sm" onclick="resetAll();" >Reset</button>
 
                                                 </td>
 
