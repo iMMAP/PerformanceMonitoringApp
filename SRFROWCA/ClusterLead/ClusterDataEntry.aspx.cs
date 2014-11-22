@@ -77,6 +77,9 @@ namespace SRFROWCA.ClusterLead
 
             PopulateYears();
             PopulateMonths();
+
+            ddlCluster.Items.Insert(0, new ListItem("--- Select Cluster ---", "-1"));
+            ddlCountry.Items.Insert(0, new ListItem("--- Select Country ---", "-1"));
         }
 
         private void SetDates()
