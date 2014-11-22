@@ -103,7 +103,12 @@ namespace SRFROWCA.ClusterLead
 
         private void LoadClusterIndicators()
         {
-            //string objective = null;
+            gvClusterIndicators.DataSource = SetDataSource();
+            gvClusterIndicators.DataBind();
+        }
+
+        private DataTable SetDataSource()
+        {
             string indicator = null;
             int? countryID = null;
             int? clusterID = null;
@@ -114,9 +119,6 @@ namespace SRFROWCA.ClusterLead
             if (!string.IsNullOrEmpty(ClusterID))
                 clusterID = Convert.ToInt32(ClusterID);
 
-            //if (!string.IsNullOrEmpty(txtObjectiveName.Text.Trim()))
-            //    objective = txtObjectiveName.Text;
-
             if (!string.IsNullOrEmpty(txtIndicatorName.Text.Trim()))
                 indicator = txtIndicatorName.Text;
 
@@ -126,8 +128,7 @@ namespace SRFROWCA.ClusterLead
             if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
                 clusterID = Convert.ToInt32(ddlCluster.SelectedValue);
 
-            gvClusterIndicators.DataSource = GetClusterIndicatros(clusterID, countryID, indicator);
-            gvClusterIndicators.DataBind();
+            return GetClusterIndicatros(clusterID, countryID, indicator);
         }
 
         private DataTable GetClusterIndicatros(int? clusterId, int? countryId, string indicator)
@@ -216,24 +217,7 @@ namespace SRFROWCA.ClusterLead
 
         protected void gvClusterIndicators_Sorting(object sender, GridViewSortEventArgs e)
         {
-            //string objective = null;
-            string indicator = null;
-            int? countryID = Convert.ToInt32(CountryID);
-            int? clusterID = Convert.ToInt32(ClusterID);
-
-            //if (!string.IsNullOrEmpty(txtObjectiveName.Text.Trim()))
-            //    objective = txtObjectiveName.Text;
-
-            if (!string.IsNullOrEmpty(txtIndicatorName.Text.Trim()))
-                indicator = txtIndicatorName.Text;
-
-            if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
-                countryID = Convert.ToInt32(ddlCountry.SelectedValue);
-
-            if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
-                clusterID = Convert.ToInt32(ddlCluster.SelectedValue);
-
-            DataTable dt = GetClusterIndicatros(clusterID, countryID, indicator);
+            DataTable dt = SetDataSource();
 
             if (dt != null)
             {
@@ -444,30 +428,7 @@ namespace SRFROWCA.ClusterLead
         {
             GridView gvExport = new GridView();
 
-            //string objective = null;
-            string indicator = null;
-            int? countryID = null;
-            int? clusterID = null;
-
-            if (!string.IsNullOrEmpty(CountryID))
-                countryID = Convert.ToInt32(CountryID);
-
-            if (!string.IsNullOrEmpty(ClusterID))
-                clusterID = Convert.ToInt32(ClusterID);
-
-            //if (!string.IsNullOrEmpty(txtObjectiveName.Text.Trim()))
-            //    objective = txtObjectiveName.Text;
-
-            if (!string.IsNullOrEmpty(txtIndicatorName.Text.Trim()))
-                indicator = txtIndicatorName.Text;
-
-            if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
-                countryID = Convert.ToInt32(ddlCountry.SelectedValue);
-
-            if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
-                clusterID = Convert.ToInt32(ddlCluster.SelectedValue);
-
-            DataTable dt = GetClusterIndicatros(clusterID, countryID, indicator);
+            DataTable dt = SetDataSource();
 
             RemoveColumnsFromDataTable(dt);
 

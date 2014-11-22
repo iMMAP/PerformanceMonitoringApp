@@ -29,7 +29,14 @@ namespace SRFROWCA.ClusterLead
 
         private void LoadClusterReports()
         {
+            gvClusterReports.DataSource = SetDataSource();
+            gvClusterReports.DataBind();
+        }
+
+        private DataTable SetDataSource()
+        {
             int? countryId = null;
+            string countryIds = null;
             int? clusterId = null;
             int? monthID = null;
             string indicator = null;
@@ -37,8 +44,10 @@ namespace SRFROWCA.ClusterLead
             if (!string.IsNullOrEmpty(txtIndicatorName.Text.Trim()))
                 indicator = txtIndicatorName.Text.Trim();
 
-            if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
-                countryId = Convert.ToInt32(ddlCountry.SelectedValue);
+            //if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
+                //countryId = Convert.ToInt32(ddlCountry.SelectedValue);
+
+            countryIds = RC.GetSelectedValues(ddlCountry);
 
             if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
                 clusterId = Convert.ToInt32(ddlCluster.SelectedValue);
@@ -46,8 +55,7 @@ namespace SRFROWCA.ClusterLead
             if (Convert.ToInt32(ddlMonth.SelectedValue) > -1)
                 monthID = Convert.ToInt32(ddlMonth.SelectedValue);
 
-            gvClusterReports.DataSource = DBContext.GetData("uspGetClusterReports", new object[] { indicator, monthID, countryId, clusterId, RC.SelectedSiteLanguageId });
-            gvClusterReports.DataBind();
+            return DBContext.GetData("uspGetClusterReports", new object[] { indicator, monthID, countryId, clusterId, RC.SelectedSiteLanguageId, cbIncludeRegional.Checked, countryIds });
         }
 
         internal override void BindGridData()
@@ -64,7 +72,7 @@ namespace SRFROWCA.ClusterLead
 
 
             ddlCluster.Items.Insert(0, new ListItem("--- Select Cluster ---", "-1"));
-            ddlCountry.Items.Insert(0, new ListItem("--- Select Country ---", "-1"));
+            //ddlCountry.Items.Insert(0, new ListItem("--- Select Country ---", "-1"));
             ddlMonth.Items.Insert(0, new ListItem("-- Select --", "-1"));
         }
 
@@ -140,24 +148,7 @@ namespace SRFROWCA.ClusterLead
 
         protected void gvClusterReports_Sorting(object sender, GridViewSortEventArgs e)
         {
-            int? countryId = null;
-            int? clusterId = null;
-            int? monthID = null;
-            string indicator = null;
-
-            if (!string.IsNullOrEmpty(txtIndicatorName.Text.Trim()))
-                indicator = txtIndicatorName.Text.Trim();
-
-            if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
-                countryId = Convert.ToInt32(ddlCountry.SelectedValue);
-
-            if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
-                clusterId = Convert.ToInt32(ddlCluster.SelectedValue);
-
-            if (Convert.ToInt32(ddlMonth.SelectedValue) > -1)
-                monthID = Convert.ToInt32(ddlMonth.SelectedValue);
-
-            DataTable dt = DBContext.GetData("uspGetClusterReports", new object[] { indicator, monthID, countryId, clusterId, RC.SelectedSiteLanguageId });
+            DataTable dt = SetDataSource();
 
             if (dt != null)
             {
@@ -196,6 +187,54 @@ namespace SRFROWCA.ClusterLead
             ViewState["SortExpression"] = column;
 
             return sortDirection;
+        }
+
+        protected void gvClusterReports_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                ObjPrToolTip.RegionalIndicatorIcon(e, 8);
+                ObjPrToolTip.CountryIndicatorIcon(e, 9);
+
+                Label lblTarget = (Label)e.Row.FindControl("lblTarget");
+                Label lblAchieved = (Label)e.Row.FindControl("lblAchieved");
+                string siteCulture = RC.SelectedSiteLanguageId.Equals(1) ? "en-US" : "de-DE";
+
+                if (lblTarget != null)
+                    lblTarget.Text = String.Format(new CultureInfo(siteCulture), "{0:0,0}", Convert.ToInt32(lblTarget.Text));
+
+                if (lblAchieved != null)
+                    lblAchieved.Text = String.Format(new CultureInfo(siteCulture), "{0:0,0}", Convert.ToInt32(lblAchieved.Text));
+            }
+        }
+
+        protected void btnExportToExcel_ServerClick(object sender, EventArgs e)
+        {
+            GridView gvExport = new GridView();
+            DataTable dt = SetDataSource();
+
+            RemoveColumnsFromDataTable(dt);
+
+            dt.DefaultView.Sort = "Country, Cluster, Indicator, Unit";
+            gvExport.DataSource = dt.DefaultView;
+            gvExport.DataBind();
+
+            string fileName = "ClusterIndicatorReport";
+            string fileExtention = ".xls";
+            ExportUtility.ExportGridView(gvExport, fileName, fileExtention, Response);
+        }
+
+        private void RemoveColumnsFromDataTable(DataTable dt)
+        {
+            try
+            {
+                dt.Columns.Remove("IsSRP");
+                dt.Columns.Remove("IsRegional");
+                dt.Columns.Remove("EmergencyLocationId");
+                dt.Columns.Remove("SiteLanguageId");
+
+            }
+            catch { }
         }
     }
 

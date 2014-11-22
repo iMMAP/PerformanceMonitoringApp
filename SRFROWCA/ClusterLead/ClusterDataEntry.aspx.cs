@@ -98,6 +98,12 @@ namespace SRFROWCA.ClusterLead
 
         private void LoadClusterIndicators()
         {
+            gvIndicators.DataSource = SetDataSource();
+            gvIndicators.DataBind();
+        }
+
+        private DataTable SetDataSource()
+        {
             int? countryId = null;
             int? clusterId = null;
 
@@ -107,8 +113,7 @@ namespace SRFROWCA.ClusterLead
             if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
                 clusterId = Convert.ToInt32(ddlCluster.SelectedValue);
 
-            gvIndicators.DataSource = GetClusterIndicatros(clusterId, countryId, null);
-            gvIndicators.DataBind();
+            return GetClusterIndicatros(clusterId, countryId, null);
         }
 
         private DataTable GetClusterIndicatros(int? clusterId, int? countryId, string indicator)
@@ -258,16 +263,7 @@ namespace SRFROWCA.ClusterLead
 
         protected void gvClusterIndicators_Sorting(object sender, GridViewSortEventArgs e)
         {
-            int? countryId = null;
-            int? clusterId = null;
-
-            if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
-                countryId = Convert.ToInt32(ddlCountry.SelectedValue);
-
-            if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
-                clusterId = Convert.ToInt32(ddlCluster.SelectedValue);
-
-            DataTable dt = GetClusterIndicatros(clusterId, countryId, null);
+            DataTable dt = SetDataSource();
 
             if (dt != null)
             {
