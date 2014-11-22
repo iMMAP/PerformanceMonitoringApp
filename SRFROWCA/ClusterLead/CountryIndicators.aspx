@@ -48,6 +48,11 @@
                             <div class="widget-box">
                                 <div class="widget-header widget-header-small header-color-blue2" style="padding-left:0px;">
                                     <h6>
+                                        <button runat="server" id="btnExportPDF" onserverclick="ExportToPDF"  class="btn btn-yellow" causesvalidation="false"
+                                            title="PDF">
+                                            <i class="icon-download"></i>PDF
+                                       
+                                        </button>
 
                                            <button runat="server" id="btnExportToExcel" onserverclick="btnExportToExcel_ServerClick" class="btn btn-yellow" causesvalidation="false"
                                             title="Excel">
