@@ -43,7 +43,7 @@ namespace SRFROWCA.Ebola
             
             if (Roles.IsUserInRole(LoginUser.UserName, "ClusterLead"))
             {
-                Response.Redirect("~/ClusterLead/ProjectsListing.aspx");
+                Response.Redirect("~/Ebola/Default.aspx");
             }
 
             if (Roles.IsUserInRole(LoginUser.UserName, "User"))

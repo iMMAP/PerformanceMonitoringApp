@@ -98,6 +98,7 @@
                 var list = '';
                 var list2 = '';
                 var j = 0;
+                var k = 0;
 
                 $(".imagetable th").each(function () {
                     var value = ($(":first-child", this).is(":input"))
@@ -108,10 +109,10 @@
                     if (value.indexOf('_') >= 0) {
                         j++;
                         city1 = value.split('_');
-                        city2 = city1[1].split('-');
-                        $(this).text(city2[1]);
+                        //city2 = city1[1].split('-');
+                        $(this).text(city1[0]);
                         if (j % 1 === 0) {
-                            list += '<th style="width:100px; text-align:center;">' + city1[0] + '</th>';
+                            list += '<th style="width:100px; text-align:center;">' + city1[1] + '</th>';
                         }
                     }
                 });

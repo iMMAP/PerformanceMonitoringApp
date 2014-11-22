@@ -19,23 +19,25 @@
     <%--<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>--%>
     <script type="text/javascript" src="../assets/js/jquery.tooltipster.min.js"></script>
     <script type="text/javascript">
-
-        $(function () {
-            bindCalendars();
-
-
-            $(".classsearchcriteriacustomreport").tooltip({
-                show: {
-                    effect: "slideDown",
-                    delay: 250
-                }
+        function pageLoad(sender, args)
+        {
+            $(function () {
+                bindCalendars();
+                $(".classsearchcriteriacustomreport").tooltip({
+                    show: {
+                        effect: "slideDown",
+                        delay: 250
+                    }
+                });
             });
-        });
+        }
+        
         $(document).ready(function () {
             $('.tooltip').tooltipster({
                 contentAsHTML: true
             });
         });
+
         function bindCalendars() {
             $("#<%=txtFromDate.ClientID%>").datepicker({
                 numberOfMonths: 2,
@@ -322,7 +324,7 @@
                             <Columns>
                                 <%--<asp:BoundField DataField="Cluster" HeaderText="Cluster" SortExpression="Cluster" />--%>
                                 <asp:BoundField DataField="Organization" HeaderText="Organization" SortExpression="Organization" />
-                                <asp:BoundField DataField="ProjectCode" HeaderText="Intervention" SortExpression="ProjectCode" />
+                                <asp:BoundField DataField="Intervention" HeaderText="Intervention" SortExpression="Intervention" />
 
                                 <%--<asp:BoundField DataField="Month" HeaderText="Month" SortExpression="Month" />--%>
                                 <asp:BoundField DataField="Objective" HeaderText="Objective" SortExpression="Objective" />
@@ -333,7 +335,10 @@
                                     ItemStyle-HorizontalAlign="Right" />
                                 <asp:BoundField DataField="Country" HeaderText="Country" SortExpression="Country" />
                                 <asp:BoundField DataField="Admin1" HeaderText="Admin1" SortExpression="Admin1" />
+                                <asp:BoundField DataField="Admin2" HeaderText="Admin2" SortExpression="Admin2" />
                                 
+                                <asp:BoundField DataField="ReportFrequencyName" HeaderText="Reporting Frequency" SortExpression="ReportFrequencyName" />
+                                <asp:BoundField DataField="ReportingPeriod" HeaderText="Reporting Period" SortExpression="ReportingPeriod" />
                                 <asp:BoundField DataField="Variable" HeaderText="Variable" SortExpression="Variable"
                                     ItemStyle-HorizontalAlign="Right" />
                               <%--  <asp:BoundField DataField="Achieved" HeaderText="Monthly Achieved" SortExpression="Achieved"
@@ -398,7 +403,12 @@
 
                 });
             </script>
+            
+            
         </ContentTemplate>
+        <Triggers>
+        <asp:PostBackTrigger ControlID="btnExportToExcel" />
+    </Triggers>
     </asp:UpdatePanel>
 
   

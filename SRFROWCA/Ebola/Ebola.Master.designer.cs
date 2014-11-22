@@ -283,33 +283,6 @@ namespace SRFROWCA.Ebola {
         protected global::System.Web.UI.WebControls.Localize localManageActivities;
         
         /// <summary>
-        /// liValidate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liValidate;
-        
-        /// <summary>
-        /// menueValidate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueValidate;
-        
-        /// <summary>
-        /// localValidate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localValidate;
-        
-        /// <summary>
         /// liValidateAchievements control.
         /// </summary>
         /// <remarks>
@@ -335,33 +308,6 @@ namespace SRFROWCA.Ebola {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Localize LocalValidateAchievements;
-        
-        /// <summary>
-        /// liValidateIndicators control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liValidateIndicators;
-        
-        /// <summary>
-        /// menueValidateIndicaotrs control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueValidateIndicaotrs;
-        
-        /// <summary>
-        /// localValidateIndicators control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localValidateIndicators;
         
         /// <summary>
         /// liCustomReport control.

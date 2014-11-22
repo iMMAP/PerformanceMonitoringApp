@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -344,9 +345,18 @@ namespace SRFROWCA.Ebola
             {
                 dt.Columns.Remove("rnumber");
                 dt.Columns.Remove("ObjectiveId");
-                dt.Columns.Remove("PriorityId");
-                dt.Columns.Remove("MonthId");
+                dt.Columns.Remove("Intervention_Code");
+                dt.Columns.Remove("Year");
+                
                 dt.Columns.Remove("cnt");
+                dt.Columns.Remove("ActivityId");
+                dt.Columns.Remove("IndicatorId");
+                dt.Columns.Remove("LocationId");
+                dt.Columns.Remove("LocationTypeId");
+                dt.Columns.Remove("ProjectId");
+                dt.Columns.Remove("LocationPCode");
+                dt.Columns.Remove("ReportDetailId");
+                
             }
             catch { }
         }
@@ -396,7 +406,7 @@ namespace SRFROWCA.Ebola
         private DataTable GetReportData(bool filter)
         {
             object[] paramValue = GetParamValues(filter);
-            return DBContext.GetData("GetAllTasksDataReport_Ebola", paramValue);
+            return DBContext.GetData("GetAllTasksDataReport_E", paramValue);
         }
 
         // Get filter criteria and create an object with parameter values.
@@ -427,6 +437,14 @@ namespace SRFROWCA.Ebola
                 isApproved = cbValidated.Checked && cbNotValidated.Checked ? null : cbValidated.Checked ? 0 : cbNotValidated.Checked ? 1 : (int?)null;
             }
 
+            DateTime? startDate = txtFromDate.Text.Trim().Length > 0 ?
+                                    DateTime.ParseExact(txtFromDate.Text.Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture) :
+                                (DateTime?)null;
+
+            DateTime? endDate = txtToDate.Text.Trim().Length > 0 ?
+                                DateTime.ParseExact(txtToDate.Text.Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture) :
+                                (DateTime?)null;
+
             int? pageSize = null;
             int? pageIndex = null;
 
@@ -439,7 +457,7 @@ namespace SRFROWCA.Ebola
             int langId = RC.SelectedSiteLanguageId;
 
             return new object[] {locationIds, clusterId, orgIds, 
-                                    objIds, actIds, indIds, projectIds,
+                                    objIds, actIds, indIds, projectIds, startDate, endDate,
                                     isApproved, pageIndex, pageSize, Convert.ToInt32(SQLPaging), langId };
         }
 
@@ -545,7 +563,7 @@ namespace SRFROWCA.Ebola
             DataTable dt = GetReportData(false);
 
             RemoveColumnsFromDataTable(dt);
-            ReplaceHTMLTags(dt);
+            //ReplaceHTMLTags(dt);
 
             GridView gv = new GridView();
             gv.DataSource = dt;

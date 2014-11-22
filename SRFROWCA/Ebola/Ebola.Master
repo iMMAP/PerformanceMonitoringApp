@@ -173,20 +173,11 @@
                         <li id="liManageActivity" runat="server"><a href="~/Ebola/ManageActivities.aspx"
                             id="menuManageActivities" runat="server"><i class="icon-list-alt"></i><span class="menu-text">
                                 <asp:Localize ID="localManageActivities" runat="server" Text="Manage Indicators" meta:resourcekey="localManageActivitiesResource1"></asp:Localize></span> </a></li>
-                        <li id="liValidate" runat="server"><a id="menueValidate" runat="server" href="#"
-                            class="dropdown-toggle"><i class="icon-check"></i><span class="menu-text">
-                                <asp:Localize ID="localValidate" runat="server" Text="Validate" meta:resourcekey="localValidateResource1"></asp:Localize>
-                            </span><b class="arrow icon-angle-down"></b></a>
-                            <ul class="submenu">
-                                <li id="liValidateAchievements" runat="server"><a id="menueValidateAchievements" runat="server"
-                                    href="~/ClusterLead/ValidateReportList.aspx"><span class="menu-text">
-                                        <asp:Localize ID="LocalValidateAchievements" runat="server" Text="Achievements" meta:resourcekey="LocalValidateAchievementsResource1"></asp:Localize>
+                        
+                        <li id="liValidateAchievements" runat="server"><a id="menueValidateAchievements" runat="server"
+                                    href="~/Ebola/ValidateReportList.aspx"><i class="icon-check"></i><span class="menu-text">
+                                        <asp:Localize ID="LocalValidateAchievements" runat="server" Text="Validate"></asp:Localize>
                                     </span></a></li>
-                                <li id="liValidateIndicators" runat="server"><a href="~/ClusterLead/ApproveIndicatorAddRemove.aspx"
-                                    id="menueValidateIndicaotrs" runat="server"><i class="icon-list-alt"></i><span class="menu-text">
-                                        <asp:Localize ID="localValidateIndicators" runat="server" Text="Indicators" meta:resourcekey="localValidateIndicatorsResource1"></asp:Localize></span></a></li>
-                            </ul>
-                        </li>
 
                         <li id="liCustomReport" runat="server"><a href="~/Ebola/AllData.aspx" id="menueCustomReport"
                             runat="server"><i class="icon-table"></i>

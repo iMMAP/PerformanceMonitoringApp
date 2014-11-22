@@ -175,8 +175,8 @@ namespace SRFROWCA.Ebola
             liManageProject.Visible = isShow;
             menuManageActivities.Visible = isShow;
             liManageActivity.Visible = isShow;
-            menueValidateIndicaotrs.Visible = isShow;
-            liValidate.Visible = isShow;
+            liValidateAchievements.Visible = isShow;
+            menueValidateAchievements.Visible = isShow;
             liActivities.Visible = isShow;
             liIndicators.Visible = isShow;
         }
@@ -197,16 +197,14 @@ namespace SRFROWCA.Ebola
         private void ShowClusterLeadMenue()
         {
             bool isShow = true;
-
-            menueValidateIndicaotrs.Visible = isShow;
-            liValidate.Visible = isShow;
+            liValidateAchievements.Visible = isShow;
+            menueValidateAchievements.Visible = isShow;
         }
 
         private void ShowCountryAdminMenue()
         {
             bool isShow = true;
-            menueValidateIndicaotrs.Visible = isShow;
-            liValidate.Visible = isShow;
+            liValidateAchievements.Visible = isShow;
         }
 
         private void ShowAdminMenue()
@@ -253,19 +251,11 @@ namespace SRFROWCA.Ebola
             
             else if (uri == "/ClusterLead/ValidateReportList.aspx")
             {
-                liValidate.Attributes.Add("class", "active open");
-                liValidateAchievements.Attributes.Add("class", "active");
+                liValidateAchievements.Attributes.Add("class", "active open");
             }
-            else if (uri == "/ClusterLead/ApproveIndicatorAddRemove.aspx")
-            {
-                liValidate.Attributes.Add("class", "active open");
-                liValidateIndicators.Attributes.Add("class", "active");
-            }
-            
             else if (uri.Contains("ClusterLead/ValidateIndicators.aspx"))
             {
-                liValidate.Attributes.Add("class", "active open");
-                liValidateAchievements.Attributes.Add("class", "active");
+                liValidateAchievements.Attributes.Add("class", "active open");
             }
             
             else if (uri.Contains("Admin/ActivityListing.aspx"))
