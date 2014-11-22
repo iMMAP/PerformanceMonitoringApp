@@ -424,7 +424,8 @@
     <Content Include="Ebola\Login.aspx" />
     <Content Include="Ebola\ManageActivities.aspx" />
     <Content Include="Ebola\ReportDataEntry.aspx" />
-    <Content Include="Ebola\WebForm1.aspx" />
+    <Content Include="Ebola\ValidateIndicators.aspx" />
+    <Content Include="Ebola\ValidateReportList.aspx" />
     <Content Include="ErrorPages\DefaultRedirectErrorPage.aspx" />
     <Content Include="ErrorPages\GenericErrorPage.aspx" />
     <Content Include="ErrorPages\Http404ErrorPage.aspx" />
@@ -1175,12 +1176,19 @@
     <Compile Include="Ebola\ReportDataEntry.aspx.designer.cs">
       <DependentUpon>ReportDataEntry.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Ebola\WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
+    <Compile Include="Ebola\ValidateIndicators.aspx.cs">
+      <DependentUpon>ValidateIndicators.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Ebola\WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
+    <Compile Include="Ebola\ValidateIndicators.aspx.designer.cs">
+      <DependentUpon>ValidateIndicators.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ebola\ValidateReportList.aspx.cs">
+      <DependentUpon>ValidateReportList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ebola\ValidateReportList.aspx.designer.cs">
+      <DependentUpon>ValidateReportList.aspx</DependentUpon>
     </Compile>
     <Compile Include="ErrorPages\DefaultRedirectErrorPage.aspx.cs">
       <DependentUpon>DefaultRedirectErrorPage.aspx</DependentUpon>
