@@ -76,6 +76,16 @@
                                     <a href="../Reports/DownloadReport.aspx?type=10"><span class="menu-text"><asp:Localize ID="Localize12" runat="server" Text="Export In Word" meta:resourcekey="localReportResource1"></asp:Localize>
                                 </span></a>
                                 </li>
+                                 <li id="li1" runat="server">
+                                    <i class="icon-hand-right blue"></i>
+                                    <a href="../Reports/DownloadReport.aspx?type=11"><span class="menu-text"><asp:Localize ID="Localize1" runat="server" Text="Export to Excel" meta:resourcekey="localReportResource1"></asp:Localize>
+                                </span></a>
+                                </li>
+                                 <li id="li2" runat="server">
+                                    <i class="icon-hand-right blue"></i>
+                                    <a href="../Reports/DownloadReport.aspx?type=12"><span class="menu-text"><asp:Localize ID="Localize2" runat="server" Text="Export to PDF" meta:resourcekey="localReportResource1"></asp:Localize>
+                                </span></a>
+                                </li>
                             </ul>
                         </div>
 
