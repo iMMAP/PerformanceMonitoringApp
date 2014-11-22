@@ -137,7 +137,7 @@ namespace SRFROWCA
             Response.Write(RenderGrid(gv).ToString());
             if (disposePassedControl)
             {
-                ///control.Dispose();
+                control.Dispose();
             }
 
             Response.End();
