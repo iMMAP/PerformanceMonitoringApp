@@ -1,6 +1,20 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="ClusterReports.aspx.cs" Inherits="SRFROWCA.ClusterLead.ClusterReports" %>
 
 <asp:Content ID="cntClusterReports" ContentPlaceHolderID="HeadContent" runat="server">
+
+    <script type="text/javascript">
+
+        function resetAll() {
+
+            document.getElementById('<%=ddlCountry.ClientID%>').selectedIndex = 0;
+            document.getElementById('<%=ddlCluster.ClientID%>').selectedIndex = 0;
+            document.getElementById('<%=ddlMonth.ClientID%>').selectedIndex = 0;
+
+            return false;
+        }
+
+    </script>
+
 </asp:Content>
 
 <asp:Content ID="cntMainContentCountryIndicators" ContentPlaceHolderID="MainContent" runat="server">
@@ -35,7 +49,7 @@
                                 </div>
                                 <div class="widget-body">
                                     <div class="widget-main">
-                                        <table border="0" style="width: 80%; margin: 0px 10px 0px 20px">
+                                        <table border="0" style="width: 95%; margin: 0px 10px 0px 20px">
                                             <tr>
                                                 <td>
                                                     <label>
@@ -44,48 +58,40 @@
                                                 <td>
                                                     <asp:TextBox ID="txtIndicatorName" runat="server" Width="270px"></asp:TextBox>
                                                 </td>
-
-                                            </tr>
-
-                                            <tr>
                                                 <td>
                                                     <asp:Label runat="server" ID="lblCountry" Text="Country:"></asp:Label>
                                                 </td>
                                                 <td>
-                                                    <asp:DropDownList AutoPostBack="true" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" runat="server" AppendDataBoundItems="true" ID="ddlCountry" Width="270">
+                                                    <asp:DropDownList AutoPostBack="true" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" runat="server" ID="ddlCountry" Width="270">
                                                         <asp:ListItem Selected="True" Text="--- Select Country ---" Value="-1"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </td>
-
-
-                                            </tr>
-                                            <tr>
-
-                                                <td>
-                                                    <asp:Label runat="server" ID="lblCluster" Text="Cluster:" meta:resourcekey="lblClusterResource1"></asp:Label>
-                                                </td>
-                                                <td>
-                                                    <asp:DropDownList AutoPostBack="True"  OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged" runat="server" AppendDataBoundItems="True" ID="ddlCluster" Width="270px" meta:resourcekey="ddlClusterResource1">
-                                                        <asp:ListItem Selected="True" Text="--- Select Cluster ---" Value="-1" meta:resourcekey="ListItemResource1"></asp:ListItem>
-                                                    </asp:DropDownList>
-                                                </td>
+                                                <td></td>
                                             </tr>
                                             <tr>
                                                 <td>Month:</td>
                                                 <td>
-                                                    <asp:DropDownList ID="ddlMonth" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged" AutoPostBack="true" runat="server">
+                                                    <asp:DropDownList ID="ddlMonth"  OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged" AutoPostBack="true" runat="server">
                                                         <asp:ListItem Selected="True" Text="--- Select ---" Value="-1"></asp:ListItem>
                                                     </asp:DropDownList></td>
+                                                <td>
+                                                    <asp:Label runat="server" ID="lblCluster" Text="Cluster:" meta:resourcekey="lblClusterResource1"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:DropDownList AutoPostBack="True" OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged" runat="server"  ID="ddlCluster" Width="270px" meta:resourcekey="ddlClusterResource1">
+                                                        <asp:ListItem Selected="True" Text="--- Select Cluster ---" Value="-1" meta:resourcekey="ListItemResource1"></asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </td>
+                                                 <td style="text-align:right;" >
+                                                    
+
+                                                    <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" CssClass="btn btn-primary" CausesValidation="False" meta:resourcekey="btnSearchResource1" />
+                                                     
+                                                     <button onclick="return resetAll();" class="btn btn-primary" >Reset</button>
+                                                </td>
                                             </tr>
 
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td style="padding-top: 10px;">
-                                                    <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" CssClass="btn btn-primary" CausesValidation="False" meta:resourcekey="btnSearchResource1" />
-                                                </td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
+                                           
                                         </table>
                                     </div>
                                 </div>
@@ -98,7 +104,7 @@
         <div class="table-responsive">
             <div style="overflow-x: auto; width: 100%">
                 <asp:GridView ID="gvClusterReports" Width="100%" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" AllowSorting="True" DataKeyNames="SiteLanguageId"
-                    ShowHeader="true" CssClass=" table-striped table-bordered table-hover">
+                    ShowHeader="true" OnSorting="gvClusterReports_Sorting" CssClass=" table-striped table-bordered table-hover">
                     <EmptyDataTemplate>
                         Your filter criteria does not match any record in database!
                     </EmptyDataTemplate>
@@ -126,18 +132,12 @@
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Center" Width="4%"></ItemStyle>
                         </asp:TemplateField>--%>
-                        <asp:BoundField ItemStyle-Width="20%" DataField="Country" HeaderText="Country" SortExpression="Country" meta:resourcekey="BoundFieldResource4">
-                        </asp:BoundField>
-                        <asp:BoundField ItemStyle-Width="20%" DataField="Cluster" HeaderText="Cluster" SortExpression="Cluster" meta:resourcekey="BoundFieldResource5">
-                        </asp:BoundField>
-                        <asp:BoundField ItemStyle-Width="28%" DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator" meta:resourcekey="BoundFieldResource6">
-                        </asp:BoundField>
-                        <asp:BoundField ItemStyle-Width="10%" DataField="Target" HeaderText="Target" SortExpression="Target" meta:resourcekey="BoundFieldResource7">
-                        </asp:BoundField>
-                        <asp:BoundField ItemStyle-Width="10%" DataField="Aggregated" HeaderText="Aggregated" SortExpression="Aggregated" >
-                        </asp:BoundField>
-                        <asp:BoundField ItemStyle-Width="10%" DataField="Unit" HeaderText="Unit" SortExpression="Unit" meta:resourcekey="BoundFieldResource8">
-                        </asp:BoundField>
+                        <asp:BoundField ItemStyle-Width="20%" DataField="Country" HeaderText="Country" SortExpression="Country" meta:resourcekey="BoundFieldResource4"></asp:BoundField>
+                        <asp:BoundField ItemStyle-Width="20%" DataField="Cluster" HeaderText="Cluster" SortExpression="Cluster" meta:resourcekey="BoundFieldResource5"></asp:BoundField>
+                        <asp:BoundField ItemStyle-Width="28%" DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator" meta:resourcekey="BoundFieldResource6"></asp:BoundField>
+                        <asp:BoundField ItemStyle-Width="10%" DataField="Target" HeaderText="Target" SortExpression="Target" meta:resourcekey="BoundFieldResource7"></asp:BoundField>
+                        <asp:BoundField ItemStyle-Width="10%" DataField="Achieved" HeaderText="Achieved" SortExpression="Achieved"></asp:BoundField>
+                        <asp:BoundField ItemStyle-Width="10%" DataField="Unit" HeaderText="Unit" SortExpression="Unit" meta:resourcekey="BoundFieldResource8"></asp:BoundField>
 
                         <%--                        <asp:TemplateField Visible="false" meta:resourcekey="TemplateFieldResource5">
                             <ItemTemplate>

@@ -11,6 +11,14 @@
             $(".numeric1").numeric();
         });
 
+        function resetAll() {
+
+            document.getElementById('<%=ddlCountry.ClientID%>').selectedIndex = 0 ;
+            document.getElementById('<%=ddlCluster.ClientID%>').selectedIndex = 0;
+
+             return false;
+         }
+
     </script>
 
 </asp:Content>
@@ -76,6 +84,7 @@
                                                 <td></td>
                                                 <td style="text-align: right;">
                                                     <asp:Button runat="server" ID="btnSaveAll" Text="Save" class="width-10 btn btn-sm" OnClientClick="return validate();" OnClick="btnSaveAll_Click" />
+                                                    <button class="width-10 btn btn-sm" onclick="return resetAll();" >Reset</button>
 
                                                 </td>
 

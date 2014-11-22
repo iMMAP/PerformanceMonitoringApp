@@ -87,9 +87,17 @@ namespace SRFROWCA.ClusterLead
 
         private void LoadCombos()
         {
-            UI.FillEmergencyLocations(ddlCountry, 1);
-            UI.FillClusters(ddlCluster, RC.SelectedSiteLanguageId);
+            //UI.FillEmergencyLocations(ddlCountry, 1);
+            //UI.FillClusters(ddlCluster, RC.SelectedSiteLanguageId);
+
+            UI.FillEmergencyLocations(ddlCountry, UserInfo.Emergency, RC.SelectedSiteLanguageId);
+            UI.FillEmergnecyClusters(ddlCluster, RC.SelectedSiteLanguageId);
+
             UI.FillUnits(ddlUnits);
+
+            ddlCluster.Items.Insert(0, new ListItem("--- Select Cluster ---", "-1"));
+            ddlCountry.Items.Insert(0,new ListItem("--- Select Country ---", "-1"));
+            ddlUnits.Items.Insert(0,new ListItem("--- Select Units ---", "-1"));
         }
 
         private void LoadClusterIndicators()
@@ -390,6 +398,7 @@ namespace SRFROWCA.ClusterLead
 
         internal override void BindGridData()
         {
+            LoadCombos();
             LoadClusterIndicators();
         }
 
@@ -411,7 +420,14 @@ namespace SRFROWCA.ClusterLead
             Guid userId = RC.GetCurrentUserId;
             string indicatorEng = txtIndicatorEng.Text.Trim();
             string indicatorFr = txtIndicatorFr.Text.Trim();
-            string target = decimal.Round(Convert.ToDecimal(txtTarget.Text.Trim()), 0).ToString();
+
+            string siteCulture = RC.SelectedSiteLanguageId.Equals(1) ? "en-US" : "de-DE";
+            string cultureTarget = txtTarget.Text.Trim();
+
+            if (RC.SelectedSiteLanguageId.Equals(2))
+                cultureTarget = cultureTarget.Replace(".", ",");
+
+            string target = decimal.Round(Convert.ToDecimal(cultureTarget, new CultureInfo(siteCulture)), 0).ToString();
             string unitID = ddlUnits.SelectedValue;
 
             if (!string.IsNullOrEmpty(hfClusterIndicatorID.Value))
@@ -453,7 +469,9 @@ namespace SRFROWCA.ClusterLead
             DataTable dt = GetClusterIndicatros(clusterID, countryID, indicator);
 
             RemoveColumnsFromDataTable(dt);
-            gvExport.DataSource = dt;
+
+            dt.DefaultView.Sort = "Country, Cluster, Indicator, Unit";
+            gvExport.DataSource = dt.DefaultView;
             gvExport.DataBind();
 
             string fileName = "ClusterIndicators";
@@ -471,6 +489,8 @@ namespace SRFROWCA.ClusterLead
                 dt.Columns.Remove("CountryID");
                 dt.Columns.Remove("ClusterId");
                 dt.Columns.Remove("UnitId");
+                dt.Columns.Remove("IsSRP");
+                dt.Columns.Remove("IsRegional");
 
             }
             catch { }

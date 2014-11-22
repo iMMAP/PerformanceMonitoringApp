@@ -31,8 +31,6 @@ namespace SRFROWCA.ClusterLead
                 LoadCombos();
                 ShowHideControls();
 
-                PopulateYears();
-                PopulateMonths();
                 SetDates();
 
                 LoadClusterIndicators();
@@ -66,6 +64,7 @@ namespace SRFROWCA.ClusterLead
 
         internal override void BindGridData()
         {
+            LoadCombos();
             LoadClusterIndicators();
         }
 
@@ -76,13 +75,8 @@ namespace SRFROWCA.ClusterLead
             //UI.FillClusters(ddlCluster, RC.SelectedSiteLanguageId);
             UI.FillEmergnecyClusters(ddlCluster, RC.SelectedSiteLanguageId);
 
-            //if (!string.IsNullOrEmpty(Convert.ToString(Session["ControlData"])))
-            //{
-            //    string[] ddlValues = Convert.ToString(Session["ControlData"]).Split('|');
-
-            //    ddlCountry.SelectedValue = ddlValues[0];
-            //    ddlCluster.SelectedValue = ddlValues[1];
-            //}
+            PopulateYears();
+            PopulateMonths();
         }
 
         private void SetDates()
@@ -194,16 +188,26 @@ namespace SRFROWCA.ClusterLead
                         clusterIndicatorID = Convert.ToInt32(lblClusterIndicatorID.Text);
 
                     if (txtAchieved != null)
-                        achieved = string.IsNullOrEmpty(txtAchieved.Text) ? null : decimal.Round(Convert.ToDecimal(txtAchieved.Text.Trim()), 0).ToString(); 
+                    {
+                        string siteCulture = RC.SelectedSiteLanguageId.Equals(1) ? "en-US" : "de-DE";
+                        string cultureAchieved = txtAchieved.Text.Trim();
+                        
+                        if(RC.SelectedSiteLanguageId.Equals(2))
+                            cultureAchieved = cultureAchieved.Replace(".", ",");
 
-                    if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
-                        countryId = Convert.ToInt32(ddlCountry.SelectedValue);
-                    else if (lblCountryID != null)
+                        achieved = string.IsNullOrEmpty(txtAchieved.Text) ? null : decimal.Round(Convert.ToDecimal(cultureAchieved, new CultureInfo(siteCulture)), 0).ToString();
+                    }
+
+                    //if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
+                    //    countryId = Convert.ToInt32(ddlCountry.SelectedValue);
+                    //else 
+                        if (lblCountryID != null)
                         countryId = Convert.ToInt32(lblCountryID.Text);
 
-                    if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
-                        clusterId = Convert.ToInt32(ddlCluster.SelectedValue);
-                    else if (lblCluster != null)
+                    //if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
+                    //    clusterId = Convert.ToInt32(ddlCluster.SelectedValue);
+                    //else
+                        if (lblCluster != null)
                         clusterId = Convert.ToInt32(lblClusterID.Text);
 
                     DBContext.Add("uspInsertClusterReport", new object[] { clusterIndicatorID, clusterId, countryId, yearId, monthId, achieved, RC.GetCurrentUserId, null });

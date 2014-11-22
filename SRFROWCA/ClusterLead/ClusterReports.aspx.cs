@@ -22,8 +22,7 @@ namespace SRFROWCA.ClusterLead
             {
                 LoadCombos();
                 ShowHideControls();
-                PopulateMonths();
-
+                
                 LoadClusterReports();
             }
         }
@@ -51,10 +50,22 @@ namespace SRFROWCA.ClusterLead
             gvClusterReports.DataBind();
         }
 
+        internal override void BindGridData()
+        {
+            LoadCombos();
+            LoadClusterReports();
+        }
+
         private void LoadCombos()
         {
             UI.FillEmergencyLocations(ddlCountry, UserInfo.Emergency, RC.SelectedSiteLanguageId);
             UI.FillEmergnecyClusters(ddlCluster, RC.SelectedSiteLanguageId);
+            PopulateMonths();
+
+
+            ddlCluster.Items.Insert(0, new ListItem("--- Select Cluster ---", "-1"));
+            ddlCountry.Items.Insert(0, new ListItem("--- Select Country ---", "-1"));
+            ddlMonth.Items.Insert(0, new ListItem("-- Select --", "-1"));
         }
 
         private void ShowHideControls()
@@ -92,13 +103,13 @@ namespace SRFROWCA.ClusterLead
             ddlMonth.DataSource = GetMonth();
             ddlMonth.DataBind();
 
-            var result = DateTime.Now.ToString("MMMM", new CultureInfo(RC.SiteCulture));
-            result = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(result);
+            //var result = DateTime.Now.ToString("MMMM", new CultureInfo(RC.SiteCulture));
+            //result = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(result);
 
-            int monthNumber = MonthNumber.GetMonthNumber(result);
-            monthNumber = monthNumber == 1 ? monthNumber : monthNumber - 1;
+            //int monthNumber = MonthNumber.GetMonthNumber(result);
+            //monthNumber = monthNumber == 1 ? monthNumber : monthNumber - 1;
 
-            ddlMonth.SelectedIndex = i > -1 ? i : ddlMonth.Items.IndexOf(ddlMonth.Items.FindByValue(monthNumber.ToString()));
+            //ddlMonth.SelectedIndex = i > -1 ? i : ddlMonth.Items.IndexOf(ddlMonth.Items.FindByValue(monthNumber.ToString()));
         }
 
         private DataTable GetMonth()
@@ -126,5 +137,66 @@ namespace SRFROWCA.ClusterLead
         {
             LoadClusterReports();
         }
+
+        protected void gvClusterReports_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            int? countryId = null;
+            int? clusterId = null;
+            int? monthID = null;
+            string indicator = null;
+
+            if (!string.IsNullOrEmpty(txtIndicatorName.Text.Trim()))
+                indicator = txtIndicatorName.Text.Trim();
+
+            if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
+                countryId = Convert.ToInt32(ddlCountry.SelectedValue);
+
+            if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
+                clusterId = Convert.ToInt32(ddlCluster.SelectedValue);
+
+            if (Convert.ToInt32(ddlMonth.SelectedValue) > -1)
+                monthID = Convert.ToInt32(ddlMonth.SelectedValue);
+
+            DataTable dt = DBContext.GetData("uspGetClusterReports", new object[] { indicator, monthID, countryId, clusterId, RC.SelectedSiteLanguageId });
+
+            if (dt != null)
+            {
+                //Sort the data.
+                dt.DefaultView.Sort = e.SortExpression + " " + GetSortDirection(e.SortExpression);
+                gvClusterReports.DataSource = dt;
+                gvClusterReports.DataBind();
+            }
+        }
+
+        private string GetSortDirection(string column)
+        {
+
+            // By default, set the sort direction to ascending.
+            string sortDirection = "ASC";
+
+            // Retrieve the last column that was sorted.
+            string sortExpression = ViewState["SortExpression"] as string;
+
+            if (sortExpression != null)
+            {
+                // Check if the same column is being sorted.
+                // Otherwise, the default value can be returned.
+                if (sortExpression == column)
+                {
+                    string lastDirection = ViewState["SortDirection"] as string;
+                    if ((lastDirection != null) && (lastDirection == "ASC"))
+                    {
+                        sortDirection = "DESC";
+                    }
+                }
+            }
+
+            // Save new values in ViewState.
+            ViewState["SortDirection"] = sortDirection;
+            ViewState["SortExpression"] = column;
+
+            return sortDirection;
+        }
     }
+
 }
