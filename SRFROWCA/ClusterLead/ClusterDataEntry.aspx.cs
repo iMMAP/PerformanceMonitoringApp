@@ -308,5 +308,49 @@ namespace SRFROWCA.ClusterLead
         {
             RC.ShowMessage(Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
         }
+
+        protected void btnExportToExcel_ServerClick(object sender, EventArgs e)
+        {
+            GridView gvExport = new GridView();
+
+            int? countryId = null;
+            string countryIds = null;
+            int? clusterId = null;
+            int? monthID = null;
+
+            if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
+                countryId = Convert.ToInt32(ddlCountry.SelectedValue);
+
+            if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
+                clusterId = Convert.ToInt32(ddlCluster.SelectedValue);
+
+            if (Convert.ToInt32(ddlMonth.SelectedValue) > -1)
+                monthID = Convert.ToInt32(ddlMonth.SelectedValue);
+
+            DataTable dt = DBContext.GetData("uspGetClusterReports", new object[] { null, monthID, countryId, clusterId, RC.SelectedSiteLanguageId, true, countryIds });
+            RemoveColumnsFromDataTable(dt);
+
+            dt.DefaultView.Sort = "Country, Cluster, Indicator, Unit";
+            gvExport.DataSource = dt.DefaultView;
+            gvExport.DataBind();
+
+            string fileName = "ClusterDataEntry";
+            string fileExtention = ".xls";
+            ExportUtility.ExportGridView(gvExport, fileName, fileExtention, Response);
+        
+        }
+
+        private void RemoveColumnsFromDataTable(DataTable dt)
+        {
+            try
+            {
+                dt.Columns.Remove("IsSRP");
+                dt.Columns.Remove("IsRegional");
+                dt.Columns.Remove("EmergencyLocationId");
+                dt.Columns.Remove("SiteLanguageId");
+
+            }
+            catch { }
+        }
     }
 }

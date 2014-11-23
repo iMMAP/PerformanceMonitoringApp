@@ -13,11 +13,11 @@
 
         function resetAll() {
 
-            document.getElementById('<%=ddlCountry.ClientID%>').selectedIndex = 0 ;
+            document.getElementById('<%=ddlCountry.ClientID%>').selectedIndex = 0;
             document.getElementById('<%=ddlCluster.ClientID%>').selectedIndex = 0;
 
-             return false;
-         }
+            return false;
+        }
 
     </script>
 
@@ -35,7 +35,7 @@
 
     </div>
     <div class="page-content">
-    <div id="divMsg"></div>
+        <div id="divMsg"></div>
         <table style="width: 100%">
             <tr>
                 <td>
@@ -43,6 +43,15 @@
                         <div class="col-xs-12 col-sm-12 ">
                             <div class="widget-box">
                                 <div class="widget-header widget-header-small header-color-blue2">
+
+                                    <h6>
+                                        <button runat="server" id="btnExportToExcel" onserverclick="btnExportToExcel_ServerClick" class="btn btn-yellow" causesvalidation="false"
+                                            title="Excel">
+                                            <i class="icon-download"></i>Excel
+                                       
+                                        </button>
+
+                                    </h6>
                                 </div>
                                 <div class="widget-body">
                                     <div class="widget-main">
@@ -52,7 +61,7 @@
                                                     <asp:Label runat="server" ID="lblCountry" Text="Country:"></asp:Label>
                                                 </td>
                                                 <td style="width: 10%;">
-                                                    <asp:DropDownList AutoPostBack="true" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" runat="server"  ID="ddlCountry" Width="270">
+                                                    <asp:DropDownList AutoPostBack="true" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" runat="server" ID="ddlCountry" Width="270">
                                                         <asp:ListItem Selected="True" Text="--- Select Country ---" Value="-1"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </td>
@@ -65,7 +74,7 @@
                                                     <asp:Label runat="server" ID="lblCluster" Text="Cluster:"></asp:Label>
                                                 </td>
                                                 <td style="<%=ClusterDisplayNone%>">
-                                                    <asp:DropDownList AutoPostBack="true" runat="server" OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged"  ID="ddlCluster" Width="270">
+                                                    <asp:DropDownList AutoPostBack="true" runat="server" OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged" ID="ddlCluster" Width="270">
                                                         <asp:ListItem Selected="True" Text="--- Select Cluster ---" Value="-1"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </td>
@@ -84,7 +93,7 @@
                                                 <td></td>
                                                 <td style="text-align: right;">
                                                     <asp:Button runat="server" ID="btnSaveAll" Text="Save" class="width-10 btn btn-sm" OnClientClick="return validate();" OnClick="btnSaveAll_Click" />
-                                                    <button class="width-10 btn btn-sm" onclick="resetAll();" >Reset</button>
+                                                    <button class="width-10 btn btn-sm" onclick="resetAll();">Reset</button>
 
                                                 </td>
 
@@ -137,10 +146,10 @@
                     <%--<asp:BoundField DataField="Target" ItemStyle-HorizontalAlign="Right" HeaderText="Target" SortExpression="Target" ItemStyle-Width="10%"></asp:BoundField>--%>
                     <asp:TemplateField ItemStyle-Width="10%" HeaderText="Target" ItemStyle-HorizontalAlign="Right" SortExpression="Target">
                         <ItemTemplate>
-                               <asp:Label ID="lblTarget" runat="server" Text=' <%# Eval("Target")%>'></asp:Label>                            
+                            <asp:Label ID="lblTarget" runat="server" Text=' <%# Eval("Target")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    
+
 
                     <%--  <asp:TemplateField ItemStyle-Width="5%" HeaderText="Running Sum">
                         <ItemTemplate>
