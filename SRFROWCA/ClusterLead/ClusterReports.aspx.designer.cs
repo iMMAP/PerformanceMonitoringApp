@@ -64,7 +64,7 @@ namespace SRFROWCA.ClusterLead {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlMonth;
+        protected global::Saplin.Controls.DropDownCheckBoxes ddlMonth;
         
         /// <summary>
         /// lblCluster control.
@@ -82,7 +82,7 @@ namespace SRFROWCA.ClusterLead {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCluster;
+        protected global::Saplin.Controls.DropDownCheckBoxes ddlCluster;
         
         /// <summary>
         /// btnSearch control.

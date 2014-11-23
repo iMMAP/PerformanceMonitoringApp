@@ -39,24 +39,27 @@ namespace SRFROWCA.ClusterLead
             int? countryId = null;
             string countryIds = null;
             int? clusterId = null;
+            string clusterIds = null;
             int? monthID = null;
+            string monthIDs = null;
             string indicator = null;
 
             if (!string.IsNullOrEmpty(txtIndicatorName.Text.Trim()))
                 indicator = txtIndicatorName.Text.Trim();
 
-            //if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
-                //countryId = Convert.ToInt32(ddlCountry.SelectedValue);
-
             countryIds = RC.GetSelectedValues(ddlCountry);
 
-            if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
-                clusterId = Convert.ToInt32(ddlCluster.SelectedValue);
+            //if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
+            //    clusterId = Convert.ToInt32(ddlCluster.SelectedValue);
 
-            if (Convert.ToInt32(ddlMonth.SelectedValue) > -1)
-                monthID = Convert.ToInt32(ddlMonth.SelectedValue);
+            clusterIds = RC.GetSelectedValues(ddlCluster);
 
-            return DBContext.GetData("uspGetClusterReports", new object[] { indicator, monthID, countryId, clusterId, RC.SelectedSiteLanguageId, cbIncludeRegional.Checked, countryIds });
+            //if (Convert.ToInt32(ddlMonth.SelectedValue) > -1)
+            //    monthID = Convert.ToInt32(ddlMonth.SelectedValue);
+
+            monthIDs = RC.GetSelectedValues(ddlMonth);
+
+            return DBContext.GetData("uspGetClusterReports", new object[] { indicator, monthID, countryId, clusterId, RC.SelectedSiteLanguageId, cbIncludeRegional.Checked, countryIds, clusterIds, monthIDs });
         }
 
         internal override void BindGridData()
@@ -72,9 +75,9 @@ namespace SRFROWCA.ClusterLead
             PopulateMonths();
 
 
-            ddlCluster.Items.Insert(0, new ListItem("--- Select Cluster ---", "-1"));
+            //ddlCluster.Items.Insert(0, new ListItem("--- Select Cluster ---", "-1"));
             //ddlCountry.Items.Insert(0, new ListItem("--- Select Country ---", "-1"));
-            ddlMonth.Items.Insert(0, new ListItem("-- Select --", "-1"));
+            //ddlMonth.Items.Insert(0, new ListItem("-- Select --", "-1"));
         }
 
         private void ShowHideControls()
@@ -242,7 +245,9 @@ namespace SRFROWCA.ClusterLead
             string countryId = null;
             string countryIds = null;
             string clusterId = null;
+            string clusterIds = null;
             string monthID = null;
+            string monthIDs = null;
             string indicator = null;
 
             if (!string.IsNullOrEmpty(txtIndicatorName.Text.Trim()))
@@ -253,11 +258,14 @@ namespace SRFROWCA.ClusterLead
 
             countryIds = RC.GetSelectedValues(ddlCountry);
 
-            if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
-                clusterId = ddlCluster.SelectedValue;
+            //if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
+            //    clusterId = ddlCluster.SelectedValue;
 
-            if (Convert.ToInt32(ddlMonth.SelectedValue) > -1)
-                monthID = ddlMonth.SelectedValue;
+            //if (Convert.ToInt32(ddlMonth.SelectedValue) > -1)
+            //    monthID = ddlMonth.SelectedValue;
+
+            clusterIds = RC.GetSelectedValues(ddlCluster);
+            monthIDs = RC.GetSelectedValues(ddlMonth);
 
             RptParameters = new ReportParameter[7];
             RptParameters[0] = new ReportParameter("pClusterID", clusterId, false);

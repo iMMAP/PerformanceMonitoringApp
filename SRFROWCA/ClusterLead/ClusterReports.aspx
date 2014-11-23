@@ -80,16 +80,28 @@
                                             <tr>
                                                 <td>Month:</td>
                                                 <td>
-                                                    <asp:DropDownList ID="ddlMonth" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged" AutoPostBack="true" runat="server">
+                                                 <%--   <asp:DropDownList ID="ddlMonth" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged" AutoPostBack="true" runat="server">
                                                         <asp:ListItem Selected="True" Text="--- Select ---" Value="-1"></asp:ListItem>
-                                                    </asp:DropDownList></td>
+                                                    </asp:DropDownList>--%>
+
+                                                     <cc:DropDownCheckBoxes UseButtons="False"   AddJQueryReference="True" AutoPostBack="true"  OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged" runat="server" ID="ddlMonth" >
+                                                        <Style SelectBoxWidth="170" DropDownBoxBoxWidth="270" DropDownBoxBoxHeight=""></Style>
+                                                        
+                                                        <Texts SelectBoxCaption="Select" />
+                                                        <%--<asp:ListItem Selected="True" Text="--- Select Country ---" Value="-1"></asp:ListItem>--%>
+                                                    </cc:DropDownCheckBoxes></td>
                                                 <td>
                                                     <asp:Label runat="server" ID="lblCluster" Text="Cluster:" meta:resourcekey="lblClusterResource1"></asp:Label>
                                                 </td>
                                                 <td>
-                                                    <asp:DropDownList AutoPostBack="True" OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged" runat="server" ID="ddlCluster" Width="270px" meta:resourcekey="ddlClusterResource1">
+                                                   <%-- <asp:DropDownList AutoPostBack="True" OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged" runat="server" ID="ddlCluster" Width="270px" meta:resourcekey="ddlClusterResource1">
                                                         <asp:ListItem Selected="True" Text="--- Select Cluster ---" Value="-1" meta:resourcekey="ListItemResource1"></asp:ListItem>
-                                                    </asp:DropDownList>
+                                                    </asp:DropDownList>--%>
+
+                                                     <cc:DropDownCheckBoxes UseButtons="False"   AddJQueryReference="True" AutoPostBack="true"  OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged" runat="server" ID="ddlCluster" >
+                                                        <Style SelectBoxWidth="170" DropDownBoxBoxWidth="270" DropDownBoxBoxHeight=""></Style>
+                                                        <Texts SelectBoxCaption="Select Cluster" />
+                                                    </cc:DropDownCheckBoxes></td>
                                                 </td>
                                                 <td style="text-align: right;">
 
