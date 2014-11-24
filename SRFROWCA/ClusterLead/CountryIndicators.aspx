@@ -18,16 +18,6 @@
             $(".numeric1").numeric();
         });
 
-        function resetAll() {
-            $("select").each(function () { this.selectedIndex = 0 });
-
-            document.getElementById('<%=txtIndicatorName.ClientID%>').value = '';
-            document.getElementById('<%=txtIndicatorEng.ClientID%>').value = '';
-            document.getElementById('<%=txtIndicatorFr.ClientID%>').value = '';
-
-            return false;
-        }
-
     </script>
     <script src="../assets/orsjs/jquery.numeric.min.js" type="text/javascript"></script>
 </asp:Content>
@@ -101,7 +91,7 @@
                                                 <td>&nbsp;
                                                 </td>
                                                 <td>
-                                                    <asp:CheckBox ID="cbIncludeRegional" runat="server" Text="Show Regional Indicators" Checked="True" meta:resourcekey="cbIncludeRegionalResource1" />
+                                                    <asp:CheckBox ID="cbIncludeRegional" runat="server" Text="Show Regional Indicators" Checked="True" AutoPostBack="true" OnCheckedChanged="cbIncudeRegional_CheckedChanged" meta:resourcekey="cbIncludeRegionalResource1" />
                                                 </td>
                                                 <td>
                                                     <asp:Label runat="server" ID="lblCountry" Text="Country:" meta:resourcekey="lblCountryResource1"></asp:Label>
@@ -114,7 +104,7 @@
                                                 <td style="text-align: right;">
                                                     
                                                     <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" CssClass="btn btn-primary" CausesValidation="False" meta:resourcekey="btnSearchResource1" />
-                                                    <button onclick="return resetAll();" class="btn btn-primary">Reset</button>
+                                                    <asp:Button ID="btnReset" runat="server" OnClick="btnReset_Click" Text="Reset" CssClass="btn btn-primary" CausesValidation="False"/>
                                                 </td>
                                             </tr>
 

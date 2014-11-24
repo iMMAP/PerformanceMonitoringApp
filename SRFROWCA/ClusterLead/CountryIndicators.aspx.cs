@@ -154,6 +154,27 @@ namespace SRFROWCA.ClusterLead
             LoadClusterIndicators();
         }
 
+        protected void btnReset_Click(object sender, EventArgs e)
+        {
+            txtIndicatorName.Text = "";
+            cbIncludeRegional.Checked = true;
+            if (ddlCluster.Items.Count > 0)
+            {
+                ddlCluster.SelectedValue = "-1";
+            }
+            if (ddlCountry.Items.Count > 0)
+            {
+                ddlCountry.SelectedValue = "-1";
+            }
+
+            LoadClusterIndicators();
+        }
+
+        protected void cbIncudeRegional_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadClusterIndicators();
+        }
+
         private void SetMaxCount()
         {
             //string countryId = string.Empty;
