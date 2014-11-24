@@ -241,7 +241,7 @@ namespace SRFROWCA.ClusterLead
             rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://win-78sij2cjpjj/Reportserver");
             //rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://54.83.26.190/Reportserver");
             ReportParameter[] RptParameters = null;
-           // rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://localhost/Reportserver");
+           //rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://localhost/Reportserver");
             string countryId = null;
             string countryIds = null;
             string clusterId = null;
@@ -267,7 +267,7 @@ namespace SRFROWCA.ClusterLead
             clusterIds = RC.GetSelectedValues(ddlCluster);
             monthIDs = RC.GetSelectedValues(ddlMonth);
 
-            RptParameters = new ReportParameter[7];
+            RptParameters = new ReportParameter[9];
             RptParameters[0] = new ReportParameter("pClusterID", clusterId, false);
             RptParameters[1] = new ReportParameter("pCountryID", countryId, false);
             RptParameters[2] = new ReportParameter("pIndicator", indicator, false);
@@ -275,6 +275,8 @@ namespace SRFROWCA.ClusterLead
             RptParameters[4] = new ReportParameter("pLangId", ((int)RC.SiteLanguage.English).ToString(), false);
             RptParameters[5] = new ReportParameter("pIsRegional", cbIncludeRegional.Checked ? "true" : "false", false);
             RptParameters[6] = new ReportParameter("pMonthID", monthID, false);
+            RptParameters[7] = new ReportParameter("pMonthIDs", monthIDs, false);
+            RptParameters[8] = new ReportParameter("pClusterIDs", clusterIds, false);
 
             rvCountry.ServerReport.ReportPath = "/reports/outputreport";
             string fileName = "ClusterIndicatorReport" + DateTime.Now.ToString("yyyy-MM-dd_hh_mm_ss") + ".pdf";
