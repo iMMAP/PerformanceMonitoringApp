@@ -646,10 +646,7 @@ namespace SRFROWCA.Ebola
             Guid loginUserId = RC.GetCurrentUserId;
             string reportName = rblProjects.SelectedItem.Text + " (" + new DateTime(1, monthId, 1).ToString("MMMM") + "-14)";
 
-            DateTime rDate = DateTime.ParseExact(txtDate.Text.Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
-
-            DateTime.ParseExact(txtDate.Text.Trim(), "MM-dd-yyyy", CultureInfo.InvariantCulture).ToString("MM-dd-yyyy");
-
+            DateTime rDate = DateTime.ParseExact(txtDate.Text.Trim(), "MM-dd-yyyy", CultureInfo.InvariantCulture);
             ReportId = DBContext.Add("InsertReport_Ebola", new object[] { YearID, MonthID, 0, DayID, projId, UserInfo.EmergencyCountry, UserInfo.Organization, loginUserId, reportName, Convert.ToInt32(rblFrequency.SelectedValue), rDate, DBNull.Value });
         }
 
@@ -736,8 +733,9 @@ namespace SRFROWCA.Ebola
 
                             if (locationIdToSave > 0)
                             {
+                                DateTime rDate = DateTime.ParseExact(txtDate.Text.Trim(), "MM-dd-yyyy", CultureInfo.InvariantCulture);
                                 int returnCode = DBContext.Add("InsertReportDetails_E", new object[] { ReportId, activityDataId, locationIdToSave, achieved, 
-                                                                    RC.GetCurrentUserId, projIndicatorId, DBNull.Value,Convert.ToInt32(rblFrequency.SelectedValue), MonthID, DayID,  DateTime.ParseExact(txtDate.Text.Trim(), "MM-dd-yyyy", CultureInfo.InvariantCulture).ToString("MM-dd-yyyy")});
+                                                                    RC.GetCurrentUserId, projIndicatorId, DBNull.Value,Convert.ToInt32(rblFrequency.SelectedValue), MonthID, DayID,  rDate});
 
                                 returnCodeForUpdate = returnCodeForUpdate == 0 ? returnCode : returnCodeForUpdate;
                             }
