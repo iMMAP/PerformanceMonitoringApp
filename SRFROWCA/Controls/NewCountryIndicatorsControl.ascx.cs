@@ -2,6 +2,7 @@
 using SRFROWCA.Common;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -30,8 +31,13 @@ namespace SRFROWCA.Controls
             {
 
             }
+            string siteCulture = RC.SelectedSiteLanguageId.Equals(1) ? "en-US" : "de-DE";
+            string cultureTarget = txtTarget.Text.Trim();
 
-            string target = decimal.Round(Convert.ToDecimal(txtTarget.Text.Trim()), 0).ToString();
+            if (RC.SelectedSiteLanguageId.Equals(2))
+                cultureTarget = cultureTarget.Replace(".", ",");
+
+            string target = decimal.Round(Convert.ToDecimal(cultureTarget, new CultureInfo(siteCulture)), 0).ToString();
             string unitId = ddlUnits.SelectedValue;
             
             Guid userId = RC.GetCurrentUserId;

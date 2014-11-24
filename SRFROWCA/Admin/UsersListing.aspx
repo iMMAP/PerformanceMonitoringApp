@@ -83,7 +83,7 @@
                                                                 <asp:DropDownList ID="ddlRoles" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlRoles_SelectedIndexChanged" CssClass="width-90">
                                                                     <asp:ListItem Text="All" Value="All" Selected="True"></asp:ListItem>
                                                                     <asp:ListItem Text="User" Value="User"></asp:ListItem>
-                                                                    <asp:ListItem Text="Clsuter Lead" Value="ClusterLead"></asp:ListItem>
+                                                                    <asp:ListItem Text="Cluster Lead" Value="ClusterLead"></asp:ListItem>
                                                                     <asp:ListItem Text="Regional Lead" Value="RegionalClusterLead"></asp:ListItem>
                                                                     <asp:ListItem Text="OCHA Country Staff" Value="OCHACountryStaff"></asp:ListItem>
                                                                     <asp:ListItem Text="OCHA Country Admin" Value="CountryAdmin"></asp:ListItem>

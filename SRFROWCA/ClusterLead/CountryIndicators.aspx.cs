@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml;
 using BusinessLogic;
+using Microsoft.Reporting.WebForms;
 using SRFROWCA.Common;
 
 namespace SRFROWCA.ClusterLead
@@ -87,14 +88,27 @@ namespace SRFROWCA.ClusterLead
 
         private void LoadCombos()
         {
-            UI.FillEmergencyLocations(ddlCountry, 1);
-            UI.FillClusters(ddlCluster, RC.SelectedSiteLanguageId);
+            //UI.FillEmergencyLocations(ddlCountry, 1);
+            //UI.FillClusters(ddlCluster, RC.SelectedSiteLanguageId);
+
+            UI.FillEmergencyLocations(ddlCountry, UserInfo.Emergency, RC.SelectedSiteLanguageId);
+            UI.FillEmergnecyClusters(ddlCluster, RC.SelectedSiteLanguageId);
+
             UI.FillUnits(ddlUnits);
+
+            ddlCluster.Items.Insert(0, new ListItem("--- Select Cluster ---", "-1"));
+            ddlCountry.Items.Insert(0,new ListItem("--- Select Country ---", "-1"));
+            ddlUnits.Items.Insert(0,new ListItem("--- Select Units ---", "-1"));
         }
 
         private void LoadClusterIndicators()
         {
-            //string objective = null;
+            gvClusterIndicators.DataSource = SetDataSource();
+            gvClusterIndicators.DataBind();
+        }
+
+        private DataTable SetDataSource()
+        {
             string indicator = null;
             int? countryID = null;
             int? clusterID = null;
@@ -105,9 +119,6 @@ namespace SRFROWCA.ClusterLead
             if (!string.IsNullOrEmpty(ClusterID))
                 clusterID = Convert.ToInt32(ClusterID);
 
-            //if (!string.IsNullOrEmpty(txtObjectiveName.Text.Trim()))
-            //    objective = txtObjectiveName.Text;
-
             if (!string.IsNullOrEmpty(txtIndicatorName.Text.Trim()))
                 indicator = txtIndicatorName.Text;
 
@@ -117,8 +128,7 @@ namespace SRFROWCA.ClusterLead
             if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
                 clusterID = Convert.ToInt32(ddlCluster.SelectedValue);
 
-            gvClusterIndicators.DataSource = GetClusterIndicatros(clusterID, countryID, indicator);
-            gvClusterIndicators.DataBind();
+            return GetClusterIndicatros(clusterID, countryID, indicator);
         }
 
         private DataTable GetClusterIndicatros(int? clusterId, int? countryId, string indicator)
@@ -207,24 +217,7 @@ namespace SRFROWCA.ClusterLead
 
         protected void gvClusterIndicators_Sorting(object sender, GridViewSortEventArgs e)
         {
-            //string objective = null;
-            string indicator = null;
-            int? countryID = Convert.ToInt32(CountryID);
-            int? clusterID = Convert.ToInt32(ClusterID);
-
-            //if (!string.IsNullOrEmpty(txtObjectiveName.Text.Trim()))
-            //    objective = txtObjectiveName.Text;
-
-            if (!string.IsNullOrEmpty(txtIndicatorName.Text.Trim()))
-                indicator = txtIndicatorName.Text;
-
-            if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
-                countryID = Convert.ToInt32(ddlCountry.SelectedValue);
-
-            if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
-                clusterID = Convert.ToInt32(ddlCluster.SelectedValue);
-
-            DataTable dt = GetClusterIndicatros(clusterID, countryID, indicator);
+            DataTable dt = SetDataSource();
 
             if (dt != null)
             {
@@ -390,6 +383,7 @@ namespace SRFROWCA.ClusterLead
 
         internal override void BindGridData()
         {
+            LoadCombos();
             LoadClusterIndicators();
         }
 
@@ -411,7 +405,14 @@ namespace SRFROWCA.ClusterLead
             Guid userId = RC.GetCurrentUserId;
             string indicatorEng = txtIndicatorEng.Text.Trim();
             string indicatorFr = txtIndicatorFr.Text.Trim();
-            string target = decimal.Round(Convert.ToDecimal(txtTarget.Text.Trim()), 0).ToString();
+
+            string siteCulture = RC.SelectedSiteLanguageId.Equals(1) ? "en-US" : "de-DE";
+            string cultureTarget = txtTarget.Text.Trim();
+
+            if (RC.SelectedSiteLanguageId.Equals(2))
+                cultureTarget = cultureTarget.Replace(".", ",");
+
+            string target = decimal.Round(Convert.ToDecimal(cultureTarget, new CultureInfo(siteCulture)), 0).ToString();
             string unitID = ddlUnits.SelectedValue;
 
             if (!string.IsNullOrEmpty(hfClusterIndicatorID.Value))
@@ -427,38 +428,74 @@ namespace SRFROWCA.ClusterLead
         {
             GridView gvExport = new GridView();
 
-            //string objective = null;
-            string indicator = null;
-            int? countryID = null;
-            int? clusterID = null;
-
-            if (!string.IsNullOrEmpty(CountryID))
-                countryID = Convert.ToInt32(CountryID);
-
-            if (!string.IsNullOrEmpty(ClusterID))
-                clusterID = Convert.ToInt32(ClusterID);
-
-            //if (!string.IsNullOrEmpty(txtObjectiveName.Text.Trim()))
-            //    objective = txtObjectiveName.Text;
-
-            if (!string.IsNullOrEmpty(txtIndicatorName.Text.Trim()))
-                indicator = txtIndicatorName.Text;
-
-            if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
-                countryID = Convert.ToInt32(ddlCountry.SelectedValue);
-
-            if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
-                clusterID = Convert.ToInt32(ddlCluster.SelectedValue);
-
-            DataTable dt = GetClusterIndicatros(clusterID, countryID, indicator);
+            DataTable dt = SetDataSource();
 
             RemoveColumnsFromDataTable(dt);
-            gvExport.DataSource = dt;
+
+            dt.DefaultView.Sort = "Country, Cluster, Indicator, Unit";
+            gvExport.DataSource = dt.DefaultView;
             gvExport.DataBind();
 
             string fileName = "ClusterIndicators";
             string fileExtention = ".xls";
             ExportUtility.ExportGridView(gvExport, fileName, fileExtention, Response);
+        }
+
+        protected void ExportToPDF(object sender, EventArgs e)
+        {
+            Warning[] warnings;
+            string[] streamIds;
+            string mimeType = string.Empty;
+            string encoding = string.Empty;
+            string extension = string.Empty;
+            byte[] bytes;
+            ReportViewer rvCountry = new ReportViewer();
+            rvCountry.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote;
+            rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://win-78sij2cjpjj/Reportserver");
+            //rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://54.83.26.190/Reportserver");
+            ReportParameter[] RptParameters = null;
+            // rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://localhost/Reportserver");
+             string indicator = null;
+             string countryID = null;
+             string clusterID = null;
+
+             if (!string.IsNullOrEmpty(CountryID))
+                 countryID = CountryID;
+
+             if (!string.IsNullOrEmpty(ClusterID))
+                 clusterID = ClusterID;
+
+             //if (!string.IsNullOrEmpty(txtObjectiveName.Text.Trim()))
+             //    objective = txtObjectiveName.Text;
+
+             if (!string.IsNullOrEmpty(txtIndicatorName.Text.Trim()))
+                 indicator = txtIndicatorName.Text;
+
+             if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
+                 countryID =ddlCountry.SelectedValue;
+
+             if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
+                 clusterID = ddlCluster.SelectedValue;
+
+            RptParameters = new ReportParameter[6];
+            RptParameters[0] = new ReportParameter("pClusterID", clusterID, false);
+            RptParameters[1] = new ReportParameter("pCountryID", countryID, false);
+            RptParameters[2] = new ReportParameter("pIndicator", indicator, false);
+            RptParameters[3] = new ReportParameter("pLangId", ((int)RC.SiteLanguage.English).ToString(), false);
+            RptParameters[4] = new ReportParameter("includeRegional",cbIncludeRegional.Checked ? "true" : "false" , false);
+            RptParameters[5] = new ReportParameter("emergencyId", UserInfo.Emergency.ToString(), false);
+
+            rvCountry.ServerReport.ReportPath = "/reports/outputindicators";
+            string fileName = "ClusterIndicators" + DateTime.Now.ToString("yyyy-MM-dd_hh_mm_ss") + ".pdf";
+            rvCountry.ServerReport.ReportServerCredentials = new ReportServerCredentials("Administrator", "&qisW.c@Jq", "");
+            rvCountry.ServerReport.SetParameters(RptParameters);
+            bytes = rvCountry.ServerReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+            Response.Buffer = true;
+            Response.Clear();
+            Response.ContentType = mimeType;
+            Response.AddHeader("content-disposition", "attachment; filename=" + fileName);
+            Response.BinaryWrite(bytes); // create the file
+            Response.Flush();
         }
 
         private void RemoveColumnsFromDataTable(DataTable dt)
@@ -471,6 +508,8 @@ namespace SRFROWCA.ClusterLead
                 dt.Columns.Remove("CountryID");
                 dt.Columns.Remove("ClusterId");
                 dt.Columns.Remove("UnitId");
+                dt.Columns.Remove("IsSRP");
+                dt.Columns.Remove("IsRegional");
 
             }
             catch { }

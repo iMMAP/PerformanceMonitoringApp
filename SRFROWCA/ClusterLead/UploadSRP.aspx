@@ -3,6 +3,27 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <style>
+        .word-icon
+        {
+            background-image:url(../assets/orsimages/word.png);
+            width:16px;
+            height:16px;
+        }
+         .pdf-icon
+        {
+            background-image:url(../assets/orsimages/pdf.png);
+            width:16px;
+            height:16px;
+        }
+           .excel-icon
+        {
+            background-image:url(../assets/orsimages/excel.png);
+            width:16px;
+            height:16px;
+        }
+
+    </style>
     <div class="breadcrumbs" id="breadcrumbs">
         <script type="text/javascript">
             try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
@@ -72,8 +93,18 @@
                             
                             <ul class="list-unstyled spaced inline bigger-110 margin-15">
                                 <li id="liReport" runat="server">
-                                    <i class="icon-hand-right blue"></i>
+                                    <div class="word-icon" style="float:left;margin-right:5px;margin-top:2px;"></div>
                                     <a href="../Reports/DownloadReport.aspx?type=10"><span class="menu-text"><asp:Localize ID="Localize12" runat="server" Text="Export In Word" meta:resourcekey="localReportResource1"></asp:Localize>
+                                </span></a>
+                                </li>
+                                 <li id="li1" runat="server">
+                                    <div class="excel-icon" style="float:left;margin-right:5px;margin-top:2px;"></div>
+                                    <a href="../Reports/DownloadReport.aspx?type=11"><span class="menu-text"><asp:Localize ID="Localize1" runat="server" Text="Export to Excel" meta:resourcekey="localReportResource1"></asp:Localize>
+                                </span></a>
+                                </li>
+                                 <li id="li2" runat="server">
+                                    <div class="pdf-icon" style="float:left;margin-right:5px;margin-top:2px;"></div>
+                                    <a href="../Reports/DownloadReport.aspx?type=12"><span class="menu-text"><asp:Localize ID="Localize2" runat="server" Text="Export to PDF" meta:resourcekey="localReportResource1"></asp:Localize>
                                 </span></a>
                                 </li>
                             </ul>

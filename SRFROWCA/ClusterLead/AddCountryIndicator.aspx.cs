@@ -136,8 +136,11 @@ namespace SRFROWCA.ClusterLead
             ddlObjective.DataSource = DBContext.GetData("GetObjectives", new object[] { RC.SelectedSiteLanguageId, null });
             ddlObjective.DataBind();*/
 
-            UI.FillEmergencyLocations(ddlCountry, 1);
-            UI.FillClusters(ddlCluster, RC.SelectedSiteLanguageId);
+            UI.FillEmergencyLocations(ddlCountry, UserInfo.Emergency, RC.SelectedSiteLanguageId);
+            UI.FillEmergnecyClusters(ddlCluster, RC.SelectedSiteLanguageId);
+
+            ddlCluster.Items.Insert(0, new ListItem("--- Select Cluster ---", "-1"));
+            ddlCountry.Items.Insert(0, new ListItem("--- Select Country ---", "-1"));
         }
 
         public int IndControlId
