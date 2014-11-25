@@ -327,7 +327,7 @@ namespace SRFROWCA.ClusterLead
             if (Convert.ToInt32(ddlMonth.SelectedValue) > -1)
                 monthID = Convert.ToInt32(ddlMonth.SelectedValue);
 
-            DataTable dt = DBContext.GetData("uspGetClusterReports", new object[] { null, monthID, countryId, clusterId, RC.SelectedSiteLanguageId, true, countryIds });
+            DataTable dt = DBContext.GetData("uspGetClusterReports", new object[] { null, monthID, countryId, clusterId, RC.SelectedSiteLanguageId, true, countryId, clusterId, monthID });
             RemoveColumnsFromDataTable(dt);
 
             dt.DefaultView.Sort = "Country, Cluster, Indicator, Unit";
