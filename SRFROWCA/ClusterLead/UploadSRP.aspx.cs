@@ -20,6 +20,15 @@ namespace SRFROWCA.ClusterLead
             if (!IsPostBack)
             {
                 //PopulateDropDowns();
+                if (UserInfo.EmergencyCountry == 6)
+                {
+                    hlTemplate.NavigateUrl = "../Test/Mali.xlsx";
+                }
+
+                if (UserInfo.EmergencyCountry == 2)
+                {
+                    hlTemplate.NavigateUrl = "../Test/Burkina.xlsx";
+                }
             }
         }
 
@@ -52,6 +61,11 @@ namespace SRFROWCA.ClusterLead
         //}
 
         #region Upload
+
+        protected void btnTemplate_Click(object sender, EventArgs e)
+        {
+            
+        }
 
         protected void btnUpload_Click(object sender, EventArgs e)
         {

@@ -34,7 +34,7 @@
         </ul>
     </div>
     <div class="page-content">
-       <div id="divMsg">
+        <div id="divMsg">
         </div>
         <div class="alert2 alert-block alert-info">
             <h6>
@@ -49,7 +49,7 @@
                             <div class="widget-box">
                                 <div class="widget-header widget-header-small header-color-blue2" style="padding-left: 0px;">
                                     <h6>
-                                        <button runat="server" id="btnExportPDF" onserverclick="ExportToPDF"  class="btn btn-yellow" causesvalidation="false"
+                                        <button runat="server" id="btnExportPDF" onserverclick="ExportToPDF" class="btn btn-yellow" causesvalidation="false"
                                             title="PDF">
                                             <i class="icon-download"></i>PDF
                                        
@@ -81,7 +81,7 @@
                                                     <asp:Label runat="server" ID="lblCluster" Text="Cluster:" meta:resourcekey="lblClusterResource1"></asp:Label>
                                                 </td>
                                                 <td>
-                                                    <asp:DropDownList AutoPostBack="True" runat="server" OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged"  ID="ddlCluster" Width="270px" meta:resourcekey="ddlClusterResource1">
+                                                    <asp:DropDownList AutoPostBack="True" runat="server" OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged" ID="ddlCluster" Width="270px" meta:resourcekey="ddlClusterResource1">
                                                         <asp:ListItem Selected="True" Text="--- Select Cluster ---" Value="-1" meta:resourcekey="ListItemResource1"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </td>
@@ -97,14 +97,14 @@
                                                     <asp:Label runat="server" ID="lblCountry" Text="Country:" meta:resourcekey="lblCountryResource1"></asp:Label>
                                                 </td>
                                                 <td>
-                                                    <asp:DropDownList AutoPostBack="True" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" runat="server"  ID="ddlCountry" Width="270px" meta:resourcekey="ddlCountryResource1">
+                                                    <asp:DropDownList AutoPostBack="True" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" runat="server" ID="ddlCountry" Width="270px" meta:resourcekey="ddlCountryResource1">
                                                         <asp:ListItem Selected="True" Text="--- Select Country ---" Value="-1" meta:resourcekey="ListItemResource2"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </td>
                                                 <td style="text-align: right;">
-                                                    
+
                                                     <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" CssClass="btn btn-primary" CausesValidation="False" meta:resourcekey="btnSearchResource1" />
-                                                    <asp:Button ID="btnReset" runat="server" OnClick="btnReset_Click" Text="Reset" CssClass="btn btn-primary" CausesValidation="False"/>
+                                                    <asp:Button ID="btnReset" runat="server" OnClick="btnReset_Click" Text="Reset" CssClass="btn btn-primary" CausesValidation="False" />
                                                 </td>
                                             </tr>
 
@@ -120,7 +120,7 @@
         <div class="table-responsive">
             <div style="overflow-x: auto; width: 100%">
                 <cc2:PagingGridView ID="gvClusterIndicators" Width="100%" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" AllowSorting="True" DataKeyNames="SiteLanguageId"
-                    OnRowDataBound="gvClusterIndicators_RowDataBound" OnSorting="gvClusterIndicators_Sorting" ShowHeader="true" OnRowCommand="gvClusterIndicators_RowCommand" CssClass=" table-striped table-bordered table-hover" meta:resourcekey="gvClusterIndicatorsResource1">
+                    OnRowDataBound="gvClusterIndicators_RowDataBound" PageSize="20" OnSorting="gvClusterIndicators_Sorting" ShowHeader="true" OnRowCommand="gvClusterIndicators_RowCommand" CssClass=" table-striped table-bordered table-hover" meta:resourcekey="gvClusterIndicatorsResource1">
                     <EmptyDataTemplate>
                         Your filter criteria does not match any record in database!
                     </EmptyDataTemplate>

@@ -128,11 +128,11 @@ namespace SRFROWCA
 
             ActiveMenueItem();
 
-            if (RC.SelectedEmergencyId == 2)
-            {
-                //HideAllAuthenticatedMenues();
-                menuDataEntry.Attributes["href"] = "~/Ebola/ReportDataEntry.aspx";
-            }
+            //if (RC.SelectedEmergencyId == 2)
+            //{
+            //    //HideAllAuthenticatedMenues();
+            //    menuDataEntry.Attributes["href"] = "~/Ebola/ReportDataEntry.aspx";
+            //}
         }
 
         private void SetCurrentEmergency()

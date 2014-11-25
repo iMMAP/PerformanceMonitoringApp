@@ -70,6 +70,8 @@ namespace SRFROWCA.ClusterLead
                 for (int i = 0; i < IndControlId; i++)
                     AddIndicatorControl(i);
             }
+
+            ShowHideControls();
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -136,8 +138,14 @@ namespace SRFROWCA.ClusterLead
             ddlObjective.DataSource = DBContext.GetData("GetObjectives", new object[] { RC.SelectedSiteLanguageId, null });
             ddlObjective.DataBind();*/
 
-            UI.FillEmergencyLocations(ddlCountry, UserInfo.Emergency, RC.SelectedSiteLanguageId);
-            UI.FillEmergnecyClusters(ddlCluster, UserInfo.Emergency);
+            int emergencyId = UserInfo.Emergency;
+            if (emergencyId == 0)
+            {
+                emergencyId = 1;
+            }
+
+            UI.FillEmergencyLocations(ddlCountry, emergencyId, RC.SelectedSiteLanguageId);
+            UI.FillEmergnecyClusters(ddlCluster, emergencyId);
 
             ddlCluster.Items.Insert(0, new ListItem("--- Select Cluster ---", "-1"));
             ddlCountry.Items.Insert(0, new ListItem("--- Select Country ---", "-1"));
@@ -172,7 +180,7 @@ namespace SRFROWCA.ClusterLead
         protected void btnAddIndicatorControl_ServerClick(object sender, EventArgs e)
         { }
 
-        protected void btnSave_ServerClick(object sender, EventArgs e)
+        protected void btnSave_Click(object sender, EventArgs e)
         {
             SaveData();
             Response.Redirect("~/ClusterLead/CountryIndicators.aspx");

@@ -69,6 +69,7 @@
                                                     <asp:DropDownList AutoPostBack="true" runat="server" OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged" ID="ddlCluster" Width="270">
                                                         <asp:ListItem Selected="True" Text="--- Select Cluster ---" Value="-1"></asp:ListItem>
                                                     </asp:DropDownList>
+
                                                 </td>
                                             </tr>
                                             <tr>
@@ -150,7 +151,7 @@
                     <asp:TemplateField ItemStyle-Width="8%" ItemStyle-HorizontalAlign="Right" HeaderText="Achieved">
                         <ItemTemplate>
                             <div style="word-wrap: break-word;">
-                                <asp:TextBox runat="server" MaxLength="10" Width="100" ID="txtAchieved" CssClass="numeric1" Style="text-align: right;" Text='<%# Eval("Achieved") %>'></asp:TextBox>
+                                <asp:TextBox runat="server" MaxLength="8" Width="100" ID="txtAchieved" CssClass="numeric1" Style="text-align: right;" Text='<%# Eval("Achieved") %>'></asp:TextBox>
                             </div>
                         </ItemTemplate>
                     </asp:TemplateField>

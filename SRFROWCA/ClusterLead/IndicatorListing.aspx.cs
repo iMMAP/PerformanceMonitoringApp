@@ -3,7 +3,6 @@ using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Web;
-using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml;
@@ -71,7 +70,7 @@ namespace SRFROWCA.ClusterLead
 
             if (maxIndValue > 0)
             {
-                     DataTable dt = DBContext.GetData("GetAllIndicatorsNew", new object[] { null, null, null, null, null, null, (int)RC.SelectedSiteLanguageId });
+                     DataTable dt = DBContext.GetData("GetAllIndicatorsNew", new object[] { null, null, null, null, null, (int)RC.SelectedSiteLanguageId });
                 if (dt.Rows.Count > 0)
                     maxIndValue = maxIndValue - dt.Rows.Count;
             }

@@ -95,11 +95,8 @@
                     </div>
                 </div>
             </div>
-            <button runat="server" id="btnSave" onserverclick="btnSave_ServerClick" class="width-10 btn btn-sm btn-primary"
-                title="Save">
-                <i class="icon-ok bigger-110"></i>Save
-           
-            </button>
+            <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" CssClass="width-10 btn btn-sm btn-primary" Text="Save" />
+            
         </div>
         <asp:CustomValidator ID="cvActivityEng" runat="server" ClientValidationFunction="validateIndicator"
             CssClass="error2">

@@ -72,7 +72,7 @@ namespace SRFROWCA.ClusterLead
 
             if (maxIndValue > 0)
             {
-                DataTable dt = DBContext.GetData("GetAllIndicatorsNew", new object[] { null, null, null, null, null, null, (int)RC.SelectedSiteLanguageId });
+                DataTable dt = DBContext.GetData("GetAllIndicatorsNew", new object[] { null, null, null, null, null, (int)RC.SelectedSiteLanguageId });
                 if (dt.Rows.Count > 0)
                     maxIndValue = maxIndValue - dt.Rows.Count;
             }
@@ -327,6 +327,7 @@ namespace SRFROWCA.ClusterLead
 
             return DBContext.GetData("GetAllActivitiesNew", new object[] { DBNull.Value, emergencyClusterId, emergencyObjectiveId, search, (int)RC.SelectedSiteLanguageId });
         }
+
         private DataTable GetObjectives()
         {
             return DBContext.GetData("GetEmergencyObjectives", new object[] { (int)RC.SelectedSiteLanguageId, UserInfo.Emergency });

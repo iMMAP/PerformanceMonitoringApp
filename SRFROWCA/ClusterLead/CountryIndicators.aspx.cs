@@ -39,6 +39,7 @@ namespace SRFROWCA.ClusterLead
             else if (RC.IsCountryAdmin(this.User))
             {
                 CountryID = Convert.ToString(UserInfo.EmergencyCountry);
+                maxCount = 1;
             }
             else
                 maxCount = 1;
@@ -90,9 +91,14 @@ namespace SRFROWCA.ClusterLead
         {
             //UI.FillEmergencyLocations(ddlCountry, 1);
             //UI.FillClusters(ddlCluster, RC.SelectedSiteLanguageId);
+            int emergencyId = UserInfo.Emergency;
+            if (emergencyId == 0)
+            {
+                emergencyId = 1;
+            }
 
-            UI.FillEmergencyLocations(ddlCountry, UserInfo.Emergency, RC.SelectedSiteLanguageId);
-            UI.FillEmergnecyClusters(ddlCluster, RC.SelectedSiteLanguageId);
+            UI.FillEmergencyLocations(ddlCountry, emergencyId, RC.SelectedSiteLanguageId);
+            UI.FillEmergnecyClusters(ddlCluster, emergencyId);
 
             UI.FillUnits(ddlUnits);
 
@@ -138,6 +144,7 @@ namespace SRFROWCA.ClusterLead
             if (emergencyId <= 0)
             {
                 regionalIncluded = false;
+                emergencyId = 1;
             }
 
             return DBContext.GetData("uspGetClusterIndicators", new object[] { clusterId, countryId, indicator,

@@ -16,13 +16,13 @@ namespace SRFROWCA.ClusterLead
         public string CountryDisplayNone = string.Empty;
         public string ClusterDisplayNone = string.Empty;
 
-        protected void Page_PreLoad(object sender, EventArgs e)
-        {
-            string control = Utils.GetPostBackControlId(this);
+        //protected void Page_PreLoad(object sender, EventArgs e)
+        //{
+        //    //string control = Utils.GetPostBackControlId(this);
 
-            if (control.Equals("btnSaveAll"))
-                ShowMessage("Achieved data saved successfully!");
-        }
+        //    //if (control.Equals("btnSaveAll"))
+        //    //    ShowMessage("Achieved data saved successfully!");
+        //}
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -70,10 +70,16 @@ namespace SRFROWCA.ClusterLead
 
         private void LoadCombos()
         {
+            int emergencyId = UserInfo.Emergency;
+            if (emergencyId == 0)
+            {
+                emergencyId = 1;
+            }
+
             //UI.FillCountry(ddlCountry);
-            UI.FillEmergencyLocations(ddlCountry, UserInfo.Emergency, RC.SelectedSiteLanguageId);
+            UI.FillEmergencyLocations(ddlCountry, emergencyId, RC.SelectedSiteLanguageId);
             //UI.FillClusters(ddlCluster, RC.SelectedSiteLanguageId);
-            UI.FillEmergnecyClusters(ddlCluster, RC.SelectedSiteLanguageId);
+            UI.FillEmergnecyClusters(ddlCluster, emergencyId);
 
             PopulateYears();
             PopulateMonths();
@@ -169,11 +175,31 @@ namespace SRFROWCA.ClusterLead
 
         private void SaveClusterIndicatorDetails()
         {
+            
+
             int clusterIndicatorID = 0;
-            string achieved = null;
+            int? achieved = null;
             int countryId = 0;
             int clusterId = 0;
-            int target = 0;
+
+            if (UserInfo.EmergencyCountry <= 0)
+            {
+                countryId = RC.GetSelectedIntVal(ddlCountry);
+            }
+            else
+            {
+                countryId = UserInfo.EmergencyCountry;
+            }
+
+            if (UserInfo.EmergencyCluster <= 0)
+            {
+                clusterId = RC.GetSelectedIntVal(ddlCluster);
+            }
+            else
+            {
+                clusterId = UserInfo.EmergencyCluster;
+            }
+
             int yearId = Convert.ToInt32(ddlYear.SelectedValue);
             int monthId = Convert.ToInt32(ddlMonth.SelectedValue);
 
@@ -181,42 +207,24 @@ namespace SRFROWCA.ClusterLead
             {
                 if (row.RowType == DataControlRowType.DataRow)
                 {
-                    //target = Convert.ToInt32(row.Cells[4].Text);
-
                     TextBox txtAchieved = (TextBox)row.FindControl("txtAchieved");
-                    Label lblTarget = (Label)row.FindControl("lblTarget");
-                    Label lblCountryID = (Label)row.FindControl("lblCountryID");
-                    Label lblClusterID = (Label)row.FindControl("lblClusterID");
                     Label lblClusterIndicatorID = (Label)row.FindControl("lblClusterIndicatorID");
-
-                    if (lblTarget != null)
-                        target = Convert.ToInt32(lblTarget.Text.Replace(".", "").Replace(",", "").Trim());
 
                     if (lblClusterIndicatorID != null)
                         clusterIndicatorID = Convert.ToInt32(lblClusterIndicatorID.Text);
 
                     if (txtAchieved != null)
                     {
-                        string siteCulture = RC.SelectedSiteLanguageId.Equals(1) ? "en-US" : "de-DE";
-                        string cultureAchieved = txtAchieved.Text.Trim();
+
+                        achieved = !string.IsNullOrEmpty(txtAchieved.Text.Trim()) ? Convert.ToInt32(txtAchieved.Text.Trim()) : (int?)null;
+                        //string siteCulture = RC.SelectedSiteLanguageId.Equals(1) ? "en-US" : "de-DE";
+                        //string cultureAchieved = txtAchieved.Text.Trim();
                         
-                        if(RC.SelectedSiteLanguageId.Equals(2))
-                            cultureAchieved = cultureAchieved.Replace(".", ",");
+                        //if(RC.SelectedSiteLanguageId.Equals(2))
+                        //    cultureAchieved = cultureAchieved.Replace(".", ",");
 
-                        achieved = string.IsNullOrEmpty(txtAchieved.Text) ? null : decimal.Round(Convert.ToDecimal(cultureAchieved, new CultureInfo(siteCulture)), 0).ToString();
+                        //achieved = string.IsNullOrEmpty(txtAchieved.Text) ? null : decimal.Round(Convert.ToDecimal(cultureAchieved, new CultureInfo(siteCulture)), 0).ToString();
                     }
-
-                    //if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
-                    //    countryId = Convert.ToInt32(ddlCountry.SelectedValue);
-                    //else 
-                        if (lblCountryID != null)
-                        countryId = Convert.ToInt32(lblCountryID.Text);
-
-                    //if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
-                    //    clusterId = Convert.ToInt32(ddlCluster.SelectedValue);
-                    //else
-                        if (lblCluster != null)
-                        clusterId = Convert.ToInt32(lblClusterID.Text);
 
                     DBContext.Add("uspInsertClusterReport", new object[] { clusterIndicatorID, clusterId, countryId, yearId, monthId, achieved, RC.GetCurrentUserId, null });
                 }
@@ -225,8 +233,33 @@ namespace SRFROWCA.ClusterLead
 
         protected void btnSaveAll_Click(object sender, EventArgs e)
         {
+            if (RC.IsAdmin(this.User))
+            {
+                int cluster = Convert.ToInt32(ddlCluster.SelectedValue);
+                int country = Convert.ToInt32(ddlCountry.SelectedValue);
+
+                if (cluster <= 0 && country <= 0)
+                {
+                    ShowMessage("Please select Cluster && Country to save data", RC.NotificationType.Error, true, 4000);
+                    return;
+                }
+            }
+
+            if (RC.IsCountryAdmin(this.User))
+            {
+                int cluster = Convert.ToInt32(ddlCluster.SelectedValue);
+
+                if (cluster <= 0)
+                {
+                    ShowMessage("Please select Cluster to save data", RC.NotificationType.Error, true, 4000);
+                    return;
+                }
+            }
+
             SaveClusterIndicatorDetails();
             LoadClusterIndicators();
+
+            ShowMessage("Data Saved Successfully!");
         }
 
         protected void ddlMonth_SelectedIndexChanged(object sender, EventArgs e)
