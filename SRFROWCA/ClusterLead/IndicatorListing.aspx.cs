@@ -15,7 +15,7 @@ namespace SRFROWCA.ClusterLead
     public partial class IndicatorListing : BasePage
     {
 
-         public bool applyFilter = false;
+         public bool applyFilter = false; 
         public int maxIndCount = 0;
         public int maxActCount = 0;
         public DateTime dateLimit = DateTime.Now.AddDays(1);
