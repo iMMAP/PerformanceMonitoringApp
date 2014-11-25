@@ -40,15 +40,18 @@ namespace SRFROWCA.Ebola
             //{
             //    Response.Redirect("~/Ebola/ReportDataEntry.aspx");
             //}
-            
-            if (Roles.IsUserInRole(LoginUser.UserName, "ClusterLead"))
-            {
-                Response.Redirect("~/Ebola/Default.aspx");
-            }
+
+
+
+
 
             if (Roles.IsUserInRole(LoginUser.UserName, "User"))
             {
                 Response.Redirect("~/Ebola/ReportDataEntry.aspx");
+            }
+            else
+            {
+                Response.Redirect("~/Ebola/Default.aspx");
             }
         }
 

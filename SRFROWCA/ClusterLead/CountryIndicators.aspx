@@ -34,7 +34,7 @@
         </ul>
     </div>
     <div class="page-content">
-        <div id="divMsg">
+       <div id="divMsg">
         </div>
         <div class="alert2 alert-block alert-info">
             <h6>

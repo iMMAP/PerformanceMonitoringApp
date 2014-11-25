@@ -153,16 +153,6 @@
                                                                                             <asp:CheckBox ID="cbNotValidated" runat="server" Text="Not Validated" /></span>
                                                                                     </td>
                                                                                 </tr>
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <span>
-                                                                                            <asp:CheckBox ID="cbAggregated" runat="server" Text="Aggregated" />
-                                                                                            </span>
-                                                                                    </td>
-                                                                                </tr>
                                                                             </table>
                                                                         </div>
                                                                     </div>

@@ -137,7 +137,7 @@ namespace SRFROWCA.ClusterLead
             ddlObjective.DataBind();*/
 
             UI.FillEmergencyLocations(ddlCountry, UserInfo.Emergency, RC.SelectedSiteLanguageId);
-            UI.FillEmergnecyClusters(ddlCluster, RC.SelectedSiteLanguageId);
+            UI.FillEmergnecyClusters(ddlCluster, UserInfo.Emergency);
 
             ddlCluster.Items.Insert(0, new ListItem("--- Select Cluster ---", "-1"));
             ddlCountry.Items.Insert(0, new ListItem("--- Select Country ---", "-1"));

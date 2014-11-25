@@ -418,9 +418,11 @@
     <Content Include="ContactUs\ContactUsControl.ascx" />
     <Content Include="Controls\FilterCriteria.ascx" />
     <Content Include="DeleteThisPlease.html" />
+    <Content Include="Ebola\ActivityListing.aspx" />
     <Content Include="Ebola\AllData.aspx" />
     <Content Include="Ebola\CreateProject.aspx" />
     <Content Include="Ebola\Default.aspx" />
+    <Content Include="Ebola\IndicatorListing.aspx" />
     <Content Include="Ebola\Login.aspx" />
     <Content Include="Ebola\ManageActivities.aspx" />
     <Content Include="Ebola\ReportDataEntry.aspx" />
@@ -1127,6 +1129,13 @@
       <DependentUpon>FilterCriteria.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\PagingGridView.cs" />
+    <Compile Include="Ebola\ActivityListing.aspx.cs">
+      <DependentUpon>ActivityListing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ebola\ActivityListing.aspx.designer.cs">
+      <DependentUpon>ActivityListing.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Ebola\AllData.aspx.cs">
       <DependentUpon>AllData.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1154,6 +1163,13 @@
     </Compile>
     <Compile Include="Ebola\Ebola.Master.designer.cs">
       <DependentUpon>Ebola.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Ebola\IndicatorListing.aspx.cs">
+      <DependentUpon>IndicatorListing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ebola\IndicatorListing.aspx.designer.cs">
+      <DependentUpon>IndicatorListing.aspx</DependentUpon>
     </Compile>
     <Compile Include="Ebola\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

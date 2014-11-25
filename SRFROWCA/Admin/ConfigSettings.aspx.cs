@@ -1,18 +1,12 @@
-﻿using BusinessLogic.Projects;
-using SRFROWCA.Common;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System;
 using System.Data;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Web;
-using System.Web.Configuration;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml;
 using System.Xml.Linq;
+using SRFROWCA.Common;
 
 namespace SRFROWCA.Admin
 {
@@ -91,14 +85,14 @@ namespace SRFROWCA.Admin
 
         private void LoadCombos()
         {
-            int emergencyID = 0;
+            int emergencyID = 1;
 
             if (RC.IsCountryAdmin(this.User))
                 emergencyID = UserInfo.Emergency;
 
             //UI.FillCountry(ddlCountry);
             UI.FillEmergencyLocations(ddlCountry, emergencyID, RC.SelectedSiteLanguageId);
-            UI.FillEmergnecyClusters(ddlCluster, RC.SelectedSiteLanguageId);
+            UI.FillEmergnecyClusters(ddlCluster, emergencyID);
             //UI.FillClusters(ddlCluster, RC.SelectedSiteLanguageId);
         }
 

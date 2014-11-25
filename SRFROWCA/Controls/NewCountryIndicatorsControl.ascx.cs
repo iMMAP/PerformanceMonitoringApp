@@ -24,8 +24,8 @@ namespace SRFROWCA.Controls
         //public void SaveIndicators(int objectiveId, int countryId, int clusterId)
         public void SaveIndicators(int countryId, int clusterId)
         {
-            string indEn = txtInd1Eng.Text.Trim();
-            string indFr = txtInd1Fr.Text.Trim();
+            string indEn = string.IsNullOrEmpty(txtInd1Eng.Text.Trim()) ? null : txtInd1Eng.Text.Trim();
+            string indFr = string.IsNullOrEmpty(txtInd1Fr.Text.Trim()) ? null : txtInd1Fr.Text.Trim();
 
             if (string.IsNullOrEmpty(indEn) && string.IsNullOrEmpty(indFr))
             {

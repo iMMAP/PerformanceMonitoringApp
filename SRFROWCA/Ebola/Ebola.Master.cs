@@ -205,6 +205,8 @@ namespace SRFROWCA.Ebola
         {
             bool isShow = true;
             liValidateAchievements.Visible = isShow;
+            liActivities.Visible = isShow;
+            liIndicators.Visible = isShow;
         }
 
         private void ShowAdminMenue()

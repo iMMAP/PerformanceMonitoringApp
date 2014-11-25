@@ -184,9 +184,9 @@
                             <asp:Localize ID="localReportCustomReport" runat="server" Text="Custom Report" meta:resourcekey="localReportCustomReportResource1"></asp:Localize>
                         </a></li>
 
-                        <li id="liActivities" runat="server"><a href="~/Admin/ActivityListing.aspx"
+                        <li id="liActivities" runat="server"><a href="~/Ebola/ActivityListing.aspx"
                             id="A3" runat="server"><i class="icon-list-alt"></i><span class="menu-text">Activities</span> </a></li>
-                        <li id="liIndicators" runat="server"><a href="~/Admin/IndicatorListing.aspx"
+                        <li id="liIndicators" runat="server"><a href="~/Ebola/IndicatorListing.aspx"
                             id="A4" runat="server"><i class="icon-list-alt"></i><span class="menu-text">Indicators</span> </a></li>
                     </ul>
                     <!-- /.nav-list -->
