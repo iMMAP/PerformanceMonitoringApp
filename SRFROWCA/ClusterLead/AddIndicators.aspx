@@ -94,11 +94,8 @@
             </button>
         </div>
 
-        <button runat="server" id="btnSave" onserverclick="btnSave_Click" class="width-10 btn btn-sm btn-primary"
-            title="Save">
-            <i class="icon-ok bigger-110"></i>Save
-                       
-        </button>
+        <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" CssClass="width-10 btn btn-sm btn-primary" />
+
         <asp:Button ID="btnBackToSRPList" runat="server" Text="Back" OnClick="btnBackToSRPList_Click"
             CssClass="width-10 btn btn-sm btn-primary" CausesValidation="false" />
     </div>

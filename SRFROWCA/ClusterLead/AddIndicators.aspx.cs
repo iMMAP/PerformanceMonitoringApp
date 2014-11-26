@@ -60,19 +60,21 @@ namespace SRFROWCA.ClusterLead
             AddIndicatorControl(0);
             IndControlId = 1;
             ShowHideControls();
-            
+
         }
         private void PopulateActivities()
-        {           
+        {
+
             int emergencyLocationId = RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) ? UserInfo.EmergencyCountry : Convert.ToInt32(ddlCountry.SelectedValue);
-            int emergencyClusterId = RC.IsClusterLead(this.User) ? UserInfo.EmergencyCluster : Convert.ToInt32(ddlCluster.SelectedValue); 
+            int emergencyClusterId = RC.IsClusterLead(this.User) ? UserInfo.EmergencyCluster : Convert.ToInt32(ddlCluster.SelectedValue);
+            //if (ddlObjective.SelectedValue == "")
             int emergencyObjectiveId = Convert.ToInt32(ddlObjective.SelectedValue);
-            
-                ddlActivity.DataSource = DBContext.GetData("GetActivitiesNew", new object[] { emergencyLocationId, emergencyClusterId, emergencyObjectiveId, RC.SelectedSiteLanguageId });
-                ddlActivity.DataTextField = "Activity";
-                ddlActivity.DataValueField = "ActivityId";
-                ddlActivity.DataBind();
-            
+
+            ddlActivity.DataSource = DBContext.GetData("GetActivitiesNew", new object[] { emergencyLocationId, emergencyClusterId, emergencyObjectiveId, RC.SelectedSiteLanguageId });
+            ddlActivity.DataTextField = "Activity";
+            ddlActivity.DataValueField = "ActivityId";
+            ddlActivity.DataBind();
+
             ListItem item = new ListItem("Select Activity", "0");
             ddlActivity.Items.Insert(0, item);
         }
@@ -109,6 +111,10 @@ namespace SRFROWCA.ClusterLead
         private void PopulateClusters()
         {
             int emgId = UserInfo.Emergency;
+            if (emgId <= 0)
+            {
+                emgId = 1;
+            }
             ddlCluster.DataValueField = "EmergencyClusterId";
             ddlCluster.DataTextField = "ClusterName";
 
@@ -125,10 +131,16 @@ namespace SRFROWCA.ClusterLead
 
         private void PopulateCountries()
         {
+            int emgId = UserInfo.Emergency;
+            if (emgId <= 0)
+            {
+                emgId = 1;
+            }
+
             ddlCountry.DataValueField = "LocationId";
             ddlCountry.DataTextField = "LocationName";
 
-            ddlCountry.DataSource = DBContext.GetData("GetEmergencyCountries", new object[] { UserInfo.Emergency });
+            ddlCountry.DataSource = DBContext.GetData("GetEmergencyCountries", new object[] { emgId });
             ddlCountry.DataBind();
             ListItem item = new ListItem("Select Country", "0");
             ddlCountry.Items.Insert(0, item);
@@ -136,8 +148,14 @@ namespace SRFROWCA.ClusterLead
 
         private void PopulateObjective()
         {
-            UI.FillObjectives(ddlObjective);
-            ddlObjective.DataSource = DBContext.GetData("GetEmergencyObjectives", new object[] {RC.SelectedSiteLanguageId,UserInfo.Emergency});
+            //UI.FillObjectives(ddlObjective);
+            int emgId = UserInfo.Emergency;
+            if (emgId <= 0)
+            {
+                emgId = 1;
+            }
+
+            ddlObjective.DataSource = DBContext.GetData("GetEmergencyObjectives", new object[] { RC.SelectedSiteLanguageId, emgId });
             ddlObjective.DataTextField = "Objective";
             ddlObjective.DataValueField = "EmergencyObjectiveId";
             ddlObjective.DataBind();
@@ -145,7 +163,7 @@ namespace SRFROWCA.ClusterLead
             ddlObjective.Items.Insert(0, item);
         }
 
-      
+
         protected void btnSave_Click(object sender, EventArgs e)
         {
             using (TransactionScope scope = new TransactionScope())
@@ -153,40 +171,40 @@ namespace SRFROWCA.ClusterLead
                 SaveData();
                 scope.Complete();
                 Response.Redirect("IndicatorListing.aspx");
-                
+
             }
         }
 
         private void SaveData()
         {
             int ActivityId = Convert.ToInt32(ddlActivity.SelectedValue);
-           
-                StringBuilder strIndcators = new StringBuilder();
-                foreach (Control ctl in pnlAdditionalIndicaotrs.Controls)
-                {
-                    if (ctl != null && ctl.ID != null && ctl.ID.Contains("indicatorControlId"))
-                    {
-                        IndicatorsWithAdmin1TargetsControl indControl = ctl as IndicatorsWithAdmin1TargetsControl;
 
-                        if (indControl != null)
-                        {
-                            if (RC.IsClusterLead(this.User))
-                            {
-                                indControl.SaveIndicators(ActivityId);
-                            }
-                            else
-                            {
-                                bool regional = RC.IsRegionalClusterLead(this.User);
-                                indControl.SaveRegionalIndicators(ActivityId, regional);
-                            }
-                            TextBox txtEng = (TextBox)indControl.FindControl("txtInd1Eng");
-                            TextBox txtFr = (TextBox)indControl.FindControl("txtInd1Fr");
-                            strIndcators.AppendFormat("Indicator (English): {0}<br/>Indicator (French): {1}<br/><br/>", txtEng.Text, txtFr.Text);
-                        }
+            StringBuilder strIndcators = new StringBuilder();
+            foreach (Control ctl in pnlAdditionalIndicaotrs.Controls)
+            {
+                if (ctl != null && ctl.ID != null && ctl.ID.Contains("indicatorControlId"))
+                {
+                    IndicatorsWithAdmin1TargetsControl indControl = ctl as IndicatorsWithAdmin1TargetsControl;
+
+                    if (indControl != null)
+                    {
+                        //if (RC.IsClusterLead(this.User))
+                        //{
+                            indControl.SaveIndicators(ActivityId);
+                        //}
+                        //else
+                        //{
+                        //    bool regional = RC.IsRegionalClusterLead(this.User);
+                        //    indControl.SaveRegionalIndicators(ActivityId, regional);
+                        //}
+                        TextBox txtEng = (TextBox)indControl.FindControl("txtInd1Eng");
+                        TextBox txtFr = (TextBox)indControl.FindControl("txtInd1Fr");
+                        strIndcators.AppendFormat("Indicator (English): {0}<br/>Indicator (French): {1}<br/><br/>", txtEng.Text, txtFr.Text);
                     }
                 }
-                SendNewIndicatorEmail(strIndcators.ToString());
-           
+            }
+            SendNewIndicatorEmail(strIndcators.ToString());
+
         }
 
         private void SendNewIndicatorEmail(string strIndicators)
@@ -211,10 +229,10 @@ namespace SRFROWCA.ClusterLead
             }
             catch
             {
- 
+
             }
         }
-       
+
 
         protected void btnAddIndiatorControl_Click(object sender, EventArgs e)
         {
@@ -247,12 +265,12 @@ namespace SRFROWCA.ClusterLead
             }
         }
 
-        
+
 
         protected void btnBackToSRPList_Click(object sender, EventArgs e)
         {
             Response.Redirect("IndicatorListing.aspx");
-           
+
         }
 
         protected void ddlObjective_SelectedIndexChanged(object sender, EventArgs e)
@@ -269,13 +287,18 @@ namespace SRFROWCA.ClusterLead
         {
             PopulateClusters();
             PopulateObjective();
-            PopulateActivities();           
+            PopulateActivities();
 
         }
 
         protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
             PopulateActivities();
+        }
+
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("CountryIndicators.aspx");
         }
     }
 }

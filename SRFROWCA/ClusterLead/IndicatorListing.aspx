@@ -107,7 +107,7 @@
                                                                     Gender Aggregated:</label>
                                                             </td>
                                                             <td class="width-30">
-                                                               <asp:CheckBox runat="server" ID="chkIsGender" />
+                                                               <asp:CheckBox runat="server" ID="chkIsGender"/>
                                                             </td>
                                                           <td class="width-20"></td>
                                                           <td class="width-30"></td>

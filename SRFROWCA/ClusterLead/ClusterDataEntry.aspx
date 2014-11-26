@@ -101,7 +101,8 @@
 
         <div id="scrolledGridView" style="overflow-x: auto; width: 100%;">
             <asp:GridView ID="gvIndicators" runat="server" AutoGenerateColumns="False" AllowSorting="True" OnSorting="gvClusterIndicators_Sorting" HeaderStyle-BackColor="ButtonFace" OnRowDataBound="gvIndicators_RowDataBound"
-                CssClass=" table-striped table-bordered table-hover" Width="100%">
+                CssClass=" table-striped table-bordered table-hover" Width="100%" ShowFooter="true"
+                EmptyDataText="There are no output indicators available!">
                 <HeaderStyle BackColor="Control"></HeaderStyle>
 
                 <Columns>

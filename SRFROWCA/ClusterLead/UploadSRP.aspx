@@ -47,34 +47,40 @@
                 <div class="error-container">
                     <div class="well">
                         <h3 class="lighter smaller">
-                            <asp:HyperLink ID="hlTemplate" runat="server" Text="Download Framework Template" NavigateUrl="../Test/Template.xlsx"></asp:HyperLink>
+                            <asp:Localize ID="Localize3" runat="server" Text="Import Framework"></asp:Localize>                            
                         </h3>
+
+                        <asp:HyperLink ID="hlTemplate" runat="server" Text="Download Framework Template" NavigateUrl="../Test/Template.xlsx"></asp:HyperLink>
                         <hr />
                         <h4 class="smaller">
                             Import Framework To ORS</h4>
 
-                        <%--<div>
-
+                        <div>
                             <label class="col-sm-3">Country: </label>
                             <div class="col-sm-9">
-                                <asp:DropDownList ID="ddlCountry" runat="server" CssClass="width-60"></asp:DropDownList>
+                                <asp:DropDownList ID="ddlCountry" runat="server" CssClass="width-60" AutoPostBack="true" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged"></asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Required"
+                                            CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCountry"></asp:RequiredFieldValidator>
                             </div>
                         </div>
                         <div class="space-20"></div>
                         <div>
                             <label class="col-sm-3">Cluster: </label>
                             <div class="col-sm-9">
-                                <asp:DropDownList ID="ddlCluster" runat="server" CssClass="width-60"></asp:DropDownList>
+                                <asp:DropDownList ID="ddlCluster" runat="server" CssClass="width-60" AutoPostBack="true" OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged"></asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Required"
+                                            CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCluster"></asp:RequiredFieldValidator>
                             </div>
-                        </div>--%>
+                        </div>
                             <div class="col-sm-9">
                                 <asp:FileUpload ID="fuSRP" runat="server" />
                             </div>
                         <div>
                             <div>
-                                <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="btnUpload_Click" />
+                                <asp:Button ID="btnUpload" runat="server" Text="Upload" CssClass="btn btn-primary" OnClick="btnUpload_Click" />
                             </div>
                         </div>
+                       
                     </div>
                 </div>
             </div>
@@ -83,9 +89,9 @@
 
                 <div class="error-container">
                     <div class="well">
-                        <h2 class="grey lighter smaller">
+                        <h3 class="grey lighter smaller">
                             <asp:Localize ID="localUploadHeaderText" runat="server" Text="Export Framework"></asp:Localize>
-                        </h2>
+                        </h3>
 
                         <hr />
                         
@@ -94,7 +100,7 @@
                             <ul class="list-unstyled spaced inline bigger-110 margin-15">
                                 <li id="liReport" runat="server">
                                     <div class="word-icon" style="float:left;margin-right:5px;margin-top:2px;"></div>
-                                    <a href="../Reports/DownloadReport.aspx?type=10"><span class="menu-text"><asp:Localize ID="Localize12" runat="server" Text="Export In Word" meta:resourcekey="localReportResource1"></asp:Localize>
+                                    <a href="../Reports/DownloadReport.aspx?type=10" runat="server" id="menueExportWord"><span class="menu-text"><asp:Localize ID="Localize12" runat="server" Text="Export In Word" meta:resourcekey="localReportResource1"></asp:Localize>
                                 </span></a>
                                 </li>
                                  <li id="li1" runat="server">
@@ -109,14 +115,8 @@
                                 </li>
                             </ul>
                         </div>
-
-                        <hr />
-                        <div class="space"></div>
-
-                        <div class="center">
-                        </div>
-                        <div class="center">
-                        </div>
+                         <hr />
+                        <div class="space-10"></div>
                     </div>
                 </div>
                 <!-- PAGE CONTENT ENDS -->

@@ -111,10 +111,11 @@
                         </div>
                         <%--<asp:Button ID="btnAddIndicatorControl" runat="server" Text="Add More Indicators"
                             OnClick="btnAddIndiatorControl_Click" CausesValidation="false" CssClass="width-10 btn btn-sm btn-danger pull-right" />--%>
-                        <button runat="server" id="btnSave" onserverclick="btnSave_Click" class="width-10 btn btn-sm btn-primary"
+                        <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" CssClass="width-10 btn btn-sm btn-primary" />
+                        <%--<button runat="server" id="btnSave" onserverclick="btnSave_Click" class="width-10 btn btn-sm btn-primary"
                             title="Save">
                             <i class="icon-ok bigger-110"></i>Save
-                        </button>
+                        </button>--%>
                         <asp:Button ID="btnBackToSRPList" runat="server" Text="Back" OnClick="btnBackToSRPList_Click"
                             CssClass="width-10 btn btn-sm btn-primary" CausesValidation="false" />
                   

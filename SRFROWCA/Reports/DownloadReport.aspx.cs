@@ -72,10 +72,23 @@ namespace SRFROWCA.Reports
             }
             else if (reportType == "10")
             {
+                string emgCountryId = UserInfo.EmergencyCountry.ToString();
+                if (Request.QueryString["emgCountryId"] != null)
+                {
+                    emgCountryId = Request.QueryString["emgCountryId"];
+                }
+
+                string emgClusterId = UserInfo.EmergencyCluster.ToString();
+
+                if (Request.QueryString["emgClusterId"] != null)
+                {
+                    emgClusterId = Request.QueryString["emgClusterId"];
+                }
+
                 DataTable dt = GetReportInfo(Convert.ToInt32(Request.QueryString["cid"]));
                 RptParameters = new ReportParameter[3];
-                RptParameters[0] = new ReportParameter("emgLocationId", UserInfo.EmergencyCountry.ToString());
-                RptParameters[1] = new ReportParameter("emgClusterId", UserInfo.EmergencyCluster.ToString());
+                RptParameters[0] = new ReportParameter("emgLocationId",  emgCountryId);
+                RptParameters[1] = new ReportParameter("emgClusterId", emgClusterId);
                 RptParameters[2] = new ReportParameter("emgLangId", (RC.SelectedSiteLanguageId).ToString());
                 
                 rvCountry.ServerReport.ReportPath = "/reports/indicators";
@@ -86,10 +99,23 @@ namespace SRFROWCA.Reports
             }
             else if (reportType == "11")
             {
+                string emgCountryId = UserInfo.EmergencyCountry.ToString();
+                if (Request.QueryString["emgCountryId"] != null)
+                {
+                    emgCountryId = Request.QueryString["emgCountryId"];
+                }
+
+                string emgClusterId = UserInfo.EmergencyCluster.ToString();
+
+                if (Request.QueryString["emgClusterId"] != null)
+                {
+                    emgClusterId = Request.QueryString["emgClusterId"];
+                }
+
                 DataTable dt = GetReportInfo(Convert.ToInt32(Request.QueryString["cid"]));
                 RptParameters = new ReportParameter[3];
-                RptParameters[0] = new ReportParameter("emgLocationId", UserInfo.EmergencyCountry.ToString());
-                RptParameters[1] = new ReportParameter("emgClusterId", UserInfo.EmergencyCluster.ToString());
+                RptParameters[0] = new ReportParameter("emgLocationId", emgCountryId);
+                RptParameters[1] = new ReportParameter("emgClusterId", emgClusterId);
                 RptParameters[2] = new ReportParameter("emgLangId", (RC.SelectedSiteLanguageId).ToString());
 
                 rvCountry.ServerReport.ReportPath = "/reports/indicators";
@@ -100,10 +126,23 @@ namespace SRFROWCA.Reports
             }
             else if (reportType == "12")
             {
+                string emgCountryId = UserInfo.EmergencyCountry.ToString();
+                if (Request.QueryString["emgCountryId"] != null)
+                {
+                    emgCountryId = Request.QueryString["emgCountryId"];
+                }
+
+                string emgClusterId = UserInfo.EmergencyCluster.ToString();
+
+                if (Request.QueryString["emgClusterId"] != null)
+                {
+                    emgClusterId = Request.QueryString["emgClusterId"];
+                }
+
                 DataTable dt = GetReportInfo(Convert.ToInt32(Request.QueryString["cid"]));
                 RptParameters = new ReportParameter[3];
-                RptParameters[0] = new ReportParameter("emgLocationId", UserInfo.EmergencyCountry.ToString());
-                RptParameters[1] = new ReportParameter("emgClusterId", UserInfo.EmergencyCluster.ToString());
+                RptParameters[0] = new ReportParameter("emgLocationId", emgCountryId);
+                RptParameters[1] = new ReportParameter("emgClusterId", emgClusterId);
                 RptParameters[2] = new ReportParameter("emgLangId", (RC.SelectedSiteLanguageId).ToString());
 
                 rvCountry.ServerReport.ReportPath = "/reports/indicators";
@@ -114,6 +153,7 @@ namespace SRFROWCA.Reports
             }
             else
             {
+
                 DataTable dt = GetReportInfo(Convert.ToInt32(Request.QueryString["cid"]));
                 rvCountry.ServerReport.ReportPath = dt.Rows[0]["SSRSReportName"].ToString(); //"/reports/countryreport";
                 RptParameters = new ReportParameter[1];

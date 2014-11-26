@@ -1,19 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using SRFROWCA.Common;
-using BusinessLogic;
 using System.Data;
 using System.Transactions;
-using SRFROWCA.Controls;
-using System.Net.Mail;
-using System.Text;
-using System.Web.Security;
-using System.Xml;
-using System.IO;
+using System.Web.UI.WebControls;
+using BusinessLogic;
+using SRFROWCA.Common;
 
 namespace SRFROWCA.ClusterLead
 {
@@ -73,6 +63,11 @@ namespace SRFROWCA.ClusterLead
         private void PopulateClusters()
         {
             int emgId = UserInfo.Emergency;
+            if (emgId <= 0)
+            {
+                emgId = 1;
+            }
+
             ddlCluster.DataValueField = "EmergencyClusterId";
             ddlCluster.DataTextField = "ClusterName";
 
@@ -89,10 +84,16 @@ namespace SRFROWCA.ClusterLead
 
         private void PopulateCountries()
         {
+            int emgId = UserInfo.Emergency;
+            if (emgId <= 0)
+            {
+                emgId = 1;
+            }
+
             ddlCountry.DataValueField = "LocationId";
             ddlCountry.DataTextField = "LocationName";
 
-            ddlCountry.DataSource = DBContext.GetData("GetEmergencyCountries", new object[]{UserInfo.Emergency});
+            ddlCountry.DataSource = DBContext.GetData("GetEmergencyCountries", new object[]{emgId});
             ddlCountry.DataBind();
             ListItem item = new ListItem("Select Country", "0");
             ddlCountry.Items.Insert(0, item);
@@ -100,8 +101,13 @@ namespace SRFROWCA.ClusterLead
 
         private void PopulateObjective()
         {
-            UI.FillObjectives(ddlObjective);
-            ddlObjective.DataSource = DBContext.GetData("GetEmergencyObjectives", new object[] {RC.SelectedSiteLanguageId,UserInfo.Emergency});
+            //UI.FillObjectives(ddlObjective);
+            int emgId = UserInfo.Emergency;
+            if (emgId <= 0)
+            {
+                emgId = 1;
+            }
+            ddlObjective.DataSource = DBContext.GetData("GetEmergencyObjectives", new object[] {RC.SelectedSiteLanguageId, emgId});
             ddlObjective.DataTextField = "Objective";
             ddlObjective.DataValueField = "EmergencyObjectiveId";
             ddlObjective.DataBind();

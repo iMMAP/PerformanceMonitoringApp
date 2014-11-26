@@ -326,12 +326,12 @@ namespace SRFROWCA
             liReports.Visible = isShow;
             menueReports.Visible = isShow;
             menueSRPIndicators.Visible = isShow;
-            liSRPIndicators.Visible = isShow;
+            //liSRPIndicators.Visible = isShow;
             menueValidateIndicaotrs.Visible = isShow;
             liValidate.Visible = isShow;
             liCLprojectsListing.Visible = isShow;
             liSumOfCountryIndicators.Visible = isShow;
-            liClusterTarget.Visible = isShow;
+            //liClusterTarget.Visible = isShow;
             liPivotSumOfCountryIndicators.Visible = isShow;
             liBulkImport.Visible = isShow;
             liORSDocuments.Visible = isShow;
@@ -367,17 +367,18 @@ namespace SRFROWCA
             liReports.Visible = isShow;
             menueReports.Visible = isShow;
             menueSRPIndicators.Visible = isShow;
-            liSRPIndicators.Visible = isShow;
+            //liSRPIndicators.Visible = isShow;
             menueValidateIndicaotrs.Visible = isShow;
             liValidate.Visible = isShow;
             liCLprojectsListing.Visible = isShow;
             liSumOfCountryIndicators.Visible = isShow;
-            liClusterTarget.Visible = isShow;
+            //liClusterTarget.Visible = isShow;
             liPivotSumOfCountryIndicators.Visible = isShow;
             liBulkImport.Visible = isShow;
             liUserListing.Visible = isShow;
             liContactList.Visible = isShow;
             liProgressSummary.Visible = isShow;
+            liSettings.Visible = isShow;
         }
 
         private void ShowOCHACountryStaff()

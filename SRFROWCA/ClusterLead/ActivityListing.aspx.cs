@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Web;
@@ -70,16 +71,29 @@ namespace SRFROWCA.ClusterLead
                 }
             }
 
+            int? emgLocationid = null;
+            int? emgClusterid = null;
+
+            if (UserInfo.EmergencyCountry > 0)
+            {
+                emgLocationid = UserInfo.EmergencyCountry;
+            }
+
+            if (UserInfo.EmergencyCluster > 0)
+            {
+                emgClusterid = UserInfo.EmergencyCluster;
+            }
+
             if (maxIndValue > 0)
             {
-                DataTable dt = DBContext.GetData("GetAllIndicatorsNew", new object[] { null, null, null, null, null, (int)RC.SelectedSiteLanguageId });
+                DataTable dt = DBContext.GetData("GetAllIndicatorsNew", new object[] {emgLocationid, emgClusterid, null, null, null, null, (int)RC.SelectedSiteLanguageId });
                 if (dt.Rows.Count > 0)
                     maxIndValue = maxIndValue - dt.Rows.Count;
             }
 
             if (maxActValue > 0)
             {
-                DataTable dt = DBContext.GetData("GetAllActivitiesNew", new object[] { null, null, null, null, (int)RC.SelectedSiteLanguageId });
+                DataTable dt = DBContext.GetData("GetAllActivitiesNew", new object[] { emgLocationid, emgClusterid, null, null, (int)RC.SelectedSiteLanguageId });
                 if (dt != null && dt.Rows.Count > 0)
                     maxActValue = maxActValue - dt.Rows.Count;
             }
@@ -91,9 +105,15 @@ namespace SRFROWCA.ClusterLead
         {
             if (IsPostBack) return;
 
-
-            LoadActivities();
             PopulateFilters();
+
+            if (RC.IsClusterLead(this.User))
+            {
+                ddlCluster.SelectedValue = UserInfo.EmergencyCluster.ToString();
+                ddlCluster.Enabled = false;
+                ddlCluster.BackColor = Color.LightGray;
+            }
+            LoadActivities();
         }
 
 
@@ -314,7 +334,11 @@ namespace SRFROWCA.ClusterLead
 
         private DataTable GetClusters()
         {
-            int? emgId = UserInfo.Emergency;
+            int emgId = UserInfo.Emergency;
+            if (emgId == 0)
+            {
+                emgId = 1;
+            }
             return DBContext.GetData("GetClusters", new object[] { (int)RC.SelectedSiteLanguageId, emgId });
         }
 
@@ -322,10 +346,15 @@ namespace SRFROWCA.ClusterLead
         {
             int? emergencyClusterId = ddlCluster.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlCluster.SelectedValue);
             int? emergencyObjectiveId = ddlObjective.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlObjective.SelectedValue);
+            int? emergencyLocationId = null;
+            if (UserInfo.EmergencyCountry > 0)
+            {
+                emergencyLocationId = UserInfo.EmergencyCountry;
+            }
 
             string search = string.IsNullOrEmpty(txtActivityName.Text) ? null : txtActivityName.Text;
 
-            return DBContext.GetData("GetAllActivitiesNew", new object[] { DBNull.Value, emergencyClusterId, emergencyObjectiveId, search, (int)RC.SelectedSiteLanguageId });
+            return DBContext.GetData("GetAllActivitiesNew", new object[] { emergencyLocationId, emergencyClusterId, emergencyObjectiveId, search, (int)RC.SelectedSiteLanguageId });
         }
 
         private DataTable GetObjectives()

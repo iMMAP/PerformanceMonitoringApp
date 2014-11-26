@@ -65,6 +65,8 @@ namespace SRFROWCA.ClusterLead
         internal override void BindGridData()
         {
             LoadCombos();
+            ShowHideControls();
+            SetDates();
             LoadClusterIndicators();
         }
 

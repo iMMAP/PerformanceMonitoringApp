@@ -103,6 +103,11 @@ namespace SRFROWCA.ClusterLead
         private void PopulateClusters()
         {
             int emgId = UserInfo.Emergency;
+            if (emgId <= 0)
+            {
+                emgId = 1;
+            }
+
             ddlCluster.DataValueField = "EmergencyClusterId";
             ddlCluster.DataTextField = "ClusterName";
 
@@ -119,10 +124,16 @@ namespace SRFROWCA.ClusterLead
 
         private void PopulateCountries()
         {
+            int emgId = UserInfo.Emergency;
+            if (emgId <= 0)
+            {
+                emgId = 1;
+            }
+
             ddlCountry.DataValueField = "LocationId";
             ddlCountry.DataTextField = "LocationName";
 
-            ddlCountry.DataSource = DBContext.GetData("GetEmergencyCountries", new object[]{UserInfo.Emergency});
+            ddlCountry.DataSource = DBContext.GetData("GetEmergencyCountries", new object[]{emgId});
             ddlCountry.DataBind();
             ListItem item = new ListItem("Select Country", "0");
             ddlCountry.Items.Insert(0, item);
@@ -130,8 +141,13 @@ namespace SRFROWCA.ClusterLead
 
         private void PopulateObjective()
         {
-            UI.FillObjectives(ddlObjective);
-            ddlObjective.DataSource = DBContext.GetData("GetEmergencyObjectives", new object[] {RC.SelectedSiteLanguageId,UserInfo.Emergency});
+            int emgId = UserInfo.Emergency;
+            if (emgId <= 0)
+            {
+                emgId = 1;
+            }
+
+            ddlObjective.DataSource = DBContext.GetData("GetEmergencyObjectives", new object[] { RC.SelectedSiteLanguageId, emgId });
             ddlObjective.DataTextField = "Objective";
             ddlObjective.DataValueField = "EmergencyObjectiveId";
             ddlObjective.DataBind();
@@ -171,15 +187,15 @@ namespace SRFROWCA.ClusterLead
 
                         if (indControl != null)
                         {
-                            if (RC.IsClusterLead(this.User))
-                            {
+                            
                                 indControl.SaveIndicators(ActivityId);
-                            }
-                            else
-                            {
-                                bool regional = RC.IsRegionalClusterLead(this.User);
-                                indControl.SaveRegionalIndicators(ActivityId, regional);
-                            }
+                            
+                            //else
+                            //{
+                            //    bool regional = RC.IsRegionalClusterLead(this.User);
+                            //    indControl.SaveRegionalIndicators(ActivityId, regional);
+                            //}
+
                             TextBox txtEng = (TextBox)indControl.FindControl("txtInd1Eng");
                             TextBox txtFr = (TextBox)indControl.FindControl("txtInd1Fr");
                             strIndcators.AppendFormat("Indicator (English): {0}<br/>Indicator (French): {1}<br/><br/>", txtEng.Text, txtFr.Text);

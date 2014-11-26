@@ -10,7 +10,7 @@ using SRFROWCA.Common;
 
 namespace SRFROWCA.Admin
 {
-    public partial class ConfigSettings : System.Web.UI.Page
+    public partial class ConfigSettings : BasePage
     {
         private DataTable dtConfigSettings = new DataTable();
         public string clsTab1 = "tab-pane fade in active";
