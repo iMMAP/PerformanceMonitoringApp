@@ -7,14 +7,11 @@ using Telerik.Web.UI;
 
 namespace SRFROWCA.PivotTables
 {
-    public partial class PerfMontPivot : System.Web.UI.Page
+    public partial class PerfMontPivot : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                UserInfo.UserProfileInfo();
-            }
+            
         }
 
         protected void btnExport_Click(object sender, EventArgs e)

@@ -6,6 +6,7 @@ using SRFROWCA.Common;
 using System.Linq;
 using System.Web.UI.HtmlControls;
 using BusinessLogic;
+using System.Collections.Generic;
 
 namespace SRFROWCA
 {
@@ -35,21 +36,12 @@ namespace SRFROWCA
                 }
             }
 
-            if (Session["SelectedEmergencyId"] == null)
+            if (RC.SelectedEmergencyId <= 0)
             {
-                if (Request.Cookies["SelectedEmergencyId"] != null)
+                if (Request.Cookies["SelectedEmergencyCookie"] != null)
                 {
-                    string emergencyId = Request.Cookies["SelectedEmergencyId"].Value;
-                    int emgId = 0;
-                    int.TryParse(emergencyId, out emgId);
-                    if (emgId > 0)
-                    {
-                        RC.SelectedEmergencyId = emgId;
-                    }
-                    else
-                    {
-                        RC.SelectedSiteLanguageId = 0;
-                    }
+                    ddlEmgergency.SelectedValue = Request.Cookies["SelectedEmergencyCookie"].Value;
+                    RC.SelectedEmergencyId = Convert.ToInt32(ddlEmgergency.SelectedValue);
                 }
             }
         }
@@ -60,26 +52,26 @@ namespace SRFROWCA
             HideAllAuthenticatedMenues();
             LoadNotifications();
 
-            
-
             if (!IsPostBack)
-                LoadEmergencies();
+            {
+                if (RC.SelectedEmergencyId > 0)
+                {
+                    ddlEmgergency.SelectedValue = RC.SelectedEmergencyId.ToString();
+                }
+                else
+                {
+                    RC.SelectedEmergencyId = Convert.ToInt32(ddlEmgergency.SelectedValue);
+                }
 
-            //DataTable dt = new DataTable();
-            //dt.Columns.Add("FullName");
-            //dt.Columns.Add("Message");
-            //dt.Columns.Add("DateTime");
-            //dt.Rows.Add(new object[] { "Kashif", "Hello, There how are you?", DateTime.Now.AddDays(1) });
-            //dt.Rows.Add(new object[] { "Max M", "Added new report.", DateTime.Now });
-            //dt.Rows.Add(new object[] { "Some One", "New ORS project Added", DateTime.Now.AddDays(3) });
-            ////rptMessages.DataSource = dt;
-            ////rptMessages.DataBind();
-
-
+                if (HttpContext.Current.User.Identity.IsAuthenticated)
+                {
+                    UserInfo.UserProfileInfo(RC.SelectedEmergencyId);
+                }
+            }
 
             if (HttpContext.Current.User.Identity.IsAuthenticated)
             {
-                SetCurrentEmergency();
+                //SetCurrentEmergency();
 
                 LoginStatus.Visible = false;
                 spanWelcome.Visible = true;
@@ -135,18 +127,18 @@ namespace SRFROWCA
             //}
         }
 
-        private void SetCurrentEmergency()
-        {
-            try
-            {
-                DataTable dtEmergencies = (DataTable)rptEmergencies.DataSource;
-                if (dtEmergencies.Rows.Count > 0)
-                {
-                    CurrentEmergency = Convert.ToString(dtEmergencies.Select("ID='" + UserInfo.Emergency + "'")[0]["Emergency"]);
-                }
-            }
-            catch { }
-        }
+        //private void SetCurrentEmergency()
+        //{
+        //    try
+        //    {
+        //        DataTable dtEmergencies = (DataTable)rptEmergencies.DataSource;
+        //        if (dtEmergencies.Rows.Count > 0)
+        //        {
+        //            CurrentEmergency = Convert.ToString(dtEmergencies.Select("ID='" + RC.SelectedEmergencyId + "'")[0]["Emergency"]);
+        //        }
+        //    }
+        //    catch { }
+        //}
 
         private void SetUserName()
         {
@@ -163,16 +155,16 @@ namespace SRFROWCA
             }
         }
 
-        private void LoadEmergencies()
-        {
-            DataTable dtEmergencies = DBContext.GetData("uspEmergencies", new object[] { RC.SelectedSiteLanguageId });
+        //private void LoadEmergencies()
+        //{
+        //    DataTable dtEmergencies = DBContext.GetData("uspEmergencies", new object[] { RC.SelectedSiteLanguageId });
 
-            if (dtEmergencies.Rows.Count > 0)
-            {
-                rptEmergencies.DataSource = dtEmergencies.Select("IsSRP=1").CopyToDataTable();
-                rptEmergencies.DataBind();
-            }
-        }
+        //    if (dtEmergencies.Rows.Count > 0)
+        //    {
+        //        rptEmergencies.DataSource = dtEmergencies.Select("IsSRP=1").CopyToDataTable();
+        //        rptEmergencies.DataBind();
+        //    }
+        //}
 
         private void LoadNotifications()
         {
@@ -804,6 +796,18 @@ namespace SRFROWCA
 
                 if (btnEmergency != null)
                     btnEmergency.Click += btnEmergency_Click;
+            }
+        }
+
+        protected void ddlEmg_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //ActivityEmergencyId = ddlEmgergency.SelectedValue;
+            RC.SelectedEmergencyId = Convert.ToInt32(ddlEmgergency.SelectedValue);
+            Response.Cookies["SelectedEmergencyCookie"].Value = ddlEmgergency.SelectedValue;
+            Response.Cookies["SelectedEmergencyCookie"].Expires = DateTime.Now.AddDays(365);
+            if (HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                UserInfo.UserProfileInfo(RC.SelectedEmergencyId);
             }
         }
     }

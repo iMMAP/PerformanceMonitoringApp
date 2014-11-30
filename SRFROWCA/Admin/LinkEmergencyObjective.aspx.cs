@@ -33,7 +33,7 @@ namespace SRFROWCA.Admin
             cblObjectives.DataValueField = "ObjectiveID";
             cblObjectives.DataTextField = "ShortObjectiveTitle";
 
-            cblObjectives.DataSource = DBContext.GetData("GetObjectives", new object[] { RC.SelectedSiteLanguageId, null });
+            cblObjectives.DataSource = DBContext.GetData("GetAllObjectives", new object[] { RC.SelectedSiteLanguageId});
             cblObjectives.DataBind();
         }
 
@@ -58,7 +58,7 @@ namespace SRFROWCA.Admin
 
         private DataTable GetEmergencyObjectives(int emergencyId)
         {
-            return DBContext.GetData("uspGetEmergencyObjectives", new object[] { emergencyId, null, (int)RC.SelectedSiteLanguageId });
+            return DBContext.GetData("GetEmgObjectives", new object[] { emergencyId, null, RC.SelectedSiteLanguageId });
         }
 
         private void CheckClusterListBox(DataTable dt)

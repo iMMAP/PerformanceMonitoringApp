@@ -295,7 +295,7 @@ namespace SRFROWCA.Pages
         private void PopulateLocations()
         {
             int countryId = UserInfo.Country;
-            if (UserInfo.Emergency == 2)
+            if (RC.SelectedEmergencyId == 2)
             {
                 PopulateAdmin2(countryId);
             }

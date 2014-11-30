@@ -52,7 +52,6 @@ namespace SRFROWCA.ClusterLead
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
-            UserInfo.UserProfileInfo();
             PopulateObjective();
             PopulateClusters();
             PopulateCountries();
@@ -102,7 +101,7 @@ namespace SRFROWCA.ClusterLead
 
         private void PopulateClusters()
         {
-            int emgId = UserInfo.Emergency;
+            int emgId = RC.SelectedEmergencyId;
             if (emgId <= 0)
             {
                 emgId = 1;
@@ -124,7 +123,7 @@ namespace SRFROWCA.ClusterLead
 
         private void PopulateCountries()
         {
-            int emgId = UserInfo.Emergency;
+            int emgId = RC.SelectedEmergencyId;
             if (emgId <= 0)
             {
                 emgId = 1;
@@ -141,7 +140,7 @@ namespace SRFROWCA.ClusterLead
 
         private void PopulateObjective()
         {
-            int emgId = UserInfo.Emergency;
+            int emgId = RC.SelectedEmergencyId;
             if (emgId <= 0)
             {
                 emgId = 1;
@@ -224,7 +223,7 @@ namespace SRFROWCA.ClusterLead
                                                         <b>User Name:</b> {1}<br/>
                                                         <b>Email:</b> {2}<br/>                                                        
                                                         <b>Phone:</b> {3}<b/>"
-                                                            , strIndicators, Membership.GetUser().UserName, Membership.GetUser().Email, RC.GetUserDetails().Rows[0]["PhoneNumber"].ToString());
+                                                            , strIndicators, Membership.GetUser().UserName, Membership.GetUser().Email, "");
                     Mail.SendMail(mailMsg);
                 }
             }
@@ -236,7 +235,7 @@ namespace SRFROWCA.ClusterLead
 
         private int SaveActivity()
         {
-            int emergencyId = UserInfo.Emergency;
+            int emergencyId = RC.SelectedEmergencyId;
             int clusterId = RC.IsClusterLead(this.User) ? UserInfo.Cluster : Convert.ToInt32(ddlCluster.SelectedValue);
             int emergencyLocationId = RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) ? UserInfo.EmergencyCountry : Convert.ToInt32(ddlCountry.SelectedValue);
             int emergencyClusterId = RC.IsClusterLead(this.User) ? UserInfo.EmergencyCluster : Convert.ToInt32(ddlCluster.SelectedValue); 

@@ -368,7 +368,7 @@ namespace SRFROWCA.ClusterLead
 
         private DataTable GetClusters()
         {
-            int emergencyId = UserInfo.Emergency;
+            int emergencyId = RC.SelectedEmergencyId;
             if (emergencyId == 0)
             {
                 emergencyId = 1;
@@ -394,7 +394,7 @@ namespace SRFROWCA.ClusterLead
         }
         private DataTable GetObjectives()
         {
-            return DBContext.GetData("GetEmergencyObjectives", new object[] { (int)RC.SelectedSiteLanguageId, UserInfo.Emergency });
+            return DBContext.GetData("GetEmergencyObjectives", new object[] { (int)RC.SelectedSiteLanguageId, RC.SelectedEmergencyId });
         }
 
            

@@ -16,11 +16,28 @@ namespace SRFROWCA.OPS
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/plain";
-            int projectId = GetReportParam(context);
-            context.Response.Write(GetXMLOfProjectData(projectId));
+
+            int dataCheck = GetDataCheckParam(context);
+            int projectId = GetProjectIdParam(context);
+            int year = GetYearParam(context);
+
+            if (dataCheck == 1)
+            {
+                DataSet dsResults = new DataSet();
+                DataTable dtResults = DBContext.GetData("uspOPSActivitiesFeed", new object[] { projectId });
+                dsResults = dtResults.DataSet;
+                dsResults.DataSetName = "ors";
+                dsResults.Tables[0].TableName = "ors_webservice";
+
+                context.Response.Write(GetReportData(dsResults));
+            }
+            else
+            {
+                context.Response.Write(GetXMLOfProjectData(projectId, year));
+            }
         }
 
-        private int GetReportParam(HttpContext context)
+        private int GetProjectIdParam(HttpContext context)
         {
             int projectId = 0;
             if (context.Request["pid"] != null)
@@ -31,9 +48,31 @@ namespace SRFROWCA.OPS
             return projectId;
         }
 
-        private string GetXMLOfProjectData(int projectId)
+        private int GetYearParam(HttpContext context)
         {
-            DataTable dt = DBContext.GetData("GetOPSProjectData", new object[] { projectId });
+            int yearId = 0;
+            if (context.Request["year"] != null)
+            {
+                int.TryParse(context.Request["year"].ToString(), out yearId);
+            }
+
+            return yearId == 0 ? 2014 : yearId;
+        }
+
+        private int GetDataCheckParam(HttpContext context)
+        {
+            int dataCheck = 0;
+            if (context.Request["datacheck"] != null)
+            {
+                int.TryParse(context.Request["datacheck"].ToString(), out dataCheck);
+            }
+
+            return dataCheck;
+        }
+
+        private string GetXMLOfProjectData(int projectId, int year)
+        {
+            DataTable dt = DBContext.GetData("GetOPSProjectData", new object[] { projectId});
 
             XDocument doc = new XDocument();
             XElement logFrameValues = new XElement("ProjectActivities");
@@ -58,12 +97,12 @@ namespace SRFROWCA.OPS
                 // Create a table from the query.
                 DataTable filteredTable = query.CopyToDataTable<DataRow>();
 
-                WriteXML(logFrameValues, filteredTable);
+                WriteXML(logFrameValues, filteredTable, year);
             }
             return doc.ToString();
         }
 
-        private void WriteXML(XElement logFrameValues, DataTable dt)
+        private void WriteXML(XElement logFrameValues, DataTable dt, int year)
         {
             if (dt.Rows.Count > 0)
             {
@@ -72,11 +111,19 @@ namespace SRFROWCA.OPS
                 string projectId = row["OPSProjectId"].ToString();
                 
                 string strObjId = row["StrategicObjectiveId"].ToString();
-                string strObjName = row["StrategicObjectiveName"].ToString();                
-                string priorityId = row["HumanitarianPriorityId"].ToString();
-                string priority = row["HumanitarianPriority"].ToString();                
-                string clusterPartnerId = row["ClusterPartnerId"].ToString();
-                string clusterPartner = row["ClusterPartner"].ToString();                
+                string strObjName = row["StrategicObjectiveName"].ToString();
+                string priorityId = "";
+                string priority = "";
+                string clusterPartnerId = "";
+                string clusterPartner = "";
+                if (year == 2014)
+                {
+                    priorityId = row["HumanitarianPriorityId"].ToString();
+                    priority = row["HumanitarianPriority"].ToString();
+
+                    clusterPartnerId = row["ClusterPartnerId"].ToString();
+                    clusterPartner = row["ClusterPartner"].ToString();
+                }
                 string priorityActivityId = row["PriorityActivityId"].ToString();
                 string activityName = row["ActivityName"].ToString();                
                 string outputIndicatorId = row["OutputIndicatorId"].ToString();
@@ -91,8 +138,11 @@ namespace SRFROWCA.OPS
                 logFrameValues.Add(logFrame);
 
                 logFrame.Add(GetElement("StrategicObjective", strObjId, strObjName));
-                logFrame.Add(GetElement("Priority", priorityId, priority));
-                logFrame.Add(GetElement("ClusterPartner", clusterPartnerId, clusterPartner));
+                if (year == 2014)
+                {
+                    logFrame.Add(GetElement("Priority", priorityId, priority));
+                    logFrame.Add(GetElement("ClusterPartner", clusterPartnerId, clusterPartner));
+                }
                 logFrame.Add(GetElement("Activity", priorityActivityId, activityName));
                 logFrame.Add(GetElement("OutputIndicator", outputIndicatorId, outputIndicator));
 
@@ -103,12 +153,19 @@ namespace SRFROWCA.OPS
                     string locName = locRow["LocationName"].ToString();
                     string locPCode = locRow["PCode"].ToString();
                     string countryName = locRow["CountryName"].ToString();
-                    string targetMid2014 = locRow["TargetMid2014"].ToString();
+                    string targetMid2014 = "";
+                    if (year == 2014)
+                    {
+                        targetMid2014 = locRow["TargetMid2014"].ToString();
+                    }
                     string target2014 = locRow["Target2014"].ToString();
 
                     locationElement.Add(GetLocationElement("Location", locPCode, locName));
-                    locationElement.Add(GetTargetElement("TargetMid", targetMid2014, targetMid2014));
-                    locationElement.Add(GetTargetElement("Target", target2014, target2014));
+                    if (year == 2014)
+                    {
+                        locationElement.Add(GetTargetElement("TargetMid", targetMid2014, targetMid2014, year.ToString()));
+                    }
+                    locationElement.Add(GetTargetElement("Target", target2014, target2014, year.ToString()));
                     logFrame.Add(locationElement);
                 }
             }
@@ -128,10 +185,10 @@ namespace SRFROWCA.OPS
             return element;
         }
 
-        private XElement GetTargetElement(string name, string idValue, string nameValue)
+        private XElement GetTargetElement(string name, string idValue, string nameValue, string year)
         {
             XElement element = new XElement(name);
-            element.SetAttributeValue("Year", "2014");
+            element.SetAttributeValue("Year", year);
             element.Value = nameValue;
             return element;
         }
@@ -143,6 +200,15 @@ namespace SRFROWCA.OPS
             element.SetAttributeValue("adminLevel", "1");
             element.Value = nameValue;
             return element;
+        }
+
+        private string GetReportData(DataSet ds)
+        {
+            using (var sw = new StringWriter())
+            {
+                ds.WriteXml(sw, XmlWriteMode.IgnoreSchema);
+                return sw.ToString();
+            }
         }
 
         public bool IsReusable

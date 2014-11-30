@@ -42,7 +42,9 @@ namespace SRFROWCA.Account
 
         private DataTable GetUserDetails(Guid userId)
         {
-            return RC.GetUserDetails();
+            // TODO: Change emergency
+            int emergencyId = 1;
+            return RC.GetUserDetails(emergencyId);
         }
 
         // Populate countries drop down.

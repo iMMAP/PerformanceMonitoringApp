@@ -235,7 +235,8 @@ namespace SRFROWCA.Ebola
         private void PopulateCountry()
         {
             LastLocationType = RC.LocationTypeForUI.Country;
-            UI.FillEmergencyLocations(ddlCountry, 2);
+            //TODO: Change Emergency Id
+            UI.FillLocationsOfEmergency(ddlCountry, 2);
             if (UserInfo.Country > 0)
             {
                 ddlCountry.SelectedValue = UserInfo.Country.ToString();

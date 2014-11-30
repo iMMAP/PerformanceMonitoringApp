@@ -87,13 +87,13 @@ namespace SRFROWCA.ClusterLead
         }
         private void LoadCountires()
         {
-            int emergencyId = UserInfo.Emergency;
+            int emergencyId = RC.SelectedEmergencyId;
             if (emergencyId <= 0)
             {
                 emergencyId = 1;
             }
 
-            UI.FillEmergencyLocations(ddlCountry, emergencyId);
+            UI.FillLocationsOfEmergency(ddlCountry, emergencyId);
 
             if (ddlCountry.Items.Count > 0)
             {
@@ -103,7 +103,7 @@ namespace SRFROWCA.ClusterLead
         }
         private void LoadClusters()
         {
-            int emergencyId = UserInfo.Emergency;
+            int emergencyId = RC.SelectedEmergencyId;
             if (emergencyId <= 0)
             {
                 emergencyId = 1;
@@ -294,7 +294,7 @@ namespace SRFROWCA.ClusterLead
         {
             int emgCountryId = Convert.ToInt32(ddlCountry.SelectedValue);
             int emgClusterId = Convert.ToInt32(ddlCluster.SelectedValue);
-            int emergencyId = UserInfo.Emergency;
+            int emergencyId = RC.SelectedEmergencyId;
             if (emergencyId <= 0)
             {
                 emergencyId = 1;

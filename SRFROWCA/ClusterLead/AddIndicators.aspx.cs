@@ -52,7 +52,6 @@ namespace SRFROWCA.ClusterLead
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
-            UserInfo.UserProfileInfo();
             PopulateObjective();
             PopulateClusters();
             PopulateCountries();
@@ -110,7 +109,7 @@ namespace SRFROWCA.ClusterLead
         }
         private void PopulateClusters()
         {
-            int emgId = UserInfo.Emergency;
+            int emgId = RC.SelectedEmergencyId;
             if (emgId <= 0)
             {
                 emgId = 1;
@@ -131,7 +130,7 @@ namespace SRFROWCA.ClusterLead
 
         private void PopulateCountries()
         {
-            int emgId = UserInfo.Emergency;
+            int emgId = RC.SelectedEmergencyId;
             if (emgId <= 0)
             {
                 emgId = 1;
@@ -149,7 +148,7 @@ namespace SRFROWCA.ClusterLead
         private void PopulateObjective()
         {
             //UI.FillObjectives(ddlObjective);
-            int emgId = UserInfo.Emergency;
+            int emgId = RC.SelectedEmergencyId;
             if (emgId <= 0)
             {
                 emgId = 1;
@@ -223,7 +222,7 @@ namespace SRFROWCA.ClusterLead
                                                         <b>User Name:</b> {1}<br/>
                                                         <b>Email:</b> {2}<br/>                                                        
                                                         <b>Phone:</b> {3}<b/>"
-                                                            , strIndicators, Membership.GetUser().UserName, Membership.GetUser().Email, RC.GetUserDetails().Rows[0]["PhoneNumber"].ToString());
+                                                            , strIndicators, Membership.GetUser().UserName, Membership.GetUser().Email, "");
                     Mail.SendMail(mailMsg);
                 }
             }

@@ -26,26 +26,14 @@ namespace SRFROWCA.Controls
         {
             string indEn = string.IsNullOrEmpty(txtInd1Eng.Text.Trim()) ? null : txtInd1Eng.Text.Trim();
             string indFr = string.IsNullOrEmpty(txtInd1Fr.Text.Trim()) ? null : txtInd1Fr.Text.Trim();
-
-            if (string.IsNullOrEmpty(indEn) && string.IsNullOrEmpty(indFr))
-            {
-
-            }
-            string siteCulture = RC.SelectedSiteLanguageId.Equals(1) ? "en-US" : "de-DE";
-            string cultureTarget = txtTarget.Text.Trim();
-
-            if (RC.SelectedSiteLanguageId.Equals(2))
-                cultureTarget = cultureTarget.Replace(".", ",");
-
-            string target = decimal.Round(Convert.ToDecimal(cultureTarget, new CultureInfo(siteCulture)), 0).ToString();
-            string unitId = ddlUnits.SelectedValue;
-            
+            int target = Convert.ToInt32(txtTarget.Text.Trim());
+            int unitId = RC.GetSelectedIntVal(ddlUnits);
             Guid userId = RC.GetCurrentUserId;
 
-            DBContext.Add("uspInsertIndicator", new object[] { indEn, indFr, target, unitId, countryId, clusterId, RC.GetCurrentUserId, null , null});
+            DBContext.Add("InsertClusterIndicator", new object[] { indEn, indFr, target, unitId, countryId, clusterId, RC.GetCurrentUserId, DBNull.Value });
         }
 
-        private void LoadCombos() 
+        private void LoadCombos()
         {
             UI.FillUnits(ddlUnits);
         }

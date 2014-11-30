@@ -49,9 +49,8 @@ namespace SRFROWCA
                 type = null;
             }
 
-
             DataSet dsResults = new DataSet();
-            DataTable dtResults = DBContext.GetData("uspOPSActivitiesFeed", new object[] { projectID, type });
+            DataTable dtResults = DBContext.GetData("uspOPSActivitiesFeed", new object[] { projectID });
             dsResults = dtResults.DataSet;
             dsResults.DataSetName = "ors";
             dsResults.Tables[0].TableName = "ors_webservice";

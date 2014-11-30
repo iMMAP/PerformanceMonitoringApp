@@ -14,6 +14,7 @@ using System.Web.Security;
 using System.Threading;
 using System.Globalization;
 using System.Configuration;
+using System.Drawing;
 
 namespace SRFROWCA.Common
 {
@@ -156,7 +157,7 @@ namespace SRFROWCA.Common
 
         internal static DataTable GetObjectives()
         {
-            return DBContext.GetData("GetObjectives", new object[] { SelectedSiteLanguageId, UserInfo.Emergency == null ? (int?)null : UserInfo.Emergency });
+            return DBContext.GetData("GetObjectives", new object[] { SelectedSiteLanguageId, RC.SelectedEmergencyId == null ? (int?)null : RC.SelectedEmergencyId });
         }
 
         internal static DataTable GetEmergencyObjectives(int emergencyId)
@@ -166,7 +167,7 @@ namespace SRFROWCA.Common
 
         internal static DataTable GetPriorities()
         {
-            return DBContext.GetData("GetPriorities", new object[] { SelectedSiteLanguageId, UserInfo.Emergency == null ? (int?)null : UserInfo.Emergency });
+            return DBContext.GetData("GetPriorities", new object[] { SelectedSiteLanguageId, RC.SelectedEmergencyId == null ? (int?)null : RC.SelectedEmergencyId });
         }
 
         #endregion
@@ -198,7 +199,7 @@ namespace SRFROWCA.Common
                     return Convert.ToInt32(HttpContext.Current.Session["SelectedEmergencyId"]);
                 }
 
-                return 1;
+                return 0;
             }
 
             set
@@ -267,15 +268,9 @@ namespace SRFROWCA.Common
             return DBContext.GetData("GetLocationAndItsChildOnType", new object[] { locationId, childTypeId });
         }
 
-        internal static DataTable GetEmergencyLocations(int emergencyId, int siteLangID)
+        internal static DataTable GetEmergencyLocations(int emergencyId)
         {
-            return DBContext.GetData("uspGetEmergencyLocations", new object[] { emergencyId, siteLangID });
-        }
-
-        internal static DataTable GetLocationEmergencies(int emergencyId)
-        {
-            int languageId = 1;
-            return DBContext.GetData("GetEmergnecyLocations", new object[] { emergencyId, languageId });
+            return DBContext.GetData("GetEmergnecyLocations", new object[] { emergencyId});
         }
 
         internal static DataTable GetLocationEmergencies(IPrincipal user)
@@ -341,10 +336,10 @@ namespace SRFROWCA.Common
             return DBContext.GetData("GetProjectsOrganizations", new object[] { locId, clusterId });
         }
 
-        internal static DataTable GetUserDetails()
+        internal static DataTable GetUserDetails(int emergencyId)
         {
             Guid userId = GetCurrentUserId;
-            return DBContext.GetData("GetUserDetails", new object[] { 1, userId });
+            return DBContext.GetData("GetUserDetails", new object[] { emergencyId, userId });
         }
 
         internal static DataTable GetMonths()
@@ -550,6 +545,19 @@ namespace SRFROWCA.Common
                     return db.Clusters.Where(x => x.ClusterId == UserInfo.Cluster && x.SiteLanguageId == RC.SelectedSiteLanguageId)
                                             .Select(x => x.ClusterName).SingleOrDefault();
                 }
+            }
+        }
+
+        internal static void EnableDisableControls(WebControl ctl, bool isEnable)
+        {
+            if (!isEnable)
+            {
+                ctl.Enabled = isEnable;
+                ctl.BackColor = Color.LightGray;
+            }
+            else
+            {
+                ctl.Enabled = isEnable;
             }
         }
 

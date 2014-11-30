@@ -56,7 +56,7 @@ namespace SRFROWCA.Admin
 
         private DataTable GetEmergencyObjectives(int? emergencyId, string objective)
         {
-            return DBContext.GetData("uspGetEmergencyObjectives", new object[] { emergencyId, objective, RC.SelectedSiteLanguageId });
+            return DBContext.GetData("GetEmgObjectives", new object[] { emergencyId, objective, RC.SelectedSiteLanguageId });
         }
 
         protected void gvEmergencyObjectives_Sorting(object sender, GridViewSortEventArgs e)

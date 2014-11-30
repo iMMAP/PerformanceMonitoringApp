@@ -1,9 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ChangeEndSettings>
-  <Key-61 CountryID="6" Country="Mali" ClusterID="1" Cluster="Education" DateLimit="11-26-2014" FrameworkCount="12" ActivityCount="4" ClusterCount="4" />
-  <Key-21 CountryID="2" Country="Burkina Faso" ClusterID="1" Cluster="Education" DateLimit="11-27-2014" FrameworkCount="12" ActivityCount="4" ClusterCount="4" />
-  <Key-610 CountryID="6" Country="Mali" ClusterID="10" Cluster="Water Sanitation &amp; Hygiene" DateLimit="11-28-2014" FrameworkCount="12" ActivityCount="6" ClusterCount="4" />
-  <Key-6 CountryID="6" Country="Mali" DateLimit="11-05-2014" FrameworkCount="45" ActivityCount="33" ClusterCount="22" />
-  <Key-66 CountryID="6" Country="Mali" ClusterID="6" Cluster="Early Recovery" DateLimit="11-13-2014" FrameworkCount="234" ActivityCount="234" ClusterCount="234" />
-  <Key-101 CountryID="10" Country="Senegal" ClusterID="1" Cluster="Education" DateLimit="11-28-2014" FrameworkCount="4" ActivityCount="2" ClusterCount="4" />
+  <Key-1613 CountryID="16" Country="Mali" ClusterID="13" Cluster="Education" DateLimit="12-03-2014" FrameworkCount="4" ActivityCount="8" ClusterCount="4" />
 </ChangeEndSettings>

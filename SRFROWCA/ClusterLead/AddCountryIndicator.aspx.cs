@@ -78,8 +78,6 @@ namespace SRFROWCA.ClusterLead
         {
             if (!IsPostBack)
             {
-                UserInfo.UserProfileInfo();
-
                 LoadCombos();
                 ShowHideControls();
                 //PopulateObjective();
@@ -138,13 +136,13 @@ namespace SRFROWCA.ClusterLead
             ddlObjective.DataSource = DBContext.GetData("GetObjectives", new object[] { RC.SelectedSiteLanguageId, null });
             ddlObjective.DataBind();*/
 
-            int emergencyId = UserInfo.Emergency;
+            int emergencyId = RC.SelectedEmergencyId;
             if (emergencyId == 0)
             {
                 emergencyId = 1;
             }
 
-            UI.FillEmergencyLocations(ddlCountry, emergencyId, RC.SelectedSiteLanguageId);
+            UI.FillEmergencyLocations(ddlCountry, emergencyId);
             UI.FillEmergnecyClusters(ddlCluster, emergencyId);
 
             ddlCluster.Items.Insert(0, new ListItem("--- Select Cluster ---", "-1"));
@@ -243,7 +241,7 @@ namespace SRFROWCA.ClusterLead
                 if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
                     clusterId = ddlCluster.SelectedValue;
 
-                DataTable dtCount = DBContext.GetData("uspGetIndicatorCount", new object[] { countryId, clusterId });
+                DataTable dtCount = DBContext.GetData("GetClusterIndicatorCount", new object[] { countryId, clusterId });
 
                 if (dtCount.Rows.Count > 0)
                     maxCount = maxCount - Convert.ToInt32(dtCount.Rows[0]["IndicatorCount"]);

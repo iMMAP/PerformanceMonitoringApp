@@ -41,16 +41,11 @@ namespace SRFROWCA.Admin
 
             if (emergencyId > 0)
             {
-                DataTable dt = GetEmergencyLocations(emergencyId);
+                DataTable dt = RC.GetEmergencyLocations(emergencyId);
                 CheckLocationsListBox(dt);
             }
         }
 
-        private DataTable GetEmergencyLocations(int emergencyId)
-        {
-            int languageId = 1;
-            return DBContext.GetData("GetEmergnecyLocations", new object[] { emergencyId, languageId });
-        }
         internal override void BindGridData()
         {
             PopulateEmergencies();

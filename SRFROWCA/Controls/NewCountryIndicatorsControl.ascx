@@ -10,8 +10,8 @@
                         <div class="widget-body">
                             <div class="widget-main no-padding-bottom no-padding-top">
                                 <div>
-                                    <label>
-                                        (English):</label>
+                                    <label class="label2">
+                                        English:</label>
                                     <div>
                                         <asp:TextBox ID="txtInd1Eng" MaxLength="4000" runat="server" TextMode="MultiLine" CssClass="width-100"></asp:TextBox>
                                        
@@ -26,8 +26,8 @@
                         <div class="widget-body">
                             <div class="widget-main no-padding-bottom no-padding-top">
                                 <div>
-                                    <label>
-                                        (French):</label>
+                                    <label class="label2">
+                                        French:</label>
                                     <div>
                                         <asp:TextBox ID="txtInd1Fr" MaxLength="4000" runat="server" TextMode="MultiLine" CssClass="width-100"></asp:TextBox>
                                       
@@ -43,7 +43,7 @@
                         <div class="widget-body">
                             <div class="widget-main no-padding-bottom no-padding-top">
                                 <div>
-                                    <label>
+                                    <label class="label2">
                                         Target:</label>
                                     <div>
                                         <asp:TextBox ID="txtTarget" MaxLength="9" runat="server" CssClass="width-100 numeric1"></asp:TextBox>
@@ -60,7 +60,7 @@
                         <div class="widget-body">
                             <div class="widget-main no-padding-bottom no-padding-top">
                                 <div>
-                                    <label>
+                                    <label class="label2">
                                         Unit:</label>
                                     <div>
                                         <asp:DropDownList runat="server" ID="ddlUnits" AppendDataBoundItems="true" CssClass="width-100">

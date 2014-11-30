@@ -20,7 +20,6 @@ namespace SRFROWCA.ClusterLead
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
-            UserInfo.UserProfileInfo();
             PopulateObjective();
             PopulateClusters();
             PopulateCountries();           
@@ -79,7 +78,7 @@ namespace SRFROWCA.ClusterLead
 
         private void PopulateClusters()
         {
-            int emgId = UserInfo.Emergency;
+            int emgId = RC.SelectedEmergencyId;
             ddlCluster.DataValueField = "EmergencyClusterId";
             ddlCluster.DataTextField = "ClusterName";
 
@@ -99,7 +98,7 @@ namespace SRFROWCA.ClusterLead
             ddlCountry.DataValueField = "LocationId";
             ddlCountry.DataTextField = "LocationName";
 
-            ddlCountry.DataSource = DBContext.GetData("GetEmergencyCountries", new object[]{UserInfo.Emergency});
+            ddlCountry.DataSource = DBContext.GetData("GetEmergencyCountries", new object[]{RC.SelectedEmergencyId});
             ddlCountry.DataBind();
             ListItem item = new ListItem("Select Country", "0");
             ddlCountry.Items.Insert(0, item);
@@ -108,7 +107,7 @@ namespace SRFROWCA.ClusterLead
         private void PopulateObjective()
         {
             UI.FillObjectives(ddlObjective);
-            ddlObjective.DataSource = DBContext.GetData("GetEmergencyObjectives", new object[] {RC.SelectedSiteLanguageId,UserInfo.Emergency});
+            ddlObjective.DataSource = DBContext.GetData("GetEmergencyObjectives", new object[] {RC.SelectedSiteLanguageId,RC.SelectedEmergencyId});
             ddlObjective.DataTextField = "ShortObjectiveTitle";
             ddlObjective.DataValueField = "EmergencyObjectiveId";
             ddlObjective.DataBind();

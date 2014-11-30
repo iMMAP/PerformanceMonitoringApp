@@ -72,14 +72,14 @@ namespace SRFROWCA.ClusterLead
 
         private void LoadCombos()
         {
-            int emergencyId = UserInfo.Emergency;
+            int emergencyId = RC.SelectedEmergencyId;
             if (emergencyId == 0)
             {
                 emergencyId = 1;
             }
 
             //UI.FillCountry(ddlCountry);
-            UI.FillEmergencyLocations(ddlCountry, emergencyId, RC.SelectedSiteLanguageId);
+            UI.FillEmergencyLocations(ddlCountry, emergencyId);
             //UI.FillClusters(ddlCluster, RC.SelectedSiteLanguageId);
             UI.FillEmergnecyClusters(ddlCluster, emergencyId);
 

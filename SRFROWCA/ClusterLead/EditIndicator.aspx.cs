@@ -21,7 +21,6 @@ namespace SRFROWCA.ClusterLead
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
-            UserInfo.UserProfileInfo();
             PopulateObjective();
             PopulateClusters();
             PopulateCountries();
@@ -121,7 +120,7 @@ namespace SRFROWCA.ClusterLead
         }
         private void PopulateClusters()
         {
-            int emgId = UserInfo.Emergency;
+            int emgId = RC.SelectedEmergencyId;
             if (emgId <= 0)
             {
                 emgId = 1;
@@ -143,7 +142,7 @@ namespace SRFROWCA.ClusterLead
 
         private void PopulateCountries()
         {
-            int emgId = UserInfo.Emergency;
+            int emgId = RC.SelectedEmergencyId;
             if (emgId <= 0)
             {
                 emgId = 1;
@@ -160,7 +159,7 @@ namespace SRFROWCA.ClusterLead
 
         private void PopulateObjective()
         {
-            int emgId = UserInfo.Emergency;
+            int emgId = RC.SelectedEmergencyId;
             if (emgId <= 0)
             {
                 emgId = 1;

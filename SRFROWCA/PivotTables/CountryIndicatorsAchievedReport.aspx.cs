@@ -17,7 +17,6 @@ namespace SRFROWCA.PivotTables
         {
             if (!IsPostBack)
             {
-                UserInfo.UserProfileInfo();
                 lblHeaderMessage.Text = UserInfo.CountryName + " " + RC.GetClusterName + " Indicators Sum";
             }
         }

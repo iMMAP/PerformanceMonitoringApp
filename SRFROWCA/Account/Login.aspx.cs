@@ -29,17 +29,17 @@ namespace SRFROWCA.Account
 
         protected void LoginUser_LoggedIn(Object sender, EventArgs e)
         {
-            DataTable dt = DBContext.GetData("GetUserEmergency", new object[] { LoginUser.UserName });
-            string emergencyId = "";
-            if (dt.Rows.Count > 0)
-            {
-                emergencyId = dt.Rows[0]["EmergencyId"].ToString();
-            }
+            //DataTable dt = DBContext.GetData("GetUserEmergency", new object[] { LoginUser.UserName });
+            //string emergencyId = "";
+            //if (dt.Rows.Count > 0)
+            //{
+            //    emergencyId = dt.Rows[0]["EmergencyId"].ToString();
+            //}
 
-            if (Roles.IsUserInRole(LoginUser.UserName, "User") && emergencyId == "2")
-            {
-                Response.Redirect("~/Ebola/ReportDataEntry.aspx");
-            }
+            //if (Roles.IsUserInRole(LoginUser.UserName, "User") && emergencyId == "2")
+            //{
+            //    Response.Redirect("~/Ebola/ReportDataEntry.aspx");
+            //}
             
             if (Roles.IsUserInRole(LoginUser.UserName, "ClusterLead"))
             {

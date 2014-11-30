@@ -16,7 +16,7 @@ using System.Web.Security;
 
 namespace SRFROWCA.LeadPages
 {
-    public partial class AddIndicatorOnActivity : System.Web.UI.Page
+    public partial class AddIndicatorOnActivity : BasePage
     {
         protected void Page_PreLoad(object sender, EventArgs e)
         {
@@ -48,8 +48,7 @@ namespace SRFROWCA.LeadPages
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (IsPostBack) return;
-            UserInfo.UserProfileInfo();
+            if (IsPostBack) return;            
             PopulateObjective();
             PopulatePriority();
             AddIndicatorControl(0);
@@ -165,7 +164,7 @@ namespace SRFROWCA.LeadPages
                                                         <b>User Name:</b> {1}<br/>
                                                         <b>Email:</b> {2}<br/>                                                        
                                                         <b>Phone:</b> {3}<b/>"
-                                                        , strIndicators, Membership.GetUser().UserName,Membership.GetUser().Email,RC.GetUserDetails().Rows[0]["PhoneNumber"].ToString());
+                                                        , strIndicators, Membership.GetUser().UserName,Membership.GetUser().Email,"");
                Mail.SendMail(mailMsg);                
             }
         }

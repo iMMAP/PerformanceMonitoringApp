@@ -57,7 +57,7 @@ namespace SRFROWCA.Pages
 
         private void PopulateClusters()
         {
-            UI.FillEmergnecyClusters(ddlCluster, UserInfo.Emergency);
+            UI.FillEmergnecyClusters(ddlCluster, RC.SelectedEmergencyId);
             ListItem item = new ListItem("Select Cluster", "0");
             ddlCluster.Items.Insert(0, item);
         }

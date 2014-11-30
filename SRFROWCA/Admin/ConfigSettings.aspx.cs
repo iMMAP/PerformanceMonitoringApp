@@ -85,15 +85,8 @@ namespace SRFROWCA.Admin
 
         private void LoadCombos()
         {
-            int emergencyID = 1;
-
-            if (RC.IsCountryAdmin(this.User))
-                emergencyID = UserInfo.Emergency;
-
-            //UI.FillCountry(ddlCountry);
-            UI.FillEmergencyLocations(ddlCountry, emergencyID, RC.SelectedSiteLanguageId);
-            UI.FillEmergnecyClusters(ddlCluster, emergencyID);
-            //UI.FillClusters(ddlCluster, RC.SelectedSiteLanguageId);
+            UI.FillEmergencyLocations(ddlCountry, RC.SelectedEmergencyId);
+            UI.FillEmergnecyClusters(ddlCluster, RC.SelectedEmergencyId);
         }
 
         private void SetKeySettings()

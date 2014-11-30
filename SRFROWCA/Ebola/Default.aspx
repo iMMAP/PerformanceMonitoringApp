@@ -4,7 +4,7 @@
     <style type="text/css">
         #outdiv
         {
-            height: 800px;
+            height: 920px;
             overflow: hidden;
             position: relative;
             width: 1100px;
@@ -18,9 +18,9 @@
             width: 1100px;
         }
 
-        #iniframe
+        .iniframe
         {
-            height: 1200px;
+            height: 1500px;
             left: -2px;
             position: absolute;
             top: -170px;
@@ -36,6 +36,25 @@
             width: 1260px;
         }
     </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#iframe2").load(function () {
+
+                var ifr = document.getElementById("iframe");
+
+                var anchors = ifr.contentDocument.getElementsByTagName("a");
+
+                for (var i in anchors) {
+
+                    anchors[i].setAttribute("target", "_blank");
+
+                }
+
+            });
+
+        });
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div>
@@ -43,7 +62,7 @@
             <img src="http://sdr.ocharowca.info/logo-hdx.png" style="position: absolute; left: 1000px; top: 310px; z-index: 1000;" />
         </div>
         <div id="outdiv">
-            <iframe src="https://data.hdx.rwlabs.org/ebola" scrolling="no" width="1000px" height="1200px" id="iniframe"></iframe>
+            <iframe src="https://data.hdx.rwlabs.org/ebola" scrolling="no" width="1000px" height="1500px" class="iniframe" id="iframe2"></iframe>
         </div>
         <p></p>
 

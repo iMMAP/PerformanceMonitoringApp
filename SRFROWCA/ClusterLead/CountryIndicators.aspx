@@ -1,9 +1,10 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="CountryIndicators.aspx.cs" Inherits="SRFROWCA.ClusterLead.CountryIndicators" Culture="auto" meta:resourcekey="PageResource1" UICulture="auto" %>
-
+<%@ MasterType VirtualPath="~/Site.Master" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Assembly="SRFROWCA" Namespace="SRFROWCA" TagPrefix="cc2" %>
 
 <asp:Content ID="cntHeadCountryIndicators" ContentPlaceHolderID="HeadContent" runat="server">
+    <script src="../assets/orsjs/jquery.wholenumber.js" type="text/javascript"></script>
     <script type="text/javascript">
         function validate() {
             var objEng = document.getElementById('<%=txtIndicatorEng.ClientID%>');
@@ -15,11 +16,9 @@
         }
 
         $(function () {
-            $(".numeric1").numeric();
+            $(".numeric1").wholenumber();
         });
-
-    </script>
-    <script src="../assets/orsjs/jquery.numeric.min.js" type="text/javascript"></script>
+        </script>
 </asp:Content>
 
 
@@ -51,8 +50,7 @@
                                     <h6>
                                         <button runat="server" id="btnExportPDF" onserverclick="ExportToPDF" class="btn btn-yellow" causesvalidation="false"
                                             title="PDF">
-                                            <i class="icon-download"></i>PDF
-                                       
+                                            <i class="icon-download"></i>PDF                                       
                                         </button>
 
                                         <button runat="server" id="btnExportToExcel" onserverclick="btnExportToExcel_ServerClick" class="btn btn-yellow" causesvalidation="false"

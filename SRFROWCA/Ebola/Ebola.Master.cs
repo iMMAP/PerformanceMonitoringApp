@@ -79,7 +79,7 @@ namespace SRFROWCA.Ebola
         //        DataTable dtEmergencies = (DataTable)rptEmergencies.DataSource;
         //        if (dtEmergencies.Rows.Count > 0)
         //        {
-        //            CurrentEmergency = Convert.ToString(dtEmergencies.Select("ID='" + UserInfo.Emergency + "'")[0]["Emergency"]);
+        //            CurrentEmergency = Convert.ToString(dtEmergencies.Select("ID='" + RC.SelectedEmergencyId + "'")[0]["Emergency"]);
         //        }
         //    }
         //    catch { }

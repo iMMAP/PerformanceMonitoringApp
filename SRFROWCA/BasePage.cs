@@ -1,6 +1,8 @@
 ﻿
 using SRFROWCA.Common;
 using System;
+using System.Web;
+using System.Web.UI.WebControls;
 namespace SRFROWCA
 {
     public class BasePage : System.Web.UI.Page
@@ -22,7 +24,20 @@ namespace SRFROWCA
         protected void Page_PreInit(object sender, EventArgs e)
         {
             GZipContents.GZipOutput();
-            UserInfo.UserProfileInfo();
+            //int emergencyId = 1;
+
+            //var pageHandler = HttpContext.Current.CurrentHandler;
+            //if (pageHandler is System.Web.UI.Page)
+            //{
+            //    DropDownList ddlEmergency = ((System.Web.UI.Page)pageHandler).Master.FindControl("ddlEmgergency") as DropDownList;
+            //    if (ddlEmergency != null)
+            //    {
+            //        string s = ddlEmergency.SelectedValue;
+            //    }
+            //}
+
+
+            //UserInfo.UserProfileInfo(emergencyId);
         }
 
         internal virtual void BindGridData(){}

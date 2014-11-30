@@ -223,18 +223,18 @@ namespace SRFROWCA.Common
             ddl.DataBind();
         }
 
-        internal static void FillEmergencyLocations(ListControl ctl, int emergencyId)
+        internal static void FillLocationsOfEmergency(ListControl ctl, int emergencyId)
         {
-            DataTable dt = RC.GetLocationEmergencies(emergencyId);
+            DataTable dt = RC.GetEmergencyLocations(emergencyId);
             ctl.DataTextField = "LocationName";
             ctl.DataValueField = "LocationId";
             ctl.DataSource = dt;
             ctl.DataBind();
         }
 
-        internal static void FillEmergencyLocations(ListControl ctl, int emergencyId, int siteLangID)
+        internal static void FillEmergencyLocations(ListControl ctl, int emergencyId)
         {
-            DataTable dt = RC.GetEmergencyLocations(emergencyId, siteLangID);
+            DataTable dt = RC.GetEmergencyLocations(emergencyId);
             ctl.DataTextField = "LocationName";
             ctl.DataValueField = "EmergencyLocationId";
             ctl.DataSource = dt;

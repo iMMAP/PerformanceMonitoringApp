@@ -279,7 +279,7 @@ namespace SRFROWCA.Ebola
         {
             int countryId = UserInfo.Country;
 
-            if (UserInfo.Emergency == 2)
+            if (RC.SelectedEmergencyId == 2)
                 PopulateAdmin2(countryId);
             else
                 PopulateAdmin1(countryId);

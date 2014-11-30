@@ -70,7 +70,7 @@ namespace SRFROWCA.ClusterLead
 
         private void LoadCombos()
         {
-            UI.FillEmergencyLocations(ddlCountry, UserInfo.Emergency, RC.SelectedSiteLanguageId);
+            UI.FillEmergencyLocations(ddlCountry, RC.SelectedEmergencyId);
             UI.FillEmergnecyClusters(ddlCluster, RC.SelectedSiteLanguageId);
             PopulateMonths();
 

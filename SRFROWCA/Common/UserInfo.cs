@@ -5,9 +5,9 @@ namespace SRFROWCA.Common
 {
     public static class UserInfo
     {
-        internal static void UserProfileInfo()
+        internal static void UserProfileInfo(int emergencyId)
         {
-            DataTable dt = RC.GetUserDetails();
+            DataTable dt = RC.GetUserDetails(emergencyId);
 
             if (dt.Rows.Count > 0)
             {
@@ -32,7 +32,7 @@ namespace SRFROWCA.Common
                 }
                 
                 HttpContext.Current.Session["UserEmergencyClusterId"] = dt.Rows[0]["EmergencyClusterId"];
-                HttpContext.Current.Session["EmergencyId"] = dt.Rows[0]["EmergencyId"];
+                //HttpContext.Current.Session["EmergencyId"] = dt.Rows[0]["EmergencyId"];
                 
             }
 
@@ -104,18 +104,18 @@ namespace SRFROWCA.Common
             }
         }
 
-        internal static int Emergency
-        {
-            get
-            {
-                int i = 0;
-                if (HttpContext.Current.Session["EmergencyId"] != null)
-                {
-                    int.TryParse(HttpContext.Current.Session["EmergencyId"].ToString(), out i);
-                }
-                return i;
-            }
-        }
+        //internal static int Emergency
+        //{
+        //    get
+        //    {
+        //        int i = 0;
+        //        if (HttpContext.Current.Session["EmergencyId"] != null)
+        //        {
+        //            int.TryParse(HttpContext.Current.Session["EmergencyId"].ToString(), out i);
+        //        }
+        //        return i;
+        //    }
+        //}
 
         internal static string CountryName
         {
