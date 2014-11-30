@@ -155,7 +155,7 @@
                         <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle" HeaderStyle-Width="80px">
                             <ItemTemplate>
                                 <asp:LinkButton ID="btnDelete" runat="server" Text="Delete" Width="80px" CausesValidation="false" 
-                                    CommandName="Delete" CommandArgument='<%# Eval("IndicatorDetailId") %>' />
+                                    CommandName="DeleteInd" CommandArgument='<%# Eval("IndicatorDetailId") %>' />
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>

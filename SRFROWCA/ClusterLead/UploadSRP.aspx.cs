@@ -19,47 +19,47 @@ namespace SRFROWCA.ClusterLead
                 PopulateDropDowns();
                 menueExportWord.HRef = string.Format("../Reports/DownloadReport.aspx?type=10&emgCountryId={0}&emgClusterId={1}", ddlCountry.SelectedValue, ddlCluster.SelectedValue);
 
-                if (ddlCountry.SelectedValue == "2")
+                if (ddlCountry.SelectedValue == "12")
                 {
                     hlTemplate.NavigateUrl = "../Test/Burkina.xlsx";                    
                 }
 
-                if (ddlCountry.SelectedValue == "3")
+                if (ddlCountry.SelectedValue == "13")
                 {
                     hlTemplate.NavigateUrl = "../Test/Cameroon.xlsx";
                 }
 
-                if (ddlCountry.SelectedValue == "4")
+                if (ddlCountry.SelectedValue == "14")
                 {
                     hlTemplate.NavigateUrl = "../Test/Chad.xlsx";
                 }
 
-                if (ddlCountry.SelectedValue == "5")
+                if (ddlCountry.SelectedValue == "15")
                 {
                     hlTemplate.NavigateUrl = "../Test/Gambia.xlsx";
                 }
 
-                if (ddlCountry.SelectedValue == "6")
+                if (ddlCountry.SelectedValue == "16")
                 {
                     hlTemplate.NavigateUrl = "../Test/Mali.xlsx";
                 }
 
-                if (ddlCountry.SelectedValue == "7")
+                if (ddlCountry.SelectedValue == "17")
                 {
                     hlTemplate.NavigateUrl = "../Test/Mauritania.xlsx";
                 }
 
-                if (ddlCountry.SelectedValue == "8")
+                if (ddlCountry.SelectedValue == "18")
                 {
                     hlTemplate.NavigateUrl = "../Test/Niger.xlsx";
                 }
 
-                if (ddlCountry.SelectedValue == "9")
+                if (ddlCountry.SelectedValue == "19")
                 {
                     hlTemplate.NavigateUrl = "../Test/Nigeria.xlsx";
                 }
 
-                if (ddlCountry.SelectedValue == "10")
+                if (ddlCountry.SelectedValue == "20")
                 {
                     hlTemplate.NavigateUrl = "../Test/Senegal.xlsx";
                 }
@@ -87,14 +87,7 @@ namespace SRFROWCA.ClusterLead
         }
         private void LoadCountires()
         {
-            int emergencyId = RC.SelectedEmergencyId;
-            if (emergencyId <= 0)
-            {
-                emergencyId = 1;
-            }
-
-            UI.FillLocationsOfEmergency(ddlCountry, emergencyId);
-
+            UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
             if (ddlCountry.Items.Count > 0)
             {
                 ListItem item = new ListItem("Select", "0");
@@ -103,14 +96,7 @@ namespace SRFROWCA.ClusterLead
         }
         private void LoadClusters()
         {
-            int emergencyId = RC.SelectedEmergencyId;
-            if (emergencyId <= 0)
-            {
-                emergencyId = 1;
-            }
-
-            UI.FillEmergnecyClusters(ddlCluster, emergencyId);
-
+            UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
             if (ddlCluster.Items.Count > 0)
             {
                 ListItem item = new ListItem("Select", "0");
@@ -121,47 +107,47 @@ namespace SRFROWCA.ClusterLead
         protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
             menueExportWord.HRef = string.Format("../Reports/DownloadReport.aspx?type=10&emgCountryId={0}&emgClusterId={1}", ddlCountry.SelectedValue, ddlCluster.SelectedValue);
-            if (ddlCountry.SelectedValue == "2")
+            if (ddlCountry.SelectedValue == "12")
             {
                 hlTemplate.NavigateUrl = "../Test/Burkina.xlsx";
             }
 
-            if (ddlCountry.SelectedValue == "3")
+            if (ddlCountry.SelectedValue == "13")
             {
                 hlTemplate.NavigateUrl = "../Test/Cameroon.xlsx";
             }
 
-            if (ddlCountry.SelectedValue == "4")
+            if (ddlCountry.SelectedValue == "14")
             {
                 hlTemplate.NavigateUrl = "../Test/Chad.xlsx";
             }
 
-            if (ddlCountry.SelectedValue == "5")
+            if (ddlCountry.SelectedValue == "15")
             {
                 hlTemplate.NavigateUrl = "../Test/Gambia.xlsx";
             }
 
-            if (ddlCountry.SelectedValue == "6")
+            if (ddlCountry.SelectedValue == "16")
             {
                 hlTemplate.NavigateUrl = "../Test/Mali.xlsx";
             }
 
-            if (ddlCountry.SelectedValue == "7")
+            if (ddlCountry.SelectedValue == "17")
             {
                 hlTemplate.NavigateUrl = "../Test/Mauritania.xlsx";
             }
 
-            if (ddlCountry.SelectedValue == "8")
+            if (ddlCountry.SelectedValue == "18")
             {
                 hlTemplate.NavigateUrl = "../Test/Niger.xlsx";
             }
 
-            if (ddlCountry.SelectedValue == "9")
+            if (ddlCountry.SelectedValue == "19")
             {
                 hlTemplate.NavigateUrl = "../Test/Nigeria.xlsx";
             }
 
-            if (ddlCountry.SelectedValue == "10")
+            if (ddlCountry.SelectedValue == "20")
             {
                 hlTemplate.NavigateUrl = "../Test/Senegal.xlsx";
             }
@@ -294,14 +280,8 @@ namespace SRFROWCA.ClusterLead
         {
             int emgCountryId = Convert.ToInt32(ddlCountry.SelectedValue);
             int emgClusterId = Convert.ToInt32(ddlCluster.SelectedValue);
-            int emergencyId = RC.SelectedEmergencyId;
-            if (emergencyId <= 0)
-            {
-                emergencyId = 1;
-            }
-
-            return DBContext.GetData("ImportSRP", new object[] {emergencyId, emgCountryId, emgClusterId,
-																					RC.GetCurrentUserId});
+            int emergencyId = RC.EmergencySahel2015;
+            return DBContext.GetData("ImportSRP", new object[] {emergencyId, emgCountryId, emgClusterId, RC.GetCurrentUserId});
         }
 
         private string GetLocationNames(DataTable dt)

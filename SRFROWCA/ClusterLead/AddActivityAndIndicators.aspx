@@ -35,7 +35,7 @@
                 <label>
                     Country:</label>
                 <div>
-                    <asp:DropDownList ID="ddlCountry" runat="server" CssClass="width-90" >
+                    <asp:DropDownList ID="ddlCountry" runat="server" CssClass="width-90" AutoPostBack="true" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" >
                     </asp:DropDownList>
                     <asp:RequiredFieldValidator ID="rfvCountry" runat="server" ErrorMessage="Required" Display="Dynamic"
                         CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCountry"></asp:RequiredFieldValidator>

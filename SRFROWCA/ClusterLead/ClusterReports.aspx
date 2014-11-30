@@ -2,6 +2,11 @@
 
 <asp:Content ID="cntClusterReports" ContentPlaceHolderID="HeadContent" runat="server">
     <%@ Register Assembly="DropDownCheckBoxes" Namespace="Saplin.Controls" TagPrefix="cc" %>
+    <style>
+        .ddlWidth {
+            width: 270px;
+        }
+    </style>
 
     <script type="text/javascript">
 
@@ -68,11 +73,10 @@
                                                     <asp:Label runat="server" ID="lblCountry" Text="Country:"></asp:Label>
                                                 </td>
                                                 <td>
-                                                    <cc:DropDownCheckBoxes UseButtons="False"   AddJQueryReference="True" AutoPostBack="true"  OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" runat="server" ID="ddlCountry" >
-                                                        <Style SelectBoxWidth="270" DropDownBoxBoxWidth="270" DropDownBoxBoxHeight=""></Style>
+                                                    <cc:DropDownCheckBoxes UseButtons="False"   AddJQueryReference="True" CssClass="ddlWidth" AutoPostBack="true"  OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" runat="server" ID="ddlCountry" >
+                                                        <Style SelectBoxWidth="" DropDownBoxBoxWidth="100%" DropDownBoxBoxHeight=""></Style>
                                                         
                                                         <Texts SelectBoxCaption="Select Country" />
-                                                        <%--<asp:ListItem Selected="True" Text="--- Select Country ---" Value="-1"></asp:ListItem>--%>
                                                     </cc:DropDownCheckBoxes>
                                                 </td>
                                                 <td></td>
@@ -80,26 +84,16 @@
                                             <tr>
                                                 <td>Month:</td>
                                                 <td>
-                                                 <%--   <asp:DropDownList ID="ddlMonth" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged" AutoPostBack="true" runat="server">
-                                                        <asp:ListItem Selected="True" Text="--- Select ---" Value="-1"></asp:ListItem>
-                                                    </asp:DropDownList>--%>
-
-                                                     <cc:DropDownCheckBoxes UseButtons="False"   AddJQueryReference="True" AutoPostBack="true"  OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged" runat="server" ID="ddlMonth" >
-                                                        <Style SelectBoxWidth="170" DropDownBoxBoxWidth="270" DropDownBoxBoxHeight=""></Style>
-                                                        
+                                                     <cc:DropDownCheckBoxes UseButtons="False"   AddJQueryReference="True" CssClass="ddlWidth" AutoPostBack="true"  OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged" runat="server" ID="ddlMonth" >
+                                                        <Style SelectBoxWidth="" DropDownBoxBoxWidth="100%" DropDownBoxBoxHeight=""></Style>                                                      
                                                         <Texts SelectBoxCaption="Select" />
-                                                        <%--<asp:ListItem Selected="True" Text="--- Select Country ---" Value="-1"></asp:ListItem>--%>
                                                     </cc:DropDownCheckBoxes></td>
                                                 <td>
                                                     <asp:Label runat="server" ID="lblCluster" Text="Cluster:" meta:resourcekey="lblClusterResource1"></asp:Label>
                                                 </td>
                                                 <td>
-                                                   <%-- <asp:DropDownList AutoPostBack="True" OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged" runat="server" ID="ddlCluster" Width="270px" meta:resourcekey="ddlClusterResource1">
-                                                        <asp:ListItem Selected="True" Text="--- Select Cluster ---" Value="-1" meta:resourcekey="ListItemResource1"></asp:ListItem>
-                                                    </asp:DropDownList>--%>
-
-                                                     <cc:DropDownCheckBoxes UseButtons="False"   AddJQueryReference="True" AutoPostBack="true"  OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged" runat="server" ID="ddlCluster" >
-                                                        <Style SelectBoxWidth="170" DropDownBoxBoxWidth="270" DropDownBoxBoxHeight=""></Style>
+                                                     <cc:DropDownCheckBoxes UseButtons="False" CssClass="ddlWidth" AddJQueryReference="True" AutoPostBack="true"  OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged" runat="server" ID="ddlCluster" >
+                                                        <Style SelectBoxWidth="" DropDownBoxBoxWidth="130%" DropDownBoxBoxHeight=""></Style>
                                                         <Texts SelectBoxCaption="Select Cluster" />
                                                     </cc:DropDownCheckBoxes></td>
                                                 </td>
@@ -107,8 +101,7 @@
 
 
                                                     <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" CssClass="btn btn-primary" CausesValidation="False" meta:resourcekey="btnSearchResource1" />
-
-                                                    <button onclick="return resetAll();" class="btn btn-primary">Reset</button>
+                                                    <asp:Button ID="btnReset" runat="server" OnClick="btnReset_Click" Text="Reset" CssClass="btn btn-primary" CausesValidation="False"/>
                                                 </td>
                                             </tr>
                                             <tr>

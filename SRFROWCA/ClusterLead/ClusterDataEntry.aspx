@@ -1,18 +1,13 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="ClusterDataEntry.aspx.cs" Inherits="SRFROWCA.ClusterLead.ClusterDataEntry" %>
-
-
 <asp:Content ID="cntHeadClusterDataEntry" ContentPlaceHolderID="HeadContent" runat="server">
-
-    <script src="../assets/orsjs/jquery.numeric.min.js" type="text/javascript"></script>
-
+    <script src="../assets/orsjs/jquery.wholenumber.js" type="text/javascript"></script>
     <script type="text/javascript">
 
         $(function () {
-            $(".numeric1").numeric();
+            $(".numeric1").wholenumber();
         });
 
     </script>
-
 </asp:Content>
 
 <asp:Content ID="cntMainClusterDataEntry" ContentPlaceHolderID="MainContent" runat="server">
@@ -49,33 +44,28 @@
                                     <div class="widget-main">
                                         <table border="0" style="width: 95%; margin: 0px 10px 0px 20px">
                                             <tr>
-                                                <td style="width: 10%;">
-                                                    <asp:Label runat="server" ID="lblCountry" Text="Country:"></asp:Label>
-                                                </td>
-                                                <td style="width: 10%;">
-                                                    <asp:DropDownList AutoPostBack="true" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" runat="server" ID="ddlCountry" Width="270">
-                                                        <asp:ListItem Selected="True" Text="--- Select Country ---" Value="-1"></asp:ListItem>
-                                                    </asp:DropDownList>
-                                                </td>
-
-                                                <td style="width: 5%"></td>
-                                                <td style="width: 25%"></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="<%=ClusterDisplayNone%>">
+                                                <td>
                                                     <asp:Label runat="server" ID="lblCluster" Text="Cluster:"></asp:Label>
                                                 </td>
-                                                <td style="<%=ClusterDisplayNone%>">
+                                                <td>
                                                     <asp:DropDownList AutoPostBack="true" runat="server" OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged" ID="ddlCluster" Width="270">
                                                         <asp:ListItem Selected="True" Text="--- Select Cluster ---" Value="-1"></asp:ListItem>
                                                     </asp:DropDownList>
 
                                                 </td>
+                                                <td>
+                                                    <asp:Label runat="server" ID="lblCountry" Text="Country:"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:DropDownList AutoPostBack="true" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" runat="server" ID="ddlCountry" Width="270">
+                                                        <asp:ListItem Selected="True" Text="--- Select Country ---" Value="-1"></asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </td>
                                             </tr>
                                             <tr>
-                                                <td>
+                                                <td style="width:100px">
                                                     <label>
-                                                        Reporting Year/Month:</label>
+                                                        Year/Month:</label>
                                                 </td>
                                                 <td>
                                                     <asp:DropDownList ID="ddlYear" Enabled="false" runat="server">
@@ -84,7 +74,7 @@
                                                     </asp:DropDownList>
                                                 </td>
                                                 <td></td>
-                                                <td style="text-align: right;">
+                                                <td>
                                                     <asp:Button runat="server" ID="btnSaveAll" Text="Save" class="width-10 btn btn-sm" OnClientClick="return validate();" OnClick="btnSaveAll_Click" />
 
                                                 </td>
@@ -101,7 +91,7 @@
 
         <div id="scrolledGridView" style="overflow-x: auto; width: 100%;">
             <asp:GridView ID="gvIndicators" runat="server" AutoGenerateColumns="False" AllowSorting="True" OnSorting="gvClusterIndicators_Sorting" HeaderStyle-BackColor="ButtonFace" OnRowDataBound="gvIndicators_RowDataBound"
-                CssClass=" table-striped table-bordered table-hover" Width="100%" ShowFooter="true"
+                CssClass=" table-striped table-bordered table-hover" Width="100%"
                 EmptyDataText="There are no output indicators available!">
                 <HeaderStyle BackColor="Control"></HeaderStyle>
 
@@ -139,16 +129,6 @@
                             <asp:Label ID="lblTarget" runat="server" Text=' <%# Eval("Target")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-
-
-                    <%--  <asp:TemplateField ItemStyle-Width="5%" HeaderText="Running Sum">
-                        <ItemTemplate>
-                            <div style=" word-wrap: break-word;">
-                                <asp:TextBox runat="server" MaxLength="10" ID="txtRunningSum" Text='<%# Eval("RunningSum") %>' ></asp:TextBox>
-                            </div>
-                        </ItemTemplate>
-                    </asp:TemplateField>--%>
-
                     <asp:TemplateField ItemStyle-Width="8%" ItemStyle-HorizontalAlign="Right" HeaderText="Achieved">
                         <ItemTemplate>
                             <div style="word-wrap: break-word;">
@@ -167,14 +147,8 @@
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:BoundField DataField="IsRegional" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden">
-                        <HeaderStyle CssClass="hidden"></HeaderStyle>
-
-                        <ItemStyle CssClass="hidden"></ItemStyle>
                     </asp:BoundField>
                     <asp:BoundField DataField="IsSRP" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden">
-                        <HeaderStyle CssClass="hidden"></HeaderStyle>
-
-                        <ItemStyle CssClass="hidden"></ItemStyle>
                     </asp:BoundField>
                 </Columns>
             </asp:GridView>

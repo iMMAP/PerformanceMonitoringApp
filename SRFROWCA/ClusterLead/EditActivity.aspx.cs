@@ -22,18 +22,42 @@ namespace SRFROWCA.ClusterLead
             if (IsPostBack) return;
             PopulateObjective();
             PopulateClusters();
-            PopulateCountries();           
-            ShowHideControls();
-            GetActivity();
+            PopulateCountries();
+            DisableDropDowns();
+            GetActivity(false);
+        }
+
+        private void LoadCombos()
+        {
+            PopulateObjective();
+            PopulateClusters();
+            PopulateCountries();
+
+            SetComboValues();
+        }
+
+        private void SetComboValues()
+        {
+            if (RC.IsClusterLead(this.User))
+            {
+                ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
+                ddlCluster.SelectedValue = UserInfo.EmergencyCluster.ToString();
+            }
+
+            if (RC.IsCountryAdmin(this.User))
+            {
+                ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
+            }
         }
 
         internal override void BindGridData()
         {
             PopulateClusters();
             PopulateObjective();
-
+            GetActivity(true);
         }
-        private void GetActivity()
+
+        private void GetActivity(bool isLangChange)
         {
             DataTable dt = DBContext.GetData("GetNewActivity", new object[] {Convert.ToInt32(Request.QueryString["id"]) });
             if (dt != null && dt.Rows.Count > 0)
@@ -41,65 +65,38 @@ namespace SRFROWCA.ClusterLead
                 ddlCountry.SelectedValue = dt.Rows[0]["EmergencyLocationId"].ToString();
                 ddlCluster.SelectedValue = dt.Rows[0]["EmergencyClusterId"].ToString();
                 ddlObjective.SelectedValue = dt.Rows[0]["EmergencyObjectiveId"].ToString();
-                txtActivityEng.Text = dt.Rows[0]["Activity"].ToString();
+
+                if (!isLangChange)
+                {
+                    txtActivityEng.Text = dt.Rows[0]["Activity"].ToString();
+                }
             }
         }
 
-        private void ShowHideControls()
+        private void DisableDropDowns()
         {
             if (RC.IsClusterLead(this.User))
             {
-                ddlCluster.Visible = false;
-                rfvCluster.Enabled = false;
-                dvcluster.Visible = false;
-                ddlCountry.Visible = false;
-                rfvCountry.Visible = false;
-                dvCountry.Visible = false;
+                RC.EnableDisableControls(ddlCluster, false);
+                RC.EnableDisableControls(ddlCountry, false);
             }
-            else if (RC.IsCountryAdmin(this.User))
+
+            if (RC.IsCountryAdmin(this.User))
             {
-                ddlCluster.Visible = true;
-                rfvCluster.Enabled = true;
-                dvcluster.Visible = true;
-                ddlCountry.Visible = false;
-                rfvCountry.Visible = false;
-                dvCountry.Visible = false;
-            }
-            else if (RC.IsAdmin(this.User) || RC.IsOCHAStaff(this.User))
-            {
-                ddlCluster.Visible = true;
-                rfvCluster.Enabled = true;
-                dvcluster.Visible = true;
-                ddlCountry.Visible = true;
-                rfvCountry.Visible = true;
-                dvCountry.Visible = true;
+                RC.EnableDisableControls(ddlCountry, false);
             }
         }
 
         private void PopulateClusters()
         {
-            int emgId = RC.SelectedEmergencyId;
-            ddlCluster.DataValueField = "EmergencyClusterId";
-            ddlCluster.DataTextField = "ClusterName";
-
-            ddlCluster.DataSource = GetEmergencyClusters(emgId);
-            ddlCluster.DataBind();
-
+            UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
             ListItem item = new ListItem("Select Cluster", "0");
             ddlCluster.Items.Insert(0, item);
-        }
-        private DataTable GetEmergencyClusters(int emergencyId)
-        {
-            return DBContext.GetData("GetEmergencyClusters", new object[] { emergencyId,RC.SelectedSiteLanguageId });
         }
 
         private void PopulateCountries()
         {
-            ddlCountry.DataValueField = "LocationId";
-            ddlCountry.DataTextField = "LocationName";
-
-            ddlCountry.DataSource = DBContext.GetData("GetEmergencyCountries", new object[]{RC.SelectedEmergencyId});
-            ddlCountry.DataBind();
+            UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
             ListItem item = new ListItem("Select Country", "0");
             ddlCountry.Items.Insert(0, item);
         }
@@ -107,8 +104,8 @@ namespace SRFROWCA.ClusterLead
         private void PopulateObjective()
         {
             UI.FillObjectives(ddlObjective);
-            ddlObjective.DataSource = DBContext.GetData("GetEmergencyObjectives", new object[] {RC.SelectedSiteLanguageId,RC.SelectedEmergencyId});
-            ddlObjective.DataTextField = "ShortObjectiveTitle";
+            ddlObjective.DataSource = DBContext.GetData("GetEmergencyObjectives", new object[] {RC.SelectedSiteLanguageId, RC.EmergencySahel2015});
+            ddlObjective.DataTextField = "Objective";
             ddlObjective.DataValueField = "EmergencyObjectiveId";
             ddlObjective.DataBind();
             ListItem item = new ListItem("Select Objective", "0");

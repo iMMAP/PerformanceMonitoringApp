@@ -610,7 +610,8 @@ namespace SRFROWCA
 
                 liClusterIndicators.Attributes.Add("class", "active");
             }
-            else if (uri.Contains("ClusterLead/ActivityListing.aspx") || uri.Contains("ClusterLead/AddActivity.aspx"))
+            else if (uri.Contains("ClusterLead/ActivityListing.aspx") || uri.Contains("ClusterLead/AddActivity.aspx")
+                || uri.Contains("ClusterLead/EditActivity.aspx"))
             {
                 PageTitle = "ORS - Activity Listing";
 
@@ -640,6 +641,14 @@ namespace SRFROWCA
 
                 liClusterFrameworks.Attributes.Add("class", "active open");
                 liClusterFrameworkImport.Attributes.Add("class", "active");
+            }
+            else if (uri.Contains("ClusterLead/ClusterReports.aspx"))
+            {
+                PageTitle = "ORS - Import Framework";
+
+                liClusterFrameworks.Attributes.Add("class", "active open");
+                liClusterFrameworkSub.Attributes.Add("class", "active open");
+                liClusterIndReports.Attributes.Add("class", "active");
             }
             else if (uri.Contains("Admin/ActivityListing.aspx"))
             {

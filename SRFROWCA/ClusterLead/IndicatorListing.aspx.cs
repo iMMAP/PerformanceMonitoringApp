@@ -134,16 +134,16 @@ namespace SRFROWCA.ClusterLead
         protected void gvActivity_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             // If user click on Delete button.
-            if (e.CommandName == "Delete")
+            if (e.CommandName == "DeleteInd")
             {
                 int IndicatorDetailId = Convert.ToInt32(e.CommandArgument);
 
                 // Check if any IP has reported on this project. If so then do not delete it.
-                if (!IndicatorIsBeingUsed(IndicatorDetailId))
-                {
-                    RC.ShowMessage(Page, Page.GetType(), "asasa", "Indicator cannot be deleted! It is being used.", RC.NotificationType.Error, true, 500);
-                }
-                else
+                //if (!IndicatorIsBeingUsed(IndicatorDetailId))
+                //{
+                //    RC.ShowMessage(Page, Page.GetType(), "asasa", "Indicator cannot be deleted! It is being used.", RC.NotificationType.Error, true, 500);
+                //}
+                //else
                 {
                     DeleteIndicator(IndicatorDetailId);
                     LoadIndicators();

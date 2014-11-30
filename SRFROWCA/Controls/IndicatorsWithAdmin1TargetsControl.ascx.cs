@@ -15,7 +15,7 @@ namespace SRFROWCA.Controls
         {
             lbl1stNumber.Text = " " + (ControlNumber).ToString();
             PopulateUnits();
-            PopulateAdmin1();
+            //PopulateAdmin1(UserInfo.EmergencyCountry);
         }
 
         private void PopulateUnits()
@@ -38,9 +38,9 @@ namespace SRFROWCA.Controls
             return DBContext.GetData("GetAllUnits", new object[] { RC.SelectedSiteLanguageId});
         }
 
-        private void PopulateAdmin1()
+        public void PopulateAdmin1(int emgLocId)
         {
-            rptAdmin1.DataSource = RC.GetAdmin1(UserInfo.Country);
+            rptAdmin1.DataSource = RC.GetAdmin1OfEmgLocation(emgLocId);
             rptAdmin1.DataBind();
         }
 

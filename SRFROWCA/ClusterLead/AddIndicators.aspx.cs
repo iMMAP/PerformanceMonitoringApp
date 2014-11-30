@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using SRFROWCA.Common;
-using BusinessLogic;
 using System.Data;
-using System.Transactions;
-using SRFROWCA.Controls;
 using System.Net.Mail;
 using System.Text;
+using System.Transactions;
 using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using BusinessLogic;
+using SRFROWCA.Common;
+using SRFROWCA.Controls;
 
 namespace SRFROWCA.ClusterLead
 {
@@ -52,22 +49,42 @@ namespace SRFROWCA.ClusterLead
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
+            LoadCombos();
+            AddIndicatorControl(0);
+            IndControlId = 1;
+            //ShowHideControls();
+            DisableDropDowns();
+        }
+
+        private void LoadCombos()
+        {
             PopulateObjective();
             PopulateClusters();
             PopulateCountries();
             PopulateActivities();
-            AddIndicatorControl(0);
-            IndControlId = 1;
-            ShowHideControls();
 
+            SetComboValues();
         }
+
+        private void SetComboValues()
+        {
+            if (RC.IsClusterLead(this.User))
+            {
+                ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
+                ddlCluster.SelectedValue = UserInfo.EmergencyCluster.ToString();
+            }
+
+            if (RC.IsCountryAdmin(this.User))
+            {
+                ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
+            }
+        }
+
         private void PopulateActivities()
         {
-
-            int emergencyLocationId = RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) ? UserInfo.EmergencyCountry : Convert.ToInt32(ddlCountry.SelectedValue);
-            int emergencyClusterId = RC.IsClusterLead(this.User) ? UserInfo.EmergencyCluster : Convert.ToInt32(ddlCluster.SelectedValue);
-            //if (ddlObjective.SelectedValue == "")
-            int emergencyObjectiveId = Convert.ToInt32(ddlObjective.SelectedValue);
+            int emergencyLocationId = RC.GetSelectedIntVal(ddlCountry);
+            int emergencyClusterId = RC.GetSelectedIntVal(ddlCluster);
+            int emergencyObjectiveId = RC.GetSelectedIntVal(ddlObjective);
 
             ddlActivity.DataSource = DBContext.GetData("GetActivitiesNew", new object[] { emergencyLocationId, emergencyClusterId, emergencyObjectiveId, RC.SelectedSiteLanguageId });
             ddlActivity.DataTextField = "Activity";
@@ -77,84 +94,68 @@ namespace SRFROWCA.ClusterLead
             ListItem item = new ListItem("Select Activity", "0");
             ddlActivity.Items.Insert(0, item);
         }
-        private void ShowHideControls()
+
+        private void DisableDropDowns()
         {
             if (RC.IsClusterLead(this.User))
             {
-                ddlCluster.Visible = false;
-                rfvCluster.Enabled = false;
-                dvcluster.Visible = false;
-                ddlCountry.Visible = false;
-                rfvCountry.Visible = false;
-                dvCountry.Visible = false;
+                RC.EnableDisableControls(ddlCluster, false);
+                RC.EnableDisableControls(ddlCountry, false);
             }
-            else if (RC.IsCountryAdmin(this.User))
+
+            if (RC.IsCountryAdmin(this.User))
             {
-                ddlCluster.Visible = true;
-                rfvCluster.Enabled = true;
-                dvcluster.Visible = true;
-                ddlCountry.Visible = false;
-                rfvCountry.Visible = false;
-                dvCountry.Visible = false;
-            }
-            else if (RC.IsAdmin(this.User) || RC.IsOCHAStaff(this.User))
-            {
-                ddlCluster.Visible = true;
-                rfvCluster.Enabled = true;
-                dvcluster.Visible = true;
-                ddlCountry.Visible = true;
-                rfvCountry.Visible = true;
-                dvCountry.Visible = true;
+                RC.EnableDisableControls(ddlCountry, false);
             }
         }
+
+        //private void ShowHideControls()
+        //{
+        //    if (RC.IsClusterLead(this.User))
+        //    {
+        //        ddlCluster.Visible = false;
+        //        rfvCluster.Enabled = false;
+        //        dvcluster.Visible = false;
+        //        ddlCountry.Visible = false;
+        //        rfvCountry.Visible = false;
+        //        dvCountry.Visible = false;
+        //    }
+        //    else if (RC.IsCountryAdmin(this.User))
+        //    {
+        //        ddlCluster.Visible = true;
+        //        rfvCluster.Enabled = true;
+        //        dvcluster.Visible = true;
+        //        ddlCountry.Visible = false;
+        //        rfvCountry.Visible = false;
+        //        dvCountry.Visible = false;
+        //    }
+        //    else if (RC.IsAdmin(this.User) || RC.IsOCHAStaff(this.User))
+        //    {
+        //        ddlCluster.Visible = true;
+        //        rfvCluster.Enabled = true;
+        //        dvcluster.Visible = true;
+        //        ddlCountry.Visible = true;
+        //        rfvCountry.Visible = true;
+        //        dvCountry.Visible = true;
+        //    }
+        //}
         private void PopulateClusters()
         {
-            int emgId = RC.SelectedEmergencyId;
-            if (emgId <= 0)
-            {
-                emgId = 1;
-            }
-            ddlCluster.DataValueField = "EmergencyClusterId";
-            ddlCluster.DataTextField = "ClusterName";
-
-            ddlCluster.DataSource = GetEmergencyClusters(emgId);
-            ddlCluster.DataBind();
-
+            UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
             ListItem item = new ListItem("Select Cluster", "0");
             ddlCluster.Items.Insert(0, item);
         }
-        private DataTable GetEmergencyClusters(int emergencyId)
-        {
-            return DBContext.GetData("GetEmergencyClusters", new object[] { emergencyId, RC.SelectedSiteLanguageId });
-        }
-
+       
         private void PopulateCountries()
         {
-            int emgId = RC.SelectedEmergencyId;
-            if (emgId <= 0)
-            {
-                emgId = 1;
-            }
-
-            ddlCountry.DataValueField = "LocationId";
-            ddlCountry.DataTextField = "LocationName";
-
-            ddlCountry.DataSource = DBContext.GetData("GetEmergencyCountries", new object[] { emgId });
-            ddlCountry.DataBind();
+            UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
             ListItem item = new ListItem("Select Country", "0");
             ddlCountry.Items.Insert(0, item);
         }
 
         private void PopulateObjective()
         {
-            //UI.FillObjectives(ddlObjective);
-            int emgId = RC.SelectedEmergencyId;
-            if (emgId <= 0)
-            {
-                emgId = 1;
-            }
-
-            ddlObjective.DataSource = DBContext.GetData("GetEmergencyObjectives", new object[] { RC.SelectedSiteLanguageId, emgId });
+            ddlObjective.DataSource = DBContext.GetData("GetEmergencyObjectives", new object[] { RC.SelectedSiteLanguageId, RC.EmergencySahel2015 });
             ddlObjective.DataTextField = "Objective";
             ddlObjective.DataValueField = "EmergencyObjectiveId";
             ddlObjective.DataBind();
@@ -241,6 +242,11 @@ namespace SRFROWCA.ClusterLead
         private void AddIndicatorControl(int i)
         {
             IndicatorsWithAdmin1TargetsControl newIndSet = (IndicatorsWithAdmin1TargetsControl)LoadControl("~/controls/IndicatorsWithAdmin1TargetsControl.ascx");
+            int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
+            if (emgLocationId > 0)
+            {
+                newIndSet.PopulateAdmin1(emgLocationId);
+            }
             newIndSet.ControlNumber = i + 1;
             newIndSet.ID = "indicatorControlId" + i.ToString();
             pnlAdditionalIndicaotrs.Controls.Add(newIndSet);

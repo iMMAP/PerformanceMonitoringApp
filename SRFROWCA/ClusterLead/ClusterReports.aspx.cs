@@ -1,14 +1,10 @@
-﻿using BusinessLogic;
-using SRFROWCA.Common;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Data;
 using System.Globalization;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
+using BusinessLogic;
 using Microsoft.Reporting.WebForms;
+using SRFROWCA.Common;
 
 namespace SRFROWCA.ClusterLead
 {
@@ -23,7 +19,6 @@ namespace SRFROWCA.ClusterLead
             {
                 LoadCombos();
                 ShowHideControls();
-                
                 LoadClusterReports();
             }
         }
@@ -70,14 +65,9 @@ namespace SRFROWCA.ClusterLead
 
         private void LoadCombos()
         {
-            UI.FillEmergencyLocations(ddlCountry, RC.SelectedEmergencyId);
-            UI.FillEmergnecyClusters(ddlCluster, RC.SelectedSiteLanguageId);
+            UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
+            UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
             PopulateMonths();
-
-
-            //ddlCluster.Items.Insert(0, new ListItem("--- Select Cluster ---", "-1"));
-            //ddlCountry.Items.Insert(0, new ListItem("--- Select Country ---", "-1"));
-            //ddlMonth.Items.Insert(0, new ListItem("-- Select --", "-1"));
         }
 
         private void ShowHideControls()
@@ -107,21 +97,11 @@ namespace SRFROWCA.ClusterLead
 
         private void PopulateMonths()
         {
-            int i = ddlMonth.SelectedIndex;
-
             ddlMonth.DataValueField = "MonthId";
             ddlMonth.DataTextField = "MonthName";
 
             ddlMonth.DataSource = GetMonth();
             ddlMonth.DataBind();
-
-            //var result = DateTime.Now.ToString("MMMM", new CultureInfo(RC.SiteCulture));
-            //result = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(result);
-
-            //int monthNumber = MonthNumber.GetMonthNumber(result);
-            //monthNumber = monthNumber == 1 ? monthNumber : monthNumber - 1;
-
-            //ddlMonth.SelectedIndex = i > -1 ? i : ddlMonth.Items.IndexOf(ddlMonth.Items.FindByValue(monthNumber.ToString()));
         }
 
         private DataTable GetMonth()
@@ -161,6 +141,23 @@ namespace SRFROWCA.ClusterLead
                 gvClusterReports.DataSource = dt;
                 gvClusterReports.DataBind();
             }
+        }
+
+        protected void btnReset_Click(object sender, EventArgs e)
+        {
+            if (RC.IsCountryAdmin(this.User))
+            {
+                RC.ClearSelectedItems(ddlCluster);
+            }
+
+            if (RC.IsAdmin(this.User))
+            {
+                RC.ClearSelectedItems(ddlCluster);
+                RC.ClearSelectedItems(ddlCountry);
+            }
+
+            RC.ClearSelectedItems(ddlMonth);
+            LoadClusterReports();
         }
 
         private string GetSortDirection(string column)

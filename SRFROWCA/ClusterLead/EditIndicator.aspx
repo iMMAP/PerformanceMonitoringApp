@@ -2,8 +2,6 @@
     CodeBehind="EditIndicator.aspx.cs" Inherits="SRFROWCA.ClusterLead.EditIndicator" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <style>
         .accordian
         {
@@ -28,6 +26,17 @@
                 margin-top: -3px;
             }
     </style>
+    <script src="../assets/orsjs/jquery.wholenumber.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+
+        $(function () {
+            $(".numeric1").wholenumber();
+        });
+        </script>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+
     <div class="breadcrumbs" id="breadcrumbs">
         <script type="text/javascript">
             try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
@@ -171,7 +180,7 @@
                                             <ItemTemplate>
                                                 <div style="float: left; width: 140px; margin-bottom: 20px; margin-right: 20px;">
                                                     <div style="float: left; width: 80px; text-align: right; margin-top: 5px;"><%#Eval("LocationName")%>&nbsp;</div>
-                                                    <asp:TextBox runat="server" MaxLength="8" onkeypress="return isNumber();" ID="txtTarget" Style="width: 50px;" Text='<%#Eval("ClusterTarget") %>'></asp:TextBox>
+                                                    <asp:TextBox runat="server" MaxLength="8" CssClass="numeric1" ID="txtTarget" Style="width: 50px;" Text='<%#Eval("ClusterTarget") %>'></asp:TextBox>
                                                 </div>
                                                 <asp:HiddenField runat="server" ID="hdnLocationId" Value='<%#Eval("LocationId")%>' />
                                             </ItemTemplate>

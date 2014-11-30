@@ -13,81 +13,52 @@ namespace SRFROWCA.ClusterLead
 {
     public partial class ClusterDataEntry : BasePage
     {
-        public string CountryDisplayNone = string.Empty;
-        public string ClusterDisplayNone = string.Empty;
-
-        //protected void Page_PreLoad(object sender, EventArgs e)
-        //{
-        //    //string control = Utils.GetPostBackControlId(this);
-
-        //    //if (control.Equals("btnSaveAll"))
-        //    //    ShowMessage("Achieved data saved successfully!");
-        //}
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 LoadCombos();
-                ShowHideControls();
-
+                DisableDropDowns();
                 SetDates();
-
                 LoadClusterIndicators();
             }
         }
 
-        private void ShowHideControls()
+        // Disable Controls on the basis of user profile
+        private void DisableDropDowns()
         {
+            if (RC.IsClusterLead(this.User))
+            {
+                RC.EnableDisableControls(ddlCluster, false);
+                RC.EnableDisableControls(ddlCountry, false);
+            }
+
             if (RC.IsCountryAdmin(this.User))
             {
-                lblCountry.Visible =
-                    ddlCountry.Visible = false;
-
-                ddlCountry.SelectedValue = Convert.ToString(UserInfo.EmergencyCountry);
-                CountryDisplayNone = "display:none";
+                RC.EnableDisableControls(ddlCountry, false);
             }
-            else if (RC.IsClusterLead(this.User))
-            {
-                lblCountry.Visible =
-                    ddlCountry.Visible =
-                        ddlCluster.Visible =
-                            lblCluster.Visible = false;
-
-                ddlCountry.SelectedValue = Convert.ToString(UserInfo.EmergencyCountry);
-                ddlCluster.SelectedValue = Convert.ToString(UserInfo.EmergencyCluster);
-
-                ClusterDisplayNone = "display:none";
-            } 
-
         }
 
         internal override void BindGridData()
         {
             LoadCombos();
-            ShowHideControls();
+            DisableDropDowns();
             SetDates();
             LoadClusterIndicators();
         }
 
         private void LoadCombos()
         {
-            int emergencyId = RC.SelectedEmergencyId;
-            if (emergencyId == 0)
-            {
-                emergencyId = 1;
-            }
-
-            //UI.FillCountry(ddlCountry);
-            UI.FillEmergencyLocations(ddlCountry, emergencyId);
-            //UI.FillClusters(ddlCluster, RC.SelectedSiteLanguageId);
-            UI.FillEmergnecyClusters(ddlCluster, emergencyId);
+            UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
+            UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
 
             PopulateYears();
             PopulateMonths();
 
             ddlCluster.Items.Insert(0, new ListItem("--- Select Cluster ---", "-1"));
             ddlCountry.Items.Insert(0, new ListItem("--- Select Country ---", "-1"));
+
+            SetComboValues();
         }
 
         private void SetDates()
@@ -122,6 +93,20 @@ namespace SRFROWCA.ClusterLead
                 clusterId = Convert.ToInt32(ddlCluster.SelectedValue);
 
             return GetClusterIndicatros(clusterId, countryId, null);
+        }
+
+        private void SetComboValues()
+        {
+            if (RC.IsClusterLead(this.User))
+            {
+                ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
+                ddlCluster.SelectedValue = UserInfo.EmergencyCluster.ToString();
+            }
+
+            if (RC.IsCountryAdmin(this.User))
+            {
+                ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
+            }
         }
 
         private DataTable GetClusterIndicatros(int? clusterId, int? countryId, string indicator)
@@ -177,31 +162,13 @@ namespace SRFROWCA.ClusterLead
 
         private void SaveClusterIndicatorDetails()
         {
-            
-
             int clusterIndicatorID = 0;
             int? achieved = null;
             int countryId = 0;
             int clusterId = 0;
 
-            if (UserInfo.EmergencyCountry <= 0)
-            {
-                countryId = RC.GetSelectedIntVal(ddlCountry);
-            }
-            else
-            {
-                countryId = UserInfo.EmergencyCountry;
-            }
-
-            if (UserInfo.EmergencyCluster <= 0)
-            {
-                clusterId = RC.GetSelectedIntVal(ddlCluster);
-            }
-            else
-            {
-                clusterId = UserInfo.EmergencyCluster;
-            }
-
+            countryId = RC.GetSelectedIntVal(ddlCountry);
+            clusterId = RC.GetSelectedIntVal(ddlCluster);
             int yearId = Convert.ToInt32(ddlYear.SelectedValue);
             int monthId = Convert.ToInt32(ddlMonth.SelectedValue);
 
@@ -217,15 +184,7 @@ namespace SRFROWCA.ClusterLead
 
                     if (txtAchieved != null)
                     {
-
                         achieved = !string.IsNullOrEmpty(txtAchieved.Text.Trim()) ? Convert.ToInt32(txtAchieved.Text.Trim()) : (int?)null;
-                        //string siteCulture = RC.SelectedSiteLanguageId.Equals(1) ? "en-US" : "de-DE";
-                        //string cultureAchieved = txtAchieved.Text.Trim();
-                        
-                        //if(RC.SelectedSiteLanguageId.Equals(2))
-                        //    cultureAchieved = cultureAchieved.Replace(".", ",");
-
-                        //achieved = string.IsNullOrEmpty(txtAchieved.Text) ? null : decimal.Round(Convert.ToDecimal(cultureAchieved, new CultureInfo(siteCulture)), 0).ToString();
                     }
 
                     DBContext.Add("uspInsertClusterReport", new object[] { clusterIndicatorID, clusterId, countryId, yearId, monthId, achieved, RC.GetCurrentUserId, null });
@@ -283,7 +242,7 @@ namespace SRFROWCA.ClusterLead
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                ObjPrToolTip.RegionalIndicatorIcon(e,9);
+                ObjPrToolTip.RegionalIndicatorIcon(e, 9);
                 ObjPrToolTip.CountryIndicatorIcon(e, 10);
 
                 Label lblTarget = (Label)e.Row.FindControl("lblTarget");
@@ -372,7 +331,7 @@ namespace SRFROWCA.ClusterLead
             string fileName = "ClusterDataEntry";
             string fileExtention = ".xls";
             ExportUtility.ExportGridView(gvExport, fileName, fileExtention, Response);
-        
+
         }
 
         private void RemoveColumnsFromDataTable(DataTable dt)

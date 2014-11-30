@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.IO;
@@ -263,6 +262,11 @@ namespace SRFROWCA.Common
             return DBContext.GetData("GetAdmin2LocationsOfCountry", new object[] { countryId });
         }
 
+        internal static DataTable GetAdmin1OfEmgLocation(int emergencyLocationId)
+        {
+            return DBContext.GetData("GetAdmin1OfEmergnecyLocation", new object[] { emergencyLocationId });
+        }
+
         internal static DataTable GetLocationsAndChilds(int locationId, int childTypeId)
         {
             return DBContext.GetData("GetLocationAndItsChildOnType", new object[] { locationId, childTypeId });
@@ -485,6 +489,14 @@ namespace SRFROWCA.Common
             return itemIds;
         }
 
+        internal static void ClearSelectedItems(object sender)
+        {
+            foreach (ListItem item in (sender as ListControl).Items)
+            {
+                item.Selected = false;
+            }
+        }
+
         // Get multiple selected values from drop down checkbox.
         internal static string GetItemsText(object sender)
         {
@@ -585,6 +597,14 @@ namespace SRFROWCA.Common
             get
             {
                 return "en-US";
+            }
+        }
+
+        internal static int EmergencySahel2015
+        {
+            get
+            {
+                return 3;
             }
         }
 
