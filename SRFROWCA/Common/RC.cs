@@ -1,19 +1,19 @@
 ﻿using System;
-using System.Linq;
-using System.Web;
-using System.IO;
-using System.Security.Cryptography;
-using System.Text;
-using System.Web.UI.WebControls;
-using System.Web.UI;
-using System.Data;
-using BusinessLogic;
-using System.Security.Principal;
-using System.Web.Security;
-using System.Threading;
-using System.Globalization;
 using System.Configuration;
+using System.Data;
 using System.Drawing;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Security.Principal;
+using System.Text;
+using System.Threading;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using BusinessLogic;
 
 namespace SRFROWCA.Common
 {
@@ -156,7 +156,7 @@ namespace SRFROWCA.Common
 
         internal static DataTable GetObjectives()
         {
-            return DBContext.GetData("GetObjectives", new object[] { SelectedSiteLanguageId, RC.SelectedEmergencyId == null ? (int?)null : RC.SelectedEmergencyId });
+            return DBContext.GetData("GetObjectives", new object[] { SelectedSiteLanguageId, RC.EmergencyEbola });
         }
 
         internal static DataTable GetEmergencyObjectives(int emergencyId)
@@ -166,7 +166,7 @@ namespace SRFROWCA.Common
 
         internal static DataTable GetPriorities()
         {
-            return DBContext.GetData("GetPriorities", new object[] { SelectedSiteLanguageId, RC.SelectedEmergencyId == null ? (int?)null : RC.SelectedEmergencyId });
+            return DBContext.GetData("GetPriorities", new object[] { SelectedSiteLanguageId, RC.EmergencyEbola });
         }
 
         #endregion
@@ -605,6 +605,14 @@ namespace SRFROWCA.Common
             get
             {
                 return 3;
+            }
+        }
+
+        internal static int EmergencyEbola
+        {
+            get
+            {
+                return 2;
             }
         }
 

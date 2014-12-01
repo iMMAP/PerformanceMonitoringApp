@@ -1,6 +1,4 @@
-﻿using BusinessLogic;
-using SRFROWCA.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
@@ -8,9 +6,10 @@ using System.IO;
 using System.Linq;
 using System.Net.Mail;
 using System.Transactions;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using BusinessLogic;
+using SRFROWCA.Common;
 
 namespace SRFROWCA.Ebola
 {
@@ -90,8 +89,8 @@ namespace SRFROWCA.Ebola
             if (dateSplit.Length > 2)
             {
                 int.TryParse(dateSplit[2], out yearId);
-                int.TryParse(dateSplit[1], out dayId);
-                int.TryParse(dateSplit[0], out monthId);
+                int.TryParse(dateSplit[0], out dayId);
+                int.TryParse(dateSplit[1], out monthId);
             }
 
             SetDateIDs(new DateTime(1, monthId, 1).ToString("MMMM"), new DateTime(yearId, 1, 1).ToString("yyyy"), dayId);
@@ -106,7 +105,7 @@ namespace SRFROWCA.Ebola
         private void PopulateDate()
         {
             if (!IsPostBack)
-                txtDate.Text = DateTime.Now.ToString("MM-dd-yyyy");
+                txtDate.Text = DateTime.Now.ToString("dd-MM-yyyy");
 
             int yearId = 0;
             int monthId = 0;
@@ -117,8 +116,8 @@ namespace SRFROWCA.Ebola
             if (dateSplit.Length > 2)
             {
                 int.TryParse(dateSplit[2], out yearId);
-                int.TryParse(dateSplit[1], out dayId);
-                int.TryParse(dateSplit[0], out monthId);
+                int.TryParse(dateSplit[0], out dayId);
+                int.TryParse(dateSplit[1], out monthId);
             }
 
             SetDateIDs(new DateTime(1, monthId, 1).ToString("MMMM"), new DateTime(yearId, 1, 1).ToString("yyyy"), dayId);
@@ -230,8 +229,8 @@ namespace SRFROWCA.Ebola
 
                 if (dateSplit.Length > 2)
                 {
-                    int.TryParse(dateSplit[1], out dayId);
-                    int.TryParse(dateSplit[0], out monthId);
+                    int.TryParse(dateSplit[0], out dayId);
+                    int.TryParse(dateSplit[1], out monthId);
                 }
 
                 GridView gv = new GridView();
@@ -385,7 +384,7 @@ namespace SRFROWCA.Ebola
             string locationIds = GetSelectedLocations();
             string locIdsNotIncluded = GetNotSelectedLocations();
 
-            DateTime rDate = DateTime.ParseExact(txtDate.Text.Trim(), "MM-dd-yyyy", CultureInfo.InvariantCulture);
+            DateTime rDate = DateTime.ParseExact(txtDate.Text.Trim(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
 
 
             Guid userId = RC.GetCurrentUserId;
@@ -438,7 +437,7 @@ namespace SRFROWCA.Ebola
             //int dayId = dateSplit.Length > 0 ? Convert.ToInt32(dateSplit[0]) : 0;
 
             int projectId = RC.GetSelectedIntVal(rblProjects);
-            DateTime rDate = DateTime.ParseExact(txtDate.Text.Trim(), "MM-dd-yyyy", CultureInfo.InvariantCulture);
+            DateTime rDate = DateTime.ParseExact(txtDate.Text.Trim(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
             DataTable dtReports = DBContext.GetData("uspGetReportID", new object[] { projectId, YearID, MonthID, DayID, UserInfo.EmergencyCountry, UserInfo.Organization, Convert.ToInt32(rblFrequency.SelectedValue),  rDate});
 
             if (dtReports.Rows.Count > 0)
@@ -568,8 +567,8 @@ namespace SRFROWCA.Ebola
                 if (dateSplit.Length > 2)
                 {
                     int.TryParse(dateSplit[2], out yearId);
-                    int.TryParse(dateSplit[1], out dayId);
-                    int.TryParse(dateSplit[0], out monthId);
+                    int.TryParse(dateSplit[0], out dayId);
+                    int.TryParse(dateSplit[1], out monthId);
                 }
 
                 string monthName = new DateTime(1, monthId, 1).ToString("MMMM") + " - " + new DateTime(1, yearId, 1).ToString("YYYY");
@@ -638,15 +637,15 @@ namespace SRFROWCA.Ebola
             if (dateSplit.Length > 2)
             {
                 yearId = Convert.ToInt32(dateSplit[2]);
-                dayId = Convert.ToInt32(dateSplit[1]);
-                monthId = Convert.ToInt32(dateSplit[0]);
+                dayId = Convert.ToInt32(dateSplit[0]);
+                monthId = Convert.ToInt32(dateSplit[1]);
             }
 
             int projId = RC.GetSelectedIntVal(rblProjects);
             Guid loginUserId = RC.GetCurrentUserId;
             string reportName = rblProjects.SelectedItem.Text + " (" + new DateTime(1, monthId, 1).ToString("MMMM") + "-14)";
 
-            DateTime rDate = DateTime.ParseExact(txtDate.Text.Trim(), "MM-dd-yyyy", CultureInfo.InvariantCulture);
+            DateTime rDate = DateTime.ParseExact(txtDate.Text.Trim(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
             ReportId = DBContext.Add("InsertReport_Ebola", new object[] { YearID, MonthID, 0, DayID, projId, UserInfo.EmergencyCountry, UserInfo.Organization, loginUserId, reportName, Convert.ToInt32(rblFrequency.SelectedValue), rDate, DBNull.Value });
         }
 
@@ -733,7 +732,7 @@ namespace SRFROWCA.Ebola
 
                             if (locationIdToSave > 0)
                             {
-                                DateTime rDate = DateTime.ParseExact(txtDate.Text.Trim(), "MM-dd-yyyy", CultureInfo.InvariantCulture);
+                                DateTime rDate = DateTime.ParseExact(txtDate.Text.Trim(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
                                 int returnCode = DBContext.Add("InsertReportDetails_E", new object[] { ReportId, activityDataId, locationIdToSave, achieved, 
                                                                     RC.GetCurrentUserId, projIndicatorId, DBNull.Value,Convert.ToInt32(rblFrequency.SelectedValue), MonthID, DayID,  rDate});
 

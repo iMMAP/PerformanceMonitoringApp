@@ -92,8 +92,8 @@ namespace SRFROWCA.ClusterLead
 
         private void LoadCombos()
         {
-            UI.FillEmergencyLocations(ddlCountry, (int)RC.SelectedEmergencyId);
-            UI.FillEmergnecyClusters(ddlCluster, (int)RC.SelectedEmergencyId);
+            UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
+            UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
             UI.FillUnits(ddlUnits);
 
             ddlCluster.Items.Insert(0, new ListItem("--- Select Cluster ---", "-1"));
@@ -154,13 +154,7 @@ namespace SRFROWCA.ClusterLead
                 regionalIncluded = cbIncludeRegional.Checked;
             }
             
-            int emergencyId = RC.SelectedEmergencyId;
-            if (emergencyId <= 0)
-            {
-                regionalIncluded = false;
-                emergencyId = 1;
-            }
-
+            int emergencyId = RC.EmergencySahel2015;
             return DBContext.GetData("GetClusterIndicators", new object[] { clusterId, countryId, indicator,
                                                                                RC.SelectedSiteLanguageId, regionalIncluded, emergencyId });
         }
@@ -539,7 +533,7 @@ namespace SRFROWCA.ClusterLead
             RptParameters[2] = new ReportParameter("pIndicator", indicator, false);
             RptParameters[3] = new ReportParameter("pLangId", ((int)RC.SiteLanguage.English).ToString(), false);
             RptParameters[4] = new ReportParameter("includeRegional", cbIncludeRegional.Checked ? "true" : "false", false);
-            RptParameters[5] = new ReportParameter("emergencyId", RC.SelectedEmergencyId.ToString(), false);
+            RptParameters[5] = new ReportParameter("emergencyId", RC.EmergencySahel2015.ToString(), false);
 
             rvCountry.ServerReport.ReportPath = "/reports/outputindicators";
             string fileName = "ClusterIndicators" + DateTime.Now.ToString("yyyy-MM-dd_hh_mm_ss") + ".pdf";

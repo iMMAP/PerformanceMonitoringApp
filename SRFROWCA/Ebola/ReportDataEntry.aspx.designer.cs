@@ -49,6 +49,15 @@ namespace SRFROWCA.Ebola {
         protected global::System.Web.UI.WebControls.TextBox txtDate;
         
         /// <summary>
+        /// Localize1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize Localize1;
+        
+        /// <summary>
         /// rblFrequency control.
         /// </summary>
         /// <remarks>

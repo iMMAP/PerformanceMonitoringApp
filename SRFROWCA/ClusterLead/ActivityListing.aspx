@@ -51,9 +51,9 @@
                                             <i class="icon-download"></i>Excel
                                         </button>
 
-                                        <asp:Button ID="btnAddActivity" runat="server" Text="Add New Activity" CausesValidation="False"
+                                        <asp:Button ID="btnAddActivity" runat="server" Text="Add Activity" CausesValidation="False"
                                             CssClass="btn btn-yellow pull-right" OnClick="btnAddActivity_Click" meta:resourcekey="btnAddActivityResource1" />
-                                        <asp:Button ID="btnAddActivityAndIndicators" runat="server" Text="Add New Activity & Indicators" CausesValidation="False"
+                                        <asp:Button ID="btnAddActivityAndIndicators" runat="server" Text="Add Activity & Indicators" CausesValidation="False"
                                             CssClass="btn btn-yellow pull-right" OnClick="btnAddActivityAndIndicators_Click" style="margin-right:5px;" meta:resourcekey="btnAddActivityAndIndicatorsResource1" />
                                     </h6>
                                 </div>

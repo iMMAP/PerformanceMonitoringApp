@@ -73,7 +73,7 @@
                 <div class="navbar-header pull-right" role="navigation">
                     <ul class="nav ace-nav">
                         <li>
-                            <asp:DropDownList ID="ddlEmgergency" runat="server" CssClass="blue" OnSelectedIndexChanged="ddlEmg_SelectedIndexChanged" AutoPostBack="true">
+                            <span style="color:white;">Current Emergency:</span><asp:DropDownList ID="ddlEmgergency" runat="server" CssClass="blue" OnSelectedIndexChanged="ddlEmg_SelectedIndexChanged" AutoPostBack="true">
                                 <asp:ListItem Text="Sahel 2015" Value="3"></asp:ListItem>
                                 <asp:ListItem Text="Sahel 2014" Value="1"></asp:ListItem>
                             </asp:DropDownList>
@@ -345,7 +345,7 @@
                         </li>
                         <li id="liClusterFrameworks" runat="server"><a id="A6" runat="server" href="#"
                             class="dropdown-toggle"><i class="icon-list-alt"></i><span class="menu-text">
-                                <asp:Localize ID="localClusterFrameworksList1" runat="server" Text="Cluster Frameworks"></asp:Localize>
+                                <asp:Localize ID="localClusterFrameworksList1" runat="server" Text="Cluster Framework"></asp:Localize>
                             </span><b class="arrow icon-angle-down"></b></a>
                             <ul class="submenu">
                                 <li id="liClusterFrameworkSub" runat="server">

@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Data;
-using System.Linq;
-using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
-using SRFROWCA.Common;
-using System.Text.RegularExpressions;
 using Saplin.Controls;
+using SRFROWCA.Common;
 namespace SRFROWCA.Anonymous
 {
     public partial class AllData : BasePage
@@ -455,11 +453,12 @@ namespace SRFROWCA.Anonymous
             }
 
             int langId = RC.SelectedSiteLanguageId;
+            int emergencyId = RC.SelectedEmergencyId;
 
             return new object[] {monthIds, locationIds, clusterIds, orgIds, 
                                     objIds, prIds, actIds, indIds, projectIds,
                                     fromMonth, toMonth, regionalInd, countryInd, funded, notFunded,
-                                    isOPS, isApproved, pageIndex, pageSize, Convert.ToInt32(SQLPaging), langId };
+                                    isOPS, isApproved, pageIndex, pageSize, Convert.ToInt32(SQLPaging), langId, emergencyId };
         }
 
         private string GetSearchCriteria()

@@ -67,6 +67,7 @@ namespace SRFROWCA.Ebola
                 LoadActivities(clusterObjectiveId);
                 ddlActivityNew.SelectedValue = gvIndicator.DataKeys[row.RowIndex].Values["PriorityActivityId"].ToString();
                 ddlUnit.SelectedValue = gvIndicator.DataKeys[row.RowIndex].Values["UnitId"].ToString();
+                rblFrequency.SelectedValue = gvIndicator.DataKeys[row.RowIndex].Values["ReportFrequencyTypeId"].ToString();
 
                 if (gvIndicator.DataKeys[row.RowIndex].Values["SiteLanguageId"].ToString() == "1")
                 {
@@ -289,6 +290,7 @@ namespace SRFROWCA.Ebola
         protected void btnAddIndicator_Click(object sender, EventArgs e)
         {
             ClearPopupControls();
+            rfvEmgNameFr.Enabled = false;
             LoadActivities((int?)null);
             mpeAddOrg.Show();
         }
@@ -299,6 +301,7 @@ namespace SRFROWCA.Ebola
             LoadIndicators();
             mpeAddOrg.Hide();
             ClearPopupControls();
+            rfvEmgNameFr.Enabled = true;
         }
 
         private void ClearPopupControls()
@@ -315,21 +318,22 @@ namespace SRFROWCA.Ebola
 
         private void SaveIndicator()
         {
+            string activityFr = !string.IsNullOrEmpty(txtActivityFr.Text.Trim()) ? txtActivityFr.Text.Trim() : txtActivityEng.Text.Trim();
             int priorityActivityId = Convert.ToInt32(ddlActivityNew.SelectedValue);
             Guid userId = RC.GetCurrentUserId;
+            int reportFrequencyId = RC.GetSelectedIntVal(rblFrequency);
 
             if (!string.IsNullOrEmpty(hdnIndicatorId.Value))
             {
                 int indicatorId = Convert.ToInt32(hdnIndicatorId.Value);
-                DBContext.Update("UpdateActivityData", new object[] { indicatorId, priorityActivityId, Convert.ToInt32(ddlUnit.SelectedValue), false, false, txtActivityEng.Text, txtActivityFr.Text, userId, txtActivityEng.Visible ? 1 : 2, DBNull.Value });
+                DBContext.Update("UpdateActivityData_Ebola", new object[] { indicatorId, priorityActivityId, Convert.ToInt32(ddlUnit.SelectedValue), false, false, txtActivityEng.Text.Trim(), txtActivityFr.Text.Trim(), userId, txtActivityEng.Visible ? 1 : 2, reportFrequencyId, DBNull.Value });
             }
             else
             {
-                DBContext.Add("InsertOutPutIndicator", new object[] { priorityActivityId, txtActivityEng.Text, txtActivityFr.Text, Convert.ToInt32(ddlUnit.SelectedValue), false,
-                                                                    false, userId, DBNull.Value });
+                DBContext.Add("InsertOutPutIndicator_Ebola", new object[] { priorityActivityId, txtActivityEng.Text.Trim(), activityFr, Convert.ToInt32(ddlUnit.SelectedValue), false,
+                                                                    false, userId, reportFrequencyId, DBNull.Value });
             }
         }
-
 
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 0)
         {

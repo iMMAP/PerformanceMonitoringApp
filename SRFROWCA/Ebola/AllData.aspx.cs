@@ -175,7 +175,7 @@ namespace SRFROWCA.Ebola
             if (!string.IsNullOrEmpty(orgIDs))
                 orgId = null;
 
-            ddlProjects.DataSource = DBContext.GetData("[GetEmergencyProjects]", new object[] { 2, locationId, 3, orgId, orgIDs });
+            ddlProjects.DataSource = DBContext.GetData("[GetEmergencyProjects]", new object[] { RC.EmergencyEbola, locationId, 3, orgId, orgIDs });
             ddlProjects.DataBind();
 
             //if (!string.IsNullOrEmpty(orgIDs))
@@ -187,7 +187,7 @@ namespace SRFROWCA.Ebola
             string objIds = RC.GetSelectedValues(ddlObjectives);
             ddlActivities.DataTextField = "ActivityName";
             ddlActivities.DataValueField = "PriorityActivityId";
-            ddlActivities.DataSource = DBContext.GetData("[GetEbolaActivities]", new object[] { 2, 3, objIds, RC.SelectedSiteLanguageId });
+            ddlActivities.DataSource = DBContext.GetData("[GetEbolaActivities]", new object[] { RC.EmergencyEbola, 3, objIds, RC.SelectedSiteLanguageId });
             ddlActivities.DataBind();
         }
 
@@ -198,7 +198,7 @@ namespace SRFROWCA.Ebola
 
             ddlIndicators.DataTextField = "DataName";
             ddlIndicators.DataValueField = "ActivityDataId";
-            ddlIndicators.DataSource = DBContext.GetData("[GetEbolaIndicators]", new object[] { 2, 3, objIds, activityIds, RC.SelectedSiteLanguageId });
+            ddlIndicators.DataSource = DBContext.GetData("[GetEbolaIndicators]", new object[] { RC.EmergencyEbola, 3, objIds, activityIds, RC.SelectedSiteLanguageId });
             ddlIndicators.DataBind();
         }
 
@@ -323,7 +323,7 @@ namespace SRFROWCA.Ebola
 
         private DataTable GetOrganizations(int? orgId, string projIDs)
         {
-            return DBContext.GetData("GetEmergencyOrganizations", new object[] { 2, orgId, projIDs });
+            return DBContext.GetData("GetEmergencyOrganizations", new object[] { RC.EmergencyEbola, orgId, projIDs });
         }
 
         private void ReplaceHTMLTags(DataTable dt)

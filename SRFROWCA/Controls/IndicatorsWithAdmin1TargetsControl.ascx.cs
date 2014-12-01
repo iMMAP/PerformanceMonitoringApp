@@ -57,8 +57,8 @@ namespace SRFROWCA.Controls
         private void SaveIndicator(int ActivityId)
         {
             int unitId = Convert.ToInt32(ddlUnit.SelectedValue);// RC.GetSelectedIntVal(ddlUnitsInd1);
-            string indEn = txtInd1Eng.Text.Trim();
-            string indFr = txtInd1Fr.Text.Trim();
+            string indEn = !string.IsNullOrEmpty(txtInd1Eng.Text.Trim()) ? txtInd1Eng.Text.Trim() : null;
+            string indFr = !string.IsNullOrEmpty(txtInd1Fr.Text.Trim().Trim()) ? txtInd1Fr.Text.Trim() : null;
             Guid userId = RC.GetCurrentUserId;
             int gender = chkGender.Checked ? 1 : 0;
 

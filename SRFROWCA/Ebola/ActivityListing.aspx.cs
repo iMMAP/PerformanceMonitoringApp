@@ -66,7 +66,7 @@ namespace SRFROWCA.Ebola
                 GridViewRow row = (((Control)e.CommandSource).NamingContainer) as GridViewRow;
                 LoadObjectivesByCluster();
                 ddlObjectiveNew.SelectedValue = gvActivity.DataKeys[row.RowIndex].Values["ClusterObjectiveId"].ToString();
-
+                rfvEmgNameFr.Enabled = true;
                 if (gvActivity.DataKeys[row.RowIndex].Values["SiteLanguageId"].ToString() == "1")
                 {
                     txtActivityEng.Text = gvActivity.DataKeys[row.RowIndex].Values["ActivityName"].ToString();
@@ -118,6 +118,7 @@ namespace SRFROWCA.Ebola
         protected void btnAddActivity_Click(object sender, EventArgs e)
         {
             ClearPopupControls();
+            rfvEmgNameFr.Enabled = false;
             mpeAddOrg.Show();
         }
 
@@ -127,6 +128,7 @@ namespace SRFROWCA.Ebola
             LoadActivities();
             mpeAddOrg.Hide();
             ClearPopupControls();
+            rfvEmgNameFr.Enabled = true;
         }
 
         protected void ddlObjective_SelectedIndexChanged(object sender, EventArgs e)
@@ -289,6 +291,7 @@ namespace SRFROWCA.Ebola
 
         private void SaveActivity()
         {
+            string activityFr = !string.IsNullOrEmpty(txtActivityFr.Text.Trim()) ? txtActivityFr.Text.Trim() : txtActivityEng.Text.Trim();
             int val = RC.GetSelectedIntVal(ddlObjectiveNew);
             int? objectiveId = val > 0 ? val : (int?)null;
             if (objectiveId > 0)
@@ -301,11 +304,11 @@ namespace SRFROWCA.Ebola
                 if (!string.IsNullOrEmpty(hdnPriorityActivityId.Value))
                 {
                     int priorityActivityId = Convert.ToInt32(hdnPriorityActivityId.Value);
-                    DBContext.Update("UpdatePriorityActivity_Ebola", new object[] { priorityActivityId, objPriorityId, activityTypeId, txtActivityEng.Text, txtActivityFr.Text, userId, txtActivityEng.Visible ? 1 : 2, DBNull.Value });
+                    DBContext.Update("UpdatePriorityActivity_Ebola", new object[] { priorityActivityId, objPriorityId, activityTypeId, txtActivityEng.Text.Trim(), txtActivityFr.Text.Trim(), userId, txtActivityEng.Visible ? 1 : 2, DBNull.Value });
                 }
                 else
                 {
-                    DBContext.Add("InsertActivity_Ebola", new object[] { objPriorityId, activityTypeId, txtActivityEng.Text, txtActivityFr.Text, userId, DBNull.Value });
+                    DBContext.Add("InsertActivity_Ebola", new object[] { objPriorityId, activityTypeId, txtActivityEng.Text.Trim(), activityFr, userId, DBNull.Value });
                 }
             }
         }

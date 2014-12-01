@@ -43,6 +43,11 @@ namespace SRFROWCA.Ebola
 
             if (HttpContext.Current.User.Identity.IsAuthenticated)
             {
+                UserInfo.UserProfileInfo(RC.EmergencyEbola);
+            }
+
+            if (HttpContext.Current.User.Identity.IsAuthenticated)
+            {
                 LoginStatus.Visible = false;
                 spanWelcome.Visible = true;
                 liRegister.Visible = false;

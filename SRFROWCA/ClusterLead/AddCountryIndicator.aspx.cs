@@ -130,18 +130,7 @@ namespace SRFROWCA.ClusterLead
 
         private void LoadCombos()
         {
-            /*ddlObjective.DataValueField = "ObjectiveID";
-            ddlObjective.DataTextField = "Objective";
-
-            ddlObjective.DataSource = DBContext.GetData("GetObjectives", new object[] { RC.SelectedSiteLanguageId, null });
-            ddlObjective.DataBind();*/
-
-            int emergencyId = RC.SelectedEmergencyId;
-            if (emergencyId == 0)
-            {
-                emergencyId = 1;
-            }
-
+            int emergencyId = RC.EmergencySahel2015;
             UI.FillEmergencyLocations(ddlCountry, emergencyId);
             UI.FillEmergnecyClusters(ddlCluster, emergencyId);
 

@@ -1,14 +1,16 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true"  MasterPageFile="~/Ebola/Ebola.Master" EnableEventValidation="false" CodeBehind="ReportDataEntry.aspx.cs" Inherits="SRFROWCA.Ebola.ReportDataEntry" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Ebola/Ebola.Master" EnableEventValidation="false" CodeBehind="ReportDataEntry.aspx.cs" Inherits="SRFROWCA.Ebola.ReportDataEntry" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Src="../Controls/ReportedIndicatorComments.ascx" TagName="ReportedIndicatorComments" TagPrefix="uc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style>
-        #MainContent_cblLocations td {
+        #MainContent_cblLocations td
+        {
             padding: 0 40px 0 0;
         }
 
-        textarea, input[type="text"] {
+        textarea, input[type="text"]
+        {
             border: 1px solid #D5D5D5;
             border-radius: 0 !important;
             box-shadow: none !important;
@@ -20,7 +22,8 @@
             text-align: right;
         }
 
-        .commentstext {
+        .commentstext
+        {
             border: 1px solid #D5D5D5;
             border-radius: 0 !important;
             box-shadow: none !important;
@@ -36,7 +39,7 @@
     <link rel="stylesheet" href="../assets/css/ors.css" />
     <!-- ace styles -->
     <script type="text/javascript" src="../assets/orsjs/ShowHideObJAndPr.js"></script>
-    <script src="../assets/orsjs/jquery.numeric.min.js" type="text/javascript"></script>
+    <script src="../assets/orsjs/jquery.wholenumber.js" type="text/javascript"></script>
     <script type="text/javascript">
         var needToConfirm = true;
 
@@ -80,74 +83,72 @@
         }
 
         $(document).ready(function () {
-
             $("#<%=txtDate.ClientID%>").datepicker({
                 numberOfMonths: 1,
-                  dateFormat: "mm-dd-yy"
-                  
+                dateFormat: "dd-mm-yy"
             });
-          });
+        });
 
-        $(function () {
-            $(".numeric1").numeric();
-            showHideObj();
-            showHidePriority();
+            $(function () {
+                $(".numeric1").wholenumber();
+                showHideObj();
+                showHidePriority();
 
 
-            if (!(/chrom(e|ium)/.test(navigator.userAgent.toLowerCase()))) {
-                var list = '';
-                var list2 = '';
-                var j = 0;
-                var k = 0;
+                if (!(/chrom(e|ium)/.test(navigator.userAgent.toLowerCase()))) {
+                    var list = '';
+                    var list2 = '';
+                    var j = 0;
+                    var k = 0;
 
-                $(".imagetable th").each(function () {
-                    var value = ($(":first-child", this).is(":input"))
-                ? $(":first-child", this).val()
-                : ($(this).text() != "")
-                  ? $(this).text()
-                  : $(this).html();
-                    if (value.indexOf('_') >= 0) {
-                        j++;
-                        city1 = value.split('_');
-                        //city2 = city1[1].split('-');
-                        $(this).text(city1[0]);
-                        if (j % 1 === 0) {
-                            list += '<th style="width:100px; text-align:center;">' + city1[1] + '</th>';
+                    $(".imagetable th").each(function () {
+                        var value = ($(":first-child", this).is(":input"))
+                    ? $(":first-child", this).val()
+                    : ($(this).text() != "")
+                      ? $(this).text()
+                      : $(this).html();
+                        if (value.indexOf('_') >= 0) {
+                            j++;
+                            city1 = value.split('_');
+                            //city2 = city1[1].split('-');
+                            $(this).text(city1[0]);
+                            if (j % 1 === 0) {
+                                list += '<th style="width:100px; text-align:center;">' + city1[1] + '</th>';
+                            }
                         }
+                    });
+
+                    $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th style="width: 100px;">&nbsp;</th><th style="width: 50px;">&nbsp;</th><th style="width: 260px;">&nbsp;</th><th style="width: 220px;">&nbsp;</th><th style="width: 40px;"></th>' + list + '</tr></thead>');
+                }
+
+                $('.cbltest').on('click', ':checkbox', function () {
+                    if ($(this).is(':checked')) {
+                        $(this).parent().addClass('highlight');
+                    }
+                    else {
+                        $(this).parent().removeClass('highlight');
                     }
                 });
 
-                $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th style="width: 100px;">&nbsp;</th><th style="width: 50px;">&nbsp;</th><th style="width: 260px;">&nbsp;</th><th style="width: 220px;">&nbsp;</th><th style="width: 40px;"></th>' + list + '</tr></thead>');
-            }
 
-            $('.cbltest').on('click', ':checkbox', function () {
-                if ($(this).is(':checked')) {
-                    $(this).parent().addClass('highlight');
-                }
-                else {
-                    $(this).parent().removeClass('highlight');
-                }
             });
 
+            $(document).ready(function () {
+                $(".cbltest").find(":checkbox").each(function () {
+                    if ($(this).is(':checked')) {
+                        $(this).parent().addClass('highlight');
+                    }
+                });
 
-        });
-
-        $(document).ready(function () {
-            $(".cbltest").find(":checkbox").each(function () {
-                if ($(this).is(':checked')) {
-                    $(this).parent().addClass('highlight');
-                }
-            });
-
-            // scrollables
-            $('.slim-scroll').each(function () {
-                var $this = $(this);
-                $this.slimScroll({
-                    height: $this.data('height') || 100,
-                    railVisible: true
+                // scrollables
+                $('.slim-scroll').each(function () {
+                    var $this = $(this);
+                    $this.slimScroll({
+                        height: $this.data('height') || 100,
+                        railVisible: true
+                    });
                 });
             });
-        });
 
     </script>
 </asp:Content>
@@ -158,9 +159,9 @@
         </script>
         <ul class="breadcrumb">
             <li><i class="icon-home home-icon"></i><a href="../Default.aspx">
-                <asp:Localize ID="localBreadCrumbHome" runat="server" Text="Home" ></asp:Localize></a> </li>
+                <asp:Localize ID="localBreadCrumbHome" runat="server" Text="Home"></asp:Localize></a> </li>
             <li class="active">
-                <asp:Localize ID="localBreadCrumbDataEntry" runat="server" Text="Data Entry" ></asp:Localize></li>
+                <asp:Localize ID="localBreadCrumbDataEntry" runat="server" Text="Data Entry"></asp:Localize></li>
         </ul>
         <!-- .breadcrumb -->
     </div>
@@ -172,87 +173,93 @@
                 <div class="widget-box no-border">
                     <div class="widget-body">
                         <div class="widget-main no-padding-top">
-                         <%--   <div class="col-sm-14 widget-container-span">--%>
-                                <div class="widget-box">
-                                    <div class="widget-header widget-header-small header-color-blue2">
-                                        <h5>
-                                            <asp:Localize ID="lblDate" runat="server" Text="Date:"  ></asp:Localize>
-                                        </h5>
-                                        <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
+                            <%--   <div class="col-sm-14 widget-container-span">--%>
+                            <div class="widget-box">
+                                <div class="widget-header widget-header-small header-color-blue2">
+                                    <h5>
+                                        <asp:Localize ID="lblDate" runat="server" Text="Date:"></asp:Localize>
+                                    </h5>
+                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        <asp:TextBox runat="server" ID="txtDate" OnTextChanged="txtDate_TextChanged" AutoPostBack="true" Style="text-align: left;" 
+                                            Font-Size="Medium" Width="200" onchange="needToConfirm = false;"></asp:TextBox>
                                     </div>
-                                    <div class="widget-body">
+                                </div>
+                            </div>
+                            <div class="widget-box">
+                                <div class="widget-header widget-header-small header-color-blue2">
+                                    <h5>
+                                        <asp:Localize ID="Localize1" runat="server"
+                                            Text="Reporting Frequency"></asp:Localize>
+                                    </h5>
+                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="slim-scroll" data-height="105">
                                         <div class="widget-main">
-                                             <asp:TextBox runat="server" ID="txtDate" OnTextChanged="txtDate_TextChanged" AutoPostBack="true" style="text-align:left;"  Font-Size="Medium" Width="200" onchange="needToConfirm = false;"></asp:TextBox>
-                                            <div style="margin-top:10px;">
-                                            <asp:RadioButtonList  runat="server" ID="rblFrequency" AutoPostBack="true" OnSelectedIndexChanged="rblFrequency_SelectedIndexChanged" onchange="needToConfirm = false;">
+                                            <asp:RadioButtonList runat="server" ID="rblFrequency" AutoPostBack="true" OnSelectedIndexChanged="rblFrequency_SelectedIndexChanged" onchange="needToConfirm = false;">
                                                 <asp:ListItem Selected="True" Text="Daily" Value="2"></asp:ListItem>
-                                                <asp:ListItem  Text="Weekly" Value="3"></asp:ListItem>
-                                                <asp:ListItem  Text="Monthly" Value="1"></asp:ListItem>
+                                                <asp:ListItem Text="Weekly" Value="3"></asp:ListItem>
+                                                <asp:ListItem Text="Monthly" Value="1"></asp:ListItem>
                                             </asp:RadioButtonList>
-                                                </div>
-                                        <%--    <asp:DropDownList ID="ddlYear" Visible="false" runat="server" OnSelectedIndexChanged="ddlYear_SelectedIndexChanged"
-                                                onchange="needToConfirm = false;" AutoPostBack="True" meta:resourcekey="ddlYearResource1">
-                                            </asp:DropDownList>
-                                            <asp:DropDownList ID="ddlMonth" Visible="false" runat="server" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged"
-                                                onchange="needToConfirm = false;" AutoPostBack="True" meta:resourcekey="ddlMonthResource1">
-                                            </asp:DropDownList>--%>
-                                            
                                         </div>
                                     </div>
                                 </div>
-                       
-                                <div class="widget-box">
-                                    <div class="widget-header widget-header-small header-color-blue2">
-                                        <h5>
-                                            <asp:Localize ID="lzeLgndProjects" runat="server"
-                                                Text="Interventions" meta:resourcekey="lzeLgndProjectsResource1"></asp:Localize>
-                                        </h5>
-                                        <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
-                                    </div>
-                                    <div class="widget-body">
-                                        <div class="slim-scroll" data-height="200">
-                                            <div class="widget-main">
-                                                <asp:RadioButtonList ID="rblProjects" runat="server" AutoPostBack="True" OnSelectedIndexChanged="rblProjects_SelectedIndexChanged"
-                                                    onchange="needToConfirm = false;" meta:resourcekey="rblProjectsResource1">
-                                                </asp:RadioButtonList>
-                                            </div>
-                                        </div>
-                                    </div>
+                            </div>
+                            <div class="widget-box">
+                                <div class="widget-header widget-header-small header-color-blue2">
+                                    <h5>
+                                        <asp:Localize ID="lzeLgndProjects" runat="server"
+                                            Text="Interventions" meta:resourcekey="lzeLgndProjectsResource1"></asp:Localize>
+                                    </h5>
+                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
                                 </div>
-                           <%-- </div>--%>
-                           <%-- <div class="col-sm-14 widget-container-span">--%>
-                                <div class="widget-box">
-                                    <div class="widget-header widget-header-small header-color-blue2">
-                                        <h5>
-                                            <asp:Localize ID="lzeLgndStrObjs" runat="server"
-                                                Text="Strategic Objectives" meta:resourcekey="lzeLgndStrObjsResource1"></asp:Localize>
-                                        </h5>
-                                        <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
-                                    </div>
-                                    <div class="widget-body">
+                                <div class="widget-body">
+                                    <div class="slim-scroll" data-height="100">
                                         <div class="widget-main">
-                                            <asp:CheckBoxList ID="cblObjectives" runat="server" CssClass="checkObj" meta:resourcekey="cblObjectivesResource1">
-                                            </asp:CheckBoxList>
+                                            <asp:RadioButtonList ID="rblProjects" runat="server" AutoPostBack="True" OnSelectedIndexChanged="rblProjects_SelectedIndexChanged"
+                                                onchange="needToConfirm = false;" meta:resourcekey="rblProjectsResource1">
+                                            </asp:RadioButtonList>
                                         </div>
                                     </div>
                                 </div>
-                           <%-- </div>
+                            </div>
+                            <%-- </div>--%>
+                            <%-- <div class="col-sm-14 widget-container-span">--%>
+                            <div class="widget-box">
+                                <div class="widget-header widget-header-small header-color-blue2">
+                                    <h5>
+                                        <asp:Localize ID="lzeLgndStrObjs" runat="server"
+                                            Text="Strategic Objectives" meta:resourcekey="lzeLgndStrObjsResource1"></asp:Localize>
+                                    </h5>
+                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        <asp:CheckBoxList ID="cblObjectives" runat="server" CssClass="checkObj" meta:resourcekey="cblObjectivesResource1">
+                                        </asp:CheckBoxList>
+                                    </div>
+                                </div>
+                            </div>
+                            <%-- </div>
                             <div class="col-sm-14 widget-container-span">--%>
-                                <div class="widget-box hidden">
-                                    <div class="widget-header widget-header-small header-color-blue2">
-                                        <h5>
-                                            <asp:Localize ID="lzeLgndHumPriorities" runat="server"
-                                                Text="Humanitarian Priorities" meta:resourcekey="lzeLgndHumPrioritiesResource1"></asp:Localize>
-                                        </h5>
-                                        <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
-                                    </div>
-                                    <div class="widget-body">
-                                        <div class="widget-main">
-                                            <asp:CheckBoxList ID="cblPriorities" runat="server" CssClass="checkPr" meta:resourcekey="cblPrioritiesResource1">
-                                            </asp:CheckBoxList>
-                                        </div>
+                            <div class="widget-box hidden">
+                                <div class="widget-header widget-header-small header-color-blue2">
+                                    <h5>
+                                        <asp:Localize ID="lzeLgndHumPriorities" runat="server"
+                                            Text="Humanitarian Priorities" meta:resourcekey="lzeLgndHumPrioritiesResource1"></asp:Localize>
+                                    </h5>
+                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        <asp:CheckBoxList ID="cblPriorities" runat="server" CssClass="checkPr" meta:resourcekey="cblPrioritiesResource1">
+                                        </asp:CheckBoxList>
                                     </div>
                                 </div>
+                            </div>
                             <%--</div>--%>
                         </div>
                     </div>
@@ -280,11 +287,11 @@
                         <div class="widget-main">
                             <div class="pull-left">
                                 <asp:Localize ID="lzeSelectLocaitonsText" runat="server"
-                                    Text="Please click on 'Locations' button to select the Admin 2 locations you want to report on."></asp:Localize>
+                                    Text="Please select your locations for you to view your indicators you selected."></asp:Localize>
                                 <button id="btnOpenLocations" runat="server" onserverclick="btnLocation_Click" onclick="needToConfirm = false;"
                                     type="button" class="btn btn-sm btn-primary">
                                     <i class="icon-building-o"></i>
-                                    <asp:Localize ID="localLocationButton" runat="server" Text="Locations" ></asp:Localize>
+                                    <asp:Localize ID="localLocationButton" runat="server" Text="Locations"></asp:Localize>
                                 </button>
                             </div>
                             <div class="spacer" style="clear: both;">
@@ -346,7 +353,7 @@
                                         </ItemTemplate>
                                         <ItemStyle Wrap="False"></ItemStyle>
                                     </asp:TemplateField>
-                                    <asp:TemplateField ItemStyle-Wrap="false" Visible="false" meta:resourcekey="TemplateFieldResource2" >
+                                    <asp:TemplateField ItemStyle-Wrap="false" Visible="false" meta:resourcekey="TemplateFieldResource2">
                                         <ItemTemplate>
                                             <asp:Image ID="imgObjective" runat="server" AlternateText="Obj" meta:resourcekey="imgObjectiveResource1" />
                                             <asp:Image ID="imgPriority" runat="server" AlternateText="Obj" meta:resourcekey="imgPriorityResource1" />
@@ -399,7 +406,7 @@
                         </div>
                         <div class="space">
                         </div>
-                        <button id="btnSave" runat="server"  onserverclick="btnSave_Click" onclick="needToConfirm = false;"
+                        <button id="btnSave" runat="server" onserverclick="btnSave_Click" onclick="needToConfirm = false;"
                             type="button" class="pull-right btn btn-sm btn-primary">
                             <i class="icon-save"></i>
                             <asp:Localize ID="localSaveButton" runat="server" Text="Save" meta:resourcekey="localSaveButtonResource1"></asp:Localize>
@@ -481,7 +488,7 @@
             <div class="modal-dialog">
 
                 <div class="modal-content">
-                    <div class="modal-header" style="border-bottom-width:0px;">
+                    <div class="modal-header" style="border-bottom-width: 0px;">
                         <button runat="server" id="btnCancelComments" onserverclick="btnCancelComments_Click"
                             class="close" data-dismiss="modal" onclick="needToConfirm = false;">
                             &times;
@@ -490,19 +497,19 @@
                         <%--<h4 class="blue bigger">
                             <asp:Localize ID="localIndComments" runat="server" Text="Indicator Comments" meta:resourcekey="localIndCommentsResource1"></asp:Localize>
                         </h4>--%>
-                    </div> 
-                    <span class="btn btn-sm btn-info no-radius" style="margin-top:5px;margin-left:8px;line-height:8px;" onclick="javascript:alertComment();">New Comment</span>
-                                     
-                    <div class="modal-body overflow-visible" style="padding-top:5px;">
+                    </div>
+                    <span class="btn btn-sm btn-info no-radius" style="margin-top: 5px; margin-left: 8px; line-height: 8px;" onclick="javascript:alertComment();">New Comment</span>
+
+                    <div class="modal-body overflow-visible" style="padding-top: 5px;">
                         <div class="row">
-                               
+
                             <uc1:ReportedIndicatorComments ID="ucIndComments" runat="server" />
                         </div>
                     </div>
-                   <br />
-                    <div class="form-actions" style=" margin: 0 auto;width: 97%;">
+                    <br />
+                    <div class="form-actions" style="margin: 0 auto; width: 97%;">
                         <div class="input-group">
-                            <input type="text" runat="server" id="txtComments" name="message" class="form-control" style="text-align:left;" placeholder="Type your comment here ...">
+                            <input type="text" runat="server" id="txtComments" name="message" class="form-control" style="text-align: left;" placeholder="Type your comment here ...">
                             <span class="input-group-btn">
                                 <%--<button type="button" class="btn btn-sm btn-info no-radius">
                                     <i class="icon-share-alt"></i>
@@ -515,8 +522,8 @@
                         <asp:Button Visible="false" ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancelComments_Click"
                             CssClass="btn btn-primary" OnClientClick="needToConfirm = false;" />
                     </div>
-                   <br />
-                    
+                    <br />
+
 
                 </div>
             </div>

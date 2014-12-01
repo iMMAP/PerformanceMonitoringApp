@@ -357,7 +357,7 @@ namespace SRFROWCA.Ebola
             string title = txtProjectTitle.Text.Trim();
             string objective = txtProjectObjective.Text.Trim();
             string projectPartners = txtImplementingPartners.Text.Trim();
-            int clusterId = 13;// Convert.ToInt32(ddlCluster.SelectedValue);
+            int clusterId = 25;// Convert.ToInt32(ddlCluster.SelectedValue);
 
             int? fundingStatus = null; // Convert.ToInt32(ddlFundingStatus.SelectedValue) > 0 ? Convert.ToInt32(ddlFundingStatus.SelectedValue) : (int?)null;
             DateTime? startDate = txtFromDate.Text.Trim().Length > 0 ?

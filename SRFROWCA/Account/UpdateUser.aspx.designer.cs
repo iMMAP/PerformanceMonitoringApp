@@ -166,24 +166,6 @@ namespace SRFROWCA.Account {
         protected global::System.Web.UI.WebControls.CustomValidator CustomValidator3;
         
         /// <summary>
-        /// ddlEmergency control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEmergency;
-        
-        /// <summary>
-        /// RequiredFieldValidator2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
-        
-        /// <summary>
         /// divCluster control.
         /// </summary>
         /// <remarks>

@@ -4,6 +4,11 @@
 <%@ MasterType VirtualPath="~/Site.master" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    <style>
+        .radioButtonList{
+    display:inline;
+}
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="breadcrumbs" id="breadcrumbs">
@@ -65,7 +70,7 @@
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                             <td class="width-20">
+                                                            <td class="width-20">
                                                                 <label>
                                                                     Activity:</label>
                                                             </td>
@@ -75,9 +80,9 @@
 
                                                                 </asp:DropDownList>
                                                             </td>
-                                                         
 
-                                                           <td class="width-20">
+
+                                                            <td class="width-20">
                                                                 <label>
                                                                     Indicator Name:</label>
                                                             </td>
@@ -87,7 +92,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td>&nbsp;</td>
-                                                            <td colspan="3" style="padding-top:20px;">
+                                                            <td colspan="3" style="padding-top: 20px;">
                                                                 <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch2_Click" CssClass="btn btn-primary" CausesValidation="false" />
 
                                                             </td>
@@ -113,21 +118,21 @@
                 <asp:GridView ID="gvIndicator" runat="server" AutoGenerateColumns="false" AllowSorting="True" AllowPaging="true" PagerSettings-Mode="NumericFirstLast"
                     OnRowCommand="gvIndicator_RowCommand" Width="100%" OnRowDataBound="gvIndicator_RowDataBound" PagerSettings-Position="Bottom"
                     CssClass=" table-striped table-bordered table-hover" OnSorting="gvIndicator_Sorting" OnPageIndexChanging="gvIndicator_PageIndexChanging" PageSize="30"
-                    DataKeyNames="ClusterId,ClusterObjectiveId,ObjectivePriorityId,PriorityActivityId,HumanitarianPriority,SiteLanguageId,DataName,IsPriorityIndicatory,IsSRPIndicator,UnitId,EmergencyId">
-                  
+                    DataKeyNames="ReportFrequencyTypeId,ClusterId,ClusterObjectiveId,ObjectivePriorityId,PriorityActivityId,HumanitarianPriority,SiteLanguageId,DataName,IsPriorityIndicatory,IsSRPIndicator,UnitId,EmergencyId">
+
                     <Columns>
                         <asp:BoundField DataField="Objective" HeaderText="Objective" SortExpression="Objective" ItemStyle-Width="20%" />
-                        <asp:BoundField DataField="ActivityName" HeaderText="Activity" SortExpression="ActivityName"  ItemStyle-Width="30%"  />
-                        <asp:BoundField DataField="DataName" HeaderText="Indicator" SortExpression="DataName"  ItemStyle-Width="40%" />
+                        <asp:BoundField DataField="ActivityName" HeaderText="Activity" SortExpression="ActivityName" ItemStyle-Width="30%" />
+                        <asp:BoundField DataField="DataName" HeaderText="Indicator" SortExpression="DataName" ItemStyle-Width="40%" />
                         <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle" HeaderStyle-Width="80px">
                             <ItemTemplate>
-                                <asp:LinkButton ID="btnEdit" runat="server" Text="Edit" Width="80px" CausesValidation="false" 
+                                <asp:LinkButton ID="btnEdit" runat="server" Text="Edit" Width="80px" CausesValidation="false"
                                     CommandName="EditIndicator" CommandArgument='<%# Eval("ActivityDataId") %>' />
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle" HeaderStyle-Width="80px">
                             <ItemTemplate>
-                                <asp:LinkButton ID="btnDelete" runat="server" Text="Delete" Width="80px" CausesValidation="false" 
+                                <asp:LinkButton ID="btnDelete" runat="server" Text="Delete" Width="80px" CausesValidation="false"
                                     CommandName="DeleteIndicator" CommandArgument='<%# Eval("ActivityDataId") %>' />
                             </ItemTemplate>
                         </asp:TemplateField>
@@ -142,7 +147,7 @@
                     <asp:ModalPopupExtender ID="mpeAddOrg" BehaviorID="mpeAddOrg" runat="server" TargetControlID="btntest"
                         PopupControlID="pnlOrg" BackgroundCssClass="modalpopupbackground" CancelControlID="btnClose">
                     </asp:ModalPopupExtender>
-                    <asp:Panel ID="pnlOrg" runat="server" Width="750px">
+                    <asp:Panel ID="pnlOrg" runat="server" Width="850px">
                         <asp:UpdatePanel ID="uPanel1" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
                                 <div class="containerPopup">
@@ -156,7 +161,7 @@
                                                     <td>Objective:
                                                     </td>
                                                     <td class="frmControl">
-                                                        <asp:DropDownList ID="ddlObjectiveNew" runat="server" AutoPostBack="true" AppendDataBoundItems="true" Width="500px" 
+                                                        <asp:DropDownList ID="ddlObjectiveNew" runat="server" AutoPostBack="true" AppendDataBoundItems="true" Width="450px"
                                                             OnSelectedIndexChanged="ddlObjectiveNew_SelectedIndexChanged">
                                                             <asp:ListItem Text="Select" Value="-1" Selected="True"></asp:ListItem>
                                                         </asp:DropDownList>
@@ -170,7 +175,7 @@
                                                     <td>Activity:
                                                     </td>
                                                     <td class="frmControl">
-                                                        <asp:DropDownList ID="ddlActivityNew" runat="server" AppendDataBoundItems="true" Width="500px">
+                                                        <asp:DropDownList ID="ddlActivityNew" runat="server" AppendDataBoundItems="true" Width="450px">
                                                             <asp:ListItem Text="Select" Value="-1" Selected="True"></asp:ListItem>
                                                         </asp:DropDownList>
                                                     </td>
@@ -183,7 +188,7 @@
                                                     <td>Unit:
                                                     </td>
                                                     <td class="frmControl">
-                                                        <asp:DropDownList ID="ddlUnit" runat="server" AppendDataBoundItems="true" Width="500px">
+                                                        <asp:DropDownList ID="ddlUnit" runat="server" AppendDataBoundItems="true" Width="450px">
                                                             <asp:ListItem Text="Select" Value="-1" Selected="True"></asp:ListItem>
                                                         </asp:DropDownList>
                                                     </td>
@@ -197,7 +202,7 @@
                                                     <td>Indicator (EN):
                                                     </td>
                                                     <td class="frmControl">
-                                                        <asp:TextBox ID="txtActivityEng" runat="server" Width="500px" MaxLength="1000" TextMode="MultiLine"></asp:TextBox>
+                                                        <asp:TextBox ID="txtActivityEng" runat="server" Width="450px" MaxLength="1000" TextMode="MultiLine"></asp:TextBox>
                                                     </td>
                                                     <td>
                                                         <asp:RequiredFieldValidator ID="rfvEmgName" runat="server" ErrorMessage="Required"
@@ -208,12 +213,23 @@
                                                     <td>Indicator (FR):
                                                     </td>
                                                     <td class="frmControl">
-                                                        <asp:TextBox ID="txtActivityFr" runat="server" Width="500px" MaxLength="1000" TextMode="MultiLine"></asp:TextBox>
+                                                        <asp:TextBox ID="txtActivityFr" runat="server" Width="450px" MaxLength="1000" TextMode="MultiLine"></asp:TextBox>
                                                     </td>
                                                     <td>
                                                         <asp:RequiredFieldValidator ID="rfvEmgNameFr" runat="server" ErrorMessage="Required"
                                                             Text="Required" ControlToValidate="txtActivityFr" CssClass="error2"></asp:RequiredFieldValidator>
                                                     </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Report Frequency:</td>
+                                                    <td>
+                                                        <asp:RadioButtonList runat="server" ID="rblFrequency" style="display:inline" >
+                                                            <asp:ListItem Selected="True" Text="Daily" Value="2"></asp:ListItem>
+                                                            <asp:ListItem Text="Weekly" Value="3"></asp:ListItem>
+                                                            <asp:ListItem Text="Monthly" Value="1"></asp:ListItem>
+                                                        </asp:RadioButtonList>
+                                                    </td>
+                                                    <td></td>
                                                 </tr>
                                                 <tr>
                                                     <td></td>

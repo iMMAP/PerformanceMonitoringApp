@@ -26,7 +26,7 @@ namespace SRFROWCA.Account
             PopulateCountries();
             PopulateOrganizations();
             PopulateClusters();
-            PopulateEmergencies();
+            //PopulateEmergencies();
 
             if (Session["EditUserId"] != null)
             {
@@ -35,11 +35,11 @@ namespace SRFROWCA.Account
             }
         }
 
-        private void PopulateEmergencies()
-        {
-            int locationId = (int)RC.SelectedSiteLanguageId;
-            UI.FillEmergency(ddlEmergency, RC.GetAllEmergencies(locationId));
-        }
+        //private void PopulateEmergencies()
+        //{
+        //    int locationId = (int)RC.SelectedSiteLanguageId;
+        //    //UI.FillEmergency(ddlEmergency, RC.GetAllEmergencies(locationId));
+        //}
 
         private void ShowHideControls()
         {
@@ -120,7 +120,7 @@ namespace SRFROWCA.Account
                 ddlUserRole.SelectedValue = dt.Rows[0]["RoleId"].ToString();               
                 ddlCountry.SelectedValue = dt.Rows[0]["LocationId"].ToString();
                 ddlClusters.SelectedValue = dt.Rows[0]["ClusterId"].ToString();
-                ddlEmergency.SelectedValue = dt.Rows[0]["EmergencyId"].ToString();
+                //ddlEmergency.SelectedValue = dt.Rows[0]["EmergencyId"].ToString();
                 if (RC.IsCountryAdmin(User))
                 {
                     ddlCountry.Enabled = false;
@@ -130,7 +130,7 @@ namespace SRFROWCA.Account
 
         private DataTable GetUserDetails(Guid userId)
         {
-            return DBContext.GetData("GetUserDetails", new object[] { 1, userId });
+            return DBContext.GetData("GetUserAccountDetails", new object[] { userId });            
         }
 
         // Populate countries drop down.
@@ -232,7 +232,7 @@ namespace SRFROWCA.Account
             countryId = ddlCountry.SelectedValue;
             int? clusterId = ddlClusters.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlClusters.SelectedValue);
             string phone = txtPhone.Text.Trim().Length > 0 ? txtPhone.Text.Trim() : null;
-            return new object[] { userId, orgId, countryId, phone, txtFullName.Text.Trim(), clusterId,ddlEmergency.SelectedValue, DBNull.Value };
+            return new object[] { userId, orgId, countryId, phone, txtFullName.Text.Trim(), clusterId, DBNull.Value };
         }
 
         protected void ddlUserRole_SelectedIndexChanged(object sender, EventArgs e)

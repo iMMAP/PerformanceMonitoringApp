@@ -390,7 +390,9 @@ namespace SRFROWCA.ClusterLead
                 emergencyLocationId = UserInfo.EmergencyCountry;
             }
 
-            return DBContext.GetData("GetAllIndicatorsNew", new object[] { emergencyLocationId, emergencyClusterId, emergencyObjectiveId, search, activityId, chkIsGender.Checked ? 1 : 0, (int)RC.SelectedSiteLanguageId });
+           int? isGender = chkIsGender.Checked ? 1 : (int?)null;
+
+           return DBContext.GetData("GetAllIndicatorsNew", new object[] { emergencyLocationId, emergencyClusterId, emergencyObjectiveId, search, activityId, isGender, (int)RC.SelectedSiteLanguageId });
         }
         private DataTable GetObjectives()
         {

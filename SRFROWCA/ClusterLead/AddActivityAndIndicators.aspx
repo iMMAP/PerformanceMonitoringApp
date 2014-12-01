@@ -52,7 +52,7 @@
                     Objective:</label>
 
                 <div>
-                    <asp:DropDownList ID="ddlObjective" runat="server" CssClass="width-45" AutoPostBack="true" >
+                    <asp:DropDownList ID="ddlObjective" runat="server" CssClass="width-45">
                     </asp:DropDownList>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Required"
                         CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlObjective"></asp:RequiredFieldValidator>

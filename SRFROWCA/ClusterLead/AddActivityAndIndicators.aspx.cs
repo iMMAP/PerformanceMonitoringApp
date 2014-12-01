@@ -265,8 +265,8 @@ namespace SRFROWCA.ClusterLead
             Guid userId = RC.GetCurrentUserId;
 
             int objId = RC.GetSelectedIntVal(ddlObjective);
-            string actEn = txtActivityEng.Text.Trim();
-            string actFr = txtActivityFr.Text.Trim();
+            string actEn = !string.IsNullOrEmpty(txtActivityEng.Text.Trim()) ? txtActivityEng.Text.Trim() : null;
+            string actFr = !string.IsNullOrEmpty(txtActivityFr.Text.Trim()) ? txtActivityFr.Text.Trim() : null;
 
             return DBContext.Add("InsertActivityNew", new object[] { emergencyClusterId, objId,emergencyLocationId, 
                                                                         actEn, actFr, userId, DBNull.Value });

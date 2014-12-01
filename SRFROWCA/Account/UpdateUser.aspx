@@ -147,7 +147,7 @@
                                     ErrorMessage="Country Required" meta:resourcekey="CustomValidator2Resource1"></asp:CustomValidator>
                             </div>
                         </div>
-                          <div class="singalselect">
+                          <%--<div class="singalselect">
                             <label>
                                 Emergency:</label>
                                  <div>
@@ -156,7 +156,7 @@
                                 </asp:DropDownList>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" InitialValue="0" runat="server" ControlToValidate="ddlEmergency" ErrorMessage="Required" Text="Required" ForeColor="Red"></asp:RequiredFieldValidator>                              
                                      </div>
-                              </div>
+                              </div>--%>
                         <div id="divCluster" runat="server">
                             <label>
                                 Cluster:</label>
