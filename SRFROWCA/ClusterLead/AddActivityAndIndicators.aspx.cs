@@ -229,9 +229,9 @@ namespace SRFROWCA.ClusterLead
                 {
                     mailMsg.From = new MailAddress("orsocharowca@gmail.com");
                     mailMsg.To.Add("orsocharowca@gmail.com");
-                    mailMsg.Subject = "New Indicators Has Been Added in ORS Master List";
+                    mailMsg.Subject = "Framework 2015 - New Indicators Has Been Added in ORS Master List";
                     mailMsg.IsBodyHtml = true;
-                    mailMsg.Body = string.Format(@"New Indicators Has Been Added in ORS Master List<hr/>
+                    mailMsg.Body = string.Format(@"New Indicators Has Been Added in ORS For 2015 Framework<hr/>
                                                 {0}<br/>                                              
                                                 <b>By Following User:</b><br/>                                                        
                                                         <b>User Name:</b> {1}<br/>

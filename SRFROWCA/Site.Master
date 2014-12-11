@@ -73,7 +73,7 @@
                 <div class="navbar-header pull-right" role="navigation">
                     <ul class="nav ace-nav">
                         <li>
-                            <span style="color:white;">Current Emergency:</span><asp:DropDownList ID="ddlEmgergency" runat="server" CssClass="blue" OnSelectedIndexChanged="ddlEmg_SelectedIndexChanged" AutoPostBack="true">
+                            <span style="color: white;">Current Emergency:</span><asp:DropDownList ID="ddlEmgergency" runat="server" CssClass="blue" OnSelectedIndexChanged="ddlEmg_SelectedIndexChanged" AutoPostBack="true">
                                 <asp:ListItem Text="Sahel 2015" Value="3"></asp:ListItem>
                                 <asp:ListItem Text="Sahel 2014" Value="1"></asp:ListItem>
                             </asp:DropDownList>
@@ -232,10 +232,10 @@
                                     <i class="icon-angle-double-right"></i>
                                     <asp:Localize ID="localReportsSumReportSumOfRegInd" runat="server" Text="Regional Indicator" meta:resourcekey="localReportsSumReportSumOfRegIndResource1"></asp:Localize></a></li>
 
-                                <li id="liCustomReport" runat="server"><a href="~/Anonymous/AllData.aspx" id="menueCustomReport"
+                                <%--<li id="liCustomReport" runat="server"><a href="~/Anonymous/AllData.aspx" id="menueCustomReport"
                                     runat="server"><i class="icon-angle-double-right"></i>
                                     <asp:Localize ID="localReportCustomReport" runat="server" Text="Custom Report" meta:resourcekey="localReportCustomReportResource1"></asp:Localize>
-                                </a></li>
+                                </a></li>--%>
                             </ul>
                         </li>
                         <%--<li id="liCountryConsolidatedReports" runat="server"><a id="menueCountryConsolidatedReports" runat="server" href="#"
@@ -348,49 +348,19 @@
                                 <asp:Localize ID="localClusterFrameworksList1" runat="server" Text="Cluster Framework"></asp:Localize>
                             </span><b class="arrow icon-angle-down"></b></a>
                             <ul class="submenu">
-                                <li id="liClusterFrameworkSub" runat="server">
-                                    <a href="#" class="dropdown-toggle">
-                                        <i class="icon-double-angle-right"></i>
-                                        Cluster Indicators
-										<b class="arrow icon-angle-down"></b>
-                                    </a>
+                                <li id="liClusterIndicators" runat="server"><a href="<%=BaseURL %>/ClusterLead/CountryIndicators.aspx"><span class="menu-text">
 
-                                    <ul class="submenu">
-                                        <li id="liClusterIndicators" runat="server"><a href="<%=BaseURL %>/ClusterLead/CountryIndicators.aspx"><span class="menu-text">
-
-                                            <asp:Localize ID="Localize8" runat="server" Text="Output Indicators" meta:resourcekey="localCountryIndicatorsResource1"></asp:Localize>
-                                        </span></a></li>
-                                        <li id="liClusterDataEntry" runat="server"><a href="<%=BaseURL %>/ClusterLead/ClusterDataEntry.aspx"><span class="menu-text">
-
-                                            <asp:Localize ID="Localize11" runat="server" Text="Output Data Entry" meta:resourcekey="localClusterDataEntryResource1"></asp:Localize>
-                                        </span></a></li>
-
-                                        <li id="liClusterIndReports" runat="server"><a href="<%=BaseURL %>/ClusterLead/ClusterReports.aspx"><span class="menu-text">
-
-                                            <asp:Localize ID="Localize12" runat="server" Text="Output Report"></asp:Localize>
-                                        </span></a></li>
-                                    </ul>
-                                </li>
-
-
+                                    <asp:Localize ID="Localize8" runat="server" Text="Output Indicators" meta:resourcekey="localCountryIndicatorsResource1"></asp:Localize>
+                                </span></a></li>
                                 <li id="liNewActivityListing" runat="server"><a href="<%=BaseURL %>/ClusterLead/ActivityListing.aspx"><span class="menu-text">
-
                                     <asp:Localize ID="Localize9" runat="server" Text="Cluster Activities" meta:resourcekey="localActivityResource1"></asp:Localize>
                                 </span></a></li>
                                 <li id="liNewIndicatorListing" runat="server"><a href="<%=BaseURL %>/ClusterLead/IndicatorListing.aspx"><span class="menu-text">
-
                                     <asp:Localize ID="Localize10" runat="server" Text="Activity Indicators" meta:resourcekey="localIndicatorsResource1"></asp:Localize>
                                 </span></a></li>
-
-
                                 <li id="liClusterFrameworkImport" runat="server"><a href="<%=BaseURL %>/ClusterLead/UploadSRP.aspx"><span class="menu-text">
                                     <asp:Localize ID="Localize13" runat="server" Text="Import/Export Framework"></asp:Localize>
                                 </span></a></li>
-
-                                <%--<li id="liReport" runat="server"><a href="<%=BaseURL %>/Reports/DownloadReport.aspx?type=10"><span class="menu-text">
-
-                                    <asp:Localize ID="Localize12" runat="server" Text="Export Framework" meta:resourcekey="localReportResource1"></asp:Localize>
-                                </span></a></li>--%>
                             </ul>
                         </li>
                         <li id="liActivities" runat="server"><a href="~/Admin/ActivityListing.aspx"

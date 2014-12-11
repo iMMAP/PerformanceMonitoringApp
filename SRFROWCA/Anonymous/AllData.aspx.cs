@@ -219,7 +219,7 @@ namespace SRFROWCA.Anonymous
 
         private void PopulateObjectives()
         {
-            UI.FillObjectives(ddlObjectives, true);
+            UI.FillObjectives(ddlObjectives, true, RC.SelectedEmergencyId);
         }
 
         // Populate Clusters drop down.

@@ -51,21 +51,21 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-5" style="<%=displayNone%>">
+                                <div class="col-sm-5">
                                     <div class="widget-box no-border">
                                         <div class="widget-body">
                                             <div class="widget-main no-padding-bottom no-padding-top">
-                                                
-                                                    <div>
-                                                        <asp:Label runat="server" ID="lblCountry" Text="Country:" CssClass="label2"></asp:Label>
-                                                        <asp:DropDownList ID="ddlCountry" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" runat="server" CssClass="width-70">
-                                                            <asp:ListItem Selected="True" Text="--- Select Country --" Value="-1"></asp:ListItem>
-                                                        </asp:DropDownList>
-                                                        <asp:RequiredFieldValidator ID="rfvddlCountry" runat="server" ErrorMessage="Required"
-                                                            CssClass="error2" InitialValue="-1" Text="Required" ControlToValidate="ddlCountry">
-                                                        </asp:RequiredFieldValidator>
-                                                    </div>
-                                                
+
+                                                <div>
+                                                    <asp:Label runat="server" ID="lblCountry" Text="Country:" CssClass="label2"></asp:Label>
+                                                    <asp:DropDownList ID="ddlCountry" AutoPostBack="true" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" runat="server" CssClass="width-70 jqCountry">
+                                                        <asp:ListItem Selected="True" Text="--- Select Country --" Value="-1"></asp:ListItem>
+                                                    </asp:DropDownList>
+                                                    <asp:RequiredFieldValidator ID="rfvddlCountry" runat="server" ErrorMessage="Required"
+                                                        CssClass="error2" InitialValue="-1" Text="Required" ControlToValidate="ddlCountry">
+                                                    </asp:RequiredFieldValidator>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -103,6 +103,22 @@
     </div>
     <script>
         function validateIndicator() {
+
+            var counter = 0;
+            $(".dvIndicator").each(function (index) {
+                var txtEng = $(this).find("[id$=txtInd1Eng]").val();
+                var txtFr = $(this).find("[id$=txtInd1Fr]").val();
+
+                if (txtEng.trim() == '' && txtFr.trim() == '') {
+
+                    alert("Please add Indicator " + (parseInt(index) + 1) + " atleast in one Language!")
+                    return false;
+                }
+            });
+
+        }
+
+        function DisableTarget() {
 
             var counter = 0;
             $(".dvIndicator").each(function (index) {

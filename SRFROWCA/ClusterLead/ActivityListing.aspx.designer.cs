@@ -76,13 +76,13 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.DropDownList ddlCluster;
         
         /// <summary>
-        /// txtActivityName control.
+        /// ddlCountry control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtActivityName;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCountry;
         
         /// <summary>
         /// ddlObjective control.
@@ -92,6 +92,15 @@ namespace SRFROWCA.ClusterLead {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlObjective;
+        
+        /// <summary>
+        /// txtActivityName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtActivityName;
         
         /// <summary>
         /// btnSearch control.

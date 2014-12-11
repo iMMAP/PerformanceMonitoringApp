@@ -168,50 +168,7 @@
 
     <div class="page-content">
         <div class="row">
-            <div class="col-sm-3">
-                <div class="widget-box no-border">
-                    <div class="widget-body">
-                        <div class="widget-main no-padding-top">
-
-                            <div class="col-sm-14 widget-container-span">
-                                <div class="widget-box">
-                                    <div class="widget-header widget-header-small header-color-blue2">
-                                        <h5>
-                                            <asp:Localize ID="lzeLgndStrObjs" runat="server"
-                                                Text="Strategic Objectives" meta:resourcekey="lzeLgndStrObjsResource1"></asp:Localize>
-                                        </h5>
-
-                                    </div>
-                                    <div class="widget-body">
-                                        <div class="widget-main">
-                                            <asp:CheckBoxList ID="cblObjectives" runat="server" CssClass="checkObj" meta:resourcekey="cblObjectivesResource1">
-                                            </asp:CheckBoxList>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-14 widget-container-span">
-                                <div class="widget-box">
-                                    <div class="widget-header widget-header-small header-color-blue2">
-                                        <h5>
-                                            <asp:Localize ID="lzeLgndHumPriorities" runat="server"
-                                                Text="Humanitarian Priorities" meta:resourcekey="lzeLgndHumPrioritiesResource1"></asp:Localize>
-                                        </h5>
-
-                                    </div>
-                                    <div class="widget-body">
-                                        <div class="widget-main">
-                                            <asp:CheckBoxList ID="cblPriorities" runat="server" CssClass="checkPr" meta:resourcekey="cblPrioritiesResource1">
-                                            </asp:CheckBoxList>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-9 widget-container-span">
+            <div class="col-sm-12 widget-container-span">
                 <div class="widget-box">
                     <div class="widget-header widget-header-small header-color-blue2">
                         <asp:Localize ID="locClusterCaption" runat="server"
@@ -253,33 +210,7 @@
                                     <RowStyle CssClass="istrow" />
                                     <AlternatingRowStyle CssClass="altcolor" />
                                     <Columns>
-                                        <asp:BoundField DataField="ObjectiveId" HeaderText="ObjectiveId" ItemStyle-Width="1px"
-                                            ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource1"></asp:BoundField>
-                                        <asp:BoundField DataField="HumanitarianPriorityId" HeaderText="HumanitarianPriorityId"
-                                            ItemStyle-Width="1px" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden"
-                                            meta:resourcekey="BoundFieldResource2"></asp:BoundField>
-                                        <asp:BoundField DataField="ObjAndPrId" HeaderText="objprid" ItemStyle-Width="1px"
-                                            ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource2"></asp:BoundField>                                        
-                                        <asp:TemplateField ItemStyle-Wrap="false" meta:resourcekey="TemplateFieldResource2">
-                                            <ItemTemplate>
-                                                <asp:Image ID="imgObjective" runat="server" AlternateText="Obj" meta:resourcekey="imgObjectiveResource1" />
-                                                <asp:Image ID="imgPriority" runat="server" AlternateText="Obj" meta:resourcekey="imgPriorityResource1" />
-                                                <asp:Image ID="imgRind" runat="server" meta:resourcekey="imgRindResource1" />
-                                                <asp:Image ID="imgCind" runat="server" meta:resourcekey="imgCindResource1" />
-                                            </ItemTemplate>
-                                            <ItemStyle Wrap="False"></ItemStyle>
-                                        </asp:TemplateField>
-                                        <asp:BoundField DataField="RInd" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden">
-                                            <HeaderStyle CssClass="hidden"></HeaderStyle>
-
-                                            <ItemStyle CssClass="hidden"></ItemStyle>
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="CInd" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden">
-                                            <HeaderStyle CssClass="hidden"></HeaderStyle>
-
-                                            <ItemStyle CssClass="hidden"></ItemStyle>
-                                        </asp:BoundField>
-
+                                        <asp:BoundField HeaderText="Objective" DataField="Objective" />
                                         <asp:TemplateField HeaderStyle-Width="150" meta:resourcekey="TemplateFieldResource2">
                                             <HeaderTemplate>
                                                 <asp:Label ID="lblGridHeaderActivity" runat="server" Text="Activity" meta:resourcekey="lblGridHeaderActivityResource1"></asp:Label>

@@ -35,6 +35,12 @@ namespace SRFROWCA.ClusterLead
                     btnAddActivity.Enabled = false;
                 }
             }
+
+            if (RC.IsRegionalClusterLead(this.User))
+            {
+                btnAddActivity.Enabled = false;
+                btnAddActivityAndIndicators.Enabled = false;
+            }
         }
 
 
@@ -86,7 +92,7 @@ namespace SRFROWCA.ClusterLead
 
             if (maxIndValue > 0)
             {
-                DataTable dt = DBContext.GetData("GetAllIndicatorsNew", new object[] {emgLocationid, emgClusterid, null, null, null, null, (int)RC.SelectedSiteLanguageId });
+                DataTable dt = DBContext.GetData("GetAllIndicatorsNew", new object[] { emgLocationid, emgClusterid, null, null, null, null, (int)RC.SelectedSiteLanguageId });
                 if (dt.Rows.Count > 0)
                     maxIndValue = maxIndValue - dt.Rows.Count;
             }
@@ -97,9 +103,9 @@ namespace SRFROWCA.ClusterLead
                 if (dt != null && dt.Rows.Count > 0)
                     maxActValue = maxActValue - dt.Rows.Count;
             }
+
+            
         }
-
-
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -110,9 +116,29 @@ namespace SRFROWCA.ClusterLead
             if (RC.IsClusterLead(this.User))
             {
                 ddlCluster.SelectedValue = UserInfo.EmergencyCluster.ToString();
+                ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
+                ddlCluster.Enabled = false;
+                ddlCountry.Enabled = false;
+                ddlCluster.BackColor = Color.LightGray;
+                ddlCountry.BackColor = Color.LightGray;
+            }
+
+            if (RC.IsRegionalClusterLead(this.User))
+            {
+                ddlCluster.SelectedValue = UserInfo.EmergencyCluster.ToString();
+                ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
                 ddlCluster.Enabled = false;
                 ddlCluster.BackColor = Color.LightGray;
             }
+
+            if (RC.IsCountryAdmin(this.User))
+            {
+                ddlCluster.SelectedValue = UserInfo.EmergencyCluster.ToString();
+                ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
+                ddlCountry.Enabled = false;
+                ddlCountry.BackColor = Color.LightGray;
+            }
+
             LoadActivities();
         }
 
@@ -123,11 +149,50 @@ namespace SRFROWCA.ClusterLead
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                Button deleteButton = e.Row.FindControl("btnDelete") as Button;
-                if (deleteButton != null)
+                ObjPrToolTip.RegionalIndicatorIcon(e, 1);
+                ObjPrToolTip.CountryIndicatorIcon(e, 2);
+
+                LinkButton btnDelete = e.Row.FindControl("btnDelete") as LinkButton;
+                LinkButton btnEdit = e.Row.FindControl("btnEdit") as LinkButton;
+                Label lblCountryID = e.Row.FindControl("lblCountryID") as Label;
+                Label lblClusterID = e.Row.FindControl("lblClusterID") as Label;
+
+                //int maxVal = 0;
+                //DateTime maxDate = DateTime.Now.AddDays(1);
+                //string configKey = "Key-";
+
+                //if (lblCountryID != null && !string.IsNullOrEmpty(lblCountryID.Text))
+                //    configKey += lblCountryID.Text.Trim();
+
+                //if (lblClusterID != null && !string.IsNullOrEmpty(lblClusterID.Text))
+                //    configKey += lblClusterID.Text.Trim();
+
+                //if (applyFilter)
+                //    GetMaxCount(configKey, out maxVal, out maxDate);
+
+                if (btnDelete != null)
                 {
-                    deleteButton.Attributes.Add("onclick", "javascript:return " +
+                    btnDelete.Attributes.Add("onclick", "javascript:return " +
                     "confirm('Are you sure you want to delete this Activity?')");
+
+                    //if (applyFilter && maxDate < DateTime.Now)
+                    //    btnDelete.Visible = false;
+                }
+
+                //if (btnEdit != null && applyFilter && maxDate < DateTime.Now)
+                //    btnEdit.Visible = false;
+
+                //string isRegional = e.Row.Cells[1].Text;
+                //if ((RC.IsCountryAdmin(this.User) || RC.IsClusterLead(this.User)) && isRegional == "True")
+                //{
+                //    btnEdit.Visible = false;
+                //    btnDelete.Visible = false;
+                //}
+
+                if (RC.IsRegionalClusterLead(this.User))
+                {
+                    btnEdit.Visible = false;
+                    btnDelete.Visible = false;
                 }
             }
         }
@@ -176,7 +241,7 @@ namespace SRFROWCA.ClusterLead
         protected void btnExportExcel_Click(object sender, EventArgs e)
         {
             GridView gvExport = new GridView();
-            DataTable dt = DBContext.GetData("GetAllActivitiesNew", new object[] { null, null, null, null, (int)RC.SelectedSiteLanguageId });//GetActivities();
+            DataTable dt = GetActivities();//DBContext.GetData("GetAllActivitiesNew", new object[] { null, null, null, null, (int)RC.SelectedSiteLanguageId });//GetActivities();
             RemoveColumnsFromDataTable(dt);
             gvExport.DataSource = dt;
             gvExport.DataBind();
@@ -302,22 +367,22 @@ namespace SRFROWCA.ClusterLead
 
         private void PopulateFilters()
         {
-            //LoadEmergencyFilter();
             LoadClustersFilter();
+            LoadCountry();
             LoadObjectivesFilter();
-            //LoadPriorityFilter();
-            //LoadEmergencyFilterNew();          
-
         }
 
         private void LoadClustersFilter()
         {
-            ddlCluster.Items.Clear();
-            ddlCluster.Items.Add(new ListItem("All", "-1"));
-            ddlCluster.DataValueField = "EmergencyClusterId";
-            ddlCluster.DataTextField = "ClusterName";
-            ddlCluster.DataSource = GetClusters();
-            ddlCluster.DataBind();
+            UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
+            ddlCluster.Items.Insert(0, new ListItem("--- Select Cluster ---", "-1"));
+
+        }
+
+        private void LoadCountry()
+        {
+            UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
+            ddlCountry.Items.Insert(0, new ListItem("--- Select Country ---", "-1"));
         }
 
         private void LoadObjectivesFilter()
@@ -329,29 +394,16 @@ namespace SRFROWCA.ClusterLead
             ddlObjective.DataSource = GetObjectives();
             ddlObjective.DataBind();
         }
-         
 
 
-        private DataTable GetClusters()
-        {
-            int emgId = RC.SelectedEmergencyId;
-            if (emgId == 0)
-            {
-                emgId = 1;
-            }
-            return DBContext.GetData("GetClusters", new object[] { (int)RC.SelectedSiteLanguageId, emgId });
-        }
+
+
 
         private DataTable GetActivities()
         {
             int? emergencyClusterId = ddlCluster.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlCluster.SelectedValue);
             int? emergencyObjectiveId = ddlObjective.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlObjective.SelectedValue);
-            int? emergencyLocationId = null;
-            if (UserInfo.EmergencyCountry > 0)
-            {
-                emergencyLocationId = UserInfo.EmergencyCountry;
-            }
-
+            int? emergencyLocationId = ddlCountry.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
             string search = string.IsNullOrEmpty(txtActivityName.Text) ? null : txtActivityName.Text;
 
             return DBContext.GetData("GetAllActivitiesNew", new object[] { emergencyLocationId, emergencyClusterId, emergencyObjectiveId, search, (int)RC.SelectedSiteLanguageId });
@@ -359,7 +411,7 @@ namespace SRFROWCA.ClusterLead
 
         private DataTable GetObjectives()
         {
-            return DBContext.GetData("GetEmergencyObjectives", new object[] { (int)RC.SelectedSiteLanguageId, RC.SelectedEmergencyId });
+            return DBContext.GetData("GetEmergencyObjectives", new object[] { (int)RC.SelectedSiteLanguageId, RC.EmergencySahel2015 });
         }
 
 

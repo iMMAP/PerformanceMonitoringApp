@@ -65,7 +65,7 @@ namespace SRFROWCA.LeadPages
 
         private void PopulateObjective()
         {
-            UI.FillObjectives(ddlObjective);
+            UI.FillObjectives(ddlObjective, RC.SelectedEmergencyId);
 
             ListItem item = new ListItem("Select Objective", "0");
             ddlObjective.Items.Insert(0, item);

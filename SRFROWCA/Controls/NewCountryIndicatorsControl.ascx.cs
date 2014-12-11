@@ -26,11 +26,18 @@ namespace SRFROWCA.Controls
         {
             string indEn = string.IsNullOrEmpty(txtInd1Eng.Text.Trim()) ? null : txtInd1Eng.Text.Trim();
             string indFr = string.IsNullOrEmpty(txtInd1Fr.Text.Trim()) ? null : txtInd1Fr.Text.Trim();
-            int target = Convert.ToInt32(txtTarget.Text.Trim());
+            int? target = !string.IsNullOrEmpty(txtTarget.Text.Trim()) ? Convert.ToInt32(txtTarget.Text.Trim()) : (int?)null;
             int unitId = RC.GetSelectedIntVal(ddlUnits);
             Guid userId = RC.GetCurrentUserId;
 
-            DBContext.Add("InsertClusterIndicator", new object[] { indEn, indFr, target, unitId, countryId, clusterId, RC.GetCurrentUserId, DBNull.Value });
+            if (countryId == 11)
+            {
+                DBContext.Add("InsertClusterIndicatorSahel", new object[] { indEn, indFr, target, unitId, countryId, clusterId, RC.GetCurrentUserId, DBNull.Value });
+            }
+            else
+            {
+                DBContext.Add("InsertClusterIndicator", new object[] { indEn, indFr, target, unitId, countryId, clusterId, RC.GetCurrentUserId, DBNull.Value });
+            }
         }
 
         private void LoadCombos()

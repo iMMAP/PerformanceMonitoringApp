@@ -74,8 +74,12 @@ namespace SRFROWCA.ClusterLead
             if (UserInfo.EmergencyCountry > 0)
             {
                 ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
-                ddlCountry.Enabled = false;
-                ddlCountry.BackColor = Color.LightGray;
+
+                if (!RC.IsRegionalClusterLead(this.User))
+                {
+                    ddlCountry.Enabled = false;
+                    ddlCountry.BackColor = Color.LightGray;
+                }
             }
 
             if (UserInfo.EmergencyCluster > 0)
@@ -170,7 +174,7 @@ namespace SRFROWCA.ClusterLead
             string tableScript = "";
             if (!string.IsNullOrEmpty(excelConString) && sheets.Length > 0)
             {
-                dt = FU.ReadDataInDataTable(excelConString, sheets[0], dt);
+                dt = FU.ReadDataInDataTable(excelConString, "Framework$", dt);
                 tableScript = CreateTableScript(dt);
             }
 

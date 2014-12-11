@@ -72,7 +72,15 @@ namespace SRFROWCA.OPS
 
         private string GetXMLOfProjectData(int projectId, int year)
         {
-            DataTable dt = DBContext.GetData("GetOPSProjectData", new object[] { projectId});
+            DataTable dt = new DataTable();
+            if (year == 2015)
+            {
+                dt = DBContext.GetData("GetOPSProjectData2", new object[] { projectId });
+            }
+            else
+            {
+                dt = DBContext.GetData("GetOPSProjectData", new object[] { projectId });
+            }
 
             XDocument doc = new XDocument();
             XElement logFrameValues = new XElement("ProjectActivities");

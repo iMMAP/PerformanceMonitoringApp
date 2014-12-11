@@ -75,7 +75,7 @@ namespace SRFROWCA.Pages
 
         private void PopulateObjectives()
         {
-            UI.FillObjectives(cblObjectives, true);
+            UI.FillObjectives(cblObjectives, true, RC.SelectedEmergencyId);
             ObjPrToolTip.ObjectivesToolTip(cblObjectives);
         }
 

@@ -79,7 +79,7 @@ namespace SRFROWCA.Reports
 
         private void PopulateObjectives()
         {
-            UI.FillObjectives(ddlObjectives, true);
+            UI.FillObjectives(ddlObjectives, true, RC.SelectedEmergencyId);
             ListItem item = new ListItem("All", "0");
             ddlObjectives.Items.Insert(0, item);
         }

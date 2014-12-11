@@ -129,34 +129,35 @@ namespace SRFROWCA.Common
             return DBContext.GetData("GetAllClusters", new object[] { RC.SelectedSiteLanguageId });
         }
 
-        internal static object GetEmergencyClusters(int emergencyId)
+        internal static DataTable GetEmergencyClusters(int emergencyId)
         {
-            //return DBContext.GetData("GetEmergencyClusters", new object[] { emergencyId, RC.SelectedSiteLanguageId });
-            using (ORSEntities db = new ORSEntities())
-            {
-                return(
-                            from ec in db.EmergencyClusters
-                            join cl in db.Clusters on ec.ClusterId equals cl.ClusterId
-                            join em in db.Emergencies on ec.EmergencyId equals em.EmergencyId
-                            where ec.EmergencyId == emergencyId
-                            && cl.SiteLanguageId == SelectedSiteLanguageId
-                            && em.SiteLanguageId == SelectedSiteLanguageId
-                            select new
-                            {
-                                ec.EmergencyClusterId,
-                                cl.ClusterName
-                            }
-                    ).ToList();
-            }
+            return DBContext.GetData("GetEmergencyClusters", new object[] { emergencyId, RC.SelectedSiteLanguageId });
+            ////return DBContext.GetData("GetEmergencyClusters", new object[] { emergencyId, RC.SelectedSiteLanguageId });
+            //using (ORSEntities db = new ORSEntities())
+            //{
+            //    return(
+            //                from ec in db.EmergencyClusters
+            //                join cl in db.Clusters on ec.ClusterId equals cl.ClusterId
+            //                join em in db.Emergencies on ec.EmergencyId equals em.EmergencyId
+            //                where ec.EmergencyId == emergencyId
+            //                && cl.SiteLanguageId == SelectedSiteLanguageId
+            //                && em.SiteLanguageId == SelectedSiteLanguageId
+            //                select new
+            //                {
+            //                    ec.EmergencyClusterId,
+            //                    cl.ClusterName
+            //                }
+            //        ).ToList();
+            //}
         }
 
         #endregion
 
         #region Logframe
 
-        internal static DataTable GetObjectives()
+        internal static DataTable GetObjectives(int emergencyId)
         {
-            return DBContext.GetData("GetObjectives", new object[] { SelectedSiteLanguageId, RC.EmergencyEbola });
+            return DBContext.GetData("GetObjectives", new object[] { SelectedSiteLanguageId, emergencyId });
         }
 
         internal static DataTable GetEmergencyObjectives(int emergencyId)

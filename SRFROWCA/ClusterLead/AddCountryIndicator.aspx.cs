@@ -17,13 +17,11 @@ namespace SRFROWCA.ClusterLead
         public bool applyFilter = false;
         public string countryId = string.Empty;
         public string clusterId = string.Empty;
-        public string displayNone = string.Empty;
 
         protected void Page_PreLoad(object sender, EventArgs e)
         {
-            if (RC.IsClusterLead(this.User))
+            if (RC.IsClusterLead(this.User) || RC.IsRegionalClusterLead(this.User))
             {
-                displayNone = "display:none";
                 countryId = Convert.ToString(UserInfo.EmergencyCountry);
                 clusterId = Convert.ToString(UserInfo.EmergencyCluster);
 
@@ -39,9 +37,6 @@ namespace SRFROWCA.ClusterLead
             //if (applyFilter)
             {
                 string control = Utils.GetPostBackControlId(this);
-
-                //if (control == "ddlCountry" || control == "ddlCluster")
-                //    IndControlId = maxCount;
 
                 if ((applyFilter && IndControlId <= maxCount && control == "btnAddIndicatorControl")
                     || control == "btnAddIndicatorControl")
@@ -71,7 +66,8 @@ namespace SRFROWCA.ClusterLead
                     AddIndicatorControl(i);
             }
 
-            ShowHideControls();
+            DisableDropDowns();
+            DisableRequiredFieldValidator();
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -79,8 +75,8 @@ namespace SRFROWCA.ClusterLead
             if (!IsPostBack)
             {
                 LoadCombos();
-                ShowHideControls();
-                //PopulateObjective();
+                DisableDropDowns();
+                
 
                 if (applyFilter)
                     SetMaxCount();
@@ -90,42 +86,42 @@ namespace SRFROWCA.ClusterLead
                     AddIndicatorControl(0);
                     IndControlId = 1;
                 }
+
+                DisableRequiredFieldValidator();
             }
         }
 
-        private void ShowHideControls()
+        private void SetComboValues()
         {
+            if (RC.IsClusterLead(this.User) || RC.IsRegionalClusterLead(this.User))
+            {
+                ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
+                ddlCluster.SelectedValue = UserInfo.EmergencyCluster.ToString();
+            }
+
             if (RC.IsCountryAdmin(this.User))
             {
-                lblCountry.Visible =
-                    ddlCountry.Visible = false;
-
-                ddlCountry.SelectedValue = Convert.ToString(UserInfo.EmergencyCountry);
+                ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
             }
-            else if (RC.IsClusterLead(this.User))
-            {
-                lblCountry.Visible =
-                    ddlCountry.Visible =
-                        ddlCluster.Visible =
-                            lblCluster.Visible = false;
+        }
 
-                ddlCountry.SelectedValue = Convert.ToString(UserInfo.EmergencyCountry);
-                ddlCluster.SelectedValue = Convert.ToString(UserInfo.EmergencyCluster);
+        private void DisableDropDowns()
+        {
+            if (RC.IsClusterLead(this.User) || RC.IsRegionalClusterLead(this.User))
+            {
+                RC.EnableDisableControls(ddlCluster, false);
+                RC.EnableDisableControls(ddlCountry, false);
+            }
+
+            if (RC.IsCountryAdmin(this.User))
+            {
+                RC.EnableDisableControls(ddlCountry, false);
             }
         }
 
         internal override void BindGridData()
         {
-            //PopulateObjective();
             LoadCombos();
-        }
-
-        private void PopulateObjective()
-        {
-            LoadCombos();
-
-            //ListItem item = new ListItem("--- Select Objective ---", "0");
-            //ddlObjective.Items.Insert(0, item);
         }
 
         private void LoadCombos()
@@ -136,6 +132,8 @@ namespace SRFROWCA.ClusterLead
 
             ddlCluster.Items.Insert(0, new ListItem("--- Select Cluster ---", "-1"));
             ddlCountry.Items.Insert(0, new ListItem("--- Select Country ---", "-1"));
+
+            SetComboValues();
         }
 
         public int IndControlId
@@ -177,9 +175,7 @@ namespace SRFROWCA.ClusterLead
         {
             foreach (Control ctl in pnlIndicaotrs.Controls)
             {
-                if (ctl != null
-                    && ctl.ID != null
-                    && ctl.ID.Contains("countryIndicatorControlId"))
+                if (ctl != null && ctl.ID != null && ctl.ID.Contains("countryIndicatorControlId"))
                 {
                     NewCountryIndicatorsControl indControl = ctl as NewCountryIndicatorsControl;
 
@@ -239,7 +235,34 @@ namespace SRFROWCA.ClusterLead
 
         protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //SetMaxCount();
+           // DisableRequiredFieldValidator();
+        }
+
+        private void DisableRequiredFieldValidator()
+        {
+            int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
+            if (emgLocationId > 0)
+            {
+                foreach (Control ctl in pnlIndicaotrs.Controls)
+                {
+                    if (ctl != null && ctl.ID != null && ctl.ID.Contains("countryIndicatorControlId"))
+                    {
+                        NewCountryIndicatorsControl indControl = ctl as NewCountryIndicatorsControl;
+
+                        if (indControl != null)
+                        {
+                            if (emgLocationId == 11)
+                            {
+                                indControl.rfvtxtTarget.Enabled = false;
+                            }
+                            else
+                            {
+                                indControl.rfvtxtTarget.Enabled = true;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         protected void ddlCluster_SelectedIndexChanged(object sender, EventArgs e)

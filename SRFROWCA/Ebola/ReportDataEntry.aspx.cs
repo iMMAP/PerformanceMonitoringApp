@@ -37,6 +37,7 @@ namespace SRFROWCA.Ebola
 
             if (!IsPostBack)
             {
+                UserInfo.UserProfileInfo(RC.EmergencyEbola);
                 PopulateLocations();
                 PopulateYears();
                 PopulateMonths();
@@ -345,7 +346,7 @@ namespace SRFROWCA.Ebola
 
         private void PopulateObjectives()
         {
-            UI.FillObjectives(cblObjectives, true);
+            UI.FillObjectives(cblObjectives, true, RC.EmergencyEbola);
         }
 
         private void PopulatePriorities()

@@ -13,42 +13,6 @@ namespace SRFROWCA.OPS {
     public partial class OPSDataEntry {
         
         /// <summary>
-        /// lzeLgndStrObjs control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize lzeLgndStrObjs;
-        
-        /// <summary>
-        /// cblObjectives control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList cblObjectives;
-        
-        /// <summary>
-        /// lzeLgndHumPriorities control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize lzeLgndHumPriorities;
-        
-        /// <summary>
-        /// cblPriorities control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList cblPriorities;
-        
-        /// <summary>
         /// locClusterCaption control.
         /// </summary>
         /// <remarks>

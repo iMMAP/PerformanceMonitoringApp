@@ -173,7 +173,7 @@
 
                                             <ItemStyle CssClass="hidden"></ItemStyle>
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="ActivityName" HeaderText="Activities" ItemStyle-CssClass="testact"
+                                        <asp:BoundField DataField="ActivityName" HeaderText="Pillars" ItemStyle-CssClass="testact"
                                             SortExpression="ActivityName">
                                             <ItemStyle CssClass="testact"></ItemStyle>
                                         </asp:BoundField>

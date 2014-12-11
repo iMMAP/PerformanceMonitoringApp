@@ -103,7 +103,7 @@ namespace SRFROWCA.ClusterLead
 
         private void PopulateObjective()
         {
-            UI.FillObjectives(ddlObjective);
+            //UI.FillObjectives(ddlObjective);
             ddlObjective.DataSource = DBContext.GetData("GetEmergencyObjectives", new object[] {RC.SelectedSiteLanguageId, RC.EmergencySahel2015});
             ddlObjective.DataTextField = "Objective";
             ddlObjective.DataValueField = "EmergencyObjectiveId";

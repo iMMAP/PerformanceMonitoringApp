@@ -26,7 +26,7 @@ namespace SRFROWCA.ClusterLead
 
         private void PopulateObjectives()
         {
-            UI.FillObjectives(rbObjectives);
+            UI.FillObjectives(rbObjectives, RC.SelectedEmergencyId);
         }
 
         private void PopulatePriorities()

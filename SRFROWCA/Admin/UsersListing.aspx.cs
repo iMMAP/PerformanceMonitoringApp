@@ -58,7 +58,7 @@ namespace SRFROWCA.Admin
             int? countryId = null;
             if (RC.IsCountryAdmin(User))
             {
-                countryId = UserInfo.EmergencyCountry;
+                countryId = UserInfo.Country;
             }
 
             return new object[] { userId, userName, email, isApproved, isLockedOut, orgName, locationName, userType, startDate, endDate, countryId,pageSize, pageIndex };

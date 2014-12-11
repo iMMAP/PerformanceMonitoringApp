@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Linq;
-using System.Threading;
 using System.Transactions;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -16,17 +15,6 @@ namespace SRFROWCA.OPS
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //string languageChange = "";
-            //if (Session["SiteChanged"] != null)
-            //{
-            //    languageChange = Session["SiteChanged"].ToString();
-            //}
-
-            //if (!string.IsNullOrEmpty(languageChange))
-            //{
-            //    Session["SiteChanged"] = null;
-            //}
-
             string languageChange = "";
             if (Session["SiteChanged"] != null)
             {
@@ -35,11 +23,6 @@ namespace SRFROWCA.OPS
 
             if (!IsPostBack)
             {
-                //if (SiteLanguageId == 0)
-                //{
-                //    SiteLanguageId = 1;
-                //}
-
                 SetOPSIds();
 
                 if (OPSProjectId > 0 && !string.IsNullOrEmpty(OPSClusterName) && !string.IsNullOrEmpty(OPSCountryName))
@@ -51,8 +34,6 @@ namespace SRFROWCA.OPS
 
                 PopulateDropDowns();
             }
-
-            PopulateToolTips();
 
             UpdateClusterName();
             lblCluster.Text = OPSClusterNameLabel;
@@ -333,8 +314,7 @@ namespace SRFROWCA.OPS
             DataTable dt = new DataTable();
             if (!string.IsNullOrEmpty(OPSCountryName))
             {
-                int isOPSEmergency = 1;
-                dt = DBContext.GetData("GetOPSEmergencyId", new object[] { OPSCountryName, isOPSEmergency, RC.SelectedSiteLanguageId });
+                dt = DBContext.GetData("GetOPSEmergencyId", new object[] { OPSCountryName, RC.EmergencySahel2015, RC.SelectedSiteLanguageId });
             }
 
             if (dt.Rows.Count > 0)
@@ -425,29 +405,12 @@ namespace SRFROWCA.OPS
         {
             LocationId = GetLocationId();
             PopulateLocations(LocationId);
-            PopulateObjectives();
-            PopulatePriorities();
-        }
-
-        private void PopulateToolTips()
-        {
-            ObjPrToolTip.ObjectivesToolTip(cblObjectives);
-            ObjPrToolTip.PrioritiesToolTip(cblPriorities);
         }
 
         private int GetLocationId()
         {
             DataTable dt = DBContext.GetData("GetLocationIdOnName", new object[] { OPSCountryName });
             return dt.Rows.Count > 0 ? Convert.ToInt32(dt.Rows[0]["LocationId"]) : 0;
-        }
-
-        private void PopulateObjectives()
-        {
-            UI.FillObjectives(cblObjectives, true);
-        }
-        private void PopulatePriorities()
-        {
-            UI.FillPriorities(cblPriorities);
         }
 
         // In this method we will get the postback control.
@@ -507,7 +470,6 @@ namespace SRFROWCA.OPS
         {
             DataTable dt = GetActivities();
             GetReport(dt);
-            PopulateToolTips();
         }
 
         private string GetSelectedItems(object sender)
@@ -559,13 +521,18 @@ namespace SRFROWCA.OPS
         {
             string locationIds = GetSelectedItems(cbAdmin1Locaitons);
             string locIdsNotIncluded = GetNotSelectedItems(cbAdmin1Locaitons);
-            int yearId = 10; //2014
-            DataTable dt = DBContext.GetData("GetOPSActivities", new object[] { OPSLocationEmergencyId, locationIds, locIdsNotIncluded, 
+            int yearId = 11; //2015
+            DataTable dt = DBContext.GetData("GetOPSActivities2", new object[] { OPSLocationEmergencyId, locationIds, locIdsNotIncluded, 
                                                                             OPSProjectId, OPSEmergencyClusterId, RC.SelectedSiteLanguageId, OPSCountryName, yearId });
             if (dt.Rows.Count <= 0 && string.IsNullOrEmpty(locationIds))
             {
                 locaNoTargetMessage.Visible = true;
                 //ShowMessage("Please click on locations button and add locations to select/edit your activities/Indicators.", RC.NotificationType.Error, true, 5000);
+            }
+            else if (dt.Rows.Count <= 0 && !string.IsNullOrEmpty(locationIds))
+            {
+                //locaNoTargetMessage.Visible = true;
+                ShowMessage("No Framework (Activities) Available For Your Cluster! Please Contact Cluster Coordinator Of Your Country.", RC.NotificationType.Error, true, 7000);
             }
             else
             {
@@ -737,7 +704,7 @@ namespace SRFROWCA.OPS
 
         private void SaveReportMainInfo()
         {
-            int yearId = 10; //2014
+            int yearId = 11; //2015
             OPSReportId = DBContext.Add("InsertOPSReport", new object[] { OPSLocationEmergencyId, OPSProjectId, OPSEmergencyClusterId, OPSUserId, RC.SelectedSiteLanguageId, yearId, DBNull.Value });
         }
 
@@ -915,7 +882,7 @@ namespace SRFROWCA.OPS
         {
             Session["dtOPSActivities"] = dt;
 
-            int yearId = 10; //2014
+            int yearId = 11; //2015
             DataTable dtReport = DBContext.GetData("GetOPSReportId", new object[] { OPSLocationEmergencyId, OPSProjectId, OPSEmergencyClusterId, yearId });
             if (dtReport.Rows.Count > 0)
             {

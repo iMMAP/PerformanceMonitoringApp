@@ -86,9 +86,9 @@ namespace SRFROWCA.Common
             ctl.DataBind();
         }
 
-        internal static void FillObjectives(ListControl control, bool useShort)
+        internal static void FillObjectives(ListControl control, bool useShort, int emergencyId)
         {
-            DataTable dt = RC.GetObjectives();
+            DataTable dt = RC.GetObjectives(emergencyId);
             FillObjectives(control, dt, true);
         }
 
@@ -114,9 +114,9 @@ namespace SRFROWCA.Common
             control.DataBind();
         }
 
-        internal static void FillObjectives(ListControl control)
+        internal static void FillObjectives(ListControl control, int emergencyId)
         {
-            DataTable dt = RC.GetObjectives();
+            DataTable dt = RC.GetObjectives(emergencyId);
             FillObjectives(control, dt, false);
         }
 

@@ -362,7 +362,7 @@
                                         </ItemTemplate>
                                         <ItemStyle Wrap="False"></ItemStyle>
                                     </asp:TemplateField>
-                                    <asp:TemplateField ItemStyle-Width="260px" HeaderText="Activities" meta:resourcekey="TemplateFieldResource3">
+                                    <asp:TemplateField ItemStyle-Width="260px" HeaderText="Pillars" meta:resourcekey="TemplateFieldResource3">
                                         <ItemTemplate>
                                             <div style="width: 260px; word-wrap: break-word;">
                                                 <%# Eval("ActivityName")%>

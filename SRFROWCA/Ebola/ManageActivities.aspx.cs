@@ -69,7 +69,7 @@ namespace SRFROWCA.Ebola
 
         private void PopulateObjectives()
         {
-            UI.FillObjectives(cblObjectives, true);
+            UI.FillObjectives(cblObjectives, true, RC.EmergencyEbola);
             ObjPrToolTip.ObjectivesToolTip(cblObjectives);
         }
 

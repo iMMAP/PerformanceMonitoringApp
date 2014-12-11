@@ -118,7 +118,7 @@
         <div class="table-responsive">
             <div style="overflow-x: auto; width: 100%">
                 <cc2:PagingGridView ID="gvClusterIndicators" Width="100%" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" AllowSorting="True" DataKeyNames="SiteLanguageId"
-                    OnRowDataBound="gvClusterIndicators_RowDataBound" PageSize="20" OnSorting="gvClusterIndicators_Sorting" ShowHeader="true" OnRowCommand="gvClusterIndicators_RowCommand" CssClass=" table-striped table-bordered table-hover" meta:resourcekey="gvClusterIndicatorsResource1">
+                    OnRowDataBound="gvClusterIndicators_RowDataBound" PageSize="50" OnPageIndexChanging="gvClusterindicators_PageIndexChanging" OnSorting="gvClusterIndicators_Sorting" ShowHeader="true" OnRowCommand="gvClusterIndicators_RowCommand" CssClass=" table-striped table-bordered table-hover" meta:resourcekey="gvClusterIndicatorsResource1">
                     <EmptyDataTemplate>
                         Your filter criteria does not match any record in database!
                     </EmptyDataTemplate>

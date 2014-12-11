@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Data;
+using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
 using SRFROWCA.Common;
-using System.Linq;
-using System.Web.UI.HtmlControls;
-using BusinessLogic;
 
 namespace SRFROWCA.Ebola
 {
@@ -39,7 +36,6 @@ namespace SRFROWCA.Ebola
         {
             SetUserName();
             HideAllAuthenticatedMenues();
-            LoadNotifications();
 
             if (HttpContext.Current.User.Identity.IsAuthenticated)
             {
@@ -77,19 +73,6 @@ namespace SRFROWCA.Ebola
             ActiveMenueItem();
         }
 
-        //private void SetCurrentEmergency()
-        //{
-        //    try
-        //    {
-        //        DataTable dtEmergencies = (DataTable)rptEmergencies.DataSource;
-        //        if (dtEmergencies.Rows.Count > 0)
-        //        {
-        //            CurrentEmergency = Convert.ToString(dtEmergencies.Select("ID='" + RC.SelectedEmergencyId + "'")[0]["Emergency"]);
-        //        }
-        //    }
-        //    catch { }
-        //}
-
         private void SetUserName()
         {
             if (HttpContext.Current.User.Identity.IsAuthenticated)
@@ -102,71 +85,6 @@ namespace SRFROWCA.Ebola
                         HeadLoginName.FormatString = user.FullName;
                     }
                 }
-            }
-        }
-
-        //private void LoadEmergencies()
-        //{
-        //    DataTable dtEmergencies = DBContext.GetData("uspEmergencies", new object[] { RC.SelectedSiteLanguageId });
-
-        //    if (dtEmergencies.Rows.Count > 0)
-        //    {
-        //        rptEmergencies.DataSource = dtEmergencies.Select("IsSRP=1").CopyToDataTable();
-        //        rptEmergencies.DataBind();
-        //    }
-        //}
-
-        private void LoadNotifications()
-        {
-            try
-            {
-                using (ORSEntities db = new ORSEntities())
-                {
-                    int count = db.Notifications.Where(x => x.EmergencyLocationId == UserInfo.EmergencyCountry
-                                                                            && x.EmergencyClusterId == UserInfo.EmergencyCluster
-                                                                            && x.IsRead == false).Count();
-                    lblNumberOfNotifications.Text = count.ToString();
-
-                    rptNotifications.DataSource = db.Notifications.Where(x => x.EmergencyLocationId == UserInfo.EmergencyCountry
-                                                                            && x.EmergencyClusterId == UserInfo.EmergencyCluster
-                                                                            && x.IsRead == false)
-                                                                  .Select(y => new { y.Notification1, y.PageURL, y.NotificationId });
-                    rptNotifications.DataBind();
-                }
-            }
-            catch (Exception ex)
-            {
-                string s = ex.ToString();
-            }
-        }
-
-        protected void btnLinkNotifications_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void btnEmergency_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void rptNotification_ItemDataBound(object sender, RepeaterItemEventArgs e)
-        {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-            {
-                LinkButton lnkButton = e.Item.FindControl("btnLinkNotifications") as LinkButton;
-                if (lnkButton != null)
-                {
-                    lnkButton.Click += btnLinkNotifications_Click;
-                }
-            }
-        }
-
-        protected void rptNotifications_ItemCommand(object sender, RepeaterCommandEventArgs e)
-        {
-            if (e.CommandName == "GoToNotification")
-            {
-                string i = e.CommandArgument.ToString();
             }
         }
 

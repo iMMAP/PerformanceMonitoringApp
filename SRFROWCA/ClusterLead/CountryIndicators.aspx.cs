@@ -22,10 +22,6 @@ namespace SRFROWCA.ClusterLead
         public string ClusterID = null;
 
 
-        protected void Page_PreRender(object sender, EventArgs e)
-        {
-            //string s = Master.SelectedValue;
-        }
         protected void Page_PreLoad(object sender, EventArgs e)
         {
             //if (!string.IsNullOrEmpty(Request.QueryString["delete"])
@@ -33,8 +29,8 @@ namespace SRFROWCA.ClusterLead
             //    ShowMessage("Indicator deleted successfully!");
             //else if (!string.IsNullOrEmpty(Request.QueryString["delete"]))
             //    ShowMessage("Error: Indicator cannot be deleted because it is being used!", RC.NotificationType.Error, true, 1000);
-
-            if (RC.IsClusterLead(this.User))
+            UserInfo.UserProfileInfo(RC.EmergencySahel2015);
+            if (RC.IsClusterLead(this.User) || RC.IsRegionalClusterLead(this.User))
             {
                 CountryID = Convert.ToString(UserInfo.EmergencyCountry);
                 ClusterID = Convert.ToString(UserInfo.EmergencyCluster);
@@ -59,7 +55,7 @@ namespace SRFROWCA.ClusterLead
                 btnAddIndicator.Enabled = true;
             }
 
-            if (RC.IsAdmin(this.User))
+            if (RC.IsAdmin(this.User) || RC.IsRegionalClusterLead(this.User))
             {
                 cbIncludeRegional.Visible = false;
             }
@@ -84,6 +80,11 @@ namespace SRFROWCA.ClusterLead
                 RC.EnableDisableControls(ddlCountry, false);
             }
 
+            if (RC.IsRegionalClusterLead(this.User))
+            {
+                RC.EnableDisableControls(ddlCluster, false);
+            }
+
             if (RC.IsCountryAdmin(this.User))
             {
                 RC.EnableDisableControls(ddlCountry, false);
@@ -104,7 +105,7 @@ namespace SRFROWCA.ClusterLead
 
         private void SetComboValues()
         {
-            if (RC.IsClusterLead(this.User))
+            if (RC.IsClusterLead(this.User) || RC.IsRegionalClusterLead(this.User))
             {
                 ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
                 ddlCluster.SelectedValue = UserInfo.EmergencyCluster.ToString();
@@ -128,11 +129,11 @@ namespace SRFROWCA.ClusterLead
             int? countryID = null;
             int? clusterID = null;
 
-            if (!string.IsNullOrEmpty(CountryID))
-                countryID = Convert.ToInt32(CountryID);
+            //if (!string.IsNullOrEmpty(CountryID))
+            //    countryID = Convert.ToInt32(CountryID);
 
-            if (!string.IsNullOrEmpty(ClusterID))
-                clusterID = Convert.ToInt32(ClusterID);
+            //if (!string.IsNullOrEmpty(ClusterID))
+            //    clusterID = Convert.ToInt32(ClusterID);
 
             if (!string.IsNullOrEmpty(txtIndicatorName.Text.Trim()))
                 indicator = txtIndicatorName.Text;
@@ -305,6 +306,12 @@ namespace SRFROWCA.ClusterLead
             return sortDirection;
         }
 
+        protected void gvClusterindicators_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvClusterIndicators.PageIndex = e.NewPageIndex;
+            LoadClusterIndicators();
+        }
+
         protected void gvClusterIndicators_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -344,6 +351,13 @@ namespace SRFROWCA.ClusterLead
 
                 string isRegional = e.Row.Cells[1].Text;
                 if ((RC.IsCountryAdmin(this.User) || RC.IsClusterLead(this.User)) && isRegional == "True")
+                {
+                    btnEdit.Visible = false;
+                    btnDelete.Visible = false;
+                }
+
+                string isCountry = e.Row.Cells[2].Text;
+                if (RC.IsRegionalClusterLead(this.User) && isCountry == "True")
                 {
                     btnEdit.Visible = false;
                     btnDelete.Visible = false;
@@ -393,7 +407,11 @@ namespace SRFROWCA.ClusterLead
                         txtIndicatorEng.Text = lblIndAlternate.Text;
                 }
 
-                txtTarget.Text = row.Cells[8].Text;
+                string target = row.Cells[8].Text;
+                if (!string.IsNullOrEmpty(target) && target != "&nbsp;")
+                {
+                    txtTarget.Text = target;
+                }
 
                 if (lblUnitID != null)
                     ddlUnits.SelectedValue = lblUnitID.Text;
@@ -458,7 +476,7 @@ namespace SRFROWCA.ClusterLead
             string indicatorEng = txtIndicatorEng.Text.Trim();
             string indicatorFr = txtIndicatorFr.Text.Trim();
             int charIndex = txtTarget.Text.Trim().IndexOf('.');
-            int target = Convert.ToInt32(txtTarget.Text.Trim());
+            int? target = !string.IsNullOrEmpty(txtTarget.Text.Trim()) ? Convert.ToInt32(txtTarget.Text.Trim()) : (int?)null;
             int unitId = RC.GetSelectedIntVal(ddlUnits);
             int clusterIndicatorId = 0;
             int.TryParse(hfClusterIndicatorID.Value, out clusterIndicatorId);

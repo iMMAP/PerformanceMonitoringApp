@@ -22,7 +22,7 @@ namespace SRFROWCA.ClusterLead
 
             PopulateControls();
             LoadProjects();
-            
+
             if (RC.IsCountryAdmin(User) || RC.IsOCHAStaff(User) || RC.IsRegionalClusterLead(User))
             {
                 PopulateClusters();
@@ -33,7 +33,7 @@ namespace SRFROWCA.ClusterLead
                     ddlCountry.Visible = true;
                 }
             }
-            else 
+            else
             {
                 ddlClusters.Visible = false;
                 divClusters.Visible = false;
@@ -79,7 +79,7 @@ namespace SRFROWCA.ClusterLead
                 int.TryParse(ddlCountry.SelectedValue, out tempVal);
             }
 
-            int? countryID = tempVal > 0 ? tempVal : UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry: (int?)null;
+            int? countryID = tempVal > 0 ? tempVal : UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
 
             DataTable dt = RC.GetProjectsOrganizations(UserInfo.EmergencyCountry, clusterId);
             UI.FillOrganizations(ddlOrg, dt);
@@ -193,7 +193,7 @@ namespace SRFROWCA.ClusterLead
             int? cbReported = cblReportingStatus.SelectedIndex > -1 ? RC.GetSelectedIntVal(cblReportingStatus) : (int?)null;
             int? cbFunded = cblFundingStatus.SelectedIndex > -1 ? RC.GetSelectedIntVal(cblFundingStatus) : (int?)null;
 
-            DataTable dtResults = DBContext.GetData("uspGetReports", new object[] { projectId, null, null , null, RC.GetCurrentUserId, RC.SelectedSiteLanguageId,countryID, clusterId, orgId, admin1,cbFunded, cbReported,});
+            DataTable dtResults = DBContext.GetData("uspGetReports", new object[] { projectId, null, null, null, RC.GetCurrentUserId, RC.SelectedSiteLanguageId, countryID, clusterId, orgId, admin1, cbFunded, cbReported, });
 
             if (dtResults.Rows.Count > 0)
             {
@@ -312,8 +312,16 @@ namespace SRFROWCA.ClusterLead
 
         private void LoadProjects()
         {
-            gvProjects.DataSource = GetProjects();
-            gvProjects.DataBind();
+            if (RC.SelectedEmergencyId == 1)
+            {
+                gvProjects.DataSource = GetProjects();
+                gvProjects.DataBind();
+            }
+            else
+            {
+                gvProjects.DataSource = new DataTable();
+                gvProjects.DataBind();
+            }
         }
 
         private DataTable GetProjects()
@@ -349,7 +357,7 @@ namespace SRFROWCA.ClusterLead
             {
                 admin1 = (int?)null;
             }
-            
+
             int? cbReported = cblReportingStatus.SelectedIndex > -1 ? RC.GetSelectedIntVal(cblReportingStatus) : (int?)null;
             int? cbFunded = cblFundingStatus.SelectedIndex > -1 ? RC.GetSelectedIntVal(cblFundingStatus) : (int?)null;
             return DBContext.GetData("GetProjects", new object[] {countryID, clusterId,projCode, orgId, admin1, DBNull.Value, 

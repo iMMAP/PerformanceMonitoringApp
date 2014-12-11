@@ -119,7 +119,7 @@
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td>
-                                                                                        <span>Activities:</span>
+                                                                                        <span>Pillars:</span>
                                                                                     </td>
                                                                                     <td>
                                                                                         <cc:DropDownCheckBoxes ID="ddlActivities" runat="server" CssClass="ddlWidth" AutoPostBack="true"
@@ -319,7 +319,7 @@
                                 <%--<asp:BoundField DataField="Month" HeaderText="Month" SortExpression="Month" />--%>
                                 <asp:BoundField DataField="Objective" HeaderText="Objective" SortExpression="Objective" />
                                 <%--<asp:BoundField DataField="Priority" HeaderText="Priority" SortExpression="Priority" />--%>
-                                <asp:BoundField DataField="Activity" HeaderText="Activity" SortExpression="Activity" />
+                                <asp:BoundField DataField="Activity" HeaderText="Pillar" SortExpression="Activity" />
                                 <asp:BoundField DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator" />
                                 <asp:BoundField DataField="Accumulative" HeaderText="Accum" SortExpression="Accumulative"
                                     ItemStyle-HorizontalAlign="Right" />
