@@ -17,53 +17,16 @@ namespace SRFROWCA.ClusterLead
             if (!IsPostBack)
             {
                 PopulateDropDowns();
-                menueExportWord.HRef = string.Format("../Reports/DownloadReport.aspx?type=10&emgCountryId={0}&emgClusterId={1}", ddlCountry.SelectedValue, ddlCluster.SelectedValue);
-
-                if (ddlCountry.SelectedValue == "12")
-                {
-                    hlTemplate.NavigateUrl = "../Test/Burkina.xlsx";                    
-                }
-
-                if (ddlCountry.SelectedValue == "13")
-                {
-                    hlTemplate.NavigateUrl = "../Test/Cameroon.xlsx";
-                }
-
-                if (ddlCountry.SelectedValue == "14")
-                {
-                    hlTemplate.NavigateUrl = "../Test/Chad.xlsx";
-                }
-
-                if (ddlCountry.SelectedValue == "15")
-                {
-                    hlTemplate.NavigateUrl = "../Test/Gambia.xlsx";
-                }
-
-                if (ddlCountry.SelectedValue == "16")
-                {
-                    hlTemplate.NavigateUrl = "../Test/Mali.xlsx";
-                }
-
-                if (ddlCountry.SelectedValue == "17")
-                {
-                    hlTemplate.NavigateUrl = "../Test/Mauritania.xlsx";
-                }
-
-                if (ddlCountry.SelectedValue == "18")
-                {
-                    hlTemplate.NavigateUrl = "../Test/Niger.xlsx";
-                }
-
-                if (ddlCountry.SelectedValue == "19")
-                {
-                    hlTemplate.NavigateUrl = "../Test/Nigeria.xlsx";
-                }
-
-                if (ddlCountry.SelectedValue == "20")
-                {
-                    hlTemplate.NavigateUrl = "../Test/Senegal.xlsx";
-                }
+                SetImportTemplate();
+                SetExportFile();
             }
+        }
+
+        internal override void BindGridData()
+        {
+            PopulateDropDowns();
+            SetImportTemplate();
+            SetExportFile();
         }
 
         private void PopulateDropDowns()
@@ -74,92 +37,122 @@ namespace SRFROWCA.ClusterLead
             if (UserInfo.EmergencyCountry > 0)
             {
                 ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
+                ddlCountryExport.SelectedValue = UserInfo.EmergencyCountry.ToString();
+                ddlCountry.Enabled = false;
+                ddlCountry.BackColor = Color.LightGray;
 
                 if (!RC.IsRegionalClusterLead(this.User))
                 {
-                    ddlCountry.Enabled = false;
-                    ddlCountry.BackColor = Color.LightGray;
+                    ddlCountryExport.Enabled = false;
+                    ddlCountryExport.BackColor = Color.LightGray;
                 }
             }
 
             if (UserInfo.EmergencyCluster > 0)
             {
                 ddlCluster.SelectedValue = UserInfo.EmergencyCluster.ToString();
+                ddlClusterExport.SelectedValue = UserInfo.EmergencyCluster.ToString();
                 ddlCluster.Enabled = false;
                 ddlCluster.BackColor = Color.LightGray;
+                ddlClusterExport.Enabled = false;
+                ddlClusterExport.BackColor = Color.LightGray;
             }
         }
         private void LoadCountires()
         {
             UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
+            UI.FillEmergencyLocations(ddlCountryExport, RC.EmergencySahel2015);
+
             if (ddlCountry.Items.Count > 0)
             {
                 ListItem item = new ListItem("Select", "0");
                 ddlCountry.Items.Insert(0, item);
+                //ddlCountryExport.Items.Insert(0, item);
             }
         }
         private void LoadClusters()
         {
             UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
+            UI.FillEmergnecyClusters(ddlClusterExport, RC.EmergencySahel2015);
             if (ddlCluster.Items.Count > 0)
             {
                 ListItem item = new ListItem("Select", "0");
                 ddlCluster.Items.Insert(0, item);
+                //ddlClusterExport.Items.Insert(0, item);
             }
         }
 
-        protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
+        private void SetImportTemplate()
         {
-            menueExportWord.HRef = string.Format("../Reports/DownloadReport.aspx?type=10&emgCountryId={0}&emgClusterId={1}", ddlCountry.SelectedValue, ddlCluster.SelectedValue);
-            if (ddlCountry.SelectedValue == "12")
+            string countryId = ddlCountry.SelectedValue;
+            if (countryId == "12")
             {
                 hlTemplate.NavigateUrl = "../Test/Burkina.xlsx";
             }
 
-            if (ddlCountry.SelectedValue == "13")
+            if (countryId == "13")
             {
                 hlTemplate.NavigateUrl = "../Test/Cameroon.xlsx";
             }
 
-            if (ddlCountry.SelectedValue == "14")
+            if (countryId == "14")
             {
                 hlTemplate.NavigateUrl = "../Test/Chad.xlsx";
             }
 
-            if (ddlCountry.SelectedValue == "15")
+            if (countryId == "15")
             {
                 hlTemplate.NavigateUrl = "../Test/Gambia.xlsx";
             }
 
-            if (ddlCountry.SelectedValue == "16")
+            if (countryId == "16")
             {
                 hlTemplate.NavigateUrl = "../Test/Mali.xlsx";
             }
 
-            if (ddlCountry.SelectedValue == "17")
+            if (countryId == "17")
             {
                 hlTemplate.NavigateUrl = "../Test/Mauritania.xlsx";
             }
 
-            if (ddlCountry.SelectedValue == "18")
+            if (countryId == "18")
             {
                 hlTemplate.NavigateUrl = "../Test/Niger.xlsx";
             }
 
-            if (ddlCountry.SelectedValue == "19")
+            if (countryId == "19")
             {
                 hlTemplate.NavigateUrl = "../Test/Nigeria.xlsx";
             }
 
-            if (ddlCountry.SelectedValue == "20")
+            if (countryId == "20")
             {
                 hlTemplate.NavigateUrl = "../Test/Senegal.xlsx";
             }
         }
 
-        protected void ddlCluster_SelectedIndexChanged(object sender, EventArgs e)
+        private void SetExportFile()
         {
-            menueExportWord.HRef = string.Format("../Reports/DownloadReport.aspx?type=10&emgCountryId={0}&emgClusterId={1}", ddlCountry.SelectedValue, ddlCluster.SelectedValue);
+            string countryId = ddlCountryExport.SelectedValue;
+            string clusterId = ddlClusterExport.SelectedValue;
+            menueExportWord.HRef = string.Format("../Reports/DownloadReport.aspx?type=10&emgCountryId={0}&emgClusterId={1}", countryId, clusterId);
+            menueExportExcel.HRef = string.Format("../Reports/DownloadReport.aspx?type=11&emgCountryId={0}&emgClusterId={1}", countryId, clusterId);
+            menueExportPDF.HRef = string.Format("../Reports/DownloadReport.aspx?type=12&emgCountryId={0}&emgClusterId={1}", countryId, clusterId);
+        }
+
+        protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SetImportTemplate();
+        }
+
+        protected void ddlCountryExport_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SetExportFile();
+        }
+
+        protected void ddlClusterExport_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SetExportFile();
         }
 
         #region Upload

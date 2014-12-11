@@ -67,7 +67,7 @@
                         <div>
                             <label class="col-sm-3">Cluster: </label>
                             <div class="col-sm-9">
-                                <asp:DropDownList ID="ddlCluster" runat="server" CssClass="width-60" AutoPostBack="true" OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged"></asp:DropDownList>
+                                <asp:DropDownList ID="ddlCluster" runat="server" CssClass="width-60" ></asp:DropDownList>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Required"
                                             CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCluster"></asp:RequiredFieldValidator>
                             </div>
@@ -80,7 +80,7 @@
                                 <asp:Button ID="btnUpload" runat="server" Text="Upload" CssClass="btn btn-primary" OnClick="btnUpload_Click" />
                             </div>
                         </div>
-                       
+                       <hr />
                     </div>
                 </div>
             </div>
@@ -93,7 +93,21 @@
                             <asp:Localize ID="localUploadHeaderText" runat="server" Text="Export Framework"></asp:Localize>
                         </h3>
 
-                        <hr />
+                        <div>
+                            <label class="col-sm-3">Country: </label>
+                            <div class="col-sm-9">
+                                <asp:DropDownList ID="ddlCountryExport" runat="server" CssClass="width-60" AutoPostBack="true" OnSelectedIndexChanged="ddlCountryExport_SelectedIndexChanged"></asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="space-20"></div>
+                        <div>
+                            <label class="col-sm-3">Cluster: </label>
+                            <div class="col-sm-9">
+                                <asp:DropDownList ID="ddlClusterExport" runat="server" CssClass="width-60" AutoPostBack="true" OnSelectedIndexChanged="ddlClusterExport_SelectedIndexChanged"></asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Required"
+                                            CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlClusterExport"></asp:RequiredFieldValidator>
+                            </div>
+                        </div>
                         
                         <div>
                             
@@ -105,12 +119,12 @@
                                 </li>
                                  <li id="li1" runat="server">
                                     <div class="excel-icon" style="float:left;margin-right:5px;margin-top:2px;"></div>
-                                    <a href="../Reports/DownloadReport.aspx?type=11"><span class="menu-text"><asp:Localize ID="Localize1" runat="server" Text="Export to Excel" meta:resourcekey="localReportResource1"></asp:Localize>
+                                    <a href="../Reports/DownloadReport.aspx?type=11" runat="server" id="menueExportExcel"><span class="menu-text"><asp:Localize ID="Localize1" runat="server" Text="Export to Excel" meta:resourcekey="localReportResource1"></asp:Localize>
                                 </span></a>
                                 </li>
                                  <li id="li2" runat="server">
                                     <div class="pdf-icon" style="float:left;margin-right:5px;margin-top:2px;"></div>
-                                    <a href="../Reports/DownloadReport.aspx?type=12"><span class="menu-text"><asp:Localize ID="Localize2" runat="server" Text="Export to PDF" meta:resourcekey="localReportResource1"></asp:Localize>
+                                    <a href="../Reports/DownloadReport.aspx?type=12" runat="server" id="menueExportPDF"><span class="menu-text"><asp:Localize ID="Localize2" runat="server" Text="Export to PDF" meta:resourcekey="localReportResource1"></asp:Localize>
                                 </span></a>
                                 </li>
                             </ul>
