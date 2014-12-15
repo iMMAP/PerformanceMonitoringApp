@@ -53,7 +53,7 @@
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body>
+<body class="skin-2">
 
     <form runat="server">
         <asp:ScriptManager ID="masterScriptMgr" runat="server">
@@ -171,7 +171,7 @@
                             <ul class="submenu">
                                 <li id="liDefault" runat="server"><a href="<%=BaseURL %>/Default.aspx"><span class="menu-text">
 
-                                    <asp:Localize ID="localDashboardPerfMon" runat="server" Text="Performance Monitoring" meta:resourcekey="Localize1Resource1"></asp:Localize>
+                                    <asp:Localize ID="localDashboardPerfMon" runat="server" Text="Home"></asp:Localize>
                                 </span></a></li>
                                 <%--<li id="liReportingStatus" runat="server"><a href="<%=BaseURL %>/ReportingStatus.aspx"><i class="icon-list"></i><span class="menu-text">
                                     <asp:Localize ID="localDashboardRepStatus" runat="server" Text="Reporting Status" meta:resourcekey="localDashboardRepStatusResource1"></asp:Localize>
@@ -352,11 +352,11 @@
 
                                     <asp:Localize ID="Localize8" runat="server" Text="Output Indicators" meta:resourcekey="localCountryIndicatorsResource1"></asp:Localize>
                                 </span></a></li>
-                                <li id="liNewActivityListing" runat="server"><a href="<%=BaseURL %>/ClusterLead/ActivityListing.aspx"><span class="menu-text">
+                               <%-- <li id="liNewActivityListing" runat="server"><a href="<%=BaseURL %>/ClusterLead/ActivityListing.aspx"><span class="menu-text">
                                     <asp:Localize ID="Localize9" runat="server" Text="Cluster Activities" meta:resourcekey="localActivityResource1"></asp:Localize>
-                                </span></a></li>
+                                </span></a></li>--%>
                                 <li id="liNewIndicatorListing" runat="server"><a href="<%=BaseURL %>/ClusterLead/IndicatorListing.aspx"><span class="menu-text">
-                                    <asp:Localize ID="Localize10" runat="server" Text="Activity Indicators" meta:resourcekey="localIndicatorsResource1"></asp:Localize>
+                                    <asp:Localize ID="Localize10" runat="server" Text="Activity And Indicators" meta:resourcekey="localIndicatorsResource1"></asp:Localize>
                                 </span></a></li>
                                 <li id="liClusterFrameworkImport" runat="server"><a href="<%=BaseURL %>/ClusterLead/UploadSRP.aspx"><span class="menu-text">
                                     <asp:Localize ID="Localize13" runat="server" Text="Import/Export Framework"></asp:Localize>

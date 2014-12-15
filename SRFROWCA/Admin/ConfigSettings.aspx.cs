@@ -85,8 +85,8 @@ namespace SRFROWCA.Admin
 
         private void LoadCombos()
         {
-            UI.FillEmergencyLocations(ddlCountry, RC.SelectedEmergencyId);
-            UI.FillEmergnecyClusters(ddlCluster, RC.SelectedEmergencyId);
+            UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
+            UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
         }
 
         private void SetKeySettings()

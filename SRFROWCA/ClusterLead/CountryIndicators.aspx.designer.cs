@@ -157,6 +157,24 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.UpdatePanel uPanel1;
         
         /// <summary>
+        /// lblEditPopupHeading control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEditPopupHeading;
+        
+        /// <summary>
+        /// hfRegionalIndicator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfRegionalIndicator;
+        
+        /// <summary>
         /// txtIndicatorEng control.
         /// </summary>
         /// <remarks>

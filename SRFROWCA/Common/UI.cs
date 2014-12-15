@@ -218,7 +218,7 @@ namespace SRFROWCA.Common
         {
             ddl.DataValueField = "UnitId";
             ddl.DataTextField = "Unit";
-            DataTable dt = RC.GetAllUnits(RC.SelectedSiteLanguageId);
+            DataTable dt = RC.GetAllUnits();
             ddl.DataSource = dt;
             ddl.DataBind();
         }

@@ -32,7 +32,8 @@
         $(".numeric1").numeric();
     });
 </script>
-
+<div id="divMsg">
+</div>
 <div style="display: block; width: 100%; margin-bottom: 15px;">
     <div style="width: 80%; margin-top: 120px; margin-bottom: 0px; display: block;">
         <asp:Localize ID="localIndicatorInfo" runat="server" meta:resourcekey="localIndicatorInfoResource1"></asp:Localize>
@@ -45,6 +46,7 @@
                 <div class="widget-main no-padding-bottom no-padding-top">
                     <div style="float: left; width: 40%;">
                         <label>
+                            <asp:HiddenField ID="hfIndicatorId" runat="server" />
                             (English):</label>
                         <div>
                             <asp:TextBox ID="txtInd1Eng" runat="server" CssClass="width-95" TextMode="MultiLine" meta:resourcekey="txtInd1EngResource1"></asp:TextBox>
@@ -64,8 +66,8 @@
                             Unit:</label>
                         <div>
                             <asp:DropDownList runat="server" ID="ddlUnit" CssClass="width-95" meta:resourcekey="ddlUnitResource1"></asp:DropDownList>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Required"
-                                CssClass="error2" Text="Required" ControlToValidate="ddlUnit" InitialValue="0" meta:resourcekey="RequiredFieldValidator1Resource1"></asp:RequiredFieldValidator>
+                            <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Required"
+                                CssClass="error2" Text="Required" ControlToValidate="ddlUnit" InitialValue="0" meta:resourcekey="RequiredFieldValidator1Resource1"></asp:RequiredFieldValidator>--%>
                         </div>
                     </div>
                 </div>
@@ -100,7 +102,7 @@
                             <ItemTemplate>
                                 <div style="float: left; width: 140px; margin-bottom: 20px; margin-right: 20px;">
                                     <div style="float: left; width: 80px; text-align: right; margin-top: 5px;"><%#Eval("LocationName")%>&nbsp;</div>
-                                    <asp:TextBox runat="server" onkeypress="return isNumber();" MaxLength="8" ID="txtTarget" Style="width: 50px;" CssClass="numeric1" meta:resourcekey="txtTargetResource1"></asp:TextBox>
+                                    <asp:TextBox ID="txtTarget" runat="server" MaxLength="8" Text='<%#Eval("ClusterTarget") %>' Style="width: 50px;" CssClass="numeric1" meta:resourcekey="txtTargetResource1"></asp:TextBox>
                                 </div>
                                 <asp:HiddenField runat="server" ID="hdnLocationId" Value='<%# Eval("LocationId") %>' />
                             </ItemTemplate>

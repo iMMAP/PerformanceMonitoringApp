@@ -189,12 +189,12 @@
                         </asp:TemplateField>
                         <asp:TemplateField Visible="false" meta:resourcekey="TemplateFieldResource5">
                             <ItemTemplate>
-                                <asp:Label ID="lblCountryID" runat="server" Text='<%# Eval("CountryID") %>' meta:resourcekey="lblCountryIDResource1"></asp:Label>
+                                <asp:Label ID="lblCountryID" runat="server" Text='<%# Eval("EmergencyLocationId") %>' meta:resourcekey="lblCountryIDResource1"></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField Visible="false" meta:resourcekey="TemplateFieldResource6">
                             <ItemTemplate>
-                                <asp:Label ID="lblClusterID" runat="server" Text='<%# Eval("ClusterID") %>' meta:resourcekey="lblClusterIDResource1"></asp:Label>
+                                <asp:Label ID="lblClusterID" runat="server" Text='<%# Eval("EmergencyClusterId") %>' meta:resourcekey="lblClusterIDResource1"></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField Visible="false" meta:resourcekey="TemplateFieldResource7">
@@ -222,11 +222,12 @@
                             <ContentTemplate>
                                 <div class="containerPopup">
                                     <div class="popupheading">
-                                        Edit Indicator
+                                        <asp:Label ID="lblEditPopupHeading" runat="server" Text="Edit Indicator"></asp:Label>
                                     </div>
                                     <div class="contentarea">
                                         <div class="formdiv">
                                             <table border="0" style="margin: 0 auto;">
+                                                <asp:HiddenField id="hfRegionalIndicator" runat="server" />
                                                 <tr>
                                                     <td>Indicator (English):
                                                     </td>
@@ -267,7 +268,7 @@
                                                     <td align="left" class="frmControl">
                                                         <br />
                                                         <asp:HiddenField ID="hfClusterIndicatorID" runat="server" />
-                                                        <asp:Button ID="btnEdit" runat="server" OnClick="btnEdit_Click" Text="Update" OnClientClick="return validate();" CssClass="btn btn_primary" meta:resourcekey="btnEditResource2" />
+                                                        <asp:Button ID="btnEdit" runat="server" OnClick="btnUpdate_Click" Text="Update" OnClientClick="return validate();" CssClass="btn btn_primary" meta:resourcekey="btnEditResource2" />
                                                         <asp:Button ID="btnClose" runat="server" Text="Close" CausesValidation="False" CssClass="btn btn_primary" meta:resourcekey="btnCloseResource1" />
                                                         <br />
                                                     </td>

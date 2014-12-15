@@ -15,40 +15,52 @@ namespace SRFROWCA.ClusterLead
 {
     public partial class IndicatorListing : BasePage
     {
-
-        public bool applyFilter = false;
-        public int maxIndCount = 0;
-        public int maxActCount = 0;
-        public DateTime dateLimit = DateTime.Now.AddDays(1);
-
-        protected void Page_PreLoad(object sender, EventArgs e)
+        protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                UserInfo.UserProfileInfo(RC.EmergencySahel2015);
+                LoadClustersFilter();
+                LoadCountry();
+                LoadObjectivesFilter();
+                PopulateActivities();
+                SetDropDownOnRole(true);
+                LoadIndicators();
+            }
+
             if (RC.IsClusterLead(this.User))
             {
-                GetMaxCount("Key-" + UserInfo.EmergencyCountry + UserInfo.EmergencyCluster, out maxIndCount, out maxActCount, out dateLimit);
-                if (maxIndCount <= 0 || (maxActCount <= 0 || (applyFilter && DateTime.Now > dateLimit)))
+                int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
+                int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
+
+                int maxIndicators = 0;
+                int maxActivities = 0;
+                DateTime endEditDate = DateTime.Now.AddDays(1);
+
+                GetMaxCount(emgLocationId, emgClusterId, out maxIndicators, out maxActivities, out endEditDate);
+                if (maxIndicators <= 0 || (maxActivities <= 0 || DateTime.Now > endEditDate))
                 {
                     btnAddActivityAndIndicators.Enabled = false;
                 }
-                if (maxIndCount <= 0 || (applyFilter && DateTime.Now > dateLimit))
+                if (maxIndicators <= 0 || DateTime.Now > endEditDate)
                 {
-                    btnAddActivity.Enabled = false;
+                    btnAddIndicator.Enabled = false;
                 }
             }
 
             if (RC.IsRegionalClusterLead(this.User))
             {
-                btnAddActivity.Enabled = false;
+                btnAddIndicator.Enabled = false;
                 btnAddActivityAndIndicators.Enabled = false;
             }
         }
 
-
-        private void GetMaxCount(string configKey, out int maxIndValue, out int maxActValue, out DateTime maxDate)
+        private void GetMaxCount(int emgLocationId, int emgClusterId, out int maxIndicators, out int maxActivities, out DateTime endEditDate)
         {
-            maxIndValue = 0;
-            maxActValue = 0;
-            maxDate = DateTime.Now.AddDays(1);
+            string configKey = "Key-" + emgLocationId.ToString() + emgClusterId.ToString();
+            maxIndicators = 0;
+            maxActivities = 0;
+            endEditDate = DateTime.Now.AddDays(1);
 
             string PATH = HttpRuntime.AppDomainAppPath;
             PATH = PATH.Substring(0, PATH.LastIndexOf(@"\") + 1) + @"Configurations\ChangeEndSettings.xml";
@@ -66,128 +78,119 @@ namespace SRFROWCA.ClusterLead
                     if (node.Name.Equals(configKey))
                     {
                         if (node.Attributes["FrameworkCount"] != null)
-                            maxIndValue = Convert.ToInt32(node.Attributes["FrameworkCount"].Value);
+                            maxIndicators = Convert.ToInt32(node.Attributes["FrameworkCount"].Value);
 
                         if (node.Attributes["ActivityCount"] != null)
-                            maxActValue = Convert.ToInt32(node.Attributes["ActivityCount"].Value);
+                            maxActivities = Convert.ToInt32(node.Attributes["ActivityCount"].Value);
 
                         if (node.Attributes["DateLimit"] != null)
-                            maxDate = DateTime.ParseExact(Convert.ToString(node.Attributes["DateLimit"].Value), "MM-dd-yyyy", CultureInfo.InvariantCulture);
+                            endEditDate = DateTime.ParseExact(Convert.ToString(node.Attributes["DateLimit"].Value), "MM-dd-yyyy", CultureInfo.InvariantCulture);
                     }
                 }
             }
 
-            int? emgLocationid = null;
-            int? emgClusterid = null;
-
-            if (UserInfo.EmergencyCountry > 0)
+            if (maxIndicators > 0)
             {
-                emgLocationid = UserInfo.EmergencyCountry;
-            }
-
-            if (UserInfo.EmergencyCluster > 0)
-            {
-                emgClusterid = UserInfo.EmergencyCluster;
-            }
-
-            if (maxIndValue > 0)
-            {
-                DataTable dt = DBContext.GetData("GetAllIndicatorsNew", new object[] { emgLocationid, emgClusterid, null, null, null, null, (int)RC.SelectedSiteLanguageId });
+                DataTable dt = DBContext.GetData("GetAllIndicatorsNew", new object[] { emgLocationId, emgClusterId, null, null, null, null, (int)RC.SelectedSiteLanguageId });
                 if (dt.Rows.Count > 0)
-                    maxIndValue = maxIndValue - dt.Rows.Count;
+                    maxIndicators = maxIndicators - dt.Rows.Count;
             }
 
-            if (maxActValue > 0)
+            if (maxActivities > 0)
             {
-                DataTable dt = DBContext.GetData("GetAllActivitiesNew", new object[] { emgLocationid, emgClusterid, null, null, (int)RC.SelectedSiteLanguageId });
+                DataTable dt = DBContext.GetData("GetAllActivitiesNew", new object[] { emgLocationId, emgClusterId, null, null, (int)RC.SelectedSiteLanguageId });
                 if (dt != null && dt.Rows.Count > 0)
-                    maxActValue = maxActValue - dt.Rows.Count;
+                    maxActivities = maxActivities - dt.Rows.Count;
             }
         }
 
-
-
-        protected void Page_Load(object sender, EventArgs e)
+        private void SetDropDownOnRole(bool bindAll)
         {
-            if (IsPostBack) return;
-
-            PopulateFilters();
-
             if (RC.IsClusterLead(this.User))
             {
                 ddlCluster.SelectedValue = UserInfo.EmergencyCluster.ToString();
-                ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
                 ddlCluster.Enabled = false;
-                ddlCountry.Enabled = false;
                 ddlCluster.BackColor = Color.LightGray;
-                ddlCountry.BackColor = Color.LightGray;
+                if (bindAll)
+                {
+                    ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
+                    ddlCountry.Enabled = false;
+                    ddlCountry.BackColor = Color.LightGray;
+                }
             }
 
             if (RC.IsRegionalClusterLead(this.User))
             {
                 ddlCluster.SelectedValue = UserInfo.EmergencyCluster.ToString();
-                ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
                 ddlCluster.Enabled = false;
                 ddlCluster.BackColor = Color.LightGray;
+                if (bindAll)
+                {
+                    ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
+                }
             }
 
             if (RC.IsCountryAdmin(this.User))
             {
                 ddlCluster.SelectedValue = UserInfo.EmergencyCluster.ToString();
-                ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
-                ddlCountry.Enabled = false;
-                ddlCountry.BackColor = Color.LightGray;
+                if (bindAll)
+                {
+                    ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
+                    ddlCountry.Enabled = false;
+                    ddlCountry.BackColor = Color.LightGray;
+                }
             }
-
-            LoadIndicators();
         }
-
-
 
         // Add delete confirmation message with all delete buttons.
         protected void gvActivity_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                ObjPrToolTip.RegionalIndicatorIcon(e, 1);
-                ObjPrToolTip.CountryIndicatorIcon(e, 2);
-
                 LinkButton btnDelete = e.Row.FindControl("btnDelete") as LinkButton;
                 LinkButton btnEdit = e.Row.FindControl("btnEdit") as LinkButton;
-                Label lblCountryID = e.Row.FindControl("lblCountryID") as Label;
-                Label lblClusterID = e.Row.FindControl("lblClusterID") as Label;
 
-                //int maxVal = 0;
-                //DateTime maxDate = DateTime.Now.AddDays(1);
-                //string configKey = "Key-";
+                int emgLocationId = 0;
+                int emgClusterId = 0;
 
-                //if (lblCountryID != null && !string.IsNullOrEmpty(lblCountryID.Text))
-                //    configKey += lblCountryID.Text.Trim();
+                Label lblCountryId = e.Row.FindControl("lblCountryID") as Label;
+                if (lblCountryId != null)
+                {
+                    int.TryParse(lblCountryId.Text, out emgLocationId);
+                }
 
-                //if (lblClusterID != null && !string.IsNullOrEmpty(lblClusterID.Text))
-                //    configKey += lblClusterID.Text.Trim();
+                Label lblClusterId = e.Row.FindControl("lblClusterID") as Label;
+                if (lblClusterId != null)
+                {
+                    int.TryParse(lblClusterId.Text, out emgClusterId);
+                }
 
-                //if (applyFilter)
-                //    GetMaxCount(configKey, out maxVal, out maxDate);
+                int maxIndicators = 0;
+                int maxActivities = 0;
+                DateTime endEditDate = DateTime.Now.AddDays(1);
+                GetMaxCount(emgLocationId, emgClusterId, out maxIndicators, out maxActivities, out endEditDate);
 
                 if (btnDelete != null)
                 {
                     btnDelete.Attributes.Add("onclick", "javascript:return " +
-                    "confirm('Are you sure you want to delete this Indicator?')");
+                    "confirm('Are you sure you want to delete this record?')");
 
-                    //if (applyFilter && maxDate < DateTime.Now)
-                    //    btnDelete.Visible = false;
+                    if (endEditDate < DateTime.Now)
+                    {
+                        if (RC.IsClusterLead(this.User) || RC.IsRegionalClusterLead(this.User))
+                        {
+                            btnDelete.Visible = false;
+                        }
+                    }
                 }
 
-                //if (btnEdit != null && applyFilter && maxDate < DateTime.Now)
-                //    btnEdit.Visible = false;
-
-                //string isRegional = e.Row.Cells[1].Text;
-                //if ((RC.IsCountryAdmin(this.User) || RC.IsClusterLead(this.User)) && isRegional == "True")
-                //{
-                //    btnEdit.Visible = false;
-                //    btnDelete.Visible = false;
-                //}
+                if (btnEdit != null && endEditDate < DateTime.Now)
+                {
+                    if (RC.IsClusterLead(this.User) || RC.IsRegionalClusterLead(this.User))
+                    {
+                        btnEdit.Visible = false;
+                    }
+                }
 
                 if (RC.IsRegionalClusterLead(this.User))
                 {
@@ -197,31 +200,45 @@ namespace SRFROWCA.ClusterLead
             }
         }
 
+        private void DeleteActivity(int activityId)
+        {
+            DBContext.Delete("DeleteActivityNew", new object[] { activityId, DBNull.Value });
+        }
+
         // Execute row commands like Edit, Delete etc. on Grid.
         protected void gvActivity_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             // If user click on Delete button.
             if (e.CommandName == "DeleteInd")
             {
-                int IndicatorDetailId = Convert.ToInt32(e.CommandArgument);
+                GridViewRow row = (((Control)e.CommandSource).NamingContainer) as GridViewRow;
 
-                // Check if any IP has reported on this project. If so then do not delete it.
-                //if (!IndicatorIsBeingUsed(IndicatorDetailId))
-                //{
-                //    RC.ShowMessage(Page, Page.GetType(), "asasa", "Indicator cannot be deleted! It is being used.", RC.NotificationType.Error, true, 500);
-                //}
-                //else
+                int indicatorId = 0;
+                int.TryParse(gvActivity.DataKeys[row.RowIndex].Values["IndicatorId"].ToString(), out indicatorId);
+
+                int activityId = 0;
+                int.TryParse(gvActivity.DataKeys[row.RowIndex].Values["ActivityId"].ToString(), out activityId);
+
+                if (indicatorId > 0)
                 {
-                    DeleteIndicator(IndicatorDetailId);
-                    LoadIndicators();
+                    DeleteIndicator(indicatorId);
+                    ShowMessage("Indicator Deleted Successfully!");
                 }
+                else if (activityId > 0)
+                {
+                    DeleteActivity(activityId);
+                    ShowMessage("Activity Deleted Successfully!");
+                }
+
+                LoadIndicators();
             }
+
 
             // Edit Project.
             if (e.CommandName == "EditActivity")
             {
-                int IndicatorId = Convert.ToInt32(e.CommandArgument);
-                Response.Redirect("EditIndicator.aspx?id=" + IndicatorId);
+                int activityId = Convert.ToInt32(e.CommandArgument);
+                Response.Redirect("AddActivityAndIndicators.aspx?a=" + activityId);
 
             }
         }
@@ -232,9 +249,18 @@ namespace SRFROWCA.ClusterLead
 
         protected void btnReset_Click(object sender, EventArgs e)
         {
-            ddlCluster.SelectedValue = "-1";
+            if (RC.IsAdmin(this.User))
+            {
+                ddlCluster.SelectedValue = "-1";
+                ddlActivity.SelectedValue = "-1";
+                ddlCountry.SelectedValue = "-1";
+            }
+            else
+            {
+                SetDropDownOnRole(true);
+            }
+
             ddlObjective.SelectedValue = "-1";
-            ddlActivity.SelectedValue = "-1";
             txtActivityName.Text = "";
             chkIsGender.Checked = false;
             LoadIndicators();
@@ -244,9 +270,7 @@ namespace SRFROWCA.ClusterLead
         {
             GridView gvExport = new GridView();
 
-
-
-            DataTable dt = GetActivities();//DBContext.GetData("GetAllIndicatorsNew", new object[] { emgLocationid, emgClusterid, null, null, null, null, (int)RC.SelectedSiteLanguageId });//GetActivities();
+            DataTable dt = GetActivities();
             RemoveColumnsFromDataTable(dt);
             gvExport.DataSource = dt;
             gvExport.DataBind();
@@ -303,9 +327,11 @@ namespace SRFROWCA.ClusterLead
 
         internal override void BindGridData()
         {
-            PopulateFilters();
+            LoadClustersFilter();
+            LoadObjectivesFilter();
+            PopulateActivities();
+            SetDropDownOnRole(false);
             LoadIndicators();
-
         }
 
         private bool IndicatorIsBeingUsed(int indicatorDetailId)
@@ -333,7 +359,6 @@ namespace SRFROWCA.ClusterLead
 
         private string GetSortDirection(string column)
         {
-
             // By default, set the sort direction to ascending.
             string sortDirection = "ASC";
 
@@ -365,24 +390,6 @@ namespace SRFROWCA.ClusterLead
         {
             gvActivity.DataSource = GetActivities();
             gvActivity.DataBind();
-            if (RC.IsClusterLead(this.User))
-            {
-                GetMaxCount("Key-" + UserInfo.EmergencyCountry + UserInfo.EmergencyCluster, out maxIndCount, out maxActCount, out dateLimit);
-                if (maxIndCount <= 0 || (applyFilter && DateTime.Now > dateLimit))
-                {
-                    gvActivity.Columns[5].Visible = false;
-                    gvActivity.Columns[6].Visible = false;
-                }
-
-            }
-        }
-
-        private void PopulateFilters()
-        {
-            LoadClustersFilter();
-            LoadCountry();
-            LoadObjectivesFilter();
-            PopulateActivities();
         }
 
         private void LoadCountry()
@@ -442,7 +449,7 @@ namespace SRFROWCA.ClusterLead
             int? emergencyLocationId = ddlCountry.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
             int? isGender = chkIsGender.Checked ? 1 : (int?)null;
 
-            return DBContext.GetData("GetAllIndicatorsNew", new object[] { emergencyLocationId, emergencyClusterId, emergencyObjectiveId, search, activityId, isGender, (int)RC.SelectedSiteLanguageId });
+            return DBContext.GetData("GetAllIndicatorsNew2", new object[] { emergencyLocationId, emergencyClusterId, emergencyObjectiveId, search, activityId, isGender, (int)RC.SelectedSiteLanguageId });
         }
         private DataTable GetObjectives()
         {
@@ -457,15 +464,11 @@ namespace SRFROWCA.ClusterLead
 
         }
 
-        protected void btnAddActivity_Click(object sender, EventArgs e)
+        protected void btnAddIndicator_Click(object sender, EventArgs e)
         {
             Response.Redirect("AddIndicators.aspx");
 
         }
-
-
-
-
 
         protected void Page_Error(object sender, EventArgs e)
         {
@@ -478,18 +481,6 @@ namespace SRFROWCA.ClusterLead
         {
             gvActivity.PageIndex = e.NewPageIndex;
             LoadIndicators();
-        }
-
-
-        protected void gvActivity_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-
-        }
-
-
-        protected void gvActivity_RowEditing(object sender, GridViewEditEventArgs e)
-        {
-
         }
 
         private void RemoveColumnsFromDataTable(DataTable dt)
@@ -507,9 +498,12 @@ namespace SRFROWCA.ClusterLead
 
         protected void btnAddActivityAndIndicators_Click(object sender, EventArgs e)
         {
-            Response.Redirect("AddActivityAndIndicators.aspx?b=i");
-
+            Response.Redirect("AddActivityAndIndicators.aspx");
         }
 
+        private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
+        {
+            RC.ShowMessage(Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
+        }
     }
 }

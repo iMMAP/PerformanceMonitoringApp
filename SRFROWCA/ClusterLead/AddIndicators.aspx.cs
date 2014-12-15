@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Net.Mail;
 using System.Text;
 using System.Transactions;
@@ -244,11 +245,20 @@ namespace SRFROWCA.ClusterLead
             int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
             if (emgLocationId > 0)
             {
-                newIndSet.PopulateAdmin1(emgLocationId);
+                int indicatorId = 0;
+                //newIndSet.PopulateAdmin1(emgLocationId);
+                DataTable dtTargets = GetAdmin1ForIndicatorAndLocation(emgLocationId, indicatorId);
+                newIndSet.rptAdmin1.DataSource = dtTargets;
+                newIndSet.rptAdmin1.DataBind();
             }
             newIndSet.ControlNumber = i + 1;
             newIndSet.ID = "indicatorControlId" + i.ToString();
             pnlAdditionalIndicaotrs.Controls.Add(newIndSet);
+        }
+
+        private DataTable GetAdmin1ForIndicatorAndLocation(int emgLocationId, int indicatorId)
+        {
+            return DBContext.GetData("GetAdmin1ForIndicator2", new object[] { indicatorId, emgLocationId });
         }
 
         public int IndControlId

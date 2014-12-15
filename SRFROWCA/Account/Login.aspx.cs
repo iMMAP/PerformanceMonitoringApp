@@ -31,7 +31,10 @@ namespace SRFROWCA.Account
         {
             if (Roles.IsUserInRole(LoginUser.UserName, "Admin"))
             {
-                Response.Redirect("~/Default.aspx");
+                if (RC.SelectedEmergencyId == 3)
+                {
+                    Response.Redirect("~/ClusterLead/CountryIndicators.aspx");
+                }
             }
             else if (Roles.IsUserInRole(LoginUser.UserName, "User"))
             {

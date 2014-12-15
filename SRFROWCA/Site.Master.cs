@@ -367,10 +367,11 @@ namespace SRFROWCA
                 liMaps.Visible = isShow;
                 liPivotSumOfCountryIndicators.Visible = isShow;
                 liBulkImport.Visible = isShow;
-                liUserListing.Visible = isShow;
+                
                 liProgressSummary.Visible = isShow;
                 liSettings.Visible = isShow;
             }
+            liUserListing.Visible = isShow;
             liClusterFrameworks.Visible = isShow;
         }
 
@@ -628,7 +629,7 @@ namespace SRFROWCA
                 PageTitle = "ORS - Activity Listing";
 
                 liClusterFrameworks.Attributes.Add("class", "active open");
-                liNewActivityListing.Attributes.Add("class", "active");
+                //liNewActivityListing.Attributes.Add("class", "active");
             }
             else if (uri.Contains("ClusterLead/IndicatorListing.aspx")
                 || uri.Contains("AddActivityAndIndicators.aspx")

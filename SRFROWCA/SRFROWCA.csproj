@@ -156,6 +156,10 @@
     <Content Include="Account\UserProfile.aspx" />
     <Content Include="Admin\ActivityData.aspx" />
     <Content Include="Admin\ActivityListing.aspx" />
+    <Content Include="assets\himages\activity_analysis_100px.png" />
+    <Content Include="assets\himages\activity_scale_operation_100px.png" />
+    <Content Include="assets\himages\SAH_Countries2.png" />
+    <Content Include="assets\himages\suivant-ors.png" />
     <Content Include="assets\orsjs\jquery.wholenumber.js" />
     <Content Include="ClusterLead\AddActivity.aspx" />
     <Content Include="ClusterLead\AddActivityAndIndicators.aspx" />

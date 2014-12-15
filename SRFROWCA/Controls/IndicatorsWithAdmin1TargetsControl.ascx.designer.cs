@@ -31,13 +31,22 @@ namespace SRFROWCA.Controls {
         protected global::System.Web.UI.WebControls.Label lbl1stNumber;
         
         /// <summary>
+        /// hfIndicatorId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        public global::System.Web.UI.WebControls.HiddenField hfIndicatorId;
+        
+        /// <summary>
         /// txtInd1Eng control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtInd1Eng;
+        public global::System.Web.UI.WebControls.TextBox txtInd1Eng;
         
         /// <summary>
         /// txtInd1Fr control.
@@ -46,7 +55,7 @@ namespace SRFROWCA.Controls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtInd1Fr;
+        public global::System.Web.UI.WebControls.TextBox txtInd1Fr;
         
         /// <summary>
         /// ddlUnit control.
@@ -55,16 +64,7 @@ namespace SRFROWCA.Controls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlUnit;
-        
-        /// <summary>
-        /// RequiredFieldValidator1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
+        public global::System.Web.UI.WebControls.DropDownList ddlUnit;
         
         /// <summary>
         /// chkGender control.
@@ -73,7 +73,7 @@ namespace SRFROWCA.Controls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkGender;
+        public global::System.Web.UI.WebControls.CheckBox chkGender;
         
         /// <summary>
         /// rptAdmin1 control.
@@ -82,6 +82,6 @@ namespace SRFROWCA.Controls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptAdmin1;
+        public global::System.Web.UI.WebControls.Repeater rptAdmin1;
     }
 }

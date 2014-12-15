@@ -118,20 +118,5 @@
 
         }
 
-        function DisableTarget() {
-
-            var counter = 0;
-            $(".dvIndicator").each(function (index) {
-                var txtEng = $(this).find("[id$=txtInd1Eng]").val();
-                var txtFr = $(this).find("[id$=txtInd1Fr]").val();
-
-                if (txtEng.trim() == '' && txtFr.trim() == '') {
-
-                    alert("Please add Indicator " + (parseInt(index) + 1) + " atleast in one Language!")
-                    return false;
-                }
-            });
-
-        }
     </script>
 </asp:Content>

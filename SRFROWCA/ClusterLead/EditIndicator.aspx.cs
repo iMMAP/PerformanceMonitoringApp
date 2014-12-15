@@ -85,7 +85,7 @@ namespace SRFROWCA.ClusterLead
         private void GetAdmin1ForIndicatorAndLocation(int indicatorDetailId)
         {
             int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
-            DataTable dt = DBContext.GetData("GetAdmin1ForIndicator", new object[] { indicatorDetailId,  emgLocationId});
+            DataTable dt = DBContext.GetData("GetAdmin1ForIndicator2", new object[] { indicatorDetailId,  emgLocationId});
             if (dt != null && dt.Rows.Count > 0)
             {
                 rptAdmin1.DataSource = dt;

@@ -326,9 +326,9 @@ namespace SRFROWCA.Common
             }
         }
 
-        internal static DataTable GetAllUnits(int lngId)
+        internal static DataTable GetAllUnits()
         {
-            return DBContext.GetData("GetAllUnits", new object[] { lngId });
+            return DBContext.GetData("GetAllUnits", new object[] { RC.SelectedSiteLanguageId });
         }
 
         internal static DataTable GetOrganizations(int? orgId)

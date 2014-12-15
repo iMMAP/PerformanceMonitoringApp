@@ -47,8 +47,8 @@
                                        
                                         </button>
 
-                                        <asp:Button ID="btnAddActivity" runat="server" Text="Add Indicator" CausesValidation="false"
-                                            CssClass="btn btn-yellow pull-right" OnClick="btnAddActivity_Click" />
+                                        <asp:Button ID="btnAddIndicator" runat="server" Text="Add Indicator" CausesValidation="false"
+                                            CssClass="btn btn-yellow pull-right" OnClick="btnAddIndicator_Click" />
                                         <asp:Button ID="btnAddActivityAndIndicators" runat="server" Text="Add Activity & Indicators" CausesValidation="false"
                                             CssClass="btn btn-yellow pull-right" OnClick="btnAddActivityAndIndicators_Click" Style="margin-right: 5px;" />
                                     </h6>
@@ -66,8 +66,6 @@
                                                             </td>
                                                             <td class="width-30">
                                                                 <asp:DropDownList ID="ddlCluster" runat="server" CssClass="width-80">
-                                                                    
-
                                                                 </asp:DropDownList>
                                                             </td>
                                                             <td>
@@ -75,8 +73,6 @@
                                                             <td>
                                                                 <asp:DropDownList runat="server" ID="ddlCountry" Width="270px" meta:resourcekey="ddlCountryResource1">
                                                                 </asp:DropDownList></td>
-
-
                                                         </tr>
                                                         <tr>
                                                             <td class="width-20">
@@ -134,9 +130,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-
                     </div>
                 </td>
             </tr>
@@ -145,16 +138,15 @@
         <div class="tablegrid">
             <div style="overflow-x: auto; width: 100%">
                 <asp:GridView ID="gvActivity" runat="server" AutoGenerateColumns="false" AllowSorting="True" AllowPaging="true" PagerSettings-Mode="NumericFirstLast"
-                    OnRowCommand="gvActivity_RowCommand" Width="100%" OnRowDataBound="gvActivity_RowDataBound" PagerSettings-Position="Bottom" DataKeyNames="IndicatorDetailId"
+                    OnRowCommand="gvActivity_RowCommand" Width="100%" OnRowDataBound="gvActivity_RowDataBound" PagerSettings-Position="Bottom" DataKeyNames="ActivityId,IndicatorDetailId,IndicatorId"
                     CssClass="table-striped table-bordered table-hover" OnSorting="gvActivity_Sorting" OnPageIndexChanging="gvActivity_PageIndexChanging"
-                    PageSize="30" OnRowDeleting="gvActivity_RowDeleting" ShowHeaderWhenEmpty="true" EmptyDataText="Your filter criteria does not match any indicator!">
+                    PageSize="30" ShowHeaderWhenEmpty="true" EmptyDataText="Your filter criteria does not match any indicator!">
 
                     <Columns>
                         <asp:TemplateField ItemStyle-Width="2%" HeaderText="#" meta:resourcekey="TemplateFieldResource1">
                             <ItemTemplate>
                                 <%# Container.DataItemIndex + 1 %>
                             </ItemTemplate>
-
                             <ItemStyle Width="2%"></ItemStyle>
                         </asp:TemplateField>
                         <asp:BoundField DataField="Country" HeaderText="Country" SortExpression="Country" ItemStyle-Width="150px"></asp:BoundField>
@@ -166,13 +158,23 @@
                         <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle" HeaderStyle-Width="80px">
                             <ItemTemplate>
                                 <asp:LinkButton ID="btnEdit" runat="server" Text="Edit" Width="80px" CausesValidation="false"
-                                    CommandName="EditActivity" CommandArgument='<%# Eval("IndicatorDetailId") %>' />
+                                    CommandName="EditActivity" CommandArgument='<%# Eval("ActivityId") %>' />
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle" HeaderStyle-Width="80px">
                             <ItemTemplate>
                                 <asp:LinkButton ID="btnDelete" runat="server" Text="Delete" Width="80px" CausesValidation="false"
                                     CommandName="DeleteInd" CommandArgument='<%# Eval("IndicatorDetailId") %>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField Visible="false" meta:resourcekey="TemplateFieldResource5">
+                            <ItemTemplate>
+                                <asp:Label ID="lblCountryID" runat="server" Text='<%# Eval("EmergencyLocationId") %>' meta:resourcekey="lblCountryIDResource1"></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField Visible="false" meta:resourcekey="TemplateFieldResource6">
+                            <ItemTemplate>
+                                <asp:Label ID="lblClusterID" runat="server" Text='<%# Eval("EmergencyClusterId") %>' meta:resourcekey="lblClusterIDResource1"></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
