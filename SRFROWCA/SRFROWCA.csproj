@@ -78,6 +78,9 @@
     <Reference Include="AjaxControlToolkit, Version=4.1.7.123, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
       <HintPath>..\_dll\AjaxControlToolkit.dll</HintPath>
     </Reference>
+    <Reference Include="DocX">
+      <HintPath>..\_dll\DocX.dll</HintPath>
+    </Reference>
     <Reference Include="DotNet.Highcharts, Version=2.0.0.0, Culture=neutral, PublicKeyToken=88854f873df851bf, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_dll\DotNet.Highcharts.dll</HintPath>
@@ -85,9 +88,6 @@
     <Reference Include="DropDownCheckBoxes, Version=1.1.0.37004, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_dll\DropDownCheckBoxes.dll</HintPath>
-    </Reference>
-    <Reference Include="Elmah">
-      <HintPath>..\_dll\Elmah.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -103,9 +103,6 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\_dll\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="Svg, Version=0.5.2.17984, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_dll\Svg.dll</HintPath>
@@ -447,6 +444,7 @@
     <Content Include="OperationalPresenceDB.aspx" />
     <Content Include="OPS\OPSDataEntryOld.aspx" />
     <Content Include="OPS\OPSDataEntry.aspx" />
+    <Content Include="OPS\SyncOPSProjects.aspx" />
     <Content Include="OPS\UploadOPSProjectDetails.aspx" />
     <Content Include="ORSDocuments\orsdocs.aspx" />
     <Content Include="Pages\AddActivities.aspx" />
@@ -1329,6 +1327,14 @@
     </Compile>
     <Compile Include="OPS\OPSDataEntry.aspx.designer.cs">
       <DependentUpon>OPSDataEntry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OPS\OPSProject.cs" />
+    <Compile Include="OPS\SyncOPSProjects.aspx.cs">
+      <DependentUpon>SyncOPSProjects.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OPS\SyncOPSProjects.aspx.designer.cs">
+      <DependentUpon>SyncOPSProjects.aspx</DependentUpon>
     </Compile>
     <Compile Include="OPS\UploadOPSProjectDetails.aspx.cs">
       <DependentUpon>UploadOPSProjectDetails.aspx</DependentUpon>

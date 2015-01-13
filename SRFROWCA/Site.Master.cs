@@ -300,11 +300,12 @@ namespace SRFROWCA
                 menuRegionalIndicators.Visible = isShow;
                 liRegionalIndicators.Visible = isShow;
                 liSumOfRegionalIndicators.Visible = isShow;
-                liCLprojectsListing.Visible = isShow;
+                
                 liCountryReports.Visible = isShow;
                 liMaps.Visible = isShow;
             }
 
+            liCLprojectsListing.Visible = isShow;
             liClusterFrameworks.Visible = isShow;
         }
 
@@ -319,7 +320,7 @@ namespace SRFROWCA
                 menueSRPIndicators.Visible = isShow;
                 menueValidateIndicaotrs.Visible = isShow;
                 liValidate.Visible = isShow;
-                liCLprojectsListing.Visible = isShow;
+                
                 liSumOfCountryIndicators.Visible = isShow;
                 liSRPIndicators.Visible = isShow;
                 liClusterTarget.Visible = isShow;
@@ -330,6 +331,7 @@ namespace SRFROWCA
                 liORSDocuments.Visible = isShow;
                 menueORSDocuments.Visible = isShow;
             }
+            liCLprojectsListing.Visible = isShow;
             liClusterFrameworks.Visible = isShow;
         }
 
@@ -358,7 +360,7 @@ namespace SRFROWCA
 
                 menueValidateIndicaotrs.Visible = isShow;
                 liValidate.Visible = isShow;
-                liCLprojectsListing.Visible = isShow;
+                
                 liSumOfCountryIndicators.Visible = isShow;
                 liSRPIndicators.Visible = isShow;
                 liClusterTarget.Visible = isShow;
@@ -371,6 +373,7 @@ namespace SRFROWCA
                 liProgressSummary.Visible = isShow;
                 liSettings.Visible = isShow;
             }
+            liCLprojectsListing.Visible = isShow;
             liUserListing.Visible = isShow;
             liClusterFrameworks.Visible = isShow;
         }
@@ -383,12 +386,14 @@ namespace SRFROWCA
                 //liReports.Visible = isShow;
                 menueReports.Visible = isShow;
                 menueSRPIndicators.Visible = isShow;
-                liCLprojectsListing.Visible = isShow;
+                
                 liPivotSumOfCountryIndicators.Visible = isShow;
                 liSumOfCountryIndicators.Visible = isShow;
                 liCountryReports.Visible = isShow;
                 liMaps.Visible = isShow;
             }
+
+            liCLprojectsListing.Visible = isShow;
         }
 
         private void ShowAdminMenue()
@@ -404,7 +409,7 @@ namespace SRFROWCA
             liIndicators.Visible = isShow;
             liActivities.Visible = isShow;
             liLocations.Visible = isShow;
-
+            liCLprojectsListing.Visible = isShow;
             liClusterFrameworks.Visible = isShow;
 
             if (RC.SelectedEmergencyId == 1)

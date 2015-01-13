@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ChangeEndSettings>
   <Key-1113 CountryID="11" Country="Sahel Region" ClusterID="13" Cluster="Education" DateLimit="12-16-2014" ClusterCount="4" />
-  <Key-1613 CountryID="16" Country="Mali" ClusterID="13" Cluster="Education" DateLimit="12-19-2014" FrameworkCount="40" ActivityCount="20" ClusterCount="4" />
+  <Key-1613 CountryID="16" Country="Mali" ClusterID="13" Cluster="Education" DateLimit="12-24-2014" FrameworkCount="40" ActivityCount="20" ClusterCount="4" />
+  <Key-1313 CountryID="13" Country="Cameroon" ClusterID="13" Cluster="Education" DateLimit="12-25-2014" FrameworkCount="50" ActivityCount="100" ClusterCount="10" />
 </ChangeEndSettings>

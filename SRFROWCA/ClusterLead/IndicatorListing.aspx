@@ -92,8 +92,6 @@
                                                             <td class="width-30">
 
                                                                 <asp:DropDownList ID="ddlActivity" runat="server" AppendDataBoundItems="true" CssClass="width-80">
-                                                                    <asp:ListItem Text="All" Value="-1" Selected="True"></asp:ListItem>
-
                                                                 </asp:DropDownList>
                                                             </td>
                                                         </tr>
@@ -149,21 +147,21 @@
                             </ItemTemplate>
                             <ItemStyle Width="2%"></ItemStyle>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="Country" HeaderText="Country" SortExpression="Country" ItemStyle-Width="150px"></asp:BoundField>
+                        <asp:BoundField DataField="Country" HeaderText="Country" SortExpression="Country" ItemStyle-Width="80px"></asp:BoundField>
                         <asp:BoundField DataField="ClusterName" HeaderText="Cluster" SortExpression="ClusterName" ItemStyle-Width="150px" />
-                        <asp:BoundField DataField="ShortObjective" HeaderText="Objective" SortExpression="ShortObjective" ItemStyle-Width="150px" />
+                        <asp:BoundField DataField="ShortObjective" HeaderText="Objective" SortExpression="ShortObjective" ItemStyle-Width="90px" />
                         <asp:BoundField DataField="Activity" HeaderText="Activity" SortExpression="Activity" />
                         <asp:BoundField DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator" />
                         <asp:BoundField DataField="Unit" HeaderText="Unit" SortExpression="Unit" />
-                        <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle" HeaderStyle-Width="80px">
+                        <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle" HeaderStyle-Width="30px">
                             <ItemTemplate>
-                                <asp:LinkButton ID="btnEdit" runat="server" Text="Edit" Width="80px" CausesValidation="false"
+                                <asp:LinkButton ID="btnEdit" runat="server" Text="Edit" Width="30px" CausesValidation="false"
                                     CommandName="EditActivity" CommandArgument='<%# Eval("ActivityId") %>' />
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle" HeaderStyle-Width="80px">
+                        <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle" HeaderStyle-Width="50px">
                             <ItemTemplate>
-                                <asp:LinkButton ID="btnDelete" runat="server" Text="Delete" Width="80px" CausesValidation="false"
+                                <asp:LinkButton ID="btnDelete" runat="server" Text="Delete" Width="50px" CausesValidation="false"
                                     CommandName="DeleteInd" CommandArgument='<%# Eval("IndicatorDetailId") %>' />
                             </ItemTemplate>
                         </asp:TemplateField>

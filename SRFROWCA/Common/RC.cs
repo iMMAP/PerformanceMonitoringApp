@@ -275,7 +275,7 @@ namespace SRFROWCA.Common
 
         internal static DataTable GetEmergencyLocations(int emergencyId)
         {
-            return DBContext.GetData("GetEmergnecyLocations", new object[] { emergencyId});
+            return DBContext.GetData("GetEmergnecyLocations", new object[] { emergencyId });
         }
 
         internal static DataTable GetLocationEmergencies(IPrincipal user)
@@ -296,7 +296,7 @@ namespace SRFROWCA.Common
 
         internal static DataTable GetAllEmergencies(int? languageId, string search = "", int disasterType = 0)
         {
-            
+
             return DBContext.GetData("GetAllEmergencies", new object[] { languageId, string.IsNullOrEmpty(search) ? null : search, disasterType > 0 ? disasterType : 0 });
         }
 
@@ -333,7 +333,7 @@ namespace SRFROWCA.Common
 
         internal static DataTable GetOrganizations(int? orgId)
         {
-            return DBContext.GetData("GetOrganizations", new object[] { orgId , null});
+            return DBContext.GetData("GetOrganizations", new object[] { orgId, null });
         }
 
         internal static DataTable GetProjectsOrganizations(int? locId, int? clusterId)
@@ -452,7 +452,7 @@ namespace SRFROWCA.Common
             ListItem item = new ListItem(text, "0");
             ctl.Items.Insert(0, item);
         }
-    
+
 
         // Get multiple selected values from drop down checkbox.
         internal static string GetSelectedValues(object sender)

@@ -89,7 +89,7 @@ namespace SRFROWCA.Common
         internal static void FillObjectives(ListControl control, bool useShort, int emergencyId)
         {
             DataTable dt = RC.GetObjectives(emergencyId);
-            FillObjectives(control, dt, true);
+            FillObjectives(control, dt, useShort);
         }
 
         internal static void FillEmergencyObjectives(ListControl control, bool useShort, int emergencyId)

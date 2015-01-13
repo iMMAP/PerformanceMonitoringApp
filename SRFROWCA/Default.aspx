@@ -24,7 +24,7 @@
         {
             float: left;
             width: 349px;
-            height: 120px;
+            height: 140px;
             padding: 10px;
             margin-right: 30px;
             color: #FFF;
@@ -43,7 +43,7 @@
             {
                 float: left;
                 width: 349px;
-                height: 120px;
+                height: 140px;
                 padding: 10px;
                 margin-right: 30px;
                 color: #FFF;
@@ -62,7 +62,7 @@
         {
             float: left;
             width: 349px;
-            height: 120px;
+            height: 140px;
             padding: 10px;
             color: #FFF;
             font-size: 16px;
@@ -80,7 +80,7 @@
             {
                 float: left;
                 width: 349px;
-                height: 120px;
+                height: 140px;
                 padding: 10px;
                 color: #FFF;
                 font-size: 16px;
@@ -132,6 +132,8 @@
             float: right;
             padding-top: 10px;
         }
+
+        a { color: inherit; }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -150,19 +152,19 @@
                 <p class="textwelcome">Welcome to the Online Reporting System (ORS) for the Sahel</p>
 
                 <div class="blocparteners">
-
+                    <a href="../Account/Login.aspx">
                     <span class="titrepartner">Partners</span><br />
                     <span>If you are a partner and want to report on your activity click here to log in</span><br />
-                    <a href="../Account/Login.aspx" class="bouton">
+                    
                         <img src="assets/himages/suivant-ors.png" class="bouton" /></a>
 
                 </div>
 
                 <div class="bloccluster">
-
+                    <a href="../Account/Login.aspx">
                     <span class="titrepartner">Cluster Coordinators</span><br />
-                    <span>If you are a partner and want to report on your activity click here to log in</span><br />
-                    <a href="../Account/Login.aspx" class="bouton">
+                    <span>If you are a cluster coordinator and you want to upload your cluster framework click here</span><br />
+                    
                         <img src="assets/himages/suivant-ors.png" class="bouton" /></a>
 
                 </div>

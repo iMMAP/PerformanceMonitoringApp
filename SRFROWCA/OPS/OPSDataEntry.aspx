@@ -44,7 +44,7 @@
     <!-- ORS styles -->
     <link rel="stylesheet" href="../assets/css/ors.css" />
     <!-- ace styles -->
-    <script type="text/javascript" src="../assets/orsjs/ShowHideObJAndPr.js"></script>
+
     <script src="../assets/orsjs/jquery.numeric.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         var needToConfirm = true;
@@ -84,9 +84,46 @@
         }
     </script>
     <script language="javascript" type="text/javascript">
+        function showHideObj() {
+            $(document).on('click', '.checkObj', function () {
+                var selectedObjs = [];
+                $("[id*=cblObjectives] input:checked").each(function () {
+                    selectedObjs.push($(this).val());
+                });
+
+                showAllObj();
+                if (selectedObjs.length > 0) {
+                    hideAllObj();
+                    var i;
+                    for (i = 0; i < selectedObjs.length; ++i) {
+                        showObj(selectedObjs[i]);
+                    }
+                }
+            });
+        }
+
+        function showAllObj() {
+            $('.istrow, .altcolor').find('td:nth-child(1)').each(function (i) {
+                $(this).parent().show();
+            });
+        }
+
+        function hideAllObj() {
+            $('.istrow, .altcolor').find('td:nth-child(1)').each(function (i) {
+                $(this).parent().hide();
+            });
+        }
+
+        function showObj(objId) {
+            $('.istrow, .altcolor').find('td:nth-child(1)').each(function (i) {
+                if ($(this).text() === objId || objId === '0') {
+                    $(this).parent().show();
+                }
+            });
+        }
+
         $(function () {
             showHideObj();
-            showHidePriority();
 
             allowOnlyNumeric();
 
@@ -189,7 +226,7 @@
                                 <asp:Button ID="btnOpenLocations" runat="server" Text="Locations" CausesValidation="False"
                                     CssClass="btn btn-primary" OnClick="btnLocation_Click" OnClientClick="needToConfirm = false;"
                                     meta:resourcekey="btnOpenLocationsResource1" />
-                                <asp:Localize ID="locaNoTargetMessage" runat="server" Text="&lt;div style=&quot;color:Red;&quot;&gt;Please click on Locations button to add locations. You will then be able to add or edit your project activities." meta:resourcekey="locaNoTargetMessageResource1"></asp:Localize>
+                                <asp:Localize ID="locaNoTargetMessage" runat="server" Text="&lt;div style=&quot;color:Red;&quot;&gt;Please click on Locations button to add locations. You will then be able to add or edit your project activities.<br/>Please select the activties that your project is working on by ticking in the Select Column." meta:resourcekey="locaNoTargetMessageResource1"></asp:Localize>
                             </div>
                             <div class="pull-right">
                                 <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
@@ -202,6 +239,9 @@
                             <br />
                             <div id="divMsg">
                             </div>
+                            <div>
+                                Filter Activities:<asp:CheckBoxList ID="cblObjectives" runat="server" CssClass="checkObj" RepeatColumns="3"></asp:CheckBoxList>
+                            </div>
                             <div id="scrolledGridView" style="overflow-x: auto; width: 100%">
                                 <asp:GridView ID="gvActivities" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True"
                                     HeaderStyle-BackColor="ButtonFace" DataKeyNames="ActivityDataId" CssClass="imagetable"
@@ -210,7 +250,17 @@
                                     <RowStyle CssClass="istrow" />
                                     <AlternatingRowStyle CssClass="altcolor" />
                                     <Columns>
-                                        <asp:BoundField HeaderText="Objective" DataField="Objective" />
+                                        <asp:BoundField DataField="ObjectiveId" HeaderText="ObjectiveId" ItemStyle-Width="1px"
+                                            ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource1"></asp:BoundField>
+                                        <asp:TemplateField HeaderStyle-Width="150" meta:resourcekey="TemplateFieldResource2">
+                                            <HeaderTemplate>
+                                                <asp:Label ID="lblObjectiveHeader" runat="server" Text="Strategic Objective"></asp:Label>
+                                            </HeaderTemplate>
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblObjective" runat="server" Text='<%# Eval("Objective") %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <HeaderStyle Width="150px"></HeaderStyle>
+                                        </asp:TemplateField>
                                         <asp:TemplateField HeaderStyle-Width="150" meta:resourcekey="TemplateFieldResource2">
                                             <HeaderTemplate>
                                                 <asp:Label ID="lblGridHeaderActivity" runat="server" Text="Activity" meta:resourcekey="lblGridHeaderActivityResource1"></asp:Label>
@@ -223,7 +273,7 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderStyle-Width="150" meta:resourcekey="TemplateFieldResource3">
                                             <HeaderTemplate>
-                                                <asp:Label ID="lblGridHeaderIndicator" runat="server" Text="Output Indicator" meta:resourcekey="lblGridHeaderIndicatorResource1"></asp:Label>
+                                                <asp:Label ID="lblGridHeaderIndicator" runat="server" Text="Activity Indicator"></asp:Label>
                                             </HeaderTemplate>
                                             <ItemTemplate>
                                                 <asp:Label ID="lblGridIndicator" runat="server" Text='<%# Eval("DataName") %>' meta:resourcekey="lblGridIndicatorResource1"></asp:Label>

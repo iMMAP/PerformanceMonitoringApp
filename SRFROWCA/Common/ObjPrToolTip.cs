@@ -97,7 +97,31 @@ namespace SRFROWCA.Common
                     ctl.Items[2].Attributes["title"] = "STRATEGIC OBJECTIVE 3: Deliver coordinated and integrated life-saving assistance to people affected by emergencies.";
                 }
             }
+        }
 
+        public static void ObjectiveLableToolTip(GridViewRowEventArgs e, int index)
+        {
+            Label lblObj = e.Row.FindControl("lblObjective") as Label;
+            if (lblObj != null)
+            {
+                string txt = e.Row.Cells[index].Text;
+
+                if (txt == "1")
+                {
+                    lblObj.ToolTip = RC.SelectedSiteLanguageId == 2 ? "OBJECTIF STRATÉGIQUE N°1 : Recueillir les données sur les risques et les vulnérabilités, les analyser et intégrer les résultats dans la programmation humanitaire et de développement." :
+                        "STRATEGIC OBJECTIVE 1: Track and analyse risk and vulnerability, integrating findings into humanitarian and evelopment programming.";
+                }
+                else if (txt == "3")
+                {
+                    lblObj.ToolTip = RC.SelectedSiteLanguageId == 2 ? "OBJECTIF STRATÉGIQUE N°2 : Soutenir les populations vulnérables à mieux faire face aux chocs en répondant aux signaux d’alerte de manière anticipée, réduisant la durée du relèvement post-crise et renforçant les capacités des acteurs nationaux." :
+                        "STRATEGIC OBJECTIVE 2: Support vulnerable populations to better cope with shocks by responding earlier to warning signals, by reducing post-crisis recovery times and by building capacity of national actors.";
+                }
+                else if (txt == "3")
+                 {
+                     lblObj.ToolTip = RC.SelectedSiteLanguageId == 2 ? "OBJECTIF STRATÉGIQUE N°3 : Fournir aux personnes en situation d’urgence une assistance coordonnée et intégrée, nécessaire à leur survie." :
+                        "STRATEGIC OBJECTIVE 3: Deliver coordinated and integrated life-saving assistance to people affected by emergencies.";
+                }
+            }
         }
 
         public static void PrioritiesToolTip(ListControl ctl)

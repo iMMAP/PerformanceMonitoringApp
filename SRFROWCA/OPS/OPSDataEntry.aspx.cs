@@ -35,6 +35,7 @@ namespace SRFROWCA.OPS
                 PopulateDropDowns();
             }
 
+            PopulateToolTips();
             UpdateClusterName();
             lblCluster.Text = OPSClusterNameLabel;
 
@@ -150,6 +151,8 @@ namespace SRFROWCA.OPS
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
+            if (!ValidateData()) return;
+
             using (TransactionScope scope = new TransactionScope())
             {
                 List<int> locationIds = GetLocationIdsFromGrid();
@@ -405,6 +408,7 @@ namespace SRFROWCA.OPS
         {
             LocationId = GetLocationId();
             PopulateLocations(LocationId);
+            UI.FillObjectives(cblObjectives, true, RC.EmergencySahel2015);
         }
 
         private int GetLocationId()
@@ -470,6 +474,8 @@ namespace SRFROWCA.OPS
         {
             DataTable dt = GetActivities();
             GetReport(dt);
+
+            PopulateToolTips();
         }
 
         private string GetSelectedItems(object sender)
@@ -524,19 +530,17 @@ namespace SRFROWCA.OPS
             int yearId = 11; //2015
             DataTable dt = DBContext.GetData("GetOPSActivities2", new object[] { OPSLocationEmergencyId, locationIds, locIdsNotIncluded, 
                                                                             OPSProjectId, OPSEmergencyClusterId, RC.SelectedSiteLanguageId, OPSCountryName, yearId });
-            if (dt.Rows.Count <= 0 && string.IsNullOrEmpty(locationIds))
+            
+            if (dt.Rows.Count <= 0 && !string.IsNullOrEmpty(locationIds))
             {
-                locaNoTargetMessage.Visible = true;
-                //ShowMessage("Please click on locations button and add locations to select/edit your activities/Indicators.", RC.NotificationType.Error, true, 5000);
-            }
-            else if (dt.Rows.Count <= 0 && !string.IsNullOrEmpty(locationIds))
-            {
-                //locaNoTargetMessage.Visible = true;
-                ShowMessage("No Framework (Activities) Available For Your Cluster! Please Contact Cluster Coordinator Of Your Country.", RC.NotificationType.Error, true, 7000);
-            }
-            else
-            {
-                locaNoTargetMessage.Visible = false;
+                if (RC.SelectedSiteLanguageId == 1)
+                {
+                    ShowMessage("The framework for your cluster (i.e. activties and indicators) has not been uploaded yet.<br/> Please contact your Cluster (Sector) coordinator for more information.<br/>Please click on this message to go back to the main window.", RC.NotificationType.Error, false, 500);
+                }
+                else
+                {
+                    ShowMessage("le cadre de travail sectoriel (les activités et les indicateurs) ne sont pas encore enregistrés.<br/> Merci de contacter votre coordinateur de cluster (secteur) pour plus de renseignements.<br/>Veuillez cliquer sur ce message pour retourner à l apage principale.", RC.NotificationType.Error, false, 500);
+                }
             }
 
             return dt.Rows.Count > 0 ? dt : new DataTable();
@@ -678,7 +682,6 @@ namespace SRFROWCA.OPS
         private void SaveReport()
         {
             SaveReportLocations();
-
             DeleteOPSReportDetails();
             SaveReportDetails();
         }
@@ -823,6 +826,74 @@ namespace SRFROWCA.OPS
             }
         }
 
+        private bool ValidateData()
+        {
+            int activityDataId = 0;
+            int? userId = OPSUserId > 0 ? OPSUserId : (int?)null;
+            bool isValid = true;
+            foreach (GridViewRow row in gvActivities.Rows)
+            {
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    activityDataId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString());
+                    DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
+
+                    bool isAdded = false;
+                    foreach (DataColumn dc in dtActivities.Columns)
+                    {
+                        string colName = dc.ColumnName;
+                        int locationId = 0;
+
+                        CheckBox cbAccum = row.FindControl(colName) as CheckBox;
+                        if (cbAccum != null && cbAccum.Checked)
+                        {
+                            isAdded = true;
+                        }
+
+                        if (isAdded)
+                        {
+                            isValid = false;
+                            HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
+                            if (hf != null)
+                            {
+                                locationId = Convert.ToInt32(hf.Value);
+                            }
+
+                            decimal? fullYearTarget = null;
+                            TextBox t = row.FindControl(colName) as TextBox;
+                            if (t != null)
+                            {
+                                if (!string.IsNullOrEmpty(t.Text))
+                                {
+                                    fullYearTarget = Convert.ToDecimal(t.Text, CultureInfo.InvariantCulture);
+                                }
+                            }
+
+                            if (locationId > 0 && fullYearTarget != null)
+                            {
+                                isValid = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (!isValid)
+                    {
+                        if (RC.SelectedSiteLanguageId == 1)
+                        {
+                            ShowMessage("Sorry, we are unable to save your selection.<br/> Please provide a target for each activity indicator.<br/> If you do not know the target at this time please put a 0 (Zero).<br/>Please click on this message to go back to the main window.", RC.NotificationType.Error, false, 500);
+                        }
+                        else
+                        {
+                            ShowMessage("Désolé, nous ne pouvons enregistrer votre sélection.<br/> Veuillez fournir une cible pour chaque indicateur par activité.<br/> Si vous ne connaissez pas encore la cible, veuillez metre un 0 (Zero).<br/>Veuillez cliquer sur ce message pour retourner à l apage principale.", RC.NotificationType.Error, false, 500);
+                        }
+                    }
+                }
+            }
+
+            return isValid;
+        }
+
         private void SaveReportDetails()
         {
             int activityDataId = 0;
@@ -865,10 +936,10 @@ namespace SRFROWCA.OPS
                                 }
                             }
 
-                            if (locationId > 0)
+                            if (locationId > 0 && fullYearTarget != null)
                             {
                                 decimal? midYearTarget = null;
-                                fullYearTarget = fullYearTarget == null ? 0 : fullYearTarget;
+                                //fullYearTarget = fullYearTarget == null ? 0 : fullYearTarget;
                                 DBContext.Add("InsertOPSReportDetails", new object[] { OPSReportId, activityDataId, locationId,
                                                                                             midYearTarget, fullYearTarget, userId, DBNull.Value });
                             }
@@ -919,11 +990,16 @@ namespace SRFROWCA.OPS
                     }
                 }
 
-                ObjPrToolTip.ObjectiveIconToolTip(e, 0);
-                ObjPrToolTip.PrioritiesIconToolTip(e, 1);
-                ObjPrToolTip.RegionalIndicatorIcon(e, 5);
-                ObjPrToolTip.CountryIndicatorIcon(e, 6);
+                ObjPrToolTip.ObjectiveLableToolTip(e, 0);
+                //ObjPrToolTip.PrioritiesIconToolTip(e, 1);
+                //ObjPrToolTip.RegionalIndicatorIcon(e, 5);
+                //ObjPrToolTip.CountryIndicatorIcon(e, 6);
             }
+        }
+
+        private void PopulateToolTips()
+        {
+            ObjPrToolTip.ObjectivesToolTip(cblObjectives);
         }
 
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)

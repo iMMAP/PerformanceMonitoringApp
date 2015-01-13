@@ -35,14 +35,14 @@ namespace SRFROWCA.ClusterLead
 
                 int maxIndicators = 0;
                 int maxActivities = 0;
-                DateTime endEditDate = DateTime.Now.AddDays(1);
+                DateTime endEditDate = DateTime.Now;
 
                 GetMaxCount(emgLocationId, emgClusterId, out maxIndicators, out maxActivities, out endEditDate);
-                if (maxIndicators <= 0 || (maxActivities <= 0 || DateTime.Now > endEditDate))
+                if (maxIndicators <= 0 || (maxActivities <= 0 || endEditDate < DateTime.Now.Date))
                 {
                     btnAddActivityAndIndicators.Enabled = false;
                 }
-                if (maxIndicators <= 0 || DateTime.Now > endEditDate)
+                if (maxIndicators <= 0 || endEditDate < DateTime.Now.Date)
                 {
                     btnAddIndicator.Enabled = false;
                 }
@@ -60,7 +60,7 @@ namespace SRFROWCA.ClusterLead
             string configKey = "Key-" + emgLocationId.ToString() + emgClusterId.ToString();
             maxIndicators = 0;
             maxActivities = 0;
-            endEditDate = DateTime.Now.AddDays(1);
+            endEditDate = DateTime.Now;
 
             string PATH = HttpRuntime.AppDomainAppPath;
             PATH = PATH.Substring(0, PATH.LastIndexOf(@"\") + 1) + @"Configurations\ChangeEndSettings.xml";
@@ -167,7 +167,7 @@ namespace SRFROWCA.ClusterLead
 
                 int maxIndicators = 0;
                 int maxActivities = 0;
-                DateTime endEditDate = DateTime.Now.AddDays(1);
+                DateTime endEditDate = DateTime.Now;
                 GetMaxCount(emgLocationId, emgClusterId, out maxIndicators, out maxActivities, out endEditDate);
 
                 if (btnDelete != null)
@@ -175,7 +175,7 @@ namespace SRFROWCA.ClusterLead
                     btnDelete.Attributes.Add("onclick", "javascript:return " +
                     "confirm('Are you sure you want to delete this record?')");
 
-                    if (endEditDate < DateTime.Now)
+                    if (endEditDate < DateTime.Now.Date)
                     {
                         if (RC.IsClusterLead(this.User) || RC.IsRegionalClusterLead(this.User))
                         {
@@ -184,7 +184,7 @@ namespace SRFROWCA.ClusterLead
                     }
                 }
 
-                if (btnEdit != null && endEditDate < DateTime.Now)
+                if (btnEdit != null && endEditDate < DateTime.Now.Date)
                 {
                     if (RC.IsClusterLead(this.User) || RC.IsRegionalClusterLead(this.User))
                     {
@@ -251,16 +251,16 @@ namespace SRFROWCA.ClusterLead
         {
             if (RC.IsAdmin(this.User))
             {
-                ddlCluster.SelectedValue = "-1";
-                ddlActivity.SelectedValue = "-1";
-                ddlCountry.SelectedValue = "-1";
+                ddlCluster.SelectedValue = "0";
+                ddlActivity.SelectedValue = "0";
+                ddlCountry.SelectedValue = "0";
             }
             else
             {
                 SetDropDownOnRole(true);
             }
 
-            ddlObjective.SelectedValue = "-1";
+            ddlObjective.SelectedValue = "0";
             txtActivityName.Text = "";
             chkIsGender.Checked = false;
             LoadIndicators();
@@ -395,15 +395,15 @@ namespace SRFROWCA.ClusterLead
         private void LoadCountry()
         {
             UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
-            ddlCountry.Items.Insert(0, new ListItem("--- Select Country ---", "-1"));
+            ddlCountry.Items.Insert(0, new ListItem("--- Select Country ---", "0"));
         }
 
         private void PopulateActivities()
         {
-            int? emergencyClusterId = ddlCluster.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlCluster.SelectedValue);
-            int? emergencyObjectiveId = ddlObjective.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlObjective.SelectedValue);
+            int? emergencyClusterId = ddlCluster.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCluster.SelectedValue);
+            int? emergencyObjectiveId = ddlObjective.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlObjective.SelectedValue);
 
-            ddlActivity.DataSource = DBContext.GetData("GetActivitiesNew", new object[] { DBNull.Value, emergencyClusterId, emergencyObjectiveId, RC.EmergencySahel2015 });
+            ddlActivity.DataSource = DBContext.GetData("GetActivitiesNew", new object[] { DBNull.Value, emergencyClusterId, emergencyObjectiveId, RC.SelectedSiteLanguageId });
             ddlActivity.DataTextField = "Activity";
             ddlActivity.DataValueField = "ActivityId";
             ddlActivity.DataBind();
@@ -415,13 +415,13 @@ namespace SRFROWCA.ClusterLead
         private void LoadClustersFilter()
         {
             UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
-            ddlCluster.Items.Insert(0, new ListItem("--- Select Cluster ---", "-1"));
+            ddlCluster.Items.Insert(0, new ListItem("--- Select Cluster ---", "0"));
         }
 
         private void LoadObjectivesFilter()
         {
             ddlObjective.Items.Clear();
-            ddlObjective.Items.Add(new ListItem("All", "-1"));
+            ddlObjective.Items.Add(new ListItem("All", "0"));
             ddlObjective.DataValueField = "EmergencyObjectiveId";
             ddlObjective.DataTextField = "Objective";
             ddlObjective.DataSource = GetObjectives();
@@ -441,12 +441,12 @@ namespace SRFROWCA.ClusterLead
 
         private DataTable GetActivities()
         {
-            int? emergencyClusterId = ddlCluster.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlCluster.SelectedValue);
-            int? emergencyObjectiveId = ddlObjective.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlObjective.SelectedValue);
-            int? activityId = ddlActivity.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlActivity.SelectedValue);
+            int? emergencyClusterId = ddlCluster.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCluster.SelectedValue);
+            int? emergencyObjectiveId = ddlObjective.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlObjective.SelectedValue);
+            int? activityId = ddlActivity.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlActivity.SelectedValue);
             string search = string.IsNullOrEmpty(txtActivityName.Text) ? null : txtActivityName.Text;
 
-            int? emergencyLocationId = ddlCountry.SelectedValue == "-1" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
+            int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
             int? isGender = chkIsGender.Checked ? 1 : (int?)null;
 
             return DBContext.GetData("GetAllIndicatorsNew2", new object[] { emergencyLocationId, emergencyClusterId, emergencyObjectiveId, search, activityId, isGender, (int)RC.SelectedSiteLanguageId });

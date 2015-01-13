@@ -28,12 +28,12 @@ namespace SRFROWCA.ClusterLead
             if (RC.IsClusterLead(this.User) || RC.IsRegionalClusterLead(this.User))
             {
                 int maxIndicators = 0;
-                DateTime endEditDate = DateTime.Now;
+                DateTime endEditDate = DateTime.Now.Date;
 
                 int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
                 int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
                 GetIndCountAndEditDate(emgLocationId, emgClusterId, out maxIndicators, out endEditDate);
-                if (maxIndicators <= 0 || DateTime.Now > endEditDate)
+                if (maxIndicators <= 0 || endEditDate < DateTime.Now.Date)
                 {
                     btnAddIndicator.Enabled = false;
                 }
@@ -292,7 +292,7 @@ namespace SRFROWCA.ClusterLead
                     btnDelete.Attributes.Add("onclick", "javascript:return " +
                     "confirm('Are you sure you want to delete this Setting?')");
 
-                    if (endEditDate < DateTime.Now)
+                    if (endEditDate < DateTime.Now.Date)
                     {
                         if (RC.IsClusterLead(this.User) || RC.IsRegionalClusterLead(this.User))
                         {
@@ -301,7 +301,7 @@ namespace SRFROWCA.ClusterLead
                     }
                 }
 
-                if (btnEdit != null && endEditDate < DateTime.Now)
+                if (btnEdit != null && endEditDate < DateTime.Now.Date)
                 {
                     if (RC.IsClusterLead(this.User) || RC.IsRegionalClusterLead(this.User))
                     {
@@ -482,12 +482,12 @@ namespace SRFROWCA.ClusterLead
         {
             if (string.IsNullOrEmpty(txtIndicatorEng.Text.Trim()))
             {
-                txtIndicatorEng.Text = txtIndicatorFr.Text.Trim();
+                txtIndicatorEng.Text = Server.HtmlEncode(txtIndicatorFr.Text.Trim());
             }
 
             if (string.IsNullOrEmpty(txtIndicatorFr.Text.Trim()))
             {
-                txtIndicatorFr.Text = txtIndicatorEng.Text.Trim();
+                txtIndicatorFr.Text = Server.HtmlEncode(txtIndicatorEng.Text.Trim());
             }
 
             string indicatorEng = txtIndicatorEng.Text.Trim();

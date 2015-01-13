@@ -49,13 +49,13 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.HtmlControls.HtmlButton btnExportToExcel;
         
         /// <summary>
-        /// localCountry control.
+        /// ddlClusters control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localCountry;
+        protected global::System.Web.UI.WebControls.DropDownList ddlClusters;
         
         /// <summary>
         /// ddlCountry control.
@@ -67,58 +67,13 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.DropDownList ddlCountry;
         
         /// <summary>
-        /// localAdmin1 control.
+        /// ddlOrg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localAdmin1;
-        
-        /// <summary>
-        /// ddlAdmin1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlAdmin1;
-        
-        /// <summary>
-        /// Localize2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize2;
-        
-        /// <summary>
-        /// cblReportingStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList cblReportingStatus;
-        
-        /// <summary>
-        /// Localize3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize3;
-        
-        /// <summary>
-        /// cblFundingStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList cblFundingStatus;
+        protected global::System.Web.UI.WebControls.DropDownList ddlOrg;
         
         /// <summary>
         /// txtProjectCode control.
@@ -130,40 +85,22 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.TextBox txtProjectCode;
         
         /// <summary>
-        /// divOrganization control.
+        /// btnSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divOrganization;
+        protected global::System.Web.UI.WebControls.Button btnSearch;
         
         /// <summary>
-        /// ddlOrg control.
+        /// btnReset control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlOrg;
-        
-        /// <summary>
-        /// divClusters control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divClusters;
-        
-        /// <summary>
-        /// ddlClusters control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlClusters;
+        protected global::System.Web.UI.WebControls.Button btnReset;
         
         /// <summary>
         /// gvProjects control.

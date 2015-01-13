@@ -96,7 +96,7 @@ namespace SRFROWCA.Ebola
                 int activityDataId = 0;
                 int.TryParse(gvIndicators.DataKeys[rowIndex]["ActivityDataId"].ToString(), out activityDataId);
                 int reportId = 0;
-                int.TryParse(gvIndicators.DataKeys[rowIndex]["ReportId"].ToString(), out reportId);
+                int.TryParse(gvIndicators.DataKeys[rowIndex]["ReportDataEntryId"].ToString(), out reportId);
 
                 if (activityDataId > 0 && reportId > 0)
                 {

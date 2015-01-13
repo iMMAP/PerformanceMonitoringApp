@@ -146,11 +146,7 @@
                                 <asp:Image ID="imgRind" runat="server" meta:resourcekey="imgRindResource1" />
                                 <asp:Image ID="imgCind" runat="server" meta:resourcekey="imgCindResource1" />
                             </ItemTemplate>
-
-
                             <ItemStyle HorizontalAlign="Center" Width="4%"></ItemStyle>
-
-
                         </asp:TemplateField>
                         <asp:BoundField ItemStyle-Width="10%" DataField="Country" HeaderText="Country" SortExpression="Country" meta:resourcekey="BoundFieldResource4">
                             <ItemStyle Width="10%"></ItemStyle>
@@ -158,7 +154,7 @@
                         <asp:BoundField ItemStyle-Width="10%" DataField="Cluster" HeaderText="Cluster" SortExpression="Cluster" meta:resourcekey="BoundFieldResource5">
                             <ItemStyle Width="10%"></ItemStyle>
                         </asp:BoundField>
-                        <asp:BoundField ItemStyle-Width="48%" DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator" meta:resourcekey="BoundFieldResource6">
+                        <asp:BoundField ItemStyle-Width="48%" DataField="Indicator" HeaderText="Indicator" HtmlEncode="false" SortExpression="Indicator" meta:resourcekey="BoundFieldResource6">
                             <ItemStyle Width="48%"></ItemStyle>
                         </asp:BoundField>
                         <asp:BoundField ItemStyle-Width="10%" DataField="Target" HeaderText="Target" SortExpression="Target" meta:resourcekey="BoundFieldResource7">
@@ -199,7 +195,7 @@
                         </asp:TemplateField>
                         <asp:TemplateField Visible="false" meta:resourcekey="TemplateFieldResource7">
                             <ItemTemplate>
-                                <asp:Label ID="lblIndAlternate" runat="server" Text='<%# Eval("IndicatorAlt") %>' meta:resourcekey="lblIndAlternateResource1"></asp:Label>
+                                <asp:Label ID="lblIndAlternate" runat="server" HtmlEncode="false" Text='<%# Eval("IndicatorAlt") %>' meta:resourcekey="lblIndAlternateResource1"></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField Visible="false" meta:resourcekey="TemplateFieldResource8">
