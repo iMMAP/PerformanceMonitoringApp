@@ -16,8 +16,6 @@ namespace SRFROWCA.OPS
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
-
-            
         }
 
         protected void btnImportProjects_Click(object sender, EventArgs e)
@@ -31,6 +29,8 @@ namespace SRFROWCA.OPS
             InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1081.xml");
             InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1082.xml");
             InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1083.xml");
+
+            //DBContext.Delete("DeleteTempProjectsOPS", new object[] { DBNull.Value });
 
             Response.Write("All Synced!");
         }
@@ -89,8 +89,8 @@ namespace SRFROWCA.OPS
                     SectorName = (string)x.Element("sector"),
                     ClusterId = (string)x.Element("cluster").Attribute("id"),
                     ClusterName = (string)x.Element("cluster"),
-                    //PriorityId = (string)x.Element("priority").Attribute("id"),
-                    //PriorityName = (string)x.Element("priority"),
+                    PriorityId = (string)x.Element("priority").Attribute("id"),
+                    PriorityName = (string)x.Element("priority"),
                     CountryId = (string)x.Element("country").Attribute("id"),
                     CountryName = (string)x.Element("country"),
                     OtherFields = (string)x.Element("other_fields"),
@@ -114,12 +114,12 @@ namespace SRFROWCA.OPS
 
         private void SyncProjects(IEnumerable<OPSProject> projects, XDocument doc)
         {
-            int k = projects.Count();
             foreach (var project in projects)
             {
                 if (project.SectorName != "SECTOR NOT YET SPECIFIED")
                 {
-                    object[] parameters = GetParameters(project);
+                    IEnumerable<OPSDescription> descriptions = GetProjectDescriptions(doc, project.ProjectId);
+                    object[] parameters = GetParameters(project, descriptions);
                     DBContext.Update("InsertUpdateOPSProject", parameters);
                     Response.Write(project.ProjectId);
                     Response.Write("<br/>");
@@ -131,14 +131,23 @@ namespace SRFROWCA.OPS
             }
         }
 
+        private IEnumerable<OPSDescription> GetProjectDescriptions(XDocument doc, string projectId)
+        {
+            var descriptions = doc.Root.Elements("project")
+                .Where(p => ((string)p.Attribute("id")) == projectId)
+                .Descendants("descriptions").Elements("description")
+                .Select(d => new OPSDescription
+                {
+                    Type = (string)d.Attribute("type"),
+                    DescriptionText = (string)d,
+
+                });
+
+            return descriptions;
+        }
+
         private IEnumerable<OPSOrganization> GetOrganizations(XDocument doc, string projectId)
         {
-            var a = doc.Root.Elements("project")
-                .Descendants("organisations").Descendants("organisation");
-            var b = doc.Root.Elements("project")
-                .Where(p => ((string)p.Attribute("id")) == projectId)
-                .Descendants("organisations").Descendants("organisation");
-
             var organizations = doc.Root.Elements("project")
                 .Where(p => ((string)p.Attribute("id")) == projectId)
                 .Descendants("organisations").Descendants("organisation")
@@ -168,12 +177,12 @@ namespace SRFROWCA.OPS
             return new object[] { projectId, organizationId, org.OrganizationName, org.OrgAbbrevation, originalRequest, revisedReques, RC.GetCurrentUserId, DBNull.Value };
         }
 
-        private object[] GetParameters(OPSProject project)
+        private object[] GetParameters(OPSProject project, IEnumerable<OPSDescription> descriptions)
         {
             int projectId = 0;
             int.TryParse(project.ProjectId, out projectId);
             int projectStatusId = 1;
-            
+
             string clusterName = "";
             if (project.ClusterName == "WATER AND SANITATION")
             {
@@ -188,10 +197,109 @@ namespace SRFROWCA.OPS
                 clusterName = project.ClusterName;
             }
 
-            return new object[] { RC.EmergencySahel2015, projectId, project.ProjectCode, project.ProjectTitle, project.ProjectObjective, 
+            int tempVal = 0;
+            int? benChildren = null;
+            if (project.BeneficiariesChildren != "0")
+            {
+                int.TryParse(project.BeneficiariesChildren, out tempVal);
+                benChildren = tempVal > 0 ? tempVal : (int?)null;
+            }
+            else
+            {
+                benChildren = 0;
+            }
+            tempVal = 0;
+
+            int? benWomen = null;
+            if (project.BeneficiariesWomen != "0")
+            {
+                int.TryParse(project.BeneficiariesWomen, out tempVal);
+                benWomen = tempVal > 0 ? tempVal : (int?)null;
+            }
+            else
+            {
+                benWomen = 0;
+            }
+            tempVal = 0;
+
+            int? benOther = null;
+            if (project.BeneficiariesOthers != "0")
+            {
+                int.TryParse(project.BeneficiariesOthers, out tempVal);
+                benOther = tempVal > 0 ? tempVal : (int?)null;
+            }
+            else
+            {
+                benOther = 0;
+            }
+            tempVal = 0;
+
+            int? benTotal = null;
+            if (project.BeneficiaryTotalNumber != "0")
+            {
+                int.TryParse(project.BeneficiaryTotalNumber, out tempVal);
+                benTotal = tempVal > 0 ? tempVal : (int?)null;
+            }
+            else
+            {
+                benTotal = 0;
+            }
+            tempVal = 0;
+
+            string objectives = null;
+            string needs = null;
+            string activites = null;
+            string indicatorOutcomes = null;
+            foreach (var description in descriptions)
+            {
+                switch (description.Type)
+                {
+                    case "objectives":
+                        {
+                            objectives = description.DescriptionText;
+                            break;
+                        }
+                    case "needs":
+                        {
+                            needs = description.DescriptionText;
+                            break;
+                        }
+                    case "activities":
+                        {
+                            activites = description.DescriptionText;
+                            break;
+                        }
+                    case "indicators/outcomes":
+                        {
+                            indicatorOutcomes = description.DescriptionText;
+                            break;
+                        }
+                    default:
+                        break;
+                }
+            }
+
+            return new object[] { RC.EmergencySahel2015, projectId, project.ProjectCode, project.ProjectTitle, objectives, 
                                     project.CountryName, clusterName, projectStatusId, project.OPSProjectStatus, 
                                     project.ProjectYear, project.ProjectContactName, project.ProjectContactPhone,
-                                    project.ProjectContactEmail, RC.GetCurrentUserId, DBNull.Value};
+                                    project.ProjectContactEmail, RC.GetCurrentUserId,
+                                    needs, activites, indicatorOutcomes,
+                                    project.ProjectStartDate,
+                                    project.ProjectEndDate,
+                                    benChildren, benWomen, benTotal,
+                                    project.BeneficiariesTotalDescription,
+                                    benOther,
+                                    project.BeneficiariesDescription,
+                                    project.ProjectImplementingpartner,
+                                    project.RelatedURL,
+                                    project.Type,
+                                    project.OPSLastUpdatedDate,
+                                    project.OPSLastUpdatedBy,
+                                    project.OPSClusterName,
+                                    project.GenderMarker,
+                                    project.EGFLocations,
+                                    project.PriorityName,
+                                    DBNull.Value};
         }
     }
 }

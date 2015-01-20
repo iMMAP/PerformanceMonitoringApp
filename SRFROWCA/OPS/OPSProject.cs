@@ -72,10 +72,8 @@ namespace SRFROWCA.OPS
 
     public class OPSDescription
     {
-        public string Objectives { get; set; }
-        public string Needs { get; set; }
-        public string Activities { get; set; }
-        public string Outcomes { get; set; }
+        public string DescriptionText { get; set; }
+        public string Type { get; set; }
     }
 
     public class OPSProjectOrganizations

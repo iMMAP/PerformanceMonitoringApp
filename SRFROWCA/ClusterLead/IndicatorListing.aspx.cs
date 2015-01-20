@@ -221,8 +221,15 @@ namespace SRFROWCA.ClusterLead
 
                 if (indicatorId > 0)
                 {
-                    DeleteIndicator(indicatorId);
-                    ShowMessage("Indicator Deleted Successfully!");
+                    if (!IndicatorIsInUse(indicatorId))
+                    {
+                        DeleteIndicator(indicatorId);
+                        ShowMessage("Indicator Deleted Successfully!");
+                    }
+                    else
+                    {
+                        ShowMessage("Indicator can not be deleted. It is being used!", RC.NotificationType.Error, true, 2000);
+                    }
                 }
                 else if (activityId > 0)
                 {
@@ -334,10 +341,10 @@ namespace SRFROWCA.ClusterLead
             LoadIndicators();
         }
 
-        private bool IndicatorIsBeingUsed(int indicatorDetailId)
+        private bool IndicatorIsInUse(int indicatorId)
         {
-            DataTable dt = DBContext.GetData("GetIsNewIndicatorBeingUsed", new object[] { indicatorDetailId });
-            return !(dt.Rows.Count > 0);
+            DataTable dt = DBContext.GetData("IndicatorInUse", new object[] { indicatorId });
+            return dt.Rows.Count > 0;
         }
 
         private void DeleteIndicator(int indicatorDetailId)

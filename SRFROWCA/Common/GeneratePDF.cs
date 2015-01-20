@@ -6,6 +6,7 @@ using System.IO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.Data;
+using System.Globalization;
 
 namespace SRFROWCA.Common
 {
@@ -218,20 +219,20 @@ namespace SRFROWCA.Common
             if (reportID != null)
             {
                 PdfPTable tbl = new PdfPTable(new float[] { 2f, 3f, 3f, 2f, 4f, 2f, 3f, 2f });
-                ProjectReportHeaders(tbl);
+                //ProjectReportHeaders(tbl);
 
                 DataRow[] row = dt.Select("ReportID='" + reportID.ToString() + "'");
 
                 if (row.Length > 0)
                 {
-                    tbl.AddCell(new Phrase(Convert.ToString(row[0]["ReportID"]), TableFont));
-                    tbl.AddCell(new Phrase(Convert.ToString(row[0]["ReportName"]), TableFont));
-                    tbl.AddCell(new Phrase(Convert.ToString(row[0]["OrganizationName"]), TableFont));
-                    tbl.AddCell(new Phrase(Convert.ToString(row[0]["Month"]), TableFont));
-                    tbl.AddCell(new Phrase(Convert.ToString(row[0]["CreatedBy"]), TableFont));
-                    tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(row[0]["CreatedDate"])) ? Convert.ToDateTime(row[0]["CreatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
-                    tbl.AddCell(new Phrase(Convert.ToString(row[0]["UpdatedBy"]), TableFont));
-                    tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(row[0]["UpdatedDate"])) ? Convert.ToDateTime(row[0]["UpdatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
+                    //tbl.AddCell(new Phrase(Convert.ToString(row[0]["ReportID"]), TableFont));
+                    //tbl.AddCell(new Phrase(Convert.ToString(row[0]["ReportName"]), TableFont));
+                    //tbl.AddCell(new Phrase(Convert.ToString(row[0]["OrganizationName"]), TableFont));
+                    //tbl.AddCell(new Phrase(Convert.ToString(row[0]["Month"]), TableFont));
+                    //tbl.AddCell(new Phrase(Convert.ToString(row[0]["CreatedBy"]), TableFont));
+                    //tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(row[0]["CreatedDate"])) ? Convert.ToDateTime(row[0]["CreatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
+                    //tbl.AddCell(new Phrase(Convert.ToString(row[0]["UpdatedBy"]), TableFont));
+                    //tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(row[0]["UpdatedDate"])) ? Convert.ToDateTime(row[0]["UpdatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
                 }
 
                 tbl.SpacingAfter = 10f;
@@ -263,16 +264,16 @@ namespace SRFROWCA.Common
                         if (!string.IsNullOrEmpty(Convert.ToString(dtFiltered.Rows[i]["ReportID"])))
                         {
                             PdfPTable tbl = new PdfPTable(new float[] { 2f, 3f, 3f, 2f, 4f, 2f, 3f, 2f });
-                            ProjectReportHeaders(tbl);
+                            //ProjectReportHeaders(tbl);
 
-                            tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["ReportID"]), TableFont));
-                            tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["ReportName"]), TableFont));
-                            tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["OrganizationName"]), TableFont));
-                            tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["Month"]), TableFont));
-                            tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["CreatedBy"]), TableFont));
-                            tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(dtFiltered.Rows[i]["CreatedDate"])) ? Convert.ToDateTime(dtFiltered.Rows[i]["CreatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
-                            tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["UpdatedBy"]), TableFont));
-                            tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(dtFiltered.Rows[i]["UpdatedDate"])) ? Convert.ToDateTime(dtFiltered.Rows[i]["UpdatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
+                            //tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["ReportID"]), TableFont));
+                            //tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["ReportName"]), TableFont));
+                            //tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["OrganizationName"]), TableFont));
+                            //tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["Month"]), TableFont));
+                            //tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["CreatedBy"]), TableFont));
+                            //tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(dtFiltered.Rows[i]["CreatedDate"])) ? Convert.ToDateTime(dtFiltered.Rows[i]["CreatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
+                            //tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["UpdatedBy"]), TableFont));
+                            //tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(dtFiltered.Rows[i]["UpdatedDate"])) ? Convert.ToDateTime(dtFiltered.Rows[i]["UpdatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
 
                             tbl.SpacingAfter = 10f;
                             document.Add(tbl);
@@ -382,7 +383,9 @@ namespace SRFROWCA.Common
                                                     select ind);
 
 
-                    PdfPTable tbl = showAccum ? new PdfPTable(4) : new PdfPTable(3);
+                    //PdfPTable tbl = showAccum ? new PdfPTable(4) : new PdfPTable(3);
+                    PdfPTable tbl = new PdfPTable(2);
+                    tbl.WidthPercentage = 39.25F;
 
                     DataRow drAct = targets.First<DataRow>();
                     AddLogFrameInfo(document, drAct);
@@ -393,18 +396,7 @@ namespace SRFROWCA.Common
                     cell.BackgroundColor = headerColor;
                     tbl.AddCell(cell);
 
-                    cell = new PdfPCell(new Phrase("Annual Target", TitleFont));
-                    cell.BackgroundColor = headerColor;
-                    tbl.AddCell(cell);
-
-                    if (showAccum)
-                    {
-                        cell = new PdfPCell(new Phrase("Accumulative", TitleFont));
-                        cell.BackgroundColor = headerColor;
-                        tbl.AddCell(cell);
-                    }
-
-                    cell = new PdfPCell(new Phrase("Monthly Achieved", TitleFont));
+                    cell = new PdfPCell(new Phrase("Target 2015", TitleFont));
                     cell.BackgroundColor = headerColor;
                     tbl.AddCell(cell);
                     foreach (DataRow row in targets)
@@ -421,10 +413,10 @@ namespace SRFROWCA.Common
         private static void ReportedData(Document document, PdfPTable tbl, DataRow row, bool showAccum)
         {
             tbl.AddCell(new Phrase(row["Location"].ToString(), TableFont));
-            tbl.AddCell(new Phrase(row["TargetAnnual"].ToString(), TableFont));
+            //tbl.AddCell(new Phrase(row["TargetAnnual"].ToString(), TableFont));
 
-            if (showAccum)
-                tbl.AddCell(new Phrase(row["Accumulative"].ToString(), TableFont));
+            //if (showAccum)
+            //    tbl.AddCell(new Phrase(row["Accumulative"].ToString(), TableFont));
 
             tbl.AddCell(new Phrase(row["Achieved"].ToString(), TableFont));
         }
@@ -444,7 +436,7 @@ namespace SRFROWCA.Common
             //tbl.AddCell(new Phrase(dr["HumanitarianPriority"].ToString(), TableFont));
             tbl.AddCell(new Phrase("Activity:", TableFont));
             tbl.AddCell(new Phrase(dr["ActivityName"].ToString(), TableFont));
-            tbl.AddCell(new Phrase("Indicator:", TableFont));
+            tbl.AddCell(new Phrase("Activity Indicator:", TableFont));
             tbl.AddCell(new Phrase(dr["DataName"].ToString(), TableFont));
 
             document.Add(tbl);
@@ -502,7 +494,7 @@ namespace SRFROWCA.Common
                     startDate = "N/A";
                 else
                     startDate = Convert.ToDateTime(startDate).ToString("MMMM dd, yyyy");
-                
+
                 if (string.IsNullOrEmpty(endDate))
                     endDate = DateTime.Now.ToString("MMMM dd, yyyy");
                 else
@@ -511,7 +503,7 @@ namespace SRFROWCA.Common
                 if (startDate.Equals("N/A"))
                     header = "Overall Progress Reports - " + endDate;
                 else
-                    header = "Overall Progress Reports - " + startDate+" to "+endDate;
+                    header = "Overall Progress Reports - " + startDate + " to " + endDate;
 
                 PdfPTable tbl = new PdfPTable(2);
 
@@ -789,6 +781,7 @@ namespace SRFROWCA.Common
         {
             ProjectMainInfo(document, dr);
             ProjectDetailInfo(document, dr);
+            //ProjectDescriptions(document, dr);
         }
 
         private static void ProjectMainInfo(Document document, DataRow dr)
@@ -802,17 +795,17 @@ namespace SRFROWCA.Common
 
             //leave a gap before and after the table
             tbl.SpacingBefore = 20f;
-            tbl.SpacingAfter = 20f;
+            tbl.SpacingAfter = 10f;
 
             // Add funding header.
             PdfPCell cell = null;
 
-            cell = new PdfPCell(new Phrase("Project Code: ", TitleFont));
+            cell = new PdfPCell(new Phrase("Appealing Agency: ", TitleFont));
             cell.Border = 0;
             cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
             tbl.AddCell(cell);
 
-            cell = new PdfPCell(new Phrase(Convert.ToString(dr["ProjectCode"]), TableFont));
+            cell = new PdfPCell(new Phrase(Convert.ToString(dr["Organizationname"]), TableFont));
             cell.Border = 0;
             cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
             tbl.AddCell(cell);
@@ -823,6 +816,16 @@ namespace SRFROWCA.Common
             tbl.AddCell(cell);
 
             cell = new PdfPCell(new Phrase(Convert.ToString(dr["ProjectTitle"]), TableFont));
+            cell.Border = 0;
+            cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
+            tbl.AddCell(cell);
+
+            cell = new PdfPCell(new Phrase("Project Code: ", TitleFont));
+            cell.Border = 0;
+            cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
+            tbl.AddCell(cell);
+
+            cell = new PdfPCell(new Phrase(Convert.ToString(dr["ProjectCode"]), TableFont));
             cell.Border = 0;
             cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
             tbl.AddCell(cell);
@@ -853,71 +856,185 @@ namespace SRFROWCA.Common
         private static void ProjectDetailInfo(Document document, DataRow dr)
         {
             PdfPTable tbl = new PdfPTable(2);
-            tbl.KeepTogether = true;
+            //!SplitLate && SplitRows
+            tbl.SplitLate = false;
+            tbl.SplitRows = true;
+            
+            //tbl.KeepTogether = true;
             float[] widths = new float[] { 1f, 3f };
             tbl.SetWidths(widths);
-            tbl.SpacingAfter = 10f;
+            tbl.SpacingAfter = 5f;
 
             // Add funding header.
             PdfPCell cell = null;
-            cell = new PdfPCell(new Phrase("Project General Info", TitleFont));
-            cell.Colspan = 2;
-            cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
-            tbl.AddCell(cell);
+            //cell = new PdfPCell(new Phrase("Project General Info", TitleFont));
+            //cell.Colspan = 2;
+            //cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
+            //tbl.AddCell(cell);
 
-            tbl.AddCell(new Phrase("Organization:", TableFont));
-            tbl.AddCell(new Phrase(Convert.ToString(dr["Organizationname"]), TableFont));
+            tbl.AddCell(new Phrase("Objectives:", TableFont));            
+            tbl.AddCell(new Phrase(Convert.ToString(dr["ProjectObjective"]), TableFont));
 
-            tbl.AddCell(new Phrase("Start Date:", TableFont));
-            tbl.AddCell(new Phrase(Convert.ToString(dr["ProjectStartDate"]), TableFont));
+            tbl.AddCell(new Phrase("Beneficiaries:", TableFont));
+            string beneficiariesTotal = string.Format("Total: {0} {1}{2}",
+                                                dr["BeneficiaryTotalNumber"].ToString(),
+                                                dr["BeneficiariesTotalDescription"].ToString(),
+                                                Environment.NewLine
+                                                );
+            string beneficiariesChildren = "";
+            if (dr["BeneficiariesChildren"].ToString() != "" && dr["BeneficiariesChildren"].ToString() != "0")
+            {
+                beneficiariesChildren = string.Format("Children: {0}{1}",
+                                                        dr["BeneficiariesChildren"].ToString(),
+                                                        Environment.NewLine
+                                                    );
+            }
 
-            tbl.AddCell(new Phrase("End Date:", TableFont));
-            tbl.AddCell(new Phrase(Convert.ToString(dr["ProjectEndDate"]), TableFont));
+            string beneficiariesWomen = "";
+            if (dr["BeneficiariesWomen"].ToString() != "" && dr["BeneficiariesWomen"].ToString() != "0")
+            {
+                beneficiariesWomen = string.Format("Women: {0}{1}",
+                                                        dr["BeneficiariesWomen"].ToString(),
+                                                        Environment.NewLine
+                                                    );
+            }
 
-            tbl.AddCell(new Phrase("Original Request:", TableFont));
-            tbl.AddCell(new Phrase(Convert.ToString(dr["OriginalRequest"]), TableFont));
+            string beneficiariesOther = "";
+            if (dr["BeneficiariesOthers"].ToString() != "" && dr["BeneficiariesOthers"].ToString() != "0")
+            {
+                beneficiariesOther = string.Format("Other group: {0} {1}", dr["BeneficiariesOthers"].ToString(), dr["BeneficiariesDescription"].ToString());
+            }
 
-            tbl.AddCell(new Phrase("Current Request:", TableFont));
-            tbl.AddCell(new Phrase(Convert.ToString(dr["CurrentRequest"]), TableFont));
-
-            tbl.AddCell(new Phrase("Beneficiaries Children:", TableFont));
-            tbl.AddCell(new Phrase(Convert.ToString(dr["BeneficiariesChildren"]), TableFont));
-
-            tbl.AddCell(new Phrase("Beneficiaries Women:", TableFont));
-            tbl.AddCell(new Phrase(Convert.ToString(dr["BeneficiariesWomen"]), TableFont));
-
-            tbl.AddCell(new Phrase("Beneficiaries Others:", TableFont));
-            tbl.AddCell(new Phrase(Convert.ToString(dr["BeneficiariesOthers"]), TableFont));
-
-            tbl.AddCell(new Phrase("Beneficiary Total:", TableFont));
-            tbl.AddCell(new Phrase(Convert.ToString(dr["BeneficiaryTotalNumber"]), TableFont));
-
-            tbl.AddCell(new Phrase("Beneficiaries Description:", TableFont));
-            tbl.AddCell(new Phrase(Convert.ToString(dr["BeneficiariesDescription"]), TableFont));
-
-            tbl.AddCell(new Phrase("Beneficiaries Total Description:", TableFont));
-            tbl.AddCell(new Phrase(Convert.ToString(dr["BeneficiariesTotalDescription"]), TableFont));
-
-            tbl.AddCell(new Phrase("OPS Status:", TableFont));
-            tbl.AddCell(new Phrase(Convert.ToString(dr["OPSProjectStatus"]), TableFont));
+            beneficiariesTotal += beneficiariesChildren + beneficiariesWomen + beneficiariesOther;
+            tbl.AddCell(new Phrase(beneficiariesTotal, TableFont));
 
             tbl.AddCell(new Phrase("Implementing Partners:", TableFont));
             tbl.AddCell(new Phrase(Convert.ToString(dr["ProjectImplementingpartner"]), TableFont));
 
-            tbl.AddCell(new Phrase("Contact Name:", TableFont));
-            tbl.AddCell(new Phrase(Convert.ToString(dr["ProjectContactName"]), TableFont));
+            tbl.AddCell(new Phrase("Project Duration:", TableFont));
+            string projectDuration = dr["ProjectStartDate"].ToString() + " - " + dr["ProjectEndDate"].ToString();
+            tbl.AddCell(new Phrase(projectDuration, TableFont));
 
-            tbl.AddCell(new Phrase("Contact Email:", TableFont));
-            tbl.AddCell(new Phrase(Convert.ToString(dr["ProjectContactEmail"]), TableFont));
+            tbl.AddCell(new Phrase("Current Funds Requested:", TableFont));
+            int originalRequest = 0;
+            int.TryParse(dr["OriginalRequest"].ToString(), out originalRequest);
+            string requestedFunds = RC.SelectedSiteLanguageId == 1 ?
+                string.Format(CultureInfo.InvariantCulture, "{0:n}", originalRequest) :
+                string.Format(CultureInfo.CreateSpecificCulture("fr-FR"), "{0:n}", originalRequest);
+            
+            tbl.AddCell(new Phrase("$" + requestedFunds, TitleFont));
 
-            tbl.AddCell(new Phrase("Contact Phone:", TableFont));
-            tbl.AddCell(new Phrase(Convert.ToString(dr["ProjectContactPhone"]), TableFont));
+            tbl.AddCell(new Phrase("Priority/Category:", TableFont));
+            tbl.AddCell(new Phrase(Convert.ToString(dr["OPSPriority"]), TableFont));
 
-            tbl.AddCell(new Phrase("Related URL:", TableFont));
-            tbl.AddCell(new Phrase(Convert.ToString(dr["RelatedURL"]), TableFont));
+            //tbl.AddCell(new Phrase("Current Request:", TableFont));
+            //tbl.AddCell(new Phrase(Convert.ToString(dr["CurrentRequest"]), TableFont));
+
+            tbl.AddCell(new Phrase("Gender Marker:", TableFont));
+            tbl.AddCell(new Phrase(Convert.ToString(dr["GenderMarker"]), TableFont));
+
+            tbl.AddCell(new Phrase("Status:", TableFont));
+            tbl.AddCell(new Phrase(Convert.ToString(dr["OPSProjectStatus"]), TableFont));
+
+            tbl.AddCell(new Phrase("Contact Details:", TableFont));
+            string contactDetails = dr["ProjectContactName"].ToString() + ", " + dr["ProjectContactEmail"].ToString() + ", " + dr["ProjectContactPhone"].ToString();
+            tbl.AddCell(new Phrase(contactDetails, TableFont));
+
+            cell = new PdfPCell(new Phrase("", TitleFont));
+            cell.Border = 0;
+            cell.Colspan = 2;
+            tbl.AddCell(cell);
+
+            cell = new PdfPCell(new Phrase("Needs", TitleFont));
+            cell.Border = 0;
+            cell.Colspan = 2;
+            tbl.AddCell(cell);
+
+            cell = new PdfPCell(new Phrase(Convert.ToString(dr["OPSNeeds"]), TableFont));
+            cell.Border = 0;
+            cell.Colspan = 2;
+            tbl.AddCell(cell);
+
+            cell = new PdfPCell(new Phrase("", TitleFont));
+            cell.Border = 0;
+            cell.Colspan = 2;
+            tbl.AddCell(cell);
+
+            cell = new PdfPCell(new Phrase("Activities Or Outputs", TitleFont));
+            cell.Border = 0;
+            cell.Colspan = 2;
+            tbl.AddCell(cell);
+
+            cell = new PdfPCell(new Phrase(Convert.ToString(dr["OPSActivities"]), TableFont));
+            cell.Border = 0;
+            cell.Colspan = 2;
+            tbl.AddCell(cell);
+
+            cell = new PdfPCell(new Phrase("", TitleFont));
+            cell.Border = 0;
+            cell.Colspan = 2;
+            tbl.AddCell(cell);
+
+            cell = new PdfPCell(new Phrase("Indicators and Targets", TitleFont));
+            cell.Border = 0;
+            cell.Colspan = 2;
+            tbl.AddCell(cell);
+
+            cell = new PdfPCell(new Phrase(Convert.ToString(dr["OPSIndicatorOutputs"]), TableFont));
+            cell.Border = 0;
+            cell.Colspan = 2;
+            tbl.AddCell(cell);
+
+            cell = new PdfPCell(new Phrase("", TitleFont));
+            cell.Border = 0;
+            cell.Colspan = 2;
+            tbl.AddCell(cell);
+
+            cell = new PdfPCell(new Phrase("Activity Details", TitleFont));
+            cell.Border = 0;
+            cell.Colspan = 2;
+            tbl.AddCell(cell);
+
+            cell = new PdfPCell(new Phrase("", TitleFont));
+            cell.Border = 0;
+            cell.Colspan = 2;
+            tbl.AddCell(cell);
 
             document.Add(tbl);
         }
+
+        //private static void ProjectDescriptions(Document document, DataRow dr)
+        //{
+        //    PdfPTable tbl = new PdfPTable(2);
+        //    tbl.KeepTogether = true;
+        //    float[] widths = new float[] { 1f, 3f };
+        //    tbl.SetWidths(widths);
+        //    tbl.SpacingAfter = 10f;
+
+        //    // Add funding header.
+        //    PdfPCell cell = null;
+        //    cell = new PdfPCell(new Phrase("Project General Info", TitleFont));
+        //    cell.Colspan = 2;
+        //    cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
+        //    tbl.AddCell(cell);
+
+        //    tbl.AddCell(new Phrase("Objectives:", TableFont));
+        //    tbl.AddCell(new Phrase(Convert.ToString(dr["ProjectObjective"]), TableFont));
+
+        //    PdfPCell cell = null;
+
+        //    cell = new PdfPCell(new Phrase("Appealing Agency: ", TitleFont));
+        //    cell.Border = 0;
+        //    cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
+        //    tbl.AddCell(cell);
+
+        //    cell = new PdfPCell(new Phrase(Convert.ToString(dr["Organizationname"]), TableFont));
+        //    cell.Border = 0;
+        //    cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
+        //    tbl.AddCell(cell);
+
+        //    document.Add(tbl);
+        //}
 
         private static void TargetsDetails(Document document, DataRow row)
         {
@@ -989,29 +1106,29 @@ namespace SRFROWCA.Common
             tbl.AddCell(new Phrase("Accumulative", TitleFont));
         }
 
-        private static void Ad2dObjective(iTextSharp.text.Document document, PdfPTable tbl, DataRow row)
-        {
-            // Add header.
-            PdfPCell cell = null;
-            cell = new PdfPCell(new Phrase("" + row["Objective"].ToString(), TitleFont));
-            cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
-            tbl.AddCell(cell);
+        //private static void Ad2dObjective(iTextSharp.text.Document document, PdfPTable tbl, DataRow row)
+        //{
+        //    // Add header.
+        //    PdfPCell cell = null;
+        //    cell = new PdfPCell(new Phrase("" + row["Objective"].ToString(), TitleFont));
+        //    cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
+        //    tbl.AddCell(cell);
 
-            cell = new PdfPCell(new Phrase("Priority: " + row["HumanitarianPriority"].ToString(), TitleFont));
-            cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
-            tbl.AddCell(cell);
+        //    cell = new PdfPCell(new Phrase("Priority: " + row["HumanitarianPriority"].ToString(), TitleFont));
+        //    cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
+        //    tbl.AddCell(cell);
 
-            cell = new PdfPCell(new Phrase("Activity: " + row["ActivityName"].ToString(), TitleFont));
-            cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
-            tbl.AddCell(cell);
+        //    cell = new PdfPCell(new Phrase("Activity: " + row["ActivityName"].ToString(), TitleFont));
+        //    cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
+        //    tbl.AddCell(cell);
 
-            cell = new PdfPCell(new Phrase("Indicator: " + row["DataName"].ToString(), TitleFont));
-            cell.Colspan = 4;
-            cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
-            tbl.AddCell(cell);
+        //    cell = new PdfPCell(new Phrase("Activ Indicator: " + row["DataName"].ToString(), TitleFont));
+        //    cell.Colspan = 4;
+        //    cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
+        //    tbl.AddCell(cell);
 
 
-        }
+        //}
 
 
         ///************************************New functions***************************************/

@@ -100,6 +100,13 @@
                         meta:resourcekey="gvProjectsResource1">
 
                         <Columns>
+                            <asp:TemplateField ItemStyle-Width="2%" HeaderText="#">
+                            <ItemTemplate>
+                                <%# Container.DataItemIndex + 1 %>
+                            </ItemTemplate>
+
+                            <ItemStyle Width="2%"></ItemStyle>
+                        </asp:TemplateField>
                             <asp:BoundField DataField="ProjectCode" HeaderText="Project Code" SortExpression="ProjectCode"
                                 meta:resourcekey="BoundFieldResource1" />
                             <asp:BoundField DataField="ProjectTitle" HeaderText="Project Title" ItemStyle-Wrap="true"
@@ -108,27 +115,24 @@
                             </asp:BoundField>
                             <asp:BoundField DataField="OrganizationName" HeaderText="Organization" SortExpression="OrganizationName"
                                 meta:resourcekey="BoundFieldResource3" ItemStyle-Width="200px" />
-                            <asp:BoundField DataField="CurrentRequest" HeaderText="Current Request" SortExpression="CurrentRequest"
-                                meta:resourcekey="BoundFieldResource5" />
+                            <%--<asp:BoundField DataField="CurrentRequest" HeaderText="Current Request" SortExpression="CurrentRequest"
+                                meta:resourcekey="BoundFieldResource5" />--%>
                             <asp:BoundField DataField="OriginalRequest" HeaderText="Original Request" SortExpression="OriginalRequest"
                                 meta:resourcekey="BoundFieldResource10" />
-                            <asp:BoundField DataField="Funded" HeaderText="Funded" SortExpression="Funded"
-                                meta:resourcekey="BoundFieldResource6" />
+                            <asp:BoundField DataField="OPSProjectStatus" HeaderText="Status" SortExpression="OPSProjectStatus"
+                                 />
                             <asp:BoundField DataField="LocationName" Visible="false" HeaderText="Reported Locations" meta:resourcekey="BoundFieldResource7" />
                             <asp:BoundField DataField="Contact" HeaderText="Contact" ItemStyle-Wrap="true" ItemStyle-Width="150px"
                                 SortExpression="Contact" meta:resourcekey="BoundFieldResource8">
                                 <ItemStyle Wrap="True" Width="150px"></ItemStyle>
                             </asp:BoundField>
                             <asp:BoundField DataField="Phone" HeaderText="Phone" meta:resourcekey="BoundFieldResource9" />
-                            <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderText="View" meta:resourcekey="TemplateFieldResource1">
+                            <%--<asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderText="View" meta:resourcekey="TemplateFieldResource1">
                                 <ItemTemplate>
                                     <asp:ImageButton ID="lnkVieDetails" runat="server" ImageUrl="../assets/orsimages/view.png" CommandName="ViewProject"
                                         CommandArgument='<%# Eval("ProjectId") %>' meta:resourcekey="lnkVieDetailsResource1" />
-
-                                    <%-- <asp:LinkButton ID="lnkVieDetails" runat="server" Text="View" CommandName="ViewProject"
-                                        CommandArgument='<%# Eval("ProjectId") %>' meta:resourcekey="lnkVieDetailsResource1" />--%>
                                 </ItemTemplate>
-                            </asp:TemplateField>
+                            </asp:TemplateField>--%>
                             <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderText="PDF">
                                 <ItemTemplate>
                                     <asp:ImageButton ID="lnkPrint" runat="server" ImageUrl="../assets/orsimages/pdf.png" CommandName="PrintReport"

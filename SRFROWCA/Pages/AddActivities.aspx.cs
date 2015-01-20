@@ -18,7 +18,6 @@ namespace SRFROWCA.Pages
         protected void Page_Load(object sender, EventArgs e)
         {
             string languageChange = "";
-            
             if (Session["SiteChanged"] != null)
                 languageChange = Session["SiteChanged"].ToString();
 
@@ -54,15 +53,13 @@ namespace SRFROWCA.Pages
                 RemoveSelectedLocations(cblLocations);
             }
 
-            //if (controlName != "imgbtnComments")
-            { 
-                DataTable dtActivities = GetActivities();
-                AddDynamicColumnsInGrid(dtActivities);
-                Session["dtActivities"] = dtActivities;
-                GetReportId();
-                gvActivities.DataSource = dtActivities;
-                gvActivities.DataBind();
-            }
+            DataTable dtActivities = GetActivities();
+            AddDynamicColumnsInGrid(dtActivities);
+            Session["dtActivities"] = dtActivities;
+            GetReportId();
+            gvActivities.DataSource = dtActivities;
+            gvActivities.DataBind();
+
         }
 
         #region Events
@@ -72,16 +69,6 @@ namespace SRFROWCA.Pages
             LocationRemoved = 0;
             BindGridData();
             AddLocationsInSelectedList();
-
-            LoadWeeks();
-        }
-
-        private void LoadWeeks()
-        {
-            //ddlWeeks.DataValueField = "WeekId";
-            //ddlWeeks.DataTextField = "WeekNumberInMonth";
-            //ddlWeeks.DataSource = GetWeeksOfYear();
-            //ddlWeeks.DataBind();
         }
 
         private DataTable GetWeeksOfYear()
@@ -151,34 +138,6 @@ namespace SRFROWCA.Pages
                     btnSaveComments.Visible = false;
 
                 mpeComments.Show();
-            }
-        }
-
-        protected void gvActivities_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            if (e.CommandName == "AddComments")
-            {
-                //if (ReportId == 0)
-                //{
-                //    SaveReportMainInfo();
-                //}
-
-                ////SaveProjectData();
-
-                //int rowIndex = int.Parse(e.CommandArgument.ToString());
-
-                //int activityDataId = 0;
-                //int.TryParse(gvActivities.DataKeys[rowIndex]["ActivityDataId"].ToString(), out activityDataId);
-
-                //if (activityDataId > 0)
-                //{
-                //    CommentsIndId = activityDataId;
-
-                //    if (ucIndComments.LoadComments(ReportId, activityDataId))
-                //        btnSaveComments.Visible = false;
-
-                //    mpeComments.Show();
-                //}
             }
         }
 
@@ -605,7 +564,7 @@ namespace SRFROWCA.Pages
 
                 string emails = string.Empty;
                 emails = "orsocharowca@gmail.com";
-                
+
 
                 if (dtEmails.Rows.Count > 0)
                 {
@@ -651,7 +610,7 @@ namespace SRFROWCA.Pages
 
         private void UpdateReportUpdatedDate()
         {
-            DBContext.Update("UpdateReportUpdatedDate", new object[] {ReportId, RC.GetCurrentUserId, DBNull.Value });
+            DBContext.Update("UpdateReportUpdatedDate", new object[] { ReportId, RC.GetCurrentUserId, DBNull.Value });
         }
 
         private void SaveReportMainInfo()

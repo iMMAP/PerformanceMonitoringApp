@@ -213,10 +213,10 @@
                         <asp:Label ID="lblCluster" runat="server" meta:resourcekey="lblClusterResource1"></asp:Label>
                         <div class="pull-right">
                             <asp:LinkButton ID="lnkLanguageEnglish" Text="English" runat="server" OnClientClick="needToConfirm=false;" CssClass="langlinks"
-                                CausesValidation="False" OnClick="lnkLanguageEnglish_Click" meta:resourcekey="lnkLanguageEnglishResource1"></asp:LinkButton>&nbsp;&nbsp;
+                                CausesValidation="False" meta:resourcekey="lnkLanguageEnglishResource1"></asp:LinkButton>&nbsp;&nbsp;
 
                             <asp:LinkButton ID="lnkLanguageFrench" Text="Français" runat="server" OnClientClick="needToConfirm=false;" CssClass="langlinks"
-                                CausesValidation="False" OnClick="lnkLanguageFrench_Click" meta:resourcekey="lnkLanguageFrenchResource1"></asp:LinkButton>
+                                CausesValidation="False" meta:resourcekey="lnkLanguageFrenchResource1"></asp:LinkButton>
                         </div>
                     </div>
 
@@ -259,7 +259,8 @@
                                             <ItemTemplate>
                                                 <asp:Label ID="lblObjective" runat="server" Text='<%# Eval("Objective") %>'></asp:Label>
                                             </ItemTemplate>
-                                            <HeaderStyle Width="150px"></HeaderStyle>
+                                            <HeaderStyle Width="100px"></HeaderStyle>
+                                            <ItemStyle Width="100px" />
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderStyle-Width="150" meta:resourcekey="TemplateFieldResource2">
                                             <HeaderTemplate>
@@ -289,6 +290,7 @@
                                                 <asp:Label ID="lblUnit" runat="server" Text='<%# Eval("Unit") %>'></asp:Label>
                                             </ItemTemplate>
                                             <HeaderStyle Width="50px"></HeaderStyle>
+                                            <ItemStyle Width="50px" />
                                         </asp:TemplateField>
 
                                     </Columns>
@@ -308,7 +310,7 @@
                     BehaviorID="mpeAddActivity" PopupControlID="pnlLocations" BackgroundCssClass="modalpopupbackground"
                     DynamicServicePath="" Enabled="True">
                 </asp:ModalPopupExtender>
-                <asp:Panel ID="pnlLocations" runat="server" Width="200px" meta:resourcekey="pnlLocationsResource1">
+                <asp:Panel ID="pnlLocations" runat="server" Width="400px" meta:resourcekey="pnlLocationsResource1">
                     <asp:UpdatePanel ID="uPanel1" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
                             <div class="row">
@@ -323,7 +325,8 @@
                                             <table border="0" style="margin: 0 auto;">
                                                 <tr>
                                                     <td>
-                                                        <asp:CheckBoxList ID="cbAdmin1Locaitons" runat="server" meta:resourcekey="cbAdmin1LocaitonsResource1" css="cbltest">
+                                                        <asp:CheckBoxList ID="cbAdmin1Locaitons" runat="server" RepeatColumns="2"
+                                                             meta:resourcekey="cbAdmin1LocaitonsResource1" css="cbltest">
                                                         </asp:CheckBoxList>
                                                     </td>
                                                 </tr>

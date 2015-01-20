@@ -41,7 +41,10 @@ namespace SRFROWCA.OPS
 
             DataTable dtActivities = GetActivities();
             AddDynamicColumnsInGrid(dtActivities);
-            GetReport(dtActivities);
+            Session["dtOPSActivities"] = dtActivities;
+            GetReport();
+            gvActivities.DataSource = dtActivities;
+            gvActivities.DataBind();
         }
 
         private void UpdateClusterName()
@@ -60,93 +63,14 @@ namespace SRFROWCA.OPS
 
         #region Events.
 
-        // Get English version of Objectives and Priorities and full drop downs.
-        protected void lnkLanguageEnglish_Click(object sender, EventArgs e)
-        {
-            //SiteLanguageId = 1;
-            //PopulateStrategicObjectives();
-            //PopulatePriorities();
-        }
-
-        // Get French version of Objectives and Priorities and full drop downs.
-        protected void lnkLanguageFrench_Click(object sender, EventArgs e)
-        {
-            //SiteLanguageId = 2;
-            //PopulateStrategicObjectives();
-            //PopulatePriorities();
-        }
-
         #region Button Click Events.
 
         protected void btnLocation_Click(object sender, EventArgs e)
         {
             ClientScript.RegisterStartupScript(this.GetType(), "key", "launchModal();", true);
             LocationRemoved = 1;
-            int k = 0;
-            foreach (GridViewRow row in gvActivities.Rows)
-            {
-                if (k > 0) break;
-                k++;
-                if (row.RowType == DataControlRowType.DataRow)
-                {
-                    DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
-
-                    //Dictionary<int, decimal?> dataSave = new Dictionary<int, decimal?>();
-                    List<int> dataSave = new List<int>();
-                    int i = 0;
-                    foreach (DataColumn dc in dtActivities.Columns)
-                    {
-                        string colName = dc.ColumnName;
-                        int locationId = 0;
-                        HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
-                        if (hf != null)
-                        {
-                            locationId = Convert.ToInt32(hf.Value);
-                        }
-
-                        if (locationId > 0)
-                        {
-                            dataSave.Add(locationId);
-                            if (i == 1)
-                            {
-                                i = 0;
-                                int locationIdToSaveT = 0;
-                                int j = 0;
-                                foreach (var item in dataSave)
-                                {
-                                    if (j == 0)
-                                    {
-                                        locationIdToSaveT = Convert.ToInt32(item.ToString());
-                                        j++;
-                                    }
-                                    else
-                                    {
-                                        j = 0;
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                i = 1;
-                            }
-                        }
-                    }
-
-                    List<ListItem> itemsToDelete = new List<ListItem>();
-
-                    foreach (ListItem item in cbAdmin1Locaitons.Items)
-                    {
-                        if (dataSave.Contains(Convert.ToInt32(item.Value)))
-                        {
-                            item.Selected = true;
-                        }
-                        else
-                        {
-                            item.Selected = false;
-                        }
-                    }
-                }
-            }
+            List<int> locationIds = GetLocationIdsFromGrid();
+            SelectLocationsOfGrid(locationIds);
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
@@ -162,6 +86,10 @@ namespace SRFROWCA.OPS
                     {
                         SaveReportMainInfo();
                     }
+                    else
+                    {
+                        UpdateReportMainInfo();
+                    }
 
                     SaveReport();
                 }
@@ -175,60 +103,10 @@ namespace SRFROWCA.OPS
             }
         }
 
-        //private bool DataIsValid()
-        //{
-        //    int activityDataId = 0;
-        //    foreach (GridViewRow row in gvActivities.Rows)
-        //    {
-        //        if (row.RowType == DataControlRowType.DataRow)
-        //        {
-        //            //activityDataId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString());
-        //            DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
-
-        //            bool isAdded = false;
-        //            foreach (DataColumn dc in dtActivities.Columns)
-        //            {
-        //                string colName = dc.ColumnName;
-        //                int locationId = 0;
-
-        //                CheckBox cbAccum = row.FindControl(colName) as CheckBox;
-        //                if (cbAccum != null && cbAccum.Checked)
-        //                {
-        //                    isAdded = true;
-        //                }
-
-        //                if (isAdded)
-        //                {
-        //                    HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
-        //                    if (hf != null)
-        //                    {
-        //                        locationId = Convert.ToInt32(hf.Value);
-        //                    }
-
-        //                    decimal? fullYearTarget = null;
-        //                    TextBox t = row.FindControl(colName) as TextBox;
-        //                    if (t != null)
-        //                    {
-        //                        if (!string.IsNullOrEmpty(t.Text))
-        //                        {
-        //                            fullYearTarget = Convert.ToDecimal(t.Text, CultureInfo.InvariantCulture);
-        //                        }
-        //                    }
-
-        //                    if (locationId > 0)
-        //                    {
-        //                        decimal? midYearTarget = null;
-        //                        fullYearTarget = fullYearTarget == null ? 0 : fullYearTarget;
-        //                        DBContext.Add("InsertOPSReportDetails", new object[] { OPSReportId, activityDataId, locationId,
-        //                                                                                    midYearTarget, fullYearTarget, 1, DBNull.Value });
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-
-        //    return true;
-        //}
+        private void UpdateReportMainInfo()
+        {
+            DBContext.Update("UpdateOPSReport", new object[] { OPSProjectId, OPSLocationEmergencyId, OPSEmergencyClusterId, OPSUserId, DBNull.Value });
+        }
 
         private List<int> GetLocationIdsFromGrid()
         {
@@ -260,6 +138,14 @@ namespace SRFROWCA.OPS
             }
 
             return locationIds.Distinct().ToList();
+        }
+
+        private void SelectLocationsOfGrid(List<int> locationIds)
+        {
+            foreach (ListItem item in cbAdmin1Locaitons.Items)
+            {
+                item.Selected = locationIds.Contains(Convert.ToInt32(item.Value));
+            }
         }
 
         #endregion
@@ -301,7 +187,7 @@ namespace SRFROWCA.OPS
                 {
                     OPSCountryName = "burkina faso";
                 }
-                else if (cName == "region" || cName == "Region" || cName == "REGION")
+                else if (cName == "region" || cName == "Region" || cName == "REGION" || cName == "sahelregion")
                 {
                     OPSCountryName = "Sahel Region";
                 }
@@ -396,6 +282,18 @@ namespace SRFROWCA.OPS
             {
                 clusterName = RC.SelectedSiteLanguageId == 2 ? "Assistance Multi Sectorielles aux Refugies" : "Multi Sector for Refugees";
             }
+            else if (OPSClusterName == "sheltercccm")
+            {
+                clusterName = RC.SelectedSiteLanguageId == 2 ? "Coordination et gestion des sites" : "Camp Coordination And Camp Management";
+            }
+            else if (OPSClusterName == "cccm")
+            {
+                clusterName = RC.SelectedSiteLanguageId == 2 ? "Coordination et gestion des sites" : "Camp Coordination And Camp Management";
+            }
+            else if (OPSClusterName == "campcoordinationandcampmanagement")
+            {
+                clusterName = RC.SelectedSiteLanguageId == 2 ? "Coordination et gestion des sites" : "Camp Coordination And Camp Management";
+            }
             else
             {
                 clusterName = OPSClusterName;
@@ -472,9 +370,11 @@ namespace SRFROWCA.OPS
 
         internal override void BindGridData()
         {
-            DataTable dt = GetActivities();
-            GetReport(dt);
-
+            DataTable dtActivities = GetActivities();
+            Session["dtOPSActivities"] = dtActivities;
+            GetReport();
+            gvActivities.DataSource = dtActivities;
+            gvActivities.DataBind();
             PopulateToolTips();
         }
 
@@ -530,7 +430,7 @@ namespace SRFROWCA.OPS
             int yearId = 11; //2015
             DataTable dt = DBContext.GetData("GetOPSActivities2", new object[] { OPSLocationEmergencyId, locationIds, locIdsNotIncluded, 
                                                                             OPSProjectId, OPSEmergencyClusterId, RC.SelectedSiteLanguageId, OPSCountryName, yearId });
-            
+
             if (dt.Rows.Count <= 0 && !string.IsNullOrEmpty(locationIds))
             {
                 if (RC.SelectedSiteLanguageId == 1)
@@ -918,7 +818,7 @@ namespace SRFROWCA.OPS
                             isAdded = true;
                         }
 
-                        if (isAdded)
+                        //if (isAdded)
                         {
                             HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
                             if (hf != null)
@@ -949,10 +849,8 @@ namespace SRFROWCA.OPS
             }
         }
 
-        private void GetReport(DataTable dt)
+        private void GetReport()
         {
-            Session["dtOPSActivities"] = dt;
-
             int yearId = 11; //2015
             DataTable dtReport = DBContext.GetData("GetOPSReportId", new object[] { OPSLocationEmergencyId, OPSProjectId, OPSEmergencyClusterId, yearId });
             if (dtReport.Rows.Count > 0)
@@ -963,9 +861,6 @@ namespace SRFROWCA.OPS
             {
                 OPSReportId = 0;
             }
-
-            gvActivities.DataSource = dt;
-            gvActivities.DataBind();
         }
 
         protected void gvActivities_RowDataBound(object sender, GridViewRowEventArgs e)

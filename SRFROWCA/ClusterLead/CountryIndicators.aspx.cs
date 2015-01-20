@@ -550,11 +550,8 @@ namespace SRFROWCA.ClusterLead
         protected void btnExportToExcel_ServerClick(object sender, EventArgs e)
         {
             GridView gvExport = new GridView();
-
             DataTable dt = SetDataSource();
-
             RemoveColumnsFromDataTable(dt);
-
             dt.DefaultView.Sort = "Country, Cluster, Indicator, Unit";
             gvExport.DataSource = dt.DefaultView;
             gvExport.DataBind();
@@ -613,12 +610,10 @@ namespace SRFROWCA.ClusterLead
                 dt.Columns.Remove("ClusterIndicatorId");
                 dt.Columns.Remove("SiteLanguageId");
                 dt.Columns.Remove("IndicatorAlt");
-                dt.Columns.Remove("CountryID");
-                dt.Columns.Remove("ClusterId");
+                dt.Columns.Remove("EmergencyLocationId");
+                dt.Columns.Remove("EmergencyClusterId");
                 dt.Columns.Remove("UnitId");
                 dt.Columns.Remove("IsSRP");
-                dt.Columns.Remove("IsRegional");
-
             }
             catch { }
         }
