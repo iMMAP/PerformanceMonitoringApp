@@ -28,7 +28,7 @@ namespace SRFROWCA.Ebola
                 LoadProjectDetails();
             }
 
-            ToggleButtons();
+            //ToggleButtons();
         }
 
         private void PopulateCurrency()

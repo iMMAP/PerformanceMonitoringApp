@@ -14,32 +14,72 @@ namespace SRFROWCA.ClusterLead
 
             PopulateControls();
             LoadProjects();
+            DisableDropDowns();
 
-            if (RC.IsClusterLead(this.User))
-            {
-                ddlClusters.Visible = false;
-            }
-            else
-            {
-                PopulateClusters();
-            }
+            //if (RC.IsClusterLead(this.User))
+            //{
+            //    ddlClusters.Visible = false;
+            //}
+            //else
+            //{
+            //    PopulateClusters();
+            //}
 
-            if (RC.IsRegionalClusterLead(User) || RC.IsAdmin(this.User))
-            {
-                ddlCountry.Enabled = true;
-            }
+            //if (RC.IsRegionalClusterLead(User) || RC.IsAdmin(this.User))
+            //{
+            //    ddlCountry.Enabled = true;
+            //}
         }
 
         private void PopulateControls()
         {
             PopulateOrganizations();
             PopulateCountries();
+            PopulateClusters();
+
+            SetComboValues();
         }
 
         private void PopulateClusters()
         {
             UI.FillEmergnecyClusters(ddlClusters, RC.SelectedEmergencyId);
             RC.AddSelectItemInList(ddlClusters, "All");
+
+            UI.FillEmergnecyClusters(ddlSecClusters, RC.SelectedEmergencyId);
+            RC.AddSelectItemInList(ddlSecClusters, "All");
+        }
+
+        private void SetComboValues()
+        {
+            if (RC.IsClusterLead(this.User) || RC.IsRegionalClusterLead(this.User))
+            {
+                ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
+                ddlClusters.SelectedValue = UserInfo.EmergencyCluster.ToString();
+            }
+
+            if (RC.IsCountryAdmin(this.User))
+            {
+                ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
+            }
+        }
+
+        private void DisableDropDowns()
+        {
+            if (RC.IsClusterLead(this.User))
+            {
+                RC.EnableDisableControls(ddlClusters, false);
+                RC.EnableDisableControls(ddlCountry, false);
+            }
+
+            if (RC.IsRegionalClusterLead(this.User))
+            {
+                RC.EnableDisableControls(ddlClusters, false);
+            }
+
+            if (RC.IsCountryAdmin(this.User))
+            {
+                RC.EnableDisableControls(ddlCountry, false);
+            }
         }
 
         private void PopulateOrganizations()
@@ -87,6 +127,9 @@ namespace SRFROWCA.ClusterLead
 
         private void ExportToPDF(int? projectId)
         {
+            int year = RC.SelectedEmergencyId == 1 ? 2014 : 2015;
+
+            DataTable dtResults = new DataTable();
 
             int tempVal = 0;
             if (ddlClusters.Visible)
@@ -94,6 +137,13 @@ namespace SRFROWCA.ClusterLead
                 int.TryParse(ddlClusters.SelectedValue, out tempVal);
             }
             int? clusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
+
+            tempVal = 0;
+            if (ddlSecClusters.Visible)
+            {
+                int.TryParse(ddlSecClusters.SelectedValue, out tempVal);
+            }
+            int? secClusterId = tempVal > 0 ? tempVal : (int?)null;
 
             tempVal = 0;
             if (ddlCountry.Visible)
@@ -104,6 +154,7 @@ namespace SRFROWCA.ClusterLead
             int? countryID = tempVal > 0 ? tempVal : UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
 
             string projCode = txtProjectCode.Text.Trim().Length > 0 ? txtProjectCode.Text.Trim() : null;
+
             int? orgId = RC.GetSelectedIntVal(ddlOrg);
 
             if (orgId == 0)
@@ -114,13 +165,17 @@ namespace SRFROWCA.ClusterLead
                     orgId = (int?)null;
             }
 
-            int year = RC.SelectedEmergencyId == 1 ? 2014 : 2015;
 
-            DataTable dtResults = DBContext.GetData("uspGetReports2", new object[] {countryID, clusterId,projCode, orgId, 1,  year, projectId});
+            string projectStatus = ddlStatus.SelectedValue == "0" ? null : ddlStatus.SelectedValue;
+            dtResults = DBContext.GetData("uspGetReports2", new object[] {countryID, clusterId,projCode, orgId, RC.SelectedSiteLanguageId, 
+                                                                                        year, projectId, projectStatus, secClusterId});
+
             if (dtResults.Rows.Count > 0)
             {
+                string fileName = DateTime.Now.ToString("yyyyMMddHHmmss");
+
                 Response.ContentType = "application/pdf";
-                Response.AddHeader("Content-Disposition", string.Format("attachment;filename=Project-{0}-{1}.pdf", UserInfo.CountryName, DateTime.Now.ToString("yyyyMMddHHmmss")));
+                Response.AddHeader("Content-Disposition", string.Format("attachment;filename=Project-{0}.pdf", fileName));
                 Response.BinaryWrite(WriteDataEntryPDF.GeneratePDF(dtResults, projectId, null).ToArray());
             }
         }
@@ -207,6 +262,13 @@ namespace SRFROWCA.ClusterLead
             int? clusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
 
             tempVal = 0;
+            if (ddlSecClusters.Visible)
+            {
+                int.TryParse(ddlSecClusters.SelectedValue, out tempVal);
+            }
+            int? secClusterId = tempVal > 0 ? tempVal : (int?)null;
+
+            tempVal = 0;
             if (ddlCountry.Visible)
             {
                 tempVal = 0;
@@ -230,8 +292,11 @@ namespace SRFROWCA.ClusterLead
             int? cbReported = null;
             int? cbFunded = null;
 
+            string projectStatus = ddlStatus.SelectedValue == "0" ? null : ddlStatus.SelectedValue;
+
             return DBContext.GetData("GetProjects", new object[] {countryID, clusterId,projCode, orgId, admin1, DBNull.Value, 
-                                                                            DBNull.Value, cbFunded, cbReported, 1,  year});
+                                                                            DBNull.Value, cbFunded, cbReported, 1,  year, 
+                                                                            projectStatus, secClusterId});
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -245,6 +310,7 @@ namespace SRFROWCA.ClusterLead
             ddlCountry.SelectedIndex = 0;
             txtProjectCode.Text = "";
             ddlOrg.SelectedIndex = 0;
+            ddlStatus.SelectedIndex = 0;
             LoadProjects();
         }
     }

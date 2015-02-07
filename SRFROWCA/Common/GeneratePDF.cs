@@ -850,6 +850,16 @@ namespace SRFROWCA.Common
             cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
             tbl.AddCell(cell);
 
+            cell = new PdfPCell(new Phrase("Sec Cluster: ", TitleFont));
+            cell.Border = 0;
+            cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
+            tbl.AddCell(cell);
+
+            cell = new PdfPCell(new Phrase(Convert.ToString(dr["SecCluster"]), TableFont));
+            cell.Border = 0;
+            cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
+            tbl.AddCell(cell);
+
             document.Add(tbl);
         }
 

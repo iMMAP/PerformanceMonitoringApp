@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Data;
-using System.Web.UI.WebControls;
 using System.Linq;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using BusinessLogic;
 using SRFROWCA.Common;
-using System.Transactions;
-using System.Web.UI;
 
 
 namespace SRFROWCA.Pages
@@ -115,7 +114,8 @@ namespace SRFROWCA.Pages
         private DataTable GetUserProjects()
         {
             bool? isOPSProject = null;
-            DataTable dt = DBContext.GetData("GetOrgProjectsOnLocation", new object[] { UserInfo.EmergencyCountry, UserInfo.Organization, isOPSProject });
+            DataTable dt = DBContext.GetData("GetOrgProjectsOnLocation", new object[] { UserInfo.EmergencyCountry, 
+                                                                                        UserInfo.Organization, isOPSProject });
             Session["testprojectdata"] = dt;
             return dt;
         }
@@ -209,7 +209,9 @@ namespace SRFROWCA.Pages
 
             if (projectClusterId > 0)
             {
-                dtIndicators = DBContext.GetData("GetProjectIndicators", new object[] { projectClusterId, UserInfo.EmergencyCountry, projectId, RC.SelectedSiteLanguageId });
+                dtIndicators = DBContext.GetData("GetProjectIndicators2015", new object[] { projectClusterId, UserInfo.EmergencyCountry, 
+                                                                                                projectId, RC.SelectedSiteLanguageId,
+                                                                                                RC.SelectedEmergencyId});
             }
 
             gvIndicators.DataSource = dtIndicators;

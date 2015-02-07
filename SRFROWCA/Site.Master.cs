@@ -283,7 +283,7 @@ namespace SRFROWCA
             menueORSDocuments.Visible = isShow;
             liCLprojectsListing.Visible = isShow;
             liClusterFrameworks.Visible = !isShow;
-            if (RC.SelectedEmergencyId == 1)
+            //if (RC.SelectedEmergencyId == 1)
             {
                 liCountryReports.Visible = isShow;
                 liMaps.Visible = isShow;
@@ -293,7 +293,7 @@ namespace SRFROWCA
         private void ShowRegionalLeadMenue()
         {
             bool isShow = true;
-            if (RC.SelectedEmergencyId == 1)
+            //if (RC.SelectedEmergencyId == 1)
             {
                 //liReports.Visible = isShow;
                 menueReports.Visible = isShow;
@@ -313,7 +313,7 @@ namespace SRFROWCA
         {
             bool isShow = true;
 
-            if (RC.SelectedEmergencyId == 1)
+            //if (RC.SelectedEmergencyId == 1)
             {
                 //liReports.Visible = isShow;
                 menueReports.Visible = isShow;
@@ -338,7 +338,7 @@ namespace SRFROWCA
         private void ShowOCHAMenue()
         {
             bool isShow = true;
-            if (RC.SelectedEmergencyId == 1)
+            //if (RC.SelectedEmergencyId == 1)
             {
                 liFundingStatus.Visible = isShow;
                 //liReports.Visible = isShow;
@@ -352,7 +352,7 @@ namespace SRFROWCA
         private void ShowCountryAdminMenue()
         {
             bool isShow = true;
-            if (RC.SelectedEmergencyId == 1)
+            //if (RC.SelectedEmergencyId == 1)
             {
                 //liReports.Visible = isShow;
                 menueReports.Visible = isShow;
@@ -381,7 +381,7 @@ namespace SRFROWCA
         private void ShowOCHACountryStaff()
         {
             bool isShow = true;
-            if (RC.SelectedEmergencyId == 1)
+            //if (RC.SelectedEmergencyId == 1)
             {
                 //liReports.Visible = isShow;
                 menueReports.Visible = isShow;
@@ -412,7 +412,7 @@ namespace SRFROWCA
             liCLprojectsListing.Visible = isShow;
             liClusterFrameworks.Visible = isShow;
 
-            if (RC.SelectedEmergencyId == 1)
+            //if (RC.SelectedEmergencyId == 1)
             {
                 liCountryReports.Visible = isShow;
                 liMapsListing.Visible = isShow;
@@ -786,16 +786,16 @@ namespace SRFROWCA
             Response.Cookies["SelectedEmergencyCookie"].Value = ddlEmgergency.SelectedValue;
             Response.Cookies["SelectedEmergencyCookie"].Expires = DateTime.Now.AddDays(365);
 
-            if (RC.SelectedEmergencyId == 1)
+            //if (RC.SelectedEmergencyId == 1)
             {
                 liCountryReports.Visible = true;
                 liMaps.Visible = true;
             }
-            else
-            {
-                liCountryReports.Visible = false;
-                liMaps.Visible = false;
-            }
+            //else
+            //{
+            //    liCountryReports.Visible = false;
+            //    liMaps.Visible = false;
+            //}
 
             if (HttpContext.Current.User.Identity.IsAuthenticated)
             {

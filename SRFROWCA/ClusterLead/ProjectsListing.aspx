@@ -29,11 +29,11 @@
                                 <i class="icon-download"></i>PDF
                                        
                             </button>
-                            <button runat="server" id="btnExportToExcel" onserverclick="ExportToExcel" class="width-10 btn btn-sm btn-yellow"
+                            <%--<button runat="server" id="btnExportToExcel" onserverclick="ExportToExcel" class="width-10 btn btn-sm btn-yellow"
                                 title="Excel">
                                 <i class="icon-download"></i>Excel
                                        
-                            </button>
+                            </button>--%>
                         </h6>
                     </div>
                     <div class="widget-body">
@@ -74,7 +74,30 @@
                                                         meta:resourcekey="txtProjectCodeResource1"></asp:TextBox>
                                                 </td>
 
-                                                <tr>
+                                                
+                                            <tr>
+                                                <td>Status:</td>
+                                                <td>
+                                                    <asp:DropDownList ID="ddlStatus" runat ="server">
+                                                        <asp:ListItem Text="All" Value="0"></asp:ListItem>
+                                                        <asp:ListItem Text="Approved by Cluster/Sector " Value="Approved by Cluster/Sector "></asp:ListItem>
+                                                        <asp:ListItem Text="CAP Final Review Phase" Value="CAP Final Review Phase"></asp:ListItem>
+                                                        <asp:ListItem Text="Draft" Value="Draft"></asp:ListItem>
+                                                        <asp:ListItem Text="HQ Review Phase" Value="HQ Review Phase"></asp:ListItem>
+                                                        <asp:ListItem Text="Published by CAP" Value="Published by CAP"></asp:ListItem>
+                                                        <asp:ListItem Text="Rejected" Value="Rejected"></asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </td>
+                                                <td class="width-20">
+                                                    <label>
+                                                       Sec Cluster:</label>
+                                                </td>
+                                                <td class="width-30">
+                                                    <asp:DropDownList ID="ddlSecClusters" runat="server" CssClass="width-80">
+                                                    </asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                     <td>&nbsp;</td>
                                                     <td colspan="4" style="padding-top: 10px;">
                                                         <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" CssClass="btn btn-primary" CausesValidation="false" />
@@ -115,6 +138,8 @@
                             </asp:BoundField>
                             <asp:BoundField DataField="OrganizationName" HeaderText="Organization" SortExpression="OrganizationName"
                                 meta:resourcekey="BoundFieldResource3" ItemStyle-Width="200px" />
+                            <asp:BoundField DataField="ClusterName" HeaderText="Cluster" SortExpression="ClusterName" />
+                            <asp:BoundField DataField="SecCluster" HeaderText="Sec Cluster" SortExpression="SecCluster" />
                             <%--<asp:BoundField DataField="CurrentRequest" HeaderText="Current Request" SortExpression="CurrentRequest"
                                 meta:resourcekey="BoundFieldResource5" />--%>
                             <asp:BoundField DataField="OriginalRequest" HeaderText="Original Request" SortExpression="OriginalRequest"

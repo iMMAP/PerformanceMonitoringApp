@@ -25,7 +25,7 @@ namespace SRFROWCA.ClusterLead
                 LoadClusterIndicators();
             }
 
-            if (RC.IsClusterLead(this.User) || RC.IsRegionalClusterLead(this.User))
+            if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) || RC.IsRegionalClusterLead(this.User))
             {
                 int maxIndicators = 0;
                 DateTime endEditDate = DateTime.Now.Date;
@@ -294,7 +294,7 @@ namespace SRFROWCA.ClusterLead
 
                     if (endEditDate < DateTime.Now.Date)
                     {
-                        if (RC.IsClusterLead(this.User) || RC.IsRegionalClusterLead(this.User))
+                        if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) || RC.IsRegionalClusterLead(this.User))
                         {
                             btnDelete.Visible = false;
                         }
@@ -303,7 +303,7 @@ namespace SRFROWCA.ClusterLead
 
                 if (btnEdit != null && endEditDate < DateTime.Now.Date)
                 {
-                    if (RC.IsClusterLead(this.User) || RC.IsRegionalClusterLead(this.User))
+                    if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) || RC.IsRegionalClusterLead(this.User))
                     {
                         btnEdit.Visible = false;
                     }

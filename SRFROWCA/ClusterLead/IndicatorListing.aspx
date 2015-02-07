@@ -91,7 +91,7 @@
                                                             </td>
                                                             <td class="width-30">
 
-                                                                <asp:DropDownList ID="ddlActivity" runat="server" AppendDataBoundItems="true" CssClass="width-80">
+                                                                <asp:DropDownList ID="ddlActivity" runat="server" CssClass="width-80">
                                                                 </asp:DropDownList>
                                                             </td>
                                                         </tr>

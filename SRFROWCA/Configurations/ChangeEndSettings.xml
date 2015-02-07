@@ -3,4 +3,5 @@
   <Key-1113 CountryID="11" Country="Sahel Region" ClusterID="13" Cluster="Education" DateLimit="12-16-2014" ClusterCount="4" />
   <Key-1613 CountryID="16" Country="Mali" ClusterID="13" Cluster="Education" DateLimit="12-24-2014" FrameworkCount="40" ActivityCount="20" ClusterCount="4" />
   <Key-1313 CountryID="13" Country="Cameroon" ClusterID="13" Cluster="Education" DateLimit="12-25-2014" FrameworkCount="50" ActivityCount="100" ClusterCount="10" />
+  <Key-1820 CountryID="18" Country="Niger" ClusterID="20" Cluster="Food Security" DateLimit="01-31-2015" FrameworkCount="40" ActivityCount="20" ClusterCount="4" />
 </ChangeEndSettings>

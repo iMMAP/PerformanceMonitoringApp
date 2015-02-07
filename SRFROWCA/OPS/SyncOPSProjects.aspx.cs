@@ -30,35 +30,33 @@ namespace SRFROWCA.OPS
             InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1082.xml");
             InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1083.xml");
 
-            //DBContext.Delete("DeleteTempProjectsOPS", new object[] { DBNull.Value });
+            DBContext.Delete("DeleteTempProjectsOPS", new object[] { DBNull.Value });
 
             Response.Write("All Synced!");
         }
 
         private void InsertUpdateProjects(string url)
         {
-            try
-            {
+            //try
+            //{
                 Response.Write("<br/>");
                 Response.Write(url);
                 Response.Write("<br/>");
                 XDocument doc = XDocument.Load(url);
                 IEnumerable<OPSProject> projects = GetProjects(doc);
                 SyncProjects(projects, doc);
-            }
-            catch (Exception ex)
-            {
-                Response.Write(url);
-                Response.Write("<br/>");
-                Response.Write(ex.ToString());
-                Response.Write("<br/>");
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Response.Write(url);
+            //    Response.Write("<br/>");
+            //    Response.Write(ex.ToString());
+            //    Response.Write("<br/>");
+            //}
         }
 
         private IEnumerable<OPSProject> GetProjects(XDocument doc)
         {
-            //XDocument doc = XDocument.Load(url);
-            int so = 0;
             var projects = doc.Root
                 .Elements("project")
                 .Select(x => new OPSProject
@@ -94,7 +92,9 @@ namespace SRFROWCA.OPS
                     CountryId = (string)x.Element("country").Attribute("id"),
                     CountryName = (string)x.Element("country"),
                     OtherFields = (string)x.Element("other_fields"),
-                    EGFLocations = (string)x.Element("egf_locations")
+                    EGFLocations = (string)x.Element("egf_locations"),
+                    SecondaryClusterId = (string)x.Element("subset").Attribute("id"),
+                    SecondaryClusterName = (string)x.Element("subset")
                     ////Organizations = new OPSProjectOrganizations
                     ////{
                     ////    Organization = x.Descendants("organisations")
@@ -116,16 +116,26 @@ namespace SRFROWCA.OPS
         {
             foreach (var project in projects)
             {
-                if (project.SectorName != "SECTOR NOT YET SPECIFIED")
+                try
                 {
-                    IEnumerable<OPSDescription> descriptions = GetProjectDescriptions(doc, project.ProjectId);
-                    object[] parameters = GetParameters(project, descriptions);
-                    DBContext.Update("InsertUpdateOPSProject", parameters);
-                    Response.Write(project.ProjectId);
+                    if (project.SectorName != "SECTOR NOT YET SPECIFIED")
+                    {
+                        IEnumerable<OPSDescription> descriptions = GetProjectDescriptions(doc, project.ProjectId);
+                        object[] parameters = GetParameters(project, descriptions);
+                        DBContext.Update("InsertUpdateOPSProject", parameters);
+                        Response.Write(project.ProjectId);
+                        Response.Write("<br/>");
+                        IEnumerable<OPSOrganization> organizations = GetOrganizations(doc, project.ProjectId);
+                        object[] orgParameter = GetOrganizationParameter(project.ProjectId, organizations.FirstOrDefault());
+                        DBContext.Update("InsertUpdateOPSProjectOrganization", orgParameter);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //Response.Write(url);
                     Response.Write("<br/>");
-                    IEnumerable<OPSOrganization> organizations = GetOrganizations(doc, project.ProjectId);
-                    object[] orgParameter = GetOrganizationParameter(project.ProjectId, organizations.FirstOrDefault());
-                    DBContext.Update("InsertUpdateOPSProjectOrganization", orgParameter);
+                    Response.Write(ex.ToString());
+                    Response.Write("<br/>");
                 }
 
             }
@@ -148,6 +158,7 @@ namespace SRFROWCA.OPS
 
         private IEnumerable<OPSOrganization> GetOrganizations(XDocument doc, string projectId)
         {
+
             var organizations = doc.Root.Elements("project")
                 .Where(p => ((string)p.Attribute("id")) == projectId)
                 .Descendants("organisations").Descendants("organisation")
@@ -195,6 +206,20 @@ namespace SRFROWCA.OPS
             else
             {
                 clusterName = project.ClusterName;
+            }
+
+            string secClusterName = "";
+            if (project.SecondaryClusterName == "WATER AND SANITATION")
+            {
+                secClusterName = "Water Sanitation & Hygiene";
+            }
+            else if (project.SecondaryClusterName == "MULTI-SECTOR FOR REFUGEES")
+            {
+                secClusterName = "Multi Sector for Refugees";
+            }
+            else
+            {
+                secClusterName = project.SecondaryClusterName;
             }
 
             int tempVal = 0;
@@ -299,6 +324,7 @@ namespace SRFROWCA.OPS
                                     project.GenderMarker,
                                     project.EGFLocations,
                                     project.PriorityName,
+                                    secClusterName,
                                     DBNull.Value};
         }
     }
