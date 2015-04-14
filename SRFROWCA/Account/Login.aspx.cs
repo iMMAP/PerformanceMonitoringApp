@@ -29,23 +29,14 @@ namespace SRFROWCA.Account
 
         protected void LoginUser_LoggedIn(Object sender, EventArgs e)
         {
-            if (Roles.IsUserInRole(LoginUser.UserName, "Admin"))
-            {
-                if (RC.SelectedEmergencyId == 3)
-                {
-                    Response.Redirect("~/ClusterLead/CountryIndicators.aspx");
-                }
-            }
-            else if (Roles.IsUserInRole(LoginUser.UserName, "User"))
+            UserInfo.UserProfileInfo(3);
+            if (Roles.IsUserInRole(LoginUser.UserName, "User"))
             {
                 Response.Redirect("~/Pages/AddActivities.aspx");
             }
-            else 
+            else
             {
-                if (RC.SelectedEmergencyId == 3)
-                {
-                    Response.Redirect("~/ClusterLead/CountryIndicators.aspx");
-                }
+                Response.Redirect("~/ClusterLead/ProjectsListing.aspx");
             }
         }
 

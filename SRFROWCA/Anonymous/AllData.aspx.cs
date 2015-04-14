@@ -47,12 +47,8 @@ namespace SRFROWCA.Anonymous
         protected void btnReset_Click(object sender, EventArgs e)
         {
             PopulateDropDowns();
-            txtFromDate.Text = "";
-            txtToDate.Text = "";
-            
-            cbORSProjects.Checked = cbORSProjects.Checked = cbRegional.Checked = cbCountry.Checked = false;
-            cbFunded.Checked = cbNotFunded.Checked = cbValidated.Checked = cbNotValidated.Checked = false;
-
+            //txtFromDate.Text = "";
+            //txtToDate.Text = "";
             LoadData();
         }
 
@@ -86,14 +82,11 @@ namespace SRFROWCA.Anonymous
         protected void ddlCluster_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadDataOnMultipleCheckBoxControl();
-            PopulateActivities();
-            PopulateIndicators();
         }
 
         protected void ddlActivities_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadDataOnMultipleCheckBoxControl();
-            PopulateIndicators();
         }
 
         protected void ddlIndicators_SelectedIndexChanged(object sender, EventArgs e)
@@ -114,9 +107,9 @@ namespace SRFROWCA.Anonymous
 
         protected void ddlProjects_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadDataOnMultipleCheckBoxControl(); 
+            LoadDataOnMultipleCheckBoxControl();
             PopulateOrganizations();
-        }  
+        }
 
         protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -154,9 +147,6 @@ namespace SRFROWCA.Anonymous
             PopulateMonths();
             PopulateOrganizations();
             PopulateObjectives();
-            PopulatePriorities();
-            PopulateActivities();
-            PopulateIndicators();
             PopulateProjects();
         }
 
@@ -179,42 +169,6 @@ namespace SRFROWCA.Anonymous
 
             //if (!string.IsNullOrEmpty(orgIDs))
             //    SelectAll(ddlProjects);
-        }
-
-        private void PopulateActivities()
-        {
-            string clusterIds = RC.GetSelectedValues(ddlClusters);
-            string objIds = RC.GetSelectedValues(ddlObjectives);
-            string priorityIds = RC.GetSelectedValues(ddlPriority);
-
-            if (clusterIds != null)
-            {
-                ddlActivities.DataTextField = "ActivityName";
-                ddlActivities.DataValueField = "PriorityActivityId";
-                ddlActivities.DataSource = DBContext.GetData("[GetActivitiesOfMultipleClusterObjAndPriorities]", new object[] { 1, clusterIds, objIds, priorityIds, RC.SelectedSiteLanguageId });
-                ddlActivities.DataBind();
-            }
-        }
-
-        private void PopulateIndicators()
-        {
-            string clusterIds = RC.GetSelectedValues(ddlClusters);
-            string objIds = RC.GetSelectedValues(ddlObjectives);
-            string priorityIds = RC.GetSelectedValues(ddlPriority);
-            string activityIds = RC.GetSelectedValues(ddlActivities);
-
-            if (clusterIds != null)
-            {
-                ddlIndicators.DataTextField = "DataName";
-                ddlIndicators.DataValueField = "ActivityDataId";
-                ddlIndicators.DataSource = DBContext.GetData("[GetIndicatorsOfMultipleClusterObjPriAndActivities]", new object[] { 1, clusterIds, objIds, priorityIds, activityIds, RC.SelectedSiteLanguageId });
-                ddlIndicators.DataBind();
-            }
-        }
-
-        private void PopulatePriorities()
-        {
-            UI.FillPriorities(ddlPriority);
         }
 
         private void PopulateObjectives()
@@ -248,10 +202,13 @@ namespace SRFROWCA.Anonymous
             UI.FillCountry(ddlCountry);
             if (UserInfo.Country > 0)
             {
-                ddlCountry.SelectedValue = UserInfo.Country.ToString();
-                ddlCountry.Visible = false;
-                lblCountry.Text = ddlCountry.SelectedItem.Text;
-                lblCountry.Visible = true;
+                if (!RC.IsRegionalClusterLead(this.User))
+                {
+                    ddlCountry.SelectedValue = UserInfo.Country.ToString();
+                    ddlCountry.Visible = false;
+                    lblCountry.Text = ddlCountry.SelectedItem.Text;
+                    lblCountry.Visible = true;
+                }
             }
         }
 
@@ -354,9 +311,11 @@ namespace SRFROWCA.Anonymous
         {
             try
             {
+                dt.Columns.Remove("FundingStatus");
+                dt.Columns.Remove("Admin2");
+                dt.Columns.Remove("ActivityId");
                 dt.Columns.Remove("rnumber");
                 dt.Columns.Remove("ObjectiveId");
-                dt.Columns.Remove("PriorityId");
                 dt.Columns.Remove("MonthId");
                 dt.Columns.Remove("cnt");
             }
@@ -408,7 +367,7 @@ namespace SRFROWCA.Anonymous
         private DataTable GetReportData(bool filter)
         {
             object[] paramValue = GetParamValues(filter);
-            return DBContext.GetData("GetAllTasksDataReport", paramValue);
+            return DBContext.GetData("GetAllTasksDataReport2015", paramValue);
         }
 
         // Get filter criteria and create an object with parameter values.
@@ -426,14 +385,9 @@ namespace SRFROWCA.Anonymous
             string clusterIds = RC.GetSelectedValues(ddlClusters);
             string orgIds = RC.GetSelectedValues(ddlOrganizations);
             string objIds = RC.GetSelectedValues(ddlObjectives);
-            string prIds = RC.GetSelectedValues(ddlPriority);
-            string actIds = RC.GetSelectedValues(ddlActivities);
-            string indIds = RC.GetSelectedValues(ddlIndicators);
             string projectIds = RC.GetSelectedValues(ddlProjects);
-            int? fromMonth = !string.IsNullOrEmpty(txtFromDate.Text.Trim()) ? Convert.ToInt32(txtFromDate.Text.Trim().Substring(0, 2)) : (int?)null;
-            int? toMonth = !string.IsNullOrEmpty(txtToDate.Text.Trim()) ? Convert.ToInt32(txtToDate.Text.Trim().Substring(0, 2)) : (int?)null;
-            int? regionalInd = cbRegional.Checked ? 1 : (int?)null;
-            int? countryInd = cbCountry.Checked ? 1 : (int?)null;
+            int? fromMonth = null;//!string.IsNullOrEmpty(txtFromDate.Text.Trim()) ? Convert.ToInt32(txtFromDate.Text.Trim().Substring(0, 2)) : (int?)null;
+            int? toMonth = null;//!string.IsNullOrEmpty(txtToDate.Text.Trim()) ? Convert.ToInt32(txtToDate.Text.Trim().Substring(0, 2)) : (int?)null;
             int? funded = cbFunded.Checked ? 1 : (int?)null;
             int? notFunded = cbNotFunded.Checked ? 1 : (int?)null;
             int? isOPS = cbOPSProjects.Checked && cbORSProjects.Checked ? null : cbOPSProjects.Checked ? 1 : cbORSProjects.Checked ? 0 : (int?)null;
@@ -449,15 +403,14 @@ namespace SRFROWCA.Anonymous
             if (filter)
             {
                 pageSize = gvReport.PageSize;
-                pageIndex = GridPageIndex; 
+                pageIndex = GridPageIndex;
             }
 
             int langId = RC.SelectedSiteLanguageId;
             int emergencyId = RC.SelectedEmergencyId;
 
             return new object[] {monthIds, locationIds, clusterIds, orgIds, 
-                                    objIds, prIds, actIds, indIds, projectIds,
-                                    fromMonth, toMonth, regionalInd, countryInd, funded, notFunded,
+                                    objIds, projectIds,fromMonth, toMonth, funded, notFunded,
                                     isOPS, isApproved, pageIndex, pageSize, Convert.ToInt32(SQLPaging), langId, emergencyId };
         }
 
@@ -469,9 +422,6 @@ namespace SRFROWCA.Anonymous
             string clusters = RC.GetItemsText(ddlClusters);
             string orgs = RC.GetItemsText(ddlOrganizations);
             string objs = RC.GetItemsText(ddlObjectives);
-            string prs = RC.GetItemsText(ddlPriority);
-            string acts = RC.GetItemsText(ddlActivities);
-            string inds = RC.GetItemsText(ddlIndicators);
             string projects = RC.GetItemsText(ddlProjects);
 
             string criteria = "";
@@ -482,9 +432,6 @@ namespace SRFROWCA.Anonymous
             criteria += MakeSearchCriteriaString("Projects: ", projects);
             criteria += MakeSearchCriteriaString("Months: ", months);
             criteria += MakeSearchCriteriaString("Objectives: ", objs);
-            criteria += MakeSearchCriteriaString("Priorities: ", prs);
-            criteria += MakeSearchCriteriaString("Activities: ", acts);
-            criteria += MakeSearchCriteriaString("Indicators: ", inds);
 
             return criteria;
         }
@@ -567,6 +514,24 @@ namespace SRFROWCA.Anonymous
             gv.DataBind();
 
             ExportUtility.ExportGridView(gv, "ORS_CustomReport", ".xls", Response, true);
+        }
+
+        protected void ExportToCSV(object sender, EventArgs e)
+        {
+            Response.ClearContent();
+            Response.Clear();
+            Response.ContentType = "application/ms-excel";
+            Response.AddHeader("Content-Disposition", "attachment; filename=DownloadedData.csv;");
+
+            SQLPaging = PagingStatus.OFF;
+            DataTable dt = GetReportData(false);
+
+            RemoveColumnsFromDataTable(dt);
+            ReplaceHTMLTags(dt);
+
+            Response.Write(DataTableToCSV.ToCSV(dt));
+            Response.Flush();
+            Response.End();
         }
 
         //private void testexport()

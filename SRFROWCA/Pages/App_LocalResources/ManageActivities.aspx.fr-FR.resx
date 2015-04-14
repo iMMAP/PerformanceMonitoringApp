@@ -178,7 +178,7 @@
     <value />
   </data>
   <data name="BoundFieldResource7.HeaderText" xml:space="preserve">
-    <value>Indicateur</value>
+    <value>Activité Indicateur</value>
   </data>
   <data name="cbIsAddedResource1.Text" xml:space="preserve">
     <value />
@@ -238,7 +238,7 @@
     <value>Gérer les activités de projet</value>
   </data>
   <data name="localResource1.Text" xml:space="preserve">
-    <value>Liste général des indicateurs de cluster</value>
+    <value>Liste général des indicateurs de activité</value>
   </data>
   <data name="lzeLgndHumPrioritiesResource1.Text" xml:space="preserve">
     <value>Priorités humanitaires</value>
@@ -262,7 +262,7 @@
     <value />
   </data>
   <data name="TemplateFieldResource1.HeaderText" xml:space="preserve">
-    <value>Objectif &amp; Priorités</value>
+    <value>Objectif</value>
   </data>
   <data name="TemplateFieldResource2.AccessibleHeaderText" xml:space="preserve">
     <value />

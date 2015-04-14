@@ -67,46 +67,8 @@
                                 <asp:Localize ID="Localize1" runat="server" Text="No Project means all"></asp:Localize>
                                 <asp:Label ID="Label1" runat="server" Text="" Visible="false"></asp:Label>
                             </li>
-                            <li>
-                                <i class="icon-hand-right blue"></i>
-
-                                <label>
-                                    <input id="chkCountryIndicators" runat="server" name="form-field-checkbox" type="checkbox" class="ace" />
-                                    <span class="lbl">Country Indicators</span>
-                                </label>
-
-                            </li>
-                            <li>
-                                <i class="icon-hand-right blue"></i>
-
-                                <label>
-                                    <input id="chkRegionalInidcators" runat="server" name="form-field-checkbox" type="checkbox" class="ace" />
-                                    <span class="lbl">Regional Indicators</span>
-                                </label>
-
-                            </li>
-                            <li>
-                                <i class="icon-hand-right blue"></i>
-
-                                <label>
-                                    <input id="chkAllIndicators" runat="server" name="form-field-checkbox" type="checkbox" class="ace" />
-                                    <span class="lbl">All Indicators (Master List)</span>
-                                </label>
-
-                            </li>
-                            <li>
-                                <i class="icon-hand-right blue"></i>
-
-                                <label>
-                                    <input id="chkProjectIndicators" runat="server" name="form-field-checkbox" type="checkbox" class="ace" />
-                                    <span class="lbl">Project Indicators</span>
-                                </label>
-
-                            </li>
-                            <li>
-                                <i class="icon-hand-right blue"></i>
-                                <asp:Localize ID="localDownloadClusterTargets" runat="server" Text="Cluster Targets of each indicator"></asp:Localize>
-                            </li>
+                            
+                           
                             <%--<li>
                                 <i class="icon-hand-right blue"></i>
                                 <asp:Localize ID="LocalDownloadLocations" runat="server" Text="All locations ('Region')"></asp:Localize>
@@ -115,7 +77,7 @@
                         <div class="space"></div>
                         <div>
                             <h4 class="smaller"><b>Locations You Want To Report ON:</b></h4>
-                            <asp:CheckBoxList ID="cblLocations" runat="server" RepeatColumns="6"></asp:CheckBoxList>
+                            <asp:CheckBoxList ID="cblLocations" runat="server" RepeatColumns="4"></asp:CheckBoxList>
                         </div>
                         <div class="space"></div>
                         <div class="hidden">

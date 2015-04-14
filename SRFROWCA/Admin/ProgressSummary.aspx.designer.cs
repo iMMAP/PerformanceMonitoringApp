@@ -94,57 +94,93 @@ namespace SRFROWCA.Admin {
         protected global::System.Web.UI.WebControls.Button btnPDFPrint;
         
         /// <summary>
-        /// lblUsers control.
+        /// lblSRPProjects control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUsers;
+        protected global::System.Web.UI.WebControls.Label lblSRPProjects;
         
         /// <summary>
-        /// lblOrganizations control.
+        /// lblSRPOrg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblOrganizations;
+        protected global::System.Web.UI.WebControls.Label lblSRPOrg;
         
         /// <summary>
-        /// lblReportedOrgs control.
+        /// lblSRPFunded control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblReportedOrgs;
+        protected global::System.Web.UI.WebControls.Label lblSRPFunded;
         
         /// <summary>
-        /// lblReportedCountries control.
+        /// lblSRPReported control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblReportedCountries;
+        protected global::System.Web.UI.WebControls.Label lblSRPReported;
         
         /// <summary>
-        /// lblReports control.
+        /// lblReportingorg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblReports;
+        protected global::System.Web.UI.WebControls.Label lblReportingorg;
         
         /// <summary>
-        /// lblReportedProjects control.
+        /// lblNonSRPPrj control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblReportedProjects;
+        protected global::System.Web.UI.WebControls.Label lblNonSRPPrj;
+        
+        /// <summary>
+        /// lblNonSRPReported control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNonSRPReported;
+        
+        /// <summary>
+        /// lblCountriesReporting control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCountriesReporting;
+        
+        /// <summary>
+        /// tblCountry control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTable tblCountry;
+        
+        /// <summary>
+        /// tblOrg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTable tblOrg;
     }
 }

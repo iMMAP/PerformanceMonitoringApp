@@ -5,7 +5,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using SRFROWCA.Common;
-
+using System.Transactions;
 
 namespace SRFROWCA.Pages
 {
@@ -14,7 +14,6 @@ namespace SRFROWCA.Pages
         protected void Page_PreRender(object sender, EventArgs e)
         {
             ObjPrToolTip.ObjectivesToolTip(cblObjectives);
-            ObjPrToolTip.PrioritiesToolTip(cblPriorities);
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -23,7 +22,6 @@ namespace SRFROWCA.Pages
             {
                 PopulateProjects();
                 PopulateObjectives();
-                PopulatePriorities();
 
                 if (rblProjects.Items.Count > 0)
                 {
@@ -47,6 +45,17 @@ namespace SRFROWCA.Pages
             }
         }
 
+        internal override void BindGridData()
+        {
+            PopulateObjectives();
+
+            if (rblProjects.Items.Count > 0)
+            {
+                rblProjects.SelectedValue = SelectedProjectId;
+                PopulateLogFrame();
+            }
+        }
+
         private bool ProjectIdExists(string SelectedProjectId)
         {
             foreach (ListItem item in rblProjects.Items)
@@ -58,30 +67,12 @@ namespace SRFROWCA.Pages
             }
 
             return false;
-        }
-
-        internal override void BindGridData()
-        {
-            PopulateObjectives();
-            PopulatePriorities();
-
-            if (rblProjects.Items.Count > 0)
-            {
-                rblProjects.SelectedValue = SelectedProjectId;
-                PopulateLogFrame();
-            }
-        }
+        }        
 
         private void PopulateObjectives()
         {
             UI.FillObjectives(cblObjectives, true, RC.SelectedEmergencyId);
             ObjPrToolTip.ObjectivesToolTip(cblObjectives);
-        }
-
-        private void PopulatePriorities()
-        {
-            UI.FillPriorities(cblPriorities);
-            ObjPrToolTip.PrioritiesToolTip(cblPriorities);
         }
 
         private void PopulateProjects()
@@ -113,87 +104,9 @@ namespace SRFROWCA.Pages
 
         private DataTable GetUserProjects()
         {
-            bool? isOPSProject = null;
-            DataTable dt = DBContext.GetData("GetOrgProjectsOnLocation", new object[] { UserInfo.EmergencyCountry, 
-                                                                                        UserInfo.Organization, isOPSProject });
+            DataTable dt = RC.GetOrgProjectsOnLocation(null);
             Session["testprojectdata"] = dt;
             return dt;
-        }
-
-        private void SaveOPSIndicator()
-        {
-            int projectId = RC.GetSelectedIntVal(rblProjects);
-            int? orgId = null;
-            Guid userId = RC.GetCurrentUserId;
-            DBContext.Delete("DeleteIndicatorFromProject", new object[] { projectId, 0, DBNull.Value, DBNull.Value });
-            foreach (GridViewRow row in gvIndicators.Rows)
-            {
-                if (row.RowType == DataControlRowType.DataRow)
-                {
-                    int indicatorId = Convert.ToInt32(gvIndicators.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString());
-
-                    CheckBox cbIsSRP = gvIndicators.Rows[row.RowIndex].FindControl("cbIsSRP") as CheckBox;
-                    if (cbIsSRP == null) return;
-                    if (!cbIsSRP.Checked)
-                    {
-                        CheckBox cbIsAdded = gvIndicators.Rows[row.RowIndex].FindControl("cbIsAdded") as CheckBox;
-                        if (cbIsAdded == null) return;
-
-                        int isOPS = 1;
-                        int isActive = Convert.ToInt32(cbIsAdded.Checked);
-
-                        DBContext.Update("UpdateOPSProjectIndicatorStatus", new object[] { projectId, indicatorId, isOPS, isActive, orgId, userId, DBNull.Value });
-                    }
-                    else
-                    {
-                        CheckBox cbIsAdded = gvIndicators.Rows[row.RowIndex].FindControl("cbIsAdded") as CheckBox;
-                        if (cbIsAdded == null) return;
-
-                        if (cbIsAdded.Checked)
-                        {
-                            int isActive = Convert.ToInt32(cbIsAdded.Checked);
-                            int projSelectedIndId = DBContext.Add("InsertProjectIndicator2",
-                                                                    new object[] { projectId, indicatorId, 0, isActive, orgId, userId, DBNull.Value });
-                        }
-                    }
-                }
-            }
-        }
-
-        private string GetSelectedIndicators()
-        {
-            string actIds = "";
-            foreach (GridViewRow row in gvIndicators.Rows)
-            {
-                if (row.RowType == DataControlRowType.DataRow)
-                {
-                    int indicatorId = Convert.ToInt32(gvIndicators.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString());
-                    CheckBox cbIsSRP = gvIndicators.Rows[row.RowIndex].FindControl("cbIsSRP") as CheckBox;
-                    if (cbIsSRP != null)
-                    {
-                        if (cbIsSRP.Checked)
-                        {
-                            CheckBox cb = gvIndicators.Rows[row.RowIndex].FindControl("cbIsAdded") as CheckBox;
-                            if (cb != null)
-                            {
-                                if (cb.Checked)
-                                {
-                                    if (actIds != "")
-                                    {
-                                        actIds += "," + indicatorId.ToString();
-                                    }
-                                    else
-                                    {
-                                        actIds += indicatorId.ToString();
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            return actIds;
         }
 
         private void PopulateLogFrame()
@@ -218,11 +131,6 @@ namespace SRFROWCA.Pages
             gvIndicators.DataBind();
         }
 
-        private DataTable GetProjectCluster(int projectId)
-        {
-            return DBContext.GetData("GetProjectCluster", new object[] { projectId });
-        }
-
         protected void rblProjects_SelectedIndexChanged(object sender, EventArgs e)
         {
             //int projectId = Convert.ToInt32(rblProjects.SelectedValue);
@@ -235,64 +143,21 @@ namespace SRFROWCA.Pages
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 ObjPrToolTip.ObjectiveIconToolTip(e, 0);
-                ObjPrToolTip.PrioritiesIconToolTip(e, 1);
+                //ObjPrToolTip.PrioritiesIconToolTip(e, 1);
 
-                ObjPrToolTip.RegionalIndicatorIcon(e, 4);
-                ObjPrToolTip.CountryIndicatorIcon(e, 5);
-            }
-        }
-
-        private string GetSelectedItems(object sender)
-        {
-            string itemIds = "";
-            foreach (ListItem item in (sender as ListControl).Items)
-            {
-                if (item.Selected)
-                {
-                    if (itemIds != "")
-                    {
-                        itemIds += "," + item.Value;
-                    }
-                    else
-                    {
-                        itemIds += item.Value;
-                    }
-                }
-            }
-
-            return itemIds;
-        }
-
-        protected void cbIsAdded_CheckedChanged(object sender, EventArgs e)
-        {
-            int projectId = RC.GetSelectedIntVal(rblProjects);
-            if (projectId == 0) return;
-
-            int index = ((GridViewRow)((CheckBox)sender).NamingContainer).RowIndex;
-            CheckBox isAdded = gvIndicators.Rows[index].FindControl("cbIsAdded") as CheckBox;
-            if (isAdded == null) return;
-
-            int indicatorId = 0;
-            int.TryParse(gvIndicators.DataKeys[index].Values["ActivityDataId"].ToString(), out indicatorId);
-
-            if (indicatorId > 0)
-            {
-                CheckBox cbIsSRP = gvIndicators.Rows[index].FindControl("cbIsSRP") as CheckBox;
-                if (cbIsSRP == null) return;
-
-                Guid userId = RC.GetCurrentUserId;
-                int yearId = 10;
-                DBContext.Add("InsertProjectIndicator", new object[] { projectId, indicatorId, UserInfo.EmergencyCountry, yearId, isAdded.Checked, userId, DBNull.Value });
+                //ObjPrToolTip.RegionalIndicatorIcon(e, 4);
+                //ObjPrToolTip.CountryIndicatorIcon(e, 5);
             }
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            //using (TransactionScope scope = new TransactionScope())
+            using (TransactionScope scope = new TransactionScope())
             {
                 SaveData();
-                //scope.Complete();
+                scope.Complete();
                 ShowMessage("Data Saved Successfully!");
+                RC.SendEmail(UserInfo.EmergencyCountry, (int?)null, "Sahel ORS: Indicators add/removed from project" + rblProjects.SelectedItem.Text, "Indicators Add/removed from project" + rblProjects.SelectedItem.Text);
             }
         }
 
@@ -306,19 +171,14 @@ namespace SRFROWCA.Pages
                 if (row.RowType == DataControlRowType.DataRow)
                 {
                     int indicatorId = 0;
-                    int.TryParse(gvIndicators.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString(), out indicatorId);
+                    int.TryParse(gvIndicators.DataKeys[row.RowIndex].Values["IndicatorId"].ToString(), out indicatorId);
                     CheckBox isAdded = gvIndicators.Rows[row.RowIndex].FindControl("cbIsAdded") as CheckBox;
 
                     if (indicatorId > 0 && isAdded != null)
                     {
                         bool isOPS = projectId > 500000 ? false : true;
-                        int yearId = 10;
 
-                        if (isAdded.Checked)
-                        {
-                            int j = 0;
-                        }
-                        DBContext.Add("InsertProjectIndicator", new object[] { projectId, indicatorId, UserInfo.EmergencyCountry, yearId,
+                        DBContext.Add("InsertProjectIndicator2015", new object[] { projectId, indicatorId, UserInfo.EmergencyCountry, RC.YearsInDB.Year2015,
                                                                                 isAdded.Checked, isOPS, RC.GetCurrentUserId, DBNull.Value });
                     }
                 }

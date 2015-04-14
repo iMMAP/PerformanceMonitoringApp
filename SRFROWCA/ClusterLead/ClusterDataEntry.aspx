@@ -32,7 +32,7 @@
                                 <div class="widget-header widget-header-small header-color-blue2">
 
                                     <h6>
-                                        <button runat="server" id="btnExportToExcel" onserverclick="btnExportToExcel_ServerClick" class="btn btn-yellow" causesvalidation="false"
+                                        <button runat="server" id="btnExportToExcel" onserverclick="btnExportToExcel_ServerClick" class="btn btn-yellow hidden" causesvalidation="false"
                                             title="Excel">
                                             <i class="icon-download"></i>Excel
                                        
@@ -115,7 +115,7 @@
 
                     </asp:TemplateField>
 
-                    <asp:TemplateField ItemStyle-Width="63%" HeaderText="Indicator" SortExpression="Indicator">
+                    <asp:TemplateField ItemStyle-Width="46%" HeaderText="Indicator" SortExpression="Indicator">
                         <ItemTemplate>
                             <div style="word-wrap: break-word;">
                                 <%# Eval("Indicator")%>
@@ -123,17 +123,26 @@
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:BoundField DataField="Unit" HeaderText="Unit" SortExpression="Unit" ItemStyle-Width="10%"></asp:BoundField>
-                    <%--<asp:BoundField DataField="Target" ItemStyle-HorizontalAlign="Right" HeaderText="Target" SortExpression="Target" ItemStyle-Width="10%"></asp:BoundField>--%>
-                    <asp:TemplateField ItemStyle-Width="10%" HeaderText="Target" ItemStyle-HorizontalAlign="Right" SortExpression="Target">
+                   <asp:TemplateField ItemStyle-Width="10%" HeaderText="Origional Target" ItemStyle-HorizontalAlign="Right" SortExpression="OrigionalTarget">
+                        <ItemTemplate>
+                            <asp:Label ID="lblOrigionalTarget" runat="server" Text=' <%# Eval("OriginalTarget")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField ItemStyle-Width="8%" HeaderText="Current Target" ItemStyle-HorizontalAlign="Right" SortExpression="CurrentTarget">
                         <ItemTemplate>
                             <asp:Label ID="lblTarget" runat="server" Text=' <%# Eval("Target")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField ItemStyle-Width="8%" ItemStyle-HorizontalAlign="Right" HeaderText="Achieved">
+                    <asp:TemplateField ItemStyle-Width="8%" ItemStyle-HorizontalAlign="Right" HeaderText="Final Achieved">
                         <ItemTemplate>
                             <div style="word-wrap: break-word;">
-                                <asp:TextBox runat="server" MaxLength="8" Width="100" ID="txtAchieved" CssClass="numeric1" Style="text-align: right;" Text='<%# Eval("Achieved") %>'></asp:TextBox>
+                                <asp:TextBox runat="server" MaxLength="8" Width="100%" ID="txtAchieved" CssClass="numeric1" Style="text-align: right;" Text='<%# Eval("Achieved") %>'></asp:TextBox>
                             </div>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                     <asp:TemplateField ItemStyle-Width="8%" HeaderText="Final Sum" ItemStyle-HorizontalAlign="Right" SortExpression="TotalSum">
+                        <ItemTemplate>
+                            <asp:Label ID="lblSum" runat="server" Text=' <%# Eval("TotalSum")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField Visible="false">
@@ -150,6 +159,8 @@
                     </asp:BoundField>
                     <asp:BoundField DataField="IsSRP" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden">
                     </asp:BoundField>
+                    <asp:BoundField ItemStyle-Font-Size="Smaller" DataField="CreatedBy" HeaderText="Created" SortExpression="CreatedBy" ItemStyle-Width="10%"></asp:BoundField>
+                    <asp:BoundField ItemStyle-Font-Size="Smaller" DataField="UpdatedBy" HeaderText="Updated" SortExpression="UpdatedBy" ItemStyle-Width="10%"></asp:BoundField>
                 </Columns>
             </asp:GridView>
         </div>

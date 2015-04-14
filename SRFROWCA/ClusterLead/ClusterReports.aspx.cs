@@ -18,8 +18,27 @@ namespace SRFROWCA.ClusterLead
             if (!IsPostBack)
             {
                 LoadCombos();
-                ShowHideControls();
+                DisableDropDowns();
                 LoadClusterReports();
+            }
+        }
+
+        private void SetComboValues()
+        {
+            if (RC.IsClusterLead(this.User))
+            {
+                ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
+                ddlCluster.SelectedValue = UserInfo.EmergencyCluster.ToString();
+            }
+
+            if (RC.IsCountryAdmin(this.User))
+            {
+                ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
+            }
+
+            if (RC.IsRegionalClusterLead(this.User))
+            {
+                ddlCluster.SelectedValue = UserInfo.EmergencyCluster.ToString();
             }
         }
 
@@ -32,29 +51,25 @@ namespace SRFROWCA.ClusterLead
         private DataTable SetDataSource()
         {
             int? countryId = null;
-            string countryIds = null;
             int? clusterId = null;
-            string clusterIds = null;
-            int? monthID = null;
             string monthIDs = null;
             string indicator = null;
 
             if (!string.IsNullOrEmpty(txtIndicatorName.Text.Trim()))
                 indicator = txtIndicatorName.Text.Trim();
 
-            countryIds = RC.GetSelectedValues(ddlCountry);
+            if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
+                clusterId = Convert.ToInt32(ddlCluster.SelectedValue);
 
-            //if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
-            //    clusterId = Convert.ToInt32(ddlCluster.SelectedValue);
-
-            clusterIds = RC.GetSelectedValues(ddlCluster);
-
-            //if (Convert.ToInt32(ddlMonth.SelectedValue) > -1)
-            //    monthID = Convert.ToInt32(ddlMonth.SelectedValue);
+            if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
+                countryId = Convert.ToInt32(ddlCountry.SelectedValue);
 
             monthIDs = RC.GetSelectedValues(ddlMonth);
 
-            return DBContext.GetData("uspGetClusterReports", new object[] { indicator, monthID, countryId, clusterId, RC.SelectedSiteLanguageId, cbIncludeRegional.Checked, countryIds, clusterIds, monthIDs });
+            bool isRegional = RC.IsRegionalClusterLead(this.User);
+
+            return DBContext.GetData("uspGetClusterReports", new object[] { indicator, countryId, clusterId, 
+                                                                             RC.SelectedSiteLanguageId, monthIDs, isRegional });
         }
 
         internal override void BindGridData()
@@ -68,31 +83,30 @@ namespace SRFROWCA.ClusterLead
             UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
             UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
             PopulateMonths();
-        }
 
-        private void ShowHideControls()
+            ddlCluster.Items.Insert(0, new ListItem("--- Select Cluster ---", "-1"));
+            ddlCountry.Items.Insert(0, new ListItem("--- Select Country ---", "-1"));
+
+            SetComboValues();
+        }        
+
+        private void DisableDropDowns()
         {
+            if (RC.IsClusterLead(this.User))
+            {
+                RC.EnableDisableControls(ddlCluster, false);
+                RC.EnableDisableControls(ddlCountry, false);
+            }
+
             if (RC.IsCountryAdmin(this.User))
             {
-                lblCountry.Visible =
-                    ddlCountry.Visible = false;
-
-                ddlCountry.SelectedValue = Convert.ToString(UserInfo.EmergencyCountry);
-                CountryDisplayNone = "display:none";
+                RC.EnableDisableControls(ddlCountry, false);
             }
-            else if (RC.IsClusterLead(this.User))
+
+            if (RC.IsRegionalClusterLead(this.User))
             {
-                lblCountry.Visible =
-                    ddlCountry.Visible =
-                        ddlCluster.Visible =
-                            lblCluster.Visible = false;
-
-                ddlCountry.SelectedValue = Convert.ToString(UserInfo.EmergencyCountry);
-                ddlCluster.SelectedValue = Convert.ToString(UserInfo.EmergencyCluster);
-
-                ClusterDisplayNone = "display:none";
+                RC.EnableDisableControls(ddlCluster, false);
             }
-
         }
 
         private void PopulateMonths()
@@ -194,17 +208,37 @@ namespace SRFROWCA.ClusterLead
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                ObjPrToolTip.RegionalIndicatorIcon(e, 8);
-                ObjPrToolTip.CountryIndicatorIcon(e, 9);
+                ObjPrToolTip.RegionalIndicatorIcon(e, 11);
+                ObjPrToolTip.CountryIndicatorIcon(e, 12);
 
-                Label lblTarget = (Label)e.Row.FindControl("lblTarget");
-                Label lblAchieved = (Label)e.Row.FindControl("lblAchieved");
                 string siteCulture = RC.SelectedSiteLanguageId.Equals(1) ? "en-US" : "de-DE";
 
-                if (lblTarget != null)
+                Label lblRegionalAchieved = (Label)e.Row.FindControl("lblRegionalAchieved");
+                if (lblRegionalAchieved != null && !string.IsNullOrEmpty(lblRegionalAchieved.Text))
+                    lblRegionalAchieved.Text = String.Format(new CultureInfo(siteCulture), "{0:0,0}", Convert.ToInt32(lblRegionalAchieved.Text));
+
+                Label lblTotalSum = (Label)e.Row.FindControl("lblTotalSum");
+                if (lblTotalSum != null && !string.IsNullOrEmpty(lblTotalSum.Text))
+                    lblTotalSum.Text = String.Format(new CultureInfo(siteCulture), "{0:0,0}", Convert.ToInt32(lblTotalSum.Text));
+
+                Label lblCountryAchieved = (Label)e.Row.FindControl("lblCountryAchieved");
+                if (lblCountryAchieved != null && !string.IsNullOrEmpty(lblCountryAchieved.Text))
+                    lblCountryAchieved.Text = String.Format(new CultureInfo(siteCulture), "{0:0,0}", Convert.ToInt32(lblCountryAchieved.Text));
+
+                Label lblCountrySum = (Label)e.Row.FindControl("lblCountrySum");
+                if (lblCountrySum != null && !string.IsNullOrEmpty(lblCountrySum.Text))
+                    lblCountrySum.Text = String.Format(new CultureInfo(siteCulture), "{0:0,0}", Convert.ToInt32(lblCountrySum.Text));
+
+                Label lblOrigionalTarget = (Label)e.Row.FindControl("lblOrigionalTarget");
+                if (lblOrigionalTarget != null && !string.IsNullOrEmpty(lblOrigionalTarget.Text))
+                    lblOrigionalTarget.Text = String.Format(new CultureInfo(siteCulture), "{0:0,0}", Convert.ToInt32(lblOrigionalTarget.Text));
+
+                Label lblTarget = (Label)e.Row.FindControl("lblTarget");
+                if (lblTarget != null && !string.IsNullOrEmpty(lblTarget.Text))
                     lblTarget.Text = String.Format(new CultureInfo(siteCulture), "{0:0,0}", Convert.ToInt32(lblTarget.Text));
 
-                if (lblAchieved != null)
+                Label lblAchieved = (Label)e.Row.FindControl("lblAchieved");
+                if (lblAchieved != null && !string.IsNullOrEmpty(lblAchieved.Text))
                     lblAchieved.Text = String.Format(new CultureInfo(siteCulture), "{0:0,0}", Convert.ToInt32(lblAchieved.Text));
             }
         }
@@ -238,7 +272,7 @@ namespace SRFROWCA.ClusterLead
             rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://win-78sij2cjpjj/Reportserver");
             //rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://54.83.26.190/Reportserver");
             ReportParameter[] RptParameters = null;
-           //rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://localhost/Reportserver");
+            //rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://localhost/Reportserver");
             string countryId = null;
             string countryIds = null;
             string clusterId = null;
@@ -293,13 +327,17 @@ namespace SRFROWCA.ClusterLead
             try
             {
                 dt.Columns.Remove("IsSRP");
-                dt.Columns.Remove("IsRegional");
+                //dt.Columns.Remove("IsRegional");
                 dt.Columns.Remove("EmergencyLocationId");
+                dt.Columns.Remove("EmergencyLocationIdSahel");                
+                dt.Columns.Remove("ClusterIndicatorId");
                 dt.Columns.Remove("SiteLanguageId");
-
+                dt.Columns.Remove("CreatedById");
+                dt.Columns.Remove("CreatedDate");
+                dt.Columns.Remove("UpdatedById");
+                dt.Columns.Remove("UpdatedDate");
             }
             catch { }
         }
     }
-
 }

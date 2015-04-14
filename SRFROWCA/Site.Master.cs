@@ -1,12 +1,8 @@
-﻿using System;
-using System.Data;
+﻿using SRFROWCA.Common;
+using System;
+using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
-using SRFROWCA.Common;
-using System.Linq;
-using System.Web.UI.HtmlControls;
-using BusinessLogic;
-using System.Collections.Generic;
 
 namespace SRFROWCA
 {
@@ -35,65 +31,30 @@ namespace SRFROWCA
                     }
                 }
             }
-
-            if (RC.SelectedEmergencyId <= 0)
-            {
-                if (Request.Cookies["SelectedEmergencyCookie"] != null)
-                {
-                    ddlEmgergency.SelectedValue = Request.Cookies["SelectedEmergencyCookie"].Value;
-                    RC.SelectedEmergencyId = Convert.ToInt32(ddlEmgergency.SelectedValue);
-                }
-            }
+            RC.SelectedEmergencyId = 3;
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            RC.SelectedEmergencyId = 3;
             SetUserName();
             HideAllAuthenticatedMenues();
             LoadNotifications();
 
             if (!IsPostBack)
             {
-                if (RC.SelectedEmergencyId > 0)
-                {
-                    ddlEmgergency.SelectedValue = RC.SelectedEmergencyId.ToString();
-                }
-                else
-                {
-                    RC.SelectedEmergencyId = Convert.ToInt32(ddlEmgergency.SelectedValue);
-                }
-
                 if (HttpContext.Current.User.Identity.IsAuthenticated)
                 {
                     UserInfo.UserProfileInfo(RC.SelectedEmergencyId);
                 }
             }
 
-            if (RC.SelectedEmergencyId == 1)
-            {
-                liCountryReports.Visible = true;
-                liMaps.Visible = true;
-            }
-            else
-            {
-                liCountryReports.Visible = false;
-                liMaps.Visible = false;
-            }
-
             if (HttpContext.Current.User.Identity.IsAuthenticated)
             {
-                //SetCurrentEmergency();
-
                 LoginStatus.Visible = false;
                 spanWelcome.Visible = true;
                 liRegister.Visible = false;
-
-                liPublicAllData.Visible = false;
-                menuePublicAllData.Visible = false;
-
                 ShowHideMenuesOnRole();
-
-                //ShowAuthenticatedMenues();
             }
 
             ActiveMenueItem();
@@ -204,74 +165,47 @@ namespace SRFROWCA
         private void HideAllAuthenticatedMenues()
         {
             bool isShow = false;
-
-            liReports.Visible = isShow;
-            menueReports.Visible = isShow;
             menuDataEntry.Visible = isShow;
             liDataEntry.Visible = isShow;
             menuManageProjects.Visible = isShow;
             liManageProject.Visible = isShow;
             menuManageActivities.Visible = isShow;
             liManageActivity.Visible = isShow;
-            menuRegionalIndicators.Visible = isShow;
-            liRegionalIndicators.Visible = isShow;
-            menueSRPIndicators.Visible = isShow;
-            liSRPIndicators.Visible = isShow;
-            menueValidateIndicaotrs.Visible = isShow;
-            liValidate.Visible = isShow;
-            //liReportsTopIndicators1.Visible = isShow;
-            //liReportsTopIndicatorsGeneral1.Visible = isShow;
-            //liReportsTopIndicatorRegional1.Visible = isShow;
+            liValidateAchievements.Visible = isShow;
             liPivotTables.Visible = isShow;
             liPivotPerfMonitoring.Visible = isShow;
             liPivotNumberOfOrgs.Visible = isShow;
             liPivotOrgOperational.Visible = isShow;
             liCLprojectsListing.Visible = isShow;
-            liSumOfCountryIndicators.Visible = isShow;
-            liSumOfRegionalIndicators.Visible = isShow;
-            liClusterTarget.Visible = isShow;
             liPivotSumOfCountryIndicators.Visible = isShow;
             liFundingStatus.Visible = isShow;
             liUserListing.Visible = isShow;
+            liKeyFigures.Visible = isShow;
             liBulkImport.Visible = isShow;
             liBulkImportUser.Visible = isShow;
-            liORSDocuments.Visible = isShow;
             liOrganizationList.Visible = isShow;
             liEmergency.Visible = isShow;
             liProgressSummary.Visible = isShow;
-            liProjectXMLFeeds.Visible = isShow;
-            liSettings.Visible = isShow;
-            liActivities.Visible = isShow;
-            liIndicators.Visible = isShow;
-            liContactList.Visible = isShow;
-
-            liSumOfRegionalIndicators.Visible = isShow;
-            liCountryReports.Visible = isShow;
             liLocations.Visible = isShow;
-            liMapsListing.Visible = isShow;
-            liMaps.Visible = isShow;
-            //liReport.Visible = isShow;
             liClusterFrameworks.Visible = isShow;
-            //liCustomReport.Visible = isShow;
-            //menueCustomReport.Visible = isShow;
-            liPublicAllData.Visible = isShow;
-            
-
+            //liORS3W.Visible = isShow;
+            liProjects.Visible = isShow;
+            liClusterFrameworkImport.Visible = isShow;
+            liSettings.Visible = isShow;
+            liManagePartners.Visible = isShow;
+            liRequestedOrganizations.Visible = isShow;
+            liKeyFiguresFramework.Visible = isShow;
         }
 
         private void ShowUserMenue()
         {
             bool isShow = true;
-
-            //liReports.Visible = isShow;
-            menueReports.Visible = isShow;
             menuDataEntry.Visible = isShow;
             liDataEntry.Visible = isShow;
             menuManageProjects.Visible = isShow;
             liManageProject.Visible = isShow;
             menuManageActivities.Visible = isShow;
             liManageActivity.Visible = isShow;
-            //liReportsSummaryReports.Visible = !isShow;
             liPivotOrgOperational.Visible = !isShow;
             menuePivotOPrPresence.Visible = !isShow;
             liPivotNumberOfOrgs.Visible = !isShow;
@@ -279,121 +213,78 @@ namespace SRFROWCA
             liPivotSumOfCountryIndicators.Visible = !isShow;
             menuePivotSumOfCountryIndicators.Visible = !isShow;
             liBulkImportUser.Visible = isShow;
-            liORSDocuments.Visible = isShow;
-            menueORSDocuments.Visible = isShow;
             liCLprojectsListing.Visible = isShow;
             liClusterFrameworks.Visible = !isShow;
-            //if (RC.SelectedEmergencyId == 1)
-            {
-                liCountryReports.Visible = isShow;
-                liMaps.Visible = isShow;
-            }
+            //liORS3W.Visible = isShow;
+            liProjects.Visible = isShow;
+            liManagePartners.Visible = isShow;
+            liKeyFiguresPublic.Visible = isShow;
+            liOutputIndReportPublic.Visible = isShow;
         }
 
         private void ShowRegionalLeadMenue()
         {
             bool isShow = true;
-            //if (RC.SelectedEmergencyId == 1)
-            {
-                //liReports.Visible = isShow;
-                menueReports.Visible = isShow;
-                menuRegionalIndicators.Visible = isShow;
-                liRegionalIndicators.Visible = isShow;
-                liSumOfRegionalIndicators.Visible = isShow;
-                
-                liCountryReports.Visible = isShow;
-                liMaps.Visible = isShow;
-            }
-
+           
             liCLprojectsListing.Visible = isShow;
             liClusterFrameworks.Visible = isShow;
+            //liORS3W.Visible = isShow;
+            liProjects.Visible = isShow;
+            liKeyFiguresPublic.Visible = isShow;
+            //liOutputIndReportPublic.Visible = isShow;
         }
 
         private void ShowClusterLeadMenue()
         {
             bool isShow = true;
-
-            //if (RC.SelectedEmergencyId == 1)
-            {
-                //liReports.Visible = isShow;
-                menueReports.Visible = isShow;
-                menueSRPIndicators.Visible = isShow;
-                menueValidateIndicaotrs.Visible = isShow;
-                liValidate.Visible = isShow;
-                
-                liSumOfCountryIndicators.Visible = isShow;
-                liSRPIndicators.Visible = isShow;
-                liClusterTarget.Visible = isShow;
-                liCountryReports.Visible = isShow;
-                liMaps.Visible = isShow;
-                liPivotSumOfCountryIndicators.Visible = isShow;
-                liBulkImport.Visible = isShow;
-                liORSDocuments.Visible = isShow;
-                menueORSDocuments.Visible = isShow;
-            }
+            liValidateAchievements.Visible = isShow;
+            liPivotSumOfCountryIndicators.Visible = isShow;
+            liBulkImport.Visible = isShow;
             liCLprojectsListing.Visible = isShow;
             liClusterFrameworks.Visible = isShow;
+            //liORS3W.Visible = isShow;
+            liProjects.Visible = isShow;
+            liKeyFiguresPublic.Visible = !isShow;
+            liKeyFigures.Visible = isShow;
+            liOutputIndReportPublic.Visible = !isShow;
         }
 
         private void ShowOCHAMenue()
         {
             bool isShow = true;
-            //if (RC.SelectedEmergencyId == 1)
-            {
-                liFundingStatus.Visible = isShow;
-                //liReports.Visible = isShow;
-                menueReports.Visible = isShow;
-                liContactList.Visible = isShow;
-                liCountryReports.Visible = isShow;
-                liMaps.Visible = isShow;
-            }
+            liFundingStatus.Visible = isShow;
+            //liORS3W.Visible = isShow;
+            liKeyFiguresPublic.Visible = isShow;
+            liOutputIndReportPublic.Visible = !isShow;
         }
 
         private void ShowCountryAdminMenue()
         {
             bool isShow = true;
-            //if (RC.SelectedEmergencyId == 1)
-            {
-                //liReports.Visible = isShow;
-                menueReports.Visible = isShow;
-                menueSRPIndicators.Visible = isShow;
-
-                menueValidateIndicaotrs.Visible = isShow;
-                liValidate.Visible = isShow;
-                
-                liSumOfCountryIndicators.Visible = isShow;
-                liSRPIndicators.Visible = isShow;
-                liClusterTarget.Visible = isShow;
-                liContactList.Visible = isShow;
-                liCountryReports.Visible = isShow;
-                liMaps.Visible = isShow;
-                liPivotSumOfCountryIndicators.Visible = isShow;
-                liBulkImport.Visible = isShow;
-                
-                liProgressSummary.Visible = isShow;
-                liSettings.Visible = isShow;
-            }
+            liValidateAchievements.Visible = isShow;
+            liPivotSumOfCountryIndicators.Visible = isShow;
+            liProgressSummary.Visible = isShow;
+            liSettings.Visible = isShow;
             liCLprojectsListing.Visible = isShow;
             liUserListing.Visible = isShow;
+            liKeyFigures.Visible = isShow;
             liClusterFrameworks.Visible = isShow;
+            //liORS3W.Visible = isShow;
+            liProjects.Visible = isShow;
+            liClusterFrameworkImport.Visible = isShow;
+            liKeyFiguresPublic.Visible = !isShow;
+            liOutputIndReportPublic.Visible = !isShow;
         }
 
         private void ShowOCHACountryStaff()
         {
             bool isShow = true;
-            //if (RC.SelectedEmergencyId == 1)
-            {
-                //liReports.Visible = isShow;
-                menueReports.Visible = isShow;
-                menueSRPIndicators.Visible = isShow;
-                
-                liPivotSumOfCountryIndicators.Visible = isShow;
-                liSumOfCountryIndicators.Visible = isShow;
-                liCountryReports.Visible = isShow;
-                liMaps.Visible = isShow;
-            }
-
+            liPivotSumOfCountryIndicators.Visible = isShow;
             liCLprojectsListing.Visible = isShow;
+            //liORS3W.Visible = isShow;
+            liProjects.Visible = isShow;
+            liKeyFiguresPublic.Visible = isShow;
+            liOutputIndReportPublic.Visible = !isShow;
         }
 
         private void ShowAdminMenue()
@@ -401,23 +292,21 @@ namespace SRFROWCA
             bool isShow = true;
             liFundingStatus.Visible = isShow;
             liUserListing.Visible = isShow;
+            liKeyFigures.Visible = isShow;
             liOrganizationList.Visible = isShow;
-            liProjectXMLFeeds.Visible = isShow;
             liEmergency.Visible = isShow;
             liProgressSummary.Visible = isShow;
             liSettings.Visible = isShow;
-            liIndicators.Visible = isShow;
-            liActivities.Visible = isShow;
             liLocations.Visible = isShow;
             liCLprojectsListing.Visible = isShow;
             liClusterFrameworks.Visible = isShow;
-
-            //if (RC.SelectedEmergencyId == 1)
-            {
-                liCountryReports.Visible = isShow;
-                liMapsListing.Visible = isShow;
-                liMaps.Visible = isShow;
-            }
+            //liORS3W.Visible = isShow;
+            liProjects.Visible = isShow;
+            liClusterFrameworkImport.Visible = isShow;
+            liRequestedOrganizations.Visible = isShow;
+            liKeyFiguresFramework.Visible = isShow;
+            liKeyFiguresPublic.Visible = !isShow;
+            liOutputIndReportPublic.Visible = !isShow;
         }
 
         private void ActiveMenueItem()
@@ -432,134 +321,52 @@ namespace SRFROWCA
             else if (uri == "/ReportingStatus.aspx")
             {
                 liDashboards.Attributes.Add("class", "active open");
-                //liReportingStatus.Attributes.Add("class", "active");
                 PageTitle = "ORS - Achievements";
             }
-            //else if (uri == "/OperationalPresenceDB.aspx")
-            //{
-            //    liDashboards.Attributes.Add("class", "active open");
-            //    liOperationalPresenceDB.Attributes.Add("class", "active");
-            //}
             else if (uri == "/Pages/AddActivities.aspx")
             {
                 PageTitle = "ORS - Add Activity";
-
                 liDataEntry.Attributes.Add("class", "active");
             }
             else if (uri == "/Pages/CreateProject.aspx")
             {
                 PageTitle = "ORS - Manage Project";
-
+                liProjects.Attributes.Add("class", "active open");
                 liManageProject.Attributes.Add("class", "active");
             }
             else if (uri == "/Pages/ManageActivities.aspx")
             {
                 PageTitle = "ORS - Manage Activity";
-
                 liManageActivity.Attributes.Add("class", "active");
             }
             else if (uri == "/Anonymous/AllData.aspx")
             {
-                PageTitle = "ORS - Reports";
-
-                liReports.Attributes.Add("class", "active open");
-                //liCustomReport.Attributes.Add("class", "active");
-                liPublicAllData.Attributes.Add("class", "active open");
+                liCustomReport.Attributes.Add("class", "active");
             }
-            else if (uri == "/Anonymous/AllDataPublic.aspx")
-            {
-                liPublicAllData.Attributes.Add("class", "active");
-            }
-            else if (uri.Contains("UploadAchived.aspx"))
+            else if (uri.Contains("Pages/UploadAchived.aspx"))
             {
                 PageTitle = "ORS - Bulk Upload";
-                liBulkImport.Attributes.Add("class", "active");
-            }
-            else if (uri.Contains("/ORSDocuments/orsdocs.aspx"))
-            {
-                PageTitle = "ORS - Documents";
-                liORSDocuments.Attributes.Add("class", "active");
-            }
-            else if (uri == "/ClusterLead/AddSRPActivitiesFromMasterList.aspx")
-            {
-                liSRPIndicators.Attributes.Add("class", "active");
-            }
-            else if (uri == "/ClusterLead/ClusterIndicatorTargets.aspx")
-            {
-                liClusterTarget.Attributes.Add("class", "active");
+                liBulkImportUser.Attributes.Add("class", "active");
             }
             else if (uri == "/ClusterLead/ValidateReportList.aspx")
             {
-                liValidate.Attributes.Add("class", "active open");
                 liValidateAchievements.Attributes.Add("class", "active");
-            }
-            else if (uri == "/ClusterLead/ApproveIndicatorAddRemove.aspx")
-            {
-                liValidate.Attributes.Add("class", "active open");
-                liValidateIndicators.Attributes.Add("class", "active");
-            }
-            else if (uri == "/RegionalLead/ManageRegionalIndicators.aspx")
-            {
-                PageTitle = "ORS - Reg. Indicators";
-                liRegionalIndicators.Attributes.Add("class", "active");
-            }
-            else if (uri == "/Reports/OperationalPresence.aspx")
-            {
-                liReports.Attributes.Add("class", "active open");
-                //liReportsSummaryReports.Attributes.Add("class", "active open");
-                liContactList.Attributes.Add("class", "active");
-            }
-            else if (uri == "/ClusterLead/SumOfCountryIndicators.aspx")
-            {
-                liReports.Attributes.Add("class", "active open");
-                //liReportsSummaryReports.Attributes.Add("class", "active open");
-                liSumOfCountryIndicators.Attributes.Add("class", "active");
-            }
-            else if (uri == "/PivotTables/RegionalIndicatorsAchievedReport.aspx")
-            {
-                liReports.Attributes.Add("class", "active open");
-                //liReportsSummaryReports.Attributes.Add("class", "active open");
-                liSumOfRegionalIndicators.Attributes.Add("class", "active");
-            }
-            else if (uri == "/Reports/ProjectsPerOrganization.aspx")
-            {
-                liReports.Attributes.Add("class", "active open");
-                //liReportsSummaryReports.Attributes.Add("class", "active open");
-                //liReportsSummaryReportsProjectReports.Attributes.Add("class", "active open");
-                //liReportsSummaryReportsProjectReportsByOrg.Attributes.Add("class", "active");
-            }
-            else if (uri == "/Reports/ProjectByClusters.aspx")
-            {
-                liReports.Attributes.Add("class", "active open");
-                //liReportsSummaryReports.Attributes.Add("class", "active open");
-                //liReportsSummaryReportsProjectReports.Attributes.Add("class", "active open");
-                //liReportsSummaryReportsProjectReportsByClusters.Attributes.Add("class", "active");
-            }
-            else if (uri == "/Reports/ProjectsByCountry.aspx")
-            {
-                liReports.Attributes.Add("class", "active open");
-                //liReportsSummaryReports.Attributes.Add("class", "active open");
-                //liReportsSummaryReportsProjectReports.Attributes.Add("class", "active open");
-                //liReportsSummaryReportsProjectReportsByCountry.Attributes.Add("class", "active");
             }
             else if (uri == "/PivotTables/PerfMontPivot.aspx")
             {
                 PageTitle = "ORS - Perf. Monitoring";
-
                 liPivotTables.Attributes.Add("class", "active open");
                 liPivotPerfMonitoring.Attributes.Add("class", "active");
             }
             else if (uri == "/PivotTables/NumOfOrgsClsCnt.aspx")
             {
                 PageTitle = "ORS - Op. Presence";
-
                 liPivotTables.Attributes.Add("class", "active open");
                 liPivotNumberOfOrgs.Attributes.Add("class", "active");
             }
             else if (uri == "/PivotTables/OprOrgsClsCnt.aspx")
             {
                 PageTitle = "ORS - Org. Presence";
-
                 liPivotTables.Attributes.Add("class", "active open");
                 liPivotOrgOperational.Attributes.Add("class", "active");
             }
@@ -568,33 +375,71 @@ namespace SRFROWCA
                 liPivotTables.Attributes.Add("class", "active open");
                 liPivotSumOfCountryIndicators.Attributes.Add("class", "active");
             }
+            else if (uri == "/Anonymous/OutputIndicatorReport.aspx")
+            {
+                liOutputIndReportPublic.Attributes.Add("class", "active");
+            }
             else if (uri == "/ClusterLead/ProjectsListing.aspx" || uri.Contains("/ClusterLead/ProjectDetails.aspx"))
             {
                 PageTitle = "ORS - Projects";
+                liProjects.Attributes.Add("class", "active open");
                 liCLprojectsListing.Attributes.Add("class", "active");
             }
-            else if (uri == "/Admin/UsersListing.aspx")
+            else if (uri.Contains("/Admin/UsersListing.aspx") || uri.Contains("/Account/Registerca.aspx") || uri.Contains("/Account/UpdateUser.aspx"))
             {
                 PageTitle = "ORS - User Details";
-
                 liUserListing.Attributes.Add("class", "active");
+            }
+
+            else if (uri.Contains("/Admin/organization/OrganizationList.aspx") ||
+                    uri.Contains("/Admin/organization/AddEditOrganization.aspx"))
+            {
+                PageTitle = "ORS - Manage Organizations";
+                liOrganizationList.Attributes.Add("class", "active");
+            }
+
+            else if (uri.Contains("/Admin/RequestedOrgListing.aspx"))
+            {
+                PageTitle = "ORS - Manage Organizations";
+                liRequestedOrganizations.Attributes.Add("class", "active");
+            }
+            else if (uri.Contains("/admin/LinkEmergencyObjective.aspx"))
+            {
+                PageTitle = "ORS - Manage Objectives";
+                liLinkEmgObjectives.Attributes.Add("class", "active");
+            }
+
+            else if (uri.Contains("/admin/EmergencyObjectives.aspx"))
+            {
+                PageTitle = "ORS - Manage Objectives";
+                liEmgObjectives.Attributes.Add("class", "active");
+            }
+
+            else if (uri == "/KeyFigures/KeyFiguresListing.aspx" || uri == "/KeyFigures/AddKeyFigure.aspx")
+            {                
+                PageTitle = "ORS - Key Figures";
+                liKeyFigures.Attributes.Add("class", "active");
+            }
+            else if (uri == "/KeyFigures/KeyFigureIndicatorListing.aspx" || uri == "/KeyFigures/AddKeyFigureCategory.aspx" ||
+                        uri == "/KeyFigures/AddKeyFigureSubCategory.aspx" || uri == "/KeyFigures/AddKeyFigureIndicator.aspx")
+            {
+                PageTitle = "ORS - Key Figures";
+                liKeyFiguresFramework.Attributes.Add("class", "active");
+            }
+            else if (uri == "/KeyFigures/KeyFiguresListingPublic.aspx")
+            {
+                PageTitle = "ORS - Key Figures";
+                liKeyFiguresPublic.Attributes.Add("class", "active");
             }
             else if (uri == "/LeadPages/FundingListing.aspx")
             {
                 PageTitle = "ORS - Fundings";
-
                 liFundingStatus.Attributes.Add("class", "active");
             }
             else if (uri == "/organization/OrganizationList.aspx")
             {
                 PageTitle = "ORS - Organizations";
-
                 liOrganizationList.Attributes.Add("class", "active");
-            }
-            else if (uri.Contains("ClusterLead/ValidateIndicators.aspx"))
-            {
-                liValidate.Attributes.Add("class", "active open");
-                liValidateAchievements.Attributes.Add("class", "active");
             }
             else if (uri.Contains("ClusterLead/UploadAchieved.aspx"))
             {
@@ -603,115 +448,88 @@ namespace SRFROWCA
             else if (uri.Contains("/EmergencyListing.aspx"))
             {
                 PageTitle = "ORS - Emergencies";
-
                 liEmergency.Attributes.Add("class", "active open");
                 liEmgList.Attributes.Add("class", "active");
             }
             else if (uri.Contains("/EmergencyLocations.aspx"))
             {
                 PageTitle = "ORS - Emergency Locations";
-
                 liEmergency.Attributes.Add("class", "active open");
                 liEmgLocation.Attributes.Add("class", "active");
             }
             else if (uri.Contains("/EmergencyClusters.aspx"))
             {
                 PageTitle = "ORS - Emergency Clusters";
-
                 liEmergency.Attributes.Add("class", "active open");
                 liEmgCluster.Attributes.Add("class", "active");
             }
-            else if (uri.Contains("ClusterLead/CountryIndicators.aspx") || uri.Contains("ClusterLead/AddCountryIndicator.aspx"))
+            else if (uri.Contains("ClusterLead/CountryIndicators.aspx") ||
+                uri.Contains("ClusterLead/EditOutputIndicator.aspx"))
             {
                 PageTitle = "ORS - Country Indicators";
-
                 liClusterFrameworks.Attributes.Add("class", "active open");
+                liOutputIndicators.Attributes.Add("class", "active open");
                 liClusterIndicators.Attributes.Add("class", "active");
             }
-            else if (uri.Contains("ClusterLead/ActivityListing.aspx") || uri.Contains("ClusterLead/AddActivity.aspx")
-                || uri.Contains("ClusterLead/EditActivity.aspx"))
+            else if (uri.Contains("ClusterLead/ClusterDataEntry.aspx") || uri.Contains("RegionalLead/ClusterDataEntry.aspx"))
             {
-                PageTitle = "ORS - Activity Listing";
-
+                PageTitle = "ORS - Country Indicators";
                 liClusterFrameworks.Attributes.Add("class", "active open");
-                //liNewActivityListing.Attributes.Add("class", "active");
+                liOutputIndicators.Attributes.Add("class", "active open");
+                liIndicatorReporting.Attributes.Add("class", "active");
             }
-            else if (uri.Contains("ClusterLead/IndicatorListing.aspx")
-                || uri.Contains("AddActivityAndIndicators.aspx")
-                || uri.Contains("ClusterLead/AddIndicators.aspx"))
+            else if (uri.Contains("ClusterLead/ClusterReports.aspx"))
             {
-                PageTitle = "ORS - Indicator Listing";
-
+                PageTitle = "ORS - Country Indicators";
                 liClusterFrameworks.Attributes.Add("class", "active open");
-                liNewIndicatorListing.Attributes.Add("class", "active");
+                liOutputIndicators.Attributes.Add("class", "active open");
+                liIndicatorReport.Attributes.Add("class", "active");
             }
+            else if (uri.Contains("ClusterLead/CountryIndicators.aspx"))
+            {
+                PageTitle = "ORS - Country Indicators";
+                liClusterFrameworks.Attributes.Add("class", "active open");
+                liOutputIndicators.Attributes.Add("class", "active open");
+                liClusterIndicators.Attributes.Add("class", "active");
+            }
+
+            else if (uri.Contains("ClusterLead/IndicatorListing.aspx") || uri.Contains("ClusterLead/AddActivityAndIndicators.aspx"))
+            {
+                PageTitle = "ORS - Activity Indicators";
+                liClusterFrameworks.Attributes.Add("class", "active open");
+                liNewIndicatorListing.Attributes.Add("class", "active open");
+            }
+
             else if (uri.Contains("ClusterLead/UploadSRP.aspx"))
             {
                 PageTitle = "ORS - Import Framework";
-
                 liClusterFrameworks.Attributes.Add("class", "active open");
                 liClusterFrameworkImport.Attributes.Add("class", "active");
-            }
-
-            else if (uri.Contains("Admin/ActivityListing.aspx"))
-            {
-                PageTitle = "ORS - Activites";
-
-                liActivities.Attributes.Add("class", "active");
-            }
-            else if (uri.Contains("Admin/IndicatorListing.aspx"))
-            {
-                PageTitle = "ORS - Indicators";
-
-                liIndicators.Attributes.Add("class", "active");
             }
             else if (uri.Contains("Admin/ProgressSummary.aspx"))
             {
                 PageTitle = "ORS - Progress Summary";
-
                 liProgressSummary.Attributes.Add("class", "active");
-            }
-            else if (uri.Contains("Admin/ProjectXMLFeeds.aspx"))
-            {
-                PageTitle = "ORS - XML Feeds";
-
-                liProjectXMLFeeds.Attributes.Add("class", "active");
-            }
-            else if (uri.Contains("CountryMapsListing") || uri.Contains("AddEditCountryMaps"))
-            {
-                PageTitle = "ORS - Country Maps";
-                liMapsListing.Attributes.Add("class", "active open");
-            }
+            }            
             else if (uri.Contains("Admin/ConfigSettings.aspx"))
             {
                 PageTitle = "ORS - Settings";
-
                 liSettings.Attributes.Add("class", "active");
             }
-            else if (uri.Contains("NewCountryReports") || uri.Contains("LoadCountryReport"))
+            else if (uri.Contains("Pages/ProjectIP.aspx"))
             {
-                PageTitle = "ORS - Country Reports";
-
-                liCountryReports.Attributes.Add("class", "active open");
-                //liCountryReports.Attributes.Add("class", "active");
-            }
-            else if (uri.Contains("CountryReports"))
-            {
-                PageTitle = "ORS - Country Reports";
-                //liCountryConsolidatedReports.Attributes.Add("class", "active open");
-                //liCountryReports.Attributes.Add("class", "active");
-            }
-            else if (uri.Contains("CountryMaps.aspx"))
-            {
-                PageTitle = "ORS - Country Maps";
-
-                liMaps.Attributes.Add("class", "active open");
-                //liCountryReports.Attributes.Add("class", "active");
+                liManagePartners.Attributes.Add("class", "active");
             }
             else if (uri.Contains("Admin/Location/AddNewLocation.aspx") || uri.Contains("Admin/Location/LocationsList.aspx"))
             {
                 liLocations.Attributes.Add("class", "active");
             }
+            else if (uri.Contains("Reports/ORS3W.aspx"))
+            {
+                PageTitle = "ORS - ORS 3W";
+                liORS3W.Attributes.Add("class", "active");
+            }
+                
             else if (uri.Contains("ContactUs.aspx"))
             {
                 PageTitle = "ORS - Contact Us";
@@ -721,9 +539,6 @@ namespace SRFROWCA
             {
                 PageTitle = "ORS - FAQ";
             }
-
-
-
         }
 
         protected void lnkLanguageEnglish_Click(object sender, EventArgs e)
@@ -772,36 +587,9 @@ namespace SRFROWCA
         {
             get
             {
-
                 return string.Format("http://{0}{1}",
                                      HttpContext.Current.Request.ServerVariables["HTTP_HOST"],
                                      (VirtualFolder.Equals("/")) ? string.Empty : VirtualFolder);
-            }
-        }
-
-        protected void ddlEmg_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //ActivityEmergencyId = ddlEmgergency.SelectedValue;
-            RC.SelectedEmergencyId = Convert.ToInt32(ddlEmgergency.SelectedValue);
-            Response.Cookies["SelectedEmergencyCookie"].Value = ddlEmgergency.SelectedValue;
-            Response.Cookies["SelectedEmergencyCookie"].Expires = DateTime.Now.AddDays(365);
-
-            //if (RC.SelectedEmergencyId == 1)
-            {
-                liCountryReports.Visible = true;
-                liMaps.Visible = true;
-            }
-            //else
-            //{
-            //    liCountryReports.Visible = false;
-            //    liMaps.Visible = false;
-            //}
-
-            if (HttpContext.Current.User.Identity.IsAuthenticated)
-            {
-                UserInfo.UserProfileInfo(RC.SelectedEmergencyId);
-                HideAllAuthenticatedMenues();
-                ShowHideMenuesOnRole();
             }
         }
     }

@@ -22,15 +22,6 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.Label lblProjectTitle;
         
         /// <summary>
-        /// lblUpdatedBy control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUpdatedBy;
-        
-        /// <summary>
         /// lblOrganization control.
         /// </summary>
         /// <remarks>
@@ -38,6 +29,15 @@ namespace SRFROWCA.ClusterLead {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblOrganization;
+        
+        /// <summary>
+        /// lblUpdatedBy control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblUpdatedBy;
         
         /// <summary>
         /// lblUpdatedOn control.
@@ -56,15 +56,6 @@ namespace SRFROWCA.ClusterLead {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblReportingPeriod;
-        
-        /// <summary>
-        /// rbCountry control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rbCountry;
         
         /// <summary>
         /// btnApprove control.

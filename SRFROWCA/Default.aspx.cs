@@ -1,24 +1,25 @@
-﻿using System;
-using System.Data;
-using System.IO;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using BusinessLogic;
+﻿using SRFROWCA.Common;
+using System;
 using System.Web;
-using System.IO.Compression;
-using SRFROWCA.Common;
-using System.Web.Security;
 
 
 namespace SRFROWCA
 {
-    public partial class _Default : System.Web.UI.Page
+    public partial class _Default : BasePage
     {
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if (HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                UserInfo.UserProfileInfo(RC.SelectedEmergencyId);
+            }
         }
-        
+
+        internal override void BindGridData()
+        {
+            base.BindGridData();
+        }
+
     }
 }

@@ -1,15 +1,17 @@
-﻿using System;
+﻿using BusinessLogic;
+using Microsoft.Reporting.WebForms;
+using SRFROWCA.Common;
+using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml;
-using BusinessLogic;
-using Microsoft.Reporting.WebForms;
-using SRFROWCA.Common;
 
 namespace SRFROWCA.ClusterLead
 {
@@ -28,6 +30,11 @@ namespace SRFROWCA.ClusterLead
                 LoadIndicators();
             }
 
+            ToggleControlsToAddIndicator();
+        }
+
+        private void ToggleControlsToAddIndicator()
+        {
             if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User))
             {
                 int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
@@ -42,9 +49,14 @@ namespace SRFROWCA.ClusterLead
                 {
                     btnAddActivityAndIndicators.Enabled = false;
                 }
-                if (maxIndicators <= 0 || endEditDate < DateTime.Now.Date)
+                else if (maxIndicators <= 0 || endEditDate < DateTime.Now.Date)
                 {
                     btnAddIndicator.Enabled = false;
+                }
+                else
+                {
+                    //btnAddIndicator.Enabled = true;
+                    btnAddActivityAndIndicators.Enabled = true;
                 }
             }
 
@@ -91,16 +103,17 @@ namespace SRFROWCA.ClusterLead
 
             if (maxIndicators > 0)
             {
-                DataTable dt = DBContext.GetData("GetAllIndicatorsNew", new object[] { emgLocationId, emgClusterId, null, null, null, null, (int)RC.SelectedSiteLanguageId });
-                if (dt.Rows.Count > 0)
-                    maxIndicators = maxIndicators - dt.Rows.Count;
+                int isActive = 1;
+                int indicatorCount = DBContext.Update("GetIndicatorsCount", new object[] { emgLocationId, emgClusterId, isActive, RC.SelectedSiteLanguageId, DBNull.Value });
+                if (indicatorCount > 0)
+                    maxIndicators = maxIndicators - indicatorCount;
             }
 
             if (maxActivities > 0)
             {
-                DataTable dt = DBContext.GetData("GetAllActivitiesNew", new object[] { emgLocationId, emgClusterId, null, null, (int)RC.SelectedSiteLanguageId });
-                if (dt != null && dt.Rows.Count > 0)
-                    maxActivities = maxActivities - dt.Rows.Count;
+                int activityCount = DBContext.Update("GetActivitiesCount", new object[] { emgLocationId, emgClusterId, RC.SelectedSiteLanguageId, DBNull.Value });
+                if (activityCount > 0)
+                    maxActivities = maxActivities - activityCount;
             }
         }
 
@@ -531,6 +544,177 @@ namespace SRFROWCA.ClusterLead
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
         {
             RC.ShowMessage(Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
+        }
+
+
+        protected void btnOK_Click(object sender, EventArgs e)
+        {
+            ToggleIndicatorStatus();
+            ToggleControlsToAddIndicator();
+            SendEmail(IndicatorActiveStatus > 0);
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            LoadIndicators();
+        }
+
+        protected void cbActive_Changed(object sender, EventArgs e)
+        {
+            IndicatorActiveStatus = -1;
+            ToggleIndicatorId = 0;
+            GridViewRow row = (GridViewRow)(((CheckBox)sender).NamingContainer);
+            int indicatorId = 0;
+            int.TryParse(gvActivity.DataKeys[row.RowIndex].Values["IndicatorId"].ToString(), out indicatorId);
+            ToggleIndicatorId = indicatorId;
+            if (ToggleIndicatorId > 0)
+            {
+                CheckBox cbIsActive = row.FindControl("cbIsActive") as CheckBox;
+                if (cbIsActive != null)
+                {                    
+                    localDisableConfirmBox.Text = !cbIsActive.Checked ? "Are you sure you want to disable this indicator?" :
+                                                                            "Are you sure you want to add this indicator?";
+                    IndicatorActiveStatus = cbIsActive.Checked ? 1 : 0;
+                    List<string> projects = GetProjectsUsingIndicator();
+                    if (!string.IsNullOrEmpty(projects[0]))
+                    {
+                        SetEmailItem(row, projects);
+                        lblProjectsCaption.Visible = true;
+                        lblProjectsCaption.Text = !cbIsActive.Checked ? "Following projects are using this indicator. This indicator will be removed from these projects:" :
+                                                                        "Following projects are using this indicator. This indicator will be added in these projects:";
+
+                        lblProjectUsingIndicator.Text = projects[0];
+                    }
+                    ModalPopupExtender1.Show();
+                }
+            }
+        }
+
+        private void SetEmailItem(GridViewRow row, List<string> projects)
+        {
+            List<string> emailItems = new List<string>();
+            Label lblCountry = row.FindControl("lblCountryID") as Label;
+            if (lblCountry != null)
+            {
+                emailItems.Add(lblCountry.Text.Trim());
+            }
+
+            Label lblCluster = row.FindControl("lblClusterID") as Label;
+            if (lblCluster != null)
+            {
+                emailItems.Add(lblCluster.Text.Trim());
+            }
+            emailItems.Add(row.Cells[1].Text.ToString());
+            emailItems.Add(row.Cells[2].Text.ToString());
+            emailItems.Add(row.Cells[5].Text.ToString());
+            emailItems.Add(projects[0]);
+            emailItems.Add(projects[1]);
+            EmailItems = emailItems;
+        }
+
+        private void ToggleIndicatorStatus()
+        {
+            int yearId = 11;
+            DBContext.Update("UpdateIndicatorAndProjectsActiveStatus", new object[] { ToggleIndicatorId, IndicatorActiveStatus, yearId, DBNull.Value });
+        }
+
+        private List<string> GetProjectsUsingIndicator()
+        {
+            DataTable dt = DBContext.GetData("GetAllProjectsUsingIndicator", new object[] { ToggleIndicatorId });
+            StringBuilder sbProjCodes = new StringBuilder();
+            StringBuilder sbProjIds = new StringBuilder();
+            foreach (DataRow dr in dt.Rows)
+            {
+                sbProjCodes.AppendFormat(" {0},", dr["ProjectCode"].ToString());
+                sbProjIds.AppendFormat("{0},", dr["ProjectId"].ToString());
+            }
+
+            List<string> projects = new List<string>();
+            projects.Add(sbProjCodes.ToString().Trim().TrimEnd(','));
+            projects.Add(sbProjIds.ToString().Trim().TrimEnd(','));
+
+            return projects;
+        }
+
+        private void SendEmail(bool isAdded)
+        {
+            List<string> emailItems = EmailItems;
+            int emgCountryId = 0; 
+            int.TryParse(emailItems[0], out emgCountryId);
+            int val = 0;
+            int.TryParse(emailItems[1], out val);
+            int? emgClusterId = val > 0 ? val : (int?)null;
+                
+            string subject = "Activity Indicator has been disabled!";
+            if (isAdded)
+            {
+                subject = "Activity Indicator has been activated!";
+            }
+
+            string country = emailItems[2];
+            string cluster = emailItems[3];
+            string user = "";
+            try { user = User.Identity.Name; }
+            catch { }
+
+            string body = string.Format(@"<b>{0}</b><br/>
+                                         <b>Country:</b> {1}<br/>
+                                         <b>Cluster:</b> {2}<br/>
+                                         <b>Indicator:</b> {3}<br/>
+                                         <b>By:</b> {4}<br/>
+                                         <b>Projects Using This Indicator:</b> {5}"
+
+                                         , subject, country, cluster, emailItems[4], user, emailItems[5]);
+            DataTable dtUsers = DBContext.GetData("GetDataEntryUsersEmails", new object[] { emailItems[6], DBNull.Value, emgCountryId });
+            RC.SendEmail(emgCountryId, emgClusterId, subject, body, dtUsers);
+        }
+
+        private int ToggleIndicatorId
+        {
+            get
+            {
+                int indId = 0;
+                if (ViewState["ToggleIndicatorId"] != null)
+                {
+                    int.TryParse(ViewState["ToggleIndicatorId"].ToString(), out indId);
+                }
+
+                return indId;
+            }
+            set
+            {
+                ViewState["ToggleIndicatorId"] = value;
+            }
+        }
+
+        private int IndicatorActiveStatus
+        {
+            get
+            {
+                int isActive = 0;
+                if (ViewState["IndicatorActiveStatusCB"] != null)
+                {
+                    int.TryParse(ViewState["IndicatorActiveStatusCB"].ToString(), out isActive);
+                }
+
+                return isActive;
+            }
+            set
+            {
+                ViewState["IndicatorActiveStatusCB"] = value;
+            }
+        }
+
+        private List<string> EmailItems
+        {
+            get
+            {
+                return ViewState["IndicatorActiveStatus"] as List<string>;
+            }
+            set
+            {
+                ViewState["IndicatorActiveStatus"] = value;
+            }
         }
     }
 }

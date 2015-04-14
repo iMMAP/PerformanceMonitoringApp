@@ -7,6 +7,7 @@ namespace SRFROWCA.Common
     {
         internal static void UserProfileInfo(int emergencyId)
         {
+            emergencyId = 3;
             DataTable dt = RC.GetUserDetails(emergencyId);
 
             if (dt.Rows.Count > 0)

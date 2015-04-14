@@ -7,6 +7,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Drawing;
+using System.Web.UI.HtmlControls;
 
 namespace SRFROWCA.Admin
 {
@@ -16,40 +18,142 @@ namespace SRFROWCA.Admin
         {
             if (!IsPostBack)
             {
-                LoadData(null, null, "-1", "-1", "-1");
-                LoadCombo();
+                LoadCombos();
+                DisableDropDowns();
+                LoadData(null, null, ddlCountry.SelectedValue, "-1", "-1");
             }
         }
 
         private void LoadData(string startDate, string endDate, string countryID, string clusterID, string isOPSProject)
         {
-            DataTable dtResult = DBContext.GetData("uspGetReportData", new object[] {startDate, endDate, countryID, clusterID, isOPSProject, RC.SelectedSiteLanguageId});
+            
+            DataTable dtResult = DBContext.GetData("uspGetReportDataNew", new object[] {startDate, endDate, countryID, clusterID, isOPSProject, RC.SelectedSiteLanguageId});
 
             if (dtResult.Rows.Count > 0)
             {
-                lblUsers.Text = Convert.ToString(dtResult.Rows[0]["UserCount"]);
-                lblOrganizations.Text = Convert.ToString(dtResult.Rows[0]["OrganizationCount"]);
-                lblReportedOrgs.Text = Convert.ToString(dtResult.Rows[0]["ReportedOrganizationCount"]);
-                lblReportedCountries.Text = Convert.ToString(dtResult.Rows[0]["CountriesCount"]);
-                lblReports.Text = Convert.ToString(dtResult.Rows[0]["ReportCount"]);
-                lblReportedProjects.Text = Convert.ToString(dtResult.Rows[0]["ReportedProjectCount"]);
+                lblSRPProjects.Text = Convert.ToString(dtResult.Rows[0]["SRPProjectsCount"]);
+                lblSRPFunded.Text = Convert.ToString(dtResult.Rows[0]["SRPFundedProjects"]);
+                lblSRPOrg.Text = Convert.ToString(dtResult.Rows[0]["SRPOrgCount"]);
+                lblSRPReported.Text = Convert.ToString(dtResult.Rows[0]["SRPReportedProjects"]);
+                lblReportingorg.Text = Convert.ToString(dtResult.Rows[0]["ReportedOrganizationCount"]);
+                lblNonSRPPrj.Text = Convert.ToString(dtResult.Rows[0]["ProjectCount"]);
+                lblNonSRPReported.Text = Convert.ToString(dtResult.Rows[0]["NonSRPReportedProjects"]);
+                lblCountriesReporting.Text = Convert.ToString(dtResult.Rows[0]["CountriesCount"]);
+
+                var distinctCountries = (from DataRow dRow in dtResult.Rows
+                                         select new
+                                         {
+                                             Country = dRow["Country"],
+                                             SRPReportedProjects = dRow["SRPProjectsReportedByCountry"],
+                                             NONSRPReportedProjects = dRow["NONSRPProjectsReportedByCountry"],
+                                             Users = dRow["Users"],
+                                             Organizations = dRow["Organizations"],
+                                             SRPProjectsPerCountry = dRow["SRPProjectsPerCountry"],
+                                             NONSRPProjectsPerCountry = dRow["NonSRPProjectsPerCountry"],
+                                             OrgPerCountry = dRow["OrgPerCountry"]
+
+                                         })
+                                     .Distinct();
+                int count = 0;
+                foreach (var country in distinctCountries)
+                {
+                    count++;
+                    HtmlTableRow tr = new HtmlTableRow();
+
+                    HtmlTableCell cell = new HtmlTableCell();
+                    cell.InnerHtml = count.ToString();
+                    tr.Cells.Add(cell);
+
+                    cell = new HtmlTableCell();
+                    cell.InnerHtml = Convert.ToString(country.Country);
+                    tr.Cells.Add(cell);
+
+                    cell = new HtmlTableCell();
+                    cell.InnerHtml = Convert.ToString(country.SRPReportedProjects) + " / " + Convert.ToString(country.SRPProjectsPerCountry);
+                    tr.Cells.Add(cell);
+
+                    cell = new HtmlTableCell();
+                    cell.InnerHtml = Convert.ToString(country.NONSRPReportedProjects) + " / " + Convert.ToString(country.NONSRPProjectsPerCountry);
+                    tr.Cells.Add(cell);
+
+                    cell = new HtmlTableCell();
+                    cell.InnerHtml = Convert.ToString(country.Organizations) + " / " + Convert.ToString(country.OrgPerCountry);
+                    tr.Cells.Add(cell);
+
+                    tblCountry.Rows.Add(tr);
+                }
+
+                var Countries = (from DataRow dRow in dtResult.Rows
+                                 select new
+                                 {
+                                     CountryID = dRow["CountryID"],
+                                     Country = dRow["Country"]
+                                 })
+                                      .Distinct();
+
+                int newCount = 0;
+                foreach (var country in Countries)
+                {
+                    newCount = 0;
+                    HtmlTableRow tr = new HtmlTableRow();
+                    tr.Attributes.Add("class", "countryHeading");
+                    HtmlTableCell cell = new HtmlTableCell();
+                    cell.InnerHtml = country.Country.ToString();
+                    cell.ColSpan = 2;
+                    tr.Cells.Add(cell);
+                    tblOrg.Rows.Add(tr);
+                    var distinctOrganizations = (from DataRow dRow in dtResult.Rows
+                                             where dRow.Field<int>("CountryID") == Convert.ToInt32(country.CountryID)
+                                             select new
+                                             {
+                                                 CountryID = dRow["CountryID"],
+                                                 OrganizationName = dRow["OrganizationName"]
+                                             })
+                                        .Distinct();
+
+                     foreach (var org in distinctOrganizations)
+                     {
+                         tr = new HtmlTableRow();
+                         tr.Attributes.Add("class", "countryData");
+                         newCount++;
+                         cell = new HtmlTableCell();
+                         cell.InnerHtml = newCount.ToString();                        
+                         tr.Cells.Add(cell);
+
+                         cell = new HtmlTableCell();
+                         cell.InnerHtml = Convert.ToString(org.OrganizationName);
+                         tr.Cells.Add(cell);
+                         tblOrg.Rows.Add(tr);
+                     }
+
+                     
+                }
             }
-            else
+           
+        }
+
+        private void LoadCombos()
+        {
+            UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
+            ddlCountry.Items.Insert(0, new ListItem("--- Select Country ---", "-1"));
+
+            SetComboValues();
+        }
+
+        private void SetComboValues()
+        {
+            if (RC.IsCountryAdmin(this.User))
             {
-                lblUsers.Text = lblOrganizations.Text = lblReportedOrgs.Text = lblReportedCountries.Text = lblReports.Text = lblReportedProjects.Text = "0";
+                ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
             }
         }
 
-        private void LoadCombo()
+        private void DisableDropDowns()
         {
-            /*UI.FillClusters(ddlClusters, RC.SelectedSiteLanguageId);
-            if (UserInfo.Cluster > 0)
+            if (RC.IsCountryAdmin(this.User))
             {
-                ddlClusters.SelectedValue = UserInfo.Cluster.ToString();
-                ddlClusters.Visible = false;
-            }*/
-
-            UI.FillLocations(ddlCountry, RC.GetLocations(this.User, (int)RC.LocationTypes.National));
+                RC.EnableDisableControls(ddlCountry, false);
+            }
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -69,7 +173,7 @@ namespace SRFROWCA.Admin
             string endDate = !string.IsNullOrEmpty(txtToDate.Text) ? txtToDate.Text.Split('-')[2] + '-' + txtToDate.Text.Split('-')[1] + '-' + txtToDate.Text.Split('-')[0] : null;
             string isOPSProject = rbIsOPSProject.SelectedValue;
 
-            DataTable dtResults = DBContext.GetData("uspGetReportData", new object[] { startDate, endDate, ddlCountry.SelectedValue, "-1", isOPSProject, RC.SelectedSiteLanguageId });
+            DataTable dtResults = DBContext.GetData("uspGetReportDataNew", new object[] { startDate, endDate, ddlCountry.SelectedValue, "-1", isOPSProject, RC.SelectedSiteLanguageId });
 
             if (dtResults.Rows.Count > 0)
             {

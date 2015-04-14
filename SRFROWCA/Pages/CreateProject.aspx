@@ -1,7 +1,18 @@
 ﻿<%@ Page Title="ORS Manage Projects" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeBehind="CreateProject.aspx.cs" Inherits="SRFROWCA.Pages.CreateProject" Culture="auto" meta:resourcekey="PageResource1" UICulture="auto" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    <script type="text/javascript">
+        function ShowModalPopup() {
+            $find("mpeOrganizations").show();
+            return false;
+        }
+        function HideModalPopup() {
+            $find("mpeOrganizations").hide();
+            return false;
+        }
+    </script>
     <script>
         $(function () {
 
@@ -22,6 +33,54 @@
     <!-- ORS styles -->
     <link rel="stylesheet" href="../assets/css/ors.css" />
     <!-- ace styles -->
+
+    <script>
+        $(function () {
+            $("tr .testcb").each(function () {
+
+                var checkBox = $(this).find("input[type='checkbox']");
+                if ($(checkBox).is(':checked')) {
+                    $(this).parent().parent().removeClass('highlightRow2');
+                    $(this).parent().parent().addClass('highlight');
+                }
+                else {
+                    $(this).parent().parent().removeClass('highlight');
+                }
+            });
+
+            // scrollables
+            $('.slim-scroll').each(function () {
+                var $this = $(this);
+                $this.slimScroll({
+                    height: $this.data('height') || 100,
+                    railVisible: true
+                });
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#txtSearch").keyup(function (event) {
+                var searchKey = $('#txtSearch').val().toLowerCase();
+                $(".gvorgsclass tr td:nth-child(2)").each(function () {
+                    var cellText = $(this).text().toLowerCase();
+                    if (cellText.indexOf(searchKey) >= 0) {
+                        $(this).parent().show();
+                    }
+                    else {
+                        $(this).parent().hide();
+                    }
+                });
+            });
+
+            $('.gvorgsclass INPUT').click(function () {
+                $(this).parent().parent().parent().toggleClass('highlight');
+            });
+        });
+    </script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="breadcrumbs" id="breadcrumbs">
@@ -106,7 +165,12 @@
                                             <asp:Localize ID="LocalizeImplementingPartners" runat="server" Text="Project Partners:"></asp:Localize></label>
                                     </td>
                                     <td colspan="5">
-                                        <asp:TextBox ID="txtImplementingPartners" runat="server" Width="500px" TextMode="MultiLine"></asp:TextBox>
+                                        <button id="btnOpenLocations" runat="server" causesvalidation="false"
+                                            type="button" class="btn btn-sm btn-primary">
+                                            <i class="icon-building-o"></i>
+                                            <asp:Localize ID="localLocationButton" runat="server" Text="Add Project Partners" meta:resourcekey="localLocationButtonResource1"></asp:Localize>
+                                        </button>
+                                        <a href="../RequestOrganization.aspx">Request Missing Parner Organization</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -121,7 +185,7 @@
                                             CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCluster" meta:resourcekey="RequiredFieldValidator1Resource1"></asp:RequiredFieldValidator>
                                     </td>
                                 </tr>
-                                 <tr>
+                                <tr>
                                     <td>
                                         <label>
                                             <asp:Localize ID="Localize1" runat="server" Text="Project Status:"></asp:Localize></label>
@@ -133,7 +197,7 @@
                                             <asp:ListItem Text="Ongoing" Value="2"></asp:ListItem>
                                             <asp:ListItem Text="Completed" Value="3"></asp:ListItem>
                                         </asp:DropDownList>
-                                         
+
                                     </td>
                                 </tr>
                                 <tr>
@@ -240,4 +304,60 @@
             </div>
         </div>
     </div>
+    <asp:ModalPopupExtender ID="mpeOrganizations" runat="server" BehaviorID="mpeOrganizations" TargetControlID="btnOpenLocations"
+        PopupControlID="pnlLocations" BackgroundCssClass="modalpopupbackground"
+        DynamicServicePath="" Enabled="True">
+    </asp:ModalPopupExtender>
+    <asp:Panel ID="pnlLocations" runat="server" Width="800px" meta:resourcekey="pnlLocationsResource1">
+        <asp:UpdatePanel ID="uPanel1" runat="server" UpdateMode="Conditional">
+            <ContentTemplate>
+                <div class="row">
+                    <div class=" width-100 modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header no-padding">
+                                <div class="table-header">                                    
+                               Search By Organization Name:  
+                                            <input type="text" id="txtSearch" width="100px" />
+                                </div>
+                            </div>
+                            <div class="modal-body no-padding">
+                                <table border="0" style="margin: 0 auto;">
+                                    <tr>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <fieldset>
+                                                <div id="scrolledGridView" style="overflow-x: auto; width: 100%; height: 400px;">
+                                                    <asp:GridView ID="gvOrgs" runat="server" AutoGenerateColumns="false" DataKeyNames="OrganizationId" CssClass="gvorgsclass">
+                                                        <Columns>
+                                                            <asp:TemplateField>
+                                                                <ItemTemplate>
+                                                                    <asp:CheckBox ID="cbOrg" runat="server" Text="" CssClass="testcb" />
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:BoundField DataField="OrganizationName" HeaderText="Organization" HeaderStyle-Width="530px" />
+                                                            <asp:BoundField DataField="OrganizationAcronym" HeaderText="Acronym" HeaderStyle-Width="220px" />
+                                                        </Columns>
+                                                        <HeaderStyle BackColor="ButtonFace" />
+                                                    </asp:GridView>
+                                                </div>
+                                            </fieldset>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="modal-footer no-margin-top">
+                                <asp:Button ID="btnClose" runat="server" Text="Close" Width="120px" CssClass="btn btn-primary"
+                                    CausesValidation="False" OnClientClick="return HideModalPopup()" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ContentTemplate>
+            <Triggers>
+                <asp:PostBackTrigger ControlID="btnClose" />
+            </Triggers>
+        </asp:UpdatePanel>
+    </asp:Panel>
 </asp:Content>

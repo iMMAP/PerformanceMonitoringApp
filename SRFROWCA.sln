@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SRFROWCA", "SRFROWCA\SRFROWCA.csproj", "{1164AB10-F0DB-4E1F-B8B1-E56D61E90D83}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{DE3BE702-AF50-4C77-AA51-D968CEA8DFE9}"
@@ -25,14 +27,12 @@ Global
 		{DE3BE702-AF50-4C77-AA51-D968CEA8DFE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DE3BE702-AF50-4C77-AA51-D968CEA8DFE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE3BE702-AF50-4C77-AA51-D968CEA8DFE9}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{DE3BE702-AF50-4C77-AA51-D968CEA8DFE9}.Debug|x86.Build.0 = Debug|Any CPU
 		{DE3BE702-AF50-4C77-AA51-D968CEA8DFE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE3BE702-AF50-4C77-AA51-D968CEA8DFE9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DE3BE702-AF50-4C77-AA51-D968CEA8DFE9}.Release|x86.ActiveCfg = Release|Any CPU
 		{C778FC54-FADB-446C-BED3-B34A36F16D79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C778FC54-FADB-446C-BED3-B34A36F16D79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C778FC54-FADB-446C-BED3-B34A36F16D79}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{C778FC54-FADB-446C-BED3-B34A36F16D79}.Debug|x86.Build.0 = Debug|Any CPU
 		{C778FC54-FADB-446C-BED3-B34A36F16D79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C778FC54-FADB-446C-BED3-B34A36F16D79}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C778FC54-FADB-446C-BED3-B34A36F16D79}.Release|x86.ActiveCfg = Release|Any CPU

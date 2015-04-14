@@ -95,18 +95,7 @@ namespace SRFROWCA.OPS
                     EGFLocations = (string)x.Element("egf_locations"),
                     SecondaryClusterId = (string)x.Element("subset").Attribute("id"),
                     SecondaryClusterName = (string)x.Element("subset")
-                    ////Organizations = new OPSProjectOrganizations
-                    ////{
-                    ////    Organization = x.Descendants("organisations")
-                    ////                      .Select(o => new OPSOrganization
-                    ////                        {
-                    ////                            OrganizationId = (string)o.Element("organization").Attribute("id"),
-                    ////                            OrgAbbrevation = (string)o.Element("name").Attribute("abbreviation"),
-                    ////                            OrganizationName = (string)o.Element("name"),
-                    ////                            OriginalRequirements = (string)o.Element("original_requirement"),
-                    ////                            RevisedRequirements = (string)o.Element("revised_requirement")
-                    ////                        }).ToList()
-                    ////}
+                    
                 });
 
             return projects;
@@ -184,6 +173,11 @@ namespace SRFROWCA.OPS
             int.TryParse(org.RevisedRequirements, out revisedReques);
             int originalRequest = 0;
             int.TryParse(org.OriginalRequirements, out originalRequest);
+
+            if (org.OrganizationName == "Food And Agriculture Organization of the United Nations")
+            {
+                org.OrganizationName = "Food & Agriculture Organization of the United Nations";
+            }
 
             return new object[] { projectId, organizationId, org.OrganizationName, org.OrgAbbrevation, originalRequest, revisedReques, RC.GetCurrentUserId, DBNull.Value };
         }

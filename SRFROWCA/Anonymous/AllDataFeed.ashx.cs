@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using BusinessLogic;
+using SRFROWCA.Common;
 
 namespace SRFROWCA.Anonymous
 {
@@ -15,21 +16,36 @@ namespace SRFROWCA.Anonymous
     {
 
         public void ProcessRequest(HttpContext context)
-        {
-            context.Response.ContentType = "text/plain";
-            DataTable dt = GetData();
+        {            
+            object[] param = GetParamValues(context);
+            DataTable dt = DBContext.GetData("GetAllTasksDataReport2015", param);
             RemoveColumnsFromDataTable(dt);
-            context.Response.Write(GetReportData(dt));
-        }
 
-        private DataTable GetData()
-        {
-            object[] paramValue = GetParamValues();
-            return DBContext.GetData("GetAllTasksDataReport", paramValue);
+            string format = "xml";
+            if (!string.IsNullOrEmpty(context.Request["format"]))
+            {
+                format = context.Request["format"].ToString();
+            }
+
+            if (format == "json")
+            {
+                context.Response.ContentType = "text/plain";
+                string strJson = DataTableToJson.DataTableToJsonBySerializer(dt);
+                context.Response.Write(strJson);
+            }
+            else
+            {
+                context.Response.ContentType = "text/xml";
+                DataSet ds = new DataSet();
+                ds = dt.DataSet;
+                ds.DataSetName = "Records";
+                ds.Tables[0].TableName = "Record";
+                context.Response.Write(GetReportData(ds));
+            }
         }
 
         // Make xml of datatable and return.
-        private string GetReportData(DataTable dt)
+        private string GetReportData(DataSet dt)
         {
             using (var sw = new StringWriter())
             {
@@ -45,59 +61,86 @@ namespace SRFROWCA.Anonymous
                 return false;
             }
         }
-
-        // Get data from db.
-        private DataTable GetReportData()
-        {
-            object[] paramValue = GetParamValues();
-            return DBContext.GetData("GetAllTasksDataReport", paramValue);
-        }
-
+        
         // Get filter criteria and create an object with parameter values.
-        private object[] GetParamValues()
+        private object[] GetParamValues(HttpContext context)
         {
-            string monthIds = null;//RC.GetSelectedValues(ddlMonth);
-            string locationIds = null; //GetLocationIds();
-            //if (string.IsNullOrEmpty(locationIds))
-            //{
-            //    if (!string.IsNullOrEmpty(lblCountry.Text.Trim()))
-            //    {
-            //        locationIds = UserInfo.Country.ToString();
-            //    }
-            //}
+            string monthIds = null;
+            if (!string.IsNullOrEmpty(context.Request["month"]))
+            {
+                monthIds = context.Request["month"].ToString();
+            }
 
-            string clusterIds = null; //RC.GetSelectedValues(ddlClusters);
-            string orgIds = null; //RC.GetSelectedValues(ddlOrganizations);
-            string objIds = null; //RC.GetSelectedValues(ddlObjectives);
-            string prIds = null; //RC.GetSelectedValues(ddlPriority);
-            string actIds = null; //RC.GetSelectedValues(ddlActivities);
-            string indIds = null; //RC.GetSelectedValues(ddlIndicators);
-            string projectIds = null; //RC.GetSelectedValues(ddlProjects);
-            int? fromMonth = null; //!string.IsNullOrEmpty(txtFromDate.Text.Trim()) ? Convert.ToInt32(txtFromDate.Text.Trim().Substring(0, 2)) : (int?)null;
-            int? toMonth = null; //!string.IsNullOrEmpty(txtToDate.Text.Trim()) ? Convert.ToInt32(txtToDate.Text.Trim().Substring(0, 2)) : (int?)null;
-            int? regionalInd = null; //cbRegional.Checked ? 1 : (int?)null;
-            int? countryInd = null; //cbCountry.Checked ? 1 : (int?)null;
-            int? funded = null; //cbFunded.Checked ? 1 : (int?)null;
-            int? notFunded = null; //cbNotFunded.Checked ? 1 : (int?)null;
-            int? isOPS = null; //cbOPSProjects.Checked && cbORSProjects.Checked ? null : cbOPSProjects.Checked ? 1 : cbORSProjects.Checked ? 0 : (int?)null;
+            string locationIds = null;
+            if (!string.IsNullOrEmpty(context.Request["country"]))
+            {
+                locationIds = context.Request["country"].ToString();
+            }
 
-            int? isApproved = 0;
+            string clusterIds = null;
+            if (!string.IsNullOrEmpty(context.Request["cluster"]))
+            {
+                clusterIds = context.Request["cluster"].ToString();
+            }
+
+            string orgIds = null;
+            if (!string.IsNullOrEmpty(context.Request["org"] ))
+            {
+                orgIds = context.Request["org"].ToString();
+            }
+
+            string objIds = null;
+            if (!string.IsNullOrEmpty(context.Request["obj"]))
+            {
+                objIds = context.Request["obj"].ToString();
+            }
+
+            string projectIds = null;
+            if (!string.IsNullOrEmpty(context.Request["project"]))
+            {
+                projectIds = context.Request["project"].ToString();
+            }
+
+            int? fromMonth = null;
+            int? toMonth = null;
+            int? funded = null;
+            int? notFunded = null;
+
+            int val = 0;
+            if (!string.IsNullOrEmpty(context.Request["ops"]))
+            {
+                int.TryParse(context.Request["ops"].ToString(), out val);
+            }
+
+            int? isOPS = val > 0 ? val : (int?)null;
+
+            int? isApproved = 1;
             int pageSize = 0;
             int pageIndex = 0;
-            int langId = 1;
-            //SetHFQueryString(monthIds, locationIds, clusterIds, orgIds);
+            int langId = 2;
 
-            return new object[] {monthIds, locationIds, clusterIds, orgIds, 
-                                    objIds, prIds, actIds, indIds, projectIds,
-                                    fromMonth, toMonth, regionalInd, countryInd, funded, notFunded,
-                                    isOPS, isApproved, pageIndex, pageSize, Convert.ToInt32(0), langId };
+            string lng = "fr";
+            if (!string.IsNullOrEmpty(context.Request["lng"]))
+            {
+                lng = context.Request["lng"].ToString();
+            }
+
+            if (lng == "en")
+            {
+                langId = 1;
+            }
+
+            int emergencyId = 3;      
+
+           return new object[] {monthIds, locationIds, clusterIds, orgIds, 
+                                    objIds, projectIds,fromMonth, toMonth, funded, notFunded,
+                                    isOPS, isApproved, pageIndex, pageSize, Convert.ToInt32(0), langId, emergencyId };
         }
 
         private void RemoveColumnsFromDataTable(DataTable dt)
         {
             dt.Columns.Remove("rnumber");
-            dt.Columns.Remove("ObjectiveId");
-            dt.Columns.Remove("PriorityId");
+            dt.Columns.Remove("ObjectiveId");            
             dt.Columns.Remove("MonthId");
             dt.Columns.Remove("cnt");
             dt.Columns.Remove("ReportDetailId");
@@ -105,6 +148,7 @@ namespace SRFROWCA.Anonymous
             dt.Columns.Remove("IndicatorId");
             dt.Columns.Remove("ProjectId");
             dt.Columns.Remove("IsApproved");
+            dt.Columns.Remove("Comments");
 
         }
     }

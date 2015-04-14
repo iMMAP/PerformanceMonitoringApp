@@ -34,11 +34,12 @@
             text-align: left;
         }
     </style>
+
     <!-- ORS styles -->
     <link rel="stylesheet" href="../assets/css/ors.css" />
     <!-- ace styles -->
     <script type="text/javascript" src="../assets/orsjs/ShowHideObJAndPr.js"></script>
-    <script src="../assets/orsjs/jquery.numeric.min.js" type="text/javascript"></script>
+    <script src="../assets/orsjs/jquery.wholenumber.js" type="text/javascript"></script>
     <script type="text/javascript">
         var needToConfirm = true;
 
@@ -64,8 +65,7 @@
             }
         }
 
-        function alertComment()
-        {
+        function alertComment() {
             var txtCmtArea = document.getElementById("<%=txtComments.ClientID %>");
             txtCmtArea.focus();
             txtCmtArea.value = '';
@@ -77,14 +77,13 @@
             hiddenField.value = "-1";
         }
 
-        function clearComments()
-        {
+        function clearComments() {
             var txtCmtArea = document.getElementById("<%=txtComments.ClientID %>");
             txtCmtArea.value = '';
         }
 
         $(function () {
-            $(".numeric1").numeric();
+            $(".numeric1").wholenumber();
             showHideObj();
             showHidePriority();
 
@@ -111,7 +110,7 @@
                     }
                 });
 
-                $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th style="width: 100px;">&nbsp;</th><th style="width: 50px;">&nbsp;</th><th style="width: 260px;">&nbsp;</th><th style="width: 220px;">&nbsp;</th><th style="width: 40px;"></th><th style="width: 20px;"></th><th style="width: 30px;">&nbsp;</th>' + list + '</tr></thead>');
+                $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th style="width: 50px;">&nbsp;</th><th style="width: 260px;">&nbsp;</th><th style="width: 220px;">&nbsp;</th><th style="width: 40px;"></th><th style="width: 20px;"></th><th style="width: 30px;">&nbsp;</th>' + list + '</tr></thead>');
             }
 
             $('.cbltest').on('click', ':checkbox', function () {
@@ -166,81 +165,64 @@
                 <div class="widget-box no-border">
                     <div class="widget-body">
                         <div class="widget-main no-padding-top">
-                         <%--   <div class="col-sm-14 widget-container-span">--%>
-                                <div class="widget-box">
-                                    <div class="widget-header widget-header-small header-color-blue2">
-                                        <h5>
-                                            <asp:Localize ID="Localize1" runat="server" Text="Year/Month:" meta:resourcekey="Localize1Resource1"></asp:Localize>
-                                        </h5>
-                                        <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
+                            <%--   <div class="col-sm-14 widget-container-span">--%>
+                            <div class="widget-box">
+                                <div class="widget-header widget-header-small header-color-blue2">
+                                    <h5>
+                                        <asp:Localize ID="Localize1" runat="server" Text="Year/Month:" meta:resourcekey="Localize1Resource1"></asp:Localize>
+                                    </h5>
+                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        <asp:DropDownList ID="ddlYear" runat="server" OnSelectedIndexChanged="ddlYear_SelectedIndexChanged"
+                                            onchange="needToConfirm = false;" AutoPostBack="True" meta:resourcekey="ddlYearResource1">
+                                        </asp:DropDownList>
+                                        <asp:DropDownList ID="ddlMonth" runat="server" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged"
+                                            onchange="needToConfirm = false;" AutoPostBack="True" meta:resourcekey="ddlMonthResource1">
+                                        </asp:DropDownList>
+
                                     </div>
-                                    <div class="widget-body">
+                                </div>
+                            </div>
+                            <%--  </div>--%>
+                            <%-- <div class="col-sm-14 widget-container-span">--%>
+                            <div class="widget-box">
+                                <div class="widget-header widget-header-small header-color-blue2">
+                                    <h5>
+                                        <asp:Localize ID="lzeLgndProjects" runat="server"
+                                            Text="Projects" meta:resourcekey="lzeLgndProjectsResource1"></asp:Localize>
+                                    </h5>
+                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="slim-scroll" data-height="200">
                                         <div class="widget-main">
-                                            <asp:DropDownList ID="ddlYear" runat="server" OnSelectedIndexChanged="ddlYear_SelectedIndexChanged"
-                                                onchange="needToConfirm = false;" AutoPostBack="True" meta:resourcekey="ddlYearResource1">
-                                            </asp:DropDownList>
-                                            <asp:DropDownList ID="ddlMonth" runat="server" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged"
-                                                onchange="needToConfirm = false;" AutoPostBack="True" meta:resourcekey="ddlMonthResource1">
-                                            </asp:DropDownList>
-                                            
+                                            <asp:RadioButtonList ID="rblProjects" runat="server" AutoPostBack="True" OnSelectedIndexChanged="rblProjects_SelectedIndexChanged"
+                                                onchange="needToConfirm = false;" meta:resourcekey="rblProjectsResource1">
+                                            </asp:RadioButtonList>
                                         </div>
                                     </div>
                                 </div>
-                          <%--  </div>--%>
-                           <%-- <div class="col-sm-14 widget-container-span">--%>
-                                <div class="widget-box">
-                                    <div class="widget-header widget-header-small header-color-blue2">
-                                        <h5>
-                                            <asp:Localize ID="lzeLgndProjects" runat="server"
-                                                Text="Projects" meta:resourcekey="lzeLgndProjectsResource1"></asp:Localize>
-                                        </h5>
-                                        <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
-                                    </div>
-                                    <div class="widget-body">
-                                        <div class="slim-scroll" data-height="200">
-                                            <div class="widget-main">
-                                                <asp:RadioButtonList ID="rblProjects" runat="server" AutoPostBack="True" OnSelectedIndexChanged="rblProjects_SelectedIndexChanged"
-                                                    onchange="needToConfirm = false;" meta:resourcekey="rblProjectsResource1">
-                                                </asp:RadioButtonList>
-                                            </div>
-                                        </div>
+                            </div>
+                            <%-- </div>--%>
+                            <%-- <div class="col-sm-14 widget-container-span">--%>
+                            <div class="widget-box">
+                                <div class="widget-header widget-header-small header-color-blue2">
+                                    <h5>
+                                        <asp:Localize ID="lzeLgndStrObjs" runat="server"
+                                            Text="Strategic Objectives" meta:resourcekey="lzeLgndStrObjsResource1"></asp:Localize>
+                                    </h5>
+                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        <asp:CheckBoxList ID="cblObjectives" runat="server" CssClass="checkObj" meta:resourcekey="cblObjectivesResource1">
+                                        </asp:CheckBoxList>
                                     </div>
                                 </div>
-                           <%-- </div>--%>
-                           <%-- <div class="col-sm-14 widget-container-span">--%>
-                                <div class="widget-box">
-                                    <div class="widget-header widget-header-small header-color-blue2">
-                                        <h5>
-                                            <asp:Localize ID="lzeLgndStrObjs" runat="server"
-                                                Text="Strategic Objectives" meta:resourcekey="lzeLgndStrObjsResource1"></asp:Localize>
-                                        </h5>
-                                        <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
-                                    </div>
-                                    <div class="widget-body">
-                                        <div class="widget-main">
-                                            <asp:CheckBoxList ID="cblObjectives" runat="server" CssClass="checkObj" meta:resourcekey="cblObjectivesResource1">
-                                            </asp:CheckBoxList>
-                                        </div>
-                                    </div>
-                                </div>
-                           <%-- </div>
-                            <div class="col-sm-14 widget-container-span">--%>
-                                <div class="widget-box">
-                                    <div class="widget-header widget-header-small header-color-blue2">
-                                        <h5>
-                                            <asp:Localize ID="lzeLgndHumPriorities" runat="server"
-                                                Text="Humanitarian Priorities" meta:resourcekey="lzeLgndHumPrioritiesResource1"></asp:Localize>
-                                        </h5>
-                                        <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
-                                    </div>
-                                    <div class="widget-body">
-                                        <div class="widget-main">
-                                            <asp:CheckBoxList ID="cblPriorities" runat="server" CssClass="checkPr" meta:resourcekey="cblPrioritiesResource1">
-                                            </asp:CheckBoxList>
-                                        </div>
-                                    </div>
-                                </div>
-                            <%--</div>--%>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -279,7 +261,7 @@
                         </div>
                         <div id="scrolledGridView" style="overflow-x: auto; width: 100%;">
                             <asp:GridView ID="gvActivities" runat="server" AutoGenerateColumns="False" HeaderStyle-BackColor="ButtonFace"
-                                DataKeyNames="ActivityDataId,ProjectIndicatorId,ReportId" CssClass="imagetable"
+                                DataKeyNames="ActivityDataId,ProjectIndicatorId,ReportId,ActivityId" CssClass="imagetable"
                                 Width="100%" OnRowDataBound="gvActivities_RowDataBound"
                                 meta:resourcekey="gvActivitiesResource1">
                                 <HeaderStyle BackColor="Control"></HeaderStyle>
@@ -292,26 +274,8 @@
 
                                         <ItemStyle CssClass="hidden" Width="1px"></ItemStyle>
                                     </asp:BoundField>
-                                    <asp:BoundField DataField="HumanitarianPriorityId" HeaderText="HumanitarianPriorityId"
-                                        ItemStyle-Width="1px" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource2">
-                                        <HeaderStyle CssClass="hidden"></HeaderStyle>
-
-                                        <ItemStyle CssClass="hidden" Width="1px"></ItemStyle>
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="ObjAndPrId" HeaderText="objprid" ItemStyle-Width="1px"
-                                        ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource3">
-                                        <HeaderStyle CssClass="hidden"></HeaderStyle>
-
-                                        <ItemStyle CssClass="hidden" Width="1px"></ItemStyle>
-                                    </asp:BoundField>
                                     <asp:BoundField DataField="ProjectId" HeaderText="pid" ItemStyle-Width="1px" ItemStyle-CssClass="hidden"
                                         HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource4">
-                                        <HeaderStyle CssClass="hidden"></HeaderStyle>
-
-                                        <ItemStyle CssClass="hidden" Width="1px"></ItemStyle>
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="objAndPrAndPId" HeaderText="objprpid" ItemStyle-Width="1px"
-                                        ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource5">
                                         <HeaderStyle CssClass="hidden"></HeaderStyle>
 
                                         <ItemStyle CssClass="hidden" Width="1px"></ItemStyle>
@@ -322,38 +286,29 @@
 
                                         <ItemStyle CssClass="hidden" Width="1px"></ItemStyle>
                                     </asp:BoundField>
-                                    <asp:BoundField DataField="PrAndPId" HeaderText="PrAndPId" ItemStyle-Width="1px"
-                                        ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource7">
-                                        <HeaderStyle CssClass="hidden"></HeaderStyle>
-
-                                        <ItemStyle CssClass="hidden" Width="1px"></ItemStyle>
-                                    </asp:BoundField>
-                                    <asp:TemplateField HeaderText="Project Code" ItemStyle-Wrap="false" meta:resourcekey="TemplateFieldResource1">
+                                    <asp:TemplateField HeaderText="Project Code" ItemStyle-Wrap="false" meta:resourcekey="TemplateFieldResource1" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden">
                                         <ItemTemplate>
                                             <asp:Label ID="lblProjectcode" runat="server" Text='<%# Eval("ProjectCode") %>' ToolTip='<%# Eval("ProjectTitle") %>'></asp:Label>
                                         </ItemTemplate>
                                         <ItemStyle Wrap="False"></ItemStyle>
                                     </asp:TemplateField>
-                                    <asp:TemplateField ItemStyle-Wrap="false" meta:resourcekey="TemplateFieldResource2" >
+                                    <asp:TemplateField ItemStyle-Wrap="false" meta:resourcekey="TemplateFieldResource2">
                                         <ItemTemplate>
                                             <asp:Image ID="imgObjective" runat="server" AlternateText="Obj" meta:resourcekey="imgObjectiveResource1" />
-                                            <asp:Image ID="imgPriority" runat="server" AlternateText="Obj" meta:resourcekey="imgPriorityResource1" />
-                                            <asp:Image ID="imgRind" runat="server" meta:resourcekey="imgRindResource1" />
-                                            <asp:Image ID="imgCind" runat="server" meta:resourcekey="imgCindResource1" />
                                         </ItemTemplate>
                                         <ItemStyle Wrap="False"></ItemStyle>
                                     </asp:TemplateField>
                                     <asp:TemplateField ItemStyle-Width="260px" HeaderText="Activity" meta:resourcekey="TemplateFieldResource3">
                                         <ItemTemplate>
                                             <div style="width: 260px; word-wrap: break-word;">
-                                                <%# Eval("ActivityName")%>
+                                                <%# Eval("Activity")%>
                                             </div>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField ItemStyle-Width="220px" HeaderText="Output Indicator" meta:resourcekey="TemplateFieldResource4">
                                         <ItemTemplate>
                                             <div style="width: 220px; word-wrap: break-word;">
-                                                <%# Eval("DataName")%>
+                                                <%# Eval("Indicator")%>
                                             </div>
                                         </ItemTemplate>
                                     </asp:TemplateField>
@@ -364,16 +319,6 @@
                                             </div>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:BoundField DataField="RInd" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource8">
-                                        <HeaderStyle CssClass="hidden"></HeaderStyle>
-
-                                        <ItemStyle CssClass="hidden"></ItemStyle>
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="CInd" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource9">
-                                        <HeaderStyle CssClass="hidden"></HeaderStyle>
-
-                                        <ItemStyle CssClass="hidden"></ItemStyle>
-                                    </asp:BoundField>
                                     <asp:TemplateField ItemStyle-Width="30px" HeaderText="CMT" meta:resourcekey="TemplateFieldResource5">
                                         <ItemTemplate>
                                             <asp:ImageButton ID="imgbtnComments" runat="server" ImageUrl="~/assets/orsimages/edit-file-icon.png"
@@ -382,6 +327,7 @@
                                         </ItemTemplate>
                                         <ItemStyle Width="30px"></ItemStyle>
                                     </asp:TemplateField>
+
                                 </Columns>
                             </asp:GridView>
                         </div>
@@ -404,7 +350,8 @@
         </div>
     </div>
     <input type="button" id="btnClientOpen" runat="server" style="display: none;" />
-    <asp:ModalPopupExtender ID="mpeAddActivity" runat="server" BehaviorID="mpeAddActivity" TargetControlID="btnClientOpen" PopupControlID="pnlLocations" BackgroundCssClass="modalpopupbackground"
+    <asp:ModalPopupExtender ID="mpeAddActivity" runat="server" BehaviorID="mpeAddActivity" TargetControlID="btnClientOpen"
+        PopupControlID="pnlLocations" BackgroundCssClass="modalpopupbackground"
         DynamicServicePath="" Enabled="True">
     </asp:ModalPopupExtender>
     <asp:Panel ID="pnlLocations" runat="server" Width="800px" meta:resourcekey="pnlLocationsResource1">
@@ -469,7 +416,7 @@
             <div class="modal-dialog">
 
                 <div class="modal-content">
-                    <div class="modal-header" style="border-bottom-width:0px;">
+                    <div class="modal-header" style="border-bottom-width: 0px;">
                         <button runat="server" id="btnCancelComments" onserverclick="btnCancelComments_Click"
                             class="close" data-dismiss="modal" onclick="needToConfirm = false;">
                             &times;
@@ -478,19 +425,19 @@
                         <%--<h4 class="blue bigger">
                             <asp:Localize ID="localIndComments" runat="server" Text="Indicator Comments" meta:resourcekey="localIndCommentsResource1"></asp:Localize>
                         </h4>--%>
-                    </div> 
-                    <span class="btn btn-sm btn-info no-radius" style="margin-top:5px;margin-left:8px;line-height:8px;" onclick="javascript:alertComment();">New Comment</span>
-                                     
-                    <div class="modal-body overflow-visible" style="padding-top:5px;">
+                    </div>
+                    <span class="btn btn-sm btn-info no-radius" style="margin-top: 5px; margin-left: 8px; line-height: 8px;" onclick="javascript:alertComment();">New Comment</span>
+
+                    <div class="modal-body overflow-visible" style="padding-top: 5px;">
                         <div class="row">
-                               
+
                             <uc1:ReportedIndicatorComments ID="ucIndComments" runat="server" />
                         </div>
                     </div>
-                   <br />
-                    <div class="form-actions" style=" margin: 0 auto;width: 97%;">
+                    <br />
+                    <div class="form-actions" style="margin: 0 auto; width: 97%;">
                         <div class="input-group">
-                            <input type="text" runat="server" id="txtComments" name="message" class="form-control" style="text-align:left;" placeholder="Type your comment here ...">
+                            <input type="text" runat="server" id="txtComments" name="message" class="form-control" style="text-align: left;" placeholder="Type your comment here ...">
                             <span class="input-group-btn">
                                 <%--<button type="button" class="btn btn-sm btn-info no-radius">
                                     <i class="icon-share-alt"></i>
@@ -503,8 +450,8 @@
                         <asp:Button Visible="false" ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancelComments_Click"
                             CssClass="btn btn-primary" OnClientClick="needToConfirm = false;" />
                     </div>
-                   <br />
-                    
+                    <br />
+
 
                 </div>
             </div>

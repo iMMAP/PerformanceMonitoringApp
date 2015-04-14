@@ -173,10 +173,28 @@ namespace SRFROWCA.OPS
                 OPSProjectId = tempVal;
             }
 
-            // Cluster Name
-            if (Request.QueryString["clname"] != null)
+            if (Request.QueryString["clname2"] != null)
             {
-                OPSClusterName = Request.QueryString["clname"].ToString();
+                if (Request.QueryString["clname2"].ToString() == " c" ||
+                    Request.QueryString["clname2"].ToString() == "")
+                {
+                    if (Request.QueryString["clname"] != null)
+                    {
+                        OPSClusterName = Request.QueryString["clname"].ToString();
+                    }
+                }
+                else
+                {
+                    OPSClusterName = Request.QueryString["clname2"].ToString();
+                }
+
+            }
+            else
+            {
+                if (Request.QueryString["clname"] != null)
+                {
+                    OPSClusterName = Request.QueryString["clname"].ToString();
+                }
             }
 
             // Country Name
@@ -232,7 +250,7 @@ namespace SRFROWCA.OPS
             string clusterName = "";
             if (OPSClusterName == "coordinationandsupportservices")
             {
-                clusterName = RC.SelectedSiteLanguageId == 2 ? "Coodination et Services de Soutien" : "Coordination And Support Services";
+                clusterName = RC.SelectedSiteLanguageId == 2 ? "Coordination et Services de Soutien" : "Coordination And Support Services";
             }
             else if (OPSClusterName == "earlyrecovery")
             {

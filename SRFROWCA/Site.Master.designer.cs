@@ -40,33 +40,6 @@ namespace SRFROWCA {
         protected global::System.Web.UI.ScriptManager masterScriptMgr;
         
         /// <summary>
-        /// ddlEmgergency control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEmgergency;
-        
-        /// <summary>
-        /// lblNumberOfNotifications control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNumberOfNotifications;
-        
-        /// <summary>
-        /// rptNotifications control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptNotifications;
-        
-        /// <summary>
         /// lnkLanguageEnglish control.
         /// </summary>
         /// <remarks>
@@ -229,112 +202,31 @@ namespace SRFROWCA {
         protected global::System.Web.UI.WebControls.Localize localDashboardPerfMon;
         
         /// <summary>
-        /// liDataEntry control.
+        /// liProjects control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liDataEntry;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liProjects;
         
         /// <summary>
-        /// menuDataEntry control.
+        /// A5 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuDataEntry;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor A5;
         
         /// <summary>
-        /// localDataEntry control.
+        /// localMainProjects control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localDataEntry;
-        
-        /// <summary>
-        /// liManageProject control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liManageProject;
-        
-        /// <summary>
-        /// menuManageProjects control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuManageProjects;
-        
-        /// <summary>
-        /// localManageProjects control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localManageProjects;
-        
-        /// <summary>
-        /// liManageActivity control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liManageActivity;
-        
-        /// <summary>
-        /// menuManageActivities control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuManageActivities;
-        
-        /// <summary>
-        /// localManageActivities control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localManageActivities;
-        
-        /// <summary>
-        /// liRegionalIndicators control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liRegionalIndicators;
-        
-        /// <summary>
-        /// menuRegionalIndicators control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuRegionalIndicators;
-        
-        /// <summary>
-        /// localManageRegionalIndicators control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localManageRegionalIndicators;
+        protected global::System.Web.UI.WebControls.Localize localMainProjects;
         
         /// <summary>
         /// liCLprojectsListing control.
@@ -364,85 +256,265 @@ namespace SRFROWCA {
         protected global::System.Web.UI.WebControls.Localize localCLProjectListing;
         
         /// <summary>
-        /// liSRPIndicators control.
+        /// liManageProject control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liSRPIndicators;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liManageProject;
         
         /// <summary>
-        /// menueSRPIndicators control.
+        /// menuManageProjects control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueSRPIndicators;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuManageProjects;
         
         /// <summary>
-        /// localAddSRPActivities control.
+        /// localManageProjects control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localAddSRPActivities;
+        protected global::System.Web.UI.WebControls.Localize localManageProjects;
         
         /// <summary>
-        /// liClusterTarget control.
+        /// liDataEntry control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liClusterTarget;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liDataEntry;
         
         /// <summary>
-        /// menueClsuterTarget control.
+        /// menuDataEntry control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueClsuterTarget;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuDataEntry;
         
         /// <summary>
-        /// localCluterTargets control.
+        /// localDataEntry control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localCluterTargets;
+        protected global::System.Web.UI.WebControls.Localize localDataEntry;
         
         /// <summary>
-        /// liValidate control.
+        /// liManageActivity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liValidate;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liManageActivity;
         
         /// <summary>
-        /// menueValidate control.
+        /// menuManageActivities control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueValidate;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuManageActivities;
         
         /// <summary>
-        /// localValidate control.
+        /// localManageActivities control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localValidate;
+        protected global::System.Web.UI.WebControls.Localize localManageActivities;
+        
+        /// <summary>
+        /// liManagePartners control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liManagePartners;
+        
+        /// <summary>
+        /// menuManagePartners control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuManagePartners;
+        
+        /// <summary>
+        /// localManagePartners control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localManagePartners;
+        
+        /// <summary>
+        /// liClusterFrameworks control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liClusterFrameworks;
+        
+        /// <summary>
+        /// A6 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor A6;
+        
+        /// <summary>
+        /// localClusterFrameworksList1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localClusterFrameworksList1;
+        
+        /// <summary>
+        /// liOutputIndicators control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liOutputIndicators;
+        
+        /// <summary>
+        /// localClFOutputIndicators control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localClFOutputIndicators;
+        
+        /// <summary>
+        /// liClusterIndicators control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liClusterIndicators;
+        
+        /// <summary>
+        /// localClFManageIndicators control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localClFManageIndicators;
+        
+        /// <summary>
+        /// liIndicatorReporting control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liIndicatorReporting;
+        
+        /// <summary>
+        /// localClFOutputDataEntry control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localClFOutputDataEntry;
+        
+        /// <summary>
+        /// liIndicatorReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liIndicatorReport;
+        
+        /// <summary>
+        /// localClFOutputDataReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localClFOutputDataReport;
+        
+        /// <summary>
+        /// liNewIndicatorListing control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liNewIndicatorListing;
+        
+        /// <summary>
+        /// localActAndIndicators control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localActAndIndicators;
+        
+        /// <summary>
+        /// liClusterFrameworkImport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liClusterFrameworkImport;
+        
+        /// <summary>
+        /// localCLFrameworkImportExport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localCLFrameworkImportExport;
+        
+        /// <summary>
+        /// liOutputIndReportPublic control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liOutputIndReportPublic;
+        
+        /// <summary>
+        /// localOutputIndReportPublic control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localOutputIndReportPublic;
         
         /// <summary>
         /// liValidateAchievements control.
@@ -472,355 +544,130 @@ namespace SRFROWCA {
         protected global::System.Web.UI.WebControls.Localize LocalValidateAchievements;
         
         /// <summary>
-        /// liValidateIndicators control.
+        /// liORS3W control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liValidateIndicators;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liORS3W;
         
         /// <summary>
-        /// menueValidateIndicaotrs control.
+        /// menuORS3W control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueValidateIndicaotrs;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuORS3W;
         
         /// <summary>
-        /// localValidateIndicators control.
+        /// liKeyFigures control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localValidateIndicators;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liKeyFigures;
         
         /// <summary>
-        /// liReports control.
+        /// menueKeyFigures control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liReports;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueKeyFigures;
         
         /// <summary>
-        /// menueReports control.
+        /// localKeyFigures control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueReports;
+        protected global::System.Web.UI.WebControls.Localize localKeyFigures;
         
         /// <summary>
-        /// localReports control.
+        /// liKeyFiguresFramework control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localReports;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liKeyFiguresFramework;
         
         /// <summary>
-        /// liContactList control.
+        /// menueKeyFigFramework control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liContactList;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueKeyFigFramework;
         
         /// <summary>
-        /// menueContactList control.
+        /// localKeyFigureFramework control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueContactList;
+        protected global::System.Web.UI.WebControls.Localize localKeyFigureFramework;
         
         /// <summary>
-        /// localReportsSumRepContactList control.
+        /// liKeyFiguresPublic control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localReportsSumRepContactList;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liKeyFiguresPublic;
         
         /// <summary>
-        /// liSumOfCountryIndicators control.
+        /// A3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liSumOfCountryIndicators;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor A3;
         
         /// <summary>
-        /// menueSumOfCountryIndicators control.
+        /// Localize1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueSumOfCountryIndicators;
+        protected global::System.Web.UI.WebControls.Localize Localize1;
         
         /// <summary>
-        /// localReportsSumRepSumOfCountryInd control.
+        /// liCustomReport control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localReportsSumRepSumOfCountryInd;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCustomReport;
         
         /// <summary>
-        /// liSumOfRegionalIndicators control.
+        /// menueCustomReport control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liSumOfRegionalIndicators;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueCustomReport;
         
         /// <summary>
-        /// menueSumOfRegionalIndicators control.
+        /// localReportCustomReport control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueSumOfRegionalIndicators;
-        
-        /// <summary>
-        /// localReportsSumReportSumOfRegInd control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localReportsSumReportSumOfRegInd;
-        
-        /// <summary>
-        /// liCountryReports control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCountryReports;
-        
-        /// <summary>
-        /// menueCountryReports control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueCountryReports;
-        
-        /// <summary>
-        /// liCountryBurkina control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCountryBurkina;
-        
-        /// <summary>
-        /// liCountryCameroon control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCountryCameroon;
-        
-        /// <summary>
-        /// liCountryChad control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCountryChad;
-        
-        /// <summary>
-        /// liCountryGambia control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCountryGambia;
-        
-        /// <summary>
-        /// liCountryMali control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCountryMali;
-        
-        /// <summary>
-        /// liCountryMauritania control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCountryMauritania;
-        
-        /// <summary>
-        /// liCountryNiger control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCountryNiger;
-        
-        /// <summary>
-        /// liCountryNigeria control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCountryNigeria;
-        
-        /// <summary>
-        /// liCountrySenegal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCountrySenegal;
-        
-        /// <summary>
-        /// liCountrySahel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCountrySahel;
-        
-        /// <summary>
-        /// liCountryLiberia control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCountryLiberia;
-        
-        /// <summary>
-        /// liMaps control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liMaps;
-        
-        /// <summary>
-        /// mnuMaps control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor mnuMaps;
-        
-        /// <summary>
-        /// liMapBurkina control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liMapBurkina;
-        
-        /// <summary>
-        /// liMapCameroon control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liMapCameroon;
-        
-        /// <summary>
-        /// liMapGambia control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liMapGambia;
-        
-        /// <summary>
-        /// liMapMali control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liMapMali;
-        
-        /// <summary>
-        /// liMapMauritania control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liMapMauritania;
-        
-        /// <summary>
-        /// liMapNiger control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liMapNiger;
-        
-        /// <summary>
-        /// liMapSenegal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liMapSenegal;
-        
-        /// <summary>
-        /// liMapsListing control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liMapsListing;
-        
-        /// <summary>
-        /// A5 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor A5;
+        protected global::System.Web.UI.WebControls.Localize localReportCustomReport;
         
         /// <summary>
         /// liPivotTables control.
@@ -976,6 +823,15 @@ namespace SRFROWCA {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor menueUserListing;
         
         /// <summary>
+        /// localSiteUsers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localSiteUsers;
+        
+        /// <summary>
         /// liFundingStatus control.
         /// </summary>
         /// <remarks>
@@ -992,6 +848,15 @@ namespace SRFROWCA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor AFundingStatus;
+        
+        /// <summary>
+        /// localFundingStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localFundingStatus;
         
         /// <summary>
         /// liOrganizationList control.
@@ -1012,6 +877,24 @@ namespace SRFROWCA {
         protected global::System.Web.UI.WebControls.Localize localOrganizationsResource1;
         
         /// <summary>
+        /// liRequestedOrganizations control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liRequestedOrganizations;
+        
+        /// <summary>
+        /// localRequestedOrgs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localRequestedOrgs;
+        
+        /// <summary>
         /// liLocations control.
         /// </summary>
         /// <remarks>
@@ -1019,6 +902,15 @@ namespace SRFROWCA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liLocations;
+        
+        /// <summary>
+        /// localLocationsListing control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localLocationsListing;
         
         /// <summary>
         /// liEmergency control.
@@ -1039,13 +931,13 @@ namespace SRFROWCA {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor A2;
         
         /// <summary>
-        /// Localize2 control.
+        /// localEmergency control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize2;
+        protected global::System.Web.UI.WebControls.Localize localEmergency;
         
         /// <summary>
         /// liEmgList control.
@@ -1057,13 +949,13 @@ namespace SRFROWCA {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liEmgList;
         
         /// <summary>
-        /// Localize3 control.
+        /// localEmergencyList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize3;
+        protected global::System.Web.UI.WebControls.Localize localEmergencyList;
         
         /// <summary>
         /// liEmgLocation control.
@@ -1075,13 +967,13 @@ namespace SRFROWCA {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liEmgLocation;
         
         /// <summary>
-        /// Localize4 control.
+        /// localEmergencyLocations control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize4;
+        protected global::System.Web.UI.WebControls.Localize localEmergencyLocations;
         
         /// <summary>
         /// liEmgCluster control.
@@ -1093,13 +985,13 @@ namespace SRFROWCA {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liEmgCluster;
         
         /// <summary>
-        /// Localize5 control.
+        /// localEmergencyCluster control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize5;
+        protected global::System.Web.UI.WebControls.Localize localEmergencyCluster;
         
         /// <summary>
         /// liLinkEmgObjectives control.
@@ -1111,13 +1003,13 @@ namespace SRFROWCA {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liLinkEmgObjectives;
         
         /// <summary>
-        /// Localize7 control.
+        /// localEmergencyObjectives control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize7;
+        protected global::System.Web.UI.WebControls.Localize localEmergencyObjectives;
         
         /// <summary>
         /// liEmgObjectives control.
@@ -1129,130 +1021,13 @@ namespace SRFROWCA {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liEmgObjectives;
         
         /// <summary>
-        /// Localize6 control.
+        /// localObjectives control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize6;
-        
-        /// <summary>
-        /// liClusterFrameworks control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liClusterFrameworks;
-        
-        /// <summary>
-        /// A6 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor A6;
-        
-        /// <summary>
-        /// localClusterFrameworksList1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localClusterFrameworksList1;
-        
-        /// <summary>
-        /// liClusterIndicators control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liClusterIndicators;
-        
-        /// <summary>
-        /// Localize8 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize8;
-        
-        /// <summary>
-        /// liNewIndicatorListing control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liNewIndicatorListing;
-        
-        /// <summary>
-        /// Localize10 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize10;
-        
-        /// <summary>
-        /// liClusterFrameworkImport control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liClusterFrameworkImport;
-        
-        /// <summary>
-        /// Localize13 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize13;
-        
-        /// <summary>
-        /// liActivities control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liActivities;
-        
-        /// <summary>
-        /// A3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor A3;
-        
-        /// <summary>
-        /// liIndicators control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liIndicators;
-        
-        /// <summary>
-        /// A4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor A4;
+        protected global::System.Web.UI.WebControls.Localize localObjectives;
         
         /// <summary>
         /// liBulkImport control.
@@ -1273,6 +1048,15 @@ namespace SRFROWCA {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor menueBulkImport;
         
         /// <summary>
+        /// localImportData control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localImportData;
+        
+        /// <summary>
         /// liBulkImportUser control.
         /// </summary>
         /// <remarks>
@@ -1291,13 +1075,13 @@ namespace SRFROWCA {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor A1;
         
         /// <summary>
-        /// liProjectXMLFeeds control.
+        /// localImportDataUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liProjectXMLFeeds;
+        protected global::System.Web.UI.WebControls.Localize localImportDataUser;
         
         /// <summary>
         /// liProgressSummary control.
@@ -1309,40 +1093,22 @@ namespace SRFROWCA {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liProgressSummary;
         
         /// <summary>
-        /// liPublicAllData control.
+        /// localProgressSummary control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liPublicAllData;
+        protected global::System.Web.UI.WebControls.Localize localProgressSummary;
         
         /// <summary>
-        /// menuePublicAllData control.
+        /// localReportsSumRepContactList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuePublicAllData;
-        
-        /// <summary>
-        /// Localize1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize1;
-        
-        /// <summary>
-        /// localContactUs control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localContactUs;
+        protected global::System.Web.UI.WebControls.Localize localReportsSumRepContactList;
         
         /// <summary>
         /// localFAQHelp control.
@@ -1354,22 +1120,22 @@ namespace SRFROWCA {
         protected global::System.Web.UI.WebControls.Localize localFAQHelp;
         
         /// <summary>
-        /// liORSDocuments control.
+        /// Localize14 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liORSDocuments;
+        protected global::System.Web.UI.WebControls.Localize Localize14;
         
         /// <summary>
-        /// menueORSDocuments control.
+        /// localContactUs control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueORSDocuments;
+        protected global::System.Web.UI.WebControls.Localize localContactUs;
         
         /// <summary>
         /// liSettings control.

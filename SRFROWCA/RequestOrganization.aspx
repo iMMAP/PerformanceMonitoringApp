@@ -51,14 +51,14 @@
                                                         CssClass="error2" Text="Type Required" ControlToValidate="txtType"></asp:RequiredFieldValidator>
                                                 </span>
                                             </label>
-                                            <label class="block clearfix">
+                                            <%--<label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
                                                     <asp:TextBox ID="txtCountry" runat="server" MaxLength="50" CssClass="form-control"
                                                         placeholder="Country"></asp:TextBox>
-                                                    <%--<i class="icon-user"></i>--%>
+                                                    
                                                 </span>
                                             </label>
-                                            <br />
+                                            <br />--%>
 
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">

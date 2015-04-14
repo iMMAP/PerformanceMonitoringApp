@@ -15,7 +15,7 @@
             <li><i class="icon-home home-icon"></i><a href="../Default.aspx">
                 <asp:Localize ID="localBreadCrumbHome" runat="server" Text="Home" meta:resourcekey="localBreadCrumbHomeResource1"></asp:Localize></a> </li>
             <li class="active">
-                <asp:Localize ID="localBreadCrumbValidateAchievements" runat="server" Text="Validate Achievements" meta:resourcekey="localBreadCrumbValidateAchievementsResource1"></asp:Localize></li>
+                <asp:Localize ID="localBreadCrumbValidateAchievements" runat="server" Text="Validate Reports" meta:resourcekey="localBreadCrumbValidateAchievementsResource1"></asp:Localize></li>
         </ul>
         <!-- .breadcrumb -->
     </div>
@@ -113,8 +113,8 @@
                                                                             <td>&nbsp;</td>
                                                                             <td>
                                                                                 <asp:RadioButtonList AutoPostBack="true" ID="rbIsOPSProject" runat="server" RepeatColumns="3" OnSelectedIndexChanged="rbIsOPSProject_SelectedIndexChanged">
-                                                                                    <asp:ListItem Text="All" Value="-1"></asp:ListItem>
-                                                                                    <asp:ListItem Text="OPS" Value="true" Selected="True"></asp:ListItem>
+                                                                                    <asp:ListItem Text="All" Value="-1"  Selected="True"></asp:ListItem>
+                                                                                    <asp:ListItem Text="OPS" Value="true"></asp:ListItem>
                                                                                     <asp:ListItem Text="ORS" Value="false"></asp:ListItem>
                                                                                 </asp:RadioButtonList>
                                                                             </td>

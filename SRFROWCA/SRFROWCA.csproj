@@ -78,13 +78,6 @@
     <Reference Include="AjaxControlToolkit, Version=4.1.7.123, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
       <HintPath>..\_dll\AjaxControlToolkit.dll</HintPath>
     </Reference>
-    <Reference Include="DocX">
-      <HintPath>..\_dll\DocX.dll</HintPath>
-    </Reference>
-    <Reference Include="DotNet.Highcharts, Version=2.0.0.0, Culture=neutral, PublicKeyToken=88854f873df851bf, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_dll\DotNet.Highcharts.dll</HintPath>
-    </Reference>
     <Reference Include="DropDownCheckBoxes, Version=1.1.0.37004, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_dll\DropDownCheckBoxes.dll</HintPath>
@@ -103,10 +96,6 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
-    <Reference Include="Svg, Version=0.5.2.17984, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_dll\Svg.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -133,10 +122,6 @@
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="Telerik.Web.UI, Version=2013.2.717.40, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_dll\Telerik.Web.UI.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
@@ -146,39 +131,35 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\PasswordSendConfirmation.aspx" />
     <Content Include="Account\Register.aspx" />
-    <Content Include="Account\Register2.aspx" />
     <Content Include="Account\Registerca.aspx" />
     <Content Include="Account\Reset.aspx" />
     <Content Include="Account\UpdateUser.aspx" />
     <Content Include="Account\UserProfile.aspx" />
-    <Content Include="Admin\ActivityData.aspx" />
-    <Content Include="Admin\ActivityListing.aspx" />
+    <Content Include="Admin\RequestedOrgListing.aspx" />
+    <Content Include="Anonymous\OutputIndicatorReport.aspx" />
+    <Content Include="assets\orsimages\Calendar16.png" />
+    <Content Include="assets\orsimages\delete16.png" />
+    <Content Include="assets\orsimages\duplicate.png" />
+    <Content Include="assets\orsimages\edit16.png" />
     <Content Include="assets\himages\activity_analysis_100px.png" />
     <Content Include="assets\himages\activity_scale_operation_100px.png" />
     <Content Include="assets\himages\SAH_Countries2.png" />
     <Content Include="assets\himages\suivant-ors.png" />
     <Content Include="assets\orsjs\jquery.wholenumber.js" />
-    <Content Include="ClusterLead\AddActivity.aspx" />
     <Content Include="ClusterLead\AddActivityAndIndicators.aspx" />
-    <Content Include="ClusterLead\AddCountryIndicator.aspx" />
     <Content Include="Admin\ConfigSettings.aspx" />
-    <Content Include="Admin\AddEditCountryMaps.aspx" />
-    <Content Include="ClusterLead\AddIndicators.aspx" />
     <Content Include="ClusterLead\ClusterDataEntry.aspx" />
     <Content Include="ClusterLead\ClusterReports.aspx" />
     <Content Include="ClusterLead\CountryIndicators.aspx" />
-    <Content Include="Admin\CountryMapsListing.aspx" />
     <Content Include="Admin\EmergencyClusters.aspx" />
     <Content Include="Admin\EmergencyLocations.aspx" />
     <Content Include="Admin\EmergencyObjectives.aspx" />
     <Content Include="Admin\IndicatorActivities.aspx" />
-    <Content Include="Admin\IndicatorListing.aspx" />
     <Content Include="Admin\LinkEmergencyObjective.aspx" />
     <Content Include="Admin\Location\AddNewLocation.aspx" />
     <Content Include="Admin\Location\LocationsList.aspx" />
     <Content Include="Admin\Organization\AddEditOrganization.aspx" />
     <Content Include="Admin\Organization\OrganizationList.aspx" />
-    <Content Include="Admin\PriorityActivities.aspx" />
     <Content Include="Admin\ProgressSummary.aspx" />
     <Content Include="Admin\ProjectXMLFeeds.aspx" />
     <Content Include="Anonymous\AllDataPublic.aspx" />
@@ -381,21 +362,14 @@
     <Content Include="assets\orsjs\quicksearch.js" />
     <Content Include="assets\orsjs\ShowHideObJAndPr.js" />
     <Content Include="assets\orsjs\ShowHideProjObjAndPr.js" />
-    <Content Include="ClusterLead\ActivityListing.aspx" />
-    <Content Include="ClusterLead\ApproveIndicatorAddRemove.aspx" />
     <Content Include="ClusterLead\ClusterIndicatorTargets.aspx" />
-    <Content Include="ClusterLead\EditActivity.aspx" />
-    <Content Include="ClusterLead\EditIndicator.aspx" />
+    <Content Include="ClusterLead\EditOutputIndicator.aspx" />
     <Content Include="ClusterLead\IndicatorListing.aspx" />
-    <Content Include="ClusterLead\ManageActivitiesClsuterLead.aspx" />
     <Content Include="ClusterLead\ProjectDetails.aspx" />
     <Content Include="ClusterLead\ProjectReports.aspx" />
     <Content Include="ClusterLead\ProjectsListing.aspx" />
     <Content Include="Admin\UploadLocations.aspx" />
-    <Content Include="Admin\UploadLogFrame.aspx" />
     <Content Include="Anonymous\AllData.aspx" />
-    <Content Include="ClusterLead\AddSRPActivitiesFromMasterList.aspx" />
-    <Content Include="ClusterLead\AddSRPActivity.aspx" />
     <Content Include="ClusterLead\ReportDetails.aspx" />
     <Content Include="ClusterLead\SahelIndicatorTargets.aspx" />
     <Content Include="ClusterLead\SumOfCountryIndicators.aspx" />
@@ -405,84 +379,58 @@
     <Content Include="ClusterLead\ValidateReportList.aspx" />
     <Content Include="Configurations\ChangeEndSettings.xml" />
     <Content Include="Controls\AddContryReportControl.ascx" />
+    <Content Include="Controls\ConfirmBox.ascx" />
     <Content Include="Controls\IndicatorsWithAdmin1TargetsControl.ascx" />
     <Content Include="Controls\NewCountryIndicatorsControl.ascx" />
     <Content Include="Controls\NewIndicatorsControl.ascx" />
     <Content Include="Controls\ReportedIndicatorComments.ascx" />
-    <Content Include="DataFeeds\AdminDataFeeds.aspx" />
     <Content Include="Admin\EmergencyListing.aspx" />
-    <Content Include="Admin\OfficeListing.aspx" />
     <Content Include="Admin\OrganizationListing.aspx" />
-    <Content Include="Admin\UploadActivities.aspx" />
     <Content Include="Admin\UsersListing.aspx" />
     <Content Include="ContactUs\Contactus.aspx" />
     <Content Include="ContactUs\ContactUsControl.ascx" />
     <Content Include="Controls\FilterCriteria.ascx" />
-    <Content Include="DeleteThisPlease.html" />
-    <Content Include="Ebola\ActivityListing.aspx" />
-    <Content Include="Ebola\AllData.aspx" />
-    <Content Include="Ebola\CreateProject.aspx" />
-    <Content Include="Ebola\Default.aspx" />
-    <Content Include="Ebola\IndicatorListing.aspx" />
-    <Content Include="Ebola\Login.aspx" />
-    <Content Include="Ebola\ManageActivities.aspx" />
-    <Content Include="Ebola\ReportDataEntry.aspx" />
-    <Content Include="Ebola\ValidateIndicators.aspx" />
-    <Content Include="Ebola\ValidateReportList.aspx" />
     <Content Include="ErrorPages\DefaultRedirectErrorPage.aspx" />
     <Content Include="ErrorPages\GenericErrorPage.aspx" />
     <Content Include="ErrorPages\Http404ErrorPage.aspx" />
     <Content Include="ErrorPages\HttpErrorPage.aspx" />
     <Content Include="faq.aspx" />
-    <Content Include="LeadPages\AddIndicatorOnActivity.aspx" />
-    <Content Include="LeadPages\EditActIndicator.aspx" />
-    <Content Include="LeadPages\FundingListing.aspx" />
-    <Content Include="LeadPages\FundingSummary.aspx" />
+    <Content Include="HtmlPage1.html" />
+    <Content Include="KeyFigures\AddKeyFigure.aspx" />
+    <Content Include="KeyFigures\AddKeyFigureCategory.aspx" />
+    <Content Include="KeyFigures\AddKeyFigureCategoryCtrl.ascx" />
+    <Content Include="KeyFigures\AddKeyFigureControl.ascx" />
+    <Content Include="KeyFigures\AddKeyFigureIndicator.aspx" />
+    <Content Include="KeyFigures\AddKeyFigureIndicatorCtrl.ascx" />
+    <Content Include="KeyFigures\AddKeyFigureSubCategory.aspx" />
+    <Content Include="KeyFigures\AddKeyFigureSubCategoryCtrl.ascx" />
+    <Content Include="KeyFigures\EditKeyFigureCategory.aspx" />
+    <Content Include="KeyFigures\EditKeyFigureIndicator.aspx" />
+    <Content Include="KeyFigures\EditKeyFigureSubCategory.aspx" />
+    <Content Include="KeyFigures\KeyFigureIndicatorListing.aspx" />
+    <Content Include="KeyFigures\KeyFiguresListing.aspx" />
+    <Content Include="KeyFigures\KeyFiguresListingPublic.aspx" />
     <Content Include="Log\ErrorLog.txt" />
-    <Content Include="Maps\FirstTestOL3.aspx" />
-    <Content Include="Maps\TargetAchievedByLocDataMap.aspx" />
-    <Content Include="OperationalPresenceDB.aspx" />
+    <Content Include="OperationalPresence.aspx" />
     <Content Include="OPS\OPSDataEntryOld.aspx" />
     <Content Include="OPS\OPSDataEntry.aspx" />
     <Content Include="OPS\SyncOPSProjects.aspx" />
     <Content Include="OPS\UploadOPSProjectDetails.aspx" />
-    <Content Include="ORSDocuments\orsdocs.aspx" />
     <Content Include="Pages\AddActivities.aspx" />
     <Content Include="Pages\CreateProject.aspx" />
     <Content Include="Pages\ManageActivities.aspx" />
-    <Content Include="Pages\TargetsAchievedOfLocationByDuration.ascx" />
+    <Content Include="Pages\ProjectIP.aspx" />
     <Content Include="Pages\UploadAchived.aspx" />
-    <Content Include="PivotTables\CountryIndicatorsAchievedReport.aspx" />
-    <Content Include="PivotTables\PerfMontPivot.aspx" />
-    <Content Include="PivotTables\RegionalIndicatorsAchievedReport.aspx" />
-    <Content Include="RegionalLead\ManageRegionalIndicators.aspx" />
     <Content Include="RegisterSuccess.aspx" />
     <Content Include="ReportingStatus.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="PivotTables\OprOrgsClsCnt.aspx" />
-    <Content Include="Reports\AddCountryReports.aspx" />
-    <Content Include="Reports\DownloadReport.aspx" />
-    <Content Include="Reports\LoadCountryMaps.aspx" />
-    <Content Include="Reports\CountryMaps.aspx" />
-    <Content Include="Reports\LoadCountryReport.aspx" />
-    <Content Include="Reports\NewCountryReports.aspx" />
-    <Content Include="Reports\CountriesForReports.aspx" />
-    <Content Include="Reports\CountryReports.aspx" />
-    <Content Include="Reports\OperationalPresence.aspx" />
-    <Content Include="PivotTables\NumOfOrgsClsCnt.aspx" />
-    <Content Include="Reports\ProjectByClusters.aspx" />
-    <Content Include="Reports\ProjectsByCluster.aspx" />
-    <Content Include="Reports\ProjectsByCountry.aspx" />
-    <Content Include="Reports\ProjectsPerOrganization.aspx" />
-    <Content Include="Reports\TopIndicaotrsRegional.aspx" />
-    <Content Include="Reports\TopIndicatorsGeneral.aspx" />
+    <Content Include="Reports\ORS3W.aspx" />
     <Content Include="RequestOrganization.aspx" />
     <Content Include="UploadSRPLogFrame.aspx" />
     <Content Include="packages.config" />
     <Content Include="Pages\Web.config" />
     <Content Include="ops.Master" />
-    <Content Include="DataFeed.ashx" />
     <Content Include="OPS\OPSActivitiesFeed.ashx" />
     <Content Include="ClusterLead\Web.config" />
     <Content Include="Admin\Web.config" />
@@ -490,14 +438,27 @@
     <Content Include="Anonymous\NumberOfOrgsByAdmin1.ashx" />
     <Content Include="Anonymous\3W.ashx" />
     <Content Include="Anonymous\4W.ashx" />
-    <Content Include="WebForm1.aspx" />
+    <Content Include="Anonymous\AllDataJson.ashx" />
+    <Content Include="Anonymous\AllDataCSV.ashx" />
+    <Content Include="Anonymous\AllValidatedDataFeed.ashx" />
     <None Include="assets\font\cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff" />
     <None Include="assets\font\DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff" />
     <None Include="assets\font\fontawesome-webfontd41d.eot" />
     <None Include="assets\font\fontawesome-webfontf77b.eot" />
     <None Include="assets\font\fontawesome-webfontf77b.ttf" />
     <None Include="assets\font\fontawesome-webfontf77b.woff" />
-    <Content Include="Ebola\Ebola.Master" />
+    <Content Include="DataFeeds\Activities.ashx" />
+    <Content Include="DataFeeds\Indicators.ashx" />
+    <Content Include="DataFeeds\Projects.ashx" />
+    <Content Include="DataFeeds\ProjectSRPTargets.ashx" />
+    <Content Include="DataFeeds\Clusters.ashx" />
+    <Content Include="DataFeeds\Orgnizations.ashx" />
+    <Content Include="DataFeeds\Country.ashx" />
+    <Content Include="DataFeeds\ReportedData.ashx" />
+    <Content Include="DataFeeds\ClusterIndicator.ashx" />
+    <Content Include="DataFeeds\FrameworkTargets.ashx" />
+    <Content Include="DataFeeds\ClusterIndicatorReports.ashx" />
+    <Content Include="DataFeeds\ORS3W.ashx" />
     <None Include="HelpFiles\HelpDocs\HelpEng\1_ORS_description_EN_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpEng\2_ORS_Resgistration_EN_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpEng\3_ORS_Role_EN_v3.pdf" />
@@ -514,16 +475,6 @@
     <None Include="HelpFiles\HelpDocs\HelpFrench\6_ORS_Language_FR_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpFrench\7_ORS_ClusterLead_FR_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpFrench\8_ORS_FAQ_FR_v3.pdf" />
-    <Content Include="ORSDocuments\Mali\Protection\Note Explicative Monitoring des 13 indicateurs du SRP.pdf" />
-    <Content Include="ORSReports\Country-Indicators\CountryIndicators-Mali-Education.pdf" />
-    <Content Include="ORSReports\Country-Indicators\CountryIndicators-Mali-S-NFI.pdf" />
-    <Content Include="ORSReports\Country-Indicators\CountryIndicators-Mali-WASH.pdf" />
-    <Content Include="ORSReports\3W\ORS3W-Burkina.pdf" />
-    <Content Include="ORSReports\3W\ORS3W-Cameroon.pdf" />
-    <Content Include="ORSReports\3W\ORS3W-Mali.pdf" />
-    <Content Include="ORSReports\3W\ORS3W-Mauritania.pdf" />
-    <Content Include="ORSReports\3W\ORS3W-Niger.pdf" />
-    <Content Include="ORSReports\3W\ORS3W-Senegal.pdf" />
     <EntityDeploy Include="ORSModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ORSModel.Designer.cs</LastGenOutput>
@@ -541,7 +492,6 @@
       <DependentUpon>ORSModel.edmx</DependentUpon>
       <LastGenOutput>ORSModel.cs</LastGenOutput>
     </Content>
-    <Content Include="OPSActivitiesFeed.ashx" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -607,13 +557,6 @@
     <Compile Include="Account\Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Account\Register2.aspx.cs">
-      <DependentUpon>Register2.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\Register2.aspx.designer.cs">
-      <DependentUpon>Register2.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Account\Registerca.aspx.cs">
       <DependentUpon>Registerca.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -642,26 +585,28 @@
     <Compile Include="Account\UserProfile.aspx.designer.cs">
       <DependentUpon>UserProfile.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\ActivityData.aspx.cs">
-      <DependentUpon>ActivityData.aspx</DependentUpon>
+    <Compile Include="Admin\RequestedOrgListing.aspx.cs">
+      <DependentUpon>RequestedOrgListing.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\ActivityData.aspx.designer.cs">
-      <DependentUpon>ActivityData.aspx</DependentUpon>
+    <Compile Include="Admin\RequestedOrgListing.aspx.designer.cs">
+      <DependentUpon>RequestedOrgListing.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\ActivityListing.aspx.cs">
-      <DependentUpon>ActivityListing.aspx</DependentUpon>
+    <Compile Include="Anonymous\AllDataCSV.ashx.cs">
+      <DependentUpon>AllDataCSV.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Anonymous\AllDataJson.ashx.cs">
+      <DependentUpon>AllDataJson.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Anonymous\AllValidatedDataFeed.ashx.cs">
+      <DependentUpon>AllValidatedDataFeed.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Anonymous\OutputIndicatorReport.aspx.cs">
+      <DependentUpon>OutputIndicatorReport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\ActivityListing.aspx.designer.cs">
-      <DependentUpon>ActivityListing.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ClusterLead\AddActivity.aspx.cs">
-      <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>AddActivity.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ClusterLead\AddActivity.aspx.designer.cs">
-      <DependentUpon>AddActivity.aspx</DependentUpon>
+    <Compile Include="Anonymous\OutputIndicatorReport.aspx.designer.cs">
+      <DependentUpon>OutputIndicatorReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="ClusterLead\AddActivityAndIndicators.aspx.cs">
       <DependentUpon>AddActivityAndIndicators.aspx</DependentUpon>
@@ -670,33 +615,12 @@
     <Compile Include="ClusterLead\AddActivityAndIndicators.aspx.designer.cs">
       <DependentUpon>AddActivityAndIndicators.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ClusterLead\AddCountryIndicator.aspx.cs">
-      <DependentUpon>AddCountryIndicator.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ClusterLead\AddCountryIndicator.aspx.designer.cs">
-      <DependentUpon>AddCountryIndicator.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Admin\ConfigSettings.aspx.cs">
       <DependentUpon>ConfigSettings.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\ConfigSettings.aspx.designer.cs">
       <DependentUpon>ConfigSettings.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\AddEditCountryMaps.aspx.cs">
-      <DependentUpon>AddEditCountryMaps.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\AddEditCountryMaps.aspx.designer.cs">
-      <DependentUpon>AddEditCountryMaps.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ClusterLead\AddIndicators.aspx.cs">
-      <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>AddIndicators.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ClusterLead\AddIndicators.aspx.designer.cs">
-      <DependentUpon>AddIndicators.aspx</DependentUpon>
     </Compile>
     <Compile Include="ClusterLead\ClusterDataEntry.aspx.cs">
       <DependentUpon>ClusterDataEntry.aspx</DependentUpon>
@@ -718,13 +642,6 @@
     </Compile>
     <Compile Include="ClusterLead\CountryIndicators.aspx.designer.cs">
       <DependentUpon>CountryIndicators.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\CountryMapsListing.aspx.cs">
-      <DependentUpon>CountryMapsListing.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\CountryMapsListing.aspx.designer.cs">
-      <DependentUpon>CountryMapsListing.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\EmergencyClusters.aspx.cs">
       <DependentUpon>EmergencyClusters.aspx</DependentUpon>
@@ -753,13 +670,6 @@
     </Compile>
     <Compile Include="Admin\IndicatorActivities.aspx.designer.cs">
       <DependentUpon>IndicatorActivities.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\IndicatorListing.aspx.cs">
-      <DependentUpon>IndicatorListing.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\IndicatorListing.aspx.designer.cs">
-      <DependentUpon>IndicatorListing.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\LinkEmergencyObjective.aspx.cs">
       <DependentUpon>LinkEmergencyObjective.aspx</DependentUpon>
@@ -796,13 +706,6 @@
     <Compile Include="Admin\Organization\OrganizationList.aspx.designer.cs">
       <DependentUpon>OrganizationList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\PriorityActivities.aspx.cs">
-      <DependentUpon>PriorityActivities.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\PriorityActivities.aspx.designer.cs">
-      <DependentUpon>PriorityActivities.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Admin\ProgressSummary.aspx.cs">
       <DependentUpon>ProgressSummary.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -836,20 +739,6 @@
     <Compile Include="Anonymous\NumberOfOrgsByAdmin1.ashx.cs">
       <DependentUpon>NumberOfOrgsByAdmin1.ashx</DependentUpon>
     </Compile>
-    <Compile Include="ClusterLead\ActivityListing.aspx.cs">
-      <DependentUpon>ActivityListing.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ClusterLead\ActivityListing.aspx.designer.cs">
-      <DependentUpon>ActivityListing.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ClusterLead\ApproveIndicatorAddRemove.aspx.cs">
-      <DependentUpon>ApproveIndicatorAddRemove.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ClusterLead\ApproveIndicatorAddRemove.aspx.designer.cs">
-      <DependentUpon>ApproveIndicatorAddRemove.aspx</DependentUpon>
-    </Compile>
     <Compile Include="ClusterLead\ClusterIndicatorTargets.aspx.cs">
       <DependentUpon>ClusterIndicatorTargets.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -857,19 +746,12 @@
     <Compile Include="ClusterLead\ClusterIndicatorTargets.aspx.designer.cs">
       <DependentUpon>ClusterIndicatorTargets.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ClusterLead\EditActivity.aspx.cs">
+    <Compile Include="ClusterLead\EditOutputIndicator.aspx.cs">
+      <DependentUpon>EditOutputIndicator.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>EditActivity.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ClusterLead\EditActivity.aspx.designer.cs">
-      <DependentUpon>EditActivity.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ClusterLead\EditIndicator.aspx.cs">
-      <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>EditIndicator.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ClusterLead\EditIndicator.aspx.designer.cs">
-      <DependentUpon>EditIndicator.aspx</DependentUpon>
+    <Compile Include="ClusterLead\EditOutputIndicator.aspx.designer.cs">
+      <DependentUpon>EditOutputIndicator.aspx</DependentUpon>
     </Compile>
     <Compile Include="ClusterLead\IndicatorListing.aspx.cs">
       <DependentUpon>IndicatorListing.aspx</DependentUpon>
@@ -877,13 +759,6 @@
     </Compile>
     <Compile Include="ClusterLead\IndicatorListing.aspx.designer.cs">
       <DependentUpon>IndicatorListing.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ClusterLead\ManageActivitiesClsuterLead.aspx.cs">
-      <DependentUpon>ManageActivitiesClsuterLead.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ClusterLead\ManageActivitiesClsuterLead.aspx.designer.cs">
-      <DependentUpon>ManageActivitiesClsuterLead.aspx</DependentUpon>
     </Compile>
     <Compile Include="ClusterLead\ProjectDetails.aspx.cs">
       <DependentUpon>ProjectDetails.aspx</DependentUpon>
@@ -913,13 +788,6 @@
     <Compile Include="Admin\UploadLocations.aspx.designer.cs">
       <DependentUpon>UploadLocations.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\UploadLogFrame.aspx.cs">
-      <DependentUpon>UploadLogFrame.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\UploadLogFrame.aspx.designer.cs">
-      <DependentUpon>UploadLogFrame.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Anonymous\AllData.aspx.cs">
       <DependentUpon>AllData.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -929,20 +797,6 @@
     </Compile>
     <Compile Include="BasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ClusterLead\AddSRPActivitiesFromMasterList.aspx.cs">
-      <DependentUpon>AddSRPActivitiesFromMasterList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ClusterLead\AddSRPActivitiesFromMasterList.aspx.designer.cs">
-      <DependentUpon>AddSRPActivitiesFromMasterList.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ClusterLead\AddSRPActivity.aspx.cs">
-      <DependentUpon>AddSRPActivity.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ClusterLead\AddSRPActivity.aspx.designer.cs">
-      <DependentUpon>AddSRPActivity.aspx</DependentUpon>
     </Compile>
     <Compile Include="ClusterLead\ReportDetails.aspx.cs">
       <DependentUpon>ReportDetails.aspx</DependentUpon>
@@ -993,6 +847,8 @@
     <Compile Include="ClusterLead\ValidateReportList.aspx.designer.cs">
       <DependentUpon>ValidateReportList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Common\DataTableToCSV.cs" />
+    <Compile Include="Common\EmailNotifications.cs" />
     <Compile Include="Common\FU.cs" />
     <Compile Include="Common\GeneratePDF.cs" />
     <Compile Include="Common\MonthNumber.cs" />
@@ -1006,6 +862,13 @@
     </Compile>
     <Compile Include="Controls\AddContryReportControl.ascx.designer.cs">
       <DependentUpon>AddContryReportControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ConfirmBox.ascx.cs">
+      <DependentUpon>ConfirmBox.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ConfirmBox.ascx.designer.cs">
+      <DependentUpon>ConfirmBox.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\IndicatorsWithAdmin1TargetsControl.ascx.cs">
       <DependentUpon>IndicatorsWithAdmin1TargetsControl.ascx</DependentUpon>
@@ -1035,37 +898,33 @@
     <Compile Include="Controls\ReportedIndicatorComments.ascx.designer.cs">
       <DependentUpon>ReportedIndicatorComments.ascx</DependentUpon>
     </Compile>
-    <Compile Include="DataFeed.ashx.cs">
-      <DependentUpon>DataFeed.ashx</DependentUpon>
+    <Compile Include="DataFeeds\Activities.ashx.cs">
+      <DependentUpon>Activities.ashx</DependentUpon>
     </Compile>
-    <Compile Include="DataFeeds\Admin1Feed.ashx.cs">
-      <DependentUpon>Admin1Feed.ashx</DependentUpon>
+    <Compile Include="DataFeeds\ClusterIndicator.ashx.cs">
+      <DependentUpon>ClusterIndicator.ashx</DependentUpon>
     </Compile>
-    <Compile Include="DataFeeds\Admin2Feed.ashx.cs">
-      <DependentUpon>Admin2Feed.ashx</DependentUpon>
+    <Compile Include="DataFeeds\ClusterIndicatorReports.ashx.cs">
+      <DependentUpon>ClusterIndicatorReports.ashx</DependentUpon>
     </Compile>
-    <Compile Include="DataFeeds\AdminDataFeeds.aspx.cs">
-      <DependentUpon>AdminDataFeeds.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DataFeeds\AdminDataFeeds.aspx.designer.cs">
-      <DependentUpon>AdminDataFeeds.aspx</DependentUpon>
+    <Compile Include="DataFeeds\Clusters.ashx.cs">
+      <DependentUpon>Clusters.ashx</DependentUpon>
     </Compile>
     <Compile Include="DataFeeds\ClustersFeed.ashx.cs">
       <DependentUpon>ClustersFeed.ashx</DependentUpon>
     </Compile>
-    <Compile Include="DataFeeds\EmergencyFeed.ashx.cs">
-      <DependentUpon>EmergencyFeed.ashx</DependentUpon>
+    <Compile Include="DataFeeds\Country.ashx.cs">
+      <DependentUpon>Country.ashx</DependentUpon>
     </Compile>
     <Compile Include="DataFeeds\FeedXML.cs" />
+    <Compile Include="DataFeeds\FrameworkTargets.ashx.cs">
+      <DependentUpon>FrameworkTargets.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="DataFeeds\Indicators.ashx.cs">
+      <DependentUpon>Indicators.ashx</DependentUpon>
+    </Compile>
     <Compile Include="DataFeeds\LogFrameDataFeed.ashx.cs">
       <DependentUpon>LogFrameDataFeed.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="DataFeeds\MonthFeed.ashx.cs">
-      <DependentUpon>MonthFeed.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="DataFeeds\OfficesFeed.ashx.cs">
-      <DependentUpon>OfficesFeed.ashx</DependentUpon>
     </Compile>
     <Compile Include="DataFeeds\Organizations.ashx.cs">
       <DependentUpon>Organizations.ashx</DependentUpon>
@@ -1073,8 +932,20 @@
     <Compile Include="DataFeeds\OrganizationsFeed.ashx.cs">
       <DependentUpon>OrganizationsFeed.ashx</DependentUpon>
     </Compile>
-    <Compile Include="DataFeeds\YearFeed.ashx.cs">
-      <DependentUpon>YearFeed.ashx</DependentUpon>
+    <Compile Include="DataFeeds\Orgnizations.ashx.cs">
+      <DependentUpon>Orgnizations.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="DataFeeds\ORS3W.ashx.cs">
+      <DependentUpon>ORS3W.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="DataFeeds\Projects.ashx.cs">
+      <DependentUpon>Projects.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="DataFeeds\ProjectSRPTargets.ashx.cs">
+      <DependentUpon>ProjectSRPTargets.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="DataFeeds\ReportedData.ashx.cs">
+      <DependentUpon>ReportedData.ashx</DependentUpon>
     </Compile>
     <Compile Include="Admin\EmergencyListing.aspx.cs">
       <DependentUpon>EmergencyListing.aspx</DependentUpon>
@@ -1083,26 +954,12 @@
     <Compile Include="Admin\EmergencyListing.aspx.designer.cs">
       <DependentUpon>EmergencyListing.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\OfficeListing.aspx.cs">
-      <DependentUpon>OfficeListing.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\OfficeListing.aspx.designer.cs">
-      <DependentUpon>OfficeListing.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Admin\OrganizationListing.aspx.cs">
       <DependentUpon>OrganizationListing.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\OrganizationListing.aspx.designer.cs">
       <DependentUpon>OrganizationListing.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\UploadActivities.aspx.cs">
-      <DependentUpon>UploadActivities.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\UploadActivities.aspx.designer.cs">
-      <DependentUpon>UploadActivities.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\UsersListing.aspx.cs">
       <DependentUpon>UsersListing.aspx</DependentUpon>
@@ -1140,83 +997,6 @@
       <DependentUpon>FilterCriteria.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\PagingGridView.cs" />
-    <Compile Include="Ebola\ActivityListing.aspx.cs">
-      <DependentUpon>ActivityListing.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Ebola\ActivityListing.aspx.designer.cs">
-      <DependentUpon>ActivityListing.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Ebola\AllData.aspx.cs">
-      <DependentUpon>AllData.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Ebola\AllData.aspx.designer.cs">
-      <DependentUpon>AllData.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Ebola\CreateProject.aspx.cs">
-      <DependentUpon>CreateProject.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Ebola\CreateProject.aspx.designer.cs">
-      <DependentUpon>CreateProject.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Ebola\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Ebola\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Ebola\Ebola.Master.cs">
-      <DependentUpon>Ebola.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Ebola\Ebola.Master.designer.cs">
-      <DependentUpon>Ebola.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Ebola\IndicatorListing.aspx.cs">
-      <DependentUpon>IndicatorListing.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Ebola\IndicatorListing.aspx.designer.cs">
-      <DependentUpon>IndicatorListing.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Ebola\Login.aspx.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Ebola\Login.aspx.designer.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Ebola\ManageActivities.aspx.cs">
-      <DependentUpon>ManageActivities.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Ebola\ManageActivities.aspx.designer.cs">
-      <DependentUpon>ManageActivities.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Ebola\ReportDataEntry.aspx.cs">
-      <DependentUpon>ReportDataEntry.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Ebola\ReportDataEntry.aspx.designer.cs">
-      <DependentUpon>ReportDataEntry.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Ebola\ValidateIndicators.aspx.cs">
-      <DependentUpon>ValidateIndicators.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Ebola\ValidateIndicators.aspx.designer.cs">
-      <DependentUpon>ValidateIndicators.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Ebola\ValidateReportList.aspx.cs">
-      <DependentUpon>ValidateReportList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Ebola\ValidateReportList.aspx.designer.cs">
-      <DependentUpon>ValidateReportList.aspx</DependentUpon>
-    </Compile>
     <Compile Include="ErrorPages\DefaultRedirectErrorPage.aspx.cs">
       <DependentUpon>DefaultRedirectErrorPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1252,54 +1032,111 @@
     <Compile Include="faq.aspx.designer.cs">
       <DependentUpon>faq.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LeadPages\AddIndicatorOnActivity.aspx.cs">
-      <DependentUpon>AddIndicatorOnActivity.aspx</DependentUpon>
+    <Compile Include="GenerateChartReportPDF.cs" />
+    <Compile Include="KeyFigures\AddKeyFigure.aspx.cs">
+      <DependentUpon>AddKeyFigure.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LeadPages\AddIndicatorOnActivity.aspx.designer.cs">
-      <DependentUpon>AddIndicatorOnActivity.aspx</DependentUpon>
+    <Compile Include="KeyFigures\AddKeyFigure.aspx.designer.cs">
+      <DependentUpon>AddKeyFigure.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LeadPages\EditActIndicator.aspx.cs">
-      <DependentUpon>EditActIndicator.aspx</DependentUpon>
+    <Compile Include="KeyFigures\AddKeyFigureCategory.aspx.cs">
+      <DependentUpon>AddKeyFigureCategory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LeadPages\EditActIndicator.aspx.designer.cs">
-      <DependentUpon>EditActIndicator.aspx</DependentUpon>
+    <Compile Include="KeyFigures\AddKeyFigureCategory.aspx.designer.cs">
+      <DependentUpon>AddKeyFigureCategory.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LeadPages\FundingListing.aspx.cs">
-      <DependentUpon>FundingListing.aspx</DependentUpon>
+    <Compile Include="KeyFigures\AddKeyFigureCategoryCtrl.ascx.cs">
+      <DependentUpon>AddKeyFigureCategoryCtrl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LeadPages\FundingListing.aspx.designer.cs">
-      <DependentUpon>FundingListing.aspx</DependentUpon>
+    <Compile Include="KeyFigures\AddKeyFigureCategoryCtrl.ascx.designer.cs">
+      <DependentUpon>AddKeyFigureCategoryCtrl.ascx</DependentUpon>
     </Compile>
-    <Compile Include="LeadPages\FundingSummary.aspx.cs">
-      <DependentUpon>FundingSummary.aspx</DependentUpon>
+    <Compile Include="KeyFigures\AddKeyFigureControl.ascx.cs">
+      <DependentUpon>AddKeyFigureControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LeadPages\FundingSummary.aspx.designer.cs">
-      <DependentUpon>FundingSummary.aspx</DependentUpon>
+    <Compile Include="KeyFigures\AddKeyFigureControl.ascx.designer.cs">
+      <DependentUpon>AddKeyFigureControl.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Maps\FirstTestOL3.aspx.cs">
-      <DependentUpon>FirstTestOL3.aspx</DependentUpon>
+    <Compile Include="KeyFigures\AddKeyFigureIndicator.aspx.cs">
+      <DependentUpon>AddKeyFigureIndicator.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Maps\FirstTestOL3.aspx.designer.cs">
-      <DependentUpon>FirstTestOL3.aspx</DependentUpon>
+    <Compile Include="KeyFigures\AddKeyFigureIndicator.aspx.designer.cs">
+      <DependentUpon>AddKeyFigureIndicator.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Maps\TargetAchievedByLocDataMap.aspx.cs">
-      <DependentUpon>TargetAchievedByLocDataMap.aspx</DependentUpon>
+    <Compile Include="KeyFigures\AddKeyFigureIndicatorCtrl.ascx.cs">
+      <DependentUpon>AddKeyFigureIndicatorCtrl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Maps\TargetAchievedByLocDataMap.aspx.designer.cs">
-      <DependentUpon>TargetAchievedByLocDataMap.aspx</DependentUpon>
+    <Compile Include="KeyFigures\AddKeyFigureIndicatorCtrl.ascx.designer.cs">
+      <DependentUpon>AddKeyFigureIndicatorCtrl.ascx</DependentUpon>
     </Compile>
-    <Compile Include="OperationalPresenceDB.aspx.cs">
-      <DependentUpon>OperationalPresenceDB.aspx</DependentUpon>
+    <Compile Include="KeyFigures\AddKeyFigureSubCategory.aspx.cs">
+      <DependentUpon>AddKeyFigureSubCategory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="OperationalPresenceDB.aspx.designer.cs">
-      <DependentUpon>OperationalPresenceDB.aspx</DependentUpon>
+    <Compile Include="KeyFigures\AddKeyFigureSubCategory.aspx.designer.cs">
+      <DependentUpon>AddKeyFigureSubCategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="KeyFigures\AddKeyFigureSubCategoryCtrl.ascx.cs">
+      <DependentUpon>AddKeyFigureSubCategoryCtrl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KeyFigures\AddKeyFigureSubCategoryCtrl.ascx.designer.cs">
+      <DependentUpon>AddKeyFigureSubCategoryCtrl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="KeyFigures\EditKeyFigureCategory.aspx.cs">
+      <DependentUpon>EditKeyFigureCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KeyFigures\EditKeyFigureCategory.aspx.designer.cs">
+      <DependentUpon>EditKeyFigureCategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="KeyFigures\EditKeyFigureIndicator.aspx.cs">
+      <DependentUpon>EditKeyFigureIndicator.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KeyFigures\EditKeyFigureIndicator.aspx.designer.cs">
+      <DependentUpon>EditKeyFigureIndicator.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="KeyFigures\EditKeyFigureSubCategory.aspx.cs">
+      <DependentUpon>EditKeyFigureSubCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KeyFigures\EditKeyFigureSubCategory.aspx.designer.cs">
+      <DependentUpon>EditKeyFigureSubCategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="KeyFigures\KeyFigureIndicatorListing.aspx.cs">
+      <DependentUpon>KeyFigureIndicatorListing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KeyFigures\KeyFigureIndicatorListing.aspx.designer.cs">
+      <DependentUpon>KeyFigureIndicatorListing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="KeyFigures\KeyFiguresListing.aspx.cs">
+      <DependentUpon>KeyFiguresListing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KeyFigures\KeyFiguresListing.aspx.designer.cs">
+      <DependentUpon>KeyFiguresListing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="KeyFigures\KeyFiguresListingPublic.aspx.cs">
+      <DependentUpon>KeyFiguresListingPublic.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KeyFigures\KeyFiguresListingPublic.aspx.designer.cs">
+      <DependentUpon>KeyFiguresListingPublic.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OperationalPresence.aspx.cs">
+      <DependentUpon>OperationalPresence.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OperationalPresence.aspx.designer.cs">
+      <DependentUpon>OperationalPresence.aspx</DependentUpon>
     </Compile>
     <Compile Include="ops.Master.cs">
       <DependentUpon>ops.Master</DependentUpon>
@@ -1307,9 +1144,6 @@
     </Compile>
     <Compile Include="ops.Master.designer.cs">
       <DependentUpon>ops.Master</DependentUpon>
-    </Compile>
-    <Compile Include="OPSActivitiesFeed.ashx.cs">
-      <DependentUpon>OPSActivitiesFeed.ashx</DependentUpon>
     </Compile>
     <Compile Include="OPS\OPSDataEntryOld.aspx.cs">
       <DependentUpon>OPSDataEntryOld.aspx</DependentUpon>
@@ -1343,13 +1177,6 @@
     <Compile Include="OPS\UploadOPSProjectDetails.aspx.designer.cs">
       <DependentUpon>UploadOPSProjectDetails.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ORSDocuments\orsdocs.aspx.cs">
-      <DependentUpon>orsdocs.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ORSDocuments\orsdocs.aspx.designer.cs">
-      <DependentUpon>orsdocs.aspx</DependentUpon>
-    </Compile>
     <Compile Include="ORSModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1374,12 +1201,12 @@
     <Compile Include="Pages\ManageActivities.aspx.designer.cs">
       <DependentUpon>ManageActivities.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\TargetsAchievedOfLocationByDuration.ascx.cs">
-      <DependentUpon>TargetsAchievedOfLocationByDuration.ascx</DependentUpon>
+    <Compile Include="Pages\ProjectIP.aspx.cs">
+      <DependentUpon>ProjectIP.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\TargetsAchievedOfLocationByDuration.ascx.designer.cs">
-      <DependentUpon>TargetsAchievedOfLocationByDuration.ascx</DependentUpon>
+    <Compile Include="Pages\ProjectIP.aspx.designer.cs">
+      <DependentUpon>ProjectIP.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\UploadAchived.aspx.cs">
       <DependentUpon>UploadAchived.aspx</DependentUpon>
@@ -1388,38 +1215,10 @@
     <Compile Include="Pages\UploadAchived.aspx.designer.cs">
       <DependentUpon>UploadAchived.aspx</DependentUpon>
     </Compile>
-    <Compile Include="PivotTables\CountryIndicatorsAchievedReport.aspx.cs">
-      <DependentUpon>CountryIndicatorsAchievedReport.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PivotTables\CountryIndicatorsAchievedReport.aspx.designer.cs">
-      <DependentUpon>CountryIndicatorsAchievedReport.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PivotTables\PerfMontPivot.aspx.cs">
-      <DependentUpon>PerfMontPivot.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PivotTables\PerfMontPivot.aspx.designer.cs">
-      <DependentUpon>PerfMontPivot.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PivotTables\RegionalIndicatorsAchievedReport.aspx.cs">
-      <DependentUpon>RegionalIndicatorsAchievedReport.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PivotTables\RegionalIndicatorsAchievedReport.aspx.designer.cs">
-      <DependentUpon>RegionalIndicatorsAchievedReport.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-    <Compile Include="RegionalLead\ManageRegionalIndicators.aspx.cs">
-      <DependentUpon>ManageRegionalIndicators.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="RegionalLead\ManageRegionalIndicators.aspx.designer.cs">
-      <DependentUpon>ManageRegionalIndicators.aspx</DependentUpon>
     </Compile>
     <Compile Include="RegisterSuccess.aspx.cs">
       <DependentUpon>RegisterSuccess.aspx</DependentUpon>
@@ -1456,125 +1255,12 @@
       <DependentUpon>AddActivities.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PivotTables\OprOrgsClsCnt.aspx.cs">
-      <DependentUpon>OprOrgsClsCnt.aspx</DependentUpon>
+    <Compile Include="Reports\ORS3W.aspx.cs">
+      <DependentUpon>ORS3W.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="PivotTables\OprOrgsClsCnt.aspx.designer.cs">
-      <DependentUpon>OprOrgsClsCnt.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ReportsCharts\ReportsCommon.cs" />
-    <Compile Include="Reports\AddCountryReports.aspx.cs">
-      <DependentUpon>AddCountryReports.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reports\AddCountryReports.aspx.designer.cs">
-      <DependentUpon>AddCountryReports.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\DownloadReport.aspx.cs">
-      <DependentUpon>DownloadReport.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reports\DownloadReport.aspx.designer.cs">
-      <DependentUpon>DownloadReport.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\LoadCountryMaps.aspx.cs">
-      <DependentUpon>LoadCountryMaps.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reports\LoadCountryMaps.aspx.designer.cs">
-      <DependentUpon>LoadCountryMaps.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\CountryMaps.aspx.cs">
-      <DependentUpon>CountryMaps.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reports\CountryMaps.aspx.designer.cs">
-      <DependentUpon>CountryMaps.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\LoadCountryReport.aspx.cs">
-      <DependentUpon>LoadCountryReport.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reports\LoadCountryReport.aspx.designer.cs">
-      <DependentUpon>LoadCountryReport.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\NewCountryReports.aspx.cs">
-      <DependentUpon>NewCountryReports.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reports\NewCountryReports.aspx.designer.cs">
-      <DependentUpon>NewCountryReports.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\CountriesForReports.aspx.cs">
-      <DependentUpon>CountriesForReports.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reports\CountriesForReports.aspx.designer.cs">
-      <DependentUpon>CountriesForReports.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\CountryReports.aspx.cs">
-      <DependentUpon>CountryReports.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reports\CountryReports.aspx.designer.cs">
-      <DependentUpon>CountryReports.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\OperationalPresence.aspx.cs">
-      <DependentUpon>OperationalPresence.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reports\OperationalPresence.aspx.designer.cs">
-      <DependentUpon>OperationalPresence.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PivotTables\NumOfOrgsClsCnt.aspx.cs">
-      <DependentUpon>NumOfOrgsClsCnt.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PivotTables\NumOfOrgsClsCnt.aspx.designer.cs">
-      <DependentUpon>NumOfOrgsClsCnt.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\ProjectByClusters.aspx.cs">
-      <DependentUpon>ProjectByClusters.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reports\ProjectByClusters.aspx.designer.cs">
-      <DependentUpon>ProjectByClusters.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\ProjectsByCluster.aspx.cs">
-      <DependentUpon>ProjectsByCluster.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reports\ProjectsByCluster.aspx.designer.cs">
-      <DependentUpon>ProjectsByCluster.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\ProjectsByCountry.aspx.cs">
-      <DependentUpon>ProjectsByCountry.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reports\ProjectsByCountry.aspx.designer.cs">
-      <DependentUpon>ProjectsByCountry.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\ProjectsPerOrganization.aspx.cs">
-      <DependentUpon>ProjectsPerOrganization.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reports\ProjectsPerOrganization.aspx.designer.cs">
-      <DependentUpon>ProjectsPerOrganization.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\TopIndicaotrsRegional.aspx.cs">
-      <DependentUpon>TopIndicaotrsRegional.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reports\TopIndicaotrsRegional.aspx.designer.cs">
-      <DependentUpon>TopIndicaotrsRegional.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\TopIndicatorsGeneral.aspx.cs">
-      <DependentUpon>TopIndicatorsGeneral.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reports\TopIndicatorsGeneral.aspx.designer.cs">
-      <DependentUpon>TopIndicatorsGeneral.aspx</DependentUpon>
+    <Compile Include="Reports\ORS3W.aspx.designer.cs">
+      <DependentUpon>ORS3W.aspx</DependentUpon>
     </Compile>
     <Compile Include="RequestOrganization.aspx.cs">
       <DependentUpon>RequestOrganization.aspx</DependentUpon>
@@ -1600,19 +1286,10 @@
     <Compile Include="UploadSRPLogFrame.aspx.designer.cs">
       <DependentUpon>UploadSRPLogFrame.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Admin\Reports\" />
     <Folder Include="App_Data\" />
     <Folder Include="OPS\OPSProjects\" />
-    <Folder Include="ORSMaps\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Web.config" />
@@ -1627,14 +1304,8 @@
   <ItemGroup>
     <Content Include="DataFeeds\Organizations.ashx" />
     <Content Include="DataFeeds\OrganizationsFeed.ashx" />
-    <Content Include="DataFeeds\OfficesFeed.ashx" />
-    <Content Include="DataFeeds\EmergencyFeed.ashx" />
     <Content Include="DataFeeds\ClustersFeed.ashx" />
-    <Content Include="DataFeeds\Admin1Feed.ashx" />
-    <Content Include="DataFeeds\Admin2Feed.ashx" />
     <Content Include="DataFeeds\LogFrameDataFeed.ashx" />
-    <Content Include="DataFeeds\YearFeed.ashx" />
-    <Content Include="DataFeeds\MonthFeed.ashx" />
     <Content Include="SessionHeartbeat.ashx" />
   </ItemGroup>
   <ItemGroup>
@@ -1725,22 +1396,6 @@
     <Content Include="Pages\App_LocalResources\ManageActivities.aspx.fr-FR.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ClusterLead\App_LocalResources\ProjectsListing.aspx.resx">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ClusterLead\App_LocalResources\ProjectsListing.aspx.fr-FR.resx">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ClusterLead\App_LocalResources\AddSRPActivitiesFromMasterList.aspx.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ClusterLead\App_LocalResources\AddSRPActivitiesFromMasterList.aspx.fr-FR.resx" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="ClusterLead\App_LocalResources\ClusterIndicatorTargets.aspx.resx" />
   </ItemGroup>
   <ItemGroup>
@@ -1759,39 +1414,26 @@
     <Content Include="App_LocalResources\faq.aspx.fr-FR.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="RegionalLead\App_LocalResources\ManageRegionalIndicators.aspx.resx" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="ClusterLead\App_LocalResources\AddActivity.aspx.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClusterLead\App_LocalResources\AddActivity.aspx.fr-FR.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Ebola\App_LocalResources\AddActivities.aspx.fr-FR.resx">
+    <Content Include="ClusterLead\App_LocalResources\ProjectsListing.aspx.fr-FR-OLd.resx">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Ebola\App_LocalResources\AddActivities.aspx.resx">
+    <Content Include="ClusterLead\App_LocalResources\ProjectsListing.aspx - OLD.resx">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Ebola\App_LocalResources\CreateProject.aspx.fr-FR.resx">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="ClusterLead\App_LocalResources\ProjectsListing.aspx.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Ebola\App_LocalResources\CreateProject.aspx.resx">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Ebola\App_LocalResources\ManageActivities.aspx.fr-FR.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Ebola\App_LocalResources\ManageActivities.aspx.resx" />
+    <Content Include="ClusterLead\App_LocalResources\ProjectsListing.aspx.fr-FR.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -1806,7 +1448,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>10696</DevelopmentServerPort>
+          <DevelopmentServerPort>39770</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost/SRFROWCA</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

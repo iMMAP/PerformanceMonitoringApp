@@ -162,7 +162,7 @@
   <data name="localChangePasswordResource1.Text" xml:space="preserve">
     <value>Change Password</value>
   </data>
-  <data name="localCLProjectListingResource1.Text" xml:space="preserve">
+  <data name="localCLProjectListingMainResource1.Text" xml:space="preserve">
     <value>Projects</value>
   </data>
   <data name="localCluterTargetsResource1.Text" xml:space="preserve">
@@ -172,11 +172,11 @@
     <value>Contact Us</value>
   </data>
   <data name="localProjectXMLFeedResource1.Text" xml:space="preserve">
-							<value>Project XML Feeds</value>
-						</data>
+    <value>Project XML Feeds</value>
+  </data>
   <data name="localProjectSummaryResource1.Text" xml:space="preserve">
-							<value>Progress Summary</value>
-						</data>
+    <value>Progress Summary</value>
+  </data>
   <data name="localDashboardOprPresenceResource1.Text" xml:space="preserve">
     <value>Operational Presence</value>
   </data>
@@ -276,7 +276,88 @@
   <data name="localWelcomeResource1.Text" xml:space="preserve">
     <value>Welcome,</value>
   </data>
-  <data name="localOrganizationsResource1" xml:space="preserve">
+  <data name="localOrganizationsResource1.Text" xml:space="preserve">
     <value>Organizations</value>
+  </data>
+  <data name="localAboutORSResource1.Text" xml:space="preserve">
+    <value>About ORS</value>
+  </data>
+  <data name="localCLProjectListingResource1.Text" xml:space="preserve">
+    <value>Projects Listing</value>
+  </data>
+  <data name="localImportDataResource1.Text" xml:space="preserve">
+    <value>Import Data</value>
+  </data>
+  <data name="localImportDataUserResource1.Text" xml:space="preserve">
+    <value>Import Data</value>
+  </data>
+  <data name="localKeyFiguresResource1.Text" xml:space="preserve">
+    <value>Key Figures</value>
+  </data>
+  <data name="localValidateReport1.Text" xml:space="preserve">
+    <value>Validate Report</value>
+  </data>
+  <data name="localActAndIndicators.Text" xml:space="preserve">
+    <value>Activities And Indicators</value>
+  </data>
+  <data name="localClFManageIndicators.Text" xml:space="preserve">
+    <value>Manage Indicators</value>
+  </data>
+  <data name="localClFOutputDataEntry.Text" xml:space="preserve">
+    <value>Output Data Entry</value>
+  </data>
+  <data name="localClFOutputDataReport.Text" xml:space="preserve">
+    <value>Output Report</value>
+  </data>
+  <data name="localClFOutputIndicators.Text" xml:space="preserve">
+    <value>Output Indicators</value>
+  </data>
+  <data name="localCLFrameworkImportExport.Text" xml:space="preserve">
+    <value>Import/Export Framework</value>
+  </data>
+  <data name="localClusterFrameworksList1.Text" xml:space="preserve">
+    <value>Cluster Framework</value>
+  </data>
+  <data name="localEmergency.Text" xml:space="preserve">
+    <value>Manage Emergency</value>
+  </data>
+  <data name="localEmergencyCluster.Text" xml:space="preserve">
+    <value>Emergency Clusters</value>
+  </data>
+  <data name="localEmergencyList.Text" xml:space="preserve">
+    <value>Emergency List</value>
+  </data>
+  <data name="localEmergencyLocations.Text" xml:space="preserve">
+    <value>Emergency Locations</value>
+  </data>
+  <data name="localEmergencyObjectives.Text" xml:space="preserve">
+    <value>Emergency Objectives</value>
+  </data>
+  <data name="localFundingStatus.Text" xml:space="preserve">
+    <value>Funding Status</value>
+  </data>
+  <data name="localKeyFigureFramework.Text" xml:space="preserve">
+    <value>KF Framework</value>
+  </data>
+  <data name="localLocationsListing.Text" xml:space="preserve">
+    <value>Manage Locations</value>
+  </data>
+  <data name="localObjectives.Text" xml:space="preserve">
+    <value>Objectives</value>
+  </data>
+  <data name="localProgressSummary.Text" xml:space="preserve">
+    <value>Progress Summary</value>
+  </data>
+  <data name="localRequestedOrgs.Text" xml:space="preserve">
+    <value>Requested Orgs</value>
+  </data>
+  <data name="localSiteUsers.Text" xml:space="preserve">
+    <value>Manage Users</value>
+  </data>
+  <data name="localOutputIndReportPublic.Text" xml:space="preserve">
+    <value>Output Report</value>
+  </data>
+  <data name="localManagePartners.Text" xml:space="preserve">
+    <value>Manage Projects</value>
   </data>
 </root>

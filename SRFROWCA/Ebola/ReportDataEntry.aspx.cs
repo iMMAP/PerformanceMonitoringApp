@@ -340,8 +340,7 @@ namespace SRFROWCA.Ebola
 
         private DataTable GetUserProjects()
         {
-            bool? isOPSProject = null;
-            return DBContext.GetData("GetOrgProjectsOnLocation", new object[] { UserInfo.EmergencyCountry, UserInfo.Organization, isOPSProject });
+            return RC.GetOrgProjectsOnLocation(null);
         }
 
         private void PopulateObjectives()

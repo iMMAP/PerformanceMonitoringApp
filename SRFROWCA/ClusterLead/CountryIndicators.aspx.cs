@@ -31,11 +31,21 @@ namespace SRFROWCA.ClusterLead
                 DateTime endEditDate = DateTime.Now.Date;
 
                 int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
+
+                if (RC.IsRegionalClusterLead(this.User))
+                {
+                    emgLocationId = 11;
+                }
+
                 int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
                 GetIndCountAndEditDate(emgLocationId, emgClusterId, out maxIndicators, out endEditDate);
                 if (maxIndicators <= 0 || endEditDate < DateTime.Now.Date)
                 {
                     btnAddIndicator.Enabled = false;
+                }
+                else
+                {
+                    btnAddIndicator.Enabled = true;
                 }
             }
             else
@@ -123,7 +133,7 @@ namespace SRFROWCA.ClusterLead
 
         protected void btnAddIndicator_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/ClusterLead/AddCountryIndicator.aspx");
+            Response.Redirect("~/ClusterLead/EditOutputIndicator.aspx");
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -168,7 +178,7 @@ namespace SRFROWCA.ClusterLead
             string configKey = "Key-" + emgLocationId.ToString() + emgClusterId.ToString();
 
             maxIndicators = 0;
-            endEditDate = DateTime.Now;
+            endEditDate = DateTime.Now.AddDays(-1);
 
             string PATH = HttpRuntime.AppDomainAppPath;
             PATH = PATH.Substring(0, PATH.LastIndexOf(@"\") + 1) + @"Configurations\ChangeEndSettings.xml";
@@ -272,12 +282,20 @@ namespace SRFROWCA.ClusterLead
                 Label lblClusterId = e.Row.FindControl("lblClusterID") as Label;
 
                 int emgLocationId = 0;
-                int emgClusterId = 0;
+                
                 if (lblCountryId != null)
                 {
-                    int.TryParse(lblCountryId.Text, out emgLocationId);
+                    if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User))
+                    {
+                         emgLocationId = RC.GetSelectedIntVal(ddlCountry);
+                    }
+                    else
+                    {
+                        int.TryParse(lblCountryId.Text, out emgLocationId);
+                    }
                 }
 
+                int emgClusterId = 0;
                 if (lblClusterId != null)
                 {
                     int.TryParse(lblClusterId.Text, out emgClusterId);
@@ -342,13 +360,31 @@ namespace SRFROWCA.ClusterLead
             }
             else if (e.CommandName == "EditIndicator")
             {
-
+                GridViewRow row = (((Control)e.CommandSource).NamingContainer) as GridViewRow;
                 int clusterIndicatorID = Convert.ToInt32(e.CommandArgument);
+
+                Label lblCountryID = row.FindControl("lblCountryID") as Label;
+                int cnId = 0;
+                if (lblCountryID != null)
+                {
+                    int.TryParse(lblCountryID.Text.ToString(), out cnId);
+                }
+
+                Label lblClusterID = row.FindControl("lblClusterID") as Label;
+                int cId = 0;
+                if (lblClusterID != null)
+                {
+                    int.TryParse(lblClusterID.Text.ToString(), out cId);
+                }
+
+                int countryId = RC.GetSelectedIntVal(ddlCountry);
+                cnId = countryId > 0? countryId : cnId;
+
+                Response.Redirect("~/ClusterLead/EditOutputIndicator.aspx?id=" + clusterIndicatorID.ToString() + "&cid=" + cId.ToString() + "&cnid=" + cnId.ToString());
 
                 ClearPopupControls();
                 hfClusterIndicatorID.Value = clusterIndicatorID.ToString();
 
-                GridViewRow row = (((Control)e.CommandSource).NamingContainer) as GridViewRow;
                 hfRegionalIndicator.Value = row.Cells[1].Text;
                 Label lblIndAlternate = row.FindControl("lblIndAlternate") as Label;
                 Label lblUnitID = row.FindControl("lblUnitID") as Label;

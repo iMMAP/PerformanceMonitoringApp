@@ -2,7 +2,18 @@
     CodeBehind="IndicatorListing.aspx.cs" Inherits="SRFROWCA.ClusterLead.IndicatorListing" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    <style>
+        .modalDialog {
+            width: 500px;
+            position: relative;
+            margin: 10% auto;
+            padding: 5px 20px 13px 20px;
+            border-radius: 2px;
+            background: #ffffff;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="breadcrumbs" id="breadcrumbs">
@@ -48,7 +59,7 @@
                                         </button>
 
                                         <asp:Button ID="btnAddIndicator" runat="server" Text="Add Indicator" CausesValidation="false"
-                                            CssClass="btn btn-yellow pull-right" OnClick="btnAddIndicator_Click" />
+                                            CssClass="btn btn-yellow pull-right hidden" OnClick="btnAddIndicator_Click" />
                                         <asp:Button ID="btnAddActivityAndIndicators" runat="server" Text="Add Activity & Indicators" CausesValidation="false"
                                             CssClass="btn btn-yellow pull-right" OnClick="btnAddActivityAndIndicators_Click" Style="margin-right: 5px;" />
                                     </h6>
@@ -118,7 +129,9 @@
                                                         <tr>
                                                             <td>&nbsp;</td>
                                                             <td colspan="4" style="padding-top: 10px;">
-                                                                <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch2_Click" CssClass="btn btn-primary" CausesValidation="false" /><asp:Button ID="btnReset" runat="server" Text="Reset" Style="margin-left: 5px;" OnClick="btnReset_Click" CssClass="btn btn-primary" CausesValidation="False" meta:resourcekey="btnSearchResource1" /></td>
+                                                                <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch2_Click" CssClass="btn btn-primary" CausesValidation="false" />
+                                                                <asp:Button ID="btnReset" runat="server" Text="Reset" Style="margin-left: 5px;" OnClick="btnReset_Click" CssClass="btn btn-primary" CausesValidation="False" meta:resourcekey="btnSearchResource1" />
+                                                            </td>
                                                         </tr>
                                                     </table>
                                                 </div>
@@ -139,7 +152,6 @@
                     OnRowCommand="gvActivity_RowCommand" Width="100%" OnRowDataBound="gvActivity_RowDataBound" PagerSettings-Position="Bottom" DataKeyNames="ActivityId,IndicatorDetailId,IndicatorId"
                     CssClass="table-striped table-bordered table-hover" OnSorting="gvActivity_Sorting" OnPageIndexChanging="gvActivity_PageIndexChanging"
                     PageSize="30" ShowHeaderWhenEmpty="true" EmptyDataText="Your filter criteria does not match any indicator!">
-
                     <Columns>
                         <asp:TemplateField ItemStyle-Width="2%" HeaderText="#" meta:resourcekey="TemplateFieldResource1">
                             <ItemTemplate>
@@ -153,6 +165,11 @@
                         <asp:BoundField DataField="Activity" HeaderText="Activity" SortExpression="Activity" />
                         <asp:BoundField DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator" />
                         <asp:BoundField DataField="Unit" HeaderText="Unit" SortExpression="Unit" />
+                        <asp:TemplateField HeaderText="Active">
+                            <ItemTemplate>
+                                <asp:CheckBox ID="cbIsActive" runat="server" Checked='<%# Eval("IsActive") %>' OnCheckedChanged="cbActive_Changed" AutoPostBack="true" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle" HeaderStyle-Width="30px">
                             <ItemTemplate>
                                 <asp:LinkButton ID="btnEdit" runat="server" Text="Edit" Width="30px" CausesValidation="false"
@@ -180,6 +197,33 @@
                 </asp:GridView>
             </div>
         </div>
+        <input type="button" id="btnClientOpen" runat="server" style="display: none;" />
+        <asp:Panel ID="Panel1" runat="server" CssClass="modalDialog" Style="display: none" Width="600">
+            <div>
+                <div>
+                    <h4>
+                        <asp:Localize ID="localDisableConfirmBox" runat="server" Text="Are you sure you want to disable this indicator?"></asp:Localize>
+                    </h4>
+                </div>
+                <br />
+                <asp:Label ID="lblProjectsCaption" runat="server" Text="Following projects are using this indicator. Indicator will be removed from these projects:" Visible="false"></asp:Label>
+                <br />
+                <br />
+                <b><asp:Label ID="lblProjectUsingIndicator" runat="server" Text=""></asp:Label></b>
+                <br />
+                <div align="center">
+                    <asp:Button ID="OkButton" runat="server" Text="OK" OnClick="btnOK_Click" class="btn btn-primary" />
+                    <asp:Button ID="CancelButton" runat="server" Text="Cancel" OnClick="btnCancel_Click" class="btn btn-default" />
+                </div>
+            </div>
+        </asp:Panel>
 
+
+        <asp:ModalPopupExtender ID="ModalPopupExtender1" runat="server"
+            TargetControlID="btnClientOpen"
+            PopupControlID="Panel1"
+            BackgroundCssClass="modalpopupbackground"
+            DropShadow="true"
+            />
     </div>
 </asp:Content>

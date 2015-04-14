@@ -38,8 +38,7 @@ namespace SRFROWCA.Pages
 
         private DataTable GetUserProjects()
         {
-            bool? isOPSProject = true;
-            return DBContext.GetData("GetOrgProjectsOnLocation", new object[] { UserInfo.EmergencyCountry, UserInfo.Organization, isOPSProject });
+            return RC.GetOrgProjectsOnLocation(null);
         }
 
         protected void btnDownload_Click(object sender, EventArgs e)
@@ -72,12 +71,12 @@ namespace SRFROWCA.Pages
             {
                 orgId = UserInfo.Organization;
             }
-            int yearId = 10;
+            int yearId = 11;
 
             string locationIds = RC.GetSelectedValues(cblLocations);
             locationIds = string.IsNullOrEmpty(locationIds) ? null : locationIds;
 
-            return DBContext.GetData("GetIndicatorsForUserDataEntryTemplate", new object[]{ emgLocationId, orgId, projectIds, countryInd,
+            return DBContext.GetData("GetIndicatorsForUserDataEntryTemplate2015", new object[]{ emgLocationId, orgId, projectIds, countryInd,
                                                                                             regionalInd, allInd, RC.SelectedSiteLanguageId, yearId, locationIds});
         }
 
@@ -176,7 +175,7 @@ namespace SRFROWCA.Pages
                     }
                 }
 
-                using (TransactionScope scope = new TransactionScope())
+                //using (TransactionScope scope = new TransactionScope())
                 {
                     if (dt.Rows.Count > 0)
                     {
@@ -185,7 +184,7 @@ namespace SRFROWCA.Pages
                         TruncateTempTables();
                     }
 
-                    scope.Complete();
+                    //scope.Complete();
                     ShowMessage("Data Imported Successfully!", RC.NotificationType.Success, false);
                 }
             }
@@ -326,7 +325,7 @@ namespace SRFROWCA.Pages
 
         private void UnpivotStagingTable(string locationColumnNames, string locationColumnNamesWithAliases, string locationColumnNamesAlias)
         {
-            DBContext.GetData("UnpivotUserImportAchievedStagingTable", new object[] { locationColumnNames, locationColumnNamesWithAliases, locationColumnNamesAlias });
+            DBContext.GetData("UnpivotUserImportAchievedStagingTable2015", new object[] { locationColumnNames, locationColumnNamesWithAliases, locationColumnNamesAlias });
         }
 
         // Add 'LocationEmergencyId' and 'UserId' in DataTable.
@@ -418,8 +417,8 @@ namespace SRFROWCA.Pages
         // Import all data from staging table to respective tables.
         private DataTable ImportData()
         {
-            int yearId = 10;
-            return DBContext.GetData("ImportUserCLDataFromStagingTable", new object[] {UserInfo.EmergencyCountry, yearId, RC.GetCurrentUserId, RC.IsClusterLead(User)});
+            int yearId = 11;
+            return DBContext.GetData("ImportUserCLDataFromStagingTable2015", new object[] {UserInfo.EmergencyCountry, yearId, RC.GetCurrentUserId, RC.IsClusterLead(User)});
         }
 
         // Create new datatable and appropriate columns.
@@ -448,8 +447,7 @@ namespace SRFROWCA.Pages
 	                            [Id] [int] IDENTITY(1,1) NOT NULL,
 	                            [Month] [nvarchar](20) NULL,
 	                            [ProjectCode] [nvarchar](50) NULL,
-	                            [Objective] [nvarchar](500) NULL,
-	                            [Priority] [nvarchar](500) NULL,
+	                            [Objective] [nvarchar](500) NULL,	                            
 	                            [Activity] [nvarchar](2000) NULL,
 	                            [Indicator Id] [int] NULL,
 	                            [Indicator] [nvarchar](2000) NULL,
@@ -481,8 +479,7 @@ namespace SRFROWCA.Pages
 	                            [Id] [int] NOT NULL,
 	                            [Month] [nvarchar](20) NULL,
 	                            [ProjectCode] [nvarchar](50) NULL,
-	                            [Objective] [nvarchar](500) NULL,
-	                            [Priority] [nvarchar](500) NULL,
+	                            [Objective] [nvarchar](500) NULL,	                            
 	                            [Activity] [nvarchar](2000) NULL,
 	                            [Indicator Id] [int] NULL,
 	                            [Indicator] [nvarchar](2000) NULL,
@@ -617,7 +614,7 @@ namespace SRFROWCA.Pages
 
         private bool LocationColumn(string name)
         {
-            if (name == "Id" || name == "Month" || name == "ProjectCode" || name == "Objective" || name == "Priority" || name == "Activity" ||
+            if (name == "Id" || name == "Month" || name == "ProjectCode" || name == "Objective" || name == "Activity" ||
                 name == "Indicator Id" || name == "Indicator" || name == "Accumulative" || name == "Unit")
             {
                 return false;

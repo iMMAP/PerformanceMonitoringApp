@@ -36,20 +36,6 @@
                 contentAsHTML: true
             });
         });
-        function bindCalendars() {
-            $("#<%=txtFromDate.ClientID%>").datepicker({
-                numberOfMonths: 2,
-                onSelect: function (selected) {
-                    $("#<%=txtToDate.ClientID%>").datepicker("option", "minDate", selected)
-                }
-            });
-                $("#<%=txtToDate.ClientID%>").datepicker({
-                numberOfMonths: 2,
-                onSelect: function (selected) {
-                    $("#<%=txtFromDate.ClientID%>").datepicker("option", "maxDate", selected)
-                }
-                });
-            }
     </script>
 </asp:Content>
 <asp:Content ID="allDataContent" ContentPlaceHolderID="MainContent" runat="server">
@@ -85,7 +71,10 @@
                                                 <button runat="server" id="btnExportToExcel" onserverclick="ExportToExcel" class="width-10 btn btn-sm btn-yellow"
                                                     title="Excel">
                                                     <i class="icon-download"></i>Excel
-                                               
+                                                </button>
+                                                <button runat="server" id="btnExportToCSV" onserverclick="ExportToCSV" class="width-10 btn btn-sm btn-yellow"
+                                                    title="CSV">
+                                                    <i class="icon-download"></i>CSV
                                                 </button>
                                             </h6>
                                             <div class="widget-toolbar">
@@ -127,54 +116,6 @@
                                                                                             <Style SelectBoxWidth="" DropDownBoxBoxWidth="100%" DropDownBoxBoxHeight=""></Style>
                                                                                             <Texts SelectBoxCaption="Select Objective" />
                                                                                         </cc:DropDownCheckBoxes>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        <span>Priority:</span>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <cc:DropDownCheckBoxes ID="ddlPriority" runat="server" CssClass="ddlWidth" AutoPostBack="true"
-                                                                                            OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged" AddJQueryReference="True"
-                                                                                            meta:resourcekey="checkBoxes2Resource1" UseButtons="False" UseSelectAllNode="True">
-                                                                                            <Style SelectBoxWidth="" DropDownBoxBoxWidth="100%" DropDownBoxBoxHeight=""></Style>
-                                                                                            <Texts SelectBoxCaption="Select Priority" />
-                                                                                        </cc:DropDownCheckBoxes>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        <span>Activities:</span>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <cc:DropDownCheckBoxes ID="ddlActivities" runat="server" CssClass="ddlWidth" AutoPostBack="true"
-                                                                                            OnSelectedIndexChanged="ddlActivities_SelectedIndexChanged" AddJQueryReference="True"
-                                                                                            meta:resourcekey="checkBoxes2Resource1" UseButtons="False" UseSelectAllNode="True">
-                                                                                            <Style SelectBoxWidth="" DropDownBoxBoxWidth="300%" DropDownBoxBoxHeight=""></Style>
-                                                                                            <Texts SelectBoxCaption="Select Activity" />
-                                                                                        </cc:DropDownCheckBoxes>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        <span>Indicators:</span>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <cc:DropDownCheckBoxes ID="ddlIndicators" runat="server" CssClass="ddlWidth" AutoPostBack="true"
-                                                                                            OnSelectedIndexChanged="ddlIndicators_SelectedIndexChanged" AddJQueryReference="True"
-                                                                                            meta:resourcekey="checkBoxes2Resource1" UseButtons="False" UseSelectAllNode="True">
-                                                                                            <Style SelectBoxWidth="" DropDownBoxBoxWidth="300%" DropDownBoxBoxHeight=""></Style>
-                                                                                            <Texts SelectBoxCaption="Select Indicator" />
-                                                                                        </cc:DropDownCheckBoxes>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td></td>
-                                                                                    <td>
-                                                                                        <span>
-                                                                                            <asp:CheckBox ID="cbRegional" runat="server" Text="Regional" />
-                                                                                            <asp:CheckBox ID="cbCountry" runat="server" Text="Country" /></span>
-
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -233,22 +174,6 @@
                                                                                             <Style SelectBoxWidth="120px" DropDownBoxBoxWidth="200%" DropDownBoxBoxHeight="200px"></Style>
                                                                                             <Texts SelectBoxCaption="Select Month" />
                                                                                         </cc:DropDownCheckBoxes>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        <span>From:</span>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <asp:TextBox ID="txtFromDate" runat="server" Width="100px"></asp:TextBox><span>(mm/dd/yyyy)</span>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        <span>To:</span>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <asp:TextBox ID="txtToDate" runat="server" Width="100px"></asp:TextBox><span>(mm/dd/yyyy)</span>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -378,8 +303,7 @@
                                 <asp:BoundField DataField="ProjectCode" HeaderText="Project" SortExpression="ProjectCode" />
 
                                 <asp:BoundField DataField="Month" HeaderText="Month" SortExpression="Month" />
-                                <asp:BoundField DataField="Objective" HeaderText="Objective" SortExpression="Objective" />
-                                <asp:BoundField DataField="Priority" HeaderText="Priority" SortExpression="Priority" />
+                                <asp:BoundField DataField="Objective" HeaderText="Objective" SortExpression="Objective" />                                
                                 <asp:BoundField DataField="Activity" HeaderText="Activity" SortExpression="Activity" />
                                 <asp:BoundField DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator" />
                                 <asp:BoundField DataField="Accumulative" HeaderText="Accum" SortExpression="Accumulative"

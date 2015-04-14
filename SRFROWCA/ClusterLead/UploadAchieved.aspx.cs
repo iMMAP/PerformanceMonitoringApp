@@ -102,15 +102,6 @@ namespace SRFROWCA.ClusterLead
             UI.FillEmergnecyClusters(ddlClusters, emgId);
         }
 
-        private bool IsIndicatorSelected()
-        {
-            bool countryInd = chkCountryIndicators.Checked;
-            bool regionalInd = chkRegionalInidcators.Checked;
-            bool allInd = chkAllIndicators.Checked;
-
-            return countryInd || regionalInd || allInd;
-
-        }
 
         private DataTable GetIndicators()
         {
@@ -123,12 +114,12 @@ namespace SRFROWCA.ClusterLead
             int? clusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
             int? emgLocationId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
 
-            bool countryInd = chkCountryIndicators.Checked;
-            bool regionalInd = chkRegionalInidcators.Checked;
-            bool allInd = chkAllIndicators.Checked;
+            //bool countryInd = chkCountryIndicators.Checked;
+            //bool regionalInd = chkRegionalInidcators.Checked;
+            //bool allInd = chkAllIndicators.Checked;
             string orgIds = null;
             orgIds = RC.GetSelectedValues(ddlOrganizations);
-            int yearId = 10;
+            int yearId = 11;
             
             string locationIds = RC.GetSelectedValues(cblLocations);
             locationIds = string.IsNullOrEmpty(locationIds) ? null : locationIds;
@@ -136,11 +127,11 @@ namespace SRFROWCA.ClusterLead
             string projectIds = null;
             projectIds = RC.GetSelectedValues(ddlProjects);
 
-            bool isProjIndicators = chkProjectIndicators.Checked;
+            bool isProjIndicators = true; // chkProjectIndicators.Checked;
 
             if (emgLocationId > 0 && clusterId > 0)
             {
-                return DBContext.GetData("GetIndicatorsForDataEntryTemplate2", new object[]{emgLocationId, clusterId, orgIds, countryInd, regionalInd, allInd,
+                return DBContext.GetData("GetIndicatorsForDataEntryTemplate2_2015", new object[]{emgLocationId, clusterId, orgIds, 
 																						RC.SelectedSiteLanguageId, yearId, locationIds, projectIds, isProjIndicators});
             }
             else
@@ -223,7 +214,7 @@ namespace SRFROWCA.ClusterLead
                 if (!IsValidFile()) return;
 
                 // Force user to select month. 
-                //if (!MonthSelected()) return;
+                if (!MonthSelected()) return;
 
                 string filePath = UploadFile();
                 string excelConString = GetExcelConString(filePath);
@@ -371,7 +362,7 @@ namespace SRFROWCA.ClusterLead
 
         private void UnpivotStagingTable(string locationColumnNames, string locationColumnNamesWithAliases, string locationColumnNamesAlias)
         {
-            DBContext.GetData("UnpivotImportAchievedStagingTable", new object[] { locationColumnNames, locationColumnNamesWithAliases, locationColumnNamesAlias });
+            DBContext.GetData("UnpivotUserImportAchievedStagingTable2015", new object[] { locationColumnNames, locationColumnNamesWithAliases, locationColumnNamesAlias });
         }
 
         private void CreateStagingTable(string tableScript, string conString)
@@ -454,9 +445,8 @@ namespace SRFROWCA.ClusterLead
         // Import all data from staging table to respective tables.
         private DataTable ImportData()
         {
-            int yearId = 10;
-            return DBContext.GetData("ImportCLDataFromStagingTable", new object[] {UserInfo.EmergencyCountry, UserInfo.EmergencyCluster,
-																					yearId, RC.GetCurrentUserId, RC.IsClusterLead(User)});
+            int yearId = 11;
+            return DBContext.GetData("ImportUserCLDataFromStagingTable2015", new object[] {UserInfo.EmergencyCountry, yearId, RC.GetCurrentUserId, RC.IsClusterLead(User)});
         }
 
         // Create new datatable and appropriate columns.
@@ -506,16 +496,14 @@ namespace SRFROWCA.ClusterLead
 							END 
 							CREATE TABLE [ImportCLDataStaging_Temp](
 								[Id] [int] IDENTITY(1,1) NOT NULL,
-								[Month] [nvarchar](20) NULL,
-								[ProjectCode] [nvarchar](20) NULL,
-								[Objective] [nvarchar](100) NULL,
-								[Priority] [nvarchar](100) NULL,
-								[Activity] [nvarchar](1000) NULL,
-								[Indicator Id] [int] NULL,
-								[Indicator] [nvarchar](1000) NULL,
-								[Accumulative] [nvarchar](10) NULL,
-								[Mid Year Target] [int] NULL,
-								[Full Year Target] [int] NULL";
+	                            [Month] [nvarchar](20) NULL,
+	                            [ProjectCode] [nvarchar](50) NULL,
+	                            [Objective] [nvarchar](500) NULL,	                            
+	                            [Activity] [nvarchar](2000) NULL,
+	                            [Indicator Id] [int] NULL,
+	                            [Indicator] [nvarchar](2000) NULL,
+	                            [Accumulative] [nvarchar](10) NULL,
+                                [Unit] [nvarchar](150) NULL ";
 
             foreach (DataColumn column in dt.Columns)
             {
@@ -540,16 +528,14 @@ namespace SRFROWCA.ClusterLead
 							END 
 							CREATE TABLE [ImportCLDataStaging_Temp2](
 								[Id] [int] NOT NULL,
-								[Month] [nvarchar](20) NULL,
-								[ProjectCode] [nvarchar](20) NULL,
-								[Objective] [nvarchar](100) NULL,
-								[Priority] [nvarchar](100) NULL,
-								[Activity] [nvarchar](1000) NULL,
-								[Indicator Id] [int] NULL,
-								[Indicator] [nvarchar](1000) NULL,
-								[Accumulative] [nvarchar](10) NULL,
-								[Mid Year Target] [int] NULL,
-								[Full Year Target] [int] NULL";
+	                            [Month] [nvarchar](20) NULL,
+	                            [ProjectCode] [nvarchar](50) NULL,
+	                            [Objective] [nvarchar](500) NULL,	                            
+	                            [Activity] [nvarchar](2000) NULL,
+	                            [Indicator Id] [int] NULL,
+	                            [Indicator] [nvarchar](2000) NULL,
+	                            [Accumulative] [nvarchar](10) NULL,
+                                [Unit] [nvarchar](150) NULL ";
             int i = 0;
             foreach (DataColumn column in dt.Columns)
             {
@@ -678,8 +664,8 @@ namespace SRFROWCA.ClusterLead
 
         private bool LocationColumn(string name)
         {
-            if (name == "Id" || name == "Month" || name == "ProjectCode" || name == "Objective" || name == "Priority" || name == "Activity" ||
-                name == "Indicator Id" || name == "Indicator" || name == "Accumulative" || name == "Mid Year Target" || name == "Full Year Target")
+            if (name == "Id" || name == "Month" || name == "ProjectCode" || name == "Objective" || name == "Activity" || name == "Unit" ||
+                name == "Indicator Id" || name == "Indicator" || name == "Accumulative")
             {
                 return false;
             }

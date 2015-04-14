@@ -124,43 +124,7 @@
     <value />
   </data>
   <data name="BoundFieldResource1.HeaderText" xml:space="preserve">
-    <value>Code Project</value>
-  </data>
-  <data name="BoundFieldResource2.AccessibleHeaderText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="BoundFieldResource2.FooterText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="BoundFieldResource2.HeaderText" xml:space="preserve">
-    <value>Titre Projet</value>
-  </data>
-  <data name="BoundFieldResource3.AccessibleHeaderText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="BoundFieldResource3.FooterText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="BoundFieldResource3.HeaderText" xml:space="preserve">
-    <value>Organization</value>
-  </data>
-  <data name="BoundFieldResource4.AccessibleHeaderText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="BoundFieldResource4.FooterText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="BoundFieldResource4.HeaderText" xml:space="preserve">
-    <value>Montant Original</value>
-  </data>
-  <data name="BoundFieldResource5.AccessibleHeaderText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="BoundFieldResource5.FooterText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="BoundFieldResource5.HeaderText" xml:space="preserve">
-    <value>Current Request</value>
+    <value>Code du projet</value>
   </data>
   <data name="BoundFieldResource10.AccessibleHeaderText" xml:space="preserve">
     <value />
@@ -169,7 +133,43 @@
     <value />
   </data>
   <data name="BoundFieldResource10.HeaderText" xml:space="preserve">
-    <value>Original Request</value>
+    <value>Demande initiale</value>
+  </data>
+  <data name="BoundFieldResource2.AccessibleHeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BoundFieldResource2.FooterText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BoundFieldResource2.HeaderText" xml:space="preserve">
+    <value>Titre du projet</value>
+  </data>
+  <data name="BoundFieldResource3.AccessibleHeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BoundFieldResource3.FooterText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BoundFieldResource3.HeaderText" xml:space="preserve">
+    <value>Organisation</value>
+  </data>
+  <data name="BoundFieldResource4.AccessibleHeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BoundFieldResource4.FooterText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BoundFieldResource4.HeaderText" xml:space="preserve">
+    <value>Cluster secondaire</value>
+  </data>
+  <data name="BoundFieldResource5.AccessibleHeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BoundFieldResource5.FooterText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BoundFieldResource5.HeaderText" xml:space="preserve">
+    <value>Cluster</value>
   </data>
   <data name="BoundFieldResource6.AccessibleHeaderText" xml:space="preserve">
     <value />
@@ -178,7 +178,7 @@
     <value />
   </data>
   <data name="BoundFieldResource6.HeaderText" xml:space="preserve">
-    <value>Financé</value>
+    <value>Statut</value>
   </data>
   <data name="BoundFieldResource7.AccessibleHeaderText" xml:space="preserve">
     <value />
@@ -187,7 +187,7 @@
     <value />
   </data>
   <data name="BoundFieldResource7.HeaderText" xml:space="preserve">
-    <value>Reported Localisation</value>
+    <value>Reported Locations</value>
   </data>
   <data name="BoundFieldResource8.AccessibleHeaderText" xml:space="preserve">
     <value />
@@ -207,104 +207,86 @@
   <data name="BoundFieldResource9.HeaderText" xml:space="preserve">
     <value>Téléphone</value>
   </data>
-  <data name="cblFundingStatusResource1.ToolTip" xml:space="preserve">
+  <data name="btnSearchResource1.Text" xml:space="preserve">
+    <value>Recherche</value>
+  </data>
+  <data name="btnSearchResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="cblReportingStatusResource1.ToolTip" xml:space="preserve">
+  <data name="ddlClustersResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="ddlAdmin1Resource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="ddlAdmin2Resource1.ToolTip" xml:space="preserve">
+  <data name="ddlCountryResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="ddlOrgResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="ddlProjStatusResource1.ToolTip" xml:space="preserve">
+  <data name="ddlSecClustersResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ddlStatusResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="gvProjectsResource1.Caption" xml:space="preserve">
     <value />
   </data>
   <data name="gvProjectsResource1.EmptyDataText" xml:space="preserve">
-    <value>Votre critère de sélection ne correspond à aucun projet!</value>
+    <value>Vos critères de filtrage ne correspond pas à tout projet!</value>
   </data>
   <data name="gvProjectsResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="ListItemResource1.Text" xml:space="preserve">
-    <value>Oui</value>
+  <data name="lblCaptionClusterResource1.Text" xml:space="preserve">
+    <value>Cluster:</value>
   </data>
-  <data name="ListItemResource1.Value" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ListItemResource2.Text" xml:space="preserve">
-    <value>Non</value>
-  </data>
-  <data name="ListItemResource2.Value" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ListItemResource3.Text" xml:space="preserve">
-    <value>Oui</value>
-  </data>
-  <data name="ListItemResource3.Value" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ListItemResource4.Text" xml:space="preserve">
-    <value>Non</value>
-  </data>
-  <data name="ListItemResource4.Value" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ListItemResource5.Text" xml:space="preserve">
-    <value>All</value>
-  </data>
-  <data name="ListItemResource5.Value" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ListItemResource6.Text" xml:space="preserve">
-    <value>En cours</value>
-  </data>
-  <data name="ListItemResource6.Value" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ListItemResource7.Text" xml:space="preserve">
-    <value>Accompli</value>
-  </data>
-  <data name="ListItemResource7.Value" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="lnkVieDetailsResource1.Text" xml:space="preserve">
-    <value>View</value>
-  </data>
-  <data name="lnkVieDetailsResource1.ToolTip" xml:space="preserve">
+  <data name="lblCaptionClusterResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="localAdmin1Resource1.Text" xml:space="preserve">
-    <value>Région:</value>
+  <data name="lblCaptionCountryResource1.Text" xml:space="preserve">
+    <value>Pays:</value>
   </data>
-  <data name="localCountryResource1.Text" xml:space="preserve">
-    <value>Country:</value>
+  <data name="lblCaptionCountryResource1.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="localBreadCrumbHomeResource1.Text" xml:space="preserve">
-    <value>Home</value>
+  <data name="lblCaptionOrganizationResource1.Text" xml:space="preserve">
+    <value>Organisation:</value>
   </data>
-  <data name="localBreadCrumbProjectsResource1.Text" xml:space="preserve">
-    <value>Projects</value>
+  <data name="lblCaptionOrganizationResource1.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="Localize1Resource1.Text" xml:space="preserve">
-    <value>Cercle:</value>
+  <data name="lblCaptionProjCodeResource1.Text" xml:space="preserve">
+    <value>Code du projets/ID</value>
   </data>
-  <data name="Localize2Resource1.Text" xml:space="preserve">
-    <value>Etat du Rapport:</value>
+  <data name="lblCaptionProjCodeResource1.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="Localize3Resource1.Text" xml:space="preserve">
-    <value>Etat de Financement:</value>
+  <data name="lblCaptionStatusResource1.Text" xml:space="preserve">
+    <value>Statut:</value>
+  </data>
+  <data name="lblCaptionStatusResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblCaptionSubSetClusterResource1.Text" xml:space="preserve">
+    <value>Cluster secondaire:</value>
+  </data>
+  <data name="lblCaptionSubSetClusterResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lnkPrintResource1.AlternateText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lnkPrintResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="localBreadCrumbHome.Text" xml:space="preserve">
+    <value>Acceuil</value>
+  </data>
+  <data name="localBreadCrumbProjects.Text" xml:space="preserve">
+    <value>Projets</value>
   </data>
   <data name="PageResource1.Title" xml:space="preserve">
-    <value>ORS - Projects</value>
+    <value />
   </data>
   <data name="TemplateFieldResource1.AccessibleHeaderText" xml:space="preserve">
     <value />
@@ -313,13 +295,27 @@
     <value />
   </data>
   <data name="TemplateFieldResource1.HeaderText" xml:space="preserve">
-    
-    <value>View</value>
+    <value>#</value>
+  </data>
+  <data name="TemplateFieldResource2.AccessibleHeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TemplateFieldResource2.FooterText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TemplateFieldResource2.HeaderText" xml:space="preserve">
+    <value>PDF</value>
   </data>
   <data name="txtProjectCodeResource1.Text" xml:space="preserve">
     <value />
   </data>
   <data name="txtProjectCodeResource1.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="btnResetResource1.Text" xml:space="preserve">
+    <value>Réinitialiser</value>
+  </data>
+  <data name="ddlSelectResource.Text" xml:space="preserve">
+    <value>Sélectionner</value>
   </data>
 </root>

@@ -2,199 +2,88 @@
     AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="SRFROWCA._Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Welcome page - ORS</title>
     <style type="text/css">
-       
-
-        .textwelcome
-        {
-            font-size: 20px;
-            color: #438eb9;
-            padding: 10px;
-        }
-
-        .textpublic
-        {
-            font-size: 14px;
-            color: #438eb9;
-        }
-
-        .blocparteners
-        {
+        .outdiv {
+            height: 750px;
+            overflow: hidden;
+            position: relative;
+            width: 49%;
             float: left;
-            width: 349px;
-            height: 140px;
-            padding: 10px;
-            margin-right: 30px;
-            color: #FFF;
-            font-size: 16px;
-            background: #ff7b02; /* Old browsers */
-            background: -moz-linear-gradient(45deg, #ff7b02 2%, #ff8f02 99%); /* FF3.6+ */
-            background: -webkit-gradient(linear, left bottom, right top, color-stop(2%,#ff7b02), color-stop(99%,#ff8f02)); /* Chrome,Safari4+ */
-            background: -webkit-linear-gradient(45deg, #ff7b02 2%,#ff8f02 99%); /* Chrome10+,Safari5.1+ */
-            background: -o-linear-gradient(45deg, #ff7b02 2%,#ff8f02 99%); /* Opera 11.10+ */
-            background: -ms-linear-gradient(45deg, #ff7b02 2%,#ff8f02 99%); /* IE10+ */
-            background: linear-gradient(45deg, #ff7b02 2%,#ff8f02 99%); /* W3C */
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff7b02', endColorstr='#ff8f02',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
         }
 
-            .blocparteners:hover
-            {
-                float: left;
-                width: 349px;
-                height: 140px;
-                padding: 10px;
-                margin-right: 30px;
-                color: #FFF;
-                font-size: 16px;
-                background: #da6c06; /* Old browsers */
-                background: -moz-linear-gradient(45deg, #da6c06 2%, #ff8f02 99%); /* FF3.6+ */
-                background: -webkit-gradient(linear, left bottom, right top, color-stop(2%,#da6c06), color-stop(99%,#ff8f02)); /* Chrome,Safari4+ */
-                background: -webkit-linear-gradient(45deg, #da6c06 2%,#ff8f02 99%); /* Chrome10+,Safari5.1+ */
-                background: -o-linear-gradient(45deg, #da6c06 2%,#ff8f02 99%); /* Opera 11.10+ */
-                background: -ms-linear-gradient(45deg, #da6c06 2%,#ff8f02 99%); /* IE10+ */
-                background: linear-gradient(45deg, #da6c06 2%,#ff8f02 99%); /* W3C */
-                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff7b02', endColorstr='#ff8f02',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-            }
-
-        .bloccluster
-        {
-            float: left;
-            width: 349px;
-            height: 140px;
-            padding: 10px;
-            color: #FFF;
-            font-size: 16px;
-            background: #528d8d; /* 00cbcb Old browsers */
-            background: -moz-linear-gradient(45deg, #528d8d 2%, #68b7b7 99%); /* FF3.6+ */
-            background: -webkit-gradient(linear, left bottom, right top, color-stop(2%,#528d8d), color-stop(99%,#68b7b7)); /* Chrome,Safari4+ */
-            background: -webkit-linear-gradient(45deg, #528d8d 2%,#68b7b7 99%); /* Chrome10+,Safari5.1+ */
-            background: -o-linear-gradient(45deg, #528d8d 2%,#68b7b7 99%); /* Opera 11.10+ */
-            background: -ms-linear-gradient(45deg, #528d8d 2%,#68b7b7 99%); /* IE10+ */
-            background: linear-gradient(45deg, #528d8d 2%,#68b7b7 99%); /* W3C */
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff7b02', endColorstr='#ff8f02',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+        .iniframe {
+            height: 100%;
+            left: 2px;
+            position: absolute;
+            top: 10px;
+            width: 100%;
         }
-
-            .bloccluster:hover
-            {
-                float: left;
-                width: 349px;
-                height: 140px;
-                padding: 10px;
-                color: #FFF;
-                font-size: 16px;
-                background: #099595; /* Old browsers */
-                background: -moz-linear-gradient(45deg, #099595 2%, #01c1c1 99%); /* FF3.6+ */
-                background: -webkit-gradient(linear, left bottom, right top, color-stop(2%,#099595), color-stop(99%,#01c1c1)); /* Chrome,Safari4+ */
-                background: -webkit-linear-gradient(45deg, #099595 2%,#01c1c1 99%); /* Chrome10+,Safari5.1+ */
-                background: -o-linear-gradient(45deg, #099595 2%,#01c1c1 99%); /* Opera 11.10+ */
-                background: -ms-linear-gradient(45deg, #099595 2%,#01c1c1 99%); /* IE10+ */
-                background: linear-gradient(45deg, #099595 2%,#01c1c1 99%); /* W3C */
-                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff7b02', endColorstr='#ff8f02',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-            }
-
-        .titrepartner
-        {
-            font-size: 18px;
-            font-weight: 700;
-        }
-
-        .bouton
-        {
-            text-align: right;
-            float: right;
-        }
-
-        #blocgraph
-        {
-            clear: both;
-            width: 1060px;
-            padding-top: 10px;
-        }
-
-        .btn-dashboard
-        {
-            float: left;
-            width: 247px;
-            height: 80px;
-            padding: 10px;
-            margin-right: 3px;
-            color: #FFF;
-            font-size: 20px;
-            text-align: left;
-            font-weight: 600;
-            background: #a39c9c; /* Old browsers */
-        }
-
-        .bouton2
-        {
-            float: right;
-            padding-top: 10px;
-        }
-
-        a { color: inherit; }
     </style>
+    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
-        </script>
-        <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="#">Home</a> </li>
-            <li class="active">Dashboard</li>
-        </ul>
-        <!-- .breadcrumb -->
+        <div class="col-sm-12 infobox-container">
+            <div class="infobox infobox-green  ">
+                <div class="infobox-icon">
+                    <img src="assets/orsimages/Partners.png" />
+                </div>
+
+                <div class="infobox-data">
+                    <span class="infobox-data-number">103</span>
+                    <div class="infobox-content">Organisations</div>
+                </div>
+
+            </div>
+
+            <div class="infobox infobox-blue  ">
+                <div class="infobox-icon">
+                    <img src="assets/orsimages/Appeals.png" />
+                </div>
+
+                <div class="infobox-data">
+                    <span class="infobox-data-number">10</span>
+                    <div class="infobox-content">Appeals</div>
+                </div>
+
+
+            </div>
+
+            <div class="infobox infobox-pink  ">
+                <div class="infobox-icon">
+                    <img src="assets/orsimages/Projects.png" />
+                </div>
+
+                <div class="infobox-data">
+                    <span class="infobox-data-number">517</span>
+                    <div class="infobox-content">Projects</div>
+                </div>
+
+            </div>
+
+            <div class="infobox infobox-red">
+                <div class="infobox-icon">
+                    <img src="assets/orsimages/Requirements.png" />
+                </div>
+
+                <div class="infobox-data">
+                    <span class="infobox-data-number">$1.95 Billion</span>
+                    <div class="infobox-content">Total Requirement</div>
+                </div>
+            </div>
+
+        </div>
+   
+     
+    <div>
+       
+        <%--<div class="outdiv">
+            <iframe src="SRP2015ORS.html" class="iniframe"></iframe>
+        </div>
+
+        <div class="outdiv">
+            <iframe src="SRP2015ORSregion.html" class="iniframe"></iframe>
+        </div>--%>
     </div>
-    <div class="page-content">
-        
-                <p class="textwelcome">Welcome to the Online Reporting System (ORS) for the Sahel</p>
+   
 
-                <div class="blocparteners">
-                    <a href="../Account/Login.aspx">
-                    <span class="titrepartner">Partners</span><br />
-                    <span>If you are a partner and want to report on your activity click here to log in</span><br />
-                    
-                        <img src="assets/himages/suivant-ors.png" class="bouton" /></a>
-
-                </div>
-
-                <div class="bloccluster">
-                    <a href="../Account/Login.aspx">
-                    <span class="titrepartner">Cluster Coordinators</span><br />
-                    <span>If you are a cluster coordinator and you want to upload your cluster framework click here</span><br />
-                    
-                        <img src="assets/himages/suivant-ors.png" class="bouton" /></a>
-
-                </div>
-
-                <div id="blocgraph">
-                    <div style="background: #a39c9c; width: 748px; padding: 10px; clear: both; color: #FFF; font-weight: 700; font-size: 18px;">Visitors</div>
-                    <div class="btn-dashboard">
-                        <a href="#" style="color: #FFF;">Dashboard</a>
-                        <img src="assets/himages/activity_analysis_100px.png" style="float: left;" />
-                        <a href="#" class="bouton">
-                            <img src="assets/himages/suivant-ors.png" class="bouton2" /></a>
-
-                    </div>
-
-                    <div class="btn-dashboard">
-                        <a href="#" style="color: #FFF;">Data</a>
-                        <img src="assets/himages/activity_scale_operation_100px.png" style="float: left;" />
-                        <a href="#" class="bouton">
-                            <img src="assets/himages/suivant-ors.png" class="bouton2" /></a>
-
-                    </div>
-
-                    <div class="btn-dashboard">
-                        <a href="#" style="color: #FFF;">3W Maps</a>
-                        <img src="assets/himages/SAH_Countries2.png" style="float: left; margin-right: 5px;" />
-                        <a href="#" class="bouton">
-                            <img src="assets/himages/suivant-ors.png" class="bouton2" /></a>
-
-                    </div>
-
-                </div>
-    </div>
 </asp:Content>

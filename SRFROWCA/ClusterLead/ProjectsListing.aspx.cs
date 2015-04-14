@@ -3,6 +3,7 @@ using System.Data;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using SRFROWCA.Common;
+using System.Web;
 
 namespace SRFROWCA.ClusterLead
 {
@@ -12,23 +13,19 @@ namespace SRFROWCA.ClusterLead
         {
             if (IsPostBack) return;
 
+            if (HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                UserInfo.UserProfileInfo(RC.SelectedEmergencyId);
+            }
+
             PopulateControls();
             LoadProjects();
             DisableDropDowns();
+        }
 
-            //if (RC.IsClusterLead(this.User))
-            //{
-            //    ddlClusters.Visible = false;
-            //}
-            //else
-            //{
-            //    PopulateClusters();
-            //}
-
-            //if (RC.IsRegionalClusterLead(User) || RC.IsAdmin(this.User))
-            //{
-            //    ddlCountry.Enabled = true;
-            //}
+        internal override void BindGridData()
+        {
+            LoadProjects();
         }
 
         private void PopulateControls()
@@ -43,10 +40,10 @@ namespace SRFROWCA.ClusterLead
         private void PopulateClusters()
         {
             UI.FillEmergnecyClusters(ddlClusters, RC.SelectedEmergencyId);
-            RC.AddSelectItemInList(ddlClusters, "All");
+            RC.AddSelectItemInList(ddlClusters, "Select");
 
             UI.FillEmergnecyClusters(ddlSecClusters, RC.SelectedEmergencyId);
-            RC.AddSelectItemInList(ddlSecClusters, "All");
+            RC.AddSelectItemInList(ddlSecClusters, "Select");
         }
 
         private void SetComboValues()
@@ -57,7 +54,7 @@ namespace SRFROWCA.ClusterLead
                 ddlClusters.SelectedValue = UserInfo.EmergencyCluster.ToString();
             }
 
-            if (RC.IsCountryAdmin(this.User))
+            if (RC.IsCountryAdmin(this.User) || RC.IsDataEntryUser(this.User))
             {
                 ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
             }
@@ -76,7 +73,7 @@ namespace SRFROWCA.ClusterLead
                 RC.EnableDisableControls(ddlClusters, false);
             }
 
-            if (RC.IsCountryAdmin(this.User))
+            if (RC.IsCountryAdmin(this.User) || RC.IsDataEntryUser(this.User))
             {
                 RC.EnableDisableControls(ddlCountry, false);
             }
@@ -97,7 +94,7 @@ namespace SRFROWCA.ClusterLead
 
             if (ddlOrg.Items.Count > 0)
             {
-                ListItem item = new ListItem("All", "0");
+                ListItem item = new ListItem("Select", "0");
                 ddlOrg.Items.Insert(0, item);
             }
         }
@@ -105,7 +102,7 @@ namespace SRFROWCA.ClusterLead
         private void PopulateCountries()
         {
             UI.FillEmergencyLocations(ddlCountry, RC.SelectedEmergencyId);
-            RC.AddSelectItemInList(ddlCountry, "All");
+            RC.AddSelectItemInList(ddlCountry, "Select");
         }
 
         protected void ExportToExcel(object sender, EventArgs e)
@@ -311,6 +308,7 @@ namespace SRFROWCA.ClusterLead
             txtProjectCode.Text = "";
             ddlOrg.SelectedIndex = 0;
             ddlStatus.SelectedIndex = 0;
+            ddlSecClusters.SelectedIndex = 0;
             LoadProjects();
         }
     }

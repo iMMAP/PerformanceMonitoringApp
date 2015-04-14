@@ -14,6 +14,8 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
+using System.Net.Mail;
+
 
 namespace SRFROWCA.Common
 {
@@ -171,6 +173,40 @@ namespace SRFROWCA.Common
         }
 
         #endregion
+
+        internal static void SendEmail(int emgLocationId, int? emgClusterId, string subject, string body, DataTable dtUsers = null)
+        {
+            try
+            {
+                DataTable dtEmails = DBContext.GetData("GetEmailsOnCountyrAndCluster", new object[] { emgLocationId, emgClusterId });
+                string emails = string.Empty;
+                emails = "orsocharowca@gmail.com";
+                emails += ",kashif.nadeem@hotmail.com";
+                using (MailMessage mailMsg = new MailMessage())
+                {
+                    for (int i = 0; i < dtEmails.Rows.Count; i++)
+                        emails += "," + Convert.ToString(dtEmails.Rows[i]["Email"]);
+
+                    if (dtUsers != null)
+                    {
+                        for (int i = 0; i < dtUsers.Rows.Count; i++)
+                            emails += "," + Convert.ToString(dtUsers.Rows[i]["Email"]);
+                    }
+
+                    mailMsg.From = new MailAddress("orsocharowca@gmail.com");
+                    mailMsg.To.Add(emails.TrimEnd(','));
+                    mailMsg.Subject = subject;
+                    mailMsg.IsBodyHtml = true;
+                    mailMsg.Body = string.Format(@"{0} <hr/>{1}", subject, body);
+                    Mail.SendMail(mailMsg);
+                }
+            }
+            catch
+            {
+
+            }
+
+        }
 
         internal static int SelectedSiteLanguageId
         {
@@ -339,6 +375,11 @@ namespace SRFROWCA.Common
         internal static DataTable GetProjectsOrganizations(int? locId, int? clusterId)
         {
             return DBContext.GetData("GetProjectsOrganizations", new object[] { locId, clusterId });
+        }
+
+        internal static DataTable GetOrgProjectsOnLocation(bool? isOPSProject)
+        {
+            return DBContext.GetData("GetOrgProjectsOnLocation", new object[] { UserInfo.EmergencyCountry, UserInfo.Organization, isOPSProject, 2015 });
         }
 
         internal static DataTable GetUserDetails(int emergencyId)
@@ -649,6 +690,12 @@ namespace SRFROWCA.Common
             Admin1 = 2,
             Admin2 = 3,
             None = -1
+        }
+
+        public enum YearsInDB
+        {
+            Year2014 = 10,
+            Year2015 = 11
         }
     }
 }

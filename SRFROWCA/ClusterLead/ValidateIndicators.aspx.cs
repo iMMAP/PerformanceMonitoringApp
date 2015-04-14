@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using BusinessLogic;
 using SRFROWCA.Common;
-using SRFROWCA.Controls;
 
 namespace SRFROWCA.ClusterLead
 {
@@ -43,56 +39,19 @@ namespace SRFROWCA.ClusterLead
                 lblOrganization.Text = dt.Rows[0]["OrganizationName"].ToString();
                 lblUpdatedBy.Text = dt.Rows[0]["Email"].ToString();
                 lblUpdatedOn.Text = dt.Rows[0]["CreatedDate"].ToString();
-                lblReportingPeriod.Text = dt.Rows[0]["MonthName"].ToString() + "-2014";
+                lblReportingPeriod.Text = dt.Rows[0]["MonthName"].ToString() + "-2015";
             }
         }
 
         private void LoadIndicators(int reporId)
         {
-            int? locTypeId = null;
-
-            if (UserInfo.EmergencyCountry.Equals(6) && !IsPostBack)
-                rbCountry.SelectedValue = "2";
-
-            if (rbCountry.SelectedValue.Equals("2"))
-                locTypeId = Convert.ToInt32(rbCountry.SelectedValue);
-                //countryId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
-
-            gvIndicators.DataSource = DBContext.GetData("GetReportIndicatorsToValidate", new object[] { reporId, RC.SelectedSiteLanguageId, locTypeId });
+            gvIndicators.DataSource = DBContext.GetData("GetReportIndicatorsToValidate2015", new object[] { reporId, RC.SelectedSiteLanguageId });
             gvIndicators.DataBind();
         }
 
         protected void gvIndicators_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             ObjPrToolTip.ObjectiveIconToolTip(e, 0);
-            ObjPrToolTip.PrioritiesIconToolTip(e, 1);
-            ObjPrToolTip.CountryIndicatorIcon(e, 2);
-
-            //if (e.Row.RowType == DataControlRowType.Header)
-            //{
-            //    e.Row.Cells[3].Visible = false;
-            //    e.Row.Cells[4].Visible = false;
-            //    e.Row.Cells[5].Visible = false;
-            //    e.Row.Cells[6].Visible = false;
-            //    e.Row.Cells[7].Visible = false;
-            //    e.Row.Cells[8].Visible = false;
-            //    //e.Row.Cells[9].Visible = false;
-            //    //e.Row.Cells[10].Visible = false;
-            //    //e.Row.Cells[11].Visible = false;
-            //}
-
-            //if (e.Row.RowType == DataControlRowType.DataRow)
-            //{
-            //    e.Row.Cells[3].Visible = false;
-            //    e.Row.Cells[4].Visible = false;
-            //    e.Row.Cells[5].Visible = false;
-            //    e.Row.Cells[6].Visible = false;
-            //    e.Row.Cells[7].Visible = false;
-            //    e.Row.Cells[8].Visible = false;
-            //    //e.Row.Cells[9].Visible = false;
-            //    //e.Row.Cells[10].Visible = false;
-            //    //e.Row.Cells[11].Visible = false;
-            //}
         }
 
         protected void gvIndicators_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -114,13 +73,13 @@ namespace SRFROWCA.ClusterLead
                         btnSaveComments.Visible = false;
 
                     mpeComments.Show();
-                   
                 }
             }
         }
 
         protected void btnApprove_Click(object sender, EventArgs e) 
         {
+            bool isApproved = false;
             int reportId = 0;
             foreach (GridViewRow row in gvIndicators.Rows)
             {
@@ -132,15 +91,15 @@ namespace SRFROWCA.ClusterLead
                     if (cb != null)
                     {
                         ApproveIndicatorData(reportDetailId, cb.Checked);
+                        isApproved = true;
                     }
                 }
             }
-
-            //if (reportId > 0)
-            //{
-            //    DBContext.Add("UpdateReporyApproved", new object[] { reportId, RC.GetCurrentUserId, DBNull.Value });
-            //}
-
+           
+            if (isApproved)
+            {
+                RC.SendEmail(UserInfo.EmergencyCountry, (int?)null, "Sahel ORS: Reports Approved!", "ORS reports approved!");
+            }
             ShowMessage("Data Saved Successfully!");
         }
 

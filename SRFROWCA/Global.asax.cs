@@ -16,17 +16,17 @@ namespace SRFROWCA
 
         }
 
-        void Application_Error(object sender, EventArgs e)
-        {
-            //// Get the exception object.
-            //Exception exc = Server.GetLastError();
+        //void Application_Error(object sender, EventArgs e)
+        //{
+        //    // Get the exception object.
+        //    Exception exc = Server.GetLastError();
+            
+        //    //Log the exception and notify system operators
+        //    //ExceptionUtility.LogException(exc, "GlobalASAX", this.User);
 
-            ////Log the exception and notify system operators
-            //ExceptionUtility.LogException(exc, "GlobalASAX", this.User);
-
-            //// Clear the error from the server
-            //Server.ClearError();
-        }
+        //    // Clear the error from the server
+        //    Server.ClearError();
+        //}
 
         void Session_Start(object sender, EventArgs e)
         {

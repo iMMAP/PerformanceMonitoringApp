@@ -17,7 +17,7 @@
                 var GridVwHeaderChckbox = document.getElementById("<%=gvIndicators.ClientID %>");
 
                 for (i = 1; i < GridVwHeaderChckbox.rows.length; i++) {
-                    GridVwHeaderChckbox.rows[i].cells[3].getElementsByTagName("INPUT")[0].checked = Checkbox.checked;
+                    GridVwHeaderChckbox.rows[i].cells[1].getElementsByTagName("INPUT")[0].checked = Checkbox.checked;
                 }
             }
 
@@ -67,80 +67,58 @@
                                         <div class="form-group">
                                             <div class="row">
 
-                                                <table class="width-90">
+                                                <table class="width-100" border="0">
+                                                    <tr>
+                                                        <td>
+                                                            <b>
+                                                                Project:
+                                                           </b>
+                                                            
+                                                        </td>
+                                                        <td colspan="5">
+                                                            <asp:Label ID="lblProjectTitle" runat="server" Text=""></asp:Label>
+                                                        </td>
+                                                    </tr>
                                                     <tr>
                                                         <td>
 
-                                                            <label class="control-label no-padding-right" style="padding-left:10px;" for="form-input-readonly">
-                                                                Project:
-                                                       
-                                                            </label>
+                                                            <b>
+                                                                Organization:
+                                                       </b>
                                                         </td>
 
+                                                        <td colspan="5">
+                                                            <asp:Label ID="lblOrganization" runat="server" Text=""></asp:Label>
+                                                        </td>
+
+                                                    </tr>
+                                                    <tr>
                                                         <td>
-                                                            <asp:Label ID="lblProjectTitle" runat="server" Text=""></asp:Label>
-
-                                                        </td>
-                                                         <td>
-                                                            <label class="control-label no-padding-right" for="form-input-readonly">
+                                                            <b>
                                                                 Updated By:
-                                                       
-                                                            </label>
+                                                            </b>
                                                         </td>
                                                         <td>
                                                             <asp:Label ID="lblUpdatedBy" runat="server" Text=""></asp:Label>
                                                         </td>
-
-                                                    </tr>
-                                                    <tr>
                                                         <td>
-
-
-                                                            <label class="control-label padding-left no-padding-right" style="padding-left:10px;" for="form-input-readonly">
-                                                                Organization:
-                                                       
-                                                            </label>
-                                                        </td>
-
-                                                        <td>
-                                                            <asp:Label ID="lblOrganization" runat="server" Text=""></asp:Label>
-                                                        </td>
-                                                          <td>
-                                                            <label class="control-label no-padding-right" for="form-input-readonly">
+                                                            <b>
                                                                 Updated On:
-                                                       
-                                                            </label>
+                                                            </b>
                                                         </td>
                                                         <td>
                                                             <asp:Label ID="lblUpdatedOn" runat="server" Text=""></asp:Label>
                                                         </td>
-                                                    </tr>
-                                                    
-                                                    
-                                                    <tr>
                                                         <td>
-                                                            <label class="control-label padding-left no-padding-right" style="padding-left:10px;" for="form-input-readonly">
+                                                            <b>
                                                                 Reporting Period:
-                                                       
-                                                            </label>
+                                                            </b>
                                                         </td>
                                                         <td>
                                                             <asp:Label ID="lblReportingPeriod" runat="server" Text=""></asp:Label>
                                                         </td>
-                                                        <td></td><td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="padding-top:20px;padding-left:10px;" colspan="3">
-                                                             <asp:RadioButtonList  AutoPostBack="true" ID="rbCountry" runat="server" RepeatColumns="2" OnSelectedIndexChanged="rbCountry_SelectedIndexChanged">
-                                                                                    <asp:ListItem Text="All Indictaors" Value="0" Selected="True"> </asp:ListItem>
-                                                                                    <asp:ListItem Text="Country Indicators" Value="2" ></asp:ListItem>
-                                                                                </asp:RadioButtonList>
-                                                                 </td>
-                                                     
                                                     </tr>
                                                 </table>
-
-
                                             </div>
                                         </div>
                                     </div>
@@ -162,11 +140,7 @@
                                             <div class="btn-group">
                                                 <button runat="server" id="btnApprove" onserverclick="btnApprove_Click" class="btn btn-sm btn-success">
                                                     <i class="icon-ok bigger-110"></i>Approve
-                                               
                                                 </button>
-                                                <%--<button runat="server" id="btnReject" onserverclick="btnReject_Click" class="btn btn-sm btn-danger">
-                                                    <i class="icon-remove bigger-110"></i>Reject
-                                                </button>--%>
                                             </div>
                                         </div>
                                     </div>
@@ -181,11 +155,8 @@
                                                         <AlternatingRowStyle CssClass="altcolor" />
                                                         <Columns>
                                                             <asp:BoundField DataField="ObjectiveId" HeaderText="Obj" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" />
-                                                            <asp:BoundField DataField="HumanitarianPriorityId" HeaderText="Pr" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" />
-                                                            <asp:BoundField DataField="IsSRP" HeaderText="Country" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" />
                                                             <asp:TemplateField HeaderText="Select" ItemStyle-Width="70px">
                                                                 <HeaderTemplate>
-
                                                                     <asp:CheckBox ID="chkSelectAll" runat="server" onclick="CheckAll(this);" />
                                                                 </HeaderTemplate>
                                                                 <ItemTemplate>
@@ -204,16 +175,14 @@
                                                             <asp:TemplateField ItemStyle-Wrap="false" meta:resourcekey="TemplateFieldResource2">
                                                                 <ItemTemplate>
                                                                     <asp:Image ID="imgObjective" runat="server" AlternateText="Obj" />
-                                                                    <asp:Image ID="imgPriority" runat="server" AlternateText="PR" />
-                                                                    <asp:Image ID="imgCind" runat="server" AlternateText="C" />
                                                                 </ItemTemplate>
                                                                 <ItemStyle Wrap="False"></ItemStyle>
                                                             </asp:TemplateField>
                                                             <asp:BoundField DataField="Activity" HeaderText="Activity" />
                                                             <asp:BoundField DataField="Indicator" HeaderText="Indicator" />
                                                             <asp:BoundField DataField="Location" HeaderText="Location" />
-                                                            <asp:BoundField DataField="AnnualTarget" HeaderText="Annual Target" />
-                                                            <asp:BoundField DataField="Achieved" HeaderText="Monthly Achieved" />
+                                                            <asp:BoundField DataField="AnnualTarget" ItemStyle-HorizontalAlign="Right" HeaderText="Annual Target" />
+                                                            <asp:BoundField DataField="Achieved" ItemStyle-HorizontalAlign="Right" HeaderText="Monthly Achieved" />
 
                                                         </Columns>
                                                     </asp:GridView>

@@ -122,7 +122,7 @@
                                     <a href="../Reports/DownloadReport.aspx?type=11" runat="server" id="menueExportExcel"><span class="menu-text"><asp:Localize ID="Localize1" runat="server" Text="Export to Excel" meta:resourcekey="localReportResource1"></asp:Localize>
                                 </span></a>
                                 </li>
-                                 <li id="li2" runat="server">
+                                 <li id="li2" runat="server"  class="hidden">
                                     <div class="pdf-icon" style="float:left;margin-right:5px;margin-top:2px;"></div>
                                     <a href="../Reports/DownloadReport.aspx?type=12" runat="server" id="menueExportPDF"><span class="menu-text"><asp:Localize ID="Localize2" runat="server" Text="Export to PDF" meta:resourcekey="localReportResource1"></asp:Localize>
                                 </span></a>

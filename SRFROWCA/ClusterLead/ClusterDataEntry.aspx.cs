@@ -1,11 +1,8 @@
 ﻿using BusinessLogic;
 using SRFROWCA.Common;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -36,6 +33,11 @@ namespace SRFROWCA.ClusterLead
             if (RC.IsCountryAdmin(this.User))
             {
                 RC.EnableDisableControls(ddlCountry, false);
+            }
+
+            if (RC.IsRegionalClusterLead(this.User))
+            {
+                RC.EnableDisableControls(ddlCluster, false);
             }
         }
 
@@ -107,14 +109,25 @@ namespace SRFROWCA.ClusterLead
             {
                 ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
             }
+
+            if (RC.IsRegionalClusterLead(this.User))
+            {
+                ddlCluster.SelectedValue = UserInfo.EmergencyCluster.ToString();
+            }
         }
 
         private DataTable GetClusterIndicatros(int? clusterId, int? countryId, string indicator)
         {
-            int yearID = Convert.ToInt32(ddlYear.SelectedValue);
-            int monthID = Convert.ToInt32(ddlMonth.SelectedValue);
+            DataTable dt = new DataTable();
+            if (countryId > 0 && clusterId > 0)
+            {
+                int yearID = Convert.ToInt32(ddlYear.SelectedValue);
+                int monthID = Convert.ToInt32(ddlMonth.SelectedValue);
+                bool isRegional = RC.IsRegionalClusterLead(this.User);
+                dt = DBContext.GetData("uspGetClusterReportDetails", new object[] { yearID, monthID, RC.SelectedSiteLanguageId, countryId, clusterId, isRegional });
+            }
 
-            return DBContext.GetData("uspGetClusterReportDetails", new object[] { yearID, monthID, RC.SelectedSiteLanguageId, countryId, clusterId });
+            return dt;
         }
 
         private void PopulateYears()
@@ -160,8 +173,9 @@ namespace SRFROWCA.ClusterLead
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 
-        private void SaveClusterIndicatorDetails()
+        private bool SaveClusterIndicatorDetails()
         {
+            bool isDataProvided = false;
             int clusterIndicatorID = 0;
             int? achieved = null;
             int countryId = 0;
@@ -170,7 +184,7 @@ namespace SRFROWCA.ClusterLead
             countryId = RC.GetSelectedIntVal(ddlCountry);
             clusterId = RC.GetSelectedIntVal(ddlCluster);
             int yearId = Convert.ToInt32(ddlYear.SelectedValue);
-            int monthId = Convert.ToInt32(ddlMonth.SelectedValue);
+            int monthId = Convert.ToInt32(ddlMonth.SelectedValue);            
 
             foreach (GridViewRow row in gvIndicators.Rows)
             {
@@ -185,21 +199,24 @@ namespace SRFROWCA.ClusterLead
                     if (txtAchieved != null)
                     {
                         achieved = !string.IsNullOrEmpty(txtAchieved.Text.Trim()) ? Convert.ToInt32(txtAchieved.Text.Trim()) : (int?)null;
+                        if (achieved > 0)
+                            isDataProvided = true;
                     }
 
                     DBContext.Add("uspInsertClusterReport", new object[] { clusterIndicatorID, clusterId, countryId, yearId, monthId, achieved, RC.GetCurrentUserId, null });
                 }
             }
+            return isDataProvided;
         }
 
         protected void btnSaveAll_Click(object sender, EventArgs e)
         {
+            int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
+            int emgCountryId = RC.GetSelectedIntVal(ddlCountry);
+
             if (RC.IsAdmin(this.User))
             {
-                int cluster = Convert.ToInt32(ddlCluster.SelectedValue);
-                int country = Convert.ToInt32(ddlCountry.SelectedValue);
-
-                if (cluster <= 0 && country <= 0)
+                if (emgClusterId <= 0 && emgCountryId <= 0)
                 {
                     ShowMessage("Please select Cluster && Country to save data", RC.NotificationType.Error, true, 4000);
                     return;
@@ -208,20 +225,42 @@ namespace SRFROWCA.ClusterLead
 
             if (RC.IsCountryAdmin(this.User))
             {
-                int cluster = Convert.ToInt32(ddlCluster.SelectedValue);
-
-                if (cluster <= 0)
+                if (emgClusterId <= 0)
                 {
                     ShowMessage("Please select Cluster to save data", RC.NotificationType.Error, true, 4000);
                     return;
                 }
             }
 
-            SaveClusterIndicatorDetails();
+            bool isAdded = SaveClusterIndicatorDetails();
             LoadClusterIndicators();
 
             ShowMessage("Data Saved Successfully!");
+            if (isAdded)
+            {
+                SendEmail();
+            }
         }
+
+        private void SendEmail()
+        {
+            int emgCountryId = RC.GetSelectedIntVal(ddlCountry);
+            int? emgClsuterId = RC.GetSelectedIntVal(ddlCluster);
+            string subject = "Output Indicator Report Saved/Updated For the month of " + ddlMonth.SelectedItem.Text;
+            string country = ddlCountry.SelectedItem.Text;
+            string cluster = ddlCluster.SelectedItem.Text;
+            string user = "";
+            try { user = User.Identity.Name; }
+            catch { }
+
+            string body = string.Format(@"<b>{0}</b><br/>
+                                         <b>Country:</b> {1}<br/>
+                                         <b>Cluster:</b> {2}<br/>
+                                         <b>Month:</b> {3}<br/>
+                                         <b>Added By:</b> {4}"
+                                         , subject, country, cluster, ddlMonth.SelectedItem.Text, user);
+            RC.SendEmail(emgCountryId, emgClsuterId, subject, body);
+        }  
 
         protected void ddlMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -242,16 +281,34 @@ namespace SRFROWCA.ClusterLead
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                ObjPrToolTip.RegionalIndicatorIcon(e, 9);
-                ObjPrToolTip.CountryIndicatorIcon(e, 10);
+                ObjPrToolTip.RegionalIndicatorIcon(e, 11);
+                ObjPrToolTip.CountryIndicatorIcon(e, 12);
 
                 Label lblTarget = (Label)e.Row.FindControl("lblTarget");
 
-                if (lblTarget != null)
-                {
-                    string siteCulture = RC.SelectedSiteLanguageId.Equals(1) ? "en-US" : "de-DE";
-                    lblTarget.Text = String.Format(new CultureInfo(siteCulture), "{0:0,0}", Convert.ToInt32(lblTarget.Text));
-                }
+                //if (lblTarget != null)
+                //{
+                //    string siteCulture = RC.SelectedSiteLanguageId.Equals(1) ? "en-US" : "fr-FR";
+                //    lblTarget.Text = String.Format(new CultureInfo(siteCulture), "{0:0,0}", Convert.ToInt32(lblTarget.Text));
+                //}
+
+
+                //Label lblOrigionalTarget = (Label)e.Row.FindControl("lblOrigionalTarget");
+
+                //if (lblOrigionalTarget != null)
+                //{
+                //    string siteCulture = RC.SelectedSiteLanguageId.Equals(1) ? "en-US" : "fr-FR";
+                //    lblOrigionalTarget.Text = String.Format(new CultureInfo(siteCulture), "{0:0,0}", Convert.ToInt32(lblOrigionalTarget.Text));
+                //}
+
+                //Label lblSum = (Label)e.Row.FindControl("lblSum");
+
+                //if (lblSum != null)
+                //{
+                //    string siteCulture = RC.SelectedSiteLanguageId.Equals(1) ? "en-US" : "fr-FR";
+                //    lblSum.Text = String.Format(new CultureInfo(siteCulture), "{0:0,0}", Convert.ToInt32(lblSum.Text));
+                //}
+                
             }
         }
 
@@ -321,7 +378,7 @@ namespace SRFROWCA.ClusterLead
             if (Convert.ToInt32(ddlMonth.SelectedValue) > -1)
                 monthID = Convert.ToInt32(ddlMonth.SelectedValue);
 
-            DataTable dt = DBContext.GetData("uspGetClusterReports", new object[] { null, monthID, countryId, clusterId, RC.SelectedSiteLanguageId, true, countryId, clusterId, monthID });
+            DataTable dt = DBContext.GetData("uspGetClusterReports", new object[] { null, countryId, clusterId, RC.SelectedSiteLanguageId, monthID });
             RemoveColumnsFromDataTable(dt);
 
             dt.DefaultView.Sort = "Country, Cluster, Indicator, Unit";

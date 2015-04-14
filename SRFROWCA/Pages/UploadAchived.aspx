@@ -101,7 +101,7 @@
                         <div class="space"></div>
                         <div>
                             <h4 class="smaller"><b>Locations You Want To Report ON:</b></h4>
-                            <asp:CheckBoxList ID="cblLocations" runat="server" RepeatColumns="6"></asp:CheckBoxList>
+                            <asp:CheckBoxList ID="cblLocations" runat="server" RepeatColumns="4"></asp:CheckBoxList>
                         </div>
                         <div class="space"></div>
                         <div class="center">

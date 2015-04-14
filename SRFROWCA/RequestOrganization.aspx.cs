@@ -26,7 +26,7 @@ namespace SRFROWCA
                 result = DBContext.Add("uspSaveOrgRequest", new object[] { txtOrganizationName.Text, 
                                                                            txtAcronym.Text, 
                                                                            txtType.Text, 
-                                                                           txtCountry.Text, 
+                                                                           "", 
                                                                            txtContactName.Text, 
                                                                            txtPhone.Text, 
                                                                            txtEmail.Text,
@@ -44,7 +44,6 @@ namespace SRFROWCA
                 mailBody += "<br>" + "Organization Name: " + txtOrganizationName.Text;
                 mailBody += "<br>" + "Organization Acronym: " + txtAcronym.Text;
                 mailBody += "<br>" + "Organization Type: " + txtType.Text;
-                mailBody += "<br>" + "Country: " + txtCountry.Text;
                 mailBody += "<br>" + "Contact Name: " + txtContactName.Text;
                 mailBody += "<br>" + "Phone: " + txtPhone.Text;
                 mailBody += "<br>" + "Email: " + txtEmail.Text;
@@ -66,7 +65,7 @@ namespace SRFROWCA
                         btnRegister.Text = "Thanks!";
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
                     txtMessage.Text = "Error: Failed to send email.";
                 }

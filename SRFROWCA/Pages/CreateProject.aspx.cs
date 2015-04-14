@@ -20,15 +20,44 @@ namespace SRFROWCA.Pages
             if (IsPostBack) return;
             PopulateClusters();
             PopulateCurrency();
-            LoadProjects();
+            LoadProjects();            
 
             if (rblProjects.Items.Count > 0)
             {
                 rblProjects.SelectedIndex = 0;
                 LoadProjectDetails();
+                PopulateOrganizations();
+                SelectProjectPartners();
             }
 
             ToggleButtons();
+        }
+
+        private void SelectProjectPartners()
+        {
+            int projectId = Convert.ToInt32(rblProjects.SelectedValue);
+            DataTable dt = DBContext.GetData("GetProjectPartnerOrganizations", new object[] { projectId });
+            foreach (DataRow dr in dt.Rows)
+            {
+                foreach (GridViewRow row in gvOrgs.Rows)
+                {
+                    string orgId = gvOrgs.DataKeys[row.RowIndex].Values["OrganizationId"].ToString();
+                    if (orgId == dr["OrganizationId"].ToString())
+                    {
+                        CheckBox cbOrg = row.FindControl("cbOrg") as CheckBox;
+                        if (cbOrg != null)
+                        {
+                            cbOrg.Checked = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void PopulateOrganizations()
+        {
+            gvOrgs.DataSource = DBContext.GetData("GetAllOrganizations");
+            gvOrgs.DataBind();
         }
 
         private void PopulateCurrency()
@@ -80,8 +109,7 @@ namespace SRFROWCA.Pages
 
         private DataTable GetProjects()
         {
-            bool? isOPSProject = null;
-            return DBContext.GetData("GetOrgProjectsOnLocation", new object[] { UserInfo.EmergencyCountry, UserInfo.Organization, isOPSProject });
+            return RC.GetOrgProjectsOnLocation(null);
         }
 
         private void ToggleButtons()
@@ -109,6 +137,8 @@ namespace SRFROWCA.Pages
         {
             LoadProjectDetails();
             ToggleButtons();
+            PopulateOrganizations();
+            SelectProjectPartners();
         }
 
         private void LoadProjectDetails()
@@ -126,7 +156,7 @@ namespace SRFROWCA.Pages
                 ddlDonor1Currency.SelectedValue = dtProject.Rows[0]["Contribution1CurrencyId"].ToString();
                 ddlFundingStatus.SelectedValue = dtProject.Rows[0]["FundingStatus"].ToString();
                 ddlProjectSatus.SelectedValue = dtProject.Rows[0]["ProjectStatus"].ToString();
-                txtImplementingPartners.Text = dtProject.Rows[0]["ProjectImplementingpartner"].ToString();
+                //txtImplementingPartners.Text = "";// dtProject.Rows[0]["ProjectImplementingpartner"].ToString();
                 txtRequestedAmount.Text = dtProject.Rows[0]["RequestedAmount"].ToString();
                 ddlRequestedAmountCurrency.SelectedValue = dtProject.Rows[0]["RequestedAmountCurrencyId"].ToString();
                 txtDonor2Name.Text = dtProject.Rows[0]["DonorName2"].ToString();
@@ -136,7 +166,7 @@ namespace SRFROWCA.Pages
                 txtContactPhone.Text = dtProject.Rows[0]["ProjectContactPhone"].ToString();
                 txtContactEmail.Text = dtProject.Rows[0]["ProjectContactEmail"].ToString();
                 ViewState["IsOpsProject"] = dtProject.Rows[0]["IsOpsProject"].ToString();
-               
+
                 DateTime dtFrom = DateTime.Now;
                 if (dtProject.Rows[0]["ProjectStartDate"] != DBNull.Value)
                 {
@@ -158,9 +188,9 @@ namespace SRFROWCA.Pages
                 {
                     txtToDate.Text = "";
                 }
-                
-                    ToggleControlsForOPS();
-                
+
+                ToggleControlsForOPS();
+
             }
         }
 
@@ -170,7 +200,7 @@ namespace SRFROWCA.Pages
             {
                 btnDeleteProject.Enabled = false;
                 txtProjectTitle.Enabled = false;
-                txtProjectTitle.BackColor =  Color.LightGray;
+                txtProjectTitle.BackColor = Color.LightGray;
                 txtProjectObjective.Enabled = false;
                 txtProjectObjective.BackColor = Color.LightGray;
                 ddlCluster.Enabled = false;
@@ -244,7 +274,7 @@ namespace SRFROWCA.Pages
             ProjectId = 0;
             txtDonorName.Text = string.Empty;
             ddlFundingStatus.SelectedValue = "-1";
-            txtImplementingPartners.Text = "";
+            //txtImplementingPartners.Text = "";
             txtRequestedAmount.Text = "";
             txtDonor1Contributed.Text = "";
             txtDonor2Name.Text = "";
@@ -301,11 +331,7 @@ namespace SRFROWCA.Pages
 
         private bool IsProjectBeingUsed()
         {
-            using (ORSEntities db = new ORSEntities())
-            {
-                int projCount = db.Reports.Where(x => x.ProjectId == ProjectId).Count();
-                return projCount > 0;
-            }
+            return ((DBContext.GetData("IsReportExistsForProject", new object[] { ProjectId }).Rows.Count > 0));
         }
 
         private void DeleteProject()
@@ -338,7 +364,7 @@ namespace SRFROWCA.Pages
             int orgId = UserInfo.Organization;
             string title = txtProjectTitle.Text.Trim();
             string objective = txtProjectObjective.Text.Trim();
-            string projectPartners = txtImplementingPartners.Text.Trim();
+            string projectPartners = ""; // txtImplementingPartners.Text.Trim();
             int clusterId = Convert.ToInt32(ddlCluster.SelectedValue);
 
             int? fundingStatus = Convert.ToInt32(ddlFundingStatus.SelectedValue) > 0 ? Convert.ToInt32(ddlFundingStatus.SelectedValue) : (int?)null;
@@ -386,13 +412,14 @@ namespace SRFROWCA.Pages
             {
                 if (ProjectId > 0)
                 {
+                    SaveProjectPartners();
                     if (Convert.ToBoolean(ViewState["IsOpsProject"].ToString()))
                     {
                         DBContext.Update("UpdateOpsProjectDetail", new object[] { ProjectId, projectPartners, ddlProjectSatus.SelectedValue, userId, DBNull.Value });
                     }
-                    else 
+                    else
                     {
-                        
+
                         DBContext.Update("UpdateProjectDetail", new object[] { ProjectId, clusterId, locationId, orgId, userId, title, objective, projectPartners, startDate, endDate, 
                                                                               requestedAmount, requestedCurrencyId, donorName, contribution1, donor1CurrencyId, donorName2, 
                                                                               contribution2, donor2CurrencyId, fundingStatus, contactName, contactPhone, contactEmail,ddlProjectSatus.SelectedValue, DBNull.Value });
@@ -403,8 +430,28 @@ namespace SRFROWCA.Pages
                     ProjectId = DBContext.Add("InsertProject", new object[] { clusterId, locationId, orgId, userId, title, objective, projectPartners, startDate, endDate, 
                                                                               requestedAmount, requestedCurrencyId, donorName, contribution1, donor1CurrencyId, donorName2, 
                                                                               contribution2, donor2CurrencyId, fundingStatus, contactName, contactPhone, contactEmail, DBNull.Value });
-                    AddNotification(ProjectId);
-                    SendEmailToUser(txtProjectTitle.Text.Trim(), ddlCluster.SelectedItem.Text, clusterId);
+                    SaveProjectPartners();
+                    //AddNotification(ProjectId);
+                    //SendEmailToUser(txtProjectTitle.Text.Trim(), ddlCluster.SelectedItem.Text, clusterId);
+                }
+            }
+        }
+
+        private void SaveProjectPartners()
+        {
+            DBContext.Delete("DeleteProjectPartnerOrganizations", new object[] { ProjectId, DBNull.Value });
+
+            foreach (GridViewRow row in gvOrgs.Rows)
+            {
+                CheckBox cbOrg = row.FindControl("cbOrg") as CheckBox;
+                if (cbOrg != null)
+                {
+                    if (cbOrg.Checked)
+                    {
+                        int orgId = 0;
+                        int.TryParse(gvOrgs.DataKeys[row.RowIndex].Values["OrganizationId"].ToString(), out orgId);
+                        DBContext.Add("InsertProjectPartners", new object[] { ProjectId, orgId, RC.GetCurrentUserId, DBNull.Value });
+                    }
                 }
             }
         }
@@ -484,6 +531,11 @@ namespace SRFROWCA.Pages
 
             DBContext.Add("InsertNotification", new object[]{notification1, RC.GetCurrentUserId, pId, UserInfo.EmergencyCountry, emergencyClusterId,
                                                                UserInfo.Organization,  pageURL, isRead, hash, DBNull.Value});
+        }
+
+        protected void btnLocation_Click(object sender, EventArgs e)
+        {
+            ClientScript.RegisterStartupScript(GetType(), "key", "launchModal();", true);
         }
 
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success)

@@ -46,11 +46,10 @@
                             <div class="widget-box">
                                 <div class="widget-header widget-header-small header-color-blue2" style="padding-left: 0px;">
                                     <h6>
-                                          <button runat="server" id="btnExportPDF" onserverclick="ExportToPDF"  class="btn btn-yellow" causesvalidation="false"
+                                          <%--<button runat="server" id="btnExportPDF" onserverclick="ExportToPDF"  class="btn btn-yellow" causesvalidation="false"
                                             title="PDF">
                                             <i class="icon-download"></i>PDF
-                                       
-                                        </button>
+                                        </button>--%>
                                         <button runat="server" id="btnExportToExcel" onserverclick="btnExportToExcel_ServerClick" class="btn btn-yellow" causesvalidation="false"
                                             title="Excel">
                                             <i class="icon-download"></i>Excel
@@ -73,11 +72,9 @@
                                                     <asp:Label runat="server" ID="lblCountry" Text="Country:"></asp:Label>
                                                 </td>
                                                 <td>
-                                                    <cc:DropDownCheckBoxes UseButtons="False"   AddJQueryReference="True" CssClass="ddlWidth" AutoPostBack="true"  OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" runat="server" ID="ddlCountry" >
-                                                        <Style SelectBoxWidth="" DropDownBoxBoxWidth="100%" DropDownBoxBoxHeight=""></Style>
-                                                        
-                                                        <Texts SelectBoxCaption="Select Country" />
-                                                    </cc:DropDownCheckBoxes>
+                                                     <asp:DropDownList AutoPostBack="true" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" runat="server" ID="ddlCountry" Width="270">
+                                                        <asp:ListItem Selected="True" Text="--- Select Country ---" Value="-1"></asp:ListItem>
+                                                    </asp:DropDownList>
                                                 </td>
                                                 <td></td>
                                             </tr>
@@ -92,26 +89,25 @@
                                                     <asp:Label runat="server" ID="lblCluster" Text="Cluster:" meta:resourcekey="lblClusterResource1"></asp:Label>
                                                 </td>
                                                 <td>
-                                                     <cc:DropDownCheckBoxes UseButtons="False" CssClass="ddlWidth" AddJQueryReference="True" AutoPostBack="true"  OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged" runat="server" ID="ddlCluster" >
-                                                        <Style SelectBoxWidth="" DropDownBoxBoxWidth="130%" DropDownBoxBoxHeight=""></Style>
-                                                        <Texts SelectBoxCaption="Select Cluster" />
-                                                    </cc:DropDownCheckBoxes></td>
-                                                </td>
+                                                      <asp:DropDownList AutoPostBack="true" runat="server" OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged" ID="ddlCluster" Width="270">
+                                                        <asp:ListItem Selected="True" Text="--- Select Cluster ---" Value="-1"></asp:ListItem>
+                                                    </asp:DropDownList>
+                                               
                                                 <td style="text-align: right;">
 
 
                                                     <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" CssClass="btn btn-primary" CausesValidation="False" meta:resourcekey="btnSearchResource1" />
-                                                    <asp:Button ID="btnReset" runat="server" OnClick="btnReset_Click" Text="Reset" CssClass="btn btn-primary" CausesValidation="False"/>
-                                                </td>
+                                                    <%--<asp:Button ID="btnReset" runat="server" OnClick="btnReset_Click" Text="Reset" CssClass="btn btn-primary" CausesValidation="False"/>--%>
+                                                </td> 
                                             </tr>
                                             <tr>
                                                 <td></td>
-                                                <td><asp:CheckBox ID="cbIncludeRegional" runat="server" Text="Show Regional Indicators" Checked="True" meta:resourcekey="cbIncludeRegionalResource1" /></td>
+                                                <td colspan="4"><asp:CheckBox ID="cbIncludeRegional" runat="server" Text="Show Regional Indicators" Checked="True" meta:resourcekey="cbIncludeRegionalResource1" /></td>
                                             </tr>
 
 
                                         </table>
-                                    </div>
+                                   </div>
                                 </div>
                             </div>
                         </div>
@@ -132,36 +128,38 @@
                                 <%# Container.DataItemIndex + 1 %>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField ItemStyle-Width="4%" ItemStyle-HorizontalAlign="Center">
+                        <asp:TemplateField ItemStyle-Width="4px" ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>
                                 <asp:Image ID="imgRind" runat="server" />
                                 <asp:Image ID="imgCind" runat="server" />
                             </ItemTemplate>
-
-
                         </asp:TemplateField>
-
-                        <asp:BoundField ItemStyle-Width="16%" DataField="Country" HeaderText="Country" SortExpression="Country" meta:resourcekey="BoundFieldResource4"></asp:BoundField>
-                        <asp:BoundField ItemStyle-Width="20%" DataField="Cluster" HeaderText="Cluster" SortExpression="Cluster" meta:resourcekey="BoundFieldResource5"></asp:BoundField>
-                        <asp:BoundField ItemStyle-Width="28%" DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator" meta:resourcekey="BoundFieldResource6"></asp:BoundField>
-                        <%--<asp:BoundField ItemStyle-Width="10%" DataField="Target" HeaderText="Target" SortExpression="Target" meta:resourcekey="BoundFieldResource7"></asp:BoundField>--%>
-
-                        <asp:TemplateField ItemStyle-Width="10%" HeaderText="Target" ItemStyle-HorizontalAlign="Right" SortExpression="Target">
+                        <asp:BoundField ItemStyle-Width="100px" DataField="Country" HeaderText="Country" SortExpression="Country" meta:resourcekey="BoundFieldResource4"></asp:BoundField>
+                        <asp:BoundField ItemStyle-Width="100px" DataField="Cluster" HeaderText="Cluster" SortExpression="Cluster" meta:resourcekey="BoundFieldResource5"></asp:BoundField>
+                        <asp:BoundField ItemStyle-Width="400px" DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator" meta:resourcekey="BoundFieldResource6"></asp:BoundField>
+                       <asp:BoundField DataField="Unit" HeaderText="Unit" SortExpression="Unit" meta:resourcekey="BoundFieldResource8"></asp:BoundField>
+                        <asp:BoundField DataField="Month" HeaderText="Month" SortExpression="Month"></asp:BoundField>
+                         <asp:TemplateField ItemStyle-Width="10%" HeaderText="Original Target" ItemStyle-HorizontalAlign="Right" SortExpression="OrigionalTarget">
                             <ItemTemplate>
-                                <asp:Label ID="lblTarget" runat="server" Text=' <%# Eval("Target")%>'></asp:Label>
+                                <asp:Label ID="lblOriginalTarget" runat="server" Text=' <%# Eval("OriginalTarget")%>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField ItemStyle-Width="10%" HeaderText="Current Target" ItemStyle-HorizontalAlign="Right" SortExpression="CurrentTarget">
+                            <ItemTemplate>
+                                <asp:Label ID="lblTarget" runat="server" Text=' <%# Eval("CurrentTarget")%>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
 
-                        <%--<asp:BoundField ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Right" DataField="Achieved" HeaderText="Achieved" SortExpression="Achieved"></asp:BoundField>--%>
-
-                         <asp:TemplateField ItemStyle-Width="10%" HeaderText="Achieved" ItemStyle-HorizontalAlign="Right" SortExpression="Achieved">
+                         <asp:TemplateField ItemStyle-Width="10%" HeaderText="Monthly Achieved" ItemStyle-HorizontalAlign="Right" SortExpression="MonthlyAchieved">
                             <ItemTemplate>
-                                <asp:Label ID="lblAchieved" runat="server" Text=' <%# Eval("Achieved")%>'></asp:Label>
+                                <asp:Label ID="lblCountryAchieved" runat="server" Text=' <%# Eval("MonthlyAchieved")%>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-
-                        <asp:BoundField ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Right" DataField="Unit" HeaderText="Unit" SortExpression="Unit" meta:resourcekey="BoundFieldResource8"></asp:BoundField>
-
+                         <asp:TemplateField ItemStyle-Width="10%" HeaderText="Final Sum" ItemStyle-HorizontalAlign="Right" SortExpression="FinalSum">
+                            <ItemTemplate>
+                                <asp:Label ID="lblCountrySum" runat="server" Text=' <%# Eval("FinalSum")%>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:BoundField DataField="IsRegional" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden">
                             <HeaderStyle CssClass="hidden"></HeaderStyle>
 
@@ -169,10 +167,10 @@
                         </asp:BoundField>
                         <asp:BoundField DataField="IsSRP" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden">
                             <HeaderStyle CssClass="hidden"></HeaderStyle>
-
                             <ItemStyle CssClass="hidden"></ItemStyle>
                         </asp:BoundField>
-
+                        <asp:BoundField ItemStyle-Font-Size="Smaller" DataField="CreatedBy" HeaderText="Created" SortExpression="CreatedBy" ItemStyle-Width="10%"></asp:BoundField>
+                    <asp:BoundField ItemStyle-Font-Size="Smaller" DataField="UpdatedBy" HeaderText="Updated" SortExpression="UpdatedBy" ItemStyle-Width="10%"></asp:BoundField>
                     </Columns>
                 </asp:GridView>
             </div>

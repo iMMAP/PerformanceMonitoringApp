@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BusinessLogic;
+using SRFROWCA.Common;
+using SRFROWCA.Controls;
+using System;
 using System.Data;
 using System.Globalization;
 using System.IO;
@@ -10,9 +13,6 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml;
-using BusinessLogic;
-using SRFROWCA.Common;
-using SRFROWCA.Controls;
 
 namespace SRFROWCA.ClusterLead
 {
@@ -591,16 +591,17 @@ namespace SRFROWCA.ClusterLead
 
             if (maxIndicators > 0)
             {
-                DataTable dt = DBContext.GetData("GetAllIndicatorsNew", new object[] { emgLocationId, emgClusterId, null, null, null, null, (int)RC.SelectedSiteLanguageId });
-                if (dt.Rows.Count > 0)
-                    maxIndicators = maxIndicators - dt.Rows.Count;
+                int isActive = 1;
+                int indicatorCount = DBContext.Update("GetIndicatorsCount", new object[] { emgLocationId, emgClusterId, isActive, RC.SelectedSiteLanguageId, DBNull.Value });
+                if (indicatorCount > 0)
+                    maxIndicators = maxIndicators - indicatorCount;
             }
 
             if (maxActivities > 0)
             {
-                DataTable dt = DBContext.GetData("GetAllActivitiesNew", new object[] { emgLocationId, emgClusterId, null, null, (int)RC.SelectedSiteLanguageId });
-                if (dt != null && dt.Rows.Count > 0)
-                    maxActivities = maxActivities - dt.Rows.Count;
+                int activityCount = DBContext.Update("GetActivitiesCount", new object[] { emgLocationId, emgClusterId, RC.SelectedSiteLanguageId, DBNull.Value });
+                if (activityCount > 0)
+                    maxActivities = maxActivities - activityCount;
             }
         }
 

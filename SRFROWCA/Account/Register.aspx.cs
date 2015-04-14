@@ -83,9 +83,10 @@ namespace SRFROWCA.Account
                         message = @"You have been registered successfully, we will verify your credentials and activate your account in few hours!";
 
                     }
-                    catch
+                    catch (Exception ex)
                     {
-                        message = "You have been registered successfully but some error occoured on sending email to the site admin. Contact admin and ask for the verification! We apologies for the inconvenience!";
+                        message = ex.ToString();
+                        //message = "You have been registered successfully but some error occoured on sending email to the site admin. Contact admin and ask for the verification! We apologies for the inconvenience!";
                     }
                 }
 

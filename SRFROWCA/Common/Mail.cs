@@ -33,9 +33,34 @@ namespace SRFROWCA.Common
         //    client.Send(mailMsg);
         //}
 
+        //internal static void SendMail(MailMessage mailMsg)
+        //{
+        //    var client = new SmtpClient("41.191.198.197", 25)
+        //    {
+        //        Credentials = new NetworkCredential("dakar@ochasomalia.org", "Ocha@123"),
+        //        //EnableSsl = true
+        //    };
+
+        //    //string appendSubject = Convert.ToString(ConfigurationManager.AppSettings["StagingEmailSubjectText"]);
+        //    string appendSubject = string.Empty;
+        //    bool sendMail = false;
+
+        //    ConfigSettings.GetKeys(out appendSubject, out sendMail);
+
+        //    if (!string.IsNullOrEmpty(appendSubject))
+        //        mailMsg.Subject = appendSubject + ": " + mailMsg.Subject;
+
+        //    //if (Convert.ToBoolean(ConfigurationManager.AppSettings["SendEmail"]))
+        //    if (sendMail)
+        //        client.Send(mailMsg);
+        //}
+
         internal static void SendMail(MailMessage mailMsg)
         {
-            var client = new SmtpClient("41.191.198.195", 25)
+            //var client = new SmtpClient("smtpout.asia.secureserver.net")
+            //{
+            //    Credentials = new NetworkCredential("test@ocharowca.info", "Ocharowca@365"),
+            var client = new SmtpClient("41.191.198.197", 25)
             {
                 Credentials = new NetworkCredential("dakar@ochasomalia.org", "Ocha@123"),
                 //EnableSsl = true
@@ -54,5 +79,6 @@ namespace SRFROWCA.Common
             if (sendMail)
                 client.Send(mailMsg);
         }
+
     }
 }

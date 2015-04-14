@@ -130,51 +130,6 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
-        /// chkCountryIndicators control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkCountryIndicators;
-        
-        /// <summary>
-        /// chkRegionalInidcators control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkRegionalInidcators;
-        
-        /// <summary>
-        /// chkAllIndicators control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkAllIndicators;
-        
-        /// <summary>
-        /// chkProjectIndicators control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkProjectIndicators;
-        
-        /// <summary>
-        /// localDownloadClusterTargets control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localDownloadClusterTargets;
-        
-        /// <summary>
         /// cblLocations control.
         /// </summary>
         /// <remarks>

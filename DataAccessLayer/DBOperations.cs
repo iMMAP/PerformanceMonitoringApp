@@ -19,6 +19,7 @@ namespace DataAccessLayer.DataAccess
 
             using (DbCommand dbCommand = database.GetStoredProcCommand(procName))
             {
+                dbCommand.CommandTimeout = 90;
                 DataSet dataSet = new DataSet();
                 dataSet = database.ExecuteDataSet(dbCommand);
                 dt = dataSet.Tables[0] != null ? dataSet.Tables[0] : new DataTable();
@@ -33,6 +34,7 @@ namespace DataAccessLayer.DataAccess
             Database.ClearParameterCache();
             using (DbCommand dbCommand = database.GetStoredProcCommand(procName, parameters))
             {
+                dbCommand.CommandTimeout = 90;
                 DataSet dataSet = database.ExecuteDataSet(dbCommand);
                 dataSet = new DataSet();
                 dataSet = database.ExecuteDataSet(dbCommand);

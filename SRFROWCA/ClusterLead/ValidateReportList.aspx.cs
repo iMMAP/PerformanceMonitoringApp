@@ -18,14 +18,15 @@ namespace SRFROWCA.ClusterLead
             {
                 PopulateDropDowns();
 
-                if (Session["ClusterLeadValidateReportCountryInd"] != null)
-                {
-                    cbCountryIndicators.Checked = true;
-                }
+                //if (Session["ClusterLeadValidateReportCountryInd"] != null)
+                //{
+                //    cbCountryIndicators.Checked = true;
+                //}
 
                 if (RC.IsCountryAdmin(User))
                 {
                     PopulateClusters();
+                    LoadReports();
                 }
                 else
                 {
@@ -167,16 +168,16 @@ namespace SRFROWCA.ClusterLead
 
         protected void cbCountryIndicators_CheckedChanged(object sender, EventArgs e)
         {
-            if (cbCountryIndicators.Checked)
-            {
-                Session["ClusterLeadValidateReportCountryInd"] = 1;
-            }
-            else
-            {
-                Session["ClusterLeadValidateReportCountryInd"] = null;
-            }
+            //if (cbCountryIndicators.Checked)
+            //{
+            //    Session["ClusterLeadValidateReportCountryInd"] = 1;
+            //}
+            //else
+            //{
+            //    Session["ClusterLeadValidateReportCountryInd"] = null;
+            //}
 
-            LoadReports();
+            //LoadReports();
         }
 
         protected void rbIsOPSProject_SelectedIndexChanged(object sender, EventArgs e)

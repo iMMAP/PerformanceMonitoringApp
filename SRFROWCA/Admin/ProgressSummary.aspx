@@ -28,6 +28,47 @@
             });
         });
     </script>
+    <style>
+        .reportTable
+        {
+            width:100%;
+           
+        }
+        .reportTable td
+        {
+            padding:5px;
+        }
+        .reportTable tr
+        {            
+            border-bottom:solid 1px #ccc;
+        }
+         .reportTable tr.heading
+        {            
+            border-bottom:solid 2px #ccc;
+            font-weight:bold;
+            font-size:14px;
+        }
+          .reportTable tr.colHeading
+        {            
+            background-color:#ccc;
+            font-weight:bold;
+             font-size:13px;
+        }
+        .countryHeading td
+        {
+             font-weight:bold;
+             font-size:13px;
+             padding-top:20px;
+             /*border-bottom:solid 1px #ccc;*/
+        }
+        .countryData td
+        {
+             
+             padding-left:30px;
+             /*border-bottom:solid 1px #ccc;*/
+        }
+
+    </style>
 </asp:Content>
 <asp:Content ID="mainContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="breadcrumbs" id="breadcrumbs">
@@ -98,7 +139,7 @@
                                                             <td>&nbsp;
                                                             </td>
                                                             <td>
-                                                                <asp:RadioButtonList ID="rbIsOPSProject" runat="server" RepeatColumns="3">
+                                                                <asp:RadioButtonList ID="rbIsOPSProject" runat="server" RepeatColumns="3" style="display:none;">
                                                                     <asp:ListItem Text="All" Value="-1" Selected="True"></asp:ListItem>
                                                                     <asp:ListItem Text="SRP" Value="1"></asp:ListItem>
                                                                     <asp:ListItem Text="ORS" Value="0"></asp:ListItem>
@@ -129,39 +170,67 @@
             </tr>
         </table>
         <br />
-        <table style="width: 25%;">
-            <tr>
-                <td>Number of Users:</td>
-                <td>
-                    <asp:Label ID="lblUsers" runat="server" Text="---"></asp:Label></td>
+        <table class="reportTable" >
+            <tr class="heading">
+                <td colspan="2">Summary</td>
             </tr>
             <tr>
-                <td>Number of Orgs:</td>
+                <td style="width:400px;">Number of SRP Projects:</td>
                 <td>
-                    <asp:Label ID="lblOrganizations" runat="server" Text="---"></asp:Label></td>
+                    <asp:Label ID="lblSRPProjects" runat="server" Text="---"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>Number of Organization with SRP projects:</td>
+                <td>
+                    <asp:Label ID="lblSRPOrg" runat="server" Text="---"></asp:Label></td>
 
             </tr>
             <tr>
-                <td>Number of Orgs Reported:</td>
+                <td>Number of SRP Projects Funded:</td>
                 <td>
-                    <asp:Label ID="lblReportedOrgs" runat="server" Text="---"></asp:Label></td>
+                    <asp:Label ID="lblSRPFunded" runat="server" Text="---"></asp:Label></td>
             </tr>
             <tr>
-                <td>Number of Countries Reported:</td>
+                <td>Number of SRP projects that reported:</td>
                 <td>
-                    <asp:Label ID="lblReportedCountries" runat="server" Text="---"></asp:Label></td>
+                    <asp:Label ID="lblSRPReported" runat="server" Text="---"></asp:Label></td>
             </tr>
             <tr>
-                <td>Number of Reports:</td>
+                <td>Number of Organizations reporting:</td>
                 <td>
-                    <asp:Label ID="lblReports" runat="server" Text="---"></asp:Label></td>
+                    <asp:Label ID="lblReportingorg" runat="server" Text="---"></asp:Label></td>
             </tr>
             <tr>
-                <td>Number of Projects with Reports:</td>
+                <td>Number of Non SRP Projects:</td>
                 <td>
-                    <asp:Label ID="lblReportedProjects" runat="server" Text="---"></asp:Label></td>
+                    <asp:Label ID="lblNonSRPPrj" runat="server" Text="---"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>Number of Non SRP Projects reported:</td>
+                <td>
+                    <asp:Label ID="lblNonSRPReported" runat="server" Text="---"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>Number of Sahel Countries Reporting:</td>
+                <td>
+                    <asp:Label ID="lblCountriesReporting" runat="server" Text="---"></asp:Label></td>
             </tr>
         </table>
+        <br /><br />
+        <table id="tblCountry" runat="server" class="reportTable">
+            <tr class="heading"><td colspan="5">Situation by Country</td></tr>
+            <tr class="colHeading">
+                <td>#</td>
+                <td>Country</td>
+                <td>SRP Projects Reporting</td>
+                <td>Non SRP Projects</td>
+                <td>Number of Reporting Organizations</td>
+            </tr>
+        </table>
+        <br /><br />
+         <table id="tblOrg" runat="server" class="reportTable">
+              <tr class="heading"><td colspan="2">Organizations Name By Country</td></tr>
+             </table>
     </div>
 
 

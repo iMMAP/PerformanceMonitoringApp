@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using SRFROWCA.Common;
+using System.Data;
 
 namespace SRFROWCA.Controls
 {
@@ -57,7 +58,7 @@ namespace SRFROWCA.Controls
             string indEn = !string.IsNullOrEmpty(txtInd1Eng.Text.Trim()) ? txtInd1Eng.Text.Trim() : txtInd1Fr.Text.Trim();
             string indFr = !string.IsNullOrEmpty(txtInd1Fr.Text.Trim().Trim()) ? txtInd1Fr.Text.Trim() : txtInd1Eng.Text.Trim();
             Guid userId = RC.GetCurrentUserId;
-            int gender = chkGender.Checked ? 1 : 0;
+            int gender = chkGender.Checked ? 1 : 0;          
 
             if (string.IsNullOrEmpty(hfIndicatorId.Value))
             {
@@ -73,6 +74,8 @@ namespace SRFROWCA.Controls
                 int.TryParse(hfIndicatorId.Value, out indicatorId);
                 if (indicatorId > 0)
                 {
+                    
+
                     DBContext.Update("UpdateIndicatorNew2", new object[] { indicatorId, activityId, unitId, indEn, indFr, userId, gender, DBNull.Value });
                     SaveAdmin1Targets(indicatorId);
                 }
@@ -84,7 +87,6 @@ namespace SRFROWCA.Controls
                         SaveAdmin1Targets(newIndicatorId);
                     }
                 }
-
             }
         }
         private void SaveAdmin1Targets(int indicatorId)
