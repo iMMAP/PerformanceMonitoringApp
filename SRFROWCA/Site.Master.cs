@@ -39,7 +39,6 @@ namespace SRFROWCA
             RC.SelectedEmergencyId = 3;
             SetUserName();
             HideAllAuthenticatedMenues();
-            LoadNotifications();
 
             if (!IsPostBack)
             {
@@ -110,30 +109,6 @@ namespace SRFROWCA
                         HeadLoginName.FormatString = user.FullName;
                     }
                 }
-            }
-        }
-
-        private void LoadNotifications()
-        {
-            try
-            {
-                using (ORSEntities db = new ORSEntities())
-                {
-                    int count = db.Notifications.Where(x => x.EmergencyLocationId == UserInfo.EmergencyCountry
-                                                                            && x.EmergencyClusterId == UserInfo.EmergencyCluster
-                                                                            && x.IsRead == false).Count();
-                    lblNumberOfNotifications.Text = count.ToString();
-
-                    rptNotifications.DataSource = db.Notifications.Where(x => x.EmergencyLocationId == UserInfo.EmergencyCountry
-                                                                            && x.EmergencyClusterId == UserInfo.EmergencyCluster
-                                                                            && x.IsRead == false)
-                                                                  .Select(y => new { y.Notification1, y.PageURL, y.NotificationId });
-                    rptNotifications.DataBind();
-                }
-            }
-            catch (Exception ex)
-            {
-                string s = ex.ToString();
             }
         }
 
@@ -225,7 +200,7 @@ namespace SRFROWCA
         private void ShowRegionalLeadMenue()
         {
             bool isShow = true;
-           
+
             liCLprojectsListing.Visible = isShow;
             liClusterFrameworks.Visible = isShow;
             //liORS3W.Visible = isShow;
@@ -416,7 +391,7 @@ namespace SRFROWCA
             }
 
             else if (uri == "/KeyFigures/KeyFiguresListing.aspx" || uri == "/KeyFigures/AddKeyFigure.aspx")
-            {                
+            {
                 PageTitle = "ORS - Key Figures";
                 liKeyFigures.Attributes.Add("class", "active");
             }
@@ -510,7 +485,7 @@ namespace SRFROWCA
             {
                 PageTitle = "ORS - Progress Summary";
                 liProgressSummary.Attributes.Add("class", "active");
-            }            
+            }
             else if (uri.Contains("Admin/ConfigSettings.aspx"))
             {
                 PageTitle = "ORS - Settings";
@@ -529,7 +504,7 @@ namespace SRFROWCA
                 PageTitle = "ORS - ORS 3W";
                 liORS3W.Attributes.Add("class", "active");
             }
-                
+
             else if (uri.Contains("ContactUs.aspx"))
             {
                 PageTitle = "ORS - Contact Us";

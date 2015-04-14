@@ -77,26 +77,6 @@
                                 <img src="../assets/orsimages/twitter.png" alt="twitter" />
                             </a>
                         </li>
-                        <%--<li class="purple"><a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-bell-alt icon-animated-bell"></i><span class="badge badge-important">
-                            <asp:Label ID="lblNumberOfNotifications" runat="server" Text=""></asp:Label></span>
-                        </a>
-                            <ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
-                                <asp:Repeater ID="rptNotifications" runat="server" OnItemCommand="rptNotifications_ItemCommand" OnItemDataBound="rptNotification_ItemDataBound">
-                                    <HeaderTemplate>
-                                        <li class="dropdown-header"><i class="icon-warning-sign"></i>Notifications </li>
-                                    </HeaderTemplate>
-                                    <ItemTemplate>
-                                        <li>
-                                            <asp:LinkButton ID="btnLinkNotifications" runat="server" PostBackUrl='<%#Eval("PageURL")%>' CommandArgument="NotificationId" CommandName="GoToNotification">
-											<span class="msg-body"><span class="msg-title"><span class="blue">                                                
-												<%#Eval("Notification1")%></span>
-											</span></span></asp:LinkButton></li>
-                                    </ItemTemplate>
-                                </asp:Repeater>
-                                <li><a href="#">See all notifications <i class="icon-arrow-right"></i></a></li>
-                            </ul>
-                        </li>--%>
-
                         <li>
                             <asp:LinkButton ID="lnkLanguageEnglish" Text="English" runat="server" OnClick="lnkLanguageEnglish_Click"
                                 CausesValidation="False" meta:resourcekey="lnkLanguageEnglishResource2"></asp:LinkButton></li>

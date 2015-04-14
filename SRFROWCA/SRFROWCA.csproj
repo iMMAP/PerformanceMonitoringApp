@@ -395,7 +395,6 @@
     <Content Include="ErrorPages\Http404ErrorPage.aspx" />
     <Content Include="ErrorPages\HttpErrorPage.aspx" />
     <Content Include="faq.aspx" />
-    <Content Include="HtmlPage1.html" />
     <Content Include="KeyFigures\AddKeyFigure.aspx" />
     <Content Include="KeyFigures\AddKeyFigureCategory.aspx" />
     <Content Include="KeyFigures\AddKeyFigureCategoryCtrl.ascx" />
@@ -425,6 +424,7 @@
     <Content Include="ReportingStatus.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Reports\DownloadReport.aspx" />
     <Content Include="Reports\ORS3W.aspx" />
     <Content Include="RequestOrganization.aspx" />
     <Content Include="UploadSRPLogFrame.aspx" />
@@ -1032,7 +1032,6 @@
     <Compile Include="faq.aspx.designer.cs">
       <DependentUpon>faq.aspx</DependentUpon>
     </Compile>
-    <Compile Include="GenerateChartReportPDF.cs" />
     <Compile Include="KeyFigures\AddKeyFigure.aspx.cs">
       <DependentUpon>AddKeyFigure.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1255,6 +1254,13 @@
       <DependentUpon>AddActivities.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\DownloadReport.aspx.cs">
+      <DependentUpon>DownloadReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\DownloadReport.aspx.designer.cs">
+      <DependentUpon>DownloadReport.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Reports\ORS3W.aspx.cs">
       <DependentUpon>ORS3W.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
