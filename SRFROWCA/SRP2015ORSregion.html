@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>2015 SRP Projects</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
+    <style>
+      html, body, #map {
+        height: 100%;
+        padding: 0;
+        margin: 0;
+      }
+      #layer_selector {
+        position: absolute;
+        top: 20px;
+        left: 50px;
+        padding: 0;
+      }
+      #layer_selector ul {
+        padding: 0; margin: 0;
+        list-style-type: none;
+      }
+      #layer_selector li {
+        border-bottom: 1px solid #999;
+        padding: 0px 10px;
+        font-family: "Helvetica", Arial;
+        font-size: 13px;
+        color: #444;
+        cursor: auto;
+      }
+      #layer_selector li:hover {
+        background-color: #F0F0F0;
+        cursor: pointer;
+      }
+      #layer_selector li.selected {
+        background-color: #EEE;
+      }
+
+
+    </style>
+ <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.11/themes/css/cartodb.css" />
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v2/themes/css/cartodb.css" />
+    <link rel="stylesheet" href="http://geosprocket.com/assets/bootstrap/css/bootstrap.css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <body>
+    <div id="map"></div>
+    <div id="layer_selector" class="cartodb_infobox btn-group">
+         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Output Indicator
+             <span class="caret"></span>
+         </a>
+         <ul class="dropdown-menu">
+     <li data="Education/Average number of school days per month in which one school meal or snack is provided [During the planning phase, education clusters should target 80% of total school days in the response]">Education/Average number of school days per month in which one school meal or snack is provided</li>
+<li data="Education/Number of pre-school, school aged children and youth; including children and youth with disabilities, enrolled in quality education through the education cluster/sectorial group’s emergency response (disaggregated by gender)">Education/Number of pre-school, school aged children and youth; including children and youth with disabilities, enrolled in quality education</li>
+<li data="Education/Number of school meals distributed">Education/Number of school meals distributed</li>
+<li data="Food Security/Number of  targeted persons that received unconditional transfers (food based)">Food Security/Number of  targeted persons that received unconditional transfers (food based)</li>
+<li data="Food Security/Number of targeted households that received agricultural support">Food Security/Number of targeted households that received agricultural support</li>
+<li data="Food Security/Number of targeted households that received support for their livestock">Food Security/Number of targeted households that received support for their livestock</li>
+<li data="Food Security/Number of targeted persons that received conditional transfers (cash, vouchers based)">Food Security/Number of targeted persons that received conditional transfers (cash, vouchers based)</li>
+<li data="Food Security/Number of targeted persons that received conditional transfers (food based)">Food Security/Number of targeted persons that received conditional transfers (food based)</li>
+<li data="Food Security/Number of targeted persons that received unconditional transfers (cash, vouchers based)">Food Security/Number of targeted persons that received unconditional transfers (cash, vouchers based)</li>
+<li data="Health/Number of births assisted by a skilled attendant in districts supported by cluster members">Health/Number of births assisted by a skilled attendant in districts supported by cluster members</li>
+<li data="Health/Number of complete monthly epidemiological reports received at central level">Health/Number of complete monthly epidemiological reports received at central level</li>
+<li data="Health/Number of outpatient consultations in districts supported by cluster members">Health/Number of outpatient consultations in districts supported by cluster members</li>
+<li data="Health/Number of under five children vaccinated against measles in districts supported by cluster members">Health/Number of under five children vaccinated against measles in districts supported by cluster members</li>
+<li data="Multi Sector for Refugees/Number of eligible persons registered">Multi Sector for Refugees/Number of eligible persons registered</li>
+<li data="Multi Sector for Refugees/Number of persons attaining a durable solution (return, local integration, or resettlement)">Multi Sector for Refugees/Number of persons attaining a durable solution (return, local integration, or resettlement)</li>
+<li data="Multi Sector for Refugees/Number of PoC with specific needs receiving support">Multi Sector for Refugees/Number of PoC with specific needs receiving support</li>
+<li data="Multi Sector for Refugees/Number of reported SGBV incidents for which survivors receive medical assistance">Multi Sector for Refugees/Number of reported SGBV incidents for which survivors receive medical assistance</li>
+<li data="Nutrition/Number of 6-23 month-old children and PLWs admitted in BSFP (Blanket Supplementary Feed Programmes)">Nutrition/Number of 6-23 month-old children and PLWs admitted in BSFP (Blanket Supplementary Feed Programmes)</li>
+<li data="Nutrition/Number of 6-59 month-old children with moderate acute malnutrition admitted in TSFP (Targeted Supplementary Feeding Programmes)">Nutrition/Number of 6-59 month-old children with moderate acute malnutrition admitted in TSFP (Targeted Supplementary Feeding Programmes)</li>
+<li data="Nutrition/Number of children 6-59 months with severe acute malnutrition admitted in therapeutic nutrition programmes">Nutrition/Number of children 6-59 months with severe acute malnutrition admitted in therapeutic nutrition programmes</li>
+<li data="Nutrition/Number of health centers implementing nutrition activities">Nutrition/Number of health centers implementing nutrition activities</li>
+<li data="Protection/Number of affected persons lacking personal identity/civil documents assisted">Protection/Number of affected persons lacking personal identity/civil documents assisted</li>
+<li data="Protection/Number of IDPs/affected population/returnees registered">Protection/Number of IDPs/affected population/returnees registered</li>
+<li data="Protection/Number of service providers providing psychosocial services to survivors of GBV">Protection/Number of service providers providing psychosocial services to survivors of GBV</li>
+<li data="Protection/Number of targeted communities with a functioning referral system for children at the community level">Protection/Number of targeted communities with a functioning referral system for children at the community level</li>
+<li data="Water Sanitation & Hygiene/Number of affected people provided with a WASH minimum package adapted to their vulnerabilities (safe drinking water, sanitation, hygiene supplies, key messages/behaviors counselling).">Water Sanitation & Hygiene/Number of affected people provided with a WASH minimum package adapted to their vulnerabilities.</li>
+<li data="Water Sanitation & Hygiene/Number of children admitted for SAM treatment having received a WASH kit with key hygiene messages/behaviors counselled to parents/care givers (household water treatment and hygiene supplies)">Water Sanitation & Hygiene/Number of children admitted for SAM treatment having received a WASH kit with key hygiene messages</li>
+<li data="Water Sanitation & Hygiene/Number of nutritional centers with a minimum WASH package (safe drinking water with chlorine residual, disinfecting hand washing soap and food utensils, hygienic defecation, key hygiene messages / behaviorus counseling).">Water Sanitation & Hygiene/Number of nutritional centers with a minimum WASH package.</li>
+
+	   </ul>
+
+    </div>
+
+
+
+	
+    <!-- include cartodb.js library -->
+    <script src="http://libs.cartocdn.com/cartodb.js/v3/3.11/cartodb.js"></script>
+    <script src="http://geosprocket.com/assets/bootstrap/js/bootstrap.min.js"></script>
+
+
+    <script>
+      // create layer selector
+      function createSelector(layer) {
+        var sql = new cartodb.SQL({ user: 'documentation' });
+        var $options = $('#layer_selector li');
+        $options.click(function(e) {
+          // get the area of the selected layer
+          var $li = $(e.target);
+          var area = $li.attr('data');
+          // deselect all and select the clicked one
+          $options.removeClass('selected');
+          $li.addClass('selected');
+          // create query based on data from the layer
+          var query = "select * from cartodbregionalind2";
+          if(area !== 'All') {
+            query = "SELECT * FROM cartodbregionalind2 where output_indicator = '" + area + "'";
+          }
+
+
+
+                    // change the query in the layer to update the map
+          layer.setSQL(query);
+        });
+      }
+      function main() {
+        cartodb.createVis('map', 'http://ocharowca.cartodb.com/api/v2/viz/8fa53c56-b29a-11e4-8d1c-0e4fddd5de28/viz.json', {
+          tiles_loader: true,
+          center_lat: 5,
+          center_lon: 3,
+          zoom: 4
+        })
+        .done(function(vis, layers) {
+          // layer 0 is the base layer, layer 1 is cartodb layer
+          var subLayer = layers[1].getSubLayer(0);
+          createSelector(subLayer);
+        })
+        .error(function(err) {
+          console.log(err);
+        });
+      }
+      window.onload = main;
+	  
+	  
+    </script>
+  </body>
+</html>
