@@ -83,10 +83,9 @@
 
         $(function () {
             $("#<%=txtFromDate.ClientID%>").datepicker({
-                dateFormat: "mm-dd-yy",
+                dateFormat: "mm/dd/yy",
                 defaultDate: Date.now(),
                 onSelect: function (selected) {
-                    //LoadData();
                 }
             });
         });
@@ -124,32 +123,31 @@
         </div>
         <table border="0" style="margin: 0 auto; width: 100%">
             <tr>
-                <td>As Of Date:</td>
+                <td>As Of Date:*</td>
                 <td colspan="5">
                     <asp:TextBox ID="txtFromDate" runat="server" Width="150px"></asp:TextBox>
-                    <%--<img src="../assets/orsimages/Calendar16.png" />--%>
+                    <label>(MM/dd/yyyy)</label>
                     <asp:RequiredFieldValidator ID="rfvDate" runat="server"
                         ControlToValidate="txtFromDate"
                         ErrorMessage="Required."
                         ForeColor="Red"></asp:RequiredFieldValidator>
-                    <asp:Button ID="btnClick" runat="server" OnClick="btnClick_Click" CssClass="hidden" CausesValidation="false" />
                 </td>
             </tr>
             <tr>
-                <td>Country:</td>
+                <td>Country:*</td>
                 <td>
                     <asp:DropDownList ID="ddlCountry" runat="server" Width="150px" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" AutoPostBack="true" onchange="needToConfirm = false;">
                     </asp:DropDownList>
                     <asp:RequiredFieldValidator ID="rfvCountry" runat="server" ErrorMessage="Required" Display="Dynamic"
                         CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCountry"></asp:RequiredFieldValidator></td>
-                <td align="right">Category:</td>
+                <td align="right">Category:*</td>
                 <td>
                     <asp:DropDownList ID="ddlCategory" runat="server" Width="250px" OnSelectedIndexChanged="ddlCategory_SelectedIndexChanged" AutoPostBack="true" onchange="needToConfirm = false;">
                     </asp:DropDownList>
                     <asp:RequiredFieldValidator ID="rfvCluster" runat="server" ErrorMessage="Required" Display="Dynamic"
                         CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCategory"></asp:RequiredFieldValidator>
                 </td>
-                <td align="right">Sub Category:</td>
+                <td align="right">Sub Category:*</td>
                 <td>
                     <asp:DropDownList ID="ddlSubCategory" runat="server" Width="250px" OnSelectedIndexChanged="ddlSubCategory_SelectedIndexChanged" AutoPostBack="true" onchange="needToConfirm = false;">
                     </asp:DropDownList>
@@ -179,7 +177,8 @@
             <HeaderTemplate>
                 <table id="tblKeyFigure" style="margin: 0 auto; width: 100%;" border="1" runat="server">
                     <tr>
-                        <th style="width: 35%;" class="graycolor"></th>
+                        <th style="width: 20%;" class="graycolor"></th>
+                        <th style="width: 15%;" class="graycolor"></th>
                         <th class="graycolor" id="thFromLocTop" runat="server"></th>
                         <th style="width: 15%;" class="graycolor"></th>
                         <th class="tdTop" colspan="3">Total</th>
@@ -187,7 +186,8 @@
                         <th class="tdTop" colspan="3">Targated</th>
                     </tr>
                     <tr>
-                        <th style="width: 35%;" class="lightgraycolor">Key Figure</th>
+                        <th style="width: 20%;" class="lightgraycolor">Key Figure</th>
+                        <th style="width: 15%;" class="lightgraycolor">Source</th>
                         <th class="lightgraycolor" id="thFromLoc" runat="server">From Location</th>
                         <th style="width: 15%;" class="lightgraycolor">Location</th>
                         <th class="tdHeader">Total</th>
@@ -205,10 +205,13 @@
             <ItemTemplate>
                 <table style="margin: 0 auto; width: 100%;" border="1" class="tblMain">
                     <tr>
-                        <td style="width: 35%;">
+                        <td style="width: 20%;">
                             <asp:Label ID="lblKeyFigureIndicator" runat="server" Width="98%" Text='<%# Eval("KeyFigureIndicator")%>'></asp:Label>
                             <asp:HiddenField ID="hfKeyFigureIndicatorId" runat="server" Value='<%# Eval("KeyFigureIndicatorId")%>' />
                             <asp:HiddenField ID="hfKeyFigureReportId" runat="server" Value='<%# Eval("KeyFigureReportId")%>' />
+                        </td>
+                        <td style="width: 15%;">
+                            <asp:TextBox ID="txtKFSouce" CssClass="itemWidth" runat="server" Text='<%# Eval("KeyFigureSource")%>'></asp:TextBox>
                         </td>
                         <td id="tdFromLocTop" runat="server">
                             <asp:TextBox ID="txtFromLocation" runat="server" CssClass="itemWidth" MaxLength="50" Text='<%# Eval("FromLocation")%>'></asp:TextBox>
@@ -216,7 +219,7 @@
                         <td style="width: 15%; text-align: left;">
                             <asp:Label ID="lblCountry" runat="server" Width="98%" Text='<%# Eval("CountryName")%>'></asp:Label>
                             <asp:HiddenField ID="hfLocationId" runat="server" Value='<%# Eval("LocationId")%>' />
-                            <span class="showDetails1" style="font-size:smaller; color:blue;cursor: pointer;">Show Admin1</span>
+                            <span class="showDetails1" style="font-size: smaller; color: blue; cursor: pointer;">Show Admin1</span>
                             <%--<input type="button" id="Admin1" class="showDetails1" title="btn" value="Admin1" name="Admin1" runat="server"/>--%>
                         </td>
                         <td class="tdTable">
@@ -255,6 +258,9 @@
                                 <ItemTemplate>
                                     <table style="margin: 0 auto; width: 100%;" border="1" class="sample">
                                         <tr>
+                                            <td style="width: 15%;">
+                                                <asp:TextBox ID="txtKFSouce" CssClass="itemWidth" runat="server" Text='<%# Eval("KeyFigureSource")%>'></asp:TextBox>
+                                            </td>
                                             <td class="tdTable" id="tdFromLoc" runat="server">
                                                 <asp:TextBox ID="txtFromLocation" runat="server" CssClass="itemWidth" MaxLength="50" Text='<%# Eval("FromLocation")%>'></asp:TextBox>
                                             </td>

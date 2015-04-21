@@ -49,7 +49,6 @@ namespace SRFROWCA.Reports
             var result = DateTime.Now.ToString("MMMM", new CultureInfo(RC.SiteCulture));
             result = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(result);
             int monthNumber = MonthNumber.GetMonthNumber(result);
-            //monthNumber = monthNumber == 1 ? monthNumber : monthNumber;
             ddlMonth.SelectedIndex = i > -1 ? i : ddlMonth.Items.IndexOf(ddlMonth.Items.FindByValue(monthNumber.ToString()));
         }
 

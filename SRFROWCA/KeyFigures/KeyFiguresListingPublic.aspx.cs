@@ -137,7 +137,7 @@ namespace SRFROWCA.KeyFigures
             LoadKeyFigures();
         }
 
-        protected void btnExportToExcel_ServerClick(object sender, EventArgs e) 
+        protected void btnExportToExcel_ServerClick(object sender, EventArgs e)
         {
             GridView gvExport = new GridView();
             DataTable dt = GetKeyFigures();
@@ -205,6 +205,55 @@ namespace SRFROWCA.KeyFigures
                 {
                     lbl.Text = String.Format(new CultureInfo(siteCulture), "{0:0,0}", Convert.ToInt32(lbl.Text));
                 }
+        }
+
+        protected void gvKeyFigures_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvKeyFigures.PageIndex = e.NewPageIndex;
+            gvKeyFigures.SelectedIndex = -1;
+            LoadKeyFigures();
+        }
+
+        protected void gvKeyFigures_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            //Retrieve the table from the session object.
+            DataTable dt = GetKeyFigures();
+            if (dt != null)
+            {
+                dt.DefaultView.Sort = e.SortExpression + " " + GetSortDirection(e.SortExpression);
+                gvKeyFigures.DataSource = dt;
+                gvKeyFigures.DataBind();
+            }
+        }
+
+        private string GetSortDirection(string column)
+        {
+
+            // By default, set the sort direction to ascending.
+            string sortDirection = "ASC";
+
+            // Retrieve the last column that was sorted.
+            string sortExpression = ViewState["SortExpression"] as string;
+
+            if (sortExpression != null)
+            {
+                // Check if the same column is being sorted.
+                // Otherwise, the default value can be returned.
+                if (sortExpression == column)
+                {
+                    string lastDirection = ViewState["SortDirection"] as string;
+                    if ((lastDirection != null) && (lastDirection == "ASC"))
+                    {
+                        sortDirection = "DESC";
+                    }
+                }
+            }
+
+            // Save new values in ViewState.
+            ViewState["SortDirection"] = sortDirection;
+            ViewState["SortExpression"] = column;
+
+            return sortDirection;
         }
     }
 }

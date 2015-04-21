@@ -137,6 +137,7 @@
     <Content Include="Account\UserProfile.aspx" />
     <Content Include="Admin\RequestedOrgListing.aspx" />
     <Content Include="Anonymous\OutputIndicatorReport.aspx" />
+    <Content Include="Anonymous\ProjectsListingPublic.aspx" />
     <Content Include="assets\orsimages\Calendar16.png" />
     <Content Include="assets\orsimages\delete16.png" />
     <Content Include="assets\orsimages\duplicate.png" />
@@ -160,10 +161,9 @@
     <Content Include="Admin\Location\LocationsList.aspx" />
     <Content Include="Admin\Organization\AddEditOrganization.aspx" />
     <Content Include="Admin\Organization\OrganizationList.aspx" />
-    <Content Include="Admin\ProgressSummary.aspx" />
-    <Content Include="Admin\ProjectXMLFeeds.aspx" />
+    <Content Include="ClusterLead\ProgressSummary.aspx" />
+    <Content Include="ClusterLead\ProjectXMLFeeds.aspx" />
     <Content Include="Anonymous\AllDataPublic.aspx" />
-    <Content Include="App_Readme\Elmah.txt" />
     <Content Include="assets\css\ace-fonts.css" />
     <Content Include="assets\css\ace-rtl.min.css" />
     <Content Include="assets\css\ace-skins.min.css" />
@@ -608,6 +608,13 @@
     <Compile Include="Anonymous\OutputIndicatorReport.aspx.designer.cs">
       <DependentUpon>OutputIndicatorReport.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Anonymous\ProjectsListingPublic.aspx.cs">
+      <DependentUpon>ProjectsListingPublic.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Anonymous\ProjectsListingPublic.aspx.designer.cs">
+      <DependentUpon>ProjectsListingPublic.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ClusterLead\AddActivityAndIndicators.aspx.cs">
       <DependentUpon>AddActivityAndIndicators.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -706,18 +713,18 @@
     <Compile Include="Admin\Organization\OrganizationList.aspx.designer.cs">
       <DependentUpon>OrganizationList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\ProgressSummary.aspx.cs">
+    <Compile Include="ClusterLead\ProgressSummary.aspx.cs">
       <DependentUpon>ProgressSummary.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\ProgressSummary.aspx.designer.cs">
+    <Compile Include="ClusterLead\ProgressSummary.aspx.designer.cs">
       <DependentUpon>ProgressSummary.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\ProjectXMLFeeds.aspx.cs">
+    <Compile Include="ClusterLead\ProjectXMLFeeds.aspx.cs">
       <DependentUpon>ProjectXMLFeeds.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\ProjectXMLFeeds.aspx.designer.cs">
+    <Compile Include="ClusterLead\ProjectXMLFeeds.aspx.designer.cs">
       <DependentUpon>ProjectXMLFeeds.aspx</DependentUpon>
     </Compile>
     <Compile Include="Anonymous\3W.ashx.cs">
@@ -1295,6 +1302,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="App_Readme\" />
     <Folder Include="OPS\OPSProjects\" />
   </ItemGroup>
   <ItemGroup>

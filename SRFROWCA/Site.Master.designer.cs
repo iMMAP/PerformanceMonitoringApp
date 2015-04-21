@@ -211,13 +211,13 @@ namespace SRFROWCA {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liProjects;
         
         /// <summary>
-        /// A5 control.
+        /// menuProjects control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor A5;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuProjects;
         
         /// <summary>
         /// localMainProjects control.
@@ -229,58 +229,31 @@ namespace SRFROWCA {
         protected global::System.Web.UI.WebControls.Localize localMainProjects;
         
         /// <summary>
-        /// liCLprojectsListing control.
+        /// liProjectsPublic control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCLprojectsListing;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liProjectsPublic;
         
         /// <summary>
-        /// menueCLProjectsListing control.
+        /// menuProjectsPublic control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menueCLProjectsListing;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuProjectsPublic;
         
         /// <summary>
-        /// localCLProjectListing control.
+        /// Localize2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localCLProjectListing;
-        
-        /// <summary>
-        /// liManageProject control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liManageProject;
-        
-        /// <summary>
-        /// menuManageProjects control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuManageProjects;
-        
-        /// <summary>
-        /// localManageProjects control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localManageProjects;
+        protected global::System.Web.UI.WebControls.Localize Localize2;
         
         /// <summary>
         /// liDataEntry control.
@@ -1100,6 +1073,15 @@ namespace SRFROWCA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Localize localProgressSummary;
+        
+        /// <summary>
+        /// liContactList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liContactList;
         
         /// <summary>
         /// localReportsSumRepContactList control.

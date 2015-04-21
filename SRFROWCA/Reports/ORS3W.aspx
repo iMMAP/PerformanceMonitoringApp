@@ -157,6 +157,8 @@
                         <asp:BoundField DataField="Organization" HeaderText="Organization" ItemStyle-Width="15%"></asp:BoundField>
                         <asp:BoundField DataField="PartnerOrganization" HeaderText="Partner" ItemStyle-Width="15%"></asp:BoundField>
                         <asp:BoundField DataField="Country" HeaderText="Country" ItemStyle-Width="10%" />
+                        <asp:BoundField DataField="PrimaryCluster" HeaderText="PrimaryCluster" ItemStyle-Width="10%" />
+                        <asp:BoundField DataField="SubCluster" HeaderText="Sub-Set Cluster" ItemStyle-Width="10%" />
                         <asp:BoundField DataField="Admin1" HeaderText="Admin1" ItemStyle-Width="10%" />
                         <asp:BoundField DataField="Activity" HeaderText="Activity" ItemStyle-Width="55%" />
                         <asp:BoundField DataField="Status" HeaderText="Status" ItemStyle-Width="10%" />

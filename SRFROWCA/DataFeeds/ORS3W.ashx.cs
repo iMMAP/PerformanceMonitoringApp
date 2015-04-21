@@ -13,12 +13,10 @@ namespace SRFROWCA.DataFeeds
     /// </summary>
     public class ORS3W : IHttpHandler
     {
-
         public void ProcessRequest(HttpContext context)
         {
             DataSet ds = new DataSet();
-            object[] param = GetReportParam(context);
-            DataTable dt = DBContext.GetData("GetORS3WDataFeed", param);
+            DataTable dt = GetData(context);            
 
             string format = "xml";
             if (!string.IsNullOrEmpty(context.Request["format"]))
@@ -35,11 +33,43 @@ namespace SRFROWCA.DataFeeds
             else
             {
                 context.Response.ContentType = "text/xml";
-                ds = dt.DataSet;
+                dt.TableName = "Indicators";
+                ds.Tables.Add(dt);
                 ds.DataSetName = "Indicators";
-                ds.Tables[0].TableName = "Indicator";
                 context.Response.Write(GetReportData(ds));
             }
+        }
+
+        private DataTable GetData(HttpContext context)
+        {
+            DataTable dt = new DataTable();
+            int val = 0;
+            if (context.Request["month"] != null)
+            {
+                int.TryParse(context.Request["month"].ToString(), out val);
+            }
+            int? monthId = val > 0 ? val : (int?)null;
+
+            if (monthId > 0)
+            {
+                object[] param = GetReportParam(context, monthId);
+                DataTable dt3W = DBContext.GetData("GetORS3WDataFeed", param);
+                dt.Merge(dt3W);
+                return dt;
+            }
+            else
+            {
+                int currentMonth = DateTime.Now.Month;
+                currentMonth = currentMonth > 1 ? currentMonth - 1 : currentMonth;
+                for (int monthNumber = 1; monthNumber <= currentMonth; monthNumber++)
+                {
+                    object[] param = GetReportParam(context, monthNumber);
+                    DataTable dt3W = DBContext.GetData("GetORS3WDataFeed", param);
+                    dt.Merge(dt3W);
+                }
+            }
+
+            return dt;
         }
 
         private string GetReportData(DataSet ds)
@@ -51,7 +81,7 @@ namespace SRFROWCA.DataFeeds
             }
         }
 
-        private object[] GetReportParam(HttpContext context)
+        private object[] GetReportParam(HttpContext context, int? monthId)
         {
             int val = 0;
 
@@ -86,13 +116,6 @@ namespace SRFROWCA.DataFeeds
                 int.TryParse(context.Request["cluster"].ToString(), out val);
             }
             int? clusterId = val > 0 ? val : (int?)null;
-
-            val = 0;
-            if (context.Request["month"] != null)
-            {
-                int.TryParse(context.Request["month"].ToString(), out val);
-            }
-            int? monthId = val > 0 ? val : (int?)null;
 
             val = 0;
 

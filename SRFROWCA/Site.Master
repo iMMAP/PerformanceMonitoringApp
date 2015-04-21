@@ -150,20 +150,15 @@
                         </li>
 
 
-                        <li id="liProjects" runat="server"><a id="A5" runat="server" href="#"
-                            class="dropdown-toggle"><i class="icon-list-alt"></i><span class="menu-text">
+                        <li id="liProjects" runat="server"><a href="~/ClusterLead/ProjectsListing.aspx"
+                                    id="menuProjects" runat="server"><i class="icon-list-alt"></i><span class="menu-text">
                                 <asp:Localize ID="localMainProjects" runat="server" Text="Projects" meta:resourcekey="localCLProjectListingMainResource1"></asp:Localize>
-                            </span><b class="arrow icon-angle-down"></b></a>
-                            <ul class="submenu">
-
-                                <li id="liCLprojectsListing" runat="server"><a href="~/ClusterLead/ProjectsListing.aspx"
-                                    id="menueCLProjectsListing" runat="server"><i class="icon-list-alt"></i><span class="menu-text">
-                                        <asp:Localize ID="localCLProjectListing" runat="server" Text="Projects Listing" meta:resourcekey="localCLProjectListingResource1"></asp:Localize></span> </a></li>
-                                <li id="liManageProject" runat="server"><a href="~/Pages/CreateProject.aspx" id="menuManageProjects"
-                                    runat="server"><i class="icon-list-alt"></i><span class="menu-text">
-                                        <asp:Localize ID="localManageProjects" runat="server" Text="Manage Projects" meta:resourcekey="localManageProjectsResource1"></asp:Localize></span>
-                                </a></li>
-                            </ul>
+                            </span></a>
+                        </li>
+                        <li id="liProjectsPublic" runat="server"><a href="~/Anonymous/ProjectsListingPublic.aspx"
+                                    id="menuProjectsPublic" runat="server"><i class="icon-list-alt"></i><span class="menu-text">
+                                <asp:Localize ID="Localize2" runat="server" Text="Projects" meta:resourcekey="localCLProjectListingMainResource1"></asp:Localize>
+                            </span></a>
                         </li>
 
                         <li id="liDataEntry" runat="server"><a href="~/Pages/AddActivities.aspx" id="menuDataEntry"
@@ -317,11 +312,11 @@
                             runat="server"><i class="icon-list-alt"></i><span class="menu-text">
                                 <asp:Localize ID="localImportDataUser" runat="server" Text="Import Data" meta:resourcekey="localImportDataUserResource1"></asp:Localize></span>
                         </a></li>
-                        <li id="liProgressSummary" runat="server"><a href='<%=BaseURL%>/Admin/ProgressSummary.aspx'
+                        <li id="liProgressSummary" runat="server"><a href='<%=BaseURL%>/ClusterLead/ProgressSummary.aspx'
                             id="menuProjectSummary"><i class="icon-table"></i><span class="menu-text">
                                 <asp:Localize ID="localProgressSummary" runat="server" Text="Progress Summary" meta:resourcekey="localProgressSummary"></asp:Localize></span>
                         </a></li>
-                        <li><a href="<%=BaseURL %>/OperationalPresence.aspx">
+                        <li id="liContactList" runat="server"><a href="<%=BaseURL %>/OperationalPresence.aspx">
                             <i class="icon-group"></i><span class="menu-text">
                                 <asp:Localize ID="localReportsSumRepContactList" runat="server" Text="Contact List" meta:resourcekey="localReportsSumRepContactListResource1"></asp:Localize>
                             </span></a></li>

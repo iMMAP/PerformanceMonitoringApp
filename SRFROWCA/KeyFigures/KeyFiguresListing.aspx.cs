@@ -20,7 +20,9 @@ namespace SRFROWCA.KeyFigures
                 LoadCountry();
                 DisableDropDowns();
                 LoadCategories();
+                SetFiltersFromSession();
                 LoadKeyFigures();
+                CliearFilterSession();
             }
         }
 
@@ -137,7 +139,7 @@ namespace SRFROWCA.KeyFigures
             LoadKeyFigures();
         }
 
-        protected void btnExportToExcel_ServerClick(object sender, EventArgs e) 
+        protected void btnExportToExcel_ServerClick(object sender, EventArgs e)
         {
             GridView gvExport = new GridView();
             DataTable dt = GetKeyFigures();
@@ -151,7 +153,83 @@ namespace SRFROWCA.KeyFigures
 
         protected void btnNew_ServerClick(object sender, EventArgs e)
         {
+            SaveFiltersInSession();
             Response.Redirect("AddKeyFigure.aspx");
+        }
+
+        private void SaveFiltersInSession()
+        {
+            int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
+            int category = RC.GetSelectedIntVal(ddlCategory);
+            int subCategory = RC.GetSelectedIntVal(ddlSubCategory);
+
+            if (emgLocationId > 0)
+                Session["KeyFigureFilterCountry"] = emgLocationId;
+            else
+                Session["KeyFigureFilterCountry"] = null;
+
+            if (category > 0)
+                Session["KeyFigureFilterCategory"] = category;
+            else
+                Session["KeyFigureFilterCategory"] = null;
+
+            if (subCategory > 0)
+                Session["KeyFigureFilterSubCategory"] = subCategory;
+            else
+                Session["KeyFigureFilterSubCategory"] = null;
+        }
+
+        private void SetFiltersFromSession()
+        {
+            if (Session["KeyFigureFilterCountry"] != null)
+            {
+                int emgLocationId = 0;
+                int.TryParse(Session["KeyFigureFilterCountry"].ToString(), out emgLocationId);
+                if (emgLocationId > 0)
+                {
+                    try
+                    {
+                        ddlCountry.SelectedValue = emgLocationId.ToString();
+                    }
+                    catch { }
+                }
+            }
+
+            if (Session["KeyFigureFilterCategory"] != null)
+            {
+                int catId = 0;
+                int.TryParse(Session["KeyFigureFilterCategory"].ToString(), out catId);
+                if (catId > 0)
+                {
+                    try
+                    {
+                        ddlCategory.SelectedValue = catId.ToString();
+                        LoadSubCategories(catId);
+                    }
+                    catch { }
+                }
+            }
+
+            if (Session["KeyFigureFilterSubCategory"] != null)
+            {
+                int subCatId = 0;
+                int.TryParse(Session["KeyFigureFilterSubCategory"].ToString(), out subCatId);
+                if (subCatId > 0)
+                {
+                    try
+                    {
+                        ddlSubCategory.SelectedValue = subCatId.ToString();
+                    }
+                    catch { }
+                }
+            }
+        }
+
+        private void CliearFilterSession()
+        {
+            Session["KeyFigureFilterCountry"] = null;
+            Session["KeyFigureFilterCategory"] = null;
+            Session["KeyFigureFilterSubCategory"] = null;
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -170,6 +248,7 @@ namespace SRFROWCA.KeyFigures
             ddlCategory.SelectedIndex = 0;
             ddlSubCategory.SelectedIndex = 0;
 
+            CliearFilterSession();
             LoadKeyFigures();
         }
 
@@ -213,10 +292,11 @@ namespace SRFROWCA.KeyFigures
             {
                 int rowIndex = 0;
                 int.TryParse(e.CommandArgument.ToString(), out rowIndex);
-                string date = gvKeyFigures.DataKeys[rowIndex].Values["AsOfDate"].ToString();
+                string date = gvKeyFigures.DataKeys[rowIndex].Values["AsOfDate2"].ToString();
                 string emgLocId = gvKeyFigures.DataKeys[rowIndex].Values["EmergencyLocationId"].ToString();
                 string catId = gvKeyFigures.DataKeys[rowIndex].Values["CategoryId"].ToString();
                 string subCatId = gvKeyFigures.DataKeys[rowIndex].Values["SubCategoryId"].ToString();
+                SaveFiltersInSession();
                 Response.Redirect(string.Format("AddKeyFigure.aspx?d={0}&l={1}&c={2}&s={3}", date, emgLocId, catId, subCatId));
             }
 
@@ -224,10 +304,11 @@ namespace SRFROWCA.KeyFigures
             {
                 int rowIndex = 0;
                 int.TryParse(e.CommandArgument.ToString(), out rowIndex);
-                string date = gvKeyFigures.DataKeys[rowIndex].Values["AsOfDate"].ToString();
+                string date = gvKeyFigures.DataKeys[rowIndex].Values["AsOfDate2"].ToString();
                 string emgLocId = gvKeyFigures.DataKeys[rowIndex].Values["EmergencyLocationId"].ToString();
                 string catId = gvKeyFigures.DataKeys[rowIndex].Values["CategoryId"].ToString();
                 string subCatId = gvKeyFigures.DataKeys[rowIndex].Values["SubCategoryId"].ToString();
+                SaveFiltersInSession();
                 Response.Redirect(string.Format("AddKeyFigure.aspx?u=1&d={0}&l={1}&c={2}&s={3}", date, emgLocId, catId, subCatId));
             }
 
@@ -241,6 +322,55 @@ namespace SRFROWCA.KeyFigures
                     LoadKeyFigures();
                 }
             }
+        }
+
+        protected void gvKeyFigures_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvKeyFigures.PageIndex = e.NewPageIndex;
+            gvKeyFigures.SelectedIndex = -1;
+            LoadKeyFigures();
+        }
+
+        protected void gvKeyFigures_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            //Retrieve the table from the session object.
+            DataTable dt = GetKeyFigures();
+            if (dt != null)
+            {
+                dt.DefaultView.Sort = e.SortExpression + " " + GetSortDirection(e.SortExpression);
+                gvKeyFigures.DataSource = dt;
+                gvKeyFigures.DataBind();
+            }
+        }
+
+        private string GetSortDirection(string column)
+        {
+
+            // By default, set the sort direction to ascending.
+            string sortDirection = "ASC";
+
+            // Retrieve the last column that was sorted.
+            string sortExpression = ViewState["SortExpression"] as string;
+
+            if (sortExpression != null)
+            {
+                // Check if the same column is being sorted.
+                // Otherwise, the default value can be returned.
+                if (sortExpression == column)
+                {
+                    string lastDirection = ViewState["SortDirection"] as string;
+                    if ((lastDirection != null) && (lastDirection == "ASC"))
+                    {
+                        sortDirection = "DESC";
+                    }
+                }
+            }
+
+            // Save new values in ViewState.
+            ViewState["SortDirection"] = sortDirection;
+            ViewState["SortExpression"] = column;
+
+            return sortDirection;
         }
     }
 }

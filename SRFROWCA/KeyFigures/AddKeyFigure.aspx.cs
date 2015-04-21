@@ -1,11 +1,9 @@
 ﻿using BusinessLogic;
 using SRFROWCA.Common;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Web;
+using System.Globalization;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
@@ -18,16 +16,73 @@ namespace SRFROWCA.KeyFigures
         {
             if (!IsPostBack)
             {
+                if (!this.User.Identity.IsAuthenticated || RC.IsDataEntryUser(this.User))
+                {
+                    Response.Redirect("~/Default.aspx");
+                }
                 IsPopulation = 0;
                 LoadCountry();
                 DisableDropDowns();
-                LoadCategories();
-                //txtFromDate.Attributes.Add("readonly", "readonly");
+                LoadCategories();                
                 txtFromDate.BackColor = ColorTranslator.FromHtml("#FFE6E6");
+                if (Request.QueryString["d"] == null && Request.QueryString["u"] == null)
+                {
+                    SetFiltersFromSession();
+                }
 
                 if (Request.QueryString["d"] != null)
                 {
                     LoadReportData();
+                }
+                else
+                {
+                    LoadData();
+                }
+            }
+        }
+
+        private void SetFiltersFromSession()
+        {
+            if (Session["KeyFigureFilterCountry"] != null)
+            {
+                int emgLocationId = 0;
+                int.TryParse(Session["KeyFigureFilterCountry"].ToString(), out emgLocationId);
+                if (emgLocationId > 0)
+                {
+                    try
+                    {
+                        ddlCountry.SelectedValue = emgLocationId.ToString();
+                    }
+                    catch { }
+                }
+            }
+
+            if (Session["KeyFigureFilterCategory"] != null)
+            {
+                int catId = 0;
+                int.TryParse(Session["KeyFigureFilterCategory"].ToString(), out catId);
+                if (catId > 0)
+                {
+                    try
+                    {
+                        ddlCategory.SelectedValue = catId.ToString();
+                        LoadSubCategories(catId);
+                    }
+                    catch { }
+                }
+            }
+
+            if (Session["KeyFigureFilterSubCategory"] != null)
+            {
+                int subCatId = 0;
+                int.TryParse(Session["KeyFigureFilterSubCategory"].ToString(), out subCatId);
+                if (subCatId > 0)
+                {
+                    try
+                    {
+                        ddlSubCategory.SelectedValue = subCatId.ToString();
+                    }
+                    catch { }
                 }
             }
         }
@@ -37,7 +92,7 @@ namespace SRFROWCA.KeyFigures
             DateTime date = DateTime.MinValue;
             if (Request.QueryString["d"] != null)
             {
-                DateTime.TryParse(Request.QueryString["d"].ToString(), out date);
+                date = DateTime.ParseExact(Request.QueryString["d"].ToString(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
             }
 
             int emgLocId = 0;
@@ -64,7 +119,7 @@ namespace SRFROWCA.KeyFigures
 
             if (date != DateTime.MinValue && emgLocId > 0 && catId > 0 && subCatId > 0)
             {
-                txtFromDate.Text = date.ToShortDateString();
+                txtFromDate.Text = date.ToString("MM/dd/yyyy");
                 ddlCountry.SelectedValue = emgLocId.ToString();
                 ddlCategory.SelectedValue = catId.ToString();
                 ddlSubCategory.SelectedValue = subCatId.ToString();
@@ -100,7 +155,6 @@ namespace SRFROWCA.KeyFigures
                     IsPopulation = 0;
                 }
             }
-
         }
 
         internal override void BindGridData()
@@ -185,7 +239,7 @@ namespace SRFROWCA.KeyFigures
             DateTime date = DateTime.MinValue;
             if (!string.IsNullOrEmpty(txtFromDate.Text.Trim()))
             {
-                DateTime.TryParse(txtFromDate.Text.Trim(), out date);
+                date = DateTime.ParseExact(txtFromDate.Text.Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
                 if (Request.QueryString["u"] != null)
                 {
                     txtFromDate.Text = "";
@@ -203,7 +257,6 @@ namespace SRFROWCA.KeyFigures
         {
             if (SaveKeyFigures())
                 Response.Redirect("KeyFiguresListing.aspx");
-                //ShowMessage("Saved Successfully!", RC.NotificationType.Success, true, 2000);
         }
 
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
@@ -214,33 +267,123 @@ namespace SRFROWCA.KeyFigures
         private bool SaveKeyFigures()
         {
             bool returnVal = true;
-            DateTime date = Convert.ToDateTime(txtFromDate.Text);
+            DateTime date = txtFromDate.Text.Trim().Length > 0 ?
+                                DateTime.ParseExact(txtFromDate.Text.Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture) :
+                                DateTime.MinValue;
+
             int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
             int kfSubCategoryId = RC.GetSelectedIntVal(ddlSubCategory);
-            if (!IsExistsInCaseOfDuplicate(date, emgLocationId, kfSubCategoryId))
+            if (!IsSourceProvided())
             {
-                foreach (RepeaterItem item in rptKeyFigure.Items)
-                {
-                    if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
-                    {
-                        int kfIndicatorId = GetValueFromHiddenField(item, "hfKeyFigureIndicatorId");
-                        int kfReportId = GetValueFromHiddenField(item, "hfKeyFigureReportId");
-
-                        if (kfReportId > 0 && IsDuplicate == 0)
-                        {
-                            DeleteKeyFigure(kfReportId);
-                        }
-
-                        SaveKeyFigure(item, date, emgLocationId, kfSubCategoryId, kfIndicatorId);
-                        SaveAdmin1Values(item, date, emgLocationId, kfSubCategoryId, kfIndicatorId);
-                    }
-                }
-                LoadData();
+                ShowMessage("Error Saving! Please provide source of the reported Key Figure(s).", RC.NotificationType.Error, true, 3000);
+                returnVal = false;
             }
             else
             {
-                ShowMessage("The data is already exists for this date and key figures.", RC.NotificationType.Error, true, 2000);
-                returnVal = false;
+                if (!IsExistsInCaseOfDuplicate(date, emgLocationId, kfSubCategoryId))
+                {
+                    foreach (RepeaterItem item in rptKeyFigure.Items)
+                    {
+                        if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
+                        {
+                            int kfIndicatorId = GetValueFromHiddenField(item, "hfKeyFigureIndicatorId");
+                            int kfReportId = GetValueFromHiddenField(item, "hfKeyFigureReportId");
+
+                            if (kfReportId > 0 && IsDuplicate == 0)
+                            {
+                                DeleteKeyFigure(kfReportId);
+                            }
+
+                            SaveKeyFigure(item, date, emgLocationId, kfSubCategoryId, kfIndicatorId);
+                            SaveAdmin1Values(item, date, emgLocationId, kfSubCategoryId, kfIndicatorId);
+                        }
+                    }
+                    LoadData();
+                }
+                else
+                {
+                    ShowMessage("The data is already exists for this date and key figures.", RC.NotificationType.Error, true, 2000);
+                    returnVal = false;
+                }
+            }
+
+            return returnVal;
+        }
+
+        private bool IsSourceProvided()
+        {
+            bool returnVal = true;
+            foreach (RepeaterItem item in rptKeyFigure.Items)
+            {
+                if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
+                {
+                    returnVal = KeyFigureSource(item);
+                    if (returnVal)
+                    {
+                        returnVal = IsAdmin1SourceProvided(item);
+                        if (!returnVal)
+                            break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+
+            return returnVal;
+        }
+
+        private bool IsAdmin1SourceProvided(RepeaterItem parentRepeater)
+        {
+            bool returnVal = true;
+            Repeater rptAdmin1 = parentRepeater.FindControl("rptAdmin1") as Repeater;
+            if (rptAdmin1 != null)
+            {
+                foreach (RepeaterItem item in rptAdmin1.Items)
+                {
+                    if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
+                    {
+                        returnVal = KeyFigureSource(item);
+                        if (!returnVal) 
+                            break;
+                    }
+                }
+            }
+
+            return returnVal;
+        }
+
+        private bool KeyFigureSource(RepeaterItem item)
+        {
+            bool returnVal = true;
+            int? totalTotal = KeyFigureReported(item, "txtTotalTotal");
+            int? totalMen = KeyFigureReported(item, "txtTotalMen");
+            int? totalWomen = KeyFigureReported(item, "txtTotalWomen");
+            int? needTotal = KeyFigureReported(item, "txtNeedTotal");
+            int? needMen = KeyFigureReported(item, "txtNeedMen");
+            int? needWomen = KeyFigureReported(item, "txtNeedWomen");
+            int? targatedTotal = KeyFigureReported(item, "txtTargetedTotal");
+            int? targatedMen = KeyFigureReported(item, "txtTargetedMen");
+            int? targatedWomen = KeyFigureReported(item, "txtTargetedWomen");
+
+            string kfSource = null;
+            TextBox txtKfSource = item.FindControl("txtKFSouce") as TextBox;
+            if (txtKfSource != null)
+            {
+                if (!string.IsNullOrEmpty(txtKfSource.Text.Trim()))
+                    kfSource = txtKfSource.Text.Trim();
+            }
+
+            bool valueProvied = (totalTotal != null || totalMen != null || totalWomen != null ||
+                                 needTotal != null || needMen != null || needWomen != null ||
+                                 targatedTotal != null || targatedMen != null || targatedWomen != null);
+            if (valueProvied)
+            {
+                if (string.IsNullOrEmpty(txtKfSource.Text.Trim()))
+                {
+                    returnVal = false;
+                }
             }
 
             return returnVal;
@@ -248,9 +391,9 @@ namespace SRFROWCA.KeyFigures
 
         private bool IsExistsInCaseOfDuplicate(DateTime date, int emgLocationId, int kfSubCategoryId)
         {
-            //if (Request.QueryString["u"] != null)
+            if (IsDuplicate == 1)
                 return (DBContext.GetData("IsKeyFiguresExistsInReports", new object[] { date, emgLocationId, kfSubCategoryId }).Rows.Count > 0);
-            //return false;
+            return false;
         }
 
         private void DeleteKeyFigure(int kfReportId)
@@ -339,6 +482,16 @@ namespace SRFROWCA.KeyFigures
                 fromLocation = txt.Text.Trim();
             }
 
+            string kfSource = null;
+            TextBox txtKfSource = item.FindControl("txtKFSouce") as TextBox;
+            if (txtKfSource != null)
+            {
+                if (!string.IsNullOrEmpty(txtKfSource.Text.Trim()))
+                {
+                    kfSource = txtKfSource.Text.Trim();
+                }
+            }
+
 
             bool valueProvied = (totalTotal != null || totalMen != null || totalWomen != null ||
                                  needTotal != null || needMen != null || needWomen != null ||
@@ -350,7 +503,7 @@ namespace SRFROWCA.KeyFigures
                                                                             totalTotal, totalMen, totalWomen,
                                                                             needTotal, needMen, needWomen,
                                                                             targatedTotal, targatedMen, targatedWomen,
-                                                                            fromLocation, RC.GetCurrentUserId, DBNull.Value});
+                                                                            fromLocation, kfSource, RC.GetCurrentUserId, DBNull.Value});
             }
         }
 
