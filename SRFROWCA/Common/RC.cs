@@ -181,7 +181,7 @@ namespace SRFROWCA.Common
                 DataTable dtEmails = DBContext.GetData("GetEmailsOnCountyrAndCluster", new object[] { emgLocationId, emgClusterId });
                 string emails = string.Empty;
                 emails = "orsocharowca@gmail.com";
-                emails += ",kashif.nadeem@hotmail.com";
+                //emails += ",kashif.nadeem@hotmail.com";
                 using (MailMessage mailMsg = new MailMessage())
                 {
                     for (int i = 0; i < dtEmails.Rows.Count; i++)

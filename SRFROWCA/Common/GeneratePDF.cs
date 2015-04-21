@@ -160,27 +160,21 @@ namespace SRFROWCA.Common
             }
         }
 
-        public static MemoryStream GenerateSummaryPDF(DataTable dt, string startDate, string endDate)
+        public static MemoryStream GenerateSummaryPDF(DataTable dtSummary, DataTable dtCountryOrgs, string month, string country, string cluster)
         {
             using (MemoryStream outputStream = new MemoryStream())
             {
                 iTextSharp.text.Document document = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4, 8, 8, 14, 6);
                 iTextSharp.text.pdf.PdfWriter writer = iTextSharp.text.pdf.PdfWriter.GetInstance(document, outputStream);
-
-                if (dt.Rows.Count > 0)
+                document.Open();
+                GenerateSummaryReport(document, dtSummary, month, country, cluster);
+                GenerateSummaryCountry(document, dtSummary);
+                GenerateSummaryOrganization(document, dtCountryOrgs);
+                try
                 {
-                    document.Open();
-                    GenerateSummaryReport(document, dt, startDate, endDate);
-                    GenerateSummaryCountry(document, dt);
-                    GenerateSummaryOrganization(document, dt);
-
-                    try
-                    {
-                        document.Close();
-                    }
-                    catch { }
+                    document.Close();
                 }
-
+                catch { }
                 return outputStream;
             }
         }
@@ -484,258 +478,215 @@ namespace SRFROWCA.Common
                               .ToList<int>();
         }
 
-        private static void GenerateSummaryReport(iTextSharp.text.Document document, DataTable dt, string startDate, string endDate)
+        private static void GenerateSummaryReport(iTextSharp.text.Document document, DataTable dt, string month, string country, string cluster)
         {
-            if (dt.Rows.Count > 0)
-            {
-                string header = string.Empty;
 
-                if (string.IsNullOrEmpty(startDate))
-                    startDate = "N/A";
-                else
-                    startDate = Convert.ToDateTime(startDate).ToString("MMMM dd, yyyy");
-
-                if (string.IsNullOrEmpty(endDate))
-                    endDate = DateTime.Now.ToString("MMMM dd, yyyy");
-                else
-                    endDate = Convert.ToDateTime(endDate).ToString("MMMM dd, yyyy");
-
-                if (startDate.Equals("N/A"))
-                    header = "Overall Progress Reports - " + endDate;
-                else
-                    header = "Overall Progress Reports - " + startDate + " to " + endDate;
-
-                PdfPTable tbl = new PdfPTable(2);
-
-                tbl.KeepTogether = true;
-                //relative col widths in proportions - 1/3 and 2/3
-                float[] widths = new float[] { 2f, 3f };
-                tbl.SetWidths(widths);
-
-                tbl.SpacingAfter = 20f;
-
-                PdfPCell cell = null;
-
-                cell = new PdfPCell(new Phrase(header, FontFactory.GetFont("Arial", 12, Font.BOLD)));
-                cell.PaddingTop = 20;
-                cell.Border = 0;
-                //cell.BorderWidthBottom = 1;
-                cell.Colspan = 2;
-                tbl.AddCell(cell);
-
-                cell = new PdfPCell();
-                cell.Padding = 5;
-                cell.Colspan = 2;
-                cell.Border = 0;
-                tbl.AddCell(cell);
-
-                cell = new PdfPCell(new Phrase("Number of SRP Projects", TableFont));
-                cell.Padding = 5;
-                cell.Border = 0;
-                cell.BorderWidthTop = 1;
-                tbl.AddCell(cell);
-
-                cell = new PdfPCell(new Phrase(Convert.ToString(dt.Rows[0]["SRPProjectsCount"]), TableFont));
-                cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
-                cell.Padding = 5;
-                tbl.AddCell(cell);
-
-                cell = new PdfPCell(new Phrase("Number of Organization with SRP projects ", TableFont));
-                cell.Padding = 5;
-                cell.Border = 0;
-                tbl.AddCell(cell);
-
-                cell = new PdfPCell(new Phrase(Convert.ToString(dt.Rows[0]["SRPOrgCount"]), TableFont));
-                cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
-                cell.Padding = 5;
-                tbl.AddCell(cell);
-
-
-                cell = new PdfPCell(new Phrase("Number of SRP Projects Funded", TableFont));
-                cell.Border = 0;
-                cell.Padding = 5;
-                tbl.AddCell(cell);
-
-                cell = new PdfPCell(new Phrase(Convert.ToString(dt.Rows[0]["SRPFundedProjects"]), TableFont));
-                cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
-                cell.Padding = 5;
-                tbl.AddCell(cell);
-
-                cell = new PdfPCell(new Phrase("Number of SRP projects that reported", TableFont));
-                cell.Border = 0;
-                cell.Padding = 5;
-                tbl.AddCell(cell);
-
-                cell = new PdfPCell(new Phrase(Convert.ToString(dt.Rows[0]["SRPReportedProjects"]), TableFont));
-                cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
-                cell.Padding = 5;
-                tbl.AddCell(cell);
-
-                cell = new PdfPCell(new Phrase("Number of Organizations reporting", TableFont));
-                cell.Border = 0;
-                cell.Padding = 5;
-                tbl.AddCell(cell);
-
-                cell = new PdfPCell(new Phrase(Convert.ToString(dt.Rows[0]["ReportedOrganizationCount"]), TableFont));
-                cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
-                cell.Padding = 5;
-                tbl.AddCell(cell);
-
-                cell = new PdfPCell(new Phrase("Number of Non SRP Projects", TableFont));
-                cell.Border = 0;
-                cell.Padding = 5;
-                tbl.AddCell(cell);
-
-                cell = new PdfPCell(new Phrase(Convert.ToString(dt.Rows[0]["ProjectCount"]), TableFont));
-                cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
-                cell.Padding = 5;
-                tbl.AddCell(cell);
-
-                cell = new PdfPCell(new Phrase("Number of Non SRP Projects reported", TableFont));
-                cell.Border = 0;
-                cell.Padding = 5;
-                tbl.AddCell(cell);
-
-                cell = new PdfPCell(new Phrase(Convert.ToString(dt.Rows[0]["NonSRPReportedProjects"]), TableFont));
-                cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
-                cell.Padding = 5;
-                tbl.AddCell(cell);
-
-                cell = new PdfPCell(new Phrase("Number of Sahel Countries Reporting", TableFont));
-                cell.Border = 0;
-                cell.Padding = 5;
-                tbl.AddCell(cell);
-
-                cell = new PdfPCell(new Phrase(Convert.ToString(dt.Rows[0]["CountriesCount"]), TableFont));
-                cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
-                cell.Padding = 5;
-                tbl.AddCell(cell);
-                
-
-                document.Add(tbl);
-            }
-        }
-
-        private static void GenerateSummaryCountry(iTextSharp.text.Document document, DataTable dt)
-        {
-            PdfPTable tbl = new PdfPTable(5);
-
+            PdfPTable tbl = new PdfPTable(2);
             tbl.KeepTogether = true;
             //relative col widths in proportions - 1/3 and 2/3
-            float[] widths = new float[] { 1f, 2f, 2f, 2f, 2f };
+            float[] widths = new float[] { 2f, 3f };
             tbl.SetWidths(widths);
 
             tbl.SpacingAfter = 20f;
 
             PdfPCell cell = null;
 
-            cell = new PdfPCell(new Phrase("Situation by Country:", FontFactory.GetFont("Arial", 9, Font.BOLD)));
+            cell = new PdfPCell(new Phrase("Sahel ORS Projects Reporting Summary:", FontFactory.GetFont("Arial", 10)));
             cell.PaddingTop = 5;
             cell.Border = 0;
-            //cell.BorderWidthBottom = 1;
-            cell.Colspan = 5;
+            cell.Colspan = 2;
             tbl.AddCell(cell);
 
-            cell = new PdfPCell(new Phrase("#", TableFont));
-            cell.Padding = 5;
+            string monthHeader = "Month - " + month;
+            cell = new PdfPCell(new Phrase(monthHeader, FontFactory.GetFont("Arial", 10)));
             cell.Border = 0;
-            cell.BorderWidthTop = 1;
+            cell.Colspan = 2;
             tbl.AddCell(cell);
 
-            cell = new PdfPCell(new Phrase("Country", TableFont));
-            cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
-            cell.Padding = 5;
+            string countryHeader = "Country - " + country;
+            cell = new PdfPCell(new Phrase(countryHeader, FontFactory.GetFont("Arial", 10)));
             cell.Border = 0;
-            cell.BorderWidthLeft = 1;
-            cell.BorderWidthBottom = 1;
-            cell.BorderWidthTop = 1;
+            cell.Colspan = 2;
             tbl.AddCell(cell);
 
-            cell = new PdfPCell(new Phrase("SRP Projects Reporting", TableFont));
-            cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
-            cell.Padding = 5;
+            string clusterHeader = "Cluster - " + cluster;
+            cell = new PdfPCell(new Phrase(clusterHeader, FontFactory.GetFont("Arial", 10)));
             cell.Border = 0;
-            cell.BorderWidthLeft = 1;
-            cell.BorderWidthBottom = 1;
-            cell.BorderWidthTop = 1;
+            cell.Colspan = 2;
             tbl.AddCell(cell);
 
-            cell = new PdfPCell(new Phrase("Non SRP Projects", TableFont));
-            cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
-            cell.Padding = 5;
+            cell = new PdfPCell();
+            cell.Colspan = 2;
             cell.Border = 0;
-            cell.BorderWidthLeft = 1;
-            cell.BorderWidthBottom = 1;
-            cell.BorderWidthTop = 1;
-            tbl.AddCell(cell);
-                       
-
-            cell = new PdfPCell(new Phrase("Number of Reporting Organizations", TableFont));
-            cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
-            cell.Padding = 5;
-            cell.Border = 0;
-            cell.BorderWidthLeft = 1;
-            cell.BorderWidthTop = 1;
-            cell.BorderWidthRight = 1;
-            cell.BorderWidthBottom = 1;
             tbl.AddCell(cell);
 
-            var distinctCountries = (from DataRow dRow in dt.Rows
-                                     select new
-                                     {
-                                         Country = dRow["Country"],
-                                         SRPReportedProjects = dRow["SRPProjectsReportedByCountry"],
-                                         NONSRPReportedProjects = dRow["NONSRPProjectsReportedByCountry"],
-                                         Users = dRow["Users"],
-                                         Organizations = dRow["Organizations"],
-                                         SRPProjectsPerCountry = dRow["SRPProjectsPerCountry"],
-                                         NONSRPProjectsPerCountry = dRow["NonSRPProjectsPerCountry"],
-                                         OrgPerCountry = dRow["OrgPerCountry"]
-
-                                     })
-                                       .Distinct();
-
-            int count = 0;
-            foreach (var country in distinctCountries)
+            if (dt.Rows.Count > 0)
             {
-                count++;
-                cell = new PdfPCell(new Phrase(count.ToString(), TableFont));
+                cell = new PdfPCell(new Phrase("Total Projects ", TableFont));
+                cell.Padding = 5;
+                cell.Border = 0;
+                cell.BorderWidthTop = 1;
+                tbl.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase(Convert.ToString(dt.Rows[0]["Projects"]), TableFont));
+                cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
+                cell.Padding = 5;
+                tbl.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase("Total Organizations ", TableFont));
                 cell.Padding = 5;
                 cell.Border = 0;
                 tbl.AddCell(cell);
 
-                cell = new PdfPCell(new Phrase(Convert.ToString(country.Country), TableFont));
+                cell = new PdfPCell(new Phrase(Convert.ToString(dt.Rows[0]["Organizations"]), TableFont));
+                cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
                 cell.Padding = 5;
+                tbl.AddCell(cell);
+
+
+                cell = new PdfPCell(new Phrase("Reporting Projects ", TableFont));
                 cell.Border = 0;
-                cell.BorderWidthLeft = 1;
-                cell.BorderWidthBottom = 1;
+                cell.Padding = 5;
                 tbl.AddCell(cell);
 
-                cell = new PdfPCell(new Phrase(Convert.ToString(country.SRPReportedProjects) + " / " + Convert.ToString(country.SRPProjectsPerCountry), TableFont));
+                cell = new PdfPCell(new Phrase(Convert.ToString(dt.Rows[0]["ReportingProjects"]), TableFont));
+                cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
                 cell.Padding = 5;
+                tbl.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase("Reporting Organizations ", TableFont));
                 cell.Border = 0;
-                cell.BorderWidthLeft = 1;
-                cell.BorderWidthBottom = 1;
-                tbl.AddCell(cell);
-
-                cell = new PdfPCell(new Phrase(Convert.ToString(country.NONSRPReportedProjects) + " / " + Convert.ToString(country.NONSRPProjectsPerCountry), TableFont));
                 cell.Padding = 5;
-                cell.BorderWidthLeft = 1;
-                cell.BorderWidthBottom = 1;
                 tbl.AddCell(cell);
 
-
-                cell = new PdfPCell(new Phrase(Convert.ToString(country.Organizations) + " / " + Convert.ToString(country.OrgPerCountry), TableFont));
+                cell = new PdfPCell(new Phrase(Convert.ToString(dt.Rows[0]["ReportingOrganizations"]), TableFont));
+                cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
                 cell.Padding = 5;
-                cell.BorderWidthLeft = 1;               
-                cell.BorderWidthBottom = 1;
-                cell.BorderWidthRight = 1;
                 tbl.AddCell(cell);
 
-                
+                cell = new PdfPCell(new Phrase("Reporting Countries ", TableFont));
+                cell.Border = 0;
+                cell.Padding = 5;
+                tbl.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase(Convert.ToString(dt.Rows[0]["ReportingCountriesCount"]), TableFont));
+                cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
+                cell.Padding = 5;
+                tbl.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase("Number Of Reports ", TableFont));
+                cell.Border = 0;
+                cell.Padding = 5;
+                tbl.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase(Convert.ToString(dt.Rows[0]["ReportsCount"]), TableFont));
+                cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
+                cell.Padding = 5;
+                tbl.AddCell(cell);                
             }
 
             document.Add(tbl);
+        }
+
+        private static void GenerateSummaryCountry(iTextSharp.text.Document document, DataTable dt)
+        {
+            if (dt.Rows.Count > 0 && dt.Rows[0]["Country"] != "")
+            {
+                PdfPTable tbl = new PdfPTable(4);
+
+                tbl.KeepTogether = true;
+                //relative col widths in proportions - 1/3 and 2/3
+                float[] widths = new float[] { 1f, 2f, 2f, 2f };
+                tbl.SetWidths(widths);
+
+                tbl.SpacingAfter = 20f;
+
+                PdfPCell cell = null;
+
+                cell = new PdfPCell(new Phrase("Country Situation:", FontFactory.GetFont("Arial", 9, Font.BOLD)));
+                cell.PaddingTop = 5;
+                cell.Border = 0;
+                //cell.BorderWidthBottom = 1;
+                cell.Colspan = 5;
+                tbl.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase("#", TableFont));
+                cell.Padding = 5;
+                cell.Border = 0;
+                cell.BorderWidthTop = 1;
+                tbl.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase("Country", TableFont));
+                cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
+                cell.Padding = 5;
+                cell.Border = 0;
+                cell.BorderWidthLeft = 1;
+                cell.BorderWidthBottom = 1;
+                cell.BorderWidthTop = 1;
+                tbl.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase("Projects/Reporting", TableFont));
+                cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
+                cell.Padding = 5;
+                cell.Border = 0;
+                cell.BorderWidthLeft = 1;
+                cell.BorderWidthBottom = 1;
+                cell.BorderWidthTop = 1;
+                tbl.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase("Organizations/Reporting", TableFont));
+                cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
+                cell.Padding = 5;
+                cell.Border = 0;
+                cell.BorderWidthLeft = 1;
+                cell.BorderWidthBottom = 1;
+                cell.BorderWidthTop = 1;
+                tbl.AddCell(cell);
+
+
+                var distinctCountries = (from DataRow dRow in dt.Rows
+                                         select new
+                                         {
+                                             Country = dRow["Country"],
+                                             TotalProjectsCountByCountry = dRow["TotalProjectsCountByCountry"],
+                                             ReportingProjectsCountByCountry = dRow["ReportingProjectsCountByCountry"],
+                                             TotalOrgsCountByCountry = dRow["TotalOrgsCountByCountry"],
+                                             ReportingOrgsCountByCountry = dRow["ReportingOrgsCountByCountry"],
+
+                                         })
+                                           .Distinct();
+
+                int count = 0;
+                foreach (var country in distinctCountries)
+                {
+                    count++;
+                    cell = new PdfPCell(new Phrase(count.ToString(), TableFont));
+                    cell.Padding = 5;
+                    cell.Border = 0;
+                    tbl.AddCell(cell);
+
+                    cell = new PdfPCell(new Phrase(Convert.ToString(country.Country), TableFont));
+                    cell.Padding = 5;
+                    cell.Border = 0;
+                    cell.BorderWidthLeft = 1;
+                    cell.BorderWidthBottom = 1;
+                    tbl.AddCell(cell);
+
+                    cell = new PdfPCell(new Phrase(Convert.ToString(country.TotalProjectsCountByCountry) + " / " + Convert.ToString(country.ReportingProjectsCountByCountry), TableFont));
+                    cell.Padding = 5;
+                    cell.Border = 0;
+                    cell.BorderWidthLeft = 1;
+                    cell.BorderWidthBottom = 1;
+                    tbl.AddCell(cell);
+
+                    cell = new PdfPCell(new Phrase(Convert.ToString(country.TotalOrgsCountByCountry) + " / " + Convert.ToString(country.ReportingOrgsCountByCountry), TableFont));
+                    cell.Padding = 5;
+                    cell.BorderWidthLeft = 1;
+                    cell.BorderWidthBottom = 1;
+                    tbl.AddCell(cell);
+                }
+                document.Add(tbl);
+            }
         }
 
         private static void GenerateSummaryOrganization(iTextSharp.text.Document document, DataTable dt)
@@ -749,7 +700,7 @@ namespace SRFROWCA.Common
 
             PdfPCell cell = null;
 
-            cell = new PdfPCell(new Phrase("Organizations Name by Country:", FontFactory.GetFont("Arial", 9, Font.BOLD)));
+            cell = new PdfPCell(new Phrase("Organizations Reporting:", FontFactory.GetFont("Arial", 9, Font.BOLD)));
             cell.PaddingTop = 5;
             cell.Border = 0;
             cell.Colspan = 2;
@@ -758,7 +709,7 @@ namespace SRFROWCA.Common
             var distinctCountries = (from DataRow dRow in dt.Rows
                                      select new
                                      {
-                                         CountryID = dRow["CountryID"],
+                                         CountryID = dRow["CountryId"],
                                          Country = dRow["Country"]
                                      })
                                        .Distinct();
@@ -776,10 +727,10 @@ namespace SRFROWCA.Common
                 tbl.AddCell(cell);
 
                 var distinctOrganizations = (from DataRow dRow in dt.Rows
-                                             where dRow.Field<int>("CountryID") == Convert.ToInt32(country.CountryID)
+                                             where dRow.Field<int>("CountryId") == Convert.ToInt32(country.CountryID)
                                              select new
                                              {
-                                                 CountryID = dRow["CountryID"],
+                                                 CountryID = dRow["CountryId"],
                                                  OrganizationName = dRow["OrganizationName"]
                                              })
                                         .Distinct();
@@ -897,7 +848,7 @@ namespace SRFROWCA.Common
             //!SplitLate && SplitRows
             tbl.SplitLate = false;
             tbl.SplitRows = true;
-            
+
             //tbl.KeepTogether = true;
             float[] widths = new float[] { 1f, 3f };
             tbl.SetWidths(widths);
@@ -910,7 +861,7 @@ namespace SRFROWCA.Common
             //cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
             //tbl.AddCell(cell);
 
-            tbl.AddCell(new Phrase("Objectives:", TableFont));            
+            tbl.AddCell(new Phrase("Objectives:", TableFont));
             tbl.AddCell(new Phrase(Convert.ToString(dr["ProjectObjective"]), TableFont));
 
             tbl.AddCell(new Phrase("Beneficiaries:", TableFont));
@@ -959,7 +910,7 @@ namespace SRFROWCA.Common
             string requestedFunds = RC.SelectedSiteLanguageId == 1 ?
                 string.Format(CultureInfo.InvariantCulture, "{0:n}", originalRequest) :
                 string.Format(CultureInfo.CreateSpecificCulture("fr-FR"), "{0:n}", originalRequest);
-            
+
             tbl.AddCell(new Phrase("$" + requestedFunds, TitleFont));
 
             tbl.AddCell(new Phrase("Priority/Category:", TableFont));
@@ -1705,4 +1656,5 @@ namespace SRFROWCA.Common
         //    }
         //}
     }
+
 }
