@@ -34,6 +34,8 @@
                                 <i class="icon-download"></i>Excel
                                        
                             </button>--%>
+                            <asp:Button ID="btnCreateProject" runat="server" OnClick="btnCreateProject_Click" Text="Create Project" CausesValidation="False"
+                                CssClass="btn btn-yellow pull-right" />
                         </h6>
                     </div>
                     <div class="widget-body">
@@ -44,14 +46,16 @@
                                         <table border="0" style="width: 100%;">
                                             <tr>
                                                 <td class="width-20">
-                                                    <label> <asp:Label ID="lblCaptionCluster" runat="server" Text="Cluster:" meta:resourcekey="lblCaptionClusterResource1"></asp:Label></label>
+                                                    <label>
+                                                        <asp:Label ID="lblCaptionCluster" runat="server" Text="Cluster:" meta:resourcekey="lblCaptionClusterResource1"></asp:Label></label>
                                                 </td>
                                                 <td class="width-30">
                                                     <asp:DropDownList ID="ddlSecClusters" runat="server" CssClass="width-80" meta:resourcekey="ddlSecClustersResource1">
                                                     </asp:DropDownList>
                                                 </td>
                                                 <td class="width-20">
-                                                    <label><asp:Label ID="lblCaptionSubSetCluster" runat="server" Text="Subset Of Cluster:" meta:resourcekey="lblCaptionSubSetClusterResource1"></asp:Label></label>
+                                                    <label>
+                                                        <asp:Label ID="lblCaptionSubSetCluster" runat="server" Text="Subset Of Cluster:" meta:resourcekey="lblCaptionSubSetClusterResource1"></asp:Label></label>
                                                 </td>
                                                 <td class="width-30">
                                                     <asp:DropDownList ID="ddlClusters" runat="server" CssClass="width-80" meta:resourcekey="ddlClustersResource1">
@@ -63,13 +67,15 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <label><asp:Label ID="lblCaptionCountry" runat="server" Text="Country:" meta:resourcekey="lblCaptionCountryResource1"></asp:Label></label>
+                                                    <label>
+                                                        <asp:Label ID="lblCaptionCountry" runat="server" Text="Country:" meta:resourcekey="lblCaptionCountryResource1"></asp:Label></label>
                                                 </td>
                                                 <td>
                                                     <asp:DropDownList runat="server" ID="ddlCountry" CssClass="width-80" meta:resourcekey="ddlCountryResource1">
                                                     </asp:DropDownList></td>
                                                 <td>
-                                                    <label><asp:Label ID="lblCaptionOrganization" runat="server" Text="Organization:" meta:resourcekey="lblCaptionOrganizationResource1"></asp:Label></label>
+                                                    <label>
+                                                        <asp:Label ID="lblCaptionOrganization" runat="server" Text="Organization:" meta:resourcekey="lblCaptionOrganizationResource1"></asp:Label></label>
                                                 </td>
                                                 <td>
                                                     <asp:DropDownList ID="ddlOrg" runat="server" CssClass="width-80"
@@ -80,14 +86,16 @@
 
                                                 <tr>
                                                     <td>
-                                                        <label><asp:Label ID="lblCaptionProjCode" runat="server" Text="Project Code/Id:" meta:resourcekey="lblCaptionProjCodeResource1"></asp:Label></label>
+                                                        <label>
+                                                            <asp:Label ID="lblCaptionProjCode" runat="server" Text="Project Code/Id:" meta:resourcekey="lblCaptionProjCodeResource1"></asp:Label></label>
                                                     </td>
                                                     <td>
                                                         <asp:TextBox ID="txtProjectCode" runat="server" CssClass="width-80"
                                                             meta:resourcekey="txtProjectCodeResource1"></asp:TextBox>
                                                     </td>
                                                     <td>
-                                                        <label><asp:Label ID="lblCaptionStatus" runat="server" Text="Status:" meta:resourcekey="lblCaptionStatusResource1"></asp:Label></label></td>
+                                                        <label>
+                                                            <asp:Label ID="lblCaptionStatus" runat="server" Text="Status:" meta:resourcekey="lblCaptionStatusResource1"></asp:Label></label></td>
                                                     <td>
                                                         <asp:DropDownList ID="ddlStatus" runat="server" meta:resourcekey="ddlStatusResource1">
                                                             <asp:ListItem Text="Select" Value="0"></asp:ListItem>
@@ -99,8 +107,15 @@
                                                             <asp:ListItem Text="Rejected" Value="Rejected"></asp:ListItem>
                                                         </asp:DropDownList>
                                                     </td>
-
                                                 </tr>
+                                            <tr>
+                                                <td>                                                    
+                                                </td>
+                                                <td>
+                                                    <asp:CheckBox ID="cbIsOPS" runat="server" Text="SRP Projects" Checked="false" />
+                                                    <asp:CheckBox ID="cbIsORS" runat="server" Text="ORS Projects" Checked="false" />
+                                                </td>
+                                            </tr>
                                             <tr>
                                                 <td>&nbsp;</td>
                                                 <td colspan="4" style="padding-top: 10px;">
@@ -122,7 +137,9 @@
                     <asp:GridView ID="gvProjects" runat="server" AutoGenerateColumns="False" CssClass="imagetable"
                         AllowPaging="True" AllowSorting="True" PageSize="50" ShowHeaderWhenEmpty="True"
                         EmptyDataText="Your filter criteria does not match any project!" Width="100%"
-                        OnRowCommand="gvProjects_RowCommand" OnSorting="gvProjects_Sorting" OnPageIndexChanging="gvProjects_PageIndexChanging"
+                        OnRowCommand="gvProjects_RowCommand" OnSorting="gvProjects_Sorting" OnRowDataBound="gvProjects_RowDataBound"
+                        OnPageIndexChanging="gvProjects_PageIndexChanging"
+                        DataKeyNames="ProjectId,ProjectOrganizationId,OrganizationId"
                         meta:resourcekey="gvProjectsResource1">
 
                         <Columns>
@@ -142,14 +159,12 @@
                                 <ItemStyle Wrap="True"></ItemStyle>
                             </asp:BoundField>
                             <asp:BoundField DataField="OrganizationName" HeaderText="Organization" SortExpression="OrganizationName"
-                                meta:resourcekey="BoundFieldResource3" ItemStyle-Width="120px">
-                            </asp:BoundField>
+                                meta:resourcekey="BoundFieldResource3" ItemStyle-Width="120px"></asp:BoundField>
                             <asp:BoundField DataField="ClusterName" HeaderText="Subset Cluster" SortExpression="ClusterName" meta:resourcekey="BoundFieldResource4" />
                             <asp:BoundField DataField="SecCluster" HeaderText="Cluster" SortExpression="SecCluster" meta:resourcekey="BoundFieldResource5" />
                             <asp:BoundField DataField="OriginalRequest" HeaderText="Original Request" SortExpression="OriginalRequest"
                                 meta:resourcekey="BoundFieldResource10" />
                             <asp:BoundField DataField="OPSProjectStatus" HeaderText="Status" SortExpression="OPSProjectStatus" meta:resourcekey="BoundFieldResource6" />
-                            <asp:BoundField DataField="LocationName" Visible="false" HeaderText="Reported Locations" meta:resourcekey="BoundFieldResource7" />
                             <asp:BoundField DataField="Contact" HeaderText="Contact" ItemStyle-Wrap="true" ItemStyle-Width="150px"
                                 SortExpression="Contact" meta:resourcekey="BoundFieldResource8">
                                 <ItemStyle Wrap="True" Width="150px"></ItemStyle>
@@ -162,6 +177,12 @@
                                 </ItemTemplate>
 
                                 <ItemStyle HorizontalAlign="Center"></ItemStyle>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderStyle-Width="30px" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="btnEdit" runat="server" ImageUrl="~/assets/orsimages/edit16.png"
+                                        CommandName="EditProject" CommandArgument='<%# Container.DataItemIndex %>' ToolTip="Edit Project Information" />
+                                </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
                     </asp:GridView>

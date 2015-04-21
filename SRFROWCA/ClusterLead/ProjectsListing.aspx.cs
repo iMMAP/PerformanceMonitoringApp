@@ -18,6 +18,11 @@ namespace SRFROWCA.ClusterLead
                 UserInfo.UserProfileInfo(RC.SelectedEmergencyId);
             }
 
+            if (RC.IsRegionalClusterLead(this.User))
+            {
+                btnCreateProject.Visible = false;
+            }
+
             PopulateControls();
             LoadProjects();
             DisableDropDowns();
@@ -54,7 +59,7 @@ namespace SRFROWCA.ClusterLead
                 ddlClusters.SelectedValue = UserInfo.EmergencyCluster.ToString();
             }
 
-            if (RC.IsCountryAdmin(this.User) || RC.IsDataEntryUser(this.User))
+            if (RC.IsCountryAdmin(this.User) || RC.IsDataEntryUser(this.User) || RC.IsOCHAStaff(this.User))
             {
                 ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
             }
@@ -73,7 +78,7 @@ namespace SRFROWCA.ClusterLead
                 RC.EnableDisableControls(ddlClusters, false);
             }
 
-            if (RC.IsCountryAdmin(this.User) || RC.IsDataEntryUser(this.User))
+            if (RC.IsCountryAdmin(this.User) || RC.IsDataEntryUser(this.User) || RC.IsOCHAStaff(this.User))
             {
                 RC.EnableDisableControls(ddlCountry, false);
             }
@@ -193,6 +198,16 @@ namespace SRFROWCA.ClusterLead
             {
                 ExportToPDF(Convert.ToInt32(e.CommandArgument));
             }
+
+            if (e.CommandName == "EditProject")
+            {
+                int rowIndex = 0;
+                int.TryParse(e.CommandArgument.ToString(), out rowIndex);
+                string projectId = gvProjects.DataKeys[rowIndex].Values["ProjectId"].ToString();
+                string projOrgId = gvProjects.DataKeys[rowIndex].Values["ProjectOrganizationId"].ToString();
+                string orgId = gvProjects.DataKeys[rowIndex].Values["OrganizationId"].ToString();
+                Response.Redirect("~/Pages/CreateProject.aspx?pid=" + projectId + "&poid=" + projOrgId + "&oid=" + orgId);
+            }
         }
 
         protected void gvProjects_Sorting(object sender, GridViewSortEventArgs e)
@@ -256,7 +271,7 @@ namespace SRFROWCA.ClusterLead
             {
                 int.TryParse(ddlClusters.SelectedValue, out tempVal);
             }
-            int? clusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
+            int? emgClusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
 
             tempVal = 0;
             if (ddlSecClusters.Visible)
@@ -271,7 +286,7 @@ namespace SRFROWCA.ClusterLead
                 tempVal = 0;
                 int.TryParse(ddlCountry.SelectedValue, out tempVal);
             }
-            int? countryID = tempVal > 0 ? tempVal : UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
+            int? emgLocationId = tempVal > 0 ? tempVal : UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
 
             string projCode = txtProjectCode.Text.Trim().Length > 0 ? txtProjectCode.Text.Trim() : null;
             int? orgId = RC.GetSelectedIntVal(ddlOrg);
@@ -284,16 +299,27 @@ namespace SRFROWCA.ClusterLead
                     orgId = (int?)null;
             }
 
-            int year = RC.SelectedEmergencyId == 1 ? 2014 : 2015;
-            int? admin1 = null;
-            int? cbReported = null;
-            int? cbFunded = null;
-
+            int year = 2015;
             string projectStatus = ddlStatus.SelectedValue == "0" ? null : ddlStatus.SelectedValue;
+            int? isOPS = null;
 
-            return DBContext.GetData("GetProjects", new object[] {countryID, clusterId,projCode, orgId, admin1, DBNull.Value, 
-                                                                            DBNull.Value, cbFunded, cbReported, 1,  year, 
-                                                                            projectStatus, secClusterId});
+            if (cbIsOPS.Checked && cbIsORS.Checked)
+            {
+                isOPS = null;
+            }
+            else if (cbIsOPS.Checked)
+            {
+                isOPS = 1;
+            }
+            else if (cbIsORS.Checked)
+            {
+                isOPS = 0;
+            }
+            
+
+            return DBContext.GetData("GetProjectsListing", new object[] {emgLocationId, emgClusterId, projCode, orgId, 
+                                                                            RC.SelectedSiteLanguageId,  year, projectStatus, 
+                                                                            secClusterId, isOPS});
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -309,7 +335,29 @@ namespace SRFROWCA.ClusterLead
             ddlOrg.SelectedIndex = 0;
             ddlStatus.SelectedIndex = 0;
             ddlSecClusters.SelectedIndex = 0;
+            cbIsOPS.Checked = false;
+            cbIsORS.Checked = false;
             LoadProjects();
+        }
+
+        protected void btnCreateProject_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Pages/CreateProject.aspx");
+        }
+
+        protected void gvProjects_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                if (RC.IsRegionalClusterLead(this.User) || (!this.User.Identity.IsAuthenticated))
+                {
+                    ImageButton btnEdit = e.Row.FindControl("btnEdit") as ImageButton;
+                    if (btnEdit != null)
+                    {
+                        btnEdit.Visible = false;
+                    }
+                }
+            }
         }
     }
 }
