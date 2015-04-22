@@ -7,6 +7,7 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.Data;
 using System.Globalization;
+using BusinessLogic;
 
 namespace SRFROWCA.Common
 {
@@ -121,40 +122,20 @@ namespace SRFROWCA.Common
 
         #endregion
 
-        public static void GenerateDocument(iTextSharp.text.Document document, DataTable dt)
-        {
-            List<int> projectIds = GetDistinctProjects(dt);
-
-            for (int i = 0; i < projectIds.Count; i++)
-            {
-                IEnumerable<DataRow> projectDetails = GetProjectInformation(dt, projectIds[i]);
-                DataRow projectGeneralInfo = projectDetails.FirstOrDefault<DataRow>();
-                ProjectGeneralInfo(document, projectGeneralInfo);
-
-                IndicatorTargets(document, projectDetails, true);
-                document.NewPage();
-            }
-        }
-
-        public static MemoryStream GeneratePDF(DataTable dt, int? projectID, int? reportID)
+        public static MemoryStream GenerateProjectsListingPDF(DataTable dtProjects, bool isShowContactInfo)
         {
             using (MemoryStream outputStream = new MemoryStream())
             {
                 iTextSharp.text.Document document = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4, 8, 8, 14, 6);
                 iTextSharp.text.pdf.PdfWriter writer = iTextSharp.text.pdf.PdfWriter.GetInstance(document, outputStream);
 
-                if (dt.Rows.Count > 0)
+                document.Open();
+                GenerateProjectsListingDocument(document, dtProjects, isShowContactInfo);
+                try
                 {
-                    document.Open();
-
-                    GenerateDocument(document, dt, projectID, reportID);
-
-                    try
-                    {
-                        document.Close();
-                    }
-                    catch { }
+                    document.Close();
                 }
+                catch { }
 
                 return outputStream;
             }
@@ -179,106 +160,55 @@ namespace SRFROWCA.Common
             }
         }
 
-        public static void GenerateDocument(iTextSharp.text.Document document, DataTable dt, int? projectID, int? reportID)
+        private static void GenerateProjectsListingDocument(iTextSharp.text.Document document, DataTable dt, bool isShowContactInfo)
         {
-            if (projectID != null && projectID > 0)
+            foreach (DataRow row in dt.Rows)
             {
-                IEnumerable<DataRow> projectDetails = GetProjectInformation(dt, (int)projectID);
-                DataRow projectGeneralInfo = projectDetails.FirstOrDefault<DataRow>();
-
-                ProjectGeneralInfo(document, projectGeneralInfo);
-                ProjectReports(document, dt, reportID);
-
-
-            }
-            else if (projectID == null)
-            {
-                List<int> projectIds = GetDistinctProjects(dt);
-
-                for (int i = 0; i < projectIds.Count; i++)
+                ProjectGeneralInfo(document, row, isShowContactInfo);
+                int projectId = 0;
+                int.TryParse(row["ProjectId"].ToString(), out projectId);
+                if (projectId > 0)
                 {
-                    IEnumerable<DataRow> projectDetails = GetProjectInformation(dt, projectIds[i]);
-                    DataRow projectGeneralInfo = projectDetails.FirstOrDefault<DataRow>();
-
-                    ProjectGeneralInfo(document, projectGeneralInfo);
-                    ProjectReports(document, dt.Select("ProjectID='" + projectIds[i] + "'").CopyToDataTable<DataRow>(), reportID);
-
-                    document.NewPage();
+                    DataTable dtIndicators = DBContext.GetData("GetProjectIndicators", new object[] { projectId, RC.SelectedSiteLanguageId });
+                    ProjectReports(document, dtIndicators);
                 }
+
+
+                document.NewPage();
             }
         }
 
-        private static void ProjectReports(iTextSharp.text.Document document, DataTable dt, int? reportID)
+        private static void ProjectReports(iTextSharp.text.Document document, DataTable dtIndicators)
         {
-            if (reportID != null)
-            {
-                PdfPTable tbl = new PdfPTable(new float[] { 2f, 3f, 3f, 2f, 4f, 2f, 3f, 2f });
-                //ProjectReportHeaders(tbl);
+            PdfPTable tbl = new PdfPTable(new float[] { 2f, 3f, 3f, 2f, 4f, 2f, 3f, 2f });
+            tbl.SpacingAfter = 10f;
+            document.Add(tbl);
+            IndicatorTargets(document, dtIndicators);
 
-                DataRow[] row = dt.Select("ReportID='" + reportID.ToString() + "'");
+            //else
+            //{
+            //    DataTable dtFiltered = new DataTable();
+            //    string[] selectedColumns = new[] { "ReportID", "ReportName", "OrganizationName", "Month", "CreatedBy", 
+            //                                                                    "CreatedDate", "UpdatedBy", "UpdatedDate" };
+            //    try
+            //    {
+            //        dtFiltered = dt.DefaultView.ToTable(true, selectedColumns);
+            //    }
+            //    catch { }
 
-                if (row.Length > 0)
-                {
-                    //tbl.AddCell(new Phrase(Convert.ToString(row[0]["ReportID"]), TableFont));
-                    //tbl.AddCell(new Phrase(Convert.ToString(row[0]["ReportName"]), TableFont));
-                    //tbl.AddCell(new Phrase(Convert.ToString(row[0]["OrganizationName"]), TableFont));
-                    //tbl.AddCell(new Phrase(Convert.ToString(row[0]["Month"]), TableFont));
-                    //tbl.AddCell(new Phrase(Convert.ToString(row[0]["CreatedBy"]), TableFont));
-                    //tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(row[0]["CreatedDate"])) ? Convert.ToDateTime(row[0]["CreatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
-                    //tbl.AddCell(new Phrase(Convert.ToString(row[0]["UpdatedBy"]), TableFont));
-                    //tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(row[0]["UpdatedDate"])) ? Convert.ToDateTime(row[0]["UpdatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
-                }
-
-                tbl.SpacingAfter = 10f;
-                document.Add(tbl);
-
-                IndicatorTargets(document, (from projectData in dt.AsEnumerable()
-                                            where projectData.Field<int?>("ReportID") == (int?)Convert.ToInt32(row[0]["ReportID"])
-                                            select projectData), false);
-
-            }
-            else
-            {
-                //DataRow[] rows = dt.Select("UserID = '" + RC.GetCurrentUserId + "'");
-
-                //if (rows.Length > 0)
-                {
-                    DataTable dtFiltered = new DataTable();
-                    string[] selectedColumns = new[] { "ReportID", "ReportName", "OrganizationName", "Month", "CreatedBy", "CreatedDate", "UpdatedBy", "UpdatedDate" };
-
-                    try
-                    {
-                        dtFiltered = dt.DefaultView.ToTable(true, selectedColumns); //new DataView(rows.CopyToDataTable<DataRow>()).ToTable(true, selectedColumns);
-
-                    }
-                    catch { }
-
-                    for (int i = 0; i < dtFiltered.Rows.Count; i++)
-                    {
-                        if (!string.IsNullOrEmpty(Convert.ToString(dtFiltered.Rows[i]["ReportID"])))
-                        {
-                            PdfPTable tbl = new PdfPTable(new float[] { 2f, 3f, 3f, 2f, 4f, 2f, 3f, 2f });
-                            //ProjectReportHeaders(tbl);
-
-                            //tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["ReportID"]), TableFont));
-                            //tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["ReportName"]), TableFont));
-                            //tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["OrganizationName"]), TableFont));
-                            //tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["Month"]), TableFont));
-                            //tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["CreatedBy"]), TableFont));
-                            //tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(dtFiltered.Rows[i]["CreatedDate"])) ? Convert.ToDateTime(dtFiltered.Rows[i]["CreatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
-                            //tbl.AddCell(new Phrase(Convert.ToString(dtFiltered.Rows[i]["UpdatedBy"]), TableFont));
-                            //tbl.AddCell(new Phrase(!string.IsNullOrEmpty(Convert.ToString(dtFiltered.Rows[i]["UpdatedDate"])) ? Convert.ToDateTime(dtFiltered.Rows[i]["UpdatedDate"]).ToString("MM/dd/yyyy") : string.Empty, TableFont));
-
-                            tbl.SpacingAfter = 10f;
-                            document.Add(tbl);
-
-                            IndicatorTargets(document, (from projectData in dt.AsEnumerable()
-                                                        where projectData.Field<int?>("ReportID") == (int?)Convert.ToInt32(dtFiltered.Rows[i]["ReportID"])
-                                                        select projectData), false);
-                        }
-                    }
-                }
-            }
+            //    for (int i = 0; i < dtFiltered.Rows.Count; i++)
+            //    {
+            //        if (!string.IsNullOrEmpty(Convert.ToString(dtFiltered.Rows[i]["ReportID"])))
+            //        {
+            //            PdfPTable tbl = new PdfPTable(new float[] { 2f, 3f, 3f, 2f, 4f, 2f, 3f, 2f });
+            //            tbl.SpacingAfter = 10f;
+            //            document.Add(tbl);
+            //            IndicatorTargets(document, (from projectData in dt.AsEnumerable()
+            //                                        where projectData.Field<int?>("ReportID") == (int?)Convert.ToInt32(dtFiltered.Rows[i]["ReportID"])
+            //                                        select projectData), false);
+            //        }
+            //    }
+            //}
         }
 
         private static void ProjectReportHeaders(PdfPTable tbl)
@@ -318,23 +248,20 @@ namespace SRFROWCA.Common
             tbl.AddCell(cell);
         }
 
-        private static void IndicatorTargets(Document document, IEnumerable<DataRow> projectDetails, bool showAccum)
+        private static void IndicatorTargets(Document document, DataTable dt)
         {
-            DataTable dt = projectDetails.CopyToDataTable();
-            var distinctPriorities = (from DataRow dRow in dt.Rows
+            var distinctObjectives = (from DataRow dRow in dt.Rows
                                       select new
                                           {
-                                              ObjectiveId = dRow["ObjectiveId"],
-                                              PriorityId = dRow["HumanitarianPriorityId"]
+                                              ObjectiveId = dRow["ObjectiveId"]
                                           })
                                         .Distinct();
 
-            foreach (var priority in distinctPriorities)
+            foreach (var objective in distinctObjectives)
             {
-                IEnumerable<DataRow> temp = (from pr in dt.AsEnumerable()
-                                             where pr.Field<int>("ObjectiveId") == (int)priority.ObjectiveId
-                                             && pr.Field<int>("HumanitarianPriorityId") == (int)priority.PriorityId
-                                             select pr);
+                IEnumerable<DataRow> temp = (from ob in dt.AsEnumerable()
+                                             where ob.Field<int>("ObjectiveId") == (int)objective.ObjectiveId
+                                             select ob);
 
                 DataTable dt1 = temp.CopyToDataTable();
                 DataRow logFrame = temp.FirstOrDefault<DataRow>();
@@ -348,23 +275,17 @@ namespace SRFROWCA.Common
                     cell1.BackgroundColor = phraseColor;
                     tbl1.AddCell(cell1);
 
-                    cell1 = new PdfPCell(new Phrase(logFrame["HumanitarianPriority"].ToString(), TableFont));
-                    cell1.Border = 0;
-                    cell1.BackgroundColor = phraseColor;
-                    tbl1.AddCell(cell1);
                     tbl1.SpacingBefore = 3f;
                     tbl1.SpacingAfter = 3f;
                     document.Add(tbl1);
-
-                    //AddLogFrameInfo(document, logFrame);
                 }
 
 
                 var distinctIndicators = (from DataRow dRow in dt1.Rows
                                           select new
                                           {
-                                              ActivityId = dRow["PriorityActivityId"],
-                                              DataId = dRow["ActivityDataId"]
+                                              ActivityId = dRow["ActivityId"],
+                                              IndicatorId = dRow["IndicatorId"]
                                           })
                                         .Distinct();
 
@@ -372,8 +293,8 @@ namespace SRFROWCA.Common
                 foreach (var indicator in distinctIndicators)
                 {
                     IEnumerable<DataRow> targets = (from ind in dt1.AsEnumerable()
-                                                    where ind.Field<int>("PriorityActivityId") == (int)indicator.ActivityId
-                                                    && ind.Field<int>("ActivityDataId") == (int)indicator.DataId
+                                                    where ind.Field<int>("ActivityId") == (int)indicator.ActivityId
+                                                    && ind.Field<int>("IndicatorId") == (int)indicator.IndicatorId
                                                     select ind);
 
 
@@ -395,7 +316,7 @@ namespace SRFROWCA.Common
                     tbl.AddCell(cell);
                     foreach (DataRow row in targets)
                     {
-                        ReportedData(document, tbl, row, showAccum);
+                        ReportedData(document, tbl, row);
                     }
 
                     tbl.SpacingAfter = 10f;
@@ -404,15 +325,10 @@ namespace SRFROWCA.Common
             }
         }
 
-        private static void ReportedData(Document document, PdfPTable tbl, DataRow row, bool showAccum)
+        private static void ReportedData(Document document, PdfPTable tbl, DataRow row)
         {
-            tbl.AddCell(new Phrase(row["Location"].ToString(), TableFont));
-            //tbl.AddCell(new Phrase(row["TargetAnnual"].ToString(), TableFont));
-
-            //if (showAccum)
-            //    tbl.AddCell(new Phrase(row["Accumulative"].ToString(), TableFont));
-
-            tbl.AddCell(new Phrase(row["Achieved"].ToString(), TableFont));
+            tbl.AddCell(new Phrase(row["LocationName"].ToString(), TableFont));
+            tbl.AddCell(new Phrase(row["Target"].ToString(), TableFont));
         }
 
         private static void AddLogFrameInfo(Document document, DataRow dr)
@@ -424,14 +340,10 @@ namespace SRFROWCA.Common
             float[] widths = new float[] { 1f, 3f };
             tbl.SetWidths(widths);
 
-            //tbl.AddCell(new Phrase("Objective:", TableFont));
-            //tbl.AddCell(new Phrase(dr["Objective"].ToString(), TableFont));
-            //tbl.AddCell(new Phrase("Priority:", TableFont));
-            //tbl.AddCell(new Phrase(dr["HumanitarianPriority"].ToString(), TableFont));
             tbl.AddCell(new Phrase("Activity:", TableFont));
-            tbl.AddCell(new Phrase(dr["ActivityName"].ToString(), TableFont));
-            tbl.AddCell(new Phrase("Activity Indicator:", TableFont));
-            tbl.AddCell(new Phrase(dr["DataName"].ToString(), TableFont));
+            tbl.AddCell(new Phrase(dr["Activity"].ToString(), TableFont));
+            tbl.AddCell(new Phrase("Indicator:", TableFont));
+            tbl.AddCell(new Phrase(dr["Indicator"].ToString(), TableFont));
 
             document.Add(tbl);
         }
@@ -582,7 +494,7 @@ namespace SRFROWCA.Common
                 cell = new PdfPCell(new Phrase(Convert.ToString(dt.Rows[0]["ReportsCount"]), TableFont));
                 cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
                 cell.Padding = 5;
-                tbl.AddCell(cell);                
+                tbl.AddCell(cell);
             }
 
             document.Add(tbl);
@@ -756,11 +668,10 @@ namespace SRFROWCA.Common
         }
 
         // Write project main info in pdf document.
-        private static void ProjectGeneralInfo(Document document, DataRow dr)
+        private static void ProjectGeneralInfo(Document document, DataRow dr, bool isShowContactInfo)
         {
             ProjectMainInfo(document, dr);
-            ProjectDetailInfo(document, dr);
-            //ProjectDescriptions(document, dr);
+            ProjectDetailInfo(document, dr, isShowContactInfo);
         }
 
         private static void ProjectMainInfo(Document document, DataRow dr)
@@ -829,12 +740,12 @@ namespace SRFROWCA.Common
             cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
             tbl.AddCell(cell);
 
-            cell = new PdfPCell(new Phrase("Sec Cluster: ", TitleFont));
+            cell = new PdfPCell(new Phrase("Sub-Set Cluster: ", TitleFont));
             cell.Border = 0;
             cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
             tbl.AddCell(cell);
 
-            cell = new PdfPCell(new Phrase(Convert.ToString(dr["SecCluster"]), TableFont));
+            cell = new PdfPCell(new Phrase(Convert.ToString(dr["SubSetCluster"]), TableFont));
             cell.Border = 0;
             cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
             tbl.AddCell(cell);
@@ -842,7 +753,7 @@ namespace SRFROWCA.Common
             document.Add(tbl);
         }
 
-        private static void ProjectDetailInfo(Document document, DataRow dr)
+        private static void ProjectDetailInfo(Document document, DataRow dr, bool isShowContactInfo)
         {
             PdfPTable tbl = new PdfPTable(2);
             //!SplitLate && SplitRows
@@ -856,10 +767,6 @@ namespace SRFROWCA.Common
 
             // Add funding header.
             PdfPCell cell = null;
-            //cell = new PdfPCell(new Phrase("Project General Info", TitleFont));
-            //cell.Colspan = 2;
-            //cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
-            //tbl.AddCell(cell);
 
             tbl.AddCell(new Phrase("Objectives:", TableFont));
             tbl.AddCell(new Phrase(Convert.ToString(dr["ProjectObjective"]), TableFont));
@@ -916,18 +823,18 @@ namespace SRFROWCA.Common
             tbl.AddCell(new Phrase("Priority/Category:", TableFont));
             tbl.AddCell(new Phrase(Convert.ToString(dr["OPSPriority"]), TableFont));
 
-            //tbl.AddCell(new Phrase("Current Request:", TableFont));
-            //tbl.AddCell(new Phrase(Convert.ToString(dr["CurrentRequest"]), TableFont));
-
             tbl.AddCell(new Phrase("Gender Marker:", TableFont));
             tbl.AddCell(new Phrase(Convert.ToString(dr["GenderMarker"]), TableFont));
 
             tbl.AddCell(new Phrase("Status:", TableFont));
             tbl.AddCell(new Phrase(Convert.ToString(dr["OPSProjectStatus"]), TableFont));
 
-            tbl.AddCell(new Phrase("Contact Details:", TableFont));
-            string contactDetails = dr["ProjectContactName"].ToString() + ", " + dr["ProjectContactEmail"].ToString() + ", " + dr["ProjectContactPhone"].ToString();
-            tbl.AddCell(new Phrase(contactDetails, TableFont));
+            if (isShowContactInfo)
+            {
+                tbl.AddCell(new Phrase("Contact Details:", TableFont));
+                string contactDetails = dr["ProjectContactName"].ToString() + ", " + dr["ProjectContactEmail"].ToString() + ", " + dr["ProjectContactPhone"].ToString();
+                tbl.AddCell(new Phrase(contactDetails, TableFont));
+            }
 
             cell = new PdfPCell(new Phrase("", TitleFont));
             cell.Border = 0;
@@ -1094,567 +1001,5 @@ namespace SRFROWCA.Common
             tbl.AddCell(new Phrase("Achieved", TitleFont));
             tbl.AddCell(new Phrase("Accumulative", TitleFont));
         }
-
-        //private static void Ad2dObjective(iTextSharp.text.Document document, PdfPTable tbl, DataRow row)
-        //{
-        //    // Add header.
-        //    PdfPCell cell = null;
-        //    cell = new PdfPCell(new Phrase("" + row["Objective"].ToString(), TitleFont));
-        //    cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
-        //    tbl.AddCell(cell);
-
-        //    cell = new PdfPCell(new Phrase("Priority: " + row["HumanitarianPriority"].ToString(), TitleFont));
-        //    cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
-        //    tbl.AddCell(cell);
-
-        //    cell = new PdfPCell(new Phrase("Activity: " + row["ActivityName"].ToString(), TitleFont));
-        //    cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
-        //    tbl.AddCell(cell);
-
-        //    cell = new PdfPCell(new Phrase("Activ Indicator: " + row["DataName"].ToString(), TitleFont));
-        //    cell.Colspan = 4;
-        //    cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
-        //    tbl.AddCell(cell);
-
-
-        //}
-
-
-        ///************************************New functions***************************************/
-
-        //private static void IPReports(iTextSharp.text.Document document, DataRow row)
-        //{
-        //    IPReportsGeneralInfo(document, row);
-        //    //int spReportId = Convert.ToInt32(row["ProjectSPReportid"].ToString());
-        //    //WriteIPReportTargets(document, spReportId);
-        //}
-
-        //private DataTable GetReportSubSector(int spReportId)
-        //{
-        //    DataTable dt = new DataTable();
-        //    structResult spReports = _dataContext.GetAllRecordsByID(ConnectionString, "Usp_ProjectGetReportSubSectors", "SPReports", new object[] { spReportId });
-
-        //    if (spReports.intCode == (int)FetchStatus.Success)
-        //    {
-        //        if (spReports.dstResult.Tables["SPReports"].Rows.Count > 0)
-        //        {
-        //            dt = spReports.dstResult.Tables["SPReports"];
-
-        //        }
-        //    }
-
-        //    return dt;
-        //}
-
-        //private DataTable GetIPReports(int projectId, int spId)
-        //{
-        //    DataTable dt = new DataTable();
-        //    structResult spReports = _dataContext.GetAllRecordsByID(ConnectionString, "Usp_ProjectGetAllReportsOfIP", "SPReports", new object[] { projectId, spId });
-
-        //    if (spReports.intCode == (int)FetchStatus.Success)
-        //    {
-
-        //        if (spReports.dstResult.Tables["SPReports"].Rows.Count > 0)
-        //        {
-        //            dt = spReports.dstResult.Tables["SPReports"];
-        //        }
-        //    }
-
-        //    return dt;
-        //}
-
-        //private static void IPReportsGeneralInfo(iTextSharp.text.Document document, DataRow row)
-        //{
-        //    //PdfPTable reportGeneralPDFTable = new PdfPTable(4);
-
-        //    //// Add header.
-        //    ////PdfPCell cell = null;
-
-        //    ////cell = new PdfPCell(new Phrase("Report: " + row["ReportFrequencyName"].ToString(), TitleFont));
-        //    ////cell.Colspan = 4;
-        //    ////cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
-        //    ////reportGeneralPDFTable.AddCell(cell);
-
-        //    //reportGeneralPDFTable.AddCell(new Phrase("Location:", TitleFont));
-        //    //reportGeneralPDFTable.AddCell(new Phrase(row["Location"].ToString(), TableFont));
-        //    //reportGeneralPDFTable.AddCell(new Phrase("Location Type:", TitleFont));
-        //    ////reportGeneralPDFTable.AddCell(new Phrase(row["LocationType"].ToString(), TableFont));
-        //    ////reportGeneralPDFTable.AddCell(new Phrase("Start-End Date:", TitleFont));
-        //    ////reportGeneralPDFTable.AddCell(new Phrase(string.Format("{0} TO {1}", row["StartDate"].ToString(), row["EndDate"].ToString()), TableFont));
-        //    ////reportGeneralPDFTable.AddCell(new Phrase("Report Status:", TitleFont));
-        //    ////reportGeneralPDFTable.AddCell(new Phrase(row["ReportStatusName"].ToString(), TableFont));
-
-        //    //document.Add(reportGeneralPDFTable);
-        //}
-
-        //private void WriteIPReportTargets(iTextSharp.text.Document document, int spReportId)
-        //{
-
-
-        //    PdfPTable reportTargetsPDFTable = new PdfPTable(12);
-
-        //    // Add header.
-        //    PdfPCell cell = null;
-
-        //    //cell = new PdfPCell(new Phrase("Report Targets", TitleFont));
-        //    //cell.Colspan = 12;
-        //    //cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
-        //    //reportTargetsPDFTable.AddCell(cell);
-
-        //    cell = new PdfPCell(new Phrase("Title", TitleFont));
-        //    cell.Colspan = 2;
-        //    cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
-        //    reportTargetsPDFTable.AddCell(cell);
-
-        //    cell = new PdfPCell(new Phrase("Assigned Target", TitleFont));
-        //    cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
-        //    reportTargetsPDFTable.AddCell(cell);
-
-        //    cell = new PdfPCell(new Phrase("Achieved Value", TitleFont));
-        //    cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
-        //    reportTargetsPDFTable.AddCell(cell);
-
-        //    cell = new PdfPCell(new Phrase("Benefic Ind Target", TitleFont));
-        //    cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
-        //    reportTargetsPDFTable.AddCell(cell);
-
-        //    cell = new PdfPCell(new Phrase("Benefic Ind Achieved", TitleFont));
-        //    cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
-        //    reportTargetsPDFTable.AddCell(cell);
-
-        //    cell = new PdfPCell(new Phrase("Benefic Families Target", TitleFont));
-        //    cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
-        //    reportTargetsPDFTable.AddCell(cell);
-
-        //    cell = new PdfPCell(new Phrase("Benefic Families Achieved", TitleFont));
-        //    cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
-        //    reportTargetsPDFTable.AddCell(cell);
-
-        //    cell = new PdfPCell(new Phrase("Benefic HH Target", TitleFont));
-        //    cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
-        //    reportTargetsPDFTable.AddCell(cell);
-
-        //    cell = new PdfPCell(new Phrase("Benefic HH Achieved", TitleFont));
-        //    cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
-        //    reportTargetsPDFTable.AddCell(cell);
-
-        //    cell = new PdfPCell(new Phrase("Total Cost", TitleFont));
-        //    cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
-        //    reportTargetsPDFTable.AddCell(cell);
-
-        //    cell = new PdfPCell(new Phrase("Total Cost Reported", TitleFont));
-        //    cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
-        //    reportTargetsPDFTable.AddCell(cell);
-
-
-
-        //    document.Add(reportTargetsPDFTable);
-
-        //    DataTable ReportSubSectors = GetReportSubSector(spReportId); // Get all the subsectors used in a particular Report
-
-        //    foreach (DataRow row in ReportSubSectors.Rows)
-        //    {
-        //        PdfPTable reportSubSectorTable = new PdfPTable(3);
-        //        // write SubSector Name
-        //        cell = new PdfPCell(new Phrase("Sub Sector: " + row["SubSector"], TitleFont));
-        //        cell.Colspan = 3;
-        //        cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.Bisque);
-        //        reportSubSectorTable.AddCell(cell);
-        //        document.Add(reportSubSectorTable);
-
-        //        int subsectorId = Convert.ToInt32(row["EmergencyPhaseSectorSubSectorID"]);
-
-        //        DataTable dtReportTargets = GetIPReportTargets(spReportId, subsectorId);//Get Activities of a Report that belong to a particular subsector
-
-        //        if (dtReportTargets.Rows.Count > 0)
-        //        {
-        //            IPReportTargets(document, dtReportTargets);
-        //        }
-        //    }
-        //    AddNewLineInDocument(document, 1);
-        //}
-
-        //private DataTable GetIPReportTargets(int reportId, int subsectorId)
-        //{
-        //    DataTable dt = new DataTable();
-
-        //    structResult spReports = _dataContext.GetAllRecordsByID(ConnectionString, "Usp_ProjectGetReportDetails", "SPReports", new object[] { reportId, subsectorId });
-
-        //    if (spReports.intCode == (int)FetchStatus.Success)
-        //    {
-        //        if (spReports.dstResult.Tables["SPReports"].Rows.Count > 0)
-        //        {
-        //            dt = spReports.dstResult.Tables["SPReports"];
-        //        }
-        //    }
-
-        //    return dt;
-        //}
-
-        //private void IPReportTargets(iTextSharp.text.Document document, DataTable dt)
-        //{
-        //    bool isValid;
-
-        //    foreach (DataRow row in dt.Rows)
-        //    {
-        //        BaseColor BC = new iTextSharp.text.BaseColor(System.Drawing.Color.Azure);
-        //        PdfPTable reportTargetsPDFTable = new PdfPTable(12);
-        //        PdfPCell cell = null;
-
-        //        cell = new PdfPCell(new Phrase(row["Activity"].ToString(), TableFont));
-        //        cell.Colspan = 2;
-        //        cell.BackgroundColor = BC;
-        //        cell.HorizontalAlignment = Element.ALIGN_RIGHT;
-        //        reportTargetsPDFTable.AddCell(cell);
-
-        //        cell = new PdfPCell(new Phrase(row["TargetValue"].ToString(), TableFont));
-        //        cell.BackgroundColor = BC;
-        //        cell.HorizontalAlignment = Element.ALIGN_RIGHT;
-        //        reportTargetsPDFTable.AddCell(cell);
-
-        //        cell = new PdfPCell(new Phrase(row["ReportedValue"].ToString(), TableFont));
-        //        cell.BackgroundColor = BC;
-        //        cell.HorizontalAlignment = Element.ALIGN_RIGHT;
-        //        reportTargetsPDFTable.AddCell(cell);
-
-        //        cell = new PdfPCell(new Phrase(row["BeneficIndividualTotal"].ToString(), TableFont));
-        //        cell.BackgroundColor = BC;
-        //        cell.HorizontalAlignment = Element.ALIGN_RIGHT;
-        //        reportTargetsPDFTable.AddCell(cell);
-
-        //        cell = new PdfPCell(new Phrase(row["BeneficIndividualTotalReported"].ToString(), TableFont));
-        //        cell.BackgroundColor = BC;
-        //        cell.HorizontalAlignment = Element.ALIGN_RIGHT;
-        //        reportTargetsPDFTable.AddCell(cell);
-
-        //        cell = new PdfPCell(new Phrase(row["BeneficFamilyTotal"].ToString(), TableFont));
-        //        cell.BackgroundColor = BC;
-        //        cell.HorizontalAlignment = Element.ALIGN_RIGHT;
-        //        reportTargetsPDFTable.AddCell(cell);
-
-        //        cell = new PdfPCell(new Phrase(row["BeneficFamilyTotalReported"].ToString(), TableFont));
-        //        cell.BackgroundColor = BC;
-        //        cell.HorizontalAlignment = Element.ALIGN_RIGHT;
-        //        reportTargetsPDFTable.AddCell(cell);
-
-        //        cell = new PdfPCell(new Phrase(row["BeneficHHTotal"].ToString(), TableFont));
-        //        cell.BackgroundColor = BC;
-        //        cell.HorizontalAlignment = Element.ALIGN_RIGHT;
-        //        reportTargetsPDFTable.AddCell(cell);
-
-        //        cell = new PdfPCell(new Phrase(row["BeneficHHTotalReported"].ToString(), TableFont));
-        //        cell.BackgroundColor = BC;
-        //        cell.HorizontalAlignment = Element.ALIGN_RIGHT;
-        //        reportTargetsPDFTable.AddCell(cell);
-
-        //        cell = new PdfPCell(new Phrase(row["ActivityCostTotal"].ToString(), TableFont));
-        //        cell.BackgroundColor = BC;
-        //        cell.HorizontalAlignment = Element.ALIGN_RIGHT;
-        //        reportTargetsPDFTable.AddCell(cell);
-
-        //        cell = new PdfPCell(new Phrase(row["ActivityCostTotalReported"].ToString(), TableFont));
-        //        cell.BackgroundColor = BC;
-        //        cell.HorizontalAlignment = Element.ALIGN_RIGHT;
-        //        reportTargetsPDFTable.AddCell(cell);
-
-
-        //        document.Add(reportTargetsPDFTable); //Add the Activity
-
-        //        isValid = !String.IsNullOrEmpty(row["BeneficMale"].ToString()) || !String.IsNullOrEmpty(row["BeneficFemale"].ToString())
-        //            || !String.IsNullOrEmpty(row["BeneficBoys"].ToString()) || !String.IsNullOrEmpty(row["BeneficGirls"].ToString())
-        //            || !String.IsNullOrEmpty(row["BeneficDisabled"].ToString()) || !String.IsNullOrEmpty(row["BeneficElderly"].ToString())
-        //            || !String.IsNullOrEmpty(row["BeneficInfant"].ToString()) || !String.IsNullOrEmpty(row["BeneficKid"].ToString());
-        //        if (isValid)
-        //        {
-        //            document.Add(GetBenefHeaders());
-        //            document.Add(GetBenefDetails(row));
-        //        }
-
-        //        isValid = !String.IsNullOrEmpty(row["BeneficMaleHH"].ToString()) || !String.IsNullOrEmpty(row["BeneficFemaleHH"].ToString())
-        //            || !String.IsNullOrEmpty(row["BeneficChildHH"].ToString()) || !String.IsNullOrEmpty(row["BeneficDisabledHH"].ToString())
-        //            || !String.IsNullOrEmpty(row["BeneficElderlyHH"].ToString());
-
-        //        if (isValid)
-        //        {
-        //            document.Add(GetHHHeaders());
-        //            document.Add(GetHHDetails(row));
-        //        }
-
-        //    }
-
-        //    //document.Add(reportTargetsPDFTable);
-
-
-        //}
-
-        //private PdfPTable GetBenefHeaders()
-        //{
-        //    PdfPTable BenefTable = new PdfPTable(18);
-        //    PdfPCell cell = null;
-        //    BaseColor BenfColor = new iTextSharp.text.BaseColor(System.Drawing.Color.Peru);
-
-        //    cell = new PdfPCell(new Phrase("Beneficiaries Individual Targets", TitleFont));
-        //    cell.Colspan = 18;
-        //    cell.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
-        //    cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
-        //    BenefTable.AddCell(cell);
-
-        //    cell = new PdfPCell(new Phrase("Male Target", TableFont));
-        //    cell.Rotation = -90;
-        //    cell.BackgroundColor = BenfColor;
-        //    BenefTable.AddCell(cell);
-
-        //    cell = new PdfPCell(new Phrase("Male Reached", TableFont));
-        //    cell.Rotation = -90;
-        //    cell.BackgroundColor = BenfColor;
-        //    BenefTable.AddCell(cell);
-        //    cell = new PdfPCell(new Phrase("Female Target", TableFont));
-        //    cell.Rotation = -90;
-        //    cell.BackgroundColor = BenfColor;
-        //    BenefTable.AddCell(cell);
-        //    cell = new PdfPCell(new Phrase("Female Reached", TableFont));
-        //    cell.Rotation = -90;
-        //    cell.BackgroundColor = BenfColor;
-        //    BenefTable.AddCell(cell);
-        //    cell = new PdfPCell(new Phrase("Boys Target", TableFont));
-        //    cell.Rotation = -90;
-        //    cell.BackgroundColor = BenfColor;
-        //    BenefTable.AddCell(cell);
-        //    cell = new PdfPCell(new Phrase("Boys Reached", TableFont));
-        //    cell.Rotation = -90;
-        //    cell.BackgroundColor = BenfColor;
-        //    BenefTable.AddCell(cell);
-        //    cell = new PdfPCell(new Phrase("Girls Target", TableFont));
-        //    cell.Rotation = -90;
-        //    cell.BackgroundColor = BenfColor;
-        //    BenefTable.AddCell(cell);
-        //    cell = new PdfPCell(new Phrase("Girls Reached", TableFont));
-        //    cell.Rotation = -90;
-        //    cell.BackgroundColor = BenfColor;
-        //    BenefTable.AddCell(cell);
-        //    cell = new PdfPCell(new Phrase("Disabled Target", TableFont));
-        //    cell.Rotation = -90;
-        //    cell.BackgroundColor = BenfColor;
-        //    BenefTable.AddCell(cell);
-        //    cell = new PdfPCell(new Phrase("Disabled Reached", TableFont));
-        //    cell.Rotation = -90;
-        //    cell.BackgroundColor = BenfColor;
-        //    BenefTable.AddCell(cell);
-        //    cell = new PdfPCell(new Phrase("Elderly Target", TableFont));
-        //    cell.Rotation = -90;
-        //    cell.BackgroundColor = BenfColor;
-        //    BenefTable.AddCell(cell);
-        //    cell = new PdfPCell(new Phrase("Elderly Reached", TableFont));
-        //    cell.Rotation = -90;
-        //    cell.BackgroundColor = BenfColor;
-        //    BenefTable.AddCell(cell);
-        //    cell = new PdfPCell(new Phrase("Children Target", TableFont));
-        //    cell.Rotation = -90;
-        //    cell.BackgroundColor = BenfColor;
-        //    BenefTable.AddCell(cell);
-        //    cell = new PdfPCell(new Phrase("Children Reached", TableFont));
-        //    cell.Rotation = -90;
-        //    cell.BackgroundColor = BenfColor;
-        //    BenefTable.AddCell(cell);
-        //    cell = new PdfPCell(new Phrase("Kids Target", TableFont));
-        //    cell.Rotation = -90;
-        //    cell.BackgroundColor = BenfColor;
-        //    BenefTable.AddCell(cell);
-        //    cell = new PdfPCell(new Phrase("Kids Reached", TableFont));
-        //    cell.Rotation = -90;
-        //    cell.BackgroundColor = BenfColor;
-        //    BenefTable.AddCell(cell);
-        //    cell = new PdfPCell(new Phrase("PLW Target", TableFont));
-        //    cell.Rotation = -90;
-        //    cell.BackgroundColor = BenfColor;
-        //    BenefTable.AddCell(cell);
-        //    cell = new PdfPCell(new Phrase("PLW Reached", TableFont));
-        //    cell.Rotation = -90;
-        //    cell.BackgroundColor = BenfColor;
-        //    BenefTable.AddCell(cell);
-        //    return (BenefTable);
-        //}
-
-        //private PdfPTable GetBenefDetails(DataRow row)
-        //{
-        //    BaseColor BenfColor = new iTextSharp.text.BaseColor(System.Drawing.Color.Peru);
-        //    PdfPTable BenefTable = new PdfPTable(18);
-        //    // new PdfPCell(new Phrase("Hello")) { BackgroundColor = color }
-        //    //BenefTable.AddCell(new Phrase(row["BeneficMale"].ToString(), TableFont));
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["BeneficMale"].ToString(), TableFont)) { BackgroundColor = BenfColor, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["BeneficMaleReported"].ToString(), TableFont)) { BackgroundColor = BenfColor, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["BeneficFemale"].ToString(), TableFont)) { BackgroundColor = BenfColor, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["BeneficFemaleReported"].ToString(), TableFont)) { BackgroundColor = BenfColor, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["BeneficBoys"].ToString(), TableFont)) { BackgroundColor = BenfColor, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["BeneficBoysReported"].ToString(), TableFont)) { BackgroundColor = BenfColor, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["BeneficGirls"].ToString(), TableFont)) { BackgroundColor = BenfColor, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["BeneficGirlsReported"].ToString(), TableFont)) { BackgroundColor = BenfColor, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["BeneficDisabled"].ToString(), TableFont)) { BackgroundColor = BenfColor, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["BeneficDisabledReported"].ToString(), TableFont)) { BackgroundColor = BenfColor, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["BeneficElderly"].ToString(), TableFont)) { BackgroundColor = BenfColor, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["BeneficElderlyReported"].ToString(), TableFont)) { BackgroundColor = BenfColor, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["BeneficInfant"].ToString(), TableFont)) { BackgroundColor = BenfColor, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["BeneficInfantReported"].ToString(), TableFont)) { BackgroundColor = BenfColor, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["BeneficKid"].ToString(), TableFont)) { BackgroundColor = BenfColor, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["BeneficKidReported"].ToString(), TableFont)) { BackgroundColor = BenfColor, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["BeneficPLW"].ToString(), TableFont)) { BackgroundColor = BenfColor, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["BeneficPLWReported"].ToString(), TableFont)) { BackgroundColor = BenfColor, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-
-        //    return (BenefTable);
-        //}
-
-        //private PdfPTable GetHHHeaders()
-        //{
-        //    PdfPTable BenefTable = new PdfPTable(18);
-        //    PdfPCell cell = null;
-        //    BaseColor BenfColor = new iTextSharp.text.BaseColor(System.Drawing.Color.Peru);
-        //    BaseColor BenfColor1 = new iTextSharp.text.BaseColor(System.Drawing.Color.PapayaWhip);
-        //    BaseColor BenfColor2 = new iTextSharp.text.BaseColor(System.Drawing.Color.PaleTurquoise);
-
-
-        //    cell = new PdfPCell(new Phrase("Beneficiaries HouseHold Targets", TitleFont));
-        //    cell.Colspan = 10;
-        //    cell.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
-        //    cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
-        //    BenefTable.AddCell(cell);
-
-
-        //    cell = new PdfPCell(new Phrase("Cost Details", TitleFont));
-        //    cell.Colspan = 8;
-        //    cell.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
-        //    cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.DarkGray);
-        //    BenefTable.AddCell(cell);
-
-        //    cell = (new PdfPCell(new Phrase("Male Target", TableFont)) { BackgroundColor = BenfColor1 });
-        //    cell.Rotation = -90;
-        //    BenefTable.AddCell(cell);
-        //    cell = new PdfPCell(new Phrase("Male Reached", TableFont)) { BackgroundColor = BenfColor1 };
-        //    cell.Rotation = -90;
-        //    BenefTable.AddCell(cell);
-        //    cell = new PdfPCell(new Phrase("Female Target", TableFont)) { BackgroundColor = BenfColor1 };
-        //    cell.Rotation = -90;
-        //    BenefTable.AddCell(cell);
-        //    cell = new PdfPCell(new Phrase("Female Reported", TableFont)) { BackgroundColor = BenfColor1 };
-        //    cell.Rotation = -90;
-        //    BenefTable.AddCell(cell);
-        //    cell = new PdfPCell(new Phrase("Child Target", TableFont)) { BackgroundColor = BenfColor1 };
-        //    cell.Rotation = -90;
-        //    BenefTable.AddCell(cell);
-        //    cell = new PdfPCell(new Phrase("Child Reached", TableFont)) { BackgroundColor = BenfColor1 };
-        //    cell.Rotation = -90;
-        //    BenefTable.AddCell(cell);
-        //    cell = new PdfPCell(new Phrase("Disabled Target", TableFont)) { BackgroundColor = BenfColor1 };
-        //    cell.Rotation = -90;
-        //    BenefTable.AddCell(cell);
-        //    cell = new PdfPCell(new Phrase("Disabled Reached", TableFont)) { BackgroundColor = BenfColor1 };
-        //    cell.Rotation = -90;
-        //    BenefTable.AddCell(cell);
-        //    cell = new PdfPCell(new Phrase("Elderly Target", TableFont)) { BackgroundColor = BenfColor1 };
-        //    cell.Rotation = -90;
-        //    BenefTable.AddCell(cell);
-        //    cell = new PdfPCell(new Phrase("Elderly Reached", TableFont)) { BackgroundColor = BenfColor1 };
-        //    cell.Rotation = -90;
-        //    BenefTable.AddCell(cell);
-
-        //    cell = new PdfPCell(new Phrase("Activity Cost", TableFont)) { BackgroundColor = BenfColor2 };
-        //    cell.Rotation = -90;
-        //    BenefTable.AddCell(cell);
-
-        //    cell = new PdfPCell(new Phrase("Activity Cost Reported", TableFont)) { BackgroundColor = BenfColor2 };
-        //    cell.Rotation = -90;
-        //    BenefTable.AddCell(cell);
-
-        //    cell = new PdfPCell(new Phrase("Admin Cost", TableFont)) { BackgroundColor = BenfColor2 };
-        //    cell.Rotation = -90;
-        //    BenefTable.AddCell(cell);
-
-        //    cell = new PdfPCell(new Phrase("Admin Cost Reported", TableFont)) { BackgroundColor = BenfColor2 };
-        //    cell.Rotation = -90;
-        //    BenefTable.AddCell(cell);
-
-        //    cell = new PdfPCell(new Phrase("Staff Cost", TableFont)) { BackgroundColor = BenfColor2 };
-        //    cell.Rotation = -90;
-        //    BenefTable.AddCell(cell);
-
-        //    cell = new PdfPCell(new Phrase("Staff Cost Reported", TableFont)) { BackgroundColor = BenfColor2 };
-        //    cell.Rotation = -90;
-        //    BenefTable.AddCell(cell);
-
-        //    cell = new PdfPCell(new Phrase("Input Cost", TableFont)) { BackgroundColor = BenfColor2 };
-        //    cell.Rotation = -90;
-        //    BenefTable.AddCell(cell);
-
-        //    cell = new PdfPCell(new Phrase("Input Cost Reported", TableFont)) { BackgroundColor = BenfColor2 };
-        //    cell.Rotation = -90;
-        //    BenefTable.AddCell(cell);
-
-        //    return (BenefTable);
-        //}
-
-        //private PdfPTable GetHHDetails(DataRow row)
-        //{
-
-        //    PdfPTable BenefTable = new PdfPTable(18);
-        //    BaseColor BenfColor = new iTextSharp.text.BaseColor(System.Drawing.Color.PapayaWhip);
-        //    BaseColor BenfColor2 = new iTextSharp.text.BaseColor(System.Drawing.Color.PaleTurquoise);
-
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["BeneficMaleHH"].ToString(), TableFont)) { BackgroundColor = BenfColor, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["BeneficMaleHHReported"].ToString(), TableFont)) { BackgroundColor = BenfColor, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["BeneficFemaleHH"].ToString(), TableFont)) { BackgroundColor = BenfColor, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["BeneficFemaleHHReported"].ToString(), TableFont)) { BackgroundColor = BenfColor, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["BeneficChildHH"].ToString(), TableFont)) { BackgroundColor = BenfColor, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["BeneficChildHHReported"].ToString(), TableFont)) { BackgroundColor = BenfColor, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["BeneficDisabledHH"].ToString(), TableFont)) { BackgroundColor = BenfColor, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["BeneficDisabledHHReported"].ToString(), TableFont)) { BackgroundColor = BenfColor, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["BeneficElderlyHH"].ToString(), TableFont)) { BackgroundColor = BenfColor, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["BeneficElderlyHHReported"].ToString(), TableFont)) { BackgroundColor = BenfColor, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["ActivityCost"].ToString(), TableFont)) { BackgroundColor = BenfColor2, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["ActivityCostReported"].ToString(), TableFont)) { BackgroundColor = BenfColor2, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["AdminCost"].ToString(), TableFont)) { BackgroundColor = BenfColor2, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["AdminCostReported"].ToString(), TableFont)) { BackgroundColor = BenfColor2, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["StaffCost"].ToString(), TableFont)) { BackgroundColor = BenfColor2, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["StaffCostReported"].ToString(), TableFont)) { BackgroundColor = BenfColor2, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["ActivityOtherCost"].ToString(), TableFont)) { BackgroundColor = BenfColor2, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-        //    BenefTable.AddCell(new PdfPCell(new Phrase(row["ActivityOtherCostReported"].ToString(), TableFont)) { BackgroundColor = BenfColor2, HorizontalAlignment = PdfPCell.ALIGN_RIGHT });
-
-        //    return (BenefTable);
-        //}
-
-        ///**************************************************************************************/
-
-        //private bool IsNew(int projectId)
-        //{
-        //    DataTable dt = new DataTable();
-
-        //    structResult Project = _dataContext.GetAllRecordsByID(ConnectionString, "Usp_ProjectIsNewProject", "Project", new object[] { projectId });
-
-        //    if (Project.intCode == (int)FetchStatus.Success)
-        //    {
-        //        if (Project.dstResult.Tables["Project"].Rows.Count > 0)
-        //        {
-        //            DataRow Row = Project.dstResult.Tables["Project"].Rows[0];
-        //            if (!string.IsNullOrEmpty(Row["IsNew"].ToString()) && Convert.ToInt32(Row["IsNew"]) == 1)
-        //            {
-        //                return true;
-        //            }
-        //            else
-        //            {
-        //                return false;
-        //            }
-        //        }
-        //    }
-
-
-        //    return true;
-        //}
-
-        //private void AddNewLineInDocument(iTextSharp.text.Document document, int numberOfLines)
-        //{
-        //    for (int i = 0; i <= numberOfLines; i++)
-        //    {
-        //        document.Add(new Paragraph("\n"));
-        //    }
-        //}
     }
-
 }
