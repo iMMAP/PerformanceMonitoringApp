@@ -4,6 +4,7 @@ using System.Web.UI.WebControls;
 using BusinessLogic;
 using SRFROWCA.Common;
 using System.Web;
+using System.Web.UI;
 
 namespace SRFROWCA.ClusterLead
 {
@@ -129,9 +130,7 @@ namespace SRFROWCA.ClusterLead
 
         private void ExportToPDF(int? projectId)
         {
-            int year = RC.SelectedEmergencyId == 1 ? 2014 : 2015;
-
-            DataTable dtResults = new DataTable();
+            int year = 2015;
 
             int tempVal = 0;
             if (ddlClusters.Visible)
@@ -167,19 +166,40 @@ namespace SRFROWCA.ClusterLead
                     orgId = (int?)null;
             }
 
+            int? isOPS = null;
+            if (cbIsOPS.Checked && cbIsORS.Checked)
+            {
+                isOPS = null;
+            }
+            else if (cbIsOPS.Checked)
+            {
+                isOPS = 1;
+            }
+            else if (cbIsORS.Checked)
+            {
+                isOPS = 0;
+            }
 
             string projectStatus = ddlStatus.SelectedValue == "0" ? null : ddlStatus.SelectedValue;
-            dtResults = DBContext.GetData("uspGetReports2", new object[] {countryID, clusterId,projCode, orgId, RC.SelectedSiteLanguageId, 
-                                                                                        year, projectId, projectStatus, secClusterId});
-
-            if (dtResults.Rows.Count > 0)
+            DataTable dtProjects = DBContext.GetData("GetProjectsWithFullDetails", new object[] {countryID, clusterId,projCode, orgId, RC.SelectedSiteLanguageId, 
+                                                                                        year, projectId, projectStatus, secClusterId, isOPS});
+            if (dtProjects.Rows.Count > 0)
             {
                 string fileName = DateTime.Now.ToString("yyyyMMddHHmmss");
 
                 Response.ContentType = "application/pdf";
                 Response.AddHeader("Content-Disposition", string.Format("attachment;filename=Project-{0}.pdf", fileName));
-                Response.BinaryWrite(WriteDataEntryPDF.GeneratePDF(dtResults, projectId, null).ToArray());
+                Response.BinaryWrite(WriteDataEntryPDF.GenerateProjectsListingPDF(dtProjects, true).ToArray());
             }
+            else
+            {
+                ShowMessage("NO Project To Export!", RC.NotificationType.Info, true, 2000);
+            }
+        }
+
+        private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
+        {
+            RC.ShowMessage(Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
         }
 
         protected void cblReportingStatus_SelectedIndexChanged(object sender, EventArgs e)
@@ -315,7 +335,7 @@ namespace SRFROWCA.ClusterLead
             {
                 isOPS = 0;
             }
-            
+
 
             return DBContext.GetData("GetProjectsListing", new object[] {emgLocationId, emgClusterId, projCode, orgId, 
                                                                             RC.SelectedSiteLanguageId,  year, projectStatus, 

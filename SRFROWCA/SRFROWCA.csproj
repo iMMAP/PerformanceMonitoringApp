@@ -365,8 +365,6 @@
     <Content Include="ClusterLead\ClusterIndicatorTargets.aspx" />
     <Content Include="ClusterLead\EditOutputIndicator.aspx" />
     <Content Include="ClusterLead\IndicatorListing.aspx" />
-    <Content Include="ClusterLead\ProjectDetails.aspx" />
-    <Content Include="ClusterLead\ProjectReports.aspx" />
     <Content Include="ClusterLead\ProjectsListing.aspx" />
     <Content Include="Admin\UploadLocations.aspx" />
     <Content Include="Anonymous\AllData.aspx" />
@@ -766,20 +764,6 @@
     </Compile>
     <Compile Include="ClusterLead\IndicatorListing.aspx.designer.cs">
       <DependentUpon>IndicatorListing.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ClusterLead\ProjectDetails.aspx.cs">
-      <DependentUpon>ProjectDetails.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ClusterLead\ProjectDetails.aspx.designer.cs">
-      <DependentUpon>ProjectDetails.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ClusterLead\ProjectReports.aspx.cs">
-      <DependentUpon>ProjectReports.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ClusterLead\ProjectReports.aspx.designer.cs">
-      <DependentUpon>ProjectReports.aspx</DependentUpon>
     </Compile>
     <Compile Include="ClusterLead\ProjectsListing.aspx.cs">
       <DependentUpon>ProjectsListing.aspx</DependentUpon>

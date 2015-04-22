@@ -17,17 +17,11 @@
         <!-- .breadcrumb -->
     </div>
     <div class="page-content">
+        <div id="divMsg"></div>
         <table class="width-100">
             <tr>
                 <td>
                     <div class="widget-header widget-header-small header-color-blue2">
-                        <%--<h6>
-                            <button runat="server" id="btnExportPDF" onserverclick="ExportToPDF" class="width-10 btn btn-sm btn-yellow"
-                                title="PDF">
-                                <i class="icon-download"></i>PDF
-                                       
-                            </button>
-                        </h6>--%>
                     </div>
                     <div class="widget-body">
                         <div class="widget-main">
@@ -85,18 +79,9 @@
                                                             meta:resourcekey="txtProjectCodeResource1"></asp:TextBox>
                                                     </td>
                                                     <td>
-                                                        <label>
-                                                            <asp:Label ID="lblCaptionStatus" runat="server" Text="Status:" meta:resourcekey="lblCaptionStatusResource1"></asp:Label></label></td>
+                                                        </td>
                                                     <td>
-                                                        <asp:DropDownList ID="ddlStatus" runat="server" meta:resourcekey="ddlStatusResource1">
-                                                            <asp:ListItem Text="Select" Value="0"></asp:ListItem>
-                                                            <asp:ListItem Text="Approved by Cluster/Sector " Value="Approved by Cluster/Sector "></asp:ListItem>
-                                                            <asp:ListItem Text="CAP Final Review Phase" Value="CAP Final Review Phase"></asp:ListItem>
-                                                            <asp:ListItem Text="Draft" Value="Draft"></asp:ListItem>
-                                                            <asp:ListItem Text="HQ Review Phase" Value="HQ Review Phase"></asp:ListItem>
-                                                            <asp:ListItem Text="Published by CAP" Value="Published by CAP"></asp:ListItem>
-                                                            <asp:ListItem Text="Rejected" Value="Rejected"></asp:ListItem>
-                                                        </asp:DropDownList>
+                                                        
                                                     </td>
                                                 </tr>
                                             <tr>
@@ -155,11 +140,11 @@
                             <asp:BoundField DataField="OriginalRequest" HeaderText="Original Request" SortExpression="OriginalRequest"
                                 meta:resourcekey="BoundFieldResource10" />
                             <asp:BoundField DataField="OPSProjectStatus" HeaderText="Status" SortExpression="OPSProjectStatus" meta:resourcekey="BoundFieldResource6" />
-                            <asp:BoundField DataField="Contact" HeaderText="Contact" ItemStyle-Wrap="true" ItemStyle-Width="150px"
+                            <%--<asp:BoundField DataField="Contact" HeaderText="Contact" ItemStyle-Wrap="true" ItemStyle-Width="150px"
                                 SortExpression="Contact" meta:resourcekey="BoundFieldResource8">
                                 <ItemStyle Wrap="True" Width="150px"></ItemStyle>
-                            </asp:BoundField>
-                            <asp:BoundField DataField="Phone" HeaderText="Phone" meta:resourcekey="BoundFieldResource9" />
+                            </asp:BoundField>--%>
+                            <%--<asp:BoundField DataField="Phone" HeaderText="Phone" meta:resourcekey="BoundFieldResource9" />--%>
                             <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderText="PDF" meta:resourcekey="TemplateFieldResource2">
                                 <ItemTemplate>
                                     <asp:ImageButton ID="lnkPrint" runat="server" ImageUrl="../assets/orsimages/pdf.png" CommandName="PrintReport"

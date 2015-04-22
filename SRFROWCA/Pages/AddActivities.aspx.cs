@@ -205,26 +205,26 @@ namespace SRFROWCA.Pages
 
         protected void btnExcel_Export(object sender, EventArgs e)
         {
-            SaveProjectData();
-            DataTable dt = GetProjectsData(true);
-            if (dt.Rows.Count > 0)
-            {
-                GridView gv = new GridView();
-                gv.DataSource = dt;
-                gv.DataBind();
-                string fileName = UserInfo.CountryName + "_" + UserInfo.OrgName + "_" + ddlMonth.SelectedItem.Text + "_Report";
-                ExportUtility.ExportGridView(gv, fileName, ".xls", Response, true);
-            }
+            //SaveProjectData();
+            //DataTable dt = GetProjectsData(true);
+            //if (dt.Rows.Count > 0)
+            //{
+            //    GridView gv = new GridView();
+            //    gv.DataSource = dt;
+            //    gv.DataBind();
+            //    string fileName = UserInfo.CountryName + "_" + UserInfo.OrgName + "_" + ddlMonth.SelectedItem.Text + "_Report";
+            //    ExportUtility.ExportGridView(gv, fileName, ".xls", Response, true);
+            //}
         }
 
         protected void btnPDF_Export(object sender, EventArgs e)
         {
-            SaveProjectData();
-            DataTable dt = GetProjectsData(false);
-            if (dt.Rows.Count > 0)
-            {
-                GeneratePDF(dt);
-            }
+            //SaveProjectData();
+            //DataTable dt = GetProjectsData(false);
+            //if (dt.Rows.Count > 0)
+            //{
+            //    //_Commented_GeneratePDF_Commented(dt);
+            //}
         }
 
         protected void Page_Error(object sender, EventArgs e)
@@ -942,20 +942,20 @@ namespace SRFROWCA.Pages
             return dt;
         }
 
-        private void GeneratePDF(DataTable dt)
-        {
-            using (MemoryStream outputStream = new MemoryStream())
-            {
-                iTextSharp.text.Document document = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4, 8, 8, 14, 6);
-                iTextSharp.text.pdf.PdfWriter writer = iTextSharp.text.pdf.PdfWriter.GetInstance(document, outputStream);
-                document.Open();
-                WriteDataEntryPDF.GenerateDocument(document, dt);
-                document.Close();
-                Response.ContentType = "application/pdf";
-                Response.AddHeader("Content-Disposition", string.Format("attachment;filename=Project-{0}.pdf", UserInfo.CountryName));
-                Response.BinaryWrite(outputStream.ToArray());
-            }
-        }
+        //private void GeneratePDF(DataTable dt)
+        //{
+        //    using (MemoryStream outputStream = new MemoryStream())
+        //    {
+        //        iTextSharp.text.Document document = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4, 8, 8, 14, 6);
+        //        iTextSharp.text.pdf.PdfWriter writer = iTextSharp.text.pdf.PdfWriter.GetInstance(document, outputStream);
+        //        document.Open();
+        //        WriteDataEntryPDF.GenerateDocument(document, dt);
+        //        document.Close();
+        //        Response.ContentType = "application/pdf";
+        //        Response.AddHeader("Content-Disposition", string.Format("attachment;filename=Project-{0}.pdf", UserInfo.CountryName));
+        //        Response.BinaryWrite(outputStream.ToArray());
+        //    }
+        //}
 
         private void BindCultureResourcesOfPage()
         {

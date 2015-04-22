@@ -5,6 +5,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using SRFROWCA.Common;
+using System.Transactions;
+
 
 namespace SRFROWCA.ClusterLead
 {
@@ -39,7 +41,7 @@ namespace SRFROWCA.ClusterLead
             {
                 if (IsTargetProvided())
                 {
-                    ShowValidationMessage();                    
+                    ShowValidationMessage();
                     return;
                 }
             }
@@ -52,10 +54,14 @@ namespace SRFROWCA.ClusterLead
                 isAdded = false;
             }
 
-            indicatorId = SaveIndicator(indicatorId);
-            SaveAdmin1Targets(indicatorId);
-            SendEmail(isAdded);
-            Response.Redirect("~/ClusterLead/CountryIndicators.aspx");
+            using (TransactionScope scope = new TransactionScope())
+            {
+                indicatorId = SaveIndicator(indicatorId);
+                SaveAdmin1Targets(indicatorId);
+                scope.Complete();
+                SendEmail(isAdded);
+                Response.Redirect("~/ClusterLead/CountryIndicators.aspx");
+            }
         }
 
         private void SendEmail(bool isAdded)
@@ -67,10 +73,11 @@ namespace SRFROWCA.ClusterLead
             {
                 subject = "New Output Indicator has been Added to ORS.";
             }
-            string country =  ddlCountry.SelectedItem.Text;
-            string cluster =  ddlCluster.SelectedItem.Text;
+            string country = ddlCountry.SelectedItem.Text;
+            string cluster = ddlCluster.SelectedItem.Text;
             string user = "";
-            try{user = User.Identity.Name;} catch{}
+            try { user = User.Identity.Name; }
+            catch { }
 
             string body = string.Format(@"<b>{0}</b><br/>
                                          <b>Country:</b> {1}<br/>
@@ -78,9 +85,9 @@ namespace SRFROWCA.ClusterLead
                                          <b>Ind Eng:</b> {3}<br/>
                                          <b>Ind Fr:</b> {4}<br/>
                                          <b>Added By:</b> {5}"
-                                         ,subject, country, cluster, txtInd1Eng.Text, txtInd1Fr.Text, user);
+                                         , subject, country, cluster, txtInd1Eng.Text, txtInd1Fr.Text, user);
             RC.SendEmail(emgCountryId, emgClsuterId, subject, body);
-        }        
+        }
 
         protected void btnBackToSRPList_Click(object sender, EventArgs e)
         {
@@ -156,7 +163,7 @@ namespace SRFROWCA.ClusterLead
                 RC.EnableDisableControls(ddlCluster, false);
                 RC.EnableDisableControls(ddlCountry, false);
             }
-            
+
             if (RC.IsCountryAdmin(this.User))
             {
                 RC.EnableDisableControls(ddlCountry, false);
@@ -286,13 +293,22 @@ namespace SRFROWCA.ClusterLead
             {
                 if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
                 {
-                    var txttarget = (TextBox)item.FindControl("txtTarget");
+                    var txtTarget = (TextBox)item.FindControl("txtTarget");
                     var hdnLocationId = (HiddenField)item.FindControl("hdnLocationId");
-                    if (!string.IsNullOrEmpty(txttarget.Text))
+                    int val = 0;
+                    bool result = int.TryParse(txtTarget.Text.Trim(), out val);
+                    int? target = null;
+                    if (result)
+                    {
+                        target = val;
+                    }
+
+                    int locationId = 0;
+                    int.TryParse(hdnLocationId.Value, out locationId);
+                    if (locationId > 0)
                     {
                         DBContext.Update("InsertOutputIndicatorTarget", new object[] { indicatorId, emgLocationId,
-                                            Convert.ToInt32(hdnLocationId.Value), Convert.ToInt32(txttarget.Text), 
-                                            RC.GetCurrentUserId, isRegional, DBNull.Value });
+                                            locationId, target, RC.GetCurrentUserId, isRegional, DBNull.Value });
                     }
                 }
             }
@@ -334,7 +350,7 @@ namespace SRFROWCA.ClusterLead
         {
             RC.ShowMessage(Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
         }
-        
+
         #endregion
     }
 }

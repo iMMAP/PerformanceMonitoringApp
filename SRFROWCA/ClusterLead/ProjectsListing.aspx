@@ -19,6 +19,7 @@
         <!-- .breadcrumb -->
     </div>
     <div class="page-content">
+         <div id="divMsg"></div>
         <table class="width-100">
             <tr>
                 <td>

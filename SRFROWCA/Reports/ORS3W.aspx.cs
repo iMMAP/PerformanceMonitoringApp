@@ -2,13 +2,8 @@
 using System.Data;
 using System.Drawing;
 using System.Globalization;
-using System.IO;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Xml;
 using BusinessLogic;
-using Microsoft.Reporting.WebForms;
 using SRFROWCA.Common;
 
 namespace SRFROWCA.Reports
@@ -23,7 +18,6 @@ namespace SRFROWCA.Reports
                 PopulateDropDowns();                
                 LoadData();
             }
-           
         }
         private void PopulateDropDowns()
         {

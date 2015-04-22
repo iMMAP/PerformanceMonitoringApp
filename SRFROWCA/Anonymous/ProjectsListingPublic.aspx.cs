@@ -4,6 +4,7 @@ using System.Web.UI.WebControls;
 using BusinessLogic;
 using SRFROWCA.Common;
 using System.Web;
+using System.Web.UI;
 
 namespace SRFROWCA.Anonymous
 {
@@ -17,7 +18,6 @@ namespace SRFROWCA.Anonymous
             {
                 UserInfo.UserProfileInfo(RC.SelectedEmergencyId);
             }
-
 
             PopulateControls();
             LoadProjects();
@@ -119,23 +119,15 @@ namespace SRFROWCA.Anonymous
             ExportUtility.ExportGridView(gv, "ProjectListing", ".xls", Response, true);
         }
 
-        protected void ExportToPDF(object sender, EventArgs e)
-        {
-            ExportToPDF(null);
-        }
-
         private void ExportToPDF(int? projectId)
         {
-            int year = RC.SelectedEmergencyId == 1 ? 2014 : 2015;
-
-            DataTable dtResults = new DataTable();
-
+            int year = 2015;
             int tempVal = 0;
             if (ddlClusters.Visible)
             {
                 int.TryParse(ddlClusters.SelectedValue, out tempVal);
             }
-            int? clusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
+            int? emgClusterId = tempVal > 0 ? tempVal : UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
 
             tempVal = 0;
             if (ddlSecClusters.Visible)
@@ -150,7 +142,7 @@ namespace SRFROWCA.Anonymous
                 tempVal = 0;
                 int.TryParse(ddlCountry.SelectedValue, out tempVal);
             }
-            int? countryID = tempVal > 0 ? tempVal : UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
+            int? emgLocationId = tempVal > 0 ? tempVal : UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
 
             string projCode = txtProjectCode.Text.Trim().Length > 0 ? txtProjectCode.Text.Trim() : null;
 
@@ -164,19 +156,42 @@ namespace SRFROWCA.Anonymous
                     orgId = (int?)null;
             }
 
+            int? isOPS = null;
+            if (cbIsOPS.Checked && cbIsORS.Checked)
+            {
+                isOPS = null;
+            }
+            else if (cbIsOPS.Checked)
+            {
+                isOPS = 1;
+            }
+            else if (cbIsORS.Checked)
+            {
+                isOPS = 0;
+            }
 
-            string projectStatus = ddlStatus.SelectedValue == "0" ? null : ddlStatus.SelectedValue;
-            dtResults = DBContext.GetData("uspGetReports2", new object[] {countryID, clusterId,projCode, orgId, RC.SelectedSiteLanguageId, 
-                                                                                        year, projectId, projectStatus, secClusterId});
+            string projectStatus = isOPS == 0 ? null : "Published by CAP"; //ddlStatus.SelectedValue == "0" ? null : ddlStatus.SelectedValue;
+            DataTable dtProjects = DBContext.GetData("GetProjectsWithFullDetails", new object[] {@emgLocationId, @emgClusterId, projCode, orgId,
+                                                                                                RC.SelectedSiteLanguageId, year, projectId, 
+                                                                                                projectStatus, secClusterId, isOPS});
 
-            if (dtResults.Rows.Count > 0)
+            if (dtProjects.Rows.Count > 0)
             {
                 string fileName = DateTime.Now.ToString("yyyyMMddHHmmss");
 
                 Response.ContentType = "application/pdf";
                 Response.AddHeader("Content-Disposition", string.Format("attachment;filename=Project-{0}.pdf", fileName));
-                Response.BinaryWrite(WriteDataEntryPDF.GeneratePDF(dtResults, projectId, null).ToArray());
+                Response.BinaryWrite(WriteDataEntryPDF.GenerateProjectsListingPDF(dtProjects, false).ToArray());
             }
+            else
+            {
+                ShowMessage("NO Project To Export!", RC.NotificationType.Info, true, 2000);
+            }
+        }
+
+        private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
+        {
+            RC.ShowMessage(Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
         }
 
         protected void cblReportingStatus_SelectedIndexChanged(object sender, EventArgs e)
@@ -188,7 +203,6 @@ namespace SRFROWCA.Anonymous
         {
             if (e.CommandName == "ViewProject")
             {
-                //Session["ViewProjectId"] = e.CommandArgument.ToString();
                 Response.Redirect("~/ClusterLead/ProjectDetails.aspx?pid=" + e.CommandArgument.ToString());
             }
             else if (e.CommandName == "PrintReport")
@@ -287,9 +301,8 @@ namespace SRFROWCA.Anonymous
             }
 
             int year = 2015;
-            string projectStatus = ddlStatus.SelectedValue == "0" ? null : ddlStatus.SelectedValue;
+            
             int? isOPS = null;
-
             if (cbIsOPS.Checked && cbIsORS.Checked)
             {
                 isOPS = null;
@@ -303,6 +316,7 @@ namespace SRFROWCA.Anonymous
                 isOPS = 0;
             }
 
+            string projectStatus = isOPS == 0 ? null : "Published by CAP"; //ddlStatus.SelectedValue == "0" ? null : ddlStatus.SelectedValue;
 
             return DBContext.GetData("GetProjectsListing", new object[] {emgLocationId, emgClusterId, projCode, orgId, 
                                                                             RC.SelectedSiteLanguageId,  year, projectStatus, 
@@ -320,7 +334,6 @@ namespace SRFROWCA.Anonymous
             ddlCountry.SelectedIndex = 0;
             txtProjectCode.Text = "";
             ddlOrg.SelectedIndex = 0;
-            ddlStatus.SelectedIndex = 0;
             ddlSecClusters.SelectedIndex = 0;
             cbIsOPS.Checked = false;
             cbIsORS.Checked = false;
