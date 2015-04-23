@@ -1001,5 +1001,190 @@ namespace SRFROWCA.Common
             tbl.AddCell(new Phrase("Achieved", TitleFont));
             tbl.AddCell(new Phrase("Accumulative", TitleFont));
         }
+
+        #region Clsuter Framewrok
+        public static MemoryStream GenerateClusterFrameworkPDF(DataTable dtProjects)
+        {
+            using (MemoryStream outputStream = new MemoryStream())
+            {
+                iTextSharp.text.Document document = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4, 8, 8, 14, 6);
+                iTextSharp.text.pdf.PdfWriter writer = iTextSharp.text.pdf.PdfWriter.GetInstance(document, outputStream);
+
+                document.Open();
+                GenerateClsuterFrameworkDocument(document, dtProjects);
+                try
+                {
+                    document.Close();
+                }
+                catch { }
+
+                return outputStream;
+            }
+        }
+
+        private static void GenerateClsuterFrameworkDocument(iTextSharp.text.Document document, DataTable dt)
+        {
+            //PdfPTable tbl = new PdfPTable(new float[] { 2f, 3f, 3f, 2f, 4f, 2f, 3f, 2f });
+            PdfPTable tbl = new PdfPTable(2);
+            tbl.SpacingAfter = 10f;
+                        
+            WriteFrameworkCountry(document, tbl, dt);
+        }
+
+        private static void WriteFrameworkCountry(Document document, PdfPTable tbl, DataTable dt)
+        {
+            DataTable dtCountryData = new DataTable();
+            var countries = (from DataRow dRow in dt.Rows
+                             select new
+                             {
+                                 CountryId = dRow["CountryId"]
+                             })
+                                .Distinct();
+
+            foreach (var country in countries)
+            {
+                IEnumerable<DataRow> countryData = (from c in dt.AsEnumerable()
+                                                    where c.Field<int>("CountryId") == (int)country.CountryId
+                                                    select c);
+
+                dtCountryData = countryData.CopyToDataTable();
+                DataRow logFrame = countryData.FirstOrDefault<DataRow>();
+                if (logFrame != null)
+                {
+                    PdfPCell cell = null;
+                    var phraseColor = new BaseColor(216, 216, 216);
+                    cell = new PdfPCell(new Phrase(logFrame["Country"].ToString(), TableFont));
+                    cell.Border = 0;
+                    cell.BackgroundColor = phraseColor;
+                    tbl.AddCell(cell);
+                    tbl.SpacingBefore = 3f;
+                    tbl.SpacingAfter = 3f;
+                    document.Add(tbl);
+                    if (dtCountryData.Rows.Count > 0)
+                    {
+                        WriteFrameworkCluster(document, tbl, dtCountryData);                        
+                    }
+                }
+            }
+        }
+
+        private static void WriteFrameworkCluster(Document document, PdfPTable tbl, DataTable dt)
+        {
+            DataTable dtClusterData = new DataTable();
+            var clusters = (from DataRow dRow in dt.Rows
+                             select new
+                             {
+                                 ClusterId = dRow["ClusterId"]
+                             })
+                                .Distinct();
+
+            foreach (var cluster in clusters)
+            {
+                IEnumerable<DataRow> clusterData = (from c in dt.AsEnumerable()
+                                                    where c.Field<int>("ClusterId") == (int)cluster.ClusterId
+                                                    select c);
+
+                dtClusterData = clusterData.CopyToDataTable();
+                DataRow logFrame = clusterData.FirstOrDefault<DataRow>();
+                if (logFrame != null)
+                {
+                    PdfPCell cell = null;
+                    var phraseColor = new BaseColor(216, 216, 216);
+                    cell = new PdfPCell(new Phrase(logFrame["Cluster"].ToString(), TableFont));
+                    cell.Border = 0;
+                    cell.BackgroundColor = phraseColor;
+                    cell.HorizontalAlignment = Element.ALIGN_RIGHT;
+                    tbl.AddCell(cell);
+                    tbl.SpacingBefore = 3f;
+                    tbl.SpacingAfter = 3f;
+                    document.Add(tbl);
+
+                    if (dtClusterData.Rows.Count > 0)
+                    {
+                        ClusterFrameworkTarget(document, dtClusterData);
+                        document.NewPage();
+                    }
+                }
+            }
+        }
+
+        private static void ClusterFrameworkTarget(Document document, DataTable dt)
+        {
+            var distinctObjectives = (from DataRow dRow in dt.Rows
+                                      select new
+                                      {
+                                          ObjectiveId = dRow["ObjectiveId"]
+                                      })
+                                        .Distinct();
+
+            foreach (var objective in distinctObjectives)
+            {
+                IEnumerable<DataRow> temp = (from ob in dt.AsEnumerable()
+                                             where ob.Field<int>("ObjectiveId") == (int)objective.ObjectiveId
+                                             select ob);
+
+                DataTable dt1 = temp.CopyToDataTable();
+                DataRow logFrame = temp.FirstOrDefault<DataRow>();
+                if (logFrame != null)
+                {
+                    PdfPTable tbl1 = new PdfPTable(1);
+                    PdfPCell cell1 = null;
+                    var phraseColor = new BaseColor(216, 216, 216);
+                    cell1 = new PdfPCell(new Phrase(logFrame["Objective"].ToString(), TableFont));
+                    cell1.Border = 0;
+                    cell1.BackgroundColor = phraseColor;
+                    tbl1.AddCell(cell1);
+
+                    tbl1.SpacingBefore = 3f;
+                    tbl1.SpacingAfter = 3f;
+                    document.Add(tbl1);
+                }
+
+
+                var distinctIndicators = (from DataRow dRow in dt1.Rows
+                                          select new
+                                          {
+                                              ActivityId = dRow["ActivityId"],
+                                              IndicatorId = dRow["IndicatorId"]
+                                          })
+                                        .Distinct();
+
+
+                foreach (var indicator in distinctIndicators)
+                {
+                    IEnumerable<DataRow> targets = (from ind in dt1.AsEnumerable()
+                                                    where ind.Field<int>("ActivityId") == (int)indicator.ActivityId
+                                                    && ind.Field<int?>("IndicatorId") == (int?)indicator.IndicatorId
+                                                    select ind);
+
+
+                    //PdfPTable tbl = showAccum ? new PdfPTable(4) : new PdfPTable(3);
+                    PdfPTable tbl = new PdfPTable(2);
+                    tbl.WidthPercentage = 39.25F;
+
+                    DataRow drAct = targets.First<DataRow>();
+                    AddLogFrameInfo(document, drAct);
+
+                    PdfPCell cell = null;
+                    var headerColor = new BaseColor(240, 240, 240);
+                    cell = new PdfPCell(new Phrase("Locaiton", TitleFont));
+                    cell.BackgroundColor = headerColor;
+                    tbl.AddCell(cell);
+
+                    cell = new PdfPCell(new Phrase("Target 2015", TitleFont));
+                    cell.BackgroundColor = headerColor;
+                    tbl.AddCell(cell);
+                    foreach (DataRow row in targets)
+                    {
+                        ReportedData(document, tbl, row);
+                    }
+
+                    tbl.SpacingAfter = 10f;
+                    document.Add(tbl);
+                }
+            }
+        }
+
+        #endregion
     }
 }

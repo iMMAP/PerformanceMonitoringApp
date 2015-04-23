@@ -4,6 +4,9 @@ using System.Web.UI.WebControls;
 using System.Data;
 using BusinessLogic;
 using SRFROWCA.Common;
+using System.Collections.Generic;
+using System.Web.UI.HtmlControls;
+using System.Text;
 
 namespace SRFROWCA.ClusterLead
 {
@@ -77,10 +80,20 @@ namespace SRFROWCA.ClusterLead
             }
         }
 
-        protected void btnApprove_Click(object sender, EventArgs e) 
+        protected void btnApprove_Click(object sender, EventArgs e)
         {
-            bool isApproved = false;
             int reportId = 0;
+            
+            StringBuilder tableApproved = new StringBuilder();
+            tableApproved.Append("<table border='1' width='70%'><tr><th>Indicator</th><th>Location</th><th>Reported</th></tr>");
+            StringBuilder trApproved = new StringBuilder();
+
+            StringBuilder tableNotApproved = new StringBuilder();
+            tableNotApproved.Append("<table border='1'  width='70%'><tr><th>Indicator</th><th>Location</th><th>Reported</th></tr>");
+            StringBuilder trNotApproved = new StringBuilder();
+
+            bool isApproved = false;
+            bool isNotApproved = false;
             foreach (GridViewRow row in gvIndicators.Rows)
             {
                 if (row.RowType == DataControlRowType.DataRow)
@@ -91,16 +104,60 @@ namespace SRFROWCA.ClusterLead
                     if (cb != null)
                     {
                         ApproveIndicatorData(reportDetailId, cb.Checked);
-                        isApproved = true;
+                        
+                        if (cb.Checked)
+                        {
+                            isApproved = true;
+                            trApproved.Append(string.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td></tr>", row.Cells[5].Text, row.Cells[6].Text, row.Cells[8].Text));
+                        }
+                        else
+                        {
+                            isNotApproved = true;
+                            trNotApproved.Append(string.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td></tr>", row.Cells[5].Text, row.Cells[6].Text, row.Cells[8].Text));
+                        }
                     }
                 }
             }
-           
+
+            string approvedIndicators = "";
+            string notApprovedIndicators = "";
             if (isApproved)
             {
-                RC.SendEmail(UserInfo.EmergencyCountry, (int?)null, "Sahel ORS: Reports Approved!", "ORS reports approved!");
+                tableApproved.Append(trApproved.ToString());
+                tableApproved.Append("</table>");
+                approvedIndicators = "<b>Indicators Approved</b><br/>" + tableApproved.ToString();
             }
-            ShowMessage("Data Saved Successfully!");
+
+            if (isNotApproved)
+            {
+                tableNotApproved.Append(trNotApproved.ToString());
+                tableNotApproved.Append("</table>");
+                notApprovedIndicators = "<b>Indicators Not Approved</b><br/>" + tableNotApproved.ToString();
+            }
+
+            if (isApproved)
+            {
+                int? emgClusterId = null;
+                emgClusterId = UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
+                string currentUser = "";
+                try { currentUser = User.Identity.Name; }
+                catch { }
+                string subject = string.Format("Project Report For {0} Approved", lblReportingPeriod.Text);
+                string bodyHeading = string.Format("Sahel ORS: Project report approved by {0} On {1}", currentUser, DateTime.Now.ToString("dd-MMM-yyyy hh:mm tt"));
+
+                string body = string.Format(@"<b>{0}</b><br/><br/>
+                                         <b>Project:</b> {1}<br/>
+                                         <b>Organization:</b> {2}<br/>
+                                         <b>Reporting Period:</b> {3}<br/><br/>
+                                         {4}<br/>
+                                         {5}
+                                        "
+                                             , bodyHeading, lblProjectTitle.Text, lblOrganization.Text,
+                                             lblReportingPeriod.Text, notApprovedIndicators, approvedIndicators);
+                RC.SendEmail(UserInfo.EmergencyCountry, emgClusterId, subject, body, null, lblUpdatedBy.Text.Trim());
+            }
+
+            Response.Redirect("~/ClusterLead/ValidateReportList.aspx");
         }
 
         protected void btnSaveComments_Click(object sender, EventArgs e)
@@ -112,11 +169,11 @@ namespace SRFROWCA.ClusterLead
             {
                 DBContext.Add("InsertIndicatorComments", new object[] { ReportId, ActivityDataId, comments, RC.GetCurrentUserId, DBNull.Value, indictorCommentDetID });
             }
-            
+
         }
 
         protected void btnCancelComments_Click(object sender, EventArgs e)
-        {}
+        { }
 
         private void ApproveIndicatorData(int reportDetailId, bool isApproved)
         {

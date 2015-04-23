@@ -157,7 +157,7 @@ namespace SRFROWCA.Pages
                 SaveData();
                 scope.Complete();
                 ShowMessage("Data Saved Successfully!");
-                RC.SendEmail(UserInfo.EmergencyCountry, (int?)null, "Sahel ORS: Indicators add/removed from project" + rblProjects.SelectedItem.Text, "Indicators Add/removed from project" + rblProjects.SelectedItem.Text);
+                //RC.SendEmail(UserInfo.EmergencyCountry, (int?)null, "Sahel ORS: Indicators add/removed from project" + rblProjects.SelectedItem.Text, "Indicators Add/removed from project" + rblProjects.SelectedItem.Text);
             }
         }
 

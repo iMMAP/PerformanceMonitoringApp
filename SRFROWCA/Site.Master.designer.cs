@@ -643,139 +643,22 @@ namespace SRFROWCA {
         protected global::System.Web.UI.WebControls.Localize localReportCustomReport;
         
         /// <summary>
-        /// liPivotTables control.
+        /// liActivitesFrameworkPublic control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liPivotTables;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liActivitesFrameworkPublic;
         
         /// <summary>
-        /// menuePivotTables control.
+        /// Localize3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuePivotTables;
-        
-        /// <summary>
-        /// localPivotTables control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localPivotTables;
-        
-        /// <summary>
-        /// liPivotPerfMonitoring control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liPivotPerfMonitoring;
-        
-        /// <summary>
-        /// menuePivotPerfMonitoring control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuePivotPerfMonitoring;
-        
-        /// <summary>
-        /// localPivotTablePerMon control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localPivotTablePerMon;
-        
-        /// <summary>
-        /// liPivotNumberOfOrgs control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liPivotNumberOfOrgs;
-        
-        /// <summary>
-        /// menuePivotOPrPresence control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuePivotOPrPresence;
-        
-        /// <summary>
-        /// localPivotTableNumOfOrgs control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localPivotTableNumOfOrgs;
-        
-        /// <summary>
-        /// liPivotOrgOperational control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liPivotOrgOperational;
-        
-        /// <summary>
-        /// menuePivotOrgPresence control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuePivotOrgPresence;
-        
-        /// <summary>
-        /// localPivotTableOrgOperational control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localPivotTableOrgOperational;
-        
-        /// <summary>
-        /// liPivotSumOfCountryIndicators control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liPivotSumOfCountryIndicators;
-        
-        /// <summary>
-        /// menuePivotSumOfCountryIndicators control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuePivotSumOfCountryIndicators;
-        
-        /// <summary>
-        /// localPivotTableSumOfInd control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localPivotTableSumOfInd;
+        protected global::System.Web.UI.WebControls.Localize Localize3;
         
         /// <summary>
         /// liUserListing control.

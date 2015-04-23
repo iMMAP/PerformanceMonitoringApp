@@ -1,10 +1,12 @@
-﻿using System;
+﻿using BusinessLogic;
+using System;
 using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Security.Principal;
 using System.Text;
@@ -13,8 +15,6 @@ using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using BusinessLogic;
-using System.Net.Mail;
 
 
 namespace SRFROWCA.Common
@@ -174,30 +174,57 @@ namespace SRFROWCA.Common
 
         #endregion
 
-        internal static void SendEmail(int emgLocationId, int? emgClusterId, string subject, string body, DataTable dtUsers = null)
+        internal static void SendEmail(int emgLocationId, int? emgClusterId, string subject, string body, DataTable dtUsers = null, string extraEmails = null)
         {
             try
             {
                 DataTable dtEmails = DBContext.GetData("GetEmailsOnCountyrAndCluster", new object[] { emgLocationId, emgClusterId });
                 string emails = string.Empty;
                 emails = "orsocharowca@gmail.com";
-                //emails += ",kashif.nadeem@hotmail.com";
+                emails += ",kashif.nadeem@hotmail.com";
+                emails += ",kashif.nadeem@hotmail.com";
+                emails += ",orsocharowca@gmail.com";
+                if (!string.IsNullOrEmpty(extraEmails))
+                {
+                    emails += "," + extraEmails;
+                }
                 using (MailMessage mailMsg = new MailMessage())
                 {
                     for (int i = 0; i < dtEmails.Rows.Count; i++)
-                        emails += "," + Convert.ToString(dtEmails.Rows[i]["Email"]);
+                    {
+                        string email = dtEmails.Rows[i]["Email"].ToString();
+                        email = email.TrimStart(',').TrimEnd(',').Trim();
+                        try
+                        {
+                            MailAddress ma = new MailAddress(email);
+                            emails += "," + email;
+                        }
+                        catch { }
+                    }
 
                     if (dtUsers != null)
                     {
                         for (int i = 0; i < dtUsers.Rows.Count; i++)
-                            emails += "," + Convert.ToString(dtUsers.Rows[i]["Email"]);
+                        {
+                            string email = dtUsers.Rows[i]["Email"].ToString();
+                            email = email.TrimStart(',').TrimEnd(',').Trim();
+                            try
+                            {
+                                MailAddress ma = new MailAddress(email);
+                                emails += "," + email;
+                            }
+                            catch { }
+                        }
                     }
 
-                    mailMsg.From = new MailAddress("orsocharowca@gmail.com");
+                    emails = emails.TrimEnd(',');
+                    string[] emailsArray = emails.Split(',');
+                    emails = string.Join(",", (emailsArray.Distinct().ToArray()));
+                    mailMsg.From = new MailAddress("orsocharowca@gmail.com", "Sahel ORS");
                     mailMsg.To.Add(emails.TrimEnd(','));
                     mailMsg.Subject = subject;
                     mailMsg.IsBodyHtml = true;
-                    mailMsg.Body = string.Format(@"{0} <hr/>{1}", subject, body);
+                    mailMsg.Body = string.Format("{0} <br/><br/>Regards,<br/>Sahel ORS", body);
                     Mail.SendMail(mailMsg);
                 }
             }
@@ -205,7 +232,6 @@ namespace SRFROWCA.Common
             {
 
             }
-
         }
 
         internal static int SelectedSiteLanguageId

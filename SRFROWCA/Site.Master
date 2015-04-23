@@ -239,27 +239,9 @@
                                 <asp:Localize ID="localReportCustomReport" runat="server" Text="Custom Report" meta:resourcekey="localReportCustomReportResource1"></asp:Localize>
                             </span></a></li>
 
-                        <li id="liPivotTables" runat="server"><a id="menuePivotTables" runat="server" href="#"
-                            class="dropdown-toggle"><i class="icon-table"></i><span class="menu-text">
-                                <asp:Localize ID="localPivotTables" runat="server" Text="Pivot Tables" meta:resourcekey="localPivotTablesResource1"></asp:Localize>
-                            </span><b class="arrow icon-angle-down"></b></a>
-                            <ul class="submenu">
-                                <li id="liPivotPerfMonitoring" runat="server"><a id="menuePivotPerfMonitoring" runat="server"
-                                    href="~/PivotTables/PerfMontPivot.aspx"><span class="menu-text">
-                                        <asp:Localize ID="localPivotTablePerMon" runat="server" Text="Performance Monitoring" meta:resourcekey="localPivotTablePerMonResource1"></asp:Localize>
-                                    </span></a></li>
-                                <li id="liPivotNumberOfOrgs" runat="server"><a id="menuePivotOPrPresence" runat="server"
-                                    href="~/PivotTables/NumOfOrgsClsCnt.aspx"><span class="menu-text">
-                                        <asp:Localize ID="localPivotTableNumOfOrgs" runat="server" Text="Operational Presence" meta:resourcekey="localPivotTableNumOfOrgsResource1"></asp:Localize>
-                                    </span></a></li>
-                                <li id="liPivotOrgOperational" runat="server"><a id="menuePivotOrgPresence" runat="server"
-                                    href="~/PivotTables/OprOrgsClsCnt.aspx"><span class="menu-text">
-                                        <asp:Localize ID="localPivotTableOrgOperational" runat="server" Text="Organizational Presence" meta:resourcekey="localPivotTableOrgOperationalResource1"></asp:Localize></span></a></li>
-                                <li id="liPivotSumOfCountryIndicators" runat="server"><a id="menuePivotSumOfCountryIndicators" runat="server" href="~/PivotTables/CountryIndicatorsAchievedReport.aspx">
-                                    <i class="icon-angle-double-right"></i>
-                                    <asp:Localize ID="localPivotTableSumOfInd" runat="server" Text="Country Indicator" meta:resourcekey="localPivotTableSumOfIndResource1"></asp:Localize></a></li>
-                            </ul>
-                        </li>
+                        <li id="liActivitesFrameworkPublic" runat="server"><a href="<%=BaseURL %>/Anonymous/ActivitiesFrameworkPublic.aspx"><i class="icon-list-alt"></i><span class="menu-text">
+                                    <asp:Localize ID="Localize3" runat="server" Text="Cluster Framework" meta:resourcekey="localClusterFrameworksList1"></asp:Localize>
+                                </span></a></li>
                         <li id="liUserListing" runat="server"><a href="~/Admin/UsersListing.aspx"
                             id="menueUserListing" runat="server"><i class="icon-group"></i><span class="menu-text">
                                 <asp:Localize ID="localSiteUsers" runat="server" Text="Users" meta:resourcekey="localSiteUsers"></asp:Localize></span> </a></li>

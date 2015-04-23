@@ -136,6 +136,7 @@
     <Content Include="Account\UpdateUser.aspx" />
     <Content Include="Account\UserProfile.aspx" />
     <Content Include="Admin\RequestedOrgListing.aspx" />
+    <Content Include="Anonymous\ActivitiesFrameworkPublic.aspx" />
     <Content Include="Anonymous\OutputIndicatorReport.aspx" />
     <Content Include="Anonymous\ProjectsListingPublic.aspx" />
     <Content Include="assets\orsimages\Calendar16.png" />
@@ -589,6 +590,13 @@
     </Compile>
     <Compile Include="Admin\RequestedOrgListing.aspx.designer.cs">
       <DependentUpon>RequestedOrgListing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Anonymous\ActivitiesFrameworkPublic.aspx.cs">
+      <DependentUpon>ActivitiesFrameworkPublic.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Anonymous\ActivitiesFrameworkPublic.aspx.designer.cs">
+      <DependentUpon>ActivitiesFrameworkPublic.aspx</DependentUpon>
     </Compile>
     <Compile Include="Anonymous\AllDataCSV.ashx.cs">
       <DependentUpon>AllDataCSV.ashx</DependentUpon>

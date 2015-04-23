@@ -290,7 +290,11 @@ namespace SRFROWCA.ClusterLead
         protected void btnExportExcel_Click(object sender, EventArgs e)
         {
             GridView gvExport = new GridView();
-
+            if (RC.GetSelectedIntVal(ddlCountry) == 0)
+            {
+                ShowMessage("Please select a country to export data!", RC.NotificationType.Warning, true, 1000);
+                return;
+            }
             DataTable dt = GetActivitiesForExcel();
             RemoveColumnsFromDataTable(dt);
             gvExport.DataSource = dt;
@@ -484,7 +488,13 @@ namespace SRFROWCA.ClusterLead
             int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
             int? isGender = chkIsGender.Checked ? 1 : (int?)null;
 
-            return DBContext.GetData("GetAllIndicatorsNew2WithTargets", new object[] { emergencyLocationId, emergencyClusterId, emergencyObjectiveId, search, activityId, isGender, (int)RC.SelectedSiteLanguageId });
+            DataTable dt = new DataTable();
+            if (emergencyLocationId > 0)
+            {
+                dt = DBContext.GetData("GetAllIndicatorsNew2WithTargets", new object[] { emergencyLocationId, emergencyClusterId, emergencyObjectiveId, search, activityId, isGender, (int)RC.SelectedSiteLanguageId });
+            }
+
+            return dt;
         }
         private DataTable GetObjectives()
         {
