@@ -213,21 +213,6 @@
     <Content Include="assets\fonts\glyphicons-halflings-regulard41d.html" />
     <Content Include="assets\font\fontawesome-webfont.svg" />
     <Content Include="assets\images\ajaxlodr.gif" />
-    <Content Include="assets\images\gallery\image-1.jpg" />
-    <Content Include="assets\images\gallery\image-2.jpg" />
-    <Content Include="assets\images\gallery\image-3.jpg" />
-    <Content Include="assets\images\gallery\image-4.jpg" />
-    <Content Include="assets\images\gallery\image-5.jpg" />
-    <Content Include="assets\images\gallery\image-6.jpg" />
-    <Content Include="assets\images\gallery\thumb-1.jpg" />
-    <Content Include="assets\images\gallery\thumb-2.jpg" />
-    <Content Include="assets\images\gallery\thumb-3.jpg" />
-    <Content Include="assets\images\gallery\thumb-4.jpg" />
-    <Content Include="assets\images\gallery\thumb-5.jpg" />
-    <Content Include="assets\images\gallery\thumb-6.jpg" />
-    <Content Include="assets\images\gritter-light.html" />
-    <Content Include="assets\images\gritter.html" />
-    <Content Include="assets\images\ie-spacer.html" />
     <Content Include="assets\images\spritemap%402x.png" />
     <Content Include="assets\images\spritemap.png" />
     <Content Include="assets\img\clear.png" />
@@ -458,6 +443,8 @@
     <Content Include="DataFeeds\FrameworkTargets.ashx" />
     <Content Include="DataFeeds\ClusterIndicatorReports.ashx" />
     <Content Include="DataFeeds\ORS3W.ashx" />
+    <Content Include="DataFeeds\KeyFiguresFeed.ashx" />
+    <Content Include="DataFeeds\IndicatorsWithClusterProjectTargets.ashx" />
     <None Include="HelpFiles\HelpDocs\HelpEng\1_ORS_description_EN_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpEng\2_ORS_Resgistration_EN_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpEng\3_ORS_Role_EN_v3.pdf" />
@@ -921,6 +908,12 @@
     </Compile>
     <Compile Include="DataFeeds\Indicators.ashx.cs">
       <DependentUpon>Indicators.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="DataFeeds\IndicatorsWithClusterProjectTargets.ashx.cs">
+      <DependentUpon>IndicatorsWithClusterProjectTargets.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="DataFeeds\KeyFiguresFeed.ashx.cs">
+      <DependentUpon>KeyFiguresFeed.ashx</DependentUpon>
     </Compile>
     <Compile Include="DataFeeds\LogFrameDataFeed.ashx.cs">
       <DependentUpon>LogFrameDataFeed.ashx</DependentUpon>

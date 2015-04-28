@@ -6,10 +6,29 @@
     <script>
         $(function () {
             $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th colspan="3" style="text-align: center;">Total</th><th colspan="3" style="text-align: center;">In Need</th><th colspan="3" style="text-align: center;">Targeted</th> <th>&nbsp;</th> <th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th></tr></thead>');
+        });
 
-            $(function () {
+        $(function () {
+            $("#<%=txtFromDate.ClientID%>").datepicker({
+                dateFormat: "dd-mm-yy",
+                defaultDate: Date.now(),
+                onSelect: function (selected) {
+                    //LoadData();
+                }
+            });
+
+            $("#<%=txtToDate.ClientID%>").datepicker({
+                dateFormat: "dd-mm-yy",
+                defaultDate: Date.now(),
+                onSelect: function (selected) {
+                    //LoadData();
+                }
+            });
+
+            var prm = Sys.WebForms.PageRequestManager.getInstance();
+            prm.add_endRequest(function () {
                 $("#<%=txtFromDate.ClientID%>").datepicker({
-                    dateFormat: "mm-dd-yy",
+                    dateFormat: "dd-mm-yy",
                     defaultDate: Date.now(),
                     onSelect: function (selected) {
                         //LoadData();
@@ -17,15 +36,15 @@
                 });
 
                 $("#<%=txtToDate.ClientID%>").datepicker({
-                    dateFormat: "mm-dd-yy",
+                    dateFormat: "dd-mm-yy",
                     defaultDate: Date.now(),
                     onSelect: function (selected) {
                         //LoadData();
                     }
                 });
-
             });
         });
+
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -102,7 +121,9 @@
                                             </tr>
                                             <tr>
                                                 <td></td>
-                                                <td></td>
+                                                <td>
+                                                    <asp:CheckBox ID="cbShowAll" runat="server" Text="Show Only Latest Reported" OnCheckedChanged="cbShowAll_CheckedChanged" AutoPostBack="true" />
+                                                </td>
                                                 <td></td>
                                                 <td align="right">
                                                     <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-default" OnClick="btnSearch_Click" />

@@ -99,24 +99,34 @@ namespace SRFROWCA.KeyFigures
             int? subCatId = val > 0 ? val : (int?)null;
 
             int? kfIndId = null;
-            DateTime dateTime = DateTime.Now;
-            DateTime? fromDate = null;
+
+            DateTime dateTime = DateTime.MinValue;
+            string fromDate = null;
             if (!string.IsNullOrEmpty(txtFromDate.Text.Trim()))
             {
-                DateTime.TryParse(txtFromDate.Text.Trim(), out dateTime);
-                fromDate = dateTime == DateTime.MinValue ? (DateTime?)null : dateTime;
+                DateTime.TryParseExact(txtFromDate.Text.Trim(), "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime);
+                if (dateTime != DateTime.MinValue)
+                {
+                    fromDate = dateTime.ToString("yyyyMMdd");
+                }
             }
 
-            DateTime? toDate = null;
+            string toDate = null;
+            dateTime = DateTime.MinValue;
             if (!string.IsNullOrEmpty(txtToDate.Text.Trim()))
             {
-                DateTime.TryParse(txtToDate.Text.Trim(), out dateTime);
-                toDate = dateTime == DateTime.MinValue ? (DateTime?)null : dateTime;
+                DateTime.TryParseExact(txtToDate.Text.Trim(), "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime);
+                if (dateTime != DateTime.MinValue)
+                {
+                    toDate = dateTime.ToString("yyyyMMdd");
+                }
             }
 
+            int isLatest = cbShowAll.Checked ? 1 : 0;
+
             return DBContext.GetData("GetKeyFigureListing", new object[] {emgLocationId, catId, subCatId,
-                                                                                    kfIndId, fromDate, toDate, 
-                                                                                    RC.SelectedSiteLanguageId, DBNull.Value});
+                                                                                    kfIndId, fromDate, toDate, isLatest,
+                                                                                    RC.SelectedSiteLanguageId});
         }
 
         protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
@@ -371,6 +381,11 @@ namespace SRFROWCA.KeyFigures
             ViewState["SortExpression"] = column;
 
             return sortDirection;
+        }
+
+        protected void cbShowAll_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadKeyFigures();
         }
     }
 }
