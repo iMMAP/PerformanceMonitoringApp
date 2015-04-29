@@ -445,6 +445,7 @@
     <Content Include="DataFeeds\ORS3W.ashx" />
     <Content Include="DataFeeds\KeyFiguresFeed.ashx" />
     <Content Include="DataFeeds\IndicatorsWithClusterProjectTargets.ashx" />
+    <Content Include="DataFeeds\FTSFundingFeed.ashx" />
     <None Include="HelpFiles\HelpDocs\HelpEng\1_ORS_description_EN_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpEng\2_ORS_Resgistration_EN_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpEng\3_ORS_Role_EN_v3.pdf" />
@@ -905,6 +906,9 @@
     <Compile Include="DataFeeds\FeedXML.cs" />
     <Compile Include="DataFeeds\FrameworkTargets.ashx.cs">
       <DependentUpon>FrameworkTargets.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="DataFeeds\FTSFundingFeed.ashx.cs">
+      <DependentUpon>FTSFundingFeed.ashx</DependentUpon>
     </Compile>
     <Compile Include="DataFeeds\Indicators.ashx.cs">
       <DependentUpon>Indicators.ashx</DependentUpon>
