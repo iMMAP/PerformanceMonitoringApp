@@ -64,7 +64,9 @@
                         <div class="col-xs-12 col-sm-12 ">
                             <div class="widget-box">
                                 <div class="widget-header widget-header-small header-color-blue2">
-                                    <h6></h6>
+                                    <h6>
+                                        <asp:Button ID="btnPDFPrint" runat="server" Text="Export PDF" CssClass="btn btn-yellow" OnClick="btnPDFPrint_Click" />
+                                    </h6>
                                 </div>
                                 <div class="widget-body">
                                     <div class="widget-main">
@@ -73,8 +75,6 @@
                                                 <div class="row">
                                                     <table border="0" style="width: 50%; margin: 10px 10px 10px 20px">
                                                         <tr>
-                                                            
-
                                                             <td>Country:
                                                             </td>
                                                             <td>
@@ -84,7 +84,7 @@
                                                             <td>Cluster: 
                                                             </td>
                                                             <td>
-                                                                <asp:DropDownList ID="ddlClusters" runat="server" AutoPostBack="true" CssClass="width-100" OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged">
+                                                                <asp:DropDownList ID="ddlClusters" runat="server" AutoPostBack="true" CssClass="width-80" OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged">
                                                                 </asp:DropDownList>
                                                             </td>
                                                         </tr>
@@ -98,7 +98,7 @@
                                                             </td>
                                                             <td></td>
                                                             <td>
-                                                                <asp:RadioButtonList ID="rbIsOPSProject" runat="server" RepeatColumns="3">
+                                                                <asp:RadioButtonList ID="rbIsOPSProject" runat="server" RepeatColumns="3" AutoPostBack="true" OnSelectedIndexChanged="rbIsOPSProject_SelectedIndexChanged">
                                                                     <asp:ListItem Text="All" Value="-1" Selected="True"></asp:ListItem>
                                                                     <asp:ListItem Text="SRP" Value="1"></asp:ListItem>
                                                                     <asp:ListItem Text="ORS" Value="0"></asp:ListItem>
@@ -108,9 +108,10 @@
                                                         <tr>
                                                             <td>&nbsp;</td>
                                                             <td style="padding-top: 20px;">
-                                                                <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-primary" OnClick="btnSearch_Click" />
+                                                                <%--<asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-primary" OnClick="btnSearch_Click" />--%>
+                                                                <asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="btn btn-primary" OnClick="btnReset_Click" />
 
-                                                                <asp:Button ID="btnPDFPrint" runat="server" Text="Export PDF" CssClass="btn btn-primary" OnClick="btnPDFPrint_Click" />
+                                                                
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -173,8 +174,10 @@
             <tr class="colHeading">
                 <td>#</td>
                 <td>Country</td>
-                <td>Projects/Reporting</td>
-                <td>Organizations/Reporting</td>
+                <td>Projects Reporting</td>
+                <td>Organizations Reporting</td>
+                <td>Activities Reported</td>
+                <td>Indicators Reported</td>
             </tr>
         </table>
         <br />

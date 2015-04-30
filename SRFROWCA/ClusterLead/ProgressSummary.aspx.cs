@@ -40,20 +40,6 @@ namespace SRFROWCA.ClusterLead
 
         private DataTable GetSummaryData()
         {
-            //DateTime dt = DateTime.MinValue;
-            //if (!string.IsNullOrEmpty(txtFromDate.Text.Trim()))
-            //{
-            //    DateTime.TryParse(txtFromDate.Text.Trim(), out dt);
-            //}
-            //DateTime? fromDate = dt == DateTime.MinValue ? (DateTime?)null : DateTime.ParseExact(dt.ToShortDateString(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
-
-            //dt = DateTime.MinValue;
-            //if (!string.IsNullOrEmpty(txtToDate.Text.Trim()))
-            //{
-            //    DateTime.TryParse(txtToDate.Text.Trim(), out dt);
-            //}
-            //DateTime? toDate = dt == DateTime.MinValue ? (DateTime?)null : DateTime.ParseExact(dt.ToShortDateString(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
-
             int val = RC.GetSelectedIntVal(ddlMonth);
             int? monthId = val > 0 ? val : (int?)null;
 
@@ -120,7 +106,7 @@ namespace SRFROWCA.ClusterLead
                 lblReportingCountries.Text = dtResult.Rows[0]["ReportingCountriesCount"].ToString();
                 lblReportsCount.Text = dtResult.Rows[0]["ReportsCount"].ToString();
 
-                if (dtResult.Rows[0]["Country"] != "")
+                if (dtResult.Rows[0]["Country"].ToString() != "")
                 {
                     var distinctCountries = (from DataRow dRow in dtResult.Rows
                                              select new
@@ -130,31 +116,48 @@ namespace SRFROWCA.ClusterLead
                                                  ReportingProjectsCountByCountry = dRow["ReportingProjectsCountByCountry"],
                                                  TotalOrgsCountByCountry = dRow["TotalOrgsCountByCountry"],
                                                  ReportingOrgsCountByCountry = dRow["ReportingOrgsCountByCountry"],
+                                                 TotalActivitiesByCountry = dRow["TotalActivitiesByCountry"],
+                                                 ReportingActivitiesCountByCountry = dRow["ReportingActivitiesCountByCountry"],
+                                                 TotalIndicatorsByCountry = dRow["TotalIndicatorsByCountry"],
+                                                 ReportingIndicatorsCountByCountry = dRow["ReportingIndicatorsCountByCountry"],
                                              })
                                          .Distinct();
                     int count = 0;
                     foreach (var country in distinctCountries)
                     {
-                        count++;
-                        HtmlTableRow tr = new HtmlTableRow();
+                        int projectCount = 0;
+                        int.TryParse(country.TotalProjectsCountByCountry.ToString(), out projectCount);
+                        if (projectCount > 0)
+                        {
+                            count++;
+                            HtmlTableRow tr = new HtmlTableRow();
 
-                        HtmlTableCell cell = new HtmlTableCell();
-                        cell.InnerHtml = count.ToString();
-                        tr.Cells.Add(cell);
+                            HtmlTableCell cell = new HtmlTableCell();
+                            cell.InnerHtml = count.ToString();
+                            tr.Cells.Add(cell);
 
-                        cell = new HtmlTableCell();
-                        cell.InnerHtml = Convert.ToString(country.Country);
-                        tr.Cells.Add(cell);
+                            cell = new HtmlTableCell();
+                            cell.InnerHtml = Convert.ToString(country.Country);
+                            tr.Cells.Add(cell);
 
-                        cell = new HtmlTableCell();
-                        cell.InnerHtml = Convert.ToString(country.TotalProjectsCountByCountry) + " / " + Convert.ToString(country.ReportingProjectsCountByCountry);
-                        tr.Cells.Add(cell);
+                            cell = new HtmlTableCell();
+                            cell.InnerHtml = Convert.ToString(country.ReportingProjectsCountByCountry) + " out of " + Convert.ToString(country.TotalProjectsCountByCountry);
+                            tr.Cells.Add(cell);
 
-                        cell = new HtmlTableCell();
-                        cell.InnerHtml = Convert.ToString(country.TotalOrgsCountByCountry) + " / " + Convert.ToString(country.ReportingOrgsCountByCountry);
-                        tr.Cells.Add(cell);
+                            cell = new HtmlTableCell();
+                            cell.InnerHtml = Convert.ToString(country.ReportingOrgsCountByCountry) + " out of " + Convert.ToString(country.TotalOrgsCountByCountry);
+                            tr.Cells.Add(cell);
 
-                        tblCountry.Rows.Add(tr);
+                            cell = new HtmlTableCell();
+                            cell.InnerHtml = Convert.ToString(country.ReportingActivitiesCountByCountry) + " out of " + Convert.ToString(country.TotalActivitiesByCountry);
+                            tr.Cells.Add(cell);
+
+                            cell = new HtmlTableCell();
+                            cell.InnerHtml = Convert.ToString(country.ReportingIndicatorsCountByCountry) + " out of " + Convert.ToString(country.TotalIndicatorsByCountry);
+                            tr.Cells.Add(cell);
+
+                            tblCountry.Rows.Add(tr);
+                        }
                     }
                 }
 
@@ -257,5 +260,21 @@ namespace SRFROWCA.ClusterLead
         {
             LoadData();
         }
+
+        protected void rbIsOPSProject_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        protected void btnReset_Click(object sender, EventArgs e)
+        {
+            ddlCountry.SelectedIndex = 0;
+            ddlClusters.SelectedIndex = 0;
+            ddlMonth.SelectedIndex = 0;
+            rbIsOPSProject.SelectedIndex = 0;
+            SetComboValues();
+            LoadData();
+        }
+    
     }
 }

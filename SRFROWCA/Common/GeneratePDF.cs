@@ -502,13 +502,13 @@ namespace SRFROWCA.Common
 
         private static void GenerateSummaryCountry(iTextSharp.text.Document document, DataTable dt)
         {
-            if (dt.Rows.Count > 0 && dt.Rows[0]["Country"] != "")
+            if (dt.Rows.Count > 0 && dt.Rows[0]["Country"].ToString() != "")
             {
-                PdfPTable tbl = new PdfPTable(4);
+                PdfPTable tbl = new PdfPTable(6);
 
                 tbl.KeepTogether = true;
                 //relative col widths in proportions - 1/3 and 2/3
-                float[] widths = new float[] { 1f, 2f, 2f, 2f };
+                float[] widths = new float[] { 1f, 2f, 2f, 2f, 2f, 2f };
                 tbl.SetWidths(widths);
 
                 tbl.SpacingAfter = 20f;
@@ -519,7 +519,7 @@ namespace SRFROWCA.Common
                 cell.PaddingTop = 5;
                 cell.Border = 0;
                 //cell.BorderWidthBottom = 1;
-                cell.Colspan = 5;
+                cell.Colspan = 7;
                 tbl.AddCell(cell);
 
                 cell = new PdfPCell(new Phrase("#", TableFont));
@@ -537,7 +537,7 @@ namespace SRFROWCA.Common
                 cell.BorderWidthTop = 1;
                 tbl.AddCell(cell);
 
-                cell = new PdfPCell(new Phrase("Projects/Reporting", TableFont));
+                cell = new PdfPCell(new Phrase("Projects Reporting", TableFont));
                 cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
                 cell.Padding = 5;
                 cell.Border = 0;
@@ -546,7 +546,25 @@ namespace SRFROWCA.Common
                 cell.BorderWidthTop = 1;
                 tbl.AddCell(cell);
 
-                cell = new PdfPCell(new Phrase("Organizations/Reporting", TableFont));
+                cell = new PdfPCell(new Phrase("Organizations Reporting", TableFont));
+                cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
+                cell.Padding = 5;
+                cell.Border = 0;
+                cell.BorderWidthLeft = 1;
+                cell.BorderWidthBottom = 1;
+                cell.BorderWidthTop = 1;
+                tbl.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase("Activities Reported", TableFont));
+                cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
+                cell.Padding = 5;
+                cell.Border = 0;
+                cell.BorderWidthLeft = 1;
+                cell.BorderWidthBottom = 1;
+                cell.BorderWidthTop = 1;
+                tbl.AddCell(cell);
+
+                cell = new PdfPCell(new Phrase("Indicators Reported", TableFont));
                 cell.BackgroundColor = new iTextSharp.text.BaseColor(System.Drawing.Color.LightGray);
                 cell.Padding = 5;
                 cell.Border = 0;
@@ -564,7 +582,10 @@ namespace SRFROWCA.Common
                                              ReportingProjectsCountByCountry = dRow["ReportingProjectsCountByCountry"],
                                              TotalOrgsCountByCountry = dRow["TotalOrgsCountByCountry"],
                                              ReportingOrgsCountByCountry = dRow["ReportingOrgsCountByCountry"],
-
+                                             TotalActivitiesByCountry = dRow["TotalActivitiesByCountry"],
+                                             ReportingActivitiesCountByCountry = dRow["ReportingActivitiesCountByCountry"],
+                                             TotalIndicatorsByCountry = dRow["TotalIndicatorsByCountry"],
+                                             ReportingIndicatorsCountByCountry = dRow["ReportingIndicatorsCountByCountry"],
                                          })
                                            .Distinct();
 
@@ -572,31 +593,49 @@ namespace SRFROWCA.Common
                 foreach (var country in distinctCountries)
                 {
                     count++;
-                    cell = new PdfPCell(new Phrase(count.ToString(), TableFont));
-                    cell.Padding = 5;
-                    cell.Border = 0;
-                    tbl.AddCell(cell);
+                    int projectCount = 0;
+                    int.TryParse(country.TotalProjectsCountByCountry.ToString(), out projectCount);
+                    if (projectCount > 0)
+                    {
+                        cell = new PdfPCell(new Phrase(count.ToString(), TableFont));
+                        cell.Padding = 5;
+                        cell.Border = 0;
+                        tbl.AddCell(cell);
 
-                    cell = new PdfPCell(new Phrase(Convert.ToString(country.Country), TableFont));
-                    cell.Padding = 5;
-                    cell.Border = 0;
-                    cell.BorderWidthLeft = 1;
-                    cell.BorderWidthBottom = 1;
-                    tbl.AddCell(cell);
+                        cell = new PdfPCell(new Phrase(Convert.ToString(country.Country), TableFont));
+                        cell.Padding = 5;
+                        cell.Border = 0;
+                        cell.BorderWidthLeft = 1;
+                        cell.BorderWidthBottom = 1;
+                        tbl.AddCell(cell);
 
-                    cell = new PdfPCell(new Phrase(Convert.ToString(country.TotalProjectsCountByCountry) + " / " + Convert.ToString(country.ReportingProjectsCountByCountry), TableFont));
-                    cell.Padding = 5;
-                    cell.Border = 0;
-                    cell.BorderWidthLeft = 1;
-                    cell.BorderWidthBottom = 1;
-                    tbl.AddCell(cell);
+                        cell = new PdfPCell(new Phrase(Convert.ToString(country.ReportingProjectsCountByCountry) + " out of " + Convert.ToString(country.TotalProjectsCountByCountry), TableFont));
+                        cell.Padding = 5;
+                        cell.Border = 0;
+                        cell.BorderWidthLeft = 1;
+                        cell.BorderWidthBottom = 1;
+                        tbl.AddCell(cell);
 
-                    cell = new PdfPCell(new Phrase(Convert.ToString(country.TotalOrgsCountByCountry) + " / " + Convert.ToString(country.ReportingOrgsCountByCountry), TableFont));
-                    cell.Padding = 5;
-                    cell.BorderWidthLeft = 1;
-                    cell.BorderWidthBottom = 1;
-                    tbl.AddCell(cell);
+                        cell = new PdfPCell(new Phrase(Convert.ToString(country.ReportingOrgsCountByCountry) + " out of " + Convert.ToString(country.TotalOrgsCountByCountry), TableFont));
+                        cell.Padding = 5;
+                        cell.BorderWidthLeft = 1;
+                        cell.BorderWidthBottom = 1;
+                        tbl.AddCell(cell);
+
+                        cell = new PdfPCell(new Phrase(Convert.ToString(country.ReportingActivitiesCountByCountry) + " out of " + Convert.ToString(country.TotalActivitiesByCountry), TableFont));
+                        cell.Padding = 5;
+                        cell.BorderWidthLeft = 1;
+                        cell.BorderWidthBottom = 1;
+                        tbl.AddCell(cell);
+
+                        cell = new PdfPCell(new Phrase(Convert.ToString(country.ReportingIndicatorsCountByCountry) + " out of " + Convert.ToString(country.TotalIndicatorsByCountry), TableFont));
+                        cell.Padding = 5;
+                        cell.BorderWidthLeft = 1;
+                        cell.BorderWidthBottom = 1;
+                        tbl.AddCell(cell);
+                    }
                 }
+
                 document.Add(tbl);
             }
         }
