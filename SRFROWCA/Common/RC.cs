@@ -514,6 +514,17 @@ namespace SRFROWCA.Common
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(SiteCulture);
         }
 
+        internal static void FormatThousandSeperator(GridViewRow row, string ctl)
+        {
+            string siteCulture = RC.SelectedSiteLanguageId.Equals(1) ? "en-US" : "de-DE";
+            Label lbl = row.FindControl(ctl) as Label;
+            if (lbl != null && !string.IsNullOrEmpty(lbl.Text))
+                if (lbl.Text.Length > 1)
+                {
+                    lbl.Text = String.Format(new CultureInfo(siteCulture), "{0:0,0}", Convert.ToInt32(lbl.Text));
+                }
+        }
+
         internal static void AddSelectItemInList(ListControl ctl, string text)
         {
             ListItem item = new ListItem(text, "0");

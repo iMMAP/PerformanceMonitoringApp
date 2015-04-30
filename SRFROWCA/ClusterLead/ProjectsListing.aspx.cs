@@ -180,9 +180,23 @@ namespace SRFROWCA.ClusterLead
                 isOPS = 0;
             }
 
+            int? isFunded = null;
+            if (cbFuned.Checked && cbNotFunded.Checked)
+            {
+                isFunded = null;
+            }
+            else if (cbFuned.Checked)
+            {
+                isFunded = 1;
+            }
+            else if (cbNotFunded.Checked)
+            {
+                isFunded = 0;
+            }
+
             string projectStatus = ddlStatus.SelectedValue == "0" ? null : ddlStatus.SelectedValue;
             DataTable dtProjects = DBContext.GetData("GetProjectsWithFullDetails", new object[] {countryID, clusterId,projCode, orgId, RC.SelectedSiteLanguageId, 
-                                                                                        year, projectId, projectStatus, secClusterId, isOPS});
+                                                                                        year, projectId, projectStatus, secClusterId, isOPS, isFunded});
             if (dtProjects.Rows.Count > 0)
             {
                 string fileName = DateTime.Now.ToString("yyyyMMddHHmmss");
@@ -336,10 +350,24 @@ namespace SRFROWCA.ClusterLead
                 isOPS = 0;
             }
 
+            int? isFunded = null;
+            if (cbFuned.Checked && cbNotFunded.Checked)
+            {
+                isFunded = null;
+            }
+            else if (cbFuned.Checked)
+            {
+                isFunded = 1;
+            }
+            else if (cbNotFunded.Checked)
+            {
+                isFunded = 0;
+            }
+
 
             return DBContext.GetData("GetProjectsListing", new object[] {emgLocationId, emgClusterId, projCode, orgId, 
                                                                             RC.SelectedSiteLanguageId,  year, projectStatus, 
-                                                                            secClusterId, isOPS});
+                                                                            secClusterId, isOPS, isFunded});
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -369,6 +397,9 @@ namespace SRFROWCA.ClusterLead
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
+                RC.FormatThousandSeperator(e.Row, "lblOriginalRequest");
+                RC.FormatThousandSeperator(e.Row, "lblFundedAmount");
+
                 if (RC.IsRegionalClusterLead(this.User) || (!this.User.Identity.IsAuthenticated))
                 {
                     ImageButton btnEdit = e.Row.FindControl("btnEdit") as ImageButton;

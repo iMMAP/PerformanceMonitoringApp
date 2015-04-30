@@ -817,8 +817,15 @@ namespace SRFROWCA.Common
             string requestedFunds = RC.SelectedSiteLanguageId == 1 ?
                 string.Format(CultureInfo.InvariantCulture, "{0:n}", originalRequest) :
                 string.Format(CultureInfo.CreateSpecificCulture("fr-FR"), "{0:n}", originalRequest);
-
             tbl.AddCell(new Phrase("$" + requestedFunds, TitleFont));
+
+            tbl.AddCell(new Phrase("Funded Amount:", TableFont));
+            int fundedAmount = 0;
+            int.TryParse(dr["FundedAmount"].ToString(), out fundedAmount);
+            string funded = RC.SelectedSiteLanguageId == 1 ?
+                string.Format(CultureInfo.InvariantCulture, "{0:n}", fundedAmount) :
+                string.Format(CultureInfo.CreateSpecificCulture("fr-FR"), "{0:n}", fundedAmount);
+            tbl.AddCell(new Phrase("$" + funded, TitleFont));
 
             tbl.AddCell(new Phrase("Priority/Category:", TableFont));
             tbl.AddCell(new Phrase(Convert.ToString(dr["OPSPriority"]), TableFont));

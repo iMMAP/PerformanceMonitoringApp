@@ -78,10 +78,10 @@
                                                         <asp:TextBox ID="txtProjectCode" runat="server" CssClass="width-80"
                                                             meta:resourcekey="txtProjectCodeResource1"></asp:TextBox>
                                                     </td>
+                                                    <td></td>
                                                     <td>
-                                                        </td>
-                                                    <td>
-                                                        
+                                                        <asp:CheckBox ID="cbFuned" runat="server" Text="Funded Projects" Checked="false" />
+                                                        <asp:CheckBox ID="cbNotFunded" runat="server" Text="Not Funded Projects" Checked="false" />
                                                     </td>
                                                 </tr>
                                             <tr>
@@ -90,6 +90,7 @@
                                                     <asp:CheckBox ID="cbIsOPS" runat="server" Text="SRP Projects" Checked="false" />
                                                     <asp:CheckBox ID="cbIsORS" runat="server" Text="ORS Projects" Checked="false" />
                                                 </td>
+
                                             </tr>
                                             <tr>
                                                 <td>&nbsp;</td>
@@ -137,14 +138,20 @@
                                 meta:resourcekey="BoundFieldResource3" ItemStyle-Width="120px"></asp:BoundField>
                             <asp:BoundField DataField="ClusterName" HeaderText="Subset Cluster" SortExpression="ClusterName" meta:resourcekey="BoundFieldResource4" />
                             <asp:BoundField DataField="SecCluster" HeaderText="Cluster" SortExpression="SecCluster" meta:resourcekey="BoundFieldResource5" />
-                            <asp:BoundField DataField="OriginalRequest" HeaderText="Original Request" SortExpression="OriginalRequest"
-                                meta:resourcekey="BoundFieldResource10" />
+
+                            <asp:TemplateField HeaderText="Original Request" SortExpression="OriginalRequest" meta:resourcekey="BoundFieldResource10">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblOriginalRequest" runat="server" Text=' <%# Eval("OriginalRequest")%>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+
+                            <asp:TemplateField HeaderText="Funded Amount" SortExpression="FundedAmount">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblFundedAmount" runat="server" Text=' <%# Eval("FundedAmount")%>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+
                             <asp:BoundField DataField="OPSProjectStatus" HeaderText="Status" SortExpression="OPSProjectStatus" meta:resourcekey="BoundFieldResource6" />
-                            <%--<asp:BoundField DataField="Contact" HeaderText="Contact" ItemStyle-Wrap="true" ItemStyle-Width="150px"
-                                SortExpression="Contact" meta:resourcekey="BoundFieldResource8">
-                                <ItemStyle Wrap="True" Width="150px"></ItemStyle>
-                            </asp:BoundField>--%>
-                            <%--<asp:BoundField DataField="Phone" HeaderText="Phone" meta:resourcekey="BoundFieldResource9" />--%>
                             <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderText="PDF" meta:resourcekey="TemplateFieldResource2">
                                 <ItemTemplate>
                                     <asp:ImageButton ID="lnkPrint" runat="server" ImageUrl="../assets/orsimages/pdf.png" CommandName="PrintReport"
@@ -159,5 +166,4 @@
             </div>
         </div>
     </div>
-
 </asp:Content>

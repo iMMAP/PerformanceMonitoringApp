@@ -170,10 +170,24 @@ namespace SRFROWCA.Anonymous
                 isOPS = 0;
             }
 
+            int? isFunded = null;
+            if (cbFuned.Checked && cbNotFunded.Checked)
+            {
+                isFunded = null;
+            }
+            else if (cbFuned.Checked)
+            {
+                isFunded = 1;
+            }
+            else if (cbNotFunded.Checked)
+            {
+                isFunded = 0;
+            }
+
             string projectStatus = isOPS == 0 ? null : "Published by CAP"; //ddlStatus.SelectedValue == "0" ? null : ddlStatus.SelectedValue;
             DataTable dtProjects = DBContext.GetData("GetProjectsWithFullDetails", new object[] {@emgLocationId, @emgClusterId, projCode, orgId,
                                                                                                 RC.SelectedSiteLanguageId, year, projectId, 
-                                                                                                projectStatus, secClusterId, isOPS});
+                                                                                                projectStatus, secClusterId, isOPS, isFunded});
 
             if (dtProjects.Rows.Count > 0)
             {
@@ -316,11 +330,25 @@ namespace SRFROWCA.Anonymous
                 isOPS = 0;
             }
 
+            int? isFunded = null;
+            if (cbFuned.Checked && cbNotFunded.Checked)
+            {
+                isFunded = null;
+            }
+            else if (cbFuned.Checked)
+            {
+                isFunded = 1;
+            }
+            else if (cbNotFunded.Checked)
+            {
+                isFunded = 0;
+            }
+
             string projectStatus = isOPS == 0 ? null : "Published by CAP"; //ddlStatus.SelectedValue == "0" ? null : ddlStatus.SelectedValue;
 
             return DBContext.GetData("GetProjectsListing", new object[] {emgLocationId, emgClusterId, projCode, orgId, 
                                                                             RC.SelectedSiteLanguageId,  year, projectStatus, 
-                                                                            secClusterId, isOPS});
+                                                                            secClusterId, isOPS, isFunded});
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -349,6 +377,9 @@ namespace SRFROWCA.Anonymous
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
+                RC.FormatThousandSeperator(e.Row, "lblOriginalRequest");
+                RC.FormatThousandSeperator(e.Row, "lblFundedAmount");
+
                 if (RC.IsRegionalClusterLead(this.User) || (!this.User.Identity.IsAuthenticated))
                 {
                     ImageButton btnEdit = e.Row.FindControl("btnEdit") as ImageButton;
