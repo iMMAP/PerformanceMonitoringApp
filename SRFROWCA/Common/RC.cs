@@ -181,9 +181,6 @@ namespace SRFROWCA.Common
                 DataTable dtEmails = DBContext.GetData("GetEmailsOnCountyrAndCluster", new object[] { emgLocationId, emgClusterId });
                 string emails = string.Empty;
                 emails = "orsocharowca@gmail.com";
-                emails += ",kashif.nadeem@hotmail.com";
-                emails += ",kashif.nadeem@hotmail.com";
-                emails += ",orsocharowca@gmail.com";
                 if (!string.IsNullOrEmpty(extraEmails))
                 {
                     emails += "," + extraEmails;
@@ -221,7 +218,8 @@ namespace SRFROWCA.Common
                     string[] emailsArray = emails.Split(',');
                     emails = string.Join(",", (emailsArray.Distinct().ToArray()));
                     mailMsg.From = new MailAddress("orsocharowca@gmail.com", "Sahel ORS");
-                    mailMsg.To.Add(emails.TrimEnd(','));
+                    mailMsg.To.Add("orsocharowca@gmail.com");
+                    mailMsg.Bcc.Add(emails.TrimEnd(','));
                     mailMsg.Subject = subject;
                     mailMsg.IsBodyHtml = true;
                     mailMsg.Body = string.Format("{0} <br/><br/>Regards,<br/>Sahel ORS", body);

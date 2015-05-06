@@ -35,7 +35,8 @@ namespace SRFROWCA.Common
                         if (isValid)
                         {
                             mailMsg.From = new MailAddress("ors@ocharowca.info", "Sahel - ORS");
-                            mailMsg.To.Add(emails);
+                            mailMsg.To.Add("ors@ocharowca.info");
+                            mailMsg.Bcc.Add(emails);
                             mailMsg.Subject = "ORS - Organization Add Request.";
                             mailMsg.IsBodyHtml = true;
                             string body = "";

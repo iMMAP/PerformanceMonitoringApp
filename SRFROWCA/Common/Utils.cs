@@ -64,7 +64,7 @@ namespace SRFROWCA.Common
             try
             {
                 byte[] key = { };
-                byte[] IV = { 0x12, 0x34, 0x56, 0x78, 0x90, 0xab, 0xcd, 0xef };
+                byte[] IV = { 0x12, 0x34, 0x56, 0x78, 0x90, 0xab, 0xcd, 0xef }; 
                 key = System.Text.Encoding.UTF8.GetBytes("r0b1nr0y");
                 DESCryptoServiceProvider des = new DESCryptoServiceProvider();
                 byte[] inputByteArray = Encoding.UTF8.GetBytes(stringToEncrypt);

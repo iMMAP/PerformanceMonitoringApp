@@ -225,8 +225,8 @@ namespace SRFROWCA.ClusterLead
         {
             if (e.CommandName == "ViewProject")
             {
-                //Session["ViewProjectId"] = e.CommandArgument.ToString();
-                Response.Redirect("~/ClusterLead/ProjectDetails.aspx?pid=" + e.CommandArgument.ToString());
+                string queryString = QueryStringModule.Encrypt("pid=" + e.CommandArgument.ToString());
+                Response.Redirect("~/ClusterLead/ProjectDetails.aspx?" + queryString);
             }
             else if (e.CommandName == "PrintReport")
             {
@@ -240,7 +240,16 @@ namespace SRFROWCA.ClusterLead
                 string projectId = gvProjects.DataKeys[rowIndex].Values["ProjectId"].ToString();
                 string projOrgId = gvProjects.DataKeys[rowIndex].Values["ProjectOrganizationId"].ToString();
                 string orgId = gvProjects.DataKeys[rowIndex].Values["OrganizationId"].ToString();
-                Response.Redirect("~/Pages/CreateProject.aspx?pid=" + projectId + "&poid=" + projOrgId + "&oid=" + orgId);
+                
+                if (!string.IsNullOrEmpty(projectId.Trim())
+                    && !string.IsNullOrEmpty(projOrgId.Trim())
+                    && !string.IsNullOrEmpty(orgId.Trim()))
+                {
+                    projectId = Utils.EncryptQueryString(projectId);
+                    projOrgId = Utils.EncryptQueryString(projOrgId);
+                    orgId = Utils.EncryptQueryString(orgId);
+                    Response.Redirect("~/Pages/ManageProject.aspx?" + "pid=" + projectId + "&poid=" + projOrgId + "&oid=" + orgId);
+                }
             }
         }
 
@@ -390,7 +399,8 @@ namespace SRFROWCA.ClusterLead
 
         protected void btnCreateProject_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Pages/CreateProject.aspx");
+            //Response.Redirect("~/Pages/CreateProject.aspx");
+            Response.Redirect("~/Pages/ManageProject.aspx");
         }
 
         protected void gvProjects_RowDataBound(object sender, GridViewRowEventArgs e)

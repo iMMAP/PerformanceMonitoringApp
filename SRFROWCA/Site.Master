@@ -298,6 +298,10 @@
                             id="menuProjectSummary"><i class="icon-table"></i><span class="menu-text">
                                 <asp:Localize ID="localProgressSummary" runat="server" Text="Progress Summary" meta:resourcekey="localProgressSummary"></asp:Localize></span>
                         </a></li>
+                        <li id="liMaps" runat="server"><a href='<%=BaseURL%>/Admin/CountryMapsListing.aspx'
+                            id="menuMaps"><i class="icon-table"></i><span class="menu-text">
+                                <asp:Localize ID="Localize4" runat="server" Text="Maps"></asp:Localize></span>
+                        </a></li>
                         <li id="liContactList" runat="server"><a href="<%=BaseURL %>/OperationalPresence.aspx">
                             <i class="icon-group"></i><span class="menu-text">
                                 <asp:Localize ID="localReportsSumRepContactList" runat="server" Text="Contact List" meta:resourcekey="localReportsSumRepContactListResource1"></asp:Localize>

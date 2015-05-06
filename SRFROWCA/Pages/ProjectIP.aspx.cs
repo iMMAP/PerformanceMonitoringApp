@@ -254,7 +254,7 @@ namespace SRFROWCA.Pages
 
         protected void btnLocation_Click(object sender, EventArgs e)
         {
-            ClientScript.RegisterStartupScript(GetType(), "key", "launchModal();", true);
+            this.Page.ClientScript.RegisterStartupScript(GetType(), "key", "launchModal();", true);
             LocationRemovedPartner = 1;
             List<int> locationIds = GetLocationIdsFromGrid();
             SelectLocationsOfGrid(locationIds);

@@ -162,6 +162,7 @@ namespace SRFROWCA
             liRequestedOrganizations.Visible = isShow;
             liKeyFiguresFramework.Visible = isShow;
             liContactList.Visible = isShow;
+            liMaps.Visible = isShow;
         }
 
         private void ShowUserMenue()
@@ -267,6 +268,7 @@ namespace SRFROWCA
             liContactList.Visible = isShow;
             liProjectsPublic.Visible = !isShow;
             liActivitesFrameworkPublic.Visible = !isShow;
+            liMaps.Visible = isShow;
         }
 
         private void ActiveMenueItem()

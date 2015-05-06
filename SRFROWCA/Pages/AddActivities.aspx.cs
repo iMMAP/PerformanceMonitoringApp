@@ -597,7 +597,8 @@ namespace SRFROWCA.Pages
                             emails += "," + Convert.ToString(dtEmails.Rows[i]["Email"]);
 
                         mailMsg.From = new MailAddress("orsocharowca@gmail.com");
-                        mailMsg.To.Add(emails.TrimEnd(','));
+                        mailMsg.To.Add("orsocharowca@gmail.com");
+                        mailMsg.Bcc.Add(emails.TrimEnd(','));
                         mailMsg.Subject = subject;
                         mailMsg.IsBodyHtml = true;
                         mailMsg.Body = string.Format(@"Notification:" + Environment.NewLine +
@@ -643,12 +644,12 @@ namespace SRFROWCA.Pages
 
         private void SaveReportMainInfo()
         {
-            int yearId = RC.GetSelectedIntVal(ddlYear);
+            int yearId = 11;// RC.GetSelectedIntVal(ddlYear);
             int monthId = RC.GetSelectedIntVal(ddlMonth);
             int projId = RC.GetSelectedIntVal(rblProjects);
             Guid loginUserId = RC.GetCurrentUserId;
             int reportingYear = 2015;
-            string reportName = rblProjects.SelectedItem.Text + " (" + ddlMonth.SelectedItem.Text + ddlYear.SelectedItem.Text.Substring(2) + ")";
+            string reportName = rblProjects.SelectedItem.Text + " (" + ddlMonth.SelectedItem.Text + "15)";
             ReportId = DBContext.Add("InsertReport2015", new object[] { yearId, monthId, projId, UserInfo.EmergencyCountry,
                                                                     UserInfo.Organization, loginUserId, reportName, reportingYear, DBNull.Value });
         }

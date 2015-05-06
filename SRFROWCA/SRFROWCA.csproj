@@ -135,6 +135,8 @@
     <Content Include="Account\Reset.aspx" />
     <Content Include="Account\UpdateUser.aspx" />
     <Content Include="Account\UserProfile.aspx" />
+    <Content Include="Admin\AddEditCountryMaps.aspx" />
+    <Content Include="Admin\CountryMapsListing.aspx" />
     <Content Include="Admin\RequestedOrgListing.aspx" />
     <Content Include="Anonymous\ActivitiesFrameworkPublic.aspx" />
     <Content Include="Anonymous\OutputIndicatorReport.aspx" />
@@ -147,6 +149,7 @@
     <Content Include="assets\himages\activity_scale_operation_100px.png" />
     <Content Include="assets\himages\SAH_Countries2.png" />
     <Content Include="assets\himages\suivant-ors.png" />
+    <Content Include="assets\orsimages\map24.png" />
     <Content Include="assets\orsjs\jquery.wholenumber.js" />
     <Content Include="ClusterLead\AddActivityAndIndicators.aspx" />
     <Content Include="Admin\ConfigSettings.aspx" />
@@ -400,15 +403,21 @@
     <Content Include="OPS\SyncOPSProjects.aspx" />
     <Content Include="OPS\UploadOPSProjectDetails.aspx" />
     <Content Include="Pages\AddActivities.aspx" />
+    <Content Include="Pages\CreateProject.ascx" />
     <Content Include="Pages\CreateProject.aspx" />
     <Content Include="Pages\ManageActivities.aspx" />
+    <Content Include="Pages\ManageProject.aspx" />
+    <Content Include="Pages\ProjectActivities.ascx" />
     <Content Include="Pages\ProjectIP.aspx" />
+    <Content Include="Pages\ProjectPartners.ascx" />
     <Content Include="Pages\UploadAchived.aspx" />
     <Content Include="RegisterSuccess.aspx" />
     <Content Include="ReportingStatus.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Reports\CountryMaps.aspx" />
     <Content Include="Reports\DownloadReport.aspx" />
+    <Content Include="Reports\LoadCountryMaps.aspx" />
     <Content Include="Reports\ORS3W.aspx" />
     <Content Include="RequestOrganization.aspx" />
     <Content Include="UploadSRPLogFrame.aspx" />
@@ -425,6 +434,7 @@
     <Content Include="Anonymous\AllDataJson.ashx" />
     <Content Include="Anonymous\AllDataCSV.ashx" />
     <Content Include="Anonymous\AllValidatedDataFeed.ashx" />
+    <Content Include="WebForm1.aspx" />
     <None Include="assets\font\cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff" />
     <None Include="assets\font\DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff" />
     <None Include="assets\font\fontawesome-webfontd41d.eot" />
@@ -571,6 +581,20 @@
     </Compile>
     <Compile Include="Account\UserProfile.aspx.designer.cs">
       <DependentUpon>UserProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\AddEditCountryMaps.aspx.cs">
+      <DependentUpon>AddEditCountryMaps.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\AddEditCountryMaps.aspx.designer.cs">
+      <DependentUpon>AddEditCountryMaps.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\CountryMapsListing.aspx.cs">
+      <DependentUpon>CountryMapsListing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\CountryMapsListing.aspx.designer.cs">
+      <DependentUpon>CountryMapsListing.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\RequestedOrgListing.aspx.cs">
       <DependentUpon>RequestedOrgListing.aspx</DependentUpon>
@@ -840,6 +864,7 @@
     <Compile Include="Common\GeneratePDF.cs" />
     <Compile Include="Common\MonthNumber.cs" />
     <Compile Include="Common\ObjPrToolTip.cs" />
+    <Compile Include="Common\QueryStringModule.cs" />
     <Compile Include="Common\ReportServerCredentials.cs" />
     <Compile Include="Common\UserInfo.cs" />
     <Compile Include="Common\Utils.cs" />
@@ -1182,6 +1207,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ORSModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\CreateProject.ascx.cs">
+      <DependentUpon>CreateProject.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\CreateProject.ascx.designer.cs">
+      <DependentUpon>CreateProject.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\CreateProject.aspx.cs">
       <DependentUpon>CreateProject.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1196,12 +1228,33 @@
     <Compile Include="Pages\ManageActivities.aspx.designer.cs">
       <DependentUpon>ManageActivities.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ManageProject.aspx.cs">
+      <DependentUpon>ManageProject.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\ManageProject.aspx.designer.cs">
+      <DependentUpon>ManageProject.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ProjectActivities.ascx.cs">
+      <DependentUpon>ProjectActivities.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\ProjectActivities.ascx.designer.cs">
+      <DependentUpon>ProjectActivities.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ProjectIP.aspx.cs">
       <DependentUpon>ProjectIP.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\ProjectIP.aspx.designer.cs">
       <DependentUpon>ProjectIP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ProjectPartners.ascx.cs">
+      <DependentUpon>ProjectPartners.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\ProjectPartners.ascx.designer.cs">
+      <DependentUpon>ProjectPartners.ascx</DependentUpon>
     </Compile>
     <Compile Include="Pages\UploadAchived.aspx.cs">
       <DependentUpon>UploadAchived.aspx</DependentUpon>
@@ -1250,12 +1303,26 @@
       <DependentUpon>AddActivities.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\CountryMaps.aspx.cs">
+      <DependentUpon>CountryMaps.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\CountryMaps.aspx.designer.cs">
+      <DependentUpon>CountryMaps.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Reports\DownloadReport.aspx.cs">
       <DependentUpon>DownloadReport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Reports\DownloadReport.aspx.designer.cs">
       <DependentUpon>DownloadReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\LoadCountryMaps.aspx.cs">
+      <DependentUpon>LoadCountryMaps.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\LoadCountryMaps.aspx.designer.cs">
+      <DependentUpon>LoadCountryMaps.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\ORS3W.aspx.cs">
       <DependentUpon>ORS3W.aspx</DependentUpon>
@@ -1287,6 +1354,13 @@
     </Compile>
     <Compile Include="UploadSRPLogFrame.aspx.designer.cs">
       <DependentUpon>UploadSRPLogFrame.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
