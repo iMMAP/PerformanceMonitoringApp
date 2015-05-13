@@ -68,7 +68,7 @@ namespace SRFROWCA.Anonymous
 
             bool isRegional = RC.IsRegionalClusterLead(this.User);
 
-            return DBContext.GetData("uspGetClusterReports", new object[] { indicator, countryId, clusterId, 
+            return DBContext.GetData("GetOutputIndicatorReports", new object[] { indicator, countryId, clusterId, 
                                                                              RC.SelectedSiteLanguageId, monthIDs, isRegional });
         }
 
@@ -211,35 +211,9 @@ namespace SRFROWCA.Anonymous
                 ObjPrToolTip.RegionalIndicatorIcon(e, 11);
                 ObjPrToolTip.CountryIndicatorIcon(e, 12);
 
-                string siteCulture = RC.SelectedSiteLanguageId.Equals(1) ? "en-US" : "de-DE";
-
-                Label lblRegionalAchieved = (Label)e.Row.FindControl("lblRegionalAchieved");
-                if (lblRegionalAchieved != null && !string.IsNullOrEmpty(lblRegionalAchieved.Text))
-                    lblRegionalAchieved.Text = String.Format(new CultureInfo(siteCulture), "{0:0,0}", Convert.ToInt32(lblRegionalAchieved.Text));
-
-                Label lblTotalSum = (Label)e.Row.FindControl("lblTotalSum");
-                if (lblTotalSum != null && !string.IsNullOrEmpty(lblTotalSum.Text))
-                    lblTotalSum.Text = String.Format(new CultureInfo(siteCulture), "{0:0,0}", Convert.ToInt32(lblTotalSum.Text));
-
-                Label lblCountryAchieved = (Label)e.Row.FindControl("lblCountryAchieved");
-                if (lblCountryAchieved != null && !string.IsNullOrEmpty(lblCountryAchieved.Text))
-                    lblCountryAchieved.Text = String.Format(new CultureInfo(siteCulture), "{0:0,0}", Convert.ToInt32(lblCountryAchieved.Text));
-
-                Label lblCountrySum = (Label)e.Row.FindControl("lblCountrySum");
-                if (lblCountrySum != null && !string.IsNullOrEmpty(lblCountrySum.Text))
-                    lblCountrySum.Text = String.Format(new CultureInfo(siteCulture), "{0:0,0}", Convert.ToInt32(lblCountrySum.Text));
-
-                Label lblOrigionalTarget = (Label)e.Row.FindControl("lblOrigionalTarget");
-                if (lblOrigionalTarget != null && !string.IsNullOrEmpty(lblOrigionalTarget.Text))
-                    lblOrigionalTarget.Text = String.Format(new CultureInfo(siteCulture), "{0:0,0}", Convert.ToInt32(lblOrigionalTarget.Text));
-
-                Label lblTarget = (Label)e.Row.FindControl("lblTarget");
-                if (lblTarget != null && !string.IsNullOrEmpty(lblTarget.Text))
-                    lblTarget.Text = String.Format(new CultureInfo(siteCulture), "{0:0,0}", Convert.ToInt32(lblTarget.Text));
-
-                Label lblAchieved = (Label)e.Row.FindControl("lblAchieved");
-                if (lblAchieved != null && !string.IsNullOrEmpty(lblAchieved.Text))
-                    lblAchieved.Text = String.Format(new CultureInfo(siteCulture), "{0:0,0}", Convert.ToInt32(lblAchieved.Text));
+                UI.SetThousandSeparator(e.Row, "lblTarget");
+                UI.SetThousandSeparator(e.Row, "lblCountryAchieved");
+                UI.SetThousandSeparator(e.Row, "lblCountrySum");
             }
         }
 
@@ -327,15 +301,17 @@ namespace SRFROWCA.Anonymous
             try
             {
                 dt.Columns.Remove("IsSRP");
-                //dt.Columns.Remove("IsRegional");
                 dt.Columns.Remove("EmergencyLocationId");
                 dt.Columns.Remove("EmergencyLocationIdSahel");
                 dt.Columns.Remove("ClusterIndicatorId");
                 dt.Columns.Remove("SiteLanguageId");
                 dt.Columns.Remove("CreatedById");
-                dt.Columns.Remove("CreatedDate");
+                dt.Columns.Remove("ReportedDate");
                 dt.Columns.Remove("UpdatedById");
                 dt.Columns.Remove("UpdatedDate");
+                dt.Columns.Remove("OriginalTarget");
+                dt.Columns.Remove("IndicatorCalculationTypeId");
+                dt.Columns.Remove("NumberOfRecords");
             }
             catch { }
         }

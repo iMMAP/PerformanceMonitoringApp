@@ -14,6 +14,7 @@ namespace SRFROWCA.ClusterLead
         {
             if (!IsPostBack)
             {
+                CliearFilterSession();
                 LoadCombos();
                 DisableDropDowns();
                 SetDates();
@@ -21,7 +22,6 @@ namespace SRFROWCA.ClusterLead
             }
         }
 
-        // Disable Controls on the basis of user profile
         private void DisableDropDowns()
         {
             if (RC.IsClusterLead(this.User))
@@ -46,6 +46,7 @@ namespace SRFROWCA.ClusterLead
             LoadCombos();
             DisableDropDowns();
             SetDates();
+            SetFiltersFromSession();
             LoadClusterIndicators();
         }
 
@@ -54,11 +55,10 @@ namespace SRFROWCA.ClusterLead
             UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
             UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
 
-            PopulateYears();
             PopulateMonths();
 
-            ddlCluster.Items.Insert(0, new ListItem("--- Select Cluster ---", "-1"));
-            ddlCountry.Items.Insert(0, new ListItem("--- Select Country ---", "-1"));
+            ddlCluster.Items.Insert(0, new ListItem("Select Cluster", "0"));
+            ddlCountry.Items.Insert(0, new ListItem("Select Country", "0"));
 
             SetComboValues();
         }
@@ -66,35 +66,18 @@ namespace SRFROWCA.ClusterLead
         private void SetDates()
         {
             int month = DateTime.Now.Month - 1;
-            int year = 11;// DateTime.Now.Year;
-
             if (month.Equals(12))
                 month = 1;
             else if (month.Equals(11))
                 month = 12;
 
             ddlMonth.SelectedValue = month.ToString();
-            ddlYear.SelectedValue = year.ToString();
         }
 
         private void LoadClusterIndicators()
-        {
-            gvIndicators.DataSource = SetDataSource();
+        {            
+            gvIndicators.DataSource = GetClusterIndicatros();
             gvIndicators.DataBind();
-        }
-
-        private DataTable SetDataSource()
-        {
-            int? countryId = null;
-            int? clusterId = null;
-
-            if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
-                countryId = Convert.ToInt32(ddlCountry.SelectedValue);
-
-            if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
-                clusterId = Convert.ToInt32(ddlCluster.SelectedValue);
-
-            return GetClusterIndicatros(clusterId, countryId, null);
         }
 
         private void SetComboValues()
@@ -116,36 +99,26 @@ namespace SRFROWCA.ClusterLead
             }
         }
 
-        private DataTable GetClusterIndicatros(int? clusterId, int? countryId, string indicator)
+        private DataTable GetClusterIndicatros()
         {
             DataTable dt = new DataTable();
-            if (countryId > 0 && clusterId > 0)
+            int val = 0;
+            val = RC.GetSelectedIntVal(ddlCountry);
+            int? emgLocationId = val > 0 ? val : (int?)null;
+
+            val = RC.GetSelectedIntVal(ddlCluster);
+            int? emgClusterId = val > 0 ? val : (int?)null;
+
+            if (emgLocationId > 0 && emgClusterId > 0)
             {
-                int yearID = Convert.ToInt32(ddlYear.SelectedValue);
-                int monthID = Convert.ToInt32(ddlMonth.SelectedValue);
+                int monthId = Convert.ToInt32(ddlMonth.SelectedValue);
                 bool isRegional = RC.IsRegionalClusterLead(this.User);
-                dt = DBContext.GetData("uspGetClusterReportDetails", new object[] { yearID, monthID, RC.SelectedSiteLanguageId, countryId, clusterId, isRegional });
+                dt = DBContext.GetData("GetOutputIndicatorsForReporting", new object[] {emgLocationId, emgClusterId
+                                                                                        ,(int)RC.YearsInDB.Year2015
+                                                                                        ,monthId, isRegional, RC.SelectedSiteLanguageId});
             }
 
             return dt;
-        }
-
-        private void PopulateYears()
-        {
-            ddlYear.DataValueField = "YearId";
-            ddlYear.DataTextField = "Year";
-
-            ddlYear.DataSource = GetYears();
-            ddlYear.DataBind();
-
-            var result = DateTime.Parse(DateTime.Now.ToShortDateString()).Year;
-            ddlYear.SelectedIndex = ddlYear.Items.IndexOf(ddlYear.Items.FindByText(result.ToString()));
-        }
-
-        private DataTable GetYears()
-        {
-            DataTable dt = DBContext.GetData("GetYears");
-            return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 
         private void PopulateMonths()
@@ -183,7 +156,7 @@ namespace SRFROWCA.ClusterLead
 
             countryId = RC.GetSelectedIntVal(ddlCountry);
             clusterId = RC.GetSelectedIntVal(ddlCluster);
-            int yearId = Convert.ToInt32(ddlYear.SelectedValue);
+            int yearId = (int)RC.YearsInDB.Year2015;
             int monthId = Convert.ToInt32(ddlMonth.SelectedValue);            
 
             foreach (GridViewRow row in gvIndicators.Rows)
@@ -265,16 +238,19 @@ namespace SRFROWCA.ClusterLead
         protected void ddlMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadClusterIndicators();
+            SaveFiltersInSession();
         }
 
         protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadClusterIndicators();
+            SaveFiltersInSession();
         }
 
         protected void ddlCluster_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadClusterIndicators();
+            SaveFiltersInSession();
         }
 
         protected void gvIndicators_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -284,75 +260,10 @@ namespace SRFROWCA.ClusterLead
                 ObjPrToolTip.RegionalIndicatorIcon(e, 11);
                 ObjPrToolTip.CountryIndicatorIcon(e, 12);
 
-                Label lblTarget = (Label)e.Row.FindControl("lblTarget");
-
-                //if (lblTarget != null)
-                //{
-                //    string siteCulture = RC.SelectedSiteLanguageId.Equals(1) ? "en-US" : "fr-FR";
-                //    lblTarget.Text = String.Format(new CultureInfo(siteCulture), "{0:0,0}", Convert.ToInt32(lblTarget.Text));
-                //}
-
-
-                //Label lblOrigionalTarget = (Label)e.Row.FindControl("lblOrigionalTarget");
-
-                //if (lblOrigionalTarget != null)
-                //{
-                //    string siteCulture = RC.SelectedSiteLanguageId.Equals(1) ? "en-US" : "fr-FR";
-                //    lblOrigionalTarget.Text = String.Format(new CultureInfo(siteCulture), "{0:0,0}", Convert.ToInt32(lblOrigionalTarget.Text));
-                //}
-
-                //Label lblSum = (Label)e.Row.FindControl("lblSum");
-
-                //if (lblSum != null)
-                //{
-                //    string siteCulture = RC.SelectedSiteLanguageId.Equals(1) ? "en-US" : "fr-FR";
-                //    lblSum.Text = String.Format(new CultureInfo(siteCulture), "{0:0,0}", Convert.ToInt32(lblSum.Text));
-                //}
-                
+                UI.SetThousandSeparator(e.Row, "lblOrigionalTarget");
+                UI.SetThousandSeparator(e.Row, "lblTarget");
+                UI.SetThousandSeparator(e.Row, "lblSum");
             }
-        }
-
-        protected void gvClusterIndicators_Sorting(object sender, GridViewSortEventArgs e)
-        {
-            DataTable dt = SetDataSource();
-
-            if (dt != null)
-            {
-                //Sort the data.
-                dt.DefaultView.Sort = e.SortExpression + " " + GetSortDirection(e.SortExpression);
-                gvIndicators.DataSource = dt;
-                gvIndicators.DataBind();
-            }
-        }
-
-        private string GetSortDirection(string column)
-        {
-
-            // By default, set the sort direction to ascending.
-            string sortDirection = "ASC";
-
-            // Retrieve the last column that was sorted.
-            string sortExpression = ViewState["SortExpression"] as string;
-
-            if (sortExpression != null)
-            {
-                // Check if the same column is being sorted.
-                // Otherwise, the default value can be returned.
-                if (sortExpression == column)
-                {
-                    string lastDirection = ViewState["SortDirection"] as string;
-                    if ((lastDirection != null) && (lastDirection == "ASC"))
-                    {
-                        sortDirection = "DESC";
-                    }
-                }
-            }
-
-            // Save new values in ViewState.
-            ViewState["SortDirection"] = sortDirection;
-            ViewState["SortExpression"] = column;
-
-            return sortDirection;
         }
 
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
@@ -360,48 +271,57 @@ namespace SRFROWCA.ClusterLead
             RC.ShowMessage(Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
         }
 
-        protected void btnExportToExcel_ServerClick(object sender, EventArgs e)
+        private void SaveFiltersInSession()
         {
-            GridView gvExport = new GridView();
+            int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
+            int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
 
-            int? countryId = null;
-            string countryIds = null;
-            int? clusterId = null;
-            int? monthID = null;
+            if (emgLocationId > 0)
+                Session["ClusterDataEntryCountry"] = emgLocationId;
+            else
+                Session["ClusterDataEntryCountry"] = null;
 
-            if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
-                countryId = Convert.ToInt32(ddlCountry.SelectedValue);
-
-            if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
-                clusterId = Convert.ToInt32(ddlCluster.SelectedValue);
-
-            if (Convert.ToInt32(ddlMonth.SelectedValue) > -1)
-                monthID = Convert.ToInt32(ddlMonth.SelectedValue);
-
-            DataTable dt = DBContext.GetData("uspGetClusterReports", new object[] { null, countryId, clusterId, RC.SelectedSiteLanguageId, monthID });
-            RemoveColumnsFromDataTable(dt);
-
-            dt.DefaultView.Sort = "Country, Cluster, Indicator, Unit";
-            gvExport.DataSource = dt.DefaultView;
-            gvExport.DataBind();
-
-            string fileName = "ClusterDataEntry";
-            string fileExtention = ".xls";
-            ExportUtility.ExportGridView(gvExport, fileName, fileExtention, Response);
-
+            if (emgClusterId > 0)
+                Session["ClusterDataEntryCluster"] = emgClusterId;
+            else
+                Session["ClusterDataEntryCluster"] = null;
         }
 
-        private void RemoveColumnsFromDataTable(DataTable dt)
+        private void SetFiltersFromSession()
         {
-            try
+            if (Session["ClusterDataEntryCountry"] != null)
             {
-                dt.Columns.Remove("IsSRP");
-                dt.Columns.Remove("IsRegional");
-                dt.Columns.Remove("EmergencyLocationId");
-                dt.Columns.Remove("SiteLanguageId");
-
+                int emgLocationId = 0;
+                int.TryParse(Session["ClusterDataEntryCountry"].ToString(), out emgLocationId);
+                if (emgLocationId > 0)
+                {
+                    try
+                    {
+                        ddlCountry.SelectedValue = emgLocationId.ToString();
+                    }
+                    catch { }
+                }
             }
-            catch { }
+
+            if (Session["ClusterDataEntryCluster"] != null)
+            {
+                int clusterId = 0;
+                int.TryParse(Session["ClusterDataEntryCluster"].ToString(), out clusterId);
+                if (clusterId > 0)
+                {
+                    try
+                    {
+                        ddlCluster.SelectedValue = clusterId.ToString();
+                    }
+                    catch { }
+                }
+            }
+        }
+
+        private void CliearFilterSession()
+        {
+            Session["ClusterDataEntryCountry"] = null;
+            Session["ClusterDataEntryCluster"] = null;
         }
     }
 }

@@ -3,6 +3,8 @@ using System.Web.UI.WebControls;
 using BusinessLogic;
 using Saplin.Controls;
 using System.Web.UI;
+using System.Globalization;
+using System;
 
 namespace SRFROWCA.Common
 {
@@ -240,6 +242,21 @@ namespace SRFROWCA.Common
             ctl.DataSource = dt;
             ctl.DataBind();
         }
-        
+
+        internal static void SetThousandSeparator(GridViewRow row, string ctlId)
+        {
+            Label lbl = row.FindControl(ctlId) as Label;
+            if (lbl != null && !string.IsNullOrEmpty(lbl.Text))
+                lbl.Text = GetThousandSeparator(lbl.Text);
+        }
+
+        internal static string GetThousandSeparator(string number)
+        {
+            string siteCulture = RC.SelectedSiteLanguageId.Equals(1) ? "en-US" : "de-DE";
+            if (number.Length > 1)
+                    number  = String.Format(new CultureInfo(siteCulture), "{0:0,0}", Convert.ToInt32(number));
+
+            return number;
+        }
     }
 }

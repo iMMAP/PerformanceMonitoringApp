@@ -43,8 +43,7 @@ namespace SRFROWCA.ClusterLead
 
         private void PopulateClusters()
         {
-            int emgId = 1;
-            UI.FillEmergnecyClusters(ddlClusters, emgId);
+            UI.FillEmergnecyClusters(ddlClusters, RC.EmergencySahel2015);
             RC.AddSelectItemInList(ddlClusters, "Select Cluster");
         }
 

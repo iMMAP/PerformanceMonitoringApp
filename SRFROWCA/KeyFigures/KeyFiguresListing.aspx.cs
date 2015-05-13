@@ -153,12 +153,22 @@ namespace SRFROWCA.KeyFigures
         {
             GridView gvExport = new GridView();
             DataTable dt = GetKeyFigures();
+            RemoveColumnsFromDataTable(dt);
             gvExport.DataSource = dt;
             gvExport.DataBind();
 
             string fileName = "KeyFigures";
             string fileExtention = ".xls";
             ExportUtility.ExportGridView(gvExport, fileName, fileExtention, Response);
+        }
+
+        private void RemoveColumnsFromDataTable(DataTable dt)
+        {
+            try
+            {
+                dt.Columns.Remove("AsOfDate3");
+            }
+            catch { }
         }
 
         protected void btnNew_ServerClick(object sender, EventArgs e)

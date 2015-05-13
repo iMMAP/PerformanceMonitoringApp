@@ -13,31 +13,22 @@ namespace SRFROWCA.ClusterLead {
     public partial class ClusterDataEntry {
         
         /// <summary>
-        /// btnExportToExcel control.
+        /// pnlOutputReportData control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnExportToExcel;
+        protected global::System.Web.UI.UpdatePanel pnlOutputReportData;
         
         /// <summary>
-        /// lblCluster control.
+        /// UpdateProgress2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCluster;
-        
-        /// <summary>
-        /// ddlCluster control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCluster;
+        protected global::System.Web.UI.UpdateProgress UpdateProgress2;
         
         /// <summary>
         /// lblCountry control.
@@ -58,13 +49,22 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.DropDownList ddlCountry;
         
         /// <summary>
-        /// ddlYear control.
+        /// lblCluster control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlYear;
+        protected global::System.Web.UI.WebControls.Label lblCluster;
+        
+        /// <summary>
+        /// ddlCluster control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCluster;
         
         /// <summary>
         /// ddlMonth control.
