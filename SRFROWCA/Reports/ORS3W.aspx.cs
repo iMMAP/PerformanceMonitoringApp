@@ -250,14 +250,19 @@ namespace SRFROWCA.Reports
 
         private void LoadData()
         {
-            gvActivity.DataSource = GetData();
+            DataTable dt = GetData();
+            if (dt.Rows.Count > 0)
+            {
+                gvActivity.VirtualItemCount = Convert.ToInt32(dt.Rows[0]["VirtualCount"].ToString());
+            }
+            gvActivity.DataSource = dt;
             gvActivity.DataBind();
         }
 
         private void LoadCountry()
         {
             UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
-            ddlCountry.Items.Insert(0, new ListItem("--- Select Country ---", "0"));
+            ddlCountry.Items.Insert(0, new ListItem("Select Country", "0"));
         }
 
         private DataTable GetData()
@@ -269,8 +274,12 @@ namespace SRFROWCA.Reports
             int? admin1 = ddlAdmin1.SelectedValue != "0" ? Convert.ToInt32(ddlAdmin1.SelectedValue) : (int?)null;
             int? month = ddlMonth.SelectedValue != "0" ? Convert.ToInt32(ddlMonth.SelectedValue) : (int?)null;
             string status = ddlStatus.SelectedValue != "0" ? ddlStatus.SelectedValue : null;
-            return DBContext.GetData("GetORS3WData", new object[]{
-               prjId,orgId,emgLocationId,admin1,emgClsuterId,month,status,RC.SelectedSiteLanguageId});
+            int pageSize = gvActivity.PageSize;
+            int pageIndex = gvActivity.PageIndex;
+
+            return DBContext.GetData("GetORS3WData", new object[]{prjId,orgId,emgLocationId,
+                                                                    admin1,emgClsuterId,month,status,
+                                                                    RC.SelectedSiteLanguageId, pageSize, pageIndex});
         }
 
         private void LoadClustersFilter()
@@ -289,6 +298,7 @@ namespace SRFROWCA.Reports
         protected void gvActivity_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             gvActivity.PageIndex = e.NewPageIndex;
+            gvActivity.SelectedIndex = -1;
             LoadData();
         }
 

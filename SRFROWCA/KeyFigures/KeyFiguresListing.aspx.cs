@@ -83,7 +83,12 @@ namespace SRFROWCA.KeyFigures
 
         private void LoadKeyFigures()
         {
-            gvKeyFigures.DataSource = GetKeyFigures();
+            DataTable dt = GetKeyFigures();
+            if (dt.Rows.Count > 0)
+            {
+                gvKeyFigures.VirtualItemCount = Convert.ToInt32(dt.Rows[0]["VirtualCount"].ToString());
+            }
+            gvKeyFigures.DataSource = dt;
             gvKeyFigures.DataBind();
         }
 
@@ -123,29 +128,31 @@ namespace SRFROWCA.KeyFigures
             }
 
             int isLatest = cbShowAll.Checked ? 1 : 0;
+            int pageSize = gvKeyFigures.PageSize;
+            int pageIndex = gvKeyFigures.PageIndex;
 
             return DBContext.GetData("GetKeyFigureListing", new object[] {emgLocationId, catId, subCatId,
                                                                                     kfIndId, fromDate, toDate, isLatest,
-                                                                                    RC.SelectedSiteLanguageId});
+                                                                                    RC.SelectedSiteLanguageId, pageSize, pageIndex});
         }
 
         protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
+            gvKeyFigures.PageIndex = 0;
             LoadKeyFigures();
         }
 
         protected void ddlCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
+            gvKeyFigures.PageIndex = 0;
             int categoryId = RC.GetSelectedIntVal(ddlCategory);
-            //if (categoryId > 0)
-            {
-                LoadSubCategories(categoryId);
-            }
+            LoadSubCategories(categoryId);
             LoadKeyFigures();
         }
 
         protected void ddlSubCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
+            gvKeyFigures.PageIndex = 0;
             LoadKeyFigures();
         }
 
@@ -254,6 +261,7 @@ namespace SRFROWCA.KeyFigures
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
+            gvKeyFigures.PageIndex = 0;
             LoadKeyFigures();
         }
 
@@ -395,6 +403,7 @@ namespace SRFROWCA.KeyFigures
 
         protected void cbShowAll_CheckedChanged(object sender, EventArgs e)
         {
+            gvKeyFigures.PageIndex = 0;
             LoadKeyFigures();
         }
     }

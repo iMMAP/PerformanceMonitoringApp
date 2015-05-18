@@ -33,9 +33,7 @@
         }
     </style>
 
-    <!-- ORS styles -->
-    <link rel="stylesheet" href="../assets/css/ors.css" />
-    <!-- ace styles -->
+    
     <script type="text/javascript" src="../assets/orsjs/ShowHideObJAndPr.js"></script>
     <script src="../assets/orsjs/jquery.wholenumber.js" type="text/javascript"></script>
     <script type="text/javascript">

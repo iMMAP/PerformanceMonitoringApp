@@ -174,7 +174,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/23/2015 17:02:20</publishTime>
     </File>
     <File Include="Anonymous/AllData.aspx">
-      <publishTime>04/14/2015 14:16:04</publishTime>
+      <publishTime>05/18/2015 17:13:44</publishTime>
     </File>
     <File Include="Anonymous/AllDataCSV.ashx">
       <publishTime>04/14/2015 14:16:04</publishTime>
@@ -186,7 +186,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/14/2015 14:16:04</publishTime>
     </File>
     <File Include="Anonymous/AllDataPublic.aspx">
-      <publishTime>09/29/2014 07:11:01</publishTime>
+      <publishTime>05/15/2015 15:55:40</publishTime>
     </File>
     <File Include="Anonymous/AllValidatedDataFeed.ashx">
       <publishTime>04/14/2015 14:16:04</publishTime>
@@ -195,7 +195,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/07/2014 09:45:10</publishTime>
     </File>
     <File Include="Anonymous/OutputIndicatorReport.aspx">
-      <publishTime>04/14/2015 14:16:04</publishTime>
+      <publishTime>05/18/2015 20:18:33</publishTime>
     </File>
     <File Include="Anonymous/ProjectsListingPublic.aspx">
       <publishTime>04/30/2015 12:06:06</publishTime>
@@ -240,7 +240,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/08/2014 12:02:45</publishTime>
     </File>
     <File Include="assets/css/bootstrap.min.css">
-      <publishTime>08/11/2014 11:01:46</publishTime>
+      <publishTime>05/15/2015 15:49:13</publishTime>
     </File>
     <File Include="assets/css/chosen-sprite%402x.png">
       <publishTime>07/30/2013 11:06:40</publishTime>
@@ -293,6 +293,48 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="assets/css/images/overlay.png">
       <publishTime>05/23/2013 11:30:38</publishTime>
     </File>
+    <File Include="assets/css/images/ui-bg_diagonals-thick_18_b81900_40x40.png">
+      <publishTime>03/11/2015 08:49:34</publishTime>
+    </File>
+    <File Include="assets/css/images/ui-bg_diagonals-thick_20_666666_40x40.png">
+      <publishTime>03/11/2015 08:49:34</publishTime>
+    </File>
+    <File Include="assets/css/images/ui-bg_flat_10_000000_40x100.png">
+      <publishTime>03/11/2015 08:49:34</publishTime>
+    </File>
+    <File Include="assets/css/images/ui-bg_glass_100_f6f6f6_1x400.png">
+      <publishTime>03/11/2015 08:49:34</publishTime>
+    </File>
+    <File Include="assets/css/images/ui-bg_glass_100_fdf5ce_1x400.png">
+      <publishTime>03/11/2015 08:49:34</publishTime>
+    </File>
+    <File Include="assets/css/images/ui-bg_glass_65_ffffff_1x400.png">
+      <publishTime>03/11/2015 08:49:34</publishTime>
+    </File>
+    <File Include="assets/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png">
+      <publishTime>03/11/2015 08:49:34</publishTime>
+    </File>
+    <File Include="assets/css/images/ui-bg_highlight-soft_100_eeeeee_1x100.png">
+      <publishTime>03/11/2015 08:49:34</publishTime>
+    </File>
+    <File Include="assets/css/images/ui-bg_highlight-soft_75_ffe45c_1x100.png">
+      <publishTime>03/11/2015 08:49:34</publishTime>
+    </File>
+    <File Include="assets/css/images/ui-icons_222222_256x240.png">
+      <publishTime>03/11/2015 08:49:34</publishTime>
+    </File>
+    <File Include="assets/css/images/ui-icons_228ef1_256x240.png">
+      <publishTime>03/11/2015 08:49:34</publishTime>
+    </File>
+    <File Include="assets/css/images/ui-icons_ef8c08_256x240.png">
+      <publishTime>03/11/2015 08:49:34</publishTime>
+    </File>
+    <File Include="assets/css/images/ui-icons_ffd27a_256x240.png">
+      <publishTime>03/11/2015 08:49:34</publishTime>
+    </File>
+    <File Include="assets/css/images/ui-icons_ffffff_256x240.png">
+      <publishTime>03/11/2015 08:49:34</publishTime>
+    </File>
     <File Include="assets/css/img/alpha.png">
       <publishTime>02/16/2012 12:38:06</publishTime>
     </File>
@@ -309,7 +351,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/17/2014 14:49:10</publishTime>
     </File>
     <File Include="assets/css/jquery-ui.min.css">
-      <publishTime>04/16/2015 15:50:23</publishTime>
+      <publishTime>03/11/2015 08:49:34</publishTime>
     </File>
     <File Include="assets/css/jquery.gritter.css">
       <publishTime>04/09/2013 11:49:16</publishTime>
@@ -333,7 +375,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/12/2013 14:04:18</publishTime>
     </File>
     <File Include="assets/css/tooltipster.css">
-      <publishTime>08/22/2014 10:00:44</publishTime>
+      <publishTime>11/12/2014 10:04:28</publishTime>
     </File>
     <File Include="assets/css/ui.jqgrid.css">
       <publishTime>04/17/2014 14:49:10</publishTime>
@@ -519,7 +561,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/17/2014 14:49:11</publishTime>
     </File>
     <File Include="assets/js/jquery-ui.min.js">
-      <publishTime>09/08/2014 12:02:45</publishTime>
+      <publishTime>03/11/2015 08:49:34</publishTime>
     </File>
     <File Include="assets/js/jquery.autosize.min.js">
       <publishTime>09/03/2013 10:33:02</publishTime>
@@ -564,7 +606,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/04/2013 09:39:56</publishTime>
     </File>
     <File Include="assets/js/jquery.tooltipster.min.js">
-      <publishTime>08/22/2014 10:00:44</publishTime>
+      <publishTime>11/12/2014 10:04:28</publishTime>
     </File>
     <File Include="assets/js/jquery.ui.touch-punch.min.js">
       <publishTime>04/22/2013 08:58:06</publishTime>
@@ -643,6 +685,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="assets/orsimages/excel.png">
       <publishTime>03/04/2014 12:29:57</publishTime>
+    </File>
+    <File Include="assets/orsimages/help.png">
+      <publishTime>05/15/2015 20:23:23</publishTime>
     </File>
     <File Include="assets/orsimages/icon/agr.png">
       <publishTime>02/07/2014 07:12:58</publishTime>
@@ -849,13 +894,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/18/2011 15:17:12</publishTime>
     </File>
     <File Include="bin/BusinessLogic.dll">
-      <publishTime>04/23/2015 10:04:03</publishTime>
+      <publishTime>05/18/2015 20:36:40</publishTime>
     </File>
     <File Include="bin/BusinessLogic.pdb">
       <publishTime>04/27/2014 16:07:43</publishTime>
     </File>
     <File Include="bin/DataAccessLayer.dll">
-      <publishTime>04/23/2015 10:04:03</publishTime>
+      <publishTime>05/18/2015 20:36:39</publishTime>
     </File>
     <File Include="bin/DataAccessLayer.pdb">
       <publishTime>04/27/2014 16:07:39</publishTime>
@@ -873,10 +918,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/08/2014 10:51:39</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
-      <publishTime>04/06/2014 09:27:36</publishTime>
+      <publishTime>04/06/2014 04:27:36</publishTime>
     </File>
     <File Include="bin/EntityFramework.SqlServer.dll">
-      <publishTime>04/06/2014 09:27:36</publishTime>
+      <publishTime>04/06/2014 04:27:36</publishTime>
     </File>
     <File Include="bin/EntityFramework.SqlServer.xml">
       <publishTime>04/06/2014 09:27:36</publishTime>
@@ -906,7 +951,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/06/2014 09:26:40</publishTime>
     </File>
     <File Include="bin/SRFROWCA.dll">
-      <publishTime>05/06/2015 18:16:29</publishTime>
+      <publishTime>05/18/2015 20:36:42</publishTime>
     </File>
     <File Include="bin/SRFROWCA.pdb">
       <publishTime>04/28/2014 16:21:20</publishTime>
@@ -1002,13 +1047,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/18/2014 14:02:05</publishTime>
     </File>
     <File Include="ClusterLead/ClusterDataEntry.aspx">
-      <publishTime>04/14/2015 14:16:04</publishTime>
+      <publishTime>05/18/2015 14:40:00</publishTime>
     </File>
     <File Include="ClusterLead/ClusterIndicatorTargets.aspx">
-      <publishTime>05/06/2014 11:01:55</publishTime>
+      <publishTime>05/15/2015 15:59:10</publishTime>
     </File>
     <File Include="ClusterLead/ClusterReports.aspx">
-      <publishTime>04/14/2015 14:16:04</publishTime>
+      <publishTime>05/13/2015 19:05:32</publishTime>
     </File>
     <File Include="ClusterLead/CountryIndicators.aspx">
       <publishTime>04/14/2015 14:16:04</publishTime>
@@ -1047,7 +1092,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/13/2014 11:34:07</publishTime>
     </File>
     <File Include="ClusterLead/ReportDetails.aspx">
-      <publishTime>10/31/2014 09:48:15</publishTime>
+      <publishTime>05/15/2015 15:56:25</publishTime>
     </File>
     <File Include="ClusterLead/SahelIndicatorTargets.aspx">
       <publishTime>04/14/2015 14:16:04</publishTime>
@@ -1056,16 +1101,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/22/2014 10:00:44</publishTime>
     </File>
     <File Include="ClusterLead/UploadAchieved.aspx">
-      <publishTime>04/14/2015 14:16:04</publishTime>
+      <publishTime>05/15/2015 15:56:33</publishTime>
     </File>
     <File Include="ClusterLead/UploadSRP.aspx">
       <publishTime>04/14/2015 14:16:04</publishTime>
     </File>
     <File Include="ClusterLead/ValidateIndicators.aspx">
-      <publishTime>04/14/2015 14:16:04</publishTime>
+      <publishTime>05/15/2015 15:56:49</publishTime>
     </File>
     <File Include="ClusterLead/ValidateReportList.aspx">
-      <publishTime>04/14/2015 14:16:04</publishTime>
+      <publishTime>05/15/2015 15:57:00</publishTime>
     </File>
     <File Include="ClusterLead/Web.config">
       <publishTime>02/26/2014 22:21:40</publishTime>
@@ -1203,7 +1248,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/25/2013 12:32:24</publishTime>
     </File>
     <File Include="Default.aspx">
-      <publishTime>04/14/2015 14:16:05</publishTime>
+      <publishTime>05/18/2015 11:54:25</publishTime>
     </File>
     <File Include="Default_.aspx">
       <publishTime>12/15/2014 20:57:35</publishTime>
@@ -3108,7 +3153,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/04/2014 13:22:00</publishTime>
     </File>
     <File Include="KeyFigures/AddKeyFigure.aspx">
-      <publishTime>04/21/2015 09:46:07</publishTime>
+      <publishTime>05/18/2015 15:33:19</publishTime>
     </File>
     <File Include="KeyFigures/AddKeyFigureCategory.aspx">
       <publishTime>04/14/2015 14:16:05</publishTime>
@@ -3144,10 +3189,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/14/2015 14:16:05</publishTime>
     </File>
     <File Include="KeyFigures/KeyFiguresListing.aspx">
-      <publishTime>04/28/2015 15:53:40</publishTime>
+      <publishTime>05/18/2015 19:55:58</publishTime>
     </File>
     <File Include="KeyFigures/KeyFiguresListingPublic.aspx">
-      <publishTime>04/28/2015 15:48:54</publishTime>
+      <publishTime>05/18/2015 20:20:40</publishTime>
     </File>
     <File Include="KeyFigures/KeyFigureTableHeaderControl.ascx">
       <publishTime>04/03/2015 17:23:42</publishTime>
@@ -3192,10 +3237,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/20/2013 14:56:58</publishTime>
     </File>
     <File Include="OPS/OPSDataEntry.aspx">
-      <publishTime>04/14/2015 14:16:05</publishTime>
+      <publishTime>05/15/2015 15:57:17</publishTime>
     </File>
     <File Include="OPS/OPSDataEntryOld.aspx">
-      <publishTime>04/14/2015 14:16:05</publishTime>
+      <publishTime>05/15/2015 15:57:29</publishTime>
     </File>
     <File Include="OPS/OPSProjectFeed.ashx">
       <publishTime>02/06/2014 12:22:02</publishTime>
@@ -3252,10 +3297,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/27/2014 15:11:08</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>04/14/2015 14:16:05</publishTime>
+      <publishTime>05/18/2015 19:10:38</publishTime>
     </File>
     <File Include="Pages/AddActivities.aspx">
-      <publishTime>04/14/2015 14:16:05</publishTime>
+      <publishTime>05/15/2015 15:57:40</publishTime>
     </File>
     <File Include="Pages/App_LocalResources/AddActivities.aspx.fr-FR.resx">
       <publishTime>04/15/2014 11:29:34</publishTime>
@@ -3288,31 +3333,31 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/16/2013 12:03:55</publishTime>
     </File>
     <File Include="Pages/CreateProject.ascx">
-      <publishTime>05/04/2015 18:46:31</publishTime>
+      <publishTime>05/15/2015 15:57:52</publishTime>
     </File>
     <File Include="Pages/CreateProject.aspx">
-      <publishTime>04/15/2015 15:47:28</publishTime>
+      <publishTime>05/15/2015 15:58:06</publishTime>
     </File>
     <File Include="Pages/ManageActivities.aspx">
-      <publishTime>04/14/2015 14:16:05</publishTime>
+      <publishTime>05/15/2015 15:58:16</publishTime>
     </File>
     <File Include="Pages/ManageProject.aspx">
       <publishTime>05/05/2015 13:14:32</publishTime>
     </File>
     <File Include="Pages/ProjectActivities.ascx">
-      <publishTime>05/04/2015 17:19:56</publishTime>
+      <publishTime>05/15/2015 15:58:28</publishTime>
     </File>
     <File Include="Pages/ProjectIP.aspx">
-      <publishTime>04/14/2015 14:16:05</publishTime>
+      <publishTime>05/15/2015 15:58:37</publishTime>
     </File>
     <File Include="Pages/ProjectPartners.ascx">
-      <publishTime>05/05/2015 15:30:28</publishTime>
+      <publishTime>05/15/2015 15:58:44</publishTime>
     </File>
     <File Include="Pages/TargetsAchievedOfLocationByDuration.ascx">
       <publishTime>11/03/2013 10:36:50</publishTime>
     </File>
     <File Include="Pages/UploadAchived.aspx">
-      <publishTime>04/14/2015 14:16:05</publishTime>
+      <publishTime>05/15/2015 15:58:53</publishTime>
     </File>
     <File Include="Pages/Web.config">
       <publishTime>10/29/2013 07:15:57</publishTime>
@@ -3375,7 +3420,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/16/2014 15:15:58</publishTime>
     </File>
     <File Include="Reports/ORS3W.aspx">
-      <publishTime>04/20/2015 15:54:14</publishTime>
+      <publishTime>05/18/2015 20:27:51</publishTime>
     </File>
     <File Include="Reports/ProjectByClusters.aspx">
       <publishTime>03/28/2014 10:57:22</publishTime>
@@ -3510,7 +3555,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/01/2014 12:31:41</publishTime>
     </File>
     <File Include="Site.Master">
-      <publishTime>05/05/2015 16:21:30</publishTime>
+      <publishTime>05/18/2015 15:49:52</publishTime>
     </File>
     <File Include="Styles/loginareamenu.css">
       <publishTime>11/04/2013 03:22:35</publishTime>
@@ -3620,8 +3665,59 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="UserManual_files/image011.png">
       <publishTime>04/24/2013 15:47:17</publishTime>
     </File>
+    <File Include="Visualization/font/avenir/12d643f2-3899-49d5-a85b-ff430f5fad15.eot">
+      <publishTime>05/18/2015 10:57:12</publishTime>
+    </File>
+    <File Include="Visualization/font/avenir/1a7c9181-cd24-4943-a9d9-d033189524e0.eot">
+      <publishTime>05/18/2015 10:57:12</publishTime>
+    </File>
+    <File Include="Visualization/font/avenir/42c793cf-df5a-4e07-bf3e-37de54df02b6.eot">
+      <publishTime>05/18/2015 10:57:12</publishTime>
+    </File>
+    <File Include="Visualization/font/avenir/e9167238-3b3f-4813-a04a-a384394eed42.eot">
+      <publishTime>05/18/2015 10:57:12</publishTime>
+    </File>
+    <File Include="Visualization/images/databox.jpg">
+      <publishTime>05/18/2015 10:57:12</publishTime>
+    </File>
+    <File Include="Visualization/images/ip.jpg">
+      <publishTime>05/18/2015 10:57:12</publishTime>
+    </File>
+    <File Include="Visualization/images/map.jpg">
+      <publishTime>05/18/2015 10:57:12</publishTime>
+    </File>
+    <File Include="Visualization/images/out.jpg">
+      <publishTime>05/18/2015 10:57:12</publishTime>
+    </File>
+    <File Include="Visualization/images/overlay-white.png">
+      <publishTime>05/18/2015 10:57:12</publishTime>
+    </File>
+    <File Include="Visualization/images/rpt.jpg">
+      <publishTime>05/18/2015 10:57:12</publishTime>
+    </File>
+    <File Include="Visualization/images/xcl.jpg">
+      <publishTime>05/18/2015 10:57:12</publishTime>
+    </File>
+    <File Include="Visualization/javascripts/main.js">
+      <publishTime>05/18/2015 10:57:12</publishTime>
+    </File>
+    <File Include="Visualization/javascripts/scale.fix.js">
+      <publishTime>05/18/2015 10:57:12</publishTime>
+    </File>
+    <File Include="Visualization/stylesheets/main.css">
+      <publishTime>05/18/2015 12:04:29</publishTime>
+    </File>
+    <File Include="Visualization/stylesheets/pygment_trac.css">
+      <publishTime>05/18/2015 10:57:12</publishTime>
+    </File>
+    <File Include="Visualization/stylesheets/styles.css">
+      <publishTime>05/18/2015 10:57:12</publishTime>
+    </File>
+    <File Include="Visualization/stylesheets/stylesheet.css">
+      <publishTime>05/18/2015 10:57:12</publishTime>
+    </File>
     <File Include="Web.config">
-      <publishTime>05/06/2015 14:59:27</publishTime>
+      <publishTime>05/18/2015 19:10:32</publishTime>
     </File>
     <File Include="WebForm1.aspx">
       <publishTime>05/04/2015 14:35:33</publishTime>

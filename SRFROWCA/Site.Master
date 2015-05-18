@@ -12,49 +12,21 @@
     <!-- basic styles -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-    <!--[if IE 7]>
-		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
-		<![endif]-->
-    <!-- page specific plugin styles -->
-    <!-- fonts -->
+
+
     <link rel="stylesheet" href="assets/css/ace-fonts.css" />
     <link rel="stylesheet" href="assets/css/ace.min.css" />
-    <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+    <%--<link rel="stylesheet" href="assets/css/ace-rtl.min.css" />--%>
     <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
     <link rel="stylesheet" href="assets/css/ors.css" />
     <link rel="Stylesheet" href="assets/css/jquery-ui.min.css" />
 
-    <!-- ORS styles -->
-
-    <!-- ace styles -->
-    <!--[if !IE] -->
-    <script type="text/javascript">
-        window.jQuery || document.write("<script src='<%# BaseURL %>/assets/js/jquery-2.0.3.min.js'>" +
-	"<" + "/script>"); </script>
-    <!-- <![endif]-->
-    <!--[if IE]> <script type="text/javascript">
-	window.jQuery || document.write("<script src='<%# BaseURL %>/assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
-	</script> <![endif]-->
-    <script type="text/javascript">        if ("ontouchend" in document)
-            document.write("<script src='<%# BaseURL %>/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
-    </script>
-    <!--[if lte IE 8]>
-		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
-		<![endif]-->
-    <!-- inline styles related to this page -->
-    <!-- ace settings handler -->
-    <script src="<%# BaseURL %>/assets/js/ace-extra.min.js"></script>
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-		<script src="<%# BaseURL %>/assets/js/html5shiv.js"></script>
-		<script src="<%# BaseURL %>/assets/js/respond.min.js"></script>
-		<![endif]-->
-
+    <script src='<%# BaseURL %>/assets/js/jquery-2.0.3.min.js'></script>
+    <script src='<%# BaseURL %>/assets/js/ace-extra.min.js'></script>
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body class="skin-2">
-
     <form runat="server">
         <asp:ScriptManager ID="masterScriptMgr" runat="server">
         </asp:ScriptManager>
@@ -151,12 +123,12 @@
 
 
                         <li id="liProjects" runat="server"><a href="~/ClusterLead/ProjectsListing.aspx"
-                                    id="menuProjects" runat="server"><i class="icon-list-alt"></i><span class="menu-text">
+                            id="menuProjects" runat="server"><i class="icon-file-alt"></i><span class="menu-text">
                                 <asp:Localize ID="localMainProjects" runat="server" Text="Projects" meta:resourcekey="localCLProjectListingMainResource1"></asp:Localize>
                             </span></a>
                         </li>
                         <li id="liProjectsPublic" runat="server"><a href="~/Anonymous/ProjectsListingPublic.aspx"
-                                    id="menuProjectsPublic" runat="server"><i class="icon-list-alt"></i><span class="menu-text">
+                            id="menuProjectsPublic" runat="server"><i class="icon-file-alt"></i><span class="menu-text">
                                 <asp:Localize ID="Localize2" runat="server" Text="Projects" meta:resourcekey="localCLProjectListingMainResource1"></asp:Localize>
                             </span></a>
                         </li>
@@ -174,7 +146,7 @@
                                 <asp:Localize ID="localManagePartners" runat="server" Text="Manage Partners" meta:resourcekey="localManagePartners"></asp:Localize></span> </a></li>
 
                         <li id="liClusterFrameworks" runat="server"><a id="A6" runat="server" href="#"
-                            class="dropdown-toggle"><i class="icon-list-alt"></i><span class="menu-text">
+                            class="dropdown-toggle"><i class="icon-group"></i><span class="menu-text">
                                 <asp:Localize ID="localClusterFrameworksList1" runat="server" Text="Cluster Framework" meta:resourcekey="localClusterFrameworksList1"></asp:Localize>
                             </span><b class="arrow icon-angle-down"></b></a>
                             <ul class="submenu">
@@ -217,11 +189,11 @@
                                 <asp:Localize ID="LocalValidateAchievements" runat="server" Text="Validate Reports" meta:resourcekey="localValidateReport1"></asp:Localize>
                             </span></a></li>
                         <li id="liORS3W" runat="server"><a href="~/Reports/ORS3W.aspx" id="menuORS3W"
-                            runat="server"><i class="icon-list-alt"></i><span class="menu-text">3W</span>
+                            runat="server"><i class="icon-table"></i><span class="menu-text">3W</span>
                         </a></li>
 
                         <li id="liKeyFigures" runat="server"><a href="~/KeyFigures/KeyFiguresListing.aspx" id="menueKeyFigures"
-                            runat="server"><i class="icon-list-alt"></i><span class="menu-text">
+                            runat="server"><i class="icon-key"></i><span class="menu-text">
                                 <asp:Localize ID="localKeyFigures" runat="server" Text="Key Figures" meta:resourcekey="localKeyFiguresResource1"></asp:Localize></span>
                         </a></li>
                         <li id="liKeyFiguresFramework" runat="server"><a href="~/KeyFigures/KeyFigureIndicatorListing.aspx" id="menueKeyFigFramework"
@@ -230,7 +202,7 @@
                             </span>
                         </a></li>
                         <li id="liKeyFiguresPublic" runat="server"><a href="~/KeyFigures/KeyFiguresListingPublic.aspx" id="A3"
-                            runat="server"><i class="icon-list-alt"></i><span class="menu-text">
+                            runat="server"><i class="icon-key"></i><span class="menu-text">
                                 <asp:Localize ID="Localize1" runat="server" Text="Key Figures" meta:resourcekey="localKeyFiguresResource1"></asp:Localize></span>
                         </a></li>
 
@@ -240,10 +212,10 @@
                             </span></a></li>
 
                         <li id="liActivitesFrameworkPublic" runat="server"><a href="<%=BaseURL %>/Anonymous/ActivitiesFrameworkPublic.aspx"><i class="icon-list-alt"></i><span class="menu-text">
-                                    <asp:Localize ID="Localize3" runat="server" Text="Cluster Framework" meta:resourcekey="localClusterFrameworksList1"></asp:Localize>
-                                </span></a></li>
+                            <asp:Localize ID="Localize3" runat="server" Text="Cluster Framework" meta:resourcekey="localClusterFrameworksList1"></asp:Localize>
+                        </span></a></li>
                         <li id="liUserListing" runat="server"><a href="~/Admin/UsersListing.aspx"
-                            id="menueUserListing" runat="server"><i class="icon-group"></i><span class="menu-text">
+                            id="menueUserListing" runat="server"><i class="icon-user"></i><span class="menu-text">
                                 <asp:Localize ID="localSiteUsers" runat="server" Text="Users" meta:resourcekey="localSiteUsers"></asp:Localize></span> </a></li>
                         <li id="liFundingStatus" runat="server"><a href="~/LeadPages/FundingListing.aspx"
                             id="AFundingStatus" runat="server"><i class="icon-money"></i><span class="menu-text">
@@ -300,8 +272,11 @@
                         </a></li>
                         <li id="liMaps" runat="server"><a href='<%=BaseURL%>/Admin/CountryMapsListing.aspx'
                             id="menuMaps"><i class="icon-table"></i><span class="menu-text">
-                                <asp:Localize ID="Localize4" runat="server" Text="Maps"></asp:Localize></span>
+                                <asp:Localize ID="Localize4" runat="server" Text="Manage Maps"></asp:Localize></span>
                         </a></li>
+                        <li><a href="<%=BaseURL %>/Reports/CountryMaps.aspx"><i class="icon-map-marker"></i><span class="menu-text">
+                            <asp:Localize ID="Localize5" runat="server" Text="Maps"></asp:Localize></span> </a></li>
+
                         <li id="liContactList" runat="server"><a href="<%=BaseURL %>/OperationalPresence.aspx">
                             <i class="icon-group"></i><span class="menu-text">
                                 <asp:Localize ID="localReportsSumRepContactList" runat="server" Text="Contact List" meta:resourcekey="localReportsSumRepContactListResource1"></asp:Localize>
@@ -341,22 +316,14 @@
         </div>
         <!-- /.main-container -->
         <!-- basic scripts -->
+
         <script src="<%# BaseURL %>/assets/js/bootstrap.min.js"></script>
-        <script src="<%# BaseURL %>/assets/js/typeahead-bs2.min.js"></script>
-        <!-- page specific plugin scripts -->
-        <!--[if lte IE 8]> <script src="assets/js/excanvas.min.js"></script>
-	<![endif]-->
         <script src="<%# BaseURL %>/assets/js/jquery-ui.min.js"></script>
-        <script src="<%# BaseURL %>/assets/js/jquery.ui.touch-punch.min.js"></script>
         <script src="<%# BaseURL %>/assets/js/jquery.slimscroll.min.js"></script>
-        <script src="<%# BaseURL %>/assets/js/jquery.sparkline.min.js"></script>
-        <!-- ace scripts
-	-->
-        <script src="<%# BaseURL %>/assets/js/ace-elements.min.js"></script>
+
+        <%--<script src="<%# BaseURL %>/assets/js/ace-elements.min.js"></script>--%>
         <script src="<%# BaseURL %>/assets/js/ace.min.js"></script>
-        <script type="text/javascript">
-            if ("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
-        </script>
+        
         <script>
             // Keep the session alive
             function setHeartbeat() {
@@ -376,8 +343,6 @@
 					);
             }
         </script>
-
-
     </form>
 </body>
 </html>

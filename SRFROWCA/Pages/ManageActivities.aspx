@@ -2,9 +2,7 @@
     CodeBehind="ManageActivities.aspx.cs" Inherits="SRFROWCA.Pages.ManageActivities" Culture="auto" meta:resourcekey="PageResource1" UICulture="auto" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <!-- ORS styles -->
-    <link rel="stylesheet" href="../assets/css/ors.css" />
-    <!-- ace styles -->
+    
     <script type="text/javascript" src="../assets/orsjs/ShowHideObJAndPr.js"></script>
    
      <script>

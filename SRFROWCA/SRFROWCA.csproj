@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SRFROWCA</RootNamespace>
     <AssemblyName>SRFROWCA</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <UseIISExpress>false</UseIISExpress>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -24,6 +24,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,6 +36,7 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <RunCodeAnalysis>false</RunCodeAnalysis>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -43,6 +45,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -57,6 +60,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -73,6 +77,7 @@
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AjaxControlToolkit, Version=4.1.7.123, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
@@ -99,7 +104,6 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
@@ -112,7 +116,6 @@
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
@@ -122,6 +125,7 @@
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
@@ -141,6 +145,20 @@
     <Content Include="Anonymous\ActivitiesFrameworkPublic.aspx" />
     <Content Include="Anonymous\OutputIndicatorReport.aspx" />
     <Content Include="Anonymous\ProjectsListingPublic.aspx" />
+    <Content Include="assets\css\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="assets\css\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="assets\css\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="assets\css\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="assets\css\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="assets\css\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="assets\css\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="assets\css\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="assets\css\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="assets\css\images\ui-icons_222222_256x240.png" />
+    <Content Include="assets\css\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="assets\css\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="assets\css\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="assets\css\images\ui-icons_ffffff_256x240.png" />
     <Content Include="assets\orsimages\Calendar16.png" />
     <Content Include="assets\orsimages\delete16.png" />
     <Content Include="assets\orsimages\duplicate.png" />
@@ -149,6 +167,7 @@
     <Content Include="assets\himages\activity_scale_operation_100px.png" />
     <Content Include="assets\himages\SAH_Countries2.png" />
     <Content Include="assets\himages\suivant-ors.png" />
+    <Content Include="assets\orsimages\help.png" />
     <Content Include="assets\orsimages\map24.png" />
     <Content Include="assets\orsjs\jquery.wholenumber.js" />
     <Content Include="ClusterLead\AddActivityAndIndicators.aspx" />
@@ -434,6 +453,19 @@
     <Content Include="Anonymous\AllDataJson.ashx" />
     <Content Include="Anonymous\AllDataCSV.ashx" />
     <Content Include="Anonymous\AllValidatedDataFeed.ashx" />
+    <Content Include="Visualization\images\databox.jpg" />
+    <Content Include="Visualization\images\ip.jpg" />
+    <Content Include="Visualization\images\map.jpg" />
+    <Content Include="Visualization\images\out.jpg" />
+    <Content Include="Visualization\images\overlay-white.png" />
+    <Content Include="Visualization\images\rpt.jpg" />
+    <Content Include="Visualization\images\xcl.jpg" />
+    <Content Include="Visualization\javascripts\main.js" />
+    <Content Include="Visualization\javascripts\scale.fix.js" />
+    <Content Include="Visualization\stylesheets\main.css" />
+    <Content Include="Visualization\stylesheets\pygment_trac.css" />
+    <Content Include="Visualization\stylesheets\styles.css" />
+    <Content Include="Visualization\stylesheets\stylesheet.css" />
     <Content Include="WebForm1.aspx" />
     <None Include="assets\font\cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff" />
     <None Include="assets\font\DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff" />
@@ -503,6 +535,10 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="Visualization\font\avenir\12d643f2-3899-49d5-a85b-ff430f5fad15.eot" />
+    <Content Include="Visualization\font\avenir\1a7c9181-cd24-4943-a9d9-d033189524e0.eot" />
+    <Content Include="Visualization\font\avenir\42c793cf-df5a-4e07-bf3e-37de54df02b6.eot" />
+    <Content Include="Visualization\font\avenir\e9167238-3b3f-4813-a04a-a384394eed42.eot" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="About.aspx.cs">

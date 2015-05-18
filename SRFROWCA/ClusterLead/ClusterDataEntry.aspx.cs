@@ -14,7 +14,7 @@ namespace SRFROWCA.ClusterLead
         {
             if (!IsPostBack)
             {
-                CliearFilterSession();
+                //CliearFilterSession();
                 LoadCombos();
                 DisableDropDowns();
                 SetDates();

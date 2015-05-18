@@ -2,9 +2,6 @@
     CodeBehind="ValidateReportList.aspx.cs" Inherits="SRFROWCA.ClusterLead.ValidateReportList" Culture="auto" meta:resourcekey="PageResource1" UICulture="auto" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <!-- ORS styles -->
-    <link rel="stylesheet" href="../assets/css/ors.css" />
-    <!-- ace styles -->
 </asp:Content>
 <asp:Content ID="vReportsContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="breadcrumbs" id="breadcrumbs">

@@ -83,10 +83,8 @@
 
         $(function () {
             $("#<%=txtFromDate.ClientID%>").datepicker({
-                dateFormat: "mm/dd/yy",
-                defaultDate: Date.now(),
-                onSelect: function (selected) {
-                }
+                dateFormat: "dd-mm-yy",
+                defaultDate: Date.now()
             });
         });
 
@@ -126,7 +124,7 @@
                 <td>As Of Date:*</td>
                 <td colspan="5">
                     <asp:TextBox ID="txtFromDate" runat="server" Width="150px"></asp:TextBox>
-                    <label>(MM/dd/yyyy)</label>
+                    <label>(dd-mm-yyyy)</label>
                     <asp:RequiredFieldValidator ID="rfvDate" runat="server"
                         ControlToValidate="txtFromDate"
                         ErrorMessage="Required."
@@ -177,19 +175,19 @@
             <HeaderTemplate>
                 <table id="tblKeyFigure" style="margin: 0 auto; width: 100%;" border="1" runat="server">
                     <tr>
-                        <th style="width: 20%;" class="graycolor"></th>
+                        <th style="width: 15%;" class="graycolor"></th>
                         <th style="width: 15%;" class="graycolor"></th>
                         <th class="graycolor" id="thFromLocTop" runat="server"></th>
-                        <th style="width: 15%;" class="graycolor"></th>
+                        <th style="width: 10%;" class="graycolor"></th>
                         <th class="tdTop" colspan="3">Total</th>
                         <th class="tdTop" colspan="3">In Need</th>
                         <th class="tdTop" colspan="3">Targated</th>
                     </tr>
                     <tr>
-                        <th style="width: 20%;" class="lightgraycolor">Key Figure</th>
+                        <th style="width: 15%;" class="lightgraycolor">Key Figure</th>
                         <th style="width: 15%;" class="lightgraycolor">Source</th>
                         <th class="lightgraycolor" id="thFromLoc" runat="server">From Location</th>
-                        <th style="width: 15%;" class="lightgraycolor">Location</th>
+                        <th style="width: 10%;" class="lightgraycolor">Location</th>
                         <th class="tdHeader">Total</th>
                         <th class="tdHeader">Men</th>
                         <th class="tdHeader">Women</th>
@@ -205,7 +203,7 @@
             <ItemTemplate>
                 <table style="margin: 0 auto; width: 100%;" border="1" class="tblMain">
                     <tr>
-                        <td style="width: 20%;">
+                        <td style="width: 15%;">
                             <asp:Label ID="lblKeyFigureIndicator" runat="server" Width="98%" Text='<%# Eval("KeyFigureIndicator")%>'></asp:Label>
                             <asp:HiddenField ID="hfKeyFigureIndicatorId" runat="server" Value='<%# Eval("KeyFigureIndicatorId")%>' />
                             <asp:HiddenField ID="hfKeyFigureReportId" runat="server" Value='<%# Eval("KeyFigureReportId")%>' />
@@ -216,7 +214,7 @@
                         <td id="tdFromLocTop" runat="server">
                             <asp:TextBox ID="txtFromLocation" runat="server" CssClass="itemWidth" MaxLength="50" Text='<%# Eval("FromLocation")%>'></asp:TextBox>
                         </td>
-                        <td style="width: 15%; text-align: left;">
+                        <td style="width: 10%; text-align: left;">
                             <asp:Label ID="lblCountry" runat="server" Width="98%" Text='<%# Eval("CountryName")%>'></asp:Label>
                             <asp:HiddenField ID="hfLocationId" runat="server" Value='<%# Eval("LocationId")%>' />
                             <span class="showDetails1" style="font-size: smaller; color: blue; cursor: pointer;">Show Admin1</span>
@@ -264,7 +262,7 @@
                                             <td class="tdTable" id="tdFromLoc" runat="server">
                                                 <asp:TextBox ID="txtFromLocation" runat="server" CssClass="itemWidth" MaxLength="50" Text='<%# Eval("FromLocation")%>'></asp:TextBox>
                                             </td>
-                                            <td style="width: 15%; text-align: left;">
+                                            <td style="width: 10%; text-align: left;">
                                                 <div style="float: left; width: 100%; text-align: left;"><%#Eval("LocationName")%></div>
                                             </td>
                                             <td class="tdTable">

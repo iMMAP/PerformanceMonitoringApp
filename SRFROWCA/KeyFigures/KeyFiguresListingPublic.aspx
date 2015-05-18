@@ -1,10 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="KeyFiguresListingPublic.aspx.cs" Inherits="SRFROWCA.KeyFigures.KeyFiguresListingPublic" %>
 
+
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 
     <script>
         $(function () {
-            //$(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th colspan="3" style="text-align: center;">Total</th><th colspan="3" style="text-align: center;">In Need</th><th colspan="3" style="text-align: center;">Targeted</th><th></th></tr></thead>');
+            $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th colspan="3" style="text-align: center;">Total</th><th colspan="3" style="text-align: center;">In Need</th><th colspan="3" style="text-align: center;">Targeted</th><th></th></tr></thead>');
            
             var prm = Sys.WebForms.PageRequestManager.getInstance();
             prm.add_endRequest(function () {
@@ -152,8 +153,9 @@
                     <asp:GridView ID="gvKeyFigures" runat="server" AutoGenerateColumns="False" OnRowDataBound="gvKeyFigures_RowDataBound"
                         HeaderStyle-BackColor="ButtonFace" AllowPaging="true" PageSize="50" OnPageIndexChanging="gvKeyFigures_PageIndexChanging"
                         CssClass="imagetable" Width="100%" OnSorting="gvKeyFigures_Sorting" AllowSorting="true"
-                        DataKeyNames="AsOfDate,SubCategoryId,CategoryId,EmergencyLocationId,KeyFigureId"
-                        EmptyDataText="There are no key figures available!">
+                        DataKeyNames="AsOfDate,SubCategoryId,CategoryId,EmergencyLocationId,KeyFigureId" AllowCustomPaging="true"
+                        EmptyDataText="There are no key figures available!"> 
+                        <PagerSettings Mode="NumericFirstLast" />
                         <HeaderStyle BackColor="Control"></HeaderStyle>
                         <Columns>
                             <asp:TemplateField ItemStyle-Width="2%" HeaderText="#" meta:resourcekey="TemplateFieldResource1">
@@ -164,11 +166,11 @@
                                 <ItemStyle Width="2%"></ItemStyle>
                             </asp:TemplateField>
                             <asp:BoundField DataField="Country" HeaderText="Country" SortExpression="Country" ItemStyle-Width="7%"></asp:BoundField>
-                            <asp:BoundField DataField="Category" HeaderText="Category" SortExpression="Category" ItemStyle-Width="15%"></asp:BoundField>
-                            <asp:BoundField DataField="SubCategory" HeaderText="Sub Category" SortExpression="SubCategory" ItemStyle-Width="15%"></asp:BoundField>
-                            <asp:BoundField DataField="KeyFigure" HeaderText="Key Figure" SortExpression="KeyFigure" ItemStyle-Width="20%"></asp:BoundField>
-                            <asp:BoundField DataField="AsOfDate" HeaderText="As Of Date" SortExpression="AsOfDate" ItemStyle-Width="10%"></asp:BoundField>
-                            <asp:BoundField DataField="KeyFigureSource" HeaderText="Source" SortExpression="KeyFigureSource" ItemStyle-Width="4%"></asp:BoundField>
+                            <asp:BoundField DataField="Category" HeaderText="Category" SortExpression="Category" ItemStyle-Width="5%"></asp:BoundField>
+                            <asp:BoundField DataField="SubCategory" HeaderText="Sub Category" SortExpression="SubCategory" ItemStyle-Width="7%"></asp:BoundField>
+                            <asp:BoundField DataField="KeyFigure" HeaderText="Key Figure" SortExpression="KeyFigure" ItemStyle-Width="15%"></asp:BoundField>
+                            <asp:BoundField DataField="AsOfDate" HeaderText="As Of Date" SortExpression="AsOfDate" ItemStyle-Width="8%"></asp:BoundField>
+                            <asp:BoundField DataField="KeyFigureSource" HeaderText="Source" SortExpression="KeyFigureSource" ItemStyle-Width="15%"></asp:BoundField>
                             <asp:BoundField DataField="FromLocation" HeaderText="From Location" SortExpression="FromLocation" ItemStyle-Width="4%"></asp:BoundField>
                             <asp:BoundField DataField="ReportedLocation" HeaderText="Location" SortExpression="ReportedLocation" ItemStyle-Width="8%"></asp:BoundField>
                             <asp:TemplateField HeaderText="Total" ItemStyle-Width="4%">

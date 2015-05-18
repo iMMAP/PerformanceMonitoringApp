@@ -12,18 +12,11 @@
             width: 100%;
         }
     </style>
-    <!-- ORS styles -->
-    <link rel="stylesheet" href="../assets/css/ors.css" />
-    <link rel="stylesheet" type="text/css" href="../assets/css/tooltipster.css" />
-    <!-- ace styles -->
-    <%--<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>--%>
-    <script type="text/javascript" src="../assets/js/jquery.tooltipster.min.js"></script>
+    <%--<link rel="stylesheet" type="text/css" href="../assets/css/tooltipster.css" />
+    <script type="text/javascript" src="../assets/js/jquery.tooltipster.min.js"></script>--%>
     <script type="text/javascript">
 
         $(function () {
-            bindCalendars();
-
-
             $(".classsearchcriteriacustomreport").tooltip({
                 show: {
                     effect: "slideDown",
@@ -32,9 +25,15 @@
             });
         });
         $(document).ready(function () {
-            $('.tooltip').tooltipster({
-                contentAsHTML: true
+            $.widget("ui.tooltip", $.ui.tooltip, {
+                options: {
+                    content: function () {
+                        return $(this).prop('title');
+                    }
+                }
             });
+
+            $('.tooltip1').tooltip();
         });
     </script>
 </asp:Content>
@@ -291,7 +290,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12">
 
-                        <cc2:PagingGridView ID="gvReport" runat="server" Width="100%" CssClass="table table-striped table-bordered table-hover"
+                        <cc2:PagingGridView ID="gvReport" runat="server" Width="100%" CssClass="imagetable"
                             AutoGenerateColumns="false" OnSorting="gvReport_Sorting" ShowHeaderWhenEmpty="true"
                             EnableViewState="false" AllowSorting="True" AllowPaging="true" PageSize="60"
                             ShowHeader="true" OnPageIndexChanging="gvReport_PageIndexChanging" EmptyDataText="Your filter criteria does not match any record in database!">
@@ -318,15 +317,12 @@
                                 <asp:TemplateField HeaderText="Cmt">
                                    
                                     <ItemTemplate>
-                                        <span class="tooltip" style="opacity: 100;" title="<%# Eval("Comments") %>">
+                                        <span class="tooltip1" style="opacity: 100;" title="<%# Eval("Comments") %>">
                                             <img src="../assets/orsimages/edit-file-icon.png" />
                                         </span>
                                     </ItemTemplate>
                                     <HeaderStyle ForeColor="#4C8FBD" />
                                 </asp:TemplateField>
-
-
-
                             </Columns>
                         </cc2:PagingGridView>
 

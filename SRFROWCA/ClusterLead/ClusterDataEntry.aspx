@@ -5,7 +5,19 @@
     <script type="text/javascript">
 
         $(function () {
-            $(".numeric1").wholenumber();
+            var prm = Sys.WebForms.PageRequestManager.getInstance();
+            prm.add_endRequest(function () {
+                $(".numeric1").wholenumber();
+
+                $.widget("ui.tooltip", $.ui.tooltip, {
+                    options: {
+                        content: function () {
+                            return $(this).prop('title');
+                        }
+                    }
+                });
+                $('.tooltip2').tooltip();
+            });
         });
 
     </script>
@@ -135,12 +147,17 @@
                                     </div>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField ItemStyle-Width="8%" HeaderText="Running Value" ItemStyle-HorizontalAlign="Right">
+                            <asp:TemplateField ItemStyle-Width="8%" HeaderText="<span class='tooltip2' title='Caculated on the basis of Calculation Method of the Indicator.'>Running Value</span>" ItemStyle-HorizontalAlign="Right">
                                 <ItemTemplate>
+                                    
                                     <asp:Label ID="lblSum" runat="server" Text=' <%# Eval("TotalSum")%>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:BoundField DataField="IndicatorCalculationType" HeaderText="Calculation Method"/>
+                            <asp:TemplateField ItemStyle-Width="8%" HeaderText="<span class='tooltip2' title='Each Indicator has assigned a calcuation method type.</br>Sum: Sum of all monthly achieved.</br>Agerage: Average of all monthly achieved.</br>Max: Max data reported in any month.</br>Latest: Latest data reported.'>Calculation Method</span>" ItemStyle-HorizontalAlign="Right">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblCalcMethod" ToolTip="some text here" runat="server" Text=' <%# Eval("IndicatorCalculationType")%>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                             <asp:TemplateField Visible="false">
                                 <ItemTemplate>
                                     <asp:Label ID="lblCountryID" runat="server" Text='<%# Eval("CountryID") %>'></asp:Label>

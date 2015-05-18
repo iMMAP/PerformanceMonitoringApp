@@ -30,9 +30,6 @@
             });
         });
     </script>
-    <!-- ORS styles -->
-    <link rel="stylesheet" href="../assets/css/ors.css" />
-    <!-- ace styles -->
 
     <script>
         $(function () {

@@ -11,10 +11,7 @@
             width: 100%;
         }
     </style>
-    <!-- ORS styles -->
-    <link rel="stylesheet" href="../assets/css/ors.css" />
-    <!-- ace styles -->
-    <%--<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>--%>
+    
     <script type="text/javascript">
         $(function () {
 

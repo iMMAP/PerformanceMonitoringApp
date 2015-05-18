@@ -113,8 +113,11 @@
                 </table>
                 <div class="table-responsive">
                     <div style="overflow-x: auto; width: 100%">
-                        <asp:GridView ID="gvClusterReports" Width="100%" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" AllowSorting="True" DataKeyNames="SiteLanguageId"
-                            ShowHeader="true" OnRowDataBound="gvClusterReports_RowDataBound" OnSorting="gvClusterReports_Sorting" CssClass="imagetable">
+                        <asp:GridView ID="gvClusterReports" Width="100%" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" 
+                            AllowSorting="True" DataKeyNames="SiteLanguageId" ShowHeader="true" OnRowDataBound="gvClusterReports_RowDataBound" 
+                            OnSorting="gvClusterReports_Sorting" CssClass="imagetable" AllowPaging="true" AllowCustomPaging="true" PageSize="50"
+                            OnPageIndexChanging="gvClusterReports_PageIndexChanging" >
+                            <PagerSettings Mode="NumericFirstLast" />
                             <EmptyDataTemplate>
                                 Your filter criteria does not match any record in database!
                             </EmptyDataTemplate>

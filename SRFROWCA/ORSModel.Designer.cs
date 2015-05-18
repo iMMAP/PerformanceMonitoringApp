@@ -3146,7 +3146,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3165,7 +3165,7 @@ namespace SRFROWCA
                 {
                     OnActivityIdentityDataIdChanging(value);
                     ReportPropertyChanging("ActivityIdentityDataId");
-                    _ActivityIdentityDataId = StructuralObject.SetValidValue(value);
+                    _ActivityIdentityDataId = StructuralObject.SetValidValue(value, "ActivityIdentityDataId");
                     ReportPropertyChanged("ActivityIdentityDataId");
                     OnActivityIdentityDataIdChanged();
                 }
@@ -3190,7 +3190,7 @@ namespace SRFROWCA
             {
                 OnPriorityActivityIdChanging(value);
                 ReportPropertyChanging("PriorityActivityId");
-                _PriorityActivityId = StructuralObject.SetValidValue(value);
+                _PriorityActivityId = StructuralObject.SetValidValue(value, "PriorityActivityId");
                 ReportPropertyChanged("PriorityActivityId");
                 OnPriorityActivityIdChanged();
             }
@@ -3214,7 +3214,7 @@ namespace SRFROWCA
             {
                 OnActivityDataIdChanging(value);
                 ReportPropertyChanging("ActivityDataId");
-                _ActivityDataId = StructuralObject.SetValidValue(value);
+                _ActivityDataId = StructuralObject.SetValidValue(value, "ActivityDataId");
                 ReportPropertyChanged("ActivityDataId");
                 OnActivityDataIdChanged();
             }
@@ -3238,7 +3238,7 @@ namespace SRFROWCA
             {
                 OnSiteLanguageIdChanging(value);
                 ReportPropertyChanging("SiteLanguageId");
-                _SiteLanguageId = StructuralObject.SetValidValue(value);
+                _SiteLanguageId = StructuralObject.SetValidValue(value, "SiteLanguageId");
                 ReportPropertyChanged("SiteLanguageId");
                 OnSiteLanguageIdChanged();
             }
@@ -3262,7 +3262,7 @@ namespace SRFROWCA
             {
                 OnDataNameChanging(value);
                 ReportPropertyChanging("DataName");
-                _DataName = StructuralObject.SetValidValue(value, false);
+                _DataName = StructuralObject.SetValidValue(value, false, "DataName");
                 ReportPropertyChanged("DataName");
                 OnDataNameChanged();
             }
@@ -3286,7 +3286,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -3310,7 +3310,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -3334,7 +3334,7 @@ namespace SRFROWCA
             {
                 OnUnitIdChanging(value);
                 ReportPropertyChanging("UnitId");
-                _UnitId = StructuralObject.SetValidValue(value);
+                _UnitId = StructuralObject.SetValidValue(value, "UnitId");
                 ReportPropertyChanged("UnitId");
                 OnUnitIdChanged();
             }
@@ -3358,7 +3358,7 @@ namespace SRFROWCA
             {
                 OnUpdatedByIdChanging(value);
                 ReportPropertyChanging("UpdatedById");
-                _UpdatedById = StructuralObject.SetValidValue(value);
+                _UpdatedById = StructuralObject.SetValidValue(value, "UpdatedById");
                 ReportPropertyChanged("UpdatedById");
                 OnUpdatedByIdChanged();
             }
@@ -3382,7 +3382,7 @@ namespace SRFROWCA
             {
                 OnUpdatedDateChanging(value);
                 ReportPropertyChanging("UpdatedDate");
-                _UpdatedDate = StructuralObject.SetValidValue(value);
+                _UpdatedDate = StructuralObject.SetValidValue(value, "UpdatedDate");
                 ReportPropertyChanged("UpdatedDate");
                 OnUpdatedDateChanged();
             }
@@ -3406,7 +3406,7 @@ namespace SRFROWCA
             {
                 OnIsSRPIndicatorChanging(value);
                 ReportPropertyChanging("IsSRPIndicator");
-                _IsSRPIndicator = StructuralObject.SetValidValue(value);
+                _IsSRPIndicator = StructuralObject.SetValidValue(value, "IsSRPIndicator");
                 ReportPropertyChanged("IsSRPIndicator");
                 OnIsSRPIndicatorChanged();
             }
@@ -3430,7 +3430,7 @@ namespace SRFROWCA
             {
                 OnIsPriorityIndicatoryChanging(value);
                 ReportPropertyChanging("IsPriorityIndicatory");
-                _IsPriorityIndicatory = StructuralObject.SetValidValue(value);
+                _IsPriorityIndicatory = StructuralObject.SetValidValue(value, "IsPriorityIndicatory");
                 ReportPropertyChanged("IsPriorityIndicatory");
                 OnIsPriorityIndicatoryChanged();
             }
@@ -3441,7 +3441,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -3469,7 +3468,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3488,7 +3487,7 @@ namespace SRFROWCA
                 {
                     OnActivityTypeIdChanging(value);
                     ReportPropertyChanging("ActivityTypeId");
-                    _ActivityTypeId = StructuralObject.SetValidValue(value);
+                    _ActivityTypeId = StructuralObject.SetValidValue(value, "ActivityTypeId");
                     ReportPropertyChanged("ActivityTypeId");
                     OnActivityTypeIdChanged();
                 }
@@ -3513,7 +3512,7 @@ namespace SRFROWCA
             {
                 OnActivityType1Changing(value);
                 ReportPropertyChanging("ActivityType1");
-                _ActivityType1 = StructuralObject.SetValidValue(value, false);
+                _ActivityType1 = StructuralObject.SetValidValue(value, false, "ActivityType1");
                 ReportPropertyChanged("ActivityType1");
                 OnActivityType1Changed();
             }
@@ -3524,7 +3523,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -3550,7 +3548,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3569,7 +3567,7 @@ namespace SRFROWCA
                 {
                     OnAllDataIdChanging(value);
                     ReportPropertyChanging("AllDataId");
-                    _AllDataId = StructuralObject.SetValidValue(value);
+                    _AllDataId = StructuralObject.SetValidValue(value, "AllDataId");
                     ReportPropertyChanged("AllDataId");
                     OnAllDataIdChanged();
                 }
@@ -3594,7 +3592,7 @@ namespace SRFROWCA
             {
                 OnProjectIdChanging(value);
                 ReportPropertyChanging("ProjectId");
-                _ProjectId = StructuralObject.SetValidValue(value);
+                _ProjectId = StructuralObject.SetValidValue(value, "ProjectId");
                 ReportPropertyChanged("ProjectId");
                 OnProjectIdChanged();
             }
@@ -3618,7 +3616,7 @@ namespace SRFROWCA
             {
                 OnProjectCodeChanging(value);
                 ReportPropertyChanging("ProjectCode");
-                _ProjectCode = StructuralObject.SetValidValue(value, true);
+                _ProjectCode = StructuralObject.SetValidValue(value, true, "ProjectCode");
                 ReportPropertyChanged("ProjectCode");
                 OnProjectCodeChanged();
             }
@@ -3642,7 +3640,7 @@ namespace SRFROWCA
             {
                 OnOrganizationIdChanging(value);
                 ReportPropertyChanging("OrganizationId");
-                _OrganizationId = StructuralObject.SetValidValue(value);
+                _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                 ReportPropertyChanged("OrganizationId");
                 OnOrganizationIdChanged();
             }
@@ -3666,7 +3664,7 @@ namespace SRFROWCA
             {
                 OnOrganizationChanging(value);
                 ReportPropertyChanging("Organization");
-                _Organization = StructuralObject.SetValidValue(value, true);
+                _Organization = StructuralObject.SetValidValue(value, true, "Organization");
                 ReportPropertyChanged("Organization");
                 OnOrganizationChanged();
             }
@@ -3690,7 +3688,7 @@ namespace SRFROWCA
             {
                 OnObjectiveIdChanging(value);
                 ReportPropertyChanging("ObjectiveId");
-                _ObjectiveId = StructuralObject.SetValidValue(value);
+                _ObjectiveId = StructuralObject.SetValidValue(value, "ObjectiveId");
                 ReportPropertyChanged("ObjectiveId");
                 OnObjectiveIdChanged();
             }
@@ -3714,7 +3712,7 @@ namespace SRFROWCA
             {
                 OnObjectiveChanging(value);
                 ReportPropertyChanging("Objective");
-                _Objective = StructuralObject.SetValidValue(value, true);
+                _Objective = StructuralObject.SetValidValue(value, true, "Objective");
                 ReportPropertyChanged("Objective");
                 OnObjectiveChanged();
             }
@@ -3738,7 +3736,7 @@ namespace SRFROWCA
             {
                 OnPriorityIdChanging(value);
                 ReportPropertyChanging("PriorityId");
-                _PriorityId = StructuralObject.SetValidValue(value);
+                _PriorityId = StructuralObject.SetValidValue(value, "PriorityId");
                 ReportPropertyChanged("PriorityId");
                 OnPriorityIdChanged();
             }
@@ -3762,7 +3760,7 @@ namespace SRFROWCA
             {
                 OnPriorityChanging(value);
                 ReportPropertyChanging("Priority");
-                _Priority = StructuralObject.SetValidValue(value, true);
+                _Priority = StructuralObject.SetValidValue(value, true, "Priority");
                 ReportPropertyChanged("Priority");
                 OnPriorityChanged();
             }
@@ -3786,7 +3784,7 @@ namespace SRFROWCA
             {
                 OnActivityIdChanging(value);
                 ReportPropertyChanging("ActivityId");
-                _ActivityId = StructuralObject.SetValidValue(value);
+                _ActivityId = StructuralObject.SetValidValue(value, "ActivityId");
                 ReportPropertyChanged("ActivityId");
                 OnActivityIdChanged();
             }
@@ -3810,7 +3808,7 @@ namespace SRFROWCA
             {
                 OnActivityChanging(value);
                 ReportPropertyChanging("Activity");
-                _Activity = StructuralObject.SetValidValue(value, true);
+                _Activity = StructuralObject.SetValidValue(value, true, "Activity");
                 ReportPropertyChanged("Activity");
                 OnActivityChanged();
             }
@@ -3834,7 +3832,7 @@ namespace SRFROWCA
             {
                 OnIndicatorIdChanging(value);
                 ReportPropertyChanging("IndicatorId");
-                _IndicatorId = StructuralObject.SetValidValue(value);
+                _IndicatorId = StructuralObject.SetValidValue(value, "IndicatorId");
                 ReportPropertyChanged("IndicatorId");
                 OnIndicatorIdChanged();
             }
@@ -3858,7 +3856,7 @@ namespace SRFROWCA
             {
                 OnIndicatorChanging(value);
                 ReportPropertyChanging("Indicator");
-                _Indicator = StructuralObject.SetValidValue(value, true);
+                _Indicator = StructuralObject.SetValidValue(value, true, "Indicator");
                 ReportPropertyChanged("Indicator");
                 OnIndicatorChanged();
             }
@@ -3882,7 +3880,7 @@ namespace SRFROWCA
             {
                 OnCountryChanging(value);
                 ReportPropertyChanging("Country");
-                _Country = StructuralObject.SetValidValue(value, true);
+                _Country = StructuralObject.SetValidValue(value, true, "Country");
                 ReportPropertyChanged("Country");
                 OnCountryChanged();
             }
@@ -3906,7 +3904,7 @@ namespace SRFROWCA
             {
                 OnAdmin1Changing(value);
                 ReportPropertyChanging("Admin1");
-                _Admin1 = StructuralObject.SetValidValue(value, true);
+                _Admin1 = StructuralObject.SetValidValue(value, true, "Admin1");
                 ReportPropertyChanged("Admin1");
                 OnAdmin1Changed();
             }
@@ -3930,7 +3928,7 @@ namespace SRFROWCA
             {
                 OnAdmin2Changing(value);
                 ReportPropertyChanging("Admin2");
-                _Admin2 = StructuralObject.SetValidValue(value, true);
+                _Admin2 = StructuralObject.SetValidValue(value, true, "Admin2");
                 ReportPropertyChanged("Admin2");
                 OnAdmin2Changed();
             }
@@ -3954,7 +3952,7 @@ namespace SRFROWCA
             {
                 OnReportIdChanging(value);
                 ReportPropertyChanging("ReportId");
-                _ReportId = StructuralObject.SetValidValue(value);
+                _ReportId = StructuralObject.SetValidValue(value, "ReportId");
                 ReportPropertyChanged("ReportId");
                 OnReportIdChanged();
             }
@@ -3978,7 +3976,7 @@ namespace SRFROWCA
             {
                 OnMonthIdChanging(value);
                 ReportPropertyChanging("MonthId");
-                _MonthId = StructuralObject.SetValidValue(value);
+                _MonthId = StructuralObject.SetValidValue(value, "MonthId");
                 ReportPropertyChanged("MonthId");
                 OnMonthIdChanged();
             }
@@ -4002,7 +4000,7 @@ namespace SRFROWCA
             {
                 OnMontNameChanging(value);
                 ReportPropertyChanging("MontName");
-                _MontName = StructuralObject.SetValidValue(value, true);
+                _MontName = StructuralObject.SetValidValue(value, true, "MontName");
                 ReportPropertyChanged("MontName");
                 OnMontNameChanged();
             }
@@ -4026,7 +4024,7 @@ namespace SRFROWCA
             {
                 OnYearIdChanging(value);
                 ReportPropertyChanging("YearId");
-                _YearId = StructuralObject.SetValidValue(value);
+                _YearId = StructuralObject.SetValidValue(value, "YearId");
                 ReportPropertyChanged("YearId");
                 OnYearIdChanged();
             }
@@ -4050,7 +4048,7 @@ namespace SRFROWCA
             {
                 OnEmergencyLocationIdChanging(value);
                 ReportPropertyChanging("EmergencyLocationId");
-                _EmergencyLocationId = StructuralObject.SetValidValue(value);
+                _EmergencyLocationId = StructuralObject.SetValidValue(value, "EmergencyLocationId");
                 ReportPropertyChanged("EmergencyLocationId");
                 OnEmergencyLocationIdChanged();
             }
@@ -4074,7 +4072,7 @@ namespace SRFROWCA
             {
                 OnEmergencyClusterIdChanging(value);
                 ReportPropertyChanging("EmergencyClusterId");
-                _EmergencyClusterId = StructuralObject.SetValidValue(value);
+                _EmergencyClusterId = StructuralObject.SetValidValue(value, "EmergencyClusterId");
                 ReportPropertyChanged("EmergencyClusterId");
                 OnEmergencyClusterIdChanged();
             }
@@ -4098,7 +4096,7 @@ namespace SRFROWCA
             {
                 OnClusterIdChanging(value);
                 ReportPropertyChanging("ClusterId");
-                _ClusterId = StructuralObject.SetValidValue(value);
+                _ClusterId = StructuralObject.SetValidValue(value, "ClusterId");
                 ReportPropertyChanged("ClusterId");
                 OnClusterIdChanged();
             }
@@ -4122,7 +4120,7 @@ namespace SRFROWCA
             {
                 OnClusterChanging(value);
                 ReportPropertyChanging("Cluster");
-                _Cluster = StructuralObject.SetValidValue(value, true);
+                _Cluster = StructuralObject.SetValidValue(value, true, "Cluster");
                 ReportPropertyChanged("Cluster");
                 OnClusterChanged();
             }
@@ -4146,7 +4144,7 @@ namespace SRFROWCA
             {
                 OnReportLocationIdChanging(value);
                 ReportPropertyChanging("ReportLocationId");
-                _ReportLocationId = StructuralObject.SetValidValue(value);
+                _ReportLocationId = StructuralObject.SetValidValue(value, "ReportLocationId");
                 ReportPropertyChanged("ReportLocationId");
                 OnReportLocationIdChanged();
             }
@@ -4170,7 +4168,7 @@ namespace SRFROWCA
             {
                 OnLocationIdChanging(value);
                 ReportPropertyChanging("LocationId");
-                _LocationId = StructuralObject.SetValidValue(value);
+                _LocationId = StructuralObject.SetValidValue(value, "LocationId");
                 ReportPropertyChanged("LocationId");
                 OnLocationIdChanged();
             }
@@ -4194,7 +4192,7 @@ namespace SRFROWCA
             {
                 OnLocationTypeIdChanging(value);
                 ReportPropertyChanging("LocationTypeId");
-                _LocationTypeId = StructuralObject.SetValidValue(value);
+                _LocationTypeId = StructuralObject.SetValidValue(value, "LocationTypeId");
                 ReportPropertyChanged("LocationTypeId");
                 OnLocationTypeIdChanged();
             }
@@ -4218,7 +4216,7 @@ namespace SRFROWCA
             {
                 OnReportDetailIdChanging(value);
                 ReportPropertyChanging("ReportDetailId");
-                _ReportDetailId = StructuralObject.SetValidValue(value);
+                _ReportDetailId = StructuralObject.SetValidValue(value, "ReportDetailId");
                 ReportPropertyChanged("ReportDetailId");
                 OnReportDetailIdChanged();
             }
@@ -4242,7 +4240,7 @@ namespace SRFROWCA
             {
                 OnAccumulativeChanging(value);
                 ReportPropertyChanging("Accumulative");
-                _Accumulative = StructuralObject.SetValidValue(value);
+                _Accumulative = StructuralObject.SetValidValue(value, "Accumulative");
                 ReportPropertyChanged("Accumulative");
                 OnAccumulativeChanged();
             }
@@ -4266,7 +4264,7 @@ namespace SRFROWCA
             {
                 OnMidYearTargetChanging(value);
                 ReportPropertyChanging("MidYearTarget");
-                _MidYearTarget = StructuralObject.SetValidValue(value);
+                _MidYearTarget = StructuralObject.SetValidValue(value, "MidYearTarget");
                 ReportPropertyChanged("MidYearTarget");
                 OnMidYearTargetChanged();
             }
@@ -4290,7 +4288,7 @@ namespace SRFROWCA
             {
                 OnAnnualTargetChanging(value);
                 ReportPropertyChanging("AnnualTarget");
-                _AnnualTarget = StructuralObject.SetValidValue(value);
+                _AnnualTarget = StructuralObject.SetValidValue(value, "AnnualTarget");
                 ReportPropertyChanged("AnnualTarget");
                 OnAnnualTargetChanged();
             }
@@ -4314,7 +4312,7 @@ namespace SRFROWCA
             {
                 OnAchievedChanging(value);
                 ReportPropertyChanging("Achieved");
-                _Achieved = StructuralObject.SetValidValue(value);
+                _Achieved = StructuralObject.SetValidValue(value, "Achieved");
                 ReportPropertyChanged("Achieved");
                 OnAchievedChanged();
             }
@@ -4338,7 +4336,7 @@ namespace SRFROWCA
             {
                 OnFundingStatusChanging(value);
                 ReportPropertyChanging("FundingStatus");
-                _FundingStatus = StructuralObject.SetValidValue(value, true);
+                _FundingStatus = StructuralObject.SetValidValue(value, true, "FundingStatus");
                 ReportPropertyChanged("FundingStatus");
                 OnFundingStatusChanged();
             }
@@ -4362,7 +4360,7 @@ namespace SRFROWCA
             {
                 OnReportCreatedDateChanging(value);
                 ReportPropertyChanging("ReportCreatedDate");
-                _ReportCreatedDate = StructuralObject.SetValidValue(value);
+                _ReportCreatedDate = StructuralObject.SetValidValue(value, "ReportCreatedDate");
                 ReportPropertyChanged("ReportCreatedDate");
                 OnReportCreatedDateChanged();
             }
@@ -4386,7 +4384,7 @@ namespace SRFROWCA
             {
                 OnIsOPSProjectChanging(value);
                 ReportPropertyChanging("IsOPSProject");
-                _IsOPSProject = StructuralObject.SetValidValue(value);
+                _IsOPSProject = StructuralObject.SetValidValue(value, "IsOPSProject");
                 ReportPropertyChanged("IsOPSProject");
                 OnIsOPSProjectChanged();
             }
@@ -4410,7 +4408,7 @@ namespace SRFROWCA
             {
                 OnIsApprovedChanging(value);
                 ReportPropertyChanging("IsApproved");
-                _IsApproved = StructuralObject.SetValidValue(value);
+                _IsApproved = StructuralObject.SetValidValue(value, "IsApproved");
                 ReportPropertyChanged("IsApproved");
                 OnIsApprovedChanged();
             }
@@ -4434,7 +4432,7 @@ namespace SRFROWCA
             {
                 OncntChanging(value);
                 ReportPropertyChanging("cnt");
-                _cnt = StructuralObject.SetValidValue(value);
+                _cnt = StructuralObject.SetValidValue(value, "cnt");
                 ReportPropertyChanged("cnt");
                 OncntChanged();
             }
@@ -4458,7 +4456,7 @@ namespace SRFROWCA
             {
                 OnLocationPCodeChanging(value);
                 ReportPropertyChanging("LocationPCode");
-                _LocationPCode = StructuralObject.SetValidValue(value, true);
+                _LocationPCode = StructuralObject.SetValidValue(value, true, "LocationPCode");
                 ReportPropertyChanged("LocationPCode");
                 OnLocationPCodeChanged();
             }
@@ -4469,7 +4467,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -4495,7 +4492,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -4514,7 +4511,7 @@ namespace SRFROWCA
                 {
                     OnAllDataIdChanging(value);
                     ReportPropertyChanging("AllDataId");
-                    _AllDataId = StructuralObject.SetValidValue(value);
+                    _AllDataId = StructuralObject.SetValidValue(value, "AllDataId");
                     ReportPropertyChanged("AllDataId");
                     OnAllDataIdChanged();
                 }
@@ -4539,7 +4536,7 @@ namespace SRFROWCA
             {
                 OnProjectIdChanging(value);
                 ReportPropertyChanging("ProjectId");
-                _ProjectId = StructuralObject.SetValidValue(value);
+                _ProjectId = StructuralObject.SetValidValue(value, "ProjectId");
                 ReportPropertyChanged("ProjectId");
                 OnProjectIdChanged();
             }
@@ -4563,7 +4560,7 @@ namespace SRFROWCA
             {
                 OnProjectCodeChanging(value);
                 ReportPropertyChanging("ProjectCode");
-                _ProjectCode = StructuralObject.SetValidValue(value, true);
+                _ProjectCode = StructuralObject.SetValidValue(value, true, "ProjectCode");
                 ReportPropertyChanged("ProjectCode");
                 OnProjectCodeChanged();
             }
@@ -4587,7 +4584,7 @@ namespace SRFROWCA
             {
                 OnOrganizationIdChanging(value);
                 ReportPropertyChanging("OrganizationId");
-                _OrganizationId = StructuralObject.SetValidValue(value);
+                _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                 ReportPropertyChanged("OrganizationId");
                 OnOrganizationIdChanged();
             }
@@ -4611,7 +4608,7 @@ namespace SRFROWCA
             {
                 OnOrganizationChanging(value);
                 ReportPropertyChanging("Organization");
-                _Organization = StructuralObject.SetValidValue(value, true);
+                _Organization = StructuralObject.SetValidValue(value, true, "Organization");
                 ReportPropertyChanged("Organization");
                 OnOrganizationChanged();
             }
@@ -4635,7 +4632,7 @@ namespace SRFROWCA
             {
                 OnObjectiveIdChanging(value);
                 ReportPropertyChanging("ObjectiveId");
-                _ObjectiveId = StructuralObject.SetValidValue(value);
+                _ObjectiveId = StructuralObject.SetValidValue(value, "ObjectiveId");
                 ReportPropertyChanged("ObjectiveId");
                 OnObjectiveIdChanged();
             }
@@ -4659,7 +4656,7 @@ namespace SRFROWCA
             {
                 OnObjectiveChanging(value);
                 ReportPropertyChanging("Objective");
-                _Objective = StructuralObject.SetValidValue(value, true);
+                _Objective = StructuralObject.SetValidValue(value, true, "Objective");
                 ReportPropertyChanged("Objective");
                 OnObjectiveChanged();
             }
@@ -4683,7 +4680,7 @@ namespace SRFROWCA
             {
                 OnPriorityIdChanging(value);
                 ReportPropertyChanging("PriorityId");
-                _PriorityId = StructuralObject.SetValidValue(value);
+                _PriorityId = StructuralObject.SetValidValue(value, "PriorityId");
                 ReportPropertyChanged("PriorityId");
                 OnPriorityIdChanged();
             }
@@ -4707,7 +4704,7 @@ namespace SRFROWCA
             {
                 OnPriorityChanging(value);
                 ReportPropertyChanging("Priority");
-                _Priority = StructuralObject.SetValidValue(value, true);
+                _Priority = StructuralObject.SetValidValue(value, true, "Priority");
                 ReportPropertyChanged("Priority");
                 OnPriorityChanged();
             }
@@ -4731,7 +4728,7 @@ namespace SRFROWCA
             {
                 OnActivityIdChanging(value);
                 ReportPropertyChanging("ActivityId");
-                _ActivityId = StructuralObject.SetValidValue(value);
+                _ActivityId = StructuralObject.SetValidValue(value, "ActivityId");
                 ReportPropertyChanged("ActivityId");
                 OnActivityIdChanged();
             }
@@ -4755,7 +4752,7 @@ namespace SRFROWCA
             {
                 OnActivityChanging(value);
                 ReportPropertyChanging("Activity");
-                _Activity = StructuralObject.SetValidValue(value, true);
+                _Activity = StructuralObject.SetValidValue(value, true, "Activity");
                 ReportPropertyChanged("Activity");
                 OnActivityChanged();
             }
@@ -4779,7 +4776,7 @@ namespace SRFROWCA
             {
                 OnIndicatorIdChanging(value);
                 ReportPropertyChanging("IndicatorId");
-                _IndicatorId = StructuralObject.SetValidValue(value);
+                _IndicatorId = StructuralObject.SetValidValue(value, "IndicatorId");
                 ReportPropertyChanged("IndicatorId");
                 OnIndicatorIdChanged();
             }
@@ -4803,7 +4800,7 @@ namespace SRFROWCA
             {
                 OnIndicatorChanging(value);
                 ReportPropertyChanging("Indicator");
-                _Indicator = StructuralObject.SetValidValue(value, true);
+                _Indicator = StructuralObject.SetValidValue(value, true, "Indicator");
                 ReportPropertyChanged("Indicator");
                 OnIndicatorChanged();
             }
@@ -4827,7 +4824,7 @@ namespace SRFROWCA
             {
                 OnCountryChanging(value);
                 ReportPropertyChanging("Country");
-                _Country = StructuralObject.SetValidValue(value, true);
+                _Country = StructuralObject.SetValidValue(value, true, "Country");
                 ReportPropertyChanged("Country");
                 OnCountryChanged();
             }
@@ -4851,7 +4848,7 @@ namespace SRFROWCA
             {
                 OnAdmin1Changing(value);
                 ReportPropertyChanging("Admin1");
-                _Admin1 = StructuralObject.SetValidValue(value, true);
+                _Admin1 = StructuralObject.SetValidValue(value, true, "Admin1");
                 ReportPropertyChanged("Admin1");
                 OnAdmin1Changed();
             }
@@ -4875,7 +4872,7 @@ namespace SRFROWCA
             {
                 OnAdmin2Changing(value);
                 ReportPropertyChanging("Admin2");
-                _Admin2 = StructuralObject.SetValidValue(value, true);
+                _Admin2 = StructuralObject.SetValidValue(value, true, "Admin2");
                 ReportPropertyChanged("Admin2");
                 OnAdmin2Changed();
             }
@@ -4899,7 +4896,7 @@ namespace SRFROWCA
             {
                 OnReportIdChanging(value);
                 ReportPropertyChanging("ReportId");
-                _ReportId = StructuralObject.SetValidValue(value);
+                _ReportId = StructuralObject.SetValidValue(value, "ReportId");
                 ReportPropertyChanged("ReportId");
                 OnReportIdChanged();
             }
@@ -4923,7 +4920,7 @@ namespace SRFROWCA
             {
                 OnMonthIdChanging(value);
                 ReportPropertyChanging("MonthId");
-                _MonthId = StructuralObject.SetValidValue(value);
+                _MonthId = StructuralObject.SetValidValue(value, "MonthId");
                 ReportPropertyChanged("MonthId");
                 OnMonthIdChanged();
             }
@@ -4947,7 +4944,7 @@ namespace SRFROWCA
             {
                 OnMontNameChanging(value);
                 ReportPropertyChanging("MontName");
-                _MontName = StructuralObject.SetValidValue(value, true);
+                _MontName = StructuralObject.SetValidValue(value, true, "MontName");
                 ReportPropertyChanged("MontName");
                 OnMontNameChanged();
             }
@@ -4971,7 +4968,7 @@ namespace SRFROWCA
             {
                 OnYearIdChanging(value);
                 ReportPropertyChanging("YearId");
-                _YearId = StructuralObject.SetValidValue(value);
+                _YearId = StructuralObject.SetValidValue(value, "YearId");
                 ReportPropertyChanged("YearId");
                 OnYearIdChanged();
             }
@@ -4995,7 +4992,7 @@ namespace SRFROWCA
             {
                 OnEmergencyLocationIdChanging(value);
                 ReportPropertyChanging("EmergencyLocationId");
-                _EmergencyLocationId = StructuralObject.SetValidValue(value);
+                _EmergencyLocationId = StructuralObject.SetValidValue(value, "EmergencyLocationId");
                 ReportPropertyChanged("EmergencyLocationId");
                 OnEmergencyLocationIdChanged();
             }
@@ -5019,7 +5016,7 @@ namespace SRFROWCA
             {
                 OnEmergencyClusterIdChanging(value);
                 ReportPropertyChanging("EmergencyClusterId");
-                _EmergencyClusterId = StructuralObject.SetValidValue(value);
+                _EmergencyClusterId = StructuralObject.SetValidValue(value, "EmergencyClusterId");
                 ReportPropertyChanged("EmergencyClusterId");
                 OnEmergencyClusterIdChanged();
             }
@@ -5043,7 +5040,7 @@ namespace SRFROWCA
             {
                 OnClusterIdChanging(value);
                 ReportPropertyChanging("ClusterId");
-                _ClusterId = StructuralObject.SetValidValue(value);
+                _ClusterId = StructuralObject.SetValidValue(value, "ClusterId");
                 ReportPropertyChanged("ClusterId");
                 OnClusterIdChanged();
             }
@@ -5067,7 +5064,7 @@ namespace SRFROWCA
             {
                 OnClusterChanging(value);
                 ReportPropertyChanging("Cluster");
-                _Cluster = StructuralObject.SetValidValue(value, true);
+                _Cluster = StructuralObject.SetValidValue(value, true, "Cluster");
                 ReportPropertyChanged("Cluster");
                 OnClusterChanged();
             }
@@ -5091,7 +5088,7 @@ namespace SRFROWCA
             {
                 OnReportLocationIdChanging(value);
                 ReportPropertyChanging("ReportLocationId");
-                _ReportLocationId = StructuralObject.SetValidValue(value);
+                _ReportLocationId = StructuralObject.SetValidValue(value, "ReportLocationId");
                 ReportPropertyChanged("ReportLocationId");
                 OnReportLocationIdChanged();
             }
@@ -5115,7 +5112,7 @@ namespace SRFROWCA
             {
                 OnLocationIdChanging(value);
                 ReportPropertyChanging("LocationId");
-                _LocationId = StructuralObject.SetValidValue(value);
+                _LocationId = StructuralObject.SetValidValue(value, "LocationId");
                 ReportPropertyChanged("LocationId");
                 OnLocationIdChanged();
             }
@@ -5139,7 +5136,7 @@ namespace SRFROWCA
             {
                 OnLocationTypeIdChanging(value);
                 ReportPropertyChanging("LocationTypeId");
-                _LocationTypeId = StructuralObject.SetValidValue(value);
+                _LocationTypeId = StructuralObject.SetValidValue(value, "LocationTypeId");
                 ReportPropertyChanged("LocationTypeId");
                 OnLocationTypeIdChanged();
             }
@@ -5163,7 +5160,7 @@ namespace SRFROWCA
             {
                 OnReportDetailIdChanging(value);
                 ReportPropertyChanging("ReportDetailId");
-                _ReportDetailId = StructuralObject.SetValidValue(value);
+                _ReportDetailId = StructuralObject.SetValidValue(value, "ReportDetailId");
                 ReportPropertyChanged("ReportDetailId");
                 OnReportDetailIdChanged();
             }
@@ -5187,7 +5184,7 @@ namespace SRFROWCA
             {
                 OnAccumulativeChanging(value);
                 ReportPropertyChanging("Accumulative");
-                _Accumulative = StructuralObject.SetValidValue(value);
+                _Accumulative = StructuralObject.SetValidValue(value, "Accumulative");
                 ReportPropertyChanged("Accumulative");
                 OnAccumulativeChanged();
             }
@@ -5211,7 +5208,7 @@ namespace SRFROWCA
             {
                 OnMidYearTargetChanging(value);
                 ReportPropertyChanging("MidYearTarget");
-                _MidYearTarget = StructuralObject.SetValidValue(value);
+                _MidYearTarget = StructuralObject.SetValidValue(value, "MidYearTarget");
                 ReportPropertyChanged("MidYearTarget");
                 OnMidYearTargetChanged();
             }
@@ -5235,7 +5232,7 @@ namespace SRFROWCA
             {
                 OnAnnualTargetChanging(value);
                 ReportPropertyChanging("AnnualTarget");
-                _AnnualTarget = StructuralObject.SetValidValue(value);
+                _AnnualTarget = StructuralObject.SetValidValue(value, "AnnualTarget");
                 ReportPropertyChanged("AnnualTarget");
                 OnAnnualTargetChanged();
             }
@@ -5259,7 +5256,7 @@ namespace SRFROWCA
             {
                 OnAchievedChanging(value);
                 ReportPropertyChanging("Achieved");
-                _Achieved = StructuralObject.SetValidValue(value);
+                _Achieved = StructuralObject.SetValidValue(value, "Achieved");
                 ReportPropertyChanged("Achieved");
                 OnAchievedChanged();
             }
@@ -5283,7 +5280,7 @@ namespace SRFROWCA
             {
                 OnFundingStatusChanging(value);
                 ReportPropertyChanging("FundingStatus");
-                _FundingStatus = StructuralObject.SetValidValue(value, true);
+                _FundingStatus = StructuralObject.SetValidValue(value, true, "FundingStatus");
                 ReportPropertyChanged("FundingStatus");
                 OnFundingStatusChanged();
             }
@@ -5307,7 +5304,7 @@ namespace SRFROWCA
             {
                 OnReportCreatedDateChanging(value);
                 ReportPropertyChanging("ReportCreatedDate");
-                _ReportCreatedDate = StructuralObject.SetValidValue(value);
+                _ReportCreatedDate = StructuralObject.SetValidValue(value, "ReportCreatedDate");
                 ReportPropertyChanged("ReportCreatedDate");
                 OnReportCreatedDateChanged();
             }
@@ -5331,7 +5328,7 @@ namespace SRFROWCA
             {
                 OnIsOPSProjectChanging(value);
                 ReportPropertyChanging("IsOPSProject");
-                _IsOPSProject = StructuralObject.SetValidValue(value);
+                _IsOPSProject = StructuralObject.SetValidValue(value, "IsOPSProject");
                 ReportPropertyChanged("IsOPSProject");
                 OnIsOPSProjectChanged();
             }
@@ -5355,7 +5352,7 @@ namespace SRFROWCA
             {
                 OnIsApprovedChanging(value);
                 ReportPropertyChanging("IsApproved");
-                _IsApproved = StructuralObject.SetValidValue(value);
+                _IsApproved = StructuralObject.SetValidValue(value, "IsApproved");
                 ReportPropertyChanged("IsApproved");
                 OnIsApprovedChanged();
             }
@@ -5379,7 +5376,7 @@ namespace SRFROWCA
             {
                 OncntChanging(value);
                 ReportPropertyChanging("cnt");
-                _cnt = StructuralObject.SetValidValue(value);
+                _cnt = StructuralObject.SetValidValue(value, "cnt");
                 ReportPropertyChanged("cnt");
                 OncntChanged();
             }
@@ -5403,7 +5400,7 @@ namespace SRFROWCA
             {
                 OnLocationPCodeChanging(value);
                 ReportPropertyChanging("LocationPCode");
-                _LocationPCode = StructuralObject.SetValidValue(value, true);
+                _LocationPCode = StructuralObject.SetValidValue(value, true, "LocationPCode");
                 ReportPropertyChanged("LocationPCode");
                 OnLocationPCodeChanged();
             }
@@ -5414,7 +5411,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -5444,7 +5440,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -5461,7 +5457,7 @@ namespace SRFROWCA
             {
                 OnApplicationNameChanging(value);
                 ReportPropertyChanging("ApplicationName");
-                _ApplicationName = StructuralObject.SetValidValue(value, false);
+                _ApplicationName = StructuralObject.SetValidValue(value, false, "ApplicationName");
                 ReportPropertyChanged("ApplicationName");
                 OnApplicationNameChanged();
             }
@@ -5485,7 +5481,7 @@ namespace SRFROWCA
             {
                 OnLoweredApplicationNameChanging(value);
                 ReportPropertyChanging("LoweredApplicationName");
-                _LoweredApplicationName = StructuralObject.SetValidValue(value, false);
+                _LoweredApplicationName = StructuralObject.SetValidValue(value, false, "LoweredApplicationName");
                 ReportPropertyChanged("LoweredApplicationName");
                 OnLoweredApplicationNameChanged();
             }
@@ -5511,7 +5507,7 @@ namespace SRFROWCA
                 {
                     OnApplicationIdChanging(value);
                     ReportPropertyChanging("ApplicationId");
-                    _ApplicationId = StructuralObject.SetValidValue(value);
+                    _ApplicationId = StructuralObject.SetValidValue(value, "ApplicationId");
                     ReportPropertyChanged("ApplicationId");
                     OnApplicationIdChanged();
                 }
@@ -5536,7 +5532,7 @@ namespace SRFROWCA
             {
                 OnDescriptionChanging(value);
                 ReportPropertyChanging("Description");
-                _Description = StructuralObject.SetValidValue(value, true);
+                _Description = StructuralObject.SetValidValue(value, true, "Description");
                 ReportPropertyChanged("Description");
                 OnDescriptionChanged();
             }
@@ -5547,7 +5543,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -5693,7 +5688,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -5710,7 +5705,7 @@ namespace SRFROWCA
             {
                 OnApplicationIdChanging(value);
                 ReportPropertyChanging("ApplicationId");
-                _ApplicationId = StructuralObject.SetValidValue(value);
+                _ApplicationId = StructuralObject.SetValidValue(value, "ApplicationId");
                 ReportPropertyChanged("ApplicationId");
                 OnApplicationIdChanged();
             }
@@ -5736,7 +5731,7 @@ namespace SRFROWCA
                 {
                     OnUserIdChanging(value);
                     ReportPropertyChanging("UserId");
-                    _UserId = StructuralObject.SetValidValue(value);
+                    _UserId = StructuralObject.SetValidValue(value, "UserId");
                     ReportPropertyChanged("UserId");
                     OnUserIdChanged();
                 }
@@ -5761,7 +5756,7 @@ namespace SRFROWCA
             {
                 OnPasswordChanging(value);
                 ReportPropertyChanging("Password");
-                _Password = StructuralObject.SetValidValue(value, false);
+                _Password = StructuralObject.SetValidValue(value, false, "Password");
                 ReportPropertyChanged("Password");
                 OnPasswordChanged();
             }
@@ -5785,7 +5780,7 @@ namespace SRFROWCA
             {
                 OnPasswordFormatChanging(value);
                 ReportPropertyChanging("PasswordFormat");
-                _PasswordFormat = StructuralObject.SetValidValue(value);
+                _PasswordFormat = StructuralObject.SetValidValue(value, "PasswordFormat");
                 ReportPropertyChanged("PasswordFormat");
                 OnPasswordFormatChanged();
             }
@@ -5809,7 +5804,7 @@ namespace SRFROWCA
             {
                 OnPasswordSaltChanging(value);
                 ReportPropertyChanging("PasswordSalt");
-                _PasswordSalt = StructuralObject.SetValidValue(value, false);
+                _PasswordSalt = StructuralObject.SetValidValue(value, false, "PasswordSalt");
                 ReportPropertyChanged("PasswordSalt");
                 OnPasswordSaltChanged();
             }
@@ -5833,7 +5828,7 @@ namespace SRFROWCA
             {
                 OnMobilePINChanging(value);
                 ReportPropertyChanging("MobilePIN");
-                _MobilePIN = StructuralObject.SetValidValue(value, true);
+                _MobilePIN = StructuralObject.SetValidValue(value, true, "MobilePIN");
                 ReportPropertyChanged("MobilePIN");
                 OnMobilePINChanged();
             }
@@ -5857,7 +5852,7 @@ namespace SRFROWCA
             {
                 OnEmailChanging(value);
                 ReportPropertyChanging("Email");
-                _Email = StructuralObject.SetValidValue(value, true);
+                _Email = StructuralObject.SetValidValue(value, true, "Email");
                 ReportPropertyChanged("Email");
                 OnEmailChanged();
             }
@@ -5881,7 +5876,7 @@ namespace SRFROWCA
             {
                 OnLoweredEmailChanging(value);
                 ReportPropertyChanging("LoweredEmail");
-                _LoweredEmail = StructuralObject.SetValidValue(value, true);
+                _LoweredEmail = StructuralObject.SetValidValue(value, true, "LoweredEmail");
                 ReportPropertyChanged("LoweredEmail");
                 OnLoweredEmailChanged();
             }
@@ -5905,7 +5900,7 @@ namespace SRFROWCA
             {
                 OnPasswordQuestionChanging(value);
                 ReportPropertyChanging("PasswordQuestion");
-                _PasswordQuestion = StructuralObject.SetValidValue(value, true);
+                _PasswordQuestion = StructuralObject.SetValidValue(value, true, "PasswordQuestion");
                 ReportPropertyChanged("PasswordQuestion");
                 OnPasswordQuestionChanged();
             }
@@ -5929,7 +5924,7 @@ namespace SRFROWCA
             {
                 OnPasswordAnswerChanging(value);
                 ReportPropertyChanging("PasswordAnswer");
-                _PasswordAnswer = StructuralObject.SetValidValue(value, true);
+                _PasswordAnswer = StructuralObject.SetValidValue(value, true, "PasswordAnswer");
                 ReportPropertyChanged("PasswordAnswer");
                 OnPasswordAnswerChanged();
             }
@@ -5953,7 +5948,7 @@ namespace SRFROWCA
             {
                 OnIsApprovedChanging(value);
                 ReportPropertyChanging("IsApproved");
-                _IsApproved = StructuralObject.SetValidValue(value);
+                _IsApproved = StructuralObject.SetValidValue(value, "IsApproved");
                 ReportPropertyChanged("IsApproved");
                 OnIsApprovedChanged();
             }
@@ -5977,7 +5972,7 @@ namespace SRFROWCA
             {
                 OnIsLockedOutChanging(value);
                 ReportPropertyChanging("IsLockedOut");
-                _IsLockedOut = StructuralObject.SetValidValue(value);
+                _IsLockedOut = StructuralObject.SetValidValue(value, "IsLockedOut");
                 ReportPropertyChanged("IsLockedOut");
                 OnIsLockedOutChanged();
             }
@@ -6001,7 +5996,7 @@ namespace SRFROWCA
             {
                 OnCreateDateChanging(value);
                 ReportPropertyChanging("CreateDate");
-                _CreateDate = StructuralObject.SetValidValue(value);
+                _CreateDate = StructuralObject.SetValidValue(value, "CreateDate");
                 ReportPropertyChanged("CreateDate");
                 OnCreateDateChanged();
             }
@@ -6025,7 +6020,7 @@ namespace SRFROWCA
             {
                 OnLastLoginDateChanging(value);
                 ReportPropertyChanging("LastLoginDate");
-                _LastLoginDate = StructuralObject.SetValidValue(value);
+                _LastLoginDate = StructuralObject.SetValidValue(value, "LastLoginDate");
                 ReportPropertyChanged("LastLoginDate");
                 OnLastLoginDateChanged();
             }
@@ -6049,7 +6044,7 @@ namespace SRFROWCA
             {
                 OnLastPasswordChangedDateChanging(value);
                 ReportPropertyChanging("LastPasswordChangedDate");
-                _LastPasswordChangedDate = StructuralObject.SetValidValue(value);
+                _LastPasswordChangedDate = StructuralObject.SetValidValue(value, "LastPasswordChangedDate");
                 ReportPropertyChanged("LastPasswordChangedDate");
                 OnLastPasswordChangedDateChanged();
             }
@@ -6073,7 +6068,7 @@ namespace SRFROWCA
             {
                 OnLastLockoutDateChanging(value);
                 ReportPropertyChanging("LastLockoutDate");
-                _LastLockoutDate = StructuralObject.SetValidValue(value);
+                _LastLockoutDate = StructuralObject.SetValidValue(value, "LastLockoutDate");
                 ReportPropertyChanged("LastLockoutDate");
                 OnLastLockoutDateChanged();
             }
@@ -6097,7 +6092,7 @@ namespace SRFROWCA
             {
                 OnFailedPasswordAttemptCountChanging(value);
                 ReportPropertyChanging("FailedPasswordAttemptCount");
-                _FailedPasswordAttemptCount = StructuralObject.SetValidValue(value);
+                _FailedPasswordAttemptCount = StructuralObject.SetValidValue(value, "FailedPasswordAttemptCount");
                 ReportPropertyChanged("FailedPasswordAttemptCount");
                 OnFailedPasswordAttemptCountChanged();
             }
@@ -6121,7 +6116,7 @@ namespace SRFROWCA
             {
                 OnFailedPasswordAttemptWindowStartChanging(value);
                 ReportPropertyChanging("FailedPasswordAttemptWindowStart");
-                _FailedPasswordAttemptWindowStart = StructuralObject.SetValidValue(value);
+                _FailedPasswordAttemptWindowStart = StructuralObject.SetValidValue(value, "FailedPasswordAttemptWindowStart");
                 ReportPropertyChanged("FailedPasswordAttemptWindowStart");
                 OnFailedPasswordAttemptWindowStartChanged();
             }
@@ -6145,7 +6140,7 @@ namespace SRFROWCA
             {
                 OnFailedPasswordAnswerAttemptCountChanging(value);
                 ReportPropertyChanging("FailedPasswordAnswerAttemptCount");
-                _FailedPasswordAnswerAttemptCount = StructuralObject.SetValidValue(value);
+                _FailedPasswordAnswerAttemptCount = StructuralObject.SetValidValue(value, "FailedPasswordAnswerAttemptCount");
                 ReportPropertyChanged("FailedPasswordAnswerAttemptCount");
                 OnFailedPasswordAnswerAttemptCountChanged();
             }
@@ -6169,7 +6164,7 @@ namespace SRFROWCA
             {
                 OnFailedPasswordAnswerAttemptWindowStartChanging(value);
                 ReportPropertyChanging("FailedPasswordAnswerAttemptWindowStart");
-                _FailedPasswordAnswerAttemptWindowStart = StructuralObject.SetValidValue(value);
+                _FailedPasswordAnswerAttemptWindowStart = StructuralObject.SetValidValue(value, "FailedPasswordAnswerAttemptWindowStart");
                 ReportPropertyChanged("FailedPasswordAnswerAttemptWindowStart");
                 OnFailedPasswordAnswerAttemptWindowStartChanged();
             }
@@ -6193,7 +6188,7 @@ namespace SRFROWCA
             {
                 OnCommentChanging(value);
                 ReportPropertyChanging("Comment");
-                _Comment = StructuralObject.SetValidValue(value, true);
+                _Comment = StructuralObject.SetValidValue(value, true, "Comment");
                 ReportPropertyChanged("Comment");
                 OnCommentChanged();
             }
@@ -6204,7 +6199,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -6316,7 +6310,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -6333,7 +6327,7 @@ namespace SRFROWCA
             {
                 OnApplicationIdChanging(value);
                 ReportPropertyChanging("ApplicationId");
-                _ApplicationId = StructuralObject.SetValidValue(value);
+                _ApplicationId = StructuralObject.SetValidValue(value, "ApplicationId");
                 ReportPropertyChanged("ApplicationId");
                 OnApplicationIdChanged();
             }
@@ -6359,7 +6353,7 @@ namespace SRFROWCA
                 {
                     OnPathIdChanging(value);
                     ReportPropertyChanging("PathId");
-                    _PathId = StructuralObject.SetValidValue(value);
+                    _PathId = StructuralObject.SetValidValue(value, "PathId");
                     ReportPropertyChanged("PathId");
                     OnPathIdChanged();
                 }
@@ -6384,7 +6378,7 @@ namespace SRFROWCA
             {
                 OnPathChanging(value);
                 ReportPropertyChanging("Path");
-                _Path = StructuralObject.SetValidValue(value, false);
+                _Path = StructuralObject.SetValidValue(value, false, "Path");
                 ReportPropertyChanged("Path");
                 OnPathChanged();
             }
@@ -6408,7 +6402,7 @@ namespace SRFROWCA
             {
                 OnLoweredPathChanging(value);
                 ReportPropertyChanging("LoweredPath");
-                _LoweredPath = StructuralObject.SetValidValue(value, false);
+                _LoweredPath = StructuralObject.SetValidValue(value, false, "LoweredPath");
                 ReportPropertyChanged("LoweredPath");
                 OnLoweredPathChanged();
             }
@@ -6419,7 +6413,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -6551,7 +6544,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -6570,7 +6563,7 @@ namespace SRFROWCA
                 {
                     OnPathIdChanging(value);
                     ReportPropertyChanging("PathId");
-                    _PathId = StructuralObject.SetValidValue(value);
+                    _PathId = StructuralObject.SetValidValue(value, "PathId");
                     ReportPropertyChanged("PathId");
                     OnPathIdChanged();
                 }
@@ -6595,7 +6588,7 @@ namespace SRFROWCA
             {
                 OnPageSettingsChanging(value);
                 ReportPropertyChanging("PageSettings");
-                _PageSettings = StructuralObject.SetValidValue(value, false);
+                _PageSettings = StructuralObject.SetValidValue(value, false, "PageSettings");
                 ReportPropertyChanged("PageSettings");
                 OnPageSettingsChanged();
             }
@@ -6619,7 +6612,7 @@ namespace SRFROWCA
             {
                 OnLastUpdatedDateChanging(value);
                 ReportPropertyChanging("LastUpdatedDate");
-                _LastUpdatedDate = StructuralObject.SetValidValue(value);
+                _LastUpdatedDate = StructuralObject.SetValidValue(value, "LastUpdatedDate");
                 ReportPropertyChanged("LastUpdatedDate");
                 OnLastUpdatedDateChanged();
             }
@@ -6630,7 +6623,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -6702,7 +6694,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -6721,7 +6713,7 @@ namespace SRFROWCA
                 {
                     OnIdChanging(value);
                     ReportPropertyChanging("Id");
-                    _Id = StructuralObject.SetValidValue(value);
+                    _Id = StructuralObject.SetValidValue(value, "Id");
                     ReportPropertyChanged("Id");
                     OnIdChanged();
                 }
@@ -6746,7 +6738,7 @@ namespace SRFROWCA
             {
                 OnPathIdChanging(value);
                 ReportPropertyChanging("PathId");
-                _PathId = StructuralObject.SetValidValue(value);
+                _PathId = StructuralObject.SetValidValue(value, "PathId");
                 ReportPropertyChanged("PathId");
                 OnPathIdChanged();
             }
@@ -6770,7 +6762,7 @@ namespace SRFROWCA
             {
                 OnUserIdChanging(value);
                 ReportPropertyChanging("UserId");
-                _UserId = StructuralObject.SetValidValue(value);
+                _UserId = StructuralObject.SetValidValue(value, "UserId");
                 ReportPropertyChanged("UserId");
                 OnUserIdChanged();
             }
@@ -6794,7 +6786,7 @@ namespace SRFROWCA
             {
                 OnPageSettingsChanging(value);
                 ReportPropertyChanging("PageSettings");
-                _PageSettings = StructuralObject.SetValidValue(value, false);
+                _PageSettings = StructuralObject.SetValidValue(value, false, "PageSettings");
                 ReportPropertyChanged("PageSettings");
                 OnPageSettingsChanged();
             }
@@ -6818,7 +6810,7 @@ namespace SRFROWCA
             {
                 OnLastUpdatedDateChanging(value);
                 ReportPropertyChanging("LastUpdatedDate");
-                _LastUpdatedDate = StructuralObject.SetValidValue(value);
+                _LastUpdatedDate = StructuralObject.SetValidValue(value, "LastUpdatedDate");
                 ReportPropertyChanged("LastUpdatedDate");
                 OnLastUpdatedDateChanged();
             }
@@ -6829,7 +6821,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -6943,7 +6934,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -6962,7 +6953,7 @@ namespace SRFROWCA
                 {
                     OnUserIdChanging(value);
                     ReportPropertyChanging("UserId");
-                    _UserId = StructuralObject.SetValidValue(value);
+                    _UserId = StructuralObject.SetValidValue(value, "UserId");
                     ReportPropertyChanged("UserId");
                     OnUserIdChanged();
                 }
@@ -6987,7 +6978,7 @@ namespace SRFROWCA
             {
                 OnPropertyNamesChanging(value);
                 ReportPropertyChanging("PropertyNames");
-                _PropertyNames = StructuralObject.SetValidValue(value, false);
+                _PropertyNames = StructuralObject.SetValidValue(value, false, "PropertyNames");
                 ReportPropertyChanged("PropertyNames");
                 OnPropertyNamesChanged();
             }
@@ -7011,7 +7002,7 @@ namespace SRFROWCA
             {
                 OnPropertyValuesStringChanging(value);
                 ReportPropertyChanging("PropertyValuesString");
-                _PropertyValuesString = StructuralObject.SetValidValue(value, false);
+                _PropertyValuesString = StructuralObject.SetValidValue(value, false, "PropertyValuesString");
                 ReportPropertyChanged("PropertyValuesString");
                 OnPropertyValuesStringChanged();
             }
@@ -7035,7 +7026,7 @@ namespace SRFROWCA
             {
                 OnPropertyValuesBinaryChanging(value);
                 ReportPropertyChanging("PropertyValuesBinary");
-                _PropertyValuesBinary = StructuralObject.SetValidValue(value, false);
+                _PropertyValuesBinary = StructuralObject.SetValidValue(value, false, "PropertyValuesBinary");
                 ReportPropertyChanged("PropertyValuesBinary");
                 OnPropertyValuesBinaryChanged();
             }
@@ -7059,7 +7050,7 @@ namespace SRFROWCA
             {
                 OnLastUpdatedDateChanging(value);
                 ReportPropertyChanging("LastUpdatedDate");
-                _LastUpdatedDate = StructuralObject.SetValidValue(value);
+                _LastUpdatedDate = StructuralObject.SetValidValue(value, "LastUpdatedDate");
                 ReportPropertyChanged("LastUpdatedDate");
                 OnLastUpdatedDateChanged();
             }
@@ -7070,7 +7061,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -7144,7 +7134,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -7161,7 +7151,7 @@ namespace SRFROWCA
             {
                 OnApplicationIdChanging(value);
                 ReportPropertyChanging("ApplicationId");
-                _ApplicationId = StructuralObject.SetValidValue(value);
+                _ApplicationId = StructuralObject.SetValidValue(value, "ApplicationId");
                 ReportPropertyChanged("ApplicationId");
                 OnApplicationIdChanged();
             }
@@ -7187,7 +7177,7 @@ namespace SRFROWCA
                 {
                     OnRoleIdChanging(value);
                     ReportPropertyChanging("RoleId");
-                    _RoleId = StructuralObject.SetValidValue(value);
+                    _RoleId = StructuralObject.SetValidValue(value, "RoleId");
                     ReportPropertyChanged("RoleId");
                     OnRoleIdChanged();
                 }
@@ -7212,7 +7202,7 @@ namespace SRFROWCA
             {
                 OnRoleNameChanging(value);
                 ReportPropertyChanging("RoleName");
-                _RoleName = StructuralObject.SetValidValue(value, false);
+                _RoleName = StructuralObject.SetValidValue(value, false, "RoleName");
                 ReportPropertyChanged("RoleName");
                 OnRoleNameChanged();
             }
@@ -7236,7 +7226,7 @@ namespace SRFROWCA
             {
                 OnLoweredRoleNameChanging(value);
                 ReportPropertyChanging("LoweredRoleName");
-                _LoweredRoleName = StructuralObject.SetValidValue(value, false);
+                _LoweredRoleName = StructuralObject.SetValidValue(value, false, "LoweredRoleName");
                 ReportPropertyChanged("LoweredRoleName");
                 OnLoweredRoleNameChanged();
             }
@@ -7260,7 +7250,7 @@ namespace SRFROWCA
             {
                 OnDescriptionChanging(value);
                 ReportPropertyChanging("Description");
-                _Description = StructuralObject.SetValidValue(value, true);
+                _Description = StructuralObject.SetValidValue(value, true, "Description");
                 ReportPropertyChanged("Description");
                 OnDescriptionChanged();
             }
@@ -7271,7 +7261,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -7365,7 +7354,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -7384,7 +7373,7 @@ namespace SRFROWCA
                 {
                     OnFeatureChanging(value);
                     ReportPropertyChanging("Feature");
-                    _Feature = StructuralObject.SetValidValue(value, false);
+                    _Feature = StructuralObject.SetValidValue(value, false, "Feature");
                     ReportPropertyChanged("Feature");
                     OnFeatureChanged();
                 }
@@ -7411,7 +7400,7 @@ namespace SRFROWCA
                 {
                     OnCompatibleSchemaVersionChanging(value);
                     ReportPropertyChanging("CompatibleSchemaVersion");
-                    _CompatibleSchemaVersion = StructuralObject.SetValidValue(value, false);
+                    _CompatibleSchemaVersion = StructuralObject.SetValidValue(value, false, "CompatibleSchemaVersion");
                     ReportPropertyChanged("CompatibleSchemaVersion");
                     OnCompatibleSchemaVersionChanged();
                 }
@@ -7436,7 +7425,7 @@ namespace SRFROWCA
             {
                 OnIsCurrentVersionChanging(value);
                 ReportPropertyChanging("IsCurrentVersion");
-                _IsCurrentVersion = StructuralObject.SetValidValue(value);
+                _IsCurrentVersion = StructuralObject.SetValidValue(value, "IsCurrentVersion");
                 ReportPropertyChanged("IsCurrentVersion");
                 OnIsCurrentVersionChanged();
             }
@@ -7447,7 +7436,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -7477,7 +7465,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -7496,7 +7484,7 @@ namespace SRFROWCA
                 {
                     OntableNameChanging(value);
                     ReportPropertyChanging("tableName");
-                    _tableName = StructuralObject.SetValidValue(value, false);
+                    _tableName = StructuralObject.SetValidValue(value, false, "tableName");
                     ReportPropertyChanged("tableName");
                     OntableNameChanged();
                 }
@@ -7521,7 +7509,7 @@ namespace SRFROWCA
             {
                 OnnotificationCreatedChanging(value);
                 ReportPropertyChanging("notificationCreated");
-                _notificationCreated = StructuralObject.SetValidValue(value);
+                _notificationCreated = StructuralObject.SetValidValue(value, "notificationCreated");
                 ReportPropertyChanged("notificationCreated");
                 OnnotificationCreatedChanged();
             }
@@ -7545,7 +7533,7 @@ namespace SRFROWCA
             {
                 OnchangeIdChanging(value);
                 ReportPropertyChanging("changeId");
-                _changeId = StructuralObject.SetValidValue(value);
+                _changeId = StructuralObject.SetValidValue(value, "changeId");
                 ReportPropertyChanged("changeId");
                 OnchangeIdChanged();
             }
@@ -7556,7 +7544,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -7592,7 +7579,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -7609,7 +7596,7 @@ namespace SRFROWCA
             {
                 OnApplicationIdChanging(value);
                 ReportPropertyChanging("ApplicationId");
-                _ApplicationId = StructuralObject.SetValidValue(value);
+                _ApplicationId = StructuralObject.SetValidValue(value, "ApplicationId");
                 ReportPropertyChanged("ApplicationId");
                 OnApplicationIdChanged();
             }
@@ -7635,7 +7622,7 @@ namespace SRFROWCA
                 {
                     OnUserIdChanging(value);
                     ReportPropertyChanging("UserId");
-                    _UserId = StructuralObject.SetValidValue(value);
+                    _UserId = StructuralObject.SetValidValue(value, "UserId");
                     ReportPropertyChanged("UserId");
                     OnUserIdChanged();
                 }
@@ -7660,7 +7647,7 @@ namespace SRFROWCA
             {
                 OnUserNameChanging(value);
                 ReportPropertyChanging("UserName");
-                _UserName = StructuralObject.SetValidValue(value, false);
+                _UserName = StructuralObject.SetValidValue(value, false, "UserName");
                 ReportPropertyChanged("UserName");
                 OnUserNameChanged();
             }
@@ -7684,7 +7671,7 @@ namespace SRFROWCA
             {
                 OnLoweredUserNameChanging(value);
                 ReportPropertyChanging("LoweredUserName");
-                _LoweredUserName = StructuralObject.SetValidValue(value, false);
+                _LoweredUserName = StructuralObject.SetValidValue(value, false, "LoweredUserName");
                 ReportPropertyChanged("LoweredUserName");
                 OnLoweredUserNameChanged();
             }
@@ -7708,7 +7695,7 @@ namespace SRFROWCA
             {
                 OnMobileAliasChanging(value);
                 ReportPropertyChanging("MobileAlias");
-                _MobileAlias = StructuralObject.SetValidValue(value, true);
+                _MobileAlias = StructuralObject.SetValidValue(value, true, "MobileAlias");
                 ReportPropertyChanged("MobileAlias");
                 OnMobileAliasChanged();
             }
@@ -7732,7 +7719,7 @@ namespace SRFROWCA
             {
                 OnIsAnonymousChanging(value);
                 ReportPropertyChanging("IsAnonymous");
-                _IsAnonymous = StructuralObject.SetValidValue(value);
+                _IsAnonymous = StructuralObject.SetValidValue(value, "IsAnonymous");
                 ReportPropertyChanged("IsAnonymous");
                 OnIsAnonymousChanged();
             }
@@ -7756,7 +7743,7 @@ namespace SRFROWCA
             {
                 OnLastActivityDateChanging(value);
                 ReportPropertyChanging("LastActivityDate");
-                _LastActivityDate = StructuralObject.SetValidValue(value);
+                _LastActivityDate = StructuralObject.SetValidValue(value, "LastActivityDate");
                 ReportPropertyChanged("LastActivityDate");
                 OnLastActivityDateChanged();
             }
@@ -7767,7 +7754,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -8005,7 +7991,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -8024,7 +8010,7 @@ namespace SRFROWCA
                 {
                     OnUserClusterIdChanging(value);
                     ReportPropertyChanging("UserClusterId");
-                    _UserClusterId = StructuralObject.SetValidValue(value);
+                    _UserClusterId = StructuralObject.SetValidValue(value, "UserClusterId");
                     ReportPropertyChanged("UserClusterId");
                     OnUserClusterIdChanged();
                 }
@@ -8051,7 +8037,7 @@ namespace SRFROWCA
                 {
                     OnUserIdChanging(value);
                     ReportPropertyChanging("UserId");
-                    _UserId = StructuralObject.SetValidValue(value);
+                    _UserId = StructuralObject.SetValidValue(value, "UserId");
                     ReportPropertyChanged("UserId");
                     OnUserIdChanged();
                 }
@@ -8078,7 +8064,7 @@ namespace SRFROWCA
                 {
                     OnClusterIdChanging(value);
                     ReportPropertyChanging("ClusterId");
-                    _ClusterId = StructuralObject.SetValidValue(value);
+                    _ClusterId = StructuralObject.SetValidValue(value, "ClusterId");
                     ReportPropertyChanged("ClusterId");
                     OnClusterIdChanged();
                 }
@@ -8105,7 +8091,7 @@ namespace SRFROWCA
                 {
                     OnCreatedDateChanging(value);
                     ReportPropertyChanging("CreatedDate");
-                    _CreatedDate = StructuralObject.SetValidValue(value);
+                    _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                     ReportPropertyChanged("CreatedDate");
                     OnCreatedDateChanged();
                 }
@@ -8117,7 +8103,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -8147,7 +8132,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -8166,7 +8151,7 @@ namespace SRFROWCA
                 {
                     OnCustomUserIdChanging(value);
                     ReportPropertyChanging("CustomUserId");
-                    _CustomUserId = StructuralObject.SetValidValue(value);
+                    _CustomUserId = StructuralObject.SetValidValue(value, "CustomUserId");
                     ReportPropertyChanged("CustomUserId");
                     OnCustomUserIdChanged();
                 }
@@ -8191,7 +8176,7 @@ namespace SRFROWCA
             {
                 OnUserIdChanging(value);
                 ReportPropertyChanging("UserId");
-                _UserId = StructuralObject.SetValidValue(value);
+                _UserId = StructuralObject.SetValidValue(value, "UserId");
                 ReportPropertyChanged("UserId");
                 OnUserIdChanged();
             }
@@ -8215,7 +8200,7 @@ namespace SRFROWCA
             {
                 OnOrganizationIdChanging(value);
                 ReportPropertyChanging("OrganizationId");
-                _OrganizationId = StructuralObject.SetValidValue(value);
+                _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                 ReportPropertyChanged("OrganizationId");
                 OnOrganizationIdChanged();
             }
@@ -8239,7 +8224,7 @@ namespace SRFROWCA
             {
                 OnCountryIdChanging(value);
                 ReportPropertyChanging("CountryId");
-                _CountryId = StructuralObject.SetValidValue(value);
+                _CountryId = StructuralObject.SetValidValue(value, "CountryId");
                 ReportPropertyChanged("CountryId");
                 OnCountryIdChanged();
             }
@@ -8263,7 +8248,7 @@ namespace SRFROWCA
             {
                 OnPhoneNumberChanging(value);
                 ReportPropertyChanging("PhoneNumber");
-                _PhoneNumber = StructuralObject.SetValidValue(value, true);
+                _PhoneNumber = StructuralObject.SetValidValue(value, true, "PhoneNumber");
                 ReportPropertyChanged("PhoneNumber");
                 OnPhoneNumberChanged();
             }
@@ -8287,7 +8272,7 @@ namespace SRFROWCA
             {
                 OnIsDefaultChanging(value);
                 ReportPropertyChanging("IsDefault");
-                _IsDefault = StructuralObject.SetValidValue(value);
+                _IsDefault = StructuralObject.SetValidValue(value, "IsDefault");
                 ReportPropertyChanged("IsDefault");
                 OnIsDefaultChanged();
             }
@@ -8311,7 +8296,7 @@ namespace SRFROWCA
             {
                 OnFullNameChanging(value);
                 ReportPropertyChanging("FullName");
-                _FullName = StructuralObject.SetValidValue(value, true);
+                _FullName = StructuralObject.SetValidValue(value, true, "FullName");
                 ReportPropertyChanged("FullName");
                 OnFullNameChanged();
             }
@@ -8322,7 +8307,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -8406,7 +8390,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -8425,7 +8409,7 @@ namespace SRFROWCA
                 {
                     OnEventIdChanging(value);
                     ReportPropertyChanging("EventId");
-                    _EventId = StructuralObject.SetValidValue(value, false);
+                    _EventId = StructuralObject.SetValidValue(value, false, "EventId");
                     ReportPropertyChanged("EventId");
                     OnEventIdChanged();
                 }
@@ -8450,7 +8434,7 @@ namespace SRFROWCA
             {
                 OnEventTimeUtcChanging(value);
                 ReportPropertyChanging("EventTimeUtc");
-                _EventTimeUtc = StructuralObject.SetValidValue(value);
+                _EventTimeUtc = StructuralObject.SetValidValue(value, "EventTimeUtc");
                 ReportPropertyChanged("EventTimeUtc");
                 OnEventTimeUtcChanged();
             }
@@ -8474,7 +8458,7 @@ namespace SRFROWCA
             {
                 OnEventTimeChanging(value);
                 ReportPropertyChanging("EventTime");
-                _EventTime = StructuralObject.SetValidValue(value);
+                _EventTime = StructuralObject.SetValidValue(value, "EventTime");
                 ReportPropertyChanged("EventTime");
                 OnEventTimeChanged();
             }
@@ -8498,7 +8482,7 @@ namespace SRFROWCA
             {
                 OnEventTypeChanging(value);
                 ReportPropertyChanging("EventType");
-                _EventType = StructuralObject.SetValidValue(value, false);
+                _EventType = StructuralObject.SetValidValue(value, false, "EventType");
                 ReportPropertyChanged("EventType");
                 OnEventTypeChanged();
             }
@@ -8522,7 +8506,7 @@ namespace SRFROWCA
             {
                 OnEventSequenceChanging(value);
                 ReportPropertyChanging("EventSequence");
-                _EventSequence = StructuralObject.SetValidValue(value);
+                _EventSequence = StructuralObject.SetValidValue(value, "EventSequence");
                 ReportPropertyChanged("EventSequence");
                 OnEventSequenceChanged();
             }
@@ -8546,7 +8530,7 @@ namespace SRFROWCA
             {
                 OnEventOccurrenceChanging(value);
                 ReportPropertyChanging("EventOccurrence");
-                _EventOccurrence = StructuralObject.SetValidValue(value);
+                _EventOccurrence = StructuralObject.SetValidValue(value, "EventOccurrence");
                 ReportPropertyChanged("EventOccurrence");
                 OnEventOccurrenceChanged();
             }
@@ -8570,7 +8554,7 @@ namespace SRFROWCA
             {
                 OnEventCodeChanging(value);
                 ReportPropertyChanging("EventCode");
-                _EventCode = StructuralObject.SetValidValue(value);
+                _EventCode = StructuralObject.SetValidValue(value, "EventCode");
                 ReportPropertyChanged("EventCode");
                 OnEventCodeChanged();
             }
@@ -8594,7 +8578,7 @@ namespace SRFROWCA
             {
                 OnEventDetailCodeChanging(value);
                 ReportPropertyChanging("EventDetailCode");
-                _EventDetailCode = StructuralObject.SetValidValue(value);
+                _EventDetailCode = StructuralObject.SetValidValue(value, "EventDetailCode");
                 ReportPropertyChanged("EventDetailCode");
                 OnEventDetailCodeChanged();
             }
@@ -8618,7 +8602,7 @@ namespace SRFROWCA
             {
                 OnMessageChanging(value);
                 ReportPropertyChanging("Message");
-                _Message = StructuralObject.SetValidValue(value, true);
+                _Message = StructuralObject.SetValidValue(value, true, "Message");
                 ReportPropertyChanged("Message");
                 OnMessageChanged();
             }
@@ -8642,7 +8626,7 @@ namespace SRFROWCA
             {
                 OnApplicationPathChanging(value);
                 ReportPropertyChanging("ApplicationPath");
-                _ApplicationPath = StructuralObject.SetValidValue(value, true);
+                _ApplicationPath = StructuralObject.SetValidValue(value, true, "ApplicationPath");
                 ReportPropertyChanged("ApplicationPath");
                 OnApplicationPathChanged();
             }
@@ -8666,7 +8650,7 @@ namespace SRFROWCA
             {
                 OnApplicationVirtualPathChanging(value);
                 ReportPropertyChanging("ApplicationVirtualPath");
-                _ApplicationVirtualPath = StructuralObject.SetValidValue(value, true);
+                _ApplicationVirtualPath = StructuralObject.SetValidValue(value, true, "ApplicationVirtualPath");
                 ReportPropertyChanged("ApplicationVirtualPath");
                 OnApplicationVirtualPathChanged();
             }
@@ -8690,7 +8674,7 @@ namespace SRFROWCA
             {
                 OnMachineNameChanging(value);
                 ReportPropertyChanging("MachineName");
-                _MachineName = StructuralObject.SetValidValue(value, false);
+                _MachineName = StructuralObject.SetValidValue(value, false, "MachineName");
                 ReportPropertyChanged("MachineName");
                 OnMachineNameChanged();
             }
@@ -8714,7 +8698,7 @@ namespace SRFROWCA
             {
                 OnRequestUrlChanging(value);
                 ReportPropertyChanging("RequestUrl");
-                _RequestUrl = StructuralObject.SetValidValue(value, true);
+                _RequestUrl = StructuralObject.SetValidValue(value, true, "RequestUrl");
                 ReportPropertyChanged("RequestUrl");
                 OnRequestUrlChanged();
             }
@@ -8738,7 +8722,7 @@ namespace SRFROWCA
             {
                 OnExceptionTypeChanging(value);
                 ReportPropertyChanging("ExceptionType");
-                _ExceptionType = StructuralObject.SetValidValue(value, true);
+                _ExceptionType = StructuralObject.SetValidValue(value, true, "ExceptionType");
                 ReportPropertyChanged("ExceptionType");
                 OnExceptionTypeChanged();
             }
@@ -8762,7 +8746,7 @@ namespace SRFROWCA
             {
                 OnDetailsChanging(value);
                 ReportPropertyChanging("Details");
-                _Details = StructuralObject.SetValidValue(value, true);
+                _Details = StructuralObject.SetValidValue(value, true, "Details");
                 ReportPropertyChanged("Details");
                 OnDetailsChanged();
             }
@@ -8773,7 +8757,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -8803,7 +8786,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -8822,7 +8805,7 @@ namespace SRFROWCA
                 {
                     OnAuditIdChanging(value);
                     ReportPropertyChanging("AuditId");
-                    _AuditId = StructuralObject.SetValidValue(value);
+                    _AuditId = StructuralObject.SetValidValue(value, "AuditId");
                     ReportPropertyChanged("AuditId");
                     OnAuditIdChanged();
                 }
@@ -8847,7 +8830,7 @@ namespace SRFROWCA
             {
                 OnDateTimeChanging(value);
                 ReportPropertyChanging("DateTime");
-                _DateTime = StructuralObject.SetValidValue(value);
+                _DateTime = StructuralObject.SetValidValue(value, "DateTime");
                 ReportPropertyChanged("DateTime");
                 OnDateTimeChanged();
             }
@@ -8871,7 +8854,7 @@ namespace SRFROWCA
             {
                 OnTableNameChanging(value);
                 ReportPropertyChanging("TableName");
-                _TableName = StructuralObject.SetValidValue(value, false);
+                _TableName = StructuralObject.SetValidValue(value, false, "TableName");
                 ReportPropertyChanged("TableName");
                 OnTableNameChanged();
             }
@@ -8895,7 +8878,7 @@ namespace SRFROWCA
             {
                 OnAuditEntryChanging(value);
                 ReportPropertyChanging("AuditEntry");
-                _AuditEntry = StructuralObject.SetValidValue(value, true);
+                _AuditEntry = StructuralObject.SetValidValue(value, true, "AuditEntry");
                 ReportPropertyChanged("AuditEntry");
                 OnAuditEntryChanged();
             }
@@ -8906,7 +8889,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -8932,7 +8914,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -8951,7 +8933,7 @@ namespace SRFROWCA
                 {
                     OnidChanging(value);
                     ReportPropertyChanging("id");
-                    _id = StructuralObject.SetValidValue(value);
+                    _id = StructuralObject.SetValidValue(value, "id");
                     ReportPropertyChanged("id");
                     OnidChanged();
                 }
@@ -8976,7 +8958,7 @@ namespace SRFROWCA
             {
                 OnYearChanging(value);
                 ReportPropertyChanging("Year");
-                _Year = StructuralObject.SetValidValue(value);
+                _Year = StructuralObject.SetValidValue(value, "Year");
                 ReportPropertyChanged("Year");
                 OnYearChanged();
             }
@@ -9000,7 +8982,7 @@ namespace SRFROWCA
             {
                 OnMonthChanging(value);
                 ReportPropertyChanging("Month");
-                _Month = StructuralObject.SetValidValue(value, true);
+                _Month = StructuralObject.SetValidValue(value, true, "Month");
                 ReportPropertyChanged("Month");
                 OnMonthChanged();
             }
@@ -9024,7 +9006,7 @@ namespace SRFROWCA
             {
                 OnMonthIdChanging(value);
                 ReportPropertyChanging("MonthId");
-                _MonthId = StructuralObject.SetValidValue(value);
+                _MonthId = StructuralObject.SetValidValue(value, "MonthId");
                 ReportPropertyChanged("MonthId");
                 OnMonthIdChanged();
             }
@@ -9048,7 +9030,7 @@ namespace SRFROWCA
             {
                 OnOrganizationChanging(value);
                 ReportPropertyChanging("Organization");
-                _Organization = StructuralObject.SetValidValue(value, true);
+                _Organization = StructuralObject.SetValidValue(value, true, "Organization");
                 ReportPropertyChanged("Organization");
                 OnOrganizationChanged();
             }
@@ -9072,7 +9054,7 @@ namespace SRFROWCA
             {
                 OnOrganizationIdChanging(value);
                 ReportPropertyChanging("OrganizationId");
-                _OrganizationId = StructuralObject.SetValidValue(value);
+                _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                 ReportPropertyChanged("OrganizationId");
                 OnOrganizationIdChanged();
             }
@@ -9096,7 +9078,7 @@ namespace SRFROWCA
             {
                 OnProject_CodeChanging(value);
                 ReportPropertyChanging("Project_Code");
-                _Project_Code = StructuralObject.SetValidValue(value, true);
+                _Project_Code = StructuralObject.SetValidValue(value, true, "Project_Code");
                 ReportPropertyChanged("Project_Code");
                 OnProject_CodeChanged();
             }
@@ -9120,7 +9102,7 @@ namespace SRFROWCA
             {
                 OnProjectIdChanging(value);
                 ReportPropertyChanging("ProjectId");
-                _ProjectId = StructuralObject.SetValidValue(value);
+                _ProjectId = StructuralObject.SetValidValue(value, "ProjectId");
                 ReportPropertyChanged("ProjectId");
                 OnProjectIdChanged();
             }
@@ -9144,7 +9126,7 @@ namespace SRFROWCA
             {
                 OnLocationChanging(value);
                 ReportPropertyChanging("Location");
-                _Location = StructuralObject.SetValidValue(value, true);
+                _Location = StructuralObject.SetValidValue(value, true, "Location");
                 ReportPropertyChanged("Location");
                 OnLocationChanged();
             }
@@ -9168,7 +9150,7 @@ namespace SRFROWCA
             {
                 OnLocationIdChanging(value);
                 ReportPropertyChanging("LocationId");
-                _LocationId = StructuralObject.SetValidValue(value);
+                _LocationId = StructuralObject.SetValidValue(value, "LocationId");
                 ReportPropertyChanged("LocationId");
                 OnLocationIdChanged();
             }
@@ -9192,7 +9174,7 @@ namespace SRFROWCA
             {
                 OnLocation_TypeChanging(value);
                 ReportPropertyChanging("Location_Type");
-                _Location_Type = StructuralObject.SetValidValue(value, true);
+                _Location_Type = StructuralObject.SetValidValue(value, true, "Location_Type");
                 ReportPropertyChanged("Location_Type");
                 OnLocation_TypeChanged();
             }
@@ -9216,7 +9198,7 @@ namespace SRFROWCA
             {
                 OnLocationTypeIdChanging(value);
                 ReportPropertyChanging("LocationTypeId");
-                _LocationTypeId = StructuralObject.SetValidValue(value);
+                _LocationTypeId = StructuralObject.SetValidValue(value, "LocationTypeId");
                 ReportPropertyChanged("LocationTypeId");
                 OnLocationTypeIdChanged();
             }
@@ -9240,7 +9222,7 @@ namespace SRFROWCA
             {
                 OnSOChanging(value);
                 ReportPropertyChanging("SO");
-                _SO = StructuralObject.SetValidValue(value, true);
+                _SO = StructuralObject.SetValidValue(value, true, "SO");
                 ReportPropertyChanged("SO");
                 OnSOChanged();
             }
@@ -9264,7 +9246,7 @@ namespace SRFROWCA
             {
                 OnObjectiveIdChanging(value);
                 ReportPropertyChanging("ObjectiveId");
-                _ObjectiveId = StructuralObject.SetValidValue(value);
+                _ObjectiveId = StructuralObject.SetValidValue(value, "ObjectiveId");
                 ReportPropertyChanged("ObjectiveId");
                 OnObjectiveIdChanged();
             }
@@ -9288,7 +9270,7 @@ namespace SRFROWCA
             {
                 OnHPChanging(value);
                 ReportPropertyChanging("HP");
-                _HP = StructuralObject.SetValidValue(value, true);
+                _HP = StructuralObject.SetValidValue(value, true, "HP");
                 ReportPropertyChanged("HP");
                 OnHPChanged();
             }
@@ -9312,7 +9294,7 @@ namespace SRFROWCA
             {
                 OnPriorityIdChanging(value);
                 ReportPropertyChanging("PriorityId");
-                _PriorityId = StructuralObject.SetValidValue(value);
+                _PriorityId = StructuralObject.SetValidValue(value, "PriorityId");
                 ReportPropertyChanged("PriorityId");
                 OnPriorityIdChanged();
             }
@@ -9336,7 +9318,7 @@ namespace SRFROWCA
             {
                 OnActivityChanging(value);
                 ReportPropertyChanging("Activity");
-                _Activity = StructuralObject.SetValidValue(value, true);
+                _Activity = StructuralObject.SetValidValue(value, true, "Activity");
                 ReportPropertyChanged("Activity");
                 OnActivityChanged();
             }
@@ -9360,7 +9342,7 @@ namespace SRFROWCA
             {
                 OnActivityIdChanging(value);
                 ReportPropertyChanging("ActivityId");
-                _ActivityId = StructuralObject.SetValidValue(value);
+                _ActivityId = StructuralObject.SetValidValue(value, "ActivityId");
                 ReportPropertyChanged("ActivityId");
                 OnActivityIdChanged();
             }
@@ -9384,7 +9366,7 @@ namespace SRFROWCA
             {
                 OnIndicatorChanging(value);
                 ReportPropertyChanging("Indicator");
-                _Indicator = StructuralObject.SetValidValue(value, true);
+                _Indicator = StructuralObject.SetValidValue(value, true, "Indicator");
                 ReportPropertyChanged("Indicator");
                 OnIndicatorChanged();
             }
@@ -9408,7 +9390,7 @@ namespace SRFROWCA
             {
                 OnIndicatorIdChanging(value);
                 ReportPropertyChanging("IndicatorId");
-                _IndicatorId = StructuralObject.SetValidValue(value);
+                _IndicatorId = StructuralObject.SetValidValue(value, "IndicatorId");
                 ReportPropertyChanged("IndicatorId");
                 OnIndicatorIdChanged();
             }
@@ -9432,7 +9414,7 @@ namespace SRFROWCA
             {
                 OnAnnual_TargetChanging(value);
                 ReportPropertyChanging("Annual_Target");
-                _Annual_Target = StructuralObject.SetValidValue(value);
+                _Annual_Target = StructuralObject.SetValidValue(value, "Annual_Target");
                 ReportPropertyChanged("Annual_Target");
                 OnAnnual_TargetChanged();
             }
@@ -9456,7 +9438,7 @@ namespace SRFROWCA
             {
                 OnAchievedChanging(value);
                 ReportPropertyChanging("Achieved");
-                _Achieved = StructuralObject.SetValidValue(value);
+                _Achieved = StructuralObject.SetValidValue(value, "Achieved");
                 ReportPropertyChanged("Achieved");
                 OnAchievedChanged();
             }
@@ -9480,7 +9462,7 @@ namespace SRFROWCA
             {
                 OnAccumulativeChanging(value);
                 ReportPropertyChanging("Accumulative");
-                _Accumulative = StructuralObject.SetValidValue(value);
+                _Accumulative = StructuralObject.SetValidValue(value, "Accumulative");
                 ReportPropertyChanged("Accumulative");
                 OnAccumulativeChanged();
             }
@@ -9504,7 +9486,7 @@ namespace SRFROWCA
             {
                 OnEmergencyClusterIdChanging(value);
                 ReportPropertyChanging("EmergencyClusterId");
-                _EmergencyClusterId = StructuralObject.SetValidValue(value);
+                _EmergencyClusterId = StructuralObject.SetValidValue(value, "EmergencyClusterId");
                 ReportPropertyChanged("EmergencyClusterId");
                 OnEmergencyClusterIdChanged();
             }
@@ -9528,7 +9510,7 @@ namespace SRFROWCA
             {
                 OnEmergnecyLocationIdChanging(value);
                 ReportPropertyChanging("EmergnecyLocationId");
-                _EmergnecyLocationId = StructuralObject.SetValidValue(value);
+                _EmergnecyLocationId = StructuralObject.SetValidValue(value, "EmergnecyLocationId");
                 ReportPropertyChanged("EmergnecyLocationId");
                 OnEmergnecyLocationIdChanged();
             }
@@ -9552,7 +9534,7 @@ namespace SRFROWCA
             {
                 OnUserIdChanging(value);
                 ReportPropertyChanging("UserId");
-                _UserId = StructuralObject.SetValidValue(value);
+                _UserId = StructuralObject.SetValidValue(value, "UserId");
                 ReportPropertyChanged("UserId");
                 OnUserIdChanged();
             }
@@ -9576,7 +9558,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -9587,7 +9569,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -9623,7 +9604,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -9642,7 +9623,7 @@ namespace SRFROWCA
                 {
                     OnClusterIdentityIdChanging(value);
                     ReportPropertyChanging("ClusterIdentityId");
-                    _ClusterIdentityId = StructuralObject.SetValidValue(value);
+                    _ClusterIdentityId = StructuralObject.SetValidValue(value, "ClusterIdentityId");
                     ReportPropertyChanged("ClusterIdentityId");
                     OnClusterIdentityIdChanged();
                 }
@@ -9667,7 +9648,7 @@ namespace SRFROWCA
             {
                 OnClusterIdChanging(value);
                 ReportPropertyChanging("ClusterId");
-                _ClusterId = StructuralObject.SetValidValue(value);
+                _ClusterId = StructuralObject.SetValidValue(value, "ClusterId");
                 ReportPropertyChanged("ClusterId");
                 OnClusterIdChanged();
             }
@@ -9691,7 +9672,7 @@ namespace SRFROWCA
             {
                 OnSiteLanguageIdChanging(value);
                 ReportPropertyChanging("SiteLanguageId");
-                _SiteLanguageId = StructuralObject.SetValidValue(value);
+                _SiteLanguageId = StructuralObject.SetValidValue(value, "SiteLanguageId");
                 ReportPropertyChanged("SiteLanguageId");
                 OnSiteLanguageIdChanged();
             }
@@ -9715,7 +9696,7 @@ namespace SRFROWCA
             {
                 OnClusterNameChanging(value);
                 ReportPropertyChanging("ClusterName");
-                _ClusterName = StructuralObject.SetValidValue(value, false);
+                _ClusterName = StructuralObject.SetValidValue(value, false, "ClusterName");
                 ReportPropertyChanged("ClusterName");
                 OnClusterNameChanged();
             }
@@ -9739,7 +9720,7 @@ namespace SRFROWCA
             {
                 OnClusterShortNameChanging(value);
                 ReportPropertyChanging("ClusterShortName");
-                _ClusterShortName = StructuralObject.SetValidValue(value, true);
+                _ClusterShortName = StructuralObject.SetValidValue(value, true, "ClusterShortName");
                 ReportPropertyChanged("ClusterShortName");
                 OnClusterShortNameChanged();
             }
@@ -9763,7 +9744,7 @@ namespace SRFROWCA
             {
                 OnDescriptionChanging(value);
                 ReportPropertyChanging("Description");
-                _Description = StructuralObject.SetValidValue(value, true);
+                _Description = StructuralObject.SetValidValue(value, true, "Description");
                 ReportPropertyChanged("Description");
                 OnDescriptionChanged();
             }
@@ -9787,7 +9768,7 @@ namespace SRFROWCA
             {
                 OnIsActiveChanging(value);
                 ReportPropertyChanging("IsActive");
-                _IsActive = StructuralObject.SetValidValue(value);
+                _IsActive = StructuralObject.SetValidValue(value, "IsActive");
                 ReportPropertyChanged("IsActive");
                 OnIsActiveChanged();
             }
@@ -9811,7 +9792,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -9835,7 +9816,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -9859,7 +9840,7 @@ namespace SRFROWCA
             {
                 OnUpdatedDateChanging(value);
                 ReportPropertyChanging("UpdatedDate");
-                _UpdatedDate = StructuralObject.SetValidValue(value);
+                _UpdatedDate = StructuralObject.SetValidValue(value, "UpdatedDate");
                 ReportPropertyChanged("UpdatedDate");
                 OnUpdatedDateChanged();
             }
@@ -9883,7 +9864,7 @@ namespace SRFROWCA
             {
                 OnUpdatedByIdChanging(value);
                 ReportPropertyChanging("UpdatedById");
-                _UpdatedById = StructuralObject.SetValidValue(value);
+                _UpdatedById = StructuralObject.SetValidValue(value, "UpdatedById");
                 ReportPropertyChanged("UpdatedById");
                 OnUpdatedByIdChanged();
             }
@@ -9894,7 +9875,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -9932,7 +9912,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -9951,7 +9931,7 @@ namespace SRFROWCA
                 {
                     OnClusterIndicatorTargetIdChanging(value);
                     ReportPropertyChanging("ClusterIndicatorTargetId");
-                    _ClusterIndicatorTargetId = StructuralObject.SetValidValue(value);
+                    _ClusterIndicatorTargetId = StructuralObject.SetValidValue(value, "ClusterIndicatorTargetId");
                     ReportPropertyChanged("ClusterIndicatorTargetId");
                     OnClusterIndicatorTargetIdChanged();
                 }
@@ -9976,7 +9956,7 @@ namespace SRFROWCA
             {
                 OnEmergencyLocationIdChanging(value);
                 ReportPropertyChanging("EmergencyLocationId");
-                _EmergencyLocationId = StructuralObject.SetValidValue(value);
+                _EmergencyLocationId = StructuralObject.SetValidValue(value, "EmergencyLocationId");
                 ReportPropertyChanged("EmergencyLocationId");
                 OnEmergencyLocationIdChanged();
             }
@@ -10000,7 +9980,7 @@ namespace SRFROWCA
             {
                 OnEmergencyClusterIdChanging(value);
                 ReportPropertyChanging("EmergencyClusterId");
-                _EmergencyClusterId = StructuralObject.SetValidValue(value);
+                _EmergencyClusterId = StructuralObject.SetValidValue(value, "EmergencyClusterId");
                 ReportPropertyChanged("EmergencyClusterId");
                 OnEmergencyClusterIdChanged();
             }
@@ -10024,7 +10004,7 @@ namespace SRFROWCA
             {
                 OnActivityDataIdChanging(value);
                 ReportPropertyChanging("ActivityDataId");
-                _ActivityDataId = StructuralObject.SetValidValue(value);
+                _ActivityDataId = StructuralObject.SetValidValue(value, "ActivityDataId");
                 ReportPropertyChanged("ActivityDataId");
                 OnActivityDataIdChanged();
             }
@@ -10048,7 +10028,7 @@ namespace SRFROWCA
             {
                 OnYearIdChanging(value);
                 ReportPropertyChanging("YearId");
-                _YearId = StructuralObject.SetValidValue(value);
+                _YearId = StructuralObject.SetValidValue(value, "YearId");
                 ReportPropertyChanged("YearId");
                 OnYearIdChanged();
             }
@@ -10072,7 +10052,7 @@ namespace SRFROWCA
             {
                 OnTargetMidYearChanging(value);
                 ReportPropertyChanging("TargetMidYear");
-                _TargetMidYear = StructuralObject.SetValidValue(value);
+                _TargetMidYear = StructuralObject.SetValidValue(value, "TargetMidYear");
                 ReportPropertyChanged("TargetMidYear");
                 OnTargetMidYearChanged();
             }
@@ -10096,7 +10076,7 @@ namespace SRFROWCA
             {
                 OnTargetFullYearChanging(value);
                 ReportPropertyChanging("TargetFullYear");
-                _TargetFullYear = StructuralObject.SetValidValue(value);
+                _TargetFullYear = StructuralObject.SetValidValue(value, "TargetFullYear");
                 ReportPropertyChanged("TargetFullYear");
                 OnTargetFullYearChanged();
             }
@@ -10120,7 +10100,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -10144,7 +10124,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -10168,7 +10148,7 @@ namespace SRFROWCA
             {
                 OnUpdatedByIdChanging(value);
                 ReportPropertyChanging("UpdatedById");
-                _UpdatedById = StructuralObject.SetValidValue(value);
+                _UpdatedById = StructuralObject.SetValidValue(value, "UpdatedById");
                 ReportPropertyChanged("UpdatedById");
                 OnUpdatedByIdChanged();
             }
@@ -10192,7 +10172,7 @@ namespace SRFROWCA
             {
                 OnUpdatedDateChanging(value);
                 ReportPropertyChanging("UpdatedDate");
-                _UpdatedDate = StructuralObject.SetValidValue(value);
+                _UpdatedDate = StructuralObject.SetValidValue(value, "UpdatedDate");
                 ReportPropertyChanged("UpdatedDate");
                 OnUpdatedDateChanged();
             }
@@ -10203,7 +10183,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -10277,7 +10256,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -10296,7 +10275,7 @@ namespace SRFROWCA
                 {
                     OnClusterObjectiveIdChanging(value);
                     ReportPropertyChanging("ClusterObjectiveId");
-                    _ClusterObjectiveId = StructuralObject.SetValidValue(value);
+                    _ClusterObjectiveId = StructuralObject.SetValidValue(value, "ClusterObjectiveId");
                     ReportPropertyChanged("ClusterObjectiveId");
                     OnClusterObjectiveIdChanged();
                 }
@@ -10321,7 +10300,7 @@ namespace SRFROWCA
             {
                 OnEmergencyClusterIdChanging(value);
                 ReportPropertyChanging("EmergencyClusterId");
-                _EmergencyClusterId = StructuralObject.SetValidValue(value);
+                _EmergencyClusterId = StructuralObject.SetValidValue(value, "EmergencyClusterId");
                 ReportPropertyChanged("EmergencyClusterId");
                 OnEmergencyClusterIdChanged();
             }
@@ -10345,7 +10324,7 @@ namespace SRFROWCA
             {
                 OnObjectiveIdChanging(value);
                 ReportPropertyChanging("ObjectiveId");
-                _ObjectiveId = StructuralObject.SetValidValue(value);
+                _ObjectiveId = StructuralObject.SetValidValue(value, "ObjectiveId");
                 ReportPropertyChanged("ObjectiveId");
                 OnObjectiveIdChanged();
             }
@@ -10369,7 +10348,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -10393,7 +10372,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -10417,7 +10396,7 @@ namespace SRFROWCA
             {
                 OnUpdatedByIdChanging(value);
                 ReportPropertyChanging("UpdatedById");
-                _UpdatedById = StructuralObject.SetValidValue(value);
+                _UpdatedById = StructuralObject.SetValidValue(value, "UpdatedById");
                 ReportPropertyChanged("UpdatedById");
                 OnUpdatedByIdChanged();
             }
@@ -10441,7 +10420,7 @@ namespace SRFROWCA
             {
                 OnUpdatedDateChanging(value);
                 ReportPropertyChanging("UpdatedDate");
-                _UpdatedDate = StructuralObject.SetValidValue(value);
+                _UpdatedDate = StructuralObject.SetValidValue(value, "UpdatedDate");
                 ReportPropertyChanged("UpdatedDate");
                 OnUpdatedDateChanged();
             }
@@ -10452,7 +10431,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -10542,7 +10520,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -10561,7 +10539,7 @@ namespace SRFROWCA
                 {
                     OnClusterPartnerIdentityIdChanging(value);
                     ReportPropertyChanging("ClusterPartnerIdentityId");
-                    _ClusterPartnerIdentityId = StructuralObject.SetValidValue(value);
+                    _ClusterPartnerIdentityId = StructuralObject.SetValidValue(value, "ClusterPartnerIdentityId");
                     ReportPropertyChanged("ClusterPartnerIdentityId");
                     OnClusterPartnerIdentityIdChanged();
                 }
@@ -10586,7 +10564,7 @@ namespace SRFROWCA
             {
                 OnClusterPartnerIdChanging(value);
                 ReportPropertyChanging("ClusterPartnerId");
-                _ClusterPartnerId = StructuralObject.SetValidValue(value);
+                _ClusterPartnerId = StructuralObject.SetValidValue(value, "ClusterPartnerId");
                 ReportPropertyChanged("ClusterPartnerId");
                 OnClusterPartnerIdChanged();
             }
@@ -10610,7 +10588,7 @@ namespace SRFROWCA
             {
                 OnSiteLanguageIdChanging(value);
                 ReportPropertyChanging("SiteLanguageId");
-                _SiteLanguageId = StructuralObject.SetValidValue(value);
+                _SiteLanguageId = StructuralObject.SetValidValue(value, "SiteLanguageId");
                 ReportPropertyChanged("SiteLanguageId");
                 OnSiteLanguageIdChanged();
             }
@@ -10634,7 +10612,7 @@ namespace SRFROWCA
             {
                 OnPriorityActivityIdChanging(value);
                 ReportPropertyChanging("PriorityActivityId");
-                _PriorityActivityId = StructuralObject.SetValidValue(value);
+                _PriorityActivityId = StructuralObject.SetValidValue(value, "PriorityActivityId");
                 ReportPropertyChanged("PriorityActivityId");
                 OnPriorityActivityIdChanged();
             }
@@ -10658,7 +10636,7 @@ namespace SRFROWCA
             {
                 OnClusterPartner1Changing(value);
                 ReportPropertyChanging("ClusterPartner1");
-                _ClusterPartner1 = StructuralObject.SetValidValue(value, true);
+                _ClusterPartner1 = StructuralObject.SetValidValue(value, true, "ClusterPartner1");
                 ReportPropertyChanged("ClusterPartner1");
                 OnClusterPartner1Changed();
             }
@@ -10669,7 +10647,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -10709,7 +10686,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -10728,7 +10705,7 @@ namespace SRFROWCA
                 {
                     OnCountryMapIdentityIdChanging(value);
                     ReportPropertyChanging("CountryMapIdentityId");
-                    _CountryMapIdentityId = StructuralObject.SetValidValue(value);
+                    _CountryMapIdentityId = StructuralObject.SetValidValue(value, "CountryMapIdentityId");
                     ReportPropertyChanged("CountryMapIdentityId");
                     OnCountryMapIdentityIdChanged();
                 }
@@ -10753,7 +10730,7 @@ namespace SRFROWCA
             {
                 OnCountryMapIdChanging(value);
                 ReportPropertyChanging("CountryMapId");
-                _CountryMapId = StructuralObject.SetValidValue(value);
+                _CountryMapId = StructuralObject.SetValidValue(value, "CountryMapId");
                 ReportPropertyChanged("CountryMapId");
                 OnCountryMapIdChanged();
             }
@@ -10777,7 +10754,7 @@ namespace SRFROWCA
             {
                 OnMapTitleChanging(value);
                 ReportPropertyChanging("MapTitle");
-                _MapTitle = StructuralObject.SetValidValue(value, false);
+                _MapTitle = StructuralObject.SetValidValue(value, false, "MapTitle");
                 ReportPropertyChanged("MapTitle");
                 OnMapTitleChanged();
             }
@@ -10801,7 +10778,7 @@ namespace SRFROWCA
             {
                 OnLocationIdChanging(value);
                 ReportPropertyChanging("LocationId");
-                _LocationId = StructuralObject.SetValidValue(value);
+                _LocationId = StructuralObject.SetValidValue(value, "LocationId");
                 ReportPropertyChanged("LocationId");
                 OnLocationIdChanged();
             }
@@ -10825,7 +10802,7 @@ namespace SRFROWCA
             {
                 OnMapTypeIdChanging(value);
                 ReportPropertyChanging("MapTypeId");
-                _MapTypeId = StructuralObject.SetValidValue(value);
+                _MapTypeId = StructuralObject.SetValidValue(value, "MapTypeId");
                 ReportPropertyChanged("MapTypeId");
                 OnMapTypeIdChanged();
             }
@@ -10849,7 +10826,7 @@ namespace SRFROWCA
             {
                 OnMapURLChanging(value);
                 ReportPropertyChanging("MapURL");
-                _MapURL = StructuralObject.SetValidValue(value, false);
+                _MapURL = StructuralObject.SetValidValue(value, false, "MapURL");
                 ReportPropertyChanged("MapURL");
                 OnMapURLChanged();
             }
@@ -10873,7 +10850,7 @@ namespace SRFROWCA
             {
                 OnSiteLanguageIdChanging(value);
                 ReportPropertyChanging("SiteLanguageId");
-                _SiteLanguageId = StructuralObject.SetValidValue(value);
+                _SiteLanguageId = StructuralObject.SetValidValue(value, "SiteLanguageId");
                 ReportPropertyChanged("SiteLanguageId");
                 OnSiteLanguageIdChanged();
             }
@@ -10897,7 +10874,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -10921,7 +10898,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -10945,7 +10922,7 @@ namespace SRFROWCA
             {
                 OnMapNumberChanging(value);
                 ReportPropertyChanging("MapNumber");
-                _MapNumber = StructuralObject.SetValidValue(value);
+                _MapNumber = StructuralObject.SetValidValue(value, "MapNumber");
                 ReportPropertyChanged("MapNumber");
                 OnMapNumberChanged();
             }
@@ -10969,7 +10946,7 @@ namespace SRFROWCA
             {
                 OnIsPublicChanging(value);
                 ReportPropertyChanging("IsPublic");
-                _IsPublic = StructuralObject.SetValidValue(value);
+                _IsPublic = StructuralObject.SetValidValue(value, "IsPublic");
                 ReportPropertyChanged("IsPublic");
                 OnIsPublicChanged();
             }
@@ -10993,7 +10970,7 @@ namespace SRFROWCA
             {
                 OnIsActiveChanging(value);
                 ReportPropertyChanging("IsActive");
-                _IsActive = StructuralObject.SetValidValue(value);
+                _IsActive = StructuralObject.SetValidValue(value, "IsActive");
                 ReportPropertyChanged("IsActive");
                 OnIsActiveChanged();
             }
@@ -11004,7 +10981,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -11044,7 +11020,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -11063,7 +11039,7 @@ namespace SRFROWCA
                 {
                     OnCountryReportIdentityIdChanging(value);
                     ReportPropertyChanging("CountryReportIdentityId");
-                    _CountryReportIdentityId = StructuralObject.SetValidValue(value);
+                    _CountryReportIdentityId = StructuralObject.SetValidValue(value, "CountryReportIdentityId");
                     ReportPropertyChanged("CountryReportIdentityId");
                     OnCountryReportIdentityIdChanged();
                 }
@@ -11088,7 +11064,7 @@ namespace SRFROWCA
             {
                 OnCountryReportIdChanging(value);
                 ReportPropertyChanging("CountryReportId");
-                _CountryReportId = StructuralObject.SetValidValue(value);
+                _CountryReportId = StructuralObject.SetValidValue(value, "CountryReportId");
                 ReportPropertyChanged("CountryReportId");
                 OnCountryReportIdChanged();
             }
@@ -11112,7 +11088,7 @@ namespace SRFROWCA
             {
                 OnReportTitleChanging(value);
                 ReportPropertyChanging("ReportTitle");
-                _ReportTitle = StructuralObject.SetValidValue(value, false);
+                _ReportTitle = StructuralObject.SetValidValue(value, false, "ReportTitle");
                 ReportPropertyChanged("ReportTitle");
                 OnReportTitleChanged();
             }
@@ -11136,7 +11112,7 @@ namespace SRFROWCA
             {
                 OnLocationIdChanging(value);
                 ReportPropertyChanging("LocationId");
-                _LocationId = StructuralObject.SetValidValue(value);
+                _LocationId = StructuralObject.SetValidValue(value, "LocationId");
                 ReportPropertyChanged("LocationId");
                 OnLocationIdChanged();
             }
@@ -11160,7 +11136,7 @@ namespace SRFROWCA
             {
                 OnReportTypeIdChanging(value);
                 ReportPropertyChanging("ReportTypeId");
-                _ReportTypeId = StructuralObject.SetValidValue(value);
+                _ReportTypeId = StructuralObject.SetValidValue(value, "ReportTypeId");
                 ReportPropertyChanged("ReportTypeId");
                 OnReportTypeIdChanged();
             }
@@ -11184,7 +11160,7 @@ namespace SRFROWCA
             {
                 OnReportURLChanging(value);
                 ReportPropertyChanging("ReportURL");
-                _ReportURL = StructuralObject.SetValidValue(value, false);
+                _ReportURL = StructuralObject.SetValidValue(value, false, "ReportURL");
                 ReportPropertyChanged("ReportURL");
                 OnReportURLChanged();
             }
@@ -11208,7 +11184,7 @@ namespace SRFROWCA
             {
                 OnSiteLanguageIdChanging(value);
                 ReportPropertyChanging("SiteLanguageId");
-                _SiteLanguageId = StructuralObject.SetValidValue(value);
+                _SiteLanguageId = StructuralObject.SetValidValue(value, "SiteLanguageId");
                 ReportPropertyChanged("SiteLanguageId");
                 OnSiteLanguageIdChanged();
             }
@@ -11232,7 +11208,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -11256,7 +11232,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -11280,7 +11256,7 @@ namespace SRFROWCA
             {
                 OnReportNumberChanging(value);
                 ReportPropertyChanging("ReportNumber");
-                _ReportNumber = StructuralObject.SetValidValue(value);
+                _ReportNumber = StructuralObject.SetValidValue(value, "ReportNumber");
                 ReportPropertyChanged("ReportNumber");
                 OnReportNumberChanged();
             }
@@ -11304,7 +11280,7 @@ namespace SRFROWCA
             {
                 OnIsPublicChanging(value);
                 ReportPropertyChanging("IsPublic");
-                _IsPublic = StructuralObject.SetValidValue(value);
+                _IsPublic = StructuralObject.SetValidValue(value, "IsPublic");
                 ReportPropertyChanged("IsPublic");
                 OnIsPublicChanged();
             }
@@ -11328,7 +11304,7 @@ namespace SRFROWCA
             {
                 OnSSRSURLChanging(value);
                 ReportPropertyChanging("SSRSURL");
-                _SSRSURL = StructuralObject.SetValidValue(value, true);
+                _SSRSURL = StructuralObject.SetValidValue(value, true, "SSRSURL");
                 ReportPropertyChanged("SSRSURL");
                 OnSSRSURLChanged();
             }
@@ -11352,7 +11328,7 @@ namespace SRFROWCA
             {
                 OnSSRSReportNameChanging(value);
                 ReportPropertyChanging("SSRSReportName");
-                _SSRSReportName = StructuralObject.SetValidValue(value, true);
+                _SSRSReportName = StructuralObject.SetValidValue(value, true, "SSRSReportName");
                 ReportPropertyChanged("SSRSReportName");
                 OnSSRSReportNameChanged();
             }
@@ -11376,7 +11352,7 @@ namespace SRFROWCA
             {
                 OnEmergencyLocationIDChanging(value);
                 ReportPropertyChanging("EmergencyLocationID");
-                _EmergencyLocationID = StructuralObject.SetValidValue(value);
+                _EmergencyLocationID = StructuralObject.SetValidValue(value, "EmergencyLocationID");
                 ReportPropertyChanged("EmergencyLocationID");
                 OnEmergencyLocationIDChanged();
             }
@@ -11400,7 +11376,7 @@ namespace SRFROWCA
             {
                 OnEmergencyClusterIDChanging(value);
                 ReportPropertyChanging("EmergencyClusterID");
-                _EmergencyClusterID = StructuralObject.SetValidValue(value);
+                _EmergencyClusterID = StructuralObject.SetValidValue(value, "EmergencyClusterID");
                 ReportPropertyChanged("EmergencyClusterID");
                 OnEmergencyClusterIDChanged();
             }
@@ -11411,7 +11387,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -11441,7 +11416,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -11460,7 +11435,7 @@ namespace SRFROWCA
                 {
                     OnCurrencyIdChanging(value);
                     ReportPropertyChanging("CurrencyId");
-                    _CurrencyId = StructuralObject.SetValidValue(value);
+                    _CurrencyId = StructuralObject.SetValidValue(value, "CurrencyId");
                     ReportPropertyChanged("CurrencyId");
                     OnCurrencyIdChanged();
                 }
@@ -11485,7 +11460,7 @@ namespace SRFROWCA
             {
                 OnCurrencyNameChanging(value);
                 ReportPropertyChanging("CurrencyName");
-                _CurrencyName = StructuralObject.SetValidValue(value, false);
+                _CurrencyName = StructuralObject.SetValidValue(value, false, "CurrencyName");
                 ReportPropertyChanged("CurrencyName");
                 OnCurrencyNameChanged();
             }
@@ -11509,7 +11484,7 @@ namespace SRFROWCA
             {
                 OnCurrencyTitleChanging(value);
                 ReportPropertyChanging("CurrencyTitle");
-                _CurrencyTitle = StructuralObject.SetValidValue(value, true);
+                _CurrencyTitle = StructuralObject.SetValidValue(value, true, "CurrencyTitle");
                 ReportPropertyChanged("CurrencyTitle");
                 OnCurrencyTitleChanged();
             }
@@ -11533,7 +11508,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -11557,7 +11532,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -11581,7 +11556,7 @@ namespace SRFROWCA
             {
                 OnUpdatedByIdChanging(value);
                 ReportPropertyChanging("UpdatedById");
-                _UpdatedById = StructuralObject.SetValidValue(value);
+                _UpdatedById = StructuralObject.SetValidValue(value, "UpdatedById");
                 ReportPropertyChanged("UpdatedById");
                 OnUpdatedByIdChanged();
             }
@@ -11605,7 +11580,7 @@ namespace SRFROWCA
             {
                 OnUpdatedDateChanging(value);
                 ReportPropertyChanging("UpdatedDate");
-                _UpdatedDate = StructuralObject.SetValidValue(value);
+                _UpdatedDate = StructuralObject.SetValidValue(value, "UpdatedDate");
                 ReportPropertyChanged("UpdatedDate");
                 OnUpdatedDateChanged();
             }
@@ -11616,7 +11591,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -11646,7 +11620,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -11665,7 +11639,7 @@ namespace SRFROWCA
                 {
                     OnEmergencyTypeIdChanging(value);
                     ReportPropertyChanging("EmergencyTypeId");
-                    _EmergencyTypeId = StructuralObject.SetValidValue(value);
+                    _EmergencyTypeId = StructuralObject.SetValidValue(value, "EmergencyTypeId");
                     ReportPropertyChanged("EmergencyTypeId");
                     OnEmergencyTypeIdChanged();
                 }
@@ -11690,7 +11664,7 @@ namespace SRFROWCA
             {
                 OnEmergencyTypeChanging(value);
                 ReportPropertyChanging("EmergencyType");
-                _EmergencyType = StructuralObject.SetValidValue(value, false);
+                _EmergencyType = StructuralObject.SetValidValue(value, false, "EmergencyType");
                 ReportPropertyChanged("EmergencyType");
                 OnEmergencyTypeChanged();
             }
@@ -11714,7 +11688,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -11738,7 +11712,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -11762,7 +11736,7 @@ namespace SRFROWCA
             {
                 OnUpdatedDateChanging(value);
                 ReportPropertyChanging("UpdatedDate");
-                _UpdatedDate = StructuralObject.SetValidValue(value);
+                _UpdatedDate = StructuralObject.SetValidValue(value, "UpdatedDate");
                 ReportPropertyChanged("UpdatedDate");
                 OnUpdatedDateChanged();
             }
@@ -11786,7 +11760,7 @@ namespace SRFROWCA
             {
                 OnUpdatedByIdChanging(value);
                 ReportPropertyChanging("UpdatedById");
-                _UpdatedById = StructuralObject.SetValidValue(value);
+                _UpdatedById = StructuralObject.SetValidValue(value, "UpdatedById");
                 ReportPropertyChanged("UpdatedById");
                 OnUpdatedByIdChanged();
             }
@@ -11797,7 +11771,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -11853,7 +11826,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -11872,7 +11845,7 @@ namespace SRFROWCA
                 {
                     OnDonorIdChanging(value);
                     ReportPropertyChanging("DonorId");
-                    _DonorId = StructuralObject.SetValidValue(value);
+                    _DonorId = StructuralObject.SetValidValue(value, "DonorId");
                     ReportPropertyChanged("DonorId");
                     OnDonorIdChanged();
                 }
@@ -11897,7 +11870,7 @@ namespace SRFROWCA
             {
                 OnDonorNameChanging(value);
                 ReportPropertyChanging("DonorName");
-                _DonorName = StructuralObject.SetValidValue(value, false);
+                _DonorName = StructuralObject.SetValidValue(value, false, "DonorName");
                 ReportPropertyChanged("DonorName");
                 OnDonorNameChanged();
             }
@@ -11921,7 +11894,7 @@ namespace SRFROWCA
             {
                 OnDonorCountryChanging(value);
                 ReportPropertyChanging("DonorCountry");
-                _DonorCountry = StructuralObject.SetValidValue(value, true);
+                _DonorCountry = StructuralObject.SetValidValue(value, true, "DonorCountry");
                 ReportPropertyChanged("DonorCountry");
                 OnDonorCountryChanged();
             }
@@ -11945,7 +11918,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -11969,7 +11942,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -11993,7 +11966,7 @@ namespace SRFROWCA
             {
                 OnUpdatedByIdChanging(value);
                 ReportPropertyChanging("UpdatedById");
-                _UpdatedById = StructuralObject.SetValidValue(value);
+                _UpdatedById = StructuralObject.SetValidValue(value, "UpdatedById");
                 ReportPropertyChanged("UpdatedById");
                 OnUpdatedByIdChanged();
             }
@@ -12017,7 +11990,7 @@ namespace SRFROWCA
             {
                 OnUpdatedDateChanging(value);
                 ReportPropertyChanging("UpdatedDate");
-                _UpdatedDate = StructuralObject.SetValidValue(value);
+                _UpdatedDate = StructuralObject.SetValidValue(value, "UpdatedDate");
                 ReportPropertyChanged("UpdatedDate");
                 OnUpdatedDateChanged();
             }
@@ -12028,7 +12001,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -12068,7 +12040,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -12087,7 +12059,7 @@ namespace SRFROWCA
                 {
                     OnEmergencyUniqueIdChanging(value);
                     ReportPropertyChanging("EmergencyUniqueId");
-                    _EmergencyUniqueId = StructuralObject.SetValidValue(value);
+                    _EmergencyUniqueId = StructuralObject.SetValidValue(value, "EmergencyUniqueId");
                     ReportPropertyChanged("EmergencyUniqueId");
                     OnEmergencyUniqueIdChanged();
                 }
@@ -12112,7 +12084,7 @@ namespace SRFROWCA
             {
                 OnEmergencyIdChanging(value);
                 ReportPropertyChanging("EmergencyId");
-                _EmergencyId = StructuralObject.SetValidValue(value);
+                _EmergencyId = StructuralObject.SetValidValue(value, "EmergencyId");
                 ReportPropertyChanged("EmergencyId");
                 OnEmergencyIdChanged();
             }
@@ -12136,7 +12108,7 @@ namespace SRFROWCA
             {
                 OnSiteLanguageIdChanging(value);
                 ReportPropertyChanging("SiteLanguageId");
-                _SiteLanguageId = StructuralObject.SetValidValue(value);
+                _SiteLanguageId = StructuralObject.SetValidValue(value, "SiteLanguageId");
                 ReportPropertyChanged("SiteLanguageId");
                 OnSiteLanguageIdChanged();
             }
@@ -12160,7 +12132,7 @@ namespace SRFROWCA
             {
                 OnEmergencyNameChanging(value);
                 ReportPropertyChanging("EmergencyName");
-                _EmergencyName = StructuralObject.SetValidValue(value, false);
+                _EmergencyName = StructuralObject.SetValidValue(value, false, "EmergencyName");
                 ReportPropertyChanged("EmergencyName");
                 OnEmergencyNameChanged();
             }
@@ -12184,7 +12156,7 @@ namespace SRFROWCA
             {
                 OnEmergencyTypeIdChanging(value);
                 ReportPropertyChanging("EmergencyTypeId");
-                _EmergencyTypeId = StructuralObject.SetValidValue(value);
+                _EmergencyTypeId = StructuralObject.SetValidValue(value, "EmergencyTypeId");
                 ReportPropertyChanged("EmergencyTypeId");
                 OnEmergencyTypeIdChanged();
             }
@@ -12208,7 +12180,7 @@ namespace SRFROWCA
             {
                 OnDescriptionChanging(value);
                 ReportPropertyChanging("Description");
-                _Description = StructuralObject.SetValidValue(value, true);
+                _Description = StructuralObject.SetValidValue(value, true, "Description");
                 ReportPropertyChanged("Description");
                 OnDescriptionChanged();
             }
@@ -12232,7 +12204,7 @@ namespace SRFROWCA
             {
                 OnIsActiveChanging(value);
                 ReportPropertyChanging("IsActive");
-                _IsActive = StructuralObject.SetValidValue(value);
+                _IsActive = StructuralObject.SetValidValue(value, "IsActive");
                 ReportPropertyChanged("IsActive");
                 OnIsActiveChanged();
             }
@@ -12256,7 +12228,7 @@ namespace SRFROWCA
             {
                 OnEmergencyDateChanging(value);
                 ReportPropertyChanging("EmergencyDate");
-                _EmergencyDate = StructuralObject.SetValidValue(value);
+                _EmergencyDate = StructuralObject.SetValidValue(value, "EmergencyDate");
                 ReportPropertyChanged("EmergencyDate");
                 OnEmergencyDateChanged();
             }
@@ -12280,7 +12252,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -12304,7 +12276,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -12328,7 +12300,7 @@ namespace SRFROWCA
             {
                 OnUpdatedDateChanging(value);
                 ReportPropertyChanging("UpdatedDate");
-                _UpdatedDate = StructuralObject.SetValidValue(value);
+                _UpdatedDate = StructuralObject.SetValidValue(value, "UpdatedDate");
                 ReportPropertyChanged("UpdatedDate");
                 OnUpdatedDateChanged();
             }
@@ -12352,7 +12324,7 @@ namespace SRFROWCA
             {
                 OnUpdatedByIdChanging(value);
                 ReportPropertyChanging("UpdatedById");
-                _UpdatedById = StructuralObject.SetValidValue(value);
+                _UpdatedById = StructuralObject.SetValidValue(value, "UpdatedById");
                 ReportPropertyChanged("UpdatedById");
                 OnUpdatedByIdChanged();
             }
@@ -12376,7 +12348,7 @@ namespace SRFROWCA
             {
                 OnIsOPSEmergencyChanging(value);
                 ReportPropertyChanging("IsOPSEmergency");
-                _IsOPSEmergency = StructuralObject.SetValidValue(value);
+                _IsOPSEmergency = StructuralObject.SetValidValue(value, "IsOPSEmergency");
                 ReportPropertyChanged("IsOPSEmergency");
                 OnIsOPSEmergencyChanged();
             }
@@ -12387,7 +12359,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -12461,7 +12432,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -12480,7 +12451,7 @@ namespace SRFROWCA
                 {
                     OnEmergencyClusterIdChanging(value);
                     ReportPropertyChanging("EmergencyClusterId");
-                    _EmergencyClusterId = StructuralObject.SetValidValue(value);
+                    _EmergencyClusterId = StructuralObject.SetValidValue(value, "EmergencyClusterId");
                     ReportPropertyChanged("EmergencyClusterId");
                     OnEmergencyClusterIdChanged();
                 }
@@ -12505,7 +12476,7 @@ namespace SRFROWCA
             {
                 OnEmergencyIdChanging(value);
                 ReportPropertyChanging("EmergencyId");
-                _EmergencyId = StructuralObject.SetValidValue(value);
+                _EmergencyId = StructuralObject.SetValidValue(value, "EmergencyId");
                 ReportPropertyChanged("EmergencyId");
                 OnEmergencyIdChanged();
             }
@@ -12529,7 +12500,7 @@ namespace SRFROWCA
             {
                 OnClusterIdChanging(value);
                 ReportPropertyChanging("ClusterId");
-                _ClusterId = StructuralObject.SetValidValue(value);
+                _ClusterId = StructuralObject.SetValidValue(value, "ClusterId");
                 ReportPropertyChanged("ClusterId");
                 OnClusterIdChanged();
             }
@@ -12553,7 +12524,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -12577,7 +12548,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -12601,7 +12572,7 @@ namespace SRFROWCA
             {
                 OnUpdatedDateChanging(value);
                 ReportPropertyChanging("UpdatedDate");
-                _UpdatedDate = StructuralObject.SetValidValue(value);
+                _UpdatedDate = StructuralObject.SetValidValue(value, "UpdatedDate");
                 ReportPropertyChanged("UpdatedDate");
                 OnUpdatedDateChanged();
             }
@@ -12625,7 +12596,7 @@ namespace SRFROWCA
             {
                 OnUpdatedByIdChanging(value);
                 ReportPropertyChanging("UpdatedById");
-                _UpdatedById = StructuralObject.SetValidValue(value);
+                _UpdatedById = StructuralObject.SetValidValue(value, "UpdatedById");
                 ReportPropertyChanged("UpdatedById");
                 OnUpdatedByIdChanged();
             }
@@ -12636,7 +12607,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -12764,7 +12734,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -12783,7 +12753,7 @@ namespace SRFROWCA
                 {
                     OnEmergencyLocationIdChanging(value);
                     ReportPropertyChanging("EmergencyLocationId");
-                    _EmergencyLocationId = StructuralObject.SetValidValue(value);
+                    _EmergencyLocationId = StructuralObject.SetValidValue(value, "EmergencyLocationId");
                     ReportPropertyChanged("EmergencyLocationId");
                     OnEmergencyLocationIdChanged();
                 }
@@ -12808,7 +12778,7 @@ namespace SRFROWCA
             {
                 OnEmergencyIdChanging(value);
                 ReportPropertyChanging("EmergencyId");
-                _EmergencyId = StructuralObject.SetValidValue(value);
+                _EmergencyId = StructuralObject.SetValidValue(value, "EmergencyId");
                 ReportPropertyChanged("EmergencyId");
                 OnEmergencyIdChanged();
             }
@@ -12832,7 +12802,7 @@ namespace SRFROWCA
             {
                 OnLocationIdChanging(value);
                 ReportPropertyChanging("LocationId");
-                _LocationId = StructuralObject.SetValidValue(value);
+                _LocationId = StructuralObject.SetValidValue(value, "LocationId");
                 ReportPropertyChanged("LocationId");
                 OnLocationIdChanged();
             }
@@ -12856,7 +12826,7 @@ namespace SRFROWCA
             {
                 OnIsActiveChanging(value);
                 ReportPropertyChanging("IsActive");
-                _IsActive = StructuralObject.SetValidValue(value);
+                _IsActive = StructuralObject.SetValidValue(value, "IsActive");
                 ReportPropertyChanged("IsActive");
                 OnIsActiveChanged();
             }
@@ -12880,7 +12850,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -12904,7 +12874,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -12928,7 +12898,7 @@ namespace SRFROWCA
             {
                 OnUpdatedDateChanging(value);
                 ReportPropertyChanging("UpdatedDate");
-                _UpdatedDate = StructuralObject.SetValidValue(value);
+                _UpdatedDate = StructuralObject.SetValidValue(value, "UpdatedDate");
                 ReportPropertyChanged("UpdatedDate");
                 OnUpdatedDateChanged();
             }
@@ -12952,7 +12922,7 @@ namespace SRFROWCA
             {
                 OnUpdatedByIdChanging(value);
                 ReportPropertyChanging("UpdatedById");
-                _UpdatedById = StructuralObject.SetValidValue(value);
+                _UpdatedById = StructuralObject.SetValidValue(value, "UpdatedById");
                 ReportPropertyChanged("UpdatedById");
                 OnUpdatedByIdChanged();
             }
@@ -12976,7 +12946,7 @@ namespace SRFROWCA
             {
                 OnIsOPSEmergencyChanging(value);
                 ReportPropertyChanging("IsOPSEmergency");
-                _IsOPSEmergency = StructuralObject.SetValidValue(value);
+                _IsOPSEmergency = StructuralObject.SetValidValue(value, "IsOPSEmergency");
                 ReportPropertyChanged("IsOPSEmergency");
                 OnIsOPSEmergencyChanged();
             }
@@ -12987,7 +12957,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -13209,7 +13178,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -13228,7 +13197,7 @@ namespace SRFROWCA
                 {
                     OnErrorLogIdChanging(value);
                     ReportPropertyChanging("ErrorLogId");
-                    _ErrorLogId = StructuralObject.SetValidValue(value);
+                    _ErrorLogId = StructuralObject.SetValidValue(value, "ErrorLogId");
                     ReportPropertyChanged("ErrorLogId");
                     OnErrorLogIdChanged();
                 }
@@ -13253,7 +13222,7 @@ namespace SRFROWCA
             {
                 OnRecordPKIdChanging(value);
                 ReportPropertyChanging("RecordPKId");
-                _RecordPKId = StructuralObject.SetValidValue(value);
+                _RecordPKId = StructuralObject.SetValidValue(value, "RecordPKId");
                 ReportPropertyChanged("RecordPKId");
                 OnRecordPKIdChanged();
             }
@@ -13277,7 +13246,7 @@ namespace SRFROWCA
             {
                 OnErrorNumberChanging(value);
                 ReportPropertyChanging("ErrorNumber");
-                _ErrorNumber = StructuralObject.SetValidValue(value);
+                _ErrorNumber = StructuralObject.SetValidValue(value, "ErrorNumber");
                 ReportPropertyChanged("ErrorNumber");
                 OnErrorNumberChanged();
             }
@@ -13301,7 +13270,7 @@ namespace SRFROWCA
             {
                 OnErrorSeverityChanging(value);
                 ReportPropertyChanging("ErrorSeverity");
-                _ErrorSeverity = StructuralObject.SetValidValue(value);
+                _ErrorSeverity = StructuralObject.SetValidValue(value, "ErrorSeverity");
                 ReportPropertyChanged("ErrorSeverity");
                 OnErrorSeverityChanged();
             }
@@ -13325,7 +13294,7 @@ namespace SRFROWCA
             {
                 OnErrorStateChanging(value);
                 ReportPropertyChanging("ErrorState");
-                _ErrorState = StructuralObject.SetValidValue(value);
+                _ErrorState = StructuralObject.SetValidValue(value, "ErrorState");
                 ReportPropertyChanged("ErrorState");
                 OnErrorStateChanged();
             }
@@ -13349,7 +13318,7 @@ namespace SRFROWCA
             {
                 OnErrorProcedureChanging(value);
                 ReportPropertyChanging("ErrorProcedure");
-                _ErrorProcedure = StructuralObject.SetValidValue(value, true);
+                _ErrorProcedure = StructuralObject.SetValidValue(value, true, "ErrorProcedure");
                 ReportPropertyChanged("ErrorProcedure");
                 OnErrorProcedureChanged();
             }
@@ -13373,7 +13342,7 @@ namespace SRFROWCA
             {
                 OnErrorLineChanging(value);
                 ReportPropertyChanging("ErrorLine");
-                _ErrorLine = StructuralObject.SetValidValue(value);
+                _ErrorLine = StructuralObject.SetValidValue(value, "ErrorLine");
                 ReportPropertyChanged("ErrorLine");
                 OnErrorLineChanged();
             }
@@ -13397,7 +13366,7 @@ namespace SRFROWCA
             {
                 OnErrorMessageChanging(value);
                 ReportPropertyChanging("ErrorMessage");
-                _ErrorMessage = StructuralObject.SetValidValue(value, true);
+                _ErrorMessage = StructuralObject.SetValidValue(value, true, "ErrorMessage");
                 ReportPropertyChanged("ErrorMessage");
                 OnErrorMessageChanged();
             }
@@ -13421,7 +13390,7 @@ namespace SRFROWCA
             {
                 OnUserIdChanging(value);
                 ReportPropertyChanging("UserId");
-                _UserId = StructuralObject.SetValidValue(value);
+                _UserId = StructuralObject.SetValidValue(value, "UserId");
                 ReportPropertyChanged("UserId");
                 OnUserIdChanged();
             }
@@ -13445,7 +13414,7 @@ namespace SRFROWCA
             {
                 OnErrorTimeChanging(value);
                 ReportPropertyChanging("ErrorTime");
-                _ErrorTime = StructuralObject.SetValidValue(value);
+                _ErrorTime = StructuralObject.SetValidValue(value, "ErrorTime");
                 ReportPropertyChanged("ErrorTime");
                 OnErrorTimeChanged();
             }
@@ -13456,7 +13425,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -13484,7 +13452,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -13503,7 +13471,7 @@ namespace SRFROWCA
                 {
                     OnAppErrorLogIdChanging(value);
                     ReportPropertyChanging("AppErrorLogId");
-                    _AppErrorLogId = StructuralObject.SetValidValue(value);
+                    _AppErrorLogId = StructuralObject.SetValidValue(value, "AppErrorLogId");
                     ReportPropertyChanged("AppErrorLogId");
                     OnAppErrorLogIdChanged();
                 }
@@ -13528,7 +13496,7 @@ namespace SRFROWCA
             {
                 OnErrorTimeChanging(value);
                 ReportPropertyChanging("ErrorTime");
-                _ErrorTime = StructuralObject.SetValidValue(value);
+                _ErrorTime = StructuralObject.SetValidValue(value, "ErrorTime");
                 ReportPropertyChanged("ErrorTime");
                 OnErrorTimeChanged();
             }
@@ -13552,7 +13520,7 @@ namespace SRFROWCA
             {
                 OnUserNameChanging(value);
                 ReportPropertyChanging("UserName");
-                _UserName = StructuralObject.SetValidValue(value, true);
+                _UserName = StructuralObject.SetValidValue(value, true, "UserName");
                 ReportPropertyChanged("UserName");
                 OnUserNameChanged();
             }
@@ -13576,7 +13544,7 @@ namespace SRFROWCA
             {
                 OnInnerExcTypeChanging(value);
                 ReportPropertyChanging("InnerExcType");
-                _InnerExcType = StructuralObject.SetValidValue(value, true);
+                _InnerExcType = StructuralObject.SetValidValue(value, true, "InnerExcType");
                 ReportPropertyChanged("InnerExcType");
                 OnInnerExcTypeChanged();
             }
@@ -13600,7 +13568,7 @@ namespace SRFROWCA
             {
                 OnInnerExcSourceChanging(value);
                 ReportPropertyChanging("InnerExcSource");
-                _InnerExcSource = StructuralObject.SetValidValue(value, true);
+                _InnerExcSource = StructuralObject.SetValidValue(value, true, "InnerExcSource");
                 ReportPropertyChanged("InnerExcSource");
                 OnInnerExcSourceChanged();
             }
@@ -13624,7 +13592,7 @@ namespace SRFROWCA
             {
                 OnInnerExcChanging(value);
                 ReportPropertyChanging("InnerExc");
-                _InnerExc = StructuralObject.SetValidValue(value, true);
+                _InnerExc = StructuralObject.SetValidValue(value, true, "InnerExc");
                 ReportPropertyChanged("InnerExc");
                 OnInnerExcChanged();
             }
@@ -13648,7 +13616,7 @@ namespace SRFROWCA
             {
                 OnInnerExcTraceChanging(value);
                 ReportPropertyChanging("InnerExcTrace");
-                _InnerExcTrace = StructuralObject.SetValidValue(value, true);
+                _InnerExcTrace = StructuralObject.SetValidValue(value, true, "InnerExcTrace");
                 ReportPropertyChanged("InnerExcTrace");
                 OnInnerExcTraceChanged();
             }
@@ -13672,7 +13640,7 @@ namespace SRFROWCA
             {
                 OnExcTypeChanging(value);
                 ReportPropertyChanging("ExcType");
-                _ExcType = StructuralObject.SetValidValue(value, true);
+                _ExcType = StructuralObject.SetValidValue(value, true, "ExcType");
                 ReportPropertyChanged("ExcType");
                 OnExcTypeChanged();
             }
@@ -13696,7 +13664,7 @@ namespace SRFROWCA
             {
                 OnExceptionMessageChanging(value);
                 ReportPropertyChanging("ExceptionMessage");
-                _ExceptionMessage = StructuralObject.SetValidValue(value, true);
+                _ExceptionMessage = StructuralObject.SetValidValue(value, true, "ExceptionMessage");
                 ReportPropertyChanged("ExceptionMessage");
                 OnExceptionMessageChanged();
             }
@@ -13720,7 +13688,7 @@ namespace SRFROWCA
             {
                 OnExceptionTraceChanging(value);
                 ReportPropertyChanging("ExceptionTrace");
-                _ExceptionTrace = StructuralObject.SetValidValue(value, true);
+                _ExceptionTrace = StructuralObject.SetValidValue(value, true, "ExceptionTrace");
                 ReportPropertyChanged("ExceptionTrace");
                 OnExceptionTraceChanged();
             }
@@ -13744,7 +13712,7 @@ namespace SRFROWCA
             {
                 OnSourceChanging(value);
                 ReportPropertyChanging("Source");
-                _Source = StructuralObject.SetValidValue(value, true);
+                _Source = StructuralObject.SetValidValue(value, true, "Source");
                 ReportPropertyChanged("Source");
                 OnSourceChanged();
             }
@@ -13768,7 +13736,7 @@ namespace SRFROWCA
             {
                 OnHttpCodeChanging(value);
                 ReportPropertyChanging("HttpCode");
-                _HttpCode = StructuralObject.SetValidValue(value);
+                _HttpCode = StructuralObject.SetValidValue(value, "HttpCode");
                 ReportPropertyChanged("HttpCode");
                 OnHttpCodeChanged();
             }
@@ -13792,7 +13760,7 @@ namespace SRFROWCA
             {
                 OnUserAgentChanging(value);
                 ReportPropertyChanging("UserAgent");
-                _UserAgent = StructuralObject.SetValidValue(value, true);
+                _UserAgent = StructuralObject.SetValidValue(value, true, "UserAgent");
                 ReportPropertyChanged("UserAgent");
                 OnUserAgentChanged();
             }
@@ -13816,7 +13784,7 @@ namespace SRFROWCA
             {
                 OnURLChanging(value);
                 ReportPropertyChanging("URL");
-                _URL = StructuralObject.SetValidValue(value, true);
+                _URL = StructuralObject.SetValidValue(value, true, "URL");
                 ReportPropertyChanged("URL");
                 OnURLChanged();
             }
@@ -13827,7 +13795,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -13853,7 +13820,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -13872,7 +13839,7 @@ namespace SRFROWCA
                 {
                     OnFTSContributionIDChanging(value);
                     ReportPropertyChanging("FTSContributionID");
-                    _FTSContributionID = StructuralObject.SetValidValue(value);
+                    _FTSContributionID = StructuralObject.SetValidValue(value, "FTSContributionID");
                     ReportPropertyChanged("FTSContributionID");
                     OnFTSContributionIDChanged();
                 }
@@ -13897,7 +13864,7 @@ namespace SRFROWCA
             {
                 OnFTSFundingIDChanging(value);
                 ReportPropertyChanging("FTSFundingID");
-                _FTSFundingID = StructuralObject.SetValidValue(value);
+                _FTSFundingID = StructuralObject.SetValidValue(value, "FTSFundingID");
                 ReportPropertyChanged("FTSFundingID");
                 OnFTSFundingIDChanged();
             }
@@ -13921,7 +13888,7 @@ namespace SRFROWCA
             {
                 OnOrganizationIDChanging(value);
                 ReportPropertyChanging("OrganizationID");
-                _OrganizationID = StructuralObject.SetValidValue(value);
+                _OrganizationID = StructuralObject.SetValidValue(value, "OrganizationID");
                 ReportPropertyChanged("OrganizationID");
                 OnOrganizationIDChanged();
             }
@@ -13945,7 +13912,7 @@ namespace SRFROWCA
             {
                 OnContributedCommittedAmountChanging(value);
                 ReportPropertyChanging("ContributedCommittedAmount");
-                _ContributedCommittedAmount = StructuralObject.SetValidValue(value);
+                _ContributedCommittedAmount = StructuralObject.SetValidValue(value, "ContributedCommittedAmount");
                 ReportPropertyChanged("ContributedCommittedAmount");
                 OnContributedCommittedAmountChanged();
             }
@@ -13969,7 +13936,7 @@ namespace SRFROWCA
             {
                 OnContributionAmountPledgedChanging(value);
                 ReportPropertyChanging("ContributionAmountPledged");
-                _ContributionAmountPledged = StructuralObject.SetValidValue(value);
+                _ContributionAmountPledged = StructuralObject.SetValidValue(value, "ContributionAmountPledged");
                 ReportPropertyChanged("ContributionAmountPledged");
                 OnContributionAmountPledgedChanged();
             }
@@ -13993,7 +13960,7 @@ namespace SRFROWCA
             {
                 OnDonorIDChanging(value);
                 ReportPropertyChanging("DonorID");
-                _DonorID = StructuralObject.SetValidValue(value);
+                _DonorID = StructuralObject.SetValidValue(value, "DonorID");
                 ReportPropertyChanged("DonorID");
                 OnDonorIDChanged();
             }
@@ -14017,7 +13984,7 @@ namespace SRFROWCA
             {
                 OnCurrencyIDChanging(value);
                 ReportPropertyChanging("CurrencyID");
-                _CurrencyID = StructuralObject.SetValidValue(value);
+                _CurrencyID = StructuralObject.SetValidValue(value, "CurrencyID");
                 ReportPropertyChanged("CurrencyID");
                 OnCurrencyIDChanged();
             }
@@ -14028,7 +13995,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -14096,7 +14062,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -14115,7 +14081,7 @@ namespace SRFROWCA
                 {
                     OnFTSFundingIdChanging(value);
                     ReportPropertyChanging("FTSFundingId");
-                    _FTSFundingId = StructuralObject.SetValidValue(value);
+                    _FTSFundingId = StructuralObject.SetValidValue(value, "FTSFundingId");
                     ReportPropertyChanged("FTSFundingId");
                     OnFTSFundingIdChanged();
                 }
@@ -14140,7 +14106,7 @@ namespace SRFROWCA
             {
                 OnProjectIdChanging(value);
                 ReportPropertyChanging("ProjectId");
-                _ProjectId = StructuralObject.SetValidValue(value);
+                _ProjectId = StructuralObject.SetValidValue(value, "ProjectId");
                 ReportPropertyChanged("ProjectId");
                 OnProjectIdChanged();
             }
@@ -14164,7 +14130,7 @@ namespace SRFROWCA
             {
                 OnCurrencyIdChanging(value);
                 ReportPropertyChanging("CurrencyId");
-                _CurrencyId = StructuralObject.SetValidValue(value);
+                _CurrencyId = StructuralObject.SetValidValue(value, "CurrencyId");
                 ReportPropertyChanged("CurrencyId");
                 OnCurrencyIdChanged();
             }
@@ -14188,7 +14154,7 @@ namespace SRFROWCA
             {
                 OnLocationIdChanging(value);
                 ReportPropertyChanging("LocationId");
-                _LocationId = StructuralObject.SetValidValue(value);
+                _LocationId = StructuralObject.SetValidValue(value, "LocationId");
                 ReportPropertyChanged("LocationId");
                 OnLocationIdChanged();
             }
@@ -14212,7 +14178,7 @@ namespace SRFROWCA
             {
                 OnProjectCodeChanging(value);
                 ReportPropertyChanging("ProjectCode");
-                _ProjectCode = StructuralObject.SetValidValue(value, true);
+                _ProjectCode = StructuralObject.SetValidValue(value, true, "ProjectCode");
                 ReportPropertyChanged("ProjectCode");
                 OnProjectCodeChanged();
             }
@@ -14236,7 +14202,7 @@ namespace SRFROWCA
             {
                 OnFTSDonorNameChanging(value);
                 ReportPropertyChanging("FTSDonorName");
-                _FTSDonorName = StructuralObject.SetValidValue(value, true);
+                _FTSDonorName = StructuralObject.SetValidValue(value, true, "FTSDonorName");
                 ReportPropertyChanged("FTSDonorName");
                 OnFTSDonorNameChanged();
             }
@@ -14260,7 +14226,7 @@ namespace SRFROWCA
             {
                 OnFTSReceipentOrganizationChanging(value);
                 ReportPropertyChanging("FTSReceipentOrganization");
-                _FTSReceipentOrganization = StructuralObject.SetValidValue(value, true);
+                _FTSReceipentOrganization = StructuralObject.SetValidValue(value, true, "FTSReceipentOrganization");
                 ReportPropertyChanged("FTSReceipentOrganization");
                 OnFTSReceipentOrganizationChanged();
             }
@@ -14284,7 +14250,7 @@ namespace SRFROWCA
             {
                 OnFTSEmergencyTitleChanging(value);
                 ReportPropertyChanging("FTSEmergencyTitle");
-                _FTSEmergencyTitle = StructuralObject.SetValidValue(value, true);
+                _FTSEmergencyTitle = StructuralObject.SetValidValue(value, true, "FTSEmergencyTitle");
                 ReportPropertyChanged("FTSEmergencyTitle");
                 OnFTSEmergencyTitleChanged();
             }
@@ -14308,7 +14274,7 @@ namespace SRFROWCA
             {
                 OnFTSAppealTitleChanging(value);
                 ReportPropertyChanging("FTSAppealTitle");
-                _FTSAppealTitle = StructuralObject.SetValidValue(value, true);
+                _FTSAppealTitle = StructuralObject.SetValidValue(value, true, "FTSAppealTitle");
                 ReportPropertyChanged("FTSAppealTitle");
                 OnFTSAppealTitleChanged();
             }
@@ -14332,7 +14298,7 @@ namespace SRFROWCA
             {
                 OnEmergencyYearChanging(value);
                 ReportPropertyChanging("EmergencyYear");
-                _EmergencyYear = StructuralObject.SetValidValue(value, true);
+                _EmergencyYear = StructuralObject.SetValidValue(value, true, "EmergencyYear");
                 ReportPropertyChanged("EmergencyYear");
                 OnEmergencyYearChanged();
             }
@@ -14356,7 +14322,7 @@ namespace SRFROWCA
             {
                 OnUSDCommitedContributedChanging(value);
                 ReportPropertyChanging("USDCommitedContributed");
-                _USDCommitedContributed = StructuralObject.SetValidValue(value);
+                _USDCommitedContributed = StructuralObject.SetValidValue(value, "USDCommitedContributed");
                 ReportPropertyChanged("USDCommitedContributed");
                 OnUSDCommitedContributedChanged();
             }
@@ -14380,7 +14346,7 @@ namespace SRFROWCA
             {
                 OnUSDPledgedChanging(value);
                 ReportPropertyChanging("USDPledged");
-                _USDPledged = StructuralObject.SetValidValue(value);
+                _USDPledged = StructuralObject.SetValidValue(value, "USDPledged");
                 ReportPropertyChanged("USDPledged");
                 OnUSDPledgedChanged();
             }
@@ -14404,7 +14370,7 @@ namespace SRFROWCA
             {
                 OnDescriptionChanging(value);
                 ReportPropertyChanging("Description");
-                _Description = StructuralObject.SetValidValue(value, true);
+                _Description = StructuralObject.SetValidValue(value, true, "Description");
                 ReportPropertyChanged("Description");
                 OnDescriptionChanged();
             }
@@ -14428,7 +14394,7 @@ namespace SRFROWCA
             {
                 OnOriginalCurrencyAmountChanging(value);
                 ReportPropertyChanging("OriginalCurrencyAmount");
-                _OriginalCurrencyAmount = StructuralObject.SetValidValue(value);
+                _OriginalCurrencyAmount = StructuralObject.SetValidValue(value, "OriginalCurrencyAmount");
                 ReportPropertyChanged("OriginalCurrencyAmount");
                 OnOriginalCurrencyAmountChanged();
             }
@@ -14452,7 +14418,7 @@ namespace SRFROWCA
             {
                 OnDecisionDateChanging(value);
                 ReportPropertyChanging("DecisionDate");
-                _DecisionDate = StructuralObject.SetValidValue(value, true);
+                _DecisionDate = StructuralObject.SetValidValue(value, true, "DecisionDate");
                 ReportPropertyChanged("DecisionDate");
                 OnDecisionDateChanged();
             }
@@ -14476,7 +14442,7 @@ namespace SRFROWCA
             {
                 OnIASCStandardSectorChanging(value);
                 ReportPropertyChanging("IASCStandardSector");
-                _IASCStandardSector = StructuralObject.SetValidValue(value, true);
+                _IASCStandardSector = StructuralObject.SetValidValue(value, true, "IASCStandardSector");
                 ReportPropertyChanged("IASCStandardSector");
                 OnIASCStandardSectorChanged();
             }
@@ -14500,7 +14466,7 @@ namespace SRFROWCA
             {
                 OnDeistinationCountryChanging(value);
                 ReportPropertyChanging("DeistinationCountry");
-                _DeistinationCountry = StructuralObject.SetValidValue(value, true);
+                _DeistinationCountry = StructuralObject.SetValidValue(value, true, "DeistinationCountry");
                 ReportPropertyChanged("DeistinationCountry");
                 OnDeistinationCountryChanged();
             }
@@ -14524,7 +14490,7 @@ namespace SRFROWCA
             {
                 OnContributionStatusChanging(value);
                 ReportPropertyChanging("ContributionStatus");
-                _ContributionStatus = StructuralObject.SetValidValue(value, true);
+                _ContributionStatus = StructuralObject.SetValidValue(value, true, "ContributionStatus");
                 ReportPropertyChanged("ContributionStatus");
                 OnContributionStatusChanged();
             }
@@ -14548,7 +14514,7 @@ namespace SRFROWCA
             {
                 OnReportedByChanging(value);
                 ReportPropertyChanging("ReportedBy");
-                _ReportedBy = StructuralObject.SetValidValue(value, true);
+                _ReportedBy = StructuralObject.SetValidValue(value, true, "ReportedBy");
                 ReportPropertyChanged("ReportedBy");
                 OnReportedByChanged();
             }
@@ -14572,7 +14538,7 @@ namespace SRFROWCA
             {
                 OnProjectClusterChanging(value);
                 ReportPropertyChanging("ProjectCluster");
-                _ProjectCluster = StructuralObject.SetValidValue(value, true);
+                _ProjectCluster = StructuralObject.SetValidValue(value, true, "ProjectCluster");
                 ReportPropertyChanged("ProjectCluster");
                 OnProjectClusterChanged();
             }
@@ -14596,7 +14562,7 @@ namespace SRFROWCA
             {
                 OnProjectSectorChanging(value);
                 ReportPropertyChanging("ProjectSector");
-                _ProjectSector = StructuralObject.SetValidValue(value, true);
+                _ProjectSector = StructuralObject.SetValidValue(value, true, "ProjectSector");
                 ReportPropertyChanged("ProjectSector");
                 OnProjectSectorChanged();
             }
@@ -14620,7 +14586,7 @@ namespace SRFROWCA
             {
                 OnRecipientTypeChanging(value);
                 ReportPropertyChanging("RecipientType");
-                _RecipientType = StructuralObject.SetValidValue(value, true);
+                _RecipientType = StructuralObject.SetValidValue(value, true, "RecipientType");
                 ReportPropertyChanged("RecipientType");
                 OnRecipientTypeChanged();
             }
@@ -14644,7 +14610,7 @@ namespace SRFROWCA
             {
                 OnRecipientAbbrevChanging(value);
                 ReportPropertyChanging("RecipientAbbrev");
-                _RecipientAbbrev = StructuralObject.SetValidValue(value, true);
+                _RecipientAbbrev = StructuralObject.SetValidValue(value, true, "RecipientAbbrev");
                 ReportPropertyChanged("RecipientAbbrev");
                 OnRecipientAbbrevChanged();
             }
@@ -14668,7 +14634,7 @@ namespace SRFROWCA
             {
                 OnProjectCountryChanging(value);
                 ReportPropertyChanging("ProjectCountry");
-                _ProjectCountry = StructuralObject.SetValidValue(value, true);
+                _ProjectCountry = StructuralObject.SetValidValue(value, true, "ProjectCountry");
                 ReportPropertyChanged("ProjectCountry");
                 OnProjectCountryChanged();
             }
@@ -14692,7 +14658,7 @@ namespace SRFROWCA
             {
                 OnAppealCountryChanging(value);
                 ReportPropertyChanging("AppealCountry");
-                _AppealCountry = StructuralObject.SetValidValue(value, true);
+                _AppealCountry = StructuralObject.SetValidValue(value, true, "AppealCountry");
                 ReportPropertyChanged("AppealCountry");
                 OnAppealCountryChanged();
             }
@@ -14716,7 +14682,7 @@ namespace SRFROWCA
             {
                 OnAmountContributedChanging(value);
                 ReportPropertyChanging("AmountContributed");
-                _AmountContributed = StructuralObject.SetValidValue(value);
+                _AmountContributed = StructuralObject.SetValidValue(value, "AmountContributed");
                 ReportPropertyChanged("AmountContributed");
                 OnAmountContributedChanged();
             }
@@ -14740,7 +14706,7 @@ namespace SRFROWCA
             {
                 OnAmountPledgedChanging(value);
                 ReportPropertyChanging("AmountPledged");
-                _AmountPledged = StructuralObject.SetValidValue(value);
+                _AmountPledged = StructuralObject.SetValidValue(value, "AmountPledged");
                 ReportPropertyChanged("AmountPledged");
                 OnAmountPledgedChanged();
             }
@@ -14764,7 +14730,7 @@ namespace SRFROWCA
             {
                 OnDonorCountryChanging(value);
                 ReportPropertyChanging("DonorCountry");
-                _DonorCountry = StructuralObject.SetValidValue(value, true);
+                _DonorCountry = StructuralObject.SetValidValue(value, true, "DonorCountry");
                 ReportPropertyChanged("DonorCountry");
                 OnDonorCountryChanged();
             }
@@ -14788,7 +14754,7 @@ namespace SRFROWCA
             {
                 OnContributionIDChanging(value);
                 ReportPropertyChanging("ContributionID");
-                _ContributionID = StructuralObject.SetValidValue(value);
+                _ContributionID = StructuralObject.SetValidValue(value, "ContributionID");
                 ReportPropertyChanged("ContributionID");
                 OnContributionIDChanged();
             }
@@ -14812,7 +14778,7 @@ namespace SRFROWCA
             {
                 OnProjectTitleChanging(value);
                 ReportPropertyChanging("ProjectTitle");
-                _ProjectTitle = StructuralObject.SetValidValue(value, true);
+                _ProjectTitle = StructuralObject.SetValidValue(value, true, "ProjectTitle");
                 ReportPropertyChanged("ProjectTitle");
                 OnProjectTitleChanged();
             }
@@ -14836,7 +14802,7 @@ namespace SRFROWCA
             {
                 OnOriginalRequestAmountChanging(value);
                 ReportPropertyChanging("OriginalRequestAmount");
-                _OriginalRequestAmount = StructuralObject.SetValidValue(value);
+                _OriginalRequestAmount = StructuralObject.SetValidValue(value, "OriginalRequestAmount");
                 ReportPropertyChanged("OriginalRequestAmount");
                 OnOriginalRequestAmountChanged();
             }
@@ -14860,7 +14826,7 @@ namespace SRFROWCA
             {
                 OnCurrentRequestAmountChanging(value);
                 ReportPropertyChanging("CurrentRequestAmount");
-                _CurrentRequestAmount = StructuralObject.SetValidValue(value);
+                _CurrentRequestAmount = StructuralObject.SetValidValue(value, "CurrentRequestAmount");
                 ReportPropertyChanged("CurrentRequestAmount");
                 OnCurrentRequestAmountChanged();
             }
@@ -14871,7 +14837,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -15007,7 +14972,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -15026,7 +14991,7 @@ namespace SRFROWCA
                 {
                     OnPriorityIdentityIdChanging(value);
                     ReportPropertyChanging("PriorityIdentityId");
-                    _PriorityIdentityId = StructuralObject.SetValidValue(value);
+                    _PriorityIdentityId = StructuralObject.SetValidValue(value, "PriorityIdentityId");
                     ReportPropertyChanged("PriorityIdentityId");
                     OnPriorityIdentityIdChanged();
                 }
@@ -15051,7 +15016,7 @@ namespace SRFROWCA
             {
                 OnHumanitarianPriorityIdChanging(value);
                 ReportPropertyChanging("HumanitarianPriorityId");
-                _HumanitarianPriorityId = StructuralObject.SetValidValue(value);
+                _HumanitarianPriorityId = StructuralObject.SetValidValue(value, "HumanitarianPriorityId");
                 ReportPropertyChanged("HumanitarianPriorityId");
                 OnHumanitarianPriorityIdChanged();
             }
@@ -15075,7 +15040,7 @@ namespace SRFROWCA
             {
                 OnSiteLanguageIdChanging(value);
                 ReportPropertyChanging("SiteLanguageId");
-                _SiteLanguageId = StructuralObject.SetValidValue(value);
+                _SiteLanguageId = StructuralObject.SetValidValue(value, "SiteLanguageId");
                 ReportPropertyChanged("SiteLanguageId");
                 OnSiteLanguageIdChanged();
             }
@@ -15099,7 +15064,7 @@ namespace SRFROWCA
             {
                 OnHumanitarianPriority1Changing(value);
                 ReportPropertyChanging("HumanitarianPriority1");
-                _HumanitarianPriority1 = StructuralObject.SetValidValue(value, false);
+                _HumanitarianPriority1 = StructuralObject.SetValidValue(value, false, "HumanitarianPriority1");
                 ReportPropertyChanged("HumanitarianPriority1");
                 OnHumanitarianPriority1Changed();
             }
@@ -15123,7 +15088,7 @@ namespace SRFROWCA
             {
                 OnIsLogFramePriorityChanging(value);
                 ReportPropertyChanging("IsLogFramePriority");
-                _IsLogFramePriority = StructuralObject.SetValidValue(value);
+                _IsLogFramePriority = StructuralObject.SetValidValue(value, "IsLogFramePriority");
                 ReportPropertyChanged("IsLogFramePriority");
                 OnIsLogFramePriorityChanged();
             }
@@ -15147,7 +15112,7 @@ namespace SRFROWCA
             {
                 OnShortPriorityTextChanging(value);
                 ReportPropertyChanging("ShortPriorityText");
-                _ShortPriorityText = StructuralObject.SetValidValue(value, true);
+                _ShortPriorityText = StructuralObject.SetValidValue(value, true, "ShortPriorityText");
                 ReportPropertyChanged("ShortPriorityText");
                 OnShortPriorityTextChanged();
             }
@@ -15171,7 +15136,7 @@ namespace SRFROWCA
             {
                 OnDateCreatedChanging(value);
                 ReportPropertyChanging("DateCreated");
-                _DateCreated = StructuralObject.SetValidValue(value);
+                _DateCreated = StructuralObject.SetValidValue(value, "DateCreated");
                 ReportPropertyChanged("DateCreated");
                 OnDateCreatedChanged();
             }
@@ -15195,7 +15160,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -15219,7 +15184,7 @@ namespace SRFROWCA
             {
                 OnDateUpdatedChanging(value);
                 ReportPropertyChanging("DateUpdated");
-                _DateUpdated = StructuralObject.SetValidValue(value);
+                _DateUpdated = StructuralObject.SetValidValue(value, "DateUpdated");
                 ReportPropertyChanged("DateUpdated");
                 OnDateUpdatedChanged();
             }
@@ -15243,7 +15208,7 @@ namespace SRFROWCA
             {
                 OnUpdatedByIdChanging(value);
                 ReportPropertyChanging("UpdatedById");
-                _UpdatedById = StructuralObject.SetValidValue(value);
+                _UpdatedById = StructuralObject.SetValidValue(value, "UpdatedById");
                 ReportPropertyChanged("UpdatedById");
                 OnUpdatedByIdChanged();
             }
@@ -15254,7 +15219,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -15280,7 +15244,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -15299,7 +15263,7 @@ namespace SRFROWCA
                 {
                     OnIdChanging(value);
                     ReportPropertyChanging("Id");
-                    _Id = StructuralObject.SetValidValue(value);
+                    _Id = StructuralObject.SetValidValue(value, "Id");
                     ReportPropertyChanged("Id");
                     OnIdChanged();
                 }
@@ -15324,7 +15288,7 @@ namespace SRFROWCA
             {
                 OnMonthChanging(value);
                 ReportPropertyChanging("Month");
-                _Month = StructuralObject.SetValidValue(value, true);
+                _Month = StructuralObject.SetValidValue(value, true, "Month");
                 ReportPropertyChanged("Month");
                 OnMonthChanged();
             }
@@ -15348,7 +15312,7 @@ namespace SRFROWCA
             {
                 OnProjectCodeChanging(value);
                 ReportPropertyChanging("ProjectCode");
-                _ProjectCode = StructuralObject.SetValidValue(value, true);
+                _ProjectCode = StructuralObject.SetValidValue(value, true, "ProjectCode");
                 ReportPropertyChanged("ProjectCode");
                 OnProjectCodeChanged();
             }
@@ -15372,7 +15336,7 @@ namespace SRFROWCA
             {
                 OnObjectiveChanging(value);
                 ReportPropertyChanging("Objective");
-                _Objective = StructuralObject.SetValidValue(value, true);
+                _Objective = StructuralObject.SetValidValue(value, true, "Objective");
                 ReportPropertyChanged("Objective");
                 OnObjectiveChanged();
             }
@@ -15396,7 +15360,7 @@ namespace SRFROWCA
             {
                 OnPriorityChanging(value);
                 ReportPropertyChanging("Priority");
-                _Priority = StructuralObject.SetValidValue(value, true);
+                _Priority = StructuralObject.SetValidValue(value, true, "Priority");
                 ReportPropertyChanged("Priority");
                 OnPriorityChanged();
             }
@@ -15420,7 +15384,7 @@ namespace SRFROWCA
             {
                 OnActivityChanging(value);
                 ReportPropertyChanging("Activity");
-                _Activity = StructuralObject.SetValidValue(value, true);
+                _Activity = StructuralObject.SetValidValue(value, true, "Activity");
                 ReportPropertyChanged("Activity");
                 OnActivityChanged();
             }
@@ -15444,7 +15408,7 @@ namespace SRFROWCA
             {
                 OnIndicator_IdChanging(value);
                 ReportPropertyChanging("Indicator_Id");
-                _Indicator_Id = StructuralObject.SetValidValue(value);
+                _Indicator_Id = StructuralObject.SetValidValue(value, "Indicator_Id");
                 ReportPropertyChanged("Indicator_Id");
                 OnIndicator_IdChanged();
             }
@@ -15468,7 +15432,7 @@ namespace SRFROWCA
             {
                 OnIndicatorChanging(value);
                 ReportPropertyChanging("Indicator");
-                _Indicator = StructuralObject.SetValidValue(value, true);
+                _Indicator = StructuralObject.SetValidValue(value, true, "Indicator");
                 ReportPropertyChanged("Indicator");
                 OnIndicatorChanged();
             }
@@ -15492,7 +15456,7 @@ namespace SRFROWCA
             {
                 OnAccumulativeChanging(value);
                 ReportPropertyChanging("Accumulative");
-                _Accumulative = StructuralObject.SetValidValue(value, true);
+                _Accumulative = StructuralObject.SetValidValue(value, true, "Accumulative");
                 ReportPropertyChanged("Accumulative");
                 OnAccumulativeChanged();
             }
@@ -15516,7 +15480,7 @@ namespace SRFROWCA
             {
                 OnMid_Year_TargetChanging(value);
                 ReportPropertyChanging("Mid_Year_Target");
-                _Mid_Year_Target = StructuralObject.SetValidValue(value);
+                _Mid_Year_Target = StructuralObject.SetValidValue(value, "Mid_Year_Target");
                 ReportPropertyChanged("Mid_Year_Target");
                 OnMid_Year_TargetChanged();
             }
@@ -15540,7 +15504,7 @@ namespace SRFROWCA
             {
                 OnFull_Year_TargetChanging(value);
                 ReportPropertyChanging("Full_Year_Target");
-                _Full_Year_Target = StructuralObject.SetValidValue(value);
+                _Full_Year_Target = StructuralObject.SetValidValue(value, "Full_Year_Target");
                 ReportPropertyChanged("Full_Year_Target");
                 OnFull_Year_TargetChanged();
             }
@@ -15564,7 +15528,7 @@ namespace SRFROWCA
             {
                 OnBamakoChanging(value);
                 ReportPropertyChanging("Bamako");
-                _Bamako = StructuralObject.SetValidValue(value);
+                _Bamako = StructuralObject.SetValidValue(value, "Bamako");
                 ReportPropertyChanged("Bamako");
                 OnBamakoChanged();
             }
@@ -15588,7 +15552,7 @@ namespace SRFROWCA
             {
                 OnGaoChanging(value);
                 ReportPropertyChanging("Gao");
-                _Gao = StructuralObject.SetValidValue(value);
+                _Gao = StructuralObject.SetValidValue(value, "Gao");
                 ReportPropertyChanged("Gao");
                 OnGaoChanged();
             }
@@ -15612,7 +15576,7 @@ namespace SRFROWCA
             {
                 OnKayesChanging(value);
                 ReportPropertyChanging("Kayes");
-                _Kayes = StructuralObject.SetValidValue(value);
+                _Kayes = StructuralObject.SetValidValue(value, "Kayes");
                 ReportPropertyChanged("Kayes");
                 OnKayesChanged();
             }
@@ -15636,7 +15600,7 @@ namespace SRFROWCA
             {
                 OnKidalChanging(value);
                 ReportPropertyChanging("Kidal");
-                _Kidal = StructuralObject.SetValidValue(value);
+                _Kidal = StructuralObject.SetValidValue(value, "Kidal");
                 ReportPropertyChanged("Kidal");
                 OnKidalChanged();
             }
@@ -15660,7 +15624,7 @@ namespace SRFROWCA
             {
                 OnKoulikoroChanging(value);
                 ReportPropertyChanging("Koulikoro");
-                _Koulikoro = StructuralObject.SetValidValue(value);
+                _Koulikoro = StructuralObject.SetValidValue(value, "Koulikoro");
                 ReportPropertyChanged("Koulikoro");
                 OnKoulikoroChanged();
             }
@@ -15684,7 +15648,7 @@ namespace SRFROWCA
             {
                 OnMoptiChanging(value);
                 ReportPropertyChanging("Mopti");
-                _Mopti = StructuralObject.SetValidValue(value);
+                _Mopti = StructuralObject.SetValidValue(value, "Mopti");
                 ReportPropertyChanged("Mopti");
                 OnMoptiChanged();
             }
@@ -15708,7 +15672,7 @@ namespace SRFROWCA
             {
                 OnSegouChanging(value);
                 ReportPropertyChanging("Segou");
-                _Segou = StructuralObject.SetValidValue(value);
+                _Segou = StructuralObject.SetValidValue(value, "Segou");
                 ReportPropertyChanged("Segou");
                 OnSegouChanged();
             }
@@ -15732,7 +15696,7 @@ namespace SRFROWCA
             {
                 OnSikassoChanging(value);
                 ReportPropertyChanging("Sikasso");
-                _Sikasso = StructuralObject.SetValidValue(value);
+                _Sikasso = StructuralObject.SetValidValue(value, "Sikasso");
                 ReportPropertyChanged("Sikasso");
                 OnSikassoChanged();
             }
@@ -15756,7 +15720,7 @@ namespace SRFROWCA
             {
                 OnTombouctouChanging(value);
                 ReportPropertyChanging("Tombouctou");
-                _Tombouctou = StructuralObject.SetValidValue(value);
+                _Tombouctou = StructuralObject.SetValidValue(value, "Tombouctou");
                 ReportPropertyChanged("Tombouctou");
                 OnTombouctouChanged();
             }
@@ -15767,7 +15731,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -15793,7 +15756,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -15812,7 +15775,7 @@ namespace SRFROWCA
                 {
                     OnIdChanging(value);
                     ReportPropertyChanging("Id");
-                    _Id = StructuralObject.SetValidValue(value);
+                    _Id = StructuralObject.SetValidValue(value, "Id");
                     ReportPropertyChanged("Id");
                     OnIdChanged();
                 }
@@ -15837,7 +15800,7 @@ namespace SRFROWCA
             {
                 OnMonthChanging(value);
                 ReportPropertyChanging("Month");
-                _Month = StructuralObject.SetValidValue(value, true);
+                _Month = StructuralObject.SetValidValue(value, true, "Month");
                 ReportPropertyChanged("Month");
                 OnMonthChanged();
             }
@@ -15861,7 +15824,7 @@ namespace SRFROWCA
             {
                 OnProjectCodeChanging(value);
                 ReportPropertyChanging("ProjectCode");
-                _ProjectCode = StructuralObject.SetValidValue(value, true);
+                _ProjectCode = StructuralObject.SetValidValue(value, true, "ProjectCode");
                 ReportPropertyChanged("ProjectCode");
                 OnProjectCodeChanged();
             }
@@ -15885,7 +15848,7 @@ namespace SRFROWCA
             {
                 OnObjectiveChanging(value);
                 ReportPropertyChanging("Objective");
-                _Objective = StructuralObject.SetValidValue(value, true);
+                _Objective = StructuralObject.SetValidValue(value, true, "Objective");
                 ReportPropertyChanged("Objective");
                 OnObjectiveChanged();
             }
@@ -15909,7 +15872,7 @@ namespace SRFROWCA
             {
                 OnPriorityChanging(value);
                 ReportPropertyChanging("Priority");
-                _Priority = StructuralObject.SetValidValue(value, true);
+                _Priority = StructuralObject.SetValidValue(value, true, "Priority");
                 ReportPropertyChanged("Priority");
                 OnPriorityChanged();
             }
@@ -15933,7 +15896,7 @@ namespace SRFROWCA
             {
                 OnActivityChanging(value);
                 ReportPropertyChanging("Activity");
-                _Activity = StructuralObject.SetValidValue(value, true);
+                _Activity = StructuralObject.SetValidValue(value, true, "Activity");
                 ReportPropertyChanged("Activity");
                 OnActivityChanged();
             }
@@ -15957,7 +15920,7 @@ namespace SRFROWCA
             {
                 OnIndicator_IdChanging(value);
                 ReportPropertyChanging("Indicator_Id");
-                _Indicator_Id = StructuralObject.SetValidValue(value);
+                _Indicator_Id = StructuralObject.SetValidValue(value, "Indicator_Id");
                 ReportPropertyChanged("Indicator_Id");
                 OnIndicator_IdChanged();
             }
@@ -15981,7 +15944,7 @@ namespace SRFROWCA
             {
                 OnIndicatorChanging(value);
                 ReportPropertyChanging("Indicator");
-                _Indicator = StructuralObject.SetValidValue(value, true);
+                _Indicator = StructuralObject.SetValidValue(value, true, "Indicator");
                 ReportPropertyChanged("Indicator");
                 OnIndicatorChanged();
             }
@@ -16005,7 +15968,7 @@ namespace SRFROWCA
             {
                 OnAccumulativeChanging(value);
                 ReportPropertyChanging("Accumulative");
-                _Accumulative = StructuralObject.SetValidValue(value, true);
+                _Accumulative = StructuralObject.SetValidValue(value, true, "Accumulative");
                 ReportPropertyChanged("Accumulative");
                 OnAccumulativeChanged();
             }
@@ -16029,7 +15992,7 @@ namespace SRFROWCA
             {
                 OnMid_Year_TargetChanging(value);
                 ReportPropertyChanging("Mid_Year_Target");
-                _Mid_Year_Target = StructuralObject.SetValidValue(value);
+                _Mid_Year_Target = StructuralObject.SetValidValue(value, "Mid_Year_Target");
                 ReportPropertyChanged("Mid_Year_Target");
                 OnMid_Year_TargetChanged();
             }
@@ -16053,7 +16016,7 @@ namespace SRFROWCA
             {
                 OnFull_Year_TargetChanging(value);
                 ReportPropertyChanging("Full_Year_Target");
-                _Full_Year_Target = StructuralObject.SetValidValue(value);
+                _Full_Year_Target = StructuralObject.SetValidValue(value, "Full_Year_Target");
                 ReportPropertyChanged("Full_Year_Target");
                 OnFull_Year_TargetChanged();
             }
@@ -16077,7 +16040,7 @@ namespace SRFROWCA
             {
                 OnBamako_01Changing(value);
                 ReportPropertyChanging("Bamako_01");
-                _Bamako_01 = StructuralObject.SetValidValue(value);
+                _Bamako_01 = StructuralObject.SetValidValue(value, "Bamako_01");
                 ReportPropertyChanged("Bamako_01");
                 OnBamako_01Changed();
             }
@@ -16101,7 +16064,7 @@ namespace SRFROWCA
             {
                 OnGao_02Changing(value);
                 ReportPropertyChanging("Gao_02");
-                _Gao_02 = StructuralObject.SetValidValue(value);
+                _Gao_02 = StructuralObject.SetValidValue(value, "Gao_02");
                 ReportPropertyChanged("Gao_02");
                 OnGao_02Changed();
             }
@@ -16125,7 +16088,7 @@ namespace SRFROWCA
             {
                 OnKayes_03Changing(value);
                 ReportPropertyChanging("Kayes_03");
-                _Kayes_03 = StructuralObject.SetValidValue(value);
+                _Kayes_03 = StructuralObject.SetValidValue(value, "Kayes_03");
                 ReportPropertyChanged("Kayes_03");
                 OnKayes_03Changed();
             }
@@ -16149,7 +16112,7 @@ namespace SRFROWCA
             {
                 OnKidal_04Changing(value);
                 ReportPropertyChanging("Kidal_04");
-                _Kidal_04 = StructuralObject.SetValidValue(value);
+                _Kidal_04 = StructuralObject.SetValidValue(value, "Kidal_04");
                 ReportPropertyChanged("Kidal_04");
                 OnKidal_04Changed();
             }
@@ -16173,7 +16136,7 @@ namespace SRFROWCA
             {
                 OnKoulikoro_05Changing(value);
                 ReportPropertyChanging("Koulikoro_05");
-                _Koulikoro_05 = StructuralObject.SetValidValue(value);
+                _Koulikoro_05 = StructuralObject.SetValidValue(value, "Koulikoro_05");
                 ReportPropertyChanged("Koulikoro_05");
                 OnKoulikoro_05Changed();
             }
@@ -16197,7 +16160,7 @@ namespace SRFROWCA
             {
                 OnMopti_06Changing(value);
                 ReportPropertyChanging("Mopti_06");
-                _Mopti_06 = StructuralObject.SetValidValue(value);
+                _Mopti_06 = StructuralObject.SetValidValue(value, "Mopti_06");
                 ReportPropertyChanged("Mopti_06");
                 OnMopti_06Changed();
             }
@@ -16221,7 +16184,7 @@ namespace SRFROWCA
             {
                 OnSegou_07Changing(value);
                 ReportPropertyChanging("Segou_07");
-                _Segou_07 = StructuralObject.SetValidValue(value);
+                _Segou_07 = StructuralObject.SetValidValue(value, "Segou_07");
                 ReportPropertyChanged("Segou_07");
                 OnSegou_07Changed();
             }
@@ -16245,7 +16208,7 @@ namespace SRFROWCA
             {
                 OnSikasso_08Changing(value);
                 ReportPropertyChanging("Sikasso_08");
-                _Sikasso_08 = StructuralObject.SetValidValue(value);
+                _Sikasso_08 = StructuralObject.SetValidValue(value, "Sikasso_08");
                 ReportPropertyChanged("Sikasso_08");
                 OnSikasso_08Changed();
             }
@@ -16269,7 +16232,7 @@ namespace SRFROWCA
             {
                 OnTombouctou_09Changing(value);
                 ReportPropertyChanging("Tombouctou_09");
-                _Tombouctou_09 = StructuralObject.SetValidValue(value);
+                _Tombouctou_09 = StructuralObject.SetValidValue(value, "Tombouctou_09");
                 ReportPropertyChanged("Tombouctou_09");
                 OnTombouctou_09Changed();
             }
@@ -16280,7 +16243,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -16306,7 +16268,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -16325,7 +16287,7 @@ namespace SRFROWCA
                 {
                     OnidChanging(value);
                     ReportPropertyChanging("id");
-                    _id = StructuralObject.SetValidValue(value);
+                    _id = StructuralObject.SetValidValue(value, "id");
                     ReportPropertyChanged("id");
                     OnidChanged();
                 }
@@ -16350,7 +16312,7 @@ namespace SRFROWCA
             {
                 OntidChanging(value);
                 ReportPropertyChanging("tid");
-                _tid = StructuralObject.SetValidValue(value);
+                _tid = StructuralObject.SetValidValue(value, "tid");
                 ReportPropertyChanged("tid");
                 OntidChanged();
             }
@@ -16374,7 +16336,7 @@ namespace SRFROWCA
             {
                 OnMonthChanging(value);
                 ReportPropertyChanging("Month");
-                _Month = StructuralObject.SetValidValue(value, true);
+                _Month = StructuralObject.SetValidValue(value, true, "Month");
                 ReportPropertyChanged("Month");
                 OnMonthChanged();
             }
@@ -16398,7 +16360,7 @@ namespace SRFROWCA
             {
                 OnMonthIdChanging(value);
                 ReportPropertyChanging("MonthId");
-                _MonthId = StructuralObject.SetValidValue(value);
+                _MonthId = StructuralObject.SetValidValue(value, "MonthId");
                 ReportPropertyChanged("MonthId");
                 OnMonthIdChanged();
             }
@@ -16422,7 +16384,7 @@ namespace SRFROWCA
             {
                 OnProjectCodeChanging(value);
                 ReportPropertyChanging("ProjectCode");
-                _ProjectCode = StructuralObject.SetValidValue(value, true);
+                _ProjectCode = StructuralObject.SetValidValue(value, true, "ProjectCode");
                 ReportPropertyChanged("ProjectCode");
                 OnProjectCodeChanged();
             }
@@ -16446,7 +16408,7 @@ namespace SRFROWCA
             {
                 OnProjectIdChanging(value);
                 ReportPropertyChanging("ProjectId");
-                _ProjectId = StructuralObject.SetValidValue(value);
+                _ProjectId = StructuralObject.SetValidValue(value, "ProjectId");
                 ReportPropertyChanged("ProjectId");
                 OnProjectIdChanged();
             }
@@ -16470,7 +16432,7 @@ namespace SRFROWCA
             {
                 OnObjectiveChanging(value);
                 ReportPropertyChanging("Objective");
-                _Objective = StructuralObject.SetValidValue(value, true);
+                _Objective = StructuralObject.SetValidValue(value, true, "Objective");
                 ReportPropertyChanged("Objective");
                 OnObjectiveChanged();
             }
@@ -16494,7 +16456,7 @@ namespace SRFROWCA
             {
                 OnPriorityChanging(value);
                 ReportPropertyChanging("Priority");
-                _Priority = StructuralObject.SetValidValue(value, true);
+                _Priority = StructuralObject.SetValidValue(value, true, "Priority");
                 ReportPropertyChanged("Priority");
                 OnPriorityChanged();
             }
@@ -16518,7 +16480,7 @@ namespace SRFROWCA
             {
                 OnActivityChanging(value);
                 ReportPropertyChanging("Activity");
-                _Activity = StructuralObject.SetValidValue(value, true);
+                _Activity = StructuralObject.SetValidValue(value, true, "Activity");
                 ReportPropertyChanged("Activity");
                 OnActivityChanged();
             }
@@ -16542,7 +16504,7 @@ namespace SRFROWCA
             {
                 OnIndicator_IdChanging(value);
                 ReportPropertyChanging("Indicator_Id");
-                _Indicator_Id = StructuralObject.SetValidValue(value);
+                _Indicator_Id = StructuralObject.SetValidValue(value, "Indicator_Id");
                 ReportPropertyChanged("Indicator_Id");
                 OnIndicator_IdChanged();
             }
@@ -16566,7 +16528,7 @@ namespace SRFROWCA
             {
                 OnIndicatorChanging(value);
                 ReportPropertyChanging("Indicator");
-                _Indicator = StructuralObject.SetValidValue(value, true);
+                _Indicator = StructuralObject.SetValidValue(value, true, "Indicator");
                 ReportPropertyChanged("Indicator");
                 OnIndicatorChanged();
             }
@@ -16590,7 +16552,7 @@ namespace SRFROWCA
             {
                 OnAccumulativeChanging(value);
                 ReportPropertyChanging("Accumulative");
-                _Accumulative = StructuralObject.SetValidValue(value, true);
+                _Accumulative = StructuralObject.SetValidValue(value, true, "Accumulative");
                 ReportPropertyChanged("Accumulative");
                 OnAccumulativeChanged();
             }
@@ -16614,7 +16576,7 @@ namespace SRFROWCA
             {
                 OnUnitChanging(value);
                 ReportPropertyChanging("Unit");
-                _Unit = StructuralObject.SetValidValue(value, true);
+                _Unit = StructuralObject.SetValidValue(value, true, "Unit");
                 ReportPropertyChanged("Unit");
                 OnUnitChanged();
             }
@@ -16638,7 +16600,7 @@ namespace SRFROWCA
             {
                 OnMid_Year_TargetChanging(value);
                 ReportPropertyChanging("Mid_Year_Target");
-                _Mid_Year_Target = StructuralObject.SetValidValue(value);
+                _Mid_Year_Target = StructuralObject.SetValidValue(value, "Mid_Year_Target");
                 ReportPropertyChanged("Mid_Year_Target");
                 OnMid_Year_TargetChanged();
             }
@@ -16662,7 +16624,7 @@ namespace SRFROWCA
             {
                 OnFull_Year_TargetChanging(value);
                 ReportPropertyChanging("Full_Year_Target");
-                _Full_Year_Target = StructuralObject.SetValidValue(value);
+                _Full_Year_Target = StructuralObject.SetValidValue(value, "Full_Year_Target");
                 ReportPropertyChanged("Full_Year_Target");
                 OnFull_Year_TargetChanged();
             }
@@ -16686,7 +16648,7 @@ namespace SRFROWCA
             {
                 OnAnnualTargetChanging(value);
                 ReportPropertyChanging("AnnualTarget");
-                _AnnualTarget = StructuralObject.SetValidValue(value);
+                _AnnualTarget = StructuralObject.SetValidValue(value, "AnnualTarget");
                 ReportPropertyChanged("AnnualTarget");
                 OnAnnualTargetChanged();
             }
@@ -16710,7 +16672,7 @@ namespace SRFROWCA
             {
                 OnLocationChanging(value);
                 ReportPropertyChanging("Location");
-                _Location = StructuralObject.SetValidValue(value, true);
+                _Location = StructuralObject.SetValidValue(value, true, "Location");
                 ReportPropertyChanged("Location");
                 OnLocationChanged();
             }
@@ -16734,7 +16696,7 @@ namespace SRFROWCA
             {
                 OnDataChanging(value);
                 ReportPropertyChanging("Data");
-                _Data = StructuralObject.SetValidValue(value);
+                _Data = StructuralObject.SetValidValue(value, "Data");
                 ReportPropertyChanged("Data");
                 OnDataChanged();
             }
@@ -16758,7 +16720,7 @@ namespace SRFROWCA
             {
                 OnLocationIdChanging(value);
                 ReportPropertyChanging("LocationId");
-                _LocationId = StructuralObject.SetValidValue(value);
+                _LocationId = StructuralObject.SetValidValue(value, "LocationId");
                 ReportPropertyChanged("LocationId");
                 OnLocationIdChanged();
             }
@@ -16782,7 +16744,7 @@ namespace SRFROWCA
             {
                 OnOrganizationIdChanging(value);
                 ReportPropertyChanging("OrganizationId");
-                _OrganizationId = StructuralObject.SetValidValue(value);
+                _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                 ReportPropertyChanged("OrganizationId");
                 OnOrganizationIdChanged();
             }
@@ -16806,7 +16768,7 @@ namespace SRFROWCA
             {
                 OnReportIdChanging(value);
                 ReportPropertyChanging("ReportId");
-                _ReportId = StructuralObject.SetValidValue(value);
+                _ReportId = StructuralObject.SetValidValue(value, "ReportId");
                 ReportPropertyChanged("ReportId");
                 OnReportIdChanged();
             }
@@ -16830,7 +16792,7 @@ namespace SRFROWCA
             {
                 OnReportLocationIdChanging(value);
                 ReportPropertyChanging("ReportLocationId");
-                _ReportLocationId = StructuralObject.SetValidValue(value);
+                _ReportLocationId = StructuralObject.SetValidValue(value, "ReportLocationId");
                 ReportPropertyChanged("ReportLocationId");
                 OnReportLocationIdChanged();
             }
@@ -16854,7 +16816,7 @@ namespace SRFROWCA
             {
                 OnIsAccumChanging(value);
                 ReportPropertyChanging("IsAccum");
-                _IsAccum = StructuralObject.SetValidValue(value);
+                _IsAccum = StructuralObject.SetValidValue(value, "IsAccum");
                 ReportPropertyChanged("IsAccum");
                 OnIsAccumChanged();
             }
@@ -16878,7 +16840,7 @@ namespace SRFROWCA
             {
                 OnIsReportExistsChanging(value);
                 ReportPropertyChanging("IsReportExists");
-                _IsReportExists = StructuralObject.SetValidValue(value);
+                _IsReportExists = StructuralObject.SetValidValue(value, "IsReportExists");
                 ReportPropertyChanged("IsReportExists");
                 OnIsReportExistsChanged();
             }
@@ -16902,7 +16864,7 @@ namespace SRFROWCA
             {
                 OnIsReportLocationExistsChanging(value);
                 ReportPropertyChanging("IsReportLocationExists");
-                _IsReportLocationExists = StructuralObject.SetValidValue(value);
+                _IsReportLocationExists = StructuralObject.SetValidValue(value, "IsReportLocationExists");
                 ReportPropertyChanged("IsReportLocationExists");
                 OnIsReportLocationExistsChanged();
             }
@@ -16926,7 +16888,7 @@ namespace SRFROWCA
             {
                 OnIndicatorExistsChanging(value);
                 ReportPropertyChanging("IndicatorExists");
-                _IndicatorExists = StructuralObject.SetValidValue(value);
+                _IndicatorExists = StructuralObject.SetValidValue(value, "IndicatorExists");
                 ReportPropertyChanged("IndicatorExists");
                 OnIndicatorExistsChanged();
             }
@@ -16950,7 +16912,7 @@ namespace SRFROWCA
             {
                 OnMidTargetExistsChanging(value);
                 ReportPropertyChanging("MidTargetExists");
-                _MidTargetExists = StructuralObject.SetValidValue(value);
+                _MidTargetExists = StructuralObject.SetValidValue(value, "MidTargetExists");
                 ReportPropertyChanged("MidTargetExists");
                 OnMidTargetExistsChanged();
             }
@@ -16974,7 +16936,7 @@ namespace SRFROWCA
             {
                 OnFullTargetExistsChanging(value);
                 ReportPropertyChanging("FullTargetExists");
-                _FullTargetExists = StructuralObject.SetValidValue(value);
+                _FullTargetExists = StructuralObject.SetValidValue(value, "FullTargetExists");
                 ReportPropertyChanged("FullTargetExists");
                 OnFullTargetExistsChanged();
             }
@@ -16998,7 +16960,7 @@ namespace SRFROWCA
             {
                 OnProjIndExistsChanging(value);
                 ReportPropertyChanging("ProjIndExists");
-                _ProjIndExists = StructuralObject.SetValidValue(value);
+                _ProjIndExists = StructuralObject.SetValidValue(value, "ProjIndExists");
                 ReportPropertyChanged("ProjIndExists");
                 OnProjIndExistsChanged();
             }
@@ -17022,7 +16984,7 @@ namespace SRFROWCA
             {
                 OnProjectIndicatorIdChanging(value);
                 ReportPropertyChanging("ProjectIndicatorId");
-                _ProjectIndicatorId = StructuralObject.SetValidValue(value);
+                _ProjectIndicatorId = StructuralObject.SetValidValue(value, "ProjectIndicatorId");
                 ReportPropertyChanged("ProjectIndicatorId");
                 OnProjectIndicatorIdChanged();
             }
@@ -17033,7 +16995,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -17075,7 +17036,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -17094,7 +17055,7 @@ namespace SRFROWCA
                 {
                     OnIndicatorApprovedIdChanging(value);
                     ReportPropertyChanging("IndicatorApprovedId");
-                    _IndicatorApprovedId = StructuralObject.SetValidValue(value);
+                    _IndicatorApprovedId = StructuralObject.SetValidValue(value, "IndicatorApprovedId");
                     ReportPropertyChanged("IndicatorApprovedId");
                     OnIndicatorApprovedIdChanged();
                 }
@@ -17119,7 +17080,7 @@ namespace SRFROWCA
             {
                 OnYearIdChanging(value);
                 ReportPropertyChanging("YearId");
-                _YearId = StructuralObject.SetValidValue(value);
+                _YearId = StructuralObject.SetValidValue(value, "YearId");
                 ReportPropertyChanged("YearId");
                 OnYearIdChanged();
             }
@@ -17143,7 +17104,7 @@ namespace SRFROWCA
             {
                 OnMonthIdChanging(value);
                 ReportPropertyChanging("MonthId");
-                _MonthId = StructuralObject.SetValidValue(value);
+                _MonthId = StructuralObject.SetValidValue(value, "MonthId");
                 ReportPropertyChanged("MonthId");
                 OnMonthIdChanged();
             }
@@ -17167,7 +17128,7 @@ namespace SRFROWCA
             {
                 OnProjectIdChanging(value);
                 ReportPropertyChanging("ProjectId");
-                _ProjectId = StructuralObject.SetValidValue(value);
+                _ProjectId = StructuralObject.SetValidValue(value, "ProjectId");
                 ReportPropertyChanged("ProjectId");
                 OnProjectIdChanged();
             }
@@ -17191,7 +17152,7 @@ namespace SRFROWCA
             {
                 OnEmergencyLocationIdChanging(value);
                 ReportPropertyChanging("EmergencyLocationId");
-                _EmergencyLocationId = StructuralObject.SetValidValue(value);
+                _EmergencyLocationId = StructuralObject.SetValidValue(value, "EmergencyLocationId");
                 ReportPropertyChanged("EmergencyLocationId");
                 OnEmergencyLocationIdChanged();
             }
@@ -17215,7 +17176,7 @@ namespace SRFROWCA
             {
                 OnOrganizationIdChanging(value);
                 ReportPropertyChanging("OrganizationId");
-                _OrganizationId = StructuralObject.SetValidValue(value);
+                _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                 ReportPropertyChanged("OrganizationId");
                 OnOrganizationIdChanged();
             }
@@ -17239,7 +17200,7 @@ namespace SRFROWCA
             {
                 OnActivityDataIdChanging(value);
                 ReportPropertyChanging("ActivityDataId");
-                _ActivityDataId = StructuralObject.SetValidValue(value);
+                _ActivityDataId = StructuralObject.SetValidValue(value, "ActivityDataId");
                 ReportPropertyChanged("ActivityDataId");
                 OnActivityDataIdChanged();
             }
@@ -17263,7 +17224,7 @@ namespace SRFROWCA
             {
                 OnIsApprovedChanging(value);
                 ReportPropertyChanging("IsApproved");
-                _IsApproved = StructuralObject.SetValidValue(value);
+                _IsApproved = StructuralObject.SetValidValue(value, "IsApproved");
                 ReportPropertyChanged("IsApproved");
                 OnIsApprovedChanged();
             }
@@ -17287,7 +17248,7 @@ namespace SRFROWCA
             {
                 OnApprovedByIdChanging(value);
                 ReportPropertyChanging("ApprovedById");
-                _ApprovedById = StructuralObject.SetValidValue(value);
+                _ApprovedById = StructuralObject.SetValidValue(value, "ApprovedById");
                 ReportPropertyChanged("ApprovedById");
                 OnApprovedByIdChanged();
             }
@@ -17311,7 +17272,7 @@ namespace SRFROWCA
             {
                 OnApprovedDateChanging(value);
                 ReportPropertyChanging("ApprovedDate");
-                _ApprovedDate = StructuralObject.SetValidValue(value);
+                _ApprovedDate = StructuralObject.SetValidValue(value, "ApprovedDate");
                 ReportPropertyChanged("ApprovedDate");
                 OnApprovedDateChanged();
             }
@@ -17335,7 +17296,7 @@ namespace SRFROWCA
             {
                 OnIsRejectedChanging(value);
                 ReportPropertyChanging("IsRejected");
-                _IsRejected = StructuralObject.SetValidValue(value);
+                _IsRejected = StructuralObject.SetValidValue(value, "IsRejected");
                 ReportPropertyChanged("IsRejected");
                 OnIsRejectedChanged();
             }
@@ -17359,7 +17320,7 @@ namespace SRFROWCA
             {
                 OnRejectedByIdChanging(value);
                 ReportPropertyChanging("RejectedById");
-                _RejectedById = StructuralObject.SetValidValue(value);
+                _RejectedById = StructuralObject.SetValidValue(value, "RejectedById");
                 ReportPropertyChanged("RejectedById");
                 OnRejectedByIdChanged();
             }
@@ -17383,7 +17344,7 @@ namespace SRFROWCA
             {
                 OnRejectedDateChanging(value);
                 ReportPropertyChanging("RejectedDate");
-                _RejectedDate = StructuralObject.SetValidValue(value);
+                _RejectedDate = StructuralObject.SetValidValue(value, "RejectedDate");
                 ReportPropertyChanged("RejectedDate");
                 OnRejectedDateChanged();
             }
@@ -17394,7 +17355,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -17504,7 +17464,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -17523,7 +17483,7 @@ namespace SRFROWCA
                 {
                     OnIndicaotrCommentIdChanging(value);
                     ReportPropertyChanging("IndicaotrCommentId");
-                    _IndicaotrCommentId = StructuralObject.SetValidValue(value);
+                    _IndicaotrCommentId = StructuralObject.SetValidValue(value, "IndicaotrCommentId");
                     ReportPropertyChanged("IndicaotrCommentId");
                     OnIndicaotrCommentIdChanged();
                 }
@@ -17548,7 +17508,7 @@ namespace SRFROWCA
             {
                 OnReportIdChanging(value);
                 ReportPropertyChanging("ReportId");
-                _ReportId = StructuralObject.SetValidValue(value);
+                _ReportId = StructuralObject.SetValidValue(value, "ReportId");
                 ReportPropertyChanged("ReportId");
                 OnReportIdChanged();
             }
@@ -17572,7 +17532,7 @@ namespace SRFROWCA
             {
                 OnYearIdChanging(value);
                 ReportPropertyChanging("YearId");
-                _YearId = StructuralObject.SetValidValue(value);
+                _YearId = StructuralObject.SetValidValue(value, "YearId");
                 ReportPropertyChanged("YearId");
                 OnYearIdChanged();
             }
@@ -17596,7 +17556,7 @@ namespace SRFROWCA
             {
                 OnMonthIdChanging(value);
                 ReportPropertyChanging("MonthId");
-                _MonthId = StructuralObject.SetValidValue(value);
+                _MonthId = StructuralObject.SetValidValue(value, "MonthId");
                 ReportPropertyChanged("MonthId");
                 OnMonthIdChanged();
             }
@@ -17620,7 +17580,7 @@ namespace SRFROWCA
             {
                 OnProjectIdChanging(value);
                 ReportPropertyChanging("ProjectId");
-                _ProjectId = StructuralObject.SetValidValue(value);
+                _ProjectId = StructuralObject.SetValidValue(value, "ProjectId");
                 ReportPropertyChanged("ProjectId");
                 OnProjectIdChanged();
             }
@@ -17644,7 +17604,7 @@ namespace SRFROWCA
             {
                 OnEmergencyLocationIdChanging(value);
                 ReportPropertyChanging("EmergencyLocationId");
-                _EmergencyLocationId = StructuralObject.SetValidValue(value);
+                _EmergencyLocationId = StructuralObject.SetValidValue(value, "EmergencyLocationId");
                 ReportPropertyChanged("EmergencyLocationId");
                 OnEmergencyLocationIdChanged();
             }
@@ -17668,7 +17628,7 @@ namespace SRFROWCA
             {
                 OnOrganizationidChanging(value);
                 ReportPropertyChanging("Organizationid");
-                _Organizationid = StructuralObject.SetValidValue(value);
+                _Organizationid = StructuralObject.SetValidValue(value, "Organizationid");
                 ReportPropertyChanged("Organizationid");
                 OnOrganizationidChanged();
             }
@@ -17692,7 +17652,7 @@ namespace SRFROWCA
             {
                 OnActivityDataIdChanging(value);
                 ReportPropertyChanging("ActivityDataId");
-                _ActivityDataId = StructuralObject.SetValidValue(value);
+                _ActivityDataId = StructuralObject.SetValidValue(value, "ActivityDataId");
                 ReportPropertyChanged("ActivityDataId");
                 OnActivityDataIdChanged();
             }
@@ -17716,7 +17676,7 @@ namespace SRFROWCA
             {
                 OnCommentsChanging(value);
                 ReportPropertyChanging("Comments");
-                _Comments = StructuralObject.SetValidValue(value, true);
+                _Comments = StructuralObject.SetValidValue(value, true, "Comments");
                 ReportPropertyChanged("Comments");
                 OnCommentsChanged();
             }
@@ -17740,7 +17700,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -17764,7 +17724,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -17775,7 +17735,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -17927,7 +17886,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -17946,7 +17905,7 @@ namespace SRFROWCA
                 {
                     OnIndicatorCommentsDetailIdChanging(value);
                     ReportPropertyChanging("IndicatorCommentsDetailId");
-                    _IndicatorCommentsDetailId = StructuralObject.SetValidValue(value);
+                    _IndicatorCommentsDetailId = StructuralObject.SetValidValue(value, "IndicatorCommentsDetailId");
                     ReportPropertyChanged("IndicatorCommentsDetailId");
                     OnIndicatorCommentsDetailIdChanged();
                 }
@@ -17971,7 +17930,7 @@ namespace SRFROWCA
             {
                 OnIndicatorCommentIdChanging(value);
                 ReportPropertyChanging("IndicatorCommentId");
-                _IndicatorCommentId = StructuralObject.SetValidValue(value);
+                _IndicatorCommentId = StructuralObject.SetValidValue(value, "IndicatorCommentId");
                 ReportPropertyChanged("IndicatorCommentId");
                 OnIndicatorCommentIdChanged();
             }
@@ -17995,7 +17954,7 @@ namespace SRFROWCA
             {
                 OnCommentsChanging(value);
                 ReportPropertyChanging("Comments");
-                _Comments = StructuralObject.SetValidValue(value, false);
+                _Comments = StructuralObject.SetValidValue(value, false, "Comments");
                 ReportPropertyChanged("Comments");
                 OnCommentsChanged();
             }
@@ -18019,7 +17978,7 @@ namespace SRFROWCA
             {
                 OnCommentOrderChanging(value);
                 ReportPropertyChanging("CommentOrder");
-                _CommentOrder = StructuralObject.SetValidValue(value);
+                _CommentOrder = StructuralObject.SetValidValue(value, "CommentOrder");
                 ReportPropertyChanged("CommentOrder");
                 OnCommentOrderChanged();
             }
@@ -18043,7 +18002,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -18067,7 +18026,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -18091,7 +18050,7 @@ namespace SRFROWCA
             {
                 OnUpdatedByIdChanging(value);
                 ReportPropertyChanging("UpdatedById");
-                _UpdatedById = StructuralObject.SetValidValue(value);
+                _UpdatedById = StructuralObject.SetValidValue(value, "UpdatedById");
                 ReportPropertyChanged("UpdatedById");
                 OnUpdatedByIdChanged();
             }
@@ -18115,7 +18074,7 @@ namespace SRFROWCA
             {
                 OnUpdatedDateChanging(value);
                 ReportPropertyChanging("UpdatedDate");
-                _UpdatedDate = StructuralObject.SetValidValue(value);
+                _UpdatedDate = StructuralObject.SetValidValue(value, "UpdatedDate");
                 ReportPropertyChanged("UpdatedDate");
                 OnUpdatedDateChanged();
             }
@@ -18126,7 +18085,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -18158,7 +18116,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -18177,7 +18135,7 @@ namespace SRFROWCA
                 {
                     OnLocationIdChanging(value);
                     ReportPropertyChanging("LocationId");
-                    _LocationId = StructuralObject.SetValidValue(value);
+                    _LocationId = StructuralObject.SetValidValue(value, "LocationId");
                     ReportPropertyChanged("LocationId");
                     OnLocationIdChanged();
                 }
@@ -18202,7 +18160,7 @@ namespace SRFROWCA
             {
                 OnLocationNameChanging(value);
                 ReportPropertyChanging("LocationName");
-                _LocationName = StructuralObject.SetValidValue(value, false);
+                _LocationName = StructuralObject.SetValidValue(value, false, "LocationName");
                 ReportPropertyChanged("LocationName");
                 OnLocationNameChanged();
             }
@@ -18226,7 +18184,7 @@ namespace SRFROWCA
             {
                 OnLocationTypeIdChanging(value);
                 ReportPropertyChanging("LocationTypeId");
-                _LocationTypeId = StructuralObject.SetValidValue(value);
+                _LocationTypeId = StructuralObject.SetValidValue(value, "LocationTypeId");
                 ReportPropertyChanged("LocationTypeId");
                 OnLocationTypeIdChanged();
             }
@@ -18250,7 +18208,7 @@ namespace SRFROWCA
             {
                 OnLocationParentIdChanging(value);
                 ReportPropertyChanging("LocationParentId");
-                _LocationParentId = StructuralObject.SetValidValue(value);
+                _LocationParentId = StructuralObject.SetValidValue(value, "LocationParentId");
                 ReportPropertyChanged("LocationParentId");
                 OnLocationParentIdChanged();
             }
@@ -18274,7 +18232,7 @@ namespace SRFROWCA
             {
                 OnLocationPCodeChanging(value);
                 ReportPropertyChanging("LocationPCode");
-                _LocationPCode = StructuralObject.SetValidValue(value, true);
+                _LocationPCode = StructuralObject.SetValidValue(value, true, "LocationPCode");
                 ReportPropertyChanged("LocationPCode");
                 OnLocationPCodeChanged();
             }
@@ -18298,7 +18256,7 @@ namespace SRFROWCA
             {
                 OnLatitudeChanging(value);
                 ReportPropertyChanging("Latitude");
-                _Latitude = StructuralObject.SetValidValue(value);
+                _Latitude = StructuralObject.SetValidValue(value, "Latitude");
                 ReportPropertyChanged("Latitude");
                 OnLatitudeChanged();
             }
@@ -18322,7 +18280,7 @@ namespace SRFROWCA
             {
                 OnLongitudeChanging(value);
                 ReportPropertyChanging("Longitude");
-                _Longitude = StructuralObject.SetValidValue(value);
+                _Longitude = StructuralObject.SetValidValue(value, "Longitude");
                 ReportPropertyChanged("Longitude");
                 OnLongitudeChanged();
             }
@@ -18346,7 +18304,7 @@ namespace SRFROWCA
             {
                 OnIsAccurateLatLngChanging(value);
                 ReportPropertyChanging("IsAccurateLatLng");
-                _IsAccurateLatLng = StructuralObject.SetValidValue(value);
+                _IsAccurateLatLng = StructuralObject.SetValidValue(value, "IsAccurateLatLng");
                 ReportPropertyChanged("IsAccurateLatLng");
                 OnIsAccurateLatLngChanged();
             }
@@ -18370,7 +18328,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -18394,7 +18352,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -18418,7 +18376,7 @@ namespace SRFROWCA
             {
                 OnUpdatedDateChanging(value);
                 ReportPropertyChanging("UpdatedDate");
-                _UpdatedDate = StructuralObject.SetValidValue(value);
+                _UpdatedDate = StructuralObject.SetValidValue(value, "UpdatedDate");
                 ReportPropertyChanged("UpdatedDate");
                 OnUpdatedDateChanged();
             }
@@ -18442,7 +18400,7 @@ namespace SRFROWCA
             {
                 OnUpdatedByIdChanging(value);
                 ReportPropertyChanging("UpdatedById");
-                _UpdatedById = StructuralObject.SetValidValue(value);
+                _UpdatedById = StructuralObject.SetValidValue(value, "UpdatedById");
                 ReportPropertyChanged("UpdatedById");
                 OnUpdatedByIdChanged();
             }
@@ -18466,7 +18424,7 @@ namespace SRFROWCA
             {
                 OnEstimatedPopulationChanging(value);
                 ReportPropertyChanging("EstimatedPopulation");
-                _EstimatedPopulation = StructuralObject.SetValidValue(value);
+                _EstimatedPopulation = StructuralObject.SetValidValue(value, "EstimatedPopulation");
                 ReportPropertyChanged("EstimatedPopulation");
                 OnEstimatedPopulationChanged();
             }
@@ -18490,7 +18448,7 @@ namespace SRFROWCA
             {
                 OnTempIdChanging(value);
                 ReportPropertyChanging("TempId");
-                _TempId = StructuralObject.SetValidValue(value);
+                _TempId = StructuralObject.SetValidValue(value, "TempId");
                 ReportPropertyChanged("TempId");
                 OnTempIdChanged();
             }
@@ -18501,7 +18459,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -18661,7 +18618,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -18680,7 +18637,7 @@ namespace SRFROWCA
                 {
                     OnLocationTypeIdChanging(value);
                     ReportPropertyChanging("LocationTypeId");
-                    _LocationTypeId = StructuralObject.SetValidValue(value);
+                    _LocationTypeId = StructuralObject.SetValidValue(value, "LocationTypeId");
                     ReportPropertyChanged("LocationTypeId");
                     OnLocationTypeIdChanged();
                 }
@@ -18705,7 +18662,7 @@ namespace SRFROWCA
             {
                 OnLocationType1Changing(value);
                 ReportPropertyChanging("LocationType1");
-                _LocationType1 = StructuralObject.SetValidValue(value, false);
+                _LocationType1 = StructuralObject.SetValidValue(value, false, "LocationType1");
                 ReportPropertyChanged("LocationType1");
                 OnLocationType1Changed();
             }
@@ -18729,7 +18686,7 @@ namespace SRFROWCA
             {
                 OnLocationOrderChanging(value);
                 ReportPropertyChanging("LocationOrder");
-                _LocationOrder = StructuralObject.SetValidValue(value);
+                _LocationOrder = StructuralObject.SetValidValue(value, "LocationOrder");
                 ReportPropertyChanged("LocationOrder");
                 OnLocationOrderChanged();
             }
@@ -18753,7 +18710,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -18764,7 +18721,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -18822,7 +18778,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -18841,7 +18797,7 @@ namespace SRFROWCA
                 {
                     OnMapTypeIdentityIdChanging(value);
                     ReportPropertyChanging("MapTypeIdentityId");
-                    _MapTypeIdentityId = StructuralObject.SetValidValue(value);
+                    _MapTypeIdentityId = StructuralObject.SetValidValue(value, "MapTypeIdentityId");
                     ReportPropertyChanged("MapTypeIdentityId");
                     OnMapTypeIdentityIdChanged();
                 }
@@ -18866,7 +18822,7 @@ namespace SRFROWCA
             {
                 OnMapTypeIdChanging(value);
                 ReportPropertyChanging("MapTypeId");
-                _MapTypeId = StructuralObject.SetValidValue(value);
+                _MapTypeId = StructuralObject.SetValidValue(value, "MapTypeId");
                 ReportPropertyChanged("MapTypeId");
                 OnMapTypeIdChanged();
             }
@@ -18890,7 +18846,7 @@ namespace SRFROWCA
             {
                 OnMapTypeTitleChanging(value);
                 ReportPropertyChanging("MapTypeTitle");
-                _MapTypeTitle = StructuralObject.SetValidValue(value, false);
+                _MapTypeTitle = StructuralObject.SetValidValue(value, false, "MapTypeTitle");
                 ReportPropertyChanged("MapTypeTitle");
                 OnMapTypeTitleChanged();
             }
@@ -18914,7 +18870,7 @@ namespace SRFROWCA
             {
                 OnSiteLanguageIdChanging(value);
                 ReportPropertyChanging("SiteLanguageId");
-                _SiteLanguageId = StructuralObject.SetValidValue(value, false);
+                _SiteLanguageId = StructuralObject.SetValidValue(value, false, "SiteLanguageId");
                 ReportPropertyChanged("SiteLanguageId");
                 OnSiteLanguageIdChanged();
             }
@@ -18938,7 +18894,7 @@ namespace SRFROWCA
             {
                 OnSequenceChanging(value);
                 ReportPropertyChanging("Sequence");
-                _Sequence = StructuralObject.SetValidValue(value);
+                _Sequence = StructuralObject.SetValidValue(value, "Sequence");
                 ReportPropertyChanged("Sequence");
                 OnSequenceChanged();
             }
@@ -18962,7 +18918,7 @@ namespace SRFROWCA
             {
                 OnIsActiveChanging(value);
                 ReportPropertyChanging("IsActive");
-                _IsActive = StructuralObject.SetValidValue(value);
+                _IsActive = StructuralObject.SetValidValue(value, "IsActive");
                 ReportPropertyChanged("IsActive");
                 OnIsActiveChanged();
             }
@@ -18973,7 +18929,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -19003,7 +18958,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -19022,7 +18977,7 @@ namespace SRFROWCA
                 {
                     OnMonthIdChanging(value);
                     ReportPropertyChanging("MonthId");
-                    _MonthId = StructuralObject.SetValidValue(value);
+                    _MonthId = StructuralObject.SetValidValue(value, "MonthId");
                     ReportPropertyChanged("MonthId");
                     OnMonthIdChanged();
                 }
@@ -19049,7 +19004,7 @@ namespace SRFROWCA
                 {
                     OnSiteLanguageIdChanging(value);
                     ReportPropertyChanging("SiteLanguageId");
-                    _SiteLanguageId = StructuralObject.SetValidValue(value);
+                    _SiteLanguageId = StructuralObject.SetValidValue(value, "SiteLanguageId");
                     ReportPropertyChanged("SiteLanguageId");
                     OnSiteLanguageIdChanged();
                 }
@@ -19076,7 +19031,7 @@ namespace SRFROWCA
                 {
                     OnMonthNameChanging(value);
                     ReportPropertyChanging("MonthName");
-                    _MonthName = StructuralObject.SetValidValue(value, false);
+                    _MonthName = StructuralObject.SetValidValue(value, false, "MonthName");
                     ReportPropertyChanged("MonthName");
                     OnMonthNameChanged();
                 }
@@ -19088,7 +19043,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -19120,7 +19074,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -19139,7 +19093,7 @@ namespace SRFROWCA
                 {
                     OnNotificationIdChanging(value);
                     ReportPropertyChanging("NotificationId");
-                    _NotificationId = StructuralObject.SetValidValue(value);
+                    _NotificationId = StructuralObject.SetValidValue(value, "NotificationId");
                     ReportPropertyChanged("NotificationId");
                     OnNotificationIdChanged();
                 }
@@ -19164,7 +19118,7 @@ namespace SRFROWCA
             {
                 OnNotification1Changing(value);
                 ReportPropertyChanging("Notification1");
-                _Notification1 = StructuralObject.SetValidValue(value, false);
+                _Notification1 = StructuralObject.SetValidValue(value, false, "Notification1");
                 ReportPropertyChanged("Notification1");
                 OnNotification1Changed();
             }
@@ -19188,7 +19142,7 @@ namespace SRFROWCA
             {
                 OnSourceUserIdChanging(value);
                 ReportPropertyChanging("SourceUserId");
-                _SourceUserId = StructuralObject.SetValidValue(value);
+                _SourceUserId = StructuralObject.SetValidValue(value, "SourceUserId");
                 ReportPropertyChanged("SourceUserId");
                 OnSourceUserIdChanged();
             }
@@ -19212,7 +19166,7 @@ namespace SRFROWCA
             {
                 OnProjectIdChanging(value);
                 ReportPropertyChanging("ProjectId");
-                _ProjectId = StructuralObject.SetValidValue(value);
+                _ProjectId = StructuralObject.SetValidValue(value, "ProjectId");
                 ReportPropertyChanged("ProjectId");
                 OnProjectIdChanged();
             }
@@ -19236,7 +19190,7 @@ namespace SRFROWCA
             {
                 OnEmergencyLocationIdChanging(value);
                 ReportPropertyChanging("EmergencyLocationId");
-                _EmergencyLocationId = StructuralObject.SetValidValue(value);
+                _EmergencyLocationId = StructuralObject.SetValidValue(value, "EmergencyLocationId");
                 ReportPropertyChanged("EmergencyLocationId");
                 OnEmergencyLocationIdChanged();
             }
@@ -19260,7 +19214,7 @@ namespace SRFROWCA
             {
                 OnEmergencyClusterIdChanging(value);
                 ReportPropertyChanging("EmergencyClusterId");
-                _EmergencyClusterId = StructuralObject.SetValidValue(value);
+                _EmergencyClusterId = StructuralObject.SetValidValue(value, "EmergencyClusterId");
                 ReportPropertyChanged("EmergencyClusterId");
                 OnEmergencyClusterIdChanged();
             }
@@ -19284,7 +19238,7 @@ namespace SRFROWCA
             {
                 OnOrganizationIdChanging(value);
                 ReportPropertyChanging("OrganizationId");
-                _OrganizationId = StructuralObject.SetValidValue(value);
+                _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                 ReportPropertyChanged("OrganizationId");
                 OnOrganizationIdChanged();
             }
@@ -19308,7 +19262,7 @@ namespace SRFROWCA
             {
                 OnMonthIdChanging(value);
                 ReportPropertyChanging("MonthId");
-                _MonthId = StructuralObject.SetValidValue(value);
+                _MonthId = StructuralObject.SetValidValue(value, "MonthId");
                 ReportPropertyChanged("MonthId");
                 OnMonthIdChanged();
             }
@@ -19332,7 +19286,7 @@ namespace SRFROWCA
             {
                 OnYearIdChanging(value);
                 ReportPropertyChanging("YearId");
-                _YearId = StructuralObject.SetValidValue(value);
+                _YearId = StructuralObject.SetValidValue(value, "YearId");
                 ReportPropertyChanged("YearId");
                 OnYearIdChanged();
             }
@@ -19356,7 +19310,7 @@ namespace SRFROWCA
             {
                 OnActivityDataIdChanging(value);
                 ReportPropertyChanging("ActivityDataId");
-                _ActivityDataId = StructuralObject.SetValidValue(value);
+                _ActivityDataId = StructuralObject.SetValidValue(value, "ActivityDataId");
                 ReportPropertyChanged("ActivityDataId");
                 OnActivityDataIdChanged();
             }
@@ -19380,7 +19334,7 @@ namespace SRFROWCA
             {
                 OnIsReadChanging(value);
                 ReportPropertyChanging("IsRead");
-                _IsRead = StructuralObject.SetValidValue(value);
+                _IsRead = StructuralObject.SetValidValue(value, "IsRead");
                 ReportPropertyChanged("IsRead");
                 OnIsReadChanged();
             }
@@ -19404,7 +19358,7 @@ namespace SRFROWCA
             {
                 OnPageURLChanging(value);
                 ReportPropertyChanging("PageURL");
-                _PageURL = StructuralObject.SetValidValue(value, true);
+                _PageURL = StructuralObject.SetValidValue(value, true, "PageURL");
                 ReportPropertyChanged("PageURL");
                 OnPageURLChanged();
             }
@@ -19428,7 +19382,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -19452,7 +19406,7 @@ namespace SRFROWCA
             {
                 OnReadDateChanging(value);
                 ReportPropertyChanging("ReadDate");
-                _ReadDate = StructuralObject.SetValidValue(value);
+                _ReadDate = StructuralObject.SetValidValue(value, "ReadDate");
                 ReportPropertyChanged("ReadDate");
                 OnReadDateChanged();
             }
@@ -19476,7 +19430,7 @@ namespace SRFROWCA
             {
                 OnNotificationTypeIdChanging(value);
                 ReportPropertyChanging("NotificationTypeId");
-                _NotificationTypeId = StructuralObject.SetValidValue(value);
+                _NotificationTypeId = StructuralObject.SetValidValue(value, "NotificationTypeId");
                 ReportPropertyChanged("NotificationTypeId");
                 OnNotificationTypeIdChanged();
             }
@@ -19500,7 +19454,7 @@ namespace SRFROWCA
             {
                 OnNotificationHashChanging(value);
                 ReportPropertyChanging("NotificationHash");
-                _NotificationHash = StructuralObject.SetValidValue(value, true);
+                _NotificationHash = StructuralObject.SetValidValue(value, true, "NotificationHash");
                 ReportPropertyChanged("NotificationHash");
                 OnNotificationHashChanged();
             }
@@ -19511,7 +19465,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -19695,7 +19648,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -19714,7 +19667,7 @@ namespace SRFROWCA
                 {
                     OnNotificationTypeIdChanging(value);
                     ReportPropertyChanging("NotificationTypeId");
-                    _NotificationTypeId = StructuralObject.SetValidValue(value);
+                    _NotificationTypeId = StructuralObject.SetValidValue(value, "NotificationTypeId");
                     ReportPropertyChanged("NotificationTypeId");
                     OnNotificationTypeIdChanged();
                 }
@@ -19739,7 +19692,7 @@ namespace SRFROWCA
             {
                 OnNotificationType1Changing(value);
                 ReportPropertyChanging("NotificationType1");
-                _NotificationType1 = StructuralObject.SetValidValue(value, false);
+                _NotificationType1 = StructuralObject.SetValidValue(value, false, "NotificationType1");
                 ReportPropertyChanged("NotificationType1");
                 OnNotificationType1Changed();
             }
@@ -19750,7 +19703,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -19812,7 +19764,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -19831,7 +19783,7 @@ namespace SRFROWCA
                 {
                     OnObjectiveIdentityIdChanging(value);
                     ReportPropertyChanging("ObjectiveIdentityId");
-                    _ObjectiveIdentityId = StructuralObject.SetValidValue(value);
+                    _ObjectiveIdentityId = StructuralObject.SetValidValue(value, "ObjectiveIdentityId");
                     ReportPropertyChanged("ObjectiveIdentityId");
                     OnObjectiveIdentityIdChanged();
                 }
@@ -19856,7 +19808,7 @@ namespace SRFROWCA
             {
                 OnObjectiveIdChanging(value);
                 ReportPropertyChanging("ObjectiveId");
-                _ObjectiveId = StructuralObject.SetValidValue(value);
+                _ObjectiveId = StructuralObject.SetValidValue(value, "ObjectiveId");
                 ReportPropertyChanged("ObjectiveId");
                 OnObjectiveIdChanged();
             }
@@ -19880,7 +19832,7 @@ namespace SRFROWCA
             {
                 OnSiteLanguageIdChanging(value);
                 ReportPropertyChanging("SiteLanguageId");
-                _SiteLanguageId = StructuralObject.SetValidValue(value);
+                _SiteLanguageId = StructuralObject.SetValidValue(value, "SiteLanguageId");
                 ReportPropertyChanged("SiteLanguageId");
                 OnSiteLanguageIdChanged();
             }
@@ -19904,7 +19856,7 @@ namespace SRFROWCA
             {
                 OnObjective1Changing(value);
                 ReportPropertyChanging("Objective1");
-                _Objective1 = StructuralObject.SetValidValue(value, false);
+                _Objective1 = StructuralObject.SetValidValue(value, false, "Objective1");
                 ReportPropertyChanged("Objective1");
                 OnObjective1Changed();
             }
@@ -19928,7 +19880,7 @@ namespace SRFROWCA
             {
                 OnIsLogFrameObjectiveChanging(value);
                 ReportPropertyChanging("IsLogFrameObjective");
-                _IsLogFrameObjective = StructuralObject.SetValidValue(value);
+                _IsLogFrameObjective = StructuralObject.SetValidValue(value, "IsLogFrameObjective");
                 ReportPropertyChanged("IsLogFrameObjective");
                 OnIsLogFrameObjectiveChanged();
             }
@@ -19952,7 +19904,7 @@ namespace SRFROWCA
             {
                 OnDateCreatedChanging(value);
                 ReportPropertyChanging("DateCreated");
-                _DateCreated = StructuralObject.SetValidValue(value);
+                _DateCreated = StructuralObject.SetValidValue(value, "DateCreated");
                 ReportPropertyChanged("DateCreated");
                 OnDateCreatedChanged();
             }
@@ -19976,7 +19928,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -20000,7 +19952,7 @@ namespace SRFROWCA
             {
                 OnDateUpdatedChanging(value);
                 ReportPropertyChanging("DateUpdated");
-                _DateUpdated = StructuralObject.SetValidValue(value);
+                _DateUpdated = StructuralObject.SetValidValue(value, "DateUpdated");
                 ReportPropertyChanged("DateUpdated");
                 OnDateUpdatedChanged();
             }
@@ -20024,7 +19976,7 @@ namespace SRFROWCA
             {
                 OnUpdatedByIdChanging(value);
                 ReportPropertyChanging("UpdatedById");
-                _UpdatedById = StructuralObject.SetValidValue(value);
+                _UpdatedById = StructuralObject.SetValidValue(value, "UpdatedById");
                 ReportPropertyChanged("UpdatedById");
                 OnUpdatedByIdChanged();
             }
@@ -20048,7 +20000,7 @@ namespace SRFROWCA
             {
                 OnShortObjectiveTitleChanging(value);
                 ReportPropertyChanging("ShortObjectiveTitle");
-                _ShortObjectiveTitle = StructuralObject.SetValidValue(value, true);
+                _ShortObjectiveTitle = StructuralObject.SetValidValue(value, true, "ShortObjectiveTitle");
                 ReportPropertyChanged("ShortObjectiveTitle");
                 OnShortObjectiveTitleChanged();
             }
@@ -20059,7 +20011,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -20089,7 +20040,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -20108,7 +20059,7 @@ namespace SRFROWCA
                 {
                     OnObjectivePriorityIdChanging(value);
                     ReportPropertyChanging("ObjectivePriorityId");
-                    _ObjectivePriorityId = StructuralObject.SetValidValue(value);
+                    _ObjectivePriorityId = StructuralObject.SetValidValue(value, "ObjectivePriorityId");
                     ReportPropertyChanged("ObjectivePriorityId");
                     OnObjectivePriorityIdChanged();
                 }
@@ -20133,7 +20084,7 @@ namespace SRFROWCA
             {
                 OnClusterObjectiveIdChanging(value);
                 ReportPropertyChanging("ClusterObjectiveId");
-                _ClusterObjectiveId = StructuralObject.SetValidValue(value);
+                _ClusterObjectiveId = StructuralObject.SetValidValue(value, "ClusterObjectiveId");
                 ReportPropertyChanged("ClusterObjectiveId");
                 OnClusterObjectiveIdChanged();
             }
@@ -20157,7 +20108,7 @@ namespace SRFROWCA
             {
                 OnHumanitarianPriorityIdChanging(value);
                 ReportPropertyChanging("HumanitarianPriorityId");
-                _HumanitarianPriorityId = StructuralObject.SetValidValue(value);
+                _HumanitarianPriorityId = StructuralObject.SetValidValue(value, "HumanitarianPriorityId");
                 ReportPropertyChanged("HumanitarianPriorityId");
                 OnHumanitarianPriorityIdChanged();
             }
@@ -20168,7 +20119,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -20260,7 +20210,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -20279,7 +20229,7 @@ namespace SRFROWCA
                 {
                     OnOPSProjectDetailsIdChanging(value);
                     ReportPropertyChanging("OPSProjectDetailsId");
-                    _OPSProjectDetailsId = StructuralObject.SetValidValue(value);
+                    _OPSProjectDetailsId = StructuralObject.SetValidValue(value, "OPSProjectDetailsId");
                     ReportPropertyChanged("OPSProjectDetailsId");
                     OnOPSProjectDetailsIdChanged();
                 }
@@ -20306,7 +20256,7 @@ namespace SRFROWCA
                 {
                     OnProjectIDChanging(value);
                     ReportPropertyChanging("ProjectID");
-                    _ProjectID = StructuralObject.SetValidValue(value);
+                    _ProjectID = StructuralObject.SetValidValue(value, "ProjectID");
                     ReportPropertyChanged("ProjectID");
                     OnProjectIDChanged();
                 }
@@ -20331,7 +20281,7 @@ namespace SRFROWCA
             {
                 OnProjectTitleChanging(value);
                 ReportPropertyChanging("ProjectTitle");
-                _ProjectTitle = StructuralObject.SetValidValue(value, true);
+                _ProjectTitle = StructuralObject.SetValidValue(value, true, "ProjectTitle");
                 ReportPropertyChanged("ProjectTitle");
                 OnProjectTitleChanged();
             }
@@ -20355,7 +20305,7 @@ namespace SRFROWCA
             {
                 OnProjectCodeChanging(value);
                 ReportPropertyChanging("ProjectCode");
-                _ProjectCode = StructuralObject.SetValidValue(value, true);
+                _ProjectCode = StructuralObject.SetValidValue(value, true, "ProjectCode");
                 ReportPropertyChanged("ProjectCode");
                 OnProjectCodeChanged();
             }
@@ -20379,7 +20329,7 @@ namespace SRFROWCA
             {
                 OnOrganizationnameChanging(value);
                 ReportPropertyChanging("Organizationname");
-                _Organizationname = StructuralObject.SetValidValue(value, true);
+                _Organizationname = StructuralObject.SetValidValue(value, true, "Organizationname");
                 ReportPropertyChanged("Organizationname");
                 OnOrganizationnameChanged();
             }
@@ -20403,7 +20353,7 @@ namespace SRFROWCA
             {
                 OnOrganisationIdChanging(value);
                 ReportPropertyChanging("OrganisationId");
-                _OrganisationId = StructuralObject.SetValidValue(value);
+                _OrganisationId = StructuralObject.SetValidValue(value, "OrganisationId");
                 ReportPropertyChanged("OrganisationId");
                 OnOrganisationIdChanged();
             }
@@ -20427,7 +20377,7 @@ namespace SRFROWCA
             {
                 OnOriginalRequestChanging(value);
                 ReportPropertyChanging("OriginalRequest");
-                _OriginalRequest = StructuralObject.SetValidValue(value);
+                _OriginalRequest = StructuralObject.SetValidValue(value, "OriginalRequest");
                 ReportPropertyChanged("OriginalRequest");
                 OnOriginalRequestChanged();
             }
@@ -20451,7 +20401,7 @@ namespace SRFROWCA
             {
                 OnOriginal_AChanging(value);
                 ReportPropertyChanging("Original_A");
-                _Original_A = StructuralObject.SetValidValue(value, true);
+                _Original_A = StructuralObject.SetValidValue(value, true, "Original_A");
                 ReportPropertyChanged("Original_A");
                 OnOriginal_AChanged();
             }
@@ -20475,7 +20425,7 @@ namespace SRFROWCA
             {
                 OnOriginal_A_AmountChanging(value);
                 ReportPropertyChanging("Original_A_Amount");
-                _Original_A_Amount = StructuralObject.SetValidValue(value);
+                _Original_A_Amount = StructuralObject.SetValidValue(value, "Original_A_Amount");
                 ReportPropertyChanged("Original_A_Amount");
                 OnOriginal_A_AmountChanged();
             }
@@ -20499,7 +20449,7 @@ namespace SRFROWCA
             {
                 OnOriginal_BChanging(value);
                 ReportPropertyChanging("Original_B");
-                _Original_B = StructuralObject.SetValidValue(value, true);
+                _Original_B = StructuralObject.SetValidValue(value, true, "Original_B");
                 ReportPropertyChanged("Original_B");
                 OnOriginal_BChanged();
             }
@@ -20523,7 +20473,7 @@ namespace SRFROWCA
             {
                 OnOriginal_B_AmountChanging(value);
                 ReportPropertyChanging("Original_B_Amount");
-                _Original_B_Amount = StructuralObject.SetValidValue(value);
+                _Original_B_Amount = StructuralObject.SetValidValue(value, "Original_B_Amount");
                 ReportPropertyChanged("Original_B_Amount");
                 OnOriginal_B_AmountChanged();
             }
@@ -20547,7 +20497,7 @@ namespace SRFROWCA
             {
                 OnOriginal_CChanging(value);
                 ReportPropertyChanging("Original_C");
-                _Original_C = StructuralObject.SetValidValue(value, true);
+                _Original_C = StructuralObject.SetValidValue(value, true, "Original_C");
                 ReportPropertyChanged("Original_C");
                 OnOriginal_CChanged();
             }
@@ -20571,7 +20521,7 @@ namespace SRFROWCA
             {
                 OnOriginal_C_AmountChanging(value);
                 ReportPropertyChanging("Original_C_Amount");
-                _Original_C_Amount = StructuralObject.SetValidValue(value);
+                _Original_C_Amount = StructuralObject.SetValidValue(value, "Original_C_Amount");
                 ReportPropertyChanged("Original_C_Amount");
                 OnOriginal_C_AmountChanged();
             }
@@ -20595,7 +20545,7 @@ namespace SRFROWCA
             {
                 OnOriginal_DChanging(value);
                 ReportPropertyChanging("Original_D");
-                _Original_D = StructuralObject.SetValidValue(value, true);
+                _Original_D = StructuralObject.SetValidValue(value, true, "Original_D");
                 ReportPropertyChanged("Original_D");
                 OnOriginal_DChanged();
             }
@@ -20619,7 +20569,7 @@ namespace SRFROWCA
             {
                 OnOriginal_D_AmountChanging(value);
                 ReportPropertyChanging("Original_D_Amount");
-                _Original_D_Amount = StructuralObject.SetValidValue(value);
+                _Original_D_Amount = StructuralObject.SetValidValue(value, "Original_D_Amount");
                 ReportPropertyChanged("Original_D_Amount");
                 OnOriginal_D_AmountChanged();
             }
@@ -20643,7 +20593,7 @@ namespace SRFROWCA
             {
                 OnOriginal_EChanging(value);
                 ReportPropertyChanging("Original_E");
-                _Original_E = StructuralObject.SetValidValue(value, true);
+                _Original_E = StructuralObject.SetValidValue(value, true, "Original_E");
                 ReportPropertyChanged("Original_E");
                 OnOriginal_EChanged();
             }
@@ -20667,7 +20617,7 @@ namespace SRFROWCA
             {
                 OnOriginal_E_AmountChanging(value);
                 ReportPropertyChanging("Original_E_Amount");
-                _Original_E_Amount = StructuralObject.SetValidValue(value);
+                _Original_E_Amount = StructuralObject.SetValidValue(value, "Original_E_Amount");
                 ReportPropertyChanged("Original_E_Amount");
                 OnOriginal_E_AmountChanged();
             }
@@ -20691,7 +20641,7 @@ namespace SRFROWCA
             {
                 OnCurrentRequestChanging(value);
                 ReportPropertyChanging("CurrentRequest");
-                _CurrentRequest = StructuralObject.SetValidValue(value);
+                _CurrentRequest = StructuralObject.SetValidValue(value, "CurrentRequest");
                 ReportPropertyChanged("CurrentRequest");
                 OnCurrentRequestChanged();
             }
@@ -20715,7 +20665,7 @@ namespace SRFROWCA
             {
                 OnCurrent_AChanging(value);
                 ReportPropertyChanging("Current_A");
-                _Current_A = StructuralObject.SetValidValue(value, true);
+                _Current_A = StructuralObject.SetValidValue(value, true, "Current_A");
                 ReportPropertyChanged("Current_A");
                 OnCurrent_AChanged();
             }
@@ -20739,7 +20689,7 @@ namespace SRFROWCA
             {
                 OnCurrent_A_AmountChanging(value);
                 ReportPropertyChanging("Current_A_Amount");
-                _Current_A_Amount = StructuralObject.SetValidValue(value);
+                _Current_A_Amount = StructuralObject.SetValidValue(value, "Current_A_Amount");
                 ReportPropertyChanged("Current_A_Amount");
                 OnCurrent_A_AmountChanged();
             }
@@ -20763,7 +20713,7 @@ namespace SRFROWCA
             {
                 OnCurrent_BChanging(value);
                 ReportPropertyChanging("Current_B");
-                _Current_B = StructuralObject.SetValidValue(value, true);
+                _Current_B = StructuralObject.SetValidValue(value, true, "Current_B");
                 ReportPropertyChanged("Current_B");
                 OnCurrent_BChanged();
             }
@@ -20787,7 +20737,7 @@ namespace SRFROWCA
             {
                 OnCurrent_B_AmountChanging(value);
                 ReportPropertyChanging("Current_B_Amount");
-                _Current_B_Amount = StructuralObject.SetValidValue(value);
+                _Current_B_Amount = StructuralObject.SetValidValue(value, "Current_B_Amount");
                 ReportPropertyChanged("Current_B_Amount");
                 OnCurrent_B_AmountChanged();
             }
@@ -20811,7 +20761,7 @@ namespace SRFROWCA
             {
                 OnCurrent_CChanging(value);
                 ReportPropertyChanging("Current_C");
-                _Current_C = StructuralObject.SetValidValue(value, true);
+                _Current_C = StructuralObject.SetValidValue(value, true, "Current_C");
                 ReportPropertyChanged("Current_C");
                 OnCurrent_CChanged();
             }
@@ -20835,7 +20785,7 @@ namespace SRFROWCA
             {
                 OnCurrent_C_AmountChanging(value);
                 ReportPropertyChanging("Current_C_Amount");
-                _Current_C_Amount = StructuralObject.SetValidValue(value);
+                _Current_C_Amount = StructuralObject.SetValidValue(value, "Current_C_Amount");
                 ReportPropertyChanged("Current_C_Amount");
                 OnCurrent_C_AmountChanged();
             }
@@ -20859,7 +20809,7 @@ namespace SRFROWCA
             {
                 OnCurrent_DChanging(value);
                 ReportPropertyChanging("Current_D");
-                _Current_D = StructuralObject.SetValidValue(value, true);
+                _Current_D = StructuralObject.SetValidValue(value, true, "Current_D");
                 ReportPropertyChanged("Current_D");
                 OnCurrent_DChanged();
             }
@@ -20883,7 +20833,7 @@ namespace SRFROWCA
             {
                 OnCurrent_D_AmountChanging(value);
                 ReportPropertyChanging("Current_D_Amount");
-                _Current_D_Amount = StructuralObject.SetValidValue(value);
+                _Current_D_Amount = StructuralObject.SetValidValue(value, "Current_D_Amount");
                 ReportPropertyChanged("Current_D_Amount");
                 OnCurrent_D_AmountChanged();
             }
@@ -20907,7 +20857,7 @@ namespace SRFROWCA
             {
                 OnCurrent_EChanging(value);
                 ReportPropertyChanging("Current_E");
-                _Current_E = StructuralObject.SetValidValue(value, true);
+                _Current_E = StructuralObject.SetValidValue(value, true, "Current_E");
                 ReportPropertyChanged("Current_E");
                 OnCurrent_EChanged();
             }
@@ -20931,7 +20881,7 @@ namespace SRFROWCA
             {
                 OnCurrent_E_AmountChanging(value);
                 ReportPropertyChanging("Current_E_Amount");
-                _Current_E_Amount = StructuralObject.SetValidValue(value);
+                _Current_E_Amount = StructuralObject.SetValidValue(value, "Current_E_Amount");
                 ReportPropertyChanged("Current_E_Amount");
                 OnCurrent_E_AmountChanged();
             }
@@ -20955,7 +20905,7 @@ namespace SRFROWCA
             {
                 OnRunningRequestChanging(value);
                 ReportPropertyChanging("RunningRequest");
-                _RunningRequest = StructuralObject.SetValidValue(value);
+                _RunningRequest = StructuralObject.SetValidValue(value, "RunningRequest");
                 ReportPropertyChanged("RunningRequest");
                 OnRunningRequestChanged();
             }
@@ -20979,7 +20929,7 @@ namespace SRFROWCA
             {
                 OnRunning_AChanging(value);
                 ReportPropertyChanging("Running_A");
-                _Running_A = StructuralObject.SetValidValue(value, true);
+                _Running_A = StructuralObject.SetValidValue(value, true, "Running_A");
                 ReportPropertyChanged("Running_A");
                 OnRunning_AChanged();
             }
@@ -21003,7 +20953,7 @@ namespace SRFROWCA
             {
                 OnRunning_A_AmountChanging(value);
                 ReportPropertyChanging("Running_A_Amount");
-                _Running_A_Amount = StructuralObject.SetValidValue(value);
+                _Running_A_Amount = StructuralObject.SetValidValue(value, "Running_A_Amount");
                 ReportPropertyChanged("Running_A_Amount");
                 OnRunning_A_AmountChanged();
             }
@@ -21027,7 +20977,7 @@ namespace SRFROWCA
             {
                 OnRunning_BChanging(value);
                 ReportPropertyChanging("Running_B");
-                _Running_B = StructuralObject.SetValidValue(value, true);
+                _Running_B = StructuralObject.SetValidValue(value, true, "Running_B");
                 ReportPropertyChanged("Running_B");
                 OnRunning_BChanged();
             }
@@ -21051,7 +21001,7 @@ namespace SRFROWCA
             {
                 OnRunning_B_AmountChanging(value);
                 ReportPropertyChanging("Running_B_Amount");
-                _Running_B_Amount = StructuralObject.SetValidValue(value);
+                _Running_B_Amount = StructuralObject.SetValidValue(value, "Running_B_Amount");
                 ReportPropertyChanged("Running_B_Amount");
                 OnRunning_B_AmountChanged();
             }
@@ -21075,7 +21025,7 @@ namespace SRFROWCA
             {
                 OnRunning_CChanging(value);
                 ReportPropertyChanging("Running_C");
-                _Running_C = StructuralObject.SetValidValue(value, true);
+                _Running_C = StructuralObject.SetValidValue(value, true, "Running_C");
                 ReportPropertyChanged("Running_C");
                 OnRunning_CChanged();
             }
@@ -21099,7 +21049,7 @@ namespace SRFROWCA
             {
                 OnRunning_C_AmountChanging(value);
                 ReportPropertyChanging("Running_C_Amount");
-                _Running_C_Amount = StructuralObject.SetValidValue(value);
+                _Running_C_Amount = StructuralObject.SetValidValue(value, "Running_C_Amount");
                 ReportPropertyChanged("Running_C_Amount");
                 OnRunning_C_AmountChanged();
             }
@@ -21123,7 +21073,7 @@ namespace SRFROWCA
             {
                 OnRunning_DChanging(value);
                 ReportPropertyChanging("Running_D");
-                _Running_D = StructuralObject.SetValidValue(value, true);
+                _Running_D = StructuralObject.SetValidValue(value, true, "Running_D");
                 ReportPropertyChanged("Running_D");
                 OnRunning_DChanged();
             }
@@ -21147,7 +21097,7 @@ namespace SRFROWCA
             {
                 OnRunning_D_AmountChanging(value);
                 ReportPropertyChanging("Running_D_Amount");
-                _Running_D_Amount = StructuralObject.SetValidValue(value);
+                _Running_D_Amount = StructuralObject.SetValidValue(value, "Running_D_Amount");
                 ReportPropertyChanged("Running_D_Amount");
                 OnRunning_D_AmountChanged();
             }
@@ -21171,7 +21121,7 @@ namespace SRFROWCA
             {
                 OnRunning_EChanging(value);
                 ReportPropertyChanging("Running_E");
-                _Running_E = StructuralObject.SetValidValue(value, true);
+                _Running_E = StructuralObject.SetValidValue(value, true, "Running_E");
                 ReportPropertyChanged("Running_E");
                 OnRunning_EChanged();
             }
@@ -21195,7 +21145,7 @@ namespace SRFROWCA
             {
                 OnRunning_E_AmountChanging(value);
                 ReportPropertyChanging("Running_E_Amount");
-                _Running_E_Amount = StructuralObject.SetValidValue(value);
+                _Running_E_Amount = StructuralObject.SetValidValue(value, "Running_E_Amount");
                 ReportPropertyChanged("Running_E_Amount");
                 OnRunning_E_AmountChanged();
             }
@@ -21219,7 +21169,7 @@ namespace SRFROWCA
             {
                 OnClusterChanging(value);
                 ReportPropertyChanging("Cluster");
-                _Cluster = StructuralObject.SetValidValue(value, true);
+                _Cluster = StructuralObject.SetValidValue(value, true, "Cluster");
                 ReportPropertyChanged("Cluster");
                 OnClusterChanged();
             }
@@ -21243,7 +21193,7 @@ namespace SRFROWCA
             {
                 OnStatus_LongDsChanging(value);
                 ReportPropertyChanging("Status_LongDs");
-                _Status_LongDs = StructuralObject.SetValidValue(value, true);
+                _Status_LongDs = StructuralObject.SetValidValue(value, true, "Status_LongDs");
                 ReportPropertyChanged("Status_LongDs");
                 OnStatus_LongDsChanged();
             }
@@ -21267,7 +21217,7 @@ namespace SRFROWCA
             {
                 OnProvince_NameChanging(value);
                 ReportPropertyChanging("Province_Name");
-                _Province_Name = StructuralObject.SetValidValue(value, true);
+                _Province_Name = StructuralObject.SetValidValue(value, true, "Province_Name");
                 ReportPropertyChanged("Province_Name");
                 OnProvince_NameChanged();
             }
@@ -21291,7 +21241,7 @@ namespace SRFROWCA
             {
                 OnObjectiveTextChanging(value);
                 ReportPropertyChanging("ObjectiveText");
-                _ObjectiveText = StructuralObject.SetValidValue(value, true);
+                _ObjectiveText = StructuralObject.SetValidValue(value, true, "ObjectiveText");
                 ReportPropertyChanged("ObjectiveText");
                 OnObjectiveTextChanged();
             }
@@ -21315,7 +21265,7 @@ namespace SRFROWCA
             {
                 OnBeneficiaryTotalNumberChanging(value);
                 ReportPropertyChanging("BeneficiaryTotalNumber");
-                _BeneficiaryTotalNumber = StructuralObject.SetValidValue(value);
+                _BeneficiaryTotalNumber = StructuralObject.SetValidValue(value, "BeneficiaryTotalNumber");
                 ReportPropertyChanged("BeneficiaryTotalNumber");
                 OnBeneficiaryTotalNumberChanged();
             }
@@ -21339,7 +21289,7 @@ namespace SRFROWCA
             {
                 OnBeneficiariesChildrenChanging(value);
                 ReportPropertyChanging("BeneficiariesChildren");
-                _BeneficiariesChildren = StructuralObject.SetValidValue(value);
+                _BeneficiariesChildren = StructuralObject.SetValidValue(value, "BeneficiariesChildren");
                 ReportPropertyChanged("BeneficiariesChildren");
                 OnBeneficiariesChildrenChanged();
             }
@@ -21363,7 +21313,7 @@ namespace SRFROWCA
             {
                 OnBeneficiariesWomenChanging(value);
                 ReportPropertyChanging("BeneficiariesWomen");
-                _BeneficiariesWomen = StructuralObject.SetValidValue(value);
+                _BeneficiariesWomen = StructuralObject.SetValidValue(value, "BeneficiariesWomen");
                 ReportPropertyChanged("BeneficiariesWomen");
                 OnBeneficiariesWomenChanged();
             }
@@ -21387,7 +21337,7 @@ namespace SRFROWCA
             {
                 OnBeneficiariesOthersChanging(value);
                 ReportPropertyChanging("BeneficiariesOthers");
-                _BeneficiariesOthers = StructuralObject.SetValidValue(value);
+                _BeneficiariesOthers = StructuralObject.SetValidValue(value, "BeneficiariesOthers");
                 ReportPropertyChanged("BeneficiariesOthers");
                 OnBeneficiariesOthersChanged();
             }
@@ -21411,7 +21361,7 @@ namespace SRFROWCA
             {
                 OnBeneficiariesDescriptionChanging(value);
                 ReportPropertyChanging("BeneficiariesDescription");
-                _BeneficiariesDescription = StructuralObject.SetValidValue(value, true);
+                _BeneficiariesDescription = StructuralObject.SetValidValue(value, true, "BeneficiariesDescription");
                 ReportPropertyChanged("BeneficiariesDescription");
                 OnBeneficiariesDescriptionChanged();
             }
@@ -21435,7 +21385,7 @@ namespace SRFROWCA
             {
                 OnBeneficiariesTotalDescriptionChanging(value);
                 ReportPropertyChanging("BeneficiariesTotalDescription");
-                _BeneficiariesTotalDescription = StructuralObject.SetValidValue(value, true);
+                _BeneficiariesTotalDescription = StructuralObject.SetValidValue(value, true, "BeneficiariesTotalDescription");
                 ReportPropertyChanged("BeneficiariesTotalDescription");
                 OnBeneficiariesTotalDescriptionChanged();
             }
@@ -21459,7 +21409,7 @@ namespace SRFROWCA
             {
                 OnProjectStartDateChanging(value);
                 ReportPropertyChanging("ProjectStartDate");
-                _ProjectStartDate = StructuralObject.SetValidValue(value);
+                _ProjectStartDate = StructuralObject.SetValidValue(value, "ProjectStartDate");
                 ReportPropertyChanged("ProjectStartDate");
                 OnProjectStartDateChanged();
             }
@@ -21483,7 +21433,7 @@ namespace SRFROWCA
             {
                 OnProjectEndDateChanging(value);
                 ReportPropertyChanging("ProjectEndDate");
-                _ProjectEndDate = StructuralObject.SetValidValue(value);
+                _ProjectEndDate = StructuralObject.SetValidValue(value, "ProjectEndDate");
                 ReportPropertyChanged("ProjectEndDate");
                 OnProjectEndDateChanged();
             }
@@ -21507,7 +21457,7 @@ namespace SRFROWCA
             {
                 OnProjectImplementingpartnerChanging(value);
                 ReportPropertyChanging("ProjectImplementingpartner");
-                _ProjectImplementingpartner = StructuralObject.SetValidValue(value, true);
+                _ProjectImplementingpartner = StructuralObject.SetValidValue(value, true, "ProjectImplementingpartner");
                 ReportPropertyChanged("ProjectImplementingpartner");
                 OnProjectImplementingpartnerChanged();
             }
@@ -21531,7 +21481,7 @@ namespace SRFROWCA
             {
                 OnNeedsChanging(value);
                 ReportPropertyChanging("Needs");
-                _Needs = StructuralObject.SetValidValue(value, true);
+                _Needs = StructuralObject.SetValidValue(value, true, "Needs");
                 ReportPropertyChanged("Needs");
                 OnNeedsChanged();
             }
@@ -21555,7 +21505,7 @@ namespace SRFROWCA
             {
                 OnActivitiesChanging(value);
                 ReportPropertyChanging("Activities");
-                _Activities = StructuralObject.SetValidValue(value, true);
+                _Activities = StructuralObject.SetValidValue(value, true, "Activities");
                 ReportPropertyChanged("Activities");
                 OnActivitiesChanged();
             }
@@ -21579,7 +21529,7 @@ namespace SRFROWCA
             {
                 OnOutcomesChanging(value);
                 ReportPropertyChanging("Outcomes");
-                _Outcomes = StructuralObject.SetValidValue(value, true);
+                _Outcomes = StructuralObject.SetValidValue(value, true, "Outcomes");
                 ReportPropertyChanged("Outcomes");
                 OnOutcomesChanged();
             }
@@ -21603,7 +21553,7 @@ namespace SRFROWCA
             {
                 OnPriorityChanging(value);
                 ReportPropertyChanging("Priority");
-                _Priority = StructuralObject.SetValidValue(value, true);
+                _Priority = StructuralObject.SetValidValue(value, true, "Priority");
                 ReportPropertyChanged("Priority");
                 OnPriorityChanged();
             }
@@ -21627,7 +21577,7 @@ namespace SRFROWCA
             {
                 OnProjectContactNameChanging(value);
                 ReportPropertyChanging("ProjectContactName");
-                _ProjectContactName = StructuralObject.SetValidValue(value, true);
+                _ProjectContactName = StructuralObject.SetValidValue(value, true, "ProjectContactName");
                 ReportPropertyChanged("ProjectContactName");
                 OnProjectContactNameChanged();
             }
@@ -21651,7 +21601,7 @@ namespace SRFROWCA
             {
                 OnProjectContactEmailChanging(value);
                 ReportPropertyChanging("ProjectContactEmail");
-                _ProjectContactEmail = StructuralObject.SetValidValue(value, true);
+                _ProjectContactEmail = StructuralObject.SetValidValue(value, true, "ProjectContactEmail");
                 ReportPropertyChanged("ProjectContactEmail");
                 OnProjectContactEmailChanged();
             }
@@ -21675,7 +21625,7 @@ namespace SRFROWCA
             {
                 OnProjectContactPhoneChanging(value);
                 ReportPropertyChanging("ProjectContactPhone");
-                _ProjectContactPhone = StructuralObject.SetValidValue(value, true);
+                _ProjectContactPhone = StructuralObject.SetValidValue(value, true, "ProjectContactPhone");
                 ReportPropertyChanged("ProjectContactPhone");
                 OnProjectContactPhoneChanged();
             }
@@ -21699,7 +21649,7 @@ namespace SRFROWCA
             {
                 OnAgencyProjectCodeChanging(value);
                 ReportPropertyChanging("AgencyProjectCode");
-                _AgencyProjectCode = StructuralObject.SetValidValue(value, true);
+                _AgencyProjectCode = StructuralObject.SetValidValue(value, true, "AgencyProjectCode");
                 ReportPropertyChanged("AgencyProjectCode");
                 OnAgencyProjectCodeChanged();
             }
@@ -21723,7 +21673,7 @@ namespace SRFROWCA
             {
                 OnRelatedURLChanging(value);
                 ReportPropertyChanging("RelatedURL");
-                _RelatedURL = StructuralObject.SetValidValue(value, true);
+                _RelatedURL = StructuralObject.SetValidValue(value, true, "RelatedURL");
                 ReportPropertyChanged("RelatedURL");
                 OnRelatedURLChanged();
             }
@@ -21747,7 +21697,7 @@ namespace SRFROWCA
             {
                 OnWorkFlowCommentsChanging(value);
                 ReportPropertyChanging("WorkFlowComments");
-                _WorkFlowComments = StructuralObject.SetValidValue(value, true);
+                _WorkFlowComments = StructuralObject.SetValidValue(value, true, "WorkFlowComments");
                 ReportPropertyChanged("WorkFlowComments");
                 OnWorkFlowCommentsChanged();
             }
@@ -21771,7 +21721,7 @@ namespace SRFROWCA
             {
                 OnProjectCreatedDateChanging(value);
                 ReportPropertyChanging("ProjectCreatedDate");
-                _ProjectCreatedDate = StructuralObject.SetValidValue(value);
+                _ProjectCreatedDate = StructuralObject.SetValidValue(value, "ProjectCreatedDate");
                 ReportPropertyChanged("ProjectCreatedDate");
                 OnProjectCreatedDateChanged();
             }
@@ -21795,7 +21745,7 @@ namespace SRFROWCA
             {
                 OnProjectTypeChanging(value);
                 ReportPropertyChanging("ProjectType");
-                _ProjectType = StructuralObject.SetValidValue(value, true);
+                _ProjectType = StructuralObject.SetValidValue(value, true, "ProjectType");
                 ReportPropertyChanged("ProjectType");
                 OnProjectTypeChanged();
             }
@@ -21819,7 +21769,7 @@ namespace SRFROWCA
             {
                 OnGenderMarkerCodeChanging(value);
                 ReportPropertyChanging("GenderMarkerCode");
-                _GenderMarkerCode = StructuralObject.SetValidValue(value, true);
+                _GenderMarkerCode = StructuralObject.SetValidValue(value, true, "GenderMarkerCode");
                 ReportPropertyChanged("GenderMarkerCode");
                 OnGenderMarkerCodeChanged();
             }
@@ -21843,7 +21793,7 @@ namespace SRFROWCA
             {
                 OnLastUpdatedDateChanging(value);
                 ReportPropertyChanging("LastUpdatedDate");
-                _LastUpdatedDate = StructuralObject.SetValidValue(value);
+                _LastUpdatedDate = StructuralObject.SetValidValue(value, "LastUpdatedDate");
                 ReportPropertyChanged("LastUpdatedDate");
                 OnLastUpdatedDateChanged();
             }
@@ -21867,7 +21817,7 @@ namespace SRFROWCA
             {
                 OnLastUpdatedByChanging(value);
                 ReportPropertyChanging("LastUpdatedBy");
-                _LastUpdatedBy = StructuralObject.SetValidValue(value, true);
+                _LastUpdatedBy = StructuralObject.SetValidValue(value, true, "LastUpdatedBy");
                 ReportPropertyChanged("LastUpdatedBy");
                 OnLastUpdatedByChanged();
             }
@@ -21891,7 +21841,7 @@ namespace SRFROWCA
             {
                 OnObjectiveChanging(value);
                 ReportPropertyChanging("Objective");
-                _Objective = StructuralObject.SetValidValue(value, true);
+                _Objective = StructuralObject.SetValidValue(value, true, "Objective");
                 ReportPropertyChanged("Objective");
                 OnObjectiveChanged();
             }
@@ -21915,7 +21865,7 @@ namespace SRFROWCA
             {
                 OnHumanitarianPriorityChanging(value);
                 ReportPropertyChanging("HumanitarianPriority");
-                _HumanitarianPriority = StructuralObject.SetValidValue(value, true);
+                _HumanitarianPriority = StructuralObject.SetValidValue(value, true, "HumanitarianPriority");
                 ReportPropertyChanged("HumanitarianPriority");
                 OnHumanitarianPriorityChanged();
             }
@@ -21939,7 +21889,7 @@ namespace SRFROWCA
             {
                 OnActivityNameChanging(value);
                 ReportPropertyChanging("ActivityName");
-                _ActivityName = StructuralObject.SetValidValue(value, true);
+                _ActivityName = StructuralObject.SetValidValue(value, true, "ActivityName");
                 ReportPropertyChanged("ActivityName");
                 OnActivityNameChanged();
             }
@@ -21963,7 +21913,7 @@ namespace SRFROWCA
             {
                 OnDataNameChanging(value);
                 ReportPropertyChanging("DataName");
-                _DataName = StructuralObject.SetValidValue(value, true);
+                _DataName = StructuralObject.SetValidValue(value, true, "DataName");
                 ReportPropertyChanged("DataName");
                 OnDataNameChanged();
             }
@@ -21987,7 +21937,7 @@ namespace SRFROWCA
             {
                 OnLocationIdChanging(value);
                 ReportPropertyChanging("LocationId");
-                _LocationId = StructuralObject.SetValidValue(value);
+                _LocationId = StructuralObject.SetValidValue(value, "LocationId");
                 ReportPropertyChanged("LocationId");
                 OnLocationIdChanged();
             }
@@ -22011,7 +21961,7 @@ namespace SRFROWCA
             {
                 OnLocationNameChanging(value);
                 ReportPropertyChanging("LocationName");
-                _LocationName = StructuralObject.SetValidValue(value, true);
+                _LocationName = StructuralObject.SetValidValue(value, true, "LocationName");
                 ReportPropertyChanged("LocationName");
                 OnLocationNameChanged();
             }
@@ -22035,7 +21985,7 @@ namespace SRFROWCA
             {
                 OnLocationId2Changing(value);
                 ReportPropertyChanging("LocationId2");
-                _LocationId2 = StructuralObject.SetValidValue(value);
+                _LocationId2 = StructuralObject.SetValidValue(value, "LocationId2");
                 ReportPropertyChanged("LocationId2");
                 OnLocationId2Changed();
             }
@@ -22059,7 +22009,7 @@ namespace SRFROWCA
             {
                 OnLocationName2Changing(value);
                 ReportPropertyChanging("LocationName2");
-                _LocationName2 = StructuralObject.SetValidValue(value, true);
+                _LocationName2 = StructuralObject.SetValidValue(value, true, "LocationName2");
                 ReportPropertyChanged("LocationName2");
                 OnLocationName2Changed();
             }
@@ -22083,7 +22033,7 @@ namespace SRFROWCA
             {
                 OnTargetMid2014Changing(value);
                 ReportPropertyChanging("TargetMid2014");
-                _TargetMid2014 = StructuralObject.SetValidValue(value);
+                _TargetMid2014 = StructuralObject.SetValidValue(value, "TargetMid2014");
                 ReportPropertyChanged("TargetMid2014");
                 OnTargetMid2014Changed();
             }
@@ -22107,7 +22057,7 @@ namespace SRFROWCA
             {
                 OnTarget2014Changing(value);
                 ReportPropertyChanging("Target2014");
-                _Target2014 = StructuralObject.SetValidValue(value);
+                _Target2014 = StructuralObject.SetValidValue(value, "Target2014");
                 ReportPropertyChanged("Target2014");
                 OnTarget2014Changed();
             }
@@ -22131,7 +22081,7 @@ namespace SRFROWCA
             {
                 OnClusterIdChanging(value);
                 ReportPropertyChanging("ClusterId");
-                _ClusterId = StructuralObject.SetValidValue(value);
+                _ClusterId = StructuralObject.SetValidValue(value, "ClusterId");
                 ReportPropertyChanged("ClusterId");
                 OnClusterIdChanged();
             }
@@ -22155,7 +22105,7 @@ namespace SRFROWCA
             {
                 OnObjectiveIdChanging(value);
                 ReportPropertyChanging("ObjectiveId");
-                _ObjectiveId = StructuralObject.SetValidValue(value);
+                _ObjectiveId = StructuralObject.SetValidValue(value, "ObjectiveId");
                 ReportPropertyChanged("ObjectiveId");
                 OnObjectiveIdChanged();
             }
@@ -22179,7 +22129,7 @@ namespace SRFROWCA
             {
                 OnHumanitarianPriorityIdChanging(value);
                 ReportPropertyChanging("HumanitarianPriorityId");
-                _HumanitarianPriorityId = StructuralObject.SetValidValue(value);
+                _HumanitarianPriorityId = StructuralObject.SetValidValue(value, "HumanitarianPriorityId");
                 ReportPropertyChanged("HumanitarianPriorityId");
                 OnHumanitarianPriorityIdChanged();
             }
@@ -22203,7 +22153,7 @@ namespace SRFROWCA
             {
                 OnPriorityActivityIdChanging(value);
                 ReportPropertyChanging("PriorityActivityId");
-                _PriorityActivityId = StructuralObject.SetValidValue(value);
+                _PriorityActivityId = StructuralObject.SetValidValue(value, "PriorityActivityId");
                 ReportPropertyChanged("PriorityActivityId");
                 OnPriorityActivityIdChanged();
             }
@@ -22227,7 +22177,7 @@ namespace SRFROWCA
             {
                 OnActivityDataIdChanging(value);
                 ReportPropertyChanging("ActivityDataId");
-                _ActivityDataId = StructuralObject.SetValidValue(value);
+                _ActivityDataId = StructuralObject.SetValidValue(value, "ActivityDataId");
                 ReportPropertyChanged("ActivityDataId");
                 OnActivityDataIdChanged();
             }
@@ -22251,7 +22201,7 @@ namespace SRFROWCA
             {
                 OnOPSReportDetailIdChanging(value);
                 ReportPropertyChanging("OPSReportDetailId");
-                _OPSReportDetailId = StructuralObject.SetValidValue(value);
+                _OPSReportDetailId = StructuralObject.SetValidValue(value, "OPSReportDetailId");
                 ReportPropertyChanged("OPSReportDetailId");
                 OnOPSReportDetailIdChanged();
             }
@@ -22275,7 +22225,7 @@ namespace SRFROWCA
             {
                 OnOPSReportIdChanging(value);
                 ReportPropertyChanging("OPSReportId");
-                _OPSReportId = StructuralObject.SetValidValue(value);
+                _OPSReportId = StructuralObject.SetValidValue(value, "OPSReportId");
                 ReportPropertyChanged("OPSReportId");
                 OnOPSReportIdChanged();
             }
@@ -22299,7 +22249,7 @@ namespace SRFROWCA
             {
                 OnLocationPCodeChanging(value);
                 ReportPropertyChanging("LocationPCode");
-                _LocationPCode = StructuralObject.SetValidValue(value, true);
+                _LocationPCode = StructuralObject.SetValidValue(value, true, "LocationPCode");
                 ReportPropertyChanged("LocationPCode");
                 OnLocationPCodeChanged();
             }
@@ -22323,7 +22273,7 @@ namespace SRFROWCA
             {
                 OnCountryCodeChanging(value);
                 ReportPropertyChanging("CountryCode");
-                _CountryCode = StructuralObject.SetValidValue(value, true);
+                _CountryCode = StructuralObject.SetValidValue(value, true, "CountryCode");
                 ReportPropertyChanged("CountryCode");
                 OnCountryCodeChanged();
             }
@@ -22347,7 +22297,7 @@ namespace SRFROWCA
             {
                 OnCluster2Changing(value);
                 ReportPropertyChanging("Cluster2");
-                _Cluster2 = StructuralObject.SetValidValue(value, true);
+                _Cluster2 = StructuralObject.SetValidValue(value, true, "Cluster2");
                 ReportPropertyChanged("Cluster2");
                 OnCluster2Changed();
             }
@@ -22371,7 +22321,7 @@ namespace SRFROWCA
             {
                 OnCountryIdChanging(value);
                 ReportPropertyChanging("CountryId");
-                _CountryId = StructuralObject.SetValidValue(value);
+                _CountryId = StructuralObject.SetValidValue(value, "CountryId");
                 ReportPropertyChanged("CountryId");
                 OnCountryIdChanged();
             }
@@ -22395,7 +22345,7 @@ namespace SRFROWCA
             {
                 OnLocationTypeIdChanging(value);
                 ReportPropertyChanging("LocationTypeId");
-                _LocationTypeId = StructuralObject.SetValidValue(value);
+                _LocationTypeId = StructuralObject.SetValidValue(value, "LocationTypeId");
                 ReportPropertyChanged("LocationTypeId");
                 OnLocationTypeIdChanged();
             }
@@ -22406,7 +22356,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -22434,7 +22383,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -22453,7 +22402,7 @@ namespace SRFROWCA
                 {
                     OnOPSProjectDetailsIdChanging(value);
                     ReportPropertyChanging("OPSProjectDetailsId");
-                    _OPSProjectDetailsId = StructuralObject.SetValidValue(value);
+                    _OPSProjectDetailsId = StructuralObject.SetValidValue(value, "OPSProjectDetailsId");
                     ReportPropertyChanged("OPSProjectDetailsId");
                     OnOPSProjectDetailsIdChanged();
                 }
@@ -22478,7 +22427,7 @@ namespace SRFROWCA
             {
                 OnProjectIDChanging(value);
                 ReportPropertyChanging("ProjectID");
-                _ProjectID = StructuralObject.SetValidValue(value);
+                _ProjectID = StructuralObject.SetValidValue(value, "ProjectID");
                 ReportPropertyChanged("ProjectID");
                 OnProjectIDChanged();
             }
@@ -22502,7 +22451,7 @@ namespace SRFROWCA
             {
                 OnProjectTitleChanging(value);
                 ReportPropertyChanging("ProjectTitle");
-                _ProjectTitle = StructuralObject.SetValidValue(value, true);
+                _ProjectTitle = StructuralObject.SetValidValue(value, true, "ProjectTitle");
                 ReportPropertyChanged("ProjectTitle");
                 OnProjectTitleChanged();
             }
@@ -22526,7 +22475,7 @@ namespace SRFROWCA
             {
                 OnProjectCodeChanging(value);
                 ReportPropertyChanging("ProjectCode");
-                _ProjectCode = StructuralObject.SetValidValue(value, true);
+                _ProjectCode = StructuralObject.SetValidValue(value, true, "ProjectCode");
                 ReportPropertyChanged("ProjectCode");
                 OnProjectCodeChanged();
             }
@@ -22550,7 +22499,7 @@ namespace SRFROWCA
             {
                 OnOrganizationnameChanging(value);
                 ReportPropertyChanging("Organizationname");
-                _Organizationname = StructuralObject.SetValidValue(value, true);
+                _Organizationname = StructuralObject.SetValidValue(value, true, "Organizationname");
                 ReportPropertyChanged("Organizationname");
                 OnOrganizationnameChanged();
             }
@@ -22574,7 +22523,7 @@ namespace SRFROWCA
             {
                 OnOrganisationIdChanging(value);
                 ReportPropertyChanging("OrganisationId");
-                _OrganisationId = StructuralObject.SetValidValue(value);
+                _OrganisationId = StructuralObject.SetValidValue(value, "OrganisationId");
                 ReportPropertyChanged("OrganisationId");
                 OnOrganisationIdChanged();
             }
@@ -22598,7 +22547,7 @@ namespace SRFROWCA
             {
                 OnOriginalRequestChanging(value);
                 ReportPropertyChanging("OriginalRequest");
-                _OriginalRequest = StructuralObject.SetValidValue(value);
+                _OriginalRequest = StructuralObject.SetValidValue(value, "OriginalRequest");
                 ReportPropertyChanged("OriginalRequest");
                 OnOriginalRequestChanged();
             }
@@ -22622,7 +22571,7 @@ namespace SRFROWCA
             {
                 OnOriginal_AChanging(value);
                 ReportPropertyChanging("Original_A");
-                _Original_A = StructuralObject.SetValidValue(value, true);
+                _Original_A = StructuralObject.SetValidValue(value, true, "Original_A");
                 ReportPropertyChanged("Original_A");
                 OnOriginal_AChanged();
             }
@@ -22646,7 +22595,7 @@ namespace SRFROWCA
             {
                 OnOriginal_A_AmountChanging(value);
                 ReportPropertyChanging("Original_A_Amount");
-                _Original_A_Amount = StructuralObject.SetValidValue(value);
+                _Original_A_Amount = StructuralObject.SetValidValue(value, "Original_A_Amount");
                 ReportPropertyChanged("Original_A_Amount");
                 OnOriginal_A_AmountChanged();
             }
@@ -22670,7 +22619,7 @@ namespace SRFROWCA
             {
                 OnOriginal_BChanging(value);
                 ReportPropertyChanging("Original_B");
-                _Original_B = StructuralObject.SetValidValue(value, true);
+                _Original_B = StructuralObject.SetValidValue(value, true, "Original_B");
                 ReportPropertyChanged("Original_B");
                 OnOriginal_BChanged();
             }
@@ -22694,7 +22643,7 @@ namespace SRFROWCA
             {
                 OnOriginal_B_AmountChanging(value);
                 ReportPropertyChanging("Original_B_Amount");
-                _Original_B_Amount = StructuralObject.SetValidValue(value);
+                _Original_B_Amount = StructuralObject.SetValidValue(value, "Original_B_Amount");
                 ReportPropertyChanged("Original_B_Amount");
                 OnOriginal_B_AmountChanged();
             }
@@ -22718,7 +22667,7 @@ namespace SRFROWCA
             {
                 OnOriginal_CChanging(value);
                 ReportPropertyChanging("Original_C");
-                _Original_C = StructuralObject.SetValidValue(value, true);
+                _Original_C = StructuralObject.SetValidValue(value, true, "Original_C");
                 ReportPropertyChanged("Original_C");
                 OnOriginal_CChanged();
             }
@@ -22742,7 +22691,7 @@ namespace SRFROWCA
             {
                 OnOriginal_C_AmountChanging(value);
                 ReportPropertyChanging("Original_C_Amount");
-                _Original_C_Amount = StructuralObject.SetValidValue(value);
+                _Original_C_Amount = StructuralObject.SetValidValue(value, "Original_C_Amount");
                 ReportPropertyChanged("Original_C_Amount");
                 OnOriginal_C_AmountChanged();
             }
@@ -22766,7 +22715,7 @@ namespace SRFROWCA
             {
                 OnOriginal_DChanging(value);
                 ReportPropertyChanging("Original_D");
-                _Original_D = StructuralObject.SetValidValue(value, true);
+                _Original_D = StructuralObject.SetValidValue(value, true, "Original_D");
                 ReportPropertyChanged("Original_D");
                 OnOriginal_DChanged();
             }
@@ -22790,7 +22739,7 @@ namespace SRFROWCA
             {
                 OnOriginal_D_AmountChanging(value);
                 ReportPropertyChanging("Original_D_Amount");
-                _Original_D_Amount = StructuralObject.SetValidValue(value);
+                _Original_D_Amount = StructuralObject.SetValidValue(value, "Original_D_Amount");
                 ReportPropertyChanged("Original_D_Amount");
                 OnOriginal_D_AmountChanged();
             }
@@ -22814,7 +22763,7 @@ namespace SRFROWCA
             {
                 OnOriginal_EChanging(value);
                 ReportPropertyChanging("Original_E");
-                _Original_E = StructuralObject.SetValidValue(value, true);
+                _Original_E = StructuralObject.SetValidValue(value, true, "Original_E");
                 ReportPropertyChanged("Original_E");
                 OnOriginal_EChanged();
             }
@@ -22838,7 +22787,7 @@ namespace SRFROWCA
             {
                 OnOriginal_E_AmountChanging(value);
                 ReportPropertyChanging("Original_E_Amount");
-                _Original_E_Amount = StructuralObject.SetValidValue(value);
+                _Original_E_Amount = StructuralObject.SetValidValue(value, "Original_E_Amount");
                 ReportPropertyChanged("Original_E_Amount");
                 OnOriginal_E_AmountChanged();
             }
@@ -22862,7 +22811,7 @@ namespace SRFROWCA
             {
                 OnCurrentRequestChanging(value);
                 ReportPropertyChanging("CurrentRequest");
-                _CurrentRequest = StructuralObject.SetValidValue(value);
+                _CurrentRequest = StructuralObject.SetValidValue(value, "CurrentRequest");
                 ReportPropertyChanged("CurrentRequest");
                 OnCurrentRequestChanged();
             }
@@ -22886,7 +22835,7 @@ namespace SRFROWCA
             {
                 OnCurrent_AChanging(value);
                 ReportPropertyChanging("Current_A");
-                _Current_A = StructuralObject.SetValidValue(value, true);
+                _Current_A = StructuralObject.SetValidValue(value, true, "Current_A");
                 ReportPropertyChanged("Current_A");
                 OnCurrent_AChanged();
             }
@@ -22910,7 +22859,7 @@ namespace SRFROWCA
             {
                 OnCurrent_A_AmountChanging(value);
                 ReportPropertyChanging("Current_A_Amount");
-                _Current_A_Amount = StructuralObject.SetValidValue(value);
+                _Current_A_Amount = StructuralObject.SetValidValue(value, "Current_A_Amount");
                 ReportPropertyChanged("Current_A_Amount");
                 OnCurrent_A_AmountChanged();
             }
@@ -22934,7 +22883,7 @@ namespace SRFROWCA
             {
                 OnCurrent_BChanging(value);
                 ReportPropertyChanging("Current_B");
-                _Current_B = StructuralObject.SetValidValue(value, true);
+                _Current_B = StructuralObject.SetValidValue(value, true, "Current_B");
                 ReportPropertyChanged("Current_B");
                 OnCurrent_BChanged();
             }
@@ -22958,7 +22907,7 @@ namespace SRFROWCA
             {
                 OnCurrent_B_AmountChanging(value);
                 ReportPropertyChanging("Current_B_Amount");
-                _Current_B_Amount = StructuralObject.SetValidValue(value);
+                _Current_B_Amount = StructuralObject.SetValidValue(value, "Current_B_Amount");
                 ReportPropertyChanged("Current_B_Amount");
                 OnCurrent_B_AmountChanged();
             }
@@ -22982,7 +22931,7 @@ namespace SRFROWCA
             {
                 OnCurrent_CChanging(value);
                 ReportPropertyChanging("Current_C");
-                _Current_C = StructuralObject.SetValidValue(value, true);
+                _Current_C = StructuralObject.SetValidValue(value, true, "Current_C");
                 ReportPropertyChanged("Current_C");
                 OnCurrent_CChanged();
             }
@@ -23006,7 +22955,7 @@ namespace SRFROWCA
             {
                 OnCurrent_C_AmountChanging(value);
                 ReportPropertyChanging("Current_C_Amount");
-                _Current_C_Amount = StructuralObject.SetValidValue(value);
+                _Current_C_Amount = StructuralObject.SetValidValue(value, "Current_C_Amount");
                 ReportPropertyChanged("Current_C_Amount");
                 OnCurrent_C_AmountChanged();
             }
@@ -23030,7 +22979,7 @@ namespace SRFROWCA
             {
                 OnCurrent_DChanging(value);
                 ReportPropertyChanging("Current_D");
-                _Current_D = StructuralObject.SetValidValue(value, true);
+                _Current_D = StructuralObject.SetValidValue(value, true, "Current_D");
                 ReportPropertyChanged("Current_D");
                 OnCurrent_DChanged();
             }
@@ -23054,7 +23003,7 @@ namespace SRFROWCA
             {
                 OnCurrent_D_AmountChanging(value);
                 ReportPropertyChanging("Current_D_Amount");
-                _Current_D_Amount = StructuralObject.SetValidValue(value);
+                _Current_D_Amount = StructuralObject.SetValidValue(value, "Current_D_Amount");
                 ReportPropertyChanged("Current_D_Amount");
                 OnCurrent_D_AmountChanged();
             }
@@ -23078,7 +23027,7 @@ namespace SRFROWCA
             {
                 OnCurrent_EChanging(value);
                 ReportPropertyChanging("Current_E");
-                _Current_E = StructuralObject.SetValidValue(value, true);
+                _Current_E = StructuralObject.SetValidValue(value, true, "Current_E");
                 ReportPropertyChanged("Current_E");
                 OnCurrent_EChanged();
             }
@@ -23102,7 +23051,7 @@ namespace SRFROWCA
             {
                 OnCurrent_E_AmountChanging(value);
                 ReportPropertyChanging("Current_E_Amount");
-                _Current_E_Amount = StructuralObject.SetValidValue(value);
+                _Current_E_Amount = StructuralObject.SetValidValue(value, "Current_E_Amount");
                 ReportPropertyChanged("Current_E_Amount");
                 OnCurrent_E_AmountChanged();
             }
@@ -23126,7 +23075,7 @@ namespace SRFROWCA
             {
                 OnRunningRequestChanging(value);
                 ReportPropertyChanging("RunningRequest");
-                _RunningRequest = StructuralObject.SetValidValue(value);
+                _RunningRequest = StructuralObject.SetValidValue(value, "RunningRequest");
                 ReportPropertyChanged("RunningRequest");
                 OnRunningRequestChanged();
             }
@@ -23150,7 +23099,7 @@ namespace SRFROWCA
             {
                 OnRunning_AChanging(value);
                 ReportPropertyChanging("Running_A");
-                _Running_A = StructuralObject.SetValidValue(value, true);
+                _Running_A = StructuralObject.SetValidValue(value, true, "Running_A");
                 ReportPropertyChanged("Running_A");
                 OnRunning_AChanged();
             }
@@ -23174,7 +23123,7 @@ namespace SRFROWCA
             {
                 OnRunning_A_AmountChanging(value);
                 ReportPropertyChanging("Running_A_Amount");
-                _Running_A_Amount = StructuralObject.SetValidValue(value);
+                _Running_A_Amount = StructuralObject.SetValidValue(value, "Running_A_Amount");
                 ReportPropertyChanged("Running_A_Amount");
                 OnRunning_A_AmountChanged();
             }
@@ -23198,7 +23147,7 @@ namespace SRFROWCA
             {
                 OnRunning_BChanging(value);
                 ReportPropertyChanging("Running_B");
-                _Running_B = StructuralObject.SetValidValue(value, true);
+                _Running_B = StructuralObject.SetValidValue(value, true, "Running_B");
                 ReportPropertyChanged("Running_B");
                 OnRunning_BChanged();
             }
@@ -23222,7 +23171,7 @@ namespace SRFROWCA
             {
                 OnRunning_B_AmountChanging(value);
                 ReportPropertyChanging("Running_B_Amount");
-                _Running_B_Amount = StructuralObject.SetValidValue(value);
+                _Running_B_Amount = StructuralObject.SetValidValue(value, "Running_B_Amount");
                 ReportPropertyChanged("Running_B_Amount");
                 OnRunning_B_AmountChanged();
             }
@@ -23246,7 +23195,7 @@ namespace SRFROWCA
             {
                 OnRunning_CChanging(value);
                 ReportPropertyChanging("Running_C");
-                _Running_C = StructuralObject.SetValidValue(value, true);
+                _Running_C = StructuralObject.SetValidValue(value, true, "Running_C");
                 ReportPropertyChanged("Running_C");
                 OnRunning_CChanged();
             }
@@ -23270,7 +23219,7 @@ namespace SRFROWCA
             {
                 OnRunning_C_AmountChanging(value);
                 ReportPropertyChanging("Running_C_Amount");
-                _Running_C_Amount = StructuralObject.SetValidValue(value);
+                _Running_C_Amount = StructuralObject.SetValidValue(value, "Running_C_Amount");
                 ReportPropertyChanged("Running_C_Amount");
                 OnRunning_C_AmountChanged();
             }
@@ -23294,7 +23243,7 @@ namespace SRFROWCA
             {
                 OnRunning_DChanging(value);
                 ReportPropertyChanging("Running_D");
-                _Running_D = StructuralObject.SetValidValue(value, true);
+                _Running_D = StructuralObject.SetValidValue(value, true, "Running_D");
                 ReportPropertyChanged("Running_D");
                 OnRunning_DChanged();
             }
@@ -23318,7 +23267,7 @@ namespace SRFROWCA
             {
                 OnRunning_D_AmountChanging(value);
                 ReportPropertyChanging("Running_D_Amount");
-                _Running_D_Amount = StructuralObject.SetValidValue(value);
+                _Running_D_Amount = StructuralObject.SetValidValue(value, "Running_D_Amount");
                 ReportPropertyChanged("Running_D_Amount");
                 OnRunning_D_AmountChanged();
             }
@@ -23342,7 +23291,7 @@ namespace SRFROWCA
             {
                 OnRunning_EChanging(value);
                 ReportPropertyChanging("Running_E");
-                _Running_E = StructuralObject.SetValidValue(value, true);
+                _Running_E = StructuralObject.SetValidValue(value, true, "Running_E");
                 ReportPropertyChanged("Running_E");
                 OnRunning_EChanged();
             }
@@ -23366,7 +23315,7 @@ namespace SRFROWCA
             {
                 OnRunning_E_AmountChanging(value);
                 ReportPropertyChanging("Running_E_Amount");
-                _Running_E_Amount = StructuralObject.SetValidValue(value);
+                _Running_E_Amount = StructuralObject.SetValidValue(value, "Running_E_Amount");
                 ReportPropertyChanged("Running_E_Amount");
                 OnRunning_E_AmountChanged();
             }
@@ -23390,7 +23339,7 @@ namespace SRFROWCA
             {
                 OnClusterChanging(value);
                 ReportPropertyChanging("Cluster");
-                _Cluster = StructuralObject.SetValidValue(value, true);
+                _Cluster = StructuralObject.SetValidValue(value, true, "Cluster");
                 ReportPropertyChanged("Cluster");
                 OnClusterChanged();
             }
@@ -23414,7 +23363,7 @@ namespace SRFROWCA
             {
                 OnStatus_LongDsChanging(value);
                 ReportPropertyChanging("Status_LongDs");
-                _Status_LongDs = StructuralObject.SetValidValue(value, true);
+                _Status_LongDs = StructuralObject.SetValidValue(value, true, "Status_LongDs");
                 ReportPropertyChanged("Status_LongDs");
                 OnStatus_LongDsChanged();
             }
@@ -23438,7 +23387,7 @@ namespace SRFROWCA
             {
                 OnProvince_NameChanging(value);
                 ReportPropertyChanging("Province_Name");
-                _Province_Name = StructuralObject.SetValidValue(value, true);
+                _Province_Name = StructuralObject.SetValidValue(value, true, "Province_Name");
                 ReportPropertyChanged("Province_Name");
                 OnProvince_NameChanged();
             }
@@ -23462,7 +23411,7 @@ namespace SRFROWCA
             {
                 OnObjectiveTextChanging(value);
                 ReportPropertyChanging("ObjectiveText");
-                _ObjectiveText = StructuralObject.SetValidValue(value, true);
+                _ObjectiveText = StructuralObject.SetValidValue(value, true, "ObjectiveText");
                 ReportPropertyChanged("ObjectiveText");
                 OnObjectiveTextChanged();
             }
@@ -23486,7 +23435,7 @@ namespace SRFROWCA
             {
                 OnBeneficiaryTotalNumberChanging(value);
                 ReportPropertyChanging("BeneficiaryTotalNumber");
-                _BeneficiaryTotalNumber = StructuralObject.SetValidValue(value);
+                _BeneficiaryTotalNumber = StructuralObject.SetValidValue(value, "BeneficiaryTotalNumber");
                 ReportPropertyChanged("BeneficiaryTotalNumber");
                 OnBeneficiaryTotalNumberChanged();
             }
@@ -23510,7 +23459,7 @@ namespace SRFROWCA
             {
                 OnBeneficiariesChildrenChanging(value);
                 ReportPropertyChanging("BeneficiariesChildren");
-                _BeneficiariesChildren = StructuralObject.SetValidValue(value);
+                _BeneficiariesChildren = StructuralObject.SetValidValue(value, "BeneficiariesChildren");
                 ReportPropertyChanged("BeneficiariesChildren");
                 OnBeneficiariesChildrenChanged();
             }
@@ -23534,7 +23483,7 @@ namespace SRFROWCA
             {
                 OnBeneficiariesWomenChanging(value);
                 ReportPropertyChanging("BeneficiariesWomen");
-                _BeneficiariesWomen = StructuralObject.SetValidValue(value);
+                _BeneficiariesWomen = StructuralObject.SetValidValue(value, "BeneficiariesWomen");
                 ReportPropertyChanged("BeneficiariesWomen");
                 OnBeneficiariesWomenChanged();
             }
@@ -23558,7 +23507,7 @@ namespace SRFROWCA
             {
                 OnBeneficiariesOthersChanging(value);
                 ReportPropertyChanging("BeneficiariesOthers");
-                _BeneficiariesOthers = StructuralObject.SetValidValue(value);
+                _BeneficiariesOthers = StructuralObject.SetValidValue(value, "BeneficiariesOthers");
                 ReportPropertyChanged("BeneficiariesOthers");
                 OnBeneficiariesOthersChanged();
             }
@@ -23582,7 +23531,7 @@ namespace SRFROWCA
             {
                 OnBeneficiariesDescriptionChanging(value);
                 ReportPropertyChanging("BeneficiariesDescription");
-                _BeneficiariesDescription = StructuralObject.SetValidValue(value, true);
+                _BeneficiariesDescription = StructuralObject.SetValidValue(value, true, "BeneficiariesDescription");
                 ReportPropertyChanged("BeneficiariesDescription");
                 OnBeneficiariesDescriptionChanged();
             }
@@ -23606,7 +23555,7 @@ namespace SRFROWCA
             {
                 OnBeneficiariesTotalDescriptionChanging(value);
                 ReportPropertyChanging("BeneficiariesTotalDescription");
-                _BeneficiariesTotalDescription = StructuralObject.SetValidValue(value, true);
+                _BeneficiariesTotalDescription = StructuralObject.SetValidValue(value, true, "BeneficiariesTotalDescription");
                 ReportPropertyChanged("BeneficiariesTotalDescription");
                 OnBeneficiariesTotalDescriptionChanged();
             }
@@ -23630,7 +23579,7 @@ namespace SRFROWCA
             {
                 OnProjectStartDateChanging(value);
                 ReportPropertyChanging("ProjectStartDate");
-                _ProjectStartDate = StructuralObject.SetValidValue(value);
+                _ProjectStartDate = StructuralObject.SetValidValue(value, "ProjectStartDate");
                 ReportPropertyChanged("ProjectStartDate");
                 OnProjectStartDateChanged();
             }
@@ -23654,7 +23603,7 @@ namespace SRFROWCA
             {
                 OnProjectEndDateChanging(value);
                 ReportPropertyChanging("ProjectEndDate");
-                _ProjectEndDate = StructuralObject.SetValidValue(value);
+                _ProjectEndDate = StructuralObject.SetValidValue(value, "ProjectEndDate");
                 ReportPropertyChanged("ProjectEndDate");
                 OnProjectEndDateChanged();
             }
@@ -23678,7 +23627,7 @@ namespace SRFROWCA
             {
                 OnProjectImplementingpartnerChanging(value);
                 ReportPropertyChanging("ProjectImplementingpartner");
-                _ProjectImplementingpartner = StructuralObject.SetValidValue(value, true);
+                _ProjectImplementingpartner = StructuralObject.SetValidValue(value, true, "ProjectImplementingpartner");
                 ReportPropertyChanged("ProjectImplementingpartner");
                 OnProjectImplementingpartnerChanged();
             }
@@ -23702,7 +23651,7 @@ namespace SRFROWCA
             {
                 OnNeedsChanging(value);
                 ReportPropertyChanging("Needs");
-                _Needs = StructuralObject.SetValidValue(value, true);
+                _Needs = StructuralObject.SetValidValue(value, true, "Needs");
                 ReportPropertyChanged("Needs");
                 OnNeedsChanged();
             }
@@ -23726,7 +23675,7 @@ namespace SRFROWCA
             {
                 OnActivitiesChanging(value);
                 ReportPropertyChanging("Activities");
-                _Activities = StructuralObject.SetValidValue(value, true);
+                _Activities = StructuralObject.SetValidValue(value, true, "Activities");
                 ReportPropertyChanged("Activities");
                 OnActivitiesChanged();
             }
@@ -23750,7 +23699,7 @@ namespace SRFROWCA
             {
                 OnOutcomesChanging(value);
                 ReportPropertyChanging("Outcomes");
-                _Outcomes = StructuralObject.SetValidValue(value, true);
+                _Outcomes = StructuralObject.SetValidValue(value, true, "Outcomes");
                 ReportPropertyChanged("Outcomes");
                 OnOutcomesChanged();
             }
@@ -23774,7 +23723,7 @@ namespace SRFROWCA
             {
                 OnPriorityChanging(value);
                 ReportPropertyChanging("Priority");
-                _Priority = StructuralObject.SetValidValue(value, true);
+                _Priority = StructuralObject.SetValidValue(value, true, "Priority");
                 ReportPropertyChanged("Priority");
                 OnPriorityChanged();
             }
@@ -23798,7 +23747,7 @@ namespace SRFROWCA
             {
                 OnProjectContactNameChanging(value);
                 ReportPropertyChanging("ProjectContactName");
-                _ProjectContactName = StructuralObject.SetValidValue(value, true);
+                _ProjectContactName = StructuralObject.SetValidValue(value, true, "ProjectContactName");
                 ReportPropertyChanged("ProjectContactName");
                 OnProjectContactNameChanged();
             }
@@ -23822,7 +23771,7 @@ namespace SRFROWCA
             {
                 OnProjectContactEmailChanging(value);
                 ReportPropertyChanging("ProjectContactEmail");
-                _ProjectContactEmail = StructuralObject.SetValidValue(value, true);
+                _ProjectContactEmail = StructuralObject.SetValidValue(value, true, "ProjectContactEmail");
                 ReportPropertyChanged("ProjectContactEmail");
                 OnProjectContactEmailChanged();
             }
@@ -23846,7 +23795,7 @@ namespace SRFROWCA
             {
                 OnProjectContactPhoneChanging(value);
                 ReportPropertyChanging("ProjectContactPhone");
-                _ProjectContactPhone = StructuralObject.SetValidValue(value, true);
+                _ProjectContactPhone = StructuralObject.SetValidValue(value, true, "ProjectContactPhone");
                 ReportPropertyChanged("ProjectContactPhone");
                 OnProjectContactPhoneChanged();
             }
@@ -23870,7 +23819,7 @@ namespace SRFROWCA
             {
                 OnAgencyProjectCodeChanging(value);
                 ReportPropertyChanging("AgencyProjectCode");
-                _AgencyProjectCode = StructuralObject.SetValidValue(value, true);
+                _AgencyProjectCode = StructuralObject.SetValidValue(value, true, "AgencyProjectCode");
                 ReportPropertyChanged("AgencyProjectCode");
                 OnAgencyProjectCodeChanged();
             }
@@ -23894,7 +23843,7 @@ namespace SRFROWCA
             {
                 OnRelatedURLChanging(value);
                 ReportPropertyChanging("RelatedURL");
-                _RelatedURL = StructuralObject.SetValidValue(value, true);
+                _RelatedURL = StructuralObject.SetValidValue(value, true, "RelatedURL");
                 ReportPropertyChanged("RelatedURL");
                 OnRelatedURLChanged();
             }
@@ -23918,7 +23867,7 @@ namespace SRFROWCA
             {
                 OnWorkFlowCommentsChanging(value);
                 ReportPropertyChanging("WorkFlowComments");
-                _WorkFlowComments = StructuralObject.SetValidValue(value, true);
+                _WorkFlowComments = StructuralObject.SetValidValue(value, true, "WorkFlowComments");
                 ReportPropertyChanged("WorkFlowComments");
                 OnWorkFlowCommentsChanged();
             }
@@ -23942,7 +23891,7 @@ namespace SRFROWCA
             {
                 OnProjectCreatedDateChanging(value);
                 ReportPropertyChanging("ProjectCreatedDate");
-                _ProjectCreatedDate = StructuralObject.SetValidValue(value);
+                _ProjectCreatedDate = StructuralObject.SetValidValue(value, "ProjectCreatedDate");
                 ReportPropertyChanged("ProjectCreatedDate");
                 OnProjectCreatedDateChanged();
             }
@@ -23966,7 +23915,7 @@ namespace SRFROWCA
             {
                 OnProjectTypeChanging(value);
                 ReportPropertyChanging("ProjectType");
-                _ProjectType = StructuralObject.SetValidValue(value, true);
+                _ProjectType = StructuralObject.SetValidValue(value, true, "ProjectType");
                 ReportPropertyChanged("ProjectType");
                 OnProjectTypeChanged();
             }
@@ -23990,7 +23939,7 @@ namespace SRFROWCA
             {
                 OnGenderMarkerCodeChanging(value);
                 ReportPropertyChanging("GenderMarkerCode");
-                _GenderMarkerCode = StructuralObject.SetValidValue(value, true);
+                _GenderMarkerCode = StructuralObject.SetValidValue(value, true, "GenderMarkerCode");
                 ReportPropertyChanged("GenderMarkerCode");
                 OnGenderMarkerCodeChanged();
             }
@@ -24014,7 +23963,7 @@ namespace SRFROWCA
             {
                 OnLastUpdatedDateChanging(value);
                 ReportPropertyChanging("LastUpdatedDate");
-                _LastUpdatedDate = StructuralObject.SetValidValue(value);
+                _LastUpdatedDate = StructuralObject.SetValidValue(value, "LastUpdatedDate");
                 ReportPropertyChanged("LastUpdatedDate");
                 OnLastUpdatedDateChanged();
             }
@@ -24038,7 +23987,7 @@ namespace SRFROWCA
             {
                 OnLastUpdatedByChanging(value);
                 ReportPropertyChanging("LastUpdatedBy");
-                _LastUpdatedBy = StructuralObject.SetValidValue(value, true);
+                _LastUpdatedBy = StructuralObject.SetValidValue(value, true, "LastUpdatedBy");
                 ReportPropertyChanged("LastUpdatedBy");
                 OnLastUpdatedByChanged();
             }
@@ -24062,7 +24011,7 @@ namespace SRFROWCA
             {
                 OnSubSetOfAppealChanging(value);
                 ReportPropertyChanging("SubSetOfAppeal");
-                _SubSetOfAppeal = StructuralObject.SetValidValue(value, true);
+                _SubSetOfAppeal = StructuralObject.SetValidValue(value, true, "SubSetOfAppeal");
                 ReportPropertyChanged("SubSetOfAppeal");
                 OnSubSetOfAppealChanged();
             }
@@ -24086,7 +24035,7 @@ namespace SRFROWCA
             {
                 OnProjectAlreadyInTableChanging(value);
                 ReportPropertyChanging("ProjectAlreadyInTable");
-                _ProjectAlreadyInTable = StructuralObject.SetValidValue(value);
+                _ProjectAlreadyInTable = StructuralObject.SetValidValue(value, "ProjectAlreadyInTable");
                 ReportPropertyChanged("ProjectAlreadyInTable");
                 OnProjectAlreadyInTableChanged();
             }
@@ -24110,7 +24059,7 @@ namespace SRFROWCA
             {
                 OnLocationCodeIdChanging(value);
                 ReportPropertyChanging("LocationCodeId");
-                _LocationCodeId = StructuralObject.SetValidValue(value);
+                _LocationCodeId = StructuralObject.SetValidValue(value, "LocationCodeId");
                 ReportPropertyChanged("LocationCodeId");
                 OnLocationCodeIdChanged();
             }
@@ -24134,7 +24083,7 @@ namespace SRFROWCA
             {
                 OnClusterCodeIdChanging(value);
                 ReportPropertyChanging("ClusterCodeId");
-                _ClusterCodeId = StructuralObject.SetValidValue(value);
+                _ClusterCodeId = StructuralObject.SetValidValue(value, "ClusterCodeId");
                 ReportPropertyChanged("ClusterCodeId");
                 OnClusterCodeIdChanged();
             }
@@ -24158,7 +24107,7 @@ namespace SRFROWCA
             {
                 OnNewlyAddedChanging(value);
                 ReportPropertyChanging("NewlyAdded");
-                _NewlyAdded = StructuralObject.SetValidValue(value);
+                _NewlyAdded = StructuralObject.SetValidValue(value, "NewlyAdded");
                 ReportPropertyChanged("NewlyAdded");
                 OnNewlyAddedChanged();
             }
@@ -24169,7 +24118,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -24205,7 +24153,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -24224,7 +24172,7 @@ namespace SRFROWCA
                 {
                     OnOPSReportIdChanging(value);
                     ReportPropertyChanging("OPSReportId");
-                    _OPSReportId = StructuralObject.SetValidValue(value);
+                    _OPSReportId = StructuralObject.SetValidValue(value, "OPSReportId");
                     ReportPropertyChanged("OPSReportId");
                     OnOPSReportIdChanged();
                 }
@@ -24249,7 +24197,7 @@ namespace SRFROWCA
             {
                 OnOPSProjectIdChanging(value);
                 ReportPropertyChanging("OPSProjectId");
-                _OPSProjectId = StructuralObject.SetValidValue(value);
+                _OPSProjectId = StructuralObject.SetValidValue(value, "OPSProjectId");
                 ReportPropertyChanged("OPSProjectId");
                 OnOPSProjectIdChanged();
             }
@@ -24273,7 +24221,7 @@ namespace SRFROWCA
             {
                 OnEmergencyClusterIdChanging(value);
                 ReportPropertyChanging("EmergencyClusterId");
-                _EmergencyClusterId = StructuralObject.SetValidValue(value);
+                _EmergencyClusterId = StructuralObject.SetValidValue(value, "EmergencyClusterId");
                 ReportPropertyChanged("EmergencyClusterId");
                 OnEmergencyClusterIdChanged();
             }
@@ -24297,7 +24245,7 @@ namespace SRFROWCA
             {
                 OnEmergencyLocationIdChanging(value);
                 ReportPropertyChanging("EmergencyLocationId");
-                _EmergencyLocationId = StructuralObject.SetValidValue(value);
+                _EmergencyLocationId = StructuralObject.SetValidValue(value, "EmergencyLocationId");
                 ReportPropertyChanged("EmergencyLocationId");
                 OnEmergencyLocationIdChanged();
             }
@@ -24321,7 +24269,7 @@ namespace SRFROWCA
             {
                 OnSiteLanguageIdChanging(value);
                 ReportPropertyChanging("SiteLanguageId");
-                _SiteLanguageId = StructuralObject.SetValidValue(value);
+                _SiteLanguageId = StructuralObject.SetValidValue(value, "SiteLanguageId");
                 ReportPropertyChanged("SiteLanguageId");
                 OnSiteLanguageIdChanged();
             }
@@ -24345,7 +24293,7 @@ namespace SRFROWCA
             {
                 OnYearIdChanging(value);
                 ReportPropertyChanging("YearId");
-                _YearId = StructuralObject.SetValidValue(value);
+                _YearId = StructuralObject.SetValidValue(value, "YearId");
                 ReportPropertyChanged("YearId");
                 OnYearIdChanged();
             }
@@ -24369,7 +24317,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -24393,7 +24341,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdOPSUserChanging(value);
                 ReportPropertyChanging("CreatedByIdOPSUser");
-                _CreatedByIdOPSUser = StructuralObject.SetValidValue(value);
+                _CreatedByIdOPSUser = StructuralObject.SetValidValue(value, "CreatedByIdOPSUser");
                 ReportPropertyChanged("CreatedByIdOPSUser");
                 OnCreatedByIdOPSUserChanged();
             }
@@ -24404,7 +24352,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -24484,7 +24431,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -24503,7 +24450,7 @@ namespace SRFROWCA
                 {
                     OnOPSReportDetailIdChanging(value);
                     ReportPropertyChanging("OPSReportDetailId");
-                    _OPSReportDetailId = StructuralObject.SetValidValue(value);
+                    _OPSReportDetailId = StructuralObject.SetValidValue(value, "OPSReportDetailId");
                     ReportPropertyChanged("OPSReportDetailId");
                     OnOPSReportDetailIdChanged();
                 }
@@ -24528,7 +24475,7 @@ namespace SRFROWCA
             {
                 OnOPSReportIdChanging(value);
                 ReportPropertyChanging("OPSReportId");
-                _OPSReportId = StructuralObject.SetValidValue(value);
+                _OPSReportId = StructuralObject.SetValidValue(value, "OPSReportId");
                 ReportPropertyChanged("OPSReportId");
                 OnOPSReportIdChanged();
             }
@@ -24552,7 +24499,7 @@ namespace SRFROWCA
             {
                 OnOPSReportLocationidChanging(value);
                 ReportPropertyChanging("OPSReportLocationid");
-                _OPSReportLocationid = StructuralObject.SetValidValue(value);
+                _OPSReportLocationid = StructuralObject.SetValidValue(value, "OPSReportLocationid");
                 ReportPropertyChanged("OPSReportLocationid");
                 OnOPSReportLocationidChanged();
             }
@@ -24576,7 +24523,7 @@ namespace SRFROWCA
             {
                 OnActivityDataIdChanging(value);
                 ReportPropertyChanging("ActivityDataId");
-                _ActivityDataId = StructuralObject.SetValidValue(value);
+                _ActivityDataId = StructuralObject.SetValidValue(value, "ActivityDataId");
                 ReportPropertyChanged("ActivityDataId");
                 OnActivityDataIdChanged();
             }
@@ -24600,7 +24547,7 @@ namespace SRFROWCA
             {
                 OnTargetMidYearChanging(value);
                 ReportPropertyChanging("TargetMidYear");
-                _TargetMidYear = StructuralObject.SetValidValue(value);
+                _TargetMidYear = StructuralObject.SetValidValue(value, "TargetMidYear");
                 ReportPropertyChanged("TargetMidYear");
                 OnTargetMidYearChanged();
             }
@@ -24624,7 +24571,7 @@ namespace SRFROWCA
             {
                 OnTargetFullYearChanging(value);
                 ReportPropertyChanging("TargetFullYear");
-                _TargetFullYear = StructuralObject.SetValidValue(value);
+                _TargetFullYear = StructuralObject.SetValidValue(value, "TargetFullYear");
                 ReportPropertyChanged("TargetFullYear");
                 OnTargetFullYearChanged();
             }
@@ -24648,7 +24595,7 @@ namespace SRFROWCA
             {
                 OnIsActiveChanging(value);
                 ReportPropertyChanging("IsActive");
-                _IsActive = StructuralObject.SetValidValue(value);
+                _IsActive = StructuralObject.SetValidValue(value, "IsActive");
                 ReportPropertyChanged("IsActive");
                 OnIsActiveChanged();
             }
@@ -24672,7 +24619,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -24696,7 +24643,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -24720,7 +24667,7 @@ namespace SRFROWCA
             {
                 OnUpdatedByIdChanging(value);
                 ReportPropertyChanging("UpdatedById");
-                _UpdatedById = StructuralObject.SetValidValue(value);
+                _UpdatedById = StructuralObject.SetValidValue(value, "UpdatedById");
                 ReportPropertyChanged("UpdatedById");
                 OnUpdatedByIdChanged();
             }
@@ -24744,7 +24691,7 @@ namespace SRFROWCA
             {
                 OnUpdatedDateChanging(value);
                 ReportPropertyChanging("UpdatedDate");
-                _UpdatedDate = StructuralObject.SetValidValue(value);
+                _UpdatedDate = StructuralObject.SetValidValue(value, "UpdatedDate");
                 ReportPropertyChanged("UpdatedDate");
                 OnUpdatedDateChanged();
             }
@@ -24755,7 +24702,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -24829,7 +24775,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -24848,7 +24794,7 @@ namespace SRFROWCA
                 {
                     OnOPSReportLocationIdChanging(value);
                     ReportPropertyChanging("OPSReportLocationId");
-                    _OPSReportLocationId = StructuralObject.SetValidValue(value);
+                    _OPSReportLocationId = StructuralObject.SetValidValue(value, "OPSReportLocationId");
                     ReportPropertyChanged("OPSReportLocationId");
                     OnOPSReportLocationIdChanged();
                 }
@@ -24873,7 +24819,7 @@ namespace SRFROWCA
             {
                 OnOPSReportIdChanging(value);
                 ReportPropertyChanging("OPSReportId");
-                _OPSReportId = StructuralObject.SetValidValue(value);
+                _OPSReportId = StructuralObject.SetValidValue(value, "OPSReportId");
                 ReportPropertyChanged("OPSReportId");
                 OnOPSReportIdChanged();
             }
@@ -24897,7 +24843,7 @@ namespace SRFROWCA
             {
                 OnLocationIdChanging(value);
                 ReportPropertyChanging("LocationId");
-                _LocationId = StructuralObject.SetValidValue(value);
+                _LocationId = StructuralObject.SetValidValue(value, "LocationId");
                 ReportPropertyChanged("LocationId");
                 OnLocationIdChanged();
             }
@@ -24921,7 +24867,7 @@ namespace SRFROWCA
             {
                 OnEmergencyClusterIdChanging(value);
                 ReportPropertyChanging("EmergencyClusterId");
-                _EmergencyClusterId = StructuralObject.SetValidValue(value);
+                _EmergencyClusterId = StructuralObject.SetValidValue(value, "EmergencyClusterId");
                 ReportPropertyChanged("EmergencyClusterId");
                 OnEmergencyClusterIdChanged();
             }
@@ -24932,7 +24878,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -25004,7 +24949,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -25023,7 +24968,7 @@ namespace SRFROWCA
                 {
                     OnOPSUserIdChanging(value);
                     ReportPropertyChanging("OPSUserId");
-                    _OPSUserId = StructuralObject.SetValidValue(value);
+                    _OPSUserId = StructuralObject.SetValidValue(value, "OPSUserId");
                     ReportPropertyChanged("OPSUserId");
                     OnOPSUserIdChanged();
                 }
@@ -25050,7 +24995,7 @@ namespace SRFROWCA
                 {
                     OnFirstLoginDateChanging(value);
                     ReportPropertyChanging("FirstLoginDate");
-                    _FirstLoginDate = StructuralObject.SetValidValue(value);
+                    _FirstLoginDate = StructuralObject.SetValidValue(value, "FirstLoginDate");
                     ReportPropertyChanged("FirstLoginDate");
                     OnFirstLoginDateChanged();
                 }
@@ -25077,7 +25022,7 @@ namespace SRFROWCA
                 {
                     OnLastLoginDateChanging(value);
                     ReportPropertyChanging("LastLoginDate");
-                    _LastLoginDate = StructuralObject.SetValidValue(value);
+                    _LastLoginDate = StructuralObject.SetValidValue(value, "LastLoginDate");
                     ReportPropertyChanged("LastLoginDate");
                     OnLastLoginDateChanged();
                 }
@@ -25089,7 +25034,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -25123,7 +25067,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -25142,7 +25086,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationIdChanging(value);
                     ReportPropertyChanging("OrganizationId");
-                    _OrganizationId = StructuralObject.SetValidValue(value);
+                    _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                     ReportPropertyChanged("OrganizationId");
                     OnOrganizationIdChanged();
                 }
@@ -25167,7 +25111,7 @@ namespace SRFROWCA
             {
                 OnOrganizationTypeIdChanging(value);
                 ReportPropertyChanging("OrganizationTypeId");
-                _OrganizationTypeId = StructuralObject.SetValidValue(value);
+                _OrganizationTypeId = StructuralObject.SetValidValue(value, "OrganizationTypeId");
                 ReportPropertyChanged("OrganizationTypeId");
                 OnOrganizationTypeIdChanged();
             }
@@ -25191,7 +25135,7 @@ namespace SRFROWCA
             {
                 OnOrganizationNameChanging(value);
                 ReportPropertyChanging("OrganizationName");
-                _OrganizationName = StructuralObject.SetValidValue(value, false);
+                _OrganizationName = StructuralObject.SetValidValue(value, false, "OrganizationName");
                 ReportPropertyChanged("OrganizationName");
                 OnOrganizationNameChanged();
             }
@@ -25215,7 +25159,7 @@ namespace SRFROWCA
             {
                 OnOrganizationAcronymChanging(value);
                 ReportPropertyChanging("OrganizationAcronym");
-                _OrganizationAcronym = StructuralObject.SetValidValue(value, true);
+                _OrganizationAcronym = StructuralObject.SetValidValue(value, true, "OrganizationAcronym");
                 ReportPropertyChanged("OrganizationAcronym");
                 OnOrganizationAcronymChanged();
             }
@@ -25239,7 +25183,7 @@ namespace SRFROWCA
             {
                 OnIsActiveChanging(value);
                 ReportPropertyChanging("IsActive");
-                _IsActive = StructuralObject.SetValidValue(value);
+                _IsActive = StructuralObject.SetValidValue(value, "IsActive");
                 ReportPropertyChanged("IsActive");
                 OnIsActiveChanged();
             }
@@ -25263,7 +25207,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -25287,7 +25231,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -25311,7 +25255,7 @@ namespace SRFROWCA
             {
                 OnUpdatedDateChanging(value);
                 ReportPropertyChanging("UpdatedDate");
-                _UpdatedDate = StructuralObject.SetValidValue(value);
+                _UpdatedDate = StructuralObject.SetValidValue(value, "UpdatedDate");
                 ReportPropertyChanged("UpdatedDate");
                 OnUpdatedDateChanged();
             }
@@ -25335,7 +25279,7 @@ namespace SRFROWCA
             {
                 OnUpdatedByIdChanging(value);
                 ReportPropertyChanging("UpdatedById");
-                _UpdatedById = StructuralObject.SetValidValue(value);
+                _UpdatedById = StructuralObject.SetValidValue(value, "UpdatedById");
                 ReportPropertyChanged("UpdatedById");
                 OnUpdatedByIdChanged();
             }
@@ -25359,7 +25303,7 @@ namespace SRFROWCA
             {
                 OnLocationIDChanging(value);
                 ReportPropertyChanging("LocationID");
-                _LocationID = StructuralObject.SetValidValue(value);
+                _LocationID = StructuralObject.SetValidValue(value, "LocationID");
                 ReportPropertyChanged("LocationID");
                 OnLocationIDChanged();
             }
@@ -25383,7 +25327,7 @@ namespace SRFROWCA
             {
                 OnPhoneChanging(value);
                 ReportPropertyChanging("Phone");
-                _Phone = StructuralObject.SetValidValue(value, true);
+                _Phone = StructuralObject.SetValidValue(value, true, "Phone");
                 ReportPropertyChanged("Phone");
                 OnPhoneChanged();
             }
@@ -25407,7 +25351,7 @@ namespace SRFROWCA
             {
                 OnAddressChanging(value);
                 ReportPropertyChanging("Address");
-                _Address = StructuralObject.SetValidValue(value, true);
+                _Address = StructuralObject.SetValidValue(value, true, "Address");
                 ReportPropertyChanged("Address");
                 OnAddressChanged();
             }
@@ -25418,7 +25362,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -25560,7 +25503,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -25579,7 +25522,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationRequestIDChanging(value);
                     ReportPropertyChanging("OrganizationRequestID");
-                    _OrganizationRequestID = StructuralObject.SetValidValue(value);
+                    _OrganizationRequestID = StructuralObject.SetValidValue(value, "OrganizationRequestID");
                     ReportPropertyChanged("OrganizationRequestID");
                     OnOrganizationRequestIDChanged();
                 }
@@ -25604,7 +25547,7 @@ namespace SRFROWCA
             {
                 OnOrganizationNameChanging(value);
                 ReportPropertyChanging("OrganizationName");
-                _OrganizationName = StructuralObject.SetValidValue(value, false);
+                _OrganizationName = StructuralObject.SetValidValue(value, false, "OrganizationName");
                 ReportPropertyChanged("OrganizationName");
                 OnOrganizationNameChanged();
             }
@@ -25628,7 +25571,7 @@ namespace SRFROWCA
             {
                 OnOrganizationAcronymChanging(value);
                 ReportPropertyChanging("OrganizationAcronym");
-                _OrganizationAcronym = StructuralObject.SetValidValue(value, false);
+                _OrganizationAcronym = StructuralObject.SetValidValue(value, false, "OrganizationAcronym");
                 ReportPropertyChanged("OrganizationAcronym");
                 OnOrganizationAcronymChanged();
             }
@@ -25652,7 +25595,7 @@ namespace SRFROWCA
             {
                 OnOrganizationTypeChanging(value);
                 ReportPropertyChanging("OrganizationType");
-                _OrganizationType = StructuralObject.SetValidValue(value, false);
+                _OrganizationType = StructuralObject.SetValidValue(value, false, "OrganizationType");
                 ReportPropertyChanged("OrganizationType");
                 OnOrganizationTypeChanged();
             }
@@ -25676,7 +25619,7 @@ namespace SRFROWCA
             {
                 OnOrganizationCountryChanging(value);
                 ReportPropertyChanging("OrganizationCountry");
-                _OrganizationCountry = StructuralObject.SetValidValue(value, true);
+                _OrganizationCountry = StructuralObject.SetValidValue(value, true, "OrganizationCountry");
                 ReportPropertyChanged("OrganizationCountry");
                 OnOrganizationCountryChanged();
             }
@@ -25700,7 +25643,7 @@ namespace SRFROWCA
             {
                 OnOrganizationContactChanging(value);
                 ReportPropertyChanging("OrganizationContact");
-                _OrganizationContact = StructuralObject.SetValidValue(value, true);
+                _OrganizationContact = StructuralObject.SetValidValue(value, true, "OrganizationContact");
                 ReportPropertyChanged("OrganizationContact");
                 OnOrganizationContactChanged();
             }
@@ -25724,7 +25667,7 @@ namespace SRFROWCA
             {
                 OnOrganizationPhoneChanging(value);
                 ReportPropertyChanging("OrganizationPhone");
-                _OrganizationPhone = StructuralObject.SetValidValue(value, true);
+                _OrganizationPhone = StructuralObject.SetValidValue(value, true, "OrganizationPhone");
                 ReportPropertyChanged("OrganizationPhone");
                 OnOrganizationPhoneChanged();
             }
@@ -25748,7 +25691,7 @@ namespace SRFROWCA
             {
                 OnOrganizationEmailChanging(value);
                 ReportPropertyChanging("OrganizationEmail");
-                _OrganizationEmail = StructuralObject.SetValidValue(value, false);
+                _OrganizationEmail = StructuralObject.SetValidValue(value, false, "OrganizationEmail");
                 ReportPropertyChanged("OrganizationEmail");
                 OnOrganizationEmailChanged();
             }
@@ -25759,7 +25702,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -25789,7 +25731,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -25808,7 +25750,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationTypeIdChanging(value);
                     ReportPropertyChanging("OrganizationTypeId");
-                    _OrganizationTypeId = StructuralObject.SetValidValue(value);
+                    _OrganizationTypeId = StructuralObject.SetValidValue(value, "OrganizationTypeId");
                     ReportPropertyChanged("OrganizationTypeId");
                     OnOrganizationTypeIdChanged();
                 }
@@ -25833,7 +25775,7 @@ namespace SRFROWCA
             {
                 OnOrganizationType1Changing(value);
                 ReportPropertyChanging("OrganizationType1");
-                _OrganizationType1 = StructuralObject.SetValidValue(value, false);
+                _OrganizationType1 = StructuralObject.SetValidValue(value, false, "OrganizationType1");
                 ReportPropertyChanged("OrganizationType1");
                 OnOrganizationType1Changed();
             }
@@ -25857,7 +25799,7 @@ namespace SRFROWCA
             {
                 OnIsActiveChanging(value);
                 ReportPropertyChanging("IsActive");
-                _IsActive = StructuralObject.SetValidValue(value);
+                _IsActive = StructuralObject.SetValidValue(value, "IsActive");
                 ReportPropertyChanged("IsActive");
                 OnIsActiveChanged();
             }
@@ -25868,7 +25810,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -25926,7 +25867,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -25945,7 +25886,7 @@ namespace SRFROWCA
                 {
                     OnORSDocumentIdChanging(value);
                     ReportPropertyChanging("ORSDocumentId");
-                    _ORSDocumentId = StructuralObject.SetValidValue(value);
+                    _ORSDocumentId = StructuralObject.SetValidValue(value, "ORSDocumentId");
                     ReportPropertyChanged("ORSDocumentId");
                     OnORSDocumentIdChanged();
                 }
@@ -25970,7 +25911,7 @@ namespace SRFROWCA
             {
                 OnDocumentNamePublicChanging(value);
                 ReportPropertyChanging("DocumentNamePublic");
-                _DocumentNamePublic = StructuralObject.SetValidValue(value, false);
+                _DocumentNamePublic = StructuralObject.SetValidValue(value, false, "DocumentNamePublic");
                 ReportPropertyChanged("DocumentNamePublic");
                 OnDocumentNamePublicChanged();
             }
@@ -25994,7 +25935,7 @@ namespace SRFROWCA
             {
                 OnDocumentNameChanging(value);
                 ReportPropertyChanging("DocumentName");
-                _DocumentName = StructuralObject.SetValidValue(value, false);
+                _DocumentName = StructuralObject.SetValidValue(value, false, "DocumentName");
                 ReportPropertyChanged("DocumentName");
                 OnDocumentNameChanged();
             }
@@ -26018,7 +25959,7 @@ namespace SRFROWCA
             {
                 OnDocumentURLChanging(value);
                 ReportPropertyChanging("DocumentURL");
-                _DocumentURL = StructuralObject.SetValidValue(value, false);
+                _DocumentURL = StructuralObject.SetValidValue(value, false, "DocumentURL");
                 ReportPropertyChanged("DocumentURL");
                 OnDocumentURLChanged();
             }
@@ -26042,7 +25983,7 @@ namespace SRFROWCA
             {
                 OnEmergencyLocationIdChanging(value);
                 ReportPropertyChanging("EmergencyLocationId");
-                _EmergencyLocationId = StructuralObject.SetValidValue(value);
+                _EmergencyLocationId = StructuralObject.SetValidValue(value, "EmergencyLocationId");
                 ReportPropertyChanged("EmergencyLocationId");
                 OnEmergencyLocationIdChanged();
             }
@@ -26066,7 +26007,7 @@ namespace SRFROWCA
             {
                 OnEmergencyClusterIdChanging(value);
                 ReportPropertyChanging("EmergencyClusterId");
-                _EmergencyClusterId = StructuralObject.SetValidValue(value);
+                _EmergencyClusterId = StructuralObject.SetValidValue(value, "EmergencyClusterId");
                 ReportPropertyChanged("EmergencyClusterId");
                 OnEmergencyClusterIdChanged();
             }
@@ -26090,7 +26031,7 @@ namespace SRFROWCA
             {
                 OnClusterNameChanging(value);
                 ReportPropertyChanging("ClusterName");
-                _ClusterName = StructuralObject.SetValidValue(value, true);
+                _ClusterName = StructuralObject.SetValidValue(value, true, "ClusterName");
                 ReportPropertyChanged("ClusterName");
                 OnClusterNameChanged();
             }
@@ -26114,7 +26055,7 @@ namespace SRFROWCA
             {
                 OnCountryNameChanging(value);
                 ReportPropertyChanging("CountryName");
-                _CountryName = StructuralObject.SetValidValue(value, true);
+                _CountryName = StructuralObject.SetValidValue(value, true, "CountryName");
                 ReportPropertyChanged("CountryName");
                 OnCountryNameChanged();
             }
@@ -26138,7 +26079,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -26162,7 +26103,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -26186,7 +26127,7 @@ namespace SRFROWCA
             {
                 OnUpdatedByIdChanging(value);
                 ReportPropertyChanging("UpdatedById");
-                _UpdatedById = StructuralObject.SetValidValue(value);
+                _UpdatedById = StructuralObject.SetValidValue(value, "UpdatedById");
                 ReportPropertyChanged("UpdatedById");
                 OnUpdatedByIdChanged();
             }
@@ -26210,7 +26151,7 @@ namespace SRFROWCA
             {
                 OnUpdatedDateChanging(value);
                 ReportPropertyChanging("UpdatedDate");
-                _UpdatedDate = StructuralObject.SetValidValue(value);
+                _UpdatedDate = StructuralObject.SetValidValue(value, "UpdatedDate");
                 ReportPropertyChanged("UpdatedDate");
                 OnUpdatedDateChanged();
             }
@@ -26221,7 +26162,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -26257,7 +26197,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -26276,7 +26216,7 @@ namespace SRFROWCA
                 {
                     OnPasswordResetIdChanging(value);
                     ReportPropertyChanging("PasswordResetId");
-                    _PasswordResetId = StructuralObject.SetValidValue(value);
+                    _PasswordResetId = StructuralObject.SetValidValue(value, "PasswordResetId");
                     ReportPropertyChanged("PasswordResetId");
                     OnPasswordResetIdChanged();
                 }
@@ -26301,7 +26241,7 @@ namespace SRFROWCA
             {
                 OnUserNameChanging(value);
                 ReportPropertyChanging("UserName");
-                _UserName = StructuralObject.SetValidValue(value, false);
+                _UserName = StructuralObject.SetValidValue(value, false, "UserName");
                 ReportPropertyChanged("UserName");
                 OnUserNameChanged();
             }
@@ -26325,7 +26265,7 @@ namespace SRFROWCA
             {
                 OnLinkGUIDChanging(value);
                 ReportPropertyChanging("LinkGUID");
-                _LinkGUID = StructuralObject.SetValidValue(value);
+                _LinkGUID = StructuralObject.SetValidValue(value, "LinkGUID");
                 ReportPropertyChanged("LinkGUID");
                 OnLinkGUIDChanged();
             }
@@ -26349,7 +26289,7 @@ namespace SRFROWCA
             {
                 OnLinkGeneratedDateChanging(value);
                 ReportPropertyChanging("LinkGeneratedDate");
-                _LinkGeneratedDate = StructuralObject.SetValidValue(value);
+                _LinkGeneratedDate = StructuralObject.SetValidValue(value, "LinkGeneratedDate");
                 ReportPropertyChanged("LinkGeneratedDate");
                 OnLinkGeneratedDateChanged();
             }
@@ -26373,7 +26313,7 @@ namespace SRFROWCA
             {
                 OnLinkHashChanging(value);
                 ReportPropertyChanging("LinkHash");
-                _LinkHash = StructuralObject.SetValidValue(value, false);
+                _LinkHash = StructuralObject.SetValidValue(value, false, "LinkHash");
                 ReportPropertyChanged("LinkHash");
                 OnLinkHashChanged();
             }
@@ -26397,7 +26337,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -26408,7 +26348,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -26446,7 +26385,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -26465,7 +26404,7 @@ namespace SRFROWCA
                 {
                     OnPriorityIdentityActivityIdChanging(value);
                     ReportPropertyChanging("PriorityIdentityActivityId");
-                    _PriorityIdentityActivityId = StructuralObject.SetValidValue(value);
+                    _PriorityIdentityActivityId = StructuralObject.SetValidValue(value, "PriorityIdentityActivityId");
                     ReportPropertyChanged("PriorityIdentityActivityId");
                     OnPriorityIdentityActivityIdChanged();
                 }
@@ -26490,7 +26429,7 @@ namespace SRFROWCA
             {
                 OnObjectivePriorityIdChanging(value);
                 ReportPropertyChanging("ObjectivePriorityId");
-                _ObjectivePriorityId = StructuralObject.SetValidValue(value);
+                _ObjectivePriorityId = StructuralObject.SetValidValue(value, "ObjectivePriorityId");
                 ReportPropertyChanged("ObjectivePriorityId");
                 OnObjectivePriorityIdChanged();
             }
@@ -26514,7 +26453,7 @@ namespace SRFROWCA
             {
                 OnPriorityActivityIdChanging(value);
                 ReportPropertyChanging("PriorityActivityId");
-                _PriorityActivityId = StructuralObject.SetValidValue(value);
+                _PriorityActivityId = StructuralObject.SetValidValue(value, "PriorityActivityId");
                 ReportPropertyChanged("PriorityActivityId");
                 OnPriorityActivityIdChanged();
             }
@@ -26538,7 +26477,7 @@ namespace SRFROWCA
             {
                 OnSiteLanguageIdChanging(value);
                 ReportPropertyChanging("SiteLanguageId");
-                _SiteLanguageId = StructuralObject.SetValidValue(value);
+                _SiteLanguageId = StructuralObject.SetValidValue(value, "SiteLanguageId");
                 ReportPropertyChanged("SiteLanguageId");
                 OnSiteLanguageIdChanged();
             }
@@ -26562,7 +26501,7 @@ namespace SRFROWCA
             {
                 OnActivityNameChanging(value);
                 ReportPropertyChanging("ActivityName");
-                _ActivityName = StructuralObject.SetValidValue(value, false);
+                _ActivityName = StructuralObject.SetValidValue(value, false, "ActivityName");
                 ReportPropertyChanged("ActivityName");
                 OnActivityNameChanged();
             }
@@ -26586,7 +26525,7 @@ namespace SRFROWCA
             {
                 OnActivityTypeIdChanging(value);
                 ReportPropertyChanging("ActivityTypeId");
-                _ActivityTypeId = StructuralObject.SetValidValue(value);
+                _ActivityTypeId = StructuralObject.SetValidValue(value, "ActivityTypeId");
                 ReportPropertyChanged("ActivityTypeId");
                 OnActivityTypeIdChanged();
             }
@@ -26610,7 +26549,7 @@ namespace SRFROWCA
             {
                 OnDateCreatedChanging(value);
                 ReportPropertyChanging("DateCreated");
-                _DateCreated = StructuralObject.SetValidValue(value);
+                _DateCreated = StructuralObject.SetValidValue(value, "DateCreated");
                 ReportPropertyChanged("DateCreated");
                 OnDateCreatedChanged();
             }
@@ -26634,7 +26573,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -26658,7 +26597,7 @@ namespace SRFROWCA
             {
                 OnDateUpdatedChanging(value);
                 ReportPropertyChanging("DateUpdated");
-                _DateUpdated = StructuralObject.SetValidValue(value);
+                _DateUpdated = StructuralObject.SetValidValue(value, "DateUpdated");
                 ReportPropertyChanged("DateUpdated");
                 OnDateUpdatedChanged();
             }
@@ -26682,7 +26621,7 @@ namespace SRFROWCA
             {
                 OnUpdatedByIdChanging(value);
                 ReportPropertyChanging("UpdatedById");
-                _UpdatedById = StructuralObject.SetValidValue(value);
+                _UpdatedById = StructuralObject.SetValidValue(value, "UpdatedById");
                 ReportPropertyChanged("UpdatedById");
                 OnUpdatedByIdChanged();
             }
@@ -26693,7 +26632,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -26773,7 +26711,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -26792,7 +26730,7 @@ namespace SRFROWCA
                 {
                     OnProjectIdChanging(value);
                     ReportPropertyChanging("ProjectId");
-                    _ProjectId = StructuralObject.SetValidValue(value);
+                    _ProjectId = StructuralObject.SetValidValue(value, "ProjectId");
                     ReportPropertyChanged("ProjectId");
                     OnProjectIdChanged();
                 }
@@ -26817,7 +26755,7 @@ namespace SRFROWCA
             {
                 OnProjectCodeChanging(value);
                 ReportPropertyChanging("ProjectCode");
-                _ProjectCode = StructuralObject.SetValidValue(value, true);
+                _ProjectCode = StructuralObject.SetValidValue(value, true, "ProjectCode");
                 ReportPropertyChanged("ProjectCode");
                 OnProjectCodeChanged();
             }
@@ -26841,7 +26779,7 @@ namespace SRFROWCA
             {
                 OnProjectTitleChanging(value);
                 ReportPropertyChanging("ProjectTitle");
-                _ProjectTitle = StructuralObject.SetValidValue(value, false);
+                _ProjectTitle = StructuralObject.SetValidValue(value, false, "ProjectTitle");
                 ReportPropertyChanged("ProjectTitle");
                 OnProjectTitleChanged();
             }
@@ -26865,7 +26803,7 @@ namespace SRFROWCA
             {
                 OnProjectObjectiveChanging(value);
                 ReportPropertyChanging("ProjectObjective");
-                _ProjectObjective = StructuralObject.SetValidValue(value, true);
+                _ProjectObjective = StructuralObject.SetValidValue(value, true, "ProjectObjective");
                 ReportPropertyChanged("ProjectObjective");
                 OnProjectObjectiveChanged();
             }
@@ -26889,7 +26827,7 @@ namespace SRFROWCA
             {
                 OnEmergencyLocationIdChanging(value);
                 ReportPropertyChanging("EmergencyLocationId");
-                _EmergencyLocationId = StructuralObject.SetValidValue(value);
+                _EmergencyLocationId = StructuralObject.SetValidValue(value, "EmergencyLocationId");
                 ReportPropertyChanged("EmergencyLocationId");
                 OnEmergencyLocationIdChanged();
             }
@@ -26913,7 +26851,7 @@ namespace SRFROWCA
             {
                 OnEmergencyClusterIdChanging(value);
                 ReportPropertyChanging("EmergencyClusterId");
-                _EmergencyClusterId = StructuralObject.SetValidValue(value);
+                _EmergencyClusterId = StructuralObject.SetValidValue(value, "EmergencyClusterId");
                 ReportPropertyChanged("EmergencyClusterId");
                 OnEmergencyClusterIdChanged();
             }
@@ -26937,7 +26875,7 @@ namespace SRFROWCA
             {
                 OnProjectStatusIdChanging(value);
                 ReportPropertyChanging("ProjectStatusId");
-                _ProjectStatusId = StructuralObject.SetValidValue(value);
+                _ProjectStatusId = StructuralObject.SetValidValue(value, "ProjectStatusId");
                 ReportPropertyChanged("ProjectStatusId");
                 OnProjectStatusIdChanged();
             }
@@ -26961,7 +26899,7 @@ namespace SRFROWCA
             {
                 OnBeneficiaryTotalNumberChanging(value);
                 ReportPropertyChanging("BeneficiaryTotalNumber");
-                _BeneficiaryTotalNumber = StructuralObject.SetValidValue(value);
+                _BeneficiaryTotalNumber = StructuralObject.SetValidValue(value, "BeneficiaryTotalNumber");
                 ReportPropertyChanged("BeneficiaryTotalNumber");
                 OnBeneficiaryTotalNumberChanged();
             }
@@ -26985,7 +26923,7 @@ namespace SRFROWCA
             {
                 OnBeneficiariesChildrenChanging(value);
                 ReportPropertyChanging("BeneficiariesChildren");
-                _BeneficiariesChildren = StructuralObject.SetValidValue(value);
+                _BeneficiariesChildren = StructuralObject.SetValidValue(value, "BeneficiariesChildren");
                 ReportPropertyChanged("BeneficiariesChildren");
                 OnBeneficiariesChildrenChanged();
             }
@@ -27009,7 +26947,7 @@ namespace SRFROWCA
             {
                 OnBeneficiariesWomenChanging(value);
                 ReportPropertyChanging("BeneficiariesWomen");
-                _BeneficiariesWomen = StructuralObject.SetValidValue(value);
+                _BeneficiariesWomen = StructuralObject.SetValidValue(value, "BeneficiariesWomen");
                 ReportPropertyChanged("BeneficiariesWomen");
                 OnBeneficiariesWomenChanged();
             }
@@ -27033,7 +26971,7 @@ namespace SRFROWCA
             {
                 OnBeneficiariesOthersChanging(value);
                 ReportPropertyChanging("BeneficiariesOthers");
-                _BeneficiariesOthers = StructuralObject.SetValidValue(value);
+                _BeneficiariesOthers = StructuralObject.SetValidValue(value, "BeneficiariesOthers");
                 ReportPropertyChanged("BeneficiariesOthers");
                 OnBeneficiariesOthersChanged();
             }
@@ -27057,7 +26995,7 @@ namespace SRFROWCA
             {
                 OnBeneficiariesDescriptionChanging(value);
                 ReportPropertyChanging("BeneficiariesDescription");
-                _BeneficiariesDescription = StructuralObject.SetValidValue(value, true);
+                _BeneficiariesDescription = StructuralObject.SetValidValue(value, true, "BeneficiariesDescription");
                 ReportPropertyChanged("BeneficiariesDescription");
                 OnBeneficiariesDescriptionChanged();
             }
@@ -27081,7 +27019,7 @@ namespace SRFROWCA
             {
                 OnBeneficiariesTotalDescriptionChanging(value);
                 ReportPropertyChanging("BeneficiariesTotalDescription");
-                _BeneficiariesTotalDescription = StructuralObject.SetValidValue(value, true);
+                _BeneficiariesTotalDescription = StructuralObject.SetValidValue(value, true, "BeneficiariesTotalDescription");
                 ReportPropertyChanged("BeneficiariesTotalDescription");
                 OnBeneficiariesTotalDescriptionChanged();
             }
@@ -27105,7 +27043,7 @@ namespace SRFROWCA
             {
                 OnProjectStartDateChanging(value);
                 ReportPropertyChanging("ProjectStartDate");
-                _ProjectStartDate = StructuralObject.SetValidValue(value);
+                _ProjectStartDate = StructuralObject.SetValidValue(value, "ProjectStartDate");
                 ReportPropertyChanged("ProjectStartDate");
                 OnProjectStartDateChanged();
             }
@@ -27129,7 +27067,7 @@ namespace SRFROWCA
             {
                 OnProjectEndDateChanging(value);
                 ReportPropertyChanging("ProjectEndDate");
-                _ProjectEndDate = StructuralObject.SetValidValue(value);
+                _ProjectEndDate = StructuralObject.SetValidValue(value, "ProjectEndDate");
                 ReportPropertyChanged("ProjectEndDate");
                 OnProjectEndDateChanged();
             }
@@ -27153,7 +27091,7 @@ namespace SRFROWCA
             {
                 OnProjectImplementingpartnerChanging(value);
                 ReportPropertyChanging("ProjectImplementingpartner");
-                _ProjectImplementingpartner = StructuralObject.SetValidValue(value, true);
+                _ProjectImplementingpartner = StructuralObject.SetValidValue(value, true, "ProjectImplementingpartner");
                 ReportPropertyChanged("ProjectImplementingpartner");
                 OnProjectImplementingpartnerChanged();
             }
@@ -27177,7 +27115,7 @@ namespace SRFROWCA
             {
                 OnProjectContactNameChanging(value);
                 ReportPropertyChanging("ProjectContactName");
-                _ProjectContactName = StructuralObject.SetValidValue(value, true);
+                _ProjectContactName = StructuralObject.SetValidValue(value, true, "ProjectContactName");
                 ReportPropertyChanged("ProjectContactName");
                 OnProjectContactNameChanged();
             }
@@ -27201,7 +27139,7 @@ namespace SRFROWCA
             {
                 OnProjectContactEmailChanging(value);
                 ReportPropertyChanging("ProjectContactEmail");
-                _ProjectContactEmail = StructuralObject.SetValidValue(value, true);
+                _ProjectContactEmail = StructuralObject.SetValidValue(value, true, "ProjectContactEmail");
                 ReportPropertyChanged("ProjectContactEmail");
                 OnProjectContactEmailChanged();
             }
@@ -27225,7 +27163,7 @@ namespace SRFROWCA
             {
                 OnProjectContactPhoneChanging(value);
                 ReportPropertyChanging("ProjectContactPhone");
-                _ProjectContactPhone = StructuralObject.SetValidValue(value, true);
+                _ProjectContactPhone = StructuralObject.SetValidValue(value, true, "ProjectContactPhone");
                 ReportPropertyChanged("ProjectContactPhone");
                 OnProjectContactPhoneChanged();
             }
@@ -27249,7 +27187,7 @@ namespace SRFROWCA
             {
                 OnRelatedURLChanging(value);
                 ReportPropertyChanging("RelatedURL");
-                _RelatedURL = StructuralObject.SetValidValue(value, true);
+                _RelatedURL = StructuralObject.SetValidValue(value, true, "RelatedURL");
                 ReportPropertyChanged("RelatedURL");
                 OnRelatedURLChanged();
             }
@@ -27273,7 +27211,7 @@ namespace SRFROWCA
             {
                 OnProjectTypeChanging(value);
                 ReportPropertyChanging("ProjectType");
-                _ProjectType = StructuralObject.SetValidValue(value, true);
+                _ProjectType = StructuralObject.SetValidValue(value, true, "ProjectType");
                 ReportPropertyChanged("ProjectType");
                 OnProjectTypeChanged();
             }
@@ -27297,7 +27235,7 @@ namespace SRFROWCA
             {
                 OnOPSLastUpdatedDateChanging(value);
                 ReportPropertyChanging("OPSLastUpdatedDate");
-                _OPSLastUpdatedDate = StructuralObject.SetValidValue(value);
+                _OPSLastUpdatedDate = StructuralObject.SetValidValue(value, "OPSLastUpdatedDate");
                 ReportPropertyChanged("OPSLastUpdatedDate");
                 OnOPSLastUpdatedDateChanged();
             }
@@ -27321,7 +27259,7 @@ namespace SRFROWCA
             {
                 OnOPSLastUpdatedByChanging(value);
                 ReportPropertyChanging("OPSLastUpdatedBy");
-                _OPSLastUpdatedBy = StructuralObject.SetValidValue(value, true);
+                _OPSLastUpdatedBy = StructuralObject.SetValidValue(value, true, "OPSLastUpdatedBy");
                 ReportPropertyChanged("OPSLastUpdatedBy");
                 OnOPSLastUpdatedByChanged();
             }
@@ -27345,7 +27283,7 @@ namespace SRFROWCA
             {
                 OnOPSProjectStatusChanging(value);
                 ReportPropertyChanging("OPSProjectStatus");
-                _OPSProjectStatus = StructuralObject.SetValidValue(value, true);
+                _OPSProjectStatus = StructuralObject.SetValidValue(value, true, "OPSProjectStatus");
                 ReportPropertyChanged("OPSProjectStatus");
                 OnOPSProjectStatusChanged();
             }
@@ -27369,7 +27307,7 @@ namespace SRFROWCA
             {
                 OnOPSClusterNameChanging(value);
                 ReportPropertyChanging("OPSClusterName");
-                _OPSClusterName = StructuralObject.SetValidValue(value, true);
+                _OPSClusterName = StructuralObject.SetValidValue(value, true, "OPSClusterName");
                 ReportPropertyChanged("OPSClusterName");
                 OnOPSClusterNameChanged();
             }
@@ -27393,7 +27331,7 @@ namespace SRFROWCA
             {
                 OnIsOPSProjectChanging(value);
                 ReportPropertyChanging("IsOPSProject");
-                _IsOPSProject = StructuralObject.SetValidValue(value);
+                _IsOPSProject = StructuralObject.SetValidValue(value, "IsOPSProject");
                 ReportPropertyChanged("IsOPSProject");
                 OnIsOPSProjectChanged();
             }
@@ -27417,7 +27355,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -27441,7 +27379,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -27465,7 +27403,7 @@ namespace SRFROWCA
             {
                 OnUpdatedDateChanging(value);
                 ReportPropertyChanging("UpdatedDate");
-                _UpdatedDate = StructuralObject.SetValidValue(value);
+                _UpdatedDate = StructuralObject.SetValidValue(value, "UpdatedDate");
                 ReportPropertyChanged("UpdatedDate");
                 OnUpdatedDateChanged();
             }
@@ -27489,7 +27427,7 @@ namespace SRFROWCA
             {
                 OnUpdatedByIdChanging(value);
                 ReportPropertyChanging("UpdatedById");
-                _UpdatedById = StructuralObject.SetValidValue(value);
+                _UpdatedById = StructuralObject.SetValidValue(value, "UpdatedById");
                 ReportPropertyChanged("UpdatedById");
                 OnUpdatedByIdChanged();
             }
@@ -27513,7 +27451,7 @@ namespace SRFROWCA
             {
                 OnImportedByIdChanging(value);
                 ReportPropertyChanging("ImportedById");
-                _ImportedById = StructuralObject.SetValidValue(value);
+                _ImportedById = StructuralObject.SetValidValue(value, "ImportedById");
                 ReportPropertyChanged("ImportedById");
                 OnImportedByIdChanged();
             }
@@ -27537,7 +27475,7 @@ namespace SRFROWCA
             {
                 OnImportedDateChanging(value);
                 ReportPropertyChanging("ImportedDate");
-                _ImportedDate = StructuralObject.SetValidValue(value);
+                _ImportedDate = StructuralObject.SetValidValue(value, "ImportedDate");
                 ReportPropertyChanged("ImportedDate");
                 OnImportedDateChanged();
             }
@@ -27561,7 +27499,7 @@ namespace SRFROWCA
             {
                 OnDonorNameChanging(value);
                 ReportPropertyChanging("DonorName");
-                _DonorName = StructuralObject.SetValidValue(value, true);
+                _DonorName = StructuralObject.SetValidValue(value, true, "DonorName");
                 ReportPropertyChanged("DonorName");
                 OnDonorNameChanged();
             }
@@ -27585,7 +27523,7 @@ namespace SRFROWCA
             {
                 OnFundingStatusChanging(value);
                 ReportPropertyChanging("FundingStatus");
-                _FundingStatus = StructuralObject.SetValidValue(value);
+                _FundingStatus = StructuralObject.SetValidValue(value, "FundingStatus");
                 ReportPropertyChanged("FundingStatus");
                 OnFundingStatusChanged();
             }
@@ -27609,7 +27547,7 @@ namespace SRFROWCA
             {
                 OnDonorName2Changing(value);
                 ReportPropertyChanging("DonorName2");
-                _DonorName2 = StructuralObject.SetValidValue(value, true);
+                _DonorName2 = StructuralObject.SetValidValue(value, true, "DonorName2");
                 ReportPropertyChanged("DonorName2");
                 OnDonorName2Changed();
             }
@@ -27633,7 +27571,7 @@ namespace SRFROWCA
             {
                 OnContribution2AmountChanging(value);
                 ReportPropertyChanging("Contribution2Amount");
-                _Contribution2Amount = StructuralObject.SetValidValue(value);
+                _Contribution2Amount = StructuralObject.SetValidValue(value, "Contribution2Amount");
                 ReportPropertyChanged("Contribution2Amount");
                 OnContribution2AmountChanged();
             }
@@ -27657,7 +27595,7 @@ namespace SRFROWCA
             {
                 OnContribution2CurrencyIdChanging(value);
                 ReportPropertyChanging("Contribution2CurrencyId");
-                _Contribution2CurrencyId = StructuralObject.SetValidValue(value);
+                _Contribution2CurrencyId = StructuralObject.SetValidValue(value, "Contribution2CurrencyId");
                 ReportPropertyChanged("Contribution2CurrencyId");
                 OnContribution2CurrencyIdChanged();
             }
@@ -27681,7 +27619,7 @@ namespace SRFROWCA
             {
                 OnRequestedAmountChanging(value);
                 ReportPropertyChanging("RequestedAmount");
-                _RequestedAmount = StructuralObject.SetValidValue(value);
+                _RequestedAmount = StructuralObject.SetValidValue(value, "RequestedAmount");
                 ReportPropertyChanged("RequestedAmount");
                 OnRequestedAmountChanged();
             }
@@ -27705,7 +27643,7 @@ namespace SRFROWCA
             {
                 OnRequestedAmountCurrencyIdChanging(value);
                 ReportPropertyChanging("RequestedAmountCurrencyId");
-                _RequestedAmountCurrencyId = StructuralObject.SetValidValue(value);
+                _RequestedAmountCurrencyId = StructuralObject.SetValidValue(value, "RequestedAmountCurrencyId");
                 ReportPropertyChanged("RequestedAmountCurrencyId");
                 OnRequestedAmountCurrencyIdChanged();
             }
@@ -27729,7 +27667,7 @@ namespace SRFROWCA
             {
                 OnContribution1AmountChanging(value);
                 ReportPropertyChanging("Contribution1Amount");
-                _Contribution1Amount = StructuralObject.SetValidValue(value);
+                _Contribution1Amount = StructuralObject.SetValidValue(value, "Contribution1Amount");
                 ReportPropertyChanged("Contribution1Amount");
                 OnContribution1AmountChanged();
             }
@@ -27753,7 +27691,7 @@ namespace SRFROWCA
             {
                 OnContribution1CurrencyIdChanging(value);
                 ReportPropertyChanging("Contribution1CurrencyId");
-                _Contribution1CurrencyId = StructuralObject.SetValidValue(value);
+                _Contribution1CurrencyId = StructuralObject.SetValidValue(value, "Contribution1CurrencyId");
                 ReportPropertyChanged("Contribution1CurrencyId");
                 OnContribution1CurrencyIdChanged();
             }
@@ -27777,7 +27715,7 @@ namespace SRFROWCA
             {
                 OnProjectStatusChanging(value);
                 ReportPropertyChanging("ProjectStatus");
-                _ProjectStatus = StructuralObject.SetValidValue(value);
+                _ProjectStatus = StructuralObject.SetValidValue(value, "ProjectStatus");
                 ReportPropertyChanged("ProjectStatus");
                 OnProjectStatusChanged();
             }
@@ -27788,7 +27726,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -28082,7 +28019,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -28101,7 +28038,7 @@ namespace SRFROWCA
                 {
                     OnProjectIndicatorIdChanging(value);
                     ReportPropertyChanging("ProjectIndicatorId");
-                    _ProjectIndicatorId = StructuralObject.SetValidValue(value);
+                    _ProjectIndicatorId = StructuralObject.SetValidValue(value, "ProjectIndicatorId");
                     ReportPropertyChanged("ProjectIndicatorId");
                     OnProjectIndicatorIdChanged();
                 }
@@ -28126,7 +28063,7 @@ namespace SRFROWCA
             {
                 OnProjectIdChanging(value);
                 ReportPropertyChanging("ProjectId");
-                _ProjectId = StructuralObject.SetValidValue(value);
+                _ProjectId = StructuralObject.SetValidValue(value, "ProjectId");
                 ReportPropertyChanged("ProjectId");
                 OnProjectIdChanged();
             }
@@ -28150,7 +28087,7 @@ namespace SRFROWCA
             {
                 OnActivityDataIdChanging(value);
                 ReportPropertyChanging("ActivityDataId");
-                _ActivityDataId = StructuralObject.SetValidValue(value);
+                _ActivityDataId = StructuralObject.SetValidValue(value, "ActivityDataId");
                 ReportPropertyChanged("ActivityDataId");
                 OnActivityDataIdChanged();
             }
@@ -28174,7 +28111,7 @@ namespace SRFROWCA
             {
                 OnEmergencyLocationIdChanging(value);
                 ReportPropertyChanging("EmergencyLocationId");
-                _EmergencyLocationId = StructuralObject.SetValidValue(value);
+                _EmergencyLocationId = StructuralObject.SetValidValue(value, "EmergencyLocationId");
                 ReportPropertyChanged("EmergencyLocationId");
                 OnEmergencyLocationIdChanged();
             }
@@ -28198,7 +28135,7 @@ namespace SRFROWCA
             {
                 OnYearIdChanging(value);
                 ReportPropertyChanging("YearId");
-                _YearId = StructuralObject.SetValidValue(value);
+                _YearId = StructuralObject.SetValidValue(value, "YearId");
                 ReportPropertyChanged("YearId");
                 OnYearIdChanged();
             }
@@ -28222,7 +28159,7 @@ namespace SRFROWCA
             {
                 OnIsOPSIndicatorChanging(value);
                 ReportPropertyChanging("IsOPSIndicator");
-                _IsOPSIndicator = StructuralObject.SetValidValue(value);
+                _IsOPSIndicator = StructuralObject.SetValidValue(value, "IsOPSIndicator");
                 ReportPropertyChanged("IsOPSIndicator");
                 OnIsOPSIndicatorChanged();
             }
@@ -28246,7 +28183,7 @@ namespace SRFROWCA
             {
                 OnIsActiveChanging(value);
                 ReportPropertyChanging("IsActive");
-                _IsActive = StructuralObject.SetValidValue(value);
+                _IsActive = StructuralObject.SetValidValue(value, "IsActive");
                 ReportPropertyChanged("IsActive");
                 OnIsActiveChanged();
             }
@@ -28270,7 +28207,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -28294,7 +28231,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -28318,7 +28255,7 @@ namespace SRFROWCA
             {
                 OnUpdatedByIdChanging(value);
                 ReportPropertyChanging("UpdatedById");
-                _UpdatedById = StructuralObject.SetValidValue(value);
+                _UpdatedById = StructuralObject.SetValidValue(value, "UpdatedById");
                 ReportPropertyChanged("UpdatedById");
                 OnUpdatedByIdChanged();
             }
@@ -28342,7 +28279,7 @@ namespace SRFROWCA
             {
                 OnUpdatedDateChanging(value);
                 ReportPropertyChanging("UpdatedDate");
-                _UpdatedDate = StructuralObject.SetValidValue(value);
+                _UpdatedDate = StructuralObject.SetValidValue(value, "UpdatedDate");
                 ReportPropertyChanged("UpdatedDate");
                 OnUpdatedDateChanged();
             }
@@ -28366,7 +28303,7 @@ namespace SRFROWCA
             {
                 OnIsDeleteRequestedChanging(value);
                 ReportPropertyChanging("IsDeleteRequested");
-                _IsDeleteRequested = StructuralObject.SetValidValue(value);
+                _IsDeleteRequested = StructuralObject.SetValidValue(value, "IsDeleteRequested");
                 ReportPropertyChanged("IsDeleteRequested");
                 OnIsDeleteRequestedChanged();
             }
@@ -28390,7 +28327,7 @@ namespace SRFROWCA
             {
                 OnIsAddRequestedChanging(value);
                 ReportPropertyChanging("IsAddRequested");
-                _IsAddRequested = StructuralObject.SetValidValue(value);
+                _IsAddRequested = StructuralObject.SetValidValue(value, "IsAddRequested");
                 ReportPropertyChanged("IsAddRequested");
                 OnIsAddRequestedChanged();
             }
@@ -28401,7 +28338,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -28513,7 +28449,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -28532,7 +28468,7 @@ namespace SRFROWCA
                 {
                     OnProjectIndicatorAnnualTargetIdChanging(value);
                     ReportPropertyChanging("ProjectIndicatorAnnualTargetId");
-                    _ProjectIndicatorAnnualTargetId = StructuralObject.SetValidValue(value);
+                    _ProjectIndicatorAnnualTargetId = StructuralObject.SetValidValue(value, "ProjectIndicatorAnnualTargetId");
                     ReportPropertyChanged("ProjectIndicatorAnnualTargetId");
                     OnProjectIndicatorAnnualTargetIdChanged();
                 }
@@ -28557,7 +28493,7 @@ namespace SRFROWCA
             {
                 OnProjectIndicatorIdChanging(value);
                 ReportPropertyChanging("ProjectIndicatorId");
-                _ProjectIndicatorId = StructuralObject.SetValidValue(value);
+                _ProjectIndicatorId = StructuralObject.SetValidValue(value, "ProjectIndicatorId");
                 ReportPropertyChanged("ProjectIndicatorId");
                 OnProjectIndicatorIdChanged();
             }
@@ -28581,7 +28517,7 @@ namespace SRFROWCA
             {
                 OnLocationIdChanging(value);
                 ReportPropertyChanging("LocationId");
-                _LocationId = StructuralObject.SetValidValue(value);
+                _LocationId = StructuralObject.SetValidValue(value, "LocationId");
                 ReportPropertyChanged("LocationId");
                 OnLocationIdChanged();
             }
@@ -28605,7 +28541,7 @@ namespace SRFROWCA
             {
                 OnTargetMidYearChanging(value);
                 ReportPropertyChanging("TargetMidYear");
-                _TargetMidYear = StructuralObject.SetValidValue(value);
+                _TargetMidYear = StructuralObject.SetValidValue(value, "TargetMidYear");
                 ReportPropertyChanged("TargetMidYear");
                 OnTargetMidYearChanged();
             }
@@ -28629,7 +28565,7 @@ namespace SRFROWCA
             {
                 OnTargetFullYearChanging(value);
                 ReportPropertyChanging("TargetFullYear");
-                _TargetFullYear = StructuralObject.SetValidValue(value);
+                _TargetFullYear = StructuralObject.SetValidValue(value, "TargetFullYear");
                 ReportPropertyChanged("TargetFullYear");
                 OnTargetFullYearChanged();
             }
@@ -28653,7 +28589,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -28677,7 +28613,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -28701,7 +28637,7 @@ namespace SRFROWCA
             {
                 OnUpdatedByIdChanging(value);
                 ReportPropertyChanging("UpdatedById");
-                _UpdatedById = StructuralObject.SetValidValue(value);
+                _UpdatedById = StructuralObject.SetValidValue(value, "UpdatedById");
                 ReportPropertyChanged("UpdatedById");
                 OnUpdatedByIdChanged();
             }
@@ -28725,7 +28661,7 @@ namespace SRFROWCA
             {
                 OnUpdatedDateChanging(value);
                 ReportPropertyChanging("UpdatedDate");
-                _UpdatedDate = StructuralObject.SetValidValue(value);
+                _UpdatedDate = StructuralObject.SetValidValue(value, "UpdatedDate");
                 ReportPropertyChanged("UpdatedDate");
                 OnUpdatedDateChanged();
             }
@@ -28736,7 +28672,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -28810,7 +28745,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -28829,7 +28764,7 @@ namespace SRFROWCA
                 {
                     OnProjectOrganizationIdChanging(value);
                     ReportPropertyChanging("ProjectOrganizationId");
-                    _ProjectOrganizationId = StructuralObject.SetValidValue(value);
+                    _ProjectOrganizationId = StructuralObject.SetValidValue(value, "ProjectOrganizationId");
                     ReportPropertyChanged("ProjectOrganizationId");
                     OnProjectOrganizationIdChanged();
                 }
@@ -28854,7 +28789,7 @@ namespace SRFROWCA
             {
                 OnProjectIdChanging(value);
                 ReportPropertyChanging("ProjectId");
-                _ProjectId = StructuralObject.SetValidValue(value);
+                _ProjectId = StructuralObject.SetValidValue(value, "ProjectId");
                 ReportPropertyChanged("ProjectId");
                 OnProjectIdChanged();
             }
@@ -28878,7 +28813,7 @@ namespace SRFROWCA
             {
                 OnOrganizationIdChanging(value);
                 ReportPropertyChanging("OrganizationId");
-                _OrganizationId = StructuralObject.SetValidValue(value);
+                _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                 ReportPropertyChanged("OrganizationId");
                 OnOrganizationIdChanged();
             }
@@ -28902,7 +28837,7 @@ namespace SRFROWCA
             {
                 OnOriginalRequestChanging(value);
                 ReportPropertyChanging("OriginalRequest");
-                _OriginalRequest = StructuralObject.SetValidValue(value);
+                _OriginalRequest = StructuralObject.SetValidValue(value, "OriginalRequest");
                 ReportPropertyChanged("OriginalRequest");
                 OnOriginalRequestChanged();
             }
@@ -28926,7 +28861,7 @@ namespace SRFROWCA
             {
                 OnCurrentRequestChanging(value);
                 ReportPropertyChanging("CurrentRequest");
-                _CurrentRequest = StructuralObject.SetValidValue(value);
+                _CurrentRequest = StructuralObject.SetValidValue(value, "CurrentRequest");
                 ReportPropertyChanged("CurrentRequest");
                 OnCurrentRequestChanged();
             }
@@ -28950,7 +28885,7 @@ namespace SRFROWCA
             {
                 OnRunningRequestChanging(value);
                 ReportPropertyChanging("RunningRequest");
-                _RunningRequest = StructuralObject.SetValidValue(value);
+                _RunningRequest = StructuralObject.SetValidValue(value, "RunningRequest");
                 ReportPropertyChanged("RunningRequest");
                 OnRunningRequestChanged();
             }
@@ -28974,7 +28909,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -28998,7 +28933,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -29022,7 +28957,7 @@ namespace SRFROWCA
             {
                 OnUpdatedByIdChanging(value);
                 ReportPropertyChanging("UpdatedById");
-                _UpdatedById = StructuralObject.SetValidValue(value);
+                _UpdatedById = StructuralObject.SetValidValue(value, "UpdatedById");
                 ReportPropertyChanged("UpdatedById");
                 OnUpdatedByIdChanged();
             }
@@ -29046,7 +28981,7 @@ namespace SRFROWCA
             {
                 OnUpdatedDateChanging(value);
                 ReportPropertyChanging("UpdatedDate");
-                _UpdatedDate = StructuralObject.SetValidValue(value);
+                _UpdatedDate = StructuralObject.SetValidValue(value, "UpdatedDate");
                 ReportPropertyChanged("UpdatedDate");
                 OnUpdatedDateChanged();
             }
@@ -29057,7 +28992,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -29165,7 +29099,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -29184,7 +29118,7 @@ namespace SRFROWCA
                 {
                     OnProjectStatusIdChanging(value);
                     ReportPropertyChanging("ProjectStatusId");
-                    _ProjectStatusId = StructuralObject.SetValidValue(value);
+                    _ProjectStatusId = StructuralObject.SetValidValue(value, "ProjectStatusId");
                     ReportPropertyChanged("ProjectStatusId");
                     OnProjectStatusIdChanged();
                 }
@@ -29209,7 +29143,7 @@ namespace SRFROWCA
             {
                 OnProjectStatusTitleChanging(value);
                 ReportPropertyChanging("ProjectStatusTitle");
-                _ProjectStatusTitle = StructuralObject.SetValidValue(value, false);
+                _ProjectStatusTitle = StructuralObject.SetValidValue(value, false, "ProjectStatusTitle");
                 ReportPropertyChanged("ProjectStatusTitle");
                 OnProjectStatusTitleChanged();
             }
@@ -29220,7 +29154,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -29278,7 +29211,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -29297,7 +29230,7 @@ namespace SRFROWCA
                 {
                     OnQIdChanging(value);
                     ReportPropertyChanging("QId");
-                    _QId = StructuralObject.SetValidValue(value);
+                    _QId = StructuralObject.SetValidValue(value, "QId");
                     ReportPropertyChanged("QId");
                     OnQIdChanged();
                 }
@@ -29322,7 +29255,7 @@ namespace SRFROWCA
             {
                 OnQNumberChanging(value);
                 ReportPropertyChanging("QNumber");
-                _QNumber = StructuralObject.SetValidValue(value);
+                _QNumber = StructuralObject.SetValidValue(value, "QNumber");
                 ReportPropertyChanged("QNumber");
                 OnQNumberChanged();
             }
@@ -29346,7 +29279,7 @@ namespace SRFROWCA
             {
                 OnQNameChanging(value);
                 ReportPropertyChanging("QName");
-                _QName = StructuralObject.SetValidValue(value, false);
+                _QName = StructuralObject.SetValidValue(value, false, "QName");
                 ReportPropertyChanged("QName");
                 OnQNameChanged();
             }
@@ -29370,7 +29303,7 @@ namespace SRFROWCA
             {
                 OnMonthIdChanging(value);
                 ReportPropertyChanging("MonthId");
-                _MonthId = StructuralObject.SetValidValue(value);
+                _MonthId = StructuralObject.SetValidValue(value, "MonthId");
                 ReportPropertyChanged("MonthId");
                 OnMonthIdChanged();
             }
@@ -29381,7 +29314,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -29411,7 +29343,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -29430,7 +29362,7 @@ namespace SRFROWCA
                 {
                     OnRegionalIndicatorIdChanging(value);
                     ReportPropertyChanging("RegionalIndicatorId");
-                    _RegionalIndicatorId = StructuralObject.SetValidValue(value);
+                    _RegionalIndicatorId = StructuralObject.SetValidValue(value, "RegionalIndicatorId");
                     ReportPropertyChanged("RegionalIndicatorId");
                     OnRegionalIndicatorIdChanged();
                 }
@@ -29455,7 +29387,7 @@ namespace SRFROWCA
             {
                 OnActivityDataIdChanging(value);
                 ReportPropertyChanging("ActivityDataId");
-                _ActivityDataId = StructuralObject.SetValidValue(value);
+                _ActivityDataId = StructuralObject.SetValidValue(value, "ActivityDataId");
                 ReportPropertyChanged("ActivityDataId");
                 OnActivityDataIdChanged();
             }
@@ -29479,7 +29411,7 @@ namespace SRFROWCA
             {
                 OnEmergencyClusterIdChanging(value);
                 ReportPropertyChanging("EmergencyClusterId");
-                _EmergencyClusterId = StructuralObject.SetValidValue(value);
+                _EmergencyClusterId = StructuralObject.SetValidValue(value, "EmergencyClusterId");
                 ReportPropertyChanged("EmergencyClusterId");
                 OnEmergencyClusterIdChanged();
             }
@@ -29503,7 +29435,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -29527,7 +29459,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -29538,7 +29470,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -29574,7 +29505,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -29593,7 +29524,7 @@ namespace SRFROWCA
                 {
                     OnRegionalIndicatorHisotryIdChanging(value);
                     ReportPropertyChanging("RegionalIndicatorHisotryId");
-                    _RegionalIndicatorHisotryId = StructuralObject.SetValidValue(value);
+                    _RegionalIndicatorHisotryId = StructuralObject.SetValidValue(value, "RegionalIndicatorHisotryId");
                     ReportPropertyChanged("RegionalIndicatorHisotryId");
                     OnRegionalIndicatorHisotryIdChanged();
                 }
@@ -29618,7 +29549,7 @@ namespace SRFROWCA
             {
                 OnRegionalIndicatorIdChanging(value);
                 ReportPropertyChanging("RegionalIndicatorId");
-                _RegionalIndicatorId = StructuralObject.SetValidValue(value);
+                _RegionalIndicatorId = StructuralObject.SetValidValue(value, "RegionalIndicatorId");
                 ReportPropertyChanged("RegionalIndicatorId");
                 OnRegionalIndicatorIdChanged();
             }
@@ -29642,7 +29573,7 @@ namespace SRFROWCA
             {
                 OnActivityDataIdChanging(value);
                 ReportPropertyChanging("ActivityDataId");
-                _ActivityDataId = StructuralObject.SetValidValue(value);
+                _ActivityDataId = StructuralObject.SetValidValue(value, "ActivityDataId");
                 ReportPropertyChanged("ActivityDataId");
                 OnActivityDataIdChanged();
             }
@@ -29666,7 +29597,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -29690,7 +29621,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -29714,7 +29645,7 @@ namespace SRFROWCA
             {
                 OnChangedByIdChanging(value);
                 ReportPropertyChanging("ChangedById");
-                _ChangedById = StructuralObject.SetValidValue(value);
+                _ChangedById = StructuralObject.SetValidValue(value, "ChangedById");
                 ReportPropertyChanged("ChangedById");
                 OnChangedByIdChanged();
             }
@@ -29738,7 +29669,7 @@ namespace SRFROWCA
             {
                 OnChangedDateChanging(value);
                 ReportPropertyChanging("ChangedDate");
-                _ChangedDate = StructuralObject.SetValidValue(value);
+                _ChangedDate = StructuralObject.SetValidValue(value, "ChangedDate");
                 ReportPropertyChanged("ChangedDate");
                 OnChangedDateChanged();
             }
@@ -29749,7 +29680,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -29789,7 +29719,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -29808,7 +29738,7 @@ namespace SRFROWCA
                 {
                     OnReportIdChanging(value);
                     ReportPropertyChanging("ReportId");
-                    _ReportId = StructuralObject.SetValidValue(value);
+                    _ReportId = StructuralObject.SetValidValue(value, "ReportId");
                     ReportPropertyChanged("ReportId");
                     OnReportIdChanged();
                 }
@@ -29833,7 +29763,7 @@ namespace SRFROWCA
             {
                 OnReportNameChanging(value);
                 ReportPropertyChanging("ReportName");
-                _ReportName = StructuralObject.SetValidValue(value, true);
+                _ReportName = StructuralObject.SetValidValue(value, true, "ReportName");
                 ReportPropertyChanged("ReportName");
                 OnReportNameChanged();
             }
@@ -29857,7 +29787,7 @@ namespace SRFROWCA
             {
                 OnYearIdChanging(value);
                 ReportPropertyChanging("YearId");
-                _YearId = StructuralObject.SetValidValue(value);
+                _YearId = StructuralObject.SetValidValue(value, "YearId");
                 ReportPropertyChanged("YearId");
                 OnYearIdChanged();
             }
@@ -29881,7 +29811,7 @@ namespace SRFROWCA
             {
                 OnMonthIdChanging(value);
                 ReportPropertyChanging("MonthId");
-                _MonthId = StructuralObject.SetValidValue(value);
+                _MonthId = StructuralObject.SetValidValue(value, "MonthId");
                 ReportPropertyChanged("MonthId");
                 OnMonthIdChanged();
             }
@@ -29905,7 +29835,7 @@ namespace SRFROWCA
             {
                 OnProjectIdChanging(value);
                 ReportPropertyChanging("ProjectId");
-                _ProjectId = StructuralObject.SetValidValue(value);
+                _ProjectId = StructuralObject.SetValidValue(value, "ProjectId");
                 ReportPropertyChanged("ProjectId");
                 OnProjectIdChanged();
             }
@@ -29929,7 +29859,7 @@ namespace SRFROWCA
             {
                 OnEmergencyLocationIdChanging(value);
                 ReportPropertyChanging("EmergencyLocationId");
-                _EmergencyLocationId = StructuralObject.SetValidValue(value);
+                _EmergencyLocationId = StructuralObject.SetValidValue(value, "EmergencyLocationId");
                 ReportPropertyChanged("EmergencyLocationId");
                 OnEmergencyLocationIdChanged();
             }
@@ -29953,7 +29883,7 @@ namespace SRFROWCA
             {
                 OnOrganizationIdChanging(value);
                 ReportPropertyChanging("OrganizationId");
-                _OrganizationId = StructuralObject.SetValidValue(value);
+                _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                 ReportPropertyChanged("OrganizationId");
                 OnOrganizationIdChanged();
             }
@@ -29977,7 +29907,7 @@ namespace SRFROWCA
             {
                 OnEmergencyClusterIdChanging(value);
                 ReportPropertyChanging("EmergencyClusterId");
-                _EmergencyClusterId = StructuralObject.SetValidValue(value);
+                _EmergencyClusterId = StructuralObject.SetValidValue(value, "EmergencyClusterId");
                 ReportPropertyChanged("EmergencyClusterId");
                 OnEmergencyClusterIdChanged();
             }
@@ -30001,7 +29931,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -30025,7 +29955,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -30049,7 +29979,7 @@ namespace SRFROWCA
             {
                 OnUpdatedDateChanging(value);
                 ReportPropertyChanging("UpdatedDate");
-                _UpdatedDate = StructuralObject.SetValidValue(value);
+                _UpdatedDate = StructuralObject.SetValidValue(value, "UpdatedDate");
                 ReportPropertyChanged("UpdatedDate");
                 OnUpdatedDateChanged();
             }
@@ -30073,7 +30003,7 @@ namespace SRFROWCA
             {
                 OnUpdatedByIdChanging(value);
                 ReportPropertyChanging("UpdatedById");
-                _UpdatedById = StructuralObject.SetValidValue(value);
+                _UpdatedById = StructuralObject.SetValidValue(value, "UpdatedById");
                 ReportPropertyChanged("UpdatedById");
                 OnUpdatedByIdChanged();
             }
@@ -30097,7 +30027,7 @@ namespace SRFROWCA
             {
                 OnIsApprovedChanging(value);
                 ReportPropertyChanging("IsApproved");
-                _IsApproved = StructuralObject.SetValidValue(value);
+                _IsApproved = StructuralObject.SetValidValue(value, "IsApproved");
                 ReportPropertyChanged("IsApproved");
                 OnIsApprovedChanged();
             }
@@ -30121,7 +30051,7 @@ namespace SRFROWCA
             {
                 OnApprovedByIdChanging(value);
                 ReportPropertyChanging("ApprovedById");
-                _ApprovedById = StructuralObject.SetValidValue(value);
+                _ApprovedById = StructuralObject.SetValidValue(value, "ApprovedById");
                 ReportPropertyChanged("ApprovedById");
                 OnApprovedByIdChanged();
             }
@@ -30145,7 +30075,7 @@ namespace SRFROWCA
             {
                 OnApprovedDateChanging(value);
                 ReportPropertyChanging("ApprovedDate");
-                _ApprovedDate = StructuralObject.SetValidValue(value);
+                _ApprovedDate = StructuralObject.SetValidValue(value, "ApprovedDate");
                 ReportPropertyChanged("ApprovedDate");
                 OnApprovedDateChanged();
             }
@@ -30169,7 +30099,7 @@ namespace SRFROWCA
             {
                 OnIsImportedChanging(value);
                 ReportPropertyChanging("IsImported");
-                _IsImported = StructuralObject.SetValidValue(value);
+                _IsImported = StructuralObject.SetValidValue(value, "IsImported");
                 ReportPropertyChanged("IsImported");
                 OnIsImportedChanged();
             }
@@ -30180,7 +30110,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -30476,7 +30405,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -30495,7 +30424,7 @@ namespace SRFROWCA
                 {
                     OnReportDetailIdChanging(value);
                     ReportPropertyChanging("ReportDetailId");
-                    _ReportDetailId = StructuralObject.SetValidValue(value);
+                    _ReportDetailId = StructuralObject.SetValidValue(value, "ReportDetailId");
                     ReportPropertyChanged("ReportDetailId");
                     OnReportDetailIdChanged();
                 }
@@ -30520,7 +30449,7 @@ namespace SRFROWCA
             {
                 OnReportIdChanging(value);
                 ReportPropertyChanging("ReportId");
-                _ReportId = StructuralObject.SetValidValue(value);
+                _ReportId = StructuralObject.SetValidValue(value, "ReportId");
                 ReportPropertyChanged("ReportId");
                 OnReportIdChanged();
             }
@@ -30544,7 +30473,7 @@ namespace SRFROWCA
             {
                 OnReportLocationIdChanging(value);
                 ReportPropertyChanging("ReportLocationId");
-                _ReportLocationId = StructuralObject.SetValidValue(value);
+                _ReportLocationId = StructuralObject.SetValidValue(value, "ReportLocationId");
                 ReportPropertyChanged("ReportLocationId");
                 OnReportLocationIdChanged();
             }
@@ -30568,7 +30497,7 @@ namespace SRFROWCA
             {
                 OnActivityDataIdChanging(value);
                 ReportPropertyChanging("ActivityDataId");
-                _ActivityDataId = StructuralObject.SetValidValue(value);
+                _ActivityDataId = StructuralObject.SetValidValue(value, "ActivityDataId");
                 ReportPropertyChanged("ActivityDataId");
                 OnActivityDataIdChanged();
             }
@@ -30592,7 +30521,7 @@ namespace SRFROWCA
             {
                 OnAchievedChanging(value);
                 ReportPropertyChanging("Achieved");
-                _Achieved = StructuralObject.SetValidValue(value);
+                _Achieved = StructuralObject.SetValidValue(value, "Achieved");
                 ReportPropertyChanged("Achieved");
                 OnAchievedChanged();
             }
@@ -30616,7 +30545,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -30640,7 +30569,7 @@ namespace SRFROWCA
             {
                 OnIsApprovedChanging(value);
                 ReportPropertyChanging("IsApproved");
-                _IsApproved = StructuralObject.SetValidValue(value);
+                _IsApproved = StructuralObject.SetValidValue(value, "IsApproved");
                 ReportPropertyChanged("IsApproved");
                 OnIsApprovedChanged();
             }
@@ -30664,7 +30593,7 @@ namespace SRFROWCA
             {
                 OnIsRejectedChanging(value);
                 ReportPropertyChanging("IsRejected");
-                _IsRejected = StructuralObject.SetValidValue(value);
+                _IsRejected = StructuralObject.SetValidValue(value, "IsRejected");
                 ReportPropertyChanged("IsRejected");
                 OnIsRejectedChanged();
             }
@@ -30688,7 +30617,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -30712,7 +30641,7 @@ namespace SRFROWCA
             {
                 OnApprovedByIdChanging(value);
                 ReportPropertyChanging("ApprovedById");
-                _ApprovedById = StructuralObject.SetValidValue(value);
+                _ApprovedById = StructuralObject.SetValidValue(value, "ApprovedById");
                 ReportPropertyChanged("ApprovedById");
                 OnApprovedByIdChanged();
             }
@@ -30736,7 +30665,7 @@ namespace SRFROWCA
             {
                 OnApprovedDateChanging(value);
                 ReportPropertyChanging("ApprovedDate");
-                _ApprovedDate = StructuralObject.SetValidValue(value);
+                _ApprovedDate = StructuralObject.SetValidValue(value, "ApprovedDate");
                 ReportPropertyChanged("ApprovedDate");
                 OnApprovedDateChanged();
             }
@@ -30760,7 +30689,7 @@ namespace SRFROWCA
             {
                 OnRejectedByIdChanging(value);
                 ReportPropertyChanging("RejectedById");
-                _RejectedById = StructuralObject.SetValidValue(value);
+                _RejectedById = StructuralObject.SetValidValue(value, "RejectedById");
                 ReportPropertyChanged("RejectedById");
                 OnRejectedByIdChanged();
             }
@@ -30784,7 +30713,7 @@ namespace SRFROWCA
             {
                 OnRejectedDateChanging(value);
                 ReportPropertyChanging("RejectedDate");
-                _RejectedDate = StructuralObject.SetValidValue(value);
+                _RejectedDate = StructuralObject.SetValidValue(value, "RejectedDate");
                 ReportPropertyChanged("RejectedDate");
                 OnRejectedDateChanged();
             }
@@ -30808,7 +30737,7 @@ namespace SRFROWCA
             {
                 OnUpdatedByIdChanging(value);
                 ReportPropertyChanging("UpdatedById");
-                _UpdatedById = StructuralObject.SetValidValue(value);
+                _UpdatedById = StructuralObject.SetValidValue(value, "UpdatedById");
                 ReportPropertyChanged("UpdatedById");
                 OnUpdatedByIdChanged();
             }
@@ -30832,7 +30761,7 @@ namespace SRFROWCA
             {
                 OnUpdatedDateChanging(value);
                 ReportPropertyChanging("UpdatedDate");
-                _UpdatedDate = StructuralObject.SetValidValue(value);
+                _UpdatedDate = StructuralObject.SetValidValue(value, "UpdatedDate");
                 ReportPropertyChanged("UpdatedDate");
                 OnUpdatedDateChanged();
             }
@@ -30843,7 +30772,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -30955,7 +30883,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -30974,7 +30902,7 @@ namespace SRFROWCA
                 {
                     OnReportFrequencyTypeIdChanging(value);
                     ReportPropertyChanging("ReportFrequencyTypeId");
-                    _ReportFrequencyTypeId = StructuralObject.SetValidValue(value);
+                    _ReportFrequencyTypeId = StructuralObject.SetValidValue(value, "ReportFrequencyTypeId");
                     ReportPropertyChanged("ReportFrequencyTypeId");
                     OnReportFrequencyTypeIdChanged();
                 }
@@ -30999,7 +30927,7 @@ namespace SRFROWCA
             {
                 OnFrequencyNameChanging(value);
                 ReportPropertyChanging("FrequencyName");
-                _FrequencyName = StructuralObject.SetValidValue(value, false);
+                _FrequencyName = StructuralObject.SetValidValue(value, false, "FrequencyName");
                 ReportPropertyChanged("FrequencyName");
                 OnFrequencyNameChanged();
             }
@@ -31023,7 +30951,7 @@ namespace SRFROWCA
             {
                 OnFrequencyPeriodInDaysChanging(value);
                 ReportPropertyChanging("FrequencyPeriodInDays");
-                _FrequencyPeriodInDays = StructuralObject.SetValidValue(value);
+                _FrequencyPeriodInDays = StructuralObject.SetValidValue(value, "FrequencyPeriodInDays");
                 ReportPropertyChanged("FrequencyPeriodInDays");
                 OnFrequencyPeriodInDaysChanged();
             }
@@ -31047,7 +30975,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -31058,7 +30986,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -31096,7 +31023,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -31115,7 +31042,7 @@ namespace SRFROWCA
                 {
                     OnReportIndicatorAccumIdChanging(value);
                     ReportPropertyChanging("ReportIndicatorAccumId");
-                    _ReportIndicatorAccumId = StructuralObject.SetValidValue(value);
+                    _ReportIndicatorAccumId = StructuralObject.SetValidValue(value, "ReportIndicatorAccumId");
                     ReportPropertyChanged("ReportIndicatorAccumId");
                     OnReportIndicatorAccumIdChanged();
                 }
@@ -31140,7 +31067,7 @@ namespace SRFROWCA
             {
                 OnProjectIdChanging(value);
                 ReportPropertyChanging("ProjectId");
-                _ProjectId = StructuralObject.SetValidValue(value);
+                _ProjectId = StructuralObject.SetValidValue(value, "ProjectId");
                 ReportPropertyChanged("ProjectId");
                 OnProjectIdChanged();
             }
@@ -31164,7 +31091,7 @@ namespace SRFROWCA
             {
                 OnYearIdChanging(value);
                 ReportPropertyChanging("YearId");
-                _YearId = StructuralObject.SetValidValue(value);
+                _YearId = StructuralObject.SetValidValue(value, "YearId");
                 ReportPropertyChanged("YearId");
                 OnYearIdChanged();
             }
@@ -31188,7 +31115,7 @@ namespace SRFROWCA
             {
                 OnActivityDataIdChanging(value);
                 ReportPropertyChanging("ActivityDataId");
-                _ActivityDataId = StructuralObject.SetValidValue(value);
+                _ActivityDataId = StructuralObject.SetValidValue(value, "ActivityDataId");
                 ReportPropertyChanged("ActivityDataId");
                 OnActivityDataIdChanged();
             }
@@ -31212,7 +31139,7 @@ namespace SRFROWCA
             {
                 OnIsAccumChanging(value);
                 ReportPropertyChanging("IsAccum");
-                _IsAccum = StructuralObject.SetValidValue(value);
+                _IsAccum = StructuralObject.SetValidValue(value, "IsAccum");
                 ReportPropertyChanged("IsAccum");
                 OnIsAccumChanged();
             }
@@ -31236,7 +31163,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -31260,7 +31187,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -31271,7 +31198,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -31301,7 +31227,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -31320,7 +31246,7 @@ namespace SRFROWCA
                 {
                     OnReportLocationIdChanging(value);
                     ReportPropertyChanging("ReportLocationId");
-                    _ReportLocationId = StructuralObject.SetValidValue(value);
+                    _ReportLocationId = StructuralObject.SetValidValue(value, "ReportLocationId");
                     ReportPropertyChanged("ReportLocationId");
                     OnReportLocationIdChanged();
                 }
@@ -31345,7 +31271,7 @@ namespace SRFROWCA
             {
                 OnReportIdChanging(value);
                 ReportPropertyChanging("ReportId");
-                _ReportId = StructuralObject.SetValidValue(value);
+                _ReportId = StructuralObject.SetValidValue(value, "ReportId");
                 ReportPropertyChanged("ReportId");
                 OnReportIdChanged();
             }
@@ -31369,7 +31295,7 @@ namespace SRFROWCA
             {
                 OnLocationIdChanging(value);
                 ReportPropertyChanging("LocationId");
-                _LocationId = StructuralObject.SetValidValue(value);
+                _LocationId = StructuralObject.SetValidValue(value, "LocationId");
                 ReportPropertyChanged("LocationId");
                 OnLocationIdChanged();
             }
@@ -31380,7 +31306,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -31514,7 +31439,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -31533,7 +31458,7 @@ namespace SRFROWCA
                 {
                     OnReportTypeIdentityIdChanging(value);
                     ReportPropertyChanging("ReportTypeIdentityId");
-                    _ReportTypeIdentityId = StructuralObject.SetValidValue(value);
+                    _ReportTypeIdentityId = StructuralObject.SetValidValue(value, "ReportTypeIdentityId");
                     ReportPropertyChanged("ReportTypeIdentityId");
                     OnReportTypeIdentityIdChanged();
                 }
@@ -31558,7 +31483,7 @@ namespace SRFROWCA
             {
                 OnReportTypeIdChanging(value);
                 ReportPropertyChanging("ReportTypeId");
-                _ReportTypeId = StructuralObject.SetValidValue(value);
+                _ReportTypeId = StructuralObject.SetValidValue(value, "ReportTypeId");
                 ReportPropertyChanged("ReportTypeId");
                 OnReportTypeIdChanged();
             }
@@ -31582,7 +31507,7 @@ namespace SRFROWCA
             {
                 OnReportTypeTitleChanging(value);
                 ReportPropertyChanging("ReportTypeTitle");
-                _ReportTypeTitle = StructuralObject.SetValidValue(value, false);
+                _ReportTypeTitle = StructuralObject.SetValidValue(value, false, "ReportTypeTitle");
                 ReportPropertyChanged("ReportTypeTitle");
                 OnReportTypeTitleChanged();
             }
@@ -31606,7 +31531,7 @@ namespace SRFROWCA
             {
                 OnSiteLanguageIdChanging(value);
                 ReportPropertyChanging("SiteLanguageId");
-                _SiteLanguageId = StructuralObject.SetValidValue(value, false);
+                _SiteLanguageId = StructuralObject.SetValidValue(value, false, "SiteLanguageId");
                 ReportPropertyChanged("SiteLanguageId");
                 OnSiteLanguageIdChanged();
             }
@@ -31630,7 +31555,7 @@ namespace SRFROWCA
             {
                 OnOrderOfReportChanging(value);
                 ReportPropertyChanging("OrderOfReport");
-                _OrderOfReport = StructuralObject.SetValidValue(value);
+                _OrderOfReport = StructuralObject.SetValidValue(value, "OrderOfReport");
                 ReportPropertyChanged("OrderOfReport");
                 OnOrderOfReportChanged();
             }
@@ -31641,7 +31566,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -31669,7 +31593,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -31688,7 +31612,7 @@ namespace SRFROWCA
                 {
                     OnSiteLanguageIdChanging(value);
                     ReportPropertyChanging("SiteLanguageId");
-                    _SiteLanguageId = StructuralObject.SetValidValue(value);
+                    _SiteLanguageId = StructuralObject.SetValidValue(value, "SiteLanguageId");
                     ReportPropertyChanged("SiteLanguageId");
                     OnSiteLanguageIdChanged();
                 }
@@ -31713,7 +31637,7 @@ namespace SRFROWCA
             {
                 OnSiteLanguage1Changing(value);
                 ReportPropertyChanging("SiteLanguage1");
-                _SiteLanguage1 = StructuralObject.SetValidValue(value, false);
+                _SiteLanguage1 = StructuralObject.SetValidValue(value, false, "SiteLanguage1");
                 ReportPropertyChanged("SiteLanguage1");
                 OnSiteLanguage1Changed();
             }
@@ -31737,7 +31661,7 @@ namespace SRFROWCA
             {
                 OnSiteLanguageCodeChanging(value);
                 ReportPropertyChanging("SiteLanguageCode");
-                _SiteLanguageCode = StructuralObject.SetValidValue(value, true);
+                _SiteLanguageCode = StructuralObject.SetValidValue(value, true, "SiteLanguageCode");
                 ReportPropertyChanged("SiteLanguageCode");
                 OnSiteLanguageCodeChanged();
             }
@@ -31748,7 +31672,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -31782,7 +31705,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -31801,7 +31724,7 @@ namespace SRFROWCA
                 {
                     OnSRPIndicatorIdChanging(value);
                     ReportPropertyChanging("SRPIndicatorId");
-                    _SRPIndicatorId = StructuralObject.SetValidValue(value);
+                    _SRPIndicatorId = StructuralObject.SetValidValue(value, "SRPIndicatorId");
                     ReportPropertyChanged("SRPIndicatorId");
                     OnSRPIndicatorIdChanged();
                 }
@@ -31826,7 +31749,7 @@ namespace SRFROWCA
             {
                 OnActivityDataIdChanging(value);
                 ReportPropertyChanging("ActivityDataId");
-                _ActivityDataId = StructuralObject.SetValidValue(value);
+                _ActivityDataId = StructuralObject.SetValidValue(value, "ActivityDataId");
                 ReportPropertyChanged("ActivityDataId");
                 OnActivityDataIdChanged();
             }
@@ -31850,7 +31773,7 @@ namespace SRFROWCA
             {
                 OnEmergencyLocationIdChanging(value);
                 ReportPropertyChanging("EmergencyLocationId");
-                _EmergencyLocationId = StructuralObject.SetValidValue(value);
+                _EmergencyLocationId = StructuralObject.SetValidValue(value, "EmergencyLocationId");
                 ReportPropertyChanged("EmergencyLocationId");
                 OnEmergencyLocationIdChanged();
             }
@@ -31874,7 +31797,7 @@ namespace SRFROWCA
             {
                 OnEmergencyClusterIdChanging(value);
                 ReportPropertyChanging("EmergencyClusterId");
-                _EmergencyClusterId = StructuralObject.SetValidValue(value);
+                _EmergencyClusterId = StructuralObject.SetValidValue(value, "EmergencyClusterId");
                 ReportPropertyChanged("EmergencyClusterId");
                 OnEmergencyClusterIdChanged();
             }
@@ -31898,7 +31821,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -31922,7 +31845,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -31933,7 +31856,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -32017,7 +31939,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -32036,7 +31958,7 @@ namespace SRFROWCA
                 {
                     OnSRPIndicatorHisotryIdChanging(value);
                     ReportPropertyChanging("SRPIndicatorHisotryId");
-                    _SRPIndicatorHisotryId = StructuralObject.SetValidValue(value);
+                    _SRPIndicatorHisotryId = StructuralObject.SetValidValue(value, "SRPIndicatorHisotryId");
                     ReportPropertyChanged("SRPIndicatorHisotryId");
                     OnSRPIndicatorHisotryIdChanged();
                 }
@@ -32061,7 +31983,7 @@ namespace SRFROWCA
             {
                 OnSRPIndicatorIdChanging(value);
                 ReportPropertyChanging("SRPIndicatorId");
-                _SRPIndicatorId = StructuralObject.SetValidValue(value);
+                _SRPIndicatorId = StructuralObject.SetValidValue(value, "SRPIndicatorId");
                 ReportPropertyChanged("SRPIndicatorId");
                 OnSRPIndicatorIdChanged();
             }
@@ -32085,7 +32007,7 @@ namespace SRFROWCA
             {
                 OnActivityDataIdChanging(value);
                 ReportPropertyChanging("ActivityDataId");
-                _ActivityDataId = StructuralObject.SetValidValue(value);
+                _ActivityDataId = StructuralObject.SetValidValue(value, "ActivityDataId");
                 ReportPropertyChanged("ActivityDataId");
                 OnActivityDataIdChanged();
             }
@@ -32109,7 +32031,7 @@ namespace SRFROWCA
             {
                 OnEmergencyLocationIdChanging(value);
                 ReportPropertyChanging("EmergencyLocationId");
-                _EmergencyLocationId = StructuralObject.SetValidValue(value);
+                _EmergencyLocationId = StructuralObject.SetValidValue(value, "EmergencyLocationId");
                 ReportPropertyChanged("EmergencyLocationId");
                 OnEmergencyLocationIdChanged();
             }
@@ -32133,7 +32055,7 @@ namespace SRFROWCA
             {
                 OnEmergencyClusterIdChanging(value);
                 ReportPropertyChanging("EmergencyClusterId");
-                _EmergencyClusterId = StructuralObject.SetValidValue(value);
+                _EmergencyClusterId = StructuralObject.SetValidValue(value, "EmergencyClusterId");
                 ReportPropertyChanged("EmergencyClusterId");
                 OnEmergencyClusterIdChanged();
             }
@@ -32157,7 +32079,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -32181,7 +32103,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -32205,7 +32127,7 @@ namespace SRFROWCA
             {
                 OnChangedByIdChanging(value);
                 ReportPropertyChanging("ChangedById");
-                _ChangedById = StructuralObject.SetValidValue(value);
+                _ChangedById = StructuralObject.SetValidValue(value, "ChangedById");
                 ReportPropertyChanged("ChangedById");
                 OnChangedByIdChanged();
             }
@@ -32229,7 +32151,7 @@ namespace SRFROWCA
             {
                 OnChangedDateChanging(value);
                 ReportPropertyChanging("ChangedDate");
-                _ChangedDate = StructuralObject.SetValidValue(value);
+                _ChangedDate = StructuralObject.SetValidValue(value, "ChangedDate");
                 ReportPropertyChanged("ChangedDate");
                 OnChangedDateChanged();
             }
@@ -32240,7 +32162,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -32266,7 +32187,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -32285,7 +32206,7 @@ namespace SRFROWCA
                 {
                     OnidChanging(value);
                     ReportPropertyChanging("id");
-                    _id = StructuralObject.SetValidValue(value);
+                    _id = StructuralObject.SetValidValue(value, "id");
                     ReportPropertyChanged("id");
                     OnidChanged();
                 }
@@ -32310,7 +32231,7 @@ namespace SRFROWCA
             {
                 OnAdmin_Level_1Changing(value);
                 ReportPropertyChanging("Admin_Level_1");
-                _Admin_Level_1 = StructuralObject.SetValidValue(value, true);
+                _Admin_Level_1 = StructuralObject.SetValidValue(value, true, "Admin_Level_1");
                 ReportPropertyChanged("Admin_Level_1");
                 OnAdmin_Level_1Changed();
             }
@@ -32334,7 +32255,7 @@ namespace SRFROWCA
             {
                 OnPcode1Changing(value);
                 ReportPropertyChanging("Pcode1");
-                _Pcode1 = StructuralObject.SetValidValue(value, true);
+                _Pcode1 = StructuralObject.SetValidValue(value, true, "Pcode1");
                 ReportPropertyChanged("Pcode1");
                 OnPcode1Changed();
             }
@@ -32358,7 +32279,7 @@ namespace SRFROWCA
             {
                 OnAdmin_Level_2Changing(value);
                 ReportPropertyChanging("Admin_Level_2");
-                _Admin_Level_2 = StructuralObject.SetValidValue(value, true);
+                _Admin_Level_2 = StructuralObject.SetValidValue(value, true, "Admin_Level_2");
                 ReportPropertyChanged("Admin_Level_2");
                 OnAdmin_Level_2Changed();
             }
@@ -32382,7 +32303,7 @@ namespace SRFROWCA
             {
                 OnPcode2Changing(value);
                 ReportPropertyChanging("Pcode2");
-                _Pcode2 = StructuralObject.SetValidValue(value, true);
+                _Pcode2 = StructuralObject.SetValidValue(value, true, "Pcode2");
                 ReportPropertyChanged("Pcode2");
                 OnPcode2Changed();
             }
@@ -32406,7 +32327,7 @@ namespace SRFROWCA
             {
                 OnCountryIdChanging(value);
                 ReportPropertyChanging("CountryId");
-                _CountryId = StructuralObject.SetValidValue(value);
+                _CountryId = StructuralObject.SetValidValue(value, "CountryId");
                 ReportPropertyChanged("CountryId");
                 OnCountryIdChanged();
             }
@@ -32430,7 +32351,7 @@ namespace SRFROWCA
             {
                 OnAdmin1IdChanging(value);
                 ReportPropertyChanging("Admin1Id");
-                _Admin1Id = StructuralObject.SetValidValue(value);
+                _Admin1Id = StructuralObject.SetValidValue(value, "Admin1Id");
                 ReportPropertyChanged("Admin1Id");
                 OnAdmin1IdChanged();
             }
@@ -32454,7 +32375,7 @@ namespace SRFROWCA
             {
                 OnAdmin2IdChanging(value);
                 ReportPropertyChanging("Admin2Id");
-                _Admin2Id = StructuralObject.SetValidValue(value);
+                _Admin2Id = StructuralObject.SetValidValue(value, "Admin2Id");
                 ReportPropertyChanged("Admin2Id");
                 OnAdmin2IdChanged();
             }
@@ -32478,7 +32399,7 @@ namespace SRFROWCA
             {
                 OnUserIdChanging(value);
                 ReportPropertyChanging("UserId");
-                _UserId = StructuralObject.SetValidValue(value);
+                _UserId = StructuralObject.SetValidValue(value, "UserId");
                 ReportPropertyChanged("UserId");
                 OnUserIdChanged();
             }
@@ -32489,7 +32410,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -32515,7 +32435,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -32534,7 +32454,7 @@ namespace SRFROWCA
                 {
                     OnIdChanging(value);
                     ReportPropertyChanging("Id");
-                    _Id = StructuralObject.SetValidValue(value);
+                    _Id = StructuralObject.SetValidValue(value, "Id");
                     ReportPropertyChanged("Id");
                     OnIdChanged();
                 }
@@ -32559,7 +32479,7 @@ namespace SRFROWCA
             {
                 OnEmergencyIdChanging(value);
                 ReportPropertyChanging("EmergencyId");
-                _EmergencyId = StructuralObject.SetValidValue(value);
+                _EmergencyId = StructuralObject.SetValidValue(value, "EmergencyId");
                 ReportPropertyChanged("EmergencyId");
                 OnEmergencyIdChanged();
             }
@@ -32583,7 +32503,7 @@ namespace SRFROWCA
             {
                 OnCluster_EnChanging(value);
                 ReportPropertyChanging("Cluster_En");
-                _Cluster_En = StructuralObject.SetValidValue(value, true);
+                _Cluster_En = StructuralObject.SetValidValue(value, true, "Cluster_En");
                 ReportPropertyChanged("Cluster_En");
                 OnCluster_EnChanged();
             }
@@ -32607,7 +32527,7 @@ namespace SRFROWCA
             {
                 OnCluster_FrChanging(value);
                 ReportPropertyChanging("Cluster_Fr");
-                _Cluster_Fr = StructuralObject.SetValidValue(value, true);
+                _Cluster_Fr = StructuralObject.SetValidValue(value, true, "Cluster_Fr");
                 ReportPropertyChanged("Cluster_Fr");
                 OnCluster_FrChanged();
             }
@@ -32631,7 +32551,7 @@ namespace SRFROWCA
             {
                 OnClusterIdChanging(value);
                 ReportPropertyChanging("ClusterId");
-                _ClusterId = StructuralObject.SetValidValue(value);
+                _ClusterId = StructuralObject.SetValidValue(value, "ClusterId");
                 ReportPropertyChanged("ClusterId");
                 OnClusterIdChanged();
             }
@@ -32655,7 +32575,7 @@ namespace SRFROWCA
             {
                 OnEmergencyClusterIdChanging(value);
                 ReportPropertyChanging("EmergencyClusterId");
-                _EmergencyClusterId = StructuralObject.SetValidValue(value);
+                _EmergencyClusterId = StructuralObject.SetValidValue(value, "EmergencyClusterId");
                 ReportPropertyChanged("EmergencyClusterId");
                 OnEmergencyClusterIdChanged();
             }
@@ -32679,7 +32599,7 @@ namespace SRFROWCA
             {
                 OnObjective_EnChanging(value);
                 ReportPropertyChanging("Objective_En");
-                _Objective_En = StructuralObject.SetValidValue(value, true);
+                _Objective_En = StructuralObject.SetValidValue(value, true, "Objective_En");
                 ReportPropertyChanged("Objective_En");
                 OnObjective_EnChanged();
             }
@@ -32703,7 +32623,7 @@ namespace SRFROWCA
             {
                 OnObjective_FrChanging(value);
                 ReportPropertyChanging("Objective_Fr");
-                _Objective_Fr = StructuralObject.SetValidValue(value, true);
+                _Objective_Fr = StructuralObject.SetValidValue(value, true, "Objective_Fr");
                 ReportPropertyChanged("Objective_Fr");
                 OnObjective_FrChanged();
             }
@@ -32727,7 +32647,7 @@ namespace SRFROWCA
             {
                 OnObjectiveIdChanging(value);
                 ReportPropertyChanging("ObjectiveId");
-                _ObjectiveId = StructuralObject.SetValidValue(value);
+                _ObjectiveId = StructuralObject.SetValidValue(value, "ObjectiveId");
                 ReportPropertyChanged("ObjectiveId");
                 OnObjectiveIdChanged();
             }
@@ -32751,7 +32671,7 @@ namespace SRFROWCA
             {
                 OnClusterObjectiveIdChanging(value);
                 ReportPropertyChanging("ClusterObjectiveId");
-                _ClusterObjectiveId = StructuralObject.SetValidValue(value);
+                _ClusterObjectiveId = StructuralObject.SetValidValue(value, "ClusterObjectiveId");
                 ReportPropertyChanged("ClusterObjectiveId");
                 OnClusterObjectiveIdChanged();
             }
@@ -32775,7 +32695,7 @@ namespace SRFROWCA
             {
                 OnPriority_EnChanging(value);
                 ReportPropertyChanging("Priority_En");
-                _Priority_En = StructuralObject.SetValidValue(value, true);
+                _Priority_En = StructuralObject.SetValidValue(value, true, "Priority_En");
                 ReportPropertyChanged("Priority_En");
                 OnPriority_EnChanged();
             }
@@ -32799,7 +32719,7 @@ namespace SRFROWCA
             {
                 OnPriority_FrChanging(value);
                 ReportPropertyChanging("Priority_Fr");
-                _Priority_Fr = StructuralObject.SetValidValue(value, true);
+                _Priority_Fr = StructuralObject.SetValidValue(value, true, "Priority_Fr");
                 ReportPropertyChanged("Priority_Fr");
                 OnPriority_FrChanged();
             }
@@ -32823,7 +32743,7 @@ namespace SRFROWCA
             {
                 OnPriorityIdChanging(value);
                 ReportPropertyChanging("PriorityId");
-                _PriorityId = StructuralObject.SetValidValue(value);
+                _PriorityId = StructuralObject.SetValidValue(value, "PriorityId");
                 ReportPropertyChanged("PriorityId");
                 OnPriorityIdChanged();
             }
@@ -32847,7 +32767,7 @@ namespace SRFROWCA
             {
                 OnObjectivePriorityIdChanging(value);
                 ReportPropertyChanging("ObjectivePriorityId");
-                _ObjectivePriorityId = StructuralObject.SetValidValue(value);
+                _ObjectivePriorityId = StructuralObject.SetValidValue(value, "ObjectivePriorityId");
                 ReportPropertyChanged("ObjectivePriorityId");
                 OnObjectivePriorityIdChanged();
             }
@@ -32871,7 +32791,7 @@ namespace SRFROWCA
             {
                 OnActivity_EnChanging(value);
                 ReportPropertyChanging("Activity_En");
-                _Activity_En = StructuralObject.SetValidValue(value, true);
+                _Activity_En = StructuralObject.SetValidValue(value, true, "Activity_En");
                 ReportPropertyChanged("Activity_En");
                 OnActivity_EnChanged();
             }
@@ -32895,7 +32815,7 @@ namespace SRFROWCA
             {
                 OnActivity_FrChanging(value);
                 ReportPropertyChanging("Activity_Fr");
-                _Activity_Fr = StructuralObject.SetValidValue(value, true);
+                _Activity_Fr = StructuralObject.SetValidValue(value, true, "Activity_Fr");
                 ReportPropertyChanged("Activity_Fr");
                 OnActivity_FrChanged();
             }
@@ -32919,7 +32839,7 @@ namespace SRFROWCA
             {
                 OnPriorityActivityIdChanging(value);
                 ReportPropertyChanging("PriorityActivityId");
-                _PriorityActivityId = StructuralObject.SetValidValue(value);
+                _PriorityActivityId = StructuralObject.SetValidValue(value, "PriorityActivityId");
                 ReportPropertyChanged("PriorityActivityId");
                 OnPriorityActivityIdChanged();
             }
@@ -32943,7 +32863,7 @@ namespace SRFROWCA
             {
                 OnData_EnChanging(value);
                 ReportPropertyChanging("Data_En");
-                _Data_En = StructuralObject.SetValidValue(value, true);
+                _Data_En = StructuralObject.SetValidValue(value, true, "Data_En");
                 ReportPropertyChanged("Data_En");
                 OnData_EnChanged();
             }
@@ -32967,7 +32887,7 @@ namespace SRFROWCA
             {
                 OnData_FrChanging(value);
                 ReportPropertyChanging("Data_Fr");
-                _Data_Fr = StructuralObject.SetValidValue(value, true);
+                _Data_Fr = StructuralObject.SetValidValue(value, true, "Data_Fr");
                 ReportPropertyChanged("Data_Fr");
                 OnData_FrChanged();
             }
@@ -32991,7 +32911,7 @@ namespace SRFROWCA
             {
                 OnActivityDataIdChanging(value);
                 ReportPropertyChanging("ActivityDataId");
-                _ActivityDataId = StructuralObject.SetValidValue(value);
+                _ActivityDataId = StructuralObject.SetValidValue(value, "ActivityDataId");
                 ReportPropertyChanged("ActivityDataId");
                 OnActivityDataIdChanged();
             }
@@ -33015,7 +32935,7 @@ namespace SRFROWCA
             {
                 OnUnit_EnChanging(value);
                 ReportPropertyChanging("Unit_En");
-                _Unit_En = StructuralObject.SetValidValue(value, true);
+                _Unit_En = StructuralObject.SetValidValue(value, true, "Unit_En");
                 ReportPropertyChanged("Unit_En");
                 OnUnit_EnChanged();
             }
@@ -33039,7 +32959,7 @@ namespace SRFROWCA
             {
                 OnUnit_FrChanging(value);
                 ReportPropertyChanging("Unit_Fr");
-                _Unit_Fr = StructuralObject.SetValidValue(value, true);
+                _Unit_Fr = StructuralObject.SetValidValue(value, true, "Unit_Fr");
                 ReportPropertyChanged("Unit_Fr");
                 OnUnit_FrChanged();
             }
@@ -33063,7 +32983,7 @@ namespace SRFROWCA
             {
                 OnUnitIdChanging(value);
                 ReportPropertyChanging("UnitId");
-                _UnitId = StructuralObject.SetValidValue(value);
+                _UnitId = StructuralObject.SetValidValue(value, "UnitId");
                 ReportPropertyChanged("UnitId");
                 OnUnitIdChanged();
             }
@@ -33087,7 +33007,7 @@ namespace SRFROWCA
             {
                 OnUserIdChanging(value);
                 ReportPropertyChanging("UserId");
-                _UserId = StructuralObject.SetValidValue(value);
+                _UserId = StructuralObject.SetValidValue(value, "UserId");
                 ReportPropertyChanged("UserId");
                 OnUserIdChanged();
             }
@@ -33111,7 +33031,7 @@ namespace SRFROWCA
             {
                 OnSecondaryCluster_EnChanging(value);
                 ReportPropertyChanging("SecondaryCluster_En");
-                _SecondaryCluster_En = StructuralObject.SetValidValue(value, true);
+                _SecondaryCluster_En = StructuralObject.SetValidValue(value, true, "SecondaryCluster_En");
                 ReportPropertyChanged("SecondaryCluster_En");
                 OnSecondaryCluster_EnChanged();
             }
@@ -33135,7 +33055,7 @@ namespace SRFROWCA
             {
                 OnSecondaryCluster_FrChanging(value);
                 ReportPropertyChanging("SecondaryCluster_Fr");
-                _SecondaryCluster_Fr = StructuralObject.SetValidValue(value, true);
+                _SecondaryCluster_Fr = StructuralObject.SetValidValue(value, true, "SecondaryCluster_Fr");
                 ReportPropertyChanged("SecondaryCluster_Fr");
                 OnSecondaryCluster_FrChanged();
             }
@@ -33159,7 +33079,7 @@ namespace SRFROWCA
             {
                 OnSecondaryClusterIdChanging(value);
                 ReportPropertyChanging("SecondaryClusterId");
-                _SecondaryClusterId = StructuralObject.SetValidValue(value);
+                _SecondaryClusterId = StructuralObject.SetValidValue(value, "SecondaryClusterId");
                 ReportPropertyChanged("SecondaryClusterId");
                 OnSecondaryClusterIdChanged();
             }
@@ -33170,7 +33090,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -33200,7 +33119,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -33217,7 +33136,7 @@ namespace SRFROWCA
             {
                 OnnameChanging(value);
                 ReportPropertyChanging("name");
-                _name = StructuralObject.SetValidValue(value, false);
+                _name = StructuralObject.SetValidValue(value, false, "name");
                 ReportPropertyChanged("name");
                 OnnameChanged();
             }
@@ -33241,7 +33160,7 @@ namespace SRFROWCA
             {
                 Onprincipal_idChanging(value);
                 ReportPropertyChanging("principal_id");
-                _principal_id = StructuralObject.SetValidValue(value);
+                _principal_id = StructuralObject.SetValidValue(value, "principal_id");
                 ReportPropertyChanged("principal_id");
                 Onprincipal_idChanged();
             }
@@ -33267,7 +33186,7 @@ namespace SRFROWCA
                 {
                     Ondiagram_idChanging(value);
                     ReportPropertyChanging("diagram_id");
-                    _diagram_id = StructuralObject.SetValidValue(value);
+                    _diagram_id = StructuralObject.SetValidValue(value, "diagram_id");
                     ReportPropertyChanged("diagram_id");
                     Ondiagram_idChanged();
                 }
@@ -33292,7 +33211,7 @@ namespace SRFROWCA
             {
                 OnversionChanging(value);
                 ReportPropertyChanging("version");
-                _version = StructuralObject.SetValidValue(value);
+                _version = StructuralObject.SetValidValue(value, "version");
                 ReportPropertyChanged("version");
                 OnversionChanged();
             }
@@ -33316,7 +33235,7 @@ namespace SRFROWCA
             {
                 OndefinitionChanging(value);
                 ReportPropertyChanging("definition");
-                _definition = StructuralObject.SetValidValue(value, true);
+                _definition = StructuralObject.SetValidValue(value, true, "definition");
                 ReportPropertyChanged("definition");
                 OndefinitionChanged();
             }
@@ -33327,7 +33246,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -33353,7 +33271,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -33372,7 +33290,7 @@ namespace SRFROWCA
                 {
                     OnIdChanging(value);
                     ReportPropertyChanging("Id");
-                    _Id = StructuralObject.SetValidValue(value);
+                    _Id = StructuralObject.SetValidValue(value, "Id");
                     ReportPropertyChanged("Id");
                     OnIdChanged();
                 }
@@ -33397,7 +33315,7 @@ namespace SRFROWCA
             {
                 OnIdtempChanging(value);
                 ReportPropertyChanging("Idtemp");
-                _Idtemp = StructuralObject.SetValidValue(value);
+                _Idtemp = StructuralObject.SetValidValue(value, "Idtemp");
                 ReportPropertyChanged("Idtemp");
                 OnIdtempChanged();
             }
@@ -33421,7 +33339,7 @@ namespace SRFROWCA
             {
                 OnEmergencyLocationIdChanging(value);
                 ReportPropertyChanging("EmergencyLocationId");
-                _EmergencyLocationId = StructuralObject.SetValidValue(value);
+                _EmergencyLocationId = StructuralObject.SetValidValue(value, "EmergencyLocationId");
                 ReportPropertyChanged("EmergencyLocationId");
                 OnEmergencyLocationIdChanged();
             }
@@ -33445,7 +33363,7 @@ namespace SRFROWCA
             {
                 OnClusterChanging(value);
                 ReportPropertyChanging("Cluster");
-                _Cluster = StructuralObject.SetValidValue(value, true);
+                _Cluster = StructuralObject.SetValidValue(value, true, "Cluster");
                 ReportPropertyChanged("Cluster");
                 OnClusterChanged();
             }
@@ -33469,7 +33387,7 @@ namespace SRFROWCA
             {
                 OnEmergencyClusterIdChanging(value);
                 ReportPropertyChanging("EmergencyClusterId");
-                _EmergencyClusterId = StructuralObject.SetValidValue(value);
+                _EmergencyClusterId = StructuralObject.SetValidValue(value, "EmergencyClusterId");
                 ReportPropertyChanged("EmergencyClusterId");
                 OnEmergencyClusterIdChanged();
             }
@@ -33493,7 +33411,7 @@ namespace SRFROWCA
             {
                 OnStrObjectivesChanging(value);
                 ReportPropertyChanging("StrObjectives");
-                _StrObjectives = StructuralObject.SetValidValue(value, true);
+                _StrObjectives = StructuralObject.SetValidValue(value, true, "StrObjectives");
                 ReportPropertyChanged("StrObjectives");
                 OnStrObjectivesChanged();
             }
@@ -33517,7 +33435,7 @@ namespace SRFROWCA
             {
                 OnStrObjectiveIdChanging(value);
                 ReportPropertyChanging("StrObjectiveId");
-                _StrObjectiveId = StructuralObject.SetValidValue(value);
+                _StrObjectiveId = StructuralObject.SetValidValue(value, "StrObjectiveId");
                 ReportPropertyChanged("StrObjectiveId");
                 OnStrObjectiveIdChanged();
             }
@@ -33541,7 +33459,7 @@ namespace SRFROWCA
             {
                 OnObjectivesChanging(value);
                 ReportPropertyChanging("Objectives");
-                _Objectives = StructuralObject.SetValidValue(value, true);
+                _Objectives = StructuralObject.SetValidValue(value, true, "Objectives");
                 ReportPropertyChanged("Objectives");
                 OnObjectivesChanged();
             }
@@ -33565,7 +33483,7 @@ namespace SRFROWCA
             {
                 OnClusterObjectiveIdChanging(value);
                 ReportPropertyChanging("ClusterObjectiveId");
-                _ClusterObjectiveId = StructuralObject.SetValidValue(value);
+                _ClusterObjectiveId = StructuralObject.SetValidValue(value, "ClusterObjectiveId");
                 ReportPropertyChanged("ClusterObjectiveId");
                 OnClusterObjectiveIdChanged();
             }
@@ -33589,7 +33507,7 @@ namespace SRFROWCA
             {
                 OnIndicatorsChanging(value);
                 ReportPropertyChanging("Indicators");
-                _Indicators = StructuralObject.SetValidValue(value, true);
+                _Indicators = StructuralObject.SetValidValue(value, true, "Indicators");
                 ReportPropertyChanged("Indicators");
                 OnIndicatorsChanged();
             }
@@ -33613,7 +33531,7 @@ namespace SRFROWCA
             {
                 OnObjectiveIndicatorIdChanging(value);
                 ReportPropertyChanging("ObjectiveIndicatorId");
-                _ObjectiveIndicatorId = StructuralObject.SetValidValue(value);
+                _ObjectiveIndicatorId = StructuralObject.SetValidValue(value, "ObjectiveIndicatorId");
                 ReportPropertyChanged("ObjectiveIndicatorId");
                 OnObjectiveIndicatorIdChanged();
             }
@@ -33637,7 +33555,7 @@ namespace SRFROWCA
             {
                 OnActivitiesChanging(value);
                 ReportPropertyChanging("Activities");
-                _Activities = StructuralObject.SetValidValue(value, true);
+                _Activities = StructuralObject.SetValidValue(value, true, "Activities");
                 ReportPropertyChanged("Activities");
                 OnActivitiesChanged();
             }
@@ -33661,7 +33579,7 @@ namespace SRFROWCA
             {
                 OnIndicatorActivityIdChanging(value);
                 ReportPropertyChanging("IndicatorActivityId");
-                _IndicatorActivityId = StructuralObject.SetValidValue(value);
+                _IndicatorActivityId = StructuralObject.SetValidValue(value, "IndicatorActivityId");
                 ReportPropertyChanged("IndicatorActivityId");
                 OnIndicatorActivityIdChanged();
             }
@@ -33685,7 +33603,7 @@ namespace SRFROWCA
             {
                 OnDataChanging(value);
                 ReportPropertyChanging("Data");
-                _Data = StructuralObject.SetValidValue(value, true);
+                _Data = StructuralObject.SetValidValue(value, true, "Data");
                 ReportPropertyChanged("Data");
                 OnDataChanged();
             }
@@ -33709,7 +33627,7 @@ namespace SRFROWCA
             {
                 OnActivityDataIdChanging(value);
                 ReportPropertyChanging("ActivityDataId");
-                _ActivityDataId = StructuralObject.SetValidValue(value);
+                _ActivityDataId = StructuralObject.SetValidValue(value, "ActivityDataId");
                 ReportPropertyChanged("ActivityDataId");
                 OnActivityDataIdChanged();
             }
@@ -33733,7 +33651,7 @@ namespace SRFROWCA
             {
                 OnUnitChanging(value);
                 ReportPropertyChanging("Unit");
-                _Unit = StructuralObject.SetValidValue(value, true);
+                _Unit = StructuralObject.SetValidValue(value, true, "Unit");
                 ReportPropertyChanged("Unit");
                 OnUnitChanged();
             }
@@ -33757,7 +33675,7 @@ namespace SRFROWCA
             {
                 OnUnitIdChanging(value);
                 ReportPropertyChanging("UnitId");
-                _UnitId = StructuralObject.SetValidValue(value);
+                _UnitId = StructuralObject.SetValidValue(value, "UnitId");
                 ReportPropertyChanged("UnitId");
                 OnUnitIdChanged();
             }
@@ -33781,7 +33699,7 @@ namespace SRFROWCA
             {
                 OnUserIdChanging(value);
                 ReportPropertyChanging("UserId");
-                _UserId = StructuralObject.SetValidValue(value);
+                _UserId = StructuralObject.SetValidValue(value, "UserId");
                 ReportPropertyChanged("UserId");
                 OnUserIdChanged();
             }
@@ -33805,7 +33723,7 @@ namespace SRFROWCA
             {
                 OnActivityTypeChanging(value);
                 ReportPropertyChanging("ActivityType");
-                _ActivityType = StructuralObject.SetValidValue(value, true);
+                _ActivityType = StructuralObject.SetValidValue(value, true, "ActivityType");
                 ReportPropertyChanged("ActivityType");
                 OnActivityTypeChanged();
             }
@@ -33829,7 +33747,7 @@ namespace SRFROWCA
             {
                 OnActivityTypeIdChanging(value);
                 ReportPropertyChanging("ActivityTypeId");
-                _ActivityTypeId = StructuralObject.SetValidValue(value);
+                _ActivityTypeId = StructuralObject.SetValidValue(value, "ActivityTypeId");
                 ReportPropertyChanged("ActivityTypeId");
                 OnActivityTypeIdChanged();
             }
@@ -33840,7 +33758,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -33874,7 +33791,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -33893,7 +33810,7 @@ namespace SRFROWCA
                 {
                     OnUnitIdentityIdChanging(value);
                     ReportPropertyChanging("UnitIdentityId");
-                    _UnitIdentityId = StructuralObject.SetValidValue(value);
+                    _UnitIdentityId = StructuralObject.SetValidValue(value, "UnitIdentityId");
                     ReportPropertyChanged("UnitIdentityId");
                     OnUnitIdentityIdChanged();
                 }
@@ -33918,7 +33835,7 @@ namespace SRFROWCA
             {
                 OnSiteLanguageIdChanging(value);
                 ReportPropertyChanging("SiteLanguageId");
-                _SiteLanguageId = StructuralObject.SetValidValue(value);
+                _SiteLanguageId = StructuralObject.SetValidValue(value, "SiteLanguageId");
                 ReportPropertyChanged("SiteLanguageId");
                 OnSiteLanguageIdChanged();
             }
@@ -33942,7 +33859,7 @@ namespace SRFROWCA
             {
                 OnUnitIdChanging(value);
                 ReportPropertyChanging("UnitId");
-                _UnitId = StructuralObject.SetValidValue(value);
+                _UnitId = StructuralObject.SetValidValue(value, "UnitId");
                 ReportPropertyChanged("UnitId");
                 OnUnitIdChanged();
             }
@@ -33966,7 +33883,7 @@ namespace SRFROWCA
             {
                 OnUnit1Changing(value);
                 ReportPropertyChanging("Unit1");
-                _Unit1 = StructuralObject.SetValidValue(value, false);
+                _Unit1 = StructuralObject.SetValidValue(value, false, "Unit1");
                 ReportPropertyChanged("Unit1");
                 OnUnit1Changed();
             }
@@ -33990,7 +33907,7 @@ namespace SRFROWCA
             {
                 OnUnitValueChanging(value);
                 ReportPropertyChanging("UnitValue");
-                _UnitValue = StructuralObject.SetValidValue(value);
+                _UnitValue = StructuralObject.SetValidValue(value, "UnitValue");
                 ReportPropertyChanged("UnitValue");
                 OnUnitValueChanged();
             }
@@ -34014,7 +33931,7 @@ namespace SRFROWCA
             {
                 OnBaseUnitIdChanging(value);
                 ReportPropertyChanging("BaseUnitId");
-                _BaseUnitId = StructuralObject.SetValidValue(value);
+                _BaseUnitId = StructuralObject.SetValidValue(value, "BaseUnitId");
                 ReportPropertyChanged("BaseUnitId");
                 OnBaseUnitIdChanged();
             }
@@ -34038,7 +33955,7 @@ namespace SRFROWCA
             {
                 OnBaseUnitValueChanging(value);
                 ReportPropertyChanging("BaseUnitValue");
-                _BaseUnitValue = StructuralObject.SetValidValue(value);
+                _BaseUnitValue = StructuralObject.SetValidValue(value, "BaseUnitValue");
                 ReportPropertyChanged("BaseUnitValue");
                 OnBaseUnitValueChanged();
             }
@@ -34062,7 +33979,7 @@ namespace SRFROWCA
             {
                 OnCreatedDateChanging(value);
                 ReportPropertyChanging("CreatedDate");
-                _CreatedDate = StructuralObject.SetValidValue(value);
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
                 ReportPropertyChanged("CreatedDate");
                 OnCreatedDateChanged();
             }
@@ -34086,7 +34003,7 @@ namespace SRFROWCA
             {
                 OnCreatedByIdChanging(value);
                 ReportPropertyChanging("CreatedById");
-                _CreatedById = StructuralObject.SetValidValue(value);
+                _CreatedById = StructuralObject.SetValidValue(value, "CreatedById");
                 ReportPropertyChanged("CreatedById");
                 OnCreatedByIdChanged();
             }
@@ -34110,7 +34027,7 @@ namespace SRFROWCA
             {
                 OnUpdatedDateChanging(value);
                 ReportPropertyChanging("UpdatedDate");
-                _UpdatedDate = StructuralObject.SetValidValue(value);
+                _UpdatedDate = StructuralObject.SetValidValue(value, "UpdatedDate");
                 ReportPropertyChanged("UpdatedDate");
                 OnUpdatedDateChanged();
             }
@@ -34134,7 +34051,7 @@ namespace SRFROWCA
             {
                 OnUpdatedByIdChanging(value);
                 ReportPropertyChanging("UpdatedById");
-                _UpdatedById = StructuralObject.SetValidValue(value);
+                _UpdatedById = StructuralObject.SetValidValue(value, "UpdatedById");
                 ReportPropertyChanged("UpdatedById");
                 OnUpdatedByIdChanged();
             }
@@ -34145,7 +34062,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -34197,7 +34113,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -34214,7 +34130,7 @@ namespace SRFROWCA
             {
                 OnOrganizationChanging(value);
                 ReportPropertyChanging("Organization");
-                _Organization = StructuralObject.SetValidValue(value, true);
+                _Organization = StructuralObject.SetValidValue(value, true, "Organization");
                 ReportPropertyChanged("Organization");
                 OnOrganizationChanged();
             }
@@ -34240,7 +34156,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -34265,7 +34181,7 @@ namespace SRFROWCA
             {
                 OnProjectChanging(value);
                 ReportPropertyChanging("Project");
-                _Project = StructuralObject.SetValidValue(value, true);
+                _Project = StructuralObject.SetValidValue(value, true, "Project");
                 ReportPropertyChanged("Project");
                 OnProjectChanged();
             }
@@ -34291,7 +34207,7 @@ namespace SRFROWCA
                 {
                     OnCountryChanging(value);
                     ReportPropertyChanging("Country");
-                    _Country = StructuralObject.SetValidValue(value, false);
+                    _Country = StructuralObject.SetValidValue(value, false, "Country");
                     ReportPropertyChanged("Country");
                     OnCountryChanged();
                 }
@@ -34318,7 +34234,7 @@ namespace SRFROWCA
                 {
                     OnAdmin1Changing(value);
                     ReportPropertyChanging("Admin1");
-                    _Admin1 = StructuralObject.SetValidValue(value, false);
+                    _Admin1 = StructuralObject.SetValidValue(value, false, "Admin1");
                     ReportPropertyChanged("Admin1");
                     OnAdmin1Changed();
                 }
@@ -34343,7 +34259,7 @@ namespace SRFROWCA
             {
                 OnObjectiveChanging(value);
                 ReportPropertyChanging("Objective");
-                _Objective = StructuralObject.SetValidValue(value, true);
+                _Objective = StructuralObject.SetValidValue(value, true, "Objective");
                 ReportPropertyChanged("Objective");
                 OnObjectiveChanged();
             }
@@ -34367,7 +34283,7 @@ namespace SRFROWCA
             {
                 OnPriorityChanging(value);
                 ReportPropertyChanging("Priority");
-                _Priority = StructuralObject.SetValidValue(value, true);
+                _Priority = StructuralObject.SetValidValue(value, true, "Priority");
                 ReportPropertyChanged("Priority");
                 OnPriorityChanged();
             }
@@ -34393,7 +34309,7 @@ namespace SRFROWCA
                 {
                     OnActivityChanging(value);
                     ReportPropertyChanging("Activity");
-                    _Activity = StructuralObject.SetValidValue(value, false);
+                    _Activity = StructuralObject.SetValidValue(value, false, "Activity");
                     ReportPropertyChanged("Activity");
                     OnActivityChanged();
                 }
@@ -34420,7 +34336,7 @@ namespace SRFROWCA
                 {
                     OnIndicatorChanging(value);
                     ReportPropertyChanging("Indicator");
-                    _Indicator = StructuralObject.SetValidValue(value, false);
+                    _Indicator = StructuralObject.SetValidValue(value, false, "Indicator");
                     ReportPropertyChanged("Indicator");
                     OnIndicatorChanged();
                 }
@@ -34447,7 +34363,7 @@ namespace SRFROWCA
                 {
                     OnYearChanging(value);
                     ReportPropertyChanging("Year");
-                    _Year = StructuralObject.SetValidValue(value);
+                    _Year = StructuralObject.SetValidValue(value, "Year");
                     ReportPropertyChanged("Year");
                     OnYearChanged();
                 }
@@ -34474,7 +34390,7 @@ namespace SRFROWCA
                 {
                     OnMonthChanging(value);
                     ReportPropertyChanging("Month");
-                    _Month = StructuralObject.SetValidValue(value, false);
+                    _Month = StructuralObject.SetValidValue(value, false, "Month");
                     ReportPropertyChanged("Month");
                     OnMonthChanged();
                 }
@@ -34501,7 +34417,7 @@ namespace SRFROWCA
                 {
                     OnAccumulativeChanging(value);
                     ReportPropertyChanging("Accumulative");
-                    _Accumulative = StructuralObject.SetValidValue(value, false);
+                    _Accumulative = StructuralObject.SetValidValue(value, false, "Accumulative");
                     ReportPropertyChanged("Accumulative");
                     OnAccumulativeChanged();
                 }
@@ -34526,7 +34442,7 @@ namespace SRFROWCA
             {
                 OnFullYearTargetChanging(value);
                 ReportPropertyChanging("FullYearTarget");
-                _FullYearTarget = StructuralObject.SetValidValue(value);
+                _FullYearTarget = StructuralObject.SetValidValue(value, "FullYearTarget");
                 ReportPropertyChanged("FullYearTarget");
                 OnFullYearTargetChanged();
             }
@@ -34550,7 +34466,7 @@ namespace SRFROWCA
             {
                 OnAchievedChanging(value);
                 ReportPropertyChanging("Achieved");
-                _Achieved = StructuralObject.SetValidValue(value);
+                _Achieved = StructuralObject.SetValidValue(value, "Achieved");
                 ReportPropertyChanged("Achieved");
                 OnAchievedChanged();
             }
@@ -34574,7 +34490,7 @@ namespace SRFROWCA
             {
                 OnRunningSumChanging(value);
                 ReportPropertyChanging("RunningSum");
-                _RunningSum = StructuralObject.SetValidValue(value);
+                _RunningSum = StructuralObject.SetValidValue(value, "RunningSum");
                 ReportPropertyChanged("RunningSum");
                 OnRunningSumChanged();
             }
@@ -34600,7 +34516,7 @@ namespace SRFROWCA
                 {
                     OnProjectIdChanging(value);
                     ReportPropertyChanging("ProjectId");
-                    _ProjectId = StructuralObject.SetValidValue(value);
+                    _ProjectId = StructuralObject.SetValidValue(value, "ProjectId");
                     ReportPropertyChanged("ProjectId");
                     OnProjectIdChanged();
                 }
@@ -34627,7 +34543,7 @@ namespace SRFROWCA
                 {
                     OnProjectTitleChanging(value);
                     ReportPropertyChanging("ProjectTitle");
-                    _ProjectTitle = StructuralObject.SetValidValue(value, false);
+                    _ProjectTitle = StructuralObject.SetValidValue(value, false, "ProjectTitle");
                     ReportPropertyChanged("ProjectTitle");
                     OnProjectTitleChanged();
                 }
@@ -34654,7 +34570,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationIdChanging(value);
                     ReportPropertyChanging("OrganizationId");
-                    _OrganizationId = StructuralObject.SetValidValue(value);
+                    _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                     ReportPropertyChanged("OrganizationId");
                     OnOrganizationIdChanged();
                 }
@@ -34681,7 +34597,7 @@ namespace SRFROWCA
                 {
                     OnActivityIdChanging(value);
                     ReportPropertyChanging("ActivityId");
-                    _ActivityId = StructuralObject.SetValidValue(value);
+                    _ActivityId = StructuralObject.SetValidValue(value, "ActivityId");
                     ReportPropertyChanged("ActivityId");
                     OnActivityIdChanged();
                 }
@@ -34708,7 +34624,7 @@ namespace SRFROWCA
                 {
                     OnIndicatorIdChanging(value);
                     ReportPropertyChanging("IndicatorId");
-                    _IndicatorId = StructuralObject.SetValidValue(value);
+                    _IndicatorId = StructuralObject.SetValidValue(value, "IndicatorId");
                     ReportPropertyChanged("IndicatorId");
                     OnIndicatorIdChanged();
                 }
@@ -34735,7 +34651,7 @@ namespace SRFROWCA
                 {
                     OnReportIdChanging(value);
                     ReportPropertyChanging("ReportId");
-                    _ReportId = StructuralObject.SetValidValue(value);
+                    _ReportId = StructuralObject.SetValidValue(value, "ReportId");
                     ReportPropertyChanged("ReportId");
                     OnReportIdChanged();
                 }
@@ -34760,7 +34676,7 @@ namespace SRFROWCA
             {
                 OnReportDetailIdChanging(value);
                 ReportPropertyChanging("ReportDetailId");
-                _ReportDetailId = StructuralObject.SetValidValue(value);
+                _ReportDetailId = StructuralObject.SetValidValue(value, "ReportDetailId");
                 ReportPropertyChanged("ReportDetailId");
                 OnReportDetailIdChanged();
             }
@@ -34784,7 +34700,7 @@ namespace SRFROWCA
             {
                 OnAdmin1PCodeChanging(value);
                 ReportPropertyChanging("Admin1PCode");
-                _Admin1PCode = StructuralObject.SetValidValue(value, true);
+                _Admin1PCode = StructuralObject.SetValidValue(value, true, "Admin1PCode");
                 ReportPropertyChanged("Admin1PCode");
                 OnAdmin1PCodeChanged();
             }
@@ -34795,7 +34711,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -34847,7 +34762,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -34864,7 +34779,7 @@ namespace SRFROWCA
             {
                 OnOrganizationChanging(value);
                 ReportPropertyChanging("Organization");
-                _Organization = StructuralObject.SetValidValue(value, true);
+                _Organization = StructuralObject.SetValidValue(value, true, "Organization");
                 ReportPropertyChanged("Organization");
                 OnOrganizationChanged();
             }
@@ -34890,7 +34805,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -34915,7 +34830,7 @@ namespace SRFROWCA
             {
                 OnProjectChanging(value);
                 ReportPropertyChanging("Project");
-                _Project = StructuralObject.SetValidValue(value, true);
+                _Project = StructuralObject.SetValidValue(value, true, "Project");
                 ReportPropertyChanged("Project");
                 OnProjectChanged();
             }
@@ -34941,7 +34856,7 @@ namespace SRFROWCA
                 {
                     OnCountryChanging(value);
                     ReportPropertyChanging("Country");
-                    _Country = StructuralObject.SetValidValue(value, false);
+                    _Country = StructuralObject.SetValidValue(value, false, "Country");
                     ReportPropertyChanged("Country");
                     OnCountryChanged();
                 }
@@ -34968,7 +34883,7 @@ namespace SRFROWCA
                 {
                     OnAdmin1Changing(value);
                     ReportPropertyChanging("Admin1");
-                    _Admin1 = StructuralObject.SetValidValue(value, false);
+                    _Admin1 = StructuralObject.SetValidValue(value, false, "Admin1");
                     ReportPropertyChanged("Admin1");
                     OnAdmin1Changed();
                 }
@@ -34993,7 +34908,7 @@ namespace SRFROWCA
             {
                 OnObjectiveChanging(value);
                 ReportPropertyChanging("Objective");
-                _Objective = StructuralObject.SetValidValue(value, true);
+                _Objective = StructuralObject.SetValidValue(value, true, "Objective");
                 ReportPropertyChanged("Objective");
                 OnObjectiveChanged();
             }
@@ -35017,7 +34932,7 @@ namespace SRFROWCA
             {
                 OnPriorityChanging(value);
                 ReportPropertyChanging("Priority");
-                _Priority = StructuralObject.SetValidValue(value, true);
+                _Priority = StructuralObject.SetValidValue(value, true, "Priority");
                 ReportPropertyChanged("Priority");
                 OnPriorityChanged();
             }
@@ -35043,7 +34958,7 @@ namespace SRFROWCA
                 {
                     OnActivityChanging(value);
                     ReportPropertyChanging("Activity");
-                    _Activity = StructuralObject.SetValidValue(value, false);
+                    _Activity = StructuralObject.SetValidValue(value, false, "Activity");
                     ReportPropertyChanged("Activity");
                     OnActivityChanged();
                 }
@@ -35070,7 +34985,7 @@ namespace SRFROWCA
                 {
                     OnIndicatorChanging(value);
                     ReportPropertyChanging("Indicator");
-                    _Indicator = StructuralObject.SetValidValue(value, false);
+                    _Indicator = StructuralObject.SetValidValue(value, false, "Indicator");
                     ReportPropertyChanged("Indicator");
                     OnIndicatorChanged();
                 }
@@ -35097,7 +35012,7 @@ namespace SRFROWCA
                 {
                     OnYearChanging(value);
                     ReportPropertyChanging("Year");
-                    _Year = StructuralObject.SetValidValue(value);
+                    _Year = StructuralObject.SetValidValue(value, "Year");
                     ReportPropertyChanged("Year");
                     OnYearChanged();
                 }
@@ -35124,7 +35039,7 @@ namespace SRFROWCA
                 {
                     OnMonthChanging(value);
                     ReportPropertyChanging("Month");
-                    _Month = StructuralObject.SetValidValue(value, false);
+                    _Month = StructuralObject.SetValidValue(value, false, "Month");
                     ReportPropertyChanged("Month");
                     OnMonthChanged();
                 }
@@ -35151,7 +35066,7 @@ namespace SRFROWCA
                 {
                     OnAccumulativeChanging(value);
                     ReportPropertyChanging("Accumulative");
-                    _Accumulative = StructuralObject.SetValidValue(value, false);
+                    _Accumulative = StructuralObject.SetValidValue(value, false, "Accumulative");
                     ReportPropertyChanged("Accumulative");
                     OnAccumulativeChanged();
                 }
@@ -35176,7 +35091,7 @@ namespace SRFROWCA
             {
                 OnFullYearTargetChanging(value);
                 ReportPropertyChanging("FullYearTarget");
-                _FullYearTarget = StructuralObject.SetValidValue(value);
+                _FullYearTarget = StructuralObject.SetValidValue(value, "FullYearTarget");
                 ReportPropertyChanged("FullYearTarget");
                 OnFullYearTargetChanged();
             }
@@ -35200,7 +35115,7 @@ namespace SRFROWCA
             {
                 OnAchievedChanging(value);
                 ReportPropertyChanging("Achieved");
-                _Achieved = StructuralObject.SetValidValue(value);
+                _Achieved = StructuralObject.SetValidValue(value, "Achieved");
                 ReportPropertyChanged("Achieved");
                 OnAchievedChanged();
             }
@@ -35224,7 +35139,7 @@ namespace SRFROWCA
             {
                 OnRunningSumChanging(value);
                 ReportPropertyChanging("RunningSum");
-                _RunningSum = StructuralObject.SetValidValue(value);
+                _RunningSum = StructuralObject.SetValidValue(value, "RunningSum");
                 ReportPropertyChanged("RunningSum");
                 OnRunningSumChanged();
             }
@@ -35250,7 +35165,7 @@ namespace SRFROWCA
                 {
                     OnProjectIdChanging(value);
                     ReportPropertyChanging("ProjectId");
-                    _ProjectId = StructuralObject.SetValidValue(value);
+                    _ProjectId = StructuralObject.SetValidValue(value, "ProjectId");
                     ReportPropertyChanged("ProjectId");
                     OnProjectIdChanged();
                 }
@@ -35277,7 +35192,7 @@ namespace SRFROWCA
                 {
                     OnProjectTitleChanging(value);
                     ReportPropertyChanging("ProjectTitle");
-                    _ProjectTitle = StructuralObject.SetValidValue(value, false);
+                    _ProjectTitle = StructuralObject.SetValidValue(value, false, "ProjectTitle");
                     ReportPropertyChanged("ProjectTitle");
                     OnProjectTitleChanged();
                 }
@@ -35304,7 +35219,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationIdChanging(value);
                     ReportPropertyChanging("OrganizationId");
-                    _OrganizationId = StructuralObject.SetValidValue(value);
+                    _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                     ReportPropertyChanged("OrganizationId");
                     OnOrganizationIdChanged();
                 }
@@ -35331,7 +35246,7 @@ namespace SRFROWCA
                 {
                     OnActivityIdChanging(value);
                     ReportPropertyChanging("ActivityId");
-                    _ActivityId = StructuralObject.SetValidValue(value);
+                    _ActivityId = StructuralObject.SetValidValue(value, "ActivityId");
                     ReportPropertyChanged("ActivityId");
                     OnActivityIdChanged();
                 }
@@ -35358,7 +35273,7 @@ namespace SRFROWCA
                 {
                     OnIndicatorIdChanging(value);
                     ReportPropertyChanging("IndicatorId");
-                    _IndicatorId = StructuralObject.SetValidValue(value);
+                    _IndicatorId = StructuralObject.SetValidValue(value, "IndicatorId");
                     ReportPropertyChanged("IndicatorId");
                     OnIndicatorIdChanged();
                 }
@@ -35385,7 +35300,7 @@ namespace SRFROWCA
                 {
                     OnReportIdChanging(value);
                     ReportPropertyChanging("ReportId");
-                    _ReportId = StructuralObject.SetValidValue(value);
+                    _ReportId = StructuralObject.SetValidValue(value, "ReportId");
                     ReportPropertyChanged("ReportId");
                     OnReportIdChanged();
                 }
@@ -35410,7 +35325,7 @@ namespace SRFROWCA
             {
                 OnReportDetailIdChanging(value);
                 ReportPropertyChanging("ReportDetailId");
-                _ReportDetailId = StructuralObject.SetValidValue(value);
+                _ReportDetailId = StructuralObject.SetValidValue(value, "ReportDetailId");
                 ReportPropertyChanged("ReportDetailId");
                 OnReportDetailIdChanged();
             }
@@ -35434,7 +35349,7 @@ namespace SRFROWCA
             {
                 OnAdmin1PCodeChanging(value);
                 ReportPropertyChanging("Admin1PCode");
-                _Admin1PCode = StructuralObject.SetValidValue(value, true);
+                _Admin1PCode = StructuralObject.SetValidValue(value, true, "Admin1PCode");
                 ReportPropertyChanged("Admin1PCode");
                 OnAdmin1PCodeChanged();
             }
@@ -35445,7 +35360,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -35505,7 +35419,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -35524,7 +35438,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationChanging(value);
                     ReportPropertyChanging("Organization");
-                    _Organization = StructuralObject.SetValidValue(value, false);
+                    _Organization = StructuralObject.SetValidValue(value, false, "Organization");
                     ReportPropertyChanged("Organization");
                     OnOrganizationChanged();
                 }
@@ -35551,7 +35465,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -35578,7 +35492,7 @@ namespace SRFROWCA
                 {
                     OnProjectChanging(value);
                     ReportPropertyChanging("Project");
-                    _Project = StructuralObject.SetValidValue(value, false);
+                    _Project = StructuralObject.SetValidValue(value, false, "Project");
                     ReportPropertyChanged("Project");
                     OnProjectChanged();
                 }
@@ -35605,7 +35519,7 @@ namespace SRFROWCA
                 {
                     OnCountryChanging(value);
                     ReportPropertyChanging("Country");
-                    _Country = StructuralObject.SetValidValue(value, false);
+                    _Country = StructuralObject.SetValidValue(value, false, "Country");
                     ReportPropertyChanged("Country");
                     OnCountryChanged();
                 }
@@ -35632,7 +35546,7 @@ namespace SRFROWCA
                 {
                     OnAdmin1Changing(value);
                     ReportPropertyChanging("Admin1");
-                    _Admin1 = StructuralObject.SetValidValue(value, false);
+                    _Admin1 = StructuralObject.SetValidValue(value, false, "Admin1");
                     ReportPropertyChanged("Admin1");
                     OnAdmin1Changed();
                 }
@@ -35657,7 +35571,7 @@ namespace SRFROWCA
             {
                 OnObjectiveChanging(value);
                 ReportPropertyChanging("Objective");
-                _Objective = StructuralObject.SetValidValue(value, true);
+                _Objective = StructuralObject.SetValidValue(value, true, "Objective");
                 ReportPropertyChanged("Objective");
                 OnObjectiveChanged();
             }
@@ -35681,7 +35595,7 @@ namespace SRFROWCA
             {
                 OnPriorityChanging(value);
                 ReportPropertyChanging("Priority");
-                _Priority = StructuralObject.SetValidValue(value, true);
+                _Priority = StructuralObject.SetValidValue(value, true, "Priority");
                 ReportPropertyChanged("Priority");
                 OnPriorityChanged();
             }
@@ -35707,7 +35621,7 @@ namespace SRFROWCA
                 {
                     OnActivityChanging(value);
                     ReportPropertyChanging("Activity");
-                    _Activity = StructuralObject.SetValidValue(value, false);
+                    _Activity = StructuralObject.SetValidValue(value, false, "Activity");
                     ReportPropertyChanged("Activity");
                     OnActivityChanged();
                 }
@@ -35734,7 +35648,7 @@ namespace SRFROWCA
                 {
                     OnIndicatorChanging(value);
                     ReportPropertyChanging("Indicator");
-                    _Indicator = StructuralObject.SetValidValue(value, false);
+                    _Indicator = StructuralObject.SetValidValue(value, false, "Indicator");
                     ReportPropertyChanged("Indicator");
                     OnIndicatorChanged();
                 }
@@ -35761,7 +35675,7 @@ namespace SRFROWCA
                 {
                     OnYearChanging(value);
                     ReportPropertyChanging("Year");
-                    _Year = StructuralObject.SetValidValue(value);
+                    _Year = StructuralObject.SetValidValue(value, "Year");
                     ReportPropertyChanged("Year");
                     OnYearChanged();
                 }
@@ -35788,7 +35702,7 @@ namespace SRFROWCA
                 {
                     OnMonthChanging(value);
                     ReportPropertyChanging("Month");
-                    _Month = StructuralObject.SetValidValue(value, false);
+                    _Month = StructuralObject.SetValidValue(value, false, "Month");
                     ReportPropertyChanged("Month");
                     OnMonthChanged();
                 }
@@ -35815,7 +35729,7 @@ namespace SRFROWCA
                 {
                     OnAccumulativeChanging(value);
                     ReportPropertyChanging("Accumulative");
-                    _Accumulative = StructuralObject.SetValidValue(value, false);
+                    _Accumulative = StructuralObject.SetValidValue(value, false, "Accumulative");
                     ReportPropertyChanged("Accumulative");
                     OnAccumulativeChanged();
                 }
@@ -35840,7 +35754,7 @@ namespace SRFROWCA
             {
                 OnFullYearTargetChanging(value);
                 ReportPropertyChanging("FullYearTarget");
-                _FullYearTarget = StructuralObject.SetValidValue(value);
+                _FullYearTarget = StructuralObject.SetValidValue(value, "FullYearTarget");
                 ReportPropertyChanged("FullYearTarget");
                 OnFullYearTargetChanged();
             }
@@ -35864,7 +35778,7 @@ namespace SRFROWCA
             {
                 OnAchievedChanging(value);
                 ReportPropertyChanging("Achieved");
-                _Achieved = StructuralObject.SetValidValue(value);
+                _Achieved = StructuralObject.SetValidValue(value, "Achieved");
                 ReportPropertyChanged("Achieved");
                 OnAchievedChanged();
             }
@@ -35888,7 +35802,7 @@ namespace SRFROWCA
             {
                 OnRunningSumChanging(value);
                 ReportPropertyChanging("RunningSum");
-                _RunningSum = StructuralObject.SetValidValue(value);
+                _RunningSum = StructuralObject.SetValidValue(value, "RunningSum");
                 ReportPropertyChanged("RunningSum");
                 OnRunningSumChanged();
             }
@@ -35914,7 +35828,7 @@ namespace SRFROWCA
                 {
                     OnProjectIdChanging(value);
                     ReportPropertyChanging("ProjectId");
-                    _ProjectId = StructuralObject.SetValidValue(value);
+                    _ProjectId = StructuralObject.SetValidValue(value, "ProjectId");
                     ReportPropertyChanged("ProjectId");
                     OnProjectIdChanged();
                 }
@@ -35941,7 +35855,7 @@ namespace SRFROWCA
                 {
                     OnProjectTitleChanging(value);
                     ReportPropertyChanging("ProjectTitle");
-                    _ProjectTitle = StructuralObject.SetValidValue(value, false);
+                    _ProjectTitle = StructuralObject.SetValidValue(value, false, "ProjectTitle");
                     ReportPropertyChanged("ProjectTitle");
                     OnProjectTitleChanged();
                 }
@@ -35968,7 +35882,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationIdChanging(value);
                     ReportPropertyChanging("OrganizationId");
-                    _OrganizationId = StructuralObject.SetValidValue(value);
+                    _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                     ReportPropertyChanged("OrganizationId");
                     OnOrganizationIdChanged();
                 }
@@ -35995,7 +35909,7 @@ namespace SRFROWCA
                 {
                     OnActivityIdChanging(value);
                     ReportPropertyChanging("ActivityId");
-                    _ActivityId = StructuralObject.SetValidValue(value);
+                    _ActivityId = StructuralObject.SetValidValue(value, "ActivityId");
                     ReportPropertyChanged("ActivityId");
                     OnActivityIdChanged();
                 }
@@ -36022,7 +35936,7 @@ namespace SRFROWCA
                 {
                     OnIndicatorIdChanging(value);
                     ReportPropertyChanging("IndicatorId");
-                    _IndicatorId = StructuralObject.SetValidValue(value);
+                    _IndicatorId = StructuralObject.SetValidValue(value, "IndicatorId");
                     ReportPropertyChanged("IndicatorId");
                     OnIndicatorIdChanged();
                 }
@@ -36049,7 +35963,7 @@ namespace SRFROWCA
                 {
                     OnReportIdChanging(value);
                     ReportPropertyChanging("ReportId");
-                    _ReportId = StructuralObject.SetValidValue(value);
+                    _ReportId = StructuralObject.SetValidValue(value, "ReportId");
                     ReportPropertyChanged("ReportId");
                     OnReportIdChanged();
                 }
@@ -36074,7 +35988,7 @@ namespace SRFROWCA
             {
                 OnReportDetailIdChanging(value);
                 ReportPropertyChanging("ReportDetailId");
-                _ReportDetailId = StructuralObject.SetValidValue(value);
+                _ReportDetailId = StructuralObject.SetValidValue(value, "ReportDetailId");
                 ReportPropertyChanged("ReportDetailId");
                 OnReportDetailIdChanged();
             }
@@ -36098,7 +36012,7 @@ namespace SRFROWCA
             {
                 OnAdmin1PCodeChanging(value);
                 ReportPropertyChanging("Admin1PCode");
-                _Admin1PCode = StructuralObject.SetValidValue(value, true);
+                _Admin1PCode = StructuralObject.SetValidValue(value, true, "Admin1PCode");
                 ReportPropertyChanged("Admin1PCode");
                 OnAdmin1PCodeChanged();
             }
@@ -36124,7 +36038,7 @@ namespace SRFROWCA
                 {
                     OnTotalCountriesChanging(value);
                     ReportPropertyChanging("TotalCountries");
-                    _TotalCountries = StructuralObject.SetValidValue(value);
+                    _TotalCountries = StructuralObject.SetValidValue(value, "TotalCountries");
                     ReportPropertyChanged("TotalCountries");
                     OnTotalCountriesChanged();
                 }
@@ -36151,7 +36065,7 @@ namespace SRFROWCA
                 {
                     OnTotalClustersChanging(value);
                     ReportPropertyChanging("TotalClusters");
-                    _TotalClusters = StructuralObject.SetValidValue(value);
+                    _TotalClusters = StructuralObject.SetValidValue(value, "TotalClusters");
                     ReportPropertyChanged("TotalClusters");
                     OnTotalClustersChanged();
                 }
@@ -36176,7 +36090,7 @@ namespace SRFROWCA
             {
                 OnTotalProjectsChanging(value);
                 ReportPropertyChanging("TotalProjects");
-                _TotalProjects = StructuralObject.SetValidValue(value);
+                _TotalProjects = StructuralObject.SetValidValue(value, "TotalProjects");
                 ReportPropertyChanged("TotalProjects");
                 OnTotalProjectsChanged();
             }
@@ -36200,7 +36114,7 @@ namespace SRFROWCA
             {
                 OnTotalOrganizaitonsChanging(value);
                 ReportPropertyChanging("TotalOrganizaitons");
-                _TotalOrganizaitons = StructuralObject.SetValidValue(value);
+                _TotalOrganizaitons = StructuralObject.SetValidValue(value, "TotalOrganizaitons");
                 ReportPropertyChanged("TotalOrganizaitons");
                 OnTotalOrganizaitonsChanged();
             }
@@ -36211,7 +36125,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -36237,7 +36150,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -36256,7 +36169,7 @@ namespace SRFROWCA
                 {
                     OnLocationNameChanging(value);
                     ReportPropertyChanging("LocationName");
-                    _LocationName = StructuralObject.SetValidValue(value, false);
+                    _LocationName = StructuralObject.SetValidValue(value, false, "LocationName");
                     ReportPropertyChanged("LocationName");
                     OnLocationNameChanged();
                 }
@@ -36281,7 +36194,7 @@ namespace SRFROWCA
             {
                 OnTotalContributionChanging(value);
                 ReportPropertyChanging("TotalContribution");
-                _TotalContribution = StructuralObject.SetValidValue(value);
+                _TotalContribution = StructuralObject.SetValidValue(value, "TotalContribution");
                 ReportPropertyChanged("TotalContribution");
                 OnTotalContributionChanged();
             }
@@ -36305,7 +36218,7 @@ namespace SRFROWCA
             {
                 OnCurrencyTitleChanging(value);
                 ReportPropertyChanging("CurrencyTitle");
-                _CurrencyTitle = StructuralObject.SetValidValue(value, true);
+                _CurrencyTitle = StructuralObject.SetValidValue(value, true, "CurrencyTitle");
                 ReportPropertyChanged("CurrencyTitle");
                 OnCurrencyTitleChanged();
             }
@@ -36316,7 +36229,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -36342,7 +36254,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -36361,7 +36273,7 @@ namespace SRFROWCA
                 {
                     OnLocationNameChanging(value);
                     ReportPropertyChanging("LocationName");
-                    _LocationName = StructuralObject.SetValidValue(value, false);
+                    _LocationName = StructuralObject.SetValidValue(value, false, "LocationName");
                     ReportPropertyChanged("LocationName");
                     OnLocationNameChanged();
                 }
@@ -36386,7 +36298,7 @@ namespace SRFROWCA
             {
                 OnNumberOfOrgsChanging(value);
                 ReportPropertyChanging("NumberOfOrgs");
-                _NumberOfOrgs = StructuralObject.SetValidValue(value);
+                _NumberOfOrgs = StructuralObject.SetValidValue(value, "NumberOfOrgs");
                 ReportPropertyChanged("NumberOfOrgs");
                 OnNumberOfOrgsChanged();
             }
@@ -36397,7 +36309,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -36431,7 +36342,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -36448,7 +36359,7 @@ namespace SRFROWCA
             {
                 OnCountryChanging(value);
                 ReportPropertyChanging("Country");
-                _Country = StructuralObject.SetValidValue(value, true);
+                _Country = StructuralObject.SetValidValue(value, true, "Country");
                 ReportPropertyChanged("Country");
                 OnCountryChanged();
             }
@@ -36474,7 +36385,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -36499,7 +36410,7 @@ namespace SRFROWCA
             {
                 OnObjectiveChanging(value);
                 ReportPropertyChanging("Objective");
-                _Objective = StructuralObject.SetValidValue(value, true);
+                _Objective = StructuralObject.SetValidValue(value, true, "Objective");
                 ReportPropertyChanged("Objective");
                 OnObjectiveChanged();
             }
@@ -36523,7 +36434,7 @@ namespace SRFROWCA
             {
                 OnPriorityChanging(value);
                 ReportPropertyChanging("Priority");
-                _Priority = StructuralObject.SetValidValue(value, true);
+                _Priority = StructuralObject.SetValidValue(value, true, "Priority");
                 ReportPropertyChanged("Priority");
                 OnPriorityChanged();
             }
@@ -36549,7 +36460,7 @@ namespace SRFROWCA
                 {
                     OnActivityChanging(value);
                     ReportPropertyChanging("Activity");
-                    _Activity = StructuralObject.SetValidValue(value, false);
+                    _Activity = StructuralObject.SetValidValue(value, false, "Activity");
                     ReportPropertyChanged("Activity");
                     OnActivityChanged();
                 }
@@ -36576,7 +36487,7 @@ namespace SRFROWCA
                 {
                     OnIndicatorChanging(value);
                     ReportPropertyChanging("Indicator");
-                    _Indicator = StructuralObject.SetValidValue(value, false);
+                    _Indicator = StructuralObject.SetValidValue(value, false, "Indicator");
                     ReportPropertyChanged("Indicator");
                     OnIndicatorChanged();
                 }
@@ -36603,7 +36514,7 @@ namespace SRFROWCA
                 {
                     OnCountry_IndicaotrChanging(value);
                     ReportPropertyChanging("Country_Indicaotr");
-                    _Country_Indicaotr = StructuralObject.SetValidValue(value, false);
+                    _Country_Indicaotr = StructuralObject.SetValidValue(value, false, "Country_Indicaotr");
                     ReportPropertyChanged("Country_Indicaotr");
                     OnCountry_IndicaotrChanged();
                 }
@@ -36630,7 +36541,7 @@ namespace SRFROWCA
                 {
                     OnRegional_IndicatorChanging(value);
                     ReportPropertyChanging("Regional_Indicator");
-                    _Regional_Indicator = StructuralObject.SetValidValue(value, false);
+                    _Regional_Indicator = StructuralObject.SetValidValue(value, false, "Regional_Indicator");
                     ReportPropertyChanged("Regional_Indicator");
                     OnRegional_IndicatorChanged();
                 }
@@ -36642,7 +36553,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -36672,7 +36582,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -36691,7 +36601,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -36716,7 +36626,7 @@ namespace SRFROWCA
             {
                 OnObjectiveChanging(value);
                 ReportPropertyChanging("Objective");
-                _Objective = StructuralObject.SetValidValue(value, true);
+                _Objective = StructuralObject.SetValidValue(value, true, "Objective");
                 ReportPropertyChanged("Objective");
                 OnObjectiveChanged();
             }
@@ -36740,7 +36650,7 @@ namespace SRFROWCA
             {
                 OnPriorityChanging(value);
                 ReportPropertyChanging("Priority");
-                _Priority = StructuralObject.SetValidValue(value, true);
+                _Priority = StructuralObject.SetValidValue(value, true, "Priority");
                 ReportPropertyChanged("Priority");
                 OnPriorityChanged();
             }
@@ -36766,7 +36676,7 @@ namespace SRFROWCA
                 {
                     OnActivityChanging(value);
                     ReportPropertyChanging("Activity");
-                    _Activity = StructuralObject.SetValidValue(value, false);
+                    _Activity = StructuralObject.SetValidValue(value, false, "Activity");
                     ReportPropertyChanged("Activity");
                     OnActivityChanged();
                 }
@@ -36793,7 +36703,7 @@ namespace SRFROWCA
                 {
                     OnIndicatorChanging(value);
                     ReportPropertyChanging("Indicator");
-                    _Indicator = StructuralObject.SetValidValue(value, false);
+                    _Indicator = StructuralObject.SetValidValue(value, false, "Indicator");
                     ReportPropertyChanged("Indicator");
                     OnIndicatorChanged();
                 }
@@ -36805,7 +36715,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -36835,7 +36744,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -36854,7 +36763,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -36879,7 +36788,7 @@ namespace SRFROWCA
             {
                 OnObjectiveChanging(value);
                 ReportPropertyChanging("Objective");
-                _Objective = StructuralObject.SetValidValue(value, true);
+                _Objective = StructuralObject.SetValidValue(value, true, "Objective");
                 ReportPropertyChanged("Objective");
                 OnObjectiveChanged();
             }
@@ -36903,7 +36812,7 @@ namespace SRFROWCA
             {
                 OnPriorityChanging(value);
                 ReportPropertyChanging("Priority");
-                _Priority = StructuralObject.SetValidValue(value, true);
+                _Priority = StructuralObject.SetValidValue(value, true, "Priority");
                 ReportPropertyChanged("Priority");
                 OnPriorityChanged();
             }
@@ -36929,7 +36838,7 @@ namespace SRFROWCA
                 {
                     OnActivityChanging(value);
                     ReportPropertyChanging("Activity");
-                    _Activity = StructuralObject.SetValidValue(value, false);
+                    _Activity = StructuralObject.SetValidValue(value, false, "Activity");
                     ReportPropertyChanged("Activity");
                     OnActivityChanged();
                 }
@@ -36956,7 +36865,7 @@ namespace SRFROWCA
                 {
                     OnIndicatorChanging(value);
                     ReportPropertyChanging("Indicator");
-                    _Indicator = StructuralObject.SetValidValue(value, false);
+                    _Indicator = StructuralObject.SetValidValue(value, false, "Indicator");
                     ReportPropertyChanged("Indicator");
                     OnIndicatorChanged();
                 }
@@ -36968,7 +36877,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -36998,7 +36906,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -37017,7 +36925,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -37042,7 +36950,7 @@ namespace SRFROWCA
             {
                 OnObjectiveChanging(value);
                 ReportPropertyChanging("Objective");
-                _Objective = StructuralObject.SetValidValue(value, true);
+                _Objective = StructuralObject.SetValidValue(value, true, "Objective");
                 ReportPropertyChanged("Objective");
                 OnObjectiveChanged();
             }
@@ -37066,7 +36974,7 @@ namespace SRFROWCA
             {
                 OnPriorityChanging(value);
                 ReportPropertyChanging("Priority");
-                _Priority = StructuralObject.SetValidValue(value, true);
+                _Priority = StructuralObject.SetValidValue(value, true, "Priority");
                 ReportPropertyChanged("Priority");
                 OnPriorityChanged();
             }
@@ -37092,7 +37000,7 @@ namespace SRFROWCA
                 {
                     OnActivityChanging(value);
                     ReportPropertyChanging("Activity");
-                    _Activity = StructuralObject.SetValidValue(value, false);
+                    _Activity = StructuralObject.SetValidValue(value, false, "Activity");
                     ReportPropertyChanged("Activity");
                     OnActivityChanged();
                 }
@@ -37119,7 +37027,7 @@ namespace SRFROWCA
                 {
                     OnIndicatorChanging(value);
                     ReportPropertyChanging("Indicator");
-                    _Indicator = StructuralObject.SetValidValue(value, false);
+                    _Indicator = StructuralObject.SetValidValue(value, false, "Indicator");
                     ReportPropertyChanged("Indicator");
                     OnIndicatorChanged();
                 }
@@ -37131,7 +37039,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -37161,7 +37068,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -37180,7 +37087,7 @@ namespace SRFROWCA
                 {
                     OnCountryChanging(value);
                     ReportPropertyChanging("Country");
-                    _Country = StructuralObject.SetValidValue(value, false);
+                    _Country = StructuralObject.SetValidValue(value, false, "Country");
                     ReportPropertyChanged("Country");
                     OnCountryChanged();
                 }
@@ -37207,7 +37114,7 @@ namespace SRFROWCA
                 {
                     OnAdmin1Changing(value);
                     ReportPropertyChanging("Admin1");
-                    _Admin1 = StructuralObject.SetValidValue(value, false);
+                    _Admin1 = StructuralObject.SetValidValue(value, false, "Admin1");
                     ReportPropertyChanged("Admin1");
                     OnAdmin1Changed();
                 }
@@ -37232,7 +37139,7 @@ namespace SRFROWCA
             {
                 OnAdmin1PCodeChanging(value);
                 ReportPropertyChanging("Admin1PCode");
-                _Admin1PCode = StructuralObject.SetValidValue(value, true);
+                _Admin1PCode = StructuralObject.SetValidValue(value, true, "Admin1PCode");
                 ReportPropertyChanged("Admin1PCode");
                 OnAdmin1PCodeChanged();
             }
@@ -37258,7 +37165,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -37283,7 +37190,7 @@ namespace SRFROWCA
             {
                 OnCount_OrgChanging(value);
                 ReportPropertyChanging("Count_Org");
-                _Count_Org = StructuralObject.SetValidValue(value);
+                _Count_Org = StructuralObject.SetValidValue(value, "Count_Org");
                 ReportPropertyChanged("Count_Org");
                 OnCount_OrgChanged();
             }
@@ -37294,7 +37201,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -37328,7 +37234,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -37347,7 +37253,7 @@ namespace SRFROWCA
                 {
                     OnCountryChanging(value);
                     ReportPropertyChanging("Country");
-                    _Country = StructuralObject.SetValidValue(value, false);
+                    _Country = StructuralObject.SetValidValue(value, false, "Country");
                     ReportPropertyChanged("Country");
                     OnCountryChanged();
                 }
@@ -37374,7 +37280,7 @@ namespace SRFROWCA
                 {
                     OnAdmin1Changing(value);
                     ReportPropertyChanging("Admin1");
-                    _Admin1 = StructuralObject.SetValidValue(value, false);
+                    _Admin1 = StructuralObject.SetValidValue(value, false, "Admin1");
                     ReportPropertyChanged("Admin1");
                     OnAdmin1Changed();
                 }
@@ -37399,7 +37305,7 @@ namespace SRFROWCA
             {
                 OnAdmin1PCodeChanging(value);
                 ReportPropertyChanging("Admin1PCode");
-                _Admin1PCode = StructuralObject.SetValidValue(value, true);
+                _Admin1PCode = StructuralObject.SetValidValue(value, true, "Admin1PCode");
                 ReportPropertyChanged("Admin1PCode");
                 OnAdmin1PCodeChanged();
             }
@@ -37425,7 +37331,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -37452,7 +37358,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationChanging(value);
                     ReportPropertyChanging("Organization");
-                    _Organization = StructuralObject.SetValidValue(value, false);
+                    _Organization = StructuralObject.SetValidValue(value, false, "Organization");
                     ReportPropertyChanged("Organization");
                     OnOrganizationChanged();
                 }
@@ -37479,7 +37385,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationIdChanging(value);
                     ReportPropertyChanging("OrganizationId");
-                    _OrganizationId = StructuralObject.SetValidValue(value);
+                    _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                     ReportPropertyChanged("OrganizationId");
                     OnOrganizationIdChanged();
                 }
@@ -37504,7 +37410,7 @@ namespace SRFROWCA
             {
                 OnNumber_OrgChanging(value);
                 ReportPropertyChanging("Number_Org");
-                _Number_Org = StructuralObject.SetValidValue(value);
+                _Number_Org = StructuralObject.SetValidValue(value, "Number_Org");
                 ReportPropertyChanged("Number_Org");
                 OnNumber_OrgChanged();
             }
@@ -37515,7 +37421,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -37549,7 +37454,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -37568,7 +37473,7 @@ namespace SRFROWCA
                 {
                     OnCountryChanging(value);
                     ReportPropertyChanging("Country");
-                    _Country = StructuralObject.SetValidValue(value, false);
+                    _Country = StructuralObject.SetValidValue(value, false, "Country");
                     ReportPropertyChanged("Country");
                     OnCountryChanged();
                 }
@@ -37595,7 +37500,7 @@ namespace SRFROWCA
                 {
                     OnAdmin1Changing(value);
                     ReportPropertyChanging("Admin1");
-                    _Admin1 = StructuralObject.SetValidValue(value, false);
+                    _Admin1 = StructuralObject.SetValidValue(value, false, "Admin1");
                     ReportPropertyChanged("Admin1");
                     OnAdmin1Changed();
                 }
@@ -37620,7 +37525,7 @@ namespace SRFROWCA
             {
                 OnAdmin1PCodeChanging(value);
                 ReportPropertyChanging("Admin1PCode");
-                _Admin1PCode = StructuralObject.SetValidValue(value, true);
+                _Admin1PCode = StructuralObject.SetValidValue(value, true, "Admin1PCode");
                 ReportPropertyChanged("Admin1PCode");
                 OnAdmin1PCodeChanged();
             }
@@ -37646,7 +37551,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -37673,7 +37578,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationChanging(value);
                     ReportPropertyChanging("Organization");
-                    _Organization = StructuralObject.SetValidValue(value, false);
+                    _Organization = StructuralObject.SetValidValue(value, false, "Organization");
                     ReportPropertyChanged("Organization");
                     OnOrganizationChanged();
                 }
@@ -37700,7 +37605,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationIdChanging(value);
                     ReportPropertyChanging("OrganizationId");
-                    _OrganizationId = StructuralObject.SetValidValue(value);
+                    _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                     ReportPropertyChanged("OrganizationId");
                     OnOrganizationIdChanged();
                 }
@@ -37725,7 +37630,7 @@ namespace SRFROWCA
             {
                 OnNumber_OrgChanging(value);
                 ReportPropertyChanging("Number_Org");
-                _Number_Org = StructuralObject.SetValidValue(value);
+                _Number_Org = StructuralObject.SetValidValue(value, "Number_Org");
                 ReportPropertyChanged("Number_Org");
                 OnNumber_OrgChanged();
             }
@@ -37736,7 +37641,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -37772,7 +37676,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -37791,7 +37695,7 @@ namespace SRFROWCA
                 {
                     OnCountryChanging(value);
                     ReportPropertyChanging("Country");
-                    _Country = StructuralObject.SetValidValue(value, false);
+                    _Country = StructuralObject.SetValidValue(value, false, "Country");
                     ReportPropertyChanged("Country");
                     OnCountryChanged();
                 }
@@ -37818,7 +37722,7 @@ namespace SRFROWCA
                 {
                     OnAdmin1Changing(value);
                     ReportPropertyChanging("Admin1");
-                    _Admin1 = StructuralObject.SetValidValue(value, false);
+                    _Admin1 = StructuralObject.SetValidValue(value, false, "Admin1");
                     ReportPropertyChanged("Admin1");
                     OnAdmin1Changed();
                 }
@@ -37843,7 +37747,7 @@ namespace SRFROWCA
             {
                 OnAdmin1PCodeChanging(value);
                 ReportPropertyChanging("Admin1PCode");
-                _Admin1PCode = StructuralObject.SetValidValue(value, true);
+                _Admin1PCode = StructuralObject.SetValidValue(value, true, "Admin1PCode");
                 ReportPropertyChanged("Admin1PCode");
                 OnAdmin1PCodeChanged();
             }
@@ -37869,7 +37773,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -37896,7 +37800,7 @@ namespace SRFROWCA
                 {
                     OnMonthChanging(value);
                     ReportPropertyChanging("Month");
-                    _Month = StructuralObject.SetValidValue(value, false);
+                    _Month = StructuralObject.SetValidValue(value, false, "Month");
                     ReportPropertyChanged("Month");
                     OnMonthChanged();
                 }
@@ -37923,7 +37827,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationChanging(value);
                     ReportPropertyChanging("Organization");
-                    _Organization = StructuralObject.SetValidValue(value, false);
+                    _Organization = StructuralObject.SetValidValue(value, false, "Organization");
                     ReportPropertyChanged("Organization");
                     OnOrganizationChanged();
                 }
@@ -37950,7 +37854,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationIdChanging(value);
                     ReportPropertyChanging("OrganizationId");
-                    _OrganizationId = StructuralObject.SetValidValue(value);
+                    _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                     ReportPropertyChanged("OrganizationId");
                     OnOrganizationIdChanged();
                 }
@@ -37975,7 +37879,7 @@ namespace SRFROWCA
             {
                 OnNumber_OrgChanging(value);
                 ReportPropertyChanging("Number_Org");
-                _Number_Org = StructuralObject.SetValidValue(value);
+                _Number_Org = StructuralObject.SetValidValue(value, "Number_Org");
                 ReportPropertyChanged("Number_Org");
                 OnNumber_OrgChanged();
             }
@@ -37986,7 +37890,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -38022,7 +37925,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -38041,7 +37944,7 @@ namespace SRFROWCA
                 {
                     OnCountryChanging(value);
                     ReportPropertyChanging("Country");
-                    _Country = StructuralObject.SetValidValue(value, false);
+                    _Country = StructuralObject.SetValidValue(value, false, "Country");
                     ReportPropertyChanged("Country");
                     OnCountryChanged();
                 }
@@ -38068,7 +37971,7 @@ namespace SRFROWCA
                 {
                     OnAdmin1Changing(value);
                     ReportPropertyChanging("Admin1");
-                    _Admin1 = StructuralObject.SetValidValue(value, false);
+                    _Admin1 = StructuralObject.SetValidValue(value, false, "Admin1");
                     ReportPropertyChanged("Admin1");
                     OnAdmin1Changed();
                 }
@@ -38093,7 +37996,7 @@ namespace SRFROWCA
             {
                 OnAdmin1PCodeChanging(value);
                 ReportPropertyChanging("Admin1PCode");
-                _Admin1PCode = StructuralObject.SetValidValue(value, true);
+                _Admin1PCode = StructuralObject.SetValidValue(value, true, "Admin1PCode");
                 ReportPropertyChanged("Admin1PCode");
                 OnAdmin1PCodeChanged();
             }
@@ -38119,7 +38022,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -38146,7 +38049,7 @@ namespace SRFROWCA
                 {
                     OnReportedMonthChanging(value);
                     ReportPropertyChanging("ReportedMonth");
-                    _ReportedMonth = StructuralObject.SetValidValue(value, false);
+                    _ReportedMonth = StructuralObject.SetValidValue(value, false, "ReportedMonth");
                     ReportPropertyChanged("ReportedMonth");
                     OnReportedMonthChanged();
                 }
@@ -38173,7 +38076,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationChanging(value);
                     ReportPropertyChanging("Organization");
-                    _Organization = StructuralObject.SetValidValue(value, false);
+                    _Organization = StructuralObject.SetValidValue(value, false, "Organization");
                     ReportPropertyChanged("Organization");
                     OnOrganizationChanged();
                 }
@@ -38200,7 +38103,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationIdChanging(value);
                     ReportPropertyChanging("OrganizationId");
-                    _OrganizationId = StructuralObject.SetValidValue(value);
+                    _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                     ReportPropertyChanged("OrganizationId");
                     OnOrganizationIdChanged();
                 }
@@ -38225,7 +38128,7 @@ namespace SRFROWCA
             {
                 OnNumber_OrgChanging(value);
                 ReportPropertyChanging("Number_Org");
-                _Number_Org = StructuralObject.SetValidValue(value);
+                _Number_Org = StructuralObject.SetValidValue(value, "Number_Org");
                 ReportPropertyChanged("Number_Org");
                 OnNumber_OrgChanged();
             }
@@ -38236,7 +38139,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -38272,7 +38174,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -38291,7 +38193,7 @@ namespace SRFROWCA
                 {
                     OnCountryChanging(value);
                     ReportPropertyChanging("Country");
-                    _Country = StructuralObject.SetValidValue(value, false);
+                    _Country = StructuralObject.SetValidValue(value, false, "Country");
                     ReportPropertyChanged("Country");
                     OnCountryChanged();
                 }
@@ -38318,7 +38220,7 @@ namespace SRFROWCA
                 {
                     OnAdmin1Changing(value);
                     ReportPropertyChanging("Admin1");
-                    _Admin1 = StructuralObject.SetValidValue(value, false);
+                    _Admin1 = StructuralObject.SetValidValue(value, false, "Admin1");
                     ReportPropertyChanged("Admin1");
                     OnAdmin1Changed();
                 }
@@ -38343,7 +38245,7 @@ namespace SRFROWCA
             {
                 OnAdmin1PCodeChanging(value);
                 ReportPropertyChanging("Admin1PCode");
-                _Admin1PCode = StructuralObject.SetValidValue(value, true);
+                _Admin1PCode = StructuralObject.SetValidValue(value, true, "Admin1PCode");
                 ReportPropertyChanged("Admin1PCode");
                 OnAdmin1PCodeChanged();
             }
@@ -38369,7 +38271,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -38396,7 +38298,7 @@ namespace SRFROWCA
                 {
                     OnReportedMonthChanging(value);
                     ReportPropertyChanging("ReportedMonth");
-                    _ReportedMonth = StructuralObject.SetValidValue(value, false);
+                    _ReportedMonth = StructuralObject.SetValidValue(value, false, "ReportedMonth");
                     ReportPropertyChanged("ReportedMonth");
                     OnReportedMonthChanged();
                 }
@@ -38423,7 +38325,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationChanging(value);
                     ReportPropertyChanging("Organization");
-                    _Organization = StructuralObject.SetValidValue(value, false);
+                    _Organization = StructuralObject.SetValidValue(value, false, "Organization");
                     ReportPropertyChanged("Organization");
                     OnOrganizationChanged();
                 }
@@ -38450,7 +38352,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationIdChanging(value);
                     ReportPropertyChanging("OrganizationId");
-                    _OrganizationId = StructuralObject.SetValidValue(value);
+                    _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                     ReportPropertyChanged("OrganizationId");
                     OnOrganizationIdChanged();
                 }
@@ -38475,7 +38377,7 @@ namespace SRFROWCA
             {
                 OnNumber_OrgChanging(value);
                 ReportPropertyChanging("Number_Org");
-                _Number_Org = StructuralObject.SetValidValue(value);
+                _Number_Org = StructuralObject.SetValidValue(value, "Number_Org");
                 ReportPropertyChanged("Number_Org");
                 OnNumber_OrgChanged();
             }
@@ -38486,7 +38388,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -38522,7 +38423,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -38541,7 +38442,7 @@ namespace SRFROWCA
                 {
                     OnCountryChanging(value);
                     ReportPropertyChanging("Country");
-                    _Country = StructuralObject.SetValidValue(value, false);
+                    _Country = StructuralObject.SetValidValue(value, false, "Country");
                     ReportPropertyChanged("Country");
                     OnCountryChanged();
                 }
@@ -38568,7 +38469,7 @@ namespace SRFROWCA
                 {
                     OnAdmin1Changing(value);
                     ReportPropertyChanging("Admin1");
-                    _Admin1 = StructuralObject.SetValidValue(value, false);
+                    _Admin1 = StructuralObject.SetValidValue(value, false, "Admin1");
                     ReportPropertyChanged("Admin1");
                     OnAdmin1Changed();
                 }
@@ -38593,7 +38494,7 @@ namespace SRFROWCA
             {
                 OnAdmin1PCodeChanging(value);
                 ReportPropertyChanging("Admin1PCode");
-                _Admin1PCode = StructuralObject.SetValidValue(value, true);
+                _Admin1PCode = StructuralObject.SetValidValue(value, true, "Admin1PCode");
                 ReportPropertyChanged("Admin1PCode");
                 OnAdmin1PCodeChanged();
             }
@@ -38619,7 +38520,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -38646,7 +38547,7 @@ namespace SRFROWCA
                 {
                     OnReportedMonthChanging(value);
                     ReportPropertyChanging("ReportedMonth");
-                    _ReportedMonth = StructuralObject.SetValidValue(value, false);
+                    _ReportedMonth = StructuralObject.SetValidValue(value, false, "ReportedMonth");
                     ReportPropertyChanged("ReportedMonth");
                     OnReportedMonthChanged();
                 }
@@ -38673,7 +38574,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationChanging(value);
                     ReportPropertyChanging("Organization");
-                    _Organization = StructuralObject.SetValidValue(value, false);
+                    _Organization = StructuralObject.SetValidValue(value, false, "Organization");
                     ReportPropertyChanged("Organization");
                     OnOrganizationChanged();
                 }
@@ -38700,7 +38601,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationIdChanging(value);
                     ReportPropertyChanging("OrganizationId");
-                    _OrganizationId = StructuralObject.SetValidValue(value);
+                    _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                     ReportPropertyChanged("OrganizationId");
                     OnOrganizationIdChanged();
                 }
@@ -38725,7 +38626,7 @@ namespace SRFROWCA
             {
                 OnNumber_OrgChanging(value);
                 ReportPropertyChanging("Number_Org");
-                _Number_Org = StructuralObject.SetValidValue(value);
+                _Number_Org = StructuralObject.SetValidValue(value, "Number_Org");
                 ReportPropertyChanged("Number_Org");
                 OnNumber_OrgChanged();
             }
@@ -38736,7 +38637,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -38770,7 +38670,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -38789,7 +38689,7 @@ namespace SRFROWCA
                 {
                     OnCountryChanging(value);
                     ReportPropertyChanging("Country");
-                    _Country = StructuralObject.SetValidValue(value, false);
+                    _Country = StructuralObject.SetValidValue(value, false, "Country");
                     ReportPropertyChanged("Country");
                     OnCountryChanged();
                 }
@@ -38816,7 +38716,7 @@ namespace SRFROWCA
                 {
                     OnAdmin1Changing(value);
                     ReportPropertyChanging("Admin1");
-                    _Admin1 = StructuralObject.SetValidValue(value, false);
+                    _Admin1 = StructuralObject.SetValidValue(value, false, "Admin1");
                     ReportPropertyChanged("Admin1");
                     OnAdmin1Changed();
                 }
@@ -38841,7 +38741,7 @@ namespace SRFROWCA
             {
                 OnAdmin1PCodeChanging(value);
                 ReportPropertyChanging("Admin1PCode");
-                _Admin1PCode = StructuralObject.SetValidValue(value, true);
+                _Admin1PCode = StructuralObject.SetValidValue(value, true, "Admin1PCode");
                 ReportPropertyChanged("Admin1PCode");
                 OnAdmin1PCodeChanged();
             }
@@ -38867,7 +38767,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -38894,7 +38794,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationChanging(value);
                     ReportPropertyChanging("Organization");
-                    _Organization = StructuralObject.SetValidValue(value, false);
+                    _Organization = StructuralObject.SetValidValue(value, false, "Organization");
                     ReportPropertyChanged("Organization");
                     OnOrganizationChanged();
                 }
@@ -38921,7 +38821,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationIdChanging(value);
                     ReportPropertyChanging("OrganizationId");
-                    _OrganizationId = StructuralObject.SetValidValue(value);
+                    _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                     ReportPropertyChanged("OrganizationId");
                     OnOrganizationIdChanged();
                 }
@@ -38946,7 +38846,7 @@ namespace SRFROWCA
             {
                 OnNumber_OrgChanging(value);
                 ReportPropertyChanging("Number_Org");
-                _Number_Org = StructuralObject.SetValidValue(value);
+                _Number_Org = StructuralObject.SetValidValue(value, "Number_Org");
                 ReportPropertyChanged("Number_Org");
                 OnNumber_OrgChanged();
             }
@@ -38957,7 +38857,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -38991,7 +38890,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -39010,7 +38909,7 @@ namespace SRFROWCA
                 {
                     OnCountryChanging(value);
                     ReportPropertyChanging("Country");
-                    _Country = StructuralObject.SetValidValue(value, false);
+                    _Country = StructuralObject.SetValidValue(value, false, "Country");
                     ReportPropertyChanged("Country");
                     OnCountryChanged();
                 }
@@ -39037,7 +38936,7 @@ namespace SRFROWCA
                 {
                     OnAdmin1Changing(value);
                     ReportPropertyChanging("Admin1");
-                    _Admin1 = StructuralObject.SetValidValue(value, false);
+                    _Admin1 = StructuralObject.SetValidValue(value, false, "Admin1");
                     ReportPropertyChanged("Admin1");
                     OnAdmin1Changed();
                 }
@@ -39062,7 +38961,7 @@ namespace SRFROWCA
             {
                 OnAdmin1PCodeChanging(value);
                 ReportPropertyChanging("Admin1PCode");
-                _Admin1PCode = StructuralObject.SetValidValue(value, true);
+                _Admin1PCode = StructuralObject.SetValidValue(value, true, "Admin1PCode");
                 ReportPropertyChanged("Admin1PCode");
                 OnAdmin1PCodeChanged();
             }
@@ -39088,7 +38987,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -39115,7 +39014,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationChanging(value);
                     ReportPropertyChanging("Organization");
-                    _Organization = StructuralObject.SetValidValue(value, false);
+                    _Organization = StructuralObject.SetValidValue(value, false, "Organization");
                     ReportPropertyChanged("Organization");
                     OnOrganizationChanged();
                 }
@@ -39142,7 +39041,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationIdChanging(value);
                     ReportPropertyChanging("OrganizationId");
-                    _OrganizationId = StructuralObject.SetValidValue(value);
+                    _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                     ReportPropertyChanged("OrganizationId");
                     OnOrganizationIdChanged();
                 }
@@ -39167,7 +39066,7 @@ namespace SRFROWCA
             {
                 OnNumber_OrgChanging(value);
                 ReportPropertyChanging("Number_Org");
-                _Number_Org = StructuralObject.SetValidValue(value);
+                _Number_Org = StructuralObject.SetValidValue(value, "Number_Org");
                 ReportPropertyChanged("Number_Org");
                 OnNumber_OrgChanged();
             }
@@ -39178,7 +39077,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -39212,7 +39110,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -39231,7 +39129,7 @@ namespace SRFROWCA
                 {
                     OnCountryChanging(value);
                     ReportPropertyChanging("Country");
-                    _Country = StructuralObject.SetValidValue(value, false);
+                    _Country = StructuralObject.SetValidValue(value, false, "Country");
                     ReportPropertyChanged("Country");
                     OnCountryChanged();
                 }
@@ -39258,7 +39156,7 @@ namespace SRFROWCA
                 {
                     OnAdmin1Changing(value);
                     ReportPropertyChanging("Admin1");
-                    _Admin1 = StructuralObject.SetValidValue(value, false);
+                    _Admin1 = StructuralObject.SetValidValue(value, false, "Admin1");
                     ReportPropertyChanged("Admin1");
                     OnAdmin1Changed();
                 }
@@ -39283,7 +39181,7 @@ namespace SRFROWCA
             {
                 OnAdmin1PCodeChanging(value);
                 ReportPropertyChanging("Admin1PCode");
-                _Admin1PCode = StructuralObject.SetValidValue(value, true);
+                _Admin1PCode = StructuralObject.SetValidValue(value, true, "Admin1PCode");
                 ReportPropertyChanged("Admin1PCode");
                 OnAdmin1PCodeChanged();
             }
@@ -39309,7 +39207,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -39336,7 +39234,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationChanging(value);
                     ReportPropertyChanging("Organization");
-                    _Organization = StructuralObject.SetValidValue(value, false);
+                    _Organization = StructuralObject.SetValidValue(value, false, "Organization");
                     ReportPropertyChanged("Organization");
                     OnOrganizationChanged();
                 }
@@ -39363,7 +39261,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationIdChanging(value);
                     ReportPropertyChanging("OrganizationId");
-                    _OrganizationId = StructuralObject.SetValidValue(value);
+                    _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                     ReportPropertyChanged("OrganizationId");
                     OnOrganizationIdChanged();
                 }
@@ -39388,7 +39286,7 @@ namespace SRFROWCA
             {
                 OnNumber_OrgChanging(value);
                 ReportPropertyChanging("Number_Org");
-                _Number_Org = StructuralObject.SetValidValue(value);
+                _Number_Org = StructuralObject.SetValidValue(value, "Number_Org");
                 ReportPropertyChanged("Number_Org");
                 OnNumber_OrgChanged();
             }
@@ -39399,7 +39297,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -39435,7 +39332,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -39454,7 +39351,7 @@ namespace SRFROWCA
                 {
                     OnCountryChanging(value);
                     ReportPropertyChanging("Country");
-                    _Country = StructuralObject.SetValidValue(value, false);
+                    _Country = StructuralObject.SetValidValue(value, false, "Country");
                     ReportPropertyChanged("Country");
                     OnCountryChanged();
                 }
@@ -39481,7 +39378,7 @@ namespace SRFROWCA
                 {
                     OnAdmin1Changing(value);
                     ReportPropertyChanging("Admin1");
-                    _Admin1 = StructuralObject.SetValidValue(value, false);
+                    _Admin1 = StructuralObject.SetValidValue(value, false, "Admin1");
                     ReportPropertyChanged("Admin1");
                     OnAdmin1Changed();
                 }
@@ -39506,7 +39403,7 @@ namespace SRFROWCA
             {
                 OnAdmin1PCodeChanging(value);
                 ReportPropertyChanging("Admin1PCode");
-                _Admin1PCode = StructuralObject.SetValidValue(value, true);
+                _Admin1PCode = StructuralObject.SetValidValue(value, true, "Admin1PCode");
                 ReportPropertyChanged("Admin1PCode");
                 OnAdmin1PCodeChanged();
             }
@@ -39532,7 +39429,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -39559,7 +39456,7 @@ namespace SRFROWCA
                 {
                     OnReportedMonthChanging(value);
                     ReportPropertyChanging("ReportedMonth");
-                    _ReportedMonth = StructuralObject.SetValidValue(value, false);
+                    _ReportedMonth = StructuralObject.SetValidValue(value, false, "ReportedMonth");
                     ReportPropertyChanged("ReportedMonth");
                     OnReportedMonthChanged();
                 }
@@ -39586,7 +39483,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationChanging(value);
                     ReportPropertyChanging("Organization");
-                    _Organization = StructuralObject.SetValidValue(value, false);
+                    _Organization = StructuralObject.SetValidValue(value, false, "Organization");
                     ReportPropertyChanged("Organization");
                     OnOrganizationChanged();
                 }
@@ -39613,7 +39510,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationIdChanging(value);
                     ReportPropertyChanging("OrganizationId");
-                    _OrganizationId = StructuralObject.SetValidValue(value);
+                    _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                     ReportPropertyChanged("OrganizationId");
                     OnOrganizationIdChanged();
                 }
@@ -39638,7 +39535,7 @@ namespace SRFROWCA
             {
                 OnNumber_OrgChanging(value);
                 ReportPropertyChanging("Number_Org");
-                _Number_Org = StructuralObject.SetValidValue(value);
+                _Number_Org = StructuralObject.SetValidValue(value, "Number_Org");
                 ReportPropertyChanged("Number_Org");
                 OnNumber_OrgChanged();
             }
@@ -39649,7 +39546,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -39685,7 +39581,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -39704,7 +39600,7 @@ namespace SRFROWCA
                 {
                     OnCountryChanging(value);
                     ReportPropertyChanging("Country");
-                    _Country = StructuralObject.SetValidValue(value, false);
+                    _Country = StructuralObject.SetValidValue(value, false, "Country");
                     ReportPropertyChanged("Country");
                     OnCountryChanged();
                 }
@@ -39731,7 +39627,7 @@ namespace SRFROWCA
                 {
                     OnAdmin1Changing(value);
                     ReportPropertyChanging("Admin1");
-                    _Admin1 = StructuralObject.SetValidValue(value, false);
+                    _Admin1 = StructuralObject.SetValidValue(value, false, "Admin1");
                     ReportPropertyChanged("Admin1");
                     OnAdmin1Changed();
                 }
@@ -39756,7 +39652,7 @@ namespace SRFROWCA
             {
                 OnAdmin1PCodeChanging(value);
                 ReportPropertyChanging("Admin1PCode");
-                _Admin1PCode = StructuralObject.SetValidValue(value, true);
+                _Admin1PCode = StructuralObject.SetValidValue(value, true, "Admin1PCode");
                 ReportPropertyChanged("Admin1PCode");
                 OnAdmin1PCodeChanged();
             }
@@ -39782,7 +39678,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -39809,7 +39705,7 @@ namespace SRFROWCA
                 {
                     OnReportedMonthChanging(value);
                     ReportPropertyChanging("ReportedMonth");
-                    _ReportedMonth = StructuralObject.SetValidValue(value, false);
+                    _ReportedMonth = StructuralObject.SetValidValue(value, false, "ReportedMonth");
                     ReportPropertyChanged("ReportedMonth");
                     OnReportedMonthChanged();
                 }
@@ -39836,7 +39732,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationChanging(value);
                     ReportPropertyChanging("Organization");
-                    _Organization = StructuralObject.SetValidValue(value, false);
+                    _Organization = StructuralObject.SetValidValue(value, false, "Organization");
                     ReportPropertyChanged("Organization");
                     OnOrganizationChanged();
                 }
@@ -39863,7 +39759,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationIdChanging(value);
                     ReportPropertyChanging("OrganizationId");
-                    _OrganizationId = StructuralObject.SetValidValue(value);
+                    _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                     ReportPropertyChanged("OrganizationId");
                     OnOrganizationIdChanged();
                 }
@@ -39888,7 +39784,7 @@ namespace SRFROWCA
             {
                 OnNumber_OrgChanging(value);
                 ReportPropertyChanging("Number_Org");
-                _Number_Org = StructuralObject.SetValidValue(value);
+                _Number_Org = StructuralObject.SetValidValue(value, "Number_Org");
                 ReportPropertyChanged("Number_Org");
                 OnNumber_OrgChanged();
             }
@@ -39899,7 +39795,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -39935,7 +39830,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -39954,7 +39849,7 @@ namespace SRFROWCA
                 {
                     OnCountryChanging(value);
                     ReportPropertyChanging("Country");
-                    _Country = StructuralObject.SetValidValue(value, false);
+                    _Country = StructuralObject.SetValidValue(value, false, "Country");
                     ReportPropertyChanged("Country");
                     OnCountryChanged();
                 }
@@ -39981,7 +39876,7 @@ namespace SRFROWCA
                 {
                     OnAdmin1Changing(value);
                     ReportPropertyChanging("Admin1");
-                    _Admin1 = StructuralObject.SetValidValue(value, false);
+                    _Admin1 = StructuralObject.SetValidValue(value, false, "Admin1");
                     ReportPropertyChanged("Admin1");
                     OnAdmin1Changed();
                 }
@@ -40006,7 +39901,7 @@ namespace SRFROWCA
             {
                 OnAdmin1PCodeChanging(value);
                 ReportPropertyChanging("Admin1PCode");
-                _Admin1PCode = StructuralObject.SetValidValue(value, true);
+                _Admin1PCode = StructuralObject.SetValidValue(value, true, "Admin1PCode");
                 ReportPropertyChanged("Admin1PCode");
                 OnAdmin1PCodeChanged();
             }
@@ -40032,7 +39927,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -40059,7 +39954,7 @@ namespace SRFROWCA
                 {
                     OnMonthChanging(value);
                     ReportPropertyChanging("Month");
-                    _Month = StructuralObject.SetValidValue(value, false);
+                    _Month = StructuralObject.SetValidValue(value, false, "Month");
                     ReportPropertyChanged("Month");
                     OnMonthChanged();
                 }
@@ -40086,7 +39981,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationChanging(value);
                     ReportPropertyChanging("Organization");
-                    _Organization = StructuralObject.SetValidValue(value, false);
+                    _Organization = StructuralObject.SetValidValue(value, false, "Organization");
                     ReportPropertyChanged("Organization");
                     OnOrganizationChanged();
                 }
@@ -40113,7 +40008,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationIdChanging(value);
                     ReportPropertyChanging("OrganizationId");
-                    _OrganizationId = StructuralObject.SetValidValue(value);
+                    _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                     ReportPropertyChanged("OrganizationId");
                     OnOrganizationIdChanged();
                 }
@@ -40138,7 +40033,7 @@ namespace SRFROWCA
             {
                 OnNumber_OrgChanging(value);
                 ReportPropertyChanging("Number_Org");
-                _Number_Org = StructuralObject.SetValidValue(value);
+                _Number_Org = StructuralObject.SetValidValue(value, "Number_Org");
                 ReportPropertyChanged("Number_Org");
                 OnNumber_OrgChanged();
             }
@@ -40149,7 +40044,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -40185,7 +40079,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -40204,7 +40098,7 @@ namespace SRFROWCA
                 {
                     OnCountryChanging(value);
                     ReportPropertyChanging("Country");
-                    _Country = StructuralObject.SetValidValue(value, false);
+                    _Country = StructuralObject.SetValidValue(value, false, "Country");
                     ReportPropertyChanged("Country");
                     OnCountryChanged();
                 }
@@ -40231,7 +40125,7 @@ namespace SRFROWCA
                 {
                     OnAdmin1Changing(value);
                     ReportPropertyChanging("Admin1");
-                    _Admin1 = StructuralObject.SetValidValue(value, false);
+                    _Admin1 = StructuralObject.SetValidValue(value, false, "Admin1");
                     ReportPropertyChanged("Admin1");
                     OnAdmin1Changed();
                 }
@@ -40256,7 +40150,7 @@ namespace SRFROWCA
             {
                 OnAdmin1PCodeChanging(value);
                 ReportPropertyChanging("Admin1PCode");
-                _Admin1PCode = StructuralObject.SetValidValue(value, true);
+                _Admin1PCode = StructuralObject.SetValidValue(value, true, "Admin1PCode");
                 ReportPropertyChanged("Admin1PCode");
                 OnAdmin1PCodeChanged();
             }
@@ -40282,7 +40176,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -40309,7 +40203,7 @@ namespace SRFROWCA
                 {
                     OnReportedMonthChanging(value);
                     ReportPropertyChanging("ReportedMonth");
-                    _ReportedMonth = StructuralObject.SetValidValue(value, false);
+                    _ReportedMonth = StructuralObject.SetValidValue(value, false, "ReportedMonth");
                     ReportPropertyChanged("ReportedMonth");
                     OnReportedMonthChanged();
                 }
@@ -40336,7 +40230,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationChanging(value);
                     ReportPropertyChanging("Organization");
-                    _Organization = StructuralObject.SetValidValue(value, false);
+                    _Organization = StructuralObject.SetValidValue(value, false, "Organization");
                     ReportPropertyChanged("Organization");
                     OnOrganizationChanged();
                 }
@@ -40363,7 +40257,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationIdChanging(value);
                     ReportPropertyChanging("OrganizationId");
-                    _OrganizationId = StructuralObject.SetValidValue(value);
+                    _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                     ReportPropertyChanged("OrganizationId");
                     OnOrganizationIdChanged();
                 }
@@ -40388,7 +40282,7 @@ namespace SRFROWCA
             {
                 OnNumber_OrgChanging(value);
                 ReportPropertyChanging("Number_Org");
-                _Number_Org = StructuralObject.SetValidValue(value);
+                _Number_Org = StructuralObject.SetValidValue(value, "Number_Org");
                 ReportPropertyChanged("Number_Org");
                 OnNumber_OrgChanged();
             }
@@ -40399,7 +40293,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -40435,7 +40328,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -40454,7 +40347,7 @@ namespace SRFROWCA
                 {
                     OnCountryChanging(value);
                     ReportPropertyChanging("Country");
-                    _Country = StructuralObject.SetValidValue(value, false);
+                    _Country = StructuralObject.SetValidValue(value, false, "Country");
                     ReportPropertyChanged("Country");
                     OnCountryChanged();
                 }
@@ -40481,7 +40374,7 @@ namespace SRFROWCA
                 {
                     OnAdmin1Changing(value);
                     ReportPropertyChanging("Admin1");
-                    _Admin1 = StructuralObject.SetValidValue(value, false);
+                    _Admin1 = StructuralObject.SetValidValue(value, false, "Admin1");
                     ReportPropertyChanged("Admin1");
                     OnAdmin1Changed();
                 }
@@ -40506,7 +40399,7 @@ namespace SRFROWCA
             {
                 OnAdmin1PCodeChanging(value);
                 ReportPropertyChanging("Admin1PCode");
-                _Admin1PCode = StructuralObject.SetValidValue(value, true);
+                _Admin1PCode = StructuralObject.SetValidValue(value, true, "Admin1PCode");
                 ReportPropertyChanged("Admin1PCode");
                 OnAdmin1PCodeChanged();
             }
@@ -40532,7 +40425,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -40559,7 +40452,7 @@ namespace SRFROWCA
                 {
                     OnReportedMonthChanging(value);
                     ReportPropertyChanging("ReportedMonth");
-                    _ReportedMonth = StructuralObject.SetValidValue(value, false);
+                    _ReportedMonth = StructuralObject.SetValidValue(value, false, "ReportedMonth");
                     ReportPropertyChanged("ReportedMonth");
                     OnReportedMonthChanged();
                 }
@@ -40586,7 +40479,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationChanging(value);
                     ReportPropertyChanging("Organization");
-                    _Organization = StructuralObject.SetValidValue(value, false);
+                    _Organization = StructuralObject.SetValidValue(value, false, "Organization");
                     ReportPropertyChanged("Organization");
                     OnOrganizationChanged();
                 }
@@ -40613,7 +40506,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationIdChanging(value);
                     ReportPropertyChanging("OrganizationId");
-                    _OrganizationId = StructuralObject.SetValidValue(value);
+                    _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                     ReportPropertyChanged("OrganizationId");
                     OnOrganizationIdChanged();
                 }
@@ -40638,7 +40531,7 @@ namespace SRFROWCA
             {
                 OnNumber_OrgChanging(value);
                 ReportPropertyChanging("Number_Org");
-                _Number_Org = StructuralObject.SetValidValue(value);
+                _Number_Org = StructuralObject.SetValidValue(value, "Number_Org");
                 ReportPropertyChanged("Number_Org");
                 OnNumber_OrgChanged();
             }
@@ -40649,7 +40542,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -40685,7 +40577,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -40704,7 +40596,7 @@ namespace SRFROWCA
                 {
                     OnCountryChanging(value);
                     ReportPropertyChanging("Country");
-                    _Country = StructuralObject.SetValidValue(value, false);
+                    _Country = StructuralObject.SetValidValue(value, false, "Country");
                     ReportPropertyChanged("Country");
                     OnCountryChanged();
                 }
@@ -40731,7 +40623,7 @@ namespace SRFROWCA
                 {
                     OnAdmin1Changing(value);
                     ReportPropertyChanging("Admin1");
-                    _Admin1 = StructuralObject.SetValidValue(value, false);
+                    _Admin1 = StructuralObject.SetValidValue(value, false, "Admin1");
                     ReportPropertyChanged("Admin1");
                     OnAdmin1Changed();
                 }
@@ -40756,7 +40648,7 @@ namespace SRFROWCA
             {
                 OnAdmin1PCodeChanging(value);
                 ReportPropertyChanging("Admin1PCode");
-                _Admin1PCode = StructuralObject.SetValidValue(value, true);
+                _Admin1PCode = StructuralObject.SetValidValue(value, true, "Admin1PCode");
                 ReportPropertyChanged("Admin1PCode");
                 OnAdmin1PCodeChanged();
             }
@@ -40782,7 +40674,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -40809,7 +40701,7 @@ namespace SRFROWCA
                 {
                     OnReportedMonthChanging(value);
                     ReportPropertyChanging("ReportedMonth");
-                    _ReportedMonth = StructuralObject.SetValidValue(value, false);
+                    _ReportedMonth = StructuralObject.SetValidValue(value, false, "ReportedMonth");
                     ReportPropertyChanged("ReportedMonth");
                     OnReportedMonthChanged();
                 }
@@ -40836,7 +40728,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationChanging(value);
                     ReportPropertyChanging("Organization");
-                    _Organization = StructuralObject.SetValidValue(value, false);
+                    _Organization = StructuralObject.SetValidValue(value, false, "Organization");
                     ReportPropertyChanged("Organization");
                     OnOrganizationChanged();
                 }
@@ -40863,7 +40755,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationIdChanging(value);
                     ReportPropertyChanging("OrganizationId");
-                    _OrganizationId = StructuralObject.SetValidValue(value);
+                    _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                     ReportPropertyChanged("OrganizationId");
                     OnOrganizationIdChanged();
                 }
@@ -40888,7 +40780,7 @@ namespace SRFROWCA
             {
                 OnNumber_OrgChanging(value);
                 ReportPropertyChanging("Number_Org");
-                _Number_Org = StructuralObject.SetValidValue(value);
+                _Number_Org = StructuralObject.SetValidValue(value, "Number_Org");
                 ReportPropertyChanged("Number_Org");
                 OnNumber_OrgChanged();
             }
@@ -40899,7 +40791,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -40935,7 +40826,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -40954,7 +40845,7 @@ namespace SRFROWCA
                 {
                     OnCountryChanging(value);
                     ReportPropertyChanging("Country");
-                    _Country = StructuralObject.SetValidValue(value, false);
+                    _Country = StructuralObject.SetValidValue(value, false, "Country");
                     ReportPropertyChanged("Country");
                     OnCountryChanged();
                 }
@@ -40981,7 +40872,7 @@ namespace SRFROWCA
                 {
                     OnAdmin1Changing(value);
                     ReportPropertyChanging("Admin1");
-                    _Admin1 = StructuralObject.SetValidValue(value, false);
+                    _Admin1 = StructuralObject.SetValidValue(value, false, "Admin1");
                     ReportPropertyChanged("Admin1");
                     OnAdmin1Changed();
                 }
@@ -41006,7 +40897,7 @@ namespace SRFROWCA
             {
                 OnAdmin1PCodeChanging(value);
                 ReportPropertyChanging("Admin1PCode");
-                _Admin1PCode = StructuralObject.SetValidValue(value, true);
+                _Admin1PCode = StructuralObject.SetValidValue(value, true, "Admin1PCode");
                 ReportPropertyChanged("Admin1PCode");
                 OnAdmin1PCodeChanged();
             }
@@ -41032,7 +40923,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -41059,7 +40950,7 @@ namespace SRFROWCA
                 {
                     OnReportedMonthChanging(value);
                     ReportPropertyChanging("ReportedMonth");
-                    _ReportedMonth = StructuralObject.SetValidValue(value, false);
+                    _ReportedMonth = StructuralObject.SetValidValue(value, false, "ReportedMonth");
                     ReportPropertyChanged("ReportedMonth");
                     OnReportedMonthChanged();
                 }
@@ -41086,7 +40977,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationChanging(value);
                     ReportPropertyChanging("Organization");
-                    _Organization = StructuralObject.SetValidValue(value, false);
+                    _Organization = StructuralObject.SetValidValue(value, false, "Organization");
                     ReportPropertyChanged("Organization");
                     OnOrganizationChanged();
                 }
@@ -41113,7 +41004,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationIdChanging(value);
                     ReportPropertyChanging("OrganizationId");
-                    _OrganizationId = StructuralObject.SetValidValue(value);
+                    _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                     ReportPropertyChanged("OrganizationId");
                     OnOrganizationIdChanged();
                 }
@@ -41138,7 +41029,7 @@ namespace SRFROWCA
             {
                 OnNumber_OrgChanging(value);
                 ReportPropertyChanging("Number_Org");
-                _Number_Org = StructuralObject.SetValidValue(value);
+                _Number_Org = StructuralObject.SetValidValue(value, "Number_Org");
                 ReportPropertyChanged("Number_Org");
                 OnNumber_OrgChanged();
             }
@@ -41149,7 +41040,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -41185,7 +41075,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -41204,7 +41094,7 @@ namespace SRFROWCA
                 {
                     OnCountryChanging(value);
                     ReportPropertyChanging("Country");
-                    _Country = StructuralObject.SetValidValue(value, false);
+                    _Country = StructuralObject.SetValidValue(value, false, "Country");
                     ReportPropertyChanged("Country");
                     OnCountryChanged();
                 }
@@ -41231,7 +41121,7 @@ namespace SRFROWCA
                 {
                     OnAdmin1Changing(value);
                     ReportPropertyChanging("Admin1");
-                    _Admin1 = StructuralObject.SetValidValue(value, false);
+                    _Admin1 = StructuralObject.SetValidValue(value, false, "Admin1");
                     ReportPropertyChanged("Admin1");
                     OnAdmin1Changed();
                 }
@@ -41256,7 +41146,7 @@ namespace SRFROWCA
             {
                 OnAdmin1PCodeChanging(value);
                 ReportPropertyChanging("Admin1PCode");
-                _Admin1PCode = StructuralObject.SetValidValue(value, true);
+                _Admin1PCode = StructuralObject.SetValidValue(value, true, "Admin1PCode");
                 ReportPropertyChanged("Admin1PCode");
                 OnAdmin1PCodeChanged();
             }
@@ -41282,7 +41172,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -41309,7 +41199,7 @@ namespace SRFROWCA
                 {
                     OnReportedMonthChanging(value);
                     ReportPropertyChanging("ReportedMonth");
-                    _ReportedMonth = StructuralObject.SetValidValue(value, false);
+                    _ReportedMonth = StructuralObject.SetValidValue(value, false, "ReportedMonth");
                     ReportPropertyChanged("ReportedMonth");
                     OnReportedMonthChanged();
                 }
@@ -41336,7 +41226,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationChanging(value);
                     ReportPropertyChanging("Organization");
-                    _Organization = StructuralObject.SetValidValue(value, false);
+                    _Organization = StructuralObject.SetValidValue(value, false, "Organization");
                     ReportPropertyChanged("Organization");
                     OnOrganizationChanged();
                 }
@@ -41363,7 +41253,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationIdChanging(value);
                     ReportPropertyChanging("OrganizationId");
-                    _OrganizationId = StructuralObject.SetValidValue(value);
+                    _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                     ReportPropertyChanged("OrganizationId");
                     OnOrganizationIdChanged();
                 }
@@ -41388,7 +41278,7 @@ namespace SRFROWCA
             {
                 OnNumber_OrgChanging(value);
                 ReportPropertyChanging("Number_Org");
-                _Number_Org = StructuralObject.SetValidValue(value);
+                _Number_Org = StructuralObject.SetValidValue(value, "Number_Org");
                 ReportPropertyChanged("Number_Org");
                 OnNumber_OrgChanged();
             }
@@ -41399,7 +41289,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -41435,7 +41324,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -41454,7 +41343,7 @@ namespace SRFROWCA
                 {
                     OnCountryChanging(value);
                     ReportPropertyChanging("Country");
-                    _Country = StructuralObject.SetValidValue(value, false);
+                    _Country = StructuralObject.SetValidValue(value, false, "Country");
                     ReportPropertyChanged("Country");
                     OnCountryChanged();
                 }
@@ -41481,7 +41370,7 @@ namespace SRFROWCA
                 {
                     OnAdmin1Changing(value);
                     ReportPropertyChanging("Admin1");
-                    _Admin1 = StructuralObject.SetValidValue(value, false);
+                    _Admin1 = StructuralObject.SetValidValue(value, false, "Admin1");
                     ReportPropertyChanged("Admin1");
                     OnAdmin1Changed();
                 }
@@ -41506,7 +41395,7 @@ namespace SRFROWCA
             {
                 OnAdmin1PCodeChanging(value);
                 ReportPropertyChanging("Admin1PCode");
-                _Admin1PCode = StructuralObject.SetValidValue(value, true);
+                _Admin1PCode = StructuralObject.SetValidValue(value, true, "Admin1PCode");
                 ReportPropertyChanged("Admin1PCode");
                 OnAdmin1PCodeChanged();
             }
@@ -41532,7 +41421,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -41559,7 +41448,7 @@ namespace SRFROWCA
                 {
                     OnReportedMonthChanging(value);
                     ReportPropertyChanging("ReportedMonth");
-                    _ReportedMonth = StructuralObject.SetValidValue(value, false);
+                    _ReportedMonth = StructuralObject.SetValidValue(value, false, "ReportedMonth");
                     ReportPropertyChanged("ReportedMonth");
                     OnReportedMonthChanged();
                 }
@@ -41586,7 +41475,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationChanging(value);
                     ReportPropertyChanging("Organization");
-                    _Organization = StructuralObject.SetValidValue(value, false);
+                    _Organization = StructuralObject.SetValidValue(value, false, "Organization");
                     ReportPropertyChanged("Organization");
                     OnOrganizationChanged();
                 }
@@ -41613,7 +41502,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationIdChanging(value);
                     ReportPropertyChanging("OrganizationId");
-                    _OrganizationId = StructuralObject.SetValidValue(value);
+                    _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                     ReportPropertyChanged("OrganizationId");
                     OnOrganizationIdChanged();
                 }
@@ -41638,7 +41527,7 @@ namespace SRFROWCA
             {
                 OnNumber_OrgChanging(value);
                 ReportPropertyChanging("Number_Org");
-                _Number_Org = StructuralObject.SetValidValue(value);
+                _Number_Org = StructuralObject.SetValidValue(value, "Number_Org");
                 ReportPropertyChanged("Number_Org");
                 OnNumber_OrgChanged();
             }
@@ -41649,7 +41538,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -41675,7 +41563,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -41694,7 +41582,7 @@ namespace SRFROWCA
                 {
                     OnLocationNameChanging(value);
                     ReportPropertyChanging("LocationName");
-                    _LocationName = StructuralObject.SetValidValue(value, false);
+                    _LocationName = StructuralObject.SetValidValue(value, false, "LocationName");
                     ReportPropertyChanged("LocationName");
                     OnLocationNameChanged();
                 }
@@ -41719,7 +41607,7 @@ namespace SRFROWCA
             {
                 OnNumberOfProjectsChanging(value);
                 ReportPropertyChanging("NumberOfProjects");
-                _NumberOfProjects = StructuralObject.SetValidValue(value);
+                _NumberOfProjects = StructuralObject.SetValidValue(value, "NumberOfProjects");
                 ReportPropertyChanged("NumberOfProjects");
                 OnNumberOfProjectsChanged();
             }
@@ -41730,7 +41618,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -41772,7 +41659,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -41791,7 +41678,7 @@ namespace SRFROWCA
                 {
                     OnProjectIdChanging(value);
                     ReportPropertyChanging("ProjectId");
-                    _ProjectId = StructuralObject.SetValidValue(value);
+                    _ProjectId = StructuralObject.SetValidValue(value, "ProjectId");
                     ReportPropertyChanged("ProjectId");
                     OnProjectIdChanged();
                 }
@@ -41818,7 +41705,7 @@ namespace SRFROWCA
                 {
                     OnProjectCodeChanging(value);
                     ReportPropertyChanging("ProjectCode");
-                    _ProjectCode = StructuralObject.SetValidValue(value, false);
+                    _ProjectCode = StructuralObject.SetValidValue(value, false, "ProjectCode");
                     ReportPropertyChanged("ProjectCode");
                     OnProjectCodeChanged();
                 }
@@ -41845,7 +41732,7 @@ namespace SRFROWCA
                 {
                     OnProjectTitleChanging(value);
                     ReportPropertyChanging("ProjectTitle");
-                    _ProjectTitle = StructuralObject.SetValidValue(value, false);
+                    _ProjectTitle = StructuralObject.SetValidValue(value, false, "ProjectTitle");
                     ReportPropertyChanged("ProjectTitle");
                     OnProjectTitleChanged();
                 }
@@ -41872,7 +41759,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationIdChanging(value);
                     ReportPropertyChanging("OrganizationId");
-                    _OrganizationId = StructuralObject.SetValidValue(value);
+                    _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                     ReportPropertyChanged("OrganizationId");
                     OnOrganizationIdChanged();
                 }
@@ -41899,7 +41786,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationNameChanging(value);
                     ReportPropertyChanging("OrganizationName");
-                    _OrganizationName = StructuralObject.SetValidValue(value, false);
+                    _OrganizationName = StructuralObject.SetValidValue(value, false, "OrganizationName");
                     ReportPropertyChanged("OrganizationName");
                     OnOrganizationNameChanged();
                 }
@@ -41926,7 +41813,7 @@ namespace SRFROWCA
                 {
                     OnClusterIdChanging(value);
                     ReportPropertyChanging("ClusterId");
-                    _ClusterId = StructuralObject.SetValidValue(value);
+                    _ClusterId = StructuralObject.SetValidValue(value, "ClusterId");
                     ReportPropertyChanged("ClusterId");
                     OnClusterIdChanged();
                 }
@@ -41953,7 +41840,7 @@ namespace SRFROWCA
                 {
                     OnClusterNameChanging(value);
                     ReportPropertyChanging("ClusterName");
-                    _ClusterName = StructuralObject.SetValidValue(value, false);
+                    _ClusterName = StructuralObject.SetValidValue(value, false, "ClusterName");
                     ReportPropertyChanged("ClusterName");
                     OnClusterNameChanged();
                 }
@@ -41980,7 +41867,7 @@ namespace SRFROWCA
                 {
                     OnLocationIdChanging(value);
                     ReportPropertyChanging("LocationId");
-                    _LocationId = StructuralObject.SetValidValue(value);
+                    _LocationId = StructuralObject.SetValidValue(value, "LocationId");
                     ReportPropertyChanged("LocationId");
                     OnLocationIdChanged();
                 }
@@ -42007,7 +41894,7 @@ namespace SRFROWCA
                 {
                     OnLocationNameChanging(value);
                     ReportPropertyChanging("LocationName");
-                    _LocationName = StructuralObject.SetValidValue(value, false);
+                    _LocationName = StructuralObject.SetValidValue(value, false, "LocationName");
                     ReportPropertyChanged("LocationName");
                     OnLocationNameChanged();
                 }
@@ -42032,7 +41919,7 @@ namespace SRFROWCA
             {
                 OnCurrentRequestAmountChanging(value);
                 ReportPropertyChanging("CurrentRequestAmount");
-                _CurrentRequestAmount = StructuralObject.SetValidValue(value);
+                _CurrentRequestAmount = StructuralObject.SetValidValue(value, "CurrentRequestAmount");
                 ReportPropertyChanged("CurrentRequestAmount");
                 OnCurrentRequestAmountChanged();
             }
@@ -42056,7 +41943,7 @@ namespace SRFROWCA
             {
                 OnContributionsChanging(value);
                 ReportPropertyChanging("Contributions");
-                _Contributions = StructuralObject.SetValidValue(value);
+                _Contributions = StructuralObject.SetValidValue(value, "Contributions");
                 ReportPropertyChanged("Contributions");
                 OnContributionsChanged();
             }
@@ -42067,7 +41954,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -42105,7 +41991,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -42124,7 +42010,7 @@ namespace SRFROWCA
                 {
                     OnProjectIdChanging(value);
                     ReportPropertyChanging("ProjectId");
-                    _ProjectId = StructuralObject.SetValidValue(value);
+                    _ProjectId = StructuralObject.SetValidValue(value, "ProjectId");
                     ReportPropertyChanged("ProjectId");
                     OnProjectIdChanged();
                 }
@@ -42151,7 +42037,7 @@ namespace SRFROWCA
                 {
                     OnObjectiveIdChanging(value);
                     ReportPropertyChanging("ObjectiveId");
-                    _ObjectiveId = StructuralObject.SetValidValue(value);
+                    _ObjectiveId = StructuralObject.SetValidValue(value, "ObjectiveId");
                     ReportPropertyChanged("ObjectiveId");
                     OnObjectiveIdChanged();
                 }
@@ -42176,7 +42062,7 @@ namespace SRFROWCA
             {
                 OnObjectiveChanging(value);
                 ReportPropertyChanging("Objective");
-                _Objective = StructuralObject.SetValidValue(value, true);
+                _Objective = StructuralObject.SetValidValue(value, true, "Objective");
                 ReportPropertyChanged("Objective");
                 OnObjectiveChanged();
             }
@@ -42202,7 +42088,7 @@ namespace SRFROWCA
                 {
                     OnPriorityIdChanging(value);
                     ReportPropertyChanging("PriorityId");
-                    _PriorityId = StructuralObject.SetValidValue(value);
+                    _PriorityId = StructuralObject.SetValidValue(value, "PriorityId");
                     ReportPropertyChanged("PriorityId");
                     OnPriorityIdChanged();
                 }
@@ -42227,7 +42113,7 @@ namespace SRFROWCA
             {
                 OnPriorityChanging(value);
                 ReportPropertyChanging("Priority");
-                _Priority = StructuralObject.SetValidValue(value, true);
+                _Priority = StructuralObject.SetValidValue(value, true, "Priority");
                 ReportPropertyChanged("Priority");
                 OnPriorityChanged();
             }
@@ -42253,7 +42139,7 @@ namespace SRFROWCA
                 {
                     OnActivityIdChanging(value);
                     ReportPropertyChanging("ActivityId");
-                    _ActivityId = StructuralObject.SetValidValue(value);
+                    _ActivityId = StructuralObject.SetValidValue(value, "ActivityId");
                     ReportPropertyChanged("ActivityId");
                     OnActivityIdChanged();
                 }
@@ -42280,7 +42166,7 @@ namespace SRFROWCA
                 {
                     OnActivityChanging(value);
                     ReportPropertyChanging("Activity");
-                    _Activity = StructuralObject.SetValidValue(value, false);
+                    _Activity = StructuralObject.SetValidValue(value, false, "Activity");
                     ReportPropertyChanged("Activity");
                     OnActivityChanged();
                 }
@@ -42307,7 +42193,7 @@ namespace SRFROWCA
                 {
                     OnIndicatorIdChanging(value);
                     ReportPropertyChanging("IndicatorId");
-                    _IndicatorId = StructuralObject.SetValidValue(value);
+                    _IndicatorId = StructuralObject.SetValidValue(value, "IndicatorId");
                     ReportPropertyChanged("IndicatorId");
                     OnIndicatorIdChanged();
                 }
@@ -42334,7 +42220,7 @@ namespace SRFROWCA
                 {
                     OnIndicatorChanging(value);
                     ReportPropertyChanging("Indicator");
-                    _Indicator = StructuralObject.SetValidValue(value, false);
+                    _Indicator = StructuralObject.SetValidValue(value, false, "Indicator");
                     ReportPropertyChanged("Indicator");
                     OnIndicatorChanged();
                 }
@@ -42346,7 +42232,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -42394,7 +42279,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -42413,7 +42298,7 @@ namespace SRFROWCA
                 {
                     OnProjectIdChanging(value);
                     ReportPropertyChanging("ProjectId");
-                    _ProjectId = StructuralObject.SetValidValue(value);
+                    _ProjectId = StructuralObject.SetValidValue(value, "ProjectId");
                     ReportPropertyChanged("ProjectId");
                     OnProjectIdChanged();
                 }
@@ -42440,7 +42325,7 @@ namespace SRFROWCA
                 {
                     OnProjectCodeChanging(value);
                     ReportPropertyChanging("ProjectCode");
-                    _ProjectCode = StructuralObject.SetValidValue(value, false);
+                    _ProjectCode = StructuralObject.SetValidValue(value, false, "ProjectCode");
                     ReportPropertyChanged("ProjectCode");
                     OnProjectCodeChanged();
                 }
@@ -42467,7 +42352,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationIdChanging(value);
                     ReportPropertyChanging("OrganizationId");
-                    _OrganizationId = StructuralObject.SetValidValue(value);
+                    _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                     ReportPropertyChanged("OrganizationId");
                     OnOrganizationIdChanged();
                 }
@@ -42494,7 +42379,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationChanging(value);
                     ReportPropertyChanging("Organization");
-                    _Organization = StructuralObject.SetValidValue(value, false);
+                    _Organization = StructuralObject.SetValidValue(value, false, "Organization");
                     ReportPropertyChanged("Organization");
                     OnOrganizationChanged();
                 }
@@ -42521,7 +42406,7 @@ namespace SRFROWCA
                 {
                     OnCountryChanging(value);
                     ReportPropertyChanging("Country");
-                    _Country = StructuralObject.SetValidValue(value, false);
+                    _Country = StructuralObject.SetValidValue(value, false, "Country");
                     ReportPropertyChanged("Country");
                     OnCountryChanged();
                 }
@@ -42548,7 +42433,7 @@ namespace SRFROWCA
                 {
                     OnClusterIdChanging(value);
                     ReportPropertyChanging("ClusterId");
-                    _ClusterId = StructuralObject.SetValidValue(value);
+                    _ClusterId = StructuralObject.SetValidValue(value, "ClusterId");
                     ReportPropertyChanged("ClusterId");
                     OnClusterIdChanged();
                 }
@@ -42575,7 +42460,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -42600,7 +42485,7 @@ namespace SRFROWCA
             {
                 OnObjectiveChanging(value);
                 ReportPropertyChanging("Objective");
-                _Objective = StructuralObject.SetValidValue(value, true);
+                _Objective = StructuralObject.SetValidValue(value, true, "Objective");
                 ReportPropertyChanged("Objective");
                 OnObjectiveChanged();
             }
@@ -42624,7 +42509,7 @@ namespace SRFROWCA
             {
                 OnPriorityChanging(value);
                 ReportPropertyChanging("Priority");
-                _Priority = StructuralObject.SetValidValue(value, true);
+                _Priority = StructuralObject.SetValidValue(value, true, "Priority");
                 ReportPropertyChanged("Priority");
                 OnPriorityChanged();
             }
@@ -42650,7 +42535,7 @@ namespace SRFROWCA
                 {
                     OnActivityIdChanging(value);
                     ReportPropertyChanging("ActivityId");
-                    _ActivityId = StructuralObject.SetValidValue(value);
+                    _ActivityId = StructuralObject.SetValidValue(value, "ActivityId");
                     ReportPropertyChanged("ActivityId");
                     OnActivityIdChanged();
                 }
@@ -42677,7 +42562,7 @@ namespace SRFROWCA
                 {
                     OnActivityChanging(value);
                     ReportPropertyChanging("Activity");
-                    _Activity = StructuralObject.SetValidValue(value, false);
+                    _Activity = StructuralObject.SetValidValue(value, false, "Activity");
                     ReportPropertyChanged("Activity");
                     OnActivityChanged();
                 }
@@ -42704,7 +42589,7 @@ namespace SRFROWCA
                 {
                     OnIndicatorIdChanging(value);
                     ReportPropertyChanging("IndicatorId");
-                    _IndicatorId = StructuralObject.SetValidValue(value);
+                    _IndicatorId = StructuralObject.SetValidValue(value, "IndicatorId");
                     ReportPropertyChanged("IndicatorId");
                     OnIndicatorIdChanged();
                 }
@@ -42731,7 +42616,7 @@ namespace SRFROWCA
                 {
                     OnIndicatorChanging(value);
                     ReportPropertyChanging("Indicator");
-                    _Indicator = StructuralObject.SetValidValue(value, false);
+                    _Indicator = StructuralObject.SetValidValue(value, false, "Indicator");
                     ReportPropertyChanged("Indicator");
                     OnIndicatorChanged();
                 }
@@ -42758,7 +42643,7 @@ namespace SRFROWCA
                 {
                     OnAdmin1Changing(value);
                     ReportPropertyChanging("Admin1");
-                    _Admin1 = StructuralObject.SetValidValue(value, false);
+                    _Admin1 = StructuralObject.SetValidValue(value, false, "Admin1");
                     ReportPropertyChanged("Admin1");
                     OnAdmin1Changed();
                 }
@@ -42770,7 +42655,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -42818,7 +42702,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -42837,7 +42721,7 @@ namespace SRFROWCA
                 {
                     OnProjectIdChanging(value);
                     ReportPropertyChanging("ProjectId");
-                    _ProjectId = StructuralObject.SetValidValue(value);
+                    _ProjectId = StructuralObject.SetValidValue(value, "ProjectId");
                     ReportPropertyChanged("ProjectId");
                     OnProjectIdChanged();
                 }
@@ -42864,7 +42748,7 @@ namespace SRFROWCA
                 {
                     OnProjectCodeChanging(value);
                     ReportPropertyChanging("ProjectCode");
-                    _ProjectCode = StructuralObject.SetValidValue(value, false);
+                    _ProjectCode = StructuralObject.SetValidValue(value, false, "ProjectCode");
                     ReportPropertyChanged("ProjectCode");
                     OnProjectCodeChanged();
                 }
@@ -42891,7 +42775,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationIdChanging(value);
                     ReportPropertyChanging("OrganizationId");
-                    _OrganizationId = StructuralObject.SetValidValue(value);
+                    _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
                     ReportPropertyChanged("OrganizationId");
                     OnOrganizationIdChanged();
                 }
@@ -42918,7 +42802,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationChanging(value);
                     ReportPropertyChanging("Organization");
-                    _Organization = StructuralObject.SetValidValue(value, false);
+                    _Organization = StructuralObject.SetValidValue(value, false, "Organization");
                     ReportPropertyChanged("Organization");
                     OnOrganizationChanged();
                 }
@@ -42945,7 +42829,7 @@ namespace SRFROWCA
                 {
                     OnCountryChanging(value);
                     ReportPropertyChanging("Country");
-                    _Country = StructuralObject.SetValidValue(value, false);
+                    _Country = StructuralObject.SetValidValue(value, false, "Country");
                     ReportPropertyChanged("Country");
                     OnCountryChanged();
                 }
@@ -42972,7 +42856,7 @@ namespace SRFROWCA
                 {
                     OnClusterIdChanging(value);
                     ReportPropertyChanging("ClusterId");
-                    _ClusterId = StructuralObject.SetValidValue(value);
+                    _ClusterId = StructuralObject.SetValidValue(value, "ClusterId");
                     ReportPropertyChanged("ClusterId");
                     OnClusterIdChanged();
                 }
@@ -42999,7 +42883,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -43024,7 +42908,7 @@ namespace SRFROWCA
             {
                 OnObjectiveChanging(value);
                 ReportPropertyChanging("Objective");
-                _Objective = StructuralObject.SetValidValue(value, true);
+                _Objective = StructuralObject.SetValidValue(value, true, "Objective");
                 ReportPropertyChanged("Objective");
                 OnObjectiveChanged();
             }
@@ -43048,7 +42932,7 @@ namespace SRFROWCA
             {
                 OnPriorityChanging(value);
                 ReportPropertyChanging("Priority");
-                _Priority = StructuralObject.SetValidValue(value, true);
+                _Priority = StructuralObject.SetValidValue(value, true, "Priority");
                 ReportPropertyChanged("Priority");
                 OnPriorityChanged();
             }
@@ -43074,7 +42958,7 @@ namespace SRFROWCA
                 {
                     OnActivityIdChanging(value);
                     ReportPropertyChanging("ActivityId");
-                    _ActivityId = StructuralObject.SetValidValue(value);
+                    _ActivityId = StructuralObject.SetValidValue(value, "ActivityId");
                     ReportPropertyChanged("ActivityId");
                     OnActivityIdChanged();
                 }
@@ -43101,7 +42985,7 @@ namespace SRFROWCA
                 {
                     OnActivityChanging(value);
                     ReportPropertyChanging("Activity");
-                    _Activity = StructuralObject.SetValidValue(value, false);
+                    _Activity = StructuralObject.SetValidValue(value, false, "Activity");
                     ReportPropertyChanged("Activity");
                     OnActivityChanged();
                 }
@@ -43128,7 +43012,7 @@ namespace SRFROWCA
                 {
                     OnIndicatorIdChanging(value);
                     ReportPropertyChanging("IndicatorId");
-                    _IndicatorId = StructuralObject.SetValidValue(value);
+                    _IndicatorId = StructuralObject.SetValidValue(value, "IndicatorId");
                     ReportPropertyChanged("IndicatorId");
                     OnIndicatorIdChanged();
                 }
@@ -43155,7 +43039,7 @@ namespace SRFROWCA
                 {
                     OnIndicatorChanging(value);
                     ReportPropertyChanging("Indicator");
-                    _Indicator = StructuralObject.SetValidValue(value, false);
+                    _Indicator = StructuralObject.SetValidValue(value, false, "Indicator");
                     ReportPropertyChanged("Indicator");
                     OnIndicatorChanged();
                 }
@@ -43182,7 +43066,7 @@ namespace SRFROWCA
                 {
                     OnAdmin1Changing(value);
                     ReportPropertyChanging("Admin1");
-                    _Admin1 = StructuralObject.SetValidValue(value, false);
+                    _Admin1 = StructuralObject.SetValidValue(value, false, "Admin1");
                     ReportPropertyChanged("Admin1");
                     OnAdmin1Changed();
                 }
@@ -43194,7 +43078,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -43226,7 +43109,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -43245,7 +43128,7 @@ namespace SRFROWCA
                 {
                     OnProjectIdChanging(value);
                     ReportPropertyChanging("ProjectId");
-                    _ProjectId = StructuralObject.SetValidValue(value);
+                    _ProjectId = StructuralObject.SetValidValue(value, "ProjectId");
                     ReportPropertyChanged("ProjectId");
                     OnProjectIdChanged();
                 }
@@ -43272,7 +43155,7 @@ namespace SRFROWCA
                 {
                     OnIndicatorIdChanging(value);
                     ReportPropertyChanging("IndicatorId");
-                    _IndicatorId = StructuralObject.SetValidValue(value);
+                    _IndicatorId = StructuralObject.SetValidValue(value, "IndicatorId");
                     ReportPropertyChanged("IndicatorId");
                     OnIndicatorIdChanged();
                 }
@@ -43299,7 +43182,7 @@ namespace SRFROWCA
                 {
                     OnCountryIdChanging(value);
                     ReportPropertyChanging("CountryId");
-                    _CountryId = StructuralObject.SetValidValue(value);
+                    _CountryId = StructuralObject.SetValidValue(value, "CountryId");
                     ReportPropertyChanged("CountryId");
                     OnCountryIdChanged();
                 }
@@ -43326,7 +43209,7 @@ namespace SRFROWCA
                 {
                     OnCountryChanging(value);
                     ReportPropertyChanging("Country");
-                    _Country = StructuralObject.SetValidValue(value, false);
+                    _Country = StructuralObject.SetValidValue(value, false, "Country");
                     ReportPropertyChanged("Country");
                     OnCountryChanged();
                 }
@@ -43351,7 +43234,7 @@ namespace SRFROWCA
             {
                 OnAdmin1IdChanging(value);
                 ReportPropertyChanging("Admin1Id");
-                _Admin1Id = StructuralObject.SetValidValue(value);
+                _Admin1Id = StructuralObject.SetValidValue(value, "Admin1Id");
                 ReportPropertyChanged("Admin1Id");
                 OnAdmin1IdChanged();
             }
@@ -43375,7 +43258,7 @@ namespace SRFROWCA
             {
                 OnAdmin1Changing(value);
                 ReportPropertyChanging("Admin1");
-                _Admin1 = StructuralObject.SetValidValue(value, true);
+                _Admin1 = StructuralObject.SetValidValue(value, true, "Admin1");
                 ReportPropertyChanged("Admin1");
                 OnAdmin1Changed();
             }
@@ -43399,7 +43282,7 @@ namespace SRFROWCA
             {
                 OnYearlyTargetChanging(value);
                 ReportPropertyChanging("YearlyTarget");
-                _YearlyTarget = StructuralObject.SetValidValue(value);
+                _YearlyTarget = StructuralObject.SetValidValue(value, "YearlyTarget");
                 ReportPropertyChanged("YearlyTarget");
                 OnYearlyTargetChanged();
             }
@@ -43410,7 +43293,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -43448,7 +43330,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -43467,7 +43349,7 @@ namespace SRFROWCA
                 {
                     OnCountryChanging(value);
                     ReportPropertyChanging("Country");
-                    _Country = StructuralObject.SetValidValue(value, false);
+                    _Country = StructuralObject.SetValidValue(value, false, "Country");
                     ReportPropertyChanged("Country");
                     OnCountryChanged();
                 }
@@ -43494,7 +43376,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationChanging(value);
                     ReportPropertyChanging("Organization");
-                    _Organization = StructuralObject.SetValidValue(value, false);
+                    _Organization = StructuralObject.SetValidValue(value, false, "Organization");
                     ReportPropertyChanged("Organization");
                     OnOrganizationChanged();
                 }
@@ -43521,7 +43403,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -43548,7 +43430,7 @@ namespace SRFROWCA
                 {
                     OnProjectIdChanging(value);
                     ReportPropertyChanging("ProjectId");
-                    _ProjectId = StructuralObject.SetValidValue(value);
+                    _ProjectId = StructuralObject.SetValidValue(value, "ProjectId");
                     ReportPropertyChanged("ProjectId");
                     OnProjectIdChanged();
                 }
@@ -43573,7 +43455,7 @@ namespace SRFROWCA
             {
                 OnProjectCodeChanging(value);
                 ReportPropertyChanging("ProjectCode");
-                _ProjectCode = StructuralObject.SetValidValue(value, true);
+                _ProjectCode = StructuralObject.SetValidValue(value, true, "ProjectCode");
                 ReportPropertyChanged("ProjectCode");
                 OnProjectCodeChanged();
             }
@@ -43599,7 +43481,7 @@ namespace SRFROWCA
                 {
                     OnProjectTitleChanging(value);
                     ReportPropertyChanging("ProjectTitle");
-                    _ProjectTitle = StructuralObject.SetValidValue(value, false);
+                    _ProjectTitle = StructuralObject.SetValidValue(value, false, "ProjectTitle");
                     ReportPropertyChanged("ProjectTitle");
                     OnProjectTitleChanged();
                 }
@@ -43624,7 +43506,7 @@ namespace SRFROWCA
             {
                 OnCurrentRequestAmountChanging(value);
                 ReportPropertyChanging("CurrentRequestAmount");
-                _CurrentRequestAmount = StructuralObject.SetValidValue(value);
+                _CurrentRequestAmount = StructuralObject.SetValidValue(value, "CurrentRequestAmount");
                 ReportPropertyChanged("CurrentRequestAmount");
                 OnCurrentRequestAmountChanged();
             }
@@ -43650,7 +43532,7 @@ namespace SRFROWCA
                 {
                     OnFundedChanging(value);
                     ReportPropertyChanging("Funded");
-                    _Funded = StructuralObject.SetValidValue(value, false);
+                    _Funded = StructuralObject.SetValidValue(value, false, "Funded");
                     ReportPropertyChanged("Funded");
                     OnFundedChanged();
                 }
@@ -43677,7 +43559,7 @@ namespace SRFROWCA
                 {
                     OnReportingChanging(value);
                     ReportPropertyChanging("Reporting");
-                    _Reporting = StructuralObject.SetValidValue(value, false);
+                    _Reporting = StructuralObject.SetValidValue(value, false, "Reporting");
                     ReportPropertyChanged("Reporting");
                     OnReportingChanged();
                 }
@@ -43689,7 +43571,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -43725,7 +43606,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -43744,7 +43625,7 @@ namespace SRFROWCA
                 {
                     OnCountryChanging(value);
                     ReportPropertyChanging("Country");
-                    _Country = StructuralObject.SetValidValue(value, false);
+                    _Country = StructuralObject.SetValidValue(value, false, "Country");
                     ReportPropertyChanged("Country");
                     OnCountryChanged();
                 }
@@ -43771,7 +43652,7 @@ namespace SRFROWCA
                 {
                     OnOrganizationChanging(value);
                     ReportPropertyChanging("Organization");
-                    _Organization = StructuralObject.SetValidValue(value, false);
+                    _Organization = StructuralObject.SetValidValue(value, false, "Organization");
                     ReportPropertyChanged("Organization");
                     OnOrganizationChanged();
                 }
@@ -43798,7 +43679,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -43825,7 +43706,7 @@ namespace SRFROWCA
                 {
                     OnProjectIdChanging(value);
                     ReportPropertyChanging("ProjectId");
-                    _ProjectId = StructuralObject.SetValidValue(value);
+                    _ProjectId = StructuralObject.SetValidValue(value, "ProjectId");
                     ReportPropertyChanged("ProjectId");
                     OnProjectIdChanged();
                 }
@@ -43850,7 +43731,7 @@ namespace SRFROWCA
             {
                 OnProjectCodeChanging(value);
                 ReportPropertyChanging("ProjectCode");
-                _ProjectCode = StructuralObject.SetValidValue(value, true);
+                _ProjectCode = StructuralObject.SetValidValue(value, true, "ProjectCode");
                 ReportPropertyChanged("ProjectCode");
                 OnProjectCodeChanged();
             }
@@ -43876,7 +43757,7 @@ namespace SRFROWCA
                 {
                     OnProjectTitleChanging(value);
                     ReportPropertyChanging("ProjectTitle");
-                    _ProjectTitle = StructuralObject.SetValidValue(value, false);
+                    _ProjectTitle = StructuralObject.SetValidValue(value, false, "ProjectTitle");
                     ReportPropertyChanged("ProjectTitle");
                     OnProjectTitleChanged();
                 }
@@ -43901,7 +43782,7 @@ namespace SRFROWCA
             {
                 OnCurrentRequestAmountChanging(value);
                 ReportPropertyChanging("CurrentRequestAmount");
-                _CurrentRequestAmount = StructuralObject.SetValidValue(value);
+                _CurrentRequestAmount = StructuralObject.SetValidValue(value, "CurrentRequestAmount");
                 ReportPropertyChanged("CurrentRequestAmount");
                 OnCurrentRequestAmountChanged();
             }
@@ -43927,7 +43808,7 @@ namespace SRFROWCA
                 {
                     OnFundedChanging(value);
                     ReportPropertyChanging("Funded");
-                    _Funded = StructuralObject.SetValidValue(value, false);
+                    _Funded = StructuralObject.SetValidValue(value, false, "Funded");
                     ReportPropertyChanged("Funded");
                     OnFundedChanged();
                 }
@@ -43939,7 +43820,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -43971,7 +43851,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -43990,7 +43870,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -44015,7 +43895,7 @@ namespace SRFROWCA
             {
                 OnObjectiveChanging(value);
                 ReportPropertyChanging("Objective");
-                _Objective = StructuralObject.SetValidValue(value, true);
+                _Objective = StructuralObject.SetValidValue(value, true, "Objective");
                 ReportPropertyChanged("Objective");
                 OnObjectiveChanged();
             }
@@ -44039,7 +43919,7 @@ namespace SRFROWCA
             {
                 OnPriorityChanging(value);
                 ReportPropertyChanging("Priority");
-                _Priority = StructuralObject.SetValidValue(value, true);
+                _Priority = StructuralObject.SetValidValue(value, true, "Priority");
                 ReportPropertyChanged("Priority");
                 OnPriorityChanged();
             }
@@ -44065,7 +43945,7 @@ namespace SRFROWCA
                 {
                     OnActivityChanging(value);
                     ReportPropertyChanging("Activity");
-                    _Activity = StructuralObject.SetValidValue(value, false);
+                    _Activity = StructuralObject.SetValidValue(value, false, "Activity");
                     ReportPropertyChanged("Activity");
                     OnActivityChanged();
                 }
@@ -44092,7 +43972,7 @@ namespace SRFROWCA
                 {
                     OnIndicatorChanging(value);
                     ReportPropertyChanging("Indicator");
-                    _Indicator = StructuralObject.SetValidValue(value, false);
+                    _Indicator = StructuralObject.SetValidValue(value, false, "Indicator");
                     ReportPropertyChanged("Indicator");
                     OnIndicatorChanged();
                 }
@@ -44119,7 +43999,7 @@ namespace SRFROWCA
                 {
                     OnRegional_IndicatorChanging(value);
                     ReportPropertyChanging("Regional_Indicator");
-                    _Regional_Indicator = StructuralObject.SetValidValue(value, false);
+                    _Regional_Indicator = StructuralObject.SetValidValue(value, false, "Regional_Indicator");
                     ReportPropertyChanged("Regional_Indicator");
                     OnRegional_IndicatorChanged();
                 }
@@ -44131,7 +44011,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -44167,7 +44046,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -44186,7 +44065,7 @@ namespace SRFROWCA
                 {
                     OnProjectCodeChanging(value);
                     ReportPropertyChanging("ProjectCode");
-                    _ProjectCode = StructuralObject.SetValidValue(value, false);
+                    _ProjectCode = StructuralObject.SetValidValue(value, false, "ProjectCode");
                     ReportPropertyChanged("ProjectCode");
                     OnProjectCodeChanged();
                 }
@@ -44213,7 +44092,7 @@ namespace SRFROWCA
                 {
                     OnProjectTitleChanging(value);
                     ReportPropertyChanging("ProjectTitle");
-                    _ProjectTitle = StructuralObject.SetValidValue(value, false);
+                    _ProjectTitle = StructuralObject.SetValidValue(value, false, "ProjectTitle");
                     ReportPropertyChanged("ProjectTitle");
                     OnProjectTitleChanged();
                 }
@@ -44240,7 +44119,7 @@ namespace SRFROWCA
                 {
                     OnClusterChanging(value);
                     ReportPropertyChanging("Cluster");
-                    _Cluster = StructuralObject.SetValidValue(value, false);
+                    _Cluster = StructuralObject.SetValidValue(value, false, "Cluster");
                     ReportPropertyChanged("Cluster");
                     OnClusterChanged();
                 }
@@ -44265,7 +44144,7 @@ namespace SRFROWCA
             {
                 OnObjectiveChanging(value);
                 ReportPropertyChanging("Objective");
-                _Objective = StructuralObject.SetValidValue(value, true);
+                _Objective = StructuralObject.SetValidValue(value, true, "Objective");
                 ReportPropertyChanged("Objective");
                 OnObjectiveChanged();
             }
@@ -44289,7 +44168,7 @@ namespace SRFROWCA
             {
                 OnPriorityChanging(value);
                 ReportPropertyChanging("Priority");
-                _Priority = StructuralObject.SetValidValue(value, true);
+                _Priority = StructuralObject.SetValidValue(value, true, "Priority");
                 ReportPropertyChanged("Priority");
                 OnPriorityChanged();
             }
@@ -44315,7 +44194,7 @@ namespace SRFROWCA
                 {
                     OnActivityChanging(value);
                     ReportPropertyChanging("Activity");
-                    _Activity = StructuralObject.SetValidValue(value, false);
+                    _Activity = StructuralObject.SetValidValue(value, false, "Activity");
                     ReportPropertyChanged("Activity");
                     OnActivityChanged();
                 }
@@ -44342,7 +44221,7 @@ namespace SRFROWCA
                 {
                     OnIndicatorChanging(value);
                     ReportPropertyChanging("Indicator");
-                    _Indicator = StructuralObject.SetValidValue(value, false);
+                    _Indicator = StructuralObject.SetValidValue(value, false, "Indicator");
                     ReportPropertyChanged("Indicator");
                     OnIndicatorChanged();
                 }
@@ -44369,7 +44248,7 @@ namespace SRFROWCA
                 {
                     OnCountryChanging(value);
                     ReportPropertyChanging("Country");
-                    _Country = StructuralObject.SetValidValue(value, false);
+                    _Country = StructuralObject.SetValidValue(value, false, "Country");
                     ReportPropertyChanged("Country");
                     OnCountryChanged();
                 }
@@ -44394,7 +44273,7 @@ namespace SRFROWCA
             {
                 OnAdmin1Changing(value);
                 ReportPropertyChanging("Admin1");
-                _Admin1 = StructuralObject.SetValidValue(value, true);
+                _Admin1 = StructuralObject.SetValidValue(value, true, "Admin1");
                 ReportPropertyChanged("Admin1");
                 OnAdmin1Changed();
             }
@@ -44418,7 +44297,7 @@ namespace SRFROWCA
             {
                 OnMidYearChanging(value);
                 ReportPropertyChanging("MidYear");
-                _MidYear = StructuralObject.SetValidValue(value);
+                _MidYear = StructuralObject.SetValidValue(value, "MidYear");
                 ReportPropertyChanged("MidYear");
                 OnMidYearChanged();
             }
@@ -44442,7 +44321,7 @@ namespace SRFROWCA
             {
                 OnFullYearChanging(value);
                 ReportPropertyChanging("FullYear");
-                _FullYear = StructuralObject.SetValidValue(value);
+                _FullYear = StructuralObject.SetValidValue(value, "FullYear");
                 ReportPropertyChanged("FullYear");
                 OnFullYearChanged();
             }
@@ -44453,7 +44332,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -44485,7 +44363,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -44504,7 +44382,7 @@ namespace SRFROWCA
                 {
                     OnObjectiveChanging(value);
                     ReportPropertyChanging("Objective");
-                    _Objective = StructuralObject.SetValidValue(value, false);
+                    _Objective = StructuralObject.SetValidValue(value, false, "Objective");
                     ReportPropertyChanged("Objective");
                     OnObjectiveChanged();
                 }
@@ -44531,7 +44409,7 @@ namespace SRFROWCA
                 {
                     OnHumanitarianPriorityChanging(value);
                     ReportPropertyChanging("HumanitarianPriority");
-                    _HumanitarianPriority = StructuralObject.SetValidValue(value, false);
+                    _HumanitarianPriority = StructuralObject.SetValidValue(value, false, "HumanitarianPriority");
                     ReportPropertyChanged("HumanitarianPriority");
                     OnHumanitarianPriorityChanged();
                 }
@@ -44558,7 +44436,7 @@ namespace SRFROWCA
                 {
                     OnActivityNameChanging(value);
                     ReportPropertyChanging("ActivityName");
-                    _ActivityName = StructuralObject.SetValidValue(value, false);
+                    _ActivityName = StructuralObject.SetValidValue(value, false, "ActivityName");
                     ReportPropertyChanged("ActivityName");
                     OnActivityNameChanged();
                 }
@@ -44585,7 +44463,7 @@ namespace SRFROWCA
                 {
                     OnDataNameChanging(value);
                     ReportPropertyChanging("DataName");
-                    _DataName = StructuralObject.SetValidValue(value, false);
+                    _DataName = StructuralObject.SetValidValue(value, false, "DataName");
                     ReportPropertyChanged("DataName");
                     OnDataNameChanged();
                 }
@@ -44610,7 +44488,7 @@ namespace SRFROWCA
             {
                 OnLocationNameChanging(value);
                 ReportPropertyChanging("LocationName");
-                _LocationName = StructuralObject.SetValidValue(value, true);
+                _LocationName = StructuralObject.SetValidValue(value, true, "LocationName");
                 ReportPropertyChanged("LocationName");
                 OnLocationNameChanged();
             }
@@ -44634,7 +44512,7 @@ namespace SRFROWCA
             {
                 OnExpr1Changing(value);
                 ReportPropertyChanging("Expr1");
-                _Expr1 = StructuralObject.SetValidValue(value, true);
+                _Expr1 = StructuralObject.SetValidValue(value, true, "Expr1");
                 ReportPropertyChanged("Expr1");
                 OnExpr1Changed();
             }
@@ -44658,7 +44536,7 @@ namespace SRFROWCA
             {
                 OnTargetMid2014Changing(value);
                 ReportPropertyChanging("TargetMid2014");
-                _TargetMid2014 = StructuralObject.SetValidValue(value);
+                _TargetMid2014 = StructuralObject.SetValidValue(value, "TargetMid2014");
                 ReportPropertyChanged("TargetMid2014");
                 OnTargetMid2014Changed();
             }
@@ -44682,7 +44560,7 @@ namespace SRFROWCA
             {
                 OnTarget2014Changing(value);
                 ReportPropertyChanging("Target2014");
-                _Target2014 = StructuralObject.SetValidValue(value);
+                _Target2014 = StructuralObject.SetValidValue(value, "Target2014");
                 ReportPropertyChanged("Target2014");
                 OnTarget2014Changed();
             }
@@ -44693,7 +44571,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -44721,7 +44598,7 @@ namespace SRFROWCA
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -44740,7 +44617,7 @@ namespace SRFROWCA
                 {
                     OnYearIdChanging(value);
                     ReportPropertyChanging("YearId");
-                    _YearId = StructuralObject.SetValidValue(value);
+                    _YearId = StructuralObject.SetValidValue(value, "YearId");
                     ReportPropertyChanged("YearId");
                     OnYearIdChanged();
                 }
@@ -44765,7 +44642,7 @@ namespace SRFROWCA
             {
                 OnYear1Changing(value);
                 ReportPropertyChanging("Year1");
-                _Year1 = StructuralObject.SetValidValue(value);
+                _Year1 = StructuralObject.SetValidValue(value, "Year1");
                 ReportPropertyChanged("Year1");
                 OnYear1Changed();
             }
@@ -44776,7 +44653,6 @@ namespace SRFROWCA
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -44807,5 +44683,4 @@ namespace SRFROWCA
 
     #endregion
 
-    
 }

@@ -142,11 +142,11 @@
 
         <div class="tablegrid">
             <div style="overflow-x: auto; width: 100%">
-                <asp:GridView ID="gvActivity" runat="server" AutoGenerateColumns="false" AllowSorting="True" AllowPaging="true" PagerSettings-Mode="NumericFirstLast"
-                    Width="100%" PagerSettings-Position="Bottom"
-                    CssClass="table-striped table-bordered table-hover" OnPageIndexChanging="gvActivity_PageIndexChanging"
+                <asp:GridView ID="gvActivity" runat="server" AutoGenerateColumns="false" AllowSorting="True" AllowPaging="true" 
+                    Width="100%" PagerSettings-Position="Bottom" AllowCustomPaging="true"
+                    CssClass="imagetable" OnPageIndexChanging="gvActivity_PageIndexChanging"
                     PageSize="50" ShowHeaderWhenEmpty="true" EmptyDataText="Your filter criteria does not match any indicator!">
-
+                    <PagerSettings Mode="NumericFirstLast" />
                     <Columns>
                         <asp:TemplateField ItemStyle-Width="2%" HeaderText="#" meta:resourcekey="TemplateFieldResource1">
                             <ItemTemplate>

@@ -89,11 +89,17 @@ namespace SRFROWCA.KeyFigures
 
         private void LoadReportData()
         {
-            DateTime date = DateTime.MinValue;
-            if (Request.QueryString["d"] != null)
-            {
-                date = DateTime.ParseExact(Request.QueryString["d"].ToString(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
-            }
+            //DateTime date = DateTime.MinValue;
+            //if (Request.QueryString["d"] != null)
+            //{
+            //    date = DateTime.ParseExact(Request.QueryString["d"].ToString(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
+            //    try
+            //    {
+            //        date = DateTime.ParseExact(Request.QueryString["d"].ToString(), "MM/dd/yyyy", new CultureInfo("en-US"));
+            //    }
+            //    catch { }
+
+            //}
 
             int emgLocId = 0;
             if (Request.QueryString["l"] != null)
@@ -117,9 +123,17 @@ namespace SRFROWCA.KeyFigures
                     UpdateIsPopulationFlag(subCatId);
             }
 
-            if (date != DateTime.MinValue && emgLocId > 0 && catId > 0 && subCatId > 0)
+            string date = null;
+            if (Request.QueryString["d"] != null)
             {
-                txtFromDate.Text = date.ToString("MM/dd/yyyy");
+                if (!string.IsNullOrEmpty(Request.QueryString["d"].ToString()))
+                {
+                    date = Request.QueryString["d"].ToString();
+                }
+            }
+            if (date !=null && emgLocId > 0 && catId > 0 && subCatId > 0)
+            {
+                txtFromDate.Text = date;
                 ddlCountry.SelectedValue = emgLocId.ToString();
                 ddlCategory.SelectedValue = catId.ToString();
                 ddlSubCategory.SelectedValue = subCatId.ToString();
@@ -236,15 +250,33 @@ namespace SRFROWCA.KeyFigures
 
         private void LoadData()
         {
-            DateTime date = DateTime.MinValue;
+            //DateTime date = DateTime.MinValue;
+            //if (!string.IsNullOrEmpty(txtFromDate.Text.Trim()))
+            //{
+            //    date = DateTime.ParseExact(txtFromDate.Text.Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
+            //    if (Request.QueryString["u"] != null)
+            //    {
+            //        txtFromDate.Text = "";
+            //    }
+            //}
+
+            DateTime dateTime = DateTime.MinValue;
+            string date = null;
             if (!string.IsNullOrEmpty(txtFromDate.Text.Trim()))
             {
-                date = DateTime.ParseExact(txtFromDate.Text.Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                DateTime.TryParseExact(txtFromDate.Text.Trim(), "dd-MM-yyyy", CultureInfo.InvariantCulture, 
+                                                                            DateTimeStyles.None, out dateTime);
+                if (dateTime != DateTime.MinValue)
+                {
+                    date = dateTime.ToString("yyyyMMdd");
+                }
+
                 if (Request.QueryString["u"] != null)
                 {
                     txtFromDate.Text = "";
                 }
             }
+
             int subCatId = RC.GetSelectedIntVal(ddlSubCategory);
             int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
             DataTable dt = DBContext.GetData("GetKeyFigureReport", new object[] { date, emgLocationId, subCatId, RC.SelectedSiteLanguageId });
@@ -268,7 +300,7 @@ namespace SRFROWCA.KeyFigures
         {
             bool returnVal = true;
             DateTime date = txtFromDate.Text.Trim().Length > 0 ?
-                                DateTime.ParseExact(txtFromDate.Text.Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture) :
+                                DateTime.ParseExact(txtFromDate.Text.Trim(), "dd-MM-yyyy", CultureInfo.InvariantCulture) :
                                 DateTime.MinValue;
 
             int emgLocationId = RC.GetSelectedIntVal(ddlCountry);

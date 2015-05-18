@@ -1,9 +1,7 @@
 ﻿<%@ Page Title="Cluster Indicator Target" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ClusterIndicatorTargets.aspx.cs" Inherits="SRFROWCA.ClusterLead.ClusterIndicatorTargets" Culture="auto" meta:resourcekey="PageResource1" UICulture="auto" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <!-- ORS styles -->
-    <link rel="stylesheet" href="../assets/css/ors.css" />
-    <!-- ace styles -->
+    
     <script type="text/javascript" src="../assets/orsjs/ShowHideObJAndPr.js"></script>
     <script type="text/javascript" src="../assets/orsjs/jq-highlight.js"></script>
     <script src="../assets/orsjs/jquery.numeric.min.js" type="text/javascript"></script>
