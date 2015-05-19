@@ -147,6 +147,8 @@
                     CssClass="imagetable" OnPageIndexChanging="gvActivity_PageIndexChanging"
                     PageSize="50" ShowHeaderWhenEmpty="true" EmptyDataText="Your filter criteria does not match any indicator!">
                     <PagerSettings Mode="NumericFirstLast" />
+                    <RowStyle CssClass="istrow" />
+                        <AlternatingRowStyle CssClass="altcolor" />
                     <Columns>
                         <asp:TemplateField ItemStyle-Width="2%" HeaderText="#" meta:resourcekey="TemplateFieldResource1">
                             <ItemTemplate>

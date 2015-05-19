@@ -104,7 +104,8 @@
                         CssClass="imagetable" Width="100%"
                         EmptyDataText="There are no output indicators available!">
                         <HeaderStyle BackColor="Control"></HeaderStyle>
-
+                        <RowStyle CssClass="istrow" />
+                        <AlternatingRowStyle CssClass="altcolor" />
                         <Columns>
                             <asp:TemplateField ItemStyle-Width="2%" HeaderText="#">
                                 <ItemTemplate>

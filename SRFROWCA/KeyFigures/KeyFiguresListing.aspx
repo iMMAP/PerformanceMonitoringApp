@@ -149,6 +149,8 @@
                 EmptyDataText="There are no key figures available!">
                 <PagerSettings Mode="NumericFirstLast" />
                 <HeaderStyle BackColor="Control"></HeaderStyle>
+                <RowStyle CssClass="istrow" />
+                <AlternatingRowStyle CssClass="altcolor" />
                 <Columns>
                     <asp:TemplateField ItemStyle-Width="2%" HeaderText="#" meta:resourcekey="TemplateFieldResource1">
                         <ItemTemplate>

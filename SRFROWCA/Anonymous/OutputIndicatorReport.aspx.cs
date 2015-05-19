@@ -44,7 +44,7 @@ namespace SRFROWCA.Anonymous
 
         private void LoadClusterReports()
         {
-            DataTable dt = SetDataSource();
+            DataTable dt = SetDataSource(true);
             if (dt.Rows.Count > 0)
             {
                 gvClusterReports.VirtualItemCount = Convert.ToInt32(dt.Rows[0]["VirtualCount"].ToString());
@@ -53,7 +53,7 @@ namespace SRFROWCA.Anonymous
             gvClusterReports.DataBind();
         }
 
-        private DataTable SetDataSource()
+        private DataTable SetDataSource(bool paging)
         {
             int? countryId = null;
             int? clusterId = null;
@@ -72,8 +72,15 @@ namespace SRFROWCA.Anonymous
             monthIDs = RC.GetSelectedValues(ddlMonth);
 
             bool isRegional = RC.IsRegionalClusterLead(this.User);
-            int pageSize = gvClusterReports.PageSize;
-            int pageIndex = gvClusterReports.PageIndex;
+
+            int? pageSize = null;
+            int? pageIndex = null;
+
+            if (paging)
+            {
+                pageSize = gvClusterReports.PageSize;
+                pageIndex = gvClusterReports.PageIndex;
+            }
 
             return DBContext.GetData("GetOutputIndicatorReports", new object[] { indicator, countryId, clusterId, 
                                                                              RC.SelectedSiteLanguageId, monthIDs, isRegional,
@@ -154,7 +161,7 @@ namespace SRFROWCA.Anonymous
 
         protected void gvClusterReports_Sorting(object sender, GridViewSortEventArgs e)
         {
-            DataTable dt = SetDataSource();
+            DataTable dt = SetDataSource(true);
 
             if (dt != null)
             {
@@ -228,7 +235,7 @@ namespace SRFROWCA.Anonymous
         protected void btnExportToExcel_ServerClick(object sender, EventArgs e)
         {
             GridView gvExport = new GridView();
-            DataTable dt = SetDataSource();
+            DataTable dt = SetDataSource(false);
 
             RemoveColumnsFromDataTable(dt);
 

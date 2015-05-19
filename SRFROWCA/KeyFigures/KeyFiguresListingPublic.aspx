@@ -4,14 +4,12 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 
     <script>
-        $(function () {
-            $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th colspan="3" style="text-align: center;">Total</th><th colspan="3" style="text-align: center;">In Need</th><th colspan="3" style="text-align: center;">Targeted</th><th></th></tr></thead>');
-           
-            var prm = Sys.WebForms.PageRequestManager.getInstance();
-            prm.add_endRequest(function () {
+        function AddHeader() {
+            $(function () {
                 $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th colspan="3" style="text-align: center;">Total</th><th colspan="3" style="text-align: center;">In Need</th><th colspan="3" style="text-align: center;">Targeted</th><th></th></tr></thead>');
             });
-        });       
+        }
+
 
         $(function () {
             $("#<%=txtFromDate.ClientID%>").datepicker({
@@ -66,6 +64,9 @@
     <div class="page-content">
         <asp:UpdatePanel ID="pnlAllData" runat="server">
             <ContentTemplate>
+                <script>
+                    Sys.Application.add_load(AddHeader);
+                </script>
                 <div style="text-align: center;">
                     <asp:UpdateProgress ID="UpdateProgress2" runat="server" AssociatedUpdatePanelID="pnlAllData"
                         DynamicLayout="true">
@@ -154,9 +155,11 @@
                         HeaderStyle-BackColor="ButtonFace" AllowPaging="true" PageSize="50" OnPageIndexChanging="gvKeyFigures_PageIndexChanging"
                         CssClass="imagetable" Width="100%" OnSorting="gvKeyFigures_Sorting" AllowSorting="true"
                         DataKeyNames="AsOfDate,SubCategoryId,CategoryId,EmergencyLocationId,KeyFigureId" AllowCustomPaging="true"
-                        EmptyDataText="There are no key figures available!"> 
+                        EmptyDataText="There are no key figures available!">
                         <PagerSettings Mode="NumericFirstLast" />
                         <HeaderStyle BackColor="Control"></HeaderStyle>
+                        <RowStyle CssClass="istrow" />
+                        <AlternatingRowStyle CssClass="altcolor" />
                         <Columns>
                             <asp:TemplateField ItemStyle-Width="2%" HeaderText="#" meta:resourcekey="TemplateFieldResource1">
                                 <ItemTemplate>

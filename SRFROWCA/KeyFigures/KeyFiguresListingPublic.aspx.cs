@@ -22,6 +22,12 @@ namespace SRFROWCA.KeyFigures
                 DisableDropDowns();
                 LoadCategories();
                 LoadKeyFigures();
+            }                     
+            
+            if (ScriptManager.GetCurrent(this).IsInAsyncPostBack)
+            {
+                var c = ScriptManager.GetCurrent(this).AsyncPostBackSourceElementID;
+                int j = 0;
             }
         }
 
@@ -82,7 +88,7 @@ namespace SRFROWCA.KeyFigures
 
         private void LoadKeyFigures()
         {
-            DataTable dt = GetKeyFigures();
+            DataTable dt = GetKeyFigures(true);
             if (dt.Rows.Count > 0)
             {
                 gvKeyFigures.VirtualItemCount = Convert.ToInt32(dt.Rows[0]["VirtualCount"].ToString());
@@ -91,7 +97,7 @@ namespace SRFROWCA.KeyFigures
             gvKeyFigures.DataBind();
         }
 
-        private DataTable GetKeyFigures()
+        private DataTable GetKeyFigures(bool paging)
         {
             int val = RC.GetSelectedIntVal(ddlCountry);
             int? emgLocationId = val > 0 ? val : (int?)null;
@@ -127,8 +133,13 @@ namespace SRFROWCA.KeyFigures
             }
 
             int isLatest = cbShowAll.Checked ? 1 : 0;
-            int pageSize = gvKeyFigures.PageSize;
-            int pageIndex = gvKeyFigures.PageIndex;
+            int? pageSize = null;
+            int? pageIndex = null;
+            if (paging)
+            {
+                pageSize = gvKeyFigures.PageSize;
+                pageIndex = gvKeyFigures.PageIndex;
+            }
 
             return DBContext.GetData("GetKeyFigureListing", new object[] {emgLocationId, catId, subCatId,
                                                                                     kfIndId, fromDate, toDate, isLatest,
@@ -158,7 +169,7 @@ namespace SRFROWCA.KeyFigures
         protected void btnExportToExcel_ServerClick(object sender, EventArgs e)
         {
             GridView gvExport = new GridView();
-            DataTable dt = GetKeyFigures();
+            DataTable dt = GetKeyFigures(false);
             RemoveColumnsFromDataTable(dt);
             gvExport.DataSource = dt;
             gvExport.DataBind();
@@ -247,7 +258,7 @@ namespace SRFROWCA.KeyFigures
         protected void gvKeyFigures_Sorting(object sender, GridViewSortEventArgs e)
         {
             //Retrieve the table from the session object.
-            DataTable dt = GetKeyFigures();
+            DataTable dt = GetKeyFigures(true);
             if (dt != null)
             {
                 dt.DefaultView.Sort = e.SortExpression + " " + GetSortDirection(e.SortExpression);

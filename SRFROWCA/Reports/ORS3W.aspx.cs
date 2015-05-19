@@ -230,7 +230,7 @@ namespace SRFROWCA.Reports
         {
             GridView gvExport = new GridView();
 
-            DataTable dt = GetData();
+            DataTable dt = GetData(false);
             RemoveColumnsFromDataTable(dt);
             gvExport.DataSource = dt;
             gvExport.DataBind();
@@ -250,7 +250,7 @@ namespace SRFROWCA.Reports
 
         private void LoadData()
         {
-            DataTable dt = GetData();
+            DataTable dt = GetData(true);
             if (dt.Rows.Count > 0)
             {
                 gvActivity.VirtualItemCount = Convert.ToInt32(dt.Rows[0]["VirtualCount"].ToString());
@@ -265,7 +265,7 @@ namespace SRFROWCA.Reports
             ddlCountry.Items.Insert(0, new ListItem("Select Country", "0"));
         }
 
-        private DataTable GetData()
+        private DataTable GetData(bool paging)
         {
             int? emgLocationId = ddlCountry.SelectedValue != "0" ? Convert.ToInt32(ddlCountry.SelectedValue) : (int?)null;
             int? emgClsuterId = ddlCluster.SelectedValue != "0" ? Convert.ToInt32(ddlCluster.SelectedValue) : (int?)null;
@@ -274,8 +274,14 @@ namespace SRFROWCA.Reports
             int? admin1 = ddlAdmin1.SelectedValue != "0" ? Convert.ToInt32(ddlAdmin1.SelectedValue) : (int?)null;
             int? month = ddlMonth.SelectedValue != "0" ? Convert.ToInt32(ddlMonth.SelectedValue) : (int?)null;
             string status = ddlStatus.SelectedValue != "0" ? ddlStatus.SelectedValue : null;
-            int pageSize = gvActivity.PageSize;
-            int pageIndex = gvActivity.PageIndex;
+
+            int? pageSize = null;
+            int? pageIndex = null;
+            if (paging)
+            {
+                pageSize = gvActivity.PageSize;
+                pageIndex = gvActivity.PageIndex;
+            }
 
             return DBContext.GetData("GetORS3WData", new object[]{prjId,orgId,emgLocationId,
                                                                     admin1,emgClsuterId,month,status,

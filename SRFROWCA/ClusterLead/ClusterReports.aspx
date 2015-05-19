@@ -133,6 +133,8 @@
                             <EmptyDataTemplate>
                                 Your filter criteria does not match any record in database!
                             </EmptyDataTemplate>
+                            <RowStyle CssClass="istrow" />
+                            <AlternatingRowStyle CssClass="altcolor" />
                             <Columns>
                                 <asp:TemplateField ItemStyle-Width="2%" HeaderText="#" meta:resourcekey="TemplateFieldResource1">
                                     <ItemTemplate>
