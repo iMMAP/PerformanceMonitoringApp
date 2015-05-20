@@ -41,11 +41,17 @@ namespace SRFROWCA.ClusterLead
 
         private void LoadClusterReports()
         {
-            gvClusterReports.DataSource = SetDataSource();
+            DataTable dt = SetDataSource(true);
+            if (dt.Rows.Count > 0)
+            {
+                gvClusterReports.VirtualItemCount = Convert.ToInt32(dt.Rows[0]["VirtualCount"].ToString());
+            }
+
+            gvClusterReports.DataSource = dt;
             gvClusterReports.DataBind();
         }
 
-        private DataTable SetDataSource()
+        private DataTable SetDataSource(bool paging)
         {
             int? countryId = null;
             int? clusterId = null;
@@ -63,10 +69,27 @@ namespace SRFROWCA.ClusterLead
 
             monthIDs = RC.GetSelectedValues(ddlMonth);
 
-            bool isRegional = RC.IsRegionalClusterLead(this.User);
+            int? isRegional = null;
+            if (RC.IsRegionalClusterLead(this.User))
+            {
+                isRegional = 1;
+            }
+            else
+            {
+                isRegional = cbIncludeRegional.Checked ? (int?)null : 1;
+            }
+
+            int? pageSize = null;
+            int? pageIndex = null;
+            if (paging)
+            {
+                pageSize = gvClusterReports.PageSize;
+                pageIndex = gvClusterReports.PageIndex;
+            }
 
             return DBContext.GetData("GetOutputIndicatorReports", new object[] { indicator, countryId, clusterId, 
-                                                                             RC.SelectedSiteLanguageId, monthIDs, isRegional });
+                                                                             RC.SelectedSiteLanguageId, monthIDs, 
+                                                                             isRegional, pageSize, pageIndex });
         }
 
         internal override void BindGridData()
@@ -123,27 +146,31 @@ namespace SRFROWCA.ClusterLead
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
+            gvClusterReports.PageIndex = 0;
             LoadClusterReports();
         }
 
         protected void ddlCluster_SelectedIndexChanged(object sender, EventArgs e)
         {
+            gvClusterReports.PageIndex = 0;
             LoadClusterReports();
         }
 
         protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
+            gvClusterReports.PageIndex = 0;
             LoadClusterReports();
         }
 
         protected void ddlMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
+            gvClusterReports.PageIndex = 0;
             LoadClusterReports();
         }
 
         protected void gvClusterReports_Sorting(object sender, GridViewSortEventArgs e)
         {
-            DataTable dt = SetDataSource();
+            DataTable dt = SetDataSource(true);
 
             if (dt != null)
             {
@@ -168,6 +195,7 @@ namespace SRFROWCA.ClusterLead
             }
 
             RC.ClearSelectedItems(ddlMonth);
+            gvClusterReports.PageIndex = 0;
             LoadClusterReports();
         }
 
@@ -217,7 +245,7 @@ namespace SRFROWCA.ClusterLead
         protected void btnExportToExcel_ServerClick(object sender, EventArgs e)
         {
             GridView gvExport = new GridView();
-            DataTable dt = SetDataSource();
+            DataTable dt = SetDataSource(false);
 
             RemoveColumnsFromDataTable(dt);
 
@@ -301,6 +329,13 @@ namespace SRFROWCA.ClusterLead
         {
             Session["ClusterDataEntryCountry"] = null;
             Session["ClusterDataEntryCluster"] = null;
+        }
+
+        protected void gvClusterReports_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvClusterReports.PageIndex = e.NewPageIndex;
+            gvClusterReports.SelectedIndex = -1;
+            LoadClusterReports();
         }
     }
 }

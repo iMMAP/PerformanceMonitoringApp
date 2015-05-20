@@ -71,7 +71,7 @@ namespace SRFROWCA.Anonymous
 
             monthIDs = RC.GetSelectedValues(ddlMonth);
 
-            bool isRegional = RC.IsRegionalClusterLead(this.User);
+            int? isRegional = cbIncludeRegional.Checked ? (int?)null : 0;
 
             int? pageSize = null;
             int? pageIndex = null;
@@ -141,21 +141,25 @@ namespace SRFROWCA.Anonymous
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
+            gvClusterReports.PageIndex = 0;
             LoadClusterReports();
         }
 
         protected void ddlCluster_SelectedIndexChanged(object sender, EventArgs e)
         {
+            gvClusterReports.PageIndex = 0;
             LoadClusterReports();
         }
 
         protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
+            gvClusterReports.PageIndex = 0;
             LoadClusterReports();
         }
 
         protected void ddlMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
+            gvClusterReports.PageIndex = 0;
             LoadClusterReports();
         }
 
@@ -186,6 +190,7 @@ namespace SRFROWCA.Anonymous
             }
 
             RC.ClearSelectedItems(ddlMonth);
+            gvClusterReports.PageIndex = 0;
             LoadClusterReports();
         }
 
@@ -246,69 +251,6 @@ namespace SRFROWCA.Anonymous
             string fileName = "ClusterIndicatorReport";
             string fileExtention = ".xls";
             ExportUtility.ExportGridView(gvExport, fileName, fileExtention, Response);
-        }
-
-        protected void ExportToPDF(object sender, EventArgs e)
-        {
-            Warning[] warnings;
-            string[] streamIds;
-            string mimeType = string.Empty;
-            string encoding = string.Empty;
-            string extension = string.Empty;
-            byte[] bytes;
-            ReportViewer rvCountry = new ReportViewer();
-            rvCountry.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote;
-            rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://win-78sij2cjpjj/Reportserver");
-            //rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://54.83.26.190/Reportserver");
-            ReportParameter[] RptParameters = null;
-            //rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://localhost/Reportserver");
-            string countryId = null;
-            string countryIds = null;
-            string clusterId = null;
-            string clusterIds = null;
-            string monthID = null;
-            string monthIDs = null;
-            string indicator = null;
-
-            if (!string.IsNullOrEmpty(txtIndicatorName.Text.Trim()))
-                indicator = txtIndicatorName.Text.Trim();
-
-            //if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
-            //countryId = Convert.ToInt32(ddlCountry.SelectedValue);
-
-            countryIds = RC.GetSelectedValues(ddlCountry);
-
-            //if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
-            //    clusterId = ddlCluster.SelectedValue;
-
-            //if (Convert.ToInt32(ddlMonth.SelectedValue) > -1)
-            //    monthID = ddlMonth.SelectedValue;
-
-            clusterIds = RC.GetSelectedValues(ddlCluster);
-            monthIDs = RC.GetSelectedValues(ddlMonth);
-
-            RptParameters = new ReportParameter[9];
-            RptParameters[0] = new ReportParameter("pClusterID", clusterId, false);
-            RptParameters[1] = new ReportParameter("pCountryID", countryId, false);
-            RptParameters[2] = new ReportParameter("pIndicator", indicator, false);
-            RptParameters[3] = new ReportParameter("pLocationIDs", countryIds, false);
-            RptParameters[4] = new ReportParameter("pLangId", ((int)RC.SiteLanguage.English).ToString(), false);
-            RptParameters[5] = new ReportParameter("pIsRegional", cbIncludeRegional.Checked ? "true" : "false", false);
-            RptParameters[6] = new ReportParameter("pMonthID", monthID, false);
-            RptParameters[7] = new ReportParameter("pMonthIDs", monthIDs, false);
-            RptParameters[8] = new ReportParameter("pClusterIDs", clusterIds, false);
-
-            rvCountry.ServerReport.ReportPath = "/reports/outputreport";
-            string fileName = "ClusterIndicatorReport" + DateTime.Now.ToString("yyyy-MM-dd_hh_mm_ss") + ".pdf";
-            rvCountry.ServerReport.ReportServerCredentials = new ReportServerCredentials("Administrator", "&qisW.c@Jq", "");
-            rvCountry.ServerReport.SetParameters(RptParameters);
-            bytes = rvCountry.ServerReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
-            Response.Buffer = true;
-            Response.Clear();
-            Response.ContentType = mimeType;
-            Response.AddHeader("content-disposition", "attachment; filename=" + fileName);
-            Response.BinaryWrite(bytes); // create the file
-            Response.Flush();
         }
 
         private void RemoveColumnsFromDataTable(DataTable dt)

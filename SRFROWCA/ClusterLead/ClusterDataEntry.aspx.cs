@@ -112,10 +112,11 @@ namespace SRFROWCA.ClusterLead
             if (emgLocationId > 0 && emgClusterId > 0)
             {
                 int monthId = Convert.ToInt32(ddlMonth.SelectedValue);
-                bool isRegional = RC.IsRegionalClusterLead(this.User);
+                int? isRegional = RC.IsRegionalClusterLead(this.User) ? 1 : (int?) null;
                 dt = DBContext.GetData("GetOutputIndicatorsForReporting", new object[] {emgLocationId, emgClusterId
                                                                                         ,(int)RC.YearsInDB.Year2015
-                                                                                        ,monthId, isRegional, RC.SelectedSiteLanguageId});
+                                                                                        ,monthId, isRegional, 
+                                                                                        RC.SelectedSiteLanguageId});
             }
 
             return dt;

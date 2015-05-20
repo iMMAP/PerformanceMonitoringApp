@@ -25,15 +25,6 @@
 </asp:Content>
 
 <asp:Content ID="cntMainContentCountryIndicators" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
-        </script>
-        <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="../Default.aspx">Home</a> </li>
-            <li class="active">Output Reports</li>
-        </ul>
-    </div>
     <div class="page-content">
         <asp:UpdatePanel ID="pnlOutputReportData" runat="server">
             <ContentTemplate>
@@ -127,8 +118,8 @@
                 <div class="table-responsive">
                     <div style="overflow-x: auto; width: 100%">
                         <asp:GridView ID="gvClusterReports" Width="100%" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False"
-                            AllowSorting="True" DataKeyNames="SiteLanguageId"
-                            ShowHeader="true" OnRowDataBound="gvClusterReports_RowDataBound"
+                            AllowSorting="True" DataKeyNames="SiteLanguageId" AllowPaging="true" AllowCustomPaging="true" PageSize="50"
+                            ShowHeader="true" OnRowDataBound="gvClusterReports_RowDataBound" OnPageIndexChanging="gvClusterReports_PageIndexChanging"
                             OnSorting="gvClusterReports_Sorting" CssClass="imagetable">
                             <EmptyDataTemplate>
                                 Your filter criteria does not match any record in database!
@@ -163,7 +154,7 @@
                                         <asp:Label ID="lblCountryAchieved" runat="server" Text=' <%# Eval("MonthlyAchieved")%>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField ItemStyle-Width="7%" HeaderText="Running Value" ItemStyle-HorizontalAlign="Right" SortExpression="FinalSum">
+                                <asp:TemplateField ItemStyle-Width="7%" HeaderText="Running Value" ItemStyle-HorizontalAlign="Right" SortExpression="RunningValue">
                                     <ItemTemplate>
                                         <asp:Label ID="lblCountrySum" runat="server" Text=' <%# Eval("RunningValue")%>'></asp:Label>
                                     </ItemTemplate>

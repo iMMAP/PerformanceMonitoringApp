@@ -24,16 +24,6 @@
 </asp:Content>
 
 <asp:Content ID="cntMainClusterDataEntry" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
-        </script>
-        <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="../Default.aspx">Home</a> </li>
-            <li class="active">Output Indicator Data Entry</li>
-        </ul>
-
-    </div>
     <div class="page-content">
         <asp:UpdatePanel ID="pnlOutputReportData" runat="server">
             <ContentTemplate>
@@ -151,7 +141,7 @@
                             <asp:TemplateField ItemStyle-Width="8%" HeaderText="<span class='tooltip2' title='Caculated on the basis of Calculation Method of the Indicator.'>Running Value</span>" ItemStyle-HorizontalAlign="Right">
                                 <ItemTemplate>
                                     
-                                    <asp:Label ID="lblSum" runat="server" Text=' <%# Eval("TotalSum")%>'></asp:Label>
+                                    <asp:Label ID="lblSum" runat="server" Text=' <%# Eval("RunningValue")%>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField ItemStyle-Width="8%" HeaderText="<span class='tooltip2' title='Each Indicator has assigned a calcuation method type.</br>Sum: Sum of all monthly achieved.</br>Agerage: Average of all monthly achieved.</br>Max: Max data reported in any month.</br>Latest: Latest data reported.'>Calculation Method</span>" ItemStyle-HorizontalAlign="Right">
