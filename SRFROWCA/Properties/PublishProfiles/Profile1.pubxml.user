@@ -174,7 +174,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/23/2015 17:02:20</publishTime>
     </File>
     <File Include="Anonymous/AllData.aspx">
-      <publishTime>05/18/2015 17:13:44</publishTime>
+      <publishTime>05/26/2015 17:22:45</publishTime>
     </File>
     <File Include="Anonymous/AllDataCSV.ashx">
       <publishTime>04/14/2015 14:16:04</publishTime>
@@ -195,10 +195,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/07/2014 09:45:10</publishTime>
     </File>
     <File Include="Anonymous/OutputIndicatorReport.aspx">
-      <publishTime>05/19/2015 12:44:37</publishTime>
+      <publishTime>05/26/2015 17:23:17</publishTime>
     </File>
     <File Include="Anonymous/ProjectsListingPublic.aspx">
-      <publishTime>04/30/2015 12:06:06</publishTime>
+      <publishTime>05/26/2015 17:23:37</publishTime>
     </File>
     <File Include="App_LocalResources/faq.aspx.fr-FR.resx">
       <publishTime>04/28/2014 10:29:21</publishTime>
@@ -240,7 +240,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/08/2014 12:02:45</publishTime>
     </File>
     <File Include="assets/css/bootstrap.min.css">
-      <publishTime>05/15/2015 15:49:13</publishTime>
+      <publishTime>05/22/2015 18:04:40</publishTime>
     </File>
     <File Include="assets/css/chosen-sprite%402x.png">
       <publishTime>07/30/2013 11:06:40</publishTime>
@@ -351,13 +351,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/17/2014 14:49:10</publishTime>
     </File>
     <File Include="assets/css/jquery-ui.min.css">
-      <publishTime>03/11/2015 08:49:34</publishTime>
+      <publishTime>05/26/2015 11:03:16</publishTime>
     </File>
     <File Include="assets/css/jquery.gritter.css">
       <publishTime>04/09/2013 11:49:16</publishTime>
     </File>
     <File Include="assets/css/ors.css">
-      <publishTime>04/14/2015 14:16:05</publishTime>
+      <publishTime>05/26/2015 17:19:40</publishTime>
     </File>
     <File Include="assets/css/prettify.css">
       <publishTime>02/16/2013 13:02:04</publishTime>
@@ -380,8 +380,20 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="assets/css/ui.jqgrid.css">
       <publishTime>04/17/2014 14:49:10</publishTime>
     </File>
+    <File Include="assets/font/fontawesome-webfont.eot">
+      <publishTime>06/26/2013 04:11:16</publishTime>
+    </File>
     <File Include="assets/font/fontawesome-webfont.svg">
       <publishTime>06/26/2013 07:41:16</publishTime>
+    </File>
+    <File Include="assets/font/fontawesome-webfont.ttf">
+      <publishTime>06/26/2013 04:11:16</publishTime>
+    </File>
+    <File Include="assets/font/fontawesome-webfont.woff">
+      <publishTime>06/26/2013 04:11:16</publishTime>
+    </File>
+    <File Include="assets/font/FontAwesome.otf">
+      <publishTime>06/26/2013 04:11:16</publishTime>
     </File>
     <File Include="assets/fonts/glyphicons-halflings-regular-2.html">
       <publishTime>10/04/2004 15:04:06</publishTime>
@@ -474,10 +486,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/17/2014 14:49:11</publishTime>
     </File>
     <File Include="assets/js/ace-extra.min.js">
-      <publishTime>04/17/2014 14:49:11</publishTime>
+      <publishTime>04/17/2014 14:49:12</publishTime>
     </File>
     <File Include="assets/js/ace.min.js">
-      <publishTime>04/17/2014 14:49:11</publishTime>
+      <publishTime>04/17/2014 14:49:12</publishTime>
     </File>
     <File Include="assets/js/additional-methods.min.js">
       <publishTime>03/22/2013 14:20:16</publishTime>
@@ -495,7 +507,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/10/2013 18:28:52</publishTime>
     </File>
     <File Include="assets/js/bootstrap.min.js">
-      <publishTime>08/21/2013 09:38:48</publishTime>
+      <publishTime>05/22/2015 18:04:40</publishTime>
     </File>
     <File Include="assets/js/chosen.jquery.min.js">
       <publishTime>07/30/2013 11:06:40</publishTime>
@@ -561,7 +573,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/17/2014 14:49:11</publishTime>
     </File>
     <File Include="assets/js/jquery-ui.min.js">
-      <publishTime>03/11/2015 08:49:34</publishTime>
+      <publishTime>05/26/2015 11:03:16</publishTime>
     </File>
     <File Include="assets/js/jquery.autosize.min.js">
       <publishTime>09/03/2013 10:33:02</publishTime>
@@ -600,7 +612,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/12/2013 23:52:22</publishTime>
     </File>
     <File Include="assets/js/jquery.slimscroll.min.js">
-      <publishTime>08/27/2014 14:11:08</publishTime>
+      <publishTime>08/27/2014 14:11:10</publishTime>
     </File>
     <File Include="assets/js/jquery.sparkline.min.js">
       <publishTime>07/04/2013 09:39:56</publishTime>
@@ -757,6 +769,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="assets/orsimages/loginmenuarrow.png">
       <publishTime>10/31/2013 21:00:58</publishTime>
+    </File>
+    <File Include="assets/orsimages/logo.gif">
+      <publishTime>06/10/2014 10:19:01</publishTime>
     </File>
     <File Include="assets/orsimages/logo.png">
       <publishTime>03/30/2014 22:15:18</publishTime>
@@ -951,7 +966,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/06/2014 09:26:40</publishTime>
     </File>
     <File Include="bin/SRFROWCA.dll">
-      <publishTime>05/20/2015 18:52:17</publishTime>
+      <publishTime>05/26/2015 17:24:45</publishTime>
     </File>
     <File Include="bin/SRFROWCA.pdb">
       <publishTime>04/28/2014 16:21:20</publishTime>
@@ -1053,7 +1068,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/15/2015 15:59:10</publishTime>
     </File>
     <File Include="ClusterLead/ClusterReports.aspx">
-      <publishTime>05/20/2015 12:32:51</publishTime>
+      <publishTime>05/21/2015 17:57:48</publishTime>
     </File>
     <File Include="ClusterLead/CountryIndicators.aspx">
       <publishTime>04/14/2015 14:16:04</publishTime>
@@ -1086,7 +1101,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/08/2014 13:02:45</publishTime>
     </File>
     <File Include="ClusterLead/ProjectsListing.aspx">
-      <publishTime>05/04/2015 16:12:37</publishTime>
+      <publishTime>05/26/2015 17:24:35</publishTime>
     </File>
     <File Include="ClusterLead/ProjectXMLFeeds.aspx">
       <publishTime>08/13/2014 11:34:07</publishTime>
@@ -1134,7 +1149,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/09/2014 09:24:46</publishTime>
     </File>
     <File Include="ContactUs/Contactus.aspx">
-      <publishTime>04/17/2014 14:49:10</publishTime>
+      <publishTime>05/26/2015 10:54:28</publishTime>
     </File>
     <File Include="ContactUs/ContactUsControl.ascx">
       <publishTime>10/31/2014 10:36:34</publishTime>
@@ -1248,7 +1263,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/25/2013 12:32:24</publishTime>
     </File>
     <File Include="Default.aspx">
-      <publishTime>05/18/2015 11:54:25</publishTime>
+      <publishTime>05/26/2015 10:36:52</publishTime>
     </File>
     <File Include="Default_.aspx">
       <publishTime>12/15/2014 20:57:35</publishTime>
@@ -1324,6 +1339,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="faq.aspx">
       <publishTime>09/22/2014 07:10:05</publishTime>
+    </File>
+    <File Include="favicon.ico">
+      <publishTime>03/28/2015 20:47:32</publishTime>
     </File>
     <File Include="fckeditor/editor/css/behaviors/disablehandles.htc">
       <publishTime>07/06/2009 16:29:16</publishTime>
@@ -3153,7 +3171,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/04/2014 13:22:00</publishTime>
     </File>
     <File Include="KeyFigures/AddKeyFigure.aspx">
-      <publishTime>05/18/2015 15:33:19</publishTime>
+      <publishTime>05/26/2015 16:18:38</publishTime>
     </File>
     <File Include="KeyFigures/AddKeyFigureCategory.aspx">
       <publishTime>04/14/2015 14:16:05</publishTime>
@@ -3189,10 +3207,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/14/2015 14:16:05</publishTime>
     </File>
     <File Include="KeyFigures/KeyFiguresListing.aspx">
-      <publishTime>05/19/2015 12:43:36</publishTime>
+      <publishTime>05/26/2015 17:31:08</publishTime>
     </File>
     <File Include="KeyFigures/KeyFiguresListingPublic.aspx">
-      <publishTime>05/19/2015 12:43:48</publishTime>
+      <publishTime>05/26/2015 17:30:23</publishTime>
     </File>
     <File Include="KeyFigures/KeyFigureTableHeaderControl.ascx">
       <publishTime>04/03/2015 17:23:42</publishTime>
@@ -3225,7 +3243,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/17/2014 15:49:10</publishTime>
     </File>
     <File Include="ops.Master">
-      <publishTime>09/08/2014 12:02:45</publishTime>
+      <publishTime>05/22/2015 12:56:51</publishTime>
     </File>
     <File Include="OPS/App_LocalResources/OPSDataEntry.aspx.fr.resx">
       <publishTime>04/14/2015 14:16:05</publishTime>
@@ -3420,7 +3438,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/16/2014 15:15:58</publishTime>
     </File>
     <File Include="Reports/ORS3W.aspx">
-      <publishTime>05/19/2015 12:44:20</publishTime>
+      <publishTime>05/26/2015 17:22:00</publishTime>
     </File>
     <File Include="Reports/ProjectByClusters.aspx">
       <publishTime>03/28/2014 10:57:22</publishTime>
@@ -3555,7 +3573,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/01/2014 12:31:41</publishTime>
     </File>
     <File Include="Site.Master">
-      <publishTime>05/19/2015 12:02:37</publishTime>
+      <publishTime>05/26/2015 17:17:55</publishTime>
     </File>
     <File Include="Styles/loginareamenu.css">
       <publishTime>11/04/2013 03:22:35</publishTime>
@@ -3717,7 +3735,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/18/2015 10:57:12</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/18/2015 19:10:32</publishTime>
+      <publishTime>05/26/2015 10:52:31</publishTime>
     </File>
     <File Include="WebForm1.aspx">
       <publishTime>05/04/2015 14:35:33</publishTime>

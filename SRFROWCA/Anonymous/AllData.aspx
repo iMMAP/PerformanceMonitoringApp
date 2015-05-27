@@ -12,8 +12,6 @@
             width: 100%;
         }
     </style>
-    <%--<link rel="stylesheet" type="text/css" href="../assets/css/tooltipster.css" />
-    <script type="text/javascript" src="../assets/js/jquery.tooltipster.min.js"></script>--%>
     <script type="text/javascript">
 
         $(function () {
@@ -38,16 +36,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="allDataContent" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
-        </script>
-        <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="#">Home</a> </li>
-            <li class="active">Custom Report</li>
-        </ul>
-        <!-- .breadcrumb -->
-    </div>
+    
     <asp:UpdatePanel ID="pnlAllData" runat="server">
         <ContentTemplate>
             <div class="page-content">
@@ -295,7 +284,8 @@
                             EnableViewState="false" AllowSorting="True" AllowPaging="true" PageSize="60"
                             ShowHeader="true" OnPageIndexChanging="gvReport_PageIndexChanging" EmptyDataText="Your filter criteria does not match any record in database!">
                             <PagerStyle BackColor="#efefef" ForeColor="DarkSlateBlue" HorizontalAlign="Center" />
-
+                            <RowStyle CssClass="istrow" />
+                        <AlternatingRowStyle CssClass="altcolor" />
                             <Columns>
                                 <asp:BoundField DataField="Cluster" HeaderText="Cluster" SortExpression="Cluster" />
                                 <asp:BoundField DataField="Organization" HeaderText="Organization" SortExpression="Organization" />
@@ -325,54 +315,9 @@
                                 </asp:TemplateField>
                             </Columns>
                         </cc2:PagingGridView>
-
                     </div>
                 </div>
             </div>
-            <div class="fullwidthdiv" style="clear: both;">
-            </div>
-            <script type="text/javascript">
-                jQuery(function ($) {
-
-                    $('#simple-colorpicker-1').ace_colorpicker({ pull_right: true }).on('change', function () {
-                        var color_class = $(this).find('option:selected').data('class');
-                        var new_class = 'widget-header';
-                        if (color_class != 'default') new_class += ' header-color-' + color_class;
-                        $(this).closest('.widget-header').attr('class', new_class);
-                    });
-
-
-                    // scrollables
-                    $('.slim-scroll').each(function () {
-                        var $this = $(this);
-                        $this.slimScroll({
-                            height: $this.data('height') || 100,
-                            railVisible: true
-                        });
-                    });
-
-                    /**$('.widget-box').on('ace.widget.settings' , function(e) {
-                    e.preventDefault();
-                    });*/
-
-
-
-                    // Portlets (boxes)
-                    $('.widget-container-span').sortable({
-                        connectWith: '.widget-container-span',
-                        items: '> .widget-box',
-                        opacity: 0.8,
-                        revert: true,
-                        forceHelperSize: true,
-                        placeholder: 'widget-placeholder',
-                        forcePlaceholderSize: true,
-                        tolerance: 'pointer'
-                    });
-
-                });
-            </script>
         </ContentTemplate>
     </asp:UpdatePanel>
-
-  
 </asp:Content>

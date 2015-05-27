@@ -22,7 +22,7 @@ namespace SRFROWCA.KeyFigures
                 LoadCategories();
                 SetFiltersFromSession();
                 LoadKeyFigures();
-                CliearFilterSession();
+                ClearFilterSession();
             }
         }
 
@@ -34,7 +34,8 @@ namespace SRFROWCA.KeyFigures
 
         private void LoadCountry()
         {
-            UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
+            //UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
+            UI.FillCountry(ddlCountry);
             ddlCountry.Items.Insert(0, new ListItem("Select Country", "0"));
             SetComboValues();
         }
@@ -56,7 +57,8 @@ namespace SRFROWCA.KeyFigures
         {
             if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User))
             {
-                ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
+                //ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
+                ddlCountry.SelectedValue = UserInfo.Country.ToString();
             }
         }
 
@@ -258,7 +260,7 @@ namespace SRFROWCA.KeyFigures
             }
         }
 
-        private void CliearFilterSession()
+        private void ClearFilterSession()
         {
             Session["KeyFigureFilterCountry"] = null;
             Session["KeyFigureFilterCategory"] = null;
@@ -281,8 +283,9 @@ namespace SRFROWCA.KeyFigures
             }
             ddlCategory.SelectedIndex = 0;
             ddlSubCategory.SelectedIndex = 0;
-
-            CliearFilterSession();
+            cbShowAll.Checked = false;
+            gvKeyFigures.PageIndex = 0;
+            ClearFilterSession();
             LoadKeyFigures();
         }
 
@@ -327,11 +330,11 @@ namespace SRFROWCA.KeyFigures
                 int rowIndex = 0;
                 int.TryParse(e.CommandArgument.ToString(), out rowIndex);
                 string date = gvKeyFigures.DataKeys[rowIndex].Values["AsOfDate2"].ToString();
-                string emgLocId = gvKeyFigures.DataKeys[rowIndex].Values["EmergencyLocationId"].ToString();
+                string countryId = gvKeyFigures.DataKeys[rowIndex].Values["CountryId"].ToString();
                 string catId = gvKeyFigures.DataKeys[rowIndex].Values["CategoryId"].ToString();
                 string subCatId = gvKeyFigures.DataKeys[rowIndex].Values["SubCategoryId"].ToString();
                 SaveFiltersInSession();
-                Response.Redirect(string.Format("AddKeyFigure.aspx?d={0}&l={1}&c={2}&s={3}", date, emgLocId, catId, subCatId));
+                Response.Redirect(string.Format("AddKeyFigure.aspx?d={0}&l={1}&c={2}&s={3}", date, countryId, catId, subCatId));
             }
 
             if (e.CommandName == "DuplicateFigure")
@@ -339,11 +342,11 @@ namespace SRFROWCA.KeyFigures
                 int rowIndex = 0;
                 int.TryParse(e.CommandArgument.ToString(), out rowIndex);
                 string date = gvKeyFigures.DataKeys[rowIndex].Values["AsOfDate2"].ToString();
-                string emgLocId = gvKeyFigures.DataKeys[rowIndex].Values["EmergencyLocationId"].ToString();
+                string countryId = gvKeyFigures.DataKeys[rowIndex].Values["CountryId"].ToString();
                 string catId = gvKeyFigures.DataKeys[rowIndex].Values["CategoryId"].ToString();
                 string subCatId = gvKeyFigures.DataKeys[rowIndex].Values["SubCategoryId"].ToString();
                 SaveFiltersInSession();
-                Response.Redirect(string.Format("AddKeyFigure.aspx?u=1&d={0}&l={1}&c={2}&s={3}", date, emgLocId, catId, subCatId));
+                Response.Redirect(string.Format("AddKeyFigure.aspx?u=1&d={0}&l={1}&c={2}&s={3}", date, countryId, catId, subCatId));
             }
 
             if (e.CommandName == "DeleteFigure")

@@ -13,7 +13,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div id="team">
-        <div class="viewport">
+        <%--<div class="viewport">
             <h1>
                 <center>Online Reporting System (ORS)<center>
             </h1>
@@ -109,7 +109,7 @@
                 </li>
             </ul>
             <div class="clearfix"></div>
-        </div>
+        </div>--%>
     </div>
-    <script src="visualization/javascripts/main.js"></script>
+    <%--<script src="visualization/javascripts/main.js"></script>--%>
 </asp:Content>

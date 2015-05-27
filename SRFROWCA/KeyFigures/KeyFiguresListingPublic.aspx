@@ -3,6 +3,19 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 
+    <script type="text/JavaScript">
+        function pageLoad() {
+            var manager = Sys.WebForms.PageRequestManager.getInstance();
+            manager.add_beginRequest(OnBeginRequest);
+        }
+
+        function OnBeginRequest(sender, args) {
+            $get('MainContent_UpdateProgress2').style.display = "block";
+        }
+
+    </script>
+
+
     <script>
         function AddHeader() {
             $(function () {
@@ -51,27 +64,15 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
-        </script>
-        <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="../Default.aspx">Home</a> </li>
-            <li class="active">Key Figures List</li>
-        </ul>
 
-    </div>
     <div class="page-content">
         <asp:UpdatePanel ID="pnlAllData" runat="server">
             <ContentTemplate>
-                <script>
-                    Sys.Application.add_load(AddHeader);
-                </script>
                 <div style="text-align: center;">
                     <asp:UpdateProgress ID="UpdateProgress2" runat="server" AssociatedUpdatePanelID="pnlAllData"
-                        DynamicLayout="true">
+                        DynamicLayout="true" DisplayAfter="1">
                         <ProgressTemplate>
-                            <img src="../assets/orsimages/ajaxlodr.gif" alt="Loading">
+                                <img src="../assets/orsimages/ajaxlodr.gif" alt="Loading">
                         </ProgressTemplate>
                     </asp:UpdateProgress>
                 </div>
@@ -153,8 +154,7 @@
                 <div id="scrolledGridView" style="overflow-x: auto; width: 100%;">
                     <asp:GridView ID="gvKeyFigures" runat="server" AutoGenerateColumns="False" OnRowDataBound="gvKeyFigures_RowDataBound"
                         HeaderStyle-BackColor="ButtonFace" AllowPaging="true" PageSize="50" OnPageIndexChanging="gvKeyFigures_PageIndexChanging"
-                        CssClass="imagetable" Width="100%" OnSorting="gvKeyFigures_Sorting" AllowSorting="true"
-                        DataKeyNames="AsOfDate,SubCategoryId,CategoryId,EmergencyLocationId,KeyFigureId" AllowCustomPaging="true"
+                        CssClass="imagetable" Width="100%" OnSorting="gvKeyFigures_Sorting" AllowSorting="true" AllowCustomPaging="true"
                         EmptyDataText="There are no key figures available!">
                         <PagerSettings Mode="NumericFirstLast" />
                         <HeaderStyle BackColor="Control"></HeaderStyle>
@@ -173,7 +173,15 @@
                             <asp:BoundField DataField="SubCategory" HeaderText="Sub Category" SortExpression="SubCategory" ItemStyle-Width="7%"></asp:BoundField>
                             <asp:BoundField DataField="KeyFigure" HeaderText="Key Figure" SortExpression="KeyFigure" ItemStyle-Width="15%"></asp:BoundField>
                             <asp:BoundField DataField="AsOfDate" HeaderText="As Of Date" SortExpression="AsOfDate" ItemStyle-Width="8%"></asp:BoundField>
-                            <asp:BoundField DataField="KeyFigureSource" HeaderText="Source" SortExpression="KeyFigureSource" ItemStyle-Width="15%"></asp:BoundField>
+                            <asp:TemplateField ItemStyle-Width="160px" HeaderText="Source">
+                                <ItemTemplate>
+                                    <div style="width: 150px; word-wrap: break-word;">
+                                        <a href='<%# Eval("KeyFigureSource")%>' target="_blank"><%# Eval("KeyFigureSource")%></a>
+                                    </div>
+
+                                </ItemTemplate>
+                            </asp:TemplateField>
+
                             <asp:BoundField DataField="FromLocation" HeaderText="From Location" SortExpression="FromLocation" ItemStyle-Width="4%"></asp:BoundField>
                             <asp:BoundField DataField="ReportedLocation" HeaderText="Location" SortExpression="ReportedLocation" ItemStyle-Width="8%"></asp:BoundField>
                             <asp:TemplateField HeaderText="Total" ItemStyle-Width="4%">
@@ -228,9 +236,10 @@
                 </div>
             </ContentTemplate>
             <Triggers>
-                <asp:AsyncPostBackTrigger ControlID="ddlCountry" />
+                <asp:AsyncPostBackTrigger ControlID="ddlCountry" EventName="selectedindexchanged" />
                 <asp:AsyncPostBackTrigger ControlID="ddlCategory" />
                 <asp:AsyncPostBackTrigger ControlID="ddlSubCategory" />
+                <asp:AsyncPostBackTrigger ControlID="cbShowAll" />
             </Triggers>
 
         </asp:UpdatePanel>

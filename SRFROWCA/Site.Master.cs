@@ -142,8 +142,8 @@ namespace SRFROWCA
             bool isShow = false;
             menuDataEntry.Visible = isShow;
             liDataEntry.Visible = isShow;            
-            menuManageActivities.Visible = isShow;
-            liManageActivity.Visible = isShow;
+            //menuManageActivities.Visible = isShow;
+            //liManageActivity.Visible = isShow;
             liValidateAchievements.Visible = isShow;
             liFundingStatus.Visible = isShow;
             liUserListing.Visible = isShow;
@@ -158,7 +158,7 @@ namespace SRFROWCA
             liProjects.Visible = isShow;
             liClusterFrameworkImport.Visible = isShow;
             liSettings.Visible = isShow;
-            liManagePartners.Visible = isShow;
+            //liManagePartners.Visible = isShow;
             liRequestedOrganizations.Visible = isShow;
             liKeyFiguresFramework.Visible = isShow;
             liContactList.Visible = isShow;
@@ -170,12 +170,12 @@ namespace SRFROWCA
             bool isShow = true;
             menuDataEntry.Visible = isShow;
             liDataEntry.Visible = isShow;
-            menuManageActivities.Visible = isShow;
-            liManageActivity.Visible = isShow;
+            //menuManageActivities.Visible = isShow;
+            //liManageActivity.Visible = isShow;
             liBulkImportUser.Visible = isShow;
             liClusterFrameworks.Visible = !isShow;
             liProjects.Visible = isShow;
-            liManagePartners.Visible = isShow;
+            //liManagePartners.Visible = isShow;
             liKeyFiguresPublic.Visible = isShow;
             liOutputIndReportPublic.Visible = isShow;
             liProjectsPublic.Visible = !isShow;
@@ -274,10 +274,9 @@ namespace SRFROWCA
         private void ActiveMenueItem()
         {
             string uri = HttpContext.Current.Request.Url.AbsolutePath;
-            if (uri == "/Default.aspx")
+            if (uri.Contains("/Default.aspx"))
             {
-                liDashboards.Attributes.Add("class", "active open");
-                liDefault.Attributes.Add("class", "active");
+                liDashboards.Attributes.Add("class", "active");
                 PageTitle = "ORS - Home";
             }
             else if (uri == "/ReportingStatus.aspx")
@@ -295,11 +294,11 @@ namespace SRFROWCA
                 PageTitle = "ORS - Manage Project";
                 liProjects.Attributes.Add("class", "active");
             }
-            else if (uri == "/Pages/ManageActivities.aspx")
-            {
-                PageTitle = "ORS - Manage Activity";
-                liManageActivity.Attributes.Add("class", "active");
-            }
+            //else if (uri == "/Pages/ManageActivities.aspx")
+            //{
+            //    PageTitle = "ORS - Manage Activity";
+            //    liManageActivity.Attributes.Add("class", "active");
+            //}
             else if (uri == "/Anonymous/AllData.aspx")
             {
                 liCustomReport.Attributes.Add("class", "active");
@@ -458,10 +457,10 @@ namespace SRFROWCA
                 PageTitle = "ORS - Settings";
                 liSettings.Attributes.Add("class", "active");
             }
-            else if (uri.Contains("Pages/ProjectIP.aspx"))
-            {
-                liManagePartners.Attributes.Add("class", "active");
-            }
+            //else if (uri.Contains("Pages/ProjectIP.aspx"))
+            //{
+            //    liManagePartners.Attributes.Add("class", "active");
+            //}
             else if (uri.Contains("Admin/Location/AddNewLocation.aspx") || uri.Contains("Admin/Location/LocationsList.aspx"))
             {
                 liLocations.Attributes.Add("class", "active");

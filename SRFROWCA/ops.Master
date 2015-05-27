@@ -15,7 +15,6 @@
     <!-- fonts -->
     <link rel="stylesheet" href="assets/css/ace-fonts.css" />
     <link rel="stylesheet" href="assets/css/ace.min.css" />
-    <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
     <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
     <link rel="Stylesheet" href="assets/css/jquery-ui.min.css" />
     <!-- ORS styles -->

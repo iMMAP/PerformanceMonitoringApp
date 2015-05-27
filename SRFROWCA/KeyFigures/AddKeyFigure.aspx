@@ -102,22 +102,11 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
-        </script>
-        <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="#">Home</a> </li>
-            <li class="active">Add/Edit Key Figure</li>
-        </ul>
-        <!-- .breadcrumb -->
-    </div>
-
     <div class="page-content">
         <div id="divMsg"></div>
         <div class="alert2 alert-block alert-info">
             <h6>
-                <asp:Localize ID="locMessageForUser" runat="server" Text="Select Country, Category & Sub-Category to report on Key Figure"></asp:Localize></h6>
+                <asp:Localize ID="locMessageForUser" runat="server" Text="Select Date, Country, Category & Sub-Category to report on Key Figure"></asp:Localize></h6>
         </div>
         <table border="0" style="margin: 0 auto; width: 100%">
             <tr>
@@ -157,6 +146,12 @@
         <hr />
         <table border="0" style="margin: 0 auto; width: 100%">
             <tr>
+                <td align="left">
+                    <div class="alert2 alert-block alert-warning">
+                        <h6>Source Field: Only VALID URL of your source is allowed. It can be URL of a website, dropbox, HR-info, google-docs etc. 
+                        </h6>
+                    </div>
+                </td>
                 <td align="right">
                     <asp:Button ID="btnSave" runat="server" Text="Save" CssClass="btn btn-primary" OnClientClick="needToConfirm = false;"
                         OnClick="btnSave_Click" />

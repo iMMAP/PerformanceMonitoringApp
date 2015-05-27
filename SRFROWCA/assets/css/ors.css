@@ -1,149 +1,25 @@
-﻿table.imagetable
-{
-    width: 100%;
-    font-size: 11px;
-    color: #39668e;
-    border-width: 1px;
-    border-color: #bbbbbb;
-    border-collapse: collapse;
-}
-
-table.imagetable th
-{
-    background: #ddd;
-    border-width: 1px;
-    padding: 4px;
-    border-style: solid;
-    border-color: #bbbbbb;
-    text-align: left;
-}
-
-table.imagetable td
-{
-    border-width: 1px;
-    padding: 4px;
-    border-style: solid;
-    color: #000000;
-    border-color: #bbbbbb;
-}
-
-.altcolor
-{
-    background-color: #fbfbfb;
-}
-
-.istrow
-{
-    background: #ebf0f4;
-}
-
-.message
-{
-		background-size: 40px 40px;
-		background-image: linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%,
-							transparent 50%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .05) 75%,
-							transparent 75%, transparent);										
-		 box-shadow: inset 0 -1px 0 rgba(255,255,255,.4);
-		 width: 100%;
-		 border: 1px solid;
-		 color: #fff;
-		 padding: 15px;
-		 position: fixed;
-		 _position: absolute;
-		 text-shadow: 0 1px 0 rgba(0,0,0,.5);
-		 animation: animate-bg 5s linear infinite;
-}
-
-.info{
-		 background-color: #4ea5cd;
-		 border-color: #3b8eb5;
-}
-
-.error{
-		 background-color: #de4343;
-		 border-color: #c43d3d;
-}
-
-.warning{
-		 background-color: #eaaf51;
-		 border-color: #d99a36;
-}
-
-.success{
-		 background-color: #61b832;
-		 border-color: #55a12c;
-}
-
-.modalpopupbackground
-{
-    background-color:black;
-    opacity: 0.7;    
-}
-
-.highlight
-{
-    background-color: yellow;
-}
-        
-.highlight2
-{
-    background-color: #ADFF2F;
-}
-
-.highlightRow
-{
-    background-color: #F08080;
-}
-
-.highlightRow2
-{
-    background-color: #DFF0D8;
-}
-
-.error2
-{
-	color: #FF0000;
-}
-.no-record
-{
-font-size:14px;
-}
-.pageHeading
-{
-    font-size:16px;
-    line-height:32px;
-    margin-left:20px;
-}
-.containerPopup
-{
-background-color:#fff;
-width:650px;
-padding:10px 30px;
-border:solid 1px #4ea5cd;
-}
-.popupheading
-{
-    font-size:16px;
-    border-bottom:solid 1px #bbbbbb;
-    line-height:30px;
-    margin-bottom:30px;
-    color:#000;
-    font-weight:bold;
-}
-.containerPopup .frmControl
-{
-padding-left:20px;
-}
-
-.alert2 {
-    border: 1px solid transparent;
-    border-radius: 4px;
-    margin-bottom: 2px;
-    padding: 3px;
-}
-
-.label2 {
-    font-size: 11px;
-    font-weight: normal;
-    margin-bottom: 2px;
-}
+﻿table.imagetable{width:100%;font-size:11px;color:#39668e;border-width:1px;border-color:#bbbbbb;border-collapse:collapse;}
+table.imagetable th{background:#ddd;border-width:1px;padding:4px;border-style:solid;border-color:#bbbbbb;text-align:left;}
+table.imagetable td{border-width:1px;padding:4px;border-style:solid;color:#000000;border-color:#bbbbbb;}
+.altcolor{background-color:#fbfbfb;}
+.istrow{background:#ebf0f4;}
+.message{background-size:40px 40px;background-image:linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%,
+transparent 50%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .05) 75%,
+transparent 75%, transparent);box-shadow:inset 0 -1px 0 rgba(255,255,255,.4);width:100%;border:1px solid;color:#fff;padding:15px;position:fixed;_position:absolute;text-shadow:0 1px 0 rgba(0,0,0,.5);animation:animate-bg 5s linear infinite;}
+.info{background-color:#4ea5cd;border-color:#3b8eb5;}
+.error{background-color:#de4343;border-color:#c43d3d;}
+.warning{background-color:#eaaf51;border-color:#d99a36;}
+.success{background-color:#61b832;border-color:#55a12c;}
+.modalpopupbackground{background-color:black;opacity:0.7;}
+.highlight{background-color:yellow;}
+.highlight2{background-color:#ADFF2F;}
+.highlightRow{background-color:#F08080;}
+.highlightRow2{background-color:#DFF0D8;}
+.error2{color:#FF0000;}
+.no-record{font-size:14px;}
+.pageHeading{font-size:16px;line-height:32px;margin-left:20px;}
+.containerPopup{background-color:#fff;width:650px;padding:10px 30px;border:solid 1px #4ea5cd;}
+.popupheading{font-size:16px;border-bottom:solid 1px #bbbbbb;line-height:30px;margin-bottom:30px;color:#000;font-weight:bold;}
+.containerPopup .frmControl{padding-left:20px;}
+.alert2{border:1px solid transparent;border-radius:4px;margin-bottom:2px;padding:3px;}
+.label2{font-size:11px;font-weight:normal;margin-bottom:2px;}

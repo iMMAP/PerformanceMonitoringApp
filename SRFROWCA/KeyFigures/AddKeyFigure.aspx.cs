@@ -23,7 +23,7 @@ namespace SRFROWCA.KeyFigures
                 IsPopulation = 0;
                 LoadCountry();
                 DisableDropDowns();
-                LoadCategories();                
+                LoadCategories();
                 txtFromDate.BackColor = ColorTranslator.FromHtml("#FFE6E6");
                 if (Request.QueryString["d"] == null && Request.QueryString["u"] == null)
                 {
@@ -45,13 +45,13 @@ namespace SRFROWCA.KeyFigures
         {
             if (Session["KeyFigureFilterCountry"] != null)
             {
-                int emgLocationId = 0;
-                int.TryParse(Session["KeyFigureFilterCountry"].ToString(), out emgLocationId);
-                if (emgLocationId > 0)
+                int countryId = 0;
+                int.TryParse(Session["KeyFigureFilterCountry"].ToString(), out countryId);
+                if (countryId > 0)
                 {
                     try
                     {
-                        ddlCountry.SelectedValue = emgLocationId.ToString();
+                        ddlCountry.SelectedValue = countryId.ToString();
                     }
                     catch { }
                 }
@@ -101,10 +101,10 @@ namespace SRFROWCA.KeyFigures
 
             //}
 
-            int emgLocId = 0;
+            int countryId = 0;
             if (Request.QueryString["l"] != null)
             {
-                int.TryParse(Request.QueryString["l"].ToString(), out emgLocId);
+                int.TryParse(Request.QueryString["l"].ToString(), out countryId);
             }
 
             int catId = 0;
@@ -131,10 +131,10 @@ namespace SRFROWCA.KeyFigures
                     date = Request.QueryString["d"].ToString();
                 }
             }
-            if (date !=null && emgLocId > 0 && catId > 0 && subCatId > 0)
+            if (date != null && countryId > 0 && catId > 0 && subCatId > 0)
             {
                 txtFromDate.Text = date;
-                ddlCountry.SelectedValue = emgLocId.ToString();
+                ddlCountry.SelectedValue = countryId.ToString();
                 ddlCategory.SelectedValue = catId.ToString();
                 ddlSubCategory.SelectedValue = subCatId.ToString();
 
@@ -178,7 +178,8 @@ namespace SRFROWCA.KeyFigures
 
         private void LoadCountry()
         {
-            UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
+            //UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
+            UI.FillCountry(ddlCountry);
             ddlCountry.Items.Insert(0, new ListItem("All", "0"));
             SetComboValues();
         }
@@ -213,7 +214,8 @@ namespace SRFROWCA.KeyFigures
         {
             if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User))
             {
-                ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
+                //ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
+                ddlCountry.SelectedValue = UserInfo.Country.ToString();
             }
         }
 
@@ -264,7 +266,7 @@ namespace SRFROWCA.KeyFigures
             string date = null;
             if (!string.IsNullOrEmpty(txtFromDate.Text.Trim()))
             {
-                DateTime.TryParseExact(txtFromDate.Text.Trim(), "dd-MM-yyyy", CultureInfo.InvariantCulture, 
+                DateTime.TryParseExact(txtFromDate.Text.Trim(), "dd-MM-yyyy", CultureInfo.InvariantCulture,
                                                                             DateTimeStyles.None, out dateTime);
                 if (dateTime != DateTime.MinValue)
                 {
@@ -278,8 +280,8 @@ namespace SRFROWCA.KeyFigures
             }
 
             int subCatId = RC.GetSelectedIntVal(ddlSubCategory);
-            int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
-            DataTable dt = DBContext.GetData("GetKeyFigureReport", new object[] { date, emgLocationId, subCatId, RC.SelectedSiteLanguageId });
+            int countryId = RC.GetSelectedIntVal(ddlCountry);
+            DataTable dt = DBContext.GetData("GetKeyFigureReport", new object[] { date, countryId, subCatId, RC.SelectedSiteLanguageId });
             rptKeyFigure.DataSource = dt;
             rptKeyFigure.DataBind();
         }
@@ -296,6 +298,25 @@ namespace SRFROWCA.KeyFigures
             RC.ShowMessage(Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
         }
 
+        public bool IsValidUri(string uri)
+        {
+            bool returnVal = false;
+            try
+            {
+                Uri validatedUri;
+                if (Uri.TryCreate(uri, UriKind.RelativeOrAbsolute, out validatedUri))
+                {
+                    returnVal = (validatedUri.Scheme == Uri.UriSchemeHttp || validatedUri.Scheme == Uri.UriSchemeHttps);
+                }
+            }
+            catch
+            {
+                //returnVal = false;
+            }
+
+            return returnVal;
+        }
+
         private bool SaveKeyFigures()
         {
             bool returnVal = true;
@@ -303,16 +324,16 @@ namespace SRFROWCA.KeyFigures
                                 DateTime.ParseExact(txtFromDate.Text.Trim(), "dd-MM-yyyy", CultureInfo.InvariantCulture) :
                                 DateTime.MinValue;
 
-            int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
+            int countryId = RC.GetSelectedIntVal(ddlCountry);
             int kfSubCategoryId = RC.GetSelectedIntVal(ddlSubCategory);
             if (!IsSourceProvided())
             {
-                ShowMessage("Error Saving! Please provide source of the reported Key Figure(s).", RC.NotificationType.Error, true, 3000);
+                ShowMessage("Error Saving! Please provide valid source (URL) of the reported Key Figure(s). You can also upload your document to HR-Info and provide link of that document!", RC.NotificationType.Error, true, 5000);
                 returnVal = false;
             }
             else
             {
-                if (!IsExistsInCaseOfDuplicate(date, emgLocationId, kfSubCategoryId))
+                if (!IsExistsInCaseOfDuplicate(date, countryId, kfSubCategoryId))
                 {
                     foreach (RepeaterItem item in rptKeyFigure.Items)
                     {
@@ -326,8 +347,8 @@ namespace SRFROWCA.KeyFigures
                                 DeleteKeyFigure(kfReportId);
                             }
 
-                            SaveKeyFigure(item, date, emgLocationId, kfSubCategoryId, kfIndicatorId);
-                            SaveAdmin1Values(item, date, emgLocationId, kfSubCategoryId, kfIndicatorId);
+                            SaveKeyFigure(item, date, countryId, kfSubCategoryId, kfIndicatorId);
+                            SaveAdmin1Values(item, date, countryId, kfSubCategoryId, kfIndicatorId);
                         }
                     }
                     LoadData();
@@ -377,7 +398,7 @@ namespace SRFROWCA.KeyFigures
                     if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
                     {
                         returnVal = KeyFigureSource(item);
-                        if (!returnVal) 
+                        if (!returnVal)
                             break;
                     }
                 }
@@ -416,15 +437,22 @@ namespace SRFROWCA.KeyFigures
                 {
                     returnVal = false;
                 }
+                else
+                {
+                    if (!IsValidUri(txtKfSource.Text.Trim()))
+                    {
+                        returnVal = false;
+                    }
+                }
             }
 
             return returnVal;
         }
 
-        private bool IsExistsInCaseOfDuplicate(DateTime date, int emgLocationId, int kfSubCategoryId)
+        private bool IsExistsInCaseOfDuplicate(DateTime date, int countryId, int kfSubCategoryId)
         {
             if (IsDuplicate == 1)
-                return (DBContext.GetData("IsKeyFiguresExistsInReports", new object[] { date, emgLocationId, kfSubCategoryId }).Rows.Count > 0);
+                return (DBContext.GetData("IsKeyFiguresExistsInReports", new object[] { date, countryId, kfSubCategoryId }).Rows.Count > 0);
             return false;
         }
 
@@ -433,7 +461,7 @@ namespace SRFROWCA.KeyFigures
             DBContext.Delete("DeleteKeyFigure", new object[] { kfReportId, DBNull.Value });
         }
 
-        private void SaveAdmin1Values(RepeaterItem mainRepeaterItem, DateTime date, int emgLocId, int kfSubCatId, int kfIndId)
+        private void SaveAdmin1Values(RepeaterItem mainRepeaterItem, DateTime date, int countryId, int kfSubCatId, int kfIndId)
         {
             Repeater rptAdmin1 = mainRepeaterItem.FindControl("rptAdmin1") as Repeater;
             if (rptAdmin1 != null)
@@ -442,7 +470,7 @@ namespace SRFROWCA.KeyFigures
                 {
                     if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
                     {
-                        SaveKeyFigure(item, date, emgLocId, kfSubCatId, kfIndId);
+                        SaveKeyFigure(item, date, countryId, kfSubCatId, kfIndId);
                     }
                 }
             }
@@ -487,13 +515,13 @@ namespace SRFROWCA.KeyFigures
         private int SaveReportMain(int kfIndicatorId)
         {
             DateTime date = Convert.ToDateTime(txtFromDate.Text);
-            int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
+            int countryId = RC.GetSelectedIntVal(ddlCountry);
             int kfSubCategoryId = RC.GetSelectedIntVal(ddlSubCategory);
 
-            return DBContext.Add("InsertKeyFigureReport", new object[] { emgLocationId, kfSubCategoryId, kfIndicatorId, date, RC.GetCurrentUserId, DBNull.Value });
+            return DBContext.Add("InsertKeyFigureReport", new object[] { countryId, kfSubCategoryId, kfIndicatorId, date, RC.GetCurrentUserId, DBNull.Value });
         }
 
-        internal void SaveKeyFigure(RepeaterItem item, DateTime date, int emgLocationId, int kfSubCatId, int kfIndId)
+        internal void SaveKeyFigure(RepeaterItem item, DateTime date, int countryId, int kfSubCatId, int kfIndId)
         {
             int locationId = GetValueFromHiddenField(item, "hfLocationId");
 
@@ -531,7 +559,7 @@ namespace SRFROWCA.KeyFigures
                                  );
             if (locationId > 0 && valueProvied)
             {
-                DBContext.Add("InsertKeyFigureReportDetails", new object[] {date, emgLocationId, kfSubCatId, kfIndId, locationId, 
+                DBContext.Add("InsertKeyFigureReportDetails", new object[] {date, countryId, kfSubCatId, kfIndId, locationId, 
                                                                             totalTotal, totalMen, totalWomen,
                                                                             needTotal, needMen, needWomen,
                                                                             targatedTotal, targatedMen, targatedWomen,
@@ -581,8 +609,8 @@ namespace SRFROWCA.KeyFigures
                     {
                         int.TryParse(hfKeyFigureReportId.Value, out kfReportId);
                     }
-                    int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
-                    DataTable dtTargets = DBContext.GetData("GetAdmin1ForKeyFigure", new object[] { kfReportId, emgLocationId });
+                    int countryId = RC.GetSelectedIntVal(ddlCountry);
+                    DataTable dtTargets = DBContext.GetData("GetAdmin1ForKeyFigure", new object[] { kfReportId, countryId });
                     rptAdmin1.DataSource = dtTargets;
                     rptAdmin1.DataBind();
                 }

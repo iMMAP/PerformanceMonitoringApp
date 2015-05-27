@@ -39,7 +39,8 @@ namespace SRFROWCA.KeyFigures
 
         private void LoadCountry()
         {
-            UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
+            //UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
+            UI.FillCountry(ddlCountry);
             ddlCountry.Items.Insert(0, new ListItem("Select Country", "0"));
             SetComboValues();
         }
@@ -61,7 +62,8 @@ namespace SRFROWCA.KeyFigures
         {
             if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User))
             {
-                ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
+                //ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
+                ddlCountry.SelectedValue = UserInfo.Country.ToString();
             }
         }
 
@@ -209,6 +211,8 @@ namespace SRFROWCA.KeyFigures
             }
             ddlCategory.SelectedIndex = 0;
             ddlSubCategory.SelectedIndex = 0;
+            cbShowAll.Checked = false;
+            gvKeyFigures.PageIndex = 0;
 
             LoadKeyFigures();
         }
@@ -302,5 +306,7 @@ namespace SRFROWCA.KeyFigures
             gvKeyFigures.PageIndex = 0;
             LoadKeyFigures();
         }
+
+        
     }
 }

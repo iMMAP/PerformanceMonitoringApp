@@ -3,19 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="mainContent" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
-        </script>
-        <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="../Default.aspx">
-                <asp:Localize ID="localBreadCrumbHome" runat="server" Text="Home" meta:resourcekey="localBreadCrumbHome"></asp:Localize></a>
-            </li>
-            <li class="active">
-                <asp:Localize ID="localBreadCrumbProjects" runat="server" Text="Projects" meta:resourcekey="localBreadCrumbProjects"></asp:Localize></li>
-        </ul>
-        <!-- .breadcrumb -->
-    </div>
+    
     <div class="page-content">
         <div id="divMsg"></div>
         <table class="width-100">
@@ -117,7 +105,8 @@
                         OnPageIndexChanging="gvProjects_PageIndexChanging"
                         DataKeyNames="ProjectId,ProjectOrganizationId,OrganizationId"
                         meta:resourcekey="gvProjectsResource1">
-
+                        <RowStyle CssClass="istrow" />
+                        <AlternatingRowStyle CssClass="altcolor" />
                         <Columns>
                             <asp:TemplateField ItemStyle-Width="2%" HeaderText="#" meta:resourcekey="TemplateFieldResource1">
                                 <ItemTemplate>
@@ -128,24 +117,24 @@
                             </asp:TemplateField>
                             <asp:BoundField DataField="ProjectCode" HeaderText="Project Code" SortExpression="ProjectCode"
                                 meta:resourcekey="BoundFieldResource1">
-                                <ItemStyle Width="120px"></ItemStyle>
+                                <ItemStyle Width="10%"></ItemStyle>
                             </asp:BoundField>
-                            <asp:BoundField DataField="ProjectTitle" HeaderText="Project Title" ItemStyle-Wrap="true"
+                            <asp:BoundField DataField="ProjectTitle" HeaderText="Project Title" ItemStyle-Wrap="true" ItemStyle-Width="35%"
                                 SortExpression="ProjectTitle" meta:resourcekey="BoundFieldResource2">
                                 <ItemStyle Wrap="True"></ItemStyle>
                             </asp:BoundField>
                             <asp:BoundField DataField="OrganizationName" HeaderText="Organization" SortExpression="OrganizationName"
-                                meta:resourcekey="BoundFieldResource3" ItemStyle-Width="120px"></asp:BoundField>
+                                meta:resourcekey="BoundFieldResource3" ItemStyle-Width="15%"></asp:BoundField>
                             <asp:BoundField DataField="ClusterName" HeaderText="Subset Cluster" SortExpression="ClusterName" meta:resourcekey="BoundFieldResource4" />
                             <asp:BoundField DataField="SecCluster" HeaderText="Cluster" SortExpression="SecCluster" meta:resourcekey="BoundFieldResource5" />
 
-                            <asp:TemplateField HeaderText="Original Request" SortExpression="OriginalRequest" meta:resourcekey="BoundFieldResource10">
+                            <asp:TemplateField HeaderText="Original Request" SortExpression="OriginalRequest" ItemStyle-HorizontalAlign="Right" meta:resourcekey="BoundFieldResource10">
                                 <ItemTemplate>
                                     <asp:Label ID="lblOriginalRequest" runat="server" Text=' <%# Eval("OriginalRequest")%>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
 
-                            <asp:TemplateField HeaderText="Funded Amount" SortExpression="FundedAmount">
+                            <asp:TemplateField HeaderText="Funded Amount" SortExpression="FundedAmount" ItemStyle-HorizontalAlign="Right">
                                 <ItemTemplate>
                                     <asp:Label ID="lblFundedAmount" runat="server" Text=' <%# Eval("FundedAmount")%>'></asp:Label>
                                 </ItemTemplate>

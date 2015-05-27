@@ -48,16 +48,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
-        </script>
-        <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="../Default.aspx">Home</a> </li>
-            <li class="active">Key Figures List</li>
-        </ul>
-
-    </div>
+    
     <div class="page-content">
         <table style="width: 100%">
             <tr>
@@ -145,7 +136,7 @@
                 OnRowDataBound="gvKeyFigures_RowDataBound" AllowPaging="true" PageSize="50" OnPageIndexChanging="gvKeyFigures_PageIndexChanging"
                 HeaderStyle-BackColor="ButtonFace" OnSorting="gvKeyFigures_Sorting" AllowSorting="true" AllowCustomPaging="true"
                 CssClass="imagetable" Width="100%"
-                DataKeyNames="AsOfDate,AsOfDate2,SubCategoryId,CategoryId,EmergencyLocationId,KeyFigureId"
+                DataKeyNames="AsOfDate,AsOfDate2,SubCategoryId,CategoryId,CountryId,KeyFigureId"
                 EmptyDataText="There are no key figures available!">
                 <PagerSettings Mode="NumericFirstLast" />
                 <HeaderStyle BackColor="Control"></HeaderStyle>
@@ -164,7 +155,13 @@
                     <asp:BoundField DataField="SubCategory" HeaderText="Sub Category" SortExpression="SubCategory" ItemStyle-Width="7%"></asp:BoundField>
                     <asp:BoundField DataField="KeyFigure" HeaderText="Key Figure" SortExpression="KeyFigure" ItemStyle-Width="15%"></asp:BoundField>
                     <asp:BoundField DataField="AsOfDate" HeaderText="As Of Date" SortExpression="AsOfDate" ItemStyle-Width="8%"></asp:BoundField>
-                    <asp:BoundField DataField="KeyFigureSource" HeaderText="Source" SortExpression="KeyFigureSource" HtmlEncode="false" ItemStyle-Width="15%"></asp:BoundField>
+                    <asp:TemplateField ItemStyle-Width="160px" HeaderText="Source">
+                                <ItemTemplate>
+                                    <div style="width: 150px; word-wrap: break-word;">
+                                        <a href='<%# Eval("KeyFigureSource")%>' target="_blank"><%# Eval("KeyFigureSource")%></a>
+                                    </div>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                     <asp:BoundField DataField="FromLocation" HeaderText="From Location" SortExpression="FromLocation" ItemStyle-Width="4%"></asp:BoundField>
                     <asp:BoundField DataField="ReportedLocation" HeaderText="Location" SortExpression="ReportedLocation" ItemStyle-Width="8%"></asp:BoundField>
                     <asp:TemplateField HeaderText="Total" ItemStyle-Width="4%">

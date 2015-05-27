@@ -8,6 +8,18 @@
         }
     </style>
 
+    <script type="text/JavaScript">
+        function pageLoad() {
+            var manager = Sys.WebForms.PageRequestManager.getInstance();
+            manager.add_beginRequest(OnBeginRequest);
+        }
+
+        function OnBeginRequest(sender, args) {
+            $get('MainContent_UpdateProgress2').style.display = "block";
+        }
+
+    </script>
+
     <script type="text/javascript">
 
         function resetAll() {
@@ -61,7 +73,8 @@
                                                             <asp:Label runat="server" ID="lblCountry" Text="Country:"></asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:DropDownList AutoPostBack="true" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" runat="server" ID="ddlCountry" Width="270">
+                                                            <asp:DropDownList ID="ddlCountry" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged"
+                                                                Width="270">
                                                             </asp:DropDownList>
                                                         </td>
                                                         <td>
@@ -117,6 +130,8 @@
                             AllowSorting="True" DataKeyNames="SiteLanguageId" ShowHeader="true" OnRowDataBound="gvClusterReports_RowDataBound"
                             OnSorting="gvClusterReports_Sorting" CssClass="imagetable" AllowPaging="true" AllowCustomPaging="true" PageSize="50"
                             OnPageIndexChanging="gvClusterReports_PageIndexChanging">
+                            <RowStyle CssClass="istrow" />
+                            <AlternatingRowStyle CssClass="altcolor" />
                             <PagerSettings Mode="NumericFirstLast" />
                             <EmptyDataTemplate>
                                 Your filter criteria does not match any record in database!

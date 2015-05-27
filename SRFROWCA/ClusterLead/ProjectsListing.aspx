@@ -4,20 +4,7 @@
 
 <asp:Content ID="headContent" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
-<asp:Content ID="mainContent" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
-        </script>
-        <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="../Default.aspx">
-                <asp:Localize ID="localBreadCrumbHome" runat="server" Text="Home" meta:resourcekey="localBreadCrumbHome"></asp:Localize></a>
-            </li>
-            <li class="active">
-                <asp:Localize ID="localBreadCrumbProjects" runat="server" Text="Projects" meta:resourcekey="localBreadCrumbProjects"></asp:Localize></li>
-        </ul>
-        <!-- .breadcrumb -->
-    </div>
+<asp:Content ID="mainContent" ContentPlaceHolderID="MainContent" runat="server">    
     <div class="page-content">
          <div id="divMsg"></div>
         <table class="width-100">
@@ -147,7 +134,8 @@
                         OnPageIndexChanging="gvProjects_PageIndexChanging"
                         DataKeyNames="ProjectId,ProjectOrganizationId,OrganizationId"
                         meta:resourcekey="gvProjectsResource1">
-
+                        <RowStyle CssClass="istrow" />
+                        <AlternatingRowStyle CssClass="altcolor" />
                         <Columns>
                             <asp:TemplateField ItemStyle-Width="2%" HeaderText="#" meta:resourcekey="TemplateFieldResource1">
                                 <ItemTemplate>
