@@ -146,6 +146,7 @@
     <Content Include="Anonymous\OutputIndicatorReport.aspx" />
     <Content Include="Anonymous\ProjectsListingPublic.aspx" />
     <Content Include="assets\css\bootstrap.min.css" />
+    <Content Include="assets\css\gridviewScroll.css" />
     <Content Include="assets\css\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="assets\css\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
     <Content Include="assets\css\images\ui-bg_flat_10_000000_40x100.png" />
@@ -160,6 +161,11 @@
     <Content Include="assets\css\images\ui-icons_ef8c08_256x240.png" />
     <Content Include="assets\css\images\ui-icons_ffd27a_256x240.png" />
     <Content Include="assets\css\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="assets\js\gridviewScroll.min.js" />
+    <Content Include="assets\orsimages\arrowhl.png" />
+    <Content Include="assets\orsimages\arrowhr.png" />
+    <Content Include="assets\orsimages\arrowvb.png" />
+    <Content Include="assets\orsimages\arrowvt.png" />
     <Content Include="assets\orsimages\Calendar16.png" />
     <Content Include="assets\orsimages\cind.png" />
     <Content Include="assets\orsimages\delete16.png" />
@@ -266,6 +272,15 @@
     <Content Include="ErrorPages\HttpErrorPage.aspx" />
     <Content Include="faq.aspx" />
     <Content Include="favicon.ico" />
+    <Content Include="GV\gridviewScroll.css" />
+    <Content Include="GV\gridviewScroll.js" />
+    <Content Include="GV\gridviewScroll.min.js" />
+    <Content Include="GV\GVScroll.aspx" />
+    <Content Include="GV\Images\arrowhl.png" />
+    <Content Include="GV\Images\arrowhr.png" />
+    <Content Include="GV\Images\arrowvb.png" />
+    <Content Include="GV\Images\arrowvt.png" />
+    <Content Include="GV\WebForm.htm" />
     <Content Include="KeyFigures\AddKeyFigure.aspx" />
     <Content Include="KeyFigures\AddKeyFigureCategory.aspx" />
     <Content Include="KeyFigures\AddKeyFigureCategoryCtrl.ascx" />
@@ -357,6 +372,7 @@
     <Content Include="DataFeeds\IndicatorsWithClusterProjectTargets.ashx" />
     <Content Include="DataFeeds\FTSFundingFeed.ashx" />
     <Content Include="assets\font\FontAwesome.otf" />
+    <Content Include="GV\README.md" />
     <None Include="HelpFiles\HelpDocs\HelpEng\1_ORS_description_EN_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpEng\2_ORS_Resgistration_EN_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpEng\3_ORS_Role_EN_v3.pdf" />
@@ -943,6 +959,13 @@
     </Compile>
     <Compile Include="faq.aspx.designer.cs">
       <DependentUpon>faq.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GV\GVScroll.aspx.cs">
+      <DependentUpon>GVScroll.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GV\GVScroll.aspx.designer.cs">
+      <DependentUpon>GVScroll.aspx</DependentUpon>
     </Compile>
     <Compile Include="KeyFigures\AddKeyFigure.aspx.cs">
       <DependentUpon>AddKeyFigure.aspx</DependentUpon>

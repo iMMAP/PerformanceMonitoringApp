@@ -39,10 +39,16 @@ namespace SRFROWCA.ClusterLead
         {
             if (!RC.IsRegionalClusterLead(this.User))
             {
-                if (IsTargetProvided())
+                if (Request.QueryString["cnid"] != null)
                 {
-                    ShowValidationMessage();
-                    return;
+                    if (!(Request.QueryString["cnid"].ToString() == "11"))
+                    {
+                        if (IsTargetProvided())
+                        {
+                            ShowValidationMessage();
+                            return;
+                        }
+                    }
                 }
             }
 
@@ -234,14 +240,11 @@ namespace SRFROWCA.ClusterLead
             {
                 emgLocationId = UserInfo.EmergencyCountry;
             }
-
-            DataTable dtTargets = GetRegionalAdmin1(emgLocationId, indicatorId);
-            rptAdmin1.DataSource = dtTargets;
-            rptAdmin1.DataBind();
-
-            if (RC.IsRegionalClusterLead(this.User))
+            if (!(RC.IsRegionalClusterLead(this.User) || emgLocationId == 11))
             {
-                rptAdmin1.Visible = false;
+                DataTable dtTargets = GetRegionalAdmin1(emgLocationId, indicatorId);
+                rptAdmin1.DataSource = dtTargets;
+                rptAdmin1.DataBind();
             }
         }
 

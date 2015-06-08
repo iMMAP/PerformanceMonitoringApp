@@ -7,10 +7,11 @@
         function pageLoad() {
             var manager = Sys.WebForms.PageRequestManager.getInstance();
             manager.add_beginRequest(OnBeginRequest);
+            AddHeader();
         }
 
         function OnBeginRequest(sender, args) {
-            $get('MainContent_UpdateProgress2').style.display = "block";
+            $get('MainContent_UpdateProgress2').style.display = "block";            
         }
 
     </script>

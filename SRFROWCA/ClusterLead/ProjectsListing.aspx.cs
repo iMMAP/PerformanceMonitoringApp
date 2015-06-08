@@ -26,7 +26,6 @@ namespace SRFROWCA.ClusterLead
 
             PopulateControls();
             LoadProjects();
-            DisableDropDowns();
         }
 
         internal override void BindGridData()
@@ -39,8 +38,8 @@ namespace SRFROWCA.ClusterLead
             PopulateOrganizations();
             PopulateCountries();
             PopulateClusters();
-
-            SetComboValues();
+            UI.SetUserCountry(ddlCountry);
+            UI.SetUserCluster(ddlClusters);
         }
 
         private void PopulateClusters()
@@ -50,39 +49,6 @@ namespace SRFROWCA.ClusterLead
 
             UI.FillEmergnecyClusters(ddlSecClusters, RC.SelectedEmergencyId);
             RC.AddSelectItemInList(ddlSecClusters, "Select");
-        }
-
-        private void SetComboValues()
-        {
-            if (RC.IsClusterLead(this.User) || RC.IsRegionalClusterLead(this.User))
-            {
-                ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
-                ddlClusters.SelectedValue = UserInfo.EmergencyCluster.ToString();
-            }
-
-            if (RC.IsCountryAdmin(this.User) || RC.IsDataEntryUser(this.User) || RC.IsOCHAStaff(this.User))
-            {
-                ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
-            }
-        }
-
-        private void DisableDropDowns()
-        {
-            if (RC.IsClusterLead(this.User))
-            {
-                RC.EnableDisableControls(ddlClusters, false);
-                RC.EnableDisableControls(ddlCountry, false);
-            }
-
-            if (RC.IsRegionalClusterLead(this.User))
-            {
-                RC.EnableDisableControls(ddlClusters, false);
-            }
-
-            if (RC.IsCountryAdmin(this.User) || RC.IsDataEntryUser(this.User) || RC.IsOCHAStaff(this.User))
-            {
-                RC.EnableDisableControls(ddlCountry, false);
-            }
         }
 
         private void PopulateOrganizations()
@@ -380,6 +346,11 @@ namespace SRFROWCA.ClusterLead
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadProjects();
+        }
+
+        protected void SelectedIndexChanged (object sender, EventArgs e)
         {
             LoadProjects();
         }

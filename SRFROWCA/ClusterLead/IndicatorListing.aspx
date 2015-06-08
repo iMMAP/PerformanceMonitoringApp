@@ -16,16 +16,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
-        </script>
-        <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="#">Home</a> </li>
-            <li class="active">Indicators</li>
-        </ul>
-        <!-- .breadcrumb -->
-    </div>
+   
     <div class="page-content">
         <table border="0" cellpadding="2" cellspacing="0" class="pstyle1" width="100%">
             <tr>
@@ -148,10 +139,11 @@
 
         <div class="tablegrid">
             <div style="overflow-x: auto; width: 100%">
-                <asp:GridView ID="gvActivity" runat="server" AutoGenerateColumns="false" AllowSorting="True" AllowPaging="true" PagerSettings-Mode="NumericFirstLast"
-                    OnRowCommand="gvActivity_RowCommand" Width="100%" OnRowDataBound="gvActivity_RowDataBound" PagerSettings-Position="Bottom" DataKeyNames="ActivityId,IndicatorDetailId,IndicatorId"
-                    CssClass="table-striped table-bordered table-hover" OnSorting="gvActivity_Sorting" OnPageIndexChanging="gvActivity_PageIndexChanging"
-                    PageSize="30" ShowHeaderWhenEmpty="true" EmptyDataText="Your filter criteria does not match any indicator!">
+                <asp:GridView ID="gvActivity" runat="server" AutoGenerateColumns="false" AllowSorting="True" AllowPaging="true" Width="100%" 
+                    PagerSettings-Mode="NumericFirstLast" OnRowCommand="gvActivity_RowCommand" OnRowDataBound="gvActivity_RowDataBound" 
+                    PagerSettings-Position="Bottom" DataKeyNames="ActivityId,IndicatorDetailId,IndicatorId"
+                    CssClass="imagetable" OnSorting="gvActivity_Sorting" OnPageIndexChanging="gvActivity_PageIndexChanging"
+                    PageSize="70" ShowHeaderWhenEmpty="true" EmptyDataText="Your filter criteria does not match any indicator!">
                     <Columns>
                         <asp:TemplateField ItemStyle-Width="2%" HeaderText="#" meta:resourcekey="TemplateFieldResource1">
                             <ItemTemplate>
@@ -162,14 +154,20 @@
                         <asp:BoundField DataField="Country" HeaderText="Country" SortExpression="Country" ItemStyle-Width="80px"></asp:BoundField>
                         <asp:BoundField DataField="ClusterName" HeaderText="Cluster" SortExpression="ClusterName" ItemStyle-Width="150px" />
                         <asp:BoundField DataField="ShortObjective" HeaderText="Objective" SortExpression="ShortObjective" ItemStyle-Width="90px" />
+                        <asp:TemplateField HeaderText="Active Activity" ItemStyle-HorizontalAlign="Center">
+                            <ItemTemplate>
+                                <asp:CheckBox ID="cbIsActivityActive" runat="server" Checked='<%# Eval("IsActivityActive") %>' OnCheckedChanged="cbActivityActive_Changed" AutoPostBack="true" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:BoundField DataField="Activity" HeaderText="Activity" SortExpression="Activity" />
                         <asp:BoundField DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator" />
-                        <asp:BoundField DataField="Unit" HeaderText="Unit" SortExpression="Unit" />
-                        <asp:TemplateField HeaderText="Active">
+                        <asp:TemplateField HeaderText="Active Indicator" ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>
                                 <asp:CheckBox ID="cbIsActive" runat="server" Checked='<%# Eval("IsActive") %>' OnCheckedChanged="cbActive_Changed" AutoPostBack="true" />
                             </ItemTemplate>
                         </asp:TemplateField>
+                        <asp:BoundField DataField="Unit" HeaderText="Unit" SortExpression="Unit" />
+                        
                         <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle" HeaderStyle-Width="30px">
                             <ItemTemplate>
                                 <asp:LinkButton ID="btnEdit" runat="server" Text="Edit" Width="30px" CausesValidation="false"

@@ -34,17 +34,18 @@ namespace SRFROWCA.Pages
                 Session["SiteChanged"] = null;
             }
 
+            //var wdth = Page.Request.Params["width"];
+            //var a = 
+            //var width1 = Page.Request.Params["width"];
+
             if (!IsPostBack)
             {
                 PopulateLocations();
-                PopulateYears();
                 PopulateMonths();
                 PopulateProjects();
 
-                if (rblProjects.Items.Count > 0)
-                    rblProjects.SelectedIndex = 0;
-
-                PopulateObjectives();
+                if (ddlProjects.Items.Count > 0)
+                    ddlProjects.SelectedIndex = 0;
             }
 
             PopulateToolTips();
@@ -52,7 +53,7 @@ namespace SRFROWCA.Pages
             //this.Form.DefaultButton = this.btnSave.UniqueID;
             string controlName = GetPostBackControlId(this);
 
-            if (controlName == "ddlMonth" || controlName == "ddlYear" || controlName == "rblProjects" || controlName == "ddlWeeks")
+            if (controlName == "ddlMonth" || controlName == "ddlProjects")
             {
                 LocationRemoved = 0;
                 RemoveSelectedLocations(cblAdmin1);
@@ -77,13 +78,6 @@ namespace SRFROWCA.Pages
             AddLocationsInSelectedList();
         }
 
-        private DataTable GetWeeksOfYear()
-        {
-            int yearId = 0;
-            int.TryParse(ddlYear.SelectedValue, out yearId);
-            return DBContext.GetData("GetWeeksOfTheYear", new object[] { yearId });
-        }
-
         protected void ddlMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
             LocationRemoved = 0;
@@ -98,7 +92,7 @@ namespace SRFROWCA.Pages
             AddLocationsInSelectedList();
         }
 
-        protected void rblProjects_SelectedIndexChanged(object sender, EventArgs e)
+        protected void ddlProjects_SelectedIndexChanged(object sender, EventArgs e)
         {
             BindGridData();
             AddLocationsInSelectedList();
@@ -135,8 +129,17 @@ namespace SRFROWCA.Pages
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 ObjPrToolTip.ObjectiveIconToolTip(e, 0);
-                ObjPrToolTip.PrioritiesIconToolTip(e, 1);
             }
+
+            //var TheBrowserWidth = width.Value;
+
+            e.Row.Cells[0].Visible = false;
+            //e.Row.Cells[e.Row.Cells.Count - 1].Width = 60;            
+
+            //for (int i = 6; i < cellCount; i++)
+            //{   
+            //    e.Row.Cells[i].Width = 60;
+            //}
         }
 
         protected void btnImgClick(object sender, EventArgs e)
@@ -263,20 +266,6 @@ namespace SRFROWCA.Pages
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 
-        private void PopulateYears()
-        {
-            ddlYear.DataValueField = "YearId";
-            ddlYear.DataTextField = "Year";
-
-            ddlYear.DataSource = GetYears();
-            ddlYear.DataBind();
-
-            var result = DateTime.Parse(DateTime.Now.ToShortDateString()).Year;
-            ddlYear.SelectedIndex = ddlYear.Items.IndexOf(ddlYear.Items.FindByText(result.ToString()));
-            ddlYear.Enabled = false;
-            ddlYear.BackColor = Color.LightGray;
-        }
-
         private DataTable GetYears()
         {
             DataTable dt = DBContext.GetData("GetYears");
@@ -339,10 +328,10 @@ namespace SRFROWCA.Pages
         private void PopulateProjects()
         {
             DataTable dt = GetUserProjects();
-            rblProjects.DataValueField = "ProjectId";
-            rblProjects.DataTextField = "ProjectCode";
-            rblProjects.DataSource = dt;
-            rblProjects.DataBind();
+            ddlProjects.DataValueField = "ProjectId";
+            ddlProjects.DataTextField = "ProjectCode";
+            ddlProjects.DataSource = dt;
+            ddlProjects.DataBind();
         }
 
         private DataTable GetUserProjects()
@@ -350,19 +339,10 @@ namespace SRFROWCA.Pages
             return RC.GetOrgProjectsOnLocation(null);
         }
 
-        private void PopulateObjectives()
-        {
-            UI.FillObjectives(cblObjectives, true, RC.SelectedEmergencyId);
-        }
-
-
-
         private void PopulateToolTips()
         {
-            ObjPrToolTip.ObjectivesToolTip(cblObjectives);
-
             DataTable dt = GetUserProjects();
-            ProjectsToolTip(rblProjects, dt);
+            ProjectsToolTip(ddlProjects, dt);
         }
 
         private void ProjectsToolTip(ListControl ctl, DataTable dt)
@@ -387,19 +367,16 @@ namespace SRFROWCA.Pages
 
         private DataTable GetActivities()
         {
-            int yearId = 0;
-            int.TryParse(ddlYear.SelectedValue, out yearId);
-
             int monthId = 0;
             int.TryParse(ddlMonth.SelectedValue, out monthId);
 
-            int projectId = RC.GetSelectedIntVal(rblProjects);
+            int projectId = RC.GetSelectedIntVal(ddlProjects);
 
             string locationIds = GetSelectedLocations();
             string locIdsNotIncluded = GetNotSelectedLocations();
             Guid userId = RC.GetCurrentUserId;
 
-            DataTable dt = DBContext.GetData("GetIPData2015", new object[] { UserInfo.EmergencyCountry, locationIds, yearId, monthId,
+            DataTable dt = DBContext.GetData("GetIPData2015", new object[] { UserInfo.EmergencyCountry, locationIds, GetYearId, monthId,
                                                                         locIdsNotIncluded, RC.SelectedSiteLanguageId, userId,
                                                                         UserInfo.Organization, projectId});
             if (dt.Rows.Count <= 0 && !string.IsNullOrEmpty(locationIds))
@@ -425,27 +402,17 @@ namespace SRFROWCA.Pages
                      columnName == "objAndPId" || columnName == "ProjectIndicatorId" || columnName == "Unit" || columnName == "ActivityId"
                     ))
                 {
-                    if (columnName.Contains("Accum"))
+                    if (columnName.Contains("_AT"))
                     {
-                        customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, "CheckBox", column.ColumnName, "1");
-                        //customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, "CheckBox", column.ColumnName, "1");
-                        customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, "CheckBox", "ACM", "1");
+                        customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, column.ColumnName, "Annual");
+                        customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, column.ColumnName, "Annual");
                         gvActivities.Columns.Add(customField);
                     }
                     else
                     {
-                        if (columnName.Contains("_1-"))
-                        {
-                            customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, "TextBox", column.ColumnName, "Annual");
-                            customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, "TextBox", column.ColumnName, "Annual");
-                            gvActivities.Columns.Add(customField);
-                        }
-                        else
-                        {
-                            customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, "TextBox", column.ColumnName);
-                            customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, "TextBox", column.ColumnName);
-                            gvActivities.Columns.Add(customField);
-                        }
+                        customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, column.ColumnName);
+                        customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, column.ColumnName);
+                        gvActivities.Columns.Add(customField);
                     }
                 }
             }
@@ -453,14 +420,13 @@ namespace SRFROWCA.Pages
 
         private void GetReportId()
         {
-            int yearId = RC.GetSelectedIntVal(ddlYear);
             int monthId = RC.GetSelectedIntVal(ddlMonth);
-            int projectId = RC.GetSelectedIntVal(rblProjects);
+            int projectId = RC.GetSelectedIntVal(ddlProjects);
 
             using (ORSEntities db = new ORSEntities())
             {
                 Report r = db.Reports.Where(x => x.ProjectId == projectId
-                                            && x.YearId == yearId
+                                            && x.YearId == GetYearId
                                             && x.MonthId == monthId
                                             && x.EmergencyLocationId == UserInfo.EmergencyCountry
                                             && x.OrganizationId == UserInfo.Organization).SingleOrDefault();
@@ -475,8 +441,6 @@ namespace SRFROWCA.Pages
             GetReportId();
             gvActivities.DataSource = dt;
             gvActivities.DataBind();
-
-            PopulateObjectives();
             PopulateToolTips();
             BindCultureResourcesOfPage();
         }
@@ -577,10 +541,10 @@ namespace SRFROWCA.Pages
             try
             {
                 int countryID = UserInfo.Country > 0 ? UserInfo.Country : 0;
-                int projId = RC.GetSelectedIntVal(rblProjects);
+                int projId = RC.GetSelectedIntVal(ddlProjects);
 
-                string monthName = ddlMonth.SelectedItem.Text + " - " + ddlYear.SelectedItem.Text;
-                string projectCode = rblProjects.SelectedItem.Text;
+                string monthName = ddlMonth.SelectedItem.Text + " - 2015";
+                string projectCode = ddlProjects.SelectedItem.Text;
                 string country = UserInfo.CountryName;
 
                 DataTable dtEmails = DBContext.GetData("uspGetUserEmails", new object[] { countryID, projId });
@@ -627,7 +591,6 @@ namespace SRFROWCA.Pages
         private int SaveReport()
         {
             DeleteReporProjectPartners();
-            DeleteReportAccumulatives();
             SaveReportLocations();
             return SaveReportDetails();
         }
@@ -646,10 +609,10 @@ namespace SRFROWCA.Pages
         {
             int yearId = 11;// RC.GetSelectedIntVal(ddlYear);
             int monthId = RC.GetSelectedIntVal(ddlMonth);
-            int projId = RC.GetSelectedIntVal(rblProjects);
+            int projId = RC.GetSelectedIntVal(ddlProjects);
             Guid loginUserId = RC.GetCurrentUserId;
             int reportingYear = 2015;
-            string reportName = rblProjects.SelectedItem.Text + " (" + ddlMonth.SelectedItem.Text + "15)";
+            string reportName = ddlProjects.SelectedItem.Text + " (" + ddlMonth.SelectedItem.Text + "15)";
             ReportId = DBContext.Add("InsertReport2015", new object[] { yearId, monthId, projId, UserInfo.EmergencyCountry,
                                                                     UserInfo.Organization, loginUserId, reportName, reportingYear, DBNull.Value });
         }
@@ -677,7 +640,6 @@ namespace SRFROWCA.Pages
         {
             int activityDataId = 0;
             int projIndicatorId = 0;
-            int yearId = RC.GetSelectedIntVal(ddlYear);
             int monthId = RC.GetSelectedIntVal(ddlMonth);
             int activityId = 0;
             int returnCodeForUpdate = 0;
@@ -685,7 +647,7 @@ namespace SRFROWCA.Pages
             {
                 if (row.RowType == DataControlRowType.DataRow)
                 {
-                    int projectId = RC.GetSelectedIntVal(rblProjects);
+                    int projectId = RC.GetSelectedIntVal(ddlProjects);
                     activityDataId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString());
                     projIndicatorId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["ProjectIndicatorId"].ToString());
                     activityId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["ActivityId"].ToString());
@@ -698,15 +660,6 @@ namespace SRFROWCA.Pages
                     {
                         string colName = dc.ColumnName;
                         int locationId = 0;
-
-                        CheckBox cbAccum = row.FindControl(colName) as CheckBox;
-                        if (cbAccum != null)
-                        {
-                            if (cbAccum.Checked)
-                            {
-                                SaveAccumulative(projectId, yearId, activityDataId, cbAccum.Checked);
-                            }
-                        }
 
                         HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
                         if (hf != null)
@@ -754,7 +707,7 @@ namespace SRFROWCA.Pages
                                 {
                                     if (achieved != null)
                                     {
-                                        DBContext.Add("InsertReportProjectPartners", new object[] { ReportId, projectId, monthId, yearId, activityId, 
+                                        DBContext.Add("InsertReportProjectPartners", new object[] { ReportId, projectId, monthId, GetYearId, activityId, 
                                                                                                 locationIdToSave, UserInfo.Organization, RC.GetCurrentUserId, DBNull.Value });
                                     }
 
@@ -774,18 +727,6 @@ namespace SRFROWCA.Pages
             }
 
             return returnCodeForUpdate;
-        }
-
-        private void DeleteReportAccumulatives()
-        {
-            int projectId = RC.GetSelectedIntVal(rblProjects);
-            int yearId = RC.GetSelectedIntVal(ddlYear);
-            DBContext.Delete("DeleteReportAccumulatives", new object[] { projectId, yearId, DBNull.Value });
-        }
-
-        private void SaveAccumulative(int projectId, int yearId, int activityDataId, bool isAccum)
-        {
-            DBContext.Add("InsertReportAccumulative", new object[] { projectId, yearId, activityDataId, isAccum, RC.GetCurrentUserId, DBNull.Value });
         }
 
         public string GetPostBackControlId(Page page)
@@ -923,13 +864,10 @@ namespace SRFROWCA.Pages
 
         private DataTable GetProjectsData(bool isPivot)
         {
-            int yearId = 0;
-            int.TryParse(ddlYear.SelectedValue, out yearId);
-
             int monthId = 0;
             int.TryParse(ddlMonth.SelectedValue, out monthId);
 
-            int projectId = RC.GetSelectedIntVal(rblProjects);
+            int projectId = RC.GetSelectedIntVal(ddlProjects);
             Guid userId = RC.GetCurrentUserId;
 
             string procedureName = "GetProjectsReportDataOfMultipleProjectsAndMonths";
@@ -938,9 +876,17 @@ namespace SRFROWCA.Pages
                 procedureName = "GetProjectsDataByLocations";
             }
 
-            DataTable dt = DBContext.GetData(procedureName, new object[] { UserInfo.EmergencyCountry, UserInfo.Organization, yearId, monthId,
-                                                                        projectId, RC.SelectedSiteLanguageId, userId});
+            DataTable dt = DBContext.GetData(procedureName, new object[] { UserInfo.EmergencyCountry, UserInfo.Organization, 
+                                                                            GetYearId, monthId, projectId, RC.SelectedSiteLanguageId, userId});
             return dt;
+        }
+
+        public int GetYearId
+        {
+            get
+            {
+                return (int)RC.YearsInDB.Year2015;
+            }
         }
 
         //private void GeneratePDF(DataTable dt)
@@ -1030,19 +976,57 @@ namespace SRFROWCA.Pages
 
         #endregion
 
+        protected void gvActivities_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.Header)
+            {
+                GridViewRow gvHeaderRow = e.Row;
+                GridViewRow gvHeaderRowCopy = new GridViewRow(0, 0, DataControlRowType.Header, DataControlRowState.Insert);
+
+                this.gvActivities.Controls[0].Controls.AddAt(0, gvHeaderRowCopy);
+
+                int headerCellCount = gvHeaderRow.Cells.Count;
+                TableCell tcMergeProduct = new TableCell();
+                tcMergeProduct.Text = "-";
+                tcMergeProduct.ColumnSpan = 5;
+                gvHeaderRowCopy.Cells.AddAt(0, tcMergeProduct);
+
+                if (headerCellCount > 6)
+                {
+                    if (e.Row.RowType == DataControlRowType.Header)
+                    {
+                        int j = 1;
+                        for (int i = 6; i < headerCellCount; i++)
+                        {
+                            string headerText = ((e.Row.Cells[i].Controls[0]) as Label).Text;
+                            string cityName = headerText.Substring(0, headerText.IndexOf('_'));
+
+                            TableCell tcHeader = gvHeaderRow.Cells[i];
+                            TableCell tcMergePackage0 = new TableCell();
+                            tcMergePackage0.Text = "<center>" + cityName + "</b></center>";
+                            tcMergePackage0.HorizontalAlign = HorizontalAlign.Center;
+                            tcMergePackage0.ColumnSpan = 2;
+                            gvHeaderRowCopy.Cells.AddAt(j, tcMergePackage0);
+                            ((e.Row.Cells[i].Controls[0]) as Label).Text = "Annual</br>Target";
+                            ((e.Row.Cells[++i].Controls[0]) as Label).Text = "Monthly</br>Achieved";
+                            j++;
+                        }
+                    }
+                }
+            }
+        }
+
     }
 
     public class GridViewTemplate : ITemplate
     {
         private readonly DataControlRowType _templateType;
         private readonly string _columnName;
-        private readonly string _controlType;
         private readonly string _txtBoxType;
 
-        public GridViewTemplate(DataControlRowType type, string controlType, string colname, string txtBoxType = "Achieved")
+        public GridViewTemplate(DataControlRowType type, string colname, string txtBoxType = "Achieved")
         {
             _templateType = type;
-            _controlType = controlType;
             _columnName = colname;
             _txtBoxType = txtBoxType;
         }
@@ -1052,48 +1036,28 @@ namespace SRFROWCA.Pages
             // Create the content for the different row types.
             if (_templateType == DataControlRowType.Header)
             {
-                if (_columnName == "ACM")
-                {
-                    Label lc = new Label { Width = 25, Text = "<b>ACM</b>" };
-                    container.Controls.Add(lc);
-                }
-                else
-                {
-                    string[] words = _columnName.Split('^');
-                    Label lc = new Label { Width = 50, Text = "<b>" + words[1] + "</b>" };
-                    container.Controls.Add(lc);
-                }
+                string[] words = _columnName.Split(new string[] { "--" }, StringSplitOptions.None);
+                Label lc = new Label { Width = 50, Text = "<b>" + words[1] + "</b>" };
+                container.Controls.Add(lc);
+
             }
             else if (_templateType == DataControlRowType.DataRow)
             {
-                if (_controlType == "TextBox")
-                {
-                    TextBox txtAchieved = new TextBox { CssClass = "numeric1", Width = 50 };
-                    txtAchieved.DataBinding += txtAchieved_DataBinding;
-                    container.Controls.Add(txtAchieved);
-                    HiddenField hf = new HiddenField();
-                    string[] words1 = _columnName.Split('^');
-                    hf.Value = words1[0];
-                    hf.ID = "hf" + _columnName;
-                    container.Controls.Add(hf);
-                    
-                    if (_txtBoxType == "Annual")
-                    {
-                        string color = RC.ConfigSettings("AnnualTargetTextBoxColor");
-                        txtAchieved.BackColor = System.Drawing.ColorTranslator.FromHtml(color);
-                    }
-                }
-                else if (_controlType == "CheckBox")
-                {
-                    CheckBox cbLocAccum = new CheckBox();
-                    cbLocAccum.DataBinding += cbAccum_DataBinding;
-                    container.Controls.Add(cbLocAccum);
+                TextBox txt = new TextBox { CssClass = "numeric1", Width = 50 };
+                txt.DataBinding += txt_DataBinding;
+                container.Controls.Add(txt);
+                HiddenField hf = new HiddenField();
+                string[] words1 = _columnName.Split(new string[] { "--" }, StringSplitOptions.None);
+                hf.Value = words1[0];
+                hf.ID = "hf" + _columnName;
+                container.Controls.Add(hf);
 
-                }
+                if (_txtBoxType == "Annual")
+                    txt.BackColor = System.Drawing.ColorTranslator.FromHtml("#FFFFF0");
             }
         }
 
-        private void txtAchieved_DataBinding(Object sender, EventArgs e)
+        private void txt_DataBinding(Object sender, EventArgs e)
         {
             TextBox txt = (TextBox)sender;
             txt.ID = _columnName;
@@ -1101,14 +1065,6 @@ namespace SRFROWCA.Pages
             txt.CssClass = "numeric1";
             GridViewRow row = (GridViewRow)txt.NamingContainer;
             txt.Text = DataBinder.Eval(row.DataItem, _columnName).ToString();
-        }
-
-        private void cbAccum_DataBinding(Object sender, EventArgs e)
-        {
-            CheckBox cb = (CheckBox)sender;
-            cb.ID = _columnName;
-            GridViewRow row = (GridViewRow)cb.NamingContainer;
-            cb.Checked = (DataBinder.Eval(row.DataItem, _columnName)).ToString() == "True";
         }
     }
 }

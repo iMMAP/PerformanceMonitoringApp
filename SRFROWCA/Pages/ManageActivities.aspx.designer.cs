@@ -13,24 +13,6 @@ namespace SRFROWCA.Pages {
     public partial class ManageActivities {
         
         /// <summary>
-        /// localBreadCrumbHome control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localBreadCrumbHome;
-        
-        /// <summary>
-        /// localBreadCrumbManageProjectActiviites control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localBreadCrumbManageProjectActiviites;
-        
-        /// <summary>
         /// lzeLgndProjects control.
         /// </summary>
         /// <remarks>

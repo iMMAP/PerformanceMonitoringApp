@@ -351,7 +351,7 @@ namespace SRFROWCA.Anonymous
                                                                             secClusterId, isOPS, isFunded});
         }
 
-        protected void btnSearch_Click(object sender, EventArgs e)
+        protected void SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadProjects();
         }

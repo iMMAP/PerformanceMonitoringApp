@@ -4,16 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
-        </script>
-        <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="#">Home</a> </li>
-            <li class="active">My Profile</li>
-        </ul>
-        <!-- .breadcrumb -->
-    </div>
+   
     <div id="user-profile-3" class="user-profile row">
         <div class="col-sm-offset-1 col-sm-10">
             <div class="space">

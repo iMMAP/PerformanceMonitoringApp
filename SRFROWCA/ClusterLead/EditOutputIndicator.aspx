@@ -27,16 +27,7 @@
     </style>
     <script src="../assets/orsjs/jquery.numeric.min.js" type="text/javascript"></script>
     <asp:HiddenField runat="server" ID="hdnIsRegional" Value="0" />
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
-        </script>
-        <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="#">Home</a> </li>
-            <li class="active">Edit Output Indicator</li>
-        </ul>
-        <!-- .breadcrumb -->
-    </div>
+    
     <div id="divMessage" runat="server" class="error2">
     </div>
     <div class="page-content">

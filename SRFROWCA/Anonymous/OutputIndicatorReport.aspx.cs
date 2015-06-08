@@ -18,7 +18,7 @@ namespace SRFROWCA.Anonymous
             if (!IsPostBack)
             {
                 LoadCombos();
-                DisableDropDowns();
+                //DisableDropDowns();
                 LoadClusterReports();
             }
         }
@@ -96,13 +96,14 @@ namespace SRFROWCA.Anonymous
         private void LoadCombos()
         {
             UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
+            ddlCountry.Items.Insert(0, new ListItem("Select Country", "-1"));
+            UI.SetUserCountry(ddlCountry);
+
             UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
+            ddlCluster.Items.Insert(0, new ListItem("Select Cluster", "-1"));
+            UI.SetUserCluster(ddlCountry);
+
             PopulateMonths();
-
-            ddlCluster.Items.Insert(0, new ListItem("--- Select Cluster ---", "-1"));
-            ddlCountry.Items.Insert(0, new ListItem("--- Select Country ---", "-1"));
-
-            SetComboValues();
         }
 
         private void DisableDropDowns()

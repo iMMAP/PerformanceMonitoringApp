@@ -24,14 +24,16 @@ namespace SRFROWCA.ClusterLead
             if (control == "btnAddIndicatorControl")
             {
                 IndControlId += 1;
+                NewIndicatorControlsAdded += 1;
             }
 
             if (control == "btnRemoveIndicatorControl")
             {
                 IndControlId -= 1;
+                NewIndicatorControlsAdded -= 1;
             }
 
-            if (IndControlId <= 1)
+            if (NewIndicatorControlsAdded < 1)
             {
                 btnRemoveIndicatorControl.Visible = false;
             }
@@ -75,15 +77,14 @@ namespace SRFROWCA.ClusterLead
 
                 GetMaxCount(emgLocationId, emgClusterId, out maxIndicators, out maxActivities, out endEditDate);
                 if (maxIndicators <= 0)
-                {
                     btnAddIndicatorControl.Visible = false;
-                }
+                else
+                    btnAddIndicatorControl.Visible = true;
             }
         }
 
         private void LoadActivityData()
         {
-            //AlreadyLoaded = 1;
             int activityId = 0;
             if (Request.QueryString["a"] != null)
             {
@@ -161,7 +162,8 @@ namespace SRFROWCA.ClusterLead
 
         private DataTable GetActivityIndicators(int activityId)
         {
-            return DBContext.GetData("GetActivityIndicators", new object[] { activityId, RC.SelectedSiteLanguageId });
+            int active = 1;
+            return DBContext.GetData("GetActivityIndicators", new object[] { activityId, active, RC.SelectedSiteLanguageId });
         }
 
         private void LoadCombos()
@@ -594,12 +596,15 @@ namespace SRFROWCA.ClusterLead
                 int isActive = 1;
                 int indicatorCount = DBContext.Update("GetIndicatorsCount", new object[] { emgLocationId, emgClusterId, isActive, RC.SelectedSiteLanguageId, DBNull.Value });
                 if (indicatorCount > 0)
-                    maxIndicators = maxIndicators - indicatorCount;
+                    maxIndicators = maxIndicators - (indicatorCount + NewIndicatorControlsAdded);
             }
 
             if (maxActivities > 0)
             {
-                int activityCount = DBContext.Update("GetActivitiesCount", new object[] { emgLocationId, emgClusterId, RC.SelectedSiteLanguageId, DBNull.Value });
+                int isActive = 1;
+                int activityCount = DBContext.Update("GetActivitiesCount", new object[] { emgLocationId, emgClusterId, 
+                                                                                          RC.SelectedSiteLanguageId, isActive,
+                                                                                          DBNull.Value });
                 if (activityCount > 0)
                     maxActivities = maxActivities - activityCount;
             }
@@ -616,6 +621,24 @@ namespace SRFROWCA.ClusterLead
                 Response.Redirect("~/ClusterLead/IndicatorListing.aspx");
             }
 
+        }
+
+        private int NewIndicatorControlsAdded
+        {
+            get
+            {
+                int numberOfControls = 0;
+                if (ViewState["NewIndicatorControlsAdded"] != null)
+                {
+                    int.TryParse(ViewState["NewIndicatorControlsAdded"].ToString(), out numberOfControls);
+                }
+
+                return numberOfControls;
+            }
+            set
+            {
+                ViewState["NewIndicatorControlsAdded"] = value;
+            }
         }
     }
 }

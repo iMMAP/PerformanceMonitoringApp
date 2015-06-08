@@ -104,14 +104,19 @@ namespace SRFROWCA.ClusterLead
             if (maxIndicators > 0)
             {
                 int isActive = 1;
-                int indicatorCount = DBContext.Update("GetIndicatorsCount", new object[] { emgLocationId, emgClusterId, isActive, RC.SelectedSiteLanguageId, DBNull.Value });
+                int indicatorCount = DBContext.Update("GetIndicatorsCount", new object[] { emgLocationId, emgClusterId, 
+                                                                                            isActive, RC.SelectedSiteLanguageId, 
+                                                                                            DBNull.Value });
                 if (indicatorCount > 0)
                     maxIndicators = maxIndicators - indicatorCount;
             }
 
             if (maxActivities > 0)
             {
-                int activityCount = DBContext.Update("GetActivitiesCount", new object[] { emgLocationId, emgClusterId, RC.SelectedSiteLanguageId, DBNull.Value });
+                int isActive = 1;
+                int activityCount = DBContext.Update("GetActivitiesCount", new object[] { emgLocationId, emgClusterId,
+                                                                                          RC.SelectedSiteLanguageId, isActive,
+                                                                                          DBNull.Value });
                 if (activityCount > 0)
                     maxActivities = maxActivities - activityCount;
             }
@@ -183,6 +188,12 @@ namespace SRFROWCA.ClusterLead
                 DateTime endEditDate = DateTime.Now;
                 GetMaxCount(emgLocationId, emgClusterId, out maxIndicators, out maxActivities, out endEditDate);
 
+                //int indicatorId = 0;
+                //int.TryParse(gvActivity.DataKeys[e.Row.RowIndex].Values["IndicatorId"].ToString(), out indicatorId);
+
+                //int activityId = 0;
+                //int.TryParse(gvActivity.DataKeys[e.Row.RowIndex].Values["ActivityId"].ToString(), out activityId);                
+
                 if (btnDelete != null)
                 {
                     btnDelete.Attributes.Add("onclick", "javascript:return " +
@@ -197,11 +208,25 @@ namespace SRFROWCA.ClusterLead
                     }
                 }
 
-                if (btnEdit != null && endEditDate < DateTime.Now.Date)
+                CheckBox cbActivity = e.Row.FindControl("cbIsActivityActive") as CheckBox;
+                if (btnEdit != null)
                 {
-                    if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) || RC.IsRegionalClusterLead(this.User))
+                    if (endEditDate < DateTime.Now.Date)
                     {
-                        btnEdit.Visible = false;
+                        if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) || RC.IsRegionalClusterLead(this.User))
+                        {
+                            btnEdit.Visible = false;
+                        }
+                    }
+                    else if (!cbActivity.Checked || maxIndicators == 0)
+                    {
+                        if (!cbActivity.Checked)
+                        {
+                            btnEdit.Visible = false;
+                        }
+                        CheckBox cbIndicator = e.Row.FindControl("cbIsActive") as CheckBox;
+                        if (!cbIndicator.Checked)
+                            cbIndicator.Enabled = false;
                     }
                 }
 
@@ -559,9 +584,15 @@ namespace SRFROWCA.ClusterLead
 
         protected void btnOK_Click(object sender, EventArgs e)
         {
-            ToggleIndicatorStatus();
+            if (IsIndicatorCheckBox == 1)
+                ToggleIndicatorStatus();
+            else
+                ToggleActivityStatus();
+
             ToggleControlsToAddIndicator();
-            SendEmail(IndicatorActiveStatus > 0);
+            
+            LoadIndicators();
+            //SendEmail(IndicatorActiveStatus > 0);
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
@@ -569,8 +600,46 @@ namespace SRFROWCA.ClusterLead
             LoadIndicators();
         }
 
+        protected void cbActivityActive_Changed(object sender, EventArgs e)
+        {
+            IsIndicatorCheckBox = 0;
+            ActivityActiveStatus = -1;
+            ToggleActivityId = 0;
+            GridViewRow row = (GridViewRow)(((CheckBox)sender).NamingContainer);
+            int activityId = 0;
+            int.TryParse(gvActivity.DataKeys[row.RowIndex].Values["ActivityId"].ToString(), out activityId);
+            ToggleActivityId = activityId;
+            
+            if (ToggleActivityId > 0)
+            {
+                CheckBox cbIsActive = row.FindControl("cbIsActivityActive") as CheckBox;
+                if (cbIsActive != null)
+                {
+                    localDisableConfirmBox.Text = !cbIsActive.Checked ? "Are you sure you want to deactivate this Activity?" :
+                                                                            "Are you sure you want to activate this Activity?";
+                    ActivityActiveStatus = cbIsActive.Checked ? 1 : 0;
+                    List<string> projects = GetProjectsOnActivity(ToggleActivityId);
+                    if (!string.IsNullOrEmpty(projects[0]))
+                    {
+                        //SetEmailItem(row, projects);
+                        lblProjectsCaption.Visible = true;
+                        lblProjectsCaption.Text = !cbIsActive.Checked ? "Indicators of this activity will be removed from the following projects." :
+                                                                        "Indicators of this activity will be added in the following projects.";
+                        lblProjectUsingIndicator.Text = projects[0];
+                    }
+                    else
+                    {
+                        lblProjectsCaption.Text = "";
+                        lblProjectUsingIndicator.Text = "";
+                    }
+                    ModalPopupExtender1.Show();
+                }
+            }            
+        }
+
         protected void cbActive_Changed(object sender, EventArgs e)
         {
+            IsIndicatorCheckBox = 1;
             IndicatorActiveStatus = -1;
             ToggleIndicatorId = 0;
             GridViewRow row = (GridViewRow)(((CheckBox)sender).NamingContainer);
@@ -581,20 +650,25 @@ namespace SRFROWCA.ClusterLead
             {
                 CheckBox cbIsActive = row.FindControl("cbIsActive") as CheckBox;
                 if (cbIsActive != null)
-                {                    
-                    localDisableConfirmBox.Text = !cbIsActive.Checked ? "Are you sure you want to disable this indicator?" :
-                                                                            "Are you sure you want to add this indicator?";
+                {
+                    localDisableConfirmBox.Text = !cbIsActive.Checked ? "Are you sure you want to deactivate this indicator?" :
+                                                                            "Are you sure you want to activate this indicator?";
                     IndicatorActiveStatus = cbIsActive.Checked ? 1 : 0;
                     List<string> projects = GetProjectsUsingIndicator();
                     if (!string.IsNullOrEmpty(projects[0]))
                     {
                         SetEmailItem(row, projects);
                         lblProjectsCaption.Visible = true;
-                        lblProjectsCaption.Text = !cbIsActive.Checked ? "Following projects are using this indicator. This indicator will be removed from these projects:" :
-                                                                        "Following projects are using this indicator. This indicator will be added in these projects:";
-
+                        lblProjectsCaption.Text = !cbIsActive.Checked ? "This indicator will be removed from these projects:" :
+                                                                        "This indicator will be added in these projects:";
                         lblProjectUsingIndicator.Text = projects[0];
                     }
+                    else
+                    {
+                        lblProjectsCaption.Text = "";
+                        lblProjectUsingIndicator.Text = "";
+                    }
+                    
                     ModalPopupExtender1.Show();
                 }
             }
@@ -624,13 +698,37 @@ namespace SRFROWCA.ClusterLead
 
         private void ToggleIndicatorStatus()
         {
-            int yearId = 11;
+            int yearId = (int)RC.YearsInDB.Year2015;
             DBContext.Update("UpdateIndicatorAndProjectsActiveStatus", new object[] { ToggleIndicatorId, IndicatorActiveStatus, yearId, DBNull.Value });
+        }
+
+        private void ToggleActivityStatus()
+        {
+            int yearId = (int)RC.YearsInDB.Year2015;
+            DBContext.Update("UpdateActivityAndProjectsActiveStatus", new object[] { ToggleActivityId, ActivityActiveStatus, yearId, DBNull.Value });
         }
 
         private List<string> GetProjectsUsingIndicator()
         {
-            DataTable dt = DBContext.GetData("GetAllProjectsUsingIndicator", new object[] { ToggleIndicatorId });
+            DataTable dt = DBContext.GetData("GetAllProjectsUsingIndicator", new object[] { ToggleIndicatorId, (int)RC.YearsInDB.Year2015});
+            StringBuilder sbProjCodes = new StringBuilder();
+            StringBuilder sbProjIds = new StringBuilder();
+            foreach (DataRow dr in dt.Rows)
+            {
+                sbProjCodes.AppendFormat(" {0},", dr["ProjectCode"].ToString());
+                sbProjIds.AppendFormat("{0},", dr["ProjectId"].ToString());
+            }
+
+            List<string> projects = new List<string>();
+            projects.Add(sbProjCodes.ToString().Trim().TrimEnd(','));
+            projects.Add(sbProjIds.ToString().Trim().TrimEnd(','));
+
+            return projects;
+        }
+
+        private List<string> GetProjectsOnActivity(int toggleActivityId)
+        {
+            DataTable dt = DBContext.GetData("GetAllProjectsUsingIndicatorActivity", new object[] { toggleActivityId, (int)RC.YearsInDB.Year2015});
             StringBuilder sbProjCodes = new StringBuilder();
             StringBuilder sbProjIds = new StringBuilder();
             foreach (DataRow dr in dt.Rows)
@@ -649,12 +747,12 @@ namespace SRFROWCA.ClusterLead
         private void SendEmail(bool isAdded)
         {
             List<string> emailItems = EmailItems;
-            int emgCountryId = 0; 
+            int emgCountryId = 0;
             int.TryParse(emailItems[0], out emgCountryId);
             int val = 0;
             int.TryParse(emailItems[1], out val);
             int? emgClusterId = val > 0 ? val : (int?)null;
-                
+
             string subject = "Activity Indicator has been disabled!";
             if (isAdded)
             {
@@ -697,6 +795,24 @@ namespace SRFROWCA.ClusterLead
             }
         }
 
+        private int ToggleActivityId
+        {
+            get
+            {
+                int indId = 0;
+                if (ViewState["ToggleActivityId"] != null)
+                {
+                    int.TryParse(ViewState["ToggleActivityId"].ToString(), out indId);
+                }
+
+                return indId;
+            }
+            set
+            {
+                ViewState["ToggleActivityId"] = value;
+            }
+        }
+
         private int IndicatorActiveStatus
         {
             get
@@ -712,6 +828,42 @@ namespace SRFROWCA.ClusterLead
             set
             {
                 ViewState["IndicatorActiveStatusCB"] = value;
+            }
+        }
+
+        private int ActivityActiveStatus
+        {
+            get
+            {
+                int isActive = 0;
+                if (ViewState["ActivityActiveStatusClsInds"] != null)
+                {
+                    int.TryParse(ViewState["ActivityActiveStatusClsInds"].ToString(), out isActive);
+                }
+
+                return isActive;
+            }
+            set
+            {
+                ViewState["ActivityActiveStatusClsInds"] = value;
+            }
+        }
+
+        private int IsIndicatorCheckBox
+        {
+            get
+            {
+                int isActive = 0;
+                if (ViewState["IsIndicatorCheckBox"] != null)
+                {
+                    int.TryParse(ViewState["IsIndicatorCheckBox"].ToString(), out isActive);
+                }
+
+                return isActive;
+            }
+            set
+            {
+                ViewState["IsIndicatorCheckBox"] = value;
             }
         }
 

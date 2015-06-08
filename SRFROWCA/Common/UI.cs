@@ -5,6 +5,7 @@ using Saplin.Controls;
 using System.Web.UI;
 using System.Globalization;
 using System;
+using System.Security.Principal;
 
 namespace SRFROWCA.Common
 {
@@ -257,6 +258,22 @@ namespace SRFROWCA.Common
                     number  = String.Format(new CultureInfo(siteCulture), "{0:0,0}", Convert.ToInt32(number));
 
             return number;
+        }
+
+        internal static void SetUserCountry(ListControl lstControl)
+        {
+            if (UserInfo.EmergencyCountry > 0)
+            {
+                lstControl.SelectedValue = UserInfo.EmergencyCountry.ToString();
+            }
+        }
+
+        internal static void SetUserCluster(ListControl lstControl)
+        {
+            if (UserInfo.EmergencyCluster > 0)
+            {
+                lstControl.SelectedValue = UserInfo.EmergencyCluster.ToString();
+            }
         }
     }
 }

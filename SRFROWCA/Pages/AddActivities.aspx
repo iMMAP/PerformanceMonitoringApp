@@ -34,9 +34,6 @@
             text-align: left;
         }
     </style>
-
-    
-    <script type="text/javascript" src="../assets/orsjs/ShowHideObJAndPr.js"></script>
     <script src="../assets/orsjs/jquery.wholenumber.js" type="text/javascript"></script>
     <script type="text/javascript">
         var needToConfirm = true;
@@ -80,37 +77,68 @@
             txtCmtArea.value = '';
         }
 
+
+        function gridviewScroll(gridWidth, gridHeight) {
+            $('#<%=gvActivities.ClientID%>').gridviewScroll({
+                width: gridWidth,
+                height: gridHeight,
+                railcolor: "#F0F0F0",
+                barcolor: "#CDCDCD",
+                barhovercolor: "#606060",
+                bgcolor: "#F0F0F0",
+                freezesize: 1,
+                arrowsize: 20,
+                varrowtopimg: "../assets/orsimages/arrowvt.png",
+                varrowbottomimg: "../assets/orsimages/arrowvb.png",
+                harrowleftimg: "../assets/orsimages/arrowhl.png",
+                harrowrightimg: "../assets/orsimages/arrowhr.png",
+                headerrowcount: 2,
+                railsize: 10,
+                barsize: 10
+            });
+        }
+
         $(function () {
             $(".numeric1").wholenumber();
-            showHideObj();
-            showHidePriority();
 
+            var windowWidth = $(window).width();
+            var windowHeight = $(window).height();
+            var gridWidth = 1400;
+            var gridHeight = 550;
 
-            if (!(/chrom(e|ium)/.test(navigator.userAgent.toLowerCase()))) {
-                var list = '';
-                var list2 = '';
-                var j = 0;
-
-                $(".imagetable th").each(function () {
-                    var value = ($(":first-child", this).is(":input"))
-                ? $(":first-child", this).val()
-                : ($(this).text() != "")
-                  ? $(this).text()
-                  : $(this).html();
-                    if (value.indexOf('_') >= 0) {
-                        j++;
-                        city1 = value.split('_');
-                        city2 = city1[1].split('-');
-                        $(this).text(city2[1]);
-                        if (j % 2 === 0) {
-                            list += '<th colspan="2" style="width:100px; text-align:center;">' + city1[0] + '</th>';
-                        }
-                    }
-                });
-
-                $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th style="width: 50px;">&nbsp;</th><th style="width: 260px;">&nbsp;</th><th style="width: 220px;">&nbsp;</th><th style="width: 40px;"></th><th style="width: 20px;"></th><th style="width: 30px;">&nbsp;</th>' + list + '</tr></thead>');
+            if (windowWidth <= 1100) {
+                gridWidth = 780;
+            }
+            else if (windowWidth <= 1120) {
+                gridWidth = 850;
+            }
+            else if (windowWidth <= 1200) {
+                gridWidth = 870;
+            }
+            else if (windowWidth <= 1250) {
+                gridWidth = 930;
+            }
+            else if (windowWidth <= 1370) {
+                gridWidth = 950;
+            }
+            else if (windowWidth <= 1450) {
+                gridWidth = 1050;
+            }
+            else if (windowWidth <= 1550) {
+                gridWidth = 1100;
+            }
+            else if (windowWidth <= 1650) {
+                gridWidth = 1150;
             }
 
+            if (windowHeight <= 700) {
+                gridHeight = 350;
+            }
+            else if (windowHeight <= 850) {
+                gridHeight = 450;
+            }
+
+            gridviewScroll(gridWidth, gridHeight);
             $('.cbltest').on('click', ':checkbox', function () {
                 if ($(this).is(':checked')) {
                     $(this).parent().addClass('highlight');
@@ -119,8 +147,6 @@
                     $(this).parent().removeClass('highlight');
                 }
             });
-
-
         });
 
         $(document).ready(function () {
@@ -129,120 +155,35 @@
                     $(this).parent().addClass('highlight');
                 }
             });
-
-            // scrollables
-            $('.slim-scroll').each(function () {
-                var $this = $(this);
-                $this.slimScroll({
-                    height: $this.data('height') || 100,
-                    railVisible: true
-                });
-            });
         });
 
     </script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../assets/js/gridviewScroll.min.js"></script>
+    <link href="../assets/css/GridviewScroll.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="mainContent" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
-        </script>
-        <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="../Default.aspx">
-                <asp:Localize ID="localBreadCrumbHome" runat="server" Text="Home" meta:resourcekey="localBreadCrumbHomeResource1"></asp:Localize></a> </li>
-            <li class="active">
-                <asp:Localize ID="localBreadCrumbDataEntry" runat="server" Text="Data Entry" meta:resourcekey="localBreadCrumbDataEntryResource1"></asp:Localize></li>
-        </ul>
-        <!-- .breadcrumb -->
-    </div>
     <div class="page-content">
         <div id="divMsg">
         </div>
+        <div style="width: 100%;">
+            <table border="0" style="margin: auto; width: 60%;">
+                <tr>
+                    <td>Month:<asp:DropDownList ID="ddlMonth" runat="server" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged"
+                        onchange="needToConfirm = false;" AutoPostBack="True" meta:resourcekey="ddlMonthResource1">
+                    </asp:DropDownList>
+                    </td>
+                    <td>Projects:<asp:DropDownList ID="ddlProjects" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlProjects_SelectedIndexChanged"
+                        onchange="needToConfirm = false;" meta:resourcekey="rblProjectsResource1">
+                    </asp:DropDownList>
+                    </td>
+                </tr>
+            </table>
+        </div>
         <div class="row">
-            <div class="col-sm-3">
-                <div class="widget-box no-border">
-                    <div class="widget-body">
-                        <div class="widget-main no-padding-top">
-                            <%--   <div class="col-sm-14 widget-container-span">--%>
-                            <div class="widget-box">
-                                <div class="widget-header widget-header-small header-color-blue2">
-                                    <h5>
-                                        <asp:Localize ID="Localize1" runat="server" Text="Year/Month:" meta:resourcekey="Localize1Resource1"></asp:Localize>
-                                    </h5>
-                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
-                                </div>
-                                <div class="widget-body">
-                                    <div class="widget-main">
-                                        <asp:DropDownList ID="ddlYear" runat="server" OnSelectedIndexChanged="ddlYear_SelectedIndexChanged"
-                                            onchange="needToConfirm = false;" AutoPostBack="True" meta:resourcekey="ddlYearResource1">
-                                        </asp:DropDownList>
-                                        <asp:DropDownList ID="ddlMonth" runat="server" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged"
-                                            onchange="needToConfirm = false;" AutoPostBack="True" meta:resourcekey="ddlMonthResource1">
-                                        </asp:DropDownList>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <%--  </div>--%>
-                            <%-- <div class="col-sm-14 widget-container-span">--%>
-                            <div class="widget-box">
-                                <div class="widget-header widget-header-small header-color-blue2">
-                                    <h5>
-                                        <asp:Localize ID="lzeLgndProjects" runat="server"
-                                            Text="Projects" meta:resourcekey="lzeLgndProjectsResource1"></asp:Localize>
-                                    </h5>
-                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
-                                </div>
-                                <div class="widget-body">
-                                    <div class="slim-scroll" data-height="200">
-                                        <div class="widget-main">
-                                            <asp:RadioButtonList ID="rblProjects" runat="server" AutoPostBack="True" OnSelectedIndexChanged="rblProjects_SelectedIndexChanged"
-                                                onchange="needToConfirm = false;" meta:resourcekey="rblProjectsResource1">
-                                            </asp:RadioButtonList>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <%-- </div>--%>
-                            <%-- <div class="col-sm-14 widget-container-span">--%>
-                            <div class="widget-box">
-                                <div class="widget-header widget-header-small header-color-blue2">
-                                    <h5>
-                                        <asp:Localize ID="lzeLgndStrObjs" runat="server"
-                                            Text="Strategic Objectives" meta:resourcekey="lzeLgndStrObjsResource1"></asp:Localize>
-                                    </h5>
-                                    <span class="widget-toolbar"><a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a></span>
-                                </div>
-                                <div class="widget-body">
-                                    <div class="widget-main">
-                                        <asp:CheckBoxList ID="cblObjectives" runat="server" CssClass="checkObj" meta:resourcekey="cblObjectivesResource1">
-                                        </asp:CheckBoxList>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-9 widget-container-span">
+            <div class="col-sm-12 widget-container-span">
                 <div class="widget-box">
-                    <div class="widget-header widget-header-small header-color-blue2">
-                        <h4>
-                            <button runat="server" id="btnGeneratePDF" onserverclick="btnPDF_Export" onclick="needToConfirm = false;"
-                                class="width-10 btn btn-sm btn-yellow" title="PDF">
-                                <i class="icon-download"></i>PDF
-                           
-                            </button>
-                            <button runat="server" id="btnExportToExcel" onserverclick="btnExcel_Export" onclick="needToConfirm = false;"
-                                class="width-10 btn btn-sm btn-yellow" title="Excel">
-                                <i class="icon-download"></i>Excel
-                           
-                            </button>
-                        </h4>
-                        <span class="widget-toolbar pull-right"><a href="#" data-action="collapse" class="pull-right">
-                            <i class="icon-chevron-up pull-right"></i></a></span>
-                    </div>
+
                     <div class="widget-body" style="padding-right: 20px; padding-left: 20px;">
                         <div class="widget-main">
                             <div class="pull-left">
@@ -258,54 +199,31 @@
                             </div>
                         </div>
                         <div id="scrolledGridView" style="overflow-x: auto; width: 100%;">
-                            <asp:GridView ID="gvActivities" runat="server" AutoGenerateColumns="False" HeaderStyle-BackColor="ButtonFace"
-                                DataKeyNames="ActivityDataId,ProjectIndicatorId,ReportId,ActivityId" CssClass="imagetable"
-                                Width="100%" OnRowDataBound="gvActivities_RowDataBound"
-                                meta:resourcekey="gvActivitiesResource1">
-                                <HeaderStyle BackColor="Control"></HeaderStyle>
-                                <RowStyle CssClass="istrow" />
-                                <AlternatingRowStyle CssClass="altcolor" />
+                            <asp:GridView ID="gvActivities" runat="server" AutoGenerateColumns="False" CssClass="imagetable"
+                                DataKeyNames="ActivityDataId,ProjectIndicatorId,ReportId,ActivityId"
+                                Width="98%" OnRowDataBound="gvActivities_RowDataBound" OnRowCreated="gvActivities_RowCreated"
+                                meta:resourcekey="gvActivitiesResource1" GridLines="None">
+                                <HeaderStyle CssClass="GridviewScrollHeader" />
+                                <RowStyle CssClass="GridviewScrollItem" />
+                                <PagerStyle CssClass="GridviewScrollPager" />
                                 <Columns>
-                                    <asp:BoundField DataField="ObjectiveId" HeaderText="ObjectiveId" ItemStyle-Width="1px"
-                                        ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource1">
-                                        <HeaderStyle CssClass="hidden"></HeaderStyle>
-
-                                        <ItemStyle CssClass="hidden" Width="1px"></ItemStyle>
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="ProjectId" HeaderText="pid" ItemStyle-Width="1px" ItemStyle-CssClass="hidden"
-                                        HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource4">
-                                        <HeaderStyle CssClass="hidden"></HeaderStyle>
-
-                                        <ItemStyle CssClass="hidden" Width="1px"></ItemStyle>
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="objAndPId" HeaderText="objAndPId" ItemStyle-Width="1px"
-                                        ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource6">
-                                        <HeaderStyle CssClass="hidden"></HeaderStyle>
-
-                                        <ItemStyle CssClass="hidden" Width="1px"></ItemStyle>
-                                    </asp:BoundField>
-                                    <asp:TemplateField HeaderText="Project Code" ItemStyle-Wrap="false" meta:resourcekey="TemplateFieldResource1" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden">
-                                        <ItemTemplate>
-                                            <asp:Label ID="lblProjectcode" runat="server" Text='<%# Eval("ProjectCode") %>' ToolTip='<%# Eval("ProjectTitle") %>'></asp:Label>
-                                        </ItemTemplate>
-                                        <ItemStyle Wrap="False"></ItemStyle>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField ItemStyle-Wrap="false" meta:resourcekey="TemplateFieldResource2">
+                                    <asp:BoundField DataField="ObjectiveId" HeaderText="ObjectiveId"
+                                        meta:resourcekey="BoundFieldResource1"></asp:BoundField>
+                                    <asp:TemplateField ItemStyle-Width="30px">
                                         <ItemTemplate>
                                             <asp:Image ID="imgObjective" runat="server" AlternateText="Obj" meta:resourcekey="imgObjectiveResource1" />
                                         </ItemTemplate>
-                                        <ItemStyle Wrap="False"></ItemStyle>
                                     </asp:TemplateField>
-                                    <asp:TemplateField ItemStyle-Width="260px" HeaderText="Activity" meta:resourcekey="TemplateFieldResource3">
+                                    <asp:TemplateField ItemStyle-Width="180px" HeaderStyle-Width="180px" HeaderText="Activity" meta:resourcekey="TemplateFieldResource3">
                                         <ItemTemplate>
-                                            <div style="width: 260px; word-wrap: break-word;">
+                                            <div style="width: 99%; word-wrap: break-word;">
                                                 <%# Eval("Activity")%>
                                             </div>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField ItemStyle-Width="220px" HeaderText="Output Indicator" meta:resourcekey="TemplateFieldResource4">
+                                    <asp:TemplateField ItemStyle-Width="180px" HeaderStyle-Width="180px" HeaderText="Output Indicator" meta:resourcekey="TemplateFieldResource4">
                                         <ItemTemplate>
-                                            <div style="width: 220px; word-wrap: break-word;">
+                                            <div style="width: 99%; word-wrap: break-word;">
                                                 <%# Eval("Indicator")%>
                                             </div>
                                         </ItemTemplate>
@@ -317,15 +235,13 @@
                                             </div>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField ItemStyle-Width="30px" HeaderText="CMT" meta:resourcekey="TemplateFieldResource5">
+                                    <asp:TemplateField ItemStyle-Width="20px" HeaderStyle-Width="20px" HeaderText="CMT" meta:resourcekey="TemplateFieldResource5">
                                         <ItemTemplate>
                                             <asp:ImageButton ID="imgbtnComments" runat="server" ImageUrl="~/assets/orsimages/edit-file-icon.png"
                                                 CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>' CommandName="AddComments" OnClick="btnImgClick"
                                                 OnClientClick="needToConfirm = false;clearComments();" meta:resourcekey="imgbtnCommentsResource1" />
                                         </ItemTemplate>
-                                        <ItemStyle Width="30px"></ItemStyle>
                                     </asp:TemplateField>
-
                                 </Columns>
                             </asp:GridView>
                         </div>
@@ -455,5 +371,4 @@
             </div>
         </div>
     </asp:Panel>
-
 </asp:Content>

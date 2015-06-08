@@ -3,17 +3,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
-        </script>
-        <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="../Default.aspx">Home</a> </li>
-            <li class="active">Key Figure Framework</li>
-        </ul>
-
-    </div>
-    <div class="page-content">
         <div class="page-content">
 
             <div id="divMsg"></div>
@@ -29,12 +18,12 @@
                                             title="Excel">
                                             <i class="icon-download"></i>Excel                                   
                                         </button>
-                                            <asp:Button ID="btnAddKeyFigure" runat="server" OnClick="btnAddKeyFigure_Click" Text="Add Key figure" CausesValidation="False"
-                                                CssClass="btn btn-purple pull-right" />
-                                            <asp:Button ID="btnAddSubCategory" runat="server" OnClick="btnAddSubCategory_Click" Text="Add Sub Category" CausesValidation="False"
-                                                CssClass="btn btn-default pull-right" />
-                                            <asp:Button ID="btnAddCategory" runat="server" OnClick="btnAddCategory_Click" Text="Add Category" CausesValidation="False"
-                                                CssClass="btn btn-yellow pull-right" />
+                                            <asp:Button ID="btnAddKeyFigure" runat="server" OnClick="btnAddKeyFigure_Click" Text="3. Add Key figure" CausesValidation="False"
+                                                CssClass="btn btn-primary pull-right" />
+                                            <asp:Button ID="btnAddSubCategory" runat="server" OnClick="btnAddSubCategory_Click" Text="2. Add Sub Category" CausesValidation="False"
+                                                CssClass="btn btn-primary pull-right" />
+                                            <asp:Button ID="btnAddCategory" runat="server" OnClick="btnAddCategory_Click" Text="1. Add Category" CausesValidation="False"
+                                                CssClass="btn btn-primary pull-right" />
                                         </h6>
                                     </div>
                                 </div>

@@ -5,16 +5,7 @@
 </asp:Content>
 
 <asp:Content ID="mainContent" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
-        </script>
-        <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="/">Home</a> </li>
-            <li class="active">FAQs & Help</li>
-        </ul>
-        <!-- .breadcrumb -->
-    </div>
+    
     <div class="page-content">
         <div class="row">
             <div class="col-xs-12">

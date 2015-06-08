@@ -24,12 +24,11 @@
             margin-top: -3px;
         }
 </style>
-<script src="../assets/orsjs/jquery.numeric.min.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 
     $(function () {
-        $(".numeric1").numeric();
+        $(".numeric1").wholenumber();
     });
 </script>
 <div id="divMsg">

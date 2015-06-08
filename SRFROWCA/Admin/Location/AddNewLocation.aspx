@@ -4,18 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-      <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
-        </script>
-        <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="../Default.aspx">
-                <asp:Localize ID="localBreadCrumbHome" runat="server" Text="Home" meta:resourcekey="localBreadCrumbHomeResource1"></asp:Localize></a> </li>
-            <li class="active">
-                <asp:Localize ID="localBreadCrumbRegister" runat="server" Text="Add New Location"></asp:Localize></li>
-        </ul>
-        <!-- .breadcrumb -->
-    </div>
+      
     <div class="page-content">
         <asp:HiddenField ID="hdnId" runat="server" Value="0" />
         <asp:HiddenField ID="hdnLocationName" runat="server" />

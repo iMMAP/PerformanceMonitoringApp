@@ -13,24 +13,6 @@ namespace SRFROWCA.Admin.Organization {
     public partial class AddEditOrganization {
         
         /// <summary>
-        /// localBreadCrumbHome control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localBreadCrumbHome;
-        
-        /// <summary>
-        /// localBreadCrumbRegister control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localBreadCrumbRegister;
-        
-        /// <summary>
         /// txtOrgName control.
         /// </summary>
         /// <remarks>

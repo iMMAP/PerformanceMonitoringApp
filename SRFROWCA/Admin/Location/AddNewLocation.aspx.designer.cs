@@ -13,24 +13,6 @@ namespace SRFROWCA.Admin.Location {
     public partial class AddNewLocation {
         
         /// <summary>
-        /// localBreadCrumbHome control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localBreadCrumbHome;
-        
-        /// <summary>
-        /// localBreadCrumbRegister control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localBreadCrumbRegister;
-        
-        /// <summary>
         /// hdnId control.
         /// </summary>
         /// <remarks>

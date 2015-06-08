@@ -22,13 +22,13 @@ namespace SRFROWCA.KeyFigures {
         protected global::System.Web.UI.HtmlControls.HtmlButton btnExportToExce;
         
         /// <summary>
-        /// btnAddCategory control.
+        /// btnAddKeyFigure control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddCategory;
+        protected global::System.Web.UI.WebControls.Button btnAddKeyFigure;
         
         /// <summary>
         /// btnAddSubCategory control.
@@ -40,13 +40,13 @@ namespace SRFROWCA.KeyFigures {
         protected global::System.Web.UI.WebControls.Button btnAddSubCategory;
         
         /// <summary>
-        /// btnAddKeyFigure control.
+        /// btnAddCategory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddKeyFigure;
+        protected global::System.Web.UI.WebControls.Button btnAddCategory;
         
         /// <summary>
         /// gvKFInd control.

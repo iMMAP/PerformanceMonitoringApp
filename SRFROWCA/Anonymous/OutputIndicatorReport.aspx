@@ -17,7 +17,6 @@
         function OnBeginRequest(sender, args) {
             $get('MainContent_UpdateProgress2').style.display = "block";
         }
-
     </script>
 
     <script type="text/javascript">
@@ -48,8 +47,6 @@
                         </ProgressTemplate>
                     </asp:UpdateProgress>
                 </div>
-                <div id="divMsg"></div>
-
                 <table width="100%">
                     <tr>
                         <td>

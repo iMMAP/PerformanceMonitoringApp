@@ -9,18 +9,7 @@
             margin-top: -5px;
         }
     </style>
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
-        </script>
-        <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="../Default.aspx">
-                <asp:Localize ID="localBreadCrumbHome" runat="server" Text="Home" meta:resourcekey="localBreadCrumbHomeResource1"></asp:Localize></a> </li>
-            <li class="active">
-                <asp:Localize ID="localBreadCrumbEmgCluster" runat="server" Text="Emergency Locations" meta:resourcekey="localBreadCrumbEmgCluster"></asp:Localize></li>
-        </ul>
-        <!-- .breadcrumb -->
-    </div>
+    
     <div class="page-content">
         <table border="0" cellpadding="2" cellspacing="0" class="pstyle1" width="100%">
             <tr>

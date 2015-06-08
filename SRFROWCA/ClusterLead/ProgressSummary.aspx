@@ -41,20 +41,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="mainContent" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
-        </script>
-        <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="../Default.aspx">
-                <asp:Localize ID="localBreadCrumbHome" runat="server" Text="Home" meta:resourcekey="localBreadCrumbHomeResource1"></asp:Localize></a>
-            </li>
-            <li class="active">
-                <asp:Localize ID="localBreadCrumbProjects" runat="server" Text="Progress Summary" meta:resourcekey="localBreadCrumbProjectsResource1"></asp:Localize></li>
-
-        </ul>
-        <!-- .breadcrumb -->
-    </div>
+    
     <div class="page-content">
         <asp:Label runat="server" ID="lblMessage"></asp:Label>
         <table width="100%">

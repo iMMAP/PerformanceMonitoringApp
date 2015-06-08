@@ -90,11 +90,6 @@ namespace SRFROWCA
             {
                 ShowAdminMenue();
             }
-
-            if (HttpContext.Current.User.IsInRole("OCHACountryStaff"))
-            {
-                ShowOCHACountryStaff();
-            }
         }
 
         private void SetUserName()
@@ -145,7 +140,7 @@ namespace SRFROWCA
             //menuManageActivities.Visible = isShow;
             //liManageActivity.Visible = isShow;
             liValidateAchievements.Visible = isShow;
-            liFundingStatus.Visible = isShow;
+            //liFundingStatus.Visible = isShow;
             liUserListing.Visible = isShow;
             liKeyFigures.Visible = isShow;
             liBulkImport.Visible = isShow;
@@ -187,9 +182,10 @@ namespace SRFROWCA
             bool isShow = true;
             liClusterFrameworks.Visible = isShow;
             liProjects.Visible = isShow;
-            liKeyFiguresPublic.Visible = isShow;
+            liKeyFiguresPublic.Visible = !isShow;
             liProjectsPublic.Visible = !isShow;
             liActivitesFrameworkPublic.Visible = !isShow;
+            liKeyFigures.Visible = isShow;
         }
 
         private void ShowClusterLeadMenue()
@@ -210,11 +206,11 @@ namespace SRFROWCA
         private void ShowOCHAMenue()
         {
             bool isShow = true;
-            liFundingStatus.Visible = isShow;
+            liProjects.Visible = isShow;
+            liProjectsPublic.Visible = !isShow;            
             liKeyFiguresPublic.Visible = isShow;
-            liOutputIndReportPublic.Visible = !isShow;
+            liOutputIndReportPublic.Visible = isShow;
             liProgressSummary.Visible = isShow;
-            liProjectsPublic.Visible = !isShow;
             liActivitesFrameworkPublic.Visible = !isShow;
         }
 
@@ -236,21 +232,10 @@ namespace SRFROWCA
             liActivitesFrameworkPublic.Visible = !isShow;
         }
 
-        private void ShowOCHACountryStaff()
-        {
-            bool isShow = true;
-            liProjects.Visible = isShow;
-            liKeyFiguresPublic.Visible = isShow;
-            liOutputIndReportPublic.Visible = !isShow;
-            liProgressSummary.Visible = isShow;
-            liProjectsPublic.Visible = !isShow;
-            liActivitesFrameworkPublic.Visible = !isShow;
-        }
-
         private void ShowAdminMenue()
         {
             bool isShow = true;
-            liFundingStatus.Visible = isShow;
+            //liFundingStatus.Visible = isShow;
             liUserListing.Visible = isShow;
             liKeyFigures.Visible = isShow;
             liOrganizationList.Visible = isShow;
@@ -286,10 +271,10 @@ namespace SRFROWCA
             }
             else if (uri == "/Pages/AddActivities.aspx")
             {
-                PageTitle = "ORS - Add Activity";
+                PageTitle = "ORS - Data Entry";
                 liDataEntry.Attributes.Add("class", "active");
             }
-            else if (uri == "/Pages/CreateProject.aspx")
+            else if (uri.Contains("/Pages/ManageProject.aspx"))
             {
                 PageTitle = "ORS - Manage Project";
                 liProjects.Attributes.Add("class", "active");
@@ -372,11 +357,11 @@ namespace SRFROWCA
                 PageTitle = "ORS - Key Figures";
                 liKeyFiguresPublic.Attributes.Add("class", "active");
             }
-            else if (uri == "/LeadPages/FundingListing.aspx")
-            {
-                PageTitle = "ORS - Fundings";
-                liFundingStatus.Attributes.Add("class", "active");
-            }
+            //else if (uri == "/LeadPages/FundingListing.aspx")
+            //{
+            //    PageTitle = "ORS - Fundings";
+            //    liFundingStatus.Attributes.Add("class", "active");
+            //}
             else if (uri == "/organization/OrganizationList.aspx")
             {
                 PageTitle = "ORS - Organizations";

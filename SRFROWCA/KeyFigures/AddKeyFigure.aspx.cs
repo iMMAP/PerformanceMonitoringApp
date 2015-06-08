@@ -22,7 +22,6 @@ namespace SRFROWCA.KeyFigures
                 }
                 IsPopulation = 0;
                 LoadCountry();
-                DisableDropDowns();
                 LoadCategories();
                 txtFromDate.BackColor = ColorTranslator.FromHtml("#FFE6E6");
                 if (Request.QueryString["d"] == null && Request.QueryString["u"] == null)
@@ -178,7 +177,6 @@ namespace SRFROWCA.KeyFigures
 
         private void LoadCountry()
         {
-            //UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
             UI.FillCountry(ddlCountry);
             ddlCountry.Items.Insert(0, new ListItem("All", "0"));
             SetComboValues();
@@ -207,14 +205,14 @@ namespace SRFROWCA.KeyFigures
             if (ddlSubCategory.Items.Count > 0)
             {
                 ddlSubCategory.Items.Insert(0, new ListItem("Select Sub Category", "0"));
-            }
+            };
+
         }
 
         private void SetComboValues()
         {
             if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User))
             {
-                //ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
                 ddlCountry.SelectedValue = UserInfo.Country.ToString();
             }
         }

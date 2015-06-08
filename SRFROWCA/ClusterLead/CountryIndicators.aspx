@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="CountryIndicators.aspx.cs" Inherits="SRFROWCA.ClusterLead.CountryIndicators" Culture="auto" meta:resourcekey="PageResource1" UICulture="auto" %>
+
 <%@ MasterType VirtualPath="~/Site.Master" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Assembly="SRFROWCA" Namespace="SRFROWCA" TagPrefix="cc2" %>
@@ -23,23 +24,10 @@
 
 
 <asp:Content ID="cntMainContentCountryIndicators" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
-        </script>
-        <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="../Default.aspx">Home</a> </li>
-            <li class="active">Output Indicators</li>
-        </ul>
-    </div>
+
     <div class="page-content">
         <div id="divMsg">
         </div>
-        <div class="alert2 alert-block alert-info">
-            <h6>
-                <asp:Localize ID="locMessageForUser" runat="server" Text="This page allows the cluster coordinator to add output indicators up to a maximum of four (4). This is in addition to the pre-selected list of Sahel Indicators. You are expected to complete the Indicator in either language." meta:resourcekey="locMessageForUserResource1"></asp:Localize></h6>
-        </div>
-
         <table width="100%">
             <tr>
                 <td>
@@ -68,11 +56,12 @@
                                         <table border="0" style="width: 95%; margin: 0px 10px 0px 20px">
                                             <tr>
                                                 <td>
-                                                    <label>
-                                                        Indicator:</label>
+                                                    <asp:Label runat="server" ID="lblCountry" Text="Country:" meta:resourcekey="lblCountryResource1"></asp:Label>
                                                 </td>
                                                 <td>
-                                                    <asp:TextBox ID="txtIndicatorName" runat="server" Width="270px" meta:resourcekey="txtIndicatorNameResource1"></asp:TextBox>
+                                                    <asp:DropDownList AutoPostBack="True" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" runat="server" ID="ddlCountry" Width="270px" meta:resourcekey="ddlCountryResource1">
+                                                        <asp:ListItem Selected="True" Text="--- Select Country ---" Value="-1" meta:resourcekey="ListItemResource2"></asp:ListItem>
+                                                    </asp:DropDownList>
                                                 </td>
 
                                                 <td>
@@ -92,12 +81,11 @@
                                                     <asp:CheckBox ID="cbIncludeRegional" runat="server" Text="Show Regional Indicators" Checked="True" AutoPostBack="true" OnCheckedChanged="cbIncudeRegional_CheckedChanged" meta:resourcekey="cbIncludeRegionalResource1" />
                                                 </td>
                                                 <td>
-                                                    <asp:Label runat="server" ID="lblCountry" Text="Country:" meta:resourcekey="lblCountryResource1"></asp:Label>
+                                                    <label>
+                                                        Indicator:</label>
                                                 </td>
                                                 <td>
-                                                    <asp:DropDownList AutoPostBack="True" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" runat="server" ID="ddlCountry" Width="270px" meta:resourcekey="ddlCountryResource1">
-                                                        <asp:ListItem Selected="True" Text="--- Select Country ---" Value="-1" meta:resourcekey="ListItemResource2"></asp:ListItem>
-                                                    </asp:DropDownList>
+                                                    <asp:TextBox ID="txtIndicatorName" runat="server" Width="270px" meta:resourcekey="txtIndicatorNameResource1"></asp:TextBox>
                                                 </td>
                                                 <td style="text-align: right;">
 
@@ -223,7 +211,7 @@
                                     <div class="contentarea">
                                         <div class="formdiv">
                                             <table border="0" style="margin: 0 auto;">
-                                                <asp:HiddenField id="hfRegionalIndicator" runat="server" />
+                                                <asp:HiddenField ID="hfRegionalIndicator" runat="server" />
                                                 <tr>
                                                     <td>Indicator (English):
                                                     </td>

@@ -74,8 +74,6 @@ namespace SRFROWCA.Controls
                 int.TryParse(hfIndicatorId.Value, out indicatorId);
                 if (indicatorId > 0)
                 {
-                    
-
                     DBContext.Update("UpdateIndicatorNew2", new object[] { indicatorId, activityId, unitId, indEn, indFr, userId, gender, DBNull.Value });
                     SaveAdmin1Targets(indicatorId);
                 }

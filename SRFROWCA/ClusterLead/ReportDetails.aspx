@@ -4,18 +4,7 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
-        </script>
-        <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="/">Home</a> </li>
-            <li><a href="ProjectsListing.aspx">Projects</a></li>
-            <li><a href="ProjectDetails.aspx?pid=<%=ProjectID%>">Project Details</a></li>
-            <li class="active">Report Details</li>
-        </ul>
-        <!-- .breadcrumb -->
-    </div>
+    
     <div class="page-content">
         <div id="divMsg">
         </div>

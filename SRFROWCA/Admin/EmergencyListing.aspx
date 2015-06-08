@@ -36,16 +36,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
-        </script>
-        <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="#">Home</a> </li>
-            <li class="active">Emergencies</li>
-        </ul>
-        <!-- .breadcrumb -->
-    </div>
+    
     <div class="page-content">
         <table border="0" cellpadding="2" cellspacing="0" class="pstyle1" width="100%">
             <tr>
