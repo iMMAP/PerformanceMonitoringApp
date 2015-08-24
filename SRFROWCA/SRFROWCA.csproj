@@ -188,6 +188,7 @@
     <Content Include="Admin\Location\LocationsList.aspx" />
     <Content Include="Admin\Organization\AddEditOrganization.aspx" />
     <Content Include="Admin\Organization\OrganizationList.aspx" />
+    <Content Include="ClusterLead\IndicatorListingMigrate.aspx" />
     <Content Include="ClusterLead\ProgressSummary.aspx" />
     <Content Include="ClusterLead\ProjectXMLFeeds.aspx" />
     <Content Include="assets\css\ace-fonts.css" />
@@ -296,6 +297,13 @@
     <Content Include="KeyFigures\KeyFiguresListing.aspx" />
     <Content Include="KeyFigures\KeyFiguresListingPublic.aspx" />
     <Content Include="Log\ErrorLog.txt" />
+    <Content Include="Nepal\Account\Login.aspx" />
+    <Content Include="Nepal\Account\Register.aspx" />
+    <Content Include="Nepal\Controls\IndicatorsWithAdmin1TargetsControl1.ascx" />
+    <Content Include="Nepal\Default.aspx" />
+    <Content Include="Nepal\Framework\AddActivityAndIndicators.aspx" />
+    <Content Include="Nepal\Framework\IndicatorListing.aspx" />
+    <Content Include="Nepal\WebForm1.aspx" />
     <Content Include="OperationalPresence.aspx" />
     <Content Include="OPS\OPSDataEntryOld.aspx" />
     <Content Include="OPS\OPSDataEntry.aspx" />
@@ -406,6 +414,7 @@
       <DependentUpon>ORSModel.edmx</DependentUpon>
       <LastGenOutput>ORSModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Nepal\Site.Master" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -651,6 +660,13 @@
     </Compile>
     <Compile Include="Admin\Organization\OrganizationList.aspx.designer.cs">
       <DependentUpon>OrganizationList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClusterLead\IndicatorListingMigrate.aspx.cs">
+      <DependentUpon>IndicatorListingMigrate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClusterLead\IndicatorListingMigrate.aspx.designer.cs">
+      <DependentUpon>IndicatorListingMigrate.aspx</DependentUpon>
     </Compile>
     <Compile Include="ClusterLead\ProgressSummary.aspx.cs">
       <DependentUpon>ProgressSummary.aspx</DependentUpon>
@@ -1064,6 +1080,62 @@
     </Compile>
     <Compile Include="KeyFigures\KeyFiguresListingPublic.aspx.designer.cs">
       <DependentUpon>KeyFiguresListingPublic.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Nepal\Account\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Nepal\Account\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Nepal\Account\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Nepal\Account\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Nepal\Controls\IndicatorsWithAdmin1TargetsControl1.ascx.cs">
+      <DependentUpon>IndicatorsWithAdmin1TargetsControl1.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Nepal\Controls\IndicatorsWithAdmin1TargetsControl1.ascx.designer.cs">
+      <DependentUpon>IndicatorsWithAdmin1TargetsControl1.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Nepal\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Nepal\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Nepal\Framework\AddActivityAndIndicators.aspx.cs">
+      <DependentUpon>AddActivityAndIndicators.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Nepal\Framework\AddActivityAndIndicators.aspx.designer.cs">
+      <DependentUpon>AddActivityAndIndicators.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Nepal\Framework\IndicatorListing.aspx.cs">
+      <DependentUpon>IndicatorListing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Nepal\Framework\IndicatorListing.aspx.designer.cs">
+      <DependentUpon>IndicatorListing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Nepal\Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Nepal\Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Nepal\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Nepal\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
     <Compile Include="OperationalPresence.aspx.cs">
       <DependentUpon>OperationalPresence.aspx</DependentUpon>

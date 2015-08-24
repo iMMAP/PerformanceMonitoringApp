@@ -48,7 +48,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    
+
     <div class="page-content">
         <table style="width: 100%">
             <tr>
@@ -115,8 +115,13 @@
                                                 <td>
                                                     <asp:CheckBox ID="cbShowAll" runat="server" Text="Show Only Latest Reported" OnCheckedChanged="cbShowAll_CheckedChanged" AutoPostBack="true" />
                                                 </td>
-                                                <td></td>
-                                                <td align="right">
+                                                <td>Key Figure:</td>
+                                                <td>
+                                                    <asp:TextBox ID="txtKeyFigure" runat="server" ToolTip="Type Keyfigure to search e.g. Refugee" Width="270px"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="right" colspan="4">
                                                     <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-default" OnClick="btnSearch_Click" />
                                                     <asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="btn btn-default" OnClick="btnReset_Click" />
                                                 </td>
@@ -156,12 +161,12 @@
                     <asp:BoundField DataField="KeyFigure" HeaderText="Key Figure" SortExpression="KeyFigure" ItemStyle-Width="15%"></asp:BoundField>
                     <asp:BoundField DataField="AsOfDate" HeaderText="As Of Date" SortExpression="AsOfDate" ItemStyle-Width="8%"></asp:BoundField>
                     <asp:TemplateField ItemStyle-Width="160px" HeaderText="Source">
-                                <ItemTemplate>
-                                    <div style="width: 150px; word-wrap: break-word;">
-                                        <a href='<%# Eval("KeyFigureSource")%>' target="_blank"><%# Eval("KeyFigureSource")%></a>
-                                    </div>
-                                </ItemTemplate>
-                            </asp:TemplateField>
+                        <ItemTemplate>
+                            <div style="width: 150px; word-wrap: break-word;">
+                                <a href='<%# Eval("KeyFigureSource")%>' target="_blank"><%# Eval("KeyFigureSource")%></a>
+                            </div>
+                        </ItemTemplate>
+                    </asp:TemplateField>
                     <asp:BoundField DataField="FromLocation" HeaderText="From Location" SortExpression="FromLocation" ItemStyle-Width="4%"></asp:BoundField>
                     <asp:BoundField DataField="ReportedLocation" HeaderText="Location" SortExpression="ReportedLocation" ItemStyle-Width="8%"></asp:BoundField>
                     <asp:TemplateField HeaderText="Total" ItemStyle-Width="4%">

@@ -29,7 +29,7 @@ namespace SRFROWCA.Account
 
         protected void LoginUser_LoggedIn(Object sender, EventArgs e)
         {
-            UserInfo.UserProfileInfo(3);
+            UserInfo.UserProfileInfo(RC.EmergencySahel2015);
             if (Roles.IsUserInRole(LoginUser.UserName, "User"))
             {
                 Response.Redirect("~/Pages/AddActivities.aspx");

@@ -1,115 +1,129 @@
-﻿<%@ Page Title="ORS - Dashboard" Language="C#" MasterPageFile="Site.master"
+﻿<%@ Page Title="ORS - Dashboard" Language="C#" MasterPageFile="~/Site.master"
     AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="SRFROWCA._Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <meta name="viewport" content="width=device-width">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <meta name="description" content="">
-    <meta name="author" content="leon-dufour@un.org">
+    <style type="text/css">
+        .outdiv {
+            height: 750px;
+            overflow: hidden;
+            position: relative;
+            width: 49%;
+            float: left;
+        }
 
-    <%--<link href="http://ors.ocharowca.info/favicon.ico" rel="icon" type="image/x-icon">--%>
-    <link rel="stylesheet" href="Visualization/stylesheets/main.css">
-    <script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script>
+        .iniframe {
+            height: 100%;
+            left: 2px;
+            position: absolute;
+            top: 10px;
+            width: 100%;
+        }
+
+        .bgcolorthispage {
+            background-color: #2e6589;
+        }
+        .alertcustome {
+            background-color: #458FBA;
+            border-color: #bce8f1;
+            color: #ffffff;
+        }
+    </style>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div id="team">
-        <%--<div class="viewport">
-            <h1>
-                <center>Online Reporting System (ORS)<center>
-            </h1>
-            <ul>
-                <center>
-                    <div class='tableauPlaceholder' style='width: 804px; height: 719px;'>
-                        <noscript>
-                            <a href='#'>
-                                <img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;H4&#47;H4PTN7DHS&#47;1_rss.png' style='border: none' />
-                            </a>
-                        </noscript>
-                            <object class='tableauViz' width='804' height='719' style='display:none;'>
-                                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
-                                <param name='path' value='shared&#47;H4PTN7DHS' /> 
-                                <param name='toolbar' value='no' />
-                                <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;H4&#47;H4PTN7DHS&#47;1.png' /> 
-                                <param name='animate_transition' value='yes' />
-                                <param name='display_static_image' value='yes' />
-                                <param name='display_spinner' value='yes' />
-                                <param name='display_overlay' value='yes' />
-                                <param name='display_count' value='yes' />
-                                <param name='showVizHome' value='no' />
-                                <param name='showTabs' value='y' />
-                                <param name='bootstrapWhenNotified' value='true' /></object>
-                    </div>
-                    <center>
-<h2><center>ORS products<center></h2>
+    <%--<div class="col-sm-12 infobox-container">
+            <div class="infobox infobox-green  ">
+                <div class="infobox-icon">
+                    <img src="assets/orsimages/Partners.png" />
+                </div>
+
+                <div class="infobox-data">
+                    <span class="infobox-data-number">103</span>
+                    <div class="infobox-content">Organisations</div>
+                </div>
+
+            </div>
+
+            <div class="infobox infobox-blue  ">
+                <div class="infobox-icon">
+                    <img src="assets/orsimages/Appeals.png" />
+                </div>
+
+                <div class="infobox-data">
+                    <span class="infobox-data-number">10</span>
+                    <div class="infobox-content">Appeals</div>
+                </div>
+
+
+            </div>
+
+            <div class="infobox infobox-pink  ">
+                <div class="infobox-icon">
+                    <img src="assets/orsimages/Projects.png" />
+                </div>
+
+                <div class="infobox-data">
+                    <span class="infobox-data-number">517</span>
+                    <div class="infobox-content">Projects</div>
+                </div>
+
+            </div>
+
+            <div class="infobox infobox-red">
+                <div class="infobox-icon">
+                    <img src="assets/orsimages/Requirements.png" />
+                </div>
+
+                <div class="infobox-data">
+                    <span class="infobox-data-number">$1.95 Billion</span>
+                    <div class="infobox-content">Total Requirement</div>
+                </div>
+            </div>
+
+        </div>
+   
+     
+    <div>
        
-            <!-- ip tableau dashboard -->
-                <li>
-                    <a href="https://public.tableau.com/profile/ocha.rowca#!/vizhome/IPdashboardORS/IPDashboard" target="_blank">
-                        <img src="visualization/images/ip.jpg" alt="Humanitarian Projects achievements">
-                        <div>
-                            <span class="name">Humanitarian Projects achievements</span>
-                            <span class="position">Tableau Vizualitation</span>
-                            <p>
-                                Visualisation showing Humanitarian Projects achievements reported on ORS.
-                            </p>
-                        </div>
-                    </a>
-                </li>
-                <!-- Output -->
-                <li>
-                    <a href="https://public.tableau.com/profile/ocha.rowca#!/vizhome/OutputIndicatorsORS/OutputIndicators" target="_blank">
-                        <img src="visualization/images/out.jpg" alt="Activity Tracking">
-                        <div>
-                            <span class="name">Cluster Output indicator achievements</span>
-                            <span class="position">Tableau Vizualitation</span>
-                            <p>
-                                Visualisation showing achievements for the regional output indicators
-                            </p>
-                        </div>
-                    </a>
-                </li>
-                <!-- RRP6 Dataviz -->
-                <li>
-                    <a href="link to the report" target="_blank">
-                        <img src="visualization/images/rpt.jpg" alt="rrp6">
-                        <div>
-                            <span class="name">Monthly reporting status</span>
-                            <span class="position">Explore budget requirement</span>
-                            <p>
-                                Report on cluster achievements blablabla
-                            </p>
-                        </div>
-                    </a>
-                </li>
-                <!-- IM Databox  -->
-                <li>
-                    <a href="https://blabla" target="_blank">
-                        <img src="visualization/images/map.jpg" alt="Information management toolkit">
-                        <div>
-                            <span class="name">Reported activities per sector / cluster </span>
-                            <span class="position">Map</span>
-                            <p>
-                                The map illustrates the number of reported ongoing activities from the 2015 Strategic Response Plans (SRP) of the 9 Sahel countries.The data was collected from partners who reported on their monthly project achievements via The Sahel Online Reporting System (ORS) 
-                            </p>
-                        </div>
-                    </a>
-                </li>
-                <!-- IM Databox  -->
-                <li>
-                    <a href="https://blabla" target="_blank">
-                        <img src="visualization/images/xcl.jpg" alt="Information management toolkit">
-                        <div>
-                            <span class="name">Excel report </span>
-                            <span class="position">Excel</span>
-                            <p>
-                                All raw data blablabla
-                            </p>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-            <div class="clearfix"></div>
-        </div>--%>
+        <div class="outdiv">
+            <iframe src="SRP2015ORS.html" class="iniframe"></iframe>
+        </div>
+
+        <div class="outdiv">
+            <iframe src="SRP2015ORSregion.html" class="iniframe"></iframe>
+        </div>
+    </div>--%>
+    <div class="page-content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div style="height: 10px;" class="bgcolorthispage"></div>
+                
+                <div align="center" class="bgcolorthispage">
+                    <div class="alert alertcustome" style="width:910px; font-size:11px; text-align:left">
+                        <button type="button" class="close" data-dismiss="alert">
+                            <i class="ace-icon fa fa-times"></i>
+                        </button>
+
+                        <i class="ace-icon fa fa-check green"></i>
+
+                        During the 2015 Strategic Response Plan (SRP), The Sahel output indicators were defined in consultation with the regional 
+                        sector focal points to provide a standard measure of performance for the Sahel. Country Cluster focal points provided their 
+                        annual targets for each country and started to report on their cluster achievements for each of the output indicators on a 
+                        monthly basis.<br />
+                        The report below shows the performance of the Sahel Output Indicators on a quarterly basis for 2015. The monthly data is 
+                        collected from the respective cluster focal points across the 9 Sahel countries (Burkina Faso, Cameroon, Chad, Gambia, Mali, 
+                        Mauritania, Niger, Nigeria and Senegal) and validated with the regional sector focal points.<br />
+                        The sectors represented at a regional level and included in the report include; Food Security, Nutrition, Health, 
+                        Water Sanitation & Hygiene, Multi-sector for refugees, Education and protection.<br />
+                        The country by country breakdown can also be viewed using the filters provided.
+
+                    </div>
+                    <iframe width="910" height="800" frameborder="0" scrolling="no" src="https://onedrive.live.com/embed?cid=880D08EC1E54FF60&resid=880d08ec1e54ff60%21527&authkey=ACcgJWLViOYr75g&em=2&AllowTyping=True&wdHideGridlines=True&wdHideHeaders=True&wdDownloadButton=True"></iframe>
+                    <div style="position: relative; top: -55px; left: 0px; width: 910px; height: 60px; background: #2e6589;"></div>
+                </div>
+            </div>
+        </div>
     </div>
-    <%--<script src="visualization/javascripts/main.js"></script>--%>
+
+
 </asp:Content>

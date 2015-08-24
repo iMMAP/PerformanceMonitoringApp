@@ -48,11 +48,13 @@
                                             <i class="icon-download"></i>Excel
                                        
                                         </button>
-
+                                        
                                         <asp:Button ID="btnAddIndicator" runat="server" Text="Add Indicator" CausesValidation="false"
                                             CssClass="btn btn-yellow pull-right hidden" OnClick="btnAddIndicator_Click" />
                                         <asp:Button ID="btnAddActivityAndIndicators" runat="server" Text="Add Activity & Indicators" CausesValidation="false"
                                             CssClass="btn btn-yellow pull-right" OnClick="btnAddActivityAndIndicators_Click" Style="margin-right: 5px;" />
+                                        <asp:Button ID="btnMigrate2016" runat="server" Text="Move To 2016" CausesValidation="false"
+                                            CssClass="btn btn-green pull-right" OnClick="btnMigrate2016_Click" />
                                     </h6>
                                 </div>
                                 <div class="widget-body">

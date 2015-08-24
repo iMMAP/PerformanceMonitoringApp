@@ -11,7 +11,7 @@
         }
 
         function OnBeginRequest(sender, args) {
-            $get('MainContent_UpdateProgress2').style.display = "block";            
+            $get('MainContent_UpdateProgress2').style.display = "block";
         }
 
     </script>
@@ -73,7 +73,7 @@
                     <asp:UpdateProgress ID="UpdateProgress2" runat="server" AssociatedUpdatePanelID="pnlAllData"
                         DynamicLayout="true" DisplayAfter="1">
                         <ProgressTemplate>
-                                <img src="../assets/orsimages/ajaxlodr.gif" alt="Loading">
+                            <img src="../assets/orsimages/ajaxlodr.gif" alt="Loading">
                         </ProgressTemplate>
                     </asp:UpdateProgress>
                 </div>
@@ -135,8 +135,13 @@
                                                         <td>
                                                             <asp:CheckBox ID="cbShowAll" runat="server" Text="Show Only Latest Reported" OnCheckedChanged="cbShowAll_CheckedChanged" AutoPostBack="true" />
                                                         </td>
-                                                        <td></td>
-                                                        <td align="right">
+                                                        <td>Key Figure:</td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtKeyFigure" runat="server" ToolTip="Type Keyfigure to search e.g. Refugee" Width="270px"></asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="right" colspan="4">
                                                             <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-default" OnClick="btnSearch_Click" />
                                                             <asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="btn btn-default" OnClick="btnReset_Click" />
                                                         </td>

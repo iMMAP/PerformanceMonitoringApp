@@ -129,6 +129,8 @@ namespace SRFROWCA.KeyFigures
                 }
             }
 
+            string keyFigure = (!string.IsNullOrEmpty(txtKeyFigure.Text.Trim())) ? txtKeyFigure.Text.Trim() : null;
+
             int isLatest = cbShowAll.Checked ? 1 : 0;
             int? pageSize = null;
             int? pageIndex = null;
@@ -140,7 +142,8 @@ namespace SRFROWCA.KeyFigures
             }
 
             return DBContext.GetData("GetKeyFigureListing", new object[] {emgLocationId, catId, subCatId,
-                                                                             kfIndId, fromDate, toDate, isLatest,
+                                                                             kfIndId, fromDate, toDate, 
+                                                                             keyFigure, isLatest,
                                                                              RC.SelectedSiteLanguageId, pageSize, pageIndex});
         }
 
@@ -277,6 +280,7 @@ namespace SRFROWCA.KeyFigures
         {
             txtFromDate.Text = "";
             txtToDate.Text = "";
+            txtKeyFigure.Text = "";
             if (RC.IsAdmin(this.User))
             {
                 ddlCountry.SelectedIndex = 0;

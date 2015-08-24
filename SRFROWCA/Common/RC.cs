@@ -693,6 +693,14 @@ namespace SRFROWCA.Common
             }
         }
 
+        internal static int Nepal2015
+        {
+            get
+            {
+                return 4;
+            }
+        }
+
         public enum LocationTypes
         {
             Region = 1,

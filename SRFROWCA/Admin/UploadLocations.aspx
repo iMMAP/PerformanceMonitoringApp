@@ -13,10 +13,7 @@
             <td>
                 <br />
                 <br />
-                <b>Please select excel file and click on import. It might take a while to complete.
-                    Excel Sheet Name should be 'Sheet1' and Column order and name should be
-                    (without hyphen) 'RowNumber' 'Cluster' 'sobjectives' 'objectives' 'Indicators' 'Activities'
-                    'Data' 'Unit' </b>
+                
                 <br />
             </td>
         </tr>

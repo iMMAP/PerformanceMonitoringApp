@@ -540,6 +540,11 @@ namespace SRFROWCA.ClusterLead
 
         }
 
+        protected void btnMigrate2016_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("IndicatorListingMigrate.aspx");
+        }
+
         protected void Page_Error(object sender, EventArgs e)
         {
             // Get last error from the server
