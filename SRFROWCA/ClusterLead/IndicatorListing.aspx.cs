@@ -49,10 +49,10 @@ namespace SRFROWCA.ClusterLead
                 {
                     btnAddActivityAndIndicators.Enabled = false;
                 }
-                else if (maxIndicators <= 0 || endEditDate < DateTime.Now.Date)
-                {
-                    btnAddIndicator.Enabled = false;
-                }
+                //else if (maxIndicators <= 0 || endEditDate < DateTime.Now.Date)
+                //{
+                //    btnAddIndicator.Enabled = false;
+                //}
                 else
                 {
                     //btnAddIndicator.Enabled = true;
@@ -62,7 +62,7 @@ namespace SRFROWCA.ClusterLead
 
             if (RC.IsRegionalClusterLead(this.User))
             {
-                btnAddIndicator.Enabled = false;
+                //btnAddIndicator.Enabled = false;
                 btnAddActivityAndIndicators.Enabled = false;
             }
         }
@@ -308,7 +308,6 @@ namespace SRFROWCA.ClusterLead
 
             ddlObjective.SelectedValue = "0";
             txtActivityName.Text = "";
-            chkIsGender.Checked = false;
             LoadIndicators();
         }
 
@@ -496,11 +495,12 @@ namespace SRFROWCA.ClusterLead
             int? emergencyObjectiveId = ddlObjective.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlObjective.SelectedValue);
             int? activityId = ddlActivity.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlActivity.SelectedValue);
             string search = string.IsNullOrEmpty(txtActivityName.Text) ? null : txtActivityName.Text;
-
             int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
-            int? isGender = chkIsGender.Checked ? 1 : (int?)null;
+            int frameworkYear = RC.GetSelectedIntVal(ddlFrameworkYear);
 
-            return DBContext.GetData("GetAllIndicatorsNew2", new object[] { emergencyLocationId, emergencyClusterId, emergencyObjectiveId, search, activityId, isGender, (int)RC.SelectedSiteLanguageId });
+            return DBContext.GetData("GetAllIndicatorsNew2", new object[] { emergencyLocationId, emergencyClusterId, 
+                                                                            emergencyObjectiveId, search, activityId, 
+                                                                            frameworkYear, (int)RC.SelectedSiteLanguageId });
         }
 
         private DataTable GetActivitiesForExcel()
@@ -509,14 +509,15 @@ namespace SRFROWCA.ClusterLead
             int? emergencyObjectiveId = ddlObjective.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlObjective.SelectedValue);
             int? activityId = ddlActivity.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlActivity.SelectedValue);
             string search = string.IsNullOrEmpty(txtActivityName.Text) ? null : txtActivityName.Text;
-
             int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
-            int? isGender = chkIsGender.Checked ? 1 : (int?)null;
+            int frameworkYear = RC.GetSelectedIntVal(ddlFrameworkYear);
 
             DataTable dt = new DataTable();
             if (emergencyLocationId > 0)
             {
-                dt = DBContext.GetData("GetAllIndicatorsNew2WithTargets", new object[] { emergencyLocationId, emergencyClusterId, emergencyObjectiveId, search, activityId, isGender, (int)RC.SelectedSiteLanguageId });
+                dt = DBContext.GetData("GetAllIndicatorsNew2WithTargets", new object[] { emergencyLocationId, emergencyClusterId, 
+                                                                                            emergencyObjectiveId, search, activityId, 
+                                                                                            frameworkYear, (int)RC.SelectedSiteLanguageId });
             }
 
             return dt;

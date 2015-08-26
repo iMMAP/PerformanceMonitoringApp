@@ -14,16 +14,16 @@
 </asp:Content>
 <asp:Content ID="mainContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="page-content">
-        <asp:UpdatePanel ID="pnlOutputReportData" runat="server">
-            <ContentTemplate>
-                <div style="text-align: center;">
+        <%--<asp:UpdatePanel ID="pnlOutputReportData" runat="server">
+            <ContentTemplate>--%>
+                <%--<div style="text-align: center;">
                     <asp:UpdateProgress ID="UpdateProgress2" runat="server" AssociatedUpdatePanelID="pnlOutputReportData"
                         DynamicLayout="true">
                         <ProgressTemplate>
                             <img src="../assets/orsimages/ajaxlodr.gif" alt="Loading">
                         </ProgressTemplate>
                     </asp:UpdateProgress>
-                </div>
+                </div>--%>
 
                 <table class="width-100">
                     <tr>
@@ -193,7 +193,7 @@
                         </div>
                     </div>
                 </div>
-            </ContentTemplate>
+            <%--</ContentTemplate>
             <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="ddlSecClusters" />
                 <asp:AsyncPostBackTrigger ControlID="ddlClusters" />
@@ -202,8 +202,8 @@
                 <asp:AsyncPostBackTrigger ControlID="cbFuned" />
                 <asp:AsyncPostBackTrigger ControlID="cbNotFunded" />
                 <asp:AsyncPostBackTrigger ControlID="cbIsOPS" />
-                <asp:AsyncPostBackTrigger ControlID="cbIsORS" />
+                <asp:AsyncPostBackTrigger ControlID="cbIsORS" />                
             </Triggers>
-        </asp:UpdatePanel>
+        </asp:UpdatePanel>--%>
     </div>
 </asp:Content>

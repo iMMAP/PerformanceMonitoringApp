@@ -38,19 +38,12 @@
                             <div class="widget-box">
                                 <div class="widget-header widget-header-small header-color-blue2">
                                     <h6>
-                                        <%--<button runat="server" id="btnExportPDF" onserverclick="ExportToPDF" class="btn btn-yellow" causesvalidation="false"
-                                            title="PDF">
-                                            <i class="icon-download"></i>PDF
-                                       
-                                        </button>--%>
                                         <button runat="server" id="btnExportToExcel" onserverclick="btnExportExcel_Click" class="btn btn-yellow" causesvalidation="false"
                                             title="Excel">
                                             <i class="icon-download"></i>Excel
                                        
                                         </button>
                                         
-                                        <asp:Button ID="btnAddIndicator" runat="server" Text="Add Indicator" CausesValidation="false"
-                                            CssClass="btn btn-yellow pull-right hidden" OnClick="btnAddIndicator_Click" />
                                         <asp:Button ID="btnAddActivityAndIndicators" runat="server" Text="Add Activity & Indicators" CausesValidation="false"
                                             CssClass="btn btn-yellow pull-right" OnClick="btnAddActivityAndIndicators_Click" Style="margin-right: 5px;" />
                                         <asp:Button ID="btnMigrate2016" runat="server" Text="Move To 2016" CausesValidation="false"
@@ -75,7 +68,7 @@
                                                             <td>
                                                                 <label>Country:</label></td>
                                                             <td>
-                                                                <asp:DropDownList runat="server" ID="ddlCountry" Width="270px" meta:resourcekey="ddlCountryResource1">
+                                                                <asp:DropDownList runat="server" ID="ddlCountry" CssClass="width-80" meta:resourcekey="ddlCountryResource1">
                                                                 </asp:DropDownList></td>
                                                         </tr>
                                                         <tr>
@@ -111,10 +104,13 @@
 
                                                             <td class="width-20">
                                                                 <label>
-                                                                    Gender Aggregated:</label>
+                                                                    Year:</label>
                                                             </td>
                                                             <td class="width-30">
-                                                                <asp:CheckBox runat="server" ID="chkIsGender" />
+                                                                <asp:DropDownList ID="ddlFrameworkYear" runat="server">
+                                                                    <asp:ListItem Text="2015" Value="11"></asp:ListItem>
+                                                                    <asp:ListItem Text="2016" Value="12"></asp:ListItem>
+                                                                </asp:DropDownList>
                                                             </td>
 
                                                         </tr>
@@ -143,7 +139,7 @@
             <div style="overflow-x: auto; width: 100%">
                 <asp:GridView ID="gvActivity" runat="server" AutoGenerateColumns="false" AllowSorting="True" AllowPaging="true" Width="100%" 
                     PagerSettings-Mode="NumericFirstLast" OnRowCommand="gvActivity_RowCommand" OnRowDataBound="gvActivity_RowDataBound" 
-                    PagerSettings-Position="Bottom" DataKeyNames="ActivityId,IndicatorDetailId,IndicatorId"
+                    PagerSettings-Position="Bottom" DataKeyNames="ActivityId,IndicatorDetailId,IndicatorId,IsMigrated"
                     CssClass="imagetable" OnSorting="gvActivity_Sorting" OnPageIndexChanging="gvActivity_PageIndexChanging"
                     PageSize="70" ShowHeaderWhenEmpty="true" EmptyDataText="Your filter criteria does not match any indicator!">
                     <Columns>

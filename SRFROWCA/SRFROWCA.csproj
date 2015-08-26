@@ -188,6 +188,7 @@
     <Content Include="Admin\Location\LocationsList.aspx" />
     <Content Include="Admin\Organization\AddEditOrganization.aspx" />
     <Content Include="Admin\Organization\OrganizationList.aspx" />
+    <Content Include="ClusterLead\IndicatorListing2016.aspx" />
     <Content Include="ClusterLead\IndicatorListingMigrate.aspx" />
     <Content Include="ClusterLead\ProgressSummary.aspx" />
     <Content Include="ClusterLead\ProjectXMLFeeds.aspx" />
@@ -660,6 +661,13 @@
     </Compile>
     <Compile Include="Admin\Organization\OrganizationList.aspx.designer.cs">
       <DependentUpon>OrganizationList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClusterLead\IndicatorListing2016.aspx.cs">
+      <DependentUpon>IndicatorListing2016.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClusterLead\IndicatorListing2016.aspx.designer.cs">
+      <DependentUpon>IndicatorListing2016.aspx</DependentUpon>
     </Compile>
     <Compile Include="ClusterLead\IndicatorListingMigrate.aspx.cs">
       <DependentUpon>IndicatorListingMigrate.aspx</DependentUpon>

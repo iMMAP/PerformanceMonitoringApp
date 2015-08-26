@@ -31,24 +31,6 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.HtmlControls.HtmlButton btnExportToExcel;
         
         /// <summary>
-        /// btnMigrate2016 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnMigrate2016;
-        
-        /// <summary>
-        /// btnAddIndicator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddIndicator;
-        
-        /// <summary>
         /// btnAddActivityAndIndicators control.
         /// </summary>
         /// <remarks>
@@ -56,6 +38,15 @@ namespace SRFROWCA.ClusterLead {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAddActivityAndIndicators;
+        
+        /// <summary>
+        /// btnMigrate2016 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnMigrate2016;
         
         /// <summary>
         /// ddlCluster control.
@@ -103,13 +94,13 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.TextBox txtActivityName;
         
         /// <summary>
-        /// chkIsGender control.
+        /// ddlFrameworkYear control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkIsGender;
+        protected global::System.Web.UI.WebControls.DropDownList ddlFrameworkYear;
         
         /// <summary>
         /// btnSearch control.
