@@ -14,9 +14,32 @@
             background: #ffffff;
         }
     </style>
+    <script type="text/javascript">
+
+        function toggleButtons() {
+            var selVal = $("#<%=ddlFrameworkYear.ClientID%>").val();
+
+            if (selVal == 12) {
+                $('#<%=btnMigrate2016.ClientID%>').hide();
+                $('#<%=btnAddActivityAndIndicators.ClientID%>').show();
+            }
+            else {
+                $('#<%=btnMigrate2016.ClientID%>').show();
+                $('#<%=btnAddActivityAndIndicators.ClientID%>').hide();
+            }
+        }
+
+        $(function () {
+            toggleButtons();
+            $("#<%=ddlFrameworkYear.ClientID%>").on('change', function () {
+                toggleButtons();
+            });
+            $('.tooltip2').tooltip();
+        });
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-   
+
     <div class="page-content">
         <table border="0" cellpadding="2" cellspacing="0" class="pstyle1" width="100%">
             <tr>
@@ -43,10 +66,10 @@
                                             <i class="icon-download"></i>Excel
                                        
                                         </button>
-                                        
+
                                         <asp:Button ID="btnAddActivityAndIndicators" runat="server" Text="Add Activity & Indicators" CausesValidation="false"
                                             CssClass="btn btn-yellow pull-right" OnClick="btnAddActivityAndIndicators_Click" Style="margin-right: 5px;" />
-                                        <asp:Button ID="btnMigrate2016" runat="server" Text="Move To 2016" CausesValidation="false"
+                                        <asp:Button ID="btnMigrate2016" runat="server" Text="Migrate Framework To 2016" CausesValidation="false"
                                             CssClass="btn btn-green pull-right" OnClick="btnMigrate2016_Click" />
                                     </h6>
                                 </div>
@@ -108,8 +131,8 @@
                                                             </td>
                                                             <td class="width-30">
                                                                 <asp:DropDownList ID="ddlFrameworkYear" runat="server">
-                                                                    <asp:ListItem Text="2015" Value="11"></asp:ListItem>
                                                                     <asp:ListItem Text="2016" Value="12"></asp:ListItem>
+                                                                    <asp:ListItem Text="2015" Value="11"></asp:ListItem>
                                                                 </asp:DropDownList>
                                                             </td>
 
@@ -137,8 +160,8 @@
 
         <div class="tablegrid">
             <div style="overflow-x: auto; width: 100%">
-                <asp:GridView ID="gvActivity" runat="server" AutoGenerateColumns="false" AllowSorting="True" AllowPaging="true" Width="100%" 
-                    PagerSettings-Mode="NumericFirstLast" OnRowCommand="gvActivity_RowCommand" OnRowDataBound="gvActivity_RowDataBound" 
+                <asp:GridView ID="gvActivity" runat="server" AutoGenerateColumns="false" AllowSorting="True" AllowPaging="true" Width="100%"
+                    PagerSettings-Mode="NumericFirstLast" OnRowCommand="gvActivity_RowCommand" OnRowDataBound="gvActivity_RowDataBound"
                     PagerSettings-Position="Bottom" DataKeyNames="ActivityId,IndicatorDetailId,IndicatorId,IsMigrated"
                     CssClass="imagetable" OnSorting="gvActivity_Sorting" OnPageIndexChanging="gvActivity_PageIndexChanging"
                     PageSize="70" ShowHeaderWhenEmpty="true" EmptyDataText="Your filter criteria does not match any indicator!">
@@ -165,7 +188,11 @@
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:BoundField DataField="Unit" HeaderText="Unit" SortExpression="Unit" />
-                        
+                        <asp:TemplateField ItemStyle-Width="4%" HeaderText="<span class='tooltip2' title='Each Indicator has assigned a calcuation method type.</br>Sum: Sum of all monthly achieved.</br>Agerage: Average of all monthly achieved.</br>Max: Max data reported in any month.</br>Latest: Latest data reported.'>Calculation Method</span>">
+                            <ItemTemplate>
+                                <asp:Label ID="lblCalcMethod" ToolTip="some text here" runat="server" Text=' <%# Eval("CalculationType")%>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle" HeaderStyle-Width="30px">
                             <ItemTemplate>
                                 <asp:LinkButton ID="btnEdit" runat="server" Text="Edit" Width="30px" CausesValidation="false"
@@ -205,7 +232,8 @@
                 <asp:Label ID="lblProjectsCaption" runat="server" Text="Following projects are using this indicator. Indicator will be removed from these projects:" Visible="false"></asp:Label>
                 <br />
                 <br />
-                <b><asp:Label ID="lblProjectUsingIndicator" runat="server" Text=""></asp:Label></b>
+                <b>
+                    <asp:Label ID="lblProjectUsingIndicator" runat="server" Text=""></asp:Label></b>
                 <br />
                 <div align="center">
                     <asp:Button ID="OkButton" runat="server" Text="OK" OnClick="btnOK_Click" class="btn btn-primary" />
@@ -219,7 +247,6 @@
             TargetControlID="btnClientOpen"
             PopupControlID="Panel1"
             BackgroundCssClass="modalpopupbackground"
-            DropShadow="true"
-            />
+            DropShadow="true" />
     </div>
 </asp:Content>

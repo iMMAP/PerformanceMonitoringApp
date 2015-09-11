@@ -96,7 +96,10 @@ namespace SRFROWCA.ClusterLead
                             maxActivities = Convert.ToInt32(node.Attributes["ActivityCount"].Value);
 
                         if (node.Attributes["DateLimit"] != null)
+                        {
                             endEditDate = DateTime.ParseExact(Convert.ToString(node.Attributes["DateLimit"].Value), "MM-dd-yyyy", CultureInfo.InvariantCulture);
+                            endEditDate.AddYears(1);
+                        }
                     }
                 }
             }
@@ -106,7 +109,7 @@ namespace SRFROWCA.ClusterLead
                 int isActive = 1;
                 int indicatorCount = DBContext.Update("GetIndicatorsCount", new object[] { emgLocationId, emgClusterId, 
                                                                                             isActive, RC.SelectedSiteLanguageId, 
-                                                                                            DBNull.Value });
+                                                                                            12, DBNull.Value });
                 if (indicatorCount > 0)
                     maxIndicators = maxIndicators - indicatorCount;
             }
@@ -116,7 +119,7 @@ namespace SRFROWCA.ClusterLead
                 int isActive = 1;
                 int activityCount = DBContext.Update("GetActivitiesCount", new object[] { emgLocationId, emgClusterId,
                                                                                           RC.SelectedSiteLanguageId, isActive,
-                                                                                          DBNull.Value });
+                                                                                          12, DBNull.Value });
                 if (activityCount > 0)
                     maxActivities = maxActivities - activityCount;
             }
@@ -269,11 +272,12 @@ namespace SRFROWCA.ClusterLead
                         ShowMessage("Indicator can not be deleted. It is being used!", RC.NotificationType.Error, true, 2000);
                     }
                 }
-                else if (activityId > 0)
-                {
-                    DeleteActivity(activityId);
-                    ShowMessage("Activity Deleted Successfully!");
-                }
+                // This is to delete activity
+                //else if (activityId > 0)
+                //{
+                //    DeleteActivity(activityId);
+                //    ShowMessage("Activity Deleted Successfully!");
+                //}
 
                 LoadIndicators();
             }

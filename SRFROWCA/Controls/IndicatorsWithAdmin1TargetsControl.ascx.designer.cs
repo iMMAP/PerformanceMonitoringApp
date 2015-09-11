@@ -67,13 +67,31 @@ namespace SRFROWCA.Controls {
         public global::System.Web.UI.WebControls.DropDownList ddlUnit;
         
         /// <summary>
-        /// chkGender control.
+        /// ddlCalculationMethod control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        public global::System.Web.UI.WebControls.CheckBox chkGender;
+        public global::System.Web.UI.WebControls.DropDownList ddlCalculationMethod;
+        
+        /// <summary>
+        /// divAdmin1Targets control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divAdmin1Targets;
+        
+        /// <summary>
+        /// pAdmin1Target control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pAdmin1Target;
         
         /// <summary>
         /// rptAdmin1 control.
@@ -83,5 +101,32 @@ namespace SRFROWCA.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         public global::System.Web.UI.WebControls.Repeater rptAdmin1;
+        
+        /// <summary>
+        /// divAdmin1GenderTargets control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divAdmin1GenderTargets;
+        
+        /// <summary>
+        /// pAdmin1GenderTarget control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pAdmin1GenderTarget;
+        
+        /// <summary>
+        /// rptAdmin1Gender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        public global::System.Web.UI.WebControls.Repeater rptAdmin1Gender;
     }
 }

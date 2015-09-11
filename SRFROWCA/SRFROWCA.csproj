@@ -142,6 +142,7 @@
     <Content Include="Admin\AddEditCountryMaps.aspx" />
     <Content Include="Admin\CountryMapsListing.aspx" />
     <Content Include="Admin\RequestedOrgListing.aspx" />
+    <Content Include="Admin\UnitsListing.aspx" />
     <Content Include="Anonymous\ActivitiesFrameworkPublic.aspx" />
     <Content Include="Anonymous\OutputIndicatorReport.aspx" />
     <Content Include="Anonymous\ProjectsListingPublic.aspx" />
@@ -255,6 +256,7 @@
     <Content Include="ClusterLead\UploadSRP.aspx" />
     <Content Include="ClusterLead\ValidateIndicators.aspx" />
     <Content Include="ClusterLead\ValidateReportList.aspx" />
+    <Content Include="ClusterLead\WebForm1.aspx" />
     <Content Include="Configurations\ChangeEndSettings.xml" />
     <Content Include="Controls\AddContryReportControl.ascx" />
     <Content Include="Controls\ConfirmBox.ascx" />
@@ -534,6 +536,13 @@
     <Compile Include="Admin\RequestedOrgListing.aspx.designer.cs">
       <DependentUpon>RequestedOrgListing.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\UnitsListing.aspx.cs">
+      <DependentUpon>UnitsListing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\UnitsListing.aspx.designer.cs">
+      <DependentUpon>UnitsListing.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Anonymous\ActivitiesFrameworkPublic.aspx.cs">
       <DependentUpon>ActivitiesFrameworkPublic.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -788,6 +797,13 @@
     </Compile>
     <Compile Include="ClusterLead\ValidateReportList.aspx.designer.cs">
       <DependentUpon>ValidateReportList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClusterLead\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClusterLead\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
     <Compile Include="Common\DataTableToCSV.cs" />
     <Compile Include="Common\EmailNotifications.cs" />

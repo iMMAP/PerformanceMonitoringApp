@@ -2,6 +2,7 @@
 using SRFROWCA.Common;
 using SRFROWCA.Controls;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.IO;
@@ -9,7 +10,9 @@ using System.Net.Mail;
 using System.Text;
 using System.Transactions;
 using System.Web;
+using System.Web.Script.Services;
 using System.Web.Security;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml;
@@ -139,14 +142,31 @@ namespace SRFROWCA.ClusterLead
                         }
 
                         bool isGender = false;
-                        bool.TryParse(dt.Rows[i]["IsGender"].ToString(), out isGender);
-                        indicatorCtl.chkGender.Checked = isGender;
+                        //bool.TryParse(dt.Rows[i]["IsGender"].ToString(), out isGender);
+                        //indicatorCtl.chkGender.Checked = isGender;
+
+                        int calMethod = 0;
+                        int.TryParse(dt.Rows[i]["IndicatorCalculationTypeId"].ToString(), out calMethod);
+                        if (calMethod > 0)
+                        {
+                            indicatorCtl.ddlCalculationMethod.SelectedValue = calMethod.ToString();
+                        }
 
                         int indicatorId = 0;
                         int.TryParse(dt.Rows[i]["IndicatorId"].ToString(), out indicatorId);
-                        DataTable dtTargets = GetAdmin1ForIndicatorAndLocation(emgLocationId, indicatorId);
+
+
+                        isGender = unitId == 269;
+                        DataTable dtTargets = GetAdminIndTargets(emgLocationId, indicatorId);
                         indicatorCtl.rptAdmin1.DataSource = dtTargets;
                         indicatorCtl.rptAdmin1.DataBind();
+                        indicatorCtl.rptAdmin1Gender.DataSource = dtTargets;
+                        indicatorCtl.rptAdmin1Gender.DataBind();
+                        if (!isGender)
+                            UpdateRepeaterTargetColumn(indicatorCtl.rptAdmin1Gender);
+                        else
+                            UpdateRepeaterTargetColumn(indicatorCtl.rptAdmin1);
+
                         pnlAdditionalIndicaotrs.Controls.Add(indicatorCtl);
                         indicatorCtl.hfIndicatorId.Value = indicatorId.ToString();
                         IndControlId += 1;
@@ -155,9 +175,30 @@ namespace SRFROWCA.ClusterLead
             }
         }
 
-        private DataTable GetAdmin1ForIndicatorAndLocation(int emgLocationId, int indicatorId)
+        private void UpdateRepeaterTargetColumn(Repeater repeater)
         {
-            return DBContext.GetData("GetAdmin1ForIndicator2", new object[] { indicatorId, emgLocationId });
+            foreach (RepeaterItem item in repeater.Items)
+            {
+                if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
+                {
+                    TextBox txtTotal = item.FindControl("txtTarget") as TextBox;
+                    if (txtTotal != null)
+                    {
+                        txtTotal.Text = "";
+                    }
+                }
+            }
+        }
+
+
+        //private DataTable GetAdmin1Location(int emgLocationId, int indicatorId)
+        //{
+        //    return DBContext.GetData("GetAdmin1LocationsOfCountry", new object[] { emgLocationId });
+        //}
+
+        private DataTable GetAdminIndTargets(int emgLocationId, int indicatorId)
+        {
+            return DBContext.GetData("GetAllAdmin1AndIndicatorTargets", new object[] { indicatorId, emgLocationId });
         }
 
         private DataTable GetActivityIndicators(int activityId)
@@ -236,15 +277,19 @@ namespace SRFROWCA.ClusterLead
 
         protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //int countryId = RC.GetSelectedIntVal(ddlCountry);
-            //foreach (Control ctl in pnlAdditionalIndicaotrs.Controls)
-            //{
-            //    if (ctl != null && ctl.ID != null && ctl.ID.Contains("indicatorControlId"))
-            //    {
-            //        IndicatorsWithAdmin1TargetsControl indControl = ctl as IndicatorsWithAdmin1TargetsControl;
-            //        indControl.PopulateAdmin1(countryId);
-            //    }
-            //}
+            int countryId = RC.GetSelectedIntVal(ddlCountry);
+            foreach (Control ctl in pnlAdditionalIndicaotrs.Controls)
+            {
+                if (ctl != null && ctl.ID != null && ctl.ID.Contains("indicatorControlId"))
+                {
+                    IndicatorsWithAdmin1TargetsControl indicatorCtl = ctl as IndicatorsWithAdmin1TargetsControl;
+                    DataTable dtTargets = GetAdminIndTargets(countryId, 0);
+                    indicatorCtl.rptAdmin1.DataSource = dtTargets;
+                    indicatorCtl.rptAdmin1.DataBind();
+                    indicatorCtl.rptAdmin1Gender.DataSource = dtTargets;
+                    indicatorCtl.rptAdmin1Gender.DataBind();
+                }
+            }
         }
 
 
@@ -263,24 +308,24 @@ namespace SRFROWCA.ClusterLead
                 return;
             }
 
-            if (IsTargetProvided())
-            {
-                if (RC.SelectedSiteLanguageId == 1)
-                {
-                    ShowMessage("Please provide target for at least one location in all indicators.<br/> If you do not know the target at this time please put a 0 (Zero).", RC.NotificationType.Error, true, 3000);
-                }
-                else
-                {
+            //if (IsTargetProvided())
+            //{
+            //    if (RC.SelectedSiteLanguageId == 1)
+            //    {
+            //        ShowMessage("Please provide target for at least one location in all indicators.<br/> If you do not know the target at this time please put a 0 (Zero).", RC.NotificationType.Error, true, 3000);
+            //    }
+            //    else
+            //    {
 
-                    ShowMessage("Se il vous plaît fournir cible pour au moins un emplacement de tous les indicateurs.<br/> Si vous ne connaissez pas la cible à ce moment se il vous plaît mettre un 0 (zéro).", RC.NotificationType.Error, true, 3000);
-                }
-                return;
-            }
+            //        ShowMessage("Se il vous plaît fournir cible pour au moins un emplacement de tous les indicateurs.<br/> Si vous ne connaissez pas la cible à ce moment se il vous plaît mettre un 0 (zéro).", RC.NotificationType.Error, true, 3000);
+            //    }
+            //    return;
+            //}
 
-            using (TransactionScope scope = new TransactionScope())
+            //using (TransactionScope scope = new TransactionScope())
             {
                 SaveData();
-                scope.Complete();
+                //scope.Complete();
                 Response.Redirect("~/ClusterLead/IndicatorListing.aspx");
             }
         }
@@ -317,7 +362,7 @@ namespace SRFROWCA.ClusterLead
                             if (unitId <= 0)
                             {
                                 isUnitValid = false;
-                                
+
                             }
                         }
                     }
@@ -330,7 +375,7 @@ namespace SRFROWCA.ClusterLead
         private bool IsTargetProvided()
         {
             bool isTargetValid = true;
-            
+
             foreach (Control ctl in pnlAdditionalIndicaotrs.Controls)
             {
                 if (ctl != null && ctl.ID != null && ctl.ID.Contains("indicatorControlId"))
@@ -512,9 +557,11 @@ namespace SRFROWCA.ClusterLead
             {
                 int indicatorId = 0;
                 //newIndSet.PopulateAdmin1(emgLocationId);
-                DataTable dtTargets = GetAdmin1ForIndicatorAndLocation(emgLocationId, indicatorId);
+                DataTable dtTargets = GetAdminIndTargets(emgLocationId, indicatorId);
                 newIndSet.rptAdmin1.DataSource = dtTargets;
                 newIndSet.rptAdmin1.DataBind();
+                newIndSet.rptAdmin1Gender.DataSource = dtTargets;
+                newIndSet.rptAdmin1Gender.DataBind();
             }
             newIndSet.ControlNumber = i + 1;
             newIndSet.ID = "indicatorControlId" + i.ToString();
@@ -586,7 +633,10 @@ namespace SRFROWCA.ClusterLead
                             maxActivities = Convert.ToInt32(node.Attributes["ActivityCount"].Value);
 
                         if (node.Attributes["DateLimit"] != null)
+                        {
                             endEditDate = DateTime.ParseExact(Convert.ToString(node.Attributes["DateLimit"].Value), "MM-dd-yyyy", CultureInfo.InvariantCulture);
+                            endEditDate.AddYears(1);
+                        }
                     }
                 }
             }
@@ -594,7 +644,8 @@ namespace SRFROWCA.ClusterLead
             if (maxIndicators > 0)
             {
                 int isActive = 1;
-                int indicatorCount = DBContext.Update("GetIndicatorsCount", new object[] { emgLocationId, emgClusterId, isActive, RC.SelectedSiteLanguageId, DBNull.Value });
+                int indicatorCount = DBContext.Update("GetIndicatorsCount", new object[] { emgLocationId, emgClusterId, isActive, 
+                                                                                            RC.SelectedSiteLanguageId, 12, DBNull.Value });
                 if (indicatorCount > 0)
                     maxIndicators = maxIndicators - (indicatorCount + NewIndicatorControlsAdded);
             }
@@ -604,7 +655,7 @@ namespace SRFROWCA.ClusterLead
                 int isActive = 1;
                 int activityCount = DBContext.Update("GetActivitiesCount", new object[] { emgLocationId, emgClusterId, 
                                                                                           RC.SelectedSiteLanguageId, isActive,
-                                                                                          DBNull.Value });
+                                                                                          12, DBNull.Value });
                 if (activityCount > 0)
                     maxActivities = maxActivities - activityCount;
             }
@@ -640,5 +691,111 @@ namespace SRFROWCA.ClusterLead
                 ViewState["NewIndicatorControlsAdded"] = value;
             }
         }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public static List<ActivityForAutoComplete> GetActivitiesEn(string cnId, string clId, string obId, string pre)
+        {
+            List<ActivityForAutoComplete> activities = new List<ActivityForAutoComplete>();
+            int emgLocId = 0;
+            int.TryParse(cnId, out emgLocId);
+            int emgClsId = 0;
+            int.TryParse(clId, out emgClsId);
+            int emgObjId = 0;
+            int.TryParse(obId, out emgObjId);
+
+            string[] split = null;
+            split = pre.Split(' ');
+            string searchQuery = "";
+            if (split.Length > 0)
+            {
+                for (int i = 0; i < split.Length; i++)
+                {
+                    if (split[i].Length > 3)
+                    {
+                        if (searchQuery.Length > 0)
+                        {
+                            searchQuery += string.Format("OR ad.Activity like '{0}{1}{2}'", "%", split[i], "%");
+                        }
+                        else
+                        {
+                            searchQuery += string.Format("(ad.Activity like '{0}{1}{2}'", "%", split[i], "%");
+                        }
+                    }
+                }
+
+                if (searchQuery.Length > 0)
+                {
+                    searchQuery += " )";
+                }
+                else
+                {
+                    searchQuery = "ad.Activity like '%1-##2at#3f1%'";
+                }
+
+                DataTable dt = DBContext.GetData("GetActivitiesAutoComplete", new object[] { emgLocId, emgClsId, emgObjId, searchQuery, 1 });
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    ActivityForAutoComplete objAct = new ActivityForAutoComplete();
+                    objAct.Activity = dt.Rows[i]["Activity"].ToString();
+                    objAct.ActivityAlt = dt.Rows[i]["ActivityFr"].ToString();
+
+                    activities.Add(objAct);
+                }
+            }
+            return activities;
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public static List<ActivityForAutoComplete> GetActivitiesFr(string cnId, string clId, string obId, string pre)
+        {
+            List<ActivityForAutoComplete> activities = new List<ActivityForAutoComplete>();
+            int emgLocId = 0;
+            int.TryParse(cnId, out emgLocId);
+            int emgClsId = 0;
+            int.TryParse(clId, out emgClsId);
+            int emgObjId = 0;
+            int.TryParse(obId, out emgObjId);
+
+            string[] split = null;
+            split = pre.Split(' ');
+            string searchQuery = "";
+            if (split.Length > 0)
+            {
+                for (int i = 0; i < split.Length; i++)
+                {
+                    if (split[i].Length > 3)
+                    {
+                        if (searchQuery.Length > 0)
+                        {
+                            searchQuery += string.Format("OR ad.Activity like '{0}{1}{2}'", "%", split[i], "%");
+                        }
+                        else
+                        {
+                            searchQuery += string.Format("(ad.Activity like '{0}{1}{2}'", "%", split[i], "%");
+                        }
+                    }
+                }
+                searchQuery = searchQuery.Length > 0 ? searchQuery + " )" : "ad.Activity like '%1-##2at#3f1%'";
+                DataTable dt = DBContext.GetData("GetActivitiesAutoComplete", new object[] { emgLocId, emgClsId, emgObjId, searchQuery, 2 });
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    ActivityForAutoComplete objAct = new ActivityForAutoComplete();
+                    objAct.Activity = dt.Rows[i]["Activity"].ToString();
+                    objAct.ActivityAlt = dt.Rows[i]["ActivityEn"].ToString();
+
+                    activities.Add(objAct);                    
+                }
+            }
+            return activities;
+        }
+    }
+
+    public class ActivityForAutoComplete
+    {
+        public int ActivityId { get; set; }
+        public string Activity { get; set; }
+        public string ActivityAlt { get; set; }
     }
 }
