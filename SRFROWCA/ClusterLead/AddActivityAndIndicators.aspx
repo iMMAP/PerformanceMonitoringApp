@@ -12,7 +12,153 @@
         }
     </style>
     <script type="text/javascript">
+        // Non Gender TArget sum
+        function calTotal() {
+            var countrySum = 0;
+            $('.trgtAdmin2').each(function () {
+                var adm2ForCountry = 0;
+                adm2ForCountry = parseInt($(this).val());
+                if (isNaN(adm2ForCountry))
+                    adm2ForCountry = 0;
+                countrySum += adm2ForCountry;
+            });
+
+            var admin1Sum = 0
+            txtAdmin2 = $(this).closest('.tblAdmin1').find('.trgtAdmin2');
+            txtAdmin2.each(function () {
+                var adm2ForAdm1 = 0;
+                adm2ForAdm1 = parseInt($(this).val());
+                if (isNaN(adm2ForAdm1))
+                    adm2ForAdm1 = 0;
+                admin1Sum += adm2ForAdm1;
+            });
+            $(this).closest('.tblCountry').find('.trgtCountry').val(countrySum);
+            $(this).closest('.tblAdmin1').find('.trgtAdmin1').val(admin1Sum);
+        }
+
+        // Gender Male Target Sum
+        function calTotalGenderMale() {
+            var countrySumMale = 0;
+            $('.trgtAdmin2GenderMale').each(function () {
+                var adm2ForCountryMale = 0;
+                adm2ForCountryMale = parseInt($(this).val());
+                if (isNaN(adm2ForCountryMale))
+                    adm2ForCountryMale = 0;
+                countrySumMale += adm2ForCountryMale;
+            });
+            if (countrySumMale == 0)
+                countrySumMale = ''
+            $(this).closest('.tblCountryGender').find('.trgtCountryGenderMale').val(countrySumMale);
+
+            var admin1GenderMaleSum = 0
+            txtAdmin2GenderMale = $(this).closest('.tblAdmin1Gender').find('.trgtAdmin2GenderMale');
+            txtAdmin2GenderMale.each(function () {
+                var adm2ForAdmin1Male = 0;
+                adm2ForAdmin1Male = parseInt($(this).val());
+                if (isNaN(adm2ForAdmin1Male))
+                    adm2ForAdmin1Male = 0;
+                admin1GenderMaleSum += adm2ForAdmin1Male;
+            });
+            if (admin1GenderMaleSum == 0)
+                admin1GenderMaleSum = ''
+            $(this).closest('.tblAdmin1Gender').find('.trgtAdmin1GenderMale').val(admin1GenderMaleSum);
+            rowGenderTotal($(this));
+            rowCountryGenderTotal();
+            rowAdmin1GenderTotal($(this));
+        }
+
+        // Gender Female Target Sum
+        function calTotalGenderFemale() {
+            var countrySumFemale = 0;
+            $('.trgtAdmin2GenderFemale').each(function () {
+                var adm2ForCountryFemale = 0;
+                adm2ForCountryFemale = parseInt($(this).val());
+                if (isNaN(adm2ForCountryFemale))
+                    adm2ForCountryFemale = 0;
+                countrySumFemale += adm2ForCountryFemale;
+            });
+            if (countrySumFemale == 0)
+                countrySumFemale = '';
+            $(this).closest('.tblCountryGender').find('.trgtCountryGenderFemale').val(countrySumFemale);
+
+            var admin1GenderFemaleSum = 0
+            txtAdmin2GenderFemale = $(this).closest('.tblAdmin1Gender').find('.trgtAdmin2GenderFemale');
+            txtAdmin2GenderFemale.each(function () {
+                var adm2ForAdmin1Female = 0;
+                adm2ForAdmin1Female = parseInt($(this).val());
+                if (isNaN(adm2ForAdmin1Female))
+                    adm2ForAdmin1Female = 0;
+                admin1GenderFemaleSum += adm2ForAdmin1Female;
+            });
+            if (admin1GenderFemaleSum == 0)
+                admin1GenderFemaleSum = '';
+            $(this).closest('.tblAdmin1Gender').find('.trgtAdmin1GenderFemale').val(admin1GenderFemaleSum);
+            rowGenderTotal($(this));
+            rowCountryGenderTotal();
+            rowAdmin1GenderTotal($(this));
+        }
+
+        function rowGenderTotal(thisObj) {            
+            var $row = thisObj.closest('tr'),
+                maleTarget = parseInt($row.find('.trgtAdmin2GenderMale').val()),
+                femaleTarget = parseInt($row.find('.trgtAdmin2GenderFemale').val());
+
+            if (isNaN(maleTarget) || maleTarget == '')
+                maleTarget = 0;
+
+            if (isNaN(femaleTarget) || femaleTarget == '')
+                femaleTarget = 0;
+
+            var total = maleTarget + femaleTarget;
+            $row.find('.trgtAdmin2GenderTotal').val(total)
+        }
+
+        function rowCountryGenderTotal() {
+            var maleTarget = parseInt($('.trgtCountryGenderMale').val())
+            var femaleTarget = parseInt($('.trgtCountryGenderFemale').val());
+
+            if (isNaN(maleTarget) || maleTarget == '')
+                maleTarget = 0;
+
+            if (isNaN(femaleTarget) || femaleTarget == '')
+                femaleTarget = 0;
+
+            var total = maleTarget + femaleTarget;
+            $('.trgtCountryGenderTotal').val(total)
+        }
+
+        function rowAdmin1GenderTotal(thisObj) {
+            var $row = thisObj.closest('.tblAdmin1Gender').find('tr.trAdmin1'),
+                maleTarget = parseInt($row.find('.trgtAdmin1GenderMale').val()),
+                femaleTarget = parseInt($row.find('.trgtAdmin1GenderFemale').val());
+            
+            if (isNaN(maleTarget) || maleTarget == '')
+                maleTarget = 0;
+
+            if (isNaN(femaleTarget) || femaleTarget == '')
+                femaleTarget = 0;
+
+            var total = maleTarget + femaleTarget;
+            $row.find('.trgtAdmin1GenderTotal').val(total)
+        }
+
         $(function () {
+            $('.showDetails1').click(function () {
+                $(this).parent().parent().next('tr.details1').slideToggle();
+                $(this).attr('src', ($(this).attr('src') == '../assets/orsimages/plus.png' ?
+                                                             '../assets/orsimages/minus.png' :
+                                                              '../assets/orsimages/plus.png'))
+            });
+
+            // Sum without Gender
+            $(".tblAdmin2").on('change', '.trgtAdmin2', calTotal);
+
+            // Sum Gender Male
+            $(".tblAdmin2Gender").on('change', '.trgtAdmin2GenderMale', calTotalGenderMale);
+
+            // Sum Gender Female
+            $(".tblAdmin2Gender").on('change', '.trgtAdmin2GenderFemale', calTotalGenderFemale);
+
             $('#<%=txtActivityEng.ClientID%>').autocomplete({
                 minLength: 4,
                 source: function (request, response) {

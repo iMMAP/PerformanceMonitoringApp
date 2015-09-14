@@ -20,6 +20,10 @@ namespace SRFROWCA.Controls
             {
                 PopulateUnits(true);
             }
+            if (!IsPostBack)
+            {
+                
+            }
         }
 
         public void PopulateUnits(bool selectIndex)
@@ -108,7 +112,7 @@ namespace SRFROWCA.Controls
         {
             int insertCount = 1;
 
-            foreach (RepeaterItem item in rptAdmin1.Items)
+            foreach (RepeaterItem item in rptCountry.Items)
             {
                 if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
                 {
@@ -142,7 +146,7 @@ namespace SRFROWCA.Controls
         {
             int insertCount = 1;
 
-            foreach (RepeaterItem item in rptAdmin1Gender.Items)
+            foreach (RepeaterItem item in rptCountryGender.Items)
             {
                 if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
                 {
@@ -188,22 +192,102 @@ namespace SRFROWCA.Controls
 
         public int ControlNumber { get; set; }
 
-        //protected void rptAdmin1_ItemDataBound(object sender, RepeaterItemEventArgs e)
-        //{
-        //    if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-        //    {
-        //        if (IsPopulation == 0)
-        //        {
-        //            HtmlTableCell td = e.Item.FindControl("tdFromLocTop") as HtmlTableCell;
-        //            if (td != null)
-        //                td.Visible = false;
+        protected void rptCountry_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                int countryId = 0;
+                HiddenField hfCountryId = e.Item.FindControl("hfCountryId") as HiddenField;
+                if (hfCountryId != null)
+                {
+                    int.TryParse(hfCountryId.Value, out countryId);
+                }
+                if (countryId > 0)
+                {
+                    Repeater rptAdmin1 = e.Item.FindControl("rptAdmin1") as Repeater;
+                    LoadAdmin1Targets(rptAdmin1, countryId);
+                }
+            }
+        }
 
-        //            td = e.Item.FindControl("tdFromLoc") as HtmlTableCell;
-        //            if (td != null)
-        //                td.Visible = false;
+        protected void rptAdmin1_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                int admin1Id = 0;
+                HiddenField hfAdmin1Id = e.Item.FindControl("hfAdmin1Id") as HiddenField;
+                if (hfAdmin1Id != null)
+                {
+                    int.TryParse(hfAdmin1Id.Value, out admin1Id);
+                }
+                if (admin1Id > 0)
+                {
+                    Repeater rptAdmin2 = e.Item.FindControl("rptAdmin2") as Repeater;
+                    LoadAdmin2Targets(rptAdmin2, admin1Id);
+                }
+            }
+        }
 
-        //        }
-        //    }
-        //}
+        private void LoadAdmin1Targets(Repeater rpt, int countryId)
+        {
+            
+            if (rpt != null)
+            {
+                int indicatorId = 0;
+                int.TryParse(hfIndicatorId.Value, out indicatorId);
+                rpt.DataSource = DBContext.GetData("[GetAdmin1TargetOfIndicator]", new object[] { countryId, indicatorId });
+                rpt.DataBind();
+            }
+        }
+        private void LoadAdmin2Targets(Repeater rptAdmin2, int admin1Id)
+        {            
+            if (rptAdmin2 != null)
+            {
+                int indicatorId = 0;
+                int.TryParse(hfIndicatorId.Value, out indicatorId);
+                rptAdmin2.DataSource = DBContext.GetData("[GetAdmin2TargetOfIndicator]", new object[] { admin1Id, indicatorId });
+                rptAdmin2.DataBind();
+            }
+        }
+
+        protected void rptCountryGender_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                int countryId = 0;
+                HiddenField hfCountryId = e.Item.FindControl("hfCountryIdGender") as HiddenField;
+                if (hfCountryId != null)
+                {
+                    int.TryParse(hfCountryId.Value, out countryId);
+                }
+                if (countryId > 0)
+                {
+                    Repeater rptAdmin1Gen = e.Item.FindControl("rptAdmin1Gender") as Repeater;
+                    LoadAdmin1Targets(rptAdmin1Gen, countryId);
+                }
+            }
+        }
+
+        protected void rptAdmin1Gender_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                int admin1Id = 0;
+                HiddenField hfAdmin1Id = e.Item.FindControl("hfAdmin1IdGender") as HiddenField;
+                if (hfAdmin1Id != null)
+                {
+                    int.TryParse(hfAdmin1Id.Value, out admin1Id);
+                }
+                if (admin1Id > 0)
+                {
+                    Repeater rptAdmin2 = e.Item.FindControl("rptAdmin2Gender") as Repeater;
+                    LoadAdmin2Targets(rptAdmin2, admin1Id);
+                }
+            }
+        }
+
+        public int EmgLocationId { get; set; }
     }
+
+    
 }

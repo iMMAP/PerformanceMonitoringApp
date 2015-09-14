@@ -94,13 +94,13 @@ namespace SRFROWCA.Controls {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pAdmin1Target;
         
         /// <summary>
-        /// rptAdmin1 control.
+        /// rptCountry control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        public global::System.Web.UI.WebControls.Repeater rptAdmin1;
+        public global::System.Web.UI.WebControls.Repeater rptCountry;
         
         /// <summary>
         /// divAdmin1GenderTargets control.
@@ -121,12 +121,12 @@ namespace SRFROWCA.Controls {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pAdmin1GenderTarget;
         
         /// <summary>
-        /// rptAdmin1Gender control.
+        /// rptCountryGender control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        public global::System.Web.UI.WebControls.Repeater rptAdmin1Gender;
+        public global::System.Web.UI.WebControls.Repeater rptCountryGender;
     }
 }

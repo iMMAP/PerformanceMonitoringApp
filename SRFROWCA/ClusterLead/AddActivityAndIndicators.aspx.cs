@@ -126,7 +126,6 @@ namespace SRFROWCA.ClusterLead
                     for (int i = 0; i < count; i++)
                     {
                         IndicatorsWithAdmin1TargetsControl indicatorCtl = (IndicatorsWithAdmin1TargetsControl)LoadControl("~/controls/IndicatorsWithAdmin1TargetsControl.ascx");
-
                         int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
                         indicatorCtl.ControlNumber = i + 1;
                         indicatorCtl.ID = "indicatorControlId" + i.ToString();
@@ -142,9 +141,6 @@ namespace SRFROWCA.ClusterLead
                         }
 
                         bool isGender = false;
-                        //bool.TryParse(dt.Rows[i]["IsGender"].ToString(), out isGender);
-                        //indicatorCtl.chkGender.Checked = isGender;
-
                         int calMethod = 0;
                         int.TryParse(dt.Rows[i]["IndicatorCalculationTypeId"].ToString(), out calMethod);
                         if (calMethod > 0)
@@ -157,15 +153,15 @@ namespace SRFROWCA.ClusterLead
 
 
                         isGender = unitId == 269;
-                        DataTable dtTargets = GetAdminIndTargets(emgLocationId, indicatorId);
-                        indicatorCtl.rptAdmin1.DataSource = dtTargets;
-                        indicatorCtl.rptAdmin1.DataBind();
-                        indicatorCtl.rptAdmin1Gender.DataSource = dtTargets;
-                        indicatorCtl.rptAdmin1Gender.DataBind();
-                        if (!isGender)
-                            UpdateRepeaterTargetColumn(indicatorCtl.rptAdmin1Gender);
-                        else
-                            UpdateRepeaterTargetColumn(indicatorCtl.rptAdmin1);
+                        DataTable dtTargets = GetCountryIndTarget(emgLocationId, indicatorId);
+                        indicatorCtl.rptCountry.DataSource  = dtTargets;
+                        indicatorCtl.rptCountry.DataBind();
+                        indicatorCtl.rptCountryGender.DataSource = dtTargets;
+                        indicatorCtl.rptCountryGender.DataBind();
+                        //if (!isGender)
+                        //    UpdateRepeaterTargetColumn(indicatorCtl.rptCountryGender);
+                        //else
+                            //UpdateRepeaterTargetColumn(indicatorCtl.rptAdmin1);
 
                         pnlAdditionalIndicaotrs.Controls.Add(indicatorCtl);
                         indicatorCtl.hfIndicatorId.Value = indicatorId.ToString();
@@ -196,6 +192,10 @@ namespace SRFROWCA.ClusterLead
         //    return DBContext.GetData("GetAdmin1LocationsOfCountry", new object[] { emgLocationId });
         //}
 
+        private DataTable GetCountryIndTarget(int emgLocationId, int indicatorId)
+        {
+            return DBContext.GetData("GetCountryTargetOfIndicator", new object[] { emgLocationId, indicatorId });
+        }
         private DataTable GetAdminIndTargets(int emgLocationId, int indicatorId)
         {
             return DBContext.GetData("GetAllAdmin1AndIndicatorTargets", new object[] { indicatorId, emgLocationId });
@@ -283,11 +283,12 @@ namespace SRFROWCA.ClusterLead
                 if (ctl != null && ctl.ID != null && ctl.ID.Contains("indicatorControlId"))
                 {
                     IndicatorsWithAdmin1TargetsControl indicatorCtl = ctl as IndicatorsWithAdmin1TargetsControl;
-                    DataTable dtTargets = GetAdminIndTargets(countryId, 0);
-                    indicatorCtl.rptAdmin1.DataSource = dtTargets;
-                    indicatorCtl.rptAdmin1.DataBind();
-                    indicatorCtl.rptAdmin1Gender.DataSource = dtTargets;
-                    indicatorCtl.rptAdmin1Gender.DataBind();
+                    //DataTable dtTargets = GetAdminIndTargets(countryId, 0);
+                    DataTable dtTargets = GetCountryIndTarget(countryId, 0);
+                    indicatorCtl.rptCountry.DataSource = dtTargets;
+                    indicatorCtl.rptCountry.DataBind();
+                    indicatorCtl.rptCountryGender.DataSource = dtTargets;
+                    indicatorCtl.rptCountryGender.DataBind();
                 }
             }
         }
@@ -556,12 +557,11 @@ namespace SRFROWCA.ClusterLead
             if (emgLocationId > 0)
             {
                 int indicatorId = 0;
-                //newIndSet.PopulateAdmin1(emgLocationId);
-                DataTable dtTargets = GetAdminIndTargets(emgLocationId, indicatorId);
-                newIndSet.rptAdmin1.DataSource = dtTargets;
-                newIndSet.rptAdmin1.DataBind();
-                newIndSet.rptAdmin1Gender.DataSource = dtTargets;
-                newIndSet.rptAdmin1Gender.DataBind();
+                DataTable dt = GetCountryIndTarget(emgLocationId, indicatorId);
+                newIndSet.rptCountry.DataSource = dt;
+                newIndSet.rptCountry.DataBind();
+                newIndSet.rptCountryGender.DataSource = dt;
+                newIndSet.rptCountryGender.DataBind();
             }
             newIndSet.ControlNumber = i + 1;
             newIndSet.ID = "indicatorControlId" + i.ToString();
@@ -797,5 +797,11 @@ namespace SRFROWCA.ClusterLead
         public int ActivityId { get; set; }
         public string Activity { get; set; }
         public string ActivityAlt { get; set; }
+    }
+
+    public class TargetCountry
+    {
+        public int LocationId { get; set; }
+        public string LocationName { get; set; }
     }
 }

@@ -20,7 +20,7 @@
     <script>
         function AddHeader() {
             $(function () {
-                $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th colspan="3" style="text-align: center;">Total</th><th colspan="3" style="text-align: center;">In Need</th><th colspan="3" style="text-align: center;">Targeted</th><th></th></tr></thead>');
+                $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th colspan="3" style="text-align: center;">Total</th><th colspan="3" style="text-align: center;">In Need</th><th colspan="3" style="text-align: center;">Targeted</th><th></th></tr></thead>');
             });
         }
 
@@ -179,16 +179,15 @@
                             <asp:BoundField DataField="SubCategory" HeaderText="Sub Category" SortExpression="SubCategory" ItemStyle-Width="7%"></asp:BoundField>
                             <asp:BoundField DataField="KeyFigure" HeaderText="Key Figure" SortExpression="KeyFigure" ItemStyle-Width="15%"></asp:BoundField>
                             <asp:BoundField DataField="AsOfDate" HeaderText="As Of Date" SortExpression="AsOfDate" ItemStyle-Width="8%"></asp:BoundField>
-                            <asp:TemplateField ItemStyle-Width="160px" HeaderText="Source">
+                            <asp:TemplateField ItemStyle-Width="50px" HeaderText="Source">
                                 <ItemTemplate>
-                                    <div style="width: 150px; word-wrap: break-word;">
-                                        <a href='<%# Eval("KeyFigureSource")%>' target="_blank"><%# Eval("KeyFigureSource")%></a>
+                                    <div style="width: 50px; word-wrap: break-word;">
+                                        <a href='<%# Eval("KeyFigureSource")%>' target="_blank"><%# Eval("KeyFigSourceShort")%></a>
                                     </div>
-
                                 </ItemTemplate>
                             </asp:TemplateField>
 
-                            <asp:BoundField DataField="FromLocation" HeaderText="From Location" SortExpression="FromLocation" ItemStyle-Width="4%"></asp:BoundField>
+                            <asp:BoundField DataField="FromLocation" HeaderText="From Location" SortExpression="FromLocation" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden"></asp:BoundField>
                             <asp:BoundField DataField="ReportedLocation" HeaderText="Location" SortExpression="ReportedLocation" ItemStyle-Width="8%"></asp:BoundField>
                             <asp:TemplateField HeaderText="Total" ItemStyle-Width="4%">
                                 <ItemTemplate>

@@ -142,12 +142,12 @@
                                             <tr>
                                                 <td>&nbsp;</td>
                                                 <td colspan="4" style="padding-top: 10px;">
-                                                    <asp:Button ID="btnSearch" runat="server" Text="Search" 
-                                                        OnClick="btnSearch_Click" CssClass="btn btn-primary" 
+                                                    <asp:Button ID="btnSearch" runat="server" Text="Search"
+                                                        OnClick="btnSearch_Click" CssClass="btn btn-primary"
                                                         CausesValidation="False" meta:resourcekey="btnSearchResource1" />
-                                                    <asp:Button ID="btnReset" runat="server" Text="Reset" 
-                                                        Style="margin-left: 5px;" OnClick="btnReset_Click" 
-                                                        CssClass="btn btn-primary" CausesValidation="False" 
+                                                    <asp:Button ID="btnReset" runat="server" Text="Reset"
+                                                        Style="margin-left: 5px;" OnClick="btnReset_Click"
+                                                        CssClass="btn btn-primary" CausesValidation="False"
                                                         meta:resourcekey="btnResetResource1" /></td>
                                             </tr>
                                         </table>
@@ -183,10 +183,12 @@
                                 meta:resourcekey="BoundFieldResource1">
                                 <ItemStyle Width="120px"></ItemStyle>
                             </asp:BoundField>
-                            <asp:BoundField DataField="ProjectTitle" HeaderText="Project Title" ItemStyle-Wrap="true"
-                                SortExpression="ProjectTitle" meta:resourcekey="BoundFieldResource2">
-                                <ItemStyle Wrap="True"></ItemStyle>
-                            </asp:BoundField>
+                            <asp:TemplateField HeaderText="Project Title" SortExpression="ProjectTitle" meta:resourcekey="BoundFieldResource2">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblProjectTitle" runat="server"
+                                        Text='<%# Eval("ProjectShortTitle") %>' ToolTip='<%# Eval("ProjectTitle") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                             <asp:BoundField DataField="OrganizationName" HeaderText="Organization" SortExpression="OrganizationName"
                                 meta:resourcekey="BoundFieldResource3" ItemStyle-Width="120px"></asp:BoundField>
                             <asp:BoundField DataField="ClusterName" HeaderText="Subset Cluster" SortExpression="ClusterName" meta:resourcekey="BoundFieldResource4" />
@@ -204,10 +206,12 @@
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="OPSProjectStatus" HeaderText="Status" SortExpression="OPSProjectStatus" meta:resourcekey="BoundFieldResource6" />
-                            <asp:BoundField DataField="Contact" HeaderText="Contact" ItemStyle-Wrap="true" ItemStyle-Width="150px"
-                                SortExpression="Contact" meta:resourcekey="BoundFieldResource8">
-                                <ItemStyle Wrap="True" Width="150px"></ItemStyle>
-                            </asp:BoundField>
+                            <asp:TemplateField HeaderText="Contact" SortExpression="ProjectContactName" meta:resourcekey="BoundFieldResource8">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblContact" runat="server"
+                                        Text='<%# Eval("Contact") %>' ToolTip='<%# Eval("Email") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                             <asp:BoundField DataField="Phone" HeaderText="Phone" meta:resourcekey="BoundFieldResource9" />
                             <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderText="PDF" meta:resourcekey="TemplateFieldResource2">
                                 <ItemTemplate>

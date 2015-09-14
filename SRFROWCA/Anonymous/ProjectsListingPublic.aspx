@@ -158,10 +158,12 @@
                                         meta:resourcekey="BoundFieldResource1">
                                         <ItemStyle Width="10%"></ItemStyle>
                                     </asp:BoundField>
-                                    <asp:BoundField DataField="ProjectTitle" HeaderText="Project Title" ItemStyle-Wrap="true" ItemStyle-Width="35%"
-                                        SortExpression="ProjectTitle" meta:resourcekey="BoundFieldResource2">
-                                        <ItemStyle Wrap="True"></ItemStyle>
-                                    </asp:BoundField>
+                                    <asp:TemplateField HeaderText="Project Title" SortExpression="ProjectTitle" meta:resourcekey="BoundFieldResource2">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblProjectTitle" runat="server"
+                                        Text='<%# Eval("ProjectShortTitle") %>' ToolTip='<%# Eval("ProjectTitle") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                                     <asp:BoundField DataField="OrganizationName" HeaderText="Organization" SortExpression="OrganizationName"
                                         meta:resourcekey="BoundFieldResource3" ItemStyle-Width="15%"></asp:BoundField>
                                     <asp:BoundField DataField="ClusterName" HeaderText="Subset Cluster" SortExpression="ClusterName" meta:resourcekey="BoundFieldResource4" />

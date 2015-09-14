@@ -30,7 +30,7 @@ namespace SRFROWCA.ClusterLead
                 LoadIndicators();
             }
 
-            ToggleControlsToAddIndicator();
+            //ToggleControlsToAddIndicator();
         }
 
         private void ToggleControlsToAddIndicator()
