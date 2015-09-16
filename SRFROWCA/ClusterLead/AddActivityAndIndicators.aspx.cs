@@ -8,7 +8,6 @@ using System.Globalization;
 using System.IO;
 using System.Net.Mail;
 using System.Text;
-using System.Transactions;
 using System.Web;
 using System.Web.Script.Services;
 using System.Web.Security;
@@ -79,10 +78,10 @@ namespace SRFROWCA.ClusterLead
                 DateTime endEditDate = DateTime.Now.AddDays(1);
 
                 GetMaxCount(emgLocationId, emgClusterId, out maxIndicators, out maxActivities, out endEditDate);
-                if (maxIndicators <= 0)
-                    btnAddIndicatorControl.Visible = false;
-                else
-                    btnAddIndicatorControl.Visible = true;
+                //if (maxIndicators <= 0)
+                    //btnAddIndicatorControl.Visible = false;
+                //else
+                    //btnAddIndicatorControl.Visible = true;
             }
         }
 
@@ -150,21 +149,20 @@ namespace SRFROWCA.ClusterLead
 
                         int indicatorId = 0;
                         int.TryParse(dt.Rows[i]["IndicatorId"].ToString(), out indicatorId);
-
+                        indicatorCtl.hfIndicatorId.Value = indicatorId.ToString();
 
                         isGender = unitId == 269;
                         DataTable dtTargets = GetCountryIndTarget(emgLocationId, indicatorId);
-                        indicatorCtl.rptCountry.DataSource  = dtTargets;
+                        indicatorCtl.rptCountry.DataSource = dtTargets;
                         indicatorCtl.rptCountry.DataBind();
                         indicatorCtl.rptCountryGender.DataSource = dtTargets;
                         indicatorCtl.rptCountryGender.DataBind();
-                        //if (!isGender)
-                        //    UpdateRepeaterTargetColumn(indicatorCtl.rptCountryGender);
-                        //else
-                            //UpdateRepeaterTargetColumn(indicatorCtl.rptAdmin1);
+                        if (!isGender)
+                            UpdateRepeaterTargetColumn(indicatorCtl.rptCountryGender);
+                        else
+                            UpdateRepeaterTargetColumn(indicatorCtl.rptCountry);
 
                         pnlAdditionalIndicaotrs.Controls.Add(indicatorCtl);
-                        indicatorCtl.hfIndicatorId.Value = indicatorId.ToString();
                         IndControlId += 1;
                     }
                 }
@@ -182,6 +180,14 @@ namespace SRFROWCA.ClusterLead
                     {
                         txtTotal.Text = "";
                     }
+
+                    Repeater rptAdmin1 = item.FindControl("rptAdmin1") as Repeater;
+                    if (rptAdmin1 != null)
+                        UpdateRepeaterTargetColumn(rptAdmin1);
+
+                    Repeater rptAdmin2 = item.FindControl("rptAdmin2") as Repeater;
+                    if (rptAdmin2 != null)
+                        UpdateRepeaterTargetColumn(rptAdmin2);
                 }
             }
         }
@@ -296,18 +302,18 @@ namespace SRFROWCA.ClusterLead
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            if (!IsUnitSelected())
-            {
-                if (RC.SelectedSiteLanguageId == 1)
-                {
-                    ShowMessage("Please select unit of each Indicator", RC.NotificationType.Error, true, 2000);
-                }
-                else
-                {
-                    ShowMessage("Se il vous plaît sélectionner lunité de chaque indicateur", RC.NotificationType.Error, true, 2000);
-                }
-                return;
-            }
+            //if (!IsUnitSelected())
+            //{
+            //    if (RC.SelectedSiteLanguageId == 1)
+            //    {
+            //        ShowMessage("Please select unit of each Indicator", RC.NotificationType.Error, true, 2000);
+            //    }
+            //    else
+            //    {
+            //        ShowMessage("Se il vous plaît sélectionner lunité de chaque indicateur", RC.NotificationType.Error, true, 2000);
+            //    }
+            //    return;
+            //}
 
             //if (IsTargetProvided())
             //{
@@ -427,13 +433,13 @@ namespace SRFROWCA.ClusterLead
 
                             if (indControl != null)
                             {
-                                TextBox txtEng = (TextBox)indControl.FindControl("txtInd1Eng");
-                                TextBox txtFr = (TextBox)indControl.FindControl("txtInd1Fr");
+                                //TextBox txtEng = (TextBox)indControl.FindControl("txtInd1Eng");
+                                //TextBox txtFr = (TextBox)indControl.FindControl("txtInd1Fr");
 
-                                if (!string.IsNullOrEmpty(txtEng.Text.Trim()) || !string.IsNullOrEmpty(txtFr.Text.Trim()))
+                                //if (!string.IsNullOrEmpty(txtEng.Text.Trim()) || !string.IsNullOrEmpty(txtFr.Text.Trim()))
                                 {
                                     indControl.SaveIndicators(ActivityId);
-                                    strIndcators.AppendFormat("Indicator (English): {0}<br/>Indicator (French): {1}<br/><br/>", txtEng.Text, txtFr.Text);
+                                    //strIndcators.AppendFormat("Indicator (English): {0}<br/>Indicator (French): {1}<br/><br/>", txtEng.Text, txtFr.Text);
                                 }
                             }
                         }
@@ -467,10 +473,10 @@ namespace SRFROWCA.ClusterLead
 
                     if (indControl != null)
                     {
-                        TextBox txtEng = (TextBox)indControl.FindControl("txtInd1Eng");
-                        TextBox txtFr = (TextBox)indControl.FindControl("txtInd1Fr");
+                        //TextBox txtEng = (TextBox)indControl.FindControl("txtInd1Eng");
+                        //TextBox txtFr = (TextBox)indControl.FindControl("txtInd1Fr");
 
-                        if (!string.IsNullOrEmpty(txtEng.Text.Trim()) || !string.IsNullOrEmpty(txtFr.Text.Trim()))
+                        //if (!string.IsNullOrEmpty(txtEng.Text.Trim()) || !string.IsNullOrEmpty(txtFr.Text.Trim()))
                         {
                             indControl.SaveIndicators(activityId);
                         }
@@ -694,102 +700,113 @@ namespace SRFROWCA.ClusterLead
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static List<ActivityForAutoComplete> GetActivitiesEn(string cnId, string clId, string obId, string pre)
+        public static List<ActivityForAutoComplete> GetActivities(string cnId, string clId, string obId, string lngId, string searchTxt)
         {
-            List<ActivityForAutoComplete> activities = new List<ActivityForAutoComplete>();
-            int emgLocId = 0;
-            int.TryParse(cnId, out emgLocId);
-            int emgClsId = 0;
-            int.TryParse(clId, out emgClsId);
-            int emgObjId = 0;
-            int.TryParse(obId, out emgObjId);
+          List<ActivityForAutoComplete> activities = new List<ActivityForAutoComplete>();
+          if (searchTxt.Length < 150)
+          {
+               int emgLocId = 0;
+              int.TryParse(cnId, out emgLocId);
+              int emgClsId = 0;
+              int.TryParse(clId, out emgClsId);
+              int emgObjId = 0;
+              int.TryParse(obId, out emgObjId);
+              int langId = 0;
+              int.TryParse(lngId, out langId);
 
-            string[] split = null;
-            split = pre.Split(' ');
-            string searchQuery = "";
-            if (split.Length > 0)
-            {
-                for (int i = 0; i < split.Length; i++)
-                {
-                    if (split[i].Length > 3)
-                    {
-                        if (searchQuery.Length > 0)
-                        {
-                            searchQuery += string.Format("OR ad.Activity like '{0}{1}{2}'", "%", split[i], "%");
-                        }
-                        else
-                        {
-                            searchQuery += string.Format("(ad.Activity like '{0}{1}{2}'", "%", split[i], "%");
-                        }
-                    }
-                }
+              string[] split = null;
+              split = searchTxt.Split(' ');
+              string searchQuery = "";
+              if (split.Length > 0)
+              {
+                  for (int i = 0; i < split.Length; i++)
+                  {
+                      if (split[i].Length > 3)
+                      {
+                          string word = split[i];
+                          word = word.Replace("'", "''");
+                          if (searchQuery.Length > 0)
+                          {
+                              searchQuery += string.Format("OR ad.Activity like '{0}{1}{2}'", "%", word, "%");
+                          }
+                          else
+                          {
+                              searchQuery += string.Format("(ad.Activity like '{0}{1}{2}'", "%", word, "%");
+                          }
+                      }
+                  }
 
-                if (searchQuery.Length > 0)
-                {
-                    searchQuery += " )";
-                }
-                else
-                {
-                    searchQuery = "ad.Activity like '%1-##2at#3f1%'";
-                }
+                  if (searchQuery.Length > 0)
+                  {
+                      searchQuery += " )";
+                  }
+                  else
+                  {
+                      searchQuery = "ad.Activity like '%1-##2at#3f1%'";
+                  }
+                  DataTable dt = DBContext.GetData("GetActivitiesAutoComplete", new object[] { emgLocId, emgClsId, emgObjId, searchQuery, langId });
+                  for (int i = 0; i < dt.Rows.Count; i++)
+                  {
+                      ActivityForAutoComplete objAct = new ActivityForAutoComplete();
+                      objAct.Activity = dt.Rows[i]["Activity"].ToString();
+                      objAct.ActivityAlt = dt.Rows[i]["ActivityFr"].ToString();
 
-                DataTable dt = DBContext.GetData("GetActivitiesAutoComplete", new object[] { emgLocId, emgClsId, emgObjId, searchQuery, 1 });
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    ActivityForAutoComplete objAct = new ActivityForAutoComplete();
-                    objAct.Activity = dt.Rows[i]["Activity"].ToString();
-                    objAct.ActivityAlt = dt.Rows[i]["ActivityFr"].ToString();
-
-                    activities.Add(objAct);
-                }
-            }
+                      activities.Add(objAct);
+                  }
+              }
+          }
             return activities;
         }
 
-        [WebMethod]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static List<ActivityForAutoComplete> GetActivitiesFr(string cnId, string clId, string obId, string pre)
-        {
-            List<ActivityForAutoComplete> activities = new List<ActivityForAutoComplete>();
-            int emgLocId = 0;
-            int.TryParse(cnId, out emgLocId);
-            int emgClsId = 0;
-            int.TryParse(clId, out emgClsId);
-            int emgObjId = 0;
-            int.TryParse(obId, out emgObjId);
+        //[WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        //public static List<ActivityForAutoComplete> GetActivitiesFr(string cnId, string clId, string obId, string pre)
+        //{
+        //    List<ActivityForAutoComplete> activities = new List<ActivityForAutoComplete>();
+        //    int emgLocId = 0;
+        //    int.TryParse(cnId, out emgLocId);
+        //    int emgClsId = 0;
+        //    int.TryParse(clId, out emgClsId);
+        //    int emgObjId = 0;
+        //    int.TryParse(obId, out emgObjId);
 
-            string[] split = null;
-            split = pre.Split(' ');
-            string searchQuery = "";
-            if (split.Length > 0)
-            {
-                for (int i = 0; i < split.Length; i++)
-                {
-                    if (split[i].Length > 3)
-                    {
-                        if (searchQuery.Length > 0)
-                        {
-                            searchQuery += string.Format("OR ad.Activity like '{0}{1}{2}'", "%", split[i], "%");
-                        }
-                        else
-                        {
-                            searchQuery += string.Format("(ad.Activity like '{0}{1}{2}'", "%", split[i], "%");
-                        }
-                    }
-                }
-                searchQuery = searchQuery.Length > 0 ? searchQuery + " )" : "ad.Activity like '%1-##2at#3f1%'";
-                DataTable dt = DBContext.GetData("GetActivitiesAutoComplete", new object[] { emgLocId, emgClsId, emgObjId, searchQuery, 2 });
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    ActivityForAutoComplete objAct = new ActivityForAutoComplete();
-                    objAct.Activity = dt.Rows[i]["Activity"].ToString();
-                    objAct.ActivityAlt = dt.Rows[i]["ActivityEn"].ToString();
+        //    string[] split = null;
+        //    split = pre.Split(' ');
+        //    string searchQuery = "";
+        //    if (split.Length > 0)
+        //    {
+        //        for (int i = 0; i < split.Length; i++)
+        //        {
+        //            if (split[i].Length > 3)
+        //            {
+        //                string word = split[i];
+        //                word = word.Replace("'", "''");
+        //                if (searchQuery.Length > 0)
+        //                {
+        //                    searchQuery += string.Format("OR ad.Activity like '{0}{1}{2}'", "%", split[i], "%");
+        //                }
+        //                else
+        //                {
+        //                    searchQuery += string.Format("(ad.Activity like '{0}{1}{2}'", "%", split[i], "%");
+        //                }
+        //            }
+        //        }
+        //        searchQuery = searchQuery.Length > 0 ? searchQuery + " )" : "ad.Activity like '%1-##2at#3f1%'";
+        //        if (searchQuery.Length < 2000)
+        //        {
+        //            DataTable dt = DBContext.GetData("GetActivitiesAutoComplete", new object[] { emgLocId, emgClsId, emgObjId, searchQuery, 2 });
+        //            for (int i = 0; i < dt.Rows.Count; i++)
+        //            {
+        //                ActivityForAutoComplete objAct = new ActivityForAutoComplete();
+        //                objAct.Activity = dt.Rows[i]["Activity"].ToString();
+        //                objAct.ActivityAlt = dt.Rows[i]["ActivityEn"].ToString();
 
-                    activities.Add(objAct);                    
-                }
-            }
-            return activities;
-        }
+        //                activities.Add(objAct);
+        //            }
+        //        }
+        //    }
+        //    return activities;
+        //}
     }
 
     public class ActivityForAutoComplete

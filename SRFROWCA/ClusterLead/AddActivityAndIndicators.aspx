@@ -13,18 +13,18 @@
     </style>
     <script type="text/javascript">
         // Non Gender TArget sum
-        function calTotal() {
+        function calTotal(thisObj) {            
             var countrySum = 0;
-            $('.trgtAdmin2').each(function () {
+            thisObj.closest('table.tblCountry').find('.trgtAdmin2').each(function () {
                 var adm2ForCountry = 0;
                 adm2ForCountry = parseInt($(this).val());
                 if (isNaN(adm2ForCountry))
                     adm2ForCountry = 0;
                 countrySum += adm2ForCountry;
             });
-
+            
             var admin1Sum = 0
-            txtAdmin2 = $(this).closest('.tblAdmin1').find('.trgtAdmin2');
+            txtAdmin2 = thisObj.closest('.tblAdmin1').find('.trgtAdmin2');
             txtAdmin2.each(function () {
                 var adm2ForAdm1 = 0;
                 adm2ForAdm1 = parseInt($(this).val());
@@ -32,14 +32,14 @@
                     adm2ForAdm1 = 0;
                 admin1Sum += adm2ForAdm1;
             });
-            $(this).closest('.tblCountry').find('.trgtCountry').val(countrySum);
-            $(this).closest('.tblAdmin1').find('.trgtAdmin1').val(admin1Sum);
+            thisObj.closest('table.tblCountry').find('.trgtCountry').val(countrySum);
+            thisObj.closest('.tblAdmin1').find('.trgtAdmin1').val(admin1Sum);
         }
 
         // Gender Male Target Sum
-        function calTotalGenderMale() {
+        function calTotalGenderMale(thisObj) {
             var countrySumMale = 0;
-            $('.trgtAdmin2GenderMale').each(function () {
+            thisObj.closest('table.tblCountryGender').find('.trgtAdmin2GenderMale').each(function () {
                 var adm2ForCountryMale = 0;
                 adm2ForCountryMale = parseInt($(this).val());
                 if (isNaN(adm2ForCountryMale))
@@ -48,10 +48,10 @@
             });
             if (countrySumMale == 0)
                 countrySumMale = ''
-            $(this).closest('.tblCountryGender').find('.trgtCountryGenderMale').val(countrySumMale);
+            thisObj.closest('table.tblCountryGender').find('.trgtCountryGenderMale').val(countrySumMale);
 
             var admin1GenderMaleSum = 0
-            txtAdmin2GenderMale = $(this).closest('.tblAdmin1Gender').find('.trgtAdmin2GenderMale');
+            txtAdmin2GenderMale = thisObj.closest('.tblAdmin1Gender').find('.trgtAdmin2GenderMale');
             txtAdmin2GenderMale.each(function () {
                 var adm2ForAdmin1Male = 0;
                 adm2ForAdmin1Male = parseInt($(this).val());
@@ -61,16 +61,16 @@
             });
             if (admin1GenderMaleSum == 0)
                 admin1GenderMaleSum = ''
-            $(this).closest('.tblAdmin1Gender').find('.trgtAdmin1GenderMale').val(admin1GenderMaleSum);
-            rowGenderTotal($(this));
-            rowCountryGenderTotal();
-            rowAdmin1GenderTotal($(this));
+            thisObj.closest('.tblAdmin1Gender').find('.trgtAdmin1GenderMale').val(admin1GenderMaleSum);
+            rowGenderTotal(thisObj);
+            rowCountryGenderTotal(thisObj);
+            rowAdmin1GenderTotal(thisObj);
         }
 
         // Gender Female Target Sum
-        function calTotalGenderFemale() {
+        function calTotalGenderFemale(thisObj) {
             var countrySumFemale = 0;
-            $('.trgtAdmin2GenderFemale').each(function () {
+            thisObj.closest('table.tblCountryGender').find('.trgtAdmin2GenderFemale').each(function () {
                 var adm2ForCountryFemale = 0;
                 adm2ForCountryFemale = parseInt($(this).val());
                 if (isNaN(adm2ForCountryFemale))
@@ -79,10 +79,10 @@
             });
             if (countrySumFemale == 0)
                 countrySumFemale = '';
-            $(this).closest('.tblCountryGender').find('.trgtCountryGenderFemale').val(countrySumFemale);
+            thisObj.closest('table.tblCountryGender').find('.trgtCountryGenderFemale').val(countrySumFemale);
 
             var admin1GenderFemaleSum = 0
-            txtAdmin2GenderFemale = $(this).closest('.tblAdmin1Gender').find('.trgtAdmin2GenderFemale');
+            txtAdmin2GenderFemale = thisObj.closest('.tblAdmin1Gender').find('.trgtAdmin2GenderFemale');
             txtAdmin2GenderFemale.each(function () {
                 var adm2ForAdmin1Female = 0;
                 adm2ForAdmin1Female = parseInt($(this).val());
@@ -92,13 +92,13 @@
             });
             if (admin1GenderFemaleSum == 0)
                 admin1GenderFemaleSum = '';
-            $(this).closest('.tblAdmin1Gender').find('.trgtAdmin1GenderFemale').val(admin1GenderFemaleSum);
-            rowGenderTotal($(this));
-            rowCountryGenderTotal();
-            rowAdmin1GenderTotal($(this));
+            thisObj.closest('.tblAdmin1Gender').find('.trgtAdmin1GenderFemale').val(admin1GenderFemaleSum);
+            rowGenderTotal(thisObj);
+            rowCountryGenderTotal(thisObj);
+            rowAdmin1GenderTotal(thisObj);
         }
 
-        function rowGenderTotal(thisObj) {            
+        function rowGenderTotal(thisObj) {
             var $row = thisObj.closest('tr'),
                 maleTarget = parseInt($row.find('.trgtAdmin2GenderMale').val()),
                 femaleTarget = parseInt($row.find('.trgtAdmin2GenderFemale').val());
@@ -113,9 +113,10 @@
             $row.find('.trgtAdmin2GenderTotal').val(total)
         }
 
-        function rowCountryGenderTotal() {
-            var maleTarget = parseInt($('.trgtCountryGenderMale').val())
-            var femaleTarget = parseInt($('.trgtCountryGenderFemale').val());
+        function rowCountryGenderTotal(thisObj) {
+            
+            var maleTarget = parseInt(thisObj.closest('table.tblCountryGender').find('.trgtCountryGenderMale').val())
+            var femaleTarget = parseInt(thisObj.closest('table.tblCountryGender').find('.trgtCountryGenderFemale').val());
 
             if (isNaN(maleTarget) || maleTarget == '')
                 maleTarget = 0;
@@ -124,14 +125,14 @@
                 femaleTarget = 0;
 
             var total = maleTarget + femaleTarget;
-            $('.trgtCountryGenderTotal').val(total)
+            thisObj.closest('table.tblCountryGender').find('.trgtCountryGenderTotal').val(total)
         }
 
         function rowAdmin1GenderTotal(thisObj) {
             var $row = thisObj.closest('.tblAdmin1Gender').find('tr.trAdmin1'),
                 maleTarget = parseInt($row.find('.trgtAdmin1GenderMale').val()),
                 femaleTarget = parseInt($row.find('.trgtAdmin1GenderFemale').val());
-            
+
             if (isNaN(maleTarget) || maleTarget == '')
                 maleTarget = 0;
 
@@ -144,39 +145,77 @@
 
         $(function () {
             $('.showDetails1').click(function () {
-                $(this).parent().parent().next('tr.details1').slideToggle();
+                $(this).parent().parent().next('tr.details1').toggle();
                 $(this).attr('src', ($(this).attr('src') == '../assets/orsimages/plus.png' ?
                                                              '../assets/orsimages/minus.png' :
                                                               '../assets/orsimages/plus.png'))
             });
+                        $('.showall').click(function () {
+                if ($(this).text() == 'Expand All') {
+                    $('.details1').show();
+                    $(this).text('Collapse All');
+                    $('.showallGen').text('Collapse All');
+                    $('.showDetails1').attr('src', '../assets/orsimages/minus.png');
+                }
+                else
+                {
+                    $('.details1').hide();
+                    $(this).text('Expand All');
+                    $('.showallGen').text('Expand All');
+                    $('.showDetails1').attr('src', '../assets/orsimages/plus.png');
+                }
+            });
+
+            $('.showallGen').click(function () {
+                if ($(this).text() == 'Expand All') {
+                    $('.details1').show();
+                    $(this).text('Collapse All');
+                    $('.showall').text('Collapse All');
+                    $('.showDetails1').attr('src', '../assets/orsimages/minus.png');
+                }
+                else {
+                    $('.details1').hide();
+                    $(this).text('Expand All');
+                    $('.showall').text('Expand All');
+                    $('.showDetails1').attr('src', '../assets/orsimages/plus.png');
+                }
+            });
 
             // Sum without Gender
-            $(".tblAdmin2").on('change', '.trgtAdmin2', calTotal);
+            //$(".tblAdmin2").on('change', '.trgtAdmin2', calTotal);
+            $(".trgtAdmin2").on('change', function () {
+                calTotal($(this));
+            });
 
             // Sum Gender Male
-            $(".tblAdmin2Gender").on('change', '.trgtAdmin2GenderMale', calTotalGenderMale);
+            $(".trgtAdmin2GenderMale").on('change', function () {
+                calTotalGenderMale($(this));
+            });
+
+            $(".trgtAdmin2GenderFemale").on('change', function () {
+                calTotalGenderFemale($(this));
+            });
 
             // Sum Gender Female
-            $(".tblAdmin2Gender").on('change', '.trgtAdmin2GenderFemale', calTotalGenderFemale);
+            //$(".tblAdmin2Gender").on('change', '.trgtAdmin2GenderFemale', calTotalGenderFemale);
 
             $('#<%=txtActivityEng.ClientID%>').autocomplete({
                 minLength: 4,
                 source: function (request, response) {
                     $.ajax({
-                        url: "AddActivityAndIndicators.aspx/GetActivitiesEn",
-                        onSelect: function (suggestion) {
-                            alert('You selected');
-                        },
-                        data: "{ 'cnId': '" + $("#<%=ddlCountry.ClientID%>").val() +
-                            "', 'clId': '" + $("#<%=ddlCluster.ClientID%>").val() +
-                            "', 'obId': '" + $("#<%=ddlObjective.ClientID%>").val() +
-                            "', 'pre':'" + request.term + "' }",
+                        url: "AddActivityAndIndicators.aspx/GetActivities",
+                        data: JSON.stringify({ "cnId": $("#<%=ddlCountry.ClientID%>").val(),
+                                "clId": $("#<%=ddlCluster.ClientID%>").val(),
+                                "obId": $("#<%=ddlObjective.ClientID%>").val(),
+                                "lngId": "1",
+                                "searchTxt": request.term
+                             }),
                         dataType: "json",
                         type: "POST",
                         contentType: "application/json; charset=utf-8",
                         success: function (data) {
                             response($.map(data.d, function (item) {
-                                return { value: item.Activity, valuealt:item.ActivityAlt }
+                                return { value: item.Activity, valuealt: item.ActivityAlt }
                             }))
 
                         },
@@ -194,11 +233,14 @@
                 minLength: 4,
                 source: function (request, response) {
                     $.ajax({
-                        url: "AddActivityAndIndicators.aspx/GetActivitiesFr",
-                        data: "{ 'cnId': '" + $("#<%=ddlCountry.ClientID%>").val() +
-                            "', 'clId': '" + $("#<%=ddlCluster.ClientID%>").val() +
-                            "', 'obId': '" + $("#<%=ddlObjective.ClientID%>").val() +
-                            "', 'pre':'" + request.term + "' }",
+                        url: "AddActivityAndIndicators.aspx/GetActivities",
+                        data: JSON.stringify({
+                            "cnId": $("#<%=ddlCountry.ClientID%>").val(),
+                            "clId": $("#<%=ddlCluster.ClientID%>").val(),
+                            "obId": $("#<%=ddlObjective.ClientID%>").val(),
+                            "lngId" : "2",
+                            "searchTxt": request.term
+                        }),
                         dataType: "json",
                         type: "POST",
                         contentType: "application/json; charset=utf-8",
@@ -230,7 +272,7 @@
 
                     <label>
                         <input hidden id="hdActId" value="0" />
-                        Country:</label>
+                        Country:*</label>
                     <div>
                         <asp:DropDownList ID="ddlCountry" runat="server" CssClass="width-100" AutoPostBack="true" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged">
                         </asp:DropDownList>
@@ -240,7 +282,7 @@
                 </div>
                 <div class="col-xs-4 col-sm-4">
                     <label>
-                        Cluster:</label>
+                        Cluster:*</label>
                     <div>
                         <asp:DropDownList ID="ddlCluster" runat="server" CssClass="width-100">
                         </asp:DropDownList>
@@ -249,10 +291,8 @@
                     </div>
                 </div>
                 <div class="col-xs-4 col-sm-4">
-
                     <label>
-                        Objective:</label>
-
+                        Objective:*</label>
                     <div>
                         <asp:DropDownList ID="ddlObjective" runat="server" CssClass="width-100">
                         </asp:DropDownList>
@@ -266,15 +306,15 @@
                     <label>
                         Activity (English):</label>
                     <div>
-                        <asp:TextBox ID="txtActivityEng" runat="server" CssClass="width-100 textboxAuto" TextMode="MultiLine" Height="70px"></asp:TextBox>
-                        <asp:CustomValidator ID="cvActivityEng" runat="server" ClientValidationFunction="validateActivity"
+                        <asp:TextBox ID="txtActivityEng" runat="server" CssClass="width-100 textboxAuto" MaxLength="1000" TextMode="MultiLine" Height="70px"></asp:TextBox>
+                        <asp:CustomValidator ID="cvActivityEng" runat="server" ClientValidationFunction="validateActivity" ControlToValidate="txtActivityEng">
                             CssClass="error2"></asp:CustomValidator>
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-6">
                     <label>Activity (French):</label>
                     <div>
-                        <asp:TextBox ID="txtActivityFr" runat="server" CssClass="width-100" TextMode="MultiLine" Height="70px"></asp:TextBox>
+                        <asp:TextBox ID="txtActivityFr" runat="server" CssClass="width-100" TextMode="MultiLine" MaxLength="1000" Height="70px"></asp:TextBox>
 
                     </div>
                 </div>
@@ -310,27 +350,8 @@
                 alert("Please add Activity atleast in one Language!")
                 return false;
             }
-            else {
-                validateUnit();
-            }
         }
 
-        function validateUnit() {
-            var counter = 0;
-            $(".dvIndicator").each(function (index) {
-                var txtEng = $(this).find("[id$=txtInd1Eng]").val();
-                var txtFr = $(this).find("[id$=txtInd1Fr]").val();
-                var unitId = $(this).find("[id$=ddlUnit]").val();
-
-                if (txtEng.trim() !== '' || txtFr.trim() !== '') {
-                    if (unitId == "0") {
-                        alert("Please select Unit!");
-                        args.IsValid = false;
-                        return false;
-                    }
-                }
-            });
-        }
 
         //function validateIndicator() {
 

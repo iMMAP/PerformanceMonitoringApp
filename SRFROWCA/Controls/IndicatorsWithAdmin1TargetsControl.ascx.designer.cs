@@ -67,6 +67,15 @@ namespace SRFROWCA.Controls {
         public global::System.Web.UI.WebControls.DropDownList ddlUnit;
         
         /// <summary>
+        /// rfvUnit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvUnit;
+        
+        /// <summary>
         /// ddlCalculationMethod control.
         /// </summary>
         /// <remarks>
@@ -74,6 +83,15 @@ namespace SRFROWCA.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         public global::System.Web.UI.WebControls.DropDownList ddlCalculationMethod;
+        
+        /// <summary>
+        /// frvCalcMethod control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator frvCalcMethod;
         
         /// <summary>
         /// divAdmin1Targets control.
@@ -91,7 +109,7 @@ namespace SRFROWCA.Controls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pAdmin1Target;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor pAdmin1Target;
         
         /// <summary>
         /// rptCountry control.
@@ -118,7 +136,7 @@ namespace SRFROWCA.Controls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pAdmin1GenderTarget;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor pAdmin1GenderTarget;
         
         /// <summary>
         /// rptCountryGender control.

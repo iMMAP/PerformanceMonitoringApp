@@ -200,7 +200,7 @@ namespace SRFROWCA.ClusterLead
                 if (btnDelete != null)
                 {
                     btnDelete.Attributes.Add("onclick", "javascript:return " +
-                    "confirm('Are you sure you want to delete this record?')");
+                    "confirm('Are you sure you want to delete this Indicator?')");
 
                     if (endEditDate < DateTime.Now.Date)
                     {
@@ -264,7 +264,7 @@ namespace SRFROWCA.ClusterLead
                 {
                     if (!IndicatorIsInUse(indicatorId))
                     {
-                        DeleteIndicator(indicatorId);
+                        DeleteIndicator(indicatorId, activityId);
                         ShowMessage("Indicator Deleted Successfully!");
                     }
                     else
@@ -393,9 +393,9 @@ namespace SRFROWCA.ClusterLead
             return dt.Rows.Count > 0;
         }
 
-        private void DeleteIndicator(int indicatorDetailId)
+        private void DeleteIndicator(int indicatorDetailId, int activityId)
         {
-            DBContext.Delete("DeleteIndicatorNew", new object[] { indicatorDetailId, DBNull.Value });
+            DBContext.Delete("DeleteIndicatorNew", new object[] { indicatorDetailId, activityId, DBNull.Value });
         }
 
         protected void gvActivity_Sorting(object sender, GridViewSortEventArgs e)
