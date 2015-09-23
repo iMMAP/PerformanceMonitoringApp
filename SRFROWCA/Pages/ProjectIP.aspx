@@ -35,7 +35,7 @@
 
     
     <script type="text/javascript" src="../assets/orsjs/ShowHideObJAndPr.js"></script>
-    <script src="../assets/orsjs/jquery.wholenumber.js" type="text/javascript"></script>
+    
     <script type="text/javascript">
         var launch = false;
         function launchModal() {

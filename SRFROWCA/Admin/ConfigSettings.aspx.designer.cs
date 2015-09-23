@@ -13,15 +13,6 @@ namespace SRFROWCA.Admin {
     public partial class ConfigSettings {
         
         /// <summary>
-        /// localTab1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localTab1;
-        
-        /// <summary>
         /// localTab2 control.
         /// </summary>
         /// <remarks>
@@ -31,49 +22,13 @@ namespace SRFROWCA.Admin {
         protected global::System.Web.UI.WebControls.Localize localTab2;
         
         /// <summary>
-        /// rbListEmailSetting control.
+        /// localTab1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rbListEmailSetting;
-        
-        /// <summary>
-        /// txtStagingSubject control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtStagingSubject;
-        
-        /// <summary>
-        /// lstConfigs control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lstConfigs;
-        
-        /// <summary>
-        /// btnSaveEmailSettings control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSaveEmailSettings;
-        
-        /// <summary>
-        /// lblEmailMessage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEmailMessage;
+        protected global::System.Web.UI.WebControls.Localize localTab1;
         
         /// <summary>
         /// lblCountry control.
@@ -121,13 +76,13 @@ namespace SRFROWCA.Admin {
         protected global::System.Web.UI.WebControls.TextBox txtDate;
         
         /// <summary>
-        /// btnAdd control.
+        /// rfvDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAdd;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDate;
         
         /// <summary>
         /// txtNoIndicatorsFramework control.
@@ -139,6 +94,15 @@ namespace SRFROWCA.Admin {
         protected global::System.Web.UI.WebControls.TextBox txtNoIndicatorsFramework;
         
         /// <summary>
+        /// rfvActInd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvActInd;
+        
+        /// <summary>
         /// txtNoActivitiesFramework control.
         /// </summary>
         /// <remarks>
@@ -148,6 +112,15 @@ namespace SRFROWCA.Admin {
         protected global::System.Web.UI.WebControls.TextBox txtNoActivitiesFramework;
         
         /// <summary>
+        /// rfvAct control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvAct;
+        
+        /// <summary>
         /// txtNoClusterIndicators control.
         /// </summary>
         /// <remarks>
@@ -155,6 +128,15 @@ namespace SRFROWCA.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNoClusterIndicators;
+        
+        /// <summary>
+        /// rfvClsInd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvClsInd;
         
         /// <summary>
         /// btnAddFrameworkSettings control.
@@ -182,5 +164,50 @@ namespace SRFROWCA.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvConfigSettings;
+        
+        /// <summary>
+        /// rbListEmailSetting control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rbListEmailSetting;
+        
+        /// <summary>
+        /// txtStagingSubject control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtStagingSubject;
+        
+        /// <summary>
+        /// lstConfigs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox lstConfigs;
+        
+        /// <summary>
+        /// btnSaveEmailSettings control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSaveEmailSettings;
+        
+        /// <summary>
+        /// lblEmailMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEmailMessage;
     }
 }

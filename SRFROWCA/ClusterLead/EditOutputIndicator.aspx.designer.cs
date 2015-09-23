@@ -22,49 +22,22 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.HiddenField hdnIsRegional;
         
         /// <summary>
-        /// divMessage control.
+        /// Button1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divMessage;
+        protected global::System.Web.UI.WebControls.Button Button1;
         
         /// <summary>
-        /// dvcluster control.
+        /// Button2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvcluster;
-        
-        /// <summary>
-        /// ddlCluster control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCluster;
-        
-        /// <summary>
-        /// rfvCluster control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCluster;
-        
-        /// <summary>
-        /// dvCountry control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvCountry;
+        protected global::System.Web.UI.WebControls.Button Button2;
         
         /// <summary>
         /// ddlCountry control.
@@ -85,22 +58,22 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCountry;
         
         /// <summary>
-        /// localIndicatorInfo control.
+        /// ddlCluster control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localIndicatorInfo;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCluster;
         
         /// <summary>
-        /// lbl1stNumber control.
+        /// rfvCluster control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl1stNumber;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCluster;
         
         /// <summary>
         /// hfIndicatorId control.
@@ -148,13 +121,103 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.DropDownList ddlUnit;
         
         /// <summary>
-        /// rptAdmin1 control.
+        /// rfvUnits control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptAdmin1;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvUnits;
+        
+        /// <summary>
+        /// ddlCalculationMethod control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCalculationMethod;
+        
+        /// <summary>
+        /// frvCalcMethod control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator frvCalcMethod;
+        
+        /// <summary>
+        /// lblIndTargetCaption control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblIndTargetCaption;
+        
+        /// <summary>
+        /// divTargets control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divTargets;
+        
+        /// <summary>
+        /// divAdmin1Targets control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divAdmin1Targets;
+        
+        /// <summary>
+        /// pAdmin1Target control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor pAdmin1Target;
+        
+        /// <summary>
+        /// rptAdmin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptAdmin;
+        
+        /// <summary>
+        /// divAdmin1GenderTargets control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divAdmin1GenderTargets;
+        
+        /// <summary>
+        /// pAdmin1GenderTarget control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor pAdmin1GenderTarget;
+        
+        /// <summary>
+        /// rptAdmin1Gender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptAdmin1Gender;
         
         /// <summary>
         /// btnSave control.

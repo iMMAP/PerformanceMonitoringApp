@@ -13,15 +13,6 @@ namespace SRFROWCA.ClusterLead {
     public partial class IndicatorListing {
         
         /// <summary>
-        /// updMessage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updMessage;
-        
-        /// <summary>
         /// btnExportToExcel control.
         /// </summary>
         /// <remarks>
@@ -119,6 +110,15 @@ namespace SRFROWCA.ClusterLead {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnReset;
+        
+        /// <summary>
+        /// divMissingTarget control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divMissingTarget;
         
         /// <summary>
         /// gvActivity control.

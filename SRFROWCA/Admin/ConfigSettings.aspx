@@ -3,7 +3,6 @@
 <asp:Content ID="cntHead" ContentPlaceHolderID="HeadContent" runat="server">
     <script type="text/javascript">
         $(function () {
-
             $("#<%=txtDate.ClientID%>").datepicker({
                 numberOfMonths: 1,
                 dateFormat: "mm-dd-yy",
@@ -11,25 +10,16 @@
                     $("#<%=txtDate.ClientID%>").datepicker("option", "minDate", selected)
                 }
             });
-        });
 
-            function isNumeric(myValue, elem) {
-                var numexp = /^[0-9]+$/;
-                if (myValue.trim() != '') {
-                    if (myValue.match(numexp)) {
-                        return true;
-                    } else {
-                        alert("Entry must be a number");
-                        elem.value = '';
-                        elem.focus();
-                        return false;
-                    }
-                }
-            }
+            $(function () {
+                $(".numeric1").wholenumber();
+            });
+        });
     </script>
+
 </asp:Content>
 <asp:Content ID="cntMainConfigSettings" ContentPlaceHolderID="MainContent" runat="server">
-    
+
     <div class="page-content">
 
         <div class="row">
@@ -37,18 +27,163 @@
                 <!-- PAGE CONTENT BEGINS -->
                 <div class="tabbable">
                     <ul class="nav nav-tabs tab-size-bigger" id="myTab">
-                        <li class="<%=liTab1%>"><a data-toggle="tab" href="#config-tab-1">
+                        <li class="<%=liTab1%>"><a data-toggle="tab" href="#config-tab-2">
+                            <asp:Localize ID="localTab2" runat="server" Text="Framework Settings" meta:resourcekey="localTab2Resource1"></asp:Localize>
+                        </a></li>
+                        <li class="<%=liTab2%>"><a data-toggle="tab" href="#config-tab-1">
                             <asp:Localize ID="localTab1" runat="server" Text="Email Settings"
                                 meta:resourcekey="localTab1Resource1"></asp:Localize>
                         </a></li>
-                        <li class="<%=liTab2%>"><a data-toggle="tab" href="#config-tab-2">
-                            <asp:Localize ID="localTab2" runat="server" Text="Framework Settings" meta:resourcekey="localTab2Resource1"></asp:Localize>
-                        </a></li>
-
                     </ul>
 
                     <div class="tab-content no-border ">
-                        <div id="config-tab-1" class="<%=clsTab1%>">
+                        <div id="config-tab-2" class="<%=clsTab1%>">
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td>
+                                        <div class="row">
+
+                                            <div class="widget-box">
+                                                <div class="widget-header widget-header-small header-color-blue2">
+                                                    <h6></h6>
+                                                </div>
+                                                <div class="widget-body">
+                                                    <div class="widget-main">
+                                                        <div class="row">
+                                                            <div class="col-xs-12">
+                                                                <div class="row">
+                                                                    <table style="width: 85%; margin: 10px 10px 10px 20px" border="0">
+                                                                        <tr style="<%=showCountry%>">
+                                                                            <td style="width: 30%">
+                                                                                <asp:Label ID="lblCountry" runat="server" Text="Country:"></asp:Label>
+                                                                            </td>
+                                                                            <td>
+                                                                                <asp:DropDownList runat="server" AppendDataBoundItems="true" ID="ddlCountry" Width="270"
+                                                                                    OnSelectedIndexChanged="ddlSelected" AutoPostBack="true">
+                                                                                    <asp:ListItem Selected="True" Text="All" Value="0"></asp:ListItem>
+                                                                                </asp:DropDownList>
+                                                                            </td>
+                                                                            <td></td>
+
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <asp:Label runat="server" ID="lblCluster" Text="Cluster:"></asp:Label>
+                                                                            </td>
+                                                                            <td>
+                                                                                <asp:DropDownList runat="server" AppendDataBoundItems="true" ID="ddlCluster" Width="270"
+                                                                                    OnSelectedIndexChanged="ddlSelected" AutoPostBack="true">
+                                                                                    <asp:ListItem Selected="True" Text="All" Value="0"></asp:ListItem>
+                                                                                </asp:DropDownList>
+
+                                                                            </td>
+                                                                            <td></td>
+
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Framework Deadline:
+                                                                            </td>
+                                                                            <td>
+                                                                                <asp:TextBox runat="server" ID="txtDate" Width="270"></asp:TextBox>
+                                                                                <asp:RequiredFieldValidator ID="rfvDate" runat="server" ErrorMessage="Required" Display="Dynamic"
+                                                                                    CssClass="error2" Text="Required" ControlToValidate="txtDate"></asp:RequiredFieldValidator>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Number of Activity Indicators Allowed:</td>
+                                                                            <td>
+                                                                                <asp:TextBox runat="server" ID="txtNoIndicatorsFramework"
+                                                                                    Width="270" CssClass="numeric1"></asp:TextBox>
+                                                                                <asp:RequiredFieldValidator ID="rfvActInd" runat="server" ErrorMessage="Required" Display="Dynamic"
+                                                                                    CssClass="error2" Text="Required" ControlToValidate="txtNoIndicatorsFramework"></asp:RequiredFieldValidator>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Number of Activities Allowed:
+                                                                            </td>
+                                                                            <td>
+                                                                                <asp:TextBox runat="server" ID="txtNoActivitiesFramework"
+                                                                                    Width="270" CssClass="numeric1"></asp:TextBox>
+                                                                                <asp:RequiredFieldValidator ID="rfvAct" runat="server" ErrorMessage="Required" Display="Dynamic"
+                                                                                    CssClass="error2" Text="Required" ControlToValidate="txtNoActivitiesFramework"></asp:RequiredFieldValidator>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Number of Output Indicators Allowed:
+                                                                            </td>
+                                                                            <td>
+                                                                                <asp:TextBox runat="server" ID="txtNoClusterIndicators" 
+                                                                                    Width="270" CssClass="numeric1" ></asp:TextBox>
+                                                                                <asp:RequiredFieldValidator ID="rfvClsInd" runat="server" ErrorMessage="Required" Display="Dynamic"
+                                                                                    CssClass="error2" Text="Required" ControlToValidate="txtNoClusterIndicators"></asp:RequiredFieldValidator>
+                                                                        </tr>
+
+                                                                        <tr>
+                                                                            <td>&nbsp;</td>
+                                                                            <td style="padding-top: 20px;">
+                                                                                <asp:Button ID="btnAddFrameworkSettings" runat="server"
+                                                                                    OnClick="btnAddFrameworkSettings_Click"
+                                                                                    Text="Save Settings" CssClass="btn btn-primary" />
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>&nbsp;</td>
+                                                                            <td style="padding-top: 20px;">
+                                                                                <asp:Label runat="server" ID="lblFrameworkSettings" Text=""></asp:Label>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="table-responsive " style="margin-top: 5px;">
+                                                    <div style="overflow-x: auto; width: 100%">
+                                                        <asp:GridView ID="gvConfigSettings" runat="server" AutoGenerateColumns="false" AllowSorting="True"
+                                                            OnRowCommand="gvConfigSettings_RowCommand" OnRowDataBound="gvConfigSettings_RowDataBound"
+                                                            CssClass=" table-striped table-bordered table-hover">
+
+                                                            <Columns>
+                                                                <asp:TemplateField ItemStyle-Width="5%" HeaderText="#">
+                                                                    <ItemTemplate>
+                                                                        <%# Container.DataItemIndex + 1 %>
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:BoundField ItemStyle-Width="15%" HeaderStyle-HorizontalAlign="Center" DataField="Country" HeaderText="Country" />
+                                                                <asp:BoundField ItemStyle-Width="15%" HeaderStyle-HorizontalAlign="Center" DataField="Cluster" HeaderText="Cluster" />
+                                                                <asp:BoundField ItemStyle-Width="15%" HeaderStyle-HorizontalAlign="Center" DataField="EndDate" HeaderText="End Date" />
+                                                                <asp:BoundField ItemStyle-Width="10%" HeaderStyle-HorizontalAlign="Center" DataField="NoOfFrameworkIndicators" HeaderText="Framework Indicator" />
+                                                                <asp:BoundField ItemStyle-Width="10%" HeaderStyle-HorizontalAlign="Center" DataField="NoOfFrameworkActivities" HeaderText="Framework Activities" />
+                                                                <asp:BoundField ItemStyle-Width="10%" HeaderStyle-HorizontalAlign="Center" DataField="NoOfClusterIndicators" HeaderText="Output Indicator" />
+                                                                <%--<asp:TemplateField HeaderStyle-Width="5%" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
+                                                                    <ItemTemplate>
+
+                                                                        <asp:LinkButton runat="server" ID="btnEdit" CausesValidation="false"
+                                                                            CommandName="EditConfig" CommandArgument='<%# Eval("ConfigKeyID") %>' Text="Edit">
+
+                                                                        </asp:LinkButton>
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>--%>
+                                                                <asp:TemplateField HeaderStyle-Width="5%" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
+                                                                    <ItemTemplate>
+                                                                        <asp:LinkButton ID="btnDelete" runat="server" Text="Delete" Width="80px" CausesValidation="false"
+                                                                            CommandName="DeleteConfig" CommandArgument='<%# Eval("ConfigKeyID") %>'>
+
+                                                                        </asp:LinkButton>
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                            </Columns>
+                                                        </asp:GridView>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="config-tab-1" class="<%=clsTab2%>">
                             <table style="width: 100%;">
                                 <tr>
                                     <td>
@@ -118,171 +253,9 @@
                                 </tr>
                             </table>
                         </div>
-                        <div id="config-tab-2" class="<%=clsTab2%>">
-                            <table style="width: 100%;">
-                                <tr>
-                                    <td>
-                                        <div class="row">
-
-                                            <div class="widget-box">
-                                                <div class="widget-header widget-header-small header-color-blue2">
-                                                    <h6></h6>
-                                                </div>
-                                                <div class="widget-body">
-                                                    <div class="widget-main">
-                                                        <div class="row">
-                                                            <div class="col-xs-12">
-                                                                <div class="row">
-                                                                    <table style="width: 85%; margin: 10px 10px 10px 20px" border="0">
-                                                                        <tr style="<%=showCountry%>">
-                                                                            <td style="width: 30%">
-                                                                                <asp:Label ID="lblCountry" runat="server" Text="Country:"></asp:Label>
-                                                                            </td>
-                                                                            <td>
-                                                                                <asp:DropDownList runat="server" AppendDataBoundItems="true" ID="ddlCountry" Width="270">
-                                                                                    <asp:ListItem Selected="True" Text="--- Select Country ---" Value="-1"></asp:ListItem>
-                                                                                </asp:DropDownList>
-                                                                            </td>
-                                                                            <td></td>
-
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <asp:Label runat="server" ID="lblCluster" Text="Cluster:"></asp:Label>
-                                                                            </td>
-                                                                            <td>
-                                                                                <asp:DropDownList runat="server" AppendDataBoundItems="true" ID="ddlCluster" Width="270">
-                                                                                    <asp:ListItem Selected="True" Text="--- Select Cluster ---" Value="-1"></asp:ListItem>
-                                                                                </asp:DropDownList>
-
-                                                                            </td>
-                                                                            <td></td>
-
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <label>
-                                                                                    Framework Deadline:
-
-                                                                                </label>
-                                                                            </td>
-                                                                            <td>
-                                                                                <asp:TextBox runat="server" ID="txtDate" Width="270"></asp:TextBox>
-                                                                            </td>
-                                                                            <td style="padding-right: 15px;">
-                                                                                <asp:Button runat="server" Visible="false" ID="btnAdd" Text="Add >>" OnClick="btnAdd_Click" CssClass="btn-primary" />
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <label>
-                                                                                    Number of Activity Indicators Allowed:
-
-                                                                                </label>
-                                                                            </td>
-                                                                            <td>
-                                                                                <asp:TextBox runat="server" ID="txtNoIndicatorsFramework" Width="270" onblur="return isNumeric(this.value, this)"></asp:TextBox>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <label>
-                                                                                    Number of Activities Allowed:
-
-                                                                                </label>
-                                                                            </td>
-                                                                            <td>
-                                                                                <asp:TextBox runat="server" ID="txtNoActivitiesFramework" Width="270" onblur="return isNumeric(this.value, this)"></asp:TextBox>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <label>
-                                                                                    Number of Output Indicators Allowed:
-
-                                                                                </label>
-                                                                            </td>
-                                                                            <td>
-                                                                                <asp:TextBox runat="server" ID="txtNoClusterIndicators" Width="270" onblur="return isNumeric(this.value, this)"></asp:TextBox>
-                                                                        </tr>
-
-                                                                        <tr>
-                                                                            <td>&nbsp;</td>
-                                                                            <td style="padding-top: 20px;">
-                                                                                <asp:Button ID="btnAddFrameworkSettings" runat="server" OnClick="btnAddFrameworkSettings_Click"
-                                                                                     Text="Add Settings" CssClass="btn btn-primary" />
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>&nbsp;</td>
-                                                                            <td style="padding-top: 20px;">
-                                                                                <asp:Label runat="server" ID="lblFrameworkSettings" Text=""></asp:Label>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-
-                                                                    
-
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        
-
-                                                    </div>
-                                                    
-                                                </div>
-                                                <div class="table-responsive " style="margin-top:5px;">
-                                                                        <div style="overflow-x: auto; width: 100%">
-                                                                            <asp:GridView ID="gvConfigSettings" runat="server" AutoGenerateColumns="false" AllowSorting="True"
-                                                                                OnRowCommand="gvConfigSettings_RowCommand" OnRowDataBound="gvConfigSettings_RowDataBound"
-                                                                                CssClass=" table-striped table-bordered table-hover">
-
-                                                                                <Columns>
-                                                                                    <asp:TemplateField ItemStyle-Width="5%" HeaderText="#">
-                                                                                        <ItemTemplate>
-                                                                                            <%# Container.DataItemIndex + 1 %>
-                                                                                        </ItemTemplate>
-                                                                                    </asp:TemplateField>
-                                                                                    <asp:BoundField ItemStyle-Width="15%" HeaderStyle-HorizontalAlign="Center" DataField="Country" HeaderText="Country"  />
-                                                                                    <asp:BoundField ItemStyle-Width="15%" HeaderStyle-HorizontalAlign="Center" DataField="Cluster" HeaderText="Cluster"  />
-                                                                                    <asp:BoundField ItemStyle-Width="15%" HeaderStyle-HorizontalAlign="Center" DataField="EndDate" HeaderText="End Date"  />
-                                                                                    <asp:BoundField ItemStyle-Width="10%" HeaderStyle-HorizontalAlign="Center" DataField="NoOfFrameworkIndicators" HeaderText="Framework Indicator" />
-                                                                                    <asp:BoundField ItemStyle-Width="10%" HeaderStyle-HorizontalAlign="Center" DataField="NoOfFrameworkActivities" HeaderText="Framework Activities" />
-                                                                                    <asp:BoundField ItemStyle-Width="10%" HeaderStyle-HorizontalAlign="Center" DataField="NoOfClusterIndicators" HeaderText="Output Indicator" />
-                                                                                    <asp:TemplateField HeaderStyle-Width="5%" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
-                                                                                        <ItemTemplate>
-
-                                                                                            <asp:LinkButton runat="server" ID="btnEdit" CausesValidation="false"
-                                                                                                CommandName="EditConfig" CommandArgument='<%# Eval("ConfigKeyID") %>' Text="Edit">
-
-                                                                                            </asp:LinkButton>
-                                                                                        </ItemTemplate>
-                                                                                    </asp:TemplateField>
-                                                                                    <asp:TemplateField HeaderStyle-Width="5%" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
-                                                                                        <ItemTemplate>
-                                                                                            <asp:LinkButton ID="btnDelete" runat="server" Text="Delete" Width="80px" CausesValidation="false"
-                                                                                                CommandName="DeleteConfig" CommandArgument='<%# Eval("ConfigKeyID") %>'>
-
-                                                                                            </asp:LinkButton>
-                                                                                        </ItemTemplate>
-                                                                                    </asp:TemplateField>
-                                                                                </Columns>
-                                                                                
-                                                                            </asp:GridView>
-                                                                        </div>
-                                                                    </div>
-                                            </div>
-
-                                        </div>
-
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
 </asp:Content>

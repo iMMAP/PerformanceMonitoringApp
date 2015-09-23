@@ -14,45 +14,12 @@
             background: #ffffff;
         }
     </style>
-    <script type="text/javascript">
 
-        function toggleButtons() {
-            var selVal = $("#<%=ddlFrameworkYear.ClientID%>").val();
-
-            if (selVal == 12) {
-                $('#<%=btnMigrate2016.ClientID%>').hide();
-                $('#<%=btnAddActivityAndIndicators.ClientID%>').show();
-            }
-            else {
-                $('#<%=btnMigrate2016.ClientID%>').show();
-                $('#<%=btnAddActivityAndIndicators.ClientID%>').hide();
-            }
-        }
-
-        $(function () {
-            toggleButtons();
-            $("#<%=ddlFrameworkYear.ClientID%>").on('change', function () {
-                toggleButtons();
-            });
-            $('.tooltip2').tooltip();
-        });
-    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="page-content">
-        <table border="0" cellpadding="2" cellspacing="0" class="pstyle1" width="100%">
-            <tr>
-                <td class="signupheading2" colspan="3">
-                    <asp:UpdatePanel ID="updMessage" runat="server" UpdateMode="Conditional">
-                        <ContentTemplate>
-                            <div id="divMsg">
-                            </div>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                </td>
-            </tr>
-        </table>
+
         <table width="100%">
             <tr>
                 <td>
@@ -67,10 +34,10 @@
                                        
                                         </button>
 
-                                        <asp:Button ID="btnAddActivityAndIndicators" runat="server" Text="Add Activity & Indicators" CausesValidation="false"
+                                        <asp:Button ID="btnAddActivityAndIndicators" runat="server" Text="Add Activity & Indicators (Framework 2016)" CausesValidation="false"
                                             CssClass="btn btn-yellow pull-right" OnClick="btnAddActivityAndIndicators_Click" Style="margin-right: 5px;" />
-                                        <asp:Button ID="btnMigrate2016" runat="server" Text="Migrate Framework To 2016" CausesValidation="false"
-                                            CssClass="btn btn-green pull-right" OnClick="btnMigrate2016_Click" />
+                                        <asp:Button ID="btnMigrate2016" runat="server" Text="Migrate 2015 Framework To 2016" CausesValidation="false"
+                                            CssClass="btn btn-danger pull-right" OnClick="btnMigrate2016_Click" />
                                     </h6>
                                 </div>
                                 <div class="widget-body">
@@ -130,7 +97,7 @@
                                                                     Year:</label>
                                                             </td>
                                                             <td class="width-30">
-                                                                <asp:DropDownList ID="ddlFrameworkYear" runat="server">
+                                                                <asp:DropDownList ID="ddlFrameworkYear" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlYear_SelectedIndexChnaged">
                                                                     <asp:ListItem Text="2016" Value="12"></asp:ListItem>
                                                                     <asp:ListItem Text="2015" Value="11"></asp:ListItem>
                                                                 </asp:DropDownList>
@@ -144,6 +111,7 @@
                                                                 <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch2_Click" CssClass="btn btn-primary" CausesValidation="false" />
                                                                 <asp:Button ID="btnReset" runat="server" Text="Reset" Style="margin-left: 5px;" OnClick="btnReset_Click" CssClass="btn btn-primary" CausesValidation="False" meta:resourcekey="btnSearchResource1" />
                                                             </td>
+
                                                         </tr>
                                                     </table>
                                                 </div>
@@ -157,6 +125,16 @@
                 </td>
             </tr>
         </table>
+        <div id="divMsg"></div>
+        <div id="divMissingTarget" runat="server" class="alert alert-block alert-danger" visible="false">
+            <button type="button" class="close" data-dismiss="alert">
+                <i class="ace-icon fa fa-times"></i>
+            </button>
+
+            <i class="ace-icon fa fa-check green"></i>
+            Please note that the Inidcators higlighted red do not have targets specified.<br />
+            You will not be able to publish this Framework until you provide targets for all the Indicators.
+        </div>
 
         <div class="tablegrid">
             <div style="overflow-x: auto; width: 100%">
@@ -166,7 +144,7 @@
                     CssClass="imagetable" OnSorting="gvActivity_Sorting" OnPageIndexChanging="gvActivity_PageIndexChanging"
                     PageSize="70" ShowHeaderWhenEmpty="true" EmptyDataText="Your filter criteria does not match any indicator!">
                     <RowStyle CssClass="istrow" />
-                        <AlternatingRowStyle CssClass="altcolor" />
+                    <AlternatingRowStyle CssClass="altcolor" />
                     <Columns>
                         <asp:TemplateField ItemStyle-Width="2%" HeaderText="#" meta:resourcekey="TemplateFieldResource1">
                             <ItemTemplate>
@@ -195,18 +173,26 @@
                                 <asp:Label ID="lblCalcMethod" ToolTip="some text here" runat="server" Text=' <%# Eval("CalculationType")%>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle" HeaderStyle-Width="30px">
+                        <asp:TemplateField HeaderText="Country Target" SortExpression="IndicatorTarget">
                             <ItemTemplate>
-                                <asp:LinkButton ID="btnEdit" runat="server" Text="Edit" Width="30px" CausesValidation="false"
-                                    CommandName="EditActivity" CommandArgument='<%# Eval("ActivityId") %>' />
+                                <asp:Label ID="lblIndTarget" runat="server" Text='<%# Eval("IndicatorTarget") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle" HeaderStyle-Width="50px">
+
+                        <asp:TemplateField HeaderStyle-Width="30px" ItemStyle-HorizontalAlign="Center" HeaderText="Edit">
                             <ItemTemplate>
-                                <asp:LinkButton ID="btnDelete" runat="server" Text="Delete" Width="50px" CausesValidation="false"
-                                    CommandName="DeleteInd" CommandArgument='<%# Eval("IndicatorDetailId") %>' />
+                                <asp:ImageButton ID="btnEdit" runat="server" ImageUrl="~/assets/orsimages/edit16.png"
+                                    CommandName="EditActivity" CommandArgument='<%# Eval("ActivityId") %>' ToolTip="Edit Indicator" />
                             </ItemTemplate>
                         </asp:TemplateField>
+                        <asp:TemplateField HeaderStyle-Width="30px" ItemStyle-HorizontalAlign="Center" HeaderText="Del">
+                            <ItemTemplate>
+                                <asp:ImageButton ID="btnDelete" runat="server" ImageUrl="~/assets/orsimages/delete16.png"
+                                    CommandName="DeleteInd" CommandArgument='<%# Eval("IndicatorDetailId") %>' ToolTip="Delete" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+
+
                         <asp:TemplateField Visible="false" meta:resourcekey="TemplateFieldResource5">
                             <ItemTemplate>
                                 <asp:Label ID="lblCountryID" runat="server" Text='<%# Eval("EmergencyLocationId") %>' meta:resourcekey="lblCountryIDResource1"></asp:Label>

@@ -5,13 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
-using System.Globalization;
-using System.IO;
 using System.Text;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Xml;
 
 namespace SRFROWCA.ClusterLead
 {
@@ -30,7 +26,7 @@ namespace SRFROWCA.ClusterLead
                 LoadIndicators();
             }
 
-            //ToggleControlsToAddIndicator();
+            ToggleControlsToAddIndicator();
         }
 
         private void ToggleControlsToAddIndicator()
@@ -40,88 +36,20 @@ namespace SRFROWCA.ClusterLead
                 int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
                 int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
 
-                int maxIndicators = 0;
-                int maxActivities = 0;
-                DateTime endEditDate = DateTime.Now;
-
-                GetMaxCount(emgLocationId, emgClusterId, out maxIndicators, out maxActivities, out endEditDate);
-                if (maxIndicators <= 0 || (maxActivities <= 0 || endEditDate < DateTime.Now.Date))
+                FrameWorkSettingsCount frCount = FrameWorkUtil.GetActivityFrameworkSettings(emgLocationId, emgClusterId);
+                if (frCount.IndCount <= 0 || (frCount.ActCount <= 0 || frCount.DateExcedded))
                 {
                     btnAddActivityAndIndicators.Enabled = false;
                 }
-                //else if (maxIndicators <= 0 || endEditDate < DateTime.Now.Date)
-                //{
-                //    btnAddIndicator.Enabled = false;
-                //}
                 else
                 {
-                    //btnAddIndicator.Enabled = true;
                     btnAddActivityAndIndicators.Enabled = true;
                 }
             }
 
             if (RC.IsRegionalClusterLead(this.User))
             {
-                //btnAddIndicator.Enabled = false;
                 btnAddActivityAndIndicators.Enabled = false;
-            }
-        }
-
-        private void GetMaxCount(int emgLocationId, int emgClusterId, out int maxIndicators, out int maxActivities, out DateTime endEditDate)
-        {
-            string configKey = "Key-" + emgLocationId.ToString() + emgClusterId.ToString();
-            maxIndicators = 0;
-            maxActivities = 0;
-            endEditDate = DateTime.Now;
-
-            string PATH = HttpRuntime.AppDomainAppPath;
-            PATH = PATH.Substring(0, PATH.LastIndexOf(@"\") + 1) + @"Configurations\ChangeEndSettings.xml";
-
-            if (File.Exists(PATH))
-            {
-                XmlDocument doc = new XmlDocument();
-                doc.Load(PATH);
-
-                XmlElement elem_settings = doc.GetElementById("ChangeEndSettings");
-                XmlNode settingsNode = doc.DocumentElement;
-
-                foreach (XmlNode node in settingsNode.ChildNodes)
-                {
-                    if (node.Name.Equals(configKey))
-                    {
-                        if (node.Attributes["FrameworkCount"] != null)
-                            maxIndicators = Convert.ToInt32(node.Attributes["FrameworkCount"].Value);
-
-                        if (node.Attributes["ActivityCount"] != null)
-                            maxActivities = Convert.ToInt32(node.Attributes["ActivityCount"].Value);
-
-                        if (node.Attributes["DateLimit"] != null)
-                        {
-                            endEditDate = DateTime.ParseExact(Convert.ToString(node.Attributes["DateLimit"].Value), "MM-dd-yyyy", CultureInfo.InvariantCulture);
-                            endEditDate.AddYears(1);
-                        }
-                    }
-                }
-            }
-
-            if (maxIndicators > 0)
-            {
-                int isActive = 1;
-                int indicatorCount = DBContext.Update("GetIndicatorsCount", new object[] { emgLocationId, emgClusterId, 
-                                                                                            isActive, RC.SelectedSiteLanguageId, 
-                                                                                            12, DBNull.Value });
-                if (indicatorCount > 0)
-                    maxIndicators = maxIndicators - indicatorCount;
-            }
-
-            if (maxActivities > 0)
-            {
-                int isActive = 1;
-                int activityCount = DBContext.Update("GetActivitiesCount", new object[] { emgLocationId, emgClusterId,
-                                                                                          RC.SelectedSiteLanguageId, isActive,
-                                                                                          12, DBNull.Value });
-                if (activityCount > 0)
-                    maxActivities = maxActivities - activityCount;
             }
         }
 
@@ -166,77 +94,90 @@ namespace SRFROWCA.ClusterLead
         // Add delete confirmation message with all delete buttons.
         protected void gvActivity_RowDataBound(object sender, GridViewRowEventArgs e)
         {
+            int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                LinkButton btnDelete = e.Row.FindControl("btnDelete") as LinkButton;
-                LinkButton btnEdit = e.Row.FindControl("btnEdit") as LinkButton;
-
-                int emgLocationId = 0;
-                int emgClusterId = 0;
-
-                Label lblCountryId = e.Row.FindControl("lblCountryID") as Label;
-                if (lblCountryId != null)
+                Label lblTarget = e.Row.FindControl("lblIndTarget") as Label;
+                if (lblTarget != null)
                 {
-                    int.TryParse(lblCountryId.Text, out emgLocationId);
-                }
-
-                Label lblClusterId = e.Row.FindControl("lblClusterID") as Label;
-                if (lblClusterId != null)
-                {
-                    int.TryParse(lblClusterId.Text, out emgClusterId);
-                }
-
-                int maxIndicators = 0;
-                int maxActivities = 0;
-                DateTime endEditDate = DateTime.Now;
-                GetMaxCount(emgLocationId, emgClusterId, out maxIndicators, out maxActivities, out endEditDate);
-
-                //int indicatorId = 0;
-                //int.TryParse(gvActivity.DataKeys[e.Row.RowIndex].Values["IndicatorId"].ToString(), out indicatorId);
-
-                //int activityId = 0;
-                //int.TryParse(gvActivity.DataKeys[e.Row.RowIndex].Values["ActivityId"].ToString(), out activityId);                
-
-                if (btnDelete != null)
-                {
-                    btnDelete.Attributes.Add("onclick", "javascript:return " +
-                    "confirm('Are you sure you want to delete this Indicator?')");
-
-                    if (endEditDate < DateTime.Now.Date)
+                    if (string.IsNullOrEmpty(lblTarget.Text))
                     {
-                        if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) || RC.IsRegionalClusterLead(this.User))
-                        {
-                            btnDelete.Visible = false;
-                        }
+                        e.Row.BackColor = ColorTranslator.FromHtml("#CD5C5C");
+                        divMissingTarget.Visible = true;
+                    }
+                    else
+                    {
+                        UI.SetThousandSeparator(e.Row, "lblIndTarget");
                     }
                 }
 
-                CheckBox cbActivity = e.Row.FindControl("cbIsActivityActive") as CheckBox;
-                if (btnEdit != null)
-                {
-                    if (endEditDate < DateTime.Now.Date)
-                    {
-                        if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) || RC.IsRegionalClusterLead(this.User))
-                        {
-                            btnEdit.Visible = false;
-                        }
-                    }
-                    else if (!cbActivity.Checked || maxIndicators == 0)
-                    {
-                        if (!cbActivity.Checked)
-                        {
-                            btnEdit.Visible = false;
-                        }
-                        CheckBox cbIndicator = e.Row.FindControl("cbIsActive") as CheckBox;
-                        if (!cbIndicator.Checked)
-                            cbIndicator.Enabled = false;
-                    }
-                }
+                ImageButton btnDelete = e.Row.FindControl("btnDelete") as ImageButton;
+                ImageButton btnEdit = e.Row.FindControl("btnEdit") as ImageButton;
 
-                if (RC.IsRegionalClusterLead(this.User))
+                if (yearId == 11)
                 {
-                    btnEdit.Visible = false;
                     btnDelete.Visible = false;
+                    btnEdit.Visible = false;
+                }
+                else
+                {
+                    int emgLocationId = 0;
+                    int emgClusterId = 0;
+
+                    Label lblCountryId = e.Row.FindControl("lblCountryID") as Label;
+                    if (lblCountryId != null)
+                    {
+                        int.TryParse(lblCountryId.Text, out emgLocationId);
+                    }
+
+                    Label lblClusterId = e.Row.FindControl("lblClusterID") as Label;
+                    if (lblClusterId != null)
+                    {
+                        int.TryParse(lblClusterId.Text, out emgClusterId);
+                    }
+
+                    FrameWorkSettingsCount frCount = FrameWorkUtil.GetActivityFrameworkSettings(emgLocationId, emgClusterId);
+                    if (btnDelete != null)
+                    {
+                        btnDelete.Attributes.Add("onclick", "javascript:return " +
+                        "confirm('Are you sure you want to delete this Indicator?')");
+
+                        if (frCount.DateExcedded)
+                        {
+                            if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) || RC.IsRegionalClusterLead(this.User))
+                            {
+                                btnDelete.Visible = false;
+                            }
+                        }
+                    }
+
+                    CheckBox cbActivity = e.Row.FindControl("cbIsActivityActive") as CheckBox;
+                    if (btnEdit != null)
+                    {
+                        if (frCount.DateExcedded)
+                        {
+                            if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) || RC.IsRegionalClusterLead(this.User))
+                            {
+                                btnEdit.Visible = false;
+                            }
+                        }
+                        else if (!cbActivity.Checked || frCount.IndCount == 0)
+                        {
+                            if (!cbActivity.Checked)
+                            {
+                                btnEdit.Visible = false;
+                            }
+                            CheckBox cbIndicator = e.Row.FindControl("cbIsActive") as CheckBox;
+                            if (!cbIndicator.Checked)
+                                cbIndicator.Enabled = false;
+                        }
+                    }
+
+                    if (RC.IsRegionalClusterLead(this.User))
+                    {
+                        btnEdit.Visible = false;
+                        btnDelete.Visible = false;
+                    }
                 }
             }
         }
@@ -280,6 +221,7 @@ namespace SRFROWCA.ClusterLead
                 //}
 
                 LoadIndicators();
+                ToggleControlsToAddIndicator();
             }
 
 
@@ -752,6 +694,11 @@ namespace SRFROWCA.ClusterLead
             projects.Add(sbProjIds.ToString().Trim().TrimEnd(','));
 
             return projects;
+        }
+
+        protected void ddlYear_SelectedIndexChnaged(object sender, EventArgs e)
+        {
+            LoadIndicators();
         }
 
         private void SendEmail(bool isAdded)

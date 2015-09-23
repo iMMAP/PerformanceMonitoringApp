@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using System.Xml;
 using System.Xml.Linq;
 using SRFROWCA.Common;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace SRFROWCA.Admin
 {
@@ -22,41 +24,41 @@ namespace SRFROWCA.Admin
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(Request.QueryString["editKey"])
-                || !string.IsNullOrEmpty(Request.QueryString["keySave"])
-                || !string.IsNullOrEmpty(Request.QueryString["delKey"]))
-            {
-                clsTab1 = clsTab1.Replace("active", string.Empty);
-                clsTab2 += " active";
-                liTab1 = liTab1.Replace("active", string.Empty);
-                liTab2 = "active";
+            //if (!string.IsNullOrEmpty(Request.QueryString["editKey"])
+            //    || !string.IsNullOrEmpty(Request.QueryString["keySave"])
+            //    || !string.IsNullOrEmpty(Request.QueryString["delKey"]))
+            //{
+            //    clsTab1 = clsTab1.Replace("active", string.Empty);
+            //    clsTab2 += " active";
+            //    liTab1 = liTab1.Replace("active", string.Empty);
+            //    liTab2 = "active";
 
-                if (!string.IsNullOrEmpty(Request.QueryString["editKey"]))
-                {
-                    btnAddFrameworkSettings.Text = "Update Settings";
-                }
-                else if (!string.IsNullOrEmpty(Request.QueryString["keySave"]))
-                {
-                    if (Convert.ToBoolean(Request.QueryString["keySave"]))
-                        lblFrameworkSettings.Text = "Settings saved successfully!";
-                    else
-                        lblFrameworkSettings.Text = "Could not save settings!";
-                }
-                else if (!string.IsNullOrEmpty(Request.QueryString["delKey"]))
-                {
-                    if (Convert.ToBoolean(Request.QueryString["delKey"]))
-                        lblFrameworkSettings.Text = "Settings deleted successfully!";
-                    else
-                        lblFrameworkSettings.Text = "Could not delete settings!";
-                }
-            }
-            else if (!string.IsNullOrEmpty(Request.QueryString["emailSave"]))
-            {
-                if (Convert.ToBoolean(Request.QueryString["emailSave"]))
-                    lblEmailMessage.Text = "Settings saved successfully!";
-                else
-                    lblEmailMessage.Text = "Could not save settings!";
-            }
+            //    if (!string.IsNullOrEmpty(Request.QueryString["editKey"]))
+            //    {
+            //        btnAddFrameworkSettings.Text = "Update Settings";
+            //    }
+            //    else if (!string.IsNullOrEmpty(Request.QueryString["keySave"]))
+            //    {
+            //        if (Convert.ToBoolean(Request.QueryString["keySave"]))
+            //            lblFrameworkSettings.Text = "Settings saved successfully!";
+            //        else
+            //            lblFrameworkSettings.Text = "Could not save settings!";
+            //    }
+            //    else if (!string.IsNullOrEmpty(Request.QueryString["delKey"]))
+            //    {
+            //        if (Convert.ToBoolean(Request.QueryString["delKey"]))
+            //            lblFrameworkSettings.Text = "Settings deleted successfully!";
+            //        else
+            //            lblFrameworkSettings.Text = "Could not delete settings!";
+            //    }
+            //}
+            //else if (!string.IsNullOrEmpty(Request.QueryString["emailSave"]))
+            //{
+            //    if (Convert.ToBoolean(Request.QueryString["emailSave"]))
+            //        lblEmailMessage.Text = "Settings saved successfully!";
+            //    else
+            //        lblEmailMessage.Text = "Could not save settings!";
+            //}
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -67,8 +69,8 @@ namespace SRFROWCA.Admin
                 ReadConfigKeys();
                 LoadCombos();
 
-                if (!string.IsNullOrEmpty(Request.QueryString["editKey"]))
-                    FillControls(Convert.ToString("Key-" + Request.QueryString["editKey"]));
+                //if (!string.IsNullOrEmpty(Request.QueryString["editKey"]))
+                //    FillControls(Convert.ToString("Key-" + Request.QueryString["editKey"]));
             }
         }
 
@@ -110,7 +112,7 @@ namespace SRFROWCA.Admin
             doc.Save(PATH);
 
             Response.Redirect("~/Admin/ConfigSettings.aspx?emailSave=true");
-        }
+        }        
 
         private void SetFrameworkSettings()
         {
@@ -118,145 +120,101 @@ namespace SRFROWCA.Admin
             PATH = PATH.Substring(0, PATH.LastIndexOf(@"\") + 1) + @"Configurations\ChangeEndSettings.xml";
 
             XmlDocument doc = new XmlDocument();
-
             if (!File.Exists(PATH))
                 doc.LoadXml("<ChangeEndSettings> </ChangeEndSettings>");
             else
                 doc.Load(PATH);
 
-            string countryID = string.Empty;
-            string country = string.Empty;
-            string clusterID = string.Empty;
-            string cluster = string.Empty;
-            string dateLimit = string.Empty;
-            string frameworkCount = string.Empty;
-            string activityCount = "";
-            string clusterCount = string.Empty;
+            List<ListItem> countriesList = GetCountryItems();
+            List<ListItem> clustersList = GetClusterItems(); 
 
-            if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
+            foreach (ListItem country in countriesList)
             {
-                countryID = ddlCountry.SelectedValue;
-                country = ddlCountry.SelectedItem.Text.Trim();
+                foreach (ListItem cluster in clustersList)
+                {
+                    string configKey = "Key-" + country.Value + cluster.Value;
+                    DeleteSettingsKey(PATH, configKey, doc);
+                    AddSettingsKey(PATH, configKey, doc, country, cluster);
+                }
+            }
+        }
+
+        private List<ListItem> GetCountryItems()
+        {
+            List<ListItem> lst = new List<ListItem>();
+            if (ddlCountry.SelectedValue == "0")
+            {
+                lst = ddlCountry.Items.Cast<ListItem>().ToList();
+                var remove = lst.SingleOrDefault(r => r.Value == "0");
+                lst.Remove(remove);
+            }
+            else
+            {
+                lst.Add(ddlCountry.SelectedItem);
             }
 
-            if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
+            return lst;
+        }
+
+        private List<ListItem> GetClusterItems()
+        {
+            List<ListItem> lst = new List<ListItem>();
+            if (ddlCluster.SelectedValue == "0")
             {
-                clusterID = ddlCluster.SelectedValue;
-                cluster = ddlCluster.SelectedItem.Text.Trim();
+                lst = ddlCluster.Items.Cast<ListItem>().ToList();
+                var remove = lst.SingleOrDefault(r => r.Value == "0");
+                lst.Remove(remove);
+            }
+            else
+            {
+                lst.Add(ddlCluster.SelectedItem);
             }
 
-            if (!string.IsNullOrEmpty(txtDate.Text.Trim()))
-                dateLimit = DateTime.ParseExact(txtDate.Text.Trim(), "MM-dd-yyyy", CultureInfo.InvariantCulture).ToString("MM-dd-yyyy"); // txtDate.Text.Trim();
-
-            if (!string.IsNullOrEmpty(txtNoIndicatorsFramework.Text.Trim()))
-                frameworkCount = txtNoIndicatorsFramework.Text.Trim();
-
-            if (!string.IsNullOrEmpty(txtNoActivitiesFramework.Text.Trim()))
-                activityCount = txtNoActivitiesFramework.Text.Trim();
-
-            if (!string.IsNullOrEmpty(txtNoClusterIndicators.Text.Trim()))
-                clusterCount = txtNoClusterIndicators.Text.Trim();
-
-            string configKey = "Key-" + countryID + clusterID;// +dateLimit.Replace("-", string.Empty) + frameworkCount + clusterCount;
-            XmlNode settingsNode = doc.DocumentElement;
-
-            bool isExist = false;
-
+            return lst;
+    }
+        private void DeleteSettingsKey(string PATH, string configKey, XmlDocument doc)
+        {
             if (File.Exists(PATH))
             {
+                XmlNode settingsNode = doc.DocumentElement;
                 XDocument delKey = XDocument.Load(PATH);
                 foreach (XmlNode node in settingsNode.ChildNodes)
                 {
-                    if (!string.IsNullOrEmpty(Request.QueryString["editKey"])
-                        && node.Name.Equals(Convert.ToString("Key-" + Request.QueryString["editKey"])))
+                    if (node.Name.Equals(configKey))
                     {
-                        delKey.Descendants(Convert.ToString("Key-" + Request.QueryString["editKey"])).Remove();
+                        delKey.Descendants(configKey).Remove();
                         delKey.Save(PATH);
                         doc.Load(PATH);
                     }
-                    else if (string.IsNullOrEmpty(Request.QueryString["editKey"]) &&
-                            node.Name.Equals(configKey))
-                    {
-                        isExist = true;
-                        //delKey.Descendants(configKey).Remove();
-                        //delKey.Save(PATH);
-                        //doc.Load(PATH);
-                    }
-
                 }
             }
-
-            if (!isExist)
-            {
-                if (!configKey.Equals("Key-") &&
-                    (!string.IsNullOrEmpty(dateLimit)
-                    || !string.IsNullOrEmpty(frameworkCount)
-                    || !string.IsNullOrEmpty(activityCount)
-                    || !string.IsNullOrEmpty(clusterCount)) &&
-                    (ddlCluster.SelectedIndex > -1 || ddlCountry.SelectedIndex > -1))
-                {
-                    XmlElement elem = doc.CreateElement(configKey);
-                    XmlAttribute key;
-
-                    if (!string.IsNullOrEmpty(countryID))
-                    {
-                        key = doc.CreateAttribute("CountryID");
-                        key.Value = countryID;
-                        elem.SetAttributeNode(key);
-
-                        key = doc.CreateAttribute("Country");
-                        key.Value = country;
-                        elem.SetAttributeNode(key);
-                    }
-
-                    if (!string.IsNullOrEmpty(clusterID))
-                    {
-                        key = doc.CreateAttribute("ClusterID");
-                        key.Value = clusterID;
-                        elem.SetAttributeNode(key);
-
-                        key = doc.CreateAttribute("Cluster");
-                        key.Value = cluster;
-                        elem.SetAttributeNode(key);
-                    }
-
-                    if (!string.IsNullOrEmpty(dateLimit))
-                    {
-                        key = doc.CreateAttribute("DateLimit");
-                        key.Value = dateLimit;
-                        elem.SetAttributeNode(key);
-                    }
-
-                    if (!string.IsNullOrEmpty(frameworkCount))
-                    {
-                        key = doc.CreateAttribute("FrameworkCount");
-                        key.Value = frameworkCount;
-                        elem.SetAttributeNode(key);
-                    }
-
-                    if (!string.IsNullOrEmpty(activityCount))
-                    {
-                        key = doc.CreateAttribute("ActivityCount");
-                        key.Value = activityCount;
-                        elem.SetAttributeNode(key);
-                    }
-
-                    if (!string.IsNullOrEmpty(clusterCount))
-                    {
-                        key = doc.CreateAttribute("ClusterCount");
-                        key.Value = clusterCount;
-                        elem.SetAttributeNode(key);
-                    }
-
-                    doc.DocumentElement.AppendChild(elem);
-                    doc.Save(PATH);
-
-                    Response.Redirect("~/Admin/ConfigSettings.aspx?keySave=true");
-                }
-            }
-
-            Response.Redirect("~/Admin/ConfigSettings.aspx?keySave=false");
         }
+
+        private void AddSettingsKey(string PATH, string configKey, XmlDocument doc, ListItem country, ListItem cluster)
+        {
+            XmlElement elem = doc.CreateElement(configKey);
+            string dateLimit = DateTime.ParseExact(txtDate.Text.Trim(), "MM-dd-yyyy", CultureInfo.InvariantCulture).ToString("MM-dd-yyyy");
+            CreateSettingsAttribute(doc, elem, "CountryID", country.Value);
+            CreateSettingsAttribute(doc, elem, "Country", country.Text);
+            CreateSettingsAttribute(doc, elem, "ClusterID", cluster.Value);
+            CreateSettingsAttribute(doc, elem, "Cluster", cluster.Text);
+            CreateSettingsAttribute(doc, elem, "DateLimit", dateLimit);
+            CreateSettingsAttribute(doc, elem, "FrameworkCount", txtNoIndicatorsFramework.Text.Trim());
+            CreateSettingsAttribute(doc, elem, "ActivityCount", txtNoActivitiesFramework.Text.Trim());
+            CreateSettingsAttribute(doc, elem, "ClusterCount", txtNoClusterIndicators.Text.Trim());
+
+            doc.DocumentElement.AppendChild(elem);
+            doc.Save(PATH);
+        }
+
+        private void CreateSettingsAttribute(XmlDocument doc, XmlElement elem, string name, string value)
+        {
+            XmlAttribute key;
+            key = doc.CreateAttribute(name);
+            key.Value = value;
+            elem.SetAttributeNode(key);
+        }
+
 
         private void ReadConfigKeys()
         {
@@ -298,7 +256,7 @@ namespace SRFROWCA.Admin
 
                         configKey += Convert.ToString(node.Attributes["CountryID"].Value);
                     }
-                        
+
                     if (node.Attributes["ClusterID"] != null)
                         configKey += Convert.ToString(node.Attributes["ClusterID"].Value);
                     //if (node.Attributes["DateLimit"] != null)
@@ -555,6 +513,12 @@ namespace SRFROWCA.Admin
             {
                 Response.Redirect("~/Admin/ConfigSettings.aspx?editKey=" + configKeyID.Replace("Key-", string.Empty));
             }
+        }
+
+        protected void ddlSelected(object sender, EventArgs e)
+        {
+            string keyId = "Key-" + ddlCountry.SelectedValue + ddlCluster.SelectedValue;
+            FillControls(keyId);
         }
 
         private void FillControls(string configKeyID)

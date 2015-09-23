@@ -20,10 +20,6 @@ namespace SRFROWCA.Controls
             {
                 PopulateUnits(true);
             }
-            if (!IsPostBack)
-            {
-
-            }
         }
 
         public void PopulateUnits(bool selectIndex)
@@ -73,7 +69,9 @@ namespace SRFROWCA.Controls
                                                                                     calMethod, DBNull.Value });
                 if (indicatorId > 0)
                 {
-                    if (unitId == 269)
+                    if (unitId == 269 || unitId == 28 || unitId == 38 || unitId == 193
+                         || unitId == 219 || unitId == 198 || unitId == 311 || unitId == 287
+                         || unitId == 67 || unitId == 132 || unitId == 252)
                         SaveAdmin2GenderTargets(indicatorId);
                     else
                         SaveAdmin2Targets(indicatorId);
@@ -88,7 +86,9 @@ namespace SRFROWCA.Controls
                     DBContext.Update("UpdateIndicatorNew2", new object[] { indicatorId, activityId, 
                                                                             unitId, indEn, indFr, userId, 
                                                                             gender, calMethod, DBNull.Value });
-                    if (unitId == 269)
+                    if (unitId == 269 || unitId == 28 || unitId == 38 || unitId == 193
+                         || unitId == 219 || unitId == 198 || unitId == 311 || unitId == 287
+                         || unitId == 67 || unitId == 132 || unitId == 252)
                         SaveAdmin2GenderTargets(indicatorId);
                     else
                         SaveAdmin2Targets(indicatorId);

@@ -2,8 +2,6 @@
     CodeBehind="EditOutputIndicator.aspx.cs" Inherits="SRFROWCA.ClusterLead.EditOutputIndicator" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <style>
         .accordian {
             height: 20px;
@@ -25,184 +23,278 @@
                 margin-top: -3px;
             }
     </style>
-    <script src="../assets/orsjs/jquery.numeric.min.js" type="text/javascript"></script>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:HiddenField runat="server" ID="hdnIsRegional" Value="0" />
-    
-    <div id="divMessage" runat="server" class="error2">
-    </div>
     <div class="page-content">
-        <div style="display: block; width: 100%; margin-bottom: 20px;">
-            <div id="dvcluster" runat="server" style="float: left; width: 50%;">
 
-                <label>
-                    Cluster:</label>
-                <div>
-                    <asp:DropDownList ID="ddlCluster" runat="server" CssClass="width-90">
-                    </asp:DropDownList>
-                    <asp:RequiredFieldValidator ID="rfvCluster" runat="server" ErrorMessage="Required" Display="Dynamic"
-                        CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCluster"></asp:RequiredFieldValidator>
-                </div>
-            </div>
-            <div id="dvCountry" runat="server" style="float: left; width: 50%;">
 
-                <label>
-                    Country:</label>
-                <div>
-                    <asp:DropDownList ID="ddlCountry" runat="server" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" AutoPostBack="true" CssClass="width-90">
+        <table border="0" style="margin: 0 auto; width: 80%">
+            <tr>
+                <td></td>
+                <td>
+                    <asp:Button ID="Button1" runat="server" OnClick="btnSave_Click" Text="Save" CssClass="width-10 btn btn-sm btn-primary" />
+                    <asp:Button ID="Button2" runat="server" Text="Back" OnClick="btnBackToSRPList_Click"
+                        CssClass="width-10 btn btn-sm btn-primary" CausesValidation="false" />
+                </td>
+            </tr>
+            <tr>
+                <td width="100px">Country:*
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlCountry" runat="server" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" AutoPostBack="true" Width="250px">
                     </asp:DropDownList>
                     <asp:RequiredFieldValidator ID="rfvCountry" runat="server" ErrorMessage="Required" Display="Dynamic"
                         CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCountry"></asp:RequiredFieldValidator>
-                </div>
-            </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Cluster:*
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlCluster" runat="server" Width="250px">
+                    </asp:DropDownList>
+                    <asp:RequiredFieldValidator ID="rfvCluster" runat="server" ErrorMessage="Required" Display="Dynamic"
+                        CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCluster"></asp:RequiredFieldValidator>
+                </td>
+            </tr>
+            <tr>
+                <td>Indicator (Eng):
+                                        <asp:HiddenField ID="hfIndicatorId" runat="server" />
+                </td>
+                <td>
+                    <asp:TextBox ID="txtInd1Eng" runat="server" Width="500px" TextMode="MultiLine"
+                        meta:resourcekey="txtInd1EngResource1" Style="height: 80px;"></asp:TextBox>
+                    <asp:CustomValidator ID="cvActivityEng" runat="server" ClientValidationFunction="validateIndicators"
+                        CssClass="error2"></asp:CustomValidator></td>
+            </tr>
+            <tr>
+                <td>Indicator (Fr):</td>
+                <td>
+                    <asp:TextBox ID="txtInd1Fr" runat="server" Width="500px"
+                        TextMode="MultiLine" meta:resourcekey="txtInd1FrResource1"
+                        Style="height: 80px;"></asp:TextBox></td>
+            </tr>
+            <tr>
+                <td>Units:*</td>
+                <td>
+                    <asp:DropDownList runat="server" ID="ddlUnit" Width="250px" meta:resourcekey="ddlUnitResource1"></asp:DropDownList>
+                    <asp:RequiredFieldValidator ID="rfvUnits" runat="server" ErrorMessage="Required" Display="Dynamic"
+                        CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlUnit"></asp:RequiredFieldValidator>
+                </td>
 
-        </div>
-
-
-        <div style="display: block; width: 100%; margin-bottom: 15px;">
-            <div style="width: 80%; margin-top: 120px; margin-bottom: 0px; display: block;">
-                <asp:Localize ID="localIndicatorInfo" runat="server" meta:resourcekey="localIndicatorInfoResource1"></asp:Localize>
-            </div>
-            <h6 class="header blue bolder smaller">Indicator<asp:Label ID="lbl1stNumber" runat="server" meta:resourcekey="lbl1stNumberResource1"></asp:Label></h6>
-
-            <div class="col-xs-12 col-sm-12 dvIndicator" style="padding-left: 0px;">
-                <div class="widget-box no-border">
-                    <div class="widget-body">
-                        <div class="widget-main no-padding-bottom no-padding-top">
-                            <div style="float: left; width: 40%;">
-                                <label>
-                                    <asp:HiddenField ID="hfIndicatorId" runat="server" />
-                                    (English):</label>
+            </tr>
+            <tr>
+                <td><span class='tooltip2' title='Each Indicator must have a calcualtion method. (1)Sum: Sum of all reported values.(2)Agerage: Average of all reported values.(3)Max: Max data reported in any month.</br>Latest: Latest reported data by month.'>Calculation:* (?)</span></td>
+                <td>
+                    <asp:DropDownList runat="server" ID="ddlCalculationMethod" Width="250px" CssClass="pullCalc">
+                        <asp:ListItem Text="Select Calculation" Value="0"></asp:ListItem>
+                        <asp:ListItem Text="Sum" Value="1"></asp:ListItem>
+                        <asp:ListItem Text="Average" Value="2"></asp:ListItem>
+                        <asp:ListItem Text="Latest" Value="3"></asp:ListItem>
+                        <asp:ListItem Text="Max" Value="5"></asp:ListItem>
+                    </asp:DropDownList>
+                    <asp:RequiredFieldValidator ID="frvCalcMethod" runat="server" ErrorMessage="Required" Display="Dynamic"
+                        CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCalculationMethod"></asp:RequiredFieldValidator>
+                </td>
+            </tr>
+            <tr>
+                <td><asp:Label ID="lblIndTargetCaption" runat="server" Text="Indicator Target"></asp:Label></td>
+                <td>
+                    <div class="col-xs-12 col-sm-12" style="float: left; margin-bottom: 10px; padding-left: 0px;" id="divTargets" runat="server">
+                        <div class="widget-box no-border">
+                            <div class="widget-body">
                                 <div>
-                                    <asp:TextBox ID="txtInd1Eng" runat="server" CssClass="width-95" TextMode="MultiLine" meta:resourcekey="txtInd1EngResource1" Style="height: 100px;"></asp:TextBox>
-                                    <asp:CustomValidator ID="cvActivityEng" runat="server" ClientValidationFunction="validateActivity"
-                                        CssClass="error2"></asp:CustomValidator>
-
-                                </div>
-                            </div>
-                            <div style="float: left; width: 40%;">
-                                <label>
-                                    (French):</label>
-                                <div>
-                                    <asp:TextBox ID="txtInd1Fr" runat="server" CssClass="width-95" TextMode="MultiLine" meta:resourcekey="txtInd1FrResource1" Style="height: 100px;"></asp:TextBox>
-
-                                </div>
-                            </div>
-                            <div style="float: left; width: 15%;">
-                                <label>
-                                    Unit:</label>
-                                <div>
-                                    <asp:DropDownList runat="server" ID="ddlUnit" CssClass="width-95" meta:resourcekey="ddlUnitResource1"></asp:DropDownList>
+                                    <div class="widget-main no-padding-bottom no-padding-top" id="divAdmin1Targets" runat="server">
+                                        <a id="pAdmin1Target" runat="server" style="width: 20%">Click To Show Locations</a>
+                                        <div class="content">
+                                            <asp:Repeater ID="rptAdmin" runat="server">
+                                                <HeaderTemplate>
+                                                    <table style="width: 300px;">
+                                                        <tr style="background-color: gray">
+                                                            <td style="width: 200px;">Location</td>
+                                                            <td style="width: 100px;">Target</td>
+                                                        </tr>
+                                                    </table>
+                                                </HeaderTemplate>
+                                                <ItemTemplate>
+                                                    <table style="width: 300px;">
+                                                        <tr style="background-color: #C8C8C8">
+                                                            <td style="width: 200px;">
+                                                                <div style="float: left; width: 100%; text-align: left;"><%#Eval("LocationName")%></div>
+                                                                <asp:HiddenField ID="hdnLocationId" runat="server" Value='<%#Eval("LocationId")%>' />
+                                                            </td>
+                                                            <td style="width: 100px;">
+                                                                <asp:TextBox ID="txtTarget" Width="100px" runat="server" 
+                                                                    Text='<%#Eval("CountryTarget") %>' ToolTip="Country Total"
+                                                                    CssClass="numeric1 trgtCountry txt"></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+                                        </div>
+                                    </div>
 
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="col-xs-12 col-sm-12" style="float: left; margin-bottom: 10px; padding-left: 0px;">
-            <div class="widget-box no-border">
-                <div class="widget-body">
-                    <div class="widget-main no-padding-bottom no-padding-top">
-                        <div>
-                            <div style="float: left; cursor: pointer;" onclick="$(this).parent().find('.content').toggle();$(this).find('.accordian').text() == '+' ? $(this).find('.accordian').text('-'): $(this).find('.accordian').text('+');">
-                                <div class="accordian">+</div>
-                                <div style="margin-left: 8px; margin-top: 0px; float: left;">
-                                    Admin1 targets
-                               
-                                </div>
-                            </div>
-                            <div class="content" style="float: left; clear: both; margin-top: 10px; margin-left: 0px;">
-                                <asp:Repeater runat="server" ID="rptAdmin1">
+                        <div class="widget-main no-padding-bottom no-padding-top hidden" id="divAdmin1GenderTargets" runat="server">
+                            <a id="pAdmin1GenderTarget" runat="server" style="width: 20%">Click To Show Locations</a>
+                            <div class="content">
+                                <asp:Repeater ID="rptAdmin1Gender" runat="server">
+                                    <HeaderTemplate>
+                                        <table style="width: 500px;">
+                                            <tr style="background-color: gray">
+                                                <td style="width: 200px;">Location</td>
+                                                <td style="width: 100px;">Male</td>
+                                                <td style="width: 100px;">Female</td>
+                                                <td style="width: 100px;">Total</td>
+                                            </tr>
+                                        </table>
+                                    </HeaderTemplate>
                                     <ItemTemplate>
-                                        <div style="float: left; width: 140px; margin-bottom: 20px; margin-right: 20px;">
-                                            <div style="float: left; width: 80px; text-align: right; margin-top: 5px;"><%#Eval("LocationName")%>&nbsp;</div>
-                                            <asp:TextBox ID="txtTarget" runat="server" MaxLength="8" Text='<%#Eval("Target") %>' Style="width: 80px;" CssClass="numeric1" meta:resourcekey="txtTargetResource1"></asp:TextBox>
-                                        </div>
-                                        <asp:HiddenField runat="server" ID="hdnLocationId" Value='<%# Eval("LocationId") %>' />
+                                        <table style="width: 500px;">
+                                            <tr style="background-color: #C8C8C8">
+                                                <td style="width: 200px;">
+                                                    <div style="float: left; width: 100%; text-align: left;"><%#Eval("LocationName")%></div>
+                                                    <asp:HiddenField ID="hdnLocationId" runat="server" Value='<%#Eval("LocationId")%>' />
+                                                </td>
+                                                <td style="width: 100px;">
+                                                    <asp:TextBox ID="txtTargetMale" Width="100px" runat="server" Text='<%#Eval("TargetMale") %>' ToolTip="Country Male Total"
+                                                        CssClass="numeric1 trgtCountryGenderMale txt"></asp:TextBox>
+                                                </td>
+                                                <td style="width: 100px;">
+                                                    <asp:TextBox ID="txtTargetFemale" Width="100px" runat="server" Text='<%#Eval("TargetFeMale") %>' ToolTip="Country Female Total"
+                                                        CssClass="numeric1 trgtCountryGenderFemale txt"></asp:TextBox>
+                                                </td>
+                                                <td style="width: 100px;">
+                                                    <asp:TextBox ID="txtTarget" Width="100px" runat="server" Text='<%#Eval("CountryTarget") %>'
+                                                        CssClass="numeric1 trgtCountryGenderTotal txt" ToolTip="Country Total"
+                                                        Enabled="false"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </ItemTemplate>
                                 </asp:Repeater>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="pull-left">
-        
-        <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" CssClass="width-10 btn btn-sm btn-primary" />
-        <asp:Button ID="btnBackToSRPList" runat="server" Text="Back" OnClick="btnBackToSRPList_Click"
-            CssClass="width-10 btn btn-sm btn-primary" CausesValidation="false" />
-            </div>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" CssClass="width-10 btn btn-sm btn-primary" />
+                    <asp:Button ID="btnBackToSRPList" runat="server" Text="Back" OnClick="btnBackToSRPList_Click"
+                        CssClass="width-10 btn btn-sm btn-primary" CausesValidation="false" />
+                </td>
+            </tr>
+        </table>
+
     </div>
     <div id="divMsg">
     </div>
     <script>
-        function validateActivity(sender, args) {
+        function validateIndicators(sender, args) {
             var txtEng = $("[id$=txtInd1Eng]").val();
             var txtFr = $("[id$=txtInd1Fr]").val();
 
-            if (txtEng.trim() == '' && txtFr.trim() == '') {
+            var countryId = $("#<%=ddlCountry.ClientID%>").val();
+            var clusterId = $("#<%=ddlCluster.ClientID%>").val();
+            var unitId = $("#<%=ddlUnit.ClientID%>").val();
+            var calcId = $("#<%=ddlCalculationMethod.ClientID%>").val();
 
+            if (countryId == "0" || clusterId == "0" || unitId == "0" || calcId == "0") {
+                args.IsValid = false;
+            }
+            else if (txtEng.trim() == '' && txtFr.trim() == '') {
                 alert("Please add Indicator atleast in one Language!")
                 args.IsValid = false;
-                return false;
             }
-            else {
-                // validateUnit();
-
-
-            }
+            else
+                arg.IsValid = true;
         }
-
-        function validateUnit() {
-            var counter = 0;
-            var txtEng = $(this).find("[id$=txtInd1Eng]").val();
-            var txtFr = $(this).find("[id$=txtInd1Fr]").val();
-            var unitId = $(this).find("[id$=ddlUnit]").val();
-
-            if (txtEng.trim() !== '' || txtFr.trim() !== '') {
-                if (unitId == "0") {
-                    alert("Please select Unit!");
-                    args.IsValid = false;
-                    return false;
-                }
-            }
-
-        }
-
 
         $(document).ready(function () {
             $(".content").hide();
-        });
-        function isNumber(evt) {
-            evt = (evt) ? evt : window.event;
-            var charCode = (evt.which) ? evt.which : evt.keyCode;
-            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-                return false;
-            }
-            return true;
-        }
+            $(".numeric1").wholenumber();
 
-        function validateUnit() {
-            var counter = 0;
-            $(".dvIndicator").each(function (index) {
-                var txtEng = $(this).find("[id$=txtInd1Eng]").val();
-                var txtFr = $(this).find("[id$=txtInd1Fr]").val();
-                var unitId = $(this).find("[id$=ddlUnit]").val();
-
-                if (txtEng.trim() !== '' || txtFr.trim() !== '') {
-                    if (unitId == "0") {
-                        alert("Please select Unit!");
-                        args.IsValid = false;
-                        return false;
+            $('.tooltip2').tooltip();
+            $(function () {
+                $("#show-option").tooltip({
+                    show: {
+                        effect: "slideDown",
+                        delay: 250
                     }
+                });
+                $("#hide-option").tooltip({
+                    hide: {
+                        effect: "explode",
+                        delay: 250
+                    }
+                });
+                $("#open-event").tooltip({
+                    show: null,
+                    position: {
+                        my: "left top",
+                        at: "left bottom"
+                    },
+                    open: function (event, ui) {
+                        ui.tooltip.animate({ top: ui.tooltip.position().top + 10 }, "fast");
+                    }
+                });
+            });
+
+            $("#<%=pAdmin1Target.ClientID%>").click(function () {
+                jQuery(this).next(".content").toggle();
+                if ($(this).text() == "Click To Show Locations") {
+                    $(this).text("Click To Hide Locations");
+                }
+                else {
+                    $(this).text("Click To Show Locations");
                 }
             });
-        }
 
+            $("#<%=pAdmin1GenderTarget.ClientID%>").click(function () {
+                jQuery(this).next(".content").toggle();
+                if ($(this).text() == "Click To Show Locations") {
+                    $(this).text("Click To Hide Locations");
+                }
+                else {
+                    $(this).text("Click To Show Locations");
+                }
+            });
+
+            $('#<%=ddlUnit.ClientID%>').change(function () {
+                var selVal = $("#<%=ddlUnit.ClientID%>").val();
+                if (selVal == 269 || selVal == 28 || selVal == 38
+                    || selVal == 193 || selVal == 219 || selVal == 198
+                     || selVal == 311 || selVal == 287 || selVal == 67 || selVal == 132
+                    || selVal == 252) {
+                    $("#<%=divAdmin1Targets.ClientID%>").addClass('hidden');
+                    $("#<%=divAdmin1GenderTargets.ClientID%>").removeClass('hidden');
+                }
+                else {
+                    $("#<%=divAdmin1Targets.ClientID%>").removeClass('hidden');
+                    $("#<%=divAdmin1GenderTargets.ClientID%>").addClass('hidden');
+                }
+            });
+
+            var selVal2 = $("#<%=ddlUnit.ClientID%>").val();
+            if (selVal2 == 269 || selVal2 == 28 || selVal2 == 38
+                    || selVal2 == 193 || selVal2 == 219 || selVal2 == 198
+                     || selVal2 == 311 || selVal2 == 287 || selVal2 == 67 || selVal2 == 132
+                    || selVal2 == 252) {
+                $("#<%=divAdmin1Targets.ClientID%>").addClass('hidden');
+                $("#<%=divAdmin1GenderTargets.ClientID%>").removeClass('hidden');
+            }
+            else {
+                $("#<%=divAdmin1Targets.ClientID%>").removeClass('hidden');
+                $("#<%=divAdmin1GenderTargets.ClientID%>").addClass('hidden');
+            }
+
+        });
 
     </script>
 </asp:Content>

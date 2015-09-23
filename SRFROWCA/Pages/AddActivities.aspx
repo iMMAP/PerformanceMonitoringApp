@@ -34,7 +34,7 @@
             text-align: left;
         }
     </style>
-    <script src="../assets/orsjs/jquery.wholenumber.js" type="text/javascript"></script>
+    
     <script type="text/javascript">
         var needToConfirm = true;
 

@@ -148,6 +148,7 @@
     <Content Include="Anonymous\ProjectsListingPublic.aspx" />
     <Content Include="assets\css\bootstrap.min.css" />
     <Content Include="assets\css\gridviewScroll.css" />
+    <Content Include="assets\css\gritter.css" />
     <Content Include="assets\css\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="assets\css\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
     <Content Include="assets\css\images\ui-bg_flat_10_000000_40x100.png" />
@@ -163,6 +164,7 @@
     <Content Include="assets\css\images\ui-icons_ffd27a_256x240.png" />
     <Content Include="assets\css\images\ui-icons_ffffff_256x240.png" />
     <Content Include="assets\js\gridviewScroll.min.js" />
+    <Content Include="assets\js\gritter.js" />
     <Content Include="assets\orsimages\arrowhl.png" />
     <Content Include="assets\orsimages\arrowhr.png" />
     <Content Include="assets\orsimages\arrowvb.png" />
@@ -189,6 +191,7 @@
     <Content Include="Admin\Location\LocationsList.aspx" />
     <Content Include="Admin\Organization\AddEditOrganization.aspx" />
     <Content Include="Admin\Organization\OrganizationList.aspx" />
+    <Content Include="ClusterLead\CountryIndMigrate.aspx" />
     <Content Include="ClusterLead\IndicatorListing2016.aspx" />
     <Content Include="ClusterLead\IndicatorListingMigrate.aspx" />
     <Content Include="ClusterLead\ProgressSummary.aspx" />
@@ -270,6 +273,7 @@
     <Content Include="ContactUs\Contactus.aspx" />
     <Content Include="ContactUs\ContactUsControl.ascx" />
     <Content Include="Controls\FilterCriteria.ascx" />
+    <Content Include="Dashboard.aspx" />
     <Content Include="ErrorPages\DefaultRedirectErrorPage.aspx" />
     <Content Include="ErrorPages\GenericErrorPage.aspx" />
     <Content Include="ErrorPages\Http404ErrorPage.aspx" />
@@ -285,6 +289,7 @@
     <Content Include="GV\Images\arrowvb.png" />
     <Content Include="GV\Images\arrowvt.png" />
     <Content Include="GV\WebForm.htm" />
+    <Content Include="HtmlPage1.html" />
     <Content Include="KeyFigures\AddKeyFigure.aspx" />
     <Content Include="KeyFigures\AddKeyFigureCategory.aspx" />
     <Content Include="KeyFigures\AddKeyFigureCategoryCtrl.ascx" />
@@ -299,14 +304,8 @@
     <Content Include="KeyFigures\KeyFigureIndicatorListing.aspx" />
     <Content Include="KeyFigures\KeyFiguresListing.aspx" />
     <Content Include="KeyFigures\KeyFiguresListingPublic.aspx" />
+    <Content Include="Landing\ClusterCord.aspx" />
     <Content Include="Log\ErrorLog.txt" />
-    <Content Include="Nepal\Account\Login.aspx" />
-    <Content Include="Nepal\Account\Register.aspx" />
-    <Content Include="Nepal\Controls\IndicatorsWithAdmin1TargetsControl1.ascx" />
-    <Content Include="Nepal\Default.aspx" />
-    <Content Include="Nepal\Framework\AddActivityAndIndicators.aspx" />
-    <Content Include="Nepal\Framework\IndicatorListing.aspx" />
-    <Content Include="Nepal\WebForm1.aspx" />
     <Content Include="OperationalPresence.aspx" />
     <Content Include="OPS\OPSDataEntryOld.aspx" />
     <Content Include="OPS\OPSDataEntry.aspx" />
@@ -330,6 +329,8 @@
     <Content Include="Reports\LoadCountryMaps.aspx" />
     <Content Include="Reports\ORS3W.aspx" />
     <Content Include="RequestOrganization.aspx" />
+    <Content Include="test1.aspx" />
+    <Content Include="text.html" />
     <Content Include="UploadSRPLogFrame.aspx" />
     <Content Include="packages.config" />
     <Content Include="Pages\Web.config" />
@@ -417,7 +418,6 @@
       <DependentUpon>ORSModel.edmx</DependentUpon>
       <LastGenOutput>ORSModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Nepal\Site.Master" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -671,6 +671,13 @@
     <Compile Include="Admin\Organization\OrganizationList.aspx.designer.cs">
       <DependentUpon>OrganizationList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ClusterLead\CountryIndMigrate.aspx.cs">
+      <DependentUpon>CountryIndMigrate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClusterLead\CountryIndMigrate.aspx.designer.cs">
+      <DependentUpon>CountryIndMigrate.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ClusterLead\IndicatorListing2016.aspx.cs">
       <DependentUpon>IndicatorListing2016.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -807,6 +814,7 @@
     </Compile>
     <Compile Include="Common\DataTableToCSV.cs" />
     <Compile Include="Common\EmailNotifications.cs" />
+    <Compile Include="Common\FrameWorkEnvoirnment.cs" />
     <Compile Include="Common\FU.cs" />
     <Compile Include="Common\GeneratePDF.cs" />
     <Compile Include="Common\MonthNumber.cs" />
@@ -856,6 +864,13 @@
     </Compile>
     <Compile Include="Controls\ReportedIndicatorComments.ascx.designer.cs">
       <DependentUpon>ReportedIndicatorComments.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="DataFeeds\Activities.ashx.cs">
       <DependentUpon>Activities.ashx</DependentUpon>
@@ -1105,61 +1120,12 @@
     <Compile Include="KeyFigures\KeyFiguresListingPublic.aspx.designer.cs">
       <DependentUpon>KeyFiguresListingPublic.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Nepal\Account\Login.aspx.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
+    <Compile Include="Landing\ClusterCord.aspx.cs">
+      <DependentUpon>ClusterCord.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Nepal\Account\Login.aspx.designer.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Nepal\Account\Register.aspx.cs">
-      <DependentUpon>Register.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Nepal\Account\Register.aspx.designer.cs">
-      <DependentUpon>Register.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Nepal\Controls\IndicatorsWithAdmin1TargetsControl1.ascx.cs">
-      <DependentUpon>IndicatorsWithAdmin1TargetsControl1.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Nepal\Controls\IndicatorsWithAdmin1TargetsControl1.ascx.designer.cs">
-      <DependentUpon>IndicatorsWithAdmin1TargetsControl1.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Nepal\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Nepal\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Nepal\Framework\AddActivityAndIndicators.aspx.cs">
-      <DependentUpon>AddActivityAndIndicators.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Nepal\Framework\AddActivityAndIndicators.aspx.designer.cs">
-      <DependentUpon>AddActivityAndIndicators.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Nepal\Framework\IndicatorListing.aspx.cs">
-      <DependentUpon>IndicatorListing.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Nepal\Framework\IndicatorListing.aspx.designer.cs">
-      <DependentUpon>IndicatorListing.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Nepal\Site.Master.cs">
-      <DependentUpon>Site.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Nepal\Site.Master.designer.cs">
-      <DependentUpon>Site.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Nepal\WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Nepal\WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
+    <Compile Include="Landing\ClusterCord.aspx.designer.cs">
+      <DependentUpon>ClusterCord.aspx</DependentUpon>
     </Compile>
     <Compile Include="OperationalPresence.aspx.cs">
       <DependentUpon>OperationalPresence.aspx</DependentUpon>
@@ -1357,6 +1323,13 @@
     </Compile>
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="test1.aspx.cs">
+      <DependentUpon>test1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="test1.aspx.designer.cs">
+      <DependentUpon>test1.aspx</DependentUpon>
     </Compile>
     <Compile Include="UploadSRPLogFrame.aspx.cs">
       <DependentUpon>UploadSRPLogFrame.aspx</DependentUpon>

@@ -49,6 +49,15 @@ namespace SRFROWCA.Controls {
         public global::System.Web.UI.WebControls.TextBox txtInd1Eng;
         
         /// <summary>
+        /// cvIndicator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvIndicator;
+        
+        /// <summary>
         /// txtInd1Fr control.
         /// </summary>
         /// <remarks>
@@ -92,6 +101,15 @@ namespace SRFROWCA.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator frvCalcMethod;
+        
+        /// <summary>
+        /// divAdmin2Targets control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divAdmin2Targets;
         
         /// <summary>
         /// divAdmin1Targets control.

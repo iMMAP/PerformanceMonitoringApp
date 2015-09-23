@@ -13,7 +13,7 @@
     </style>
     <script type="text/javascript">
         // Non Gender TArget sum
-        function calTotal(thisObj) {            
+        function calTotal(thisObj) {
             var countrySum = 0;
             thisObj.closest('table.tblCountry').find('.trgtAdmin2').each(function () {
                 var adm2ForCountry = 0;
@@ -22,7 +22,7 @@
                     adm2ForCountry = 0;
                 countrySum += adm2ForCountry;
             });
-            
+
             var admin1Sum = 0
             txtAdmin2 = thisObj.closest('.tblAdmin1').find('.trgtAdmin2');
             txtAdmin2.each(function () {
@@ -114,7 +114,7 @@
         }
 
         function rowCountryGenderTotal(thisObj) {
-            
+
             var maleTarget = parseInt(thisObj.closest('table.tblCountryGender').find('.trgtCountryGenderMale').val())
             var femaleTarget = parseInt(thisObj.closest('table.tblCountryGender').find('.trgtCountryGenderFemale').val());
 
@@ -150,15 +150,14 @@
                                                              '../assets/orsimages/minus.png' :
                                                               '../assets/orsimages/plus.png'))
             });
-                        $('.showall').click(function () {
+            $('.showall').click(function () {
                 if ($(this).text() == 'Expand All') {
                     $('.details1').show();
                     $(this).text('Collapse All');
                     $('.showallGen').text('Collapse All');
                     $('.showDetails1').attr('src', '../assets/orsimages/minus.png');
                 }
-                else
-                {
+                else {
                     $('.details1').hide();
                     $(this).text('Expand All');
                     $('.showallGen').text('Expand All');
@@ -204,12 +203,13 @@
                 source: function (request, response) {
                     $.ajax({
                         url: "AddActivityAndIndicators.aspx/GetActivities",
-                        data: JSON.stringify({ "cnId": $("#<%=ddlCountry.ClientID%>").val(),
-                                "clId": $("#<%=ddlCluster.ClientID%>").val(),
-                                "obId": $("#<%=ddlObjective.ClientID%>").val(),
-                                "lngId": "1",
-                                "searchTxt": request.term
-                             }),
+                        data: JSON.stringify({
+                            "cnId": $("#<%=ddlCountry.ClientID%>").val(),
+                            "clId": $("#<%=ddlCluster.ClientID%>").val(),
+                            "obId": $("#<%=ddlObjective.ClientID%>").val(),
+                            "lngId": "1",
+                            "searchTxt": request.term
+                        }),
                         dataType: "json",
                         type: "POST",
                         contentType: "application/json; charset=utf-8",
@@ -238,7 +238,7 @@
                             "cnId": $("#<%=ddlCountry.ClientID%>").val(),
                             "clId": $("#<%=ddlCluster.ClientID%>").val(),
                             "obId": $("#<%=ddlObjective.ClientID%>").val(),
-                            "lngId" : "2",
+                            "lngId": "2",
                             "searchTxt": request.term
                         }),
                         dataType: "json",
@@ -268,6 +268,16 @@
     <div class="page-content">
         <div class="col-xs-12 col-sm-12">
             <div class="row">
+                <div class="col-xs-12 col-sm-12">
+                    <asp:Button ID="Button1" runat="server" OnClick="btnSave_Click" Text="Save" CssClass="width-10 btn btn-sm btn-primary" />
+                    <asp:Button ID="Button2" runat="server" Text="Back" OnClick="btnBackToSRPList_Click"
+                        CssClass="width-10 btn btn-sm btn-primary" CausesValidation="false" />
+                    <asp:Button ID="Button3" runat="server" Text="Help"
+                        CssClass="width-10 btn btn-sm btn-primary" CausesValidation="false" />
+
+                </div>
+                <hr />
+
                 <div class="col-xs-4 col-sm-4">
 
                     <label>
@@ -307,7 +317,7 @@
                         Activity (English):</label>
                     <div>
                         <asp:TextBox ID="txtActivityEng" runat="server" CssClass="width-100 textboxAuto" MaxLength="1000" TextMode="MultiLine" Height="70px"></asp:TextBox>
-                        <asp:CustomValidator ID="cvActivityEng" runat="server" ClientValidationFunction="validateActivity" ControlToValidate="txtActivityEng">
+                        <asp:CustomValidator ID="cvActivityEng" runat="server" ClientValidationFunction="validateActivity" ValidateEmptyText="true"
                             CssClass="error2"></asp:CustomValidator>
                     </div>
                 </div>
@@ -344,29 +354,67 @@
         function validateActivity(sender, args) {
             var txtEng = $("[id$=txtActivityEng]").val();
             var txtFr = $("[id$=txtActivityFr]").val();
+            var countryId = $("#<%=ddlCountry.ClientID%>").val();
+            var clusterId = $("#<%=ddlCluster.ClientID%>").val();
+            var objId = $("#<%=ddlObjective.ClientID%>").val();
+            var unitId = 0;
+            $(".pullUnits").each(function () {
+                if ($(this).val() == 0)
+                    unitId = -1;
+            });
 
-            if (txtEng.trim() == '' && txtFr.trim() == '') {
+            var calcId = 0;
+            $(".pullCalc").each(function () {
+                if ($(this).val() == 0)
+                    calcId = -1;
+            });
 
-                alert("Please add Activity atleast in one Language!")
-                return false;
+            if (countryId == "0" || clusterId == "0" || objId == "0" || unitId == -1 || calcId == -1) {
+                args.IsValid = false;
             }
+            else if (txtEng.trim() == '' && txtFr.trim() == '') {
+                alert("Please add Activity!");
+                args.IsValid = false;
+            }
+            else
+                args.IsValid = true;
         }
 
 
-        //function validateIndicator() {
+        function validateIndicator(sender, args) {
+            var counter = 0;
+            $(".dvIndicator").each(function () {
+                var index = 0;
+                var txtEng = $(this).find("[id$=txtInd1Eng]").val();
+                var txtFr = $(this).find("[id$=txtInd1Fr]").val();
+                var countryId = $("#<%=ddlCountry.ClientID%>").val();
+                var clusterId = $("#<%=ddlCluster.ClientID%>").val();
+                var objId = $("#<%=ddlObjective.ClientID%>").val();
+                var unitId = 0;
+                $(".pullUnits").each(function () {
+                    if ($(this).val() == 0)
+                        unitId = -1;
+                });
 
-        //    var counter = 0;
-        //    $(".dvIndicator").each(function (index) {
-        //        var txtEng = $(this).find("[id$=txtInd1Eng]").val();
-        //        var txtFr = $(this).find("[id$=txtInd1Fr]").val();
+                var calcId = 0;
+                $(".pullCalc").each(function () {
+                    if ($(this).val() == 0)
+                        calcId = -1;
+                });
 
-        //        if (txtEng.trim() == '' && txtFr.trim() == '') {
+                if (countryId == "0" || clusterId == "0" || objId == "0" || unitId == -1 || calcId == -1) {
+                    args.IsValid = false;
+                }
+                else if (txtEng.trim() == '' && txtFr.trim() == '') {
+                    alert("Please add Indicator " + (parseInt(index) + 1));
+                    args.IsValid = false;
+                }
+                else
+                    arg.IsValid = true;
 
-        //            alert("Please add Indicator " + (parseInt(index)+1) + " atleast in one Language!")
-        //            return false;
-        //        }
-        //    });
+                index += 1;
+            });
+        }
 
-        //}
     </script>
 </asp:Content>

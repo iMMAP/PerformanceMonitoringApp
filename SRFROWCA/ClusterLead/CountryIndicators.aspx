@@ -5,29 +5,10 @@
 <%@ Register Assembly="SRFROWCA" Namespace="SRFROWCA" TagPrefix="cc2" %>
 
 <asp:Content ID="cntHeadCountryIndicators" ContentPlaceHolderID="HeadContent" runat="server">
-    <script src="../assets/orsjs/jquery.wholenumber.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        function validate() {
-            var objEng = document.getElementById('<%=txtIndicatorEng.ClientID%>');
-            var objFr = document.getElementById('<%=txtIndicatorFr.ClientID%>');
-            if (objEng.value == '' && objFr.value == '') {
-                alert("Please Enter Indicator!");
-                return false;
-            }
-        }
-
-        $(function () {
-            $(".numeric1").wholenumber();
-        });
-        </script>
 </asp:Content>
-
-
 <asp:Content ID="cntMainContentCountryIndicators" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="page-content">
-        <div id="divMsg">
-        </div>
         <table width="100%">
             <tr>
                 <td>
@@ -51,6 +32,8 @@
                                             CssClass="btn btn-yellow pull-right" meta:resourcekey="btnAddIndicatorResource1" />
                                     </h6>
                                 </div>
+                                <div id="divMsg">
+                                </div>
                                 <div class="widget-body">
                                     <div class="widget-main">
                                         <table border="0" style="width: 95%; margin: 0px 10px 0px 20px">
@@ -72,7 +55,11 @@
                                                         <asp:ListItem Selected="True" Text="--- Select Cluster ---" Value="-1" meta:resourcekey="ListItemResource1"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </td>
-                                                <td></td>
+                                                <td>Year:
+                                                    <asp:DropDownList ID="ddlFrameworkYear" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlYear_SelectedIndexChnaged">
+                                                        <asp:ListItem Text="2016" Value="12"></asp:ListItem>
+                                                        <asp:ListItem Text="2015" Value="11"></asp:ListItem>
+                                                    </asp:DropDownList></td>
                                             </tr>
                                             <tr>
                                                 <td>&nbsp;
@@ -105,71 +92,51 @@
         </table>
         <div class="table-responsive">
             <div style="overflow-x: auto; width: 100%">
-                <cc2:PagingGridView ID="gvClusterIndicators" Width="100%" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" AllowSorting="True" DataKeyNames="SiteLanguageId"
-                    OnRowDataBound="gvClusterIndicators_RowDataBound" PageSize="50" OnPageIndexChanging="gvClusterindicators_PageIndexChanging" OnSorting="gvClusterIndicators_Sorting" ShowHeader="true" OnRowCommand="gvClusterIndicators_RowCommand" CssClass=" table-striped table-bordered table-hover" meta:resourcekey="gvClusterIndicatorsResource1">
+                <cc2:PagingGridView ID="gvClusterIndicators" Width="100%" runat="server" ShowHeaderWhenEmpty="true"
+                    AutoGenerateColumns="False" AllowSorting="True"
+                    OnRowDataBound="gvClusterIndicators_RowDataBound" PageSize="50"
+                    OnPageIndexChanging="gvClusterindicators_PageIndexChanging"
+                    OnSorting="gvClusterIndicators_Sorting" ShowHeader="true"
+                    OnRowCommand="gvClusterIndicators_RowCommand" CssClass="imagetable"
+                    meta:resourcekey="gvClusterIndicatorsResource1">
                     <EmptyDataTemplate>
                         Your filter criteria does not match any record in database!
                     </EmptyDataTemplate>
+                    <RowStyle CssClass="istrow" />
+                    <AlternatingRowStyle CssClass="altcolor" />
                     <Columns>
                         <asp:TemplateField ItemStyle-Width="2%" HeaderText="#" meta:resourcekey="TemplateFieldResource1">
                             <ItemTemplate>
                                 <%# Container.DataItemIndex + 1 %>
                             </ItemTemplate>
-
-                            <ItemStyle Width="2%"></ItemStyle>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="IsRegional" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource1">
-                            <HeaderStyle CssClass="hidden"></HeaderStyle>
-
-                            <ItemStyle CssClass="hidden"></ItemStyle>
-                        </asp:BoundField>
-                        <asp:BoundField DataField="IsSRP" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource2">
-                            <HeaderStyle CssClass="hidden"></HeaderStyle>
-
-                            <ItemStyle CssClass="hidden"></ItemStyle>
-                        </asp:BoundField>
+                        <asp:BoundField DataField="IsRegional" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource1" />
+                        <asp:BoundField DataField="IsSRP" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource2" />
                         <asp:BoundField Visible="false" DataField="ClusterIndicatorId" HeaderText="ID" SortExpression="ClusterIndicatorId" meta:resourcekey="BoundFieldResource3" />
-                        <asp:TemplateField ItemStyle-Width="4%" ItemStyle-HorizontalAlign="Center" meta:resourcekey="TemplateFieldResource2">
+                        <asp:TemplateField ItemStyle-Width="20px" ItemStyle-HorizontalAlign="Center" meta:resourcekey="TemplateFieldResource2">
                             <ItemTemplate>
                                 <asp:Image ID="imgRind" runat="server" meta:resourcekey="imgRindResource1" />
                                 <asp:Image ID="imgCind" runat="server" meta:resourcekey="imgCindResource1" />
                             </ItemTemplate>
-                            <ItemStyle HorizontalAlign="Center" Width="4%"></ItemStyle>
                         </asp:TemplateField>
-                        <asp:BoundField ItemStyle-Width="10%" DataField="Country" HeaderText="Country" SortExpression="Country" meta:resourcekey="BoundFieldResource4">
-                            <ItemStyle Width="10%"></ItemStyle>
-                        </asp:BoundField>
-                        <asp:BoundField ItemStyle-Width="10%" DataField="Cluster" HeaderText="Cluster" SortExpression="Cluster" meta:resourcekey="BoundFieldResource5">
-                            <ItemStyle Width="10%"></ItemStyle>
-                        </asp:BoundField>
-                        <asp:BoundField ItemStyle-Width="48%" DataField="Indicator" HeaderText="Indicator" HtmlEncode="false" SortExpression="Indicator" meta:resourcekey="BoundFieldResource6">
-                            <ItemStyle Width="48%"></ItemStyle>
-                        </asp:BoundField>
-                        <asp:BoundField ItemStyle-Width="10%" DataField="Target" HeaderText="Target" SortExpression="Target" meta:resourcekey="BoundFieldResource7">
-                            <ItemStyle Width="10%"></ItemStyle>
-                        </asp:BoundField>
-                        <asp:BoundField ItemStyle-Width="10%" DataField="Unit" HeaderText="Unit" SortExpression="Unit" meta:resourcekey="BoundFieldResource8">
-                            <ItemStyle Width="10%"></ItemStyle>
-                        </asp:BoundField>
-                        <asp:TemplateField HeaderStyle-Width="5%" ItemStyle-HorizontalAlign="Center" meta:resourcekey="TemplateFieldResource3">
+                        <asp:BoundField ItemStyle-Width="10%" DataField="Country" HeaderText="Country" SortExpression="Country" meta:resourcekey="BoundFieldResource4" />
+                        <asp:BoundField ItemStyle-Width="10%" DataField="Cluster" HeaderText="Cluster" SortExpression="Cluster" meta:resourcekey="BoundFieldResource5" />
+                        <asp:BoundField ItemStyle-Width="48%" DataField="Indicator" HeaderText="Indicator" HtmlEncode="false" SortExpression="Indicator" meta:resourcekey="BoundFieldResource6" />
+                        <asp:BoundField ItemStyle-Width="10%" DataField="Target" HeaderText="Target" SortExpression="Target" meta:resourcekey="BoundFieldResource7" />
+                        <asp:BoundField ItemStyle-Width="10%" DataField="Unit" HeaderText="Unit" SortExpression="Unit" meta:resourcekey="BoundFieldResource8" />
+                        <asp:BoundField ItemStyle-Width="5%" DataField="CalculationMethod" HeaderText="Calculation" SortExpression="CalculationMethod" />
+
+                        <asp:TemplateField HeaderStyle-Width="30px" ItemStyle-HorizontalAlign="Center" HeaderText="Edit">
                             <ItemTemplate>
-                                <asp:LinkButton runat="server" ID="btnEdit" CausesValidation="False"
-                                    CommandName="EditIndicator" CommandArgument='<%# Eval("ClusterIndicatorId") %>' Text="Edit" meta:resourcekey="btnEditResource1"></asp:LinkButton>
+                                <asp:ImageButton ID="btnEdit" runat="server" ImageUrl="~/assets/orsimages/edit16.png"
+                                    CommandName="EditIndicator" CommandArgument='<%# Eval("ClusterIndicatorId") %>' ToolTip="Edit Indicator" />
                             </ItemTemplate>
-
-                            <HeaderStyle Width="5%"></HeaderStyle>
-
-                            <ItemStyle HorizontalAlign="Center"></ItemStyle>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderStyle-Width="5%" ItemStyle-HorizontalAlign="Center" meta:resourcekey="TemplateFieldResource4">
+                        <asp:TemplateField HeaderStyle-Width="30px" ItemStyle-HorizontalAlign="Center" HeaderText="Del">
                             <ItemTemplate>
-                                <asp:LinkButton ID="btnDelete" runat="server" Text="Delete" Width="80px" CausesValidation="False"
-                                    CommandName="DeleteIndicator" CommandArgument='<%# Eval("ClusterIndicatorId") %>' meta:resourcekey="btnDeleteResource1"></asp:LinkButton>
+                                <asp:ImageButton ID="btnDelete" runat="server" ImageUrl="~/assets/orsimages/delete16.png"
+                                    CommandName="DeleteIndicator" CommandArgument='<%# Eval("ClusterIndicatorId") %>' ToolTip="Delete" />
                             </ItemTemplate>
-
-                            <HeaderStyle Width="5%"></HeaderStyle>
-
-                            <ItemStyle HorizontalAlign="Center"></ItemStyle>
                         </asp:TemplateField>
                         <asp:TemplateField Visible="false" meta:resourcekey="TemplateFieldResource5">
                             <ItemTemplate>
@@ -194,95 +161,6 @@
                     </Columns>
                 </cc2:PagingGridView>
             </div>
-        </div>
-        <table>
-            <tr>
-                <td>
-                    <asp:ModalPopupExtender ID="mpeEditIndicator" runat="server" TargetControlID="btnTarget"
-                        PopupControlID="pnlOrg" BackgroundCssClass="modalpopupbackground" CancelControlID="btnClose" DynamicServicePath="" Enabled="True">
-                    </asp:ModalPopupExtender>
-                    <asp:Panel ID="pnlOrg" runat="server" Width="650px" meta:resourcekey="pnlOrgResource1">
-                        <asp:UpdatePanel ID="uPanel1" runat="server" UpdateMode="Conditional">
-                            <ContentTemplate>
-                                <div class="containerPopup">
-                                    <div class="popupheading">
-                                        <asp:Label ID="lblEditPopupHeading" runat="server" Text="Edit Indicator"></asp:Label>
-                                    </div>
-                                    <div class="contentarea">
-                                        <div class="formdiv">
-                                            <table border="0" style="margin: 0 auto;">
-                                                <asp:HiddenField ID="hfRegionalIndicator" runat="server" />
-                                                <tr>
-                                                    <td>Indicator (English):
-                                                    </td>
-                                                    <td class="frmControl">
-                                                        <asp:TextBox ID="txtIndicatorEng" runat="server" TextMode="MultiLine" Height="70px" Width="450px" MaxLength="4000" meta:resourcekey="txtIndicatorEngResource1"></asp:TextBox>
-                                                    </td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Indicator (French):
-                                                    </td>
-                                                    <td class="frmControl">
-                                                        <asp:TextBox ID="txtIndicatorFr" runat="server" TextMode="MultiLine" Height="70px" Width="450px" MaxLength="4000" meta:resourcekey="txtIndicatorFrResource1"></asp:TextBox>
-                                                    </td>
-                                                    <td></td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>Target:
-                                                    </td>
-                                                    <td class="frmControl">
-                                                        <asp:TextBox ID="txtTarget" CssClass="numeric1" runat="server" Width="450px" MaxLength="9" meta:resourcekey="txtTargetResource1"></asp:TextBox>
-                                                    </td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Unit:
-                                                    </td>
-                                                    <td class="frmControl">
-                                                        <asp:DropDownList runat="server" ID="ddlUnits" Width="450px" meta:resourcekey="ddlUnitsResource1"></asp:DropDownList>
-
-                                                    </td>
-                                                    <td></td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td></td>
-                                                    <td align="left" class="frmControl">
-                                                        <br />
-                                                        <asp:HiddenField ID="hfClusterIndicatorID" runat="server" />
-                                                        <asp:Button ID="btnEdit" runat="server" OnClick="btnUpdate_Click" Text="Update" OnClientClick="return validate();" CssClass="btn btn_primary" meta:resourcekey="btnEditResource2" />
-                                                        <asp:Button ID="btnClose" runat="server" Text="Close" CausesValidation="False" CssClass="btn btn_primary" meta:resourcekey="btnCloseResource1" />
-                                                        <br />
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <asp:Label ID="lblMessage2" runat="server" CssClass="error-message" Visible="False"
-                                                            ViewStateMode="Disabled" meta:resourcekey="lblMessage2Resource1"></asp:Label>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                            <div class="spacer" style="clear: both;">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="graybarcontainer">
-                                    </div>
-                                </div>
-                            </ContentTemplate>
-                            <Triggers>
-                                <asp:PostBackTrigger ControlID="btnEdit" />
-                                <asp:PostBackTrigger ControlID="btnClose" />
-                            </Triggers>
-                        </asp:UpdatePanel>
-                    </asp:Panel>
-                </td>
-            </tr>
-        </table>
-        <div style="display: none">
-            <asp:Button ID="btnTarget" runat="server" Width="1px" meta:resourcekey="btnTargetResource1" />
         </div>
     </div>
 </asp:Content>

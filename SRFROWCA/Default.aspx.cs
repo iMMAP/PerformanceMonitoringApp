@@ -14,6 +14,17 @@ namespace SRFROWCA
             {
                 UserInfo.UserProfileInfo(RC.SelectedEmergencyId);
             }
+
+            if (!IsPostBack)
+            {
+                if (HttpContext.Current.User.Identity.IsAuthenticated)
+                {
+                    if (RC.IsClusterLead(this.User))
+                        Response.Redirect("~/Landing/ClusterCord.aspx");
+                    else
+                        Response.Redirect("Dashboard.aspx");
+                }
+            }
         }
 
         internal override void BindGridData()

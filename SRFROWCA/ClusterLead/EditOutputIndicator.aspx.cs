@@ -26,6 +26,13 @@ namespace SRFROWCA.ClusterLead
                 {
                     GetTargetsforRegion(0);
                 }
+
+                int emgLocId = RC.GetSelectedIntVal(ddlCountry);
+                if (emgLocId == 11)
+                {
+                    divTargets.Visible = false;
+                    lblIndTargetCaption.Visible = false;
+                }
             }
         }
 
@@ -37,19 +44,24 @@ namespace SRFROWCA.ClusterLead
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            if (!RC.IsRegionalClusterLead(this.User))
+            int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
+            if (emgLocationId != 11)
             {
-                if (Request.QueryString["cnid"] != null)
+                bool isTargetValid = false;
+                int unitId = RC.GetSelectedIntVal(ddlUnit);
+                if (unitId == 269 || unitId == 28 || unitId == 38 || unitId == 193
+                    || unitId == 219 || unitId == 198 || unitId == 311 || unitId == 132
+                    || unitId == 252)
+                    isTargetValid = IsTargetProvidedGender(rptAdmin1Gender);
+                else
+                    isTargetValid = IsTargetProvided(rptAdmin);
+
+                if (!isTargetValid)
                 {
-                    if (!(Request.QueryString["cnid"].ToString() == "11"))
-                    {
-                        if (IsTargetProvided())
-                        {
-                            ShowValidationMessage();
-                            return;
-                        }
-                    }
+                    ShowValidationMessage();
+                    return;
                 }
+
             }
 
             bool isAdded = true;
@@ -60,12 +72,24 @@ namespace SRFROWCA.ClusterLead
                 isAdded = false;
             }
 
-            using (TransactionScope scope = new TransactionScope())
+            //using (TransactionScope scope = new TransactionScope())
             {
                 indicatorId = SaveIndicator(indicatorId);
-                SaveAdmin1Targets(indicatorId);
-                scope.Complete();
-                SendEmail(isAdded);
+
+                DBContext.Delete("DeleteClusterOutputIndicatorTargets", new object[] { indicatorId, emgLocationId, DBNull.Value });
+                int unitId = RC.GetSelectedIntVal(ddlUnit);
+                if (unitId == 269 || unitId == 28 || unitId == 38 || unitId == 193
+                            || unitId == 219 || unitId == 198 || unitId == 311 || unitId == 132
+                            || unitId == 252)
+                {
+                    SaveAdmin1GenderTargets(indicatorId, emgLocationId);
+                }
+                else
+                {
+                    SaveAdmin1Targets(indicatorId, emgLocationId);
+                }
+                //scope.Complete();
+                //SendEmail(isAdded);
                 Response.Redirect("~/ClusterLead/CountryIndicators.aspx");
             }
         }
@@ -113,8 +137,9 @@ namespace SRFROWCA.ClusterLead
             UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
             UI.FillUnits(ddlUnit);
 
-            ddlCluster.Items.Insert(0, new ListItem("--- Select Cluster ---", "-1"));
-            ddlCountry.Items.Insert(0, new ListItem("--- Select Country ---", "-1"));
+            ddlCluster.Items.Insert(0, new ListItem("Select Cluster", "0"));
+            ddlCountry.Items.Insert(0, new ListItem("Select Country", "0"));
+            ddlUnit.Items.Insert(0, new ListItem("Select Unit", "0"));
 
             SetComboValues();
         }
@@ -211,12 +236,13 @@ namespace SRFROWCA.ClusterLead
                 int indicatorId = 0;
                 int.TryParse(Request.QueryString["id"].ToString(), out indicatorId);
                 DataTable dt = new DataTable();
-                dt = DBContext.GetData("GetClusterIndicatorById", new object[] { indicatorId, RC.SiteLanguage.English });
+                dt = DBContext.GetData("GetClusterIndicatorById", new object[] { indicatorId });
                 if (dt.Rows.Count > 0)
                 {
                     txtInd1Eng.Text = dt.Rows[0]["IndicatorEng"].ToString();
                     txtInd1Fr.Text = dt.Rows[0]["IndicatorFr"].ToString();
                     ddlUnit.SelectedValue = dt.Rows[0]["UnitId"].ToString();
+                    ddlCalculationMethod.SelectedValue = dt.Rows[0]["IndicatorCalculationTypeId"].ToString();
                 }
 
                 hdnIsRegional.Value = dt.Rows[0]["IsRegional"].ToString();
@@ -235,6 +261,25 @@ namespace SRFROWCA.ClusterLead
 
         private void GetTargetsforRegion(int indicatorId)
         {
+            PopulateTargets(indicatorId);
+            int unitId = RC.GetSelectedIntVal(ddlUnit);
+            bool isGender = false;
+            if (unitId == 269 || unitId == 28 || unitId == 38 || unitId == 193
+                     || unitId == 219 || unitId == 198 || unitId == 311 || unitId == 287
+                     || unitId == 67 || unitId == 132 || unitId == 252)
+            {
+                isGender = true;
+            }
+
+            if (!isGender)
+                UpdateRepeaterTargetColumn(rptAdmin1Gender);
+            else
+                UpdateRepeaterTargetColumn(rptAdmin);
+
+        }
+
+        private void PopulateTargets(int indicatorId)
+        {
             int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
             if (emgLocationId <= 0)
             {
@@ -243,8 +288,10 @@ namespace SRFROWCA.ClusterLead
             if (!(RC.IsRegionalClusterLead(this.User) || emgLocationId == 11))
             {
                 DataTable dtTargets = GetRegionalAdmin1(emgLocationId, indicatorId);
-                rptAdmin1.DataSource = dtTargets;
-                rptAdmin1.DataBind();
+                rptAdmin.DataSource = dtTargets;
+                rptAdmin.DataBind();
+                rptAdmin1Gender.DataSource = dtTargets;
+                rptAdmin1Gender.DataBind();
             }
         }
 
@@ -257,12 +304,11 @@ namespace SRFROWCA.ClusterLead
         {
             if (RC.SelectedSiteLanguageId == 1)
             {
-                ShowMessage("Please provide target for at least one location in all indicators.<br/> If you do not know the target at this time please put a 0 (Zero).", RC.NotificationType.Error, true, 3000);
+                ShowMessage("Please provide target for at least one location.", RC.NotificationType.Error, true, 5000);
             }
             else
             {
-
-                ShowMessage("Se il vous plaît fournir cible pour au moins un emplacement de tous les indicateurs.<br/> Si vous ne connaissez pas la cible à ce moment se il vous plaît mettre un 0 (zéro).", RC.NotificationType.Error, true, 3000);
+                ShowMessage("Se il vous plaît fournir cible pour au moins un emplacement.", RC.NotificationType.Error, true, 5000);
             }
         }
 
@@ -271,44 +317,47 @@ namespace SRFROWCA.ClusterLead
             string indEng = txtInd1Eng.Text.Trim();
             string indFr = txtInd1Fr.Text.Trim();
             int unitId = RC.GetSelectedIntVal(ddlUnit);
+            int calcMethod = RC.GetSelectedIntVal(ddlCalculationMethod);
+
+            if (string.IsNullOrEmpty(indEng))
+                indEng = indFr;
+
+            if (string.IsNullOrEmpty(indFr))
+                indFr = indEng;
 
             if (indicatorId > 0)
             {
                 DBContext.Add("UpdateClusterIndicatorWithoutTarget", new object[] { indicatorId, indEng, indFr, 
-                                                                                        unitId, RC.GetCurrentUserId, DBNull.Value, });
+                                                                                        unitId, calcMethod, RC.GetCurrentUserId, DBNull.Value, });
             }
             else
             {
+                int yearId = 12;
                 int countryId = RC.GetSelectedIntVal(ddlCountry);
                 int clusterId = RC.GetSelectedIntVal(ddlCluster);
                 indicatorId = DBContext.Add("InsertClusterIndicator", new object[] { indEng, indFr, unitId, countryId, clusterId, 
-                                                                                        RC.GetCurrentUserId, DBNull.Value });
+                                                                                     yearId, calcMethod, RC.GetCurrentUserId, DBNull.Value });
             }
             return indicatorId;
         }
-        private void SaveAdmin1Targets(int indicatorId)
+        private void SaveAdmin1Targets(int indicatorId, int emgLocationId)
         {
-            int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
             int isRegional = 0;
             int.TryParse(hdnIsRegional.Value, out isRegional);
 
-            foreach (RepeaterItem item in rptAdmin1.Items)
+            foreach (RepeaterItem item in rptAdmin.Items)
             {
                 if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
                 {
                     var txtTarget = (TextBox)item.FindControl("txtTarget");
-                    var hdnLocationId = (HiddenField)item.FindControl("hdnLocationId");
                     int val = 0;
-                    bool result = int.TryParse(txtTarget.Text.Trim(), out val);
-                    int? target = null;
-                    if (result)
-                    {
-                        target = val;
-                    }
+                    int.TryParse(txtTarget.Text.Trim(), out val);
+                    int? target = val > 0 ? val : (int?)null;
 
+                    var hdnLocationId = (HiddenField)item.FindControl("hdnLocationId");
                     int locationId = 0;
                     int.TryParse(hdnLocationId.Value, out locationId);
-                    if (locationId > 0)
+                    if (locationId > 0 && target > 0)
                     {
                         DBContext.Update("InsertOutputIndicatorTarget", new object[] { indicatorId, emgLocationId,
                                             locationId, target, RC.GetCurrentUserId, isRegional, DBNull.Value });
@@ -316,6 +365,50 @@ namespace SRFROWCA.ClusterLead
                 }
             }
         }
+
+        private void SaveAdmin1GenderTargets(int indicatorId, int emgLocationId)
+        {
+            int isRegional = 0;
+            int.TryParse(hdnIsRegional.Value, out isRegional);
+
+            foreach (RepeaterItem item in rptAdmin1Gender.Items)
+            {
+                if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
+                {
+                    int val = 0;
+                    TextBox txtTargetMale = item.FindControl("txtTargetMale") as TextBox;
+                    if (txtTargetMale != null)
+                    {
+                        int.TryParse(txtTargetMale.Text.Trim(), out val);
+                    }
+                    int? targetMale = val > 0 ? val : (int?)null;
+                    val = 0;
+                    TextBox txtTargetFemale = item.FindControl("txtTargetFemale") as TextBox;
+                    if (txtTargetFemale != null)
+                    {
+                        int.TryParse(txtTargetFemale.Text.Trim(), out val);
+                    }
+                    int? targetFemale = val > 0 ? val : (int?)null;
+
+                    int? countryTarget = null;
+
+                    var hdnLocationId = (HiddenField)item.FindControl("hdnLocationId");
+                    int locationId = 0;
+                    int.TryParse(hdnLocationId.Value, out locationId);
+                    if (locationId > 0)
+                    {
+                        if (targetMale > 0 || targetFemale > 0)
+                        {
+                            countryTarget = (targetMale ?? 0) + (targetFemale ?? 0);
+                            DBContext.Update("InsertOutputIndicatorTargetGender", new object[] { indicatorId, emgLocationId,
+                                            locationId, targetMale, targetFemale, countryTarget, 
+                                            RC.GetCurrentUserId, isRegional, DBNull.Value });
+                        }
+                    }
+                }
+            }
+        }
+
         private void EnableDisableEditControls(bool isEnabled)
         {
             txtInd1Eng.Enabled = isEnabled;
@@ -324,17 +417,18 @@ namespace SRFROWCA.ClusterLead
             txtInd1Fr.BackColor = isEnabled ? Color.White : Color.LightGray;
             ddlUnit.Enabled = isEnabled;
             ddlUnit.BackColor = isEnabled ? Color.White : Color.LightGray;
+            ddlCalculationMethod.Enabled = isEnabled;
+            ddlCalculationMethod.BackColor = isEnabled ? Color.White : Color.LightGray;
         }
-        private bool IsTargetProvided()
+        private bool IsTargetProvided(Repeater repeater)
         {
-            bool isTargetValid = true;
-
+            bool isTargetValid = false;
 
             if (!string.IsNullOrEmpty(txtInd1Eng.Text.Trim()) ||
                 !string.IsNullOrEmpty(txtInd1Fr.Text.Trim()))
             {
                 isTargetValid = false;
-                foreach (RepeaterItem item in rptAdmin1.Items)
+                foreach (RepeaterItem item in repeater.Items)
                 {
                     if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
                     {
@@ -347,11 +441,52 @@ namespace SRFROWCA.ClusterLead
                     }
                 }
             }
-            return !isTargetValid;
+            return isTargetValid;
         }
+
+        private bool IsTargetProvidedGender(Repeater repeater)
+        {
+            bool isTargetValid = false;
+
+            if (!string.IsNullOrEmpty(txtInd1Eng.Text.Trim()) ||
+                !string.IsNullOrEmpty(txtInd1Fr.Text.Trim()))
+            {
+                isTargetValid = false;
+                foreach (RepeaterItem item in repeater.Items)
+                {
+                    if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
+                    {
+                        TextBox txtTargetMale = item.FindControl("txtTargetMale") as TextBox;
+                        TextBox txtTargetFemale = item.FindControl("txtTargetFemale") as TextBox;
+                        if (!string.IsNullOrEmpty(txtTargetMale.Text.Trim()) || !string.IsNullOrEmpty(txtTargetFemale.Text.Trim()))
+                        {
+                            isTargetValid = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            return isTargetValid;
+        }
+
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
         {
             RC.ShowMessage(Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
+        }
+
+        private void UpdateRepeaterTargetColumn(Repeater repeater)
+        {
+            foreach (RepeaterItem item in repeater.Items)
+            {
+                if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
+                {
+                    TextBox txtTotal = item.FindControl("txtTarget") as TextBox;
+                    if (txtTotal != null)
+                    {
+                        txtTotal.Text = "";
+                    }
+                }
+            }
         }
 
         #endregion

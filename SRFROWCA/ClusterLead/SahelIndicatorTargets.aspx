@@ -1,8 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SahelIndicatorTargets.aspx.cs" Inherits="SRFROWCA.ClusterLead.SahelIndicatorTargets" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <script src="../assets/orsjs/jquery.wholenumber.js" type="text/javascript"></script>
-
     <script type="text/javascript">
 
         $(function () {
