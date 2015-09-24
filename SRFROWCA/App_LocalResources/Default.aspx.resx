@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="btnLoginCCResource1.Text" xml:space="preserve">
+    <value>Login as Cluster Coordinator</value>
+  </data>
+  <data name="btnLoginCCResource1.ToolTip" xml:space="preserve">
+    <value>As a cluster coordinator, once you are logged in, you will have access to the following functionalities.&lt;ul&gt;&lt;li&gt;Upload and manage your Cluster Framework&lt;/li&gt;&lt;li&gt;Validate Cluster project achievements reported by partners.&lt;/li&gt;&lt;li&gt;Enter your monthly cluster achievements on Output Indicators (both regional and country- specific)&lt;/li&gt;&lt;li&gt;Access to all data and reports including Who does What Where (3Ws) and Key Figures&lt;/li&gt;&lt;/ul&gt;</value>
+  </data>
+  <data name="btnLoginDEResource1.Text" xml:space="preserve">
+    <value>Login as Data Entry</value>
+  </data>
+  <data name="btnLoginDEResource1.ToolTip" xml:space="preserve">
+    <value>This profile allows you to enter data and track your project(s) achievements on a monthly basis. You will also have access to Projects data, Cluster/Sector output indicators, Who What Where (3Ws) and Key Figures.</value>
+  </data>
+  <data name="btnLoginOCHAResource1.Text" xml:space="preserve">
+    <value>Login as OCHA Staff</value>
+  </data>
+  <data name="btnLoginOCHAResource1.ToolTip" xml:space="preserve">
+    <value>As OCHA Staff, once you are logged in, you will have full access to all the data submitted including Projects data, Output Indicators, Who does What Where (3Ws) and Key Figures</value>
+  </data>
+  <data name="btnLoginRCResource1.Text" xml:space="preserve">
+    <value>Login as Regional Coordinator</value>
+  </data>
+  <data name="btnLoginRCResource1.ToolTip" xml:space="preserve">
+    <value>This profile is designated for Regional Sector working group focal points. It allows you to track the reporting on Output Indicators by different Sahel countries and allows you to enter the data on output indicators after liaising with the country cluster/sector coordinators. You will also have access to Projects data, Output Indicators, Who does What Where (3Ws) and Key Figures.</value>
+  </data>
+  <data name="btnRegisterResource1.Text" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="btnRegisterResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="localMenuCustomReportResource1.Text" xml:space="preserve">
+    <value>Custom Report (Project Activities)</value>
+  </data>
+  <data name="localMenuDashboardResource1.Text" xml:space="preserve">
+    <value>ORS Dashboard</value>
+  </data>
+  <data name="localMenuFramework2015Resource1.Text" xml:space="preserve">
+    <value>Cluster Framework 2015</value>
+  </data>
+  <data name="localMenuKeyFiguresResource1.Text" xml:space="preserve">
+    <value>Key-Figures</value>
+  </data>
+  <data name="localMenuLogRegLableResource1.Text" xml:space="preserve">
+    <value>Login or Register!</value>
+  </data>
+  <data name="localMenuMapsResource1.Text" xml:space="preserve">
+    <value>Maps</value>
+  </data>
+  <data name="localMenuORSLableResource1.Text" xml:space="preserve">
+    <value>Access to ORS Data and Visualisations!</value>
+  </data>
+  <data name="localMenuOutputIndResource1.Text" xml:space="preserve">
+    <value>Cluster Output Indicators Reported</value>
+  </data>
+  <data name="localMenuProjectsResource1.Text" xml:space="preserve">
+    <value>Projects 2015 List</value>
+  </data>
+  <data name="locDefaultIntroResource1.Text" xml:space="preserve">
+    <value>The Sahel Online Reporting System (ORS) is a performance monitoring tool that allows humanitarian partners 
+                                        participating in inter-agency planning processes to directly report on the achievements based on the 
+                                        activities specified during the SRP/HRP. The database has been designed to facilitate information sharing 
+                                        and monitor response of humanitarian interventions.</value>
+  </data>
+  <data name="locDefaultWelcomeResource1.Text" xml:space="preserve">
+    <value>Welcome to ORS!</value>
+  </data>
+  <data name="locHelpLableResource1.Text" xml:space="preserve">
+    <value>Do you need help?</value>
+  </data>
+  <data name="locSendEmailResource1.Text" xml:space="preserve">
+    <value>Send us an email</value>
+  </data>
+  <data name="locSkypeResource1.Text" xml:space="preserve">
+    <value>Skype: Send us message on 'orshelpdesk'</value>
+  </data>
+  <data name="PageResource1.Title" xml:space="preserve">
+    <value>ORS - Home</value>
+  </data>
+</root>
