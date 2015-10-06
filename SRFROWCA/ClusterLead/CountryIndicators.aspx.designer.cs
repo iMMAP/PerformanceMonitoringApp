@@ -67,6 +67,15 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.DropDownList ddlCluster;
         
         /// <summary>
+        /// lblYear control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblYear;
+        
+        /// <summary>
         /// ddlFrameworkYear control.
         /// </summary>
         /// <remarks>
@@ -83,6 +92,15 @@ namespace SRFROWCA.ClusterLead {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox cbIncludeRegional;
+        
+        /// <summary>
+        /// lblIndicatorSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblIndicatorSearch;
         
         /// <summary>
         /// txtIndicatorName control.

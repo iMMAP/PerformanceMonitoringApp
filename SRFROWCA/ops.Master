@@ -5,44 +5,26 @@
 <head id="Head1" runat="server">
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
     <title></title>
-    <!-- basic styles -->
+    
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-    <!--[if IE 7]>
-		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
-		<![endif]-->
-    <!-- page specific plugin styles -->
-    <!-- fonts -->
+    
     <link rel="stylesheet" href="assets/css/ace-fonts.css" />
     <link rel="stylesheet" href="assets/css/ace.min.css" />
     <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
     <link rel="Stylesheet" href="assets/css/jquery-ui.min.css" />
-    <!-- ORS styles -->
+    
     <link rel="stylesheet" href="assets/css/ors.css" />
-    <!-- ace styles -->
-    <!--[if !IE] -->
+    
+    
     <script type="text/javascript">
         window.jQuery || document.write("<script src='<%# BaseURL %>/assets/js/jquery-2.0.3.min.js'>" +
     "<" + "/script>"); </script>
-    <!-- <![endif]-->
-    <!--[if IE]> <script type="text/javascript">
-    window.jQuery || document.write("<script src='<%# BaseURL %>/assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
-    </script> <![endif]-->
     <script type="text/javascript">        if ("ontouchend" in document)
             document.write("<script src='<%# BaseURL %>/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
     </script>
-    <!--[if lte IE 8]>
-		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
-		<![endif]-->
-    <!-- inline styles related to this page -->
-    <!-- ace settings handler -->
     <script src="<%# BaseURL %>/assets/js/ace-extra.min.js"></script>
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-		<script src="<%# BaseURL %>/assets/js/html5shiv.js"></script>
-		<script src="<%# BaseURL %>/assets/js/respond.min.js"></script>
-		<![endif]-->
-    </script>
+    
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
 </head>

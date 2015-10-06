@@ -51,7 +51,7 @@ namespace SRFROWCA.ClusterLead
                 int unitId = RC.GetSelectedIntVal(ddlUnit);
                 if (unitId == 269 || unitId == 28 || unitId == 38 || unitId == 193
                     || unitId == 219 || unitId == 198 || unitId == 311 || unitId == 132
-                    || unitId == 252)
+                    || unitId == 252 || unitId == 238)
                     isTargetValid = IsTargetProvidedGender(rptAdmin1Gender);
                 else
                     isTargetValid = IsTargetProvided(rptAdmin);
@@ -64,23 +64,21 @@ namespace SRFROWCA.ClusterLead
 
             }
 
-            bool isAdded = true;
             int indicatorId = 0;
             if (Request.QueryString["id"] != null)
             {
                 int.TryParse(Request.QueryString["id"].ToString(), out indicatorId);
-                isAdded = false;
             }
 
-            //using (TransactionScope scope = new TransactionScope())
+            using (TransactionScope scope = new TransactionScope())
             {
                 indicatorId = SaveIndicator(indicatorId);
 
                 DBContext.Delete("DeleteClusterOutputIndicatorTargets", new object[] { indicatorId, emgLocationId, DBNull.Value });
                 int unitId = RC.GetSelectedIntVal(ddlUnit);
                 if (unitId == 269 || unitId == 28 || unitId == 38 || unitId == 193
-                            || unitId == 219 || unitId == 198 || unitId == 311 || unitId == 132
-                            || unitId == 252)
+                    || unitId == 219 || unitId == 198 || unitId == 311 || unitId == 132
+                    || unitId == 252 || unitId == 238)
                 {
                     SaveAdmin1GenderTargets(indicatorId, emgLocationId);
                 }
@@ -88,7 +86,7 @@ namespace SRFROWCA.ClusterLead
                 {
                     SaveAdmin1Targets(indicatorId, emgLocationId);
                 }
-                //scope.Complete();
+                scope.Complete();
                 //SendEmail(isAdded);
                 Response.Redirect("~/ClusterLead/CountryIndicators.aspx");
             }
@@ -266,7 +264,7 @@ namespace SRFROWCA.ClusterLead
             bool isGender = false;
             if (unitId == 269 || unitId == 28 || unitId == 38 || unitId == 193
                      || unitId == 219 || unitId == 198 || unitId == 311 || unitId == 287
-                     || unitId == 67 || unitId == 132 || unitId == 252)
+                     || unitId == 67 || unitId == 132 || unitId == 252 || unitId == 238)
             {
                 isGender = true;
             }
@@ -304,11 +302,11 @@ namespace SRFROWCA.ClusterLead
         {
             if (RC.SelectedSiteLanguageId == 1)
             {
-                ShowMessage("Please provide target for at least one location.", RC.NotificationType.Error, true, 5000);
+                ShowMessage("Please, provide target for at least one location.", RC.NotificationType.Error, true, 5000);
             }
             else
             {
-                ShowMessage("Se il vous plaît fournir cible pour au moins un emplacement.", RC.NotificationType.Error, true, 5000);
+                ShowMessage("Se il vous plaît, fournissez la cible pour au moins une localité.", RC.NotificationType.Error, true, 5000);
             }
         }
 

@@ -1,5 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
-    CodeBehind="AddActivityAndIndicators.aspx.cs" Inherits="SRFROWCA.ClusterLead.AddActivityAndIndicators" %>
+﻿Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+    CodeBehind="AddActivityAndIndicators.aspx.cs" Inherits="SRFROWCA.ClusterLead.AddActivityAndIndicators" culture="auto" meta:resourcekey="PageResource1" uiculture="auto" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
@@ -150,7 +150,8 @@
                                                              '../assets/orsimages/minus.png' :
                                                               '../assets/orsimages/plus.png'))
             });
-            $('.showall').click(function () {
+
+            $('.showall').click(function () {
                 if ($(this).text() == 'Expand All') {
                     $('.details1').show();
                     $(this).text('Collapse All');
@@ -269,62 +270,56 @@
         <div class="col-xs-12 col-sm-12">
             <div class="row">
                 <div class="col-xs-12 col-sm-12">
-                    <asp:Button ID="Button1" runat="server" OnClick="btnSave_Click" Text="Save" CssClass="width-10 btn btn-sm btn-primary" />
+                    <asp:Button ID="Button1" runat="server" OnClick="btnSave_Click" Text="Save" CssClass="width-10 btn btn-sm btn-primary" meta:resourcekey="Button1Resource1" />
                     <asp:Button ID="Button2" runat="server" Text="Back" OnClick="btnBackToSRPList_Click"
-                        CssClass="width-10 btn btn-sm btn-primary" CausesValidation="false" />
+                        CssClass="width-10 btn btn-sm btn-primary" CausesValidation="False" meta:resourcekey="Button2Resource1" />
                     <asp:Button ID="Button3" runat="server" Text="Help"
-                        CssClass="width-10 btn btn-sm btn-primary" CausesValidation="false" />
-
+                        CssClass="width-10 btn btn-sm btn-primary" CausesValidation="False" meta:resourcekey="Button3Resource1" />
                 </div>
                 <hr />
 
                 <div class="col-xs-4 col-sm-4">
-
-                    <label>
-                        <input hidden id="hdActId" value="0" />
-                        Country:*</label>
+                    <input hidden id="hdActId" value="0" />
+                    <asp:Label runat="server" ID="lblCountry" Text="Country:*" meta:resourcekey="lblCountryResource1"></asp:Label>
                     <div>
-                        <asp:DropDownList ID="ddlCountry" runat="server" CssClass="width-100" AutoPostBack="true" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged">
+                        <asp:DropDownList ID="ddlCountry" runat="server" CssClass="width-100" AutoPostBack="True" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" meta:resourcekey="ddlCountryResource1">
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator ID="rfvCountry" runat="server" ErrorMessage="Required" Display="Dynamic"
-                            CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCountry"></asp:RequiredFieldValidator>
+                            CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCountry" meta:resourcekey="rfvCountryResource1"></asp:RequiredFieldValidator>
                     </div>
                 </div>
                 <div class="col-xs-4 col-sm-4">
-                    <label>
-                        Cluster:*</label>
+                    <asp:Label runat="server" ID="lblCluster" Text="Cluster:*" meta:resourcekey="lblClusterResource1"></asp:Label>
                     <div>
-                        <asp:DropDownList ID="ddlCluster" runat="server" CssClass="width-100">
+                        <asp:DropDownList ID="ddlCluster" runat="server" CssClass="width-100" meta:resourcekey="ddlClusterResource1">
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator ID="rfvCluster" runat="server" ErrorMessage="Required" Display="Dynamic"
-                            CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCluster"></asp:RequiredFieldValidator>
+                            CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCluster" meta:resourcekey="rfvClusterResource1"></asp:RequiredFieldValidator>
                     </div>
                 </div>
                 <div class="col-xs-4 col-sm-4">
-                    <label>
-                        Objective:*</label>
+                    <asp:Label ID="lblObj" runat="server" Text="Objective:" meta:resourcekey="lblObjResource1"></asp:Label>
                     <div>
-                        <asp:DropDownList ID="ddlObjective" runat="server" CssClass="width-100">
+                        <asp:DropDownList ID="ddlObjective" runat="server" CssClass="width-100" meta:resourcekey="ddlObjectiveResource1">
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Required"
-                            CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlObjective"></asp:RequiredFieldValidator>
+                            CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlObjective" meta:resourcekey="RequiredFieldValidator1Resource1"></asp:RequiredFieldValidator>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-6 col-sm-6">
-                    <label>
-                        Activity (English):</label>
+                    <asp:Label ID="lblActivityEngCap" runat="server" Text="Activity (English)" meta:resourcekey="lblActivityEngCapResource1"></asp:Label>
                     <div>
-                        <asp:TextBox ID="txtActivityEng" runat="server" CssClass="width-100 textboxAuto" MaxLength="1000" TextMode="MultiLine" Height="70px"></asp:TextBox>
-                        <asp:CustomValidator ID="cvActivityEng" runat="server" ClientValidationFunction="validateActivity" ValidateEmptyText="true"
-                            CssClass="error2"></asp:CustomValidator>
+                        <asp:TextBox ID="txtActivityEng" runat="server" CssClass="width-100 textboxAuto" MaxLength="1000" TextMode="MultiLine" Height="70px" meta:resourcekey="txtActivityEngResource1"></asp:TextBox>
+                        <asp:CustomValidator ID="cvActivityEng" runat="server" ClientValidationFunction="validateActivity" ValidateEmptyText="True"
+                            CssClass="error2" meta:resourcekey="cvActivityEngResource1"></asp:CustomValidator>
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-6">
-                    <label>Activity (French):</label>
+                    <asp:Label ID="lblActivitFrCap" runat="server" Text="Activity (French):" meta:resourcekey="lblActivitFrCapResource1"></asp:Label>
                     <div>
-                        <asp:TextBox ID="txtActivityFr" runat="server" CssClass="width-100" TextMode="MultiLine" MaxLength="1000" Height="70px"></asp:TextBox>
+                        <asp:TextBox ID="txtActivityFr" runat="server" CssClass="width-100" TextMode="MultiLine" MaxLength="1000" Height="70px" meta:resourcekey="txtActivityFrResource1"></asp:TextBox>
 
                     </div>
                 </div>
@@ -332,7 +327,7 @@
         </div>
 
 
-        <asp:Panel ID="pnlAdditionalIndicaotrs" runat="server">
+        <asp:Panel ID="pnlAdditionalIndicaotrs" runat="server" meta:resourcekey="pnlAdditionalIndicaotrsResource1">
         </asp:Panel>
 
         <div class="pull-right">
@@ -345,9 +340,9 @@
                 <i class="icon-plus smaller-75"></i>
             </button>
         </div>
-        <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" CssClass="width-10 btn btn-sm btn-primary" />
+        <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" CssClass="width-10 btn btn-sm btn-primary" meta:resourcekey="btnSaveResource1" />
         <asp:Button ID="btnBackToSRPList" runat="server" Text="Back" OnClick="btnBackToSRPList_Click"
-            CssClass="width-10 btn btn-sm btn-primary" CausesValidation="false" />
+            CssClass="width-10 btn btn-sm btn-primary" CausesValidation="False" meta:resourcekey="btnBackToSRPListResource1" />
 
     </div>
     <script>

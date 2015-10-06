@@ -141,7 +141,7 @@
                                                     <li>
                                                         <span class="center"></span>
                                                     </li>
-                                                    <li>Don't have ORS account?
+                                                    <li><asp:Localize ID="localNoAccount" runat="server" Text="Don't have ORS account?" meta:resourcekey="localDonthaveORSResource"></asp:Localize>
                                                             <asp:Button ID="btnRegister" runat="server" Text="Register"
                                                                 PostBackUrl="~/Account/Register.aspx" CssClass="btn btn-danger btn-sm" meta:resourcekey="btnRegisterResource1" />
                                                     </li>

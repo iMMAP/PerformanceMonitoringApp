@@ -259,7 +259,6 @@
     <Content Include="ClusterLead\UploadSRP.aspx" />
     <Content Include="ClusterLead\ValidateIndicators.aspx" />
     <Content Include="ClusterLead\ValidateReportList.aspx" />
-    <Content Include="ClusterLead\WebForm1.aspx" />
     <Content Include="Configurations\ChangeEndSettings.xml" />
     <Content Include="Controls\AddContryReportControl.ascx" />
     <Content Include="Controls\ConfirmBox.ascx" />
@@ -307,8 +306,12 @@
     <Content Include="Landing\ClusterCord.aspx" />
     <Content Include="Log\ErrorLog.txt" />
     <Content Include="OperationalPresence.aspx" />
+    <Content Include="OPS\GridTestOPS.aspx" />
+    <Content Include="OPS\OPSDataEntry2.aspx" />
+    <Content Include="OPS\OPSDataEntryNested.aspx" />
     <Content Include="OPS\OPSDataEntryOld.aspx" />
     <Content Include="OPS\OPSDataEntry.aspx" />
+    <Content Include="OPS\OPSDataEntryRpt.aspx" />
     <Content Include="OPS\SyncOPSProjects.aspx" />
     <Content Include="OPS\UploadOPSProjectDetails.aspx" />
     <Content Include="Pages\AddActivities.aspx" />
@@ -805,13 +808,6 @@
     <Compile Include="ClusterLead\ValidateReportList.aspx.designer.cs">
       <DependentUpon>ValidateReportList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ClusterLead\WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ClusterLead\WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Common\DataTableToCSV.cs" />
     <Compile Include="Common\EmailNotifications.cs" />
     <Compile Include="Common\FrameWorkEnvoirnment.cs" />
@@ -1141,6 +1137,27 @@
     <Compile Include="ops.Master.designer.cs">
       <DependentUpon>ops.Master</DependentUpon>
     </Compile>
+    <Compile Include="OPS\GridTestOPS.aspx.cs">
+      <DependentUpon>GridTestOPS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OPS\GridTestOPS.aspx.designer.cs">
+      <DependentUpon>GridTestOPS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OPS\OPSDataEntry2.aspx.cs">
+      <DependentUpon>OPSDataEntry2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OPS\OPSDataEntry2.aspx.designer.cs">
+      <DependentUpon>OPSDataEntry2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OPS\OPSDataEntryNested.aspx.cs">
+      <DependentUpon>OPSDataEntryNested.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OPS\OPSDataEntryNested.aspx.designer.cs">
+      <DependentUpon>OPSDataEntryNested.aspx</DependentUpon>
+    </Compile>
     <Compile Include="OPS\OPSDataEntryOld.aspx.cs">
       <DependentUpon>OPSDataEntryOld.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1157,6 +1174,13 @@
     </Compile>
     <Compile Include="OPS\OPSDataEntry.aspx.designer.cs">
       <DependentUpon>OPSDataEntry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OPS\OPSDataEntryRpt.aspx.cs">
+      <DependentUpon>OPSDataEntryRpt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OPS\OPSDataEntryRpt.aspx.designer.cs">
+      <DependentUpon>OPSDataEntryRpt.aspx</DependentUpon>
     </Compile>
     <Compile Include="OPS\OPSProject.cs" />
     <Compile Include="OPS\SyncOPSProjects.aspx.cs">
@@ -1485,11 +1509,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ClusterLead\App_LocalResources\ProjectsListing.aspx - OLD.resx">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="ClusterLead\App_LocalResources\ProjectsListing.aspx.resx" />
   </ItemGroup>
   <ItemGroup>
@@ -1500,6 +1519,42 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_LocalResources\Default.aspx.fr-FR.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Landing\App_LocalResources\ClusterCord.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Landing\App_LocalResources\ClusterCord.aspx.fr-FR.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ClusterLead\App_LocalResources\CountryIndicators.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ClusterLead\App_LocalResources\CountryIndicators.aspx.fr-FR.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ClusterLead\App_LocalResources\EditOutputIndicator.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ClusterLead\App_LocalResources\EditOutputIndicator.aspx.fr-FR.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ClusterLead\App_LocalResources\IndicatorListing.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ClusterLead\App_LocalResources\IndicatorListing.aspx.fr-FR.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ClusterLead\App_LocalResources\AddActivityAndIndicators.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ClusterLead\App_LocalResources\AddActivityAndIndicators.aspx.fr-FR.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Controls\App_LocalResources\IndicatorsWithAdmin1TargetsControl.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Controls\App_LocalResources\IndicatorsWithAdmin1TargetsControl.ascx.fr-FR.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

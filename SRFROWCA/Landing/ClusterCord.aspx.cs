@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace SRFROWCA.Landing
 {
-    public partial class ClusterCord : System.Web.UI.Page
+    public partial class ClusterCord : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

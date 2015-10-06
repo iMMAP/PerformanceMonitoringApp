@@ -87,7 +87,7 @@
             if (selVal == 269 || selVal == 28 || selVal == 38
                 || selVal == 193 || selVal == 219 || selVal == 198
                  || selVal == 311 || selVal == 287 || selVal == 67 || selVal == 132
-                || selVal == 252) {
+                || selVal == 252 || selVal == 238) {
                 $("#<%=divAdmin1Targets.ClientID%>").addClass('hidden');
                 $("#<%=divAdmin1GenderTargets.ClientID%>").removeClass('hidden');
             }
@@ -101,7 +101,7 @@
         if (selVal2 == 269 || selVal2 == 28 || selVal2 == 38
                 || selVal2 == 193 || selVal2 == 219 || selVal2 == 198
                  || selVal2 == 311 || selVal2 == 287 || selVal2 == 67 || selVal2 == 132
-                || selVal2 == 252) {
+                || selVal2 == 252 || selVal == 238) {
             $("#<%=divAdmin1Targets.ClientID%>").addClass('hidden');
             $("#<%=divAdmin1GenderTargets.ClientID%>").removeClass('hidden');
         }
@@ -129,19 +129,18 @@
 
         <div class="widget-main no-padding-bottom no-padding-top">
             <div style="float: left; width: 32%;">
-                <label>
-                    <asp:HiddenField ID="hfIndicatorId" runat="server" />
-                    (English):</label>
+
+                <asp:HiddenField ID="hfIndicatorId" runat="server" />
+                <asp:Label ID="lblIndEngCap" runat="server" Text="(English):" meta:resourcekey="lblIndEngCapResource1"></asp:Label>
                 <div>
                     <asp:TextBox ID="txtInd1Eng" runat="server" CssClass="width-95" TextMode="MultiLine" Height="60px" MaxLength="1000"
                         meta:resourcekey="txtInd1EngResource1"></asp:TextBox>
-                    <asp:CustomValidator ID="cvIndicator" runat="server" ClientValidationFunction="validateIndicator" ValidateEmptyText="true"
-                        CssClass="error2"></asp:CustomValidator>
+                    <asp:CustomValidator ID="cvIndicator" runat="server" ClientValidationFunction="validateIndicator" ValidateEmptyText="True"
+                        CssClass="error2" meta:resourcekey="cvIndicatorResource1"></asp:CustomValidator>
                 </div>
             </div>
             <div style="float: left; width: 32%;">
-                <label>
-                    (French):</label>
+                <asp:Label ID="lblIndFrCap" runat="server" Text="(French):" meta:resourcekey="lblIndFrCapResource1"></asp:Label>
                 <div>
                     <asp:TextBox ID="txtInd1Fr" runat="server" CssClass="width-95" TextMode="MultiLine" Height="60px" MaxLength="1000"
                         meta:resourcekey="txtInd1FrResource1"></asp:TextBox>
@@ -149,12 +148,11 @@
                 </div>
             </div>
             <div style="float: left; width: 19%;">
-                <label>
-                    Unit:*</label>
+                <asp:Label ID="lblUnitCap" runat="server" Text="Unit:*"></asp:Label>
                 <div>
                     <asp:DropDownList runat="server" ID="ddlUnit" CssClass="width-90 pullUnits" meta:resourcekey="ddlUnitResource1"></asp:DropDownList>
                     <asp:RequiredFieldValidator ID="rfvUnit" runat="server" ErrorMessage="Required" Display="Dynamic"
-                        CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlUnit"></asp:RequiredFieldValidator>
+                        CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlUnit" meta:resourcekey="rfvUnitResource1"></asp:RequiredFieldValidator>
                 </div>
             </div>
             <div style="float: left; width: 14%;">
@@ -162,15 +160,15 @@
                     <span class='tooltip2' title='Each Indicator must have a calcualtion method. (1)Sum: Sum of all reported values.(2)Agerage: Average of all reported values.(3)Max: Max data reported in any month.</br>Latest: Latest reported data by month.'>Calculation:* (?)</span>
                 </label>
                 <div>
-                    <asp:DropDownList runat="server" ID="ddlCalculationMethod" CssClass="width-100 pullCalc">
-                        <asp:ListItem Text="Select" Value="0"></asp:ListItem>
-                        <asp:ListItem Text="Sum" Value="1"></asp:ListItem>
-                        <asp:ListItem Text="Average" Value="2"></asp:ListItem>
-                        <asp:ListItem Text="Latest" Value="3"></asp:ListItem>
-                        <asp:ListItem Text="Max" Value="5"></asp:ListItem>
+                    <asp:DropDownList runat="server" ID="ddlCalculationMethod" CssClass="width-100 pullCalc" meta:resourcekey="ddlCalculationMethodResource1">
+                        <asp:ListItem Text="Select" Value="0" meta:resourcekey="ListItemResource1"></asp:ListItem>
+                        <asp:ListItem Text="Sum" Value="1" meta:resourcekey="ListItemResource2"></asp:ListItem>
+                        <asp:ListItem Text="Average" Value="2" meta:resourcekey="ListItemResource3"></asp:ListItem>
+                        <asp:ListItem Text="Latest" Value="3" meta:resourcekey="ListItemResource4"></asp:ListItem>
+                        <asp:ListItem Text="Max" Value="5" meta:resourcekey="ListItemResource5"></asp:ListItem>
                     </asp:DropDownList>
                     <asp:RequiredFieldValidator ID="frvCalcMethod" runat="server" ErrorMessage="Required" Display="Dynamic"
-                        CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCalculationMethod"></asp:RequiredFieldValidator>
+                        CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCalculationMethod" meta:resourcekey="frvCalcMethodResource1"></asp:RequiredFieldValidator>
                 </div>
 
             </div>
@@ -184,26 +182,26 @@
         <div class="widget-body">
             <div id="divAdmin2Targets" runat="server">
                 <div class="widget-main no-padding-bottom no-padding-top" id="divAdmin1Targets" runat="server">
-                    <p style="color:red">Providing targets is mandatory.</p>
-                    <a id="pAdmin1Target" runat="server" style="width: 20%">Click To Show Locations</a>
+                    <p style="color: red">Providing targets is mandatory.</p>
+                    <a id="pAdmin1Target" runat="server" style="width: 20%"><asp:Localize ID="localClickToShow1" runat="server" Text="Click To Show Locations" meta:resourcekey="localClickToShow1Resource1"></asp:Localize></a>
                     <div class="content">
                         <asp:Repeater ID="rptCountry" runat="server" OnItemDataBound="rptCountry_ItemDataBound">
                             <HeaderTemplate>
                                 <table style="width: 500px;" class="imagetable tblCountry">
                                     <tr style="background-color: gray">
-                                        <td style="width: 360px;">Location</td>
-                                        <td style="width: 100px;">Target</td>
+                                        <td style="width: 360px;"><asp:Label ID="lblRptLoc" runat="server" Text="Location" meta:resourcekey="lblRptLocResource1"></asp:Label></td>
+                                        <td style="width: 100px;"><asp:Label runat="server" Text="Target" meta:resourcekey="LabelResource1"></asp:Label></td>
                                     </tr>
                             </HeaderTemplate>
                             <ItemTemplate>
                                 <tr style="background-color: #C8C8C8">
                                     <td style="width: 360px;">
                                         <div style="float: left; width: 100%; text-align: left;"><%#Eval("LocationName")%></div>
-                                        <asp:HiddenField ID="hfCountryId" runat="server" Value='<%#Eval("LocationId")%>' />
+                                        <asp:HiddenField ID="hfCountryId" runat="server" Value='<%# Eval("LocationId") %>' />
                                     </td>
                                     <td class="tdTable">
-                                        <asp:TextBox ID="txtTarget" runat="server" Text='<%#Eval("CountryTarget") %>' ToolTip="Country Total"
-                                            CssClass="numeric1 trgtCountry txt" Enabled="false"></asp:TextBox>
+                                        <asp:TextBox ID="txtTarget" runat="server" Text='<%# Eval("CountryTarget") %>' ToolTip="Country Total"
+                                            CssClass="numeric1 trgtCountry txt" Enabled="False" meta:resourcekey="txtTargetResource1"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
@@ -218,11 +216,11 @@
                                                         <td style="width: 355px;">
 
                                                             <div style="float: left; width: 100%; text-align: left;"><%#Eval("LocationName")%></div>
-                                                            <asp:HiddenField ID="hfAdmin1Id" runat="server" Value='<%#Eval("LocationId")%>' />
+                                                            <asp:HiddenField ID="hfAdmin1Id" runat="server" Value='<%# Eval("LocationId") %>' />
                                                         </td>
                                                         <td class="tdTable">
-                                                            <asp:TextBox ID="txtTarget" runat="server" Text='<%#Eval("Admin1Target") %>' ToolTip="Admin1 Total"
-                                                                CssClass="numeric1 trgtAdmin1" Style="text-align: right;" Width="100px" Enabled="false"></asp:TextBox>
+                                                            <asp:TextBox ID="txtTarget" runat="server" Text='<%# Eval("Admin1Target") %>' ToolTip="Admin1 Total"
+                                                                CssClass="numeric1 trgtAdmin1" Style="text-align: right;" Width="100px" Enabled="False" meta:resourcekey="txtTargetResource2"></asp:TextBox>
                                                         </td>
 
                                                     </tr>
@@ -235,11 +233,11 @@
                                                                         <tr>
                                                                             <td style="width: 400px;">
                                                                                 <div style="float: left; width: 100%; text-align: left;"><%#Eval("LocationName")%></div>
-                                                                                <asp:HiddenField ID="hfAdmin2Id" runat="server" Value='<%#Eval("LocationId")%>' />
+                                                                                <asp:HiddenField ID="hfAdmin2Id" runat="server" Value='<%# Eval("LocationId") %>' />
                                                                             </td>
                                                                             <td class="tdTable">
                                                                                 <asp:TextBox ID="txtTarget" Style="text-align: right;" runat="server"
-                                                                                    Text='<%#Eval("ClusterTarget") %>' CssClass="numeric1 trgtAdmin2" Width="100px"></asp:TextBox>
+                                                                                    Text='<%# Eval("ClusterTarget") %>' CssClass="numeric1 trgtAdmin2" Width="100px" meta:resourcekey="txtTargetResource3"></asp:TextBox>
                                                                             </td>
                                                                         </tr>
                                                                     </table>
@@ -262,37 +260,37 @@
                     </div>
                 </div>
                 <div class="widget-main no-padding-bottom no-padding-top hidden" id="divAdmin1GenderTargets" runat="server">
-                    <p style="color:red">Providing targets is mandatory.</p>
-                    <a id="pAdmin1GenderTarget" runat="server" style="width: 20%">Click To Show Locations</a>
+                    <p style="color: red">Providing targets is mandatory.</p>
+                    <a id="pAdmin1GenderTarget" runat="server" style="width: 20%"><asp:Localize ID="localClickShow2" runat="server" Text="Click To Show Locations" meta:resourcekey="localClickShow2Resource1"></asp:Localize></a>
                     <div class="content">
                         <asp:Repeater ID="rptCountryGender" runat="server" OnItemDataBound="rptCountryGender_ItemDataBound">
                             <HeaderTemplate>
                                 <table style="width: 600px;" class="imagetable tblCountryGender">
                                     <tr style="background-color: gray">
-                                        <td style="width: 260px;">Location</td>
-                                        <td style="width: 100px;">Male</td>
-                                        <td style="width: 100px;">Female</td>
-                                        <td style="width: 100px;">Total</td>
+                                        <td style="width: 260px;"><asp:Label ID="lblRptGenLoc" runat="server" Text="Location" meta:resourcekey="lblRptGenLocResource1"></asp:Label></td>
+                                        <td style="width: 100px;"><asp:Label ID="lblRptGenMale" runat="server" Text="Male" meta:resourcekey="lblRptGenMaleResource1"></asp:Label></td>
+                                        <td style="width: 100px;"><asp:Label ID="lblRptGenFemale" runat="server" Text="Female" meta:resourcekey="lblRptGenFemaleResource1"></asp:Label></td>
+                                        <td style="width: 100px;"><asp:Label ID="lblRptGenTotal" runat="server" Text="Total" meta:resourcekey="lblRptGenTotalResource1"></asp:Label></td>
                                     </tr>
                             </HeaderTemplate>
                             <ItemTemplate>
                                 <tr style="background-color: #C8C8C8">
                                     <td style="width: 260px;">
                                         <div style="float: left; width: 100%; text-align: left;"><%#Eval("LocationName")%></div>
-                                        <asp:HiddenField ID="hfCountryId" runat="server" Value='<%#Eval("LocationId")%>' />
+                                        <asp:HiddenField ID="hfCountryId" runat="server" Value='<%# Eval("LocationId") %>' />
                                     </td>
                                     <td class="tdTable">
-                                        <asp:TextBox ID="txtTargetMale" runat="server" Text='<%#Eval("CountryTargetMale") %>' ToolTip="Country Male Total"
-                                            CssClass="numeric1 trgtCountryGenderMale txt" Enabled="false"></asp:TextBox>
+                                        <asp:TextBox ID="txtTargetMale" runat="server" Text='<%# Eval("CountryTargetMale") %>' ToolTip="Country Male Total"
+                                            CssClass="numeric1 trgtCountryGenderMale txt" Enabled="False" meta:resourcekey="txtTargetMaleResource1"></asp:TextBox>
                                     </td>
                                     <td class="tdTable">
-                                        <asp:TextBox ID="txtTargetFemale" runat="server" Text='<%#Eval("CountryTargetFeMale") %>' ToolTip="Country Female Total"
-                                            CssClass="numeric1 trgtCountryGenderFemale txt" Enabled="false"></asp:TextBox>
+                                        <asp:TextBox ID="txtTargetFemale" runat="server" Text='<%# Eval("CountryTargetFeMale") %>' ToolTip="Country Female Total"
+                                            CssClass="numeric1 trgtCountryGenderFemale txt" Enabled="False" meta:resourcekey="txtTargetFemaleResource1"></asp:TextBox>
                                     </td>
                                     <td class="tdTable">
-                                        <asp:TextBox ID="txtTarget" runat="server" Text='<%#Eval("CountryTarget") %>'
+                                        <asp:TextBox ID="txtTarget" runat="server" Text='<%# Eval("CountryTarget") %>'
                                             CssClass="numeric1 trgtCountryGenderTotal txt" ToolTip="Country Total"
-                                            Enabled="false"></asp:TextBox>
+                                            Enabled="False" meta:resourcekey="txtTargetResource4"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
@@ -307,20 +305,20 @@
                                                         <td style="width: 240px;">
 
                                                             <div style="float: left; width: 100%; text-align: left;"><%#Eval("LocationName")%></div>
-                                                            <asp:HiddenField ID="hfAdmin1Id" runat="server" Value='<%#Eval("LocationId")%>' />
+                                                            <asp:HiddenField ID="hfAdmin1Id" runat="server" Value='<%# Eval("LocationId") %>' />
                                                         </td>
                                                         <td class="tdTable">
-                                                            <asp:TextBox ID="txtTargetMale" runat="server" Text='<%#Eval("Admin1TargetMale") %>' ToolTip="Admin1 Male Total"
-                                                                CssClass="numeric1 trgtAdmin1GenderMale" Style="text-align: right;" Width="100px" Enabled="false"></asp:TextBox>
+                                                            <asp:TextBox ID="txtTargetMale" runat="server" Text='<%# Eval("Admin1TargetMale") %>' ToolTip="Admin1 Male Total"
+                                                                CssClass="numeric1 trgtAdmin1GenderMale" Style="text-align: right;" Width="100px" Enabled="False" meta:resourcekey="txtTargetMaleResource2"></asp:TextBox>
                                                         </td>
                                                         <td class="tdTable">
-                                                            <asp:TextBox ID="txtTargetFeMale" runat="server" Text='<%#Eval("Admin1TargetFeMale") %>' ToolTip="Admin1 Female Total"
-                                                                CssClass="numeric1 trgtAdmin1GenderFemale" Style="text-align: right;" Width="100px" Enabled="false"></asp:TextBox>
+                                                            <asp:TextBox ID="txtTargetFeMale" runat="server" Text='<%# Eval("Admin1TargetFeMale") %>' ToolTip="Admin1 Female Total"
+                                                                CssClass="numeric1 trgtAdmin1GenderFemale" Style="text-align: right;" Width="100px" Enabled="False" meta:resourcekey="txtTargetFeMaleResource2"></asp:TextBox>
                                                         </td>
                                                         <td class="tdTable">
-                                                            <asp:TextBox ID="txtTarget" runat="server" Text='<%#Eval("Admin1Target") %>' ToolTip="Admin1 Total"
+                                                            <asp:TextBox ID="txtTarget" runat="server" Text='<%# Eval("Admin1Target") %>' ToolTip="Admin1 Total"
                                                                 CssClass="numeric1 trgtAdmin1GenderTotal" Style="text-align: right;"
-                                                                Width="100px" Enabled="false"></asp:TextBox>
+                                                                Width="100px" Enabled="False" meta:resourcekey="txtTargetResource5"></asp:TextBox>
                                                         </td>
 
                                                     </tr>
@@ -333,21 +331,21 @@
                                                                         <tr>
                                                                             <td style="width: 400px;">
                                                                                 <div style="float: left; width: 100%; text-align: left;"><%#Eval("LocationName")%></div>
-                                                                                <asp:HiddenField ID="hfAdmin2Id" runat="server" Value='<%#Eval("LocationId")%>' />
+                                                                                <asp:HiddenField ID="hfAdmin2Id" runat="server" Value='<%# Eval("LocationId") %>' />
                                                                             </td>
                                                                             <td class="tdTable">
                                                                                 <asp:TextBox ID="txtTargetMale" Style="text-align: right;" runat="server"
-                                                                                    Text='<%#Eval("TargetMale") %>' CssClass="numeric1 trgtAdmin2GenderMale" Width="100px"></asp:TextBox>
+                                                                                    Text='<%# Eval("TargetMale") %>' CssClass="numeric1 trgtAdmin2GenderMale" Width="100px" meta:resourcekey="txtTargetMaleResource3"></asp:TextBox>
                                                                             </td>
                                                                             <td class="tdTable">
                                                                                 <asp:TextBox ID="txtTargetFemale" Style="text-align: right;" runat="server"
-                                                                                    Text='<%#Eval("TargetFemale") %>' CssClass="numeric1 trgtAdmin2GenderFemale" Width="100px"></asp:TextBox>
+                                                                                    Text='<%# Eval("TargetFemale") %>' CssClass="numeric1 trgtAdmin2GenderFemale" Width="100px" meta:resourcekey="txtTargetFemaleResource3"></asp:TextBox>
                                                                             </td>
                                                                             <td class="tdTable">
                                                                                 <asp:TextBox ID="txtTarget" Style="text-align: right;" runat="server"
-                                                                                    Text='<%#Eval("ClusterTarget") %>' ToolTip="Admin2 Total"
+                                                                                    Text='<%# Eval("ClusterTarget") %>' ToolTip="Admin2 Total"
                                                                                     CssClass="numeric1 trgtAdmin2GenderTotal" Width="100px"
-                                                                                    Enabled="false"></asp:TextBox>
+                                                                                    Enabled="False" meta:resourcekey="txtTargetResource6"></asp:TextBox>
                                                                             </td>
                                                                         </tr>
                                                                     </table>

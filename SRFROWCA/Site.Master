@@ -104,6 +104,8 @@
                     </div>
                     <!-- #sidebar-shortcuts -->
                     <ul class="nav nav-list">
+                        <li><a href="<%=BaseURL %>/Default.aspx"><i class="icon-home"></i><span class="menu-text">
+                            <asp:Localize ID="localHome" runat="server" Text="Home" meta:resourcekey="localHomeRsource"></asp:Localize></span> </a></li>
 
                         <li id="liDashboards" runat="server"><a href="<%=BaseURL %>/Dashboard.aspx"><i class="icon-dashboard"></i><span class="menu-text">
                             <asp:Localize ID="localDashboard" runat="server" Text="Dashboard" meta:resourcekey="localMasterDashboardResource1"></asp:Localize>
@@ -162,7 +164,7 @@
                                     <asp:Localize ID="localActAndIndicators" runat="server" Text="Activities And Indicators" meta:resourcekey="localActAndIndicators"></asp:Localize>
                                 </span></a></li>
                                 <li id="liClusterFrameworkImport" runat="server"><a href="<%=BaseURL %>/ClusterLead/UploadSRP.aspx"><span class="menu-text">
-                                    <asp:Localize ID="localCLFrameworkImportExport" runat="server" Text="Import/Export Framework" meta:resourcekey="localCLFrameworkImportExport"></asp:Localize>
+                                    <asp:Localize ID="localCLFrameworkImportExport" runat="server" Text="Export Framework" meta:resourcekey="localCLFrameworkImportExport"></asp:Localize>
                                 </span></a></li>
                             </ul>
                         </li>

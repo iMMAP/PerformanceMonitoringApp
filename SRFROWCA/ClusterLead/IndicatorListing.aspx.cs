@@ -23,6 +23,7 @@ namespace SRFROWCA.ClusterLead
                 LoadObjectivesFilter();
                 PopulateActivities();
                 SetDropDownOnRole(true);
+                SetFiltersFromSession();
                 LoadIndicators();
             }
 
@@ -97,17 +98,24 @@ namespace SRFROWCA.ClusterLead
             int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                Label lblTarget = e.Row.FindControl("lblIndTarget") as Label;
-                if (lblTarget != null)
+                if (yearId == 11)
                 {
-                    if (string.IsNullOrEmpty(lblTarget.Text))
+                    divMissingTarget.Visible = false;
+                }
+                else
+                {
+                    Label lblTarget = e.Row.FindControl("lblIndTarget") as Label;
+                    if (lblTarget != null)
                     {
-                        e.Row.BackColor = ColorTranslator.FromHtml("#CD5C5C");
-                        divMissingTarget.Visible = true;
-                    }
-                    else
-                    {
-                        UI.SetThousandSeparator(e.Row, "lblIndTarget");
+                        if (string.IsNullOrEmpty(lblTarget.Text))
+                        {
+                            e.Row.BackColor = ColorTranslator.FromHtml("#CD5C5C");
+                            divMissingTarget.Visible = true;
+                        }
+                        else
+                        {
+                            UI.SetThousandSeparator(e.Row, "lblIndTarget");
+                        }
                     }
                 }
 
@@ -235,8 +243,8 @@ namespace SRFROWCA.ClusterLead
         }
         protected void btnSearch2_Click(object sender, EventArgs e)
         {
-            LoadIndicators();
             PopulateActivities();
+            LoadIndicators();
         }
 
         protected void btnReset_Click(object sender, EventArgs e)
@@ -395,13 +403,21 @@ namespace SRFROWCA.ClusterLead
 
         private void PopulateActivities()
         {
-            int? emergencyClusterId = ddlCluster.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCluster.SelectedValue);
-            int? emergencyObjectiveId = ddlObjective.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlObjective.SelectedValue);
-            int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
+            int? emgLocId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
+            int? emgClusterId = ddlCluster.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCluster.SelectedValue);
+            int? emgObjId = ddlObjective.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlObjective.SelectedValue);
 
-            ddlActivity.DataSource = DBContext.GetData("GetActivitiesNew", new object[] { emergencyLocationId, emergencyClusterId, emergencyObjectiveId, RC.SelectedSiteLanguageId });
-            ddlActivity.DataTextField = "Activity";
-            ddlActivity.DataValueField = "ActivityId";
+            DataTable dtAct = new DataTable();
+            if (emgLocId > 0 && emgClusterId > 0)
+            {
+                int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
+                dtAct = DBContext.GetData("GetActivitiesNew", new object[] { emgLocId, emgClusterId, emgObjId, 
+                                                                              yearId, RC.SelectedSiteLanguageId });
+                ddlActivity.DataTextField = "Activity";
+                ddlActivity.DataValueField = "ActivityId";
+            }
+
+            ddlActivity.DataSource = dtAct;
             ddlActivity.DataBind();
 
             ListItem item = new ListItem("Select Activity", "0");
@@ -481,12 +497,6 @@ namespace SRFROWCA.ClusterLead
 
         }
 
-        protected void btnAddIndicator_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("AddIndicators.aspx");
-
-        }
-
         protected void btnMigrate2016_Click(object sender, EventArgs e)
         {
             Response.Redirect("IndicatorListingMigrate.aspx");
@@ -523,8 +533,56 @@ namespace SRFROWCA.ClusterLead
             catch { }
         }
 
+        private void SaveFiltersInSession()
+        {
+            int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
+            int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
+
+            if (emgLocationId > 0)
+                Session["ClusterFrameworkSelectedCountry"] = emgLocationId;
+            else
+                Session["ClusterFrameworkSelectedCountry"] = null;
+
+            if (emgClusterId > 0)
+                Session["ClusterFrameworkSelectedCluster"] = emgClusterId;
+            else
+                Session["ClusterFrameworkSelectedCluster"] = null;
+        }
+
+        private void SetFiltersFromSession()
+        {
+            if (Session["ClusterFrameworkSelectedCountry"] != null)
+            {
+                int countryId = 0;
+                int.TryParse(Session["ClusterFrameworkSelectedCountry"].ToString(), out countryId);
+                if (countryId > 0)
+                {
+                    try
+                    {
+                        ddlCountry.SelectedValue = countryId.ToString();
+                    }
+                    catch { }
+                }
+            }
+
+            if (Session["ClusterFrameworkSelectedCluster"] != null)
+            {
+                int clusterId = 0;
+                int.TryParse(Session["ClusterFrameworkSelectedCluster"].ToString(), out clusterId);
+                if (clusterId > 0)
+                {
+                    try
+                    {
+                        ddlCluster.SelectedValue = clusterId.ToString();
+                    }
+                    catch { }
+                }
+            }
+        }
+
         protected void btnAddActivityAndIndicators_Click(object sender, EventArgs e)
         {
+            //SaveFiltersInSession();
             Response.Redirect("AddActivityAndIndicators.aspx");
         }
 
@@ -542,7 +600,7 @@ namespace SRFROWCA.ClusterLead
                 ToggleActivityStatus();
 
             ToggleControlsToAddIndicator();
-            
+
             LoadIndicators();
             //SendEmail(IndicatorActiveStatus > 0);
         }
@@ -561,7 +619,7 @@ namespace SRFROWCA.ClusterLead
             int activityId = 0;
             int.TryParse(gvActivity.DataKeys[row.RowIndex].Values["ActivityId"].ToString(), out activityId);
             ToggleActivityId = activityId;
-            
+
             if (ToggleActivityId > 0)
             {
                 CheckBox cbIsActive = row.FindControl("cbIsActivityActive") as CheckBox;
@@ -586,7 +644,7 @@ namespace SRFROWCA.ClusterLead
                     }
                     ModalPopupExtender1.Show();
                 }
-            }            
+            }
         }
 
         protected void cbActive_Changed(object sender, EventArgs e)
@@ -620,7 +678,7 @@ namespace SRFROWCA.ClusterLead
                         lblProjectsCaption.Text = "";
                         lblProjectUsingIndicator.Text = "";
                     }
-                    
+
                     ModalPopupExtender1.Show();
                 }
             }
@@ -662,7 +720,7 @@ namespace SRFROWCA.ClusterLead
 
         private List<string> GetProjectsUsingIndicator()
         {
-            DataTable dt = DBContext.GetData("GetAllProjectsUsingIndicator", new object[] { ToggleIndicatorId, (int)RC.YearsInDB.Year2015});
+            DataTable dt = DBContext.GetData("GetAllProjectsUsingIndicator", new object[] { ToggleIndicatorId, (int)RC.YearsInDB.Year2015 });
             StringBuilder sbProjCodes = new StringBuilder();
             StringBuilder sbProjIds = new StringBuilder();
             foreach (DataRow dr in dt.Rows)
@@ -680,7 +738,7 @@ namespace SRFROWCA.ClusterLead
 
         private List<string> GetProjectsOnActivity(int toggleActivityId)
         {
-            DataTable dt = DBContext.GetData("GetAllProjectsUsingIndicatorActivity", new object[] { toggleActivityId, (int)RC.YearsInDB.Year2015});
+            DataTable dt = DBContext.GetData("GetAllProjectsUsingIndicatorActivity", new object[] { toggleActivityId, (int)RC.YearsInDB.Year2015 });
             StringBuilder sbProjCodes = new StringBuilder();
             StringBuilder sbProjIds = new StringBuilder();
             foreach (DataRow dr in dt.Rows)
@@ -696,8 +754,22 @@ namespace SRFROWCA.ClusterLead
             return projects;
         }
 
+        protected void ddlSelectedIndexChnaged(object sender, EventArgs e)
+        {
+            PopulateActivities();
+            LoadIndicators();
+            SaveFiltersInSession();
+        }
+
+        protected void ddlActivitySelectedIndexChnaged(object sender, EventArgs e)
+        {
+            LoadIndicators();
+            //PopulateActivities();
+        }
+
         protected void ddlYear_SelectedIndexChnaged(object sender, EventArgs e)
         {
+            PopulateActivities();
             LoadIndicators();
         }
 

@@ -22,22 +22,31 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.HiddenField hdnIsRegional;
         
         /// <summary>
-        /// Button1 control.
+        /// btnSave2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button btnSave2;
         
         /// <summary>
-        /// Button2 control.
+        /// btnBack2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.Button btnBack2;
+        
+        /// <summary>
+        /// lblCountry control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCountry;
         
         /// <summary>
         /// ddlCountry control.
@@ -58,6 +67,15 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCountry;
         
         /// <summary>
+        /// lblCluster control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCluster;
+        
+        /// <summary>
         /// ddlCluster control.
         /// </summary>
         /// <remarks>
@@ -74,6 +92,15 @@ namespace SRFROWCA.ClusterLead {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCluster;
+        
+        /// <summary>
+        /// lblIndEng control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblIndEng;
         
         /// <summary>
         /// hfIndicatorId control.
@@ -103,6 +130,15 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.CustomValidator cvActivityEng;
         
         /// <summary>
+        /// lblIndFr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblIndFr;
+        
+        /// <summary>
         /// txtInd1Fr control.
         /// </summary>
         /// <remarks>
@@ -110,6 +146,15 @@ namespace SRFROWCA.ClusterLead {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtInd1Fr;
+        
+        /// <summary>
+        /// lblUnit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblUnit;
         
         /// <summary>
         /// ddlUnit control.
@@ -184,6 +229,15 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor pAdmin1Target;
         
         /// <summary>
+        /// localRptShowLoc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localRptShowLoc;
+        
+        /// <summary>
         /// rptAdmin control.
         /// </summary>
         /// <remarks>
@@ -209,6 +263,15 @@ namespace SRFROWCA.ClusterLead {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor pAdmin1GenderTarget;
+        
+        /// <summary>
+        /// localRptGendShow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localRptGendShow;
         
         /// <summary>
         /// rptAdmin1Gender control.

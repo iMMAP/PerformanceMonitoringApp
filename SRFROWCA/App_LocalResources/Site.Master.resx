@@ -313,7 +313,7 @@
     <value>Output Indicators</value>
   </data>
   <data name="localCLFrameworkImportExport.Text" xml:space="preserve">
-    <value>Import/Export Framework</value>
+    <value>Export Framework</value>
   </data>
   <data name="localClusterFrameworksList1.Text" xml:space="preserve">
     <value>Cluster Framework</value>
@@ -359,5 +359,8 @@
   </data>
   <data name="localManagePartners.Text" xml:space="preserve">
     <value>Manage Partners</value>
+  </data>
+  <data name="localHomeRsource.Text" xml:space="preserve">
+    <value>Home</value>
   </data>
 </root>

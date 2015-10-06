@@ -33,16 +33,20 @@ namespace SRFROWCA.OPS
                 }
 
                 PopulateDropDowns();
+
+
+                PopulateToolTips();
+                UpdateClusterName();
+                lblCluster.Text = OPSClusterNameLabel;
+
+                GetReport();
+                PopulateIndicators();
             }
+        }
 
-            PopulateToolTips();
-            UpdateClusterName();
-            lblCluster.Text = OPSClusterNameLabel;
-
+        private void PopulateIndicators()
+        {
             DataTable dtActivities = GetActivities();
-            AddDynamicColumnsInGrid(dtActivities);
-            Session["dtOPSActivities"] = dtActivities;
-            GetReport();
             gvActivities.DataSource = dtActivities;
             gvActivities.DataBind();
         }
@@ -65,41 +69,157 @@ namespace SRFROWCA.OPS
 
         #region Button Click Events.
 
-        protected void btnLocation_Click(object sender, EventArgs e)
-        {
-            ClientScript.RegisterStartupScript(this.GetType(), "key", "launchModal();", true);
-            LocationRemoved = 1;
-            List<int> locationIds = GetLocationIdsFromGrid();
-            SelectLocationsOfGrid(locationIds);
-        }
-
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            if (!ValidateData()) return;
-
+            //if (!ValidateData()) return;
+            bool isSaved = false;
             using (TransactionScope scope = new TransactionScope())
             {
-                List<int> locationIds = GetLocationIdsFromGrid();
-                if (locationIds.Count > 0)
-                {
-                    if (OPSReportId == 0)
-                    {
-                        SaveReportMainInfo();
-                    }
-                    else
-                    {
-                        UpdateReportMainInfo();
-                    }
+                //List<int> locationIds = GetLocationIdsFromGrid();
+                //if (locationIds.Count > 0)
 
-                    SaveReport();
+                if (OPSReportId == 0)
+                {
+                    SaveReportMainInfo();
                 }
                 else
                 {
-                    DeleteReport();
+                    UpdateReportMainInfo();
                 }
 
+                SaveReport();
+
+                //else
+                //{
+                //    DeleteReport();
+                //}
+
                 scope.Complete();
+                isSaved = true;
                 ShowMessage("Your Data Saved Successfuly!");
+            }
+
+            if (isSaved)
+            PopulateIndicators();
+        }
+
+        private void SaveReportDetails()
+        {
+            foreach (GridViewRow row in gvActivities.Rows)
+            {
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    int indicatorId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["IndicatorId"].ToString());
+                    int unitId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["UnitId"].ToString());
+                    Repeater rptCountry = row.FindControl("rptCountryGender") as Repeater;
+                    if (rptCountry != null)
+                    {
+                        CountryRepeater(rptCountry, indicatorId, unitId);
+                    }
+                }
+            }
+        }
+
+        private void CountryRepeater(Repeater rptCountry, int indicatorId, int unitId)
+        {
+            foreach (RepeaterItem item in rptCountry.Items)
+            {
+                if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
+                {
+                    HiddenField hfCountryId = item.FindControl("hfCountryId") as HiddenField;
+                    int countryId = 0;
+                    if (hfCountryId != null)
+                        int.TryParse(hfCountryId.Value, out countryId);
+
+                    Repeater rptAdmin1 = item.FindControl("rptAdmin1") as Repeater;
+                    if (rptAdmin1 != null)
+                    {
+                        Admin1Repeater(rptAdmin1, indicatorId, unitId, countryId);
+                    }
+                }
+            }
+        }
+
+        private void Admin1Repeater(Repeater rptAdmin1, int indicatorId, int unitId, int countryId)
+        {
+            foreach (RepeaterItem item in rptAdmin1.Items)
+            {
+                if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
+                {
+                    HiddenField hfAdmin1Id = item.FindControl("hfAdmin1Id") as HiddenField;
+                    int admin1Id = 0;
+                    if (hfAdmin1Id != null)
+                        int.TryParse(hfAdmin1Id.Value, out admin1Id);
+
+                    Repeater rptAdmin2 = item.FindControl("rptAdmin2") as Repeater;
+                    if (rptAdmin2 != null)
+                    {
+                        if (unitId == 269 || unitId == 28 || unitId == 38 || unitId == 193
+                                || unitId == 219 || unitId == 198 || unitId == 311 || unitId == 287
+                                || unitId == 67 || unitId == 132 || unitId == 252)
+                            SaveAdmin2GenderTargets(rptAdmin2, indicatorId, countryId, admin1Id);
+                        else
+                            SaveAdmin2Targets(rptAdmin2, indicatorId, countryId, admin1Id);
+
+
+                    }
+                }
+            }
+        }
+
+        private void SaveAdmin2Targets(Repeater rptAdmin2, int indicatorId, int countryId, int admin1Id)
+        {
+            int? userId = OPSUserId > 0 ? OPSUserId : (int?)null;
+            foreach (RepeaterItem item in rptAdmin2.Items)
+            {
+                if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
+                {
+                    HiddenField hfAdmin2Id = item.FindControl("hfAdmin2Id") as HiddenField;
+                    int admin2Id = 0;
+                    if (hfAdmin2Id != null)
+                        int.TryParse(hfAdmin2Id.Value, out admin2Id);
+
+                    int? target = null;
+                    TextBox txtTarget = item.FindControl("txtAdmin2TargetProject") as TextBox;
+                    target = string.IsNullOrEmpty(txtTarget.Text.Trim()) ? (int?)null : Convert.ToInt32(txtTarget.Text.Trim());
+                    if (admin2Id > 0)
+                    {
+                        DBContext.Update("InsertOPSReportDetails", new object[] { OPSReportId, indicatorId, countryId, admin1Id , admin2Id, 
+                                                                                        target, userId, DBNull.Value });
+                    }
+                }
+            }
+        }
+
+        private void SaveAdmin2GenderTargets(Repeater rptAdmin2, int indicatorId, int countryId, int admin1Id)
+        {
+            int? userId = OPSUserId > 0 ? OPSUserId : (int?)null;
+            foreach (RepeaterItem item in rptAdmin2.Items)
+            {
+                if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
+                {
+                    TextBox txtAdmin2Male = item.FindControl("txtAdmin2TargetMaleProject") as TextBox;
+                    TextBox txtAdmin2Female = item.FindControl("txtAdmin2TargetFemaleProject") as TextBox;
+
+                    int? maleTarget = null;
+                    if (txtAdmin2Male != null)
+                        maleTarget = string.IsNullOrEmpty(txtAdmin2Male.Text.Trim()) ? (int?)null : Convert.ToInt32(txtAdmin2Male.Text.Trim());
+
+                    int? femaleTarget = null;
+                    if (txtAdmin2Female != null)
+                        femaleTarget = string.IsNullOrEmpty(txtAdmin2Female.Text.Trim()) ? (int?)null : Convert.ToInt32(txtAdmin2Female.Text.Trim());
+
+                    HiddenField hfAdmin2Id = item.FindControl("hfAdmin2Id") as HiddenField;
+                    int admin2Id = 0;
+                    if (hfAdmin2Id != null)
+                        int.TryParse(hfAdmin2Id.Value, out admin2Id);
+                    if (admin2Id > 0)
+                    {
+                        DBContext.Update("InsertOPSReportDetailsGender", new object[] {OPSReportId, indicatorId, countryId, admin1Id , 
+                                                                                        admin2Id, maleTarget, femaleTarget,
+                                                                                         userId, DBNull.Value });
+                    }
+                }
             }
         }
 
@@ -116,20 +236,20 @@ namespace SRFROWCA.OPS
                 if (row.RowType == DataControlRowType.DataRow)
                 {
 
-                    DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
-                    foreach (DataColumn dc in dtActivities.Columns)
-                    {
-                        string colName = dc.ColumnName;
+                    //DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
+                    //foreach (DataColumn dc in dtActivities.Columns)
+                    //{
+                    //    string colName = dc.ColumnName;
 
-                        HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
-                        if (hf != null)
-                        {
-                            int locationId = 0;
-                            int.TryParse(hf.Value, out locationId);
-                            if (locationId > 0)
-                                locationIds.Add((locationId));
-                        }
-                    }
+                    //    HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
+                    //    if (hf != null)
+                    //    {
+                    //        int locationId = 0;
+                    //        int.TryParse(hf.Value, out locationId);
+                    //        if (locationId > 0)
+                    //            locationIds.Add((locationId));
+                    //    }
+                    //}
 
                     // If data row then iterate only once bece we need column names
                     // from grid to get ids from hidden fields.
@@ -140,13 +260,13 @@ namespace SRFROWCA.OPS
             return locationIds.Distinct().ToList();
         }
 
-        private void SelectLocationsOfGrid(List<int> locationIds)
-        {
-            foreach (ListItem item in cbAdmin1Locaitons.Items)
-            {
-                item.Selected = locationIds.Contains(Convert.ToInt32(item.Value));
-            }
-        }
+        //private void SelectLocationsOfGrid(List<int> locationIds)
+        //{
+        //    foreach (ListItem item in cbAdmin1Locaitons.Items)
+        //    {
+        //        item.Selected = locationIds.Contains(Convert.ToInt32(item.Value));
+        //    }
+        //}
 
         #endregion
 
@@ -323,7 +443,6 @@ namespace SRFROWCA.OPS
         private void PopulateDropDowns()
         {
             LocationId = GetLocationId();
-            PopulateLocations(LocationId);
             UI.FillObjectives(cblObjectives, true, RC.EmergencySahel2015);
         }
 
@@ -388,11 +507,12 @@ namespace SRFROWCA.OPS
 
         internal override void BindGridData()
         {
-            DataTable dtActivities = GetActivities();
-            Session["dtOPSActivities"] = dtActivities;
-            GetReport();
-            gvActivities.DataSource = dtActivities;
-            gvActivities.DataBind();
+            PopulateIndicators();
+            //DataTable dtActivities = GetActivities();
+            //Session["dtOPSActivities"] = dtActivities;
+            //GetReport();
+            //gvActivities.DataSource = dtActivities;
+            //gvActivities.DataBind();
             PopulateToolTips();
         }
 
@@ -443,13 +563,10 @@ namespace SRFROWCA.OPS
 
         private DataTable GetActivities()
         {
-            string locationIds = GetSelectedItems(cbAdmin1Locaitons);
-            string locIdsNotIncluded = GetNotSelectedItems(cbAdmin1Locaitons);
-            int yearId = 11; //2015
-            DataTable dt = DBContext.GetData("GetOPSActivities2", new object[] { OPSLocationEmergencyId, locationIds, locIdsNotIncluded, 
-                                                                            OPSProjectId, OPSEmergencyClusterId, RC.SelectedSiteLanguageId, OPSCountryName, yearId });
+            int yearId = 12; //2015
+            DataTable dt = DBContext.GetData("GetOPSActivities3", new object[] { OPSLocationEmergencyId, OPSEmergencyClusterId, OPSProjectId, RC.SelectedSiteLanguageId, yearId });
 
-            if (dt.Rows.Count <= 0 && !string.IsNullOrEmpty(locationIds))
+            if (dt.Rows.Count <= 0)
             {
                 if (RC.SelectedSiteLanguageId == 1)
                 {
@@ -461,74 +578,6 @@ namespace SRFROWCA.OPS
                 }
             }
 
-            return dt.Rows.Count > 0 ? dt : new DataTable();
-        }
-
-        private void AddLocationsInSelectedList()
-        {
-            PopulateLocations(LocationId);
-        }
-
-        private void PopulateLocations(int parentLocationId)
-        {
-            DataTable dt = GetChildLocations(parentLocationId);
-
-            cbAdmin1Locaitons.DataValueField = "LocationId";
-            cbAdmin1Locaitons.DataTextField = "LocationName";
-
-            cbAdmin1Locaitons.DataSource = dt;
-            cbAdmin1Locaitons.DataBind();
-        }
-
-        private DataTable GetReportLocations()
-        {
-            DataTable dt = DBContext.GetData("GetReportLocations", new object[] { OPSReportId });
-            return dt.Rows.Count > 0 ? dt : new DataTable();
-        }
-
-        private void AddDynamicColumnsInGrid(DataTable dt)
-        {
-            foreach (DataColumn column in dt.Columns)
-            {
-                TemplateField customField = new TemplateField();
-                // Create the dynamic templates and assign them to
-                // the appropriate template property.
-
-                string columnName = column.ColumnName;
-                if (!(columnName == "OPSReportId" || columnName == "ClusterName" || columnName == "SecondaryCluster" ||
-                        columnName == "Objective" || columnName == "HumanitarianPriority" || columnName == "ActivityDataId" ||
-                        columnName == "ActivityName" || columnName == "DataName" || columnName == "IsActive" ||
-                        columnName == "ObjectiveId" || columnName == "HumanitarianPriorityId" || columnName == "ObjAndPrId" ||
-                        columnName == "PriorityActivityId" || columnName == "RInd" || columnName == "CInd" || columnName == "Unit"))
-                {
-                    if (columnName == "IsAdded")
-                    {
-
-                        customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, column.ColumnName, "1", "CheckBox");
-                        customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, "Selected", "1", "CheckBox");
-                        gvActivities.Columns.Add(customField);
-                    }
-                    else
-                    {
-                        customField.ItemTemplate = new GridViewTemplate(DataControlRowType.DataRow, column.ColumnName, "1", "TextBox");
-                        customField.HeaderTemplate = new GridViewTemplate(DataControlRowType.Header, column.ColumnName, "1", "TextBox");
-                        gvActivities.Columns.Add(customField);
-                    }
-                }
-            }
-        }
-
-        private DataTable GetChildLocations(int parentLocationId)
-        {
-            DataTable dt = new DataTable();
-            //if (OPSCountryName == "Sahel Region")
-            //{
-            //    dt = DBContext.GetData("GetSahelRegionalLocationsForOPS");
-            //}
-            //else
-            {
-                dt = DBContext.GetData("GetSecondLevelChildLocationsAndCountry", new object[] { parentLocationId });
-            }
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 
@@ -599,7 +648,7 @@ namespace SRFROWCA.OPS
 
         private void SaveReport()
         {
-            SaveReportLocations();
+            //SaveReportLocations();
             DeleteOPSReportDetails();
             SaveReportDetails();
         }
@@ -625,8 +674,10 @@ namespace SRFROWCA.OPS
 
         private void SaveReportMainInfo()
         {
-            int yearId = 11; //2015
-            OPSReportId = DBContext.Add("InsertOPSReport", new object[] { OPSLocationEmergencyId, OPSProjectId, OPSEmergencyClusterId, OPSUserId, RC.SelectedSiteLanguageId, yearId, DBNull.Value });
+            int yearId = 12; //2016
+            OPSReportId = DBContext.Add("InsertOPSReport", new object[] { OPSLocationEmergencyId, OPSProjectId, 
+                                                                            OPSEmergencyClusterId, OPSUserId, 
+                                                                            RC.SelectedSiteLanguageId, yearId, DBNull.Value });
         }
 
         private bool IsDataExistsToSave()
@@ -696,181 +747,181 @@ namespace SRFROWCA.OPS
             }
         }
 
-        protected void CaptureDataFromGrid()
-        {
-            string activityDataId = "";
-            foreach (GridViewRow row in gvActivities.Rows)
-            {
-                if (row.RowType != DataControlRowType.DataRow) return;
+        //protected void CaptureDataFromGrid()
+        //{
+        //    string activityDataId = "";
+        //    foreach (GridViewRow row in gvActivities.Rows)
+        //    {
+        //        if (row.RowType != DataControlRowType.DataRow) return;
 
-                activityDataId = gvActivities.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString();
-                int colummCounts = gvActivities.Columns.Count;
+        //        activityDataId = gvActivities.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString();
+        //        int colummCounts = gvActivities.Columns.Count;
 
-                DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
-                if (dtActivities == null) return;
+        //        DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
+        //        if (dtActivities == null) return;
 
-                DataTable dtClone;
-                if (Session["dtClone"] != null)
-                {
-                    dtClone = (DataTable)Session["dtClone"];
-                }
-                else
-                {
-                    dtClone = dtActivities.Copy();
-                    foreach (DataRow dr in dtClone.Rows)
-                    {
-                        foreach (DataColumn dc in dtClone.Columns)
-                        {
-                            if (dc.DataType == typeof(string))
-                            {
-                                dr[dc] = "";
-                            }
-                        }
-                    }
-                }
+        //        DataTable dtClone;
+        //        if (Session["dtClone"] != null)
+        //        {
+        //            dtClone = (DataTable)Session["dtClone"];
+        //        }
+        //        else
+        //        {
+        //            dtClone = dtActivities.Copy();
+        //            foreach (DataRow dr in dtClone.Rows)
+        //            {
+        //                foreach (DataColumn dc in dtClone.Columns)
+        //                {
+        //                    if (dc.DataType == typeof(string))
+        //                    {
+        //                        dr[dc] = "";
+        //                    }
+        //                }
+        //            }
+        //        }
 
-                foreach (DataColumn dc in dtClone.Columns)
-                {
-                    string colName = dc.ColumnName;
-                    TextBox t = row.FindControl(colName) as TextBox;
-                    if (t != null)
-                    {
-                        dtClone.Rows[row.RowIndex][colName] = t.Text;
-                        dtClone.Rows[row.RowIndex]["ActivityDataId"] = activityDataId;
-                    }
-                }
+        //        foreach (DataColumn dc in dtClone.Columns)
+        //        {
+        //            string colName = dc.ColumnName;
+        //            TextBox t = row.FindControl(colName) as TextBox;
+        //            if (t != null)
+        //            {
+        //                dtClone.Rows[row.RowIndex][colName] = t.Text;
+        //                dtClone.Rows[row.RowIndex]["ActivityDataId"] = activityDataId;
+        //            }
+        //        }
 
-                Session["dtClone"] = dtClone;
-            }
-        }
+        //        Session["dtClone"] = dtClone;
+        //    }
+        //}
 
-        private bool ValidateData()
-        {
-            int activityDataId = 0;
-            int? userId = OPSUserId > 0 ? OPSUserId : (int?)null;
-            bool isValid = true;
-            foreach (GridViewRow row in gvActivities.Rows)
-            {
-                if (row.RowType == DataControlRowType.DataRow)
-                {
-                    activityDataId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString());
-                    DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
+        //private bool ValidateData()
+        //{
+        //    int activityDataId = 0;
+        //    int? userId = OPSUserId > 0 ? OPSUserId : (int?)null;
+        //    bool isValid = true;
+        //    foreach (GridViewRow row in gvActivities.Rows)
+        //    {
+        //        if (row.RowType == DataControlRowType.DataRow)
+        //        {
+        //            activityDataId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString());
+        //            DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
 
-                    bool isAdded = false;
-                    foreach (DataColumn dc in dtActivities.Columns)
-                    {
-                        string colName = dc.ColumnName;
-                        int locationId = 0;
+        //            bool isAdded = false;
+        //            foreach (DataColumn dc in dtActivities.Columns)
+        //            {
+        //                string colName = dc.ColumnName;
+        //                int locationId = 0;
 
-                        CheckBox cbAccum = row.FindControl(colName) as CheckBox;
-                        if (cbAccum != null && cbAccum.Checked)
-                        {
-                            isAdded = true;
-                        }
+        //                CheckBox cbAccum = row.FindControl(colName) as CheckBox;
+        //                if (cbAccum != null && cbAccum.Checked)
+        //                {
+        //                    isAdded = true;
+        //                }
 
-                        if (isAdded)
-                        {
-                            isValid = false;
-                            HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
-                            if (hf != null)
-                            {
-                                locationId = Convert.ToInt32(hf.Value);
-                            }
+        //                if (isAdded)
+        //                {
+        //                    isValid = false;
+        //                    HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
+        //                    if (hf != null)
+        //                    {
+        //                        locationId = Convert.ToInt32(hf.Value);
+        //                    }
 
-                            decimal? fullYearTarget = null;
-                            TextBox t = row.FindControl(colName) as TextBox;
-                            if (t != null)
-                            {
-                                if (!string.IsNullOrEmpty(t.Text))
-                                {
-                                    fullYearTarget = Convert.ToDecimal(t.Text, CultureInfo.InvariantCulture);
-                                }
-                            }
+        //                    decimal? fullYearTarget = null;
+        //                    TextBox t = row.FindControl(colName) as TextBox;
+        //                    if (t != null)
+        //                    {
+        //                        if (!string.IsNullOrEmpty(t.Text))
+        //                        {
+        //                            fullYearTarget = Convert.ToDecimal(t.Text, CultureInfo.InvariantCulture);
+        //                        }
+        //                    }
 
-                            if (locationId > 0 && fullYearTarget != null)
-                            {
-                                isValid = true;
-                                break;
-                            }
-                        }
-                    }
+        //                    if (locationId > 0 && fullYearTarget != null)
+        //                    {
+        //                        isValid = true;
+        //                        break;
+        //                    }
+        //                }
+        //            }
 
-                    if (!isValid)
-                    {
-                        if (RC.SelectedSiteLanguageId == 1)
-                        {
-                            ShowMessage("Sorry, we are unable to save your selection.<br/> Please provide a target for each activity indicator.<br/> If you do not know the target at this time please put a 0 (Zero).<br/>Please click on this message to go back to the main window.", RC.NotificationType.Error, false, 500);
-                        }
-                        else
-                        {
-                            ShowMessage("Désolé, nous ne pouvons enregistrer votre sélection.<br/> Veuillez fournir une cible pour chaque indicateur par activité.<br/> Si vous ne connaissez pas encore la cible, veuillez metre un 0 (Zero).<br/>Veuillez cliquer sur ce message pour retourner à l apage principale.", RC.NotificationType.Error, false, 500);
-                        }
-                    }
-                }
-            }
+        //            if (!isValid)
+        //            {
+        //                if (RC.SelectedSiteLanguageId == 1)
+        //                {
+        //                    ShowMessage("Sorry, we are unable to save your selection.<br/> Please provide a target for each activity indicator.<br/> If you do not know the target at this time please put a 0 (Zero).<br/>Please click on this message to go back to the main window.", RC.NotificationType.Error, false, 500);
+        //                }
+        //                else
+        //                {
+        //                    ShowMessage("Désolé, nous ne pouvons enregistrer votre sélection.<br/> Veuillez fournir une cible pour chaque indicateur par activité.<br/> Si vous ne connaissez pas encore la cible, veuillez metre un 0 (Zero).<br/>Veuillez cliquer sur ce message pour retourner à l apage principale.", RC.NotificationType.Error, false, 500);
+        //                }
+        //            }
+        //        }
+        //    }
 
-            return isValid;
-        }
+        //    return isValid;
+        //}
 
-        private void SaveReportDetails()
-        {
-            int activityDataId = 0;
-            int? userId = OPSUserId > 0 ? OPSUserId : (int?)null;
+        //private void SaveReportDetails()
+        //{
+        //    int activityDataId = 0;
+        //    int? userId = OPSUserId > 0 ? OPSUserId : (int?)null;
 
-            foreach (GridViewRow row in gvActivities.Rows)
-            {
-                if (row.RowType == DataControlRowType.DataRow)
-                {
-                    activityDataId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString());
-                    DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
+        //    foreach (GridViewRow row in gvActivities.Rows)
+        //    {
+        //        if (row.RowType == DataControlRowType.DataRow)
+        //        {
+        //            activityDataId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["ActivityDataId"].ToString());
+        //            DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
 
-                    bool isAdded = false;
-                    foreach (DataColumn dc in dtActivities.Columns)
-                    {
-                        string colName = dc.ColumnName;
-                        int locationId = 0;
+        //            bool isAdded = false;
+        //            foreach (DataColumn dc in dtActivities.Columns)
+        //            {
+        //                string colName = dc.ColumnName;
+        //                int locationId = 0;
 
-                        CheckBox cbAccum = row.FindControl(colName) as CheckBox;
-                        if (cbAccum != null && cbAccum.Checked)
-                        {
-                            isAdded = true;
-                        }
+        //                CheckBox cbAccum = row.FindControl(colName) as CheckBox;
+        //                if (cbAccum != null && cbAccum.Checked)
+        //                {
+        //                    isAdded = true;
+        //                }
 
-                        //if (isAdded)
-                        {
-                            HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
-                            if (hf != null)
-                            {
-                                locationId = Convert.ToInt32(hf.Value);
-                            }
+        //                //if (isAdded)
+        //                {
+        //                    HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
+        //                    if (hf != null)
+        //                    {
+        //                        locationId = Convert.ToInt32(hf.Value);
+        //                    }
 
-                            decimal? fullYearTarget = null;
-                            TextBox t = row.FindControl(colName) as TextBox;
-                            if (t != null)
-                            {
-                                if (!string.IsNullOrEmpty(t.Text))
-                                {
-                                    fullYearTarget = Convert.ToDecimal(t.Text, CultureInfo.InvariantCulture);
-                                }
-                            }
+        //                    decimal? fullYearTarget = null;
+        //                    TextBox t = row.FindControl(colName) as TextBox;
+        //                    if (t != null)
+        //                    {
+        //                        if (!string.IsNullOrEmpty(t.Text))
+        //                        {
+        //                            fullYearTarget = Convert.ToDecimal(t.Text, CultureInfo.InvariantCulture);
+        //                        }
+        //                    }
 
-                            if (locationId > 0 && fullYearTarget != null)
-                            {
-                                decimal? midYearTarget = null;
-                                //fullYearTarget = fullYearTarget == null ? 0 : fullYearTarget;
-                                DBContext.Add("InsertOPSReportDetails", new object[] { OPSReportId, activityDataId, locationId,
-                                                                                            midYearTarget, fullYearTarget, userId, DBNull.Value });
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        //                    if (locationId > 0 && fullYearTarget != null)
+        //                    {
+        //                        decimal? midYearTarget = null;
+        //                        //fullYearTarget = fullYearTarget == null ? 0 : fullYearTarget;
+        //                        DBContext.Add("InsertOPSReportDetails", new object[] { OPSReportId, activityDataId, locationId,
+        //                                                                                    midYearTarget, fullYearTarget, userId, DBNull.Value });
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
 
         private void GetReport()
         {
-            int yearId = 11; //2015
-            DataTable dtReport = DBContext.GetData("GetOPSReportId", new object[] { OPSLocationEmergencyId, OPSProjectId, OPSEmergencyClusterId, yearId });
+            int yearId = 12; //2015
+            DataTable dtReport = DBContext.GetData("GetOPSReportId", new object[] { OPSProjectId, yearId });
             if (dtReport.Rows.Count > 0)
             {
                 OPSReportId = string.IsNullOrEmpty(dtReport.Rows[0]["OPSReportId"].ToString()) ? 0 : Convert.ToInt32(dtReport.Rows[0]["OPSReportId"].ToString());
@@ -885,28 +936,28 @@ namespace SRFROWCA.OPS
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                if (Session["dtOPSActivities"] == null) return;
 
-                DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
-                if (dtActivities == null) return;
-
-                foreach (DataColumn dc in dtActivities.Columns)
+                HiddenField hfIndicatorId = e.Row.FindControl("hfIndicatorId") as HiddenField;
+                int indicatorId = 0;
+                if (hfIndicatorId != null)
                 {
-                    string colName = dc.ColumnName;
-                    TextBox txt = e.Row.FindControl(colName) as TextBox;
-                    if (txt != null)
+                    int.TryParse(hfIndicatorId.Value, out indicatorId);
+                }
+                if (indicatorId > 0)
+                {
+                    Repeater rptCountry = e.Row.FindControl("rptCountryGender") as Repeater;
+                    if (rptCountry != null)
                     {
-                        if (txt.Text == "-1")
-                        {
-                            txt.Text = "";
-                        }
+                        int yearId = 12;
+                        DataTable dt = DBContext.GetData("GetOPSCountryTargetOfIndicator",
+                                                                    new object[] { OPSLocationEmergencyId, OPSEmergencyClusterId, 
+                                                                               OPSProjectId, yearId, indicatorId});
+                        rptCountry.DataSource = dt;
+                        rptCountry.DataBind();
                     }
                 }
-
+                ObjPrToolTip.ObjectiveIconToolTip(e, 0);
                 ObjPrToolTip.ObjectiveLableToolTip(e, 0);
-                //ObjPrToolTip.PrioritiesIconToolTip(e, 1);
-                //ObjPrToolTip.RegionalIndicatorIcon(e, 5);
-                //ObjPrToolTip.CountryIndicatorIcon(e, 6);
             }
         }
 
@@ -951,7 +1002,7 @@ namespace SRFROWCA.OPS
             }
         }
 
-        public int LocationId
+        private int LocationId
         {
             get
             {
@@ -1110,7 +1161,7 @@ namespace SRFROWCA.OPS
             }
         }
 
-        public int OPSLocationEmergencyId
+        private int OPSLocationEmergencyId
         {
             get
             {
@@ -1183,79 +1234,128 @@ namespace SRFROWCA.OPS
         }
 
         #endregion
-    }
 
-    public class GridViewTemplate : ITemplate
-    {
-        private DataControlRowType templateType;
-        private string columnName;
-        private string locationId;
-        private string controlType;
 
-        public GridViewTemplate(DataControlRowType type, string colname, string locId, string cntrlType)
+
+        protected void rptCountryGender_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            templateType = type;
-            columnName = colname;
-            locationId = locId;
-            controlType = cntrlType;
-        }
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                HiddenField hfIndicatorId = e.Item.FindControl("hfCountryIndicatorId") as HiddenField;
+                int indicatorId = 0;
+                if (hfIndicatorId != null)
+                {
+                    int.TryParse(hfIndicatorId.Value, out indicatorId);
+                }
+                if (indicatorId > 0)
+                {
+                    HiddenField hfCountryId = e.Item.FindControl("hfCountryId") as HiddenField;
+                    int countryId = 0;
+                    if (hfCountryId != null)
+                    {
+                        int.TryParse(hfCountryId.Value, out countryId);
+                    }
 
-        public void InstantiateIn(System.Web.UI.Control container)
-        {
-            if (templateType == DataControlRowType.Header)
-            {
-                if (columnName == "Selected")
-                {
-                    Label lc = new Label { Width = 50, Text = "<b>Selected</b>" };
-                    container.Controls.Add(lc);
-                }
-                else
-                {
-                    string[] words = columnName.Split('^');
-                    Label lc = new Label { Width = 50, Text = "<b>" + words[1] + "</b>" };
-                    container.Controls.Add(lc);
-                }
-            }
-            else if (templateType == DataControlRowType.DataRow)
-            {
-                if (controlType == "TextBox")
-                {
-                    TextBox txtTA = new TextBox();
-                    txtTA.CssClass = "numeric1";
-                    txtTA.Width = 43;
-                    txtTA.Style["font-size"] = 10 + "px";
-                    txtTA.DataBinding += new EventHandler(this.FirstName_DataBinding);
-                    container.Controls.Add(txtTA);
-                    HiddenField hf = new HiddenField();
-                    string[] words1 = columnName.Split('^');
-                    hf.Value = words1[0];
-                    hf.ID = "hf" + columnName;
-                    container.Controls.Add(hf);
-                }
-                else if (controlType == "CheckBox")
-                {
-                    CheckBox cbLocAccum = new CheckBox();
-                    cbLocAccum.DataBinding += cbAccum_DataBinding;
-                    container.Controls.Add(cbLocAccum);
+                    Repeater rptAdmin1 = e.Item.FindControl("rptAdmin1") as Repeater;
+                    if (rptAdmin1 != null)
+                    {
+                        int yearId = 12;
+                        rptAdmin1.DataSource = DBContext.GetData("[GetOPSAdmin1TargetOfIndicator]", new object[] { countryId, OPSLocationEmergencyId, 
+                                                                                                                OPSEmergencyClusterId, OPSProjectId, 
+                                                                                                                yearId, indicatorId });
+                        rptAdmin1.DataBind();
+                    }
                 }
             }
         }
 
-        private void FirstName_DataBinding(Object sender, EventArgs e)
+        protected void rptAdmin1Gender_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            TextBox l = (TextBox)sender;
-            l.ID = columnName;
-            l.MaxLength = 12;
-            GridViewRow row = (GridViewRow)l.NamingContainer;
-            l.Text = DataBinder.Eval(row.DataItem, columnName).ToString();
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                HiddenField hfIndicatorId = e.Item.FindControl("hfAdmin1IndicatorId") as HiddenField;
+                int indicatorId = 0;
+                if (hfIndicatorId != null)
+                {
+                    int.TryParse(hfIndicatorId.Value, out indicatorId);
+                }
+                if (indicatorId > 0)
+                {
+                    HiddenField hfAdmin1Id = e.Item.FindControl("hfAdmin1Id") as HiddenField;
+                    int admin1Id = 0;
+                    if (hfAdmin1Id != null)
+                    {
+                        int.TryParse(hfAdmin1Id.Value, out admin1Id);
+                    }
+
+                    Repeater rptAdmin2 = e.Item.FindControl("rptAdmin2") as Repeater;
+                    if (rptAdmin2 != null)
+                    {
+                        int yearId = 12;
+                        DataTable dt = DBContext.GetData("[GetOPSAdmin2TargetOfIndicator]", new object[] {admin1Id, OPSLocationEmergencyId, 
+                                                                                                                OPSEmergencyClusterId, OPSProjectId, 
+                                                                                                                yearId, indicatorId });
+                        rptAdmin2.DataSource = dt;
+                        rptAdmin2.DataBind();
+                    }
+                }
+            }
         }
 
-        private void cbAccum_DataBinding(Object sender, EventArgs e)
+        protected void rptAdmin2_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            CheckBox cb = (CheckBox)sender;
-            cb.ID = columnName;
-            GridViewRow row = (GridViewRow)cb.NamingContainer;
-            cb.Checked = (DataBinder.Eval(row.DataItem, columnName)).ToString() == "True";
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                //var a = e.Item.Parent.FindControl("");
+                GridViewRow row = (e.Item.Parent.Parent.Parent.Parent.Parent.Parent.Parent) as GridViewRow;
+                if (row != null)
+                {
+                    int unitId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["UnitId"].ToString());
+
+                    TextBox txtAdmin2Male = e.Item.FindControl("txtAdmin2TargetMaleProject") as TextBox;
+                    TextBox txtAdmin2Female = e.Item.FindControl("txtAdmin2TargetFemaleProject") as TextBox;
+                    TextBox txtAdmin2Target = e.Item.FindControl("txtAdmin2TargetProject") as TextBox;
+                    
+                    if (unitId == 269 || unitId == 28 || unitId == 38 || unitId == 193
+                                || unitId == 219 || unitId == 198 || unitId == 311 || unitId == 287
+                                || unitId == 67 || unitId == 132 || unitId == 252)
+                    {
+                        if (txtAdmin2Target != null)
+                            txtAdmin2Target.Enabled = false;
+                    }
+                    else
+                    {
+                        if (txtAdmin2Male != null)
+                            txtAdmin2Male.Enabled = false;
+                        if (txtAdmin2Female != null)
+                            txtAdmin2Female.Enabled = false;
+                    }
+                }
+            }
         }
+
+        protected void lnkLanguageEnglish_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                RC.SelectedSiteLanguageId = (int)RC.SiteLanguage.English;
+                RC.AddSiteLangInCookie(this.Response, RC.SiteLanguage.English);
+                BindGridData();
+            }
+            catch { }
+        }
+
+        protected void lnkLanguageFrench_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                RC.SelectedSiteLanguageId = (int)Common.RC.SiteLanguage.French;
+                RC.AddSiteLangInCookie(this.Response, Common.RC.SiteLanguage.French);
+                BindGridData();
+            }
+            catch { }
+        }
+
+
     }
 }

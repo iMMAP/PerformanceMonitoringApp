@@ -1,8 +1,10 @@
-﻿table.imagetable{width:100%;font-size:11px;color:#39668e;border-width:1px;border-color:#bbbbbb;border-collapse:collapse;}
+﻿table.imagetable{font-size:11px;color:#39668e;border-width:1px;border-color:#bbbbbb;border-collapse:collapse;}
 table.imagetable th{background:#ddd;border-width:1px;padding:4px;border-style:solid;border-color:#bbbbbb;text-align:left;}
 table.imagetable td{border-width:1px;padding:4px;border-style:solid;color:#000000;border-color:#bbbbbb;}
 .altcolor{background-color:#fbfbfb;}
 .istrow{background:#ebf0f4;}
+.rowcolor1 {background:#99CCCC;}
+.altrowcolor1 {background:#99FFCC;}
 .message{background-size:40px 40px;background-image:linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%,
 transparent 50%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .05) 75%,
 transparent 75%, transparent);box-shadow:inset 0 -1px 0 rgba(255,255,255,.4);width:100%;border:1px solid;color:#fff;padding:15px;position:fixed;_position:absolute;text-shadow:0 1px 0 rgba(0,0,0,.5);animation:animate-bg 5s linear infinite;}

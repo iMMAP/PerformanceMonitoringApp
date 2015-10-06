@@ -301,7 +301,7 @@
     <value>Indicateurs de résultat</value>
   </data>
   <data name="localCLFrameworkImportExport.Text" xml:space="preserve">
-    <value>importer/exporter le cadre</value>
+    <value>Exporter le cadre</value>
   </data>
   <data name="localClusterFrameworksList1.Text" xml:space="preserve">
     <value>Cadre sectoriel</value>
@@ -347,5 +347,8 @@
   </data>
   <data name="localManagePartners.Text" xml:space="preserve">
     <value>Gérer Partenaires</value>
+  </data>
+  <data name="localHomeRsource.Text" xml:space="preserve">
+    <value>Accueil</value>
   </data>
 </root>

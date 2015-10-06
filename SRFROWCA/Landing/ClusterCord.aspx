@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ClusterCord.aspx.cs" Inherits="SRFROWCA.Landing.ClusterCord" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ClusterCord.aspx.cs" Inherits="SRFROWCA.Landing.ClusterCord" culture="auto" meta:resourcekey="PageResource1" uiculture="auto" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <title>ORS - Cluster Coordinator Landing</title>
@@ -16,13 +16,14 @@
                             <div class="widget-header widget-header-small">
                                 <h4 class="widget-title smaller">
                                     <i class="ace-icon fa fa-check-square-o bigger-110"></i>
-                                    ORS - Sector Coordination Quick Access Menu
+                                    <asp:Localize ID="localQuickMenue" runat="server" Text="ORS - Sector Coordination Quick Access Menu" meta:resourcekey="localQuickMenueResource1"></asp:Localize>
                                 </h4>
                             </div>
                             <div class="widget-body">
                                 <div class="widget-main">
                                     <p>
-                                        Welcome back to ORS. You logged in as a Cluster/Sector coordinator. Please tell us what you would like to do!
+                                        <asp:Localize ID="localWelcomeMessage" runat="server"
+                                            Text="Welcome back to ORS. You logged in as a Cluster/Sector coordinator. Please tell us what you would like to do!" meta:resourcekey="localWelcomeMessageResource1"></asp:Localize>
                                     </p>
                                 </div>
                             </div>
@@ -35,29 +36,30 @@
                                                 <div class="col-xs-11 arrowed arrowed-right">
                                                     <span class="label label-warning">
                                                         <i class="ace-icon fa fa-exclamation-triangle bigger-120"></i>
-                                                        To Work On Your <b>2016</b> Sector Framework?
+                                                        <asp:Localize ID="localToWork2016" runat="server"
+                                                            Text="To Work On Your 2016 Sector Framework?" meta:resourcekey="localToWork2016Resource1"></asp:Localize>
                                                     </span>
                                                 </div>
                                             </div>
                                             <div>
                                                 <hr />
                                                 <div class=" label label-lg label-info arrowed-in arrowed-right">
-                                                    <b>You Can Do ...</b>
+                                                    <asp:Localize ID="localCanDo2016" runat="server" Text="You Can Do ..." meta:resourcekey="localCanDo2016Resource1"></asp:Localize>
                                                 </div>
                                                 <ul class="list-unstyled spaced">
                                                     <li>
                                                         <a href="../ClusterLead/CountryIndicators.aspx">
-                                                            <i class="ace-icon fa fa-caret-right blue"></i>Go to my 2016 Output Indicators Page
+                                                            <asp:Localize ID="localMenu2016OutputInd" runat="server" Text="Go to my 2016 Output Indicators Page" meta:resourcekey="localMenu2016OutputIndResource1"></asp:Localize>
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="../ClusterLead/IndicatorListing.aspx">
-                                                            <i class="ace-icon fa fa-caret-right blue"></i>Go to my 2016 Sector Response Plan
+                                                            <asp:Localize ID="localMenu2016SectorInd" runat="server" Text="Go to my 2016 Sector Response Plan" meta:resourcekey="localMenu2016SectorIndResource1"></asp:Localize>
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="../ClusterLead/IndicatorListingMigrate.aspx">
-                                                            <i class="ace-icon fa fa-caret-right blue"></i>Migrate 2015 activites & indicators To 2016 Framework
+                                                            <asp:Localize ID="localMenu2016Migrate" runat="server" Text="Migrate 2015 activites & indicators To 2016 Framework" meta:resourcekey="localMenu2016MigrateResource1"></asp:Localize>
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -70,7 +72,8 @@
                                                 <div class="col-xs-11 arrowed arrowed-right">
                                                     <span class="label label-warning">
                                                         <i class="ace-icon fa fa-exclamation-triangle bigger-120"></i>
-                                                        To Work On Your <b>2015</b> Sector Framework?
+                                                        <asp:Localize ID="localToWork2015" runat="server"
+                                                            Text="To Work On Your 2015 Sector Framework?" meta:resourcekey="localToWork2015Resource1"></asp:Localize>
                                                     </span>
                                                 </div>
                                             </div>
@@ -78,30 +81,30 @@
                                             <div>
                                                 <hr />
                                                 <div class=" label label-lg label-info arrowed-in arrowed-right">
-                                                    <b>You Can Do ...</b>
+                                                    <asp:Localize ID="localCanDo2015" runat="server" Text="You Can Do ..." meta:resourcekey="localCanDo2015Resource1"></asp:Localize>
                                                 </div>
                                                 <ul class="list-unstyled spaced">
 
                                                     <li>
-                                                        <a href="">
-                                                            <i class="ace-icon fa fa-caret-right blue"></i>Validate 2015 Partners Report
+                                                        <a href="../ClusterLead/ValidateReportList.aspx">
+                                                            <asp:Localize ID="localMenu2015Validate" runat="server" Text="Validate 2015 Partners Report" meta:resourcekey="localMenu2015ValidateResource1"></asp:Localize>
                                                         </a>
                                                     </li>
 
                                                     <li>
-                                                        <a href="">
-                                                            <i class="ace-icon fa fa-caret-right blue"></i>Provide information for my 2015 sector output indicators
+                                                        <a href="../ClusterLead/ClusterDataEntry.aspx">
+                                                            <asp:Localize ID="localMenu2015OutIndDataEntry" runat="server" Text="Provide information for my 2015 sector output indicators" meta:resourcekey="localMenu2015OutIndDataEntryResource1"></asp:Localize>
                                                         </a>
                                                     </li>
 
                                                     <li>
-                                                        <a href="">
-                                                            <i class="ace-icon fa fa-caret-right blue"></i>See the list of 2015 project for my sector
+                                                        <a href="../ClusterLead/ProjectsListing.aspx">
+                                                            <asp:Localize ID="localMenu2015Projects" runat="server" Text="See the list of 2015 project for my sector" meta:resourcekey="localMenu2015ProjectsResource1"></asp:Localize>
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="">
-                                                            <i class="ace-icon fa fa-caret-right blue"></i>Access to my 3W data for 2015
+                                                        <a href="../Reports/ORS3W.aspx">
+                                                            <asp:Localize ID="localMenu20153W" runat="server" Text="Access to my 3W data for 2015" meta:resourcekey="localMenu20153WResource1"></asp:Localize>
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -119,15 +122,16 @@
                                             <div>
 
                                                 <div class=" label label-lg label-info arrowed-in arrowed-right">
-                                                    <b>Do you need help?</b>
+                                                    <asp:Localize ID="locHelpLable" runat="server" Text="Do you need help?" meta:resourcekey="locHelpLableResource1"></asp:Localize>
                                                 </div>
                                                 <ul class="list-unstyled spaced">
                                                     <li>
                                                         <a href="../ContactUs/Contactus.aspx">
-                                                            <i class="ace-icon fa fa-caret-right blue"></i>Send us an email
+                                                            <asp:Localize ID="locSendEmail" runat="server" Text="Send us an email" meta:resourcekey="locSendEmailResource1"></asp:Localize>
                                                         </a>
                                                     </li>
-                                                    <li>Skype: orshelpdesk
+                                                    <li>
+                                                        <asp:Localize ID="locSkype" runat="server" Text="Skype: Send us message on 'orshelpdesk'" meta:resourcekey="locSkypeResource1"></asp:Localize>
                                                     </li>
                                                 </ul>
                                             </div>

@@ -195,4 +195,7 @@
   <data name="PageResource1.Title" xml:space="preserve">
     <value>ORS - Home</value>
   </data>
+  <data name="localDonthaveORSResource.Text" xml:space="preserve">
+    <value>Don't have ORS Account?</value>
+  </data>
 </root>

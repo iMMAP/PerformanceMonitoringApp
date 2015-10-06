@@ -1,15 +1,10 @@
-﻿using System;
-using System.Data;
-using System.Drawing;
-using System.Globalization;
-using System.IO;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Xml;
-using BusinessLogic;
+﻿using BusinessLogic;
 using Microsoft.Reporting.WebForms;
 using SRFROWCA.Common;
+using System;
+using System.Data;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace SRFROWCA.ClusterLead
 {
@@ -75,8 +70,8 @@ namespace SRFROWCA.ClusterLead
             UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
             UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
 
-            ddlCluster.Items.Insert(0, new ListItem("--- Select Cluster ---", "-1"));
-            ddlCountry.Items.Insert(0, new ListItem("--- Select Country ---", "-1"));
+            ddlCluster.Items.Insert(0, new ListItem("Select Cluster", "0"));
+            ddlCountry.Items.Insert(0, new ListItem("Select Country", "0"));
 
             SetComboValues();
         }
@@ -110,10 +105,10 @@ namespace SRFROWCA.ClusterLead
             if (!string.IsNullOrEmpty(txtIndicatorName.Text.Trim()))
                 indicator = txtIndicatorName.Text;
 
-            if (Convert.ToInt32(ddlCountry.SelectedValue) > -1)
+            if (Convert.ToInt32(ddlCountry.SelectedValue) > 0)
                 countryId = Convert.ToInt32(ddlCountry.SelectedValue);
 
-            if (Convert.ToInt32(ddlCluster.SelectedValue) > -1)
+            if (Convert.ToInt32(ddlCluster.SelectedValue) > 0)
                 clusterId = Convert.ToInt32(ddlCluster.SelectedValue);
 
             bool regionalIncluded = false;
@@ -145,11 +140,11 @@ namespace SRFROWCA.ClusterLead
             {
                 if (ddlCluster.Items.Count > 0)
                 {
-                    ddlCluster.SelectedValue = "-1";
+                    ddlCluster.SelectedValue = "0";
                 }
                 if (ddlCountry.Items.Count > 0)
                 {
-                    ddlCountry.SelectedValue = "-1";
+                    ddlCountry.SelectedValue = "0";
                 }
             }
 
@@ -157,7 +152,7 @@ namespace SRFROWCA.ClusterLead
             {
                 if (ddlCluster.Items.Count > 0)
                 {
-                    ddlCluster.SelectedValue = "-1";
+                    ddlCluster.SelectedValue = "0";
                 }
             }
 
@@ -226,7 +221,7 @@ namespace SRFROWCA.ClusterLead
             {
                 ObjPrToolTip.RegionalIndicatorIcon(e, 1);
                 ObjPrToolTip.CountryIndicatorIcon(e, 2);
-
+                UI.SetThousandSeparator(e.Row, "lblIndTarget");
 
                 ImageButton btnDelete = e.Row.FindControl("btnDelete") as ImageButton;
                 ImageButton btnEdit = e.Row.FindControl("btnEdit") as ImageButton;
@@ -239,7 +234,6 @@ namespace SRFROWCA.ClusterLead
                 }
                 else
                 {
-
                     Label lblCountryId = e.Row.FindControl("lblCountryID") as Label;
                     Label lblClusterId = e.Row.FindControl("lblClusterID") as Label;
 
@@ -339,7 +333,7 @@ namespace SRFROWCA.ClusterLead
                 }
 
                 int countryId = RC.GetSelectedIntVal(ddlCountry);
-                cnId = countryId > 0? countryId : cnId;
+                cnId = countryId > 0 ? countryId : cnId;
 
                 Response.Redirect("~/ClusterLead/EditOutputIndicator.aspx?id=" + clusterIndicatorID.ToString() + "&cid=" + cId.ToString() + "&cnid=" + cnId.ToString());
             }

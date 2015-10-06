@@ -51,6 +51,7 @@ namespace SRFROWCA.ClusterLead
             if (!IsPostBack)
             {
                 LoadCombos();
+                SetFiltersFromSession();
                 DisableDropDowns();
 
                 if (Request.QueryString["a"] != null)
@@ -146,7 +147,7 @@ namespace SRFROWCA.ClusterLead
 
                         if (unitId == 269 || unitId == 28 || unitId == 38 || unitId == 193
                          || unitId == 219 || unitId == 198 || unitId == 311 || unitId == 287
-                         || unitId == 67 || unitId == 132 || unitId == 252)
+                         || unitId == 67 || unitId == 132 || unitId == 252 || unitId == 238)
                         {
                             isGender = true;
                         }
@@ -243,14 +244,9 @@ namespace SRFROWCA.ClusterLead
 
         private void DisableDropDowns()
         {
-            if (RC.IsClusterLead(this.User))
+            if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User))
             {
                 RC.EnableDisableControls(ddlCluster, false);
-                RC.EnableDisableControls(ddlCountry, false);
-            }
-
-            if (RC.IsCountryAdmin(this.User))
-            {
                 RC.EnableDisableControls(ddlCountry, false);
             }
         }
@@ -343,7 +339,7 @@ namespace SRFROWCA.ClusterLead
                             || indControl.ddlUnit.SelectedValue == "38" || indControl.ddlUnit.SelectedValue == "193"
                             || indControl.ddlUnit.SelectedValue == "219" || indControl.ddlUnit.SelectedValue == "198"
                             || indControl.ddlUnit.SelectedValue == "311" || indControl.ddlUnit.SelectedValue == "132"
-                            || indControl.ddlUnit.SelectedValue == "252")
+                            || indControl.ddlUnit.SelectedValue == "252" || indControl.ddlUnit.SelectedValue == "238")
                             isTargetValid = TargetProvided(indControl.rptCountryGender, true);
                         else
                             isTargetValid = TargetProvided(indControl.rptCountry, false);
@@ -557,6 +553,37 @@ namespace SRFROWCA.ClusterLead
             newIndSet.ControlNumber = i + 1;
             newIndSet.ID = "indicatorControlId" + i.ToString();
             pnlAdditionalIndicaotrs.Controls.Add(newIndSet);
+        }
+
+        private void SetFiltersFromSession()
+        {
+            if (Session["ClusterFrameworkSelectedCountry"] != null)
+            {
+                int countryId = 0;
+                int.TryParse(Session["ClusterFrameworkSelectedCountry"].ToString(), out countryId);
+                if (countryId > 0)
+                {
+                    try
+                    {
+                        ddlCountry.SelectedValue = countryId.ToString();
+                    }
+                    catch { }
+                }
+            }
+
+            if (Session["ClusterFrameworkSelectedCluster"] != null)
+            {
+                int clusterId = 0;
+                int.TryParse(Session["ClusterFrameworkSelectedCluster"].ToString(), out clusterId);
+                if (clusterId > 0)
+                {
+                    try
+                    {
+                        ddlCluster.SelectedValue = clusterId.ToString();
+                    }
+                    catch { }
+                }
+            }
         }
 
         public int IndControlId

@@ -71,7 +71,7 @@ namespace SRFROWCA.Controls
                 {
                     if (unitId == 269 || unitId == 28 || unitId == 38 || unitId == 193
                          || unitId == 219 || unitId == 198 || unitId == 311 || unitId == 287
-                         || unitId == 67 || unitId == 132 || unitId == 252)
+                         || unitId == 67 || unitId == 132 || unitId == 252 || unitId == 238)
                         SaveAdmin2GenderTargets(indicatorId);
                     else
                         SaveAdmin2Targets(indicatorId);
@@ -88,7 +88,7 @@ namespace SRFROWCA.Controls
                                                                             gender, calMethod, DBNull.Value });
                     if (unitId == 269 || unitId == 28 || unitId == 38 || unitId == 193
                          || unitId == 219 || unitId == 198 || unitId == 311 || unitId == 287
-                         || unitId == 67 || unitId == 132 || unitId == 252)
+                         || unitId == 67 || unitId == 132 || unitId == 252 || unitId == 238)
                         SaveAdmin2GenderTargets(indicatorId);
                     else
                         SaveAdmin2Targets(indicatorId);
@@ -100,7 +100,9 @@ namespace SRFROWCA.Controls
                                                                                             calMethod, DBNull.Value });
                     if (newIndicatorId > 0)
                     {
-                        if (unitId == 269)
+                        if (unitId == 269 || unitId == 28 || unitId == 38 || unitId == 193
+                         || unitId == 219 || unitId == 198 || unitId == 311 || unitId == 287
+                         || unitId == 67 || unitId == 132 || unitId == 252 || unitId == 238)
                             SaveAdmin2GenderTargets(indicatorId);
                         else
                             SaveAdmin2Targets(indicatorId);

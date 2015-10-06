@@ -29,6 +29,7 @@ namespace SRFROWCA.Account
 
         protected void LoginUser_LoggedIn(Object sender, EventArgs e)
         {
+            CleanSessions();
             UserInfo.UserProfileInfo(RC.EmergencySahel2015);
             if (Roles.IsUserInRole(LoginUser.UserName, "User"))
             {
@@ -42,6 +43,12 @@ namespace SRFROWCA.Account
             {
                 Response.Redirect("~/ClusterLead/ProjectsListing.aspx");
             }
+        }
+
+        private void CleanSessions()
+        {
+            Session["ClusterFrameworkSelectedCountry"] = null;
+            Session["ClusterFrameworkSelectedCluster"] = null;
         }
 
         protected void LoginUser_LoginError(object sender, EventArgs e)

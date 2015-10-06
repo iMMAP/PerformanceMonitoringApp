@@ -40,6 +40,15 @@ namespace SRFROWCA.Controls {
         public global::System.Web.UI.WebControls.HiddenField hfIndicatorId;
         
         /// <summary>
+        /// lblIndEngCap control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblIndEngCap;
+        
+        /// <summary>
         /// txtInd1Eng control.
         /// </summary>
         /// <remarks>
@@ -58,6 +67,15 @@ namespace SRFROWCA.Controls {
         protected global::System.Web.UI.WebControls.CustomValidator cvIndicator;
         
         /// <summary>
+        /// lblIndFrCap control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblIndFrCap;
+        
+        /// <summary>
         /// txtInd1Fr control.
         /// </summary>
         /// <remarks>
@@ -65,6 +83,15 @@ namespace SRFROWCA.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         public global::System.Web.UI.WebControls.TextBox txtInd1Fr;
+        
+        /// <summary>
+        /// lblUnitCap control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblUnitCap;
         
         /// <summary>
         /// ddlUnit control.
@@ -130,6 +157,15 @@ namespace SRFROWCA.Controls {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor pAdmin1Target;
         
         /// <summary>
+        /// localClickToShow1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localClickToShow1;
+        
+        /// <summary>
         /// rptCountry control.
         /// </summary>
         /// <remarks>
@@ -155,6 +191,15 @@ namespace SRFROWCA.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor pAdmin1GenderTarget;
+        
+        /// <summary>
+        /// localClickShow2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localClickShow2;
         
         /// <summary>
         /// rptCountryGender control.

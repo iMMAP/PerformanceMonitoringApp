@@ -227,6 +227,12 @@
                                         CommandName="EditProject" CommandArgument='<%# Container.DataItemIndex %>' ToolTip="Edit Project Information" />
                                 </ItemTemplate>
                             </asp:TemplateField>
+                            <asp:TemplateField HeaderStyle-Width="30px" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="btnDelete" runat="server" ImageUrl="~/assets/orsimages/delete16.png"
+                                        CommandName="DeleteProject" CommandArgument='<%# Eval("ProjectId") %>' ToolTip="Delete" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
                 </div>

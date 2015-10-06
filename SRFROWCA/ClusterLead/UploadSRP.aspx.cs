@@ -17,7 +17,7 @@ namespace SRFROWCA.ClusterLead
             if (!IsPostBack)
             {
                 PopulateDropDowns();
-                SetImportTemplate();
+                //SetImportTemplate();
                 SetExportFile();
             }
         }
@@ -25,7 +25,7 @@ namespace SRFROWCA.ClusterLead
         internal override void BindGridData()
         {
             PopulateDropDowns();
-            SetImportTemplate();
+            //SetImportTemplate();
             SetExportFile();
         }
 
@@ -36,10 +36,10 @@ namespace SRFROWCA.ClusterLead
 
             if (UserInfo.EmergencyCountry > 0)
             {
-                ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
+                //ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
                 ddlCountryExport.SelectedValue = UserInfo.EmergencyCountry.ToString();
-                ddlCountry.Enabled = false;
-                ddlCountry.BackColor = Color.LightGray;
+                //ddlCountry.Enabled = false;
+                //ddlCountry.BackColor = Color.LightGray;
 
                 if (!RC.IsRegionalClusterLead(this.User))
                 {
@@ -50,86 +50,86 @@ namespace SRFROWCA.ClusterLead
 
             if (UserInfo.EmergencyCluster > 0)
             {
-                ddlCluster.SelectedValue = UserInfo.EmergencyCluster.ToString();
+                //ddlCluster.SelectedValue = UserInfo.EmergencyCluster.ToString();
                 ddlClusterExport.SelectedValue = UserInfo.EmergencyCluster.ToString();
-                ddlCluster.Enabled = false;
-                ddlCluster.BackColor = Color.LightGray;
+                //ddlCluster.Enabled = false;
+                //ddlCluster.BackColor = Color.LightGray;
                 ddlClusterExport.Enabled = false;
                 ddlClusterExport.BackColor = Color.LightGray;
             }
         }
         private void LoadCountires()
         {
-            UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
+            //UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
             UI.FillEmergencyLocations(ddlCountryExport, RC.EmergencySahel2015);
 
-            if (ddlCountry.Items.Count > 0)
+            //if (ddlCountry.Items.Count > 0)
             {
                 ListItem item = new ListItem("Select", "0");
-                ddlCountry.Items.Insert(0, item);
+                //ddlCountry.Items.Insert(0, item);
                 //ddlCountryExport.Items.Insert(0, item);
             }
         }
         private void LoadClusters()
         {
-            UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
+            //UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
             UI.FillEmergnecyClusters(ddlClusterExport, RC.EmergencySahel2015);
-            if (ddlCluster.Items.Count > 0)
-            {
-                ListItem item = new ListItem("Select", "0");
-                ddlCluster.Items.Insert(0, item);
-                //ddlClusterExport.Items.Insert(0, item);
-            }
+            //if (ddlCluster.Items.Count > 0)
+            //{
+            //    ListItem item = new ListItem("Select", "0");
+            //    ddlCluster.Items.Insert(0, item);
+            //    //ddlClusterExport.Items.Insert(0, item);
+            //}
         }
 
-        private void SetImportTemplate()
-        {
-            string countryId = ddlCountry.SelectedValue;
-            if (countryId == "12")
-            {
-                hlTemplate.NavigateUrl = "../Test/Burkina.xlsx";
-            }
+        //private void SetImportTemplate()
+        //{
+        //    string countryId = ddlCountry.SelectedValue;
+        //    if (countryId == "12")
+        //    {
+        //        hlTemplate.NavigateUrl = "../Test/Burkina.xlsx";
+        //    }
 
-            if (countryId == "13")
-            {
-                hlTemplate.NavigateUrl = "../Test/Cameroon.xlsx";
-            }
+        //    if (countryId == "13")
+        //    {
+        //        hlTemplate.NavigateUrl = "../Test/Cameroon.xlsx";
+        //    }
 
-            if (countryId == "14")
-            {
-                hlTemplate.NavigateUrl = "../Test/Chad.xlsx";
-            }
+        //    if (countryId == "14")
+        //    {
+        //        hlTemplate.NavigateUrl = "../Test/Chad.xlsx";
+        //    }
 
-            if (countryId == "15")
-            {
-                hlTemplate.NavigateUrl = "../Test/Gambia.xlsx";
-            }
+        //    if (countryId == "15")
+        //    {
+        //        hlTemplate.NavigateUrl = "../Test/Gambia.xlsx";
+        //    }
 
-            if (countryId == "16")
-            {
-                hlTemplate.NavigateUrl = "../Test/Mali.xlsx";
-            }
+        //    if (countryId == "16")
+        //    {
+        //        hlTemplate.NavigateUrl = "../Test/Mali.xlsx";
+        //    }
 
-            if (countryId == "17")
-            {
-                hlTemplate.NavigateUrl = "../Test/Mauritania.xlsx";
-            }
+        //    if (countryId == "17")
+        //    {
+        //        hlTemplate.NavigateUrl = "../Test/Mauritania.xlsx";
+        //    }
 
-            if (countryId == "18")
-            {
-                hlTemplate.NavigateUrl = "../Test/Niger.xlsx";
-            }
+        //    if (countryId == "18")
+        //    {
+        //        hlTemplate.NavigateUrl = "../Test/Niger.xlsx";
+        //    }
 
-            if (countryId == "19")
-            {
-                hlTemplate.NavigateUrl = "../Test/Nigeria.xlsx";
-            }
+        //    if (countryId == "19")
+        //    {
+        //        hlTemplate.NavigateUrl = "../Test/Nigeria.xlsx";
+        //    }
 
-            if (countryId == "20")
-            {
-                hlTemplate.NavigateUrl = "../Test/Senegal.xlsx";
-            }
-        }
+        //    if (countryId == "20")
+        //    {
+        //        hlTemplate.NavigateUrl = "../Test/Senegal.xlsx";
+        //    }
+        //}
 
         private void SetExportFile()
         {
@@ -142,7 +142,7 @@ namespace SRFROWCA.ClusterLead
 
         protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SetImportTemplate();
+            //SetImportTemplate();
         }
 
         protected void ddlCountryExport_SelectedIndexChanged(object sender, EventArgs e)
@@ -159,51 +159,51 @@ namespace SRFROWCA.ClusterLead
 
         protected void btnUpload_Click(object sender, EventArgs e)
         {
-            string filePath = FU.UploadFile(fuSRP, Server.MapPath(@"~/TEST"));
-            string excelConString = FU.GetExcelConString(filePath);
-            string[] sheets = FU.GetExcelSheetNames(excelConString);
+            //string filePath = FU.UploadFile(fuSRP, Server.MapPath(@"~/TEST"));
+            //string excelConString = FU.GetExcelConString(filePath);
+            //string[] sheets = FU.GetExcelSheetNames(excelConString);
 
-            DataTable dt = MakeDataTable();
-            string tableScript = "";
-            if (!string.IsNullOrEmpty(excelConString) && sheets.Length > 0)
-            {
-                dt = FU.ReadDataInDataTable(excelConString, "Framework$", dt);
-                tableScript = CreateTableScript(dt);
-            }
+            //DataTable dt = MakeDataTable();
+            //string tableScript = "";
+            //if (!string.IsNullOrEmpty(excelConString) && sheets.Length > 0)
+            //{
+            //    dt = FU.ReadDataInDataTable(excelConString, "Framework$", dt);
+            //    tableScript = CreateTableScript(dt);
+            //}
 
-            //using (TransactionScope scope = new TransactionScope())
-            {
-                if (dt.Rows.Count > 0)
-                {
-                    string conString = ConfigurationManager.ConnectionStrings["live_dbName"].ConnectionString;
-                    FU.CreateTableInDB(conString, tableScript);
-                    FU.WriteDataInDBTable(conString, "ImportSRPTemp", dt);
-                    UnpivotStagingTable(dt);
-                    ImportData();
-                    //TruncateTempTables();
-                }
+            ////using (TransactionScope scope = new TransactionScope())
+            //{
+            //    if (dt.Rows.Count > 0)
+            //    {
+            //        string conString = ConfigurationManager.ConnectionStrings["live_dbName"].ConnectionString;
+            //        FU.CreateTableInDB(conString, tableScript);
+            //        FU.WriteDataInDBTable(conString, "ImportSRPTemp", dt);
+            //        UnpivotStagingTable(dt);
+            //        ImportData();
+            //        //TruncateTempTables();
+            //    }
 
-                //scope.Complete();
-                ShowMessage("Framework Imported Successfully!", RC.NotificationType.Success, false);
-            }
+            //    //scope.Complete();
+            //    ShowMessage("Framework Imported Successfully!", RC.NotificationType.Success, false);
+            //}
         }
 
         private bool IsValidFile()
         {
-            if (fuSRP.HasFile)
-            {
-                string fileExt = Path.GetExtension(fuSRP.PostedFile.FileName);
-                if (fileExt != ".xls" && fileExt != ".xlsx" && fileExt != ".xlsb")
-                {
-                    ShowMessage("Pleae use Excel files with 'xls' OR 'xlsx' extentions.");
-                    return false;
-                }
-            }
-            else
-            {
-                ShowMessage("Please select file to upload!");
-                return false;
-            }
+            //if (fuSRP.HasFile)
+            //{
+            //    string fileExt = Path.GetExtension(fuSRP.PostedFile.FileName);
+            //    if (fileExt != ".xls" && fileExt != ".xlsx" && fileExt != ".xlsb")
+            //    {
+            //        ShowMessage("Pleae use Excel files with 'xls' OR 'xlsx' extentions.");
+            //        return false;
+            //    }
+            //}
+            //else
+            //{
+            //    ShowMessage("Please select file to upload!");
+            //    return false;
+            //}
 
             return true;
         }
@@ -273,12 +273,12 @@ namespace SRFROWCA.ClusterLead
             DBContext.GetData("UnpivotImportSRPStaging", new object[] { locations, locationsWithAliases, aliasesOfLocations });
         }
 
-        private DataTable ImportData()
+        private void ImportData()
         {
-            int emgCountryId = Convert.ToInt32(ddlCountry.SelectedValue);
-            int emgClusterId = Convert.ToInt32(ddlCluster.SelectedValue);
-            int emergencyId = RC.EmergencySahel2015;
-            return DBContext.GetData("ImportSRP", new object[] {emergencyId, emgCountryId, emgClusterId, RC.GetCurrentUserId});
+            //int emgCountryId = Convert.ToInt32(ddlCountry.SelectedValue);
+            //int emgClusterId = Convert.ToInt32(ddlCluster.SelectedValue);
+            //int emergencyId = RC.EmergencySahel2015;
+            //return DBContext.GetData("ImportSRP", new object[] {emergencyId, emgCountryId, emgClusterId, RC.GetCurrentUserId});
         }
 
         private string GetLocationNames(DataTable dt)

@@ -151,45 +151,48 @@
     <value>Custom Report (Project Activities)</value>
   </data>
   <data name="localMenuDashboardResource1.Text" xml:space="preserve">
-    <value>ORS Dashboard</value>
+    <value>Tableau de bord ORS</value>
   </data>
   <data name="localMenuFramework2015Resource1.Text" xml:space="preserve">
-    <value>Cluster Framework 2015</value>
+    <value>Cadre sectoriel 2015</value>
   </data>
   <data name="localMenuKeyFiguresResource1.Text" xml:space="preserve">
-    <value>Key-Figures</value>
+    <value>Chiffres clés</value>
   </data>
   <data name="localMenuLogRegLableResource1.Text" xml:space="preserve">
-    <value>Login or Register!</value>
+    <value>Se connecter ou s'inscire</value>
   </data>
   <data name="localMenuMapsResource1.Text" xml:space="preserve">
-    <value>Maps</value>
+    <value>Cartes</value>
   </data>
   <data name="localMenuORSLableResource1.Text" xml:space="preserve">
-    <value>Access to ORS Data and Visualisations!</value>
+    <value>Accés aux données et visualisations ORS</value>
   </data>
   <data name="localMenuOutputIndResource1.Text" xml:space="preserve">
     <value>Cluster Output Indicators Reported</value>
   </data>
   <data name="localMenuProjectsResource1.Text" xml:space="preserve">
-    <value>Projects 2015 List</value>
+    <value>Listes des projets 2015</value>
   </data>
   <data name="locDefaultIntroResource1.Text" xml:space="preserve">
-    <value>Le système de rapportage en ligne (ORS) est un outil de suivi des performances qui permet aux partenaires humanitaires, participant dans les processus de planification inter-agences, de renseigner sur les progrès basés sur les activités définies lors du SRP/HRP. La base de données a été conçue afin de faciliter le partage de l’information et de suivre la réponse des interventions humanitaires.</value>
+    <value>Le système de rapportage en ligne (ORS) est un outil de suivi des performances qui permet aux partenaires humanitaires, participant aux processus de planification inter-agences, de renseigner sur les progrès basés sur les activités définies lors du SRP/HRP. La base de données a été conçue afin de faciliter le partage de l’information et de suivre la réponse des interventions humanitaires.</value>
   </data>
   <data name="locDefaultWelcomeResource1.Text" xml:space="preserve">
     <value>Bienvenue sur ORS!</value>
   </data>
   <data name="locHelpLableResource1.Text" xml:space="preserve">
-    <value>Do you need help?</value>
+    <value>Besoin d'aide?</value>
   </data>
   <data name="locSendEmailResource1.Text" xml:space="preserve">
-    <value>Send us an email</value>
+    <value>Envover un e-mail</value>
   </data>
   <data name="locSkypeResource1.Text" xml:space="preserve">
-    <value>Skype: Send us message on 'orshelpdesk'</value>
+    <value>Skype: Envoyer un message au 'orshelpdesk'</value>
   </data>
   <data name="PageResource1.Title" xml:space="preserve">
-    <value>ORS - Home</value>
+    <value>ORS - Accueil</value>
+  </data>
+  <data name="localDonthaveORSResource.Text" xml:space="preserve">
+    <value>Pas encore de compte?</value>
   </data>
 </root>

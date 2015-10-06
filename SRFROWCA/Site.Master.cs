@@ -201,6 +201,7 @@ namespace SRFROWCA
             liProgressSummary.Visible = isShow;
             liProjectsPublic.Visible = !isShow;
             liActivitesFrameworkPublic.Visible = !isShow;
+            liClusterFrameworkImport.Visible = isShow;
         }
 
         private void ShowOCHAMenue()

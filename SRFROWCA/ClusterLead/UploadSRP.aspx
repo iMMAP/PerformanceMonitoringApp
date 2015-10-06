@@ -30,7 +30,7 @@
         </div>
         <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>
         <div class="row">
-            <div class="col-xs-6">
+            <%--<div class="col-xs-6">
                 <!-- PAGE CONTENT BEGINS -->
 
                 <div class="error-container">
@@ -72,7 +72,7 @@
                        <hr />
                     </div>
                 </div>
-            </div>
+            </div>--%>
             <div class="col-xs-6">
                 <!-- PAGE CONTENT BEGINS -->
 
@@ -106,7 +106,7 @@
                                     <a href="../Reports/DownloadReport.aspx?type=10" runat="server" id="menueExportWord"><span class="menu-text"><asp:Localize ID="Localize12" runat="server" Text="Export In Word" meta:resourcekey="localReportResource1"></asp:Localize>
                                 </span></a>
                                 </li>
-                                 <li id="li1" runat="server">
+                                 <li id="li1" runat="server" class="hidden">
                                     <div class="excel-icon" style="float:left;margin-right:5px;margin-top:2px;"></div>
                                     <a href="../Reports/DownloadReport.aspx?type=11" runat="server" id="menueExportExcel"><span class="menu-text"><asp:Localize ID="Localize1" runat="server" Text="Export to Excel" meta:resourcekey="localReportResource1"></asp:Localize>
                                 </span></a>

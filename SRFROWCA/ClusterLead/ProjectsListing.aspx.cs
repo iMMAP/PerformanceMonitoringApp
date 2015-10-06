@@ -197,7 +197,7 @@ namespace SRFROWCA.ClusterLead
             else if (e.CommandName == "PrintReport")
             {
                 ExportToPDF(Convert.ToInt32(e.CommandArgument));
-            }
+            }            
 
             if (e.CommandName == "EditProject")
             {
@@ -217,6 +217,31 @@ namespace SRFROWCA.ClusterLead
                     Response.Redirect("~/Pages/ManageProject.aspx?" + "pid=" + projectId + "&poid=" + projOrgId + "&oid=" + orgId);
                 }
             }
+
+            if (e.CommandName == "DeleteProject")
+            {
+                int projId = Convert.ToInt32(e.CommandArgument);
+                DeleteProject(projId);
+            }
+        }
+
+        private void DeleteProject(int projectId)
+        {
+            if (!IsProjectBeingUsed(projectId))
+            {
+                DBContext.Delete("DeleteProject", new object[] { projectId, DBNull.Value });
+                ShowMessage("Project Deleted Successfully!", RC.NotificationType.Success);
+                LoadProjects();
+            }
+            else
+            {
+                ShowMessage("This project can not be deleted becasue its being used in reports!", RC.NotificationType.Error);
+            }
+        }
+
+        private bool IsProjectBeingUsed(int projectId)
+        {
+            return ((DBContext.GetData("IsReportExistsForProject", new object[] { projectId }).Rows.Count > 0));
         }
 
         protected void gvProjects_Sorting(object sender, GridViewSortEventArgs e)

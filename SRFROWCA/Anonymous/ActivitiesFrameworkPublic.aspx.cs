@@ -152,7 +152,11 @@ namespace SRFROWCA.Anonymous
             int? emergencyObjectiveId = ddlObjective.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlObjective.SelectedValue);
             int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
 
-            ddlActivity.DataSource = DBContext.GetData("GetActivitiesNew", new object[] { emergencyLocationId, emergencyClusterId, emergencyObjectiveId, RC.SelectedSiteLanguageId });
+            int yearId = 11;
+
+            ddlActivity.DataSource = DBContext.GetData("GetActivitiesNew", new object[] { emergencyLocationId, emergencyClusterId, 
+                                                                                            emergencyObjectiveId, yearId,
+                                                                                            RC.SelectedSiteLanguageId });
             ddlActivity.DataTextField = "Activity";
             ddlActivity.DataValueField = "ActivityId";
             ddlActivity.DataBind();
