@@ -147,6 +147,7 @@
     <Content Include="Anonymous\OutputIndicatorReport.aspx" />
     <Content Include="Anonymous\ProjectsListingPublic.aspx" />
     <Content Include="assets\css\bootstrap.min.css" />
+    <Content Include="assets\css\ddl.css" />
     <Content Include="assets\css\gridviewScroll.css" />
     <Content Include="assets\css\gritter.css" />
     <Content Include="assets\css\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
@@ -176,6 +177,7 @@
     <Content Include="assets\orsimages\edit16.png" />
     <Content Include="assets\orsimages\logo.gif" />
     <Content Include="assets\orsimages\map24.png" />
+    <Content Include="assets\orsjs\ddlslick.js" />
     <Content Include="assets\orsjs\jquery.wholenumber.js" />
     <Content Include="ClusterLead\AddActivityAndIndicators.aspx" />
     <Content Include="Admin\ConfigSettings.aspx" />
@@ -289,6 +291,8 @@
     <Content Include="GV\Images\arrowvt.png" />
     <Content Include="GV\WebForm.htm" />
     <Content Include="HtmlPage1.html" />
+    <Content Include="HtmlPage2.html" />
+    <Content Include="HtmlPage3.html" />
     <Content Include="KeyFigures\AddKeyFigure.aspx" />
     <Content Include="KeyFigures\AddKeyFigureCategory.aspx" />
     <Content Include="KeyFigures\AddKeyFigureCategoryCtrl.ascx" />
@@ -306,7 +310,9 @@
     <Content Include="Landing\ClusterCord.aspx" />
     <Content Include="Log\ErrorLog.txt" />
     <Content Include="OperationalPresence.aspx" />
+    <Content Include="OPSTargets.html" />
     <Content Include="OPS\GridTestOPS.aspx" />
+    <Content Include="OPS\IndicatorTargetsByProjectStatus.html" />
     <Content Include="OPS\OPSDataEntry2.aspx" />
     <Content Include="OPS\OPSDataEntryNested.aspx" />
     <Content Include="OPS\OPSDataEntryOld.aspx" />
@@ -329,6 +335,7 @@
     <Content Include="Global.asax" />
     <Content Include="Reports\CountryMaps.aspx" />
     <Content Include="Reports\DownloadReport.aspx" />
+    <Content Include="Reports\IndicatorTargetByProjectStatus.aspx" />
     <Content Include="Reports\LoadCountryMaps.aspx" />
     <Content Include="Reports\ORS3W.aspx" />
     <Content Include="RequestOrganization.aspx" />
@@ -421,6 +428,7 @@
       <DependentUpon>ORSModel.edmx</DependentUpon>
       <LastGenOutput>ORSModel.cs</LastGenOutput>
     </Content>
+    <Content Include="NoMenue.Master" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -1123,6 +1131,13 @@
     <Compile Include="Landing\ClusterCord.aspx.designer.cs">
       <DependentUpon>ClusterCord.aspx</DependentUpon>
     </Compile>
+    <Compile Include="NoMenue.Master.cs">
+      <DependentUpon>NoMenue.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NoMenue.Master.designer.cs">
+      <DependentUpon>NoMenue.Master</DependentUpon>
+    </Compile>
     <Compile Include="OperationalPresence.aspx.cs">
       <DependentUpon>OperationalPresence.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1316,6 +1331,13 @@
     </Compile>
     <Compile Include="Reports\DownloadReport.aspx.designer.cs">
       <DependentUpon>DownloadReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\IndicatorTargetByProjectStatus.aspx.cs">
+      <DependentUpon>IndicatorTargetByProjectStatus.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\IndicatorTargetByProjectStatus.aspx.designer.cs">
+      <DependentUpon>IndicatorTargetByProjectStatus.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\LoadCountryMaps.aspx.cs">
       <DependentUpon>LoadCountryMaps.aspx</DependentUpon>
