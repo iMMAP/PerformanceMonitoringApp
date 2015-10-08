@@ -1,0 +1,92 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="NoMenue.master.cs" Inherits="SRFROWCA.NoMenue" %>
+
+<!DOCTYPE html>
+<html>
+<head id="masterHead" runat="server">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <meta charset="utf-8" />
+    <title><%=PageTitle %></title>
+    <meta name="description" content="<%=MetaDescription %>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- basic styles -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/ddl.css" rel="stylesheet" />
+    <%--<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">--%>
+    <link rel="stylesheet" href="assets/css/ace-fonts.css" />
+    <link rel="stylesheet" href="assets/css/ace.min.css" />
+    <%--<link rel="stylesheet" href="assets/css/ace-skins.min.css" />--%>
+    <link rel="stylesheet" href="assets/css/ors.css" />
+    <%--<link rel="Stylesheet" href="assets/css/jquery-ui.min.css" />--%>
+    <script src='<%# BaseURL %>/assets/js/jquery-2.0.3.min.js'></script>
+
+    <style>
+        .navbar {
+            background: #f8f8f8;
+        }
+    </style>
+
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form runat="server">
+        <div class="navbar navbar-default" id="navbar">
+            <div class="navbar-container" id="navbar-container">
+                <div class="navbar-header pull-left">
+                    <a href="<%# BaseURL %>/Default.aspx" class="navbar-brand">
+                        <img src="<%# BaseURL %>/assets/orsimages/logo.gif" alt="OCHA" /></a>
+                </div>
+                <div></div>
+                <div class="navbar-header pull-right" role="navigation">
+                    <ul class="nav ace-nav">
+                        <li>
+                            <asp:LinkButton ID="lnkLanguageEnglish" Text="En" runat="server" OnClick="lnkLanguageEnglish_Click"
+                                CausesValidation="False" meta:resourcekey="lnkLanguageEnglishResource2"></asp:LinkButton></li>
+                        <li>
+                            <asp:LinkButton ID="lnkLanguageFrench" Text="Fr" runat="server" OnClick="lnkLanguageFrench_Click"
+                                CausesValidation="False" meta:resourcekey="lnkLanguageFrenchResource2"></asp:LinkButton></li>
+                    </ul>
+                    <!-- /.ace-nav -->
+                </div>
+                <!-- /.navbar-header -->
+            </div>
+            <!-- /.container -->
+        </div>
+        <div class="main-container" id="main-container">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+
+            <!-- /.main-content -->
+        </div>
+
+        <!-- basic scripts -->
+        <%--<script src='<%# BaseURL %>/assets/js/ace-extra.min.js'></script>--%>
+        <script src="<%# BaseURL %>/assets/js/bootstrap.min.js"></script>
+        <%--<script src="<%# BaseURL %>/assets/js/jquery-ui.min.js"></script>--%>
+        <script src="<%# BaseURL %>/assets/js/ace.min.js"></script>
+        <script src="<%# BaseURL %>/assets/orsjs/ddlslick.js"></script>
+
+        <script>
+            
+            // Keep the session alive
+            function setHeartbeat() {
+                setTimeout("heartbeat()", 200000);
+            }
+
+            $(function () {
+                heartbeat();
+            });
+
+            function heartbeat() {
+                $.get(
+						"/SessionHeartbeat.ashx",
+						function (data) {
+						    setHeartbeat();
+						}
+					);
+            }
+        </script>
+    </form>
+</body>
+</html>
