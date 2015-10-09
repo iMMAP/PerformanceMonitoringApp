@@ -2,6 +2,7 @@
 using SRFROWCA.Common;
 using System;
 using System.Data;
+using System.Drawing;
 using System.Web.UI.WebControls;
 
 namespace SRFROWCA.Reports
@@ -13,18 +14,12 @@ namespace SRFROWCA.Reports
             if (!IsPostBack)
             {
                 PopulateDropDowns();
+                SetDropDownOnRole();
                 PopulateIndicators();
             }
         }
 
-        private void PopulateDropDowns()
-        {
-            UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
-            ddlCluster.Items.Insert(0, new ListItem("All", "0"));
-
-            UI.FillEmergencyLocations(ddlLocation, RC.EmergencySahel2015);
-            ddlLocation.Items.Insert(0, new ListItem("All", "0"));
-        }
+        
 
         #region Events
 
@@ -32,6 +27,10 @@ namespace SRFROWCA.Reports
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
+                UI.SetThousandSeparator(e.Row, "lblClusterTotal");
+                UI.SetThousandSeparator(e.Row, "lblDraftTotal");
+                UI.SetThousandSeparator(e.Row, "lblApprovedTotal");
+                UI.SetThousandSeparator(e.Row, "lblCapTotal");
                 PopulateAdminGrid(e.Row, "hfCountryId", "gvAdmin1", "GetOPSAdmin1TargetOfIndicatorForOpsClusCooReport");
                 ObjPrToolTip.ObjectiveIconToolTip(e, 2);
             }
@@ -41,7 +40,22 @@ namespace SRFROWCA.Reports
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
+                UI.SetThousandSeparator(e.Row, "lblAdm1ClusterTotal");
+                UI.SetThousandSeparator(e.Row, "lblAdm1DraftTotal");
+                UI.SetThousandSeparator(e.Row, "lblAdm1ApprovedTotal");
+                UI.SetThousandSeparator(e.Row, "lblAdm1CapTotal");
                 PopulateAdminGrid(e.Row, "hfAdmin1Id", "gvAdmin2", "GetOPSAdmin2TargetOfIndicatorForOpsClusCooReport");
+            }
+        }
+
+        protected void gvAdmin2_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                UI.SetThousandSeparator(e.Row, "lblAdm2ClusterTotal");
+                UI.SetThousandSeparator(e.Row, "lblAdm2DraftTotal");
+                UI.SetThousandSeparator(e.Row, "lblAdm2ApprovedTotal");
+                UI.SetThousandSeparator(e.Row, "lblAdm2CapTotal");
             }
         }
 
@@ -58,6 +72,16 @@ namespace SRFROWCA.Reports
         {
             PopulateIndicators();
         }
+
+        private void PopulateDropDowns()
+        {
+            UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
+            ddlCluster.Items.Insert(0, new ListItem("All", "0"));
+
+            UI.FillEmergencyLocations(ddlLocation, RC.EmergencySahel2015);
+            ddlLocation.Items.Insert(0, new ListItem("All", "0"));
+        }
+
         private void PopulateIndicators()
         {
             DataTable dt = GetIndicators();
@@ -65,10 +89,39 @@ namespace SRFROWCA.Reports
             gvActivities.DataBind();
         }
 
+        private void SetDropDownOnRole()
+        {
+            if (RC.IsClusterLead(this.User))
+            {
+                ddlCluster.SelectedValue = UserInfo.EmergencyCluster.ToString();
+                ddlCluster.Enabled = false;
+                ddlCluster.BackColor = Color.LightGray;
+
+                ddlLocation.SelectedValue = UserInfo.EmergencyCountry.ToString();
+                ddlLocation.Enabled = false;
+                ddlLocation.BackColor = Color.LightGray;
+
+            }
+
+            if (RC.IsRegionalClusterLead(this.User))
+            {
+                ddlCluster.SelectedValue = UserInfo.EmergencyCluster.ToString();
+                ddlCluster.Enabled = false;
+                ddlCluster.BackColor = Color.LightGray;
+            }
+
+            if (RC.IsCountryAdmin(this.User))
+            {
+                ddlLocation.SelectedValue = UserInfo.EmergencyCountry.ToString();
+                ddlLocation.Enabled = false;
+                ddlLocation.BackColor = Color.LightGray;
+            }
+        }
+
         private DataTable GetIndicators()
         {
             int val = RC.GetSelectedIntVal(ddlLocation);
-            int? emgLocId = val > 0 ? val : (int?) null;
+            int? emgLocId = val > 0 ? val : (int?)null;
             val = RC.GetSelectedIntVal(ddlCluster);
             int? emgClusterId = val > 0 ? val : (int?)null;
             int langId = RC.SelectedSiteLanguageId;

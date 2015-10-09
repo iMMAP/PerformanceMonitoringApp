@@ -35,6 +35,14 @@ namespace SRFROWCA
         protected void Page_Load(object sender, EventArgs e)
         {
             RC.SelectedEmergencyId = 3;
+
+            if (!IsPostBack)
+            {
+                if (HttpContext.Current.User.Identity.IsAuthenticated)
+                {
+                    UserInfo.UserProfileInfo(RC.SelectedEmergencyId);
+                }
+            }
         }
 
         protected void lnkLanguageEnglish_Click(object sender, EventArgs e)

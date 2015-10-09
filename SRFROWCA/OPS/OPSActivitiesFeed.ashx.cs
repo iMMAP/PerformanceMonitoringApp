@@ -77,9 +77,13 @@ namespace SRFROWCA.OPS
             {
                 dt = DBContext.GetData("GetOPSProjectData2", new object[] { projectId });
             }
-            else
+            else if (year == 2014)
             {
                 dt = DBContext.GetData("GetOPSProjectData", new object[] { projectId });
+            }
+            else
+            {
+                dt = DBContext.GetData("GetOPSProjectData2016", new object[] { projectId });
             }
 
             XDocument doc = new XDocument();
