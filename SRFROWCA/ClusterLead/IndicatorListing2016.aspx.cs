@@ -198,7 +198,7 @@ namespace SRFROWCA.ClusterLead
         {
             // Get last error from the server
             Exception exc = Server.GetLastError();
-            SRFROWCA.Common.ExceptionUtility.LogException(exc, "ActivityListing", this.User);
+            ExceptionUtility.LogException(exc, User);
         }
 
         protected void gvActivity_PageIndexChanging(object sender, GridViewPageEventArgs e)

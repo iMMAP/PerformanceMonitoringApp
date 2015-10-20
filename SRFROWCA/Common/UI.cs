@@ -38,6 +38,23 @@ namespace SRFROWCA.Common
             cbl.DataBind();
         }
 
+        internal static void FillEmergnecyClusters(ListControl cbl, int emergencyId, int removeEntry)
+        {
+            cbl.DataValueField = "EmergencyClusterId";
+            cbl.DataTextField = "ClusterName";
+            DataTable dt = RC.GetEmergencyClusters(emergencyId);
+            for(int i = 0; i< dt.Rows.Count; i++)
+            {
+                if (dt.Rows[i]["EmergencyClusterId"].ToString() == removeEntry.ToString())
+                {
+                    dt.Rows.RemoveAt(i);
+                    break;
+                }
+            }
+            cbl.DataSource = dt;
+            cbl.DataBind();
+        }
+
         // Populate LocationDropDown
         internal static void FillLocations(ListControl ddl, DataTable dt)
         {
@@ -245,6 +262,13 @@ namespace SRFROWCA.Common
         }
 
         internal static void SetThousandSeparator(GridViewRow row, string ctlId)
+        {
+            Label lbl = row.FindControl(ctlId) as Label;
+            if (lbl != null && !string.IsNullOrEmpty(lbl.Text))
+                lbl.Text = GetThousandSeparator(lbl.Text);
+        }
+
+        internal static void SetThousandSeparator(RepeaterItem row, string ctlId)
         {
             Label lbl = row.FindControl(ctlId) as Label;
             if (lbl != null && !string.IsNullOrEmpty(lbl.Text))

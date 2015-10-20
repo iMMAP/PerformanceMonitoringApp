@@ -15,12 +15,11 @@ using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Xml;
 
 
 namespace SRFROWCA.Common
 {
-    public class RC
+    public static class RC
     {
         #region Roles & Rights
 
@@ -135,23 +134,6 @@ namespace SRFROWCA.Common
         internal static DataTable GetEmergencyClusters(int emergencyId)
         {
             return DBContext.GetData("GetEmergencyClusters", new object[] { emergencyId, RC.SelectedSiteLanguageId });
-            ////return DBContext.GetData("GetEmergencyClusters", new object[] { emergencyId, RC.SelectedSiteLanguageId });
-            //using (ORSEntities db = new ORSEntities())
-            //{
-            //    return(
-            //                from ec in db.EmergencyClusters
-            //                join cl in db.Clusters on ec.ClusterId equals cl.ClusterId
-            //                join em in db.Emergencies on ec.EmergencyId equals em.EmergencyId
-            //                where ec.EmergencyId == emergencyId
-            //                && cl.SiteLanguageId == SelectedSiteLanguageId
-            //                && em.SiteLanguageId == SelectedSiteLanguageId
-            //                select new
-            //                {
-            //                    ec.EmergencyClusterId,
-            //                    cl.ClusterName
-            //                }
-            //        ).ToList();
-            //}
         }
 
         #endregion
@@ -662,6 +644,11 @@ namespace SRFROWCA.Common
             return setting;
         }
 
+        public static bool IsGenderUnit(int unitId)
+        {
+            int[] GenderUnits = { 28, 38, 132, 193, 198, 219, 238, 252, 269, 311 };
+            return (Array.IndexOf(GenderUnits, unitId)) > -1;
+        }
         internal static string FrenchCulture
         {
             get
@@ -700,7 +687,7 @@ namespace SRFROWCA.Common
             {
                 return 4;
             }
-        }
+        }        
 
         public enum LocationTypes
         {
@@ -739,13 +726,31 @@ namespace SRFROWCA.Common
         public enum YearsInDB
         {
             Year2014 = 10,
-            Year2015 = 11
+            Year2015 = 11,
+            Year2016 = 12
         }
 
-        
+        public enum LocationCategory
+        {
+            Government = 1,
+            Health = 2,
+        }
+
+        public enum EmgClsId2016
+        {
+            EDU = 13,
+            ESN = 14,
+            HLT = 15,
+            NUT = 16,
+            PRO = 17,
+            ER = 18,
+            CSS = 19,
+            FS = 20,
+            LGS = 21,
+            WASH = 22,
+            ETC = 23,
+            MS = 24,
+            CCCM = 26
+        }
     }
-
-
-
-
 }

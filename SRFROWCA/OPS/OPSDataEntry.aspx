@@ -5,12 +5,42 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style>
+        .page-content {
+            margin: 0;
+            padding: 8px 12px 24px;
+        }
+
+        .widget-main {
+            padding: 2px;
+        }
+
+        table.imagetable2 td {
+            padding: 2px 0px 2px 0px;
+        }
+
+        .padding1 {
+            padding: 2px;
+        }
+
+        table.imagetable2 td {
+            padding: 2px 0px 2px 0px;
+        }
+
+        .padding1 {
+            padding: 2px;
+        }
+
+        .lblnotarget {
+            color: red;
+            font-weight: bold;
+        }
+
         .details1 {
             display: none;
         }
 
-        tdTable {
-            width: 10%;
+        .txtalign {
+            text-align: right;
         }
 
         .details0 {
@@ -107,6 +137,7 @@
 
         $(function () {
             //showHideObj();
+            $(".numeric1").wholenumber();
 
             $('.showDetails1').click(function () {
                 $(this).parent().parent().next('tr.details1').toggle();
@@ -147,17 +178,16 @@
                         <div class="widget-main">
                             <div class="pull-right">
                                 <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
-                                    CausesValidation="False" Width="120px" CssClass="btn btn-primary" meta:resourcekey="btnSaveResource1" />
-                                <asp:Localize ID="locbtnCloseWindow" runat="server" Text="&lt;input type=&quot;button&quot; class=&quot;btn btn-primary&quot; value=&quot;Close Window&quot; id=&quot;close&quot; onclick=&quot;window.close()&quot; /&gt;"
+                                    CausesValidation="False" Width="110px" CssClass="btn btn-sm btn-primary" meta:resourcekey="btnSaveResource1" />
+
+                                <asp:Localize ID="locbtnCloseWindow" runat="server"
+                                    Text="&lt;input type=&quot;button&quot; class=&quot;btn btn-sm btn-primary&quot; value=&quot;Close Window&quot; id=&quot;close&quot; onclick=&quot;window.close()&quot; /&gt;"
                                     meta:resourcekey="locbtnCloseWindowResource1"></asp:Localize>
                             </div>
                             <div class="spacer" style="clear: both;">
                             </div>
                             <br />
                             <div id="divMsg">
-                            </div>
-                            <div>
-                                <asp:CheckBoxList ID="cblObjectives" runat="server" CssClass="checkObj hidden" RepeatColumns="3"></asp:CheckBoxList>
                             </div>
                             <div id="scrolledGridView" style="overflow-x: auto; width: 100%">
                                 <asp:GridView ID="gvActivities" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True"
@@ -180,7 +210,7 @@
                                                 <%--<asp:Label ID="lblObjective" runat="server" Text='<%# Eval("Objective") %>'></asp:Label>--%>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderStyle-Width="150" ItemStyle-Width="150" meta:resourcekey="TemplateFieldResource2">
+                                        <asp:TemplateField HeaderStyle-Width="250" ItemStyle-Width="250" meta:resourcekey="TemplateFieldResource2">
                                             <HeaderTemplate>
                                                 <asp:Label ID="lblGridHeaderActivity" runat="server" Text="Activity" meta:resourcekey="lblGridHeaderActivityResource1"></asp:Label>
                                             </HeaderTemplate>
@@ -189,7 +219,7 @@
                                                     meta:resourcekey="lblGridActivityResource1"></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderStyle-Width="150" ItemStyle-Width="150" meta:resourcekey="TemplateFieldResource3">
+                                        <asp:TemplateField HeaderStyle-Width="250" ItemStyle-Width="250" meta:resourcekey="TemplateFieldResource3">
                                             <HeaderTemplate>
                                                 <asp:Label ID="lblGridHeaderIndicator" runat="server" Text="Indicator"></asp:Label>
                                             </HeaderTemplate>
@@ -215,166 +245,166 @@
                                                 <asp:Label ID="lblCalMethod" runat="server" Text='<%# Eval("CalculationType") %>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderStyle-Width="500" ItemStyle-Width="500px">
+                                        <asp:TemplateField HeaderStyle-Width="600" ItemStyle-Width="600">
                                             <ItemTemplate>
+                                                <asp:Label ID="lblNoTarget" runat="server" CssClass="lblnotarget" Visible="false"
+                                                    Text="No Target Provided For This Inidcator, Consult Cluster Coordinator"></asp:Label>
                                                 <asp:Repeater ID="rptCountryGender" runat="server" OnItemDataBound="rptCountryGender_ItemDataBound">
                                                     <ItemTemplate>
-                                                        <table style="width: 100%;" class="imagetable tblCountryGender">
+                                                        <table style="width: 600px;" class="imagetable imagetable2 tblCountryGender">
                                                             <tr>
-                                                                <th colspan="2" style="width: 135px;" class="lightgraycolor"></th>
-                                                                <th class="tdHeader" colspan="3">Cluster Targets</th>
-                                                                <th class="tdHeader" colspan="3">Project Targets</th>
+                                                                <th colspan="2" style="width: 125px;" class="lightgraycolor"></th>
+                                                                <th class="tdHeader" style="width: 210px;" colspan="3">Cluster Targets</th>
+                                                                <th class="tdHeader" style="width: 210px" colspan="3">Project Targets</th>
                                                             </tr>
                                                             <tr>
-                                                                <th colspan="2" style="width: 135px;" class="lightgraycolor">Locaiton</th>
-                                                                <th class="tdHeader">Male</th>
-                                                                <th class="tdHeader">Female</th>
-                                                                <th class="tdHeader">Total</th>
-                                                                <th class="tdHeader">Male</th>
-                                                                <th class="tdHeader">Female</th>
-                                                                <th class="tdHeader">Total</th>
+                                                                <th colspan="2" style="width: 125px;" class="lightgraycolor">Locaiton</th>
+                                                                <th class="tdHeader" style="width: 70px;">Male</th>
+                                                                <th class="tdHeader" style="width: 70px;">Female</th>
+                                                                <th class="tdHeader" style="width: 70px;">Total</th>
+                                                                <th class="tdHeader" style="width: 70px;">Male</th>
+                                                                <th class="tdHeader" style="width: 70px;">Female</th>
+                                                                <th class="tdHeader" style="width: 70px;">Total</th>
                                                             </tr>
-                                                            <tr style="background-color: #C8C8C8">
+                                                            <tr style="background-color: #C0C0C0 ">
                                                                 <td width="5px">
                                                                     <img src="../assets/orsimages/plus.png" class="showDetails0"
                                                                         title="Click to show/hide Admin1" alt="Expand/Collapse Admin1" /></td>
-                                                                <td style="width: 100px;">
-                                                                    <div style="float: left; width: 100%; text-align: left;">
+                                                                <td style="width: 120px;">
+                                                                    <div style="float: left; width: 120px; padding: 2px; text-align: left;">
                                                                         <%#Eval("LocationName")%>
                                                                         <asp:HiddenField ID="hfCountryId" runat="server" Value='<%#Eval("LocationId")%>' />
                                                                         <asp:HiddenField ID="hfCountryIndicatorId" runat="server" Value='<%#Eval("IndicatorId")%>' />
                                                                 </td>
                                                                 <td class="tdTable">
-
-                                                                    <asp:TextBox ID="txtCountryTargetMaleCluster" runat="server"
-                                                                        Text='<%#Eval("ClusterMale") %>' ToolTip="Cluster Country Target Total Male"
-                                                                        CssClass="trgtCountryGenderMale" Enabled="false" Width="100%"></asp:TextBox>
+                                                                    <asp:Label ID="lblCountryTargetMaleCluster" runat="server"
+                                                                        Text='<%#Eval("ClusterMale") %>' ToolTip="Cluster Target: Country Total Male"
+                                                                        CssClass="trgtCountryGenderMale txtalign" Width="70px"></asp:Label>
                                                                 </td>
                                                                 <td class="tdTable">
-                                                                    <asp:TextBox ID="txtCountryTargetFemaleCluster" runat="server"
-                                                                        Text='<%#Eval("ClusterFemale") %>' ToolTip="Cluster Country Target Total Female"
-                                                                        CssClass="trgtCountryGenderMale txt" Enabled="false" Width="100%"></asp:TextBox>
+                                                                    <asp:Label ID="lblCountryTargetFemaleCluster" runat="server"
+                                                                        Text='<%#Eval("ClusterFemale") %>' ToolTip="Cluster Target: Country Total Female"
+                                                                        CssClass="trgtCountryGenderMale txtalign" Width="70px"></asp:Label>
                                                                 </td>
                                                                 <td class="tdTable">
-                                                                    <asp:TextBox ID="txtCountryTargetCluster" runat="server"
-                                                                        Text='<%#Eval("ClusterTotal") %>' ToolTip="Cluster Country Target Total"
-                                                                        CssClass="trgtCountryGenderMale txt" Enabled="false" Width="100%"></asp:TextBox>
+                                                                    <asp:Label ID="lblCountryTargetCluster" runat="server"
+                                                                        Text='<%#Eval("ClusterTotal") %>' ToolTip="Cluster Target: Country Total"
+                                                                        CssClass="trgtCountryGenderMale txtalign" Width="70px"></asp:Label>
                                                                 </td>
                                                                 <td class="tdTable">
-                                                                    <asp:TextBox ID="txtCountryTargetMaleProject" runat="server"
-                                                                        Text='<%#Eval("ProjectMale") %>' ToolTip="Project Country Target Total Male"
-                                                                        CssClass="trgtCountryGenderMale txt" Enabled="false" Width="100%"></asp:TextBox>
+                                                                    <asp:Label ID="lblCountryTargetMaleProject" runat="server"
+                                                                        Text='<%#Eval("ProjectMale") %>' ToolTip="Project Target: Country Total Male"
+                                                                        CssClass="trgtCountryGenderMale txtalign" Width="70px"></asp:Label>
                                                                 </td>
                                                                 <td class="tdTable">
-                                                                    <asp:TextBox ID="txtCountryTargetFemaleProject" runat="server"
-                                                                        Text='<%#Eval("ProjectFemale") %>' ToolTip="Project Country Target Total Female"
-                                                                        CssClass="trgtCountryGenderMale txt" Enabled="false" Width="100%"></asp:TextBox>
+                                                                    <asp:Label ID="lblCountryTargetFemaleProject" runat="server"
+                                                                        Text='<%#Eval("ProjectFemale") %>' ToolTip="Project Target: Country Total Female"
+                                                                        CssClass="trgtCountryGenderMale txtalign" Width="70px"></asp:Label>
                                                                 </td>
                                                                 <td class="tdTable">
-                                                                    <asp:TextBox ID="txtCountryTargetProject" runat="server"
-                                                                        Text='<%#Eval("ProjectTotal") %>' ToolTip="Project Country Target Total"
-                                                                        CssClass="trgtCountryGenderMale txt" Enabled="false" Width="100%"></asp:TextBox>
+                                                                    <asp:Label ID="lblCountryTargetProject" runat="server"
+                                                                        Text='<%#Eval("ProjectTotal") %>' ToolTip="Project Target: Country Total"
+                                                                        CssClass="trgtCountryGenderMale txtalign" Width="70px"></asp:Label>
                                                                 </td>
                                                             </tr>
                                                             <tr class="details0">
                                                                 <td style="width: 100%;" colspan="8">
                                                                     <asp:Repeater ID="rptAdmin1" runat="server" OnItemDataBound="rptAdmin1Gender_ItemDataBound">
                                                                         <ItemTemplate>
-                                                                            <table style="margin: 0 auto; width: 100%;" border="0" class="imagetable tblAdmin1Gender">
-                                                                                <tr style="background-color: #EEEEEE" class="trAdmin1">
+                                                                            <table style="margin: 0 auto; width: 600px;" border="0" class="imagetable imagetable2 tblAdmin1Gender">
+                                                                                <tr style="background-color: #D8D8D8  " class="trAdmin1">
                                                                                     <td width="5px">
                                                                                         <img src="../assets/orsimages/plus.png" class="showDetails1"
                                                                                             title="Click to show/hide Admin2" /></td>
-                                                                                    <td style="width: 150px;">
-
-                                                                                        <div style="float: left; width: 100%; text-align: left;"><%#Eval("LocationName")%></div>
+                                                                                    <td style="width: 130px;">
+                                                                                        <div style="float: left; width: 100%; padding: 2px; text-align: left;"><%#Eval("LocationName")%></div>
                                                                                         <asp:HiddenField ID="hfAdmin1Id" runat="server" Value='<%#Eval("LocationId")%>' />
                                                                                         <asp:HiddenField ID="hfAdmin1IndicatorId" runat="server" Value='<%#Eval("IndicatorId")%>' />
                                                                                     </td>
                                                                                     <td class="tdTable">
-                                                                                        <asp:TextBox ID="txtAdmin1TargetMaleCluster" runat="server"
-                                                                                            Text='<%#Eval("ClusterMale") %>' ToolTip="Cluster Admin1 Male Total"
-                                                                                            CssClass="trgtAdmin1GenderMale" Style="text-align: right;"
-                                                                                            Width="100%" Enabled="false"></asp:TextBox>
+                                                                                        <asp:Label ID="lblAdmin1TargetMaleCluster" runat="server"
+                                                                                            Text='<%#Eval("ClusterMale") %>' ToolTip="Cluster Tareget: Admin1 Total Male"
+                                                                                            CssClass="trgtAdmin1GenderMale txtalign"
+                                                                                            Width="70px"></asp:Label>
                                                                                     </td>
                                                                                     <td class="tdTable">
-                                                                                        <asp:TextBox ID="txtAdmin1TargetFemaleCluster" runat="server"
-                                                                                            Text='<%#Eval("ClusterFemale") %>' ToolTip="Cluster Admin1 Female Total"
-                                                                                            CssClass="trgtAdmin1GenderMale" Style="text-align: right;"
-                                                                                            Width="100%" Enabled="false"></asp:TextBox>
+                                                                                        <asp:Label ID="lblAdmin1TargetFemaleCluster" runat="server"
+                                                                                            Text='<%#Eval("ClusterFemale") %>' ToolTip="Cluster Target: Admin1 Total Female"
+                                                                                            CssClass="trgtAdmin1GenderMale txtalign"
+                                                                                            Width="70px"></asp:Label>
                                                                                     </td>
                                                                                     <td class="tdTable">
-                                                                                        <asp:TextBox ID="txtAdmin1TargetCluster" runat="server"
-                                                                                            Text='<%#Eval("ClusterTotal") %>' ToolTip="Cluster Admin1 Total"
-                                                                                            CssClass="trgtAdmin1GenderMale" Style="text-align: right;"
-                                                                                            Width="100%" Enabled="false"></asp:TextBox>
+                                                                                        <asp:Label ID="lblAdmin1TargetCluster" runat="server"
+                                                                                            Text='<%#Eval("ClusterTotal") %>' ToolTip="Cluster Target: Admin1 Total"
+                                                                                            CssClass="trgtAdmin1GenderMale txtalign"
+                                                                                            Width="70px"></asp:Label>
                                                                                     </td>
                                                                                     <td class="tdTable">
-                                                                                        <asp:TextBox ID="txtAdmin1TargetMaleProject" runat="server"
-                                                                                            Text='<%#Eval("ProjectMale") %>' ToolTip="Project Admin1 Male Total"
-                                                                                            CssClass="trgtAdmin1GenderMale" Style="text-align: right;"
-                                                                                            Width="100%" Enabled="false"></asp:TextBox>
+                                                                                        <asp:Label ID="lblAdmin1TargetMaleProject" runat="server"
+                                                                                            Text='<%#Eval("ProjectMale") %>' ToolTip="Project Target: Admin1 Total Male"
+                                                                                            CssClass="trgtAdmin1GenderMale txtalign"
+                                                                                            Width="70px"></asp:Label>
                                                                                     </td>
                                                                                     <td class="tdTable">
-                                                                                        <asp:TextBox ID="txtAdmin1TargetFemaleProject" runat="server"
-                                                                                            Text='<%#Eval("ProjectFemale") %>' ToolTip="Project Admin1 Female Total"
-                                                                                            CssClass="trgtAdmin1GenderMale" Style="text-align: right;"
-                                                                                            Width="100%" Enabled="false"></asp:TextBox>
+                                                                                        <asp:Label ID="lblAdmin1TargetFemaleProject" runat="server"
+                                                                                            Text='<%#Eval("ProjectFemale") %>' ToolTip="Project Target: Admin1 Total Female"
+                                                                                            CssClass="trgtAdmin1GenderMale txtalign"
+                                                                                            Width="70px"></asp:Label>
                                                                                     </td>
                                                                                     <td class="tdTable">
-                                                                                        <asp:TextBox ID="txtAdmin1TargetProject" runat="server"
-                                                                                            Text='<%#Eval("ProjectTotal") %>' ToolTip="Project Admin1 Total"
-                                                                                            CssClass="trgtAdmin1GenderMale" Style="text-align: right;"
-                                                                                            Width="100%" Enabled="false"></asp:TextBox>
+                                                                                        <asp:Label ID="lblAdmin1TargetProject" runat="server"
+                                                                                            Text='<%#Eval("ProjectTotal") %>' ToolTip="Project Target: Admin1 Total"
+                                                                                            CssClass="trgtAdmin1GenderMale txtalign"
+                                                                                            Width="70px"></asp:Label>
                                                                                     </td>
 
                                                                                 </tr>
-                                                                                <tr class="details1">
+                                                                                <tr class="details1" style="background-color:#F0F0F0">
                                                                                     <td></td>
                                                                                     <td style="width: 100%;" colspan="8">
                                                                                         <asp:Repeater ID="rptAdmin2" runat="server" OnItemDataBound="rptAdmin2_ItemDataBound">
                                                                                             <ItemTemplate>
-                                                                                                <table style="margin: 0 auto; width: 100%;" border="0" class="imagetable tblAdmin2Gender">
+                                                                                                <table style="margin: 0 auto; width: 585px;" border="0" class="imagetable tblAdmin2Gender">
                                                                                                     <tr>
-                                                                                                        <td style="width: 150px">
-                                                                                                            <div style="float: left; width: 100%; text-align: left;"><%#Eval("LocationName")%></div>
+                                                                                                        <td style="width: 130px">
+                                                                                                            <div style="float: left; width: 100%; padding: 2px; text-align: left;"><%#Eval("LocationName")%></div>
                                                                                                             <asp:HiddenField ID="hfAdmin2Id" runat="server" Value='<%#Eval("LocationId")%>' />
                                                                                                         </td>
                                                                                                         <td class="tdTable">
-                                                                                                            <asp:TextBox ID="txtAdmin2TargetMaleCluster" runat="server"
-                                                                                                                Text='<%#Eval("ClusterMale") %>' ToolTip="Cluster Admin1 Male Total"
-                                                                                                                CssClass="trgtAdmin2GenderMale" Style="text-align: right;"
-                                                                                                                Width="100%" Enabled="false"></asp:TextBox>
+                                                                                                            <asp:Label ID="lblAdmin2TargetMaleCluster" runat="server"
+                                                                                                                Text='<%#Eval("ClusterMale") %>' ToolTip="Cluster Target: Admin2 Total Male"
+                                                                                                                CssClass="trgtAdmin2GenderMale padding1 txtalign"
+                                                                                                                Width="70px"></asp:Label>
                                                                                                         </td>
                                                                                                         <td class="tdTable">
-                                                                                                            <asp:TextBox ID="txtAdmin2TargetFemaleCluster" runat="server"
-                                                                                                                Text='<%#Eval("ClusterFemale") %>' ToolTip="Cluster Admin1 Female Total"
-                                                                                                                CssClass="trgtAdmin2GenderMale" Style="text-align: right;"
-                                                                                                                Width="100%" Enabled="false"></asp:TextBox>
+                                                                                                            <asp:Label ID="lblAdmin2TargetFemaleCluster" runat="server"
+                                                                                                                Text='<%#Eval("ClusterFemale") %>' ToolTip="Cluster Target: Admin2 Total Female"
+                                                                                                                CssClass="trgtAdmin2GenderMale txtalign"
+                                                                                                                Width="70px"></asp:Label>
                                                                                                         </td>
                                                                                                         <td class="tdTable">
-                                                                                                            <asp:TextBox ID="txtAdmin2TargetCluster" runat="server"
-                                                                                                                Text='<%#Eval("ClusterTotal") %>' ToolTip="Cluster Admin1 Total"
-                                                                                                                CssClass="trgtAdmin2GenderMale" Style="text-align: right;"
-                                                                                                                Width="100%" Enabled="false"></asp:TextBox>
+                                                                                                            <asp:Label ID="lblAdmin2TargetCluster" runat="server"
+                                                                                                                Text='<%#Eval("ClusterTotal") %>' ToolTip="Cluster Target: Admin2 Total"
+                                                                                                                CssClass="trgtAdmin2GenderMale txtalign"
+                                                                                                                Width="70px"></asp:Label>
                                                                                                         </td>
-                                                                                                        <td class="tdTable">
+                                                                                                        <td class="tdTable" style="padding-left: 2px;">
                                                                                                             <asp:TextBox ID="txtAdmin2TargetMaleProject" runat="server"
-                                                                                                                Text='<%#Eval("ProjectMale") %>' ToolTip="Project Admin1 Male Total"
-                                                                                                                CssClass="trgtAdmin2GenderMale" Style="text-align: right;"
-                                                                                                                Width="100%"></asp:TextBox>
+                                                                                                                Text='<%#Eval("ProjectMale") %>' ToolTip="Project Target Admin2 Total Male"
+                                                                                                                CssClass="trgtAdmin2GenderMale numeric1 padding1 txtalign"
+                                                                                                                Width="70px"></asp:TextBox>
                                                                                                         </td>
-                                                                                                        <td class="tdTable">
+                                                                                                        <td class="tdTable" style="padding-left: 2px;">
                                                                                                             <asp:TextBox ID="txtAdmin2TargetFemaleProject" runat="server"
-                                                                                                                Text='<%#Eval("ProjectFemale") %>' ToolTip="Project Admin1 Female Total"
-                                                                                                                CssClass="trgtAdmin1GenderMale" Style="text-align: right;"
-                                                                                                                Width="100%"></asp:TextBox>
+                                                                                                                Text='<%#Eval("ProjectFemale") %>' ToolTip="Project Target Admin2 Total Female"
+                                                                                                                CssClass="trgtAdmin1GenderMale numeric1 padding1 txtalign"
+                                                                                                                Width="70px"></asp:TextBox>
                                                                                                         </td>
-                                                                                                        <td class="tdTable">
+                                                                                                        <td class="tdTable" style="padding-left: 2px;">
                                                                                                             <asp:TextBox ID="txtAdmin2TargetProject" runat="server"
-                                                                                                                Text='<%#Eval("ProjectTotal") %>' ToolTip="Project Admin1 Total"
-                                                                                                                CssClass="trgtAdmin1GenderMale" Style="text-align: right;"
-                                                                                                                Width="100%"></asp:TextBox>
+                                                                                                                Text='<%#Eval("ProjectTotal") %>' ToolTip="Project Target Admin2 Total"
+                                                                                                                CssClass="trgtAdmin1GenderMale numeric1 txtalign" Style="text-align: right;"
+                                                                                                                Width="70px"></asp:TextBox>
                                                                                                         </td>
                                                                                                     </tr>
                                                                                                 </table>
@@ -383,7 +413,6 @@
                                                                                         </asp:Repeater>
                                                                                     </td>
                                                                                 </tr>
-
                                                                             </table>
                                                                         </ItemTemplate>
                                                                     </asp:Repeater>
@@ -391,7 +420,6 @@
                                                             </tr>
                                                         </table>
                                                         <asp:HiddenField runat="server" ID="hfLocationIdGender" Value='<%# Eval("LocationId") %>' />
-
                                                     </ItemTemplate>
                                                 </asp:Repeater>
                                             </ItemTemplate>

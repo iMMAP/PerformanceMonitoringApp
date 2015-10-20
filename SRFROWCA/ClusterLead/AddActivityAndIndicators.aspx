@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AddActivityAndIndicators.aspx.cs" 
+﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AddActivityAndIndicators.aspx.cs"
     Inherits="SRFROWCA.ClusterLead.AddActivityAndIndicators" Culture="auto" UICulture="auto" meta:resourcekey="PageResource1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
@@ -144,6 +144,7 @@
         }
 
         $(function () {
+            $('[data-rel=popover]').popover({ html: true });
             $('.showDetails1').click(function () {
                 $(this).parent().parent().next('tr.details1').toggle();
                 $(this).attr('src', ($(this).attr('src') == '../assets/orsimages/plus.png' ?
@@ -269,20 +270,26 @@
     <div class="page-content">
         <div class="col-xs-12 col-sm-12">
             <div class="row">
-                <div class="col-xs-12 col-sm-12">
+                <div class="col-xs-4 col-sm-4">
                     <asp:Button ID="Button1" runat="server" OnClick="btnSave_Click" Text="Save" CssClass="width-10 btn btn-sm btn-primary" meta:resourcekey="Button1Resource1" />
                     <asp:Button ID="Button2" runat="server" Text="Back" OnClick="btnBackToSRPList_Click"
                         CssClass="width-10 btn btn-sm btn-primary" CausesValidation="False" meta:resourcekey="Button2Resource1" />
                     <asp:Button ID="Button3" runat="server" Text="Help"
                         CssClass="width-10 btn btn-sm btn-primary" CausesValidation="False" meta:resourcekey="Button3Resource1" />
                 </div>
-                <hr />
-
+                <div class="col-xs-4 col-sm-4">
+                    <asp:Label ID="lblMSRefugee" runat="server" Text="MS for Refugees Cluster Framework" 
+                        CssClass="label-warning label-lg" Visible="false"></asp:Label>
+                    <asp:CheckBox id="cbMSRefugees" runat="server" Text="Yes" Visible="false"/>
+                </div>
+            </div>
+            <br />
+            <div class="row">
                 <div class="col-xs-4 col-sm-4">
                     <input hidden id="hdActId" value="0" />
                     <asp:Label runat="server" ID="lblCountry" Text="Country:*" meta:resourcekey="lblCountryResource1"></asp:Label>
                     <div>
-                        <asp:DropDownList ID="ddlCountry" runat="server" CssClass="width-100" AutoPostBack="True" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" meta:resourcekey="ddlCountryResource1">
+                        <asp:DropDownList ID="ddlCountry" runat="server" CssClass="width-100" meta:resourcekey="ddlCountryResource1">
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator ID="rfvCountry" runat="server" ErrorMessage="Required" Display="Dynamic"
                             CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCountry" meta:resourcekey="rfvCountryResource1"></asp:RequiredFieldValidator>
@@ -307,6 +314,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-xs-6 col-sm-6">
                     <asp:Label ID="lblActivityEngCap" runat="server" Text="Activity (English)" meta:resourcekey="lblActivityEngCapResource1"></asp:Label>

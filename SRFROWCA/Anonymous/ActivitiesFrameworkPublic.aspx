@@ -1,21 +1,19 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ActivitiesFrameworkPublic.aspx.cs" Inherits="SRFROWCA.Anonymous.ActivitiesFrameworkPublic" %>
-
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    <style>
+        .modalDialog {
+            width: 500px;
+            position: relative;
+            margin: 10% auto;
+            padding: 5px 20px 13px 20px;
+            border-radius: 2px;
+            background: #ffffff;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
-        </script>
-        <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="#">Home</a> </li>
-            <li class="active">Activities Framework</li>
-        </ul>
-        <!-- .breadcrumb -->
-    </div>
     <div class="page-content">
-        <div id="divMsg">
-        </div>
         <table width="100%">
             <tr>
                 <td>
@@ -24,15 +22,9 @@
                             <div class="widget-box">
                                 <div class="widget-header widget-header-small header-color-blue2">
                                     <h6>
-                                        <%--<button runat="server" id="btnExportPDF" onserverclick="ExportToPDF" class="btn btn-yellow" causesvalidation="false"
-                                            title="PDF">
-                                            <i class="icon-download"></i>PDF
-                                       
-                                        </button>--%>
-                                        <button runat="server" id="btnExportToExcel" onserverclick="btnExportExcel_Click" class="btn btn-yellow" causesvalidation="false"
-                                            title="Excel">
+                                        <button runat="server" id="btnExportToExcel" onserverclick="btnExportExcel_Click"
+                                            class="btn btn-sm btn-yellow" causesvalidation="false" title="Excel">
                                             <i class="icon-download"></i>Excel
-                                       
                                         </button>
                                     </h6>
                                 </div>
@@ -44,56 +36,58 @@
                                                     <table border="0" style="width: 100%;">
                                                         <tr>
                                                             <td class="width-20">
-                                                                <label>
-                                                                    Cluster:</label>
+                                                                <asp:Label runat="server" ID="lblCountry" Text="Country:" meta:resourcekey="lblCountryResource1"></asp:Label>
                                                             </td>
                                                             <td class="width-30">
-                                                                <asp:DropDownList ID="ddlCluster" runat="server" CssClass="width-80">
-                                                                </asp:DropDownList>
-                                                            </td>
-                                                            <td>
-                                                                <label>Country:</label></td>
-                                                            <td>
-                                                                <asp:DropDownList runat="server" ID="ddlCountry" Width="270px" meta:resourcekey="ddlCountryResource1">
+                                                                <asp:DropDownList runat="server" ID="ddlCountry" CssClass="width-80" AutoPostBack="True"
+                                                                    OnSelectedIndexChanged="ddlSelectedIndexChnaged"
+                                                                    meta:resourcekey="ddlCountryResource1">
                                                                 </asp:DropDownList></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="width-20">
-                                                                <label>
-                                                                    Objective:</label>
+                                                            <td>
+                                                                <asp:Label runat="server" ID="lblCluster" Text="Cluster:" meta:resourcekey="lblClusterResource1"></asp:Label>
                                                             </td>
-                                                            <td class="width-30">
-                                                                <asp:DropDownList ID="ddlObjective" runat="server" AppendDataBoundItems="true" CssClass="width-80">
-                                                                    <asp:ListItem Text="All" Value="-1" Selected="True"></asp:ListItem>
-
-                                                                </asp:DropDownList>
-                                                            </td>
-                                                            <td class="width-20">
-                                                                <label>
-                                                                    Activity:</label>
-                                                            </td>
-                                                            <td class="width-30">
-
-                                                                <asp:DropDownList ID="ddlActivity" runat="server" CssClass="width-80">
+                                                            <td>
+                                                                <asp:DropDownList ID="ddlCluster" runat="server" CssClass="width-80" AutoPostBack="True"
+                                                                    OnSelectedIndexChanged="ddlSelectedIndexChnaged" meta:resourcekey="ddlClusterResource1">
                                                                 </asp:DropDownList>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td class="width-20">
-                                                                <label>
-                                                                    Indicator Name:</label>
+                                                                <asp:Label ID="lblObj" runat="server" Text="Objective:" meta:resourcekey="lblObjResource1"></asp:Label>
+                                                            </td>
+                                                            <td class="width-30">
+                                                                <asp:DropDownList ID="ddlObjective" runat="server" AppendDataBoundItems="True" AutoPostBack="True"
+                                                                    CssClass="width-80" OnSelectedIndexChanged="ddlSelectedIndexChnaged" meta:resourcekey="ddlObjectiveResource1">
+                                                                </asp:DropDownList>
+                                                            </td>
+                                                            <td class="width-20">
+                                                                <asp:Label ID="lblActivity" runat="server" Text="Activity:" meta:resourcekey="lblActivityResource1"></asp:Label>
+                                                            </td>
+                                                            <td class="width-30">
+
+                                                                <asp:DropDownList ID="ddlActivity" runat="server" CssClass="width-80" AutoPostBack="True"
+                                                                    OnSelectedIndexChanged="ddlActivitySelectedIndexChnaged" meta:resourcekey="ddlActivityResource1">
+                                                                </asp:DropDownList>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="width-20">
+                                                                <asp:Label ID="lblIndicator" runat="server" Text="Indicator" meta:resourcekey="lblIndicatorResource1"></asp:Label>
                                                             </td>
 
                                                             <td class="width-30">
-                                                                <asp:TextBox ID="txtActivityName" runat="server" CssClass="width-80"></asp:TextBox>
+                                                                <asp:TextBox ID="txtActivityName" runat="server" CssClass="width-80" meta:resourcekey="txtActivityNameResource1"></asp:TextBox>
                                                             </td>
 
                                                             <td class="width-20">
-                                                                <label>
-                                                                    Gender Aggregated:</label>
+                                                                <asp:Label ID="lblYear" runat="server" Text="Year:" meta:resourcekey="lblYearResource1"></asp:Label>
                                                             </td>
                                                             <td class="width-30">
-                                                                <asp:CheckBox runat="server" ID="chkIsGender" />
+                                                                <asp:DropDownList ID="ddlFrameworkYear" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlYear_SelectedIndexChnaged" meta:resourcekey="ddlFrameworkYearResource1">
+                                                                    <asp:ListItem Text="2016" Value="12" meta:resourcekey="ListItemResource2"></asp:ListItem>
+                                                                    <asp:ListItem Text="2015" Value="11" meta:resourcekey="ListItemResource3"></asp:ListItem>
+                                                                </asp:DropDownList>
                                                             </td>
 
                                                         </tr>
@@ -101,9 +95,12 @@
                                                         <tr>
                                                             <td>&nbsp;</td>
                                                             <td colspan="4" style="padding-top: 10px;">
-                                                                <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch2_Click" CssClass="btn btn-primary" CausesValidation="false" />
-                                                                <asp:Button ID="btnReset" runat="server" Text="Reset" Style="margin-left: 5px;" OnClick="btnReset_Click" CssClass="btn btn-primary" CausesValidation="False" meta:resourcekey="btnSearchResource1" />
+                                                                <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch2_Click"
+                                                                    CssClass="btn btn-sm btn-primary" CausesValidation="False" meta:resourcekey="btnSearchResource1" />
+                                                                <asp:Button ID="btnReset" runat="server" Text="Reset" Style="margin-left: 5px;"
+                                                                    OnClick="btnReset_Click" CssClass="btn btn-sm btn-primary" CausesValidation="False" meta:resourcekey="btnResetResourceIndlst1" />
                                                             </td>
+
                                                         </tr>
                                                     </table>
                                                 </div>
@@ -117,13 +114,18 @@
                 </td>
             </tr>
         </table>
-
         <div class="tablegrid">
             <div style="overflow-x: auto; width: 100%">
-                <asp:GridView ID="gvActivity" runat="server" AutoGenerateColumns="false" AllowSorting="True" AllowPaging="true" PagerSettings-Mode="NumericFirstLast"
-                    Width="100%"  PagerSettings-Position="Bottom" DataKeyNames="ActivityId,IndicatorDetailId,IndicatorId"
-                    CssClass="table-striped table-bordered table-hover" OnSorting="gvActivity_Sorting" OnPageIndexChanging="gvActivity_PageIndexChanging"
-                    PageSize="30" ShowHeaderWhenEmpty="true" EmptyDataText="Your filter criteria does not match any indicator!">
+                <asp:GridView ID="gvActivity" runat="server" AutoGenerateColumns="False" AllowSorting="True" AllowPaging="True" Width="100%"
+                    PagerSettings-Mode="NumericFirstLast" OnRowDataBound="gvActivity_RowDataBound"
+                    PagerSettings-Position="Bottom" DataKeyNames="ActivityId,IndicatorDetailId,IndicatorId,IsMigrated"
+                    CssClass="imagetable table-hover" OnSorting="gvActivity_Sorting" OnPageIndexChanging="gvActivity_PageIndexChanging"
+                    PageSize="70" ShowHeaderWhenEmpty="True" EmptyDataText="Your filter criteria does not match any indicator!" meta:resourcekey="gvActivityResource1">
+
+                    <PagerSettings Mode="NumericFirstLast"></PagerSettings>
+
+                    <RowStyle CssClass="istrow" />
+                    <AlternatingRowStyle CssClass="altcolor" />
                     <Columns>
                         <asp:TemplateField ItemStyle-Width="2%" HeaderText="#" meta:resourcekey="TemplateFieldResource1">
                             <ItemTemplate>
@@ -131,12 +133,30 @@
                             </ItemTemplate>
                             <ItemStyle Width="2%"></ItemStyle>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="Country" HeaderText="Country" SortExpression="Country" ItemStyle-Width="80px"></asp:BoundField>
-                        <asp:BoundField DataField="ClusterName" HeaderText="Cluster" SortExpression="ClusterName" ItemStyle-Width="150px" />
-                        <asp:BoundField DataField="ShortObjective" HeaderText="Objective" SortExpression="ShortObjective" ItemStyle-Width="90px" />
-                        <asp:BoundField DataField="Activity" HeaderText="Activity" SortExpression="Activity" />
-                        <asp:BoundField DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator" />
-                        <asp:BoundField DataField="Unit" HeaderText="Unit" SortExpression="Unit" />
+                        <asp:BoundField DataField="Country" HeaderText="Country" SortExpression="Country" ItemStyle-Width="80px" meta:resourcekey="BoundFieldResource1">
+                            <ItemStyle Width="80px"></ItemStyle>
+                        </asp:BoundField>
+                        <asp:BoundField DataField="ClusterName" HeaderText="Cluster" SortExpression="ClusterName" ItemStyle-Width="150px" meta:resourcekey="BoundFieldResource2">
+                            <ItemStyle Width="150px"></ItemStyle>
+                        </asp:BoundField>
+                        <asp:BoundField DataField="ShortObjective" HeaderText="Objective" SortExpression="ShortObjective" ItemStyle-Width="90px" meta:resourcekey="BoundFieldResource3">
+                            <ItemStyle Width="90px"></ItemStyle>
+                        </asp:BoundField>
+                        <asp:BoundField DataField="Activity" HeaderText="Activity" SortExpression="Activity" meta:resourcekey="BoundFieldResource4" />
+                        <asp:BoundField DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator" meta:resourcekey="BoundFieldResource5" />
+                        <asp:BoundField DataField="Unit" HeaderText="Unit" SortExpression="Unit" meta:resourcekey="BoundFieldResource6" />
+                        <asp:TemplateField ItemStyle-Width="4%" HeaderText="<span class='tooltip2' title='Each Indicator has assigned a calcuation method type.</br>Sum: Sum of all monthly achieved.</br>Agerage: Average of all monthly achieved.</br>Max: Max data reported in any month.</br>Latest: Latest data reported.'>Calculation Method</span>" meta:resourcekey="TemplateFieldResource4">
+                            <ItemTemplate>
+                                <asp:Label ID="lblCalcMethod" ToolTip="" runat="server" Text='<%# Eval("CalculationType") %>' meta:resourcekey="lblCalcMethodResource1"></asp:Label>
+                            </ItemTemplate>
+
+                            <ItemStyle Width="4%"></ItemStyle>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Country Target" SortExpression="IndicatorTarget" ItemStyle-HorizontalAlign="Right" meta:resourcekey="TemplateFieldResource5">
+                            <ItemTemplate>
+                                <asp:Label ID="lblIndTarget" runat="server" Text='<%# Eval("IndicatorTarget") %>' meta:resourcekey="lblIndTargetResource1"></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:TemplateField Visible="false" meta:resourcekey="TemplateFieldResource5">
                             <ItemTemplate>
                                 <asp:Label ID="lblCountryID" runat="server" Text='<%# Eval("EmergencyLocationId") %>' meta:resourcekey="lblCountryIDResource1"></asp:Label>
@@ -153,4 +173,33 @@
             </div>
         </div>
     </div>
+    <input type="button" id="btnClientOpen" runat="server" style="display: none;" />
+    <asp:Panel ID="Panel2" runat="server" CssClass="modalDialog" Style="display: none" Width="600px" meta:resourcekey="Panel1Resource1">
+        <div>
+            <br />
+            Export With Admin2 (Targets):
+                <asp:RadioButton ID="rbExlAdmin2Yes" runat="server" GroupName="ExcelAdmin2Target" Checked="false" Text="Yes" />
+            <asp:RadioButton ID="rbExlAdmin2No" runat="server" GroupName="ExcelAdmin2Target" Checked="true" Text="NO" />
+            <br />
+
+            Include Identity (Ids) Columns:
+                <asp:RadioButton ID="rbExlIdnYes" runat="server" GroupName="ExcelIdnTarget" Text="Yes" />
+
+            <asp:RadioButton ID="rbExlIdnNO" runat="server" GroupName="ExcelIdnTarget" Checked="true" />
+            <label>No</label>
+
+            <div align="center">
+                <asp:Button ID="btnExportExcelOK" runat="server" Text="OK" OnClick="btnExportExcelOK_Click" class="btn btn-sm btn-primary" meta:resourcekey="OkButtonResource1" />
+                <button id="btnExportExcelCancel" class="btn btn-sm btn-primary">Close</button>
+
+            </div>
+        </div>
+    </asp:Panel>
+
+    <asp:ModalPopupExtender ID="ModalPopupExtender2" runat="server"
+        TargetControlID="btnClientOpen" CancelControlID="btnExportExcelCancel"
+        PopupControlID="Panel2"
+        BackgroundCssClass="modalpopupbackground"
+        DropShadow="True" DynamicServicePath="" Enabled="True" />
+
 </asp:Content>

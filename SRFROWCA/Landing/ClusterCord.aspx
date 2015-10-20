@@ -1,7 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ClusterCord.aspx.cs" Inherits="SRFROWCA.Landing.ClusterCord" culture="auto" meta:resourcekey="PageResource1" uiculture="auto" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ClusterCord.aspx.cs" Inherits="SRFROWCA.Landing.ClusterCord" Culture="auto" meta:resourcekey="PageResource1" UICulture="auto" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <title>ORS - Cluster Coordinator Landing</title>
+    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="page-content">
@@ -19,22 +20,17 @@
                                     <asp:Localize ID="localQuickMenue" runat="server" Text="ORS - Sector Coordination Quick Access Menu" meta:resourcekey="localQuickMenueResource1"></asp:Localize>
                                 </h4>
                             </div>
-                            <div class="widget-body">
-                                <div class="widget-main">
-                                    <p>
-                                        <asp:Localize ID="localWelcomeMessage" runat="server"
-                                            Text="Welcome back to ORS. You logged in as a Cluster/Sector coordinator. Please tell us what you would like to do!" meta:resourcekey="localWelcomeMessageResource1"></asp:Localize>
-                                    </p>
-                                </div>
-                            </div>
-
+                            <h5>
+                                <asp:Localize ID="localWelcomeMessage" runat="server"
+                                    Text="Welcome back to ORS. You logged in as a Cluster/Sector coordinator. Please tell us what you would like to do!" meta:resourcekey="localWelcomeMessageResource1"></asp:Localize>
+                            </h5>
                             <div class="widget-body">
                                 <div class="widget-main padding-24">
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="row">
                                                 <div class="col-xs-11 arrowed arrowed-right">
-                                                    <span class="label label-warning">
+                                                    <span class="label label-lg label-warning">
                                                         <i class="ace-icon fa fa-exclamation-triangle bigger-120"></i>
                                                         <asp:Localize ID="localToWork2016" runat="server"
                                                             Text="To Work On Your 2016 Sector Framework?" meta:resourcekey="localToWork2016Resource1"></asp:Localize>
@@ -62,7 +58,7 @@
                                                             <asp:Localize ID="localMenu2016Migrate" runat="server" Text="Migrate 2015 activites & indicators To 2016 Framework" meta:resourcekey="localMenu2016MigrateResource1"></asp:Localize>
                                                         </a>
                                                     </li>
-                                                    <li>
+                                                    <li class="hidden">
                                                         <a href="../Reports/IndicatorTargetByProjectStatus.aspx">
                                                             <asp:Localize ID="localCCReport" runat="server" Text="Cluster FrameWork Report"></asp:Localize>
                                                         </a>
@@ -75,7 +71,7 @@
                                         <div class="col-sm-6">
                                             <div class="row">
                                                 <div class="col-xs-11 arrowed arrowed-right">
-                                                    <span class="label label-warning">
+                                                    <span class="label label-lg label-warning">
                                                         <i class="ace-icon fa fa-exclamation-triangle bigger-120"></i>
                                                         <asp:Localize ID="localToWork2015" runat="server"
                                                             Text="To Work On Your 2015 Sector Framework?" meta:resourcekey="localToWork2015Resource1"></asp:Localize>

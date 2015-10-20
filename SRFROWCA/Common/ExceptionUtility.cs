@@ -22,8 +22,14 @@ namespace SRFROWCA.Common
             if (exc != null)
             {
                 string userName = iPrincipal != null ? iPrincipal.Identity.Name : "";
-                object[] items = GetParameters(exc, source, userName);
-                string subject = string.Format(@"ORS Exception, source: {0} at: {1} by: {2}", source, DateTime.Now.ToString("yyyy-MM-dd hh:mm"), userName);
+                string url = "";
+                if (HttpContext.Current != null)
+                {
+                    url = HttpContext.Current.Request.Url.ToString();
+                }
+
+                object[] items = GetParameters(exc, userName);
+                string subject = string.Format(@"ORS Exception, source: {0} at: {1} by: {2}", url, DateTime.Now.ToString("yyyy-MM-dd hh:mm"), userName);
                 string mailBody = string.Format(@"Inner Exception Type: {0}
                                             Inner Exception Source: {1} 
                                             Inner Exception: {2}
@@ -57,12 +63,12 @@ namespace SRFROWCA.Common
             }
         }
 
-        internal static void LogException(Exception exc, string source, System.Security.Principal.IPrincipal iPrincipal)
+        internal static void LogException(Exception exc, System.Security.Principal.IPrincipal iPrincipal)
         {            
             if (exc != null)
             {
                 string userName = iPrincipal != null ? iPrincipal.Identity.Name : null;
-                object[] parameters = GetParameters(exc, source, userName);
+                object[] parameters = GetParameters(exc, userName);
                 WriteExceptionInDB(parameters);
 
                 //if (source != "GlobalASAX")
@@ -75,7 +81,7 @@ namespace SRFROWCA.Common
             DBContext.Add("InsertApplicationExceptions", parameters);
         }
 
-        private static object[] GetParameters(Exception exc, string source, string userName)
+        private static object[] GetParameters(Exception exc, string userName)
         {
             string innerExcType = exc.InnerException != null ? exc.InnerException.GetType().ToString() : null;
             string innerExcSource = exc.InnerException != null ? exc.InnerException.Source : null;
@@ -102,7 +108,7 @@ namespace SRFROWCA.Common
 
             return new object[] { userName, innerExcType, innerExcSource, innerExc,
                                     innerExcStackTrace, excType, exception, excStackTrace,
-                                    source, httpCode, userAgent, url, DBNull.Value };
+                                    httpCode, userAgent, url, DBNull.Value };
         }
     }
 }

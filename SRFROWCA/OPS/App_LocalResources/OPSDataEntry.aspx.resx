@@ -252,7 +252,7 @@
             </value>
   </data>
   <data name="locbtnCloseWindowResource1.Text" xml:space="preserve">
-    <value>&lt;input type="button" class="btn btn-primary" value="Close Window" id="close" onclick="window.close()" /&gt;</value>
+    <value>&lt;input type="button" class="btn btn-sm btn-primary" value="Close Window" id="close" Width="110px" onclick="window.close()" /&gt;</value>
   </data>
   <data name="locClusterCaptionResource1.Text" xml:space="preserve">
     <value>Cluster:</value>

@@ -236,7 +236,7 @@ namespace SRFROWCA.Pages
 
             // Get last error from the server
             Exception exc = Server.GetLastError();
-            ExceptionUtility.LogException(exc, "AddActivites", this.User);
+            ExceptionUtility.LogException(exc, User);
         }
 
         #endregion

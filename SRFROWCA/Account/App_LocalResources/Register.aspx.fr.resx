@@ -130,7 +130,7 @@
     <value />
   </data>
   <data name="CustomValidator1Resource1.ErrorMessage" xml:space="preserve">
-    <value>Sélectionner votre Cluster</value>
+    <value>Sélectionner votre cluster</value>
   </data>
   <data name="CustomValidator1Resource1.Text" xml:space="preserve">
     <value />
@@ -139,7 +139,7 @@
     <value />
   </data>
   <data name="CustomValidator2Resource1.ErrorMessage" xml:space="preserve">
-    <value>Séléctionner votre Organisation</value>
+    <value>Séléctionner votre organisation</value>
   </data>
   <data name="CustomValidator2Resource1.Text" xml:space="preserve">
     <value />
@@ -160,7 +160,7 @@
     <value />
   </data>
   <data name="ListItemResource1.Text" xml:space="preserve">
-    <value>Séléctionner votre Role</value>
+    <value>Sélectionner Rôle</value>
   </data>
   <data name="ListItemResource1.Value" xml:space="preserve">
     <value>0</value>
@@ -196,7 +196,7 @@
     <value>S'inscrire</value>
   </data>
   <data name="localRegisterNewUserResource1.Text" xml:space="preserve">
-    <value>Inscription nouvel utilisateur</value>
+    <value>Inscription d’un nouvel utilisateur</value>
   </data>
   <data name="localRegisterResource1.Text" xml:space="preserve">
     <value>Retour à la connexion</value>
@@ -205,10 +205,10 @@
     <value>ORS</value>
   </data>
   <data name="RequiredFieldValidator2Resource1.ErrorMessage" xml:space="preserve">
-    <value>Sélectionner votre Pays</value>
+    <value>Sélectionner votre pays</value>
   </data>
   <data name="RequiredFieldValidator2Resource1.Text" xml:space="preserve">
-    <value>Sélectionner votre Pays</value>
+    <value>Sélectionner votre pays</value>
   </data>
   <data name="RequiredFieldValidator2Resource1.ToolTip" xml:space="preserve">
     <value />
@@ -259,10 +259,10 @@
     <value />
   </data>
   <data name="rfvUserRoleResource1.ErrorMessage" xml:space="preserve">
-    <value>Select Your Role</value>
+    <value>Sélectionner Rôle</value>
   </data>
   <data name="rfvUserRoleResource1.Text" xml:space="preserve">
-    <value>Select Your Role</value>
+    <value>Sélectionner Rôle</value>
   </data>
   <data name="rfvUserRoleResource1.ToolTip" xml:space="preserve">
     <value />
@@ -305,5 +305,8 @@
   </data>
   <data name="valMinLengthResource1.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="localOrgMissin.Text" xml:space="preserve">
+    <value>Ajouter votre organisation si elle n’est pas listée</value>
   </data>
 </root>

@@ -23,27 +23,27 @@
                                             <i class="icon-download"></i>PDF                                       
                                         </button>--%>
 
-                                        <button runat="server" id="btnExportToExcel" onserverclick="btnExportToExcel_ServerClick" class="btn btn-yellow" causesvalidation="false"
+                                        <button runat="server" id="btnExportToExcel" onserverclick="btnExportToExcel_ServerClick" class="btn btn-sm btn-yellow" causesvalidation="false"
                                             title="Excel">
                                             <i class="icon-download"></i>Excel
                                        
                                         </button>
 
                                         <asp:Button ID="btnAddIndicator" runat="server" OnClick="btnAddIndicator_Click" Text="Add Indicator" CausesValidation="False"
-                                            CssClass="btn btn-yellow pull-right" meta:resourcekey="btnAddIndicatorResource1" />
+                                            CssClass="btn btn-sm btn-yellow pull-right" meta:resourcekey="btnAddIndicatorResource1" />
                                     </h6>
                                 </div>
                                 <div id="divMsg">
                                 </div>
                                 <div class="widget-body">
                                     <div class="widget-main">
-                                        <table border="0" style="width: 95%; margin: 0px 10px 0px 20px">
+                                        <table border="0" style="width: 100%; margin: 0 auto;">
                                             <tr>
                                                 <td>
                                                     <asp:Label runat="server" ID="lblCountry" Text="Country:" meta:resourcekey="lblCountryResource1"></asp:Label>
                                                 </td>
                                                 <td>
-                                                    <asp:DropDownList AutoPostBack="True" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" runat="server" ID="ddlCountry" Width="270px" meta:resourcekey="ddlCountryResource1">
+                                                    <asp:DropDownList AutoPostBack="True" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" runat="server" ID="ddlCountry" Width="200px" meta:resourcekey="ddlCountryResource1">
                                                         <asp:ListItem Selected="True" Text="--- Select Country ---" Value="0" meta:resourcekey="ListItemResource1"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </td>
@@ -67,7 +67,9 @@
                                                 <td>&nbsp;
                                                 </td>
                                                 <td>
-                                                    <asp:CheckBox ID="cbIncludeRegional" runat="server" Text="Show Regional Indicators" Checked="True" AutoPostBack="True" OnCheckedChanged="cbIncudeRegional_CheckedChanged" meta:resourcekey="cbIncludeRegionalResource1" />
+                                                    <asp:CheckBox ID="cbIncludeRegional" runat="server" CssClass="ace ace-checkbox-2"
+                                                        Checked="True" AutoPostBack="True" OnCheckedChanged="cbIncudeRegional_CheckedChanged" />
+                                                    <asp:Localize ID="localCBIsRegCap" runat="server" Text="<span class='label-sm'>Show Regional Indicators</span>" meta:resourcekey="cbIncludeRegionalResource1"></asp:Localize>
                                                 </td>
                                                 <td>
                                                     <asp:Label ID="lblIndicatorSearch" runat="server" Text="Indicator:" meta:resourcekey="lblIndicatorSearchResource1"></asp:Label>
@@ -77,8 +79,8 @@
                                                 </td>
                                                 <td style="text-align: right;">
 
-                                                    <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" CssClass="btn btn-primary" CausesValidation="False" meta:resourcekey="btnSearchResource1" />
-                                                    <asp:Button ID="btnReset" runat="server" OnClick="btnReset_Click" Text="Reset" CssClass="btn btn-primary" CausesValidation="False" meta:resourcekey="btnResetResource1" />
+                                                    <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" CssClass="btn btn-sm btn-primary" CausesValidation="False" meta:resourcekey="btnSearchResource1" />
+                                                    <asp:Button ID="btnReset" runat="server" OnClick="btnReset_Click" Text="Reset" CssClass="btn btn-sm btn-primary" CausesValidation="False" meta:resourcekey="btnResetResource1" />
                                                 </td>
                                             </tr>
 
@@ -131,52 +133,30 @@
                                 <asp:Image ID="imgRind" runat="server" meta:resourcekey="imgRindResource1" />
                                 <asp:Image ID="imgCind" runat="server" meta:resourcekey="imgCindResource1" />
                             </ItemTemplate>
-
                             <ItemStyle HorizontalAlign="Center" Width="20px"></ItemStyle>
                         </asp:TemplateField>
-                        <asp:BoundField ItemStyle-Width="10%" DataField="Country" HeaderText="Country" SortExpression="Country" meta:resourcekey="BoundFieldResource4">
-                            <ItemStyle Width="10%"></ItemStyle>
-                        </asp:BoundField>
-                        <asp:BoundField ItemStyle-Width="10%" DataField="Cluster" HeaderText="Cluster" SortExpression="Cluster" meta:resourcekey="BoundFieldResource5">
-                            <ItemStyle Width="10%"></ItemStyle>
-                        </asp:BoundField>
-                        <asp:BoundField ItemStyle-Width="48%" DataField="Indicator" HeaderText="Indicator" HtmlEncode="false" SortExpression="Indicator" meta:resourcekey="BoundFieldResource6">
-                            <ItemStyle Width="48%"></ItemStyle>
-                        </asp:BoundField>
-                        <asp:TemplateField HeaderText="Target" SortExpression="Target" ItemStyle-HorizontalAlign="Right" meta:resourcekey="TemplateFieldResource3">
+                        <asp:BoundField ItemStyle-Width="10%" DataField="Country" HeaderText="Country" SortExpression="Country" meta:resourcekey="BoundFieldResource4"></asp:BoundField>
+                        <asp:BoundField ItemStyle-Width="15%" DataField="Cluster" HeaderText="Cluster" SortExpression="Cluster" meta:resourcekey="BoundFieldResource5"></asp:BoundField>
+                        <asp:BoundField ItemStyle-Width="40%" DataField="Indicator" HeaderText="Indicator" HtmlEncode="false" SortExpression="Indicator" meta:resourcekey="BoundFieldResource6"></asp:BoundField>
+                        <asp:BoundField ItemStyle-Width="10%" DataField="Unit" HeaderText="Unit" SortExpression="Unit" meta:resourcekey="BoundFieldResource7"></asp:BoundField>
+                        <asp:BoundField ItemStyle-Width="50px" DataField="CalculationMethod" HeaderText="Calculation" SortExpression="CalculationMethod" meta:resourcekey="BoundFieldResource8"></asp:BoundField>
+                        <asp:TemplateField ItemStyle-Width="150px" HeaderStyle-Width="150px" HeaderText="Target" SortExpression="Target" ItemStyle-HorizontalAlign="Right" meta:resourcekey="TemplateFieldResource3">
                             <ItemTemplate>
                                 <asp:Label ID="lblIndTarget" runat="server" Text='<%# Eval("Target") %>' meta:resourcekey="lblIndTargetResource1"></asp:Label>
                             </ItemTemplate>
-
                             <ItemStyle HorizontalAlign="Right"></ItemStyle>
                         </asp:TemplateField>
-                        <asp:BoundField ItemStyle-Width="10%" DataField="Unit" HeaderText="Unit" SortExpression="Unit" meta:resourcekey="BoundFieldResource7">
-                            <ItemStyle Width="10%"></ItemStyle>
-                        </asp:BoundField>
-                        <asp:BoundField ItemStyle-Width="5%" DataField="CalculationMethod" HeaderText="Calculation" SortExpression="CalculationMethod" meta:resourcekey="BoundFieldResource8">
-
-                            <ItemStyle Width="5%"></ItemStyle>
-                        </asp:BoundField>
-
                         <asp:TemplateField HeaderStyle-Width="30px" ItemStyle-HorizontalAlign="Center" HeaderText="Edit" meta:resourcekey="TemplateFieldResource4">
                             <ItemTemplate>
                                 <asp:ImageButton ID="btnEdit" runat="server" ImageUrl="~/assets/orsimages/edit16.png"
                                     CommandName="EditIndicator" CommandArgument='<%# Eval("ClusterIndicatorId") %>' ToolTip="Edit Indicator" meta:resourcekey="btnEditResource1" />
                             </ItemTemplate>
-
-                            <HeaderStyle Width="30px"></HeaderStyle>
-
-                            <ItemStyle HorizontalAlign="Center"></ItemStyle>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderStyle-Width="30px" ItemStyle-HorizontalAlign="Center" HeaderText="Del" meta:resourcekey="TemplateFieldResource5">
                             <ItemTemplate>
                                 <asp:ImageButton ID="btnDelete" runat="server" ImageUrl="~/assets/orsimages/delete16.png"
                                     CommandName="DeleteIndicator" CommandArgument='<%# Eval("ClusterIndicatorId") %>' ToolTip="Delete" meta:resourcekey="btnDeleteResource1" />
                             </ItemTemplate>
-
-                            <HeaderStyle Width="30px"></HeaderStyle>
-
-                            <ItemStyle HorizontalAlign="Center"></ItemStyle>
                         </asp:TemplateField>
                         <asp:TemplateField Visible="false" meta:resourcekey="TemplateFieldResource6">
                             <ItemTemplate>

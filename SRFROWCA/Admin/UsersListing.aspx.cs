@@ -274,7 +274,7 @@ namespace SRFROWCA.Admin
         {
             // Get last error from the server
             Exception exc = Server.GetLastError();
-            SRFROWCA.Common.ExceptionUtility.LogException(exc, "UsersListing", this.User);
+            ExceptionUtility.LogException(exc, User);
         }
 
         private int GridPageIndex

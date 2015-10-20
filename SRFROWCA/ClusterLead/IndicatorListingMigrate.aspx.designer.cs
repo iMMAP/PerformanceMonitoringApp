@@ -40,13 +40,13 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.Button btnBackToFramework;
         
         /// <summary>
-        /// ddlCluster control.
+        /// lblCountry control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCluster;
+        protected global::System.Web.UI.WebControls.Label lblCountry;
         
         /// <summary>
         /// ddlCountry control.
@@ -58,6 +58,33 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.DropDownList ddlCountry;
         
         /// <summary>
+        /// lblCluster control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCluster;
+        
+        /// <summary>
+        /// ddlCluster control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCluster;
+        
+        /// <summary>
+        /// lblObjective control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblObjective;
+        
+        /// <summary>
         /// ddlObjective control.
         /// </summary>
         /// <remarks>
@@ -65,6 +92,15 @@ namespace SRFROWCA.ClusterLead {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlObjective;
+        
+        /// <summary>
+        /// lblActivity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblActivity;
         
         /// <summary>
         /// ddlActivity control.
@@ -92,6 +128,24 @@ namespace SRFROWCA.ClusterLead {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnReset;
+        
+        /// <summary>
+        /// divMigrateMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divMigrateMessage;
+        
+        /// <summary>
+        /// lblMigrateMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMigrateMessage;
         
         /// <summary>
         /// gvActivity control.

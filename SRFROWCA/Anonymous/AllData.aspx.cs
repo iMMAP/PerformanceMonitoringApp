@@ -658,5 +658,13 @@ namespace SRFROWCA.Anonymous
         }
 
         #endregion
+
+        protected void Page_Error(object sender, EventArgs e)
+        {
+            // Get last error from the server
+            Exception exc = Server.GetLastError();
+            ExceptionUtility.LogException(exc, this.User);
+        }
+
     }
 }

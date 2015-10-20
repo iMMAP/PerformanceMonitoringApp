@@ -62,5 +62,12 @@ namespace SRFROWCA.ClusterLead
             ObjPrToolTip.PrioritiesIconToolTip(e, 1);
             ObjPrToolTip.CountryIndicatorIcon(e, 2);
         }
+
+        protected void Page_Error(object sender, EventArgs e)
+        {
+            // Get last error from the server
+            Exception exc = Server.GetLastError();
+            ExceptionUtility.LogException(exc, User);
+        }
     }
 }

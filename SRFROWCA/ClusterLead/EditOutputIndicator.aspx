@@ -41,6 +41,7 @@
         }
 
         $(function () {
+            $('[data-rel=popover]').popover({ html: true });
             $(".trgtAdmin2GenderMale").on('change', function () {
                 rowGenderTotal($(this));
             });
@@ -66,11 +67,11 @@
                 </td>
             </tr>
             <tr>
-                <td width="100px">
+                <td width="150px">
                     <asp:Label ID="lblCountry" runat="server" Text="Country:*" meta:resourcekey="lblCountryResource1"></asp:Label>
                 </td>
                 <td>
-                    <asp:DropDownList ID="ddlCountry" runat="server" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" AutoPostBack="True" Width="250px" meta:resourcekey="ddlCountryResource1">
+                    <asp:DropDownList ID="ddlCountry" runat="server" OnSelectedIndexChanged="ddl_SelectedIndexChanged" AutoPostBack="True" Width="250px" meta:resourcekey="ddlCountryResource1">
                     </asp:DropDownList>
                     <asp:RequiredFieldValidator ID="rfvCountry" runat="server" ErrorMessage="Required" Display="Dynamic"
                         CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCountry" meta:resourcekey="rfvCountryResource1">
@@ -82,7 +83,8 @@
                     <asp:Label ID="lblCluster" runat="server" Text="Cluster:*" meta:resourcekey="lblClusterResource1"></asp:Label>
                 </td>
                 <td>
-                    <asp:DropDownList ID="ddlCluster" runat="server" Width="250px" meta:resourcekey="ddlClusterResource1">
+                    <asp:DropDownList ID="ddlCluster" runat="server" Width="250px" 
+                        OnSelectedIndexChanged="ddl_SelectedIndexChanged" AutoPostBack="true" meta:resourcekey="ddlClusterResource1">
                     </asp:DropDownList>
                     <asp:RequiredFieldValidator ID="rfvCluster" runat="server" ErrorMessage="Required" Display="Dynamic"
                         CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCluster" meta:resourcekey="rfvClusterResource1">
@@ -125,7 +127,9 @@
 
             </tr>
             <tr>
-                <td><span class='tooltip2' title='Each Indicator must have a calcualtion method. (1)Sum: Sum of all reported values.(2)Agerage: Average of all reported values.(3)Max: Max data reported in any month.</br>Latest: Latest reported data by month.'>Calculation:* (?)</span></td>
+                <td>
+                    <asp:Localize ID="localCalMethod" runat="server" Text="<span class='calctemp'>Calculation:*</span>" meta:resourcekey="localCalMethodResource1"></asp:Localize>
+                    <asp:Localize ID="localCalMethodHelp" runat="server" Text="<span class='orshelpicon' data-rel='popover' data-placement='top' data-original-title='<i class='icon-wrench  bigger-110 icon-only'></i>Calculation Method' data-content='<b>Sum:</b> Running Sum of monthly achievements.<br/> <b>Average:</b> Averate of monthly achievements.<br/><b>Latest:</b> Latest recorded achievement<br/><b>Max:</b> Maximum value of achievements.'>?</span>" meta:resourcekey="localCalMethodHelpResource1"></asp:Localize></td>
                 <td>
                     <asp:DropDownList runat="server" ID="ddlCalculationMethod" Width="250px" CssClass="pullCalc" meta:resourcekey="ddlCalculationMethodResource1">
                         <asp:ListItem Text="Select Calculation" Value="0" meta:resourcekey="ListItemResource1"></asp:ListItem>
@@ -251,73 +255,73 @@
             var txtFr = $("[id$=txtInd1Fr]").val();
 
             var countryId = $("#<%=ddlCountry.ClientID%>").val();
-                var clusterId = $("#<%=ddlCluster.ClientID%>").val();
-                var unitId = $("#<%=ddlUnit.ClientID%>").val();
-                var calcId = $("#<%=ddlCalculationMethod.ClientID%>").val();
+            var clusterId = $("#<%=ddlCluster.ClientID%>").val();
+            var unitId = $("#<%=ddlUnit.ClientID%>").val();
+            var calcId = $("#<%=ddlCalculationMethod.ClientID%>").val();
 
-                if (countryId == "0" || clusterId == "0" || unitId == "0" || calcId == "0") {
-                    args.IsValid = false;
-                }
-                else if (txtEng.trim() == '' && txtFr.trim() == '') {
-                    alert("Please add Indicator atleast in one Language!")
-                    args.IsValid = false;
-                }
-                else
-                    arg.IsValid = true;
+            if (countryId == "0" || clusterId == "0" || unitId == "0" || calcId == "0") {
+                args.IsValid = false;
             }
+            else if (txtEng.trim() == '' && txtFr.trim() == '') {
+                alert("Please add Indicator atleast in one Language!")
+                args.IsValid = false;
+            }
+            else
+                arg.IsValid = true;
+        }
 
-            $(document).ready(function () {
-                $(".content").hide();
-                $(".numeric1").wholenumber();
+        $(document).ready(function () {
+            $(".content").hide();
+            $(".numeric1").wholenumber();
 
-                $('.tooltip2').tooltip();
-                $(function () {
-                    $("#show-option").tooltip({
-                        show: {
-                            effect: "slideDown",
-                            delay: 250
-                        }
-                    });
-                    $("#hide-option").tooltip({
-                        hide: {
-                            effect: "explode",
-                            delay: 250
-                        }
-                    });
-                    $("#open-event").tooltip({
-                        show: null,
-                        position: {
-                            my: "left top",
-                            at: "left bottom"
-                        },
-                        open: function (event, ui) {
-                            ui.tooltip.animate({ top: ui.tooltip.position().top + 10 }, "fast");
-                        }
-                    });
+            $('.tooltip2').tooltip();
+            $(function () {
+                $("#show-option").tooltip({
+                    show: {
+                        effect: "slideDown",
+                        delay: 250
+                    }
+                });
+                $("#hide-option").tooltip({
+                    hide: {
+                        effect: "explode",
+                        delay: 250
+                    }
+                });
+                $("#open-event").tooltip({
+                    show: null,
+                    position: {
+                        my: "left top",
+                        at: "left bottom"
+                    },
+                    open: function (event, ui) {
+                        ui.tooltip.animate({ top: ui.tooltip.position().top + 10 }, "fast");
+                    }
+                });
+            });
+
+            $("#<%=pAdmin1Target.ClientID%>").click(function () {
+                    jQuery(this).next(".content").toggle();
+                    if ($(this).text() == "Click To Show Locations") {
+                        $(this).text("Click To Hide Locations");
+                    }
+                    else {
+                        $(this).text("Click To Show Locations");
+                    }
                 });
 
-                $("#<%=pAdmin1Target.ClientID%>").click(function () {
-                jQuery(this).next(".content").toggle();
-                if ($(this).text() == "Click To Show Locations") {
-                    $(this).text("Click To Hide Locations");
-                }
-                else {
-                    $(this).text("Click To Show Locations");
-                }
-            });
+                $("#<%=pAdmin1GenderTarget.ClientID%>").click(function () {
+                    jQuery(this).next(".content").toggle();
+                    if ($(this).text() == "Click To Show Locations") {
+                        $(this).text("Click To Hide Locations");
+                    }
+                    else {
+                        $(this).text("Click To Show Locations");
+                    }
+                });
 
-            $("#<%=pAdmin1GenderTarget.ClientID%>").click(function () {
-                jQuery(this).next(".content").toggle();
-                if ($(this).text() == "Click To Show Locations") {
-                    $(this).text("Click To Hide Locations");
-                }
-                else {
-                    $(this).text("Click To Show Locations");
-                }
-            });
-
-            $('#<%=ddlUnit.ClientID%>').change(function () {
-                var selVal = $("#<%=ddlUnit.ClientID%>").val();
+                $('#<%=ddlUnit.ClientID%>').change(function () {
+                    var selVal = $("#<%=ddlUnit.ClientID%>").val();
                 if (selVal == 269 || selVal == 28 || selVal == 38
                     || selVal == 193 || selVal == 219 || selVal == 198
                      || selVal == 311 || selVal == 287 || selVal == 67 || selVal == 132
@@ -331,12 +335,12 @@
                 }
             });
 
-            var selVal2 = $("#<%=ddlUnit.ClientID%>").val();
-            if (selVal2 == 269 || selVal2 == 28 || selVal2 == 38
-                    || selVal2 == 193 || selVal2 == 219 || selVal2 == 198
-                     || selVal2 == 311 || selVal2 == 287 || selVal2 == 67 || selVal2 == 132
-                    || selVal2 == 252 || selVal2 == 238) {
-                $("#<%=divAdmin1Targets.ClientID%>").addClass('hidden');
+                var selVal2 = $("#<%=ddlUnit.ClientID%>").val();
+                if (selVal2 == 269 || selVal2 == 28 || selVal2 == 38
+                        || selVal2 == 193 || selVal2 == 219 || selVal2 == 198
+                         || selVal2 == 311 || selVal2 == 287 || selVal2 == 67 || selVal2 == 132
+                        || selVal2 == 252 || selVal2 == 238) {
+                    $("#<%=divAdmin1Targets.ClientID%>").addClass('hidden');
                 $("#<%=divAdmin1GenderTargets.ClientID%>").removeClass('hidden');
             }
             else {
@@ -344,7 +348,7 @@
                 $("#<%=divAdmin1GenderTargets.ClientID%>").addClass('hidden');
             }
 
-        });
+            });
 
     </script>
 </asp:Content>

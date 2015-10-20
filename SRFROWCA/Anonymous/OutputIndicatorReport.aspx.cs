@@ -280,5 +280,12 @@ namespace SRFROWCA.Anonymous
             gvClusterReports.SelectedIndex = -1;
             LoadClusterReports();
         }
+
+        protected void Page_Error(object sender, EventArgs e)
+        {
+            // Get last error from the server
+            Exception exc = Server.GetLastError();
+            ExceptionUtility.LogException(exc, User);
+        }
     }
 }

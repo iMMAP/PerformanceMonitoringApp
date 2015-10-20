@@ -970,7 +970,7 @@ namespace SRFROWCA.OPS
             ShowMessage("<b>Some Error Occoured. Admin Has Notified About It</b>.<br/> Please Try Again.", RC.NotificationType.Error);
             // Get last error from the server
             Exception exc = Server.GetLastError();
-            SRFROWCA.Common.ExceptionUtility.LogException(exc, "AddActivites", this.User);
+            ExceptionUtility.LogException(exc, User);
         }
 
         #endregion

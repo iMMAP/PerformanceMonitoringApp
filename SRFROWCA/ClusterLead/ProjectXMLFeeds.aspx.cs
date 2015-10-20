@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.Projects;
+using SRFROWCA.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -359,6 +360,13 @@ namespace SRFROWCA.Admin
                 return dateSplitted[1] + "/" + dateSplitted[0] + "/" + dateSplitted[2];
             else
                 return string.Empty;
+        }
+
+        protected void Page_Error(object sender, EventArgs e)
+        {
+            // Get last error from the server
+            Exception exc = Server.GetLastError();
+            ExceptionUtility.LogException(exc, User); 
         }
     }
 }

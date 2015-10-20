@@ -94,6 +94,15 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.CheckBox cbIncludeRegional;
         
         /// <summary>
+        /// localCBIsRegCap control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localCBIsRegCap;
+        
+        /// <summary>
         /// lblIndicatorSearch control.
         /// </summary>
         /// <remarks>

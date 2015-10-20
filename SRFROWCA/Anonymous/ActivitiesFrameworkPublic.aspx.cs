@@ -1,17 +1,9 @@
 ﻿using BusinessLogic;
-using Microsoft.Reporting.WebForms;
 using SRFROWCA.Common;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
-using System.Globalization;
-using System.IO;
-using System.Text;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Xml;
 
 namespace SRFROWCA.Anonymous
 {
@@ -26,63 +18,131 @@ namespace SRFROWCA.Anonymous
                 LoadCountry();
                 LoadObjectivesFilter();
                 PopulateActivities();
+                SetDropDownOnRole(true);
                 LoadIndicators();
             }
         }
 
-        
-        protected void btnSearch2_Click(object sender, EventArgs e)
+        protected void ddlSelectedIndexChnaged(object sender, EventArgs e)
+        {
+            PopulateActivities();
+            LoadIndicators();
+        }
+
+        protected void ddlActivitySelectedIndexChnaged(object sender, EventArgs e)
         {
             LoadIndicators();
+            //PopulateActivities();
+        }
+
+        protected void ddlYear_SelectedIndexChnaged(object sender, EventArgs e)
+        {
             PopulateActivities();
+            LoadIndicators();
+        }
+
+        private void SetDropDownOnRole(bool bindAll)
+        {
+            if (RC.IsClusterLead(this.User))
+            {
+                ddlCluster.SelectedValue = UserInfo.EmergencyCluster.ToString();
+                ddlCluster.Enabled = false;
+                ddlCluster.BackColor = Color.LightGray;
+                if (bindAll)
+                {
+                    ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
+                    ddlCountry.Enabled = false;
+                    ddlCountry.BackColor = Color.LightGray;
+                }
+            }
+
+            if (RC.IsRegionalClusterLead(this.User))
+            {
+                ddlCluster.SelectedValue = UserInfo.EmergencyCluster.ToString();
+                ddlCluster.Enabled = false;
+                ddlCluster.BackColor = Color.LightGray;
+                if (bindAll)
+                {
+                    ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
+                }
+            }
+
+            if (RC.IsCountryAdmin(this.User))
+            {
+                ddlCluster.SelectedValue = UserInfo.EmergencyCluster.ToString();
+                if (bindAll)
+                {
+                    ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
+                    ddlCountry.Enabled = false;
+                    ddlCountry.BackColor = Color.LightGray;
+                }
+            }
+        }
+
+        // Add delete confirmation message with all delete buttons.
+        protected void gvActivity_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                Label lblTarget = e.Row.FindControl("lblIndTarget") as Label;
+                if (lblTarget != null)
+                {
+                    if (!string.IsNullOrEmpty(lblTarget.Text))
+                        UI.SetThousandSeparator(e.Row, "lblIndTarget");
+                }
+            }
+        }
+
+        private void DeleteActivity(int activityId)
+        {
+            DBContext.Delete("DeleteActivityNew", new object[] { activityId, DBNull.Value });
+        }
+
+        // Execute row commands like Edit, Delete etc. on Grid.
+        protected void btnSearch2_Click(object sender, EventArgs e)
+        {
+            PopulateActivities();
+            LoadIndicators();
         }
 
         protected void btnReset_Click(object sender, EventArgs e)
         {
-            ddlCluster.SelectedValue = "0";
-            ddlActivity.SelectedValue = "0";
-            ddlCountry.SelectedValue = "0";
+            if (RC.IsAdmin(this.User))
+            {
+                ddlCluster.SelectedValue = "0";
+                ddlActivity.SelectedValue = "0";
+                ddlCountry.SelectedValue = "0";
+            }
+            else
+            {
+                SetDropDownOnRole(true);
+            }
+
             ddlObjective.SelectedValue = "0";
             txtActivityName.Text = "";
-            chkIsGender.Checked = false;
             LoadIndicators();
         }
 
         protected void btnExportExcel_Click(object sender, EventArgs e)
         {
+            ModalPopupExtender2.Show();
+        }
+
+        protected void btnExportExcelOK_Click(object sender, EventArgs e)
+        {
             GridView gvExport = new GridView();
-            if (RC.GetSelectedIntVal(ddlCountry) == 0)
-            {
-                ShowMessage("Please select a country to export data!", RC.NotificationType.Warning, true, 1000);
-                return;
-            }
-            DataTable dt = GetActivitiesForExcel();
-            RemoveColumnsFromDataTable(dt);
+            bool admin2 = rbExlAdmin2Yes.Checked;
+            DataTable dt = GetActivitiesForExcel(admin2);
+            if (rbExlIdnNO.Checked)
+                RemoveColumnsFromDataTable(dt);
             gvExport.DataSource = dt;
             gvExport.DataBind();
 
             string fileName = "Indicators";
             string fileExtention = ".xls";
             ExportUtility.ExportGridView(gvExport, fileName, fileExtention, Response);
-        }
-
-        protected void ExportToPDF(object sender, EventArgs e)
-        {
-            object[] parameters = GetFilterParameters();
-            DataTable dtFramework = DBContext.GetData("GetAllIndicatorsNew2WithTargetsForPDF", parameters);
-
-            if (dtFramework.Rows.Count > 0)
-            {
-                string fileName = "ORS_Cluster_Framewrok_" + DateTime.Now.ToString("dd-MMM-yyyy_hh-mm-ss");
-
-                Response.ContentType = "application/pdf";
-                Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}.pdf", fileName));
-                Response.BinaryWrite(WriteDataEntryPDF.GenerateClusterFrameworkPDF(dtFramework).ToArray());
-            }
-            else
-            {
-                ShowMessage("NO Project To Export!", RC.NotificationType.Info, true, 2000);
-            }
+            ModalPopupExtender2.Hide();
         }
 
         internal override void BindGridData()
@@ -90,6 +150,7 @@ namespace SRFROWCA.Anonymous
             LoadClustersFilter();
             LoadObjectivesFilter();
             PopulateActivities();
+            SetDropDownOnRole(false);
             LoadIndicators();
         }
 
@@ -143,38 +204,52 @@ namespace SRFROWCA.Anonymous
         private void LoadCountry()
         {
             UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
-            ddlCountry.Items.Insert(0, new ListItem("--- Select Country ---", "0"));
+            if (RC.SelectedSiteLanguageId == 1)
+                ddlCountry.Items.Insert(0, new ListItem("Select Country", "0"));
+            else
+                ddlCountry.Items.Insert(0, new ListItem("Sélectionner Pays", "0"));
         }
 
         private void PopulateActivities()
         {
-            int? emergencyClusterId = ddlCluster.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCluster.SelectedValue);
-            int? emergencyObjectiveId = ddlObjective.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlObjective.SelectedValue);
-            int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
+            int? emgLocId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
+            int? emgClusterId = ddlCluster.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCluster.SelectedValue);
+            int? emgObjId = ddlObjective.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlObjective.SelectedValue);
 
-            int yearId = 11;
+            DataTable dtAct = new DataTable();
+            if (emgLocId > 0 && emgClusterId > 0)
+            {
+                int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
+                dtAct = DBContext.GetData("GetActivitiesNew", new object[] { emgLocId, emgClusterId, emgObjId, 
+                                                                              yearId, RC.SelectedSiteLanguageId });
+                ddlActivity.DataTextField = "Activity";
+                ddlActivity.DataValueField = "ActivityId";
+            }
 
-            ddlActivity.DataSource = DBContext.GetData("GetActivitiesNew", new object[] { emergencyLocationId, emergencyClusterId, 
-                                                                                            emergencyObjectiveId, yearId,
-                                                                                            RC.SelectedSiteLanguageId });
-            ddlActivity.DataTextField = "Activity";
-            ddlActivity.DataValueField = "ActivityId";
+            ddlActivity.DataSource = dtAct;
             ddlActivity.DataBind();
-
-            ListItem item = new ListItem("Select Activity", "0");
-            ddlActivity.Items.Insert(0, item);
+            if (RC.SelectedSiteLanguageId == 1)
+                ddlActivity.Items.Insert(0, new ListItem("Select Activity", "0"));
+            else
+                ddlActivity.Items.Insert(0, new ListItem("Sélectionner Activité", "0"));
         }
 
         private void LoadClustersFilter()
         {
             UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
-            ddlCluster.Items.Insert(0, new ListItem("--- Select Cluster ---", "0"));
+            if (RC.SelectedSiteLanguageId == 1)
+                ddlCluster.Items.Insert(0, new ListItem("Select Cluster", "0"));
+            else
+                ddlCluster.Items.Insert(0, new ListItem("Sélectionner Cluster", "0"));
         }
 
         private void LoadObjectivesFilter()
         {
             ddlObjective.Items.Clear();
-            ddlObjective.Items.Add(new ListItem("All", "0"));
+            if (RC.SelectedSiteLanguageId == 1)
+                ddlObjective.Items.Add(new ListItem("Select Objective", "0"));
+            else
+                ddlObjective.Items.Add(new ListItem("Sélectionner Objectif", "0"));
             ddlObjective.DataValueField = "EmergencyObjectiveId";
             ddlObjective.DataTextField = "Objective";
             ddlObjective.DataSource = GetObjectives();
@@ -194,42 +269,40 @@ namespace SRFROWCA.Anonymous
 
         private DataTable GetActivities()
         {
-            object[] parameters = GetFilterParameters();
-            return DBContext.GetData("GetAllIndicatorsNew2", parameters);
+            int? emergencyClusterId = ddlCluster.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCluster.SelectedValue);
+            int? emergencyObjectiveId = ddlObjective.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlObjective.SelectedValue);
+            int? activityId = ddlActivity.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlActivity.SelectedValue);
+            string search = string.IsNullOrEmpty(txtActivityName.Text) ? null : txtActivityName.Text;
+            int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
+            int frameworkYear = RC.GetSelectedIntVal(ddlFrameworkYear);
+
+            return DBContext.GetData("GetAllIndicatorsNew2", new object[] { emergencyLocationId, emergencyClusterId, 
+                                                                            emergencyObjectiveId, search, activityId, 
+                                                                            frameworkYear, (int)RC.SelectedSiteLanguageId });
         }
 
-        private DataTable GetActivitiesForExcel()
-        {
-            object[] parameters = GetFilterParameters();
-            return DBContext.GetData("GetAllIndicatorsNew2WithTargets", parameters);
-        }
-
-        private object[] GetFilterParameters()
+        private DataTable GetActivitiesForExcel(bool admin2)
         {
             int? emergencyClusterId = ddlCluster.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCluster.SelectedValue);
             int? emergencyObjectiveId = ddlObjective.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlObjective.SelectedValue);
             int? activityId = ddlActivity.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlActivity.SelectedValue);
             string search = string.IsNullOrEmpty(txtActivityName.Text) ? null : txtActivityName.Text;
             int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
-            int? isGender = chkIsGender.Checked ? 1 : (int?)null;
-
-            return new object[] { emergencyLocationId, emergencyClusterId, emergencyObjectiveId, search, activityId, isGender, (int)RC.SelectedSiteLanguageId };
+            int frameworkYear = RC.GetSelectedIntVal(ddlFrameworkYear);
+            return DBContext.GetData("GetAllIndicatorsNew2WithT", new object[] { emergencyLocationId, emergencyClusterId, emergencyObjectiveId, 
+                                                                                    search, activityId, frameworkYear, 
+                                                                                    admin2, (int)RC.SelectedSiteLanguageId });
         }
         private DataTable GetObjectives()
         {
             return DBContext.GetData("GetEmergencyObjectives", new object[] { (int)RC.SelectedSiteLanguageId, RC.EmergencySahel2015 });
         }
 
-        private DataTable GetActivityTypes()
-        {
-            return DBContext.GetData("GetActivityTypes");
-        }
-
         protected void Page_Error(object sender, EventArgs e)
         {
             // Get last error from the server
             Exception exc = Server.GetLastError();
-            SRFROWCA.Common.ExceptionUtility.LogException(exc, "ActivityListing", this.User);
+            ExceptionUtility.LogException(exc, User);
         }
 
         protected void gvActivity_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -246,19 +319,21 @@ namespace SRFROWCA.Anonymous
                 dt.Columns.Remove("ClusterId");
                 dt.Columns.Remove("IndicatorId");
                 dt.Columns.Remove("IndicatorDetailId");
-                dt.Columns.Remove("ClusterName");
-                dt.Columns.Remove("ShortObjective");
                 dt.Columns.Remove("EmergencyClusterId");
                 dt.Columns.Remove("EmergencyLocationId");
-                dt.Columns.Remove("ShortObjective");
-
+                dt.Columns.Remove("IndicatorCalculationTypeId");
+                dt.Columns.Remove("LocationId");
+                dt.Columns.Remove("ObjectiveId");
+                dt.Columns.Remove("IsActiveIndicator");
+                dt.Columns.Remove("IsActivityActive");
+                dt.Columns.Remove("IndicatorCalculationTypeId");
+                try
+                {
+                    dt.Columns.Remove("TargetLocationId");
+                }
+                catch { }
             }
             catch { }
-        }
-
-        private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
-        {
-            RC.ShowMessage(Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
         }
     }
 }

@@ -2,17 +2,17 @@
     EnableEventValidation="false" CodeBehind="UsersListing.aspx.cs" Inherits="SRFROWCA.Admin.UsersListing" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-     <%@ Register Assembly="SRFROWCA" Namespace="SRFROWCA" TagPrefix="cc2" %>
+    <%@ Register Assembly="SRFROWCA" Namespace="SRFROWCA" TagPrefix="cc2" %>
     <script>
         $(function () {
             $("#<%=txtFromDate.ClientID%>").datepicker();
             $("#<%=txtToDate.ClientID%>").datepicker();
         });
-       
+
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    
+
     <div class="page-content">
 
         <table width="100%">
@@ -26,6 +26,7 @@
                                         <button runat="server" id="btnExportToExcel" onserverclick="btnExportExcel_Click" class="btn btn-yellow"
                                             title="Excel">
                                             <i class="icon-download"></i>Excel
+                                       
                                         </button>
                                         <asp:Button ID="btnAddUser" runat="server" Text="Add New User" PostBackUrl="~/Account/Registerca.aspx"
                                             CssClass="btn btn-yellow pull-right" />
@@ -68,6 +69,7 @@
                                                             <td>
                                                                 <label>
                                                                     User Type:
+                                                               
                                                                 </label>
                                                             </td>
                                                             <td>
@@ -105,17 +107,16 @@
                                                                     <asp:ListItem Text="Not Approved" Value="0"></asp:ListItem>
                                                                 </asp:RadioButtonList>
                                                             </td>
-                                                            <td >
-                                                                
-                                                            </td>
                                                             <td></td>
-                                                           
+                                                            <td></td>
 
-                                                            
+
+
                                                         </tr>
                                                         <tr>
                                                             <td>&nbsp;</td>
-                                                            <td colspan="5" style="padding-top:20px;"><asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" CssClass="btn btn-primary" /></td>
+                                                            <td colspan="5" style="padding-top: 20px;">
+                                                                <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" CssClass="btn btn-primary" /></td>
                                                         </tr>
                                                     </table>
                                                 </div>
@@ -135,12 +136,14 @@
         <table width="100%">
             <tr>
                 <td>
-                      <cc2:PagingGridView ID="gvUsers" runat="server" AutoGenerateColumns="false" AllowPaging="true"
-                       CssClass="table table-striped table-bordered table-hover" PageSize="30" AllowSorting="true" Width="100%" OnPageIndexChanging="gvUsers_PageIndexChanging"
-                        OnSorting="gvUsers_Sorting" OnRowCommand="gvUsers_RowCommand" >
-                             <PagerStyle BackColor="#efefef" ForeColor="DarkSlateBlue" HorizontalAlign="Center" />
-                            <PagerSettings Mode="NumericFirstLast" />
-                       
+                    <cc2:PagingGridView ID="gvUsers" runat="server" AutoGenerateColumns="false" AllowPaging="true"
+                        CssClass="imagetable table-hover" PageSize="30" AllowSorting="true"
+                        Width="100%" OnPageIndexChanging="gvUsers_PageIndexChanging"
+                        OnSorting="gvUsers_Sorting" OnRowCommand="gvUsers_RowCommand">
+                        <PagerStyle BackColor="#efefef" ForeColor="DarkSlateBlue" HorizontalAlign="Center" />
+                        <PagerSettings Mode="NumericFirstLast" />
+                        <RowStyle CssClass="istrow" />
+                        <AlternatingRowStyle CssClass="altcolor" />
                         <Columns>
                             <asp:TemplateField ItemStyle-CssClass="rownum" ItemStyle-Width="2%" HeaderText="#">
                                 <ItemTemplate>
@@ -149,14 +152,14 @@
                             </asp:TemplateField>
                             <asp:BoundField DataField="UserName" HeaderText="User Name" SortExpression="UserName" />
                             <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
-                            <asp:TemplateField HeaderText="Approved" SortExpression="IsApproved" HeaderStyle-Width="50px"
+                            <asp:TemplateField HeaderText="App" SortExpression="IsApproved" HeaderStyle-Width="50px"
                                 ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
                                     <asp:CheckBox ID="chkIsApproved" AutoPostBack="true" runat="server" OnCheckedChanged="chkIsApproved_CheckedChanged"
                                         Checked='<%# Eval("IsApproved") %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Locked" SortExpression="IsLockedOut" HeaderStyle-Width="50px"
+                            <asp:TemplateField HeaderText="Lock" SortExpression="IsLockedOut" HeaderStyle-Width="50px"
                                 ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
                                     <asp:CheckBox ID="chkIsLocked" AutoPostBack="true" runat="server" OnCheckedChanged="chkIsLocked_CheckedChanged"
@@ -165,25 +168,26 @@
                             </asp:TemplateField>
                             <asp:BoundField DataField="RoleName" HeaderText="Role" SortExpression="RoleName" />
                             <asp:BoundField DataField="OrganizationName" HeaderText="Organization" SortExpression="OrganizationName"
-                                ItemStyle-Width="500px" />
+                                ItemStyle-Width="250px" />
                             <asp:BoundField DataField="LocationName" HeaderText="Country" SortExpression="LocationName"
-                                ItemStyle-HorizontalAlign="Center" ItemStyle-Width="150"/>
+                                ItemStyle-HorizontalAlign="Center" ItemStyle-Width="100" />
                             <asp:BoundField DataField="CreateDate" HeaderText="Create Date" SortExpression="DateCreated"
-                                ItemStyle-HorizontalAlign="Center" ItemStyle-Width="250" />
+                                ItemStyle-HorizontalAlign="Center" ItemStyle-Width="150" />
+                            <asp:BoundField DataField="LastLogin" HeaderText="Last Login" SortExpression="LastLoginDate"
+                                ItemStyle-HorizontalAlign="Center" ItemStyle-Width="100" />
                             <asp:TemplateField Visible="false">
                                 <ItemTemplate>
                                     <asp:Label ID="lblUserId" runat="server" Visible="false" Text='<%#Eval("UserId") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField  HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center"
-                                HeaderStyle-Width="70">
+                            <asp:TemplateField HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center"
+                                HeaderStyle-Width="30">
                                 <ItemTemplate>
-                                    
                                     <asp:LinkButton ID="btnEdit" runat="server" Text="Edit" CommandName="EditUser" CommandArgument='<%# Eval("UserId") %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
-                   </cc2:PagingGridView>
+                    </cc2:PagingGridView>
                 </td>
             </tr>
         </table>

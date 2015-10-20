@@ -4,16 +4,17 @@
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
-    <div class="containerLogin">
-        <div class="graybarLogin">
-            Change Password
-        </div>
-        <div class="contentarea">
-            Your password has been changed successfully!
-            <div class="spacer" style="clear: both;">
+    <div class="page-content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="error-container">
+                    <div class="well">
+                        <h1 class="grey lighter smaller">Change Password</h1>
+                        <hr />
+                        <h3>Your password has been changed successfully!</h3>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="graybarcontainer">
         </div>
     </div>
 </asp:Content>

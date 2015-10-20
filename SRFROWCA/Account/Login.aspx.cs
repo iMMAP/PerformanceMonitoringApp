@@ -83,7 +83,7 @@ namespace SRFROWCA.Account
         {
             // Get last error from the server
             Exception exc = Server.GetLastError();
-            ExceptionUtility.LogException(exc, "Login", User);
+            ExceptionUtility.LogException(exc, User);
         }
     }
 }

@@ -18,9 +18,9 @@ namespace SRFROWCA.ClusterLead
             if (!IsPostBack)
             {
                 UserInfo.UserProfileInfo(RC.EmergencySahel2015);
-                LoadClustersFilter();
+                LoadClusters();
                 LoadCountry();
-                LoadObjectivesFilter();
+                LoadObjectives();
                 PopulateActivities();
                 SetDropDownOnRole(true);
                 SetFiltersFromSession();
@@ -32,7 +32,7 @@ namespace SRFROWCA.ClusterLead
 
         private void ToggleControlsToAddIndicator()
         {
-            if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User))
+            if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) || RC.IsAdmin(this.User))
             {
                 int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
                 int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
@@ -41,16 +41,19 @@ namespace SRFROWCA.ClusterLead
                 if (frCount.IndCount <= 0 || (frCount.ActCount <= 0 || frCount.DateExcedded))
                 {
                     btnAddActivityAndIndicators.Enabled = false;
+                    btnMigrate2016.Enabled = false;
                 }
                 else
                 {
                     btnAddActivityAndIndicators.Enabled = true;
+                    btnMigrate2016.Enabled = true;
                 }
             }
 
             if (RC.IsRegionalClusterLead(this.User))
             {
                 btnAddActivityAndIndicators.Enabled = false;
+                btnMigrate2016.Enabled = false;
             }
         }
 
@@ -109,7 +112,7 @@ namespace SRFROWCA.ClusterLead
                     {
                         if (string.IsNullOrEmpty(lblTarget.Text))
                         {
-                            e.Row.BackColor = ColorTranslator.FromHtml("#CD5C5C");
+                            e.Row.BackColor = ColorTranslator.FromHtml("#ff9999");
                             divMissingTarget.Visible = true;
                         }
                         else
@@ -267,20 +270,23 @@ namespace SRFROWCA.ClusterLead
 
         protected void btnExportExcel_Click(object sender, EventArgs e)
         {
+            ModalPopupExtender2.Show();
+        }
+
+        protected void btnExportExcelOK_Click(object sender, EventArgs e)
+        {
             GridView gvExport = new GridView();
-            if (RC.GetSelectedIntVal(ddlCountry) == 0)
-            {
-                ShowMessage("Please select a country to export data!", RC.NotificationType.Warning, true, 1000);
-                return;
-            }
-            DataTable dt = GetActivitiesForExcel();
-            RemoveColumnsFromDataTable(dt);
+            bool admin2 = rbExlAdmin2Yes.Checked;
+            DataTable dt = GetActivitiesForExcel(admin2);
+            if (rbExlIdnNO.Checked)
+                RemoveColumnsFromDataTable(dt);
             gvExport.DataSource = dt;
             gvExport.DataBind();
 
             string fileName = "Indicators";
             string fileExtention = ".xls";
             ExportUtility.ExportGridView(gvExport, fileName, fileExtention, Response);
+            ModalPopupExtender2.Hide();
         }
 
         protected void ExportToPDF(object sender, EventArgs e)
@@ -330,8 +336,8 @@ namespace SRFROWCA.ClusterLead
 
         internal override void BindGridData()
         {
-            LoadClustersFilter();
-            LoadObjectivesFilter();
+            LoadClusters();
+            LoadObjectives();
             PopulateActivities();
             SetDropDownOnRole(false);
             LoadIndicators();
@@ -398,7 +404,10 @@ namespace SRFROWCA.ClusterLead
         private void LoadCountry()
         {
             UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
-            ddlCountry.Items.Insert(0, new ListItem("--- Select Country ---", "0"));
+            if (RC.SelectedSiteLanguageId == 1)
+                ddlCountry.Items.Insert(0, new ListItem("Select Country", "0"));
+            else
+                ddlCountry.Items.Insert(0, new ListItem("Sélectionner Pays", "0"));
         }
 
         private void PopulateActivities()
@@ -419,21 +428,28 @@ namespace SRFROWCA.ClusterLead
 
             ddlActivity.DataSource = dtAct;
             ddlActivity.DataBind();
-
-            ListItem item = new ListItem("Select Activity", "0");
-            ddlActivity.Items.Insert(0, item);
+            if (RC.SelectedSiteLanguageId == 1)
+                ddlActivity.Items.Insert(0, new ListItem("Select Activity", "0"));
+            else
+                ddlActivity.Items.Insert(0, new ListItem("Sélectionner Activité", "0"));
         }
 
-        private void LoadClustersFilter()
+        private void LoadClusters()
         {
             UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
-            ddlCluster.Items.Insert(0, new ListItem("--- Select Cluster ---", "0"));
+            if (RC.SelectedSiteLanguageId == 1)
+                ddlCluster.Items.Insert(0, new ListItem("Select Cluster", "0"));
+            else
+                ddlCluster.Items.Insert(0, new ListItem("Sélectionner Cluster", "0"));
         }
 
-        private void LoadObjectivesFilter()
+        private void LoadObjectives()
         {
             ddlObjective.Items.Clear();
-            ddlObjective.Items.Add(new ListItem("All", "0"));
+            if (RC.SelectedSiteLanguageId == 1)
+                ddlObjective.Items.Add(new ListItem("Select Objective", "0"));
+            else
+                ddlObjective.Items.Add(new ListItem("Sélectionner Objectif", "0"));
             ddlObjective.DataValueField = "EmergencyObjectiveId";
             ddlObjective.DataTextField = "Objective";
             ddlObjective.DataSource = GetObjectives();
@@ -465,7 +481,7 @@ namespace SRFROWCA.ClusterLead
                                                                             frameworkYear, (int)RC.SelectedSiteLanguageId });
         }
 
-        private DataTable GetActivitiesForExcel()
+        private DataTable GetActivitiesForExcel(bool admin2)
         {
             int? emergencyClusterId = ddlCluster.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCluster.SelectedValue);
             int? emergencyObjectiveId = ddlObjective.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlObjective.SelectedValue);
@@ -474,15 +490,9 @@ namespace SRFROWCA.ClusterLead
             int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
             int frameworkYear = RC.GetSelectedIntVal(ddlFrameworkYear);
 
-            DataTable dt = new DataTable();
-            if (emergencyLocationId > 0)
-            {
-                dt = DBContext.GetData("GetAllIndicatorsNew2WithTargets", new object[] { emergencyLocationId, emergencyClusterId, 
-                                                                                            emergencyObjectiveId, search, activityId, 
-                                                                                            frameworkYear, (int)RC.SelectedSiteLanguageId });
-            }
-
-            return dt;
+            return DBContext.GetData("GetAllIndicatorsNew2WithT", new object[] { emergencyLocationId, emergencyClusterId, emergencyObjectiveId, 
+                                                                                    search, activityId, frameworkYear, 
+                                                                                    admin2, (int)RC.SelectedSiteLanguageId });
         }
         private DataTable GetObjectives()
         {
@@ -506,7 +516,7 @@ namespace SRFROWCA.ClusterLead
         {
             // Get last error from the server
             Exception exc = Server.GetLastError();
-            SRFROWCA.Common.ExceptionUtility.LogException(exc, "ActivityListing", this.User);
+            ExceptionUtility.LogException(exc, User);
         }
 
         protected void gvActivity_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -523,12 +533,31 @@ namespace SRFROWCA.ClusterLead
                 dt.Columns.Remove("ClusterId");
                 dt.Columns.Remove("IndicatorId");
                 dt.Columns.Remove("IndicatorDetailId");
-                dt.Columns.Remove("ClusterName");
-                dt.Columns.Remove("ShortObjective");
                 dt.Columns.Remove("EmergencyClusterId");
                 dt.Columns.Remove("EmergencyLocationId");
-                dt.Columns.Remove("ShortObjective");
+                dt.Columns.Remove("LocationId");
+                dt.Columns.Remove("ObjectiveId");                
+                dt.Columns.Remove("IsActivityActive");
+                dt.Columns.Remove("IsActive");
+                try
+                {
+                    if ((RC.GetSelectedIntVal(ddlFrameworkYear)) == 11)
+                    {
+                        
+                        dt.Columns.Remove("TargetMale");
+                        dt.Columns.Remove("TargetFemale");
+                    }
+                    dt.Columns.Remove("TargetLocationId");
+                }
+                catch { }
 
+                try
+                {
+                    dt.Columns.Remove("IndicatorCalculationTypeId");
+                    dt.Columns.Remove("IsActiveIndicator");
+                    
+                }
+                catch { }
             }
             catch { }
         }

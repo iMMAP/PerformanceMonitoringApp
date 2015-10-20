@@ -189,48 +189,48 @@
 
                             <asp:BoundField DataField="FromLocation" HeaderText="From Location" SortExpression="FromLocation" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden"></asp:BoundField>
                             <asp:BoundField DataField="ReportedLocation" HeaderText="Location" SortExpression="ReportedLocation" ItemStyle-Width="8%"></asp:BoundField>
-                            <asp:TemplateField HeaderText="Total" ItemStyle-Width="4%">
+                            <asp:TemplateField HeaderText="Total" ItemStyle-Width="4%" ItemStyle-HorizontalAlign="Right">
                                 <ItemTemplate>
                                     <asp:Label ID="lblTotalTotal" runat="server" Text=' <%# Eval("TotalTotal")%>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Men" ItemStyle-Width="4%">
+                            <asp:TemplateField HeaderText="Men" ItemStyle-Width="4%" ItemStyle-HorizontalAlign="Right">
                                 <ItemTemplate>
                                     <asp:Label ID="lblTotalMen" runat="server" Text=' <%# Eval("TotalMen")%>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Women" ItemStyle-Width="4%">
+                            <asp:TemplateField HeaderText="Women" ItemStyle-Width="4%" ItemStyle-HorizontalAlign="Right">
                                 <ItemTemplate>
                                     <asp:Label ID="lblTotalWomen" runat="server" Text=' <%# Eval("TotalWomen")%>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Total" ItemStyle-Width="4%">
+                            <asp:TemplateField HeaderText="Total" ItemStyle-Width="4%" ItemStyle-HorizontalAlign="Right">
                                 <ItemTemplate>
                                     <asp:Label ID="lblNeedTotal" runat="server" Text=' <%# Eval("NeedTotal")%>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Men" ItemStyle-Width="4%">
+                            <asp:TemplateField HeaderText="Men" ItemStyle-Width="4%" ItemStyle-HorizontalAlign="Right">
                                 <ItemTemplate>
                                     <asp:Label ID="lblNeedlMen" runat="server" Text=' <%# Eval("NeedMen")%>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Women" ItemStyle-Width="4%">
+                            <asp:TemplateField HeaderText="Women" ItemStyle-Width="4%" ItemStyle-HorizontalAlign="Right">
                                 <ItemTemplate>
                                     <asp:Label ID="lblNeedWomen" runat="server" Text=' <%# Eval("NeedWomen")%>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
 
-                            <asp:TemplateField HeaderText="Total" ItemStyle-Width="4%">
+                            <asp:TemplateField HeaderText="Total" ItemStyle-Width="4%" ItemStyle-HorizontalAlign="Right">
                                 <ItemTemplate>
                                     <asp:Label ID="lblTargetedTotal" runat="server" Text=' <%# Eval("TargetedTotal")%>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Men" ItemStyle-Width="4%">
+                            <asp:TemplateField HeaderText="Men" ItemStyle-Width="4%" ItemStyle-HorizontalAlign="Right">
                                 <ItemTemplate>
                                     <asp:Label ID="lblTargetedlMen" runat="server" Text=' <%# Eval("TargetedMen")%>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Women" ItemStyle-Width="4%">
+                            <asp:TemplateField HeaderText="Women" ItemStyle-Width="4%" ItemStyle-HorizontalAlign="Right">
                                 <ItemTemplate>
                                     <asp:Label ID="lblTargetedWomen" runat="server" Text=' <%# Eval("TargetedWomen")%>'></asp:Label>
                                 </ItemTemplate>

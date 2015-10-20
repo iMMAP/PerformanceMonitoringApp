@@ -136,7 +136,7 @@ namespace SRFROWCA
         {
             bool isShow = false;
             menuDataEntry.Visible = isShow;
-            liDataEntry.Visible = isShow;            
+            liDataEntry.Visible = isShow;
             //menuManageActivities.Visible = isShow;
             //liManageActivity.Visible = isShow;
             liValidateAchievements.Visible = isShow;
@@ -201,14 +201,14 @@ namespace SRFROWCA
             liProgressSummary.Visible = isShow;
             liProjectsPublic.Visible = !isShow;
             liActivitesFrameworkPublic.Visible = !isShow;
-            liClusterFrameworkImport.Visible = isShow;
+            //liClusterFrameworkImport.Visible = isShow;
         }
 
         private void ShowOCHAMenue()
         {
             bool isShow = true;
             liProjects.Visible = isShow;
-            liProjectsPublic.Visible = !isShow;            
+            liProjectsPublic.Visible = !isShow;
             liKeyFiguresPublic.Visible = isShow;
             liOutputIndReportPublic.Visible = isShow;
             liProgressSummary.Visible = isShow;
@@ -225,7 +225,7 @@ namespace SRFROWCA
             liKeyFigures.Visible = isShow;
             liClusterFrameworks.Visible = isShow;
             liProjects.Visible = isShow;
-            liClusterFrameworkImport.Visible = isShow;
+            //liClusterFrameworkImport.Visible = isShow;
             liKeyFiguresPublic.Visible = !isShow;
             liOutputIndReportPublic.Visible = !isShow;
             liContactList.Visible = isShow;
@@ -246,7 +246,7 @@ namespace SRFROWCA
             liLocations.Visible = isShow;
             liClusterFrameworks.Visible = isShow;
             liProjects.Visible = isShow;
-            liClusterFrameworkImport.Visible = isShow;
+            //liClusterFrameworkImport.Visible = isShow;
             liRequestedOrganizations.Visible = isShow;
             liKeyFiguresFramework.Visible = isShow;
             liKeyFiguresPublic.Visible = !isShow;
@@ -260,10 +260,16 @@ namespace SRFROWCA
         private void ActiveMenueItem()
         {
             string uri = HttpContext.Current.Request.Url.AbsolutePath;
-            if (uri.Contains("/Default.aspx"))
+            if (uri.Contains("/Default.aspx") || uri.Contains("Landing/ClusterCord"))
+            {
+                //liDashboards.Attributes.Add("class", "active");
+                liHome.Attributes.Add("class", "active");
+                PageTitle = "ORS - Home";
+            }
+            else if (uri.Contains("/Dashboard.aspx"))
             {
                 liDashboards.Attributes.Add("class", "active");
-                PageTitle = "ORS - Home";
+                PageTitle = "ORS - Dashboard";
             }
             else if (uri == "/ReportingStatus.aspx")
             {
@@ -420,7 +426,9 @@ namespace SRFROWCA
                 liClusterIndicators.Attributes.Add("class", "active");
             }
 
-            else if (uri.Contains("ClusterLead/IndicatorListing.aspx") || uri.Contains("ClusterLead/AddActivityAndIndicators.aspx"))
+            else if (uri.Contains("ClusterLead/IndicatorListing.aspx") 
+                || uri.Contains("ClusterLead/AddActivityAndIndicators.aspx")
+                ||uri.Contains("ClusterLead/IndicatorListingMigrate.aspx"))
             {
                 PageTitle = "ORS - Activity Indicators";
                 liClusterFrameworks.Attributes.Add("class", "active open");

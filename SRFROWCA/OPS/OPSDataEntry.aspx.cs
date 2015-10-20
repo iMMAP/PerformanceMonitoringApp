@@ -32,9 +32,6 @@ namespace SRFROWCA.OPS
                 }
 
                 PopulateDropDowns();
-
-
-                PopulateToolTips();
                 UpdateClusterName();
                 lblCluster.Text = OPSClusterNameLabel;
 
@@ -68,38 +65,120 @@ namespace SRFROWCA.OPS
 
         #region Button Click Events.
 
-        protected void btnSave_Click(object sender, EventArgs e)
+        private bool TargetProvided(Repeater rpt, bool isGender)
         {
-            //if (!ValidateData()) return;
-            bool isSaved = false;
-            using (TransactionScope scope = new TransactionScope())
+            bool isTargetValid = false;
+            foreach (RepeaterItem item in rpt.Items)
             {
-                //List<int> locationIds = GetLocationIdsFromGrid();
-                //if (locationIds.Count > 0)
-
-                if (OPSReportId == 0)
+                if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
                 {
-                    SaveReportMainInfo();
+                    Repeater rptAdmin1 = (Repeater)item.FindControl("rptAdmin1");
+                    foreach (RepeaterItem admin1Item in rptAdmin1.Items)
+                    {
+                        if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
+                        {
+                            Repeater rptAdmin2 = (Repeater)admin1Item.FindControl("rptAdmin2");
+                            foreach (RepeaterItem admin2Item in rptAdmin2.Items)
+                            {
+                                if (isGender)
+                                {
+                                    TextBox txtTargetMale = admin2Item.FindControl("txtAdmin2TargetMaleProject") as TextBox;
+                                    TextBox txtTargetFemale = admin2Item.FindControl("txtAdmin2TargetFemaleProject") as TextBox;
+                                    if (!string.IsNullOrEmpty(txtTargetMale.Text.Trim()) || !string.IsNullOrEmpty(txtTargetFemale.Text.Trim()))
+                                    {
+                                        isTargetValid = true;
+                                        break;
+                                    }
+                                }
+                                else
+                                {
+                                    TextBox txtTarget = admin2Item.FindControl("txtAdmin2TargetProject") as TextBox;
+                                    if (!string.IsNullOrEmpty(txtTarget.Text.Trim()))
+                                    {
+                                        isTargetValid = true;
+                                        break;
+                                    }
+                                }
+                            }
+
+                            if (isTargetValid) break;
+                        }
+                    }
+
+                    if (isTargetValid) break;
+                }
+            }
+
+            return isTargetValid;
+        }
+
+        private bool IsTargetProvided()
+        {
+            bool isTargetValid = false;
+            foreach (GridViewRow row in gvActivities.Rows)
+            {
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    int unitId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["UnitId"].ToString());
+
+                    Repeater rptCountry = row.FindControl("rptCountryGender") as Repeater;
+                    if (rptCountry != null)
+                    {
+                        if (unitId == 269 || unitId == 28 || unitId == 38 || unitId == 193 || unitId == 219 
+                            || unitId == 198 || unitId == 311 || unitId == 132 || unitId == 252 || unitId == 238)
+                           isTargetValid = TargetProvided(rptCountry, true);
+                        else
+                            isTargetValid =  TargetProvided(rptCountry, false);
+                    }
+                    if (isTargetValid) break;
+                }
+            }
+
+            if (!isTargetValid)
+            {
+                if (RC.SelectedSiteLanguageId == 1)
+                {
+                    ShowMessage("Please provide target for at least one location.", RC.NotificationType.Error, true, 3000);
                 }
                 else
                 {
-                    UpdateReportMainInfo();
+
+                    ShowMessage("Se il vous plaît fournir cible pour au moins un emplacement.", RC.NotificationType.Error, true, 3000);
                 }
-
-                SaveReport();
-
-                //else
-                //{
-                //    DeleteReport();
-                //}
-
-                scope.Complete();
-                isSaved = true;
-                ShowMessage("Your Data Saved Successfuly!");
             }
 
-            if (isSaved)
-            PopulateIndicators();
+            return isTargetValid;
+        }
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            if (IsTargetProvided())
+            {
+                bool isSaved = false;
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    if (OPSReportId == 0)
+                    {
+                        SaveReportMainInfo();
+                    }
+                    else
+                    {
+                        UpdateReportMainInfo();
+                    }
+
+                    SaveReport();
+                    //    DeleteReport();
+                    scope.Complete();
+                    isSaved = true;
+                    if (RC.SelectedSiteLanguageId == 1)
+                        ShowMessage("Your Data Saved Successfully!");
+                    else
+                        ShowMessage("Vos données sauvegardées avec succès");
+                }
+
+                if (isSaved)
+                    PopulateIndicators();
+            }
         }
 
         private void SaveReportDetails()
@@ -442,7 +521,7 @@ namespace SRFROWCA.OPS
         private void PopulateDropDowns()
         {
             LocationId = GetLocationId();
-            UI.FillObjectives(cblObjectives, true, RC.EmergencySahel2015);
+            //UI.FillObjectives(cblObjectives, true, RC.EmergencySahel2015);
         }
 
         private int GetLocationId()
@@ -507,12 +586,6 @@ namespace SRFROWCA.OPS
         internal override void BindGridData()
         {
             PopulateIndicators();
-            //DataTable dtActivities = GetActivities();
-            //Session["dtOPSActivities"] = dtActivities;
-            //GetReport();
-            //gvActivities.DataSource = dtActivities;
-            //gvActivities.DataBind();
-            PopulateToolTips();
         }
 
         private string GetSelectedItems(object sender)
@@ -935,7 +1008,6 @@ namespace SRFROWCA.OPS
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-
                 HiddenField hfIndicatorId = e.Row.FindControl("hfIndicatorId") as HiddenField;
                 int indicatorId = 0;
                 if (hfIndicatorId != null)
@@ -953,6 +1025,13 @@ namespace SRFROWCA.OPS
                                                                                OPSProjectId, yearId, indicatorId});
                         rptCountry.DataSource = dt;
                         rptCountry.DataBind();
+
+                        if (dt.Rows.Count == 0)
+                        {
+                            Label lblNoTarget = e.Row.FindControl("lblNoTarget") as Label;
+                            if (lblNoTarget != null)
+                                lblNoTarget.Visible = true;
+                        }
                     }
                 }
                 ObjPrToolTip.ObjectiveIconToolTip(e, 0);
@@ -960,23 +1039,17 @@ namespace SRFROWCA.OPS
             }
         }
 
-        private void PopulateToolTips()
-        {
-            ObjPrToolTip.ObjectivesToolTip(cblObjectives);
-        }
-
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
         {
-            //updMessage.Update();
             RC.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
         }
 
         protected void Page_Error(object sender, EventArgs e)
         {
-            ShowMessage("<b>Some Error Occoured. Admin Has Notified About It</b>.<br/> Please Try Again.", RC.NotificationType.Error);
+            //ShowMessage("<b>Some Error Occoured. Admin Has Notified About It</b>.<br/> Please Try Again.", RC.NotificationType.Error);
             // Get last error from the server
             Exception exc = Server.GetLastError();
-            SRFROWCA.Common.ExceptionUtility.LogException(exc, "AddActivites", this.User);
+            ExceptionUtility.LogException(exc, User);
         }
 
         #endregion
@@ -1240,6 +1313,13 @@ namespace SRFROWCA.OPS
         {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
+                UI.SetThousandSeparator(e.Item, "lblCountryTargetMaleCluster");
+                UI.SetThousandSeparator(e.Item, "lblCountryTargetFemaleCluster");
+                UI.SetThousandSeparator(e.Item, "lblCountryTargetCluster");
+                UI.SetThousandSeparator(e.Item, "lblCountryTargetMaleProject");
+                UI.SetThousandSeparator(e.Item, "lblCountryTargetFemaleProject");
+                UI.SetThousandSeparator(e.Item, "lblCountryTargetProject");
+
                 HiddenField hfIndicatorId = e.Item.FindControl("hfCountryIndicatorId") as HiddenField;
                 int indicatorId = 0;
                 if (hfIndicatorId != null)
@@ -1272,6 +1352,13 @@ namespace SRFROWCA.OPS
         {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
+                UI.SetThousandSeparator(e.Item, "lblAdmin1TargetMaleCluster");
+                UI.SetThousandSeparator(e.Item, "lblAdmin1TargetFemaleCluster");
+                UI.SetThousandSeparator(e.Item, "lblAdmin1TargetCluster");
+                UI.SetThousandSeparator(e.Item, "lblAdmin1TargetMaleProject");
+                UI.SetThousandSeparator(e.Item, "lblAdmin1TargetFemaleProject");
+                UI.SetThousandSeparator(e.Item, "lblAdmin1TargetProject");
+
                 HiddenField hfIndicatorId = e.Item.FindControl("hfAdmin1IndicatorId") as HiddenField;
                 int indicatorId = 0;
                 if (hfIndicatorId != null)
@@ -1314,20 +1401,21 @@ namespace SRFROWCA.OPS
                     TextBox txtAdmin2Male = e.Item.FindControl("txtAdmin2TargetMaleProject") as TextBox;
                     TextBox txtAdmin2Female = e.Item.FindControl("txtAdmin2TargetFemaleProject") as TextBox;
                     TextBox txtAdmin2Target = e.Item.FindControl("txtAdmin2TargetProject") as TextBox;
-                    
+
+                    txtAdmin2Male.BackColor = System.Drawing.ColorTranslator.FromHtml("#FFFFE0");
+                    txtAdmin2Female.BackColor = System.Drawing.ColorTranslator.FromHtml("#FFFFE0");
+                    txtAdmin2Target.BackColor = System.Drawing.ColorTranslator.FromHtml("#FFFFE0");
+
                     if (unitId == 269 || unitId == 28 || unitId == 38 || unitId == 193
-                                || unitId == 219 || unitId == 198 || unitId == 311 || unitId == 287
-                                || unitId == 67 || unitId == 132 || unitId == 252)
+                            || unitId == 219 || unitId == 198 || unitId == 311 || unitId == 287
+                            || unitId == 67 || unitId == 132 || unitId == 252)
                     {
-                        if (txtAdmin2Target != null)
-                            txtAdmin2Target.Enabled = false;
+                        txtAdmin2Target.Enabled = false;
                     }
                     else
                     {
-                        if (txtAdmin2Male != null)
-                            txtAdmin2Male.Enabled = false;
-                        if (txtAdmin2Female != null)
-                            txtAdmin2Female.Enabled = false;
+                        txtAdmin2Male.Enabled = false;
+                        txtAdmin2Female.Enabled = false;
                     }
                 }
             }

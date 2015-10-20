@@ -104,7 +104,7 @@
                     </div>
                     <!-- #sidebar-shortcuts -->
                     <ul class="nav nav-list">
-                        <li><a href="<%=BaseURL %>/Default.aspx"><i class="icon-home"></i><span class="menu-text">
+                        <li id="liHome" runat="server"><a href="<%=BaseURL %>/Default.aspx"><i class="icon-home"></i><span class="menu-text">
                             <asp:Localize ID="localHome" runat="server" Text="Home" meta:resourcekey="localHomeRsource"></asp:Localize></span> </a></li>
 
                         <li id="liDashboards" runat="server"><a href="<%=BaseURL %>/Dashboard.aspx"><i class="icon-dashboard"></i><span class="menu-text">

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Net.Mail;
 using System.Text;
+using System.Transactions;
 using System.Web.Script.Services;
 using System.Web.Security;
 using System.Web.Services;
@@ -30,33 +31,28 @@ namespace SRFROWCA.ClusterLead
                 IndControlId -= 1;
                 NewIndicatorControlsAdded -= 1;
             }
-
-            if (NewIndicatorControlsAdded < 1)
-            {
-                btnRemoveIndicatorControl.Visible = false;
-            }
-            else
-            {
-                btnRemoveIndicatorControl.Visible = true;
-            }
+            btnRemoveIndicatorControl.Visible = !(NewIndicatorControlsAdded < 1);
 
             for (int i = 0; i < IndControlId; i++)
-            {
                 AddIndicatorControl(i);
-            }
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+                ToggleMSRefugeeControls();
                 LoadCombos();
                 SetFiltersFromSession();
                 DisableDropDowns();
 
+                // IN Edit mode.
                 if (Request.QueryString["a"] != null)
                 {
-                    LoadActivityData();
+                    int activityId = 0;
+                    int.TryParse(Request.QueryString["a"].ToString(), out activityId);
+                    if (activityId > 0)
+                        LoadIndicatorToEdit(activityId);
                 }
                 else
                 {
@@ -78,95 +74,140 @@ namespace SRFROWCA.ClusterLead
             }
         }
 
-        private void LoadActivityData()
+        private void ToggleMSRefugeeControls()
         {
-            int activityId = 0;
-            if (Request.QueryString["a"] != null)
+            if (RC.IsAdmin(this.User) || RC.IsCountryAdmin(this.User))
             {
-                int.TryParse(Request.QueryString["a"].ToString(), out activityId);
-            }
-
-            if (activityId > 0)
-            {
-                DataTable dt = GetActivityIndicators(activityId);
-                if (dt.Rows.Count > 0)
+                if (Session["ClusterFrameworkSelectedCluster"] != null)
                 {
-                    int count = dt.Rows.Count;
-                    txtActivityEng.Text = dt.Rows[0]["ActivityEng"].ToString();
-                    txtActivityFr.Text = dt.Rows[0]["ActivityFr"].ToString();
-
-                    int emgLocationId1 = 0;
-                    int.TryParse(dt.Rows[0]["EmergencyLocationId"].ToString(), out emgLocationId1);
-                    if (emgLocationId1 > 0)
+                    int clusterId = 0;
+                    int.TryParse(Session["ClusterFrameworkSelectedCluster"].ToString(), out clusterId);
+                    if (clusterId > 0)
                     {
-                        ddlCountry.SelectedValue = emgLocationId1.ToString();
-                    }
-                    int emgClusterId = 0;
-                    int.TryParse(dt.Rows[0]["EmergencyClusterId"].ToString(), out emgClusterId);
-                    if (emgClusterId > 0)
-                    {
-                        ddlCluster.SelectedValue = emgClusterId.ToString();
-                    }
-
-                    int emgObjectiveId = 0;
-                    int.TryParse(dt.Rows[0]["EmergencyObjectiveId"].ToString(), out emgObjectiveId);
-                    if (emgObjectiveId > 0)
-                    {
-                        ddlObjective.SelectedValue = emgObjectiveId.ToString();
-                    }
-
-                    for (int i = 0; i < count; i++)
-                    {
-                        IndicatorsWithAdmin1TargetsControl indicatorCtl = (IndicatorsWithAdmin1TargetsControl)LoadControl("~/controls/IndicatorsWithAdmin1TargetsControl.ascx");
-                        int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
-                        indicatorCtl.EmgLocationId = emgLocationId;
-                        indicatorCtl.ControlNumber = i + 1;
-                        indicatorCtl.ID = "indicatorControlId" + i.ToString();
-
-                        indicatorCtl.txtInd1Eng.Text = dt.Rows[i]["IndicatorEng"].ToString();
-                        indicatorCtl.txtInd1Fr.Text = dt.Rows[i]["IndicatorFr"].ToString();
-                        int unitId = 0;
-                        int.TryParse(dt.Rows[i]["UnitId"].ToString(), out unitId);
-                        if (unitId > 0)
+                        if (clusterId == (int)RC.EmgClsId2016.MS)
                         {
-                            indicatorCtl.PopulateUnits(false);
-                            indicatorCtl.ddlUnit.SelectedValue = unitId.ToString();
+                            lblMSRefugee.Visible = true;
+                            cbMSRefugees.Checked = true;
+                            cbMSRefugees.Visible = true;
+                            cbMSRefugees.Enabled = false;
                         }
 
-                        bool isGender = false;
-                        int calMethod = 0;
-                        int.TryParse(dt.Rows[i]["IndicatorCalculationTypeId"].ToString(), out calMethod);
-                        if (calMethod > 0)
-                        {
-                            indicatorCtl.ddlCalculationMethod.SelectedValue = calMethod.ToString();
-                        }
-
-                        int indicatorId = 0;
-                        int.TryParse(dt.Rows[i]["IndicatorId"].ToString(), out indicatorId);
-                        indicatorCtl.hfIndicatorId.Value = indicatorId.ToString();
-
-                        if (unitId == 269 || unitId == 28 || unitId == 38 || unitId == 193
-                         || unitId == 219 || unitId == 198 || unitId == 311 || unitId == 287
-                         || unitId == 67 || unitId == 132 || unitId == 252 || unitId == 238)
-                        {
-                            isGender = true;
-                        }
-                        DataTable dtTargets = GetCountryIndTarget(emgLocationId, indicatorId);
-                        indicatorCtl.rptCountry.DataSource = dtTargets;
-                        indicatorCtl.rptCountry.DataBind();
-                        indicatorCtl.rptCountryGender.DataSource = dtTargets;
-                        indicatorCtl.rptCountryGender.DataBind();
-                        if (!isGender)
-                            UpdateRepeaterTargetColumn(indicatorCtl.rptCountryGender);
-                        else
-                            UpdateRepeaterTargetColumn(indicatorCtl.rptCountry);
-
-                        pnlAdditionalIndicaotrs.Controls.Add(indicatorCtl);
-                        IndControlId += 1;
                     }
                 }
             }
+            else if (UserInfo.EmergencyCluster == (int)RC.EmgClsId2016.MS)
+            {
+                lblMSRefugee.Visible = true;
+            }
         }
+
+        private void LoadIndicatorToEdit(int activityId)
+        {
+            DataTable dt = GetActivityIndicators(activityId);
+            if (dt.Rows.Count > 0)
+            {
+                int count = dt.Rows.Count;
+                PopulateActivitiesControls(dt);
+                for (int i = 0; i < count; i++)
+                {
+                    FrameworkIndicators indCtl = (FrameworkIndicators)LoadControl("~/controls/FrameworkIndicators.ascx");
+                    PopulateIndicatorsControls(indCtl, dt, i);
+                    pnlAdditionalIndicaotrs.Controls.Add(indCtl);
+                    IndControlId += 1;
+                }
+            }
+        }
+
+        private void PopulateIndicatorsControls(FrameworkIndicators ctl, DataTable dt, int i)
+        {
+            int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
+            ctl.ControlNumber = i + 1;
+            ctl.ID = "indicatorControlId" + i.ToString();
+
+            ctl.txtInd1Eng.Text = dt.Rows[i]["IndicatorEng"].ToString();
+            ctl.txtInd1Fr.Text = dt.Rows[i]["IndicatorFr"].ToString();
+            int unitId = 0;
+            int.TryParse(dt.Rows[i]["UnitId"].ToString(), out unitId);
+            if (unitId > 0)
+            {
+                ctl.PopulateUnits(false);
+                ctl.ddlUnit.SelectedValue = unitId.ToString();
+            }
+
+            int calMethod = 0;
+            int.TryParse(dt.Rows[i]["IndicatorCalculationTypeId"].ToString(), out calMethod);
+            if (calMethod > 0)
+            {
+                ctl.ddlCalculationMethod.SelectedValue = calMethod.ToString();
+            }
+
+            int indicatorId = 0;
+            int.TryParse(dt.Rows[i]["IndicatorId"].ToString(), out indicatorId);
+            ctl.hfIndicatorId.Value = indicatorId.ToString();
+
+            bool isGender = RC.IsGenderUnit(unitId);
+            LoadIndLocations(ctl, indicatorId);
+
+            if (!isGender)
+                UpdateRepeaterTargetColumn(ctl.rptCountryGender);
+            else
+                UpdateRepeaterTargetColumn(ctl.rptCountry);
+        }
+
+        private void PopulateActivitiesControls(DataTable dt)
+        {
+            txtActivityEng.Text = dt.Rows[0]["ActivityEng"].ToString();
+            txtActivityFr.Text = dt.Rows[0]["ActivityFr"].ToString();
+
+            int emgLocationId = 0;
+            int.TryParse(dt.Rows[0]["EmergencyLocationId"].ToString(), out emgLocationId);
+            if (emgLocationId > 0)
+                ddlCountry.SelectedValue = emgLocationId.ToString();
+
+            int emgClusterId = 0;
+            int.TryParse(dt.Rows[0]["EmergencyClusterId"].ToString(), out emgClusterId);
+            if (emgClusterId > 0)
+            {
+                if (emgClusterId == 24)
+                {
+                    cbMSRefugees.Checked = true;
+                    int secEmgClusterId = 0;
+                    int.TryParse(dt.Rows[0]["EmgergencySecClusterId"].ToString(), out secEmgClusterId);
+                    ddlCluster.SelectedValue = secEmgClusterId.ToString();
+                }
+                else
+                    ddlCluster.SelectedValue = emgClusterId.ToString();
+            }
+
+            int emgObjectiveId = 0;
+            int.TryParse(dt.Rows[0]["EmergencyObjectiveId"].ToString(), out emgObjectiveId);
+            if (emgObjectiveId > 0)
+                ddlObjective.SelectedValue = emgObjectiveId.ToString();
+        }
+
+        private void LoadIndLocations(FrameworkIndicators ctl, int indicatorId)
+        {
+            int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
+            int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
+            if (cbMSRefugees.Checked || UserInfo.EmergencyCluster == (int)RC.EmgClsId2016.MS)
+            {
+                ctl.ClusterFrameworkLocCatId = (int)RC.LocationCategory.Government;
+            }
+            else
+            {
+                ctl.ClusterFrameworkLocCatId = emgClusterId == (int)RC.EmgClsId2016.HLT ?
+                                                                (int)RC.LocationCategory.Health :
+                                                                (int)RC.LocationCategory.Government;
+            }
+
+            DataTable dtTargets = GetCountryIndTarget(emgLocationId, indicatorId);
+            ctl.rptCountry.DataSource = dtTargets;
+            ctl.rptCountry.DataBind();
+            ctl.rptCountryGender.DataSource = dtTargets;
+            ctl.rptCountryGender.DataBind();
+        }
+
+
 
         private void UpdateRepeaterTargetColumn(Repeater repeater)
         {
@@ -191,20 +232,11 @@ namespace SRFROWCA.ClusterLead
             }
         }
 
-
-        //private DataTable GetAdmin1Location(int emgLocationId, int indicatorId)
-        //{
-        //    return DBContext.GetData("GetAdmin1LocationsOfCountry", new object[] { emgLocationId });
-        //}
-
         private DataTable GetCountryIndTarget(int emgLocationId, int indicatorId)
         {
             return DBContext.GetData("GetCountryTargetOfIndicator", new object[] { emgLocationId, indicatorId });
         }
-        private DataTable GetAdminIndTargets(int emgLocationId, int indicatorId)
-        {
-            return DBContext.GetData("GetAllAdmin1AndIndicatorTargets", new object[] { indicatorId, emgLocationId });
-        }
+
 
         private DataTable GetActivityIndicators(int activityId)
         {
@@ -223,9 +255,8 @@ namespace SRFROWCA.ClusterLead
 
         internal override void BindGridData()
         {
-            //PopulateClusters();
-            //PopulateObjective();
-
+            PopulateClusters();
+            PopulateObjective();
         }
 
         private void SetComboValues()
@@ -233,7 +264,9 @@ namespace SRFROWCA.ClusterLead
             if (RC.IsClusterLead(this.User))
             {
                 ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
-                ddlCluster.SelectedValue = UserInfo.EmergencyCluster.ToString();
+
+                if (UserInfo.EmergencyCluster != 24)
+                    ddlCluster.SelectedValue = UserInfo.EmergencyCluster.ToString();
             }
 
             if (RC.IsCountryAdmin(this.User))
@@ -244,25 +277,35 @@ namespace SRFROWCA.ClusterLead
 
         private void DisableDropDowns()
         {
-            if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User))
-            {
+            int clusterId = 0;
+            if (Session["ClusterFrameworkSelectedCluster"] != null)
+                int.TryParse(Session["ClusterFrameworkSelectedCluster"].ToString(), out clusterId);
+
+            if (!(UserInfo.EmergencyCluster == (int)RC.EmgClsId2016.MS || clusterId == (int)RC.EmgClsId2016.MS))
                 RC.EnableDisableControls(ddlCluster, false);
-                RC.EnableDisableControls(ddlCountry, false);
-            }
+
+            RC.EnableDisableControls(ddlCountry, false);
         }
 
         private void PopulateClusters()
         {
-            UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
-            ListItem item = new ListItem("Select Cluster", "0");
-            ddlCluster.Items.Insert(0, item);
+            //if (UserInfo.EmergencyCluster == 24)
+            UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015, 24);
+            //else
+            //    UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
+            if (RC.SelectedSiteLanguageId == 1)
+                ddlCluster.Items.Insert(0, new ListItem("Select Cluster", "0"));
+            else
+                ddlCluster.Items.Insert(0, new ListItem("Sélectionner Cluster", "0"));
         }
 
         private void PopulateCountries()
         {
             UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
-            ListItem item = new ListItem("Select Country", "0");
-            ddlCountry.Items.Insert(0, item);
+            if (RC.SelectedSiteLanguageId == 1)
+                ddlCountry.Items.Insert(0, new ListItem("Select Country", "0"));
+            else
+                ddlCountry.Items.Insert(0, new ListItem("Sélectionner Pays", "0"));
         }
 
         private void PopulateObjective()
@@ -271,28 +314,24 @@ namespace SRFROWCA.ClusterLead
             ddlObjective.DataTextField = "Objective";
             ddlObjective.DataValueField = "EmergencyObjectiveId";
             ddlObjective.DataBind();
-            ListItem item = new ListItem("Select Objective", "0");
-            ddlObjective.Items.Insert(0, item);
+            if (RC.SelectedSiteLanguageId == 1)
+                ddlObjective.Items.Insert(0, new ListItem("Select Objective", "0"));
+            else
+                ddlObjective.Items.Insert(0, new ListItem("Sélectionner Objectif", "0"));
+
         }
 
-        protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
+        protected void ddl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int countryId = RC.GetSelectedIntVal(ddlCountry);
             foreach (Control ctl in pnlAdditionalIndicaotrs.Controls)
             {
                 if (ctl != null && ctl.ID != null && ctl.ID.Contains("indicatorControlId"))
                 {
-                    IndicatorsWithAdmin1TargetsControl indicatorCtl = ctl as IndicatorsWithAdmin1TargetsControl;
-                    indicatorCtl.EmgLocationId = countryId;
-                    DataTable dtTargets = GetCountryIndTarget(countryId, 0);
-                    indicatorCtl.rptCountry.DataSource = dtTargets;
-                    indicatorCtl.rptCountry.DataBind();
-                    indicatorCtl.rptCountryGender.DataSource = dtTargets;
-                    indicatorCtl.rptCountryGender.DataBind();
+                    FrameworkIndicators indCtl = ctl as FrameworkIndicators;
+                    LoadIndLocations(indCtl, 0);
                 }
             }
         }
-
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
@@ -310,10 +349,10 @@ namespace SRFROWCA.ClusterLead
                 return;
             }
 
-            //using (TransactionScope scope = new TransactionScope())
+            using (TransactionScope scope = new TransactionScope())
             {
                 SaveData();
-                //scope.Complete();
+                scope.Complete();
                 Response.Redirect("~/ClusterLead/IndicatorListing.aspx");
             }
         }
@@ -331,24 +370,21 @@ namespace SRFROWCA.ClusterLead
             {
                 if (ctl != null && ctl.ID != null && ctl.ID.Contains("indicatorControlId"))
                 {
-                    IndicatorsWithAdmin1TargetsControl indControl = ctl as IndicatorsWithAdmin1TargetsControl;
-
-                    if (indControl != null)
+                    FrameworkIndicators indCtl = ctl as FrameworkIndicators;
+                    if (indCtl != null)
                     {
-                        if (indControl.ddlUnit.SelectedValue == "269" || indControl.ddlUnit.SelectedValue == "28"
-                            || indControl.ddlUnit.SelectedValue == "38" || indControl.ddlUnit.SelectedValue == "193"
-                            || indControl.ddlUnit.SelectedValue == "219" || indControl.ddlUnit.SelectedValue == "198"
-                            || indControl.ddlUnit.SelectedValue == "311" || indControl.ddlUnit.SelectedValue == "132"
-                            || indControl.ddlUnit.SelectedValue == "252" || indControl.ddlUnit.SelectedValue == "238")
-                            isTargetValid = TargetProvided(indControl.rptCountryGender, true);
+                        int unitId = RC.GetSelectedIntVal(indCtl.ddlUnit);
+                        if (RC.IsGenderUnit(unitId))
+                            isTargetValid = TargetProvided(indCtl.rptCountryGender, true);
                         else
-                            isTargetValid = TargetProvided(indControl.rptCountry, false);
+                            isTargetValid = TargetProvided(indCtl.rptCountry, false);
                     }
                 }
             }
 
             return isTargetValid;
         }
+
 
         private bool TargetProvided(Repeater rpt, bool isGender)
         {
@@ -410,22 +446,16 @@ namespace SRFROWCA.ClusterLead
                     {
                         if (ctl != null && ctl.ID != null && ctl.ID.Contains("indicatorControlId"))
                         {
-                            IndicatorsWithAdmin1TargetsControl indControl = ctl as IndicatorsWithAdmin1TargetsControl;
+                            FrameworkIndicators indControl = ctl as FrameworkIndicators;
 
                             if (indControl != null)
                             {
-                                //TextBox txtEng = (TextBox)indControl.FindControl("txtInd1Eng");
-                                //TextBox txtFr = (TextBox)indControl.FindControl("txtInd1Fr");
-
-                                //if (!string.IsNullOrEmpty(txtEng.Text.Trim()) || !string.IsNullOrEmpty(txtFr.Text.Trim()))
-                                {
-                                    indControl.SaveIndicators(ActivityId);
-                                    //strIndcators.AppendFormat("Indicator (English): {0}<br/>Indicator (French): {1}<br/><br/>", txtEng.Text, txtFr.Text);
-                                }
+                                indControl.SaveIndicators(ActivityId);
+                                //strIndcators.AppendFormat("Indicator (English): {0}<br/>Indicator (French): {1}<br/><br/>", txtEng.Text, txtFr.Text);
                             }
                         }
                     }
-                    SendNewIndicatorEmail(strIndcators.ToString());
+                    //SendNewIndicatorEmail(strIndcators.ToString());
                 }
             }
             else
@@ -450,17 +480,11 @@ namespace SRFROWCA.ClusterLead
             {
                 if (ctl != null && ctl.ID != null && ctl.ID.Contains("indicatorControlId"))
                 {
-                    IndicatorsWithAdmin1TargetsControl indControl = ctl as IndicatorsWithAdmin1TargetsControl;
+                    FrameworkIndicators indControl = ctl as FrameworkIndicators;
 
                     if (indControl != null)
                     {
-                        //TextBox txtEng = (TextBox)indControl.FindControl("txtInd1Eng");
-                        //TextBox txtFr = (TextBox)indControl.FindControl("txtInd1Fr");
-
-                        //if (!string.IsNullOrEmpty(txtEng.Text.Trim()) || !string.IsNullOrEmpty(txtFr.Text.Trim()))
-                        {
-                            indControl.SaveIndicators(activityId);
-                        }
+                        indControl.SaveIndicators(activityId);
                     }
                 }
             }
@@ -469,14 +493,25 @@ namespace SRFROWCA.ClusterLead
         private void UpdateActivity(int activityId)
         {
             int emgLocationId = Convert.ToInt32(ddlCountry.SelectedValue);
-            int emgClusterId = Convert.ToInt32(ddlCluster.SelectedValue);
+            int emgClusterId = 0;
+            int? emgSecClusterId = null;
+            if (UserInfo.EmergencyCluster == 24 || cbMSRefugees.Checked)
+            {
+                emgClusterId = 24;
+                emgSecClusterId = RC.GetSelectedIntVal(ddlCluster);
+            }
+            else
+                emgClusterId = RC.GetSelectedIntVal(ddlCluster);
+
             int emgObjectiveId = Convert.ToInt32(ddlObjective.SelectedValue);
             string actEn = !string.IsNullOrEmpty(txtActivityEng.Text.Trim()) ? txtActivityEng.Text.Trim() : null;
             string actFr = !string.IsNullOrEmpty(txtActivityFr.Text.Trim()) ? txtActivityFr.Text.Trim() : null;
 
             if (!string.IsNullOrEmpty(actFr) || !string.IsNullOrEmpty(actEn))
             {
-                DBContext.Update("UpdateActivtiyNew2", new object[] { activityId, emgLocationId, emgClusterId, emgObjectiveId, actEn, actFr, RC.GetCurrentUserId, DBNull.Value });
+                DBContext.Update("UpdateActivtiyNew2", new object[] { activityId, emgLocationId, emgClusterId, 
+                                                                        emgObjectiveId, actEn, actFr, 
+                                                                        RC.GetCurrentUserId, emgSecClusterId, DBNull.Value });
             }
         }
 
@@ -509,18 +544,17 @@ namespace SRFROWCA.ClusterLead
 
         private int SaveActivity()
         {
-            int emergencyId = RC.SelectedEmergencyId;
-            int clusterId = RC.IsClusterLead(this.User) ? UserInfo.Cluster : Convert.ToInt32(ddlCluster.SelectedValue);
             int emergencyLocationId = RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) ? UserInfo.EmergencyCountry : Convert.ToInt32(ddlCountry.SelectedValue);
-            int emergencyClusterId = RC.IsClusterLead(this.User) ? UserInfo.EmergencyCluster : Convert.ToInt32(ddlCluster.SelectedValue);
 
-            if (emergencyClusterId == 0)
+            int emergencyClusterId = 0;
+            int? emgSecClusterId = null;
+            if (UserInfo.EmergencyCluster == 24 || cbMSRefugees.Checked)
             {
-                if (Request.QueryString["cid"] != null)
-                {
-                    int.TryParse(Request.QueryString["cid"], out emergencyClusterId);
-                }
+                emergencyClusterId = 24;
+                emgSecClusterId = RC.GetSelectedIntVal(ddlCluster);
             }
+            else
+                emergencyClusterId = RC.GetSelectedIntVal(ddlCluster);
 
             Guid userId = RC.GetCurrentUserId;
 
@@ -529,7 +563,8 @@ namespace SRFROWCA.ClusterLead
             string actFr = !string.IsNullOrEmpty(txtActivityFr.Text.Trim()) ? txtActivityFr.Text.Trim() : null;
             int yearId = 12;
             return DBContext.Add("InsertActivityNew", new object[] { emergencyClusterId, objId,emergencyLocationId, 
-                                                                        actEn, actFr, userId, yearId, RC.SelectedSiteLanguageId, DBNull.Value });
+                                                                        actEn, actFr, userId, yearId,
+                                                                        RC.SelectedSiteLanguageId, emgSecClusterId, DBNull.Value });
         }
 
         protected void btnAddIndiatorControl_Click(object sender, EventArgs e)
@@ -539,20 +574,12 @@ namespace SRFROWCA.ClusterLead
 
         private void AddIndicatorControl(int i)
         {
-            IndicatorsWithAdmin1TargetsControl newIndSet = (IndicatorsWithAdmin1TargetsControl)LoadControl("~/controls/IndicatorsWithAdmin1TargetsControl.ascx");
-            int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
-            if (emgLocationId > 0)
-            {
-                int indicatorId = 0;
-                DataTable dt = GetCountryIndTarget(emgLocationId, indicatorId);
-                newIndSet.rptCountry.DataSource = dt;
-                newIndSet.rptCountry.DataBind();
-                newIndSet.rptCountryGender.DataSource = dt;
-                newIndSet.rptCountryGender.DataBind();
-            }
-            newIndSet.ControlNumber = i + 1;
-            newIndSet.ID = "indicatorControlId" + i.ToString();
-            pnlAdditionalIndicaotrs.Controls.Add(newIndSet);
+            FrameworkIndicators indCtl = (FrameworkIndicators)LoadControl("~/controls/FrameworkIndicators.ascx");
+
+            LoadIndLocations(indCtl, 0);
+            indCtl.ControlNumber = i + 1;
+            indCtl.ID = "indicatorControlId" + i.ToString();
+            pnlAdditionalIndicaotrs.Controls.Add(indCtl);
         }
 
         private void SetFiltersFromSession()
@@ -571,17 +598,20 @@ namespace SRFROWCA.ClusterLead
                 }
             }
 
-            if (Session["ClusterFrameworkSelectedCluster"] != null)
+            if (UserInfo.EmergencyCluster != 24)
             {
-                int clusterId = 0;
-                int.TryParse(Session["ClusterFrameworkSelectedCluster"].ToString(), out clusterId);
-                if (clusterId > 0)
+                if (Session["ClusterFrameworkSelectedCluster"] != null)
                 {
-                    try
+                    int clusterId = 0;
+                    int.TryParse(Session["ClusterFrameworkSelectedCluster"].ToString(), out clusterId);
+                    if (clusterId > 0)
                     {
-                        ddlCluster.SelectedValue = clusterId.ToString();
+                        try
+                        {
+                            ddlCluster.SelectedValue = clusterId.ToString();
+                        }
+                        catch { }
                     }
-                    catch { }
                 }
             }
         }
@@ -694,6 +724,18 @@ namespace SRFROWCA.ClusterLead
             }
             return activities;
         }
+
+        protected void Page_Error(object sender, EventArgs e)
+        {
+            // Get last error from the server
+            Exception exc = Server.GetLastError();
+            ExceptionUtility.LogException(exc, User);
+        }
+
+        //protected void MsRefugeeChange(object sender, EventArgs e)
+        //{
+        //    PopulateClusters();
+        //}
     }
 
     public class ActivityForAutoComplete

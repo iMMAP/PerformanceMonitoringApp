@@ -5,34 +5,28 @@
 <head id="Head1" runat="server">
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
     <title></title>
-    
+
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="assets/css/ace-fonts.css" />
     <link rel="stylesheet" href="assets/css/ace.min.css" />
     <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
     <link rel="Stylesheet" href="assets/css/jquery-ui.min.css" />
-    
+
     <link rel="stylesheet" href="assets/css/ors.css" />
-    
-    
-    <script type="text/javascript">
-        window.jQuery || document.write("<script src='<%# BaseURL %>/assets/js/jquery-2.0.3.min.js'>" +
-    "<" + "/script>"); </script>
-    <script type="text/javascript">        if ("ontouchend" in document)
-            document.write("<script src='<%# BaseURL %>/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
-    </script>
+    <script src='<%# BaseURL %>/assets/js/jquery-2.0.3.min.js'></script>
     <script src="<%# BaseURL %>/assets/js/ace-extra.min.js"></script>
-    
+    <script src="<%# BaseURL %>/assets/orsjs/jquery.wholenumber.js"></script>
+
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="Form1" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true">
-    </asp:ScriptManager>
-    <asp:ContentPlaceHolder ID="MainContent" runat="server" />    
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true">
+        </asp:ScriptManager>
+        <asp:ContentPlaceHolder ID="MainContent" runat="server" />
     </form>
 </body>
 </html>

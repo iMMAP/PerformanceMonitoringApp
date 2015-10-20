@@ -815,7 +815,7 @@ namespace SRFROWCA.ClusterLead
         {
             // Get last error from the server
             Exception exc = Server.GetLastError();
-            SRFROWCA.Common.ExceptionUtility.LogException(exc, "UploadActivities", this.User);
+            ExceptionUtility.LogException(exc, User);
         }
     }
 }

@@ -21,7 +21,34 @@ namespace SRFROWCA.ClusterLead
                 LoadObjectivesFilter();
                 PopulateActivities();
                 SetDropDownOnRole(true);
+                SetFiltersFromSession();
+                ToggleControlsToAddIndicator();
                 LoadIndicators();
+
+            }
+        }
+
+        private void ToggleControlsToAddIndicator()
+        {
+            int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
+            int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
+
+            if (emgLocationId > 0 && emgClusterId > 0)
+            {
+                FrameWorkSettingsCount frCount = FrameWorkUtil.GetActivityFrameworkSettings(emgLocationId, emgClusterId);
+                if (frCount.IndCount <= 0 || frCount.DateExcedded)
+                {
+                    btnMigrate.Enabled = false;
+                    divMigrateMessage.Visible = true;
+                    lblMigrateMessage.Text = "Number of Maximum Indicators allowed are exceeded. You can not migrate more indicators to 2016 framework.";
+
+                }
+                else
+                {
+                    divMigrateMessage.Visible = true;
+                    btnMigrate.Enabled = true;
+                    lblMigrateMessage.Text = "You can migrate " + frCount.IndCount.ToString() + " Indicator(s)";
+                }
             }
         }
 
@@ -77,30 +104,67 @@ namespace SRFROWCA.ClusterLead
         // Execute row commands like Edit, Delete etc. on Grid.
         protected void btnSearch2_Click(object sender, EventArgs e)
         {
+            ToggleControlsToAddIndicator();
             LoadIndicators();
             PopulateActivities();
         }
 
-        protected void btnMigrate_Click(object sender, EventArgs e)
+        private bool IsAllowdToMigrate()
         {
-            foreach (GridViewRow row in gvActivity.Rows)
+            int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
+            int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
+            bool canMigrate = false;
+            if (emgLocationId > 0 && emgClusterId > 0)
             {
-                if (row.RowType == DataControlRowType.DataRow)
+                FrameWorkSettingsCount frCount = FrameWorkUtil.GetActivityFrameworkSettings(emgLocationId, emgClusterId);
+                lblMigrateMessage.Text = "You can only migrate " + frCount.IndCount.ToString() + " Indicator(s)";
+                int indCount = 0;
+                foreach (GridViewRow row in gvActivity.Rows)
                 {
-                    int activityId = Convert.ToInt32(gvActivity.DataKeys[row.RowIndex].Values["ActivityId"].ToString());
-                    int indicatorId = Convert.ToInt32(gvActivity.DataKeys[row.RowIndex].Values["IndicatorId"].ToString());
-                    CheckBox cb = gvActivity.Rows[row.RowIndex].FindControl("cbIsSelected") as CheckBox;
-                    if (cb != null)
+                    if (row.RowType == DataControlRowType.DataRow)
                     {
-                        if (cb.Checked && cb.Enabled)
+                        CheckBox cb = gvActivity.Rows[row.RowIndex].FindControl("cbIsSelected") as CheckBox;
+                        if (cb != null)
                         {
-                            DBContext.Add("Insert2016Framework", new object[] { activityId, indicatorId, 12, RC.GetCurrentUserId, DBNull.Value });
+                            if (cb.Checked && cb.Enabled)
+                                indCount += 1;
                         }
                     }
                 }
+
+                canMigrate = indCount <= frCount.IndCount;
             }
 
-            Response.Redirect("~/ClusterLead/IndicatorListing.aspx");
+            return canMigrate;
+        }
+
+        protected void btnMigrate_Click(object sender, EventArgs e)
+        {
+            if (!IsAllowdToMigrate())
+            {
+                divMigrateMessage.Visible = true;
+                lblMigrateMessage.Visible = true;
+            }
+            else
+            {
+                foreach (GridViewRow row in gvActivity.Rows)
+                {
+                    if (row.RowType == DataControlRowType.DataRow)
+                    {
+                        int activityId = Convert.ToInt32(gvActivity.DataKeys[row.RowIndex].Values["ActivityId"].ToString());
+                        int indicatorId = Convert.ToInt32(gvActivity.DataKeys[row.RowIndex].Values["IndicatorId"].ToString());
+                        CheckBox cb = gvActivity.Rows[row.RowIndex].FindControl("cbIsSelected") as CheckBox;
+                        if (cb != null)
+                        {
+                            if (cb.Checked && cb.Enabled)
+                            {
+                                DBContext.Add("Insert2016Framework", new object[] { activityId, indicatorId, 12, RC.GetCurrentUserId, DBNull.Value });
+                            }
+                        }
+                    }
+                }
+                Response.Redirect("~/ClusterLead/IndicatorListing.aspx");
+            }
         }
 
         protected void btnReset_Click(object sender, EventArgs e)
@@ -170,16 +234,57 @@ namespace SRFROWCA.ClusterLead
             return sortDirection;
         }
 
+        private void SetFiltersFromSession()
+        {
+            if (Session["ClusterFrameworkSelectedCountry"] != null)
+            {
+                int countryId = 0;
+                int.TryParse(Session["ClusterFrameworkSelectedCountry"].ToString(), out countryId);
+                if (countryId > 0)
+                {
+                    try
+                    {
+                        ddlCountry.SelectedValue = countryId.ToString();
+                    }
+                    catch { }
+                }
+            }
+
+            if (Session["ClusterFrameworkSelectedCluster"] != null)
+            {
+                int clusterId = 0;
+                int.TryParse(Session["ClusterFrameworkSelectedCluster"].ToString(), out clusterId);
+                if (clusterId > 0)
+                {
+                    try
+                    {
+                        ddlCluster.SelectedValue = clusterId.ToString();
+                    }
+                    catch { }
+                }
+            }
+
+        }
+
         private void LoadIndicators()
         {
-            gvActivity.DataSource = GetActivities();
+            DataTable dt = GetActivities();
+            if (dt.Rows.Count == 0)
+            {
+                divMigrateMessage.Visible = false;
+            }
+
+            gvActivity.DataSource = dt;
             gvActivity.DataBind();
         }
 
         private void LoadCountry()
         {
             UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
-            ddlCountry.Items.Insert(0, new ListItem("--- Select Country ---", "0"));
+            if (RC.SelectedSiteLanguageId == 1)
+                ddlCountry.Items.Insert(0, new ListItem("Select Country", "0"));
+            else
+                ddlCountry.Items.Insert(0, new ListItem("Sélectionner Pays", "0"));
         }
 
         private void PopulateActivities()
@@ -195,20 +300,28 @@ namespace SRFROWCA.ClusterLead
             ddlActivity.DataValueField = "ActivityId";
             ddlActivity.DataBind();
 
-            ListItem item = new ListItem("Select Activity", "0");
-            ddlActivity.Items.Insert(0, item);
+            if (RC.SelectedSiteLanguageId == 1)
+                ddlActivity.Items.Insert(0, new ListItem("Select Activity", "0"));
+            else
+                ddlActivity.Items.Insert(0, new ListItem("Sélectionner Activité", "0"));
         }
 
         private void LoadClustersFilter()
         {
             UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
-            ddlCluster.Items.Insert(0, new ListItem("--- Select Cluster ---", "0"));
+            if (RC.SelectedSiteLanguageId == 1)
+                ddlCluster.Items.Insert(0, new ListItem("Select Cluster", "0"));
+            else
+                ddlCluster.Items.Insert(0, new ListItem("Sélectionner Cluster", "0"));
         }
 
         private void LoadObjectivesFilter()
         {
             ddlObjective.Items.Clear();
-            ddlObjective.Items.Add(new ListItem("All", "0"));
+            if (RC.SelectedSiteLanguageId == 1)
+                ddlObjective.Items.Add(new ListItem("Select Objective", "0"));
+            else
+                ddlObjective.Items.Add(new ListItem("Sélectionner Objectif", "0"));
             ddlObjective.DataValueField = "EmergencyObjectiveId";
             ddlObjective.DataTextField = "Objective";
             ddlObjective.DataSource = GetObjectives();
@@ -232,9 +345,14 @@ namespace SRFROWCA.ClusterLead
             int? emergencyObjectiveId = ddlObjective.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlObjective.SelectedValue);
             int? activityId = ddlActivity.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlActivity.SelectedValue);
             int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
-            return DBContext.GetData("GetAllIndicatorsToMigrate", new object[] { emergencyLocationId, emergencyClusterId, 
+            if (emergencyClusterId > 0 && emergencyLocationId > 0)
+            {
+                return DBContext.GetData("GetAllIndicatorsToMigrate", new object[] { emergencyLocationId, emergencyClusterId, 
                                                                                     emergencyObjectiveId, activityId, 
                                                                                     (int)RC.SelectedSiteLanguageId });
+            }
+            else
+                return new DataTable();
         }
         private DataTable GetObjectives()
         {
@@ -253,7 +371,7 @@ namespace SRFROWCA.ClusterLead
         {
             // Get last error from the server
             Exception exc = Server.GetLastError();
-            SRFROWCA.Common.ExceptionUtility.LogException(exc, "ActivityListing", this.User);
+            ExceptionUtility.LogException(exc, User);
         }
 
         protected void gvActivity_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -266,7 +384,7 @@ namespace SRFROWCA.ClusterLead
         {
             RC.ShowMessage(Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
         }
-        
+
         private void SetEmailItem(GridViewRow row, List<string> projects)
         {
             List<string> emailItems = new List<string>();

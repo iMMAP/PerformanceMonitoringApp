@@ -68,10 +68,16 @@ namespace SRFROWCA.ClusterLead
         private void LoadCombos()
         {
             UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
-            UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
+            if (RC.SelectedSiteLanguageId == 1)
+                ddlCountry.Items.Insert(0, new ListItem("Select Country", "0"));
+            else
+                ddlCountry.Items.Insert(0, new ListItem("Sélectionner Pays", "0"));
 
-            ddlCluster.Items.Insert(0, new ListItem("Select Cluster", "0"));
-            ddlCountry.Items.Insert(0, new ListItem("Select Country", "0"));
+            UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
+            if (RC.SelectedSiteLanguageId == 1)
+                ddlCluster.Items.Insert(0, new ListItem("Select Cluster", "0"));
+            else
+                ddlCluster.Items.Insert(0, new ListItem("Sélectionner Cluster", "0"));
 
             SetComboValues();
         }

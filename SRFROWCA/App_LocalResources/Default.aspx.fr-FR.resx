@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="btnLoginCCResource1.Text" xml:space="preserve">
-    <value>Connexion en tant que cluster lead</value>
+    <value>Connexion en tant que coordinateur de cluster</value>
   </data>
   <data name="btnLoginCCResource1.ToolTip" xml:space="preserve">
     <value>Comme coordinateur de cluster, une fois connecté, vous aurez accès aux fonctionnalités suivantes:&lt;ul&gt;&lt;li&gt;Téléchargement et gestion de votre cadre de suivi cluster.&lt;/li&gt;&lt;li&gt;Validation des réalisations des projets clusters renseignées par les partenaires.&lt;/li&gt;&lt;li&gt;Rapportage mensuel des réalisations des clusters sur les indicateurs de résultats (régionaux et spécifiques au pays).&lt;/li&gt;&lt;li&gt;L'accès à tous les données et rapports, y inclus les Qui Fait Quoi Où (3Ws) et les chiffres clés.&lt;/li&gt;&lt;/ul&gt;</value>
@@ -148,7 +148,7 @@
     <value />
   </data>
   <data name="localMenuCustomReportResource1.Text" xml:space="preserve">
-    <value>Custom Report (Project Activities)</value>
+    <value>Rapport personnalisé (activités du projet)</value>
   </data>
   <data name="localMenuDashboardResource1.Text" xml:space="preserve">
     <value>Tableau de bord ORS</value>
@@ -166,13 +166,13 @@
     <value>Cartes</value>
   </data>
   <data name="localMenuORSLableResource1.Text" xml:space="preserve">
-    <value>Accés aux données et visualisations ORS</value>
+    <value>Accès aux données et infographies ORS</value>
   </data>
   <data name="localMenuOutputIndResource1.Text" xml:space="preserve">
-    <value>Cluster Output Indicators Reported</value>
+    <value>Indicateurs de résultat rapportés</value>
   </data>
   <data name="localMenuProjectsResource1.Text" xml:space="preserve">
-    <value>Listes des projets 2015</value>
+    <value>Liste des projets 2015</value>
   </data>
   <data name="locDefaultIntroResource1.Text" xml:space="preserve">
     <value>Le système de rapportage en ligne (ORS) est un outil de suivi des performances qui permet aux partenaires humanitaires, participant aux processus de planification inter-agences, de renseigner sur les progrès basés sur les activités définies lors du SRP/HRP. La base de données a été conçue afin de faciliter le partage de l’information et de suivre la réponse des interventions humanitaires.</value>
@@ -184,15 +184,15 @@
     <value>Besoin d'aide?</value>
   </data>
   <data name="locSendEmailResource1.Text" xml:space="preserve">
-    <value>Envover un e-mail</value>
+    <value>Envoyer un e-mail</value>
   </data>
   <data name="locSkypeResource1.Text" xml:space="preserve">
-    <value>Skype: Envoyer un message au 'orshelpdesk'</value>
+    <value>Skype: Envoyer un message Skype au 'orshelpdesk'</value>
   </data>
   <data name="PageResource1.Title" xml:space="preserve">
     <value>ORS - Accueil</value>
   </data>
   <data name="localDonthaveORSResource.Text" xml:space="preserve">
-    <value>Pas encore de compte?</value>
+    <value>Nouvel utilisateur ORS ?</value>
   </data>
 </root>

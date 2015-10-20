@@ -344,7 +344,7 @@ namespace SRFROWCA.Admin
         {
             // Get last error from the server
             Exception exc = Server.GetLastError();
-            SRFROWCA.Common.ExceptionUtility.LogException(exc, "IndicatorActivities", this.User);
+            ExceptionUtility.LogException(exc, User);
         }
     }
 }

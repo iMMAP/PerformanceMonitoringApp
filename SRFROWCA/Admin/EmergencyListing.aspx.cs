@@ -257,7 +257,7 @@ namespace SRFROWCA.Admin
         {
             // Get last error from the server
             Exception exc = Server.GetLastError();
-            SRFROWCA.Common.ExceptionUtility.LogException(exc, "EmergencyListing", this.User);
+            ExceptionUtility.LogException(exc, User);
         }
     }
 }

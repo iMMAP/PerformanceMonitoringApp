@@ -11,6 +11,7 @@ using System.IO;
 using System.Data.OleDb;
 using BusinessLogic;
 using System.Web.Security;
+using SRFROWCA.Common;
 
 namespace SRFROWCA.Admin
 {
@@ -214,7 +215,7 @@ namespace SRFROWCA.Admin
         {
             // Get last error from the server
             Exception exc = Server.GetLastError();
-            SRFROWCA.Common.ExceptionUtility.LogException(exc, "UploadActivities", this.User);
+            ExceptionUtility.LogException(exc, User);
         }
     }
 }

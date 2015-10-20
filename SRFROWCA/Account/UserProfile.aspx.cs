@@ -104,7 +104,7 @@ namespace SRFROWCA.Account
         {
             // Get last error from the server
             Exception exc = Server.GetLastError();
-            SRFROWCA.Common.ExceptionUtility.LogException(exc, "UpdateUser", this.User);
+            ExceptionUtility.LogException(exc, User);
         }
     }
 }

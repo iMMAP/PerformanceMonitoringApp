@@ -123,20 +123,20 @@
   <data name="FailureTextResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-    <data name="localBreadCrumbHomeResource1.Text" xml:space="preserve">
+  <data name="localBreadCrumbHomeResource1.Text" xml:space="preserve">
     <value>Accueil</value>
   </data>
-    <data name="localBreadCrumbLoginResource1.Text" xml:space="preserve">
+  <data name="localBreadCrumbLoginResource1.Text" xml:space="preserve">
     <value>Se connecter</value>
   </data>
   <data name="localEnterYourInfoResource1.Text" xml:space="preserve">
-    <value>Saisir votre information s'il vous plait</value>
+    <value>Veuillez saisir votre identifiant et mot de passe</value>
   </data>
   <data name="localForgotPasswordResource1.Text" xml:space="preserve">
-    <value>J'ai oublié mon mot de passe</value>
+    <value>Mot de passe oublié</value>
   </data>
   <data name="localToRegisterResource1.Text" xml:space="preserve">
-    <value>Je veux m'inscrire</value>
+    <value>Je veux M'inscrire</value>
   </data>
   <data name="LoginButtonResource1.Text" xml:space="preserve">
     <value>Se connecter</value>
@@ -211,9 +211,9 @@
     <value>Nom d'utilisateur exig.</value>
   </data>
   <data name="UserNameResource1.Text" xml:space="preserve">
-    <value/>
+    <value />
   </data>
   <data name="UserNameResource1.ToolTip" xml:space="preserve">
-    <value/>
+    <value />
   </data>
 </root>

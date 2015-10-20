@@ -18,9 +18,7 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
     <div class="page-content">
-
         <table width="100%">
             <tr>
                 <td>
@@ -29,16 +27,16 @@
                             <div class="widget-box">
                                 <div class="widget-header widget-header-small header-color-blue2">
                                     <h6>
-                                        <button runat="server" id="btnExportToExcel" onserverclick="btnExportExcel_Click" class="btn btn-yellow" causesvalidation="false"
-                                            title="Excel">
+                                        <button runat="server" id="btnExportToExcel" onserverclick="btnExportExcel_Click"
+                                            class="btn btn-sm btn-yellow" causesvalidation="false" title="Excel">
                                             <i class="icon-download"></i>Excel
-                                       
                                         </button>
 
-                                        <asp:Button ID="btnAddActivityAndIndicators" runat="server" Text="Add Activity & Indicators (Framework 2016)" CausesValidation="False"
-                                            CssClass="btn btn-yellow pull-right" OnClick="btnAddActivityAndIndicators_Click" Style="margin-right: 5px;" meta:resourcekey="btnAddActivityAndIndicatorsResource1" />
+                                        <asp:Button ID="btnAddActivityAndIndicators" runat="server" Text="Add Activity & Indicators (Framework 2016)"
+                                            CausesValidation="False" CssClass="btn btn-sm btn-yellow pull-right" OnClick="btnAddActivityAndIndicators_Click"
+                                            Style="margin-right: 5px;" meta:resourcekey="btnAddActivityAndIndicatorsResource1" />
                                         <asp:Button ID="btnMigrate2016" runat="server" Text="Migrate 2015 Framework To 2016" CausesValidation="False"
-                                            CssClass="btn btn-danger pull-right" OnClick="btnMigrate2016_Click" meta:resourcekey="btnMigrate2016Resource1" />
+                                            CssClass="btn btn-sm btn-danger pull-right" OnClick="btnMigrate2016_Click" meta:resourcekey="btnMigrate2016Resource1" />
                                     </h6>
                                 </div>
                                 <div class="widget-body">
@@ -72,7 +70,6 @@
                                                             <td class="width-30">
                                                                 <asp:DropDownList ID="ddlObjective" runat="server" AppendDataBoundItems="True" AutoPostBack="True"
                                                                     CssClass="width-80" OnSelectedIndexChanged="ddlSelectedIndexChnaged" meta:resourcekey="ddlObjectiveResource1">
-                                                                    <asp:ListItem Text="All" Value="-1" Selected="True" meta:resourcekey="ListItemResource1"></asp:ListItem>
                                                                 </asp:DropDownList>
                                                             </td>
                                                             <td class="width-20">
@@ -109,8 +106,10 @@
                                                         <tr>
                                                             <td>&nbsp;</td>
                                                             <td colspan="4" style="padding-top: 10px;">
-                                                                <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch2_Click" CssClass="btn btn-primary" CausesValidation="False" meta:resourcekey="btnSearchResource1" />
-                                                                <asp:Button ID="btnReset" runat="server" Text="Reset" Style="margin-left: 5px;" OnClick="btnReset_Click" CssClass="btn btn-primary" CausesValidation="False" meta:resourcekey="btnResetResource1" />
+                                                                <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch2_Click"
+                                                                    CssClass="btn btn-sm btn-primary" CausesValidation="False" meta:resourcekey="btnSearchResource1" />
+                                                                <asp:Button ID="btnReset" runat="server" Text="Reset" Style="margin-left: 5px;"
+                                                                    OnClick="btnReset_Click" CssClass="btn btn-sm btn-primary" CausesValidation="False" meta:resourcekey="btnResetResourceIndlst1" />
                                                             </td>
 
                                                         </tr>
@@ -136,7 +135,7 @@
                 <asp:GridView ID="gvActivity" runat="server" AutoGenerateColumns="False" AllowSorting="True" AllowPaging="True" Width="100%"
                     PagerSettings-Mode="NumericFirstLast" OnRowCommand="gvActivity_RowCommand" OnRowDataBound="gvActivity_RowDataBound"
                     PagerSettings-Position="Bottom" DataKeyNames="ActivityId,IndicatorDetailId,IndicatorId,IsMigrated"
-                    CssClass="imagetable" OnSorting="gvActivity_Sorting" OnPageIndexChanging="gvActivity_PageIndexChanging"
+                    CssClass="imagetable table-hover" OnSorting="gvActivity_Sorting" OnPageIndexChanging="gvActivity_PageIndexChanging"
                     PageSize="70" ShowHeaderWhenEmpty="True" EmptyDataText="Your filter criteria does not match any indicator!" meta:resourcekey="gvActivityResource1">
 
                     <PagerSettings Mode="NumericFirstLast"></PagerSettings>
@@ -178,7 +177,7 @@
                         <asp:BoundField DataField="Unit" HeaderText="Unit" SortExpression="Unit" meta:resourcekey="BoundFieldResource6" />
                         <asp:TemplateField ItemStyle-Width="4%" HeaderText="<span class='tooltip2' title='Each Indicator has assigned a calcuation method type.</br>Sum: Sum of all monthly achieved.</br>Agerage: Average of all monthly achieved.</br>Max: Max data reported in any month.</br>Latest: Latest data reported.'>Calculation Method</span>" meta:resourcekey="TemplateFieldResource4">
                             <ItemTemplate>
-                                <asp:Label ID="lblCalcMethod" ToolTip="some text here" runat="server" Text='<%# Eval("CalculationType") %>' meta:resourcekey="lblCalcMethodResource1"></asp:Label>
+                                <asp:Label ID="lblCalcMethod" ToolTip="" runat="server" Text='<%# Eval("CalculationType") %>' meta:resourcekey="lblCalcMethodResource1"></asp:Label>
                             </ItemTemplate>
 
                             <ItemStyle Width="4%"></ItemStyle>
@@ -187,8 +186,6 @@
                             <ItemTemplate>
                                 <asp:Label ID="lblIndTarget" runat="server" Text='<%# Eval("IndicatorTarget") %>' meta:resourcekey="lblIndTargetResource1"></asp:Label>
                             </ItemTemplate>
-
-                            <ItemStyle HorizontalAlign="Right"></ItemStyle>
                         </asp:TemplateField>
 
                         <asp:TemplateField HeaderStyle-Width="30px" ItemStyle-HorizontalAlign="Center" HeaderText="Edit" meta:resourcekey="TemplateFieldResource6">
@@ -206,12 +203,7 @@
                                 <asp:ImageButton ID="btnDelete" runat="server" ImageUrl="~/assets/orsimages/delete16.png"
                                     CommandName="DeleteInd" CommandArgument='<%# Eval("IndicatorDetailId") %>' ToolTip="Delete" meta:resourcekey="btnDeleteResource1" />
                             </ItemTemplate>
-
-                            <HeaderStyle Width="30px"></HeaderStyle>
-
-                            <ItemStyle HorizontalAlign="Center"></ItemStyle>
                         </asp:TemplateField>
-
 
                         <asp:TemplateField Visible="false" meta:resourcekey="TemplateFieldResource5">
                             <ItemTemplate>
@@ -254,6 +246,35 @@
         <asp:ModalPopupExtender ID="ModalPopupExtender1" runat="server"
             TargetControlID="btnClientOpen"
             PopupControlID="Panel1"
+            BackgroundCssClass="modalpopupbackground"
+            DropShadow="True" DynamicServicePath="" Enabled="True" />
+
+        <input type="button" id="Button1" runat="server" style="display: none;" />
+        <asp:Panel ID="Panel2" runat="server" CssClass="modalDialog" Style="display: none" Width="600px" meta:resourcekey="Panel1Resource1">
+            <div>
+                <br />
+                Export With Admin2 (Targets):
+                <asp:RadioButton ID="rbExlAdmin2Yes" runat="server" GroupName="ExcelAdmin2Target" Checked="false" Text="Yes" />
+                <asp:RadioButton ID="rbExlAdmin2No" runat="server" GroupName="ExcelAdmin2Target" Checked="true" Text="NO" />
+                <br />
+
+                Include Identity (Ids) Columns:
+                <asp:RadioButton ID="rbExlIdnYes" runat="server" GroupName="ExcelIdnTarget" Text="Yes" />
+
+                <asp:RadioButton ID="rbExlIdnNO" runat="server" GroupName="ExcelIdnTarget" Checked="true" />
+                <label>No</label>
+
+                <div align="center">
+                    <asp:Button ID="btnExportExcelOK" runat="server" Text="OK" OnClick="btnExportExcelOK_Click" class="btn btn-sm btn-primary" meta:resourcekey="OkButtonResource1" />
+                    <button id="btnExportExcelCancel" class="btn btn-sm btn-primary" >Close</button>
+                    
+                </div>
+            </div>
+        </asp:Panel>
+
+        <asp:ModalPopupExtender ID="ModalPopupExtender2" runat="server"
+            TargetControlID="btnClientOpen" CancelControlID="btnExportExcelCancel"
+            PopupControlID="Panel2"
             BackgroundCssClass="modalpopupbackground"
             DropShadow="True" DynamicServicePath="" Enabled="True" />
     </div>

@@ -37,7 +37,7 @@ namespace SRFROWCA.ClusterLead
         }
 
         #region Events.
-        protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
+        protected void ddl_SelectedIndexChanged(object sender, EventArgs e)
         {
             GetTargetsforRegion(0);
         }
@@ -127,17 +127,29 @@ namespace SRFROWCA.ClusterLead
         #region Methods.
         internal override void BindGridData()
         {
+            LoadCombos();
+            DisableDropDowns();
         }
 
         private void LoadCombos()
         {
             UI.FillEmergencyLocations(ddlCountry, RC.EmergencySahel2015);
-            UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
-            UI.FillUnits(ddlUnit);
+            if (RC.SelectedSiteLanguageId == 1)
+                ddlCountry.Items.Insert(0, new ListItem("Select Country", "0"));
+            else
+                ddlCountry.Items.Insert(0, new ListItem("Sélectionner Pays", "0"));
 
-            ddlCluster.Items.Insert(0, new ListItem("Select Cluster", "0"));
-            ddlCountry.Items.Insert(0, new ListItem("Select Country", "0"));
-            ddlUnit.Items.Insert(0, new ListItem("Select Unit", "0"));
+            UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
+            if (RC.SelectedSiteLanguageId == 1)
+                ddlCluster.Items.Insert(0, new ListItem("Select Cluster", "0"));
+            else
+                ddlCluster.Items.Insert(0, new ListItem("Sélectionner Cluster", "0"));
+
+            UI.FillUnits(ddlUnit);
+            if (RC.SelectedSiteLanguageId == 1)
+                ddlUnit.Items.Insert(0, new ListItem("Select Unit", "0"));
+            else
+                ddlUnit.Items.Insert(0, new ListItem("Sélectionner Unité", "0"));
 
             SetComboValues();
         }
@@ -280,12 +292,16 @@ namespace SRFROWCA.ClusterLead
         {
             int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
             if (emgLocationId <= 0)
-            {
                 emgLocationId = UserInfo.EmergencyCountry;
-            }
-            if (!(RC.IsRegionalClusterLead(this.User) || emgLocationId == 11))
+
+            if ((RC.IsRegionalClusterLead(this.User) || emgLocationId == 11))
+                return;
+            int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
+            int locCategoryId = emgClusterId == (int)RC.EmgClsId2016.HLT ? (int)RC.LocationCategory.Health : (int)RC.LocationCategory.Government;
+
+            if (emgLocationId > 0 && emgClusterId > 0)
             {
-                DataTable dtTargets = GetRegionalAdmin1(emgLocationId, indicatorId);
+                DataTable dtTargets = GetRegionalAdmin1(emgLocationId, indicatorId, locCategoryId);
                 rptAdmin.DataSource = dtTargets;
                 rptAdmin.DataBind();
                 rptAdmin1Gender.DataSource = dtTargets;
@@ -293,9 +309,9 @@ namespace SRFROWCA.ClusterLead
             }
         }
 
-        private DataTable GetRegionalAdmin1(int emgLocationId, int indicatorId)
+        private DataTable GetRegionalAdmin1(int emgLocationId, int indicatorId, int locCatId)
         {
-            return DBContext.GetData("GetRegionalTargetsForOutputIndicator", new object[] { indicatorId, emgLocationId });
+            return DBContext.GetData("GetRegionalTargetsForOutputIndicator", new object[] { indicatorId, emgLocationId, locCatId });
         }
 
         private void ShowValidationMessage()
@@ -485,6 +501,13 @@ namespace SRFROWCA.ClusterLead
                     }
                 }
             }
+        }
+
+        protected void Page_Error(object sender, EventArgs e)
+        {
+            // Get last error from the server
+            Exception exc = Server.GetLastError();
+            ExceptionUtility.LogException(exc, User);
         }
 
         #endregion

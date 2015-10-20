@@ -146,6 +146,7 @@
     <Content Include="Anonymous\ActivitiesFrameworkPublic.aspx" />
     <Content Include="Anonymous\OutputIndicatorReport.aspx" />
     <Content Include="Anonymous\ProjectsListingPublic.aspx" />
+    <Content Include="App_Offline_.htm" />
     <Content Include="assets\css\bootstrap.min.css" />
     <Content Include="assets\css\ddl.css" />
     <Content Include="assets\css\gridviewScroll.css" />
@@ -264,7 +265,7 @@
     <Content Include="Configurations\ChangeEndSettings.xml" />
     <Content Include="Controls\AddContryReportControl.ascx" />
     <Content Include="Controls\ConfirmBox.ascx" />
-    <Content Include="Controls\IndicatorsWithAdmin1TargetsControl.ascx" />
+    <Content Include="Controls\FrameworkIndicators.ascx" />
     <Content Include="Controls\NewCountryIndicatorsControl.ascx" />
     <Content Include="Controls\NewIndicatorsControl.ascx" />
     <Content Include="Controls\ReportedIndicatorComments.ascx" />
@@ -281,6 +282,7 @@
     <Content Include="ErrorPages\HttpErrorPage.aspx" />
     <Content Include="faq.aspx" />
     <Content Include="favicon.ico" />
+    <Content Include="GeoCode.aspx" />
     <Content Include="GV\gridviewScroll.css" />
     <Content Include="GV\gridviewScroll.js" />
     <Content Include="GV\gridviewScroll.min.js" />
@@ -293,6 +295,7 @@
     <Content Include="HtmlPage1.html" />
     <Content Include="HtmlPage2.html" />
     <Content Include="HtmlPage3.html" />
+    <Content Include="HtmlPage4.html" />
     <Content Include="KeyFigures\AddKeyFigure.aspx" />
     <Content Include="KeyFigures\AddKeyFigureCategory.aspx" />
     <Content Include="KeyFigures\AddKeyFigureCategoryCtrl.ascx" />
@@ -355,6 +358,7 @@
     <Content Include="Anonymous\AllDataJson.ashx" />
     <Content Include="Anonymous\AllDataCSV.ashx" />
     <Content Include="Anonymous\AllValidatedDataFeed.ashx" />
+    <Content Include="UtilsExamples.aspx" />
     <Content Include="Visualization\images\databox.jpg" />
     <Content Include="Visualization\images\ip.jpg" />
     <Content Include="Visualization\images\map.jpg" />
@@ -841,12 +845,12 @@
     <Compile Include="Controls\ConfirmBox.ascx.designer.cs">
       <DependentUpon>ConfirmBox.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\IndicatorsWithAdmin1TargetsControl.ascx.cs">
-      <DependentUpon>IndicatorsWithAdmin1TargetsControl.ascx</DependentUpon>
+    <Compile Include="Controls\FrameworkIndicators.ascx.cs">
+      <DependentUpon>FrameworkIndicators.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\IndicatorsWithAdmin1TargetsControl.ascx.designer.cs">
-      <DependentUpon>IndicatorsWithAdmin1TargetsControl.ascx</DependentUpon>
+    <Compile Include="Controls\FrameworkIndicators.ascx.designer.cs">
+      <DependentUpon>FrameworkIndicators.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\NewCountryIndicatorsControl.ascx.cs">
       <DependentUpon>NewCountryIndicatorsControl.ascx</DependentUpon>
@@ -1018,6 +1022,13 @@
     </Compile>
     <Compile Include="faq.aspx.designer.cs">
       <DependentUpon>faq.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GeoCode.aspx.cs">
+      <DependentUpon>GeoCode.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GeoCode.aspx.designer.cs">
+      <DependentUpon>GeoCode.aspx</DependentUpon>
     </Compile>
     <Compile Include="GV\GVScroll.aspx.cs">
       <DependentUpon>GVScroll.aspx</DependentUpon>
@@ -1198,6 +1209,8 @@
       <DependentUpon>OPSDataEntryRpt.aspx</DependentUpon>
     </Compile>
     <Compile Include="OPS\OPSProject.cs" />
+    <Compile Include="OPS\OpsXMLFeed.cs" />
+    <Compile Include="OPS\OpsXMLFeed2.cs" />
     <Compile Include="OPS\SyncOPSProjects.aspx.cs">
       <DependentUpon>SyncOPSProjects.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1212,6 +1225,7 @@
     <Compile Include="OPS\UploadOPSProjectDetails.aspx.designer.cs">
       <DependentUpon>UploadOPSProjectDetails.aspx</DependentUpon>
     </Compile>
+    <Compile Include="OPS\OpsXMLFeed2015.cs" />
     <Compile Include="ORSModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1384,6 +1398,13 @@
     <Compile Include="UploadSRPLogFrame.aspx.designer.cs">
       <DependentUpon>UploadSRPLogFrame.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UtilsExamples.aspx.cs">
+      <DependentUpon>UtilsExamples.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UtilsExamples.aspx.designer.cs">
+      <DependentUpon>UtilsExamples.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1444,10 +1465,14 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Account\App_LocalResources\Register.aspx.resx" />
+    <Content Include="Account\App_LocalResources\Register.aspx.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Account\App_LocalResources\Register.aspx.fr.resx" />
+    <Content Include="Account\App_LocalResources\Register.aspx.fr.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\App_LocalResources\ChangePassword.aspx.resx" />
@@ -1573,10 +1598,14 @@
     <Content Include="ClusterLead\App_LocalResources\AddActivityAndIndicators.aspx.fr-FR.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Controls\App_LocalResources\IndicatorsWithAdmin1TargetsControl.ascx.resx" />
+    <Content Include="Controls\App_LocalResources\FrameworkIndicators.ascx.fr-FR.resx" />
+    <Content Include="Controls\App_LocalResources\FrameworkIndicators.ascx.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Controls\App_LocalResources\IndicatorsWithAdmin1TargetsControl.ascx.fr-FR.resx" />
+    <Content Include="ClusterLead\App_LocalResources\IndicatorListingMigrate.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ClusterLead\App_LocalResources\IndicatorListingMigrate.aspx.fr-FR.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
