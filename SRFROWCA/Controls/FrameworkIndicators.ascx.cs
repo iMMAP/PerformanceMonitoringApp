@@ -7,6 +7,9 @@ using System.Web.UI.WebControls;
 using BusinessLogic;
 using SRFROWCA.Common;
 using System.Data;
+using SRFROWCA.Configurations;
+using System.Web.Services;
+using System.Web.Script.Services;
 
 namespace SRFROWCA.Controls
 {
@@ -19,6 +22,42 @@ namespace SRFROWCA.Controls
             if (string.IsNullOrEmpty(hfIndicatorId.Value) || hfIndicatorId.Value == "0")
             {
                 PopulateUnits(true);
+            }
+
+            string key = this.indCtlEmgLocId.ToString() + this.indCtlEmgClusterId.ToString();
+            AdminTargetSettingItems items = RC.AdminTargetSettings(key);
+            if (items.IsTarget)
+            {
+                UserControl ctl = null;
+                if (items.AdminLevel == RC.LocationTypes.National)
+                {
+                    ctl = (ctlCountryTargets)LoadControl("~/controls/ctlCountryTargets.ascx");
+                    ((ctlCountryTargets)ctl).EmgLocId = this.indCtlEmgLocId;
+                    ((ctlCountryTargets)ctl).IndicatorId = this.indCtlIndicatorId;
+                    ((ctlCountryTargets)ctl).IsGender = this.indCtlIsGender;
+                    ((ctlCountryTargets)ctl).ID = "AdminTargetControl";
+                }
+                else if (items.AdminLevel == RC.LocationTypes.Governorate)
+                {
+                    ctl = (ctlAdmin1Targets)LoadControl("~/controls/ctlAdmin1Targets.ascx");
+                    ((ctlAdmin1Targets)ctl).EmgLocId = this.indCtlEmgLocId;
+                    ((ctlAdmin1Targets)ctl).IndicatorId = this.indCtlIndicatorId;
+                    ((ctlAdmin1Targets)ctl).Category = items.Category;
+                    ((ctlAdmin1Targets)ctl).IsGender = this.indCtlIsGender;
+                    ((ctlAdmin1Targets)ctl).ID = "AdminTargetControl";
+                }
+                else if (items.AdminLevel == RC.LocationTypes.District)
+                {
+                    ctl = (ctlAdmin2Targets)LoadControl("~/controls/ctlAdmin2Targets.ascx");
+                    ((ctlAdmin2Targets)ctl).EmgLocId = this.indCtlEmgLocId;
+                    ((ctlAdmin2Targets)ctl).IndicatorId = this.indCtlIndicatorId;
+                    ((ctlAdmin2Targets)ctl).Category = items.Category;
+                    ((ctlAdmin2Targets)ctl).IsGender = this.indCtlIsGender;
+                    ((ctlAdmin2Targets)ctl).ID = "AdminTargetControl";
+                }
+
+                if (ctl != null)
+                    pnlTargets.Controls.Add(ctl);
             }
         }
 
@@ -46,74 +85,58 @@ namespace SRFROWCA.Controls
         {
             SaveIndicator(activityId);
         }
-        public void SaveRegionalIndicators(int priorityActivityId, bool regional)
-        {
-            SaveRegionalIndicator(priorityActivityId, regional);
-        }
 
-        private void SaveIndicator(int activityId)
+        private void SaveTargets(int indicatorId, bool IsGender)
         {
-            int unitId = 0;
-            int.TryParse(ddlUnit.SelectedValue, out unitId);
-            string indEn = !string.IsNullOrEmpty(txtInd1Eng.Text.Trim()) ? txtInd1Eng.Text.Trim() : txtInd1Fr.Text.Trim();
-            string indFr = !string.IsNullOrEmpty(txtInd1Fr.Text.Trim().Trim()) ? txtInd1Fr.Text.Trim() : txtInd1Eng.Text.Trim();
-            Guid userId = RC.GetCurrentUserId;
-            int gender = 0;
-            int val = RC.GetSelectedIntVal(ddlCalculationMethod);
-            int? calMethod = val > 0 ? val : (int?)val;
-
-            if (string.IsNullOrEmpty(hfIndicatorId.Value))
+            string key = this.indCtlEmgLocId.ToString() + this.indCtlEmgClusterId.ToString();
+            AdminTargetSettingItems items = RC.AdminTargetSettings(key);
+            foreach (Control ctlTareget in pnlTargets.Controls)
             {
-                int indicatorId = DBContext.Add("InsertIndicator", new object[] { activityId, indEn, indFr, 
-                                                                                    unitId, userId, gender, 
-                                                                                    calMethod, DBNull.Value });
-                if (indicatorId > 0)
+                if (ctlTareget != null && ctlTareget.ID != null && ctlTareget.ID.Contains("AdminTargetControl"))
                 {
-                    if (unitId == 269 || unitId == 28 || unitId == 38 || unitId == 193
-                         || unitId == 219 || unitId == 198 || unitId == 311 || unitId == 287
-                         || unitId == 67 || unitId == 132 || unitId == 252 || unitId == 238)
-                        SaveAdmin2GenderTargets(indicatorId);
-                    else
-                        SaveAdmin2Targets(indicatorId);
-                }
-            }
-            else
-            {
-                int indicatorId = 0;
-                int.TryParse(hfIndicatorId.Value, out indicatorId);
-                if (indicatorId > 0)
-                {
-                    DBContext.Update("UpdateIndicatorNew2", new object[] { indicatorId, activityId, 
-                                                                            unitId, indEn, indFr, userId, 
-                                                                            gender, calMethod, DBNull.Value });
-                    if (unitId == 269 || unitId == 28 || unitId == 38 || unitId == 193
-                         || unitId == 219 || unitId == 198 || unitId == 311 || unitId == 287
-                         || unitId == 67 || unitId == 132 || unitId == 252 || unitId == 238)
-                        SaveAdmin2GenderTargets(indicatorId);
-                    else
-                        SaveAdmin2Targets(indicatorId);
-                }
-                else
-                {
-                    int newIndicatorId = DBContext.Add("InsertIndicator", new object[] { activityId, indEn, indFr, 
-                                                                                            unitId, userId, gender, 
-                                                                                            calMethod, DBNull.Value });
-                    if (newIndicatorId > 0)
+                    string ctlType = ctlTareget.GetType().ToString();
+                    //if (ctlTareget.GetType() == ctlCountryTargets)
+                    if (items.AdminLevel == RC.LocationTypes.National)
                     {
-                        if (unitId == 269 || unitId == 28 || unitId == 38 || unitId == 193
-                         || unitId == 219 || unitId == 198 || unitId == 311 || unitId == 287
-                         || unitId == 67 || unitId == 132 || unitId == 252 || unitId == 238)
-                            SaveAdmin2GenderTargets(indicatorId);
-                        else
-                            SaveAdmin2Targets(indicatorId);
+                        ctlCountryTargets countryCtl = ctlTareget as ctlCountryTargets;
+                        if (countryCtl != null)
+                        {
+                            if (IsGender)
+                                SaveCountryTargetsGender(countryCtl.rptCountryGender, indicatorId);
+                            else
+                                SaveCountryTargets(countryCtl.rptCountry, indicatorId);
+                        }
+                    }
+                    else if (items.AdminLevel == RC.LocationTypes.Governorate)
+                    {
+                        ctlAdmin1Targets adm1Ctl = ctlTareget as ctlAdmin1Targets;
+                        if (adm1Ctl != null)
+                        {
+                            if (IsGender)
+                                SaveAdmin1TargetGender(adm1Ctl.rptCountryGender, indicatorId);
+                            else
+                                SaveAdmin1Target(adm1Ctl.rptCountry, indicatorId);
+                        }
+                    }
+                    else if (items.AdminLevel == RC.LocationTypes.District)
+                    {
+                        ctlAdmin2Targets adm2Ctl = ctlTareget as ctlAdmin2Targets;
+                        if (adm2Ctl != null)
+                        {
+                            if (IsGender)
+                                SaveAdmin2TargetGender(adm2Ctl.rptCountryGender, indicatorId);
+                            else
+                                SaveAdmin2Target(adm2Ctl.rptCountry, indicatorId);
+                        }
                     }
                 }
             }
         }
-        private void SaveAdmin2Targets(int indicatorId)
+
+        private void SaveAdmin2Target(Repeater repeater, int indicatorId)
         {
             int insertCount = 1;
-            foreach (RepeaterItem item in rptCountry.Items)
+            foreach (RepeaterItem item in repeater.Items)
             {
                 if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
                 {
@@ -161,7 +184,7 @@ namespace SRFROWCA.Controls
                                                 {
                                                     DBContext.Update("InsertIndicatorTarget", new object[] { indicatorId, Convert.ToInt32(hfCountryId.Value),
                                                                                                             admin1LocationId, admin2LocationId, admin2Target,
-                                                                                                            insertCount, RC.GetCurrentUserId, DBNull.Value });
+                                                                                                            insertCount, 4, RC.GetCurrentUserId, DBNull.Value });
                                                     insertCount++;
                                                 }
                                             }
@@ -178,22 +201,10 @@ namespace SRFROWCA.Controls
             DBContext.Update("UpdateCountryAndAdmin1TargetsOfIndicator", new object[] { indicatorId, DBNull.Value });
         }
 
-        private int? GetAdminTarget(RepeaterItem item, string controlName)
-        {
-            int? reportedValue = null;
-            TextBox txt = item.FindControl(controlName) as TextBox;
-            if (!string.IsNullOrEmpty(txt.Text.Trim()))
-            {
-                reportedValue = Convert.ToInt32(txt.Text.Trim());
-            }
-
-            return reportedValue;
-        }
-
-        private void SaveAdmin2GenderTargets(int indicatorId)
+        private void SaveAdmin2TargetGender(Repeater repeater, int indicatorId)
         {
             int insertCount = 1;
-            foreach (RepeaterItem item in rptCountryGender.Items)
+            foreach (RepeaterItem item in repeater.Items)
             {
                 if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
                 {
@@ -239,7 +250,7 @@ namespace SRFROWCA.Controls
                                             {
                                                 DBContext.Update("InsertIndicatorTargetGender", new object[] { indicatorId, countryId, admin1Id , 
                                                                                                                 admin2Id, admin2MaleTarget, admin2FemaleTarget,
-                                                                                                                insertCount, RC.GetCurrentUserId, DBNull.Value });
+                                                                                                                insertCount, 4, RC.GetCurrentUserId, DBNull.Value });
                                                 insertCount++;
                                             }
                                         }
@@ -255,125 +266,214 @@ namespace SRFROWCA.Controls
             DBContext.Update("UpdateCountryAndAdmin1TargetsOfIndicatorGender", new object[] { indicatorId, DBNull.Value });
         }
 
-        private void SaveRegionalIndicator(int ActivityId, bool regional)
+        private void SaveAdmin1Target(Repeater repeater, int indicatorId)
         {
-            int unitId = Convert.ToInt32(ddlUnit.SelectedValue);// RC.GetSelectedIntVal(ddlUnitsInd1);
-            string indEn = txtInd1Eng.Text.Trim();
-            string indFr = txtInd1Fr.Text.Trim();
+            int insertCount = 1;
+            foreach (RepeaterItem item in repeater.Items)
+            {
+                if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
+                {
+                    TextBox txtCountryTarget = item.FindControl("txtTarget") as TextBox;
+                    var hfCountryId = (HiddenField)item.FindControl("hfCountryId");
+                    int countryId = Convert.ToInt32(hfCountryId.Value);
+
+                    Repeater rptAdmin1 = item.FindControl("rptAdmin1") as Repeater;
+                    if (rptAdmin1 != null)
+                    {
+                        foreach (RepeaterItem rptAdmin1Item in rptAdmin1.Items)
+                        {
+                            if (rptAdmin1Item.ItemType == ListItemType.Item || rptAdmin1Item.ItemType == ListItemType.AlternatingItem)
+                            {
+                                int? admin1Target = null;
+                                TextBox txtAdmin1Target = rptAdmin1Item.FindControl("txtTarget") as TextBox;
+                                var hfAdmin1Id = (HiddenField)rptAdmin1Item.FindControl("hfAdmin1Id");
+                                int admin1LocationId = Convert.ToInt32(hfAdmin1Id.Value);
+                                if (txtAdmin1Target != null)
+                                {
+                                    admin1Target = string.IsNullOrEmpty(txtAdmin1Target.Text.Trim()) ? (int?)null : Convert.ToInt32(txtAdmin1Target.Text.Trim());
+                                    if (admin1Target != null)
+                                    {
+                                        DBContext.Update("InsertIndicatorTarget_Admin1", new object[] { indicatorId, countryId, admin1LocationId, admin1Target,
+                                                                                                            insertCount, 3, RC.GetCurrentUserId, DBNull.Value });
+                                        insertCount++;
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+            
+            DBContext.Update("UpdateCountryAndAdmin1TargetsOfIndicator_Admin1", new object[] { indicatorId, DBNull.Value });
+        }
+
+        private void SaveAdmin1TargetGender(Repeater repeater, int indicatorId)
+        {
+            int insertCount = 1;
+            foreach (RepeaterItem item in repeater.Items)
+            {
+                if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
+                {
+                    HiddenField hfCountryId = item.FindControl("hfCountryId") as HiddenField;
+                    int countryId = 0;
+                    if (hfCountryId != null)
+                        int.TryParse(hfCountryId.Value, out countryId);
+
+                    Repeater rptAdmin1 = item.FindControl("rptAdmin1") as Repeater;
+                    if (rptAdmin1 != null)
+                    {
+                        foreach (RepeaterItem rptAdmin1Item in rptAdmin1.Items)
+                        {
+                            if (rptAdmin1Item.ItemType == ListItemType.Item || rptAdmin1Item.ItemType == ListItemType.AlternatingItem)
+                            {
+                                HiddenField hfAdmin1Id = rptAdmin1Item.FindControl("hfAdmin1Id") as HiddenField;
+                                int admin1Id = 0;
+                                if (hfAdmin1Id != null)
+                                    int.TryParse(hfAdmin1Id.Value, out admin1Id);
+
+                                int? admin1MaleTarget = null;
+                                int? admin1FemaleTarget = null;
+                                TextBox txtTargetMale = rptAdmin1Item.FindControl("txtTargetMale") as TextBox;
+                                TextBox txtTargetFemale = rptAdmin1Item.FindControl("txtTargetFemale") as TextBox;
+                                if (txtTargetMale != null || txtTargetFemale != null)
+                                {
+                                    admin1MaleTarget = string.IsNullOrEmpty(txtTargetMale.Text.Trim()) ? (int?)null : Convert.ToInt32(txtTargetMale.Text.Trim());
+                                    admin1FemaleTarget = string.IsNullOrEmpty(txtTargetFemale.Text.Trim()) ? (int?)null : Convert.ToInt32(txtTargetFemale.Text.Trim());
+                                    if (admin1MaleTarget != null || admin1FemaleTarget != null)
+                                    {
+                                        DBContext.Update("InsertIndicatorTargetGender_Admin1", new object[] { indicatorId, countryId, admin1Id , 
+                                                                                                                admin1MaleTarget, admin1FemaleTarget,
+                                                                                                                insertCount, 3, RC.GetCurrentUserId, DBNull.Value });
+                                    }
+                                    insertCount++;
+
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+            DBContext.Update("UpdateCountryAndAdmin1TargetsOfIndicatorGender_Admin1", new object[] { indicatorId, DBNull.Value });
+        }
+
+        private void SaveCountryTargets(Repeater repeater, int indicatorId)
+        {
+            int insertCount = 1;
+            foreach (RepeaterItem item in repeater.Items)
+            {
+                if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
+                {
+                    int? countryTarget = null;
+                    TextBox txtCountryTarget = item.FindControl("txtTarget") as TextBox;
+                    var hfCountryId = (HiddenField)item.FindControl("hfCountryId");
+                    int countryId = Convert.ToInt32(hfCountryId.Value);
+                    if (txtCountryTarget != null)
+                    {
+                        countryTarget = string.IsNullOrEmpty(txtCountryTarget.Text.Trim()) ? (int?)null : Convert.ToInt32(txtCountryTarget.Text.Trim());
+                        if (countryTarget != null)
+                        {
+                            DBContext.Update("InsertIndicatorTarget_Country", new object[] { indicatorId, countryId, countryTarget,
+                                                                                                         2,   insertCount, RC.GetCurrentUserId, DBNull.Value });
+                            insertCount++;
+
+                        }
+                    }
+                }
+            }
+        }
+
+        private void SaveCountryTargetsGender(Repeater repeater, int indicatorId)
+        {
+            int insertCount = 1;
+            foreach (RepeaterItem item in repeater.Items)
+            {
+                if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
+                {
+                    HiddenField hfCountryId = item.FindControl("hfCountryId") as HiddenField;
+                    int countryId = 0;
+                    if (hfCountryId != null)
+                        int.TryParse(hfCountryId.Value, out countryId);
+                    int? countryMaleTarget = null;
+                    int? countryFemaleTarget = null;
+                    TextBox txtTargetMale = item.FindControl("txtTargetMale") as TextBox;
+                    TextBox txtTargetFemale = item.FindControl("txtTargetFemale") as TextBox;
+                    if (txtTargetMale != null || txtTargetFemale != null)
+                    {
+                        countryMaleTarget = string.IsNullOrEmpty(txtTargetMale.Text.Trim()) ? (int?)null : Convert.ToInt32(txtTargetMale.Text.Trim());
+                        countryFemaleTarget = string.IsNullOrEmpty(txtTargetFemale.Text.Trim()) ? (int?)null : Convert.ToInt32(txtTargetFemale.Text.Trim());
+                        if (countryMaleTarget != null || countryFemaleTarget != null)
+                        {
+                            DBContext.Update("InsertIndicatorTargetGender_Country", new object[] { indicatorId, countryId, countryMaleTarget, 
+                                                                                        countryFemaleTarget, insertCount, 2, RC.GetCurrentUserId, DBNull.Value });
+                        }
+                        insertCount++;
+
+                    }
+                }
+            }
+        }
+
+        private void SaveIndicator(int activityId)
+        {
+            int unitId = 0;
+            int.TryParse(ddlUnit.SelectedValue, out unitId);
+            string indEn = !string.IsNullOrEmpty(txtInd1Eng.Text.Trim()) ? txtInd1Eng.Text.Trim() : txtInd1Fr.Text.Trim();
+            string indFr = !string.IsNullOrEmpty(txtInd1Fr.Text.Trim().Trim()) ? txtInd1Fr.Text.Trim() : txtInd1Eng.Text.Trim();
             Guid userId = RC.GetCurrentUserId;
-            bool isSRP = regional;
+            bool isGender = RC.IsGenderUnit(unitId);
+            int val = RC.GetSelectedIntVal(ddlCalculationMethod);
+            int? calMethod = val > 0 ? val : (int?)val;
 
-
-            int indicatorId = DBContext.Add("InsertIndicator", new object[] { ActivityId, indEn, indFr, 
-                                                                unitId, userId, DBNull.Value});
-            if (indicatorId > 0)
+            if (string.IsNullOrEmpty(hfIndicatorId.Value))
             {
-                SaveAdmin2Targets(indicatorId);
-
+                int indicatorId = DBContext.Add("InsertIndicator", new object[] { activityId, indEn, indFr, 
+                                                                                    unitId, userId, isGender, 
+                                                                                    calMethod, DBNull.Value });
+                SaveTargets(indicatorId, isGender);
             }
-        }
-
-
-        public int ControlNumber { get; set; }
-
-        protected void rptCountry_ItemDataBound(object sender, RepeaterItemEventArgs e)
-        {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-            {
-                int countryId = 0;
-                HiddenField hfCountryId = e.Item.FindControl("hfCountryId") as HiddenField;
-                if (hfCountryId != null)
-                {
-                    int.TryParse(hfCountryId.Value, out countryId);
-                }
-                if (countryId > 0)
-                {
-                    Repeater rptAdmin1 = e.Item.FindControl("rptAdmin1") as Repeater;
-                    LoadAdmin1Targets(rptAdmin1, countryId);
-                }
-            }
-        }
-
-        protected void rptAdmin1_ItemDataBound(object sender, RepeaterItemEventArgs e)
-        {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-            {
-                int admin1Id = 0;
-                HiddenField hfAdmin1Id = e.Item.FindControl("hfAdmin1Id") as HiddenField;
-                if (hfAdmin1Id != null)
-                {
-                    int.TryParse(hfAdmin1Id.Value, out admin1Id);
-                }
-                if (admin1Id > 0)
-                {
-                    Repeater rptAdmin2 = e.Item.FindControl("rptAdmin2") as Repeater;
-                    LoadAdmin2Targets(rptAdmin2, admin1Id);
-                }
-            }
-        }
-
-        private void LoadAdmin1Targets(Repeater rpt, int countryId)
-        {
-            if (rpt != null)
-            {
-                if (countryId > 0 && ClusterFrameworkLocCatId > 0)
-                {
-                    int indicatorId = 0;
-                    int.TryParse(hfIndicatorId.Value, out indicatorId);
-                    rpt.DataSource = DBContext.GetData("[GetAdmin1TargetOfIndicator]", new object[] { countryId, indicatorId, ClusterFrameworkLocCatId });
-                    rpt.DataBind();
-                }
-            }
-        }
-        private void LoadAdmin2Targets(Repeater rptAdmin2, int admin1Id)
-        {
-            if (rptAdmin2 != null)
+            else
             {
                 int indicatorId = 0;
                 int.TryParse(hfIndicatorId.Value, out indicatorId);
-                rptAdmin2.DataSource = DBContext.GetData("[GetAdmin2TargetOfIndicator]", new object[] { admin1Id, indicatorId, ClusterFrameworkLocCatId });
-                rptAdmin2.DataBind();
+                if (indicatorId > 0)
+                {
+                    DBContext.Update("UpdateIndicatorNew2", new object[] { indicatorId, activityId, 
+                                                                            unitId, indEn, indFr, userId, 
+                                                                            isGender, calMethod, DBNull.Value });
+                    SaveTargets(indicatorId, isGender);
+                }
+                else
+                {
+                    int newIndicatorId = DBContext.Add("InsertIndicator", new object[] { activityId, indEn, indFr, 
+                                                                                            unitId, userId, isGender, 
+                                                                                            calMethod, DBNull.Value });
+                    SaveTargets(newIndicatorId, isGender);
+                }
             }
         }
 
-        protected void rptCountryGender_ItemDataBound(object sender, RepeaterItemEventArgs e)
+
+        private int? GetAdminTarget(RepeaterItem item, string controlName)
         {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            int? reportedValue = null;
+            TextBox txt = item.FindControl(controlName) as TextBox;
+            if (!string.IsNullOrEmpty(txt.Text.Trim()))
             {
-                int countryId = 0;
-                HiddenField hfCountryId = e.Item.FindControl("hfCountryId") as HiddenField;
-                if (hfCountryId != null)
-                {
-                    int.TryParse(hfCountryId.Value, out countryId);
-                }
-                if (countryId > 0)
-                {
-                    Repeater rptAdmin1Gen = e.Item.FindControl("rptAdmin1") as Repeater;
-                    LoadAdmin1Targets(rptAdmin1Gen, countryId);
-                }
+                reportedValue = Convert.ToInt32(txt.Text.Trim());
             }
+
+            return reportedValue;
         }
 
-        protected void rptAdmin1Gender_ItemDataBound(object sender, RepeaterItemEventArgs e)
-        {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-            {
-                int admin1Id = 0;
-                HiddenField hfAdmin1Id = e.Item.FindControl("hfAdmin1Id") as HiddenField;
-                if (hfAdmin1Id != null)
-                {
-                    int.TryParse(hfAdmin1Id.Value, out admin1Id);
-                }
-                if (admin1Id > 0)
-                {
-                    Repeater rptAdmin2 = e.Item.FindControl("rptAdmin2") as Repeater;
-                    LoadAdmin2Targets(rptAdmin2, admin1Id);
-                }
-            }
-        }
+        public int ControlNumber { get; set; }
 
-        public int ClusterFrameworkEmgClusterId { get; set; }
+        public int indCtlEmgLocId { get; set; }
+        public int indCtlEmgClusterId { get; set; }
+        public int indCtlIndicatorId { get; set; }
         public int ClusterFrameworkLocCatId { get; set; }
+        public bool indCtlIsGender { get; set; }
     }
 
 

@@ -226,7 +226,8 @@ namespace SRFROWCA.Anonymous
                 ddlAdmin1.DataValueField = "LocationId";
                 ddlAdmin1.DataTextField = "LocationName";
 
-                ddlAdmin1.DataSource = DBContext.GetData("GetAdmin1LocationsOfMultipleCountries", new object[] { countryIds });
+                ddlAdmin1.DataSource = DBContext.GetData("GetAdmin1LocationsOfMultipleCountries",
+                                                                new object[] { countryIds, (int)RC.LocationCategory.Government });
                 ddlAdmin1.DataBind();
             }
         }

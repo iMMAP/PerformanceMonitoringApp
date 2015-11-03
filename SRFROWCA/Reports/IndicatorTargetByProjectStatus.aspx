@@ -1,7 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/NoMenue.Master" AutoEventWireup="true" CodeBehind="IndicatorTargetByProjectStatus.aspx.cs" Inherits="SRFROWCA.Reports.IndicatorTargetByProjectStatus" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <style>
+        .FooterStyle {
+            background-color: #a2f2f2;
+            color: White;
+            text-align: right;
+        }
+
         .CentGrid {
             width: 1200px;
             margin-left: auto;
@@ -77,17 +84,8 @@
         }
     </style>
     <script type="text/javascript">
-
         $(function () {
-            //$('.ddlslk').ddslick({
-            //    width: 150
-            //});
-
-            //$('.ddlslk1').ddslick({
-            //    width: 250
-            //});
-
-            
+            $('[data-rel=popover]').popover({ html: true });
 
             $('body').on('click', '#imgcnt1[alt=plus]', function () {
                 $(this).closest("tr").after("<tr><td style='border:none;' ></td><td colspan = '999'>" + $(this).next().html() + "</td></tr>")
@@ -141,14 +139,25 @@
             <div class="col-xs-2"></div>
         </div>
         <hr />
+
         <!-- /.btn-group -->
         <div id="scrolledGridView" style="overflow-x: auto; width: 100%">
             <asp:GridView ID="gvActivities" runat="server" AutoGenerateColumns="False" CssClass="imagetable CentGrid"
-                DataKeyNames="IndicatorId,UnitId" OnRowDataBound="gvActivities_RowDataBound" ShowHeaderWhenEmpty="true"
+                DataKeyNames="IndicatorId" OnRowDataBound="gvActivities_RowDataBound"
+                ShowHeaderWhenEmpty="true"
                 EmptyDataText="No Cluster Framework Available For The Selected Country & Cluster">
+                <FooterStyle CssClass="FooterStyle" />
                 <RowStyle CssClass="istrow" />
                 <AlternatingRowStyle CssClass="altrow" />
                 <Columns>
+                    <asp:BoundField DataField="ObjectiveId" ItemStyle-Width="1px" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden"></asp:BoundField>
+                    <asp:TemplateField ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden">
+                        <ItemTemplate>
+                            <asp:HiddenField ID="hfIndicatorId" runat="server" Value='<%#Eval("IndicatorId")%>' />
+                            <asp:HiddenField ID="hfCountryId" runat="server" Value='<%#Eval("CountryId")%>' />
+                            <asp:HiddenField ID="hfEmgLocId" runat="server" Value='<%#Eval("EmergencyLocationId")%>' />
+                        </ItemTemplate>
+                    </asp:TemplateField>
                     <asp:TemplateField>
                         <ItemTemplate>
                             <img id="imgcnt1" alt="plus" style="cursor: pointer;" class="pointer1" src="../assets/orsimages/plus.png" />
@@ -170,7 +179,7 @@
                                                 <asp:HiddenField ID="hfAdmin1IndicatorId" runat="server" Value='<%#Eval("IndicatorId")%>' />
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField ItemStyle-Width="760" HeaderStyle-Width="760" ItemStyle-BackColor="White" ItemStyle-HorizontalAlign="Right"
+                                        <asp:TemplateField ItemStyle-Width="800" HeaderStyle-Width="800" ItemStyle-BackColor="White" ItemStyle-HorizontalAlign="Right"
                                             HeaderStyle-BackColor="White" ItemStyle-BorderStyle="None" HeaderStyle-BorderStyle="None">
                                             <ItemTemplate>
                                                 <img id="imgcnt2" alt="plus" style="cursor: pointer;" class="pointer1" src="../assets/orsimages/plus.png" />
@@ -178,66 +187,61 @@
                                                     <asp:GridView ID="gvAdmin2" runat="server" AutoGenerateColumns="false"
                                                         ShowHeader="false" Width="100%" OnRowDataBound="gvAdmin2_RowDataBound">
                                                         <Columns>
-                                                            <asp:BoundField DataField="LocationName" HeaderText="Location" HeaderStyle-Width="125" ItemStyle-Width="125" />
-                                                            <asp:TemplateField HeaderText="Cluster" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="80" ItemStyle-Width="80">
+                                                            <asp:BoundField DataField="LocationName" HeaderText="Location" HeaderStyle-Width="125" ItemStyle-Width="133" />
+                                                            <asp:TemplateField HeaderText="Cluster Total" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="90" ItemStyle-Width="90">
                                                                 <ItemTemplate>
                                                                     <asp:Label ID="lblAdm2ClusterTotal" runat="server" Text='<%# Eval("ClusterTotal") %>'></asp:Label>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Draft" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="78" ItemStyle-Width="78">
+                                                            <asp:TemplateField HeaderText="Draft Project" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="82" ItemStyle-Width="82">
                                                                 <ItemTemplate>
                                                                     <asp:Label ID="lblAdm2DraftTotal" runat="server" Text='<%# Eval("DraftTotal") %>'></asp:Label>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Approved" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="80" ItemStyle-Width="80">
+                                                            <asp:TemplateField HeaderText="Approved Project" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="85" ItemStyle-Width="85">
                                                                 <ItemTemplate>
                                                                     <asp:Label ID="lblAdm2ApprovedTotal" runat="server" Text='<%# Eval("ApprovedTotal") %>'></asp:Label>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Pub CAP" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="70" ItemStyle-Width="70">
+                                                            <asp:TemplateField HeaderText="Coverage" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="85" ItemStyle-Width="85">
                                                                 <ItemTemplate>
-                                                                    <asp:Label ID="lblAdm2CapTotal" runat="server" Text='<%# Eval("CAPTotal") %>'></asp:Label>
+                                                                    <asp:Label ID="lblAdm2CapTotal" runat="server" Text='<%# Eval("PercentApproved") %>'></asp:Label>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
+                                                            <asp:TemplateField HeaderStyle-Width="40px"></asp:TemplateField>
                                                         </Columns>
                                                     </asp:GridView>
                                                 </asp:Panel>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:BoundField DataField="LocationName" HeaderText="Location" HeaderStyle-Width="130" />
-                                        <asp:TemplateField HeaderText="Cluster" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="80">
+                                        <asp:BoundField DataField="LocationName" HeaderText="Location" HeaderStyle-Width="150" />
+                                        <asp:TemplateField HeaderText="Cluster Total" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="95">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblAdm1ClusterTotal" runat="server" Text='<%# Eval("ClusterTotal") %>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Draft" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="80">
+                                        <asp:TemplateField HeaderText="Draft Project" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="90">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblAdm1DraftTotal" runat="server" Text='<%# Eval("DraftTotal") %>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Approved" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="80">
+                                        <asp:TemplateField HeaderText="Approved Project" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="90">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblAdm1ApprovedTotal" runat="server" Text='<%# Eval("ApprovedTotal") %>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Pub CAP" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="75">
+                                        <asp:TemplateField HeaderText="Coverage" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="90">
                                             <ItemTemplate>
-                                                <asp:Label ID="lblAdm1CapTotal" runat="server" Text='<%# Eval("CAPTotal") %>'></asp:Label>
+                                                <asp:Label ID="lblAdm1CapTotal" runat="server" Text='<%# Eval("PercentApproved") %>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
+                                        <asp:TemplateField HeaderStyle-Width="45px"></asp:TemplateField>
                                     </Columns>
                                 </asp:GridView>
                             </asp:Panel>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden">
-                        <ItemTemplate>
-                            <asp:HiddenField ID="hfIndicatorId" runat="server" Value='<%#Eval("IndicatorId")%>' />
-                            <asp:HiddenField ID="hfCountryId" runat="server" Value='<%#Eval("CountryId")%>' />
-                            <asp:HiddenField ID="hfEmgLocId" runat="server" Value='<%#Eval("EmergencyLocationId")%>' />
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:BoundField DataField="ObjectiveId" ItemStyle-Width="1px" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden"></asp:BoundField>
+
                     <asp:TemplateField HeaderStyle-Width="30" ItemStyle-Width="30"
                         meta:resourcekey="TemplateFieldResource2">
                         <HeaderTemplate>
@@ -265,35 +269,34 @@
                                 meta:resourcekey="lblGridIndicatorResource1"></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-
-                    <asp:TemplateField HeaderStyle-Width="120" ItemStyle-Width="120px">
-                        <HeaderTemplate>
-                            <asp:Label ID="lblUnitHeader" runat="server" Text="Unit"></asp:Label>
-                        </HeaderTemplate>
-                        <ItemTemplate>
-                            <asp:Label ID="lblUnit" runat="server" Text='<%# Eval("Unit") %>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
                     <asp:BoundField DataField="Country" HeaderText="Country" HeaderStyle-Width="130" />
-                    <asp:TemplateField HeaderText="Cluster" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="80">
+                    <asp:TemplateField HeaderText="Cluster Target" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="80">
                         <ItemTemplate>
                             <asp:Label ID="lblClusterTotal" runat="server" Text='<%# Eval("ClusterTotal") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Draft" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="80">
+                    <asp:TemplateField HeaderText="Draft Projects Target" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="80">
                         <ItemTemplate>
                             <asp:Label ID="lblDraftTotal" runat="server" Text='<%# Eval("DraftTotal") %>'></asp:Label>
                         </ItemTemplate>
+
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Approved" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="80">
+                    <asp:TemplateField HeaderText="Approved Projects Target" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="80">
                         <ItemTemplate>
                             <asp:Label ID="lblApprovedTotal" runat="server" Text='<%# Eval("ApprovedTotal") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Pub CAP" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="80">
+                    <asp:TemplateField HeaderText="Coverage" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="80">
                         <ItemTemplate>
-                            <asp:Label ID="lblCapTotal" runat="server" Text='<%# Eval("CAPTotal") %>'></asp:Label>
+                            <asp:Label ID="lblCapTotal" runat="server" Text='<%# Eval("PercentApproved")  + "%" %>'></asp:Label>
                         </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField ItemStyle-Width="40" HeaderStyle-Width="40" ItemStyle-HorizontalAlign="Right">
+                        <ItemTemplate>
+                            <span id="spanProject" runat="server" class="orshelpicon" data-rel="popover" data-placement="top"
+                                data-original-title="Indicator Projects" data-content="">View</span>
+                        </ItemTemplate>
+
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>

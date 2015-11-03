@@ -12,11 +12,11 @@
     <!-- basic styles -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-	<link rel="stylesheet" href="assets/css/ace-fonts.css" />
+    <link rel="stylesheet" href="assets/css/ace-fonts.css" />
     <link rel="stylesheet" href="assets/css/ace.min.css" />
     <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
     <link rel="stylesheet" href="assets/css/ors.css" />
-    <link rel="Stylesheet" href="assets/css/jquery-ui.min.css" />    
+    <link rel="Stylesheet" href="assets/css/jquery-ui.min.css" />
     <script src='<%# BaseURL %>/assets/js/jquery-2.0.3.min.js'></script>
 
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
@@ -163,8 +163,8 @@
                                 <li id="liNewIndicatorListing" runat="server"><a href="<%=BaseURL %>/ClusterLead/IndicatorListing.aspx"><span class="menu-text">
                                     <asp:Localize ID="localActAndIndicators" runat="server" Text="Activities And Indicators" meta:resourcekey="localActAndIndicators"></asp:Localize>
                                 </span></a></li>
-                                <li id="liClusterFrameworkImport" runat="server"><a href="<%=BaseURL %>/ClusterLead/UploadSRP.aspx"><span class="menu-text">
-                                    <asp:Localize ID="localCLFrameworkImportExport" runat="server" Text="Export Framework" meta:resourcekey="localCLFrameworkImportExport"></asp:Localize>
+                                <li id="liClusterFrameworkImport" runat="server"><a href="<%=BaseURL %>/Anonymous/ExpClusterFramework.aspx"><span class="menu-text">
+                                    <asp:Localize ID="localCLFrameworkImportExport" runat="server" Text="Export Framework 2016" meta:resourcekey="localCLFrameworkImportExport"></asp:Localize>
                                 </span></a></li>
                             </ul>
                         </li>
@@ -259,6 +259,8 @@
                             id="menuProjectSummary"><i class="icon-table"></i><span class="menu-text">
                                 <asp:Localize ID="localProgressSummary" runat="server" Text="Progress Summary" meta:resourcekey="localProgressSummary"></asp:Localize></span>
                         </a></li>
+                        <li><a href="<%=BaseURL %>/reports/IndicatorTargetByProjectStatus.aspx"><i class="icon-list"></i><span class="menu-text">
+                            Fremework Targets</span> </a></li>
                         <li id="liMaps" runat="server"><a href='<%=BaseURL%>/Admin/CountryMapsListing.aspx'
                             id="menuMaps"><i class="icon-table"></i><span class="menu-text">
                                 <asp:Localize ID="Localize4" runat="server" Text="Manage Maps"></asp:Localize></span>
@@ -285,6 +287,22 @@
                                 <asp:Localize ID="localSettings" runat="server" Text="Settings" meta:resourcekey="localSettingsResource1"></asp:Localize>
                             </span>
                         </a></li>
+
+                        <li id="liManageUnits" runat="server"><a href="~/Admin/UnitsListing.aspx" id="aManageUnits"
+                            runat="server"><i class="icon-cogs"></i><span class="menu-text">Manage Units
+                            </span>
+                        </a></li>
+
+                        <li id="liMangeTarSettings" runat="server"><a href="~/Admin/TargetSettings.aspx" id="aManageTarSettings"
+                            runat="server"><i class="icon-cogs"></i><span class="menu-text">Targets Settings
+                            </span>
+                        </a></li>
+                        <li id="liSyncProjects" runat="server"><a href="~/ops/SyncOPSProjects.aspx" id="a4"
+                            runat="server"><i class="icon-cogs"></i><span class="menu-text">Sync Projects
+                            </span>
+                        </a></li>
+                        <li><a href="<%=BaseURL %>/Reports/IndicatorTargetByProjectStatus.aspx"><i class="icon-comment-alt"></i><span class="menu-text">
+                            CC Report</span> </a></li>
                     </ul>
                     <!-- /.nav-list -->
                     <div class="sidebar-collapse" id="sidebar-collapse">
@@ -311,7 +329,7 @@
         <script src="<%# BaseURL %>/assets/js/jquery.slimscroll.min.js"></script>
         <script src="<%# BaseURL %>/assets/js/ace.min.js"></script>
         <script src="<%# BaseURL %>/assets/orsjs/jquery.wholenumber.js" type="text/javascript"></script>
-        
+
         <script>
             // Keep the session alive
             function setHeartbeat() {

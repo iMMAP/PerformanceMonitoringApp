@@ -103,7 +103,7 @@ namespace SRFROWCA.Pages
                     {
                         bool isOPS = projectId > 500000 ? false : true;
 
-                        DBContext.Add("InsertProjectIndicator2015", new object[] { projectId, indicatorId, projectEmgLocationId, RC.YearsInDB.Year2015,
+                        DBContext.Add("InsertProjectIndicator2015", new object[] { projectId, indicatorId, projectEmgLocationId, RC.Year._2015,
                                                                                 isAdded.Checked, isOPS, RC.GetCurrentUserId, DBNull.Value });
                     }
                 }

@@ -1,5 +1,7 @@
 ﻿using BusinessLogic;
+using SRFROWCA.Configurations;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Drawing;
@@ -15,6 +17,7 @@ using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Xml.Linq;
 
 
 namespace SRFROWCA.Common
@@ -148,11 +151,6 @@ namespace SRFROWCA.Common
         internal static DataTable GetEmergencyObjectives(int emergencyId)
         {
             return DBContext.GetData("GetObjectives", new object[] { SelectedSiteLanguageId, emergencyId });
-        }
-
-        internal static DataTable GetPriorities()
-        {
-            return DBContext.GetData("GetPriorities", new object[] { SelectedSiteLanguageId, RC.EmergencyEbola });
         }
 
         #endregion
@@ -296,19 +294,19 @@ namespace SRFROWCA.Common
             return dt;
         }
 
-        internal static DataTable GetAdmin1(int countryId)
+        internal static DataTable GetAdmin1(int countryId, int locationCatId)
         {
-            return DBContext.GetData("GetAdmin1LocationsOfCountry", new object[] { countryId });
+            return DBContext.GetData("GetAdmin1LocationsOfCountry", new object[] { countryId, locationCatId });
         }
 
-        internal static DataTable GetAdmin2(int countryId)
+        internal static DataTable GetAdmin2(int countryId, int locCatId)
         {
-            return DBContext.GetData("GetAdmin2LocationsOfCountry", new object[] { countryId });
+            return DBContext.GetData("GetAdmin2LocationsOfCountry", new object[] { countryId, locCatId });
         }
 
-        internal static DataTable GetAdmin1OfEmgLocation(int emergencyLocationId)
+        internal static DataTable GetAdmin1OfEmgLocation(int emergencyLocationId, int locCatId)
         {
-            return DBContext.GetData("GetAdmin1OfEmergnecyLocation", new object[] { emergencyLocationId });
+            return DBContext.GetData("GetAdmin1OfEmergnecyLocation", new object[] { emergencyLocationId, locCatId });
         }
 
         internal static DataTable GetLocationsAndChilds(int locationId, int childTypeId)
@@ -594,6 +592,13 @@ namespace SRFROWCA.Common
             return items;
         }
 
+        internal static int ConvertStringToInt(string str)
+        {
+            int i = 0;
+            int.TryParse(str, out i);
+            return i;
+        }
+
         internal static int GetSelectedIntVal(ListControl ctl)
         {
             int i = 0;
@@ -646,9 +651,59 @@ namespace SRFROWCA.Common
 
         public static bool IsGenderUnit(int unitId)
         {
-            int[] GenderUnits = { 28, 38, 132, 193, 198, 219, 238, 252, 269, 311 };
+            string PATH = HttpRuntime.AppDomainAppPath;
+            PATH = PATH.Substring(0, PATH.LastIndexOf(@"\") + 1) + @"Configurations\Units.xml";
+            var lst = XDocument.Load(PATH)
+                    .Root.Elements("unit")
+                    .Select(x => x.Value)
+                    .ToArray();
+
+            int[] GenderUnits = Array.ConvertAll(lst, s => int.Parse(s));
             return (Array.IndexOf(GenderUnits, unitId)) > -1;
         }
+
+        public static AdminTargetSettingItems AdminTargetSettings(string key)
+        {
+            AdminTargetSettingItems settingItems = new AdminTargetSettingItems();
+            string PATH = HttpRuntime.AppDomainAppPath;
+            PATH = PATH.Substring(0, PATH.LastIndexOf(@"\") + 1) + @"Configurations\AdminTargetSettings.xml";
+            XElement root = XElement.Load(PATH);
+            IEnumerable<XElement> address =
+                from el in root.Elements("AdminTarget")
+                where (string)el.Attribute("Key") == key
+                select el;
+            foreach (XElement el in address)
+            {
+                settingItems.IsTarget = (el.Attribute("IsTarget").Value == "Yes");
+                settingItems.IsMandatory = (el.Attribute("IsMandatory").Value == "Yes");
+                if (el.Attribute("Level") != null && el.Attribute("Level").Value != "")
+                    settingItems.AdminLevel = el.Attribute("Level").Value.ToEnum<LocationTypes>();
+
+                if (el.Attribute("Category") != null && el.Attribute("Category").Value != "")
+                    settingItems.Category = el.Attribute("Category").Value.ToEnum<LocationCategory>();
+            }
+
+            return settingItems;
+        }
+
+        public static List<ListItem> GetListControlItems(ListControl ctl)
+        {
+            List<ListItem> lst = new List<ListItem>();
+            if (ctl.SelectedValue == "0")
+            {
+                lst = ctl.Items.Cast<ListItem>().ToList();
+                var remove = lst.SingleOrDefault(r => r.Value == "0");
+                lst.Remove(remove);
+            }
+            else
+            {
+                lst.Add(ctl.SelectedItem);
+            }
+
+            return lst;
+        }
+
+
         internal static string FrenchCulture
         {
             get
@@ -673,22 +728,191 @@ namespace SRFROWCA.Common
             }
         }
 
-        internal static int EmergencyEbola
+        public static T ToEnum<T>(this string value)
         {
-            get
-            {
-                return 2;
-            }
+            return (T)Enum.Parse(typeof(T), value, true);
         }
 
-        internal static int Nepal2015
+        public static string MapOPSWithORSClusterNames(string opsClusterName)
         {
-            get
+            string clusterName = "";
+            if (opsClusterName == "coordinationandsupportservices")
             {
-                return 4;
+                clusterName = "Coordination And Support Services";
             }
-        }        
+            else if (opsClusterName == "earlyrecovery")
+            {
+                clusterName = "Early Recovery";
+            }
+            else if (opsClusterName == "education")
+            {
+                clusterName = "Education";
+            }
+            else if (opsClusterName == "emergencyshelterandnfi")
+            {
+                clusterName = "Emergency Shelter And NFI";
+            }
+            else if (opsClusterName == "foodsecurity")
+            {
+                clusterName = "Food Security";
+            }
+            else if (opsClusterName == "health")
+            {
+                clusterName = "Health";
+            }
+            else if (opsClusterName == "logistics")
+            {
+                clusterName = "Logistics";
+            }
+            else if (opsClusterName == "nutrition")
+            {
+                clusterName = "Nutrition";
+            }
+            else if (opsClusterName == "protection")
+            {
+                clusterName = "Protection";
+            }
+            else if (opsClusterName == "logistics")
+            {
+                clusterName = "Logistics";
+            }
+            else if (opsClusterName == "waterandsanitation")
+            {
+                clusterName = "Water Sanitation & Hygiene";
+            }
+            else if (opsClusterName == "emergencytelecommunication")
+            {
+                clusterName = "Emergency Telecommunication";
+            }
+            else if (opsClusterName == "multisectorforrefugees")
+            {
+                clusterName = "Multi Sector for Refugees";
+            }
+            else if (opsClusterName == "sheltercccm")
+            {
+                clusterName = "Camp Coordination And Camp Management";
+            }
+            else if (opsClusterName == "cccm")
+            {
+                clusterName = "Camp Coordination And Camp Management";
+            }
+            else if (opsClusterName == "campcoordinationandcampmanagement")
+            {
+                clusterName = "Camp Coordination And Camp Management";
+            }
+            else
+            {
+                clusterName = opsClusterName;
+            }
 
+            return clusterName;
+        }
+
+        public static int EmgClusterIdsSAH2015(string cluster)
+        {
+            int emgClusterId = 0;
+            switch (cluster)
+            {
+                case "Education":
+                    emgClusterId = (int)ClusterSAH2015.EDU;
+                    break;
+                case "Emergency Shelter And NFI":
+                    emgClusterId = (int)ClusterSAH2015.ESN;
+                    break;
+                case "Health":
+                    emgClusterId = (int)ClusterSAH2015.HLT;
+                    break;
+                case "Nutrition":
+                    emgClusterId = (int)ClusterSAH2015.NUT;
+                    break;
+                case "Protection":
+                    emgClusterId = (int)ClusterSAH2015.PRO;
+                    break;
+                case "Early Recovery":
+                    emgClusterId = (int)ClusterSAH2015.ER;
+                    break;
+                case "Coordination And Support Services":
+                    emgClusterId = (int)ClusterSAH2015.CSS;
+                    break;
+                case "Food Security":
+                    emgClusterId = (int)ClusterSAH2015.FS;
+                    break;
+                case "Logistics":
+                    emgClusterId = (int)ClusterSAH2015.LGS;
+                    break;
+                case "Water Sanitation & Hygiene":
+                    emgClusterId = (int)ClusterSAH2015.WASH;
+                    break;
+                case "Emergency Telecommunication":
+                    emgClusterId = (int)ClusterSAH2015.ETC;
+                    break;
+                case "Multi Sector for Refugees":
+                    emgClusterId = (int)ClusterSAH2015.MS;
+                    break;
+                case "Camp Coordination And Camp Management":
+                    emgClusterId = (int)ClusterSAH2015.CCCM;
+                    break;
+                default:
+                    emgClusterId = 0;
+                    break;
+            }
+
+            return emgClusterId;
+        }
+
+        public static int EmgLocationIdsSAH2015(string location)
+        {
+            int emgLocId = 0;
+            switch (location)
+            {
+                    case "Burkina Faso":
+                    case "burkina faso":
+                    emgLocId = (int)LocationSAH2015.BFA;
+                    break;
+                    case "Cameroon":
+                    case "cameroon":
+                    emgLocId = (int)LocationSAH2015.CMR;
+                    break;
+                    case "Chad":
+                    case "chad":
+                    emgLocId = (int)LocationSAH2015.TCD;
+                    break;
+                    case "Gambia":
+                    case "gambia":
+                    emgLocId = (int)LocationSAH2015.GMB;
+                    break;
+                    case "Mali":
+                    case "mali":
+                    emgLocId = (int)LocationSAH2015.MLI;
+                    break;
+                    case "Mauritania":
+                    case "mauritania":
+                    emgLocId = (int)LocationSAH2015.MRT;
+                    break;
+                    case "Niger":
+                    case "niger":
+                    emgLocId = (int)LocationSAH2015.NER;
+                    break;
+                    case "Nigeria":
+                    case "nigeria":
+                    emgLocId = (int)LocationSAH2015.NGA;
+                    break;
+                    case "Senegal":
+                    case "senegal":
+                    emgLocId = (int)LocationSAH2015.SEN;
+                    break;
+                    case "Sahel Region":
+                    case "sahel region":
+                    emgLocId = (int)LocationSAH2015.SAHRegion;
+                    break;
+                default:
+                    emgLocId = 0;
+                    break;
+            }
+
+            return emgLocId;
+        }
+        
         public enum LocationTypes
         {
             Region = 1,
@@ -699,6 +923,7 @@ namespace SRFROWCA.Common
             Village = 6,
             Nonrepresentative = 7,
             Other = 8,
+            None = 0,
         }
 
         internal enum NotificationType
@@ -723,11 +948,11 @@ namespace SRFROWCA.Common
             None = -1
         }
 
-        public enum YearsInDB
+        public enum Year
         {
-            Year2014 = 10,
-            Year2015 = 11,
-            Year2016 = 12
+            _2014 = 10,
+            _2015 = 11,
+            _2016 = 12
         }
 
         public enum LocationCategory
@@ -736,7 +961,7 @@ namespace SRFROWCA.Common
             Health = 2,
         }
 
-        public enum EmgClsId2016
+        public enum ClusterSAH2015
         {
             EDU = 13,
             ESN = 14,
@@ -751,6 +976,21 @@ namespace SRFROWCA.Common
             ETC = 23,
             MS = 24,
             CCCM = 26
+        }
+
+
+        public enum LocationSAH2015
+        {
+            SAHRegion = 11,
+            BFA = 12,
+            CMR = 13,
+            TCD = 14,
+            GMB = 15,
+            MLI = 16,
+            MRT = 17,
+            NER = 18,
+            NGA = 19,
+            SEN = 20
         }
     }
 }

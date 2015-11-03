@@ -1,4 +1,5 @@
 ﻿using BusinessLogic;
+using SRFROWCA.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -17,7 +18,24 @@ namespace SRFROWCA.DataFeeds
         {
             DataSet ds = new DataSet();
             object[] param = GetReportParam(context);
-            DataTable dt = DBContext.GetData("ProjectSRPTargets", param);
+
+            int yearId = (int)RC.Year._2016;
+            if (context.Request["year"] != null)
+            {
+                int val = 0;
+                int.TryParse(context.Request["year"].ToString(), out val);
+                yearId = val == 2015 ? (int)RC.Year._2015 : (int)RC.Year._2016;
+            }
+
+            DataTable dt = new DataTable();
+            if (yearId == 11)
+            {
+                dt = DBContext.GetData("ProjectSRPTargets", param);
+            }
+            else
+            {
+                dt = DBContext.GetData("ProjectSRPTargets_2016", param);
+            }
 
             string format = "xml";
             if (!string.IsNullOrEmpty(context.Request["format"]))
@@ -112,7 +130,7 @@ namespace SRFROWCA.DataFeeds
             if (context.Request["tloc"] != null)
             {
                 targetLoc = context.Request["tloc"].ToString();
-            }            
+            }
 
             string lng = "fr";
             if (context.Request["lng"] != null)

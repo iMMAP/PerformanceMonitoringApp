@@ -64,19 +64,19 @@ namespace SRFROWCA.Common
             ddl.DataBind();
         }
 
-        internal static void FillAdmin1(ListControl ddl, int countryId)
+        internal static void FillAdmin1(ListControl ddl, int countryId, int locCatId)
         {
             ddl.DataValueField = "LocationId";
             ddl.DataTextField = "LocationName";
-            ddl.DataSource = RC.GetAdmin1(countryId);
+            ddl.DataSource = RC.GetAdmin1(countryId, locCatId);
             ddl.DataBind();
         }
 
-        internal static void FillAdmin2(ListControl ddl, int countryId)
+        internal static void FillAdmin2(ListControl ddl, int countryId, int locCatId)
         {
             ddl.DataValueField = "LocationId";
             ddl.DataTextField = "LocationName";
-            ddl.DataSource = RC.GetAdmin2(countryId);
+            ddl.DataSource = RC.GetAdmin2(countryId, locCatId);
             ddl.DataBind();
         }
 
@@ -161,12 +161,6 @@ namespace SRFROWCA.Common
             }
             control.DataSource = dt;
             control.DataBind();
-        }
-
-        internal static void FillPriorities(ListControl control)
-        {
-            DataTable dt = RC.GetPriorities();
-            FillPriorities(control, dt);
         }
 
         internal static void FillActivities(ListControl ddl, DataTable dt)
@@ -268,6 +262,14 @@ namespace SRFROWCA.Common
                 lbl.Text = GetThousandSeparator(lbl.Text);
         }
 
+        internal static string GetControlText(GridViewRow row, string ctlId)
+        {
+            ITextControl ctl = row.FindControl(ctlId) as ITextControl;
+            if (ctl != null && !string.IsNullOrEmpty(ctl.Text))
+                return ctl.Text;
+            return "";
+        }
+
         internal static void SetThousandSeparator(RepeaterItem row, string ctlId)
         {
             Label lbl = row.FindControl(ctlId) as Label;
@@ -277,7 +279,7 @@ namespace SRFROWCA.Common
 
         internal static string GetThousandSeparator(string number)
         {
-            string siteCulture = RC.SelectedSiteLanguageId.Equals(1) ? "en-US" : "de-DE";
+            string siteCulture = RC.SelectedSiteLanguageId.Equals(1) ? "en-US" : "fr-FR";
             if (number.Length > 1)
                     number  = String.Format(new CultureInfo(siteCulture), "{0:0,0}", Convert.ToInt32(number));
 

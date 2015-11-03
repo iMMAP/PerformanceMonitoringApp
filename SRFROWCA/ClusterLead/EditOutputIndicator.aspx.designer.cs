@@ -247,15 +247,6 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor pAdmin1Target;
         
         /// <summary>
-        /// localRptShowLoc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localRptShowLoc;
-        
-        /// <summary>
         /// rptAdmin control.
         /// </summary>
         /// <remarks>
@@ -281,15 +272,6 @@ namespace SRFROWCA.ClusterLead {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor pAdmin1GenderTarget;
-        
-        /// <summary>
-        /// localRptGendShow control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localRptGendShow;
         
         /// <summary>
         /// rptAdmin1Gender control.

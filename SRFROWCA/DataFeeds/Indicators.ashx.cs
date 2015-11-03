@@ -1,4 +1,5 @@
 ﻿using BusinessLogic;
+using SRFROWCA.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -88,7 +89,20 @@ namespace SRFROWCA.DataFeeds
             }
             int? indId = val > 0 ? val : (int?)null;
 
-            return new object[] { countryId, clusterId, objId, actId, indId };
+            int? yearId = (int)RC.Year._2016;
+            if (context.Request["year"] != null)
+            {
+                if (context.Request["year"].ToString() != "no")
+                    yearId = null;
+                else
+                {
+                    val = 0;
+                    int.TryParse(context.Request["year"].ToString(), out val);
+                    yearId = val == 2015 ? (int)RC.Year._2015 : (int)RC.Year._2016;
+                }
+            }
+
+            return new object[] { countryId, clusterId, objId, actId, indId, yearId };
         }
 
         public bool IsReusable

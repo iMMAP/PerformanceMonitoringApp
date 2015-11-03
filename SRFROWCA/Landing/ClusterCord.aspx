@@ -58,6 +58,11 @@
                                                             <asp:Localize ID="localMenu2016Migrate" runat="server" Text="Migrate 2015 activites & indicators To 2016 Framework" meta:resourcekey="localMenu2016MigrateResource1"></asp:Localize>
                                                         </a>
                                                     </li>
+                                                    <li>
+                                                        <a href="../Anonymous/ExpClusterFramework.aspx">
+                                                            <asp:Localize ID="localMenu2016ExpFramewrk" runat="server" Text="Export Framework 2016 " meta:resourcekey="localMenu2016ExpFrameworkResource1"></asp:Localize>
+                                                        </a>
+                                                    </li>
                                                     <li class="hidden">
                                                         <a href="../Reports/IndicatorTargetByProjectStatus.aspx">
                                                             <asp:Localize ID="localCCReport" runat="server" Text="Cluster FrameWork Report"></asp:Localize>

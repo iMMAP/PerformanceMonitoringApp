@@ -1,11 +1,13 @@
-﻿using System;
+﻿using BusinessLogic;
+using SRFROWCA.Common;
+using System;
 using System.Data;
 using System.Drawing;
+using System.Transactions;
+using System.Web.Script.Services;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using BusinessLogic;
-using SRFROWCA.Common;
-using System.Transactions;
 
 
 namespace SRFROWCA.ClusterLead
@@ -17,6 +19,7 @@ namespace SRFROWCA.ClusterLead
             if (!IsPostBack)
             {
                 LoadCombos();
+                SetFiltersFromSession();
                 DisableDropDowns();
                 if (Request.QueryString["id"] != null)
                 {
@@ -49,9 +52,7 @@ namespace SRFROWCA.ClusterLead
             {
                 bool isTargetValid = false;
                 int unitId = RC.GetSelectedIntVal(ddlUnit);
-                if (unitId == 269 || unitId == 28 || unitId == 38 || unitId == 193
-                    || unitId == 219 || unitId == 198 || unitId == 311 || unitId == 132
-                    || unitId == 252 || unitId == 238)
+                if (RC.IsGenderUnit(unitId))
                     isTargetValid = IsTargetProvidedGender(rptAdmin1Gender);
                 else
                     isTargetValid = IsTargetProvided(rptAdmin);
@@ -76,9 +77,7 @@ namespace SRFROWCA.ClusterLead
 
                 DBContext.Delete("DeleteClusterOutputIndicatorTargets", new object[] { indicatorId, emgLocationId, DBNull.Value });
                 int unitId = RC.GetSelectedIntVal(ddlUnit);
-                if (unitId == 269 || unitId == 28 || unitId == 38 || unitId == 193
-                    || unitId == 219 || unitId == 198 || unitId == 311 || unitId == 132
-                    || unitId == 252 || unitId == 238)
+                if (RC.IsGenderUnit(unitId))
                 {
                     SaveAdmin1GenderTargets(indicatorId, emgLocationId);
                 }
@@ -199,16 +198,16 @@ namespace SRFROWCA.ClusterLead
         // Disable Controls on the basis of user profile
         private void DisableDropDowns()
         {
-            if (RC.IsClusterLead(this.User) || RC.IsRegionalClusterLead(this.User))
-            {
+            //if (RC.IsClusterLead(this.User) || RC.IsRegionalClusterLead(this.User))
+            //{
                 RC.EnableDisableControls(ddlCluster, false);
                 RC.EnableDisableControls(ddlCountry, false);
-            }
+            //}
 
-            if (RC.IsCountryAdmin(this.User))
-            {
-                RC.EnableDisableControls(ddlCountry, false);
-            }
+            //if (RC.IsCountryAdmin(this.User))
+            //{
+            //    RC.EnableDisableControls(ddlCountry, false);
+            //}
 
             if (Request.QueryString["cid"] != null)
             {
@@ -274,9 +273,7 @@ namespace SRFROWCA.ClusterLead
             PopulateTargets(indicatorId);
             int unitId = RC.GetSelectedIntVal(ddlUnit);
             bool isGender = false;
-            if (unitId == 269 || unitId == 28 || unitId == 38 || unitId == 193
-                     || unitId == 219 || unitId == 198 || unitId == 311 || unitId == 287
-                     || unitId == 67 || unitId == 132 || unitId == 252 || unitId == 238)
+            if (RC.IsGenderUnit(unitId))
             {
                 isGender = true;
             }
@@ -297,7 +294,7 @@ namespace SRFROWCA.ClusterLead
             if ((RC.IsRegionalClusterLead(this.User) || emgLocationId == 11))
                 return;
             int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
-            int locCategoryId = emgClusterId == (int)RC.EmgClsId2016.HLT ? (int)RC.LocationCategory.Health : (int)RC.LocationCategory.Government;
+            int locCategoryId = emgClusterId == (int)RC.ClusterSAH2015.HLT ? (int)RC.LocationCategory.Health : (int)RC.LocationCategory.Government;
 
             if (emgLocationId > 0 && emgClusterId > 0)
             {
@@ -503,8 +500,48 @@ namespace SRFROWCA.ClusterLead
             }
         }
 
+        private void SetFiltersFromSession()
+        {
+            if (Session["OutputFrameworkSelectedCountry"] != null)
+            {
+                int countryId = 0;
+                int.TryParse(Session["OutputFrameworkSelectedCountry"].ToString(), out countryId);
+                if (countryId > 0)
+                {
+                    try
+                    {
+                        ddlCountry.SelectedValue = countryId.ToString();
+                    }
+                    catch { }
+                }
+            }
+
+            if (Session["OutputFrameworkSelectedCluster"] != null)
+            {
+                int clusterId = 0;
+                int.TryParse(Session["OutputFrameworkSelectedCluster"].ToString(), out clusterId);
+                if (clusterId > 0)
+                {
+                    try
+                    {
+                        ddlCluster.SelectedValue = clusterId.ToString();
+                    }
+                    catch { }
+                }
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public static bool IsGenderDisaggregated(string unitId)
+        {
+            int unitIdToSearch = Convert.ToInt32(unitId);
+            return RC.IsGenderUnit(unitIdToSearch);
+        }
+
         protected void Page_Error(object sender, EventArgs e)
         {
+
             // Get last error from the server
             Exception exc = Server.GetLastError();
             ExceptionUtility.LogException(exc, User);

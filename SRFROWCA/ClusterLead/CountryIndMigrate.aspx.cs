@@ -215,16 +215,13 @@ namespace SRFROWCA.ClusterLead
                     int.TryParse(lblClusterId.Text, out emgClusterId);
                 }
 
-                FrameWorkSettingsCount frCount = FrameWorkUtil.GetOutputFrameworkSettings(emgLocationId, emgClusterId);
-
-                //GetIndCountAndEditDate(emgLocationId, emgClusterId, out maxIndicators, out endEditDate);
-
+                bool IsDateExceeded = SectorFramework.DateExceeded(emgLocationId, emgClusterId);
                 if (btnDelete != null)
                 {
                     btnDelete.Attributes.Add("onclick", "javascript:return " +
                     "confirm('Are you sure you want to delete this Setting?')");
 
-                    if (frCount.DateExcedded)
+                    if (IsDateExceeded)
                     {
                         if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) || RC.IsRegionalClusterLead(this.User))
                         {
@@ -233,7 +230,7 @@ namespace SRFROWCA.ClusterLead
                     }
                 }
 
-                if (btnEdit != null && frCount.DateExcedded)
+                if (btnEdit != null && IsDateExceeded)
                 {
                     if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) || RC.IsRegionalClusterLead(this.User))
                     {

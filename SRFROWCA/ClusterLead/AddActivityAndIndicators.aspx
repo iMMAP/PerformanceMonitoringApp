@@ -278,9 +278,9 @@
                         CssClass="width-10 btn btn-sm btn-primary" CausesValidation="False" meta:resourcekey="Button3Resource1" />
                 </div>
                 <div class="col-xs-4 col-sm-4">
-                    <asp:Label ID="lblMSRefugee" runat="server" Text="MS for Refugees Cluster Framework" 
+                    <asp:Label ID="lblMSRefugee" runat="server" Text="MS for Refugees Cluster Framework"
                         CssClass="label-warning label-lg" Visible="false"></asp:Label>
-                    <asp:CheckBox id="cbMSRefugees" runat="server" Text="Yes" Visible="false"/>
+                    <asp:CheckBox ID="cbMSRefugees" runat="server" Text="Yes" Visible="false" />
                 </div>
             </div>
             <br />
@@ -333,8 +333,6 @@
                 </div>
             </div>
         </div>
-
-
         <asp:Panel ID="pnlAdditionalIndicaotrs" runat="server" meta:resourcekey="pnlAdditionalIndicaotrsResource1">
         </asp:Panel>
 
@@ -348,9 +346,11 @@
                 <i class="icon-plus smaller-75"></i>
             </button>
         </div>
-        <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" CssClass="width-10 btn btn-sm btn-primary" meta:resourcekey="btnSaveResource1" />
-        <asp:Button ID="btnBackToSRPList" runat="server" Text="Back" OnClick="btnBackToSRPList_Click"
-            CssClass="width-10 btn btn-sm btn-primary" CausesValidation="False" meta:resourcekey="btnBackToSRPListResource1" />
+        <div class="col-xs-12 col-sm-12">
+            <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" CssClass="width-10 btn btn-sm btn-primary" meta:resourcekey="btnSaveResource1" />
+            <asp:Button ID="btnBackToSRPList" runat="server" Text="Back" OnClick="btnBackToSRPList_Click"
+                CssClass="width-10 btn btn-sm btn-primary" CausesValidation="False" meta:resourcekey="btnBackToSRPListResource1" />
+        </div>
 
     </div>
     <script>

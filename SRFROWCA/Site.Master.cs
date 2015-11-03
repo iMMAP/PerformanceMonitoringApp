@@ -153,11 +153,14 @@ namespace SRFROWCA
             liProjects.Visible = isShow;
             liClusterFrameworkImport.Visible = isShow;
             liSettings.Visible = isShow;
+            liManageUnits.Visible = isShow;
+            liMangeTarSettings.Visible = isShow;
             //liManagePartners.Visible = isShow;
             liRequestedOrganizations.Visible = isShow;
             liKeyFiguresFramework.Visible = isShow;
             liContactList.Visible = isShow;
             liMaps.Visible = isShow;
+            liSyncProjects.Visible = isShow;
         }
 
         private void ShowUserMenue()
@@ -174,7 +177,7 @@ namespace SRFROWCA
             liKeyFiguresPublic.Visible = isShow;
             liOutputIndReportPublic.Visible = isShow;
             liProjectsPublic.Visible = !isShow;
-            liActivitesFrameworkPublic.Visible = !isShow;
+            liActivitesFrameworkPublic.Visible = isShow;
         }
 
         private void ShowRegionalLeadMenue()
@@ -186,6 +189,7 @@ namespace SRFROWCA
             liProjectsPublic.Visible = !isShow;
             liActivitesFrameworkPublic.Visible = !isShow;
             liKeyFigures.Visible = isShow;
+            liClusterFrameworkImport.Visible = isShow;
         }
 
         private void ShowClusterLeadMenue()
@@ -201,7 +205,7 @@ namespace SRFROWCA
             liProgressSummary.Visible = isShow;
             liProjectsPublic.Visible = !isShow;
             liActivitesFrameworkPublic.Visible = !isShow;
-            //liClusterFrameworkImport.Visible = isShow;
+            liClusterFrameworkImport.Visible = isShow;
         }
 
         private void ShowOCHAMenue()
@@ -221,16 +225,17 @@ namespace SRFROWCA
             liValidateAchievements.Visible = isShow;
             liProgressSummary.Visible = isShow;
             liSettings.Visible = isShow;
+           
             liUserListing.Visible = isShow;
             liKeyFigures.Visible = isShow;
             liClusterFrameworks.Visible = isShow;
             liProjects.Visible = isShow;
-            //liClusterFrameworkImport.Visible = isShow;
+            liClusterFrameworkImport.Visible = isShow;
             liKeyFiguresPublic.Visible = !isShow;
             liOutputIndReportPublic.Visible = !isShow;
             liContactList.Visible = isShow;
             liProjectsPublic.Visible = !isShow;
-            liActivitesFrameworkPublic.Visible = !isShow;
+            liActivitesFrameworkPublic.Visible = isShow;
         }
 
         private void ShowAdminMenue()
@@ -243,10 +248,12 @@ namespace SRFROWCA
             liEmergency.Visible = isShow;
             liProgressSummary.Visible = isShow;
             liSettings.Visible = isShow;
+            liManageUnits.Visible = isShow;
+            liMangeTarSettings.Visible = isShow;
             liLocations.Visible = isShow;
             liClusterFrameworks.Visible = isShow;
             liProjects.Visible = isShow;
-            //liClusterFrameworkImport.Visible = isShow;
+            liClusterFrameworkImport.Visible = isShow;
             liRequestedOrganizations.Visible = isShow;
             liKeyFiguresFramework.Visible = isShow;
             liKeyFiguresPublic.Visible = !isShow;
@@ -255,6 +262,7 @@ namespace SRFROWCA
             liProjectsPublic.Visible = !isShow;
             liActivitesFrameworkPublic.Visible = !isShow;
             liMaps.Visible = isShow;
+            liSyncProjects.Visible = isShow;
         }
 
         private void ActiveMenueItem()
@@ -435,9 +443,9 @@ namespace SRFROWCA
                 liNewIndicatorListing.Attributes.Add("class", "active open");
             }
 
-            else if (uri.Contains("ClusterLead/UploadSRP.aspx"))
+            else if (uri.Contains("Anonymous/ExpClusterFramework.aspx"))
             {
-                PageTitle = "ORS - Import Framework";
+                PageTitle = "ORS - Export Framework";
                 liClusterFrameworks.Attributes.Add("class", "active open");
                 liClusterFrameworkImport.Attributes.Add("class", "active");
             }

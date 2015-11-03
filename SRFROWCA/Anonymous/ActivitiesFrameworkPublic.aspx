@@ -26,6 +26,11 @@
                                             class="btn btn-sm btn-yellow" causesvalidation="false" title="Excel">
                                             <i class="icon-download"></i>Excel
                                         </button>
+                                        
+                                        <button runat="server" id="btnExportToWord" onserverclick="btnExportWord_Click"
+                                            class="btn btn-sm btn-yellow" causesvalidation="false" title="Word">
+                                            <i class="icon-download"></i>Export To Word (2016)
+                                        </button>
                                     </h6>
                                 </div>
                                 <div class="widget-body">

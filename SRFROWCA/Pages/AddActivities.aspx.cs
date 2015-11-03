@@ -376,7 +376,7 @@ namespace SRFROWCA.Pages
             string locIdsNotIncluded = GetNotSelectedLocations();
             Guid userId = RC.GetCurrentUserId;
 
-            DataTable dt = DBContext.GetData("GetIPData2015", new object[] { UserInfo.EmergencyCountry, locationIds, GetYearId, monthId,
+            DataTable dt = DBContext.GetData("GetIPData2015", new object[] { UserInfo.EmergencyCountry, locationIds, RC.Year._2015, monthId,
                                                                         locIdsNotIncluded, RC.SelectedSiteLanguageId, userId,
                                                                         UserInfo.Organization, projectId});
             if (dt.Rows.Count <= 0 && !string.IsNullOrEmpty(locationIds))
@@ -426,7 +426,7 @@ namespace SRFROWCA.Pages
             using (ORSEntities db = new ORSEntities())
             {
                 Report r = db.Reports.Where(x => x.ProjectId == projectId
-                                            && x.YearId == GetYearId
+                                            && x.YearId == (int)RC.Year._2015
                                             && x.MonthId == monthId
                                             && x.EmergencyLocationId == UserInfo.EmergencyCountry
                                             && x.OrganizationId == UserInfo.Organization).SingleOrDefault();
@@ -707,7 +707,7 @@ namespace SRFROWCA.Pages
                                 {
                                     if (achieved != null)
                                     {
-                                        DBContext.Add("InsertReportProjectPartners", new object[] { ReportId, projectId, monthId, GetYearId, activityId, 
+                                        DBContext.Add("InsertReportProjectPartners", new object[] { ReportId, projectId, monthId, RC.Year._2015, activityId, 
                                                                                                 locationIdToSave, UserInfo.Organization, RC.GetCurrentUserId, DBNull.Value });
                                     }
 
@@ -876,18 +876,11 @@ namespace SRFROWCA.Pages
                 procedureName = "GetProjectsDataByLocations";
             }
 
-            DataTable dt = DBContext.GetData(procedureName, new object[] { UserInfo.EmergencyCountry, UserInfo.Organization, 
-                                                                            GetYearId, monthId, projectId, RC.SelectedSiteLanguageId, userId});
+            DataTable dt = DBContext.GetData(procedureName, new object[] { UserInfo.EmergencyCountry, UserInfo.Organization, RC.Year._2015,
+                                                                            monthId, projectId, RC.SelectedSiteLanguageId, userId});
             return dt;
         }
-
-        public int GetYearId
-        {
-            get
-            {
-                return (int)RC.YearsInDB.Year2015;
-            }
-        }
+        
 
         //private void GeneratePDF(DataTable dt)
         //{

@@ -24,7 +24,6 @@ namespace SRFROWCA.ClusterLead
                 SetFiltersFromSession();
                 ToggleControlsToAddIndicator();
                 LoadIndicators();
-
             }
         }
 
@@ -35,8 +34,9 @@ namespace SRFROWCA.ClusterLead
 
             if (emgLocationId > 0 && emgClusterId > 0)
             {
-                FrameWorkSettingsCount frCount = FrameWorkUtil.GetActivityFrameworkSettings(emgLocationId, emgClusterId);
-                if (frCount.IndCount <= 0 || frCount.DateExcedded)
+                int indUnused =  SectorFramework.IndUnused(emgLocationId, emgClusterId);
+                bool IsDateExceeded = SectorFramework.DateExceeded(emgLocationId, emgClusterId);
+                if (indUnused <= 0 || IsDateExceeded)
                 {
                     btnMigrate.Enabled = false;
                     divMigrateMessage.Visible = true;
@@ -47,7 +47,7 @@ namespace SRFROWCA.ClusterLead
                 {
                     divMigrateMessage.Visible = true;
                     btnMigrate.Enabled = true;
-                    lblMigrateMessage.Text = "You can migrate " + frCount.IndCount.ToString() + " Indicator(s)";
+                    lblMigrateMessage.Text = "You can migrate " + indUnused.ToString() + " Indicator(s)";
                 }
             }
         }
@@ -116,8 +116,8 @@ namespace SRFROWCA.ClusterLead
             bool canMigrate = false;
             if (emgLocationId > 0 && emgClusterId > 0)
             {
-                FrameWorkSettingsCount frCount = FrameWorkUtil.GetActivityFrameworkSettings(emgLocationId, emgClusterId);
-                lblMigrateMessage.Text = "You can only migrate " + frCount.IndCount.ToString() + " Indicator(s)";
+                int indUnused = SectorFramework.IndUnused(emgLocationId, emgClusterId);
+                lblMigrateMessage.Text = "You can only migrate " + indUnused.ToString() + " Indicator(s)";
                 int indCount = 0;
                 foreach (GridViewRow row in gvActivity.Rows)
                 {
@@ -131,8 +131,7 @@ namespace SRFROWCA.ClusterLead
                         }
                     }
                 }
-
-                canMigrate = indCount <= frCount.IndCount;
+                canMigrate = indCount <= indUnused;
             }
 
             return canMigrate;

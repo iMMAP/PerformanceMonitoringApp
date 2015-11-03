@@ -129,6 +129,11 @@ namespace SRFROWCA.Anonymous
             ModalPopupExtender2.Show();
         }
 
+        protected void btnExportWord_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ExpClusterFramework.aspx");
+        }
+
         protected void btnExportExcelOK_Click(object sender, EventArgs e)
         {
             GridView gvExport = new GridView();

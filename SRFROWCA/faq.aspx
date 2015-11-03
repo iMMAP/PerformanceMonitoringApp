@@ -5,7 +5,7 @@
 </asp:Content>
 
 <asp:Content ID="mainContent" ContentPlaceHolderID="MainContent" runat="server">
-    
+
     <div class="page-content">
         <div class="row">
             <div class="col-xs-12">
@@ -392,19 +392,18 @@
                                                     <div class="panel-heading">
                                                         <a href="#faq-list-4-sub-1" data-parent="#faq-list-nested-4" data-toggle="collapse"
                                                             class="accordion-toggle collapsed"><i class="icon-plus smaller-80 middle" data-icon-hide="icon-minus"
-                                                                data-icon-show="icon-plus"></i>&nbsp;How to Log in 
+                                                                data-icon-show="icon-plus"></i>&nbsp;How to create project on OPS and add project targets?
                                                             
                                                         </a>
                                                     </div>
                                                     <div class="panel-collapse collapse" id="faq-list-4-sub-1">
                                                         <div class="panel-body">
                                                             <div>
-                                                                <a href="https://www.youtube.com/watch?v=ktlOY8qZKuc&list=PLlXl6B0m9IO1_-IZLhCD4cRr1Ma2H4DVX"
+                                                                <a href="https://youtu.be/eF4x6Fyw9j8"
                                                                     target="_blank">Watch on youtube</a>
                                                             </div>
                                                             <div>
-                                                                <iframe width="640" height="360" src="//www.youtube.com/embed/ktlOY8qZKuc?list=PLlXl6B0m9IO1_-IZLhCD4cRr1Ma2H4DVX"
-                                                                    frameborder="0" allowfullscreen></iframe>
+                                                                <iframe width="560" height="315" src="https://www.youtube.com/embed/eF4x6Fyw9j8" frameborder="0" allowfullscreen></iframe>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -413,38 +412,18 @@
                                                     <div class="panel-heading">
                                                         <a href="#faq-list-4-sub-2" data-parent="#faq-list-nested-4" data-toggle="collapse"
                                                             class="accordion-toggle collapsed"><i class="icon-plus smaller-80 middle" data-icon-hide="icon-minus"
-                                                                data-icon-show="icon-plus"></i>&nbsp;
-                                                            How to report on ORS Data Entry
+                                                                data-icon-show="icon-plus"></i>&nbsp;How to upload a cluster framework ...
+                                                            
                                                         </a>
                                                     </div>
                                                     <div class="panel-collapse collapse" id="faq-list-4-sub-2">
                                                         <div class="panel-body">
                                                             <div>
-                                                                <a href="https://www.youtube.com/watch?v=SKYB1TS9mII"
+                                                                <a href="https://youtu.be/sqllY6sDIkQ?list=PLlXl6B0m9IO1nYmOOFqo3108K-cBE_Iza"
                                                                     target="_blank">Watch on youtube</a>
                                                             </div>
                                                             <div>
-                                                                <iframe width="640" height="360" src="//www.youtube.com/embed/SKYB1TS9mII" frameborder="0" allowfullscreen></iframe>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="panel panel-default">
-                                                    <div class="panel-heading">
-                                                        <a href="#faq-list-4-sub-3" data-parent="#faq-list-nested-4" data-toggle="collapse"
-                                                            class="accordion-toggle collapsed"><i class="icon-plus smaller-80 middle" data-icon-hide="icon-minus"
-                                                                data-icon-show="icon-plus"></i>&nbsp;
-                                                             Using ORS as a Cluster Lead
-                                                        </a>
-                                                    </div>
-                                                    <div class="panel-collapse collapse" id="faq-list-4-sub-3">
-                                                        <div class="panel-body">
-                                                            <div>
-                                                                <a href="http://www.youtube.com/watch?v=9lH4nw9jSKc&feature=youtu.be"
-                                                                    target="_blank">Watch on youtube</a>
-                                                            </div>
-                                                            <div>
-                                                                <iframe width="640" height="360" src="//www.youtube.com/embed/9lH4nw9jSKc" frameborder="0" allowfullscreen></iframe>
+                                                                <iframe width="560" height="315" src="https://www.youtube.com/embed/sqllY6sDIkQ?list=PLlXl6B0m9IO1nYmOOFqo3108K-cBE_Iza" frameborder="0" allowfullscreen></iframe>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -466,18 +445,17 @@
                                                         <a href="#faq-list-42-sub-1" data-parent="#faq-list-nested-42" data-toggle="collapse"
                                                             class="accordion-toggle collapsed"><i class="icon-plus smaller-80 middle" data-icon-hide="icon-minus"
                                                                 data-icon-show="icon-plus"></i>&nbsp;
-                                                            Comment s'enregistrer sur ORS
+                                                            Comment mettre en ligne un projet et ajouter des activités au projet?
                                                         </a>
                                                     </div>
                                                     <div class="panel-collapse collapse" id="faq-list-42-sub-1">
                                                         <div class="panel-body">
                                                             <div>
-                                                                <a href="https://www.youtube.com/watch?v=pks-71zvJHU&list=PLlXl6B0m9IO1_-IZLhCD4cRr1Ma2H4DVX"
+                                                                <a href="https://youtu.be/yidD2hRlURY"
                                                                     target="_blank">Regarder sur youtube</a>
                                                             </div>
                                                             <div>
-                                                                <iframe width="640" height="360" src="//www.youtube.com/embed/pks-71zvJHU?list=PLlXl6B0m9IO1_-IZLhCD4cRr1Ma2H4DVX"
-                                                                    frameborder="0" allowfullscreen></iframe>
+                                                                <iframe width="560" height="315" src="https://www.youtube.com/embed/yidD2hRlURY" frameborder="0" allowfullscreen></iframe>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -485,46 +463,26 @@
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading">
                                                         <a href="#faq-list-42-sub-2" data-parent="#faq-list-nested-42" data-toggle="collapse"
-                                                            class="accordion-toggle collapsed"><i class="icon-plus smaller-80 middle" data-icon-hide="icon-minus"
+                                                            class="accordion-toggle"><i class="icon-plus smaller-80 middle" data-icon-hide="icon-minus"
                                                                 data-icon-show="icon-plus"></i>&nbsp;
-                                                            Comment faire un reporting sur OR:
+                                                            Comment mettre en ligne un cadre ...
                                                         </a>
                                                     </div>
                                                     <div class="panel-collapse collapse" id="faq-list-42-sub-2">
                                                         <div class="panel-body">
 
                                                             <div>
-                                                                <a href="https://www.youtube.com/watch?v=BJh5ufW0ZqQ&list=PLlXl6B0m9IO1_-IZLhCD4cRr1Ma2H4DVX"
+                                                                <a href="https://youtu.be/js3vA-ZQqyA?list=PLlXl6B0m9IO1nYmOOFqo3108K-cBE_Iza"
                                                                     target="_blank">Regarder sur youtube</a>
                                                             </div>
                                                             <div>
-                                                                <iframe width="640" height="360" src="//www.youtube.com/embed/BJh5ufW0ZqQ?list=PLlXl6B0m9IO1_-IZLhCD4cRr1Ma2H4DVX"
-                                                                    frameborder="0" allowfullscreen></iframe>
+                                                                <iframe width="560" height="315" src="https://www.youtube.com/embed/js3vA-ZQqyA?list=PLlXl6B0m9IO1nYmOOFqo3108K-cBE_Iza" frameborder="0" allowfullscreen></iframe>
                                                             </div>
 
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="panel panel-default">
-                                                    <div class="panel-heading">
-                                                        <a href="#faq-list-42-sub-3" data-parent="#faq-list-nested-42" data-toggle="collapse"
-                                                            class="accordion-toggle collapsed"><i class="icon-plus smaller-80 middle" data-icon-hide="icon-minus"
-                                                                data-icon-show="icon-plus"></i>&nbsp;
-                                                            Utilisation de ORS en tant que Coordonnateur de
-                                                        </a>
-                                                    </div>
-                                                    <div class="panel-collapse collapse" id="faq-list-42-sub-3">
-                                                        <div class="panel-body">
-                                                            <div>
-                                                                <a href="http://www.youtube.com/watch?v=QK3Molj9wtg&feature=youtu.be"
-                                                                    target="_blank">Regarder sur youtube</a>
-                                                            </div>
-                                                            <div>
-                                                                <iframe width="480" height="360" src="//www.youtube.com/embed/QK3Molj9wtg" frameborder="0" allowfullscreen></iframe>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -540,5 +498,5 @@
         <!-- /.row -->
     </div>
     <!-- /.page-content -->
- 
+
 </asp:Content>

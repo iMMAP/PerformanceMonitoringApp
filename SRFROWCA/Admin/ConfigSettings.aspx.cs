@@ -21,46 +21,6 @@ namespace SRFROWCA.Admin
         public string liTab2 = string.Empty;
         public string showCountry = string.Empty;
         public string countryId = string.Empty;
-
-        protected void Page_Init(object sender, EventArgs e)
-        {
-            //if (!string.IsNullOrEmpty(Request.QueryString["editKey"])
-            //    || !string.IsNullOrEmpty(Request.QueryString["keySave"])
-            //    || !string.IsNullOrEmpty(Request.QueryString["delKey"]))
-            //{
-            //    clsTab1 = clsTab1.Replace("active", string.Empty);
-            //    clsTab2 += " active";
-            //    liTab1 = liTab1.Replace("active", string.Empty);
-            //    liTab2 = "active";
-
-            //    if (!string.IsNullOrEmpty(Request.QueryString["editKey"]))
-            //    {
-            //        btnAddFrameworkSettings.Text = "Update Settings";
-            //    }
-            //    else if (!string.IsNullOrEmpty(Request.QueryString["keySave"]))
-            //    {
-            //        if (Convert.ToBoolean(Request.QueryString["keySave"]))
-            //            lblFrameworkSettings.Text = "Settings saved successfully!";
-            //        else
-            //            lblFrameworkSettings.Text = "Could not save settings!";
-            //    }
-            //    else if (!string.IsNullOrEmpty(Request.QueryString["delKey"]))
-            //    {
-            //        if (Convert.ToBoolean(Request.QueryString["delKey"]))
-            //            lblFrameworkSettings.Text = "Settings deleted successfully!";
-            //        else
-            //            lblFrameworkSettings.Text = "Could not delete settings!";
-            //    }
-            //}
-            //else if (!string.IsNullOrEmpty(Request.QueryString["emailSave"]))
-            //{
-            //    if (Convert.ToBoolean(Request.QueryString["emailSave"]))
-            //        lblEmailMessage.Text = "Settings saved successfully!";
-            //    else
-            //        lblEmailMessage.Text = "Could not save settings!";
-            //}
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -68,9 +28,6 @@ namespace SRFROWCA.Admin
                 ShowHideControls();
                 ReadConfigKeys();
                 LoadCombos();
-
-                //if (!string.IsNullOrEmpty(Request.QueryString["editKey"]))
-                //    FillControls(Convert.ToString("Key-" + Request.QueryString["editKey"]));
             }
         }
 
@@ -112,7 +69,7 @@ namespace SRFROWCA.Admin
             doc.Save(PATH);
 
             Response.Redirect("~/Admin/ConfigSettings.aspx?emailSave=true");
-        }        
+        }
 
         private void SetFrameworkSettings()
         {
@@ -125,8 +82,8 @@ namespace SRFROWCA.Admin
             else
                 doc.Load(PATH);
 
-            List<ListItem> countriesList = GetCountryItems();
-            List<ListItem> clustersList = GetClusterItems(); 
+            List<ListItem> countriesList = RC.GetListControlItems(ddlCountry);
+            List<ListItem> clustersList = RC.GetListControlItems(ddlCluster);
 
             foreach (ListItem country in countriesList)
             {
@@ -139,39 +96,9 @@ namespace SRFROWCA.Admin
             }
         }
 
-        private List<ListItem> GetCountryItems()
-        {
-            List<ListItem> lst = new List<ListItem>();
-            if (ddlCountry.SelectedValue == "0")
-            {
-                lst = ddlCountry.Items.Cast<ListItem>().ToList();
-                var remove = lst.SingleOrDefault(r => r.Value == "0");
-                lst.Remove(remove);
-            }
-            else
-            {
-                lst.Add(ddlCountry.SelectedItem);
-            }
 
-            return lst;
-        }
 
-        private List<ListItem> GetClusterItems()
-        {
-            List<ListItem> lst = new List<ListItem>();
-            if (ddlCluster.SelectedValue == "0")
-            {
-                lst = ddlCluster.Items.Cast<ListItem>().ToList();
-                var remove = lst.SingleOrDefault(r => r.Value == "0");
-                lst.Remove(remove);
-            }
-            else
-            {
-                lst.Add(ddlCluster.SelectedItem);
-            }
-
-            return lst;
-    }
+        
         private void DeleteSettingsKey(string PATH, string configKey, XmlDocument doc)
         {
             if (File.Exists(PATH))

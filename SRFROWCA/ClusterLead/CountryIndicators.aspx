@@ -29,7 +29,8 @@
                                        
                                         </button>
 
-                                        <asp:Button ID="btnAddIndicator" runat="server" OnClick="btnAddIndicator_Click" Text="Add Indicator" CausesValidation="False"
+                                        <asp:Button ID="btnAddIndicator" runat="server" OnClick="btnAddIndicator_Click" Text="Add Indicator" 
+                                            CausesValidation="False" Enabled="false"
                                             CssClass="btn btn-sm btn-yellow pull-right" meta:resourcekey="btnAddIndicatorResource1" />
                                     </h6>
                                 </div>
@@ -39,29 +40,23 @@
                                     <div class="widget-main">
                                         <table border="0" style="width: 100%; margin: 0 auto;">
                                             <tr>
-                                                <td>
+                                                <td style="width:60px">
                                                     <asp:Label runat="server" ID="lblCountry" Text="Country:" meta:resourcekey="lblCountryResource1"></asp:Label>
                                                 </td>
-                                                <td>
-                                                    <asp:DropDownList AutoPostBack="True" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" runat="server" ID="ddlCountry" Width="200px" meta:resourcekey="ddlCountryResource1">
-                                                        <asp:ListItem Selected="True" Text="--- Select Country ---" Value="0" meta:resourcekey="ListItemResource1"></asp:ListItem>
+                                                <td style="width:230px">
+                                                    <asp:DropDownList ID="ddlCountry" runat="server" Width="200px" AutoPostBack="True"
+                                                        OnSelectedIndexChanged="ddl_SelectedIndexChanged" meta:resourcekey="ddlCountryResource1">
                                                     </asp:DropDownList>
                                                 </td>
 
-                                                <td>
+                                                <td style="width:60px">
                                                     <asp:Label runat="server" ID="lblCluster" Text="Cluster:" meta:resourcekey="lblClusterResource1"></asp:Label>
                                                 </td>
-                                                <td>
-                                                    <asp:DropDownList AutoPostBack="True" runat="server" OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged" ID="ddlCluster" Width="270px" meta:resourcekey="ddlClusterResource1">
-                                                        <asp:ListItem Selected="True" Text="--- Select Cluster ---" Value="0" meta:resourcekey="ListItemResource2"></asp:ListItem>
+                                                <td style="width:270px">
+                                                    <asp:DropDownList ID="ddlCluster" runat="server" AutoPostBack="True" Width="260px"
+                                                        OnSelectedIndexChanged="ddl_SelectedIndexChanged" meta:resourcekey="ddlClusterResource1">
                                                     </asp:DropDownList>
                                                 </td>
-                                                <td>
-                                                    <asp:Label ID="lblYear" runat="server" Text="Year:" meta:resourcekey="lblYearResource1"></asp:Label>
-                                                    <asp:DropDownList ID="ddlFrameworkYear" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlYear_SelectedIndexChnaged" meta:resourcekey="ddlFrameworkYearResource1">
-                                                        <asp:ListItem Text="2016" Value="12" meta:resourcekey="ListItemResource3"></asp:ListItem>
-                                                        <asp:ListItem Text="2015" Value="11" meta:resourcekey="ListItemResource4"></asp:ListItem>
-                                                    </asp:DropDownList></td>
                                             </tr>
                                             <tr>
                                                 <td>&nbsp;
@@ -72,15 +67,13 @@
                                                     <asp:Localize ID="localCBIsRegCap" runat="server" Text="<span class='label-sm'>Show Regional Indicators</span>" meta:resourcekey="cbIncludeRegionalResource1"></asp:Localize>
                                                 </td>
                                                 <td>
-                                                    <asp:Label ID="lblIndicatorSearch" runat="server" Text="Indicator:" meta:resourcekey="lblIndicatorSearchResource1"></asp:Label>
+                                                    <asp:Label ID="lblYear" runat="server" Text="Year:" meta:resourcekey="lblYearResource1"></asp:Label>
                                                 </td>
                                                 <td>
-                                                    <asp:TextBox ID="txtIndicatorName" runat="server" Width="270px" meta:resourcekey="txtIndicatorNameResource1"></asp:TextBox>
-                                                </td>
-                                                <td style="text-align: right;">
-
-                                                    <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" CssClass="btn btn-sm btn-primary" CausesValidation="False" meta:resourcekey="btnSearchResource1" />
-                                                    <asp:Button ID="btnReset" runat="server" OnClick="btnReset_Click" Text="Reset" CssClass="btn btn-sm btn-primary" CausesValidation="False" meta:resourcekey="btnResetResource1" />
+                                                    <asp:DropDownList ID="ddlFrameworkYear" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddl_SelectedIndexChanged" meta:resourcekey="ddlFrameworkYearResource1">
+                                                        <asp:ListItem Text="2016" Value="12" meta:resourcekey="ListItemResource3"></asp:ListItem>
+                                                        <asp:ListItem Text="2015" Value="11" meta:resourcekey="ListItemResource4"></asp:ListItem>
+                                                    </asp:DropDownList>
                                                 </td>
                                             </tr>
 
@@ -148,13 +141,13 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderStyle-Width="30px" ItemStyle-HorizontalAlign="Center" HeaderText="Edit" meta:resourcekey="TemplateFieldResource4">
                             <ItemTemplate>
-                                <asp:ImageButton ID="btnEdit" runat="server" ImageUrl="~/assets/orsimages/edit16.png"
+                                <asp:ImageButton ID="btnEdit" runat="server" ImageUrl="~/assets/orsimages/edit16.png" Visible="false"
                                     CommandName="EditIndicator" CommandArgument='<%# Eval("ClusterIndicatorId") %>' ToolTip="Edit Indicator" meta:resourcekey="btnEditResource1" />
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderStyle-Width="30px" ItemStyle-HorizontalAlign="Center" HeaderText="Del" meta:resourcekey="TemplateFieldResource5">
                             <ItemTemplate>
-                                <asp:ImageButton ID="btnDelete" runat="server" ImageUrl="~/assets/orsimages/delete16.png"
+                                <asp:ImageButton ID="btnDelete" runat="server" ImageUrl="~/assets/orsimages/delete16.png" Visible="false"
                                     CommandName="DeleteIndicator" CommandArgument='<%# Eval("ClusterIndicatorId") %>' ToolTip="Delete" meta:resourcekey="btnDeleteResource1" />
                             </ItemTemplate>
                         </asp:TemplateField>

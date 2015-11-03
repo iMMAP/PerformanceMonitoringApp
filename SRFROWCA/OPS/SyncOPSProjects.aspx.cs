@@ -8,6 +8,7 @@ using System.Xml;
 using System.Xml.Linq;
 using BusinessLogic;
 using SRFROWCA.Common;
+using System.Transactions;
 
 namespace SRFROWCA.OPS
 {
@@ -20,39 +21,45 @@ namespace SRFROWCA.OPS
 
         protected void btnImportProjects_Click(object sender, EventArgs e)
         {
-            InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1075.xml");
-            InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1076.xml");
-            InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1077.xml");
-            InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1078.xml");
-            InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1079.xml");
-            InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1080.xml");
-            InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1081.xml");
-            InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1082.xml");
-            InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1083.xml");
+            //DBContext.Update("UpdateProjectsTableWithToDeleteNull", new object[] { DBNull.Value });
 
-            DBContext.Delete("DeleteTempProjectsOPS", new object[] { DBNull.Value });
+            //using (TransactionScope scope = new TransactionScope())
+            {
+                InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1105.xml");
+                InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1107.xml");
+                InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1108.xml");
+                InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1109.xml");
+                InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1110.xml");
+                InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1111.xml");
+                InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1112.xml");
+                InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1113.xml");
+                InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1114.xml");
+                InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1115.xml");
 
-            Response.Write("All Synced!");
+                //DBContext.Delete("DeleteTempProjectsOPS", new object[] { DBNull.Value });
+                //scope.Complete();
+                Response.Write("All Synced!");
+            }
         }
 
         private void InsertUpdateProjects(string url)
         {
-            //try
-            //{
+            try
+            {
                 Response.Write("<br/>");
                 Response.Write(url);
                 Response.Write("<br/>");
                 XDocument doc = XDocument.Load(url);
                 IEnumerable<OPSProject> projects = GetProjects(doc);
                 SyncProjects(projects, doc);
-            //}
-            //catch (Exception ex)
-            //{
-            //    Response.Write(url);
-            //    Response.Write("<br/>");
-            //    Response.Write(ex.ToString());
-            //    Response.Write("<br/>");
-            //}
+            }
+            catch (Exception ex)
+            {
+                Response.Write(url);
+                Response.Write("<br/>");
+                Response.Write(ex.ToString());
+                Response.Write("<br/>");
+            }
         }
 
         private IEnumerable<OPSProject> GetProjects(XDocument doc)
@@ -93,9 +100,9 @@ namespace SRFROWCA.OPS
                     CountryName = (string)x.Element("country"),
                     OtherFields = (string)x.Element("other_fields"),
                     EGFLocations = (string)x.Element("egf_locations"),
-                    SecondaryClusterId = (string)x.Element("subset").Attribute("id"),
-                    SecondaryClusterName = (string)x.Element("subset")
-                    
+                    //SecondaryClusterId = (string)x.Element("subset").Attribute("id"),
+                    //SecondaryClusterName = (string)x.Element("subset")
+
                 });
 
             return projects;
@@ -202,19 +209,19 @@ namespace SRFROWCA.OPS
                 clusterName = project.ClusterName;
             }
 
-            string secClusterName = "";
-            if (project.SecondaryClusterName == "WATER AND SANITATION")
-            {
-                secClusterName = "Water Sanitation & Hygiene";
-            }
-            else if (project.SecondaryClusterName == "MULTI-SECTOR FOR REFUGEES")
-            {
-                secClusterName = "Multi Sector for Refugees";
-            }
-            else
-            {
-                secClusterName = project.SecondaryClusterName;
-            }
+            //string secClusterName = "";
+            //if (project.SecondaryClusterName == "WATER AND SANITATION")
+            //{
+            //    secClusterName = "Water Sanitation & Hygiene";
+            //}
+            //else if (project.SecondaryClusterName == "MULTI-SECTOR FOR REFUGEES")
+            //{
+            //    secClusterName = "Multi Sector for Refugees";
+            //}
+            //else
+            //{
+            //    secClusterName = project.SecondaryClusterName;
+            //}
 
             int tempVal = 0;
             int? benChildren = null;
@@ -318,8 +325,11 @@ namespace SRFROWCA.OPS
                                     project.GenderMarker,
                                     project.EGFLocations,
                                     project.PriorityName,
-                                    secClusterName,
+                                    //secClusterName,
+                                    (int)RC.Year._2016,
                                     DBNull.Value};
         }
+
+
     }
 }

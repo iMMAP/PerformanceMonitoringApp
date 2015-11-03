@@ -4,133 +4,117 @@ using System.Globalization;
 using System.IO;
 using System.Web;
 using System.Xml;
-using System.Collections.Generic;
-using System.Data;
 
 namespace SRFROWCA.Common
 {
-    public static class FrameWorkUtil
+    public static class SectorFramework
     {
-        public static FrameWorkSettingsCount GetActivityFrameworkSettings(int emgLocationId, int emgClusterId)
+        private static XmlElement GetClusterDocElements(int emgLocationId, int emgClusterId)
         {
-            int maxIndicators = 0;
-            int maxActivities = 0;
-            DateTime endEditDate = DateTime.Now.Date;
-
-            string configKey = "Key-" + emgLocationId.ToString() + emgClusterId.ToString();
-            maxIndicators = 0;
-            maxActivities = 0;
-            endEditDate = DateTime.Now;
-
+            XmlDocument doc = new XmlDocument();
             string PATH = HttpRuntime.AppDomainAppPath;
             PATH = PATH.Substring(0, PATH.LastIndexOf(@"\") + 1) + @"Configurations\ChangeEndSettings.xml";
-
             if (File.Exists(PATH))
-            {
-                XmlDocument doc = new XmlDocument();
                 doc.Load(PATH);
+            return doc.DocumentElement;
+        }
 
-                XmlElement elem_settings = doc.GetElementById("ChangeEndSettings");
-                XmlNode settingsNode = doc.DocumentElement;
+        public static bool DateExceeded(int emgLocationId, int emgClusterId)
+        {
+            DateTime frDate = DateTime.MaxValue;
 
-                foreach (XmlNode node in settingsNode.ChildNodes)
+            // Make Key which is saved in configuration file
+            string configKey = "Key-" + emgLocationId.ToString() + emgClusterId.ToString();
+            XmlNode settingsNode = GetClusterDocElements(emgLocationId, emgClusterId);
+            foreach (XmlNode node in settingsNode.ChildNodes)
+            {
+                if (node.Name.Equals(configKey))
                 {
-                    if (node.Name.Equals(configKey))
-                    {
-                        if (node.Attributes["FrameworkCount"] != null)
-                            maxIndicators = Convert.ToInt32(node.Attributes["FrameworkCount"].Value);
+                    if (node.Attributes["DateLimit"] != null)
+                        frDate = DateTime.ParseExact(Convert.ToString(node.Attributes["DateLimit"].Value),
+                                                                        "MM-dd-yyyy", CultureInfo.InvariantCulture);
+                }
+            }
 
-                        if (node.Attributes["ActivityCount"] != null)
-                            maxActivities = Convert.ToInt32(node.Attributes["ActivityCount"].Value);
+            // If Date is less than or equal than current 
+            // date then it is not exceeded, return false.
+            return frDate <= DateTime.Now.Date;
+        }
 
-                        if (node.Attributes["DateLimit"] != null)
-                        {
-                            endEditDate = DateTime.ParseExact(Convert.ToString(node.Attributes["DateLimit"].Value), "MM-dd-yyyy", CultureInfo.InvariantCulture);
-                        }
-                    }
+        public static int IndUnused(int emgLocationId, int emgClusterId)
+        {
+            int allowedIndicators = 0;
+            string configKey = "Key-" + emgLocationId.ToString() + emgClusterId.ToString();
+            XmlNode settingsNode = GetClusterDocElements(emgLocationId, emgClusterId);
+            foreach (XmlNode node in settingsNode.ChildNodes)
+            {
+                if (node.Name.Equals(configKey))
+                {
+                    if (node.Attributes["FrameworkCount"] != null)
+                        allowedIndicators = Convert.ToInt32(node.Attributes["FrameworkCount"].Value);
                 }
             }
 
             int yearId = 12;
-            if (maxIndicators > 0)
+            if (allowedIndicators > 0)
             {
                 int isActive = 1;
                 int indicatorCount = DBContext.Update("GetIndicatorsCount", new object[] { emgLocationId, emgClusterId, 
                                                                                             isActive, RC.SelectedSiteLanguageId, yearId, DBNull.Value });
                 if (indicatorCount > 0)
-                    maxIndicators = maxIndicators - indicatorCount;
+                    allowedIndicators -= indicatorCount;
             }
 
-            if (maxActivities > 0)
+            return allowedIndicators;
+        }
+
+        public static int ActivityUnused(int emgLocationId, int emgClusterId)
+        {
+            int allowedActivities = 0;
+            string configKey = "Key-" + emgLocationId.ToString() + emgClusterId.ToString();
+            XmlNode settingsNode = GetClusterDocElements(emgLocationId, emgClusterId);
+            foreach (XmlNode node in settingsNode.ChildNodes)
+            {
+                if (node.Name.Equals(configKey))
+                {
+                    if (node.Attributes["ActivityCount"] != null)
+                        allowedActivities = Convert.ToInt32(node.Attributes["ActivityCount"].Value);
+                }
+            }
+
+            int yearId = 12;
+            if (allowedActivities > 0)
             {
                 int isActive = 1;
                 int activityCount = DBContext.Update("GetActivitiesCount", new object[] { emgLocationId, emgClusterId,
                                                                                           RC.SelectedSiteLanguageId, isActive,
                                                                                           yearId, DBNull.Value });
                 if (activityCount > 0)
-                    maxActivities = maxActivities - activityCount;
+                    allowedActivities -= activityCount;
             }
 
-            FrameWorkSettingsCount fr = new FrameWorkSettingsCount();
-            fr.IndCount = maxIndicators;
-            fr.ActCount = maxActivities;
-            fr.DateExcedded = endEditDate <= DateTime.Now.Date;
-            return fr;
+            return allowedActivities;
         }
 
-        public static FrameWorkSettingsCount GetOutputFrameworkSettings(int emgLocationId, int emgClusterId)
+        public static int OutputIndUnused(int emgLocationId, int emgClusterId)
         {
-            int maxIndicators = 0;
-            DateTime endEditDate = DateTime.Now.Date;
+            int outputIndAllowed = 0;
+
             string configKey = "Key-" + emgLocationId.ToString() + emgClusterId.ToString();
 
-            maxIndicators = 0;
-            endEditDate = DateTime.Now.AddDays(-1);
-
-            string PATH = HttpRuntime.AppDomainAppPath;
-            PATH = PATH.Substring(0, PATH.LastIndexOf(@"\") + 1) + @"Configurations\ChangeEndSettings.xml";
-
-            if (File.Exists(PATH))
+            XmlNode settingsNode = GetClusterDocElements(emgLocationId, emgClusterId);
+            foreach (XmlNode node in settingsNode.ChildNodes)
             {
-                XmlDocument doc = new XmlDocument();
-                doc.Load(PATH);
-
-                XmlElement elem_settings = doc.GetElementById("ChangeEndSettings");
-                XmlNode settingsNode = doc.DocumentElement;
-
-                foreach (XmlNode node in settingsNode.ChildNodes)
+                if (node.Name.Equals(configKey))
                 {
-                    if (node.Name.Equals(configKey))
-                    {
-                        if (node.Attributes["ClusterCount"] != null)
-                        {
-                            maxIndicators = Convert.ToInt32(node.Attributes["ClusterCount"].Value);
-                        }
-
-                        if (node.Attributes["DateLimit"] != null)
-                        {
-                            endEditDate = DateTime.ParseExact(Convert.ToString(node.Attributes["DateLimit"].Value), "MM-dd-yyyy", CultureInfo.InvariantCulture);
-                        }
-                    }
+                    if (node.Attributes["ClusterCount"] != null)
+                        outputIndAllowed = Convert.ToInt32(node.Attributes["ClusterCount"].Value);
                 }
             }
 
             int yearId = 12;
             int val = DBContext.Update("GetClusterIndicatorCount", new object[] { emgLocationId, emgClusterId, yearId, DBNull.Value });
-            maxIndicators -= val;
-            
-            FrameWorkSettingsCount fr = new FrameWorkSettingsCount();
-            fr.ClsIndCount = maxIndicators;
-            fr.DateExcedded = endEditDate <= DateTime.Now.Date;
-            return fr;
+            return (outputIndAllowed -= val);
         }
-    }
-
-    public class FrameWorkSettingsCount
-    {
-        public int IndCount { get; set; }
-        public int ActCount { get; set; }
-        public int ClsIndCount { get; set; }
-        public bool DateExcedded { get; set; }
     }
 }

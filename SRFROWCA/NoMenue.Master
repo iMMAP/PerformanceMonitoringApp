@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="assets/css/ors.css" />
     <%--<link rel="Stylesheet" href="assets/css/jquery-ui.min.css" />--%>
     <script src='<%# BaseURL %>/assets/js/jquery-2.0.3.min.js'></script>
+    
 
     <style>
         .navbar {
@@ -30,7 +31,10 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
+    
     <form runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"> 
+</asp:ScriptManager>
         <div class="navbar navbar-default" id="navbar">
             <div class="navbar-container" id="navbar-container">
                 <div class="navbar-header pull-left">
@@ -63,7 +67,7 @@
         <!-- basic scripts -->
         <%--<script src='<%# BaseURL %>/assets/js/ace-extra.min.js'></script>--%>
         <script src="<%# BaseURL %>/assets/js/bootstrap.min.js"></script>
-        <%--<script src="<%# BaseURL %>/assets/js/jquery-ui.min.js"></script>--%>
+        <script src="<%# BaseURL %>/assets/js/jquery-ui.min.js"></script>
         <script src="<%# BaseURL %>/assets/js/ace.min.js"></script>
         <script src="<%# BaseURL %>/assets/orsjs/ddlslick.js"></script>
 

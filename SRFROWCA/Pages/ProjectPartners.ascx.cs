@@ -173,7 +173,7 @@ namespace SRFROWCA.Pages
 
         private DataTable GetAdmin1Locations(int emgLocationId)
         {
-            DataTable dt = DBContext.GetData("GetAdmin1OfEmergnecyLocation", new object[] { emgLocationId });
+            DataTable dt = DBContext.GetData("GetAdmin1OfEmergnecyLocation", new object[] { emgLocationId, (int)RC.LocationCategory.Government });
             return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 

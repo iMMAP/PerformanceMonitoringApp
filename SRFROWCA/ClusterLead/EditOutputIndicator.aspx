@@ -24,7 +24,6 @@
             }
     </style>
     <script>
-
         function rowGenderTotal(thisObj) {
             var $row = thisObj.closest('tr'),
                 maleTarget = parseInt($row.find('.trgtAdmin2GenderMale').val()),
@@ -74,8 +73,7 @@
                     <asp:DropDownList ID="ddlCountry" runat="server" OnSelectedIndexChanged="ddl_SelectedIndexChanged" AutoPostBack="True" Width="250px" meta:resourcekey="ddlCountryResource1">
                     </asp:DropDownList>
                     <asp:RequiredFieldValidator ID="rfvCountry" runat="server" ErrorMessage="Required" Display="Dynamic"
-                        CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCountry" meta:resourcekey="rfvCountryResource1">
-                    </asp:RequiredFieldValidator>
+                        CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCountry" meta:resourcekey="rfvCountryResource1"></asp:RequiredFieldValidator>
                 </td>
             </tr>
             <tr>
@@ -83,12 +81,11 @@
                     <asp:Label ID="lblCluster" runat="server" Text="Cluster:*" meta:resourcekey="lblClusterResource1"></asp:Label>
                 </td>
                 <td>
-                    <asp:DropDownList ID="ddlCluster" runat="server" Width="250px" 
-                        OnSelectedIndexChanged="ddl_SelectedIndexChanged" AutoPostBack="true" meta:resourcekey="ddlClusterResource1">
+                    <asp:DropDownList ID="ddlCluster" runat="server" Width="250px"
+                        OnSelectedIndexChanged="ddl_SelectedIndexChanged" AutoPostBack="True" meta:resourcekey="ddlClusterResource1">
                     </asp:DropDownList>
                     <asp:RequiredFieldValidator ID="rfvCluster" runat="server" ErrorMessage="Required" Display="Dynamic"
-                        CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCluster" meta:resourcekey="rfvClusterResource1">
-                    </asp:RequiredFieldValidator>
+                        CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCluster" meta:resourcekey="rfvClusterResource1"></asp:RequiredFieldValidator>
                 </td>
             </tr>
             <tr>
@@ -98,11 +95,9 @@
                 </td>
                 <td>
                     <asp:TextBox ID="txtInd1Eng" runat="server" Width="500px" TextMode="MultiLine"
-                        meta:resourcekey="txtInd1EngResource1" Style="height: 80px;">
-                    </asp:TextBox>
+                        meta:resourcekey="txtInd1EngResource1" Style="height: 80px;"></asp:TextBox>
                     <asp:CustomValidator ID="cvActivityEng" runat="server" ClientValidationFunction="validateIndicators"
-                        CssClass="error2" meta:resourcekey="cvActivityEngResource1">
-                    </asp:CustomValidator></td>
+                        CssClass="error2" meta:resourcekey="cvActivityEngResource1"></asp:CustomValidator></td>
             </tr>
             <tr>
                 <td>
@@ -111,8 +106,7 @@
                 <td>
                     <asp:TextBox ID="txtInd1Fr" runat="server" Width="500px"
                         TextMode="MultiLine" meta:resourcekey="txtInd1FrResource1"
-                        Style="height: 80px;">
-                    </asp:TextBox></td>
+                        Style="height: 80px;"></asp:TextBox></td>
             </tr>
             <tr>
                 <td>
@@ -121,15 +115,14 @@
                 <td>
                     <asp:DropDownList runat="server" ID="ddlUnit" Width="250px" meta:resourcekey="ddlUnitResource1"></asp:DropDownList>
                     <asp:RequiredFieldValidator ID="rfvUnits" runat="server" ErrorMessage="Required" Display="Dynamic"
-                        CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlUnit" meta:resourcekey="rfvUnitsResource1">
-                    </asp:RequiredFieldValidator>
+                        CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlUnit" meta:resourcekey="rfvUnitsResource1"></asp:RequiredFieldValidator>
                 </td>
 
             </tr>
             <tr>
                 <td>
                     <asp:Localize ID="localCalMethod" runat="server" Text="<span class='calctemp'>Calculation:*</span>" meta:resourcekey="localCalMethodResource1"></asp:Localize>
-                    <asp:Localize ID="localCalMethodHelp" runat="server" Text="<span class='orshelpicon' data-rel='popover' data-placement='top' data-original-title='<i class='icon-wrench  bigger-110 icon-only'></i>Calculation Method' data-content='<b>Sum:</b> Running Sum of monthly achievements.<br/> <b>Average:</b> Averate of monthly achievements.<br/><b>Latest:</b> Latest recorded achievement<br/><b>Max:</b> Maximum value of achievements.'>?</span>" meta:resourcekey="localCalMethodHelpResource1"></asp:Localize></td>
+                    <asp:Localize ID="localCalMethodHelp" runat="server" Text="<span class='orshelpicon' data-rel='popover' data-placement='top' data-original-title='Calculation Method' data-content='<b>Sum:</b> Running Sum of monthly achievements.<br/> <b>Average:</b> Averate of monthly achievements.<br/><b>Latest:</b> Latest recorded achievement<br/><b>Max:</b> Maximum value of achievements.'>?</span>" meta:resourcekey="localCalMethodHelpResource1"></asp:Localize></td>
                 <td>
                     <asp:DropDownList runat="server" ID="ddlCalculationMethod" Width="250px" CssClass="pullCalc" meta:resourcekey="ddlCalculationMethodResource1">
                         <asp:ListItem Text="Select Calculation" Value="0" meta:resourcekey="ListItemResource1"></asp:ListItem>
@@ -139,8 +132,7 @@
                         <asp:ListItem Text="Max" Value="5" meta:resourcekey="ListItemResource5"></asp:ListItem>
                     </asp:DropDownList>
                     <asp:RequiredFieldValidator ID="frvCalcMethod" runat="server" ErrorMessage="Required" Display="Dynamic"
-                        CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCalculationMethod" meta:resourcekey="frvCalcMethodResource1">
-                    </asp:RequiredFieldValidator>
+                        CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCalculationMethod" meta:resourcekey="frvCalcMethodResource1"></asp:RequiredFieldValidator>
                 </td>
             </tr>
             <tr>
@@ -152,8 +144,8 @@
                             <div class="widget-body">
                                 <div>
                                     <div class="widget-main no-padding-bottom no-padding-top" id="divAdmin1Targets" runat="server">
-                                        <a id="pAdmin1Target" runat="server" style="width: 20%">
-                                            <asp:Localize ID="localRptShowLoc" runat="server" Text="Click To Show Locations" meta:resourcekey="localRptShowLocResource1"></asp:Localize></a>
+                                        <a id="pAdmin1Target" runat="server" style="width: 20%">Click To Show Locations
+                                        </a>
                                         <div class="content">
                                             <asp:Repeater ID="rptAdmin" runat="server">
                                                 <HeaderTemplate>
@@ -189,8 +181,8 @@
                             </div>
                         </div>
                         <div class="widget-main no-padding-bottom no-padding-top hidden" id="divAdmin1GenderTargets" runat="server">
-                            <a id="pAdmin1GenderTarget" runat="server" style="width: 20%">
-                                <asp:Localize ID="localRptGendShow" runat="server" Text="Click To Show Locations" meta:resourcekey="localRptShowLocResource1"></asp:Localize></a>
+                            <a id="pAdmin1GenderTarget" runat="server" style="width: 20%">Click To Show Locations
+                            </a>
                             <div class="content">
                                 <asp:Repeater ID="rptAdmin1Gender" runat="server">
                                     <HeaderTemplate>
@@ -270,6 +262,29 @@
                 arg.IsValid = true;
         }
 
+        function LoadTargetControls()
+        {
+                $.ajax({
+                    url: "EditOutputIndicator.aspx/IsGenderDisaggregated",
+                    data: JSON.stringify({
+                        "unitId": $("#<%=ddlUnit.ClientID%>").val()
+                    }),
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        if (data.d) {
+                            $("#<%=divAdmin1Targets.ClientID%>").addClass('hidden');
+                            $("#<%=divAdmin1GenderTargets.ClientID%>").removeClass('hidden');
+                        }
+                        else {
+                            $("#<%=divAdmin1Targets.ClientID%>").removeClass('hidden');
+                            $("#<%=divAdmin1GenderTargets.ClientID%>").addClass('hidden');
+                        }
+                    }
+                });
+        }
+
         $(document).ready(function () {
             $(".content").hide();
             $(".numeric1").wholenumber();
@@ -300,55 +315,52 @@
                 });
             });
 
+            LoadTargetControls();
+
             $("#<%=pAdmin1Target.ClientID%>").click(function () {
-                    jQuery(this).next(".content").toggle();
-                    if ($(this).text() == "Click To Show Locations") {
-                        $(this).text("Click To Hide Locations");
-                    }
-                    else {
-                        $(this).text("Click To Show Locations");
-                    }
-                });
-
-                $("#<%=pAdmin1GenderTarget.ClientID%>").click(function () {
-                    jQuery(this).next(".content").toggle();
-                    if ($(this).text() == "Click To Show Locations") {
-                        $(this).text("Click To Hide Locations");
-                    }
-                    else {
-                        $(this).text("Click To Show Locations");
-                    }
-                });
-
-                $('#<%=ddlUnit.ClientID%>').change(function () {
-                    var selVal = $("#<%=ddlUnit.ClientID%>").val();
-                if (selVal == 269 || selVal == 28 || selVal == 38
-                    || selVal == 193 || selVal == 219 || selVal == 198
-                     || selVal == 311 || selVal == 287 || selVal == 67 || selVal == 132
-                    || selVal == 252 || selVal == 238) {
-                    $("#<%=divAdmin1Targets.ClientID%>").addClass('hidden');
-                    $("#<%=divAdmin1GenderTargets.ClientID%>").removeClass('hidden');
+                jQuery(this).next(".content").toggle();
+                if ($.trim($(this).text()) === "Click To Show Locations") {
+                    $(this).text("Click To Hide Locations");
                 }
                 else {
-                    $("#<%=divAdmin1Targets.ClientID%>").removeClass('hidden');
-                    $("#<%=divAdmin1GenderTargets.ClientID%>").addClass('hidden');
+                    $(this).text("Click To Show Locations");
                 }
             });
 
-                var selVal2 = $("#<%=ddlUnit.ClientID%>").val();
-                if (selVal2 == 269 || selVal2 == 28 || selVal2 == 38
-                        || selVal2 == 193 || selVal2 == 219 || selVal2 == 198
-                         || selVal2 == 311 || selVal2 == 287 || selVal2 == 67 || selVal2 == 132
-                        || selVal2 == 252 || selVal2 == 238) {
-                    $("#<%=divAdmin1Targets.ClientID%>").addClass('hidden');
-                $("#<%=divAdmin1GenderTargets.ClientID%>").removeClass('hidden');
-            }
-            else {
-                $("#<%=divAdmin1Targets.ClientID%>").removeClass('hidden');
-                $("#<%=divAdmin1GenderTargets.ClientID%>").addClass('hidden');
-            }
-
+            $("#<%=pAdmin1GenderTarget.ClientID%>").click(function () {
+                jQuery(this).next(".content").toggle();
+                if ($.trim($(this).text()) === "Click To Show Locations") {
+                    $(this).text("Click To Hide Locations");
+                }
+                else {
+                    $(this).text("Click To Show Locations");
+                }
             });
+
+            
+
+            $('#<%=ddlUnit.ClientID%>').change(function () {
+                $.ajax({
+                    url: "EditOutputIndicator.aspx/IsGenderDisaggregated",
+                    data: JSON.stringify({
+                        "unitId": $("#<%=ddlUnit.ClientID%>").val()
+                    }),
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        if (data.d) {
+                            $("#<%=divAdmin1Targets.ClientID%>").addClass('hidden');
+                            $("#<%=divAdmin1GenderTargets.ClientID%>").removeClass('hidden');
+                        }
+                        else {
+                            $("#<%=divAdmin1Targets.ClientID%>").removeClass('hidden');
+                            $("#<%=divAdmin1GenderTargets.ClientID%>").addClass('hidden');
+                        }
+                    }
+                });
+            });
+        });
 
     </script>
 </asp:Content>

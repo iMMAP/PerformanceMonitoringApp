@@ -114,7 +114,7 @@ namespace SRFROWCA.ClusterLead
                 int monthId = Convert.ToInt32(ddlMonth.SelectedValue);
                 int? isRegional = RC.IsRegionalClusterLead(this.User) ? 1 : (int?) null;
                 dt = DBContext.GetData("GetOutputIndicatorsForReporting", new object[] {emgLocationId, emgClusterId
-                                                                                        ,(int)RC.YearsInDB.Year2015
+                                                                                        ,(int)RC.Year._2015
                                                                                         ,monthId, isRegional, 
                                                                                         RC.SelectedSiteLanguageId});
             }
@@ -157,7 +157,7 @@ namespace SRFROWCA.ClusterLead
 
             countryId = RC.GetSelectedIntVal(ddlCountry);
             clusterId = RC.GetSelectedIntVal(ddlCluster);
-            int yearId = (int)RC.YearsInDB.Year2015;
+            int yearId = (int)RC.Year._2015; ;
             int monthId = Convert.ToInt32(ddlMonth.SelectedValue);            
 
             foreach (GridViewRow row in gvIndicators.Rows)

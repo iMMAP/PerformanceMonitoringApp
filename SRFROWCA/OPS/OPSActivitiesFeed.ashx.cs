@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Xml.Linq;
 using BusinessLogic;
+using SRFROWCA.Configurations;
+using SRFROWCA.Common;
 
 namespace SRFROWCA.OPS
 {
@@ -86,10 +88,23 @@ namespace SRFROWCA.OPS
             }
             else
             {
-                dt = DBContext.GetData("GetProjectDataForOPSFeed", new object[] { projectId });
+                DataTable dtProjInfo = DBContext.GetData("GetProjCountryAndCluster", new object[] { projectId });
+                string emgLocId = "";
+                string emgClusterId = "";
+                if (dtProjInfo.Rows.Count > 0)
+                {
+                    emgLocId = dtProjInfo.Rows[0]["EmergencyLocationId"].ToString();
+                    emgClusterId = dtProjInfo.Rows[0]["EmergencyClusterId"].ToString();
+                }
+                string key = emgLocId + emgClusterId;
+                AdminTargetSettingItems items = RC.AdminTargetSettings(key);
+
+                int locationTypeId = (items.Category == RC.LocationCategory.Health) ? (int)RC.LocationCategory.Health
+                                                                                        : (int)RC.LocationCategory.Government;
+                dt = DBContext.GetData("GetProjectDataForOPSFeed", new object[] { projectId, locationTypeId });
                 OpsXMLFeed2.GetOPSFeed(dt, doc, projectId);
             }
-            
+
             return doc.ToString();
         }
 

@@ -106,7 +106,7 @@ namespace SRFROWCA.Reports
                 ddlAdmin1.DataValueField = "LocationId";
                 ddlAdmin1.DataTextField = "LocationName";
 
-                ddlAdmin1.DataSource = DBContext.GetData("GetAdmin1OfEmergnecyLocation", new object[] { countryIds });
+                ddlAdmin1.DataSource = DBContext.GetData("GetAdmin1OfEmergnecyLocation", new object[] { countryIds, (int)RC.LocationCategory.Government });
                 ddlAdmin1.DataBind();
                 ddlAdmin1.Items.Insert(0, new ListItem("--- Select Admin1 ---", "0"));
             }

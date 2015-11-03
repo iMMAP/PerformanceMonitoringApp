@@ -1,5 +1,6 @@
 ﻿using BusinessLogic;
 using SRFROWCA.Common;
+using SRFROWCA.Configurations;
 using SRFROWCA.Controls;
 using System;
 using System.Collections.Generic;
@@ -66,8 +67,8 @@ namespace SRFROWCA.ClusterLead
                 int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
                 int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
 
-                FrameWorkSettingsCount frCount = FrameWorkUtil.GetActivityFrameworkSettings(emgLocationId, emgClusterId);
-                if (frCount.IndCount <= 0)
+                int indUnused = SectorFramework.IndUnused(emgLocationId, emgClusterId);
+                if (indUnused <= 0)
                     btnAddIndicatorControl.Visible = false;
                 else
                     btnAddIndicatorControl.Visible = true;
@@ -84,7 +85,7 @@ namespace SRFROWCA.ClusterLead
                     int.TryParse(Session["ClusterFrameworkSelectedCluster"].ToString(), out clusterId);
                     if (clusterId > 0)
                     {
-                        if (clusterId == (int)RC.EmgClsId2016.MS)
+                        if (clusterId == (int)RC.ClusterSAH2015.MS)
                         {
                             lblMSRefugee.Visible = true;
                             cbMSRefugees.Checked = true;
@@ -95,7 +96,7 @@ namespace SRFROWCA.ClusterLead
                     }
                 }
             }
-            else if (UserInfo.EmergencyCluster == (int)RC.EmgClsId2016.MS)
+            else if (UserInfo.EmergencyCluster == (int)RC.ClusterSAH2015.MS)
             {
                 lblMSRefugee.Visible = true;
             }
@@ -146,12 +147,15 @@ namespace SRFROWCA.ClusterLead
             ctl.hfIndicatorId.Value = indicatorId.ToString();
 
             bool isGender = RC.IsGenderUnit(unitId);
-            LoadIndLocations(ctl, indicatorId);
+            LoadIndLocations(ctl, indicatorId, isGender);
 
-            if (!isGender)
-                UpdateRepeaterTargetColumn(ctl.rptCountryGender);
-            else
-                UpdateRepeaterTargetColumn(ctl.rptCountry);
+            //ctl.indControlEmgLocId = RC.GetSelectedIntVal(ddlCountry);
+            //ctl.indCtlEmgClusterId = RC.GetSelectedIntVal(ddlCluster);
+            //ctl.indCtlIndicatorId = indicatorId;
+            //if (!isGender)
+            //    UpdateRepeaterTargetColumn(ctl.rptCountryGender);
+            //else
+            //    UpdateRepeaterTargetColumn(ctl.rptCountry);
         }
 
         private void PopulateActivitiesControls(DataTable dt)
@@ -168,7 +172,7 @@ namespace SRFROWCA.ClusterLead
             int.TryParse(dt.Rows[0]["EmergencyClusterId"].ToString(), out emgClusterId);
             if (emgClusterId > 0)
             {
-                if (emgClusterId == 24)
+                if (emgClusterId == (int)RC.ClusterSAH2015.MS)
                 {
                     cbMSRefugees.Checked = true;
                     int secEmgClusterId = 0;
@@ -185,26 +189,32 @@ namespace SRFROWCA.ClusterLead
                 ddlObjective.SelectedValue = emgObjectiveId.ToString();
         }
 
-        private void LoadIndLocations(FrameworkIndicators ctl, int indicatorId)
+        private void LoadIndLocations(FrameworkIndicators ctl, int indicatorId, bool isGender)
         {
-            int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
-            int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
-            if (cbMSRefugees.Checked || UserInfo.EmergencyCluster == (int)RC.EmgClsId2016.MS)
-            {
-                ctl.ClusterFrameworkLocCatId = (int)RC.LocationCategory.Government;
-            }
-            else
-            {
-                ctl.ClusterFrameworkLocCatId = emgClusterId == (int)RC.EmgClsId2016.HLT ?
-                                                                (int)RC.LocationCategory.Health :
-                                                                (int)RC.LocationCategory.Government;
-            }
+            ctl.indCtlEmgLocId = RC.GetSelectedIntVal(ddlCountry);
+            ctl.indCtlEmgClusterId = RC.GetSelectedIntVal(ddlCluster);
+            ctl.indCtlIndicatorId = indicatorId;
+            ctl.indCtlIsGender = isGender;
+            ctl.hfAdmin2CtlIsGender.Value = isGender.ToString();
 
-            DataTable dtTargets = GetCountryIndTarget(emgLocationId, indicatorId);
-            ctl.rptCountry.DataSource = dtTargets;
-            ctl.rptCountry.DataBind();
-            ctl.rptCountryGender.DataSource = dtTargets;
-            ctl.rptCountryGender.DataBind();
+            //ctl.EmgLocId = RC.GetSelectedIntVal(ddlCountry);
+            //ctl.EmgClusterId = RC.GetSelectedIntVal(ddlCluster);
+            if (cbMSRefugees.Checked || UserInfo.EmergencyCluster == (int)RC.ClusterSAH2015.MS)
+            {
+                ctl.indCtlEmgClusterId = (int)RC.ClusterSAH2015.MS;
+            }
+            //else
+            //{
+            //    ctl.ClusterFrameworkLocCatId = emgClusterId == (int)RC.ClusterSAH2015.HLT ?
+            //                                                    (int)RC.LocationCategory.Health :
+            //                                                    (int)RC.LocationCategory.Government;
+            //}
+
+            //DataTable dtTargets = GetCountryIndTarget(emgLocationId, indicatorId);
+            //ctl.rptCountry.DataSource = dtTargets;
+            //ctl.rptCountry.DataBind();
+            //ctl.rptCountryGender.DataSource = dtTargets;
+            //ctl.rptCountryGender.DataBind();
         }
 
 
@@ -265,7 +275,7 @@ namespace SRFROWCA.ClusterLead
             {
                 ddlCountry.SelectedValue = UserInfo.EmergencyCountry.ToString();
 
-                if (UserInfo.EmergencyCluster != 24)
+                if (UserInfo.EmergencyCluster != (int)RC.ClusterSAH2015.MS)
                     ddlCluster.SelectedValue = UserInfo.EmergencyCluster.ToString();
             }
 
@@ -281,7 +291,7 @@ namespace SRFROWCA.ClusterLead
             if (Session["ClusterFrameworkSelectedCluster"] != null)
                 int.TryParse(Session["ClusterFrameworkSelectedCluster"].ToString(), out clusterId);
 
-            if (!(UserInfo.EmergencyCluster == (int)RC.EmgClsId2016.MS || clusterId == (int)RC.EmgClsId2016.MS))
+            if (!(UserInfo.EmergencyCluster == (int)RC.ClusterSAH2015.MS || clusterId == (int)RC.ClusterSAH2015.MS))
                 RC.EnableDisableControls(ddlCluster, false);
 
             RC.EnableDisableControls(ddlCountry, false);
@@ -289,10 +299,7 @@ namespace SRFROWCA.ClusterLead
 
         private void PopulateClusters()
         {
-            //if (UserInfo.EmergencyCluster == 24)
-            UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015, 24);
-            //else
-            //    UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
+            UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
             if (RC.SelectedSiteLanguageId == 1)
                 ddlCluster.Items.Insert(0, new ListItem("Select Cluster", "0"));
             else
@@ -328,7 +335,7 @@ namespace SRFROWCA.ClusterLead
                 if (ctl != null && ctl.ID != null && ctl.ID.Contains("indicatorControlId"))
                 {
                     FrameworkIndicators indCtl = ctl as FrameworkIndicators;
-                    LoadIndLocations(indCtl, 0);
+                    LoadIndLocations(indCtl, 0, false);
                 }
             }
         }
@@ -364,20 +371,71 @@ namespace SRFROWCA.ClusterLead
 
         private bool IsTargetProvided()
         {
+            string key = ddlCountry.SelectedValue + ddlCluster.SelectedValue;
+            AdminTargetSettingItems items = RC.AdminTargetSettings(key);
+
             bool isTargetValid = true;
 
-            foreach (Control ctl in pnlAdditionalIndicaotrs.Controls)
+            if (items.IsMandatory)
             {
-                if (ctl != null && ctl.ID != null && ctl.ID.Contains("indicatorControlId"))
+                foreach (Control ctl in pnlAdditionalIndicaotrs.Controls)
                 {
-                    FrameworkIndicators indCtl = ctl as FrameworkIndicators;
-                    if (indCtl != null)
+                    if (ctl != null && ctl.ID != null && ctl.ID.Contains("indicatorControlId"))
                     {
-                        int unitId = RC.GetSelectedIntVal(indCtl.ddlUnit);
-                        if (RC.IsGenderUnit(unitId))
-                            isTargetValid = TargetProvided(indCtl.rptCountryGender, true);
-                        else
-                            isTargetValid = TargetProvided(indCtl.rptCountry, false);
+                        FrameworkIndicators indCtl = ctl as FrameworkIndicators;
+                        if (indCtl != null)
+                        {
+                            int unitId = RC.GetSelectedIntVal(indCtl.ddlUnit);
+                            Panel pnlTarget = indCtl.FindControl("pnlTargets") as Panel;
+                            if (pnlTarget != null)
+                            {
+
+                                foreach (Control ctlTareget in pnlTarget.Controls)
+                                {
+                                    if (ctlTareget != null && ctlTareget.ID != null && ctlTareget.ID.Contains("AdminTargetControl"))
+                                    {
+                                        if (items.AdminLevel == RC.LocationTypes.National)
+                                        {
+                                            ctlCountryTargets countryCtl = ctlTareget as ctlCountryTargets;
+                                            if (countryCtl != null)
+                                            {
+                                                if (RC.IsGenderUnit(unitId))
+                                                    isTargetValid = TargetProvidedCountry(countryCtl.rptCountryGender, true);
+                                                else
+                                                    isTargetValid = TargetProvidedCountry(countryCtl.rptCountry, false);
+                                            }
+                                        }
+                                        else if (items.AdminLevel == RC.LocationTypes.Governorate)
+                                        {
+                                            ctlAdmin1Targets adm1Ctl = ctlTareget as ctlAdmin1Targets;
+                                            if (adm1Ctl != null)
+                                            {
+                                                if (RC.IsGenderUnit(unitId))
+                                                    isTargetValid = TargetProvidedAdmin1(adm1Ctl.rptCountryGender, true);
+                                                else
+                                                    isTargetValid = TargetProvidedAdmin1(adm1Ctl.rptCountry, false);
+                                            }
+                                        }
+                                        else if (items.AdminLevel == RC.LocationTypes.District)
+                                        {
+                                            ctlAdmin2Targets adm2Ctl = ctlTareget as ctlAdmin2Targets;
+                                            if (adm2Ctl != null)
+                                            {
+                                                if (RC.IsGenderUnit(unitId))
+                                                    isTargetValid = TargetProvidedAdmin2(adm2Ctl.rptCountryGender, true);
+                                                else
+                                                    isTargetValid = TargetProvidedAdmin2(adm2Ctl.rptCountry, false);
+                                            }
+                                        }
+
+                                        if (!isTargetValid)
+                                            break;
+                                    }
+                                }
+                            }
+                            if (!isTargetValid)
+                                break;
+                        }
                     }
                 }
             }
@@ -386,7 +444,7 @@ namespace SRFROWCA.ClusterLead
         }
 
 
-        private bool TargetProvided(Repeater rpt, bool isGender)
+        private bool TargetProvidedAdmin2(Repeater rpt, bool isGender)
         {
             bool isTargetValid = false;
             foreach (RepeaterItem item in rpt.Items)
@@ -427,6 +485,70 @@ namespace SRFROWCA.ClusterLead
                     }
 
                     if (isTargetValid) break;
+                }
+            }
+
+            return isTargetValid;
+        }
+
+        private bool TargetProvidedAdmin1(Repeater rpt, bool isGender)
+        {
+            bool isTargetValid = false;
+            foreach (RepeaterItem item in rpt.Items)
+            {
+                if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
+                {
+                    Repeater rptAdmin1 = (Repeater)item.FindControl("rptAdmin1");
+                    foreach (RepeaterItem admin1Item in rptAdmin1.Items)
+                    {
+                        if (isGender)
+                        {
+                            TextBox txtTargetMale = admin1Item.FindControl("txtTargetMale") as TextBox;
+                            TextBox txtTargetFemale = admin1Item.FindControl("txtTargetFemale") as TextBox;
+                            if (!string.IsNullOrEmpty(txtTargetMale.Text.Trim()) || !string.IsNullOrEmpty(txtTargetFemale.Text.Trim()))
+                            {
+                                isTargetValid = true;
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            TextBox txtTarget = admin1Item.FindControl("txtTarget") as TextBox;
+                            if (!string.IsNullOrEmpty(txtTarget.Text.Trim()))
+                            {
+                                isTargetValid = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (isTargetValid) break;
+                }
+            }
+
+            return isTargetValid;
+        }
+
+        private bool TargetProvidedCountry(Repeater rpt, bool isGender)
+        {
+            bool isTargetValid = false;
+            foreach (RepeaterItem item in rpt.Items)
+            {
+                if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
+                {
+                    if (isGender)
+                    {
+                        TextBox txtTargetMale = item.FindControl("txtTargetMale") as TextBox;
+                        TextBox txtTargetFemale = item.FindControl("txtTargetFemale") as TextBox;
+                        if (!string.IsNullOrEmpty(txtTargetMale.Text.Trim()) || !string.IsNullOrEmpty(txtTargetFemale.Text.Trim()))
+                            isTargetValid = true;
+                    }
+                    else
+                    {
+                        TextBox txtTarget = item.FindControl("txtTarget") as TextBox;
+                        if (!string.IsNullOrEmpty(txtTarget.Text.Trim()))
+                            isTargetValid = true;
+                    }
                 }
             }
 
@@ -495,9 +617,9 @@ namespace SRFROWCA.ClusterLead
             int emgLocationId = Convert.ToInt32(ddlCountry.SelectedValue);
             int emgClusterId = 0;
             int? emgSecClusterId = null;
-            if (UserInfo.EmergencyCluster == 24 || cbMSRefugees.Checked)
+            if (UserInfo.EmergencyCluster == (int)RC.ClusterSAH2015.MS || cbMSRefugees.Checked)
             {
-                emgClusterId = 24;
+                emgClusterId = (int)RC.ClusterSAH2015.MS;
                 emgSecClusterId = RC.GetSelectedIntVal(ddlCluster);
             }
             else
@@ -548,9 +670,9 @@ namespace SRFROWCA.ClusterLead
 
             int emergencyClusterId = 0;
             int? emgSecClusterId = null;
-            if (UserInfo.EmergencyCluster == 24 || cbMSRefugees.Checked)
+            if (UserInfo.EmergencyCluster == (int)RC.ClusterSAH2015.MS || cbMSRefugees.Checked)
             {
-                emergencyClusterId = 24;
+                emergencyClusterId = (int)RC.ClusterSAH2015.MS;
                 emgSecClusterId = RC.GetSelectedIntVal(ddlCluster);
             }
             else
@@ -561,7 +683,7 @@ namespace SRFROWCA.ClusterLead
             int objId = RC.GetSelectedIntVal(ddlObjective);
             string actEn = !string.IsNullOrEmpty(txtActivityEng.Text.Trim()) ? txtActivityEng.Text.Trim() : null;
             string actFr = !string.IsNullOrEmpty(txtActivityFr.Text.Trim()) ? txtActivityFr.Text.Trim() : null;
-            int yearId = 12;
+            int yearId = (int)RC.Year._2016;
             return DBContext.Add("InsertActivityNew", new object[] { emergencyClusterId, objId,emergencyLocationId, 
                                                                         actEn, actFr, userId, yearId,
                                                                         RC.SelectedSiteLanguageId, emgSecClusterId, DBNull.Value });
@@ -576,7 +698,7 @@ namespace SRFROWCA.ClusterLead
         {
             FrameworkIndicators indCtl = (FrameworkIndicators)LoadControl("~/controls/FrameworkIndicators.ascx");
 
-            LoadIndLocations(indCtl, 0);
+            LoadIndLocations(indCtl, 0, false);
             indCtl.ControlNumber = i + 1;
             indCtl.ID = "indicatorControlId" + i.ToString();
             pnlAdditionalIndicaotrs.Controls.Add(indCtl);
@@ -598,7 +720,7 @@ namespace SRFROWCA.ClusterLead
                 }
             }
 
-            if (UserInfo.EmergencyCluster != 24)
+            if (UserInfo.EmergencyCluster != (int)RC.ClusterSAH2015.MS)
             {
                 if (Session["ClusterFrameworkSelectedCluster"] != null)
                 {
@@ -725,12 +847,22 @@ namespace SRFROWCA.ClusterLead
             return activities;
         }
 
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public static bool IsGenderDisaggregated(string unitId)
+        {
+            int unitIdToSearch = Convert.ToInt32(unitId);
+            return RC.IsGenderUnit(unitIdToSearch);
+        }
+
         protected void Page_Error(object sender, EventArgs e)
         {
             // Get last error from the server
             Exception exc = Server.GetLastError();
             ExceptionUtility.LogException(exc, User);
         }
+
+
 
         //protected void MsRefugeeChange(object sender, EventArgs e)
         //{

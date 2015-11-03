@@ -91,7 +91,7 @@
                                                     </li>
                                                     <li>
                                                         <a href="../Anonymous/ActivitiesFrameworkPublic.aspx">
-                                                            <asp:Localize ID="localMenuFramework2015" runat="server" Text="Cluster Framework 2015" meta:resourcekey="localMenuFramework2015Resource1"></asp:Localize>
+                                                            <asp:Localize ID="localMenuFramework2015" runat="server" Text="Cluster Framework" meta:resourcekey="localMenuFramework2015Resource1"></asp:Localize>
                                                         </a>
                                                     </li>
                                                     <li>

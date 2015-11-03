@@ -31,12 +31,18 @@
                                             class="btn btn-sm btn-yellow" causesvalidation="false" title="Excel">
                                             <i class="icon-download"></i>Excel
                                         </button>
+                                        <button runat="server" id="btnExportToWord" onserverclick="btnExportWord_Click"
+                                            class="btn btn-sm btn-yellow" causesvalidation="false" title="Excel">
+                                            <i class="icon-download"></i>Export To Word
+                                        </button>
 
                                         <asp:Button ID="btnAddActivityAndIndicators" runat="server" Text="Add Activity & Indicators (Framework 2016)"
-                                            CausesValidation="False" CssClass="btn btn-sm btn-yellow pull-right" OnClick="btnAddActivityAndIndicators_Click"
+                                            CausesValidation="False" CssClass="btn btn-sm btn-yellow pull-right" 
+                                            OnClick="btnAddActivityAndIndicators_Click" Enabled="false"
                                             Style="margin-right: 5px;" meta:resourcekey="btnAddActivityAndIndicatorsResource1" />
                                         <asp:Button ID="btnMigrate2016" runat="server" Text="Migrate 2015 Framework To 2016" CausesValidation="False"
-                                            CssClass="btn btn-sm btn-danger pull-right" OnClick="btnMigrate2016_Click" meta:resourcekey="btnMigrate2016Resource1" />
+                                            CssClass="btn btn-sm btn-danger pull-right" OnClick="btnMigrate2016_Click" Enabled="false"
+                                            meta:resourcekey="btnMigrate2016Resource1" />
                                     </h6>
                                 </div>
                                 <div class="widget-body">

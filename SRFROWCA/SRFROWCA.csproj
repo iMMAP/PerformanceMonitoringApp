@@ -25,6 +25,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <TargetFrameworkProfile />
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -142,6 +143,7 @@
     <Content Include="Admin\AddEditCountryMaps.aspx" />
     <Content Include="Admin\CountryMapsListing.aspx" />
     <Content Include="Admin\RequestedOrgListing.aspx" />
+    <Content Include="Admin\TargetSettings.aspx" />
     <Content Include="Admin\UnitsListing.aspx" />
     <Content Include="Anonymous\ActivitiesFrameworkPublic.aspx" />
     <Content Include="Anonymous\OutputIndicatorReport.aspx" />
@@ -259,12 +261,20 @@
     <Content Include="ClusterLead\SahelIndicatorTargets.aspx" />
     <Content Include="ClusterLead\SumOfCountryIndicators.aspx" />
     <Content Include="ClusterLead\UploadAchieved.aspx" />
-    <Content Include="ClusterLead\UploadSRP.aspx" />
+    <Content Include="Anonymous\ExpClusterFramework.aspx" />
     <Content Include="ClusterLead\ValidateIndicators.aspx" />
     <Content Include="ClusterLead\ValidateReportList.aspx" />
+    <Content Include="Configurations\AdminTargetSettings.xml" />
     <Content Include="Configurations\ChangeEndSettings.xml" />
+    <Content Include="Configurations\Settings.xml" />
+    <Content Include="Configurations\Units.xml" />
     <Content Include="Controls\AddContryReportControl.ascx" />
     <Content Include="Controls\ConfirmBox.ascx" />
+    <Content Include="Controls\ctlAdmin1Targets.ascx" />
+    <Content Include="Controls\ctlAdmin2Targets.ascx" />
+    <Content Include="Controls\ctlCountryTargets.ascx" />
+    <Content Include="Controls\ctlOPSAdmin1Targets.ascx" />
+    <Content Include="Controls\ctlOPSAdmin2Targets.ascx" />
     <Content Include="Controls\FrameworkIndicators.ascx" />
     <Content Include="Controls\NewCountryIndicatorsControl.ascx" />
     <Content Include="Controls\NewIndicatorsControl.ascx" />
@@ -316,9 +326,6 @@
     <Content Include="OPSTargets.html" />
     <Content Include="OPS\GridTestOPS.aspx" />
     <Content Include="OPS\IndicatorTargetsByProjectStatus.html" />
-    <Content Include="OPS\OPSDataEntry2.aspx" />
-    <Content Include="OPS\OPSDataEntryNested.aspx" />
-    <Content Include="OPS\OPSDataEntryOld.aspx" />
     <Content Include="OPS\OPSDataEntry.aspx" />
     <Content Include="OPS\OPSDataEntryRpt.aspx" />
     <Content Include="OPS\SyncOPSProjects.aspx" />
@@ -550,6 +557,13 @@
     </Compile>
     <Compile Include="Admin\RequestedOrgListing.aspx.designer.cs">
       <DependentUpon>RequestedOrgListing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\TargetSettings.aspx.cs">
+      <DependentUpon>TargetSettings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\TargetSettings.aspx.designer.cs">
+      <DependentUpon>TargetSettings.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\UnitsListing.aspx.cs">
       <DependentUpon>UnitsListing.aspx</DependentUpon>
@@ -799,12 +813,12 @@
     <Compile Include="ClusterLead\UploadAchieved.aspx.designer.cs">
       <DependentUpon>UploadAchieved.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ClusterLead\UploadSRP.aspx.cs">
-      <DependentUpon>UploadSRP.aspx</DependentUpon>
+    <Compile Include="Anonymous\ExpClusterFramework.aspx.cs">
+      <DependentUpon>ExpClusterFramework.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ClusterLead\UploadSRP.aspx.designer.cs">
-      <DependentUpon>UploadSRP.aspx</DependentUpon>
+    <Compile Include="Anonymous\ExpClusterFramework.aspx.designer.cs">
+      <DependentUpon>ExpClusterFramework.aspx</DependentUpon>
     </Compile>
     <Compile Include="ClusterLead\ValidateIndicators.aspx.cs">
       <DependentUpon>ValidateIndicators.aspx</DependentUpon>
@@ -831,6 +845,7 @@
     <Compile Include="Common\ReportServerCredentials.cs" />
     <Compile Include="Common\UserInfo.cs" />
     <Compile Include="Common\Utils.cs" />
+    <Compile Include="Configurations\AdminTargetSettingItems.cs" />
     <Compile Include="Controls\AddContryReportControl.ascx.cs">
       <DependentUpon>AddContryReportControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -844,6 +859,41 @@
     </Compile>
     <Compile Include="Controls\ConfirmBox.ascx.designer.cs">
       <DependentUpon>ConfirmBox.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ctlAdmin1Targets.ascx.cs">
+      <DependentUpon>ctlAdmin1Targets.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ctlAdmin1Targets.ascx.designer.cs">
+      <DependentUpon>ctlAdmin1Targets.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ctlAdmin2Targets.ascx.cs">
+      <DependentUpon>ctlAdmin2Targets.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ctlAdmin2Targets.ascx.designer.cs">
+      <DependentUpon>ctlAdmin2Targets.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ctlCountryTargets.ascx.cs">
+      <DependentUpon>ctlCountryTargets.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ctlCountryTargets.ascx.designer.cs">
+      <DependentUpon>ctlCountryTargets.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ctlOPSAdmin1Targets.ascx.cs">
+      <DependentUpon>ctlOPSAdmin1Targets.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ctlOPSAdmin1Targets.ascx.designer.cs">
+      <DependentUpon>ctlOPSAdmin1Targets.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ctlOPSAdmin2Targets.ascx.cs">
+      <DependentUpon>ctlOPSAdmin2Targets.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ctlOPSAdmin2Targets.ascx.designer.cs">
+      <DependentUpon>ctlOPSAdmin2Targets.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\FrameworkIndicators.ascx.cs">
       <DependentUpon>FrameworkIndicators.ascx</DependentUpon>
@@ -891,9 +941,6 @@
     </Compile>
     <Compile Include="DataFeeds\Clusters.ashx.cs">
       <DependentUpon>Clusters.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="DataFeeds\ClustersFeed.ashx.cs">
-      <DependentUpon>ClustersFeed.ashx</DependentUpon>
     </Compile>
     <Compile Include="DataFeeds\Country.ashx.cs">
       <DependentUpon>Country.ashx</DependentUpon>
@@ -1170,27 +1217,6 @@
     <Compile Include="OPS\GridTestOPS.aspx.designer.cs">
       <DependentUpon>GridTestOPS.aspx</DependentUpon>
     </Compile>
-    <Compile Include="OPS\OPSDataEntry2.aspx.cs">
-      <DependentUpon>OPSDataEntry2.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="OPS\OPSDataEntry2.aspx.designer.cs">
-      <DependentUpon>OPSDataEntry2.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="OPS\OPSDataEntryNested.aspx.cs">
-      <DependentUpon>OPSDataEntryNested.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="OPS\OPSDataEntryNested.aspx.designer.cs">
-      <DependentUpon>OPSDataEntryNested.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="OPS\OPSDataEntryOld.aspx.cs">
-      <DependentUpon>OPSDataEntryOld.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="OPS\OPSDataEntryOld.aspx.designer.cs">
-      <DependentUpon>OPSDataEntryOld.aspx</DependentUpon>
-    </Compile>
     <Compile Include="OPS\OPSActivitiesFeed.ashx.cs">
       <DependentUpon>OPSActivitiesFeed.ashx</DependentUpon>
     </Compile>
@@ -1431,7 +1457,6 @@
   <ItemGroup>
     <Content Include="DataFeeds\Organizations.ashx" />
     <Content Include="DataFeeds\OrganizationsFeed.ashx" />
-    <Content Include="DataFeeds\ClustersFeed.ashx" />
     <Content Include="DataFeeds\LogFrameDataFeed.ashx" />
     <Content Include="SessionHeartbeat.ashx" />
   </ItemGroup>
@@ -1606,6 +1631,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClusterLead\App_LocalResources\IndicatorListingMigrate.aspx.fr-FR.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ClusterLead\App_LocalResources\EditOutputIndicator__.aspx.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

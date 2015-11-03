@@ -6,13 +6,17 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Text;
+using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Xml.Linq;
 
 namespace SRFROWCA.ClusterLead
 {
     public partial class IndicatorListing : BasePage
     {
+        
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -25,9 +29,8 @@ namespace SRFROWCA.ClusterLead
                 SetDropDownOnRole(true);
                 SetFiltersFromSession();
                 LoadIndicators();
+                ToggleControlsToAddIndicator();
             }
-
-            ToggleControlsToAddIndicator();
         }
 
         private void ToggleControlsToAddIndicator()
@@ -36,24 +39,27 @@ namespace SRFROWCA.ClusterLead
             {
                 int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
                 int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
-
-                FrameWorkSettingsCount frCount = FrameWorkUtil.GetActivityFrameworkSettings(emgLocationId, emgClusterId);
-                if (frCount.IndCount <= 0 || (frCount.ActCount <= 0 || frCount.DateExcedded))
+                if (emgLocationId > 0 && emgClusterId > 0)
+                {
+                    int indUnused = SectorFramework.IndUnused(emgLocationId, emgClusterId);
+                    int actUnused = SectorFramework.ActivityUnused(emgLocationId, emgClusterId);
+                    bool IsDateExceeded = SectorFramework.DateExceeded(emgLocationId, emgClusterId);
+                    if (indUnused <= 0 || (actUnused <= 0 || IsDateExceeded))
+                    {
+                        btnAddActivityAndIndicators.Enabled = false;
+                        btnMigrate2016.Enabled = false;
+                    }
+                    else
+                    {
+                        btnAddActivityAndIndicators.Enabled = true;
+                        btnMigrate2016.Enabled = true;
+                    }
+                }
+                else
                 {
                     btnAddActivityAndIndicators.Enabled = false;
                     btnMigrate2016.Enabled = false;
                 }
-                else
-                {
-                    btnAddActivityAndIndicators.Enabled = true;
-                    btnMigrate2016.Enabled = true;
-                }
-            }
-
-            if (RC.IsRegionalClusterLead(this.User))
-            {
-                btnAddActivityAndIndicators.Enabled = false;
-                btnMigrate2016.Enabled = false;
             }
         }
 
@@ -147,32 +153,34 @@ namespace SRFROWCA.ClusterLead
                         int.TryParse(lblClusterId.Text, out emgClusterId);
                     }
 
-                    FrameWorkSettingsCount frCount = FrameWorkUtil.GetActivityFrameworkSettings(emgLocationId, emgClusterId);
+                    //FrameWorkSettingsCount frCount = FrameWorkUtil.GetActivityFrameworkSettings(emgLocationId, emgClusterId);
                     if (btnDelete != null)
                     {
                         btnDelete.Attributes.Add("onclick", "javascript:return " +
                         "confirm('Are you sure you want to delete this Indicator?')");
 
-                        if (frCount.DateExcedded)
-                        {
-                            if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) || RC.IsRegionalClusterLead(this.User))
-                            {
-                                btnDelete.Visible = false;
-                            }
-                        }
+                        //if (frCount.DateExcedded)
+                        //{
+                        //    if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) || RC.IsRegionalClusterLead(this.User))
+                        //    {
+                        //        btnDelete.Visible = false;
+                        //    }
+                        //}
                     }
 
                     CheckBox cbActivity = e.Row.FindControl("cbIsActivityActive") as CheckBox;
                     if (btnEdit != null)
                     {
-                        if (frCount.DateExcedded)
-                        {
-                            if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) || RC.IsRegionalClusterLead(this.User))
-                            {
-                                btnEdit.Visible = false;
-                            }
-                        }
-                        else if (!cbActivity.Checked || frCount.IndCount == 0)
+                        //if (frCount.DateExcedded)
+                        //{
+                        //    if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) || RC.IsRegionalClusterLead(this.User))
+                        //    {
+                        //        btnEdit.Visible = false;
+                        //    }
+                        //}
+                        //else 
+                        if (!cbActivity.Checked)
+                        // || frCount.IndCount == 0)
                         {
                             if (!cbActivity.Checked)
                             {
@@ -224,17 +232,9 @@ namespace SRFROWCA.ClusterLead
                         ShowMessage("Indicator can not be deleted. It is being used!", RC.NotificationType.Error, true, 2000);
                     }
                 }
-                // This is to delete activity
-                //else if (activityId > 0)
-                //{
-                //    DeleteActivity(activityId);
-                //    ShowMessage("Activity Deleted Successfully!");
-                //}
-
                 LoadIndicators();
                 ToggleControlsToAddIndicator();
             }
-
 
             // Edit Project.
             if (e.CommandName == "EditActivity")
@@ -264,14 +264,21 @@ namespace SRFROWCA.ClusterLead
             }
 
             ddlObjective.SelectedValue = "0";
+            ddlFrameworkYear.SelectedIndex = 0;
             txtActivityName.Text = "";
             LoadIndicators();
+            ToggleControlsToAddIndicator();
         }
 
         protected void btnExportExcel_Click(object sender, EventArgs e)
         {
             ModalPopupExtender2.Show();
         }
+
+        protected void btnExportWord_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../Anonymous/ExpClusterFramework.aspx");
+        }        
 
         protected void btnExportExcelOK_Click(object sender, EventArgs e)
         {
@@ -536,14 +543,14 @@ namespace SRFROWCA.ClusterLead
                 dt.Columns.Remove("EmergencyClusterId");
                 dt.Columns.Remove("EmergencyLocationId");
                 dt.Columns.Remove("LocationId");
-                dt.Columns.Remove("ObjectiveId");                
+                dt.Columns.Remove("ObjectiveId");
                 dt.Columns.Remove("IsActivityActive");
                 dt.Columns.Remove("IsActive");
                 try
                 {
                     if ((RC.GetSelectedIntVal(ddlFrameworkYear)) == 11)
                     {
-                        
+
                         dt.Columns.Remove("TargetMale");
                         dt.Columns.Remove("TargetFemale");
                     }
@@ -555,7 +562,7 @@ namespace SRFROWCA.ClusterLead
                 {
                     dt.Columns.Remove("IndicatorCalculationTypeId");
                     dt.Columns.Remove("IsActiveIndicator");
-                    
+
                 }
                 catch { }
             }
@@ -737,19 +744,19 @@ namespace SRFROWCA.ClusterLead
 
         private void ToggleIndicatorStatus()
         {
-            int yearId = (int)RC.YearsInDB.Year2015;
+            int yearId = (int)RC.Year._2015;
             DBContext.Update("UpdateIndicatorAndProjectsActiveStatus", new object[] { ToggleIndicatorId, IndicatorActiveStatus, yearId, DBNull.Value });
         }
 
         private void ToggleActivityStatus()
         {
-            int yearId = (int)RC.YearsInDB.Year2015;
+            int yearId = (int)RC.Year._2015;
             DBContext.Update("UpdateActivityAndProjectsActiveStatus", new object[] { ToggleActivityId, ActivityActiveStatus, yearId, DBNull.Value });
         }
 
         private List<string> GetProjectsUsingIndicator()
         {
-            DataTable dt = DBContext.GetData("GetAllProjectsUsingIndicator", new object[] { ToggleIndicatorId, (int)RC.YearsInDB.Year2015 });
+            DataTable dt = DBContext.GetData("GetAllProjectsUsingIndicator", new object[] { ToggleIndicatorId, (int)RC.Year._2015 });
             StringBuilder sbProjCodes = new StringBuilder();
             StringBuilder sbProjIds = new StringBuilder();
             foreach (DataRow dr in dt.Rows)
@@ -767,7 +774,7 @@ namespace SRFROWCA.ClusterLead
 
         private List<string> GetProjectsOnActivity(int toggleActivityId)
         {
-            DataTable dt = DBContext.GetData("GetAllProjectsUsingIndicatorActivity", new object[] { toggleActivityId, (int)RC.YearsInDB.Year2015 });
+            DataTable dt = DBContext.GetData("GetAllProjectsUsingIndicatorActivity", new object[] { toggleActivityId, (int)RC.Year._2015 });
             StringBuilder sbProjCodes = new StringBuilder();
             StringBuilder sbProjIds = new StringBuilder();
             foreach (DataRow dr in dt.Rows)
@@ -788,6 +795,7 @@ namespace SRFROWCA.ClusterLead
             PopulateActivities();
             LoadIndicators();
             SaveFiltersInSession();
+            ToggleControlsToAddIndicator();
         }
 
         protected void ddlActivitySelectedIndexChnaged(object sender, EventArgs e)

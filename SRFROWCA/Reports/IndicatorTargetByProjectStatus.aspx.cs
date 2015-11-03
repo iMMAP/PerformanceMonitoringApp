@@ -1,13 +1,18 @@
-﻿using BusinessLogic;
+﻿using AjaxControlToolkit;
+using BusinessLogic;
 using SRFROWCA.Common;
 using System;
 using System.Data;
 using System.Drawing;
+using System.Text;
+using System.Web.Script.Services;
+using System.Web.Services;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace SRFROWCA.Reports
 {
-    public partial class IndicatorTargetByProjectStatus : BasePage
+    public partial class IndicatorTargetByProjectStatus : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -19,8 +24,6 @@ namespace SRFROWCA.Reports
             }
         }
 
-        
-
         #region Events
 
         protected void gvActivities_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -30,9 +33,17 @@ namespace SRFROWCA.Reports
                 UI.SetThousandSeparator(e.Row, "lblClusterTotal");
                 UI.SetThousandSeparator(e.Row, "lblDraftTotal");
                 UI.SetThousandSeparator(e.Row, "lblApprovedTotal");
-                UI.SetThousandSeparator(e.Row, "lblCapTotal");
+
                 PopulateAdminGrid(e.Row, "hfCountryId", "gvAdmin1", "GetOPSAdmin1TargetOfIndicatorForOpsClusCooReport");
-                ObjPrToolTip.ObjectiveIconToolTip(e, 2);
+                ObjPrToolTip.ObjectiveIconToolTip(e, 0);
+
+                HtmlGenericControl span = e.Row.FindControl("spanProject") as HtmlGenericControl;
+                if (span != null)
+                {
+                    int indicatorId = Convert.ToInt32(gvActivities.DataKeys[e.Row.RowIndex].Value.ToString());
+                    string s = GetIndProjects(indicatorId);
+                    span.Attributes["data-content"] = s;
+                }
             }
         }
 
@@ -43,7 +54,7 @@ namespace SRFROWCA.Reports
                 UI.SetThousandSeparator(e.Row, "lblAdm1ClusterTotal");
                 UI.SetThousandSeparator(e.Row, "lblAdm1DraftTotal");
                 UI.SetThousandSeparator(e.Row, "lblAdm1ApprovedTotal");
-                UI.SetThousandSeparator(e.Row, "lblAdm1CapTotal");
+                
                 PopulateAdminGrid(e.Row, "hfAdmin1Id", "gvAdmin2", "GetOPSAdmin2TargetOfIndicatorForOpsClusCooReport");
             }
         }
@@ -55,7 +66,7 @@ namespace SRFROWCA.Reports
                 UI.SetThousandSeparator(e.Row, "lblAdm2ClusterTotal");
                 UI.SetThousandSeparator(e.Row, "lblAdm2DraftTotal");
                 UI.SetThousandSeparator(e.Row, "lblAdm2ApprovedTotal");
-                UI.SetThousandSeparator(e.Row, "lblAdm2CapTotal");
+                
             }
         }
 
@@ -68,10 +79,10 @@ namespace SRFROWCA.Reports
 
         #region Methods
 
-        internal override void BindGridData()
-        {
-            PopulateIndicators();
-        }
+        //internal override void BindGridData()
+        //{
+        //    PopulateIndicators();
+        //}
 
         private void PopulateDropDowns()
         {
@@ -125,8 +136,14 @@ namespace SRFROWCA.Reports
             val = RC.GetSelectedIntVal(ddlCluster);
             int? emgClusterId = val > 0 ? val : (int?)null;
             int langId = RC.SelectedSiteLanguageId;
-            int yearId = 12;
-            return DBContext.GetData("GetAllIndicatorsForOPSTargetReport", new object[] { emgLocId, emgClusterId, langId, yearId });
+            DataTable dt = new DataTable();
+            if (emgLocId > 0 && emgClusterId > 0)
+            {
+                dt = DBContext.GetData("GetAllIndicatorsForOPSTargetReport", new object[] { emgLocId, emgClusterId, 
+                                                                                                langId, RC.Year._2016 });
+            }
+
+            return dt;
         }
 
         private void PopulateAdminGrid(GridViewRow row, string hfLocName, string gvName, string procName)
@@ -159,6 +176,33 @@ namespace SRFROWCA.Reports
                     }
                 }
             }
+        }
+
+        private string GetIndProjects(int indId)
+        {
+            DataTable dt = DBContext.GetData("GetProjectsUsingInd", new object[] { indId });
+
+            StringBuilder b = new StringBuilder();
+            b.Append("<table class='imagetable'>");
+
+            b.Append("<tr><th>Project Code</th>");
+            b.Append("<th>Organization</th>");
+            b.Append("<th>Draft Total</th>");
+            b.Append("<th>Approved Total</th>");
+
+            foreach(DataRow row in dt.Rows)
+            {
+                b.Append("<tr>");
+                b.Append("<td>" + row["ProjectCode"].ToString() + "</td>");
+                b.Append("<td width=200px>" + row["OrgName"].ToString() + "</td>");
+                b.Append("<td>" + row["DraftProject"].ToString() + "</td>");
+                b.Append("<td>" + row["ApprovedProject"].ToString() + "</td>");
+                b.Append("</tr>");                
+            }
+
+            b.Append("</table>");
+
+            return b.ToString(); 
         }
 
         #endregion
