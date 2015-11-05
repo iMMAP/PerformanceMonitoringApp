@@ -153,34 +153,36 @@ namespace SRFROWCA.ClusterLead
                         int.TryParse(lblClusterId.Text, out emgClusterId);
                     }
 
-                    //FrameWorkSettingsCount frCount = FrameWorkUtil.GetActivityFrameworkSettings(emgLocationId, emgClusterId);
+                    int indUnused = SectorFramework.IndUnused(emgLocationId, emgClusterId);
+                    int actUnused = SectorFramework.ActivityUnused(emgLocationId, emgClusterId);
+                    bool IsDateExceeded = SectorFramework.DateExceeded(emgLocationId, emgClusterId);
+                    
                     if (btnDelete != null)
                     {
                         btnDelete.Attributes.Add("onclick", "javascript:return " +
                         "confirm('Are you sure you want to delete this Indicator?')");
 
-                        //if (frCount.DateExcedded)
-                        //{
-                        //    if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) || RC.IsRegionalClusterLead(this.User))
-                        //    {
-                        //        btnDelete.Visible = false;
-                        //    }
-                        //}
+                        if (IsDateExceeded)
+                        {
+                            if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) || RC.IsRegionalClusterLead(this.User))
+                            {
+                                btnDelete.Visible = false;
+                            }
+                        }
                     }
 
                     CheckBox cbActivity = e.Row.FindControl("cbIsActivityActive") as CheckBox;
                     if (btnEdit != null)
                     {
-                        //if (frCount.DateExcedded)
-                        //{
-                        //    if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) || RC.IsRegionalClusterLead(this.User))
-                        //    {
-                        //        btnEdit.Visible = false;
-                        //    }
-                        //}
-                        //else 
-                        if (!cbActivity.Checked)
-                        // || frCount.IndCount == 0)
+                        if (IsDateExceeded)
+                        {
+                            if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) || RC.IsRegionalClusterLead(this.User))
+                            {
+                                btnEdit.Visible = false;
+                            }
+                        }
+                        else 
+                        if (!cbActivity.Checked || indUnused <= 0)
                         {
                             if (!cbActivity.Checked)
                             {

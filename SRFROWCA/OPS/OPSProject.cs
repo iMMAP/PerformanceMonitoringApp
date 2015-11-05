@@ -67,7 +67,7 @@ namespace SRFROWCA.OPS
         public string OtherFields { get; set; }
         public string EGFLocations { get; set; }
         //public string SecondaryClusterId { get; set; }
-        //public string SecondaryClusterName { get; set; }
+        public string Refugee { get; set; }
         public OPSDescription OPSDescriptions { get; set; }
         public OPSProjectOrganizations Organizations { get; set; }
     }

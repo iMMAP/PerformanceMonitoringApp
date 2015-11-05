@@ -61,7 +61,7 @@ namespace SRFROWCA.DataFeeds
             int? countryId = val > 0 ? val : (int?)null;
 
             val = 0;
-            if (context.Request["cluster"] != null)
+            if (!string.IsNullOrEmpty(context.Request["cluster"]))
             {
                 int.TryParse(context.Request["cluster"].ToString(), out val);
             }

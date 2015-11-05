@@ -278,7 +278,7 @@
                         CssClass="width-10 btn btn-sm btn-primary" CausesValidation="False" meta:resourcekey="Button3Resource1" />
                 </div>
                 <div class="col-xs-4 col-sm-4">
-                    <asp:Label ID="lblMSRefugee" runat="server" Text="MS for Refugees Cluster Framework"
+                    <asp:Label ID="lblMSRefugee" runat="server" Text="MS for Refugees Sector Framework"
                         CssClass="label-warning label-lg" Visible="false"></asp:Label>
                     <asp:CheckBox ID="cbMSRefugees" runat="server" Text="Yes" Visible="false" />
                 </div>

@@ -109,13 +109,14 @@ namespace SRFROWCA.ClusterLead
             val = RC.GetSelectedIntVal(ddlCluster);
             int? emgClusterId = val > 0 ? val : (int?)null;
 
+            int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
+
             if (emgLocationId > 0 && emgClusterId > 0)
             {
                 int monthId = Convert.ToInt32(ddlMonth.SelectedValue);
                 int? isRegional = RC.IsRegionalClusterLead(this.User) ? 1 : (int?) null;
                 dt = DBContext.GetData("GetOutputIndicatorsForReporting", new object[] {emgLocationId, emgClusterId
-                                                                                        ,(int)RC.Year._2015
-                                                                                        ,monthId, isRegional, 
+                                                                                        ,yearId,monthId, isRegional, 
                                                                                         RC.SelectedSiteLanguageId});
             }
 
@@ -253,6 +254,11 @@ namespace SRFROWCA.ClusterLead
             LoadClusterIndicators();
             SaveFiltersInSession();
         }
+
+        protected void ddlYear_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadClusterIndicators();
+        }       
 
         protected void gvIndicators_RowDataBound(object sender, GridViewRowEventArgs e)
         {

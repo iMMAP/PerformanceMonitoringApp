@@ -406,6 +406,8 @@
     <Content Include="DataFeeds\FTSFundingFeed.ashx" />
     <Content Include="assets\font\FontAwesome.otf" />
     <Content Include="GV\README.md" />
+    <Content Include="DataFeeds\IndicatorsClusterProjectsTargets.ashx" />
+    <Content Include="DataFeeds\ProjectReqWithOrgStretch.ashx" />
     <None Include="HelpFiles\HelpDocs\HelpEng\1_ORS_description_EN_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpEng\2_ORS_Resgistration_EN_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpEng\3_ORS_Role_EN_v3.pdf" />
@@ -836,6 +838,7 @@
     </Compile>
     <Compile Include="Common\DataTableToCSV.cs" />
     <Compile Include="Common\EmailNotifications.cs" />
+    <Compile Include="Common\Extentions.cs" />
     <Compile Include="Common\FrameWorkEnvoirnment.cs" />
     <Compile Include="Common\FU.cs" />
     <Compile Include="Common\GeneratePDF.cs" />
@@ -955,6 +958,9 @@
     <Compile Include="DataFeeds\Indicators.ashx.cs">
       <DependentUpon>Indicators.ashx</DependentUpon>
     </Compile>
+    <Compile Include="DataFeeds\IndicatorsClusterProjectsTargets.ashx.cs">
+      <DependentUpon>IndicatorsClusterProjectsTargets.ashx</DependentUpon>
+    </Compile>
     <Compile Include="DataFeeds\IndicatorsWithClusterProjectTargets.ashx.cs">
       <DependentUpon>IndicatorsWithClusterProjectTargets.ashx</DependentUpon>
     </Compile>
@@ -975,6 +981,9 @@
     </Compile>
     <Compile Include="DataFeeds\ORS3W.ashx.cs">
       <DependentUpon>ORS3W.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="DataFeeds\ProjectReqWithOrgStretch.ashx.cs">
+      <DependentUpon>ProjectReqWithOrgStretch.ashx</DependentUpon>
     </Compile>
     <Compile Include="DataFeeds\Projects.ashx.cs">
       <DependentUpon>Projects.ashx</DependentUpon>

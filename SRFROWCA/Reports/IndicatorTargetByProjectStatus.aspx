@@ -294,7 +294,7 @@
                     <asp:TemplateField ItemStyle-Width="40" HeaderStyle-Width="40" ItemStyle-HorizontalAlign="Right">
                         <ItemTemplate>
                             <span id="spanProject" runat="server" class="orshelpicon" data-rel="popover" data-placement="top"
-                                data-original-title="Indicator Projects" data-content="">View</span>
+                                data-original-title="Projects using this indicator" data-content="">View</span>
                         </ItemTemplate>
 
                     </asp:TemplateField>

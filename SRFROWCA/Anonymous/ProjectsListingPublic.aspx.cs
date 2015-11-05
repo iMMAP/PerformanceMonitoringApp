@@ -121,7 +121,7 @@ namespace SRFROWCA.Anonymous
 
         private void ExportToPDF(int? projectId)
         {
-            int year = 2015;
+            int yearId = 11;
             int tempVal = 0;
             if (ddlClusters.Visible)
             {
@@ -186,7 +186,7 @@ namespace SRFROWCA.Anonymous
 
             string projectStatus = isOPS == 0 ? null : "Published by CAP"; //ddlStatus.SelectedValue == "0" ? null : ddlStatus.SelectedValue;
             DataTable dtProjects = DBContext.GetData("GetProjectsWithFullDetails", new object[] {@emgLocationId, @emgClusterId, projCode, orgId,
-                                                                                                RC.SelectedSiteLanguageId, year, projectId, 
+                                                                                                RC.SelectedSiteLanguageId, yearId, projectId, 
                                                                                                 projectStatus, secClusterId, isOPS, isFunded});
 
             if (dtProjects.Rows.Count > 0)
@@ -195,7 +195,7 @@ namespace SRFROWCA.Anonymous
 
                 Response.ContentType = "application/pdf";
                 Response.AddHeader("Content-Disposition", string.Format("attachment;filename=Project-{0}.pdf", fileName));
-                Response.BinaryWrite(WriteDataEntryPDF.GenerateProjectsListingPDF(dtProjects, false).ToArray());
+                Response.BinaryWrite(WriteDataEntryPDF.GenerateProjectsListingPDF(dtProjects, false, yearId).ToArray());
             }
             else
             {
@@ -314,7 +314,7 @@ namespace SRFROWCA.Anonymous
                     orgId = (int?)null;
             }
 
-            int year = 2015;
+            int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
             
             int? isOPS = null;
             if (cbIsOPS.Checked && cbIsORS.Checked)
@@ -347,7 +347,7 @@ namespace SRFROWCA.Anonymous
             string projectStatus = isOPS == 0 ? null : "Published by CAP"; //ddlStatus.SelectedValue == "0" ? null : ddlStatus.SelectedValue;
 
             return DBContext.GetData("GetProjectsListing", new object[] {emgLocationId, emgClusterId, projCode, orgId, 
-                                                                            RC.SelectedSiteLanguageId,  year, projectStatus, 
+                                                                            RC.SelectedSiteLanguageId,  yearId, projectStatus, 
                                                                             secClusterId, isOPS, isFunded});
         }
 

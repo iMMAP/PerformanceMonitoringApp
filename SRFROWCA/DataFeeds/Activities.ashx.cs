@@ -48,21 +48,21 @@ namespace SRFROWCA.DataFeeds
             }
 
             string cluster = null;
-            if (context.Request["cluster"] != null)
+            if (!string.IsNullOrEmpty(context.Request["cluster"]))
             {
                 cluster = context.Request["cluster"].ToString();
             }
 
             string obj = null;
-            if (context.Request["obj"] != null)
+            if (!string.IsNullOrEmpty(context.Request["obj"] ))
             {
-                obj = context.Request["obj"].ToString();
+                obj = context.Request["obj"].ToString().NullIfEmpty(); 
             }
 
             string act = null;
-            if (context.Request["act"] != null)
+            if (!string.IsNullOrEmpty(context.Request["act"] ))
             {
-                act = context.Request["act"].ToString();
+                act = context.Request["act"].ToString().NullIfEmpty();
             }
 
             int? yearId = (int)RC.Year._2016;

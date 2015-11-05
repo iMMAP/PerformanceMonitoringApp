@@ -112,6 +112,15 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.CheckBox cbIncludeRegional;
         
         /// <summary>
+        /// ddlFrameworkYear control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlFrameworkYear;
+        
+        /// <summary>
         /// gvClusterReports control.
         /// </summary>
         /// <remarks>

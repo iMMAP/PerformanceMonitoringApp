@@ -27,30 +27,14 @@ namespace SRFROWCA.OPS
             if (items.IsTarget)
             {
                 UserControl ctl = null;
-                if (items.AdminLevel == RC.LocationTypes.National)
-                {
-                    //ctl = (ctlCountryTargets)LoadControl("~/controls/ctlCountryTargets.ascx");
-                    //((ctlCountryTargets)ctl).EmgLocId = this.indCtlEmgLocId;
-                    //((ctlCountryTargets)ctl).IndicatorId = this.indCtlIndicatorId;
-                    //((ctlCountryTargets)ctl).IsGender = this.indCtlIsGender;
-                    //((ctlCountryTargets)ctl).ID = "AdminTargetControl";
-                }
-                else if (items.AdminLevel == RC.LocationTypes.Governorate)
+                if (items.AdminLevel == RC.LocationTypes.Governorate)
                 {
                     ctl = (ctlOPSAdmin1Targets)LoadControl("~/controls/ctlOPSAdmin1Targets.ascx");
-                    //((ctlAdmin1Targets)ctl).EmgLocId = this.indCtlEmgLocId;
-                    //((ctlAdmin1Targets)ctl).IndicatorId = this.indCtlIndicatorId;
-                    //((ctlAdmin1Targets)ctl).Category = items.Category;
-                    //((ctlAdmin1Targets)ctl).IsGender = this.indCtlIsGender;
                     ((ctlOPSAdmin1Targets)ctl).ID = "OPSTargetControl";
                 }
                 else if (items.AdminLevel == RC.LocationTypes.District)
                 {
                     ctl = (ctlOPSAdmin2Targets)LoadControl("~/controls/ctlOPSAdmin2Targets.ascx");
-                    //((ctlAdmin2Targets)ctl).EmgLocId = this.indCtlEmgLocId;
-                    //((ctlAdmin2Targets)ctl).IndicatorId = this.indCtlIndicatorId;
-                    //((ctlAdmin2Targets)ctl).Category = items.Category;
-                    //((ctlAdmin2Targets)ctl).IsGender = this.indCtlIsGender;
                     ((ctlOPSAdmin2Targets)ctl).ID = "OPSTargetControl";
                 }
 

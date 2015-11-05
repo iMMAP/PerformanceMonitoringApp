@@ -54,7 +54,7 @@ namespace SRFROWCA.Reports
                 UI.SetThousandSeparator(e.Row, "lblAdm1ClusterTotal");
                 UI.SetThousandSeparator(e.Row, "lblAdm1DraftTotal");
                 UI.SetThousandSeparator(e.Row, "lblAdm1ApprovedTotal");
-                
+
                 PopulateAdminGrid(e.Row, "hfAdmin1Id", "gvAdmin2", "GetOPSAdmin2TargetOfIndicatorForOpsClusCooReport");
             }
         }
@@ -66,7 +66,7 @@ namespace SRFROWCA.Reports
                 UI.SetThousandSeparator(e.Row, "lblAdm2ClusterTotal");
                 UI.SetThousandSeparator(e.Row, "lblAdm2DraftTotal");
                 UI.SetThousandSeparator(e.Row, "lblAdm2ApprovedTotal");
-                
+
             }
         }
 
@@ -185,24 +185,24 @@ namespace SRFROWCA.Reports
             StringBuilder b = new StringBuilder();
             b.Append("<table class='imagetable'>");
 
-            b.Append("<tr><th>Project Code</th>");
-            b.Append("<th>Organization</th>");
+            b.Append("<tr><th width=200px>Project Code</th>");
+            b.Append("<th width=200px>Organization</th>");
             b.Append("<th>Draft Total</th>");
             b.Append("<th>Approved Total</th>");
 
-            foreach(DataRow row in dt.Rows)
+            foreach (DataRow row in dt.Rows)
             {
                 b.Append("<tr>");
                 b.Append("<td>" + row["ProjectCode"].ToString() + "</td>");
-                b.Append("<td width=200px>" + row["OrgName"].ToString() + "</td>");
+                b.Append("<td>" + row["OrgName"].ToString() + "</td>");
                 b.Append("<td>" + row["DraftProject"].ToString() + "</td>");
                 b.Append("<td>" + row["ApprovedProject"].ToString() + "</td>");
-                b.Append("</tr>");                
+                b.Append("</tr>");
             }
 
             b.Append("</table>");
 
-            return b.ToString(); 
+            return b.ToString();
         }
 
         #endregion

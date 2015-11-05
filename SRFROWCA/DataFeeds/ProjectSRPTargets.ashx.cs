@@ -121,13 +121,13 @@ namespace SRFROWCA.DataFeeds
             int? indId = val > 0 ? val : (int?)null;
 
             string status = null;
-            if (context.Request["status"] != null)
+            if (!string.IsNullOrEmpty(context.Request["status"]))
             {
                 status = context.Request["status"].ToString();
             }
 
             string targetLoc = null;
-            if (context.Request["tloc"] != null)
+            if (!string.IsNullOrEmpty(context.Request["tloc"] ))
             {
                 targetLoc = context.Request["tloc"].ToString();
             }

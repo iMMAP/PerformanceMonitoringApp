@@ -87,8 +87,10 @@ namespace SRFROWCA.ClusterLead
                 pageIndex = gvClusterReports.PageIndex;
             }
 
+            int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
+
             return DBContext.GetData("GetOutputIndicatorReports", new object[] { indicator, countryId, clusterId, 
-                                                                             RC.SelectedSiteLanguageId, monthIDs, 
+                                                                             RC.SelectedSiteLanguageId, yearId, monthIDs, 
                                                                              isRegional, pageSize, pageIndex });
         }
 
@@ -157,6 +159,12 @@ namespace SRFROWCA.ClusterLead
         }
 
         protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gvClusterReports.PageIndex = 0;
+            LoadClusterReports();
+        }
+
+        protected void ddlYear_SelectedIndexChanged(object sender, EventArgs e)
         {
             gvClusterReports.PageIndex = 0;
             LoadClusterReports();

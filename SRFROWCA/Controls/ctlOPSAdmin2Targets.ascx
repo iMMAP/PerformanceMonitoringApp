@@ -116,7 +116,7 @@
 
 <div class="widget-header widget-header-small header-color-blue2">
     <asp:Localize ID="locClusterCaption" runat="server"
-        Text="Cluster:" meta:resourcekey="locClusterCaptionResource1"></asp:Localize>
+        Text="Sector:" meta:resourcekey="locClusterCaptionResource1"></asp:Localize>
     <asp:Label ID="lblCluster" runat="server" meta:resourcekey="lblClusterResource1"></asp:Label>
     <div class="pull-right">
         <asp:LinkButton ID="lnkLanguageEnglish" Text="English" runat="server" OnClientClick="needToConfirm=true;" CssClass="langlinks"
@@ -200,13 +200,13 @@
                     <asp:TemplateField HeaderStyle-Width="600" ItemStyle-Width="600">
                         <ItemTemplate>
                             <asp:Label ID="lblNoTarget" runat="server" CssClass="lblnotarget" Visible="false"
-                                Text="No Target Provided For This Inidcator, Consult Cluster Coordinator"></asp:Label>
+                                Text="No Target Provided For This Inidcator, Consult Secotr Coordinator"></asp:Label>
                             <asp:Repeater ID="rptCountryGender" runat="server" OnItemDataBound="rptCountryGender_ItemDataBound">
                                 <ItemTemplate>
                                     <table style="width: 600px;" class="imagetable imagetable2 tblCountryGender">
                                         <tr>
                                             <th colspan="2" style="width: 125px;" class="lightgraycolor"></th>
-                                            <th class="tdHeader" style="width: 210px;" colspan="3">Cluster Targets</th>
+                                            <th class="tdHeader" style="width: 210px;" colspan="3">Sector Targets</th>
                                             <th class="tdHeader" style="width: 210px" colspan="3">Project Targets</th>
                                         </tr>
                                         <tr>

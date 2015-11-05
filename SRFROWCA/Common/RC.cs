@@ -504,6 +504,12 @@ namespace SRFROWCA.Common
                 }
         }
 
+        internal static string StringToThousandSeperator(string val)
+        {
+            string siteCulture = RC.SelectedSiteLanguageId.Equals(1) ? "en-US" : "de-DE";
+            return String.Format(new CultureInfo(siteCulture), "{0:0,0}", Convert.ToInt32(val));
+        }
+
         internal static void AddSelectItemInList(ListControl ctl, string text)
         {
             ListItem item = new ListItem(text, "0");

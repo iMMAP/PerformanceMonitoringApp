@@ -72,6 +72,10 @@
                                                         <td>
                                                             <asp:DropDownList ID="ddlMonth" AutoPostBack="true" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged" runat="server">
                                                             </asp:DropDownList>
+                                                            <asp:DropDownList ID="ddlFrameworkYear" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlYear_SelectedIndexChanged" CssClass="hidden">
+                                                                <asp:ListItem Text="2015" Value="11" Selected="True"></asp:ListItem>
+                                                                <asp:ListItem Text="2016" Value="12"></asp:ListItem>
+                                                            </asp:DropDownList>
                                                         </td>
                                                         <td></td>
                                                         <td class="pull-right">
@@ -127,20 +131,20 @@
                                     <asp:Label ID="lblTarget" runat="server" Text=' <%# Eval("Target")%>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField ItemStyle-Width="8%" 
-                                    ItemStyle-BackColor="LightYellow"
-                                    ItemStyle-HorizontalAlign="Right" 
-                                    HeaderText="Monthly Achieved">
+                            <asp:TemplateField ItemStyle-Width="8%"
+                                ItemStyle-BackColor="LightYellow"
+                                ItemStyle-HorizontalAlign="Right"
+                                HeaderText="Monthly Achieved">
                                 <ItemTemplate>
                                     <div style="word-wrap: break-word;">
-                                        <asp:TextBox runat="server" MaxLength="8" Width="100%" ID="txtAchieved" 
+                                        <asp:TextBox runat="server" MaxLength="8" Width="100%" ID="txtAchieved"
                                             CssClass="numeric1" Style="text-align: right;" Text='<%# Eval("Achieved") %>'></asp:TextBox>
                                     </div>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField ItemStyle-Width="8%" HeaderText="<span class='tooltip2' title='Caculated on the basis of Calculation Method of the Indicator.'>Running Value</span>" ItemStyle-HorizontalAlign="Right">
                                 <ItemTemplate>
-                                    
+
                                     <asp:Label ID="lblSum" runat="server" Text=' <%# Eval("RunningValue")%>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
@@ -171,7 +175,7 @@
                 </div>--%>
                 </div>
             </ContentTemplate>
-             <Triggers>
+            <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="ddlCountry" />
                 <asp:AsyncPostBackTrigger ControlID="ddlCluster" />
                 <asp:AsyncPostBackTrigger ControlID="ddlMonth" />

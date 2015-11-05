@@ -103,9 +103,12 @@
                                                         <td></td>
                                                         <td colspan="4">
                                                             <asp:CheckBox ID="cbIncludeRegional" runat="server" Text="Show Regional Indicators" Checked="True" meta:resourcekey="cbIncludeRegionalResource1" /></td>
+                                                        
+                                                            <asp:DropDownList ID="ddlFrameworkYear" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlYear_SelectedIndexChanged" CssClass="hidden">
+                                                                <asp:ListItem Text="2015" Value="11" Selected="True"></asp:ListItem>
+                                                                <asp:ListItem Text="2016" Value="12"></asp:ListItem>
+                                                            </asp:DropDownList>
                                                     </tr>
-
-
                                                 </table>
                                             </div>
                                         </div>

@@ -101,7 +101,7 @@ namespace SRFROWCA.OPS
                     OtherFields = (string)x.Element("other_fields"),
                     EGFLocations = (string)x.Element("egf_locations"),
                     //SecondaryClusterId = (string)x.Element("subset").Attribute("id"),
-                    //SecondaryClusterName = (string)x.Element("subset")
+                    Refugee = (string)x.Element("refugee")
 
                 });
 
@@ -325,7 +325,7 @@ namespace SRFROWCA.OPS
                                     project.GenderMarker,
                                     project.EGFLocations,
                                     project.PriorityName,
-                                    //secClusterName,
+                                    project.Refugee,
                                     (int)RC.Year._2016,
                                     DBNull.Value};
         }

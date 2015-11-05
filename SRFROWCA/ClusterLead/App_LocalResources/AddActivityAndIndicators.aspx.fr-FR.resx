@@ -178,7 +178,7 @@
     <value />
   </data>
   <data name="lblClusterResource1.Text" xml:space="preserve">
-    <value>Cluster:*</value>
+    <value>Secteur:*</value>
   </data>
   <data name="lblClusterResource1.ToolTip" xml:space="preserve">
     <value />

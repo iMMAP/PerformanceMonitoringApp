@@ -133,7 +133,7 @@
     <value />
   </data>
   <data name="BoundFieldResource2.HeaderText" xml:space="preserve">
-    <value>Cluster</value>
+    <value>Sector</value>
   </data>
   <data name="BoundFieldResource3.AccessibleHeaderText" xml:space="preserve">
     <value />
@@ -232,7 +232,7 @@
     <value />
   </data>
   <data name="lblClusterResource1.Text" xml:space="preserve">
-    <value>Cluster:</value>
+    <value>Sector:</value>
   </data>
   <data name="lblClusterResource1.ToolTip" xml:space="preserve">
     <value />

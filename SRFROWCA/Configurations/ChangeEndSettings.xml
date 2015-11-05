@@ -100,7 +100,6 @@
   <Key-1419 CountryID="14" Country="Chad" ClusterID="19" Cluster="Coordination and Support Services" DateLimit="12-31-2015" FrameworkCount="50" ActivityCount="25" ClusterCount="4" />
   <Key-1318 CountryID="13" Country="Cameroon" ClusterID="18" Cluster="Early Recovery" DateLimit="11-01-2015" FrameworkCount="50" ActivityCount="25" ClusterCount="4" />
   <Key-1613 CountryID="16" Country="Mali" ClusterID="13" Cluster="Education" DateLimit="11-01-2015" FrameworkCount="50" ActivityCount="25" ClusterCount="4" />
-  <Key-1618 CountryID="16" Country="Mali" ClusterID="18" Cluster="Early Recovery" DateLimit="11-01-2015" FrameworkCount="50" ActivityCount="25" ClusterCount="4" />
   <Key-1614 CountryID="16" Country="Mali" ClusterID="14" Cluster="Emergency Shelter and NFI" DateLimit="11-01-2015" FrameworkCount="50" ActivityCount="25" ClusterCount="4" />
   <Key-1620 CountryID="16" Country="Mali" ClusterID="20" Cluster="Food Security" DateLimit="11-01-2015" FrameworkCount="50" ActivityCount="25" ClusterCount="6" />
   <Key-1615 CountryID="16" Country="Mali" ClusterID="15" Cluster="Health" DateLimit="11-01-2015" FrameworkCount="50" ActivityCount="25" ClusterCount="4" />
@@ -130,4 +129,5 @@
   <Key-1214 CountryID="12" Country="Burkina Faso" ClusterID="14" Cluster="Emergency Shelter and NFI" DateLimit="11-01-2015" FrameworkCount="50" ActivityCount="25" ClusterCount="4" />
   <Key-1324 CountryID="13" Country="Cameroon" ClusterID="24" Cluster="Multi Sector for Refugees" DateLimit="11-01-2015" FrameworkCount="50" ActivityCount="25" ClusterCount="4" />
   <Key-1315 CountryID="13" Country="Cameroon" ClusterID="15" Cluster="Health" DateLimit="11-30-2015" FrameworkCount="50" ActivityCount="25" ClusterCount="4" />
+  <Key-1618 CountryID="16" Country="Mali" ClusterID="18" Cluster="Early Recovery" DateLimit="11-01-2015" FrameworkCount="50" ActivityCount="25" ClusterCount="4" />
 </ChangeEndSettings>

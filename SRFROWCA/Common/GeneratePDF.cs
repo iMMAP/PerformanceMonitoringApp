@@ -8,6 +8,7 @@ using iTextSharp.text.pdf;
 using System.Data;
 using System.Globalization;
 using BusinessLogic;
+using SRFROWCA.Configurations;
 
 namespace SRFROWCA.Common
 {
@@ -122,7 +123,7 @@ namespace SRFROWCA.Common
 
         #endregion
 
-        public static MemoryStream GenerateProjectsListingPDF(DataTable dtProjects, bool isShowContactInfo)
+        public static MemoryStream GenerateProjectsListingPDF(DataTable dtProjects, bool isShowContactInfo, int yearId)
         {
             using (MemoryStream outputStream = new MemoryStream())
             {
@@ -130,7 +131,7 @@ namespace SRFROWCA.Common
                 iTextSharp.text.pdf.PdfWriter writer = iTextSharp.text.pdf.PdfWriter.GetInstance(document, outputStream);
 
                 document.Open();
-                GenerateProjectsListingDocument(document, dtProjects, isShowContactInfo);
+                GenerateProjectsListingDocument(document, dtProjects, isShowContactInfo, yearId);
                 try
                 {
                     document.Close();
@@ -160,7 +161,24 @@ namespace SRFROWCA.Common
             }
         }
 
-        private static void GenerateProjectsListingDocument(iTextSharp.text.Document document, DataTable dt, bool isShowContactInfo)
+        private static int GetProjectLocationCategoryType(int projectId)
+        {
+            DataTable dtProjInfo = DBContext.GetData("GetProjCountryAndCluster", new object[] { projectId });
+            string emgLocId = "";
+            string emgClusterId = "";
+            if (dtProjInfo.Rows.Count > 0)
+            {
+                emgLocId = dtProjInfo.Rows[0]["EmergencyLocationId"].ToString();
+                emgClusterId = dtProjInfo.Rows[0]["EmergencyClusterId"].ToString();
+            }
+            string key = emgLocId + emgClusterId;
+            AdminTargetSettingItems items = RC.AdminTargetSettings(key);
+
+            return (items.Category == RC.LocationCategory.Health) ? (int)RC.LocationCategory.Health
+                                                                                    : (int)RC.LocationCategory.Government;
+        }
+
+        private static void GenerateProjectsListingDocument(iTextSharp.text.Document document, DataTable dt, bool isShowContactInfo, int yearId)
         {
             foreach (DataRow row in dt.Rows)
             {
@@ -169,46 +187,21 @@ namespace SRFROWCA.Common
                 int.TryParse(row["ProjectId"].ToString(), out projectId);
                 if (projectId > 0)
                 {
-                    DataTable dtIndicators = DBContext.GetData("GetProjectIndicators", new object[] { projectId, RC.SelectedSiteLanguageId });
-                    ProjectReports(document, dtIndicators);
+                    int locCatId = GetProjectLocationCategoryType(projectId);
+                    DataTable dtIndicators = DBContext.GetData("GetProjectIndicators", new object[] { projectId, locCatId, RC.SelectedSiteLanguageId });
+                    ProjectReports(document, dtIndicators, yearId);
                 }
-
 
                 document.NewPage();
             }
         }
 
-        private static void ProjectReports(iTextSharp.text.Document document, DataTable dtIndicators)
+        private static void ProjectReports(iTextSharp.text.Document document, DataTable dtIndicators, int yearId)
         {
             PdfPTable tbl = new PdfPTable(new float[] { 2f, 3f, 3f, 2f, 4f, 2f, 3f, 2f });
             tbl.SpacingAfter = 10f;
             document.Add(tbl);
-            IndicatorTargets(document, dtIndicators);
-
-            //else
-            //{
-            //    DataTable dtFiltered = new DataTable();
-            //    string[] selectedColumns = new[] { "ReportID", "ReportName", "OrganizationName", "Month", "CreatedBy", 
-            //                                                                    "CreatedDate", "UpdatedBy", "UpdatedDate" };
-            //    try
-            //    {
-            //        dtFiltered = dt.DefaultView.ToTable(true, selectedColumns);
-            //    }
-            //    catch { }
-
-            //    for (int i = 0; i < dtFiltered.Rows.Count; i++)
-            //    {
-            //        if (!string.IsNullOrEmpty(Convert.ToString(dtFiltered.Rows[i]["ReportID"])))
-            //        {
-            //            PdfPTable tbl = new PdfPTable(new float[] { 2f, 3f, 3f, 2f, 4f, 2f, 3f, 2f });
-            //            tbl.SpacingAfter = 10f;
-            //            document.Add(tbl);
-            //            IndicatorTargets(document, (from projectData in dt.AsEnumerable()
-            //                                        where projectData.Field<int?>("ReportID") == (int?)Convert.ToInt32(dtFiltered.Rows[i]["ReportID"])
-            //                                        select projectData), false);
-            //        }
-            //    }
-            //}
+            IndicatorTargets(document, dtIndicators, yearId);
         }
 
         private static void ProjectReportHeaders(PdfPTable tbl)
@@ -248,7 +241,7 @@ namespace SRFROWCA.Common
             tbl.AddCell(cell);
         }
 
-        private static void IndicatorTargets(Document document, DataTable dt)
+        private static void IndicatorTargets(Document document, DataTable dt, int yearId)
         {
             var distinctObjectives = (from DataRow dRow in dt.Rows
                                       select new
@@ -297,32 +290,169 @@ namespace SRFROWCA.Common
                                                     && ind.Field<int>("IndicatorId") == (int)indicator.IndicatorId
                                                     select ind);
 
-
-                    //PdfPTable tbl = showAccum ? new PdfPTable(4) : new PdfPTable(3);
-                    PdfPTable tbl = new PdfPTable(2);
-                    tbl.WidthPercentage = 39.25F;
-
-                    DataRow drAct = targets.First<DataRow>();
-                    AddLogFrameInfo(document, drAct);
-
-                    PdfPCell cell = null;
-                    var headerColor = new BaseColor(240, 240, 240);
-                    cell = new PdfPCell(new Phrase("Locaiton", TitleFont));
-                    cell.BackgroundColor = headerColor;
-                    tbl.AddCell(cell);
-
-                    cell = new PdfPCell(new Phrase("Target 2015", TitleFont));
-                    cell.BackgroundColor = headerColor;
-                    tbl.AddCell(cell);
-                    foreach (DataRow row in targets)
+                    if (yearId == 11)
                     {
-                        ReportedData(document, tbl, row);
-                    }
+                        PdfPTable tbl = new PdfPTable(2);
+                        tbl.WidthPercentage = 39.25F;
 
-                    tbl.SpacingAfter = 10f;
-                    document.Add(tbl);
+                        DataRow drAct = targets.First<DataRow>();
+                        AddLogFrameInfo(document, drAct);
+
+                        PdfPCell cell = null;
+                        var headerColor = new BaseColor(240, 240, 240);
+                        cell = new PdfPCell(new Phrase("Locaiton", TitleFont));
+                        cell.BackgroundColor = headerColor;
+                        tbl.AddCell(cell);
+
+                        cell = new PdfPCell(new Phrase("Target 2015", TitleFont));
+                        cell.BackgroundColor = headerColor;
+                        tbl.AddCell(cell);
+                        foreach (DataRow row in targets)
+                        {
+                            ReportedData(document, tbl, row);
+                        }
+
+                        tbl.SpacingAfter = 10f;
+                        document.Add(tbl);
+                    }
+                    else if (yearId == 12)
+                    {
+                        PdfPTable tbl = new PdfPTable(8);
+                        //tbl.WidthPercentage = 39.25F;
+                        tbl.TotalWidth = 500f;
+                        float[] widths = new float[] { 80f, 80f, 60f, 60f, 60f, 60f, 60f, 60f};
+                        tbl.SetWidths(widths);
+
+                        DataRow drAct = targets.First<DataRow>();
+                        AddLogFrameInfo(document, drAct);
+
+                        PdfPCell cell = null;
+                        var headerColor = new BaseColor(240, 240, 240);
+                        cell = new PdfPCell(new Phrase("Locaiton", TitleFont));
+                        cell.BackgroundColor = headerColor;
+                        cell.Colspan = 2;
+                        cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                        tbl.AddCell(cell);
+
+                        cell = new PdfPCell(new Phrase("Cluster Target", TitleFont));
+                        cell.BackgroundColor = headerColor;
+                        cell.Colspan = 3;
+                        cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                        tbl.AddCell(cell);
+
+                        cell = new PdfPCell(new Phrase("Project Target", TitleFont));
+                        cell.BackgroundColor = headerColor;
+                        cell.Colspan = 3;
+                        cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                        tbl.AddCell(cell);
+
+                        cell = new PdfPCell(new Phrase("Country/Admin1", TitleFont));
+                        cell.BackgroundColor = headerColor;
+                        cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                        tbl.AddCell(cell);
+
+                        cell = new PdfPCell(new Phrase("Target Location", TitleFont));
+                        cell.BackgroundColor = headerColor;
+                        cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                        tbl.AddCell(cell);
+
+                        cell = new PdfPCell(new Phrase("Male", TitleFont));
+                        cell.BackgroundColor = headerColor;
+                        cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                        tbl.AddCell(cell);
+
+                        cell = new PdfPCell(new Phrase("Female", TitleFont));
+                        cell.BackgroundColor = headerColor;
+                        cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                        tbl.AddCell(cell);
+
+                        cell = new PdfPCell(new Phrase("Total", TitleFont));
+                        cell.BackgroundColor = headerColor;
+                        cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                        tbl.AddCell(cell);
+
+                        cell = new PdfPCell(new Phrase("Male", TitleFont));
+                        cell.BackgroundColor = headerColor;
+                        cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                        tbl.AddCell(cell);
+
+                        cell = new PdfPCell(new Phrase("Female", TitleFont));
+                        cell.BackgroundColor = headerColor;
+                        cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                        tbl.AddCell(cell);
+
+                        cell = new PdfPCell(new Phrase("Total", TitleFont));
+                        cell.BackgroundColor = headerColor;
+                        cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                        tbl.AddCell(cell);
+
+                        foreach (DataRow row in targets)
+                        {
+                            ReportedData2(document, tbl, row);
+                        }
+
+                        tbl.SpacingAfter = 10f;
+                        document.Add(tbl);
+                    }                    
                 }
             }
+        }
+
+        private static void ReportedData2(Document document, PdfPTable tbl, DataRow row)
+        {
+            
+            //tbl.AddCell(new Phrase("ParentLocation", TableFont));
+            //tbl.AddCell(new Phrase("LocationName", TableFont));
+
+            PdfPCell cell = null;
+
+            cell = new PdfPCell(new Phrase(row["ParentLocation"].ToString(), TableFont));
+            tbl.AddCell(cell);
+
+            cell = new PdfPCell(new Phrase(row["LocationName"].ToString(), TableFont));
+            tbl.AddCell(cell);
+
+            string val = row["ClusterTotal"].ToString();
+            if (!string.IsNullOrEmpty(val))
+                val = RC.StringToThousandSeperator(val);
+            cell = new PdfPCell(new Phrase(val, TableFont));
+            cell.HorizontalAlignment = Element.ALIGN_RIGHT;
+            tbl.AddCell(cell);
+
+            val = row["ClusterMale"].ToString();
+            if (!string.IsNullOrEmpty(val))
+                val = RC.StringToThousandSeperator(val);
+            cell = new PdfPCell(new Phrase(val, TableFont));
+            cell.HorizontalAlignment = Element.ALIGN_RIGHT;
+            tbl.AddCell(cell);
+
+            val = row["ClusterFemale"].ToString();
+            if (!string.IsNullOrEmpty(val))
+                val = RC.StringToThousandSeperator(val);
+            cell = new PdfPCell(new Phrase(val, TableFont));
+            cell.HorizontalAlignment = Element.ALIGN_RIGHT;
+            tbl.AddCell(cell);
+
+            val = row["Target"].ToString();
+            if (!string.IsNullOrEmpty(val))
+                val = RC.StringToThousandSeperator(val);
+            cell = new PdfPCell(new Phrase(val, TableFont));
+            cell.HorizontalAlignment = Element.ALIGN_RIGHT;
+            tbl.AddCell(cell);
+
+            val = row["ProjectMale"].ToString();
+            if (!string.IsNullOrEmpty(val))
+                val = RC.StringToThousandSeperator(val);
+            cell = new PdfPCell(new Phrase(val, TableFont));
+            cell.HorizontalAlignment = Element.ALIGN_RIGHT;
+            tbl.AddCell(cell);
+
+            val = row["ProjectFemale"].ToString();
+            if (!string.IsNullOrEmpty(val))
+                val = RC.StringToThousandSeperator(val);
+            cell = new PdfPCell(new Phrase(val, TableFont));
+            cell.HorizontalAlignment = Element.ALIGN_RIGHT;
+            tbl.AddCell(cell);
         }
 
         private static void ReportedData(Document document, PdfPTable tbl, DataRow row)
@@ -344,6 +474,10 @@ namespace SRFROWCA.Common
             tbl.AddCell(new Phrase(dr["Activity"].ToString(), TableFont));
             tbl.AddCell(new Phrase("Indicator:", TableFont));
             tbl.AddCell(new Phrase(dr["Indicator"].ToString(), TableFont));
+            tbl.AddCell(new Phrase("Unit:", TableFont));
+            tbl.AddCell(new Phrase(dr["Unit"].ToString(), TableFont));
+            tbl.AddCell(new Phrase("Calc Method:", TableFont));
+            tbl.AddCell(new Phrase(dr["CalculationType"].ToString(), TableFont));
 
             document.Add(tbl);
         }
@@ -878,7 +1012,8 @@ namespace SRFROWCA.Common
             if (isShowContactInfo)
             {
                 tbl.AddCell(new Phrase("Contact Details:", TableFont));
-                string contactDetails = dr["ProjectContactName"].ToString() + ", " + dr["ProjectContactEmail"].ToString() + ", " + dr["ProjectContactPhone"].ToString();
+                //string contactDetails = dr["ProjectContactName"].ToString() + ", " + dr["ProjectContactEmail"].ToString() + ", " + dr["ProjectContactPhone"].ToString();
+                string contactDetails = dr["ProjectContactName"].ToString();
                 tbl.AddCell(new Phrase(contactDetails, TableFont));
             }
 

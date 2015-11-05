@@ -29,6 +29,18 @@
                                     <div class="row">
                                         <table border="0" style="width: 100%;">
                                             <tr>
+                                                <td>
+                                                    <label>
+                                                        <asp:Label ID="lblCaptionCountry" runat="server" Text="Country:"
+                                                            meta:resourcekey="lblCaptionCountryResource1">
+                                                        </asp:Label>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <asp:DropDownList runat="server" ID="ddlCountry" CssClass="width-80" AutoPostBack="true"
+                                                        OnSelectedIndexChanged="SelectedIndexChanged" meta:resourcekey="ddlCountryResource1">
+                                                    </asp:DropDownList>
+                                                </td>
                                                 <td class="width-20">
                                                     <label>
                                                         <asp:Label ID="lblCaptionCluster" runat="server" Text="Cluster:"
@@ -41,6 +53,10 @@
                                                         OnSelectedIndexChanged="SelectedIndexChanged" meta:resourcekey="ddlSecClustersResource1">
                                                     </asp:DropDownList>
                                                 </td>
+
+                                            </tr>
+                                            <tr>
+
                                                 <td class="width-20">
                                                     <label>
                                                         <asp:Label ID="lblCaptionSubSetCluster" runat="server"
@@ -54,20 +70,8 @@
                                                         OnSelectedIndexChanged="SelectedIndexChanged" meta:resourcekey="ddlClustersResource1">
                                                     </asp:DropDownList>
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label>
-                                                        <asp:Label ID="lblCaptionCountry" runat="server" Text="Country:"
-                                                            meta:resourcekey="lblCaptionCountryResource1">
-                                                        </asp:Label>
-                                                    </label>
-                                                </td>
-                                                <td>
-                                                    <asp:DropDownList runat="server" ID="ddlCountry" CssClass="width-80" AutoPostBack="true"
-                                                        OnSelectedIndexChanged="SelectedIndexChanged" meta:resourcekey="ddlCountryResource1">
-                                                    </asp:DropDownList>
-                                                </td>
+
+
                                                 <td>
                                                     <label>
                                                         <asp:Label ID="lblCaptionOrganization" runat="server"
@@ -101,7 +105,7 @@
                                                         </label>
                                                     </td>
                                                     <td>
-                                                        <asp:DropDownList ID="ddlStatus" runat="server"
+                                                        <asp:DropDownList ID="ddlStatus" runat="server" CssClass="width-80"
                                                             meta:resourcekey="ddlStatusResource1"
                                                             OnSelectedIndexChanged="SelectedIndexChanged"
                                                             AutoPostBack="true">
@@ -141,7 +145,7 @@
                                             </tr>
                                             <tr>
                                                 <td>&nbsp;</td>
-                                                <td colspan="4" style="padding-top: 10px;">
+                                                <td colspan="1" style="padding-top: 10px;">
                                                     <asp:Button ID="btnSearch" runat="server" Text="Search"
                                                         OnClick="btnSearch_Click" CssClass="btn btn-primary"
                                                         CausesValidation="False" meta:resourcekey="btnSearchResource1" />
@@ -149,6 +153,13 @@
                                                         Style="margin-left: 5px;" OnClick="btnReset_Click"
                                                         CssClass="btn btn-primary" CausesValidation="False"
                                                         meta:resourcekey="btnResetResource1" /></td>
+                                                <td>Year:</td>
+                                                <td>
+                                                    <asp:DropDownList ID="ddlFrameworkYear" runat="server" AutoPostBack="True" OnSelectedIndexChanged="SelectedIndexChanged" meta:resourcekey="ddlFrameworkYearResource1">
+                                                        <asp:ListItem Text="2016" Value="12" meta:resourcekey="ListItemResource3"></asp:ListItem>
+                                                        <asp:ListItem Text="2015" Value="11" meta:resourcekey="ListItemResource4"></asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </td>
                                             </tr>
                                         </table>
                                     </div>

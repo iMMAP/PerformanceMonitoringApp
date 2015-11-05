@@ -1,10 +1,7 @@
 ﻿$.fn.wholenumber = function () {
 
     this.keydown(function (event) {
-        if (event.shiftKey) {
-            event.preventDefault();
-        }
-		
+        
         if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9) {
         }
         else {

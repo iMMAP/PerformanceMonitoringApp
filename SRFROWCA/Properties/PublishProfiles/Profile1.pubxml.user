@@ -207,7 +207,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/27/2015 14:36:11</publishTime>
     </File>
     <File Include="Anonymous/ProjectsListingPublic.aspx">
-      <publishTime>09/13/2015 20:36:14</publishTime>
+      <publishTime>11/05/2015 21:18:21</publishTime>
     </File>
     <File Include="App_LocalResources/Default.aspx.fr-FR.resx">
       <publishTime>10/29/2015 11:36:59</publishTime>
@@ -942,7 +942,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/24/2014 12:14:46</publishTime>
     </File>
     <File Include="assets/orsjs/jquery.wholenumber.js">
-      <publishTime>09/17/2015 13:02:41</publishTime>
+      <publishTime>11/05/2015 12:39:21</publishTime>
     </File>
     <File Include="assets/orsjs/quicksearch.js">
       <publishTime>02/10/2013 01:10:30</publishTime>
@@ -1017,7 +1017,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/06/2014 09:26:40</publishTime>
     </File>
     <File Include="bin/SRFROWCA.dll">
-      <publishTime>11/03/2015 19:32:44</publishTime>
+      <publishTime>11/05/2015 22:21:18</publishTime>
     </File>
     <File Include="bin/SRFROWCA.pdb">
       <publishTime>04/28/2014 16:21:20</publishTime>
@@ -1044,7 +1044,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/24/2015 18:00:57</publishTime>
     </File>
     <File Include="ClusterLead/AddActivityAndIndicators.aspx">
-      <publishTime>11/03/2015 09:52:38</publishTime>
+      <publishTime>11/04/2015 12:06:43</publishTime>
     </File>
     <File Include="ClusterLead/AddCountryIndicator.aspx">
       <publishTime>12/15/2014 14:10:47</publishTime>
@@ -1077,10 +1077,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/14/2015 14:16:04</publishTime>
     </File>
     <File Include="ClusterLead/App_LocalResources/AddActivityAndIndicators.aspx.fr-FR.resx">
-      <publishTime>10/06/2015 14:58:10</publishTime>
+      <publishTime>11/04/2015 11:53:16</publishTime>
     </File>
     <File Include="ClusterLead/App_LocalResources/AddActivityAndIndicators.aspx.resx">
-      <publishTime>10/06/2015 14:55:11</publishTime>
+      <publishTime>11/04/2015 11:53:25</publishTime>
     </File>
     <File Include="ClusterLead/App_LocalResources/AddSRPActivitiesFromMasterList.aspx.fr-FR.resx">
       <publishTime>04/17/2014 16:38:22</publishTime>
@@ -1095,31 +1095,31 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/17/2014 15:59:29</publishTime>
     </File>
     <File Include="ClusterLead/App_LocalResources/CountryIndicators.aspx.fr-FR.resx">
-      <publishTime>10/15/2015 12:39:17</publishTime>
+      <publishTime>11/04/2015 11:56:24</publishTime>
     </File>
     <File Include="ClusterLead/App_LocalResources/CountryIndicators.aspx.resx">
-      <publishTime>10/15/2015 12:45:23</publishTime>
+      <publishTime>11/04/2015 12:00:34</publishTime>
     </File>
     <File Include="ClusterLead/App_LocalResources/EditOutputIndicator.aspx.fr-FR.resx">
-      <publishTime>10/22/2015 20:51:15</publishTime>
+      <publishTime>11/04/2015 12:00:38</publishTime>
     </File>
     <File Include="ClusterLead/App_LocalResources/EditOutputIndicator.aspx.resx">
-      <publishTime>10/22/2015 21:01:58</publishTime>
+      <publishTime>11/04/2015 11:54:13</publishTime>
     </File>
     <File Include="ClusterLead/App_LocalResources/EditOutputIndicator__.aspx.resx">
       <publishTime>10/15/2015 11:04:23</publishTime>
     </File>
     <File Include="ClusterLead/App_LocalResources/IndicatorListing.aspx.fr-FR.resx">
-      <publishTime>10/13/2015 16:48:05</publishTime>
+      <publishTime>11/04/2015 11:54:48</publishTime>
     </File>
     <File Include="ClusterLead/App_LocalResources/IndicatorListing.aspx.resx">
-      <publishTime>10/13/2015 16:48:23</publishTime>
+      <publishTime>11/04/2015 11:55:05</publishTime>
     </File>
     <File Include="ClusterLead/App_LocalResources/IndicatorListingMigrate.aspx.fr-FR.resx">
-      <publishTime>10/15/2015 15:06:26</publishTime>
+      <publishTime>11/04/2015 11:55:25</publishTime>
     </File>
     <File Include="ClusterLead/App_LocalResources/IndicatorListingMigrate.aspx.resx">
-      <publishTime>10/15/2015 14:57:55</publishTime>
+      <publishTime>11/04/2015 11:55:43</publishTime>
     </File>
     <File Include="ClusterLead/App_LocalResources/ProjectsListing.aspx - OLD.resx">
       <publishTime>04/14/2015 14:16:04</publishTime>
@@ -1140,13 +1140,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/18/2014 14:02:05</publishTime>
     </File>
     <File Include="ClusterLead/ClusterDataEntry.aspx">
-      <publishTime>09/24/2015 12:07:29</publishTime>
+      <publishTime>11/05/2015 15:10:05</publishTime>
     </File>
     <File Include="ClusterLead/ClusterIndicatorTargets.aspx">
       <publishTime>05/15/2015 15:59:10</publishTime>
     </File>
     <File Include="ClusterLead/ClusterReports.aspx">
-      <publishTime>05/21/2015 17:57:48</publishTime>
+      <publishTime>11/05/2015 12:56:49</publishTime>
     </File>
     <File Include="ClusterLead/CountryIndicators.aspx">
       <publishTime>10/22/2015 20:16:19</publishTime>
@@ -1188,7 +1188,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/08/2014 13:02:45</publishTime>
     </File>
     <File Include="ClusterLead/ProjectsListing.aspx">
-      <publishTime>09/28/2015 10:25:08</publishTime>
+      <publishTime>11/05/2015 21:31:18</publishTime>
     </File>
     <File Include="ClusterLead/ProjectXMLFeeds.aspx">
       <publishTime>05/27/2015 14:53:37</publishTime>
@@ -1224,7 +1224,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/02/2015 12:51:51</publishTime>
     </File>
     <File Include="Configurations/ChangeEndSettings.xml">
-      <publishTime>11/03/2015 11:26:13</publishTime>
+      <publishTime>11/05/2015 15:36:54</publishTime>
     </File>
     <File Include="Configurations/Settings.xml">
       <publishTime>05/07/2015 12:38:41</publishTime>
@@ -1281,10 +1281,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/25/2015 11:50:23</publishTime>
     </File>
     <File Include="Controls/ctlOPSAdmin1Targets.ascx">
-      <publishTime>10/27/2015 08:51:03</publishTime>
+      <publishTime>11/04/2015 14:58:03</publishTime>
     </File>
     <File Include="Controls/ctlOPSAdmin2Targets.ascx">
-      <publishTime>10/26/2015 18:00:20</publishTime>
+      <publishTime>11/04/2015 14:57:29</publishTime>
     </File>
     <File Include="Controls/FilterCriteria.ascx">
       <publishTime>11/03/2013 10:36:50</publishTime>
@@ -1305,7 +1305,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/25/2014 20:59:03</publishTime>
     </File>
     <File Include="Dashboard.aspx">
-      <publishTime>10/25/2015 22:52:35</publishTime>
+      <publishTime>11/05/2015 18:26:38</publishTime>
     </File>
     <File Include="DataFeed.ashx">
       <publishTime>02/22/2013 07:38:20</publishTime>
@@ -1352,6 +1352,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="DataFeeds/Indicators.ashx">
       <publishTime>04/14/2015 14:16:04</publishTime>
     </File>
+    <File Include="DataFeeds/IndicatorsClusterProjectsTargets.ashx">
+      <publishTime>11/04/2015 17:33:07</publishTime>
+    </File>
     <File Include="DataFeeds/IndicatorsWithClusterProjectTargets.ashx">
       <publishTime>04/28/2015 14:28:15</publishTime>
     </File>
@@ -1378,6 +1381,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="DataFeeds/ORS3W.ashx">
       <publishTime>04/14/2015 14:16:05</publishTime>
+    </File>
+    <File Include="DataFeeds/ProjectReqWithOrgStretch.ashx">
+      <publishTime>11/05/2015 16:00:36</publishTime>
     </File>
     <File Include="DataFeeds/Projects.ashx">
       <publishTime>04/14/2015 14:16:05</publishTime>
@@ -3441,7 +3447,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/23/2015 10:33:18</publishTime>
     </File>
     <File Include="NoMenue.Master">
-      <publishTime>11/03/2015 09:45:28</publishTime>
+      <publishTime>11/05/2015 15:07:10</publishTime>
     </File>
     <File Include="OperationalPresence.aspx">
       <publishTime>04/14/2015 14:16:05</publishTime>
@@ -3651,7 +3657,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/29/2014 12:24:35</publishTime>
     </File>
     <File Include="Reports/IndicatorTargetByProjectStatus.aspx">
-      <publishTime>11/03/2015 19:09:00</publishTime>
+      <publishTime>11/05/2015 12:59:33</publishTime>
     </File>
     <File Include="Reports/LoadCountryMaps.aspx">
       <publishTime>09/14/2014 13:37:59</publishTime>
@@ -3801,7 +3807,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/01/2014 12:31:41</publishTime>
     </File>
     <File Include="Site.Master">
-      <publishTime>11/02/2015 18:57:04</publishTime>
+      <publishTime>11/05/2015 15:07:18</publishTime>
     </File>
     <File Include="Styles/loginareamenu.css">
       <publishTime>11/04/2013 03:22:35</publishTime>
@@ -3975,7 +3981,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/03/2015 17:55:40</publishTime>
     </File>
     <File Include="WebForm1.aspx">
-      <publishTime>11/03/2015 10:57:04</publishTime>
+      <publishTime>11/04/2015 11:26:43</publishTime>
     </File>
     <File Include="WebForm2.aspx">
       <publishTime>03/24/2014 03:14:32</publishTime>
