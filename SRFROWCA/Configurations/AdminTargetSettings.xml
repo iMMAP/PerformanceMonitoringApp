@@ -80,7 +80,6 @@
   <AdminTarget Key="1814" CountryID="18" Country="Niger" ClusterID="14" Cluster="Emergency Shelter and NFI" IsTarget="Yes" Level="District" Category="Government" IsMandatory="Yes" />
   <AdminTarget Key="1823" CountryID="18" Country="Niger" ClusterID="23" Cluster="Emergency Telecommunication" IsTarget="Yes" Level="District" Category="Government" IsMandatory="Yes" />
   <AdminTarget Key="1815" CountryID="18" Country="Niger" ClusterID="15" Cluster="Health" IsTarget="Yes" Level="District" Category="Government" IsMandatory="Yes" />
-  <AdminTarget Key="1821" CountryID="18" Country="Niger" ClusterID="21" Cluster="Logistics" IsTarget="Yes" Level="District" Category="Government" IsMandatory="Yes" />
   <AdminTarget Key="1824" CountryID="18" Country="Niger" ClusterID="24" Cluster="Multi Sector for Refugees" IsTarget="Yes" Level="District" Category="Government" IsMandatory="Yes" />
   <AdminTarget Key="1816" CountryID="18" Country="Niger" ClusterID="16" Cluster="Nutrition" IsTarget="Yes" Level="District" Category="Government" IsMandatory="Yes" />
   <AdminTarget Key="1817" CountryID="18" Country="Niger" ClusterID="17" Cluster="Protection" IsTarget="Yes" Level="District" Category="Government" IsMandatory="Yes" />
@@ -108,7 +107,6 @@
   <AdminTarget Key="2015" CountryID="20" Country="Senegal" ClusterID="15" Cluster="Health" IsTarget="Yes" Level="District" Category="Government" IsMandatory="Yes" />
   <AdminTarget Key="2021" CountryID="20" Country="Senegal" ClusterID="21" Cluster="Logistics" IsTarget="Yes" Level="District" Category="Government" IsMandatory="Yes" />
   <AdminTarget Key="2024" CountryID="20" Country="Senegal" ClusterID="24" Cluster="Multi Sector for Refugees" IsTarget="Yes" Level="District" Category="Government" IsMandatory="Yes" />
-  <AdminTarget Key="2016" CountryID="20" Country="Senegal" ClusterID="16" Cluster="Nutrition" IsTarget="Yes" Level="District" Category="Government" IsMandatory="Yes" />
   <AdminTarget Key="2017" CountryID="20" Country="Senegal" ClusterID="17" Cluster="Protection" IsTarget="Yes" Level="District" Category="Government" IsMandatory="Yes" />
   <AdminTarget Key="2022" CountryID="20" Country="Senegal" ClusterID="22" Cluster="Water Sanitation &amp; Hygiene" IsTarget="Yes" Level="District" Category="Government" IsMandatory="Yes" />
   <AdminTarget Key="1420" CountryID="14" Country="Chad" ClusterID="20" Cluster="Food Security" IsTarget="Yes" Level="Governorate" Category="Government" IsMandatory="Yes" />
@@ -117,4 +115,6 @@
   <AdminTarget Key="1416" CountryID="14" Country="Chad" ClusterID="16" Cluster="Nutrition" IsTarget="Yes" Level="District" Category="Health" IsMandatory="Yes" />
   <AdminTarget Key="1820" CountryID="18" Country="Niger" ClusterID="20" Cluster="Food Security" IsTarget="Yes" Level="National" Category="Government" IsMandatory="Yes" />
   <AdminTarget Key="1415" CountryID="14" Country="Chad" ClusterID="15" Cluster="Santé" IsTarget="Yes" Level="Governorate" Category="Government" IsMandatory="Yes" />
+  <AdminTarget Key="1821" CountryID="18" Country="Niger" ClusterID="21" Cluster="Logistics" IsTarget="Yes" Level="National" Category="Government" IsMandatory="Yes" />
+  <AdminTarget Key="2016" CountryID="20" Country="Senegal" ClusterID="16" Cluster="Nutrition" IsTarget="Yes" Level="Governorate" Category="Government" IsMandatory="Yes" />
 </AdminTargets>

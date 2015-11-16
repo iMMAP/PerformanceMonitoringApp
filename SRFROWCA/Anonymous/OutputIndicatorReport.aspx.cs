@@ -82,8 +82,9 @@ namespace SRFROWCA.Anonymous
                 pageIndex = gvClusterReports.PageIndex;
             }
 
+            int yearId = 11;
             return DBContext.GetData("GetOutputIndicatorReports", new object[] { indicator, countryId, clusterId, 
-                                                                             RC.SelectedSiteLanguageId, monthIDs, isRegional,
+                                                                             RC.SelectedSiteLanguageId, yearId, monthIDs, isRegional,
                                                                                pageSize, pageIndex });
         }
 

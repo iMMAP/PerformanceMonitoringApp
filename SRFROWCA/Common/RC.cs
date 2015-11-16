@@ -709,6 +709,45 @@ namespace SRFROWCA.Common
             return lst;
         }
 
+        public static void DtSetNullToEmpty(DataTable dt)
+        {
+            foreach (DataRow row in dt.Rows)
+            {
+                foreach (DataColumn col in dt.Columns)
+                {
+                    if (row.IsNull(col) && col.DataType == typeof(string))
+                        row.SetField(col, String.Empty);
+
+                    if (DBNull.Value.Equals(col))
+                        row.SetField(col, String.Empty);
+                }
+            }
+        }
+
+        public static string GenerateXMLOfDataTable(DataTable dt, string rootName, string elementName)
+        {
+            XDocument doc = new XDocument();
+            XElement root = new XElement(rootName);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                XElement project = new XElement(elementName);
+                foreach (DataColumn column in dt.Columns)
+                {
+                    string val = row[column].ToString();
+                    val = string.IsNullOrEmpty(val) ? "" : val;
+                    XElement projElement = new XElement(column.ColumnName, val);
+                    project.Add(projElement);
+                }
+
+                root.Add(project);
+            }
+
+            doc.Add(root);
+
+            return doc.ToString();
+        }
+
 
         internal static string FrenchCulture
         {

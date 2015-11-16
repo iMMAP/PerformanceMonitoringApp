@@ -342,12 +342,12 @@ namespace SRFROWCA.Controls
                                     admin1FemaleTarget = string.IsNullOrEmpty(txtTargetFemale.Text.Trim()) ? (int?)null : Convert.ToInt32(txtTargetFemale.Text.Trim());
                                     if (admin1MaleTarget != null || admin1FemaleTarget != null)
                                     {
+                                        
                                         DBContext.Update("InsertIndicatorTargetGender_Admin1", new object[] { indicatorId, countryId, admin1Id , 
                                                                                                                 admin1MaleTarget, admin1FemaleTarget,
                                                                                                                 insertCount, 3, RC.GetCurrentUserId, DBNull.Value });
+                                        insertCount++;
                                     }
-                                    insertCount++;
-
                                 }
                             }
                         }

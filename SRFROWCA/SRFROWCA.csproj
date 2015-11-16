@@ -359,9 +359,6 @@
     <Content Include="ClusterLead\Web.config" />
     <Content Include="Admin\Web.config" />
     <Content Include="Anonymous\AllDataFeed.ashx" />
-    <Content Include="Anonymous\NumberOfOrgsByAdmin1.ashx" />
-    <Content Include="Anonymous\3W.ashx" />
-    <Content Include="Anonymous\4W.ashx" />
     <Content Include="Anonymous\AllDataJson.ashx" />
     <Content Include="Anonymous\AllDataCSV.ashx" />
     <Content Include="Anonymous\AllValidatedDataFeed.ashx" />
@@ -394,7 +391,6 @@
     <Content Include="DataFeeds\Projects.ashx" />
     <Content Include="DataFeeds\ProjectSRPTargets.ashx" />
     <Content Include="DataFeeds\Clusters.ashx" />
-    <Content Include="DataFeeds\Orgnizations.ashx" />
     <Content Include="DataFeeds\Country.ashx" />
     <Content Include="DataFeeds\ReportedData.ashx" />
     <Content Include="DataFeeds\ClusterIndicator.ashx" />
@@ -408,6 +404,7 @@
     <Content Include="GV\README.md" />
     <Content Include="DataFeeds\IndicatorsClusterProjectsTargets.ashx" />
     <Content Include="DataFeeds\ProjectReqWithOrgStretch.ashx" />
+    <Content Include="DataFeeds\OrsLocations.ashx" />
     <None Include="HelpFiles\HelpDocs\HelpEng\1_ORS_description_EN_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpEng\2_ORS_Resgistration_EN_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpEng\3_ORS_Role_EN_v3.pdf" />
@@ -737,17 +734,8 @@
     <Compile Include="ClusterLead\ProjectXMLFeeds.aspx.designer.cs">
       <DependentUpon>ProjectXMLFeeds.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Anonymous\3W.ashx.cs">
-      <DependentUpon>3W.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="Anonymous\4W.ashx.cs">
-      <DependentUpon>4W.ashx</DependentUpon>
-    </Compile>
     <Compile Include="Anonymous\AllDataFeed.ashx.cs">
       <DependentUpon>AllDataFeed.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="Anonymous\NumberOfOrgsByAdmin1.ashx.cs">
-      <DependentUpon>NumberOfOrgsByAdmin1.ashx</DependentUpon>
     </Compile>
     <Compile Include="ClusterLead\EditOutputIndicator.aspx.cs">
       <DependentUpon>EditOutputIndicator.aspx</DependentUpon>
@@ -967,20 +955,17 @@
     <Compile Include="DataFeeds\KeyFiguresFeed.ashx.cs">
       <DependentUpon>KeyFiguresFeed.ashx</DependentUpon>
     </Compile>
-    <Compile Include="DataFeeds\LogFrameDataFeed.ashx.cs">
-      <DependentUpon>LogFrameDataFeed.ashx</DependentUpon>
-    </Compile>
     <Compile Include="DataFeeds\Organizations.ashx.cs">
       <DependentUpon>Organizations.ashx</DependentUpon>
     </Compile>
     <Compile Include="DataFeeds\OrganizationsFeed.ashx.cs">
       <DependentUpon>OrganizationsFeed.ashx</DependentUpon>
     </Compile>
-    <Compile Include="DataFeeds\Orgnizations.ashx.cs">
-      <DependentUpon>Orgnizations.ashx</DependentUpon>
-    </Compile>
     <Compile Include="DataFeeds\ORS3W.ashx.cs">
       <DependentUpon>ORS3W.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="DataFeeds\OrsLocations.ashx.cs">
+      <DependentUpon>OrsLocations.ashx</DependentUpon>
     </Compile>
     <Compile Include="DataFeeds\ProjectReqWithOrgStretch.ashx.cs">
       <DependentUpon>ProjectReqWithOrgStretch.ashx</DependentUpon>
@@ -1466,7 +1451,6 @@
   <ItemGroup>
     <Content Include="DataFeeds\Organizations.ashx" />
     <Content Include="DataFeeds\OrganizationsFeed.ashx" />
-    <Content Include="DataFeeds\LogFrameDataFeed.ashx" />
     <Content Include="SessionHeartbeat.ashx" />
   </ItemGroup>
   <ItemGroup>
