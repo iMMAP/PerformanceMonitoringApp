@@ -41,44 +41,35 @@ namespace SRFROWCA.DataFeeds
 
         private object[] GetReportParam(HttpContext context)
         {
-            string country = null;
+            int val = 0;
             if (!string.IsNullOrEmpty(context.Request["country"]))
             {
-                country = context.Request["country"].ToString();
+                int.TryParse(context.Request["country"].ToString(), out val);
             }
+            int? countryId = val > 0 ? val : (int?)null;
 
-            string cluster = null;
-            if (!string.IsNullOrEmpty(context.Request["cluster"]))
+            val = 0;
+            if (context.Request["cluster"] != null)
             {
-                cluster = context.Request["cluster"].ToString();
+                int.TryParse(context.Request["cluster"].ToString(), out val);
             }
-
-            string obj = null;
-            if (!string.IsNullOrEmpty(context.Request["obj"] ))
-            {
-                obj = context.Request["obj"].ToString().NullIfEmpty(); 
-            }
-
-            string act = null;
-            if (!string.IsNullOrEmpty(context.Request["act"] ))
-            {
-                act = context.Request["act"].ToString().NullIfEmpty();
-            }
-
-            int? yearId = (int)RC.Year._2016;
+            int? clusterId = val > 0 ? val : (int?)null;
+            
+            val = 0;
+            int? yearId = null;
             if (context.Request["year"] != null)
             {
-                if (context.Request["year"].ToString() != "no")
-                    yearId = null;
-                else
-                {
-                    int val = 0;
-                    int.TryParse(context.Request["year"].ToString(), out val);
-                    yearId = val == 2015 ? (int)RC.Year._2015 : (int)RC.Year._2016;
-                }
+                int.TryParse(context.Request["year"].ToString(), out val);
+                yearId = val == 2015 ? (int)RC.Year._2015 : (int)RC.Year._2016;
             }
 
-            return new object[] {country, cluster, obj, act, yearId};
+            string lng = "fr";
+            if (context.Request["lng"] != null)
+            {
+                lng = context.Request["lng"].ToString();
+            }
+
+            return new object[] {countryId, clusterId, yearId, lng};
         }
 
         public bool IsReusable

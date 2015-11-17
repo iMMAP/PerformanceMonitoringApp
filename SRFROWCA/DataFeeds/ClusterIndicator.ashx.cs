@@ -81,7 +81,7 @@ namespace SRFROWCA.DataFeeds
             int isAdmin = 0;
             if (context.Request["admin1target"] != null)
             {
-                string queryVal = context.Request["admintarget"].ToString();
+                string queryVal = context.Request["admin1target"].ToString();
                 if (queryVal == "Yes" || queryVal == "yes" || queryVal == "y" || queryVal == "1")
                     isAdmin = 1;
             }

@@ -89,20 +89,21 @@ namespace SRFROWCA.DataFeeds
             }
             int? indId = val > 0 ? val : (int?)null;
 
-            int? yearId = (int)RC.Year._2016;
+            val = 0;
+            int? yearId = null;
             if (context.Request["year"] != null)
             {
-                if (context.Request["year"].ToString() != "no")
-                    yearId = null;
-                else
-                {
-                    val = 0;
-                    int.TryParse(context.Request["year"].ToString(), out val);
-                    yearId = val == 2015 ? (int)RC.Year._2015 : (int)RC.Year._2016;
-                }
+                int.TryParse(context.Request["year"].ToString(), out val);
+                yearId = val == 2015 ? (int)RC.Year._2015 : (int)RC.Year._2016;
             }
 
-            return new object[] { countryId, clusterId, objId, actId, indId, yearId };
+            string lng = "fr";
+            if (context.Request["lng"] != null)
+            {
+                lng = context.Request["lng"].ToString();
+            }
+
+            return new object[] { countryId, clusterId, objId, actId, indId, yearId, lng };
         }
 
         public bool IsReusable
