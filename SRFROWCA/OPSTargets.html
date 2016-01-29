@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        table {
+            border: 1px solid #000;
+        }
+
+        tr.spaceUnder td {
+            padding-top: 1em;
+        }
+    </style>
+</head>
+<body>
+    <h2>ORS - OPS Activity Targets</h2>
+    <h3>ORS Changes (Just for information)</h3>
+    <h4>For HRP 2016 (Sahel) ORS introduced few basic changes in Cluster Framework.</h4>
+    <ol>
+        <li>Indicator targets at Admin level 2. In 2015 it was on Admin Level 1.</li>
+        <li>Indicator must have a Unit. The Unit can be Gender-disaggregated. In case of Gender-disaggregated Cluster Coordinator has to provide Male and Female targets.</li>
+        <li>Indicator must have a calculation method. This method is needed to do analysis on targeted and reported values. </li>
+    </ol>
+    <h3>OPS Changes</h3>
+    <ol>
+        <li>Strategic Objective: We will only show short text it will be like 'Strategic Objective 1' etc. No change at the OPS end.</li>
+        <li>Change caption 'Activity Indicator' to 'Indicator'.</li>
+        <li>Add Field 'Unit'.</li>
+        <li>Add Field 'Calculation Method'.</li>
+        <li>Locations Changes</li>
+        <ol>
+            <li>Add double header on Locations table.</li>
+            <li>Add two columns for location. 'Admin1' and 'Admin2' in place of 'Location'</li>
+            <li>Add 5 more columns for target. Total columns for targets will be 6. Three for Cluster Targets and three for Project Targets. </li>
+        </ol>
+    </ol>
+    <h4>All these chagnes/fields will be included in the XML feed. The example is given below, after table</h4>
+    <h4>Activity Targets:</h4>
+    <div style="overflow-x: auto; margin:0 auto; width: 80%">
+        <table style="width: 100%;" border="0">
+            <tr>
+                <td>
+                    Strategic Objective:
+                </td>
+                <td>
+                    STRATEGIC OBJECTIVE 1:
+                </td>
+            </tr>
+            <tr>
+                <td>Activity:</td>
+                <td>
+                    Continuously evaluate the coordination of NFIs within different concerned populations (IDPs, returned, foster families and flood victims).
+                </td>
+            </tr>
+            <tr>
+                <td>Indicator:</td>
+                <td>
+                    Number of evaluation reports.
+                </td>
+            </tr>
+            <tr>
+                <td>Unit:</td>
+                <td>People</i></td>
+            </tr>
+            <tr>
+                <td>Calc Method:</td>
+                <td>Average</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <table width="90%" border="1">
+                        <tr>
+                            <td colspan="2" style="background-color:gray; text-align:center">Location</td>
+                            <td colspan="3" style="background-color: gray; text-align: center">Cluster Targets 2016</td>
+                            <td colspan="3" style="background-color: gray; text-align: center">Project Targets 2016</td>
+                        </tr>
+                        <tr>
+                            <td style="background-color:lightgray">Admin1</td>
+                            <td style="background-color:lightgray">Admin2</td>
+                            <td style="background-color:lightgray">Male</td>
+                            <td style="background-color:lightgray">Female</td>
+                            <td style="background-color:lightgray">Total</td>
+                            <td style="background-color:lightgray">Male</td>
+                            <td style="background-color:lightgray">Female</td>
+                            <td style="background-color:lightgray">Total</td>
+                        </tr>
+                        <tr>
+                            <td>Gao</td>
+                            <td>Bourem</td>
+                            <td>100</td>
+                            <td>200</td>
+                            <td>300</td>
+                            <td>50</td>
+                            <td>50</td>
+                            <td>100</td>
+                        </tr>
+                        <tr>
+                            <td>Gao</td>
+                            <td>Gao</td>
+                            <td>75</td>
+                            <td>75</td>
+                            <td>150</td>
+                            <td>50</td>
+                            <td>50</td>
+                            <td>100</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="spaceUnder">
+                <td>
+                    Strategic Objective:
+                </td>
+                <td>
+                    STRATEGIC OBJECTIVE 1:
+                </td>
+            </tr>
+            <tr>
+                <td>Activity:</td>
+                <td>
+                    Support the Development and Review of Country/Regional HNO and SRP.
+                </td>
+            </tr>
+            <tr>
+                <td>Indicator:</td>
+                <td>
+                    Country/Regional HNO and SRP Document  Avalaible.
+                </td>
+            </tr>
+            <tr>
+                <td>Unit:</td>
+                <td>Number</td>
+            </tr>
+            <tr>
+                <td>Calc Method:</td>
+                <td>Sum</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <table width="90%" border="1">
+                        <tr>
+                            <td colspan="2" style="background-color:gray; text-align:center">Location</td>
+                            <td colspan="3" style="background-color: gray; text-align: center">Cluster Targets 2016</td>
+                            <td colspan="3" style="background-color: gray; text-align: center">Project Targets 2016</td>
+                        </tr>
+                        <tr>
+                            <td style="background-color:lightgray">Admin1</td>
+                            <td style="background-color:lightgray">Admin2</td>
+                            <td style="background-color:lightgray">Male</td>
+                            <td style="background-color:lightgray">Female</td>
+                            <td style="background-color:lightgray">Total</td>
+                            <td style="background-color:lightgray">Male</td>
+                            <td style="background-color:lightgray">Female</td>
+                            <td style="background-color:lightgray">Total</td>
+                        </tr>
+                        <tr>
+                            <td>Gao</td>
+                            <td>Bourem</td>
+                            <td></td>
+                            <td></td>
+                            <td>300</td>
+                            <td></td>
+                            <td></td>
+                            <td>100</td>
+                        </tr>
+                        <tr>
+                            <td>Gao</td>
+                            <td>Gao</td>
+                            <td></td>
+                            <td></td>
+                            <td>150</td>
+                            <td></td>
+                            <td></td>
+                            <td>100</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+        <hr />
+        <h3>XML</h3>
+        <hr />
+        <textarea style="width:100%; height:700px">
+            <projectactivities opsid="12345">
+                <projectactivity id="998">
+                    <strategicobjective>STRATEGIC OBJECTIVE 1</strategicobjective>
+                    <activity>Continuously evaluate the coordination of NFIs within different concerned populations (IDPs, returned, foster families and flood victims).</activity>
+                    <outputindicator>Number of evaluation reports.</outputindicator>
+                    <unit>People</unit>
+                    <calcmethod>Average</calcmethod>
+                    <locations>
+                        <location>
+                            <admin1 pcode="MLI007" adminlevel="1">Gao</admin1>
+                            <admin2 pcode="MLI007003" adminlevel="2">Bourem</admin2>
+                            <clustermale year="2016">100</clustermale>
+                            <clusterfemale year="2016">200</clusterfemale>
+                            <clustertotal year="2016">300</clustertotal>
+                            <projectmale year="2016">50</projectmale>
+                            <projectfemale year="2016">50</projectfemale>
+                            <projecttotal year="2016">100</projecttotal>
+                        </location>
+                        <location>
+                            <admin1 pcode="MLI007" adminlevel="1">Gao</admin1>
+                            <admin2 pcode="MLI007001" adminlevel="2">Gao</admin2>
+                            <clustermale year="2016">75</clustermale>
+                            <clusterfemale year="2016">75</clusterfemale>
+                            <clustertotal year="2016">150</clustertotal>
+                            <projectmale year="2016">50</projectmale>
+                            <projectfemale year="2016">50</projectfemale>
+                            <projecttotal year="2016">100</projecttotal>
+                        </location>
+                    </locations>
+                </projectactivity>
+                <projectactivity id="999">
+                    <strategicobjective>STRATEGIC OBJECTIVE 1</strategicobjective>
+                    <activity>Support the Development and Review of Country/Regional HNO and SRP.</activity>
+                    <outputindicator>Country/Regional HNO and SRP Document Avalaible.</outputindicator>
+                    <unit>Number</unit>
+                    <calcmethod>Sum</calcmethod>
+                    <locations>
+                        <location>
+                            <admin1 pcode="MLI007" adminlevel="1">Gao</admin1>
+                            <admin2 pcode="MLI007003" adminlevel="2">Bourem</admin2>
+                            <clustermale year="2016"></clustermale>
+                            <clusterfemale year="2016"></clusterfemale>
+                            <clustertotal year="2016">300</clustertotal>
+                            <projectmale year="2016"></projectmale>
+                            <projectfemale year="2016"></projectfemale>
+                            <projecttotal year="2016">100</projecttotal>
+                        </location>
+                        <location>
+                            <admin1 pcode="MLI007" adminlevel="1">Gao</admin1>
+                            <admin2 pcode="MLI007001" adminlevel="2">Gao</admin2>
+                            <clustermale year="2016"></clustermale>
+                            <clusterfemale year="2016"></clusterfemale>
+                            <clustertotal year="2016">150</clustertotal>
+                            <projectmale year="2016"></projectmale>
+                            <projectfemale year="2016"></projectfemale>
+                            <projecttotal year="2016">100</projecttotal>
+                        </location>
+                    </locations>
+                </projectactivity>
+            </projectactivities>
+        </textarea>
+</body>
+</html>
