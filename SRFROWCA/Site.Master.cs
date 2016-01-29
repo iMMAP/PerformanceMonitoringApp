@@ -419,6 +419,13 @@ namespace SRFROWCA
                 liOutputIndicators.Attributes.Add("class", "active open");
                 liIndicatorReporting.Attributes.Add("class", "active");
             }
+            else if (uri.Contains("ClusterLead/ClusterDataEntry16.aspx"))
+            {
+                PageTitle = "ORS - Country Indicators";
+                liClusterFrameworks.Attributes.Add("class", "active open");
+                liOutputIndicators.Attributes.Add("class", "active open");
+                liIndicatorReporting16.Attributes.Add("class", "active");
+            }
             else if (uri.Contains("ClusterLead/ClusterReports.aspx"))
             {
                 PageTitle = "ORS - Country Indicators";

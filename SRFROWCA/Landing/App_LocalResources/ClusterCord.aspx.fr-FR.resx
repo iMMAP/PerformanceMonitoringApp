@@ -171,4 +171,67 @@
   <data name="localMenu2016ExpFrameworkResource1.Text" xml:space="preserve">
     <value>Exporter le cadre 2016</value>
   </data>
+  <data name="btnImportData15Resource.Text" xml:space="preserve">
+    <value>Import Project Actvities Data 2015 (FR)</value>
+  </data>
+  <data name="btnImportData15Resource.ToolTip" xml:space="preserve">
+    <value>Import Data (FR)</value>
+  </data>
+  <data name="btnlnk3W16Resource.Text" xml:space="preserve">
+    <value>3W of 2016 Activities (FR)</value>
+  </data>
+  <data name="btnlnk3W16Resource.ToolTip" xml:space="preserve">
+    <value>3W of 2016 Activities (FR)</value>
+  </data>
+  <data name="btnlnkOutputDataEntry16Resource.Text" xml:space="preserve">
+    <value>Sector Outputput Indicactors 2016 Data Entry (FR)</value>
+  </data>
+  <data name="btnlnkOutputDataEntry16Resource.ToolTip" xml:space="preserve">
+    <value>Sector Outputput Indicactors 2016 Data Entry (FR)</value>
+  </data>
+  <data name="btnlnkProgress2015Resource.ToolTip" xml:space="preserve">
+    <value>Progress Summary 2015 (FR)</value>
+  </data>
+  <data name="btnlnkProgress2016Resource.Text" xml:space="preserve">
+    <value>Progress Summary 2016 (FR)</value>
+  </data>
+  <data name="btnlnkProgress2016Resource.ToolTip" xml:space="preserve">
+    <value>Progress Summary 2016 (FR)</value>
+  </data>
+  <data name="btnlnkProjects16Resource.Text" xml:space="preserve">
+    <value>My Sector Projects 2016 (FR)</value>
+  </data>
+  <data name="btnlnkProjects16Resource.ToolTip" xml:space="preserve">
+    <value>My Sector Projects 2016 (FR)</value>
+  </data>
+  <data name="btnlnkValidateReport2016Resource.Text" xml:space="preserve">
+    <value>Validate 2016 Partners Report (FR)</value>
+  </data>
+  <data name="btnlnkValidateReport2016Resource.ToolTip" xml:space="preserve">
+    <value>Validate 2016 Partners Report (FR)</value>
+  </data>
+  <data name="localMenu2015OutIndDataEntryResource1.ToolTip" xml:space="preserve">
+    <value>Output Data Entry 2015 (FR)</value>
+  </data>
+  <data name="localMenu2015OutputIndResource1.ToolTip" xml:space="preserve">
+    <value>Cluster Indicators 2015 (FR)</value>
+  </data>
+  <data name="localMenu2015ProjectsResource1.ToolTip" xml:space="preserve">
+    <value>Projects 2015 (FR)</value>
+  </data>
+  <data name="localMenu2015SectorIndResource1.ToolTip" xml:space="preserve">
+    <value>Sector Indicators 2015 (FR)</value>
+  </data>
+  <data name="localMenu2015ValidateResource1.ToolTip" xml:space="preserve">
+    <value>2015 Report (FR)</value>
+  </data>
+  <data name="localMenu2016ExpFrameworkResource1.ToolTip" xml:space="preserve">
+    <value>Export 2016 Framework (FR)</value>
+  </data>
+  <data name="localMenu2016OutputIndResource1.ToolTip" xml:space="preserve">
+    <value>Output Indicators (FR)</value>
+  </data>
+  <data name="localMenu2016SectorIndResource1.ToolTip" xml:space="preserve">
+    <value>Sector Indicators (FR)</value>
+  </data>
 </root>

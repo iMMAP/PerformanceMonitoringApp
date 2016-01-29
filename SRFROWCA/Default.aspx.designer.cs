@@ -40,67 +40,67 @@ namespace SRFROWCA {
         protected global::System.Web.UI.WebControls.Localize localMenuORSLable;
         
         /// <summary>
-        /// localMenuDashboard control.
+        /// btnlnkDashboard control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localMenuDashboard;
+        protected global::System.Web.UI.WebControls.LinkButton btnlnkDashboard;
         
         /// <summary>
-        /// localMenuMaps control.
+        /// btnlnkCountryMaps control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localMenuMaps;
+        protected global::System.Web.UI.WebControls.LinkButton btnlnkCountryMaps;
         
         /// <summary>
-        /// localMenuKeyFigures control.
+        /// btnlnkKeyFigures control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localMenuKeyFigures;
+        protected global::System.Web.UI.WebControls.LinkButton btnlnkKeyFigures;
         
         /// <summary>
-        /// localMenuProjects control.
+        /// btnlnkProjects control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localMenuProjects;
+        protected global::System.Web.UI.WebControls.LinkButton btnlnkProjects;
         
         /// <summary>
-        /// localMenuOutputInd control.
+        /// btnlnkOutputIndicators control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localMenuOutputInd;
+        protected global::System.Web.UI.WebControls.LinkButton btnlnkOutputIndicators;
         
         /// <summary>
-        /// localMenuFramework2015 control.
+        /// btnlnkFramework control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localMenuFramework2015;
+        protected global::System.Web.UI.WebControls.LinkButton btnlnkFramework;
         
         /// <summary>
-        /// localMenuCustomReport control.
+        /// btnlnkAllData control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localMenuCustomReport;
+        protected global::System.Web.UI.WebControls.LinkButton btnlnkAllData;
         
         /// <summary>
         /// localMenuLogRegLable control.

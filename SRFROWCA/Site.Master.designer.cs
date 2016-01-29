@@ -355,6 +355,24 @@ namespace SRFROWCA {
         protected global::System.Web.UI.WebControls.Localize localClFOutputDataEntry;
         
         /// <summary>
+        /// liIndicatorReporting16 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liIndicatorReporting16;
+        
+        /// <summary>
+        /// Localize6 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize Localize6;
+        
+        /// <summary>
         /// liIndicatorReport control.
         /// </summary>
         /// <remarks>

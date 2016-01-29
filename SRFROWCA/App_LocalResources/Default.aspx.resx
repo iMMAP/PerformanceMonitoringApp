@@ -172,7 +172,7 @@
     <value>Cluster Output Indicators Reported</value>
   </data>
   <data name="localMenuProjectsResource1.Text" xml:space="preserve">
-    <value>Projects 2015 List</value>
+    <value>Projects List</value>
   </data>
   <data name="locDefaultIntroResource1.Text" xml:space="preserve">
     <value>The Sahel Online Reporting System (ORS) is a performance monitoring tool that allows humanitarian partners 
@@ -197,5 +197,26 @@
   </data>
   <data name="localDonthaveORSResource.Text" xml:space="preserve">
     <value>Don't have ORS Account?</value>
+  </data>
+  <data name="localMenuCustomReportResource1.ToolTip" xml:space="preserve">
+    <value>Custom Report</value>
+  </data>
+  <data name="localMenuDashboardResource1.ToolTip" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="localMenuFramework2015Resource1.ToolTip" xml:space="preserve">
+    <value>Framework</value>
+  </data>
+  <data name="localMenuKeyFiguresResource1.ToolTip" xml:space="preserve">
+    <value>KeyFigures</value>
+  </data>
+  <data name="localMenuMapsResource1.ToolTip" xml:space="preserve">
+    <value>Maps</value>
+  </data>
+  <data name="localMenuOutputIndResource1.ToolTip" xml:space="preserve">
+    <value>Output Indicators</value>
+  </data>
+  <data name="localMenuProjectsResource1.ToolTip" xml:space="preserve">
+    <value>Projects</value>
   </data>
 </root>

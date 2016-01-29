@@ -21,6 +21,10 @@ namespace SRFROWCA
                 {
                     if (RC.IsClusterLead(this.User))
                         Response.Redirect("~/Landing/ClusterCord.aspx");
+                    else if (RC.IsDataEntryUser(this.User))
+                        Response.Redirect("~/Landing/ImplementingPartners.aspx");
+                    else if (RC.IsCountryAdmin(this.User))
+                        Response.Redirect("~/Landing/OCHALanding.aspx");
                     else
                         Response.Redirect("Dashboard.aspx");
                 }

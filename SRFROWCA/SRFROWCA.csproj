@@ -185,6 +185,7 @@
     <Content Include="ClusterLead\AddActivityAndIndicators.aspx" />
     <Content Include="Admin\ConfigSettings.aspx" />
     <Content Include="ClusterLead\ClusterDataEntry.aspx" />
+    <Content Include="ClusterLead\ClusterDataEntry16.aspx" />
     <Content Include="ClusterLead\ClusterReports.aspx" />
     <Content Include="ClusterLead\CountryIndicators.aspx" />
     <Content Include="Admin\EmergencyClusters.aspx" />
@@ -197,6 +198,7 @@
     <Content Include="Admin\Organization\AddEditOrganization.aspx" />
     <Content Include="Admin\Organization\OrganizationList.aspx" />
     <Content Include="ClusterLead\CountryIndMigrate.aspx" />
+    <Content Include="ClusterLead\ImportData16.aspx" />
     <Content Include="ClusterLead\IndicatorListing2016.aspx" />
     <Content Include="ClusterLead\IndicatorListingMigrate.aspx" />
     <Content Include="ClusterLead\ProgressSummary.aspx" />
@@ -264,6 +266,9 @@
     <Content Include="Anonymous\ExpClusterFramework.aspx" />
     <Content Include="ClusterLead\ValidateIndicators.aspx" />
     <Content Include="ClusterLead\ValidateReportList.aspx" />
+    <Content Include="ClustOutputIndicators\ctlOutputIndicatorDataEntryCountry.ascx" />
+    <Content Include="ClustOutputIndicators\ctlOutputIndicatorsDataEntry.ascx" />
+    <Content Include="ClustOutputIndicators\TestDataEntry.aspx" />
     <Content Include="Configurations\AdminTargetSettings.xml" />
     <Content Include="Configurations\ChangeEndSettings.xml" />
     <Content Include="Configurations\Settings.xml" />
@@ -321,6 +326,8 @@
     <Content Include="KeyFigures\KeyFiguresListing.aspx" />
     <Content Include="KeyFigures\KeyFiguresListingPublic.aspx" />
     <Content Include="Landing\ClusterCord.aspx" />
+    <Content Include="Landing\ImplementingPartners.aspx" />
+    <Content Include="Landing\OCHALanding.aspx" />
     <Content Include="Log\ErrorLog.txt" />
     <Content Include="OperationalPresence.aspx" />
     <Content Include="OPSTargets.html" />
@@ -405,6 +412,8 @@
     <Content Include="DataFeeds\IndicatorsClusterProjectsTargets.ashx" />
     <Content Include="DataFeeds\ProjectReqWithOrgStretch.ashx" />
     <Content Include="DataFeeds\OrsLocations.ashx" />
+    <Content Include="DataFeeds\ClusterIndicatorReports16.ashx" />
+    <Content Include="DataFeeds\ProjectPartners.ashx" />
     <None Include="HelpFiles\HelpDocs\HelpEng\1_ORS_description_EN_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpEng\2_ORS_Resgistration_EN_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpEng\3_ORS_Role_EN_v3.pdf" />
@@ -622,6 +631,13 @@
     <Compile Include="ClusterLead\ClusterDataEntry.aspx.designer.cs">
       <DependentUpon>ClusterDataEntry.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ClusterLead\ClusterDataEntry16.aspx.cs">
+      <DependentUpon>ClusterDataEntry16.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClusterLead\ClusterDataEntry16.aspx.designer.cs">
+      <DependentUpon>ClusterDataEntry16.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ClusterLead\ClusterReports.aspx.cs">
       <DependentUpon>ClusterReports.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -705,6 +721,13 @@
     </Compile>
     <Compile Include="ClusterLead\CountryIndMigrate.aspx.designer.cs">
       <DependentUpon>CountryIndMigrate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClusterLead\ImportData16.aspx.cs">
+      <DependentUpon>ImportData16.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClusterLead\ImportData16.aspx.designer.cs">
+      <DependentUpon>ImportData16.aspx</DependentUpon>
     </Compile>
     <Compile Include="ClusterLead\IndicatorListing2016.aspx.cs">
       <DependentUpon>IndicatorListing2016.aspx</DependentUpon>
@@ -824,6 +847,27 @@
     <Compile Include="ClusterLead\ValidateReportList.aspx.designer.cs">
       <DependentUpon>ValidateReportList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ClustOutputIndicators\ctlOutputIndicatorDataEntryCountry.ascx.cs">
+      <DependentUpon>ctlOutputIndicatorDataEntryCountry.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClustOutputIndicators\ctlOutputIndicatorDataEntryCountry.ascx.designer.cs">
+      <DependentUpon>ctlOutputIndicatorDataEntryCountry.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ClustOutputIndicators\ctlOutputIndicatorsDataEntry.ascx.cs">
+      <DependentUpon>ctlOutputIndicatorsDataEntry.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClustOutputIndicators\ctlOutputIndicatorsDataEntry.ascx.designer.cs">
+      <DependentUpon>ctlOutputIndicatorsDataEntry.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ClustOutputIndicators\TestDataEntry.aspx.cs">
+      <DependentUpon>TestDataEntry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClustOutputIndicators\TestDataEntry.aspx.designer.cs">
+      <DependentUpon>TestDataEntry.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Common\DataTableToCSV.cs" />
     <Compile Include="Common\EmailNotifications.cs" />
     <Compile Include="Common\Extentions.cs" />
@@ -930,6 +974,9 @@
     <Compile Include="DataFeeds\ClusterIndicatorReports.ashx.cs">
       <DependentUpon>ClusterIndicatorReports.ashx</DependentUpon>
     </Compile>
+    <Compile Include="DataFeeds\ClusterIndicatorReports16.ashx.cs">
+      <DependentUpon>ClusterIndicatorReports16.ashx</DependentUpon>
+    </Compile>
     <Compile Include="DataFeeds\Clusters.ashx.cs">
       <DependentUpon>Clusters.ashx</DependentUpon>
     </Compile>
@@ -966,6 +1013,9 @@
     </Compile>
     <Compile Include="DataFeeds\OrsLocations.ashx.cs">
       <DependentUpon>OrsLocations.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="DataFeeds\ProjectPartners.ashx.cs">
+      <DependentUpon>ProjectPartners.ashx</DependentUpon>
     </Compile>
     <Compile Include="DataFeeds\ProjectReqWithOrgStretch.ashx.cs">
       <DependentUpon>ProjectReqWithOrgStretch.ashx</DependentUpon>
@@ -1182,6 +1232,20 @@
     </Compile>
     <Compile Include="Landing\ClusterCord.aspx.designer.cs">
       <DependentUpon>ClusterCord.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Landing\ImplementingPartners.aspx.cs">
+      <DependentUpon>ImplementingPartners.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Landing\ImplementingPartners.aspx.designer.cs">
+      <DependentUpon>ImplementingPartners.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Landing\OCHALanding.aspx.cs">
+      <DependentUpon>OCHALanding.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Landing\OCHALanding.aspx.designer.cs">
+      <DependentUpon>OCHALanding.aspx</DependentUpon>
     </Compile>
     <Compile Include="NoMenue.Master.cs">
       <DependentUpon>NoMenue.Master</DependentUpon>

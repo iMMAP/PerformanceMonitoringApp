@@ -18,6 +18,12 @@ namespace SRFROWCA.ClusterLead
                 LoadCombos();
                 SetFiltersFromSession();
                 DisableDropDowns();
+                if (Request.QueryString["year"] != null)
+                {
+                    if (Request.QueryString["year"] == "2015")
+                        ddlFrameworkYear.SelectedValue = "11";
+                }
+
                 LoadClusterIndicators();
                 ToggleAddIndicators();
             }

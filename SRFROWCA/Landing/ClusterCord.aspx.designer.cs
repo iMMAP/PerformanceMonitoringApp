@@ -49,40 +49,76 @@ namespace SRFROWCA.Landing {
         protected global::System.Web.UI.WebControls.Localize localCanDo2016;
         
         /// <summary>
-        /// localMenu2016OutputInd control.
+        /// btnlnkValidateReport16 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localMenu2016OutputInd;
+        protected global::System.Web.UI.WebControls.LinkButton btnlnkValidateReport16;
         
         /// <summary>
-        /// localMenu2016SectorInd control.
+        /// btnlnkClusterIndicators16 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localMenu2016SectorInd;
+        protected global::System.Web.UI.WebControls.LinkButton btnlnkClusterIndicators16;
         
         /// <summary>
-        /// localMenu2016Migrate control.
+        /// btnlnkSectorIndicators16 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localMenu2016Migrate;
+        protected global::System.Web.UI.WebControls.LinkButton btnlnkSectorIndicators16;
         
         /// <summary>
-        /// localMenu2016ExpFramewrk control.
+        /// btnlnkOutputDataEntry16 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localMenu2016ExpFramewrk;
+        protected global::System.Web.UI.WebControls.LinkButton btnlnkOutputDataEntry16;
+        
+        /// <summary>
+        /// btnlnkProjects16 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnlnkProjects16;
+        
+        /// <summary>
+        /// btnlnk3W16 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnlnk3W16;
+        
+        /// <summary>
+        /// btnlnkProgress16 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnlnkProgress16;
+        
+        /// <summary>
+        /// btnlnkExportFramework control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnlnkExportFramework;
         
         /// <summary>
         /// localCCReport control.
@@ -112,40 +148,76 @@ namespace SRFROWCA.Landing {
         protected global::System.Web.UI.WebControls.Localize localCanDo2015;
         
         /// <summary>
-        /// localMenu2015Validate control.
+        /// btnlnkValidateReport15 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localMenu2015Validate;
+        protected global::System.Web.UI.WebControls.LinkButton btnlnkValidateReport15;
         
         /// <summary>
-        /// localMenu2015OutIndDataEntry control.
+        /// btnlnkClusterIndicators15 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localMenu2015OutIndDataEntry;
+        protected global::System.Web.UI.WebControls.LinkButton btnlnkClusterIndicators15;
         
         /// <summary>
-        /// localMenu2015Projects control.
+        /// btnlnkSectorIndicators15 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localMenu2015Projects;
+        protected global::System.Web.UI.WebControls.LinkButton btnlnkSectorIndicators15;
         
         /// <summary>
-        /// localMenu20153W control.
+        /// btnlnkOutputDataEntry15 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localMenu20153W;
+        protected global::System.Web.UI.WebControls.LinkButton btnlnkOutputDataEntry15;
+        
+        /// <summary>
+        /// btnlnkProjects15 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnlnkProjects15;
+        
+        /// <summary>
+        /// btnlnk3W15 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnlnk3W15;
+        
+        /// <summary>
+        /// btnlnkProgress15 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnlnkProgress15;
+        
+        /// <summary>
+        /// btnImportData15 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnImportData15;
         
         /// <summary>
         /// locHelpLable control.

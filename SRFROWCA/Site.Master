@@ -152,7 +152,10 @@
                                         </span></a></li>
 
                                         <li id="liIndicatorReporting" runat="server"><a href="<%=BaseURL %>/ClusterLead/ClusterDataEntry.aspx"><span class="menu-text">
-                                            <asp:Localize ID="localClFOutputDataEntry" runat="server" Text="Output Data Entry" meta:resourcekey="localClFOutputDataEntry"></asp:Localize>
+                                            <asp:Localize ID="localClFOutputDataEntry" runat="server" Text="Output Data Entry (15)" meta:resourcekey="localClFOutputDataEntry"></asp:Localize>
+                                        </span></a></li>
+                                        <li id="liIndicatorReporting16" runat="server"><a href="<%=BaseURL %>/ClusterLead/ClusterDataEntry16.aspx"><span class="menu-text">
+                                            <asp:Localize ID="Localize6" runat="server" Text="Output Data Entry (16)"></asp:Localize>
                                         </span></a></li>
 
                                         <li id="liIndicatorReport" runat="server"><a href="<%=BaseURL %>/ClusterLead/ClusterReports.aspx"><span class="menu-text">

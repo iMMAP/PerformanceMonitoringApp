@@ -24,6 +24,13 @@ namespace SRFROWCA.ClusterLead
                 btnCreateProject.Visible = false;
             }
 
+            if (Request.QueryString["year"] != null)
+            {
+                if (Request.QueryString["year"] == "2015")
+                    ddlFrameworkYear.SelectedValue = "11";
+            }
+            
+
             PopulateControls();
             LoadProjects();
         }

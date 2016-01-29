@@ -34,11 +34,15 @@ namespace SRFROWCA.Account
             UserInfo.UserProfileInfo(RC.EmergencySahel2015);
             if (Roles.IsUserInRole(LoginUser.UserName, "User"))
             {
-                Response.Redirect("~/Pages/AddActivities.aspx");
+                Response.Redirect("~/Landing/ImplementingPartners.aspx");
             }
             else if (Roles.IsUserInRole(LoginUser.UserName, "ClusterLead"))
             {
                 Response.Redirect("~/Landing/ClusterCord.aspx");
+            }
+            else if (Roles.IsUserInRole(LoginUser.UserName, "CountryAdmin"))
+            {
+                Response.Redirect("~/Landing/OCHALanding.aspx");
             }
             else
             {

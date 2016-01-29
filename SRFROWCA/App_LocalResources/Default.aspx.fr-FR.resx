@@ -172,7 +172,7 @@
     <value>Indicateurs de résultat rapportés</value>
   </data>
   <data name="localMenuProjectsResource1.Text" xml:space="preserve">
-    <value>Liste des projets 2015</value>
+    <value>Liste des projets</value>
   </data>
   <data name="locDefaultIntroResource1.Text" xml:space="preserve">
     <value>Le système de rapportage en ligne (ORS) est un outil de suivi des performances qui permet aux partenaires humanitaires, participant aux processus de planification inter-agences, de renseigner sur les progrès basés sur les activités définies lors du SRP/HRP. La base de données a été conçue afin de faciliter le partage de l’information et de suivre la réponse des interventions humanitaires.</value>
@@ -194,5 +194,26 @@
   </data>
   <data name="localDonthaveORSResource.Text" xml:space="preserve">
     <value>Nouvel utilisateur ORS ?</value>
+  </data>
+  <data name="localMenuCustomReportResource1.ToolTip" xml:space="preserve">
+    <value>Custom Report (FR)</value>
+  </data>
+  <data name="localMenuDashboardResource1.ToolTip" xml:space="preserve">
+    <value>Dashboard (FR)</value>
+  </data>
+  <data name="localMenuFramework2015Resource1.ToolTip" xml:space="preserve">
+    <value>Framework (FR)</value>
+  </data>
+  <data name="localMenuKeyFiguresResource1.ToolTip" xml:space="preserve">
+    <value>KeyFigures (FR)</value>
+  </data>
+  <data name="localMenuMapsResource1.ToolTip" xml:space="preserve">
+    <value>Maps (FR)</value>
+  </data>
+  <data name="localMenuOutputIndResource1.ToolTip" xml:space="preserve">
+    <value>Output Indicators (FR)</value>
+  </data>
+  <data name="localMenuProjectsResource1.ToolTip" xml:space="preserve">
+    <value>Projects (FR)</value>
   </data>
 </root>
