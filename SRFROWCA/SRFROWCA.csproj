@@ -414,6 +414,8 @@
     <Content Include="DataFeeds\OrsLocations.ashx" />
     <Content Include="DataFeeds\ClusterIndicatorReports16.ashx" />
     <Content Include="DataFeeds\ProjectPartners.ashx" />
+    <Content Include="DataFeeds\ProjectIndicatorsWithTargets.ashx" />
+    <Content Include="DataFeeds\OrganizationsByCountry.ashx" />
     <None Include="HelpFiles\HelpDocs\HelpEng\1_ORS_description_EN_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpEng\2_ORS_Resgistration_EN_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpEng\3_ORS_Role_EN_v3.pdf" />
@@ -1005,6 +1007,9 @@
     <Compile Include="DataFeeds\Organizations.ashx.cs">
       <DependentUpon>Organizations.ashx</DependentUpon>
     </Compile>
+    <Compile Include="DataFeeds\OrganizationsByCountry.ashx.cs">
+      <DependentUpon>OrganizationsByCountry.ashx</DependentUpon>
+    </Compile>
     <Compile Include="DataFeeds\OrganizationsFeed.ashx.cs">
       <DependentUpon>OrganizationsFeed.ashx</DependentUpon>
     </Compile>
@@ -1013,6 +1018,9 @@
     </Compile>
     <Compile Include="DataFeeds\OrsLocations.ashx.cs">
       <DependentUpon>OrsLocations.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="DataFeeds\ProjectIndicatorsWithTargets.ashx.cs">
+      <DependentUpon>ProjectIndicatorsWithTargets.ashx</DependentUpon>
     </Compile>
     <Compile Include="DataFeeds\ProjectPartners.ashx.cs">
       <DependentUpon>ProjectPartners.ashx</DependentUpon>

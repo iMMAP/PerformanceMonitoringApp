@@ -121,6 +121,15 @@ namespace SRFROWCA.Landing {
         protected global::System.Web.UI.WebControls.LinkButton btnlnkExportFramework;
         
         /// <summary>
+        /// btnlnkImportData16 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnlnkImportData16;
+        
+        /// <summary>
         /// localCCReport control.
         /// </summary>
         /// <remarks>

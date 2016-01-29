@@ -72,7 +72,7 @@ namespace SRFROWCA.ClusterLead
                     if (dt.Rows.Count > 0)
                     {
                         FillStagingTableInDB(dt);
-                        //ImportData();
+                        ImportData();
                         //TruncateTempTables();
                     }
 
@@ -111,6 +111,7 @@ namespace SRFROWCA.ClusterLead
         // Read Data From Excel Sheet and Save into DB
         private void FillStagingTableInDB(DataTable dt)
         {
+            DBContext.Update("TruncateStagingTable2016", new object[] { DBNull.Value });
             string conString = ConfigurationManager.ConnectionStrings["live_dbName"].ConnectionString;
             WriteDataToDB(dt, conString);
         }
@@ -174,20 +175,7 @@ namespace SRFROWCA.ClusterLead
             }
         }
 
-        //private void CreateStagingTable(string tableScript, string conString)
-        //{
-        //    SqlConnection con = new SqlConnection(conString);
-        //    SqlCommand cmd = new SqlCommand(tableScript, con);
-        //    try
-        //    {
-        //        con.Open();
-        //        cmd.ExecuteNonQuery();
-        //    }
-        //    finally
-        //    {
-        //        con.Close();
-        //    }
-        //}
+       
 
         // Upload file to server and return full path with name of file.
         private string UploadFile()
@@ -257,7 +245,8 @@ namespace SRFROWCA.ClusterLead
         private DataTable ImportData()
         {
             int yearId = 12;
-            return DBContext.GetData("ImportUserCLDataFromStagingTable2015", new object[] { UserInfo.EmergencyCountry, yearId, RC.GetCurrentUserId, RC.IsClusterLead(User) });
+            int monthId = Convert.ToInt32(ddlMonth.SelectedValue);
+            return DBContext.GetData("ImportUserCLDataFromStagingTable2016", new object[] { yearId, monthId, RC.GetCurrentUserId, RC.IsClusterLead(User) });
         }
 
         // Create new datatable and appropriate columns.
