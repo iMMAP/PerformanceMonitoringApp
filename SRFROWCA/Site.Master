@@ -111,7 +111,7 @@
                             <asp:Localize ID="localDashboard" runat="server" Text="Dashboard" meta:resourcekey="localMasterDashboardResource1"></asp:Localize>
                         </span></a></li>
 
-                        <li id="liProjects" runat="server"><a href="~/ClusterLead/ProjectsListing.aspx"
+                        <li id="liProjects" runat="server"><a href="~/OrsProject/ProjectsListing.aspx"
                             id="menuProjects" runat="server"><i class="icon-file-alt"></i><span class="menu-text">
                                 <asp:Localize ID="localMainProjects" runat="server" Text="Projects" meta:resourcekey="localCLProjectListingMainResource1"></asp:Localize>
                             </span></a>
@@ -152,10 +152,10 @@
                                         </span></a></li>
 
                                         <li id="liIndicatorReporting" runat="server"><a href="<%=BaseURL %>/ClusterLead/ClusterDataEntry.aspx"><span class="menu-text">
-                                            <asp:Localize ID="localClFOutputDataEntry" runat="server" Text="Output Data Entry (15)" meta:resourcekey="localClFOutputDataEntry"></asp:Localize>
+                                            <asp:Localize ID="localClFOutputDataEntry" runat="server" Text="Output Data Entry 2015" meta:resourcekey="localClFOutputDataEntry"></asp:Localize>
                                         </span></a></li>
                                         <li id="liIndicatorReporting16" runat="server"><a href="<%=BaseURL %>/ClusterLead/ClusterDataEntry16.aspx"><span class="menu-text">
-                                            <asp:Localize ID="Localize6" runat="server" Text="Output Data Entry (16)"></asp:Localize>
+                                            <asp:Localize ID="Localize6" runat="server" Text="Output Data Entry 2016"  meta:resourcekey="localCLFOutputDataEntry16"></asp:Localize>
                                         </span></a></li>
 
                                         <li id="liIndicatorReport" runat="server"><a href="<%=BaseURL %>/ClusterLead/ClusterReports.aspx"><span class="menu-text">
@@ -250,11 +250,11 @@
                             </ul>
                         </li>
 
-                        <li id="liBulkImport" runat="server"><a href="~/ClusterLead/UploadAchieved.aspx" id="menueBulkImport"
+                        <li id="liBulkImport" runat="server"><a href="~/ClusterLead/ImportData16.aspx" id="menueBulkImport"
                             runat="server"><i class="icon-list-alt"></i><span class="menu-text">
                                 <asp:Localize ID="localImportData" runat="server" Text="Import Data" meta:resourcekey="localImportDataResource1"></asp:Localize></span>
                         </a></li>
-                        <li id="liBulkImportUser" runat="server"><a href="~/Pages/UploadAchived.aspx" id="A1"
+                        <li id="liBulkImportUser" runat="server"><a href="~/ClusterLead/ImportData16.aspx" id="A1"
                             runat="server"><i class="icon-list-alt"></i><span class="menu-text">
                                 <asp:Localize ID="localImportDataUser" runat="server" Text="Import Data" meta:resourcekey="localImportDataUserResource1"></asp:Localize></span>
                         </a></li>

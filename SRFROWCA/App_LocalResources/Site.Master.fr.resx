@@ -292,7 +292,7 @@
     <value>Gestion des indicateurs</value>
   </data>
   <data name="localClFOutputDataEntry.Text" xml:space="preserve">
-    <value>Saise des données</value>
+    <value>Saise des données 2015</value>
   </data>
   <data name="localClFOutputDataReport.Text" xml:space="preserve">
     <value>Rapport de résultat</value>
@@ -350,5 +350,8 @@
   </data>
   <data name="localHomeRsource.Text" xml:space="preserve">
     <value>Accueil</value>
+  </data>
+  <data name="localCLFOutputDataEntry16" xml:space="preserve">
+    <value>Saise des données 2016</value>
   </data>
 </root>

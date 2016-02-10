@@ -316,7 +316,7 @@ namespace SRFROWCA
             {
                 liOutputIndReportPublic.Attributes.Add("class", "active");
             }
-            else if (uri == "/ClusterLead/ProjectsListing.aspx" || uri.Contains("/ClusterLead/ProjectDetails.aspx"))
+            else if (uri == "/OrsProject/ProjectsListing.aspx" || uri.Contains("/OrsProject/ProjectDetails.aspx"))
             {
                 PageTitle = "ORS - Projects";
                 liProjects.Attributes.Add("class", "active");

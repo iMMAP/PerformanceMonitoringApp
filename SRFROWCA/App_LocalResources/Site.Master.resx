@@ -304,7 +304,7 @@
     <value>Manage Indicators</value>
   </data>
   <data name="localClFOutputDataEntry.Text" xml:space="preserve">
-    <value>Output Data Entry</value>
+    <value>Output Data Entry 2015</value>
   </data>
   <data name="localClFOutputDataReport.Text" xml:space="preserve">
     <value>Output Report</value>
@@ -362,5 +362,8 @@
   </data>
   <data name="localHomeRsource.Text" xml:space="preserve">
     <value>Home</value>
+  </data>
+  <data name="localCLFOutputDataEntry16" xml:space="preserve">
+    <value>Output Data Entry 2016</value>
   </data>
 </root>

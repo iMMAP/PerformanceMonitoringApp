@@ -52,10 +52,10 @@
                                                     <asp:Localize ID="localCanDo2016" runat="server" Text="You Can Do ..."></asp:Localize>
                                                 </div>
                                                 <ul class="list-unstyled spaced">
-                                                    <.xli> 
+                                                    <li> 
                                                         <asp:LinkButton ID="btnlnkValidateReport16" runat="server" Text="Validate 2016 Partners Report" CssClass="tooltip elemopacity"
                                                              PostBackUrl="../ClusterLead/ValidateReportList.aspx"></asp:LinkButton>
-                                                    </.xli>
+                                                    </li>
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkClusterIndicators16" runat="server" Text="Go to my 2016 Output Indicators Page"
                                                              PostBackUrl="../ClusterLead/CountryIndicators.aspx"></asp:LinkButton>
@@ -67,10 +67,9 @@
                                                     </li>--%>
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkSectorIndicators16" runat="server" Text="GO to my 2016 Sector Response Plan" CssClass="tooltip elemopacity"
-                                                             PostBackUrl="../ClusterLead/IndicatorListing.aspx"z cx AccessKey  ></asp:LinkButton>
+                                                             PostBackUrl="../ClusterLead/IndicatorListing.aspx"></asp:LinkButton>
                                                     </li>
-                                                    <%--<li>
-                                                        <a href="../ClusterLead/IndicatorListing.aspx">
+                                                    <%--<li>                                                  <a href="../ClusterLead/IndicatorListing.aspx">
                                                             <asp:Localize ID="localMenu2016SectorInd" runat="server" Text="Go to my 2016 Sector Response Plan" meta:resourcekey="localMenu2016SectorIndResource1"></asp:Localize>
                                                         </a>
                                                     </li>--%>

@@ -8,18 +8,12 @@
         </div>
         <asp:label id="lblMessage" runat="server" text=""></asp:label>
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-xs-8">
                 <!-- PAGE CONTENT BEGINS -->
 
                 <div class="error-container">
                     <div class="well">
                         <div>
-                            <p>
-                                Select Month You Are Reporting For:
-                                    <asp:dropdownlist id="ddlMonth" runat="server">
-                                    </asp:dropdownlist>
-                            </p>
-
                             <p>
                                 <asp:localize id="localUploadBrowseText" runat="server" text="Click 'Browse' To Select File."></asp:localize>
                             </p>
@@ -29,6 +23,25 @@
                             <p>
                                 <asp:button id="btnImport" runat="server" text="Import" cssclass="btn btn-primary" onclick="btnImport_Click" />
                             </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- PAGE CONTENT ENDS -->
+            </div>
+            <div class="col-xs-4">
+                <!-- PAGE CONTENT BEGINS -->
+
+                <div class="error-container">
+                    <div class="well">
+                        <div>
+                            <p>This is only for testing purpose!</p>
+                            <p> 
+                                Export My Data.
+                            </p>
+                            <p>
+                                <asp:button id="btnExport" runat="server" text="Export To Excel" cssclass="btn btn-primary" onclick="btnExport_Click" />
+                            </p>
+                            
                         </div>
                     </div>
                 </div>

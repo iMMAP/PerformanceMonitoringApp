@@ -282,7 +282,6 @@ namespace SRFROWCA.Common
             string siteCulture = RC.SelectedSiteLanguageId.Equals(1) ? "en-US" : "fr-FR";
             if (number.Length > 1)
                     number  = String.Format(new CultureInfo(siteCulture), "{0:0,0}", Convert.ToInt32(number));
-
             return number;
         }
 

@@ -14,61 +14,12 @@ namespace SRFROWCA.ClusterLead
         {
             if (!IsPostBack)
             {
-                //CliearFilterSession();
                 LoadCombos();
                 DisableDropDowns();
                 SetDates();
-                //AddIndicatorControl();
                 LoadClusterIndicators();
-
             }
-
-            //string controlName = GetPostBackControlId(this);
-
-            //if (controlName == "btnSaveAll")
-            //{
-            //    AddIndicatorControl();
-            //}
         }
-
-        //private void AddIndicatorControl()
-        //{
-        //    //pnlAdditionalIndicaotrs.Controls.RemoveAt(0);
-        //    if (ddlFrameworkYear.SelectedValue == "12")
-        //    {
-        //        ctlOutputIndicatorsDataEntry indCtl = (ctlOutputIndicatorsDataEntry)LoadControl("ctlOutputIndicatorsDataEntry.ascx");
-
-        //        int val = 0;
-        //        val = RC.GetSelectedIntVal(ddlCountry);
-        //        indCtl.EmgLocationId = val > 0 ? val : (int?)null;
-        //        val = RC.GetSelectedIntVal(ddlCluster);
-        //        indCtl.EmgClusterId = val > 0 ? val : (int?)null;
-        //        indCtl.YearId = RC.GetSelectedIntVal(ddlFrameworkYear);
-        //        indCtl.MonthId = Convert.ToInt32(ddlMonth.SelectedValue);
-        //        indCtl.IsRegional = RC.IsRegionalClusterLead(this.User) ? 1 : (int?)null;
-
-        //        //LoadIndLocations(indCtl, 0, false);
-        //        //indCtl.ControlNumber = 1;
-        //        indCtl.ID = "indicatorControlId" + "1";
-        //        pnlAdditionalIndicaotrs.Controls.Add(indCtl);
-        //    }
-        //    else
-        //    {
-        //        ctlOutputIndicatorDataEntryCountry indCtl = (ctlOutputIndicatorDataEntryCountry)LoadControl("ctlOutputIndicatorDataEntryCountry.ascx");
-
-        //        int val = 0;
-        //        val = RC.GetSelectedIntVal(ddlCountry);
-        //        indCtl.EmgLocationId = val > 0 ? val : (int?)null;
-        //        val = RC.GetSelectedIntVal(ddlCluster);
-        //        indCtl.EmgClusterId = val > 0 ? val : (int?)null;
-        //        indCtl.YearId = RC.GetSelectedIntVal(ddlFrameworkYear);
-        //        indCtl.MonthId = Convert.ToInt32(ddlMonth.SelectedValue);
-        //        indCtl.IsRegional = RC.IsRegionalClusterLead(this.User) ? 1 : (int?)null;
-
-        //        indCtl.ID = "indicatorControlId" + "1";
-        //        pnlAdditionalIndicaotrs.Controls.Add(indCtl);
-        //    }
-        //}
 
         private void DisableDropDowns()
         {
@@ -88,15 +39,6 @@ namespace SRFROWCA.ClusterLead
                 RC.EnableDisableControls(ddlCluster, false);
             }
         }
-
-        //internal override void BindGridData()
-        //{
-        //    LoadCombos();
-        //    DisableDropDowns();
-        //    SetDates();
-        //    SetFiltersFromSession();
-        //    LoadClusterIndicators();
-        //}
 
         private void LoadCombos()
         {
@@ -242,13 +184,6 @@ namespace SRFROWCA.ClusterLead
         {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
-                //UI.SetThousandSeparator(e.Item, "lblCountryTargetMaleCluster");
-                //UI.SetThousandSeparator(e.Item, "lblCountryTargetFemaleCluster");
-                //UI.SetThousandSeparator(e.Item, "lblCountryTargetCluster");
-                //UI.SetThousandSeparator(e.Item, "lblCountryTargetMaleProject");
-                //UI.SetThousandSeparator(e.Item, "lblCountryTargetFemaleProject");
-                //UI.SetThousandSeparator(e.Item, "lblCountryTargetProject");
-
                 HiddenField hfIndicatorId = e.Item.FindControl("hfCountryIndicatorId") as HiddenField;
                 int indicatorId = 0;
                 if (hfIndicatorId != null)
@@ -284,10 +219,6 @@ namespace SRFROWCA.ClusterLead
         {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
-                //UI.SetThousandSeparator(e.Item, "lblAdmin1TargetMaleCluster");
-                //UI.SetThousandSeparator(e.Item, "lblAdmin1TargetFemaleCluster");
-                //UI.SetThousandSeparator(e.Item, "lblAdmin1TargetCluster");
-
                 HiddenField hfIndicatorId = e.Item.FindControl("hfAdmin1IndicatorId") as HiddenField;
                 int indicatorId = 0;
                 if (hfIndicatorId != null)
@@ -334,36 +265,6 @@ namespace SRFROWCA.ClusterLead
                 }
             }
         }
-
-        //public bool SaveClusterIndicatorDetails(int countryId, int clusterId, int monthId)
-        //{
-        //    bool isDataProvided = false;
-        //    int clusterIndicatorID = 0;
-        //    int? achieved = null;
-
-        //    foreach (GridViewRow row in gvIndicators.Rows)
-        //    {
-        //        if (row.RowType == DataControlRowType.DataRow)
-        //        {
-        //            TextBox txtAchieved = (TextBox)row.FindControl("txtAchieved");
-        //            Label lblClusterIndicatorID = (Label)row.FindControl("lblClusterIndicatorID");
-
-        //            if (lblClusterIndicatorID != null)
-        //                clusterIndicatorID = Convert.ToInt32(lblClusterIndicatorID.Text);
-
-        //            if (txtAchieved != null)
-        //            {
-        //                achieved = !string.IsNullOrEmpty(txtAchieved.Text.Trim()) ? Convert.ToInt32(txtAchieved.Text.Trim()) : (int?)null;
-        //                if (achieved > 0)
-        //                    isDataProvided = true;
-        //            }
-
-        //            DBContext.Add("uspInsertClusterReport", new object[] { clusterIndicatorID, clusterId, countryId, 11, monthId,
-        //                                                                                            achieved, RC.GetCurrentUserId, null });
-        //        }
-        //    }
-        //    return isDataProvided;
-        //}
 
         public void SaveReportDetails(int emgLocId, int clusterId, int monthId)
         {
@@ -467,42 +368,7 @@ namespace SRFROWCA.ClusterLead
             }
         }
 
-        //private bool SaveClusterIndicatorDetails()
-        //{
-        //    bool isDataProvided = false;
-        //    int clusterIndicatorID = 0;
-        //    int? achieved = null;
-        //    int countryId = 0;
-        //    int clusterId = 0;
-
-        //    countryId = RC.GetSelectedIntVal(ddlCountry);
-        //    clusterId = RC.GetSelectedIntVal(ddlCluster);
-        //    int yearId = (int)RC.Year._2015; ;
-        //    int monthId = Convert.ToInt32(ddlMonth.SelectedValue);
-
-        //    //foreach (GridViewRow row in gvIndicators.Rows)
-        //    //{
-        //    //    if (row.RowType == DataControlRowType.DataRow)
-        //    //    {
-        //    //        TextBox txtAchieved = (TextBox)row.FindControl("txtAchieved");
-        //    //        Label lblClusterIndicatorID = (Label)row.FindControl("lblClusterIndicatorID");
-
-        //    //        if (lblClusterIndicatorID != null)
-        //    //            clusterIndicatorID = Convert.ToInt32(lblClusterIndicatorID.Text);
-
-        //    //        if (txtAchieved != null)
-        //    //        {
-        //    //            achieved = !string.IsNullOrEmpty(txtAchieved.Text.Trim()) ? Convert.ToInt32(txtAchieved.Text.Trim()) : (int?)null;
-        //    //            if (achieved > 0)
-        //    //                isDataProvided = true;
-        //    //        }
-
-        //    //        DBContext.Add("uspInsertClusterReport", new object[] { clusterIndicatorID, clusterId, countryId, yearId, monthId, achieved, RC.GetCurrentUserId, null });
-        //    //    }
-        //    //}
-        //    return isDataProvided;
-        //}
-
+        
         protected void btnSaveAll_Click(object sender, EventArgs e)
         {
             int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
@@ -526,53 +392,10 @@ namespace SRFROWCA.ClusterLead
                 }
             }
 
-            //bool isAdded = SaveClusterIndicatorDetails();
-            //LoadClusterIndicators();
-
-            //int countryId = RC.GetSelectedIntVal(ddlCountry);
-            //int clusterId = RC.GetSelectedIntVal(ddlCluster);
             int monthId = Convert.ToInt32(ddlMonth.SelectedValue);
-            //bool isAdded = false;
-
-            //if (ddlFrameworkYear.SelectedValue == "11")
-            //{
-            //    foreach (Control ctl in pnlAdditionalIndicaotrs.Controls)
-            //    {
-            //        if (ctl != null && ctl.ID != null && ctl.ID.Contains("indicatorControlId"))
-            //        {
-            //            ctlOutputIndicatorDataEntryCountry indControl = ctl as ctlOutputIndicatorDataEntryCountry;
-
-            //            if (indControl != null)
-            //            {
-            //                isAdded = indControl.SaveClusterIndicatorDetails(countryId, clusterId, monthId);
-            //            }
-            //        }
-            //    }
-            //}
-
-            ////if (ddlFrameworkYear.SelectedValue == "12")
-            //{
-            //    //foreach (Control ctl in pnlAdditionalIndicaotrs.Controls)
-            //    {
-            //        //if (ctl != null && ctl.ID != null && ctl.ID.Contains("indicatorControlId"))
-            //        {
-            //           // ctlOutputIndicatorsDataEntry indControl = ctl as ctlOutputIndicatorsDataEntry;
-
-            //           // if (indControl != null)
-            //            {
-            //                indControl.SaveReportDetails(countryId, clusterId, monthId);
-            //            }
-            //        }
-            //    }
-            //}
-
             SaveReportDetails(emgCountryId, emgClusterId, monthId);
-
             ShowMessage("Data Saved Successfully!");
-            //if (isAdded)
-            //{
-            //    // SendEmail();
-            //}
+            LoadClusterIndicators();
         }
 
         private void SendEmail()
@@ -615,25 +438,6 @@ namespace SRFROWCA.ClusterLead
             //AddIndicatorControl();
             SaveFiltersInSession();
         }
-
-        protected void ddlYear_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //LoadClusterIndicators();
-            //AddIndicatorControl();
-        }
-
-        //protected void gvIndicators_RowDataBound(object sender, GridViewRowEventArgs e)
-        //{
-        //    if (e.Row.RowType == DataControlRowType.DataRow)
-        //    {
-        //        ObjPrToolTip.RegionalIndicatorIcon(e, 11);
-        //        ObjPrToolTip.CountryIndicatorIcon(e, 12);
-
-        //        UI.SetThousandSeparator(e.Row, "lblOrigionalTarget");
-        //        UI.SetThousandSeparator(e.Row, "lblTarget");
-        //        UI.SetThousandSeparator(e.Row, "lblSum");
-        //    }
-        //}
 
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
         {

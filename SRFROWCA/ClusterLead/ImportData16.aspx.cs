@@ -6,9 +6,9 @@ using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
 using System.Data.SqlClient;
-using System.Globalization;
 using System.IO;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace SRFROWCA.ClusterLead
 {
@@ -16,31 +16,6 @@ namespace SRFROWCA.ClusterLead
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-                PopulateMonths();
-        }
-
-
-        #region Upload Data
-
-        private void PopulateMonths()
-        {
-            int i = ddlMonth.SelectedIndex;
-
-            ddlMonth.DataValueField = "MonthId";
-            ddlMonth.DataTextField = "MonthName";
-
-            ddlMonth.DataSource = GetMonth();
-            ddlMonth.DataBind();
-
-            var result = DateTime.Now.ToString("MMMM", new CultureInfo(RC.SiteCulture));
-            result = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(result);
-            ddlMonth.SelectedIndex = i > -1 ? i : ddlMonth.Items.IndexOf(ddlMonth.Items.FindByText(result));
-        }
-        private DataTable GetMonth()
-        {
-            DataTable dt = DBContext.GetData("GetMonths", new object[] { RC.SelectedSiteLanguageId });
-            return dt.Rows.Count > 0 ? dt : new DataTable();
         }
 
         protected void btnImport_Click(object sender, EventArgs e)
@@ -50,22 +25,10 @@ namespace SRFROWCA.ClusterLead
                 // Check if file is uploaded and is excel file
                 if (!IsValidFile()) return;
 
-                // Force user to select month. 
-                if (!MonthSelected()) return;
-
+                // Upload selected file.
                 string filePath = UploadFile();
                 string excelConString = GetExcelConString(filePath);
-
-                DataTable dt = new DataTable();
-                string[] sheets = GetExcelSheetNames(excelConString);
-                if (!string.IsNullOrEmpty(excelConString))
-                {
-                    if (sheets.Length > 0)
-                    {
-                        dt = ReadDataInDataTable(excelConString, "RPT$");
-                        RemoveUnwantedColumns(dt);
-                    }
-                }
+                DataTable dt = GetDataFromSheet(filePath);
 
                 //using (TransactionScope scope = new TransactionScope())
                 {
@@ -73,7 +36,6 @@ namespace SRFROWCA.ClusterLead
                     {
                         FillStagingTableInDB(dt);
                         ImportData();
-                        //TruncateTempTables();
                     }
 
                     //scope.Complete();
@@ -107,75 +69,6 @@ namespace SRFROWCA.ClusterLead
 
             return true;
         }
-
-        // Read Data From Excel Sheet and Save into DB
-        private void FillStagingTableInDB(DataTable dt)
-        {
-            DBContext.Update("TruncateStagingTable2016", new object[] { DBNull.Value });
-            string conString = ConfigurationManager.ConnectionStrings["live_dbName"].ConnectionString;
-            WriteDataToDB(dt, conString);
-        }
-
-        private String[] GetExcelSheetNames(string excelConString)
-        {
-            OleDbConnection objConn = null;
-            System.Data.DataTable dt = null;
-
-            try
-            {
-                //// Connection String. Change the excel file to the file you
-                //// will search.
-                //String connString = "Provider=Microsoft.Jet.OLEDB.4.0;" +
-                //  "Data Source=" + excelFile + ";Extended Properties=Excel 8.0;";
-                objConn = new OleDbConnection(excelConString);
-                // Open connection with the database.
-                objConn.Open();
-                // Get the data table containg the schema guid.
-                dt = objConn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
-
-                if (dt == null)
-                {
-                    return null;
-                }
-
-                String[] excelSheets = new String[dt.Rows.Count];
-                int i = 0;
-
-                // Add the sheet name to the string array.
-                foreach (DataRow row in dt.Rows)
-                {
-                    excelSheets[i] = row["TABLE_NAME"].ToString();
-                    i++;
-                }
-
-                // Loop through all of the sheets if you want too...
-                //for (int j = 0; j < excelSheets.Length; j++)
-                //{
-                //    // Query each excel sheet.
-                //}
-
-                return excelSheets;
-            }
-            catch
-            {
-                return null;
-            }
-            finally
-            {
-                // Clean up.
-                if (objConn != null)
-                {
-                    objConn.Close();
-                    objConn.Dispose();
-                }
-                if (dt != null)
-                {
-                    dt.Dispose();
-                }
-            }
-        }
-
-       
 
         // Upload file to server and return full path with name of file.
         private string UploadFile()
@@ -218,6 +111,29 @@ namespace SRFROWCA.ClusterLead
             return con;
         }
 
+        private DataTable GetDataFromSheet(string filePath)
+        {
+            //Get excel connection string
+            string excelConString = GetExcelConString(filePath);
+
+            DataTable dt = new DataTable();
+            if (!string.IsNullOrEmpty(excelConString))
+            {
+                dt = ReadDataInDataTable(excelConString, "RPT$");
+                RemoveUnwantedColumns(dt);
+            }
+
+            return dt;
+        }
+
+        // Read Data From Excel Sheet and Save into DB
+        private void FillStagingTableInDB(DataTable dt)
+        {
+            DBContext.Update("TruncateStagingTable2016", new object[] { DBNull.Value });
+            string conString = ConfigurationManager.ConnectionStrings["live_dbName"].ConnectionString;
+            WriteDataToDB(dt, conString);
+        }
+
         // First Read data from excel sheet into data table.
         // Add UserId, Selected Emregency Id and Identity column.
         // Above added data is needed to update tables in db.
@@ -242,11 +158,10 @@ namespace SRFROWCA.ClusterLead
         }
 
         // Import all data from staging table to respective tables.
-        private DataTable ImportData()
+        private int ImportData()
         {
             int yearId = 12;
-            int monthId = Convert.ToInt32(ddlMonth.SelectedValue);
-            return DBContext.GetData("ImportUserCLDataFromStagingTable2016", new object[] { yearId, monthId, RC.GetCurrentUserId, RC.IsClusterLead(User) });
+            return DBContext.Update("ImportUserCLDataFromStagingTable2016", new object[] { yearId, RC.GetCurrentUserId, DBNull.Value });
         }
 
         // Create new datatable and appropriate columns.
@@ -275,17 +190,6 @@ namespace SRFROWCA.ClusterLead
             sqlBulk.Close();
         }
 
-        private bool MonthSelected()
-        {
-            if (ddlMonth.SelectedValue == "0")
-            {
-                ShowMessage("Please Select Month You Want To Report For", RC.NotificationType.Error, false);
-                return false;
-            }
-
-            return true;
-        }
-
         private void RemoveUnwantedColumns(DataTable dt)
         {
             List<DataColumn> columns = new List<DataColumn>();
@@ -302,7 +206,9 @@ namespace SRFROWCA.ClusterLead
                     column.ColumnName == "Target Female" ||
                     column.ColumnName == "Achieved Total" ||
                     column.ColumnName == "Achieved Male" ||
-                    column.ColumnName == "Achieved Female"))
+                    column.ColumnName == "Achieved Female" ||
+                    column.ColumnName == "ORG_ID" ||
+                    column.ColumnName == "IP_ID"))
                 {
                     columns.Add(column);
                 }
@@ -312,9 +218,41 @@ namespace SRFROWCA.ClusterLead
                 dt.Columns.Remove(column);
         }
 
-        #endregion
+        protected void btnExport_Click(object sender, EventArgs e)
+        {
+            DataTable dt = GetData();
+            GridView gv = new GridView();
+            gv.DataSource = dt;
+            gv.DataBind();
 
-        private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
+            ExportUtility.ExportGridView(gv, "ORS_CustomReport16", ".xls", Response, true);
+        }
+
+        private DataTable GetData()
+        {
+            int? countryId = null;
+            int? clusterId = null;
+            int? orgId = null;
+            if (RC.IsClusterLead(this.User))
+            {
+                countryId = UserInfo.Country;
+                clusterId = UserInfo.Cluster;
+            }
+            else if (RC.IsCountryAdmin(this.User))
+            {
+                countryId = UserInfo.Country;
+            }
+            else if (RC.IsDataEntryUser(this.User))
+            {
+                countryId = UserInfo.Country;
+                orgId = UserInfo.Organization;
+            }
+
+            return DBContext.GetData("GetReportedData2016_Report", new object[]{countryId, clusterId, orgId, RC.SelectedSiteLanguageId});
+        }
+
+        private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, 
+                                    bool fadeOut = true, int animationTime = 500)
         {
             RC.ShowMessage(Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
         }

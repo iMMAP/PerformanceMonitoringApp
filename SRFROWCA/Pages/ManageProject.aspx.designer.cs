@@ -37,7 +37,7 @@ namespace SRFROWCA.Pages {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::SRFROWCA.Pages.CreateProject1 ctlCreateProject;
+        protected global::SRFROWCA.OrsProject.CreateProject1 ctlCreateProject;
         
         /// <summary>
         /// tpnlActivities control.

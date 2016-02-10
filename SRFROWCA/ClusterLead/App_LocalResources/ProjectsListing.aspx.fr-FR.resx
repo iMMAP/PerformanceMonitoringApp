@@ -133,7 +133,7 @@
     <value />
   </data>
   <data name="BoundFieldResource10.HeaderText" xml:space="preserve">
-    <value>Demande initiale</value>
+    <value>Demandé ($)</value>
   </data>
   <data name="BoundFieldResource2.AccessibleHeaderText" xml:space="preserve">
     <value />
@@ -160,7 +160,7 @@
     <value />
   </data>
   <data name="BoundFieldResource4.HeaderText" xml:space="preserve">
-    <value>Cluster secondaire</value>
+    <value>Cluster</value>
   </data>
   <data name="BoundFieldResource5.AccessibleHeaderText" xml:space="preserve">
     <value />
@@ -169,7 +169,7 @@
     <value />
   </data>
   <data name="BoundFieldResource5.HeaderText" xml:space="preserve">
-    <value>Cluster</value>
+    <value>Cluster secondaire</value>
   </data>
   <data name="BoundFieldResource6.AccessibleHeaderText" xml:space="preserve">
     <value />

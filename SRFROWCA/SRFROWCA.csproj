@@ -102,6 +102,9 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Owin">
+      <HintPath>..\_dll\Owin.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -181,6 +184,8 @@
     <Content Include="assets\orsimages\logo.gif" />
     <Content Include="assets\orsimages\map24.png" />
     <Content Include="assets\orsjs\ddlslick.js" />
+    <Content Include="assets\orsjs\jquery.dataTables.js" />
+    <Content Include="assets\orsjs\jquery.dataTables.min.js" />
     <Content Include="assets\orsjs\jquery.wholenumber.js" />
     <Content Include="ClusterLead\AddActivityAndIndicators.aspx" />
     <Content Include="Admin\ConfigSettings.aspx" />
@@ -256,7 +261,6 @@
     <Content Include="assets\orsjs\ShowHideObJAndPr.js" />
     <Content Include="ClusterLead\EditOutputIndicator.aspx" />
     <Content Include="ClusterLead\IndicatorListing.aspx" />
-    <Content Include="ClusterLead\ProjectsListing.aspx" />
     <Content Include="Admin\UploadLocations.aspx" />
     <Content Include="Anonymous\AllData.aspx" />
     <Content Include="ClusterLead\ReportDetails.aspx" />
@@ -337,15 +341,18 @@
     <Content Include="OPS\OPSDataEntryRpt.aspx" />
     <Content Include="OPS\SyncOPSProjects.aspx" />
     <Content Include="OPS\UploadOPSProjectDetails.aspx" />
+    <Content Include="OrsProject\CreateProject.ascx" />
+    <Content Include="OrsProject\ProjectsListing.aspx" />
     <Content Include="Pages\AddActivities.aspx" />
-    <Content Include="Pages\CreateProject.ascx" />
-    <Content Include="Pages\CreateProject.aspx" />
     <Content Include="Pages\ManageActivities.aspx" />
     <Content Include="Pages\ManageProject.aspx" />
     <Content Include="Pages\ProjectActivities.ascx" />
     <Content Include="Pages\ProjectIP.aspx" />
     <Content Include="Pages\ProjectPartners.ascx" />
     <Content Include="Pages\UploadAchived.aspx" />
+    <Content Include="OrsProject\ctlORSAdmin1Targets.ascx" />
+    <Content Include="OrsProject\ctlORSAdmin2Targets.ascx" />
+    <Content Include="OrsProject\ProjectTargets.aspx" />
     <Content Include="RegisterSuccess.aspx" />
     <Content Include="ReportingStatus.aspx" />
     <Content Include="Default.aspx" />
@@ -357,6 +364,7 @@
     <Content Include="Reports\ORS3W.aspx" />
     <Content Include="RequestOrganization.aspx" />
     <Content Include="test1.aspx" />
+    <Content Include="testdata.txt" />
     <Content Include="text.html" />
     <Content Include="UploadSRPLogFrame.aspx" />
     <Content Include="packages.config" />
@@ -384,6 +392,9 @@
     <Content Include="Visualization\stylesheets\styles.css" />
     <Content Include="Visualization\stylesheets\stylesheet.css" />
     <Content Include="WebForm1.aspx" />
+    <Content Include="WebForm2.aspx" />
+    <Content Include="WebForm3.aspx" />
+    <Content Include="WebService.asmx" />
     <None Include="assets\font\cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff" />
     <None Include="assets\font\DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff" />
     <Content Include="assets\font\fontawesome-webfont.ttf" />
@@ -416,6 +427,8 @@
     <Content Include="DataFeeds\ProjectPartners.ashx" />
     <Content Include="DataFeeds\ProjectIndicatorsWithTargets.ashx" />
     <Content Include="DataFeeds\OrganizationsByCountry.ashx" />
+    <Content Include="DataFeeds\ReportBasic.ashx" />
+    <Content Include="DataFeeds\ORSDataEntryVersions.ashx" />
     <None Include="HelpFiles\HelpDocs\HelpEng\1_ORS_description_EN_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpEng\2_ORS_Resgistration_EN_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpEng\3_ORS_Role_EN_v3.pdf" />
@@ -432,24 +445,25 @@
     <None Include="HelpFiles\HelpDocs\HelpFrench\6_ORS_Language_FR_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpFrench\7_ORS_ClusterLead_FR_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpFrench\8_ORS_FAQ_FR_v3.pdf" />
-    <EntityDeploy Include="ORSModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ORSModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="ORSModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ORSModel.edmx</DependentUpon>
-      <LastGenOutput>ORSModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="ORSModel.edmx.diagram">
-      <DependentUpon>ORSModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="ORSModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ORSModel.edmx</DependentUpon>
-      <LastGenOutput>ORSModel.cs</LastGenOutput>
-    </Content>
     <Content Include="NoMenue.Master" />
+    <Content Include="Landing\Web.config" />
+    <EntityDeploy Include="ORSDataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ORSDataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="ORSDataModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ORSDataModel.edmx</DependentUpon>
+      <LastGenOutput>ORSDataModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ORSDataModel.edmx.diagram">
+      <DependentUpon>ORSDataModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="ORSDataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ORSDataModel.edmx</DependentUpon>
+      <LastGenOutput>ORSDataModel.cs</LastGenOutput>
+    </Content>
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -547,6 +561,18 @@
     <Compile Include="Account\UserProfile.aspx.designer.cs">
       <DependentUpon>UserProfile.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Activity.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ActivityData.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ActivityDetail.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ActivityType.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Admin\AddEditCountryMaps.aspx.cs">
       <DependentUpon>AddEditCountryMaps.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -582,6 +608,12 @@
     <Compile Include="Admin\UnitsListing.aspx.designer.cs">
       <DependentUpon>UnitsListing.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AllDataStagingEnglish.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AllDataStagingFrench.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Anonymous\ActivitiesFrameworkPublic.aspx.cs">
       <DependentUpon>ActivitiesFrameworkPublic.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -611,6 +643,63 @@
     </Compile>
     <Compile Include="Anonymous\ProjectsListingPublic.aspx.designer.cs">
       <DependentUpon>ProjectsListingPublic.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="aspnet_Applications.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aspnet_Membership.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aspnet_Paths.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aspnet_PersonalizationAllUsers.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aspnet_PersonalizationPerUser.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aspnet_Profile.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aspnet_Roles.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aspnet_SchemaVersions.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNet_SqlCacheTablesForChangeNotification.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aspnet_Users.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aspnet_Users_Clusters.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aspnet_Users_Custom.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aspnet_WebEvent_Events.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AuditAll.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BulkImport_Staging.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Cluster.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClusterIndicator.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClusterIndicatorDetail.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClusterIndicatorTarget.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ClusterLead\AddActivityAndIndicators.aspx.cs">
       <DependentUpon>AddActivityAndIndicators.aspx</DependentUpon>
@@ -776,13 +865,6 @@
     <Compile Include="ClusterLead\IndicatorListing.aspx.designer.cs">
       <DependentUpon>IndicatorListing.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ClusterLead\ProjectsListing.aspx.cs">
-      <DependentUpon>ProjectsListing.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ClusterLead\ProjectsListing.aspx.designer.cs">
-      <DependentUpon>ProjectsListing.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Admin\UploadLocations.aspx.cs">
       <DependentUpon>UploadLocations.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -848,6 +930,18 @@
     </Compile>
     <Compile Include="ClusterLead\ValidateReportList.aspx.designer.cs">
       <DependentUpon>ValidateReportList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClusterObjective.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClusterPartner.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClusterReport.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClusterReportDetail.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ClustOutputIndicators\ctlOutputIndicatorDataEntryCountry.ascx.cs">
       <DependentUpon>ctlOutputIndicatorDataEntryCountry.ascx</DependentUpon>
@@ -960,6 +1054,19 @@
     <Compile Include="Controls\ReportedIndicatorComments.ascx.designer.cs">
       <DependentUpon>ReportedIndicatorComments.ascx</DependentUpon>
     </Compile>
+    <Compile Include="CountryMap.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CountryMapDetail.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CountryReport.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Currency.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUser.cs" />
     <Compile Include="Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1016,6 +1123,9 @@
     <Compile Include="DataFeeds\ORS3W.ashx.cs">
       <DependentUpon>ORS3W.ashx</DependentUpon>
     </Compile>
+    <Compile Include="DataFeeds\ORSDataEntryVersions.ashx.cs">
+      <DependentUpon>ORSDataEntryVersions.ashx</DependentUpon>
+    </Compile>
     <Compile Include="DataFeeds\OrsLocations.ashx.cs">
       <DependentUpon>OrsLocations.ashx</DependentUpon>
     </Compile>
@@ -1033,6 +1143,9 @@
     </Compile>
     <Compile Include="DataFeeds\ProjectSRPTargets.ashx.cs">
       <DependentUpon>ProjectSRPTargets.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="DataFeeds\ReportBasic.ashx.cs">
+      <DependentUpon>ReportBasic.ashx</DependentUpon>
     </Compile>
     <Compile Include="DataFeeds\ReportedData.ashx.cs">
       <DependentUpon>ReportedData.ashx</DependentUpon>
@@ -1087,6 +1200,30 @@
       <DependentUpon>FilterCriteria.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\PagingGridView.cs" />
+    <Compile Include="DisasterType.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Donor.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Emergency.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmergencyCluster.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmergencyLocation.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmergencyObjective.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorLog.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorLogApplication.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ErrorPages\DefaultRedirectErrorPage.aspx.cs">
       <DependentUpon>DefaultRedirectErrorPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1122,6 +1259,15 @@
     <Compile Include="faq.aspx.designer.cs">
       <DependentUpon>faq.aspx</DependentUpon>
     </Compile>
+    <Compile Include="FTSFunding.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FTSFundingDetail.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GenderCategory.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="GeoCode.aspx.cs">
       <DependentUpon>GeoCode.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1135,6 +1281,75 @@
     </Compile>
     <Compile Include="GV\GVScroll.aspx.designer.cs">
       <DependentUpon>GVScroll.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HumanitarianPriority.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ImportCLDataStagingTable.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ImportCLDataStaging_Temp.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ImportCLDataStaging_Temp2.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ImportSRPFramework.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ImportSRPStaging.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ImportSRPTemp.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Indicator.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IndicatorApproved.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IndicatorCalculationType.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IndicatorClusterTarget.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IndicatorComment.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IndicatorCommentsDetail.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IndicatorDetail.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KeyFigureCategory.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KeyFigureCategoryDetail.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KeyFigureDetail.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KeyFigureIndicator.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KeyFigureIndicatorDetail.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KeyFigureReport.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KeyFigureReportDetail.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KeyFigureSubCategory.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KeyFigureSubCategoryDetail.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="KeyFigures\AddKeyFigure.aspx.cs">
       <DependentUpon>AddKeyFigure.aspx</DependentUpon>
@@ -1255,12 +1470,39 @@
     <Compile Include="Landing\OCHALanding.aspx.designer.cs">
       <DependentUpon>OCHALanding.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Location.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LocationCategory.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LocationType.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MapType.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Month.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="NoMenue.Master.cs">
       <DependentUpon>NoMenue.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="NoMenue.Master.designer.cs">
       <DependentUpon>NoMenue.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Notification.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NotificationType.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Objective.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ObjectivePriority.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="OperationalPresence.aspx.cs">
       <DependentUpon>OperationalPresence.aspx</DependentUpon>
@@ -1275,6 +1517,27 @@
     </Compile>
     <Compile Include="ops.Master.designer.cs">
       <DependentUpon>ops.Master</DependentUpon>
+    </Compile>
+    <Compile Include="OPSAllData.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OPSProjectDetail.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OPSProjectsToClean.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OPSReport.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OPSReportDetail.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OPSReportLocation.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OPSUser.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="OPS\GridTestOPS.aspx.cs">
       <DependentUpon>GridTestOPS.aspx</DependentUpon>
@@ -1318,29 +1581,49 @@
       <DependentUpon>UploadOPSProjectDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="OPS\OpsXMLFeed2015.cs" />
-    <Compile Include="ORSModel.Context.cs">
+    <Compile Include="Organization.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrganizationRequest.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrganizationType.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORSDataEntryVersion.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORSDataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ORSModel.Context.tt</DependentUpon>
+      <DependentUpon>ORSDataModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORSModel.Designer.cs">
+    <Compile Include="ORSDataModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ORSModel.edmx</DependentUpon>
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Pages\CreateProject.ascx.cs">
+    <Compile Include="ORSDataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ORSDataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ORSDocument.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrsProject\CreateProject.ascx.cs">
       <DependentUpon>CreateProject.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\CreateProject.ascx.designer.cs">
+    <Compile Include="OrsProject\CreateProject.ascx.designer.cs">
       <DependentUpon>CreateProject.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\CreateProject.aspx.cs">
-      <DependentUpon>CreateProject.aspx</DependentUpon>
+    <Compile Include="OrsProject\ProjectsListing.aspx.cs">
+      <DependentUpon>ProjectsListing.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\CreateProject.aspx.designer.cs">
-      <DependentUpon>CreateProject.aspx</DependentUpon>
+    <Compile Include="OrsProject\ProjectsListing.aspx.designer.cs">
+      <DependentUpon>ProjectsListing.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\ManageActivities.aspx.cs">
       <DependentUpon>ManageActivities.aspx</DependentUpon>
@@ -1384,10 +1667,76 @@
     <Compile Include="Pages\UploadAchived.aspx.designer.cs">
       <DependentUpon>UploadAchived.aspx</DependentUpon>
     </Compile>
+    <Compile Include="OrsProject\ctlORSAdmin1Targets.ascx.cs">
+      <DependentUpon>ctlORSAdmin1Targets.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrsProject\ctlORSAdmin1Targets.ascx.designer.cs">
+      <DependentUpon>ctlORSAdmin1Targets.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="OrsProject\ctlORSAdmin2Targets.ascx.cs">
+      <DependentUpon>ctlORSAdmin2Targets.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrsProject\ctlORSAdmin2Targets.ascx.designer.cs">
+      <DependentUpon>ctlORSAdmin2Targets.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="OrsProject\ProjectTargets.aspx.cs">
+      <DependentUpon>ProjectTargets.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrsProject\ProjectTargets.aspx.designer.cs">
+      <DependentUpon>ProjectTargets.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordReset.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PriorityActivity.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Project.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectIndicator.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectIndicatorAnnualTarget.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectOrganization.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectPartner.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectPartnerActivity.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectPartnerActLocation.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectPartnerActLocOrganization.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectPartnerPresence.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectStatu.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Quarter.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RegionalIndicator.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RegionalIndicatorsHistory.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="RegisterSuccess.aspx.cs">
       <DependentUpon>RegisterSuccess.aspx</DependentUpon>
@@ -1395,6 +1744,30 @@
     </Compile>
     <Compile Include="RegisterSuccess.aspx.designer.cs">
       <DependentUpon>RegisterSuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Report.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReportDataEntryAccum.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReportDataEntryDetail.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReportDataEntryLocation.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReportDetail.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReportDetailsGender.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReportFrequencyType.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReportIndicatorAccumulative.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ReportingStatus.aspx.cs">
       <DependentUpon>ReportingStatus.aspx</DependentUpon>
@@ -1424,6 +1797,15 @@
       <DependentUpon>AddActivities.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportLocation.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReportProjectPartner.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReportsDataEntry.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Reports\CountryMaps.aspx.cs">
       <DependentUpon>CountryMaps.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1459,12 +1841,18 @@
     <Compile Include="Reports\ORS3W.aspx.designer.cs">
       <DependentUpon>ORS3W.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ReportType.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="RequestOrganization.aspx.cs">
       <DependentUpon>RequestOrganization.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="RequestOrganization.aspx.designer.cs">
       <DependentUpon>RequestOrganization.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SahelIndicatorCountryTarget.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="SessionHeartbeat.ashx.cs">
       <DependentUpon>SessionHeartbeat.ashx</DependentUpon>
@@ -1476,12 +1864,39 @@
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
+    <Compile Include="SiteLanguage.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sometable2.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sometable3.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SRPIndicator.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SRPIndicatorsHistory.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StagingTableLogFrame.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TempData.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="test1.aspx.cs">
       <DependentUpon>test1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="test1.aspx.designer.cs">
       <DependentUpon>test1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Unit.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UploadSRPLogFrame.aspx.cs">
       <DependentUpon>UploadSRPLogFrame.aspx</DependentUpon>
@@ -1503,6 +1918,30 @@
     </Compile>
     <Compile Include="WebForm1.aspx.designer.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm2.aspx.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm2.aspx.designer.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm3.aspx.cs">
+      <DependentUpon>WebForm3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm3.aspx.designer.cs">
+      <DependentUpon>WebForm3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebService.asmx.cs">
+      <DependentUpon>WebService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Week.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Year.cs">
+      <DependentUpon>ORSDataModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -1639,11 +2078,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClusterLead\App_LocalResources\AddActivity.aspx.fr-FR.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ClusterLead\App_LocalResources\ProjectsListing.aspx.fr-FR-OLd.resx">
-      <SubType>Designer</SubType>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClusterLead\App_LocalResources\ProjectsListing.aspx.resx" />
