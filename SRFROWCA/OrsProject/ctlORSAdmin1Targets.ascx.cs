@@ -238,10 +238,10 @@ namespace SRFROWCA.OrsProject
             //if (IsTargetProvided())
             {
                 bool isSaved = false;
-                using (TransactionScope scope = new TransactionScope())
+                //using (TransactionScope scope = new TransactionScope())
                 {
                     SaveTargets();
-                    scope.Complete();
+                    //scope.Complete();
                     isSaved = true;
                     if (RC.SelectedSiteLanguageId == 1)
                         ShowMessage("Your Data Saved Successfully!");
@@ -311,7 +311,7 @@ namespace SRFROWCA.OrsProject
                     TextBox txtTarget = item.FindControl("txtAdmin1TargetProject") as TextBox;
                     target = string.IsNullOrEmpty(txtTarget.Text.Trim()) ? (int?)null : Convert.ToInt32(txtTarget.Text.Trim());
                     if (admin1Id > 0)
-                        DBContext.Update("InsertOPSReportDetails_Admin1", new object[] { indicatorId, countryId, admin1Id, 
+                        DBContext.Update("InsertUpdateProjectIndicatorTargets", new object[] {ProjectId, indicatorId, countryId, admin1Id, admin1Id,
                                                                                         target, RC.GetCurrentUserId, DBNull.Value });
                     
                 }
@@ -320,33 +320,32 @@ namespace SRFROWCA.OrsProject
 
         private void SaveAdmin1GenderTargets(Repeater rptAdmin1, int indicatorId, int countryId)
         {
-            //int? userId = OPSUserId > 0 ? OPSUserId : (int?)null;
-            //foreach (RepeaterItem item in rptAdmin1.Items)
-            //{
-            //    if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
-            //    {
-            //        TextBox txtAdmin1Male = item.FindControl("txtAdmin1TargetMaleProject") as TextBox;
-            //        TextBox txtAdmin1Female = item.FindControl("txtAdmin1TargetFemaleProject") as TextBox;
+            foreach (RepeaterItem item in rptAdmin1.Items)
+            {
+                if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
+                {
+                    TextBox txtAdmin1Male = item.FindControl("txtAdmin1TargetMaleProject") as TextBox;
+                    TextBox txtAdmin1Female = item.FindControl("txtAdmin1TargetFemaleProject") as TextBox;
 
-            //        int? maleTarget = null;
-            //        if (txtAdmin1Male != null)
-            //            maleTarget = string.IsNullOrEmpty(txtAdmin1Male.Text.Trim()) ? (int?)null : Convert.ToInt32(txtAdmin1Male.Text.Trim());
+                    int? maleTarget = null;
+                    if (txtAdmin1Male != null)
+                        maleTarget = string.IsNullOrEmpty(txtAdmin1Male.Text.Trim()) ? (int?)null : Convert.ToInt32(txtAdmin1Male.Text.Trim());
 
-            //        int? femaleTarget = null;
-            //        if (txtAdmin1Female != null)
-            //            femaleTarget = string.IsNullOrEmpty(txtAdmin1Female.Text.Trim()) ? (int?)null : Convert.ToInt32(txtAdmin1Female.Text.Trim());
+                    int? femaleTarget = null;
+                    if (txtAdmin1Female != null)
+                        femaleTarget = string.IsNullOrEmpty(txtAdmin1Female.Text.Trim()) ? (int?)null : Convert.ToInt32(txtAdmin1Female.Text.Trim());
 
-            //        HiddenField hfAdmin1Id = item.FindControl("hfAdmin1Id") as HiddenField;
-            //        int admin1Id = 0;
-            //        if (hfAdmin1Id != null)
-            //            int.TryParse(hfAdmin1Id.Value, out admin1Id);
-            //        if (admin1Id > 0)
-            //        {
-            //            DBContext.Update("InsertOPSReportDetailsGender_Admin1", new object[] {OPSReportId, indicatorId, countryId, admin1Id, 
-            //                                                                            maleTarget, femaleTarget,userId, DBNull.Value });
-            //        }
-            //    }
-            //}
+                    HiddenField hfAdmin1Id = item.FindControl("hfAdmin1Id") as HiddenField;
+                    int admin1Id = 0;
+                    if (hfAdmin1Id != null)
+                        int.TryParse(hfAdmin1Id.Value, out admin1Id);
+                    if (admin1Id > 0)
+                    {
+                        DBContext.Update("InsertUpdateProjectIndicatorTargetsGender", new object[] {ProjectId, indicatorId, countryId, admin1Id, admin1Id, 
+                                                                                        maleTarget, femaleTarget, RC.GetCurrentUserId, DBNull.Value });
+                    }
+                }
+            }
         }
 
         #endregion

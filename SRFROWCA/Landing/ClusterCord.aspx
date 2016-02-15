@@ -81,7 +81,7 @@
                                                     </li>
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkProjects16" runat="server" Text="My Sector Projects 2016" CssClass="tooltip elemopacity"
-                                                             PostBackUrl="../ClusterLead/ProjectsListing.aspx?year=2016" meta:resourcekey="btnlnkProjects16Resource"></asp:LinkButton>
+                                                             PostBackUrl="../OrsProject/ProjectsListing.aspx?year=2016" meta:resourcekey="btnlnkProjects16Resource"></asp:LinkButton>
                                                     </li>
                                                     <li>
                                                         <asp:LinkButton ID="btnlnk3W16" runat="server" Text="3W of 2016 Activities" CssClass="tooltip elemopacity"
@@ -160,15 +160,15 @@
                                                     </li>
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkOutputDataEntry15" runat="server" Text="Sector Outputput Indicactors 2015 Data Entry" CssClass="tooltip elemopacity"
-                                                             PostBackUrl="../ClusterLead/ClusterDataEntry16.aspx" meta:resourcekey="localMenu2015OutIndDataEntryResource1"></asp:LinkButton>
+                                                             PostBackUrl="../ClusterLead/ClusterDataEntry.aspx" meta:resourcekey="localMenu2015OutIndDataEntryResource1"></asp:LinkButton>
                                                     </li>
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkProjects15" runat="server" Text="My Sector Projects 2015" CssClass="tooltip elemopacity"
-                                                             PostBackUrl="../ClusterLead/ProjectsListing.aspx?year=2015" meta:resourcekey="localMenu2015ProjectsResource1"></asp:LinkButton>
+                                                             PostBackUrl="../OrsProject/ProjectsListing.aspx?year=2015" meta:resourcekey="localMenu2015ProjectsResource1"></asp:LinkButton>
                                                     </li>
                                                     <li>
                                                         <asp:LinkButton ID="btnlnk3W15" runat="server" Text="3W of 2015 Activities" CssClass="tooltip elemopacity"
-                                                             PostBackUrl="../../Reports/ORS3W.aspx" meta:resourcekey="localMenu20153WResource1"></asp:LinkButton>
+                                                             PostBackUrl="../Reports/ORS3W.aspx" meta:resourcekey="localMenu20153WResource1"></asp:LinkButton>
                                                     </li>
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkProgress15" runat="server" Text="Progress Summary 2015" CssClass="tooltip elemopacity"

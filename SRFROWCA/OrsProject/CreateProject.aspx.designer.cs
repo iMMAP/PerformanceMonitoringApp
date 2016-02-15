@@ -103,24 +103,6 @@ namespace SRFROWCA.OrsProject {
         protected global::System.Web.UI.WebControls.DropDownList ddlOrgs;
         
         /// <summary>
-        /// lblAppealingAgency2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAppealingAgency2;
-        
-        /// <summary>
-        /// ddlOrgs2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlOrgs2;
-        
-        /// <summary>
         /// localProjectObjective control.
         /// </summary>
         /// <remarks>
@@ -137,33 +119,6 @@ namespace SRFROWCA.OrsProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtProjectObjective;
-        
-        /// <summary>
-        /// LocalizeImplementingPartners control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize LocalizeImplementingPartners;
-        
-        /// <summary>
-        /// btnOpenLocations control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnOpenLocations;
-        
-        /// <summary>
-        /// localLocationButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localLocationButton;
         
         /// <summary>
         /// localCluster control.
@@ -191,24 +146,6 @@ namespace SRFROWCA.OrsProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
-        
-        /// <summary>
-        /// Localize1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize1;
-        
-        /// <summary>
-        /// ddlProjectSatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlProjectSatus;
         
         /// <summary>
         /// localCreateProjectStartDate control.
@@ -247,105 +184,6 @@ namespace SRFROWCA.OrsProject {
         protected global::System.Web.UI.WebControls.TextBox txtToDate;
         
         /// <summary>
-        /// txtRequestedAmount control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtRequestedAmount;
-        
-        /// <summary>
-        /// ddlRequestedAmountCurrency control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlRequestedAmountCurrency;
-        
-        /// <summary>
-        /// localFundingStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localFundingStatus;
-        
-        /// <summary>
-        /// ddlFundingStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlFundingStatus;
-        
-        /// <summary>
-        /// localDonorName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localDonorName;
-        
-        /// <summary>
-        /// txtDonorName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDonorName;
-        
-        /// <summary>
-        /// txtDonor1Contributed control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDonor1Contributed;
-        
-        /// <summary>
-        /// ddlDonor1Currency control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDonor1Currency;
-        
-        /// <summary>
-        /// txtDonor2Name control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDonor2Name;
-        
-        /// <summary>
-        /// txtDonor2Contributed control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDonor2Contributed;
-        
-        /// <summary>
-        /// ddlDonor2Currency control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDonor2Currency;
-        
-        /// <summary>
         /// txtContactName control.
         /// </summary>
         /// <remarks>
@@ -380,50 +218,5 @@ namespace SRFROWCA.OrsProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSave;
-        
-        /// <summary>
-        /// mpeOrganizations control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender mpeOrganizations;
-        
-        /// <summary>
-        /// pnlLocations control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlLocations;
-        
-        /// <summary>
-        /// uPanel1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel uPanel1;
-        
-        /// <summary>
-        /// gvOrgs control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvOrgs;
-        
-        /// <summary>
-        /// btnClose control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnClose;
     }
 }

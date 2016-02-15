@@ -58,7 +58,7 @@
                                                     </li>
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkClusterIndicators16" runat="server" Text="Go to my 2016 Output Indicators Page"
-                                                             PostBackUrl="../ClusterLead/CountryIndicators.aspx"></asp:LinkButton>
+                                                             PostBackUrl="../ClusterLead/CountryIndicators.aspx?year=2016"></asp:LinkButton>
                                                     </li>
                                                     <%--<li>
                                                         <a href="../ClusterLead/CountryIndicators.aspx">
@@ -67,7 +67,7 @@
                                                     </li>--%>
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkSectorIndicators16" runat="server" Text="GO to my 2016 Sector Response Plan" CssClass="tooltip elemopacity"
-                                                             PostBackUrl="../ClusterLead/IndicatorListing.aspx"></asp:LinkButton>
+                                                             PostBackUrl="../ClusterLead/IndicatorListing.aspx?year=2016"></asp:LinkButton>
                                                     </li>
                                                     <%--<li>                                                  <a href="../ClusterLead/IndicatorListing.aspx">
                                                             <asp:Localize ID="localMenu2016SectorInd" runat="server" Text="Go to my 2016 Sector Response Plan" meta:resourcekey="localMenu2016SectorIndResource1"></asp:Localize>
@@ -79,7 +79,7 @@
                                                     </li>
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkProjects16" runat="server" Text="My Sector Projects 2016" CssClass="tooltip elemopacity"
-                                                             PostBackUrl="../ClusterLead/ProjecsList.aspx" meta:resourcekey="btnlnkProjects16Resource"></asp:LinkButton>
+                                                             PostBackUrl="../OrsProject/ProjectsListing.aspx?year=2016" meta:resourcekey="btnlnkProjects16Resource"></asp:LinkButton>
                                                     </li>
                                                     <li>
                                                         <asp:LinkButton ID="btnlnk3W16" runat="server" Text="3W of 2016 Activities" CssClass="tooltip elemopacity"
@@ -94,6 +94,10 @@
                                                             <asp:Localize ID="localMenu2016Migrate" runat="server" Text="Migrate 2015 activites & indicators To 2016 Framework" meta:resourcekey="localMenu2016MigrateResource1"></asp:Localize>
                                                         </a>
                                                     </li>--%>
+                                                     <li>
+                                                        <asp:LinkButton ID="lbtnImportData" runat="server" Text="Import Project Actvities Data 2016" CssClass="tooltip elemopacity"
+                                                             PostBackUrl="../ClusterLead/ImportData16.aspx" meta:resourcekey="btnImportData15Resource"></asp:LinkButton>
+                                                    </li>
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkExportFramework" runat="server" Text="Export Framework 2016" CssClass="tooltip elemopacity"
                                                              PostBackUrl="Anonymous/ExpClusterFramework.aspx" meta:resourcekey="localMenu2016ExpFrameworkResource1"></asp:LinkButton>
@@ -141,7 +145,7 @@
                                                     </li>--%>
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkClusterIndicators15" runat="server" Text="Go to my 2015 Output Indicators Page"
-                                                             PostBackUrl="../ClusterLead/CountryIndicators.aspx" meta:resourcekey="localMenu2015OutputIndResource1"></asp:LinkButton>
+                                                             PostBackUrl="../ClusterLead/CountryIndicators.aspx?year=2015" meta:resourcekey="localMenu2015OutputIndResource1"></asp:LinkButton>
                                                     </li>
                                                     <%--<li>
                                                         <a href="../ClusterLead/CountryIndicators.aspx">
@@ -150,19 +154,19 @@
                                                     </li>--%>
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkSectorIndicators15" runat="server" Text="GO to my 2015 Sector Response Plan" CssClass="tooltip elemopacity"
-                                                             PostBackUrl="../ClusterLead/IndicatorListing.aspx" meta:resourcekey="localMenu2015SectorIndResource1"></asp:LinkButton>
+                                                             PostBackUrl="../ClusterLead/IndicatorListing.aspx?year=2015" meta:resourcekey="localMenu2015SectorIndResource1"></asp:LinkButton>
                                                     </li>
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkOutputDataEntry15" runat="server" Text="Sector Outputput Indicactors 2015 Data Entry" CssClass="tooltip elemopacity"
-                                                             PostBackUrl="../ClusterLead/ClusterDataEntry16.aspx" meta:resourcekey="localMenu2015OutIndDataEntryResource1"></asp:LinkButton>
+                                                             PostBackUrl="../ClusterLead/ClusterDataEntry.aspx" meta:resourcekey="localMenu2015OutIndDataEntryResource1"></asp:LinkButton>
                                                     </li>
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkProjects15" runat="server" Text="My Sector Projects 2015" CssClass="tooltip elemopacity"
-                                                             PostBackUrl="../ClusterLead/ProjecsList.aspx" meta:resourcekey="localMenu2015ProjectsResource1"></asp:LinkButton>
+                                                             PostBackUrl="../OrsProject/ProjectsListing.aspx?year=2015" meta:resourcekey="localMenu2015ProjectsResource1"></asp:LinkButton>
                                                     </li>
                                                     <li>
                                                         <asp:LinkButton ID="btnlnk3W15" runat="server" Text="3W of 2015 Activities" CssClass="tooltip elemopacity"
-                                                             PostBackUrl="../ClusterLead/ProjecsList.aspx" meta:resourcekey="localMenu20153WResource1"></asp:LinkButton>
+                                                             PostBackUrl="../OrsProject/ProjectsListing.aspx?year=2015" meta:resourcekey="localMenu20153WResource1"></asp:LinkButton>
                                                     </li>
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkProgress15" runat="server" Text="Progress Summary 2015" CssClass="tooltip elemopacity"
@@ -170,7 +174,7 @@
                                                     </li>
                                                     <li>
                                                         <asp:LinkButton ID="btnImportData15" runat="server" Text="Import Project Actvities Data 2015" CssClass="tooltip elemopacity"
-                                                             PostBackUrl="../ClusterLead/ProgressSummary.aspx" meta:resourcekey="btnImportData15Resource"></asp:LinkButton>
+                                                             PostBackUrl="../ClusterLead/UploadAchieved.aspx" meta:resourcekey="btnImportData15Resource"></asp:LinkButton>
                                                     </li>
 
                                                     <%--<li>

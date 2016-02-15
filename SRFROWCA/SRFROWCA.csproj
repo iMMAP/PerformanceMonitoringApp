@@ -341,14 +341,9 @@
     <Content Include="OPS\OPSDataEntryRpt.aspx" />
     <Content Include="OPS\SyncOPSProjects.aspx" />
     <Content Include="OPS\UploadOPSProjectDetails.aspx" />
-    <Content Include="OrsProject\CreateProject.ascx" />
+    <Content Include="OrsProject\CreateProject.aspx" />
+    <Content Include="OrsProject\ImportUpdateProjectPartners.aspx" />
     <Content Include="OrsProject\ProjectsListing.aspx" />
-    <Content Include="Pages\AddActivities.aspx" />
-    <Content Include="Pages\ManageActivities.aspx" />
-    <Content Include="Pages\ManageProject.aspx" />
-    <Content Include="Pages\ProjectActivities.ascx" />
-    <Content Include="Pages\ProjectIP.aspx" />
-    <Content Include="Pages\ProjectPartners.ascx" />
     <Content Include="Pages\UploadAchived.aspx" />
     <Content Include="OrsProject\ctlORSAdmin1Targets.ascx" />
     <Content Include="OrsProject\ctlORSAdmin2Targets.ascx" />
@@ -429,6 +424,9 @@
     <Content Include="DataFeeds\OrganizationsByCountry.ashx" />
     <Content Include="DataFeeds\ReportBasic.ashx" />
     <Content Include="DataFeeds\ORSDataEntryVersions.ashx" />
+    <Content Include="DataFeeds\ProjectPartnersWithTargets.ashx" />
+    <Content Include="DataFeeds\ProjectsWithPartners.ashx" />
+    <Content Include="DataFeeds\ProjectAndPartnerIndicatorsWithTargets.ashx" />
     <None Include="HelpFiles\HelpDocs\HelpEng\1_ORS_description_EN_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpEng\2_ORS_Resgistration_EN_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpEng\3_ORS_Role_EN_v3.pdf" />
@@ -1129,11 +1127,17 @@
     <Compile Include="DataFeeds\OrsLocations.ashx.cs">
       <DependentUpon>OrsLocations.ashx</DependentUpon>
     </Compile>
+    <Compile Include="DataFeeds\ProjectAndPartnerIndicatorsWithTargets.ashx.cs">
+      <DependentUpon>ProjectAndPartnerIndicatorsWithTargets.ashx</DependentUpon>
+    </Compile>
     <Compile Include="DataFeeds\ProjectIndicatorsWithTargets.ashx.cs">
       <DependentUpon>ProjectIndicatorsWithTargets.ashx</DependentUpon>
     </Compile>
     <Compile Include="DataFeeds\ProjectPartners.ashx.cs">
       <DependentUpon>ProjectPartners.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="DataFeeds\ProjectPartnersWithTargets.ashx.cs">
+      <DependentUpon>ProjectPartnersWithTargets.ashx</DependentUpon>
     </Compile>
     <Compile Include="DataFeeds\ProjectReqWithOrgStretch.ashx.cs">
       <DependentUpon>ProjectReqWithOrgStretch.ashx</DependentUpon>
@@ -1143,6 +1147,9 @@
     </Compile>
     <Compile Include="DataFeeds\ProjectSRPTargets.ashx.cs">
       <DependentUpon>ProjectSRPTargets.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="DataFeeds\ProjectsWithPartners.ashx.cs">
+      <DependentUpon>ProjectsWithPartners.ashx</DependentUpon>
     </Compile>
     <Compile Include="DataFeeds\ReportBasic.ashx.cs">
       <DependentUpon>ReportBasic.ashx</DependentUpon>
@@ -1611,12 +1618,19 @@
     <Compile Include="ORSDocument.cs">
       <DependentUpon>ORSDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="OrsProject\CreateProject.ascx.cs">
-      <DependentUpon>CreateProject.ascx</DependentUpon>
+    <Compile Include="OrsProject\CreateProject.aspx.cs">
+      <DependentUpon>CreateProject.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="OrsProject\CreateProject.ascx.designer.cs">
-      <DependentUpon>CreateProject.ascx</DependentUpon>
+    <Compile Include="OrsProject\CreateProject.aspx.designer.cs">
+      <DependentUpon>CreateProject.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrsProject\ImportUpdateProjectPartners.aspx.cs">
+      <DependentUpon>ImportUpdateProjectPartners.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrsProject\ImportUpdateProjectPartners.aspx.designer.cs">
+      <DependentUpon>ImportUpdateProjectPartners.aspx</DependentUpon>
     </Compile>
     <Compile Include="OrsProject\ProjectsListing.aspx.cs">
       <DependentUpon>ProjectsListing.aspx</DependentUpon>
@@ -1624,41 +1638,6 @@
     </Compile>
     <Compile Include="OrsProject\ProjectsListing.aspx.designer.cs">
       <DependentUpon>ProjectsListing.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\ManageActivities.aspx.cs">
-      <DependentUpon>ManageActivities.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\ManageActivities.aspx.designer.cs">
-      <DependentUpon>ManageActivities.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\ManageProject.aspx.cs">
-      <DependentUpon>ManageProject.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\ManageProject.aspx.designer.cs">
-      <DependentUpon>ManageProject.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\ProjectActivities.ascx.cs">
-      <DependentUpon>ProjectActivities.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\ProjectActivities.ascx.designer.cs">
-      <DependentUpon>ProjectActivities.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\ProjectIP.aspx.cs">
-      <DependentUpon>ProjectIP.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\ProjectIP.aspx.designer.cs">
-      <DependentUpon>ProjectIP.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\ProjectPartners.ascx.cs">
-      <DependentUpon>ProjectPartners.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\ProjectPartners.ascx.designer.cs">
-      <DependentUpon>ProjectPartners.ascx</DependentUpon>
     </Compile>
     <Compile Include="Pages\UploadAchived.aspx.cs">
       <DependentUpon>UploadAchived.aspx</DependentUpon>
@@ -1788,13 +1767,6 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\AddActivities.aspx.cs">
-      <DependentUpon>AddActivities.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\AddActivities.aspx.designer.cs">
-      <DependentUpon>AddActivities.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportLocation.cs">

@@ -1026,7 +1026,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/05/2016 18:20:08</publishTime>
     </File>
     <File Include="bin/SRFROWCA.dll">
-      <publishTime>02/08/2016 10:52:38</publishTime>
+      <publishTime>02/12/2016 15:49:12</publishTime>
     </File>
     <File Include="bin/SRFROWCA.pdb">
       <publishTime>04/28/2014 16:21:20</publishTime>
@@ -1137,10 +1137,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/14/2015 14:16:04</publishTime>
     </File>
     <File Include="ClusterLead/App_LocalResources/ProjectsListing.aspx.fr-FR.resx">
-      <publishTime>04/14/2015 14:16:04</publishTime>
+      <publishTime>02/09/2016 11:40:08</publishTime>
     </File>
     <File Include="ClusterLead/App_LocalResources/ProjectsListing.aspx.resx">
-      <publishTime>04/14/2015 14:16:04</publishTime>
+      <publishTime>02/09/2016 11:40:10</publishTime>
     </File>
     <File Include="ClusterLead/App_LocalResources/ValidateReportList.aspx.fr-FR.resx">
       <publishTime>04/18/2014 14:06:16</publishTime>
@@ -1176,7 +1176,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/26/2015 14:48:30</publishTime>
     </File>
     <File Include="ClusterLead/ImportData16.aspx">
-      <publishTime>02/04/2016 16:05:11</publishTime>
+      <publishTime>02/11/2016 17:53:52</publishTime>
     </File>
     <File Include="ClusterLead/IndicatorListing.aspx">
       <publishTime>10/29/2015 11:06:45</publishTime>
@@ -1418,11 +1418,17 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="DataFeeds/OrsLocations.ashx">
       <publishTime>11/16/2015 16:16:32</publishTime>
     </File>
+    <File Include="DataFeeds/ProjectAndPartnerIndicatorsWithTargets.ashx">
+      <publishTime>02/12/2016 15:31:46</publishTime>
+    </File>
     <File Include="DataFeeds/ProjectIndicatorsWithTargets.ashx">
       <publishTime>01/29/2016 15:46:22</publishTime>
     </File>
     <File Include="DataFeeds/ProjectPartners.ashx">
       <publishTime>01/14/2016 11:32:40</publishTime>
+    </File>
+    <File Include="DataFeeds/ProjectPartnersWithTargets.ashx">
+      <publishTime>02/11/2016 17:55:31</publishTime>
     </File>
     <File Include="DataFeeds/ProjectReqWithOrgStretch.ashx">
       <publishTime>11/05/2015 16:00:36</publishTime>
@@ -1432,6 +1438,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="DataFeeds/ProjectSRPTargets.ashx">
       <publishTime>04/14/2015 14:16:05</publishTime>
+    </File>
+    <File Include="DataFeeds/ProjectsWithPartners.ashx">
+      <publishTime>02/12/2016 15:46:48</publishTime>
     </File>
     <File Include="DataFeeds/ReportBasic.ashx">
       <publishTime>02/06/2016 21:20:09</publishTime>
@@ -3557,6 +3566,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="OPSTargets.html">
       <publishTime>10/07/2015 14:11:42</publishTime>
     </File>
+    <File Include="ORSDataModel.edmx.diagram">
+      <publishTime>02/10/2016 12:21:36</publishTime>
+    </File>
     <File Include="ORSDocuments/Mali/Protection/Note Explicative Monitoring des 13 indicateurs du SRP.pdf">
       <publishTime>06/10/2014 12:29:08</publishTime>
     </File>
@@ -3571,6 +3583,24 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="ORSModel.tt">
       <publishTime>10/15/2014 12:15:16</publishTime>
+    </File>
+    <File Include="OrsProject/CreateProject.ascx">
+      <publishTime>02/10/2016 10:46:21</publishTime>
+    </File>
+    <File Include="OrsProject/ctlORSAdmin1Targets.ascx">
+      <publishTime>02/10/2016 17:07:55</publishTime>
+    </File>
+    <File Include="OrsProject/ctlORSAdmin2Targets.ascx">
+      <publishTime>02/12/2016 09:46:52</publishTime>
+    </File>
+    <File Include="OrsProject/ImportUpdateProjectPartners.aspx">
+      <publishTime>02/11/2016 15:10:17</publishTime>
+    </File>
+    <File Include="OrsProject/ProjectsListing.aspx">
+      <publishTime>02/10/2016 11:43:51</publishTime>
+    </File>
+    <File Include="OrsProject/ProjectTargets.aspx">
+      <publishTime>02/10/2016 16:03:28</publishTime>
     </File>
     <File Include="ORSReports/3W/ORS3W-Burkina.pdf">
       <publishTime>08/27/2014 15:11:08</publishTime>
@@ -3660,7 +3690,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/03/2013 10:36:50</publishTime>
     </File>
     <File Include="Pages/UploadAchived.aspx">
-      <publishTime>05/27/2015 14:58:14</publishTime>
+      <publishTime>02/12/2016 10:48:31</publishTime>
     </File>
     <File Include="Pages/Web.config">
       <publishTime>10/29/2013 07:15:57</publishTime>
@@ -3861,7 +3891,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/01/2014 12:31:41</publishTime>
     </File>
     <File Include="Site.Master">
-      <publishTime>02/04/2016 11:25:13</publishTime>
+      <publishTime>02/10/2016 11:01:42</publishTime>
     </File>
     <File Include="Styles/loginareamenu.css">
       <publishTime>11/04/2013 03:22:35</publishTime>
@@ -4035,7 +4065,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/18/2015 10:57:12</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/29/2016 12:04:59</publishTime>
+      <publishTime>02/10/2016 12:21:34</publishTime>
     </File>
     <File Include="WebForm1.aspx">
       <publishTime>01/29/2016 11:17:57</publishTime>
@@ -4044,10 +4074,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/05/2016 18:55:17</publishTime>
     </File>
     <File Include="WebForm3.aspx">
-      <publishTime>02/05/2016 19:49:00</publishTime>
+      <publishTime>02/08/2016 12:07:31</publishTime>
     </File>
     <File Include="WebForm5.aspx">
       <publishTime>01/06/2014 15:21:17</publishTime>
+    </File>
+    <File Include="WebService.asmx">
+      <publishTime>12/30/2014 11:35:05</publishTime>
     </File>
     <File Include="xmlprojectfeeds.aspx">
       <publishTime>12/29/2013 04:03:28</publishTime>

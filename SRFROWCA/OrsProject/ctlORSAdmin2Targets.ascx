@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ctlORSAdmin2Targets.ascx.cs" Inherits="SRFROWCA.OrsProject.ctlOPSAdmin2Targets" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ctlORSAdmin2Targets.ascx.cs" Inherits="SRFROWCA.OrsProject.ctlORSAdmin2Targets" %>
 
 <style>
     .page-content {

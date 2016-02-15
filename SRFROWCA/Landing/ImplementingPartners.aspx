@@ -67,11 +67,11 @@
                                                     
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkProjects16" runat="server" Text="My Sector Projects 2016" CssClass="tooltip elemopacity"
-                                                            PostBackUrl="../ClusterLead/ProjecsList.aspx"></asp:LinkButton>
+                                                            PostBackUrl="../OrsProject/ProjectsListing.aspx?year=2016"></asp:LinkButton>
                                                     </li>
                                                     <li>
                                                         <asp:LinkButton ID="btnlnk3W16" runat="server" Text="3W of 2016 Activities" CssClass="tooltip elemopacity"
-                                                            PostBackUrl="../ClusterLead/ProjecsList.aspx"></asp:LinkButton>
+                                                            PostBackUrl="../Reports/ORS3W.aspx"></asp:LinkButton>
                                                     </li>
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkProgress16" runat="server" Text="Progress Summary 2016" CssClass="tooltip elemopacity"
@@ -105,20 +105,17 @@
                                                         <asp:LinkButton ID="btnlnkDataEntry15" runat="server" Text="Data Entry 2015" CssClass=""
                                                             PostBackUrl="../ClusterLead/ValidateReportList.aspx"></asp:LinkButton>
                                                     </li>
-                                                   
-                                                 
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkSectorIndicators15" runat="server" Text="GO to my 2015 Sector Response Plan" CssClass="tooltip elemopacity"
                                                             PostBackUrl="../ClusterLead/IndicatorListing.aspx"></asp:LinkButton>
                                                     </li>
-                                                    
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkProjects15" runat="server" Text="My Sector Projects 2015" CssClass="tooltip elemopacity"
-                                                            PostBackUrl="../ClusterLead/ProjecsList.aspx"></asp:LinkButton>
+                                                            PostBackUrl="../OrsProject/ProjectsListing.aspx?year=2015"></asp:LinkButton>
                                                     </li>
                                                     <li>
                                                         <asp:LinkButton ID="btnlnk3W15" runat="server" Text="3W of 2015 Activities" CssClass="tooltip elemopacity"
-                                                            PostBackUrl="../ClusterLead/ProjecsList.aspx"></asp:LinkButton>
+                                                            PostBackUrl="../Reports/ORS3W.aspx"></asp:LinkButton>
                                                     </li>
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkProgress15" runat="server" Text="Progress Summary 2015" CssClass="tooltip elemopacity"

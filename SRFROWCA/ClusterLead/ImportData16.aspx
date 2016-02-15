@@ -14,8 +14,9 @@
                 <div class="error-container">
                     <div class="well">
                         <div>
+                            <h2>Import Data</h2>
                             <p>
-                                <asp:localize id="localUploadBrowseText" runat="server" text="Click 'Browse' To Select File."></asp:localize>
+                                <asp:localize id="localUploadBrowseText" runat="server" text="Click 'Browse' To Select File."></asp:localize>                                
                             </p>
                             <p>
                                 <asp:fileupload id="fuAchieved" runat="server" class="btn btn-grey" />
@@ -47,7 +48,18 @@
                 </div>
                 <!-- PAGE CONTENT ENDS -->
             </div>
-            <!-- /.col -->
+             <div class="col-xs-8">
+                <!-- PAGE CONTENT BEGINS -->
+
+                <div class="error-container">
+                    <div class="well">
+                        <div>
+                            <h3><a href="../OrsProject/ImportUpdateProjectPartners.aspx">Import Partners</a></h3>
+                        </div>
+                    </div>
+                </div>
+                <!-- PAGE CONTENT ENDS -->
+            </div>
         </div>
         <!-- /.row -->
     </div>

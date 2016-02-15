@@ -33,8 +33,8 @@
                                 <i class="icon-download"></i>PDF
                                        
                             </button>
-                            <asp:Button ID="btnCreateProject" runat="server" OnClick="btnCreateProject_Click"
-                                Text="Create Project" CausesValidation="False"
+                            <asp:Button ID="btnCreateProject" runat="server"
+                                Text="Create Project" CausesValidation="False" PostBackUrl="~/OrsProject/CreateProject.aspx"
                                 CssClass="btn btn-yellow pull-right" />
                         </h6>
                     </div>
@@ -272,7 +272,7 @@
                         EmptyDataText="Your filter criteria does not match any project!" Width="100%"
                         OnRowCommand="gvProjects_RowCommand" OnSorting="gvProjects_Sorting" OnRowDataBound="gvProjects_RowDataBound"
                         OnPageIndexChanging="gvProjects_PageIndexChanging"
-                        DataKeyNames="ProjectId,ProjectOrganizationId,OrganizationId"
+                        DataKeyNames="ProjectId,ProjectOrganizationId,OrganizationId,IsOPS"
                         meta:resourcekey="gvProjectsResource1">
                         <RowStyle CssClass="istrow" />
                         <AlternatingRowStyle CssClass="altcolor" />

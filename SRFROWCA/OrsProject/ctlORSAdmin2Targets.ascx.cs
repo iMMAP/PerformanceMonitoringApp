@@ -1,10 +1,8 @@
 ﻿using BusinessLogic;
 using SRFROWCA.Common;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Transactions;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -22,18 +20,11 @@ namespace SRFROWCA.OrsProject
 
             if (!IsPostBack)
             {
-                SetOPSIds();
-                GetReportId();
+                SetProjectId();
                 PopulateIndicators();
             }
         }
 
-        private void PopulateIndicators()
-        {
-            DataTable dtActivities = GetActivities();
-            gvActivities.DataSource = dtActivities;
-            gvActivities.DataBind();
-        }
 
         #region Events.
 
@@ -52,10 +43,7 @@ namespace SRFROWCA.OrsProject
                     Repeater rptCountry = e.Row.FindControl("rptCountryGender") as Repeater;
                     if (rptCountry != null)
                     {
-                        int yearId = 12;
-                        DataTable dt = DBContext.GetData("GetOPSCountryTargetOfIndicator",
-                                                                    new object[] { EmgLocationId, EmgClusterId, 
-                                                                               OPSProjectId, yearId, indicatorId});
+                        DataTable dt = DBContext.GetData("GetProjectCountryTargetOfIndicator", new object[] { ProjectId, indicatorId });
                         rptCountry.DataSource = dt;
                         rptCountry.DataBind();
 
@@ -101,10 +89,8 @@ namespace SRFROWCA.OrsProject
                     Repeater rptAdmin1 = e.Item.FindControl("rptAdmin1") as Repeater;
                     if (rptAdmin1 != null)
                     {
-                        int yearId = 12;
-                        rptAdmin1.DataSource = DBContext.GetData("[GetOPSAdmin1TargetOfIndicator]", new object[] { countryId, EmgLocationId, 
-                                                                                                                EmgClusterId, OPSProjectId, 
-                                                                                                                yearId, indicatorId });
+                        DataTable dt = DBContext.GetData("GetProjectTargetOfIndicatorAdmin1_ForAdmin2", new object[] { ProjectId, indicatorId });
+                        rptAdmin1.DataSource = dt;
                         rptAdmin1.DataBind();
                     }
                 }
@@ -140,10 +126,7 @@ namespace SRFROWCA.OrsProject
                     Repeater rptAdmin2 = e.Item.FindControl("rptAdmin2") as Repeater;
                     if (rptAdmin2 != null)
                     {
-                        int yearId = 12;
-                        DataTable dt = DBContext.GetData("[GetOPSAdmin2TargetOfIndicator]", new object[] {admin1Id, EmgLocationId, 
-                                                                                                                EmgClusterId, OPSProjectId, 
-                                                                                                                yearId, indicatorId });
+                        DataTable dt = DBContext.GetData("[GetProjectTargetOfIndicator_Admin2]", new object[] {admin1Id, ProjectId, indicatorId });
                         rptAdmin2.DataSource = dt;
                         rptAdmin2.DataBind();
                     }
@@ -182,7 +165,23 @@ namespace SRFROWCA.OrsProject
             }
         }
 
-        #region Button Click Events.
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            bool isSaved = false;
+            //using (TransactionScope scope = new TransactionScope())
+            {
+                SaveProjectTargets();
+                //scope.Complete();
+                isSaved = true;
+                if (RC.SelectedSiteLanguageId == 1)
+                    ShowMessage("Your Data Saved Successfully!");
+                else
+                    ShowMessage("Vos données sauvegardées avec succès");
+            }
+
+            if (isSaved)
+                PopulateIndicators();
+        }
 
         private bool TargetProvided(Repeater rpt, bool isGender)
         {
@@ -268,38 +267,70 @@ namespace SRFROWCA.OrsProject
             return isTargetValid;
         }
 
-        protected void btnSave_Click(object sender, EventArgs e)
+        #endregion
+
+        #region Methods.
+
+        // Get values from querystring and set variables.
+        private void SetProjectId()
         {
-            if (IsTargetProvided())
+            int tempVal = 0;
+            // ProjectId
+            if (Request.QueryString["pid"] != null)
             {
-                bool isSaved = false;
-                using (TransactionScope scope = new TransactionScope())
-                {
-                    if (OPSReportId == 0)
-                    {
-                        SaveReportMainInfo();
-                    }
-                    else
-                    {
-                        UpdateReportMainInfo();
-                    }
-
-                    SaveReport();
-                    //    DeleteReport();
-                    scope.Complete();
-                    isSaved = true;
-                    if (RC.SelectedSiteLanguageId == 1)
-                        ShowMessage("Your Data Saved Successfully!");
-                    else
-                        ShowMessage("Vos données sauvegardées avec succès");
-                }
-
-                if (isSaved)
-                    PopulateIndicators();
+                tempVal = 0;
+                int.TryParse(Request.QueryString["pid"].ToString(), out tempVal);
+                ProjectId = tempVal;
             }
         }
 
-        private void SaveReportDetails()
+        private void PopulateIndicators()
+        {
+            DataTable dtActivities = GetActivities();
+            gvActivities.DataSource = dtActivities;
+            gvActivities.DataBind();
+        }
+
+        private DataTable GetActivities()
+        {
+            int projectId = 0;
+            if (Request.QueryString["pid"] != null)
+                int.TryParse(Request.QueryString["pid"].ToString(), out projectId);
+
+            Project project = null;
+            using (ORSEntities db = new ORSEntities())
+            {
+                project = db.Projects.FirstOrDefault(x => x.ProjectId == projectId);
+            }
+
+            int emgLocationId = project.EmergencyLocationId;
+            int emgClusterId = project.EmergencyClusterId;
+            int? emgSecClusterId = project.SecEmergencyClusterId;
+            int yearId = (int)RC.Year._Current;
+            DataTable dt = new DataTable();
+            if (emgClusterId == (int)RC.ClusterSAH2015.MS)
+                dt = DBContext.GetData("GetMSRefgFrameworkForProjectTargets", new object[] { emgLocationId, emgClusterId, emgSecClusterId,
+                                                                                    projectId, RC.SelectedSiteLanguageId, yearId });
+            else
+                dt = DBContext.GetData("GetFrameworkForProjectTargets", new object[] { emgLocationId, emgClusterId,
+                                                                                    projectId, RC.SelectedSiteLanguageId, yearId });
+
+            if (dt.Rows.Count <= 0)
+            {
+                if (RC.SelectedSiteLanguageId == 1)
+                {
+                    ShowMessage("The framework for your cluster (i.e. activties and indicators) has not been uploaded yet.<br/> Please contact your Cluster (Sector) coordinator for more information.<br/>Please click on this message to go back to the main window.", RC.NotificationType.Error, false, 500);
+                }
+                else
+                {
+                    ShowMessage("le cadre de travail sectoriel (les activités et les indicateurs) ne sont pas encore enregistrés.<br/> Merci de contacter votre coordinateur de cluster (secteur) pour plus de renseignements.<br/>Veuillez cliquer sur ce message pour retourner à l apage principale.", RC.NotificationType.Error, false, 500);
+                }
+            }
+
+            return dt;
+        }
+
+        private void SaveProjectTargets()
         {
             foreach (GridViewRow row in gvActivities.Rows)
             {
@@ -361,33 +392,8 @@ namespace SRFROWCA.OrsProject
             }
         }
 
-        private void SaveAdmin2Targets(Repeater rptAdmin2, int indicatorId, int countryId, int admin1Id)
-        {
-            int? userId = OPSUserId > 0 ? OPSUserId : (int?)null;
-            foreach (RepeaterItem item in rptAdmin2.Items)
-            {
-                if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
-                {
-                    HiddenField hfAdmin2Id = item.FindControl("hfAdmin2Id") as HiddenField;
-                    int admin2Id = 0;
-                    if (hfAdmin2Id != null)
-                        int.TryParse(hfAdmin2Id.Value, out admin2Id);
-
-                    int? target = null;
-                    TextBox txtTarget = item.FindControl("txtAdmin2TargetProject") as TextBox;
-                    target = string.IsNullOrEmpty(txtTarget.Text.Trim()) ? (int?)null : Convert.ToInt32(txtTarget.Text.Trim());
-                    if (admin2Id > 0)
-                    {
-                        DBContext.Update("InsertOPSReportDetails", new object[] { OPSReportId, indicatorId, countryId, admin1Id , admin2Id, 
-                                                                                        target, userId, DBNull.Value });
-                    }
-                }
-            }
-        }
-
         private void SaveAdmin2GenderTargets(Repeater rptAdmin2, int indicatorId, int countryId, int admin1Id)
         {
-            int? userId = OPSUserId > 0 ? OPSUserId : (int?)null;
             foreach (RepeaterItem item in rptAdmin2.Items)
             {
                 if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
@@ -409,177 +415,36 @@ namespace SRFROWCA.OrsProject
                         int.TryParse(hfAdmin2Id.Value, out admin2Id);
                     if (admin2Id > 0)
                     {
-                        DBContext.Update("InsertOPSReportDetailsGender", new object[] {OPSReportId, indicatorId, countryId, admin1Id , 
+                        DBContext.Update("InsertUpdateProjectIndicatorTargetsGender", new object[] {ProjectId, indicatorId, countryId, admin1Id , 
                                                                                         admin2Id, maleTarget, femaleTarget,
-                                                                                         userId, DBNull.Value });
+                                                                                         RC.GetCurrentUserId, DBNull.Value });
                     }
                 }
             }
         }
 
-        private void UpdateReportMainInfo()
+        private void SaveAdmin2Targets(Repeater rptAdmin2, int indicatorId, int countryId, int admin1Id)
         {
-            DBContext.Update("UpdateOPSReport", new object[] { OPSProjectId, EmgLocationId, EmgClusterId, OPSUserId, DBNull.Value });
-        }
-
-        private List<int> GetLocationIdsFromGrid()
-        {
-            List<int> locationIds = new List<int>();
-            foreach (GridViewRow row in gvActivities.Rows)
+            foreach (RepeaterItem item in rptAdmin2.Items)
             {
-                if (row.RowType == DataControlRowType.DataRow)
+                if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
                 {
+                    HiddenField hfAdmin2Id = item.FindControl("hfAdmin2Id") as HiddenField;
+                    int admin2Id = 0;
+                    if (hfAdmin2Id != null)
+                        int.TryParse(hfAdmin2Id.Value, out admin2Id);
 
-                    //DataTable dtActivities = (DataTable)Session["dtOPSActivities"];
-                    //foreach (DataColumn dc in dtActivities.Columns)
-                    //{
-                    //    string colName = dc.ColumnName;
-
-                    //    HiddenField hf = row.FindControl("hf" + colName) as HiddenField;
-                    //    if (hf != null)
-                    //    {
-                    //        int locationId = 0;
-                    //        int.TryParse(hf.Value, out locationId);
-                    //        if (locationId > 0)
-                    //            locationIds.Add((locationId));
-                    //    }
-                    //}
-
-                    // If data row then iterate only once bece we need column names
-                    // from grid to get ids from hidden fields.
-                    break;
-                }
-            }
-
-            return locationIds.Distinct().ToList();
-        }
-
-        #endregion
-
-        #endregion
-
-        #region Methods.
-
-        // Get values from querystring and set variables.
-        private void SetOPSIds()
-        {
-            int tempVal = 0;
-            // UserId
-            if (Request.QueryString["uid"] != null)
-            {
-                int.TryParse(Request.QueryString["uid"].ToString(), out tempVal);
-                OPSUserId = tempVal;
-            }
-
-            // ProjectId
-            if (Request.QueryString["pid"] != null)
-            {
-                tempVal = 0;
-                int.TryParse(Request.QueryString["pid"].ToString(), out tempVal);
-                OPSProjectId = tempVal;
-            }
-        }
-
-        // In this method we will get the postback control.
-        public string GetPostBackControlId(Page page)
-        {
-            // If page is requested first time then return.
-            if (!page.IsPostBack)
-                return "";
-
-            Control control = null;
-            // first we will check the "__EVENTTARGET" because if post back made by the controls
-            // which used "_doPostBack" function also available in Request.Form collection.
-            string controlName = page.Request.Params["__EVENTTARGET"];
-            if (!String.IsNullOrEmpty(controlName))
-            {
-                control = page.FindControl(controlName);
-            }
-            else
-            {
-                // if __EVENTTARGET is null, the control is a button type and we need to
-                // iterate over the form collection to find it
-
-                string controlId;
-                Control foundControl;
-
-                foreach (string ctl in page.Request.Form)
-                {
-                    // handle ImageButton they having an additional "quasi-property"
-                    // in their Id which identifies mouse x and y coordinates
-                    if (ctl.EndsWith(".x") || ctl.EndsWith(".y"))
+                    int? target = null;
+                    TextBox txtTarget = item.FindControl("txtAdmin2TargetProject") as TextBox;
+                    target = string.IsNullOrEmpty(txtTarget.Text.Trim()) ? (int?)null : Convert.ToInt32(txtTarget.Text.Trim());
+                    if (admin2Id > 0)
                     {
-                        controlId = ctl.Substring(0, ctl.Length - 2);
-                        foundControl = page.FindControl(controlId);
+                        DBContext.Update("InsertUpdateProjectIndicatorTargets", new object[] {ProjectId, indicatorId, countryId, admin1Id, admin2Id,
+                                                                                        target, RC.GetCurrentUserId, DBNull.Value });
                     }
-                    else
-                    {
-                        foundControl = page.FindControl(ctl);
-                    }
-
-                    if (!(foundControl is Button || foundControl is ImageButton)) continue;
-
-                    control = foundControl;
-                    break;
                 }
             }
-
-            return control == null ? String.Empty : control.ID;
         }
-
-
-        private DataTable GetActivities()
-        {
-            int yearId = (int)RC.Year._2016;
-            DataTable dt = new DataTable();
-            if (IsMSRefugee)
-                dt = DBContext.GetData("GetOPSRefugeesActivities", new object[] { EmgLocationId, EmgClusterId, EmgClusterId2,
-                                                                                    OPSProjectId, RC.SelectedSiteLanguageId, yearId });
-            else
-                dt = DBContext.GetData("GetOPSActivities3", new object[] { EmgLocationId, EmgClusterId,
-                                                                                    OPSProjectId, RC.SelectedSiteLanguageId, yearId });
-
-
-            if (dt.Rows.Count <= 0)
-            {
-                if (RC.SelectedSiteLanguageId == 1)
-                {
-                    ShowMessage("The framework for your cluster (i.e. activties and indicators) has not been uploaded yet.<br/> Please contact your Cluster (Sector) coordinator for more information.<br/>Please click on this message to go back to the main window.", RC.NotificationType.Error, false, 500);
-                }
-                else
-                {
-                    ShowMessage("le cadre de travail sectoriel (les activités et les indicateurs) ne sont pas encore enregistrés.<br/> Merci de contacter votre coordinateur de cluster (secteur) pour plus de renseignements.<br/>Veuillez cliquer sur ce message pour retourner à l apage principale.", RC.NotificationType.Error, false, 500);
-                }
-            }
-
-            return dt;
-        }
-
-
-        private void DeleteOPSReportDetails()
-        {
-            DBContext.Delete("DeleteOPSReportDetails", new object[] { OPSReportId, EmgClusterId, DBNull.Value });
-        }
-
-        private void SaveReport()
-        {
-            DeleteOPSReportDetails();
-            SaveReportDetails();
-        }
-
-        private void SaveReportMainInfo()
-        {
-            int yearId = (int)RC.Year._2016;
-            OPSReportId = DBContext.Add("InsertOPSReport", new object[] { EmgLocationId, OPSProjectId, 
-                                                                            EmgClusterId, OPSUserId, 
-                                                                            RC.SelectedSiteLanguageId, yearId, DBNull.Value });
-        }
-
-        private void GetReportId()
-        {
-            OPSReportId = DBContext.Update("GetOPSReportId", new object[] { OPSProjectId, DBNull.Value });
-        }
-
 
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
         {
@@ -590,138 +455,25 @@ namespace SRFROWCA.OrsProject
 
         #region Properties & Enums
 
-        private int OPSReportId
+        private int ProjectId
         {
             get
             {
-                int opsReportId = 0;
-                if (ViewState["OPSReportId"] != null)
+                int projectId = 0;
+                if (ViewState["ProjectId"] != null)
                 {
-                    int.TryParse(ViewState["OPSReportId"].ToString(), out opsReportId);
+                    int.TryParse(ViewState["ProjectId"].ToString(), out projectId);
                 }
 
-                return opsReportId;
+                return projectId;
             }
             set
             {
-                ViewState["OPSReportId"] = value.ToString();
-            }
-        }
-
-        private int OPSUserId
-        {
-            get
-            {
-                int opsUserId = 0;
-                if (ViewState["OPSUserId"] != null)
-                {
-                    int.TryParse(ViewState["OPSUserId"].ToString(), out opsUserId);
-                }
-
-                return opsUserId;
-            }
-            set
-            {
-                ViewState["OPSUserId"] = value.ToString();
-            }
-        }
-
-        private int OPSProjectId
-        {
-            get
-            {
-                int opsProjectId = 0;
-                if (ViewState["OPSProjectId"] != null)
-                {
-                    int.TryParse(ViewState["OPSProjectId"].ToString(), out opsProjectId);
-                }
-
-                return opsProjectId;
-            }
-            set
-            {
-                ViewState["OPSProjectId"] = value.ToString();
+                ViewState["ProjectId"] = value.ToString();
             }
         }
 
         #endregion
-
-
-        private int EmgClusterId
-        {
-            get
-            {
-                string clusterName = IsMSRefugee ? "multisectorforrefugees" : OPSClusterName;
-                return RC.EmgClusterIdsSAH2015(RC.MapOPSWithORSClusterNames(clusterName));
-            }
-        }
-
-        private int EmgClusterId2
-        {
-            get
-            {
-                return RC.EmgClusterIdsSAH2015(RC.MapOPSWithORSClusterNames(OPSClusterName));
-            }
-        }
-
-        private int EmgLocationId
-        {
-            get
-            {
-                return RC.EmgLocationIdsSAH2015(OPSCountryName);
-            }
-        }
-        private bool IsMSRefugee
-        {
-            get
-            {
-                string clusterName = "";
-                if (Request.QueryString["clname2"] != null)
-                {
-                    clusterName = Request.QueryString["clname2"].ToString();
-                }
-
-                return clusterName == "multisectorforrefugees";
-            }
-        }
-
-        private string OPSClusterName
-        {
-            get
-            {
-                string clusterName = "";
-                if (Request.QueryString["clname"] != null)
-                {
-                    clusterName = Request.QueryString["clname"].ToString();
-                }
-                return clusterName;
-            }
-        }
-        private string OPSCountryName
-        {
-            get
-            {
-                string countryName = "";
-                if (Request.QueryString["cname"] != null)
-                {
-                    string cName = Request.QueryString["cname"].ToString();
-                    if (cName == "burkinafaso" || cName == "Burkinafaso" || cName == "BURKINAFASO")
-                    {
-                        countryName = "burkina faso";
-                    }
-                    else if (cName == "region" || cName == "Region" || cName == "REGION" || cName == "sahelregion")
-                    {
-                        countryName = "Sahel Region";
-                    }
-                    else
-                    {
-                        countryName = cName;
-                    }
-                }
-
-                return countryName;
-            }
-        }
 
         protected void lnkLanguageEnglish_Click(object sender, EventArgs e)
         {
@@ -729,7 +481,6 @@ namespace SRFROWCA.OrsProject
             {
                 RC.SelectedSiteLanguageId = (int)RC.SiteLanguage.English;
                 RC.AddSiteLangInCookie(this.Response, RC.SiteLanguage.English);
-                //BindGridData();
             }
             catch { }
         }
@@ -740,7 +491,6 @@ namespace SRFROWCA.OrsProject
             {
                 RC.SelectedSiteLanguageId = (int)Common.RC.SiteLanguage.French;
                 RC.AddSiteLangInCookie(this.Response, Common.RC.SiteLanguage.French);
-                //BindGridData();
             }
             catch { }
         }
