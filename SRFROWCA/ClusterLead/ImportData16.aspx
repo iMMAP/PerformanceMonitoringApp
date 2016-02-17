@@ -6,6 +6,7 @@
     <div class="page-content">
         <div id="divMsg">
         </div>
+        <div class="vspace-10"></div>
         <asp:label id="lblMessage" runat="server" text=""></asp:label>
         <div class="row">
             <div class="col-xs-8">
@@ -29,7 +30,7 @@
                 </div>
                 <!-- PAGE CONTENT ENDS -->
             </div>
-            <div class="col-xs-4">
+           <%-- <div class="col-xs-4">
                 <!-- PAGE CONTENT BEGINS -->
 
                 <div class="error-container">
@@ -59,7 +60,7 @@
                     </div>
                 </div>
                 <!-- PAGE CONTENT ENDS -->
-            </div>
+            </div>--%>
         </div>
         <!-- /.row -->
     </div>

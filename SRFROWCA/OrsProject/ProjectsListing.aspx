@@ -29,12 +29,12 @@
                     <div class="widget-header widget-header-small header-color-blue2">
                         <h6>
                             <button runat="server" id="btnExportPDF" onserverclick="ExportToPDF" class="btn btn-yellow"
-                                title="PDF">
+                                title="Export All Projects (PDF)">
                                 <i class="icon-download"></i>PDF
                                        
                             </button>
                             <asp:Button ID="btnCreateProject" runat="server"
-                                Text="Create Project" CausesValidation="False" PostBackUrl="~/OrsProject/CreateProject.aspx"
+                                Text="Create ORS Project" CausesValidation="False" PostBackUrl="~/OrsProject/CreateProject.aspx"
                                 CssClass="btn btn-yellow pull-right" />
                         </h6>
                     </div>
@@ -139,24 +139,24 @@
                                                 <td></td>
                                                 <td>
                                                     <asp:CheckBox ID="cbIsOPS" runat="server"
-                                                        Text="SRP Projects" Checked="false"
+                                                        Text="HRP Projects" Checked="true"
                                                         OnCheckedChanged="SelectedIndexChanged"
-                                                        AutoPostBack="true" />
+                                                        AutoPostBack="true" ToolTip="Oly Show HRP Projects" />
                                                     <asp:CheckBox ID="cbIsORS" runat="server"
                                                         Text="ORS Projects" Checked="false"
                                                         OnCheckedChanged="SelectedIndexChanged"
-                                                        AutoPostBack="true" />
+                                                        AutoPostBack="true" ToolTip="Only Show ORS Projects" />
                                                 </td>
                                                 <td></td>
                                                 <td>
                                                     <asp:CheckBox ID="cbFuned" runat="server"
-                                                        Text="Funded Projects" Checked="false"
+                                                        Text="Funded" Checked="false"
                                                         OnCheckedChanged="SelectedIndexChanged"
-                                                        AutoPostBack="true" />
+                                                        AutoPostBack="true" ToolTip="Only Show Funded Projects" />
                                                     <asp:CheckBox ID="cbNotFunded" runat="server"
-                                                        Text="Not Funded Projects" Checked="false"
+                                                        Text="Not Funded" Checked="false"
                                                         OnCheckedChanged="SelectedIndexChanged"
-                                                        AutoPostBack="true" />
+                                                        AutoPostBack="true" ToolTip="Only Show Not Funded Projects" />
                                                 </td>
                                             </tr>
                                             <tr>
@@ -324,16 +324,34 @@
                             </asp:TemplateField>
                             <asp:BoundField DataField="Phone" HeaderText="Phone" meta:resourcekey="BoundFieldResource9" />
                             <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderText="PDF" meta:resourcekey="TemplateFieldResource2">
+                                <HeaderTemplate>
+                                    <asp:Label ID="lblPDFExportHeader" runat="server" Text="PDF" ToolTip="Export Project (PDF)"></asp:Label>
+                                </HeaderTemplate>
                                 <ItemTemplate>
                                     <asp:ImageButton ID="lnkPrint" runat="server" ImageUrl="../assets/orsimages/pdf.png" CommandName="PrintReport"
-                                        CommandArgument='<%# Eval("ProjectId") %>' meta:resourcekey="lnkPrintResource1" />
+                                        CommandArgument='<%# Eval("ProjectId") %>' meta:resourcekey="lnkPrintResource1" ToolTip="Export" />
                                 </ItemTemplate>
 
                                 <ItemStyle HorizontalAlign="Center"></ItemStyle>
                             </asp:TemplateField>
-                            <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderText="TGT">
+                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                <HeaderTemplate>
+                                    <asp:Label ID="lblTargetHeader" runat="server" Text="TGT" ToolTip="Project Targets"></asp:Label>
+                                </HeaderTemplate>
                                 <ItemTemplate>
-                                    <a style="cursor: pointer;" onclick="return popitup('ProjectTargets.aspx?pid=<%# Eval("ProjectId")%>')"><img alt="tgt" src="../assets/orsimages/target1.png" /></a>
+                                    <a style="cursor: pointer;" onclick="return popitup('ProjectTargets.aspx?pid=<%# Eval("ProjectId")%>')">
+                                        <img alt="tgt" src="../assets/orsimages/target1.png" title="Project Targets" /></a>
+                                </ItemTemplate>
+
+                                <ItemStyle HorizontalAlign="Center"></ItemStyle>
+                            </asp:TemplateField>
+                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                <HeaderTemplate>
+                                    <asp:Label ID="lblPartnerHeader" runat="server" Text="PRT" ToolTip="Project Partners"></asp:Label>
+                                </HeaderTemplate>
+                                <ItemTemplate>
+                                    <a style="cursor: pointer;" onclick="return popitup('ProjectPartners.aspx?pid=<%# Eval("ProjectId")%>')">
+                                        <img alt="tgt" src="../assets/orsimages/partners2.png" title="Project Targets" /></a>
                                 </ItemTemplate>
 
                                 <ItemStyle HorizontalAlign="Center"></ItemStyle>
@@ -342,10 +360,6 @@
                                 <ItemTemplate>
                                     <asp:ImageButton ID="btnEdit" runat="server" ImageUrl="~/assets/orsimages/edit16.png"
                                         CommandName="EditProject" CommandArgument='<%# Container.DataItemIndex %>' ToolTip="Edit Project Information" />
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderStyle-Width="30px" ItemStyle-HorizontalAlign="Center">
-                                <ItemTemplate>
                                     <asp:ImageButton ID="btnDelete" runat="server" ImageUrl="~/assets/orsimages/delete16.png"
                                         CommandName="DeleteProject" CommandArgument='<%# Eval("ProjectId") %>' ToolTip="Delete" />
                                 </ItemTemplate>

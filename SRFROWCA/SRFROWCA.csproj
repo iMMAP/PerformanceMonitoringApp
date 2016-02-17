@@ -183,6 +183,8 @@
     <Content Include="assets\orsimages\edit16.png" />
     <Content Include="assets\orsimages\logo.gif" />
     <Content Include="assets\orsimages\map24.png" />
+    <Content Include="assets\orsimages\partners2.png" />
+    <Content Include="assets\orsimages\target1.png" />
     <Content Include="assets\orsjs\ddlslick.js" />
     <Content Include="assets\orsjs\jquery.dataTables.js" />
     <Content Include="assets\orsjs\jquery.dataTables.min.js" />
@@ -342,7 +344,9 @@
     <Content Include="OPS\SyncOPSProjects.aspx" />
     <Content Include="OPS\UploadOPSProjectDetails.aspx" />
     <Content Include="OrsProject\CreateProject.aspx" />
+    <Content Include="OrsProject\ctlORSAdmin1Partners.ascx" />
     <Content Include="OrsProject\ImportUpdateProjectPartners.aspx" />
+    <Content Include="OrsProject\ProjectPartners.aspx" />
     <Content Include="OrsProject\ProjectsListing.aspx" />
     <Content Include="Pages\UploadAchived.aspx" />
     <Content Include="OrsProject\ctlORSAdmin1Targets.ascx" />
@@ -1625,12 +1629,26 @@
     <Compile Include="OrsProject\CreateProject.aspx.designer.cs">
       <DependentUpon>CreateProject.aspx</DependentUpon>
     </Compile>
+    <Compile Include="OrsProject\ctlORSAdmin1Partners.ascx.cs">
+      <DependentUpon>ctlORSAdmin1Partners.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrsProject\ctlORSAdmin1Partners.ascx.designer.cs">
+      <DependentUpon>ctlORSAdmin1Partners.ascx</DependentUpon>
+    </Compile>
     <Compile Include="OrsProject\ImportUpdateProjectPartners.aspx.cs">
       <DependentUpon>ImportUpdateProjectPartners.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="OrsProject\ImportUpdateProjectPartners.aspx.designer.cs">
       <DependentUpon>ImportUpdateProjectPartners.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrsProject\ProjectPartners.aspx.cs">
+      <DependentUpon>ProjectPartners.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrsProject\ProjectPartners.aspx.designer.cs">
+      <DependentUpon>ProjectPartners.aspx</DependentUpon>
     </Compile>
     <Compile Include="OrsProject\ProjectsListing.aspx.cs">
       <DependentUpon>ProjectsListing.aspx</DependentUpon>
