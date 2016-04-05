@@ -1,60 +1,145 @@
-﻿using SRFROWCA.Common;
-using SRFROWCA.Configurations;
+﻿using BusinessLogic;
+using SRFROWCA.Common;
 using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Web;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace SRFROWCA.OrsProject
 {
-    public partial class ProjectPartners : System.Web.UI.Page
+    public partial class ProjectPartners : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            AddTargetControl();
+            //this.Form.DefaultButton = this.btnSearch.UniqueID;
+            if (IsPostBack) return;
+            GetProjectId();
+            hfProjectId.Value = ProjectId.ToString();
+            SetProjectCode();
+            LoadPartnerOrgs();
+            LoadOrganizations();
+
         }
 
-        private void AddTargetControl()
+        private void SetProjectCode()
         {
-            int projectId = 0;
+            Project project = null;
+            using (ORSEntities db = new ORSEntities())
+            {
+                project = db.Projects.FirstOrDefault(x => x.ProjectId == ProjectId);
+            }
+
+            if (project != null)
+            {
+                lblProjectCode.Text = "Project: " + project.ProjectCode;
+            }
+        }
+
+        private void LoadPartnerOrgs()
+        {
+            DataTable dt = DBContext.GetData("GetProjectPartners", new object[] { ProjectId });
+            gvPartnerOrgs.DataSource = dt;
+            gvPartnerOrgs.DataBind();
+        }
+
+        private void LoadOrganizations()
+        {
+            gvOrganization.DataSource = DBContext.GetData("GetOrganizationsToAddAsPartner", new object[] { ProjectId });
+            gvOrganization.DataBind();
+        }
+
+        protected void gvPartnerOrgs_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "DeletePartner")
+            {
+                int orgId = Convert.ToInt32(e.CommandArgument);
+                DeleteProjectPartner(orgId);
+            }
+        }
+
+        protected void gvOrganization_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "AddPartner")
+            {
+                int orgId = Convert.ToInt32(e.CommandArgument);
+                AddProjectPartner(orgId);
+                LoadPartnerOrgs();
+                LoadOrganizations();
+            }
+        }
+
+        private void AddProjectPartner(int orgId)
+        {
+            DBContext.Add("InsertProjectPartner", new object[] { ProjectId, orgId, (int)RC.Year._Current, RC.GetCurrentUserId, DBNull.Value });
+        }
+
+        private void DeleteProjectPartner(int orgId)
+        {
+            if (IsPartnerReportsExists(orgId))
+            {
+                ShowMessage("This partner can not be deleted. Reported data exists for this partner.", RC.NotificationType.Error, true, 3000);
+            }
+            else
+            {
+                DeletePartner(orgId);
+                LoadPartnerOrgs();
+                LoadOrganizations();
+            }
+        }
+
+        private void DeletePartner(int orgId)
+        {
+            DBContext.Delete("DeleteProjectPartners", new object[] { ProjectId, orgId, DBNull.Value });
+        }
+
+        private bool IsPartnerReportsExists(int orgId)
+        {
+            return (DBContext.GetData("IsPartnerReportsExists", new object[] { ProjectId, orgId })).Rows.Count > 0;
+        }
+       
+        private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
+        {
+            RC.ShowMessage(Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
+        }
+
+        private void GetProjectId()
+        {
+            int tempVal = 0;
             if (Request.QueryString["pid"] != null)
             {
-                int.TryParse(Request.QueryString["pid"].ToString(), out projectId);
+                tempVal = 0;
+                int.TryParse(Request.QueryString["pid"].ToString(), out tempVal);
+                ProjectId = tempVal;
             }
+        }
 
-            Project project = null;
-            using(ORSEntities db = new ORSEntities())
+        private int ProjectId
+        {
+            get
             {
-                project = db.Projects.FirstOrDefault(x => x.ProjectId == projectId);
-            }
-
-            if (project == null)
-                return;
-
-            string key = project.EmergencyLocationId.ToString() + project.EmergencyClusterId.ToString();
-            AdminTargetSettingItems items = RC.AdminTargetSettings(key);
-            if (items.IsTarget)
-            {
-                UserControl ctl = null;
-                if (items.AdminLevel == RC.LocationTypes.Governorate)
+                int projectId = 0;
+                if (ViewState["ProjectId"] != null)
                 {
-                    ctl = (ctlORSAdmin1Partners)LoadControl("~/OrsProject/ctlORSAdmin1Partners.ascx");
-                    ((ctlORSAdmin1Partners)ctl).ID = "ORSPartnerControl";
-                }
-                else if (items.AdminLevel == RC.LocationTypes.District)
-                {
-                    ctl = (ctlORSAdmin2Targets)LoadControl("~/OrsProject/ctlORSAdmin2Targets.ascx");
-                    ((ctlORSAdmin2Targets)ctl).ID = "ORSTargetControl";
+                    int.TryParse(ViewState["ProjectId"].ToString(), out projectId);
                 }
 
-                if (ctl != null)
-                    pnlTargets.Controls.Add(ctl);
+                return projectId;
+            }
+            set
+            {
+                ViewState["ProjectId"] = value.ToString();
             }
         }
 
         protected void Page_Error(object sender, EventArgs e)
         {
+            // Get last error from the server
             Exception exc = Server.GetLastError();
             ExceptionUtility.LogException(exc, User);
         }
     }
+
 }

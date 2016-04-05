@@ -220,33 +220,6 @@ namespace SRFROWCA {
         protected global::System.Web.UI.WebControls.Localize localMainProjects;
         
         /// <summary>
-        /// liProjectsPublic control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liProjectsPublic;
-        
-        /// <summary>
-        /// menuProjectsPublic control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuProjectsPublic;
-        
-        /// <summary>
-        /// Localize2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize2;
-        
-        /// <summary>
         /// liDataEntry control.
         /// </summary>
         /// <remarks>
@@ -391,6 +364,24 @@ namespace SRFROWCA {
         protected global::System.Web.UI.WebControls.Localize localClFOutputDataReport;
         
         /// <summary>
+        /// liIndicatorReport16 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liIndicatorReport16;
+        
+        /// <summary>
+        /// Localize2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize Localize2;
+        
+        /// <summary>
         /// liNewIndicatorListing control.
         /// </summary>
         /// <remarks>
@@ -443,6 +434,24 @@ namespace SRFROWCA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Localize localOutputIndReportPublic;
+        
+        /// <summary>
+        /// liOutputIndReportPublic16 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liOutputIndReportPublic16;
+        
+        /// <summary>
+        /// Localize7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize Localize7;
         
         /// <summary>
         /// liValidateAchievements control.
@@ -938,15 +947,6 @@ namespace SRFROWCA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Localize localFAQHelp;
-        
-        /// <summary>
-        /// Localize14 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize14;
         
         /// <summary>
         /// localContactUs control.

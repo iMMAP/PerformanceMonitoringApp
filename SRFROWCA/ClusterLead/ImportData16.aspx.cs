@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.IO;
+using System.Transactions;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -16,6 +17,8 @@ namespace SRFROWCA.ClusterLead
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //if (!this.User.Identity.IsAuthenticated)
+            //    Response.Redirect("../Default.aspx");
         }
 
         protected void btnImport_Click(object sender, EventArgs e)
@@ -44,7 +47,6 @@ namespace SRFROWCA.ClusterLead
             }
             catch (Exception ex)
             {
-                //TruncateTempTables();
                 lblMessage.Text = ex.ToString();
                 ShowMessage("Some Error Occoured During Import, Please contact with site Admin!", RC.NotificationType.Error, false);
             }
@@ -57,7 +59,7 @@ namespace SRFROWCA.ClusterLead
                 string fileExt = Path.GetExtension(fuAchieved.PostedFile.FileName);
                 if (fileExt != ".xls" && fileExt != ".xlsx" && fileExt != ".xlsb" && fileExt != ".xlsm")
                 {
-                    ShowMessage("Pleae use Excel files with 'xls' OR 'xlsx' extentions.");
+                    ShowMessage("Pleae use Excel files with 'xls' OR 'xlsx' OR xlsm extentions.");
                     return false;
                 }
             }
@@ -129,7 +131,7 @@ namespace SRFROWCA.ClusterLead
         // Read Data From Excel Sheet and Save into DB
         private void FillStagingTableInDB(DataTable dt)
         {
-            DBContext.Update("TruncateStagingTable2016", new object[] { DBNull.Value });
+            //DBContext.Update("TruncateStagingTable2016", new object[] { DBNull.Value });
             string conString = ConfigurationManager.ConnectionStrings["live_dbName"].ConnectionString;
             WriteDataToDB(dt, conString);
         }
@@ -160,8 +162,10 @@ namespace SRFROWCA.ClusterLead
         // Import all data from staging table to respective tables.
         private int ImportData()
         {
-            int yearId = 12;
-            return DBContext.Update("ImportUserCLDataFromStagingTable2016", new object[] { yearId, RC.GetCurrentUserId, DBNull.Value });
+            int yearId = (int)RC.Year._Current;
+            return DBContext.Update("ImportUserCLDataFromStagingTable2016", new object[] { yearId, UserInfo.Organization, UserInfo.EmergencyCountry,
+                                                                                           UserInfo.EmergencyCluster, RC.GetCurrentUserId, 
+                                                                                           DBNull.Value });
         }
 
         // Create new datatable and appropriate columns.

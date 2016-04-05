@@ -15,6 +15,7 @@ namespace SRFROWCA.ClusterLead
             if (!IsPostBack)
             {
                 LoadCombos();
+                SetFiltersFromSession();
                 DisableDropDowns();
                 SetDates();
                 LoadClusterIndicators();
@@ -68,6 +69,53 @@ namespace SRFROWCA.ClusterLead
         {
             gvIndicators.DataSource = GetClusterIndicatros();
             gvIndicators.DataBind();
+        }
+
+        private void SaveFiltersInSession()
+        {
+            int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
+            int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
+
+            if (emgLocationId > 0)
+                Session["OutputFrameworkSelectedCountry"] = emgLocationId;
+            else
+                Session["OutputFrameworkSelectedCountry"] = null;
+
+            if (emgClusterId > 0)
+                Session["OutputFrameworkSelectedCluster"] = emgClusterId;
+            else
+                Session["OutputFrameworkSelectedCluster"] = null;
+        }
+
+        private void SetFiltersFromSession()
+        {
+            if (Session["OutputFrameworkSelectedCountry"] != null)
+            {
+                int countryId = 0;
+                int.TryParse(Session["OutputFrameworkSelectedCountry"].ToString(), out countryId);
+                if (countryId > 0)
+                {
+                    try
+                    {
+                        ddlCountry.SelectedValue = countryId.ToString();
+                    }
+                    catch { }
+                }
+            }
+
+            if (Session["OutputFrameworkSelectedCluster"] != null)
+            {
+                int clusterId = 0;
+                int.TryParse(Session["OutputFrameworkSelectedCluster"].ToString(), out clusterId);
+                if (clusterId > 0)
+                {
+                    try
+                    {
+                        ddlCluster.SelectedValue = clusterId.ToString();
+                    }
+                    catch { }
+                }
+            }
         }
 
         private void SetComboValues()
@@ -444,58 +492,6 @@ namespace SRFROWCA.ClusterLead
             RC.ShowMessage(Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
         }
 
-        private void SaveFiltersInSession()
-        {
-            int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
-            int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
-
-            if (emgLocationId > 0)
-                Session["ClusterDataEntryCountry"] = emgLocationId;
-            else
-                Session["ClusterDataEntryCountry"] = null;
-
-            if (emgClusterId > 0)
-                Session["ClusterDataEntryCluster"] = emgClusterId;
-            else
-                Session["ClusterDataEntryCluster"] = null;
-        }
-
-        private void SetFiltersFromSession()
-        {
-            if (Session["ClusterDataEntryCountry"] != null)
-            {
-                int emgLocationId = 0;
-                int.TryParse(Session["ClusterDataEntryCountry"].ToString(), out emgLocationId);
-                if (emgLocationId > 0)
-                {
-                    try
-                    {
-                        ddlCountry.SelectedValue = emgLocationId.ToString();
-                    }
-                    catch { }
-                }
-            }
-
-            if (Session["ClusterDataEntryCluster"] != null)
-            {
-                int clusterId = 0;
-                int.TryParse(Session["ClusterDataEntryCluster"].ToString(), out clusterId);
-                if (clusterId > 0)
-                {
-                    try
-                    {
-                        ddlCluster.SelectedValue = clusterId.ToString();
-                    }
-                    catch { }
-                }
-            }
-        }
-
-        private void CliearFilterSession()
-        {
-            Session["ClusterDataEntryCountry"] = null;
-            Session["ClusterDataEntryCluster"] = null;
-        }
 
         public string GetPostBackControlId(Page page)
         {

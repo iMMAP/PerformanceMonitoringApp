@@ -307,7 +307,7 @@
     <value>Output Data Entry 2015</value>
   </data>
   <data name="localClFOutputDataReport.Text" xml:space="preserve">
-    <value>Output Report</value>
+    <value>Output Report 2015</value>
   </data>
   <data name="localClFOutputIndicators.Text" xml:space="preserve">
     <value>Output Indicators</value>
@@ -355,7 +355,7 @@
     <value>Manage Users</value>
   </data>
   <data name="localOutputIndReportPublic.Text" xml:space="preserve">
-    <value>Output Report</value>
+    <value>Output Report 2015</value>
   </data>
   <data name="localManagePartners.Text" xml:space="preserve">
     <value>Manage Partners</value>
@@ -365,5 +365,11 @@
   </data>
   <data name="localCLFOutputDataEntry16" xml:space="preserve">
     <value>Output Data Entry 2016</value>
+  </data>
+  <data name="localClFOutputDataReport16.Text" xml:space="preserve">
+    <value>Output Report 2016</value>
+  </data>
+  <data name="localOutputIndReportPublic16.Text" xml:space="preserve">
+    <value>Output Report 2016</value>
   </data>
 </root>

@@ -8,9 +8,10 @@
 //------------------------------------------------------------------------------
 
 namespace SRFROWCA.OrsProject {
-    
-    
-    public partial class ProjectTargets {
+
+
+    public partial class ProjectTargets
+    {
         
         /// <summary>
         /// pnlTargets control.

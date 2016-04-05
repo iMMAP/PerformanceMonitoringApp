@@ -34,7 +34,7 @@
                                                                     <table class="width-100">
                                                                         <tr>
                                                                             <td class="width-30">
-                                                                                <asp:Localize ID="localProjectCode" runat="server" Text="Project Code:" meta:resourcekey="localProjectCodeResource1"></asp:Localize>
+                                                                                <label><asp:Localize ID="localProjectCode" runat="server" Text="Project Code:" meta:resourcekey="localProjectCodeResource1"></asp:Localize></label>
                                                                             </td>
                                                                             <td>
                                                                                 <asp:DropDownList ID="ddlProjects" runat="server" CssClass="width-100"
@@ -44,7 +44,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td>
-                                                                                <asp:Localize ID="localMonths" runat="server" Text="Months:" meta:resourcekey="localMonthsResource1"></asp:Localize>
+                                                                                <label><asp:Localize ID="localMonths" runat="server" Text="Months:" meta:resourcekey="localMonthsResource1"></asp:Localize></label>
                                                                             </td>
                                                                             <td>
                                                                                 <asp:DropDownList ID="ddlMonths" runat="server" CssClass="width-100"
@@ -61,8 +61,12 @@
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td></td>
+                                                                            <td><label>Year:</label></td>
                                                                             <td>
+                                                                                <asp:DropDownList ID="ddlFrameworkYear" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlYear_SelectedIndexChanged">
+                                                                                            <asp:ListItem Text="2016" Value="12" meta:resourcekey="ListItemResource2"></asp:ListItem>
+                                                                                            <asp:ListItem Text="2015" Value="11" meta:resourcekey="ListItemResource3"></asp:ListItem>
+                                                                                        </asp:DropDownList>
                                                                                 <asp:CheckBox Visible="false" ID="cbCountryIndicators" runat="server" Text="Country Indicators" AutoPostBack="true" OnCheckedChanged="cbCountryIndicators_CheckedChanged" /></td>
                                                                         </tr>
                                                                     </table>
@@ -77,7 +81,7 @@
                                                                     <table class="width-100">
                                                                         <tr>
                                                                             <td class="width-20">
-                                                                                <asp:Localize ID="localProjectTitle" runat="server" Text="Project Title:" meta:resourcekey="localProjectTitleResource1"></asp:Localize>
+                                                                                <label><asp:Localize ID="localProjectTitle" runat="server" Text="Project Title:" meta:resourcekey="localProjectTitleResource1"></asp:Localize></label>
                                                                             </td>
                                                                             <td>
                                                                                 <asp:DropDownList ID="ddlProjectTitle" runat="server" CssClass="width-100"
@@ -87,7 +91,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td>
-                                                                                <asp:Localize ID="localOrganization" runat="server" Text="Organization:" meta:resourcekey="localOrganizationResource1"></asp:Localize>
+                                                                                <label><asp:Localize ID="localOrganization" runat="server" Text="Organization:" meta:resourcekey="localOrganizationResource1"></asp:Localize></label>
                                                                             </td>
                                                                             <td>
                                                                                 <asp:DropDownList ID="ddlOrganizations" runat="server" CssClass="width-100"

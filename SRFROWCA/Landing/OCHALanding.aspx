@@ -74,7 +74,7 @@
                                                         </a>
                                                     </li>--%>
                                                     <li>
-                                                        <asp:LinkButton ID="btnlnkOutputDataEntry16" runat="server" Text="Sector Outputput Indicactors 2016 Data Entry" CssClass="tooltip elemopacity"
+                                                        <asp:LinkButton ID="btnlnkOutputDataEntry16" runat="server" Text="Sector Outputput Indicactors 2016 Import Data" CssClass="tooltip elemopacity"
                                                              PostBackUrl="../ClusterLead/ClusterDataEntry16.aspx" meta:resourcekey="btnlnkOutputDataEntry16Resource"></asp:LinkButton>
                                                     </li>
                                                     <li>
@@ -87,7 +87,7 @@
                                                     </li>
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkProgress16" runat="server" Text="Progress Summary 2016" CssClass="tooltip elemopacity"
-                                                             PostBackUrl="../ClusterLead/ProgressSummary.aspx" meta:resourcekey="btnlnkProgress2016Resource"></asp:LinkButton>
+                                                             PostBackUrl="../Reports/Summary/ProgressSummary.aspx" meta:resourcekey="btnlnkProgress2016Resource"></asp:LinkButton>
                                                     </li>
                                                     <%--<li>
                                                         <a href="../ClusterLead/IndicatorListingMigrate.aspx">
@@ -95,8 +95,8 @@
                                                         </a>
                                                     </li>--%>
                                                      <li>
-                                                        <asp:LinkButton ID="lbtnImportData" runat="server" Text="Import Project Actvities Data 2016" CssClass="tooltip elemopacity"
-                                                             PostBackUrl="../ClusterLead/ImportData16.aspx" meta:resourcekey="btnImportData15Resource"></asp:LinkButton>
+                                                        <asp:LinkButton ID="lbtnImportData" runat="server" Text="Import Data 2016" CssClass="tooltip elemopacity"
+                                                             PostBackUrl="../ClusterLead/ImportData16.aspx"></asp:LinkButton>
                                                     </li>
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkExportFramework" runat="server" Text="Export Framework 2016" CssClass="tooltip elemopacity"
@@ -170,11 +170,11 @@
                                                     </li>
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkProgress15" runat="server" Text="Progress Summary 2015" CssClass="tooltip elemopacity"
-                                                             PostBackUrl="../ClusterLead/ProgressSummary.aspx" meta:resourcekey="btnlnkProgress2015Resource"></asp:LinkButton>
+                                                             PostBackUrl="../Reports/Summary/ProgressSummary.aspx" meta:resourcekey="btnlnkProgress2015Resource"></asp:LinkButton>
                                                     </li>
                                                     <li>
-                                                        <asp:LinkButton ID="btnImportData15" runat="server" Text="Import Project Actvities Data 2015" CssClass="tooltip elemopacity"
-                                                             PostBackUrl="../ClusterLead/UploadAchieved.aspx" meta:resourcekey="btnImportData15Resource"></asp:LinkButton>
+                                                        <asp:LinkButton ID="btnImportData15" runat="server" Text="Import Data 2015" CssClass="tooltip elemopacity"
+                                                             PostBackUrl="../ClusterLead/UploadAchieved.aspx"></asp:LinkButton>
                                                     </li>
 
                                                     <%--<li>

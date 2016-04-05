@@ -14,6 +14,10 @@ namespace SRFROWCA.OrsProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.Form.DefaultButton = this.btnSearch.UniqueID;
+            if (!RC.IsAuthenticated(this.User))
+                btnCreateProject.Visible = false;
+
             if (IsPostBack) return;
 
             if (HttpContext.Current.User.Identity.IsAuthenticated)
@@ -46,7 +50,8 @@ namespace SRFROWCA.OrsProject
             PopulateOrganizations();
             PopulateCountries();
             PopulateClusters();
-            UI.SetUserCountry(ddlCountry);
+            if (!RC.IsRegionalClusterLead(this.User))
+                UI.SetUserCountry(ddlCountry);
             UI.SetUserCluster(ddlSecClusters);
             SetOrganization();
         }
@@ -92,18 +97,6 @@ namespace SRFROWCA.OrsProject
         {
             UI.FillEmergencyLocations(ddlCountry, RC.SelectedEmergencyId);
             RC.AddSelectItemInList(ddlCountry, "Select");
-        }
-
-        protected void ExportToExcel(object sender, EventArgs e)
-        {
-            DataTable dt = GetProjects();//DBContext.GetData("GetProjects", new object[] { countryID, clusterId, null, orgId, null, DBNull.Value, DBNull.Value, null, null, 1 });
-            //RemoveColumnsFromDataTable(dt);
-
-            GridView gv = new GridView();
-            gv.DataSource = dt;
-            gv.DataBind();
-
-            ExportUtility.ExportGridView(gv, "ProjectListing", ".xls", Response, true);
         }
 
         protected void ExportToPDF(object sender, EventArgs e)
@@ -311,6 +304,10 @@ namespace SRFROWCA.OrsProject
         private void LoadProjects()
         {
             DataTable dt = GetProjects();
+            if (dt.Rows.Count > 0)
+            {
+                gvProjects.VirtualItemCount = Convert.ToInt32(dt.Rows[0]["VirtualCount"].ToString());
+            }
             gvProjects.DataSource = dt;
             gvProjects.DataBind();
 
@@ -376,13 +373,6 @@ namespace SRFROWCA.OrsProject
                 }
                 else
                     lblFunded.Text = "";
-
-                //req = req.Substring(0, req.IndexOf('.'));
-                ////funded = funded.Substring(0, funded.IndexOf('.'));
-                //lblRequiremens.Text = UI.GetThousandSeparator(req);
-                //lblFunded.Text = UI.GetThousandSeparator(funded);
-                //lblRequiremens.Text = req;
-                //lblFunded.Text = funded;
             }
             else
             {
@@ -390,8 +380,6 @@ namespace SRFROWCA.OrsProject
                 lblOrgs.Text = "";
                 lblCountry.Text = "";
                 lblClusters.Text = "";
-                string req = "";
-                string funded = "";
                 lblPercentFunded.Text = "";
                 lblRequiremens.Text = "";
                 lblFunded.Text = "";
@@ -407,7 +395,7 @@ namespace SRFROWCA.OrsProject
                 tempVal = 0;
                 int.TryParse(ddlCountry.SelectedValue, out tempVal);
             }
-            int? emgLocationId = tempVal > 0 ? tempVal : (int?)null;            
+            int? emgLocationId = tempVal > 0 ? tempVal : (int?)null;
 
             tempVal = 0;
             if (ddlSecClusters.Visible)
@@ -424,15 +412,9 @@ namespace SRFROWCA.OrsProject
             int? emgClusterId = tempVal > 0 ? tempVal : (int?)null;
 
             string projCode = txtProjectCode.Text.Trim().Length > 0 ? txtProjectCode.Text.Trim() : null;
-            int? orgId = RC.GetSelectedIntVal(ddlOrg);
 
-            if (orgId == 0)
-            {
-                if (RC.IsDataEntryUser(User))
-                    orgId = UserInfo.Organization;
-                else
-                    orgId = (int?)null;
-            }
+            tempVal = RC.GetSelectedIntVal(ddlOrg);
+            int? orgId = tempVal > 0 ? tempVal : (int?)null;
 
             int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
             string projectStatus = ddlStatus.SelectedValue == "0" ? null : ddlStatus.SelectedValue;
@@ -465,10 +447,12 @@ namespace SRFROWCA.OrsProject
                 isFunded = 0;
             }
 
+            int? pageSize = gvProjects.PageSize;
+            int? pageIndex = gvProjects.PageIndex;
 
             return DBContext.GetData("GetProjectsListing", new object[] {emgLocationId, emgClusterId, projCode, orgId, 
                                                                             RC.SelectedSiteLanguageId,  yearId, projectStatus, 
-                                                                            secClusterId, isOPS, isFunded});
+                                                                            secClusterId, isOPS, isFunded, pageIndex, pageSize});
         }
 
 
@@ -497,26 +481,76 @@ namespace SRFROWCA.OrsProject
 
         protected void gvProjects_RowDataBound(object sender, GridViewRowEventArgs e)
         {
+
+            if (e.Row.RowType == DataControlRowType.Header)
+            {
+                if (!this.User.Identity.IsAuthenticated || RC.IsClusterLead(this.User) || RC.IsRegionalClusterLead(this.User))
+                {
+                    e.Row.Cells[10].Visible = false;
+                    e.Row.Cells[12].Visible = false;
+                    e.Row.Cells[13].Visible = false;
+                    e.Row.Cells[14].Visible = false;
+                }
+            }
+
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 RC.FormatThousandSeperator(e.Row, "lblOriginalRequest");
                 RC.FormatThousandSeperator(e.Row, "lblFundedAmount");
 
-                int isOPS = 0;
-                int.TryParse(gvProjects.DataKeys[e.Row.RowIndex]["IsOPS"].ToString(), out isOPS);
-
-                if (!this.User.Identity.IsAuthenticated || isOPS == 1) 
+                if (!this.User.Identity.IsAuthenticated || RC.IsClusterLead(this.User) || RC.IsRegionalClusterLead(this.User))
                 {
-                    ImageButton btnEdit = e.Row.FindControl("btnEdit") as ImageButton;
-                    if (btnEdit != null)
-                        btnEdit.Visible = false;
+                    e.Row.Cells[10].Visible = false;
+                    e.Row.Cells[12].Visible = false;
+                    e.Row.Cells[13].Visible = false;
+                    e.Row.Cells[14].Visible = false;
+                }
+                else
+                {
+                    int isOPS = 0;
+                    int.TryParse(gvProjects.DataKeys[e.Row.RowIndex]["IsOPS"].ToString(), out isOPS);
+                    if (isOPS == 1)
+                    {
+                        HideFunctionButtons(e.Row, "btnEdit");
+                        HideFunctionButtons(e.Row, "btnDelete");
+                    }
 
-                    ImageButton btnDelete = e.Row.FindControl("btnDelete") as ImageButton;
-                    if (btnDelete != null)
-                        btnDelete.Visible = false;
-                    
+                    if (RC.IsAdmin(this.User)) return;
+
+                    int orgId = 0;
+                    int.TryParse(gvProjects.DataKeys[e.Row.RowIndex].Values["OrganizationId"].ToString(), out orgId);
+
+                    int emgLocationId = 0;
+                    int.TryParse(gvProjects.DataKeys[e.Row.RowIndex].Values["EmergencyLocationId"].ToString(), out emgLocationId);
+
+                    if (RC.IsCountryAdmin(this.User))
+                    {
+                        if (!(emgLocationId == UserInfo.EmergencyCountry))
+                        {
+                            HideFunctionButtons(e.Row, "imgbtnTargets");
+                            HideFunctionButtons(e.Row, "imgbtnPartners");
+                            HideFunctionButtons(e.Row, "btnEdit");
+                            HideFunctionButtons(e.Row, "btnDelete");
+                        }
+                    }
+                    else if (!(orgId == UserInfo.Organization && emgLocationId == UserInfo.EmergencyCountry))
+                    {
+                        HideFunctionButtons(e.Row, "imgbtnTargets");
+                        HideFunctionButtons(e.Row, "imgbtnPartners");
+                        HideFunctionButtons(e.Row, "btnEdit");
+                        HideFunctionButtons(e.Row, "btnDelete");
+                    }
+
+
                 }
             }
+        }
+
+        private void HideFunctionButtons(GridViewRow row, string controlName)
+        {
+            ImageButton btnTargets = row.FindControl(controlName) as ImageButton;
+            if (btnTargets != null)
+                btnTargets.Visible = false;
         }
 
         protected void Page_Error(object sender, EventArgs e)

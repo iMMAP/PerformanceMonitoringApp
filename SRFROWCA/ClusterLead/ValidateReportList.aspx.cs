@@ -17,12 +17,6 @@ namespace SRFROWCA.ClusterLead
             if (!IsPostBack)
             {
                 PopulateDropDowns();
-
-                //if (Session["ClusterLeadValidateReportCountryInd"] != null)
-                //{
-                //    cbCountryIndicators.Checked = true;
-                //}
-
                 if (RC.IsCountryAdmin(User))
                 {
                     PopulateClusters();
@@ -50,8 +44,7 @@ namespace SRFROWCA.ClusterLead
         private void PopulateDropDowns()
         {
             PopulateMonths();
-            PopulateOrganizations();
-            PopulateProjectCodes();
+            PopulateOrganizations();            
         }
 
         private void PopulateMonths()
@@ -88,10 +81,11 @@ namespace SRFROWCA.ClusterLead
         {
             using (ORSEntities db = new ORSEntities())
             {
+                int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
                 ddlProjects.DataValueField = "ProjectId";
                 ddlProjects.DataTextField = "ProjectCode";
-
-                DataTable dt = DBContext.GetData("GetReportProjectsForClusterLead", new object[] { UserInfo.EmergencyCountry, UserInfo.EmergencyCluster });
+                DataTable dt = DBContext.GetData("GetReportProjectsForClusterLead", new object[] { UserInfo.EmergencyCountry, 
+                    UserInfo.EmergencyCluster, yearId });
                 ddlProjects.DataSource = dt;
                 ddlProjects.DataBind();
 
@@ -110,7 +104,7 @@ namespace SRFROWCA.ClusterLead
         }
 
         private void LoadReports()
-        {
+        {            
             int tempVal = 0;
             if (ddlClusters.Visible)
             {
@@ -137,8 +131,8 @@ namespace SRFROWCA.ClusterLead
             bool srpInd = cbCountryIndicators.Checked;
 
             bool? isOPS = rbIsOPSProject.SelectedValue.Equals("-1") ? (bool?)null : Convert.ToBoolean(rbIsOPSProject.SelectedValue);
-
-            gvReports.DataSource = DBContext.GetData("GetCountryReports", new object[] { emgLocationId, clusterId, projectID, monthId, orgId, srpInd, isOPS });
+            int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
+            gvReports.DataSource = DBContext.GetData("GetCountryReports", new object[] { emgLocationId, clusterId, projectID, monthId, orgId, srpInd, isOPS, yearId });
             gvReports.DataBind();
         }
 
@@ -179,6 +173,11 @@ namespace SRFROWCA.ClusterLead
             //LoadReports();
         }
 
+        protected void ddlYear_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PopulateProjectCodes();
+            LoadReports();
+        }
         protected void rbIsOPSProject_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadReports();

@@ -13,24 +13,6 @@ namespace SRFROWCA.OrsProject {
     public partial class CreateProject {
         
         /// <summary>
-        /// localBreadCrumbHome control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localBreadCrumbHome;
-        
-        /// <summary>
-        /// localBreadCrumbManageProjects control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize localBreadCrumbManageProjects;
-        
-        /// <summary>
         /// localProjectCode control.
         /// </summary>
         /// <remarks>
@@ -184,6 +166,15 @@ namespace SRFROWCA.OrsProject {
         protected global::System.Web.UI.WebControls.TextBox txtToDate;
         
         /// <summary>
+        /// lblCaptionContactName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize lblCaptionContactName;
+        
+        /// <summary>
         /// txtContactName control.
         /// </summary>
         /// <remarks>
@@ -193,6 +184,15 @@ namespace SRFROWCA.OrsProject {
         protected global::System.Web.UI.WebControls.TextBox txtContactName;
         
         /// <summary>
+        /// lblCaptionContactPhone control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize lblCaptionContactPhone;
+        
+        /// <summary>
         /// txtContactPhone control.
         /// </summary>
         /// <remarks>
@@ -200,6 +200,15 @@ namespace SRFROWCA.OrsProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtContactPhone;
+        
+        /// <summary>
+        /// lblCaptionContactEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize lblCaptionContactEmail;
         
         /// <summary>
         /// txtContactEmail control.

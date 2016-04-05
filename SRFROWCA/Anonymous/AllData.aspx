@@ -7,6 +7,7 @@
     <%@ Register Assembly="DropDownCheckBoxes" Namespace="Saplin.Controls" TagPrefix="cc" %>
     <%--Custom GridView Class to include custom paging functionality.--%>
     <%@ Register Assembly="SRFROWCA" Namespace="SRFROWCA" TagPrefix="cc2" %>
+    
     <style>
         .ddlWidth {
             width: 100%;
@@ -36,7 +37,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="allDataContent" ContentPlaceHolderID="MainContent" runat="server">
-    
+
     <asp:UpdatePanel ID="pnlAllData" runat="server">
         <ContentTemplate>
             <div class="page-content">
@@ -48,7 +49,7 @@
                         </ProgressTemplate>
                     </asp:UpdateProgress>
                 </div>
-                <table style="width:100%">
+                <table style="width: 100%">
                     <tr>
                         <td>
                             <div class="row">
@@ -81,7 +82,7 @@
                                                                             <table class="width-100">
                                                                                 <tr>
                                                                                     <td>
-                                                                                        <span>Cluster: </span>
+                                                                                        <label>Cluster:</label>
                                                                                     </td>
                                                                                     <td>
                                                                                         <cc:DropDownCheckBoxes ID="ddlClusters" runat="server" OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged"
@@ -90,12 +91,14 @@
                                                                                             <Style SelectBoxWidth="" DropDownBoxBoxWidth="200%" DropDownBoxBoxHeight=""></Style>
                                                                                             <Texts SelectBoxCaption="Select Clusters" />
                                                                                         </cc:DropDownCheckBoxes>
-                                                                                        <asp:Label ID="lblCluster" runat="server" Text="" Visible="false"></asp:Label>
+                                                                                        <label>
+                                                                                            <asp:Label ID="lblCluster" runat="server" Text="" Visible="false"></asp:Label></label>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td>
-                                                                                        <span>Objectives</span>
+                                                                                        <label>
+                                                                                            Objectives<label>
                                                                                     </td>
                                                                                     <td>
                                                                                         <cc:DropDownCheckBoxes ID="ddlObjectives" runat="server" CssClass="ddlWidth" AutoPostBack="true"
@@ -110,8 +113,8 @@
                                                                                     <td></td>
                                                                                     <td>
                                                                                         <span>
-                                                                                            <asp:CheckBox ID="cbOPSProjects" runat="server" Text="SRP Projects" />
-                                                                                            <asp:CheckBox ID="cbORSProjects" runat="server" Text="Non SRP Projects" /></span>
+                                                                                            <asp:CheckBox ID="cbOPSProjects" runat="server" Text="HRP Projects" />
+                                                                                            <asp:CheckBox ID="cbORSProjects" runat="server" Text="Non HRP Projects" /></span>
                                                                                     </td>
                                                                                 </tr>
                                                                             </table>
@@ -126,7 +129,8 @@
                                                                             <table class="width-100">
                                                                                 <tr>
                                                                                     <td>
-                                                                                        <span>Organization:</span>
+                                                                                        <label>
+                                                                                            Organization:<label>
                                                                                     </td>
                                                                                     <td>
                                                                                         <cc:DropDownCheckBoxes ID="ddlOrganizations" runat="server" CssClass="ddlWidth" AutoPostBack="true"
@@ -135,12 +139,13 @@
                                                                                             <Style SelectBoxWidth="" DropDownBoxBoxWidth="250%" DropDownBoxBoxHeight="300px"></Style>
                                                                                             <Texts SelectBoxCaption="Select Organization" />
                                                                                         </cc:DropDownCheckBoxes>
-                                                                                        <asp:Label ID="lblOrganization" runat="server" Text="" Visible="false"></asp:Label>
+                                                                                        <label>
+                                                                                            <asp:Label ID="lblOrganization" runat="server" Text="" Visible="false"></asp:Label></label>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td>
-                                                                                        <span>Projects:</span>
+                                                                                        <label>Projects:</label>
                                                                                     </td>
                                                                                     <td>
                                                                                         <cc:DropDownCheckBoxes ID="ddlProjects" runat="server" CssClass="ddlWidth" AutoPostBack="true"
@@ -153,7 +158,7 @@
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td>
-                                                                                        <span>Month:</span>
+                                                                                        <label>Month:</label>
                                                                                     </td>
                                                                                     <td>
                                                                                         <cc:DropDownCheckBoxes ID="ddlMonth" runat="server" OnSelectedIndexChanged="ddl_SelectedIndexChanged"
@@ -162,6 +167,10 @@
                                                                                             <Style SelectBoxWidth="120px" DropDownBoxBoxWidth="200%" DropDownBoxBoxHeight="200px"></Style>
                                                                                             <Texts SelectBoxCaption="Select Month" />
                                                                                         </cc:DropDownCheckBoxes>
+                                                                                        <asp:DropDownList ID="ddlFrameworkYear" runat="server">
+                                                                                            <asp:ListItem Text="2016" Value="2016" meta:resourcekey="ListItemResource2"></asp:ListItem>
+                                                                                            <asp:ListItem Text="2015" Value="2015" meta:resourcekey="ListItemResource3"></asp:ListItem>
+                                                                                        </asp:DropDownList>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -172,7 +181,10 @@
                                                                                         <span>
                                                                                             <asp:CheckBox ID="cbValidated" runat="server" Text="Validated" />
                                                                                             <asp:CheckBox ID="cbNotValidated" runat="server" Text="Not Validated" /></span>
+
+
                                                                                     </td>
+
                                                                                 </tr>
                                                                             </table>
                                                                         </div>
@@ -186,7 +198,7 @@
                                                                             <table class="width-100">
                                                                                 <tr>
                                                                                     <td>
-                                                                                        <span>Country:</span>
+                                                                                        <label>Country:</label>
                                                                                     </td>
                                                                                     <td>
                                                                                         <cc:DropDownCheckBoxes ID="ddlCountry" runat="server" CssClass="ddlWidth" AutoPostBack="true"
@@ -200,7 +212,7 @@
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td>
-                                                                                        <span>Admin1:</span>
+                                                                                        <label>Admin1:</label>
                                                                                     </td>
                                                                                     <td>
                                                                                         <cc:DropDownCheckBoxes ID="ddlAdmin1" runat="server" CssClass="ddlWidth" OnSelectedIndexChanged="ddlAdmin1_SelectedIndexChanged"
@@ -225,7 +237,8 @@
                                                                                     </td>
                                                                                 </tr>--%>
                                                                                 <tr>
-                                                                                    <td>Funding Status:
+                                                                                    <td>
+                                                                                        <label>Funding Status:</label>
                                                                                     </td>
                                                                                     <td>
                                                                                         <span>
@@ -237,8 +250,8 @@
                                                                                     <td></td>
                                                                                     <td>
                                                                                         <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click"
-                                                                                            class="btn btn-primary" />
-                                                                                        <asp:Button ID="btnReset" runat="server" Text="Reset" OnClick="btnReset_Click" class="btn" />
+                                                                                            class="btn btn-primary btn-sm" />
+                                                                                        <asp:Button ID="btnReset" runat="server" Text="Reset" OnClick="btnReset_Click" class="btn btn-sm" />
                                                                                     </td>
                                                                                 </tr>
                                                                             </table>
@@ -262,7 +275,7 @@
                 <div class="widget-box">
                     <div class="widget-header widget-header-small header-color-blue2">
                         <h6>Search Criteria
-                            </h6>
+                        </h6>
                         <div class="widget-toolbar">
                             <a href="#" data-action="collapse"><i class="icon-chevron-down"></i></a>
                         </div>
@@ -285,27 +298,29 @@
                             ShowHeader="true" OnPageIndexChanging="gvReport_PageIndexChanging" EmptyDataText="Your filter criteria does not match any record in database!">
                             <PagerStyle BackColor="#efefef" ForeColor="DarkSlateBlue" HorizontalAlign="Center" />
                             <RowStyle CssClass="istrow" />
-                        <AlternatingRowStyle CssClass="altcolor" />
+                            <AlternatingRowStyle CssClass="altcolor" />
                             <Columns>
                                 <asp:BoundField DataField="Cluster" HeaderText="Cluster" SortExpression="Cluster" />
                                 <asp:BoundField DataField="Organization" HeaderText="Organization" SortExpression="Organization" />
                                 <asp:BoundField DataField="ProjectCode" HeaderText="Project" SortExpression="ProjectCode" />
 
                                 <asp:BoundField DataField="Month" HeaderText="Month" SortExpression="Month" />
-                                <asp:BoundField DataField="Objective" HeaderText="Objective" SortExpression="Objective" />                                
+                                <asp:BoundField DataField="Objective" HeaderText="Objective" SortExpression="Objective" />
                                 <asp:BoundField DataField="Activity" HeaderText="Activity" SortExpression="Activity" />
                                 <asp:BoundField DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator" />
-                                <asp:BoundField DataField="Accumulative" HeaderText="Accum" SortExpression="Accumulative"
-                                    ItemStyle-HorizontalAlign="Right" />
                                 <asp:BoundField DataField="Country" HeaderText="Country" SortExpression="Country" />
                                 <asp:BoundField DataField="Admin1" HeaderText="Admin1" SortExpression="Admin1" />
-                                
+                                <asp:BoundField DataField="Admin2" HeaderText="Admin2" SortExpression="Admin2" />
+
                                 <asp:BoundField DataField="AnnualTarget" HeaderText="Annual Target" SortExpression="AnnualTarget"
                                     ItemStyle-HorizontalAlign="Right" />
                                 <asp:BoundField DataField="Achieved" HeaderText="Monthly Achieved" SortExpression="Achieved"
                                     ItemStyle-HorizontalAlign="Right" />
+                                <asp:TemplateField HeaderText="Appr" SortExpression="IsApproved">
+                                    <ItemTemplate><%# (Boolean.Parse(Eval("IsApproved").ToString())) ? "Yes" : "No" %></ItemTemplate>
+                                </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Cmt">
-                                   
+
                                     <ItemTemplate>
                                         <span class="tooltip1" style="opacity: 100;" title="<%# Eval("Comments") %>">
                                             <img src="../assets/orsimages/edit-file-icon.png" />
@@ -320,4 +335,5 @@
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
 </asp:Content>

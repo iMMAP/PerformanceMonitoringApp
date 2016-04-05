@@ -28,14 +28,14 @@
                 <td>
                     <div class="widget-header widget-header-small header-color-blue2">
                         <h6>
-                            <button runat="server" id="btnExportPDF" onserverclick="ExportToPDF" class="btn btn-yellow"
+                            <button runat="server" id="btnExportPDF" onserverclick="ExportToPDF" class="btn btn-yellow btn-sm"
                                 title="Export All Projects (PDF)">
                                 <i class="icon-download"></i>PDF
                                        
                             </button>
                             <asp:Button ID="btnCreateProject" runat="server"
                                 Text="Create ORS Project" CausesValidation="False" PostBackUrl="~/OrsProject/CreateProject.aspx"
-                                CssClass="btn btn-yellow pull-right" />
+                                CssClass="btn btn-yellow pull-right btn-sm" />                            
                         </h6>
                     </div>
                     <div class="widget-body">
@@ -52,28 +52,24 @@
                                                         </asp:Label>
                                                     </label>
                                                 </td>
-                                                <td>
+                                                <td class="width-20">
                                                     <asp:DropDownList runat="server" ID="ddlCountry" CssClass="width-80" AutoPostBack="true"
                                                         OnSelectedIndexChanged="SelectedIndexChanged" meta:resourcekey="ddlCountryResource1">
                                                     </asp:DropDownList>
                                                 </td>
-                                                <td class="width-20">
+                                                <td>
                                                     <label>
                                                         <asp:Label ID="lblCaptionCluster" runat="server" Text="Cluster:"
                                                             meta:resourcekey="lblCaptionClusterResource1">
                                                         </asp:Label>
                                                     </label>
                                                 </td>
-                                                <td class="width-30">
+                                                <td class="width-20">
                                                     <asp:DropDownList ID="ddlSecClusters" runat="server" CssClass="width-80" AutoPostBack="true"
                                                         OnSelectedIndexChanged="SelectedIndexChanged" meta:resourcekey="ddlSecClustersResource1">
                                                     </asp:DropDownList>
                                                 </td>
-
-                                            </tr>
-                                            <tr>
-
-                                                <td class="width-20">
+                                                <td>
                                                     <label>
                                                         <asp:Label ID="lblCaptionSubSetCluster" runat="server"
                                                             Text="Subset Of Cluster:" OnSelectedIndexChanged="SelectedIndexChanged"
@@ -81,13 +77,13 @@
                                                         </asp:Label>
                                                     </label>
                                                 </td>
-                                                <td class="width-30">
+                                                <td class="width-20">
                                                     <asp:DropDownList ID="ddlClusters" runat="server" CssClass="width-80" AutoPostBack="true"
                                                         OnSelectedIndexChanged="SelectedIndexChanged" meta:resourcekey="ddlClustersResource1">
                                                     </asp:DropDownList>
                                                 </td>
-
-
+                                            </tr>
+                                            <tr>
                                                 <td>
                                                     <label>
                                                         <asp:Label ID="lblCaptionOrganization" runat="server"
@@ -100,83 +96,78 @@
                                                         OnSelectedIndexChanged="SelectedIndexChanged" meta:resourcekey="ddlOrgResource1">
                                                     </asp:DropDownList>
                                                 </td>
-                                                <tr>
-                                                    <td>
-                                                        <label>
-                                                            <asp:Label ID="lblCaptionProjCode" runat="server"
-                                                                Text="Project Code/Id:"
-                                                                meta:resourcekey="lblCaptionProjCodeResource1">
-                                                            </asp:Label>
-                                                        </label>
-                                                    </td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtProjectCode" runat="server" CssClass="width-80"
-                                                            meta:resourcekey="txtProjectCodeResource1"></asp:TextBox>
-                                                    </td>
-                                                    <td>
-                                                        <label>
-                                                            <asp:Label ID="lblCaptionStatus" runat="server"
-                                                                Text="Status:" meta:resourcekey="lblCaptionStatusResource1">
-                                                            </asp:Label>
-                                                        </label>
-                                                    </td>
-                                                    <td>
-                                                        <asp:DropDownList ID="ddlStatus" runat="server" CssClass="width-80"
-                                                            meta:resourcekey="ddlStatusResource1"
-                                                            OnSelectedIndexChanged="SelectedIndexChanged"
-                                                            AutoPostBack="true">
-                                                            <asp:ListItem Text="Select" Value="0"></asp:ListItem>
-                                                            <asp:ListItem Text="Approved by Cluster/Sector " Value="Approved by Cluster/Sector "></asp:ListItem>
-                                                            <asp:ListItem Text="CAP Final Review Phase" Value="CAP Final Review Phase"></asp:ListItem>
-                                                            <asp:ListItem Text="Draft" Value="Draft"></asp:ListItem>
-                                                            <asp:ListItem Text="HQ Review Phase" Value="HQ Review Phase"></asp:ListItem>
-                                                            <asp:ListItem Text="Published by CAP" Value="Published by CAP"></asp:ListItem>
-                                                            <asp:ListItem Text="Rejected" Value="Rejected"></asp:ListItem>
-                                                        </asp:DropDownList>
-                                                    </td>
-                                                </tr>
-                                            <tr>
-                                                <td></td>
                                                 <td>
-                                                    <asp:CheckBox ID="cbIsOPS" runat="server"
-                                                        Text="HRP Projects" Checked="true"
-                                                        OnCheckedChanged="SelectedIndexChanged"
-                                                        AutoPostBack="true" ToolTip="Oly Show HRP Projects" />
-                                                    <asp:CheckBox ID="cbIsORS" runat="server"
-                                                        Text="ORS Projects" Checked="false"
-                                                        OnCheckedChanged="SelectedIndexChanged"
-                                                        AutoPostBack="true" ToolTip="Only Show ORS Projects" />
+                                                    <label>
+                                                        <asp:Label ID="lblCaptionProjCode" runat="server"
+                                                            Text="Project Code/Id:"
+                                                            meta:resourcekey="lblCaptionProjCodeResource1">
+                                                        </asp:Label>
+                                                    </label>
                                                 </td>
-                                                <td></td>
                                                 <td>
-                                                    <asp:CheckBox ID="cbFuned" runat="server"
-                                                        Text="Funded" Checked="false"
-                                                        OnCheckedChanged="SelectedIndexChanged"
-                                                        AutoPostBack="true" ToolTip="Only Show Funded Projects" />
-                                                    <asp:CheckBox ID="cbNotFunded" runat="server"
-                                                        Text="Not Funded" Checked="false"
-                                                        OnCheckedChanged="SelectedIndexChanged"
-                                                        AutoPostBack="true" ToolTip="Only Show Not Funded Projects" />
+                                                    <asp:TextBox ID="txtProjectCode" runat="server" CssClass="width-80"
+                                                        meta:resourcekey="txtProjectCodeResource1"></asp:TextBox>
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td colspan="1" style="padding-top: 10px;">
-                                                    <asp:Button ID="btnSearch" runat="server" Text="Search"
-                                                        OnClick="btnSearch_Click" CssClass="btn btn-primary"
-                                                        CausesValidation="False" meta:resourcekey="btnSearchResource1" />
-                                                    <asp:Button ID="btnReset" runat="server" Text="Reset"
-                                                        Style="margin-left: 5px;" OnClick="btnReset_Click"
-                                                        CssClass="btn btn-primary" CausesValidation="False"
-                                                        meta:resourcekey="btnResetResource1" /></td>
-                                                <td>Year:</td>
                                                 <td>
-                                                    <asp:DropDownList ID="ddlFrameworkYear" runat="server" AutoPostBack="True" OnSelectedIndexChanged="SelectedIndexChanged" meta:resourcekey="ddlFrameworkYearResource1">
-                                                        <asp:ListItem Text="2016" Value="12" meta:resourcekey="ListItemResource3"></asp:ListItem>
-                                                        <asp:ListItem Text="2015" Value="11" meta:resourcekey="ListItemResource4"></asp:ListItem>
+                                                    <label>
+                                                        <asp:Label ID="lblCaptionStatus" runat="server"
+                                                            Text="Status:" meta:resourcekey="lblCaptionStatusResource1">
+                                                        </asp:Label>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <asp:DropDownList ID="ddlStatus" runat="server" CssClass="width-80"
+                                                        meta:resourcekey="ddlStatusResource1"
+                                                        OnSelectedIndexChanged="SelectedIndexChanged"
+                                                        AutoPostBack="true">
+                                                        <asp:ListItem Text="Select" Value="0"></asp:ListItem>
+                                                        <asp:ListItem Text="Approved by Cluster/Sector " Value="Approved by Cluster/Sector "></asp:ListItem>
+                                                        <asp:ListItem Text="CAP Final Review Phase" Value="CAP Final Review Phase"></asp:ListItem>
+                                                        <asp:ListItem Text="Draft" Value="Draft"></asp:ListItem>
+                                                        <asp:ListItem Text="HQ Review Phase" Value="HQ Review Phase"></asp:ListItem>
+                                                        <asp:ListItem Text="Published by CAP" Value="Published by CAP"></asp:ListItem>
+                                                        <asp:ListItem Text="Rejected" Value="Rejected"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </td>
-                                            </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>
+                                                        <asp:CheckBox ID="cbIsOPS" runat="server"
+                                                            Text="HRP Projects" Checked="true"
+                                                            OnCheckedChanged="SelectedIndexChanged"
+                                                            AutoPostBack="true" ToolTip="Oly Show HRP Projects" />
+                                                        <asp:CheckBox ID="cbIsORS" runat="server"
+                                                            Text="ORS Projects" Checked="false"
+                                                            OnCheckedChanged="SelectedIndexChanged"
+                                                            AutoPostBack="true" ToolTip="Only Show ORS Projects" />
+                                                    </td>
+                                                    <td></td>
+                                                    <td>
+                                                        <asp:CheckBox ID="cbFuned" runat="server"
+                                                            Text="Funded" Checked="false"
+                                                            OnCheckedChanged="SelectedIndexChanged"
+                                                            AutoPostBack="true" ToolTip="Only Show Funded Projects" />
+                                                        <asp:CheckBox ID="cbNotFunded" runat="server"
+                                                            Text="Not Funded" Checked="false"
+                                                            OnCheckedChanged="SelectedIndexChanged"
+                                                            AutoPostBack="true" ToolTip="Only Show Not Funded Projects" />
+                                                    </td>
+                                                    <td>
+                                                        <label>
+                                                            <asp:Label ID="lblCaptionYear" runat="server"
+                                                                Text="Yea:">
+                                                            </asp:Label>
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <asp:DropDownList ID="ddlFrameworkYear" runat="server" AutoPostBack="True" CssClass="width-80"
+                                                            OnSelectedIndexChanged="SelectedIndexChanged" meta:resourcekey="ddlFrameworkYearResource1">
+                                                            <asp:ListItem Text="2016" Value="12" meta:resourcekey="ListItemResource3"></asp:ListItem>
+                                                            <asp:ListItem Text="2015" Value="11" meta:resourcekey="ListItemResource4"></asp:ListItem>
+                                                        </asp:DropDownList>
+                                                        <asp:Button ID="btnSearch" runat="server" class="hidden" Width="1px" OnClick="btnSearch_Click" />
+                                                    </td>
+                                                </tr>
                                         </table>
                                     </div>
                                 </div>
@@ -268,12 +259,13 @@
             <div class="col-xs-12 col-sm-12 widget-container-span">
                 <div class="widget-box">
                     <asp:GridView ID="gvProjects" runat="server" AutoGenerateColumns="False" CssClass="imagetable"
-                        AllowPaging="True" AllowSorting="True" PageSize="50" ShowHeaderWhenEmpty="True"
+                        AllowPaging="True" AllowSorting="True" PageSize="20" ShowHeaderWhenEmpty="True" AllowCustomPaging="true"
                         EmptyDataText="Your filter criteria does not match any project!" Width="100%"
                         OnRowCommand="gvProjects_RowCommand" OnSorting="gvProjects_Sorting" OnRowDataBound="gvProjects_RowDataBound"
                         OnPageIndexChanging="gvProjects_PageIndexChanging"
-                        DataKeyNames="ProjectId,ProjectOrganizationId,OrganizationId,IsOPS"
+                        DataKeyNames="ProjectId,ProjectOrganizationId,OrganizationId,IsOPS,EmergencyLocationId"
                         meta:resourcekey="gvProjectsResource1">
+                         <PagerSettings Mode="NumericFirstLast" />
                         <RowStyle CssClass="istrow" />
                         <AlternatingRowStyle CssClass="altcolor" />
                         <Columns>
@@ -296,8 +288,8 @@
                             </asp:TemplateField>
                             <asp:BoundField DataField="OrganizationName" HeaderText="Organization" SortExpression="OrganizationName"
                                 meta:resourcekey="BoundFieldResource3" ItemStyle-Width="120px"></asp:BoundField>
-                            <asp:BoundField DataField="ClusterName" HeaderText="Subset Cluster" SortExpression="ClusterName" meta:resourcekey="BoundFieldResource4" />
-                            <asp:BoundField DataField="SecCluster" HeaderText="Cluster" SortExpression="SecCluster" meta:resourcekey="BoundFieldResource5" />
+                            <asp:BoundField DataField="ClusterName" HeaderText="Cluster" SortExpression="ClusterName" meta:resourcekey="BoundFieldResource4" />
+                            <asp:BoundField DataField="SecCluster" HeaderText="Sub-Set Cluster" SortExpression="SecCluster" meta:resourcekey="BoundFieldResource5" />
 
                             <asp:TemplateField HeaderText="Original Request" SortExpression="OriginalRequest" ItemStyle-HorizontalAlign="Right"
                                 meta:resourcekey="BoundFieldResource10">
@@ -336,11 +328,22 @@
                             </asp:TemplateField>
                             <asp:TemplateField ItemStyle-HorizontalAlign="Center">
                                 <HeaderTemplate>
+                                    <asp:Label ID="lblReportHeader" runat="server" Text="RPT" ToolTip="Project Data Entry"></asp:Label>
+                                </HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="imgbtnReport" runat="server" ImageUrl="../assets/orsimages/report1.png" ToolTip="Project Data Entry"
+                                        OnClientClick=<%# string.Format("return popitup('ProjectDataEntry.aspx?pid={0}&orgid={1}')", Eval("ProjectId"), Eval("OrganizationId")) %> />
+                                </ItemTemplate>
+
+                                <ItemStyle HorizontalAlign="Center"></ItemStyle>
+                            </asp:TemplateField>
+                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                <HeaderTemplate>
                                     <asp:Label ID="lblTargetHeader" runat="server" Text="TGT" ToolTip="Project Targets"></asp:Label>
                                 </HeaderTemplate>
                                 <ItemTemplate>
-                                    <a style="cursor: pointer;" onclick="return popitup('ProjectTargets.aspx?pid=<%# Eval("ProjectId")%>')">
-                                        <img alt="tgt" src="../assets/orsimages/target1.png" title="Project Targets" /></a>
+                                    <asp:ImageButton ID="imgbtnTargets" runat="server" ImageUrl="../assets/orsimages/target1.png" ToolTip="Project Targets"
+                                        OnClientClick=<%# string.Format("return popitup('ProjectTargets.aspx?pid={0}')", Eval("ProjectId")) %> />
                                 </ItemTemplate>
 
                                 <ItemStyle HorizontalAlign="Center"></ItemStyle>
@@ -350,8 +353,8 @@
                                     <asp:Label ID="lblPartnerHeader" runat="server" Text="PRT" ToolTip="Project Partners"></asp:Label>
                                 </HeaderTemplate>
                                 <ItemTemplate>
-                                    <a style="cursor: pointer;" onclick="return popitup('ProjectPartners.aspx?pid=<%# Eval("ProjectId")%>')">
-                                        <img alt="tgt" src="../assets/orsimages/partners2.png" title="Project Targets" /></a>
+                                    <asp:ImageButton ID="imgbtnPartners" runat="server" ImageUrl="../assets/orsimages/partners2.png"
+                                        ToolTip="Project Partners" PostBackUrl=<%# string.Format("ProjectPartners.aspx?pid={0}", Eval("ProjectId")) %>  />
                                 </ItemTemplate>
 
                                 <ItemStyle HorizontalAlign="Center"></ItemStyle>

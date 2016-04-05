@@ -142,14 +142,14 @@ namespace SRFROWCA.Common
             }
         }
 
-        public static MemoryStream GenerateSummaryPDF(DataTable dtSummary, DataTable dtCountryOrgs, string month, string country, string cluster)
+        public static MemoryStream GenerateSummaryPDF(DataTable dtSummary, DataTable dtCountryOrgs, string month, string country, string cluster, string year)
         {
             using (MemoryStream outputStream = new MemoryStream())
             {
                 iTextSharp.text.Document document = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4, 8, 8, 14, 6);
                 iTextSharp.text.pdf.PdfWriter writer = iTextSharp.text.pdf.PdfWriter.GetInstance(document, outputStream);
                 document.Open();
-                GenerateSummaryReport(document, dtSummary, month, country, cluster);
+                GenerateSummaryReport(document, dtSummary, month, country, cluster, year);
                 GenerateSummaryCountry(document, dtSummary);
                 GenerateSummaryOrganization(document, dtCountryOrgs);
                 try
@@ -524,7 +524,7 @@ namespace SRFROWCA.Common
                               .ToList<int>();
         }
 
-        private static void GenerateSummaryReport(iTextSharp.text.Document document, DataTable dt, string month, string country, string cluster)
+        private static void GenerateSummaryReport(iTextSharp.text.Document document, DataTable dt, string month, string country, string cluster, string year)
         {
 
             PdfPTable tbl = new PdfPTable(2);
@@ -539,6 +539,12 @@ namespace SRFROWCA.Common
 
             cell = new PdfPCell(new Phrase("Sahel ORS Projects Reporting Summary:", FontFactory.GetFont("Arial", 10)));
             cell.PaddingTop = 5;
+            cell.Border = 0;
+            cell.Colspan = 2;
+            tbl.AddCell(cell);
+
+            string yearHeader = "Year - " + year;
+            cell = new PdfPCell(new Phrase(yearHeader, FontFactory.GetFont("Arial", 10)));
             cell.Border = 0;
             cell.Colspan = 2;
             tbl.AddCell(cell);

@@ -68,7 +68,7 @@
                                                     <tr>
                                                         <td>
                                                             <b>
-                                                                Project:
+                                                                <label>Project:</label>
                                                            </b>
                                                             
                                                         </td>
@@ -80,7 +80,7 @@
                                                         <td>
 
                                                             <b>
-                                                                Organization:
+                                                                <label>Organization:</label>
                                                        </b>
                                                         </td>
 
@@ -92,7 +92,7 @@
                                                     <tr>
                                                         <td>
                                                             <b>
-                                                                Updated By:
+                                                                <label>Updated By:</label>
                                                             </b>
                                                         </td>
                                                         <td>
@@ -100,7 +100,7 @@
                                                         </td>
                                                         <td>
                                                             <b>
-                                                                Updated On:
+                                                                <label>Updated On:</label>
                                                             </b>
                                                         </td>
                                                         <td>
@@ -108,7 +108,7 @@
                                                         </td>
                                                         <td>
                                                             <b>
-                                                                Reporting Period:
+                                                                <label>Reporting Period:</label>
                                                             </b>
                                                         </td>
                                                         <td>

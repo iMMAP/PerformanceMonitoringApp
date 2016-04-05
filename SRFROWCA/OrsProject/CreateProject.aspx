@@ -47,18 +47,6 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
-        </script>
-        <ul class="breadcrumb">
-            <li><i class="icon-home home-icon"></i><a href="../Default.aspx">
-                <asp:Localize ID="localBreadCrumbHome" runat="server" Text="Home" meta:resourcekey="localBreadCrumbHomeResource1"></asp:Localize></a> </li>
-            <li class="active">
-                <asp:Localize ID="localBreadCrumbManageProjects" runat="server" Text="Manage Projects" meta:resourcekey="localBreadCrumbDataEntryResource1"></asp:Localize></li>
-        </ul>
-        <!-- .breadcrumb -->
-    </div>
     <div class="page-content">
         <div id="divMsg">
         </div>
@@ -156,21 +144,25 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Contact Name:</td>
+                                    <td><label>
+                                        <asp:Localize ID="lblCaptionContactName" runat="server" Text="Contact Name:"></asp:Localize>
+                                        </label></td>
                                     <td>
                                         <asp:TextBox ID="txtContactName" runat="server" Width="150px" MaxLength="50"></asp:TextBox>
                                     </td>
-                                    <td>Phone:</td>
+                                    <td><label><asp:Localize ID="lblCaptionContactPhone" runat="server" Text="Phone:"></asp:Localize>
+                                        </label></td>
                                     <td>
                                         <asp:TextBox ID="txtContactPhone" runat="server" Width="100px" MaxLength="50"></asp:TextBox>
                                     </td>
-                                    <td>Email:</td>
+                                    <td><label><asp:Localize ID="lblCaptionContactEmail" runat="server" Text="Email:"></asp:Localize>
+                                        </label></td>
                                     <td>
                                         <asp:TextBox ID="txtContactEmail" runat="server" Width="150px" MaxLength="100"></asp:TextBox>
                                 </tr>
                                 <tr>
                                     <td colspan="3" style="padding-top: 20px;">
-                                        <asp:Button ID="btnSave" runat="server" Text="Save" CssClass="btn btn-primary"
+                                        <asp:Button ID="btnSave" runat="server" Text="Save" CssClass="btn btn-primary btn-sm"
                                             OnClick="btnSave_Click" meta:resourcekey="btnSaveResource1" Enabled="true" />
                                     </td>
                                 </tr>

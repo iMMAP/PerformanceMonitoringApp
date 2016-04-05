@@ -25,8 +25,8 @@ namespace SRFROWCA
                         Response.Redirect("~/Landing/ImplementingPartners.aspx");
                     else if (RC.IsCountryAdmin(this.User))
                         Response.Redirect("~/Landing/OCHALanding.aspx");
-                    else
-                        Response.Redirect("Dashboard.aspx");
+                    //else
+                    //    Response.Redirect("Dashboard.aspx");
                 }
             }
         }

@@ -82,20 +82,20 @@
 </style>
 <script src="../assets/orsjs/jquery.numeric.min.js" type="text/javascript"></script>
 <script type="text/javascript">
-    var needToConfirm = true;
-    window.onbeforeunload = confirmExit;
-    function confirmExit() {
-        if (needToConfirm) {
-            var message = '';
-            var e = e || window.event;
-            // For IE and Firefox prior to version 4
-            if (e) {
-                e.returnValue = message;
-            }
-            // For Safari
-            return message;
-        }
-    }
+    //var needToConfirm = true;
+    //window.onbeforeunload = confirmExit;
+    //function confirmExit() {
+    //    if (needToConfirm) {
+    //        var message = '';
+    //        var e = e || window.event;
+    //        // For IE and Firefox prior to version 4
+    //        if (e) {
+    //            e.returnValue = message;
+    //        }
+    //        // For Safari
+    //        return message;
+    //    }
+    //}
 
 
     $(function () {
@@ -119,31 +119,31 @@
 
 
 <div class="widget-header widget-header-small header-color-blue2">
-    <asp:Localize ID="locClusterCaption" runat="server"
+   <%-- <asp:Localize ID="locClusterCaption" runat="server"
         Text="Sector:" meta:resourcekey="locClusterCaptionResource1"></asp:Localize>
-    <asp:Label ID="lblCluster" runat="server" meta:resourcekey="lblClusterResource1"></asp:Label>
+    <asp:Label ID="lblCluster" runat="server" meta:resourcekey="lblClusterResource1"></asp:Label>--%>
     <div class="pull-right">
-        <asp:LinkButton ID="lnkLanguageEnglish" Text="English" runat="server" OnClientClick="needToConfirm=true;" CssClass="langlinks"
-            CausesValidation="False" OnClick="lnkLanguageEnglish_Click" meta:resourcekey="lnkLanguageEnglishResource1"></asp:LinkButton>&nbsp;&nbsp;
+        <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" 
+            CausesValidation="False" Width="110px" CssClass="btn btn-sm btn-warning" meta:resourcekey="btnSaveResource1" />
 
-                            <asp:LinkButton ID="lnkLanguageFrench" Text="Français" runat="server" OnClientClick="needToConfirm=true;" CssClass="langlinks"
-                                CausesValidation="False" OnClick="lnkLanguageFrench_Click" meta:resourcekey="lnkLanguageFrenchResource1"></asp:LinkButton>
+        <asp:Localize ID="locbtnCloseWindow" runat="server"
+            Text="&lt;input type=&quot;button&quot; class=&quot;btn btn-sm &quot; value=&quot;Close Window&quot; id=&quot;close&quot; onclick=&quot;window.close()&quot; /&gt;"
+            meta:resourcekey="locbtnCloseWindowResource1"></asp:Localize>
     </div>
 </div>
 
 <div class="widget-body">
     <div class="widget-main">
-        <div class="pull-right">
-            <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
-                CausesValidation="False" Width="110px" CssClass="btn btn-sm btn-primary" meta:resourcekey="btnSaveResource1" />
+         <div class="pull-left">
+            <asp:Label ID="lblPageNumber" runat="server" Text=""></asp:Label>
+        </div>
+        <div class="center">
+            <asp:Button ID="btnPrevious" runat="server" OnClick="btnPrevious_Click" Text="<< Previous" 
+                CausesValidation="False" Width="110px" CssClass="btn btn-sm btn-yellow"/>
 
-            <asp:Localize ID="locbtnCloseWindow" runat="server"
-                Text="&lt;input type=&quot;button&quot; class=&quot;btn btn-sm btn-primary&quot; value=&quot;Close Window&quot; id=&quot;close&quot; onclick=&quot;window.close()&quot; /&gt;"
-                meta:resourcekey="locbtnCloseWindowResource1"></asp:Localize>
+            <asp:Button ID="btnNext" runat="server" OnClick="btnNext_Click" Text="Next >>" 
+                CausesValidation="False" Width="110px" CssClass="btn btn-sm btn-yellow"/>
         </div>
-        <div class="spacer" style="clear: both;">
-        </div>
-        <br />
         <div id="divMsg">
         </div>
         <div id="scrolledGridView" style="overflow-x: auto; width: 100%">
@@ -162,7 +162,6 @@
                             <asp:Label ID="lblObjectiveHeader" runat="server" Text=""></asp:Label>
                         </HeaderTemplate>
                         <ItemTemplate>
-                            <asp:HiddenField ID="hfIndicatorId" runat="server" Value='<%#Eval("IndicatorId")%>' />
                             <asp:Label ID="lblIndIdTemp" runat="server" Text='<%#Eval("IndicatorId")%>'></asp:Label>
                             <asp:Image ID="imgObjective" runat="server" meta:resourcekey="imgRindResource1" />
                         </ItemTemplate>
@@ -220,7 +219,6 @@
                                             <td style="width: 120px;">
                                                 <div style="float: left; width: 120px; padding: 2px; text-align: left;">
                                                     <%#Eval("LocationName")%>
-                                                    <asp:HiddenField ID="hfCountryId" runat="server" Value='<%#Eval("LocationId")%>' />
                                                     <asp:HiddenField ID="hfCountryIndicatorId" runat="server" Value='<%#Eval("IndicatorId")%>' />
                                             </td>
                                             <td class="tdTable">
@@ -254,7 +252,6 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <asp:HiddenField runat="server" ID="hfLocationIdGender" Value='<%# Eval("LocationId") %>' />
                                 </ItemTemplate>
                             </asp:Repeater>
                         </ItemTemplate>

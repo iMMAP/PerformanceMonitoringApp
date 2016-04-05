@@ -336,7 +336,8 @@ namespace SRFROWCA.Pages
 
         private DataTable GetUserProjects()
         {
-            return RC.GetOrgProjectsOnLocation(null);
+            int yearId = 11;//RC.GetSelectedIntVal(ddlFrameworkYear);
+            return RC.GetOrgProjectsOnLocation(null, yearId);
         }
 
         private void PopulateToolTips()
@@ -375,8 +376,8 @@ namespace SRFROWCA.Pages
             string locationIds = GetSelectedLocations();
             string locIdsNotIncluded = GetNotSelectedLocations();
             Guid userId = RC.GetCurrentUserId;
-
-            DataTable dt = DBContext.GetData("GetIPData2015", new object[] { UserInfo.EmergencyCountry, locationIds, RC.Year._2015, monthId,
+            int yearId = 11; // RC.GetSelectedIntVal(ddlFrameworkYear);
+            DataTable dt = DBContext.GetData("GetIPData2015", new object[] { UserInfo.EmergencyCountry, locationIds, yearId, monthId,
                                                                         locIdsNotIncluded, RC.SelectedSiteLanguageId, userId,
                                                                         UserInfo.Organization, projectId});
             if (dt.Rows.Count <= 0 && !string.IsNullOrEmpty(locationIds))
@@ -613,8 +614,8 @@ namespace SRFROWCA.Pages
             Guid loginUserId = RC.GetCurrentUserId;
             int reportingYear = 2015;
             string reportName = ddlProjects.SelectedItem.Text + " (" + ddlMonth.SelectedItem.Text + "15)";
-            ReportId = DBContext.Add("InsertReport2015", new object[] { yearId, monthId, projId, UserInfo.EmergencyCountry,
-                                                                    UserInfo.Organization, loginUserId, reportName, reportingYear, DBNull.Value });
+            ReportId = DBContext.Add("InsertReport2015", new object[] { yearId, monthId, projId, UserInfo.Organization, 
+                                                                        loginUserId, reportName, reportingYear, DBNull.Value });
         }
 
         private void SaveReportLocations()

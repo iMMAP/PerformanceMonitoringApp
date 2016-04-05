@@ -130,6 +130,15 @@ namespace SRFROWCA.Anonymous {
         protected global::Saplin.Controls.DropDownCheckBoxes ddlMonth;
         
         /// <summary>
+        /// ddlFrameworkYear control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlFrameworkYear;
+        
+        /// <summary>
         /// ltrlValidated control.
         /// </summary>
         /// <remarks>

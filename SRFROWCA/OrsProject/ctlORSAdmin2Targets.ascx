@@ -115,31 +115,18 @@
 
 
 <div class="widget-header widget-header-small header-color-blue2">
-    <asp:Localize ID="locClusterCaption" runat="server"
-        Text="Sector:" meta:resourcekey="locClusterCaptionResource1"></asp:Localize>
-    <asp:Label ID="lblCluster" runat="server" meta:resourcekey="lblClusterResource1"></asp:Label>
     <div class="pull-right">
-        <asp:LinkButton ID="lnkLanguageEnglish" Text="English" runat="server" OnClientClick="needToConfirm=true;" CssClass="langlinks"
-            CausesValidation="False" OnClick="lnkLanguageEnglish_Click" meta:resourcekey="lnkLanguageEnglishResource1"></asp:LinkButton>&nbsp;&nbsp;
+            <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
+                CausesValidation="False" Width="110px" CssClass="btn btn-sm btn-warning" meta:resourcekey="btnSaveResource1" />
 
-                            <asp:LinkButton ID="lnkLanguageFrench" Text="Français" runat="server" OnClientClick="needToConfirm=true;" CssClass="langlinks"
-                                CausesValidation="False" OnClick="lnkLanguageFrench_Click" meta:resourcekey="lnkLanguageFrenchResource1"></asp:LinkButton>
-    </div>
+            <asp:Localize ID="locbtnCloseWindow" runat="server"
+                Text="&lt;input type=&quot;button&quot; class=&quot;btn btn-sm &quot; value=&quot;Close Window&quot; id=&quot;close&quot; onclick=&quot;window.close()&quot; /&gt;"
+                meta:resourcekey="locbtnCloseWindowResource1"></asp:Localize>
+        </div>
 </div>
 
 <div class="widget-body">
     <div class="widget-main">
-        <div class="pull-right">
-            <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" OnClientClick="needToConfirm = false;"
-                CausesValidation="False" Width="110px" CssClass="btn btn-sm btn-primary" meta:resourcekey="btnSaveResource1" />
-
-            <asp:Localize ID="locbtnCloseWindow" runat="server"
-                Text="&lt;input type=&quot;button&quot; class=&quot;btn btn-sm btn-primary&quot; value=&quot;Close Window&quot; id=&quot;close&quot; onclick=&quot;window.close()&quot; /&gt;"
-                meta:resourcekey="locbtnCloseWindowResource1"></asp:Localize>
-        </div>
-        <div class="spacer" style="clear: both;">
-        </div>
-        <br />
         <div id="divMsg">
         </div>
         <div id="scrolledGridView" style="overflow-x: auto; width: 100%">

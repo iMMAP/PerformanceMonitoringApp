@@ -50,7 +50,7 @@
                                             title="PDF">
                                             <i class="icon-download"></i>PDF
                                         </button>--%>
-                                                <button runat="server" id="btnExportToExcel" onserverclick="btnExportToExcel_ServerClick" class="btn btn-yellow" causesvalidation="false"
+                                                <button runat="server" id="btnExportToExcel" onserverclick="btnExportToExcel_ServerClick" class="btn btn-yellow btn-sm" causesvalidation="false"
                                                     title="Excel">
                                                     <i class="icon-download"></i>Excel
                                                 </button>
@@ -62,14 +62,14 @@
                                                 <table border="0" style="width: 95%; margin: 0px 10px 0px 20px">
                                                     <tr>
                                                         <td>
-                                                            <asp:Label runat="server" ID="lblCountry" Text="Country:"></asp:Label>
+                                                           <label> <asp:Label runat="server" ID="lblCountry" Text="Country:"></asp:Label></label>
                                                         </td>
                                                         <td>
                                                             <asp:DropDownList AutoPostBack="true" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" runat="server" ID="ddlCountry" Width="270">
                                                             </asp:DropDownList>
                                                         </td>
                                                         <td>
-                                                            <asp:Label runat="server" ID="lblCluster" Text="Cluster:" meta:resourcekey="lblClusterResource1"></asp:Label>
+                                                            <label><asp:Label runat="server" ID="lblCluster" Text="Cluster:" meta:resourcekey="lblClusterResource1"></asp:Label></label>
                                                         </td>
                                                         <td>
                                                             <asp:DropDownList AutoPostBack="true" runat="server" OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged" ID="ddlCluster" Width="270">
@@ -79,7 +79,7 @@
                                                         <td></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Month:</td>
+                                                        <td><label>Month:</label></td>
                                                         <td>
                                                             <cc:DropDownCheckBoxes UseButtons="False" AddJQueryReference="True" CssClass="ddlWidth" AutoPostBack="true" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged" runat="server" ID="ddlMonth">
                                                                 <Style SelectBoxWidth="" DropDownBoxBoxWidth="100%" DropDownBoxBoxHeight=""></Style>
@@ -95,7 +95,7 @@
                                                         </td>
 
                                                         <td style="text-align: right;">
-                                                            <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" CssClass="btn btn-primary" CausesValidation="False" meta:resourcekey="btnSearchResource1" />
+                                                            <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" CssClass="btn btn-primary btn-sm" CausesValidation="False" meta:resourcekey="btnSearchResource1" />
                                                             <%--<asp:Button ID="btnReset" runat="server" OnClick="btnReset_Click" Text="Reset" CssClass="btn btn-primary" CausesValidation="False"/>--%>
                                                         </td>
                                                     </tr>

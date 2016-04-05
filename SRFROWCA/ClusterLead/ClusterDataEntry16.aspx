@@ -130,14 +130,14 @@
                                         <table border="0" style="width: 98%; margin: 0px 10px 0px 20px">
                                             <tr>
                                                 <td>
-                                                    <asp:Label runat="server" ID="lblCountry" Text="Country:"></asp:Label>
+                                                    <label><asp:Label runat="server" ID="lblCountry" Text="Country:"></asp:Label></label>
                                                 </td>
                                                 <td>
                                                     <asp:DropDownList AutoPostBack="true" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" runat="server" ID="ddlCountry" Width="270">
                                                     </asp:DropDownList>
                                                 </td>
                                                 <td>
-                                                    <asp:Label runat="server" ID="lblCluster" Text="Cluster:"></asp:Label>
+                                                    <label><asp:Label runat="server" ID="lblCluster" Text="Cluster:"></asp:Label></label>
                                                 </td>
                                                 <td>
                                                     <asp:DropDownList AutoPostBack="true" runat="server" OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged" ID="ddlCluster" Width="270">
@@ -157,7 +157,7 @@
                                                 </td>
                                                 <td></td>
                                                 <td class="pull-right">
-                                                    <asp:Button runat="server" ID="btnSaveAll" Text="Save" class="btn btn-primary" 
+                                                    <asp:Button runat="server" ID="btnSaveAll" Text="Save" class="btn btn-primary btn-sm" 
                                                         OnClick="btnSaveAll_Click" OnClientClick="needToConfirm = false;" />
                                                 </td>
                                             </tr>

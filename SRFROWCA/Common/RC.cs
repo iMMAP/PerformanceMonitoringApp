@@ -382,9 +382,9 @@ namespace SRFROWCA.Common
             return DBContext.GetData("GetProjectsOrganizations", new object[] { locId, clusterId });
         }
 
-        internal static DataTable GetOrgProjectsOnLocation(bool? isOPSProject)
+        internal static DataTable GetOrgProjectsOnLocation(bool? isOPSProject, int yearId)
         {
-            return DBContext.GetData("GetOrgProjectsOnLocation", new object[] { UserInfo.EmergencyCountry, UserInfo.Organization, isOPSProject, 2015 });
+            return DBContext.GetData("GetOrgProjectsOnLocation", new object[] { UserInfo.EmergencyCountry, UserInfo.Organization, isOPSProject, yearId });
         }
 
         internal static DataTable GetUserDetails(int emergencyId)

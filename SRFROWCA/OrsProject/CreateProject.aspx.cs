@@ -34,7 +34,7 @@ namespace SRFROWCA.OrsProject
         {
             Save();
             SelctProjectCode();
-            //ShowMessage((string)GetLocalResourceObject("CreateProjects_SaveMessageSuccess"));
+            ShowMessage("Project Created!", RC.NotificationType.Success);
         }
 
         private void PopulateDropDowns()
@@ -67,7 +67,7 @@ namespace SRFROWCA.OrsProject
         private void PopulateOrganizations()
         {
             ddlOrgs.DataValueField = "OrganizationId";
-            ddlOrgs.DataTextField = "OrganizationAcronym";
+            ddlOrgs.DataTextField = "OrganizationName";
             ddlOrgs.DataSource = DBContext.GetData("GetAllOrganizations");
             ddlOrgs.DataBind();
 

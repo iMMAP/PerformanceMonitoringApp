@@ -34,7 +34,7 @@
             text-align: left;
         }
     </style>
-    
+
     <script type="text/javascript">
         var needToConfirm = true;
 
@@ -158,7 +158,7 @@
         });
 
     </script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+    <%--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>--%>
     <script type="text/javascript" src="../assets/js/gridviewScroll.min.js"></script>
     <link href="../assets/css/GridviewScroll.css" rel="stylesheet" />
 </asp:Content>
@@ -172,6 +172,10 @@
                     <td>Month:<asp:DropDownList ID="ddlMonth" runat="server" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged"
                         onchange="needToConfirm = false;" AutoPostBack="True" meta:resourcekey="ddlMonthResource1">
                     </asp:DropDownList>
+                        <%--<asp:DropDownList ID="ddlFrameworkYear" runat="server" AutoPostBack="True">
+                            <asp:ListItem Text="2016" Value="12" meta:resourcekey="ListItemResource3"></asp:ListItem>
+                            <asp:ListItem Text="2015" Value="11" meta:resourcekey="ListItemResource4"></asp:ListItem>
+                        </asp:DropDownList>--%>
                     </td>
                     <td>Projects:<asp:DropDownList ID="ddlProjects" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlProjects_SelectedIndexChanged"
                         onchange="needToConfirm = false;" meta:resourcekey="rblProjectsResource1">

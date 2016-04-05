@@ -283,8 +283,9 @@ namespace SRFROWCA.Reports
                 pageIndex = gvActivity.PageIndex;
             }
 
+            int yearId = 11;
             return DBContext.GetData("GetORS3WData", new object[]{prjId,orgId,emgLocationId,
-                                                                    admin1,emgClsuterId,month,status,
+                                                                    admin1,emgClsuterId,month,status, yearId,
                                                                     RC.SelectedSiteLanguageId, pageSize, pageIndex});
         }
 

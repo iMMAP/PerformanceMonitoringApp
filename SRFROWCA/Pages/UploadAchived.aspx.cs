@@ -38,7 +38,7 @@ namespace SRFROWCA.Pages
 
         private DataTable GetUserProjects()
         {
-            return RC.GetOrgProjectsOnLocation(null);
+            return RC.GetOrgProjectsOnLocation(null, (int)RC.Year._2015);
         }
 
         protected void btnDownload_Click(object sender, EventArgs e)

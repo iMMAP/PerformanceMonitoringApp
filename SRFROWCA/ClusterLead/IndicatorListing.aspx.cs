@@ -21,7 +21,7 @@ namespace SRFROWCA.ClusterLead
         {
             if (!IsPostBack)
             {
-                UserInfo.UserProfileInfo(RC.EmergencySahel2015);
+                //UserInfo.UserProfileInfo(RC.EmergencySahel2015);
                 LoadClusters();
                 LoadCountry();
                 LoadObjectives();
@@ -169,7 +169,8 @@ namespace SRFROWCA.ClusterLead
 
                         if (IsDateExceeded)
                         {
-                            if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) || RC.IsRegionalClusterLead(this.User))
+                            if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) 
+                                || RC.IsRegionalClusterLead(this.User) || RC.IsDataEntryUser(this.User))
                             {
                                 btnDelete.Visible = false;
                             }
@@ -181,7 +182,8 @@ namespace SRFROWCA.ClusterLead
                     {
                         if (IsDateExceeded)
                         {
-                            if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) || RC.IsRegionalClusterLead(this.User))
+                            if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) 
+                                || RC.IsRegionalClusterLead(this.User) || RC.IsDataEntryUser(this.User))
                             {
                                 btnEdit.Visible = false;
                             }

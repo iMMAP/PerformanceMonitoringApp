@@ -155,7 +155,7 @@ namespace SRFROWCA.Common
                 string txt = e.Row.Cells[cellIndex].Text;
                 if (txt.Equals("True"))
                 {
-                    imgRind.ImageUrl = "../assets/orsimages/rind.png";
+                    imgRind.ImageUrl = "~/assets/orsimages/rind.png";
                     imgRind.ToolTip = "Regional Indicator";
                 }
                 else
@@ -173,7 +173,7 @@ namespace SRFROWCA.Common
                 string txt = e.Row.Cells[cellIndex].Text;
                 if (txt.Equals("True"))
                 {
-                    imgCind.ImageUrl = "../assets/orsimages/cind.png";
+                    imgCind.ImageUrl = "~/assets/orsimages/cind.png";
                     imgCind.ToolTip = "Country Indicator";
                 }
                 else

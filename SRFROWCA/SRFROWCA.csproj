@@ -189,6 +189,7 @@
     <Content Include="assets\orsjs\jquery.dataTables.js" />
     <Content Include="assets\orsjs\jquery.dataTables.min.js" />
     <Content Include="assets\orsjs\jquery.wholenumber.js" />
+    <Content Include="bar1.html" />
     <Content Include="ClusterLead\AddActivityAndIndicators.aspx" />
     <Content Include="Admin\ConfigSettings.aspx" />
     <Content Include="ClusterLead\ClusterDataEntry.aspx" />
@@ -208,7 +209,12 @@
     <Content Include="ClusterLead\ImportData16.aspx" />
     <Content Include="ClusterLead\IndicatorListing2016.aspx" />
     <Content Include="ClusterLead\IndicatorListingMigrate.aspx" />
-    <Content Include="ClusterLead\ProgressSummary.aspx" />
+    <Content Include="d3.aspx" />
+    <Content Include="OrsProject\ctlORSAdmin1Report.ascx" />
+    <Content Include="OrsProject\ctlORSAdmin2Report.ascx" />
+    <Content Include="OrsProject\ProjectDataEntry.aspx" />
+    <Content Include="Reports\OutputIndicators\ReportedOutputIndicators.aspx" />
+    <Content Include="Reports\Summary\ProgressSummary.aspx" />
     <Content Include="ClusterLead\ProjectXMLFeeds.aspx" />
     <Content Include="assets\css\ace-fonts.css" />
     <Content Include="assets\css\ace-skins.min.css" />
@@ -337,7 +343,6 @@
     <Content Include="Log\ErrorLog.txt" />
     <Content Include="OperationalPresence.aspx" />
     <Content Include="OPSTargets.html" />
-    <Content Include="OPS\GridTestOPS.aspx" />
     <Content Include="OPS\IndicatorTargetsByProjectStatus.html" />
     <Content Include="OPS\OPSDataEntry.aspx" />
     <Content Include="OPS\OPSDataEntryRpt.aspx" />
@@ -345,9 +350,12 @@
     <Content Include="OPS\UploadOPSProjectDetails.aspx" />
     <Content Include="OrsProject\CreateProject.aspx" />
     <Content Include="OrsProject\ctlORSAdmin1Partners.ascx" />
+    <Content Include="OrsProject\ctlORSAdmin2Partners.ascx" />
     <Content Include="OrsProject\ImportUpdateProjectPartners.aspx" />
     <Content Include="OrsProject\ProjectPartners.aspx" />
+    <Content Include="OrsProject\ProjectPartnersIndicators.aspx" />
     <Content Include="OrsProject\ProjectsListing.aspx" />
+    <Content Include="Pages\AddActivities.aspx" />
     <Content Include="Pages\UploadAchived.aspx" />
     <Content Include="OrsProject\ctlORSAdmin1Targets.ascx" />
     <Content Include="OrsProject\ctlORSAdmin2Targets.ascx" />
@@ -394,6 +402,7 @@
     <Content Include="WebForm2.aspx" />
     <Content Include="WebForm3.aspx" />
     <Content Include="WebService.asmx" />
+    <Content Include="WebUserControl1.ascx" />
     <None Include="assets\font\cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff" />
     <None Include="assets\font\DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff" />
     <Content Include="assets\font\fontawesome-webfont.ttf" />
@@ -431,6 +440,8 @@
     <Content Include="DataFeeds\ProjectPartnersWithTargets.ashx" />
     <Content Include="DataFeeds\ProjectsWithPartners.ashx" />
     <Content Include="DataFeeds\ProjectAndPartnerIndicatorsWithTargets.ashx" />
+    <Content Include="data.json" />
+    <Content Include="data.tsv" />
     <None Include="HelpFiles\HelpDocs\HelpEng\1_ORS_description_EN_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpEng\2_ORS_Resgistration_EN_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpEng\3_ORS_Role_EN_v3.pdf" />
@@ -473,12 +484,6 @@
     </None>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Visualization\font\avenir\12d643f2-3899-49d5-a85b-ff430f5fad15.eot" />
     <Content Include="Visualization\font\avenir\1a7c9181-cd24-4943-a9d9-d033189524e0.eot" />
@@ -836,11 +841,46 @@
     <Compile Include="ClusterLead\IndicatorListingMigrate.aspx.designer.cs">
       <DependentUpon>IndicatorListingMigrate.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ClusterLead\ProgressSummary.aspx.cs">
+    <Compile Include="d3.aspx.cs">
+      <DependentUpon>d3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="d3.aspx.designer.cs">
+      <DependentUpon>d3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrsProject\ctlORSAdmin1Report.ascx.cs">
+      <DependentUpon>ctlORSAdmin1Report.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrsProject\ctlORSAdmin1Report.ascx.designer.cs">
+      <DependentUpon>ctlORSAdmin1Report.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="OrsProject\ctlORSAdmin2Report.ascx.cs">
+      <DependentUpon>ctlORSAdmin2Report.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrsProject\ctlORSAdmin2Report.ascx.designer.cs">
+      <DependentUpon>ctlORSAdmin2Report.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="OrsProject\ProjectDataEntry.aspx.cs">
+      <DependentUpon>ProjectDataEntry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrsProject\ProjectDataEntry.aspx.designer.cs">
+      <DependentUpon>ProjectDataEntry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\OutputIndicators\ReportedOutputIndicators.aspx.cs">
+      <DependentUpon>ReportedOutputIndicators.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\OutputIndicators\ReportedOutputIndicators.aspx.designer.cs">
+      <DependentUpon>ReportedOutputIndicators.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Summary\ProgressSummary.aspx.cs">
       <DependentUpon>ProgressSummary.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ClusterLead\ProgressSummary.aspx.designer.cs">
+    <Compile Include="Reports\Summary\ProgressSummary.aspx.designer.cs">
       <DependentUpon>ProgressSummary.aspx</DependentUpon>
     </Compile>
     <Compile Include="ClusterLead\ProjectXMLFeeds.aspx.cs">
@@ -1550,13 +1590,6 @@
     <Compile Include="OPSUser.cs">
       <DependentUpon>ORSDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="OPS\GridTestOPS.aspx.cs">
-      <DependentUpon>GridTestOPS.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="OPS\GridTestOPS.aspx.designer.cs">
-      <DependentUpon>GridTestOPS.aspx</DependentUpon>
-    </Compile>
     <Compile Include="OPS\OPSActivitiesFeed.ashx.cs">
       <DependentUpon>OPSActivitiesFeed.ashx</DependentUpon>
     </Compile>
@@ -1636,6 +1669,13 @@
     <Compile Include="OrsProject\ctlORSAdmin1Partners.ascx.designer.cs">
       <DependentUpon>ctlORSAdmin1Partners.ascx</DependentUpon>
     </Compile>
+    <Compile Include="OrsProject\ctlORSAdmin2Partners.ascx.cs">
+      <DependentUpon>ctlORSAdmin2Partners.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrsProject\ctlORSAdmin2Partners.ascx.designer.cs">
+      <DependentUpon>ctlORSAdmin2Partners.ascx</DependentUpon>
+    </Compile>
     <Compile Include="OrsProject\ImportUpdateProjectPartners.aspx.cs">
       <DependentUpon>ImportUpdateProjectPartners.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1650,12 +1690,26 @@
     <Compile Include="OrsProject\ProjectPartners.aspx.designer.cs">
       <DependentUpon>ProjectPartners.aspx</DependentUpon>
     </Compile>
+    <Compile Include="OrsProject\ProjectPartnersIndicators.aspx.cs">
+      <DependentUpon>ProjectPartnersIndicators.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrsProject\ProjectPartnersIndicators.aspx.designer.cs">
+      <DependentUpon>ProjectPartnersIndicators.aspx</DependentUpon>
+    </Compile>
     <Compile Include="OrsProject\ProjectsListing.aspx.cs">
       <DependentUpon>ProjectsListing.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="OrsProject\ProjectsListing.aspx.designer.cs">
       <DependentUpon>ProjectsListing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AddActivities.aspx.cs">
+      <DependentUpon>AddActivities.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\AddActivities.aspx.designer.cs">
+      <DependentUpon>AddActivities.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\UploadAchived.aspx.cs">
       <DependentUpon>UploadAchived.aspx</DependentUpon>
@@ -1926,6 +1980,13 @@
     <Compile Include="WebService.asmx.cs">
       <DependentUpon>WebService.asmx</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WebUserControl1.ascx.cs">
+      <DependentUpon>WebUserControl1.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUserControl1.ascx.designer.cs">
+      <DependentUpon>WebUserControl1.ascx</DependentUpon>
     </Compile>
     <Compile Include="Week.cs">
       <DependentUpon>ORSDataModel.tt</DependentUpon>

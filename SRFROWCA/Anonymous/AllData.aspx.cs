@@ -409,10 +409,10 @@ namespace SRFROWCA.Anonymous
 
             int langId = RC.SelectedSiteLanguageId;
             int emergencyId = RC.SelectedEmergencyId;
-
+            int year = RC.GetSelectedIntVal(ddlFrameworkYear);
             return new object[] {monthIds, locationIds, clusterIds, orgIds, 
                                     objIds, projectIds,fromMonth, toMonth, funded, notFunded,
-                                    isOPS, isApproved, pageIndex, pageSize, Convert.ToInt32(SQLPaging), langId, emergencyId };
+                                    isOPS, isApproved, pageIndex, pageSize, Convert.ToInt32(SQLPaging), langId, emergencyId, year };
         }
 
         private string GetSearchCriteria()

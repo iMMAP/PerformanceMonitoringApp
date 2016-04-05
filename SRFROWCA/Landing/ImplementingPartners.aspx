@@ -55,8 +55,8 @@
                                                 </div>
                                                 <ul class="list-unstyled spaced">
                                                     <li>
-                                                        <asp:LinkButton ID="btnlnkDataEntry" runat="server" Text="Data Entry 2016" CssClass="tooltip elemopacity"
-                                                            PostBackUrl="../ClusterLead/ValidateReportList.aspx"></asp:LinkButton>
+                                                        <asp:LinkButton ID="btnlnkDataEntry" runat="server" Text="Import Data 2016" CssClass="tooltip elemopacity"
+                                                            PostBackUrl="../ClusterLead/ImportData16.aspx"></asp:LinkButton>
                                                     </li>
                                                     
                                                     <li>
@@ -75,7 +75,7 @@
                                                     </li>
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkProgress16" runat="server" Text="Progress Summary 2016" CssClass="tooltip elemopacity"
-                                                            PostBackUrl="../ClusterLead/ProgressSummary.aspx"></asp:LinkButton>
+                                                            PostBackUrl="../Reports/Summary/ProgressSummary.aspx"></asp:LinkButton>
                                                     </li>
                                                    
                                                    
@@ -103,7 +103,7 @@
                                                 <ul class="list-unstyled spaced">
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkDataEntry15" runat="server" Text="Data Entry 2015" CssClass=""
-                                                            PostBackUrl="../ClusterLead/ValidateReportList.aspx"></asp:LinkButton>
+                                                            PostBackUrl="../Pages/AddActivities.aspx"></asp:LinkButton>
                                                     </li>
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkSectorIndicators15" runat="server" Text="GO to my 2015 Sector Response Plan" CssClass="tooltip elemopacity"
@@ -119,7 +119,7 @@
                                                     </li>
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkProgress15" runat="server" Text="Progress Summary 2015" CssClass="tooltip elemopacity"
-                                                            PostBackUrl="../ClusterLead/ProgressSummary.aspx"></asp:LinkButton>
+                                                            PostBackUrl="../Reports/Summary/ProgressSummary.aspx"></asp:LinkButton>
                                                     </li>
                                                 </ul>
                                             </div>

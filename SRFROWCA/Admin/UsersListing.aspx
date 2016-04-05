@@ -23,13 +23,13 @@
                             <div class="widget-box">
                                 <div class="widget-header widget-header-small header-color-blue2">
                                     <h6>
-                                        <button runat="server" id="btnExportToExcel" onserverclick="btnExportExcel_Click" class="btn btn-yellow"
+                                        <button runat="server" id="btnExportToExcel" onserverclick="btnExportExcel_Click" class="btn btn-yellow btn-sm"
                                             title="Excel">
                                             <i class="icon-download"></i>Excel
                                        
                                         </button>
                                         <asp:Button ID="btnAddUser" runat="server" Text="Add New User" PostBackUrl="~/Account/Registerca.aspx"
-                                            CssClass="btn btn-yellow pull-right" />
+                                            CssClass="btn btn-yellow pull-right btn-sm" />
                                     </h6>
                                 </div>
                                 <div class="widget-body">
@@ -54,7 +54,9 @@
                                                             <td>
                                                                 <asp:TextBox ID="txtOrg" runat="server" CssClass="width-90"></asp:TextBox>
                                                             </td>
-                                                            <td>Registered From:</td>
+                                                            <td>
+                                                                <label>Registered From: </label>
+                                                            </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtFromDate" runat="server" CssClass="width-40"></asp:TextBox></td>
                                                         </tr>
@@ -83,7 +85,8 @@
                                                                 </asp:DropDownList>
                                                             </td>
 
-                                                            <td>Registered To:
+                                                            <td>
+                                                                <label>Registered To:</label>
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtToDate" runat="server" CssClass="width-40"></asp:TextBox>
@@ -98,7 +101,8 @@
                                                             <td>
                                                                 <asp:TextBox ID="txtCountry" runat="server" CssClass="width-90"></asp:TextBox>
                                                             </td>
-                                                            <td>Approved:
+                                                            <td>
+                                                                <label>Approved:</label>
                                                             </td>
                                                             <td>
                                                                 <asp:RadioButtonList ID="rbIsApproved" runat="server" RepeatColumns="3">
@@ -116,7 +120,8 @@
                                                         <tr>
                                                             <td>&nbsp;</td>
                                                             <td colspan="5" style="padding-top: 20px;">
-                                                                <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" CssClass="btn btn-primary" /></td>
+                                                                <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" 
+                                                                    CssClass="btn btn-primary btn-sm" /></td>
                                                         </tr>
                                                     </table>
                                                 </div>
@@ -170,6 +175,8 @@
                             <asp:BoundField DataField="OrganizationName" HeaderText="Organization" SortExpression="OrganizationName"
                                 ItemStyle-Width="250px" />
                             <asp:BoundField DataField="LocationName" HeaderText="Country" SortExpression="LocationName"
+                                ItemStyle-HorizontalAlign="Center" ItemStyle-Width="100" />
+                            <asp:BoundField DataField="Cluster" HeaderText="Cluster" SortExpression="Cluster"
                                 ItemStyle-HorizontalAlign="Center" ItemStyle-Width="100" />
                             <asp:BoundField DataField="CreateDate" HeaderText="Create Date" SortExpression="DateCreated"
                                 ItemStyle-HorizontalAlign="Center" ItemStyle-Width="150" />

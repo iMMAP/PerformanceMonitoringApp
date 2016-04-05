@@ -295,7 +295,7 @@
     <value>Saise des données 2015</value>
   </data>
   <data name="localClFOutputDataReport.Text" xml:space="preserve">
-    <value>Rapport de résultat</value>
+    <value>Rapport de résultat 2015</value>
   </data>
   <data name="localClFOutputIndicators.Text" xml:space="preserve">
     <value>Indicateurs de résultat</value>
@@ -353,5 +353,11 @@
   </data>
   <data name="localCLFOutputDataEntry16" xml:space="preserve">
     <value>Saise des données 2016</value>
+  </data>
+  <data name="localClFOutputDataReport16.Text" xml:space="preserve">
+    <value>Rapport de résultat 2016</value>
+  </data>
+  <data name="localOutputIndReportPublic16.Text" xml:space="preserve">
+    <value>Rapport de résultat 2016</value>
   </data>
 </root>

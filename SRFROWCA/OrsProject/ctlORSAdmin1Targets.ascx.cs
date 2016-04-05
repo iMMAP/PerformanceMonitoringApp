@@ -1,7 +1,6 @@
 ﻿using BusinessLogic;
 using SRFROWCA.Common;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Transactions;
@@ -14,16 +13,9 @@ namespace SRFROWCA.OrsProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string languageChange = "";
-            if (Session["SiteChanged"] != null)
-            {
-                languageChange = Session["SiteChanged"].ToString();
-            }
-
             if (!IsPostBack)
             {
                 SetOPSIds();
-                //GetReportId();
                 PopulateIndicators();
             }
         }
@@ -158,100 +150,23 @@ namespace SRFROWCA.OrsProject
 
         #region Button Click Events.
 
-        private bool TargetProvided(Repeater rpt, bool isGender)
-        {
-            bool isTargetValid = false;
-            foreach (RepeaterItem item in rpt.Items)
-            {
-                if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
-                {
-                    Repeater rptAdmin1 = (Repeater)item.FindControl("rptAdmin1");
-                    foreach (RepeaterItem admin1Item in rptAdmin1.Items)
-                    {
-                        if (isGender)
-                        {
-                            TextBox txtTargetMale = admin1Item.FindControl("txtAdmin1TargetMaleProject") as TextBox;
-                            TextBox txtTargetFemale = admin1Item.FindControl("txtAdmin1TargetFemaleProject") as TextBox;
-                            if (!string.IsNullOrEmpty(txtTargetMale.Text.Trim()) || !string.IsNullOrEmpty(txtTargetFemale.Text.Trim()))
-                            {
-                                isTargetValid = true;
-                                break;
-                            }
-                        }
-                        else
-                        {
-                            TextBox txtTarget = admin1Item.FindControl("txtAdmin1TargetProject") as TextBox;
-                            if (!string.IsNullOrEmpty(txtTarget.Text.Trim()))
-                            {
-                                isTargetValid = true;
-                                break;
-                            }
-                        }
-                    }
-
-                    if (isTargetValid) break;
-                }
-            }
-
-            return isTargetValid;
-        }
-
-        private bool IsTargetProvided()
-        {
-            bool isTargetValid = false;
-            foreach (GridViewRow row in gvActivities.Rows)
-            {
-                if (row.RowType == DataControlRowType.DataRow)
-                {
-                    int unitId = Convert.ToInt32(gvActivities.DataKeys[row.RowIndex].Values["UnitId"].ToString());
-
-                    Repeater rptCountry = row.FindControl("rptCountry") as Repeater;
-                    if (rptCountry != null)
-                    {
-                        if (RC.IsGenderUnit(unitId))
-                            isTargetValid = TargetProvided(rptCountry, true);
-                        else
-                            isTargetValid = TargetProvided(rptCountry, false);
-                    }
-                    if (isTargetValid) break;
-                }
-            }
-
-            if (!isTargetValid)
-            {
-                if (RC.SelectedSiteLanguageId == 1)
-                {
-                    ShowMessage("Please provide target for at least one location.", RC.NotificationType.Error, true, 3000);
-                }
-                else
-                {
-
-                    ShowMessage("Se il vous plaît fournir cible pour au moins un emplacement.", RC.NotificationType.Error, true, 3000);
-                }
-            }
-
-            return isTargetValid;
-        }
-
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            //if (IsTargetProvided())
-            {
-                bool isSaved = false;
-                //using (TransactionScope scope = new TransactionScope())
-                {
-                    SaveTargets();
-                    //scope.Complete();
-                    isSaved = true;
-                    if (RC.SelectedSiteLanguageId == 1)
-                        ShowMessage("Your Data Saved Successfully!");
-                    else
-                        ShowMessage("Vos données sauvegardées avec succès");
-                }
 
-                if (isSaved)
-                    PopulateIndicators();
+            bool isSaved = false;
+            using (TransactionScope scope = new TransactionScope())
+            {
+                SaveTargets();
+                scope.Complete();
+                isSaved = true;
+                if (RC.SelectedSiteLanguageId == 1)
+                    ShowMessage("Your Data Saved Successfully!");
+                else
+                    ShowMessage("Vos données sauvegardées avec succès");
             }
+
+            if (isSaved)
+                PopulateIndicators();
         }
 
         private void SaveTargets()
@@ -313,7 +228,7 @@ namespace SRFROWCA.OrsProject
                     if (admin1Id > 0)
                         DBContext.Update("InsertUpdateProjectIndicatorTargets", new object[] {ProjectId, indicatorId, countryId, admin1Id, admin1Id,
                                                                                         target, RC.GetCurrentUserId, DBNull.Value });
-                    
+
                 }
             }
         }
@@ -366,53 +281,6 @@ namespace SRFROWCA.OrsProject
             }
         }
 
-        // In this method we will get the postback control.
-        public string GetPostBackControlId(Page page)
-        {
-            // If page is requested first time then return.
-            if (!page.IsPostBack)
-                return "";
-
-            Control control = null;
-            // first we will check the "__EVENTTARGET" because if post back made by the controls
-            // which used "_doPostBack" function also available in Request.Form collection.
-            string controlName = page.Request.Params["__EVENTTARGET"];
-            if (!String.IsNullOrEmpty(controlName))
-            {
-                control = page.FindControl(controlName);
-            }
-            else
-            {
-                // if __EVENTTARGET is null, the control is a button type and we need to
-                // iterate over the form collection to find it
-
-                string controlId;
-                Control foundControl;
-
-                foreach (string ctl in page.Request.Form)
-                {
-                    // handle ImageButton they having an additional "quasi-property"
-                    // in their Id which identifies mouse x and y coordinates
-                    if (ctl.EndsWith(".x") || ctl.EndsWith(".y"))
-                    {
-                        controlId = ctl.Substring(0, ctl.Length - 2);
-                        foundControl = page.FindControl(controlId);
-                    }
-                    else
-                    {
-                        foundControl = page.FindControl(ctl);
-                    }
-
-                    if (!(foundControl is Button || foundControl is ImageButton)) continue;
-
-                    control = foundControl;
-                    break;
-                }
-            }
-
-            return control == null ? String.Empty : control.ID;
-        }
-
         private DataTable GetActivities()
         {
             int projectId = 0;
@@ -454,13 +322,6 @@ namespace SRFROWCA.OrsProject
             return dt;
         }
 
-        private void DeleteOPSReportDetails()
-        {
-            //DBContext.Delete("DeleteOPSReportDetails", new object[] { OPSReportId, EmgClusterId, DBNull.Value });
-        }
-
-        
-
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
         {
             RC.ShowMessage(this.Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
@@ -489,27 +350,5 @@ namespace SRFROWCA.OrsProject
         }
 
         #endregion
-
-        protected void lnkLanguageEnglish_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                RC.SelectedSiteLanguageId = (int)RC.SiteLanguage.English;
-                RC.AddSiteLangInCookie(this.Response, RC.SiteLanguage.English);
-                //BindGridData();
-            }
-            catch { }
-        }
-
-        protected void lnkLanguageFrench_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                RC.SelectedSiteLanguageId = (int)Common.RC.SiteLanguage.French;
-                RC.AddSiteLangInCookie(this.Response, Common.RC.SiteLanguage.French);
-                //BindGridData();
-            }
-            catch { }
-        }
     }
 }

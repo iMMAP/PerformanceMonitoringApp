@@ -62,7 +62,6 @@ namespace SRFROWCA.ClusterLead
                     ShowValidationMessage();
                     return;
                 }
-
             }
 
             int indicatorId = 0;
@@ -85,6 +84,7 @@ namespace SRFROWCA.ClusterLead
                 {
                     SaveAdmin1Targets(indicatorId, emgLocationId);
                 }
+                DBContext.Update("UpdateOutputIndicatorCountryTotalTargets", new object[] { RC.Year._Current, DBNull.Value });
                 scope.Complete();
                 //SendEmail(isAdded);
                 Response.Redirect("~/ClusterLead/CountryIndicators.aspx");
@@ -498,6 +498,22 @@ namespace SRFROWCA.ClusterLead
                     }
                 }
             }
+        }
+
+        private void SaveFiltersInSession()
+        {
+            int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
+            int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
+
+            if (emgLocationId > 0)
+                Session["OutputFrameworkSelectedCountry"] = emgLocationId;
+            else
+                Session["OutputFrameworkSelectedCountry"] = null;
+
+            if (emgClusterId > 0)
+                Session["OutputFrameworkSelectedCluster"] = emgClusterId;
+            else
+                Session["OutputFrameworkSelectedCluster"] = null;
         }
 
         private void SetFiltersFromSession()

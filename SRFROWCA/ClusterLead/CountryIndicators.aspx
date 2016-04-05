@@ -18,11 +18,6 @@
                             <div class="widget-box">
                                 <div class="widget-header widget-header-small header-color-blue2" style="padding-left: 0px;">
                                     <h6>
-                                        <%--<button runat="server" id="btnExportPDF" onserverclick="ExportToPDF" class="btn btn-yellow" causesvalidation="false"
-                                            title="PDF">
-                                            <i class="icon-download"></i>PDF                                       
-                                        </button>--%>
-
                                         <button runat="server" id="btnExportToExcel" onserverclick="btnExportToExcel_ServerClick" class="btn btn-sm btn-yellow" causesvalidation="false"
                                             title="Excel">
                                             <i class="icon-download"></i>Excel
@@ -41,7 +36,7 @@
                                         <table border="0" style="width: 100%; margin: 0 auto;">
                                             <tr>
                                                 <td style="width:60px">
-                                                    <asp:Label runat="server" ID="lblCountry" Text="Country:" meta:resourcekey="lblCountryResource1"></asp:Label>
+                                                    <label><asp:Label runat="server" ID="lblCountry" Text="Country:" meta:resourcekey="lblCountryResource1"></asp:Label></label>
                                                 </td>
                                                 <td style="width:230px">
                                                     <asp:DropDownList ID="ddlCountry" runat="server" Width="200px" AutoPostBack="True"
@@ -50,7 +45,7 @@
                                                 </td>
 
                                                 <td style="width:60px">
-                                                    <asp:Label runat="server" ID="lblCluster" Text="Cluster:" meta:resourcekey="lblClusterResource1"></asp:Label>
+                                                   <label> <asp:Label runat="server" ID="lblCluster" Text="Cluster:" meta:resourcekey="lblClusterResource1"></asp:Label></label>
                                                 </td>
                                                 <td style="width:270px">
                                                     <asp:DropDownList ID="ddlCluster" runat="server" AutoPostBack="True" Width="260px"
@@ -64,10 +59,10 @@
                                                 <td>
                                                     <asp:CheckBox ID="cbIncludeRegional" runat="server" CssClass="ace ace-checkbox-2"
                                                         Checked="True" AutoPostBack="True" OnCheckedChanged="cbIncudeRegional_CheckedChanged" />
-                                                    <asp:Localize ID="localCBIsRegCap" runat="server" Text="<span class='label-sm'>Show Regional Indicators</span>" meta:resourcekey="cbIncludeRegionalResource1"></asp:Localize>
+                                                   <label> <asp:Localize ID="localCBIsRegCap" runat="server" Text="<span class='label-sm'>Show Regional Indicators</span>" meta:resourcekey="cbIncludeRegionalResource1"></asp:Localize></label>
                                                 </td>
                                                 <td>
-                                                    <asp:Label ID="lblYear" runat="server" Text="Year:" meta:resourcekey="lblYearResource1"></asp:Label>
+                                                   <label> <asp:Label ID="lblYear" runat="server" Text="Year:" meta:resourcekey="lblYearResource1"></asp:Label></label>
                                                 </td>
                                                 <td>
                                                     <asp:DropDownList ID="ddlFrameworkYear" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddl_SelectedIndexChanged" meta:resourcekey="ddlFrameworkYearResource1">

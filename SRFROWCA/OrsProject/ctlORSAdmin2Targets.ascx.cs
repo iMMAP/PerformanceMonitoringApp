@@ -3,6 +3,7 @@ using SRFROWCA.Common;
 using System;
 using System.Data;
 using System.Linq;
+using System.Transactions;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -12,12 +13,6 @@ namespace SRFROWCA.OrsProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string languageChange = "";
-            if (Session["SiteChanged"] != null)
-            {
-                languageChange = Session["SiteChanged"].ToString();
-            }
-
             if (!IsPostBack)
             {
                 SetProjectId();
@@ -168,10 +163,10 @@ namespace SRFROWCA.OrsProject
         protected void btnSave_Click(object sender, EventArgs e)
         {
             bool isSaved = false;
-            //using (TransactionScope scope = new TransactionScope())
+            using (TransactionScope scope = new TransactionScope())
             {
                 SaveProjectTargets();
-                //scope.Complete();
+                scope.Complete();
                 isSaved = true;
                 if (RC.SelectedSiteLanguageId == 1)
                     ShowMessage("Your Data Saved Successfully!");
@@ -474,27 +469,5 @@ namespace SRFROWCA.OrsProject
         }
 
         #endregion
-
-        protected void lnkLanguageEnglish_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                RC.SelectedSiteLanguageId = (int)RC.SiteLanguage.English;
-                RC.AddSiteLangInCookie(this.Response, RC.SiteLanguage.English);
-            }
-            catch { }
-        }
-
-        protected void lnkLanguageFrench_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                RC.SelectedSiteLanguageId = (int)Common.RC.SiteLanguage.French;
-                RC.AddSiteLangInCookie(this.Response, Common.RC.SiteLanguage.French);
-            }
-            catch { }
-        }
-
-
     }
 }

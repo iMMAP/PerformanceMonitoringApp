@@ -9,7 +9,6 @@
         white-space: nowrap;        
     }
     </style>
-
     <script>
         $(function () {
             $(".imagetable").prepend('<thead><tr style="background-color:ButtonFace;"><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th colspan="3" style="text-align: center;">Total</th><th colspan="3" style="text-align: center;">In Need</th><th colspan="3" style="text-align: center;">Targeted</th> <th>&nbsp;</th> <th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th></tr></thead>');
@@ -245,4 +244,5 @@
             </asp:GridView>
         </div>
     </div>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
 </asp:Content>

@@ -14,7 +14,7 @@ namespace SRFROWCA.ClusterLead
         {
             if (!IsPostBack)
             {
-                UserInfo.UserProfileInfo(RC.EmergencySahel2015);
+                //UserInfo.UserProfileInfo(RC.EmergencySahel2015);
                 LoadCombos();
                 SetFiltersFromSession();
                 DisableDropDowns();

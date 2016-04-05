@@ -42,7 +42,7 @@ namespace SRFROWCA.ClusterLead
                 lblOrganization.Text = dt.Rows[0]["OrganizationName"].ToString();
                 lblUpdatedBy.Text = dt.Rows[0]["Email"].ToString();
                 lblUpdatedOn.Text = dt.Rows[0]["CreatedDate"].ToString();
-                lblReportingPeriod.Text = dt.Rows[0]["MonthName"].ToString() + "-2015";
+                lblReportingPeriod.Text = dt.Rows[0]["MonthName"].ToString();
             }
         }
 

@@ -41,7 +41,7 @@
                                             OnClick="btnAddActivityAndIndicators_Click" Enabled="false"
                                             Style="margin-right: 5px;" meta:resourcekey="btnAddActivityAndIndicatorsResource1" />
                                         <asp:Button ID="btnMigrate2016" runat="server" Text="Migrate 2015 Framework To 2016" CausesValidation="False"
-                                            CssClass="btn btn-sm btn-danger pull-right" OnClick="btnMigrate2016_Click" Enabled="false"
+                                            CssClass="hidden btn btn-sm btn-danger pull-right" OnClick="btnMigrate2016_Click" Enabled="false"
                                             meta:resourcekey="btnMigrate2016Resource1" />
                                     </h6>
                                 </div>
@@ -53,7 +53,7 @@
                                                     <table border="0" style="width: 100%;">
                                                         <tr>
                                                             <td class="width-20">
-                                                                <asp:Label runat="server" ID="lblCountry" Text="Country:" meta:resourcekey="lblCountryResource1"></asp:Label>
+                                                               <label> <asp:Label runat="server" ID="lblCountry" Text="Country:" meta:resourcekey="lblCountryResource1"></asp:Label></label>
                                                             </td>
                                                             <td class="width-30">
                                                                 <asp:DropDownList runat="server" ID="ddlCountry" CssClass="width-80" AutoPostBack="True"
@@ -61,7 +61,7 @@
                                                                     meta:resourcekey="ddlCountryResource1">
                                                                 </asp:DropDownList></td>
                                                             <td>
-                                                                <asp:Label runat="server" ID="lblCluster" Text="Cluster:" meta:resourcekey="lblClusterResource1"></asp:Label>
+                                                               <label> <asp:Label runat="server" ID="lblCluster" Text="Cluster:" meta:resourcekey="lblClusterResource1"></asp:Label></label>
                                                             </td>
                                                             <td>
                                                                 <asp:DropDownList ID="ddlCluster" runat="server" CssClass="width-80" AutoPostBack="True"
@@ -71,7 +71,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="width-20">
-                                                                <asp:Label ID="lblObj" runat="server" Text="Objective:" meta:resourcekey="lblObjResource1"></asp:Label>
+                                                               <label> <asp:Label ID="lblObj" runat="server" Text="Objective:" meta:resourcekey="lblObjResource1"></asp:Label></label>
                                                             </td>
                                                             <td class="width-30">
                                                                 <asp:DropDownList ID="ddlObjective" runat="server" AppendDataBoundItems="True" AutoPostBack="True"
@@ -79,7 +79,7 @@
                                                                 </asp:DropDownList>
                                                             </td>
                                                             <td class="width-20">
-                                                                <asp:Label ID="lblActivity" runat="server" Text="Activity:" meta:resourcekey="lblActivityResource1"></asp:Label>
+                                                                <label><asp:Label ID="lblActivity" runat="server" Text="Activity:" meta:resourcekey="lblActivityResource1"></asp:Label></label>
                                                             </td>
                                                             <td class="width-30">
 
@@ -90,7 +90,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="width-20">
-                                                                <asp:Label ID="lblIndicator" runat="server" Text="Indicator" meta:resourcekey="lblIndicatorResource1"></asp:Label>
+                                                                <label><asp:Label ID="lblIndicator" runat="server" Text="Indicator" meta:resourcekey="lblIndicatorResource1"></asp:Label></label>
                                                             </td>
 
                                                             <td class="width-30">
@@ -98,7 +98,7 @@
                                                             </td>
 
                                                             <td class="width-20">
-                                                                <asp:Label ID="lblYear" runat="server" Text="Year:" meta:resourcekey="lblYearResource1"></asp:Label>
+                                                                <label><asp:Label ID="lblYear" runat="server" Text="Year:" meta:resourcekey="lblYearResource1"></asp:Label></label>
                                                             </td>
                                                             <td class="width-30">
                                                                 <asp:DropDownList ID="ddlFrameworkYear" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlYear_SelectedIndexChnaged" meta:resourcekey="ddlFrameworkYearResource1">

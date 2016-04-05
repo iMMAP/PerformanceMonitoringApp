@@ -94,7 +94,6 @@
   <Key-1220 CountryID="12" Country="Burkina Faso" ClusterID="20" Cluster="Food Security" DateLimit="12-31-2015" FrameworkCount="50" ActivityCount="25" ClusterCount="6" />
   <Key-1520 CountryID="15" Country="Gambia" ClusterID="20" Cluster="Food Security" DateLimit="12-31-2015" FrameworkCount="50" ActivityCount="25" ClusterCount="6" />
   <Key-1720 CountryID="17" Country="Mauritania" ClusterID="20" Cluster="Food Security" DateLimit="12-31-2015" FrameworkCount="50" ActivityCount="25" ClusterCount="6" />
-  <Key-1920 CountryID="19" Country="Nigeria" ClusterID="20" Cluster="Food Security" DateLimit="12-31-2015" FrameworkCount="50" ActivityCount="25" ClusterCount="6" />
   <Key-2020 CountryID="20" Country="Senegal" ClusterID="20" Cluster="Food Security" DateLimit="12-31-2015" FrameworkCount="50" ActivityCount="25" ClusterCount="6" />
   <Key-1120 CountryID="11" Country="Sahel Region" ClusterID="20" Cluster="Food Security" DateLimit="12-31-2015" FrameworkCount="50" ActivityCount="25" ClusterCount="6" />
   <Key-1419 CountryID="14" Country="Chad" ClusterID="19" Cluster="Coordination and Support Services" DateLimit="12-31-2015" FrameworkCount="50" ActivityCount="25" ClusterCount="4" />
@@ -130,4 +129,5 @@
   <Key-1324 CountryID="13" Country="Cameroon" ClusterID="24" Cluster="Multi Sector for Refugees" DateLimit="11-01-2015" FrameworkCount="50" ActivityCount="25" ClusterCount="4" />
   <Key-1315 CountryID="13" Country="Cameroon" ClusterID="15" Cluster="Health" DateLimit="11-30-2015" FrameworkCount="50" ActivityCount="25" ClusterCount="4" />
   <Key-1618 CountryID="16" Country="Mali" ClusterID="18" Cluster="Early Recovery" DateLimit="11-01-2015" FrameworkCount="50" ActivityCount="25" ClusterCount="4" />
+  <Key-1920 CountryID="19" Country="Nigeria" ClusterID="20" Cluster="Food Security" DateLimit="03-31-2016" FrameworkCount="50" ActivityCount="25" ClusterCount="6" />
 </ChangeEndSettings>

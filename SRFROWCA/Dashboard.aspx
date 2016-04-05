@@ -1,61 +1,36 @@
 ﻿<%@ Page Title="ORS - Dashboard" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="SRFROWCA.Dashboard" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-     <style type="text/css">
-        .outdiv {
-            height: 750px;
-            overflow: hidden;
-            position: relative;
-            width: 49%;
-            float: left;
-        }
 
-        .iniframe {
-            height: 100%;
-            left: 2px;
-            position: absolute;
-            top: 10px;
-            width: 100%;
-        }
-
-        .bgcolorthispage {
-            background-color: #2e6589;
-        }
-        .alertcustome {
-            background-color: #458FBA;
-            border-color: #bce8f1;
-            color: #ffffff;
-        }
-    </style>
+    <script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="page-content">
         <div class="row">
-            <div class="col-xs-12">
-                <div style="height: 10px;" class="bgcolorthispage"></div>
-                
-                <div align="center" class="bgcolorthispage">
-                    <div class="alert alertcustome" style="width:910px; font-size:11px; text-align:left">
-                        <button type="button" class="close" data-dismiss="alert">
-                            <i class="ace-icon fa fa-times"></i>
-                        </button>
+            <div class="col-sm-12">
 
-                        <i class="ace-icon fa fa-check green"></i>
 
-                        During the 2015 Strategic Response Plan (SRP), The Sahel output indicators were defined in consultation with the regional 
-                        sector focal points to provide a standard measure of performance for the Sahel. Country Cluster focal points provided their 
-                        annual targets for each country and started to report on their cluster achievements for each of the output indicators on a 
-                        monthly basis.<br />
-                        The report below shows the performance of the Sahel Output Indicators on a quarterly basis for 2015. The monthly data is 
-                        collected from the respective cluster focal points across the 9 Sahel countries (Burkina Faso, Cameroon, Chad, Gambia, Mali, 
-                        Mauritania, Niger, Nigeria and Senegal) and validated with the regional sector focal points.<br />
-                        The sectors represented at a regional level and included in the report include; Food Security, Nutrition, Health, 
-                        Water Sanitation & Hygiene, Multi-sector for refugees, Education and protection.<br />
-                        The country by country breakdown can also be viewed using the filters provided.
-
-                    </div>
-                    <%--<iframe width="910" height="800" frameborder="0" scrolling="no" src="https://onedrive.live.com/embed?cid=880D08EC1E54FF60&resid=880d08ec1e54ff60%21527&authkey=ACcgJWLViOYr75g&em=2&AllowTyping=True&wdHideGridlines=True&wdHideHeaders=True&wdDownloadButton=True"></iframe>--%>
-                    <div style="position: relative; top: -55px; left: 0px; width: 910px; height: 60px; background: #2e6589;"></div>
+                <div class='tableauPlaceholder' style='width: 100%; height: 2069px;'>
+                    <noscript>
+                        <a href='#'>
+                            <img alt='HRP 2016: Organisation Projects* ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;HR&#47;HRP2016Projects&#47;Tableaudebord2&#47;1_rss.png' style='border: none' /></a>
+                    </noscript>
+                    <object class='tableauViz' width='100%' height='2069' style='display: none;'>
+                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                        <param name='site_root' value='' />
+                        <param name='name' value='HRP2016Projects&#47;Tableaudebord2' />
+                        <param name='tabs' value='no' />
+                        <param name='toolbar' value='yes' />
+                        <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;HR&#47;HRP2016Projects&#47;Tableaudebord2&#47;1.png' />
+                        <param name='animate_transition' value='yes' />
+                        <param name='display_static_image' value='yes' />
+                        <param name='display_spinner' value='yes' />
+                        <param name='display_overlay' value='yes' />
+                        <param name='display_count' value='yes' />
+                        <param name='showVizHome' value='no' />
+                        <param name='showTabs' value='y' />
+                        <param name='bootstrapWhenNotified' value='true' />
+                    </object>
                 </div>
             </div>
         </div>

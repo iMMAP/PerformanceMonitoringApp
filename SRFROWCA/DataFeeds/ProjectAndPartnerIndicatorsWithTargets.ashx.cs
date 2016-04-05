@@ -11,7 +11,6 @@ namespace SRFROWCA.DataFeeds
     /// </summary>
     public class ProjectAndPartnerIndicatorsWithTargets : IHttpHandler
     {
-
         public void ProcessRequest(HttpContext context)
         {
             DataSet ds = new DataSet();

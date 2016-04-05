@@ -16,6 +16,7 @@ namespace SRFROWCA.ClusterLead
             {
                 //CliearFilterSession();
                 LoadCombos();
+                SetFiltersFromSession();
                 DisableDropDowns();
                 SetDates();
                 LoadClusterIndicators();
@@ -284,36 +285,36 @@ namespace SRFROWCA.ClusterLead
             int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
 
             if (emgLocationId > 0)
-                Session["ClusterDataEntryCountry"] = emgLocationId;
+                Session["OutputFrameworkSelectedCountry"] = emgLocationId;
             else
-                Session["ClusterDataEntryCountry"] = null;
+                Session["OutputFrameworkSelectedCountry"] = null;
 
             if (emgClusterId > 0)
-                Session["ClusterDataEntryCluster"] = emgClusterId;
+                Session["OutputFrameworkSelectedCluster"] = emgClusterId;
             else
-                Session["ClusterDataEntryCluster"] = null;
+                Session["OutputFrameworkSelectedCluster"] = null;
         }
 
         private void SetFiltersFromSession()
         {
-            if (Session["ClusterDataEntryCountry"] != null)
+            if (Session["OutputFrameworkSelectedCountry"] != null)
             {
-                int emgLocationId = 0;
-                int.TryParse(Session["ClusterDataEntryCountry"].ToString(), out emgLocationId);
-                if (emgLocationId > 0)
+                int countryId = 0;
+                int.TryParse(Session["OutputFrameworkSelectedCountry"].ToString(), out countryId);
+                if (countryId > 0)
                 {
                     try
                     {
-                        ddlCountry.SelectedValue = emgLocationId.ToString();
+                        ddlCountry.SelectedValue = countryId.ToString();
                     }
                     catch { }
                 }
             }
 
-            if (Session["ClusterDataEntryCluster"] != null)
+            if (Session["OutputFrameworkSelectedCluster"] != null)
             {
                 int clusterId = 0;
-                int.TryParse(Session["ClusterDataEntryCluster"].ToString(), out clusterId);
+                int.TryParse(Session["OutputFrameworkSelectedCluster"].ToString(), out clusterId);
                 if (clusterId > 0)
                 {
                     try
