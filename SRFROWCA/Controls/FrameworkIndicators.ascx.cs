@@ -20,9 +20,11 @@ namespace SRFROWCA.Controls
         {
             lbl1stNumber.Text = " " + (ControlNumber).ToString();
             if (string.IsNullOrEmpty(hfIndicatorId.Value) || hfIndicatorId.Value == "0")
-            {
+            {                
                 PopulateUnits(true);
             }
+
+            ToggleCPCheckbox();
 
             string key = this.indCtlEmgLocId.ToString() + this.indCtlEmgClusterId.ToString();
             AdminTargetSettingItems items = RC.AdminTargetSettings(key);
@@ -304,7 +306,7 @@ namespace SRFROWCA.Controls
                     }
                 }
             }
-            
+
             DBContext.Update("UpdateCountryAndAdmin1TargetsOfIndicator_Admin1", new object[] { indicatorId, DBNull.Value });
         }
 
@@ -342,7 +344,7 @@ namespace SRFROWCA.Controls
                                     admin1FemaleTarget = string.IsNullOrEmpty(txtTargetFemale.Text.Trim()) ? (int?)null : Convert.ToInt32(txtTargetFemale.Text.Trim());
                                     if (admin1MaleTarget != null || admin1FemaleTarget != null)
                                     {
-                                        
+
                                         DBContext.Update("InsertIndicatorTargetGender_Admin1", new object[] { indicatorId, countryId, admin1Id , 
                                                                                                                 admin1MaleTarget, admin1FemaleTarget,
                                                                                                                 insertCount, 3, RC.GetCurrentUserId, DBNull.Value });
@@ -425,12 +427,13 @@ namespace SRFROWCA.Controls
             bool isGender = RC.IsGenderUnit(unitId);
             int val = RC.GetSelectedIntVal(ddlCalculationMethod);
             int? calMethod = val > 0 ? val : (int?)val;
+            bool isCP = cbCP.Checked;
 
             if (string.IsNullOrEmpty(hfIndicatorId.Value))
             {
                 int indicatorId = DBContext.Add("InsertIndicator", new object[] { activityId, indEn, indFr, 
                                                                                     unitId, userId, isGender, 
-                                                                                    calMethod, DBNull.Value });
+                                                                                    calMethod, isCP, DBNull.Value });
                 SaveTargets(indicatorId, isGender);
             }
             else
@@ -441,15 +444,32 @@ namespace SRFROWCA.Controls
                 {
                     DBContext.Update("UpdateIndicatorNew2", new object[] { indicatorId, activityId, 
                                                                             unitId, indEn, indFr, userId, 
-                                                                            isGender, calMethod, DBNull.Value });
+                                                                            isGender, calMethod, isCP, DBNull.Value });
                     SaveTargets(indicatorId, isGender);
                 }
                 else
                 {
                     int newIndicatorId = DBContext.Add("InsertIndicator", new object[] { activityId, indEn, indFr, 
                                                                                             unitId, userId, isGender, 
-                                                                                            calMethod, DBNull.Value });
+                                                                                            calMethod, isCP, DBNull.Value });
                     SaveTargets(newIndicatorId, isGender);
+                }
+            }
+        }
+
+        private void ToggleCPCheckbox()
+        {
+            if (Session["ClusterFrameworkSelectedCluster"] != null)
+            {
+                int clusterId = 0;
+                int.TryParse(Session["ClusterFrameworkSelectedCluster"].ToString(), out clusterId);
+                if (clusterId > 0)
+                {
+                    if (clusterId == (int)RC.ClusterSAH2015.PRO)
+                    {
+                        lblCP.Visible = true;
+                        cbCP.Visible = true;
+                    }
                 }
             }
         }

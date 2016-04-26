@@ -15,7 +15,7 @@ namespace SRFROWCA.OrsProject
         {
             if (!IsPostBack)
             {
-                SetProjectId();
+                SetGlobalIds();
                 PopulateIndicators();
             }
         }
@@ -267,7 +267,7 @@ namespace SRFROWCA.OrsProject
         #region Methods.
 
         // Get values from querystring and set variables.
-        private void SetProjectId()
+        private void SetGlobalIds()
         {
             int tempVal = 0;
             // ProjectId

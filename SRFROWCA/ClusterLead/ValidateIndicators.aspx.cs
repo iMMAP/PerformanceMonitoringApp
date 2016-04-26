@@ -38,10 +38,9 @@ namespace SRFROWCA.ClusterLead
             DataTable dt = DBContext.GetData("GetReportMainInfo", new object[] { reportId });
             if (dt.Rows.Count > 0)
             {
-                lblProjectTitle.Text = "(" + dt.Rows[0]["ProjectCode"].ToString() + ") " + dt.Rows[0]["ProjectTitle"].ToString();
+                lblProjectTitle.Text = dt.Rows[0]["ProjectCode"].ToString();
                 lblOrganization.Text = dt.Rows[0]["OrganizationName"].ToString();
                 lblUpdatedBy.Text = dt.Rows[0]["Email"].ToString();
-                lblUpdatedOn.Text = dt.Rows[0]["CreatedDate"].ToString();
                 lblReportingPeriod.Text = dt.Rows[0]["MonthName"].ToString();
             }
         }
@@ -55,29 +54,6 @@ namespace SRFROWCA.ClusterLead
         protected void gvIndicators_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             ObjPrToolTip.ObjectiveIconToolTip(e, 0);
-        }
-
-        protected void gvIndicators_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            if (e.CommandName == "AddComments")
-            {
-                int rowIndex = int.Parse(e.CommandArgument.ToString());
-                int activityDataId = 0;
-                int.TryParse(gvIndicators.DataKeys[rowIndex]["ActivityDataId"].ToString(), out activityDataId);
-                int reportId = 0;
-                int.TryParse(gvIndicators.DataKeys[rowIndex]["ReportId"].ToString(), out reportId);
-
-                if (activityDataId > 0 && reportId > 0)
-                {
-                    ActivityDataId = activityDataId;
-                    ReportId = reportId;
-
-                    if (ucIndComments.LoadComments(reportId, activityDataId))
-                        btnSaveComments.Visible = false;
-
-                    mpeComments.Show();
-                }
-            }
         }
 
         protected void btnApprove_Click(object sender, EventArgs e)
@@ -158,22 +134,7 @@ namespace SRFROWCA.ClusterLead
             }
 
             Response.Redirect("~/ClusterLead/ValidateReportList.aspx");
-        }
-
-        protected void btnSaveComments_Click(object sender, EventArgs e)
-        {
-            string comments = txtComments.Value;// ucIndComments.GetComments();
-            int indictorCommentDetID = ucIndComments.GetIndicatorCommentDetailID();
-
-            if (!string.IsNullOrEmpty(comments))
-            {
-                DBContext.Add("InsertIndicatorComments", new object[] { ReportId, ActivityDataId, comments, RC.GetCurrentUserId, DBNull.Value, indictorCommentDetID });
-            }
-
-        }
-
-        protected void btnCancelComments_Click(object sender, EventArgs e)
-        { }
+        }       
 
         private void ApproveIndicatorData(int reportDetailId, bool isApproved)
         {

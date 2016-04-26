@@ -80,7 +80,7 @@
         width: 50%;
     }
 </style>
-<script src="../assets/orsjs/jquery.numeric.min.js" type="text/javascript"></script>
+
 <script type="text/javascript">
     //var needToConfirm = true;
     //window.onbeforeunload = confirmExit;

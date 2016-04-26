@@ -412,14 +412,7 @@ namespace SRFROWCA.Common
             cell = new PdfPCell(new Phrase(row["LocationName"].ToString(), TableFont));
             tbl.AddCell(cell);
 
-            string val = row["ClusterTotal"].ToString();
-            if (!string.IsNullOrEmpty(val))
-                val = RC.StringToThousandSeperator(val);
-            cell = new PdfPCell(new Phrase(val, TableFont));
-            cell.HorizontalAlignment = Element.ALIGN_RIGHT;
-            tbl.AddCell(cell);
-
-            val = row["ClusterMale"].ToString();
+            string val = row["ClusterMale"].ToString();
             if (!string.IsNullOrEmpty(val))
                 val = RC.StringToThousandSeperator(val);
             cell = new PdfPCell(new Phrase(val, TableFont));
@@ -433,12 +426,12 @@ namespace SRFROWCA.Common
             cell.HorizontalAlignment = Element.ALIGN_RIGHT;
             tbl.AddCell(cell);
 
-            val = row["Target"].ToString();
+            val = row["ClusterTotal"].ToString();
             if (!string.IsNullOrEmpty(val))
                 val = RC.StringToThousandSeperator(val);
             cell = new PdfPCell(new Phrase(val, TableFont));
             cell.HorizontalAlignment = Element.ALIGN_RIGHT;
-            tbl.AddCell(cell);
+            tbl.AddCell(cell);            
 
             val = row["ProjectMale"].ToString();
             if (!string.IsNullOrEmpty(val))
@@ -448,6 +441,13 @@ namespace SRFROWCA.Common
             tbl.AddCell(cell);
 
             val = row["ProjectFemale"].ToString();
+            if (!string.IsNullOrEmpty(val))
+                val = RC.StringToThousandSeperator(val);
+            cell = new PdfPCell(new Phrase(val, TableFont));
+            cell.HorizontalAlignment = Element.ALIGN_RIGHT;
+            tbl.AddCell(cell);
+
+            val = row["Target"].ToString();
             if (!string.IsNullOrEmpty(val))
                 val = RC.StringToThousandSeperator(val);
             cell = new PdfPCell(new Phrase(val, TableFont));

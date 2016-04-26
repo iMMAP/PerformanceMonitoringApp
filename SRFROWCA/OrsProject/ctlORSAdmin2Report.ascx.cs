@@ -18,6 +18,8 @@ namespace SRFROWCA.OrsProject
             {
                 PopulateMonths();
                 SetGlobalIds();
+                PopulateOrganizations();
+                SetReportId();
                 PopulateIndicators();
             }
         }
@@ -44,8 +46,33 @@ namespace SRFROWCA.OrsProject
 
         protected void ddlMonth_SelectedIndexChnaged(object sender, EventArgs e)
         {
-            SetGlobalIds();
+            SetReportId();
             PopulateIndicators();
+        }
+
+        private void PopulateOrganizations()
+        {
+            DataTable dt = GetProjectPartners();
+
+            ddlOrgs.DataValueField = "OrganizationId";
+            ddlOrgs.DataTextField = "OrganizationName";
+            ddlOrgs.DataSource = dt;
+            ddlOrgs.DataBind();
+            if (RC.IsDataEntryUser(((Page)this.Parent.Parent.Parent.Parent.Parent).User))
+                ddlOrgs.SelectedValue = UserInfo.Organization.ToString();
+
+            else
+                ddlOrgs.SelectedValue = OrganizationId.ToString();
+        }
+
+        private DataTable GetProjectPartners()
+        {
+            int orgId = OrganizationId;
+            if (RC.IsDataEntryUser(((Page)this.Parent.Parent.Parent.Parent.Parent).User))
+            {
+                orgId = UserInfo.Organization;
+            }
+            return DBContext.GetData("GetProjectPartnersDataEntry", new object[] { ProjectId, orgId });
         }
 
         protected void gvActivities_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -63,8 +90,9 @@ namespace SRFROWCA.OrsProject
                     Repeater rptCountry = e.Row.FindControl("rptCountry") as Repeater;
                     if (rptCountry != null)
                     {
+                        int orgId = RC.GetSelectedIntVal(ddlOrgs);
                         DataTable dt = DBContext.GetData("GetProjectIndicatorDataEntryTarget_Country",
-                                                  new object[] { ProjectId, ReportId, OrganizationId, indicatorId });
+                                                  new object[] { ProjectId, ReportId, orgId, indicatorId });
                         rptCountry.DataSource = dt;
                         rptCountry.DataBind();
 
@@ -111,8 +139,10 @@ namespace SRFROWCA.OrsProject
                     Repeater rptAdmin1 = e.Item.FindControl("rptAdmin1") as Repeater;
                     if (rptAdmin1 != null)
                     {
+                        int orgId = RC.GetSelectedIntVal(ddlOrgs);
+                        bool isProjectOwner = orgId == OrganizationId;
                         DataTable dt = DBContext.GetData("GetProjectIndicatorDataEntryTargetAdmin1_Admin2",
-                                                            new object[] { ProjectId, ReportId, OrganizationId, indicatorId });
+                                                            new object[] { ProjectId, ReportId, orgId, isProjectOwner, indicatorId });
                         rptAdmin1.DataSource = dt;
                         rptAdmin1.DataBind();
                     }
@@ -149,8 +179,10 @@ namespace SRFROWCA.OrsProject
                     Repeater rptAdmin2 = e.Item.FindControl("rptAdmin2") as Repeater;
                     if (rptAdmin2 != null)
                     {
+                        int orgId = RC.GetSelectedIntVal(ddlOrgs);
+                        bool isProjectOwner = orgId == OrganizationId;
                         DataTable dt = DBContext.GetData("GetProjectIndicatorDataEntryTarget_Admin2",
-                                                           new object[] {admin1Id, ProjectId, ReportId, OrganizationId, indicatorId });
+                                                           new object[] {admin1Id, ProjectId, ReportId, orgId, isProjectOwner, indicatorId });
                         rptAdmin2.DataSource = dt;
                         rptAdmin2.DataBind();
                     }
@@ -249,29 +281,20 @@ namespace SRFROWCA.OrsProject
             {
                 tempVal = 0;
                 int.TryParse(Request.QueryString["orgid"].ToString(), out tempVal);
-
                 OrganizationId = tempVal > 0 ? tempVal : UserInfo.Organization;
-                if (OrganizationId > 0)
-                {
-                    SetReportId();
-                    using (ORSEntities db = new ORSEntities())
-                    {
-                        var org = db.Organizations.FirstOrDefault(x => x.OrganizationId == OrganizationId);
-                        lblReportingOrg.Text = "Reporting Organization: " + org.OrganizationAcronym;
-                    }
-                }
             }
         }
 
         private void SetReportId()
         {
+            int orgId = RC.GetSelectedIntVal(ddlOrgs);
             int monthId = RC.GetSelectedIntVal(ddlMonth);
             using (ORSEntities db = new ORSEntities())
             {
                 Report r = db.Reports.Where(x => x.ProjectId == ProjectId
                                             && x.YearId == (int)RC.Year._Current
                                             && x.MonthId == monthId
-                                            && x.OrganizationId == OrganizationId).SingleOrDefault();
+                                            && x.OrganizationId == orgId).SingleOrDefault();
                 ReportId = r != null ? r.ReportId : 0;
             }
         }
@@ -302,11 +325,14 @@ namespace SRFROWCA.OrsProject
             }
 
             DataTable dt = new DataTable();
+            int orgId = RC.GetSelectedIntVal(ddlOrgs);
+            bool isProjectOwner = orgId == OrganizationId;
 
             if (emgClusterId == (int)RC.ClusterSAH2015.MS)
-                dt = DBContext.GetData("GetMSRefProjectIndicatorsDataEntry", new object[] { emgSecClusterId, ProjectId, RC.SelectedSiteLanguageId });
+                dt = DBContext.GetData("GetMSRefProjectIndicatorsDataEntry", new object[] { emgSecClusterId, ProjectId, orgId, isProjectOwner,
+                                                                                                                        RC.SelectedSiteLanguageId });
             else
-                dt = DBContext.GetData("GetProjectIndicatorsDataEntry", new object[] { ProjectId, RC.SelectedSiteLanguageId });
+                dt = DBContext.GetData("GetProjectIndicatorsDataEntry", new object[] { ProjectId, orgId, isProjectOwner, RC.SelectedSiteLanguageId });
 
             if (dt.Rows.Count <= 0)
             {
@@ -453,17 +479,24 @@ namespace SRFROWCA.OrsProject
 
         private void SaveReportMainInfo()
         {
+            int orgId = RC.GetSelectedIntVal(ddlOrgs);
             int yearId = (int)RC.Year._Current;
             int monthId = RC.GetSelectedIntVal(ddlMonth);
             int reportingYear = 2016;
             string reportName = lblProjectCode.Text + " (" + ddlMonth.SelectedItem.Text + "16)";
-            ReportId = DBContext.Add("InsertReport2015", new object[] { yearId, monthId, ProjectId, OrganizationId, 
+            ReportId = DBContext.Add("InsertReport2015", new object[] { yearId, monthId, ProjectId, orgId, 
                                                                         RC.GetCurrentUserId, reportName, reportingYear, DBNull.Value });
         }
 
         private void UpdateReportUpdatedDate()
         {
             DBContext.Update("UpdateReportUpdatedDate", new object[] { ReportId, RC.GetCurrentUserId, DBNull.Value });
+        }
+
+        protected void ddlOrgs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SetReportId();
+            PopulateIndicators();
         }
 
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)

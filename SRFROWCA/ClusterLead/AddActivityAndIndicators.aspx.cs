@@ -142,6 +142,10 @@ namespace SRFROWCA.ClusterLead
                 ctl.ddlCalculationMethod.SelectedValue = calMethod.ToString();
             }
 
+            bool isCP = false;
+            bool.TryParse(dt.Rows[i]["IsChildProtection"].ToString(), out isCP);
+            ctl.cbCP.Checked = isCP;
+
             int indicatorId = 0;
             int.TryParse(dt.Rows[i]["IndicatorId"].ToString(), out indicatorId);
             ctl.hfIndicatorId.Value = indicatorId.ToString();

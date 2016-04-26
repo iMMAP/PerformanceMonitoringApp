@@ -159,7 +159,7 @@
 
                 <div id="scrolledGridView" style="overflow-x: auto; width: 100%;">
                     <asp:GridView ID="gvKeyFigures" runat="server" AutoGenerateColumns="False" OnRowDataBound="gvKeyFigures_RowDataBound"
-                        HeaderStyle-BackColor="ButtonFace" AllowPaging="true" PageSize="50" OnPageIndexChanging="gvKeyFigures_PageIndexChanging"
+                        HeaderStyle-BackColor="ButtonFace" AllowPaging="true" PageSize="40" OnPageIndexChanging="gvKeyFigures_PageIndexChanging"
                         CssClass="imagetable" Width="100%" OnSorting="gvKeyFigures_Sorting" AllowSorting="true" AllowCustomPaging="true"
                         EmptyDataText="There are no key figures available!">
                         <PagerSettings Mode="NumericFirstLast" />

@@ -1,23 +1,26 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="ClusterDataEntry.aspx.cs" Inherits="SRFROWCA.ClusterLead.ClusterDataEntry" %>
 
 <asp:Content ID="cntHeadClusterDataEntry" ContentPlaceHolderID="HeadContent" runat="server">
-    <script src="../assets/orsjs/jquery.wholenumber.js" type="text/javascript"></script>
+    
     <script type="text/javascript">
 
         $(function () {
+            
             var prm = Sys.WebForms.PageRequestManager.getInstance();
             prm.add_endRequest(function () {
                 $(".numeric1").wholenumber();
 
-                $.widget("ui.tooltip", $.ui.tooltip, {
-                    options: {
-                        content: function () {
-                            return $(this).prop('title');
-                        }
-                    }
-                });
-                $('.tooltip2').tooltip();
+                //$.widget("ui.tooltip", $.ui.tooltip, {
+                //    options: {
+                //        content: function () {
+                //            return $(this).prop('title');
+                //        }
+                //    }
+                //});
+                //$('.tooltip2').tooltip();
             });
+
+            
         });
 
     </script>

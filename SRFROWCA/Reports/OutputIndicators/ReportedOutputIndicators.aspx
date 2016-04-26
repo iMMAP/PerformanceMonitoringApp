@@ -2,7 +2,7 @@
 
 <%@ Register Assembly="DropDownCheckBoxes" Namespace="Saplin.Controls" TagPrefix="cc" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-     <%@ Register Assembly="DropDownCheckBoxes" Namespace="Saplin.Controls" TagPrefix="cc" %>
+     
     <style>
         .ddlWidth {
             width: 270px;
@@ -118,7 +118,7 @@
                 <div class="table-responsive">
                     <div style="overflow-x: auto; width: 100%">
                         <asp:GridView ID="gvClusterReports" Width="100%" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False"
-                            AllowSorting="True" DataKeyNames="SiteLanguageId" AllowPaging="true" AllowCustomPaging="true" PageSize="50"
+                            AllowSorting="True" DataKeyNames="SiteLanguageId" AllowPaging="true" AllowCustomPaging="true" PageSize="30"
                             ShowHeader="true" OnRowDataBound="gvClusterReports_RowDataBound" OnPageIndexChanging="gvClusterReports_PageIndexChanging"
                             OnSorting="gvClusterReports_Sorting" CssClass="imagetable">
                             <EmptyDataTemplate>
@@ -143,6 +143,7 @@
                                 <asp:BoundField ItemStyle-Width="30%" DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator" meta:resourcekey="BoundFieldResource6"></asp:BoundField>
                                 <asp:BoundField DataField="Unit" HeaderText="Unit" SortExpression="Unit" meta:resourcekey="BoundFieldResource8"></asp:BoundField>
                                 <asp:BoundField DataField="Month" HeaderText="Month" SortExpression="Month"></asp:BoundField>
+                                <asp:BoundField DataField="AchievedLocation" HeaderText="Location" SortExpression="AchievedLocation"></asp:BoundField>
                                 <asp:TemplateField ItemStyle-Width="8%" HeaderText="Target Total" ItemStyle-HorizontalAlign="Right">
                                     <ItemTemplate>
                                         <asp:Label ID="lblTarget" runat="server" Text=' <%# Eval("TargetTotal")%>'></asp:Label>

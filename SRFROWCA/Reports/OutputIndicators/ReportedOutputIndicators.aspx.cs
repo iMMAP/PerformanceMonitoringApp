@@ -240,11 +240,15 @@ namespace SRFROWCA.Reports.OutputIndicators
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                ObjPrToolTip.RegionalIndicatorIcon(e, 15);
-                ObjPrToolTip.CountryIndicatorIcon(e, 16);
+                ObjPrToolTip.RegionalIndicatorIcon(e, 16);
+                ObjPrToolTip.CountryIndicatorIcon(e, 17);
 
                 UI.SetThousandSeparator(e.Row, "lblTarget");
-                UI.SetThousandSeparator(e.Row, "lblCountryAchieved");
+                UI.SetThousandSeparator(e.Row, "lblTargetMale");
+                UI.SetThousandSeparator(e.Row, "lblTargetFemale");
+                UI.SetThousandSeparator(e.Row, "lblAchieved");
+                UI.SetThousandSeparator(e.Row, "lblAchievedMale");
+                UI.SetThousandSeparator(e.Row, "lblAchievedFemale");
                 UI.SetThousandSeparator(e.Row, "lblCountrySum");
             }
         }

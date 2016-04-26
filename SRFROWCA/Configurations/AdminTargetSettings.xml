@@ -10,7 +10,6 @@
   <AdminTarget Key="1215" CountryID="12" Country="Burkina Faso" ClusterID="15" Cluster="Health" IsTarget="Yes" Level="District" Category="Government" IsMandatory="Yes" />
   <AdminTarget Key="1221" CountryID="12" Country="Burkina Faso" ClusterID="21" Cluster="Logistics" IsTarget="Yes" Level="District" Category="Government" IsMandatory="Yes" />
   <AdminTarget Key="1224" CountryID="12" Country="Burkina Faso" ClusterID="24" Cluster="Multi Sector for Refugees" IsTarget="Yes" Level="District" Category="Government" IsMandatory="Yes" />
-  <AdminTarget Key="1216" CountryID="12" Country="Burkina Faso" ClusterID="16" Cluster="Nutrition" IsTarget="Yes" Level="District" Category="Government" IsMandatory="Yes" />
   <AdminTarget Key="1217" CountryID="12" Country="Burkina Faso" ClusterID="17" Cluster="Protection" IsTarget="Yes" Level="District" Category="Government" IsMandatory="Yes" />
   <AdminTarget Key="1222" CountryID="12" Country="Burkina Faso" ClusterID="22" Cluster="Water Sanitation &amp; Hygiene" IsTarget="Yes" Level="District" Category="Government" IsMandatory="Yes" />
   <AdminTarget Key="1326" CountryID="13" Country="Cameroon" ClusterID="26" Cluster="Camp Coordination And Camp Management" IsTarget="Yes" Level="District" Category="Government" IsMandatory="Yes" />
@@ -115,6 +114,7 @@
   <AdminTarget Key="1416" CountryID="14" Country="Chad" ClusterID="16" Cluster="Nutrition" IsTarget="Yes" Level="District" Category="Health" IsMandatory="Yes" />
   <AdminTarget Key="1820" CountryID="18" Country="Niger" ClusterID="20" Cluster="Food Security" IsTarget="Yes" Level="National" Category="Government" IsMandatory="Yes" />
   <AdminTarget Key="1415" CountryID="14" Country="Chad" ClusterID="15" Cluster="Santé" IsTarget="Yes" Level="Governorate" Category="Government" IsMandatory="Yes" />
-  <AdminTarget Key="1821" CountryID="18" Country="Niger" ClusterID="21" Cluster="Logistics" IsTarget="Yes" Level="National" Category="Government" IsMandatory="Yes" />
+  <AdminTarget Key="1821" CountryID="18" Country="Niger" ClusterID="21" Cluster="Logistique" IsTarget="Yes" Level="National" Category="Government" IsMandatory="Yes" />
   <AdminTarget Key="2016" CountryID="20" Country="Senegal" ClusterID="16" Cluster="Nutrition" IsTarget="Yes" Level="Governorate" Category="Government" IsMandatory="Yes" />
+  <AdminTarget Key="1216" CountryID="12" Country="Burkina Faso" ClusterID="16" Cluster="Nutrition" IsTarget="Yes" Level="Governorate" Category="Health" IsMandatory="Yes" />
 </AdminTargets>

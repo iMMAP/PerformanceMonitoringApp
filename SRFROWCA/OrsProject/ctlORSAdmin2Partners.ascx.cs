@@ -327,14 +327,11 @@ namespace SRFROWCA.OrsProject
                                select l.LocationName).SingleOrDefault();
             }
 
-            int yearId = (int)RC.Year._Current;
             DataTable dt = new DataTable();
             if (emgClusterId == (int)RC.ClusterSAH2015.MS)
-                dt = DBContext.GetData("GetMSRefgFrameworkForProjectPartners", new object[] { emgLocationId, emgClusterId, emgSecClusterId,
-                                                                                    ProjectId, RC.SelectedSiteLanguageId, yearId, PageIndex });
+                dt = DBContext.GetData("GetMSRefgFrameworkForProjectPartners", new object[] { emgSecClusterId, ProjectId, RC.SelectedSiteLanguageId, PageIndex });
             else
-                dt = DBContext.GetData("GetFrameworkForProjectPartners", new object[] { emgLocationId, emgClusterId,
-                                                                                    ProjectId, RC.SelectedSiteLanguageId, yearId, PageIndex});
+                dt = DBContext.GetData("GetFrameworkForProjectPartners", new object[] { ProjectId, RC.SelectedSiteLanguageId, PageIndex});
 
             if (dt.Rows.Count <= 0)
             {
@@ -360,12 +357,12 @@ namespace SRFROWCA.OrsProject
         private void EnableDisableWizardButtons(int numOfRecords)
         {
             btnPrevious.Enabled = PageIndex > 0;
-            if (numOfRecords / (PageIndex + 1) > 4)
+            if (numOfRecords / (PageIndex + 1) > 6)
                 btnNext.Text = "Next >>";
             else
                 btnNext.Text = "Finish";
 
-            int pageTotal = numOfRecords % 4 == 0 ? numOfRecords / 4 : (numOfRecords / 4) + 1;
+            int pageTotal = numOfRecords % 6 == 0 ? numOfRecords / 6 : (numOfRecords / 6) + 1;
             lblPageNumber.Text = "Page " + (PageIndex + 1).ToString() + " Of " + pageTotal.ToString();
         }
 

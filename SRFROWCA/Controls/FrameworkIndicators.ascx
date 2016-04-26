@@ -2,6 +2,9 @@
     Inherits="SRFROWCA.Controls.FrameworkIndicators" %>
 
 <style>
+    .rightAlignCBThis {
+          
+    }
     .accordian {
         height: 20px;
         width: 20px;
@@ -142,7 +145,7 @@
 
                 </div>
             </div>
-            <div style="float: left; width: 17%;">
+            <div style="float: left; width: 12%;">
                 <asp:Label ID="lblUnitCap" runat="server" Text="Unit:*" meta:resourcekey="lblUnitCapResource1"></asp:Label>
                 <div>
                     <asp:DropDownList runat="server" ID="ddlUnit" CssClass="width-90 pullUnits" meta:resourcekey="ddlUnitResource1"></asp:DropDownList>
@@ -165,6 +168,12 @@
 
                     <asp:RequiredFieldValidator ID="frvCalcMethod" runat="server" ErrorMessage="Required" Display="Dynamic"
                         CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCalculationMethod" meta:resourcekey="frvCalcMethodResource1"></asp:RequiredFieldValidator>
+                </div>
+            </div>
+            <div style="float: left; width: 6%; margin-left:15px">
+                <asp:Label ID="lblCP" runat="server" Text="CP" ToolTip="Child Protection Indicator" CssClass="marig-10" Visible="false"></asp:Label>
+                <div>
+                    <asp:CheckBox ID="cbCP" runat="server" Text="Yes" TextAlign="Right" ToolTip="Child Protection Indicator" Visible="false"/>
                 </div>
             </div>
         </div>        

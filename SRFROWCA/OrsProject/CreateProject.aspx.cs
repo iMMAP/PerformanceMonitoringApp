@@ -34,7 +34,7 @@ namespace SRFROWCA.OrsProject
         {
             Save();
             SelctProjectCode();
-            ShowMessage("Project Created!", RC.NotificationType.Success);
+            ShowMessage("Project Created/Saved!", RC.NotificationType.Success);
         }
 
         private void PopulateDropDowns()
@@ -127,6 +127,12 @@ namespace SRFROWCA.OrsProject
                 ltrlProjectCode.Text = dtProject.Rows[0]["ProjectCode"].ToString();
                 txtProjectTitle.Text = dtProject.Rows[0]["ProjectTitle"].ToString();
                 txtProjectObjective.Text = dtProject.Rows[0]["ProjectObjective"].ToString();
+                txtRequestedAmount.Text = dtProject.Rows[0]["RequestedAmount"].ToString();
+                ddlFundingStatus.SelectedValue = dtProject.Rows[0]["FundingStatus"].ToString();
+                txtDonorName.Text = dtProject.Rows[0]["DonorName"].ToString();
+                txtDonor1Contributed.Text = dtProject.Rows[0]["Contribution1Amount"].ToString();
+                txtDonor2Name.Text = dtProject.Rows[0]["DonorName2"].ToString();
+                txtDonor2Contributed.Text = dtProject.Rows[0]["Contribution2Amount"].ToString();
                 txtContactName.Text = dtProject.Rows[0]["ProjectContactName"].ToString();
                 txtContactPhone.Text = dtProject.Rows[0]["ProjectContactPhone"].ToString();
                 txtContactEmail.Text = dtProject.Rows[0]["ProjectContactEmail"].ToString();
@@ -207,6 +213,21 @@ namespace SRFROWCA.OrsProject
                                 DateTime.ParseExact(txtToDate.Text.Trim(), "dd-MM-yyyy", CultureInfo.InvariantCulture) :
                                 (DateTime?)null;
 
+            int? fundingStatus = Convert.ToInt32(ddlFundingStatus.SelectedValue) > 0 ? Convert.ToInt32(ddlFundingStatus.SelectedValue) : (int?)null;
+
+            int val = 0;
+            int.TryParse(txtRequestedAmount.Text.Trim(), out val);
+            int? requestedAmount = val > 0 ? val : (int?)null;
+            val = 0;
+
+            string donorName = !string.IsNullOrEmpty(txtDonorName.Text.Trim()) ? txtDonorName.Text.Trim() : null;
+            int.TryParse(txtDonor1Contributed.Text.Trim(), out val);
+            int? contribution1 = val > 0 ? val : (int?)null;
+
+            string donorName2 = !string.IsNullOrEmpty(txtDonor2Name.Text.Trim()) ? txtDonor2Name.Text.Trim() : null;
+            int.TryParse(txtDonor2Contributed.Text.Trim(), out val);
+            int? contribution2 = val > 0 ? val : (int?)null;
+
             string contactName = !string.IsNullOrEmpty(txtContactName.Text.Trim()) ? txtContactName.Text.Trim() : null;
             string contactPhone = !string.IsNullOrEmpty(txtContactPhone.Text.Trim()) ? txtContactPhone.Text.Trim() : null;
             string contactEmail = !string.IsNullOrEmpty(txtContactEmail.Text.Trim()) ? txtContactEmail.Text.Trim() : null;
@@ -223,13 +244,15 @@ namespace SRFROWCA.OrsProject
                 }
 
                 DBContext.Update("UpdateProjectDetail", new object[] { ProjectId, emgLocationId, emgClusterId, orgId, projOrgId, title, objective, 
-                                                                        startDate, endDate, contactName, contactPhone, contactEmail, userId, 
+                                                                        startDate, endDate, requestedAmount, fundingStatus, donorName, contribution1,
+                                                                        donorName2, contribution2, contactName, contactPhone, contactEmail, userId, 
                                                                         DBNull.Value });
             }
             else
             {
-                ProjectId = DBContext.Add("InsertProject", new object[] { emgClusterId, emgLocationId, orgId, title, objective, startDate, endDate, 
-                                                                              contactName, contactPhone, contactEmail, userId, 
+                ProjectId = DBContext.Add("InsertProject", new object[] { emgClusterId, emgLocationId, orgId, title, objective, startDate, endDate,
+                                                                            requestedAmount, fundingStatus, donorName, contribution1, donorName2, contribution2, 
+                                                                            contactName, contactPhone, contactEmail, userId,
                                                                               year, yearId, DBNull.Value });
             }
 

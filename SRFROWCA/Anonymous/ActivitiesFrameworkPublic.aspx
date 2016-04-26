@@ -122,10 +122,10 @@
         <div class="tablegrid">
             <div style="overflow-x: auto; width: 100%">
                 <asp:GridView ID="gvActivity" runat="server" AutoGenerateColumns="False" AllowSorting="True" AllowPaging="True" Width="100%"
-                    PagerSettings-Mode="NumericFirstLast" OnRowDataBound="gvActivity_RowDataBound"
+                    PagerSettings-Mode="NumericFirstLast" OnRowDataBound="gvActivity_RowDataBound" AllowCustomPaging="true"
                     PagerSettings-Position="Bottom" DataKeyNames="ActivityId,IndicatorDetailId,IndicatorId,IsMigrated"
                     CssClass="imagetable table-hover" OnSorting="gvActivity_Sorting" OnPageIndexChanging="gvActivity_PageIndexChanging"
-                    PageSize="70" ShowHeaderWhenEmpty="True" EmptyDataText="Your filter criteria does not match any indicator!" meta:resourcekey="gvActivityResource1">
+                    PageSize="40" ShowHeaderWhenEmpty="True" EmptyDataText="Your filter criteria does not match any indicator!" meta:resourcekey="gvActivityResource1">
 
                     <PagerSettings Mode="NumericFirstLast"></PagerSettings>
 

@@ -192,7 +192,7 @@ namespace SRFROWCA.ClusterLead
             {
                 ObjPrToolTip.RegionalIndicatorIcon(e, 1);
                 ObjPrToolTip.CountryIndicatorIcon(e, 2);
-                
+                UI.SetThousandSeparator(e.Row, "lblSum");
 
                 HiddenField hfIndicatorId = e.Row.FindControl("hfIndicatorId") as HiddenField;
                 int indicatorId = 0;
@@ -223,8 +223,6 @@ namespace SRFROWCA.ClusterLead
                         }
                     }
                 }
-                ObjPrToolTip.ObjectiveIconToolTip(e, 0);
-                ObjPrToolTip.ObjectiveLableToolTip(e, 0);
             }
         }
 
@@ -246,6 +244,13 @@ namespace SRFROWCA.ClusterLead
                     {
                         int.TryParse(hfCountryId.Value, out countryId);
                     }
+
+                    UI.SetThousandSeparator(e.Item, "lblCountryTargetMaleCluster");
+                    UI.SetThousandSeparator(e.Item, "lblCountryTargetFemaleCluster");
+                    UI.SetThousandSeparator(e.Item, "lblCountryTargetCluster");
+                    UI.SetThousandSeparator(e.Item, "lblCountryTargetMaleProject");
+                    UI.SetThousandSeparator(e.Item, "lblCountryTargetFemaleProject");
+                    UI.SetThousandSeparator(e.Item, "lblCountryTargetProject");
 
                     Repeater rptAdmin1 = e.Item.FindControl("rptAdmin1") as Repeater;
                     if (rptAdmin1 != null)
@@ -282,6 +287,10 @@ namespace SRFROWCA.ClusterLead
                         int.TryParse(hfAdmin1Id.Value, out admin1Id);
                     }
                 }
+
+                UI.SetThousandSeparator(e.Item, "lblAdmin1TargetMaleCluster");
+                UI.SetThousandSeparator(e.Item, "lblAdmin1TargetFemaleCluster");
+                UI.SetThousandSeparator(e.Item, "lblAdmin1TargetCluster");
 
                 GridViewRow row = (e.Item.Parent.Parent.Parent.Parent.Parent) as GridViewRow;
                 if (row != null)

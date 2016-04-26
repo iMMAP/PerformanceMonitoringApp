@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using SRFROWCA.Common;
 using BusinessLogic;
 using System.Data;
+using System.Drawing;
 
 namespace SRFROWCA.ClusterLead
 {
@@ -17,16 +18,9 @@ namespace SRFROWCA.ClusterLead
             if (!IsPostBack)
             {
                 PopulateDropDowns();
-                if (RC.IsCountryAdmin(User))
-                {
-                    PopulateClusters();
-                    LoadReports();
-                }
-                else
-                {
-                    divClusters.Visible = false;
-                    LoadReports();
-                }
+                PopulateClusters();
+                SetDropDownOnRole();
+                LoadReports();
             }
         }
 
@@ -41,10 +35,21 @@ namespace SRFROWCA.ClusterLead
             RC.AddSelectItemInList(ddlClusters, "Select Cluster");
         }
 
+        private void SetDropDownOnRole()
+        {
+            if (RC.IsClusterLead(this.User))
+            {
+                ddlClusters.SelectedValue = UserInfo.EmergencyCluster.ToString();
+                ddlClusters.Enabled = false;
+                ddlClusters.BackColor = Color.LightGray;
+            }
+        }
+
         private void PopulateDropDowns()
         {
+            PopulateProjectCodes();
             PopulateMonths();
-            PopulateOrganizations();            
+            PopulateOrganizations();
         }
 
         private void PopulateMonths()
@@ -64,47 +69,50 @@ namespace SRFROWCA.ClusterLead
         {
             ddlOrganizations.DataValueField = "OrganizationId";
             ddlOrganizations.DataTextField = "OrganizationName";
-            int? orgId = null;
-            ddlOrganizations.DataSource = GetOrganizations(orgId);
+            ddlOrganizations.DataSource = GetOrganizations();
             ddlOrganizations.DataBind();
 
             ListItem item = new ListItem("Select", "0");
             ddlOrganizations.Items.Insert(0, item);
         }
 
-        private object GetOrganizations(int? orgId)
+        private object GetOrganizations()
         {
-            return DBContext.GetData("GetReportOrganizationsForClusterLead", new object[] { UserInfo.EmergencyCountry, UserInfo.EmergencyCluster });
+            int val = RC.GetSelectedIntVal(ddlProjects);
+            int? projectId = val > 0 ? val : (int?)null;
+            val = RC.GetSelectedIntVal(ddlOrganizations);
+            int? orgId = val > 0 ? val : (int?)null;
+            val = RC.GetSelectedIntVal(ddlClusters);
+            int? emgClusterId = val > 0 ? val : UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
+            val = RC.GetSelectedIntVal(ddlMonths);
+            int? monthId = val > 0 ? val : (int?)null;
+            int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
+            int? emgLocationId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
+            return DBContext.GetData("GetReportOrganizationsForClusterLead", new object[] { projectId, orgId, emgLocationId, 
+                                                                                            emgClusterId, monthId, yearId });
         }
 
         private void PopulateProjectCodes()
         {
-            using (ORSEntities db = new ORSEntities())
-            {
-                int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
-                ddlProjects.DataValueField = "ProjectId";
-                ddlProjects.DataTextField = "ProjectCode";
-                DataTable dt = DBContext.GetData("GetReportProjectsForClusterLead", new object[] { UserInfo.EmergencyCountry, 
-                    UserInfo.EmergencyCluster, yearId });
-                ddlProjects.DataSource = dt;
-                ddlProjects.DataBind();
+            ddlProjects.DataValueField = "ProjectId";
+            ddlProjects.DataTextField = "ProjectCode";
 
-
-                ListItem item = new ListItem("Select", "0");
-                ddlProjects.Items.Insert(0, item);
-
-                ddlProjectTitle.DataValueField = "ProjectId";
-                ddlProjectTitle.DataTextField = "ProjectTitle";
-
-                ddlProjectTitle.DataSource = dt;
-                ddlProjectTitle.DataBind();
-
-                ddlProjectTitle.Items.Insert(0, item);
-            }
+            int val = RC.GetSelectedIntVal(ddlOrganizations);
+            int? orgId = val > 0 ? val : (int?)null;
+            val = RC.GetSelectedIntVal(ddlClusters);
+            int? emgClusterId = val > 0 ? val : UserInfo.EmergencyCluster > 0 ? UserInfo.EmergencyCluster : (int?)null;
+            val = RC.GetSelectedIntVal(ddlMonths);
+            int? monthId = val > 0 ? val : (int?)null;
+            int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
+            int? emgLocationId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
+            ddlProjects.DataSource = DBContext.GetData("GetReportProjectsForClusterLead", new object[] { orgId, emgLocationId, emgClusterId, monthId, yearId });
+            ddlProjects.DataBind();
+            if (ddlProjects.Items.Count > 0)
+                ddlProjects.Items.Insert(0, new ListItem("Select", "0"));
         }
 
         private void LoadReports()
-        {            
+        {
             int tempVal = 0;
             if (ddlClusters.Visible)
             {
@@ -115,12 +123,7 @@ namespace SRFROWCA.ClusterLead
             int? emgLocationId = UserInfo.EmergencyCountry > 0 ? UserInfo.EmergencyCountry : (int?)null;
 
             int id = RC.GetSelectedIntVal(ddlProjects);
-
-            if (id == 0)
-            {
-                id = RC.GetSelectedIntVal(ddlProjectTitle);
-            }
-            int? projectID = id == 0 ? (int?)null : id;
+            int? projectId = id == 0 ? (int?)null : id;
 
             id = RC.GetSelectedIntVal(ddlMonths);
             int? monthId = id == 0 ? (int?)null : id;
@@ -128,11 +131,10 @@ namespace SRFROWCA.ClusterLead
             id = RC.GetSelectedIntVal(ddlOrganizations);
             int? orgId = id == 0 ? (int?)null : id;
 
-            bool srpInd = cbCountryIndicators.Checked;
-
             bool? isOPS = rbIsOPSProject.SelectedValue.Equals("-1") ? (bool?)null : Convert.ToBoolean(rbIsOPSProject.SelectedValue);
             int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
-            gvReports.DataSource = DBContext.GetData("GetCountryReports", new object[] { emgLocationId, clusterId, projectID, monthId, orgId, srpInd, isOPS, yearId });
+            gvReports.DataSource = DBContext.GetData("GetCountryReports", new object[] { emgLocationId, clusterId, projectId, 
+                                                                                        monthId, orgId, isOPS, yearId, RC.SelectedSiteLanguageId });
             gvReports.DataBind();
         }
 
@@ -154,28 +156,29 @@ namespace SRFROWCA.ClusterLead
             LoadReports();
         }
 
-        protected void ddl_SelectedIndexChanged(object sender, EventArgs e)
+        protected void ddlProjectCodes_SelectedIndexChanged(object sender, EventArgs e)
         {
+            PopulateOrganizations();
             LoadReports();
         }
 
-        protected void cbCountryIndicators_CheckedChanged(object sender, EventArgs e)
+        protected void ddlOrganizations_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //if (cbCountryIndicators.Checked)
-            //{
-            //    Session["ClusterLeadValidateReportCountryInd"] = 1;
-            //}
-            //else
-            //{
-            //    Session["ClusterLeadValidateReportCountryInd"] = null;
-            //}
+            PopulateProjectCodes();
+            LoadReports();
+        }
 
-            //LoadReports();
+        protected void ddlMonth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PopulateProjectCodes();
+            PopulateOrganizations();
+            LoadReports();
         }
 
         protected void ddlYear_SelectedIndexChanged(object sender, EventArgs e)
         {
             PopulateProjectCodes();
+            PopulateOrganizations();
             LoadReports();
         }
         protected void rbIsOPSProject_SelectedIndexChanged(object sender, EventArgs e)

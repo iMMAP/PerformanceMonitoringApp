@@ -15,7 +15,7 @@ namespace SRFROWCA.OrsProject
         {
             if (!IsPostBack)
             {
-                SetOPSIds();
+                SetGlobalIds();
                 PopulateIndicators();
             }
         }
@@ -270,7 +270,7 @@ namespace SRFROWCA.OrsProject
         #region Methods.
 
         // Get values from querystring and set variables.
-        private void SetOPSIds()
+        private void SetGlobalIds()
         {
             int tempVal = 0;
             if (Request.QueryString["pid"] != null)

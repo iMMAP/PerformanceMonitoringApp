@@ -229,7 +229,7 @@
                                                                         <tr>
                                                                             <td>&nbsp;</td>
                                                                             <td style="padding-top: 20px;">
-                                                                                <asp:Button ID="btnSaveEmailSettings" runat="server" Text="Save Settings" CssClass="btn btn-primary" OnClick="btnSaveEmailSettings_Click" />
+                                                                                <asp:Button ID="btnSaveEmailSettings" runat="server" CausesValidation="false" Text="Save Settings" CssClass="btn btn-primary" OnClick="btnSaveEmailSettings_Click" />
                                                                             </td>
                                                                         </tr>
                                                                         <tr>

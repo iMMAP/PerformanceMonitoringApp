@@ -67,13 +67,22 @@ namespace SRFROWCA.Anonymous {
         protected global::System.Web.UI.WebControls.Label lblCluster;
         
         /// <summary>
-        /// ddlObjectives control.
+        /// ddlMonth control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Saplin.Controls.DropDownCheckBoxes ddlObjectives;
+        protected global::Saplin.Controls.DropDownCheckBoxes ddlMonth;
+        
+        /// <summary>
+        /// ddlFrameworkYear control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlFrameworkYear;
         
         /// <summary>
         /// cbOPSProjects control.
@@ -119,33 +128,6 @@ namespace SRFROWCA.Anonymous {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Saplin.Controls.DropDownCheckBoxes ddlProjects;
-        
-        /// <summary>
-        /// ddlMonth control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Saplin.Controls.DropDownCheckBoxes ddlMonth;
-        
-        /// <summary>
-        /// ddlFrameworkYear control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlFrameworkYear;
-        
-        /// <summary>
-        /// ltrlValidated control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltrlValidated;
         
         /// <summary>
         /// cbValidated control.

@@ -1,117 +1,103 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ClusterDataEntry16.aspx.cs" Inherits="SRFROWCA.ClusterLead.ClusterDataEntry16" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style>
-    .page-content {
-        margin: 0;
-        padding: 8px 12px 24px;
-    }
+        .page-content {
+            margin: 0;
+            padding: 8px 12px 24px;
+        }
 
-    .widget-main {
-        padding: 2px;
-    }
+        .widget-main {
+            padding: 2px;
+        }
 
-    table.imagetable2 td {
-        padding: 2px 0px 2px 0px;
-    }
+        table.imagetable2 td {
+            padding: 2px 0px 2px 0px;
+        }
 
-    .padding1 {
-        padding: 2px;
-    }
+        .padding1 {
+            padding: 2px;
+        }
 
-    table.imagetable2 td {
-        padding: 2px 0px 2px 0px;
-    }
+        table.imagetable2 td {
+            padding: 2px 0px 2px 0px;
+        }
 
-    .padding1 {
-        padding: 2px;
-    }
+        .padding1 {
+            padding: 2px;
+        }
 
-    .lblnotarget {
-        color: red;
-        font-weight: bold;
-    }
+        .lblnotarget {
+            color: red;
+            font-weight: bold;
+        }
 
-    .details1 {
-        display: none;
-    }
+        .details1 {
+            display: none;
+        }
 
-    .txtalign {
-        text-align: right;
-    }
+        .txtalign {
+            text-align: right;
+        }
 
-    .details0 {
-        display: none;
-    }
+        .details0 {
+            display: none;
+        }
 
-    #MainContent_cblLocations td {
-        padding: 0 40px 0 0;
-    }
+        #MainContent_cblLocations td {
+            padding: 0 40px 0 0;
+        }
 
-    textarea, input[type="text"] {
-        border: 1px solid #D5D5D5;
-        border-radius: 0 !important;
-        box-shadow: none !important;
-        font-family: inherit;
-        font-size: 11px;
-        line-height: 1.2;
-        padding: 2px 1px;
-        transition-duration: 0.1s;
-        text-align: right;
-        width: 70px;
-    }
+        textarea, input[type="text"] {
+            border: 1px solid #D5D5D5;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            font-family: inherit;
+            font-size: 11px;
+            line-height: 1.2;
+            padding: 2px 1px;
+            transition-duration: 0.1s;
+            text-align: right;
+            width: 70px;
+        }
 
-    .commentstext {
-        border: 1px solid #D5D5D5;
-        border-radius: 0 !important;
-        box-shadow: none !important;
-        font-family: inherit;
-        font-size: 12px;
-        line-height: 1.2;
-        padding: 0 0;
-        transition-duration: 0.1s;
-        text-align: left;
-    }
+        .commentstext {
+            border: 1px solid #D5D5D5;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            font-family: inherit;
+            font-size: 12px;
+            line-height: 1.2;
+            padding: 0 0;
+            transition-duration: 0.1s;
+            text-align: left;
+        }
 
-    .langlinks {
-        color: white;
-    }
-</style>
-<script src="../assets/orsjs/jquery.numeric.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-    //var needToConfirm = true;
-    //window.onbeforeunload = confirmExit;
-    //function confirmExit() {
-    //    if (needToConfirm) {
-    //        var message = '';
-    //        var e = e || window.event;
-    //        // For IE and Firefox prior to version 4
-    //        if (e) {
-    //            e.returnValue = message;
-    //        }
-    //        // For Safari
-    //        return message;
-    //    }
-    //}
+        .langlinks {
+            color: white;
+        }
+    </style>
 
+    <script type="text/javascript">
 
-    $(function () {
+        $(function () {
 
-        $(".numeric1").wholenumber();
-        $('.showDetails1').click(function () {
-            $(this).parent().parent().next('tr.details1').toggle();
-            $(this).attr('src', ($(this).attr('src') == '../assets/orsimages/plus.png' ?
-                                                         '../assets/orsimages/minus.png' :
-                                                          '../assets/orsimages/plus.png'))
+            $(".numeric1").wholenumber();
+            $('.showDetails1').click(function () {
+                $(this).parent().parent().next('tr.details1').toggle();
+                $(this).attr('src', ($(this).attr('src') == '../assets/orsimages/plus.png' ?
+                                                             '../assets/orsimages/minus.png' :
+                                                              '../assets/orsimages/plus.png'))
+            });
+
+            $('.showDetails0').click(function () {
+                $(this).parent().parent().parent().parent().find('tr.details0').toggle();
+                $(this).attr('src', ($(this).attr('src') == '../assets/orsimages/plus.png' ?
+                                                             '../assets/orsimages/minus.png' :
+                                                              '../assets/orsimages/plus.png'))
+            });
         });
-
-        $('.showDetails0').click(function () {
-            $(this).parent().parent().parent().parent().find('tr.details0').toggle();
-            $(this).attr('src', ($(this).attr('src') == '../assets/orsimages/plus.png' ?
-                                                         '../assets/orsimages/minus.png' :
-                                                          '../assets/orsimages/plus.png'))
-        });
-    });
-</script>
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="page-content">
@@ -130,14 +116,16 @@
                                         <table border="0" style="width: 98%; margin: 0px 10px 0px 20px">
                                             <tr>
                                                 <td>
-                                                    <label><asp:Label runat="server" ID="lblCountry" Text="Country:"></asp:Label></label>
+                                                    <label>
+                                                        <asp:Label runat="server" ID="lblCountry" Text="Country:"></asp:Label></label>
                                                 </td>
                                                 <td>
                                                     <asp:DropDownList AutoPostBack="true" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" runat="server" ID="ddlCountry" Width="270">
                                                     </asp:DropDownList>
                                                 </td>
                                                 <td>
-                                                    <label><asp:Label runat="server" ID="lblCluster" Text="Cluster:"></asp:Label></label>
+                                                    <label>
+                                                        <asp:Label runat="server" ID="lblCluster" Text="Cluster:"></asp:Label></label>
                                                 </td>
                                                 <td>
                                                     <asp:DropDownList AutoPostBack="true" runat="server" OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged" ID="ddlCluster" Width="270">
@@ -153,11 +141,11 @@
                                                 <td>
                                                     <asp:DropDownList ID="ddlMonth" AutoPostBack="true" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged" runat="server">
                                                     </asp:DropDownList>
-                                                   
+
                                                 </td>
                                                 <td></td>
                                                 <td class="pull-right">
-                                                    <asp:Button runat="server" ID="btnSaveAll" Text="Save" class="btn btn-primary btn-sm" 
+                                                    <asp:Button runat="server" ID="btnSaveAll" Text="Save" class="btn btn-primary btn-sm"
                                                         OnClick="btnSaveAll_Click" OnClientClick="needToConfirm = false;" />
                                                 </td>
                                             </tr>
@@ -171,7 +159,7 @@
                 </td>
             </tr>
         </table>
-         <div id="scrolledGridView" style="overflow-x: auto; width: 100%">
+        <div id="scrolledGridView" style="overflow-x: auto; width: 100%">
             <asp:GridView ID="gvIndicators" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True"
                 HeaderStyle-BackColor="ButtonFace" DataKeyNames="ClusterIndicatorId,UnitId" CssClass="imagetable"
                 Width="100%" OnRowDataBound="gvIndicators_RowDataBound">
@@ -189,7 +177,6 @@
                     <asp:TemplateField ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden">
                         <ItemTemplate>
                             <asp:HiddenField ID="hfIndicatorId" runat="server" Value='<%#Eval("ClusterIndicatorID")%>' />
-                            <asp:Label ID="lblClusterIndicatorID" runat="server" Text='<%# Eval("ClusterIndicatorID") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField ItemStyle-Width="4%" ItemStyle-HorizontalAlign="Center">

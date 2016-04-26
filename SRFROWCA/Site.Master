@@ -116,10 +116,10 @@
                                 <asp:Localize ID="localMainProjects" runat="server" Text="Projects" meta:resourcekey="localCLProjectListingMainResource1"></asp:Localize>
                             </span></a>
                         </li>
-                        <li id="liDataEntry" runat="server"><a href="~/Pages/AddActivities.aspx" id="menuDataEntry"
+                        <%--<li id="liDataEntry" runat="server"><a href="~/Pages/AddActivities.aspx" id="menuDataEntry"
                             runat="server"><i class="icon-list-alt"></i><span class="menu-text">
                                 <asp:Localize ID="localDataEntry" runat="server" Text="Data Entry" meta:resourcekey="localDataEntryResource1"></asp:Localize></span>
-                        </a></li>
+                        </a></li>--%>
                         <%--<li id="liManageActivity" runat="server"><a href="~/Pages/ManageActivities.aspx"
                             id="menuManageActivities" runat="server"><i class="icon-list-alt"></i><span class="menu-text">
                                 <asp:Localize ID="localManageActivities" runat="server" Text="Manage Activities" meta:resourcekey="localManageActivitiesResource1"></asp:Localize></span> </a></li>--%>
@@ -152,7 +152,7 @@
                                             <asp:Localize ID="Localize6" runat="server" Text="Output Data Entry 2016" meta:resourcekey="localCLFOutputDataEntry16"></asp:Localize>
                                         </span></a></li>
 
-                                        <li id="liIndicatorReport" runat="server"><a href="<%=BaseURL %>/ClusterLead/ClusterReports.aspx"><span class="menu-text">
+                                        <li id="liIndicatorReport" runat="server"><a href="<%=BaseURL %>/Reports/OutputIndicators/ReportedOutputIndicators15.aspx"><span class="menu-text">
                                             <asp:Localize ID="localClFOutputDataReport" runat="server" Text="Output Report 2015" meta:resourcekey="localClFOutputDataReport"></asp:Localize>
                                         </span></a></li>
                                         <li id="liIndicatorReport16" runat="server"><a href="<%=BaseURL %>/Reports/OutputIndicators/ReportedOutputIndicators.aspx"><span class="menu-text">
@@ -169,7 +169,7 @@
                             </ul>
                         </li>
 
-                        <li id="liOutputIndReportPublic" runat="server"><a href="<%=BaseURL %>/Anonymous/OutputIndicatorReport.aspx"><i class="icon-list-alt"></i><span class="menu-text">
+                        <li id="liOutputIndReportPublic" runat="server"><a href="<%=BaseURL %>/Reports/OutputIndicators/ReportedOutputIndicators15.aspx"><i class="icon-list-alt"></i><span class="menu-text">
                             <asp:Localize ID="localOutputIndReportPublic" runat="server" Text="Output Report 2015" meta:resourcekey="localOutputIndReportPublic"></asp:Localize>
                         </span></a></li>
                         <li id="liOutputIndReportPublic16" runat="server"><a href="<%=BaseURL %>/Reports/OutputIndicators/ReportedOutputIndicators.aspx"><i class="icon-list-alt"></i><span class="menu-text">
@@ -262,7 +262,7 @@
                             id="menuProjectSummary"><i class="icon-table"></i><span class="menu-text">
                                 <asp:Localize ID="localProgressSummary" runat="server" Text="Progress Summary" meta:resourcekey="localProgressSummary"></asp:Localize></span>
                         </a></li>
-                        <li><a href="<%=BaseURL %>/reports/IndicatorTargetByProjectStatus.aspx"><i class="icon-list"></i><span class="menu-text">OPS Targets</span> </a></li>
+                        
                         <li id="liMaps" runat="server"><a href='<%=BaseURL%>/Admin/CountryMapsListing.aspx'
                             id="menuMaps"><i class="icon-table"></i><span class="menu-text">
                                 <asp:Localize ID="Localize4" runat="server" Text="Manage Maps"></asp:Localize></span>
@@ -327,7 +327,7 @@
     <%--<script src="<%# BaseURL %>/assets/js/jquery-ui.min.js"></script>--%>
     <%--<script src="<%# BaseURL %>/assets/js/jquery.slimscroll.min.js"></script>--%>
     <script src="<%# BaseURL %>/assets/js/ace.min.js"></script>
-    <%--<script src="<%# BaseURL %>/assets/orsjs/jquery.wholenumber.js" type="text/javascript"></script>--%>
+    <script src="<%# BaseURL %>/assets/orsjs/jquery.wholenumber.js" type="text/javascript"></script>
 
     <script>
         // Keep the session alive

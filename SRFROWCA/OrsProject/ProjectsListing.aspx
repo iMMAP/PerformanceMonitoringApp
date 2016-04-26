@@ -155,7 +155,7 @@
                                                     <td>
                                                         <label>
                                                             <asp:Label ID="lblCaptionYear" runat="server"
-                                                                Text="Yea:">
+                                                                Text="Year:">
                                                             </asp:Label>
                                                         </label>
                                                     </td>
@@ -263,7 +263,7 @@
                         EmptyDataText="Your filter criteria does not match any project!" Width="100%"
                         OnRowCommand="gvProjects_RowCommand" OnSorting="gvProjects_Sorting" OnRowDataBound="gvProjects_RowDataBound"
                         OnPageIndexChanging="gvProjects_PageIndexChanging"
-                        DataKeyNames="ProjectId,ProjectOrganizationId,OrganizationId,IsOPS,EmergencyLocationId"
+                        DataKeyNames="ProjectId,ProjectOrganizationId,OrganizationId,IsOPS,EmergencyLocationId,EmergencyClusterId"
                         meta:resourcekey="gvProjectsResource1">
                          <PagerSettings Mode="NumericFirstLast" />
                         <RowStyle CssClass="istrow" />
@@ -286,8 +286,14 @@
                                         Text='<%# Eval("ProjectShortTitle") %>' ToolTip='<%# Eval("ProjectTitle") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:BoundField DataField="OrganizationName" HeaderText="Organization" SortExpression="OrganizationName"
-                                meta:resourcekey="BoundFieldResource3" ItemStyle-Width="120px"></asp:BoundField>
+                            <asp:TemplateField HeaderText="Organization" SortExpression="OrganizationAcronym" meta:resourcekey="BoundFieldResource3"
+                                ItemStyle-Width="140px" >
+                                <ItemTemplate>
+                                    <asp:Label ID="lblOrganization" runat="server" 
+                                        Text='<%# Eval("OrganizationAcronym") %>' ToolTip='<%# Eval("OrganizationName") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                           
                             <asp:BoundField DataField="ClusterName" HeaderText="Cluster" SortExpression="ClusterName" meta:resourcekey="BoundFieldResource4" />
                             <asp:BoundField DataField="SecCluster" HeaderText="Sub-Set Cluster" SortExpression="SecCluster" meta:resourcekey="BoundFieldResource5" />
 
@@ -314,7 +320,7 @@
                                         Text='<%# Eval("Contact") %>' ToolTip='<%# Eval("Email") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:BoundField DataField="Phone" HeaderText="Phone" meta:resourcekey="BoundFieldResource9" />
+                            <%--<asp:BoundField DataField="Phone" HeaderText="Phone" meta:resourcekey="BoundFieldResource9" />--%>
                             <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderText="PDF" meta:resourcekey="TemplateFieldResource2">
                                 <HeaderTemplate>
                                     <asp:Label ID="lblPDFExportHeader" runat="server" Text="PDF" ToolTip="Export Project (PDF)"></asp:Label>

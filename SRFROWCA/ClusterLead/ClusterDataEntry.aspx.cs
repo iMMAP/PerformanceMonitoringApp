@@ -159,7 +159,7 @@ namespace SRFROWCA.ClusterLead
 
             countryId = RC.GetSelectedIntVal(ddlCountry);
             clusterId = RC.GetSelectedIntVal(ddlCluster);
-            int yearId = (int)RC.Year._2015; ;
+            int yearId = (int)RC.Year._2015; 
             int monthId = Convert.ToInt32(ddlMonth.SelectedValue);            
 
             foreach (GridViewRow row in gvIndicators.Rows)

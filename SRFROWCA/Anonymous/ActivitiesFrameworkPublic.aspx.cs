@@ -202,7 +202,12 @@ namespace SRFROWCA.Anonymous
 
         private void LoadIndicators()
         {
-            gvActivity.DataSource = GetActivities();
+            DataTable dt = GetActivities();
+            if (dt.Rows.Count > 0)
+            {
+                gvActivity.VirtualItemCount = Convert.ToInt32(dt.Rows[0]["VirtualCount"].ToString());
+            }
+            gvActivity.DataSource = dt;
             gvActivity.DataBind();
         }
 
@@ -280,10 +285,14 @@ namespace SRFROWCA.Anonymous
             string search = string.IsNullOrEmpty(txtActivityName.Text) ? null : txtActivityName.Text;
             int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
             int frameworkYear = RC.GetSelectedIntVal(ddlFrameworkYear);
+            int? pageSize = gvActivity.PageSize;
+            int? pageIndex = gvActivity.PageIndex;
 
             return DBContext.GetData("GetAllIndicatorsNew2", new object[] { emergencyLocationId, emergencyClusterId, 
                                                                             emergencyObjectiveId, search, activityId, 
-                                                                            frameworkYear, (int)RC.SelectedSiteLanguageId });
+                                                                            frameworkYear, (int)RC.SelectedSiteLanguageId ,
+                                                                             pageIndex, pageSize  });
+            
         }
 
         private DataTable GetActivitiesForExcel(bool admin2)

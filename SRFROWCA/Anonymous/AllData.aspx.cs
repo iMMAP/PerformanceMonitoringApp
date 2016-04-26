@@ -23,7 +23,6 @@ namespace SRFROWCA.Anonymous
 
             if (!this.User.Identity.IsAuthenticated)
             {
-                ltrlValidated.Visible = false;
                 cbValidated.Visible = false;
                 cbNotValidated.Visible = false;
             }
@@ -146,7 +145,6 @@ namespace SRFROWCA.Anonymous
             PopulateLocations();
             PopulateMonths();
             PopulateOrganizations();
-            PopulateObjectives();
             PopulateProjects();
         }
 
@@ -169,11 +167,6 @@ namespace SRFROWCA.Anonymous
 
             //if (!string.IsNullOrEmpty(orgIDs))
             //    SelectAll(ddlProjects);
-        }
-
-        private void PopulateObjectives()
-        {
-            UI.FillObjectives(ddlObjectives, true, RC.SelectedEmergencyId);
         }
 
         // Populate Clusters drop down.
@@ -294,35 +287,7 @@ namespace SRFROWCA.Anonymous
             return DBContext.GetData("GetOrganizations", new object[] { orgId, projIDs });
         }
 
-        private void ReplaceHTMLTags(DataTable dt)
-        {
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                dt.Rows[i]["Comments"] = StripTagsRegex(Convert.ToString(dt.Rows[i]["Comments"]).Replace("<br>", "\r\n"));
-
-            }
-        }
-
-        private string StripTagsRegex(string source)
-        {
-            return Regex.Replace(source, "<.*?>", string.Empty);
-        }
-
-        private void RemoveColumnsFromDataTable(DataTable dt)
-        {
-            try
-            {
-                dt.Columns.Remove("FundingStatus");
-                dt.Columns.Remove("Admin2");
-                dt.Columns.Remove("ActivityId");
-                dt.Columns.Remove("rnumber");
-                dt.Columns.Remove("ObjectiveId");
-                dt.Columns.Remove("MonthId");
-                dt.Columns.Remove("cnt");
-            }
-            catch { }
-        }
-
+        
         #endregion
 
         #region GridView Methods.
@@ -356,7 +321,6 @@ namespace SRFROWCA.Anonymous
 
                 // rnumber and Cnt colums are not needed in gridview
                 // so remove these two columns from datatable.
-                dt.Columns.Remove("rnumber");
                 dt.Columns.Remove("Cnt");
             }
 
@@ -385,10 +349,7 @@ namespace SRFROWCA.Anonymous
             }
             string clusterIds = RC.GetSelectedValues(ddlClusters);
             string orgIds = RC.GetSelectedValues(ddlOrganizations);
-            string objIds = RC.GetSelectedValues(ddlObjectives);
             string projectIds = RC.GetSelectedValues(ddlProjects);
-            int? fromMonth = null;//!string.IsNullOrEmpty(txtFromDate.Text.Trim()) ? Convert.ToInt32(txtFromDate.Text.Trim().Substring(0, 2)) : (int?)null;
-            int? toMonth = null;//!string.IsNullOrEmpty(txtToDate.Text.Trim()) ? Convert.ToInt32(txtToDate.Text.Trim().Substring(0, 2)) : (int?)null;
             int? funded = cbFunded.Checked ? 1 : (int?)null;
             int? notFunded = cbNotFunded.Checked ? 1 : (int?)null;
             int? isOPS = cbOPSProjects.Checked && cbORSProjects.Checked ? null : cbOPSProjects.Checked ? 1 : cbORSProjects.Checked ? 0 : (int?)null;
@@ -408,11 +369,9 @@ namespace SRFROWCA.Anonymous
             }
 
             int langId = RC.SelectedSiteLanguageId;
-            int emergencyId = RC.SelectedEmergencyId;
             int year = RC.GetSelectedIntVal(ddlFrameworkYear);
-            return new object[] {monthIds, locationIds, clusterIds, orgIds, 
-                                    objIds, projectIds,fromMonth, toMonth, funded, notFunded,
-                                    isOPS, isApproved, pageIndex, pageSize, Convert.ToInt32(SQLPaging), langId, emergencyId, year };
+            return new object[] {monthIds, locationIds, clusterIds, orgIds, projectIds, funded, notFunded,
+                                    isOPS, isApproved, pageIndex, pageSize, Convert.ToInt32(SQLPaging), langId, year };
         }
 
         private string GetSearchCriteria()
@@ -422,7 +381,6 @@ namespace SRFROWCA.Anonymous
             string admin1 = RC.GetItemsText(ddlAdmin1);
             string clusters = RC.GetItemsText(ddlClusters);
             string orgs = RC.GetItemsText(ddlOrganizations);
-            string objs = RC.GetItemsText(ddlObjectives);
             string projects = RC.GetItemsText(ddlProjects);
 
             string criteria = "";
@@ -432,7 +390,6 @@ namespace SRFROWCA.Anonymous
             criteria += MakeSearchCriteriaString("Admin1: ", admin1);
             criteria += MakeSearchCriteriaString("Projects: ", projects);
             criteria += MakeSearchCriteriaString("Months: ", months);
-            criteria += MakeSearchCriteriaString("Objectives: ", objs);
 
             return criteria;
         }
@@ -507,9 +464,6 @@ namespace SRFROWCA.Anonymous
             SQLPaging = PagingStatus.OFF;
             DataTable dt = GetReportData(false);
 
-            RemoveColumnsFromDataTable(dt);
-            ReplaceHTMLTags(dt);
-
             GridView gv = new GridView();
             gv.DataSource = dt;
             gv.DataBind();
@@ -526,60 +480,10 @@ namespace SRFROWCA.Anonymous
 
             SQLPaging = PagingStatus.OFF;
             DataTable dt = GetReportData(false);
-
-            RemoveColumnsFromDataTable(dt);
-            ReplaceHTMLTags(dt);
-
             Response.Write(DataTableToCSV.ToCSV(dt));
             Response.Flush();
             Response.End();
         }
-
-        //private void testexport()
-        //{
-
-        //    Response.Clear();
-
-        //    Response.AddHeader("content-disposition", "attachment; filename=FileName1.xls");
-
-        //    Response.Charset = "";
-
-        //    Response.ContentType = "application/vnd.xls";
-
-        //    System.IO.StringWriter stringWrite = new System.IO.StringWriter();
-
-        //    System.Web.UI.HtmlTextWriter htmlWrite =
-        //    new HtmlTextWriter(stringWrite);
-        //    GridView g = new GridView();
-        //    this.Form.Controls.Add(g);
-
-        //    g.HeaderStyle.BackColor = System.Drawing.Color.Red;
-        //    SQLPaging = PagingStatus.OFF;
-        //    DataTable dt = GetReportData();
-        //    SQLPaging = PagingStatus.ON;
-        //    g.DataSource = dt;
-        //    g.DataBind();
-        //    foreach (GridViewRow i in g.Rows)
-        //    {
-
-        //        foreach (TableCell tc in i.Cells)
-
-        //            tc.Attributes.Add("class", "text");
-
-
-        //    }
-
-        //    g.RenderControl(htmlWrite);
-        //    string style = @"<style> .text { mso-number-format:\@; } </style> ";
-
-        //    Response.Write(style);
-
-        //    Response.Write(stringWrite.ToString());
-
-        //    Response.End();
-
-
-        //}
 
         public override void VerifyRenderingInServerForm(Control control) { }
 

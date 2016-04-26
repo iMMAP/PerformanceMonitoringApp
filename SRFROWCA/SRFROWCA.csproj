@@ -184,6 +184,7 @@
     <Content Include="assets\orsimages\logo.gif" />
     <Content Include="assets\orsimages\map24.png" />
     <Content Include="assets\orsimages\partners2.png" />
+    <Content Include="assets\orsimages\report1.png" />
     <Content Include="assets\orsimages\target1.png" />
     <Content Include="assets\orsjs\ddlslick.js" />
     <Content Include="assets\orsjs\jquery.dataTables.js" />
@@ -194,7 +195,6 @@
     <Content Include="Admin\ConfigSettings.aspx" />
     <Content Include="ClusterLead\ClusterDataEntry.aspx" />
     <Content Include="ClusterLead\ClusterDataEntry16.aspx" />
-    <Content Include="ClusterLead\ClusterReports.aspx" />
     <Content Include="ClusterLead\CountryIndicators.aspx" />
     <Content Include="Admin\EmergencyClusters.aspx" />
     <Content Include="Admin\EmergencyLocations.aspx" />
@@ -214,6 +214,7 @@
     <Content Include="OrsProject\ctlORSAdmin2Report.ascx" />
     <Content Include="OrsProject\ProjectDataEntry.aspx" />
     <Content Include="Reports\OutputIndicators\ReportedOutputIndicators.aspx" />
+    <Content Include="Reports\OutputIndicators\ReportedOutputIndicators15.aspx" />
     <Content Include="Reports\Summary\ProgressSummary.aspx" />
     <Content Include="ClusterLead\ProjectXMLFeeds.aspx" />
     <Content Include="assets\css\ace-fonts.css" />
@@ -477,7 +478,7 @@
       <DependentUpon>ORSDataModel.edmx</DependentUpon>
       <LastGenOutput>ORSDataModel.cs</LastGenOutput>
     </Content>
-    <None Include="Properties\PublishProfiles\Profile1.pubxml" />
+    <None Include="Properties\PublishProfiles\Sahel.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -736,13 +737,6 @@
     <Compile Include="ClusterLead\ClusterDataEntry16.aspx.designer.cs">
       <DependentUpon>ClusterDataEntry16.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ClusterLead\ClusterReports.aspx.cs">
-      <DependentUpon>ClusterReports.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ClusterLead\ClusterReports.aspx.designer.cs">
-      <DependentUpon>ClusterReports.aspx</DependentUpon>
-    </Compile>
     <Compile Include="ClusterLead\CountryIndicators.aspx.cs">
       <DependentUpon>CountryIndicators.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -875,6 +869,13 @@
     </Compile>
     <Compile Include="Reports\OutputIndicators\ReportedOutputIndicators.aspx.designer.cs">
       <DependentUpon>ReportedOutputIndicators.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\OutputIndicators\ReportedOutputIndicators15.aspx.cs">
+      <DependentUpon>ReportedOutputIndicators15.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\OutputIndicators\ReportedOutputIndicators15.aspx.designer.cs">
+      <DependentUpon>ReportedOutputIndicators15.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\Summary\ProgressSummary.aspx.cs">
       <DependentUpon>ProgressSummary.aspx</DependentUpon>

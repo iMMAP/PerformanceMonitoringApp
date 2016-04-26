@@ -450,9 +450,14 @@ namespace SRFROWCA.OrsProject
             int? pageSize = gvProjects.PageSize;
             int? pageIndex = gvProjects.PageIndex;
 
+            int? userOrg = 
+            (RC.IsDataEntryUser(this.User) && orgId > 0 && orgId == UserInfo.Organization) ?
+                UserInfo.Organization : (int?)null;
+            
+
             return DBContext.GetData("GetProjectsListing", new object[] {emgLocationId, emgClusterId, projCode, orgId, 
                                                                             RC.SelectedSiteLanguageId,  yearId, projectStatus, 
-                                                                            secClusterId, isOPS, isFunded, pageIndex, pageSize});
+                                                                            secClusterId, isOPS, isFunded, pageIndex, pageSize, userOrg});
         }
 
 
@@ -481,12 +486,12 @@ namespace SRFROWCA.OrsProject
 
         protected void gvProjects_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-
+            int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
             if (e.Row.RowType == DataControlRowType.Header)
             {
-                if (!this.User.Identity.IsAuthenticated || RC.IsClusterLead(this.User) || RC.IsRegionalClusterLead(this.User))
+                if (!this.User.Identity.IsAuthenticated || RC.IsRegionalClusterLead(this.User) || yearId == (int)RC.Year._2015)
                 {
-                    e.Row.Cells[10].Visible = false;
+                    e.Row.Cells[11].Visible = false;
                     e.Row.Cells[12].Visible = false;
                     e.Row.Cells[13].Visible = false;
                     e.Row.Cells[14].Visible = false;
@@ -498,15 +503,22 @@ namespace SRFROWCA.OrsProject
                 RC.FormatThousandSeperator(e.Row, "lblOriginalRequest");
                 RC.FormatThousandSeperator(e.Row, "lblFundedAmount");
 
-                if (!this.User.Identity.IsAuthenticated || RC.IsClusterLead(this.User) || RC.IsRegionalClusterLead(this.User))
+                if (!this.User.Identity.IsAuthenticated || RC.IsRegionalClusterLead(this.User) || yearId == (int)RC.Year._2015)
                 {
-                    e.Row.Cells[10].Visible = false;
+                    e.Row.Cells[11].Visible = false;
                     e.Row.Cells[12].Visible = false;
                     e.Row.Cells[13].Visible = false;
                     e.Row.Cells[14].Visible = false;
                 }
                 else
                 {
+                    ImageButton deleteButton = e.Row.FindControl("btnDelete") as ImageButton;
+                    if (deleteButton != null)
+                    {
+                        deleteButton.Attributes.Add("onclick", "javascript:return " +
+                        "confirm('Are you sure you want to delete this project?')");
+                    }
+
                     int isOPS = 0;
                     int.TryParse(gvProjects.DataKeys[e.Row.RowIndex]["IsOPS"].ToString(), out isOPS);
                     if (isOPS == 1)
@@ -523,10 +535,25 @@ namespace SRFROWCA.OrsProject
                     int emgLocationId = 0;
                     int.TryParse(gvProjects.DataKeys[e.Row.RowIndex].Values["EmergencyLocationId"].ToString(), out emgLocationId);
 
+                    int emgClusterId = 0;
+                    int.TryParse(gvProjects.DataKeys[e.Row.RowIndex].Values["EmergencyClusterId"].ToString(), out emgClusterId);
+
                     if (RC.IsCountryAdmin(this.User))
                     {
                         if (!(emgLocationId == UserInfo.EmergencyCountry))
                         {
+                            HideFunctionButtons(e.Row, "imgbtnReport");
+                            HideFunctionButtons(e.Row, "imgbtnTargets");
+                            HideFunctionButtons(e.Row, "imgbtnPartners");
+                            HideFunctionButtons(e.Row, "btnEdit");
+                            HideFunctionButtons(e.Row, "btnDelete");
+                        }
+                    }
+                    else if (RC.IsClusterLead(this.User))
+                    {
+                        if (!(emgClusterId == UserInfo.EmergencyCluster && emgLocationId == UserInfo.EmergencyCountry))
+                        {
+                            HideFunctionButtons(e.Row, "imgbtnReport");
                             HideFunctionButtons(e.Row, "imgbtnTargets");
                             HideFunctionButtons(e.Row, "imgbtnPartners");
                             HideFunctionButtons(e.Row, "btnEdit");
@@ -535,6 +562,7 @@ namespace SRFROWCA.OrsProject
                     }
                     else if (!(orgId == UserInfo.Organization && emgLocationId == UserInfo.EmergencyCountry))
                     {
+                        HideFunctionButtons(e.Row, "imgbtnReport");
                         HideFunctionButtons(e.Row, "imgbtnTargets");
                         HideFunctionButtons(e.Row, "imgbtnPartners");
                         HideFunctionButtons(e.Row, "btnEdit");

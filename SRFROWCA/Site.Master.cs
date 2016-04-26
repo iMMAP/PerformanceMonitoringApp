@@ -135,8 +135,8 @@ namespace SRFROWCA
         private void HideAllAuthenticatedMenues()
         {
             bool isShow = false;
-            menuDataEntry.Visible = isShow;
-            liDataEntry.Visible = isShow;
+            //menuDataEntry.Visible = isShow;
+            //liDataEntry.Visible = isShow;
             //menuManageActivities.Visible = isShow;
             //liManageActivity.Visible = isShow;
             liValidateAchievements.Visible = isShow;
@@ -166,8 +166,8 @@ namespace SRFROWCA
         private void ShowUserMenue()
         {
             bool isShow = true;
-            menuDataEntry.Visible = isShow;
-            liDataEntry.Visible = isShow;
+            //menuDataEntry.Visible = isShow;
+            //liDataEntry.Visible = isShow;
             //menuManageActivities.Visible = isShow;
             //liManageActivity.Visible = isShow;
             liBulkImportUser.Visible = isShow;
@@ -286,11 +286,11 @@ namespace SRFROWCA
                 liDashboards.Attributes.Add("class", "active open");
                 PageTitle = "ORS - Achievements";
             }
-            else if (uri == "/Pages/AddActivities.aspx")
-            {
-                PageTitle = "ORS - Data Entry";
-                liDataEntry.Attributes.Add("class", "active");
-            }
+            //else if (uri == "/Pages/AddActivities.aspx")
+            //{
+            //    PageTitle = "ORS - Data Entry";
+            //    liDataEntry.Attributes.Add("class", "active");
+            //}
             else if (uri.Contains("/Pages/ManageProject.aspx"))
             {
                 PageTitle = "ORS - Manage Project";
@@ -310,7 +310,7 @@ namespace SRFROWCA
                 PageTitle = "ORS - Bulk Upload";
                 liBulkImportUser.Attributes.Add("class", "active");
             }
-            else if (uri == "/ClusterLead/ValidateReportList.aspx")
+            else if (uri == "/ClusterLead/ValidateReportList.aspx" || uri == "/ClusterLead/ValidateIndicators.aspx")
             {
                 liValidateAchievements.Attributes.Add("class", "active");
             }
@@ -424,16 +424,14 @@ namespace SRFROWCA
                 liOutputIndicators.Attributes.Add("class", "active open");
                 liIndicatorReporting16.Attributes.Add("class", "active");
             }
-            else if (uri.Contains("ClusterLead/ClusterReports.aspx"))
+            else if (uri.Contains("Reports/OutputIndicators/ReportedOutputIndicators15.aspx"))
             {
-                PageTitle = "ORS - Country Indicators";
                 liClusterFrameworks.Attributes.Add("class", "active open");
                 liOutputIndicators.Attributes.Add("class", "active open");
                 liIndicatorReport.Attributes.Add("class", "active");
             }
             else if (uri.Contains("Reports/OutputIndicators/ReportedOutputIndicators.aspx"))
             {
-                PageTitle = "ORS - Country Indicators";
                 liClusterFrameworks.Attributes.Add("class", "active open");
                 liOutputIndicators.Attributes.Add("class", "active open");
                 liIndicatorReport16.Attributes.Add("class", "active");

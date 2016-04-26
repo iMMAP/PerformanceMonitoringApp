@@ -144,7 +144,7 @@
 
         <div id="scrolledGridView" style="overflow-x: auto; width: 100%;">
             <asp:GridView ID="gvKeyFigures" runat="server" AutoGenerateColumns="False" OnRowCommand="gvKeyFigures_RowCommand"
-                OnRowDataBound="gvKeyFigures_RowDataBound" AllowPaging="true" PageSize="50" OnPageIndexChanging="gvKeyFigures_PageIndexChanging"
+                OnRowDataBound="gvKeyFigures_RowDataBound" AllowPaging="true" PageSize="40" OnPageIndexChanging="gvKeyFigures_PageIndexChanging"
                 HeaderStyle-BackColor="ButtonFace" OnSorting="gvKeyFigures_Sorting" AllowSorting="true" AllowCustomPaging="true"
                 CssClass="imagetable" Width="100%"
                 DataKeyNames="AsOfDate,AsOfDate2,SubCategoryId,CategoryId,CountryId,KeyFigureId"

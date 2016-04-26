@@ -108,7 +108,7 @@ namespace SRFROWCA.Account
             {
                 using (MailMessage mailMsg = new MailMessage())
                 {
-                    mailMsg.From = new MailAddress("orsocharowca@gmail.com");
+                    mailMsg.From = new MailAddress("ors@ocharowca.info", "Sahel - ORS");
                     mailMsg.To.Add(new MailAddress(toEmail));
                     mailMsg.Subject = "ORS Password Change Request";
                     mailMsg.IsBodyHtml = true;
@@ -116,8 +116,9 @@ namespace SRFROWCA.Account
                     Mail.SendMail(mailMsg);
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                string s = ex.ToString();
             }
         }
 
