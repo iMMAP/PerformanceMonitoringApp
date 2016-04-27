@@ -6,7 +6,6 @@
   <Key-1223 CountryID="12" Country="Burkina Faso" ClusterID="23" Cluster="Emergency Telecommunication" DateLimit="12-31-2015" FrameworkCount="50" ActivityCount="25" ClusterCount="4" />
   <Key-1215 CountryID="12" Country="Burkina Faso" ClusterID="15" Cluster="Health" DateLimit="12-31-2015" FrameworkCount="50" ActivityCount="25" ClusterCount="4" />
   <Key-1221 CountryID="12" Country="Burkina Faso" ClusterID="21" Cluster="Logistics" DateLimit="12-31-2015" FrameworkCount="50" ActivityCount="25" ClusterCount="4" />
-  <Key-1224 CountryID="12" Country="Burkina Faso" ClusterID="24" Cluster="Multi Sector for Refugees" DateLimit="12-31-2015" FrameworkCount="50" ActivityCount="25" ClusterCount="4" />
   <Key-1216 CountryID="12" Country="Burkina Faso" ClusterID="16" Cluster="Nutrition" DateLimit="12-31-2015" FrameworkCount="50" ActivityCount="25" ClusterCount="4" />
   <Key-1222 CountryID="12" Country="Burkina Faso" ClusterID="22" Cluster="Water Sanitation &amp; Hygiene" DateLimit="12-31-2015" FrameworkCount="50" ActivityCount="25" ClusterCount="4" />
   <Key-1326 CountryID="13" Country="Cameroon" ClusterID="26" Cluster="Camp Coordination And Camp Management" DateLimit="12-31-2015" FrameworkCount="50" ActivityCount="25" ClusterCount="4" />
@@ -130,4 +129,5 @@
   <Key-1920 CountryID="19" Country="Nigeria" ClusterID="20" Cluster="Food Security" DateLimit="03-31-2016" FrameworkCount="50" ActivityCount="25" ClusterCount="6" />
   <Key-1217 CountryID="12" Country="Burkina Faso" ClusterID="17" Cluster="Protection" DateLimit="12-31-2016" FrameworkCount="50" ActivityCount="25" ClusterCount="4" />
   <Key-1213 CountryID="12" Country="Burkina Faso" ClusterID="13" Cluster="Education" DateLimit="12-31-2016" FrameworkCount="66" ActivityCount="44" ClusterCount="5" />
+  <Key-1224 CountryID="12" Country="Burkina Faso" ClusterID="24" Cluster="Multi Sector for Refugees" DateLimit="06-30-2016" FrameworkCount="50" ActivityCount="25" ClusterCount="4" />
 </ChangeEndSettings>

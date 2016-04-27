@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using BusinessLogic;
+using SRFROWCA.Common;
+using SRFROWCA.Configurations;
+using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using BusinessLogic;
-using SRFROWCA.Common;
-using System.Data;
-using SRFROWCA.Configurations;
-using System.Web.Services;
-using System.Web.Script.Services;
 
 namespace SRFROWCA.Controls
 {
@@ -23,8 +17,6 @@ namespace SRFROWCA.Controls
             {                
                 PopulateUnits(true);
             }
-
-            ToggleCPCheckbox();
 
             string key = this.indCtlEmgLocId.ToString() + this.indCtlEmgClusterId.ToString();
             AdminTargetSettingItems items = RC.AdminTargetSettings(key);
@@ -456,24 +448,6 @@ namespace SRFROWCA.Controls
                 }
             }
         }
-
-        private void ToggleCPCheckbox()
-        {
-            if (Session["ClusterFrameworkSelectedCluster"] != null)
-            {
-                int clusterId = 0;
-                int.TryParse(Session["ClusterFrameworkSelectedCluster"].ToString(), out clusterId);
-                if (clusterId > 0)
-                {
-                    if (clusterId == (int)RC.ClusterSAH2015.PRO)
-                    {
-                        lblCP.Visible = true;
-                        cbCP.Visible = true;
-                    }
-                }
-            }
-        }
-
 
         private int? GetAdminTarget(RepeaterItem item, string controlName)
         {

@@ -158,7 +158,6 @@
         });
 
     </script>
-    <%--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>--%>
     <script type="text/javascript" src="../assets/js/gridviewScroll.min.js"></script>
     <link href="../assets/css/GridviewScroll.css" rel="stylesheet" />
 </asp:Content>

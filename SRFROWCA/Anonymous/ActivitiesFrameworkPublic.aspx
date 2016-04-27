@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ActivitiesFrameworkPublic.aspx.cs" Inherits="SRFROWCA.Anonymous.ActivitiesFrameworkPublic" %>
+
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style>
@@ -9,6 +10,10 @@
             padding: 5px 20px 13px 20px;
             border-radius: 2px;
             background: #ffffff;
+        }
+
+        .mycheckbox {
+            margin-left: 20px;
         }
     </style>
 </asp:Content>
@@ -26,7 +31,7 @@
                                             class="btn btn-sm btn-yellow" causesvalidation="false" title="Excel">
                                             <i class="icon-download"></i>Excel
                                         </button>
-                                        
+
                                         <button runat="server" id="btnExportToWord" onserverclick="btnExportWord_Click"
                                             class="btn btn-sm btn-yellow" causesvalidation="false" title="Word">
                                             <i class="icon-download"></i>Export To Word (2016)
@@ -93,6 +98,8 @@
                                                                     <asp:ListItem Text="2016" Value="12" meta:resourcekey="ListItemResource2"></asp:ListItem>
                                                                     <asp:ListItem Text="2015" Value="11" meta:resourcekey="ListItemResource3"></asp:ListItem>
                                                                 </asp:DropDownList>
+                                                                <asp:CheckBox ID="cbCPActivity" runat="server" Text="CP Activity:" TextAlign="Left" CssClass="mycheckbox"
+                                                                    OnCheckedChanged="ddlActivitySelectedIndexChnaged" AutoPostBack="true" />
                                                             </td>
 
                                                         </tr>
@@ -138,15 +145,15 @@
                             </ItemTemplate>
                             <ItemStyle Width="2%"></ItemStyle>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="Country" HeaderText="Country" SortExpression="Country" ItemStyle-Width="80px" meta:resourcekey="BoundFieldResource1">
-                            <ItemStyle Width="80px"></ItemStyle>
-                        </asp:BoundField>
-                        <asp:BoundField DataField="ClusterName" HeaderText="Cluster" SortExpression="ClusterName" ItemStyle-Width="150px" meta:resourcekey="BoundFieldResource2">
-                            <ItemStyle Width="150px"></ItemStyle>
-                        </asp:BoundField>
-                        <asp:BoundField DataField="ShortObjective" HeaderText="Objective" SortExpression="ShortObjective" ItemStyle-Width="90px" meta:resourcekey="BoundFieldResource3">
-                            <ItemStyle Width="90px"></ItemStyle>
-                        </asp:BoundField>
+                        <asp:BoundField DataField="ObjectiveId" HeaderText="" ItemStyle-Width="1px" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" />
+                        <asp:BoundField DataField="Country" HeaderText="Country" SortExpression="Country" ItemStyle-Width="80px" meta:resourcekey="BoundFieldResource1" />
+                        <asp:BoundField DataField="ClusterName" HeaderText="Cluster" SortExpression="ClusterName" ItemStyle-Width="150px" meta:resourcekey="BoundFieldResource2" />
+                        <asp:TemplateField HeaderStyle-Width="60" ItemStyle-Width="60" >
+                            <ItemTemplate>
+                                <asp:Image ID="imgObjective" runat="server" />
+                                <asp:Image ID="imgCP" ImageUrl="~/assets/orsimages/cp1.png" ToolTip="Child Protection Indicator" runat="server" Visible='<%# Eval("IsChildProtection") %>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:BoundField DataField="Activity" HeaderText="Activity" SortExpression="Activity" meta:resourcekey="BoundFieldResource4" />
                         <asp:BoundField DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator" meta:resourcekey="BoundFieldResource5" />
                         <asp:BoundField DataField="Unit" HeaderText="Unit" SortExpression="Unit" meta:resourcekey="BoundFieldResource6" />

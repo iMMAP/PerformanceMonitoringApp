@@ -111,6 +111,9 @@ namespace SRFROWCA.ClusterLead
             int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
+                ObjPrToolTip.ObjectiveIconToolTip(e, 1);
+                //ObjPrToolTip.ObjectiveLableToolTip(e, 0);
+
                 if (yearId == 11)
                 {
                     divMissingTarget.Visible = false;
@@ -513,10 +516,11 @@ namespace SRFROWCA.ClusterLead
             string search = string.IsNullOrEmpty(txtActivityName.Text) ? null : txtActivityName.Text;
             int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
             int frameworkYear = RC.GetSelectedIntVal(ddlFrameworkYear);
+            bool? isCP = cbCPActivity.Checked ? true : (bool?)null;
 
             return DBContext.GetData("GetAllIndicatorsNew2WithT", new object[] { emergencyLocationId, emergencyClusterId, emergencyObjectiveId, 
                                                                                     search, activityId, frameworkYear, 
-                                                                                    admin2, (int)RC.SelectedSiteLanguageId });
+                                                                                    admin2, isCP, (int)RC.SelectedSiteLanguageId });
         }
         private DataTable GetObjectives()
         {

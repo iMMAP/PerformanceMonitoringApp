@@ -301,5 +301,4 @@
             </ItemTemplate>
         </asp:Repeater>
     </div>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
 </asp:Content>

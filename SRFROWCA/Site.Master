@@ -324,8 +324,7 @@
     <!-- basic scripts -->
     <script src='<%# BaseURL %>/assets/js/ace-extra.min.js'></script>
     <script src="<%# BaseURL %>/assets/js/bootstrap.min.js"></script>
-    <%--<script src="<%# BaseURL %>/assets/js/jquery-ui.min.js"></script>--%>
-    <%--<script src="<%# BaseURL %>/assets/js/jquery.slimscroll.min.js"></script>--%>
+    <script src="<%# BaseURL %>/assets/js/jquery-ui.min.js"></script>
     <script src="<%# BaseURL %>/assets/js/ace.min.js"></script>
     <script src="<%# BaseURL %>/assets/orsjs/jquery.wholenumber.js" type="text/javascript"></script>
 

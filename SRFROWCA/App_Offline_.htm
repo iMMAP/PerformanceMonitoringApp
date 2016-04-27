@@ -2,6 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Site Maintenance</title>
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js"
+            integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ="
+            crossorigin="anonymous"></script>
     <style>
         body {
             text-align: center;
@@ -34,10 +37,42 @@
                 text-decoration: none;
             }
     </style>
+    <script>
+        $(function () {
+            var d1 = new Date();
+            var BigDay = new Date(d1);
+            BigDay.setMinutes(d1.getMinutes() + 30);
+
+            var msPerDay = 24 * 60 * 60 * 1000;
+
+
+            window.setInterval(function () {
+                var today = new Date();
+                var timeLeft = (BigDay.getTime() - today.getTime());
+
+                var e_daysLeft = timeLeft / msPerDay;
+                var daysLeft = Math.floor(e_daysLeft);
+
+                var e_hrsLeft = (e_daysLeft - daysLeft) * 24;
+                var hrsLeft = Math.floor(e_hrsLeft);
+
+                var e_minsLeft = (e_hrsLeft - hrsLeft) * 60;
+                var minsLeft = Math.floor(e_minsLeft);
+
+                var e_secsLeft = (e_minsLeft - minsLeft) * 60;
+                var secsLeft = Math.floor(e_secsLeft);
+
+
+                var timeString = daysLeft + " : " + hrsLeft + " : " + minsLeft + " : " + secsLeft;
+                $('#countdown').html(timeString);
+            }, 1000);
+        })
+    </script>
 </head>
 <body>
     <div class="page-content">
         <article>
+            <h1 id="countdown"></h1>
             <h1>We&rsquo;ll be back soon!</h1>
             <div>
                 <p>Sorry for the inconvenience but we&rsquo;re performing some maintenance at the moment. 
@@ -46,5 +81,6 @@
             </div>
         </article>
     </div>
+    
 </body>
 </html>

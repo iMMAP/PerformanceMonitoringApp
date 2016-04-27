@@ -140,7 +140,7 @@
                 <Columns>
                     <asp:BoundField DataField="ObjectiveId" HeaderText="ObjectiveId" ItemStyle-Width="1px"
                         ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" meta:resourcekey="BoundFieldResource1"></asp:BoundField>
-                    <asp:TemplateField HeaderStyle-Width="30" ItemStyle-Width="30"
+                    <asp:TemplateField HeaderStyle-Width="60" ItemStyle-Width="60"
                         meta:resourcekey="TemplateFieldResource2">
                         <HeaderTemplate>
                             <asp:Label ID="lblObjectiveHeader" runat="server" Text=""></asp:Label>
@@ -148,6 +148,7 @@
                         <ItemTemplate>
                             <asp:HiddenField ID="hfIndicatorId" runat="server" Value='<%#Eval("IndicatorId")%>' />
                             <asp:Image ID="imgObjective" runat="server" meta:resourcekey="imgRindResource1" />
+                            <asp:Image ID="imgCP" ImageUrl="~/assets/orsimages/cp1.png" ToolTip="Child Protection Indicator" runat="server" Visible='<%# Eval("IsChildProtection") %>'  />
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderStyle-Width="250" ItemStyle-Width="250" meta:resourcekey="TemplateFieldResource2">

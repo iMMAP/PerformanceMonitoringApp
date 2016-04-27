@@ -178,6 +178,7 @@
     <Content Include="assets\orsimages\arrowvt.png" />
     <Content Include="assets\orsimages\Calendar16.png" />
     <Content Include="assets\orsimages\cind.png" />
+    <Content Include="assets\orsimages\cp16.png" />
     <Content Include="assets\orsimages\delete16.png" />
     <Content Include="assets\orsimages\duplicate.png" />
     <Content Include="assets\orsimages\edit16.png" />

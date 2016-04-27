@@ -3,23 +3,6 @@
     UICulture="auto" meta:resourcekey="PageResource1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <%--<link href="../assets/css/GridviewScroll.css" rel="stylesheet" />
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="../assets/js/gridviewScroll.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            gridviewScroll();
-        });
-
-        function gridviewScroll() {
-            $('#<%=gvOrganization.ClientID%>').gridviewScroll({
-            width: 600,
-            height: 200
-        });
-    }
-    </script>--%>
-
     <script>
         function popitup() {
             //newwindow = window.open(url, 'name', 'height=700,width=1000', scro);

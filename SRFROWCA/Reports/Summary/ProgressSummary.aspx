@@ -1,7 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ProgressSummary.aspx.cs" Inherits="SRFROWCA.Reports.Summary.ProgressSummary" MasterPageFile="~/Site.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <%-- <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>--%>
     <style>
         .reportTable {
             width: 100%;

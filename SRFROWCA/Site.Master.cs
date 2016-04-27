@@ -235,7 +235,7 @@ namespace SRFROWCA
             liOutputIndReportPublic.Visible = !isShow;
             liOutputIndReportPublic16.Visible = !isShow;
             liContactList.Visible = isShow;
-            liActivitesFrameworkPublic.Visible = isShow;
+            liActivitesFrameworkPublic.Visible = !isShow;
             liBulkImport.Visible = isShow;
         }
 

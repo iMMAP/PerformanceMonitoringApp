@@ -168,15 +168,15 @@
                             </ItemTemplate>
                             <ItemStyle Width="2%"></ItemStyle>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="Country" HeaderText="Country" SortExpression="Country" ItemStyle-Width="80px" meta:resourcekey="BoundFieldResource1">
-                            <ItemStyle Width="80px"></ItemStyle>
-                        </asp:BoundField>
-                        <asp:BoundField DataField="ClusterName" HeaderText="Cluster" SortExpression="ClusterName" ItemStyle-Width="150px" meta:resourcekey="BoundFieldResource2">
-                            <ItemStyle Width="150px"></ItemStyle>
-                        </asp:BoundField>
-                        <asp:BoundField DataField="ShortObjective" HeaderText="Objective" SortExpression="ShortObjective" ItemStyle-Width="90px" meta:resourcekey="BoundFieldResource3">
-                            <ItemStyle Width="90px"></ItemStyle>
-                        </asp:BoundField>
+                        <asp:BoundField DataField="ObjectiveId" HeaderText="" ItemStyle-Width="1px" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" />
+                        <asp:BoundField DataField="Country" HeaderText="Country" SortExpression="Country" ItemStyle-Width="80px" meta:resourcekey="BoundFieldResource1" />
+                        <asp:BoundField DataField="ClusterName" HeaderText="Cluster" SortExpression="ClusterName" ItemStyle-Width="150px" meta:resourcekey="BoundFieldResource2" />
+                        <asp:TemplateField HeaderStyle-Width="60" ItemStyle-Width="60" >
+                        <ItemTemplate>
+                            <asp:Image ID="imgObjective" runat="server" />
+                            <asp:Image ID="imgCP" ImageUrl="~/assets/orsimages/cp1.png" ToolTip="Child Protection Indicator" runat="server" Visible='<%# Eval("IsChildProtection") %>'  />
+                        </ItemTemplate>
+                    </asp:TemplateField>
                         <asp:TemplateField HeaderText="Active Activity" ItemStyle-HorizontalAlign="Center" meta:resourcekey="TemplateFieldResource2">
                             <ItemTemplate>
                                 <asp:CheckBox ID="cbIsActivityActive" runat="server" Checked='<%# Eval("IsActivityActive") %>' OnCheckedChanged="cbActivityActive_Changed" AutoPostBack="True" meta:resourcekey="cbIsActivityActiveResource1" />

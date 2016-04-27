@@ -170,10 +170,10 @@
                         CssClass="error2" InitialValue="0" Text="Required" ControlToValidate="ddlCalculationMethod" meta:resourcekey="frvCalcMethodResource1"></asp:RequiredFieldValidator>
                 </div>
             </div>
-            <div style="float: left; width: 6%; margin-left:15px">
-                <asp:Label ID="lblCP" runat="server" Text="CP" ToolTip="Child Protection Indicator" CssClass="marig-10" Visible="false"></asp:Label>
+            <div style="float: left; width: 6%; margin-left:15px" class="cbCP">
+                <asp:Label ID="lblCP" runat="server" Text="CP" ToolTip="Child Protection Indicator" CssClass="marig-10"></asp:Label>
                 <div>
-                    <asp:CheckBox ID="cbCP" runat="server" Text="Yes" TextAlign="Right" ToolTip="Child Protection Indicator" Visible="false"/>
+                    <asp:CheckBox ID="cbCP" runat="server" Text="Yes" TextAlign="Right" ToolTip="Child Protection Indicator"/>
                 </div>
             </div>
         </div>        

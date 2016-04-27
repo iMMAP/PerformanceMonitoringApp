@@ -7,8 +7,12 @@
     <%@ Register Assembly="DropDownCheckBoxes" Namespace="Saplin.Controls" TagPrefix="cc" %>
     <%--Custom GridView Class to include custom paging functionality.--%>
     <%@ Register Assembly="SRFROWCA" Namespace="SRFROWCA" TagPrefix="cc2" %>
-    
+
     <style>
+        .mycheckbox {
+            margin-left: 20px;
+        }
+
         .ddlWidth {
             width: 100%;
         }
@@ -159,11 +163,9 @@
                                                                                         </cc:DropDownCheckBoxes>
                                                                                     </td>
                                                                                 </tr>
-                                                                                
+
                                                                                 <tr>
-                                                                                    <td>
-                                                                                        
-                                                                                    </td>
+                                                                                    <td></td>
                                                                                     <td>
                                                                                         <span>
                                                                                             <asp:CheckBox ID="cbValidated" runat="server" Text="Validated" />
@@ -211,13 +213,13 @@
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                    <td>
-                                                                                        
-                                                                                    </td>
+                                                                                    <td></td>
                                                                                     <td>
                                                                                         <span>
                                                                                             <asp:CheckBox ID="cbFunded" runat="server" Text="Funded" />
                                                                                             <asp:CheckBox ID="cbNotFunded" runat="server" Text="Not Funded" /></span>
+                                                                                        <asp:CheckBox ID="cbCPActivity" runat="server" Text="CP Activity:" TextAlign="Left" CssClass="mycheckbox"
+                                                                                            OnCheckedChanged="ddl_SelectedIndexChanged" AutoPostBack="true" />
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -290,13 +292,13 @@
                                         <asp:Label ID="lblTarget" runat="server" Text=' <%# Eval("TargetTotal")%>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                               
-                                <asp:TemplateField  HeaderText="Achieved Total" ItemStyle-HorizontalAlign="Right">
+
+                                <asp:TemplateField HeaderText="Achieved Total" ItemStyle-HorizontalAlign="Right">
                                     <ItemTemplate>
                                         <asp:Label ID="lblAchieved" runat="server" Text=' <%# Eval("AchievedTotal")%>'></asp:Label>
                                     </ItemTemplate>
-                                </asp:TemplateField>                               
-                                <asp:TemplateField  HeaderText="Running Value" ItemStyle-HorizontalAlign="Right" SortExpression="RunningValue">
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Running Value" ItemStyle-HorizontalAlign="Right" SortExpression="RunningValue">
                                     <ItemTemplate>
                                         <asp:Label ID="lblCountrySum" runat="server" Text=' <%# Eval("RunningValue")%>'></asp:Label>
                                     </ItemTemplate>
@@ -304,7 +306,7 @@
                                 <asp:BoundField DataField="CalculationMethod" HeaderText="Calculation Method" SortExpression="CalculationMethod" />
                                 <asp:TemplateField HeaderText="Appr" SortExpression="IsApproved">
                                     <ItemTemplate><%# (Boolean.Parse(Eval("IsApproved").ToString())) ? "Yes" : "No" %></ItemTemplate>
-                                </asp:TemplateField>                               
+                                </asp:TemplateField>
                             </Columns>
                         </cc2:PagingGridView>
                     </div>
@@ -312,5 +314,4 @@
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
-    <%--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>--%>
 </asp:Content>

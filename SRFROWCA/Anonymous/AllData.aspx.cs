@@ -368,10 +368,12 @@ namespace SRFROWCA.Anonymous
                 pageIndex = GridPageIndex;
             }
 
+            bool? isCP = cbCPActivity.Checked ? true : (bool?)null;
+
             int langId = RC.SelectedSiteLanguageId;
             int year = RC.GetSelectedIntVal(ddlFrameworkYear);
             return new object[] {monthIds, locationIds, clusterIds, orgIds, projectIds, funded, notFunded,
-                                    isOPS, isApproved, pageIndex, pageSize, Convert.ToInt32(SQLPaging), langId, year };
+                                    isOPS, isApproved, isCP, pageIndex, pageSize, Convert.ToInt32(SQLPaging), langId, year };
         }
 
         private string GetSearchCriteria()

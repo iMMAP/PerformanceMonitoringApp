@@ -331,9 +331,9 @@ namespace SRFROWCA.ClusterLead
                 {
                     int indicatorId = 0;
                     int unitId = 0;
-                    Label lblIndicator = row.FindControl("lblClusterIndicatorID") as Label;
-                    if (lblIndicator != null)
-                        int.TryParse(lblIndicator.Text, out indicatorId);
+                    HiddenField hfIndicator = row.FindControl("hfIndicatorId") as HiddenField;
+                    if (hfIndicator != null)
+                        int.TryParse(hfIndicator.Value.ToString(), out indicatorId);
 
                     Label lblUnitId = row.FindControl("lblUnitId") as Label;
                     if (lblUnitId != null)

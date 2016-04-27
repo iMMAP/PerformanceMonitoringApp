@@ -260,6 +260,20 @@
                     $('#<%=txtActivityEng.ClientID%>').val(ui.item.valuealt)
                 }
             });
+
+            if ($('#<%=ddlCluster.ClientID%>').val() === '17') {
+                $('.cbCP').removeClass('hidden');
+            } else {
+                $('.cbCP').addClass('hidden');
+            }
+
+            $('#<%=ddlCluster.ClientID%>').change(function () {
+                if ($(this).val() === '17') {
+                    $('.cbCP').removeClass('hidden');
+                } else {
+                    $('.cbCP').addClass('hidden');
+                }
+            });
         });
     </script>
 </asp:Content>

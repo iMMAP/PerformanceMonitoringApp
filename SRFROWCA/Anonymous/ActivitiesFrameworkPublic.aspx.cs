@@ -85,6 +85,7 @@ namespace SRFROWCA.Anonymous
             int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
+                ObjPrToolTip.ObjectiveIconToolTip(e, 1);
                 Label lblTarget = e.Row.FindControl("lblIndTarget") as Label;
                 if (lblTarget != null)
                 {
@@ -285,12 +286,13 @@ namespace SRFROWCA.Anonymous
             string search = string.IsNullOrEmpty(txtActivityName.Text) ? null : txtActivityName.Text;
             int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
             int frameworkYear = RC.GetSelectedIntVal(ddlFrameworkYear);
+            bool? isCP = cbCPActivity.Checked ? true : (bool?)null;
             int? pageSize = gvActivity.PageSize;
             int? pageIndex = gvActivity.PageIndex;
 
             return DBContext.GetData("GetAllIndicatorsNew2", new object[] { emergencyLocationId, emergencyClusterId, 
                                                                             emergencyObjectiveId, search, activityId, 
-                                                                            frameworkYear, (int)RC.SelectedSiteLanguageId ,
+                                                                            frameworkYear, isCP, (int)RC.SelectedSiteLanguageId ,
                                                                              pageIndex, pageSize  });
             
         }
@@ -303,9 +305,10 @@ namespace SRFROWCA.Anonymous
             string search = string.IsNullOrEmpty(txtActivityName.Text) ? null : txtActivityName.Text;
             int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
             int frameworkYear = RC.GetSelectedIntVal(ddlFrameworkYear);
+            bool? isCP = cbCPActivity.Checked ? true : (bool?)null;
             return DBContext.GetData("GetAllIndicatorsNew2WithT", new object[] { emergencyLocationId, emergencyClusterId, emergencyObjectiveId, 
                                                                                     search, activityId, frameworkYear, 
-                                                                                    admin2, (int)RC.SelectedSiteLanguageId });
+                                                                                    admin2, isCP, (int)RC.SelectedSiteLanguageId });
         }
         private DataTable GetObjectives()
         {
