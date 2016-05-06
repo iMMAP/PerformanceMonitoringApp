@@ -38,11 +38,25 @@ namespace SRFROWCA.ClusterLead
                     if (dt.Rows.Count > 0)
                     {
                         FillStagingTableInDB(dt);
-                        ImportData();
+                        int returnValue = ImportData();
+                        if (returnValue > 0)
+                        {
+                            DataTable dtWrongLocations = DBContext.GetData("GetTempInvalidLocations", new object[] {returnValue});
+                            if (dtWrongLocations.Rows.Count > 0)
+                            {
+                                gvActivity.DataSource = dtWrongLocations;
+                                gvActivity.DataBind();
+                                lblWrongLocMessage.Visible = true;
+                                lblWrongLocMessage.Text = "Following Data is not imported becuase these project(s) are using invalid locations to report! Please contact Country OCHA Admin OR ORS-help-desk for further clarifications.";
+                                ShowMessage("There are some issues with Data! For details look at the table below.", RC.NotificationType.Error, false);
+                            }
+                        }
+                        else
+                            ShowMessage("Data Imported Successfully!", RC.NotificationType.Success, false);
                     }
 
                     //scope.Complete();
-                    ShowMessage("Data Imported Successfully!", RC.NotificationType.Success, false);
+                    
                 }
             }
             catch (Exception ex)
@@ -131,7 +145,7 @@ namespace SRFROWCA.ClusterLead
         // Read Data From Excel Sheet and Save into DB
         private void FillStagingTableInDB(DataTable dt)
         {
-            //DBContext.Update("TruncateStagingTable2016", new object[] { DBNull.Value });
+            DBContext.Update("TruncateStagingTable2016", new object[] { DBNull.Value });
             string conString = ConfigurationManager.ConnectionStrings["live_dbName"].ConnectionString;
             WriteDataToDB(dt, conString);
         }
