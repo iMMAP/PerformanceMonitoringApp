@@ -1,9 +1,11 @@
 ﻿using BusinessLogic;
+using ClosedXML.Excel;
 using SRFROWCA.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -175,13 +177,32 @@ namespace SRFROWCA.KeyFigures
         {
             GridView gvExport = new GridView();
             DataTable dt = GetKeyFigures(false);
-            RemoveColumnsFromDataTable(dt);
-            gvExport.DataSource = dt;
-            gvExport.DataBind();
 
-            string fileName = "KeyFigures";
-            string fileExtention = ".xls";
-            ExportUtility.ExportGridView(gvExport, fileName, fileExtention, Response);
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+
+                wb.Worksheets.Add(dt, "LineItemsForAllBills");  //pass datatable and Worksheetname
+
+                Response.Clear();
+                Response.Buffer = true;
+                Response.Charset = "";
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment;filename=Maram_workbook_LineItems.xlsx");
+                using (MemoryStream MyMemoryStream = new MemoryStream())
+                {
+                    wb.SaveAs(MyMemoryStream);
+                    MyMemoryStream.WriteTo(Response.OutputStream);
+                    Response.Flush();
+                    Response.End();
+                }
+            }
+            //RemoveColumnsFromDataTable(dt);
+            //gvExport.DataSource = dt;
+            //gvExport.DataBind();
+
+            //string fileName = "KeyFigures";
+            //string fileExtention = ".xlsx";
+            //ExportUtility.ExportGridView(gvExport, fileName, fileExtention, Response);
         }
 
         private void RemoveColumnsFromDataTable(DataTable dt)

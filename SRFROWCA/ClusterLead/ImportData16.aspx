@@ -31,8 +31,9 @@
                 <!-- PAGE CONTENT ENDS -->
             </div>
             <div class="col-xs-12">
-                <asp:Label ID="lblWrongLocMessage" runat="server" Visible="false" Text="" CssClass="label-danger bigger"></asp:Label>
-                <hr />
+                <p>
+                    <span id="spnWrongLocMessage" runat="server" visible="false" class="btn btn-danger btn-sm popover-error" data-rel="popover" data-placement="top">Following Data is not imported becuase these project(s) are using invalid locations (Admin Level) to report! Please contact Country OCHA Admin OR ORS-help-desk for further clarifications.</span>
+                </p>
                 <div class="tablegrid">
                     <div style="overflow-x: auto; width: 100%">
                         <asp:GridView ID="gvActivity" runat="server" AutoGenerateColumns="False" Width="100%"

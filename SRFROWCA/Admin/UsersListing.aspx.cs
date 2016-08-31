@@ -153,11 +153,7 @@ namespace SRFROWCA.Admin
         {
             DataTable dt = GetUsers(10000);
             string fileName = "ORSUsers";
-            string fileExtention = ".xls";
-            GridView gvUserExport = new GridView();
-            gvUserExport.DataSource = dt;
-            gvUserExport.DataBind();
-            ExportUtility.ExportGridView(gvUserExport, fileName, fileExtention, Response);
+            ExportUtility.ExportGridView(dt, fileName, Response);
         }
 
         public override void VerifyRenderingInServerForm(Control control) { }

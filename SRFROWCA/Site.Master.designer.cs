@@ -886,6 +886,15 @@ namespace SRFROWCA {
         protected global::System.Web.UI.WebControls.Localize Localize4;
         
         /// <summary>
+        /// liApi control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liApi;
+        
+        /// <summary>
         /// Localize5 control.
         /// </summary>
         /// <remarks>

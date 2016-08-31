@@ -99,8 +99,8 @@ namespace SRFROWCA.Admin.Organization
         protected void btnExportExcel_Click(object sender, EventArgs e)
         {
             string fileName = "Organizations";
-            string fileExtention = ".xls";
-            ExportUtility.ExportGridView(gvOrganization, fileName, fileExtention, Response);
+            DataTable dt = objOrganization.GetOrganizations(GetParameters());
+            ExportUtility.ExportGridView(dt, fileName, Response);
         }
         protected void gvOrganization_RowCommand(object sender, GridViewCommandEventArgs e)
         {

@@ -293,6 +293,7 @@ namespace SRFROWCA.ClusterLead
 
             if ((RC.IsRegionalClusterLead(this.User) || emgLocationId == 11))
                 return;
+
             int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
             int locCategoryId = emgClusterId == (int)RC.ClusterSAH2015.HLT ? (int)RC.LocationCategory.Health : (int)RC.LocationCategory.Government;
 

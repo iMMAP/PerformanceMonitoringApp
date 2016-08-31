@@ -250,18 +250,11 @@ namespace SRFROWCA.Reports.OutputIndicators
 
         protected void btnExportToExcel_ServerClick(object sender, EventArgs e)
         {
-            GridView gvExport = new GridView();
             DataTable dt = SetDataSource(false);
-
             RemoveColumnsFromDataTable(dt);
-
             dt.DefaultView.Sort = "Country, Cluster, Indicator, Unit";
-            gvExport.DataSource = dt.DefaultView;
-            gvExport.DataBind();
-
             string fileName = "ClusterIndicatorReport";
-            string fileExtention = ".xls";
-            ExportUtility.ExportGridView(gvExport, fileName, fileExtention, Response);
+            ExportUtility.ExportGridView(dt, fileName, Response);
         }
 
         private void RemoveColumnsFromDataTable(DataTable dt)

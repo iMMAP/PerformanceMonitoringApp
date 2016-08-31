@@ -69,21 +69,15 @@ namespace SRFROWCA.DataFeeds
             int? clusterId = val > 0 ? val : (int?)null;
 
             val = 0;
-            int isReg = 1;
-            if (context.Request["addregional"] != null)
+            int? isReg = null;
+            if (context.Request["reg"] != null)
             {
-                string queryVal = context.Request["addregional"].ToString();
-                if (queryVal == "No" || queryVal == "no" || queryVal == "n" || queryVal == "0")
+                string queryVal = context.Request["reg"].ToString();
+                if (queryVal == "No" || queryVal == "no" || queryVal == "n" || queryVal == "NO" || queryVal == "0")
                     isReg = 0;
-            }
 
-            val = 0;
-            int isAdmin = 0;
-            if (context.Request["admin1target"] != null)
-            {
-                string queryVal = context.Request["admin1target"].ToString();
-                if (queryVal == "Yes" || queryVal == "yes" || queryVal == "y" || queryVal == "1")
-                    isAdmin = 1;
+                if (queryVal == "Yes" || queryVal == "yes" || queryVal == "y" || queryVal == "YES" || queryVal == "1")
+                    isReg = 1;
             }
 
             int? yearId = null;
@@ -93,13 +87,7 @@ namespace SRFROWCA.DataFeeds
                 yearId = val == 2015 ? (int)RC.Year._2015 : (int)RC.Year._2016;
             }
 
-            string lng = "fr";
-            if (context.Request["lng"] != null)
-            {
-                lng = context.Request["lng"].ToString();
-            }
-
-            return new object[] { countryId, clusterId, yearId, isReg, isAdmin, lng};
+            return new object[] { countryId, clusterId, yearId, isReg};
         }
 
         public bool IsReusable

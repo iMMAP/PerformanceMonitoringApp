@@ -88,8 +88,8 @@ namespace SRFROWCA.Reports.Summary
             isOPS = RC.GetSelectedIntVal(rbIsOPSProject);
             isOPS = isOPS == -1 ? (int?)null : isOPS;
 
-            int year = 2015;
-            return DBContext.GetData("GetReportingOrganizationsByCountry", new object[] { monthId, emgLocationId, emgClusterId, isOPS, year });
+            int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
+            return DBContext.GetData("GetReportingOrganizationsByCountry", new object[] { monthId, emgLocationId, emgClusterId, isOPS, yearId });
         }
 
         private void LoadData()

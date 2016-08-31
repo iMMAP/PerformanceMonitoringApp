@@ -84,6 +84,9 @@
     <Reference Include="AjaxControlToolkit, Version=4.1.7.123, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
       <HintPath>..\_dll\AjaxControlToolkit.dll</HintPath>
     </Reference>
+    <Reference Include="ClosedXML">
+      <HintPath>..\_dll\ClosedXML.dll</HintPath>
+    </Reference>
     <Reference Include="DropDownCheckBoxes, Version=1.1.0.37004, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_dll\DropDownCheckBoxes.dll</HintPath>
@@ -151,6 +154,11 @@
     <Content Include="Anonymous\ActivitiesFrameworkPublic.aspx" />
     <Content Include="Anonymous\OutputIndicatorReport.aspx" />
     <Content Include="Anonymous\ProjectsListingPublic.aspx" />
+    <Content Include="api\v2\docs.aspx" />
+    <Content Include="api\v2\doc\KeyFiguresAPI.aspx" />
+    <Content Include="api\v2\doc\KeyFiguresLakeChadAPI.aspx" />
+    <Content Include="api\v2\doc\outputindicatorsapi.aspx" />
+    <Content Include="api\v2\doc\ProjectsAPI.aspx" />
     <Content Include="App_Offline_.htm" />
     <Content Include="assets\css\bootstrap.min.css" />
     <Content Include="assets\css\ddl.css" />
@@ -404,7 +412,14 @@
     <Content Include="WebForm2.aspx" />
     <Content Include="WebForm3.aspx" />
     <Content Include="WebService.asmx" />
-    <Content Include="WebUserControl1.ascx" />
+    <Content Include="api\v2\Framework\activitiesapi.ashx" />
+    <Content Include="api\v2\KeyFigures\KeyFigures.ashx" />
+    <Content Include="api\v2\KeyFigures\KeyFiguresLakeChad.ashx" />
+    <Content Include="api\v2\OutPutInd\OutPutIndicatorReportedData.ashx" />
+    <Content Include="api\v2\OutPutInd\OutputIndIcatorsFramework.ashx" />
+    <Content Include="api\v2\OutPutInd\OutPutIndicatorsReportedFeed.ashx" />
+    <Content Include="api\v2\Projects.ashx" />
+    <Content Include="api\Web.config" />
     <None Include="assets\font\cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff" />
     <None Include="assets\font\DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff" />
     <Content Include="assets\font\fontawesome-webfont.ttf" />
@@ -652,6 +667,63 @@
     </Compile>
     <Compile Include="Anonymous\ProjectsListingPublic.aspx.designer.cs">
       <DependentUpon>ProjectsListingPublic.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="api\v2\docs.aspx.cs">
+      <DependentUpon>docs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="api\v2\docs.aspx.designer.cs">
+      <DependentUpon>docs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="api\v2\doc\KeyFiguresAPI.aspx.cs">
+      <DependentUpon>KeyFiguresAPI.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="api\v2\doc\KeyFiguresAPI.aspx.designer.cs">
+      <DependentUpon>KeyFiguresAPI.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="api\v2\doc\KeyFiguresLakeChadAPI.aspx.cs">
+      <DependentUpon>KeyFiguresLakeChadAPI.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="api\v2\doc\KeyFiguresLakeChadAPI.aspx.designer.cs">
+      <DependentUpon>KeyFiguresLakeChadAPI.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="api\v2\doc\outputindicatorsapi.aspx.cs">
+      <DependentUpon>outputindicatorsapi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="api\v2\doc\outputindicatorsapi.aspx.designer.cs">
+      <DependentUpon>outputindicatorsapi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="api\v2\doc\ProjectsAPI.aspx.cs">
+      <DependentUpon>ProjectsAPI.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="api\v2\doc\ProjectsAPI.aspx.designer.cs">
+      <DependentUpon>ProjectsAPI.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="api\v2\Framework\activitiesapi.ashx.cs">
+      <DependentUpon>activitiesapi.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="api\v2\ItemizeAPI.cs" />
+    <Compile Include="api\v2\KeyFigures\KeyFigures.ashx.cs">
+      <DependentUpon>KeyFigures.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="api\v2\KeyFigures\KeyFiguresLakeChad.ashx.cs">
+      <DependentUpon>KeyFiguresLakeChad.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="api\v2\OutPutInd\OutPutIndicatorReportedData.ashx.cs">
+      <DependentUpon>OutPutIndicatorReportedData.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="api\v2\OutPutInd\OutputIndIcatorsFramework.ashx.cs">
+      <DependentUpon>OutputIndIcatorsFramework.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="api\v2\OutPutInd\OutPutIndicatorsReportedFeed.ashx.cs">
+      <DependentUpon>OutPutIndicatorsReportedFeed.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="api\v2\Projects.ashx.cs">
+      <DependentUpon>Projects.ashx</DependentUpon>
     </Compile>
     <Compile Include="aspnet_Applications.cs">
       <DependentUpon>ORSDataModel.tt</DependentUpon>
@@ -1983,13 +2055,6 @@
       <DependentUpon>WebService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="WebUserControl1.ascx.cs">
-      <DependentUpon>WebUserControl1.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUserControl1.ascx.designer.cs">
-      <DependentUpon>WebUserControl1.ascx</DependentUpon>
-    </Compile>
     <Compile Include="Week.cs">
       <DependentUpon>ORSDataModel.tt</DependentUpon>
     </Compile>
@@ -1998,6 +2063,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="api\v2\Projects\" />
     <Folder Include="App_Data\" />
     <Folder Include="App_Readme\" />
     <Folder Include="OPS\OPSProjects\" />

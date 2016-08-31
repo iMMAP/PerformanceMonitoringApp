@@ -465,12 +465,7 @@ namespace SRFROWCA.Anonymous
         {
             SQLPaging = PagingStatus.OFF;
             DataTable dt = GetReportData(false);
-
-            GridView gv = new GridView();
-            gv.DataSource = dt;
-            gv.DataBind();
-
-            ExportUtility.ExportGridView(gv, "ORS_CustomReport", ".xls", Response, true);
+            ExportUtility.ExportGridView(dt, "ORS_CustomReport", Response);
         }
 
         protected void ExportToCSV(object sender, EventArgs e)

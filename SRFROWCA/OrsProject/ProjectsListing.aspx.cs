@@ -530,7 +530,11 @@ namespace SRFROWCA.OrsProject
                     if (RC.IsAdmin(this.User)) return;
 
                     int orgId = 0;
-                    int.TryParse(gvProjects.DataKeys[e.Row.RowIndex].Values["OrganizationId"].ToString(), out orgId);
+                    int.TryParse(gvProjects.DataKeys[e.Row.RowIndex].Values["UserOrgId"].ToString(), out orgId);
+                    int userOrgId = 0;
+                    int.TryParse(gvProjects.DataKeys[e.Row.RowIndex].Values["UserOrgId"].ToString(), out userOrgId);
+                    int isPartner = 0;
+                    int.TryParse(gvProjects.DataKeys[e.Row.RowIndex].Values["IsPartner"].ToString(), out isPartner);
 
                     int emgLocationId = 0;
                     int.TryParse(gvProjects.DataKeys[e.Row.RowIndex].Values["EmergencyLocationId"].ToString(), out emgLocationId);
@@ -562,14 +566,23 @@ namespace SRFROWCA.OrsProject
                     }
                     else if (!(orgId == UserInfo.Organization && emgLocationId == UserInfo.EmergencyCountry))
                     {
-                        HideFunctionButtons(e.Row, "imgbtnReport");
+                       
+                            HideFunctionButtons(e.Row, "imgbtnReport");
+                            HideFunctionButtons(e.Row, "imgbtnTargets");
+                            HideFunctionButtons(e.Row, "imgbtnPartners");
+                            HideFunctionButtons(e.Row, "btnEdit");
+                            HideFunctionButtons(e.Row, "btnDelete");
+                       
+                    }
+                    else if (!(isPartner == 0 && orgId == UserInfo.Organization && emgLocationId == UserInfo.EmergencyCountry))
+                    {
+
                         HideFunctionButtons(e.Row, "imgbtnTargets");
                         HideFunctionButtons(e.Row, "imgbtnPartners");
                         HideFunctionButtons(e.Row, "btnEdit");
                         HideFunctionButtons(e.Row, "btnDelete");
+
                     }
-
-
                 }
             }
         }

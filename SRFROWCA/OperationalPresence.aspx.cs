@@ -130,15 +130,9 @@ namespace SRFROWCA
 
         protected void ExportToExcel(object sender, EventArgs e)
         {
-            GridView gvExport = new GridView();
             DataTable dt = GetContacts();
-
-            gvExport.DataSource = dt;
-            gvExport.DataBind();
-
             string fileName = "Operational_Presence";
-            string fileExtention = ".xls";
-            ExportUtility.ExportGridView(gvExport, fileName, fileExtention, Response);
+            ExportUtility.ExportGridView(dt, fileName, Response);
         }
     }
 }

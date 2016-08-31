@@ -49,13 +49,13 @@ namespace SRFROWCA.ClusterLead {
         protected global::System.Web.UI.WebControls.Button btnImport;
         
         /// <summary>
-        /// lblWrongLocMessage control.
+        /// spnWrongLocMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblWrongLocMessage;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spnWrongLocMessage;
         
         /// <summary>
         /// gvActivity control.

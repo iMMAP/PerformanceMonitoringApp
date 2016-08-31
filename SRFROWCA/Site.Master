@@ -262,10 +262,13 @@
                             id="menuProjectSummary"><i class="icon-table"></i><span class="menu-text">
                                 <asp:Localize ID="localProgressSummary" runat="server" Text="Progress Summary" meta:resourcekey="localProgressSummary"></asp:Localize></span>
                         </a></li>
-                        
+
                         <li id="liMaps" runat="server"><a href='<%=BaseURL%>/Admin/CountryMapsListing.aspx'
                             id="menuMaps"><i class="icon-table"></i><span class="menu-text">
                                 <asp:Localize ID="Localize4" runat="server" Text="Manage Maps"></asp:Localize></span>
+                        </a></li>
+                        <li id="liApi" runat="server" class="hidde"><a href='<%=BaseURL%>/api/v2/docs.aspx'
+                            id="menuApi"><i class="icon-table"></i><span class="menu-text">ORS API</span>
                         </a></li>
                         <li><a href="<%=BaseURL %>/Reports/CountryMaps.aspx"><i class="icon-map-marker"></i><span class="menu-text">
                             <asp:Localize ID="Localize5" runat="server" Text="Maps"></asp:Localize></span> </a></li>

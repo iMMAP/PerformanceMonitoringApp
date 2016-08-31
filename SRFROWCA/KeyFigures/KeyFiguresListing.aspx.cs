@@ -169,15 +169,11 @@ namespace SRFROWCA.KeyFigures
 
         protected void btnExportToExcel_ServerClick(object sender, EventArgs e)
         {
-            GridView gvExport = new GridView();
             DataTable dt = GetKeyFigures(false);
             RemoveColumnsFromDataTable(dt);
-            gvExport.DataSource = dt;
-            gvExport.DataBind();
 
             string fileName = "KeyFigures";
-            string fileExtention = ".xls";
-            ExportUtility.ExportGridView(gvExport, fileName, fileExtention, Response);
+            ExportUtility.ExportGridView(dt, fileName, Response);
         }
 
         private void RemoveColumnsFromDataTable(DataTable dt)

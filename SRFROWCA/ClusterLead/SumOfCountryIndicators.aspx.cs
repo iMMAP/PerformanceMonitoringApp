@@ -124,11 +124,7 @@ namespace SRFROWCA.ClusterLead
         {
             DataTable dt = GetData(true);
             RemoveColumnsFromDataTable(dt);
-            GridView gv = new GridView();
-            gv.DataSource = dt;
-            gv.DataBind();
-
-            ExportUtility.ExportGridView(gv, UserInfo.CountryName + "_" + RC.GetClusterName + "_Indicator_Target", ".xls", Response, true);
+            ExportUtility.ExportGridView(dt, UserInfo.CountryName + "_" + RC.GetClusterName + "_Indicator_Target", Response);
         }
 
         private void RemoveColumnsFromDataTable(DataTable dt)

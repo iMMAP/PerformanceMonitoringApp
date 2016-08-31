@@ -137,17 +137,13 @@ namespace SRFROWCA.Anonymous
 
         protected void btnExportExcelOK_Click(object sender, EventArgs e)
         {
-            GridView gvExport = new GridView();
             bool admin2 = rbExlAdmin2Yes.Checked;
             DataTable dt = GetActivitiesForExcel(admin2);
             if (rbExlIdnNO.Checked)
                 RemoveColumnsFromDataTable(dt);
-            gvExport.DataSource = dt;
-            gvExport.DataBind();
 
             string fileName = "Indicators";
-            string fileExtention = ".xls";
-            ExportUtility.ExportGridView(gvExport, fileName, fileExtention, Response);
+            ExportUtility.ExportGridView(dt, fileName, Response);
             ModalPopupExtender2.Hide();
         }
 

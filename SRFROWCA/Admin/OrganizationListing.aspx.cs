@@ -221,11 +221,11 @@ namespace SRFROWCA.Admin
 
         protected void btnExportToExcel_Click(object sender, EventArgs e)
         {
-            string fileName = "3WPMorgs";
-            string fileExtention = ".xls";
-            gvOrgs.AllowSorting = false;
-            ExportUtility.ExportGridView(gvOrgs, fileName, fileExtention, Response);
-            gvOrgs.AllowSorting = false;
+            //string fileName = "3WPMorgs";
+            //string fileExtention = ".xls";
+            //gvOrgs.AllowSorting = false;
+            //ExportUtility.ExportGridView(gvOrgs, fileName, fileExtention, Response);
+            //gvOrgs.AllowSorting = false;
         }
 
         public override void VerifyRenderingInServerForm(Control control) { }

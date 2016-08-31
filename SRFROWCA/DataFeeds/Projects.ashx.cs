@@ -28,12 +28,14 @@ namespace SRFROWCA.DataFeeds
             if (format == "json")
             {
                 context.Response.ContentType = "text/plain";
+                context.Response.ContentEncoding = System.Text.Encoding.UTF8;
                 string strJson = SRFROWCA.Common.DataTableToJson.DataTableToJsonBySerializer(dt);
                 context.Response.Write(strJson);
             }
             else
             {
                 context.Response.ContentType = "text/xml";
+                context.Response.ContentEncoding = System.Text.Encoding.UTF8;
                 ds = dt.DataSet;
                 ds.DataSetName = "Projects";
                 ds.Tables[0].TableName = "Project";

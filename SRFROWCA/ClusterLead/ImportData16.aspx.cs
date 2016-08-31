@@ -46,8 +46,7 @@ namespace SRFROWCA.ClusterLead
                             {
                                 gvActivity.DataSource = dtWrongLocations;
                                 gvActivity.DataBind();
-                                lblWrongLocMessage.Visible = true;
-                                lblWrongLocMessage.Text = "Following Data is not imported becuase these project(s) are using invalid locations to report! Please contact Country OCHA Admin OR ORS-help-desk for further clarifications.";
+                                spnWrongLocMessage.Visible = true;
                                 ShowMessage("There are some issues with Data! For details look at the table below.", RC.NotificationType.Error, false);
                             }
                         }
@@ -239,11 +238,7 @@ namespace SRFROWCA.ClusterLead
         protected void btnExport_Click(object sender, EventArgs e)
         {
             DataTable dt = GetData();
-            GridView gv = new GridView();
-            gv.DataSource = dt;
-            gv.DataBind();
-
-            ExportUtility.ExportGridView(gv, "ORS_CustomReport16", ".xls", Response, true);
+            ExportUtility.ExportGridView(dt, "ORS_CustomReport16", Response);
         }
 
         private DataTable GetData()

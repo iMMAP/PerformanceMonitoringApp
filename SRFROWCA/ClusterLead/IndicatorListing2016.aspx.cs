@@ -75,14 +75,12 @@ namespace SRFROWCA.ClusterLead
                 ShowMessage("Please select a country to export data!", RC.NotificationType.Warning, true, 1000);
                 return;
             }
+
             DataTable dt = GetActivitiesForExcel();
-            RemoveColumnsFromDataTable(dt);
-            gvExport.DataSource = dt;
-            gvExport.DataBind();
+            RemoveColumnsFromDataTable(dt);            
 
             string fileName = "Indicators";
-            string fileExtention = ".xls";
-            ExportUtility.ExportGridView(gvExport, fileName, fileExtention, Response);
+            ExportUtility.ExportGridView(dt, fileName, Response);
         }
 
         internal override void BindGridData()

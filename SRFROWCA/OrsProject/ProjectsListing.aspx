@@ -263,7 +263,7 @@
                         EmptyDataText="Your filter criteria does not match any project!" Width="100%"
                         OnRowCommand="gvProjects_RowCommand" OnSorting="gvProjects_Sorting" OnRowDataBound="gvProjects_RowDataBound"
                         OnPageIndexChanging="gvProjects_PageIndexChanging"
-                        DataKeyNames="ProjectId,ProjectOrganizationId,OrganizationId,IsOPS,EmergencyLocationId,EmergencyClusterId"
+                        DataKeyNames="ProjectId,ProjectOrganizationId,OrganizationId,IsOPS,EmergencyLocationId,EmergencyClusterId,UserOrgId,IsPartner"
                         meta:resourcekey="gvProjectsResource1">
                          <PagerSettings Mode="NumericFirstLast" />
                         <RowStyle CssClass="istrow" />

@@ -25,16 +25,16 @@ namespace SRFROWCA.OPS
 
             //using (TransactionScope scope = new TransactionScope())
             {
-                InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1105.xml");
-                InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1107.xml");
-                InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1108.xml");
-                InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1109.xml");
-                InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1110.xml");
-                InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1111.xml");
-                InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1112.xml");
-                InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1113.xml");
-                InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1114.xml");
-                InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1115.xml");
+                InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1105/published.xml"); // Burkina
+                InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1107/published.xml"); // Cameroon
+                InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1108/published.xml"); // Chad
+                InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1109/published.xml"); // Gambia
+                InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1110/published.xml"); // Mali
+                InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1111/published.xml"); // Mauritania
+                InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1112/published.xml"); // Niger
+                InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1113/published.xml"); // Nigeria
+                InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1114/published.xml"); // Sahel
+                InsertUpdateProjects("http://ops.unocha.org/api/v1/project/appeal/1115/published.xml"); // Senegal
 
                 //DBContext.Delete("DeleteTempProjectsOPS", new object[] { DBNull.Value });
                 //scope.Complete();

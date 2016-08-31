@@ -136,14 +136,10 @@ namespace SRFROWCA.KeyFigures
 
         protected void btnExportToExcel_ServerClick(object sender, EventArgs e)
         {
-            GridView gvExport = new GridView();
             DataTable dt = GetKeyFigures();
-            gvExport.DataSource = dt;
-            gvExport.DataBind();
 
             string fileName = "KeyFiguresFramework";
-            string fileExtention = ".xls";
-            ExportUtility.ExportGridView(gvExport, fileName, fileExtention, Response);
+            ExportUtility.ExportGridView(dt, fileName, Response);
         }
 
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)

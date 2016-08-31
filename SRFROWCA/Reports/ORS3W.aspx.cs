@@ -228,16 +228,11 @@ namespace SRFROWCA.Reports
 
         protected void btnExportExcel_Click(object sender, EventArgs e)
         {
-            GridView gvExport = new GridView();
-
             DataTable dt = GetData(false);
             RemoveColumnsFromDataTable(dt);
-            gvExport.DataSource = dt;
-            gvExport.DataBind();
 
             string fileName = "ORS3W";
-            string fileExtention = ".xls";
-            ExportUtility.ExportGridView(gvExport, fileName, fileExtention, Response);
+            ExportUtility.ExportGridView(dt, fileName, Response);
         }
 
      

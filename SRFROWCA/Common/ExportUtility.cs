@@ -8,6 +8,7 @@ using BusinessLogic;
 using System.Data;
 using System.IO;
 using System.Drawing;
+using ClosedXML.Excel;
 
 namespace SRFROWCA
 {
@@ -116,31 +117,52 @@ namespace SRFROWCA
             return sw;
         }
 
-        internal static void ExportGridView(Control control, string fileName, string fileExtention, HttpResponse Response)
-        {
-            ExportGridView(control, fileName, fileExtention, Response, false);
-        }
+        //internal static void ExportGridView(Control control, string fileName, string fileExtention, HttpResponse Response)
+        //{
+        //    ExportGridView(control, fileName, fileExtention, Response, false);
+        //}
 
-        internal static void ExportGridView(Control control, string fileName, string fileExtention, HttpResponse Response, bool disposePassedControl)
+        internal static void ExportGridView(DataTable dt, string fileName, HttpResponse Response)
         {
-            ExportUtility.PrepareControlForExport(control);
-            string[] nameWithSpaces = fileName.Split(' ');
-            fileName = string.Join("-", nameWithSpaces);
-            fileName += DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss") + fileExtention;
-            Response.Clear();
-            Response.AddHeader("content-disposition", "attachment;filename=" + fileName);
-            Response.ContentType = "application/ms-excel";
-            Response.ContentEncoding = System.Text.Encoding.Unicode;
-            Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
-            GridView gv = control as GridView;
-
-            Response.Write(RenderGrid(gv).ToString());
-            if (disposePassedControl)
+            using (XLWorkbook wb = new XLWorkbook())
             {
-                control.Dispose();
+
+                wb.Worksheets.Add(dt, "Sheet1");  //pass datatable and Worksheetname
+
+                fileName += DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss") + ".xlsx";
+
+                Response.Clear();
+                Response.Buffer = true;
+                Response.Charset = "";
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment;filename=" + fileName);
+                using (MemoryStream MyMemoryStream = new MemoryStream())
+                {
+                    wb.SaveAs(MyMemoryStream);
+                    MyMemoryStream.WriteTo(Response.OutputStream);
+                    Response.Flush();
+                    Response.End();
+                }
             }
 
-            Response.End();
+            //ExportUtility.PrepareControlForExport(control);
+            //string[] nameWithSpaces = fileName.Split(' ');
+            //fileName = string.Join("-", nameWithSpaces);
+            //fileName += DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss") + fileExtention;
+            //Response.Clear();
+            //Response.AddHeader("content-disposition", "attachment;filename=" + fileName);
+            //Response.ContentType = "application/ms-excel";
+            //Response.ContentEncoding = System.Text.Encoding.Unicode;
+            //Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
+            //GridView gv = control as GridView;
+
+            //Response.Write(RenderGrid(gv).ToString());
+            //if (disposePassedControl)
+            //{
+            //    control.Dispose();
+            //}
+
+            //Response.End();
         }
 
         //public static void ExportWithBorder(string fileName, GridView gv)

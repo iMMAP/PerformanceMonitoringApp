@@ -88,7 +88,7 @@ namespace SRFROWCA.Admin
         {
             string fileName = "Emergencies";
             string fileExtention = ".xls";
-            ExportUtility.ExportGridView(gvEmergency, fileName, fileExtention, Response);
+            //ExportUtility.ExportGridView(gvEmergency, fileName, fileExtention, Response);
         }
 
         internal override void BindGridData()

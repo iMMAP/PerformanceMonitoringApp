@@ -111,12 +111,7 @@ namespace SRFROWCA.Anonymous
         {
             DataTable dt = GetProjects();//DBContext.GetData("GetProjects", new object[] { countryID, clusterId, null, orgId, null, DBNull.Value, DBNull.Value, null, null, 1 });
             //RemoveColumnsFromDataTable(dt);
-
-            GridView gv = new GridView();
-            gv.DataSource = dt;
-            gv.DataBind();
-
-            ExportUtility.ExportGridView(gv, "ProjectListing", ".xls", Response, true);
+            ExportUtility.ExportGridView(dt, "ProjectListing", Response);
         }
 
         private void ExportToPDF(int? projectId)
