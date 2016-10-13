@@ -220,7 +220,7 @@
     <value>S'inscrire</value>
   </data>
   <data name="localReportCustomReportResource1.Text" xml:space="preserve">
-    <value>Rapport personnalisé</value>
+    <value>Projets Rapports</value>
   </data>
   <data name="localREportsProjReportByClusterResource1.Text" xml:space="preserve">
     <value>Par Cluster</value>
@@ -283,13 +283,13 @@
     <value>Chiffres clés</value>
   </data>
   <data name="localValidateReport1.Text" xml:space="preserve">
-    <value>Rapport Valider</value>
+    <value>Rapports Valider Prj.</value>
   </data>
   <data name="localActAndIndicators.Text" xml:space="preserve">
-    <value>Activités et indicateurs</value>
+    <value>Cadre sectoriel</value>
   </data>
   <data name="localClFManageIndicators.Text" xml:space="preserve">
-    <value>Gestion des indicateurs</value>
+    <value>Indicateurs de résultat</value>
   </data>
   <data name="localClFOutputDataEntry.Text" xml:space="preserve">
     <value>Saise des données 2015</value>
@@ -352,12 +352,12 @@
     <value>Accueil</value>
   </data>
   <data name="localCLFOutputDataEntry16" xml:space="preserve">
-    <value>Saise des données 2016</value>
+    <value>Saise des données</value>
   </data>
   <data name="localClFOutputDataReport16.Text" xml:space="preserve">
-    <value>Rapport de résultat 2016</value>
+    <value>Rapports des résultat</value>
   </data>
   <data name="localOutputIndReportPublic16.Text" xml:space="preserve">
-    <value>Rapport de résultat 2016</value>
+    <value>Rapports des résultat Ind.</value>
   </data>
 </root>

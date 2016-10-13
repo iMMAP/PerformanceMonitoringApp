@@ -104,9 +104,7 @@
                                         <asp:ListItem Text="Select Your Role" Value="0" meta:resourcekey="ListItemResource1"></asp:ListItem>
                                         <asp:ListItem Text="Data Entry/Agency Officer" Value="1" meta:resourcekey="ListItemResource2"></asp:ListItem>
                                         <asp:ListItem Text="Country Cluster Lead" Value="2" meta:resourcekey="ListItemResource3"></asp:ListItem>
-                                        <asp:ListItem Text="Region Cluster Lead" Value="3" meta:resourcekey="ListItemResource4"></asp:ListItem>
                                         <asp:ListItem Text="OCHA Country Admin" Value="5"></asp:ListItem>
-                                        <asp:ListItem Text="OCHA Country Staff" Value="6"></asp:ListItem>
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="rfvUserRole" runat="server" ErrorMessage="Select Your Role"
                                         CssClass="error2" InitialValue="0" Text="Select Your Role" ControlToValidate="ddlUserRole" meta:resourcekey="rfvUserRoleResource1"></asp:RequiredFieldValidator>

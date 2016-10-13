@@ -31,6 +31,8 @@ namespace SRFROWCA.ClusterLead
                 {
                     if (Request.QueryString["year"] == "2015")
                         ddlFrameworkYear.SelectedValue = "11";
+                    if (Request.QueryString["year"] == "2016")
+                        ddlFrameworkYear.SelectedValue = "12";
                 }
                 LoadIndicators();
                 ToggleControlsToAddIndicator();
@@ -39,6 +41,11 @@ namespace SRFROWCA.ClusterLead
 
         private void ToggleControlsToAddIndicator()
         {
+            //if (RC.GetSelectedIntVal(ddlFrameworkYear) == (int)RC.Year._2015 || RC.GetSelectedIntVal(ddlFrameworkYear) == (int)RC.Year._2016)
+            //{
+            //    btnAddActivityAndIndicators.Enabled = false;
+            //    return;
+            //}
             if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) || RC.IsAdmin(this.User))
             {
                 int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
@@ -114,7 +121,7 @@ namespace SRFROWCA.ClusterLead
                 ObjPrToolTip.ObjectiveIconToolTip(e, 1);
                 //ObjPrToolTip.ObjectiveLableToolTip(e, 0);
 
-                if (yearId == 11)
+                if (yearId == (int)RC.Year._2015 || yearId == (int)RC.Year._2016)
                 {
                     divMissingTarget.Visible = false;
                 }
@@ -138,7 +145,7 @@ namespace SRFROWCA.ClusterLead
                 ImageButton btnDelete = e.Row.FindControl("btnDelete") as ImageButton;
                 ImageButton btnEdit = e.Row.FindControl("btnEdit") as ImageButton;
 
-                if (yearId == 11)
+                if (yearId == (int)RC.Year._2015 || yearId == (int)RC.Year._2016)
                 {
                     btnDelete.Visible = false;
                     btnEdit.Visible = false;
@@ -520,7 +527,11 @@ namespace SRFROWCA.ClusterLead
         }
         private DataTable GetObjectives()
         {
-            return DBContext.GetData("GetEmergencyObjectives", new object[] { (int)RC.SelectedSiteLanguageId, RC.EmergencySahel2015 });
+            int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
+            int frameworkYear = RC.GetSelectedIntVal(ddlFrameworkYear);
+
+            return DBContext.GetData("GetEmergencyObjectives", new object[] { (int)RC.SelectedSiteLanguageId, RC.EmergencySahel2015,
+                                            frameworkYear, emergencyLocationId});
         }
 
 
@@ -813,6 +824,7 @@ namespace SRFROWCA.ClusterLead
             LoadIndicators();
             SaveFiltersInSession();
             ToggleControlsToAddIndicator();
+            LoadObjectives();
         }
 
         protected void ddlActivitySelectedIndexChnaged(object sender, EventArgs e)
@@ -825,6 +837,7 @@ namespace SRFROWCA.ClusterLead
         {
             PopulateActivities();
             LoadIndicators();
+            
         }
 
         private void SendEmail(bool isAdded)

@@ -27,14 +27,14 @@
                             <div class="widget-header widget-header-small">
                                 <h4 class="widget-title smaller">
                                     <i class="ace-icon fa fa-check-square-o bigger-110"></i>
-                                    <asp:Localize ID="localQuickMenue" runat="server" Text="ORS - Sector Coordination Quick Access Menu" meta:resourcekey="localQuickMenueResource1"></asp:Localize>
+                                    <asp:Localize ID="localQuickMenue" runat="server" Text="ORS - Sector Coordination" meta:resourcekey="localQuickMenueResource1"></asp:Localize>
                                 </h4>
                             </div>
                             <h5>
                                 <asp:Localize ID="localWelcomeMessage" runat="server"
-                                    Text="Welcome back to ORS. You logged in as a Cluster/Sector coordinator. Please tell us what you would like to do!" meta:resourcekey="localWelcomeMessageResource1"></asp:Localize>
+                                    Text="Welcome back to ORS. You logged in as a Cluster/Sector coordinator."  meta:resourcekey="localWelcomeMessageResource1"></asp:Localize>
                             </h5>
-                            <div class="widget-body">
+                           <%-- <div class="widget-body">
                                 <div class="widget-main padding-24">
                                     <div class="row">
                                         <div class="col-sm-6">
@@ -61,20 +61,12 @@
                                                         <asp:LinkButton ID="btnlnkClusterIndicators16" runat="server" Text="Go to my 2016 Output Indicators Page"
                                                              PostBackUrl="../ClusterLead/CountryIndicators.aspx?year=2016" meta:resourcekey="localMenu2016OutputIndResource1"></asp:LinkButton>
                                                     </li>
-                                                    <%--<li>
-                                                        <a href="../ClusterLead/CountryIndicators.aspx">
-                                                            <asp:Localize ID="localMenu2016OutputInd" runat="server" Text="Go to my 2016 Output Indicators Page" meta:resourcekey="localMenu2016OutputIndResource1"></asp:Localize>
-                                                        </a>
-                                                    </li>--%>
+                                                   
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkSectorIndicators16" runat="server" Text="GO to my 2016 Sector Response Plan" CssClass="tooltip elemopacity"
                                                              PostBackUrl="../ClusterLead/IndicatorListing.aspx?year=2016" meta:resourcekey="localMenu2016SectorIndResource1"></asp:LinkButton>
                                                     </li>
-                                                    <%--<li>
-                                                        <a href="../ClusterLead/IndicatorListing.aspx">
-                                                            <asp:Localize ID="localMenu2016SectorInd" runat="server" Text="Go to my 2016 Sector Response Plan" meta:resourcekey="localMenu2016SectorIndResource1"></asp:Localize>
-                                                        </a>
-                                                    </li>--%>
+                                                   
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkOutputDataEntry16" runat="server" Text="Sector Outputput Indicactors 2016 Import Data" CssClass="tooltip elemopacity"
                                                              PostBackUrl="../ClusterLead/ClusterDataEntry16.aspx" meta:resourcekey="btnlnkOutputDataEntry16Resource"></asp:LinkButton>
@@ -91,11 +83,7 @@
                                                         <asp:LinkButton ID="btnlnkProgress16" runat="server" Text="Progress Summary 2016" CssClass="tooltip elemopacity"
                                                              PostBackUrl="../Reports/Summary/ProgressSummary.aspx" meta:resourcekey="btnlnkProgress2016Resource"></asp:LinkButton>
                                                     </li>
-                                                    <%--<li>
-                                                        <a href="../ClusterLead/IndicatorListingMigrate.aspx">
-                                                            <asp:Localize ID="localMenu2016Migrate" runat="server" Text="Migrate 2015 activites & indicators To 2016 Framework" meta:resourcekey="localMenu2016MigrateResource1"></asp:Localize>
-                                                        </a>
-                                                    </li>--%>
+                                                 
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkExportFramework" runat="server" Text="Export Framework 2016" CssClass="tooltip elemopacity"
                                                              PostBackUrl="../Anonymous/ExpClusterFramework.aspx" meta:resourcekey="localMenu2016ExpFrameworkResource1"></asp:LinkButton>
@@ -103,12 +91,7 @@
                                                     <li >
                                                         <asp:LinkButton ID="btnlnkImportData16" runat="server" Text="Import Data 2016" CssClass="tooltip elemopacity"
                                                              PostBackUrl="../ClusterLead/ImportData16.aspx" ></asp:LinkButton>
-                                                    </li>
-                                                    <%--<li>
-                                                        <a href="../Anonymous/ExpClusterFramework.aspx">
-                                                            <asp:Localize ID="localMenu2016ExpFramewrk" runat="server" Text="Export Framework 2016" meta:resourcekey="localMenu2016ExpFrameworkResource1"></asp:Localize>
-                                                        </a>
-                                                    </li>--%>
+                                                  
                                                     <li class="hidden">
                                                         <a href="../Reports/IndicatorTargetByProjectStatus.aspx">
                                                             <asp:Localize ID="localCCReport" runat="server" Text="Cluster FrameWork Report"></asp:Localize>
@@ -140,20 +123,11 @@
                                                         <asp:LinkButton ID="btnlnkValidateReport15" runat="server" Text="Validate 2015 Partners Report" CssClass=""
                                                              PostBackUrl="../ClusterLead/ValidateReportList.aspx" meta:resourcekey="localMenu2015ValidateResource1"></asp:LinkButton>
                                                     </li>
-                                                    <%--<li>
-                                                        <a href="../ClusterLead/ValidateReportList.aspx">
-                                                            <asp:Localize ID="localMenu2015Validate" runat="server" Text="Validate 2015 Partners Report" meta:resourcekey="localMenu2015ValidateResource1"></asp:Localize>
-                                                        </a>
-                                                    </li>--%>
+                                                  
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkClusterIndicators15" runat="server" Text="Go to my 2015 Output Indicators Page"
                                                              PostBackUrl="../ClusterLead/CountryIndicators.aspx?year=2015" meta:resourcekey="localMenu2015OutputIndResource1"></asp:LinkButton>
-                                                    </li>
-                                                    <%--<li>
-                                                        <a href="../ClusterLead/CountryIndicators.aspx">
-                                                            <asp:Localize ID="localMenu2016OutputInd" runat="server" Text="Go to my 2016 Output Indicators Page" meta:resourcekey="localMenu2016OutputIndResource1"></asp:Localize>
-                                                        </a>
-                                                    </li>--%>
+                                                
                                                     <li>
                                                         <asp:LinkButton ID="btnlnkSectorIndicators15" runat="server" Text="GO to my 2015 Sector Response Plan" CssClass="tooltip elemopacity"
                                                              PostBackUrl="../ClusterLead/IndicatorListing.aspx?year=2015" meta:resourcekey="localMenu2015SectorIndResource1"></asp:LinkButton>
@@ -179,22 +153,6 @@
                                                              PostBackUrl="../ClusterLead/UploadAchieved.aspx" meta:resourcekey="btnImportData15Resource"></asp:LinkButton>
                                                     </li>
 
-                                                    <%--<li>
-                                                        <a href="../ClusterLead/ClusterDataEntry.aspx">
-                                                            <asp:Localize ID="localMenu2015OutIndDataEntry" runat="server" Text="Provide information for my 2015 sector output indicators" meta:resourcekey="localMenu2015OutIndDataEntryResource1"></asp:Localize>
-                                                        </a>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="../ClusterLead/ProjectsListing.aspx">
-                                                            <asp:Localize ID="localMenu2015Projects" runat="server" Text="See the list of 2015 project for my sector" meta:resourcekey="localMenu2015ProjectsResource1"></asp:Localize>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="../Reports/ORS3W.aspx">
-                                                            <asp:Localize ID="localMenu20153W" runat="server" Text="Access to my 3W data for 2015" meta:resourcekey="localMenu20153WResource1"></asp:Localize>
-                                                        </a>
-                                                    </li>--%>
                                                 </ul>
                                             </div>
                                         </div>
@@ -202,7 +160,7 @@
                                     </div>
                                     <!-- /.row -->
                                 </div>
-                            </div>
+                            </div>--%>
                             <div class="widget-body">
                                 <div class="widget-main padding-24">
                                     <div class="row">

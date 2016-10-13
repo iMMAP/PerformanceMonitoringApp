@@ -308,7 +308,11 @@ namespace SRFROWCA.Anonymous
         }
         private DataTable GetObjectives()
         {
-            return DBContext.GetData("GetEmergencyObjectives", new object[] { (int)RC.SelectedSiteLanguageId, RC.EmergencySahel2015 });
+            int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
+            int frameworkYear = RC.GetSelectedIntVal(ddlFrameworkYear);
+
+            return DBContext.GetData("GetEmergencyObjectives", new object[] { (int)RC.SelectedSiteLanguageId, RC.EmergencySahel2015,
+                                            frameworkYear, emergencyLocationId});
         }
 
         protected void Page_Error(object sender, EventArgs e)

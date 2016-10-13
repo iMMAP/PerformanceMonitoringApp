@@ -111,6 +111,7 @@
                                                                                             <Texts SelectBoxCaption="Select Month" />
                                                                                         </cc:DropDownCheckBoxes>
                                                                                         <asp:DropDownList ID="ddlFrameworkYear" runat="server">
+                                                                                            <asp:ListItem Text="2017" Value="2017"></asp:ListItem>
                                                                                             <asp:ListItem Text="2016" Value="2016" meta:resourcekey="ListItemResource2"></asp:ListItem>
                                                                                             <asp:ListItem Text="2015" Value="2015" meta:resourcekey="ListItemResource3"></asp:ListItem>
                                                                                         </asp:DropDownList>

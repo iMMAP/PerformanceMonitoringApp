@@ -172,7 +172,7 @@
     <value>Unité</value>
   </data>
   <data name="btnAddActivityAndIndicatorsResource1.Text" xml:space="preserve">
-    <value>Ajouter activité et indicateurs (cadre 2016)</value>
+    <value>Ajouter activité et indicateurs (cadre 2017)</value>
   </data>
   <data name="btnAddActivityAndIndicatorsResource1.ToolTip" xml:space="preserve">
     <value />
@@ -190,7 +190,7 @@
     <value>Indicateur Editer</value>
   </data>
   <data name="btnMigrate2016Resource1.Text" xml:space="preserve">
-    <value>Migrer le plan de réponse 2015 vers 2016</value>
+    <value>Migrer le plan de réponse 2016 vers 2017</value>
   </data>
   <data name="btnMigrate2016Resource1.ToolTip" xml:space="preserve">
     <value />

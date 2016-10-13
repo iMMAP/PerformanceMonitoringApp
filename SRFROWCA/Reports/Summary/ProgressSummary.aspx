@@ -87,7 +87,8 @@
                                                                 <label>Year:</label></td>
                                                             <td>
                                                                 <asp:DropDownList ID="ddlFrameworkYear" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddl_SelectedIndexChanged" meta:resourcekey="ddlFrameworkYearResource1">
-                                                                    <asp:ListItem Text="2016" Value="12"></asp:ListItem>
+                                                                    <asp:ListItem Text="2017" Value="13"></asp:ListItem>
+                                                                    <asp:ListItem Text="2016" Value="12" Selected="True"></asp:ListItem>
                                                                     <asp:ListItem Text="2015" Value="11"></asp:ListItem>
                                                                 </asp:DropDownList>
 

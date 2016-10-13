@@ -145,7 +145,7 @@
     <value>Go to my 2016 Sector Response Plan</value>
   </data>
   <data name="localQuickMenueResource1.Text" xml:space="preserve">
-    <value>ORS - Sector Coordination Quick Access Menu</value>
+    <value>ORS - Sector Coordination</value>
   </data>
   <data name="localToWork2015Resource1.Text" xml:space="preserve">
     <value>To Work On Your 2015 Sector Framework?</value>
@@ -154,7 +154,7 @@
     <value>To Work On Your 2016 Sector Framework?</value>
   </data>
   <data name="localWelcomeMessageResource1.Text" xml:space="preserve">
-    <value>Welcome back to ORS. You logged in as a Cluster/Sector coordinator. Please tell us what you would like to do?</value>
+    <value>Welcome back to ORS. You logged in as a Cluster/Sector coordinator.</value>
   </data>
   <data name="locHelpLableResource1.Text" xml:space="preserve">
     <value>Do you need help?</value>

@@ -46,6 +46,7 @@ namespace SRFROWCA.ClusterLead
                 LoadCombos();
                 SetFiltersFromSession();
                 DisableDropDowns();
+                PopulateObjective();
 
                 // IN Edit mode.
                 if (Request.QueryString["a"] != null)
@@ -260,11 +261,10 @@ namespace SRFROWCA.ClusterLead
 
         private void LoadCombos()
         {
-            PopulateObjective();
             PopulateClusters();
             PopulateCountries();
-
             SetComboValues();
+            
         }
 
         internal override void BindGridData()
@@ -321,7 +321,11 @@ namespace SRFROWCA.ClusterLead
 
         private void PopulateObjective()
         {
-            ddlObjective.DataSource = DBContext.GetData("GetEmergencyObjectives", new object[] { RC.SelectedSiteLanguageId, RC.EmergencySahel2015 });
+            int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
+            int yearId = (int)RC.Year._2017;
+
+            ddlObjective.DataSource = DBContext.GetData("GetEmergencyObjectives", new object[] { (int)RC.SelectedSiteLanguageId, RC.EmergencySahel2015,
+                                            yearId, emergencyLocationId});
             ddlObjective.DataTextField = "Objective";
             ddlObjective.DataValueField = "EmergencyObjectiveId";
             ddlObjective.DataBind();
@@ -687,7 +691,7 @@ namespace SRFROWCA.ClusterLead
             int objId = RC.GetSelectedIntVal(ddlObjective);
             string actEn = !string.IsNullOrEmpty(txtActivityEng.Text.Trim()) ? txtActivityEng.Text.Trim() : null;
             string actFr = !string.IsNullOrEmpty(txtActivityFr.Text.Trim()) ? txtActivityFr.Text.Trim() : null;
-            int yearId = (int)RC.Year._2016;
+            int yearId = (int)RC.Year._2017;
             return DBContext.Add("InsertActivityNew", new object[] { emergencyClusterId, objId,emergencyLocationId, 
                                                                         actEn, actFr, userId, yearId,
                                                                         RC.SelectedSiteLanguageId, emgSecClusterId, DBNull.Value });

@@ -145,7 +145,7 @@
     <value>Accéder à la page Plan de réponse sectoriel 2016</value>
   </data>
   <data name="localQuickMenueResource1.Text" xml:space="preserve">
-    <value>ORS – Menu d’accès rapide!</value>
+    <value>ORS – Sector Coordination</value>
   </data>
   <data name="localToWork2015Resource1.Text" xml:space="preserve">
     <value>Travailler sur le cadre sectoriel 2015?</value>
@@ -154,7 +154,7 @@
     <value>Travailler sur le cadre sectoriel 2016?</value>
   </data>
   <data name="localWelcomeMessageResource1.Text" xml:space="preserve">
-    <value>Bienvenue sur ORS. Vous êtes connecté en tant que coordinateur de cluster/sector. Que souhaitez-vous faire?</value>
+    <value>Bienvenue sur ORS.</value>
   </data>
   <data name="locHelpLableResource1.Text" xml:space="preserve">
     <value>Besoin d’aide?</value>

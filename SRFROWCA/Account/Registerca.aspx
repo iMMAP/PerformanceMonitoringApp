@@ -71,8 +71,6 @@
                             <asp:ListItem Text="Select Your Role" Value="0"></asp:ListItem>
                             <asp:ListItem Text="Data Entry/Field Officer" Value="1"></asp:ListItem>
                             <asp:ListItem Text="Country Cluster Lead" Value="2"></asp:ListItem>
-                            <asp:ListItem Text="Regional Cluster Lead" Value="3"></asp:ListItem>
-                            <asp:ListItem Text="OCHA Staff" Value="4"></asp:ListItem>
                             <asp:ListItem Text="OCHA Country Admin" Value="5"></asp:ListItem>
                         </asp:DropDownList>
                     </td>

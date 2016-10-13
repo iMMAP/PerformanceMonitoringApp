@@ -8,49 +8,49 @@ namespace SRFROWCA.Common
 {
     public static class ObjPrToolTip
     {
-        public static void PrioritiesIconToolTip(GridViewRowEventArgs e, int index)
-        {
-            Image imghp = e.Row.FindControl("imgPriority") as Image;
-            if (imghp != null)
-            {
-                string txtHP = e.Row.Cells[index].Text;
-                if (txtHP == "1")
-                {
-                    imghp.ImageUrl = "~/assets/orsimages/icon/hp1.png";
-                    imghp.ToolTip = RC.SelectedSiteLanguageId == 2 ?
-                        "Répondre aux conséquences humanitaires dues aux catastrophes naturelles (inondations, etc.)" :
-                        "Addressing the humanitarian impact Natural disasters (floods, etc.)";
-                }
-                else if (txtHP == "2")
-                {
-                    imghp.ImageUrl = "~/assets/orsimages/icon/hp2.png";
-                    imghp.ToolTip = RC.SelectedSiteLanguageId == 2 ?
-                        "Répondre aux conséquences humanitaires dues aux conflits (PDIs, refugies, protection, etc.)" :
-                        "Addressing the humanitarian impact of Conflict (IDPs, refugees, protection, etc.)";
-                }
-                else if (txtHP == "3")
-                {
-                    imghp.ImageUrl = "~/assets/orsimages/icon/hp3.png";
-                    imghp.ToolTip = RC.SelectedSiteLanguageId == 2 ?
-                        "Répondre aux conséquences humanitaires dues aux épidémies (cholera, paludisme, etc.)" :
-                        "Addressing the humanitarian impact of Epidemics (cholera, malaria, etc.)";
-                }
-                else if (txtHP == "4")
-                {
-                    imghp.ImageUrl = "~/assets/orsimages/icon/hp4.png";
-                    imghp.ToolTip = RC.SelectedSiteLanguageId == 2 ?
-                        "Répondre aux conséquences humanitaires dues à l’insécurité alimentaire" :
-                        "Addressing the humanitarian impact of Food insecurity";
-                }
-                else if (txtHP == "5")
-                {
-                    imghp.ImageUrl = "~/assets/orsimages/icon/hp5.png";
-                    imghp.ToolTip = RC.SelectedSiteLanguageId == 2 ?
-                        "Répondre aux conséquences humanitaires dues à la malnutrition" :
-                        "Addressing the humanitarian impact of Malnutrition";
-                }
-            }
-        }
+        //public static void PrioritiesIconToolTip(GridViewRowEventArgs e, int index)
+        //{
+        //    Image imghp = e.Row.FindControl("imgPriority") as Image;
+        //    if (imghp != null)
+        //    {
+        //        string txtHP = e.Row.Cells[index].Text;
+        //        if (txtHP == "1")
+        //        {
+        //            imghp.ImageUrl = "~/assets/orsimages/icon/hp1.png";
+        //            imghp.ToolTip = RC.SelectedSiteLanguageId == 2 ?
+        //                "Répondre aux conséquences humanitaires dues aux catastrophes naturelles (inondations, etc.)" :
+        //                "Addressing the humanitarian impact Natural disasters (floods, etc.)";
+        //        }
+        //        else if (txtHP == "2")
+        //        {
+        //            imghp.ImageUrl = "~/assets/orsimages/icon/hp2.png";
+        //            imghp.ToolTip = RC.SelectedSiteLanguageId == 2 ?
+        //                "Répondre aux conséquences humanitaires dues aux conflits (PDIs, refugies, protection, etc.)" :
+        //                "Addressing the humanitarian impact of Conflict (IDPs, refugees, protection, etc.)";
+        //        }
+        //        else if (txtHP == "3")
+        //        {
+        //            imghp.ImageUrl = "~/assets/orsimages/icon/hp3.png";
+        //            imghp.ToolTip = RC.SelectedSiteLanguageId == 2 ?
+        //                "Répondre aux conséquences humanitaires dues aux épidémies (cholera, paludisme, etc.)" :
+        //                "Addressing the humanitarian impact of Epidemics (cholera, malaria, etc.)";
+        //        }
+        //        else if (txtHP == "4")
+        //        {
+        //            imghp.ImageUrl = "~/assets/orsimages/icon/hp4.png";
+        //            imghp.ToolTip = RC.SelectedSiteLanguageId == 2 ?
+        //                "Répondre aux conséquences humanitaires dues à l’insécurité alimentaire" :
+        //                "Addressing the humanitarian impact of Food insecurity";
+        //        }
+        //        else if (txtHP == "5")
+        //        {
+        //            imghp.ImageUrl = "~/assets/orsimages/icon/hp5.png";
+        //            imghp.ToolTip = RC.SelectedSiteLanguageId == 2 ?
+        //                "Répondre aux conséquences humanitaires dues à la malnutrition" :
+        //                "Addressing the humanitarian impact of Malnutrition";
+        //        }
+        //    }
+        //}
 
         public static void ObjectiveIconToolTip(GridViewRowEventArgs e, int index)
         {
@@ -77,27 +77,32 @@ namespace SRFROWCA.Common
                     imgObj.ToolTip = RC.SelectedSiteLanguageId == 2 ? "OBJECTIF STRATÉGIQUE N°3 : Fournir aux personnes en situation d’urgence une assistance coordonnée et intégrée, nécessaire à leur survie." :
                         "STRATEGIC OBJECTIVE 3: Deliver coordinated and integrated life-saving assistance to people affected by emergencies.";
                 }
+                else
+                {
+                    imgObj.ImageUrl = "~/assets/orsimages/icon/so1.png";
+                    imgObj.ToolTip = RC.SelectedSiteLanguageId == 2 ? "OBJECTIF STRATÉGIQUE N°1" : "STRATEGIC OBJECTIVE 1:";
+                }
             }
         }
 
-        public static void ObjectivesToolTip(ListControl ctl)
-        {
-            if (ctl.Items.Count > 2)
-            {
-                if (RC.SelectedSiteLanguageId == 2)
-                {
-                    ctl.Items[0].Attributes["title"] = "OBJECTIF STRATÉGIQUE N°1 : Recueillir les données sur les risques et les vulnérabilités, les analyser et intégrer les résultats dans la programmation humanitaire et de développement.";
-                    ctl.Items[1].Attributes["title"] = "OBJECTIF STRATÉGIQUE N°2 : Soutenir les populations vulnérables à mieux faire face aux chocs en répondant aux signaux d’alerte de manière anticipée, réduisant la durée du relèvement post-crise et renforçant les capacités des acteurs nationaux.";
-                    ctl.Items[2].Attributes["title"] = "OBJECTIF STRATÉGIQUE N°3 : Fournir aux personnes en situation d’urgence une assistance coordonnée et intégrée, nécessaire à leur survie.";
-                }
-                else
-                {
-                    ctl.Items[0].Attributes["title"] = "STRATEGIC OBJECTIVE 1: Track and analyse risk and vulnerability, integrating findings into humanitarian and development programming.";
-                    ctl.Items[1].Attributes["title"] = "STRATEGIC OBJECTIVE 2: Support vulnerable populations to better cope with shocks by responding earlier to warning signals, by reducing post-crisis recovery times and by building capacity of national actors.";
-                    ctl.Items[2].Attributes["title"] = "STRATEGIC OBJECTIVE 3: Deliver coordinated and integrated life-saving assistance to people affected by emergencies.";
-                }
-            }
-        }
+        //public static void ObjectivesToolTip(ListControl ctl)
+        //{
+        //    if (ctl.Items.Count > 2)
+        //    {
+        //        if (RC.SelectedSiteLanguageId == 2)
+        //        {
+        //            ctl.Items[0].Attributes["title"] = "OBJECTIF STRATÉGIQUE N°1 : Recueillir les données sur les risques et les vulnérabilités, les analyser et intégrer les résultats dans la programmation humanitaire et de développement.";
+        //            ctl.Items[1].Attributes["title"] = "OBJECTIF STRATÉGIQUE N°2 : Soutenir les populations vulnérables à mieux faire face aux chocs en répondant aux signaux d’alerte de manière anticipée, réduisant la durée du relèvement post-crise et renforçant les capacités des acteurs nationaux.";
+        //            ctl.Items[2].Attributes["title"] = "OBJECTIF STRATÉGIQUE N°3 : Fournir aux personnes en situation d’urgence une assistance coordonnée et intégrée, nécessaire à leur survie.";
+        //        }
+        //        else
+        //        {
+        //            ctl.Items[0].Attributes["title"] = "STRATEGIC OBJECTIVE 1: Track and analyse risk and vulnerability, integrating findings into humanitarian and development programming.";
+        //            ctl.Items[1].Attributes["title"] = "STRATEGIC OBJECTIVE 2: Support vulnerable populations to better cope with shocks by responding earlier to warning signals, by reducing post-crisis recovery times and by building capacity of national actors.";
+        //            ctl.Items[2].Attributes["title"] = "STRATEGIC OBJECTIVE 3: Deliver coordinated and integrated life-saving assistance to people affected by emergencies.";
+        //        }
+        //    }
+        //}
 
         public static void ObjectiveLableToolTip(GridViewRowEventArgs e, int index)
         {
@@ -124,28 +129,28 @@ namespace SRFROWCA.Common
             }
         }
 
-        public static void PrioritiesToolTip(ListControl ctl)
-        {
-            if (ctl.Items.Count > 5)
-            {
-                if (RC.SelectedSiteLanguageId == 2)
-                {
-                    ctl.Items[0].Attributes["title"] = "Répondre aux conséquences humanitaires dues aux catastrophes naturelles (inondations, etc.)";
-                    ctl.Items[1].Attributes["title"] = "Répondre aux conséquences humanitaires dues aux conflits (PDIs, refugies, protection, etc.)";
-                    ctl.Items[2].Attributes["title"] = "Répondre aux conséquences humanitaires dues aux épidémies (cholera, paludisme, etc.)";
-                    ctl.Items[3].Attributes["title"] = "Répondre aux conséquences humanitaires dues à l’insécurité alimentaire";
-                    ctl.Items[4].Attributes["title"] = "Répondre aux conséquences humanitaires dues à la malnutrition";
-                }
-                else
-                {
-                    ctl.Items[0].Attributes["title"] = "Addressing the humanitarian impact Natural disasters (floods, etc.)";
-                    ctl.Items[1].Attributes["title"] = "Addressing the humanitarian impact of Conflict (IDPs, refugees, protection, etc.)";
-                    ctl.Items[2].Attributes["title"] = "Addressing the humanitarian impact of Epidemics (cholera, malaria, etc.)";
-                    ctl.Items[3].Attributes["title"] = "Addressing the humanitarian impact of Food insecurity";
-                    ctl.Items[4].Attributes["title"] = "Addressing the humanitarian impact of Malnutrition";
-                }
-            }
-        }
+        //public static void PrioritiesToolTip(ListControl ctl)
+        //{
+        //    if (ctl.Items.Count > 5)
+        //    {
+        //        if (RC.SelectedSiteLanguageId == 2)
+        //        {
+        //            ctl.Items[0].Attributes["title"] = "Répondre aux conséquences humanitaires dues aux catastrophes naturelles (inondations, etc.)";
+        //            ctl.Items[1].Attributes["title"] = "Répondre aux conséquences humanitaires dues aux conflits (PDIs, refugies, protection, etc.)";
+        //            ctl.Items[2].Attributes["title"] = "Répondre aux conséquences humanitaires dues aux épidémies (cholera, paludisme, etc.)";
+        //            ctl.Items[3].Attributes["title"] = "Répondre aux conséquences humanitaires dues à l’insécurité alimentaire";
+        //            ctl.Items[4].Attributes["title"] = "Répondre aux conséquences humanitaires dues à la malnutrition";
+        //        }
+        //        else
+        //        {
+        //            ctl.Items[0].Attributes["title"] = "Addressing the humanitarian impact Natural disasters (floods, etc.)";
+        //            ctl.Items[1].Attributes["title"] = "Addressing the humanitarian impact of Conflict (IDPs, refugees, protection, etc.)";
+        //            ctl.Items[2].Attributes["title"] = "Addressing the humanitarian impact of Epidemics (cholera, malaria, etc.)";
+        //            ctl.Items[3].Attributes["title"] = "Addressing the humanitarian impact of Food insecurity";
+        //            ctl.Items[4].Attributes["title"] = "Addressing the humanitarian impact of Malnutrition";
+        //        }
+        //    }
+        //}
 
         public static void RegionalIndicatorIcon(GridViewRowEventArgs e, int cellIndex)
         {

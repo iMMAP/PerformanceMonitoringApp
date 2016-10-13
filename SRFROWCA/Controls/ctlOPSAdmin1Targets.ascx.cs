@@ -52,7 +52,7 @@ namespace SRFROWCA.Controls
                     Repeater rptCountry = e.Row.FindControl("rptCountryGender") as Repeater;
                     if (rptCountry != null)
                     {
-                        int yearId = 12;
+                        int yearId = (int)RC.Year._2017;
                         DataTable dt = DBContext.GetData("GetOPSCountryTargetOfIndicator",
                                                                     new object[] { EmgLocationId, EmgClusterId, 
                                                                                OPSProjectId, yearId, indicatorId});
@@ -101,7 +101,7 @@ namespace SRFROWCA.Controls
                     Repeater rptAdmin1 = e.Item.FindControl("rptAdmin1") as Repeater;
                     if (rptAdmin1 != null)
                     {
-                        int yearId = 12;
+                        int yearId = (int)RC.Year._2017;
                         rptAdmin1.DataSource = DBContext.GetData("[GetOPSAdmin1TargetOfIndicator_Admin1]", new object[] { countryId, EmgLocationId, 
                                                                                                                 EmgClusterId, OPSProjectId, 
                                                                                                                 yearId, indicatorId });
@@ -477,7 +477,7 @@ namespace SRFROWCA.Controls
 
         private DataTable GetActivities()
         {
-            int yearId = (int)RC.Year._2016;
+            int yearId = (int)RC.Year._2017;
             DataTable dt = new DataTable();
             if (IsMSRefugee)
                 dt = DBContext.GetData("GetOPSRefugeesActivities", new object[] { EmgLocationId, EmgClusterId, EmgClusterId2,
@@ -516,7 +516,7 @@ namespace SRFROWCA.Controls
 
         private void SaveReportMainInfo()
         {
-            int yearId = (int)RC.Year._2016;
+            int yearId = (int)RC.Year._2017;
             OPSReportId = DBContext.Add("InsertOPSReport", new object[] { EmgLocationId, OPSProjectId, 
                                                                             EmgClusterId, OPSUserId, 
                                                                             RC.SelectedSiteLanguageId, yearId, DBNull.Value });

@@ -232,7 +232,7 @@
     <value>Register</value>
   </data>
   <data name="localReportCustomReportResource1.Text" xml:space="preserve">
-    <value>Custom Report</value>
+    <value>Projects Reports</value>
   </data>
   <data name="localREportsProjReportByClusterResource1.Text" xml:space="preserve">
     <value>By Cluster</value>
@@ -295,13 +295,13 @@
     <value>Key Figures</value>
   </data>
   <data name="localValidateReport1.Text" xml:space="preserve">
-    <value>Validate Report</value>
+    <value>Validate Prj. Reports</value>
   </data>
   <data name="localActAndIndicators.Text" xml:space="preserve">
-    <value>Activities And Indicators</value>
+    <value>Cluster Framework</value>
   </data>
   <data name="localClFManageIndicators.Text" xml:space="preserve">
-    <value>Manage Indicators</value>
+    <value>Output Indicators</value>
   </data>
   <data name="localClFOutputDataEntry.Text" xml:space="preserve">
     <value>Output Data Entry 2015</value>
@@ -364,12 +364,12 @@
     <value>Home</value>
   </data>
   <data name="localCLFOutputDataEntry16" xml:space="preserve">
-    <value>Output Data Entry 2016</value>
+    <value>Output Data Entry</value>
   </data>
   <data name="localClFOutputDataReport16.Text" xml:space="preserve">
-    <value>Output Report 2016</value>
+    <value>Output Reports</value>
   </data>
   <data name="localOutputIndReportPublic16.Text" xml:space="preserve">
-    <value>Output Report 2016</value>
+    <value>Output Ind. Reports</value>
   </data>
 </root>

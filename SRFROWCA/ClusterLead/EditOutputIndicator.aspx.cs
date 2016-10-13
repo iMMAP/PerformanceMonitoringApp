@@ -344,7 +344,7 @@ namespace SRFROWCA.ClusterLead
             }
             else
             {
-                int yearId = 12;
+                int yearId = (int)RC.Year._2017;
                 int countryId = RC.GetSelectedIntVal(ddlCountry);
                 int clusterId = RC.GetSelectedIntVal(ddlCluster);
                 indicatorId = DBContext.Add("InsertClusterIndicator", new object[] { indEng, indFr, unitId, countryId, clusterId, 

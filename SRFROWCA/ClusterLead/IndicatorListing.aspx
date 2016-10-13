@@ -43,11 +43,11 @@
                                             <i class="icon-download"></i>Export To Word
                                         </button>
 
-                                        <asp:Button ID="btnAddActivityAndIndicators" runat="server" Text="Add Activity & Indicators (Framework 2016)"
+                                        <asp:Button ID="btnAddActivityAndIndicators" runat="server" Text="Add Activity & Indicators (Framework 2017)"
                                             CausesValidation="False" CssClass="btn btn-sm btn-yellow pull-right"
                                             OnClick="btnAddActivityAndIndicators_Click" Enabled="false"
                                             Style="margin-right: 5px;" meta:resourcekey="btnAddActivityAndIndicatorsResource1" />
-                                        <asp:Button ID="btnMigrate2016" runat="server" Text="Migrate 2015 Framework To 2016" CausesValidation="False"
+                                        <asp:Button ID="btnMigrate2016" runat="server" Text="Migrate 2016 Framework To 2017" CausesValidation="False"
                                             CssClass="hidden btn btn-sm btn-danger pull-right" OnClick="btnMigrate2016_Click" Enabled="false"
                                             meta:resourcekey="btnMigrate2016Resource1" />
                                     </h6>
@@ -115,6 +115,7 @@
                                                             </td>
                                                             <td class="width-30">
                                                                 <asp:DropDownList ID="ddlFrameworkYear" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlYear_SelectedIndexChnaged" meta:resourcekey="ddlFrameworkYearResource1">
+                                                                    <asp:ListItem Text="2017" Value="13"></asp:ListItem>
                                                                     <asp:ListItem Text="2016" Value="12" meta:resourcekey="ListItemResource2"></asp:ListItem>
                                                                     <asp:ListItem Text="2015" Value="11" meta:resourcekey="ListItemResource3"></asp:ListItem>
                                                                 </asp:DropDownList>

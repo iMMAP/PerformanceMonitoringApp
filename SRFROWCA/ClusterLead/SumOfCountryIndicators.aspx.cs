@@ -76,7 +76,7 @@ namespace SRFROWCA.ClusterLead
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 ObjPrToolTip.ObjectiveIconToolTip(e, 0);
-                ObjPrToolTip.PrioritiesIconToolTip(e, 1);
+                //ObjPrToolTip.PrioritiesIconToolTip(e, 1);
             }
         }
 

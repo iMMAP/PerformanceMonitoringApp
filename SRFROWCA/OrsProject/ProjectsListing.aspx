@@ -162,6 +162,7 @@
                                                     <td>
                                                         <asp:DropDownList ID="ddlFrameworkYear" runat="server" AutoPostBack="True" CssClass="width-80"
                                                             OnSelectedIndexChanged="SelectedIndexChanged" meta:resourcekey="ddlFrameworkYearResource1">
+                                                            <asp:ListItem Text="2017" Value="13"></asp:ListItem>
                                                             <asp:ListItem Text="2016" Value="12" meta:resourcekey="ListItemResource3"></asp:ListItem>
                                                             <asp:ListItem Text="2015" Value="11" meta:resourcekey="ListItemResource4"></asp:ListItem>
                                                         </asp:DropDownList>

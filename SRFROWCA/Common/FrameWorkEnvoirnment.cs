@@ -55,7 +55,7 @@ namespace SRFROWCA.Common
                 }
             }
 
-            int yearId = 12;
+            int yearId = (int)RC.Year._2017;
             if (allowedIndicators > 0)
             {
                 int isActive = 1;
@@ -82,7 +82,7 @@ namespace SRFROWCA.Common
                 }
             }
 
-            int yearId = 12;
+            int yearId = (int)RC.Year._2017;
             if (allowedActivities > 0)
             {
                 int isActive = 1;
@@ -112,7 +112,7 @@ namespace SRFROWCA.Common
                 }
             }
 
-            int yearId = 12;
+            int yearId = (int)RC.Year._2017;
             int val = DBContext.Update("GetClusterIndicatorCount", new object[] { emgLocationId, emgClusterId, yearId, DBNull.Value });
             return (outputIndAllowed -= val);
         }

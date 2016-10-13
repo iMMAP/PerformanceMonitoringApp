@@ -172,7 +172,7 @@
     <value>Unit</value>
   </data>
   <data name="btnAddActivityAndIndicatorsResource1.Text" xml:space="preserve">
-    <value>Add Activity &amp; Indicators (Framework 2016)</value>
+    <value>Add Activity &amp; Indicators (Framework 2017)</value>
   </data>
   <data name="btnAddActivityAndIndicatorsResource1.ToolTip" xml:space="preserve">
     <value />
@@ -190,7 +190,7 @@
     <value>Edit Indicator</value>
   </data>
   <data name="btnMigrate2016Resource1.Text" xml:space="preserve">
-    <value>Migrate 2015 Framework To 2016</value>
+    <value>Migrate 2016 Framework To 2017</value>
   </data>
   <data name="btnMigrate2016Resource1.ToolTip" xml:space="preserve">
     <value />

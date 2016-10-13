@@ -22,6 +22,9 @@ namespace SRFROWCA.ClusterLead
                 {
                     if (Request.QueryString["year"] == "2015")
                         ddlFrameworkYear.SelectedValue = "11";
+
+                    if (Request.QueryString["year"] == "2016")
+                        ddlFrameworkYear.SelectedValue = "12";
                 }
 
                 LoadClusterIndicators();
@@ -72,7 +75,7 @@ namespace SRFROWCA.ClusterLead
 
                 ImageButton btnDelete = e.Row.FindControl("btnDelete") as ImageButton;
                 ImageButton btnEdit = e.Row.FindControl("btnEdit") as ImageButton;
-                if (RC.GetSelectedIntVal(ddlFrameworkYear) == (int)RC.Year._2015)
+                if (RC.GetSelectedIntVal(ddlFrameworkYear) == (int)RC.Year._2015 || RC.GetSelectedIntVal(ddlFrameworkYear) == (int)RC.Year._2016)
                 {
                     if (btnDelete != null && btnEdit != null)
                     {
@@ -281,7 +284,7 @@ namespace SRFROWCA.ClusterLead
             }
 
             // Year is 2015 disable and return
-            if (RC.GetSelectedIntVal(ddlFrameworkYear) == (int)RC.Year._2015)
+            if (RC.GetSelectedIntVal(ddlFrameworkYear) == (int)RC.Year._2015 || RC.GetSelectedIntVal(ddlFrameworkYear) == (int)RC.Year._2016)
             {
                 btnAddIndicator.Enabled = false;
                 return;

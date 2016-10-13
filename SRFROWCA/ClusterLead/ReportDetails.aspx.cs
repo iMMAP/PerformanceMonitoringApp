@@ -58,9 +58,9 @@ namespace SRFROWCA.ClusterLead
 
         protected void gvIndicators_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            ObjPrToolTip.ObjectiveIconToolTip(e, 0);
-            ObjPrToolTip.PrioritiesIconToolTip(e, 1);
-            ObjPrToolTip.CountryIndicatorIcon(e, 2);
+            //ObjPrToolTip.ObjectiveIconToolTip(e, 0);
+            //ObjPrToolTip.PrioritiesIconToolTip(e, 1);
+            //ObjPrToolTip.CountryIndicatorIcon(e, 2);
         }
 
         protected void Page_Error(object sender, EventArgs e)
