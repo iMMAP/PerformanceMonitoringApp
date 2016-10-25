@@ -271,7 +271,7 @@
     <value />
   </data>
   <data name="lblIndicatorResource1.Text" xml:space="preserve">
-    <value>Indicator</value>
+    <value>Indicator:</value>
   </data>
   <data name="lblIndicatorResource1.ToolTip" xml:space="preserve">
     <value />

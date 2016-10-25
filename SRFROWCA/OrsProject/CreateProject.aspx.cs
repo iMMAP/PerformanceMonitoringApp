@@ -233,8 +233,8 @@ namespace SRFROWCA.OrsProject
             string contactEmail = !string.IsNullOrEmpty(txtContactEmail.Text.Trim()) ? txtContactEmail.Text.Trim() : null;
 
             Guid userId = RC.GetCurrentUserId;
-            int yearId = (int)RC.Year._Current;
-            int year = 2016;
+            int yearId = (int)RC.Year._2017;
+            int year = 2017;
             if (ProjectId > 0)
             {
                 int projOrgId = 0;

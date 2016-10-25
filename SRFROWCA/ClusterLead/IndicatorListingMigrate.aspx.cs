@@ -316,15 +316,9 @@ namespace SRFROWCA.ClusterLead
 
         private void LoadObjectivesFilter()
         {
-            ddlObjective.Items.Clear();
-            if (RC.SelectedSiteLanguageId == 1)
-                ddlObjective.Items.Add(new ListItem("Select Objective", "0"));
-            else
-                ddlObjective.Items.Add(new ListItem("Sélectionner Objectif", "0"));
-            ddlObjective.DataValueField = "EmergencyObjectiveId";
-            ddlObjective.DataTextField = "Objective";
-            ddlObjective.DataSource = GetObjectives();
-            ddlObjective.DataBind();
+            int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
+            int yearId = (int)RC.Year._2017;
+            UI.PopulateEmergencyObjectives(ddlObjective, yearId, emergencyLocationId);
         }
 
         private DataTable GetClusters()
@@ -353,13 +347,6 @@ namespace SRFROWCA.ClusterLead
             else
                 return new DataTable();
         }
-        private DataTable GetObjectives()
-        {
-            int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
-            int yearId = (int)RC.Year._2017;
-            return DBContext.GetData("GetEmergencyObjectives", new object[] { (int)RC.SelectedSiteLanguageId, RC.EmergencySahel2015, yearId, emergencyLocationId });
-        }
-
 
         private DataTable GetActivityTypes()
         {

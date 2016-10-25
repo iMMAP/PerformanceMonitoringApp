@@ -112,10 +112,17 @@ namespace SRFROWCA.Common
             FillObjectives(control, dt, useShort);
         }
 
-        internal static void FillEmergencyObjectives(ListControl control, bool useShort, int emergencyId)
+        internal static void PopulateEmergencyObjectives(ListControl control, int yearId, int? emergencyLocationId)
         {
-            DataTable dt = RC.GetEmergencyObjectives(emergencyId);
-            FillObjectives(control, dt, true);
+            control.DataValueField = "EmergencyObjectiveId";
+            control.DataTextField = "Objective";
+            control.DataSource = RC.GetEmergencyObjectives(yearId, emergencyLocationId);
+            control.DataBind();
+
+            if (RC.SelectedSiteLanguageId == 1)
+                control.Items.Insert(0, new ListItem("Select Objective", "0"));
+            else
+                control.Items.Insert(0, new ListItem("Sélectionner Objectif", "0"));
         }
 
         internal static void FillObjectives(ListControl control, DataTable dt, bool useShort)

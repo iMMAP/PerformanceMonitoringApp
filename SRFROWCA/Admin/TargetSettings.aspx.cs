@@ -1,7 +1,9 @@
-﻿using SRFROWCA.Common;
+﻿using BusinessLogic;
+using SRFROWCA.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -36,110 +38,62 @@ namespace SRFROWCA.Admin
             gvSettings.DataBind();
         }
 
-        private DataTable CreateDataTable()
-        {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Key");
-            dt.Columns.Add("Country");
-            dt.Columns.Add("Cluster");
-            dt.Columns.Add("Target");
-            dt.Columns.Add("Level");
-            dt.Columns.Add("Category");
-            dt.Columns.Add("Mandatory");
-            return dt;
-        }
-
         private DataTable GetFrameworkSettings()
         {
-            DataTable dt = CreateDataTable();
-            string path = GetFilePath();
-            if (File.Exists(path))
-            {
-                XElement root = XElement.Load(path);
-                IEnumerable<XElement> address =
-                    from el in root.Elements("AdminTarget")
-                    select el;
-                foreach (XElement el in address)
-                {
-                    AddRowInDataTable(el, dt);
-                }
-            }
+            int val = RC.GetSelectedIntVal(ddlCountry);
+            int? emgLocId = val == 0 ? (int?)null : val;
+            val = RC.GetSelectedIntVal(ddlCluster);
+            int? emgClusterId = val == 0 ? (int?)null : val;
 
-            return dt;
-        }
+            int year = RC.GetSelectedIntVal(ddlFrameworkYear);
 
-        private void AddRowInDataTable(XElement el, DataTable dt)
-        {
-            DataRow row = dt.NewRow();
-
-            string country = null;
-            if (el.Attribute("CountryID") != null)
-                country = el.Attribute("CountryID").Value;
-
-            string cluster = null;
-            if (el.Attribute("ClusterID") != null)
-                cluster = el.Attribute("ClusterID").Value;
-            if (country != null && cluster != null)
-            {
-                row["Key"] = country + cluster;
-                row["Country"] = el.Attribute("Country") == null ? "" : el.Attribute("Country").Value;
-                row["Cluster"] = el.Attribute("Cluster") == null ? "" : el.Attribute("Cluster").Value;
-                row["Target"] = el.Attribute("IsTarget") == null ? "" : el.Attribute("IsTarget").Value;
-                string level = "";
-                if (el.Attribute("Level") != null)
-                {
-                    if (el.Attribute("Level").Value == "National")
-                        level = "Country";
-                    else if (el.Attribute("Level").Value == "Governorate")
-                        level = "Admin1";
-                    else if (el.Attribute("Level").Value == "District")
-                        level = "Admin2";
-                }
-
-                row["Level"] = level;
-
-                row["Category"] = el.Attribute("Category") == null ? "" : el.Attribute("Category").Value;
-                row["Mandatory"] = el.Attribute("IsMandatory") == null ? "" : el.Attribute("IsMandatory").Value;
-            }
-
-            dt.Rows.Add(row);
+            return DBContext.GetData("GetTargetSettings", new object[] { emgLocId, emgClusterId, year });
         }
 
         protected void ddlSelected(object sender, EventArgs e)
         {
             int countryId = RC.GetSelectedIntVal(ddlCountry);
             int clusterId = RC.GetSelectedIntVal(ddlCluster);
+            int year = RC.GetSelectedIntVal(ddlFrameworkYear);
 
             if (countryId > 0 && clusterId > 0)
             {
-                string key = ddlCountry.SelectedValue + ddlCluster.SelectedValue;
-                FillControls(key);
+                FillControls(countryId, clusterId);
             }
+
+            LoadSettings();
         }
 
-        private void FillControls(string key)
+        private void FillControls(int countryId, int clusterId)
         {
-            string path = GetFilePath();
-
-            XElement root = XElement.Load(path);
-            IEnumerable<XElement> address =
-                from el in root.Elements("AdminTarget")
-                where (string)el.Attribute("Key") == key
-                select el;
-            foreach (XElement el in address)
+            DataTable dt = GetFrameworkSettings();
+            if (dt.Rows.Count > 0)
             {
-                if (el.Attribute("IsTarget") != null)
+                DataRow row = dt.Rows[0];
+
+                DateTime dtFrom = DateTime.Now;
+                if (row["DateLimit"] != DBNull.Value)
                 {
-                    if (el.Attribute("IsTarget").Value == "Yes")
-                    {
-                        rbTargetYes.Checked = true;
-                        rbTargetNo.Checked = false;
-                    }
-                    else
-                    {
-                        rbTargetNo.Checked = true;
-                        rbTargetYes.Checked = false;
-                    }
+                    dtFrom = DateTime.ParseExact(row["DateLimit"].ToString(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                    txtDate.Text = dtFrom.ToString("dd-MM-yyyy");
+                }
+                else
+                {
+                    txtDate.Text = "";
+                }
+
+                ddlFrameworkYear.SelectedValue = row["Year"].ToString();
+                txtNoClusterIndicators.Text = row["ClusterIndicatorMax"].ToString();
+                txtNoActivitiesFramework.Text = row["ActivityMax"].ToString();
+                txtNoIndicatorsFramework.Text = row["IndicatorMax"].ToString();
+                ddlLevel.SelectedValue = row["AdminLevel"].ToString();
+                ddlType.SelectedValue = row["AdminType"].ToString();
+
+
+                if (row["IsTargetNeeded"].ToString() == "True")
+                {
+                    rbTargetYes.Checked = true;
+                    rbTargetNo.Checked = false;
                 }
                 else
                 {
@@ -147,61 +101,47 @@ namespace SRFROWCA.Admin
                     rbTargetYes.Checked = false;
                 }
 
-                if (el.Attribute("Level") != null)
-                    ddlLevel.SelectedValue = el.Attribute("Level").Value;
-                if (el.Attribute("Category") != null)
-                    ddlType.SelectedValue = el.Attribute("Category").Value;
-
-                if (el.Attribute("IsMandatory") != null)
+                if (row["IsTargetMandatory"].ToString() == "True")
                 {
-                    if (el.Attribute("IsMandatory").Value == "Yes")
-                    {
-                        rbMandatoryYes.Checked = true;
-                        rbMandatoryNo.Checked = false;
-                    }
-                    else
-                    {
-                        rbMandatoryNo.Checked = true;
-                        rbMandatoryYes.Checked = false;
-                    }
+                    rbMandatoryYes.Checked = true;
+                    rbMandatoryNo.Checked = false;
                 }
                 else
                 {
                     rbMandatoryNo.Checked = true;
                     rbMandatoryYes.Checked = false;
                 }
+
             }
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
             SetFrameworkSettings();
-            LoadSettings();
             lblFrameworkSettings.Text = "Settings save successfully!";
         }
 
         private void SetFrameworkSettings()
         {
-            DeleteElement();
             AddSettingsKey();
             LoadSettings();
+            ClearControls();
+        }
+
+        private void ClearControls()
+        {
+            txtDate.Text = "";
+            txtNoClusterIndicators.Text = "";
+            txtNoActivitiesFramework.Text = "";
+            txtNoIndicatorsFramework.Text = "";
+            ddlLevel.SelectedIndex = 0;
+            ddlType.SelectedIndex = 0;
+            rbTargetYes.Checked = true;
+            rbMandatoryYes.Checked = true;
         }
 
         private void AddSettingsKey()
         {
-            string path = GetFilePath();
-            XDocument doc = null;
-            if (!File.Exists(path))
-            {
-                doc = new XDocument(new XDeclaration("1.0", "utf-8", ""));
-                XElement root = new XElement("AdminTargets");
-                doc.Add(root);
-            }
-            else
-            {
-                doc = XDocument.Load(path);
-            }
-
             List<ListItem> countriesList = RC.GetListControlItems(ddlCountry);
             List<ListItem> clustersList = RC.GetListControlItems(ddlCluster);
 
@@ -209,27 +149,25 @@ namespace SRFROWCA.Admin
             {
                 foreach (ListItem cluster in clustersList)
                 {
-                    string key = country.Value + cluster.Value;
-                    string isTarget = rbTargetYes.Checked ? "Yes" : "No";
-                    string isMandatory = rbMandatoryYes.Checked ? "Yes" : "No";
+                    int year = RC.GetSelectedIntVal(ddlFrameworkYear);
+                    string key = country.Value + cluster.Value + year.ToString();
+                    int emgLocId = Convert.ToInt32(country.Value);
+                    int emgClusterId = Convert.ToInt32(cluster.Value);
+                    DateTime dateLimit = DateTime.ParseExact(txtDate.Text.Trim(),
+                                                                "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                    int outputInd = Convert.ToInt32(txtNoClusterIndicators.Text.Trim());
+                    int activities = Convert.ToInt32(txtNoActivitiesFramework.Text.Trim());
+                    int indicators = Convert.ToInt32(txtNoIndicatorsFramework.Text.Trim());
+                    string adminLevel = ddlLevel.SelectedValue;
+                    string adminType = ddlType.SelectedValue;
+                    int isTarget = rbTargetYes.Checked ? 1 : 0;
+                    int isMandatory = rbMandatoryYes.Checked ? 1 : 0;
 
-                    XElement el = new XElement("AdminTarget",
-                                    new XAttribute("Key", key),
-                                    new XAttribute("CountryID", country.Value),
-                                    new XAttribute("Country", country.Text),
-                                    new XAttribute("ClusterID", cluster.Value),
-                                    new XAttribute("Cluster", cluster.Text),
-                                    new XAttribute("IsTarget", isTarget),
-                                    new XAttribute("Level", ddlLevel.SelectedValue),
-                                    new XAttribute("Category", ddlType.SelectedValue),
-                                    new XAttribute("IsMandatory", isMandatory)
-                                    );
-                    doc.Element("AdminTargets").Add(el);
+                    DBContext.Add("InsertAdminTargetSettings", new object[]{key, year, emgLocId, emgClusterId, dateLimit, outputInd
+                                                                             ,activities, indicators, adminLevel, adminType
+                                                                             ,isTarget, isMandatory, DBNull.Value});
                 }
             }
-
-            doc.Save(path);
-
         }
 
         private void CreateSettingsAttribute(XmlDocument doc, XmlElement elem, string name, string value)
@@ -242,50 +180,14 @@ namespace SRFROWCA.Admin
 
         private void DeleteElement()
         {
-            string path = GetFilePath();
-            XDocument doc = XDocument.Load(path);
+            int val = RC.GetSelectedIntVal(ddlCountry);
+            int? emgLocId = val == 0 ? (int?)null : val;
+            val = RC.GetSelectedIntVal(ddlCluster);
+            int? emgClusterId = val == 0 ? (int?)null : val;
 
-            List<ListItem> countriesList = RC.GetListControlItems(ddlCountry);
-            List<ListItem> clustersList = RC.GetListControlItems(ddlCluster);
+            int year = RC.GetSelectedIntVal(ddlFrameworkYear);
 
-            foreach (ListItem country in countriesList)
-            {
-                foreach (ListItem cluster in clustersList)
-                {
-                    string key = country.Value + cluster.Value;
-                    doc.Descendants("AdminTarget")
-                    .Where(e => (string)e.Attribute("Key") == key)
-                    .Remove();
-                }
-            }
-
-            doc.Save(path);
+            DBContext.Delete("DeleteAdminTargetSettings", new object[] { emgLocId, emgClusterId, year, DBNull.Value });
         }
-
-        //private void DeleteSettingsKey(string configKey, XmlDocument doc)
-        //{
-        //    string path = GetFilePath();
-        //    if (File.Exists(path))
-        //    {
-        //        XmlNode settingsNode = doc.DocumentElement;
-        //        XDocument delKey = XDocument.Load(path);
-        //        foreach (XmlNode node in settingsNode.ChildNodes)
-        //        {
-        //            if (node.Name.Equals(configKey))
-        //            {
-        //                delKey.Descendants(configKey).Remove();
-        //                delKey.Save(path);
-        //                doc.Load(path);
-        //            }
-        //        }
-        //    }
-        //}
-
-        private string GetFilePath()
-        {
-            string path = HttpRuntime.AppDomainAppPath;
-            return path.Substring(0, path.LastIndexOf(@"\") + 1) + @"Configurations\AdminTargetSettings.xml";
-        }
-
     }
 }

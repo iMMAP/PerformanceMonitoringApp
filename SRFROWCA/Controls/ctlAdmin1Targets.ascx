@@ -4,21 +4,21 @@
         $('.content').hide();
         $("#<%=pAdmin1Target.ClientID%>").click(function () {
             $(this).next(".content").toggle();
-            if ($.trim($(this).text()) === "Click To Show Locations") {
+            if ($.trim($(this).text()) === "Click To Show Locations To Add/Edit Targets") {
                 $(this).text("Click To Hide Locations");
             }
             else {
-                $(this).text("Click To Show Locations");
+                $(this).text("Click To Show Locations To Add/Edit Targets");
             }
         });
 
         $("#<%=pAdmin1GenderTarget.ClientID%>").click(function () {
             $(this).next(".content").toggle();
-            if ($.trim($(this).text()) === "Click To Show Locations") {
+            if ($.trim($(this).text()) === "Click To Show Locations To Add/Edit Targets") {
                 $(this).text("Click To Hide Locations");
             }
             else {
-                $(this).text("Click To Show Locations");
+                $(this).text("Click To Show Locations To Add/Edit Targets");
             }
         });
     });
@@ -28,7 +28,7 @@
         <div class="widget-body">
             <div class="widget-main no-padding-bottom no-padding-top targetCtl" id="divAdmin1Targets" runat="server">
                 <a id="pAdmin1Target" runat="server" style="width: 20%">
-                    <asp:Localize ID="localClickToShow1" runat="server" Text="Click To Show Locations" meta:resourcekey="localClickToShow1Resource1"></asp:Localize></a>
+                    <asp:Localize ID="localClickToShow1" runat="server" Text="Click To Show Locations To Add/Edit Targets" meta:resourcekey="localClickToShow1Resource1"></asp:Localize></a>
                 <div class="content">
                     <asp:Repeater ID="rptCountry" runat="server" OnItemDataBound="rptCountry_ItemDataBound">
                         <HeaderTemplate>
@@ -81,7 +81,7 @@
             </div>
             <div class="widget-main no-padding-bottom no-padding-top hidden targetGenderCtl" id="divAdmin1GenderTargets" runat="server">
                 <a id="pAdmin1GenderTarget" runat="server" style="width: 20%">
-                    <asp:Localize ID="localClickShow2" runat="server" Text="Click To Show Locations" meta:resourcekey="localClickShow2Resource1"></asp:Localize></a>
+                    <asp:Localize ID="localClickShow2" runat="server" Text="Click To Show Locations To Add/Edit Targets" meta:resourcekey="localClickShow2Resource1"></asp:Localize></a>
 
                 <div class="content">
                     <asp:Repeater ID="rptCountryGender" runat="server" OnItemDataBound="rptCountryGender_ItemDataBound">

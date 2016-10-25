@@ -16,21 +16,17 @@ namespace SRFROWCA.OPS
 
         private void AddOPSTargetControl()
         {
-            //LoadIndLocations(indCtl, 0, false);
-            //indCtl.ControlNumber = i + 1;
-            //indCtl.ID = "indicatorControlId" + i.ToString();
-
-            string key = EmgLocationId.ToString() + EmgClusterId.ToString();
-            AdminTargetSettingItems items = RC.AdminTargetSettings(key);
+            int year = 2017;
+            AdminTargetSettingItems items = RC.AdminTargetSettings(EmgLocationId, EmgClusterId, year);
             if (items.IsTarget)
             {
                 UserControl ctl = null;
-                if (items.AdminLevel == RC.LocationTypes.Governorate)
+                if (items.AdminLevel == RC.AdminLevels.Admin1)
                 {
                     ctl = (ctlOPSAdmin1Targets)LoadControl("~/controls/ctlOPSAdmin1Targets.ascx");
                     ((ctlOPSAdmin1Targets)ctl).ID = "OPSTargetControl";
                 }
-                else if (items.AdminLevel == RC.LocationTypes.District)
+                else if (items.AdminLevel == RC.AdminLevels.Admin2)
                 {
                     ctl = (ctlOPSAdmin2Targets)LoadControl("~/controls/ctlOPSAdmin2Targets.ascx");
                     ((ctlOPSAdmin2Targets)ctl).ID = "OPSTargetControl";
@@ -112,4 +108,6 @@ namespace SRFROWCA.OPS
             ExceptionUtility.LogException(exc, User);
         }
     }
+
+    
 }

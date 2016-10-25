@@ -14,16 +14,15 @@ namespace SRFROWCA.Controls
         {
             lbl1stNumber.Text = " " + (ControlNumber).ToString();
             if (string.IsNullOrEmpty(hfIndicatorId.Value) || hfIndicatorId.Value == "0")
-            {                
+            {
                 PopulateUnits(true);
             }
 
-            string key = this.indCtlEmgLocId.ToString() + this.indCtlEmgClusterId.ToString();
-            AdminTargetSettingItems items = RC.AdminTargetSettings(key);
+            AdminTargetSettingItems items = RC.AdminTargetSettings(indCtlEmgLocId, indCtlEmgClusterId, indYear);
             if (items.IsTarget)
             {
                 UserControl ctl = null;
-                if (items.AdminLevel == RC.LocationTypes.National)
+                if (items.AdminLevel == RC.AdminLevels.Country)
                 {
                     ctl = (ctlCountryTargets)LoadControl("~/controls/ctlCountryTargets.ascx");
                     ((ctlCountryTargets)ctl).EmgLocId = this.indCtlEmgLocId;
@@ -31,7 +30,7 @@ namespace SRFROWCA.Controls
                     ((ctlCountryTargets)ctl).IsGender = this.indCtlIsGender;
                     ((ctlCountryTargets)ctl).ID = "AdminTargetControl";
                 }
-                else if (items.AdminLevel == RC.LocationTypes.Governorate)
+                else if (items.AdminLevel == RC.AdminLevels.Admin1)
                 {
                     ctl = (ctlAdmin1Targets)LoadControl("~/controls/ctlAdmin1Targets.ascx");
                     ((ctlAdmin1Targets)ctl).EmgLocId = this.indCtlEmgLocId;
@@ -40,7 +39,7 @@ namespace SRFROWCA.Controls
                     ((ctlAdmin1Targets)ctl).IsGender = this.indCtlIsGender;
                     ((ctlAdmin1Targets)ctl).ID = "AdminTargetControl";
                 }
-                else if (items.AdminLevel == RC.LocationTypes.District)
+                else if (items.AdminLevel == RC.AdminLevels.Admin2)
                 {
                     ctl = (ctlAdmin2Targets)LoadControl("~/controls/ctlAdmin2Targets.ascx");
                     ((ctlAdmin2Targets)ctl).EmgLocId = this.indCtlEmgLocId;
@@ -82,15 +81,14 @@ namespace SRFROWCA.Controls
 
         private void SaveTargets(int indicatorId, bool IsGender)
         {
-            string key = this.indCtlEmgLocId.ToString() + this.indCtlEmgClusterId.ToString();
-            AdminTargetSettingItems items = RC.AdminTargetSettings(key);
+            AdminTargetSettingItems items = RC.AdminTargetSettings(indCtlEmgLocId, indCtlEmgClusterId, indYear);
+
             foreach (Control ctlTareget in pnlTargets.Controls)
             {
                 if (ctlTareget != null && ctlTareget.ID != null && ctlTareget.ID.Contains("AdminTargetControl"))
                 {
                     string ctlType = ctlTareget.GetType().ToString();
-                    //if (ctlTareget.GetType() == ctlCountryTargets)
-                    if (items.AdminLevel == RC.LocationTypes.National)
+                    if (items.AdminLevel == RC.AdminLevels.Country)
                     {
                         ctlCountryTargets countryCtl = ctlTareget as ctlCountryTargets;
                         if (countryCtl != null)
@@ -101,7 +99,7 @@ namespace SRFROWCA.Controls
                                 SaveCountryTargets(countryCtl.rptCountry, indicatorId);
                         }
                     }
-                    else if (items.AdminLevel == RC.LocationTypes.Governorate)
+                    else if (items.AdminLevel == RC.AdminLevels.Admin1)
                     {
                         ctlAdmin1Targets adm1Ctl = ctlTareget as ctlAdmin1Targets;
                         if (adm1Ctl != null)
@@ -112,7 +110,7 @@ namespace SRFROWCA.Controls
                                 SaveAdmin1Target(adm1Ctl.rptCountry, indicatorId);
                         }
                     }
-                    else if (items.AdminLevel == RC.LocationTypes.District)
+                    else if (items.AdminLevel == RC.AdminLevels.Admin2)
                     {
                         ctlAdmin2Targets adm2Ctl = ctlTareget as ctlAdmin2Targets;
                         if (adm2Ctl != null)
@@ -468,6 +466,7 @@ namespace SRFROWCA.Controls
         public int indCtlIndicatorId { get; set; }
         public int ClusterFrameworkLocCatId { get; set; }
         public bool indCtlIsGender { get; set; }
+        public int indYear { get; set; }
     }
 
 

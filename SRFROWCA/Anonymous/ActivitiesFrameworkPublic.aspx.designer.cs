@@ -85,24 +85,6 @@ namespace SRFROWCA.Anonymous {
         protected global::System.Web.UI.WebControls.DropDownList ddlObjective;
         
         /// <summary>
-        /// lblActivity control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblActivity;
-        
-        /// <summary>
-        /// ddlActivity control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlActivity;
-        
-        /// <summary>
         /// lblIndicator control.
         /// </summary>
         /// <remarks>

@@ -164,15 +164,15 @@ namespace SRFROWCA.Common
         private static int GetProjectLocationCategoryType(int projectId)
         {
             DataTable dtProjInfo = DBContext.GetData("GetProjCountryAndCluster", new object[] { projectId });
-            string emgLocId = "";
-            string emgClusterId = "";
+            int emgLocId = 0;
+            int emgClusterId = 0;
             if (dtProjInfo.Rows.Count > 0)
             {
-                emgLocId = dtProjInfo.Rows[0]["EmergencyLocationId"].ToString();
-                emgClusterId = dtProjInfo.Rows[0]["EmergencyClusterId"].ToString();
+                int.TryParse(dtProjInfo.Rows[0]["EmergencyLocationId"].ToString(), out emgLocId);
+                int.TryParse(dtProjInfo.Rows[0]["EmergencyClusterId"].ToString(), out emgClusterId);
             }
-            string key = emgLocId + emgClusterId;
-            AdminTargetSettingItems items = RC.AdminTargetSettings(key);
+
+            AdminTargetSettingItems items = RC.AdminTargetSettings(emgLocId, emgClusterId, (int)RC.Year._2017);
 
             return (items.Category == RC.LocationCategory.Health) ? (int)RC.LocationCategory.Health
                                                                                     : (int)RC.LocationCategory.Government;

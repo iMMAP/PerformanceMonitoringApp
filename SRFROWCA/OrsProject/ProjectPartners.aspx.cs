@@ -73,7 +73,7 @@ namespace SRFROWCA.OrsProject
 
         private void AddProjectPartner(int orgId)
         {
-            DBContext.Add("InsertProjectPartner", new object[] { ProjectId, orgId, (int)RC.Year._Current, RC.GetCurrentUserId, DBNull.Value });
+            DBContext.Add("InsertProjectPartner", new object[] { ProjectId, orgId, RC.GetCurrentUserId, DBNull.Value });
         }
 
         private void DeleteProjectPartner(int orgId)

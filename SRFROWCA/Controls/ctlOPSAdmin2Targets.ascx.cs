@@ -23,6 +23,16 @@ namespace SRFROWCA.Controls
 
             if (!IsPostBack)
             {
+                string clusterName = "";
+                if (OPSClusterNameSecondary == "multisectorforrefugees")
+                {
+                    clusterName = "Refugee Response for " + OPSClusterName;
+                }
+                else
+                {
+                    clusterName = OPSClusterName;
+                }
+                lblCluster.Text = clusterName;
                 SetOPSIds();
                 GetReportId();
                 PopulateIndicators();
@@ -69,7 +79,7 @@ namespace SRFROWCA.Controls
                     }
                 }
                 ObjPrToolTip.ObjectiveIconToolTip(e, 0);
-                ObjPrToolTip.ObjectiveLableToolTip(e, 0);
+                //ObjPrToolTip.ObjectiveLableToolTip(e, 0);
             }
         }
 
@@ -683,6 +693,20 @@ namespace SRFROWCA.Controls
                 }
 
                 return clusterName == "multisectorforrefugees";
+            }
+        }
+
+        private string OPSClusterNameSecondary
+        {
+            get
+            {
+                string clusterName = "";
+                if (Request.QueryString["clname2"] != null)
+                {
+                    clusterName = Request.QueryString["clname2"].ToString();
+                }
+
+                return clusterName;
             }
         }
 

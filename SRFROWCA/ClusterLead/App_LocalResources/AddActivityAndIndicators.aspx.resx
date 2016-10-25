@@ -190,7 +190,7 @@
     <value />
   </data>
   <data name="lblObjResource1.Text" xml:space="preserve">
-    <value>Objective:</value>
+    <value>Objective*:</value>
   </data>
   <data name="lblObjResource1.ToolTip" xml:space="preserve">
     <value />
@@ -242,5 +242,8 @@
   </data>
   <data name="txtActivityFrResource1.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="lblMsRefugeeResource1.Text" xml:space="preserve">
+    <value>MS for Refugees Sector Framework (Refugee Response)</value>
   </data>
 </root>

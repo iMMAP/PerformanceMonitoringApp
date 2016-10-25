@@ -54,6 +54,9 @@ namespace SRFROWCA.Account
         {
             Session["ClusterFrameworkSelectedCountry"] = null;
             Session["ClusterFrameworkSelectedCluster"] = null;
+            Session["OutputFrameworkSelectedCountry"] = null;
+            Session["OutputFrameworkSelectedCluster"] = null;
+                
         }
 
         protected void LoginUser_LoginError(object sender, EventArgs e)

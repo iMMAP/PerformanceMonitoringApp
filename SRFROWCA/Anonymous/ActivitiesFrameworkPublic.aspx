@@ -71,7 +71,7 @@
                                                                     CssClass="width-80" OnSelectedIndexChanged="ddlSelectedIndexChnaged" meta:resourcekey="ddlObjectiveResource1">
                                                                 </asp:DropDownList>
                                                             </td>
-                                                            <td class="width-20">
+                                                            <%--<td class="width-20">
                                                                 <asp:Label ID="lblActivity" runat="server" Text="Activity:" meta:resourcekey="lblActivityResource1"></asp:Label>
                                                             </td>
                                                             <td class="width-30">
@@ -79,20 +79,21 @@
                                                                 <asp:DropDownList ID="ddlActivity" runat="server" CssClass="width-80" AutoPostBack="True"
                                                                     OnSelectedIndexChanged="ddlActivitySelectedIndexChnaged" meta:resourcekey="ddlActivityResource1">
                                                                 </asp:DropDownList>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="width-20">
+                                                            </td>--%>
+                                                             <td class="width-20">
                                                                 <asp:Label ID="lblIndicator" runat="server" Text="Indicator" meta:resourcekey="lblIndicatorResource1"></asp:Label>
                                                             </td>
 
                                                             <td class="width-30">
                                                                 <asp:TextBox ID="txtActivityName" runat="server" CssClass="width-80" meta:resourcekey="txtActivityNameResource1"></asp:TextBox>
                                                             </td>
-
+                                                            </tr>
+                                                        <tr>
                                                             <td class="width-20">
                                                                 <asp:Label ID="lblYear" runat="server" Text="Year:" meta:resourcekey="lblYearResource1"></asp:Label>
                                                             </td>
+                                                        
+                                                           
                                                             <td class="width-30">
                                                                 <asp:DropDownList ID="ddlFrameworkYear" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlYear_SelectedIndexChnaged" meta:resourcekey="ddlFrameworkYearResource1">
                                                                     <asp:ListItem Text="2017" Value="13"></asp:ListItem>

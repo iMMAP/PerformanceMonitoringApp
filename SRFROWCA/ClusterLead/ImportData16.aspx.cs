@@ -17,8 +17,13 @@ namespace SRFROWCA.ClusterLead
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (!this.User.Identity.IsAuthenticated)
-            //    Response.Redirect("../Default.aspx");
+        }
+
+        protected void ddlYear_SelectedIndexChnaged(object sender, EventArgs e)
+        {
+            int yearId = RC.GetSelectedIntVal(ddlYear);
+            fuAchieved.Enabled = yearId > 0;
+            btnImport.Enabled = yearId > 0;
         }
 
         protected void btnImport_Click(object sender, EventArgs e)
@@ -41,7 +46,7 @@ namespace SRFROWCA.ClusterLead
                         int returnValue = ImportData();
                         if (returnValue > 0)
                         {
-                            DataTable dtWrongLocations = DBContext.GetData("GetTempInvalidLocations", new object[] {returnValue});
+                            DataTable dtWrongLocations = DBContext.GetData("GetTempInvalidLocations", new object[] { returnValue });
                             if (dtWrongLocations.Rows.Count > 0)
                             {
                                 gvActivity.DataSource = dtWrongLocations;
@@ -55,7 +60,7 @@ namespace SRFROWCA.ClusterLead
                     }
 
                     //scope.Complete();
-                    
+
                 }
             }
             catch (Exception ex)
@@ -175,7 +180,7 @@ namespace SRFROWCA.ClusterLead
         // Import all data from staging table to respective tables.
         private int ImportData()
         {
-            int yearId = (int)RC.Year._Current;
+            int yearId = RC.GetSelectedIntVal(ddlYear);
             return DBContext.Update("ImportUserCLDataFromStagingTable2016", new object[] { yearId, UserInfo.Organization, UserInfo.EmergencyCountry,
                                                                                            UserInfo.EmergencyCluster, RC.GetCurrentUserId, 
                                                                                            DBNull.Value });
@@ -261,10 +266,10 @@ namespace SRFROWCA.ClusterLead
                 orgId = UserInfo.Organization;
             }
 
-            return DBContext.GetData("GetReportedData2016_Report", new object[]{countryId, clusterId, orgId, RC.SelectedSiteLanguageId});
+            return DBContext.GetData("GetReportedData2016_Report", new object[] { countryId, clusterId, orgId, RC.SelectedSiteLanguageId });
         }
 
-        private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, 
+        private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success,
                                     bool fadeOut = true, int animationTime = 500)
         {
             RC.ShowMessage(Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);

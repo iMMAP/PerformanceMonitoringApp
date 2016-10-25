@@ -17,13 +17,21 @@
                         <div>
                             <h2>Import Data</h2>
                             <p>
+                                Year: (Select Year To Import Data)
+                                <asp:DropDownList ID="ddlYear" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlYear_SelectedIndexChnaged">
+                                    <asp:ListItem Text="Select" Value="0"></asp:ListItem>
+                                    <asp:ListItem Text="2017" Value="13"></asp:ListItem>
+                                    <asp:ListItem Text="2016" Value="12"></asp:ListItem>
+                                </asp:DropDownList>
+                            </p>
+                            <p>
                                 <asp:Localize ID="localUploadBrowseText" runat="server" Text="Click 'Browse' To Select File."></asp:Localize>
                             </p>
                             <p>
-                                <asp:FileUpload ID="fuAchieved" runat="server" class="btn btn-grey" />
+                                <asp:FileUpload ID="fuAchieved" runat="server" class="btn btn-grey" Enabled="false" />
                             </p>
                             <p>
-                                <asp:Button ID="btnImport" runat="server" Text="Import" CssClass="btn btn-primary" OnClick="btnImport_Click" />
+                                <asp:Button ID="btnImport" runat="server" Text="Import" Enabled="false" CssClass="btn btn-primary" OnClick="btnImport_Click" />
                             </p>
                         </div>
                     </div>

@@ -84,30 +84,23 @@
                                                                     <asp:Label ID="lblObj" runat="server" Text="Objective:" meta:resourcekey="lblObjResource1"></asp:Label></label>
                                                             </td>
                                                             <td class="width-30">
-                                                                <asp:DropDownList ID="ddlObjective" runat="server" AppendDataBoundItems="True" AutoPostBack="True"
-                                                                    CssClass="width-80" OnSelectedIndexChanged="ddlSelectedIndexChnaged" meta:resourcekey="ddlObjectiveResource1">
+                                                                <asp:DropDownList ID="ddlObjective" runat="server" AutoPostBack="True"
+                                                                    CssClass="width-80" OnSelectedIndexChanged="ddlObj_SelectedIndexChnaged" meta:resourcekey="ddlObjectiveResource1">
                                                                 </asp:DropDownList>
-                                                            </td>
-                                                            <td class="width-20">
-                                                                <label>
-                                                                    <asp:Label ID="lblActivity" runat="server" Text="Activity:" meta:resourcekey="lblActivityResource1"></asp:Label></label>
-                                                            </td>
-                                                            <td class="width-30">
+                                                            </td>                                                           
 
-                                                                <asp:DropDownList ID="ddlActivity" runat="server" CssClass="width-80" AutoPostBack="True"
-                                                                    OnSelectedIndexChanged="ddlActivitySelectedIndexChnaged" meta:resourcekey="ddlActivityResource1">
-                                                                </asp:DropDownList>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
                                                             <td class="width-20">
                                                                 <label>
-                                                                    <asp:Label ID="lblIndicator" runat="server" Text="Indicator" meta:resourcekey="lblIndicatorResource1"></asp:Label></label>
+                                                                    <asp:Label ID="lblIndicator" runat="server" Text="Indicator:" meta:resourcekey="lblIndicatorResource1"></asp:Label></label>
                                                             </td>
 
                                                             <td class="width-30">
                                                                 <asp:TextBox ID="txtActivityName" runat="server" CssClass="width-80" meta:resourcekey="txtActivityNameResource1"></asp:TextBox>
                                                             </td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            
 
                                                             <td class="width-20">
                                                                 <label>
@@ -119,12 +112,9 @@
                                                                     <asp:ListItem Text="2016" Value="12" meta:resourcekey="ListItemResource2"></asp:ListItem>
                                                                     <asp:ListItem Text="2015" Value="11" meta:resourcekey="ListItemResource3"></asp:ListItem>
                                                                 </asp:DropDownList>
-                                                                <asp:CheckBox ID="cbCPActivity" runat="server" Text="CP Activity:" TextAlign="Left" CssClass="mycheckbox"
+                                                                <asp:CheckBox ID="cbCPActivity" runat="server" Text="CP Activity:" ToolTip="Child Protection Activity" TextAlign="Left" CssClass="mycheckbox"
                                                                  OnCheckedChanged="ddlActivitySelectedIndexChnaged" AutoPostBack="true" />
                                                             </td>
-                                                        </tr>
-
-                                                        <tr>
                                                             <td>&nbsp;</td>
                                                             <td colspan="4" style="padding-top: 10px;">
                                                                 <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch2_Click"
@@ -178,22 +168,22 @@
                             <asp:Image ID="imgCP" ImageUrl="~/assets/orsimages/cp1.png" ToolTip="Child Protection Indicator" runat="server" Visible='<%# Eval("IsChildProtection") %>'  />
                         </ItemTemplate>
                     </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Active Activity" ItemStyle-HorizontalAlign="Center" meta:resourcekey="TemplateFieldResource2">
+                        <%--<asp:TemplateField HeaderText="Active Activity" ItemStyle-HorizontalAlign="Center" meta:resourcekey="TemplateFieldResource2">
                             <ItemTemplate>
                                 <asp:CheckBox ID="cbIsActivityActive" runat="server" Checked='<%# Eval("IsActivityActive") %>' OnCheckedChanged="cbActivityActive_Changed" AutoPostBack="True" meta:resourcekey="cbIsActivityActiveResource1" />
                             </ItemTemplate>
 
                             <ItemStyle HorizontalAlign="Center"></ItemStyle>
-                        </asp:TemplateField>
+                        </asp:TemplateField>--%>
                         <asp:BoundField DataField="Activity" HeaderText="Activity" SortExpression="Activity" meta:resourcekey="BoundFieldResource4" />
                         <asp:BoundField DataField="Indicator" HeaderText="Indicator" SortExpression="Indicator" meta:resourcekey="BoundFieldResource5" />
-                        <asp:TemplateField HeaderText="Active Indicator" ItemStyle-HorizontalAlign="Center" meta:resourcekey="TemplateFieldResource3">
+                        <%--<asp:TemplateField HeaderText="Active Indicator" ItemStyle-HorizontalAlign="Center" meta:resourcekey="TemplateFieldResource3">
                             <ItemTemplate>
                                 <asp:CheckBox ID="cbIsActive" runat="server" Checked='<%# Eval("IsActive") %>' OnCheckedChanged="cbActive_Changed" AutoPostBack="True" meta:resourcekey="cbIsActiveResource1" />
                             </ItemTemplate>
 
                             <ItemStyle HorizontalAlign="Center"></ItemStyle>
-                        </asp:TemplateField>
+                        </asp:TemplateField>--%>
                         <asp:BoundField DataField="Unit" HeaderText="Unit" SortExpression="Unit" meta:resourcekey="BoundFieldResource6" />
                         <asp:TemplateField ItemStyle-Width="4%" HeaderText="<span class='tooltip2' title='Each Indicator has assigned a calcuation method type.</br>Sum: Sum of all monthly achieved.</br>Agerage: Average of all monthly achieved.</br>Max: Max data reported in any month.</br>Latest: Latest data reported.'>Calculation Method</span>" meta:resourcekey="TemplateFieldResource4">
                             <ItemTemplate>
@@ -233,6 +223,11 @@
                         <asp:TemplateField Visible="false" meta:resourcekey="TemplateFieldResource6">
                             <ItemTemplate>
                                 <asp:Label ID="lblClusterID" runat="server" Text='<%# Eval("EmergencyClusterId") %>' meta:resourcekey="lblClusterIDResource1"></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                         <asp:TemplateField Visible="false">
+                            <ItemTemplate>
+                                <asp:Label ID="lblIsDateExceeded" runat="server" Text='<%# Eval("IsDateExceeded") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>

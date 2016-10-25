@@ -22,6 +22,7 @@ namespace SRFROWCA.Controls
 
             if (!IsPostBack)
             {
+                lblCluster.Text = OPSClusterName;
                 SetOPSIds();
                 GetReportId();
                 PopulateIndicators();
@@ -68,7 +69,7 @@ namespace SRFROWCA.Controls
                     }
                 }
                 ObjPrToolTip.ObjectiveIconToolTip(e, 0);
-                ObjPrToolTip.ObjectiveLableToolTip(e, 0);
+                //ObjPrToolTip.ObjectiveLableToolTip(e, 0);
             }
         }
 

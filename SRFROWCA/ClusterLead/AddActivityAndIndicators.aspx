@@ -288,11 +288,12 @@
                     <asp:Button ID="Button1" runat="server" OnClick="btnSave_Click" Text="Save" CssClass="width-10 btn btn-sm btn-primary" meta:resourcekey="Button1Resource1" />
                     <asp:Button ID="Button2" runat="server" Text="Back" OnClick="btnBackToSRPList_Click"
                         CssClass="width-10 btn btn-sm btn-primary" CausesValidation="False" meta:resourcekey="Button2Resource1" />
-                    <asp:Button ID="Button3" runat="server" Text="Help"
+                    <asp:Button ID="Button3" runat="server" Text="Help" Visible="false"
                         CssClass="width-10 btn btn-sm btn-primary" CausesValidation="False" meta:resourcekey="Button3Resource1" />
                 </div>
                 <div class="col-xs-4 col-sm-4">
-                    <asp:Label ID="lblMSRefugee" runat="server" Text="MS for Refugees Sector Framework"
+                    <asp:Label ID="lblMSRefugee" runat="server" Text="MS for Refugees Sector Framework (Refugee Response)"
+                        meta:resourcekey="lblMsRefugeeResource1"
                         CssClass="label-warning label-lg" Visible="false"></asp:Label>
                     <asp:CheckBox ID="cbMSRefugees" runat="server" Text="Yes" Visible="false" />
                 </div>
@@ -319,7 +320,7 @@
                     </div>
                 </div>
                 <div class="col-xs-4 col-sm-4">
-                    <asp:Label ID="lblObj" runat="server" Text="Objective:" meta:resourcekey="lblObjResource1"></asp:Label>
+                    <asp:Label ID="lblObj" runat="server" Text="Objective*:" meta:resourcekey="lblObjResource1"></asp:Label>
                     <div>
                         <asp:DropDownList ID="ddlObjective" runat="server" CssClass="width-100" meta:resourcekey="ddlObjectiveResource1">
                         </asp:DropDownList>
@@ -399,6 +400,7 @@
 
 
         function validateIndicator(sender, args) {
+            
             var counter = 0;
             $(".dvIndicator").each(function () {
                 var index = 0;
@@ -427,7 +429,7 @@
                     args.IsValid = false;
                 }
                 else
-                    arg.IsValid = true;
+                    args.IsValid = true;
 
                 index += 1;
             });

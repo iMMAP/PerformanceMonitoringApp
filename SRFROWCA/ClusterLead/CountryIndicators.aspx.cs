@@ -16,7 +16,7 @@ namespace SRFROWCA.ClusterLead
             {
                 //UserInfo.UserProfileInfo(RC.EmergencySahel2015);
                 LoadCombos();
-                SetFiltersFromSession();
+                RC.SetFiltersFromSession(ddlCountry, ddlCluster, Session);
                 DisableDropDowns();
                 if (Request.QueryString["year"] != null)
                 {
@@ -75,7 +75,8 @@ namespace SRFROWCA.ClusterLead
 
                 ImageButton btnDelete = e.Row.FindControl("btnDelete") as ImageButton;
                 ImageButton btnEdit = e.Row.FindControl("btnEdit") as ImageButton;
-                if (RC.GetSelectedIntVal(ddlFrameworkYear) == (int)RC.Year._2015 || RC.GetSelectedIntVal(ddlFrameworkYear) == (int)RC.Year._2016)
+
+                if (!RC.IsAdmin(this.User) && (RC.GetSelectedIntVal(ddlFrameworkYear) == (int)RC.Year._2015 || RC.GetSelectedIntVal(ddlFrameworkYear) == (int)RC.Year._2016))
                 {
                     if (btnDelete != null && btnEdit != null)
                     {
@@ -89,7 +90,14 @@ namespace SRFROWCA.ClusterLead
                     {
                         btnDelete.Attributes.Add("onclick", "javascript:return " +
                         "confirm('Are you sure you want to delete this Indicators?')");
-                        bool IsDateExceeded = SectorFramework.DateExceeded(emgLocationId, emgClusterId);
+                        //int year = 0;
+                        //int.TryParse(ddlFrameworkYear.SelectedItem.Text, out year);
+                        //bool IsDateExceeded = SectorFramework.DateExceeded(emgLocationId, emgClusterId, year);
+                        Label lblIsDateExceeded = e.Row.FindControl("lblIsDateExceeded") as Label;
+                        bool IsDateExceeded = false;
+                        if (lblIsDateExceeded != null)
+                            IsDateExceeded = lblIsDateExceeded.Text == "1";
+
                         if (!IsDateExceeded || RC.IsAdmin(this.User))
                         {
                             btnDelete.Visible = true;
@@ -166,9 +174,14 @@ namespace SRFROWCA.ClusterLead
         }
         protected void ddl_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
+            cbIncludeRegional.Visible = yearId < (int)RC.Year._2017;
+            localCBIsRegCap.Visible = yearId < (int)RC.Year._2017;
+
             LoadClusterIndicators();
             ToggleAddIndicators();
-            SaveFiltersInSession();
+            RC.SaveFiltersInSession(ddlCountry, ddlCluster, Session);
+
         }
         protected void gvClusterIndicators_Sorting(object sender, GridViewSortEventArgs e)
         {
@@ -300,8 +313,10 @@ namespace SRFROWCA.ClusterLead
                 return;
             }
 
-            int indUnused = SectorFramework.OutputIndUnused(emgLocationId, emgClusterId);
-            bool IsDateExceeded = SectorFramework.DateExceeded(emgLocationId, emgClusterId);
+            int year = 0;
+            int.TryParse(ddlFrameworkYear.SelectedItem.Text, out year);
+            int indUnused = SectorFramework.OutputIndUnused(emgLocationId, emgClusterId, year);
+            bool IsDateExceeded = SectorFramework.DateExceeded(emgLocationId, emgClusterId, year);
             btnAddIndicator.Enabled = !(indUnused <= 0 || IsDateExceeded);
 
         }
@@ -344,53 +359,6 @@ namespace SRFROWCA.ClusterLead
             return Convert.ToBoolean(DBContext.Delete("uspDeleteClusterIndicator", new object[] { indicatorID, null }));
         }
 
-        private void SaveFiltersInSession()
-        {
-            int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
-            int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
-
-            if (emgLocationId > 0)
-                Session["OutputFrameworkSelectedCountry"] = emgLocationId;
-            else
-                Session["OutputFrameworkSelectedCountry"] = null;
-
-            if (emgClusterId > 0)
-                Session["OutputFrameworkSelectedCluster"] = emgClusterId;
-            else
-                Session["OutputFrameworkSelectedCluster"] = null;
-        }
-
-        private void SetFiltersFromSession()
-        {
-            if (Session["OutputFrameworkSelectedCountry"] != null)
-            {
-                int countryId = 0;
-                int.TryParse(Session["OutputFrameworkSelectedCountry"].ToString(), out countryId);
-                if (countryId > 0)
-                {
-                    try
-                    {
-                        ddlCountry.SelectedValue = countryId.ToString();
-                    }
-                    catch { }
-                }
-            }
-
-            if (Session["OutputFrameworkSelectedCluster"] != null)
-            {
-                int clusterId = 0;
-                int.TryParse(Session["OutputFrameworkSelectedCluster"].ToString(), out clusterId);
-                if (clusterId > 0)
-                {
-                    try
-                    {
-                        ddlCluster.SelectedValue = clusterId.ToString();
-                    }
-                    catch { }
-                }
-            }
-        }
-
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
         {
             RC.ShowMessage(Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
@@ -400,6 +368,11 @@ namespace SRFROWCA.ClusterLead
         {
             try
             {
+                int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
+                if (yearId > (int)RC.Year._2016)
+                {
+                    dt.Columns.Remove("IsRegional");
+                }
                 dt.Columns.Remove("ClusterIndicatorId");
                 dt.Columns.Remove("SiteLanguageId");
                 dt.Columns.Remove("IndicatorAlt");
@@ -407,6 +380,8 @@ namespace SRFROWCA.ClusterLead
                 dt.Columns.Remove("EmergencyClusterId");
                 dt.Columns.Remove("UnitId");
                 dt.Columns.Remove("IsSRP");
+                dt.Columns.Remove("IndicatorCalculationTypeId");
+
             }
             catch { }
         }

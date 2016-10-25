@@ -32,17 +32,16 @@ namespace SRFROWCA.OrsProject
             if (project == null)
                 return;
 
-            string key = project.EmergencyLocationId.ToString() + project.EmergencyClusterId.ToString();
-            AdminTargetSettingItems items = RC.AdminTargetSettings(key);
+            AdminTargetSettingItems items = RC.AdminTargetSettings(project.EmergencyLocationId, project.EmergencyClusterId, project.Year);
             if (items.IsTarget)
             {
                 UserControl ctl = null;
-                if (items.AdminLevel == RC.LocationTypes.Governorate)
+                if (items.AdminLevel == RC.AdminLevels.Admin1)
                 {
                     ctl = (ctlORSAdmin1Report)LoadControl("~/OrsProject/ctlORSAdmin1Report.ascx");
                     ((ctlORSAdmin1Report)ctl).ID = "ORSReportControl";
                 }
-                else if (items.AdminLevel == RC.LocationTypes.District)
+                else if (items.AdminLevel == RC.AdminLevels.Admin2)
                 {
                     ctl = (ctlORSAdmin2Report)LoadControl("~/OrsProject/ctlORSAdmin2Report.ascx");
                     ((ctlORSAdmin2Report)ctl).ID = "ORSReportControl";

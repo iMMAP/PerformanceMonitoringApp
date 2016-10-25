@@ -16,7 +16,7 @@ namespace SRFROWCA.ClusterLead
             {
                 //CliearFilterSession();
                 LoadCombos();
-                SetFiltersFromSession();
+                RC.SetFiltersFromSession(ddlCountry, ddlCluster, Session);
                 DisableDropDowns();
                 SetDates();
                 LoadClusterIndicators();
@@ -47,7 +47,7 @@ namespace SRFROWCA.ClusterLead
             LoadCombos();
             DisableDropDowns();
             SetDates();
-            SetFiltersFromSession();
+            RC.SetFiltersFromSession(ddlCountry, ddlCluster, Session);
             LoadClusterIndicators();
         }
 
@@ -241,19 +241,19 @@ namespace SRFROWCA.ClusterLead
         protected void ddlMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadClusterIndicators();
-            SaveFiltersInSession();
+            RC.SaveFiltersInSession(ddlCountry, ddlCluster, Session);
         }
 
         protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadClusterIndicators();
-            SaveFiltersInSession();
+            RC.SaveFiltersInSession(ddlCountry, ddlCluster, Session);
         }
 
         protected void ddlCluster_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadClusterIndicators();
-            SaveFiltersInSession();
+            RC.SaveFiltersInSession(ddlCountry, ddlCluster, Session);
         }
 
         protected void ddlYear_SelectedIndexChanged(object sender, EventArgs e)
@@ -279,52 +279,7 @@ namespace SRFROWCA.ClusterLead
             RC.ShowMessage(Page, typeof(Page), UniqueID, message, notificationType, fadeOut, animationTime);
         }
 
-        private void SaveFiltersInSession()
-        {
-            int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
-            int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
-
-            if (emgLocationId > 0)
-                Session["OutputFrameworkSelectedCountry"] = emgLocationId;
-            else
-                Session["OutputFrameworkSelectedCountry"] = null;
-
-            if (emgClusterId > 0)
-                Session["OutputFrameworkSelectedCluster"] = emgClusterId;
-            else
-                Session["OutputFrameworkSelectedCluster"] = null;
-        }
-
-        private void SetFiltersFromSession()
-        {
-            if (Session["OutputFrameworkSelectedCountry"] != null)
-            {
-                int countryId = 0;
-                int.TryParse(Session["OutputFrameworkSelectedCountry"].ToString(), out countryId);
-                if (countryId > 0)
-                {
-                    try
-                    {
-                        ddlCountry.SelectedValue = countryId.ToString();
-                    }
-                    catch { }
-                }
-            }
-
-            if (Session["OutputFrameworkSelectedCluster"] != null)
-            {
-                int clusterId = 0;
-                int.TryParse(Session["OutputFrameworkSelectedCluster"].ToString(), out clusterId);
-                if (clusterId > 0)
-                {
-                    try
-                    {
-                        ddlCluster.SelectedValue = clusterId.ToString();
-                    }
-                    catch { }
-                }
-            }
-        }
+       
 
         private void CliearFilterSession()
         {

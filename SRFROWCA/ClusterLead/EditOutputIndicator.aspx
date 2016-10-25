@@ -144,7 +144,7 @@
                             <div class="widget-body">
                                 <div>
                                     <div class="widget-main no-padding-bottom no-padding-top" id="divAdmin1Targets" runat="server">
-                                        <a id="pAdmin1Target" runat="server" style="width: 20%">Click To Show Locations
+                                        <a id="pAdmin1Target" runat="server" style="width: 20%">Click To Show Locations To Add/Edit Targets
                                         </a>
                                         <div class="content">
                                             <asp:Repeater ID="rptAdmin" runat="server">
@@ -181,7 +181,7 @@
                             </div>
                         </div>
                         <div class="widget-main no-padding-bottom no-padding-top hidden" id="divAdmin1GenderTargets" runat="server">
-                            <a id="pAdmin1GenderTarget" runat="server" style="width: 20%">Click To Show Locations
+                            <a id="pAdmin1GenderTarget" runat="server" style="width: 20%">Click To Show Locations To Add/Edit Targets
                             </a>
                             <div class="content">
                                 <asp:Repeater ID="rptAdmin1Gender" runat="server">
@@ -259,7 +259,7 @@
                 args.IsValid = false;
             }
             else
-                arg.IsValid = true;
+                args.IsValid = true;
         }
 
         function LoadTargetControls()
@@ -319,21 +319,21 @@
 
             $("#<%=pAdmin1Target.ClientID%>").click(function () {
                 jQuery(this).next(".content").toggle();
-                if ($.trim($(this).text()) === "Click To Show Locations") {
+                if ($.trim($(this).text()) === "Click To Show Locations To Add/Edit Targets") {
                     $(this).text("Click To Hide Locations");
                 }
                 else {
-                    $(this).text("Click To Show Locations");
+                    $(this).text("Click To Show Locations To Add/Edit Targets");
                 }
             });
 
             $("#<%=pAdmin1GenderTarget.ClientID%>").click(function () {
                 jQuery(this).next(".content").toggle();
-                if ($.trim($(this).text()) === "Click To Show Locations") {
+                if ($.trim($(this).text()) === "Click To Show Locations To Add/Edit Targets") {
                     $(this).text("Click To Hide Locations");
                 }
                 else {
-                    $(this).text("Click To Show Locations");
+                    $(this).text("Click To Show Locations To Add/Edit Targets");
                 }
             });
 

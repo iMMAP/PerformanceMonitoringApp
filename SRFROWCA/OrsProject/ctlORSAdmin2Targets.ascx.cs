@@ -301,7 +301,8 @@ namespace SRFROWCA.OrsProject
             int emgLocationId = project.EmergencyLocationId;
             int emgClusterId = project.EmergencyClusterId;
             int? emgSecClusterId = project.SecEmergencyClusterId;
-            int yearId = (int)RC.Year._Current;
+            int yearId = (int)project.YearId;
+            
             DataTable dt = new DataTable();
             if (emgClusterId == (int)RC.ClusterSAH2015.MS)
                 dt = DBContext.GetData("GetMSRefgFrameworkForProjectTargets", new object[] { emgLocationId, emgClusterId, emgSecClusterId,

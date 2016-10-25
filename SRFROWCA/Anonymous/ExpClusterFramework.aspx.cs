@@ -17,7 +17,7 @@ namespace SRFROWCA.Anonymous
             if (!IsPostBack)
             {
                 PopulateDropDowns();
-                SetFiltersFromSession();
+                RC.SetFiltersFromSessionCluster(ddlCountryExport, ddlClusterExport, Session);
                 SetExportFile();
             }
         }
@@ -96,36 +96,7 @@ namespace SRFROWCA.Anonymous
             SetExportFile();
         }
 
-        private void SetFiltersFromSession()
-        {
-            if (Session["ClusterFrameworkSelectedCountry"] != null)
-            {
-                int countryId = 0;
-                int.TryParse(Session["ClusterFrameworkSelectedCountry"].ToString(), out countryId);
-                if (countryId > 0)
-                {
-                    try
-                    {
-                        ddlCountryExport.SelectedValue = countryId.ToString();
-                    }
-                    catch { }
-                }
-            }
-
-            if (Session["ClusterFrameworkSelectedCluster"] != null)
-            {
-                int clusterId = 0;
-                int.TryParse(Session["ClusterFrameworkSelectedCluster"].ToString(), out clusterId);
-                if (clusterId > 0)
-                {
-                    try
-                    {
-                        ddlClusterExport.SelectedValue = clusterId.ToString();
-                    }
-                    catch { }
-                }
-            }
-        }
+        
 
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
         {

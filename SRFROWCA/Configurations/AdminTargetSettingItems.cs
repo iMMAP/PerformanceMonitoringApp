@@ -12,7 +12,7 @@ namespace SRFROWCA.Configurations
     {
         public bool IsTarget { get; set; }
 
-        public RC.LocationTypes AdminLevel { get; set; }
+        public RC.AdminLevels AdminLevel { get; set; }
 
         public RC.LocationCategory Category { get; set; }
 

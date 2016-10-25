@@ -470,12 +470,11 @@ namespace SRFROWCA
                 liNewIndicatorListing.Attributes.Add("class", "active");
             }
 
-            else if (uri.Contains("Anonymous/ExpClusterFramework.aspx"))
-            {
-                PageTitle = "ORS - Export Framework";
-                //liClusterFrameworks.Attributes.Add("class", "active open");
-                liClusterFrameworkImport.Attributes.Add("class", "active");
-            }
+            //else if (uri.Contains("Anonymous/ExpClusterFramework.aspx"))
+            //{
+            //    PageTitle = "ORS - Export Framework";
+            //    liNewIndicatorListing.Attributes.Add("class", "active");
+            //}
             else if (uri.Contains("Reports/Summary/ProgressSummary.aspx"))
             {
                 PageTitle = "ORS - Progress Summary";

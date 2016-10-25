@@ -288,7 +288,7 @@ namespace SRFROWCA.OrsProject
                         List<int> selectedOrgs = orgs.Split(',').Select(int.Parse).ToList();
                         foreach (int orgId in selectedOrgs)
                         {
-                            DBContext.Add("InsertProjectPartners", new object[] { ProjectId, orgId, indicatorId, admin1Id, (int)RC.Year._Current,
+                            DBContext.Add("InsertProjectPartners", new object[] { ProjectId, orgId, indicatorId, admin1Id,
                                                                                 RC.GetCurrentUserId, DBNull.Value });
                         }
                     }

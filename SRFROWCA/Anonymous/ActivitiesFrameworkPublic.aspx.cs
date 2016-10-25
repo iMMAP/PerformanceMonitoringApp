@@ -16,8 +16,7 @@ namespace SRFROWCA.Anonymous
                 UserInfo.UserProfileInfo(RC.EmergencySahel2015);
                 LoadClustersFilter();
                 LoadCountry();
-                LoadObjectivesFilter();
-                PopulateActivities();
+                LoadObjectives();
                 SetDropDownOnRole(true);
                 LoadIndicators();
             }
@@ -25,7 +24,6 @@ namespace SRFROWCA.Anonymous
 
         protected void ddlSelectedIndexChnaged(object sender, EventArgs e)
         {
-            PopulateActivities();
             LoadIndicators();
         }
 
@@ -37,7 +35,6 @@ namespace SRFROWCA.Anonymous
 
         protected void ddlYear_SelectedIndexChnaged(object sender, EventArgs e)
         {
-            PopulateActivities();
             LoadIndicators();
         }
 
@@ -103,7 +100,6 @@ namespace SRFROWCA.Anonymous
         // Execute row commands like Edit, Delete etc. on Grid.
         protected void btnSearch2_Click(object sender, EventArgs e)
         {
-            PopulateActivities();
             LoadIndicators();
         }
 
@@ -112,7 +108,6 @@ namespace SRFROWCA.Anonymous
             if (RC.IsAdmin(this.User))
             {
                 ddlCluster.SelectedValue = "0";
-                ddlActivity.SelectedValue = "0";
                 ddlCountry.SelectedValue = "0";
             }
             else
@@ -150,8 +145,7 @@ namespace SRFROWCA.Anonymous
         internal override void BindGridData()
         {
             LoadClustersFilter();
-            LoadObjectivesFilter();
-            PopulateActivities();
+            LoadObjectives();
             SetDropDownOnRole(false);
             LoadIndicators();
         }
@@ -217,29 +211,6 @@ namespace SRFROWCA.Anonymous
                 ddlCountry.Items.Insert(0, new ListItem("Sélectionner Pays", "0"));
         }
 
-        private void PopulateActivities()
-        {
-            int? emgLocId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
-            int? emgClusterId = ddlCluster.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCluster.SelectedValue);
-            int? emgObjId = ddlObjective.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlObjective.SelectedValue);
-
-            DataTable dtAct = new DataTable();
-            if (emgLocId > 0 && emgClusterId > 0)
-            {
-                int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
-                dtAct = DBContext.GetData("GetActivitiesNew", new object[] { emgLocId, emgClusterId, emgObjId, 
-                                                                              yearId, RC.SelectedSiteLanguageId });
-                ddlActivity.DataTextField = "Activity";
-                ddlActivity.DataValueField = "ActivityId";
-            }
-
-            ddlActivity.DataSource = dtAct;
-            ddlActivity.DataBind();
-            if (RC.SelectedSiteLanguageId == 1)
-                ddlActivity.Items.Insert(0, new ListItem("Select Activity", "0"));
-            else
-                ddlActivity.Items.Insert(0, new ListItem("Sélectionner Activité", "0"));
-        }
 
         private void LoadClustersFilter()
         {
@@ -250,17 +221,11 @@ namespace SRFROWCA.Anonymous
                 ddlCluster.Items.Insert(0, new ListItem("Sélectionner Cluster", "0"));
         }
 
-        private void LoadObjectivesFilter()
+        private void LoadObjectives()
         {
-            ddlObjective.Items.Clear();
-            if (RC.SelectedSiteLanguageId == 1)
-                ddlObjective.Items.Add(new ListItem("Select Objective", "0"));
-            else
-                ddlObjective.Items.Add(new ListItem("Sélectionner Objectif", "0"));
-            ddlObjective.DataValueField = "EmergencyObjectiveId";
-            ddlObjective.DataTextField = "Objective";
-            ddlObjective.DataSource = GetObjectives();
-            ddlObjective.DataBind();
+            int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
+            int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
+            UI.PopulateEmergencyObjectives(ddlObjective, yearId, emergencyLocationId);
         }
 
         private DataTable GetClusters()
@@ -278,7 +243,6 @@ namespace SRFROWCA.Anonymous
         {
             int? emergencyClusterId = ddlCluster.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCluster.SelectedValue);
             int? emergencyObjectiveId = ddlObjective.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlObjective.SelectedValue);
-            int? activityId = ddlActivity.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlActivity.SelectedValue);
             string search = string.IsNullOrEmpty(txtActivityName.Text) ? null : txtActivityName.Text;
             int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
             int frameworkYear = RC.GetSelectedIntVal(ddlFrameworkYear);
@@ -287,9 +251,9 @@ namespace SRFROWCA.Anonymous
             int? pageIndex = gvActivity.PageIndex;
 
             return DBContext.GetData("GetAllIndicatorsNew2", new object[] { emergencyLocationId, emergencyClusterId, 
-                                                                            emergencyObjectiveId, search, activityId, 
-                                                                            frameworkYear, isCP, (int)RC.SelectedSiteLanguageId ,
-                                                                             pageIndex, pageSize  });
+                                                                            emergencyObjectiveId, search, frameworkYear, 
+                                                                            isCP, (int)RC.SelectedSiteLanguageId,
+                                                                               pageIndex, pageSize  });
             
         }
 
@@ -297,22 +261,13 @@ namespace SRFROWCA.Anonymous
         {
             int? emergencyClusterId = ddlCluster.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCluster.SelectedValue);
             int? emergencyObjectiveId = ddlObjective.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlObjective.SelectedValue);
-            int? activityId = ddlActivity.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlActivity.SelectedValue);
             string search = string.IsNullOrEmpty(txtActivityName.Text) ? null : txtActivityName.Text;
             int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
             int frameworkYear = RC.GetSelectedIntVal(ddlFrameworkYear);
             bool? isCP = cbCPActivity.Checked ? true : (bool?)null;
             return DBContext.GetData("GetAllIndicatorsNew2WithT", new object[] { emergencyLocationId, emergencyClusterId, emergencyObjectiveId, 
-                                                                                    search, activityId, frameworkYear, 
-                                                                                    admin2, isCP, (int)RC.SelectedSiteLanguageId });
-        }
-        private DataTable GetObjectives()
-        {
-            int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
-            int frameworkYear = RC.GetSelectedIntVal(ddlFrameworkYear);
-
-            return DBContext.GetData("GetEmergencyObjectives", new object[] { (int)RC.SelectedSiteLanguageId, RC.EmergencySahel2015,
-                                            frameworkYear, emergencyLocationId});
+                                                                                    search, frameworkYear, admin2, 
+                                                                                    isCP, (int)RC.SelectedSiteLanguageId });
         }
 
         protected void Page_Error(object sender, EventArgs e)

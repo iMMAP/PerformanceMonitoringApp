@@ -147,6 +147,7 @@
     <Content Include="Account\UpdateUser.aspx" />
     <Content Include="Account\UserProfile.aspx" />
     <Content Include="Admin\AddEditCountryMaps.aspx" />
+    <Content Include="Admin\ConfigSettings.aspx" />
     <Content Include="Admin\CountryMapsListing.aspx" />
     <Content Include="Admin\RequestedOrgListing.aspx" />
     <Content Include="Admin\TargetSettings.aspx" />
@@ -190,6 +191,7 @@
     <Content Include="assets\orsimages\delete16.png" />
     <Content Include="assets\orsimages\duplicate.png" />
     <Content Include="assets\orsimages\edit16.png" />
+    <Content Include="assets\orsimages\icon\so4.png" />
     <Content Include="assets\orsimages\logo.gif" />
     <Content Include="assets\orsimages\map24.png" />
     <Content Include="assets\orsimages\partners2.png" />
@@ -201,7 +203,6 @@
     <Content Include="assets\orsjs\jquery.wholenumber.js" />
     <Content Include="bar1.html" />
     <Content Include="ClusterLead\AddActivityAndIndicators.aspx" />
-    <Content Include="Admin\ConfigSettings.aspx" />
     <Content Include="ClusterLead\ClusterDataEntry.aspx" />
     <Content Include="ClusterLead\ClusterDataEntry16.aspx" />
     <Content Include="ClusterLead\CountryIndicators.aspx" />
@@ -214,10 +215,7 @@
     <Content Include="Admin\Location\LocationsList.aspx" />
     <Content Include="Admin\Organization\AddEditOrganization.aspx" />
     <Content Include="Admin\Organization\OrganizationList.aspx" />
-    <Content Include="ClusterLead\CountryIndMigrate.aspx" />
     <Content Include="ClusterLead\ImportData16.aspx" />
-    <Content Include="ClusterLead\IndicatorListing2016.aspx" />
-    <Content Include="ClusterLead\IndicatorListingMigrate.aspx" />
     <Content Include="d3.aspx" />
     <Content Include="OrsProject\ctlORSAdmin1Report.ascx" />
     <Content Include="OrsProject\ctlORSAdmin2Report.ascx" />
@@ -291,8 +289,6 @@
     <Content Include="ClustOutputIndicators\ctlOutputIndicatorDataEntryCountry.ascx" />
     <Content Include="ClustOutputIndicators\ctlOutputIndicatorsDataEntry.ascx" />
     <Content Include="ClustOutputIndicators\TestDataEntry.aspx" />
-    <Content Include="Configurations\AdminTargetSettings.xml" />
-    <Content Include="Configurations\ChangeEndSettings.xml" />
     <Content Include="Configurations\Settings.xml" />
     <Content Include="Configurations\Units.xml" />
     <Content Include="Controls\AddContryReportControl.ascx" />
@@ -604,6 +600,13 @@
     <Compile Include="Admin\AddEditCountryMaps.aspx.designer.cs">
       <DependentUpon>AddEditCountryMaps.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\ConfigSettings.aspx.cs">
+      <DependentUpon>ConfigSettings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ConfigSettings.aspx.designer.cs">
+      <DependentUpon>ConfigSettings.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\CountryMapsListing.aspx.cs">
       <DependentUpon>CountryMapsListing.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -789,13 +792,6 @@
     <Compile Include="ClusterLead\AddActivityAndIndicators.aspx.designer.cs">
       <DependentUpon>AddActivityAndIndicators.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\ConfigSettings.aspx.cs">
-      <DependentUpon>ConfigSettings.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\ConfigSettings.aspx.designer.cs">
-      <DependentUpon>ConfigSettings.aspx</DependentUpon>
-    </Compile>
     <Compile Include="ClusterLead\ClusterDataEntry.aspx.cs">
       <DependentUpon>ClusterDataEntry.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -880,33 +876,12 @@
     <Compile Include="Admin\Organization\OrganizationList.aspx.designer.cs">
       <DependentUpon>OrganizationList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ClusterLead\CountryIndMigrate.aspx.cs">
-      <DependentUpon>CountryIndMigrate.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ClusterLead\CountryIndMigrate.aspx.designer.cs">
-      <DependentUpon>CountryIndMigrate.aspx</DependentUpon>
-    </Compile>
     <Compile Include="ClusterLead\ImportData16.aspx.cs">
       <DependentUpon>ImportData16.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ClusterLead\ImportData16.aspx.designer.cs">
       <DependentUpon>ImportData16.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ClusterLead\IndicatorListing2016.aspx.cs">
-      <DependentUpon>IndicatorListing2016.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ClusterLead\IndicatorListing2016.aspx.designer.cs">
-      <DependentUpon>IndicatorListing2016.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ClusterLead\IndicatorListingMigrate.aspx.cs">
-      <DependentUpon>IndicatorListingMigrate.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ClusterLead\IndicatorListingMigrate.aspx.designer.cs">
-      <DependentUpon>IndicatorListingMigrate.aspx</DependentUpon>
     </Compile>
     <Compile Include="d3.aspx.cs">
       <DependentUpon>d3.aspx</DependentUpon>

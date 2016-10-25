@@ -15,6 +15,7 @@ using System.Text;
 using System.Threading;
 using System.Web;
 using System.Web.Security;
+using System.Web.SessionState;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml.Linq;
@@ -148,9 +149,18 @@ namespace SRFROWCA.Common
             return DBContext.GetData("GetObjectives", new object[] { SelectedSiteLanguageId, emergencyId });
         }
 
-        internal static DataTable GetEmergencyObjectives(int emergencyId)
+
+        internal static DataTable GetEmergencyObjectives(int yearId, int? emergencyLocationId)
         {
-            return DBContext.GetData("GetObjectives", new object[] { SelectedSiteLanguageId, emergencyId });
+            if (yearId < (int)RC.Year._2017)
+            {
+                emergencyLocationId = null;
+                // 2015 and 2016 are same but in db we only have YearId for 2016
+                // if user select 2015 then just make it 2016 to pull objectives.
+                yearId = (int)RC.Year._2016;
+            }
+            return DBContext.GetData("GetEmergencyObjectives", new object[] { (int)RC.SelectedSiteLanguageId, RC.EmergencySahel2015,
+                                            yearId, emergencyLocationId});
         }
 
         #endregion
@@ -668,26 +678,19 @@ namespace SRFROWCA.Common
             return (Array.IndexOf(GenderUnits, unitId)) > -1;
         }
 
-        public static AdminTargetSettingItems AdminTargetSettings(string key)
+        public static AdminTargetSettingItems AdminTargetSettings(int emgLocId, int emgClusterId, int year)
         {
             AdminTargetSettingItems settingItems = new AdminTargetSettingItems();
-            string PATH = HttpRuntime.AppDomainAppPath;
-            PATH = PATH.Substring(0, PATH.LastIndexOf(@"\") + 1) + @"Configurations\AdminTargetSettings.xml";
-            XElement root = XElement.Load(PATH);
-            IEnumerable<XElement> address =
-                from el in root.Elements("AdminTarget")
-                where (string)el.Attribute("Key") == key
-                select el;
-            foreach (XElement el in address)
-            {
-                settingItems.IsTarget = (el.Attribute("IsTarget").Value == "Yes");
-                settingItems.IsMandatory = (el.Attribute("IsMandatory").Value == "Yes");
-                if (el.Attribute("Level") != null && el.Attribute("Level").Value != "")
-                    settingItems.AdminLevel = el.Attribute("Level").Value.ToEnum<LocationTypes>();
+            
+            DataTable dt = DBContext.GetData("GetTargetSettings", new object[] { emgLocId, emgClusterId, year });
 
-                if (el.Attribute("Category") != null && el.Attribute("Category").Value != "")
-                    settingItems.Category = el.Attribute("Category").Value.ToEnum<LocationCategory>();
-            }
+                foreach (DataRow row in dt.Rows)
+                {
+                    settingItems.IsTarget = (row["IsTargetNeeded"].ToString() == "True");
+                    settingItems.IsMandatory = (row["IsTargetMandatory"].ToString() == "True");
+                    settingItems.AdminLevel = row["AdminLevel"].ToString().ToEnum<AdminLevels>();
+                    settingItems.Category = row["AdminType"].ToString().ToEnum<LocationCategory>();
+                }
 
             return settingItems;
         }
@@ -748,6 +751,119 @@ namespace SRFROWCA.Common
             return doc.ToString();
         }
 
+        internal static void SaveFiltersInSession(ListControl ddlCountry, ListControl ddlCluster, HttpSessionState Session)
+        {
+            int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
+            int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
+
+            if (emgLocationId > 0)
+                Session["OutputFrameworkSelectedCountry"] = emgLocationId;
+            else
+                Session["OutputFrameworkSelectedCountry"] = null;
+
+            if (emgClusterId > 0)
+                Session["OutputFrameworkSelectedCluster"] = emgClusterId;
+            else
+                Session["OutputFrameworkSelectedCluster"] = null;
+        }
+
+        internal static void SetFiltersFromSession(ListControl ddlCountry, ListControl ddlCluster, HttpSessionState Session)
+        {
+            if (Session["OutputFrameworkSelectedCountry"] != null)
+            {
+                int selectedCountryId = RC.GetSelectedIntVal(ddlCountry);
+                if (selectedCountryId <= 0)
+                {
+                    int countryId = 0;
+                    int.TryParse(Session["OutputFrameworkSelectedCountry"].ToString(), out countryId);
+                    if (countryId > 0)
+                    {
+                        try
+                        {
+                            ddlCountry.SelectedValue = countryId.ToString();
+                        }
+                        catch { }
+                    }
+                }
+            }
+
+            if (Session["OutputFrameworkSelectedCluster"] != null)
+            {
+                int selectedClusterId = RC.GetSelectedIntVal(ddlCluster);
+                if (selectedClusterId <= 0)
+                {
+                    int clusterId = 0;
+                    int.TryParse(Session["OutputFrameworkSelectedCluster"].ToString(), out clusterId);
+                    if (clusterId > 0)
+                    {
+                        try
+                        {
+                            ddlCluster.SelectedValue = clusterId.ToString();
+                        }
+                        catch { }
+                    }
+                }
+            }
+        }
+
+        internal static void SaveFiltersInSessionCluster(ListControl ddlCountry, ListControl ddlCluster, HttpSessionState Session)
+        {
+            int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
+            int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
+
+            if (emgLocationId > 0)
+                Session["ClusterFrameworkSelectedCountry"] = emgLocationId;
+            else
+                Session["ClusterFrameworkSelectedCountry"] = null;
+
+            if (emgClusterId > 0)
+                Session["ClusterFrameworkSelectedCluster"] = emgClusterId;
+            else
+                Session["ClusterFrameworkSelectedCluster"] = null;
+        }
+
+        internal static void SetFiltersFromSessionCluster(ListControl ddlCountry, ListControl ddlCluster, HttpSessionState Session)
+        {
+            int selectedCountryId = RC.GetSelectedIntVal(ddlCountry);
+            if (selectedCountryId <= 0)
+            {
+                if (Session["ClusterFrameworkSelectedCountry"] != null)
+                {
+                    int countryId = 0;
+                    int.TryParse(Session["ClusterFrameworkSelectedCountry"].ToString(), out countryId);
+                    if (countryId > 0)
+                    {
+                        try
+                        {
+                            ddlCountry.SelectedValue = countryId.ToString();
+                        }
+                        catch { }
+                    }
+                }
+            }
+
+            if (UserInfo.EmergencyCluster != (int)RC.ClusterSAH2015.MS)
+            {
+                 int selectedClusterId = RC.GetSelectedIntVal(ddlCluster);
+                 if (selectedClusterId <= 0)
+                 {
+                     if (Session["ClusterFrameworkSelectedCluster"] != null)
+                     {
+                         int clusterId = 0;
+                         int.TryParse(Session["ClusterFrameworkSelectedCluster"].ToString(), out clusterId);
+                         if (clusterId > 0)
+                         {
+                             try
+                             {
+                                 ddlCluster.SelectedValue = clusterId.ToString();
+                             }
+                             catch { }
+                         }
+                     }
+                 }
+            }
+        }
+
 
         internal static string FrenchCulture
         {
@@ -793,19 +909,19 @@ namespace SRFROWCA.Common
             {
                 clusterName = "Education";
             }
-            else if (opsClusterName == "emergencyshelterandnfi")
+            else if (opsClusterName == "emergencyshelterandnfi" || opsClusterName == "abrisnfi")
             {
                 clusterName = "Emergency Shelter And NFI";
             }
-            else if (opsClusterName == "foodsecurity")
+            else if (opsClusterName == "foodsecurity" || opsClusterName == "securitéalimentaire")
             {
                 clusterName = "Food Security";
             }
-            else if (opsClusterName == "health")
+            else if (opsClusterName == "health" || opsClusterName == "santé")
             {
                 clusterName = "Health";
             }
-            else if (opsClusterName == "logistics")
+            else if (opsClusterName == "logistics" || opsClusterName == "logistiqueunhas")
             {
                 clusterName = "Logistics";
             }
@@ -813,7 +929,7 @@ namespace SRFROWCA.Common
             {
                 clusterName = "Nutrition";
             }
-            else if (opsClusterName == "protection")
+            else if (opsClusterName == "protection") //sclusterprotectiondelenfant sclustervbg
             {
                 clusterName = "Protection";
             }
@@ -821,7 +937,7 @@ namespace SRFROWCA.Common
             {
                 clusterName = "Logistics";
             }
-            else if (opsClusterName == "waterandsanitation")
+            else if (opsClusterName == "waterandsanitation" || opsClusterName == "wash") 
             {
                 clusterName = "Water Sanitation & Hygiene";
             }
@@ -971,6 +1087,15 @@ namespace SRFROWCA.Common
             None = 0,
         }
 
+        public enum AdminLevels
+        {
+            Country = 0,
+            Admin1 = 1,
+            Admin2 = 2,
+            Admin3 = 3
+
+        }
+
         internal enum NotificationType
         {
             Success = 1,
@@ -993,7 +1118,7 @@ namespace SRFROWCA.Common
             None = -1
         }
 
-        public enum Year
+        public enum Year : int
         {
             _2014 = 10,
             _2015 = 11,

@@ -59,28 +59,65 @@ namespace SRFROWCA.Common
             {
                 string txt = e.Row.Cells[index].Text;
 
-                if (txt.Contains("1"))
+                if (txt.Contains("1") || txt.Contains("4") || txt.Contains("7"))
                 {
                     imgObj.ImageUrl = "~/assets/orsimages/icon/so1.png";
                     imgObj.ToolTip = RC.SelectedSiteLanguageId == 2 ? "OBJECTIF STRATÉGIQUE N°1 : Recueillir les données sur les risques et les vulnérabilités, les analyser et intégrer les résultats dans la programmation humanitaire et de développement." :
                         "STRATEGIC OBJECTIVE 1: Track and analyse risk and vulnerability, integrating findings into humanitarian and evelopment programming.";
                 }
-                else if (txt.Contains("2"))
+                else if (txt.Contains("2") || txt.Contains("5") || txt.Contains("8"))
                 {
                     imgObj.ImageUrl = "~/assets/orsimages/icon/so2.png";
                     imgObj.ToolTip = RC.SelectedSiteLanguageId == 2 ? "OBJECTIF STRATÉGIQUE N°2 : Soutenir les populations vulnérables à mieux faire face aux chocs en répondant aux signaux d’alerte de manière anticipée, réduisant la durée du relèvement post-crise et renforçant les capacités des acteurs nationaux." :
                         "STRATEGIC OBJECTIVE 2: Support vulnerable populations to better cope with shocks by responding earlier to warning signals, by reducing post-crisis recovery times and by building capacity of national actors.";
                 }
-                else if (txt.Contains("3"))
+                else if (txt.Contains("3") || txt.Contains("6") || txt.Contains("9"))
                 {
                     imgObj.ImageUrl = "~/assets/orsimages/icon/so3.png";
                     imgObj.ToolTip = RC.SelectedSiteLanguageId == 2 ? "OBJECTIF STRATÉGIQUE N°3 : Fournir aux personnes en situation d’urgence une assistance coordonnée et intégrée, nécessaire à leur survie." :
                         "STRATEGIC OBJECTIVE 3: Deliver coordinated and integrated life-saving assistance to people affected by emergencies.";
                 }
-                else
+                else if (txt.Contains("10"))
                 {
                     imgObj.ImageUrl = "~/assets/orsimages/icon/so1.png";
-                    imgObj.ToolTip = RC.SelectedSiteLanguageId == 2 ? "OBJECTIF STRATÉGIQUE N°1" : "STRATEGIC OBJECTIVE 1:";
+                    imgObj.ToolTip = RC.SelectedSiteLanguageId == 2 ? "Objectif stratégique No.1 : Recueillir les données sur les risques et les vulnérabilités, les analyser par groupe d'âge et de genre et intégrer les résultats dans la programmation humanitaire et de développement." :
+                          "Strategic Objective No.1: Collect data on risks and vulnerabilities, analyze by age group and gender and integrate the results into humanitarian programming and development.";
+                }
+                else if (txt.Contains("11"))
+                {
+                    imgObj.ImageUrl = "~/assets/orsimages/icon/so2.png";
+                    imgObj.ToolTip = RC.SelectedSiteLanguageId == 2 ? "Objectif stratégique No.2 : Renforcer les capacités de résilience des populations vulnérables, par groupe d'âge et de genre, et soutenir les acteurs nationaux à prévenir et faire face aux chocs." :
+                        "Strategic Objective No.2: Strengthening vulnerable populations resilience, by age group and gender, and support national actors to prevent and deal with shocks.";
+                }
+                else if (txt.Contains("12"))
+                {
+                    imgObj.ImageUrl = "~/assets/orsimages/icon/so3.png";
+                    imgObj.ToolTip = RC.SelectedSiteLanguageId == 2 ? "Objectif stratégique No.3 : Fournir aux personnes, en situation d’urgence, une assistance coordonnée, adaptée à leurs besoins et intégrée, nécessaire à leur survie." :
+                        "Strategic Objective No.3: To provide people in emergencies, coordinated assistance tailored to their needs and integrated, they need to survive.";
+                }
+                else if (txt.Contains("13"))
+                {
+                    imgObj.ImageUrl = "~/assets/orsimages/icon/so4.png";
+                    imgObj.ToolTip = RC.SelectedSiteLanguageId == 2 ? "Objectif stratégique No.4 : Faire un plaidoyer pour l’accès à la protection, conformément aux lois nationales et conventions internationales ; promouvoir et renforcer la redevabilité envers les populations affectées, dans le respect des principes humanitaires." :
+                        "Strategic Objective No.4: Advocate for access to protection in accordance with national laws and international conventions; promote and strengthen accountability to affected populations in accordance with humanitarian principles.";
+                }
+                else if (txt.Contains("14"))
+                {
+                    imgObj.ImageUrl = "~/assets/orsimages/icon/so1.png";
+                    imgObj.ToolTip = RC.SelectedSiteLanguageId == 2 ? "Objectif stratégique No.1 : Sauver des vies." :
+                        "Strategic Objective No.1 Saving Lives.";
+                }
+                else if (txt.Contains("15"))
+                {
+                    imgObj.ImageUrl = "~/assets/orsimages/icon/so2.png";
+                    imgObj.ToolTip = RC.SelectedSiteLanguageId == 2 ? "Objectif stratégique No.2 : Strategic Objective No.2 Renforcer la résilience." :
+                        "Strategic Objective No.2: Build resilience.";
+                }
+                else if (txt.Contains("16"))
+                {
+                    imgObj.ImageUrl = "~/assets/orsimages/icon/so3.png";
+                    imgObj.ToolTip = RC.SelectedSiteLanguageId == 2 ? "Objectif stratégique No.3 Protection des personnes affectées par les crises." :
+                        "Strategic Objective No.3 Protecting people affected by crises";
                 }
             }
         }
@@ -122,9 +159,9 @@ namespace SRFROWCA.Common
                         "STRATEGIC OBJECTIVE 2: Support vulnerable populations to better cope with shocks by responding earlier to warning signals, by reducing post-crisis recovery times and by building capacity of national actors.";
                 }
                 else if (txt == "3")
-                 {
-                     lblObj.ToolTip = RC.SelectedSiteLanguageId == 2 ? "OBJECTIF STRATÉGIQUE N°3 : Fournir aux personnes en situation d’urgence une assistance coordonnée et intégrée, nécessaire à leur survie." :
-                        "STRATEGIC OBJECTIVE 3: Deliver coordinated and integrated life-saving assistance to people affected by emergencies.";
+                {
+                    lblObj.ToolTip = RC.SelectedSiteLanguageId == 2 ? "OBJECTIF STRATÉGIQUE N°3 : Fournir aux personnes en situation d’urgence une assistance coordonnée et intégrée, nécessaire à leur survie." :
+                       "STRATEGIC OBJECTIVE 3: Deliver coordinated and integrated life-saving assistance to people affected by emergencies.";
                 }
             }
         }

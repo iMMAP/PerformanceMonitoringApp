@@ -292,7 +292,6 @@ namespace SRFROWCA.OrsProject
             using (ORSEntities db = new ORSEntities())
             {
                 Report r = db.Reports.Where(x => x.ProjectId == ProjectId
-                                            && x.YearId == (int)RC.Year._Current
                                             && x.MonthId == monthId
                                             && x.OrganizationId == orgId).SingleOrDefault();
                 ReportId = r != null ? r.ReportId : 0;
@@ -480,12 +479,10 @@ namespace SRFROWCA.OrsProject
         private void SaveReportMainInfo()
         {
             int orgId = RC.GetSelectedIntVal(ddlOrgs);
-            int yearId = (int)RC.Year._Current;
             int monthId = RC.GetSelectedIntVal(ddlMonth);
-            int reportingYear = 2016;
-            string reportName = lblProjectCode.Text + " (" + ddlMonth.SelectedItem.Text + "16)";
-            ReportId = DBContext.Add("InsertReport2015", new object[] { yearId, monthId, ProjectId, orgId, 
-                                                                        RC.GetCurrentUserId, reportName, reportingYear, DBNull.Value });
+            string reportName = lblProjectCode.Text + " (" + ddlMonth.SelectedItem.Text;
+            ReportId = DBContext.Add("InsertReport2015", new object[] { monthId, ProjectId, orgId, 
+                                                                        RC.GetCurrentUserId, reportName, DBNull.Value });
         }
 
         private void UpdateReportUpdatedDate()

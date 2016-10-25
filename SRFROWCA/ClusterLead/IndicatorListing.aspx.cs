@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Web;
+using System.Web.SessionState;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml.Linq;
@@ -15,7 +16,7 @@ namespace SRFROWCA.ClusterLead
 {
     public partial class IndicatorListing : BasePage
     {
-        
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -23,10 +24,12 @@ namespace SRFROWCA.ClusterLead
             {
                 LoadClusters();
                 LoadCountry();
-                LoadObjectives();
-                PopulateActivities();
                 SetDropDownOnRole(true);
-                SetFiltersFromSession();
+                RC.SetFiltersFromSessionCluster(ddlCountry, ddlCluster, Session);
+                LoadObjectives();
+                //PopulateActivities();
+
+
                 if (Request.QueryString["year"] != null)
                 {
                     if (Request.QueryString["year"] == "2015")
@@ -39,22 +42,289 @@ namespace SRFROWCA.ClusterLead
             }
         }
 
+        #region Events.
+        protected void gvActivity_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                ObjPrToolTip.ObjectiveIconToolTip(e, 1);
+                //ObjPrToolTip.ObjectiveLableToolTip(e, 0);
+
+                if (yearId == (int)RC.Year._2015 || yearId == (int)RC.Year._2016)
+                {
+                    divMissingTarget.Visible = false;
+                }
+                else
+                {
+                    Label lblTarget = e.Row.FindControl("lblIndTarget") as Label;
+                    if (lblTarget != null)
+                    {
+                        if (string.IsNullOrEmpty(lblTarget.Text))
+                        {
+                            e.Row.BackColor = ColorTranslator.FromHtml("#ff9999");
+                            divMissingTarget.Visible = true;
+                        }
+                        else
+                        {
+                            UI.SetThousandSeparator(e.Row, "lblIndTarget");
+                        }
+                    }
+                }
+
+                ImageButton btnDelete = e.Row.FindControl("btnDelete") as ImageButton;
+                ImageButton btnEdit = e.Row.FindControl("btnEdit") as ImageButton;
+
+                if (!RC.IsAdmin(this.User) && (RC.GetSelectedIntVal(ddlFrameworkYear) == (int)RC.Year._2015))
+                {
+                    btnDelete.Visible = false;
+                    btnEdit.Visible = false;
+                }
+                else
+                {
+                    int emgLocationId = 0;
+                    int emgClusterId = 0;
+
+                    Label lblCountryId = e.Row.FindControl("lblCountryID") as Label;
+                    if (lblCountryId != null)
+                    {
+                        int.TryParse(lblCountryId.Text, out emgLocationId);
+                    }
+
+                    Label lblClusterId = e.Row.FindControl("lblClusterID") as Label;
+                    if (lblClusterId != null)
+                    {
+                        int.TryParse(lblClusterId.Text, out emgClusterId);
+                    }
+
+                    //int year = 0;
+                    //int.TryParse(ddlFrameworkYear.SelectedItem.Text, out year);
+                    //int indUnused = SectorFramework.IndUnused(emgLocationId, emgClusterId, year);
+                    //int actUnused = SectorFramework.ActivityUnused(emgLocationId, emgClusterId, year);
+                    Label lblIsDateExceeded = e.Row.FindControl("lblIsDateExceeded") as Label;
+                    bool IsDateExceeded = false;
+                    if (lblIsDateExceeded != null)
+                        IsDateExceeded = lblIsDateExceeded.Text == "1";
+
+                    if (btnDelete != null)
+                    {
+                        btnDelete.Attributes.Add("onclick", "javascript:return " +
+                        "confirm('Are you sure you want to delete this Indicator?')");
+
+                        if (IsDateExceeded)
+                        {
+                            if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User)
+                                || RC.IsRegionalClusterLead(this.User) || RC.IsDataEntryUser(this.User))
+                            {
+                                btnDelete.Visible = false;
+                            }
+                        }
+                    }
+
+                    //CheckBox cbActivity = e.Row.FindControl("cbIsActivityActive") as CheckBox;
+                    if (btnEdit != null)
+                    {
+                        if (IsDateExceeded)
+                        {
+                            if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User)
+                                || RC.IsRegionalClusterLead(this.User) || RC.IsDataEntryUser(this.User))
+                            {
+                                btnEdit.Visible = false;
+                            }
+                        }
+                        //else
+                        //    if (!cbActivity.Checked || indUnused <= 0)
+                        //    {
+                        //        if (!cbActivity.Checked)
+                        //        {
+                        //            btnEdit.Visible = false;
+                        //        }
+                        //        CheckBox cbIndicator = e.Row.FindControl("cbIsActive") as CheckBox;
+                        //        if (!cbIndicator.Checked)
+                        //            cbIndicator.Enabled = false;
+                        //    }
+                    }
+
+                    if (RC.IsRegionalClusterLead(this.User))
+                    {
+                        btnEdit.Visible = false;
+                        btnDelete.Visible = false;
+                    }
+                }
+            }
+        }
+
+        protected void gvActivity_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            // If user click on Delete button.
+            if (e.CommandName == "DeleteInd")
+            {
+                GridViewRow row = (((Control)e.CommandSource).NamingContainer) as GridViewRow;
+
+                int indicatorId = 0;
+                int.TryParse(gvActivity.DataKeys[row.RowIndex].Values["IndicatorId"].ToString(), out indicatorId);
+
+                int activityId = 0;
+                int.TryParse(gvActivity.DataKeys[row.RowIndex].Values["ActivityId"].ToString(), out activityId);
+
+                if (indicatorId > 0)
+                {
+                    if (!IndicatorIsInUse(indicatorId))
+                    {
+                        DeleteIndicator(indicatorId, activityId);
+                        ShowMessage("Indicator Deleted Successfully!");
+                    }
+                    else
+                    {
+                        ShowMessage("Indicator can not be deleted. It is being used!", RC.NotificationType.Error, true, 2000);
+                    }
+                }
+                LoadIndicators();
+                ToggleControlsToAddIndicator();
+            }
+
+            // Edit Project.
+            if (e.CommandName == "EditActivity")
+            {
+                int activityId = Convert.ToInt32(e.CommandArgument);
+                string year = ddlFrameworkYear.SelectedItem.Text;
+                Response.Redirect("AddActivityAndIndicators.aspx?a=" + activityId.ToString() + "&year=" + year);
+
+            }
+        }
+
+        protected void btnSearch2_Click(object sender, EventArgs e)
+        {
+            LoadIndicators();
+        }
+
+        protected void btnReset_Click(object sender, EventArgs e)
+        {
+            if (RC.IsAdmin(this.User))
+            {
+                ddlCluster.SelectedValue = "0";
+                //ddlActivity.SelectedValue = "0";
+                ddlCountry.SelectedValue = "0";
+            }
+            else
+            {
+                SetDropDownOnRole(true);
+            }
+
+            ddlObjective.SelectedValue = "0";
+            ddlFrameworkYear.SelectedIndex = 0;
+            txtActivityName.Text = "";
+            LoadIndicators();
+            ToggleControlsToAddIndicator();
+        }
+
+        protected void btnExportExcel_Click(object sender, EventArgs e)
+        {
+            ModalPopupExtender2.Show();
+        }
+
+        protected void btnExportWord_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../Anonymous/ExpClusterFramework.aspx");
+        }
+
+        protected void btnExportExcelOK_Click(object sender, EventArgs e)
+        {
+            bool admin2 = rbExlAdmin2Yes.Checked;
+            DataTable dt = GetActivitiesForExcel(admin2);
+            if (rbExlIdnNO.Checked)
+                RemoveColumnsFromDataTable(dt);
+
+            string fileName = "Indicators";
+            ExportUtility.ExportGridView(dt, fileName, Response);
+            ModalPopupExtender2.Hide();
+        }
+
+        protected void gvActivity_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            DataTable dt = GetActivities();
+            if (dt != null)
+            {
+                //Sort the data.
+                dt.DefaultView.Sort = e.SortExpression + " " + GetSortDirection(e.SortExpression);
+                gvActivity.DataSource = dt;
+                gvActivity.DataBind();
+            }
+        }
+
+        protected void ddlSelectedIndexChnaged(object sender, EventArgs e)
+        {
+            LoadIndicators();
+            RC.SaveFiltersInSessionCluster(ddlCountry, ddlCluster, Session);
+            ToggleControlsToAddIndicator();
+            LoadObjectives();
+        }
+
+        protected void ddlObj_SelectedIndexChnaged(object sender, EventArgs e)
+        {
+            LoadIndicators();
+            RC.SaveFiltersInSessionCluster(ddlCountry, ddlCluster, Session);
+            ToggleControlsToAddIndicator();
+        }
+
+        protected void gvActivity_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvActivity.PageIndex = e.NewPageIndex;
+            LoadIndicators();
+        }
+
+        protected void btnAddActivityAndIndicators_Click(object sender, EventArgs e)
+        {
+            string year = ddlFrameworkYear.SelectedItem.Text;
+            Response.Redirect("AddActivityAndIndicators.aspx?year=" + year);
+        }
+
+        protected void btnOK_Click(object sender, EventArgs e)
+        {
+            if (IsIndicatorCheckBox == 1)
+                ToggleIndicatorStatus();
+            else
+                ToggleActivityStatus();
+
+            ToggleControlsToAddIndicator();
+
+            LoadIndicators();
+            //SendEmail(IndicatorActiveStatus > 0);
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            LoadIndicators();
+        }
+
+        protected void ddlYear_SelectedIndexChnaged(object sender, EventArgs e)
+        {
+            LoadObjectives();
+            LoadIndicators();
+            ToggleControlsToAddIndicator();
+        }
+
+        protected void ddlActivitySelectedIndexChnaged(object sender, EventArgs e)
+        {
+            LoadIndicators();
+        }
+
+        #endregion
+
+        #region Methods.
         private void ToggleControlsToAddIndicator()
         {
-            //if (RC.GetSelectedIntVal(ddlFrameworkYear) == (int)RC.Year._2015 || RC.GetSelectedIntVal(ddlFrameworkYear) == (int)RC.Year._2016)
-            //{
-            //    btnAddActivityAndIndicators.Enabled = false;
-            //    return;
-            //}
             if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) || RC.IsAdmin(this.User))
             {
                 int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
                 int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
                 if (emgLocationId > 0 && emgClusterId > 0)
                 {
-                    int indUnused = SectorFramework.IndUnused(emgLocationId, emgClusterId);
-                    int actUnused = SectorFramework.ActivityUnused(emgLocationId, emgClusterId);
-                    bool IsDateExceeded = SectorFramework.DateExceeded(emgLocationId, emgClusterId);
+                    int year = 0;
+                    int.TryParse(ddlFrameworkYear.SelectedItem.Text, out year);
+                    int indUnused = SectorFramework.IndUnused(emgLocationId, emgClusterId, year);
+                    int actUnused = SectorFramework.ActivityUnused(emgLocationId, emgClusterId, year);
+                    bool IsDateExceeded = SectorFramework.DateExceeded(emgLocationId, emgClusterId, year);
                     if (indUnused <= 0 || (actUnused <= 0 || IsDateExceeded))
                     {
                         btnAddActivityAndIndicators.Enabled = false;
@@ -113,111 +383,7 @@ namespace SRFROWCA.ClusterLead
         }
 
         // Add delete confirmation message with all delete buttons.
-        protected void gvActivity_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                ObjPrToolTip.ObjectiveIconToolTip(e, 1);
-                //ObjPrToolTip.ObjectiveLableToolTip(e, 0);
 
-                if (yearId == (int)RC.Year._2015 || yearId == (int)RC.Year._2016)
-                {
-                    divMissingTarget.Visible = false;
-                }
-                else
-                {
-                    Label lblTarget = e.Row.FindControl("lblIndTarget") as Label;
-                    if (lblTarget != null)
-                    {
-                        if (string.IsNullOrEmpty(lblTarget.Text))
-                        {
-                            e.Row.BackColor = ColorTranslator.FromHtml("#ff9999");
-                            divMissingTarget.Visible = true;
-                        }
-                        else
-                        {
-                            UI.SetThousandSeparator(e.Row, "lblIndTarget");
-                        }
-                    }
-                }
-
-                ImageButton btnDelete = e.Row.FindControl("btnDelete") as ImageButton;
-                ImageButton btnEdit = e.Row.FindControl("btnEdit") as ImageButton;
-
-                if (yearId == (int)RC.Year._2015 || yearId == (int)RC.Year._2016)
-                {
-                    btnDelete.Visible = false;
-                    btnEdit.Visible = false;
-                }
-                else
-                {
-                    int emgLocationId = 0;
-                    int emgClusterId = 0;
-
-                    Label lblCountryId = e.Row.FindControl("lblCountryID") as Label;
-                    if (lblCountryId != null)
-                    {
-                        int.TryParse(lblCountryId.Text, out emgLocationId);
-                    }
-
-                    Label lblClusterId = e.Row.FindControl("lblClusterID") as Label;
-                    if (lblClusterId != null)
-                    {
-                        int.TryParse(lblClusterId.Text, out emgClusterId);
-                    }
-
-                    int indUnused = SectorFramework.IndUnused(emgLocationId, emgClusterId);
-                    int actUnused = SectorFramework.ActivityUnused(emgLocationId, emgClusterId);
-                    bool IsDateExceeded = SectorFramework.DateExceeded(emgLocationId, emgClusterId);
-                    
-                    if (btnDelete != null)
-                    {
-                        btnDelete.Attributes.Add("onclick", "javascript:return " +
-                        "confirm('Are you sure you want to delete this Indicator?')");
-
-                        if (IsDateExceeded)
-                        {
-                            if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) 
-                                || RC.IsRegionalClusterLead(this.User) || RC.IsDataEntryUser(this.User))
-                            {
-                                btnDelete.Visible = false;
-                            }
-                        }
-                    }
-
-                    CheckBox cbActivity = e.Row.FindControl("cbIsActivityActive") as CheckBox;
-                    if (btnEdit != null)
-                    {
-                        if (IsDateExceeded)
-                        {
-                            if (RC.IsClusterLead(this.User) || RC.IsCountryAdmin(this.User) 
-                                || RC.IsRegionalClusterLead(this.User) || RC.IsDataEntryUser(this.User))
-                            {
-                                btnEdit.Visible = false;
-                            }
-                        }
-                        else 
-                        if (!cbActivity.Checked || indUnused <= 0)
-                        {
-                            if (!cbActivity.Checked)
-                            {
-                                btnEdit.Visible = false;
-                            }
-                            CheckBox cbIndicator = e.Row.FindControl("cbIsActive") as CheckBox;
-                            if (!cbIndicator.Checked)
-                                cbIndicator.Enabled = false;
-                        }
-                    }
-
-                    if (RC.IsRegionalClusterLead(this.User))
-                    {
-                        btnEdit.Visible = false;
-                        btnDelete.Visible = false;
-                    }
-                }
-            }
-        }
 
         private void DeleteActivity(int activityId)
         {
@@ -225,141 +391,13 @@ namespace SRFROWCA.ClusterLead
         }
 
         // Execute row commands like Edit, Delete etc. on Grid.
-        protected void gvActivity_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            // If user click on Delete button.
-            if (e.CommandName == "DeleteInd")
-            {
-                GridViewRow row = (((Control)e.CommandSource).NamingContainer) as GridViewRow;
 
-                int indicatorId = 0;
-                int.TryParse(gvActivity.DataKeys[row.RowIndex].Values["IndicatorId"].ToString(), out indicatorId);
-
-                int activityId = 0;
-                int.TryParse(gvActivity.DataKeys[row.RowIndex].Values["ActivityId"].ToString(), out activityId);
-
-                if (indicatorId > 0)
-                {
-                    if (!IndicatorIsInUse(indicatorId))
-                    {
-                        DeleteIndicator(indicatorId, activityId);
-                        ShowMessage("Indicator Deleted Successfully!");
-                    }
-                    else
-                    {
-                        ShowMessage("Indicator can not be deleted. It is being used!", RC.NotificationType.Error, true, 2000);
-                    }
-                }
-                LoadIndicators();
-                ToggleControlsToAddIndicator();
-            }
-
-            // Edit Project.
-            if (e.CommandName == "EditActivity")
-            {
-                int activityId = Convert.ToInt32(e.CommandArgument);
-                Response.Redirect("AddActivityAndIndicators.aspx?a=" + activityId);
-
-            }
-        }
-        protected void btnSearch2_Click(object sender, EventArgs e)
-        {
-            PopulateActivities();
-            LoadIndicators();
-        }
-
-        protected void btnReset_Click(object sender, EventArgs e)
-        {
-            if (RC.IsAdmin(this.User))
-            {
-                ddlCluster.SelectedValue = "0";
-                ddlActivity.SelectedValue = "0";
-                ddlCountry.SelectedValue = "0";
-            }
-            else
-            {
-                SetDropDownOnRole(true);
-            }
-
-            ddlObjective.SelectedValue = "0";
-            ddlFrameworkYear.SelectedIndex = 0;
-            txtActivityName.Text = "";
-            LoadIndicators();
-            ToggleControlsToAddIndicator();
-        }
-
-        protected void btnExportExcel_Click(object sender, EventArgs e)
-        {
-            ModalPopupExtender2.Show();
-        }
-
-        protected void btnExportWord_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("../Anonymous/ExpClusterFramework.aspx");
-        }        
-
-        protected void btnExportExcelOK_Click(object sender, EventArgs e)
-        {
-            bool admin2 = rbExlAdmin2Yes.Checked;
-            DataTable dt = GetActivitiesForExcel(admin2);
-            if (rbExlIdnNO.Checked)
-                RemoveColumnsFromDataTable(dt);
-
-            string fileName = "Indicators";
-            ExportUtility.ExportGridView(dt, fileName, Response);
-            ModalPopupExtender2.Hide();
-        }
-
-        protected void ExportToPDF(object sender, EventArgs e)
-        {
-            Warning[] warnings;
-            string[] streamIds;
-            string mimeType = string.Empty;
-            string encoding = string.Empty;
-            string extension = string.Empty;
-            byte[] bytes;
-            ReportViewer rvCountry = new ReportViewer();
-            rvCountry.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote;
-            rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://win-78sij2cjpjj/Reportserver");
-            //rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://54.83.26.190/Reportserver");
-            ReportParameter[] RptParameters = null;
-            // rvCountry.ServerReport.ReportServerUrl = new System.Uri("http://localhost/Reportserver");
-
-            string activityId = null;
-
-            string emergencyClusterId = null;
-            string emergencyObjectiveId = null;
-            string search = null;
-            string emgLocationId = null;
-            string IsGender = null;
-
-            RptParameters = new ReportParameter[7];
-            RptParameters[0] = new ReportParameter("emgLocationId", emgLocationId, false);
-            RptParameters[1] = new ReportParameter("emgClusterId", emergencyClusterId, false);
-            RptParameters[2] = new ReportParameter("emgObjectiveId", emergencyObjectiveId, false);
-            RptParameters[3] = new ReportParameter("search", search, false);
-            RptParameters[4] = new ReportParameter("activityId", activityId, false);
-            RptParameters[5] = new ReportParameter("isGender", IsGender, false);
-            RptParameters[6] = new ReportParameter("lngId", ((int)RC.SiteLanguage.English).ToString(), false);
-
-            rvCountry.ServerReport.ReportPath = "/reports/activityindicators";
-            string fileName = "ActivityIndicators" + DateTime.Now.ToString("yyyy-MM-dd_hh_mm_ss") + ".pdf";
-            rvCountry.ServerReport.ReportServerCredentials = new ReportServerCredentials("Administrator", "&qisW.c@Jq", "");
-            rvCountry.ServerReport.SetParameters(RptParameters);
-            bytes = rvCountry.ServerReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
-            Response.Buffer = true;
-            Response.Clear();
-            Response.ContentType = mimeType;
-            Response.AddHeader("content-disposition", "attachment; filename=" + fileName);
-            Response.BinaryWrite(bytes); // create the file
-            Response.Flush();
-        }
 
         internal override void BindGridData()
         {
             LoadClusters();
             LoadObjectives();
-            PopulateActivities();
+            //PopulateActivities();
             SetDropDownOnRole(false);
             LoadIndicators();
         }
@@ -375,17 +413,6 @@ namespace SRFROWCA.ClusterLead
             DBContext.Delete("DeleteIndicatorNew", new object[] { indicatorDetailId, activityId, DBNull.Value });
         }
 
-        protected void gvActivity_Sorting(object sender, GridViewSortEventArgs e)
-        {
-            DataTable dt = GetActivities();
-            if (dt != null)
-            {
-                //Sort the data.
-                dt.DefaultView.Sort = e.SortExpression + " " + GetSortDirection(e.SortExpression);
-                gvActivity.DataSource = dt;
-                gvActivity.DataBind();
-            }
-        }
 
         private string GetSortDirection(string column)
         {
@@ -436,30 +463,6 @@ namespace SRFROWCA.ClusterLead
                 ddlCountry.Items.Insert(0, new ListItem("Sélectionner Pays", "0"));
         }
 
-        private void PopulateActivities()
-        {
-            int? emgLocId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
-            int? emgClusterId = ddlCluster.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCluster.SelectedValue);
-            int? emgObjId = ddlObjective.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlObjective.SelectedValue);
-
-            DataTable dtAct = new DataTable();
-            if (emgLocId > 0 && emgClusterId > 0)
-            {
-                int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
-                dtAct = DBContext.GetData("GetActivitiesNew", new object[] { emgLocId, emgClusterId, emgObjId, 
-                                                                              yearId, RC.SelectedSiteLanguageId });
-                ddlActivity.DataTextField = "Activity";
-                ddlActivity.DataValueField = "ActivityId";
-            }
-
-            ddlActivity.DataSource = dtAct;
-            ddlActivity.DataBind();
-            if (RC.SelectedSiteLanguageId == 1)
-                ddlActivity.Items.Insert(0, new ListItem("Select Activity", "0"));
-            else
-                ddlActivity.Items.Insert(0, new ListItem("Sélectionner Activité", "0"));
-        }
-
         private void LoadClusters()
         {
             UI.FillEmergnecyClusters(ddlCluster, RC.EmergencySahel2015);
@@ -471,15 +474,9 @@ namespace SRFROWCA.ClusterLead
 
         private void LoadObjectives()
         {
-            ddlObjective.Items.Clear();
-            if (RC.SelectedSiteLanguageId == 1)
-                ddlObjective.Items.Add(new ListItem("Select Objective", "0"));
-            else
-                ddlObjective.Items.Add(new ListItem("Sélectionner Objectif", "0"));
-            ddlObjective.DataValueField = "EmergencyObjectiveId";
-            ddlObjective.DataTextField = "Objective";
-            ddlObjective.DataSource = GetObjectives();
-            ddlObjective.DataBind();
+            int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
+            int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
+            UI.PopulateEmergencyObjectives(ddlObjective, yearId, emergencyLocationId);
         }
 
         private DataTable GetClusters()
@@ -497,7 +494,6 @@ namespace SRFROWCA.ClusterLead
         {
             int? emergencyClusterId = ddlCluster.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCluster.SelectedValue);
             int? emergencyObjectiveId = ddlObjective.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlObjective.SelectedValue);
-            int? activityId = ddlActivity.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlActivity.SelectedValue);
             string search = string.IsNullOrEmpty(txtActivityName.Text) ? null : txtActivityName.Text;
             int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
             int frameworkYear = RC.GetSelectedIntVal(ddlFrameworkYear);
@@ -506,8 +502,8 @@ namespace SRFROWCA.ClusterLead
             int? pageIndex = gvActivity.PageIndex;
 
             return DBContext.GetData("GetAllIndicatorsNew2", new object[] { emergencyLocationId, emergencyClusterId, 
-                                                                            emergencyObjectiveId, search, activityId, 
-                                                                            frameworkYear, isCP, (int)RC.SelectedSiteLanguageId,
+                                                                            emergencyObjectiveId, search, frameworkYear, 
+                                                                            isCP, (int)RC.SelectedSiteLanguageId,
                                                                                pageIndex, pageSize  });
         }
 
@@ -515,37 +511,16 @@ namespace SRFROWCA.ClusterLead
         {
             int? emergencyClusterId = ddlCluster.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCluster.SelectedValue);
             int? emergencyObjectiveId = ddlObjective.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlObjective.SelectedValue);
-            int? activityId = ddlActivity.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlActivity.SelectedValue);
             string search = string.IsNullOrEmpty(txtActivityName.Text) ? null : txtActivityName.Text;
             int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
             int frameworkYear = RC.GetSelectedIntVal(ddlFrameworkYear);
             bool? isCP = cbCPActivity.Checked ? true : (bool?)null;
 
             return DBContext.GetData("GetAllIndicatorsNew2WithT", new object[] { emergencyLocationId, emergencyClusterId, emergencyObjectiveId, 
-                                                                                    search, activityId, frameworkYear, 
-                                                                                    admin2, isCP, (int)RC.SelectedSiteLanguageId });
-        }
-        private DataTable GetObjectives()
-        {
-            int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
-            int frameworkYear = RC.GetSelectedIntVal(ddlFrameworkYear);
-
-            return DBContext.GetData("GetEmergencyObjectives", new object[] { (int)RC.SelectedSiteLanguageId, RC.EmergencySahel2015,
-                                            frameworkYear, emergencyLocationId});
+                                                                                    search, frameworkYear, admin2, 
+                                                                                    isCP, (int)RC.SelectedSiteLanguageId });
         }
 
-
-        private DataTable GetActivityTypes()
-        {
-
-            return DBContext.GetData("GetActivityTypes");
-
-        }
-
-        protected void btnMigrate2016_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("IndicatorListingMigrate.aspx");
-        }
 
         protected void Page_Error(object sender, EventArgs e)
         {
@@ -554,16 +529,12 @@ namespace SRFROWCA.ClusterLead
             ExceptionUtility.LogException(exc, User);
         }
 
-        protected void gvActivity_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            gvActivity.PageIndex = e.NewPageIndex;
-            LoadIndicators();
-        }
-
         private void RemoveColumnsFromDataTable(DataTable dt)
         {
             try
             {
+
+                dt.Columns.Remove("GenderDisaggregated");
                 dt.Columns.Remove("ActivityId");
                 dt.Columns.Remove("ClusterId");
                 dt.Columns.Remove("IndicatorId");
@@ -572,8 +543,10 @@ namespace SRFROWCA.ClusterLead
                 dt.Columns.Remove("EmergencyLocationId");
                 dt.Columns.Remove("LocationId");
                 dt.Columns.Remove("ObjectiveId");
-                dt.Columns.Remove("IsActivityActive");
-                dt.Columns.Remove("IsActive");
+
+                if (!((RC.GetSelectedIntVal(ddlCluster)) ==  (int)RC.ClusterSAH2015.PRO))
+                    dt.Columns.Remove("IsChildProtection");
+
                 try
                 {
                     if ((RC.GetSelectedIntVal(ddlFrameworkYear)) == 11)
@@ -589,66 +562,15 @@ namespace SRFROWCA.ClusterLead
                 try
                 {
                     dt.Columns.Remove("IndicatorCalculationTypeId");
-                    dt.Columns.Remove("IsActiveIndicator");
-
                 }
                 catch { }
             }
             catch { }
         }
 
-        private void SaveFiltersInSession()
-        {
-            int emgLocationId = RC.GetSelectedIntVal(ddlCountry);
-            int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
 
-            if (emgLocationId > 0)
-                Session["ClusterFrameworkSelectedCountry"] = emgLocationId;
-            else
-                Session["ClusterFrameworkSelectedCountry"] = null;
 
-            if (emgClusterId > 0)
-                Session["ClusterFrameworkSelectedCluster"] = emgClusterId;
-            else
-                Session["ClusterFrameworkSelectedCluster"] = null;
-        }
 
-        private void SetFiltersFromSession()
-        {
-            if (Session["ClusterFrameworkSelectedCountry"] != null)
-            {
-                int countryId = 0;
-                int.TryParse(Session["ClusterFrameworkSelectedCountry"].ToString(), out countryId);
-                if (countryId > 0)
-                {
-                    try
-                    {
-                        ddlCountry.SelectedValue = countryId.ToString();
-                    }
-                    catch { }
-                }
-            }
-
-            if (Session["ClusterFrameworkSelectedCluster"] != null)
-            {
-                int clusterId = 0;
-                int.TryParse(Session["ClusterFrameworkSelectedCluster"].ToString(), out clusterId);
-                if (clusterId > 0)
-                {
-                    try
-                    {
-                        ddlCluster.SelectedValue = clusterId.ToString();
-                    }
-                    catch { }
-                }
-            }
-        }
-
-        protected void btnAddActivityAndIndicators_Click(object sender, EventArgs e)
-        {
-            //SaveFiltersInSession();
-            Response.Redirect("AddActivityAndIndicators.aspx");
-        }
 
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)
         {
@@ -656,97 +578,84 @@ namespace SRFROWCA.ClusterLead
         }
 
 
-        protected void btnOK_Click(object sender, EventArgs e)
-        {
-            if (IsIndicatorCheckBox == 1)
-                ToggleIndicatorStatus();
-            else
-                ToggleActivityStatus();
+        #endregion
 
-            ToggleControlsToAddIndicator();
 
-            LoadIndicators();
-            //SendEmail(IndicatorActiveStatus > 0);
-        }
+        #region Unused Code
 
-        protected void btnCancel_Click(object sender, EventArgs e)
-        {
-            LoadIndicators();
-        }
+        //protected void cbActivityActive_Changed(object sender, EventArgs e)
+        //{
+        //    IsIndicatorCheckBox = 0;
+        //    ActivityActiveStatus = -1;
+        //    ToggleActivityId = 0;
+        //    GridViewRow row = (GridViewRow)(((CheckBox)sender).NamingContainer);
+        //    int activityId = 0;
+        //    int.TryParse(gvActivity.DataKeys[row.RowIndex].Values["ActivityId"].ToString(), out activityId);
+        //    ToggleActivityId = activityId;
 
-        protected void cbActivityActive_Changed(object sender, EventArgs e)
-        {
-            IsIndicatorCheckBox = 0;
-            ActivityActiveStatus = -1;
-            ToggleActivityId = 0;
-            GridViewRow row = (GridViewRow)(((CheckBox)sender).NamingContainer);
-            int activityId = 0;
-            int.TryParse(gvActivity.DataKeys[row.RowIndex].Values["ActivityId"].ToString(), out activityId);
-            ToggleActivityId = activityId;
+        //    if (ToggleActivityId > 0)
+        //    {
+        //        CheckBox cbIsActive = row.FindControl("cbIsActivityActive") as CheckBox;
+        //        if (cbIsActive != null)
+        //        {
+        //            localDisableConfirmBox.Text = !cbIsActive.Checked ? "Are you sure you want to deactivate this Activity?" :
+        //                                                                    "Are you sure you want to activate this Activity?";
+        //            ActivityActiveStatus = cbIsActive.Checked ? 1 : 0;
+        //            List<string> projects = GetProjectsOnActivity(ToggleActivityId);
+        //            if (!string.IsNullOrEmpty(projects[0]))
+        //            {
+        //                //SetEmailItem(row, projects);
+        //                lblProjectsCaption.Visible = true;
+        //                lblProjectsCaption.Text = !cbIsActive.Checked ? "Indicators of this activity will be removed from the following projects." :
+        //                                                                "Indicators of this activity will be added in the following projects.";
+        //                lblProjectUsingIndicator.Text = projects[0];
+        //            }
+        //            else
+        //            {
+        //                lblProjectsCaption.Text = "";
+        //                lblProjectUsingIndicator.Text = "";
+        //            }
+        //            ModalPopupExtender1.Show();
+        //        }
+        //    }
+        //}
 
-            if (ToggleActivityId > 0)
-            {
-                CheckBox cbIsActive = row.FindControl("cbIsActivityActive") as CheckBox;
-                if (cbIsActive != null)
-                {
-                    localDisableConfirmBox.Text = !cbIsActive.Checked ? "Are you sure you want to deactivate this Activity?" :
-                                                                            "Are you sure you want to activate this Activity?";
-                    ActivityActiveStatus = cbIsActive.Checked ? 1 : 0;
-                    List<string> projects = GetProjectsOnActivity(ToggleActivityId);
-                    if (!string.IsNullOrEmpty(projects[0]))
-                    {
-                        //SetEmailItem(row, projects);
-                        lblProjectsCaption.Visible = true;
-                        lblProjectsCaption.Text = !cbIsActive.Checked ? "Indicators of this activity will be removed from the following projects." :
-                                                                        "Indicators of this activity will be added in the following projects.";
-                        lblProjectUsingIndicator.Text = projects[0];
-                    }
-                    else
-                    {
-                        lblProjectsCaption.Text = "";
-                        lblProjectUsingIndicator.Text = "";
-                    }
-                    ModalPopupExtender1.Show();
-                }
-            }
-        }
+        //protected void cbActive_Changed(object sender, EventArgs e)
+        //{
+        //    IsIndicatorCheckBox = 1;
+        //    IndicatorActiveStatus = -1;
+        //    ToggleIndicatorId = 0;
+        //    GridViewRow row = (GridViewRow)(((CheckBox)sender).NamingContainer);
+        //    int indicatorId = 0;
+        //    int.TryParse(gvActivity.DataKeys[row.RowIndex].Values["IndicatorId"].ToString(), out indicatorId);
+        //    ToggleIndicatorId = indicatorId;
+        //    if (ToggleIndicatorId > 0)
+        //    {
+        //        CheckBox cbIsActive = row.FindControl("cbIsActive") as CheckBox;
+        //        if (cbIsActive != null)
+        //        {
+        //            localDisableConfirmBox.Text = !cbIsActive.Checked ? "Are you sure you want to deactivate this indicator?" :
+        //                                                                    "Are you sure you want to activate this indicator?";
+        //            IndicatorActiveStatus = cbIsActive.Checked ? 1 : 0;
+        //            List<string> projects = GetProjectsUsingIndicator();
+        //            if (!string.IsNullOrEmpty(projects[0]))
+        //            {
+        //                SetEmailItem(row, projects);
+        //                lblProjectsCaption.Visible = true;
+        //                lblProjectsCaption.Text = !cbIsActive.Checked ? "This indicator will be removed from these projects:" :
+        //                                                                "This indicator will be added in these projects:";
+        //                lblProjectUsingIndicator.Text = projects[0];
+        //            }
+        //            else
+        //            {
+        //                lblProjectsCaption.Text = "";
+        //                lblProjectUsingIndicator.Text = "";
+        //            }
 
-        protected void cbActive_Changed(object sender, EventArgs e)
-        {
-            IsIndicatorCheckBox = 1;
-            IndicatorActiveStatus = -1;
-            ToggleIndicatorId = 0;
-            GridViewRow row = (GridViewRow)(((CheckBox)sender).NamingContainer);
-            int indicatorId = 0;
-            int.TryParse(gvActivity.DataKeys[row.RowIndex].Values["IndicatorId"].ToString(), out indicatorId);
-            ToggleIndicatorId = indicatorId;
-            if (ToggleIndicatorId > 0)
-            {
-                CheckBox cbIsActive = row.FindControl("cbIsActive") as CheckBox;
-                if (cbIsActive != null)
-                {
-                    localDisableConfirmBox.Text = !cbIsActive.Checked ? "Are you sure you want to deactivate this indicator?" :
-                                                                            "Are you sure you want to activate this indicator?";
-                    IndicatorActiveStatus = cbIsActive.Checked ? 1 : 0;
-                    List<string> projects = GetProjectsUsingIndicator();
-                    if (!string.IsNullOrEmpty(projects[0]))
-                    {
-                        SetEmailItem(row, projects);
-                        lblProjectsCaption.Visible = true;
-                        lblProjectsCaption.Text = !cbIsActive.Checked ? "This indicator will be removed from these projects:" :
-                                                                        "This indicator will be added in these projects:";
-                        lblProjectUsingIndicator.Text = projects[0];
-                    }
-                    else
-                    {
-                        lblProjectsCaption.Text = "";
-                        lblProjectUsingIndicator.Text = "";
-                    }
-
-                    ModalPopupExtender1.Show();
-                }
-            }
-        }
+        //            ModalPopupExtender1.Show();
+        //        }
+        //    }
+        //}
 
         private void SetEmailItem(GridViewRow row, List<string> projects)
         {
@@ -772,13 +681,13 @@ namespace SRFROWCA.ClusterLead
 
         private void ToggleIndicatorStatus()
         {
-            int yearId = (int)RC.Year._2015;
+            int yearId = (int)RC.Year._2017;
             DBContext.Update("UpdateIndicatorAndProjectsActiveStatus", new object[] { ToggleIndicatorId, IndicatorActiveStatus, yearId, DBNull.Value });
         }
 
         private void ToggleActivityStatus()
         {
-            int yearId = (int)RC.Year._2015;
+            int yearId = (int)RC.Year._2017;
             DBContext.Update("UpdateActivityAndProjectsActiveStatus", new object[] { ToggleActivityId, ActivityActiveStatus, yearId, DBNull.Value });
         }
 
@@ -816,28 +725,6 @@ namespace SRFROWCA.ClusterLead
             projects.Add(sbProjIds.ToString().Trim().TrimEnd(','));
 
             return projects;
-        }
-
-        protected void ddlSelectedIndexChnaged(object sender, EventArgs e)
-        {
-            PopulateActivities();
-            LoadIndicators();
-            SaveFiltersInSession();
-            ToggleControlsToAddIndicator();
-            LoadObjectives();
-        }
-
-        protected void ddlActivitySelectedIndexChnaged(object sender, EventArgs e)
-        {
-            LoadIndicators();
-            //PopulateActivities();
-        }
-
-        protected void ddlYear_SelectedIndexChnaged(object sender, EventArgs e)
-        {
-            PopulateActivities();
-            LoadIndicators();
-            
         }
 
         private void SendEmail(bool isAdded)
@@ -974,5 +861,13 @@ namespace SRFROWCA.ClusterLead
                 ViewState["IndicatorActiveStatus"] = value;
             }
         }
+
+        protected void btnMigrate2016_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("IndicatorListingMigrate.aspx");
+        }
+
+        #endregion
+
     }
 }
