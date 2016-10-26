@@ -929,7 +929,7 @@ namespace SRFROWCA.Common
             {
                 clusterName = "Nutrition";
             }
-            else if (opsClusterName == "protection") //sclusterprotectiondelenfant sclustervbg
+            else if (opsClusterName == "protection" || opsClusterName == "sclusterprotectiondelenfant" || opsClusterName == "sclustervbg")
             {
                 clusterName = "Protection";
             }
