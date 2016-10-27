@@ -246,13 +246,21 @@ namespace SRFROWCA.Anonymous
             string search = string.IsNullOrEmpty(txtActivityName.Text) ? null : txtActivityName.Text;
             int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
             int frameworkYear = RC.GetSelectedIntVal(ddlFrameworkYear);
-            bool? isCP = cbCPActivity.Checked ? true : (bool?)null;
+           
+            bool? isCP = null;
+            bool? isSGBV = null;
+            int val = RC.GetSelectedIntVal(ddlCP);
+            if (val == 1)
+                isCP = true;
+            else if (val == 2)
+                isSGBV = true;
+
             int? pageSize = gvActivity.PageSize;
             int? pageIndex = gvActivity.PageIndex;
 
             return DBContext.GetData("GetAllIndicatorsNew2", new object[] { emergencyLocationId, emergencyClusterId, 
                                                                             emergencyObjectiveId, search, frameworkYear, 
-                                                                            isCP, (int)RC.SelectedSiteLanguageId,
+                                                                            isCP, isSGBV, (int)RC.SelectedSiteLanguageId,
                                                                                pageIndex, pageSize  });
             
         }
@@ -264,10 +272,17 @@ namespace SRFROWCA.Anonymous
             string search = string.IsNullOrEmpty(txtActivityName.Text) ? null : txtActivityName.Text;
             int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
             int frameworkYear = RC.GetSelectedIntVal(ddlFrameworkYear);
-            bool? isCP = cbCPActivity.Checked ? true : (bool?)null;
+            bool? isCP = null;
+            bool? isSGBV = null;
+            int val = RC.GetSelectedIntVal(ddlCP);
+            if (val == 1)
+                isCP = true;
+            else if (val == 2)
+                isSGBV = true;
+
             return DBContext.GetData("GetAllIndicatorsNew2WithT", new object[] { emergencyLocationId, emergencyClusterId, emergencyObjectiveId, 
                                                                                     search, frameworkYear, admin2, 
-                                                                                    isCP, (int)RC.SelectedSiteLanguageId });
+                                                                                    isCP, isSGBV, (int)RC.SelectedSiteLanguageId });
         }
 
         protected void Page_Error(object sender, EventArgs e)

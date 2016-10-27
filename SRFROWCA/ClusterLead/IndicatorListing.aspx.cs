@@ -14,7 +14,7 @@ using System.Xml.Linq;
 
 namespace SRFROWCA.ClusterLead
 {
-    public partial class IndicatorListing : BasePage
+    public partial class IndicatorListing : System.Web.UI.Page
     {
 
 
@@ -393,14 +393,14 @@ namespace SRFROWCA.ClusterLead
         // Execute row commands like Edit, Delete etc. on Grid.
 
 
-        internal override void BindGridData()
-        {
-            LoadClusters();
-            LoadObjectives();
-            //PopulateActivities();
-            SetDropDownOnRole(false);
-            LoadIndicators();
-        }
+        //internal override void BindGridData()
+        //{
+        //    LoadClusters();
+        //    LoadObjectives();
+        //    //PopulateActivities();
+        //    SetDropDownOnRole(false);
+        //    LoadIndicators();
+        //}
 
         private bool IndicatorIsInUse(int indicatorId)
         {
@@ -497,13 +497,21 @@ namespace SRFROWCA.ClusterLead
             string search = string.IsNullOrEmpty(txtActivityName.Text) ? null : txtActivityName.Text;
             int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
             int frameworkYear = RC.GetSelectedIntVal(ddlFrameworkYear);
-            bool? isCP = cbCPActivity.Checked ? true : (bool?)null;
+
+            bool? isCP = null;
+            bool? isSGBV = null;
+            int val = RC.GetSelectedIntVal(ddlCP);
+            if (val == 1)
+                isCP = true;
+            else if (val == 2)
+                isSGBV = true;
+
             int? pageSize = gvActivity.PageSize;
             int? pageIndex = gvActivity.PageIndex;
 
             return DBContext.GetData("GetAllIndicatorsNew2", new object[] { emergencyLocationId, emergencyClusterId, 
                                                                             emergencyObjectiveId, search, frameworkYear, 
-                                                                            isCP, (int)RC.SelectedSiteLanguageId,
+                                                                            isCP, isSGBV, (int)RC.SelectedSiteLanguageId,
                                                                                pageIndex, pageSize  });
         }
 
@@ -514,11 +522,17 @@ namespace SRFROWCA.ClusterLead
             string search = string.IsNullOrEmpty(txtActivityName.Text) ? null : txtActivityName.Text;
             int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
             int frameworkYear = RC.GetSelectedIntVal(ddlFrameworkYear);
-            bool? isCP = cbCPActivity.Checked ? true : (bool?)null;
+            bool? isCP = null;
+            bool? isSGBV = null;
+            int val = RC.GetSelectedIntVal(ddlCP);
+            if (val == 1)
+                isCP = true;
+            else if (val == 2)
+                isSGBV = true;
 
             return DBContext.GetData("GetAllIndicatorsNew2WithT", new object[] { emergencyLocationId, emergencyClusterId, emergencyObjectiveId, 
                                                                                     search, frameworkYear, admin2, 
-                                                                                    isCP, (int)RC.SelectedSiteLanguageId });
+                                                                                    isCP, isSGBV, (int)RC.SelectedSiteLanguageId });
         }
 
 
@@ -544,7 +558,7 @@ namespace SRFROWCA.ClusterLead
                 dt.Columns.Remove("LocationId");
                 dt.Columns.Remove("ObjectiveId");
 
-                if (!((RC.GetSelectedIntVal(ddlCluster)) ==  (int)RC.ClusterSAH2015.PRO))
+                if (!((RC.GetSelectedIntVal(ddlCluster)) == (int)RC.ClusterSAH2015.PRO))
                     dt.Columns.Remove("IsChildProtection");
 
                 try

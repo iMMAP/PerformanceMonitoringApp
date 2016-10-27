@@ -160,6 +160,10 @@ namespace SRFROWCA.ClusterLead
             bool.TryParse(dt.Rows[i]["IsChildProtection"].ToString(), out isCP);
             ctl.cbCP.Checked = isCP;
 
+            bool isSGBV = false;
+            bool.TryParse(dt.Rows[i]["IsSGBV"].ToString(), out isSGBV);
+            ctl.cbSGBV.Checked = isSGBV;
+
             int indicatorId = 0;
             int.TryParse(dt.Rows[i]["IndicatorId"].ToString(), out indicatorId);
             ctl.hfIndicatorId.Value = indicatorId.ToString();

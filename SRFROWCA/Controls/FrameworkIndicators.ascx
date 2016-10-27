@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="FrameworkIndicators.ascx.cs"
+﻿    <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="FrameworkIndicators.ascx.cs"
     Inherits="SRFROWCA.Controls.FrameworkIndicators" %>
 
 <style>
@@ -126,21 +126,20 @@
 
     <div class="col-xs-12 col-sm-12 dvIndicator" style="padding-left: 0px;">
         <div class="widget-main no-padding-bottom no-padding-top">
-            <div style="float: left; width: 32%;">
-
+            <div style="float: left; width: 30%;">
                 <asp:HiddenField ID="hfIndicatorId" runat="server" />
                 <asp:Label ID="lblIndEngCap" runat="server" Text="(English):" meta:resourcekey="lblIndEngCapResource1"></asp:Label>
                 <div>
-                    <asp:TextBox ID="txtInd1Eng" runat="server" CssClass="width-95" TextMode="MultiLine" Height="60px" MaxLength="1000"
+                    <asp:TextBox ID="txtInd1Eng" runat="server" CssClass="width-95" TextMode="MultiLine" Height="55px" MaxLength="1000"
                         meta:resourcekey="txtInd1EngResource1"></asp:TextBox>
                     <asp:CustomValidator ID="cvIndicator" runat="server" ClientValidationFunction="validateIndicator" ValidateEmptyText="True"
                         CssClass="error2" meta:resourcekey="cvIndicatorResource1"></asp:CustomValidator>
                 </div>
             </div>
-            <div style="float: left; width: 32%;">
+            <div style="float: left; width: 30%;">
                 <asp:Label ID="lblIndFrCap" runat="server" Text="(French):" meta:resourcekey="lblIndFrCapResource1"></asp:Label>
                 <div>
-                    <asp:TextBox ID="txtInd1Fr" runat="server" CssClass="width-95" TextMode="MultiLine" Height="60px" MaxLength="1000"
+                    <asp:TextBox ID="txtInd1Fr" runat="server" CssClass="width-95" TextMode="MultiLine" Height="55px" MaxLength="1000"
                         meta:resourcekey="txtInd1FrResource1"></asp:TextBox>
 
                 </div>
@@ -174,6 +173,12 @@
                 <asp:Label ID="lblCP" runat="server" Text="CP" ToolTip="Child Protection Indicator" CssClass="marig-10"></asp:Label>
                 <div>
                     <asp:CheckBox ID="cbCP" runat="server" Text="Yes" TextAlign="Right" ToolTip="Child Protection Indicator"/>
+                </div>
+            </div>
+            <div style="float: left; width: 6%; margin-left:10px" class="cbCP">
+                <asp:Label ID="lblSGBV" runat="server" Text="SGBV" ToolTip="Sexual & Gender Based Violence" CssClass="marig-10"></asp:Label>
+                <div>
+                    <asp:CheckBox ID="cbSGBV" runat="server" Text="Yes" TextAlign="Right" ToolTip="Sexual & Gender Based Violence"/>
                 </div>
             </div>
         </div>        

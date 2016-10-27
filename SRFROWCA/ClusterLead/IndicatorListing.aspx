@@ -18,6 +18,7 @@
         .mycheckbox input[type="checkbox"] {
             margin-left: 5px;
         }
+
         .mycheckbox {
             margin-left: 20px;
         }
@@ -87,7 +88,7 @@
                                                                 <asp:DropDownList ID="ddlObjective" runat="server" AutoPostBack="True"
                                                                     CssClass="width-80" OnSelectedIndexChanged="ddlObj_SelectedIndexChnaged" meta:resourcekey="ddlObjectiveResource1">
                                                                 </asp:DropDownList>
-                                                            </td>                                                           
+                                                            </td>
 
                                                             <td class="width-20">
                                                                 <label>
@@ -100,7 +101,7 @@
 
                                                         </tr>
                                                         <tr>
-                                                            
+
 
                                                             <td class="width-20">
                                                                 <label>
@@ -112,8 +113,13 @@
                                                                     <asp:ListItem Text="2016" Value="12" meta:resourcekey="ListItemResource2"></asp:ListItem>
                                                                     <asp:ListItem Text="2015" Value="11" meta:resourcekey="ListItemResource3"></asp:ListItem>
                                                                 </asp:DropDownList>
-                                                                <asp:CheckBox ID="cbCPActivity" runat="server" Text="CP Activity:" ToolTip="Child Protection Activity" TextAlign="Left" CssClass="mycheckbox"
-                                                                 OnCheckedChanged="ddlActivitySelectedIndexChnaged" AutoPostBack="true" />
+                                                                <label>CP/SGBV:</label>
+                                                                <asp:DropDownList ID="ddlCP" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlObj_SelectedIndexChnaged">
+                                                                    <asp:ListItem Text="Select" Value="0"></asp:ListItem>
+                                                                    <asp:ListItem Text="Child Protection" Value="1"></asp:ListItem>
+                                                                    <asp:ListItem Text="SGBV" Value="2"></asp:ListItem>
+                                                                </asp:DropDownList>
+                                                                
                                                             </td>
                                                             <td>&nbsp;</td>
                                                             <td colspan="4" style="padding-top: 10px;">
@@ -162,12 +168,13 @@
                         <asp:BoundField DataField="ObjectiveId" HeaderText="" ItemStyle-Width="1px" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" />
                         <asp:BoundField DataField="Country" HeaderText="Country" SortExpression="Country" ItemStyle-Width="80px" meta:resourcekey="BoundFieldResource1" />
                         <asp:BoundField DataField="ClusterName" HeaderText="Cluster" SortExpression="ClusterName" ItemStyle-Width="150px" meta:resourcekey="BoundFieldResource2" />
-                        <asp:TemplateField HeaderStyle-Width="60" ItemStyle-Width="60" >
-                        <ItemTemplate>
-                            <asp:Image ID="imgObjective" runat="server" />
-                            <asp:Image ID="imgCP" ImageUrl="~/assets/orsimages/cp1.png" ToolTip="Child Protection Indicator" runat="server" Visible='<%# Eval("IsChildProtection") %>'  />
-                        </ItemTemplate>
-                    </asp:TemplateField>
+                        <asp:TemplateField HeaderStyle-Width="60" ItemStyle-Width="60">
+                            <ItemTemplate>
+                                <asp:Image ID="imgObjective" runat="server" />
+                                <asp:Image ID="imgCP" ImageUrl="~/assets/orsimages/cp1.png" ToolTip="Child Protection Indicator" runat="server" Visible='<%# Eval("IsChildProtection") %>' />
+                                <asp:Image ID="imgSGBV" ImageUrl="~/assets/orsimages/cp1.png" ToolTip="Sexual & Gender Based Voilence" runat="server" Visible='<%# Eval("IsSGBV") %>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <%--<asp:TemplateField HeaderText="Active Activity" ItemStyle-HorizontalAlign="Center" meta:resourcekey="TemplateFieldResource2">
                             <ItemTemplate>
                                 <asp:CheckBox ID="cbIsActivityActive" runat="server" Checked='<%# Eval("IsActivityActive") %>' OnCheckedChanged="cbActivityActive_Changed" AutoPostBack="True" meta:resourcekey="cbIsActivityActiveResource1" />
@@ -225,7 +232,7 @@
                                 <asp:Label ID="lblClusterID" runat="server" Text='<%# Eval("EmergencyClusterId") %>' meta:resourcekey="lblClusterIDResource1"></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                         <asp:TemplateField Visible="false">
+                        <asp:TemplateField Visible="false">
                             <ItemTemplate>
                                 <asp:Label ID="lblIsDateExceeded" runat="server" Text='<%# Eval("IsDateExceeded") %>'></asp:Label>
                             </ItemTemplate>

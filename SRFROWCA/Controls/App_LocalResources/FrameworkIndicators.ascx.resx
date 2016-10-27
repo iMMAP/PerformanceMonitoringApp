@@ -235,7 +235,7 @@
     <value>&lt;span class="orshelpicon" data-rel="popover" data-placement="top" data-original-title="Calculation Method" data-content="&lt;b&gt;Sum:&lt;/b&gt; Running Sum of monthly achievements.&lt;br/&gt; &lt;b&gt;Average:&lt;/b&gt; Averate of monthly achievements.&lt;br/&gt;&lt;b&gt;Latest:&lt;/b&gt; Latest recorded achievement.&lt;br/&gt;&lt;b&gt;Max:&lt;/b&gt; Maximum value of achievements."&gt;?&lt;/span&gt;</value>
   </data>
   <data name="localCalMethodResource1.Text" xml:space="preserve">
-    <value>&lt;span&gt;Calculation Method:*&lt;/span&gt;</value>
+    <value>&lt;span&gt;Calc Methd:*&lt;/span&gt;</value>
   </data>
   <data name="localClickShow2Resource1.Text" xml:space="preserve">
     <value>Click To Show Locations</value>

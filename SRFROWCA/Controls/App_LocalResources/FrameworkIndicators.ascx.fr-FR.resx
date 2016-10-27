@@ -301,7 +301,7 @@
     <value>Unité</value>
   </data>
   <data name="localCalMethodResource1.Text" xml:space="preserve">
-    <value>&lt;span&gt;Méthode de calcul*&lt;/span&gt;</value>
+    <value>&lt;span&gt;Méthd de calc*&lt;/span&gt;</value>
   </data>
   <data name="localCalMethodHelpResource1.Text" xml:space="preserve">
     <value>&lt;span class="orshelpicon" data-rel="popover" data-placement="top" data-original-title="Méthode de calcul" data-content="&lt;b&gt;Sum:&lt;/b&gt; somme de toutes les réalisations mensuelles.&lt;br/&gt; &lt;b&gt;Average:&lt;/b&gt; Moyenne de toutes les réalisations mensuelles.&lt;br/&gt;&lt;b&gt;Latest:&lt;/b&gt; Dernière donnée mensuelle rapportée.&lt;br/&gt;&lt;b&gt;Max:&lt;/b&gt; Donnée maximale de la période rapportée."&gt;?&lt;/span&gt;</value>

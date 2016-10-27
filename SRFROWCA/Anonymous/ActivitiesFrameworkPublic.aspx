@@ -100,8 +100,12 @@
                                                                     <asp:ListItem Text="2016" Value="12" meta:resourcekey="ListItemResource2"></asp:ListItem>
                                                                     <asp:ListItem Text="2015" Value="11" meta:resourcekey="ListItemResource3"></asp:ListItem>
                                                                 </asp:DropDownList>
-                                                                <asp:CheckBox ID="cbCPActivity" runat="server" Text="CP Activity:" TextAlign="Left" CssClass="mycheckbox"
-                                                                    OnCheckedChanged="ddlActivitySelectedIndexChnaged" AutoPostBack="true" />
+                                                               <label>CP/SGBV:</label>
+                                                                <asp:DropDownList ID="ddlCP" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSelectedIndexChnaged">
+                                                                    <asp:ListItem Text="Select" Value="0"></asp:ListItem>
+                                                                    <asp:ListItem Text="Child Protection" Value="1"></asp:ListItem>
+                                                                    <asp:ListItem Text="SGBV" Value="2"></asp:ListItem>
+                                                                </asp:DropDownList>
                                                             </td>
 
                                                         </tr>
@@ -154,6 +158,7 @@
                             <ItemTemplate>
                                 <asp:Image ID="imgObjective" runat="server" />
                                 <asp:Image ID="imgCP" ImageUrl="~/assets/orsimages/cp1.png" ToolTip="Child Protection Indicator" runat="server" Visible='<%# Eval("IsChildProtection") %>' />
+                                <asp:Image ID="imgSGBV" ImageUrl="~/assets/orsimages/cp1.png" ToolTip="Sexual & Gender Based Voilence" runat="server" Visible='<%# Eval("IsSGBV") %>' />
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:BoundField DataField="Activity" HeaderText="Activity" SortExpression="Activity" meta:resourcekey="BoundFieldResource4" />

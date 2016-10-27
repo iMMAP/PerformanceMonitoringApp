@@ -418,12 +418,13 @@ namespace SRFROWCA.Controls
             int val = RC.GetSelectedIntVal(ddlCalculationMethod);
             int? calMethod = val > 0 ? val : (int?)val;
             bool isCP = cbCP.Checked;
+            bool isSGBV = cbSGBV.Checked;
 
             if (string.IsNullOrEmpty(hfIndicatorId.Value))
             {
                 int indicatorId = DBContext.Add("InsertIndicator", new object[] { activityId, indEn, indFr, 
                                                                                     unitId, userId, isGender, 
-                                                                                    calMethod, isCP, DBNull.Value });
+                                                                                    calMethod, isCP, isSGBV, DBNull.Value });
                 SaveTargets(indicatorId, isGender);
             }
             else
@@ -434,14 +435,14 @@ namespace SRFROWCA.Controls
                 {
                     DBContext.Update("UpdateIndicatorNew2", new object[] { indicatorId, activityId, 
                                                                             unitId, indEn, indFr, userId, 
-                                                                            isGender, calMethod, isCP, DBNull.Value });
+                                                                            isGender, calMethod, isCP, isSGBV, DBNull.Value });
                     SaveTargets(indicatorId, isGender);
                 }
                 else
                 {
                     int newIndicatorId = DBContext.Add("InsertIndicator", new object[] { activityId, indEn, indFr, 
                                                                                             unitId, userId, isGender, 
-                                                                                            calMethod, isCP, DBNull.Value });
+                                                                                            calMethod, isCP, isSGBV, DBNull.Value });
                     SaveTargets(newIndicatorId, isGender);
                 }
             }
