@@ -72,6 +72,19 @@
                                 <tr>
                                     <td>
                                         <label>
+                                            Year:
+                                        </label>
+                                    </td>
+                                    <td colspan="5">
+                                        <asp:DropDownList ID="ddlYear" runat="server" Width="430px">
+                                            <asp:ListItem Text="2017" Value="13"></asp:ListItem>
+                                            <asp:ListItem Text="2016" Value="12"></asp:ListItem>                                            
+                                        </asp:DropDownList>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>
                                             <asp:Label ID="lblCountry" runat="server" Text="Country"></asp:Label>
                                         </label>
                                     </td>

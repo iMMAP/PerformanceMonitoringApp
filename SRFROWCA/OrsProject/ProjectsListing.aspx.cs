@@ -169,9 +169,13 @@ namespace SRFROWCA.OrsProject
                 isFunded = 0;
             }
 
+            int? isLCB = null;
+            if (cbLCB.Checked)
+                isLCB = 1;
+
             string projectStatus = ddlStatus.SelectedValue == "0" ? null : ddlStatus.SelectedValue;
             DataTable dtProjects = DBContext.GetData("GetProjectsWithFullDetails", new object[] {countryID, clusterId,projCode, orgId, RC.SelectedSiteLanguageId, 
-                                                                                        yearId, projectId, projectStatus, secClusterId, isOPS, isFunded});
+                                                                                        yearId, projectId, projectStatus, secClusterId, isOPS, isFunded, isLCB});
             if (dtProjects.Rows.Count > 0)
             {
                 string fileName = DateTime.Now.ToString("yyyyMMddHHmmss");
@@ -447,6 +451,10 @@ namespace SRFROWCA.OrsProject
                 isFunded = 0;
             }
 
+            int? isLCB = null;
+            if (cbLCB.Checked)
+                isLCB = 1;
+
             int? pageSize = gvProjects.PageSize;
             int? pageIndex = gvProjects.PageIndex;
 
@@ -457,7 +465,8 @@ namespace SRFROWCA.OrsProject
 
             return DBContext.GetData("GetProjectsListing", new object[] {emgLocationId, emgClusterId, projCode, orgId, 
                                                                             RC.SelectedSiteLanguageId,  yearId, projectStatus, 
-                                                                            secClusterId, isOPS, isFunded, pageIndex, pageSize, userOrg});
+                                                                            secClusterId, isOPS, isFunded, isLCB,
+                                                                            pageIndex, pageSize, userOrg});
         }
 
 

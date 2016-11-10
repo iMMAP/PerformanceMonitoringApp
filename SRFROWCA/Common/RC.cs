@@ -688,8 +688,15 @@ namespace SRFROWCA.Common
                 {
                     settingItems.IsTarget = (row["IsTargetNeeded"].ToString() == "True");
                     settingItems.IsMandatory = (row["IsTargetMandatory"].ToString() == "True");
-                    settingItems.AdminLevel = row["AdminLevel"].ToString().ToEnum<AdminLevels>();
-                    settingItems.Category = row["AdminType"].ToString().ToEnum<LocationCategory>();
+                    if (!string.IsNullOrEmpty(row["AdminLevel"].ToString()))
+                    {
+                        settingItems.AdminLevel = row["AdminLevel"].ToString().ToEnum<AdminLevels>();
+                    }
+
+                    if (!string.IsNullOrEmpty(row["AdminType"].ToString()))
+                    {
+                        settingItems.Category = row["AdminType"].ToString().ToEnum<LocationCategory>();
+                    }
                 }
 
             return settingItems;
@@ -897,9 +904,9 @@ namespace SRFROWCA.Common
         public static string MapOPSWithORSClusterNames(string opsClusterName)
         {
             string clusterName = "";
-            if (opsClusterName == "coordinationandsupportservices")
+            if (opsClusterName == "coordinationandsupportservices" || opsClusterName == "Coordination" || opsClusterName == "coordination")
             {
-                clusterName = "Coordination And Support Services";
+                clusterName = "Coordination and Support Services";
             }
             else if (opsClusterName == "earlyrecovery")
             {
@@ -909,11 +916,13 @@ namespace SRFROWCA.Common
             {
                 clusterName = "Education";
             }
-            else if (opsClusterName == "emergencyshelterandnfi" || opsClusterName == "abrisnfi")
+            else if (opsClusterName == "emergencyshelterandnfi" || opsClusterName == "abrisnfi" 
+                || opsClusterName == "shelter" || opsClusterName == "abrisccmame")
             {
                 clusterName = "Emergency Shelter And NFI";
             }
-            else if (opsClusterName == "foodsecurity" || opsClusterName == "securitéalimentaire")
+            else if (opsClusterName == "foodsecurity" || opsClusterName == "securitéalimentaire" 
+                || opsClusterName == "sécuritéalimentaire") 
             {
                 clusterName = "Food Security";
             }
@@ -933,11 +942,11 @@ namespace SRFROWCA.Common
             {
                 clusterName = "Protection";
             }
-            else if (opsClusterName == "logistics")
+            else if (opsClusterName == "logistics" || opsClusterName == "logistique")
             {
                 clusterName = "Logistics";
             }
-            else if (opsClusterName == "waterandsanitation" || opsClusterName == "wash") 
+            else if (opsClusterName == "waterandsanitation" || opsClusterName == "wash" || opsClusterName == "eauhygièneetassainissement") 
             {
                 clusterName = "Water Sanitation & Hygiene";
             }
@@ -945,7 +954,7 @@ namespace SRFROWCA.Common
             {
                 clusterName = "Emergency Telecommunication";
             }
-            else if (opsClusterName == "multisectorforrefugees")
+            else if (opsClusterName == "multisectorforrefugees" || opsClusterName == "réponsemultisectoriellepourlesréfugiés")
             {
                 clusterName = "Multi Sector for Refugees";
             }
@@ -993,6 +1002,7 @@ namespace SRFROWCA.Common
                     emgClusterId = (int)ClusterSAH2015.ER;
                     break;
                 case "Coordination And Support Services":
+                case "Coordination and Support Services":
                     emgClusterId = (int)ClusterSAH2015.CSS;
                     break;
                 case "Food Security":

@@ -139,6 +139,7 @@ namespace SRFROWCA.OrsProject
                 ddlCluster.SelectedValue = dtProject.Rows[0]["EmergencyClusterId"].ToString();
                 ddlCountry.SelectedValue = dtProject.Rows[0]["EmergencyLocationId"].ToString();
                 ddlOrgs.SelectedValue = dtProject.Rows[0]["OrganizationId"].ToString();
+                ddlYear.SelectedValue = dtProject.Rows[0]["YearId"].ToString();
 
                 DateTime dtFrom = DateTime.Now;
                 if (dtProject.Rows[0]["ProjectStartDate"] != DBNull.Value)
@@ -233,8 +234,8 @@ namespace SRFROWCA.OrsProject
             string contactEmail = !string.IsNullOrEmpty(txtContactEmail.Text.Trim()) ? txtContactEmail.Text.Trim() : null;
 
             Guid userId = RC.GetCurrentUserId;
-            int yearId = (int)RC.Year._2017;
-            int year = 2017;
+            int yearId = RC.GetSelectedIntVal(ddlYear);
+            int year = Convert.ToInt32(ddlYear.SelectedItem.Text);
             if (ProjectId > 0)
             {
                 int projOrgId = 0;

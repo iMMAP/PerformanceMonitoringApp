@@ -35,19 +35,9 @@
             <div class="col-sm-8 indented">
                 <div class="method">
                     <div class="col-sm-4"><a href="doc/ProjectsAPI.aspx">/Projects</a></div>
-                    <div class="col-sm-8">Get all projects</div>
+                    <div class="col-sm-8">Get all projects (with Targets)</div>
                     <br style="clear: both;">
-                </div>
-                <div class="method">
-                    <div class="col-sm-4"><a href="doc/ProjectsAPI.aspx">/ProjectsTargets</a></div>
-                    <div class="col-sm-8">Get projects Targets</div>
-                    <br style="clear: both;">
-                </div>
-                <div class="method">
-                    <div class="col-sm-4"><a href="doc/ProjectsAPI.aspx">/ProjectsReports</a></div>
-                    <div class="col-sm-8">Get projects Reports</div>
-                    <br style="clear: both;">
-                </div>
+                </div>               
             </div>
             <h3 class="col-sm-12">Key-Figures</h3>
             <div class="col-sm-8 indented">

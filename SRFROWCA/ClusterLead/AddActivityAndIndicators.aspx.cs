@@ -322,7 +322,18 @@ namespace SRFROWCA.ClusterLead
         private void PopulateObjective()
         {
             int? emergencyLocationId = ddlCountry.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlCountry.SelectedValue);
-            int yearId = (int)RC.Year._2017;
+            int year = 0;
+            if (Request.QueryString["year"] != null)
+                int.TryParse(Request.QueryString["year"].ToString(), out year);
+
+            RC.Year yearEnum;
+            int yearId = 0;
+            if (Enum.TryParse("_" + year.ToString(), out yearEnum))
+                yearId = (int)yearEnum;
+
+            if (yearId == 0)
+                yearId = (int)RC.Year._2017;
+
             UI.PopulateEmergencyObjectives(ddlObjective, yearId, emergencyLocationId);
         }
 

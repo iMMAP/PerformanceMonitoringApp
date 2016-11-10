@@ -92,7 +92,12 @@ namespace SRFROWCA.DataFeeds
             if (context.Request["year"] != null)
             {
                 int.TryParse(context.Request["year"].ToString(), out val);
-                yearId = val == 2015 ? (int)RC.Year._2015 : (int)RC.Year._2016;
+                if (val == 2015)
+                    yearId = (int)RC.Year._2015;
+                else if (val == 2016)
+                    yearId = (int)RC.Year._2016;
+                else
+                    yearId = (int)RC.Year._2017;
             }
 
             val = 0;

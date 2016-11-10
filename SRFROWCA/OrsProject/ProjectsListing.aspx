@@ -33,9 +33,9 @@
                                 <i class="icon-download"></i>PDF
                                        
                             </button>
-                            <asp:Button ID="btnCreateProject" runat="server" Visible="false"
+                            <asp:Button ID="btnCreateProject" runat="server" Visible="true"
                                 Text="Create ORS Project" CausesValidation="False" PostBackUrl="~/OrsProject/CreateProject.aspx"
-                                CssClass="btn btn-yellow pull-right btn-sm" />                            
+                                CssClass="btn btn-yellow pull-right btn-sm" />
                         </h6>
                     </div>
                     <div class="widget-body">
@@ -160,12 +160,16 @@
                                                         </label>
                                                     </td>
                                                     <td>
-                                                        <asp:DropDownList ID="ddlFrameworkYear" runat="server" AutoPostBack="True" CssClass="width-80"
-                                                            OnSelectedIndexChanged="SelectedIndexChanged" meta:resourcekey="ddlFrameworkYearResource1">
+                                                        <asp:DropDownList ID="ddlFrameworkYear" runat="server" AutoPostBack="True"
+                                                            OnSelectedIndexChanged="SelectedIndexChanged" meta:resourcekey="ddlFrameworkYearResource1" Width="70px">
                                                             <asp:ListItem Text="2017" Value="13"></asp:ListItem>
                                                             <asp:ListItem Text="2016" Value="12" Selected="True" meta:resourcekey="ListItemResource3"></asp:ListItem>
                                                             <asp:ListItem Text="2015" Value="11" meta:resourcekey="ListItemResource4"></asp:ListItem>
                                                         </asp:DropDownList>
+                                                        <asp:CheckBox ID="cbLCB" runat="server" style="margin-left:20px;"
+                                                            Text="LCB" Checked="false"
+                                                            OnCheckedChanged="SelectedIndexChanged"
+                                                            AutoPostBack="true" ToolTip="Filter Lake Chad Basin Projects" />
                                                         <asp:Button ID="btnSearch" runat="server" class="hidden" Width="1px" OnClick="btnSearch_Click" />
                                                     </td>
                                                 </tr>
@@ -266,7 +270,7 @@
                         OnPageIndexChanging="gvProjects_PageIndexChanging"
                         DataKeyNames="ProjectId,ProjectOrganizationId,OrganizationId,IsOPS,EmergencyLocationId,EmergencyClusterId,UserOrgId,IsPartner"
                         meta:resourcekey="gvProjectsResource1">
-                         <PagerSettings Mode="NumericFirstLast" />
+                        <PagerSettings Mode="NumericFirstLast" />
                         <RowStyle CssClass="istrow" />
                         <AlternatingRowStyle CssClass="altcolor" />
                         <Columns>
@@ -288,13 +292,13 @@
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Organization" SortExpression="OrganizationAcronym" meta:resourcekey="BoundFieldResource3"
-                                ItemStyle-Width="140px" >
+                                ItemStyle-Width="140px">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblOrganization" runat="server" 
+                                    <asp:Label ID="lblOrganization" runat="server"
                                         Text='<%# Eval("OrganizationAcronym") %>' ToolTip='<%# Eval("OrganizationName") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                           
+
                             <asp:BoundField DataField="ClusterName" HeaderText="Cluster" SortExpression="ClusterName" meta:resourcekey="BoundFieldResource4" />
                             <asp:BoundField DataField="SecCluster" HeaderText="Sub-Set Cluster" SortExpression="SecCluster" meta:resourcekey="BoundFieldResource5" />
 
@@ -315,7 +319,7 @@
                                     <asp:Label ID="lblPercentageFunded" runat="server" Text='<%# Eval("PercentageFunded")  + "%" %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Contact" SortExpression="ProjectContactName" meta:resourcekey="BoundFieldResource8">
+                            <asp:TemplateField ItemStyle-Width="200px" HeaderText="Contact" SortExpression="ProjectContactName" meta:resourcekey="BoundFieldResource8">
                                 <ItemTemplate>
                                     <asp:Label ID="lblContact" runat="server"
                                         Text='<%# Eval("Contact") %>' ToolTip='<%# Eval("Email") %>'></asp:Label>
@@ -361,7 +365,7 @@
                                 </HeaderTemplate>
                                 <ItemTemplate>
                                     <asp:ImageButton ID="imgbtnPartners" runat="server" ImageUrl="../assets/orsimages/partners2.png"
-                                        ToolTip="Project Partners" PostBackUrl=<%# string.Format("ProjectPartners.aspx?pid={0}", Eval("ProjectId")) %>  />
+                                        ToolTip="Project Partners" PostBackUrl='<%# string.Format("ProjectPartners.aspx?pid={0}", Eval("ProjectId")) %>' />
                                 </ItemTemplate>
 
                                 <ItemStyle HorizontalAlign="Center"></ItemStyle>

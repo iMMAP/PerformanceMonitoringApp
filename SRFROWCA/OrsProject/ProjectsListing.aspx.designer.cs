@@ -193,6 +193,15 @@ namespace SRFROWCA.OrsProject {
         protected global::System.Web.UI.WebControls.DropDownList ddlFrameworkYear;
         
         /// <summary>
+        /// cbLCB control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbLCB;
+        
+        /// <summary>
         /// btnSearch control.
         /// </summary>
         /// <remarks>

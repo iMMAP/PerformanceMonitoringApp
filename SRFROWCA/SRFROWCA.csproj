@@ -414,8 +414,8 @@
     <Content Include="api\v2\OutPutInd\OutPutIndicatorReportedData.ashx" />
     <Content Include="api\v2\OutPutInd\OutputIndIcatorsFramework.ashx" />
     <Content Include="api\v2\OutPutInd\OutPutIndicatorsReportedFeed.ashx" />
-    <Content Include="api\v2\Projects.ashx" />
     <Content Include="api\Web.config" />
+    <Content Include="api\v2\Projects\Projects.ashx" />
     <None Include="assets\font\cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff" />
     <None Include="assets\font\DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff" />
     <Content Include="assets\font\fontawesome-webfont.ttf" />
@@ -725,7 +725,7 @@
     <Compile Include="api\v2\OutPutInd\OutPutIndicatorsReportedFeed.ashx.cs">
       <DependentUpon>OutPutIndicatorsReportedFeed.ashx</DependentUpon>
     </Compile>
-    <Compile Include="api\v2\Projects.ashx.cs">
+    <Compile Include="api\v2\Projects\Projects.ashx.cs">
       <DependentUpon>Projects.ashx</DependentUpon>
     </Compile>
     <Compile Include="aspnet_Applications.cs">
@@ -2038,7 +2038,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="api\v2\Projects\" />
     <Folder Include="App_Data\" />
     <Folder Include="App_Readme\" />
     <Folder Include="OPS\OPSProjects\" />

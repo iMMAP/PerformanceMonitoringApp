@@ -13,6 +13,15 @@ namespace SRFROWCA.api.v2.doc {
     public partial class ProjectsAPI {
         
         /// <summary>
+        /// hfOrgId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfOrgId;
+        
+        /// <summary>
         /// ddlOrg control.
         /// </summary>
         /// <remarks>

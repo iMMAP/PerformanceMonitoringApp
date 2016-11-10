@@ -31,6 +31,15 @@ namespace SRFROWCA.OrsProject {
         protected global::System.Web.UI.WebControls.Literal ltrlProjectCode;
         
         /// <summary>
+        /// ddlYear control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlYear;
+        
+        /// <summary>
         /// lblCountry control.
         /// </summary>
         /// <remarks>

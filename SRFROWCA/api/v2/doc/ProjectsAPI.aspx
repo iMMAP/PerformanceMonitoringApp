@@ -55,11 +55,14 @@
 
                 typeQS = MakeClusterQueryString();
                 queryString = MakeURL(queryString, typeQS);
-
-                typeQS = MakeMonthQueryString();
+               
+                typeQS = MakeSingleValueQueryStringDDLServer("#<%=ddlOrg.ClientID%>", "org");
                 queryString = MakeURL(queryString, typeQS);
 
-                typeQS = MakeSingleValueQueryString("#selectType", "reg");
+                typeQS = MakeSingleValueQueryString("#txtPrjIds", "pid");
+                queryString = MakeURL(queryString, typeQS)
+
+                typeQS = MakeSingleValueQueryString("#opsProjects", "isops");
                 queryString = MakeURL(queryString, typeQS);
 
                 typeQS = MakeSingleValueQueryString("#selectIDs", "inclids");
@@ -68,8 +71,11 @@
                 typeQS = MakeSingleValueQueryString("#selectReportType", "rtype");
                 queryString = MakeURL(queryString, typeQS);
 
-                typeQS = MakeCheckedValueQueryString("#cbCountryLevel", "rlevel");
+                typeQS = MakeSingleValueQueryString("#lcbType", "lcb");
                 queryString = MakeURL(queryString, typeQS);
+
+                //typeQS = MakeCheckedValueQueryString("#cbCountryLevel", "rlevel");
+                //queryString = MakeURL(queryString, typeQS);
 
                 typeQS = MakeSingleValueQueryString("#selectYear", "year");
                 queryString = MakeURL(queryString, typeQS);
@@ -78,7 +84,7 @@
                 queryString = MakeURL(queryString, typeQS);
 
                 typeQS = MakeSingleValueQueryString("#selectLang", "lng");
-                queryString = MakeURL(queryString, typeQS);
+                queryString = MakeURL(queryString, typeQS);                
 
                 var url = $('#hdURL').val();
                 url += queryString;
@@ -116,25 +122,7 @@
                 countryQS = "country=" + country.join();
             }
             return countryQS;
-        }
-
-        function MakeMonthQueryString() {
-            var months = new Array();
-            $('#selectMonth_chosen').find('.chosen-choices').each(function () {
-                $(this).find('li.search-choice').each(function () {
-                    var current = $(this);
-                    var selectedMonth = $(current).find('span').text();
-                    var monthId = GetMonthId(selectedMonth);
-                    months.push(monthId);
-                });
-            });
-
-            var monthQS = "";
-            if (months.length > 0) {
-                monthQS = "month=" + months.join();
-            }
-            return monthQS;
-        }
+        }        
 
         function MakeClusterQueryString() {
             var cluster = new Array();
@@ -157,7 +145,15 @@
         function MakeSingleValueQueryString(elemId, elemName) {
             var selectedVal = $(elemId).val();
 
-            if (selectedVal != 'undefined' || selectedVal !== "") {
+            if (selectedVal != 'undefined' && selectedVal !== "") {
+                return elemName + "=" + selectedVal;
+            }
+            return "";
+        }
+
+        function MakeSingleValueQueryStringDDLServer(elemId, elemName) {
+            var selectedVal = $(elemId).val();
+            if (selectedVal !== 'undefined' && selectedVal !== "" && selectedVal !== "0") {
                 return elemName + "=" + selectedVal;
             }
             return "";
@@ -256,52 +252,7 @@
 
             return id;
         }
-
-        function GetMonthId(cluster) {
-            var id = 0;
-            switch (cluster) {
-                case "Jan":
-                    id = 1;
-                    break;
-                case "Feb":
-                    id = 2;
-                    break;
-                case "Mar":
-                    id = 3;
-                    break;
-                case "Apr":
-                    id = 4;
-                    break;
-                case "May":
-                    id = 5;
-                    break;
-                case "Jun":
-                    id = 6;
-                    break;
-                case "Jul":
-                    id = 7;
-                    break;
-                case "Aug":
-                    id = 8;
-                    break;
-                case "Sep":
-                    id = 9;
-                    break;
-                case "Oct":
-                    id = 10;
-                    break;
-                case "Nov":
-                    id = 11;
-                    break;
-                case "Dec":
-                    id = 12;
-                    break;
-                case "CCCM":
-                    id = 13;
-                    break;
-            }
-            return id;
-        }
+       
 
         function copyToClipboardMsg(elem, msgElem) {
             var succeed = copyToClipboard(elem);
@@ -428,23 +379,12 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <label>Month:</label>
+                                                    <label>Org:</label>
                                                 </td>
-                                                <td colspan="2">
-                                                    <select multiple="" class="wdt chosen-select tag-input-style" id="selectMonth" data-placeholder="...">
-                                                        <option value="1">Jan</option>
-                                                        <option value="2">Feb</option>
-                                                        <option value="3">Mar</option>
-                                                        <option value="4">Apr</option>
-                                                        <option value="5">May</option>
-                                                        <option value="6">Jun</option>
-                                                        <option value="7">Jul</option>
-                                                        <option value="8">Aug</option>
-                                                        <option value="9">Sep</option>
-                                                        <option value="10">Oct</option>
-                                                        <option value="11">Nov</option>
-                                                        <option value="12">Dec</option>
-                                                    </select>
+                                               <td>
+                                                   <asp:HiddenField ID="hfOrgId" runat="server" />
+                                                    <asp:DropDownList ID="ddlOrg" runat="server" CssClass="wdt">
+                                                    </asp:DropDownList>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -459,17 +399,17 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <label>Org:</label>
+                                                    <label>Prj IDs:</label>
                                                 </td>
                                                 <td>
-                                                    <asp:DropDownList ID="ddlOrg" runat="server" CssClass="wdt">
-                                                    </asp:DropDownList>
-                                                </td>
+                                                    <input type="text" id="txtPrjIds" class="wdt" />
+                                                    <span class='orshelpicon' data-rel='popover' data-placement='bottom' data-original-title='Project Ids' data-content='To filter multiple projects, seperate IDs with comma'>?</span>
+                                                    </td>
                                                  <td>
                                                     <label>prj Type:</label>
                                                 </td>
                                                 <td>
-                                                    <select id="selectType" class="wdt">
+                                                    <select id="opsProjects" class="wdt">
                                                         <option value="yes">HRP</option>
                                                         <option value="no">ORS</option>
                                                         <option value="both">HRP & ORS</option>
@@ -485,8 +425,9 @@
                                                     <select id="selectIDs" class="wdt">
                                                         <option value="no">NO</option>
                                                         <option value="yes">YES</option>
+                                                        <option value="all">ALL</option>
                                                     </select>
-                                                    <span class='orshelpicon' data-rel='popover' data-placement='bottom' data-original-title='Extra Columns' data-content='<b>Yes:</b>Include extra columns like IndicatorId, UnitId, MonthId etc.'>?</span>
+                                                    <span class='orshelpicon' data-rel='popover' data-placement='bottom' data-original-title='Extra Columns' data-content='<b>Yes:</b>Include extra columns like CountryId, ClusterId etc.<br/><b>All:</b>Returns all OPS project info like needs, objectives etc.'>?</span>
                                                 </td>
                                                 <td>
                                                     <label>Lang:</label>
@@ -502,9 +443,8 @@
                                                     <select id="selectReportType" class="wdt">
                                                         <option value="1">Only Projects</option>
                                                         <option value="2">Projects Targets</option>
-                                                        <option value="2">Projects Targets & Reported</option>
                                                     </select>
-                                                    <span class='orshelpicon' data-rel='popover' data-placement='bottom' data-original-title='Report Type' data-content='<b>Only Reported:</b>Only returns the indicators which are reported.<br/><b>Monthly Status:</b>Returns all the indicators, for each month, with or without reports. If months are not selected, in Months filter, then upt-to the current month.'>?</span>
+                                                    <span class='orshelpicon' data-rel='popover' data-placement='bottom' data-original-title='Output Type' data-content='<b>Only Projects:</b>Only returns the projects.<br/><b>Projects Targets:</b>Returns project basic info and its targets.'>?</span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -514,6 +454,7 @@
                                                 </td>
                                                 <td>
                                                     <select id="selectYear" class="wdt">
+                                                        <option value="2017">2017</option>
                                                         <option value="2016">2016</option>
                                                         <option value="2015">2015</option>
                                                     </select>
@@ -527,11 +468,14 @@
                                                         <option value="json">Json</option>
                                                     </select>
                                                 </td>
-                                                <td></td>
+                                                <td><label>LCB:</label></td>
                                                 <td>
-                                                    <input type="checkbox" id="cbCountryLevel" />
-                                                    <label>At Country Level</label>
-                                                    <span class='orshelpicon' data-rel='popover' data-placement='bottom' data-original-title='Country Level Reports' data-content='If selected, it will sum data at country level.'>?</span>
+                                                    <select id="lcbType" class="wdt">
+                                                        <option value="">All</option>
+                                                        <option value="yes">Lake Chad Basin</option>
+                                                        <option value="no">Non Lake Chad Basin</option>
+                                                    </select>
+                                                    <span class='orshelpicon' data-rel='popover' data-placement='bottom' data-original-title='Lake Chad Basin' data-content='Use this to filter Lake Chad Basin projects.'>?</span>
                                                 </td>
                                             </tr>
                                             
@@ -548,8 +492,8 @@
         <table border="0" style="margin: 0 auto; width: 100%;">
             <tr>
                 <td>
-                    <input type="hidden" id="hdURL" value="http://localhost:39770/api/v2/OutPutInd/OutPutIndicatorsReportedFeed.ashx?" />
-                    <input type="text" id="txtURL" value="http://localhost:39770/api/v2/OutPutInd/OutPutIndicatorsReportedFeed.ashx?" class="width-100" readonly="readonly" />
+                    <input type="hidden" id="hdURL" value="http://localhost:39770/api/v2/Projects/Projects.ashx?" />
+                    <input type="text" id="txtURL" value="http://localhost:39770/api/v2/Projects/Projects.ashx?" class="width-100" readonly="readonly" />
                 </td>
                 <td>
                     <button type="button" id="btnURL" class="btn btn-small btn-sm">Copy Link</button>
