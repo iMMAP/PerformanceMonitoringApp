@@ -232,7 +232,7 @@ namespace SRFROWCA.Common
                     return Convert.ToInt32(HttpContext.Current.Session["SiteLanguage"]);
                 }
 
-                return Convert.ToInt32(SiteLanguage.English);
+                return Convert.ToInt32(SiteLanguage.French);
             }
 
             set
@@ -921,7 +921,7 @@ namespace SRFROWCA.Common
             {
                 clusterName = "Emergency Shelter And NFI";
             }
-            else if (opsClusterName == "foodsecurity" || opsClusterName == "securitéalimentaire" 
+            else if (opsClusterName == "foodsecurity" || opsClusterName == "securitéalimentaire"
                 || opsClusterName == "sécuritéalimentaire") 
             {
                 clusterName = "Food Security";
@@ -946,7 +946,7 @@ namespace SRFROWCA.Common
             {
                 clusterName = "Logistics";
             }
-            else if (opsClusterName == "waterandsanitation" || opsClusterName == "wash" || opsClusterName == "eauhygièneetassainissement") 
+            else if (opsClusterName == "waterandsanitation" || opsClusterName == "wash" || opsClusterName == "eauhygièneetassainissement")
             {
                 clusterName = "Water Sanitation & Hygiene";
             }
@@ -954,7 +954,8 @@ namespace SRFROWCA.Common
             {
                 clusterName = "Emergency Telecommunication";
             }
-            else if (opsClusterName == "multisectorforrefugees" || opsClusterName == "réponsemultisectoriellepourlesréfugiés")
+            else if (opsClusterName == "multisectorforrefugees" || opsClusterName == "réponsemultisectoriellepourlesréfugiés"
+                || opsClusterName == "r�ponsemultisectoriellepourlesr�fugi�s")
             {
                 clusterName = "Multi Sector for Refugees";
             }

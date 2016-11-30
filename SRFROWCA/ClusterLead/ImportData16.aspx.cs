@@ -13,7 +13,7 @@ using System.Web.UI.WebControls;
 
 namespace SRFROWCA.ClusterLead
 {
-    public partial class ImportData16 : System.Web.UI.Page
+    public partial class ImportData16 : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

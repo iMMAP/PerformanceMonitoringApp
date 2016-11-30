@@ -14,23 +14,27 @@ namespace SRFROWCA
 
         protected void Page_Init(object sender, EventArgs e)
         {
+
             if (Session["SiteLanguage"] == null)
             {
                 if (Request.Cookies["SiteLanguageCookie"] != null)
                 {
                     string siteLangId = Request.Cookies["SiteLanguageCookie"].Value;
-                    if (siteLangId == "2")
-                    {
-                        RC.SelectedSiteLanguageId = (int)RC.SiteLanguage.French;
-                        RC.SiteCulture = RC.FrenchCulture;
-                    }
-                    else
+                    if (siteLangId == "1")
                     {
                         RC.SelectedSiteLanguageId = (int)RC.SiteLanguage.English;
                         RC.SiteCulture = RC.EnglishCulture;
                     }
+                    else
+                    {
+                        RC.SelectedSiteLanguageId = (int)RC.SiteLanguage.French;
+                        RC.SiteCulture = RC.FrenchCulture;
+
+
+                    }
                 }
             }
+
             RC.SelectedEmergencyId = 3;
         }
 

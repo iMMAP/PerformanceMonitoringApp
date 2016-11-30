@@ -153,7 +153,7 @@
                     OnRowCommand="gvActivity_RowCommand" OnRowDataBound="gvActivity_RowDataBound"
                     PagerSettings-Position="Bottom" DataKeyNames="ActivityId,IndicatorDetailId,IndicatorId,IsMigrated"
                     CssClass="imagetable table-hover" OnSorting="gvActivity_Sorting" OnPageIndexChanging="gvActivity_PageIndexChanging"
-                    PageSize="50" ShowHeaderWhenEmpty="True" AllowCustomPaging="true"
+                    PageSize="120" ShowHeaderWhenEmpty="True" AllowCustomPaging="true"
                     EmptyDataText="Your filter criteria does not match any indicator!" meta:resourcekey="gvActivityResource1">
                     <PagerSettings Mode="NumericFirstLast"></PagerSettings>
                     <RowStyle CssClass="istrow" />

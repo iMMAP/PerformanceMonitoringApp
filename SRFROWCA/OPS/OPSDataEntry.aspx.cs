@@ -16,7 +16,7 @@ namespace SRFROWCA.OPS
 
         private void AddOPSTargetControl()
         {
-            int year = 2016;
+            int year = 2017;
             AdminTargetSettingItems items = RC.AdminTargetSettings(EmgLocationId, EmgClusterId, year);
             if (items.IsTarget)
             {

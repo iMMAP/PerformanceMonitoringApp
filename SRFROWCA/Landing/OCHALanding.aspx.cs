@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace SRFROWCA.Landing
 {
-    public partial class OCHALanding : System.Web.UI.Page
+    public partial class OCHALanding : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

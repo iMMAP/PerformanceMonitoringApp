@@ -14,7 +14,7 @@ using System.Xml.Linq;
 
 namespace SRFROWCA.ClusterLead
 {
-    public partial class IndicatorListing : System.Web.UI.Page
+    public partial class IndicatorListing : BasePage
     {
 
 
@@ -393,14 +393,14 @@ namespace SRFROWCA.ClusterLead
         // Execute row commands like Edit, Delete etc. on Grid.
 
 
-        //internal override void BindGridData()
-        //{
-        //    LoadClusters();
-        //    LoadObjectives();
-        //    //PopulateActivities();
-        //    SetDropDownOnRole(false);
-        //    LoadIndicators();
-        //}
+        internal override void BindGridData()
+        {
+            //LoadClusters();
+            //LoadObjectives();
+            //PopulateActivities();
+            //SetDropDownOnRole(false);
+            //LoadIndicators();
+        }
 
         private bool IndicatorIsInUse(int indicatorId)
         {

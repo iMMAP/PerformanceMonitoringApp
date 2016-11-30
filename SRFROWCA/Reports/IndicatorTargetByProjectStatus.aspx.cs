@@ -140,7 +140,7 @@ namespace SRFROWCA.Reports
             if (emgLocId > 0 && emgClusterId > 0)
             {
                 dt = DBContext.GetData("GetAllIndicatorsForOPSTargetReport", new object[] { emgLocId, emgClusterId, 
-                                                                                                langId, RC.Year._2016 });
+                                                                                                langId, RC.Year._2017 });
             }
 
             return dt;

@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 
 namespace SRFROWCA.Reports.Summary
 {
-    public partial class ProgressSummary : System.Web.UI.Page
+    public partial class ProgressSummary : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

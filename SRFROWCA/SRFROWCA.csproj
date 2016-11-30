@@ -156,9 +156,11 @@
     <Content Include="Anonymous\OutputIndicatorReport.aspx" />
     <Content Include="Anonymous\ProjectsListingPublic.aspx" />
     <Content Include="api\v2\docs.aspx" />
+    <Content Include="api\v2\doc\Activities.aspx" />
     <Content Include="api\v2\doc\KeyFiguresAPI.aspx" />
     <Content Include="api\v2\doc\KeyFiguresLakeChadAPI.aspx" />
     <Content Include="api\v2\doc\outputindicatorsapi.aspx" />
+    <Content Include="api\v2\doc\ProjectClusterTargetsAPI.aspx" />
     <Content Include="api\v2\doc\ProjectsAPI.aspx" />
     <Content Include="App_Offline_.htm" />
     <Content Include="assets\css\bootstrap.min.css" />
@@ -179,6 +181,8 @@
     <Content Include="assets\css\images\ui-icons_ef8c08_256x240.png" />
     <Content Include="assets\css\images\ui-icons_ffd27a_256x240.png" />
     <Content Include="assets\css\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="assets\d3\d3.js" />
+    <Content Include="assets\d3\d3.min.js" />
     <Content Include="assets\js\gridviewScroll.min.js" />
     <Content Include="assets\js\gritter.js" />
     <Content Include="assets\orsimages\arrowhl.png" />
@@ -217,6 +221,11 @@
     <Content Include="Admin\Organization\OrganizationList.aspx" />
     <Content Include="ClusterLead\ImportData16.aspx" />
     <Content Include="d3.aspx" />
+    <Content Include="d3time.html" />
+    <Content Include="hcr-top-20.aspx" />
+    <Content Include="hcr-top-20.html" />
+    <Content Include="heatchrt.aspx" />
+    <Content Include="ht.aspx" />
     <Content Include="OrsProject\ctlORSAdmin1Report.ascx" />
     <Content Include="OrsProject\ctlORSAdmin2Report.ascx" />
     <Content Include="OrsProject\ProjectDataEntry.aspx" />
@@ -377,6 +386,7 @@
     <Content Include="Reports\ORS3W.aspx" />
     <Content Include="RequestOrganization.aspx" />
     <Content Include="test1.aspx" />
+    <Content Include="test1.html" />
     <Content Include="testdata.txt" />
     <Content Include="text.html" />
     <Content Include="UploadSRPLogFrame.aspx" />
@@ -416,6 +426,8 @@
     <Content Include="api\v2\OutPutInd\OutPutIndicatorsReportedFeed.ashx" />
     <Content Include="api\Web.config" />
     <Content Include="api\v2\Projects\Projects.ashx" />
+    <Content Include="api\v2\Projects\ProjectClusterTargets.ashx" />
+    <Content Include="assets\d3\LICENSE" />
     <None Include="assets\font\cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff" />
     <None Include="assets\font\DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff" />
     <Content Include="assets\font\fontawesome-webfont.ttf" />
@@ -678,6 +690,13 @@
     <Compile Include="api\v2\docs.aspx.designer.cs">
       <DependentUpon>docs.aspx</DependentUpon>
     </Compile>
+    <Compile Include="api\v2\doc\Activities.aspx.cs">
+      <DependentUpon>Activities.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="api\v2\doc\Activities.aspx.designer.cs">
+      <DependentUpon>Activities.aspx</DependentUpon>
+    </Compile>
     <Compile Include="api\v2\doc\KeyFiguresAPI.aspx.cs">
       <DependentUpon>KeyFiguresAPI.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -698,6 +717,13 @@
     </Compile>
     <Compile Include="api\v2\doc\outputindicatorsapi.aspx.designer.cs">
       <DependentUpon>outputindicatorsapi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="api\v2\doc\ProjectClusterTargetsAPI.aspx.cs">
+      <DependentUpon>ProjectClusterTargetsAPI.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="api\v2\doc\ProjectClusterTargetsAPI.aspx.designer.cs">
+      <DependentUpon>ProjectClusterTargetsAPI.aspx</DependentUpon>
     </Compile>
     <Compile Include="api\v2\doc\ProjectsAPI.aspx.cs">
       <DependentUpon>ProjectsAPI.aspx</DependentUpon>
@@ -724,6 +750,9 @@
     </Compile>
     <Compile Include="api\v2\OutPutInd\OutPutIndicatorsReportedFeed.ashx.cs">
       <DependentUpon>OutPutIndicatorsReportedFeed.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="api\v2\Projects\ProjectClusterTargets.ashx.cs">
+      <DependentUpon>ProjectClusterTargets.ashx</DependentUpon>
     </Compile>
     <Compile Include="api\v2\Projects\Projects.ashx.cs">
       <DependentUpon>Projects.ashx</DependentUpon>
@@ -889,6 +918,27 @@
     </Compile>
     <Compile Include="d3.aspx.designer.cs">
       <DependentUpon>d3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="hcr-top-20.aspx.cs">
+      <DependentUpon>hcr-top-20.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="hcr-top-20.aspx.designer.cs">
+      <DependentUpon>hcr-top-20.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="heatchrt.aspx.cs">
+      <DependentUpon>heatchrt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="heatchrt.aspx.designer.cs">
+      <DependentUpon>heatchrt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ht.aspx.cs">
+      <DependentUpon>ht.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ht.aspx.designer.cs">
+      <DependentUpon>ht.aspx</DependentUpon>
     </Compile>
     <Compile Include="OrsProject\ctlORSAdmin1Report.ascx.cs">
       <DependentUpon>ctlORSAdmin1Report.ascx</DependentUpon>

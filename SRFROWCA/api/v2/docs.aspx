@@ -37,7 +37,12 @@
                     <div class="col-sm-4"><a href="doc/ProjectsAPI.aspx">/Projects</a></div>
                     <div class="col-sm-8">Get all projects (with Targets)</div>
                     <br style="clear: both;">
-                </div>               
+                </div>   
+                <div class="method">
+                    <div class="col-sm-4"><a href="doc/ProjectClusterTargetsAPI.aspx">/Total Targets of an Indicator</a></div>
+                    <div class="col-sm-8">Get total project targets of an indicator. Use this API to find out gap between Cluster Target and Projects Targets.</div>
+                    <br style="clear: both;">
+                </div>                 
             </div>
             <h3 class="col-sm-12">Key-Figures</h3>
             <div class="col-sm-8 indented">

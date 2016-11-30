@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 
 namespace SRFROWCA.ClusterLead
 {
-    public partial class ClusterDataEntry16 : System.Web.UI.Page
+    public partial class ClusterDataEntry16 : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
