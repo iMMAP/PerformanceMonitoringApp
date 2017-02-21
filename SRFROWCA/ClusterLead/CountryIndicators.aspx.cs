@@ -17,16 +17,7 @@ namespace SRFROWCA.ClusterLead
                 //UserInfo.UserProfileInfo(RC.EmergencySahel2015);
                 LoadCombos();
                 RC.SetFiltersFromSession(ddlCountry, ddlCluster, Session);
-                DisableDropDowns();
-                if (Request.QueryString["year"] != null)
-                {
-                    if (Request.QueryString["year"] == "2015")
-                        ddlFrameworkYear.SelectedValue = "11";
-
-                    if (Request.QueryString["year"] == "2016")
-                        ddlFrameworkYear.SelectedValue = "12";
-                }
-
+                DisableDropDowns(); 
                 LoadClusterIndicators();
                 ToggleAddIndicators();
             }
@@ -175,8 +166,8 @@ namespace SRFROWCA.ClusterLead
         protected void ddl_SelectedIndexChanged(object sender, EventArgs e)
         {
             int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
-            cbIncludeRegional.Visible = yearId < (int)RC.Year._2017;
-            localCBIsRegCap.Visible = yearId < (int)RC.Year._2017;
+            //cbIncludeRegional.Visible = yearId < (int)RC.Year._2017;
+            //localCBIsRegCap.Visible = yearId < (int)RC.Year._2017;
 
             LoadClusterIndicators();
             ToggleAddIndicators();
@@ -263,12 +254,8 @@ namespace SRFROWCA.ClusterLead
         }
         private DataTable GetIndicators()
         {
-            string indicator = null;
             int? countryId = null;
             int? clusterId = null;
-
-            //if (!string.IsNullOrEmpty(txtIndicatorName.Text.Trim()))
-            //    indicator = txtIndicatorName.Text;
 
             if (Convert.ToInt32(ddlCountry.SelectedValue) > 0)
                 countryId = Convert.ToInt32(ddlCountry.SelectedValue);
@@ -277,10 +264,10 @@ namespace SRFROWCA.ClusterLead
                 clusterId = Convert.ToInt32(ddlCluster.SelectedValue);
 
             bool regionalIncluded = false;
-            if (cbIncludeRegional.Visible)
-            {
+            //if (cbIncludeRegional.Visible)
+            //{
                 regionalIncluded = cbIncludeRegional.Checked;
-            }
+            //}
 
             int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
 

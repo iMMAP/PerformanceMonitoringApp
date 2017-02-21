@@ -84,7 +84,7 @@ namespace SRFROWCA.ClusterLead
                 {
                     SaveAdmin1Targets(indicatorId, emgLocationId);
                 }
-                DBContext.Update("UpdateOutputIndicatorCountryTotalTargets", new object[] { RC.Year._Current, DBNull.Value });
+                DBContext.Update("UpdateOutputIndicatorCountryTotalTargets", new object[] { RC.Year._2017, DBNull.Value });
                 scope.Complete();
                 //SendEmail(isAdded);
                 Response.Redirect("~/ClusterLead/CountryIndicators.aspx");

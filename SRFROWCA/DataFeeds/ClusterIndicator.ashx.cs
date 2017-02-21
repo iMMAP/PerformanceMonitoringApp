@@ -80,11 +80,24 @@ namespace SRFROWCA.DataFeeds
                     isReg = 1;
             }
 
-            int? yearId = null;
+            int? yearId = (int)RC.Year._Current;
             if (context.Request["year"] != null)
             {
-                int.TryParse(context.Request["year"].ToString(), out val);
-                yearId = val == 2015 ? (int)RC.Year._2015 : (int)RC.Year._2016;
+                if (context.Request["year"].ToString() != "no")
+                    yearId = null;
+                else
+                {
+                    val = 0;
+                    int.TryParse(context.Request["year"].ToString(), out val);
+
+                    RC.Year yearEnum;
+                    if (Enum.TryParse("_" + val.ToString(), out yearEnum))
+                        yearId = (int)yearEnum;
+
+                    if (yearId <= 0)
+                        yearId = (int)RC.Year._Current;
+
+                }
             }
 
             return new object[] { countryId, clusterId, yearId, isReg};

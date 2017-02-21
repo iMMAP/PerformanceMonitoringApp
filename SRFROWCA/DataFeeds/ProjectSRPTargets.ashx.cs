@@ -19,12 +19,24 @@ namespace SRFROWCA.DataFeeds
             DataSet ds = new DataSet();
             object[] param = GetReportParam(context);
 
-            int yearId = (int)RC.Year._2016;
+            int? yearId = (int)RC.Year._Current;
             if (context.Request["year"] != null)
             {
-                int val = 0;
-                int.TryParse(context.Request["year"].ToString(), out val);
-                yearId = val == 2015 ? (int)RC.Year._2015 : (int)RC.Year._2016;
+                if (context.Request["year"].ToString() != "no")
+                    yearId = null;
+                else
+                {
+                    int val = 0;
+                    int.TryParse(context.Request["year"].ToString(), out val);
+
+                    RC.Year yearEnum;
+                    if (Enum.TryParse("_" + val.ToString(), out yearEnum))
+                        yearId = (int)yearEnum;
+
+                    if (yearId <= 0)
+                        yearId = (int)RC.Year._Current;
+
+                }
             }
 
             DataTable dt = new DataTable();
@@ -132,13 +144,33 @@ namespace SRFROWCA.DataFeeds
                 targetLoc = context.Request["tloc"].ToString();
             }
 
+            int? yearId = (int)RC.Year._Current;
+            if (context.Request["year"] != null)
+            {
+                if (context.Request["year"].ToString() != "no")
+                    yearId = null;
+                else
+                {
+                    val = 0;
+                    int.TryParse(context.Request["year"].ToString(), out val);
+
+                    RC.Year yearEnum;
+                    if (Enum.TryParse("_" + val.ToString(), out yearEnum))
+                        yearId = (int)yearEnum;
+
+                    if (yearId <= 0)
+                        yearId = (int)RC.Year._Current;
+
+                }
+            }
+
             string lng = "fr";
             if (context.Request["lng"] != null)
             {
                 lng = context.Request["lng"].ToString();
             }
 
-            return new object[] { projectId, countryId, subClusterId, clusterId, orgId, actId, indId, status, targetLoc, lng };
+            return new object[] { projectId, countryId, subClusterId, clusterId, orgId, actId, indId, status, targetLoc, yearId, lng };
         }
 
         public bool IsReusable

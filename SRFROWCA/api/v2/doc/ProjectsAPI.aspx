@@ -65,6 +65,9 @@
                 typeQS = MakeSingleValueQueryString("#opsProjects", "isops");
                 queryString = MakeURL(queryString, typeQS);
 
+                typeQS = MakeSingleValueQueryString("#fundingType", "isfunded");
+                queryString = MakeURL(queryString, typeQS);                
+
                 typeQS = MakeSingleValueQueryString("#selectIDs", "inclids");
                 queryString = MakeURL(queryString, typeQS);
 

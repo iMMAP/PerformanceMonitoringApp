@@ -32,10 +32,8 @@ namespace SRFROWCA.api.v2.Projects
                         int.TryParse(context.Request["year"].ToString(), out val);
                         if (val == 2015)
                             procedureName = "ProjectIndicatorsWithTargets_API";
-                        else if (val == 2016)
+                        else 
                             procedureName = "ProjectIndicatorsWithTargets_API";
-                        else if (val == 2017)
-                            procedureName = "ProjectSRPTargets_API";
                     }
                 }
             }
@@ -112,6 +110,17 @@ namespace SRFROWCA.api.v2.Projects
                     isOPS = 0;
             }
 
+            int? isFunded = null;
+            if (context.Request["isfunded"] != null)
+            {
+                string queryVal = context.Request["isfunded"].ToString();
+
+                if (queryVal == "yes")
+                    isFunded = 1;
+                else if (queryVal == "no")
+                    isFunded = 0;
+            }
+
             int? isLCB = null;
             if (context.Request["lcb"] != null)
             {
@@ -153,7 +162,7 @@ namespace SRFROWCA.api.v2.Projects
                 lng = context.Request["lng"].ToString();
             }
 
-            return new object[] { countryIds, clusterIds, orgId, prjIds, isOPS, isLCB, inclIds, yearId, lng };
+            return new object[] { countryIds, clusterIds, orgId, prjIds, isOPS, isLCB, inclIds, yearId, isFunded, lng };
         }
 
         public bool IsReusable

@@ -58,9 +58,9 @@
                                                 </td>
                                                 <td>
                                                     <asp:CheckBox ID="cbIncludeRegional" runat="server" CssClass="ace ace-checkbox-2"
-                                                        Checked="True" AutoPostBack="True" OnCheckedChanged="cbIncudeRegional_CheckedChanged" Visible="false" />
+                                                        Checked="True" AutoPostBack="True" OnCheckedChanged="cbIncudeRegional_CheckedChanged" />
                                                    <label> <asp:Localize ID="localCBIsRegCap" runat="server" Text="<span class='label-sm'>Show Regional Indicators</span>" 
-                                                       meta:resourcekey="cbIncludeRegionalResource1" Visible="false"></asp:Localize></label>
+                                                       meta:resourcekey="cbIncludeRegionalResource1" Visible="true"></asp:Localize></label>
                                                 </td>
                                                 <td>
                                                    <label> <asp:Label ID="lblYear" runat="server" Text="Year:" meta:resourcekey="lblYearResource1"></asp:Label></label>

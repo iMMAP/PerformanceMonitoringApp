@@ -153,8 +153,8 @@
     <Content Include="Admin\TargetSettings.aspx" />
     <Content Include="Admin\UnitsListing.aspx" />
     <Content Include="Anonymous\ActivitiesFrameworkPublic.aspx" />
+    <Content Include="Anonymous\AllDataCSV.ashx" />
     <Content Include="Anonymous\OutputIndicatorReport.aspx" />
-    <Content Include="Anonymous\ProjectsListingPublic.aspx" />
     <Content Include="api\v2\docs.aspx" />
     <Content Include="api\v2\doc\Activities.aspx" />
     <Content Include="api\v2\doc\KeyFiguresAPI.aspx" />
@@ -205,7 +205,6 @@
     <Content Include="assets\orsjs\jquery.dataTables.js" />
     <Content Include="assets\orsjs\jquery.dataTables.min.js" />
     <Content Include="assets\orsjs\jquery.wholenumber.js" />
-    <Content Include="bar1.html" />
     <Content Include="ClusterLead\AddActivityAndIndicators.aspx" />
     <Content Include="ClusterLead\ClusterDataEntry.aspx" />
     <Content Include="ClusterLead\ClusterDataEntry16.aspx" />
@@ -220,12 +219,6 @@
     <Content Include="Admin\Organization\AddEditOrganization.aspx" />
     <Content Include="Admin\Organization\OrganizationList.aspx" />
     <Content Include="ClusterLead\ImportData16.aspx" />
-    <Content Include="d3.aspx" />
-    <Content Include="d3time.html" />
-    <Content Include="hcr-top-20.aspx" />
-    <Content Include="hcr-top-20.html" />
-    <Content Include="heatchrt.aspx" />
-    <Content Include="ht.aspx" />
     <Content Include="OrsProject\ctlORSAdmin1Report.ascx" />
     <Content Include="OrsProject\ctlORSAdmin2Report.ascx" />
     <Content Include="OrsProject\ProjectDataEntry.aspx" />
@@ -295,9 +288,6 @@
     <Content Include="Anonymous\ExpClusterFramework.aspx" />
     <Content Include="ClusterLead\ValidateIndicators.aspx" />
     <Content Include="ClusterLead\ValidateReportList.aspx" />
-    <Content Include="ClustOutputIndicators\ctlOutputIndicatorDataEntryCountry.ascx" />
-    <Content Include="ClustOutputIndicators\ctlOutputIndicatorsDataEntry.ascx" />
-    <Content Include="ClustOutputIndicators\TestDataEntry.aspx" />
     <Content Include="Configurations\Settings.xml" />
     <Content Include="Configurations\Units.xml" />
     <Content Include="Controls\AddContryReportControl.ascx" />
@@ -324,7 +314,6 @@
     <Content Include="ErrorPages\HttpErrorPage.aspx" />
     <Content Include="faq.aspx" />
     <Content Include="favicon.ico" />
-    <Content Include="GeoCode.aspx" />
     <Content Include="GV\gridviewScroll.css" />
     <Content Include="GV\gridviewScroll.js" />
     <Content Include="GV\gridviewScroll.min.js" />
@@ -334,10 +323,7 @@
     <Content Include="GV\Images\arrowvb.png" />
     <Content Include="GV\Images\arrowvt.png" />
     <Content Include="GV\WebForm.htm" />
-    <Content Include="HtmlPage1.html" />
     <Content Include="HtmlPage2.html" />
-    <Content Include="HtmlPage3.html" />
-    <Content Include="HtmlPage4.html" />
     <Content Include="KeyFigures\AddKeyFigure.aspx" />
     <Content Include="KeyFigures\AddKeyFigureCategory.aspx" />
     <Content Include="KeyFigures\AddKeyFigureCategoryCtrl.ascx" />
@@ -356,8 +342,6 @@
     <Content Include="Landing\ImplementingPartners.aspx" />
     <Content Include="Landing\OCHALanding.aspx" />
     <Content Include="Log\ErrorLog.txt" />
-    <Content Include="OperationalPresence.aspx" />
-    <Content Include="OPSTargets.html" />
     <Content Include="OPS\IndicatorTargetsByProjectStatus.html" />
     <Content Include="OPS\OPSDataEntry.aspx" />
     <Content Include="OPS\OPSDataEntryRpt.aspx" />
@@ -370,54 +354,25 @@
     <Content Include="OrsProject\ProjectPartners.aspx" />
     <Content Include="OrsProject\ProjectPartnersIndicators.aspx" />
     <Content Include="OrsProject\ProjectsListing.aspx" />
-    <Content Include="Pages\AddActivities.aspx" />
-    <Content Include="Pages\UploadAchived.aspx" />
     <Content Include="OrsProject\ctlORSAdmin1Targets.ascx" />
     <Content Include="OrsProject\ctlORSAdmin2Targets.ascx" />
     <Content Include="OrsProject\ProjectTargets.aspx" />
     <Content Include="RegisterSuccess.aspx" />
-    <Content Include="ReportingStatus.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="Reports\CountryMaps.aspx" />
     <Content Include="Reports\DownloadReport.aspx" />
     <Content Include="Reports\IndicatorTargetByProjectStatus.aspx" />
-    <Content Include="Reports\LoadCountryMaps.aspx" />
     <Content Include="Reports\ORS3W.aspx" />
     <Content Include="RequestOrganization.aspx" />
-    <Content Include="test1.aspx" />
-    <Content Include="test1.html" />
-    <Content Include="testdata.txt" />
-    <Content Include="text.html" />
-    <Content Include="UploadSRPLogFrame.aspx" />
     <Content Include="packages.config" />
-    <Content Include="Pages\Web.config" />
     <Content Include="ops.Master" />
     <Content Include="OPS\OPSActivitiesFeed.ashx" />
     <Content Include="ClusterLead\Web.config" />
     <Content Include="Admin\Web.config" />
     <Content Include="Anonymous\AllDataFeed.ashx" />
     <Content Include="Anonymous\AllDataJson.ashx" />
-    <Content Include="Anonymous\AllDataCSV.ashx" />
     <Content Include="Anonymous\AllValidatedDataFeed.ashx" />
-    <Content Include="UtilsExamples.aspx" />
-    <Content Include="Visualization\images\databox.jpg" />
-    <Content Include="Visualization\images\ip.jpg" />
-    <Content Include="Visualization\images\map.jpg" />
-    <Content Include="Visualization\images\out.jpg" />
-    <Content Include="Visualization\images\overlay-white.png" />
-    <Content Include="Visualization\images\rpt.jpg" />
-    <Content Include="Visualization\images\xcl.jpg" />
-    <Content Include="Visualization\javascripts\main.js" />
-    <Content Include="Visualization\javascripts\scale.fix.js" />
-    <Content Include="Visualization\stylesheets\main.css" />
-    <Content Include="Visualization\stylesheets\pygment_trac.css" />
-    <Content Include="Visualization\stylesheets\styles.css" />
-    <Content Include="Visualization\stylesheets\stylesheet.css" />
     <Content Include="WebForm1.aspx" />
-    <Content Include="WebForm2.aspx" />
-    <Content Include="WebForm3.aspx" />
-    <Content Include="WebService.asmx" />
     <Content Include="api\v2\Framework\activitiesapi.ashx" />
     <Content Include="api\v2\KeyFigures\KeyFigures.ashx" />
     <Content Include="api\v2\KeyFigures\KeyFiguresLakeChad.ashx" />
@@ -465,8 +420,6 @@
     <Content Include="DataFeeds\ProjectPartnersWithTargets.ashx" />
     <Content Include="DataFeeds\ProjectsWithPartners.ashx" />
     <Content Include="DataFeeds\ProjectAndPartnerIndicatorsWithTargets.ashx" />
-    <Content Include="data.json" />
-    <Content Include="data.tsv" />
     <None Include="HelpFiles\HelpDocs\HelpEng\1_ORS_description_EN_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpEng\2_ORS_Resgistration_EN_v3.pdf" />
     <None Include="HelpFiles\HelpDocs\HelpEng\3_ORS_Role_EN_v3.pdf" />
@@ -510,10 +463,6 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Visualization\font\avenir\12d643f2-3899-49d5-a85b-ff430f5fad15.eot" />
-    <Content Include="Visualization\font\avenir\1a7c9181-cd24-4943-a9d9-d033189524e0.eot" />
-    <Content Include="Visualization\font\avenir\42c793cf-df5a-4e07-bf3e-37de54df02b6.eot" />
-    <Content Include="Visualization\font\avenir\e9167238-3b3f-4813-a04a-a384394eed42.eot" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="About.aspx.cs">
@@ -662,6 +611,7 @@
     </Compile>
     <Compile Include="Anonymous\AllDataCSV.ashx.cs">
       <DependentUpon>AllDataCSV.ashx</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Anonymous\AllDataJson.ashx.cs">
       <DependentUpon>AllDataJson.ashx</DependentUpon>
@@ -675,13 +625,6 @@
     </Compile>
     <Compile Include="Anonymous\OutputIndicatorReport.aspx.designer.cs">
       <DependentUpon>OutputIndicatorReport.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Anonymous\ProjectsListingPublic.aspx.cs">
-      <DependentUpon>ProjectsListingPublic.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Anonymous\ProjectsListingPublic.aspx.designer.cs">
-      <DependentUpon>ProjectsListingPublic.aspx</DependentUpon>
     </Compile>
     <Compile Include="api\v2\docs.aspx.cs">
       <DependentUpon>docs.aspx</DependentUpon>
@@ -912,34 +855,6 @@
     <Compile Include="ClusterLead\ImportData16.aspx.designer.cs">
       <DependentUpon>ImportData16.aspx</DependentUpon>
     </Compile>
-    <Compile Include="d3.aspx.cs">
-      <DependentUpon>d3.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="d3.aspx.designer.cs">
-      <DependentUpon>d3.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="hcr-top-20.aspx.cs">
-      <DependentUpon>hcr-top-20.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="hcr-top-20.aspx.designer.cs">
-      <DependentUpon>hcr-top-20.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="heatchrt.aspx.cs">
-      <DependentUpon>heatchrt.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="heatchrt.aspx.designer.cs">
-      <DependentUpon>heatchrt.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ht.aspx.cs">
-      <DependentUpon>ht.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ht.aspx.designer.cs">
-      <DependentUpon>ht.aspx</DependentUpon>
-    </Compile>
     <Compile Include="OrsProject\ctlORSAdmin1Report.ascx.cs">
       <DependentUpon>ctlORSAdmin1Report.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1084,27 +999,6 @@
     <Compile Include="ClusterReportDetail.cs">
       <DependentUpon>ORSDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ClustOutputIndicators\ctlOutputIndicatorDataEntryCountry.ascx.cs">
-      <DependentUpon>ctlOutputIndicatorDataEntryCountry.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ClustOutputIndicators\ctlOutputIndicatorDataEntryCountry.ascx.designer.cs">
-      <DependentUpon>ctlOutputIndicatorDataEntryCountry.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="ClustOutputIndicators\ctlOutputIndicatorsDataEntry.ascx.cs">
-      <DependentUpon>ctlOutputIndicatorsDataEntry.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ClustOutputIndicators\ctlOutputIndicatorsDataEntry.ascx.designer.cs">
-      <DependentUpon>ctlOutputIndicatorsDataEntry.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="ClustOutputIndicators\TestDataEntry.aspx.cs">
-      <DependentUpon>TestDataEntry.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ClustOutputIndicators\TestDataEntry.aspx.designer.cs">
-      <DependentUpon>TestDataEntry.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Common\DataTableToCSV.cs" />
     <Compile Include="Common\EmailNotifications.cs" />
     <Compile Include="Common\Extentions.cs" />
@@ -1207,7 +1101,6 @@
     <Compile Include="Currency.cs">
       <DependentUpon>ORSDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="CustomUser.cs" />
     <Compile Include="Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1417,13 +1310,6 @@
     </Compile>
     <Compile Include="GenderCategory.cs">
       <DependentUpon>ORSDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="GeoCode.aspx.cs">
-      <DependentUpon>GeoCode.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="GeoCode.aspx.designer.cs">
-      <DependentUpon>GeoCode.aspx</DependentUpon>
     </Compile>
     <Compile Include="GV\GVScroll.aspx.cs">
       <DependentUpon>GVScroll.aspx</DependentUpon>
@@ -1654,13 +1540,6 @@
     <Compile Include="ObjectivePriority.cs">
       <DependentUpon>ORSDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="OperationalPresence.aspx.cs">
-      <DependentUpon>OperationalPresence.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="OperationalPresence.aspx.designer.cs">
-      <DependentUpon>OperationalPresence.aspx</DependentUpon>
-    </Compile>
     <Compile Include="ops.Master.cs">
       <DependentUpon>ops.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1803,20 +1682,6 @@
     <Compile Include="OrsProject\ProjectsListing.aspx.designer.cs">
       <DependentUpon>ProjectsListing.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AddActivities.aspx.cs">
-      <DependentUpon>AddActivities.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\AddActivities.aspx.designer.cs">
-      <DependentUpon>AddActivities.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\UploadAchived.aspx.cs">
-      <DependentUpon>UploadAchived.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\UploadAchived.aspx.designer.cs">
-      <DependentUpon>UploadAchived.aspx</DependentUpon>
-    </Compile>
     <Compile Include="OrsProject\ctlORSAdmin1Targets.ascx.cs">
       <DependentUpon>ctlORSAdmin1Targets.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1919,13 +1784,6 @@
     <Compile Include="ReportIndicatorAccumulative.cs">
       <DependentUpon>ORSDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ReportingStatus.aspx.cs">
-      <DependentUpon>ReportingStatus.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ReportingStatus.aspx.designer.cs">
-      <DependentUpon>ReportingStatus.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Common\RC.cs" />
     <Compile Include="Common\ExportUtility.cs" />
     <Compile Include="Common\Mail.cs" />
@@ -1949,13 +1807,6 @@
     <Compile Include="ReportsDataEntry.cs">
       <DependentUpon>ORSDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Reports\CountryMaps.aspx.cs">
-      <DependentUpon>CountryMaps.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reports\CountryMaps.aspx.designer.cs">
-      <DependentUpon>CountryMaps.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Reports\DownloadReport.aspx.cs">
       <DependentUpon>DownloadReport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1969,13 +1820,6 @@
     </Compile>
     <Compile Include="Reports\IndicatorTargetByProjectStatus.aspx.designer.cs">
       <DependentUpon>IndicatorTargetByProjectStatus.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\LoadCountryMaps.aspx.cs">
-      <DependentUpon>LoadCountryMaps.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reports\LoadCountryMaps.aspx.designer.cs">
-      <DependentUpon>LoadCountryMaps.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\ORS3W.aspx.cs">
       <DependentUpon>ORS3W.aspx</DependentUpon>
@@ -2031,29 +1875,8 @@
     <Compile Include="TempData.cs">
       <DependentUpon>ORSDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="test1.aspx.cs">
-      <DependentUpon>test1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="test1.aspx.designer.cs">
-      <DependentUpon>test1.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Unit.cs">
       <DependentUpon>ORSDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UploadSRPLogFrame.aspx.cs">
-      <DependentUpon>UploadSRPLogFrame.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UploadSRPLogFrame.aspx.designer.cs">
-      <DependentUpon>UploadSRPLogFrame.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UtilsExamples.aspx.cs">
-      <DependentUpon>UtilsExamples.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UtilsExamples.aspx.designer.cs">
-      <DependentUpon>UtilsExamples.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
@@ -2061,24 +1884,6 @@
     </Compile>
     <Compile Include="WebForm1.aspx.designer.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebForm2.aspx.cs">
-      <DependentUpon>WebForm2.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm2.aspx.designer.cs">
-      <DependentUpon>WebForm2.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebForm3.aspx.cs">
-      <DependentUpon>WebForm3.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm3.aspx.designer.cs">
-      <DependentUpon>WebForm3.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebService.asmx.cs">
-      <DependentUpon>WebService.asmx</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Week.cs">
       <DependentUpon>ORSDataModel.tt</DependentUpon>
@@ -2171,32 +1976,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ContactUs\App_LocalResources\Contactus.aspx.fr.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Pages\App_LocalResources\AddActivities.aspx.resx">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Pages\App_LocalResources\AddActivities.aspx.fr-FR.resx">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Pages\App_LocalResources\ManageActivities.aspx.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Pages\App_LocalResources\CreateProject.aspx.resx">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Pages\App_LocalResources\CreateProject.aspx.fr-FR.resx">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Pages\App_LocalResources\ManageActivities.aspx.fr-FR.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClusterLead\App_LocalResources\ClusterIndicatorTargets.aspx.resx" />

@@ -17,7 +17,7 @@ namespace SRFROWCA.api.v2.OutPutInd
             object[] param = GetReportParam(context);
 
             //int val = 0;
-            string procedureName = "OutPutIndicatorReportedDataFeed_OnlyReportedAtAdmin1";
+            string procedureName = "OutPutIndicatorRedportedDataFeed_OnlyReportedAtAdmin1";
 
             int reportLevel = 0;
             if (!string.IsNullOrEmpty(context.Request["rlevel"]))

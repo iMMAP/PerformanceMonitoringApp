@@ -267,28 +267,16 @@
                                 <asp:Localize ID="localImportDataUser" runat="server" Text="Import Data" meta:resourcekey="localImportDataUserResource1"></asp:Localize></span>
                         </a></li>
 
-
-                        <%--<li id="liMaps" runat="server"><a href='<%=BaseURL%>/Admin/CountryMapsListing.aspx'
-                            id="menuMaps"><i class="icon-table"></i><span class="menu-text">
-                                <asp:Localize ID="Localize4" runat="server" Text="Manage Maps"></asp:Localize></span>
-                        </a></li>--%>
                         <li id="liApi" runat="server" class="hidde"><a href='<%=BaseURL%>/api/v2/docs.aspx'
                             id="menuApi"><i class="icon-cloud-download"></i><span class="menu-text">ORS API</span>
                         </a></li>
-                        <%-- <li><a href="<%=BaseURL %>/Reports/CountryMaps.aspx"><i class="icon-map-marker"></i><span class="menu-text">
-                            <asp:Localize ID="Localize5" runat="server" Text="Maps"></asp:Localize></span> </a></li>--%>
-
-                       <%-- <li id="liContactList" runat="server"><a href="<%=BaseURL %>/OperationalPresence.aspx">
-                            <i class="icon-group"></i><span class="menu-text">
-                                <asp:Localize ID="localReportsSumRepContactList" runat="server" Text="Contact List" meta:resourcekey="localReportsSumRepContactListResource1"></asp:Localize>
-                            </span></a></li>--%>
+                        
                         <li><a href="<%=BaseURL %>/faq.aspx"><i class="icon-comment-alt"></i><span class="menu-text">
                             <asp:Localize ID="localFAQHelp" runat="server" Text="FAQs & Help" meta:resourcekey="localFAQHelpResource1"></asp:Localize></span> </a></li>
                         <li><a href="<%=BaseURL %>/ContactUs/Contactus.aspx"><i class="icon-envelope-alt"></i><span
                             class="menu-text">
                             <asp:Localize ID="localContactUs" runat="server" Text="Contact Us" meta:resourcekey="localContactUsResource1"></asp:Localize></span> </a></li>
-
-
+                        
                         <li id="liSettings" runat="server"><a href="~/Admin/ConfigSettings.aspx" id="menuSettings"
                             runat="server"><i class="icon-cogs"></i><span class="menu-text">
                                 <asp:Localize ID="localSettings" runat="server" Text="Settings" meta:resourcekey="localSettingsResource1"></asp:Localize>
