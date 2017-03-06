@@ -157,10 +157,13 @@
     <Content Include="Anonymous\OutputIndicatorReport.aspx" />
     <Content Include="api\v2\docs.aspx" />
     <Content Include="api\v2\doc\Activities.aspx" />
+    <Content Include="api\v2\doc\indicators.aspx" />
     <Content Include="api\v2\doc\KeyFiguresAPI.aspx" />
     <Content Include="api\v2\doc\KeyFiguresLakeChadAPI.aspx" />
+    <Content Include="api\v2\doc\orgsbycountry.aspx" />
     <Content Include="api\v2\doc\outputindicatorsapi.aspx" />
     <Content Include="api\v2\doc\ProjectClusterTargetsAPI.aspx" />
+    <Content Include="api\v2\doc\ProjectReportsAPI.aspx" />
     <Content Include="api\v2\doc\ProjectsAPI.aspx" />
     <Content Include="App_Offline_.htm" />
     <Content Include="assets\css\bootstrap.min.css" />
@@ -383,6 +386,9 @@
     <Content Include="api\v2\Projects\Projects.ashx" />
     <Content Include="api\v2\Projects\ProjectClusterTargets.ashx" />
     <Content Include="assets\d3\LICENSE" />
+    <Content Include="api\v2\Projects\ProjectReports.ashx" />
+    <Content Include="api\v2\Framework\indicatorsapi.ashx" />
+    <Content Include="api\v2\Framework\orgsbycountryapi.ashx" />
     <None Include="assets\font\cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff" />
     <None Include="assets\font\DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff" />
     <Content Include="assets\font\fontawesome-webfont.ttf" />
@@ -640,6 +646,13 @@
     <Compile Include="api\v2\doc\Activities.aspx.designer.cs">
       <DependentUpon>Activities.aspx</DependentUpon>
     </Compile>
+    <Compile Include="api\v2\doc\indicators.aspx.cs">
+      <DependentUpon>indicators.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="api\v2\doc\indicators.aspx.designer.cs">
+      <DependentUpon>indicators.aspx</DependentUpon>
+    </Compile>
     <Compile Include="api\v2\doc\KeyFiguresAPI.aspx.cs">
       <DependentUpon>KeyFiguresAPI.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -653,6 +666,13 @@
     </Compile>
     <Compile Include="api\v2\doc\KeyFiguresLakeChadAPI.aspx.designer.cs">
       <DependentUpon>KeyFiguresLakeChadAPI.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="api\v2\doc\orgsbycountry.aspx.cs">
+      <DependentUpon>orgsbycountry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="api\v2\doc\orgsbycountry.aspx.designer.cs">
+      <DependentUpon>orgsbycountry.aspx</DependentUpon>
     </Compile>
     <Compile Include="api\v2\doc\outputindicatorsapi.aspx.cs">
       <DependentUpon>outputindicatorsapi.aspx</DependentUpon>
@@ -668,6 +688,13 @@
     <Compile Include="api\v2\doc\ProjectClusterTargetsAPI.aspx.designer.cs">
       <DependentUpon>ProjectClusterTargetsAPI.aspx</DependentUpon>
     </Compile>
+    <Compile Include="api\v2\doc\ProjectReportsAPI.aspx.cs">
+      <DependentUpon>ProjectReportsAPI.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="api\v2\doc\ProjectReportsAPI.aspx.designer.cs">
+      <DependentUpon>ProjectReportsAPI.aspx</DependentUpon>
+    </Compile>
     <Compile Include="api\v2\doc\ProjectsAPI.aspx.cs">
       <DependentUpon>ProjectsAPI.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -677,6 +704,12 @@
     </Compile>
     <Compile Include="api\v2\Framework\activitiesapi.ashx.cs">
       <DependentUpon>activitiesapi.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="api\v2\Framework\indicatorsapi.ashx.cs">
+      <DependentUpon>indicatorsapi.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="api\v2\Framework\orgsbycountryapi.ashx.cs">
+      <DependentUpon>orgsbycountryapi.ashx</DependentUpon>
     </Compile>
     <Compile Include="api\v2\ItemizeAPI.cs" />
     <Compile Include="api\v2\KeyFigures\KeyFigures.ashx.cs">
@@ -696,6 +729,9 @@
     </Compile>
     <Compile Include="api\v2\Projects\ProjectClusterTargets.ashx.cs">
       <DependentUpon>ProjectClusterTargets.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="api\v2\Projects\ProjectReports.ashx.cs">
+      <DependentUpon>ProjectReports.ashx</DependentUpon>
     </Compile>
     <Compile Include="api\v2\Projects\Projects.ashx.cs">
       <DependentUpon>Projects.ashx</DependentUpon>

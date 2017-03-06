@@ -300,35 +300,14 @@ namespace SRFROWCA
             string uri = HttpContext.Current.Request.Url.AbsolutePath;
             if (uri.Contains("/Default.aspx") || uri.Contains("Landing/ClusterCord"))
             {
-                //liDashboards.Attributes.Add("class", "active");
                 liHome.Attributes.Add("class", "active");
                 PageTitle = "ORS - Home";
             }
-            //else if (uri.Contains("/Dashboard.aspx"))
-            //{
-            //    liDashboards.Attributes.Add("class", "active");
-            //    PageTitle = "ORS - Dashboard";
-            //}
-            //else if (uri == "/ReportingStatus.aspx")
-            //{
-            //    liDashboards.Attributes.Add("class", "active open");
-            //    PageTitle = "ORS - Achievements";
-            //}
-            //else if (uri == "/Pages/AddActivities.aspx")
-            //{
-            //    PageTitle = "ORS - Data Entry";
-            //    liDataEntry.Attributes.Add("class", "active");
-            //}
             else if (uri.Contains("/Pages/ManageProject.aspx"))
             {
                 PageTitle = "ORS - Manage Project";
                 liProjects.Attributes.Add("class", "active");
             }
-            //else if (uri == "/Pages/ManageActivities.aspx")
-            //{
-            //    PageTitle = "ORS - Manage Activity";
-            //    liManageActivity.Attributes.Add("class", "active");
-            //}
             else if (uri == "/Anonymous/AllData.aspx")
             {
                 liReportsMain.Attributes.Add("class", "active open");
@@ -343,10 +322,6 @@ namespace SRFROWCA
             {
                 liValidateAchievements.Attributes.Add("class", "active");
             }
-            //else if (uri == "/Anonymous/OutputIndicatorReport.aspx")
-            //{
-            //    liOutputIndReportPublic.Attributes.Add("class", "active");
-            //}
             else if (uri == "/OrsProject/ProjectsListing.aspx" || uri == "/OrsProject/ProjectPartners.aspx"
                  || uri == "/OrsProject/CreateProject.aspx")
             {
@@ -399,11 +374,6 @@ namespace SRFROWCA
                 PageTitle = "ORS - Key Figures";
                 liKeyFiguresPublic.Attributes.Add("class", "active");
             }
-            //else if (uri == "/LeadPages/FundingListing.aspx")
-            //{
-            //    PageTitle = "ORS - Fundings";
-            //    liFundingStatus.Attributes.Add("class", "active");
-            //}
             else if (uri == "/organization/OrganizationList.aspx")
             {
                 PageTitle = "ORS - Organizations";
@@ -442,26 +412,20 @@ namespace SRFROWCA
             else if (uri.Contains("ClusterLead/ClusterDataEntry16.aspx"))
             {
                 PageTitle = "ORS - Country Indicators";
-                //liClusterFrameworks.Attributes.Add("class", "active open");
                 liIndicatorReporting16.Attributes.Add("class", "active");
             }
             else if (uri.Contains("Reports/OutputIndicators/ReportedOutputIndicators15.aspx"))
             {
-                //liClusterFrameworks.Attributes.Add("class", "active open");
                 liOutputIndicators.Attributes.Add("class", "active");
-                //liIndicatorReport.Attributes.Add("class", "active");
             }
             else if (uri.Contains("Reports/OutputIndicators/ReportedOutputIndicators.aspx"))
             {
-                //liClusterFrameworks.Attributes.Add("class", "active open");
-                //liOutputIndicators.Attributes.Add("class", "active open");
                 liReportsMain.Attributes.Add("class", "active open");
                 liOutputIndReportPublic16.Attributes.Add("class", "active");
             }
             else if (uri.Contains("ClusterLead/CountryIndicators.aspx"))
             {
                 PageTitle = "ORS - Country Indicators";
-                //liClusterFrameworks.Attributes.Add("class", "active open");
                 liOutputIndicators.Attributes.Add("class", "active");
             }
 
@@ -470,15 +434,9 @@ namespace SRFROWCA
                 || uri.Contains("ClusterLead/IndicatorListingMigrate.aspx"))
             {
                 PageTitle = "ORS - Activity Indicators";
-                //liClusterFrameworks.Attributes.Add("class", "active open");
                 liNewIndicatorListing.Attributes.Add("class", "active");
             }
 
-            //else if (uri.Contains("Anonymous/ExpClusterFramework.aspx"))
-            //{
-            //    PageTitle = "ORS - Export Framework";
-            //    liNewIndicatorListing.Attributes.Add("class", "active");
-            //}
             else if (uri.Contains("Reports/Summary/ProgressSummary.aspx"))
             {
                 PageTitle = "ORS - Progress Summary";
@@ -490,21 +448,10 @@ namespace SRFROWCA
                 PageTitle = "ORS - Settings";
                 liSettings.Attributes.Add("class", "active");
             }
-            //else if (uri.Contains("Pages/ProjectIP.aspx"))
-            //{
-            //    liManagePartners.Attributes.Add("class", "active");
-            //}
             else if (uri.Contains("Admin/Location/AddNewLocation.aspx") || uri.Contains("Admin/Location/LocationsList.aspx"))
             {
                 liLocations.Attributes.Add("class", "active");
             }
-            else if (uri.Contains("Reports/ORS3W.aspx"))
-            {
-                PageTitle = "ORS - ORS 3W";
-                liReportsMain.Attributes.Add("class", "active open");
-                liORS3W.Attributes.Add("class", "active");
-            }
-
             else if (uri.Contains("Anonymous/ActivitiesFrameworkPublic.aspx"))
             {
                 PageTitle = "ORS - Cluster Framework";

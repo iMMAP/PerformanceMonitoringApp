@@ -472,24 +472,6 @@ namespace SRFROWCA {
         protected global::System.Web.UI.WebControls.Localize Localize3;
         
         /// <summary>
-        /// liORS3W control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liORS3W;
-        
-        /// <summary>
-        /// menuORS3W control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuORS3W;
-        
-        /// <summary>
         /// liProgressSummary control.
         /// </summary>
         /// <remarks>

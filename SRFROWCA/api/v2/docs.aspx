@@ -42,6 +42,11 @@
                     <div class="col-sm-4"><a href="doc/ProjectClusterTargetsAPI.aspx">/Total Targets of an Indicator</a></div>
                     <div class="col-sm-8">Get total project targets of an indicator. Use this API to find out gap between Cluster Target and Projects Targets.</div>
                     <br style="clear: both;">
+                </div>      
+                 <div class="method">
+                    <div class="col-sm-4"><a href="doc/ProjectReportsAPI.aspx">/Project reports</a></div>
+                    <div class="col-sm-8">Get reported data of project.</div>
+                    <br style="clear: both;">
                 </div>                 
             </div>
             <h3 class="col-sm-12">Key-Figures</h3>
@@ -64,21 +69,21 @@
                     <div class="col-sm-8">Get Monthly Achived Reports Of Output Inidcators</div>
                     <br style="clear: both;">
                 </div>
-                <div class="method">
+               <%-- <div class="method">
                     <div class="col-sm-4"><a href="doc/ProjectsAPI.aspx">/Output Indicators</a></div>
                     <div class="col-sm-8">Get list of output indicators</div>
                     <br style="clear: both;">
-                </div>
+                </div>--%>
             </div>
             <h3 class="col-sm-12">Cluster Framework</h3>
             <div class="col-sm-8 indented">
                 <div class="method">
-                    <div class="col-sm-4"><a href="doc/activitiesapi.aspx">/Activities</a></div>
+                    <div class="col-sm-4"><a href="doc/activities.aspx">/Activities</a></div>
                     <div class="col-sm-8">Get Cluster Framework 'Activities'</div>
                     <br style="clear: both;">
                 </div>
                 <div class="method">
-                    <div class="col-sm-4"><a href="doc/Indicatorsapi.aspx">/Indicators</a></div>
+                    <div class="col-sm-4"><a href="doc/indicators.aspx">/Indicators</a></div>
                     <div class="col-sm-8">Get Cluster Framework 'Indicators'</div>
                     <br style="clear: both;">
                 </div>

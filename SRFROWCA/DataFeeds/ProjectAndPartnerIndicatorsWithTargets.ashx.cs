@@ -79,10 +79,9 @@ namespace SRFROWCA.DataFeeds
             {
                 int.TryParse(context.Request["org"].ToString(), out val);
             }
+
             int? orgId = val > 0 ? val : (int?)null;
-
             int? yearId = (int)RC.Year._Current;
-
             if (context.Request["year"] != null)
             {
                 int.TryParse(context.Request["year"].ToString(), out val);

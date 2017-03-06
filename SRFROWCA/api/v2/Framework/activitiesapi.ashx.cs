@@ -1,10 +1,7 @@
 ﻿using BusinessLogic;
 using SRFROWCA.Common;
-using System;
-using System.Collections.Generic;
 using System.Data;
 using System.IO;
-using System.Linq;
 using System.Web;
 
 namespace SRFROWCA.api.v2.Framework
@@ -19,28 +16,7 @@ namespace SRFROWCA.api.v2.Framework
         {
             DataSet ds = new DataSet();
             object[] param = GetReportParam(context);
-
-            string procedureName = "GetFrameworkActivities_API";
-            if (!string.IsNullOrEmpty(context.Request["rtype"]))
-            {
-                int reportType = 1;
-                int.TryParse(context.Request["rtype"].ToString(), out reportType);
-                if (reportType == 2)
-                {
-                    int val = 0;
-                    if (context.Request["year"] != null)
-                    {
-                        int.TryParse(context.Request["year"].ToString(), out val);
-                        if (val == 2015)
-                            procedureName = "ProjectIndicatorsWithTargets_API";
-                        else if (val == 2016)
-                            procedureName = "ProjectIndicatorsWithTargets_API";
-                        else if (val == 2017)
-                            procedureName = "ProjectSRPTargets_API";
-                    }
-                }
-            }
-
+            string procedureName = "GetFrameworkActivities_API"; 
             DataTable dt = DBContext.GetData(procedureName, param);
 
             string format = "xml";
@@ -91,51 +67,6 @@ namespace SRFROWCA.api.v2.Framework
                 clusterIds = context.Request["cluster"].ToString();
             }
 
-            string orgId = null;
-            if (!string.IsNullOrEmpty(context.Request["org"]))
-            {
-                orgId = context.Request["org"].ToString();
-            }
-
-            string prjIds = null;
-            if (!string.IsNullOrEmpty(context.Request["pid"]))
-            {
-                prjIds = context.Request["pid"].ToString();
-            }
-
-            int? isOPS = null;
-            if (context.Request["isops"] != null)
-            {
-                string queryVal = context.Request["isops"].ToString();
-
-                if (queryVal == "yes")
-                    isOPS = 1;
-                else if (queryVal == "no")
-                    isOPS = 0;
-            }
-
-            int? isLCB = null;
-            if (context.Request["lcb"] != null)
-            {
-                string queryVal = context.Request["lcb"].ToString();
-
-                if (queryVal == "yes")
-                    isLCB = 1;
-                else if (queryVal == "no")
-                    isLCB = 0;
-            }
-
-            int inclIds = 0;
-            if (context.Request["inclids"] != null)
-            {
-                string queryVal = context.Request["inclids"].ToString();
-
-                if (queryVal == "Yes" || queryVal == "yes" || queryVal == "y" || queryVal == "YES" || queryVal == "1")
-                    inclIds = 1;
-                else if (queryVal == "ALL" || queryVal == "all" || queryVal == "All")
-                    inclIds = 2;
-            }
-
             int val = 0;
             int? yearId = null;
             if (context.Request["year"] != null)
@@ -155,7 +86,7 @@ namespace SRFROWCA.api.v2.Framework
                 lng = context.Request["lng"].ToString();
             }
 
-            return new object[] { countryIds, clusterIds, orgId, prjIds, isOPS, isLCB, inclIds, yearId, lng };
+            return new object[] { countryIds, clusterIds, yearId, lng };
         }
 
         public bool IsReusable

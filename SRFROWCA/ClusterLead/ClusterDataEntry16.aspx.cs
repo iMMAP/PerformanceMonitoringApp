@@ -56,11 +56,13 @@ namespace SRFROWCA.ClusterLead
 
         private void SetDates()
         {
-            int month = DateTime.Now.Month - 1;
-            if (month.Equals(12))
-                month = 1;
-            else if (month.Equals(11))
-                month = 12;
+            //int month = DateTime.Now.Month - 1;
+            //if (month.Equals(12))
+            //    month = 1;
+            //else if (month.Equals(11))
+            //    month = 12;
+
+            int month = 12;
 
             ddlMonth.SelectedValue = month.ToString();
         }

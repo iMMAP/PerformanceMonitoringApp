@@ -163,8 +163,8 @@
                                                         <asp:DropDownList ID="ddlFrameworkYear" runat="server" AutoPostBack="True"
                                                             OnSelectedIndexChanged="SelectedIndexChanged" meta:resourcekey="ddlFrameworkYearResource1" Width="70px">
                                                             <asp:ListItem Text="2017" Value="13"></asp:ListItem>
-                                                            <asp:ListItem Text="2016" Value="12" Selected="True" meta:resourcekey="ListItemResource3"></asp:ListItem>
-                                                            <asp:ListItem Text="2015" Value="11" meta:resourcekey="ListItemResource4"></asp:ListItem>
+                                                            <asp:ListItem Text="2016" Value="12"></asp:ListItem>
+                                                            <asp:ListItem Text="2015" Value="11"></asp:ListItem>
                                                         </asp:DropDownList>
                                                         <asp:CheckBox ID="cbLCB" runat="server" style="margin-left:20px;"
                                                             Text="LCB" Checked="false"

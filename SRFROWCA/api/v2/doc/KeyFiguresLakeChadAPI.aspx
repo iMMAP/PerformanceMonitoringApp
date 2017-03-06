@@ -319,16 +319,10 @@
                                                 <td>
                                                     <select multiple=""
                                                         class="wdt chosen-select tag-input-style" id="selectCountry" data-placeholder="...">
-                                                        <option value="2">BFA</option>
                                                         <option value="3">CMR</option>
                                                         <option value="4">TCD</option>
-                                                        <option value="5">GMB</option>
-                                                        <option value="6">MLI</option>
-                                                        <option value="7">MRT</option>
                                                         <option value="8">NER</option>
                                                         <option value="9">NGA</option>
-                                                        <option value="10">SEN</option>
-                                                        <option value="567">SAH Reg</option>
                                                     </select>
                                                 </td>
                                                 <td>

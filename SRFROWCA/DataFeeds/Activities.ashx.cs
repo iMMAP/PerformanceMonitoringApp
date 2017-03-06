@@ -51,25 +51,19 @@ namespace SRFROWCA.DataFeeds
                 int.TryParse(context.Request["cluster"].ToString(), out val);
             }
             int? clusterId = val > 0 ? val : (int?)null;
-            
-            val = 0;
+
             int? yearId = (int)RC.Year._Current;
             if (context.Request["year"] != null)
             {
-                if (context.Request["year"].ToString() != "no")
-                    yearId = null;
-                else
-                {
-                    val = 0;
-                    int.TryParse(context.Request["year"].ToString(), out val);
+                val = 0;
+                int.TryParse(context.Request["year"].ToString(), out val);
 
-                    RC.Year yearEnum;
-                    if (Enum.TryParse("_" + val.ToString(), out yearEnum))
-                        yearId = (int)yearEnum;
+                RC.Year yearEnum;
+                if (Enum.TryParse("_" + val.ToString(), out yearEnum))
+                    yearId = (int)yearEnum;
 
-                    if (yearId <= 0)
-                        yearId = (int)RC.Year._Current;
-                }
+                if (yearId <= 0)
+                    yearId = (int)RC.Year._Current;
             }
 
             string lng = "fr";

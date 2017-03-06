@@ -22,21 +22,15 @@ namespace SRFROWCA.DataFeeds
             int? yearId = (int)RC.Year._Current;
             if (context.Request["year"] != null)
             {
-                if (context.Request["year"].ToString() != "no")
-                    yearId = null;
-                else
-                {
-                    int val = 0;
-                    int.TryParse(context.Request["year"].ToString(), out val);
+                int val = 0;
+                int.TryParse(context.Request["year"].ToString(), out val);
 
-                    RC.Year yearEnum;
-                    if (Enum.TryParse("_" + val.ToString(), out yearEnum))
-                        yearId = (int)yearEnum;
+                RC.Year yearEnum;
+                if (Enum.TryParse("_" + val.ToString(), out yearEnum))
+                    yearId = (int)yearEnum;
 
-                    if (yearId <= 0)
-                        yearId = (int)RC.Year._Current;
-
-                }
+                if (yearId <= 0)
+                    yearId = (int)RC.Year._Current;
             }
 
             DataTable dt = new DataTable();

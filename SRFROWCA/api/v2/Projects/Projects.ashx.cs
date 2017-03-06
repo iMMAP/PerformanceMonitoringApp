@@ -26,15 +26,7 @@ namespace SRFROWCA.api.v2.Projects
                 int.TryParse(context.Request["rtype"].ToString(), out reportType);
                 if (reportType == 2)
                 {
-                    int val = 0;
-                    if (context.Request["year"] != null)
-                    {
-                        int.TryParse(context.Request["year"].ToString(), out val);
-                        if (val == 2015)
-                            procedureName = "ProjectIndicatorsWithTargets_API";
-                        else 
-                            procedureName = "ProjectIndicatorsWithTargets_API";
-                    }
+                        procedureName = "ProjectIndicatorsWithTargets_API";
                 }
             }
 
