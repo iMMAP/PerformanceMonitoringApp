@@ -2,7 +2,7 @@
 
 <%@ Register Assembly="DropDownCheckBoxes" Namespace="Saplin.Controls" TagPrefix="cc" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-     
+
     <style>
         .ddlWidth {
             width: 270px;
@@ -25,7 +25,7 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-<div class="page-content">
+    <div class="page-content">
         <asp:UpdatePanel ID="pnlOutputReportData" runat="server">
             <ContentTemplate>
                 <div style="text-align: center;">
@@ -59,7 +59,7 @@
                                                     <tr>
                                                         <td>
                                                             <label>
-                                                            <asp:Label runat="server" ID="lblCountry" Text="Country:"></asp:Label></label>
+                                                                <asp:Label runat="server" ID="lblCountry" Text="Country:"></asp:Label></label>
                                                         </td>
                                                         <td>
                                                             <asp:DropDownList AutoPostBack="true" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" runat="server" ID="ddlCountry" Width="270">
@@ -67,7 +67,7 @@
                                                         </td>
                                                         <td>
                                                             <label>
-                                                            <asp:Label runat="server" ID="lblCluster" Text="Cluster:" meta:resourcekey="lblClusterResource1"></asp:Label></label>
+                                                                <asp:Label runat="server" ID="lblCluster" Text="Cluster:" meta:resourcekey="lblClusterResource1"></asp:Label></label>
                                                         </td>
                                                         <td>
                                                             <asp:DropDownList AutoPostBack="true" runat="server" OnSelectedIndexChanged="ddlCluster_SelectedIndexChanged" ID="ddlCluster" Width="270">
@@ -77,7 +77,8 @@
                                                         <td></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><label>Month:</label></td>
+                                                        <td>
+                                                            <label>Month:</label></td>
                                                         <td>
                                                             <cc:DropDownCheckBoxes UseButtons="False" AddJQueryReference="True" CssClass="ddlWidth" AutoPostBack="true" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged" runat="server" ID="ddlMonth">
                                                                 <Style SelectBoxWidth="" DropDownBoxBoxWidth="100%" DropDownBoxBoxHeight=""></Style>
@@ -92,20 +93,23 @@
                                                             <asp:TextBox ID="txtIndicatorName" runat="server" Width="270px"></asp:TextBox>
                                                         </td>
 
-                                                        <td style="text-align: right;">
-                                                            <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" CssClass="btn btn-primary btn-sm" CausesValidation="False" meta:resourcekey="btnSearchResource1" />
-                                                        </td>
+                                                        
                                                     </tr>
                                                     <tr>
                                                         <td></td>
-                                                        <td colspan="4">
+                                                        <td>
                                                             <asp:CheckBox ID="cbIncludeRegional" runat="server" Text="Show Regional Indicators" Checked="True" meta:resourcekey="cbIncludeRegionalResource1" /></td>
-                                                        
-                                                            <asp:DropDownList ID="ddlFrameworkYear" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlYear_SelectedIndexChanged" CssClass="hidden">
-                                                                <asp:ListItem Text="2015" Value="11"></asp:ListItem>
-                                                                <asp:ListItem Text="2016" Value="12"  Selected="True"></asp:ListItem>
+                                                        <td><label>Year:</label></td>
+                                                        <td>
+                                                            <asp:DropDownList ID="ddlFrameworkYear" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlYear_SelectedIndexChanged">
                                                                 <asp:ListItem Text="2017" Value="13"></asp:ListItem>
+                                                                <asp:ListItem Text="2016" Value="12"></asp:ListItem>
+                                                                <asp:ListItem Text="2015" Value="11"></asp:ListItem>
                                                             </asp:DropDownList>
+                                                        </td>
+                                                        <td style="text-align: right;">
+                                                            <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" CssClass="btn btn-primary btn-sm" CausesValidation="False" meta:resourcekey="btnSearchResource1" />
+                                                        </td>
                                                     </tr>
                                                 </table>
                                             </div>

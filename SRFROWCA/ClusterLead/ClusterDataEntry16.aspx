@@ -136,12 +136,15 @@
                                             <tr>
                                                 <td style="width: 100px">
                                                     <label>
-                                                        Month:</label>
+                                                        Year/Month:</label>
                                                 </td>
                                                 <td>
-                                                    <asp:DropDownList ID="ddlMonth" AutoPostBack="true" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged" runat="server">
+                                                    <asp:DropDownList ID="ddlFrameworkYear" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddl_SelectedIndexChanged" meta:resourcekey="ddlFrameworkYearResource1">
+                                                        <asp:ListItem Text="2017" Value="13"></asp:ListItem>
+                                                        <asp:ListItem Text="2016" Value="12"></asp:ListItem>
                                                     </asp:DropDownList>
-                                                    <b>(2016 Data Entry)</b>
+                                                    <asp:DropDownList ID="ddlMonth" AutoPostBack="true" OnSelectedIndexChanged="ddlMonth_SelectedIndexChanged" runat="server">
+                                                    </asp:DropDownList>                                                    
                                                 </td>
                                                 <td></td>
                                                 <td class="pull-right">

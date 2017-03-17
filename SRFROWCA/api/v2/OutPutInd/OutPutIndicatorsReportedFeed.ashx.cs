@@ -115,7 +115,12 @@ namespace SRFROWCA.api.v2.OutPutInd
             if (context.Request["year"] != null)
             {
                 int.TryParse(context.Request["year"].ToString(), out val);
-                yearId = val == 2015 ? (int)RC.Year._2015 : (int)RC.Year._2016;
+                if (val == 2015)
+                    yearId = (int)RC.Year._2015;
+                else if (val == 2016)
+                    yearId = (int)RC.Year._2016;
+                else if (val == 2017)
+                    yearId = (int)RC.Year._2017;
             }
 
             string lng = "fr";

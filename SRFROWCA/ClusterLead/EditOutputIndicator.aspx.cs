@@ -87,6 +87,7 @@ namespace SRFROWCA.ClusterLead
                 DBContext.Update("UpdateOutputIndicatorCountryTotalTargets", new object[] { RC.Year._2017, DBNull.Value });
                 scope.Complete();
                 //SendEmail(isAdded);
+
                 Response.Redirect("~/ClusterLead/CountryIndicators.aspx");
             }
         }

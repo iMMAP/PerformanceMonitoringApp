@@ -271,13 +271,13 @@ namespace SRFROWCA.Reports.OutputIndicators
                 dt.Columns.Remove("EmergencyLocationIdSahel");
                 dt.Columns.Remove("ClusterIndicatorId");
                 dt.Columns.Remove("SiteLanguageId");
-                dt.Columns.Remove("CreatedById");
-                dt.Columns.Remove("ReportedDate");
+                
                 dt.Columns.Remove("UpdatedById");
-                dt.Columns.Remove("UpdatedDate");
-                dt.Columns.Remove("OriginalTarget");
                 dt.Columns.Remove("IndicatorCalculationTypeId");
-                dt.Columns.Remove("NumberOfRecords");
+                dt.Columns.Remove("IsGender");
+                dt.Columns.Remove("VirtualCount");
+                dt.Columns.Remove("UnitId");
+                dt.Columns.Remove("EmergencyClusterId");
             }
             catch { }
         }

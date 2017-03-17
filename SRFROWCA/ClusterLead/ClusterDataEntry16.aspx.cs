@@ -56,13 +56,11 @@ namespace SRFROWCA.ClusterLead
 
         private void SetDates()
         {
-            //int month = DateTime.Now.Month - 1;
-            //if (month.Equals(12))
-            //    month = 1;
-            //else if (month.Equals(11))
-            //    month = 12;
-
-            int month = 12;
+            int month = DateTime.Now.Month - 1;
+            if (month.Equals(12))
+                month = 1;
+            else if (month.Equals(11))
+                month = 12;
 
             ddlMonth.SelectedValue = month.ToString();
         }
@@ -102,7 +100,7 @@ namespace SRFROWCA.ClusterLead
             val = RC.GetSelectedIntVal(ddlCluster);
             int? emgClusterId = val > 0 ? val : (int?)null;
 
-            int yearId = 12;
+            int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
 
             if (emgLocationId > 0 && emgClusterId > 0)
             {
@@ -162,7 +160,7 @@ namespace SRFROWCA.ClusterLead
                     {
                         int emgLocId = RC.GetSelectedIntVal(ddlCountry);
                         int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
-                        int yearId = 12;
+                        int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
                         int monthId = RC.GetSelectedIntVal(ddlMonth);
                         DataTable dt = DBContext.GetData("GetOutputCountryTargetOfIndicator",
                                                                     new object[] { emgLocId, emgClusterId, 
@@ -212,7 +210,7 @@ namespace SRFROWCA.ClusterLead
                     {
                         int emgLocId = RC.GetSelectedIntVal(ddlCountry);
                         int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
-                        int yearId = 12;
+                        int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
                         int monthId = RC.GetSelectedIntVal(ddlMonth);
                         DataTable dt1 = DBContext.GetData("[GetOutputAdmin1TargetOfIndicator]", new object[] {countryId, emgLocId, 
                                                                                                                 emgClusterId, yearId, indicatorId, monthId });
@@ -278,7 +276,7 @@ namespace SRFROWCA.ClusterLead
             }
         }
 
-        public void SaveReportDetails(int emgLocId, int clusterId, int monthId)
+        public void SaveReportDetails(int emgLocId, int clusterId, int monthId, int yearId)
         {
             foreach (GridViewRow row in gvIndicators.Rows)
             {
@@ -298,13 +296,13 @@ namespace SRFROWCA.ClusterLead
                     Repeater rptCountry = row.FindControl("rptCountryGender") as Repeater;
                     if (rptCountry != null)
                     {
-                        CountryRepeater(rptCountry, indicatorId, unitId, emgLocId, clusterId, monthId);
+                        CountryRepeater(rptCountry, indicatorId, unitId, emgLocId, clusterId, monthId, yearId);
                     }
                 }
             }
         }
 
-        private void CountryRepeater(Repeater rptCountry, int indicatorId, int unitId, int emgLocId, int clusterId, int monthId)
+        private void CountryRepeater(Repeater rptCountry, int indicatorId, int unitId, int emgLocId, int clusterId, int monthId, int yearId)
         {
             foreach (RepeaterItem item in rptCountry.Items)
             {
@@ -319,15 +317,15 @@ namespace SRFROWCA.ClusterLead
                     if (rptAdmin1 != null)
                     {
                         if (RC.IsGenderUnit(unitId))
-                            SaveAdmin1GenderTargets(rptAdmin1, indicatorId, countryId, emgLocId, clusterId, monthId);
+                            SaveAdmin1GenderTargets(rptAdmin1, indicatorId, countryId, emgLocId, clusterId, monthId, yearId);
                         else
-                            SaveAdmin1Targets(rptAdmin1, indicatorId, countryId, emgLocId, clusterId, monthId);
+                            SaveAdmin1Targets(rptAdmin1, indicatorId, countryId, emgLocId, clusterId, monthId, yearId);
                     }
                 }
             }
         }
 
-        private void SaveAdmin1Targets(Repeater rptAdmin1, int indicatorId, int countryId, int emgLocId, int clusterId, int monthId)
+        private void SaveAdmin1Targets(Repeater rptAdmin1, int indicatorId, int countryId, int emgLocId, int clusterId, int monthId, int yearId)
         {
             foreach (RepeaterItem item in rptAdmin1.Items)
             {
@@ -343,14 +341,14 @@ namespace SRFROWCA.ClusterLead
                     achieved = string.IsNullOrEmpty(txtTarget.Text.Trim()) ? (int?)null : Convert.ToInt32(txtTarget.Text.Trim());
                     if (admin1Id > 0)
                     {
-                        DBContext.Update("uspInsertClusterReport2", new object[] { indicatorId, emgLocId, clusterId, countryId, admin1Id, 12, monthId,
+                        DBContext.Update("uspInsertClusterReport2", new object[] { indicatorId, emgLocId, clusterId, countryId, admin1Id, yearId, monthId,
                                                                                       achieved, RC.GetCurrentUserId, null });
                     }
                 }
             }
         }
 
-        private void SaveAdmin1GenderTargets(Repeater rptAdmin1, int indicatorId, int countryId, int emgLocId, int clusterId, int monthId)
+        private void SaveAdmin1GenderTargets(Repeater rptAdmin1, int indicatorId, int countryId, int emgLocId, int clusterId, int monthId, int yearId)
         {
             foreach (RepeaterItem item in rptAdmin1.Items)
             {
@@ -373,14 +371,13 @@ namespace SRFROWCA.ClusterLead
                         int.TryParse(hfAdmin1Id.Value, out admin1Id);
                     if (admin1Id > 0)
                     {
-                        DBContext.Update("uspInsertClusterReport2_Admin1", new object[] {indicatorId, emgLocId, clusterId, countryId, admin1Id, 12, monthId,
+                        DBContext.Update("uspInsertClusterReport2_Admin1", new object[] {indicatorId, emgLocId, clusterId, countryId, admin1Id, yearId, monthId,
                                                                                         maleTarget, femaleTarget ,RC.GetCurrentUserId, DBNull.Value });
                     }
                 }
             }
         }
 
-        
         protected void btnSaveAll_Click(object sender, EventArgs e)
         {
             int emgClusterId = RC.GetSelectedIntVal(ddlCluster);
@@ -405,29 +402,10 @@ namespace SRFROWCA.ClusterLead
             }
 
             int monthId = Convert.ToInt32(ddlMonth.SelectedValue);
-            SaveReportDetails(emgCountryId, emgClusterId, monthId);
+            int yearId = RC.GetSelectedIntVal(ddlFrameworkYear);
+            SaveReportDetails(emgCountryId, emgClusterId, monthId, yearId);
             ShowMessage("Data Saved Successfully!");
             LoadClusterIndicators();
-        }
-
-        private void SendEmail()
-        {
-            int emgCountryId = RC.GetSelectedIntVal(ddlCountry);
-            int? emgClsuterId = RC.GetSelectedIntVal(ddlCluster);
-            string subject = "Output Indicator Report Saved/Updated For the month of " + ddlMonth.SelectedItem.Text;
-            string country = ddlCountry.SelectedItem.Text;
-            string cluster = ddlCluster.SelectedItem.Text;
-            string user = "";
-            try { user = User.Identity.Name; }
-            catch { }
-
-            string body = string.Format(@"<b>{0}</b><br/>
-                                         <b>Country:</b> {1}<br/>
-                                         <b>Cluster:</b> {2}<br/>
-                                         <b>Month:</b> {3}<br/>
-                                         <b>Added By:</b> {4}"
-                                         , subject, country, cluster, ddlMonth.SelectedItem.Text, user);
-            RC.SendEmail(emgCountryId, emgClsuterId, subject, body);
         }
 
         protected void ddlMonth_SelectedIndexChanged(object sender, EventArgs e)
@@ -446,6 +424,11 @@ namespace SRFROWCA.ClusterLead
         {
             LoadClusterIndicators();
             RC.SaveFiltersInSession(ddlCountry, ddlCluster, Session);
+        }
+
+        protected void ddl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadClusterIndicators();
         }
 
         private void ShowMessage(string message, RC.NotificationType notificationType = RC.NotificationType.Success, bool fadeOut = true, int animationTime = 500)

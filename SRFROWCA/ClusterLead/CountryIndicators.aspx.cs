@@ -87,7 +87,7 @@ namespace SRFROWCA.ClusterLead
                         Label lblIsDateExceeded = e.Row.FindControl("lblIsDateExceeded") as Label;
                         bool IsDateExceeded = false;
                         if (lblIsDateExceeded != null)
-                            IsDateExceeded = lblIsDateExceeded.Text == "1";
+                            IsDateExceeded = lblIsDateExceeded.Text == "True";
 
                         if (!IsDateExceeded || RC.IsAdmin(this.User))
                         {
