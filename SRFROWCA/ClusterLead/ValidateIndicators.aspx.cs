@@ -130,7 +130,7 @@ namespace SRFROWCA.ClusterLead
                                         "
                                              , bodyHeading, lblProjectTitle.Text, lblOrganization.Text,
                                              lblReportingPeriod.Text, notApprovedIndicators, approvedIndicators);
-                RC.SendEmail(UserInfo.EmergencyCountry, emgClusterId, subject, body, null, lblUpdatedBy.Text.Trim());
+                //RC.SendEmail(UserInfo.EmergencyCountry, emgClusterId, subject, body, null, lblUpdatedBy.Text.Trim());
             }
 
             Response.Redirect("~/ClusterLead/ValidateReportList.aspx");

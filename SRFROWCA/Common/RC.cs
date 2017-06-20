@@ -1135,7 +1135,7 @@ namespace SRFROWCA.Common
             _2015 = 11,
             _2016 = 12,
             _2017 = 13,
-            _Current = 12,
+            _Current = 13,
         }
 
         public enum LocationCategory

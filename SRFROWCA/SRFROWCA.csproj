@@ -154,6 +154,7 @@
     <Content Include="Admin\UnitsListing.aspx" />
     <Content Include="Anonymous\ActivitiesFrameworkPublic.aspx" />
     <Content Include="Anonymous\AllDataCSV.ashx" />
+    <Content Include="Anonymous\hxl.aspx" />
     <Content Include="Anonymous\OutputIndicatorReport.aspx" />
     <Content Include="api\v2\docs.aspx" />
     <Content Include="api\v2\doc\Activities.aspx" />
@@ -624,6 +625,13 @@
     </Compile>
     <Compile Include="Anonymous\AllValidatedDataFeed.ashx.cs">
       <DependentUpon>AllValidatedDataFeed.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Anonymous\hxl.aspx.cs">
+      <DependentUpon>hxl.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Anonymous\hxl.aspx.designer.cs">
+      <DependentUpon>hxl.aspx</DependentUpon>
     </Compile>
     <Compile Include="Anonymous\OutputIndicatorReport.aspx.cs">
       <DependentUpon>OutputIndicatorReport.aspx</DependentUpon>

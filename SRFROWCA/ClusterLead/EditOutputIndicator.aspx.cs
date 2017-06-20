@@ -86,35 +86,9 @@ namespace SRFROWCA.ClusterLead
                 }
                 DBContext.Update("UpdateOutputIndicatorCountryTotalTargets", new object[] { RC.Year._2017, DBNull.Value });
                 scope.Complete();
-                //SendEmail(isAdded);
-
+                
                 Response.Redirect("~/ClusterLead/CountryIndicators.aspx");
             }
-        }
-
-        private void SendEmail(bool isAdded)
-        {
-            int emgCountryId = RC.GetSelectedIntVal(ddlCountry);
-            int? emgClsuterId = RC.GetSelectedIntVal(ddlCluster);
-            string subject = "Output Indicator has been updated.";
-            if (isAdded)
-            {
-                subject = "New Output Indicator has been Added to ORS.";
-            }
-            string country = ddlCountry.SelectedItem.Text;
-            string cluster = ddlCluster.SelectedItem.Text;
-            string user = "";
-            try { user = User.Identity.Name; }
-            catch { }
-
-            string body = string.Format(@"<b>{0}</b><br/>
-                                         <b>Country:</b> {1}<br/>
-                                         <b>Cluster:</b> {2}<br/>
-                                         <b>Ind Eng:</b> {3}<br/>
-                                         <b>Ind Fr:</b> {4}<br/>
-                                         <b>Added By:</b> {5}"
-                                         , subject, country, cluster, txtInd1Eng.Text, txtInd1Fr.Text, user);
-            RC.SendEmail(emgCountryId, emgClsuterId, subject, body);
         }
 
         protected void btnBackToSRPList_Click(object sender, EventArgs e)

@@ -592,7 +592,6 @@ namespace SRFROWCA.ClusterLead
                             }
                         }
                     }
-                    //SendNewIndicatorEmail(strIndcators.ToString());
                 }
             }
             else
@@ -652,32 +651,6 @@ namespace SRFROWCA.ClusterLead
             }
         }
 
-
-        private void SendNewIndicatorEmail(string strIndicators)
-        {
-            try
-            {
-                using (MailMessage mailMsg = new MailMessage())
-                {
-                    mailMsg.From = new MailAddress("orsocharowca@gmail.com");
-                    mailMsg.To.Add("orsocharowca@gmail.com");
-                    mailMsg.Subject = "Framework 2015 - New Indicators Has Been Added in ORS Master List";
-                    mailMsg.IsBodyHtml = true;
-                    mailMsg.Body = string.Format(@"New Indicators Has Been Added in ORS For 2015 Framework<hr/>
-                                                {0}<br/>                                              
-                                                <b>By Following User:</b><br/>                                                        
-                                                        <b>User Name:</b> {1}<br/>
-                                                        <b>Email:</b> {2}<br/>                                                        
-                                                        <b>Phone:</b> {3}<b/>"
-                                                            , strIndicators, Membership.GetUser().UserName, Membership.GetUser().Email, "");
-                    Mail.SendMail(mailMsg);
-                }
-            }
-            catch
-            {
-
-            }
-        }
 
         private int SaveActivity()
         {

@@ -133,7 +133,7 @@ namespace SRFROWCA.DataFeeds
             }
 
             string targetLoc = null;
-            if (!string.IsNullOrEmpty(context.Request["tloc"] ))
+            if (!string.IsNullOrEmpty(context.Request["tloc"]))
             {
                 targetLoc = context.Request["tloc"].ToString();
             }
@@ -141,21 +141,16 @@ namespace SRFROWCA.DataFeeds
             int? yearId = (int)RC.Year._Current;
             if (context.Request["year"] != null)
             {
-                if (context.Request["year"].ToString() != "no")
-                    yearId = null;
-                else
-                {
-                    val = 0;
-                    int.TryParse(context.Request["year"].ToString(), out val);
+                val = 0;
+                int.TryParse(context.Request["year"].ToString(), out val);
 
-                    RC.Year yearEnum;
-                    if (Enum.TryParse("_" + val.ToString(), out yearEnum))
-                        yearId = (int)yearEnum;
+                RC.Year yearEnum;
+                if (Enum.TryParse("_" + val.ToString(), out yearEnum))
+                    yearId = (int)yearEnum;
 
-                    if (yearId <= 0)
-                        yearId = (int)RC.Year._Current;
+                if (yearId <= 0)
+                    yearId = (int)RC.Year._Current;
 
-                }
             }
 
             string lng = "fr";

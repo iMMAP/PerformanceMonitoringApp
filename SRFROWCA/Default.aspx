@@ -47,6 +47,8 @@
                                         and monitor response of humanitarian interventions."
                                             meta:resourcekey="locDefaultIntroResource1"></asp:localize>
                                     </p>
+
+                                    <iframe width="100%" height="600" src="https://app.powerbi.com/view?r=eyJrIjoiNGJlYjhlOTAtZTg0Yi00ZDg0LTgwNDUtMzhlZjAzMjA5NWY2IiwidCI6IjBmOWUzNWRiLTU0NGYtNGY2MC1iZGNjLTVlYTQxNmU2ZGM3MCIsImMiOjh9" frameborder="0" allowFullScreen="true"></iframe>
                                 </div>
                             </div>
 

@@ -289,7 +289,7 @@ namespace SRFROWCA.ClusterLead
             ToggleControlsToAddIndicator();
 
             LoadIndicators();
-            //SendEmail(IndicatorActiveStatus > 0);
+            
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
@@ -597,102 +597,6 @@ namespace SRFROWCA.ClusterLead
 
         #region Unused Code
 
-        //protected void cbActivityActive_Changed(object sender, EventArgs e)
-        //{
-        //    IsIndicatorCheckBox = 0;
-        //    ActivityActiveStatus = -1;
-        //    ToggleActivityId = 0;
-        //    GridViewRow row = (GridViewRow)(((CheckBox)sender).NamingContainer);
-        //    int activityId = 0;
-        //    int.TryParse(gvActivity.DataKeys[row.RowIndex].Values["ActivityId"].ToString(), out activityId);
-        //    ToggleActivityId = activityId;
-
-        //    if (ToggleActivityId > 0)
-        //    {
-        //        CheckBox cbIsActive = row.FindControl("cbIsActivityActive") as CheckBox;
-        //        if (cbIsActive != null)
-        //        {
-        //            localDisableConfirmBox.Text = !cbIsActive.Checked ? "Are you sure you want to deactivate this Activity?" :
-        //                                                                    "Are you sure you want to activate this Activity?";
-        //            ActivityActiveStatus = cbIsActive.Checked ? 1 : 0;
-        //            List<string> projects = GetProjectsOnActivity(ToggleActivityId);
-        //            if (!string.IsNullOrEmpty(projects[0]))
-        //            {
-        //                //SetEmailItem(row, projects);
-        //                lblProjectsCaption.Visible = true;
-        //                lblProjectsCaption.Text = !cbIsActive.Checked ? "Indicators of this activity will be removed from the following projects." :
-        //                                                                "Indicators of this activity will be added in the following projects.";
-        //                lblProjectUsingIndicator.Text = projects[0];
-        //            }
-        //            else
-        //            {
-        //                lblProjectsCaption.Text = "";
-        //                lblProjectUsingIndicator.Text = "";
-        //            }
-        //            ModalPopupExtender1.Show();
-        //        }
-        //    }
-        //}
-
-        //protected void cbActive_Changed(object sender, EventArgs e)
-        //{
-        //    IsIndicatorCheckBox = 1;
-        //    IndicatorActiveStatus = -1;
-        //    ToggleIndicatorId = 0;
-        //    GridViewRow row = (GridViewRow)(((CheckBox)sender).NamingContainer);
-        //    int indicatorId = 0;
-        //    int.TryParse(gvActivity.DataKeys[row.RowIndex].Values["IndicatorId"].ToString(), out indicatorId);
-        //    ToggleIndicatorId = indicatorId;
-        //    if (ToggleIndicatorId > 0)
-        //    {
-        //        CheckBox cbIsActive = row.FindControl("cbIsActive") as CheckBox;
-        //        if (cbIsActive != null)
-        //        {
-        //            localDisableConfirmBox.Text = !cbIsActive.Checked ? "Are you sure you want to deactivate this indicator?" :
-        //                                                                    "Are you sure you want to activate this indicator?";
-        //            IndicatorActiveStatus = cbIsActive.Checked ? 1 : 0;
-        //            List<string> projects = GetProjectsUsingIndicator();
-        //            if (!string.IsNullOrEmpty(projects[0]))
-        //            {
-        //                SetEmailItem(row, projects);
-        //                lblProjectsCaption.Visible = true;
-        //                lblProjectsCaption.Text = !cbIsActive.Checked ? "This indicator will be removed from these projects:" :
-        //                                                                "This indicator will be added in these projects:";
-        //                lblProjectUsingIndicator.Text = projects[0];
-        //            }
-        //            else
-        //            {
-        //                lblProjectsCaption.Text = "";
-        //                lblProjectUsingIndicator.Text = "";
-        //            }
-
-        //            ModalPopupExtender1.Show();
-        //        }
-        //    }
-        //}
-
-        private void SetEmailItem(GridViewRow row, List<string> projects)
-        {
-            List<string> emailItems = new List<string>();
-            Label lblCountry = row.FindControl("lblCountryID") as Label;
-            if (lblCountry != null)
-            {
-                emailItems.Add(lblCountry.Text.Trim());
-            }
-
-            Label lblCluster = row.FindControl("lblClusterID") as Label;
-            if (lblCluster != null)
-            {
-                emailItems.Add(lblCluster.Text.Trim());
-            }
-            emailItems.Add(row.Cells[1].Text.ToString());
-            emailItems.Add(row.Cells[2].Text.ToString());
-            emailItems.Add(row.Cells[5].Text.ToString());
-            emailItems.Add(projects[0]);
-            emailItems.Add(projects[1]);
-            EmailItems = emailItems;
-        }
-
         private void ToggleIndicatorStatus()
         {
             int yearId = (int)RC.Year._2017;
@@ -739,39 +643,6 @@ namespace SRFROWCA.ClusterLead
             projects.Add(sbProjIds.ToString().Trim().TrimEnd(','));
 
             return projects;
-        }
-
-        private void SendEmail(bool isAdded)
-        {
-            List<string> emailItems = EmailItems;
-            int emgCountryId = 0;
-            int.TryParse(emailItems[0], out emgCountryId);
-            int val = 0;
-            int.TryParse(emailItems[1], out val);
-            int? emgClusterId = val > 0 ? val : (int?)null;
-
-            string subject = "Activity Indicator has been disabled!";
-            if (isAdded)
-            {
-                subject = "Activity Indicator has been activated!";
-            }
-
-            string country = emailItems[2];
-            string cluster = emailItems[3];
-            string user = "";
-            try { user = User.Identity.Name; }
-            catch { }
-
-            string body = string.Format(@"<b>{0}</b><br/>
-                                         <b>Country:</b> {1}<br/>
-                                         <b>Cluster:</b> {2}<br/>
-                                         <b>Indicator:</b> {3}<br/>
-                                         <b>By:</b> {4}<br/>
-                                         <b>Projects Using This Indicator:</b> {5}"
-
-                                         , subject, country, cluster, emailItems[4], user, emailItems[5]);
-            DataTable dtUsers = DBContext.GetData("GetDataEntryUsersEmails", new object[] { emailItems[6], DBNull.Value, emgCountryId });
-            RC.SendEmail(emgCountryId, emgClusterId, subject, body, dtUsers);
         }
 
         private int ToggleIndicatorId
@@ -861,18 +732,6 @@ namespace SRFROWCA.ClusterLead
             set
             {
                 ViewState["IsIndicatorCheckBox"] = value;
-            }
-        }
-
-        private List<string> EmailItems
-        {
-            get
-            {
-                return ViewState["IndicatorActiveStatus"] as List<string>;
-            }
-            set
-            {
-                ViewState["IndicatorActiveStatus"] = value;
             }
         }
 

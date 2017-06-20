@@ -211,32 +211,8 @@ namespace SRFROWCA.ClusterLead
             bool isAdded = SaveClusterIndicatorDetails();
             LoadClusterIndicators();
 
-            ShowMessage("Data Saved Successfully!");
-            if (isAdded)
-            {
-                SendEmail();
-            }
+            ShowMessage("Data Saved Successfully!");            
         }
-
-        private void SendEmail()
-        {
-            int emgCountryId = RC.GetSelectedIntVal(ddlCountry);
-            int? emgClsuterId = RC.GetSelectedIntVal(ddlCluster);
-            string subject = "Output Indicator Report Saved/Updated For the month of " + ddlMonth.SelectedItem.Text;
-            string country = ddlCountry.SelectedItem.Text;
-            string cluster = ddlCluster.SelectedItem.Text;
-            string user = "";
-            try { user = User.Identity.Name; }
-            catch { }
-
-            string body = string.Format(@"<b>{0}</b><br/>
-                                         <b>Country:</b> {1}<br/>
-                                         <b>Cluster:</b> {2}<br/>
-                                         <b>Month:</b> {3}<br/>
-                                         <b>Added By:</b> {4}"
-                                         , subject, country, cluster, ddlMonth.SelectedItem.Text, user);
-            RC.SendEmail(emgCountryId, emgClsuterId, subject, body);
-        }  
 
         protected void ddlMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
