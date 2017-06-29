@@ -551,6 +551,9 @@ namespace SRFROWCA.OrsProject
                     int emgClusterId = 0;
                     int.TryParse(gvProjects.DataKeys[e.Row.RowIndex].Values["EmergencyClusterId"].ToString(), out emgClusterId);
 
+                    int emgSecClusterId = 0;
+                    int.TryParse(gvProjects.DataKeys[e.Row.RowIndex].Values["EmergencySecClusterId"].ToString(), out emgSecClusterId);
+
                     if (RC.IsCountryAdmin(this.User))
                     {
                         if (!(emgLocationId == UserInfo.EmergencyCountry))
@@ -564,7 +567,8 @@ namespace SRFROWCA.OrsProject
                     }
                     else if (RC.IsClusterLead(this.User))
                     {
-                        if (!(emgClusterId == UserInfo.EmergencyCluster && emgLocationId == UserInfo.EmergencyCountry))
+                        if (!((emgClusterId == UserInfo.EmergencyCluster || emgSecClusterId == UserInfo.EmergencyCluster)
+                                    && emgLocationId == UserInfo.EmergencyCountry))
                         {
                             HideFunctionButtons(e.Row, "imgbtnReport");
                             HideFunctionButtons(e.Row, "imgbtnTargets");

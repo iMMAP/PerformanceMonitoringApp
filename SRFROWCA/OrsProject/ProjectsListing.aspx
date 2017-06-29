@@ -25,7 +25,7 @@
         <div id="divMsg"></div>
         <table class="width-100">
             <tr>
-                <td>
+                <td>    
                     <div class="widget-header widget-header-small header-color-blue2">
                         <h6>
                             <button runat="server" id="btnExportPDF" onserverclick="ExportToPDF" class="btn btn-yellow btn-sm"
@@ -268,7 +268,7 @@
                         EmptyDataText="Your filter criteria does not match any project!" Width="100%"
                         OnRowCommand="gvProjects_RowCommand" OnSorting="gvProjects_Sorting" OnRowDataBound="gvProjects_RowDataBound"
                         OnPageIndexChanging="gvProjects_PageIndexChanging"
-                        DataKeyNames="ProjectId,ProjectOrganizationId,OrganizationId,IsOPS,EmergencyLocationId,EmergencyClusterId,UserOrgId,IsPartner"
+                        DataKeyNames="ProjectId,ProjectOrganizationId,OrganizationId,IsOPS,EmergencyLocationId,EmergencyClusterId,UserOrgId,IsPartner,EmergencySecClusterId"
                         meta:resourcekey="gvProjectsResource1">
                         <PagerSettings Mode="NumericFirstLast" />
                         <RowStyle CssClass="istrow" />
